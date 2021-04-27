@@ -34,15 +34,17 @@ public class TransactionDtoParserTest {
     @Test
     public void parseDataFromFile_isOk() throws IOException {
         List<String> records = Files.readAllLines(Path.of(PATH_TO_FILE_INPUT));
-        List<TransactionDto> exceptedTractionDtoList = new ArrayList<>();
-        exceptedTractionDtoList.add(
-                new TransactionDto(Operation.BALANCE, new Product("banana"), 150));
-        exceptedTractionDtoList.add(
-                new TransactionDto(Operation.SUPPLY, new Product("apple"), 10));
-        exceptedTractionDtoList.add(
-                new TransactionDto(Operation.PURCHASE, new Product("banana"), 30));
-        List<TransactionDto> actualTransactionDtoList = parser.parse(records);
-        Assert.assertEquals(exceptedTractionDtoList, actualTransactionDtoList);
+        List<TransactionDto> exceptedList = new ArrayList<>();
+
+        exceptedList.add(new TransactionDto(Operation.BALANCE,
+                new Product("banana"), 150));
+        exceptedList.add(new TransactionDto(Operation.SUPPLY,
+                new Product("apple"), 10));
+        exceptedList.add(new TransactionDto(Operation.PURCHASE,
+                new Product("banana"), 30));
+
+        List<TransactionDto> actualList = parser.parse(records);
+        Assert.assertEquals(exceptedList, actualList);
     }
 
     @Test(expected = EntryFormatException.class)

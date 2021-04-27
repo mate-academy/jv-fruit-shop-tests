@@ -75,7 +75,7 @@ public class WarehouseServiceImplTest {
     @Test
     public void addToStorageTestWithCorrectData_Ok() {
         warehouseService.addToStorage(correctDataFromFile);
-        Map<Product, Integer> actual = productDao.getAll();
+        Map<Product, Integer> actual = Storage.getProducts();
         assertEquals(expectedMap, actual);
     }
 

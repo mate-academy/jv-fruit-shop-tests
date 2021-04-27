@@ -91,8 +91,8 @@ public class WarehouseServiceImplTest {
 
     @Test
     public void getReportFromStorage_Ok() {
-        productDao.add(new Product("banana"), 152);
-        productDao.add(new Product("apple"), 90);
+        Storage.getProducts().put(new Product("banana"), 152);
+        Storage.getProducts().put(new Product("apple"), 90);
         String actual = warehouseService.getReportFromStorage();
         assertEquals(INPUT, actual);
     }

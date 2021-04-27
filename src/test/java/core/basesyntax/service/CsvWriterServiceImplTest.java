@@ -15,7 +15,7 @@ public class CsvWriterServiceImplTest {
     private static final String RESULT_PATH
             = "src/test/java/resources/report.csv";
     private static final String WRONG_RESULT_PATH
-            = "????";
+            = "////";
     private static final String INPUT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90";

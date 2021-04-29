@@ -24,7 +24,7 @@ import org.junit.Test;
 public class WarehouseServiceImplTest {
     private static final String INPUT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
-            + "apple,90";
+            + "apple,90" + System.lineSeparator();
     private static WarehouseService warehouseService;
     private static ProductDao productDao;
     private static List<String> correctDataFromFile;

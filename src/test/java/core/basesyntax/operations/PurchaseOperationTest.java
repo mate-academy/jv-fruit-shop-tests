@@ -17,7 +17,7 @@ public class PurchaseOperationTest {
 
     @Test
     public void calculateAmountTest_Ok() {
-        int expected = OLD_AMOUNT - AMOUNT;
+        int expected = -10;
         int actual = operation.calculateAmount(OLD_AMOUNT, AMOUNT);
         assertEquals(expected, actual);
     }

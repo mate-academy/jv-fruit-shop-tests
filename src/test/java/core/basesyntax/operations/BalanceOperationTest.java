@@ -11,13 +11,13 @@ public class BalanceOperationTest {
     private static final int AMOUNT = 20;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operation = new BalanceOperation();
     }
 
     @Test
     public void calculateAmountTest_Ok() {
-        int expected = OLD_AMOUNT + AMOUNT;
+        int expected = 30;
         int actual = operation.calculateAmount(OLD_AMOUNT, AMOUNT);
         assertEquals(expected, actual);
     }

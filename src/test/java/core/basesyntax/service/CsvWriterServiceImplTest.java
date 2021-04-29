@@ -18,7 +18,7 @@ public class CsvWriterServiceImplTest {
             = "////";
     private static final String INPUT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
-            + "apple,90";
+            + "apple,90" + System.lineSeparator();
 
     @BeforeClass
     public static void beforeClass() throws Exception {

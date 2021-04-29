@@ -56,6 +56,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             reportBuilder.append(productIntegerEntry.getKey().getName()
                     + SEPARATOR + productIntegerEntry.getValue());
         }
+        reportBuilder.append(System.lineSeparator());
         return reportBuilder.toString();
     }
 }

@@ -2,9 +2,10 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,29 +30,21 @@ public class CsvWriterServiceImplTest {
     public void writeToFileTestWithCorrectInput_Ok() {
         writerService.writeToFile(INPUT, PATH_FOR_TEST);
 
-        StringBuilder expected = new StringBuilder();
-        try (BufferedReader readFile
-                     = new BufferedReader(new FileReader(RESULT_PATH))) {
-            String lineText;
-            while ((lineText = readFile.readLine()) != null) {
-                expected.append(lineText);
-            }
+        List<String> expectedList;
+        try {
+            expectedList = Files.readAllLines(Path.of(RESULT_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + RESULT_PATH);
         }
 
-        StringBuilder actual = new StringBuilder();
-        try (BufferedReader readFile
-                     = new BufferedReader(new FileReader(PATH_FOR_TEST))) {
-            String lineText;
-            while ((lineText = readFile.readLine()) != null) {
-                actual.append(lineText);
-            }
+        List<String> actualList;
+        try {
+            actualList = Files.readAllLines(Path.of(PATH_FOR_TEST));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + PATH_FOR_TEST);
         }
 
-        assertEquals(expected.toString(), actual.toString());
+        assertEquals(expectedList, actualList);
     }
 
     @Test(expected = RuntimeException.class)

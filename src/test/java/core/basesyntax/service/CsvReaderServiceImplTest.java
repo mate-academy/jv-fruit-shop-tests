@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class CsvReaderServiceImplTest {
 
     @Test
     public void readFromFileTestWithCorrectInput_Ok() {
-        List<String> expected = new ArrayList<>();
+        List<String> expected;
         try {
             expected = Files.readAllLines(Path.of(FILE_FROM));
         } catch (IOException e) {

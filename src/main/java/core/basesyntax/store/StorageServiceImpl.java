@@ -3,9 +3,7 @@ package core.basesyntax.store;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
-
 import java.util.List;
-
 
 public class StorageServiceImpl implements StorageService {
     private static final String CSV_SEPARATOR = ",";
@@ -18,8 +16,8 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public List<Fruit> saveData (List<FruitRecord> fruitRecordList) {
-        for(FruitRecord fruitRecord: fruitRecordList) {
+    public List<Fruit> saveData(List<FruitRecord> fruitRecordList) {
+        for (FruitRecord fruitRecord: fruitRecordList) {
             typeStrategy.get(fruitRecord.getOperationType())
                     .makeOperation(fruitRecord.getFruit().getName(),
                             fruitRecord.getFruit().getBalance());
@@ -35,7 +33,7 @@ public class StorageServiceImpl implements StorageService {
             stringBuilder.append("\n" + fruit.getName()
                     + CSV_SEPARATOR + fruit.getBalance());
         }
-       return stringBuilder.toString();
+        return stringBuilder.toString();
     }
 
 }

@@ -1,18 +1,19 @@
 package core.basesyntax.store;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.OperationType;
-import core.basesyntax.store.strategy.*;
+import core.basesyntax.store.strategy.BalanceHandler;
+import core.basesyntax.store.strategy.PurchaseHandler;
+import core.basesyntax.store.strategy.ReturnHandler;
+import core.basesyntax.store.strategy.SupplyHandler;
+import core.basesyntax.store.strategy.TypeHandler;
 import core.basesyntax.validator.quantity.QuantityValidator;
 import core.basesyntax.validator.quantity.QuantityValidatorImpl;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -1,15 +1,13 @@
 package core.basesyntax.file.reader;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderImplTest {
     private static final String FILE_PATH_OK = "src/test/resources/testFilePositive.csv";

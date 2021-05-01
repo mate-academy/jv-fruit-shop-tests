@@ -1,15 +1,14 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class FruitDaoImplTest {
     private static final int QUANTITY = 100;

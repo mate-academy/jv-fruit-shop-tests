@@ -21,8 +21,12 @@ public class FruitRecord {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitRecord that = (FruitRecord) o;
         return Objects.equals(fruit, that.fruit) && operationType == that.operationType;
     }
@@ -34,9 +38,10 @@ public class FruitRecord {
 
     @Override
     public String toString() {
-        return "FruitRecord{" +
-                "fruit=" + fruit.toString() +
-                ", operationType=" + operationType +
-                '}';
+        return "FruitRecord{"
+                + "fruit="
+                + fruit.toString()
+                + ", operationType="
+                + operationType + '}';
     }
 }

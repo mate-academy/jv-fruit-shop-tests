@@ -1,15 +1,16 @@
 package core.basesyntax.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class FruitTest {
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
-    private static final int QUANTITY = 100;
-    private static final int NEW_QUANTITY = 123;
+    private static final long QUANTITY = 100;
+    private static final long NEW_QUANTITY = 123;
     private static Fruit fruit;
 
     @BeforeClass
@@ -25,8 +26,8 @@ public class FruitTest {
 
     @Test
     public void getBalanceTest_Ok() {
-        long actual = fruit.getBalance();
-        assertEquals(QUANTITY, actual);
+        fruit.setBalance(QUANTITY);
+        assertEquals(QUANTITY, fruit.getBalance());
     }
 
     @Test

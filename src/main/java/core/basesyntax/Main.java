@@ -15,7 +15,11 @@ import core.basesyntax.store.StorageService;
 import core.basesyntax.store.StorageServiceImpl;
 import core.basesyntax.store.TypeStrategy;
 import core.basesyntax.store.TypeStrategyImpl;
-import core.basesyntax.store.strategy.*;
+import core.basesyntax.store.strategy.BalanceHandler;
+import core.basesyntax.store.strategy.PurchaseHandler;
+import core.basesyntax.store.strategy.ReturnHandler;
+import core.basesyntax.store.strategy.SupplyHandler;
+import core.basesyntax.store.strategy.TypeHandler;
 import core.basesyntax.validator.Validator;
 import core.basesyntax.validator.ValidatorImpl;
 import core.basesyntax.validator.length.LineLengthValidator;
@@ -24,13 +28,11 @@ import core.basesyntax.validator.quantity.QuantityValidator;
 import core.basesyntax.validator.quantity.QuantityValidatorImpl;
 import core.basesyntax.validator.type.TypeValidator;
 import core.basesyntax.validator.type.TypeValidatorImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class
-Main {
+public class Main {
     private static final String PATH_FOR_DB_OK =
             "src/main/resources/testFilePositive.csv";
     private static final String PATH_FOR_DB_NOT_OK =

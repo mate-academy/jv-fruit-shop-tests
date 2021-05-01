@@ -6,7 +6,6 @@ import org.junit.Test;
 public class QuantityValidatorImplTest {
 
     private static QuantityValidator quantityValidator;
-    private static final int CORRECT_LENGTH = 3;
     private static final long BALANCE = 10;
     private static final long POSITIVE_QUANTITY = 200;
     private static final long NEGATIVE_QUANTITY = -130;

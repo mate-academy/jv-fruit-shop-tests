@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.validator.Validator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class ParserImpl implements Parser {
     @Override
     public List<FruitRecord> parseLines(List<String> lines) {
         List<FruitRecord> fruitRecords = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++){
+        for (int i = 1; i < lines.size(); i++) {
             String[] splitedLine = lines.get(i).split(CSV_SEPARATOR);
             validator.validateLine(splitedLine, i);
             fruitRecords.add(new FruitRecord(

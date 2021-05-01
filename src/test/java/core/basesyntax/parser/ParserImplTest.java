@@ -1,27 +1,26 @@
 package core.basesyntax.parser;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.OperationType;
-
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.validator.ValidatorImpl;
 import core.basesyntax.validator.length.LineLengthValidatorImpl;
 import core.basesyntax.validator.quantity.QuantityValidatorImpl;
 import core.basesyntax.validator.type.TypeValidatorImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ParserImplTest {
     private static Parser parser;
     private static List<String> linesContent;
     private static final String APPLE = "apple";
     private static final String BALANCE = "b";
-    private static final long QUANTITY  = 234;
+    private static final long QUANTITY = 234;
+
     @BeforeClass
     public static void setUp() {
         parser = new ParserImpl(new ValidatorImpl(new LineLengthValidatorImpl(),

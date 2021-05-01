@@ -11,9 +11,9 @@ public class ValidatorImpl implements Validator {
 
     public ValidatorImpl(LineLengthValidator lineLengthValidator, TypeValidator typeValidator,
                          QuantityValidator quantityValidator) {
-       this.lineLengthValidator = lineLengthValidator;
-       this.typeValidator = typeValidator;
-       this.quantityValidator = quantityValidator;
+        this.lineLengthValidator = lineLengthValidator;
+        this.typeValidator = typeValidator;
+        this.quantityValidator = quantityValidator;
     }
 
     @Override

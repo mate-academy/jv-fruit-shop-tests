@@ -1,22 +1,21 @@
 package core.basesyntax.file.writer;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static FileWriter fileWriter;
     private static final String FILE_TEST = "src/test/resources/report/report.csv";
     private static final String FILE_CONTENT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator();
+    private static FileWriter fileWriter;
 
     @BeforeClass
     public static void setUp() {

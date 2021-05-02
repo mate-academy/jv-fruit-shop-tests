@@ -36,9 +36,24 @@ public class FruitDtoParserImplTest {
     }
 
     @Test
-    public void parseFruitDto_amountWithWhiteSpaces_ok() {
+    public void parseFruitDto_amountWithWhitespaces_ok() {
         FruitDto actual = FRUIT_DTO_PARSER.parseFruitDto("b,apple,  20 ");
         FruitDto expected = new FruitDto("apple", 20);
         assertEquals(expected, actual);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parseFruitDto_noCommasLine_notOk() {
+        FRUIT_DTO_PARSER.parseFruitDto("bapple20");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parseFruitDto_nonNumericAmount_notOk() {
+        FRUIT_DTO_PARSER.parseFruitDto("r,banana,2@1");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parseFruitDto_negativeAmount_notOk() {
+        FRUIT_DTO_PARSER.parseFruitDto("r,banana,-42");
     }
 }

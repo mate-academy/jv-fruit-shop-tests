@@ -37,4 +37,18 @@ public class TakeFromStorageHandlerImplTest {
         takeFromStorage.handleGoods(dataToSubtract);
         assertEquals(expected, actual);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void handleGoods_deductMoreThanStock_notOk() {
+        addToStorage();
+        FruitDto exceedingStorage = new FruitDto("mango", 60);
+        takeFromStorage.handleGoods(exceedingStorage);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void handleGoods_noSuchKey_notOk() {
+        addToStorage();
+        FruitDto nonPresentFruit = new FruitDto("papaya", 2);
+        takeFromStorage.handleGoods(nonPresentFruit);
+    }
 }

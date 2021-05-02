@@ -14,11 +14,6 @@ public class FruitDtoParserImpl implements FruitDtoParser {
         if (!amount.matches(IS_NUMERIC)) {
             throw new RuntimeException("Invalid input");
         }
-        if (amount.contains("-")) {
-            throw new RuntimeException("Buyers will not be able to buy "
-                    + amount + " " + fruit + ". "
-                    + amount + " is incorrect input.");
-        }
         return new FruitDto(fruit, Integer.parseInt(amount));
     }
 }

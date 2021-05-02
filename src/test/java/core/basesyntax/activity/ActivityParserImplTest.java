@@ -35,4 +35,16 @@ public class ActivityParserImplTest {
         Activities actual = activityParser.parseActivity("r   ,fruit,2");
         assertEquals(expected, actual);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void parseActivity_absentCommas_notOk() {
+        activityParser.parseActivity("bstring3");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parseActivity_badOperationType_notOk() {
+        activityParser.parseActivity("m,tree,4");
+        activityParser.parseActivity("42@,min, 2");
+    }
+
 }

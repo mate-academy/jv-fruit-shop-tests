@@ -1,17 +1,16 @@
 package core.basesyntax.fruitshop.file.reader;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class FileReaderImplTest {
+public class FileReaderImplTest {
     private static final FileReaderImpl FILE_READER = new FileReaderImpl();
 
     @Test
-    void read_customInput_ok() {
+    public void read_customInput_ok() {
         String fileName = "src/test/TestInput.csv";
         List<String> expected = List.of("apple", "banana", "apricot");
         List<String> actual = FILE_READER.read(fileName);
@@ -19,7 +18,7 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_actualInput_ok() {
+    public void read_actualInput_ok() {
         String fileName = "src/test/ActualInput.csv";
         List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20",
@@ -35,17 +34,10 @@ class FileReaderImplTest {
     }
 
     @Test
-    void read_emptyEntry_ok() {
+    public void read_emptyEntry_ok() {
         String fileName = "src/test/EmptyInput.csv";
         List<String> expected = new ArrayList<>();
         List<String> actual = FILE_READER.read(fileName);
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void read_nonexistentFile_notOk() {
-        String fileName = "src/test/FileToRead.csv";
-        assertThrows(RuntimeException.class, () ->
-                FILE_READER.read(fileName));
     }
 }

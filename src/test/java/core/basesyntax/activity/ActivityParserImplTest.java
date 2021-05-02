@@ -1,7 +1,6 @@
 package core.basesyntax.activity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -35,21 +34,5 @@ public class ActivityParserImplTest {
         Activities expected = Activities.RETURN;
         Activities actual = activityParser.parseActivity("r   ,fruit,2");
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void parseActivity_invalidOperation_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                activityParser.parseActivity("m,fruit,2"));
-        assertThrows(RuntimeException.class, () ->
-                activityParser.parseActivity("123,fruit , 214"));
-        assertThrows(RuntimeException.class, () ->
-                activityParser.parseActivity(""));
-    }
-
-    @Test
-    public void parseActivity_badStyleInput_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                activityParser.parseActivity("mf24wW!ruit2"));
     }
 }

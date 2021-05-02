@@ -1,14 +1,14 @@
 package core.basesyntax.activity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.storage.dao.AddToStorageHandlerImpl;
 import core.basesyntax.storage.dao.StorageHandler;
 import core.basesyntax.storage.dao.TakeFromStorageHandlerImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ActivityStrategyImplTest {
     private static final StorageHandler ADD_TO_STORAGE = new AddToStorageHandlerImpl();
@@ -16,7 +16,7 @@ public class ActivityStrategyImplTest {
     private static Map<Activities, StorageHandler> handlerMap = new HashMap<>();
     private final ActivityStrategy activityStrategy = new ActivityStrategyImpl(handlerMap);
 
-    @BeforeAll
+    @BeforeClass
     public static void fillMap() {
         handlerMap.put(Activities.BALANCE, ADD_TO_STORAGE);
         handlerMap.put(Activities.PURCHASE, TAKE_FROM_STORAGE);

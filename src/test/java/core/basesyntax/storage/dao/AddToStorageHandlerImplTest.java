@@ -1,19 +1,19 @@
 package core.basesyntax.storage.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.dto.FruitDto;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 public class AddToStorageHandlerImplTest {
     private static final AddToStorageHandlerImpl HANDLER = new AddToStorageHandlerImpl();
     private Map<String, Integer> expected;
     private final Map<String, Integer> actual = Storage.getFruitStorage();
 
-    @BeforeAll
+    @BeforeClass
     public static void resetStorage() {
         Storage.getFruitStorage().entrySet().clear();
     }

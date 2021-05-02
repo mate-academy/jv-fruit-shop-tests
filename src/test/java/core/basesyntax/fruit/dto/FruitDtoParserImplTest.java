@@ -1,7 +1,6 @@
 package core.basesyntax.fruit.dto;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -27,24 +26,6 @@ public class FruitDtoParserImplTest {
         FruitDto actual = FRUIT_DTO_PARSER.parseFruitDto("r,a2@tr2g,43");
         FruitDto expected = new FruitDto("a2@tr2g", 43);
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void parseFruitDto_nonNumericAmount_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                FRUIT_DTO_PARSER.parseFruitDto("r,plum,3df2@"));
-    }
-
-    @Test
-    public void parseFruitDto_negativeAmount_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                FRUIT_DTO_PARSER.parseFruitDto("b,orange,-64"));
-    }
-
-    @Test
-    public void parseFruitDto_badInputStyle_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                FRUIT_DTO_PARSER.parseFruitDto("bf2orange-64"));
     }
 
     @Test

@@ -26,8 +26,18 @@ public class FruitStoreDaoTest {
         Storage.getFruits().put(apple, QUANTITY);
     }
 
+    @After
+    public void afterEachTest() {
+        expectedMap.clear();
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.getFruits().clear();
+    }
+
     @Test
-    public void addFruit_equalsMap_returnsTrue() {
+    public void addFruit_addAppleToDb_returnsTrue() {
         expectedMap.put(apple, QUANTITY);
         assertEquals(expectedMap, Storage.getFruits());
     }
@@ -54,15 +64,5 @@ public class FruitStoreDaoTest {
     public void getAll_notEqualsMap_returnsTrue() {
         expectedMap.put(new Fruit("banana"), QUANTITY);
         assertNotEquals(expectedMap, Storage.getFruits());
-    }
-
-    @After
-    public void afterEachTest() {
-        expectedMap.clear();
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.getFruits().clear();
     }
 }

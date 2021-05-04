@@ -91,6 +91,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/FruitStoreApplication*</exclude>
+                        <exclude>**/Fruit*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

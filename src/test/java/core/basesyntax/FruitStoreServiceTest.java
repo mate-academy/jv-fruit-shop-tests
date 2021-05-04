@@ -45,8 +45,13 @@ public class FruitStoreServiceTest {
         fruitStoreService = new FruitStoreServiceImpl(fruitStoreDao, actionStrategy);
     }
 
+    @After
+    public void afterEachTest() {
+        Storage.getFruits().clear();
+    }
+
     @Test
-    public void createNewReport_equalsReports_returnsTrue() {
+    public void createNewReport_addTwoFruitsToDb_returnsTrue() {
         Storage.getFruits().put(new Fruit("banana"), 12);
         Storage.getFruits().put(new Fruit("apple"), 20);
         String actualReport = fruitStoreService.createNewReport();
@@ -84,10 +89,5 @@ public class FruitStoreServiceTest {
         expectedMap.put(new Fruit("banana"), 2);
         expectedMap.put(new Fruit("apple"), 10);
         assertEquals(expectedMap, Storage.getFruits());
-    }
-
-    @After
-    public void afterEachTest() {
-        Storage.getFruits().clear();
     }
 }

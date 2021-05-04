@@ -4,12 +4,10 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitDataDto;
 import core.basesyntax.operations.Operations;
 import core.basesyntax.service.DataParserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataParserServiceImpl implements DataParserService {
-
 
     private static final String DATA_COLUMN_SEPARATOR = ",";
     private static final int OPERATION_TYPE_INDEX = 0;
@@ -21,15 +19,16 @@ public class DataParserServiceImpl implements DataParserService {
             = "Input quantity should be greater then zero";
     private static final String THIRD_EXCEPTION_MESSAGE = "Incorrect operation";
 
-
     @Override
     public List<FruitDataDto> parseDataFromInputFile(List<String> dataFromInputFile) {
         return dataFromInputFile.stream()
                 .skip(COLUMN_HEADER_ROW)
                 .map(string -> string.split(DATA_COLUMN_SEPARATOR))
                 .filter(this::isValid)
-                .map(array -> new FruitDataDto(Operations.valueOf(array[OPERATION_TYPE_INDEX]),
-                        new Fruit(array[FRUIT_NAME_INDEX]), Integer.parseInt(array[FRUIT_QUANTITY_INDEX])))
+                .map(array -> new FruitDataDto(Operations
+                        .getEnumByString(array[OPERATION_TYPE_INDEX]),
+                        new Fruit(array[FRUIT_NAME_INDEX]),
+                        Integer.parseInt(array[FRUIT_QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 
@@ -40,7 +39,7 @@ public class DataParserServiceImpl implements DataParserService {
         if (Integer.parseInt(currentDataStringArray[FRUIT_QUANTITY_INDEX]) < 0) {
             throw new RuntimeException(SECOND_EXCEPTION_MESSAGE);
         }
-        if (Operations.contains(currentDataStringArray[OPERATION_TYPE_INDEX])) {
+        if (!Operations.contains(currentDataStringArray[OPERATION_TYPE_INDEX])) {
             throw new RuntimeException(THIRD_EXCEPTION_MESSAGE);
         }
         return true;

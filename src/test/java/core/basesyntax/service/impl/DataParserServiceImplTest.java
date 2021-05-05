@@ -14,8 +14,6 @@ import org.junit.Test;
 
 public class DataParserServiceImplTest {
     private static DataParserService dataParserService;
-    private List<FruitDataDto> actual;
-    private List<FruitDataDto> expected;
     private List<String> inputDataList;
 
     @BeforeClass
@@ -26,8 +24,6 @@ public class DataParserServiceImplTest {
     @Before
     public void before() {
         inputDataList = new ArrayList<>();
-        actual = new ArrayList<>();
-        expected = new ArrayList<>();
     }
 
     @Test
@@ -42,6 +38,7 @@ public class DataParserServiceImplTest {
         inputDataList.add("p,banana,5");
         inputDataList.add("s,banana,50");
 
+        List<FruitDataDto> expected = new ArrayList<>();
         expected.add(new FruitDataDto(Operations.BALANCE, new Fruit("banana"), 20));
         expected.add(new FruitDataDto(Operations.BALANCE, new Fruit("apple"), 100));
         expected.add(new FruitDataDto(Operations.SUPPLY, new Fruit("banana"), 100));
@@ -51,7 +48,7 @@ public class DataParserServiceImplTest {
         expected.add(new FruitDataDto(Operations.PURCHASE, new Fruit("banana"), 5));
         expected.add(new FruitDataDto(Operations.SUPPLY, new Fruit("banana"), 50));
 
-        actual = dataParserService.parseDataFromInputFile(inputDataList);
+        List<FruitDataDto> actual = dataParserService.parseDataFromInputFile(inputDataList);
 
         assertEquals(expected, actual);
     }

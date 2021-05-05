@@ -32,7 +32,7 @@ public class FruitServiceImplTest {
     private List<FruitDataDto> fruitDataDtoList;
 
     @BeforeClass
-    public static void beforeAll() {
+    public static void beforeClass() {
         chooseOperation = new HashMap<>();
         chooseOperation.put(Operations.BALANCE, new AddOperation());
         chooseOperation.put(Operations.PURCHASE, new SubtractOperation());
@@ -42,15 +42,15 @@ public class FruitServiceImplTest {
 
     @Before
     public void before() {
+        fruitService = new FruitServiceImpl(chooseOperation);
         Storage.getFruits().put(new Fruit("cherry"), 150);
         Storage.getFruits().put(new Fruit("banana"), 75);
         Storage.getFruits().put(new Fruit("blueberry"), 200);
-        fruitService = new FruitServiceImpl(chooseOperation);
+        fruitDataDtoList = new ArrayList<>();
     }
 
     @Test
     public void applyOperationsOnFruitsDtoWithCorrectDataTest_Ok() {
-        fruitDataDtoList = new ArrayList<>();
         fruitDataDtoList.add(new FruitDataDto(Operations.SUPPLY, CHERRY, CHERRY_QUANTITY));
         fruitDataDtoList.add(new FruitDataDto(Operations.RETURN, BANANA, BANANA_QUANTITY));
         fruitDataDtoList.add(new FruitDataDto(Operations.PURCHASE, BLUEBERRY, BLUEBERRY_QUANTITY));
@@ -67,7 +67,6 @@ public class FruitServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void applyOperationsOnFruitsDtoWithIncorrectDataTest_NotOk() {
-        fruitDataDtoList = new ArrayList<>();
         fruitDataDtoList.add(new FruitDataDto(Operations
                 .PURCHASE, CHERRY, CHERRY_INCORRECT_QUANTITY));
         fruitService.applyOperationsOnFruitsDto(fruitDataDtoList);

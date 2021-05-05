@@ -19,11 +19,9 @@ public class WriterServiceImplTest {
             + "banana,75" + System.lineSeparator()
             + "blueberry,200";
     private static WriterService writerService;
-    private List<String> actual;
-    private List<String> expected;
 
     @BeforeClass
-    public static void before() {
+    public static void beforeClass() {
         writerService = new WriterServiceImpl();
     }
 
@@ -31,13 +29,14 @@ public class WriterServiceImplTest {
     public void writeCorrectDataIntoTheOutputFile_Ok() {
         writerService.write(OUTPUT_FILE_DIRECTION, DATA_INTO_THE_OUTPUT_FILE);
 
+        List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(OUTPUT_FILE_DIRECTION));
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from test file");
         }
 
-        expected = new ArrayList<>();
+        List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("cherry,150");
         expected.add("banana,75");

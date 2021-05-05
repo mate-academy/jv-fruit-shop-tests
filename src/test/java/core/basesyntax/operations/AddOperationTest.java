@@ -42,15 +42,15 @@ public class AddOperationTest {
         Storage.getFruits().put(CHERRY, CHERRY_QUANTITY);
         Storage.getFruits().put(BANANA, BANANA_QUANTITY);
         Storage.getFruits().put(BLUEBERRY, BLUEBERRY_QUANTITY);
-        actual = Storage.getFruits();
 
-        expected.put(CHERRY, 195);
-        expected.put(BANANA, 105);
-        expected.put(BLUEBERRY, 448);
+        expected.put(new Fruit("cherry"), 195);
+        expected.put(new Fruit("banana"), 105);
+        expected.put(new Fruit("blueberry"), 448);
 
         operation.apply(CHERRY, INCREASE_BY_CHERRY);
         operation.apply(BANANA, INCREASE_BY_BANANA);
         operation.apply(BLUEBERRY, INCREASE_BY_BLUEBERRY);
+        actual = Storage.getFruits();
 
         assertEquals(expected, actual);
     }

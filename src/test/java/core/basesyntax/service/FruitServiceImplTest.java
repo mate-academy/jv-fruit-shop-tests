@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
@@ -27,25 +27,23 @@ public class FruitServiceImplTest {
     private static final int VALID_QUANTITY = 50;
     private static final int INVALID_QUANTITY = -20;
     private static final String FRUIT_BANANA = "banana";
-    private FruitDto validBalanceDto;
-    private FruitDto validSupplyDto;
-    private FruitDto validPurchaseDto;
-    private FruitDto validReturnDto;
-    private Map<String, FruitOperations> operationsMap;
-    private FruitDao fruitDao;
-    private Validator validator;
-    private FruitService fruitService;
-    private List<FruitDto> fruits;
+    private static FruitDto validBalanceDto;
+    private static FruitDto validSupplyDto;
+    private static FruitDto validPurchaseDto;
+    private static FruitDto validReturnDto;
+    private static FruitDao fruitDao;
+    private static FruitService fruitService;
+    private static List<FruitDto> fruits;
 
-    @Before
-    public void setUp() {
-        operationsMap = new HashMap<>();
+    @BeforeClass
+    public static void beforeClass() {
+        Map<String, FruitOperations> operationsMap = new HashMap<>();
         operationsMap.put(BALANCE, new FruitBalance());
         operationsMap.put(PURCHASE, new FruitPurchase());
         operationsMap.put(RETURN, new FruitSupplyOrReturn());
         operationsMap.put(SUPPLY, new FruitSupplyOrReturn());
         fruitDao = new FruitDaoImpl();
-        validator = new ValidatorImpl(operationsMap, fruitDao);
+        Validator validator = new ValidatorImpl(operationsMap, fruitDao);
         fruitService = new FruitServiceImpl(operationsMap, validator, fruitDao);
         validBalanceDto = new FruitDto(FRUIT_BANANA, VALID_QUANTITY, BALANCE);
         validSupplyDto = new FruitDto(FRUIT_BANANA, VALID_QUANTITY, SUPPLY);
@@ -55,7 +53,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void applyOperationsOnFruitsDto_ApplyOnValidFruitsDto_Ok() {
+    public void applyOperationsOnFruitsDto_OnValidFruitsDto_Ok() {
         fruits.add(validBalanceDto);
         fruits.add(validSupplyDto);
         fruits.add(validReturnDto);
@@ -67,7 +65,7 @@ public class FruitServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyOperationsOnFruitsDto_ApplyOnInvalidFruitsDto_Ok() {
+    public void applyOperationsOnFruitsDto_OnInvalidFruitsDto_Ok() {
         fruits.add(new FruitDto(FRUIT_BANANA, INVALID_QUANTITY, BALANCE));
         fruitService.applyOperationsOnFruitsDto(fruits);
     }

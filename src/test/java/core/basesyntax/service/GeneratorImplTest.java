@@ -6,31 +6,31 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GeneratorImplTest {
     private static final String EXPECTED_REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator();
-    private Generator generator;
-    private FruitDao fruitDao;
+    private static Generator generator;
+    private static FruitDao fruitDao;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         generator = new GeneratorImpl(fruitDao);
     }
 
     @Test
-    public void generateReport_generateReportFromValidStorage_Ok() {
+    public void generateReport_FromValidStorage_Ok() {
         Storage.getFruits().put("banana", 152);
         Storage.getFruits().put("apple", 90);
         assertEquals(EXPECTED_REPORT, generator.generateReport());
     }
 
     @Test
-    public void generateReport_generateReportFromEmptyStorage_Ok() {
+    public void generateReport_FromEmptyStorage_Ok() {
         assertEquals("fruit,quantity" + System.lineSeparator(), generator.generateReport());
     }
 

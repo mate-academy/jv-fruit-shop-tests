@@ -12,7 +12,7 @@ import core.basesyntax.dto.FruitDto;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ValidatorImplTest {
@@ -25,17 +25,16 @@ public class ValidatorImplTest {
     private static final int INVALID_QUANTITY = -20;
     private static final String FRUIT_BANANA = "banana";
     private static final String INVALID_FRUIT = "jfij12ll";
-    private FruitDto validBalanceDto;
-    private FruitDto validSupplyDto;
-    private FruitDto validPurchaseDto;
-    private FruitDto validReturnDto;
-    private Validator validator;
-    private FruitDao fruitDao;
-    private Map<String, FruitOperations> operationsMap;
+    private static FruitDto validBalanceDto;
+    private static FruitDto validSupplyDto;
+    private static FruitDto validPurchaseDto;
+    private static FruitDto validReturnDto;
+    private static Validator validator;
+    private static FruitDao fruitDao;
 
-    @Before
-    public void setUp() {
-        operationsMap = new HashMap<>();
+    @BeforeClass
+    public static void beforeClass() {
+        Map<String, FruitOperations> operationsMap = new HashMap<>();
         operationsMap.put(BALANCE, new FruitBalance());
         operationsMap.put(PURCHASE, new FruitPurchase());
         operationsMap.put(RETURN, new FruitSupplyOrReturn());
@@ -49,14 +48,14 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_ValidateBalanceDto_Ok() {
+    public void validateFile_ValidBalanceDto_Ok() {
         validator.validateFile(validBalanceDto);
         assertTrue(fruitDao.containFruit(FRUIT_BANANA)
                 && fruitDao.getQuantity(FRUIT_BANANA) == VALID_QUANTITY);
     }
 
     @Test
-    public void validate_ValidateOperationsOrder_Ok() {
+    public void validateFile_ValidOperationsOrder_Ok() {
         validator.validateFile(validBalanceDto);
         validator.validateFile(validSupplyDto);
         validator.validateFile(validReturnDto);
@@ -67,30 +66,30 @@ public class ValidatorImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_ValidateInvalidFruit_NotOk() {
+    public void validateFile_InvalidFruit_NotOk() {
         validator.validateFile(validBalanceDto);
         validator.validateFile(new FruitDto(INVALID_FRUIT, VALID_QUANTITY, SUPPLY));
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_ValidateInvalidQuantity_NotOK() {
+    public void validateFile_InvalidQuantity_NotOK() {
         validator.validateFile(new FruitDto(FRUIT_BANANA, INVALID_QUANTITY, BALANCE));
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_ValidateInvalidOperation_NotOK() {
+    public void validateFile_InvalidOperation_NotOK() {
         validator.validateFile(new FruitDto(FRUIT_BANANA, VALID_QUANTITY, INVALID_OPERATION));
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_ValidateInvalidOperationOrder_NotOK() {
+    public void validateFile_InvalidOperationOrder_NotOK() {
         validator.validateFile(validBalanceDto);
         validator.validateFile(validPurchaseDto);
         validator.validateFile(validPurchaseDto);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_ValidateSupplyBeforeBalance_NotOK() {
+    public void validateFile_SupplyBeforeBalance_NotOK() {
         validator.validateFile(validSupplyDto);
         validator.validateFile(validBalanceDto);
     }

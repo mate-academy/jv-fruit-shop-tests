@@ -5,22 +5,22 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserImplTest {
     private static final int EXPECTED_LENGTH = 8;
-    private Parser parser;
-    private List<String> input;
+    private static Parser parser;
+    private static List<String> input;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         parser = new ParserImpl();
         input = new ArrayList<>();
     }
 
     @Test
-    public void parseDto_ParseValidFile_Ok() {
+    public void parseDto_ValidFile_Ok() {
         input.add("type,fruit,quantity");
         input.add("b,banana,20");
         input.add("b,apple,100");
@@ -34,7 +34,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parseDto_ParseFileWithSpaces_Ok() {
+    public void parseDto_FileWithSpaces_Ok() {
         input.add("type,fruit,quantity");
         input.add("b  ,banana,20");
         input.add("b,apple  ,100");
@@ -48,7 +48,7 @@ public class ParserImplTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void parseDto_ParseFileWithInvalidData_NotOk() {
+    public void parseDto_FileWithInvalidData_NotOk() {
         input.add("type,fruit,quantity");
         input.add("b,banana,20");
         input.add("b,apple,100");

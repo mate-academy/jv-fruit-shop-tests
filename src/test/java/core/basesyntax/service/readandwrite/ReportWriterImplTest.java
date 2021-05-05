@@ -8,10 +8,9 @@ import org.junit.Test;
 public class ReportWriterImplTest {
     private static final String PATH_TO_FILE = "src/test/resources/reportTest.csv";
     private static final String WRONG_PATH_TO_FILE = "src/test/resoces/reportTest.csv";
-    private static final String CONTENT =
-            "fruit,quantity\r\n"
-                    + "banana,152\r\n"
-                    + "apple,90\r\n";
+    private static final String CONTENT = "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator()
+            + "apple,90" + System.lineSeparator();
     private static ReportWriter reportWriter;
 
     @BeforeClass

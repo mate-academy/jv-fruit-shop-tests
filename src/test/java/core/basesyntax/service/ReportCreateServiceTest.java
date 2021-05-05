@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.Fruit;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportCreateServiceTest {
     private static final ReportCreateService reportCreateService =
@@ -15,8 +15,8 @@ public class ReportCreateServiceTest {
     private final Fruit banana = new Fruit("banana");
     private final Fruit strawberry = new Fruit("strawberry");
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         Storage.getFruitDataBase().entrySet().clear();
     }
 

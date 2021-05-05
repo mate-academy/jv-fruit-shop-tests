@@ -34,12 +34,6 @@ public class AddOperationTest {
     }
 
     @Test
-    public void addDifferentFruits_Ok() {
-        Storage.fruits.put(new Fruit("apple"),20);
-        assertEquals(10,operation.apply(fruitRecordDtoTest));
-    }
-
-    @Test
     public void addFruitWithNullValue_NotOk() {
         Fruit fruit = new Fruit(null);
         Storage.fruits.put(fruit,null);

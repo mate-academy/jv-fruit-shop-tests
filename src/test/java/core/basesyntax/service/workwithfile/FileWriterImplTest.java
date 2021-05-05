@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
+    private static final String PATH = "src/test/resources/writer.csv";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -14,8 +15,8 @@ public class FileWriterImplTest {
 
     @Test
     public void writeCorrectInputFile_Ok() {
-        String path = "src/test/resources/writer.csv";
-        String report = "s,banana,100";
+        String path = PATH;
+        String report = "s,banana,100" + System.lineSeparator();
         fileWriter.writeData(report,path);
         Assert.assertNotNull(report);
         Assert.assertNotNull(path);

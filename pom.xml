@@ -26,6 +26,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -91,6 +97,15 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/FruitDaoImpl*</exclude>
+                        <exclude>**/Storage*</exclude>
+                        <exclude>**/IncorrectFruitTypeException*</exclude>
+                        <exclude>**/IncorrectQuantityValueException*</exclude>
+                        <exclude>**/InsufficientAmountException*</exclude>
+                        <exclude>**/InvalidFruitTypeException*</exclude>
+                        <exclude>**/InvalidOperationTypeException*</exclude>
+                        <exclude>**/InvalidOperationTypeException*</exclude>
+                        <exclude>**/TransactionDto*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

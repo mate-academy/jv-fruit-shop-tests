@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
     private static final String CORRECT_FILE_PATH = "src\\test\\resourcesTest\\input_Date.csv";
     private static final String INCORRECT_FILE_PATH = "src\\main\\shopExample.cvs";
-    private static final String PATH_EMPTY_FILE = "src\\test\\resourcesTest\\empty_file.csv";
+    private static final String PATH_EMPTY_FILE = "src\\test\\resourcesTest\\emptyFile.csv";
     private static ReaderService readerService;
     private static List<String> actual;
     private static List<String> expected;

@@ -36,6 +36,6 @@ public class FruitServiceImpl implements FruitService {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return builderReport.toString();
+        return builderReport.toString().trim();
     }
 }

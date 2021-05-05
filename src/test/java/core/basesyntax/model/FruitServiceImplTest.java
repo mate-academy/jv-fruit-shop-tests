@@ -74,7 +74,7 @@ public class FruitServiceImplTest {
         String actualReport = fruitService.getReport();
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,172" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator();
+                + "apple,90";
         assertEquals(expectedReport, actualReport);
     }
 
@@ -83,7 +83,7 @@ public class FruitServiceImplTest {
         List<FruitRecordDto> recordDtos = new ArrayList<>();
         fruitService.save(recordDtos);
         String actualReport = fruitService.getReport();
-        String expectedReport = "fruit,quantity" + System.lineSeparator();
+        String expectedReport = "fruit,quantity";
         assertEquals(expectedReport, actualReport);
     }
 

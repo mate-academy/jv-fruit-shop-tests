@@ -19,7 +19,7 @@ public class ReportServiceImpl implements ReportService {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        stringBuilder.append(System.lineSeparator());
-        return stringBuilder.toString().trim();
+        //stringBuilder.append(System.lineSeparator());
+        return stringBuilder.toString();
     }
 }

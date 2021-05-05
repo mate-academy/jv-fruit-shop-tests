@@ -14,7 +14,7 @@ public class AddOperationTest {
     private static final String FRUIT = "banana";
     private static final Integer QUANTITY = 12;
     private static final FruitDto FRUIT_DTO =
-            new FruitDto(Operation.PURCHASE, FRUIT, QUANTITY);
+            new FruitDto(Operation.SUPPLY, FRUIT, QUANTITY);
     private static FruitOperationService addOperation;
 
     @BeforeClass

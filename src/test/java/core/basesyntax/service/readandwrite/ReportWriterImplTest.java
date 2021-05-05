@@ -9,9 +9,9 @@ public class ReportWriterImplTest {
     private static final String PATH_TO_FILE = "src/test/resources/reportTest.csv";
     private static final String WRONG_PATH_TO_FILE = "src/test/resoces/reportTest.csv";
     private static final String CONTENT =
-            "fruit,quantity\n"
-                    + "banana,152\n"
-                    + "apple,90\n";
+            "fruit,quantity\r\n"
+                    + "banana,152\r\n"
+                    + "apple,90\r\n";
     private static ReportWriter reportWriter;
 
     @BeforeClass

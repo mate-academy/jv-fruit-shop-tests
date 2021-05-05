@@ -46,4 +46,13 @@ public class TransactionDto {
     public int hashCode() {
         return Objects.hash(operationType, fruit, quantity);
     }
+
+    @Override
+    public String toString() {
+        return "TransactionDto{" +
+                "operationType=" + operationType +
+                ", fruit=" + fruit +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

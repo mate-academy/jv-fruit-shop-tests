@@ -1,0 +1,32 @@
+package core.basesyntax.service.implementations;
+
+import core.basesyntax.service.FileReaderService;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import java.util.List;
+
+public class FileReaderServiceImplTest {
+    private static final String PATH_TO_FILE = "src/test/resources/data_test_ok.csv";
+    private static final String PATH_TO_NOT_EXISTING_FILE = "src/test/resources/casper.csv";
+    private static FileReaderService fileReader;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        fileReader = new FileReaderServiceImpl();
+    }
+
+    @Test
+    public void FileReaderServiceImplTest_readFromFile_Ok() {
+        List<String> actual = fileReader.readFromFile(PATH_TO_FILE);
+        List<String> expected = List.of("type,fruit,quantity",
+                "b,banana,20", "b,apple,100", "s,banana,100",
+                "p,banana,13", "r,apple,10");
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void FileReaderServiceImplTest_readFromNonExistFile_NotOk() {
+        fileReader.readFromFile(PATH_TO_NOT_EXISTING_FILE);
+    }
+}

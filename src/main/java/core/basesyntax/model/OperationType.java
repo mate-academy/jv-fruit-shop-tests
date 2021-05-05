@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.exeptions.InvalidOperationTypeException;
-
 import java.util.Arrays;
 
 public enum OperationType {

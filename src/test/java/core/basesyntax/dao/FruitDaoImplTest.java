@@ -13,24 +13,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private static final Fruit CHERRY = new Fruit("cherry");
+    private static final Fruit cherry = new Fruit("cherry");
     private static final Integer CHERRY_QUANTITY = 150;
-    private static final Fruit BANANA = new Fruit("banana");
+    private static final Fruit banana = new Fruit("banana");
     private static final Integer BANANA_QUANTITY = 50;
-    private static final Fruit BLUEBERRY = new Fruit("blueberry");
+    private static final Fruit blueberry = new Fruit("blueberry");
     private static final Integer BLUEBERRY_QUANTITY = 23;
     private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
-        fruitDao.update(CHERRY, CHERRY_QUANTITY);
-        fruitDao.update(BANANA, BANANA_QUANTITY);
-        fruitDao.update(BLUEBERRY, BLUEBERRY_QUANTITY);
+        fruitDao.update(cherry, CHERRY_QUANTITY);
+        fruitDao.update(banana, BANANA_QUANTITY);
+        fruitDao.update(blueberry, BLUEBERRY_QUANTITY);
     }
 
     @Test
-    public void updateTest_Ok() {
+    public void updateStorageTest_Ok() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("cherry"), 150);
         expected.put(new Fruit("banana"), 50);
@@ -41,29 +41,29 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getTest_Ok() {
+    public void getQuantityFromStorageTest_Ok() {
         Optional<Integer> expected;
         Optional<Integer> actual;
 
         expected = Optional.of(150);
-        actual = fruitDao.get(CHERRY);
+        actual = fruitDao.get(cherry);
         assertEquals(expected, actual);
 
         expected = Optional.of(50);
-        actual = fruitDao.get(BANANA);
+        actual = fruitDao.get(banana);
         assertEquals(expected, actual);
 
         expected = Optional.of(23);
-        actual = fruitDao.get(BLUEBERRY);
+        actual = fruitDao.get(blueberry);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getFruitsTest_Ok() {
+    public void getAllFruitsFromStorageTest_Ok() {
         Set<Fruit> expected = new HashSet<>();
-        expected.add(CHERRY);
-        expected.add(BANANA);
-        expected.add(BLUEBERRY);
+        expected.add(cherry);
+        expected.add(banana);
+        expected.add(blueberry);
 
         Set<Fruit> actual = fruitDao.getFruits();
         assertEquals(expected, actual);

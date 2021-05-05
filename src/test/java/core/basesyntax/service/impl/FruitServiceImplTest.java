@@ -20,9 +20,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private static final Fruit CHERRY = new Fruit("cherry");
-    private static final Fruit BANANA = new Fruit("banana");
-    private static final Fruit BLUEBERRY = new Fruit("blueberry");
+    private static final Fruit cherry = new Fruit("cherry");
+    private static final Fruit banana = new Fruit("banana");
+    private static final Fruit blueberry = new Fruit("blueberry");
     private static final Integer CHERRY_QUANTITY = 50;
     private static final Integer BANANA_QUANTITY = 25;
     private static final Integer BLUEBERRY_QUANTITY = 100;
@@ -51,9 +51,9 @@ public class FruitServiceImplTest {
 
     @Test
     public void applyOperationsOnFruitsDtoWithCorrectDataTest_Ok() {
-        fruitDataDtoList.add(new FruitDataDto(Operations.SUPPLY, CHERRY, CHERRY_QUANTITY));
-        fruitDataDtoList.add(new FruitDataDto(Operations.RETURN, BANANA, BANANA_QUANTITY));
-        fruitDataDtoList.add(new FruitDataDto(Operations.PURCHASE, BLUEBERRY, BLUEBERRY_QUANTITY));
+        fruitDataDtoList.add(new FruitDataDto(Operations.SUPPLY, cherry, CHERRY_QUANTITY));
+        fruitDataDtoList.add(new FruitDataDto(Operations.RETURN, banana, BANANA_QUANTITY));
+        fruitDataDtoList.add(new FruitDataDto(Operations.PURCHASE, blueberry, BLUEBERRY_QUANTITY));
 
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("cherry"), 200);
@@ -68,7 +68,7 @@ public class FruitServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void applyOperationsOnFruitsDtoWithIncorrectDataTest_NotOk() {
         fruitDataDtoList.add(new FruitDataDto(Operations
-                .PURCHASE, CHERRY, CHERRY_INCORRECT_QUANTITY));
+                .PURCHASE, cherry, CHERRY_INCORRECT_QUANTITY));
         fruitService.applyOperationsOnFruitsDto(fruitDataDtoList);
     }
 

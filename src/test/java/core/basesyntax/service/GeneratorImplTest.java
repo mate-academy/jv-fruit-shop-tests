@@ -12,7 +12,7 @@ import org.junit.Test;
 public class GeneratorImplTest {
     private static final String EXPECTED_REPORT = "fruit,quantity\r\n"
             + "banana,152\r\n"
-            + "apple,90";
+            + "apple,90\r";
     private Generator generator;
     private FruitDao fruitDao;
 
@@ -31,7 +31,7 @@ public class GeneratorImplTest {
 
     @Test
     public void generateReport_generateReportFromEmptyStorage_Ok() {
-        assertEquals("fruit,quantity", generator.generateReport());
+        assertEquals("fruit,quantity\r", generator.generateReport());
     }
 
     @After

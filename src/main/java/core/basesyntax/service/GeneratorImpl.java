@@ -17,7 +17,7 @@ public class GeneratorImpl implements Generator {
         report.append(TITLE).append(System.lineSeparator());
         fruitDao.getAll().forEach((key, value) -> report.append(key).append(SEPARATOR)
                 .append(value).append(System.lineSeparator()));
-        report.setLength(report.length() - 2);
+        report.setLength(report.length() - 1);
         return report.toString();
     }
 }

@@ -1,4 +1,4 @@
-package core.basesyntax.fruitshop.file.reader;
+package core.basesyntax.service;
 
 import java.util.List;
 

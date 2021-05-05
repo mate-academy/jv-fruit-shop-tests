@@ -1,4 +1,4 @@
-package core.basesyntax.fruitshop.report.generator;
+package core.basesyntax.service;
 
 import org.junit.Test;
 

@@ -1,10 +1,10 @@
-package core.basesyntax.storage.dao;
+package core.basesyntax.service.handler;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.dto.FruitDto;
 import java.util.Map;
 
-public class TakeFromStorageHandlerImpl implements StorageHandler {
+public class RemoveFruitHandlerImpl implements FruitHandler {
     @Override
     public void handleGoods(FruitDto fruitData) {
         int amount = fruitData.getAmount();

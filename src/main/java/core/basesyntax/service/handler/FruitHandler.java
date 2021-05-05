@@ -1,7 +1,7 @@
-package core.basesyntax.storage.dao;
+package core.basesyntax.service.handler;
 
 import core.basesyntax.fruit.dto.FruitDto;
 
-public interface StorageHandler {
+public interface FruitHandler {
     void handleGoods(FruitDto fruitData);
 }

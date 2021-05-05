@@ -1,4 +1,4 @@
-package core.basesyntax.fruitshop.report.generator;
+package core.basesyntax.service;
 
 public interface FileWriter {
     void writeReport(String report, String toFile);

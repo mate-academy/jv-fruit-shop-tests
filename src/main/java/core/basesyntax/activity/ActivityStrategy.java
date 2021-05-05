@@ -1,7 +1,7 @@
 package core.basesyntax.activity;
 
-import core.basesyntax.storage.dao.StorageHandler;
+import core.basesyntax.service.handler.FruitHandler;
 
 public interface ActivityStrategy {
-    StorageHandler get(Activities activities);
+    FruitHandler get(Activities activities);
 }

@@ -1,4 +1,4 @@
-package core.basesyntax.fruitshop.report.generator;
+package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;

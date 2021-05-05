@@ -1,4 +1,4 @@
-package core.basesyntax.storage.dao;
+package core.basesyntax.service.handler;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,8 +8,8 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TakeFromStorageHandlerImplTest {
-    private final StorageHandler takeFromStorage = new TakeFromStorageHandlerImpl();
+public class RemoveFruitHandlerImplTest {
+    private final FruitHandler takeFromStorage = new RemoveFruitHandlerImpl();
     private final Map<String, Integer> actual = Storage.getFruitStorage();
 
     @BeforeClass

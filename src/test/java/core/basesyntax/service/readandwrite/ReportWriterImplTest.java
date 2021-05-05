@@ -11,7 +11,7 @@ public class ReportWriterImplTest {
     private static final String CONTENT =
             "fruit,quantity\n"
                     + "banana,152\n"
-                    + "apple,90";
+                    + "apple,90\n";
     private static ReportWriter reportWriter;
 
     @BeforeClass

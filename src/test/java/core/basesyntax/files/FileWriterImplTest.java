@@ -9,9 +9,9 @@ public class FileWriterImplTest {
     private static final String REPORT_FILE_PATH = "src/test/resources/report.csv";
     private static final String INVALID_PATH = "src/test/resources/invalidReport.csv";
     private static final String DIRECTORY_PATH = "src/test/resources";
-    private static final String REPORT = "fruit,quantity\r\n"
-            + "banana,152\r\n"
-            + "apple,90\r\n";
+    private static final String REPORT = "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator()
+            + "apple,90" + System.lineSeparator();
     private static final int EXPECTED_SIZE = 3;
     private FileWriter fileWriter;
     private FileReader fileReader;

@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GeneratorImplTest {
-    private static final String EXPECTED_REPORT = "fruit,quantity\r\n"
-            + "banana,152\r\n"
-            + "apple,90\r\n";
+    private static final String EXPECTED_REPORT = "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator()
+            + "apple,90" + System.lineSeparator();
     private Generator generator;
     private FruitDao fruitDao;
 
@@ -31,7 +31,7 @@ public class GeneratorImplTest {
 
     @Test
     public void generateReport_generateReportFromEmptyStorage_Ok() {
-        assertEquals("fruit,quantity\r\n", generator.generateReport());
+        assertEquals("fruit,quantity" + System.lineSeparator(), generator.generateReport());
     }
 
     @After

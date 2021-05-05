@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
@@ -13,8 +13,8 @@ public class FileWriterTest {
     private static final String CONTENT = "content";
     private static FileWriter writer;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         writer = new CsvFileWriterImpl();
     }
 

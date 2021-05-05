@@ -8,6 +8,7 @@ import core.basesyntax.exceptions.IncorrectPurchaseRequestException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DecreaseOperationHandlerTest {
@@ -19,9 +20,8 @@ public class DecreaseOperationHandlerTest {
     private static OperationHandler decreaseHandler;
     private static final int ZERO = 0;
 
-    @Before
-    public void setUp() {
-        FruitStorage.storage.clear();
+    @BeforeClass
+    public static void beforeClass() {
         correctFruitForIncrease = new FruitRecordDto(OperationType.BALANCE,
                 new Fruit("fruit"), 21);
         incorrectFruitForIncrease = new FruitRecordDto(OperationType.BALANCE,
@@ -32,6 +32,11 @@ public class DecreaseOperationHandlerTest {
                 new Fruit("not_fruit"), 23);
         increaseHandler = new IncreaseOperationHandler();
         decreaseHandler = new DecreaseOperationHandler();
+    }
+
+    @Before
+    public void setUp() {
+        FruitStorage.storage.clear();
     }
 
     @Test

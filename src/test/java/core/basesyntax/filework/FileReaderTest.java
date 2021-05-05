@@ -3,7 +3,7 @@ package core.basesyntax.filework;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.exceptions.ReadFromFileException;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
@@ -12,8 +12,8 @@ public class FileReaderTest {
     private static final String INCORRECT_PATH_FOR_READ = "src/main/test/resources/fruits_shop.csv";
     private static FileReader reader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         reader = new CsvFileReaderImpl();
     }
 

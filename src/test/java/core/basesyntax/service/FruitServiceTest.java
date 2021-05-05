@@ -15,6 +15,7 @@ import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
@@ -29,10 +30,8 @@ public class FruitServiceTest {
             + "banana,152\n"
             + "apple,90\n";
 
-    @Before
-    public void setUp() {
-        ParserCsvImpl.fruitStore.clear();
-        FruitStorage.storage.clear();
+    @BeforeClass
+    public static void beforeClass() {
         reader = new CsvFileReaderImpl();
         fruitService = new FruitServiceImpl();
         parser = new ParserCsvImpl();
@@ -41,6 +40,12 @@ public class FruitServiceTest {
         operationHandlerMap.put(OperationType.SUPPLY, new IncreaseOperationHandler());
         operationHandlerMap.put(OperationType.RETURN, new IncreaseOperationHandler());
         operationHandlerMap.put(OperationType.PURCHASE, new DecreaseOperationHandler());
+    }
+
+    @Before
+    public void setUp() {
+        ParserCsvImpl.fruitStore.clear();
+        FruitStorage.storage.clear();
     }
 
     @Test

@@ -8,6 +8,7 @@ import core.basesyntax.exceptions.IncorrectAdditionalGoodsException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class IncreaseOperationHandlerTest {
@@ -15,14 +16,18 @@ public class IncreaseOperationHandlerTest {
     private static FruitRecordDto correctFruitForIncrease;
     private static FruitRecordDto incorrectFruitForIncrease;
 
-    @Before
-    public void setUp() {
-        FruitStorage.storage.clear();
+    @BeforeClass
+    public static void beforeClass() {
         increaseHandler = new IncreaseOperationHandler();
         correctFruitForIncrease = new FruitRecordDto(OperationType.BALANCE,
                 new Fruit("fruit"), 21);
         incorrectFruitForIncrease = new FruitRecordDto(OperationType.SUPPLY,
                 new Fruit("fruit"), -21);
+    }
+
+    @Before
+    public void setUp() {
+        FruitStorage.storage.clear();
     }
 
     @Test

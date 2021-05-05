@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ReportGeneratorImplTest {
     private static final String TITLE = "fruit,quantity\n";
-    private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
+    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     @BeforeClass
     public static void clearStorage() {

@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddToStorageHandlerImplTest {
-    private static final AddToStorageHandlerImpl HANDLER = new AddToStorageHandlerImpl();
+    private static final StorageHandler HANDLER = new AddToStorageHandlerImpl();
     private Map<String, Integer> expected;
     private final Map<String, Integer> actual = Storage.getFruitStorage();
 

@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TakeFromStorageHandlerImplTest {
-    private final TakeFromStorageHandlerImpl takeFromStorage = new TakeFromStorageHandlerImpl();
+    private final StorageHandler takeFromStorage = new TakeFromStorageHandlerImpl();
     private final Map<String, Integer> actual = Storage.getFruitStorage();
 
     @BeforeClass

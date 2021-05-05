@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class ActivityParserImplTest {
-    private final ActivityParserImpl activityParser = new ActivityParserImpl();
+    private final ActivityParser activityParser = new ActivityParserImpl();
 
     @Test
     public void parseActivity_balanceAction_ok() {

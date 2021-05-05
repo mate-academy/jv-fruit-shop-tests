@@ -23,7 +23,7 @@ public class FruitServiceImplTest {
     private static Map<Fruit, Integer> actual;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Map<Operation, FruitOperationHandler> strategyMap = new HashMap<>();
         strategyMap.put(Operation.BALANCE, new AddBalanceOperation());
         strategyMap.put(Operation.SUPPLY, new SupplyOperation());
@@ -88,7 +88,7 @@ public class FruitServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruitsDataBase.entrySet().clear();
     }
 }

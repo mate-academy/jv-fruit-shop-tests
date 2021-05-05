@@ -7,8 +7,8 @@ import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationTest {
@@ -20,17 +20,12 @@ public class ReturnOperationTest {
             new FruitRecordDto(Operation.RETURN,"qqq", 100);
     private static final FruitRecordDto fruitRecordDtoNegativeQuantity =
             new FruitRecordDto(Operation.RETURN,"apple", -20);
-    private static FruitOperationHandler operationHandler;
+    private static final FruitOperationHandler operationHandler = new ReturnOperation();
     private static Map<Fruit, Integer> expected;
     private static Map<Fruit, Integer> actual;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        operationHandler = new ReturnOperation();
-    }
-
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.fruitsDataBase.put(new Fruit("banana"), 10);
         Storage.fruitsDataBase.put(new Fruit("mango"), 200);
         Storage.fruitsDataBase.put(new Fruit("apple"), 30);
@@ -56,5 +51,10 @@ public class ReturnOperationTest {
     @Test (expected = RuntimeException.class)
     public void apply_returnNegativeQuantity_Ok() {
         operationHandler.apply(fruitRecordDtoNegativeQuantity);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitsDataBase.clear();
     }
 }

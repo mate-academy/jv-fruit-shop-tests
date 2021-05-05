@@ -4,21 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String CORRECT_FILE_PATH = "src\\test\\resourcesTest\\input_Date.csv";
     private static final String INCORRECT_FILE_PATH = "src\\main\\shopExample.cvs";
     private static final String PATH_EMPTY_FILE = "src\\test\\resourcesTest\\emptyFile.csv";
-    private static ReaderService readerService;
+    private static final ReaderService readerService = new ReaderServiceImpl();
     private static List<String> actual;
     private static List<String> expected;
-
-    @Before
-    public void setUp() throws Exception {
-        readerService = new ReaderServiceImpl();
-    }
 
     @Test
     public void rear_dataFromFile_Ok() {

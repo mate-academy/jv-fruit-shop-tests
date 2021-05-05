@@ -6,16 +6,10 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FruitRecordDtoParserImplTest {
-    private static FruitRecordDtoParser fruitRecordDtoParser;
-
-    @Before
-    public void setUp() throws Exception {
-        fruitRecordDtoParser = new FruitRecordDtoParserImpl();
-    }
+    private static final FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
 
     @Test
     public void parse_correctLinesFromFile_Ok() {
@@ -41,14 +35,14 @@ public class FruitRecordDtoParserImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parse_incorrectLengthColumns_Ok() {
+    public void parse_incorrectLengthColumns_notOk() {
         List<String> lines = new ArrayList(Arrays.asList("type,fruit,quantity",
                 "b,banana,40,50"));
         fruitRecordDtoParser.parse(lines);
     }
 
     @Test (expected = RuntimeException.class)
-    public void parse_incorrectQuantityNotNumber_OK() {
+    public void parse_incorrectQuantityNotNumber_notOk() {
         List<String> lines = new ArrayList(Arrays.asList("type,fruit,quantity",
                 "b,apple,two"));
         fruitRecordDtoParser.parse(lines);

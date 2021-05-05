@@ -8,7 +8,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import java.util.Map;
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddBalanceOperationTest {
@@ -22,14 +21,9 @@ public class AddBalanceOperationTest {
             new FruitRecordDto(Operation.BALANCE, "1234", 100);
     private static final FruitRecordDto fruitRecordDtoWrongQuantity =
             new FruitRecordDto(Operation.BALANCE, "apple", -20);
-    private static FruitOperationHandler operationHandler;
+    private static final FruitOperationHandler operationHandler = new AddBalanceOperation();
     private static Map<Fruit, Integer> expected;
     private static Map<Fruit, Integer> actual;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        operationHandler = new AddBalanceOperation();
-    }
 
     @Test
     public void apply_addCorrectCase_Ok() {
@@ -67,7 +61,7 @@ public class AddBalanceOperationTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruitsDataBase.entrySet().clear();
     }
 }

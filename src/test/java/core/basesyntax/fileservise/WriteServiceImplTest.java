@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
@@ -15,13 +14,8 @@ public class WriteServiceImplTest {
     private static final String INCORRECT_FILE_PATH = "src\\mein\\report.cvs";
     private static final String report = "fruit,quantity" + System.lineSeparator()
             + "banana,172" + System.lineSeparator()
-            + "apple,90" + System.lineSeparator();
-    private static WriteServiceImpl writeService;
-
-    @Before
-    public void setUp() throws Exception {
-        writeService = new WriteServiceImpl();
-    }
+            + "apple,90";
+    private static final WriteServiceImpl writeService = new WriteServiceImpl();
 
     @Test
     public void write_reportToFile_Ok() throws IOException {

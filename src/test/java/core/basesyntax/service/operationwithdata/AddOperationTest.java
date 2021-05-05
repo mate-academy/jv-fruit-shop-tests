@@ -23,7 +23,7 @@ public class AddOperationTest {
     }
 
     @Test
-    public void apply_Ok() {
+    public void apply_Add_Ok() {
         addOperation.apply(FRUIT_DTO);
         addOperation.apply(FRUIT_DTO);
         Integer expected = 24;

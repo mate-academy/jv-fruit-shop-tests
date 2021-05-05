@@ -5,11 +5,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.fileservice.FileReader;
 import core.basesyntax.service.fileservice.FileReaderForCsvImpl;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;

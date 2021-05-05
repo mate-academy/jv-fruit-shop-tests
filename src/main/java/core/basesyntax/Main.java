@@ -14,7 +14,6 @@ import core.basesyntax.service.implementation.FileWriterImpl;
 import core.basesyntax.service.implementation.ReduceOperation;
 import core.basesyntax.service.implementation.ReportServiceImpl;
 import core.basesyntax.service.implementation.SetOperation;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

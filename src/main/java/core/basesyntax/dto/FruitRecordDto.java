@@ -1,7 +1,6 @@
 package core.basesyntax.dto;
 
 import core.basesyntax.service.OperationType;
-
 import java.util.Objects;
 
 public class FruitRecordDto {
@@ -29,12 +28,16 @@ public class FruitRecordDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitRecordDto that = (FruitRecordDto) o;
-        return quantity == that.quantity &&
-                operationType == that.operationType &&
-                Objects.equals(fruitName, that.fruitName);
+        return quantity == that.quantity
+                && operationType == that.operationType
+                && Objects.equals(fruitName, that.fruitName);
     }
 
     @Override

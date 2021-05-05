@@ -6,7 +6,7 @@ import core.basesyntax.exceptions.ReadFromFileException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CsvFileReaderImplTest {
+public class FileReaderTest {
     private static final String CORRECT_PATH_FOR_READ = "src/main/resources/fruit_shop.csv";
     private static final String EMPTY_FILE_FOR_READ = "src/test/resources/test_empty_read_file.csv";
     private static final String INCORRECT_PATH_FOR_READ = "src/main/test/resources/fruits_shop.csv";

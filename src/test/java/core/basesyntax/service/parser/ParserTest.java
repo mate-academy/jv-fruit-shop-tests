@@ -9,7 +9,7 @@ import core.basesyntax.model.OperationType;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ParserCsvImplTest {
+public class ParserTest {
     private static Parser parser;
     private static FruitRecordDto correctFruitForDecrease;
 

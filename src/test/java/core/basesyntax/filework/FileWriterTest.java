@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CsvFileWriterImplTest {
+public class FileWriterTest {
     private static final String CORRECT_PATH_FOR_WRITE = "src/test/resources/test_write_file.csv";
     private static final String CONTENT = "content";
     private static FileWriter writer;

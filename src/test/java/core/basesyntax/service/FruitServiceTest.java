@@ -17,7 +17,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FruitServiceImplTest {
+public class FruitServiceTest {
     private static FruitService fruitService;
     private static FileReader reader;
     private static Parser parser;

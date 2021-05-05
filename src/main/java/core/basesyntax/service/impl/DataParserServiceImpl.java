@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitDataDto;
 import core.basesyntax.operations.Operations;
 import core.basesyntax.service.DataParserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

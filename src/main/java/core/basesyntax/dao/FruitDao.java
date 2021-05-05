@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.Optional;
 import java.util.Set;
 

@@ -2,7 +2,6 @@ package core.basesyntax.model.dto;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.operations.Operations;
-
 import java.util.Objects;
 
 public class FruitDataDto {

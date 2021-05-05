@@ -13,7 +13,6 @@ import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

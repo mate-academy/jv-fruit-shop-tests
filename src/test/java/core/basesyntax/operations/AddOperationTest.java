@@ -36,9 +36,4 @@ public class AddOperationTest {
     public void invalidDataNullProductName_NotOk() {
         addOperation.apply(new ProductDto("r", null, 0));
     }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
-    }
 }

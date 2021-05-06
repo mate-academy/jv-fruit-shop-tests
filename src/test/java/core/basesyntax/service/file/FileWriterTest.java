@@ -1,7 +1,6 @@
 package core.basesyntax.service.file;
 
 import core.basesyntax.service.file.impl.FileWriterImpl;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
-    private static final String PATH_TO_FILE_INPUT = "src/main/resources/data.csv";
     private static final String PATH_TO_FILE_OUTPUT = "src/main/resources/output.csv";
     private static final String PATH_TO_EXISTING_FILE_OUTPUT = "src/main/resources/existing.csv";
     private static final String INCORRECT_FILE_PATH = "this?path/is/src/incorrect/main/file.csv";
@@ -33,17 +31,14 @@ public class FileWriterTest {
 
     @Test
     public void fileWriteData_isOk() throws IOException {
-        List<String> recordsFromInputFile =
-                Files.readAllLines(Path.of(PATH_TO_FILE_INPUT));
-        BufferedWriter writer =
-                new BufferedWriter(new java.io.FileWriter(PATH_TO_FILE_OUTPUT));
-        for (String record : recordsFromInputFile) {
-            writer.write(record + System.lineSeparator());
-        }
-        writer.close();
-        List<String> recordsFromOutputFile =
-                Files.readAllLines(Path.of(PATH_TO_FILE_OUTPUT));
-        Assert.assertEquals(recordsFromInputFile, recordsFromOutputFile);
+        String report = "fruit,quantity"
+                + System.lineSeparator() + "banana,150"
+                + System.lineSeparator() + "apple,50"
+                + System.lineSeparator();
+        fileWriter.write(PATH_TO_FILE_OUTPUT, report);
+        List<String> expected = List.of("fruit,quantity", "banana,150", "apple,50");
+        List<String> actual = Files.readAllLines(Path.of(PATH_TO_FILE_OUTPUT));;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

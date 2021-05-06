@@ -18,11 +18,6 @@ public class OperationHandlerIncreaseTest {
         operation = new OperationIncreaseHandler(productDao);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        productDao.getAll().clear();
-    }
-
     @Test
     public void supplyAmountInEmptyStorage_isOk() {
         Product banana = new Product("banana");
@@ -38,6 +33,11 @@ public class OperationHandlerIncreaseTest {
         int exceptedAmount = 202;
         int actualAmount = operation.apply(50, banana);
         Assert.assertEquals(exceptedAmount, actualAmount);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        productDao.getAll().clear();
     }
 
     private static void saveToStorage() {

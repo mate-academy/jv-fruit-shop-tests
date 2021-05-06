@@ -20,11 +20,6 @@ public class OperationDecreaseHandlerTest {
         operation = new OperationDecreaseHandler(productDao);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        productDao.getAll().clear();
-    }
-
     @Test
     public void decreaseAmount_isOk() {
         saveToStorage();
@@ -45,6 +40,11 @@ public class OperationDecreaseHandlerTest {
     public void purchaseProductInEmptyStorage_notOk() {
         Product apple = new Product("apple");
         operation.apply(100,apple);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        productDao.getAll().clear();
     }
 
     private static void saveToStorage() {

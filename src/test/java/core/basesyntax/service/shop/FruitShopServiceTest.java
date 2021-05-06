@@ -35,12 +35,6 @@ public class FruitShopServiceTest {
         transactionDtoList = new ArrayList<>();
     }
 
-    @After
-    public void tearDown() {
-        productDao.getAll().clear();
-        transactionDtoList.clear();
-    }
-
     @Test
     public void saveDataToStorageWithBalanceOperation_isOk() {
         Map<Product, Integer> exceptedStorage = new HashMap<>();
@@ -115,6 +109,12 @@ public class FruitShopServiceTest {
     public void createReportWhenStorageIsEmpty_isOk() {
         String exceptedReport = "fruit,quantity" + System.lineSeparator();
         Assert.assertEquals(exceptedReport, shopService.createReport());
+    }
+
+    @After
+    public void tearDown() {
+        productDao.getAll().clear();
+        transactionDtoList.clear();
     }
 
     private static Map<String, OperationHandler> getOperationHandlerMap(ProductDao productDao) {

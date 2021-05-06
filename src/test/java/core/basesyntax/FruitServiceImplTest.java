@@ -36,16 +36,21 @@ public class FruitServiceImplTest {
                                             new FruitRecordDto());
     }
 
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
     public void saveData_chooseCorrectStrategy_isOk() {
         Fruit apple = new Fruit("apple");
         Fruit banana = new Fruit("banana");
-        List<FruitRecordDto> recordDtos = List.of(
+        List<FruitRecordDto> recordDto = List.of(
                 new FruitRecordDto(apple, 20, OperationType.BALANCE),
                 new FruitRecordDto(banana, 30, OperationType.BALANCE),
                 new FruitRecordDto(apple, 5, OperationType.RETURN),
                 new FruitRecordDto(banana, 30, OperationType.PURCHASE));
-        fruitService.saveData(recordDtos);
+        fruitService.saveData(recordDto);
 
         Optional<Integer> optionalAppleQuantity = Optional.of(Storage.fruitStorage.get(apple));
         Optional<Integer> optionalBananaQuantity = Optional.of(Storage.fruitStorage.get(banana));
@@ -55,18 +60,13 @@ public class FruitServiceImplTest {
         Assert.assertEquals(0, actualBananaQuantity);
     }
 
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
-    }
-
     @Test (expected = RuntimeException.class)
     public void saveData_chooseCorrectStrategy_NotOk() {
         Fruit banana = new Fruit("banana");
-        List<FruitRecordDto> recordDtos = List.of(
+        List<FruitRecordDto> recordDto = List.of(
                 new FruitRecordDto(banana, 20, OperationType.BALANCE),
                 new FruitRecordDto(banana, 5, OperationType.RETURN),
                 new FruitRecordDto(banana, 30, OperationType.PURCHASE));
-        fruitService.saveData(recordDtos);
+        fruitService.saveData(recordDto);
     }
 }

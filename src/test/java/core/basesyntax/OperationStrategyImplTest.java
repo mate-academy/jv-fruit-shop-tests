@@ -13,16 +13,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static Map<OperationType, OperationHandler> operationStrategyMap = new HashMap<>();
+    private static final Map<OperationType, OperationHandler> operationStrategyMap =
+                                                            new HashMap<>();
+    private static final OperationHandler decreaseHandler = new DecreaseOperationHandler();
+    private static final OperationHandler increaseHandler = new IncreaseOperationHandler();
     private static OperationStrategy operationStrategy;
-    private static OperationHandler increaseHandler;
-    private static OperationHandler decreaseHandler;
 
     @BeforeClass
     public static void beforeClass() {
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
-        increaseHandler = new IncreaseOperationHandler();
-        decreaseHandler = new DecreaseOperationHandler();
 
         operationStrategyMap.put(OperationType.BALANCE, increaseHandler);
         operationStrategyMap.put(OperationType.RETURN, increaseHandler);

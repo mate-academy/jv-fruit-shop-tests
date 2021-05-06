@@ -13,17 +13,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerTest {
-    private static OperationHandler operationHandlerDecrease;
-    private static OperationHandler operationHandlerIncrease;
+    private static final OperationHandler operationHandlerDecrease = new DecreaseOperationHandler();
+    private static final OperationHandler operationHandlerIncrease = new IncreaseOperationHandler();
     private static Fruit apple;
     private static Fruit banana;
 
     @BeforeClass
     public static void beforeClass() {
-        operationHandlerDecrease = new DecreaseOperationHandler();
-        operationHandlerIncrease = new IncreaseOperationHandler();
         apple = new Fruit("apple");
         banana = new Fruit("banana");
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 
     @Test
@@ -49,10 +52,5 @@ public class OperationHandlerTest {
     public void apply_DecreaseOperationHandler_NotOk() {
         Storage.fruitStorage.put(banana, 15);
         operationHandlerDecrease.apply(new FruitRecordDto(banana, 20, OperationType.PURCHASE));
-    }
-
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
     }
 }

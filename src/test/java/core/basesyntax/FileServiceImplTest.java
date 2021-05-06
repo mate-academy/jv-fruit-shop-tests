@@ -36,7 +36,9 @@ public class FileServiceImplTest {
 
     @Test
     public void writeToFile_isOk() {
-        String expectedReport = "fruit,quantity\n" + "apple,90\n" + "banana,152\n";
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                                + "apple,90" + System.lineSeparator()
+                                + "banana,152" + System.lineSeparator();
         fileService.writeToFile(FILE_NAME_TO, expectedReport);
         String actualReport = readFromFile(FILE_NAME_TO);
         Assert.assertEquals(expectedReport, actualReport);
@@ -44,7 +46,9 @@ public class FileServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void writeToFile_InvalidFile_NotOk() {
-        String report = "fruit,quantity\n" + "apple,90\n" + "banana,152\n";
+        String report = "fruit,quantity" + System.lineSeparator()
+                        + "apple,90" + System.lineSeparator()
+                        + "banana,152" + System.lineSeparator();
         fileService.writeToFile("", report);
         fileService.writeToFile(FILE_NAME_WRONG, null);
     }

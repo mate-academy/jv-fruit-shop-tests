@@ -25,6 +25,11 @@ public class ReportCreatorImplTest {
         banana = new Fruit("banana");
     }
 
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
     public void createReport_isOk() {
         Storage.fruitStorage.put(apple, 90);
@@ -33,11 +38,6 @@ public class ReportCreatorImplTest {
         String expectedReport = reportCreator.createReport(Storage.fruitStorage);
         String actualReport = readFromFile(FILE_REPORT);
         Assert.assertEquals(expectedReport, actualReport);
-    }
-
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
     }
 
     @Test (expected = RuntimeException.class)

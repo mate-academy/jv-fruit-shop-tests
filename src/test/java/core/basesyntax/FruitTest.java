@@ -5,6 +5,7 @@ import core.basesyntax.model.Fruit;
 import java.util.Optional;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTest {
@@ -12,10 +13,16 @@ public class FruitTest {
     private static Fruit apple;
     private static Fruit melon;
 
-    public FruitTest() {
+    @Before
+    public void setUp() {
         banana = new Fruit("banana");
         apple = new Fruit("apple");
         melon = new Fruit("melon");
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 
     @Test
@@ -25,14 +32,9 @@ public class FruitTest {
 
         Optional<Integer> optionalBanana = Optional.ofNullable(Storage.fruitStorage.get(banana));
         int actual = optionalBanana.get();
-        Assert.assertTrue("apple".equals(apple.getName()));
+        Assert.assertEquals("apple", apple.getName());
         Assert.assertTrue(Optional.ofNullable(Storage.fruitStorage.get(apple)).isPresent());
         Assert.assertEquals(20, actual);
-    }
-
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
     }
 
     @Test

@@ -9,9 +9,9 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static FileReaderService fileReaderService;
-    private static final String NOT_EXIST_FILEPATH = "src\\test\\resources\\invalid.csv";
-    private static final String EMPTY_FILEPATH = "src\\test\\resources\\empty.csv";
-    private static final String VALID_FILEPATH = "src\\test\\resources\\valid.csv";
+    private static final String NOT_EXIST_FILEPATH = "src/test/resources/invalid.csv";
+    private static final String EMPTY_FILEPATH = "src/test/resources/empty.csv";
+    private static final String VALID_FILEPATH = "src/test/resources/valid.csv";
 
     @BeforeClass
     public static void beforeClass() {

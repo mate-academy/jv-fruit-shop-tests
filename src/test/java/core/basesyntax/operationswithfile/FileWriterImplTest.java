@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String TRUE_PATH = "src/test/java/resources/file.csv";
+    private static final String TRUE_PATH = "src/test/java/resources/file1.csv";
     private static final String FALSE_PATH = "srv/test/java/core/basesyntax/resources/newFile.csv";
     private static final Map<String, Integer> balance = new HashMap<>();
     private static final FileWriter fileWriter = new FileWriterImpl();

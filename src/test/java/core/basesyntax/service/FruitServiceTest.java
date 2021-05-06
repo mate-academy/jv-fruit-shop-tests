@@ -23,8 +23,8 @@ public class FruitServiceTest {
     private static FileReader reader;
     private static Parser parser;
     private static Map<OperationType, OperationHandler> operationHandlerMap;
-    private static final String CORRECT_PATH_FOR_READ = "src/main/resources/fruit_shop.csv";
-    private static final String INCORRECT_PATH_FOR_READ = "src/main/resources/fruits_shop.csv";
+    private static final String CORRECT_PATH_FOR_READ = "src/test/resources/fruit_shop.csv";
+    private static final String INCORRECT_PATH_FOR_READ = "src/test/resources/fruits_shop.csv";
     private static final String HEADER = "fruit,quantity\n";
     private static final String CORRECT_REPORT_DATA = "fruit,quantity\n"
             + "banana,152\n"

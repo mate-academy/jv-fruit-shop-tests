@@ -3,7 +3,6 @@ package core.basesyntax.filework;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,18 +20,13 @@ public class FileWriterTest {
     @Test
     public void fileWriterWriteToFile_Ok() {
         writer.write(CORRECT_PATH_FOR_WRITE, CONTENT);
-        BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new java.io.FileReader(CORRECT_PATH_FOR_WRITE));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException();
-        }
-        String line;
-        try {
-            line = bufferedReader.readLine();
+        String actual;
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new java.io.FileReader(CORRECT_PATH_FOR_WRITE))) {
+            actual = bufferedReader.readLine();
         } catch (IOException e) {
             throw new RuntimeException();
         }
-        assertEquals(CONTENT, line);
+        assertEquals(CONTENT, actual);
     }
 }

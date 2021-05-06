@@ -28,13 +28,13 @@ public class ValidatorTest {
 
     @Test
     public void validatorIsValidLine_Ok() {
-        boolean validLine = Validator.isValidLine(new String[]{"s"});
-        assertTrue(validLine);
+        boolean isValidLine = Validator.isValidLine(new String[]{"s"});
+        assertTrue(isValidLine);
     }
 
     @Test
     public void validatorIsValidLine_NotOk() {
-        boolean validLine = Validator.isValidLine(new String[]{"ss"});
-        assertFalse(validLine);
+        boolean isValidLine = Validator.isValidLine(new String[]{"ss"});
+        assertFalse(isValidLine);
     }
 }

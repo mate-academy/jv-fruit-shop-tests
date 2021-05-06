@@ -18,7 +18,7 @@ public class DecreaseOperationHandlerTest {
     private static FruitRecordDto incorrectFruitForDecrease;
     private static OperationHandler increaseHandler;
     private static OperationHandler decreaseHandler;
-    private static final int ZERO = 0;
+    private static final int GET_ZERO = 0;
 
     @BeforeClass
     public static void beforeClass() {
@@ -44,7 +44,7 @@ public class DecreaseOperationHandlerTest {
         increaseHandler.apply(correctFruitForIncrease);
         decreaseHandler.apply(correctFruitForDecrease);
         int actual = FruitStorage.storage.get(correctFruitForDecrease.getFruitName());
-        assertEquals(actual, ZERO);
+        assertEquals(actual, GET_ZERO);
     }
 
     @Test(expected = IncorrectPurchaseRequestException.class)

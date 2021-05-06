@@ -3,6 +3,7 @@ package core.basesyntax.fileservise;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,10 +25,10 @@ public class WriteServiceImplTest {
         try {
             expectedList = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read file " + CORRECT_FILE_PATH);
+            throw new RuntimeException("Cannot read file " + CORRECT_FILE_PATH, e);
         }
 
-        BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(CORRECT_FILE_PATH));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(CORRECT_FILE_PATH));
         writer.write(report);
         writer.close();
 
@@ -35,7 +36,7 @@ public class WriteServiceImplTest {
         try {
             actualList = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + CORRECT_FILE_PATH);
+            throw new RuntimeException("Can't read file " + CORRECT_FILE_PATH, e);
         }
         assertEquals(expectedList, actualList);
     }

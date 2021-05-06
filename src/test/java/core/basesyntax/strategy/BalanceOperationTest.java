@@ -39,7 +39,7 @@ public class BalanceOperationTest {
     }
 
     @After
-    public void tearDown() {
+    public void clear() {
         Storage.fruitsDataBase.entrySet().clear();
     }
 }

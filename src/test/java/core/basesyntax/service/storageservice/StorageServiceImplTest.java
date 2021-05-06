@@ -36,11 +36,6 @@ public class StorageServiceImplTest {
         storageService = new StorageServiceImpl(operationStrategy,storageDao);
     }
 
-    @After
-    public void tearDown() {
-        storageDao.getAll().clear();
-    }
-
     @Test
     public void addToStorage_isOkay() {
         Map<Fruit, Integer> expected = new HashMap<>();
@@ -85,5 +80,10 @@ public class StorageServiceImplTest {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = storageService.getReport();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        storageDao.getAll().clear();
     }
 }

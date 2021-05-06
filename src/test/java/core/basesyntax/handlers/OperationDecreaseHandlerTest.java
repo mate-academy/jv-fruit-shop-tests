@@ -20,11 +20,6 @@ public class OperationDecreaseHandlerTest {
         operationHandler = new OperationDecreaseHandler(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        storageDao.getAll().clear();
-    }
-
     @Test
     public void apply_isOk() {
         storageDao.add(new Fruit("apple"), 20);
@@ -42,5 +37,10 @@ public class OperationDecreaseHandlerTest {
     public void apply_AmountLess_notOk() {
         storageDao.add(new Fruit("apple"), 20);
         operationHandler.apply(new Fruit("apple"),30);
+    }
+
+    @After
+    public void tearDown() {
+        storageDao.getAll().clear();
     }
 }

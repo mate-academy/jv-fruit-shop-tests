@@ -19,11 +19,6 @@ public class OperationIncreaseHandlerTest {
         operationHandler = new OperationIncreaseHandler(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        storageDao.getAll().clear();
-    }
-
     @Test
     public void increaseApplyInEmptyStorage_isOk() {
         int expected = 20;
@@ -37,5 +32,10 @@ public class OperationIncreaseHandlerTest {
         int expected = 50;
         int actual = operationHandler.apply(new Fruit("apple"),30);
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        storageDao.getAll().clear();
     }
 }

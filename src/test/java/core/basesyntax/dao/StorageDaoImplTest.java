@@ -18,11 +18,6 @@ public class StorageDaoImplTest {
         storageDao = new StorageDaoImpl();
     }
 
-    @After
-    public void tearDown() {
-        storageDao.getAll().clear();
-    }
-
     @Test
     public void add_isOk() {
         Map<Fruit, Integer> expected = new HashMap<>();
@@ -93,5 +88,10 @@ public class StorageDaoImplTest {
         Map<Fruit, Integer> expected = new HashMap<>();
         Map<Fruit,Integer> actual = storageDao.getAll();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        storageDao.getAll().clear();
     }
 }

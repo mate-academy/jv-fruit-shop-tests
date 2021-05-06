@@ -9,22 +9,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImpTest {
-    @Test
-    public void makeReportRight_ok() {
+    private static FruitService fruitService;
+    private static List<FruitRecordDto> listParse;
+    private static FruitParse parseImp;
+    private static List<String> list;
+
+    @BeforeClass
+    public static void beforeClass() {
         CustomFileReader reader = new CustomFileReadImp();
-        List<String> list = reader.readFromFile("src/test/right.file.csv");
+        list = reader.readFromFile("src/test/right.file.csv");
         FruitOperation add = new FruitAdd();
         Map<String, FruitOperation> map = new HashMap<>();
         map.put("s", add);
         map.put("r", add);
         map.put("b", add);
         map.put("p", new FruitMinus());
-        FruitService fruitService = new FruitServiceImp(map);
-        FruitParse parseImp = new FruitParseDtoParseImp();
-        List<FruitRecordDto> listParse = parseImp.parse(list);
+        fruitService = new FruitServiceImp(map);
+        parseImp = new FruitParseDtoParseImp();
+        listParse = parseImp.parse(list);
+
+    }
+
+    @Test
+    public void makeReportRight_ok() {
         parseImp.parse(list);
         fruitService.saveData(listParse);
 

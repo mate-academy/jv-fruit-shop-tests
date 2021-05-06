@@ -9,19 +9,24 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
     private static final ReportService reportBuilder = new ReportService();
+    private static final StorageService storage = new StorageService();
     private static final Fruit apple = new Fruit("apple");
     private static final Fruit banana = new Fruit("banana");
 
-    @Test
-    public void buildReport_Ok() {
-        StorageService storage = new StorageService();
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         storage.create(apple, new Operation(Operation.OperationType.BALANCE, apple, 20));
         storage.create(banana, new Operation(Operation.OperationType.BALANCE, banana, 35));
+    }
 
+    @Test
+    public void buildReport_Ok() {
         String expected = "banana,35" + System.lineSeparator() + "apple,20"
                 + System.lineSeparator();
         String actual = reportBuilder.buildReport(storage);
@@ -30,7 +35,6 @@ public class ReportServiceTest {
 
     @Test
     public void writeData_Ok() {
-        StorageService storage = new StorageService();
         Fruit apple = new Fruit("apple");
         Fruit banana = new Fruit("banana");
         storage.create(apple, new Operation(Operation.OperationType.BALANCE, apple, 20));

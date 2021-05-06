@@ -14,6 +14,7 @@ public class BalanceHandlerTest {
     private final String expected = "fruit,quantity" + System.lineSeparator()
             + "banana," + 50 + System.lineSeparator()
             + "apple," + 35 + System.lineSeparator() + "mango," + 12 + System.lineSeparator();
+    private final FruitRecordDto fruitRecordDto = new FruitRecordDto("b", "banana", 20);
 
     @Before
     public void setUp() {
@@ -22,7 +23,6 @@ public class BalanceHandlerTest {
 
     @Test
     public void apply_CorrectFruitRecordDtoWithOperationBalance_Ok() {
-        FruitRecordDto fruitRecordDto = new FruitRecordDto("b", "banana", 20);
         Fruit fruit = new Fruit("banana");
         Storage.fruits.put(fruit, 20);
         int expected = 20;

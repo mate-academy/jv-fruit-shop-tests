@@ -9,16 +9,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private FruitOperationHandler fruitRecordDtoParser = new AddOperationHandler();
+    private FruitOperationHandler fruitRecordDtoParser;
+    private FruitRecordDto fruitRecordDto;
 
     @Before
     public void setUp() {
         Storage.getFruits().clear();
+        fruitRecordDtoParser = new AddOperationHandler();
     }
 
     @Test
     public void apply_CorrectFruitRecordDtoWithOperationSupply_Ok() {
-        FruitRecordDto fruitRecordDto = new FruitRecordDto("s", "apple", 20);
+        fruitRecordDto = new FruitRecordDto("s", "apple", 20);
         Fruit fruit = new Fruit("apple");
         Storage.fruits.put(fruit, 24);
         int expected = 44;
@@ -28,7 +30,7 @@ public class AddOperationHandlerTest {
 
     @Test
     public void apply_CorrectFruitRecordDtoWithOperationReturn_Ok() {
-        FruitRecordDto fruitRecordDto = new FruitRecordDto("r", "mango", 13);
+        fruitRecordDto = new FruitRecordDto("r", "mango", 13);
         Fruit fruit = new Fruit("mango");
         Storage.fruits.put(fruit, 24);
         int expected = 37;

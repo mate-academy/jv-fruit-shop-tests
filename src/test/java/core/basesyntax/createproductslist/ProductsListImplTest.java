@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class ProductsListImplTest {
     private static final List<Transaction> transactionList = new ArrayList<>();
-    private static final Map<String, Integer> map = new HashMap<>();
+    private static final Map<String, Integer> expected = new HashMap<>();
     private static final ProductsListImpl productsList = new ProductsListImpl();
     private static final Transaction transaction = new Transaction();
     private static final Transaction transaction2 = new Transaction();
@@ -32,19 +32,17 @@ public class ProductsListImplTest {
 
     @Test
     public void getProductListWithLegalData_ok() {
-        addToTransactionList();
-        map.put("banana",40);
-        map.put("apple",40);
+        expected.put("banana",40);
+        expected.put("apple",40);
         Map<String, Integer> productList = productsList.getProductList(transactionList);
-        assertEquals(map,productList);
+        assertEquals(expected,productList);
     }
 
     @Test
     public void getProductListWithIllegalData_notOk() {
-        addToTransactionList();
-        map.put("banana",50);
-        map.put("pineapples",40);
+        expected.put("banana",50);
+        expected.put("pineapples",40);
         Map<String, Integer> productList = productsList.getProductList(transactionList);
-        assertNotEquals(map,productList);
+        assertNotEquals(expected,productList);
     }
 }

@@ -2,8 +2,7 @@ package core.basesyntax.operationswithfile;
 
 import static org.junit.Assert.assertEquals;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.BeforeClass;
@@ -24,11 +23,10 @@ public class FileWriterImplTest {
     @Test
     public void testWriteToFileWithTruePath_ok() {
         fileWriter.getNewFile(balance,TRUE_PATH);
-        boolean actual = false;
-        if (Files.exists(Path.of("src/test/java/resources/file.csv"))) {
-            actual = true;
-        }
-        assertEquals(true,actual);
+        File file = new File(TRUE_PATH);
+        long expected = 37;
+        long actual = file.length();
+        assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)

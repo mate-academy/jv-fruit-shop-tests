@@ -1,8 +1,7 @@
 package model.dto;
 
-import model.OperationType;
-
 import java.util.Objects;
+import model.OperationType;
 
 public class FruitRecordDto {
     private OperationType operationType;
@@ -20,17 +19,17 @@ public class FruitRecordDto {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        FruitRecordDto that = (FruitRecordDto) o;
-        return operationType == that.operationType &&
-                Objects.equals(fruitName, that.fruitName) &&
-                Objects.equals(quantity, that.quantity);
+        FruitRecordDto fruitRecordDto = (FruitRecordDto) obj;
+        return operationType == fruitRecordDto.operationType
+                && Objects.equals(fruitName, fruitRecordDto.fruitName)
+                && Objects.equals(quantity, fruitRecordDto.quantity);
     }
 
     @Override

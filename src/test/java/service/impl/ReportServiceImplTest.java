@@ -23,7 +23,6 @@ public class ReportServiceImplTest {
     private static final Map<OperationType, OperationHandler> fruitOperationsServiceMap
             = new HashMap<>();
 
-
     @BeforeClass
     public static void servicesInit() {
         fruitOperationsServiceMap.put(OperationType.BALANCE, new BalanceOperation());

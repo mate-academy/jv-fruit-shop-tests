@@ -7,7 +7,6 @@ import core.basesyntax.servise.inrterfase.ReportBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,10 +14,11 @@ public class ReportBuilderImplTest {
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit APPLE = new Fruit("apple");
     private static List<FruitRecordDto> listFruitDto;
-    private ReportBuilder splitter;
+    private static ReportBuilder splitter;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
+        splitter = new ReportBuilderImpl();
         listFruitDto = new ArrayList<>();
         listFruitDto.add(new FruitRecordDto(Operation.BALANCE, BANANA,20));
         listFruitDto.add(new FruitRecordDto(Operation.BALANCE, APPLE, 100));
@@ -28,11 +28,6 @@ public class ReportBuilderImplTest {
         listFruitDto.add(new FruitRecordDto(Operation.PURCHASE, APPLE, 20));
         listFruitDto.add(new FruitRecordDto(Operation.PURCHASE, BANANA, 5));
         listFruitDto.add(new FruitRecordDto(Operation.SUPPLY, BANANA, 50));
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        splitter = new ReportBuilderImpl();
     }
 
     @Test
@@ -55,17 +50,16 @@ public class ReportBuilderImplTest {
     public void splitOfReport_InputNegativeNumber_NotOk() {
         List<String> inputData = new ArrayList<>();
         inputData.add("type,fruit,quantity");
-        inputData.add("b,banana,20");
+        inputData.add("p,banana,20");
         inputData.add("b,apple,-100");
         splitter.getReport(inputData);
-
     }
 
     @Test (expected = InvalidInputDataException.class)
     public void splitOfReport_InputWrongNumberOfData_NotOk() {
         List<String> inputData = new ArrayList<>();
         inputData.add("type,fruit,quantity");
-        inputData.add("b,banana,20,505");
+        inputData.add("s,banana,20,505");
         inputData.add("b,apple,100");
         splitter.getReport(inputData);
     }
@@ -83,7 +77,7 @@ public class ReportBuilderImplTest {
     public void splitOfReport_InputWrongTypeAsWord_NotOk() {
         List<String> inputData = new ArrayList<>();
         inputData.add("type,fruit,quantity");
-        inputData.add("b,banana,20");
+        inputData.add("r,banana,20");
         inputData.add("o,apple,hundred");
         splitter.getReport(inputData);
     }

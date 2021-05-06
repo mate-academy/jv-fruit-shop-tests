@@ -11,13 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportWriterImplTest {
-    private static final Fruit BANANA = new Fruit("banana");
-    private static final Fruit APPLE = new Fruit("apple");
-    private static final Fruit ORANGE = new Fruit("orange");
+    private static final Fruit banana = new Fruit("banana");
+    private static final Fruit apple = new Fruit("apple");
+    private static final Fruit orange = new Fruit("orange");
     private static final String DIRECT_TO_OUTPUT_FILE
             = "src/test/resources/outputReportTest.csv";
     private static final String DIRECT_TO_OUTPUT_EMPTY_FILE
             = "src/test/resources/outputEmptyReportTest.csv";
+    private static final String INVALID_PATH
+            = "srv/test/java/core/basesyntax/resources/newFile.csv";
     private ReportWriter writer;
 
     @Before
@@ -28,9 +30,9 @@ public class ReportWriterImplTest {
 
     @Test
     public void writeReport_NormalWork_Ok() {
-        Storage.storageOfFruits.put(BANANA, 100);
-        Storage.storageOfFruits.put(APPLE, 50);
-        Storage.storageOfFruits.put(ORANGE, 0);
+        Storage.storageOfFruits.put(banana, 100);
+        Storage.storageOfFruits.put(apple, 50);
+        Storage.storageOfFruits.put(orange, 0);
         writer.writeReport(DIRECT_TO_OUTPUT_FILE);
         String actualResult = readFromFile(DIRECT_TO_OUTPUT_FILE).trim();
         String expectedResult = "fruit,quantity" + System.lineSeparator()
@@ -46,6 +48,11 @@ public class ReportWriterImplTest {
         String actualResult = readFromFile(DIRECT_TO_OUTPUT_EMPTY_FILE).trim();
         String expectedResult = "fruit,quantity";
         Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testWriteToFileWithFalsePath_assertException() {
+        writer.writeReport(INVALID_PATH);
     }
 
     private String readFromFile(String fileName) {

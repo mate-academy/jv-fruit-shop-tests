@@ -11,20 +11,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StrategySubtractionTest {
-    private static final Fruit BANANA = new Fruit("banana");
-    private static final Fruit APPLE = new Fruit("apple");
+    private static final Fruit banana = new Fruit("banana");
+    private static final Fruit apple = new Fruit("apple");
     private Strategy subtraction;
 
     @Before
     public void setUp() {
-        Storage.storageOfFruits.put(BANANA, 25);
+        Storage.storageOfFruits.put(banana, 25);
         subtraction = new StrategySubtraction();
     }
 
     @Test
     public void changeBalance_SubtractionAmount_Ok() {
-        FruitRecordDto firstTest = new FruitRecordDto(Operation.PURCHASE, BANANA, 25);
-        int actual = subtraction.changeBalance(firstTest);
+        FruitRecordDto fruitRecordDto = new FruitRecordDto(Operation.PURCHASE, banana, 25);
+        int actual = subtraction.changeBalance(fruitRecordDto);
         int expected = 0;
         assertEquals("Result was wrong! Expected: " + expected
                 + " but was: " + actual, expected, actual);
@@ -32,14 +32,14 @@ public class StrategySubtractionTest {
 
     @Test (expected = InvalidValueOfAmountException.class)
     public void changeBalance_SubtractionAmountLeseZero_NotOk() {
-        FruitRecordDto firstTest = new FruitRecordDto(Operation.PURCHASE, BANANA, 35);
-        subtraction.changeBalance(firstTest);
+        FruitRecordDto fruitRecordDto = new FruitRecordDto(Operation.PURCHASE, banana, 35);
+        subtraction.changeBalance(fruitRecordDto);
     }
 
     @Test (expected = InvalidValueOfAmountException.class)
     public void changeBalance_SubtractionByNotExistFruit_NotOk() {
-        FruitRecordDto firstTest = new FruitRecordDto(Operation.PURCHASE, APPLE, 35);
-        subtraction.changeBalance(firstTest);
+        FruitRecordDto fruitRecordDto = new FruitRecordDto(Operation.PURCHASE, apple, 35);
+        subtraction.changeBalance(fruitRecordDto);
     }
 
     @After

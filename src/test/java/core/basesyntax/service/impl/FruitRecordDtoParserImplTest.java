@@ -4,10 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.FruitRecordDtoParser;
 import core.basesyntax.service.operations.OperationType;
 import core.basesyntax.validate.ValidationData;
 import core.basesyntax.validate.impl.ValidationDataImpl;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,6 +42,14 @@ public class FruitRecordDtoParserImplTest {
                 .get(0).getFruitName());
         assertEquals("apple",fruitRecordDtoParser.parse(List.of("b,apple,20"))
                 .get(0).getFruitName());
+    }
+
+    @Test
+    public void parseValueWithCorrectInputDada_Ok() {
+        FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.b,"banana",2);
+        List<FruitRecordDto> testList = new ArrayList<>();
+        testList.add(fruitRecordDto);
+        assertEquals(testList,fruitRecordDtoParser.parse(List.of("b,banana,2")));
     }
 
     @Test(expected = RuntimeException.class)

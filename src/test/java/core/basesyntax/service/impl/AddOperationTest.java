@@ -8,22 +8,24 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.operations.OperationType;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationTest {
     private static FruitOperation operation;
     private static FruitRecordDto fruitRecordDtoTest;
+    private static Storage storage;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         operation = new AddOperation();
         fruitRecordDtoTest = new FruitRecordDto(OperationType.b,"banana",10);
+        storage = new Storage();
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void afterClass() throws Exception {
         Storage.fruits.clear();
     }
 

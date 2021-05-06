@@ -10,7 +10,7 @@ import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.operations.OperationType;
 import core.basesyntax.validate.RemoveOperationValidator;
 import core.basesyntax.validate.impl.RemoveOperationValidatorImpl;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,16 +18,18 @@ public class RemoveOperationTest {
     private static FruitOperation operation;
     private static FruitRecordDto fruitRecordDtoTest;
     private static RemoveOperationValidator removeOperationValidator;
+    private static Storage storage;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         operation = new RemoveOperation();
         fruitRecordDtoTest = new FruitRecordDto(OperationType.b,"banana",20);
         removeOperationValidator = new RemoveOperationValidatorImpl();
+        storage = new Storage();
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void afterClass() throws Exception {
         Storage.fruits.clear();
     }
 

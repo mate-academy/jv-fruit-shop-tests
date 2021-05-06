@@ -24,35 +24,35 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StoreServiceTest {
+    public static final String CORRECT_INPUT_FILE = "src/test/resources/correct.csv";
+    public static final String INCORRECT_INPUT_FILE = "src/test/resources/incorrect.csv";
     private static StoreService storeService;
-    private static Map<String, Operation> map;
-    private static FruitsDao fruitsDao;
-    private static OperationStrategy operationStrategy;
-    private static DataValidator dataValidator;
     private static FruitRecordParserService parser;
     private static FileReader fileReader;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        dataValidator = new DataValidator();
+        DataValidator dataValidator = new DataValidator();
         parser = new FruitRecordParserServiceImpl(dataValidator);
+        fileReader = new FileReaderImpl();
+        initializeStoreService();
+    }
 
-        fruitsDao = new FruitsDaoImpl();
-        map = new HashMap<>();
+    private static void initializeStoreService() {
+        FruitsDao fruitsDao = new FruitsDaoImpl();
+        Map<String, Operation> map = new HashMap<>();
         map.put("b", new CreateOperation(fruitsDao));
         map.put("p", new RemoveOperation(fruitsDao));
         map.put("s", new AddOperation(fruitsDao));
         map.put("r", new AddOrCreateOperation(fruitsDao));
-        operationStrategy = new OperationStrategyImpl(map);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(map);
         storeService = new StoreServiceImpl(operationStrategy);
-
-        fileReader = new FileReaderImpl();
     }
 
     @Test
     public void doInstruction_correctInput_Ok() {
         storeService.doInstruction(parser.getRecord(fileReader
-                .readFile("src/test/resources/correct.csv")));
+                .readFile(CORRECT_INPUT_FILE)));
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 152);
         expected.put(new Fruit("apple"), 90);
@@ -63,6 +63,6 @@ public class StoreServiceTest {
     @Test(expected = InvalidInputException.class)
     public void doInstructions_incorrectInput_NotOk() {
         storeService.doInstruction(parser.getRecord(fileReader
-                .readFile("src/test/resources/incorrect.csv")));
+                .readFile(INCORRECT_INPUT_FILE)));
     }
 }

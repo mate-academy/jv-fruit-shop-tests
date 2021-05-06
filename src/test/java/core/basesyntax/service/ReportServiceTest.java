@@ -16,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
+    public static final String REPORT_TEST_CSV = "src/test/resources/reportTest.csv";
     private static ReportService reportService;
     private static FileWriter fileWriter;
     private static FruitsDao fruitsDao;
@@ -31,7 +32,7 @@ public class ReportServiceTest {
     public void createReport_reportFromStorage_Ok() {
         fruitsDao.add(new Fruit("banana"), 20);
         fruitsDao.add(new Fruit("apple"), 50);
-        reportService.createReport("src/test/resources/reportTest.csv");
+        reportService.createReport(REPORT_TEST_CSV);
         List<String> expected = List.of("type,quantity","banana,20","apple,50");
         File file = new File("src/test/resources/reportTest.csv");
         try {

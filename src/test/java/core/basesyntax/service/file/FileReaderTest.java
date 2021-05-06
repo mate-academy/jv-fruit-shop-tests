@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
+    public static final String FILE_TO_READ = "src/test/resources/readTest.csv";
     private static FileReader fileReader;
     private static List<String> expected;
 
@@ -17,7 +18,7 @@ public class FileReaderTest {
 
     @Test
     public void readFromFile_readCorrectFile_Ok() {
-        List<String> actual = fileReader.readFile("src/test/resources/readTest.csv");
+        List<String> actual = fileReader.readFile(FILE_TO_READ);
         expected = List.of("I", "hate", "Junit4");
         assertEquals(expected, actual);
     }

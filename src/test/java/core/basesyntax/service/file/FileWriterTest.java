@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
+    public static final String FILE_TO_WRITE = "src/test/resources/writeTest.csv";
     private static FileWriter fileWriter;
     private static List<String> expected;
 
@@ -20,7 +21,7 @@ public class FileWriterTest {
 
     @Test
     public void writeToFIle_correctWrite_Ok() {
-        fileWriter.writeToFile("src/test/resources/writeTest.csv", "Still hate Junit4");
+        fileWriter.writeToFile(FILE_TO_WRITE, "Still hate Junit4");
         File file = new File("src/test/resources/writeTest.csv");
         try {
             List<String> actual = Files.readAllLines(file.toPath());

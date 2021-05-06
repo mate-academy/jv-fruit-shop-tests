@@ -44,7 +44,7 @@ public class FruitServiceImplTest {
         Map<Fruit, Integer> expectedStorageMap = new HashMap<>();
         expectedStorageMap.put(new Fruit("orange"), 12);
         expectedStorageMap.put(new Fruit("banana"), 25);
-        fruitService.saveData(VALID_DATA);
+        fruitService.saveData(validData);
         Map<Fruit, Integer> actualStorageMap = FruitStorage.getFruits();
         assertEquals(expectedStorageMap, actualStorageMap);
     }

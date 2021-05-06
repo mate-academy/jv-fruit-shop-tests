@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AddOperationTest {
-    private static final int expected = 250;
+    private static final int EXPECTED = 250;
 
     @Before
     public void setUp() {
@@ -22,7 +22,7 @@ public class AddOperationTest {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.RETURN, "banana", 100);
         FruitOperation returnOperation = new AddOperation();
         int actual = returnOperation.apply(fruitRecordDto);
-        assertEquals(expected, actual);
+        assertEquals(EXPECTED, actual);
     }
 
     @Test
@@ -30,6 +30,6 @@ public class AddOperationTest {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.SUPPLY, "banana", 100);
         FruitOperation supplyOperation = new AddOperation();
         int actual = supplyOperation.apply(fruitRecordDto);
-        assertEquals(expected, actual);
+        assertEquals(EXPECTED, actual);
     }
 }

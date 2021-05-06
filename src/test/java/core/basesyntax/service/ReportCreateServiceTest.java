@@ -9,40 +9,44 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreateServiceTest {
-    private static final ReportCreateService reportCreateService =
-            new ReportCreateService(new FruitDaoImpl());
-    private final Fruit apple = new Fruit("apple");
-    private final Fruit banana = new Fruit("banana");
-    private final Fruit strawberry = new Fruit("strawberry");
+    private ReportCreateService reportCreateService;
+    private Fruit apple;
+    private Fruit banana;
+    private Fruit strawberry;
 
     @Before
     public void setUp() {
+        reportCreateService =
+                new ReportCreateService(new FruitDaoImpl());
+        apple = new Fruit("apple");
+        banana = new Fruit("banana");
+        strawberry = new Fruit("strawberry");
         Storage.getFruitDataBase().entrySet().clear();
     }
 
     @Test
-    void createReport_reportNormalData_OK() {
+    public void createReport_reportNormalData_OK() {
         Storage.getFruitDataBase().put(apple, 44);
         Storage.getFruitDataBase().put(banana, 25);
         Storage.getFruitDataBase().put(strawberry, 11);
         String actual = reportCreateService.createReport();
-        String expected = "fruit,quantity\r\n"
-                + "banana,25\r\n"
-                + "apple,44\r\n"
-                + "strawberry,11\r\n";
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,25" + System.lineSeparator()
+                + "apple,44" + System.lineSeparator()
+                + "strawberry,11" + System.lineSeparator();
         assertEquals(expected, actual);
     }
 
     @Test
-    void createReport_reportWithNotNormalData_Ok() {
+    public void createReport_reportWithNotNormalData_Ok() {
         Storage.getFruitDataBase().put(apple, 23);
         Storage.getFruitDataBase().put(banana, 11);
         Storage.getFruitDataBase().put(null, -10);
         String actual = reportCreateService.createReport();
-        String expected = "fruit,quantity\r\n"
-                + "null,-10\r\n"
-                + "banana,11\r\n"
-                + "apple,23\r\n";
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "null,-10" + System.lineSeparator()
+                + "banana,11" + System.lineSeparator()
+                + "apple,23" + System.lineSeparator();
         assertEquals(expected, actual);
     }
 }

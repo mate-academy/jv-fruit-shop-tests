@@ -12,10 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionDtoParserTest {
-    private static final TransactionDtoParser parser = new TransactionDtoParser();
+    private TransactionDtoParser parser;
 
     @Before
     public void setUp() {
+        parser = new TransactionDtoParser();
         Storage.getFruitDataBase().entrySet().clear();
     }
 

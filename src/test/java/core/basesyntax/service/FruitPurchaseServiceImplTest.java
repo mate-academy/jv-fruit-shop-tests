@@ -12,13 +12,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitPurchaseServiceImplTest {
-    private final OperationType type = OperationType.PURCHASE;
-    private final FruitOperationService fruitPurchaseService = new FruitPurchaseServiceImpl(
-            new FruitDaoImpl());
-    private Fruit fruit = new Fruit("blueberry");
+    private OperationType type = OperationType.PURCHASE;
+    private FruitOperationService fruitPurchaseService;
+    private Fruit fruit;
 
     @Before
     public void setUp() {
+        type = OperationType.PURCHASE;
+        fruitPurchaseService = new FruitPurchaseServiceImpl(
+                new FruitDaoImpl());
+        fruit = new Fruit("blueberry");
         Storage.getFruitDataBase().entrySet().clear();
     }
 

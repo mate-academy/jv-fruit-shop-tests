@@ -11,13 +11,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitBalanceServiceImplTest {
-    private final OperationType type = OperationType.BALANCE;
-    private final FruitOperationService fruitBalanceService = new FruitBalanceServiceImpl(
-            new FruitDaoImpl());
-    private Fruit fruit = new Fruit("apple");
+    private OperationType type = OperationType.BALANCE;
+    private FruitOperationService fruitBalanceService;
+    private Fruit fruit;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        type = OperationType.BALANCE;
+        fruitBalanceService = new FruitBalanceServiceImpl(
+                new FruitDaoImpl());
+        fruit = new Fruit("apple");
         Storage.getFruitDataBase().entrySet().clear();
     }
 

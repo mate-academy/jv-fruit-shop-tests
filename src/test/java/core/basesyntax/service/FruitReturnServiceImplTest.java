@@ -11,13 +11,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitReturnServiceImplTest {
-    private final OperationType type = OperationType.RETURN;
-    private final FruitOperationService fruitReturnService = new FruitReturnServiceImpl(
-            new FruitDaoImpl());
-    private Fruit fruit = new Fruit("banana");
+    private OperationType type;
+    private FruitOperationService fruitReturnService;
+    private Fruit fruit;
 
     @Before
     public void setUp() {
+        type = OperationType.RETURN;
+        fruitReturnService = new FruitReturnServiceImpl(
+                new FruitDaoImpl());
+        fruit = new Fruit("banana");
         Storage.getFruitDataBase().entrySet().clear();
     }
 

@@ -8,16 +8,21 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.interfaces.FruitOperationService;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitSupplyServiceImplTest {
-    private final OperationType type = OperationType.SUPPLY;
-    private final FruitOperationService fruitSupplyService = new FruitSupplyServiceImpl(
+    private OperationType type;
+    private FruitOperationService fruitSupplyService = new FruitSupplyServiceImpl(
             new FruitDaoImpl());
-    private Fruit fruit = new Fruit("strawberry");
+    private Fruit fruit;
 
     @Before
     public void setUp() {
+        type = OperationType.SUPPLY;
+        fruitSupplyService = new FruitSupplyServiceImpl(
+                new FruitDaoImpl());
+        fruit = new Fruit("strawberry");
         Storage.getFruitDataBase().entrySet().clear();
     }
 

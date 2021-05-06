@@ -40,7 +40,6 @@ public class TransactionDtoParserImplTest {
         expected.add(new TransactionDto(OperationType.PURCHASE, new Fruit("banana"), 13));
         expected.add(new TransactionDto(OperationType.RETURN, new Fruit("apple"), 10));
         List<TransactionDto> actual = parser.parse(transactions);
-
         Assert.assertEquals(expected, actual);
     }
 

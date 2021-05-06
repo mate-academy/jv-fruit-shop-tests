@@ -51,7 +51,6 @@ public class FruitShopServiceImplTest {
         transactionList.add(new TransactionDto(OperationType.BALANCE,
                 new Fruit("banana"), 25));
         saveToStorage();
-
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
@@ -62,7 +61,6 @@ public class FruitShopServiceImplTest {
         transactionList.add(new TransactionDto(OperationType.SUPPLY,
                 new Fruit("banana"), 25));
         saveToStorage();
-
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
@@ -73,7 +71,6 @@ public class FruitShopServiceImplTest {
         transactionList.add(new TransactionDto(OperationType.RETURN,
                 new Fruit("banana"), 25));
         saveToStorage();
-
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
@@ -86,7 +83,6 @@ public class FruitShopServiceImplTest {
         transactionList.add(new TransactionDto(OperationType.PURCHASE,
                 new Fruit("banana"), 5));
         saveToStorage();
-
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
@@ -124,7 +120,6 @@ public class FruitShopServiceImplTest {
                 + "apple,90"
                 + System.lineSeparator();
         String actual = fruitShopService.createReport();
-
         Assert.assertEquals(expected, actual);
     }
 

@@ -90,7 +90,10 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Main.*</exclude>
+                        <exclude>**/*Storage.*</exclude>
+                        <exclude>**/*FruitRecordDto.*</exclude>
+                        <exclude>**/*Fruit.*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

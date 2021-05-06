@@ -45,7 +45,6 @@ public class ReportGeneratorTest {
             List<String> actual = Files.readAllLines(file.toPath());
             List<String> expected = EXPECTED_DATA;
             assertEquals(expected, actual);
-            Files.write(file.toPath(), "".getBytes());
         } catch (IOException exception) {
             throw new RuntimeException("Can't read from file");
         }

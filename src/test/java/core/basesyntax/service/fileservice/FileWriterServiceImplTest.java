@@ -14,9 +14,9 @@ public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
     private static final String EMPTY_DATA = "";
     private static final String VALID_DATA = "b,banana,20\nb,apple,100\ns,banana,100";
-    private static final String VALID_FILEPATH = "src\\test\\resources\\valid.csv";
-    private static final String INVALID_FILEPATH = "serece\\test\\invalid.csv";
-    private static final String WRITER_RESULT_FILEPATH = "src\\test\\resources\\writerResult.csv";
+    private static final String VALID_FILEPATH = "src/test/resources/valid.csv";
+    private static final String INVALID_FILEPATH = "serece/test/invalid.csv";
+    private static final String WRITER_RESULT_FILEPATH = "src/test/resources/writerResult.csv";
     private static final String EXCEPTION_MESSAGE = "Can't write data to file";
 
     @BeforeClass

@@ -1,11 +1,10 @@
 package service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.OperationType;
 import model.dto.FruitRecordDto;
 import service.ParserService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_TYPE_INDEX = 0;

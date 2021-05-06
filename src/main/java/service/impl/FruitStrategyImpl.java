@@ -1,10 +1,9 @@
 package service.impl;
 
+import java.util.Map;
 import model.OperationType;
 import service.FruitStrategy;
 import service.OperationHandler;
-
-import java.util.Map;
 
 public class FruitStrategyImpl implements FruitStrategy {
     private Map<OperationType, OperationHandler> activityHandleMap;

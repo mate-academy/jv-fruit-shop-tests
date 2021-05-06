@@ -1,5 +1,8 @@
 package basesyntax;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.OperationType;
 import model.dto.FruitRecordDto;
 import service.FileService;
@@ -17,10 +20,6 @@ import service.impl.ParserServiceImpl;
 import service.impl.RemoveOperation;
 import service.impl.ReportServiceImpl;
 import service.impl.ReturnOperation;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ApplicationRun {
     private static final String PATH_SOURCE_FILE = "src/main/resources/input.csv";

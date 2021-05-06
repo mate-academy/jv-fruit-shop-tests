@@ -1,10 +1,9 @@
 package service.impl;
 
+import java.util.List;
 import model.dto.FruitRecordDto;
 import service.FruitService;
 import service.FruitStrategy;
-
-import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
     private FruitStrategy fruitStrategy;

@@ -1,12 +1,11 @@
 package service.impl;
 
-import service.FileService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import service.FileService;
 
 public class FileServiceImpl implements FileService {
     private static final String ERROR_READ_MESSAGE = "Can`t read from file ";

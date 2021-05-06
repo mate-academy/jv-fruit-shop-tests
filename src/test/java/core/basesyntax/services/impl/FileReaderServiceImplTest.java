@@ -1,9 +1,6 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FileReaderService;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -21,12 +18,9 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void read_TestCorrectInput() {
-        List<String> expected;
-        try {
-            expected = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't read from file " + CORRECT_FILE_PATH, e);
-        }
+        List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100",
+                "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5",
+                "s,banana,50");
         List<String> actual = fileReaderService.read(CORRECT_FILE_PATH);
         Assert.assertEquals(expected, actual);
     }

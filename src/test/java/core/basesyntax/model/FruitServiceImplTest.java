@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
@@ -22,8 +22,8 @@ public class FruitServiceImplTest {
     private static Map<Fruit, Integer> expected;
     private static Map<Fruit, Integer> actual;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         Map<Operation, FruitOperationHandler> strategyMap = new HashMap<>();
         strategyMap.put(Operation.BALANCE, new AddBalanceOperation());
         strategyMap.put(Operation.SUPPLY, new SupplyOperation());

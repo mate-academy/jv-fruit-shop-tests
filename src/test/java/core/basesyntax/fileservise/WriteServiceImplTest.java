@@ -15,7 +15,7 @@ public class WriteServiceImplTest {
     private static final String INCORRECT_FILE_PATH = "src\\mein\\report.cvs";
     private static final String report = "fruit,quantity" + System.lineSeparator()
             + "banana,172" + System.lineSeparator()
-            + "apple,90";
+            + "apple,90" + System.lineSeparator();
     private static final WriteServiceImpl writeService = new WriteServiceImpl();
 
     @Test

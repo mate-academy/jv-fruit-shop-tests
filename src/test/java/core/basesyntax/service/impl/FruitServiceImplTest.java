@@ -27,6 +27,11 @@ public class FruitServiceImplTest {
                 new FruitRecordDto(Operation.PURCHASE, "banana", 20));
 
     @Before
+    public void clearDbBeforeStart() {
+        Storage.fruits.entrySet().clear();
+    }
+
+    @Before
     public void setUp() {
         Map<Operation, FruitOperationHandler> operationStrategy = new HashMap<>();
         operationStrategy.put(Operation.BALANCE, new AddOperation());
@@ -62,7 +67,7 @@ public class FruitServiceImplTest {
     }
 
     @After
-    public void tearDown() {
-        Storage.fruits.entrySet().clear();
+    public void cleanMapDbBeforeStart() {
+        Storage.fruits.entrySet().clear();;
     }
 }

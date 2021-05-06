@@ -25,6 +25,11 @@ public class AddOperationTest {
     }
 
     @Before
+    public void cleanMapDbBeforeStart() {
+        Storage.fruits.clear();
+    }
+
+    @Before
     public void setUp() {
         Storage.fruits.put(new Fruit("banana"), 30);
         Storage.fruits.put(new Fruit("apple"), 70);

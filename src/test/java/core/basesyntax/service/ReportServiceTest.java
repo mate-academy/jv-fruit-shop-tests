@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class ReportServiceTest {
     private static final Fruit banana = new Fruit("banana");
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storage.create(apple, new Operation(Operation.OperationType.BALANCE, apple, 20));
         storage.create(banana, new Operation(Operation.OperationType.BALANCE, banana, 35));
     }
@@ -35,11 +34,6 @@ public class ReportServiceTest {
 
     @Test
     public void writeData_Ok() {
-        Fruit apple = new Fruit("apple");
-        Fruit banana = new Fruit("banana");
-        storage.create(apple, new Operation(Operation.OperationType.BALANCE, apple, 20));
-        storage.create(banana, new Operation(Operation.OperationType.BALANCE, banana, 35));
-
         String report = reportBuilder.buildReport(storage);
         reportBuilder.writeData("src/test/test_write_data.csv", report);
         try {

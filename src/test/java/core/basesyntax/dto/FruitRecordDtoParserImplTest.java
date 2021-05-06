@@ -19,11 +19,6 @@ public class FruitRecordDtoParserImplTest {
         testList = new ArrayList<>();
     }
 
-    @After
-    public void afterEachTest() {
-        testList.clear();
-    }
-
     @Test
     public void parse_balanceOperation_isOk() {
         testList.add("b,apple,100");
@@ -86,5 +81,10 @@ public class FruitRecordDtoParserImplTest {
     public void parse_incorrectQuantity_notOk() {
         testList.add("b,banana,-1x0");
         FruitRecordDto expected = parser.parse(testList).get(INDEX_OF_FIRST_ELEMENT);
+    }
+
+    @After
+    public void afterEachTest() {
+        testList.clear();
     }
 }

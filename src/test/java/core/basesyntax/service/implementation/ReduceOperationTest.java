@@ -18,11 +18,6 @@ public class ReduceOperationTest {
         handler = new ReduceOperation();
     }
 
-    @After
-    public void afterEachTest() {
-        Storage.fruitsContainer.clear();
-    }
-
     @Test
     public void apply_reduceFruitsFromStorage_isOk() {
         Storage.fruitsContainer.put("banana", 100);
@@ -43,5 +38,10 @@ public class ReduceOperationTest {
         Storage.fruitsContainer.put("apple", 10);
         FruitRecordDto fruitRecord = new FruitRecordDto(OperationType.PURCHASE, "apple", 50);
         handler.apply(fruitRecord);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruitsContainer.clear();
     }
 }

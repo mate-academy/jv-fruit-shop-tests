@@ -16,11 +16,6 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl();
     }
 
-    @After
-    public void afterEachTest() {
-        Storage.fruitsContainer.clear();
-    }
-
     @Test
     public void createReport_withCorrectData_isOk() {
         Storage.fruitsContainer.put("apple", 100);
@@ -34,5 +29,10 @@ public class ReportServiceImplTest {
         String actual = reportService.createReport(Storage.fruitsContainer);
         String expected = "fruit,quantity";
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruitsContainer.clear();
     }
 }

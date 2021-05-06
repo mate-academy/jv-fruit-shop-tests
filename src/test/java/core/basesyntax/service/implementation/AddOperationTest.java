@@ -18,11 +18,6 @@ public class AddOperationTest {
         handler = new AddOperation();
     }
 
-    @After
-    public void afterEachTest() {
-        Storage.fruitsContainer.clear();
-    }
-
     @Test
     public void apply_correctRecord_isOk() {
         FruitRecordDto fruitRecord = new FruitRecordDto(OperationType.SUPPLY, "banana", 100);
@@ -38,5 +33,10 @@ public class AddOperationTest {
         handler.apply(fruitRecord);
         int actual = Storage.fruitsContainer.get("banana");
         assertEquals(200, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruitsContainer.clear();
     }
 }

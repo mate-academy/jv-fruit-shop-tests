@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dto.ProductDto;
 import core.basesyntax.storage.Storage;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

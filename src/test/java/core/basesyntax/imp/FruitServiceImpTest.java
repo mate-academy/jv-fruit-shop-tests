@@ -31,7 +31,6 @@ public class FruitServiceImpTest {
         fruitService = new FruitServiceImp(map);
         parseImp = new FruitParseDtoParseImp();
         listParse = parseImp.parse(list);
-
     }
 
     @Test
@@ -44,7 +43,6 @@ public class FruitServiceImpTest {
                 .append(System.lineSeparator())
                 .append("banana,20").append(System.lineSeparator())
                 .append("apple,100").append(System.lineSeparator());
-
         Assert.assertEquals(fruitService.makeReport(), String.valueOf(builder));
     }
 }

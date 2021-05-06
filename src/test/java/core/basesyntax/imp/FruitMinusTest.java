@@ -37,7 +37,6 @@ public class FruitMinusTest {
 
     @Test(expected = RuntimeException.class)
     public void checkMinusOperatingWithWrongAmount_notOk() {
-        fruitRecordDto = null;
-        fruitMinus.operation(fruitRecordDto);
+        fruitMinus.operation(null);
     }
 }

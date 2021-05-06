@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationTest {
+    private final FruitOperation purchaseOperation = new PurchaseOperation();
 
     @Before
     public void setUp() {
@@ -20,7 +21,6 @@ public class PurchaseOperationTest {
     public void applyPurchaseOperation_Ok() {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.PURCHASE, "banana", 100);
         int expected = 50;
-        FruitOperation purchaseOperation = new PurchaseOperation();
         int actual = purchaseOperation.apply(fruitRecordDto);
         assertEquals(expected, actual);
     }
@@ -28,7 +28,6 @@ public class PurchaseOperationTest {
     @Test(expected = RuntimeException.class)
     public void applyPurchaseOperationWithNotEnoughQuantityOnStorage_NotOk() {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.PURCHASE, "banana", 200);
-        FruitOperation purchaseOperation = new PurchaseOperation();
         purchaseOperation.apply(fruitRecordDto);
     }
 }

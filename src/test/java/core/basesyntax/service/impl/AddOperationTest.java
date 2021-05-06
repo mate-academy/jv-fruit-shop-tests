@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class AddOperationTest {
     private static final int EXPECTED = 250;
+    private final FruitOperation addOperation = new AddOperation();
 
     @Before
     public void setUp() {
@@ -20,16 +21,14 @@ public class AddOperationTest {
     @Test
     public void applySupplyOperation_Ok() {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.RETURN, "banana", 100);
-        FruitOperation returnOperation = new AddOperation();
-        int actual = returnOperation.apply(fruitRecordDto);
+        int actual = addOperation.apply(fruitRecordDto);
         assertEquals(EXPECTED, actual);
     }
 
     @Test
     public void applyReturnOperation_Ok() {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.SUPPLY, "banana", 100);
-        FruitOperation supplyOperation = new AddOperation();
-        int actual = supplyOperation.apply(fruitRecordDto);
+        int actual = addOperation.apply(fruitRecordDto);
         assertEquals(EXPECTED, actual);
     }
 }

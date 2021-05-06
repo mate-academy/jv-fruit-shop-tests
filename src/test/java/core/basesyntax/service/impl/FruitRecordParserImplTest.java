@@ -6,6 +6,7 @@ import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitRecordParser;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class FruitRecordParserImplTest {
     private static FruitRecordDto fruitRecordDtoReturn;
     private static FruitRecordDto fruitRecordDtoPurchase;
     private static FruitRecordParser fruitRecordParser;
-    private final List<String> strings = new ArrayList<>();
+    private final List<String> rawRecords = new ArrayList<>();
     private final List<FruitRecordDto> expected = new ArrayList<>();
 
     @BeforeClass
@@ -36,62 +37,68 @@ public class FruitRecordParserImplTest {
         expected.add(fruitRecordDtoPurchase);
     }
 
+    @After
+    public void tearDown() {
+        expected.clear();
+        rawRecords.clear();
+    }
+
     @Test
     public void parseValidData_Ok() {
-        strings.add("b,banana,100");
-        strings.add("s,apple,125");
-        strings.add("r,banana,150");
-        strings.add("p,apple,75");
-        List<FruitRecordDto> actual = fruitRecordParser.parse(strings);
+        rawRecords.add("b,banana,100");
+        rawRecords.add("s,apple,125");
+        rawRecords.add("r,banana,150");
+        rawRecords.add("p,apple,75");
+        List<FruitRecordDto> actual = fruitRecordParser.parse(rawRecords);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parseValidDataWithTitle_Ok() {
-        strings.add("type,fruit ,quantity");
-        strings.add("b,banana,100");
-        strings.add("s,apple,125");
-        strings.add("r,banana,150");
-        strings.add("p,apple,75");
-        List<FruitRecordDto> actual = fruitRecordParser.parse(strings);
+        rawRecords.add("type,fruit ,quantity");
+        rawRecords.add("b,banana,100");
+        rawRecords.add("s,apple,125");
+        rawRecords.add("r,banana,150");
+        rawRecords.add("p,apple,75");
+        List<FruitRecordDto> actual = fruitRecordParser.parse(rawRecords);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parseDataWithSpaces_Ok() {
-        strings.add(" b ,   banana ,  100 ");
-        strings.add("s ,apple,125");
-        strings.add("r   ,banana,150 ");
-        strings.add("  p,apple , 75 ");
-        List<FruitRecordDto> actual = fruitRecordParser.parse(strings);
+        rawRecords.add(" b ,   banana ,  100 ");
+        rawRecords.add("s ,apple,125");
+        rawRecords.add("r   ,banana,150 ");
+        rawRecords.add("  p,apple , 75 ");
+        List<FruitRecordDto> actual = fruitRecordParser.parse(rawRecords);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseDataWithInvalidOperationType_NotOk() {
-        strings.add("z,banana,100");
-        strings.add("w,apple,125");
-        strings.add("y,banana,150");
-        strings.add("o,apple,75");
-        fruitRecordParser.parse(strings);
+        rawRecords.add("z,banana,100");
+        rawRecords.add("w,apple,125");
+        rawRecords.add("y,banana,150");
+        rawRecords.add("o,apple,75");
+        fruitRecordParser.parse(rawRecords);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseDataWithInvalidQuantity_NotOk() {
-        strings.add("b,banana,-100");
-        strings.add("s,apple,-125");
-        strings.add("r,banana,-150");
-        strings.add("p,apple,-75");
-        fruitRecordParser.parse(strings);
+        rawRecords.add("b,banana,-100");
+        rawRecords.add("s,apple,-125");
+        rawRecords.add("r,banana,-150");
+        rawRecords.add("p,apple,-75");
+        fruitRecordParser.parse(rawRecords);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseDataWithInvalidTitle_NotOk() {
-        strings.add("type,fruit ,quantity, cost");
-        strings.add("b,banana,100, 25");
-        strings.add("s,apple,125, 50");
-        strings.add("r,banana,150, 75");
-        strings.add("p,apple,75, 15");
-        fruitRecordParser.parse(strings);
+        rawRecords.add("type,fruit ,quantity, cost");
+        rawRecords.add("b,banana,100, 25");
+        rawRecords.add("s,apple,125, 50");
+        rawRecords.add("r,banana,150, 75");
+        rawRecords.add("p,apple,75, 15");
+        fruitRecordParser.parse(rawRecords);
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax.service.dto;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
-
 import java.util.Objects;
 
 public class TransactionDto {
@@ -49,10 +48,9 @@ public class TransactionDto {
 
     @Override
     public String toString() {
-        return "TransactionDto{" +
-                "operationType=" + operationType +
-                ", fruit=" + fruit +
-                ", quantity=" + quantity +
-                '}';
+        return "TransactionDto{"
+                + "operationType=" + operationType
+                + ", fruit=" + fruit
+                + ", quantity=" + quantity + '}';
     }
 }

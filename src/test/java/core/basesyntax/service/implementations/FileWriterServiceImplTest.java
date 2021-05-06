@@ -1,14 +1,14 @@
 package core.basesyntax.service.implementations;
 
 import core.basesyntax.service.FileWriterService;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static final String PATH_TO_REPORT
@@ -24,12 +24,12 @@ public class FileWriterServiceImplTest {
             + System.lineSeparator();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileWriter = new FileWriterServiceImpl();
     }
 
     @Test
-    public void FileWriterServiceImplTest_writeToFile_Ok() {
+    public void fileWriterServiceImplTest_writeToFile_Ok() {
         fileWriter.writeToFile(PATH_TO_REPORT, REPORT);
         List<String> expected = Arrays.asList(REPORT.split(System.lineSeparator()));
         List<String> actual;
@@ -42,7 +42,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void FileWriterServiceImplTest_writeToFile_invalidPath_NotOk() {
+    public void fileWriterServiceImplTest_writeToFile_invalidPath_NotOk() {
         fileWriter.writeToFile(INVALID_FILE_PATH, REPORT);
     }
 }

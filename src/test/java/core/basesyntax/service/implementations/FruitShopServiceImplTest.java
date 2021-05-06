@@ -11,31 +11,29 @@ import core.basesyntax.service.dto.TransactionDto;
 import core.basesyntax.service.operations.OperationDecreaseHandler;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.OperationIncreaseHandler;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static FruitShopService fruitShopService;
     private static FruitDao fruitDao;
-    private static OperationStrategy operationStrategy;
     private static List<TransactionDto> transactionList;
 
     @BeforeClass
     public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
         Map<String, OperationHandler> handlers = new HashMap<>();
         handlers.put("b", new OperationIncreaseHandler(fruitDao));
         handlers.put("s", new OperationIncreaseHandler(fruitDao));
         handlers.put("p", new OperationDecreaseHandler(fruitDao));
         handlers.put("r", new OperationIncreaseHandler(fruitDao));
-        
-        operationStrategy =new OperationStrategyImpl(handlers);
-        fruitDao = new FruitDaoImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
         fruitShopService = new FruitShopServiceImpl(operationStrategy, fruitDao);
         transactionList = new ArrayList<>();
     }
@@ -47,60 +45,60 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void FruitShopServiceImplTest_saveData_Ok() {
+    public void fruitShopServiceImplTest_saveData_Ok() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 25);
         transactionList.add(new TransactionDto(OperationType.BALANCE,
                 new Fruit("banana"), 25));
-        fruitShopService.saveData(transactionList);
+        saveToStorage();
 
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
     @Test
-    public void FruitShopServiceImplTest_saveData_supplyOperation_Ok() {
+    public void fruitShopServiceImplTest_saveData_supplyOperation_Ok() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 25);
         transactionList.add(new TransactionDto(OperationType.SUPPLY,
                 new Fruit("banana"), 25));
-        fruitShopService.saveData(transactionList);
+        saveToStorage();
 
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
     @Test
-    public void FruitShopServiceImplTest_saveData_returnOperation_Ok() {
+    public void fruitShopServiceImplTest_saveData_returnOperation_Ok() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 25);
         transactionList.add(new TransactionDto(OperationType.RETURN,
                 new Fruit("banana"), 25));
-        fruitShopService.saveData(transactionList);
+        saveToStorage();
 
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
     @Test
-    public void FruitShopServiceImplTest_saveData_purchaseOperation_Ok() {
+    public void fruitShopServiceImplTest_saveData_purchaseOperation_Ok() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 25);
         transactionList.add(new TransactionDto(OperationType.RETURN,
                 new Fruit("banana"), 30));
         transactionList.add(new TransactionDto(OperationType.PURCHASE,
                 new Fruit("banana"), 5));
-        fruitShopService.saveData(transactionList);
+        saveToStorage();
 
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
     @Test (expected = InvalidQuantityException.class)
-    public void FruitShopServiceImplTest_saveData_purchaseOperation_NotOk() {
+    public void fruitShopServiceImplTest_saveData_purchaseOperation_NotOk() {
         transactionList.add(new TransactionDto(OperationType.PURCHASE,
                 new Fruit("banana"), 25));
-        fruitShopService.saveData(transactionList);
+        saveToStorage();
     }
 
     @Test
-    public void FruitShopServiceImplTest_createReport_Ok() {
+    public void fruitShopServiceImplTest_createReport_Ok() {
         transactionList.add(new TransactionDto(OperationType.BALANCE,
                 new Fruit("banana"), 20));
         transactionList.add(new TransactionDto(OperationType.BALANCE,
@@ -117,7 +115,7 @@ public class FruitShopServiceImplTest {
                 new Fruit("banana"), 5));
         transactionList.add(new TransactionDto(OperationType.SUPPLY,
                 new Fruit("banana"), 50));
-        fruitShopService.saveData(transactionList);
+        saveToStorage();
 
         String expected = "fruit,quantity"
                 + System.lineSeparator()
@@ -128,5 +126,9 @@ public class FruitShopServiceImplTest {
         String actual = fruitShopService.createReport();
 
         Assert.assertEquals(expected, actual);
+    }
+
+    private static void saveToStorage() {
+        fruitShopService.saveData(transactionList);
     }
 }

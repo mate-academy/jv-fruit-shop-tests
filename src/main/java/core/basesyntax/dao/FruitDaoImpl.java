@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.Fruit;
-
 import java.util.Map;
 import java.util.Optional;
 

@@ -12,7 +12,7 @@ public class OperationTypeTest {
     private static final String INVALID_TYPE = "q";
 
     @Test
-    public void OperationTypeTest_getOperationType_Ok() {
+    public void operationTypeTest_getOperationType_Ok() {
         OperationType actualPurchase = OperationType.getOperationType(PURCHASE);
         OperationType expectedPurchase = OperationType.PURCHASE;
         Assert.assertEquals(expectedPurchase, actualPurchase);
@@ -32,7 +32,7 @@ public class OperationTypeTest {
     }
 
     @Test (expected = InvalidOperationTypeException.class)
-    public void OperationTypeTest_getOperationType_NotOk() {
+    public void operationTypeTest_getOperationType_NotOk() {
         OperationType actual = OperationType.getOperationType(INVALID_TYPE);
     }
 }

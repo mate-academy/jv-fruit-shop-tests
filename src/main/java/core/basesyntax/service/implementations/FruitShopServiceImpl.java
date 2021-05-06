@@ -6,12 +6,11 @@ import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.dto.TransactionDto;
 import core.basesyntax.service.operations.OperationHandler;
-
 import java.util.List;
 import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private static final String TITLE = "fruit, quantity";
+    private static final String TITLE = "fruit,quantity";
     private static final String SEPARATOR = ",";
     private final OperationStrategy handlers;
     private final FruitDao fruitDao;

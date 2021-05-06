@@ -15,7 +15,7 @@ public class FruitDaoImplTest {
     private static final int QUANTITY = 25;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
     }
 
@@ -45,7 +45,7 @@ public class FruitDaoImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.getFruitsDataBase().clear();
     }
 }

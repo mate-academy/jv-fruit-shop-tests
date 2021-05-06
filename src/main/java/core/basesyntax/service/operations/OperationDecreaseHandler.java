@@ -3,7 +3,6 @@ package core.basesyntax.service.operations;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.exeptions.InvalidQuantityException;
 import core.basesyntax.model.Fruit;
-
 import java.util.Optional;
 
 public class OperationDecreaseHandler implements OperationHandler {

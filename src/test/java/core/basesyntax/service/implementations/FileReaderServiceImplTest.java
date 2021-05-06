@@ -1,10 +1,10 @@
 package core.basesyntax.service.implementations;
 
 import core.basesyntax.service.FileReaderService;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.List;
 
 public class FileReaderServiceImplTest {
     private static final String PATH_TO_FILE = "src/test/resources/data_test_ok.csv";
@@ -12,12 +12,12 @@ public class FileReaderServiceImplTest {
     private static FileReaderService fileReader;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileReader = new FileReaderServiceImpl();
     }
 
     @Test
-    public void FileReaderServiceImplTest_readFromFile_Ok() {
+    public void fileReaderServiceImplTest_readFromFile_Ok() {
         List<String> actual = fileReader.readFromFile(PATH_TO_FILE);
         List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20", "b,apple,100", "s,banana,100",
@@ -26,7 +26,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void FileReaderServiceImplTest_readFromNonExistFile_NotOk() {
+    public void fileReaderServiceImplTest_readFromNonExistFile_NotOk() {
         fileReader.readFromFile(PATH_TO_NOT_EXISTING_FILE);
     }
 }

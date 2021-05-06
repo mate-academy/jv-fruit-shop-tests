@@ -3,7 +3,6 @@ package core.basesyntax.service.dto;
 import core.basesyntax.exeptions.InvalidDataFormatException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -14,18 +14,18 @@ public class OperationDecreaseHandlerTest {
     private static FruitDao fruitDao;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         operation = new OperationDecreaseHandler(fruitDao);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         fruitDao.getAll().clear();
     }
 
     @Test
-    public void OperationDecreaseHandlerTest_Apply_Ok() {
+    public void operationDecreaseHandlerTest_apply_Ok() {
         saveToStorage();
         Fruit banana = new Fruit("banana");
         int excepted = 100;
@@ -34,7 +34,7 @@ public class OperationDecreaseHandlerTest {
     }
 
     @Test (expected = InvalidQuantityException.class)
-    public void OperationDecreaseHandlerTest_Apply_NotOk() {
+    public void operationDecreaseHandlerTest_apply_NotOk() {
         saveToStorage();
         Fruit banana = new Fruit("banana");
         operation.apply(200, banana);

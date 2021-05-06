@@ -15,7 +15,6 @@ import core.basesyntax.service.implementations.OperationStrategyImpl;
 import core.basesyntax.service.operations.OperationDecreaseHandler;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.OperationIncreaseHandler;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -37,12 +37,6 @@ public class FruitRecordParserImplTest {
         expected.add(fruitRecordDtoPurchase);
     }
 
-    @After
-    public void tearDown() {
-        expected.clear();
-        rawRecords.clear();
-    }
-
     @Test
     public void parseValidData_Ok() {
         rawRecords.add("b,banana,100");
@@ -100,5 +94,11 @@ public class FruitRecordParserImplTest {
         rawRecords.add("r,banana,150, 75");
         rawRecords.add("p,apple,75, 15");
         fruitRecordParser.parse(rawRecords);
+    }
+
+    @After
+    public void tearDown() {
+        expected.clear();
+        rawRecords.clear();
     }
 }

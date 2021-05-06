@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dto.Fruit;
 import core.basesyntax.dto.Operation;
 import core.basesyntax.exceptions.IllegalDataException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class OperationParserTest {
     private static final OperationParser operationParser = new OperationParser();
 
     @Test
-    public void parseOperation_Ok() throws IOException {
+    public void parseOperation_Ok() {
         List<Operation> listOfOperations = new ArrayList<>();
         listOfOperations.add(BANANA_BALANCE);
         listOfOperations.add(APPLE_BALANCE);
@@ -33,7 +32,7 @@ public class OperationParserTest {
     }
 
     @Test(expected = IllegalDataException.class)
-    public void handleIllegalData_Ok() throws IOException {
+    public void handleIllegalData_Ok() {
         List<String> stringList = dataReader.readData("src/test/illegal_data_test.csv");
         operationParser.parseOperationsToList(stringList);
     }

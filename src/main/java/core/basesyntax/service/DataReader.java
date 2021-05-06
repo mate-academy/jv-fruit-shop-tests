@@ -11,11 +11,11 @@ public class DataReader implements core.basesyntax.service.Reader {
     }
 
     @Override
-    public List<String> readData(String sourceName) throws IOException {
+    public List<String> readData(String sourceName) {
         try {
             return Files.readAllLines(Path.of(sourceName));
         } catch (IOException e) {
-            throw new IOException("Can't read file", e);
+            throw new RuntimeException("Can't read file", e);
         }
     }
 }

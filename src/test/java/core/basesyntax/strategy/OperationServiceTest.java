@@ -9,7 +9,6 @@ import core.basesyntax.service.DataReader;
 import core.basesyntax.service.OperationParser;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.StorageService;
-import java.io.IOException;
 import java.util.List;
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class OperationServiceTest {
     private static final Fruit apple = new Fruit("apple");
 
     @Test
-    public void applyOperations_Ok() throws IOException {
+    public void applyOperations_Ok() {
         List<String> operationsList = dataReader.readData("src/test/operations_test.csv");
         List<Operation> allOperations = dataParser.parseOperationsToList(operationsList);
 
@@ -37,8 +36,8 @@ public class OperationServiceTest {
     }
 
     @Test(expected = InvalidOperationException.class)
-    public void handleUnknownOperation_Ok() throws IOException {
+    public void handleUnknownOperation_Ok() {
         List<String> operationsList = dataReader.readData("src/test/unknown_operation.csv");
-        List<Operation> allOperations = dataParser.parseOperationsToList(operationsList);
+        dataParser.parseOperationsToList(operationsList);
     }
 }

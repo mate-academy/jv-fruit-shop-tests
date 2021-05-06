@@ -11,7 +11,7 @@ public class FileReaderImplTest {
 
     private static final String INVALID_FILE_PATH = "src/test/java/resources/inputFileTest.txt";
     private static final String VALID_FILE_PATH = "src/test/java/resources/InputFileTest.csv";
-    private static final List<String> expected =
+    private static final List<String> EXPECTED_LIST =
             List.of("type,fruit,quantity", "b,banana,50",
                     "b,apple,100", "s,banana,25", "p,banana,20", "r,apple,75");
     private static FileReader fileReader;
@@ -29,6 +29,6 @@ public class FileReaderImplTest {
     @Test
     public void readeFromFile_validFilePath_isOk() {
         List<String> actual = fileReader.readFromFile(VALID_FILE_PATH);
-        assertEquals(expected, actual);
+        assertEquals(EXPECTED_LIST, actual);
     }
 }

@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DecreaseOperationImplTest {
-    private static final FruitOperationHandler decreaseOperation = new DecreaseOperationImpl();
-    private static final FruitRecordDto fruitRecordDto =
+    private static final FruitOperationHandler DECREASE_OPERATION = new DecreaseOperationImpl();
+    private static final FruitRecordDto FRUIT_RECORD_DTO =
             new FruitRecordDto(OperationType.PURCHASE,"apple", 25);
 
     @Before
@@ -22,13 +22,13 @@ public class DecreaseOperationImplTest {
     @Test
     public void testApply_withDecreaseOperation_isOk() {
         Storage.getFruits().put("apple", 50);
-        int newQuantity = decreaseOperation.apply(fruitRecordDto);
+        int newQuantity = DECREASE_OPERATION.apply(FRUIT_RECORD_DTO);
         assertEquals(25, newQuantity);
     }
 
     @Test(expected = RuntimeException.class)
     public void testApply_withDecreaseOperationAndNotEnoughFruits_isNotOk() {
         Storage.getFruits().put("apple", 10);
-        decreaseOperation.apply(fruitRecordDto);
+        DECREASE_OPERATION.apply(FRUIT_RECORD_DTO);
     }
 }

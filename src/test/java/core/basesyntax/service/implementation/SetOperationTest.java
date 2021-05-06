@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SetOperationTest {
-    private static final FruitOperationHandler decreaseOperation = new SetOperation();
-    private static final FruitRecordDto fruitRecordDto =
-            new FruitRecordDto(OperationType.PURCHASE,"apple", 250);
+    private static final FruitOperationHandler SET_OPERATION = new SetOperation();
+    private static final FruitRecordDto FRUIT_RECORD_DTO =
+            new FruitRecordDto(OperationType.BALANCE,"apple", 250);
 
     @Before
     public void cleanMapDB() {
@@ -22,7 +22,7 @@ public class SetOperationTest {
     @Test
     public void testApply_withSetOperation_isOk() {
         Storage.getFruits().put("apple", 50);
-        int newQuantity = decreaseOperation.apply(fruitRecordDto);
+        int newQuantity = SET_OPERATION.apply(FRUIT_RECORD_DTO);
         assertEquals(250, newQuantity);
     }
 }

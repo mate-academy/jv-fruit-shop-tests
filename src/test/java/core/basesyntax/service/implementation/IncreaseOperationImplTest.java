@@ -9,9 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class IncreaseOperationImplTest extends TestCase {
-    private static final FruitOperationHandler decreaseOperation = new IncreaseOperationImpl();
-    private static final FruitRecordDto fruitRecordDto =
-            new FruitRecordDto(OperationType.PURCHASE, "apple", 25);
+    private static final FruitOperationHandler DECREASE = new IncreaseOperationImpl();
+    private static final FruitRecordDto FRUIT_SUPPLY =
+            new FruitRecordDto(OperationType.SUPPLY, "apple", 25);
+    private static final FruitRecordDto FRUIT_RETURN =
+            new FruitRecordDto(OperationType.RETURN, "apple", 25);
 
     @Before
     public void cleanMapDB() {
@@ -19,9 +21,17 @@ public class IncreaseOperationImplTest extends TestCase {
     }
 
     @Test
-    public void testApply_withIncreaseOperation_isOk() {
+    public void testApply_withSupplyOperation_isOk() {
         Storage.getFruits().put("apple", 50);
-        int newQuantity = decreaseOperation.apply(fruitRecordDto);
+        int newQuantity = DECREASE.apply(FRUIT_SUPPLY);
         assertEquals(75, newQuantity);
     }
+
+    @Test
+    public void testApply_withReturnOperation_isOk() {
+        Storage.getFruits().put("apple", 50);
+        int newQuantity = DECREASE.apply(FRUIT_RETURN);
+        assertEquals(75, newQuantity);
+    }
+
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.operationswithfile;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.io.File;
 import java.util.HashMap;
@@ -24,9 +24,9 @@ public class FileWriterImplTest {
     public void testWriteToFileWithTruePath_ok() {
         fileWriter.getNewFile(balance,TRUE_PATH);
         File file = new File(TRUE_PATH);
-        long expected = 37;
+        long expected = 0;
         long actual = file.length();
-        assertEquals(expected,actual);
+        assertNotEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)

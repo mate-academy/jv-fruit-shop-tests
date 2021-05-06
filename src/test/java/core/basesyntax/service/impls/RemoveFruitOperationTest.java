@@ -23,17 +23,17 @@ public class RemoveFruitOperationTest {
     public void removing_isOk() {
         excepted = 5;
         assertEquals(excepted,
-                removing.apply(new FruitRecordDto("s", "banana", 5)));
+                removing.apply(new FruitRecordDto("p", "banana", 5)));
     }
 
     @Test (expected = IllegalTransactionException.class)
     public void removing_negative_throwsException() {
-        removing.apply(new FruitRecordDto("s", "banana", -20));
+        removing.apply(new FruitRecordDto("p", "banana", -20));
     }
 
     @Test (expected = IllegalTransactionException.class)
     public void removing_negativeResult_throwsException() {
-        removing.apply(new FruitRecordDto("s", "banana", 20));
+        removing.apply(new FruitRecordDto("p", "banana", 20));
     }
 
     @After

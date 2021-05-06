@@ -12,7 +12,7 @@ import org.junit.Test;
 public class ReportServiceImplTest {
     private static final String expected = "fruit,amount" + System.lineSeparator()
             + "banana," + 15 + System.lineSeparator()
-            + "apple," + 35 + System.lineSeparator() + "mango," + 10;
+            + "apple," + 35 + System.lineSeparator() + "mango," + 10 + System.lineSeparator();
 
     @BeforeClass
     public static void beforeClass() {

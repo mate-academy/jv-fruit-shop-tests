@@ -11,6 +11,12 @@ public class DataValidatorImpl implements DataValidator {
 
     @Override
     public boolean validateData(List<String> dataFromFile) {
+        if (dataFromFile == null) {
+            throw new RuntimeException("Data source file is null");
+        }
+        if (dataFromFile.isEmpty()) {
+            throw new RuntimeException("Source file is empty");
+        }
         for (String s : dataFromFile) {
             if (DESCRIPTION_DATA.equals(s.trim())) {
                 return true;

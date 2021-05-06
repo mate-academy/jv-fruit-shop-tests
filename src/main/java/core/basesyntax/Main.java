@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.datavalidation.DataValidatorImpl;
 import core.basesyntax.shopdao.FruitDaoImpl;
 import core.basesyntax.shopoperations.Balance;
 import core.basesyntax.shopoperations.ListOfOperations;
@@ -28,6 +29,7 @@ public class Main {
         StoreService storeService
                 = new StoreServiceImpl(new StrategyImpl(operationMap), new FruitDaoImpl());
         List<String> data = new CsvReadServiceImpl().readFromFile("src/main/resources/file.csv");
+        new DataValidatorImpl().validateData(data);
         storeService.addToStorage(data);
         new FileWriterServiceImpl().writeToFile(new ReportServiceImpl(
                 new FruitDaoImpl()).getReport(), "src/main/resources/report.csv");

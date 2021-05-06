@@ -1,7 +1,6 @@
 package core.basesyntax.shopservice;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -31,14 +30,8 @@ public class FileWriterServiceImplTest {
                 Files.readAllLines(Path.of(invalidFilePathActual)));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_EmptyPath_Bad() {
-        boolean actual = true;
-        try {
-            new FileWriterServiceImpl().writeToFile(data, "");
-        } catch (RuntimeException e) {
-            actual = false;
-        }
-        assertFalse(actual);
+        new FileWriterServiceImpl().writeToFile(data, "");
     }
 }

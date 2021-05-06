@@ -25,6 +25,7 @@ public class StoreServiceImplTest {
 
     @Before
     public void setUp() {
+        Storage.getFruits().clear();
         Map<ListOfOperations, ShopBalanceOperation> operationMap = new HashMap<>();
         operationMap.put(ListOfOperations.B, new Balance());
         operationMap.put(ListOfOperations.S, new Supply());
@@ -36,7 +37,6 @@ public class StoreServiceImplTest {
 
     @Test
     public void addToStorage() {
-        Storage.getFruits().clear();
         dataFromFile.add("type,fruit,quantity");
         dataFromFile.add("b,banana,60");
         dataFromFile.add("b,apple,60");

@@ -14,13 +14,15 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-        StringBuilder report = new StringBuilder().append("fruit,amount");
+        StringBuilder report = new StringBuilder()
+                .append("fruit,amount")
+                .append(System.lineSeparator());
         Map<Fruit, Integer> products = fruitDao.getAll();
         for (Map.Entry<Fruit, Integer> productsEntry : products.entrySet()) {
-            report.append(System.lineSeparator())
-                    .append(productsEntry.getKey().getName())
+            report.append(productsEntry.getKey().getName())
                     .append(SEPARATOR)
-                    .append(productsEntry.getValue());
+                    .append(productsEntry.getValue())
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

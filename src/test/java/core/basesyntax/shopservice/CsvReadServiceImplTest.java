@@ -1,7 +1,6 @@
 package core.basesyntax.shopservice;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +24,8 @@ public class CsvReadServiceImplTest {
                 .readFromFile("src/test/resources/emptyFile.csv"));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_NotExistingFile_Ok() {
-        try {
-            new CsvReadServiceImpl().readFromFile("src/test/resources/FFile.csv");
-        } catch (RuntimeException e) {
-            assertFalse(false);
-        }
+        new CsvReadServiceImpl().readFromFile("src/test/resources/FFile.csv");
     }
 }

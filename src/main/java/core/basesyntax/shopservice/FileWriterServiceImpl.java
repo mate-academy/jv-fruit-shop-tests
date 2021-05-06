@@ -10,7 +10,7 @@ public class FileWriterServiceImpl implements WriteService {
         try {
             Files.write(Path.of(filePath), data.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to path " + filePath, e);
+            throw new RuntimeException("Can't write to path " + "\"" + filePath + "\"", e);
         }
     }
 }

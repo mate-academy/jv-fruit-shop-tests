@@ -4,17 +4,18 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dto.ProductDto;
 import core.basesyntax.storage.Storage;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationTest {
-    private static final ProductDto VALID_PRODUCT = new ProductDto("p",
+    private static final ProductDto validProduct = new ProductDto("p",
             "TEST_FRUIT",
             123);
-    private static final ProductDto INVALID_PRODUCT = new ProductDto("p",
+    private static final ProductDto invalidProduct = new ProductDto("p",
             "TEST_FRUIT",
             -123);
-    private static final ProductDto NOT_EXIST_PRODUCT = new ProductDto("p",
+    private static final ProductDto notExistsProduct = new ProductDto("p",
             "NOT_EXIST_FRUIT",
             0);
     private static final Operation purchaseOperation = new PurchaseOperation();
@@ -26,7 +27,7 @@ public class PurchaseOperationTest {
 
     @Test
     public void validData_Ok() {
-        purchaseOperation.apply(VALID_PRODUCT);
+        purchaseOperation.apply(validProduct);
         int expected = 1111;
         int actual = Storage.fruits.get("TEST_FRUIT");
         assertEquals(expected, actual);
@@ -34,11 +35,16 @@ public class PurchaseOperationTest {
 
     @Test(expected = RuntimeException.class)
     public void negativeCapacityData_NotOk() {
-        purchaseOperation.apply(INVALID_PRODUCT);
+        purchaseOperation.apply(invalidProduct);
     }
 
     @Test(expected = RuntimeException.class)
     public void notExistData_NotOk() {
-        purchaseOperation.apply(NOT_EXIST_PRODUCT);
+        purchaseOperation.apply(notExistsProduct);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
     }
 }

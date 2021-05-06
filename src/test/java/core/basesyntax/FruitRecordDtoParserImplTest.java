@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitRecordDtoParserImplTest {
-    private static final List<String> EMPTY = new ArrayList<>();
+    private static final List<String> EMPTY_LIST = new ArrayList<>();
     private static final List<String> INVALID = List.of("type,fruit,quantity",
             "b,banana,20",
             "b,apple,100",
@@ -60,6 +60,6 @@ public class FruitRecordDtoParserImplTest {
 
     @Test(expected = RuntimeException.class)
     public void parseLines_emptyList_notOk() {
-        fruitRecordDtoParser.parse(EMPTY);
+        fruitRecordDtoParser.parse(EMPTY_LIST);
     }
 }

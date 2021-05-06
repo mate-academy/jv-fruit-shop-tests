@@ -35,10 +35,10 @@ public class FruitServiceImplTest {
     @Test
     public void save_correctData_OK() {
         final Fruit banana = new Fruit("banana");
-        List<FruitRecordDto> correctData = new ArrayList<>();
-        correctData.add(new FruitRecordDto(OperationType.BALANCE, "banana", 75));
-        correctData.add(new FruitRecordDto(OperationType.SUPPLY, "banana", 25));
-        fruitService.saveData(correctData);
+        List<FruitRecordDto> fruitRecordDtos = new ArrayList<>();
+        fruitRecordDtos.add(new FruitRecordDto(OperationType.BALANCE, "banana", 75));
+        fruitRecordDtos.add(new FruitRecordDto(OperationType.SUPPLY, "banana", 25));
+        fruitService.saveData(fruitRecordDtos);
         int expected = 100;
         int actual = Storage.fruits.get(banana);
         Assert.assertEquals(expected, actual);

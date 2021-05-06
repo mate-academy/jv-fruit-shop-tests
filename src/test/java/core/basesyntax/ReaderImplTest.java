@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderImplTest {
-    private static final String VALID =
+    private static final String VALID_PATH =
             "src/test/java/core/basesyntax/resources/valid.csv";
     private static final String INVALID =
             "src/test/java/core/basesyntax/resources/notValid.csv";
@@ -34,7 +34,7 @@ public class ReaderImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = reader.readFromFile(VALID);
+        List<String> actual = reader.readFromFile(VALID_PATH);
         Assert.assertEquals(expected, actual);
     }
 

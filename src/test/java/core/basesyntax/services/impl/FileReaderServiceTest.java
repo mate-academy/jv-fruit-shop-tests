@@ -16,20 +16,21 @@ public class FileReaderServiceTest {
 
     @Test
     public void fileReaderServiceCustom_OK() {
-        String filePath = "src/test/resources/testInput.csv";
+        String randomContentPath = "src/test/resources/testInput.csv";
         List<String> expected = List.of("cherry", "apple", "banana");
-        List<String> actual = fileReaderService.read(filePath);
+        List<String> actual = fileReaderService.read(randomContentPath);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void fileReaderServiceNotExistingFile_notOK() {
-        fileReaderService.read("src/test/resources/someFilecsv");
+        String invalidFilePath = "src/test/resources/someFilecsv";
+        fileReaderService.read(invalidFilePath);
     }
 
     @Test
     public void fileReaderServiceValidData_OK() {
-        String fileName = "src/test/resources/TestNotEmptyFile.csv";
+        String validReportPath = "src/test/resources/TestNotEmptyFile.csv";
         List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
@@ -39,7 +40,7 @@ public class FileReaderServiceTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = fileReaderService.read(fileName);
+        List<String> actual = fileReaderService.read(validReportPath);
         Assert.assertEquals(expected, actual);
     }
 }

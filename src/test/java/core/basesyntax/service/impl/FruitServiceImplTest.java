@@ -21,7 +21,7 @@ import org.junit.rules.ExpectedException;
 public class FruitServiceImplTest {
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static final Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-    private static final List<String> VALID_DATA =
+    private static final List<String> validData =
             List.of("type,fruit,quantity", "b,orange,25", "b,banana,100",
             "s,banana,25", "p,orange,13", "p,banana,115", "r,banana,15");
 

@@ -31,6 +31,11 @@ public class FruitServiceImplTest {
         fruitRecordDtoList = new ArrayList<>();
     }
 
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
+    }
+
     @Test
     public void applyOperation_Ok() {
         Map<Fruit, Integer> currentQuantity = new HashMap<>();
@@ -42,10 +47,5 @@ public class FruitServiceImplTest {
         fruitRecordDtoList.add(new FruitRecordDto(Operation.SUPPLY, "banana", 100));
         fruitService.applyOperation(fruitRecordDtoList);
         Assert.assertEquals(currentQuantity.get(banana), Storage.fruits.get(banana));
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
     }
 }

@@ -18,6 +18,11 @@ public class AddOperationTest {
         Storage.fruits.put(new Fruit("banana"), 50);
     }
 
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
+    }
+
     @Test
     public void apply_addOperation_Ok() {
         int expected = 70;
@@ -29,10 +34,5 @@ public class AddOperationTest {
     @Test(expected = RuntimeException.class)
     public void apply_addOperation_NotOk() {
         operationHandler.apply(new FruitRecordDto(Operation.SUPPLY, "banana", null));
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
     }
 }

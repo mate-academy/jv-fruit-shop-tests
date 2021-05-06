@@ -18,6 +18,11 @@ public class PurchaseOperationTest {
         Storage.fruits.put(new Fruit("banana"), 50);
     }
 
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
+    }
+
     @Test
     public void apply_addOperation_Ok() {
         int expected = 20;
@@ -30,10 +35,5 @@ public class PurchaseOperationTest {
     public void apply_addOperation_NotOk() {
         operationHandler.apply(new FruitRecordDto(Operation.PURCHASE, "banana", null));
         operationHandler.apply(new FruitRecordDto(Operation.PURCHASE, "banana", -30));
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
     }
 }

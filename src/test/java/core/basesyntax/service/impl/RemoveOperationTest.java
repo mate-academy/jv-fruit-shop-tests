@@ -28,11 +28,6 @@ public class RemoveOperationTest {
         storage = new Storage();
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void removeAmountTest_Ok() {
         Storage.fruits.put(new Fruit("banana"),30);
@@ -55,5 +50,10 @@ public class RemoveOperationTest {
     @Test (expected = RuntimeException.class)
     public void removeValidationWithIncorrectParamsTest_NotOk() {
         removeOperationValidator.removeOperationValidate(5,10);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
     }
 }

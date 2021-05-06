@@ -24,11 +24,6 @@ public class AddOperationTest {
         storage = new Storage();
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void addAmountTest_Ok() {
         Storage.fruits.put(new Fruit("banana"),5);
@@ -40,5 +35,10 @@ public class AddOperationTest {
         Fruit fruit = new Fruit(null);
         Storage.fruits.put(fruit,null);
         assertNull(Storage.fruits.get(fruit));
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
     }
 }

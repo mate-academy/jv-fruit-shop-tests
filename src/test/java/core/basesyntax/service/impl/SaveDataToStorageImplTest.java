@@ -27,13 +27,6 @@ public class SaveDataToStorageImplTest {
         storage = new Storage();
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
-        testList.clear();
-        operationMap.clear();
-    }
-
     @Test
     public void firstAndSecondParamsTest_Ok() {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.b,"banana",21);
@@ -50,5 +43,12 @@ public class SaveDataToStorageImplTest {
         saveDataToStorage.saveData(testList,operationMap);
         Assert.assertNotNull(testList);
         Assert.assertNotNull(operationMap);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
+        testList.clear();
+        operationMap.clear();
     }
 }

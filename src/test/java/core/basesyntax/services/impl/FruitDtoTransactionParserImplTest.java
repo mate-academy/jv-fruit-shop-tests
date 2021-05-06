@@ -18,11 +18,11 @@ public class FruitDtoTransactionParserImplTest {
     public void setUp() {
         fruitDtoTransactionParser = new FruitDtoTransactionParserImpl();
         lines = List.of("b,banana,20", "b,apple,50");
-        fruitDtoTransactions = fruitDtoTransactionParser.parse(lines);
     }
 
     @Test
     public void test_ifParserReturnRightFruitName_Ok() {
+        fruitDtoTransactions = fruitDtoTransactionParser.parse(lines);
         String excepted = "apple";
         String actual = fruitDtoTransactions.get(1).getFruitName();
         assertEquals(excepted, actual);
@@ -30,6 +30,7 @@ public class FruitDtoTransactionParserImplTest {
 
     @Test
     public void test_ifParserReturnRightOperationType_Ok() {
+        fruitDtoTransactions = fruitDtoTransactionParser.parse(lines);
         OperationType excepted = OperationType.BALANCE;
         OperationType actual = fruitDtoTransactions.get(1).getOperationType();
         assertEquals(excepted, actual);
@@ -37,6 +38,7 @@ public class FruitDtoTransactionParserImplTest {
 
     @Test
     public void test_ifParserReturnRightQuantity_Ok() {
+        fruitDtoTransactions = fruitDtoTransactionParser.parse(lines);
         Integer excepted = 20;
         Integer actual = fruitDtoTransactions.get(0).getFruitCount();
         assertEquals(excepted, actual);

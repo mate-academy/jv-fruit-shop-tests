@@ -39,6 +39,6 @@ public class FileWriterImplementationTest {
 
     @Test(expected = RuntimeException.class)
     public void writeWithWrongFilePath_NotOk() {
-        fileWriterService.write("","");
+        fileWriterService.write("", "");
     }
 }

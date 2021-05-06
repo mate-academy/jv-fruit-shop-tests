@@ -18,9 +18,9 @@ public class ReturnOperationTest {
     @BeforeClass
     public static void beforeClass() {
         operation = new ReturnOperation();
-        fruitRecordDto = new FruitRecordDto("r","banana",20);
+        fruitRecordDto = new FruitRecordDto("r", "banana", 20);
         fruitRecordDtoWithNullValue = new FruitRecordDto("r", "banana", null);
-        fruitRecordDtoWithNegativeValue = new FruitRecordDto("r","banana",-1);
+        fruitRecordDtoWithNegativeValue = new FruitRecordDto("r", "banana", -1);
     }
 
     @Test

@@ -16,8 +16,9 @@ public class BalanceOperationTest {
     @BeforeClass
     public static void beforeClass() {
         fruitOperationHandler = new BalanceOperation();
-        fruitRecordDto = new FruitRecordDto("b","banana",20);
-        fruitRecordDtoWithNullValue = new FruitRecordDto("b", "banana", null);
+        fruitRecordDto = new FruitRecordDto("b", "banana", 20);
+        fruitRecordDtoWithNullValue = new FruitRecordDto("b",
+                "banana", null);
         operationType = fruitOperationHandler.getOperationType();
     }
 

@@ -18,9 +18,9 @@ public class SupplyOperationTest {
     @BeforeClass
     public static void beforeClass() {
         operation = new SupplyOperation();
-        fruitRecordDto = new FruitRecordDto("s","banana",20);
+        fruitRecordDto = new FruitRecordDto("s", "banana", 20);
         fruitRecordDtoWithNullValue = new FruitRecordDto("s", "banana", null);
-        fruitRecordDtoWithNegativeValue = new FruitRecordDto("s","banana",-1);
+        fruitRecordDtoWithNegativeValue = new FruitRecordDto("s", "banana", -1);
     }
 
     @Test

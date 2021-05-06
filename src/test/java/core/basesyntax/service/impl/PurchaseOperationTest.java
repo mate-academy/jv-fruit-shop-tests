@@ -18,9 +18,9 @@ public class PurchaseOperationTest {
     @BeforeClass
     public static void beforeClass() {
         operation = new PurchaseOperation();
-        fruitRecordDto = new FruitRecordDto("p","banana",20);
+        fruitRecordDto = new FruitRecordDto("p", "banana", 20);
         fruitRecordDtoWithNullValue = new FruitRecordDto("p", "banana", null);
-        fruitRecordDtoWithNegativeValue = new FruitRecordDto("p","banana",-1);
+        fruitRecordDtoWithNegativeValue = new FruitRecordDto("p", "banana", -1);
     }
 
     @Test

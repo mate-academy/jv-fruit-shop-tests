@@ -23,7 +23,7 @@ public class FruitRecordDtoParserImplTest {
 
     @Test
     public void getDataFromListIfDataCorrect_Ok() {
-        expected = List.of(new FruitRecordDto("b","apple",23));
+        expected = List.of(new FruitRecordDto("b", "apple", 23));
         actual = parser.parse(corectdatalist);
         FruitRecordDto element1 = expected.get(0);
         FruitRecordDto element2 = actual.get(0);
@@ -49,7 +49,7 @@ public class FruitRecordDtoParserImplTest {
     @Test
     public void getDataWithFirstFileLine_Ok() {
         List<String> list = List.of("type,fruit,quantity","b,apple,23");
-        expected = List.of(new FruitRecordDto("b","apple",23));
+        expected = List.of(new FruitRecordDto("b", "apple", 23));
         actual = parser.parse(list);
         FruitRecordDto element1 = expected.get(0);
         FruitRecordDto element2 = actual.get(0);

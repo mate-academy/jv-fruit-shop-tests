@@ -30,7 +30,7 @@ public class StorageServiceImplTest {
 
     @Test
     public void getReport_Ok() {
-        Storage.fruits.put(new Fruit("banana"),10);
+        Storage.fruits.put(new Fruit("banana"), 10);
         String expected = "Fruit, Quantity\n"
                 + "banana,10\n";
         String actual = operationStrategy.getReport();

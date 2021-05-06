@@ -24,4 +24,10 @@ public class ReportCreatorTest {
         String actual = reportCreator.createReport();
         assertEquals(expecct, actual);
     }
+
+    @Test
+    public void createEmptyReport_Ok() {
+        Storage.fruits.clear();
+        assertEquals(reportCreator.createReport(), "fruit,quantity\n");
+    }
 }

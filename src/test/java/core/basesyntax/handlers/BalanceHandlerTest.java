@@ -6,11 +6,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
+    public static final int POSITIVE_CURRENT_COUNT = 10;
+    public static final int NEGATIVE_CURRENT_COUNT = -15;
+    public static final int POSITIVE_COUNT_OF_STORAGE = 5;
+    public static final int NEGATIVE_COUNT_OF_STORAGE = -10;
     private static Activity activity;
-    private static final int POSITIVE_CURRENT_COUNT = 10;
-    private static final int NEGATIVE_CURRENT_COUNT = -15;
-    private static final int POSITIVE_COUNT_OF_STORAGE = 5;
-    private static final int NEGATIVE_COUNT_OF_STORAGE = -10;
 
     @BeforeClass
     public static void beforeClass() {

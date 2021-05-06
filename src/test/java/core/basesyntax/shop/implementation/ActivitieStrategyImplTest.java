@@ -1,6 +1,7 @@
 package core.basesyntax.shop.implementation;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import core.basesyntax.handlers.Activity;
 import core.basesyntax.handlers.BalanceHandler;
@@ -33,5 +34,11 @@ public class ActivitieStrategyImplTest {
         Activity expected = activitieMap.get(ACTION);
         Activity actual = strategy.get(ACTION);
         assertEquals(expected.getClass(), actual.getClass());
+    }
+
+    @Test
+    public void getInvalidActivities_OK() {
+        Activity actual = strategy.get("X");
+        assertNull(actual);
     }
 }

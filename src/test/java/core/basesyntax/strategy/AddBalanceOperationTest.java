@@ -8,6 +8,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import java.util.Map;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddBalanceOperationTest {
@@ -24,6 +25,11 @@ public class AddBalanceOperationTest {
     private static final FruitOperationHandler operationHandler = new AddBalanceOperation();
     private static Map<Fruit, Integer> expected;
     private static Map<Fruit, Integer> actual;
+
+    @BeforeClass
+    public static void beforeClass() {
+        Storage.fruitsDataBase.clear();
+    }
 
     @Test
     public void apply_addCorrectCase_Ok() {

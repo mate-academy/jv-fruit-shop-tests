@@ -6,10 +6,16 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitRecordDtoParserImplTest {
-    private static final FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
+    private static FruitRecordDtoParser fruitRecordDtoParser;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitRecordDtoParser = new FruitRecordDtoParserImpl();
+    }
 
     @Test
     public void parse_correctLinesFromFile_Ok() {

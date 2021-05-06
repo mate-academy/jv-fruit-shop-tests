@@ -8,9 +8,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class AddOperationStrategyTest {
     private static FruitDao fruitDao;
@@ -20,9 +18,6 @@ public class AddOperationStrategyTest {
     private static FruitRecordDto secondFruitRecordDto;
     private static final int FIRST_POSITIVE = 345;
     private static final int SECOND_POSITIVE = 275;
-
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
     public static void setUp() {

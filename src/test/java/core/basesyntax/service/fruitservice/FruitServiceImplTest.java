@@ -18,16 +18,11 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FruitServiceImplTest {
-    private static final String fromFile = "src/test/resources/valid_instructions.csv";
+    private static final String FROM_FILE = "src/test/resources/valid_instructions.csv";
     private static FruitService fruitService;
-
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
     public static void setUp() {
@@ -44,7 +39,7 @@ public class FruitServiceImplTest {
         fruitOperationHandler.put(Operation.getOperationByLetter("p"), removeOperation);
         FruitRecordStrategy fruitRecordStrategy =
                 new FruitRecordStrategyImpl(fruitOperationHandler);
-        List<FruitRecordDto> dtos = parser.parse(fileReader.readAllLinesFromFile(fromFile));
+        List<FruitRecordDto> dtos = parser.parse(fileReader.readAllLinesFromFile(FROM_FILE));
         fruitService = new FruitServiceImpl(fruitRecordStrategy, fruitDao);
         fruitService.saveData(dtos);
     }

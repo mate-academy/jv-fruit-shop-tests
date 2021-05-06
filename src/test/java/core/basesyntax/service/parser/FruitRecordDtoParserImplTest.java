@@ -8,26 +8,23 @@ import core.basesyntax.service.fileservice.FileReaderForCsvImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FruitRecordDtoParserImplTest {
-    private static final String validCsvFile = "src/test/resources/valid_instructions.csv";
-    private static final String firstInvalidCsvFile = "src/test/resources/invalid_instructions.csv";
-    private static final String secondInvalidCsvFile =
+    private static final String VALID_CSV_FILE = "src/test/resources/valid_instructions.csv";
+    private static final String FIRST_INVALID_CSV_FILE =
+            "src/test/resources/invalid_instructions.csv";
+    private static final String SECOND_INVALID_CSV_FILE =
             "src/test/resources/invalid_instructions_2.csv";
-    private static final String thirdInvalidCsvFile =
+    private static final String THIRD_INVALID_CSV_FILE =
             "src/test/resources/invalid_instructions_3.csv";
-    private static final String fourthInvalidCsvFile =
+    private static final String FOURTH_INVALID_CSV_FILE =
             "src/test/resources/invalid_instructions_4.csv";
     private static final String emptyCsvFile = "src/test/resources/empty.csv";
+    private static final String invalidPathCsvFile = "src/test/resourcesempty.csv";
     private static final FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
     private static final FileReader fileReader = new FileReaderForCsvImpl();
     private static List<FruitRecordDto> expected;
-
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
     public static void setUp() {
@@ -46,32 +43,37 @@ public class FruitRecordDtoParserImplTest {
 
     @Test
     public void check_parserWithValidData_OK() {
-        List<FruitRecordDto> actual = parser.parse(fileReader.readAllLinesFromFile(validCsvFile));
+        List<FruitRecordDto> actual = parser.parse(fileReader.readAllLinesFromFile(VALID_CSV_FILE));
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void check_parserWithValidDataFirst_Not_OK() {
-        parser.parse(fileReader.readAllLinesFromFile(firstInvalidCsvFile));
+        parser.parse(fileReader.readAllLinesFromFile(FIRST_INVALID_CSV_FILE));
     }
 
     @Test(expected = RuntimeException.class)
     public void check_parserWithValidDataSecond_Not_OK() {
-        parser.parse(fileReader.readAllLinesFromFile(secondInvalidCsvFile));
+        parser.parse(fileReader.readAllLinesFromFile(SECOND_INVALID_CSV_FILE));
     }
 
     @Test(expected = RuntimeException.class)
     public void check_parserWithValidDataThird_Not_OK() {
-        parser.parse(fileReader.readAllLinesFromFile(thirdInvalidCsvFile));
+        parser.parse(fileReader.readAllLinesFromFile(THIRD_INVALID_CSV_FILE));
     }
 
     @Test(expected = NumberFormatException.class)
     public void check_parserWithValidDataFourth_Not_OK() {
-        parser.parse(fileReader.readAllLinesFromFile(fourthInvalidCsvFile));
+        parser.parse(fileReader.readAllLinesFromFile(FOURTH_INVALID_CSV_FILE));
     }
 
     @Test(expected = RuntimeException.class)
     public void check_parserWithEmptyFile_Not_OK() {
         parser.parse(fileReader.readAllLinesFromFile(emptyCsvFile));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void check_parserWrongPath_Not_OK() {
+        parser.parse(fileReader.readAllLinesFromFile(invalidPathCsvFile));
     }
 }

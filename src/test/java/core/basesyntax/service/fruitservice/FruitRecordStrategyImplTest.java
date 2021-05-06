@@ -10,17 +10,12 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FruitRecordStrategyImplTest {
     private static RecordHandler addOperation;
     private static FruitRecordStrategy fruitRecordStrategy;
     private static RecordHandler removeOperation;
-
-    @Rule
-    public ExpectedException expectedEx = ExpectedException.none();
     private RecordHandler actual;
 
     @BeforeClass

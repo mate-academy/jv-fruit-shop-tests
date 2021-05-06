@@ -43,7 +43,8 @@ public class FruitRecordDtoParserImplTest {
 
     @Test
     public void check_parserWithValidData_OK() {
-        List<FruitRecordDto> actual = PARSER.parse(FILE_READER.readAllLinesFromFile(VALID_CSV_FILE));
+        List<FruitRecordDto> actual =
+                PARSER.parse(FILE_READER.readAllLinesFromFile(VALID_CSV_FILE));
         Assert.assertEquals(expected, actual);
     }
 

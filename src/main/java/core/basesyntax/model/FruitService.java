@@ -11,5 +11,4 @@ public interface FruitService {
 
     String getReport();
 
-    void saveThis(List<FruitRecordDto> recordDto);
 }

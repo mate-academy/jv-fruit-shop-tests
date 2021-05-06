@@ -43,11 +43,6 @@ public class OperationTest {
 
     @Test(expected = RuntimeException.class)
     public void getOperationByShortName_incorrectOperation_null_NotOk() {
-        Operation.getOperationByShortName("null");
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void getOperationByShortName_incorrectOperation_number_NotOk() {
-        Operation.getOperationByShortName("9");
+        Operation.getOperationByShortName(null);
     }
 }

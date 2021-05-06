@@ -12,17 +12,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationTest {
-    private static final FruitRecordDto fruitRecordDtoCorrectInput =
+    private static final FruitRecordDto BANANA =
             new FruitRecordDto(Operation.PURCHASE,"banana", 10);
-    private static final FruitRecordDto fruitRecordDtoCorrectInput1 =
+    private static final FruitRecordDto CITRON =
             new FruitRecordDto(Operation.PURCHASE, "citron", 100);
-    private static final FruitRecordDto fruitRecordDtoFruitNameEmpty =
+    private static final FruitRecordDto EMPTY =
             new FruitRecordDto(Operation.PURCHASE, "", 100);
-    private static final FruitRecordDto fruitRecordDtoUnknownFruit =
+    private static final FruitRecordDto CHECK =
             new FruitRecordDto(Operation.PURCHASE,"check", 50);
-    private static final FruitRecordDto fruitRecordDtoNegativeQuantity =
+    private static final FruitRecordDto NEGATIVE_AMOUNT_APPLE =
             new FruitRecordDto(Operation.PURCHASE,"apple", -15);
-    private static final FruitRecordDto fruitRecordDtoOverQuantity =
+    private static final FruitRecordDto APPLE =
             new FruitRecordDto(Operation.PURCHASE,"apple", 75);
     private static final FruitOperationHandler operationHandler = new PurchaseOperation();
 
@@ -35,8 +35,8 @@ public class PurchaseOperationTest {
 
     @Test
     public void apply_purchaseCorrectInput_Ok() {
-        operationHandler.apply(fruitRecordDtoCorrectInput);
-        operationHandler.apply(fruitRecordDtoCorrectInput1);
+        operationHandler.apply(BANANA);
+        operationHandler.apply(CITRON);
 
         Map<Fruit, Integer> expected =
                 Map.of(new Fruit("banana"), 0,
@@ -47,27 +47,27 @@ public class PurchaseOperationTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void apply_purchaseFruitNameEmpty_Ok() {
-        operationHandler.apply(fruitRecordDtoFruitNameEmpty);
+    public void apply_purchaseFruitNameEmpty_NotOk() {
+        operationHandler.apply(EMPTY);
     }
 
     @Test(expected = RuntimeException.class)
-    public void apply_purchaseUnknownFruit_Ok() {
-        operationHandler.apply(fruitRecordDtoUnknownFruit);
+    public void apply_purchaseUnknownFruit_NotOk() {
+        operationHandler.apply(CHECK);
     }
 
     @Test(expected = RuntimeException.class)
-    public void apply_purchaseNegativeFruitQuantity_Ok() {
-        operationHandler.apply(fruitRecordDtoNegativeQuantity);
+    public void apply_purchaseNegativeFruitQuantity_NotOk() {
+        operationHandler.apply(NEGATIVE_AMOUNT_APPLE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void apply_purchaseMoreThenHave_Ok() {
-        operationHandler.apply(fruitRecordDtoOverQuantity);
+    public void apply_purchaseMoreThenHave_NotOk() {
+        operationHandler.apply(APPLE);
     }
 
     @After
     public void clear() {
-        Storage.fruitsDataBase.entrySet().clear();
+        Storage.fruitsDataBase.clear();
     }
 }

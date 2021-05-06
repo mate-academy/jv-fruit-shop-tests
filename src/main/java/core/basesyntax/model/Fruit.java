@@ -13,10 +13,6 @@ public class Fruit {
         return fruitName;
     }
 
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

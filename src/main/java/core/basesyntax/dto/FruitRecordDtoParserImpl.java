@@ -20,7 +20,7 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             String operationType = parseLine[OPERATION].trim();
             Operation operationTypeCorrect = Operation.getOperationByShortName(operationType);
             String fruitName = parseLine[FRUIT].trim();
-            Integer quantity;
+            int quantity;
             try {
                 quantity = Integer.parseInt(parseLine[QUANTITY].trim());
             } catch (NumberFormatException e) {

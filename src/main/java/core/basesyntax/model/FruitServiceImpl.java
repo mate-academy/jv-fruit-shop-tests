@@ -31,9 +31,4 @@ public class FruitServiceImpl implements FruitService {
         }
         return builder.toString().trim();
     }
-
-    @Override
-    public void saveThis(List<FruitRecordDto> recordDto) {
-    }
-
 }

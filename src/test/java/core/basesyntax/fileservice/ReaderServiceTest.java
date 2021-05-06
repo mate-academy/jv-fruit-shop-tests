@@ -3,10 +3,16 @@ package core.basesyntax.fileservice;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceTest {
-    private static final ReaderService READER_SERVICE = new ReaderServiceImpl();
+    private static ReaderService readerService;
+
+    @BeforeClass
+    public static void initializeObject() {
+        readerService = new ReaderServiceImpl();
+    }
 
     @Test
    public void readFromFile_correctInput_Ok() {
@@ -19,20 +25,18 @@ public class ReaderServiceTest {
                 "r,apple,10",
                 "p,apple,20",
                 "p,banana,5");
-        assertEquals(expected, READER_SERVICE.readFromFile(file));
+        assertEquals(expected, readerService.readFromFile(file));
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_wrongFilePath_Not_Ok() {
         String file = "src/main/resources/text1";
-        assertEquals(new RuntimeException("Can not read the file..."),
-                READER_SERVICE.readFromFile(file));
+        readerService.readFromFile(file);
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_notFilePath_Not_Ok() {
         String file = "what time is it?";
-        assertEquals(new RuntimeException("Can not read the file..."),
-                READER_SERVICE.readFromFile(file));
+        readerService.readFromFile(file);
     }
 }

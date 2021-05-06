@@ -8,6 +8,7 @@ public class WriteServiceImpl implements WriteService {
     @Override
     public void writeToFile(String report, String filePath) {
         File file = new File(filePath);
+        report += System.lineSeparator();
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {

@@ -40,8 +40,6 @@ public class StorageServiceImplTest {
         return typeHandlerMap;
     }
 
-
-
     @BeforeClass
     public static void setUp() {
         TypeStrategy typeStrategy = new TypeStrategyImpl(makeMap());

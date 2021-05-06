@@ -21,12 +21,11 @@ public class WriteServiceToCscImplTest {
     @Test
     public void fileWriteWithCorrectInput_Ok() {
         writeService.writeToFile(CORRECT_PATH, CONTENT);
-        String actual;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(CORRECT_PATH))) {
-            actual = bufferedReader.readLine();
+            String actual = bufferedReader.readLine();
+            assertEquals(CONTENT, actual);
         } catch (IOException e) {
             throw new RuntimeException();
         }
-        assertEquals(CONTENT, actual);
     }
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 public class OperationTest {
     private static Operation actual;
     private static Operation expected;
+    private static final String INVALID_OPERATION = "o";
 
     @Test
     public void getOperationFromString_balance_Ok() {
@@ -38,6 +39,6 @@ public class OperationTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void getOperationFromString_incorrectOperation_NotOk() {
-        Operation.getOperationFromString("o");
+        Operation.getOperationFromString(INVALID_OPERATION);
     }
 }

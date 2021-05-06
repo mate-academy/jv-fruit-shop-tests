@@ -12,14 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static FruitService fruitService;
-    private static final String expected = "fruit,quantity" + System.lineSeparator()
-            + "banana,10" + System.lineSeparator();
     private final List<FruitRecordDto> recordDtos = List.of(
             new FruitRecordDto(Operation.BALANCE, "banana", 10),
                 new FruitRecordDto(Operation.SUPPLY, "banana", 10),
@@ -28,7 +25,7 @@ public class FruitServiceImplTest {
 
     @Before
     public void clearDbBeforeStart() {
-        Storage.fruits.entrySet().clear();
+        Storage.fruits.clear();
     }
 
     @Before
@@ -61,13 +58,10 @@ public class FruitServiceImplTest {
 
     @Test
     public void getReport_Ok() {
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator();
         fruitService.addToStorage(recordDtos);
         String actual = fruitService.getReport();
         assertEquals(expected, actual);
-    }
-
-    @After
-    public void cleanMapDbBeforeStart() {
-        Storage.fruits.entrySet().clear();;
     }
 }

@@ -19,8 +19,11 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void writeToFileWithCorrectInput_Ok() {
-        Assert.assertNotNull(CORRECT_PATH, FRUIT_DATA);
+    public void writeCorrectInputFile_Ok() {
+        String report = "s,banana,100" + System.lineSeparator();
+        writerService.write(report,CORRECT_PATH);
+        Assert.assertNotNull(report);
+        Assert.assertNotNull(CORRECT_PATH);
     }
 
     @Test(expected = RuntimeException.class)

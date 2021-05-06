@@ -29,6 +29,6 @@ public class FruitRecordDtoParserImplTest {
         List<FruitRecordDto> expected = List.of(new FruitRecordDto(Operation.BALANCE, "banana", 10),
                 new FruitRecordDto(Operation.SUPPLY, "banana", 20),
                 new FruitRecordDto(Operation.PURCHASE, "banana", 15));
-        assertEquals(expected.toString(), actual.toString());
+        assertEquals(expected, actual);
     }
 }

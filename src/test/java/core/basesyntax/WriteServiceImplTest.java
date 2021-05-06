@@ -8,9 +8,7 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class WriteServiceImplTest {
     private static final String PATH = "src/test/resources/report.csv";
@@ -21,9 +19,6 @@ public class WriteServiceImplTest {
             + "mango,11"
             + "\n";
     private static WriteService writeService;
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void initialization() {

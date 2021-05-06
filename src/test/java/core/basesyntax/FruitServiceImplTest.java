@@ -27,16 +27,13 @@ public class FruitServiceImplTest {
     private static FruitService fruitService;
 
     @BeforeClass
-    public static void operationsInitialization() {
+    public static void initialization() {
+        fruitService = new FruitServiceImpl(operations);
+
         operations.put(BALANCE, new AddOperation());
         operations.put(Operation.PURCHASE, new SubtractOperation());
         operations.put(Operation.RETURN, new AddOperation());
         operations.put(Operation.SUPPLY, new AddOperation());
-    }
-
-    @BeforeClass
-    public static void initialization() {
-        fruitService = new FruitServiceImpl(operations);
     }
 
     @Test

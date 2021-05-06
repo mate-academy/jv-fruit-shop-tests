@@ -48,6 +48,13 @@ public class AddOperationTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void addOperation_negativeQuantity() {
+        Storage.fruits.put(new Fruit("apple"), 60);
+        fruitRecordDto = new FruitRecordDto(OperationType.SUPPLY, "apple", -40);
+        operation.apply(fruitRecordDto);
+    }
+
     @Test
     public void addOperation_fruitStorageAfterApply_OK() {
         final Fruit apple = new Fruit("apple");

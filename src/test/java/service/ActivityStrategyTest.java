@@ -18,21 +18,21 @@ import service.util.DataValidatorImpl;
 public class ActivityStrategyTest {
     private static FruitDao fruitDao;
     private static DataValidator dataValidator;
+    private static ActivityStrategy activityStrategy;
 
     @BeforeClass
     public static void beforeClass() {
         dataValidator = new DataValidatorImpl();
         fruitDao = new FruitDaoImpl();
-    }
-
-    @Test
-    public void get_putDataAndGetIt_OK() {
         Map<String, ActivityHandler> data = new HashMap<>();
         data.put("BalanceHandler", new Balance(fruitDao));
         data.put("PurchaseHandler", new Purchase(fruitDao, dataValidator));
         data.put("SupplyOrReturn", new SupplyOrReturn(fruitDao));
-        ActivityStrategy activityStrategy = new ActivityStrategyImpl(data);
+        activityStrategy = new ActivityStrategyImpl(data);
+    }
 
+    @Test
+    public void get_putDataAndGetIt_OK() {
         ActivityHandler actual = activityStrategy.get("BalanceHandler");
         ActivityHandler expected = new Balance(fruitDao);
         assertEquals(actual.getClass(), expected.getClass());

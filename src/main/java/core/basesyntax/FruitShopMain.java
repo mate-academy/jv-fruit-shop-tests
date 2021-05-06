@@ -13,7 +13,6 @@ import core.basesyntax.service.Operation;
 import core.basesyntax.service.impl.AddOperation;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.PurchaseOperation;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

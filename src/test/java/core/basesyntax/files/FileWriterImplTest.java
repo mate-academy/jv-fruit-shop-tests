@@ -1,17 +1,16 @@
 package core.basesyntax.files;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String TEST_REPORT_PATH = "src/test/java/resources/test_expectedReport.csv";
+    private static final String TEST_REPORT_PATH =
+            "src/test/java/resources/test_expectedReport.csv";
     private static final String REPORT_PATH = "src/test/java/resources/test_report.csv";
     private static final String EXPECTED_REPORT = "fruit,quantity"
             + System.lineSeparator()
@@ -19,7 +18,6 @@ public class FileWriterImplTest {
             + "apple,90" + System.lineSeparator();
     private static FileWriter fileWriter;
     private static FileReader fileReader;
-
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -37,12 +35,11 @@ public class FileWriterImplTest {
             throw new RuntimeException("We can't read from file", e);
         }
         List<String> actual = fileReader.readFromFile(TEST_REPORT_PATH);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void createReport_TestWithIncorrectPath_NotOk() {
         fileWriter.createReport(EXPECTED_REPORT, "");
     }
-
 }

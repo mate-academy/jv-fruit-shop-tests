@@ -1,14 +1,12 @@
 package core.basesyntax.files;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderImplTest {
     private static final String FILE_PATH = "src/test/java/resources/test_shop.csv";
@@ -29,7 +27,7 @@ public class FileReaderImplTest {
             throw new RuntimeException("We can't read from file");
         }
         List<String> actual = fileReader.readFromFile(FILE_PATH);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

@@ -6,7 +6,6 @@ import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Operation;
-
 import java.util.List;
 import java.util.Map;
 

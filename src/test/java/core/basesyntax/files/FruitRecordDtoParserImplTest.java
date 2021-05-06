@@ -2,12 +2,11 @@ package core.basesyntax.files;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.Operation;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FruitRecordDtoParserImplTest {
     private static FruitRecordDtoParser fruitRecordDtoParser;
@@ -26,12 +25,12 @@ public class FruitRecordDtoParserImplTest {
         fruitsList.add("p,banana,5");
         fruitsList.add("r,banana,5");
         fruitsList.add("s,banana,10");
-        List<FruitRecordDto> actual = fruitRecordDtoParser.parseStrings(fruitsList);
         List<FruitRecordDto> expected = new ArrayList<>();
         expected.add(new FruitRecordDto(Operation.BALANCE, "banana", 10));
         expected.add(new FruitRecordDto(Operation.PURCHASE, "banana", 5));
         expected.add(new FruitRecordDto(Operation.RETURN, "banana", 5));
         expected.add(new FruitRecordDto(Operation.SUPPLY, "banana", 10));
+        List<FruitRecordDto> actual = fruitRecordDtoParser.parseStrings(fruitsList);
         Assert.assertEquals(expected, actual);
     }
 

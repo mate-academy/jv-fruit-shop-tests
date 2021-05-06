@@ -7,12 +7,12 @@ import core.basesyntax.service.FruitOperation;
 import org.junit.Test;
 
 public class BalanceOperationTest {
+    private final FruitOperation balanceOperation = new BalanceOperation();
 
     @Test
     public void applyBalanceOperation_Ok() {
         FruitRecordDto fruitRecordDto = new FruitRecordDto(OperationType.BALANCE, "banana", 100);
         int expected = 100;
-        FruitOperation balanceOperation = new BalanceOperation();
         int actual = balanceOperation.apply(fruitRecordDto);
         assertEquals(expected, actual);
     }

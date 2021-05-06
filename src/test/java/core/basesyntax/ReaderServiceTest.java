@@ -17,9 +17,7 @@ public class ReaderServiceTest {
 
     @After
     public void cleanData() {
-        if (data != null) {
-            data.clear();
-        }
+        data.clear();
     }
 
     @Test

@@ -30,7 +30,13 @@ public class FruitShopServiceTest {
 
     @BeforeClass
     public static void setUp() {
+        Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(Operation.BALANCE, additionStrategy);
+        operationStrategyMap.put(Operation.SUPPLY, additionStrategy);
+        operationStrategyMap.put(Operation.RETURN, additionStrategy);
+        operationStrategyMap.put(Operation.PURCHASE, new ReduceStrategy());
         fillTransactionDto();
+        fruitService = new FruitShopServiceImpl(operationStrategyMap);
     }
 
     @Test
@@ -54,12 +60,6 @@ public class FruitShopServiceTest {
     }
 
     private static void fillTransactionDto() {
-        Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(Operation.BALANCE, additionStrategy);
-        operationStrategyMap.put(Operation.SUPPLY, additionStrategy);
-        operationStrategyMap.put(Operation.RETURN, additionStrategy);
-        operationStrategyMap.put(Operation.PURCHASE, new ReduceStrategy());
-
         expectedTransactionDtos = new ArrayList<>();
         expectedTransactionDtos.add(new FruitRecordDto(Operation.BALANCE,
                 new Fruit("banana"), 20));
@@ -77,6 +77,5 @@ public class FruitShopServiceTest {
                 new Fruit("banana"), 5));
         expectedTransactionDtos.add(new FruitRecordDto(Operation.SUPPLY,
                 new Fruit("banana"), 50));
-        fruitService = new FruitShopServiceImpl(operationStrategyMap);
     }
 }

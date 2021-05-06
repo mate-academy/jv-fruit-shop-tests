@@ -19,7 +19,7 @@ public class SetOperationTest {
     }
 
     @After
-    public void tearDown() {
+    public void afterEachTest() {
         Storage.fruitsContainer.clear();
     }
 
@@ -32,7 +32,7 @@ public class SetOperationTest {
     }
 
     @Test
-    public void apply_setCorrectRecord() {
+    public void apply_setTwoSameRecord_isOk() {
         FruitRecordDto fruitRecord = new FruitRecordDto(OperationType.BALANCE, "apple", 50);
         FruitRecordDto newFruitRecord = new FruitRecordDto(OperationType.BALANCE, "apple", 150);
         handler.apply(fruitRecord);

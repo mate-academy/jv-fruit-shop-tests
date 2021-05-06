@@ -17,7 +17,7 @@ public class ReportServiceImplTest {
     }
 
     @After
-    public void tearDown() {
+    public void afterEachTest() {
         Storage.fruitsContainer.clear();
     }
 

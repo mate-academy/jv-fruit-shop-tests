@@ -20,7 +20,7 @@ public class FruitRecordDtoParserImplTest {
     }
 
     @After
-    public void tearDown() {
+    public void afterEachTest() {
         testList.clear();
     }
 

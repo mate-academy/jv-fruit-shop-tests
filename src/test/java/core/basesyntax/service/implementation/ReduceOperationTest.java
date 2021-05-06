@@ -19,7 +19,7 @@ public class ReduceOperationTest {
     }
 
     @After
-    public void tearDown() {
+    public void afterEachTest() {
         Storage.fruitsContainer.clear();
     }
 

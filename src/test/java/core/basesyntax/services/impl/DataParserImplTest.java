@@ -18,7 +18,7 @@ public class DataParserImplTest {
     private static DataParser dataParser;
 
     @BeforeClass
-    public static void initialization() {
+    public static void beforeClass() {
         emptyList = new ArrayList<>();
         dataParser = new DataParserImpl();
         validList = List.of("type,fruit,quantity",

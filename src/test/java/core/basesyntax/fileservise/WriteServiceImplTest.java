@@ -25,13 +25,12 @@ public class WriteServiceImplTest {
         try {
             expectedList = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read file " + CORRECT_FILE_PATH, e);
+            throw new RuntimeException("Can't read file " + CORRECT_FILE_PATH, e);
         }
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(CORRECT_FILE_PATH));
         writer.write(report);
         writer.close();
-
         List<String> actualList;
         try {
             actualList = Files.readAllLines(Path.of(CORRECT_FILE_PATH));

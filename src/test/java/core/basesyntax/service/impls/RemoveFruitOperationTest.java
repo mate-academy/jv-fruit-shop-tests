@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class RemoveFruitOperationTest {
-    private int excepted;
+    private Integer excepted;
     private final DatabaseOperation removing = new RemoveFruitOperation();
 
     @Before
@@ -22,8 +22,9 @@ public class RemoveFruitOperationTest {
     @Test
     public void removing_isOk() {
         excepted = 5;
+        removing.apply(new FruitRecordDto("p", "banana", 5));
         assertEquals(excepted,
-                removing.apply(new FruitRecordDto("p", "banana", 5)));
+                Storage.shopDatabase.get("banana"));
     }
 
     @Test (expected = IllegalTransactionException.class)

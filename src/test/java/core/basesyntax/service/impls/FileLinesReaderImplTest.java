@@ -9,7 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileLinesReaderImplTest {
-
+    private static final String TEST_INPUT_FILE = "src/test/resources/test_input.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
     private final FileLinesReader testReader = new FileLinesReaderImpl();
     private List<String> expected;
 
@@ -21,12 +22,12 @@ public class FileLinesReaderImplTest {
     @Test
     public void reading_existingFile_isOk() {
         expected.add("b,banana,20");
-        assertEquals(expected, testReader.dataFromFile("src/test/resources/test_input.csv"));
+        assertEquals(expected, testReader.dataFromFile(TEST_INPUT_FILE));
     }
 
     @Test
     public void reading_emptyFile_isOk() {
-        assertEquals(expected, testReader.dataFromFile("src/test/resources/empty.csv"));
+        assertEquals(expected, testReader.dataFromFile(EMPTY_FILE));
     }
 
     @Test (expected = RuntimeException.class)

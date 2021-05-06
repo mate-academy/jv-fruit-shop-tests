@@ -10,22 +10,23 @@ import org.junit.After;
 import org.junit.Test;
 
 public class AddFruitOperationTest {
-    private int excepted;
+    private Integer excepted;
     private final DatabaseOperation addition = new AddFruitOperation();
 
     @Test
     public void addition_toEmptyDb_isOk() {
         excepted = 20;
-        assertEquals(excepted,
-                addition.apply(new FruitRecordDto("s", "banana", 20)));
+        addition.apply(new FruitRecordDto("s", "banana", 20));
+        assertEquals(excepted, Storage.shopDatabase.get("banana"));
     }
 
     @Test
     public void addition_isOk() {
         Storage.shopDatabase.put("banana", 10);
         excepted = 30;
+        addition.apply(new FruitRecordDto("s", "banana", 20));
         assertEquals(excepted,
-                addition.apply(new FruitRecordDto("s", "banana", 20)));
+                Storage.shopDatabase.get("banana"));
     }
 
     @Test (expected = IllegalTransactionException.class)

@@ -26,7 +26,7 @@ public class OperationIncreaseHandlerTest {
 
     @Test
     public void operationIncreaseHandlerTest_apply_Ok() {
-        saveToStorage();
+        fruitDao.add(new Fruit("banana"), 152);
         Fruit banana = new Fruit("banana");
         int expected = 160;
         int actual = operation.apply(8, banana);
@@ -37,10 +37,5 @@ public class OperationIncreaseHandlerTest {
     public void operationIncreaseHandlerTest_apply_NotOk() {
         Fruit banana = new Fruit("banana");
         int actual = operation.apply(-10, banana);
-    }
-
-    private static void saveToStorage() {
-        Fruit banana = new Fruit("banana");
-        fruitDao.add(banana, 152);
     }
 }

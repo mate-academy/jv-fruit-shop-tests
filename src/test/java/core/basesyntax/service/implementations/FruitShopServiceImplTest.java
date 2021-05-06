@@ -86,7 +86,7 @@ public class FruitShopServiceImplTest {
         Assert.assertEquals(expected, fruitDao.getAll());
     }
 
-    @Test (expected = InvalidQuantityException.class)
+    @Test(expected = InvalidQuantityException.class)
     public void fruitShopServiceImplTest_saveData_purchaseOperation_NotOk() {
         transactionList.add(new TransactionDto(OperationType.PURCHASE,
                 new Fruit("banana"), 25));

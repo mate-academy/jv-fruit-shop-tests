@@ -6,6 +6,7 @@ import core.basesyntax.exeptions.InvalidQuantityException;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,6 +20,11 @@ public class OperationDecreaseHandlerTest {
         operation = new OperationDecreaseHandler(fruitDao);
     }
 
+    @Before
+    public void setUp() {
+        fruitDao.add(new Fruit("banana"), 152);
+    }
+
     @After
     public void tearDown() {
         fruitDao.getAll().clear();
@@ -26,7 +32,6 @@ public class OperationDecreaseHandlerTest {
 
     @Test
     public void operationDecreaseHandlerTest_apply_Ok() {
-        saveToStorage();
         Fruit banana = new Fruit("banana");
         int excepted = 100;
         int actual = operation.apply(52, banana);
@@ -35,13 +40,7 @@ public class OperationDecreaseHandlerTest {
 
     @Test (expected = InvalidQuantityException.class)
     public void operationDecreaseHandlerTest_apply_NotOk() {
-        saveToStorage();
         Fruit banana = new Fruit("banana");
         operation.apply(200, banana);
-    }
-
-    private static void saveToStorage() {
-        Fruit banana = new Fruit("banana");
-        fruitDao.add(banana, 152);
     }
 }

@@ -4,22 +4,22 @@ import core.basesyntax.basesyntax.db.Storage;
 import core.basesyntax.basesyntax.model.Fruit;
 import core.basesyntax.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.basesyntax.service.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class SubtractOperationHandlerTest {
     private OperationHandler subtractOperationHandler = new SubtractOperationHandler();
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         Storage.fruits.put(new Fruit("banana"), 100);
         Storage.fruits.put(new Fruit("apple"), 100);
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         Storage.fruits.clear();
     }
 

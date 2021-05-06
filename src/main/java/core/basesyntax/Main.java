@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main {
+public class Main<T> {
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
@@ -48,4 +48,5 @@ public class Main {
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeData(report, "src/main/resources/output.csv");
     }
+
 }

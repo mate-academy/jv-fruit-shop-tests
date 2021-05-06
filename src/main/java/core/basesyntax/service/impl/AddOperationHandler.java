@@ -14,7 +14,12 @@ public class AddOperationHandler implements OperationHandler {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         int currentQuantity = fruitDao.getCurrentQuantity(fruitRecordDto);
-        int newQuantity = currentQuantity + fruitRecordDto.getQuantity();
+        int newQuantity;
+        try {
+            newQuantity = Math.addExact(currentQuantity, fruitRecordDto.getQuantity());
+        } catch (ArithmeticException e) {
+            throw new RuntimeException("Quantity can't be larger than " + Integer.MAX_VALUE, e);
+        }
         fruitDao.update(fruitRecordDto, newQuantity);
         return newQuantity;
     }

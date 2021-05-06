@@ -24,4 +24,32 @@ public class FruitRecordDto {
     public int getQuantity() {
         return quantity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        FruitRecordDto that = (FruitRecordDto) o;
+
+        if (quantity != that.quantity) {
+            return false;
+        }
+        if (operation != that.operation) {
+            return false;
+        }
+        return name != null ? name.equals(that.name) : that.name == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = operation != null ? operation.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + quantity;
+        return result;
+    }
 }

@@ -13,9 +13,13 @@ public class ParserServiceImpl implements ParserService {
     private static final int quantityIndex = 2;
     private static final int nameIndex = 1;
     private static final int MAX_VALUES_NUMBER = 3;
+    private static final String NULL_LINE = "Line can't be null";
 
     @Override
     public FruitRecordDto parse(String line) {
+        if (line == null) {
+            throw new InvalidDataFormatException(NULL_LINE);
+        }
         if (line.isEmpty()) {
             throw new InvalidDataFormatException(EMPTY_LINE);
         }

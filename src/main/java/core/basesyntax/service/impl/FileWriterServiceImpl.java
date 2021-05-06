@@ -8,6 +8,9 @@ import java.nio.file.Path;
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeData(String data, String filePath) {
+        if (filePath == null || data == null) {
+            throw new IllegalArgumentException("Data or file path can't be null!");
+        }
         Path path = Path.of(filePath);
         try {
             Files.writeString(path, data);

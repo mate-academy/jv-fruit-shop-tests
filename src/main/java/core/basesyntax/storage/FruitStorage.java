@@ -1,6 +1,6 @@
 package core.basesyntax.storage;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.dto.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 

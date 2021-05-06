@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax.model.dto;
 
 public final class Fruit {
     private final String name;

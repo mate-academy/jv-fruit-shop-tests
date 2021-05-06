@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exceptions.EmptyFileException;
 import core.basesyntax.service.interfaces.FileReaderService;
 import java.nio.file.Path;
 import java.util.List;
@@ -13,24 +14,32 @@ public class FileReaderServiceImplTest {
     private static final String NON_EXISTING_FILE =
             "src/test/resources/NonExistingTestFile.csv";
     private static final String VALID_INPUT_FILE = "src/test/resources/ValidInputFile.csv";
-    private static final List<String> VALID_LIST = List.of("type,fruit,quantity");
-    private static final String READ_EXCEPTION = "Can't read file";
+    private static final String EMPTY_FILE = "src/test/resources/EmptyFile.csv";
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
     private final FileReaderService fileReaderService = new FileReaderServiceImpl();
 
     @Test
-    public void readLines_Ok() {
+    public void readLines_validPath_Ok() {
         Path validFilePath = Path.of(VALID_INPUT_FILE);
+        List<String> expected = List.of("type,fruit,quantity");
         List<String> actual = fileReaderService.readLines(validFilePath);
-        assertEquals(VALID_LIST, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void readLines_NotOk() {
+    public void readLines_invalidPath_NotOk() {
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage(READ_EXCEPTION);
+        expectedException.expectMessage("Can't read file");
         Path invalidFilePath = Path.of(NON_EXISTING_FILE);
         fileReaderService.readLines(invalidFilePath);
+    }
+
+    @Test
+    public void readLines_emptyFile_notOk() {
+        expectedException.expect(EmptyFileException.class);
+        expectedException.expectMessage("is empty!");
+        Path emptyFilePath = Path.of(EMPTY_FILE);
+        fileReaderService.readLines(emptyFilePath);
     }
 }

@@ -29,8 +29,7 @@ public class StorageServiceImplTest {
     private static Fruit fruit;
     private static final OperationType BALANCE = OperationType.B;
 
-    @BeforeClass
-    public static void setUp() {
+    private static Map<OperationType, TypeHandler> makeMap() {
         Map<OperationType, TypeHandler> typeHandlerMap = new HashMap<>();
         FruitDao fruitDao = new FruitDaoImpl();
         QuantityValidator quantityValidator = new QuantityValidatorImpl();
@@ -38,7 +37,14 @@ public class StorageServiceImplTest {
         typeHandlerMap.put(OperationType.S, new SupplyHandler(fruitDao));
         typeHandlerMap.put(OperationType.P, new PurchaseHandler(fruitDao, quantityValidator));
         typeHandlerMap.put(OperationType.R, new ReturnHandler(fruitDao));
-        TypeStrategy typeStrategy = new TypeStrategyImpl(typeHandlerMap);
+        return typeHandlerMap;
+    }
+
+
+
+    @BeforeClass
+    public static void setUp() {
+        TypeStrategy typeStrategy = new TypeStrategyImpl(makeMap());
         fruitRecordList = new ArrayList<>();
         storageService = new StorageServiceImpl(
                 typeStrategy, new FruitDaoImpl());
@@ -53,7 +59,6 @@ public class StorageServiceImplTest {
         expected.add(fruit);
         List<Fruit> actual = storageService.saveData(fruitRecordList);
         assertEquals(expected, actual);
-
     }
 
     @Test

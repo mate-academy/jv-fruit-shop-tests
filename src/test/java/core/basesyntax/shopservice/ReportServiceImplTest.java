@@ -28,7 +28,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport() {
+    public void getReport_ValidData_Ok() {
         assertEquals(expected, new ReportServiceImpl(new FruitDaoImpl()).getReport());
     }
 }

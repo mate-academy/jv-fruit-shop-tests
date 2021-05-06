@@ -17,17 +17,26 @@ public class FileWriterServiceImplTest {
             = "src/test/resources/testFileWriterServiceExpected.csv";
 
     @Test
-    public void writeToFile_ExistingPath_Ok() throws IOException {
+    public void writeToFile_ExistingPath_Ok() {
         new FileWriterServiceImpl().writeToFile(data, filePathActual);
-        assertEquals(Files.readAllLines(Path.of(filePathExpected)),
-                Files.readAllLines(Path.of(filePathActual)));
+        try {
+            assertEquals(Files.readAllLines(Path.of(filePathExpected)),
+                    Files.readAllLines(Path.of(filePathActual)));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to path " + "\"" + filePathActual + "\"", e);
+        }
     }
 
     @Test
-    public void writeToFile_NonExistingFile_Ok() throws IOException {
+    public void writeToFile_NonExistingFile_Ok() {
         new FileWriterServiceImpl().writeToFile(data, invalidFilePathActual);
-        assertEquals(Files.readAllLines(Path.of(filePathExpected)),
-                Files.readAllLines(Path.of(invalidFilePathActual)));
+        try {
+            assertEquals(Files.readAllLines(Path.of(filePathExpected)),
+                    Files.readAllLines(Path.of(invalidFilePathActual)));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to path " + "\""
+                    + invalidFilePathActual + "\"", e);
+        }
     }
 
     @Test(expected = RuntimeException.class)

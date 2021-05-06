@@ -36,7 +36,7 @@ public class StoreServiceImplTest {
     }
 
     @Test
-    public void addToStorage() {
+    public void addToStorage_ValidData_Ok() {
         dataFromFile.add("type,fruit,quantity");
         dataFromFile.add("b,banana,60");
         dataFromFile.add("b,apple,60");

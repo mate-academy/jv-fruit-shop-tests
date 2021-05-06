@@ -25,7 +25,7 @@ public class CsvReadServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NotExistingFile_Ok() {
+    public void readFromFile_NotExistingFile_Bad() {
         new CsvReadServiceImpl().readFromFile("src/test/resources/FFile.csv");
     }
 }

@@ -17,7 +17,7 @@ public class ActivityStrategyImplTest {
     private final ActivityStrategy activityStrategy = new ActivityStrategyImpl(handlerMap);
 
     @BeforeClass
-    public static void fillMap() {
+    public static void setUp() {
         handlerMap.put(Activities.BALANCE, ADD_TO_STORAGE);
         handlerMap.put(Activities.PURCHASE, TAKE_FROM_STORAGE);
         handlerMap.put(Activities.RETURN, ADD_TO_STORAGE);

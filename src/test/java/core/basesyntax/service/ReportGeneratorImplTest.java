@@ -17,7 +17,6 @@ public class ReportGeneratorImplTest {
 
     @Test
     public void generateReport_emptyStorage_ok() {
-
         String actual = reportGenerator.generateReport();
         assertEquals(TITLE, actual);
     }
@@ -27,11 +26,11 @@ public class ReportGeneratorImplTest {
         Storage.getFruitStorage().put("paprika", 10);
         Storage.getFruitStorage().put("melon", 3);
         String actual = reportGenerator.generateReport();
-        String builder = TITLE
+        String expected = TITLE
                 + "paprika" + "," + 10
                 + System.lineSeparator()
                 + "melon" + "," + 3
                 + System.lineSeparator();
-        assertEquals(builder, actual);
+        assertEquals(expected, actual);
     }
 }

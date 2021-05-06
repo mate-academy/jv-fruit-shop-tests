@@ -9,7 +9,6 @@ public class ActivityParserImplTest {
 
     @Test
     public void parseActivity_balanceAction_ok() {
-
         Activities expected = Activities.BALANCE;
         Activities actual = activityParser.parseActivity("b,fruit,2");
         assertEquals(expected, actual);

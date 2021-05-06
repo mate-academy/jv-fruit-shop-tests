@@ -4,16 +4,22 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final FileReader FILE_READER = new FileReaderImpl();
+    private FileReader fileReader;
+
+    @Before
+    public void setUp() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     public void read_customInput_ok() {
         String fileName = "src/test/resources/TestInput.csv";
         List<String> expected = List.of("apple", "banana", "apricot");
-        List<String> actual = FILE_READER.read(fileName);
+        List<String> actual = fileReader.read(fileName);
         assertEquals(expected, actual);
     }
 
@@ -29,7 +35,7 @@ public class FileReaderImplTest {
                 "p,apple ,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = FILE_READER.read(fileName);
+        List<String> actual = fileReader.read(fileName);
         assertEquals(expected, actual);
     }
 
@@ -37,12 +43,12 @@ public class FileReaderImplTest {
     public void read_emptyEntry_ok() {
         String fileName = "src/test/resources/EmptyInput.csv";
         List<String> expected = new ArrayList<>();
-        List<String> actual = FILE_READER.read(fileName);
+        List<String> actual = fileReader.read(fileName);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void read_nonExistingFile_notOk() {
-        FILE_READER.read("src/main/test/java/Rnadom.txt");
+        fileReader.read("src/main/test/java/Rnadom.txt");
     }
 }

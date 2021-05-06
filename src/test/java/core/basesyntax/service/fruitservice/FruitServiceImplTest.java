@@ -60,7 +60,6 @@ public class FruitServiceImplTest {
                 + "apple,390" + System.lineSeparator();
         String actual = fruitService.createReport();
         Assert.assertNotNull(actual);
-        Assert.assertFalse(actual.isEmpty() || actual.isBlank());
         Assert.assertEquals(expected, actual);
     }
 }

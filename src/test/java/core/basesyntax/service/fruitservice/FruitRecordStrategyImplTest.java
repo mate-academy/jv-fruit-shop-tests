@@ -45,14 +45,17 @@ public class FruitRecordStrategyImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void check_getOperation_Not_OK() {
+    public void check_getOperationWithNull_Not_OK() {
         actual = fruitRecordStrategy.get(Operation.getOperationByLetter(null));
-        Assert.assertEquals(addOperation, actual);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void check_getInvalidOperation_Not_OK() {
         actual = fruitRecordStrategy.get(Operation.getOperationByLetter("x"));
-        Assert.assertEquals(addOperation, actual);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void check_getOperationWithEmptyLine_Not_OK() {
         actual = fruitRecordStrategy.get(Operation.getOperationByLetter(" "));
-        Assert.assertEquals(addOperation, actual);
     }
 }

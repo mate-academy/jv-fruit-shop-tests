@@ -9,8 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataValidationImplTest {
-    private static final List<String> EMPTY = new ArrayList<>();
-    private static final List<String> NOT_EMPTY = List.of("type,fruit,quantity",
+    private static final List<String> EMPTY_LIST = new ArrayList<>();
+    private static final List<String> NOT_EMPTY_LIST = List.of("type,fruit,quantity",
             "b,banana,20",
             "b,apple,100",
             "s,banana,100",
@@ -36,13 +36,13 @@ public class DataValidationImplTest {
     @Test
     public void checkListNotEmpty_notEmptyList_ok() {
         expected = true;
-        actual = dataValidation.checkListNotEmpty(NOT_EMPTY);
+        actual = dataValidation.checkListNotEmpty(NOT_EMPTY_LIST);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void checkListNotEmpty_emptyList_notOk() {
-        dataValidation.checkListNotEmpty(EMPTY);
+        dataValidation.checkListNotEmpty(EMPTY_LIST);
     }
 
     @Test

@@ -6,7 +6,6 @@ import core.basesyntax.database.Storage;
 import core.basesyntax.service.Product;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

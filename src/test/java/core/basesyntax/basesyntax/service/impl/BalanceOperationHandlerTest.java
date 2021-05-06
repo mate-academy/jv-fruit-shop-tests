@@ -3,15 +3,15 @@ package core.basesyntax.basesyntax.service.impl;
 import core.basesyntax.basesyntax.db.Storage;
 import core.basesyntax.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.basesyntax.service.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private OperationHandler balanceOperationHandler = new BalanceOperationHandler();
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         Storage.fruits.clear();
     }
 

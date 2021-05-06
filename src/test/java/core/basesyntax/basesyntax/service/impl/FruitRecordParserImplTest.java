@@ -7,23 +7,24 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitRecordParserImplTest {
     private static FruitRecordParser fruitRecordParser;
     private static final String INPUT_FILE
-            = "src/test/java/core/basesyntax/resources/inputData.csv";
+            = "src/test/java/core/basesyntax/basesyntax/resources/inputData.csv";
     private static final String INCORRECT_DATA
-            = "src/test/java/core/basesyntax/resources/incorrectData.csv";
+            = "src/test/java/core/basesyntax/basesyntax/resources/incorrectData.csv";
     private static final String INPUT_NEGATIVE_NUMBERS
-            = "src/test/java/core/basesyntax/resources/inputNegativeNumbers.csv";
+            = "src/test/java/core/basesyntax/basesyntax/resources/inputNegativeNumbers.csv";
     private static final String INCORRECT_FIELD_NUMBER
-            = "src/test/java/core/basesyntax/resources/incorrectFieldNumber";
+            = "src/test/java/core/basesyntax/basesyntax/resources/incorrectFieldNumber";
     private static final String INVALID_OPERATION
-            = "src/test/java/core/basesyntax/resources/invalidOperation";
+            = "src/test/java/core/basesyntax/basesyntax/resources/invalidOperation";
     private static final String INCORRECT_FORMAT
-            = "src/test/java/core/basesyntax/resources/incorrectFormat";
+            = "src/test/java/core/basesyntax/basesyntax/resources/incorrectFormat";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -38,6 +39,7 @@ public class FruitRecordParserImplTest {
         dtos.add(new FruitRecordDto("r", "banana", 50));
         dtos.add(new FruitRecordDto("p", "apple", 50));
         List<FruitRecordDto> actual = fruitRecordParser.parse(inputData);
+        Assert.assertEquals(dtos.toString(), actual.toString());
     }
 
     @Test(expected = RuntimeException.class)

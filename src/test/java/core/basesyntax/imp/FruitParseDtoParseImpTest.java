@@ -5,7 +5,9 @@ import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.FruitParse;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,19 +24,25 @@ public class FruitParseDtoParseImpTest {
         reader = new CustomFileReadImp();
     }
 
-    @Test
-    public void rightParse_ok() {
+    @Before
+    public void beforeEach() {
         listRecord.add(new FruitRecordDto("b", new Fruit("banana"), 20));
         listRecord.add(new FruitRecordDto("b", new Fruit("apple"), 100));
+    }
+
+    @After
+    public void afterEach() {
+        listRecord.clear();
+    }
+
+    @Test
+    public void rightParse_ok() {
         list = reader.readFromFile("src/test/right.file.csv");
         Assert.assertEquals(listRecord, parseFruit.parse(list));
     }
 
     @Test
     public void fileWithSpace_ok() {
-        listRecord.clear();
-        listRecord.add(new FruitRecordDto("b", new Fruit("banana"), 20));
-        listRecord.add(new FruitRecordDto("b", new Fruit("apple"), 100));
         list = reader.readFromFile("src/test/file.with.space.csv");
         Assert.assertEquals(listRecord, parseFruit.parse(list));
     }

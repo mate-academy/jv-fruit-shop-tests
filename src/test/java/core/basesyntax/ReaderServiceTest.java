@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ReaderServiceTest {
     private static final String PATH_TO_THREE_LINE_FILE = "src/test/resources/test2_3lines.csv";
     private static final String PATH_TO_ONE_LINE_FILE = "src/test/resources/test_read_1_line .csv";
-    private static List<String> data;
+    private static List<String> data = new ArrayList<>();
     private static final ServiceReader fileReader = new ServiceReaderImpl();
     private final List<String> expected = new ArrayList<>();
 

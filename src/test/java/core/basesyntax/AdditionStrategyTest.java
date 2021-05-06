@@ -13,14 +13,14 @@ import org.junit.Test;
 
 public class AdditionStrategyTest {
     private static OperationStrategy operationStrategy;
-    private static FruitRecordDto firstTest;
-    private static FruitRecordDto secondTest;
+    private static FruitRecordDto supplyTest;
+    private static FruitRecordDto balanceTest;
 
     @BeforeClass
     public static void setUp() {
-        firstTest = new FruitRecordDto(
+        supplyTest = new FruitRecordDto(
                 Operation.SUPPLY, new Fruit("banana"), 100);
-        secondTest = new FruitRecordDto(Operation.BALANCE, new Fruit("apple"), 50);
+        balanceTest = new FruitRecordDto(Operation.BALANCE, new Fruit("apple"), 50);
         operationStrategy = new AdditionStrategy();
     }
 
@@ -31,11 +31,11 @@ public class AdditionStrategyTest {
 
     @Test
     public void additionStrategy_ok() {
-        operationStrategy.apply(firstTest);
-        operationStrategy.apply(firstTest);
-        operationStrategy.apply(secondTest);
-        Integer bananaQuantity = Storage.fruits.get(firstTest.getFruit());
-        Integer appleQuantity = Storage.fruits.get(secondTest.getFruit());
+        operationStrategy.apply(supplyTest);
+        operationStrategy.apply(supplyTest);
+        operationStrategy.apply(balanceTest);
+        Integer bananaQuantity = Storage.fruits.get(supplyTest.getFruit());
+        Integer appleQuantity = Storage.fruits.get(balanceTest.getFruit());
         Assert.assertEquals(200, bananaQuantity.intValue());
         Assert.assertEquals(50, appleQuantity.intValue());
     }

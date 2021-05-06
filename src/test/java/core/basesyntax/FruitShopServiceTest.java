@@ -30,6 +30,30 @@ public class FruitShopServiceTest {
 
     @BeforeClass
     public static void setUp() {
+        fillTransactionDto();
+    }
+
+    @Test
+    public void applyOperationOnFruitsDto() {
+        Fruit apple = new Fruit("apple");
+        Fruit banana = new Fruit("banana");
+        fruitService.applyOperationOnFruitsDto(expectedTransactionDtos);
+        Assert.assertEquals(90, Storage.fruits.get(apple).intValue());
+        Assert.assertEquals(152, Storage.fruits.get(banana).intValue());
+    }
+
+    @Test
+    public void getReport_ok() {
+        Storage.fruits.put(new Fruit("orange"), 50);
+        Storage.fruits.put(new Fruit("cherry"), 20);
+        Map<Fruit, Integer> actual = fruitService.getFruits();
+        Map<Fruit, Integer> expected = new HashMap<>();
+        expected.put(new Fruit("orange"), 50);
+        expected.put(new Fruit("cherry"), 20);
+        Assert.assertEquals(expected, actual);
+    }
+
+    private static void fillTransactionDto() {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, additionStrategy);
         operationStrategyMap.put(Operation.SUPPLY, additionStrategy);
@@ -53,27 +77,6 @@ public class FruitShopServiceTest {
                 new Fruit("banana"), 5));
         expectedTransactionDtos.add(new FruitRecordDto(Operation.SUPPLY,
                 new Fruit("banana"), 50));
-
         fruitService = new FruitShopServiceImpl(operationStrategyMap);
-    }
-
-    @Test
-    public void applyOperationOnFruitsDto() {
-        Fruit apple = new Fruit("apple");
-        Fruit banana = new Fruit("banana");
-        fruitService.applyOperationOnFruitsDto(expectedTransactionDtos);
-        Assert.assertEquals(90, Storage.fruits.get(apple).intValue());
-        Assert.assertEquals(152, Storage.fruits.get(banana).intValue());
-    }
-
-    @Test
-    public void getReport_ok() {
-        Storage.fruits.put(new Fruit("orange"), 50);
-        Storage.fruits.put(new Fruit("cherry"), 20);
-        Map<Fruit, Integer> actual = fruitService.getFruits();
-        Map<Fruit, Integer> expected = new HashMap<>();
-        expected.put(new Fruit("orange"), 50);
-        expected.put(new Fruit("cherry"), 20);
-        Assert.assertEquals(expected, actual);
     }
 }

@@ -1,29 +1,29 @@
 package core.basesyntax.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class FruitDaoImplTest {
+public class FruitDaoImplTest {
     private static final int QUANTITY = 5;
     private static FruitDao fruitDao;
     private static Map<Fruit, Integer> expectedMap;
     private static Fruit apple;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         expectedMap = new HashMap<>();
         apple = new Fruit("apple");
-        Storage.fruits.put(apple, QUANTITY);
+        fruitDao.add(apple, QUANTITY);
     }
 
     @Test
@@ -50,13 +50,13 @@ class FruitDaoImplTest {
         assertNotEquals(expectedMap, Storage.fruits);
     }
 
-    @AfterEach
-    public void afterEach() {
+    @After
+    public void after() {
         expectedMap.clear();
     }
 
-    @AfterAll
-    public static void afterAll() {
+    @AfterClass
+    public static void afterClass() {
         Storage.fruits.clear();
     }
 }

@@ -1,10 +1,10 @@
 package core.basesyntax.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class OperationTest {
+public class OperationTest {
     @Test
     public void getType_checkBalanceOperation_isOk() {
         assertEquals("b", Operation.BALANCE.getType());

@@ -1,28 +1,27 @@
 package core.basesyntax.service.impls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReaderService;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ReaderServiceImplTest {
+public class ReaderServiceImplTest {
     private static final String ILLEGAL_PATH = "//ty/illegal.csv";
     private static final String TEST_PATH = "src/test/resources/testlog.csv";
     private static final List<String> EXPECTED
             = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
     private static ReaderService readerService;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         readerService = new ReaderServiceImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_illegalPath_RuntimeException() {
-        assertThrows(RuntimeException.class, () -> readerService.readFile(ILLEGAL_PATH));
+        readerService.readFile(ILLEGAL_PATH);
     }
 
     @Test

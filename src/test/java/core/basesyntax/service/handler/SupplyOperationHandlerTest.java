@@ -1,11 +1,11 @@
 package core.basesyntax.service.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class SupplyOperationHandlerTest {
+public class SupplyOperationHandlerTest {
     private static final int MORE_ZERO = 5;
     private static final int LESS_ZERO = -5;
     private static final int ZERO = 0;
@@ -13,8 +13,8 @@ class SupplyOperationHandlerTest {
     private int actual;
     private int expected;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         operationHandler = new SupplyOperationHandler();
     }
 

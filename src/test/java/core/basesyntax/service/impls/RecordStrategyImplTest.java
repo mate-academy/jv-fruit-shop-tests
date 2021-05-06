@@ -1,8 +1,7 @@
 package core.basesyntax.service.impls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.service.RecordStrategy;
 import core.basesyntax.service.handler.BalanceOperationHandler;
@@ -14,10 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class RecordStrategyImplTest {
+public class RecordStrategyImplTest {
     private static final String BALANCE_OPERATION = "b";
     private static final String SUPPLY_OPERATION = "s";
     private static final String PURCHASE_OPERATION = "p";
@@ -25,8 +24,8 @@ class RecordStrategyImplTest {
     private static final String UNKNOWN_OPERATION = "u";
     private static RecordStrategy recordStrategy;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(BALANCE_OPERATION, new BalanceOperationHandler());
         operationHandlerMap.put(SUPPLY_OPERATION, new SupplyOperationHandler());
@@ -69,9 +68,9 @@ class RecordStrategyImplTest {
                 balanceOperationHandler.get().getClass());
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void get_UnknownHandler_isNotOK() {
         Optional<OperationHandler> unknownOperationHandler = recordStrategy.get(UNKNOWN_OPERATION);
-        assertThrows(NoSuchElementException.class, unknownOperationHandler::get);
+        unknownOperationHandler.get();
     }
 }

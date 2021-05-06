@@ -1,17 +1,16 @@
 package core.basesyntax.service.impls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class WriterServiceImplTest {
+public class WriterServiceImplTest {
     private static final String ILLEGAL_PATH = "//ty/illegal.csv";
     private static final String TEST_PATH = "src/test/resources/testreport.csv";
     private static final String REPORT = "fruit,quantity" + System.lineSeparator()
@@ -20,15 +19,15 @@ class WriterServiceImplTest {
     private static WriterService writerService;
     private static List<String> expected;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         writerService = new WriterServiceImpl();
         expected = List.of("fruit,quantity", "banana,12", "apple,20");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_illegalPath_RuntimeException() {
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile(REPORT, ILLEGAL_PATH));
+        writerService.writeToFile(REPORT, ILLEGAL_PATH);
     }
 
     @Test

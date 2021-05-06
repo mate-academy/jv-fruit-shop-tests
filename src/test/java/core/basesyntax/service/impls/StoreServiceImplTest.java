@@ -1,8 +1,7 @@
 package core.basesyntax.service.impls;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -19,11 +18,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class StoreServiceImplTest {
+public class StoreServiceImplTest {
     private static final String EXPECTED_REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,12" + System.lineSeparator()
             + "apple,20";
@@ -32,8 +31,8 @@ class StoreServiceImplTest {
     private static final String UNKNOWN_OPERATION = "c,apple,1";
     private static StoreService storeService;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new BalanceOperationHandler());
         operationHandlerMap.put("s", new SupplyOperationHandler());
@@ -59,20 +58,20 @@ class StoreServiceImplTest {
         assertNotEquals(EXPECTED_REPORT, actualReport);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void processRecords_negativeQuantity_RuntimeException() {
         List<String> data = new ArrayList<>();
         data.add(LOG_TITLE);
         data.add(NEGATIVE_QUANTITY);
-        assertThrows(RuntimeException.class, () -> storeService.processRecords(data));
+        storeService.processRecords(data);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void processRecords_unknownOperation_RuntimeException() {
         List<String> data = new ArrayList<>();
         data.add(LOG_TITLE);
         data.add(UNKNOWN_OPERATION);
-        assertThrows(RuntimeException.class, () -> storeService.processRecords(data));
+        storeService.processRecords(data);
     }
 
     @Test
@@ -87,8 +86,8 @@ class StoreServiceImplTest {
         assertEquals(expected, Storage.fruits);
     }
 
-    @AfterEach
-    public void afterEach() {
+    @After
+    public void after() {
         Storage.fruits.clear();
     }
 }

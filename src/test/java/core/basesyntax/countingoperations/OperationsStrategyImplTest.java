@@ -31,12 +31,12 @@ public class OperationsStrategyImplTest {
     }
 
     @Test
-    public void getStrategyWithSupplyOperationType_notOk() {
+    public void getStrategyWithSupplyOperationType_ok() {
         transaction.setOperationType("s");
         transaction.setName("banana");
         transaction.setCount(50);
         Integer actual = operationsStrategy.getStrategy(transaction);
-        Integer expected = -50;
-        assertNotEquals(actual,expected);
+        Integer expected = 50;
+        assertEquals(actual,expected);
     }
 }

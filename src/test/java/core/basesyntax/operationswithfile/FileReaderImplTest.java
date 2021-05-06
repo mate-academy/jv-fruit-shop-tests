@@ -1,5 +1,6 @@
 package core.basesyntax.operationswithfile;
 
+import static org.junit.Assert.assertEquals;
 import java.util.List;
 import org.junit.Test;
 
@@ -16,5 +17,8 @@ public class FileReaderImplTest {
     @Test
     public void testReadFromFileWithTruePath_ok() {
         List<Transaction> operations = fileReader.getOperations(TRUE_PATH);
+        int actual = operations.size();
+        int expected = 8;
+        assertEquals(actual,expected);
     }
 }

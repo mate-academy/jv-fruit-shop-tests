@@ -53,7 +53,5 @@ public class CountOperationImplTest {
     public void getCount_withIllegalData() {
         transactionList.get(1).setCount(180);
         Map<String, Integer> actual = countOperation.getCount(balance, transactionList);
-
     }
-
 }

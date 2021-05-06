@@ -5,12 +5,11 @@ import core.basesyntax.storage.DataBase;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class PurchaseFruitHandlerImplTest {
-
+public class PurchaseFruitHandlerImplTest {
     private static final Map<String, Integer> db = new HashMap<>();
     private static final OperationType operationTypeSupply
             = core.basesyntax.service.impl.OperationType
@@ -40,8 +39,8 @@ class PurchaseFruitHandlerImplTest {
         addHandler.applyFruitToStorage(fruitRecordDtoBalance);
         int actual = purchaseHandler.applyFruitToStorage(fruitRecordDto);
         db.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
-        Assert.assertEquals(Optional.ofNullable(db.get(fruitRecordDto.getName())),
-                Optional.ofNullable(actual));
+        Assertions.assertEquals(Optional.ofNullable(db.get(fruitRecordDto.getName())),
+                Optional.of(actual));
         DataBase.getDataBase().remove(fruitRecordDto.getName());
     }
 }

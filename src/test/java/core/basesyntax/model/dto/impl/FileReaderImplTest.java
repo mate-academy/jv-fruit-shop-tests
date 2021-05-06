@@ -1,12 +1,11 @@
 package core.basesyntax.model.dto.impl;
 
 import java.util.List;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FileReaderImplTest {
-
+public class FileReaderImplTest {
     private static final String FILE_NAME = "Operations.csv";
     private static final String WRONG_FILE_NAME = "Invalid_fileName.csv";
     private static FileReaderImpl fileReader;
@@ -30,6 +29,7 @@ class FileReaderImplTest {
                 " s,    banana,     50");
         List<String> actual = fileReader.readFile(FILE_NAME);
 
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
+
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +40,6 @@ public class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException("File not found or can't be read", e);
         }
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
-
 }

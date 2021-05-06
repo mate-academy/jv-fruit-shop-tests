@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.storage.DataBase;
 import java.util.HashMap;
@@ -8,7 +10,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AddHandlerImplTest {
+public class AddHandlerImplTest {
     private static final Map<String, Integer> db = new HashMap<>();
     private static final OperationType operationType = core.basesyntax.service.impl.OperationType
             .getOperationType("s");
@@ -36,7 +38,7 @@ class AddHandlerImplTest {
     void addFruitToStorage_Ok() {
         db.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
         addHandler.applyFruitToStorage(fruitRecordDto);
-        Assert.assertEquals(db, DataBase.getDataBase());
+        assertEquals(db, DataBase.getDataBase());
         DataBase.getDataBase().remove(fruitRecordDto.getName());
     }
 }

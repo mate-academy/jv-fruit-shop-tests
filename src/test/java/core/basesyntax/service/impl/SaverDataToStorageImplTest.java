@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SaverDataToStorageImplTest {
+public class SaverDataToStorageImplTest {
     private static final Map<String, Integer> db = new HashMap<>();
     private static final OperationType operationType
             = core.basesyntax.service.impl.OperationType
@@ -50,7 +50,7 @@ class SaverDataToStorageImplTest {
         db.put(secondFruitRecordDto.getName(),db.get(fruitRecordDto.getName())
                 + secondFruitRecordDto.getAmount());
         saverDataToStorage.saveDataToStorage(fruitDtos, operationStrategyMap);
-        Assert.assertEquals(db, DataBase.getDataBase());
+        Assertions.assertEquals(db, DataBase.getDataBase());
         DataBase.getDataBase().remove(fruitRecordDto.getName());
     }
 }

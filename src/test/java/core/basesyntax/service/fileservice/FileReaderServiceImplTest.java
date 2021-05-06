@@ -9,9 +9,9 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static FileReaderService fileReaderService;
-    private static final String NOT_EXIST_FILEPATH = "src/test/resources/invalid.csv";
-    private static final String EMPTY_FILEPATH = "src/test/resources/empty.csv";
-    private static final String VALID_FILEPATH = "src/test/resources/valid.csv";
+    private static final String NOT_EXIST_FILE = "src/test/resources/invalid.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
+    private static final String VALID_FILE = "src/test/resources/valid.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -25,13 +25,13 @@ public class FileReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void fileReaderService_filePathNotExist_notOk() {
-        fileReaderService.read(NOT_EXIST_FILEPATH);
+        fileReaderService.read(NOT_EXIST_FILE);
     }
 
     @Test
     public void fileReaderService_readEmptyFile_isOk() {
         List<String> expected = new ArrayList<>();
-        List<String> actual = fileReaderService.read(EMPTY_FILEPATH);
+        List<String> actual = fileReaderService.read(EMPTY_FILE);
         assertEquals(expected, actual);
     }
 
@@ -40,7 +40,7 @@ public class FileReaderServiceImplTest {
         List<String> expected = List.of("b,banana,20",
                 "b,apple,100",
                 "s,banana,100");
-        List<String> actual = fileReaderService.read(VALID_FILEPATH);
+        List<String> actual = fileReaderService.read(VALID_FILE);
         assertEquals(expected, actual);
     }
 }

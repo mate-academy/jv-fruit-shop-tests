@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationTest {
-    private static final ProductDto VALID_PRODUCT = new ProductDto("r",
+    private static final ProductDto validProduct = new ProductDto("r",
             "TEST_FRUIT",
             123);
     private static final Operation addOperation = new AddOperation();
@@ -21,7 +21,7 @@ public class AddOperationTest {
 
     @Test
     public void validData_Ok() {
-        addOperation.apply(VALID_PRODUCT);
+        addOperation.apply(validProduct);
         int expected = 123;
         int actual = Storage.fruits.get("TEST_FRUIT");
         assertEquals(expected, actual);

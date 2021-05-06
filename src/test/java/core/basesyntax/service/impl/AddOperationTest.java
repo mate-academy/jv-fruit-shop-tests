@@ -24,7 +24,7 @@ public class AddOperationTest {
         operation = new AddOperation();
     }
 
-    @Before
+    @After
     public void cleanMapDbBeforeStart() {
         Storage.fruits.clear();
     }
@@ -69,10 +69,5 @@ public class AddOperationTest {
     @Test (expected = RuntimeException.class)
     public void apply_addIncorrectQuantity_NotOk() {
         operation.apply(fruitRecordDtoWithWrongQuantity);
-    }
-
-    @After
-    public void cleanMapDB() {
-        Storage.fruits.clear();
     }
 }

@@ -25,7 +25,7 @@ public class PurchaseOperationTest {
         operation = new PurchaseOperation();
     }
 
-    @Before
+    @After
     public void cleanMapDbBeforeStart() {
         Storage.fruits.clear();
     }
@@ -55,10 +55,5 @@ public class PurchaseOperationTest {
     @Test (expected = RuntimeException.class)
     public void apply_addIncorrectFruitName_NotOk() {
         operation.apply(fruitRecordDtoWithWrongFruitName);
-    }
-
-    @After
-    public void cleanMapDB() {
-        Storage.fruits.clear();
     }
 }

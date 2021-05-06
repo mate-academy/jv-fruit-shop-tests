@@ -8,10 +8,10 @@ public class ServiceWriterImpl implements ServiceWriter {
     private static final String COMMA = ",";
 
     @Override
-    public void writeData(String data, String filePath) {
-        Path path = Path.of(filePath);
+    public boolean writeData(String data, String filePath) {
         try {
-            Files.writeString(path, data);
+            Files.writeString(Path.of(filePath), data);
+            return true;
         } catch (IOException e) {
             throw new RuntimeException("Can't write to a file " + filePath, e);
         }

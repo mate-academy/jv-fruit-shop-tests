@@ -18,9 +18,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FruitServiceImplTest {
+public class FruitShopServiceTest {
     private static List<FruitRecordDto> expectedTransactionDtos;
     private static FruitShopService fruitService;
+    private static final AdditionStrategy additionStrategy = new AdditionStrategy();
 
     @After
     public void clear() {
@@ -30,9 +31,9 @@ public class FruitServiceImplTest {
     @BeforeClass
     public static void setUp() {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(Operation.BALANCE, new AdditionStrategy());
-        operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategy());
-        operationStrategyMap.put(Operation.RETURN, new AdditionStrategy());
+        operationStrategyMap.put(Operation.BALANCE, additionStrategy);
+        operationStrategyMap.put(Operation.SUPPLY, additionStrategy);
+        operationStrategyMap.put(Operation.RETURN, additionStrategy);
         operationStrategyMap.put(Operation.PURCHASE, new ReduceStrategy());
 
         expectedTransactionDtos = new ArrayList<>();

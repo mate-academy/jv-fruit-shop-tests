@@ -30,7 +30,7 @@ public class AdditionStrategyTest {
     }
 
     @Test
-    public void additionStategy_ok() {
+    public void additionStrategy_ok() {
         operationStrategy.apply(firstTest);
         operationStrategy.apply(firstTest);
         operationStrategy.apply(secondTest);

@@ -15,9 +15,13 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CsvFileWriterImplTest {
+public class ServiceWriterTest {
     private static final String EXPECTED_REPORT = "src/test/resources/expected_file.csv";
     private static final String PATH_TO_WRITE = "src/test/resources/file_to_write.csv";
+    private static final String WRONG_PATH_TO_FILE = "src/test/resourcess/file_to_write.csv";
+    private static final String DATA = "fruit,quantity" + System.lineSeparator()
+            + "banana,2" + System.lineSeparator()
+            + "apple,35" + System.lineSeparator();
     private static final Map<Fruit, Integer> fruits = new HashMap<>();
     private static final ServiceWriter fileWriter = new ServiceWriterImpl();
     private static final ReportCreator reportCreator = new ReportCreatorImpl();
@@ -41,5 +45,10 @@ public class CsvFileWriterImplTest {
         }
         Assert.assertEquals(actualData.size(), expectedData.size());
         Assert.assertEquals(expectedData, actualData);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void fileWriterCheck_NotOk() {
+        fileWriter.writeData(DATA, WRONG_PATH_TO_FILE);
     }
 }

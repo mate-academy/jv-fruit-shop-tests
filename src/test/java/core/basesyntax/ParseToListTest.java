@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ParseToListImplTest {
+public class ParseToListTest {
     private static final List<String> listOfStringsWithOneLine = new ArrayList<>();
     private static final List<String> listOfStringsWithThreeLines = new ArrayList<>();
     private static List<String> nullList;

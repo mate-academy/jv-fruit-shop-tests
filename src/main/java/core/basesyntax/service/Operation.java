@@ -12,10 +12,6 @@ public enum Operation {
         this.operation = operation;
     }
 
-    public String getOperation() {
-        return operation;
-    }
-
     public static Operation fromString(String operation) {
         for (Operation operations : Operation.values()) {
             if (operations.operation.equalsIgnoreCase(operation)) {

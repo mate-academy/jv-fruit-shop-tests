@@ -1,6 +1,7 @@
 package core.basesyntax.model.dto.impl;
 
 import core.basesyntax.storage.DataBase;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -13,12 +14,13 @@ public class ReportHandlerImplTest {
     private static ReportHandlerImpl reportHandler = new ReportHandlerImpl();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        map = DataBase.getDataBase();
+    public static void beforeClass() {
+        map = new HashMap<>();
     }
 
     @Test
     public void makeReportTest_Ok() {
+        map = DataBase.getDataBase();
         String expected = reportHandler.makeReport();
         StringBuilder report = new StringBuilder();
         String actual = "";

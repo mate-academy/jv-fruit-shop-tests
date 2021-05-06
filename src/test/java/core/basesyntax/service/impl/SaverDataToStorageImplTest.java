@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,11 @@ public class SaverDataToStorageImplTest {
                 = new FruitRecordDto(operationType, "apple", amount);
     }
 
+    @AfterEach
+    void tearDown() {
+        DataBase.getDataBase().remove(fruitRecordDto.getName());
+    }
+
     @Test
     void saveDataToStorageTest_Ok() {
         operationStrategyMap.put(OperationType.BALANCE, addHandler);
@@ -51,6 +57,5 @@ public class SaverDataToStorageImplTest {
                 + secondFruitRecordDto.getAmount());
         saverDataToStorage.saveDataToStorage(fruitDtos, operationStrategyMap);
         Assertions.assertEquals(db, DataBase.getDataBase());
-        DataBase.getDataBase().remove(fruitRecordDto.getName());
     }
 }

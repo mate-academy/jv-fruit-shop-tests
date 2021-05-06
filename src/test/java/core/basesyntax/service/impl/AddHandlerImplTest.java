@@ -6,7 +6,7 @@ import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.storage.DataBase;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,13 +25,17 @@ public class AddHandlerImplTest {
                 = new FruitRecordDto(operationType, "banana", amount);
     }
 
+    @AfterEach
+    void tearDown() {
+        DataBase.getDataBase().remove(fruitRecordDto.getName());
+    }
+
     @Test
     void getAmountOfFruitFromStorage_Ok() {
         db.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
         int expected = addHandler.applyFruitToStorage(fruitRecordDto);
         int actual = db.get(fruitRecordDto.getName());
-        Assert.assertEquals(expected, actual);
-        DataBase.getDataBase().remove(fruitRecordDto.getName());
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -39,6 +43,6 @@ public class AddHandlerImplTest {
         db.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
         addHandler.applyFruitToStorage(fruitRecordDto);
         assertEquals(db, DataBase.getDataBase());
-        DataBase.getDataBase().remove(fruitRecordDto.getName());
+
     }
 }

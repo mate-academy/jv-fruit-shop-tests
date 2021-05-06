@@ -5,8 +5,6 @@ import core.basesyntax.dto.Operation;
 import core.basesyntax.exceptions.AlreadyHaveItException;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class StorageServiceTest {
     private static final Fruit banana = new Fruit("banana");
 

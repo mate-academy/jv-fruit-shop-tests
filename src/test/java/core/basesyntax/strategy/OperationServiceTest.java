@@ -1,20 +1,17 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dto.Fruit;
 import core.basesyntax.dto.Operation;
-import core.basesyntax.exceptions.IllegalDataException;
 import core.basesyntax.exceptions.InvalidOperationException;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.OperationParser;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.StorageService;
-import org.junit.Test;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class OperationServiceTest {
     private static final DataReader dataReader = new DataReader();

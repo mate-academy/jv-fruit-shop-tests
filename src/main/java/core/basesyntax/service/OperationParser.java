@@ -4,7 +4,6 @@ import core.basesyntax.dto.Fruit;
 import core.basesyntax.dto.Operation;
 import core.basesyntax.exceptions.IllegalDataException;
 import core.basesyntax.exceptions.InvalidOperationException;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

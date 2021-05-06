@@ -4,12 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dto.Fruit;
 import core.basesyntax.dto.Operation;
+import core.basesyntax.exceptions.IllegalDataException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import core.basesyntax.exceptions.IllegalDataException;
-import org.junit.Before;
 import org.junit.Test;
 
 public class OperationParserTest {

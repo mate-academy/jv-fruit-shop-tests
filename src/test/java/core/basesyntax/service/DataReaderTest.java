@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import core.basesyntax.exceptions.IllegalDataException;
 import org.junit.Test;
 
 public class DataReaderTest {
@@ -22,7 +20,7 @@ public class DataReaderTest {
     }
 
     @Test(expected = IOException.class)
-    public void handleIOException_Ok() throws IOException {
+    public void handleIOexception_Ok() throws IOException {
         dataReader.readData("file.csv");
     }
 }

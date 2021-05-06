@@ -36,7 +36,7 @@ public class FruitAddTest {
 
     @Test(expected = RuntimeException.class)
     public void checkAddOperation_notOk() {
-        fruitRecordDto = new FruitRecordDto("r", fruit, -AMOUNT);
+        fruitRecordDto = new FruitRecordDto("b", fruit, -AMOUNT);
         fruitAdd.operation(fruitRecordDto);
     }
 }

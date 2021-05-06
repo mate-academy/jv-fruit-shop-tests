@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class SupplyActionHandlerTest {
     private static final int GREATER_ZERO_NUMBER = 5;
+    private static final int LESS_ZERO_NUMBER = -5;
     private static final int ZERO_NUMBER = 0;
     private static ActionHandler actionHandler;
     private int actual;
@@ -28,6 +29,13 @@ public class SupplyActionHandlerTest {
     public void calculateQuantity_withZeroOperand_returnsTrue() {
         actual = actionHandler.calculateQuantity(ZERO_NUMBER, GREATER_ZERO_NUMBER);
         expected = 5;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void calculateQuantity_lessThanZeroOperand_returnsTrue() {
+        actual = actionHandler.calculateQuantity(ZERO_NUMBER, LESS_ZERO_NUMBER);
+        expected = -5;
         assertEquals(expected, actual);
     }
 }

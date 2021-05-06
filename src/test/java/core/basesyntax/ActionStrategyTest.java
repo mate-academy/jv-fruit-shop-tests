@@ -27,12 +27,7 @@ public class ActionStrategyTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Map<String, ActionHandler> actionHandlerMap = new HashMap<>();
-        actionHandlerMap.put(BALANCE_ACTION_KEY, new BalanceActionHandler());
-        actionHandlerMap.put(SUPPLY_ACTION_KEY, new SupplyActionHandler());
-        actionHandlerMap.put(PURCHASE_ACTION_KEY, new PurchaseActionHandler());
-        actionHandlerMap.put(RETURN_ACTION_KEY, new ReturnActionHandler());
-        actionStrategy = new ActionStrategyImpl(actionHandlerMap);
+        actionStrategy = new ActionStrategyImpl(getActionHandlerMap());
     }
 
     @Test
@@ -82,5 +77,14 @@ public class ActionStrategyTest {
         Optional<ActionHandler> actionHandlerOptional =
                 actionStrategy.get(INVALID_ACTION_KEY);
         actionHandlerOptional.get();
+    }
+
+    private static Map<String, ActionHandler> getActionHandlerMap() {
+        Map<String, ActionHandler> actionHandlerMap = new HashMap<>();
+        actionHandlerMap.put(BALANCE_ACTION_KEY, new BalanceActionHandler());
+        actionHandlerMap.put(SUPPLY_ACTION_KEY, new SupplyActionHandler());
+        actionHandlerMap.put(PURCHASE_ACTION_KEY, new PurchaseActionHandler());
+        actionHandlerMap.put(RETURN_ACTION_KEY, new ReturnActionHandler());
+        return actionHandlerMap;
     }
 }

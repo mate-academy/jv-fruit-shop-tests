@@ -4,14 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReportService;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static final ReportService REPORT_SERVICE = new ReportServiceImpl();
+    private static ReportService REPORT_SERVICE;
 
-    @Before
-    public void cleanMapDB() {
+    @BeforeClass
+    public static void setUp() {
+        REPORT_SERVICE = new ReportServiceImpl();
         Storage.getFruits().clear();
     }
 

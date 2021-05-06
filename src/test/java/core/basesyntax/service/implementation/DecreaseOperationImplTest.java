@@ -10,25 +10,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DecreaseOperationImplTest {
-    private static final FruitOperationHandler DECREASE_OPERATION = new DecreaseOperationImpl();
-    private static final FruitRecordDto FRUIT_RECORD_DTO =
-            new FruitRecordDto(OperationType.PURCHASE,"apple", 25);
+    private static FruitOperationHandler fruitOperationHandler;
+    private static FruitRecordDto fruitRecordDto;
 
     @Before
-    public void cleanMapDB() {
+    public void setUp() {
+        fruitOperationHandler = new DecreaseOperationImpl();
+        fruitRecordDto = new FruitRecordDto(OperationType.PURCHASE,"apple", 25);
         Storage.getFruits().clear();
     }
 
     @Test
     public void testApply_withDecreaseOperation_isOk() {
         Storage.getFruits().put("apple", 50);
-        int newQuantity = DECREASE_OPERATION.apply(FRUIT_RECORD_DTO);
+        int newQuantity = fruitOperationHandler.apply(fruitRecordDto);
         assertEquals(25, newQuantity);
     }
 
     @Test(expected = RuntimeException.class)
     public void testApply_withDecreaseOperationAndNotEnoughFruits_isNotOk() {
         Storage.getFruits().put("apple", 10);
-        DECREASE_OPERATION.apply(FRUIT_RECORD_DTO);
+        fruitOperationHandler.apply(fruitRecordDto);
     }
 }

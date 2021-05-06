@@ -6,16 +6,18 @@ import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.OperationType;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SetOperationTest {
-    private static final FruitOperationHandler SET_OPERATION = new SetOperation();
-    private static final FruitRecordDto FRUIT_RECORD_DTO =
-            new FruitRecordDto(OperationType.BALANCE,"apple", 250);
+    private static FruitOperationHandler SET_OPERATION;
+    private static FruitRecordDto FRUIT_RECORD_DTO;
 
-    @Before
-    public void cleanMapDB() {
+    @BeforeClass
+    public static void setUp() {
+        SET_OPERATION = new SetOperation();
+        FRUIT_RECORD_DTO =
+                new FruitRecordDto(OperationType.BALANCE,"apple", 250);
         Storage.getFruits().clear();
     }
 

@@ -38,12 +38,15 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void saveDto() {
-        int expectedBananas = 20;
-        int expectedApples = 100;
+    public void saveDto_Ok() {
+        int expectedBananas = 120;
+        int expectedApples = 60;
         List<FruitRecordDto> dtos = List.of(
                 new FruitRecordDto(OperationType.BALANCE, "banana", 20),
-                new FruitRecordDto(OperationType.BALANCE, "apple", 100));
+                new FruitRecordDto(OperationType.BALANCE, "apple", 100),
+                new FruitRecordDto(OperationType.SUPPLY, "banana", 100),
+                new FruitRecordDto(OperationType.PURCHASE, "apple", 50),
+                new FruitRecordDto(OperationType.RETURN, "apple", 10));
         fruitService.saveDto(dtos);
         int actualBananas = Storage.fruits.get(new Fruit("banana"));
         int actualApples = Storage.fruits.get(new Fruit("apple"));

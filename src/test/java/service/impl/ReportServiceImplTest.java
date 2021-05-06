@@ -32,7 +32,6 @@ public class ReportServiceImplTest {
         fruitStrategy = new FruitStrategyImpl(fruitOperationsServiceMap);
         fruitService = new FruitServiceImpl(fruitStrategy);
         reportService = new ReportServiceImpl();
-
     }
 
     @Before

@@ -27,9 +27,7 @@ public class BalanceOperationTest {
     public void apply_balanceToStoreNotContainsFruit_Ok() {
         int expected = 20;
         int actual = balanceHandler.apply(
-                new FruitRecordDto(OperationType.BALANCE,
-                        "banana",
-                        20));
+                new FruitRecordDto(OperationType.BALANCE,"banana",20));
         assertEquals(expected, actual);
     }
 }

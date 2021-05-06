@@ -28,9 +28,7 @@ public class ReturnOperationTest {
     public void apply_returnToStoreNotContainsFruit_Ok() {
         int expected = 20;
         int actual = returnHandler.apply(
-                new FruitRecordDto(OperationType.RETURN,
-                        "banana",
-                        20));
+                new FruitRecordDto(OperationType.RETURN,"banana",20));
         assertEquals(expected, actual);
     }
 
@@ -39,9 +37,7 @@ public class ReturnOperationTest {
         Storage.fruits.put(new Fruit("banana"), 20);
         int expected = 40;
         int actual = returnHandler.apply(
-                new FruitRecordDto(OperationType.RETURN,
-                        "banana",
-                        20));
+                new FruitRecordDto(OperationType.RETURN,"banana",20));
         assertEquals(expected, actual);
     }
 }

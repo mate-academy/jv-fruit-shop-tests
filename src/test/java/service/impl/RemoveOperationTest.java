@@ -26,17 +26,13 @@ public class RemoveOperationTest {
 
     @Test(expected = RuntimeException.class)
     public void apply_removeFromStoreNotContainsFruit_RuntimeException() {
-        removeHandler.apply(new FruitRecordDto(OperationType.PURCHASE,
-                        "banana",
-                        20));
+        removeHandler.apply(new FruitRecordDto(OperationType.PURCHASE,"banana",20));
     }
 
     @Test(expected = RuntimeException.class)
     public void apply_removeFromStoreMoreThanAvailableFruit_RuntimeException() {
         Storage.fruits.put(new Fruit("banana"), 20);
-        removeHandler.apply(new FruitRecordDto(OperationType.PURCHASE,
-                        "banana",
-                        40));
+        removeHandler.apply(new FruitRecordDto(OperationType.PURCHASE,"banana", 40));
     }
 
     @Test
@@ -44,9 +40,7 @@ public class RemoveOperationTest {
         Storage.fruits.put(new Fruit("banana"), 20);
         int expected = 10;
         int actual = removeHandler.apply(
-                new FruitRecordDto(OperationType.PURCHASE,
-                        "banana",
-                        10));
+                new FruitRecordDto(OperationType.PURCHASE,"banana", 10));
         assertEquals(expected, actual);
     }
 }

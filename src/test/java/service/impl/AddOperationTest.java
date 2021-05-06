@@ -28,9 +28,7 @@ public class AddOperationTest {
     public void apply_addToStoreNotContainsFruit_Ok() {
         int expected = 20;
         int actual = addHandler.apply(
-                new FruitRecordDto(OperationType.SUPPLY,
-                        "banana",
-                        20));
+                new FruitRecordDto(OperationType.SUPPLY,"banana",20));
         assertEquals(expected, actual);
     }
 
@@ -39,9 +37,7 @@ public class AddOperationTest {
         Storage.fruits.put(new Fruit("banana"), 20);
         int expected = 40;
         int actual = addHandler.apply(
-                new FruitRecordDto(OperationType.SUPPLY,
-                        "banana",
-                        20));
+                new FruitRecordDto(OperationType.SUPPLY,"banana",20));
         assertEquals(expected, actual);
     }
 }

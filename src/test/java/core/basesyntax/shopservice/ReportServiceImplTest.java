@@ -22,13 +22,13 @@ public class ReportServiceImplTest {
         Storage.getFruits().put(new Fruit("mango"), 10);
     }
 
-    @AfterClass
-    public static void afterClass() {
-        Storage.getFruits().clear();
-    }
-
     @Test
     public void getReport_ValidData_Ok() {
         assertEquals(expected, new ReportServiceImpl(new FruitDaoImpl()).getReport());
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.getFruits().clear();
     }
 }

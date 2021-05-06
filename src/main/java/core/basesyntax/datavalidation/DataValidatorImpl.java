@@ -17,6 +17,9 @@ public class DataValidatorImpl implements DataValidator {
         if (dataFromFile.isEmpty()) {
             throw new RuntimeException("Source file is empty");
         }
+        if (dataFromFile.size() == 1 && dataFromFile.get(0).equals(DESCRIPTION_DATA)) {
+            throw new RuntimeException("No information about the fruits in resource file.");
+        }
         for (String s : dataFromFile) {
             if (DESCRIPTION_DATA.equals(s.trim())) {
                 return true;

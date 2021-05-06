@@ -5,11 +5,17 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataValidatorImplTest {
-    private static final DataValidator dataValidator = new DataValidatorImpl();
+    private static DataValidator dataValidator;
     private final List<String> dataList = new ArrayList<>();
+
+    @BeforeClass
+    public static void initialize() {
+        dataValidator = new DataValidatorImpl();
+    }
 
     @Before
     public void clearData() {
@@ -18,6 +24,7 @@ public class DataValidatorImplTest {
 
     @Test
     public void validateData_ValidData_Ok() {
+        dataList.add("type,fruit,quantity");
         dataList.add("b,apple,10");
         assertTrue(dataValidator.validateData(dataList));
     }
@@ -33,10 +40,10 @@ public class DataValidatorImplTest {
         assertTrue(dataValidator.validateData(dataList));
     }
 
-    @Test
-    public void validateData_ValidFirstLine_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void validateData_ValidOnlyFirstLineNoInfoAboutFruits_Bad() {
         dataList.add("type,fruit,quantity");
-        assertTrue(dataValidator.validateData(dataList));
+        dataValidator.validateData(dataList);
     }
 
     @Test

@@ -8,39 +8,39 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
-    private static final String data = "Hello" + System.lineSeparator()
+    private static final String DATA = "Hello" + System.lineSeparator()
             + "mates" + 47 + System.lineSeparator() + "!";
-    private static final String filePathActual
+    private static final String FILE_PATH_ACTUAL
             = "src/test/resources/testFileWriterServiceActual.csv";
-    private static final String invalidFilePathActual = "src/test/resources/InvalidPath.csv";
-    private static final String filePathExpected
+    private static final String INVALID_FILE_PATH_ACTUAL = "src/test/resources/InvalidPath.csv";
+    private static final String FILE_PATH_EXPECTED
             = "src/test/resources/testFileWriterServiceExpected.csv";
 
     @Test
     public void writeToFile_ExistingPath_Ok() {
-        new FileWriterServiceImpl().writeToFile(data, filePathActual);
+        new FileWriterServiceImpl().writeToFile(DATA, FILE_PATH_ACTUAL);
         try {
-            assertEquals(Files.readAllLines(Path.of(filePathExpected)),
-                    Files.readAllLines(Path.of(filePathActual)));
+            assertEquals(Files.readAllLines(Path.of(FILE_PATH_EXPECTED)),
+                    Files.readAllLines(Path.of(FILE_PATH_ACTUAL)));
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to path " + "\"" + filePathActual + "\"", e);
+            throw new RuntimeException("Can't write to path " + "\"" + FILE_PATH_ACTUAL + "\"", e);
         }
     }
 
     @Test
     public void writeToFile_NonExistingFile_Ok() {
-        new FileWriterServiceImpl().writeToFile(data, invalidFilePathActual);
+        new FileWriterServiceImpl().writeToFile(DATA, INVALID_FILE_PATH_ACTUAL);
         try {
-            assertEquals(Files.readAllLines(Path.of(filePathExpected)),
-                    Files.readAllLines(Path.of(invalidFilePathActual)));
+            assertEquals(Files.readAllLines(Path.of(FILE_PATH_EXPECTED)),
+                    Files.readAllLines(Path.of(INVALID_FILE_PATH_ACTUAL)));
         } catch (IOException e) {
             throw new RuntimeException("Can't write to path " + "\""
-                    + invalidFilePathActual + "\"", e);
+                    + INVALID_FILE_PATH_ACTUAL + "\"", e);
         }
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_EmptyPath_Bad() {
-        new FileWriterServiceImpl().writeToFile(data, "");
+        new FileWriterServiceImpl().writeToFile(DATA, "");
     }
 }

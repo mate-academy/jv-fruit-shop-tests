@@ -10,31 +10,31 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvParserTest {
-    private static final List<String> TEST_LIST = new ArrayList<>(3);
-    private static final List<String> INVALID_TEST_LIST = new ArrayList<>(4);
-    private static final List<ProductDto> PRODUCT_DTOS = new ArrayList<>(3);
+    private static final List<String> testList = new ArrayList<>(3);
+    private static final List<String> invalidTestList = new ArrayList<>(4);
+    private static final List<ProductDto> products = new ArrayList<>(3);
     private static final CsvParser csvParser = new CsvParser();
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        TEST_LIST.add("b,banana,20");
-        TEST_LIST.add("b,apple,100");
-        TEST_LIST.add("s,banana,100");
+        testList.add("b,banana,20");
+        testList.add("b,apple,100");
+        testList.add("s,banana,100");
 
-        INVALID_TEST_LIST.add("b,banana,20");
-        INVALID_TEST_LIST.add("b,apple,100");
-        INVALID_TEST_LIST.add("s,banana,100");
-        INVALID_TEST_LIST.add("s,banana,123,14,null");
+        invalidTestList.add("b,banana,20");
+        invalidTestList.add("b,apple,100");
+        invalidTestList.add("s,banana,100");
+        invalidTestList.add("s,banana,123,14,null");
 
-        PRODUCT_DTOS.add(new ProductDto("b", "banana", 20));
-        PRODUCT_DTOS.add(new ProductDto("b", "apple", 100));
-        PRODUCT_DTOS.add(new ProductDto("s", "banana", 100));
+        products.add(new ProductDto("b", "banana", 20));
+        products.add(new ProductDto("b", "apple", 100));
+        products.add(new ProductDto("s", "banana", 100));
     }
 
     @Test
     public void parseValidData_Ok() {
-        List<ProductDto> actual = csvParser.parse(TEST_LIST);
-        assertEquals(PRODUCT_DTOS, actual);
+        List<ProductDto> actual = csvParser.parse(testList);
+        assertEquals(products, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -49,7 +49,7 @@ public class CsvParserTest {
 
     @Test
     public void parseDataWithInvalidElement() {
-        List<ProductDto> actual = csvParser.parse(INVALID_TEST_LIST);
-        assertEquals(PRODUCT_DTOS, actual);
+        List<ProductDto> actual = csvParser.parse(invalidTestList);
+        assertEquals(products, actual);
     }
 }

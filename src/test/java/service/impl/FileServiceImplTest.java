@@ -30,11 +30,11 @@ public class FileServiceImplTest {
         fileService.readFromCsvFile(INVALID_INPUT_PATH);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void writeToCsvFile_Ok() {
-        String report = "banana,20" + System.lineSeparator() + "apple,30";
+        String report = "banana,20\napple,30\n";
+        fileService.writeToCsvFile(VALID_OUTPUT_PATH, report);
         List<String> expected = List.of("banana,20", "apple,30");
-        fileService.writeToCsvFile(report, VALID_OUTPUT_PATH);
         List<String> actual = fileService.readFromCsvFile(VALID_OUTPUT_PATH);
         assertEquals(expected, actual);
     }

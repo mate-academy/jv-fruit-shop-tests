@@ -94,6 +94,7 @@
                         <exclude>**/Fruit*</exclude>
                         <exclude>**/Storage*</exclude>
                         <exclude>**/OperationType*</exclude>
+                        <exclude>**/FruitDtoTransaction*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

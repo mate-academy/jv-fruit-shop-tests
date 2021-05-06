@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitBalanceServiceImplTest {
-    private OperationType type = OperationType.BALANCE;
+    private OperationType type;
     private FruitOperationService fruitBalanceService;
     private Fruit fruit;
 

@@ -8,13 +8,11 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.interfaces.FruitOperationService;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitSupplyServiceImplTest {
     private OperationType type;
-    private FruitOperationService fruitSupplyService = new FruitSupplyServiceImpl(
-            new FruitDaoImpl());
+    private FruitOperationService fruitSupplyService;
     private Fruit fruit;
 
     @Before

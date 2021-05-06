@@ -11,8 +11,8 @@ import org.junit.Test;
 public class FileWriterServiceImplTest {
     private static final String incorrectPath = "main/resources/fail";
     private static final String correctPath = "src/test/resources/writeTest.csv";
-    private  FileWriterService fileWriterService;
-    private  FileReaderService fileReaderService;
+    private FileWriterService fileWriterService;
+    private FileReaderService fileReaderService;
 
     @Before
     public void setUp() {

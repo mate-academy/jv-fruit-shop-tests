@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitPurchaseServiceImplTest {
-    private OperationType type = OperationType.PURCHASE;
+    private OperationType type;
     private FruitOperationService fruitPurchaseService;
     private Fruit fruit;
 

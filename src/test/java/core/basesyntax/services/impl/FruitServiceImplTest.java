@@ -18,8 +18,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private static final List<TransactionDto> validDtoList = new ArrayList<>();
-    private static final List<TransactionDto> emptyList = new ArrayList<>();
+    private static List<TransactionDto> validDtoList;
+    private static List<TransactionDto> emptyList;
     private static final String CHERRY = "cherry";
     private static final String BANANA = "banana";
     private static final Integer CHERRY_AMOUNT = 115;
@@ -30,6 +30,8 @@ public class FruitServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        validDtoList = new ArrayList<>();
+        emptyList = new ArrayList<>();
         Map<Operation, FruitStrategy> fruitStrategies = new HashMap<>();
         FruitStrategy fruitsIncreasing = new IncrementFruit();
         FruitStrategy fruitsDecreasing = new DecrementFruit();
@@ -52,7 +54,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void applyOperationOnFruitDto_TestWithValidData() {
+    public void applyOperationOnFruitDto_TestWithValidData_OK() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit(CHERRY), CHERRY_AMOUNT);
         expected.put(new Fruit(BANANA), BANANA_AMOUNT);
@@ -62,7 +64,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void applyOperationOnFruitDto_TestWithEmptyList() {
+    public void applyOperationOnFruitDto_TestWithEmptyList_OK() {
         Map<Fruit, Integer> expected = new HashMap<>();
         fruitService.applyOperation(emptyList);
         Map<Fruit, Integer> actual = FruitDataBase.getFruitMap();
@@ -70,7 +72,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void generateReport_TestWithValidData() {
+    public void generateReport_TestWithValidData_OK() {
         FruitDataBase.getFruitMap().put(new Fruit(CHERRY), CHERRY_AMOUNT);
         FruitDataBase.getFruitMap().put(new Fruit(BANANA), BANANA_AMOUNT);
         expected = "fruit,quantity" + System.lineSeparator()
@@ -81,7 +83,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void generateReport_TestDatabaseIsEmpty() {
+    public void generateReport_TestDatabaseIsEmpty_OK() {
         expected = "fruit,quantity";
         actual = fruitService.createReport();
         Assert.assertEquals(expected, actual);

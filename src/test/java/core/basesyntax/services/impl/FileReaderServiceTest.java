@@ -3,10 +3,16 @@ package core.basesyntax.services.impl;
 import core.basesyntax.services.FileReaderService;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceTest {
-    private final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    private static FileReaderService fileReaderService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     public void fileReaderServiceCustom_OK() {

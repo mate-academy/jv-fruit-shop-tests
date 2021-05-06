@@ -1,10 +1,16 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FileWriterService;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceTest {
-    private final FileWriterService fileWriterService = new FileWriterServiceImpl();
+    private static FileWriterService fileWriterService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileWriterService = new FileWriterServiceImpl();
+    }
 
     @Test
     public void fileWriterTestExistingPath_OK() {

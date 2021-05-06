@@ -11,7 +11,7 @@ public class OperationTest {
     }
 
     @Test
-    public void testValidOperation() {
+    public void testValidOperation_OK() {
         Operation actual;
         Operation expected;
 

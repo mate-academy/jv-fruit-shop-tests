@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileReaderImplTest {
     private static final String FILE_NAME = "Operations.csv";
-    private static final String WRONG_FILE_NAME = "Invalid_fileName.csv";
+    private static final String INVALID_FILE_NAME = "Invalid_fileName.csv";
     private static FileReaderImpl fileReader;
 
     @BeforeAll
@@ -30,6 +30,12 @@ public class FileReaderImplTest {
         List<String> actual = fileReader.readFile(FILE_NAME);
 
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void writeFileWithWrongInput_NotOk() {
+        Assertions.assertThrows(RuntimeException.class, () ->
+                fileReader.readFile(INVALID_FILE_NAME));
     }
 
 }

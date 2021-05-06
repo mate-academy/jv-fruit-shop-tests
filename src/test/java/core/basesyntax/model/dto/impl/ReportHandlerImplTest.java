@@ -1,8 +1,11 @@
 package core.basesyntax.model.dto.impl;
 
+import core.basesyntax.model.dto.FruitRecordDto;
+import core.basesyntax.service.impl.AddHandlerImpl;
+import core.basesyntax.service.impl.OperationType;
 import core.basesyntax.storage.DataBase;
-import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,30 +13,34 @@ import org.junit.Test;
 public class ReportHandlerImplTest {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String COLUMN_SEPARATOR = ",";
+    private static final AddHandlerImpl addHandler = new AddHandlerImpl();
     private static Map<String, Integer> map;
-    private static ReportHandlerImpl reportHandler = new ReportHandlerImpl();
+    private static ReportHandlerImpl reportHandler;
+    private static FruitRecordDto fruitRecordDto;
 
     @BeforeClass
     public static void beforeClass() {
-        map = new HashMap<>();
+        map = DataBase.getDataBase();
+        reportHandler = new ReportHandlerImpl(map);
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.getDataBase().remove(fruitRecordDto.getName());
     }
 
     @Test
     public void makeReportTest_Ok() {
-        map = DataBase.getDataBase();
-        String expected = reportHandler.makeReport();
-        StringBuilder report = new StringBuilder();
-        String actual = "";
-        report.append(FIRST_LINE)
-                .append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            report.append(entry.getKey())
-                    .append(COLUMN_SEPARATOR)
-                    .append(entry.getValue().toString())
-                    .append(System.lineSeparator());
-            actual = report.toString();
-        }
+        fruitRecordDto
+                = new FruitRecordDto(OperationType.BALANCE, "banana", 25);
+        addHandler.applyFruitToStorage(fruitRecordDto);
+        String actual = reportHandler.makeReport();
+        String expected = FIRST_LINE
+                + System.lineSeparator()
+                + fruitRecordDto.getName()
+                + COLUMN_SEPARATOR
+                + fruitRecordDto.getAmount()
+                + System.lineSeparator();
         Assert.assertEquals(expected, actual);
     }
-
 }

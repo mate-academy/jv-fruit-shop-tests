@@ -11,11 +11,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileWriterImplTest {
-    private static final String FILE_NAME = "Report.csv";
-    private static final String INVALID_FILE_NAME = "InvalidReport.csv";
+    private static final String FILE_NAME = "TestFile.csv";
     private static final String REPORT = "fruit,quantity"
             + System.lineSeparator()
-            + "banana,102"
+            + "banana,103"
             + System.lineSeparator()
             + "apple,90"
             + System.lineSeparator();

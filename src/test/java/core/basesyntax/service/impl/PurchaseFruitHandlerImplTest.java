@@ -12,25 +12,24 @@ import org.junit.jupiter.api.Test;
 
 public class PurchaseFruitHandlerImplTest {
     private static final Map<String, Integer> db = new HashMap<>();
-    private static final OperationType operationTypeSupply
-            = core.basesyntax.service.impl.OperationType
-            .getOperationType("s");
-    private static final OperationType operationTypeBalance
-            = core.basesyntax.service.impl.OperationType
-            .getOperationType("b");
-    private static final int balanceAmount = 50;
-    private static FruitRecordDto fruitRecordDtoBalance;
-    private static FruitRecordDto fruitRecordDto;
     private static final AddHandlerImpl addHandler = new AddHandlerImpl();
     private static final PurchaseFruitHandlerImpl purchaseHandler
             = new PurchaseFruitHandlerImpl();
-    private static int amount;
+    private static OperationType operationTypeSupply;
+    private static OperationType operationTypeBalance;
+    private static FruitRecordDto fruitRecordDtoBalance;
+    private static FruitRecordDto fruitRecordDto;
+    private static int balanceAmount;
+    private static int purchaseAmount;
 
     @BeforeEach
     void setUp() {
-        amount = 25;
+        operationTypeSupply = OperationType.SUPPLY;
+        operationTypeBalance = OperationType.BALANCE;
+        purchaseAmount = 25;
+        balanceAmount = 50;
         fruitRecordDto
-                = new FruitRecordDto(operationTypeSupply, "banana", amount);
+                = new FruitRecordDto(operationTypeSupply, "banana", purchaseAmount);
         fruitRecordDtoBalance =
                 new FruitRecordDto(operationTypeBalance, "banana", balanceAmount);
     }

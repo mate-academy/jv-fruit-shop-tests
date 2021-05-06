@@ -33,10 +33,11 @@ public class ValidatorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void amountInStorageTest_NotOk() {
+    public void amountInStorageNotEnoughTest_NotOk() {
         DataBase.getDataBase()
                 .put(NegativeAmountFruitRecordDto.getName(),
                         NegativeAmountFruitRecordDto.getAmount());
         validator.checkPurchaseValidation(testFruitRecordDto);
     }
+
 }

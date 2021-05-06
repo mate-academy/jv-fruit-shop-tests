@@ -20,11 +20,6 @@ public class FruitTest {
         melon = new Fruit("melon");
     }
 
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
-    }
-
     @Test
     public void storeFruits_isOk() {
         Storage.fruitStorage.put(banana, 20);
@@ -44,5 +39,10 @@ public class FruitTest {
         Storage.fruitStorage.remove(apple, 10);
         Assert.assertFalse(Optional.ofNullable(Storage.fruitStorage.get(melon)).isPresent());
         Assert.assertFalse(Storage.fruitStorage.isEmpty());
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

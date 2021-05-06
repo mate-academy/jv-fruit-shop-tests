@@ -36,11 +36,6 @@ public class FruitServiceImplTest {
                                             new FruitRecordDto());
     }
 
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
-    }
-
     @Test
     public void saveData_chooseCorrectStrategy_isOk() {
         Fruit apple = new Fruit("apple");
@@ -68,5 +63,10 @@ public class FruitServiceImplTest {
                 new FruitRecordDto(banana, 5, OperationType.RETURN),
                 new FruitRecordDto(banana, 30, OperationType.PURCHASE));
         fruitService.saveData(recordDto);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

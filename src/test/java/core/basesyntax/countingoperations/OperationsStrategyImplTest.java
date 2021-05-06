@@ -1,7 +1,6 @@
 package core.basesyntax.countingoperations;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.operationswithfile.Transaction;
 import org.junit.Test;

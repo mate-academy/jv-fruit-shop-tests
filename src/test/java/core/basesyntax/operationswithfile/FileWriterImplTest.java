@@ -1,6 +1,7 @@
 package core.basesyntax.operationswithfile;
 
 import static org.junit.Assert.assertEquals;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class FileWriterImplTest {
     public void testWriteToFileWithTruePath_ok() {
         fileWriter.getNewFile(balance,TRUE_PATH);
         boolean actual = false;
-        if (Files.exists(Path.of("src/test/java/resources/file.csv"))){
+        if (Files.exists(Path.of("src/test/java/resources/file.csv"))) {
             actual = true;
         }
         assertEquals(true,actual);

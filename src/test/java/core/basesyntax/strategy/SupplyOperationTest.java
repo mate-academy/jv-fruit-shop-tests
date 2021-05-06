@@ -63,7 +63,7 @@ public class SupplyOperationTest {
     }
 
     @After
-    public void tearDown() {
+    public void clear() {
         Storage.fruitsDataBase.clear();
     }
 }

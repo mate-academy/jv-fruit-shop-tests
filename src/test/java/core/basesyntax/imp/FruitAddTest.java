@@ -21,11 +21,6 @@ public class FruitAddTest {
         fruit = new Fruit(NAME_FRUIT);
     }
 
-    @After
-    public void afterEachTest() {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void checkAddOperation_ok() {
         fruitRecordDto = new FruitRecordDto("b", fruit, AMOUNT);
@@ -38,5 +33,10 @@ public class FruitAddTest {
     public void checkAddOperation_notOk() {
         fruitRecordDto = new FruitRecordDto("b", fruit, -AMOUNT);
         fruitAdd.operation(fruitRecordDto);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruits.clear();
     }
 }

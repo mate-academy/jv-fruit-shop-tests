@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class FruitDaoImplTest {
     @Test
     public void add_addApple_isOk() {
         expectedMap.put(apple, QUANTITY);
-        assertEquals(expectedMap, Storage.fruits);
+        assertEquals(expectedMap, fruitDao.getAll());
     }
 
     @Test
@@ -47,7 +46,7 @@ public class FruitDaoImplTest {
     @Test
     public void getAll_equalsMap_isOk() {
         expectedMap.put(new Fruit("banana"), QUANTITY);
-        assertNotEquals(expectedMap, Storage.fruits);
+        assertNotEquals(expectedMap,fruitDao.getAll());
     }
 
     @After
@@ -57,6 +56,6 @@ public class FruitDaoImplTest {
 
     @AfterClass
     public static void afterClass() {
-        Storage.fruits.clear();
+        fruitDao.getAll().clear();
     }
 }

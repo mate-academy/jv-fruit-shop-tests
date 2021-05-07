@@ -15,34 +15,34 @@ public class AddHandlerImplTest {
     private static Map<String, Integer> testDataBase;
     private static FruitRecordDto fruitRecordDto;
     private static OperationType operationType;
-    private static int amount;
 
     @BeforeEach
     void setUp() {
         testDataBase = new HashMap<>();
         operationType = OperationType.SUPPLY;
-        amount = 25;
+        int amount = 25;
         fruitRecordDto
                 = new FruitRecordDto(operationType, "banana", amount);
     }
 
     @AfterEach
     void tearDown() {
-        DataBase.getDataBase().remove(fruitRecordDto.getName());
+        DataBase.getDataBase().clear();
     }
 
     @Test
     void getAmountOfFruitFromStorage_Ok() {
         testDataBase.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
-        int expected = addHandler.applyFruitToStorage(fruitRecordDto);
-        int actual = testDataBase.get(fruitRecordDto.getName());
+        int expected = testDataBase.get(fruitRecordDto.getName());
+        int actual = addHandler.applyFruitToStorage(fruitRecordDto);
         assertEquals(expected, actual);
     }
 
     @Test
     void addFruitToStorage_Ok() {
         testDataBase.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
-        addHandler.applyFruitToStorage(fruitRecordDto);
-        assertEquals(testDataBase, DataBase.getDataBase());
+        int expected = testDataBase.get(fruitRecordDto.getName());
+        int actual = addHandler.applyFruitToStorage(fruitRecordDto);
+        assertEquals(expected, actual);
     }
 }

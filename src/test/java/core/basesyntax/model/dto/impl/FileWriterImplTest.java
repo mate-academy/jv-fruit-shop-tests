@@ -1,9 +1,8 @@
 package core.basesyntax.model.dto.impl;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -29,13 +28,9 @@ public class FileWriterImplTest {
     void fileWriteTest_Ok() {
         fileWriter.writeToFile(REPORT, FILE_NAME);
         List<String> expected = Arrays.asList(REPORT.split(System.lineSeparator()));
-        List<String> actual = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                actual.add(line);
-                line = bufferedReader.readLine();
-            }
+        List<String> actual;
+        try {
+            actual = Files.readAllLines(Path.of(FILE_NAME));
         } catch (IOException e) {
             throw new RuntimeException("File not found or can't be read", e);
         }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,21 +18,19 @@ public class SaverDataToStorageImplTest {
             = new SaverDataToStorageImpl();
     private static final ApplierFruitsToStorage purchaseHandler
             = new PurchaseFruitHandlerImpl();
-    private static Map<String, Integer> testDataBase;
-    private static OperationType operationType;
-    private static FruitRecordDto firstFruitRecordDto;
-    private static FruitRecordDto secondFruitRecordDto;
-    private static int firstFruitDtoAmount;
-    private static int secondFruitDtoAmount;
-    private static List<FruitRecordDto> fruitDtos;
-    private static Map<OperationType, ApplierFruitsToStorage> operationStrategyMap;
+    private Map<String, Integer> testDataBase;
+    private OperationType operationType;
+    private FruitRecordDto firstFruitRecordDto;
+    private FruitRecordDto secondFruitRecordDto;
+    private List<FruitRecordDto> fruitDtos;
+    private Map<OperationType, ApplierFruitsToStorage> operationStrategyMap;
 
     @BeforeEach
     void setUp() {
         testDataBase = new HashMap<>();
         operationType = OperationType.SUPPLY;
-        firstFruitDtoAmount = 30;
-        secondFruitDtoAmount = 50;
+        int firstFruitDtoAmount = 30;
+        int secondFruitDtoAmount = 50;
         firstFruitRecordDto = new FruitRecordDto(operationType, "apple", firstFruitDtoAmount);
         secondFruitRecordDto = new FruitRecordDto(OperationType
                 .SUPPLY, "apple", secondFruitDtoAmount);
@@ -41,9 +39,9 @@ public class SaverDataToStorageImplTest {
                 = new HashMap<>();
     }
 
-    @AfterEach
-    void tearDown() {
-        DataBase.getDataBase().remove(firstFruitRecordDto.getName());
+    @AfterAll
+    static void afterAll() {
+        DataBase.getDataBase().clear();
     }
 
     @Test

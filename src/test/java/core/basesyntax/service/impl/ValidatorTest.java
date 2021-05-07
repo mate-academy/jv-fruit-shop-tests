@@ -1,16 +1,22 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
+import core.basesyntax.service.ApplierFruitsToStorage;
 import core.basesyntax.storage.DataBase;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ValidatorTest {
+    private static final ApplierFruitsToStorage supplyFruits
+            = new AddHandlerImpl();
+    private static final ApplierFruitsToStorage purchaseFruits
+                    = new PurchaseFruitHandlerImpl();
+    private static final Validator validator = new Validator();
     private static FruitRecordDto NegativeAmountFruitRecordDto;
     private static FruitRecordDto testFruitRecordDto;
     private static FruitRecordDto fruitRecordDto;
-    private static final Validator validator = new Validator();
 
     @BeforeClass
     public static void beforeClass() {
@@ -24,7 +30,7 @@ public class ValidatorTest {
 
     @After
     public void tearDown() {
-        DataBase.getDataBase().remove(NegativeAmountFruitRecordDto.getName());
+        DataBase.getDataBase().clear();
     }
 
     @Test(expected = RuntimeException.class)
@@ -40,4 +46,12 @@ public class ValidatorTest {
         validator.checkPurchaseValidation(testFruitRecordDto);
     }
 
+    @Test
+    public void checkPurchaseValidationTest_Ok() {
+        supplyFruits.applyFruitToStorage(testFruitRecordDto);
+        validator.checkPurchaseValidation(fruitRecordDto);
+        int expected = 20;
+        int actual = purchaseFruits.applyFruitToStorage(fruitRecordDto);
+        Assert.assertEquals(expected, actual);
+    }
 }

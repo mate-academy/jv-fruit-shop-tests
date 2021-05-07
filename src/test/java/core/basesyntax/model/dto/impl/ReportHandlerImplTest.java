@@ -5,7 +5,7 @@ import core.basesyntax.service.impl.AddHandlerImpl;
 import core.basesyntax.service.impl.OperationType;
 import core.basesyntax.storage.DataBase;
 import java.util.Map;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,9 +24,9 @@ public class ReportHandlerImplTest {
         reportHandler = new ReportHandlerImpl(map);
     }
 
-    @After
-    public void tearDown() {
-        DataBase.getDataBase().remove(fruitRecordDto.getName());
+    @AfterClass
+    public static void afterClass() {
+        DataBase.getDataBase().clear();
     }
 
     @Test

@@ -4,7 +4,6 @@ import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.storage.DataBase;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,36 +14,38 @@ public class PurchaseFruitHandlerImplTest {
     private static final AddHandlerImpl addHandler = new AddHandlerImpl();
     private static final PurchaseFruitHandlerImpl purchaseHandler
             = new PurchaseFruitHandlerImpl();
-    private static OperationType operationTypeSupply;
-    private static OperationType operationTypeBalance;
-    private static FruitRecordDto fruitRecordDtoBalance;
-    private static FruitRecordDto fruitRecordDto;
-    private static int balanceAmount;
-    private static int purchaseAmount;
+    private FruitRecordDto fruitRecordDtoBalance;
+    private FruitRecordDto purchaseFruitRecordDto;
 
     @BeforeEach
     void setUp() {
-        operationTypeSupply = OperationType.SUPPLY;
-        operationTypeBalance = OperationType.BALANCE;
-        purchaseAmount = 25;
-        balanceAmount = 50;
-        fruitRecordDto
-                = new FruitRecordDto(operationTypeSupply, "banana", purchaseAmount);
+        OperationType operationTypeBalance = OperationType.BALANCE;
+        OperationType operationTypePurchase = OperationType.PURCHASE;
+        int purchaseAmount = 25;
+        int balanceAmount = 50;
+        purchaseFruitRecordDto
+                = new FruitRecordDto(operationTypePurchase, "banana", purchaseAmount);
         fruitRecordDtoBalance =
                 new FruitRecordDto(operationTypeBalance, "banana", balanceAmount);
     }
 
     @AfterEach
     void tearDown() {
-        DataBase.getDataBase().remove(fruitRecordDto.getName());
+        DataBase.getDataBase().clear();
     }
 
     @Test
-    void getAmountAfterPurchase_Ok() {
+    void getAmountAfterPurchaseTest_Ok() {
         addHandler.applyFruitToStorage(fruitRecordDtoBalance);
-        int actual = purchaseHandler.applyFruitToStorage(fruitRecordDto);
-        db.put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
-        Assertions.assertEquals(Optional.ofNullable(db.get(fruitRecordDto.getName())),
-                Optional.of(actual));
+        int actual = purchaseHandler.applyFruitToStorage(purchaseFruitRecordDto);
+        db.put(purchaseFruitRecordDto.getName(), purchaseFruitRecordDto.getAmount());
+        int expected = 25;
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    void noFruitInStorageTest_NotOk() {
+        Assertions.assertThrows(RuntimeException.class, () ->
+                purchaseHandler.applyFruitToStorage(purchaseFruitRecordDto));
     }
 }

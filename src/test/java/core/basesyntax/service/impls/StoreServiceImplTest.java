@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.RecordStrategy;
 import core.basesyntax.service.StoreService;
@@ -30,6 +29,7 @@ public class StoreServiceImplTest {
     private static final String NEGATIVE_QUANTITY = "p,apple,-1";
     private static final String UNKNOWN_OPERATION = "c,apple,1";
     private static StoreService storeService;
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeClass() {
@@ -39,21 +39,21 @@ public class StoreServiceImplTest {
         operationHandlerMap.put("p", new PurchaseOperationHandler());
         operationHandlerMap.put("r", new ReturnOperationHandler());
         RecordStrategy recordStrategy = new RecordStrategyImpl(operationHandlerMap);
-        FruitDao fruitDao = new FruitDaoImpl();
+        fruitDao = new FruitDaoImpl();
         storeService = new StoreServiceImpl(fruitDao, recordStrategy);
     }
 
     @Test
     public void createReport_addTwoFruit_isOk() {
-        Storage.fruits.put(new Fruit("banana"), 12);
-        Storage.fruits.put(new Fruit("apple"), 20);
+        fruitDao.add(new Fruit("banana"), 12);
+        fruitDao.add(new Fruit("apple"), 20);
         String actualReport = storeService.createReport();
         assertEquals(EXPECTED_REPORT, actualReport);
     }
 
     @Test
     public void createReport_notEqualsReports_isOK() {
-        Storage.fruits.put(new Fruit("banana"), 12);
+        fruitDao.add(new Fruit("banana"), 12);
         String actualReport = storeService.createReport();
         assertNotEquals(EXPECTED_REPORT, actualReport);
     }
@@ -76,18 +76,18 @@ public class StoreServiceImplTest {
 
     @Test
     public void processRecords_isOk() {
-        Storage.fruits.put(new Fruit("banana"), 2);
-        Storage.fruits.put(new Fruit("apple"), 10);
+        fruitDao.add(new Fruit("banana"), 2);
+        fruitDao.add(new Fruit("apple"), 10);
 
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 2);
         expected.put(new Fruit("apple"), 10);
 
-        assertEquals(expected, Storage.fruits);
+        assertEquals(expected, fruitDao.getAll());
     }
 
     @After
     public void after() {
-        Storage.fruits.clear();
+        fruitDao.getAll().clear();
     }
 }

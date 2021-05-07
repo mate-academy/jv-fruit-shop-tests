@@ -33,13 +33,13 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void get_existKey_isOk() {
+    public void get_existingKey_isOk() {
         int actual = fruitDao.get(apple);
         assertEquals(5, actual);
     }
 
     @Test
-    public void get_notExistKey_isOk() {
+    public void get_notExistentKey_isOk() {
         int actual = fruitDao.get(new Fruit("banana"));
         assertEquals(0, actual);
     }

@@ -16,7 +16,7 @@ public class FileReaderTest {
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20",
                 "p,banana,5", "s,banana,50");
         List<String> actual = fileReader.readDataFromFile(fileName);
-        assertEquals("You read incorrectly data from file!", expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

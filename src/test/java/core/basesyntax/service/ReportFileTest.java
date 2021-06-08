@@ -12,7 +12,6 @@ public class ReportFileTest {
 
     @Test
     public void writeDataToReportFile_Ok() {
-        reportFile.madeReportFile("database.csv");
         String actualResult = readFromFile("report.csv").trim();
         String expectedResult = "fruit,quantity" + System.lineSeparator()
                 + "banana,142" + System.lineSeparator() + "apple,90";

@@ -30,7 +30,7 @@ public class ReportFileTest {
         try {
             return Files.readString(Path.of("report.csv"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't correctly read data from file " + "report.csv", e);
+            throw new RuntimeException("Can't correctly read data from file " + "report.csv.", e);
         }
     }
 }

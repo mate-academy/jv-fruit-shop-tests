@@ -12,7 +12,7 @@ public class ReportFileTest {
 
     @Test
     public void writeDataToReportFile_Ok() {
-        String actualResult = readFromFile("report.csv").trim();
+        String actualResult = readFromFile().trim();
         String expectedResult = "fruit,quantity" + System.lineSeparator()
                 + "banana,142" + System.lineSeparator() + "apple,90";
         Assert.assertEquals(expectedResult, actualResult);
@@ -26,11 +26,11 @@ public class ReportFileTest {
         });
     }
 
-    private String readFromFile(String path) {
+    private String readFromFile() {
         try {
-            return Files.readString(Path.of(path));
+            return Files.readString(Path.of("report.csv"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't correctly read data from file " + path, e);
+            throw new RuntimeException("Can't correctly read data from file " + "report.csv", e);
         }
     }
 }

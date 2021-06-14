@@ -1,7 +1,5 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,32 +17,12 @@ public class ValidatorImplTest {
     @Test(expected = RuntimeException.class)
     public void validateWrongString_NotOk() {
         List<String> testList = Arrays.asList(",fruitName,10");
-        try {
-            validator.validate(testList);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Method have to throw RuntimeException.");
+        validator.validate(testList);
     }
-
-    /*@Test
-    public void validateNull() {
-        try {
-            validator.validate(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Method have to throw NullPointerException.");
-    }*/
 
     @Test(expected = RuntimeException.class)
     public void validateEmptyList() {
         List<String> emptyList = new ArrayList<>();
-        try {
-            validator.validate(emptyList);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Method have to throw RuntimeException.");
+        validator.validate(emptyList);
     }
 }

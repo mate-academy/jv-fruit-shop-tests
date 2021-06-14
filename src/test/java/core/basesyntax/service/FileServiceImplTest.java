@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,25 +9,10 @@ import org.junit.Test;
 public class FileServiceImplTest {
     private final FileService fileService = new FileServiceImpl();
 
-    /*@Test(expected = NullPointerException.class)
-    public void readFileByNullFileName() {
-        try {
-            fileService.readFile(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Method have to throw NullPointerException.");
-    }*/
-
     @Test(expected = RuntimeException.class)
     public void readFileByWrongFileName() {
         String fileName = "anotherFileName";
-        try {
-            fileService.readFile(fileName);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Method have to throw RuntimeException.");
+        fileService.readFile(fileName);
     }
 
     @Test
@@ -39,27 +23,11 @@ public class FileServiceImplTest {
         assertEquals(excepted,actual);
     }
 
-    /*@Test
-    public void writeFileByNullFileName() {
-        String content = "some content";
-        try {
-            fileService.writeFile(null, content);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Method have to throw NullPointerException.");
-    }*/
-
     @Test(expected = RuntimeException.class)
     public void writeFileByWrongFileName() {
         String content = "some content";
         String wrongFilename = "";
-        try {
-            fileService.writeFile(wrongFilename,content);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Method have to throw RuntimeException.");
+        fileService.writeFile(wrongFilename,content);
     }
 
     @Test

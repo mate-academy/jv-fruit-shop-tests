@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,50 +9,12 @@ import org.junit.Test;
 public class ReportBuilderImplTest {
     private final ReportBuilder report = new ReportBuilderImpl();
 
-    /*@Test
-    public void buildReportWithNull() {
-        try {
-            report.buildReport(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Method have to throw NullPointerException.");
-    }*/
-
-    /*@Test
-    public void buildReportWithEmptyList() {
-        List<String> emptyList = new ArrayList<>();
-        try {
-            report.buildReport(emptyList);
-        } catch (IndexOutOfBoundsException e) {
-            return;
-        }
-        fail("Method have to throw NullPointerException.");
-    }
-
-    @Test
-    public void buildReportWithListWithSizeOne() {
-        List<String> wrongDataList = new ArrayList<>();
-        wrongDataList.add("b,banana,10");
-        try {
-            report.buildReport(wrongDataList);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Method have to throw RunTimeException.");
-    }*/
-
-    @Test
+    @Test(expected = NullPointerException.class)
     public void buildReportWithWrongData_NotOk() {
         List<String> wrongDataList = new ArrayList<>();
         wrongDataList.add("Heading");
         wrongDataList.add("wrongOperation,banana,10");
-        try {
-            report.buildReport(wrongDataList);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Method have to throw NullPointerException.");
+        report.buildReport(wrongDataList);
     }
 
     @Test

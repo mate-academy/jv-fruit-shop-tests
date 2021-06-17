@@ -1,5 +1,5 @@
 b,banana,20
-b,apple,100
+b,apple,300
 s,banana,100
 p,banana,13
 r,apple,10

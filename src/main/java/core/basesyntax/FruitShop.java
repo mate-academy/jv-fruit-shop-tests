@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class FruitShop {
     public static void main(String[] args) {
-        final String fromFileNamePath = "src/main/java/resources/input.txt";
-        final String toFileNamePath = "src/main/java/resources/report.txt";
+        final String fromFileNamePath = "src/main/resources/input.txt";
+        final String toFileNamePath = "src/main/resources/report.txt";
 
         RecordDao recordDao = new RecordDaoImpl();
 

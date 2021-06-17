@@ -1,6 +1,7 @@
 package core.basesyntax.services.actions;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
+
 import java.util.Map;
 
 public class IncreaseHandler implements ActionHandler {

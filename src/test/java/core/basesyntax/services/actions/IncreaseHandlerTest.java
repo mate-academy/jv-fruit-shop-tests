@@ -1,6 +1,5 @@
 package core.basesyntax.services.actions;
 
-import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -25,9 +24,8 @@ public class IncreaseHandlerTest {
         String fruitName = "banana";
         int quantity = 40;
         ActionHandler actionHandler = actionHandlerMap.get(type);
-        actionHandler.getResultOfAction(fruitName, quantity);
-        int actual = Storage.fruits.get(fruitName);
-        int expected = 192;
-        Assert.assertEquals(actual, expected);
+        int actual = actionHandler.getResultOfAction(fruitName, quantity);
+        int expected = 40;
+        Assert.assertEquals(expected, actual);
     }
 }

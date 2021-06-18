@@ -1,5 +1,5 @@
 package core.basesyntax.services.actions;
 
 public interface ActionHandler {
-    void getResultOfAction(String fruitName, int fruitCount);
+    Integer getResultOfAction(String fruitName, int fruitCount);
 }

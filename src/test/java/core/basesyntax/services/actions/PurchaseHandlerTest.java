@@ -1,6 +1,5 @@
 package core.basesyntax.services.actions;
 
-import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -20,14 +19,13 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void testGetResultOfAction_Ok() {
+    public void purchaseHandler_Ok() {
         String type = "p";
-        String fruitName = "banana";
+        String fruitName = "apple";
         int quantity = 20;
+        int expected = -20;
         ActionHandler actionHandler = actionHandlerMap.get(type);
-        actionHandler.getResultOfAction(fruitName, quantity);
-        int actual = Storage.fruits.get(fruitName);
-        int expected = 172;
-        Assert.assertEquals(actual, expected);
+        int actual = actionHandler.getResultOfAction(fruitName, quantity);
+        Assert.assertEquals(expected, actual);
     }
 }

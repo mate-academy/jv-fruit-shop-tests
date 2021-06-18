@@ -4,7 +4,8 @@ import core.basesyntax.db.Storage;
 
 public class BalanceHandler implements ActionHandler {
     @Override
-    public void getResultOfAction(String fruitName, int fruitCount) {
+    public Integer getResultOfAction(String fruitName, int fruitCount) {
         Storage.fruits.put(fruitName, fruitCount);
+        return Storage.fruits.get(fruitName);
     }
 }

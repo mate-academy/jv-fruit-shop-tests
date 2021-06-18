@@ -33,11 +33,6 @@ public class FruitShopTest {
     }
 
     @Test
-    public void testMain_Ok() {
-        FruitShop.main(new String[0]);
-    }
-
-    @Test
     public void storeSendReport_Ok() {
         String fileName = "src/test/resources/output.txt";
         List<String> correctDataList = createListWithCorrectData();

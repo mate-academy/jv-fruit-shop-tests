@@ -1,5 +1,6 @@
 package core.basesyntax.services;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.services.actions.ActionHandler;
 import core.basesyntax.services.actions.BalanceHandler;
 import core.basesyntax.services.actions.IncreaseHandler;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +19,7 @@ public class ReportImplTest {
 
     @Before
     public void before() {
+        Storage.fruits.clear();
         Map<String, ActionHandler> actionHandlerMap = new HashMap<>();
         actionHandlerMap.put("b",new BalanceHandler());
         actionHandlerMap.put("s",new IncreaseHandler());
@@ -39,9 +42,14 @@ public class ReportImplTest {
         correctDataList.add("Heading");
         correctDataList.add("b,banana,10");
         correctDataList.add("b,someUnknownFruit,1");
-        String expectedReport = "fruit,quantity\nbanana,10\napple,290"
+        String expectedReport = "fruit,quantity\nbanana,10"
                 + "\nsomeUnknownFruit,1\n";
         String actualReport = report.createReport(correctDataList);
         Assert.assertEquals(expectedReport,actualReport);
+    }
+
+    @After
+    public void after() {
+        Storage.fruits.clear();
     }
 }

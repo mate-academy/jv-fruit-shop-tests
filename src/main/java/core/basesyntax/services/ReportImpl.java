@@ -26,8 +26,7 @@ public class ReportImpl implements Report {
                 String type = recordParts[0];
                 int quantity = Integer.parseInt(recordParts[2]);
                 ActionHandler actionHandler = actionType.get(type);
-                Map<String, Integer> storage = actionHandler.getResultOfAction(fruitName, quantity);
-                System.out.println(storage);
+                actionHandler.getResultOfAction(fruitName, quantity);
             }
         }
 

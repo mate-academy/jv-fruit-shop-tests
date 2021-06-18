@@ -1,11 +1,10 @@
 package core.basesyntax.dao;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class RecordDaoImplTest {
     private static RecordDao recordDao;
@@ -39,7 +38,7 @@ public class RecordDaoImplTest {
 
     @Test
     public void writeFileByCorrectName_Ok() {
-        String fileName = "output-test.txt";
+        String fileName = "src/test/resources/output-test.txt";
         String outputFileNewContent = "Hello\nWorld\nMates\n!";
         List<String> excepted = Arrays.asList("Hello","World","Mates","!");
         recordDao.writeFile(fileName, outputFileNewContent);

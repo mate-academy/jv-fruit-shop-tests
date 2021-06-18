@@ -8,18 +8,16 @@ import core.basesyntax.services.actions.ActionHandler;
 import core.basesyntax.services.actions.BalanceHandler;
 import core.basesyntax.services.actions.IncreaseHandler;
 import core.basesyntax.services.actions.PurchaseHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 public class FruitShop {
     public static void main(String[] args) {
         final String fromFileNamePath = "src/main/resources/input.txt";
         final String toFileNamePath = "src/main/resources/report.txt";
-
-        RecordDao recordDao = new RecordDaoImpl();
+        final RecordDao recordDao = new RecordDaoImpl();
+        FruitShop shop = new FruitShop();
 
         Map<String, ActionHandler> actionHandlerMap = new HashMap<>();
         actionHandlerMap.put("b",new BalanceHandler());
@@ -34,4 +32,3 @@ public class FruitShop {
         recordDao.writeFile(toFileNamePath, report);
     }
 }
-

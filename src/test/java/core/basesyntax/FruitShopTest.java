@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.RecordDao;
 import core.basesyntax.dao.RecordDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.services.Report;
 import core.basesyntax.services.ReportImpl;
 import core.basesyntax.services.actions.ActionHandler;
@@ -13,6 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,6 +35,11 @@ public class FruitShopTest {
     }
 
     @Test
+    public void checkMainFunction_Ok() {
+        FruitShop.main(new String[0]);
+    }
+
+    @Test
     public void storeSendReport_Ok() {
         String fileName = "src/test/resources/output.txt";
         List<String> correctDataList = createListWithCorrectData();
@@ -41,6 +48,11 @@ public class FruitShopTest {
         List<String> excepted = Arrays.asList("fruit,quantity", "banana,10", "someUnknownFruit,1");
         List<String> actual = recordDao.readFile(fileName);
         Assert.assertEquals(excepted,actual);
+    }
+
+    @After
+    public void after() {
+        Storage.fruits.clear();
     }
 
     List<String> createListWithCorrectData() {

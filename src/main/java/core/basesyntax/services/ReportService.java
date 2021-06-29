@@ -2,6 +2,6 @@ package core.basesyntax.services;
 
 import java.util.List;
 
-public interface Report {
+public interface ReportService {
     String createReport(List<String> records);
 }

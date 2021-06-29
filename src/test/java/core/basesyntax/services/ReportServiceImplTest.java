@@ -11,21 +11,21 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReportImplTest {
-    private static Report report;
+public class ReportServiceImplTest {
+    private static ReportService reportService;
 
-    @Before
-    public void before() {
+    @BeforeClass
+    public static void setUp() {
         Storage.fruits.clear();
         Map<String, ActionHandler> actionHandlerMap = new HashMap<>();
         actionHandlerMap.put("b",new BalanceHandler());
         actionHandlerMap.put("s",new IncreaseHandler());
         actionHandlerMap.put("p",new PurchaseHandler());
         actionHandlerMap.put("r",new IncreaseHandler());
-        report = new ReportImpl(actionHandlerMap);
+        reportService = new ReportServiceImpl(actionHandlerMap);
     }
 
     @Test(expected = NullPointerException.class)
@@ -33,7 +33,7 @@ public class ReportImplTest {
         List<String> wrongDataList = new ArrayList<>();
         wrongDataList.add("Ahahahah");
         wrongDataList.add("wrongData,strawberry,20");
-        report.createReport(wrongDataList);
+        reportService.createReport(wrongDataList);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class ReportImplTest {
         correctDataList.add("b,someUnknownFruit,1");
         String expectedReport = "fruit,quantity\nbanana,10"
                 + "\nsomeUnknownFruit,1\n";
-        String actualReport = report.createReport(correctDataList);
+        String actualReport = reportService.createReport(correctDataList);
         Assert.assertEquals(expectedReport,actualReport);
     }
 

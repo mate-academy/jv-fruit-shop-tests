@@ -10,25 +10,22 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-    private static Map<String, ActionHandler> actionHandlerMap;
+    private static ActionHandler actionHandler;
 
     @BeforeClass
     public static void setUp() {
         Storage.fruits.clear();
-        actionHandlerMap = new HashMap<>();
-        actionHandlerMap.put("b",new BalanceHandler());
+        actionHandler = new BalanceHandler();
     }
 
     @Test
     public void testGetResultOfAction_Ok() {
-        String type = "b";
         String fruitName = "banana";
         int quantity = 40;
-        ActionHandler actionHandler = actionHandlerMap.get(type);
         actionHandler.getResultOfAction(fruitName, quantity);
         Set<Map.Entry<String, Integer>> actual = Storage.fruits.entrySet();
 
-        final Map<String, Integer> fruitsTestStorage = new HashMap<>();
+        Map<String, Integer> fruitsTestStorage = new HashMap<>();
         fruitsTestStorage.put("banana", 40);
         Set<Map.Entry<String, Integer>> expected = fruitsTestStorage.entrySet();
         Assert.assertEquals(expected, actual);

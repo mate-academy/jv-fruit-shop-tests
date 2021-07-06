@@ -8,9 +8,7 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

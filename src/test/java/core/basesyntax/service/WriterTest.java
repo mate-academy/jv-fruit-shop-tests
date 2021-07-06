@@ -37,7 +37,7 @@ public class WriterTest {
     @Test (expected = RuntimeException.class)
     public void writeToFile_CantWriteToFile_NotOk() {
         String contentToWrite = "What kind of tea is hard to swallow?\nReality.";
-        String outputFile = "magic\nfile";
+        String outputFile = "/";
         writer.writeToFile(outputFile, contentToWrite);
     }
 }

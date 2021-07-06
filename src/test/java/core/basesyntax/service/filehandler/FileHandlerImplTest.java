@@ -12,8 +12,8 @@ import org.junit.Test;
 
 public class FileHandlerImplTest {
     private static FileHandler fileHandler;
-    private static final String TEST_INPUT_DATA = "src\\test\\resources\\testFile.txt";
-    private static final String TEST_OUTPUT_DATA = "src\\test\\resources\\testOutFile.txt";
+    private static final String TEST_INPUT_DATA = "src/test/resources/testFile.txt";
+    private static final String TEST_OUTPUT_DATA = "src/test/resources/testOutFile.txt";
 
     @BeforeClass
     public static void beforeClass() {

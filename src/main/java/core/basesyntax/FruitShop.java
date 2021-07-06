@@ -16,8 +16,8 @@ import core.basesyntax.service.validator.ValidatorImpl;
 import java.util.List;
 
 public class FruitShop {
-    private static final String INPUT_DATA = "src\\main\\resources\\inputFile.txt";
-    private static final String OUTPUT_DATA = "src\\main\\resources\\output.txt";
+    private static final String INPUT_DATA = "src/main/resources/inputFile.txt";
+    private static final String OUTPUT_DATA = "src/main/resources/output.txt";
 
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandlerImpl();

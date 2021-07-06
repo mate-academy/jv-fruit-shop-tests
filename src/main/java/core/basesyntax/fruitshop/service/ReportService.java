@@ -1,0 +1,10 @@
+package core.basesyntax.fruitshop.service;
+
+import core.basesyntax.fruitshop.model.Fruit;
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Set;
+
+public interface ReportService {
+    String generateReport(Set<Map.Entry<Fruit, BigDecimal>> report);
+}

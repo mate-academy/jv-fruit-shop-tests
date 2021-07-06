@@ -10,6 +10,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
+    private static final Fruit APPLE = new Fruit("apple");
+    private static final Fruit BANANA = new Fruit("banana");
+    private static final Fruit ORANGE = new Fruit("orange");
+    private static final Fruit PINEAPPLE = new Fruit("pineapple");
     private static FruitService fruitService;
 
     @BeforeClass
@@ -24,12 +28,12 @@ public class FruitServiceTest {
 
     @Test
     public void testGetReport() {
-        Storage.storage.put(new Fruit("apple"), 20);
-        Storage.storage.put(new Fruit("banana"), 10);
-        Storage.storage.put(new Fruit("pineapple"), 230);
-        Storage.storage.put(new Fruit("fruit"), 0);
+        Storage.storage.put(APPLE, 20);
+        Storage.storage.put(BANANA, 10);
+        Storage.storage.put(PINEAPPLE, 230);
+        Storage.storage.put(ORANGE, 0);
 
-        String expected = "fruit,quantity\napple,20\nbanana,10\npineapple,230\nfruit,0";
+        String expected = "fruit,quantity\napple,20\nbanana,10\npineapple,230\norange,0";
         List<String> expectedSplited = List.of(expected.split("\n"));
         String actual = fruitService.getReport();
         List<String> actualSplited = List.of(actual.split("\n"));

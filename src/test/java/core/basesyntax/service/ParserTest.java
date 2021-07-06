@@ -8,6 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
+    private static final String PURCHASE = "p";
+    private static final Fruit BANANA = new Fruit("banana");
     private static Parser parser;
 
     @BeforeClass
@@ -18,7 +20,7 @@ public class ParserTest {
     @Test
     public void parseLine_ValidLine_Ok() {
         String lineToParse = "p,banana,2019";
-        Transaction expected = new Transaction("p", new Fruit("banana"), 2019);
+        Transaction expected = new Transaction(PURCHASE, BANANA, 2019);
         Transaction actual = parser.parseLine(lineToParse);
         assertEquals(expected.getFruit(), actual.getFruit());
         assertEquals(expected.getOperation(), actual.getOperation());

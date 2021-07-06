@@ -4,7 +4,6 @@ import core.basesyntax.service.WriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 
 public class WriterServiceImpl implements WriterService {
     @Override

@@ -4,7 +4,6 @@ import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {

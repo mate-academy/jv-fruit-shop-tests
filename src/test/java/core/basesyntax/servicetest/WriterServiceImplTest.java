@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

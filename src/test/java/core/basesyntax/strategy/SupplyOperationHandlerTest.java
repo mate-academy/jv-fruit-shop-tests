@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,21 +26,16 @@ public class SupplyOperationHandlerTest {
     public void supplyHandler_addTransaction_Ok() {
         FruitDto fruitDto = new FruitDto("s", "banana", 84);
         handler.apply(fruitDto);
-        int actual = Storage.storage.get(banana);
         int expected = 92;
+        int actual = Storage.storage.get(banana);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void supplyHandler_chekReturnValue_Ok() {
-        FruitDto fruitDto = new FruitDto("s", "apple", 84);
+        FruitDto fruitDto = new FruitDto("s", "apple", 1);
+        int expected = 36;
         int actual = handler.apply(fruitDto);
-        int expected = 119;
         Assert.assertEquals(expected, actual);
-    }
-
-    @After
-    public void erase() {
-        Storage.storage.clear();
     }
 }

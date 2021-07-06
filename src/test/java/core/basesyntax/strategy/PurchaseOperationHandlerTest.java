@@ -26,8 +26,8 @@ public class PurchaseOperationHandlerTest {
     public void purchaseHandler_addTransactionWithEnoughQuantity_Ok() {
         FruitDto fruitDto = new FruitDto("p", "apple", 1);
         handler.apply(fruitDto);
-        int actual = Storage.storage.get(apple);
         int expected = 24;
+        int actual = Storage.storage.get(apple);
         Assert.assertEquals(expected, actual);
     }
 

@@ -24,16 +24,16 @@ public class BalanceOperationHandlerTest {
     public void balanceHandler_addTransaction_Ok() {
         FruitDto fruitDto = new FruitDto("b", "apple", 18);
         handler.apply(fruitDto);
-        int actual = Storage.storage.get(apple);
         int expected = 18;
+        int actual = Storage.storage.get(apple);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void balanceHandler_chekReturnValue_Ok() {
         FruitDto fruitDto = new FruitDto("b", "banana", 84);
-        int actual = handler.apply(fruitDto);
         int expected = 84;
+        int actual = handler.apply(fruitDto);
         Assert.assertEquals(expected, actual);
     }
 

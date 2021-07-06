@@ -5,7 +5,6 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,8 +33,9 @@ public class WriterServiceImplTest {
                 expected, actual);
     }
 
-    @Test(expected = InvalidPathException.class)
+    @Test(expected = RuntimeException.class)
     public void writeToFile_wrongFileName_NotOk() {
-        writerService.writeToFile("???", "I bet this message will never be written)");
+        writerService.writeToFile("src/test/resces/empty-file",
+                "I bet this message will never be written)");
     }
 }

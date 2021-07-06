@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
     public void writeToFile(String fileName, String report) {
         try {
             Files.writeString(new File(fileName).toPath(), report);
-        } catch (InvalidPathException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + fileName, e);
         }
     }

@@ -2,6 +2,8 @@ package core.basesyntax.servicetest;
 
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.impl.ReaderServiceImpl;
+
+import java.nio.file.InvalidPathException;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,7 +27,7 @@ public class ReaderServiceImplTest {
                 expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidPathException.class)
     public void readFromFile_wrongFileName_NotOk() {
         readerService.readFromFile("???");
     }

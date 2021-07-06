@@ -12,7 +12,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(new File(fileName).toPath());
-        } catch (InvalidPathException | IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName, e);
         }
     }

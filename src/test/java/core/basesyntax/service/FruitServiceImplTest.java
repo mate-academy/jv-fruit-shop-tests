@@ -11,6 +11,7 @@ import core.basesyntax.service.strategy.StrategySupplierImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,8 +26,13 @@ public class FruitServiceImplTest {
         fruitService = new FruitServiceImpl(new StrategySupplierImpl(fruitDao), fruitDao);
     }
 
+    @Before
+    public void beforeEach() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
-    public void test_processRequests_Ok() {
+    public void processRequests_Ok() {
         List<FruitDto> transaction = new ArrayList<>();
         transaction.add(new FruitDto("b", "apple", 1));
         transaction.add(new FruitDto("s", "apple", 7));
@@ -35,11 +41,10 @@ public class FruitServiceImplTest {
         Integer expected = 0;
         Integer actual = Storage.fruitStorage.get(new Fruit("apple"));
         assertEquals(expected, actual);
-        Storage.fruitStorage.clear();
     }
 
     @Test
-    public void test_processRequests_NotOk() {
+    public void processRequests_NotOk() {
         List<FruitDto> transaction = new ArrayList<>();
         transaction.add(new FruitDto("y", "apple", 1));
         try {
@@ -48,11 +53,10 @@ public class FruitServiceImplTest {
             return;
         }
         fail();
-        Storage.fruitStorage.clear();
     }
 
     @Test
-    public void test_getCurrentStorageState_Ok() {
+    public void getCurrentStorageState_Ok() {
         final StringBuilder stringBuilder = new StringBuilder();
         Storage.fruitStorage.put(new Fruit("testFruit1"), 120);
         Storage.fruitStorage.put(new Fruit("testFruit2"), 130);
@@ -67,6 +71,5 @@ public class FruitServiceImplTest {
         String expected = stringBuilder.toString();
         String actual = fruitService.getCurrentStorageState();
         assertEquals(expected, actual);
-        Storage.fruitStorage.clear();
     }
 }

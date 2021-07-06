@@ -7,6 +7,7 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,19 +19,23 @@ public class ReduceQuantityStrategyTest {
         strategy = new ReduceQuantityStrategy(new FruitDaoImpl());
     }
 
+    @Before
+    public void beforeEach() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
-    public void test_reduceProcess_Ok() {
+    public void reduceProcess_Ok() {
         Fruit fruit = new Fruit("cherry");
         Storage.fruitStorage.put(fruit, 25000);
         strategy.process(new FruitDto("p", "cherry", 77));
         Integer expected = 24923;
         Integer actual = Storage.fruitStorage.get(fruit);
         assertEquals(expected, actual);
-        Storage.fruitStorage.clear();
     }
 
     @Test
-    public void test_reduceProcess_NotOk() {
+    public void reduceProcess_NotOk() {
         try {
             Fruit fruit = new Fruit("cherry");
             Storage.fruitStorage.put(fruit, 25000);

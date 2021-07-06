@@ -8,6 +8,7 @@ import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,27 +20,30 @@ public class FruitDaoImplTest {
         fruitDao = new FruitDaoImpl();
     }
 
+    @Before
+    public void beforeEach() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
-    public void test_putToDb_Ok() {
+    public void putToDb_Ok() {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("cherry"), 120);
         fruitDao.put(new Fruit("cherry"), 120);
         assertEquals(expected, Storage.fruitStorage);
         assertEquals(expected.size(), Storage.fruitStorage.size());
-        Storage.fruitStorage.clear();
     }
 
     @Test
-    public void test_getFromDb_Ok() {
+    public void getFromDb_Ok() {
         fruitDao.put(new Fruit("cherry"), 120);
         Integer expected = 120;
         Integer actual = fruitDao.get(new Fruit("cherry"));
         assertEquals(expected, actual);
-        Storage.fruitStorage.clear();
     }
 
     @Test
-    public void test_getAll_Ok() {
+    public void getAll_Ok() {
         fruitDao.put(new Fruit("cherry"), 120);
         fruitDao.put(new Fruit("banana"), 81);
         fruitDao.put(new Fruit("apple"), 1);

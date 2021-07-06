@@ -17,7 +17,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void test_Parse_Ok() {
+    public void parse_Ok() {
         ArrayList<String> strings = new ArrayList<>();
         strings.add("type,fruit,quantity");
         strings.add("p,apple,20");

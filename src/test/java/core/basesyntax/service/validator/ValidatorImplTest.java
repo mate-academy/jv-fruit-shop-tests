@@ -14,12 +14,12 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void test_parse_Ok() {
+    public void parse_Ok() {
         validator.validate("b,banana,20");
     }
 
     @Test
-    public void test_parse_NotOk() {
+    public void parse_NotOk() {
         try {
             validator.validate(",a");
         } catch (RuntimeException e) {

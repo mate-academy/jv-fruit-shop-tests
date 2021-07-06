@@ -21,18 +21,18 @@ public class FileHandlerImplTest {
     }
 
     @Test
-    public void test_readFromFile_Ok() {
+    public void readFromFile_Ok() {
         try {
             String expected = String.join("\n", Files.readAllLines(Path.of(TEST_INPUT_DATA)));
             String actual = String.join("\n", fileHandler.readFromFile(TEST_INPUT_DATA));
             assertEquals(expected, actual);
         } catch (IOException e) {
-            throw new RuntimeException("File read error in test_readFromFile_ok");
+            throw new RuntimeException("File read error in readFromFile_ok");
         }
     }
 
     @Test
-    public void test_readWithInvalidSours_NotOk() {
+    public void readWithInvalidSours_NotOk() {
         try {
             fileHandler.readFromFile("");
         } catch (RuntimeException e) {
@@ -42,7 +42,7 @@ public class FileHandlerImplTest {
     }
 
     @Test
-    public void test_writeToFile_Ok() {
+    public void writeToFile_Ok() {
         try {
             String expected = String.join("\n", Files.readAllLines(Path.of(TEST_INPUT_DATA)));
             fileHandler.writeToFile(TEST_OUTPUT_DATA, expected);
@@ -55,7 +55,7 @@ public class FileHandlerImplTest {
     }
 
     @Test
-    public void test_writeWithInvalidSours_NotOk() {
+    public void writeWithInvalidSours_NotOk() {
         try {
             fileHandler.writeToFile("", "anyData");
         } catch (RuntimeException e) {

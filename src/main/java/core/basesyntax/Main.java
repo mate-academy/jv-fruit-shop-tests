@@ -39,8 +39,8 @@ public class Main {
         infoFromFile.stream()
                 .map(parser::parseToFruitDto)
                 .forEach(fruitDto -> operationHandlerMap
-                    .get(fruitDto.getOperation())
-                    .apply(fruitDto)
+                        .get(fruitDto.getOperation())
+                        .apply(fruitDto)
                 );
         FruitReportService report = new FruitReportService(Storage.storage);
         Writer fileWriter = new FileWriter();

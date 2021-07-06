@@ -43,7 +43,7 @@ public class Fruit {
         }
         Fruit fruit = (Fruit) o;
         return Objects.equals(name, fruit.name) && Objects
-            .equals(price, fruit.price);
+                .equals(price, fruit.price);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Fruit {
     @Override
     public String toString() {
         return "Fruit{"
-            + "name='" + name + '\''
-            + ", price=" + price + '}';
+                + "name='" + name + '\''
+                + ", price=" + price + '}';
     }
 }

@@ -48,7 +48,7 @@ public class FruitDto {
         }
         FruitDto fruitDto = (FruitDto) o;
         return quantity == fruitDto.quantity && Objects.equals(operation, fruitDto.operation)
-            && Objects.equals(name, fruitDto.name);
+                && Objects.equals(name, fruitDto.name);
     }
 
     @Override
@@ -59,8 +59,8 @@ public class FruitDto {
     @Override
     public String toString() {
         return "FruitDto{"
-            + "operation='" + operation + '\''
-            + ", name='" + name + '\''
-            + ", count=" + quantity + '}';
+                + "operation='" + operation + '\''
+                + ", name='" + name + '\''
+                + ", count=" + quantity + '}';
     }
 }

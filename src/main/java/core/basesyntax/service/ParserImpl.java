@@ -21,7 +21,7 @@ public class ParserImpl implements Parser {
         }
         String[] partsOfElement = line.split(WORDS_SEPARATOR);
         return new FruitDto(partsOfElement[INDEX_OPERATION],
-            partsOfElement[INDEX_NAME],
-            Integer.parseInt(partsOfElement[INDEX_COUNT]));
+                partsOfElement[INDEX_NAME],
+                Integer.parseInt(partsOfElement[INDEX_COUNT]));
     }
 }

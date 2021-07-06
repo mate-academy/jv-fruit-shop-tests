@@ -18,7 +18,6 @@ import core.basesyntax.service.Writer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,7 +32,7 @@ public class PurchaseHandlerTest {
             "src/test/resources/purchasetest/reportPurchaseTest.csv";
 
     @Before
-    public void setStorageOperation(){
+    public void setStorageOperation() {
         StorageTest.storage.clear();
     }
 
@@ -59,7 +58,7 @@ public class PurchaseHandlerTest {
         FruitDto fruitDto = new FruitDto("p", "banana", 100);
         OperationHandler expected = new PurchaseHandler(StorageTest.storage);
         OperationHandler actual = StorageTest.operationHandlerMap.get(fruitDto.getOperation());
-        assertEquals(expected.getClass(),actual.getClass());
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test

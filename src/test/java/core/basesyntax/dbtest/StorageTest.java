@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageTest {
-    public static Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-    public static Map<Fruit, Integer> storage = new HashMap<>();
+    public static final Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+    public static final Map<Fruit, Integer> storage = new HashMap<>();
 
     static {
         operationHandlerMap.put("b", new BalanceHandler(storage));

@@ -18,15 +18,15 @@ public class FruitReportServiceTest {
 
     @Test
     public void fruitReportService_getReport_ok() {
-        StorageTest.storage.put(new Fruit("banana"),100);
-        StorageTest.storage.put(new Fruit("apple"),110);
-        StorageTest.storage.put(new Fruit("pine apple"),120);
+        StorageTest.storage.put(new Fruit("banana"), 100);
+        StorageTest.storage.put(new Fruit("apple"), 110);
+        StorageTest.storage.put(new Fruit("pine apple"), 120);
         String actual = fruitReportService.getReport();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,110" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator()
                 + "pine apple,120";
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
 }

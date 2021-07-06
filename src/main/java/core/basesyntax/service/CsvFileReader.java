@@ -11,9 +11,9 @@ public class CsvFileReader implements FileReader {
     public List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(Paths.get(fileName))
-                .stream()
-                .skip(1)
-                .collect(Collectors.toList());
+                    .stream()
+                    .skip(1)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Problem with file" + fileName, e);
         }

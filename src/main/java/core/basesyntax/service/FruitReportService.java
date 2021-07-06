@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dbtest.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 

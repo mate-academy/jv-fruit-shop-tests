@@ -18,12 +18,14 @@ public class ReportServiceTest {
 
     @Test
     public void getReport_Ok() {
-        StringBuilder builder = new StringBuilder().append("fruit,quantity\r\n");
+        StringBuilder builder = new StringBuilder()
+                .append("fruit,quantity")
+                .append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> pair : Storage.fruits.entrySet()) {
             builder.append(pair.getKey().getName())
                     .append(",")
                     .append(pair.getValue())
-                    .append("\r\n");
+                    .append(System.lineSeparator());
         }
         String expected = builder.toString().trim();
         String actual = new ReportServiceImpl().getReport();

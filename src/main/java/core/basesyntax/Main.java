@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String TYPE = "type";
     private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
 

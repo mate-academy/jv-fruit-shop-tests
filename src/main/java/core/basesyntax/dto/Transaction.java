@@ -2,7 +2,6 @@ package core.basesyntax.dto;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
-
 import java.util.Objects;
 
 public class Transaction {
@@ -39,10 +38,15 @@ public class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Transaction that = (Transaction) o;
-        return quantity == that.quantity && operation == that.operation && Objects.equals(fruit, that.fruit);
+        return quantity == that.quantity && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override

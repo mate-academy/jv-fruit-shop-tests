@@ -1,18 +1,15 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.ParserImpl;
 import org.junit.Test;
 
-
 public class ParserTest {
-    Parser parser = new ParserImpl();
+    private final Parser parser = new ParserImpl();
 
     @Test
     public void test_ParsingString_OK() {
@@ -22,15 +19,13 @@ public class ParserTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_NullString_Not_OK() {
-        assertThrows(RuntimeException.class,
-                () -> parser.parseLine(null));
+        parser.parseLine(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_WrongStringType() {
-        assertThrows(RuntimeException.class,
-                () -> parser.parseLine(""));
+        parser.parseLine("");
     }
 }

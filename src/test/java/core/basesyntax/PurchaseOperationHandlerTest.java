@@ -13,23 +13,27 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler handler;
+    private static Fruit apple;
+    private static Fruit banana;
 
     @BeforeClass
     public static void beforeClass() {
         handler = new PurchaseOperationHandler();
+        apple = new Fruit("apple");
+        banana = new Fruit("banana");
     }
 
     @Before
     public void setUp() {
-        Storage.getStorage().put(new Fruit("apple"), 20);
-        Storage.getStorage().put(new Fruit("banana"), 10);
+        Storage.getStorage().put(apple, 20);
+        Storage.getStorage().put(banana, 10);
     }
 
     @Test
     public void purchaseHandler_addTransactionWithEnoughQuantity_Ok() {
         Transaction transaction = new Transaction("p", "apple", 1);
         handler.perform(transaction);
-        int actual = Storage.getStorage().get(new Fruit("apple"));
+        int actual = Storage.getStorage().get(apple);
         int expected = 19;
         Assert.assertEquals(expected, actual);
     }

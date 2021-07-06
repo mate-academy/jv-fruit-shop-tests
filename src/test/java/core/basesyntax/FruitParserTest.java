@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitParserTest {
-
     private static Validator fruitValidator;
     private static Parser fruitParser;
 

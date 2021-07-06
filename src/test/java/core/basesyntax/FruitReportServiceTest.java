@@ -4,6 +4,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FruitReportService;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -24,7 +26,11 @@ public class FruitReportServiceTest {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()
                 + "apple,10";
-        Assert.assertEquals(expected, fruitReportService.getReport());
+        List<String> expectedList = Arrays.asList(expected.split(System.lineSeparator()));
+        List<String> actualList =
+                Arrays.asList(fruitReportService.getReport().split(System.lineSeparator()));
+        Assert.assertTrue(expectedList.size() == actualList.size()
+                && expectedList.containsAll(actualList));
     }
 
     @AfterClass

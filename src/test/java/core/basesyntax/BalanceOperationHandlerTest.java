@@ -13,23 +13,29 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static OperationHandler handler;
+    private static Fruit apple;
+    private static Fruit banana;
+    private static Fruit orange;
 
     @BeforeClass
     public static void beforeClass() {
         handler = new BalanceOperationHandler();
+        apple = new Fruit("apple");
+        banana = new Fruit("banana");
+        orange = new Fruit("orange");
     }
 
     @Before
     public void setUp() {
-        Storage.getStorage().put(new Fruit("apple"), 45);
-        Storage.getStorage().put(new Fruit("banana"), 77);
+        Storage.getStorage().put(apple, 45);
+        Storage.getStorage().put(banana, 77);
     }
 
     @Test
     public void balanceHandler_addTransactionWithExistingFruit_Ok() {
         Transaction transaction = new Transaction("b", "apple", 100);
         handler.perform(transaction);
-        int actual = Storage.getStorage().get(new Fruit("apple"));
+        int actual = Storage.getStorage().get(apple);
         int expected = 100;
         Assert.assertEquals(expected, actual);
     }
@@ -38,7 +44,7 @@ public class BalanceOperationHandlerTest {
     public void balanceHandler_addTransactionWithNotExistingFruit_Ok() {
         Transaction transaction = new Transaction("b", "orange", 45);
         handler.perform(transaction);
-        int actual = Storage.getStorage().get(new Fruit("orange"));
+        int actual = Storage.getStorage().get(orange);
         int expected = 45;
         Assert.assertEquals(expected, actual);
     }

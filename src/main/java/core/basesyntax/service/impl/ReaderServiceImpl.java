@@ -4,6 +4,7 @@ import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
@@ -11,7 +12,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(new File(fileName).toPath());
-        } catch (IOException e) {
+        } catch (InvalidPathException | IOException e) {
             throw new RuntimeException("Can't read from file " + fileName, e);
         }
     }

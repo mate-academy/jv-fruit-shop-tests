@@ -29,10 +29,6 @@ public class Fruit {
     public int hashCode() {
         return Objects.hash(name);
     }
-
-    @Override
-    public String toString() {
-        return String.format("Fruit{name='%s'}", name);
-    }
 }
+
 

@@ -26,7 +26,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void supply_validDataToStorage_OK() {
+    public void supply_ValidDataToStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int expected = 110;
@@ -35,7 +35,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void return_validDataToStorage_OK() {
+    public void return_ValidDataToStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int expected = 110;
@@ -44,7 +44,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void add_invalidDataToStorage_OK() {
+    public void add_InvalidDataToStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int expected = 0;

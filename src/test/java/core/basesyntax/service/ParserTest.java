@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_validData_OK() {
+    public void parse_ValidData_OK() {
         String stringToParse = "b,banana,12";
         Transaction expected = new Transaction(Operation.B, new Fruit("banana"), 12);
         Transaction actual = parser.parseLine(stringToParse);
@@ -26,17 +26,17 @@ public class ParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_wrongStringType() {
+    public void parse_WrongStringType() {
         parser.parseLine("");
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_stringWithoutElement() {
+    public void parse_StringWithoutElement() {
         parser.parseLine("b,apple,");
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_stringWithNegativeQuantity() {
+    public void parse_StringWithNegativeQuantity() {
         parser.parseLine("p,orange,-10");
     }
 }

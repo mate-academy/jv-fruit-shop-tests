@@ -10,7 +10,8 @@ import org.junit.Test;
 public class FileWriterServiceTest {
     @Test
     public void writeToFile_Ok() {
-        new FileWriterServiceImpl().writeToFile("Hello, this is test sentence.",
+        String expected = "Hello, this is test sentence.";
+        new FileWriterServiceImpl().writeToFile(expected,
                 "src/test/resources/test_report.csv");
         String actual = "";
         try {
@@ -19,7 +20,6 @@ public class FileWriterServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file.", e);
         }
-        String expected = "Hello, this is test sentence.";
         assertEquals(expected, actual);
     }
 }

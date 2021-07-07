@@ -9,18 +9,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OperationHandlerTest {
+public class AddOperationHandlerTest {
     @Before
     public void setUp() {
         Storage.fruits.put(new Fruit("banana"), 50);
-    }
-
-    @Test
-    public void purchaseOperationHandler_Ok() {
-        Transaction transaction = new Transaction("p", "banana", 20);
-        int expected = 30;
-        int actual = new PurchaseOperationHandler().apply(transaction);
-        assertEquals(expected, actual);
     }
 
     @Test
@@ -28,14 +20,6 @@ public class OperationHandlerTest {
         Transaction transaction = new Transaction("s", "banana", 150);
         int expected = 200;
         int actual = new AddOperationHandler().apply(transaction);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void balanceOperationHandler_Ok() {
-        Transaction transaction = new Transaction("b", "banana", 150);
-        int expected = 150;
-        int actual = new BalanceOperationHandler().apply(transaction);
         assertEquals(expected, actual);
     }
 
@@ -52,3 +36,4 @@ public class OperationHandlerTest {
         Storage.fruits.clear();
     }
 }
+

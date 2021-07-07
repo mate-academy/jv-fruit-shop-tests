@@ -22,7 +22,7 @@ public class FruitShopDataParser implements Parser<List<String>> {
     @Override
     public void parse(List<String> data) {
         String[] partsOfLine;
-        for (int r = 1; r < data.size() - 1; r++) {
+        for (int r = 1; r < data.size(); r++) {
             partsOfLine = data.get(r).split(SPLITERATOR);
             if (partsOfLine.length != CSV_DATA_PARTS
                     || !(operationStrategy.isOperationExist(partsOfLine[TYPE_INDEX]))

@@ -1,6 +1,6 @@
 package reader;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,16 +15,14 @@ public class FileReaderImplTest {
 
     @Test
     public void readFromExistSource_Ok() {
-        List<String> readedData = reader.read(
-                GOOD_PATH);
+        List<String> readedData = reader.read(GOOD_PATH);
         List<String> correctReadedData;
         try {
-            correctReadedData = Files.readAllLines(
-                    GOOD_PATH);
+            correctReadedData = Files.readAllLines(GOOD_PATH);
         } catch (IOException e) {
             throw new RuntimeException("There is no source like this");
         }
-        assertArrayEquals(correctReadedData.toArray(), readedData.toArray());
+        assertEquals(correctReadedData, readedData);
     }
 
     @Test(expected = RuntimeException.class)

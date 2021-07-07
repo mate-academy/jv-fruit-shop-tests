@@ -1,6 +1,7 @@
 package service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.Collections;
 import java.util.Map;
@@ -18,15 +19,19 @@ public class DataProcessorFruitsImplTest {
     @Test
     public void processWithMap_Ok() {
         String result = processor.process(mapOfFruits);
-        StringBuilder builder = new StringBuilder();
-        for (Map.Entry<Fruit, Integer> entry : mapOfFruits.entrySet()) {
-            builder.append(entry.getKey().getName())
-                    .append(",")
-                    .append(entry.getValue())
-                    .append(System.lineSeparator());
+        String[] expected = new StringBuilder()
+            .append("banana").append(",")
+                .append(100).append(" ")
+                .append("tangerine").append(",")
+                .append(200).append(" ")
+                .append("apple").append(",")
+                .append(400).append(" ")
+                .toString().split(" ");
+        for (String string : expected) {
+            if (!(result.contains(string))) {
+                fail();
+            }
         }
-        String expected = String.join(System.lineSeparator(), builder.toString());
-        assertEquals(expected, result);
     }
 
     @Test

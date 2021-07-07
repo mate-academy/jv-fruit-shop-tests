@@ -7,15 +7,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private static final int TYPE_OPERATION = 0;
-    private static final int NAME_FRUIT = 1;
-    private static final int QUANTITY = 2;
     private static final String VALID_LINE = "b,banana,20";
     private static final String NOT_VALID_TYPE = "t,banana,20";
     private static final String NOT_VALID_FRUIT_NAME = "b,@#*,20";
     private static final String NOT_VALID_QUANTITY = "b,banana,%";
     private static final String NOT_VALID_COLUMN = "banana,20";
-    private static final String SYMBOL_FOR_SPLIT = ",";
     private static Parser parser;
 
     @BeforeClass

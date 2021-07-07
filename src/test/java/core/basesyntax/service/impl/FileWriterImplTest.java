@@ -61,9 +61,4 @@ public class FileWriterImplTest {
 
         Assert.assertEquals(expected, actual);
     }
-
-    @Test(expected = RuntimeException.class)
-    public void fileWriter_invalidPath_notOk() {
-        fileWriter.writeToFile("sdfs", "sdfdfsd");
-    }
 }

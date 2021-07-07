@@ -25,7 +25,7 @@ public class FruitReportServiceImplTest {
     }
 
     @Test
-    public void test_createReport_Ok() {
+    public void report_createReport_Ok() {
         StringBuilder reportExpected = new StringBuilder();
         String expected = reportExpected.append(TITLE)
                 .append(System.lineSeparator()).append("banana")

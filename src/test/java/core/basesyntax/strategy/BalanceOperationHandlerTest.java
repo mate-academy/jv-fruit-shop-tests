@@ -30,7 +30,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandler_chekReturnValue_Ok() {
+    public void balanceHandler_checkReturnValue_Ok() {
         FruitDto fruitDto = new FruitDto("b", "banana", 84);
         int expected = 84;
         int actual = handler.apply(fruitDto);

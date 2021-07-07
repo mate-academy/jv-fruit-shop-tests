@@ -18,7 +18,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void test_Parser_Ok() {
+    public void parseLines_NormalLine_Ok() {
         List<String> strings = new ArrayList<>();
         strings.add("type,fruit,quantity");
         strings.add("s,banana,150");
@@ -28,7 +28,7 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_ParserCount_NotOk() {
+    public void parseLines_NegativeQuantity_NotOk() {
         List<String> strings = new ArrayList<>();
         strings.add("type,fruit,quantity");
         strings.add("s,banana,-15");
@@ -36,7 +36,7 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_ParserLine_NotOk() {
+    public void parseLines_NotStandardLine_NotOk() {
         List<String> strings = new ArrayList<>();
         strings.add("type,fruit,quantity");
         strings.add("sadadd");

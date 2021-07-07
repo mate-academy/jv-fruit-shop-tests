@@ -32,9 +32,17 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyHandler_chekReturnValue_Ok() {
+    public void supplyHandler_checkReturnValue_Ok() {
         FruitDto fruitDto = new FruitDto("s", "apple", 1);
         int expected = 36;
+        int actual = handler.apply(fruitDto);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void supplyHandler_checkReturnTransaction_Ok() {
+        FruitDto fruitDto = new FruitDto("r", "apple", 20);
+        int expected = 56;
         int actual = handler.apply(fruitDto);
         Assert.assertEquals(expected, actual);
     }

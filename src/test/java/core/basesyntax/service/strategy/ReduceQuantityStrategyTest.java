@@ -1,7 +1,6 @@
 package core.basesyntax.service.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -34,15 +33,10 @@ public class ReduceQuantityStrategyTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void reduceProcess_NotOk() {
-        try {
-            Fruit fruit = new Fruit("cherry");
-            Storage.fruitStorage.put(fruit, 25000);
-            strategy.process(new FruitDto("p", "cherry", 25077));
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail();
+        Fruit fruit = new Fruit("cherry");
+        Storage.fruitStorage.put(fruit, 25000);
+        strategy.process(new FruitDto("p", "cherry", 25077));
     }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.service.filehandler;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -31,14 +30,9 @@ public class FileHandlerImplTest {
         }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readWithInvalidSours_NotOk() {
-        try {
-            fileHandler.readFromFile("");
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail();
+        fileHandler.readFromFile("");
     }
 
     @Test
@@ -54,13 +48,8 @@ public class FileHandlerImplTest {
         }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeWithInvalidSours_NotOk() {
-        try {
-            fileHandler.writeToFile("", "anyData");
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail();
+        fileHandler.writeToFile("", "anyData");
     }
 }

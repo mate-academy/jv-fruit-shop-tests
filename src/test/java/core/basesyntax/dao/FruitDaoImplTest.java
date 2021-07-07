@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -31,7 +30,6 @@ public class FruitDaoImplTest {
         expected.put(new Fruit("cherry"), 120);
         fruitDao.put(new Fruit("cherry"), 120);
         assertEquals(expected, Storage.fruitStorage);
-        assertEquals(expected.size(), Storage.fruitStorage.size());
     }
 
     @Test
@@ -49,7 +47,6 @@ public class FruitDaoImplTest {
         fruitDao.put(new Fruit("apple"), 1);
         Set<Map.Entry<Fruit, Integer>> actual = fruitDao.getAll();
         Set<Map.Entry<Fruit, Integer>> expected = Storage.fruitStorage.entrySet();
-        assertTrue(expected.containsAll(actual));
-        assertEquals(expected.size(), actual.size());
+        assertEquals(expected, actual);
     }
 }

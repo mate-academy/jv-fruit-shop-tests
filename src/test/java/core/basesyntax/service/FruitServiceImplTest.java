@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -43,16 +42,11 @@ public class FruitServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void processRequests_NotOk() {
         List<FruitDto> transaction = new ArrayList<>();
         transaction.add(new FruitDto("y", "apple", 1));
-        try {
-            fruitService.processRequests(transaction);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail();
+        fruitService.processRequests(transaction);
     }
 
     @Test

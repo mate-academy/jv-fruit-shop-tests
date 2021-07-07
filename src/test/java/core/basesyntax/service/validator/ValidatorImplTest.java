@@ -1,7 +1,5 @@
 package core.basesyntax.service.validator;
 
-import static org.junit.Assert.fail;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,13 +16,8 @@ public class ValidatorImplTest {
         validator.validate("b,banana,20");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void parse_NotOk() {
-        try {
-            validator.validate(",a");
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail();
+        validator.validate(",a");
     }
 }

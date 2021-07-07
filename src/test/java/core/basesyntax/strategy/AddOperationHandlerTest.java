@@ -5,29 +5,21 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private static final String PURCHASE = "p";
     private static final String SUPPLY = "s";
-    private static final String BALANCE = "b";
     private static final String RETURN = "r";
     private static final Fruit APPLE = new Fruit("apple");
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit ORANGE = new Fruit("orange");
-    private static Map<String, OperationHandler> operationStrategyMap;
+    private static OperationHandler addOperation;
 
     @BeforeClass
     public static void before() {
-        operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(PURCHASE, new PurchaseOperationHandler());
-        operationStrategyMap.put(SUPPLY, new AddOperationHandler());
-        operationStrategyMap.put(BALANCE, new BalanceOperationHandler());
-        operationStrategyMap.put(RETURN, new AddOperationHandler());
+        addOperation = new AddOperationHandler();
     }
 
     @Before
@@ -39,15 +31,15 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void supplySingle() {
+    public void supplySingle_Ok() {
         int expected = 50;
         Transaction transaction = new Transaction(SUPPLY, APPLE, 30);
-        operationStrategyMap.get(transaction.getOperation()).apply(transaction);
-        assertEquals(expected, Storage.storage.get(APPLE).intValue());
+        int actual = addOperation.apply(transaction);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void supplyMultiple() {
+    public void supplyMultiple_Ok() {
         final int expectedApple = 80;
         final int expectedBanana = 60;
         final int expectedOrange = 70;
@@ -56,10 +48,10 @@ public class AddOperationHandlerTest {
         Transaction transactionOrange = new Transaction(SUPPLY, ORANGE, 30);
         Transaction transactionBanana = new Transaction(SUPPLY, BANANA, 30);
 
-        operationStrategyMap.get(transactionApple.getOperation()).apply(transactionApple);
-        operationStrategyMap.get(transactionApple.getOperation()).apply(transactionApple);
-        operationStrategyMap.get(transactionOrange.getOperation()).apply(transactionOrange);
-        operationStrategyMap.get(transactionBanana.getOperation()).apply(transactionBanana);
+        addOperation.apply(transactionApple);
+        addOperation.apply(transactionApple);
+        addOperation.apply(transactionOrange);
+        addOperation.apply(transactionBanana);
 
         assertEquals(expectedApple, Storage.storage.get(APPLE).intValue());
         assertEquals(expectedBanana, Storage.storage.get(BANANA).intValue());
@@ -67,15 +59,15 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void returnSingle() {
+    public void returnSingle_Ok() {
         int expected = 50;
         Transaction transaction = new Transaction(RETURN, APPLE, 30);
-        operationStrategyMap.get(transaction.getOperation()).apply(transaction);
-        assertEquals(expected, Storage.storage.get(APPLE).intValue());
+        int actual = addOperation.apply(transaction);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void returnMultiple() {
+    public void returnMultiple_Ok() {
         final int expectedApple = 80;
         final int expectedBanana = 60;
         final int expectedOrange = 70;
@@ -84,10 +76,10 @@ public class AddOperationHandlerTest {
         Transaction transactionOrange = new Transaction(RETURN, ORANGE, 30);
         Transaction transactionBanana = new Transaction(RETURN, BANANA, 30);
 
-        operationStrategyMap.get(transactionApple.getOperation()).apply(transactionApple);
-        operationStrategyMap.get(transactionApple.getOperation()).apply(transactionApple);
-        operationStrategyMap.get(transactionOrange.getOperation()).apply(transactionOrange);
-        operationStrategyMap.get(transactionBanana.getOperation()).apply(transactionBanana);
+        addOperation.apply(transactionApple);
+        addOperation.apply(transactionApple);
+        addOperation.apply(transactionOrange);
+        addOperation.apply(transactionBanana);
 
         assertEquals(expectedApple, Storage.storage.get(APPLE).intValue());
         assertEquals(expectedBanana, Storage.storage.get(BANANA).intValue());
@@ -95,7 +87,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void returnAndSupplyOperations() {
+    public void returnAndSupplyOperations_Ok() {
         final int expectedApple = 140;
         final int expectedBanana = 90;
         final int expectedOrange = 130;
@@ -108,24 +100,15 @@ public class AddOperationHandlerTest {
         Transaction transactionSupplyOrange = new Transaction(SUPPLY, ORANGE, 30);
         Transaction transactionSupplyBanana = new Transaction(SUPPLY, BANANA, 30);
 
-        operationStrategyMap
-                .get(transactionReturnApple.getOperation()).apply(transactionReturnApple);
-        operationStrategyMap
-                .get(transactionReturnApple.getOperation()).apply(transactionReturnApple);
-        operationStrategyMap
-                .get(transactionReturnOrange.getOperation()).apply(transactionReturnOrange);
-        operationStrategyMap
-                .get(transactionReturnBanana.getOperation()).apply(transactionReturnBanana);
-        operationStrategyMap
-                .get(transactionSupplyApple.getOperation()).apply(transactionSupplyApple);
-        operationStrategyMap
-                .get(transactionSupplyApple.getOperation()).apply(transactionSupplyApple);
-        operationStrategyMap
-                .get(transactionSupplyBanana.getOperation()).apply(transactionSupplyBanana);
-        operationStrategyMap
-                .get(transactionSupplyOrange.getOperation()).apply(transactionSupplyOrange);
-        operationStrategyMap
-                .get(transactionSupplyOrange.getOperation()).apply(transactionSupplyOrange);
+        addOperation.apply(transactionReturnApple);
+        addOperation.apply(transactionReturnApple);
+        addOperation.apply(transactionReturnOrange);
+        addOperation.apply(transactionReturnBanana);
+        addOperation.apply(transactionSupplyApple);
+        addOperation.apply(transactionSupplyApple);
+        addOperation.apply(transactionSupplyBanana);
+        addOperation.apply(transactionSupplyOrange);
+        addOperation.apply(transactionSupplyOrange);
 
         assertEquals(expectedApple, Storage.storage.get(APPLE).intValue());
         assertEquals(expectedBanana, Storage.storage.get(BANANA).intValue());

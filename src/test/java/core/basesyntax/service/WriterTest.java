@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +18,7 @@ public class WriterTest {
     }
 
     @Test
-    public void writeToFile() {
+    public void writeToFile_Ok() {
         String contentToWrite = "What kind of tea is hard to swallow?\nReality.";
         String outputFile = "src/test/resources/output.txt";
         writer.writeToFile(outputFile, contentToWrite);
@@ -30,12 +30,11 @@ public class WriterTest {
             throw new RuntimeException("Can't open " + outputFile);
         }
         List<String> expected = List.of(contentToWrite.split("\n"));
-        assertTrue(actual.size() == expected.size()
-                && actual.containsAll(expected));
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeToFile_CantWriteToFile_NotOk() {
+    public void invalidFileName_Not_Ok() {
         String contentToWrite = "What kind of tea is hard to swallow?\nReality.";
         String outputFile = "/";
         writer.writeToFile(outputFile, contentToWrite);

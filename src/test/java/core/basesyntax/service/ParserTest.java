@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseLine_ValidLine_Ok() {
+    public void validLine_Ok() {
         String lineToParse = "p,banana,2019";
         Transaction expected = new Transaction(PURCHASE, BANANA, 2019);
         Transaction actual = parser.parseLine(lineToParse);
@@ -28,24 +28,14 @@ public class ParserTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseLine_InvalidLine_NotEnoughElements_Not_Ok() {
+    public void invalidLine_NotEnoughElements_Not_Ok() {
         String lineToParse = "p,fd,";
         parser.parseLine(lineToParse);
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseLine_InvalidLine_NotNumber_Not_Ok() {
+    public void invalidLine_NotNumber_Not_Ok() {
         String lineToParse = "p,fd,number";
         parser.parseLine(lineToParse);
-    }
-
-    @Test
-    public void parseLine_InvalidLine_Not_Ok() {
-        String lineToParse = "psdf,fdsdfadfgdsa,1234";
-        Transaction expected = new Transaction("psdf", new Fruit("fdsdfadfgdsa"),1234);
-        Transaction actual = parser.parseLine(lineToParse);
-        assertEquals(expected.getQuantity(), actual.getQuantity());
-        assertEquals(expected.getFruit(), actual.getFruit());
-        assertEquals(expected.getOperation(), actual.getOperation());
     }
 }

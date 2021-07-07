@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,27 +26,25 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void testGetReport() {
+    public void correctReport_Ok() {
         Storage.storage.put(APPLE, 20);
         Storage.storage.put(BANANA, 10);
         Storage.storage.put(PINEAPPLE, 230);
         Storage.storage.put(ORANGE, 0);
 
-        String expected = "fruit,quantity\napple,20\nbanana,10\npineapple,230\norange,0";
-        List<String> expectedSplited = List.of(expected.split("\n"));
+        String expected = "fruit,quantity\n"
+                + "banana,10\n"
+                + "apple,20\n"
+                + "orange,0\n"
+                + "pineapple,230";
         String actual = fruitService.getReport();
-        List<String> actualSplited = List.of(actual.split("\n"));
-        assertTrue(actualSplited.size() == expectedSplited.size()
-                && actualSplited.containsAll(expectedSplited));
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void testGetReport_EmptyStorage() {
-        String expected = "fruit,quantity\n";
-        List<String> expectedSplited = List.of(expected.split("\n"));
+    public void emptyStorage_Ok() {
+        String expected = "fruit,quantity";
         String actual = fruitService.getReport();
-        List<String> actualSplited = List.of(actual.split("\n"));
-        assertTrue(actualSplited.size() == expectedSplited.size()
-                && actualSplited.containsAll(expectedSplited));
+        assertEquals(expected, actual);
     }
 }

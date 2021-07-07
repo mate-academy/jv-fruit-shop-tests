@@ -5,29 +5,20 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static final String PURCHASE = "p";
-    private static final String SUPPLY = "s";
-    private static final String BALANCE = "b";
-    private static final String RETURN = "r";
     private static final Fruit APPLE = new Fruit("apple");
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit ORANGE = new Fruit("orange");
-    private static Map<String, OperationHandler> operationStrategyMap;
+    private static OperationHandler purchaseOperation;
 
     @BeforeClass
     public static void before() {
-        operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(PURCHASE, new PurchaseOperationHandler());
-        operationStrategyMap.put(SUPPLY, new AddOperationHandler());
-        operationStrategyMap.put(BALANCE, new BalanceOperationHandler());
-        operationStrategyMap.put(RETURN, new AddOperationHandler());
+        purchaseOperation = new PurchaseOperationHandler();
     }
 
     @Before
@@ -39,7 +30,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseBasic() {
+    public void purchaseBasic_Ok() {
         int expectedApple = 10;
         int expectedBanana = 25;
         int expectedOrange = 10;
@@ -48,15 +39,9 @@ public class PurchaseOperationHandlerTest {
         Transaction transactionBanana = new Transaction(PURCHASE, BANANA, 5);
         Transaction transactionOrange = new Transaction(PURCHASE, ORANGE, 30);
 
-        int actualApple =
-                operationStrategyMap.get(transactionApple.getOperation())
-                        .apply(transactionApple);
-        int actualBanana =
-                operationStrategyMap.get(transactionBanana.getOperation())
-                        .apply(transactionBanana);
-        int actualOrange =
-                operationStrategyMap.get(transactionOrange.getOperation())
-                        .apply(transactionOrange);
+        int actualApple = purchaseOperation.apply(transactionApple);
+        int actualBanana = purchaseOperation.apply(transactionBanana);
+        int actualOrange = purchaseOperation.apply(transactionOrange);
 
         assertEquals(expectedApple, actualApple);
         assertEquals(expectedBanana, actualBanana);
@@ -64,7 +49,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseMoreThanAvailable() {
+    public void purchaseMoreThanAvailable_Ok() {
         int expectedApple = 0;
         int expectedBanana = 0;
         int expectedOrange = 10;
@@ -73,15 +58,9 @@ public class PurchaseOperationHandlerTest {
         Transaction transactionBanana = new Transaction(PURCHASE, BANANA, 5342);
         Transaction transactionOrange = new Transaction(PURCHASE, ORANGE, 30);
 
-        int actualApple =
-                operationStrategyMap.get(transactionApple.getOperation())
-                        .apply(transactionApple);
-        int actualBanana =
-                operationStrategyMap.get(transactionBanana.getOperation())
-                        .apply(transactionBanana);
-        int actualOrange =
-                operationStrategyMap.get(transactionOrange.getOperation())
-                        .apply(transactionOrange);
+        int actualApple = purchaseOperation.apply(transactionApple);
+        int actualBanana = purchaseOperation.apply(transactionBanana);
+        int actualOrange = purchaseOperation.apply(transactionOrange);
 
         assertEquals(expectedApple, actualApple);
         assertEquals(expectedBanana, actualBanana);

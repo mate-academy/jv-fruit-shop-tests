@@ -38,7 +38,7 @@ public class AdditionOperationHandlerTest {
     @Test
     public void apply_onExistData_Ok() {
         Transaction transaction = new Transaction(Operation.SUPPLY, "banana", 100);
-        int expected = Storage.storage.get(new Fruit("banana")) + 100;
+        int expected = 109;
         handler.apply(transaction);
         int actual = Storage.storage.get(new Fruit("banana"));
         Assert.assertEquals(String.format("\nExpected:\n%s\nbut was:\n%s", expected, actual),

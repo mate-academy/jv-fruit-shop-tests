@@ -20,15 +20,15 @@ public class ParseImplTest {
 
     @Test
     public void parseToTransactionsList_RegularData_Ok() {
-        List<String> actual = List.of("type,fruit,quantity", "s,banana,100",
+        List<String> initialData = List.of("type,fruit,quantity", "s,banana,100",
                 "r,apple,8", "b,grape,20", "p,peach,38");
         List<Transaction> expected = List.of(new Transaction(Operation.SUPPLY, "banana", 100),
                 new Transaction(Operation.RETURN, "apple", 8), new Transaction(Operation.BALANCE,
                         "grape", 20),
                 new Transaction(Operation.PURCHASE, "peach", 38));
         Assert.assertEquals(String.format("\nExpected:\n%s\nbut was:\n%s",
-                parser.parseToTransactionList(actual),
-                expected), parser.parseToTransactionList(actual), expected);
+                parser.parseToTransactionList(initialData),
+                expected), parser.parseToTransactionList(initialData), expected);
     }
 
     @Test(expected = RuntimeException.class)

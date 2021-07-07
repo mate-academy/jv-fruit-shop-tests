@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.service.impl.LineValidatorImpl;
 import core.basesyntax.service.impl.ParserImpl;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
-    private LineValidator lineValidator;
-    private Parser parser;
+    private static LineValidator lineValidator;
+    private static Parser parser;
 
-    @Before
-    public void init() {
+    @BeforeClass
+    public static void beforeClass() {
         lineValidator = new LineValidatorImpl();
         parser = new ParserImpl(lineValidator);
     }

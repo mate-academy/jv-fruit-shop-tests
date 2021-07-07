@@ -6,17 +6,21 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private OperationHandler handler;
+    private static OperationHandler handler;
+
+    @BeforeClass
+    public static void beforeClass() {
+        handler = new PurchaseOperationHandler();
+    }
 
     @Before
     public void init() {
-        handler = new PurchaseOperationHandler();
         Storage.storage.clear();
     }
 
@@ -58,10 +62,5 @@ public class PurchaseOperationHandlerTest {
         Storage.storage.put(fruit,putQuantity);
         Transaction transaction = new Transaction(operation, fruit.getName(), removeQuantity);
         handler.apply(transaction);
-    }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
     }
 }

@@ -9,14 +9,14 @@ import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MapCreatorTest {
-    private MapCreator mapCreator;
+    private static MapCreator mapCreator;
 
-    @Before
-    public void init() {
+    @BeforeClass
+    public static void beforeClass() {
         mapCreator = new MapCreatorImpl();
     }
 

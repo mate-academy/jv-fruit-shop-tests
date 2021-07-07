@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
-    private FruitService fruitService;
+    private static FruitService fruitService;
 
-    @Before
-    public void init() {
+    @BeforeClass
+    public static void beforeClass() {
         fruitService = new FruitServiceImpl();
     }
 

@@ -8,14 +8,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
-    private FileWriter fileWriter;
+    private static FileWriter fileWriter;
 
-    @Before
-    public void init() {
+    @BeforeClass
+    public static void beforeClass() {
         fileWriter = new FileWriterImpl();
     }
 

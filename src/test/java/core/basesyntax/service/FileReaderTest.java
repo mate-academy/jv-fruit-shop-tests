@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.impl.FileReaderImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
-    private FileReader fileReader;
+    private static FileReader fileReader;
 
-    @Before
-    public void init() {
+    @BeforeClass
+    public static void beforeClass() {
         fileReader = new FileReaderImpl();
     }
 

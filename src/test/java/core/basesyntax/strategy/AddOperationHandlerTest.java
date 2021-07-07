@@ -6,17 +6,21 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.impl.AddOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private OperationHandler handler;
+    private static OperationHandler handler;
+
+    @BeforeClass
+    public static void beforeClass() {
+        handler = new AddOperationHandler();
+    }
 
     @Before
     public void init() {
-        handler = new AddOperationHandler();
         Storage.storage.clear();
     }
 
@@ -70,10 +74,5 @@ public class AddOperationHandlerTest {
         Transaction transaction = new Transaction(operation, fruit.getName(), putQuantity);
         int actual = handler.apply(transaction);
         Assert.assertEquals(expected, actual);
-    }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
     }
 }

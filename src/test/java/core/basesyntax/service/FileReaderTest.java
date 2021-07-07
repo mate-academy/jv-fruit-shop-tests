@@ -13,7 +13,7 @@ public class FileReaderTest {
     private static final FileReader fileReader = new FileReaderImpl();
 
     @Test
-    public void test_readingFromFile_OK() {
+    public void test_readingFromFile_ok() {
         String expected = null;
         try {
             expected = String.join("\n", Files.readAllLines(Path.of(INPUT_DATA)));
@@ -25,7 +25,7 @@ public class FileReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_readingFromFile_NotOK() {
+    public void test_readingFromFile_notOk() {
         fileReader.readFromFile(NO_CORRECT_PATH);
     }
 }

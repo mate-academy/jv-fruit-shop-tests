@@ -10,11 +10,11 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private final OperationHandler balanceHandler = new BalanceOperationHandler();
-    private final Fruit apple = new Fruit();
 
     @Test
-    public void test_ImportingNewFruitsToStorage_OK() {
+    public void test_importingNewFruitsToStorage_ok() {
         Storage.storage.clear();
+        Fruit apple = new Fruit();
         apple.setName("apple");
         Storage.storage.put(apple, 10);
         int expected = 100;

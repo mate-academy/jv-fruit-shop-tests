@@ -9,10 +9,10 @@ import org.junit.Test;
 
 public class ParserTest {
     private final Parser parserImpl = new ParserImpl();
-    private Fruit apple = new Fruit();
 
     @Test
-    public void test_parseLine_Ok() {
+    public void test_parseLine_ok() {
+        Fruit apple = new Fruit();
         String inputLine = "b,apple,10";
         apple.setName("apple");
         Transaction expected = new Transaction(Operation.B, apple, 10);
@@ -21,7 +21,7 @@ public class ParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_parseLine_NotOK() {
+    public void test_parseLine_notOk() {
         parserImpl.parseLine("114546");
     }
 }

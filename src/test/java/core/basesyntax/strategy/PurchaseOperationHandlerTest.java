@@ -11,11 +11,11 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private OperationHandler purchaseHandler;
-    private final Fruit apple = new Fruit();
-    private final Fruit banana = new Fruit();
 
     @Test
-    public void test_SubtractingFruitsFromStorage_Ok() {
+    public void test_subtractingFruitsFromStorage_ok() {
+        purchaseHandler = new PurchaseOperationHandler();
+        Fruit apple = new Fruit();
         apple.setName("apple");
         Storage.storage.put(apple, 10);
         int actual = purchaseHandler.apply(new Transaction(Operation.P, apple, 5));
@@ -24,7 +24,9 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_NotEnoughFruitsSubtracting_Ok() {
+    public void test_notEnoughFruitsSubtracting_ok() {
+        purchaseHandler = new PurchaseOperationHandler();
+        Fruit banana = new Fruit();
         banana.setName("banana");
         Storage.storage.put(banana, 10);
         purchaseHandler.apply(new Transaction(Operation.P, banana, 11));
@@ -34,6 +36,5 @@ public class PurchaseOperationHandlerTest {
     @Before
     public void start() {
         Storage.storage.clear();
-        purchaseHandler = new PurchaseOperationHandler();
     }
 }

@@ -12,10 +12,10 @@ import org.junit.Test;
 
 public class AddOperationHandlerTest {
     private final OperationHandler addHandler = new AddOperationHandler();
-    private final Fruit apple = new Fruit();
 
     @Test
-    public void test_AddingFruitsToStorage_OK() {
+    public void test_addingFruitsToStorage_ok() {
+        Fruit apple = new Fruit();
         Storage.storage.put(apple, 10);
         int expected = 20;
         int actual = addHandler.apply(new Transaction(Operation.S, apple, 10));
@@ -23,7 +23,17 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void test_AddingWrongData_OK() {
+    public void test_returnFruitsToStorage_ok() {
+        Fruit apple = new Fruit();
+        Storage.storage.put(apple, 10);
+        int expected = 20;
+        int actual = addHandler.apply(new Transaction(Operation.R, apple, 10));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_addingWrongData_ok() {
+        Fruit apple = new Fruit();
         Storage.storage.put(apple, 10);
         int expected = 0;
         int actual = addHandler.apply(new Transaction(Operation.S, apple, 0));
@@ -33,6 +43,5 @@ public class AddOperationHandlerTest {
     @Before
     public void start() {
         Storage.storage.clear();
-        apple.setName("apple");
     }
 }

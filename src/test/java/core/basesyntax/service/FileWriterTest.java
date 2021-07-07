@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterTest {
@@ -17,13 +16,9 @@ public class FileWriterTest {
     private static final String REPORT = "I'm not a Superman" + System.lineSeparator() + "...";
     private FileWriter fileWriter;
 
-    @Before
-    public void start() {
-        fileWriter = new FileWriterImpl();
-    }
-
     @Test
-    public void test_WritingToFile_OK() {
+    public void test_writingToFile_ok() {
+        fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(REPORT, WRITER_FILE_PATH);
         List<String> expected = new ArrayList<>();
         try {
@@ -37,7 +32,8 @@ public class FileWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_WritingToWrongFile_NotOK() {
+    public void test_writingToWrongFile_notOk() {
+        fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(REPORT, WRONG_PATH);
     }
 }

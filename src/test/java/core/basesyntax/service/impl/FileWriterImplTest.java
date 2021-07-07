@@ -21,7 +21,7 @@ public class FileWriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void emptyFileName_NotOk() {
-        fileWriter.write(EMPTY_LINE, TEST_REPORT);
+        fileWriter.write("", TEST_REPORT);
     }
 
     @Test

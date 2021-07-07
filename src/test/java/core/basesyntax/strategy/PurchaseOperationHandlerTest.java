@@ -5,6 +5,7 @@ import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +19,10 @@ public class PurchaseOperationHandlerTest {
         handler = new PurchaseOperationHandler();
         apple = new Fruit("apple");
         banana = new Fruit("banana");
+    }
+
+    @Before
+    public void beforeEach() {
         Storage.storage.put(apple, 25);
         Storage.storage.put(banana, 54);
     }

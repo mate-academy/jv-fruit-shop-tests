@@ -8,14 +8,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
     private static final String WRITER_FILE_PATH = "src/test/resources"
             + "/fileWriterResources/output_OK.csv";
     private static final String NOT_EXISTING_FILE_PATH = "";
-    private static final FileWriter fileWriter = new FileWriterImpl();
-    private static final FileReader fileReader = new FileReaderImpl();
+    private static FileWriter fileWriter;
+    private static FileReader fileReader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReader = new FileReaderImpl();
+        fileWriter = new FileWriterImpl();
+    }
 
     @Test
     public void test_writingToFile_OK() {

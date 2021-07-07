@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.FileReaderImpl;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
@@ -12,7 +14,12 @@ public class FileReaderTest {
             + "/fileReaderResources/input_OK.csv";
     private static final String NOT_EXISTING_FILE_PATH = "src/test/resources"
             + "/fileReaderResources/nevermind.csv";
-    private final FileReader fileReader = new FileReaderImpl();
+    private static FileReader fileReader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test ()
     public void test_readingFromFile_OK() {

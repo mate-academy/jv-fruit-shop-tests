@@ -5,14 +5,20 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.FruitReportService;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReporterTest {
-    private final ReportService reportService = new FruitReportService();
+    private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {
+        reportService = new FruitReportService();
+    }
+
+    @Before
+    public void tearDown() {
         Storage.storage.clear();
     }
 

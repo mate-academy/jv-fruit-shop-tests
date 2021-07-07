@@ -18,6 +18,7 @@ public class FileWriterTest {
 
     @Test
     public void test_writingToFile_ok() {
+        //TestCommit
         fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(REPORT, WRITER_FILE_PATH);
         List<String> expected = new ArrayList<>();

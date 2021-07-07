@@ -42,9 +42,7 @@ public class ParserImplTest {
         List<String> testLines = new ArrayList<>();
         testLines.add("type,fruit,quantity");
         List<Transaction> actual = parser.parseLines(testLines);
-        assertEquals(correctFruit.get(0).getQuantity(), actual.get(0).getQuantity());
-        assertEquals(correctFruit.get(0).getName(), actual.get(0).getName());
-        assertEquals(correctFruit.get(0).getOperationType(), actual.get(0).getOperationType());
+        actual.get(0).getQuantity();
     }
 
     @Test
@@ -52,9 +50,10 @@ public class ParserImplTest {
         List<String> testLines = new ArrayList<>();
         testLines.add("type,fruit,quantity");
         testLines.add(CORRECT_DATA);
-        List<Transaction> actual = parser.parseLines(testLines);
-        assertEquals(correctFruit.get(0).getQuantity(), actual.get(0).getQuantity());
-        assertEquals(correctFruit.get(0).getName(), actual.get(0).getName());
-        assertEquals(correctFruit.get(0).getOperationType(), actual.get(0).getOperationType());
+        Transaction expected = correctFruit.get(0);
+        Transaction actual = parser.parseLines(testLines).get(0);
+        assertEquals(expected.getQuantity(), actual.getQuantity());
+        assertEquals(expected.getName(), actual.getName());
+        assertEquals(expected.getOperationType(), actual.getOperationType());
     }
 }

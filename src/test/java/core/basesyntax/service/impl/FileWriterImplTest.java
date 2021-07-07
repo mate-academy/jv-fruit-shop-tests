@@ -4,14 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileWriter;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-
     private static FileWriter fileWriter;
 
     @BeforeClass
@@ -19,10 +20,18 @@ public class FileWriterImplTest {
         fileWriter = new FileWriterImpl();
     }
 
+    @AfterClass
+    public static void afterClass() {
+        File file = new File("src/test/java/testresources/bnbv.csv");
+        file.delete();
+        File fileFoCreateAndWrite = new File("src/test/java/testresources/test_report.csv");
+        fileFoCreateAndWrite.delete();
+    }
+
     @Test(expected = RuntimeException.class)
     public void writeNullData_NotOk() {
         String data = null;
-        fileWriter.writeToFile(data, "bnbv.csv");
+        fileWriter.writeToFile(data, "src/test/java/testresources/bnbv.csv");
     }
 
     @Test(expected = RuntimeException.class)
@@ -36,15 +45,15 @@ public class FileWriterImplTest {
         String fileName = "src/test/java/testresources/test_report.csv";
         String expected = "Test line!";
         fileWriter.writeToFile(expected, fileName);
-        BufferedReader buffering = null;
+        BufferedReader bufferedReader = null;
         try {
-            buffering = new BufferedReader(new FileReader(fileName));
+            bufferedReader = new BufferedReader(new FileReader(fileName));
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Can't find file.");
         }
         String actual = null;
         try {
-            actual = buffering.readLine().toString();
+            actual = bufferedReader.readLine().toString();
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file:" + fileName);
         }

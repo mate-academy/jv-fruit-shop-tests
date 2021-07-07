@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.Validator;
 import org.junit.BeforeClass;
@@ -21,16 +22,16 @@ public class ValidatorImplTest {
 
     @Test
     public void checkEmptyString_Ok() {
-        assertEquals(false, validator.isLineValid(""));
+        assertFalse(validator.isLineValid(""));
     }
 
     @Test
     public void checkIncorrectString_Ok() {
-        assertEquals(false, validator.isLineValid("ggg"));
+        assertFalse(validator.isLineValid("ggg"));
     }
 
     @Test
     public void checkCorrectString_Ok() {
-        assertEquals(true, validator.isLineValid("p,banana,13"));
+        assertTrue(validator.isLineValid("p,banana,13"));
     }
 }

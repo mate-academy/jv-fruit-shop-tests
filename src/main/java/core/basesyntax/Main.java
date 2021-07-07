@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src\\main\\resources\\inputFile.cvs";
-    private static final String OUTPUT_FILE = "src\\main\\resources\\outputFile.txt";
+    private static final String INPUT_FILE = "src/main/resources/inputFile.cvs";
+    private static final String OUTPUT_FILE = "src/main/resources/outputFile.txt";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> handlers = new MapCreatorImpl().createMap();

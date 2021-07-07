@@ -47,7 +47,7 @@ public class FileWriterTest {
     @Test(expected = RuntimeException.class)
     public void fileWriter_NullAndFileName_notOk() {
         String report = null;
-        String fileName = "src\\test\\resources\\FileWriter\\correctWork.cvs";
+        String fileName = "src/test/resources/FileWriter/correctWork.cvs";
         fileWriter.writeToFile(report,fileName);
     }
 

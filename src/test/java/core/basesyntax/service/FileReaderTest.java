@@ -18,7 +18,7 @@ public class FileReaderTest {
 
     @Test
     public void fileReader_correctFile_ok() {
-        String fileName = "src\\test\\resources\\FileReaderTest\\correctWork.cvs";
+        String fileName = "src/test/resources/FileReaderTest/correctWork.cvs";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");

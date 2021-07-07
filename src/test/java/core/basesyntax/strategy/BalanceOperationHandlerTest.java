@@ -5,6 +5,7 @@ import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,10 +13,14 @@ public class BalanceOperationHandlerTest {
     private static OperationsHandler operationsHandler;
     private static FruitDto fruitDto;
 
+    @Before
+    public void setUp() throws Exception {
+        Storage.storage.put(new Fruit("banana"), 60);
+    }
+
     @BeforeClass
     public static void beforeClass() {
         operationsHandler = new BalanceOperationHandler();
-        Storage.storage.put(new Fruit("banana"), 60);
     }
 
     @Test

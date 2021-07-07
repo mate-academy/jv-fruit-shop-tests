@@ -5,17 +5,10 @@ import static org.junit.Assert.assertEquals;
 import db.Storage;
 import model.Fruit;
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static final String SYMBOL_FOR_SEPARATING = ",";
-    private static Storage storage;
-
-    @BeforeClass
-    public static void operationBeforeTest() {
-        storage = new Storage();
-    }
 
     @After
     public void operationAfterTest() {

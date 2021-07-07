@@ -26,9 +26,7 @@ public class ParserImplTest {
     @Test
     public void parseLine_validLine_Ok() {
         Transaction actual = parser.parseLine(VALID_LINE);
-        String[] validData = VALID_LINE.split(SYMBOL_FOR_SPLIT);
-        Transaction expected = new Transaction(validData[TYPE_OPERATION],
-                validData[NAME_FRUIT], Integer.parseInt(validData[QUANTITY]));
+        Transaction expected = new Transaction("b", "banana", 20);
         assertEquals(expected, actual);
     }
 

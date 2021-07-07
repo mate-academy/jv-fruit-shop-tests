@@ -11,7 +11,6 @@ import org.junit.Test;
 public class PurchaseOperationHandlerTest {
     private static OperationHandler purchaseOperation;
 
-
     @BeforeClass
     public static void beforeClass() {
         purchaseOperation = new PurchaseOperationHandler();

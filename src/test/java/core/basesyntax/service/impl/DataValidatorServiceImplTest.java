@@ -23,9 +23,8 @@ public class DataValidatorServiceImplTest {
     @Test
     public void validator_checkDataInput_BalanceOperation_PositiveQuality_ok() {
         String[] data = new String[]{"b", "banana", "10"};
-        boolean expected = true;
         boolean actual = validator.checkDataInput(data);
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual);
     }
 
     @Test
@@ -38,17 +37,15 @@ public class DataValidatorServiceImplTest {
     @Test
     public void validator_checkDataInput_PurchaseOperation_PositiveQuality_ok() {
         String[] data = new String[]{"p", "banana", "10"};
-        boolean expected = true;
         boolean actual = validator.checkDataInput(data);
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual);
     }
 
     @Test
     public void validator_checkDataInput_ReturnOperation_PositiveQuality_ok() {
         String[] data = new String[]{"r", "banana", "10"};
-        boolean expected = true;
         boolean actual = validator.checkDataInput(data);
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)

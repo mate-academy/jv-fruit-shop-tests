@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,11 +15,9 @@ public class FileWriterTest {
             + "/fileWriterResources/output_OK.csv";
     private static final String NOT_EXISTING_FILE_PATH = "";
     private static FileWriter fileWriter;
-    private static FileReader fileReader;
 
     @BeforeClass
     public static void beforeClass() {
-        fileReader = new FileReaderImpl();
         fileWriter = new FileWriterImpl();
     }
 
@@ -30,13 +27,13 @@ public class FileWriterTest {
                 + "be written to the" + System.lineSeparator()
                 + "FILE";
         fileWriter.writeToFile(report, WRITER_FILE_PATH);
-        List<String> expected;
+        List<String> actual;
         try {
-            expected = Files.readAllLines(Path.of(WRITER_FILE_PATH));
+            actual = Files.readAllLines(Path.of(WRITER_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Error while reading file " + WRITER_FILE_PATH, e);
         }
-        List<String> actual = fileReader.readFromFile(WRITER_FILE_PATH);
+        List<String> expected = List.of("this is text, that should", "be written to the", "FILE");
         assertEquals(expected, actual);
     }
 

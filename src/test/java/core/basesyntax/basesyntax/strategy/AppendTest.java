@@ -14,8 +14,8 @@ import org.junit.Test;
 public class AppendTest {
     private static final String APPEND = "s";
     private static final String RETURN = "r";
-    private static final String APPLE = "yabloko";
-    private static final String PINEAPPLE = "bananchik";
+    private static final String APPLE = "apple";
+    private static final String PINEAPPLE = "pineapple";
     private static final String VODKA = "vodka";
     private static OperationHandler handler;
     private static Transaction transactionApple;

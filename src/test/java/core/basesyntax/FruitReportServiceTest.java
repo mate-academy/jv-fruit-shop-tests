@@ -29,8 +29,7 @@ public class FruitReportServiceTest {
         List<String> expectedList = Arrays.asList(expected.split(System.lineSeparator()));
         List<String> actualList =
                 Arrays.asList(fruitReportService.getReport().split(System.lineSeparator()));
-        Assert.assertTrue(expectedList.size() == actualList.size()
-                && expectedList.containsAll(actualList));
+        Assert.assertEquals(expectedList, actualList);
     }
 
     @AfterClass

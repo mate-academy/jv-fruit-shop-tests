@@ -43,8 +43,7 @@ public class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Error while running the test", e);
         }
-        Assert.assertTrue(expectedList.size() == actualList.size()
-                && expectedList.containsAll(actualList));
+        Assert.assertEquals(expectedList,actualList);
     }
 
     @Test(expected = RuntimeException.class)

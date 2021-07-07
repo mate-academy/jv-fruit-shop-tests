@@ -1,11 +1,12 @@
 package strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import db.FruitsDao;
 import db.GenericDao;
+import java.util.Map;
 import models.Fruit;
 import org.junit.Test;
-import java.util.Map;
-import static org.junit.Assert.*;
 
 public class OperationStrategyTest {
     private static GenericDao<Fruit, Integer> dao = new FruitsDao();

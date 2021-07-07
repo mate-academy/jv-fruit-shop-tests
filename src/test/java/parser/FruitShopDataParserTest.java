@@ -3,21 +3,21 @@ package parser;
 import db.FruitsDao;
 import db.GenericDao;
 import exceptions.InvalidDataException;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import strategy.AdditionalOperationHandler;
-import strategy.OperationHandler;
-import strategy.OperationStrategy;
-import strategy.PurchaseOperationHandler;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import org.junit.Test;
+import strategy.AdditionalOperationHandler;
+import strategy.OperationHandler;
+import strategy.OperationStrategy;
+import strategy.PurchaseOperationHandler;
 
 public class FruitShopDataParserTest {
-    private static final GenericDao fruitsDao = new FruitsDao();
-    private  static Map<String, OperationHandler> map = Map.of("b", new AdditionalOperationHandler(fruitsDao),
+    private static GenericDao fruitsDao = new FruitsDao();
+    private static Map<String, OperationHandler> map = Map.of(
+            "b", new AdditionalOperationHandler(fruitsDao),
             "s", new AdditionalOperationHandler(fruitsDao),
             "r", new AdditionalOperationHandler(fruitsDao),
             "p", new PurchaseOperationHandler(fruitsDao));

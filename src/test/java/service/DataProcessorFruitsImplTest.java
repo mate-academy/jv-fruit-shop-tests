@@ -1,15 +1,17 @@
 package service;
 
-import models.Fruit;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Collections;
 import java.util.Map;
-import java.util.Stack;
-import static org.junit.Assert.*;
+import models.Fruit;
+import org.junit.Test;
 
 public class DataProcessorFruitsImplTest {
-    private static DataProcessor<Map<Fruit, Integer>, String> processor = new DataProcessorFruitsImpl();
-    private static Map<Fruit, Integer> mapOfFruits = Map.of(new Fruit("banana"), 100,
+    private static DataProcessor<Map<Fruit, Integer>, String> processor
+            = new DataProcessorFruitsImpl();
+    private static Map<Fruit, Integer> mapOfFruits = Map.of(
+            new Fruit("banana"), 100,
             new Fruit("tangerine"), 200,
             new Fruit("apple"), 400);
 

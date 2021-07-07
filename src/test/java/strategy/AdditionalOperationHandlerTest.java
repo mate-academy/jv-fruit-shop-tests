@@ -1,11 +1,11 @@
 package strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import db.FruitsDao;
 import db.GenericDao;
 import models.Fruit;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class AdditionalOperationHandlerTest {
     private static final GenericDao<Fruit, Integer> fruitsDao = new FruitsDao();

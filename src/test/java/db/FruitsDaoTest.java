@@ -1,19 +1,19 @@
 package db;
 
 import exceptions.BalanceException;
+import java.util.Map;
 import models.Fruit;
 import org.junit.Assert;
 import org.junit.Test;
-import java.util.Map;
 
 public class FruitsDaoTest {
-private static final GenericDao FRUITS_DAO = new FruitsDao();
-private final static Fruit VALID_FRUIT = new Fruit("banana");
-private final static Fruit INVALID_FRUIT = new Fruit("orange");
-private final static Fruit RANDOM_FRUIT = new Fruit("tangerine");
-private final static Fruit SECOND_RANDOM_FRUIT = new Fruit("lemon");
-private final static Integer BAD_QUANTITY = -20;
-private final static Integer GOOD_QUANTITY = 20;
+    private static Fruit VALID_FRUIT = new Fruit("banana");
+    private static Fruit INVALID_FRUIT = new Fruit("orange");
+    private static Fruit RANDOM_FRUIT = new Fruit("tangerine");
+    private static Fruit SECOND_RANDOM_FRUIT = new Fruit("lemon");
+    private static Integer BAD_QUANTITY = -20;
+    private static Integer GOOD_QUANTITY = 20;
+    private static final GenericDao FRUITS_DAO = new FruitsDao();
 
     @Test
     public void updateWithValidElement_Ok() {

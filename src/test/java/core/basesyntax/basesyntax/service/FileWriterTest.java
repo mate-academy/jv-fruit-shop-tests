@@ -39,12 +39,12 @@ public class FileWriterTest {
     public void writer_writeToExistFile_Ok() {
         List<String> expectedList = Arrays.asList(REPORT.split(System.lineSeparator()));
         List<String> actualList;
+        fileWriter.writeToFile(REPORT,FILE_PATH);
         try {
             actualList = readAllLines(Path.of(FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file here: " + FILE_PATH, e);
         }
-        fileWriter.writeToFile(REPORT,FILE_PATH);
         Assert.assertEquals(expectedList, actualList);
     }
 

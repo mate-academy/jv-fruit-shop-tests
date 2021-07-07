@@ -35,7 +35,6 @@ public class Main {
 
         FruitService fruitService = new FruitServiceImpl();
         String report = fruitService.getReport();
-
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(report, OUTPUT_FILE);
     }

@@ -1,11 +1,1 @@
-os: linux
-arch:
-  - ppc64le
-language: java
-jdk:
-  - openjdk11
-script:
-  - mvn clean verify
-cache:
-  directories:
-    - $HOME/.m2
+os: linuxarch:  - ppc64lelanguage: javajdk:  - openjdk11script:  - mvn clean verifycache:  directories:    - $HOME/.m2

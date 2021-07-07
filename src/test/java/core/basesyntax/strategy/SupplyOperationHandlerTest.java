@@ -31,4 +31,14 @@ public class SupplyOperationHandlerTest {
         int actual = Storage.data.get(fruit);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void supplyOperation_return_ok() {
+        Fruit fruit = new Fruit("apple");
+        Transaction transaction = new Transaction("r", fruit, 5);
+        supplyOperation.apply(transaction);
+        int expected = 15;
+        int actual = Storage.data.get(fruit);
+        Assert.assertEquals(expected, actual);
+    }
 }

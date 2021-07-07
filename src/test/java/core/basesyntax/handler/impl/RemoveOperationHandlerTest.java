@@ -39,4 +39,10 @@ public class RemoveOperationHandlerTest {
     public void removeOperationHandler_nonExistentFruit_notOk() {
         removeOperationHandler.apply(transaction);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void removeOperationHandler_notEnoughFruit_notOk() {
+        Storage.fruitStorage.put(fruit, 12);
+        removeOperationHandler.apply(transaction);
+    }
 }

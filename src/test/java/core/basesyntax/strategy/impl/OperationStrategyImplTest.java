@@ -26,9 +26,23 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void operationStrategy_usualState_ok() {
+    public void operationStrategy_addOperationHandler_ok() {
         Class<? extends AddOperationHandler> expected = AddOperationHandler.class;
         Class<? extends OperationHandler> actual = operationStrategy.get("s").getClass();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void operationStrategy_balanceOperationHandler_ok() {
+        Class<? extends BalanceOperationHandler> expected = BalanceOperationHandler.class;
+        Class<? extends OperationHandler> actual = operationStrategy.get("b").getClass();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void operationStrategy_removeOperationHandler_ok() {
+        Class<? extends RemoveOperationHandler> expected = RemoveOperationHandler.class;
+        Class<? extends OperationHandler> actual = operationStrategy.get("p").getClass();
         Assert.assertEquals(expected, actual);
     }
 }

@@ -50,7 +50,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandler_chekReturnValue_Ok() {
+    public void balanceHandler_checkReturnValue_Ok() {
         Transaction transaction = new Transaction("b", "banana", 24);
         int actual = handler.perform(transaction);
         int expected = 24;

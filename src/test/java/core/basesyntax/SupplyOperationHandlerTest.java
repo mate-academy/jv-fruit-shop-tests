@@ -41,7 +41,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyHandle_addTransactionWithNotExistingFruit_Ok() {
+    public void supplyHandler_addTransactionWithNotExistingFruit_Ok() {
         Transaction transaction = new Transaction("s", "orange", 77);
         handler.perform(transaction);
         int actual = Storage.getStorage().get(orange);
@@ -50,10 +50,36 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyHandle_chekReturnValue_Ok() {
+    public void supplyHandler_checkReturnValue_Ok() {
         Transaction transaction = new Transaction("s", "banana", 32);
         int actual = handler.perform(transaction);
         int expected = 121;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void returnHandler_addTransactionWithExistingFruit_Ok() {
+        Transaction transaction = new Transaction("r", "apple", 20);
+        handler.perform(transaction);
+        int actual = Storage.getStorage().get(apple);
+        int expected = 83;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void returnHandler_addTransactionWithNotExistingFruit_Ok() {
+        Transaction transaction = new Transaction("r", "orange", 44);
+        handler.perform(transaction);
+        int actual = Storage.getStorage().get(orange);
+        int expected = 44;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void returnHandler_checkReturnValue_Ok() {
+        Transaction transaction = new Transaction("r", "banana", 30);
+        int actual = handler.perform(transaction);
+        int expected = 119;
         Assert.assertEquals(expected, actual);
     }
 

@@ -5,18 +5,26 @@ import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
+    private static FileWriter fileWriter;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileWriter = new FileWriterImpl();
+    }
+
     @Test
     public void writer_fileCreated_Ok() {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
         String fileName = "src/test/resources/result_test.csv";
-        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(fileName, report);
         Assert.assertTrue(Files.exists(Path.of(fileName)));
     }
@@ -26,21 +34,17 @@ public class FileWriterImplTest {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
+        List<String> expectedList = Arrays.asList(expected.split(System.lineSeparator()));
         String fileName = "src/test/resources/result_test.csv";
-        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(fileName, expected);
-        List<String> actual;
+        List<String> actualList;
         try {
-            actual = Files.readAllLines(Path.of(fileName));
+            actualList = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Error while running the test", e);
         }
-        StringBuilder resultSB = new StringBuilder();
-        for (String s : actual) {
-            resultSB.append(s).append(System.lineSeparator());
-        }
-
-        Assert.assertEquals(expected, resultSB.toString().trim());
+        Assert.assertTrue(expectedList.size() == actualList.size()
+                && expectedList.containsAll(actualList));
     }
 
     @Test(expected = RuntimeException.class)

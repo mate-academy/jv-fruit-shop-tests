@@ -7,9 +7,17 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
+    private static OperationHandler handler;
+
+    @BeforeClass
+    public static void beforeClass() {
+        handler = new AddOperationHandler();
+    }
+
     @Before
     public void setUp() {
         Storage.fruits.put(new Fruit("banana"), 50);
@@ -19,7 +27,7 @@ public class AddOperationHandlerTest {
     public void supplyOperationHandler_Ok() {
         Transaction transaction = new Transaction("s", "banana", 150);
         int expected = 200;
-        int actual = new AddOperationHandler().apply(transaction);
+        int actual = handler.apply(transaction);
         assertEquals(expected, actual);
     }
 
@@ -27,7 +35,7 @@ public class AddOperationHandlerTest {
     public void returnOperationHandler_Ok() {
         Transaction transaction = new Transaction("r", "banana", 150);
         int expected = 200;
-        int actual = new AddOperationHandler().apply(transaction);
+        int actual = handler.apply(transaction);
         assertEquals(expected, actual);
     }
 

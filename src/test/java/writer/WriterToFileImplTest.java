@@ -11,14 +11,15 @@ import org.junit.Test;
 
 public class WriterToFileImplTest {
     private static final Writer<File, String> writer = new WriterToFileImpl();
+    private static final Path GOOD_PATH = Path.of("src/test/resources/Result.csv");
+    private static final Path BAD_PATH = Path.of("src/test/resources3/Result.csv");
 
     @Test
     public void writeToFile_Ok() {
-        Path path = Path.of("src/test/resources/Result.csv");
         String expected = "datadatadata";
-        writer.write(path.toFile(), expected);
+        writer.write(GOOD_PATH.toFile(), expected);
         String result;
-        try (BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(GOOD_PATH.toFile()))) {
             result = reader.readLine();
         } catch (IOException e) {
             throw new RuntimeException("There is no source like this");
@@ -28,7 +29,6 @@ public class WriterToFileImplTest {
 
     @Test(expected = RuntimeException.class)
     public void badWriteToFile_Ok() {
-        Path path = Path.of("src/test/resources3/Result.csv");
-        writer.write(path.toFile(), "data");
+        writer.write(BAD_PATH.toFile(), "data");
     }
 }

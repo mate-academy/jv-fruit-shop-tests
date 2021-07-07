@@ -10,15 +10,17 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private static Reader<String, Path> reader = new FileReaderImpl();
+    private static final Path GOOD_PATH = Path.of("src/test/resources/CorrectTestSource.csv");
+    private static final Path BAD_PATH = Path.of("src/test/resources3/Result.csv");
 
     @Test
     public void readFromExistSource_Ok() {
         List<String> readedData = reader.read(
-                Path.of("src/test/resources/CorrectTestSource.csv"));
+                GOOD_PATH);
         List<String> correctReadedData;
         try {
             correctReadedData = Files.readAllLines(
-                    Path.of("src/test/resources/CorrectTestSource.csv"));
+                    GOOD_PATH);
         } catch (IOException e) {
             throw new RuntimeException("There is no source like this");
         }
@@ -27,6 +29,6 @@ public class FileReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readFromNonExistSource_NotOk() {
-        List<String> readedData = reader.read(Path.of("src/test/resources2/CorrectTestSource.csv"));
+        List<String> readedData = reader.read(BAD_PATH);
     }
 }

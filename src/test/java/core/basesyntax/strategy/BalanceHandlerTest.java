@@ -3,9 +3,11 @@ package core.basesyntax.strategy;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dbtest.StorageTest;
 import core.basesyntax.dto.FruitDto;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -76,5 +78,26 @@ public class BalanceHandlerTest {
                     "Files are not able to be read: " + PATH_FILE_RESULT + " " + PATH_OUTPUT_FILE,
                     e);
         }
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void balanceHandler_apply_NullCheck_ok() {
+        OperationHandler operationHandler = new BalanceHandler(StorageTest.storage);
+        operationHandler.apply(null);
+    }
+
+    @Test
+    public void balanceHandler_apply_changeStorage_ok() {
+        StorageTest.storage.put(new Fruit("banana"), 100);
+        OperationHandler purchaseHandler = new BalanceHandler(StorageTest.storage);
+        purchaseHandler.apply(new FruitDto("b", "grape", 100));
+        assertTrue(StorageTest.storage.containsKey(new Fruit("grape")));
+        assertEquals(100,
+                StorageTest.storage.get(new Fruit("grape")).intValue());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchaseHandler_constructor_notOk() {
+        OperationHandler purchaseHandler = new BalanceHandler(null);
     }
 }

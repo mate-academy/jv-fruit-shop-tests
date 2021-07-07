@@ -91,6 +91,9 @@
         <configuration>
           <excludes>
             <exclude>**/Main*</exclude>
+            <exclude>**/Storage*</exclude>
+            <exclude>**/FruitDto*</exclude>
+            <exclude>**/Fruit*</exclude>
           </excludes>
         </configuration>
       </plugin>

@@ -5,9 +5,13 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class AdditionHandler implements OperationHandler {
-    private Map<Fruit, Integer> storage;
+    private final Map<Fruit, Integer> storage;
 
     public AdditionHandler(Map<Fruit, Integer> storage) {
+        if (storage == null) {
+            throw new RuntimeException("arg Map<Fruit, Integer> is null",
+                    new NullPointerException());
+        }
         this.storage = storage;
     }
 

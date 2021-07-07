@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.dbtest.StorageTest;
 import core.basesyntax.dto.FruitDto;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -87,5 +88,31 @@ public class AdditionHandlerTest {
                     "Files are not able to be read: " + PATH_FILE_RESULT + " " + PATH_OUTPUT_FILE,
                     e);
         }
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void additionHandler_apply_NullCheck_ok() {
+        OperationHandler operationHandler = new PurchaseHandler(StorageTest.storage);
+        operationHandler.apply(null);
+    }
+
+    @Test
+    public void additionHandler_apply_changeStorage_ok() {
+        StorageTest.storage.put(new Fruit("banana"), 100);
+        OperationHandler purchaseHandler = new AdditionHandler(StorageTest.storage);
+        purchaseHandler.apply(new FruitDto("s", "banana", 100));
+        int expected = 200;
+        int actual = StorageTest.storage.get(new Fruit("banana"));
+        assertEquals(expected, actual);
+
+        purchaseHandler.apply(new FruitDto("r", "banana", 100));
+        expected = 300;
+        actual = StorageTest.storage.get(new Fruit("banana"));
+        assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchaseHandler_constructor_notOk() {
+        PurchaseHandler purchaseHandler = new PurchaseHandler(null);
     }
 }

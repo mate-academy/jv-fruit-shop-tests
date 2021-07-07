@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.dbtest.StorageTest;
 import core.basesyntax.dto.FruitDto;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -19,7 +20,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,11 +33,6 @@ public class PurchaseHandlerTest {
 
     @Before
     public void setStorageOperation() {
-        StorageTest.storage.clear();
-    }
-
-    @AfterClass
-    public static void clearStorage() {
         StorageTest.storage.clear();
     }
 
@@ -87,5 +82,33 @@ public class PurchaseHandlerTest {
                     "Files are not able to be read: " + PATH_FILE_RESULT + " " + PATH_OUTPUT_FILE,
                     e);
         }
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchaseHandler_apply_NullCheck_ok() {
+        OperationHandler operationHandler = new PurchaseHandler(StorageTest.storage);
+        operationHandler.apply(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchaseHandler_apply_notEnoughQuantityInStorage_ok() {
+        StorageTest.storage.put(new Fruit("banana"), 100);
+        PurchaseHandler purchaseHandler = new PurchaseHandler(StorageTest.storage);
+        purchaseHandler.apply(new FruitDto("p", "banana", 120));
+    }
+
+    @Test
+    public void purchaseHandler_apply_changeStorage_ok() {
+        StorageTest.storage.put(new Fruit("banana"), 100);
+        PurchaseHandler purchaseHandler = new PurchaseHandler(StorageTest.storage);
+        purchaseHandler.apply(new FruitDto("p", "banana", 100));
+        int expected = 0;
+        int actual = StorageTest.storage.get(new Fruit("banana"));
+        assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchaseHandler_constructor_notOk() {
+        PurchaseHandler purchaseHandler = new PurchaseHandler(null);
     }
 }

@@ -6,9 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriter implements Writer {
+    private static final String PATTERN = "(\\w+,\\w+\\r*\\n*)(\\w+,\\d+\\r*\\n*)*";
 
     @Override
     public boolean writeToFile(String report, String filePath) {
+
+        if (report == null || !report.matches(PATTERN)) {
+            throw new RuntimeException("Report isn't valid");
+        }
         try {
             Files.write(Path.of(filePath), report.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {

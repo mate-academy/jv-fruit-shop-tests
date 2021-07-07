@@ -31,4 +31,9 @@ public class ParserImplTest {
         FruitDto actual = parser.parseToFruitDto("r,banane,100");
         assertNotEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parser_parseToFruitDto_isValid_false_notOk() {
+        parser.parseToFruitDto("b,wegsd,-100");
+    }
 }

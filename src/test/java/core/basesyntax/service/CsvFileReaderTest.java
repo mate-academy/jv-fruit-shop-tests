@@ -18,7 +18,7 @@ public class CsvFileReaderTest {
     }
 
     @Test
-    public void fileReader_equals_ok() {
+    public void fileReader_readSuccess_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -33,7 +33,7 @@ public class CsvFileReaderTest {
     }
 
     @Test
-    public void fileReader_equals_notOk() {
+    public void fileReader_failRead_notOk() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -46,6 +46,11 @@ public class CsvFileReaderTest {
         expected.add("s,banana,50");
         List<String> actual = fileReader.readFromFile(PATH_FILE_INTO);
         assertNotEquals(expected.toArray(), actual.toArray());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fileReader_nullArgPath() {
+        fileReader.readFromFile("sfkjdh.csv");
     }
 
 }

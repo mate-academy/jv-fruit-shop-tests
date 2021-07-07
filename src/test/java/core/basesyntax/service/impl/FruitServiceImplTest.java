@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.Transaction;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -40,18 +40,19 @@ public class FruitServiceImplTest {
 
     @Test
     public void callMethodOnEmptyListName_Ok() {
+        Map<Fruit, Integer> testStorage = Storage.getFruits();
         List<Transaction> testList = new ArrayList<>();
         fruitService.applyOperations(testList);
+        assertEquals(testStorage, Storage.getFruits());
     }
 
     @Test
     public void callMethodOnNotEmptyListName_Ok() {
         List<Transaction> testList = new ArrayList<>();
-        testList.add(new Transaction(OperationType.SUPPLY, "apple", 50));
-        testList.add(new Transaction(OperationType.PURCHASE, "apple", 30));
+        String expectedName = "apple";
+        Integer expectedQuantity = 50;
+        testList.add(new Transaction(OperationType.SUPPLY, expectedName, expectedQuantity));
         fruitService.applyOperations(testList);
-        String expected = "fruit,quantity\n" + "apple,20";
-        ReportService reportService = new ReportServiceImpl();
-        assertEquals(expected, reportService.getReport());
+        assertEquals(expectedQuantity, Storage.getFruits().get(new Fruit(expectedName)));
     }
 }

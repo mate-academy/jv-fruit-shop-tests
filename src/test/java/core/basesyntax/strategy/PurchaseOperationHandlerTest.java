@@ -7,6 +7,7 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -16,6 +17,10 @@ public class PurchaseOperationHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         handler = new PurchaseOperationHandler();
+    }
+
+    @Before
+    public void before() {
         Storage.getFruits().put(new Fruit("apple"), 50);
     }
 
@@ -26,8 +31,8 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void testPurchase_Ok() {
-        Transaction transaction = new Transaction(OperationType.PURCHASE, "apple", 0);
-        int expected = 0;
+        Transaction transaction = new Transaction(OperationType.PURCHASE, "apple", 10);
+        int expected = 40;
         int actual = handler.apply(transaction);
         assertEquals(expected, actual);
     }

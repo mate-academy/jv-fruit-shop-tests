@@ -30,7 +30,7 @@ public class FruitServiceTest {
         int newQuantity = 100;
         Storage.storage.put(fruit, newQuantity);
         String actual = fruitService.getReport();
-        String expected = "fruit,quantity" + System.lineSeparator() + "banana,100";
+        String expected = "fruit,quantity" + "\n" + "banana,100";
         assertEquals(expected, actual);
     }
 }

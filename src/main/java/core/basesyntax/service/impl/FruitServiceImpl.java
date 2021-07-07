@@ -10,7 +10,7 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public String getReport() {
         StringBuilder reportText = new StringBuilder(HEAD);
-        Storage.storage.forEach((key, value) -> reportText.append(System.lineSeparator())
+        Storage.storage.forEach((key, value) -> reportText.append("\n")
                 .append(key.getName())
                 .append(SEPARATOR)
                 .append(value));

@@ -25,8 +25,8 @@ public class ParserImpl implements Parser {
         if (Integer.parseInt(splitLine[QUANTITY_INDEX]) < 0) {
             throw new RuntimeException("Quantity cannot be less than zero");
         }
-        if (!operations.contains(splitLine[0])) {
-            throw new RuntimeException("Invalid operation");
+        if (!operations.contains(splitLine[OPERATION_INDEX])) {
+            throw new RuntimeException("Invalid operation : " + splitLine[OPERATION_INDEX]);
         }
         return new Transaction(splitLine[OPERATION_INDEX],
                 splitLine[NAME_INDEX],

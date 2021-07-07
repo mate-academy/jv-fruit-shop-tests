@@ -25,13 +25,7 @@ public class FruitReportServiceImplTest {
     public void report_getReport_ok() {
         Storage.data.put(new Fruit("banana"), 10);
         StringBuilder builder = new StringBuilder();
-        builder.append("fruit,quantity")
-                .append("\n")
-                .append("banana")
-                .append(",")
-                .append(10)
-                .append("\n");
-        String expected = builder.toString();
+        String expected ="fruit,quantity\nbanana,10\n";
         String actual = report.getReport();
         Assert.assertEquals(expected, actual);
     }

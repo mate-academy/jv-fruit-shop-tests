@@ -9,7 +9,7 @@ public class DataValidatorServiceImplTest {
     private static DataValidatorService validator;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         validator = new DataValidatorServiceImpl();
     }
 

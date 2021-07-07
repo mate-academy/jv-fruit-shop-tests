@@ -10,9 +10,10 @@ public class PurchaseOperationHandler implements OperationHandler {
         DataValidatorServiceImpl validator = new DataValidatorServiceImpl();
         int oldQuantity = Storage.data.get(transaction.getFruit());
         int newQuantity = oldQuantity - transaction.getQuantity();
-        if (validator.checkOperation(newQuantity)) {
-            Storage.data.put(transaction.getFruit(), newQuantity);
+        if (newQuantity < 0) {
+            throw new RuntimeException("limit quantity");
         }
+        Storage.data.put(transaction.getFruit(), newQuantity);
         return newQuantity;
     }
 }

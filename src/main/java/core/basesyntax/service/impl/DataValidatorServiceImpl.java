@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataValidatorService;
 
 public class DataValidatorServiceImpl implements DataValidatorService {
-
     public static final int OPERATION = 0;
     public static final int FRUIT_NAME = 1;
     public static final int QUALITY = 2;
@@ -20,13 +19,6 @@ public class DataValidatorServiceImpl implements DataValidatorService {
                 || data[OPERATION].equals("p")
                 || data[OPERATION].equals("r"))) {
             throw new RuntimeException("Incorrect input data");
-        }
-        return true;
-    }
-
-    public boolean checkOperation(int value) {
-        if (value < ZERO) {
-            throw new RuntimeException("money ran out");
         }
         return true;
     }

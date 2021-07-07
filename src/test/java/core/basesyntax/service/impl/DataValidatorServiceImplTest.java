@@ -31,9 +31,8 @@ public class DataValidatorServiceImplTest {
     @Test
     public void validator_checkDataInput_SupplyOperation_PositiveQuality_ok() {
         String[] data = new String[]{"s", "banana", "10"};
-        boolean expected = true;
         boolean actual = validator.checkDataInput(data);
-        Assert.assertEquals(expected, actual);
+        Assert.assertTrue(actual);
     }
 
     @Test
@@ -74,17 +73,5 @@ public class DataValidatorServiceImplTest {
     public void validator_checkDataInput_negativeQuantity_notOk() {
         String[] data = new String[]{"r", "apple", "-10"};
         validator.checkDataInput(data);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void validator_checkOperation_negativeValue_notOk() {
-        validator.checkOperation(-10);
-    }
-
-    @Test
-    public void validator_checkOperation_positiveValue_ok() {
-        boolean expected = true;
-        boolean actual = validator.checkOperation(10);
-        Assert.assertEquals(expected, actual);
     }
 }

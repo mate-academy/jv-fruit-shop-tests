@@ -31,4 +31,11 @@ public class PurchaseOperationHandlerTest {
         int actual = Storage.data.get(fruit);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void purchaseOperation_limitQuantity_notOk() {
+        Fruit fruit = new Fruit("apple");
+        Transaction transaction = new Transaction("p", fruit, 20);
+        purchaseOperation.apply(transaction);
+    }
 }

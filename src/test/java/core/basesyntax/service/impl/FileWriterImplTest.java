@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileWriter;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import org.junit.AfterClass;
@@ -45,19 +44,12 @@ public class FileWriterImplTest {
         String fileName = "src/test/java/testresources/test_report.csv";
         String expected = "Test line!";
         fileWriter.writeToFile(expected, fileName);
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(fileName));
-        } catch (FileNotFoundException e) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            String actual = bufferedReader.readLine().toString();
+            assertEquals(expected, actual);
+        } catch (IOException e) {
             throw new RuntimeException("Can't find file.");
         }
-        String actual = null;
-        try {
-            actual = bufferedReader.readLine().toString();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read from file:" + fileName);
-        }
-        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

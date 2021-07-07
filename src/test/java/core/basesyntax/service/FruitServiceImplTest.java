@@ -9,7 +9,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.strategy.StrategySupplierImpl;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -51,18 +50,10 @@ public class FruitServiceImplTest {
 
     @Test
     public void getCurrentStorageState_Ok() {
-        final StringBuilder stringBuilder = new StringBuilder();
+        final String expected = "fruit,quantity\ntestFruit3,220\ntestFruit2,130\ntestFruit1,120\n";
         Storage.fruitStorage.put(new Fruit("testFruit1"), 120);
         Storage.fruitStorage.put(new Fruit("testFruit2"), 130);
         Storage.fruitStorage.put(new Fruit("testFruit3"), 220);
-        stringBuilder.append("fruit,quantity\n");
-        for (Map.Entry<Fruit, Integer> pair : Storage.fruitStorage.entrySet()) {
-            stringBuilder.append(pair.getKey().getName())
-                    .append(WORDS_SEPARATOR)
-                    .append(pair.getValue())
-                    .append(LINES_SEPARATOR);
-        }
-        String expected = stringBuilder.toString();
         String actual = fruitService.getCurrentStorageState();
         assertEquals(expected, actual);
     }

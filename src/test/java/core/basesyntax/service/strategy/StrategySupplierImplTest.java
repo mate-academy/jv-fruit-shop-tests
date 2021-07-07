@@ -22,9 +22,23 @@ public class StrategySupplierImplTest {
     }
 
     @Test
-    public void getStrategy() {
+    public void getStrategyReduce() {
         String expected = ReduceQuantityStrategy.class.getName();
         String actual = supplier.getStrategy("p").getClass().getName();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getStrategySet() {
+        String expected = SetQuantityStrategy.class.getName();
+        String actual = supplier.getStrategy("b").getClass().getName();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getStrategyIncrease() {
+        String expected = IncreaseQuantityStrategy.class.getName();
+        String actual = supplier.getStrategy("s").getClass().getName();
         assertEquals(expected, actual);
     }
 }

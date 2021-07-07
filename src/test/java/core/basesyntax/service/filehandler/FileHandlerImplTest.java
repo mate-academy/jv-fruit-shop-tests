@@ -21,9 +21,9 @@ public class FileHandlerImplTest {
 
     @Test
     public void readFromFile_Ok() {
+        String actual = String.join("\n", fileHandler.readFromFile(TEST_INPUT_DATA));
         try {
             String expected = String.join("\n", Files.readAllLines(Path.of(TEST_INPUT_DATA)));
-            String actual = String.join("\n", fileHandler.readFromFile(TEST_INPUT_DATA));
             assertEquals(expected, actual);
         } catch (IOException e) {
             throw new RuntimeException("File read error in readFromFile_ok");

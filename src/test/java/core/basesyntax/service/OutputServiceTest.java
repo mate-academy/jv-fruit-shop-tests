@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OutputServiceTest {
-    private final OutputService reportService = new FruitOutputService();
-    private final Fruit apple = new Fruit();
-    private final Fruit banana = new Fruit();
+    private OutputService reportService;
+    private Fruit apple = new Fruit();
+    private Fruit banana = new Fruit();
 
     @Test
     public void test_Report_OK() {
@@ -25,6 +25,7 @@ public class OutputServiceTest {
 
     @Before
     public void start() {
+        reportService = new FruitOutputService();
         Storage.storage.clear();
         apple.setName("apple");
         banana.setName("banana");

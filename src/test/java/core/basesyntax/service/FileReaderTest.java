@@ -25,7 +25,7 @@ public class FileReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_readingFromFile_Not_OK() {
+    public void test_readingFromFile_NotOK() {
         fileReader.readFromFile(NO_CORRECT_PATH);
     }
 }

@@ -17,8 +17,8 @@ public class AddOperationHandlerTest {
     @Test
     public void test_AddingFruitsToStorage_OK() {
         Storage.storage.put(apple, 10);
-        int expected = 10;
-        int actual = addHandler.apply(new Transaction(Operation.P, apple, 0));
+        int expected = 20;
+        int actual = addHandler.apply(new Transaction(Operation.S, apple, 10));
         assertEquals(expected, actual);
     }
 
@@ -26,7 +26,7 @@ public class AddOperationHandlerTest {
     public void test_AddingWrongData_OK() {
         Storage.storage.put(apple, 10);
         int expected = 0;
-        int actual = addHandler.apply(new Transaction(Operation.P, apple, 0));
+        int actual = addHandler.apply(new Transaction(Operation.S, apple, 0));
         assertNotEquals(expected, actual);
     }
 

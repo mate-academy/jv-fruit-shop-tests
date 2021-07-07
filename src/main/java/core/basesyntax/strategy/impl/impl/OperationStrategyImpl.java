@@ -2,7 +2,6 @@ package core.basesyntax.strategy.impl.impl;
 
 import core.basesyntax.handler.impl.OperationHandler;
 import core.basesyntax.strategy.impl.OperationStrategy;
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

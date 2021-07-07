@@ -97,9 +97,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/FruitShop*</exclude>
-                        <exclude>**/dto*</exclude>
-                        <exclude>**/db*</exclude>
-                        <exclude>**/model*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

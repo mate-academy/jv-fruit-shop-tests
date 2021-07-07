@@ -4,10 +4,9 @@ import core.basesyntax.handler.impl.OperationHandler;
 import core.basesyntax.handler.impl.impl.AddOperationHandler;
 import core.basesyntax.handler.impl.impl.BalanceOperationHandler;
 import core.basesyntax.handler.impl.impl.RemoveOperationHandler;
+import core.basesyntax.strategy.impl.impl.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
-
-import core.basesyntax.strategy.impl.impl.OperationStrategyImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

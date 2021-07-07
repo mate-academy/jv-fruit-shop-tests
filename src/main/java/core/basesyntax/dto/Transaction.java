@@ -1,5 +1,7 @@
 package core.basesyntax.dto;
 
+import java.util.Objects;
+
 public class Transaction {
     private String operation;
     private String name;
@@ -29,5 +31,24 @@ public class Transaction {
                 + "operation='" + operation + '\''
                 + ", name='" + name + '\''
                 + ", quantity=" + quantity + '}';
+    }
+
+    @Override
+    public boolean equals(Object transaction) {
+        if (this == transaction) {
+            return true;
+        }
+        if (transaction == null || getClass() != transaction.getClass()) {
+            return false;
+        }
+        Transaction that = (Transaction) transaction;
+        return quantity == that.quantity
+                && Objects.equals(operation, that.operation)
+                && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, name, quantity);
     }
 }

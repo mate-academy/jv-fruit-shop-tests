@@ -21,8 +21,8 @@ public class ParserTest {
     @Test
     public void parser_correctWork_ok() {
         String line = "b,banana,20";
-        String actual = new Transaction("b","banana",20).toString();
-        String expected = parser.parseLine(line).toString();
+        Transaction actual = new Transaction("b","banana",20);
+        Transaction expected = parser.parseLine(line);
         assertEquals(expected, actual);
     }
 

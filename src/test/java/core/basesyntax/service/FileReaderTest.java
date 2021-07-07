@@ -17,12 +17,12 @@ public class FileReaderTest {
     @Test
     public void read_inputCorrectFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
-        List<String> actual = fileReader.readFromFile("src/test/java/resources/input_file.csv");
+        List<String> actual = fileReader.readFromFile("src/test/resources/input_file.csv");
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void read_nonExistentPath_NotOk() {
-        fileReader.readFromFile("src/test/java/resources/non-existent.csv");
+        fileReader.readFromFile("src/test/resources/non-existent.csv");
     }
 }

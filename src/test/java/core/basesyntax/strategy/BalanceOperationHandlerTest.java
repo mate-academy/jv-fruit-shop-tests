@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static OperationsHandler operationsHandler;
-    private static FruitDto fruitDto;
 
     @Before
     public void setUp() throws Exception {
@@ -19,15 +18,15 @@ public class BalanceOperationHandlerTest {
     }
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws Exception {
         operationsHandler = new BalanceOperationHandler();
     }
 
     @Test
     public void getBalance_Ok() {
-        fruitDto = new FruitDto("b", "banana", 60);
+        FruitDto fruitDto = new FruitDto("b", "banana", 60);
         int expected = 60;
-        int actual = new BalanceOperationHandler().apply(fruitDto);
+        int actual = operationsHandler.apply(fruitDto);
         Assert.assertEquals(expected, actual);
     }
 

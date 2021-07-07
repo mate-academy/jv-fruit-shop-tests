@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static OperationsHandler operationsHandler;
-    private static FruitDto fruitDto;
 
     @Before
     public void setUp() throws Exception {
@@ -25,20 +24,20 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void purchase_validAmountFruits_Ok() {
-        fruitDto = new FruitDto("p", "apple", 20);
+        FruitDto fruitDto = new FruitDto("p", "apple", 20);
         int expected = 80;
-        int actual = new PurchaseOperationHandler().apply(fruitDto);
+        int actual = operationsHandler.apply(fruitDto);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void purchase_invalidAmountFruits_Ok() {
-        fruitDto = new FruitDto("p", "apple", 102);
+        FruitDto fruitDto = new FruitDto("p", "apple", 102);
         new PurchaseOperationHandler().apply(fruitDto);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() throws Exception {
         Storage.storage.clear();
     }
 }

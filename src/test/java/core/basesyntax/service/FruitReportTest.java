@@ -12,13 +12,13 @@ public class FruitReportTest {
 
     @BeforeClass
     public static void beforeClass() {
-        Storage.storage.put(new Fruit("banana"), 20);
-        Storage.storage.put(new Fruit("apple"), 100);
         fruitReport = new FruitReportImpl();
     }
 
     @Test
     public void getReport_fromStorage_Ok() {
+        Storage.storage.put(new Fruit("banana"), 20);
+        Storage.storage.put(new Fruit("apple"), 100);
         String actual = fruitReport.getReport();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()

@@ -21,9 +21,9 @@ public class FileWriterTest {
     public void write_toCorrectFile_Ok() throws IOException {
         fileWriter.writeToFile("type,fruit,quantity\n"
                 + "b,banana,20\n"
-                + "b,apple,100", "src/test/java/resources/output_file.csv");
+                + "b,apple,100", "src/test/resources/output_file.csv");
         List<String> actual = Files.readAllLines(
-                Path.of("src/test/java/resources/output_file.csv"));
+                Path.of("src/test/resources/output_file.csv"));
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
         Assert.assertEquals(expected, actual);
     }

@@ -32,7 +32,7 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void return_fruitsInStorage_Ok() {
-        FruitDto fruitDto = new FruitDto("s", "banana", 60);
+        FruitDto fruitDto = new FruitDto("r", "banana", 60);
         int expected = 85;
         int actual = new SupplyOperationHandler().apply(fruitDto);
         Assert.assertEquals(expected, actual);

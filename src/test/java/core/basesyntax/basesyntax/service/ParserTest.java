@@ -1,7 +1,6 @@
 package core.basesyntax.basesyntax.service;
 
 import core.basesyntax.dto.Transaction;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
 import org.junit.Assert;

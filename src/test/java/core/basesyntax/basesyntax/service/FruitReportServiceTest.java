@@ -37,9 +37,9 @@ public class FruitReportServiceTest {
     public void report_getReport_Ok() {
         String expected = "fruit,quantity"
                 + SEPARATOR
-                + "pineapple,521"
+                + "apple,125"
                 + SEPARATOR
-                + "apple,125";
+                + "pineapple,521";
 
         List<String> expectedList = Arrays.asList(expected.split(SEPARATOR));
         List<String> actualList = Arrays.asList(fruitReportService.returnReport().split(SEPARATOR));

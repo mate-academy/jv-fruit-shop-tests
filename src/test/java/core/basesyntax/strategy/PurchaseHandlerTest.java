@@ -6,12 +6,12 @@ import static org.junit.Assert.assertNotEquals;
 import core.basesyntax.db.StorageTest;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
     private static OperationHandler purchaseHandler;
+
     @BeforeClass
     public static void setStorageOperation() {
         purchaseHandler = new PurchaseHandler(StorageTest.storage);

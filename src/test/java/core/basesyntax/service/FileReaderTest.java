@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.FileReaderImpl;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 

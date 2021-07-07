@@ -17,7 +17,7 @@ import org.junit.Test;
 public class FileWriterTest {
     private static final String REPORT = "fruit,quantity" + System.lineSeparator()
             + "vodka,350" + System.lineSeparator()
-            + "yabloko,250";
+            + "apple,250";
     private static final String FILE_PATH = "src" + File.separator
             + "test" + File.separator
             + "resources" + File.separator
@@ -44,6 +44,7 @@ public class FileWriterTest {
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file here: " + FILE_PATH, e);
         }
+        fileWriter.writeToFile(REPORT,FILE_PATH);
         Assert.assertEquals(expectedList, actualList);
     }
 

@@ -13,33 +13,33 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitReportServiceTest {
-    private static final String YABLOKO = "yabloko";
-    private static final String BANANCHIK = "bananchik";
+    private static final String APPLE = "apple";
+    private static final String PINEAPPLE = "pineapple";
     private static final String SEPARATOR = System.lineSeparator();
-    private static Fruit yabloko;
-    private static Fruit bananchik;
+    private static Fruit apple;
+    private static Fruit pineapple;
     private static FruitReportService fruitReportService;
 
     @BeforeClass
     public static void beforeClass() {
-        yabloko = new Fruit(YABLOKO);
-        bananchik = new Fruit(BANANCHIK);
+        apple = new Fruit(APPLE);
+        pineapple = new Fruit(PINEAPPLE);
         fruitReportService = new FruitReportServiceImpl();
     }
 
     @Before
     public void setUp() {
-        Storage.fruitStorage.put(yabloko, 125);
-        Storage.fruitStorage.put(bananchik, 521);
+        Storage.fruitStorage.put(apple, 125);
+        Storage.fruitStorage.put(pineapple, 521);
     }
 
     @Test
     public void report_getReport_Ok() {
         String expected = "fruit,quantity"
                 + SEPARATOR
-                + "bananchik,521"
+                + "pineapple,521"
                 + SEPARATOR
-                + "yabloko,125";
+                + "apple,125";
 
         List<String> expectedList = Arrays.asList(expected.split(SEPARATOR));
         List<String> actualList = Arrays.asList(fruitReportService.returnReport().split(SEPARATOR));

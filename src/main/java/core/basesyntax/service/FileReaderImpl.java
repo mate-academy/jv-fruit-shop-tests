@@ -8,7 +8,6 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFromFile(String fileName) {
-        List<String> reader;
         try {
             return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {

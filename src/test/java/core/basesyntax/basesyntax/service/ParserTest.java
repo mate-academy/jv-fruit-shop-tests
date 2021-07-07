@@ -4,27 +4,23 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.PurchaseOperationHandler;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
-    private static final String BANANCHIK = "bananchik";
+    private static final String PINEAPPLE = "pineapple";
     private static Parser parser;
 
     @BeforeClass
     public static void beforeClass() {
-        OperationHandler handler = new PurchaseOperationHandler();
-        Fruit bananchik = new Fruit(BANANCHIK);
         parser = new ParserImpl();
     }
 
     @Test
     public void parser_parserLine_Ok() {
-        String line = "b,bananchik,500";
-        Transaction expected = new Transaction("b", BANANCHIK, 500);
+        String line = "b,pineapple,500";
+        Transaction expected = new Transaction("b", PINEAPPLE, 500);
         Transaction actual = parser.parseLine(line);
 
         Assert.assertEquals(expected.getOperation(), actual.getOperation());
@@ -34,7 +30,7 @@ public class ParserTest {
 
     @Test(expected = RuntimeException.class)
     public void parser_parserLineEmptyElement_Not_Ok() {
-        String line = "p,aple";
+        String line = "p,apple";
         parser.parseLine(line);
     }
 

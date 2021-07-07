@@ -13,37 +13,37 @@ import org.junit.Test;
 
 public class PurchaseTest {
     private static final String PURCHASE = "p";
-    private static final String YABLOKO = "yabloko";
-    private static final String BANANCHIK = "bananchik";
+    private static final String APPLE = "apple";
+    private static final String PINEAPPLE = "pineapple";
     private static OperationHandler handler;
     private static Transaction transactionApple;
     private static Transaction transactionBanana;
-    private static Fruit yabloko;
-    private static Fruit bananchik;
+    private static Fruit apple;
+    private static Fruit pineapple;
 
     @BeforeClass
     public static void beforeClass() {
         handler = new PurchaseOperationHandler();
-        yabloko = new Fruit(YABLOKO);
-        bananchik = new Fruit(BANANCHIK);
+        apple = new Fruit(APPLE);
+        pineapple = new Fruit(PINEAPPLE);
     }
 
     @Before
     public void setUp() {
-        Storage.fruitStorage.put(yabloko, 50);
-        Storage.fruitStorage.put(bananchik, 50);
+        Storage.fruitStorage.put(apple, 50);
+        Storage.fruitStorage.put(pineapple, 50);
     }
 
     @Test
     public void purchase_addTransaction_Ok() {
-        transactionApple = new Transaction(PURCHASE, YABLOKO, 10);
-        transactionBanana = new Transaction(PURCHASE, BANANCHIK, 40);
+        transactionApple = new Transaction(PURCHASE, APPLE, 10);
+        transactionBanana = new Transaction(PURCHASE, PINEAPPLE, 40);
 
         handler.apply(transactionApple);
         handler.apply(transactionBanana);
 
-        int actualApple = Storage.fruitStorage.get(yabloko);
-        int actualBanana = Storage.fruitStorage.get(bananchik);
+        int actualApple = Storage.fruitStorage.get(apple);
+        int actualBanana = Storage.fruitStorage.get(pineapple);
         int expectedApple = 40;
         int expectedBanana = 10;
 
@@ -53,8 +53,8 @@ public class PurchaseTest {
 
     @Test(expected = RuntimeException.class)
     public void purchase_addTransactionWithNotEnough_notOk() {
-        transactionApple = new Transaction(PURCHASE, YABLOKO, 450);
-        transactionBanana = new Transaction(PURCHASE, BANANCHIK, 780);
+        transactionApple = new Transaction(PURCHASE, APPLE, 450);
+        transactionBanana = new Transaction(PURCHASE, PINEAPPLE, 780);
 
         handler.apply(transactionApple);
         handler.apply(transactionBanana);

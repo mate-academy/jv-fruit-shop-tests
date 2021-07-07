@@ -1,0 +1,58 @@
+package core.basesyntax.service;
+
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.dto.Transaction;
+import core.basesyntax.service.impl.LineValidatorImpl;
+import core.basesyntax.service.impl.ParserImpl;
+import org.junit.Before;
+import org.junit.Test;
+
+public class ParserTest {
+    private LineValidator lineValidator;
+    private Parser parser;
+
+    @Before
+    public void init() {
+        lineValidator = new LineValidatorImpl();
+        parser = new ParserImpl(lineValidator);
+    }
+
+    @Test
+    public void parser_correctWork_ok() {
+        String line = "b,banana,20";
+        String actual = new Transaction("b","banana",20).toString();
+        String expected = parser.parseLine(line).toString();
+        assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parser_withOutOperation_notOk() {
+        String line = "banana,20";
+        parser.parseLine(line);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parser_withOutFruit_notOk() {
+        String line = "b,,20";
+        parser.parseLine(line);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parser_withOutQuantity_notOk() {
+        String line = "b,banana,";
+        parser.parseLine(line);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parser_emptyLine_notOk() {
+        String line = "";
+        parser.parseLine(line);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void parser_Null_notOk() {
+        String line = null;
+        parser.parseLine(line);
+    }
+}

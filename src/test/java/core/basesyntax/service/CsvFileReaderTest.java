@@ -5,15 +5,15 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderTest {
     private static final String PATH_FILE_INTO = "src/main/resources/storage.csv";
-    private CsvFileReader fileReader;
+    private static CsvFileReader fileReader;
 
-    @Before
-    public void setFileReader() {
+    @BeforeClass
+    public static void setFileReader() {
         fileReader = new CsvFileReader();
     }
 

@@ -3,7 +3,6 @@ package core.basesyntax.dto;
 import java.util.Objects;
 
 public class FruitDto {
-
     private String operation;
     private String name;
     private int quantity;

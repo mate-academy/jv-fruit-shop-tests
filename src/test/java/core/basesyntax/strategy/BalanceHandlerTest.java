@@ -4,20 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.dbtest.StorageTest;
+import core.basesyntax.db.StorageTest;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-    public static final String PATH_INPUT_FILE =
-            "src/test/resources/balancetest/storageBalanceTest.csv";
-    public static final String PATH_OUTPUT_FILE =
-            "src/test/resources/balancetest/reportBalanceTest.csv";
-    public static final String PATH_FILE_RESULT =
-            "src/test/resources/balancetest/resultBalanceTest.csv";
-
     @Before
     public void setUp() {
         StorageTest.storage.clear();

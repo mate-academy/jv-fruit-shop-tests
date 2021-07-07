@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.dbtest.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-
     private static final String PATH_INPUT_FILE = "src/main/resources/storage.csv";
     private static final String PATH_OUTPUT_FILE = "src/main/resources/report.csv";
 

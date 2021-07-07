@@ -3,20 +3,13 @@ package core.basesyntax.strategy;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import core.basesyntax.dbtest.StorageTest;
+import core.basesyntax.db.StorageTest;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
-    public static final String PATH_INPUT_FILE =
-            "src/test/resources/purchasetest/storagePurchaseTest.csv";
-    public static final String PATH_OUTPUT_FILE =
-            "src/test/resources/purchasetest/resultPurchaseTest.csv";
-    public static final String PATH_FILE_RESULT =
-            "src/test/resources/purchasetest/reportPurchaseTest.csv";
-
     @Before
     public void setStorageOperation() {
         StorageTest.storage.clear();

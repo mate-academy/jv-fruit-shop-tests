@@ -2,17 +2,16 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dbtest.StorageTest;
+import core.basesyntax.db.StorageTest;
 import core.basesyntax.model.Fruit;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitReportServiceTest {
-    private static FruitReportService fruitReportService;
+    private static ReportService fruitReportService;
 
-    @Before
-    public void setFruitReportService() {
-        StorageTest.storage.clear();
+    @BeforeClass
+    public static void setFruitReportService() {
         fruitReportService = new FruitReportService(StorageTest.storage);
     }
 

@@ -1,4 +1,4 @@
-package core.basesyntax.dbtest;
+package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.AdditionHandler;

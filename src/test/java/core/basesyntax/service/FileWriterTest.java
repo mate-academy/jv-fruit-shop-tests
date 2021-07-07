@@ -2,11 +2,10 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dbtest.StorageTest;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
@@ -18,12 +17,11 @@ public class FileWriterTest {
     private static final String REPORT_VALID = "fruit,quantity" + System.lineSeparator()
             + "apple,90" + System.lineSeparator()
             + "banana,152";
-    private FileWriter fileWriter;
+    private static FileWriter fileWriter;
 
-    @Before
-    public void setFileWriter() {
+    @BeforeClass
+    public static void setFileWriter() {
         fileWriter = new FileWriter();
-        StorageTest.storage.clear();
     }
 
     @Test

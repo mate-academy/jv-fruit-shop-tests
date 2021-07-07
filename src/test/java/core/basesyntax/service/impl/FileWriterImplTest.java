@@ -1,9 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Writer;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,12 +32,7 @@ public class FileWriterImplTest {
     }
 
     private void createAndReadFromFile(String fileName, String report) {
-        File resultFile = new File(fileName);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(resultFile))) {
-            writer.write(report);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not write in file " + fileName, e);
-        }
+        fileWriter.write(fileName, report);
         Path testFilePath = Path.of(fileName);
         List<String> actual;
         try {

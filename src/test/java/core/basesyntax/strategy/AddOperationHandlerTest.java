@@ -30,9 +30,16 @@ public class AddOperationHandlerTest {
         add("coconut", 0, 0);
     }
 
+    @Test
+    public void addToExistingFruit_Ok() {
+        Fruit papaya = new Fruit("papaya");
+        Storage.storage.put(papaya, 10);
+        add("papaya", 20, 30);
+    }
+
     private void add(String fruitName, int quantity, int expected) {
         Fruit fruit = new Fruit(fruitName);
-        Transaction transaction = new Transaction("a", fruit.getName(), quantity);
+        Transaction transaction = new Transaction("s", fruit.getName(), quantity);
         addOperation.apply(transaction);
         int actual = Storage.storage.get(fruit);
         Assert.assertEquals(expected, actual);

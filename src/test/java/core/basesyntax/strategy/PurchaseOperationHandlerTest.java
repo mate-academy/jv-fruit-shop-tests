@@ -41,7 +41,7 @@ public class PurchaseOperationHandlerTest {
 
     private void purchase(String fruitName, int quantity, int expected) {
         Fruit fruit = new Fruit(fruitName);
-        Transaction transaction = new Transaction("b", fruit.getName(), quantity);
+        Transaction transaction = new Transaction("p", fruit.getName(), quantity);
         purchaseOperation.apply(transaction);
         int actual = Storage.storage.get(fruit);
         Assert.assertEquals(expected, actual);

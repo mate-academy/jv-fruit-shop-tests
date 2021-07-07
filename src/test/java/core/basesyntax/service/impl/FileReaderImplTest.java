@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.Reader;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +11,7 @@ public class FileReaderImplTest {
     private static final String CORRECT_INPUT = "src/test/resources/test_file_correct_input.csv";
     private static final String EMPTY_FILE = "src/test/resources/test_file_empty.csv";
     private static final String WRONG_INPUT = "src/test/resources/test_file_wrong_data.csv";
-    private FileReaderImpl fileReader = new FileReaderImpl();
+    private Reader fileReader = new FileReaderImpl();
 
     @Test(expected = RuntimeException.class)
     public void nonExistingFile_NotOk() {

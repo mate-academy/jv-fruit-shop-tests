@@ -17,16 +17,16 @@ public class OperationStrategyTest {
     private static final String OPERATION_SUPPLY = "s";
     private static final String OPERATION_PURCHASE = "p";
     private static final String OPERATION_RETURN = "r";
-    private static Map<String, OperationHandler> test_handlers;
-    private Strategy strategy = new OperationStrategy(test_handlers);
+    private static Map<String, OperationHandler> testHandlers;
+    private Strategy strategy = new OperationStrategy(testHandlers);
 
     @BeforeClass
     public static void beforeClass() {
-        test_handlers = new HashMap<>();
-        test_handlers.put(OPERATION_BALANCE, new BalanceOperationHandler());
-        test_handlers.put(OPERATION_SUPPLY, new AddOperationHandler());
-        test_handlers.put(OPERATION_PURCHASE, new PurchaseOperationHandler());
-        test_handlers.put(OPERATION_RETURN, new AddOperationHandler());
+        testHandlers = new HashMap<>();
+        testHandlers.put(OPERATION_BALANCE, new BalanceOperationHandler());
+        testHandlers.put(OPERATION_SUPPLY, new AddOperationHandler());
+        testHandlers.put(OPERATION_PURCHASE, new PurchaseOperationHandler());
+        testHandlers.put(OPERATION_RETURN, new AddOperationHandler());
 
     }
 

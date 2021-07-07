@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.Validator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class FruitValidatorTest {
     private static final String ZERO_QUANTITY_STRING = "b,coconut,0";
     private static final String EDGE_CASE_MAX_VALUE = "b,coconut," + Integer.MAX_VALUE;
     private static final String EDGE_CASE_MIN_VALUE = "b,coconut," + Integer.MIN_VALUE;
-    private FruitValidator validator = new FruitValidator();
+    private Validator validator = new FruitValidator();
 
     @Test
     public void emptyString_Ok() {

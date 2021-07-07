@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
@@ -15,10 +15,10 @@ public class FileWriterTest {
     private static final String OUTPUT_FILE_DOES_NOT_EXIST = "";
     private static final String REPORT = "fruit,quantity\n"
             + "banana,152\n" + "apple,90";
-    private FileWriter fileWriter;
+    private static FileWriter fileWriter;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fileWriter = new FileWriterImpl();
     }
 

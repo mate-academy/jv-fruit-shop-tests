@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
@@ -14,10 +14,10 @@ public class FileReaderTest {
     private static final String INPUT_FILE_NOT_OK
             = "src/test/resources/shop_operations_test_not_ok.csv";
     private static final String INPUT_FILE_DOES_NOT_EXIST = "";
-    private FileReader fileReader;
+    private static FileReader fileReader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fileReader = new FileReaderImpl();
     }
 

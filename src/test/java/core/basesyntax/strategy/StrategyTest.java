@@ -9,15 +9,15 @@ import core.basesyntax.dto.ShopOperation;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyTest {
-    private Strategy strategy;
-    private Map<String, OperationHandler> handlers;
+    private static Strategy strategy;
+    private static Map<String, OperationHandler> handlers;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         handlers = new HashMap<>();
         handlers.put(BALANCE, new BalanceOperationHandler());
         handlers.put(SUPPLY, new AddOperationHandler());

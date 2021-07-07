@@ -6,10 +6,11 @@ import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SubtractOperationHandlerTest {
-    private SubtractOperationHandler subtractOperationHandler;
+    private static SubtractOperationHandler subtractOperationHandler;
     private Fruit banana = new Fruit("banana");
 
     @After
@@ -19,8 +20,12 @@ public class SubtractOperationHandlerTest {
 
     @Before
     public void setUp() {
-        subtractOperationHandler = new SubtractOperationHandler();
         Storage.storage.clear();
+    }
+
+    @BeforeClass
+    public static void beforeClass() {
+        subtractOperationHandler = new SubtractOperationHandler();
     }
 
     @Test(expected = NullPointerException.class)

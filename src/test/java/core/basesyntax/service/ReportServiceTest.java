@@ -5,21 +5,16 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
     private static final String HEADER = "fruit,quantity";
-    private ReportService reportService;
+    private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {
         Storage.storage.clear();
-    }
-
-    @Before
-    public void setUp() {
         reportService = new ReportServiceImpl();
     }
 

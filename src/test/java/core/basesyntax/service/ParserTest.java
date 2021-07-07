@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.dto.ShopOperation;
 import core.basesyntax.service.impl.ParserImpl;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
@@ -12,10 +12,10 @@ public class ParserTest {
     private static final String INCORRECT_LINE = "&Ufdj5##a,4fas23-12v%#v";
     private static final String EMPTY_LINE = "";
     private static final String ONE_ELEMENT_LINE = "type";
-    private Parser parser;
+    private static Parser parser;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         parser = new ParserImpl();
     }
 

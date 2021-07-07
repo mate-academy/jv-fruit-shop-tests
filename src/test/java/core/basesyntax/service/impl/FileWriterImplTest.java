@@ -32,12 +32,11 @@ public class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Error while running the test", e);
         }
-        StringBuilder resultSB = new StringBuilder();
-        for (String s : actual) {
-            resultSB.append(s).append(System.lineSeparator());
+        StringBuilder result = new StringBuilder();
+        for (String line: actual) {
+            result.append(line).append(System.lineSeparator());
         }
-
-        Assert.assertEquals(expected, resultSB.toString().trim());
+        Assert.assertEquals(expected, result.toString().trim());
     }
 
     @Test(expected = RuntimeException.class)

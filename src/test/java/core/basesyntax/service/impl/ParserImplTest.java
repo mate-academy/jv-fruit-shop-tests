@@ -16,7 +16,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parseUsualState_ok() {
+    public void parser_usualState_ok() {
         String line = "p,apple,15";
         Transaction expected = new Transaction("p", "apple", 15);
         Transaction actual = parser.parseLine(line);
@@ -24,17 +24,17 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parserEmptyLine_notOk() {
+    public void parser_emptyLine_notOk() {
         parser.parseLine("");
     }
 
     @Test(expected = RuntimeException.class)
-    public void parserInvalidFruitQuantity_notOk() {
+    public void parserInvalid_fruitQuantity_notOk() {
         parser.parseLine("p,apple,-2");
     }
 
     @Test(expected = RuntimeException.class)
-    public void parserIvalidOperation_notOk() {
+    public void parserInvalid_operation_notOk() {
         parser.parseLine("g, apple, 1");
     }
 }

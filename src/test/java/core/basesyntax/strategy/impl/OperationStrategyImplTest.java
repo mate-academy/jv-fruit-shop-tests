@@ -26,7 +26,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void operationStrategyUsualState_ok() {
+    public void operationStrategy_usualState_ok() {
         Class<? extends AddOperationHandler> expected = AddOperationHandler.class;
         Class<? extends OperationHandler> actual = operationStrategy.get("s").getClass();
         Assert.assertEquals(expected, actual);

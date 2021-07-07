@@ -27,7 +27,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandlerUsualState_ok() {
+    public void balanceHandler_usualState_ok() {
         balanceOperationHandler.apply(transaction);
         Integer expected = 15;
         Integer actual = Storage.fruitStorage.get(fruit);
@@ -35,7 +35,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandlerWithExistedFruit_ok() {
+    public void balanceHandler_existentFruit_ok() {
         Storage.fruitStorage.put(fruit, 7);
         balanceOperationHandler.apply(transaction);
         Integer expected = 15;

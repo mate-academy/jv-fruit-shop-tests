@@ -18,7 +18,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void fileWriterUsualState_ok() {
+    public void fileWriter_usualState_ok() {
         String expectedOutputPath = "src/test/resources/expectedOutput.csv";
         String actualOutputPath = "src/test/resources/actualOutput.csv";
         String data = new StringBuilder()
@@ -60,5 +60,10 @@ public class FileWriterImplTest {
         }
 
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fileWriter_invalidPath_notOk() {
+        fileWriter.writeToFile("sdfs", "sdfdfsd");
     }
 }

@@ -27,7 +27,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void addHandlerUsualState_ok() {
+    public void addHandler_usualState_ok() {
         Storage.fruitStorage.put(fruit, 15);
         addOperationHandler.apply(transaction);
         Integer actual = Storage.fruitStorage.get(fruit);
@@ -36,7 +36,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void addHandlerWithNonExistentFruit_ok() {
+    public void addHandler_nonExistentFruit_ok() {
         addOperationHandler.apply(transaction);
         Integer actual = Storage.fruitStorage.get(fruit);
         Integer expected = 15;

@@ -27,7 +27,7 @@ public class RemoveOperationHandlerTest {
     }
 
     @Test
-    public void removeOperationHandlerUsualState_ok() {
+    public void removeOperationHandler_usualState_ok() {
         Storage.fruitStorage.put(fruit, 15);
         removeOperationHandler.apply(transaction);
         Integer expected = 0;
@@ -36,7 +36,7 @@ public class RemoveOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void removeOperationHandlerWithNonExistentFruit_notOk() {
+    public void removeOperationHandler_nonExistentFruit_notOk() {
         removeOperationHandler.apply(transaction);
     }
 }

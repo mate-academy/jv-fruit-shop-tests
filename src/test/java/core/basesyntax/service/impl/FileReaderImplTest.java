@@ -16,7 +16,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void fileReaderUsualState_ok() {
+    public void fileReader_usualState_ok() {
         List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
@@ -27,12 +27,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileReaderWithInvalidPath_notOk() {
+    public void fileReader_invalidPath_notOk() {
         fileReader.read("dfdfsfd");
     }
 
     @Test
-    public void fileReaderWithEmptyFile_ok() {
+    public void fileReader_emptyFile_ok() {
         List<String> actual = fileReader.read("src/test/resources/emptyInput.csv");
         Assert.assertEquals(Collections.emptyList(), actual);
     }

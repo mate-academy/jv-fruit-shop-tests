@@ -22,7 +22,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void fruitShopServiceUsualState_ok() {
+    public void fruitShopService_usualState_ok() {
         Storage.fruitStorage.put(new Fruit("apple"), 15);
         String expected = new StringBuilder()
                 .append("fruit").append(",")
@@ -35,7 +35,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void fruitShopServiceEmptyStorage_ok() {
+    public void fruitShopService_emptyStorage_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = fruitShopService.createReport();
         Assert.assertEquals(expected, actual);

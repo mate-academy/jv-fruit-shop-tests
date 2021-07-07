@@ -47,8 +47,7 @@ public class FileWriterImplTest {
             stringBuilder.append(line).append(System.lineSeparator());
         }
         String lines = stringBuilder.toString();
-        FileWriter writeLineToFile = new FileWriterImpl();
-        writeLineToFile.writeToFile(lines, "");
+        writer.writeToFile(lines, "");
     }
 
     private List<String> getExpectedResult() {

@@ -17,7 +17,7 @@ public class FileWriterTest {
     private static final String REPORT_VALID = "fruit,quantity" + System.lineSeparator()
             + "apple,90" + System.lineSeparator()
             + "banana,152";
-    private static FileWriter fileWriter;
+    private static Writer fileWriter;
 
     @BeforeClass
     public static void setFileWriter() {

@@ -15,16 +15,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
-    private static final String TITLE = "fruit,quantity";
-    private static final String SEPARATOR = File.separator;
-    private static final String REPORT = TITLE + System.lineSeparator()
+    private static final String REPORT = "fruit,quantity" + System.lineSeparator()
             + "vodka,350" + System.lineSeparator()
             + "yabloko,250";
-    private static final String FILE_PATH = "src" + SEPARATOR
-            + "test" + SEPARATOR
-            + "resources" + SEPARATOR
+    private static final String FILE_PATH = "src" + File.separator
+            + "test" + File.separator
+            + "resources" + File.separator
             + "reportTest.csv";
-
     private static FileWriter fileWriter;
 
     @BeforeClass

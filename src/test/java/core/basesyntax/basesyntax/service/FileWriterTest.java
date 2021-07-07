@@ -52,6 +52,6 @@ public class FileWriterTest {
 
     @Test(expected = RuntimeException.class)
     public void writer_writeToFileException_NotOk() {
-        fileWriter.writeToFile(REPORT, "|*|");
+        fileWriter.writeToFile(REPORT, "");
     }
 }

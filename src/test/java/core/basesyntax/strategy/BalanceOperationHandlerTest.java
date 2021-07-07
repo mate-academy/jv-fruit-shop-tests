@@ -26,7 +26,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void update_ValidDataInStorage_OK() {
+    public void update_validDataInStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int expected = 100;

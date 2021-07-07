@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
-
     private static final String READER_FILE_PATH = "src/test/resources"
             + "/fileReaderResources/input_OK.csv";
     private static final String NOT_EXISTING_FILE_PATH = "src/test/resources"

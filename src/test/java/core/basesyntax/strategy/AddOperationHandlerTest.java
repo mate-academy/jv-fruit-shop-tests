@@ -26,16 +26,25 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void add_ValidDataToStorage_OK() {
+    public void supply_validDataToStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int expected = 110;
-        int actual = addHandler.apply(new Transaction(Operation.P, apple, 100));
+        int actual = addHandler.apply(new Transaction(Operation.S, apple, 100));
         assertEquals(expected, actual);
     }
 
     @Test
-    public void add_InvalidDataToStorage_OK() {
+    public void return_validDataToStorage_OK() {
+        Storage.storage.put(apple, 10);
+        Storage.storage.put(orange, 20);
+        int expected = 110;
+        int actual = addHandler.apply(new Transaction(Operation.R, apple, 100));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void add_invalidDataToStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int expected = 0;

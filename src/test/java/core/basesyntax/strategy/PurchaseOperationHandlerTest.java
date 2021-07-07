@@ -26,7 +26,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void subtract_ValidDataFromStorage_OK() {
+    public void subtract_validDataFromStorage_OK() {
         Storage.storage.put(apple, 10);
         Storage.storage.put(orange, 20);
         int actual = purchaseHandler.apply(new Transaction(Operation.P, apple, 5));

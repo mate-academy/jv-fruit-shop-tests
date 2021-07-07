@@ -19,24 +19,24 @@ public class ParserTest {
 
     @Test
     public void parse_validData_OK() {
-        String strToParse = "b,banana,12";
+        String stringToParse = "b,banana,12";
         Transaction expected = new Transaction(Operation.B, new Fruit("banana"), 12);
-        Transaction actual = parser.parseLine(strToParse);
+        Transaction actual = parser.parseLine(stringToParse);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_WrongStringType() {
+    public void parse_wrongStringType() {
         parser.parseLine("");
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_StringWithoutElement() {
+    public void parse_stringWithoutElement() {
         parser.parseLine("b,apple,");
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_StringWithNegativeQuantity() {
+    public void parse_stringWithNegativeQuantity() {
         parser.parseLine("p,orange,-10");
     }
 }

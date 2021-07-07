@@ -7,16 +7,21 @@ import dto.Transaction;
 import model.Fruit;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler operationHandler;
 
+    @BeforeClass
+    public static void operationBeforeTest() {
+        operationHandler = new PurchaseOperationHandler();
+    }
+
     @Before
-    public void operationsBeforeTest() {
+    public void operationsBeforeEveryoneTest() {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 25);
-        operationHandler = new PurchaseOperationHandler();
     }
 
     @After

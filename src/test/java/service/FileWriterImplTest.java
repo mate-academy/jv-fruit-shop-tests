@@ -7,49 +7,43 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String PATH_FROM_FILE = "src/test/resources/testWriter.csv";
-    private static List<String> actual;
+    private static FileWriter writer;
 
     @BeforeClass
     public static void operationBeforeTest() {
-        actual = new ArrayList<>();
-    }
-
-    @After
-    public void operationAfterTest() {
-        actual.clear();
+        writer = new FileWriterImpl();
     }
 
     @Test
     public void writeToFile_validPath_Ok() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String line : linesFile()) {
+        for (String line : getExpectedResult()) {
             stringBuilder.append(line).append(System.lineSeparator());
         }
         String lines = stringBuilder.toString();
-        FileWriter writeLineToFile = new FileWriterImpl();
-        writeLineToFile.writeToFile(lines, PATH_FROM_FILE);
-        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_FROM_FILE))) {
+        String pathFromFile = "src/test/resources/testWriter.csv";
+        writer.writeToFile(lines, pathFromFile);
+        List<String> actual = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(pathFromFile))) {
             String line = reader.readLine();
             while (line != null) {
                 actual.add(line);
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + PATH_FROM_FILE, e);
+            throw new RuntimeException("Can't read file" + pathFromFile, e);
         }
-        assertEquals(linesFile(), actual);
+        assertEquals(getExpectedResult(), actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_notValidPath_NotOk() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String line : linesFile()) {
+        for (String line : getExpectedResult()) {
             stringBuilder.append(line).append(System.lineSeparator());
         }
         String lines = stringBuilder.toString();
@@ -57,7 +51,7 @@ public class FileWriterImplTest {
         writeLineToFile.writeToFile(lines, "");
     }
 
-    private List<String> linesFile() {
+    private List<String> getExpectedResult() {
         List<String> testList = new ArrayList<>();
         testList.add("fruit,quantity");
         testList.add("banana,152");

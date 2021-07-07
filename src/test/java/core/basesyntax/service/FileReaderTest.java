@@ -5,12 +5,18 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
     private static final String INPUT_DATA = "src/test/resources/input.csv";
     private static final String NO_CORRECT_PATH = "src/test/resources/";
-    private static final FileReader fileReader = new FileReaderImpl();
+    private static FileReader fileReader;
+
+    @BeforeClass
+    public static void start() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     public void test_readingFromFile_ok() {

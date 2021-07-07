@@ -4,14 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OutputServiceTest {
-    private OutputService reportService;
+    private static OutputService reportService;
+
+    @BeforeClass
+    public static void start() {
+        reportService = new FruitOutputService();
+    }
 
     @Test
     public void test_report_ok() {
-        reportService = new FruitOutputService();
         Storage.storage.clear();
         Fruit apple = new Fruit();
         Fruit banana = new Fruit();

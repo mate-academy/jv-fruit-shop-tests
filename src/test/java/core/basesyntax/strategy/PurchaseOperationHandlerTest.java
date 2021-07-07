@@ -7,14 +7,14 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private OperationHandler purchaseHandler;
+    private static OperationHandler purchaseHandler;
 
     @Test
     public void test_subtractingFruitsFromStorage_ok() {
-        purchaseHandler = new PurchaseOperationHandler();
         Fruit apple = new Fruit();
         apple.setName("apple");
         Storage.storage.put(apple, 10);
@@ -25,7 +25,6 @@ public class PurchaseOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void test_notEnoughFruitsSubtracting_ok() {
-        purchaseHandler = new PurchaseOperationHandler();
         Fruit banana = new Fruit();
         banana.setName("banana");
         Storage.storage.put(banana, 10);
@@ -34,7 +33,12 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Before
-    public void start() {
+    public void startBeforeEachMethod() {
         Storage.storage.clear();
+    }
+
+    @BeforeClass
+    public static void start() {
+        purchaseHandler = new PurchaseOperationHandler();
     }
 }

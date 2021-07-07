@@ -5,10 +5,16 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
-    private final Parser parserImpl = new ParserImpl();
+    private static Parser parserImpl;
+
+    @BeforeClass
+    public static void start() {
+        parserImpl = new ParserImpl();
+    }
 
     @Test
     public void test_parseLine_ok() {

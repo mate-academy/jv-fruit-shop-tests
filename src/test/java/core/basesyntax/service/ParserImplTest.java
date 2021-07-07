@@ -8,13 +8,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserImplTest {
-
-    private static Validator validator;
     private static Parser parser;
 
     @BeforeClass
     public static void setValidatorParser() {
-        validator = new ValidatorCsv();
+        Validator validator = new ValidatorCsv();
         parser = new ParserImpl(validator);
     }
 

@@ -45,12 +45,12 @@ public class CsvFileReaderTest {
         expected.add("p,banana,5");
         expected.add("s,banana,50");
         List<String> actual = fileReader.readFromFile(PATH_FILE_INTO);
-        assertNotEquals(expected.toArray(), actual.toArray());
+        assertNotEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void fileReader_nullArgPath() {
-        fileReader.readFromFile("sfkjdh.csv");
+        fileReader.readFromFile(null);
     }
 
 }

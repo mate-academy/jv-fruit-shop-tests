@@ -21,7 +21,7 @@ public class FileReaderTest {
     }
 
     @Test ()
-    public void test_readingFromFile_OK() {
+    public void readLines_ValidResult_OK() {
         String expected = "this is  input text for testing my own FileReader 34!@#$%^&*()";
         List<String> stringsFromFile = fileReader.readFromFile(READER_FILE_PATH);
         String actual = stringsFromFile.get(0);
@@ -29,7 +29,7 @@ public class FileReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_readingFromFile_Not_OK() {
+    public void readLines_InvalidResult_Not_OK() {
         fileReader.readFromFile(NOT_EXISTING_FILE_PATH);
     }
 }

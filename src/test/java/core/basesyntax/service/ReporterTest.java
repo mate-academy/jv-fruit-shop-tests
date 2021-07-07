@@ -23,7 +23,7 @@ public class ReporterTest {
     }
 
     @Test
-    public void test_Report_OK() {
+    public void report_validData_OK() {
         Storage.storage.put(new Fruit("banana"), 12);
         Storage.storage.put(new Fruit("apple"), 34);
         Storage.storage.put(new Fruit("orange"), 1);

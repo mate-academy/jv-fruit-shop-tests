@@ -22,7 +22,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void test_writingToFile_OK() {
+    public void writeToFile_ValidString_OK() {
         String report = "this is text, that should" + System.lineSeparator()
                 + "be written to the" + System.lineSeparator()
                 + "FILE";
@@ -38,11 +38,10 @@ public class FileWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_writingToFile_Not_OK() {
+    public void writeToFile_InvalidString_Not_OK() {
         String report = "this is text, that should" + System.lineSeparator()
                 + "be written to the" + System.lineSeparator()
                 + "FILE";
         fileWriter.writeToFile(report, NOT_EXISTING_FILE_PATH);
     }
-
 }

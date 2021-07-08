@@ -47,6 +47,8 @@ public class FruitShopDataParserTest {
         for (Map.Entry<Fruit, Integer> entry : Storage.fruits.entrySet()) {
             System.out.println(entry.getKey().getName() + " " + entry.getValue());
             Fruit fruit = entry.getKey();
+            //Нельзя просто гетнуть по имени,
+            // так как мы используем фрукты, а они генерируются в хедлере
             if (fruit.getName().equals("ananas")
                     && entry.getValue() == 20) {
                 counter++;

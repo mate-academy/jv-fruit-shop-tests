@@ -27,6 +27,8 @@ public class DataProcessorFruitsImplTest {
                 .append("apple").append(",")
                 .append(400).append(" ")
                 .toString().split(" ");
+        //Здесь без ассертИквалс потому,
+        // что под капотом наш обработчик данных генерит сетовый репорт
         for (String string : expected) {
             if (!(result.contains(string))) {
                 fail();

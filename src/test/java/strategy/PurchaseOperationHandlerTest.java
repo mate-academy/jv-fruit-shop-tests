@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import db.FruitsDao;
 import db.GenericDao;
+import db.Storage;
 import models.Fruit;
+import org.junit.After;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
@@ -12,6 +14,11 @@ public class PurchaseOperationHandlerTest {
     private static final OperationHandler additionalOperationHandler
             = new AdditionalOperationHandler(fruitsDao);
     private static final Fruit izir = new Fruit("inzir");
+
+    @After
+    public void tearDownStorage() {
+        Storage.fruits.clear();
+    }
 
     @Test
     public void changeBalance_Ok() {

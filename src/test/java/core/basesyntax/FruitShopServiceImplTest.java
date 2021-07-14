@@ -23,7 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,11 +57,9 @@ public class FruitShopServiceImplTest {
     @After
     public void teardown() {
         try {
-            Files.delete(new File(TO_FILE).toPath());
-        } catch (NoSuchFileException ignored) {
-            // missing report file doesn't affect tests results,
-            // the goal is not to have existing report before next test run
-        } catch (IOException e) {
+            File report = new File(TO_FILE);
+            report.delete();
+        } catch (SecurityException e) {
             fail("Report file wasn't deleted after test, reason: " + e);
         }
     }

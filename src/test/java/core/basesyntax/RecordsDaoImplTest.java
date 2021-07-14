@@ -35,12 +35,8 @@ public class RecordsDaoImplTest {
 
     @After
     public void teardown() {
-        try {
-            File report = new File(TO_FILE);
-            report.delete();
-        } catch (SecurityException e) {
-            fail("Report file wasn't deleted after test, reason: " + e);
-        }
+        File report = new File(TO_FILE);
+        report.delete();
     }
 
     @Test

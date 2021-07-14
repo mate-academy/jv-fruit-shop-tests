@@ -39,8 +39,10 @@ public class RecordsDaoImplTest {
         try {
             Files.delete(new File(TO_FILE).toPath());
         } catch (NoSuchFileException ignored) {
+            // missing report file doesn't affect tests results,
+            // the goal is not to have existing report before next test run
         } catch (IOException e) {
-            fail("Report file wasn't deleted before test, reason: " + e);
+            fail("Report file wasn't deleted after test, reason: " + e);
         }
     }
 

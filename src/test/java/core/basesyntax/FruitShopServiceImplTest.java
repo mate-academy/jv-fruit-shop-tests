@@ -27,6 +27,8 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
@@ -35,35 +37,39 @@ public class FruitShopServiceImplTest {
     private static final String TO_FILE = TESTS_FILES_FOLDER + "testReport.csv";
     private static final String CORRECT_REPORT = TESTS_FILES_FOLDER + "correctReport.csv";
     private static final Map<Record.OperationType, OperationHandler>
-            OPERATION_HANDLER_MAP = new HashMap<>();
-    private static final ReportsDao DAO = new ReportsDaoImpl();
-    private static final RecordsValidator RECORDS_VALIDATOR = new RecordsValidatorImpl();
+            operationHandlersMap = new HashMap<>();
+    private static final ReportsDao reportsDao = new ReportsDaoImpl();
+    private static final RecordsValidator recordsValidator = new RecordsValidatorImpl();
     private static final RecordsMapper
-            RECORDS_MAPPER = new RecordsMapperImpl(DAO, RECORDS_VALIDATOR);
-    private static final Record.OperationType BALANCE_OPERATION = Record.OperationType.BALANCE;
-    private static final Record.OperationType PURCHASE_OPERATION = Record.OperationType.PURCHASE;
-    private static final Record.OperationType RETURN_OPERATION = Record.OperationType.RETURN;
-    private static final Record.OperationType SUPPLY_OPERATION = Record.OperationType.SUPPLY;
+            recordsMapper = new RecordsMapperImpl(reportsDao, recordsValidator);
+    private static final Record.OperationType balanceOperation = Record.OperationType.BALANCE;
+    private static final Record.OperationType purchaseOperation = Record.OperationType.PURCHASE;
+    private static final Record.OperationType returnOperation = Record.OperationType.RETURN;
+    private static final Record.OperationType supplyOperation = Record.OperationType.SUPPLY;
+
+    @BeforeClass
+    public static void setup() {
+        operationHandlersMap.put(balanceOperation, new BalanceOperationHandler());
+        operationHandlersMap.put(purchaseOperation, new PurchaseOperationHandler());
+        operationHandlersMap.put(returnOperation, new ReturnOperationHandler());
+        operationHandlersMap.put(supplyOperation, new SupplyOperationHandler());
+    }
+
+    @After
+    public void teardown() {
+        try {
+            Files.delete(new File(TO_FILE).toPath());
+        } catch (NoSuchFileException ignored) {
+        } catch (IOException e) {
+            fail("Report file wasn't deleted after test, reason: " + e);
+        }
+    }
 
     @Test
     public void sortRecord_GoodInputs_ok() {
-        OPERATION_HANDLER_MAP.put(BALANCE_OPERATION, new BalanceOperationHandler());
-        OPERATION_HANDLER_MAP.put(PURCHASE_OPERATION, new PurchaseOperationHandler());
-        OPERATION_HANDLER_MAP.put(RETURN_OPERATION, new ReturnOperationHandler());
-        OPERATION_HANDLER_MAP.put(SUPPLY_OPERATION, new SupplyOperationHandler());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
         FruitShopService fruitShopService =
-                new FruitShopServiceImpl(DAO, operationStrategy, RECORDS_MAPPER);
-
-        try {
-            Files.delete(new File(TO_FILE).toPath());
-        } catch (NoSuchFileException e) {
-            System.out.println("Previous report file wasn't deleted as it's absent but it's ok");
-        } catch (IOException e) {
-            System.out.println("Report file wasn't deleted before test, reason: " + e);
-            fail();
-        }
-
+                new FruitShopServiceImpl(reportsDao, operationStrategy, recordsMapper);
         fruitShopService.generateDailyReport(GOOD_FILE, TO_FILE);
         try {
             byte[] expectedBytes = Files.readAllBytes(Paths.get(CORRECT_REPORT));
@@ -72,8 +78,7 @@ public class FruitShopServiceImplTest {
             String provided = new String(providedBytes, StandardCharsets.UTF_8);
             assertEquals("The content of files should match", expected, provided);
         } catch (IOException e) {
-            System.out.println("Cannot open files for comparison, reason: " + e);
-            fail();
+            fail("Cannot open files for comparison, reason: " + e);
         }
     }
 }

@@ -23,50 +23,50 @@ public class RecordsMapperImplTest {
     private static final String EXTRA_COLUMN_INPUT_FILE =
             TESTS_FILES_FOLDER + "extraColumnInput.csv";
     private static final String MISSING_COLUMN_FILE = TESTS_FILES_FOLDER + "missingColumnInput.csv";
-    private static final ReportsDao REPORTS_DAO = new ReportsDaoImpl();
-    private static final RecordsValidator RECORDS_VALIDATOR = new RecordsValidatorImpl();
-    private static final RecordsMapper RECORDS_MAPPER =
-            new RecordsMapperImpl(REPORTS_DAO, RECORDS_VALIDATOR);
+    private static final ReportsDao reportsDao = new ReportsDaoImpl();
+    private static final RecordsValidator recordsValidator = new RecordsValidatorImpl();
+    private static final RecordsMapper recordsMapper =
+            new RecordsMapperImpl(reportsDao, recordsValidator);
     private static final String FRUIT1 = "banana";
     private static final String FRUIT2 = "apple";
-    private static final int[] QUANTITY = {20, 150, 100, 13, 10, 5, 50};
+    private static final int[] quantity = {20, 150, 100, 13, 10, 5, 50};
 
     @Test
     public void map_goodInput_ok() {
         List<Record> expected = new ArrayList<>();
-        expected.add(new Record(Record.OperationType.BALANCE, FRUIT1, QUANTITY[0]));
-        expected.add(new Record(Record.OperationType.BALANCE, FRUIT2, QUANTITY[1]));
-        expected.add(new Record(Record.OperationType.SUPPLY, FRUIT1, QUANTITY[2]));
-        expected.add(new Record(Record.OperationType.PURCHASE, FRUIT1, QUANTITY[3]));
-        expected.add(new Record(Record.OperationType.RETURN, FRUIT2, QUANTITY[4]));
-        expected.add(new Record(Record.OperationType.PURCHASE, FRUIT2, QUANTITY[0]));
-        expected.add(new Record(Record.OperationType.PURCHASE, FRUIT1, QUANTITY[5]));
-        expected.add(new Record(Record.OperationType.SUPPLY, FRUIT1, QUANTITY[6]));
-        assertEquals(expected, RECORDS_MAPPER.map(GOOD_FILE));
+        expected.add(new Record(Record.OperationType.BALANCE, FRUIT1, quantity[0]));
+        expected.add(new Record(Record.OperationType.BALANCE, FRUIT2, quantity[1]));
+        expected.add(new Record(Record.OperationType.SUPPLY, FRUIT1, quantity[2]));
+        expected.add(new Record(Record.OperationType.PURCHASE, FRUIT1, quantity[3]));
+        expected.add(new Record(Record.OperationType.RETURN, FRUIT2, quantity[4]));
+        expected.add(new Record(Record.OperationType.PURCHASE, FRUIT2, quantity[0]));
+        expected.add(new Record(Record.OperationType.PURCHASE, FRUIT1, quantity[5]));
+        expected.add(new Record(Record.OperationType.SUPPLY, FRUIT1, quantity[6]));
+        assertEquals(expected, recordsMapper.map(GOOD_FILE));
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void map_emptyFileInput_notOk() {
-        RECORDS_MAPPER.map(EMPTY_FILE);
+        recordsMapper.map(EMPTY_FILE);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void map_noHeaderInput_notOk() {
-        RECORDS_MAPPER.map(NO_HEADER_INPUT_FILE);
+        recordsMapper.map(NO_HEADER_INPUT_FILE);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void map_incorrectHeaderInput_notOk() {
-        RECORDS_MAPPER.map(INCORRECT_HEADER_INPUT_FILE);
+        recordsMapper.map(INCORRECT_HEADER_INPUT_FILE);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void map_missingColumnInput_notOk() {
-        RECORDS_MAPPER.map(MISSING_COLUMN_FILE);
+        recordsMapper.map(MISSING_COLUMN_FILE);
     }
 
     @Test (expected = IllegalArgumentException.class)
     public void map_extraColumnInput_notOk() {
-        RECORDS_MAPPER.map(EXTRA_COLUMN_INPUT_FILE);
+        recordsMapper.map(EXTRA_COLUMN_INPUT_FILE);
     }
 }

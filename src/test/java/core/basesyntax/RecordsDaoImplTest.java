@@ -13,6 +13,8 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class RecordsDaoImplTest {
@@ -22,41 +24,46 @@ public class RecordsDaoImplTest {
     private static final String EMPTY_FILE = TESTS_FILES_FOLDER + "emptyFile.csv";
     private static final String NO_FILE = TESTS_FILES_FOLDER + "noFile.csv";
     private static final String TO_FILE = TESTS_FILES_FOLDER + "testReport.csv";
-    //private static final String UNRECORDABLE_FILE = TESTS_FILES_FOLDER + "unrecordableFile.csv";
     private static final String CORRECT_REPORT = TESTS_FILES_FOLDER + "correctReport.csv";
     private static final String HEADER = "type,fruit,quantity";
-    private static final ReportsDao DAO = new ReportsDaoImpl();
-    private static final Map<String, Integer> MAP = new HashMap<>();
+    private static final ReportsDao reportsDao = new ReportsDaoImpl();
+    private static final Map<String, Integer> map = new HashMap<>();
+
+    @Before
+    public void init() {
+        map.clear();
+    }
+
+    @After
+    public void teardown() {
+        try {
+            Files.delete(new File(TO_FILE).toPath());
+        } catch (NoSuchFileException ignored) {
+        } catch (IOException e) {
+            fail("Report file wasn't deleted before test, reason: " + e);
+        }
+    }
 
     @Test
     public void getRawRecords_goodFile_ok() {
-        assertEquals(DAO.getRawRecords(GOOD_FILE).size(), GOOD_FILE_RECORDS_NUM);
+        assertEquals(reportsDao.getRawRecords(GOOD_FILE).size(), GOOD_FILE_RECORDS_NUM);
     }
 
     @Test
     public void getRawRecords_emptyFile_ok() {
-        assertEquals(DAO.getRawRecords(EMPTY_FILE).size(), 0);
+        assertEquals(reportsDao.getRawRecords(EMPTY_FILE).size(), 0);
     }
 
     @Test(expected = RuntimeException.class)
     public void getRawRecords_noFile_notOk() {
-        assertEquals(DAO.getRawRecords(NO_FILE).size(), 0);
+        assertEquals(reportsDao.getRawRecords(NO_FILE).size(), 0);
     }
 
     @Test
     public void saveReport_goodMap_ok() {
-        MAP.clear();
-        MAP.put("banana", 152);
-        MAP.put("apple", 140);
-        try {
-            Files.delete(new File(TO_FILE).toPath());
-        } catch (NoSuchFileException e) {
-            System.out.println("Previous report file wasn't deleted as it's absent but it's ok");
-        } catch (IOException e) {
-            System.out.println("Report file wasn't deleted before test, reason: " + e);
-            fail();
-        }
-        DAO.saveReport(MAP, TO_FILE);
+        map.put("banana", 152);
+        map.put("apple", 140);
+        reportsDao.saveReport(map, TO_FILE);
         try {
             byte[] expectedBytes = Files.readAllBytes(Paths.get(CORRECT_REPORT));
             byte[] providedBytes = Files.readAllBytes(Paths.get(TO_FILE));
@@ -71,16 +78,7 @@ public class RecordsDaoImplTest {
 
     @Test
     public void saveReport_emptyMap_ok() {
-        MAP.clear();
-        try {
-            Files.delete(new File(TO_FILE).toPath());
-        } catch (NoSuchFileException e) {
-            System.out.println("Previous report file wasn't deleted as it's absent but it's ok");
-        } catch (IOException e) {
-            System.out.println("Report file wasn't deleted before test, reason: " + e);
-            fail();
-        }
-        DAO.saveReport(MAP, TO_FILE);
+        reportsDao.saveReport(map, TO_FILE);
         try {
             byte[] providedBytes = Files.readAllBytes(Paths.get(TO_FILE));
             String provided = new String(providedBytes, StandardCharsets.UTF_8);
@@ -93,17 +91,6 @@ public class RecordsDaoImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void saveReport_nullMap_notOk() {
-        DAO.saveReport(null, TO_FILE);
+        reportsDao.saveReport(null, TO_FILE);
     }
-
-    /* Method below commented out as file read-only access is now working on Travis side
-    *
-    * @Test(expected = RuntimeException.class)
-    * public void saveReport_impossibleWritingFile_notOk() {
-    *    MAP.clear();
-    *    MAP.put("banana", 152);
-    *    MAP.put("apple", 140);
-    *    DAO.saveReport(MAP, UNRECORDABLE_FILE);
-    *}
-    */
 }

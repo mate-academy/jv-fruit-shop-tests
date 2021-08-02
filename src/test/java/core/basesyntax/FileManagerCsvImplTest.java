@@ -40,7 +40,7 @@ public class FileManagerCsvImplTest {
         // Can't import jupiter because of JUnit4
         // So can't use AssertThrows also
         try {
-            FILE_MANAGER.writeToFile("?" + FILE_NAME, expected);
+            FILE_MANAGER.writeToFile("", expected);
         } catch (RuntimeException e) {
             return;
         }

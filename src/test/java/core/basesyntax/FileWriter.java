@@ -23,15 +23,14 @@ public class FileWriter {
     }
 
     public static void renewInputFile(String filePath) {
-        FileWriter.writeDataToFile(filePath, "type,fruit,quantity\n" +
-                "b,banana,20\n" +
-                "b,apple,100\n" +
-                "s,banana,100\n" +
-                "p,banana,13\n" +
-                "r,apple,10\n" +
-                "p,apple,20\n" +
-                "p,banana,5\n" +
-                "s,banana,50");
-
+        FileWriter.writeDataToFile(filePath, "type,fruit,quantity\n"
+                + "b,banana,20\n"
+                + "b,apple,100\n"
+                + "s,banana,100\n"
+                + "p,banana,13\n"
+                + "r,apple,10\n"
+                + "p,apple,20\n"
+                + "p,banana,5\n"
+                + "s,banana,50");
     }
 }

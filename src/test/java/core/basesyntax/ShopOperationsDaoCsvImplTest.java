@@ -5,6 +5,7 @@ import dao.ShopOperationsDaoCsvImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,6 +29,9 @@ public class ShopOperationsDaoCsvImplTest {
                 + "p,banana,13\n"
                 + "r,apple,10");
         Assert.assertTrue(shopOperationsDao.validate());
+
+        // AfterAll doesn't work
+        FileWriter.renewInputFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -51,6 +55,9 @@ public class ShopOperationsDaoCsvImplTest {
                 + "i,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
+
+        // AfterAll doesn't work
+        FileWriter.renewInputFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -90,6 +97,9 @@ public class ShopOperationsDaoCsvImplTest {
                 + "apple,90";
         actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
+
+        // AfterAll doesn't work
+        FileWriter.renewInputFile(INPUT_FILE_NAME);
     }
 
     private String getDataFromFile() {

@@ -26,7 +26,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "p,banana,13\n"
                 + "r,apple,10");
         Assert.assertTrue(shopOperationsDao.validate());
-        renewFile(INPUT_FILE_NAME);
+        FileAdministrating.renewInputFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "i,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
-        renewFile(INPUT_FILE_NAME);
+        FileAdministrating.renewInputFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -74,10 +74,6 @@ public class ShopOperationsDaoCsvImplTest {
                 + "melon,13";
         String actual = FileAdministrating.getDataFromFile(OUTPUT_FILE_NAME);
         Assert.assertEquals(expected, actual);
-        renewFile(INPUT_FILE_NAME);
-    }
-
-    private void renewFile(String fileName) {
-        FileAdministrating.renewInputFile(fileName);
+        FileAdministrating.renewInputFile(INPUT_FILE_NAME);
     }
 }

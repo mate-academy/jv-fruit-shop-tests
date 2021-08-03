@@ -2,11 +2,9 @@ package core.basesyntax;
 
 import fm.FileManager;
 import fm.FileManagerCsvImpl;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.Test;
+import util.FileAdministrating;
 
 public class FileManagerCsvImplTest {
     private static final FileManager fileManager = new FileManagerCsvImpl();
@@ -18,7 +16,7 @@ public class FileManagerCsvImplTest {
                 + "b,grape,50\n"
                 + "b,melon,30";
         fileManager.writeToFile(FILE_NAME, expected);
-        String actual = getDataFromFile();
+        String actual = FileAdministrating.getDataFromFile(FILE_NAME);
         Assert.assertEquals(expected, actual);
 
         expected = "type,fruit,quantity\n"
@@ -28,7 +26,7 @@ public class FileManagerCsvImplTest {
                 + "p,banana,13\n"
                 + "r,apple,10";
         fileManager.writeToFile(FILE_NAME, expected);
-        actual = getDataFromFile();
+        actual = FileAdministrating.getDataFromFile(FILE_NAME);
         Assert.assertEquals(expected, actual);
     }
 
@@ -45,16 +43,5 @@ public class FileManagerCsvImplTest {
             return;
         }
         Assert.fail("Runtime exception should be thrown because of invalid filename!");
-    }
-
-    private String getDataFromFile() {
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            Files.readAllLines(Path.of(FILE_NAME))
-                    .forEach(s -> stringBuilder.append(s).append("\n"));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + FILE_NAME);
-        }
-        return stringBuilder.toString().trim();
     }
 }

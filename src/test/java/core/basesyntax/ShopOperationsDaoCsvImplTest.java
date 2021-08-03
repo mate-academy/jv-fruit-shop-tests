@@ -28,9 +28,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "p,banana,13\n"
                 + "r,apple,10");
         Assert.assertTrue(shopOperationsDao.validate());
-
-        // AfterEach doesn't work
-        FileWriter.renewInputFile(inputFileName);
+        renewFile(inputFileName);
     }
 
     @Test
@@ -54,9 +52,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "i,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
-
-        // AfterEach doesn't work
-        FileWriter.renewInputFile(inputFileName);
+        renewFile(inputFileName);
     }
 
     @Test
@@ -80,6 +76,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "melon,13";
         String actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
+        renewFile(inputFileName);
     }
 
     private String getDataFromFile() {
@@ -91,5 +88,9 @@ public class ShopOperationsDaoCsvImplTest {
             throw new RuntimeException("Can't find file by path: " + outputFileName);
         }
         return stringBuilder.toString().trim();
+    }
+
+    private void renewFile(String fileName) {
+        FileWriter.renewInputFile(fileName);
     }
 }

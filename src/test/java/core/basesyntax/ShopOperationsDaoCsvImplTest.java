@@ -9,19 +9,19 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ShopOperationsDaoCsvImplTest {
-    private static final String INPUT_FILE_NAME = "fruit-shop.csv";
-    private static final String OUTPUT_FILE_NAME = "fruit-shop-report.csv";
+    private static final String inputFileName = "fruit-shop.csv";
+    private static final String outputFileName = "fruit-shop-report.csv";
     private static final ShopOperationsDao shopOperationsDao
-            = new ShopOperationsDaoCsvImpl(INPUT_FILE_NAME, OUTPUT_FILE_NAME);
+            = new ShopOperationsDaoCsvImpl(inputFileName, outputFileName);
 
     @Test
     public void validate_Ok() {
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,melon,30");
         Assert.assertTrue(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
                 + "s,banana,100\n"
@@ -30,38 +30,38 @@ public class ShopOperationsDaoCsvImplTest {
         Assert.assertTrue(shopOperationsDao.validate());
 
         // AfterAll doesn't work
-        FileWriter.renewInputFile(INPUT_FILE_NAME);
+        FileWriter.renewInputFile(inputFileName);
     }
 
     @Test
     public void validate_NotOk() {
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "b,grape,-50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "i,grape,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "i,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
         // AfterAll doesn't work
-        FileWriter.renewInputFile(INPUT_FILE_NAME);
+        FileWriter.renewInputFile(inputFileName);
     }
 
     @Test
     public void generateReport_Ok() {
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,melon,30\n"
                 + "p,grape,2\n"
@@ -81,7 +81,7 @@ public class ShopOperationsDaoCsvImplTest {
         String actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
 
-        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
                 + "s,banana,100\n"
@@ -98,16 +98,16 @@ public class ShopOperationsDaoCsvImplTest {
         Assert.assertEquals(expected, actual);
 
         // AfterAll doesn't work
-        FileWriter.renewInputFile(INPUT_FILE_NAME);
+        FileWriter.renewInputFile(inputFileName);
     }
 
     private String getDataFromFile() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            Files.readAllLines(Path.of(OUTPUT_FILE_NAME))
+            Files.readAllLines(Path.of(outputFileName))
                     .forEach(s -> stringBuilder.append(s).append("\n"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + OUTPUT_FILE_NAME);
+            throw new RuntimeException("Can't find file by path: " + outputFileName);
         }
         return stringBuilder.toString().trim();
     }

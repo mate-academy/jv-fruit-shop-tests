@@ -9,15 +9,15 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FileManagerCsvImplTest {
-    private static final FileManager FILE_MANAGER = new FileManagerCsvImpl();
-    private static final String FILE_NAME = "fruit-shop-report.csv";
+    private static final FileManager fileManager = new FileManagerCsvImpl();
+    private static final String fileName = "fruit-shop-report.csv";
 
     @Test
     public void writeToFile_Ok() {
         String expected = "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,melon,30";
-        FILE_MANAGER.writeToFile(FILE_NAME, expected);
+        fileManager.writeToFile(fileName, expected);
         String actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
 
@@ -27,7 +27,7 @@ public class FileManagerCsvImplTest {
                 + "s,banana,100\n"
                 + "p,banana,13\n"
                 + "r,apple,10";
-        FILE_MANAGER.writeToFile(FILE_NAME, expected);
+        fileManager.writeToFile(fileName, expected);
         actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
     }
@@ -40,7 +40,7 @@ public class FileManagerCsvImplTest {
         // Can't import jupiter because of JUnit4
         // So can't use AssertThrows also
         try {
-            FILE_MANAGER.writeToFile("", expected);
+            fileManager.writeToFile("", expected);
         } catch (RuntimeException e) {
             return;
         }
@@ -50,10 +50,10 @@ public class FileManagerCsvImplTest {
     private String getDataFromFile() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            Files.readAllLines(Path.of(FILE_NAME))
+            Files.readAllLines(Path.of(fileName))
                     .forEach(s -> stringBuilder.append(s).append("\n"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + FILE_NAME);
+            throw new RuntimeException("Can't find file by path: " + fileName);
         }
         return stringBuilder.toString().trim();
     }

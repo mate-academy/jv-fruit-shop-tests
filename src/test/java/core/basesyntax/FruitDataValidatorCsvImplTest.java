@@ -8,7 +8,7 @@ import validators.FruitDataValidator;
 import validators.FruitDataValidatorCsvImpl;
 
 public class FruitDataValidatorCsvImplTest {
-    private static final FruitDataValidator VALIDATOR = new FruitDataValidatorCsvImpl();
+    private static final FruitDataValidator validator = new FruitDataValidatorCsvImpl();
 
     @Test
     public void validate_Ok() {
@@ -17,7 +17,7 @@ public class FruitDataValidatorCsvImplTest {
         rows.add("p,melon,30");
         rows.add("r,apple,100");
         rows.add("s,orange,8");
-        Assert.assertTrue(VALIDATOR.validate(rows));
+        Assert.assertTrue(validator.validate(rows));
     }
 
     @Test
@@ -25,21 +25,21 @@ public class FruitDataValidatorCsvImplTest {
         List<String> rows = new ArrayList<>();
         rows.add("b,grape,50");
         rows.add("i,melon,30");
-        Assert.assertFalse(VALIDATOR.validate(rows));
+        Assert.assertFalse(validator.validate(rows));
 
         rows.clear();
         rows.add("b,grape,50");
         rows.add("p,grape,-30");
-        Assert.assertFalse(VALIDATOR.validate(rows));
+        Assert.assertFalse(validator.validate(rows));
 
         rows.clear();
         rows.add("b,grape,50");
         rows.add("p,,30");
-        Assert.assertFalse(VALIDATOR.validate(rows));
+        Assert.assertFalse(validator.validate(rows));
 
         rows.clear();
         rows.add("b,grape,50");
         rows.add("p,30");
-        Assert.assertFalse(VALIDATOR.validate(rows));
+        Assert.assertFalse(validator.validate(rows));
     }
 }

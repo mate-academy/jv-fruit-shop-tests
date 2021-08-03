@@ -9,55 +9,55 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ShopOperationsDaoCsvImplTest {
-    private static final String inputFileName = "fruit-shop.csv";
-    private static final String outputFileName = "fruit-shop-report.csv";
+    private static final String INPUT_FILE_NAME = "fruit-shop.csv";
+    private static final String OUTPUT_FILE_NAME = "fruit-shop-report.csv";
     private static final ShopOperationsDao shopOperationsDao
-            = new ShopOperationsDaoCsvImpl(inputFileName, outputFileName);
+            = new ShopOperationsDaoCsvImpl(INPUT_FILE_NAME, OUTPUT_FILE_NAME);
 
     @Test
     public void validate_Ok() {
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,melon,30");
         Assert.assertTrue(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
                 + "s,banana,100\n"
                 + "p,banana,13\n"
                 + "r,apple,10");
         Assert.assertTrue(shopOperationsDao.validate());
-        renewFile(inputFileName);
+        renewFile(INPUT_FILE_NAME);
     }
 
     @Test
     public void validate_NotOk() {
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "b,grape,-50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "i,grape,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "i,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
-        renewFile(inputFileName);
+        renewFile(INPUT_FILE_NAME);
     }
 
     @Test
     public void generateReport_Ok() {
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
+        FileWriter.writeDataToFile(INPUT_FILE_NAME, "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,melon,30\n"
                 + "p,grape,2\n"
@@ -76,16 +76,16 @@ public class ShopOperationsDaoCsvImplTest {
                 + "melon,13";
         String actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
-        renewFile(inputFileName);
+        renewFile(INPUT_FILE_NAME);
     }
 
     private String getDataFromFile() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            Files.readAllLines(Path.of(outputFileName))
+            Files.readAllLines(Path.of(OUTPUT_FILE_NAME))
                     .forEach(s -> stringBuilder.append(s).append("\n"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + outputFileName);
+            throw new RuntimeException("Can't find file by path: " + OUTPUT_FILE_NAME);
         }
         return stringBuilder.toString().trim();
     }

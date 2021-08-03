@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class FileManagerCsvImplTest {
     private static final FileManager fileManager = new FileManagerCsvImpl();
-    private static final String fileName = "fruit-shop-report.csv";
+    private static final String FILE_NAME = "fruit-shop-report.csv";
 
     @Test
     public void writeToFile_Ok() {
         String expected = "type,fruit,quantity\n"
                 + "b,grape,50\n"
                 + "b,melon,30";
-        fileManager.writeToFile(fileName, expected);
+        fileManager.writeToFile(FILE_NAME, expected);
         String actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
 
@@ -27,7 +27,7 @@ public class FileManagerCsvImplTest {
                 + "s,banana,100\n"
                 + "p,banana,13\n"
                 + "r,apple,10";
-        fileManager.writeToFile(fileName, expected);
+        fileManager.writeToFile(FILE_NAME, expected);
         actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
     }
@@ -50,10 +50,10 @@ public class FileManagerCsvImplTest {
     private String getDataFromFile() {
         StringBuilder stringBuilder = new StringBuilder();
         try {
-            Files.readAllLines(Path.of(fileName))
+            Files.readAllLines(Path.of(FILE_NAME))
                     .forEach(s -> stringBuilder.append(s).append("\n"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + fileName);
+            throw new RuntimeException("Can't find file by path: " + FILE_NAME);
         }
         return stringBuilder.toString().trim();
     }

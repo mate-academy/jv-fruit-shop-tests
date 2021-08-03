@@ -29,7 +29,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "r,apple,10");
         Assert.assertTrue(shopOperationsDao.validate());
 
-        // AfterAll doesn't work
+        // AfterEach doesn't work
         FileWriter.renewInputFile(inputFileName);
     }
 
@@ -55,7 +55,7 @@ public class ShopOperationsDaoCsvImplTest {
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
 
-        // AfterAll doesn't work
+        // AfterEach doesn't work
         FileWriter.renewInputFile(inputFileName);
     }
 
@@ -80,25 +80,6 @@ public class ShopOperationsDaoCsvImplTest {
                 + "melon,13";
         String actual = getDataFromFile();
         Assert.assertEquals(expected, actual);
-
-        FileWriter.writeDataToFile(inputFileName, "type,fruit,quantity\n"
-                + "b,banana,20\n"
-                + "b,apple,100\n"
-                + "s,banana,100\n"
-                + "p,banana,13\n"
-                + "r,apple,10 \n"
-                + "p,apple,20 \n"
-                + "p,banana,5 \n"
-                + "s,banana,50 ");
-        shopOperationsDao.generateReport();
-        expected = "fruit,quantity\n"
-                + "banana,152\n"
-                + "apple,90";
-        actual = getDataFromFile();
-        Assert.assertEquals(expected, actual);
-
-        // AfterAll doesn't work
-        FileWriter.renewInputFile(inputFileName);
     }
 
     private String getDataFromFile() {

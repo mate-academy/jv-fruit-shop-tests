@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import dao.ShopOperationsDao;
 import dao.ShopOperationsDaoCsvImpl;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import util.FileAdministrating;
@@ -26,7 +27,6 @@ public class ShopOperationsDaoCsvImplTest {
                 + "p,banana,13\n"
                 + "r,apple,10");
         Assert.assertTrue(shopOperationsDao.validate());
-        FileAdministrating.renewInputFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -50,7 +50,6 @@ public class ShopOperationsDaoCsvImplTest {
                 + "i,50\n"
                 + "b,melon,30");
         Assert.assertFalse(shopOperationsDao.validate());
-        FileAdministrating.renewInputFile(INPUT_FILE_NAME);
     }
 
     @Test
@@ -74,6 +73,10 @@ public class ShopOperationsDaoCsvImplTest {
                 + "melon,13";
         String actual = FileAdministrating.getDataFromFile(OUTPUT_FILE_NAME);
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void teardown() {
         FileAdministrating.renewInputFile(INPUT_FILE_NAME);
     }
 }

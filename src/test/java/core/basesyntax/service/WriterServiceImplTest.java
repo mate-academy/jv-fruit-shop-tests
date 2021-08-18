@@ -16,7 +16,7 @@ public class WriterServiceImplTest {
     public ExpectedException exceptionRule = ExpectedException.none();
 
     private WriterService writerService;
-    private final String wrongOutputFilename = "///";
+    private final String wrongOutputFilename = "";
     private final String normalOutputFilename = "src/main/resources/reportTest.csv";
 
     @Before

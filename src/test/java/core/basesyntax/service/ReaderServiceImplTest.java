@@ -15,21 +15,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReaderServiceImplTest {
 
+    private static ReaderService readerService;
+
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
-    private ReaderService readerService;
     private final String wrongInputFilename = "error.txt";
     private List<String> storeData = new ArrayList<>();
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.Type.BALANCE, new BalanceOperationHandlerImpl());
         operationHandlerMap.put(Operation.Type.PURCHASE, new PurchaseOperationHandlerImpl());
@@ -40,7 +42,10 @@ public class ReaderServiceImplTest {
         FruitStorageDaoImpl fruitStorageDao = new FruitStorageDaoImpl();
 
         readerService = new ReaderServiceImpl(fruitStorageDao, operationStrategy);
+    }
 
+    @Before
+    public void setUp() throws Exception {
         Storage.fruits.clear();
 
         storeData.add("b,banana,20");
@@ -60,8 +65,9 @@ public class ReaderServiceImplTest {
                 + " but it is " + actualListSize, expectedListSize, actualListSize);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void readFromAbsentFile_RuntimeException() {
+        exceptionRule.expect(RuntimeException.class);
         readerService.readFromFile(wrongInputFilename);
     }
 

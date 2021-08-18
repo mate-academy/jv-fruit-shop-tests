@@ -6,24 +6,29 @@ import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
 
+    private static WriterService writerService;
+
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
-    private WriterService writerService;
     private final String wrongOutputFilename = "";
     private final String normalOutputFilename = "src/main/resources/reportTest.csv";
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         FruitStorageDaoImpl fruitStorageDao = new FruitStorageDaoImpl();
         writerService = new WriterServiceImpl(fruitStorageDao);
+    }
 
+    @Before
+    public void setUp() throws Exception {
         Storage.fruits.clear();
         Fruit orange = new Fruit("orange");
         orange.setQuantity(22);
@@ -31,11 +36,6 @@ public class WriterServiceImplTest {
         banana.setQuantity(35);
         Storage.fruits.add(orange);
         Storage.fruits.add(banana);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void writeToWrongNameFile_RuntimeException() {
-        writerService.writeToFile(wrongOutputFilename);
     }
 
     @Test
@@ -47,9 +47,15 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_ExceptionThrown() {
+    public void writeToWrongNameFile_RuntimeException() {
         exceptionRule.expect(RuntimeException.class);
+        writerService.writeToFile(wrongOutputFilename);
+    }
+
+    @Test
+    public void writeDataToFile_ExceptionThrown() {
         String expectedMessage = "Can't write a new file";
+        exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage(expectedMessage);
         writerService.writeToFile(wrongOutputFilename);
     }

@@ -22,16 +22,6 @@ public class FileWriterTest {
         fileWriter = new FileServiceImpl();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void write_nullFile_NotOk() {
-        fileWriter.write(null, REPORT);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void write_nullContent_NotOk() {
-        fileWriter.write(OUTPUT_FILE_OK,null);
-    }
-
     @Test(expected = RuntimeException.class)
     public void write_fileDoesNotExist_NotOk() {
         fileWriter.write(OUTPUT_FILE_DOES_NOT_EXIST, REPORT);

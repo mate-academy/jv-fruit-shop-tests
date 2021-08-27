@@ -1,7 +1,9 @@
 package core.basesyntax;
 
+import core.basesyntax.dto.ShopOperation;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,6 +14,7 @@ public class ParserTest {
     private static final String EMPTY_LINE = "";
     private static final String ONE_ELEMENT_LINE = "type";
     private static Parser parser;
+    private static final String CORRECT_LINE = "s,banana,10";
 
     @BeforeClass
     public static void beforeClass() {
@@ -41,5 +44,12 @@ public class ParserTest {
     @Test(expected = RuntimeException.class)
     public void parseLine_oneElementLine_NotOk() {
         parser.parseLine(ONE_ELEMENT_LINE);
+    }
+
+    @Test
+    public void parseLine_correctLine_Ok() {
+        ShopOperation expected = new ShopOperation("s", "banana", 10);
+        ShopOperation actual = parser.parseLine(CORRECT_LINE);
+        Assert.assertEquals(expected, actual);
     }
 }

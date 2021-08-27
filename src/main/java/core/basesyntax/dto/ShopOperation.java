@@ -33,15 +33,24 @@ public class ShopOperation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o != null && getClass() == o.getClass()) {
+            ShopOperation that = (ShopOperation) o;
 
-        ShopOperation that = (ShopOperation) o;
+            if (getQuantity() != that.getQuantity()) {
+                return false;
+            }
+            return (getOperation() != null
+                    ? getOperation().equals(that.getOperation())
+                    : that.getOperation() == null) && (getFruitName()
+                    != null ? getFruitName().equals(that.getFruitName())
+                    : that.getFruitName() == null);
 
-        if (getQuantity() != that.getQuantity()) return false;
-        if (getOperation() != null ? !getOperation().equals(that.getOperation()) : that.getOperation() != null)
+        } else {
             return false;
-        return getFruitName() != null ? getFruitName().equals(that.getFruitName()) : that.getFruitName() == null;
+        }
     }
 
     @Override

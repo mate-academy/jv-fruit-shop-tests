@@ -25,7 +25,7 @@ public class LineParserImplTest {
 
     @Test(expected = RuntimeException.class)
     public void lineStartWithNumber_NotOk() {
-        String line = "20,banana,b";
-        FruitShopOperation actual = lineParser.parseLine(line);
+        String invalidInput = "20,banana,b";
+        FruitShopOperation actual = lineParser.parseLine(invalidInput);
     }
 }

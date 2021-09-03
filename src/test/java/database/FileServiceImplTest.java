@@ -1,9 +1,7 @@
 package database;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -46,13 +44,6 @@ public class FileServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void readingFileFromIncorrectPath_Not_Ok() {
         List<String> actual = fileService.readFile(INCORRECT_PATH);
-    }
-
-    @Test
-    public void emptyFileFromPath_Not_Ok() {
-        List<String> expected = new ArrayList<>();
-        List<String> actual = fileService.readFile(CORRECT_PATH);
-        assertNotEquals(expected,actual);
     }
 
     @Test

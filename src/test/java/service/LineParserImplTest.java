@@ -18,8 +18,8 @@ public class LineParserImplTest {
     @Test
     public void correctLine_Ok() {
         FruitShopOperation expected = new FruitShopOperation("b",new Fruit("banana"),20);
-        String line = "b,banana,20";
-        FruitShopOperation actual = lineParser.parseLine(line);
+        String validInput = "b,banana,20";
+        FruitShopOperation actual = lineParser.parseLine(validInput);
         assertEquals(expected, actual);
     }
 

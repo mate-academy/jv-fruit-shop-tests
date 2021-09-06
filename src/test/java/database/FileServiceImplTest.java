@@ -76,7 +76,7 @@ public class FileServiceImplTest {
 
     @Test
     public void fileWrite_Ok() {
-        String validLine = "type,fruit,quantity\n"
+        String validInput = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
                 + "s,banana,100\n"
@@ -94,6 +94,6 @@ public class FileServiceImplTest {
                 + "r,pineapple,2\n"
                 + "s,pineapple,1\n"
                 + "p,pineapple,3";
-        fileService.writeToFile("src/main/java/database/inputValue.csv", validLine);
+        fileService.writeToFile("src/main/java/database/inputValue.csv", validInput);
     }
 }

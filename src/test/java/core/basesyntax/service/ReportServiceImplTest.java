@@ -20,7 +20,8 @@ public class ReportServiceImplTest {
         Map<String, Integer> fruitsStorage = new HashMap<>();
         fruitsStorage.put("banana", 20);
         fruitsStorage.put("apple", 15);
-        String expected = COLUMN_NAMES + "\r\nbanana,20\r\napple,15\r\n";
+        String expected = COLUMN_NAMES + System.lineSeparator() + "banana,20"
+                + System.lineSeparator() + "apple,15" + System.lineSeparator();
         String actual = reportService.createReport(fruitsStorage);
         Assert.assertEquals("Report wasn't created correctly", expected, actual);
     }

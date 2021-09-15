@@ -13,6 +13,12 @@ public class WriterServiceImp implements WriterService {
 
     @Override
     public String writeToFile(List<String> reportList, String filePath) {
+        if (filePath == null) {
+            throw new RuntimeException("file path is null!");
+        }
+        if (reportList == null) {
+            throw new RuntimeException("report list is null!");
+        }
         String reportDateTime = dtf.format(LocalDateTime.now());
         String fullFilePath = filePath + "report dated" + reportDateTime;
         File file = new File(fullFilePath);

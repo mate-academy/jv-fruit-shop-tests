@@ -11,9 +11,6 @@ import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class ReportTest {
 
     private static List<String> testInputList;

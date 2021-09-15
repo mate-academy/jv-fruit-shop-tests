@@ -7,25 +7,21 @@ import core.basesyntax.dao.ReaderServiceImp;
 import core.basesyntax.dao.WriterService;
 import core.basesyntax.dao.WriterServiceImp;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceTest {
     private static ReaderService readerService;
     private static WriterService writerService;
-    private static List<String> testInputList;
+    private static final List<String> testInputList = List.of("b,banana,20",
+            "s,banana,100", "p,banana,100", "r,banana,100");
     private static final String wrongFilePath = "<:main:>";
     private static final String outFilePath = "src/main/resources/";
-    private static final String[] testInput = new String[] {"b,banana,20",
-            "s,banana,100", "p,banana,100", "r,banana,100"};
 
     @Before
     public void initialize() {
         readerService = new ReaderServiceImp();
         writerService = new WriterServiceImp();
-        testInputList = Stream.of(testInput).collect(Collectors.toList());
     }
 
     @Test(expected = RuntimeException.class)

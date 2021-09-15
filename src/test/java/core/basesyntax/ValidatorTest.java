@@ -16,8 +16,6 @@ public class ValidatorTest {
     private static final String wrongQuantityOne = "b,banana,null";
     private static final String wrongQuantityTwo = "b,banana,-20";
     private static final String wrongActivityCodes = "k,banana,20";
-    private static final String[] testInput = new String[] {"b,banana,20",
-            "s,banana,100", "p,banana,100", "r,banana,100"};
 
     @Before
     public void initialize() {

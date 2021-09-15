@@ -14,6 +14,9 @@ public class ReaderServiceImp implements ReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> activitiesLines;
+        if (filePath == null) {
+            throw new RuntimeException("filePath is null!!");
+        }
         try {
             activitiesLines = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {

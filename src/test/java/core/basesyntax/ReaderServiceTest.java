@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.ReaderService;
@@ -27,9 +28,11 @@ public class ReaderServiceTest {
         assertTrue(actual.containsAll(testInputList));
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test
     public void readFromFile_wrongFilePath_NotOk() {
-        readerService.readFromFile(wrongFilePath);
+        assertThrows(RuntimeException.class,() -> {
+            readerService.readFromFile(wrongFilePath);
+        });
     }
 
     @Test (expected = RuntimeException.class)

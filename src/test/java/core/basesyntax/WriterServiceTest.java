@@ -27,21 +27,21 @@ public class WriterServiceTest {
 
     @Test
     public void writeToFile_PathNull_NotOk() {
-        assertThrows(RuntimeException.class, ()-> {
+        assertThrows(RuntimeException.class, () -> {
             writerService.writeToFile(testInputList, null);
         });
     }
 
     @Test
     public void writeToFile_TestInputListNull_NotOk() {
-        assertThrows(RuntimeException.class, ()-> {
+        assertThrows(RuntimeException.class, () -> {
             writerService.writeToFile(null, outFilePath);
         });
     }
 
     @Test
     public void writeToFile_Path_NotOk() {
-        assertThrows(RuntimeException.class, ()-> {
+        assertThrows(RuntimeException.class, () -> {
             writerService.writeToFile(testInputList, wrongFilePath);
         });
     }

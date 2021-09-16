@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.service.operationhandler.BalanceOperationHandler;
 import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.Operations;
@@ -11,13 +9,14 @@ import core.basesyntax.service.operationhandler.SupplyOperationHandler;
 import core.basesyntax.service.operationstrategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class StrategyTest {
     private static OperationStrategyImpl operationStrategy;
 
-    @BeforeAll
+    @BeforeClass
     public static void beforeAll() {
         OperationHandler supplyOperationHandler = new SupplyOperationHandler();
         OperationHandler balanceOperationHandler = new BalanceOperationHandler();
@@ -32,40 +31,41 @@ public class StrategyTest {
     }
 
     @Test
-    void operationSupply() {
+    public void operationSupply() {
         OperationHandler actual = operationStrategy.getOperationHandler("s");
         OperationHandler expected = new SupplyOperationHandler();
-        assertEquals(expected.getClass(), actual.getClass(), "OperationStrategy works incorrect "
-                + "with SupplyOperationHandler");
+        Assert.assertEquals("OperationStrategy works incorrect "
+                        + "with SupplyOperationHandler", expected.getClass(), actual.getClass());
     }
 
     @Test
-    void operationBalance() {
+    public void operationBalance() {
         OperationHandler actual = operationStrategy.getOperationHandler("b");
         OperationHandler expected = new BalanceOperationHandler();
-        assertEquals(expected.getClass(), actual.getClass(), "OperationStrategy works incorrect "
-                + "with SupplyOperationHandler");
+        Assert.assertEquals("OperationStrategy works incorrect with SupplyOperationHandler",
+                expected.getClass(), actual.getClass());
     }
 
     @Test
-    void operationPurchase() {
+    public void operationPurchase() {
         OperationHandler actual = operationStrategy.getOperationHandler("p");
         OperationHandler expected = new PurchaseOperationHandler();
-        assertEquals(expected.getClass(), actual.getClass(), "OperationStrategy works incorrect "
-                + "with PurchaseOperationHandler");
+        Assert.assertEquals("OperationStrategy works incorrect "
+                        + "with PurchaseOperationHandler", expected.getClass(), actual.getClass());
     }
 
     @Test
-    void supplyOperation() {
+    public void supplyOperation() {
         OperationHandler actual = operationStrategy.getOperationHandler("s");
         OperationHandler expected = new SupplyOperationHandler();
-        assertEquals(expected.getClass(), actual.getClass(), "OperationStrategy works incorrect "
-                + "with SupplyOperationHandler");
+        Assert.assertEquals("OperationStrategy works incorrect "
+                        + "with SupplyOperationHandler", expected.getClass(), actual.getClass());
     }
 
     @Test
-    void incorrectOperation() {
+    public void incorrectOperation() {
         OperationHandler actual = operationStrategy.getOperationHandler("f");
-        assertEquals(null, actual, "OperationStrategy works incorrect with Incorrect Data");
+        Assert.assertNull("OperationStrategy works "
+                + "incorrect with Incorrect Data", actual);
     }
 }

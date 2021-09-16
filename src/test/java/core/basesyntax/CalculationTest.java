@@ -1,8 +1,5 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.filewriter.FileWriterImpl;
 import core.basesyntax.filewriter.WriteIntoFile;
 import core.basesyntax.operationprovider.DataProcessorImpl;
@@ -18,8 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CalculationTest {
     private static DataProcessorImpl dataProcessor;
@@ -29,7 +27,7 @@ public class CalculationTest {
     private static ReportDataStoragePerMapImpl reportDataStorage;
     private WriteIntoFile fileWriter = new FileWriterImpl();
 
-    @BeforeAll
+    @BeforeClass
     public static void beforeAll() {
         OperationHandler supplyOperationHandler = new SupplyOperationHandler();
         OperationHandler balanceOperationHandler = new BalanceOperationHandler();
@@ -59,18 +57,19 @@ public class CalculationTest {
     }
 
     @Test
-    void calculationOperation() {
+    public void calculationOperation() {
         List<String> correctInput1 = new ArrayList<>();
         correctInput1.addAll(correctInput);
         correctInput1.remove(0);
         dataProcessor.handleInput(correctInput1, operationStrategy, reportDataStorage);
-        assertEquals(correctOutput.entrySet(), reportDataStorage.getAllData(), "OperationStrategy "
-                + "works incorrect with SupplyOperationHandler");
+        Assert.assertEquals("OperationStrategy "
+                        + "works incorrect with SupplyOperationHandler",
+                correctOutput.entrySet(), reportDataStorage.getAllData());
     }
 
     @Test
-    void wrongFileWrite() {
-        assertThrows(RuntimeException.class, () ->
+    public void wrongFileWrite() {
+        Assert.assertThrows(RuntimeException.class, () ->
                 fileWriter.writeInFile(reportDataStorage.getAllData(), ""));
     }
 }

@@ -1,19 +1,18 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.validator.Validator;
 import core.basesyntax.validator.ValidatorImpl;
 import java.util.ArrayList;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ValidatorTest {
     private static ArrayList<String> invalidInput1;
     private static ArrayList<String> invalidInput2;
     private Validator validator = new ValidatorImpl();
 
-    @BeforeAll
+    @BeforeClass
     public static void beforeAll() {
         invalidInput1 = new ArrayList<>();
         invalidInput1.add("type,fruit,quantity");
@@ -28,16 +27,18 @@ public class ValidatorTest {
     }
 
     @Test
-    void incorrectDataFromFile() {
+    public void incorrectDataFromFile() {
         boolean expected = false;
         boolean actual = validator.validate(invalidInput1);
-        assertEquals(expected, actual, "Data validation is incorrect (no number in input file");
+        Assert.assertEquals("Data validation is incorrect (no number in input file",
+                expected, actual);
     }
 
     @Test
-    void incorrectDataFromFileNegativeNumber() {
+    public void incorrectDataFromFileNegativeNumber() {
         boolean expected = false;
         boolean actual = validator.validate(invalidInput2);
-        assertEquals(expected, actual, "Data validation is incorrect (number is negative");
+        Assert.assertEquals("Data validation is incorrect (number is negative",
+                expected, actual);
     }
 }

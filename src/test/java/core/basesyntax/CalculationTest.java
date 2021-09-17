@@ -57,7 +57,7 @@ public class CalculationTest {
     }
 
     @Test
-    public void calculationOperation() {
+    public void calculationOperation_OK() {
         List<String> correctInput1 = new ArrayList<>();
         correctInput1.addAll(correctInput);
         correctInput1.remove(0);
@@ -65,11 +65,5 @@ public class CalculationTest {
         Assert.assertEquals("OperationStrategy "
                         + "works incorrect with SupplyOperationHandler",
                 correctOutput.entrySet(), reportDataStorage.getAllData());
-    }
-
-    @Test
-    public void wrongFileWrite() {
-        Assert.assertThrows(RuntimeException.class, () ->
-                fileWriter.writeInFile(reportDataStorage.getAllData(), ""));
     }
 }

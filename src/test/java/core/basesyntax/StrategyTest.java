@@ -31,7 +31,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void operationSupply() {
+    public void operationSupply_OK() {
         OperationHandler actual = operationStrategy.getOperationHandler("s");
         OperationHandler expected = new SupplyOperationHandler();
         Assert.assertEquals("OperationStrategy works incorrect "
@@ -39,7 +39,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void operationBalance() {
+    public void operationBalance_OK() {
         OperationHandler actual = operationStrategy.getOperationHandler("b");
         OperationHandler expected = new BalanceOperationHandler();
         Assert.assertEquals("OperationStrategy works incorrect with SupplyOperationHandler",
@@ -47,7 +47,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void operationPurchase() {
+    public void operationPurchase_OK() {
         OperationHandler actual = operationStrategy.getOperationHandler("p");
         OperationHandler expected = new PurchaseOperationHandler();
         Assert.assertEquals("OperationStrategy works incorrect "
@@ -55,7 +55,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void supplyOperation() {
+    public void supplyOperation_OK() {
         OperationHandler actual = operationStrategy.getOperationHandler("s");
         OperationHandler expected = new SupplyOperationHandler();
         Assert.assertEquals("OperationStrategy works incorrect "
@@ -63,7 +63,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void incorrectOperation() {
+    public void incorrectOperation_NO_OK() {
         OperationHandler actual = operationStrategy.getOperationHandler("f");
         Assert.assertNull("OperationStrategy works "
                 + "incorrect with Incorrect Data", actual);

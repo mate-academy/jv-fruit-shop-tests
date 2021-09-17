@@ -29,12 +29,12 @@ public class DaoTest {
     }
 
     @Test
-    public void wrongFileName() {
+    public void wrongFileName_NOT_OK() {
         Assert.assertThrows(RuntimeException.class, () -> fileDaoCsv.getData(INVALID_DATA_FILE));
     }
 
     @Test
-    public void correctDataFromFile() {
+    public void correctDataFromFile_OK() {
         List<String> actual = fileDaoCsv.getData(VALID_DATA_FILE);
         Assert.assertEquals("Reading from file result is incorrect", correctInput, actual);
     }

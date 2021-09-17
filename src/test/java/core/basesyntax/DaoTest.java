@@ -29,7 +29,7 @@ public class DaoTest {
     }
 
     @Test
-    public void wrongFileName_NOT_OK() {
+    public void wrongFileName_NotOK() {
         Assert.assertThrows(RuntimeException.class, () -> fileDaoCsv.getData(INVALID_DATA_FILE));
     }
 

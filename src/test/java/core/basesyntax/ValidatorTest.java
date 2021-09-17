@@ -27,7 +27,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void incorrectDataFromFile_NOT_OK() {
+    public void incorrectDataFromFile_NotOK() {
         boolean expected = false;
         boolean actual = validator.validate(invalidInput1);
         Assert.assertEquals("Data validation is incorrect (no number in input file",
@@ -35,7 +35,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void incorrectDataFromFileNegativeNumber_NOT_OK() {
+    public void incorrectDataFromFileNegativeNumber_NotOK() {
         boolean expected = false;
         boolean actual = validator.validate(invalidInput2);
         Assert.assertEquals("Data validation is incorrect (number is negative",

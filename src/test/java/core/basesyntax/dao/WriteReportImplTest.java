@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriteReportImplTest {
-    private static final String FILE_NAME = "src\\test\\resources\\reportFileTest.csv";
+    private static final String FILE_NAME = "src/test/resources//reportFileTest.csv";
     private static WriteReport writeReport;
     private static final String REPORT = "fruit, quantity" + System.lineSeparator() + "banana,152"
             + System.lineSeparator() + "apple,90" + System.lineSeparator();

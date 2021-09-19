@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderCsvImplTest {
-    private static final String FILE_NAME = "src\\test\\resources\\InputFileTest.csv";
+    private static final String FILE_NAME = "src\\test\\resources\\inputFileTest.csv";
     private static final String EMPTY_FILE = "src\\test\\resources\\InputEmptyDataFileTest.csv";
     private static final String MISSING_FILE_NAME = "src\\test\\resources\\MissingFile.csv";
     private static FileReader fileReader;

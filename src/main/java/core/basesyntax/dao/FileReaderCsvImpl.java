@@ -4,7 +4,7 @@ import core.basesyntax.services.ValidatorService;
 import core.basesyntax.services.ValidatorServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class FileReaderCsvImpl implements FileReader {
@@ -15,7 +15,7 @@ public class FileReaderCsvImpl implements FileReader {
         validatorService.nullInputDataValidator(fileName);
         List<String> dataFromFile;
         try {
-            dataFromFile = Files.readAllLines(Path.of(fileName));
+            dataFromFile = Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file");
         }

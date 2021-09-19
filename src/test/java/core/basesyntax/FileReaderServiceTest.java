@@ -13,7 +13,7 @@ public class FileReaderServiceTest {
     private static FileReaderService fileReaderService;
 
     @BeforeAll
-    public static void initializeFileReader() {
+    public static void initialize() {
         fileReaderService = new FileReaderServiceImpl();
     }
 

@@ -24,7 +24,7 @@ public class ParseServiceTest {
     private static ParseService parseService;
 
     @BeforeAll
-    public static void initializeFileReader() {
+    public static void initialize() {
         parseService = new ParseServiceImpl();
     }
 

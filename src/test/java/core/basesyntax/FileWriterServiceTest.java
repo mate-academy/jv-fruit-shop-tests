@@ -10,7 +10,7 @@ public class FileWriterServiceTest {
     private static FileWriterService fileWriterService;
 
     @BeforeAll
-    public static void initializeFileReader() {
+    public static void initialize() {
         fileWriterService = new FileWriterServiceImpl();
     }
 

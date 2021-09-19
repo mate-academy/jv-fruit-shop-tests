@@ -24,7 +24,7 @@ public class RecordListMakerServiceTest {
     private static RecordListMakerService recordListMakerService;
 
     @BeforeAll
-    public static void initializeFileReader() {
+    public static void initialize() {
         recordListMakerService = new RecordListMakerServiceImpl();
     }
 

@@ -1,7 +1,11 @@
-package core.basesyntax.service.activityhandler;
+package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.activityhandler.BalanceActivityHandler;
+import core.basesyntax.service.activityhandler.PurchaseActivityHandler;
+import core.basesyntax.service.activityhandler.ReturnActivityHandler;
+import core.basesyntax.service.activityhandler.SupplyActivityHandler;
 import org.junit.Test;
 
 public class ActivityHandlerTest {
@@ -18,18 +22,18 @@ public class ActivityHandlerTest {
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void balanceHandlerNegative_OK() {
-        balanceActivityHandler.get(MINUS_AMOUNT);
-    }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void purchaseHandlerPositive_OK() {
-        purchaseActivityHandler.get(PLUS_AMOUNT);
+    public void purchaseHandlerNegative_OK() {
+        purchaseActivityHandler.get(MINUS_AMOUNT);
     }
 
     @Test
-    public void purchaseHandlerNegative_OK() {
-        assertEquals(MINUS_AMOUNT * -1, purchaseActivityHandler.get(MINUS_AMOUNT));
+    public void purchaseHandlerPositive_OK() {
+        assertEquals(PLUS_AMOUNT * -1, purchaseActivityHandler.get(PLUS_AMOUNT));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void balanceHandlerNegative_OK() {
+        balanceActivityHandler.get(MINUS_AMOUNT);
     }
 
     @Test

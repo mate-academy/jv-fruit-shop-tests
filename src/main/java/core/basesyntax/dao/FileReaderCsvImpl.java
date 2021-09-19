@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.exception.ValidationException;
 import core.basesyntax.services.ValidatorService;
 import core.basesyntax.services.ValidatorServiceImpl;
 import java.io.IOException;
@@ -18,7 +17,7 @@ public class FileReaderCsvImpl implements FileReader {
         try {
             dataFromFile = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new ValidationException("Can't get data from file");
+            throw new RuntimeException("Can't get data from file");
         }
         validatorService.emptyInputDataValidator(dataFromFile);
         return dataFromFile;

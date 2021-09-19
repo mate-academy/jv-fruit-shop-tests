@@ -31,12 +31,12 @@ public class FileReaderCsvImplTest {
                 expectedList.size(),actualList.size());
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = RuntimeException.class)
     public void getDataFromMissingFile_NotOk() {
         fileReader.getData(MISSING_FILE_NAME);
     }
 
-    @Test(expected = ValidationException.class)
+    @Test(expected = RuntimeException.class)
     public void getDataFromEmptyFile_NotOk() {
         fileReader.getData(EMPTY_FILE);
     }

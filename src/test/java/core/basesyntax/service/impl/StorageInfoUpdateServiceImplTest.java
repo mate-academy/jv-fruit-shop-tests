@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,24 +7,21 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.StorageInfoUpdateService;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
-import core.basesyntax.service.impl.RecordListMakerServiceImpl;
-import core.basesyntax.service.impl.StorageInfoUpdateServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.DecreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.IncreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class StorageInfoUpdateServiceTest {
+public class StorageInfoUpdateServiceImplTest {
     private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";
     private static StorageInfoUpdateService storageInfoUpdateService;
     private static List<FruitRecord> recordList;
 
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         Map<FruitRecord.Operation, OperationHandler> handlerMap = Map.of(
                 FruitRecord.Operation.PURCHASE, new DecreaseAmountOperationHandlerImpl(),

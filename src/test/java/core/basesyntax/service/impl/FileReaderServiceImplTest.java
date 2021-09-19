@@ -1,18 +1,17 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class FileReaderServiceTest {
+public class FileReaderServiceImplTest {
     private static final String CORRECT_INPUT_FILE_NAME = "src/main/resources/fruits.csv";
     private static final String WRONG_INPUT_FILE_NAME = "src/main/resources/fruits100.csv";
     private static FileReaderService fileReaderService;
 
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         fileReaderService = new FileReaderServiceImpl();
     }

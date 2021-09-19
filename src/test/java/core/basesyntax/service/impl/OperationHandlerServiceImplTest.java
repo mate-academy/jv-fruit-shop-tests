@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,16 +8,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.OperationHandlerService;
-import core.basesyntax.service.impl.OperationHandlerServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.DecreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.IncreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-public class OperationHandlerServiceTest {
+public class OperationHandlerServiceImplTest {
     private static final Fruit APPLE = new Fruit("apple");
     private static final Integer APPLE_AMOUNT = 100;
     private static final Integer APPLE_AMOUNT_SUPPLIED = 20;
@@ -36,7 +35,7 @@ public class OperationHandlerServiceTest {
             new FruitRecord(FruitRecord.Operation.RETURN, APPLE, APPLE_AMOUNT_RETURNED);
     private static OperationHandlerService operationHandlerService;
 
-    @BeforeEach
+    @Before
     public void initialize() {
         Map<FruitRecord.Operation, OperationHandler> handlerMap = Map.of(
                 FruitRecord.Operation.PURCHASE, new DecreaseAmountOperationHandlerImpl(),

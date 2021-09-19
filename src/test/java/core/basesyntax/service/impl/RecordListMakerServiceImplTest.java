@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -7,12 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.RecordListMakerService;
-import core.basesyntax.service.impl.RecordListMakerServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class RecordListMakerServiceTest {
+public class RecordListMakerServiceImplTest {
     private static final FruitRecord appleRecordBalance =
             new FruitRecord(FruitRecord.Operation.BALANCE, new Fruit("apple"), 30);
     private static final FruitRecord bananaRecordBalance
@@ -28,7 +27,7 @@ public class RecordListMakerServiceTest {
     private static final String WRONG_ROW = "a,banana,45";
     private static RecordListMakerService recordListMakerService;
 
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         recordListMakerService = new RecordListMakerServiceImpl();
     }

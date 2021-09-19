@@ -1,15 +1,14 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.impl.FileWriterServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class FileWriterServiceTest {
+public class FileWriterServiceImplTest {
     private static final String OUTPUT_FILE_NAME = "src/main/resources/report.csv";
     private static FileWriterService fileWriterService;
 
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         fileWriterService = new FileWriterServiceImpl();
     }

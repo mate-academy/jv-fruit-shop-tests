@@ -1,18 +1,17 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportMakerService;
-import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class ReportMakerServiceTest {
+public class ReportMakerServiceImplTest {
     private static ReportMakerService reportMakerService;
 
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         reportMakerService = new ReportMakerServiceImpl();
     }

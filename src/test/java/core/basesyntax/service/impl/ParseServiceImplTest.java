@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -6,11 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.ParseService;
-import core.basesyntax.service.impl.ParseServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class ParseServiceTest {
+public class ParseServiceImplTest {
     private static final String WRONG_ROW_EMPTY_ROW = "";
     private static final String WRONG_ROW_EXTRA_PART = "b,apple,123,banana";
     private static final String WRONG_ROW_NEGATIVE_AMOUNT = "b,apple,-123";
@@ -23,7 +22,7 @@ public class ParseServiceTest {
     private static final String CORRECT_ROW_PURCHASE = "p,apple,100";
     private static ParseService parseService;
 
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         parseService = new ParseServiceImpl();
     }

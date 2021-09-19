@@ -2,7 +2,6 @@ package core.basesyntax.db;
 
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.Map;
 import java.util.NoSuchElementException;
 

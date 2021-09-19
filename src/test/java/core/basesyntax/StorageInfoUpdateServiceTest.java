@@ -1,27 +1,23 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.RecordListMakerService;
 import core.basesyntax.service.StorageInfoUpdateService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.RecordListMakerServiceImpl;
-import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.StorageInfoUpdateServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.DecreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.IncreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class StorageInfoUpdateServiceTest {
     private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";

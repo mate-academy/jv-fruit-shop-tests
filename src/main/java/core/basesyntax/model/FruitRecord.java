@@ -43,7 +43,9 @@ public class FruitRecord {
             return false;
         }
         FruitRecord record = (FruitRecord) o;
-        return amount == record.amount && operation == record.operation && Objects.equals(fruit, record.fruit);
+        return amount == record.amount
+                && operation == record.operation
+                && Objects.equals(fruit, record.fruit);
     }
 
     @Override

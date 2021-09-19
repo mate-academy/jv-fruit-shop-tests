@@ -15,7 +15,6 @@ import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.DecreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.IncreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

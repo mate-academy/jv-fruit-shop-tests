@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -10,13 +13,9 @@ import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.DecreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.IncreaseAmountOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OperationHandlerServiceTest {
     private static final Fruit APPLE = new Fruit("apple");
@@ -25,11 +24,16 @@ public class OperationHandlerServiceTest {
     private static final Integer APPLE_AMOUNT_PURCHASED = 30;
     private static final Integer APPLE_AMOUNT_TOO_MUCH_PURCHASED = 130;
     private static final Integer APPLE_AMOUNT_RETURNED = 25;
-    private static final FruitRecord APPLE_BALANCE_RECORD = new FruitRecord(FruitRecord.Operation.BALANCE, APPLE, APPLE_AMOUNT);
-    private static final FruitRecord APPLE_SUPPLY_RECORD = new FruitRecord(FruitRecord.Operation.SUPPLY, APPLE, APPLE_AMOUNT_SUPPLIED);
-    private static final FruitRecord APPLE_PURCHASE_RECORD = new FruitRecord(FruitRecord.Operation.PURCHASE, APPLE, APPLE_AMOUNT_PURCHASED);
-    private static final FruitRecord APPLE_PURCHASE_TOO_MUCH_RECORD = new FruitRecord(FruitRecord.Operation.PURCHASE, APPLE, APPLE_AMOUNT_TOO_MUCH_PURCHASED);
-    private static final FruitRecord APPLE_RETURN_RECORD = new FruitRecord(FruitRecord.Operation.RETURN, APPLE, APPLE_AMOUNT_RETURNED);
+    private static final FruitRecord APPLE_BALANCE_RECORD =
+            new FruitRecord(FruitRecord.Operation.BALANCE, APPLE, APPLE_AMOUNT);
+    private static final FruitRecord APPLE_SUPPLY_RECORD =
+            new FruitRecord(FruitRecord.Operation.SUPPLY, APPLE, APPLE_AMOUNT_SUPPLIED);
+    private static final FruitRecord APPLE_PURCHASE_RECORD =
+            new FruitRecord(FruitRecord.Operation.PURCHASE, APPLE, APPLE_AMOUNT_PURCHASED);
+    private static final FruitRecord APPLE_PURCHASE_TOO_MUCH_RECORD =
+            new FruitRecord(FruitRecord.Operation.PURCHASE, APPLE, APPLE_AMOUNT_TOO_MUCH_PURCHASED);
+    private static final FruitRecord APPLE_RETURN_RECORD =
+            new FruitRecord(FruitRecord.Operation.RETURN, APPLE, APPLE_AMOUNT_RETURNED);
     private static OperationHandlerService operationHandlerService;
 
     @BeforeEach
@@ -81,6 +85,7 @@ public class OperationHandlerServiceTest {
     @Test
     public void changingAmountOfApplesByPurchaseOperationWhenStorageHasNotEnoughFruits_notOk() {
         operationHandlerService.changeAmount(APPLE_BALANCE_RECORD);
-        assertThrows(RuntimeException.class, () -> operationHandlerService.changeAmount(APPLE_PURCHASE_TOO_MUCH_RECORD));
+        assertThrows(RuntimeException.class,
+                () -> operationHandlerService.changeAmount(APPLE_PURCHASE_TOO_MUCH_RECORD));
     }
 }

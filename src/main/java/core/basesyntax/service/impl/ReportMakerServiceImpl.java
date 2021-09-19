@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportMakerService;
-
 import java.util.Map;
 
 public class ReportMakerServiceImpl implements ReportMakerService {

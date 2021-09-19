@@ -1,11 +1,11 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileReaderServiceTest {
     private static final String CORRECT_INPUT_FILE_NAME = "src/main/resources/fruits.csv";
@@ -19,7 +19,8 @@ public class FileReaderServiceTest {
 
     @Test
     public void readingInformationFromNotExistingFile_notOk() {
-        assertThrows(RuntimeException.class, () -> fileReaderService.readRowsFromFile(WRONG_INPUT_FILE_NAME));
+        assertThrows(RuntimeException.class,
+                () -> fileReaderService.readRowsFromFile(WRONG_INPUT_FILE_NAME));
     }
 
     @Test

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.RecordListMakerService;
-
 import java.util.ArrayList;
 import java.util.List;
 

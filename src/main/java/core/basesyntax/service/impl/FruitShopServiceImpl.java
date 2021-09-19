@@ -4,7 +4,6 @@ import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.RecordListMakerService;
 import core.basesyntax.service.StorageInfoUpdateService;
-
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {

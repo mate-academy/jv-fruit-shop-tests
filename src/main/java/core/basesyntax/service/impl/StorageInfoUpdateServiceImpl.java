@@ -4,7 +4,6 @@ import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.OperationHandlerService;
 import core.basesyntax.service.StorageInfoUpdateService;
-
 import java.util.List;
 
 public class StorageInfoUpdateServiceImpl implements StorageInfoUpdateService {

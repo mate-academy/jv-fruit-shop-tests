@@ -2,10 +2,10 @@ package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Map;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -21,15 +21,15 @@ public class ReportMakerServiceImpl implements ReportMakerService {
         return builder.toString();
     }
 
-    private Iterable<? extends Map.Entry<Fruit, Integer>> getListFromMap(Map<Fruit, Integer> map) {
-        List<Map.Entry<Fruit, Integer>> entries = new ArrayList<>(map.entrySet());
-        entries.sort((o1, o2) -> o2.getValue() - o1.getValue());
-        return entries;
-    }
-
     private String getSingleFruitReport(Map.Entry<Fruit, Integer> entry) {
         return entry.getKey().getName()
                 + COMMA
                 + entry.getValue();
+    }
+
+    private Iterable<? extends Map.Entry<Fruit, Integer>> getListFromMap(Map<Fruit, Integer> map) {
+        List<Map.Entry<Fruit, Integer>> entries = new ArrayList<>(map.entrySet());
+        entries.sort((o1, o2) -> o2.getValue() - o1.getValue());
+        return entries;
     }
 }

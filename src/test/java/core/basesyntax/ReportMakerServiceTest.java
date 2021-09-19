@@ -21,7 +21,7 @@ public class ReportMakerServiceTest {
     public void makingReportFromMap_Ok() {
         Map<Fruit, Integer> resultMap = Map.of(new Fruit("banana"), 90, new Fruit("apple"), 100);
         String actual = reportMakerService.getReport(resultMap);
-        String expected = "fruit,quantity\nbanana,90\napple,100";
+        String expected = "fruit,quantity\napple,100\nbanana,90";
         assertEquals(actual, expected);
     }
 }

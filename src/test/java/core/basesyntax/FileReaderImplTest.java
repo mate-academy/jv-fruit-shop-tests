@@ -1,18 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileDaoCsv;
-import core.basesyntax.dao.FileDaoCsvImpl;
+import core.basesyntax.dao.FileReaderCsv;
+import core.basesyntax.dao.FileReaderCsvImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DaoTest {
+public class FileReaderImplTest {
     private static ArrayList<String> correctInput;
     private static final String INVALID_DATA_FILE = "file_incorrect_1_name";
     private static final String VALID_DATA_FILE = "report.csv";
-    private FileDaoCsv fileDaoCsv = new FileDaoCsvImpl();
+    private FileReaderCsv fileReaderCsv = new FileReaderCsvImpl();
 
     @BeforeClass
     public static void beforeAll() {
@@ -30,12 +30,12 @@ public class DaoTest {
 
     @Test
     public void wrongFileName_NotOK() {
-        Assert.assertThrows(RuntimeException.class, () -> fileDaoCsv.getData(INVALID_DATA_FILE));
+        Assert.assertThrows(RuntimeException.class, () -> fileReaderCsv.getData(INVALID_DATA_FILE));
     }
 
     @Test
     public void correctDataFromFile_OK() {
-        List<String> actual = fileDaoCsv.getData(VALID_DATA_FILE);
+        List<String> actual = fileReaderCsv.getData(VALID_DATA_FILE);
         Assert.assertEquals("Reading from file result is incorrect", correctInput, actual);
     }
 }

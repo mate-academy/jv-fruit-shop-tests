@@ -12,8 +12,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class OperationHandlerTest {
-    private static OperationHandler operationHandler;
+public class AllOperationsTest {
     private static OperationHandler balanceOperationHandler;
     private static OperationHandler purchaseOperationHandler;
     private static OperationHandler supplyOperationHandler;

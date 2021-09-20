@@ -2,6 +2,6 @@ package core.basesyntax.dao;
 
 import java.util.List;
 
-public interface FileDaoCsv {
+public interface FileReaderCsv {
     List<String> getData(String fileName);
 }

@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ValidatorTest {
+public class ValidatorImplTest {
     private static ArrayList<String> invalidInput1;
     private static ArrayList<String> invalidInput2;
     private Validator validator = new ValidatorImpl();

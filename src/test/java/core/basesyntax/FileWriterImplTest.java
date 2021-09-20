@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FileWriterTest {
+public class FileWriterImplTest {
     private static HashMap<String, Integer> correctOutput;
     private static ReportDataStoragePerMapImpl reportDataStorage;
     private WriteIntoFile fileWriter = new FileWriterImpl();

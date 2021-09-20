@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class StrategyTest {
+public class OperationHandlerImplTest {
     private static OperationStrategyImpl operationStrategy;
 
     @BeforeClass

@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileDaoCsvImpl implements FileDaoCsv {
+public class FileReaderCsvImpl implements FileReaderCsv {
     @Override
     public List<String> getData(String fileName) {
         List<String> data = new ArrayList<>();

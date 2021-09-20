@@ -19,7 +19,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CalculationTest {
+public class DataProcessorImplTest {
     private static DataProcessorImpl dataProcessor;
     private static ArrayList<String> correctInput;
     private static HashMap<String, Integer> correctOutput;
@@ -57,7 +57,7 @@ public class CalculationTest {
     }
 
     @Test
-    public void calculationOperation_OK() {
+    public void operationHandler_OK() {
         List<String> correctInput1 = new ArrayList<>();
         correctInput1.addAll(correctInput);
         correctInput1.remove(0);

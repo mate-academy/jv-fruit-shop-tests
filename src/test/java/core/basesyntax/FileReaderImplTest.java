@@ -29,12 +29,12 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void wrongFileName_NotOK() {
+    public void getData_wrongFileName_NotOK() {
         Assert.assertThrows(RuntimeException.class, () -> fileReaderCsv.getData(INVALID_DATA_FILE));
     }
 
     @Test
-    public void correctDataFromFile_OK() {
+    public void getData_correctDataFromFile_OK() {
         List<String> actual = fileReaderCsv.getData(VALID_DATA_FILE);
         Assert.assertEquals("Reading from file result is incorrect", correctInput, actual);
     }

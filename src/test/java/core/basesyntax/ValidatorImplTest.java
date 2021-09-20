@@ -10,6 +10,7 @@ import org.junit.Test;
 public class ValidatorImplTest {
     private static ArrayList<String> invalidInput1;
     private static ArrayList<String> invalidInput2;
+    private static ArrayList<String> validInput;
     private Validator validator = new ValidatorImpl();
 
     @BeforeClass
@@ -24,10 +25,15 @@ public class ValidatorImplTest {
         invalidInput2.add("b,banana,150");
         invalidInput2.add("b,apple,100");
         invalidInput2.add("s,banana,-20");
+        validInput = new ArrayList<>();
+        validInput.add("type,fruit,quantity");
+        validInput.add("b,banana,150");
+        validInput.add("b,apple,100");
+        validInput.add("s,banana,20");
     }
 
     @Test
-    public void incorrectDataFromFile_NotOK() {
+    public void validate_incorrectDataFromFile_NoNumber_NotOK() {
         boolean expected = false;
         boolean actual = validator.validate(invalidInput1);
         Assert.assertEquals("Data validation is incorrect (no number in input file",
@@ -35,10 +41,17 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void incorrectDataFromFileNegativeNumber_NotOK() {
+    public void validate_incorrectDataFromFile_NegativeNumber_NotOK() {
         boolean expected = false;
         boolean actual = validator.validate(invalidInput2);
         Assert.assertEquals("Data validation is incorrect (number is negative",
                 expected, actual);
+    }
+
+    @Test
+    public void validate_correctDataFromFile_OK() {
+        boolean actual = validator.validate(validInput);
+        Assert.assertTrue("Data validation is incorrect (Data is correct) ",
+                actual);
     }
 }

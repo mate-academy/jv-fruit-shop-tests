@@ -27,13 +27,13 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void wrongFileWrite_NotOK() {
+    public void writeInFile_whenWrongFilePath_NotOK() {
         Assert.assertThrows(RuntimeException.class, () ->
                 fileWriter.writeInFile(reportDataStorage.getAllData(), ""));
     }
 
     @Test
-    public void wrongFileWrite_OK() {
+    public void writeInFile_whenCorrectFilePath_OK() {
         fileWriter.writeInFile(reportDataStorage.getAllData(), "result.csv");
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static Map<Fruit, Integer> mapQuantityFruit;
-    private static final String TITLE_REPORT = "fruit, quantity";
+    private static final String TITLE_REPORT = "fruit,quantity";
     private static ReportService reportService;
 
     @Before
@@ -24,7 +24,7 @@ public class ReportServiceImplTest {
     @Test
     public void createReport_Ok() {
         String actual = reportService.createReport(mapQuantityFruit,TITLE_REPORT);
-        String expected = "fruit, quantity" + System.lineSeparator() + "banana,152"
+        String expected = "fruit,quantity" + System.lineSeparator() + "banana,152"
                 + System.lineSeparator() + "apple,90" + System.lineSeparator();
         assertEquals(actual,expected);
     }

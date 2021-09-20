@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.exception.ValidationException;
 import java.io.File;
@@ -13,9 +14,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriteReportImplTest {
-    private static final String FILE_NAME = "src/test/resources//reportFileTest.csv";
+    private static final String FILE_NAME = "src/test/resources/reportFileTest.csv";
     private static WriteReport writeReport;
-    private static final String REPORT = "fruit, quantity" + System.lineSeparator() + "banana,152"
+    private static final String REPORT = "fruit,quantity" + System.lineSeparator() + "banana,152"
             + System.lineSeparator() + "apple,90" + System.lineSeparator();
 
     @Before
@@ -25,15 +26,15 @@ public class WriteReportImplTest {
 
     @Test
     public void write_Ok() {
-        writeReport.write(REPORT,FILE_NAME);
-        List<String> actual;
+        writeReport.write(REPORT, FILE_NAME);
+        List<String> actual = null;
         try {
             actual = Files.readAllLines(Path.of(String.valueOf(new File(FILE_NAME))));
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file");
+            fail("Can't get data from file");
         }
-        String expectedString = "banana,152";
-        assertEquals("Test failed: incorrect data", actual.get(1),expectedString);
+        String expectedString = "fruit,quantity";
+        assertEquals("Test failed: incorrect data", actual.get(0),expectedString);
         int expectedSize = 3;
         assertEquals("Test failed: incorrect number elements from report",
                 actual.size(),expectedSize);

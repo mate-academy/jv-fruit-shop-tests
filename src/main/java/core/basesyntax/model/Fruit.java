@@ -1,29 +1,28 @@
 package core.basesyntax.model;
 
 public class Fruit {
-    private String fruitname;
+    private String fruitName;
 
-    public Fruit(String fruitname) {
-        this.fruitname = fruitname;
+    public Fruit(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public String getFruitName() {
-        return fruitname;
+        return fruitName;
     }
 
     @Override
     public int hashCode() {
-        return 31 * 17 + (fruitname == null ? 0 : fruitname.hashCode());
+        return fruitName == null ? 0 : fruitName.hashCode();
     }
 
     @Override
-    public boolean equals(Object newFruit) {
-        if (newFruit != null && newFruit.getClass().equals(Fruit.class)) {
-            Fruit castedFruit = (Fruit) newFruit;
-            return ((this.fruitname == null && castedFruit.getFruitName() == null)
-                    || (this.fruitname != null
-                    && this.fruitname.equals(castedFruit.getFruitName())));
+    public boolean equals(Object fruit) {
+        if (!(fruit != null && fruit.getClass().equals(Fruit.class))) {
+            return false;
         }
-        return false;
+        Fruit castedFruit = (Fruit) fruit;
+        return ((fruitName == castedFruit.fruitName))
+                || (fruitName != null && fruitName.equals(castedFruit.getFruitName()));
     }
 }

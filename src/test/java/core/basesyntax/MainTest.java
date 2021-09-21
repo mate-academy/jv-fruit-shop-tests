@@ -1,21 +1,24 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.DataBase;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.FruitStorage;
 import core.basesyntax.service.DataProcessor;
 import core.basesyntax.service.DataProcessorImpl;
-import core.basesyntax.service.amount.AddAmount;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.ReportCreatorImpl;
+import core.basesyntax.service.amount.AdditionHandler;
 import core.basesyntax.service.amount.AmountHandler;
-import core.basesyntax.service.amount.SubtractAmount;
-import core.basesyntax.service.files.InputFileReader;
-import core.basesyntax.service.files.InputFileReaderImpl;
-import core.basesyntax.service.files.InputRowParser;
-import core.basesyntax.service.files.InputRowParserImpl;
+import core.basesyntax.service.amount.SubtractionHandler;
+import core.basesyntax.service.files.FileReader;
+import core.basesyntax.service.files.FileReaderImpl;
 import core.basesyntax.service.files.ReportWriter;
 import core.basesyntax.service.files.ReportWriterImpl;
+import core.basesyntax.service.files.RowParser;
+import core.basesyntax.service.files.RowParserImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.service.validation.DataValidator;
@@ -26,6 +29,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,79 +46,65 @@ public class MainTest {
     private static final String CORRECT_INPUT_FILE = "src/main/resources/fruits_correct.csv";
     private static final String NON_EXISTENT_FILE = "src/main/resource/non_existent.csv";
     private static final String REPORT_FILE = "src/main/resources/report.csv";
-    private static final String DATA_DIVIDER = ",";
-    private static final List<FruitRecord> DATA_BASE = DataBase.db;
+    private static final String REPORT_HEADER = "fruitRecord,quantity";
+    private static final String[] DATA_ROW = new String[]{"b", "banana", "10"};
+    private static final String[] INCORRECT_ROW_LENGTH = new String[]{"banana"};
+    private static final String[] INCORRECT_FRUIT_AMOUNT = new String[]{"p", "banana", "-10"};
+    private static final String[] EMPTY_FRUIT_NAME = new String[]{"p", "", "10"};
+    private static final String[] EMPTY_OPERATION_TYPE = new String[]{"", "banana", "10"};
+    private static final List<FruitRecord> DATA_BASE = DataBase.DB;
+    private static final Map<String, Integer> FRUIT_COUNT = FruitStorage.FRUIT_COUNT;
     private static Map<FruitRecord.Type, AmountHandler> strategies;
-    private static List<String> correctInputFileData;
-    private static List<String> inCorrectInputFileData;
-    private static List<String> inCorrectInputFileData2;
-    private static List<String> inCorrectInputFileData3;
-    private static List<FruitRecord> correctFruitRecords;
-    private static List<FruitRecord> correctFruitReportRecords;
-    private static List<String> correctReportRecords;
+    private static List<String> fileData;
+    private static List<FruitRecord> fruitRecords;
+    private static List<String> reportRecords;
     private static OperationStrategy operationStrategy;
     private static DataProcessor dataProcessor;
-    private static AmountHandler addAmountHandler;
-    private static AmountHandler subtractAmountHandler;
-    private static InputFileReader inputFileReaderImpl;
+    private static AmountHandler additionHandler;
+    private static AmountHandler subtractionHandler;
+    private static FileReader fileReaderImpl;
     private static ReportWriter reportWriter;
-    private static InputRowParser inputRowParser;
+    private static RowParser rowParser;
     private static DataValidator dataValidator;
-    private static FruitsDao fruitsDao;
+    private static FruitDao fruitDao;
 
     @Before
     public void setUp() {
-        addAmountHandler = new AddAmount();
-        subtractAmountHandler = new SubtractAmount();
-        inputFileReaderImpl = new InputFileReaderImpl();
+        additionHandler = new AdditionHandler();
+        subtractionHandler = new SubtractionHandler();
+        fileReaderImpl = new FileReaderImpl();
         reportWriter = new ReportWriterImpl();
-        inputRowParser = new InputRowParserImpl();
+        rowParser = new RowParserImpl();
         dataValidator = new DataValidatorImpl();
-        fruitsDao = new FruitsDaoImpl();
-        correctFruitRecords = new ArrayList<>();
-        correctFruitRecords.add(new FruitRecord(20, BALANCE, new Fruit("banana")));
-        correctFruitRecords.add(new FruitRecord(100, BALANCE, new Fruit("apple")));
-        correctFruitRecords.add(new FruitRecord(100, SUPPLY, new Fruit("banana")));
-        correctFruitRecords.add(new FruitRecord(13, PURCHASE, new Fruit("banana")));
-        correctFruitRecords.add(new FruitRecord(10, RETURN, new Fruit("apple")));
-        correctFruitRecords.add(new FruitRecord(20, PURCHASE, new Fruit("apple")));
-        correctFruitRecords.add(new FruitRecord(5, PURCHASE, new Fruit("banana")));
-        correctFruitRecords.add(new FruitRecord(50, SUPPLY, new Fruit("banana")));
-        correctFruitReportRecords = new ArrayList<>();
-        correctFruitReportRecords.add(new FruitRecord(152, BALANCE, new Fruit("banana")));
-        correctFruitReportRecords.add(new FruitRecord(90, BALANCE, new Fruit("apple")));
-        correctReportRecords = new ArrayList<>();
-        correctReportRecords.add("fruitRecord,quantity");
-        correctReportRecords.add("banana,152");
-        correctReportRecords.add("apple,90");
+        fruitDao = new FruitDaoImpl();
+        fruitRecords = new ArrayList<>();
+        fruitRecords.add(new FruitRecord(20, BALANCE, new Fruit("banana")));
+        fruitRecords.add(new FruitRecord(100, BALANCE, new Fruit("apple")));
+        fruitRecords.add(new FruitRecord(100, SUPPLY, new Fruit("banana")));
+        fruitRecords.add(new FruitRecord(13, PURCHASE, new Fruit("banana")));
+        fruitRecords.add(new FruitRecord(10, RETURN, new Fruit("apple")));
+        fruitRecords.add(new FruitRecord(20, PURCHASE, new Fruit("apple")));
+        fruitRecords.add(new FruitRecord(5, PURCHASE, new Fruit("banana")));
+        fruitRecords.add(new FruitRecord(50, SUPPLY, new Fruit("banana")));
+        reportRecords = new ArrayList<>();
+        reportRecords.add("banana,152");
+        reportRecords.add("apple,90");
         strategies = new HashMap<>();
-        strategies.put(BALANCE, addAmountHandler);
-        strategies.put(SUPPLY, addAmountHandler);
-        strategies.put(RETURN, addAmountHandler);
-        strategies.put(PURCHASE, subtractAmountHandler);
+        strategies.put(BALANCE, additionHandler);
+        strategies.put(SUPPLY, additionHandler);
+        strategies.put(RETURN, additionHandler);
+        strategies.put(PURCHASE, subtractionHandler);
         operationStrategy = new OperationStrategyImpl(strategies);
-        dataProcessor = new DataProcessorImpl(operationStrategy);
-        correctInputFileData = new ArrayList<>();
-        correctInputFileData.add("b,banana,20");
-        correctInputFileData.add("b,apple,100");
-        correctInputFileData.add("s,banana,100");
-        correctInputFileData.add("p,banana,13");
-        correctInputFileData.add("r,apple,10");
-        correctInputFileData.add("p,apple,20");
-        correctInputFileData.add("p,banana,5");
-        correctInputFileData.add("s,banana,50");
-        inCorrectInputFileData = new ArrayList<>();
-        inCorrectInputFileData.add("b,banana,20");
-        inCorrectInputFileData.add("p,,");
-        inCorrectInputFileData.add("s,banana,50");
-        inCorrectInputFileData2 = new ArrayList<>();
-        inCorrectInputFileData2.add("b,banana,20");
-        inCorrectInputFileData2.add("p,banana,-10");
-        inCorrectInputFileData2.add("s,banana,50");
-        inCorrectInputFileData3 = new ArrayList<>();
-        inCorrectInputFileData3.add("b,banana,20");
-        inCorrectInputFileData3.add("p,apple,10");
-        inCorrectInputFileData3.add(",banana,50");
+        dataProcessor = new DataProcessorImpl();
+        fileData = new ArrayList<>();
+        fileData.add("b,banana,20");
+        fileData.add("b,apple,100");
+        fileData.add("s,banana,100");
+        fileData.add("p,banana,13");
+        fileData.add("r,apple,10");
+        fileData.add("p,apple,20");
+        fileData.add("p,banana,5");
+        fileData.add("s,banana,50");
     }
 
     @Test
@@ -155,21 +145,21 @@ public class MainTest {
 
     @Test
     public void readDataFromCorrectFile_readFile_OK() {
-        List<String> expectedFileData = new ArrayList<>(correctInputFileData);
-        List<String> actualFileData = inputFileReaderImpl.readFile(CORRECT_INPUT_FILE);
+        List<String> expectedFileData = fileData;
+        List<String> actualFileData = fileReaderImpl.readFile(CORRECT_INPUT_FILE);
         Assert.assertEquals("Test failed! Expected file data and actual file data is different!",
                 expectedFileData, actualFileData);
     }
 
     @Test(expected = RuntimeException.class)
     public void readDataFromNonExistentFile_readFile_Not_OK() {
-        inputFileReaderImpl.readFile(NON_EXISTENT_FILE);
+        fileReaderImpl.readFile(NON_EXISTENT_FILE);
     }
 
     @Test
     public void getFruitRecordsFromFileData_parse_OK() {
-        List<FruitRecord> expected = new ArrayList<>(correctFruitRecords);
-        List<FruitRecord> actual = inputRowParser.parse(correctInputFileData);
+        List<FruitRecord> expected = fruitRecords;
+        List<FruitRecord> actual = rowParser.parse(fileData);
         Assert.assertEquals("Test failed! "
                         + "Expected fruit records and actual fruit records are different!",
                 expected, actual);
@@ -177,41 +167,38 @@ public class MainTest {
 
     @Test
     public void validateDataFromCorrectFile_validate_OK() {
-        for (String row : correctInputFileData) {
-            String[] inputRowData = row.split(DATA_DIVIDER);
-            boolean actual = dataValidator.validate(inputRowData);
-            Assert.assertTrue("Test failed! Expected result differs from actual result!", actual);
-        }
+        Assert.assertTrue("Test failed! Expected result differs from actual result!",
+                dataValidator.validate(DATA_ROW));
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateDataFromIncorrectFile_validate_Not_OK() {
-        for (String row : inCorrectInputFileData) {
-            String[] inputRowData = row.split(DATA_DIVIDER);
-            dataValidator.validate(inputRowData);
-        }
+    public void validateIncorrectRowLength_validate_Not_OK() {
+        dataValidator.validate(INCORRECT_ROW_LENGTH);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateDataFromIncorrectFile2_validate_Not_OK() {
-        for (String row : inCorrectInputFileData2) {
-            String[] inputRowData = row.split(DATA_DIVIDER);
-            dataValidator.validate(inputRowData);
-        }
+    public void validateIncorrectFruitAmount_validate_Not_OK() {
+        dataValidator.validate(INCORRECT_FRUIT_AMOUNT);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateDataFromIncorrectFile3_validate_Not_OK() {
-        for (String row : inCorrectInputFileData3) {
-            String[] inputRowData = row.split(DATA_DIVIDER);
-            dataValidator.validate(inputRowData);
-        }
+    public void validateIncorrectFruitName_validate_Not_OK() {
+        dataValidator.validate(EMPTY_FRUIT_NAME);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void validateIncorrectOperationType_validate_Not_OK() {
+        dataValidator.validate(EMPTY_OPERATION_TYPE);
     }
 
     @Test
-    public void processCorrectFruitRecords_OK() {
-        boolean actual = dataProcessor.processData(correctFruitRecords);
-        Assert.assertTrue("Test failed! Expected result differs from actual result!", actual);
+    public void processFruitRecords_OK() {
+        Assert.assertTrue("Test failed! The operation should return TRUE",
+                dataProcessor.processData(fruitRecords));
+        List<FruitRecord> expected = fruitRecords;
+        List<FruitRecord> actual = fruitDao.getRecords();
+        Assert.assertEquals("Test failed! Expected result differs from actual result!",
+                expected, actual);
     }
 
     @Test
@@ -220,34 +207,48 @@ public class MainTest {
                 SUPPLY, new Fruit("banana"));
         FruitRecord newPurchaseRecord = new FruitRecord(13,
                 PURCHASE, new Fruit("banana"));
-        addAmountHandler.apply(newSupplyRecord);
-        Assert.assertTrue(subtractAmountHandler.apply(newPurchaseRecord));
+        additionHandler.apply(newSupplyRecord);
+        subtractionHandler.apply(newPurchaseRecord);
+        int expected = 7;
+        int actual = FRUIT_COUNT.get("banana");
+        Assert.assertEquals("Test failed! Expected result differs from actual result!",
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void subtractIncorrectAmount_apply_No_OK() {
         FruitRecord newPurchaseRecord = new FruitRecord(13,
                 PURCHASE, new Fruit("banana"));
-        subtractAmountHandler.apply(newPurchaseRecord);
+        subtractionHandler.apply(newPurchaseRecord);
+    }
+
+    @Test
+    public void createFruitRecordsReport_createReport_OK() {
+        DATA_BASE.addAll(fruitRecords);
+        ReportCreator reportCreator = new ReportCreatorImpl(operationStrategy);
+        List<String> expected = reportRecords;
+        List<String> actual = reportCreator.createReport();
+        Assert.assertEquals("Test failed! Expected result differs from actual result!",
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeReportToNonExistentDirectory_writeReportToFile_Not_OK() {
-        DATA_BASE.addAll(correctFruitRecords);
-        reportWriter.writeReportToFile(NON_EXISTENT_FILE);
+        DATA_BASE.addAll(fruitRecords);
+        reportWriter.writeReportToFile(NON_EXISTENT_FILE, reportRecords);
     }
 
     @Test
     public void writeReportToExistentDirectory_writeReportToFile_OK() {
-        DATA_BASE.addAll(correctFruitReportRecords);
-        reportWriter.writeReportToFile(REPORT_FILE);
+        reportWriter.writeReportToFile(REPORT_FILE, reportRecords);
         List<String> result;
         try {
             result = Files.readAllLines(Paths.get(REPORT_FILE));
         } catch (IOException e) {
             throw new RuntimeException("Can't read input file, " + e);
         }
-        List<String> expected = correctReportRecords;
+        reportRecords.add(0,REPORT_HEADER);
+        List<String> expected = reportRecords;
         List<String> actual = result;
         Assert.assertEquals(expected, actual);
     }
@@ -256,47 +257,9 @@ public class MainTest {
     public void addNewRecordToDataBase_addRecord_OK() {
         FruitRecord newRecord = new FruitRecord(20, BALANCE, new Fruit("banana"));
         Assert.assertTrue("Test failed! Expected true!",
-                fruitsDao.addRecord(newRecord));
-        List<FruitRecord> expected = new ArrayList<>();
-        expected.add(newRecord);
+                fruitDao.addRecord(newRecord));
+        List<FruitRecord> expected = Arrays.asList(newRecord);
         List<FruitRecord> actual = DATA_BASE;
-        Assert.assertEquals("Test failed! Expected record differs from actual record!",
-                expected, actual);
-    }
-
-    @Test
-    public void updateExistingRecord_updateRecord_OK() {
-        FruitRecord newRecord = new FruitRecord(20, BALANCE, new Fruit("banana"));
-        FruitRecord anotherRecord = new FruitRecord(45, SUPPLY, new Fruit("banana"));
-        DATA_BASE.add(newRecord);
-        Assert.assertTrue("Test failed! Expected true!",
-                fruitsDao.updateRecord(anotherRecord));
-        List<FruitRecord> expected = new ArrayList<>();
-        expected.add(anotherRecord);
-        List<FruitRecord> actual = DATA_BASE;
-        Assert.assertEquals("Test failed! Expected record differs from actual record!",
-                expected, actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void updateNonExistingRecord_updateRecord_Not_OK() {
-        FruitRecord newRecord = new FruitRecord(20, BALANCE, new Fruit("banana"));
-        fruitsDao.updateRecord(newRecord);
-    }
-
-    @Test
-    public void getExistingRecord_getRecord_OK() {
-        FruitRecord expected = new FruitRecord(20, BALANCE, new Fruit("banana"));
-        DATA_BASE.add(expected);
-        FruitRecord actual = fruitsDao.getRecord(expected);
-        Assert.assertEquals("Test failed! Expected record differs from actual record!",
-                expected, actual);
-    }
-
-    @Test
-    public void getNonExistingRecord_getRecord_OK() {
-        FruitRecord expected = new FruitRecord(0, BALANCE, new Fruit("banana"));
-        FruitRecord actual = fruitsDao.getRecord(expected);
         Assert.assertEquals("Test failed! Expected record differs from actual record!",
                 expected, actual);
     }
@@ -304,13 +267,13 @@ public class MainTest {
     @Test
     public void getAllRecordsFromDataBase_OK() {
         FruitRecord newRecord = new FruitRecord(21, BALANCE, new Fruit("banana"));
-        List<FruitRecord> expected = new ArrayList<>(correctFruitRecords);
+        List<FruitRecord> expected = new ArrayList<>(fruitRecords);
         expected.remove(5);
         expected.set(0, newRecord);
-        DATA_BASE.addAll(correctFruitRecords);
+        DATA_BASE.addAll(fruitRecords);
         DATA_BASE.remove(5);
         DATA_BASE.set(0, newRecord);
-        List<FruitRecord> actual = fruitsDao.getRecords();
+        List<FruitRecord> actual = fruitDao.getRecords();
         Assert.assertEquals("Test failed! Expected records differ from actual records!",
                 expected, actual);
     }
@@ -390,6 +353,7 @@ public class MainTest {
     @After
     public void afterEachTest() {
         DATA_BASE.clear();
+        FRUIT_COUNT.clear();
         PrintWriter writer;
         try {
             writer = new PrintWriter(REPORT_FILE);

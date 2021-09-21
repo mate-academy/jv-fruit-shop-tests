@@ -7,11 +7,10 @@ import java.util.List;
 
 public class DataProcessorImpl implements DataProcessor {
     @Override
-    public boolean processData(List<FruitRecord> records) {
+    public void processData(List<FruitRecord> records) {
         FruitDao fruitDao = new FruitDaoImpl();
         for (FruitRecord record : records) {
             fruitDao.addRecord(record);
         }
-        return true;
     }
 }

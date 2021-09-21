@@ -33,7 +33,7 @@ public class PurchaseOperationTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_purchase_not_ok() {
+    public void purchaseOperation_purchase_not_OK() {
         Fruit fruit = new Fruit("apple");
         Transaction transaction = new Transaction(Transaction.Operation.PURCHASE, fruit, 14);
         purchaseOperation.apply(transaction);

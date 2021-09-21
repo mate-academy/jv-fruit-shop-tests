@@ -21,7 +21,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void reader_notCorrectData_not_ok() {
+    public void reader_notCorrectData_not_OK() {
         boolean actual = reader.readFromFile("src/test/resources/readerTest.csv")
                 .equals(List.of("someData"));
         Assert.assertFalse(actual);

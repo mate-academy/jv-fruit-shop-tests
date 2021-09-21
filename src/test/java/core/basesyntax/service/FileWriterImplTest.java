@@ -39,7 +39,7 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writer_incorrectFileName_not_ok() {
+    public void writer_incorrectFileName_not_OK() {
         writer.writeToFile("", "Some report");
     }
 }

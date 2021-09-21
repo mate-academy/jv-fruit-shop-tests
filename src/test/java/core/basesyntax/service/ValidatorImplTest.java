@@ -74,13 +74,13 @@ public class ValidatorImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validator_findOperation_IncorrectOperation_not_ok() {
+    public void validator_findOperation_IncorrectOperation_not_OK() {
         String data = "i";
         ValidatorImpl.findOperation(data);
     }
 
     @Test
-    public void validator_checkOperation_CorrectOperation() {
+    public void validator_checkOperation_CorrectOperation_OK() {
         int newQuantity = 20;
         Assert.assertTrue(validator.checkOperation(newQuantity));
     }

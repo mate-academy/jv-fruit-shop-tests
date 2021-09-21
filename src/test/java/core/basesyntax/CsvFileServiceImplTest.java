@@ -1,23 +1,25 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileAccessDaoCsv;
-import core.basesyntax.dao.FileAccessDaoCsvImpl;
+import core.basesyntax.dao.CsvFileService;
+import core.basesyntax.dao.CsvFileServiceImpl;
+import java.io.File;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-
-public class FileAccessDaoCsvImplTest {
-    private final FileAccessDaoCsv fileAccessDaoCsv = new FileAccessDaoCsvImpl();
-    private static final String OK_READ_FILE_PATH = "src/test/resources/FileReadDaoTest.csv";
+public class CsvFileServiceImplTest {
+    private static final String OK_READ_FILE_PATH = "src/test/resources/CsvFileTestInput.csv";
     private static final String OK_WRITE_FILE_PATH = "src/test/resources/FileWriteDaoTest.csv";
     private static final String NOT_OK_FILE_PATH = "src/test/no such path";
     private static final String STRING_TO_WRITE = "apple, banana";
+    private static final List<String> EXPECTED_LIST = List.of("apple", "banana");
+    private final CsvFileService fileAccessDaoCsv = new CsvFileServiceImpl();
 
     @Test
     public void readFromFile_Ok() {
-        fileAccessDaoCsv.readFromFile(OK_READ_FILE_PATH);
+        List<String> actual = fileAccessDaoCsv.readFromFile(OK_READ_FILE_PATH);
+        Assert.assertEquals(EXPECTED_LIST, actual);
     }
 
     @Test (expected = RuntimeException.class)
@@ -45,7 +47,7 @@ public class FileAccessDaoCsvImplTest {
     }
 
     @Test
-    public void writeToFile_NotOk_FilePath() {
+    public void writeToFile_NotOk_WrongFilePath() {
         fileAccessDaoCsv.writeToFile(STRING_TO_WRITE, NOT_OK_FILE_PATH);
         File report = new File(OK_WRITE_FILE_PATH);
         Assert.assertFalse(report.exists());

@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileAccessDaoCsv;
-import core.basesyntax.dao.FileAccessDaoCsvImpl;
+import core.basesyntax.dao.CsvFileService;
+import core.basesyntax.dao.CsvFileServiceImpl;
 import core.basesyntax.service.ActivityStrategy;
 import core.basesyntax.service.ActivityStrategyImpl;
 import core.basesyntax.service.InputValidator;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    private static final String IN_FILE_PATH = "src/main/resources/shopInput_OK.csv";
+    private static final String IN_FILE_PATH = "src/main/resources/shopInputTest_OK.csv";
     private static final String OUT_FILE_PATH = "src/main/resources/shopReport.csv";
 
     public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class Main {
         activityHandlerMap.put("s", new SupplyActivityHandler());
 
         ActivityStrategy strategy = new ActivityStrategyImpl(activityHandlerMap);
-        FileAccessDaoCsv fileDao = new FileAccessDaoCsvImpl();
+        CsvFileService fileDao = new CsvFileServiceImpl();
         InputValidator validator = new InputValidatorImpl();
 
         ReportService reportService = new ReportServiceImpl(fileDao, validator, strategy);

@@ -5,11 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileAccessDaoCsvImpl implements FileAccessDaoCsv {
+public class CsvFileServiceImpl implements CsvFileService {
 
     @Override
     public List<String> readFromFile(String filePath) {

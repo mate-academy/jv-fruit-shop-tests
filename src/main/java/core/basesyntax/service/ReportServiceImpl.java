@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FileAccessDaoCsv;
+import core.basesyntax.dao.CsvFileService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +9,11 @@ public class ReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String REPORT_DATA_DELIMITER = ",";
 
-    private final FileAccessDaoCsv readerDao;
+    private final CsvFileService readerDao;
     private final InputValidator inputValidator;
     private final ActivityStrategy strategy;
 
-    public ReportServiceImpl(FileAccessDaoCsv readerDao, InputValidator inputValidator,
+    public ReportServiceImpl(CsvFileService readerDao, InputValidator inputValidator,
                              ActivityStrategy strategy) {
         this.readerDao = readerDao;
         this.inputValidator = inputValidator;
@@ -32,6 +32,7 @@ public class ReportServiceImpl implements ReportService {
 
     private void fillReportMap(List<String> inputList, Map<String, Integer> reportMap) {
         inputValidator.validateInput(inputList);
+
         for (int i = 1; i < inputList.size(); i++) {
             String[] reportColumn = inputList.get(i).split(REPORT_DATA_DELIMITER);
 

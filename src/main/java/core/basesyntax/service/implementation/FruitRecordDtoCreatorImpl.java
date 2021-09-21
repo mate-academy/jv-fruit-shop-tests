@@ -3,7 +3,6 @@ package core.basesyntax.service.implementation;
 import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.FruitRecordDtoCreator;
 import core.basesyntax.service.FruitRecordDtoParser;
-
 import java.util.ArrayList;
 import java.util.List;
 

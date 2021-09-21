@@ -24,7 +24,6 @@ import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
 import core.basesyntax.service.validator.RecordValidator;
 import core.basesyntax.service.validator.RecordValidatorImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.model.FruitRecordDto;
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

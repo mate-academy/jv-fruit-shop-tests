@@ -2,7 +2,6 @@ package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
-
 import java.util.Map;
 
 public class BalanceOperationHandler implements OperationHandler {

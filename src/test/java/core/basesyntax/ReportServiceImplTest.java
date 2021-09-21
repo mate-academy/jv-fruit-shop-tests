@@ -21,7 +21,6 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,12 +44,6 @@ public class ReportServiceImplTest {
         activityHandlerMap.put("p", purchaseActivityHandler);
         activityHandlerMap.put("r", returnActivityHandler);
         activityHandlerMap.put("s", supplyActivityHandler);
-    }
-
-    @Test
-    public void reportServiceImplConstructor_Ok() {
-        Assert.assertEquals(ReportServiceImpl.class,
-                new ReportServiceImpl(readerDao, inputValidator, strategy).getClass());
     }
 
     @Test

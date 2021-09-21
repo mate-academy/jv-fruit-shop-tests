@@ -9,6 +9,5 @@ public class BalanceActivityHandler implements ActivityHandler {
         } else {
             return fruitAmount;
         }
-
     }
 }

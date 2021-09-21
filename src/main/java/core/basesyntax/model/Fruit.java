@@ -14,11 +14,6 @@ public final class Fruit {
     }
 
     @Override
-    public String toString() {
-        return "Fruit{" + "fruitName='" + fruitName + '\'' + '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

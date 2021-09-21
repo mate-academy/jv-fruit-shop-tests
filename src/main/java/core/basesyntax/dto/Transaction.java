@@ -26,20 +26,11 @@ public class Transaction {
     }
 
     @Override
-    public String toString() {
-        return "Transaction{"
-                + "operation: " + operation
-                + ", fruit: " + fruit
-                + ", quantity: " + quantity
-                + "}";
-    }
-
-    @Override
     public boolean equals(Object transaction) {
         if (transaction == this) {
             return true;
         }
-        if (transaction == null) {
+        if (transaction == null || this.getClass() != transaction.getClass()) {
             return false;
         }
         if (transaction.getClass().equals(Transaction.class)) {

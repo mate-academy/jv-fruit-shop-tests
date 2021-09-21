@@ -17,6 +17,19 @@ public class ReportingImplTest {
     }
 
     @Test
+    public void createReport_NotNullData_Ok() {
+        Stock.stockStorage.put("banana", 50);
+        Stock.stockStorage.put("apple", 20);
+        List<String> expected = new ArrayList<>();
+        expected.add(START_MESSAGE);
+        expected.add("banana,50");
+        expected.add("apple,20");
+        Reporting reporting = new ReportingImpl();
+        List<String> actual = reporting.createReport();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void createReport_Null_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add(START_MESSAGE);

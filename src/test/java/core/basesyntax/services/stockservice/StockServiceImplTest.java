@@ -55,7 +55,72 @@ public class StockServiceImplTest {
     }
 
     @Test
-    public void applyOperationsOnFruitsDto_OperationNotAvailable_Ok() {
+    public void applyOperationsOnFruitsDto_OperationBalance_Ok() {
+        TransactionDto transactionDto = new TransactionDto(
+                "b", "banana", 50);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put(transactionDto.getFruit(), transactionDto.getAmount());
+        StockService stockService = new StockServiceImpl(strategyOperations);
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
+        transactionDtoList.add(transactionDto);
+        stockService.applyOperationsOnFruitsDto(transactionDtoList);
+        Map<String, Integer> actual = Stock.stockStorage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void applyOperationsOnFruitsDto_OperationSupply_Ok() {
+        TransactionDto transactionDto = new TransactionDto(
+                "b", "banana", 50);
+        TransactionDto transactionDtoTwo = new TransactionDto(
+                "s", "banana", 50);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put(transactionDto.getFruit(), 100);
+        StockService stockService = new StockServiceImpl(strategyOperations);
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
+        transactionDtoList.add(transactionDto);
+        transactionDtoList.add(transactionDtoTwo);
+        stockService.applyOperationsOnFruitsDto(transactionDtoList);
+        Map<String, Integer> actual = Stock.stockStorage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void applyOperationsOnFruitsDto_OperationPurchase_Ok() {
+        TransactionDto transactionDto = new TransactionDto(
+                "b", "banana", 50);
+        TransactionDto transactionDtoTwo = new TransactionDto(
+                "p", "banana", 20);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put(transactionDto.getFruit(), 30);
+        StockService stockService = new StockServiceImpl(strategyOperations);
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
+        transactionDtoList.add(transactionDto);
+        transactionDtoList.add(transactionDtoTwo);
+        stockService.applyOperationsOnFruitsDto(transactionDtoList);
+        Map<String, Integer> actual = Stock.stockStorage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void applyOperationsOnFruitsDto_OperationReturn_Ok() {
+        TransactionDto transactionDto = new TransactionDto(
+                "b", "banana", 50);
+        TransactionDto transactionDtoTwo = new TransactionDto(
+                "r", "banana", 20);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put(transactionDto.getFruit(), 70);
+        StockService stockService = new StockServiceImpl(strategyOperations);
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
+        transactionDtoList.add(transactionDto);
+        transactionDtoList.add(transactionDtoTwo);
+        stockService.applyOperationsOnFruitsDto(transactionDtoList);
+        Map<String, Integer> actual = Stock.stockStorage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void applyOperationsOnFruitsDto_OperationNotAvailable_NotOk() {
         TransactionDto transactionDtoFirst = new TransactionDto(
                 "b", "banana", 50);
         TransactionDto transactionDtoSecond = new TransactionDto(

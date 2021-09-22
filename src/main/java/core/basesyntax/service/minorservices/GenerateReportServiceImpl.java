@@ -11,10 +11,15 @@ public class GenerateReportServiceImpl implements GenerateReportService {
     public String generateReport(Set<String> fruitNames) {
         StringBuilder report = new StringBuilder();
         report.append(HEAD_ROW).append(System.lineSeparator());
+        if (fruitNames == null) {
+            return report.toString().trim();
+        }
         FruitsDao fruitsDao = new FruitsDaoImpl();
         for (String name : fruitNames) {
-            report.append(name).append(",").append(fruitsDao.get(name).getAmount())
-                    .append(System.lineSeparator());
+            if (fruitsDao.get(name) != null) {
+                report.append(name).append(",").append(fruitsDao.get(name).getAmount())
+                        .append(System.lineSeparator());
+            }
         }
         return report.toString().trim();
     }

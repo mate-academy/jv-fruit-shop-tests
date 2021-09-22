@@ -15,13 +15,13 @@ public class FruitsShopServiceImpl implements FruitsShopService {
     private static final int FRUIT_AMOUNT_POSITION = 2;
     private final ActivityStrategy activityStrategy;
     private final ReaderService readerService;
-    private final GenerateReportService writerService;
+    private final GenerateReportService generateReportService;
 
     public FruitsShopServiceImpl(ActivityStrategy activityStrategy,
                                  ReaderService readerService, GenerateReportService writerService) {
         this.activityStrategy = activityStrategy;
         this.readerService = readerService;
-        this.writerService = writerService;
+        this.generateReportService = writerService;
     }
 
     @Override
@@ -38,6 +38,6 @@ public class FruitsShopServiceImpl implements FruitsShopService {
                     .doActivity(new FruitDto(values[FRUIT_NAME_POSITION],
                             Integer.parseInt(values[FRUIT_AMOUNT_POSITION])));
         }
-        return writerService.generateReport(fruitNames);
+        return generateReportService.generateReport(fruitNames);
     }
 }

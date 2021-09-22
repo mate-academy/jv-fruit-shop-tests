@@ -37,7 +37,7 @@ public class FruitDto {
     @Override
     public int hashCode() {
         int result = 1;
-        result = 31 * result + name.hashCode();
+        result = 31 * result + (name == null ? 0 : name.hashCode());
         result = 31 * result + amount;
         return result;
     }

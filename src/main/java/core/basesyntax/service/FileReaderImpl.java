@@ -14,7 +14,9 @@ public class FileReaderImpl implements FileReader {
         File file = new File(filePath);
         try {
             fileContent = Files.readAllLines(file.toPath());
-            fileContent.remove(HEADER_INDEX);
+            if (!fileContent.isEmpty()) {
+                fileContent.remove(HEADER_INDEX);
+            }
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file!", e);
         }

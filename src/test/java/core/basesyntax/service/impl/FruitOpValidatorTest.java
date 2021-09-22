@@ -7,7 +7,7 @@ public class FruitOpValidatorTest {
     private FruitOperatorValidator fruitOpValidator = new FruitOperatorValidator();
 
     @Test(expected = ValidationException.class)
-    public void validate_validationException_Ok() throws ValidationException {
+    public void validate_validationException_notOk() throws ValidationException {
         fruitOpValidator.validate(null);
     }
 

@@ -10,7 +10,7 @@ public class FruitTest {
     private Fruit expected = new Fruit("banana");
 
     @Test(expected = ValidationException.class)
-    public void getName_null_Ok() {
+    public void getName_null_notOk() {
         Fruit actual = new Fruit(null);
     }
 

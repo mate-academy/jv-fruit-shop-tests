@@ -16,7 +16,7 @@ public class OperationTypeTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void getOperation_throwException_Ok() {
+    public void getOperation_throwException_notOk() {
         OperationType.getOperation("a");
     }
 }

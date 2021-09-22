@@ -9,7 +9,7 @@ public class FruitRecordTest {
     private FruitRecord fruitRecordExpected = new FruitRecord("b", testFruit, 10);
 
     @Test
-    public void getOperation_Ok() {
+    public void getOperation_validEntry_Ok() {
         String expectedOperation = fruitRecordExpected.getOperation();
         FruitRecord test = new FruitRecord("b", new Fruit("test"), 10);
         String actual = test.getOperation();
@@ -17,7 +17,7 @@ public class FruitRecordTest {
     }
 
     @Test
-    public void getFruit() {
+    public void getFruit_checkValidValue_Ok() {
         Fruit expected = fruitRecordExpected.getFruit();
         FruitRecord test = new FruitRecord("b", new Fruit("test"), 10);
         assertEquals(expected, test.getFruit());

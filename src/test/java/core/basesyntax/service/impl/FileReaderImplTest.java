@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String sourceFile = "src/main/java/resources/filetest";
-    private FileReaderImpl fileService = new FileReaderImpl();
-    private List<String> expected = new ArrayList<>();
+    private static final String SOURCE_FILE = "src/main/java/resources/filetest";
+    private final FileReaderImpl fileService = new FileReaderImpl();
+    private final List<String> expected = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
@@ -36,6 +36,6 @@ public class FileReaderImplTest {
 
     @Test
     public void readFile_validFileName_Ok() {
-        assertEquals(expected, fileService.read(sourceFile));
+        assertEquals(expected, fileService.read(SOURCE_FILE));
     }
 }

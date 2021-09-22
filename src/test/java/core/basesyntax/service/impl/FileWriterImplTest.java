@@ -27,12 +27,12 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void recordDataToFile_resultFileNull_Ok() {
+    public void recordDataToFile_resultFileNull_notOk() {
         fileWriter.write(null, data);
     }
 
     @Test(expected = RuntimeException.class)
-    public void recordDataToFile_dataNull_Ok() {
+    public void recordDataToFile_dataNull_notOk() {
         fileWriter.write(DESTINATION_FILE, null);
     }
 

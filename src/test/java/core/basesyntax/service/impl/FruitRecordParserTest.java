@@ -12,7 +12,7 @@ public class FruitRecordParserTest {
     private FruitRecordParser fruitRecordParser = new FruitRecordParser();
 
     @Test(expected = NullPointerException.class)
-    public void parse_nullPointerException_Ok() {
+    public void parse_nullPointerException_notOk() {
         fruitRecordParser.parse(null);
     }
 

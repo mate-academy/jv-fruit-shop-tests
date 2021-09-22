@@ -22,7 +22,8 @@ public class ValidatorImplTest {
                 .fruit(Fruit.builder().name("peach").build())
                 .type(OperationType.BALANCE).amount(10).build();
         boolean actual = validator.validateRecord(fruitRecordDto);
-        Assert.assertTrue(actual);
+        Assert.assertTrue("Expected true with fruitRecord: "
+                + fruitRecordDto + ", but was: " + actual, actual);
     }
 
     @Test(expected = RuntimeException.class)

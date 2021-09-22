@@ -54,13 +54,22 @@ public class DataParserImplTest {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(Fruit.builder().name("banana").build(), 107);
         Map<Fruit, Integer> actual = dataParser.parseDto(fruitList);
-        Assert.assertEquals(expected, actual);
-        Assert.assertTrue("Expected map with key: banana"
-                + "and value: 107, but was: " + actual,expected.equals(actual));
+        Assert.assertEquals("Expected map with key: banana"
+                + "and value: 107, but was: " + actual, expected, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void parseDto_nullInput_NotOk() {
+        List<FruitRecordDto> fruits = null;
+        dataParser.parseDto(fruits);
     }
 
     @Test
-    public void parseDto_nullInput_NotOk() {
-
+    public void parseDto_emptyFile_Ok() {
+        List<FruitRecordDto> fruits = new ArrayList<>();
+        Map<Fruit, Integer> expected = new HashMap<>();
+        Map<Fruit, Integer> actual = dataParser.parseDto(fruits);
+        Assert.assertEquals("Expected empty map with empty input, but: "
+                + actual, expected, actual);
     }
 }

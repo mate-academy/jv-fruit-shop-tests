@@ -17,6 +17,8 @@ public class FruitRecordParserImplTest {
     private static List<String> fullList;
     private static List<TransactionDto> expectedList;
     private static List<String> nullList;
+    private List<TransactionDto> expected;
+    private List<TransactionDto> actual;
 
     @BeforeClass
     public static void setUp() {
@@ -35,15 +37,15 @@ public class FruitRecordParserImplTest {
 
     @Test
     public void parse_emptyList_Ok() {
-        List<TransactionDto> expected = new ArrayList<>();
-        List<TransactionDto> actual = fruitRecordParser.parse(emptyList);
+        expected = new ArrayList<>();
+        actual = fruitRecordParser.parse(emptyList);
         assertEquals("Test failed! You should returned empty list.", expected, actual);
     }
 
     @Test
     public void parse_fullList_Ok() {
-        List<TransactionDto> expected = expectedList;
-        List<TransactionDto> actual = fruitRecordParser.parse(fullList);
+        expected = expectedList;
+        actual = fruitRecordParser.parse(fullList);
         Assert.assertEquals("Test failed! Lists are different.", expected, actual);
     }
 

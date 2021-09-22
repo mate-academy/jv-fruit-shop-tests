@@ -30,13 +30,13 @@ import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static FruitService fruitService;
-    private static OperationStrategy operationStrategy;
-    private static FruitRecordsDao fruitRecordsDao;
     private static List<TransactionDto> emptyList;
     private static List<TransactionDto> fullList;
     private static List<TransactionDto> nullList;
     private static Map<Fruit, Integer> expectedMap;
     private static List<String> reportList;
+    private List<String> expected;
+    private List<String> actual;
 
     @BeforeClass
     public static void setUp() {
@@ -46,7 +46,7 @@ public class FruitServiceImplTest {
         operationHandlerMap.put(PURCHASE, new PurchaseOperationHandler());
         operationHandlerMap.put(RETURN, new ReturnOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        fruitRecordsDao = new FruitRecordsDaoImpl();
+        FruitRecordsDao fruitRecordsDao = new FruitRecordsDaoImpl();
         fruitService = new FruitServiceImpl(operationStrategy, fruitRecordsDao);
         emptyList = new ArrayList<>();
         nullList = null;
@@ -87,17 +87,17 @@ public class FruitServiceImplTest {
 
     @Test
     public void buildReportToList_fullReport_Ok() {
-        List<String> expected = reportList;
+        expected = reportList;
         FruitStorage.fruitStorage.putAll(expectedMap);
-        List<String> actual = fruitService.buildReportToList();
+        actual = fruitService.buildReportToList();
         assertEquals("Test failed! Actual reportList not equals expected reportList",
                 expected, actual);
     }
 
     @Test
     public void buildReportToList_reportWithEmptyStorage_Ok() {
-        List<String> expected = new ArrayList<>(List.of("fruit,quantity"));
-        List<String> actual = fruitService.buildReportToList();
+        expected = new ArrayList<>(List.of("fruit,quantity"));
+        actual = fruitService.buildReportToList();
         assertEquals("Test failed! Actual reportList not equals expected reportList",
                 expected, actual);
     }

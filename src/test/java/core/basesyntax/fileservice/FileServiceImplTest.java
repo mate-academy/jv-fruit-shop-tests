@@ -18,6 +18,8 @@ public class FileServiceImplTest {
     private static FileService fileService;
     private static List<String> emptyList;
     private static List<String> fullList;
+    private List<String> expected;
+    private List<String> actual;
 
     @BeforeClass
     public static void setUp() {
@@ -40,8 +42,8 @@ public class FileServiceImplTest {
     public void writeAndReadFile_fileWithEmptyList_Ok() {
         fileService.writeToFile(emptyList, DAILY_SHOP_CSV);
         assertTrue("Test failed! File isn`t exist", Files.exists(DAILY_SHOP_CSV));
-        List<String> expected = readFromTestFile(DAILY_SHOP_CSV);
-        List<String> actual = fileService.readFromFile(DAILY_SHOP_CSV);
+        expected = readFromTestFile(DAILY_SHOP_CSV);
+        actual = fileService.readFromFile(DAILY_SHOP_CSV);
         assertEquals("Test failed! You should returned empty list.", expected, actual);
     }
 
@@ -49,9 +51,9 @@ public class FileServiceImplTest {
     public void writeAndReadFile_fileWithCorrectDataList_Ok() {
         fileService.writeToFile(fullList, DAILY_SHOP_CSV);
         assertTrue("Test failed! File isn`t exist", Files.exists(DAILY_SHOP_CSV));
-        List<String> expected = readFromTestFile(DAILY_SHOP_CSV);
+        expected = readFromTestFile(DAILY_SHOP_CSV);
         expected.remove(0);
-        List<String> actual = fileService.readFromFile(DAILY_SHOP_CSV);
+        actual = fileService.readFromFile(DAILY_SHOP_CSV);
         assertEquals("Test failed! You should returned "
                 + expected + ", but was "
                 + actual, expected, actual);

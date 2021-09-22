@@ -1,15 +1,8 @@
 package core.basesyntax.validation;
 
-import core.basesyntax.database.Database;
-import core.basesyntax.service.RecordParserImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class InputValidatorTest {
     private static final int CORRECT_SIZE = 3;

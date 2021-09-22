@@ -1,22 +1,17 @@
 package core.basesyntax.service;
 
 import core.basesyntax.database.Database;
-import core.basesyntax.model.Record;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
 public class RecordParserTest {
     private static final int EXPECTED_OK_SIZE = 2;
     private static RecordParser recordParser;
-
 
     @BeforeClass
     public static void beforeAll() {

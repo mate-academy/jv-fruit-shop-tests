@@ -1,13 +1,11 @@
 package core.basesyntax.service;
 
-import org.junit.*;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderTest {
     private static final String CORRECT_PATH = "src/test/resources/testInput.csv";
@@ -43,6 +41,4 @@ public class FileReaderTest {
         List<String> actual = fileReader.read(EMPTY_PATH);
         Assert.assertEquals("List should be empty if file is empty: ", expected, actual);
     }
-
-
 }

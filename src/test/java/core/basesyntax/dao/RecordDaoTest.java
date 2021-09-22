@@ -2,13 +2,11 @@ package core.basesyntax.dao;
 
 import core.basesyntax.database.Database;
 import core.basesyntax.model.Record;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class RecordDaoTest {
     private static final int ADD_CORRECT_DB_SIZE = 1;

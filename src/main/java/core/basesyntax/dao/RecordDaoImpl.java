@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.database.Database;
 import core.basesyntax.model.Record;
-
 import java.util.List;
 
 public class RecordDaoImpl implements RecordDao {

@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class DecreaseHandlerTest {
     private static DecreaseHandler decreaseHandler;
 
@@ -26,11 +24,9 @@ public class DecreaseHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-
     @Test (expected = RuntimeException.class)
     public void apply_amountTooBig_NotOk() {
         decreaseHandler.apply(new Record("p", "apple", 10));
-
     }
 
     @After

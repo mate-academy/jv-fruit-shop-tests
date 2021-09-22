@@ -6,7 +6,6 @@ import core.basesyntax.model.Record;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.report.FruitBalance;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -5,7 +5,6 @@ import core.basesyntax.dao.RecordDaoImpl;
 import core.basesyntax.model.Record;
 import core.basesyntax.validation.InputValidator;
 import core.basesyntax.validation.InputValidatorImpl;
-
 import java.util.List;
 
 public class RecordParserImpl implements RecordParser {

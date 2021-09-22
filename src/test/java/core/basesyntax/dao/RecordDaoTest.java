@@ -24,6 +24,8 @@ public class RecordDaoTest {
         recordDao.addRecord(testRecord);
         int expected = ADD_CORRECT_DB_SIZE;
         int actual = Database.RECORDS.size();
+        Assert.assertEquals("Database size should be"
+                + ADD_CORRECT_DB_SIZE, expected, actual);
     }
 
     @Test
@@ -34,7 +36,8 @@ public class RecordDaoTest {
         List<Record> testRecords = recordDao.getRecords();
         int actual = testRecords.size();
         int expected = GET_CORRECT_DB_SIZE;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Database size should be"
+                + GET_CORRECT_DB_SIZE, expected, actual);
     }
 
     @After

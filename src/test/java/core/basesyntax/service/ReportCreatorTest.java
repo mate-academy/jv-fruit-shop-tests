@@ -11,6 +11,7 @@ import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.report.FruitBalance;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,14 +52,14 @@ public class ReportCreatorTest {
         List<String> expected = new ArrayList<>();
         expected.add("banana,107");
         expected.add("apple,100");
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Reports differ from each other!", expected, actual);
     }
 
     @Test
     public void createEmptyReport_Ok() {
         List<String> actual = reportCreator.createReport();
-        List<String> expected = new ArrayList<>();
-        Assert.assertEquals(expected, actual);
+        List<String> expected = Collections.emptyList();
+        Assert.assertEquals("Report should be empty!", expected, actual);
     }
 
     @After

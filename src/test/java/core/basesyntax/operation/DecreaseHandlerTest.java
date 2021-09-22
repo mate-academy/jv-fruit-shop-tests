@@ -21,7 +21,7 @@ public class DecreaseHandlerTest {
         decreaseHandler.apply(new Record("p", "apple", 10));
         int expected = 10;
         int actual = FruitBalance.FRUIT_BALANCE.get("apple");
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Fruit amounts should match!", expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

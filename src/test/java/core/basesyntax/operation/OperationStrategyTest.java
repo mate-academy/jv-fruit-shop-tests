@@ -36,7 +36,7 @@ public class OperationStrategyTest {
         operationStrategy.get(BALANCE).apply(new Record(BALANCE, "apple", 10));
         int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
         int expected = AMOUNT_ADDITION;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Amounts should add!", expected, actual);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class OperationStrategyTest {
         operationStrategy.get(SUPPLY).apply(new Record(SUPPLY, "apple", 10));
         int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
         int expected = AMOUNT_ADDITION;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Amounts should add!", expected, actual);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class OperationStrategyTest {
         operationStrategy.get(RETURN).apply(new Record(RETURN, "apple", 10));
         int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
         int expected = AMOUNT_ADDITION;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Amounts should add!", expected, actual);
     }
 
     @Test
@@ -64,11 +64,12 @@ public class OperationStrategyTest {
         operationStrategy.get(PURCHASE).apply(new Record(PURCHASE, "apple", 5));
         int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
         int expected = AMOUNT_DECREASE;
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Amounts should subtract!",expected, actual);
     }
 
     @After
     public void tearDown() {
+
         FruitBalance.FRUIT_BALANCE.clear();
     }
 }

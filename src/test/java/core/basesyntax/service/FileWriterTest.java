@@ -20,12 +20,11 @@ public class FileWriterTest {
 
     @Test
     public void write_writeFile_Ok() {
-        List<String> testData = new ArrayList<>();
-        testData.add("banana,107");
-        testData.add("apple,100");
-        fileWriter.write(testData, CORRECT_PATH);
+        List<String> expected = new ArrayList<>();
+        expected.add("banana,107");
+        expected.add("apple,100");
+        fileWriter.write(expected, CORRECT_PATH);
         List<String> actual = fileReader.read(CORRECT_PATH);
-        List<String> expected = testData;
         Assert.assertEquals(expected, actual);
     }
 

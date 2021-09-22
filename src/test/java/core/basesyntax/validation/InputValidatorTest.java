@@ -24,7 +24,7 @@ public class InputValidatorTest {
         testData[FRUIT_INDEX] = "apple";
         testData[AMOUNT_INDEX] = "100";
         inputValidator.isValidInput(testData);
-        Assert.assertTrue("Input data incorrect!", true);
+        Assert.assertTrue("Input data is incorrect!", true);
     }
 
     @Test (expected = RuntimeException.class)

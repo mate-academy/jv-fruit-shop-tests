@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,9 +25,13 @@ public class DataParserImplTest {
     private static Map<OperationType, OperationHandler> operationMap;
     private static OperationStrategy strategy;
     private static List<FruitRecordDto> fruitList;
+    private static Map<Fruit, Integer> expected;
+    private static Map<Fruit, Integer> actual;
 
     @BeforeClass
     public static void initializer() {
+        expected = new HashMap<>();
+        actual = new HashMap<>();
         fruitList = new ArrayList<>();
         fruitList.add(FruitRecordDto.builder()
                 .type(OperationType.BALANCE)
@@ -49,11 +54,16 @@ public class DataParserImplTest {
         dataParser = new DataParserImpl(strategy);
     }
 
+    @After
+    public void clear() {
+        expected.clear();
+        actual.clear();
+    }
+
     @Test
     public void parseDto_RightInput_Ok() {
-        Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(Fruit.builder().name("banana").build(), 107);
-        Map<Fruit, Integer> actual = dataParser.parseDto(fruitList);
+        actual = dataParser.parseDto(fruitList);
         Assert.assertEquals("Expected map with key: banana"
                 + "and value: 107, but was: " + actual, expected, actual);
     }
@@ -67,8 +77,7 @@ public class DataParserImplTest {
     @Test
     public void parseDto_emptyFile_Ok() {
         List<FruitRecordDto> fruits = new ArrayList<>();
-        Map<Fruit, Integer> expected = new HashMap<>();
-        Map<Fruit, Integer> actual = dataParser.parseDto(fruits);
+        actual = dataParser.parseDto(fruits);
         Assert.assertEquals("Expected empty map with empty input, but: "
                 + actual, expected, actual);
     }

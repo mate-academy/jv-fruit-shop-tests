@@ -20,17 +20,24 @@ public class ReportCreatorImplTest {
     public static final Map<Fruit, Integer> fruitMap = new HashMap<>();
     private static ReportCreator creator;
     private static FruitStorageServiceImpl service;
+    private static List<String> actual;
+    private static List<String> expected;
+    private static String path;
 
     @BeforeClass
     public static void initialize() {
         creator = new ReportCreatorImpl();
         service = new FruitStorageServiceImpl();
+        actual = new ArrayList<>();
+        expected = new ArrayList<>();
     }
 
     @After
     public void clear() {
         fruitMap.clear();
         fruitStorage.clear();
+        actual.clear();
+        expected.clear();
     }
 
     @Test
@@ -38,12 +45,10 @@ public class ReportCreatorImplTest {
         fruitMap.put(Fruit.builder().name("peach").build(), 16);
         fruitMap.put(Fruit.builder().name("banana").build(), 13);
         service.addToStorage(fruitMap);
-        List<String> actual = new ArrayList<>();
-        List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("Fruit(name=peach),16");
         expected.add("Fruit(name=banana),13");
-        String path = "src/test/resources/RightTest";
+        path = "src/test/resources/RightTest";
         creator.createReport(path, LocalDate.now());
         try {
             actual = Files.readAllLines(Path.of(path));
@@ -56,10 +61,8 @@ public class ReportCreatorImplTest {
 
     @Test
     public void createReport_nullInput_Ok() {
-        String path = "src/test/resources/nullTest";
+        path = "src/test/resources/nullTest";
         creator.createReport(path, LocalDate.now());
-        List<String> actual = new ArrayList<>();
-        List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         try {
             actual = Files.readAllLines(Path.of(path));
@@ -72,11 +75,9 @@ public class ReportCreatorImplTest {
 
     @Test
     public void createReport_EmptyFile_Ok() {
-        String path = "src/test/resources/emptyTest";
+        path = "src/test/resources/emptyTest";
         service.addToStorage(fruitMap);
         creator.createReport(path, LocalDate.now());
-        List<String> actual = new ArrayList<>();
-        List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         try {
             actual = Files.readAllLines(Path.of(path));

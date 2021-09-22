@@ -12,21 +12,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitStorageServiceImplTest {
-    public static final Map<LocalDate, Map<Fruit, Integer>> fruitStorage = new HashMap<>();
-    public static final Map<Fruit, Integer> fruitMap = new HashMap<>();
+    private static Map<LocalDate, Map<Fruit, Integer>> fruitStorage;
+    private static Map<Fruit, Integer> fruitMap;
     private static FruitStorageRepository repository;
     private static FruitStorageServiceImpl service;
+    private static Map<Fruit, Integer> expected;
+    private static Map<Fruit, Integer> actual;
 
     @BeforeClass
     public static void initialize() {
         repository = new FruitStorageRepositoryImpl();
         service = new FruitStorageServiceImpl();
+        fruitStorage = new HashMap<>();
+        fruitMap = new HashMap<>();
+        expected = new HashMap<>();
+        actual = new HashMap<>();
+
     }
 
     @After
     public void clear() {
         fruitMap.clear();
         fruitStorage.clear();
+        expected = new HashMap<>();
+        actual = new HashMap<>();
     }
 
     @Test
@@ -48,7 +57,7 @@ public class FruitStorageServiceImplTest {
     }
 
     @Test
-    public void addToStorage_emptyMap() {
+    public void addToStorage_emptyMap_Ok() {
         service.addToStorage(fruitMap);
         Assert.assertTrue("Expected a empty storage with empty input, "
                 + "but was:" + fruitStorage, fruitStorage.isEmpty());
@@ -59,8 +68,8 @@ public class FruitStorageServiceImplTest {
         fruitMap.put(Fruit.builder().name("peach").build(), 16);
         fruitMap.put(Fruit.builder().name("banana").build(), 13);
         repository.add(fruitMap);
-        Map<Fruit, Integer> expected = fruitMap;
-        Map<Fruit, Integer> actual = service.getFromStorage(LocalDate.now());
+        expected = fruitMap;
+        actual = service.getFromStorage(LocalDate.now());
         Assert.assertEquals("Expected: " + expected
                 + " with map: " + fruitMap + ", but was: " + actual, expected, actual);
     }
@@ -68,8 +77,8 @@ public class FruitStorageServiceImplTest {
     @Test
     public void getFromStorage_nullInput_OK() {
         service.addToStorage(null);
-        Map<Fruit, Integer> expected = null;
-        Map<Fruit, Integer> actual = service.getFromStorage(LocalDate.now());
+        expected = null;
+        actual = service.getFromStorage(LocalDate.now());
         Assert.assertEquals("Expected a null map, but was: "
                 + actual, expected, actual);
     }
@@ -77,8 +86,7 @@ public class FruitStorageServiceImplTest {
     @Test
     public void getFromStorage_emptyInput_Ok() {
         service.addToStorage(fruitMap);
-        Map<Fruit, Integer> expected = new HashMap<>();
-        Map<Fruit, Integer> actual = service.getFromStorage(LocalDate.now());
+        actual = service.getFromStorage(LocalDate.now());
         Assert.assertEquals("Expected a empty map, but was: "
                 + actual, expected, actual);
     }

@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class ValidatorImplTest {
     private static Validator validator;
+    private static boolean expected;
+    private static boolean actual;
 
     @BeforeClass
     public static void initializer() {
@@ -39,7 +41,7 @@ public class ValidatorImplTest {
         FruitRecordDto fruitRecordDto = FruitRecordDto.builder()
                 .fruit(null)
                 .type(OperationType.BALANCE).amount(10).build();
-        boolean actual = validator.validateRecord(fruitRecordDto);
+        actual = validator.validateRecord(fruitRecordDto);
     }
 
     @Test(expected = RuntimeException.class)
@@ -47,12 +49,12 @@ public class ValidatorImplTest {
         FruitRecordDto fruitRecordDto = FruitRecordDto.builder()
                 .fruit(Fruit.builder().name("apricot").build())
                 .type(null).amount(16).build();
-        boolean actual = validator.validateRecord(fruitRecordDto);
+        actual = validator.validateRecord(fruitRecordDto);
     }
 
     @Test(expected = RuntimeException.class)
     public void validAmount_notANumber_NotOk() {
         String line = "abc";
-        boolean expected = validator.validAmount(line);
+        expected = validator.validAmount(line);
     }
 }

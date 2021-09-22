@@ -6,6 +6,7 @@ import core.basesyntax.operation.OperationType;
 import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,6 +14,9 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
     private static List<FruitRecordDto> fruitList;
+    private static String path;
+    private static List<FruitRecordDto> expected;
+    private static List<FruitRecordDto> actual;
 
     @BeforeClass
     public static void initialize() {
@@ -30,47 +34,55 @@ public class ReaderServiceImplTest {
                 .fruit(Fruit.builder().name("banana").build())
                 .amount(13).build());
         readerService = new ReaderServiceImpl();
+        expected = new ArrayList<>();
+        actual = new ArrayList<>();
+    }
+
+    @After
+    public void clear() {
+        expected.clear();
+        actual.clear();
     }
 
     @Test
     public void read_rightInput_Ok() {
-        String path = "src/test/resources/rightInput.csv";
-        List<FruitRecordDto> expected = fruitList;
-        List<FruitRecordDto> actual = readerService.read(path);
+        path = "src/test/resources/rightInput.csv";
+        expected = fruitList;
+        actual = readerService.read(path);
         Assert.assertEquals("Failed with right data, expected: "
                 + expected + ", but was:" + actual, expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void read_nullPath_NotOK() {
-        String path = null;
-        List<FruitRecordDto> actual = readerService.read(path);
+        path = null;
+        actual = readerService.read(path);
     }
 
     @Test(expected = RuntimeException.class)
     public void read_emptyColumnName_NotOk() {
-        String path = "src/test/resources/emptyColumnName.csv.csv";
-        List<FruitRecordDto> actual = readerService.read(path);
+        path = "src/test/resources/emptyColumnName.csv";
+        actual = readerService.read(path);
+        System.out.println(actual);
     }
 
     @Test
     public void read_EmptyFile_Ok() {
-        String path = "src/test/resources/emptyFile.csv";
-        List<FruitRecordDto> expected = new ArrayList<>();
-        List<FruitRecordDto> actual = readerService.read(path);
+        path = "src/test/resources/emptyFile.csv";
+        actual = readerService.read(path);
         Assert.assertEquals("Failed with empty file, expected: " + expected
                 + ", but was: " + actual, expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_EmptyColumnAmount() {
-        String path = "src/test/resources/emptyColumnAmount";
-        List<FruitRecordDto> actual = readerService.read(path);
+    public void read_EmptyColumnAmount_NotOk() {
+        path = "src/test/resources/emptyColumnAmount";
+        actual = readerService.read(path);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_negativeAmount() {
-        String path = "src/test/resources/negativeAmount";
-        List<FruitRecordDto> actual = readerService.read(path);
+    public void read_negativeAmount_NotOk() {
+        path = "src/test/resources/negativeAmount";
+        actual = readerService.read(path);
     }
 }

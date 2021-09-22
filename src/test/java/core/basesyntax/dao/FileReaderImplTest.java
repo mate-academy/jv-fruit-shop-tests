@@ -12,8 +12,8 @@ public class FileReaderImplTest {
             = "src/test/java/resources/input_with_data_test.csv";
     public static final String INCORRECT_PATH = "wrong path";
     public static final String COLUMN_NAMES = "operation,fruit,amount";
-    public static final String DATA_FROM_FILE_FIRST = "b,banana,15";
-    public static final String DATA_FROM_FILE_SECOND = "b,apple,10";
+    public static final String DATA_FROM_FILE_FIRST = "b,banana,40";
+    public static final String DATA_FROM_FILE_SECOND = "b,apple,35";
     private static FileReader fileReader;
 
     @BeforeClass

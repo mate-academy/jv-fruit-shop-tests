@@ -20,7 +20,6 @@ public class DecreaseOperationHandlerImplTest {
 
     @Test
     public void getAmount_correctData_Ok() {
-
         fruitRecordDto.setFruit(new Fruit("apple"));
         fruitRecordDto.setAmount(20);
         fruitRecordDto.setOperationType(FruitRecordDto.OperationType.PURCHASE);

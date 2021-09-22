@@ -1,38 +1,38 @@
 package core.basesyntax.service.fileservice;
 
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileServiceImplTest {
+    private static final String INPUT_CSV = "src/test/resources/input.csv";
+    private static final String OUTPUT_CSV = "src/test/resources/output.csv";
+    private static final String INCORRECT_PATH = "src/test/java";
     private static FileService fileService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileService = new FileServiceImpl();
     }
 
     @Test
     public void readDataFromFile_correctPath_Ok() throws IOException {
         List<String> expected = Files
-                .readAllLines(Path.of("src/test/resources/input.csv"));
-        List<String> actual = fileService.readDataFromFile("src/test/resources/input.csv");
+                .readAllLines(Path.of(INPUT_CSV));
+        List<String> actual = fileService.readDataFromFile(INPUT_CSV);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void readDataFromFile_incorrectPath_NotOk() {
-        String incorrectPath = "src/java/resources/input.csv";
-        fileService.readDataFromFile(incorrectPath);
+        fileService.readDataFromFile(INCORRECT_PATH);
     }
 
     @Test
@@ -40,18 +40,22 @@ public class FileServiceImplTest {
         String data = "fruit,quantity\n"
                 + "banana,150\n"
                 + "apple,150";
-        fileService.writeDataToFile("src/test/resources/output.csv", data);
+        fileService.writeDataToFile(OUTPUT_CSV, data);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,150");
         expected.add("apple,150");
-        List<String> actual = fileService.readDataFromFile("src/test/resources/output.csv");
+        List<String> actual = fileService.readDataFromFile(OUTPUT_CSV);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeDataToFile_incorrectPath_NotOk() {
+        fileService.writeDataToFile(INCORRECT_PATH, "");
     }
 
     @After
     public void close() throws IOException {
-        new FileWriter("src/test/resources/output.csv", false).close();
+        new FileWriter(OUTPUT_CSV, false).close();
     }
-
 }

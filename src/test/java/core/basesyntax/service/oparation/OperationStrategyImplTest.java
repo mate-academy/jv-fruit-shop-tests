@@ -15,7 +15,7 @@ public class OperationStrategyImplTest {
     private String expected;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         Map<String, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(TypeOperations.BALANCE.get(), new BalanceHandler());
         operationHandlersMap.put(TypeOperations.SUPPLY.get(), new SupplyHandler());

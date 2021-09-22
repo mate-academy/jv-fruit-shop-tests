@@ -9,7 +9,7 @@ public class FruitTest {
     private Fruit fruit;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruit = new Fruit("banana");
     }
 

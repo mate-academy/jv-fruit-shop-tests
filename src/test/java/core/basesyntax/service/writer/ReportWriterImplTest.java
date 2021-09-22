@@ -16,7 +16,7 @@ public class ReportWriterImplTest {
     private static String toReportString;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         reportWriter = new ReportWriterImpl();
         toReportString = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()

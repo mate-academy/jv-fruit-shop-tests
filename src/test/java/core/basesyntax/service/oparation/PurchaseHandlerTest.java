@@ -15,7 +15,7 @@ public class PurchaseHandlerTest {
     private static FruitRecordDto fruitRecordDto;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.getFruitStorageMap().put(new Fruit("banana"), 10);
         Storage.getFruitStorageMap().put(new Fruit("apple"), 10);
         operationHandler = new PurchaseHandler();

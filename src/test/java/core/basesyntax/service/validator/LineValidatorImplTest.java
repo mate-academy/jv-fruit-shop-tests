@@ -9,7 +9,7 @@ public class LineValidatorImplTest {
     private static Validator validator;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         validator = new LineValidatorImpl();
     }
 

@@ -24,7 +24,7 @@ public class FruitRecordDtoParserImplTest {
     private static List<String> list;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(TypeOperations.BALANCE.get(), new BalanceHandler());
         operationHandlersMap.put(TypeOperations.SUPPLY.get(), new SupplyHandler());

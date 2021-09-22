@@ -15,7 +15,7 @@ public class SupplyHandlerTest {
     private static FruitRecordDto fruitRecordDto;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.getFruitStorageMap().put(new Fruit("banana"), 0);
         Storage.getFruitStorageMap().put(new Fruit("apple"), 0);
         operationHandler = new SupplyHandler();

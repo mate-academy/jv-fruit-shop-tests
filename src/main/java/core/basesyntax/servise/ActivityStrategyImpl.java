@@ -12,6 +12,9 @@ public class ActivityStrategyImpl implements ActivityStrategy {
 
     @Override
     public ActivityHandler getActivity(String activity) {
+        if (activities.get(activity) == null) {
+            throw new RuntimeException("Unknown Activity");
+        }
         return activities.get(activity);
     }
 }

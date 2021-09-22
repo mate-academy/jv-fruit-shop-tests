@@ -33,7 +33,7 @@ public class ValidatorImplTest {
         FruitRecordDto fruitRecordDto = FruitRecordDto.builder()
                 .fruit(Fruit.builder().name("peach").build())
                 .type(OperationType.BALANCE).amount(-8).build();
-        boolean actual = validator.validateRecord(fruitRecordDto);
+        validator.validateRecord(fruitRecordDto);
     }
 
     @Test(expected = RuntimeException.class)
@@ -41,7 +41,7 @@ public class ValidatorImplTest {
         FruitRecordDto fruitRecordDto = FruitRecordDto.builder()
                 .fruit(null)
                 .type(OperationType.BALANCE).amount(10).build();
-        actual = validator.validateRecord(fruitRecordDto);
+        validator.validateRecord(fruitRecordDto);
     }
 
     @Test(expected = RuntimeException.class)
@@ -49,7 +49,7 @@ public class ValidatorImplTest {
         FruitRecordDto fruitRecordDto = FruitRecordDto.builder()
                 .fruit(Fruit.builder().name("apricot").build())
                 .type(null).amount(16).build();
-        actual = validator.validateRecord(fruitRecordDto);
+        validator.validateRecord(fruitRecordDto);
     }
 
     @Test(expected = RuntimeException.class)

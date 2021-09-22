@@ -16,8 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    public static final Map<LocalDate, Map<Fruit, Integer>> fruitStorage = new HashMap<>();
-    public static final Map<Fruit, Integer> fruitMap = new HashMap<>();
+    private static Map<LocalDate, Map<Fruit, Integer>> fruitStorage;
+    private static Map<Fruit, Integer> fruitMap;
     private static ReportCreator creator;
     private static FruitStorageServiceImpl service;
     private static List<String> actual;
@@ -26,6 +26,8 @@ public class ReportCreatorImplTest {
 
     @BeforeClass
     public static void initialize() {
+        fruitStorage = new HashMap<>();
+        fruitMap = new HashMap<>();
         creator = new ReportCreatorImpl();
         service = new FruitStorageServiceImpl();
         actual = new ArrayList<>();

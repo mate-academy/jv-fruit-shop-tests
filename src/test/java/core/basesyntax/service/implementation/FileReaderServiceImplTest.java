@@ -19,11 +19,16 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void getRecords_correctFileName_Ok() {
-        List<String> expected = List.of("b,banana,10",
-                "b,apple,85", "s,banana,38", "p,banana,13", "r,apple,3", "p,apple,24",
-                "p,banana,5", "s,banana,50");
+        List<String> expected = List.of("b,banana,10", "b,apple,85",
+                "s,banana,38", "p,banana,13", "r,apple,3",
+                "p,apple,24", "p,banana,5", "s,banana,50");
         List<String> actual = fileReaderService.getRecords(CORRECT_FILE_NAME);
         assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void getRecords_inputNull_Ok() {
+        fileReaderService.getRecords(null);
     }
 
     @Test (expected = RuntimeException.class)

@@ -27,7 +27,6 @@ public class FruitStorageServiceImplTest {
         fruitMap = new HashMap<>();
         expected = new HashMap<>();
         actual = new HashMap<>();
-
     }
 
     @After

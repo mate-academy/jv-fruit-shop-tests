@@ -78,7 +78,7 @@ public class DataParserImplTest {
     public void parseDto_emptyFile_Ok() {
         List<FruitRecordDto> fruits = new ArrayList<>();
         actual = dataParser.parseDto(fruits);
-        Assert.assertEquals("Expected empty map with empty input, but: "
+        Assert.assertEquals("Expected empty map with empty input, but was: "
                 + actual, expected, actual);
     }
 }

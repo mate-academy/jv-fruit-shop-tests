@@ -16,6 +16,9 @@ public class RecordParserImpl implements RecordParser {
 
     @Override
     public void parseRecords(List<String> linesFromFile) {
+        if (linesFromFile.isEmpty()) {
+            throw new RuntimeException("Cannot parse empty list!!!");
+        }
         RecordDao recordDao = new RecordDaoImpl();
         for (String line: linesFromFile) {
             String[] recordData = line.split(SEPARATOR);

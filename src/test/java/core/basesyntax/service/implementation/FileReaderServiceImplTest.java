@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String CORRECT_FILE_NAME = "src/main/resources/CorrectFromFile.csv";
+    private static final String CORRECT_FILE_NAME = "src/test/resources/CorrectFromFile.csv";
     private static final String WRONG_FILE_NAME = "WrongFromFile.csv";
     private static FileReaderService fileReaderService;
 

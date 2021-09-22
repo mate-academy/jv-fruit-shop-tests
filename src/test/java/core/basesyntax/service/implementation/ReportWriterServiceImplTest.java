@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportWriterServiceImplTest {
-    private static final String CORRECT_FILE_NAME = "src/main/resources/CorrectToFile.csv";
+    private static final String CORRECT_FILE_NAME = "src/test/resources/CorrectToFile.csv";
     private static final String WRONG_FILE_NAME = "";
     private static final String TABLE_HEADING = "fruit,quantity";
     private static ReportWriterService reportWriterService;

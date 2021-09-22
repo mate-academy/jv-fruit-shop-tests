@@ -18,7 +18,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void validate_invalidNumberValue_Ok() {
+    public void validate_invalidNumberValue_notOk() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,-20");
@@ -27,7 +27,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void validate_invalidActivityValue_Ok() {
+    public void validate_invalidActivityValue_notOk() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("a,banana,20");
@@ -36,7 +36,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void validate_invalidLineSizeValue_Ok() {
+    public void validate_invalidLineSizeValue_notOk() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("a,banana,20,30");
@@ -45,7 +45,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void validate_emptyValue_Ok() {
+    public void validate_emptyValue_notOk() {
         List<String> lines = new ArrayList<>();
         assertFalse(Validator.validate(lines));
     }

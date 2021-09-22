@@ -2,6 +2,7 @@ package core.basesyntax.service.report;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,5 +21,10 @@ public class ReportCreatorImplTest {
                 + System.lineSeparator();
         String actual = report.createReport();
         Assert.assertEquals(expected, actual);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.fruitStorage.clear();
     }
 }

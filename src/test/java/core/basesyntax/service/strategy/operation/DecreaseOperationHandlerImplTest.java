@@ -3,6 +3,7 @@ package core.basesyntax.service.strategy.operation;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,5 +35,10 @@ public class DecreaseOperationHandlerImplTest {
         fruitRecordDto.setAmount(20);
         fruitRecordDto.setOperationType(FruitRecordDto.OperationType.PURCHASE);
         operationHandler.getAmount(fruitRecordDto);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.fruitStorage.clear();
     }
 }

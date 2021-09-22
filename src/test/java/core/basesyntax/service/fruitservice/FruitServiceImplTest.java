@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,26 +37,26 @@ public class FruitServiceImplTest {
         operationHandlerMap.put(FruitRecordDto.OperationType.RETURN.getType(),
                 new IncreaseOperationHandlerImpl());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
+                100, FruitRecordDto.OperationType.BALANCE));
+        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
+                100, FruitRecordDto.OperationType.BALANCE));
+        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
+                10, FruitRecordDto.OperationType.RETURN));
+        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
+                10, FruitRecordDto.OperationType.RETURN));
+        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
+                50, FruitRecordDto.OperationType.SUPPLY));
+        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
+                50, FruitRecordDto.OperationType.SUPPLY));
+        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
+                10, FruitRecordDto.OperationType.PURCHASE));
+        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
+                10, FruitRecordDto.OperationType.PURCHASE));
     }
 
     @Test
     public void safe_Ok() {
-        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
-                100, FruitRecordDto.OperationType.BALANCE));
-        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
-                100, FruitRecordDto.OperationType.BALANCE));
-        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
-                10, FruitRecordDto.OperationType.RETURN));
-        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
-                10, FruitRecordDto.OperationType.RETURN));
-        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
-                50, FruitRecordDto.OperationType.SUPPLY));
-        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
-                50, FruitRecordDto.OperationType.SUPPLY));
-        fruitRecords.add(new FruitRecordDto(new Fruit("apple"),
-                10, FruitRecordDto.OperationType.PURCHASE));
-        fruitRecords.add(new FruitRecordDto(new Fruit("banana"),
-                10, FruitRecordDto.OperationType.PURCHASE));
         fruitService.safe(fruitRecords, operationStrategy);
         Map<Fruit, Integer> actual = Storage.fruitStorage;
         Map<Fruit, Integer> expected = new HashMap<>();
@@ -63,4 +64,10 @@ public class FruitServiceImplTest {
         expected.put(new Fruit("banana"), 150);
         Assert.assertEquals(expected, actual);
     }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.fruitStorage.clear();
+    }
 }
+

@@ -22,10 +22,8 @@ public class CSvFileService implements FileService {
                 sourceDataInString.append((char) data);
                 data = fileReader.read();
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("No such file " + e);
         } catch (IOException e) {
-            throw new RuntimeException("IOException " + e);
+            throw new RuntimeException("No such file " + e);
         }
         return sourceDataInString.toString();
     }
@@ -40,8 +38,6 @@ public class CSvFileService implements FileService {
             FileWriter writer = new FileWriter(fileToWrite);
             writer.append(dataToWrite);
             writer.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("No such file " + e);
         } catch (IOException e) {
             throw new RuntimeException("IOException " + e);
         }

@@ -5,7 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class CSvFileServiceTest {
-    public static final String filePathData =
+    private static final String noFileLink = "";
+    private static final String filePathData =
             "src/main/java/core/basesyntax/source/data.csv";
     private static final String destFile =
             "src/main/java/core/basesyntax/source/storage.csv";
@@ -26,6 +27,16 @@ public class CSvFileServiceTest {
         boolean expected = true;
         boolean actual = source.equals(readData);
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readData_noSuchFile_Ok() {
+        fileService.readData(noFileLink);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void write_noSuchFile_Ok() {
+        fileService.writeData(source, noFileLink);
     }
 
     @Test

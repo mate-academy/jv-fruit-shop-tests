@@ -96,7 +96,6 @@ public class ShopServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't delete file");
         }
-
     }
 
     @Test

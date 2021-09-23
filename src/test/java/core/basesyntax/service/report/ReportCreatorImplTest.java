@@ -16,7 +16,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void name() {
+    public void reportCreator_Ok() {
         Storage.fruitStorage.put(new Fruit("apple"), 150);
         Storage.fruitStorage.put(new Fruit("banana"), 150);
         String expected = "fruit,quantity"

@@ -28,13 +28,6 @@ public class FileReaderImplTest {
         fileReader.read(EMPTY_FILE);
     }
 
-    @Test
-    public void getDataFromFile() {
-        expected.add("type,fruit,quantity");
-        expected.add("s,banana,10");
-        expected.add("r,apple,20");
-    }
-
     @Test(expected = RuntimeException.class)
     public void readFromExistentFile() {
         fileReader.read(EXISTENT);

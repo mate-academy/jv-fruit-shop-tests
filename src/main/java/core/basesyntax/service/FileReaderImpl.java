@@ -14,6 +14,9 @@ public class FileReaderImpl implements FileReader {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + filePath);
         }
+        if (data.isEmpty()) {
+            throw new RuntimeException("File is empty" + filePath);
+        }
         return data;
     }
 }

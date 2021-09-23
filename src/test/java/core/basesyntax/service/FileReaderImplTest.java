@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private static FileReader fileReader;
-    private static final String FILE_PATH = "src/main/resources/fruitbase.csv";
+    private static final String FILE_PATH = "src/test/resources/fruitbase.csv";
     private static final String WRONG_FILE_PATH = "error/23op/hello.csv";
     private static final String EMPTY_FILE = "src/test/resources/emptyFile.csv";
     private static List<String> expected;

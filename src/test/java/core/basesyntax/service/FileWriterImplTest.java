@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String FILE_PATH = "src/main/resources/fruitReport.csv";
+    private static final String FILE_PATH = "src/test/resources/fruitReport.csv";
     private static final String REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152"
             + System.lineSeparator()

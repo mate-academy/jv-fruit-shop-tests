@@ -20,6 +20,12 @@ public class ValidatorImplTest {
         validator.checkInputData(data);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void validator_checkInput_no_Operation_not_ok() {
+        String[] data = new String[]{"", "apple", "13"};
+        validator.checkInputData(data);
+    }
+
     @Test
     public void validator_BalanceOperation_PositiveQuality_OK() {
         String[] data = new String[] {"b", "apple", "13"};

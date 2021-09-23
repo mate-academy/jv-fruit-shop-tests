@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class FileWriterImplTest {
     private static FileWriter writer;
+    private static String filePath = "src/test/resources/numbers.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -19,7 +20,7 @@ public class FileWriterImplTest {
 
     @Before
     public void setUp() throws Exception {
-        PrintWriter writer = new PrintWriter("src/test/resources/numbers.csv");
+        PrintWriter writer = new PrintWriter(filePath);
         writer.print("");
         writer.close();
     }
@@ -27,8 +28,8 @@ public class FileWriterImplTest {
     @Test
     public void writer_writeToFile_OK() {
         String expected = "12345678";
-        writer.writeToFile("src/test/resources/numbers.csv", expected);
-        File file = new File("src/test/resources/numbers.csv");
+        writer.writeToFile(filePath, expected);
+        File file = new File(filePath);
         String actual = "";
         try {
             actual = Files.readString(file.toPath());

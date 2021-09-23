@@ -34,7 +34,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void supplyOperation_Return_OK() {
+    public void returnOperation_Return_OK() {
         Fruit fruit = new Fruit("apple");
         Transaction transaction = new Transaction(Transaction.Operation.RETURN,
                 fruit, 13);

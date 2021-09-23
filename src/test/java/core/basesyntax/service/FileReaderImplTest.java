@@ -20,13 +20,6 @@ public class FileReaderImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void reader_notCorrectData_not_OK() {
-        boolean actual = reader.readFromFile("src/test/resources/readerTest.csv")
-                .equals(List.of("someData"));
-        Assert.assertFalse(actual);
-    }
-
     @Test(expected = RuntimeException.class)
     public void reader_incorrectFilePath_not_ok() {
         reader.readFromFile("");

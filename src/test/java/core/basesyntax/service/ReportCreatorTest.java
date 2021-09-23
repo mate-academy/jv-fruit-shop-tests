@@ -43,11 +43,11 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void createReport_Ok() {
-        recordDao.addRecord(new Record("b","banana",20));
-        recordDao.addRecord(new Record("b","apple",100));
-        recordDao.addRecord(new Record("s","banana",100));
-        recordDao.addRecord(new Record("p","banana",13));
+    public void createReport_CorrectData_Ok() {
+        Database.RECORDS.add(new Record("b","banana",20));
+        Database.RECORDS.add(new Record("b","apple",100));
+        Database.RECORDS.add(new Record("s","banana",100));
+        Database.RECORDS.add(new Record("p","banana",13));
         List<String> actual = reportCreator.createReport();
         List<String> expected = new ArrayList<>();
         expected.add("banana,107");
@@ -56,7 +56,7 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void createEmptyReport_Ok() {
+    public void createReport_EmptyData_Ok() {
         List<String> actual = reportCreator.createReport();
         List<String> expected = Collections.emptyList();
         Assert.assertEquals("Report should be empty!", expected, actual);

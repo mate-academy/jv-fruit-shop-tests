@@ -1,6 +1,5 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.model.Record;
 import core.basesyntax.report.FruitBalance;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +13,7 @@ public class OperationStrategyTest {
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
-    private static final String EQUAL_MAP_KEY = "apple";
-    private static final int AMOUNT_ADDITION = 20;
-    private static final int AMOUNT_DECREASE = 5;
+    private static final String INVALID_OPERATION = "h";
     private static Map<String, OperationHandler> operationHandlerMap;
     private static OperationStrategy operationStrategy;
 
@@ -31,45 +28,20 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void get_balanceOperation_Ok() {
-        operationHandlerMap.get(BALANCE).apply(new Record(BALANCE, "apple", 10));
-        operationStrategy.get(BALANCE).apply(new Record(BALANCE, "apple", 10));
-        int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
-        int expected = AMOUNT_ADDITION;
-        Assert.assertEquals("Amounts should add!", expected, actual);
+    public void get_HandlerByOperation_Ok() {
+        Assert.assertEquals(operationStrategy.get(BALANCE).getClass(), AdditionHandler.class);
+        Assert.assertEquals(operationStrategy.get(SUPPLY).getClass(), AdditionHandler.class);
+        Assert.assertEquals(operationStrategy.get(RETURN).getClass(), AdditionHandler.class);
+        Assert.assertEquals(operationStrategy.get(PURCHASE).getClass(), DecreaseHandler.class);
     }
 
-    @Test
-    public void get_supplyOperation_Ok() {
-        operationHandlerMap.get(SUPPLY).apply(new Record(SUPPLY, "apple", 10));
-        operationStrategy.get(SUPPLY).apply(new Record(SUPPLY, "apple", 10));
-        int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
-        int expected = AMOUNT_ADDITION;
-        Assert.assertEquals("Amounts should add!", expected, actual);
-    }
-
-    @Test
-    public void get_returnOperation_Ok() {
-        operationHandlerMap.get(RETURN).apply(new Record(RETURN, "apple", 10));
-        operationStrategy.get(RETURN).apply(new Record(RETURN, "apple", 10));
-        int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
-        int expected = AMOUNT_ADDITION;
-        Assert.assertEquals("Amounts should add!", expected, actual);
-    }
-
-    @Test
-    public void get_purchaseOperation_Ok() {
-        FruitBalance.FRUIT_BALANCE.put("apple", 20);
-        operationHandlerMap.get(PURCHASE).apply(new Record(PURCHASE, "apple", 10));
-        operationStrategy.get(PURCHASE).apply(new Record(PURCHASE, "apple", 5));
-        int actual = FruitBalance.FRUIT_BALANCE.get(EQUAL_MAP_KEY);
-        int expected = AMOUNT_DECREASE;
-        Assert.assertEquals("Amounts should subtract!",expected, actual);
+    @Test (expected = RuntimeException.class)
+    public void get_HandlerByInvalidOperation_NotOk() {
+        operationStrategy.get(INVALID_OPERATION);
     }
 
     @After
     public void tearDown() {
-
         FruitBalance.FRUIT_BALANCE.clear();
     }
 }

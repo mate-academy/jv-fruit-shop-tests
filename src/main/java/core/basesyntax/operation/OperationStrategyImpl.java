@@ -11,6 +11,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(String operationType) {
+        if (operationHandlerMap.get(operationType) == null) {
+            throw new RuntimeException("Invalid operation type");
+        }
         return operationHandlerMap.get(operationType);
     }
 }

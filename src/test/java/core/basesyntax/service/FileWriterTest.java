@@ -19,7 +19,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void write_writeFile_Ok() {
+    public void write_CorrectFile_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("banana,107");
         expected.add("apple,100");
@@ -29,7 +29,7 @@ public class FileWriterTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_writeEmptyPath_NotOk() {
+    public void write_EmptyPath_NotOk() {
         List<String> testData = new ArrayList<>();
         testData.add("banana,107");
         testData.add("apple,100");

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class FileReaderTest {
     private static final String CORRECT_PATH = "src/test/resources/testInput.csv";
-    private static final String EMPTY_PATH = "src/test/resources/emptyInput.csv";
+    private static final String EMPTY_FILE = "src/test/resources/emptyInput.csv";
     private static final String INCORRECT_PATH = "some input";
     private static FileReader fileReader;
 
@@ -19,7 +19,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void read_readFileCorrectPath_Ok() {
+    public void read_FileWithCorrectPath_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -28,14 +28,14 @@ public class FileReaderTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void read_readFileIncorrectPath_Ok() {
+    public void read_FileWithIncorrectPath_Ok() {
         fileReader.read(INCORRECT_PATH);
     }
 
     @Test
-    public void read_readEmptyFile_Ok() {
+    public void read_EmptyFile_Ok() {
         List<String> expected = Collections.emptyList();
-        List<String> actual = fileReader.read(EMPTY_PATH);
+        List<String> actual = fileReader.read(EMPTY_FILE);
         Assert.assertEquals("List should be empty if file is empty: ", expected, actual);
     }
 }

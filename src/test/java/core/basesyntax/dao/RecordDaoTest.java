@@ -9,8 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class RecordDaoTest {
-    private static final int ADD_CORRECT_DB_SIZE = 1;
-    private static final int GET_CORRECT_DB_SIZE = 3;
     private static RecordDao recordDao;
 
     @BeforeClass
@@ -22,22 +20,24 @@ public class RecordDaoTest {
     public void addRecord_correctData_Ok() {
         Record testRecord = new Record("b", "apple", 100);
         recordDao.addRecord(testRecord);
-        int expected = ADD_CORRECT_DB_SIZE;
-        int actual = Database.RECORDS.size();
-        Assert.assertEquals("Database size should be"
-                + ADD_CORRECT_DB_SIZE, expected, actual);
+        List<Record> expected = List.of(testRecord);
+        List<Record> actual = Database.RECORDS;
+        Assert.assertEquals("Expected and actual records "
+                + "differ from each other!", expected, actual);
     }
 
     @Test
-    public void getRecords_Ok() {
-        Database.RECORDS.add(new Record("b", "apple", 100));
-        Database.RECORDS.add(new Record("b", "banana", 20));
-        Database.RECORDS.add(new Record("s", "apple", 60));
-        List<Record> testRecords = recordDao.getRecords();
-        int actual = testRecords.size();
-        int expected = GET_CORRECT_DB_SIZE;
-        Assert.assertEquals("Database size should be"
-                + GET_CORRECT_DB_SIZE, expected, actual);
+    public void getRecords_correctData_Ok() {
+        Record testRecord1 = new Record("b", "apple", 20);
+        Record testRecord2 = new Record("b", "banana", 30);
+        Record testRecord3 = new Record("b", "fruit", 40);
+        Database.RECORDS.add(testRecord1);
+        Database.RECORDS.add(testRecord2);
+        Database.RECORDS.add(testRecord3);
+        List<Record> expected = List.of(testRecord1, testRecord2, testRecord3);
+        List<Record> actual = recordDao.getRecords();
+        Assert.assertEquals("Expected and actual records "
+                + "differ from each other!", expected, actual);
     }
 
     @After

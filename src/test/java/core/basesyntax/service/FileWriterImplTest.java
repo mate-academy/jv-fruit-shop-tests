@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,11 +21,12 @@ public class FileWriterImplTest {
             + System.lineSeparator();
     private static FileWriter fileWriter;
     private List<String> actual;
-    private String expected;
+    private List<String> expected;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         fileWriter = new FileWriterImpl();
+
     }
 
     @Test
@@ -35,8 +37,11 @@ public class FileWriterImplTest {
         } catch (IOException e) {
             fail("Can't read data from file");
         }
-        expected = "fruit,quantity";
-        assertEquals(actual.get(0), expected);
+        expected = new ArrayList<>();
+        expected.add("fruit,quantity");
+        expected.add("banana,152");
+        expected.add("apple,90");
+        assertEquals(actual, expected);
     }
 
     @Test(expected = RuntimeException.class)

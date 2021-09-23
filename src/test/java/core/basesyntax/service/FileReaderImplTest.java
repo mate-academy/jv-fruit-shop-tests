@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,14 +28,18 @@ public class FileReaderImplTest {
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");
+        expected.add("s,banana,100");
+        expected.add("p,banana,13");
+        expected.add("r,apple,10");
+        expected.add("p,apple,20");
+        expected.add("p,banana,5");
+        expected.add("s,banana,50");
     }
 
     @Test
     public void getDataFromFile_ok() {
         actual = fileReader.getDataFromFile(FILE_PATH);
-        assertEquals(expected.get(0), actual.get(0));
-        actual = fileReader.getDataFromFile(FILE_PATH);
-        assertEquals(expected.get(1), actual.get(1));
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -50,5 +55,10 @@ public class FileReaderImplTest {
     @Test(expected = RuntimeException.class)
     public void getDataFromNullFile_notOk() {
         fileReader.getDataFromFile(null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        expected.clear();
     }
 }

@@ -17,10 +17,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static final String TEST_FILE = "src/main/resources/test.csv";
-    private static final String TITLE = "fruit,quantity";
-    private static final String LINE_01 = "banana,152";
-    private static final String LINE_02 = "apple,90";
+    private static final String TEST_FILE = "src/test/resources/test.csv";
+    private static final String EXPECTED_TITLE = "fruit,quantity";
+    private static final String EXPECTED_LINE_01 = "banana,152";
+    private static final String EXPECTED_LINE_02 = "apple,90";
     private static final String TEST_MAP_01_FRUIT = "banana";
     private static final Integer TEST_MAP_01_QUANTITY = 152;
     private static final String TEST_MAP_02_FRUIT = "apple";
@@ -34,9 +34,9 @@ public class WriterServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         expectedList = new ArrayList<>();
-        expectedList.add(TITLE);
-        expectedList.add(LINE_01);
-        expectedList.add(LINE_02);
+        expectedList.add(EXPECTED_TITLE);
+        expectedList.add(EXPECTED_LINE_01);
+        expectedList.add(EXPECTED_LINE_02);
         testMap = new HashMap<>();
         testMap.put(TEST_MAP_01_FRUIT, TEST_MAP_01_QUANTITY);
         testMap.put(TEST_MAP_02_FRUIT, TEST_MAP_02_QUANTITY);

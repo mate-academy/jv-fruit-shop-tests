@@ -26,9 +26,9 @@ public class ReaderServiceTest {
         try {
             validFile = folder.newFile("validFile.txt");
             emptyFile = folder.newFile("emptyFile.txt");
-        } catch (IOException ioe) {
-            System.err.println("Can't create temporary test file in "
-                    + ReaderServiceTest.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't create temporary test file in "
+                    + ReaderServiceTest.class, e);
         }
     }
 
@@ -45,13 +45,15 @@ public class ReaderServiceTest {
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("s,apple,100");
-        assertEquals(expected, readerService.readFromFile(validFile.getPath()));
+        List<String> actual = readerService.readFromFile(validFile.getPath());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void readFromFile_validValueEmptyFile_Ok() {
         List<String> expected = new ArrayList<>();
-        assertEquals(expected, readerService.readFromFile(emptyFile.getPath()));
+        List<String> actual = readerService.readFromFile(emptyFile.getPath());
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

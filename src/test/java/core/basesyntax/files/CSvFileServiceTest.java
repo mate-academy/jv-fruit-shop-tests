@@ -11,15 +11,7 @@ public class CSvFileServiceTest {
     private static final String destFile =
             "src/test/java/resources/storage.csv";
     private static final FileService fileService = new CSvFileService();
-    private static final String source = "type,fruit,quantity\r\n"
-            + "b,banana,20\r\n"
-            + "b,apple,100\r\n"
-            + "s,banana,100\r\n"
-            + "p,banana,13\r\n"
-            + "r,apple,10\r\n"
-            + "p,apple,20\r\n"
-            + "p,banana,5\r\n"
-            + "s,banana,50";
+    private static final String source = "type,fruit,quantity";
 
     @Test
     public void readData_Ok() {

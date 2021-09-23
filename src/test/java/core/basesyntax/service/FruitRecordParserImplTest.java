@@ -77,4 +77,15 @@ public class FruitRecordParserImplTest {
         List<String[]> splitedInformationList = new ArrayList<>();
         fruitRecordParser.parse(splitedInformationList);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_WithNotCorrectFirstLine_ExceptionOk() {
+        List<String[]> splitedInformationList = List.of(
+                new String[]{"ty", "frui", "quantity"},
+                new String[]{"b", "banana", "20"},
+                new String[]{"b", "apple", "100"},
+                new String[]{"s", "banana", "100"},
+                new String[]{"r", "banana", "13"});
+        fruitRecordParser.parse(splitedInformationList);
+    }
 }

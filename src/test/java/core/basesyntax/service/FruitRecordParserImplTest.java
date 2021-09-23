@@ -1,22 +1,21 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitRecord;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class FruitRecordParserImplTest {
+public class FruitRecordParserImplTest {
     private static FruitRecordParser fruitRecordParser;
     private static List<String> dataList;
     private static List<FruitRecord> expectedFruitRecordList;
     private List<FruitRecord> actual;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fruitRecordParser = new FruitRecordParserImpl();
         dataList = new ArrayList<>();
         dataList.add("b,banana,10");
@@ -31,16 +30,15 @@ class FruitRecordParserImplTest {
     }
 
     @Test
-    void checkStringToFruitRecord_Ok() {
+    public void checkStringToFruitRecord_Ok() {
         actual = fruitRecordParser.parserFruitRecords(dataList);
         assertEquals(expectedFruitRecordList, actual);
     }
 
-    @Test
-    void checkStringToFruitRecord_NotOk() {
+    @Test(expected = ValidationException.class)
+    public void checkStringToFruitRecord_NotOk() {
         dataList.add("r,banana,-5");
-        assertThrows(ValidationException.class,
-                () -> fruitRecordParser.parserFruitRecords(dataList));
+        fruitRecordParser.parserFruitRecords(dataList);
     }
 
 }

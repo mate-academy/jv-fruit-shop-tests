@@ -1,29 +1,30 @@
 package core.basesyntax.service.operation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitRecord;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class PurchaseHandlerImplTest {
+public class PurchaseHandlerImplTest {
     private static OperationHandler operationHandler;
     private Map<String, Integer> expected;
     private FruitRecord fruitRecord;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationHandler = new PurchaseHandlerImpl();
     }
 
     @Test
-    void checkFruitPurchase_Ok() {
+    public void checkFruitPurchase_Ok() {
         expected = new HashMap<>();
         expected.put("banana",10);
+        Storage.fruitMap.clear();
         Storage.fruitMap.put("banana",20);
         fruitRecord = new FruitRecord("b","banana",10);
         operationHandler.applyOperation(fruitRecord);
@@ -31,7 +32,7 @@ class PurchaseHandlerImplTest {
     }
 
     @Test
-    void checkFruitPurchase_NotOk() {
+    public void checkFruitPurchase_NotOk() {
         expected = new HashMap<>();
         expected.put("banana",10);
         Storage.fruitMap.put("banana",25);
@@ -41,9 +42,10 @@ class PurchaseHandlerImplTest {
     }
 
     @Test
-    void checkTwoFruitPurcahse_Ok() {
+    public void checkTwoFruitPurcahse_Ok() {
         expected = new HashMap<>();
         expected.put("banana",10);
+        Storage.fruitMap.clear();
         Storage.fruitMap.put("banana",20);
         fruitRecord = new FruitRecord("b","banana",10);
         operationHandler.applyOperation(fruitRecord);

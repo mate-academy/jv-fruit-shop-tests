@@ -1,31 +1,30 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ReadFileImplTest {
+public class ReadFileImplTest {
     private static WriteToFile writeToFile;
     private static ReadFile readFile;
     private String toReadFile;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         writeToFile = new WriteToFileImpl();
         readFile = new ReadFileImpl();
     }
 
-    @Test
-    void readFromWrongFilePath_NotOk() {
+    @Test (expected = ValidationException.class)
+    public void readFromWrongFilePath_NotOk() {
         toReadFile = "src/main/testfile.csv";
-        assertThrows(ValidationException.class, () -> readFile.readFromFile(toReadFile));
+        readFile.readFromFile(toReadFile);
     }
 
     @Test
-    void readFileWithCorrectPath_Ok() {
+    public void readFileWithCorrectPath_Ok() {
         toReadFile = "src/main/resources/testfile.csv";
         List<String> list = readFile.readFromFile(toReadFile);
         assertEquals(list.size(), 1);

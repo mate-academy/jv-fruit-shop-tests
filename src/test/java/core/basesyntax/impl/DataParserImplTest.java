@@ -68,7 +68,7 @@ public class DataParserImplTest {
                 + "and value: 107, but was: " + actual, expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void parseDto_nullInput_NotOk() {
         List<FruitRecordDto> fruits = null;
         dataParser.parseDto(fruits);

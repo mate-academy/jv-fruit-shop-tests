@@ -24,6 +24,9 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public Map<Fruit, Integer> parseDto(List<FruitRecordDto> records) {
+        if (records == null) {
+            throw new RuntimeException("List recordDto is null");
+        }
         Map<Fruit, Integer> recordMap = records.stream()
                 .filter(validator::validateRecord)
                 .map(FruitRecordDto::getFruit)

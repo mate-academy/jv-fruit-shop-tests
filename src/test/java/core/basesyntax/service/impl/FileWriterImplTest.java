@@ -37,14 +37,9 @@ public class FileWriterImplTest {
         fail();
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void recordDataToFile_dataNull_notOk() {
-        try {
-            fileWriter.write(DESTINATION_FILE, null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail();
+        fileWriter.write(DESTINATION_FILE, null);
     }
 
     @Test

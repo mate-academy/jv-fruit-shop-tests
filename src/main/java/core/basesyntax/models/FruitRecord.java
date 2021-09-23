@@ -25,14 +25,6 @@ public class FruitRecord {
         return nameOfFruit;
     }
 
-    public void setTypeOfOperation(char typeOfOperation) {
-        this.typeOfOperation = typeOfOperation;
-    }
-
-    public void setNameOfFruit(String nameOfFruit) {
-        this.nameOfFruit = nameOfFruit;
-    }
-
     public void setAmount(int amount) {
         this.amount = amount;
     }

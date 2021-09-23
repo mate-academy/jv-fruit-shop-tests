@@ -42,7 +42,7 @@ public class CSvFileService implements FileService {
             writer.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException("No such file " + e);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new RuntimeException("IOException " + e);
         }
     }

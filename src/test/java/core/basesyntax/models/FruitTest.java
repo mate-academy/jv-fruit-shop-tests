@@ -70,10 +70,26 @@ public class FruitTest {
     }
 
     @Test
+    public void equals_sameObject_Ok() {
+        Fruit fruit = new Fruit(name, amount);
+        boolean expected = true;
+        boolean actual = fruit.equals(fruit);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void equals_null_Ok() {
+        Fruit fruit = new Fruit(name, amount);
+        boolean expected = false;
+        boolean actual = fruit.equals(null);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void equals_Ok() {
         Fruit fruit = new Fruit(name, amount);
         boolean expected = true;
-        boolean actual = validFruit.equals(fruit);
+        boolean actual = fruit.equals(validFruit);
         assertEquals(expected, actual);
     }
 

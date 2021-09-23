@@ -5,15 +5,15 @@ import core.basesyntax.service.impl.TransactionDto;
 import core.basesyntax.service.impl.TransactionDtoParseImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class TransactionDtoParseImplTest {
     private static TransactionDtoParseImpl transactionDtoParse;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         transactionDtoParse = new TransactionDtoParseImpl();
     }
 
@@ -26,7 +26,7 @@ public class TransactionDtoParseImplTest {
         parsedData.add(new TransactionDto("b",
                 new Fruit("apple"), 1));
         List<TransactionDto> actual = transactionDtoParse.parseData(dataList);
-        Assertions.assertEquals(parsedData, actual);
+        Assert.assertEquals(parsedData, actual);
     }
 
     @Test
@@ -34,17 +34,17 @@ public class TransactionDtoParseImplTest {
         List<String> dataList = new ArrayList<>();
         dataList.add("type,fruit,quantity");
         dataList.add("b,apple,0");
-        Assertions.assertThrows(IllegalArgumentException.class,
+        Assert.assertThrows(IllegalArgumentException.class,
                 () -> transactionDtoParse.parseData(dataList));
         List<String> dataList2 = new ArrayList<>();
         dataList2.add("type,fruit,quantity");
         dataList2.add("");
-        Assertions.assertThrows(IllegalArgumentException.class,
+        Assert.assertThrows(IllegalArgumentException.class,
                 () -> transactionDtoParse.parseData(dataList2));
         List<String> dataList3 = new ArrayList<>();
         dataList3.add("type,fruit,quantity");
         dataList3.add(null);
-        Assertions.assertThrows(NullPointerException.class,
+        Assert.assertThrows(NullPointerException.class,
                 () -> transactionDtoParse.parseData(dataList3));
     }
 }

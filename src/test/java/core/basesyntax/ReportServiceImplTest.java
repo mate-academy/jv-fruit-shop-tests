@@ -3,15 +3,15 @@ package core.basesyntax;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.Storage;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static final String REPORT_CAPTION = "fruit,quantity";
     private static ReportServiceImpl reportService;
 
-    @BeforeAll
+    @BeforeClass
     public static void beforeAll() {
         reportService = new ReportServiceImpl();
     }
@@ -24,7 +24,7 @@ public class ReportServiceImplTest {
                 + "banana,10" + System.lineSeparator()
                 + "apple,10" + System.lineSeparator();
         String actual = reportService.getReport();
-        Assertions.assertEquals(expected,actual);
+        Assert.assertEquals(expected,actual);
     }
 }
 

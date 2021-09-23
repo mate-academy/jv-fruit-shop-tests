@@ -19,7 +19,6 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class FruitServiceImplTest {
     private static FruitService fruitService;
@@ -64,7 +63,7 @@ public class FruitServiceImplTest {
                 new Fruit("apple"), 1));
         transactionData.add(new TransactionDto(Operation.PURCHASE.getOperation(),
                 new Fruit("apple"), 2));
-        Assertions.assertThrows(RuntimeException.class, () ->
+        Assert.assertThrows(RuntimeException.class, () ->
                 fruitService.saveDataToDb(transactionData));
     }
 
@@ -73,7 +72,7 @@ public class FruitServiceImplTest {
         List<TransactionDto> transactionData = new ArrayList<>();
         transactionData.add(new TransactionDto(null,
                 new Fruit("apple"), 1));
-        Assertions.assertThrows(RuntimeException.class, () ->
+        Assert.assertThrows(RuntimeException.class, () ->
                 fruitService.saveDataToDb(transactionData));
     }
 }

@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,21 +30,6 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void recordDataToFile_resultFileNull_notOk() {
-        try {
-            fileWriter.write(null, data);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail();
-    }
-
-    @Test (expected = RuntimeException.class)
-    public void recordDataToFile_dataNull_notOk() {
-        fileWriter.write(DESTINATION_FILE, null);
-    }
-
-    @Test
     public void recordDataToFile_validData_Ok() {
         fileWriter.write(DESTINATION_FILE, data);
         StringBuilder result = new StringBuilder();
@@ -55,5 +42,17 @@ public class FileWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Unable to read test file " + DESTINATION_FILE);
         }
+    }
+
+    @Test
+    public void recordDataToFile_wrongFilePath_notOk() {
+        try {
+            fileWriter.write("/testfiless/test.txt", data);
+        } catch (RuntimeException e) {
+            Assert.assertEquals("Unable to record data in file/testfiless/test.txt",
+                    e.getMessage());
+            return;
+        }
+        Assert.fail();
     }
 }

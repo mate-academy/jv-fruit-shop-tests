@@ -12,11 +12,6 @@ public class FileReaderImplTest {
     private static final String SOURCE_FILE = "src/main/java/resources/filetest";
     private final FileReaderImpl fileReader = new FileReaderImpl();
 
-    @Test (expected = NullPointerException.class)
-    public void readFile_Null_notOk() {
-        fileReader.read(null);
-    }
-
     @Test
     public void readFile_incorrectPath_NotOk() {
         try {

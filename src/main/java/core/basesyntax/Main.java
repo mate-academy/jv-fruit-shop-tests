@@ -23,9 +23,9 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH
-            = "src/main/java/resources/inputFile";
+            = "src/main/resources/inputFile";
     private static final String REPORT_FILE_PATH
-            = "src/main/java/resources/reportFile";
+            = "src/main/resources/reportFile";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();

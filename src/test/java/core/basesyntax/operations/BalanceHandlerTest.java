@@ -5,24 +5,19 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperationDto;
 import core.basesyntax.model.OperationType;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
     private static OperationHandler operationHandler;
-    private FruitOperationDto fruitOperationDto;
-    private Fruit fruit;
+    private static FruitOperationDto fruitOperationDto;
+    private static Fruit fruit;
     private int expected;
     private int actual;
 
     @BeforeClass
     public static void beforeClass() {
         operationHandler = new BalanceHandler();
-    }
-
-    @Before
-    public void setUp() {
         fruit = new Fruit("banana");
         fruitOperationDto = new FruitOperationDto(OperationType.BALANCE, fruit, 20);
     }
@@ -39,7 +34,6 @@ public class BalanceHandlerTest {
         FruitOperationDto newFruitOperationDto = new FruitOperationDto(
                 OperationType.BALANCE, fruit, 150);
         expected = 150;
-        operationHandler.apply(fruitOperationDto);
         actual = operationHandler.apply(newFruitOperationDto);
         assertEquals(expected, actual);
     }

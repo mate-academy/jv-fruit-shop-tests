@@ -41,16 +41,6 @@ public class ObtainingHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void apply_obtainingWithNotEmptyStorage_Ok() {
-        FruitOperationDto newFruitOperationDto = new FruitOperationDto(
-                OperationType.SUPPLY, fruit, 70);
-        operationHandler.apply(fruitOperationDto);
-        expected = 90;
-        actual = operationHandler.apply(newFruitOperationDto);
-        assertEquals(expected, actual);
-    }
-
     @Test(expected = RuntimeException.class)
     public void apply_obtainingWithNull_NotOk() {
         operationHandler.apply(null);

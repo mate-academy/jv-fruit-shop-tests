@@ -8,6 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
+    private static final String FILE_NAME = "src/test/resources/ValidOutputDataForTest.csv";
     private static FileWriter fileWriter;
     private static FileReader fileReader;
 
@@ -21,11 +22,11 @@ public class FileWriterImplTest {
     public void write_WithValidFileName_Ok() {
         fileWriter.write("fruit, quantity"
                         + System.lineSeparator() + "b,apple,40",
-                "src/test/resources/ValidOutputDataForTest.csv");
+                FILE_NAME);
         List<String> expected = new ArrayList<>();
         expected.add("b,apple,40");
         List<String> actual = fileReader.read(
-                "src/test/resources/ValidOutputDataForTest.csv");
+                FILE_NAME);
         assertEquals(expected, actual);
     }
 }

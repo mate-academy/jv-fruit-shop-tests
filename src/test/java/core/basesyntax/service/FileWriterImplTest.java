@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void write_CorrectData_Ok() {
+    public void write_correctData_ok() {
         fileWriter.write(report, OUTPUT_FILE);
         try {
             actual = Files.readAllLines(Path.of(OUTPUT_FILE));
@@ -59,7 +60,12 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToNullFile_notOk() {
+    public void writeToNullFilePath_notOk() {
         fileWriter.write(report, null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        expected.clear();
     }
 }

@@ -17,7 +17,7 @@ public class BalanceHandlerTest {
     private int expected;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandler = new BalanceHandler();
         banana = new Fruit("banana");
         apple = new Fruit("apple");
@@ -29,6 +29,15 @@ public class BalanceHandlerTest {
         FruitDataBase.storage.put(apple, 200);
         expected = 200;
         actual = operationHandler.apply(new FruitRecordDto("r", banana, 200));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void apply_CheckZero_ok() {
+        FruitDataBase.storage.put(banana, 200);
+        FruitDataBase.storage.put(apple, 200);
+        expected = 0;
+        actual = operationHandler.apply(new FruitRecordDto("r", banana, 0));
         assertEquals(expected, actual);
     }
 

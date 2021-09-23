@@ -27,12 +27,12 @@ public class ValidatorImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_incorrectDataWithNegativeNumber_NotOk() {
+    public void validate_incorrectDataWithNegativeNumber_notOk() {
         actual = validator.validator(dataWithNegativeNumber);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_DataWithoutFirstElement_NotOk() {
+    public void validate_DataWithoutFirstElement_notOk() {
         actual = validator.validator(invalidData);
     }
 }

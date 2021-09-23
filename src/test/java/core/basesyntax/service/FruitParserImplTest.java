@@ -20,7 +20,7 @@ public class FruitParserImplTest {
     }
 
     @Test
-    public void theCorrectData_ok() {
+    public void parseData_theCorrectData_ok() {
         List<String> data = new ArrayList<>();
         data.add("b,banana,10");
         data.add("b,apple,15");
@@ -32,7 +32,7 @@ public class FruitParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseData_incorrectData_NotOk() {
+    public void parseData_incorrectData_notOk() {
         data.add("b,banana,-10");
         data.add("r,apple,");
         fruitParser.apply(data);

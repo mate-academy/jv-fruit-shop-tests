@@ -19,7 +19,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void getDataFromFile_RightPath_Ok() {
+    public void getDataFromFile_RightPath_ok() {
         fileReader.read(FILE_PATH);
     }
 
@@ -29,7 +29,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void getDateFromFile() {
+    public void getDataFromFile() {
         expected.add("type,fruit,quantity");
         expected.add("s,banana,10");
         expected.add("r,apple,20");

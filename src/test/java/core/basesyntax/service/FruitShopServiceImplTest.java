@@ -22,11 +22,16 @@ import org.junit.Test;
 public class FruitShopServiceImplTest {
     private static List<FruitRecordDto> fruitRecordList;
     private static FruitShopService fruitShopService;
-    private int expected;
-    private int actual;
+    private static String expected;
+    private static String actual;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
+        expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,152"
+                + System.lineSeparator()
+                + "apple,90"
+                + System.lineSeparator();
         Map<String, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put("b", new BalanceHandler());
         handlerMap.put("s", new IncreaseFruitHandler());
@@ -34,7 +39,6 @@ public class FruitShopServiceImplTest {
         handlerMap.put("r", new IncreaseFruitHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        Integer expected = FruitDataBase.storage.get(new Fruit("banana"));
         fruitRecordList = new ArrayList<>();
         fruitRecordList.add(new FruitRecordDto("b", new Fruit("banana"), 200));
         fruitRecordList.add(new FruitRecordDto("b", new Fruit("apple"), 20));
@@ -44,13 +48,21 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void save_correctAmount_ok() {
-        expected = 220;
+        int expected = 220;
         fruitShopService.save(fruitRecordList);
-        actual = FruitDataBase.storage.get(new Fruit("banana"));
+        int actual = FruitDataBase.storage.get(new Fruit("banana"));
         assertEquals(expected, actual);
         expected = 10;
         fruitShopService.save(fruitRecordList);
         actual = FruitDataBase.storage.get(new Fruit("apple"));
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void createReport_ok() {
+        FruitDataBase.storage.put(new Fruit("banana"), 152);
+        FruitDataBase.storage.put(new Fruit("apple"), 90);
+        actual = fruitShopService.createReport();
         assertEquals(expected, actual);
     }
 

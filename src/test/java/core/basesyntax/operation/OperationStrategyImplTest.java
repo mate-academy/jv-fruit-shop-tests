@@ -40,4 +40,37 @@ public class OperationStrategyImplTest {
         actual = operationStrategy.get("r");
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void getHandler_balanceHandler_Ok() {
+        expected = operationHandlerMap.get("b");
+        actual = operationStrategy.get("b");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getHandler_supplyHandler_Ok() {
+        expected = operationHandlerMap.get("s");
+        actual = operationStrategy.get("s");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getHandler_returnHandler_Ok() {
+        expected = operationHandlerMap.get("r");
+        actual = operationStrategy.get("r");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getHandler_purchaseHandler_Ok() {
+        expected = operationHandlerMap.get("p");
+        actual = operationStrategy.get("p");
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void getHandler_handlerNull_NotOk() {
+        actual = operationStrategy.get(null);
+    }
 }

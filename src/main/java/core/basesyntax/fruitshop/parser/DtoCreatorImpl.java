@@ -3,8 +3,6 @@ package core.basesyntax.fruitshop.parser;
 import core.basesyntax.fruitshop.model.Fruit;
 import core.basesyntax.fruitshop.model.OperationType;
 import core.basesyntax.fruitshop.model.RecordDto;
-import core.basesyntax.fruitshop.parser.DtoCreator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +26,8 @@ public class DtoCreatorImpl implements DtoCreator {
             fruitRecordLineDto.setOperationType(OperationType
                       .valueOfLabel(fruitsRecordPart[OPERATION_RECORD_OR_HEADER].trim()));
             fruitRecordLineDto.setFruitType(new Fruit(fruitsRecordPart[FRUIT_TYPE_RECORD].trim()));
-            fruitRecordLineDto.setAmount(Integer.parseInt(fruitsRecordPart[FRUIT_AMOUNT_RECORD].trim()));
+            fruitRecordLineDto.setAmount(Integer
+                    .parseInt(fruitsRecordPart[FRUIT_AMOUNT_RECORD].trim()));
             parsedToDtoData.add(fruitRecordLineDto);
         }
         return parsedToDtoData;

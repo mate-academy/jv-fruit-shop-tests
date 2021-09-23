@@ -1,7 +1,6 @@
 package core.basesyntax.fruitshop.fruitstoragedb;
 
 import core.basesyntax.fruitshop.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 

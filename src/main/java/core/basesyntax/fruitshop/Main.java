@@ -21,14 +21,13 @@ import core.basesyntax.fruitshop.service.reporthandlers.ReportGenerator;
 import core.basesyntax.fruitshop.service.reporthandlers.ReportGeneratorImpl;
 import core.basesyntax.fruitshop.service.validators.OperationsValidator;
 import core.basesyntax.fruitshop.service.validators.OperationsValidatorImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String REPORT_FILE_NAME = "ReportForFruitShop";
-    private static final String INPUT_FILE_PATH = "src/main/java/fruitshop/InputDataForFruitShop";
+    private static final String INPUT_FILE_PATH = "src/main/resources/InputDataForFruitShop";
 
     public static void main(String[] args) {
         Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();

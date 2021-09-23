@@ -2,7 +2,6 @@ package core.basesyntax.fruitshop.service.operations;
 
 import core.basesyntax.fruitshop.fruitstoragedb.FruitStorage;
 import core.basesyntax.fruitshop.model.RecordDto;
-import core.basesyntax.fruitshop.service.operations.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     private static final String DOUBLE_BALANCE_CALCULATION_NOTIFICATION

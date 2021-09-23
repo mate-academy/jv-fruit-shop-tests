@@ -3,23 +3,30 @@ package core.basesyntax.fruitshop.parser;
 import core.basesyntax.fruitshop.model.Fruit;
 import core.basesyntax.fruitshop.model.OperationType;
 import core.basesyntax.fruitshop.model.RecordDto;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
 public class DtoCreatorImplTest {
-    DtoCreatorImpl dtoCreator = new DtoCreatorImpl();
+    private DtoCreatorImpl dtoCreator;
+    private List<String> inputData;
+    private List<RecordDto> recordDtos;
 
-    List<String> inputData;
+    public DtoCreatorImpl getDtoCreator() {
+        return dtoCreator;
+    }
+
+    public List<String> getInputData() {
+        return inputData;
+    }
 
     @Before
     public void setUp() throws Exception {
+        dtoCreator = new DtoCreatorImpl();
         inputData = new ArrayList<>();
+        recordDtos = new ArrayList<>();
         inputData.add("type,fruit,quantity");
         inputData.add(" b,banana,10");
         inputData.add("b,apple, 0");
@@ -30,7 +37,6 @@ public class DtoCreatorImplTest {
 
     @Test
     public void toDtoDataFormatter_Ok() {
-        List<RecordDto> recordDtos = new ArrayList<>();
         RecordDto firstdto = new RecordDto();
         firstdto.setOperationType(OperationType.BALANCE);
         firstdto.setFruitType(new Fruit("banana"));
@@ -46,6 +52,5 @@ public class DtoCreatorImplTest {
         recordDtos.add(fifthDto);
 
         Assert.assertEquals(recordDtos, dtoCreator.toDtoDataFormatter(inputData));
-
     }
 }

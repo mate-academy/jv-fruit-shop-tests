@@ -3,7 +3,6 @@ package core.basesyntax.fruitshop.service.operations;
 import core.basesyntax.fruitshop.fruitstoragedb.FruitStorage;
 import core.basesyntax.fruitshop.model.Fruit;
 import core.basesyntax.fruitshop.model.RecordDto;
-import core.basesyntax.fruitshop.service.operations.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private static final String NO_FRUITS_TO_BUY_NOTIFICATION

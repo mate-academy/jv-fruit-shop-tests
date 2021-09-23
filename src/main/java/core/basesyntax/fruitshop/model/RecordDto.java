@@ -1,8 +1,5 @@
 package core.basesyntax.fruitshop.model;
 
-import core.basesyntax.fruitshop.model.Fruit;
-import core.basesyntax.fruitshop.model.OperationType;
-
 import java.util.Objects;
 
 public class RecordDto {
@@ -46,10 +43,15 @@ public class RecordDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         RecordDto dto = (RecordDto) o;
-        return amount == dto.amount && operationType == dto.operationType && Objects.equals(fruitType, dto.fruitType);
+        return amount == dto.amount && operationType == dto.operationType
+                && Objects.equals(fruitType, dto.fruitType);
     }
 
     @Override

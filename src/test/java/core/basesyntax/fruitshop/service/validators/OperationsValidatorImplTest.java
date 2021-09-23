@@ -1,25 +1,19 @@
 package core.basesyntax.fruitshop.service.validators;
 
-import org.junit.Assert;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
 public class OperationsValidatorImplTest {
 
-    List<String> wrongAmount;
-    List<String> emptyList;
-    List<String> lackOfInformation;
-    OperationsValidatorImpl operationsValidator = new OperationsValidatorImpl();
-    
+    private List<String> wrongAmount;
+    private List<String> emptyList;
+    private List<String> lackOfInformation;
+    private OperationsValidatorImpl operationsValidator = new OperationsValidatorImpl();
 
     @Before
     public void setUp() throws Exception {
-
         wrongAmount = new ArrayList<>();
         wrongAmount.add("b,banana, -13");
         wrongAmount.add("s,apple,10");

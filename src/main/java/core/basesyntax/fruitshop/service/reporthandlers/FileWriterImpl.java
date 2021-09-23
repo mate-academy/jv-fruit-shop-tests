@@ -1,7 +1,5 @@
 package core.basesyntax.fruitshop.service.reporthandlers;
 
-import core.basesyntax.fruitshop.service.reporthandlers.FileWriter;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;

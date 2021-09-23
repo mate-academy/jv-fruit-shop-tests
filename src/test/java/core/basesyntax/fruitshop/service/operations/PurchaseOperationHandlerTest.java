@@ -9,8 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class PurchaseOperationHandlerTest {
 
     @Before
@@ -23,7 +21,7 @@ public class PurchaseOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void buyMoreThanAvailable_applyOperation_Ok() {
-        RecordDto buy = new RecordDto(OperationType.BALANCE,  new Fruit("orange"), 50);
+        RecordDto buy = new RecordDto(OperationType.BALANCE, new Fruit("orange"), 50);
         PurchaseOperationHandler purchase = new PurchaseOperationHandler();
         purchase.applyOperation(buy);
     }
@@ -32,9 +30,4 @@ public class PurchaseOperationHandlerTest {
     public void afterEachTest() throws Exception {
         FruitStorage.getStorage().clear();
     }
-
-   /* @Test(expected = RuntimeException.class)
-    public void buyUnavailableFruit_applyOperation_Ok() {
-
-    }*/
 }

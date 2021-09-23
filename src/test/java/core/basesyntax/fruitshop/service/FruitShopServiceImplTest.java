@@ -9,24 +9,20 @@ import core.basesyntax.fruitshop.service.operations.OperationHandler;
 import core.basesyntax.fruitshop.service.operations.PurchaseOperationHandler;
 import core.basesyntax.fruitshop.service.operations.ReturnOperationHandler;
 import core.basesyntax.fruitshop.service.operations.SupplyOperationHandler;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FruitShopServiceImplTest {
-    List<RecordDto> recordsList;
-    FruitShopServiceImpl fruitShopService;
-    Map<OperationType, OperationHandler> operationHandlerMap;
-    Map<Fruit, Integer> initialStorage;
+    private List<RecordDto> recordsList;
+    private FruitShopServiceImpl fruitShopService;
+    private Map<OperationType, OperationHandler> operationHandlerMap;
+    private Map<Fruit, Integer> initialStorage;
 
     @Before
     public void setUp() throws Exception {
@@ -50,7 +46,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void Changed_fruitStorageModifier_Ok() {
+    public void changed_fruitStorageModifier_Ok() {
         fruitShopService = new FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
         fruitShopService.fruitStorageModifier(recordsList);
         Map<Fruit, Integer> expectedResult = new HashMap<>();

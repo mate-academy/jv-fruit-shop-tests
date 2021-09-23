@@ -1,7 +1,5 @@
 package core.basesyntax.fruitshop.service;
 
-import core.basesyntax.fruitshop.service.InputDataReader;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

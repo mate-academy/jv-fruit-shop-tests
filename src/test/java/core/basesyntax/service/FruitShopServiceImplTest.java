@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.operation.BalanceHandler;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,7 +27,6 @@ public class FruitShopServiceImplTest {
     private static Map<String, OperationHandler> operationHandlerMap;
     private static Fruit banana;
     private static Fruit apple;
-    private static Map<Fruit, Integer> expected;
     private static Map<Fruit, Integer> actual;
 
     @BeforeClass
@@ -36,7 +37,6 @@ public class FruitShopServiceImplTest {
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
         banana = new Fruit("banana");
         apple = new Fruit("apple");
-        expected = new HashMap<>();
         actual = new HashMap<>();
     }
 
@@ -54,10 +54,10 @@ public class FruitShopServiceImplTest {
                 banana, 100));
         transactionDtoList.add(new TransactionDto("b",
                 apple, 50));
-        expected.put(banana, 100);
-        expected.put(apple, 50);
+        Storage.getFruitsStorage().put(banana, 100);
+        Storage.getFruitsStorage().put(apple, 50);
         actual = fruitShopService.transact(transactionDtoList, operationStrategy);
-        assertEquals(expected, actual);
+        assertEquals(Storage.getFruitsStorage(), actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -66,13 +66,16 @@ public class FruitShopServiceImplTest {
                 banana, -10));
         transactionDtoList.add(new TransactionDto("b",
                 apple, 50));
-        expected.put(banana, 8);
-        expected.put(apple, 50);
         actual = fruitShopService.transact(transactionDtoList, operationStrategy);
     }
 
     @After
     public void tearDown() throws Exception {
         transactionDtoList.clear();
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.getFruitsStorage().clear();
     }
 }

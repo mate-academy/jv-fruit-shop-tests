@@ -11,6 +11,7 @@ import org.junit.Test;
 public class ValidatorImplTest {
     private static Validator validator;
     private static List<String> inputDataFromFile;
+    private boolean actual;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -22,8 +23,8 @@ public class ValidatorImplTest {
     public void isDataValid_ok() {
         inputDataFromFile.add("b,banana,120");
         inputDataFromFile.add("r,apple,20");
-        validator.isDataValid(inputDataFromFile);
-        assertTrue(true);
+        actual = validator.isDataValid(inputDataFromFile);
+        assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)

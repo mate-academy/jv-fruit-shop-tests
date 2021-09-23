@@ -37,10 +37,13 @@ public class OperationStrategyImplTest {
     public void getHandler_ok() {
         expected = operationHandlerMap.get("b");
         actual = operationStrategy.getHandler("b");
+        assertEquals(expected, actual);
         expected = operationHandlerMap.get("s");
         actual = operationStrategy.getHandler("s");
+        assertEquals(expected, actual);
         expected = operationHandlerMap.get("p");
         actual = operationStrategy.getHandler("p");
+        assertEquals(expected, actual);
         expected = operationHandlerMap.get("r");
         actual = operationStrategy.getHandler("r");
         assertEquals(expected, actual);

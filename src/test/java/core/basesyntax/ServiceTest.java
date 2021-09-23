@@ -6,7 +6,6 @@ import core.basesyntax.fruitshop.model.TransactionDto;
 import core.basesyntax.fruitshop.service.FileReaderServiceImpl;
 import core.basesyntax.fruitshop.service.FileWriterServiceImpl;
 import core.basesyntax.fruitshop.service.FruitShopServiceImpl;
-import core.basesyntax.fruitshop.service.OperationStrategyImpl;
 import core.basesyntax.fruitshop.service.TransactionDtoServiceImpl;
 import core.basesyntax.fruitshop.service.operation.BalanceOperationHandler;
 import core.basesyntax.fruitshop.service.operation.OperationHandler;
@@ -41,7 +40,6 @@ public class ServiceTest {
         operationHandlerMap.put(OperationType.SUPPLY, new SupplyOperationHandler());
         operationHandlerMap.put(OperationType.PURCHASE, new PurchaseOperationHandler());
         operationHandlerMap.put(OperationType.RETURN, new ReturnOperationHandler());
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         readerService = new FileReaderServiceImpl();
         fileWriterService = new FileWriterServiceImpl();
         fruitShopService = new FruitShopServiceImpl(operationHandlerMap);
@@ -69,7 +67,6 @@ public class ServiceTest {
         String path = "src//main//resources//reportFile.csv";
         String data = "fruit,quantity\nbanana,152\napple,90\n";
         String expected = "fruit,quantity\nbanana,152\napple,90\n";
-        String actual;
         fileWriterService.writeToFile(data, path);
         try {
             Stream<String> lines = Files.lines(Paths.get(path));
@@ -81,7 +78,6 @@ public class ServiceTest {
 
     @Test
     public void createReportIsOk() {
-        Map<String, Integer> storage = new HashMap<>();
         Storage.fruitBalance.put("banana", 56);
         Storage.fruitBalance.put("apple", 73);
         Storage.fruitBalance.put("mango", 42);

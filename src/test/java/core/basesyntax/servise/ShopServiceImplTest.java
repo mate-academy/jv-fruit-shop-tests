@@ -26,21 +26,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ShopServiceImplTest {
-    private static final String SOURCE_FILE = "src/main/resources/test_source.csv";
-    private static final String RESULT_FILE = "src/main/resources/test_result.csv";
-    private static final String TEST_LINE_01 = "type,fruit,quantity";
-    private static final String TEST_LINE_02 = "b,banana,20";
-    private static final String TEST_LINE_03 = "b,apple,100";
-    private static final String TEST_LINE_04 = "s,banana,100";
-    private static final String TEST_LINE_05 = "p,banana,13";
-    private static final String TEST_LINE_06 = "r,apple,10";
-    private static final String TEST_LINE_07 = "p,apple,20";
-    private static final String TEST_LINE_08 = "p,banana,5";
-    private static final String TEST_LINE_09 = "s,banana,50";
+    private static final String SOURCE_FILE =
+            "src/test/resources/test_source_shop_service_impl.csv";
+    private static final String RESULT_FILE =
+            "src/test/resources/test_result_shop_service_impl.csv";
     private static final String ACTUAL_LINE_01 = "fruit,quantity";
     private static final String ACTUAL_LINE_02 = "banana,152";
     private static final String ACTUAL_LINE_03 = "apple,90";
-    private static List<String> testList;
     private static List<String> expectedList;
     private static Map<String, ActivityHandler> activities;
     private static ActivityStrategy activityStrategy;
@@ -49,23 +41,12 @@ public class ShopServiceImplTest {
     private static Reader readerSource;
     private static Reader readerResult;
     private static ReaderService readerService;
-    private static Writer writerSource;
-    private static Writer writerResult;
+    private static Writer writer;
     private static WriterService writerService;
     private static ShopService shopService;
 
     @BeforeClass
     public static void beforeClass() {
-        testList = new ArrayList<>();
-        testList.add(TEST_LINE_01);
-        testList.add(TEST_LINE_02);
-        testList.add(TEST_LINE_03);
-        testList.add(TEST_LINE_04);
-        testList.add(TEST_LINE_05);
-        testList.add(TEST_LINE_06);
-        testList.add(TEST_LINE_07);
-        testList.add(TEST_LINE_08);
-        testList.add(TEST_LINE_09);
         expectedList = new ArrayList<>();
         expectedList.add(ACTUAL_LINE_01);
         expectedList.add(ACTUAL_LINE_02);
@@ -80,21 +61,18 @@ public class ShopServiceImplTest {
         lineValidator = new LineValidator();
         readerSource = new ReaderFileImpl(SOURCE_FILE);
         readerResult = new ReaderFileImpl(RESULT_FILE);
+        writer = new WriterFileImpl(RESULT_FILE);
         readerService = new ReaderServiceImpl(readerSource, titleValidator, lineValidator);
-        writerSource = new WriterFileImpl(SOURCE_FILE);
-        writerResult = new WriterFileImpl(RESULT_FILE);
-        writerService = new WriterServiceImpl(writerResult);
+        writerService = new WriterServiceImpl(writer);
         shopService = new ShopServiceImpl(readerService, writerService, activityStrategy);
-        writerSource.write(testList);
     }
 
     @AfterClass
     public static void afterClass() {
         try {
-            Files.delete(Path.of(SOURCE_FILE));
             Files.delete(Path.of(RESULT_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't delete file");
+            Assert.fail("Can't delete file " + RESULT_FILE);
         }
     }
 

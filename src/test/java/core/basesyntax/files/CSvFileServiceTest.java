@@ -7,9 +7,9 @@ import org.junit.Test;
 public class CSvFileServiceTest {
     private static final String noFileLink = "";
     private static final String filePathData =
-            "src/main/java/core/basesyntax/source/data.csv";
+            "src/test/java/resources/data.csv";
     private static final String destFile =
-            "src/main/java/core/basesyntax/source/storage.csv";
+            "src/test/java/resources/storage.csv";
     private static final FileService fileService = new CSvFileService();
     private static final String source = "type,fruit,quantity\r\n"
             + "b,banana,20\r\n"

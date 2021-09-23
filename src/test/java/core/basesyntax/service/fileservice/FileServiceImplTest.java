@@ -1,12 +1,11 @@
 package core.basesyntax.service.fileservice;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -54,9 +53,9 @@ public class FileServiceImplTest {
         fileService.writeDataToFile(INCORRECT_PATH, "");
     }
 
-    @After
-    public void deleteDataFromFile() throws IOException {
-        new FileWriter(OUTPUT_CSV, false).close();
-        new FileWriter(INPUT_CSV, false).close();
+    @AfterClass
+    public static void deleteDataFromFile() throws IOException {
+        Files.deleteIfExists(Path.of(OUTPUT_CSV));
+        Files.deleteIfExists(Path.of(INPUT_CSV));
     }
 }

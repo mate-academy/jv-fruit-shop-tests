@@ -34,18 +34,18 @@ class FruitRecordDaoImplTest {
     }
 
     @Test
-    void checkListOfFruitRecordsGet_Ok() {
-        Storage.fruitRecordList.clear();
-        Storage.fruitRecordList.addAll(expected);
-        actual = fruitRecordDao.getAll();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     void checkListOfFruitRecords_NotOk() {
         fruitRecordDao.saveAll(expected);
         actual = Storage.fruitRecordList;
         actual.remove(0);
         assertNotEquals(expected, actual);
+    }
+
+    @Test
+    void checkListOfFruitRecordsGet_Ok() {
+        Storage.fruitRecordList.clear();
+        Storage.fruitRecordList.addAll(expected);
+        actual = fruitRecordDao.getAll();
+        assertEquals(expected, actual);
     }
 }

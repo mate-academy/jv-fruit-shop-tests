@@ -88,7 +88,7 @@ public class FruitShopServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void updateStorage_inputNull_NotOk() {
         fruitShopService.updateStorage(null);
     }

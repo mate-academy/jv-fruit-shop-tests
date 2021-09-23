@@ -15,6 +15,9 @@ public class FruitRecordDtoCreatorImpl implements FruitRecordDtoCreator {
 
     @Override
     public List<FruitRecordDto> createRecords(List<String> records) {
+        if (records == null) {
+            throw new RuntimeException("Can't create fruit records from null string records");
+        }
         List<FruitRecordDto> fruitRecordDtos = new ArrayList<>();
         for (String record : records) {
             FruitRecordDto fruitRecordDto = fruitRecordDtoParser.parseRecord(record);

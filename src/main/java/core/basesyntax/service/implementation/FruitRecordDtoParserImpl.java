@@ -18,6 +18,9 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
 
     @Override
     public FruitRecordDto parseRecord(String record) {
+        if (record == null) {
+            throw new RuntimeException("Can't parse from null record");
+        }
         String[] recordData = record.split(CSV_SEPARATOR);
         recordValidator.checkRecord(recordData);
         return new FruitRecordDto(FruitRecordDto.Type

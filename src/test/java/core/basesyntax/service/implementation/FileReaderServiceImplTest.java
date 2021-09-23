@@ -26,7 +26,7 @@ public class FileReaderServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void getRecords_inputNull_Ok() {
         fileReaderService.getRecords(null);
     }

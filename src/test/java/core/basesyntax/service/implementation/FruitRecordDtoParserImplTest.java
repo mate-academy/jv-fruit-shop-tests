@@ -38,7 +38,7 @@ public class FruitRecordDtoParserImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void parseRecord_inputNull_NotOk() {
         fruitRecordDtoParser.parseRecord(null);
     }

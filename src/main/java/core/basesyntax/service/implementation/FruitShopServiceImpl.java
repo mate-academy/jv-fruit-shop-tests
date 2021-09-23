@@ -18,6 +18,9 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void updateStorage(List<FruitRecordDto> fruitRecordDtos) {
+        if (fruitRecordDtos == null) {
+            throw new RuntimeException("Can't update storage with null fruit records DTO");
+        }
         for (FruitRecordDto record : fruitRecordDtos) {
             OperationHandler operationHandler = operationStrategy.get(record.getTypeOfOperation());
             Integer newAmountValue = operationHandler.calculateNewAmount(record.getFruit(),

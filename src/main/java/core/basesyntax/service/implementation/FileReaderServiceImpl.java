@@ -11,6 +11,9 @@ public class FileReaderServiceImpl implements FileReaderService {
 
     @Override
     public List<String> getRecords(String fileName) {
+        if (fileName == null) {
+            throw new RuntimeException("Can't get records from null file name");
+        }
         List<String> stringsFromFile;
         try {
             stringsFromFile = Files.readAllLines(Path.of(fileName));

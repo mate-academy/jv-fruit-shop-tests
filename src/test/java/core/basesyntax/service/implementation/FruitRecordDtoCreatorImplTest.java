@@ -48,7 +48,7 @@ public class FruitRecordDtoCreatorImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void createRecords_inputNull_NotOk() {
         fruitRecordDtoCreator.createRecords(null);
     }

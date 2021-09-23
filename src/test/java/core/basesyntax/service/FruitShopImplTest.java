@@ -11,8 +11,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class FruitShopImplTest {
-    private static String FILE_FOR_READING = "src/test/resources/database.csv";
-    private static String FILE_FOR_WRITING = "src/test/resources/towrite.csv";
+    private static final String FILE_FOR_READING = "src/test/resources/database.csv";
+    private static final String FILE_FOR_WRITING = "src/test/resources/towrite.csv";
 
     @Test
     public void readFile_ValidFilePath_Ok() throws IOException {

@@ -61,12 +61,6 @@ public class FileValidationTest {
         assertFalse(actual);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void checkFile_NullValue_NotOk() {
-        boolean actual = new FileValidation().checkFile(null);
-        assertFalse(actual);
-    }
-
     @After
     public void afterEachTest() {
         readFile.clear();

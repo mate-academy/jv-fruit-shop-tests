@@ -27,11 +27,6 @@ public class PurchaseHandlerTest {
         assertEquals(expected,actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void apply_nullFruit_NotOk() {
-        new PurchaseHandler().getOperationResult(null);
-    }
-
     @Test(expected = RuntimeException.class)
     public void getOperationResult_NotEnoughFruits_NotOk() {
         FruitsStorage.fruitsStorage.put(new Fruit("apple"), 70);

@@ -2,7 +2,9 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operation.BalanceHandler;
 import core.basesyntax.operation.OperationTypeStrategy;
 import core.basesyntax.operation.OperationTypeStrategyImpl;
@@ -18,6 +20,7 @@ import org.junit.Test;
 public class OperationTypeStrategyImplTest {
     private static Map<OperationType, ShopOperationHandler> shopOperationMap;
     private static OperationTypeStrategy operationTypeStrategy;
+    private static TransactionDto transactionDto;
 
     @BeforeClass
     public static void setUp() {
@@ -27,6 +30,8 @@ public class OperationTypeStrategyImplTest {
         shopOperationMap.put(OperationType.SUPPLY, new SupplyHandler());
         shopOperationMap.put(OperationType.RETURN, new ReturnHandler());
         operationTypeStrategy = new OperationTypeStrategyImpl(shopOperationMap);
+        transactionDto = new TransactionDto(OperationType.BALANCE,
+                new Fruit("banana"), 10);
     }
 
     @Test

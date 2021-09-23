@@ -9,14 +9,17 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileServiceImplTest {
     private static final Path DAILY_SHOP_CSV = Path.of("dailyShopCsv.csv");
     private static final Path INVALID_FILE_PATH = Path.of("");
+    private static final Path FILE_PATH_AS_NULL = null;
     private static FileService fileService;
     private static List<String> emptyList;
+    private static List<String> listAsNull;
     private static List<String> fullList;
     private List<String> expected;
     private List<String> actual;
@@ -27,6 +30,7 @@ public class FileServiceImplTest {
         emptyList = new ArrayList<>();
         fullList = new ArrayList<>(List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13"));
+        listAsNull = null;
     }
 
     @After
@@ -62,11 +66,19 @@ public class FileServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void writeToFile_fileWithInvalidFilePath_NotOk() {
         fileService.writeToFile(fullList, INVALID_FILE_PATH);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_ListNullAndFileWithNullPath_NotOk() {
+        fileService.writeToFile(listAsNull, FILE_PATH_AS_NULL);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_fileWithInvalidFilePath_NotOk() {
-        fileService.readFromFile(DAILY_SHOP_CSV);
+        fileService.readFromFile(INVALID_FILE_PATH);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
     private List<String> readFromTestFile(Path path) {

@@ -3,8 +3,10 @@ package core.basesyntax.db;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -43,61 +45,44 @@ public class FruitRecordsDaoImplTest {
                 + actual + " for fruit " + correctFruit, expected, actual);
     }
 
-    @Test
-    public void save_bothFruitAndQuantityNull_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void save_bothFruitAndQuantityNull_NotOk() {
         fruitRecordsDao.save(fruitAsNull, quantityAsNull);
-        expected = quantityAsNull;
-        actual = FruitStorage.fruitStorage.get(fruitAsNull);
-        assertEquals("Test failed! Storage must store "
-                + expected + ", but was "
-                + actual + " for fruit " + fruitAsNull, expected, actual);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
-    @Test
-    public void save_fruitNullAndQuantityNotNull_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void save_fruitNullAndQuantityNotNull_NotOk() {
         fruitRecordsDao.save(fruitAsNull, quantity);
-        expected = quantity;
-        actual = FruitStorage.fruitStorage.get(fruitAsNull);
-        assertEquals("Test failed! Storage must store "
-                + expected + ", but was "
-                + actual + " for fruit " + fruitAsNull, expected, actual);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
-    @Test
-    public void save_fruitNotNullAndQuantityNull_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void save_fruitNotNullAndQuantityNull_NotOk() {
         fruitRecordsDao.save(correctFruit, quantityAsNull);
-        expected = quantityAsNull;
-        actual = FruitStorage.fruitStorage.get(correctFruit);
-        assertEquals("Test failed! Storage must store "
-                + expected + ", but was "
-                + actual + " for fruit " + correctFruit, expected, actual);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
-    @Test
-    public void save_fruitWithNameNullAndQuantityNotNull_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void save_fruitWithNameNullAndQuantityNotNull_NotOk() {
         fruitRecordsDao.save(fruitWithNameNull, quantity);
-        expected = quantity;
-        actual = FruitStorage.fruitStorage.get(fruitWithNameNull);
-        assertEquals("Test failed! Storage must store "
-                + expected + ", but was "
-                + actual + " for fruit " + fruitWithNameNull, expected, actual);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
-    @Test
-    public void save_fruitWithNameNullAndQuantityNull_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void save_fruitWithNameNullAndQuantityNull_NotOk() {
         fruitRecordsDao.save(fruitWithNameNull, quantityAsNull);
-        expected = quantityAsNull;
-        actual = FruitStorage.fruitStorage.get(fruitWithNameNull);
-        assertEquals("Test failed! Storage must store "
-                + expected + ", but was "
-                + actual + " for fruit " + fruitWithNameNull, expected, actual);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
     @Test
     public void getAll_getMapEqualsStorageMap_Ok() {
-        Map<Fruit, Integer> expected = FruitStorage.fruitStorage;
+        Map<Fruit, Integer> expectedMap = new HashMap<>();
+        expectedMap.put(correctFruit, quantity);
+        FruitStorage.fruitStorage.put(correctFruit, quantity);
         Map<Fruit, Integer> actual = fruitRecordsDao.getAll();
-        assertEquals("Test failed! Actual storage not equals expected storage", expected, actual);
+        assertEquals("Test failed! Actual storage not equals expected storage",
+                expectedMap, actual);
     }
 
     @Test
@@ -109,21 +94,15 @@ public class FruitRecordsDaoImplTest {
                 + actual + " for fruit " + correctFruit, expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getFruitAmountFromStorage_fruitWithNameNull_Ok() {
-        expected = FruitStorage.fruitStorage.get(fruitWithNameNull);
-        actual = fruitRecordsDao.getFruitAmountFromStorage(fruitWithNameNull);
-        assertEquals("Test failed! Returned quantity "
-                + expected + ", but was "
-                + actual + " for fruit " + fruitWithNameNull, expected, actual);
+        fruitRecordsDao.getFruitAmountFromStorage(fruitWithNameNull);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getFruitAmountFromStorage_fruitNull_Ok() {
-        expected = FruitStorage.fruitStorage.get(fruitAsNull);
-        actual = fruitRecordsDao.getFruitAmountFromStorage(fruitAsNull);
-        assertEquals("Test failed! Returned quantity "
-                + expected + ", but was "
-                + actual + " for fruit " + fruitAsNull, expected, actual);
+        fruitRecordsDao.getFruitAmountFromStorage(fruitAsNull);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 }

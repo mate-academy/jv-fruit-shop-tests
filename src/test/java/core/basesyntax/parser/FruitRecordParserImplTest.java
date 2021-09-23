@@ -49,8 +49,9 @@ public class FruitRecordParserImplTest {
         Assert.assertEquals("Test failed! Lists are different.", expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void parse_nullList_NotOk() {
         fruitRecordParser.parse(nullList);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 }

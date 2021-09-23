@@ -13,6 +13,9 @@ public class FruitRecordParserImpl implements FruitRecordParser {
 
     @Override
     public List<TransactionDto> parse(List<String> records) {
+        if (records == null) {
+            throw new RuntimeException("Input list with records isn`t exist.");
+        }
         return records.stream()
                 .map(l -> l.split(","))
                 .map(r -> new TransactionDto(OperationType.getEnumValue(r[OPERATION_TYPE]),

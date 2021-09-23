@@ -20,6 +20,9 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void saveFruitRecordsFromFile(List<TransactionDto> fruitRecordsList) {
+        if (fruitRecordsList == null) {
+            throw new RuntimeException("Input list with records isn`t exist.");
+        }
         fruitRecordsList.forEach(t -> fruitRecordsDao.save(t.getFruit(),
                 operationStrategy.get(t.getOperationType())
                         .doOperation(t)));

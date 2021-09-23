@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -72,9 +73,10 @@ public class FruitServiceImplTest {
         assertTrue("Test failed! Storage must be empty.", FruitStorage.fruitStorage.isEmpty());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void saveFruitRecordsFromFile_nullList_NotOk() {
         fruitService.saveFruitRecordsFromFile(nullList);
+        Assert.fail("Expected " + expected + ", but method ran successful.");
     }
 
     @Test

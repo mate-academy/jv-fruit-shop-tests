@@ -12,6 +12,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<String> readFromFile(Path fileFrom) {
+        if (fileFrom == null) {
+            throw new RuntimeException("File path is null.");
+        }
         try {
             return Files.lines(fileFrom)
                     .skip(LINE_WITH_TITLES)
@@ -23,6 +26,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public boolean writeToFile(List<String> dataList, Path fileTo) {
+        if (dataList == null || fileTo == null) {
+            throw new RuntimeException("Input parameters have null values: "
+                    + " dataList = " + dataList
+                    + ", fileTo = " + fileTo);
+        }
         try {
             Files.write(fileTo, dataList, StandardCharsets.UTF_8);
             return true;

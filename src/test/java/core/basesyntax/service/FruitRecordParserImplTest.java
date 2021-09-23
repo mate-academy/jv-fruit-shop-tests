@@ -57,7 +57,7 @@ public class FruitRecordParserImplTest {
                 new String[]{"b", "banana", "20"},
                 new String[]{"b", "100"},
                 new String[]{"s", "banana", "100"},
-                new String[]{"p", "banana", "13"});
+                new String[]{"p", "banana", "12"});
         fruitRecordParser.parse(splitedInformationList);
     }
 

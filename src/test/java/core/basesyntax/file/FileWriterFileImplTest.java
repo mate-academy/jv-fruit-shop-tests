@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterFileImplTest {
-    private static final String CORRECT_PATH = "src/test/resources/report_test.csv";
+    private static final String CORRECT_PATH = "src/test/resources/output.txt";
     private static final String INCORRECT_PATH = "";
     private static FileWriter fileWriter;
     private static List<String> content = Collections.singletonList("b,banana,100500");

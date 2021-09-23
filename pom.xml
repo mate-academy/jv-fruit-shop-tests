@@ -49,6 +49,7 @@
                     <linkXRef>false</linkXRef>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
+
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

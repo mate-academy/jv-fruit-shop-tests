@@ -9,30 +9,40 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportGeneratorImplTest {
-    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+    private static String expected =
+            "fruit,quantity" + System.lineSeparator()
+                    + "banana,10" + System.lineSeparator()
+                    + "apple,122" + System.lineSeparator()
+                    + "orange,1122";
     private final ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
-    private String expected;
 
     @Before
-    public void setUp() throws Exception {
-        Fruit banana = new Fruit("banana");
-        Fruit apple = new Fruit("apple");
-        Fruit orange = new Fruit("orange");
-        Storage.storage.put(banana, 10);
-        Storage.storage.put(apple, 122);
-        Storage.storage.put(orange, 1122);
-        StringBuilder stringBuilder = new StringBuilder(HEADER);
-        Storage.storage.forEach((key, value) -> stringBuilder.append(key.getName())
-                .append(",")
-                .append(value)
-                .append(System.lineSeparator()));
-        expected = stringBuilder.toString().trim();
+    public void setUp() {
+        Storage.storage.clear();
+        Storage.storage.put(new Fruit("banana"), 10);
+        Storage.storage.put(new Fruit("apple"), 122);
+        Storage.storage.put(new Fruit("orange"), 1122);
     }
 
     @Test
     public void createDataForReport_Ok() {
         String actual = reportGenerator.generateReport();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void createDataForReport_empty_storage_OK() {
+        Storage.storage.clear();
+        String actual = reportGenerator.generateReport();
+        String expectedResult = "fruit,quantity";
+        assertEquals(expectedResult, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void createDataForReport_invalidData_NotOk() {
+        Storage.storage.clear();
+        Storage.storage.put(null, null);
+        String actual = reportGenerator.generateReport();
     }
 
     @AfterClass

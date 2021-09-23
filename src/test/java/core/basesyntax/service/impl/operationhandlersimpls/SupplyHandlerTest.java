@@ -34,7 +34,7 @@ public class SupplyHandlerTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.storage.clear();
     }
 }

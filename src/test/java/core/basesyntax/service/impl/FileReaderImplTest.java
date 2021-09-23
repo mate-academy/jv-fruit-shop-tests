@@ -1,19 +1,43 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class FileReaderImplTest {
     private static final String SOURCE_FILE = "src/main/java/resources/filetest";
-    private final FileReaderImpl fileService = new FileReaderImpl();
-    private final List<String> expected = new ArrayList<>();
+    private final FileReaderImpl fileReader = new FileReaderImpl();
 
-    @Before
-    public void setUp() throws Exception {
+    @Test
+    public void readFile_Null_notOk() {
+        try {
+            fileReader.read(null);
+        } catch (NullPointerException e) {
+            return;
+        }
+        fail();
+    }
+
+    @Test
+    public void readFile_incorrectPath_NotOk() {
+        try {
+            fileReader.read("src/main/java/resourcesee/filetest");
+        } catch (RuntimeException e) {
+            Assert.assertEquals("Unable to read data from file "
+                            + "src/main/java/resourcesee/filetest",
+                    e.getMessage());
+            return;
+        }
+        fail();
+    }
+
+    @Test
+    public void readFile_validFileName_Ok() {
+        List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
         expected.add("s,banana,100");
@@ -22,20 +46,6 @@ public class FileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void readFile_Null_notOk() {
-        fileService.read(null);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void readFile_incorrectPath_NotOk() {
-        fileService.read("src/main/java/resourcesee/filetest");
-    }
-
-    @Test
-    public void readFile_validFileName_Ok() {
-        assertEquals(expected, fileService.read(SOURCE_FILE));
+        assertEquals(expected, fileReader.read(SOURCE_FILE));
     }
 }

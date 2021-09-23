@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,14 +27,24 @@ public class FileWriterImplTest {
         data = stringBuilder.toString().trim();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void recordDataToFile_resultFileNull_notOk() {
-        fileWriter.write(null, data);
+        try {
+            fileWriter.write(null, data);
+        } catch (NullPointerException e) {
+            return;
+        }
+        fail();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void recordDataToFile_dataNull_notOk() {
-        fileWriter.write(DESTINATION_FILE, null);
+        try {
+            fileWriter.write(DESTINATION_FILE, null);
+        } catch (NullPointerException e) {
+            return;
+        }
+        fail();
     }
 
     @Test

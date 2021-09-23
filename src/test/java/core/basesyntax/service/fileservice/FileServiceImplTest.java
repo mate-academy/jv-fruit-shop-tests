@@ -35,7 +35,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_Ok() throws IOException {
+    public void writeDataToFile_Ok() {
         String data = "fruit,quantity\n"
                 + "banana,150\n"
                 + "apple,150";

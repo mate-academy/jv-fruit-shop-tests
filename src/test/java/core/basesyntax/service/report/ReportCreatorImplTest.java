@@ -11,7 +11,7 @@ public class ReportCreatorImplTest {
     private static Report report;
 
     @BeforeClass
-    public static void beforeClass()  {
+    public static void beforeClass() {
         report = new ReportCreatorImpl();
     }
 

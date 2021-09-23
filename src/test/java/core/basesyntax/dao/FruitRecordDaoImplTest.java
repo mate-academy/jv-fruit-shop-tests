@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
-import static org.junit.gen5.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitRecord;

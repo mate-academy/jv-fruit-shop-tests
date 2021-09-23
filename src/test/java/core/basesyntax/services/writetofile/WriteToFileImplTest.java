@@ -1,6 +1,7 @@
 package core.basesyntax.services.writetofile;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,11 +18,11 @@ public class WriteToFileImplTest {
         String filePath = "src/main/resources/report.csv";
         WriteToFile writeToFile = new WriteToFileImpl();
         writeToFile.writeToFile(expected);
-        List<String> actual;
+        List<String> actual = null;
         try {
             actual = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("File not exist!", e);
+            fail("File not exist!");
         }
         assertEquals(expected, actual);
     }

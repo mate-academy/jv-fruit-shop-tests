@@ -11,15 +11,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterFileImplTest {
-    private static final String TEST_FILE = "src/main/resources/test.csv";
+    private static final String TEST_FILE = "src/test/resources/test.csv";
     private static List<String> dataList;
     private static final String TITLE = "fruit,quantity";
     private static final String LINE = "banana,152";
-    private Reader readerFile = new ReaderFileImpl(TEST_FILE);
-    private Writer writerFile = new WriterFileImpl(TEST_FILE);
+    private static Reader readerFile;
+    private static Writer writerFile;
 
     @BeforeClass
     public static void beforeAll() {
+        readerFile = new ReaderFileImpl(TEST_FILE);
+        writerFile = new WriterFileImpl(TEST_FILE);
         dataList = new ArrayList<>();
         dataList.add(TITLE);
         dataList.add(LINE);
@@ -29,7 +31,7 @@ public class WriterFileImplTest {
     public void writeDataToFile_Ok() {
         writerFile.write(dataList);
         List<String> actualList = readerFile.read();
-        Assert.assertTrue(actualList.equals(dataList));
+        Assert.assertEquals(actualList, dataList);
     }
 
     @AfterClass
@@ -37,7 +39,7 @@ public class WriterFileImplTest {
         try {
             Files.delete(Path.of(TEST_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't delete file " + TEST_FILE);
+            Assert.fail("Can't delete file " + TEST_FILE);
         }
     }
 }

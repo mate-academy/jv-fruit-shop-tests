@@ -1,11 +1,11 @@
 package core.basesyntax.service.operationtypes;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PurchaseHandlerTest {
     private static int expectedAmount = 50;

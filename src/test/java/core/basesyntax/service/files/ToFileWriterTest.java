@@ -1,19 +1,19 @@
 package core.basesyntax.service.files;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ToFileWriterTest {
     private static final String FILE_HEAD = "fruit,quantity";
     private static final String TO_FILE_NAME = "src/test/resources/result.csv";
+    private static final String INCORRECT_FILE_NAME = "";
     private static final String SEPARATOR = ",";
     private static String report;
     private static ToFileWriter toFileWriter;
@@ -49,5 +49,10 @@ public class ToFileWriterTest {
             throw new RuntimeException("Can't read file");
         }
         assertEquals(actual, expected);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void write_incorrectFileName_NotOk() {
+        toFileWriter.writeToCsv(report, INCORRECT_FILE_NAME);
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.model;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.operationtypes.OperationStrategy;
 import core.basesyntax.service.operationtypes.Operations;
-
 import java.util.List;
 
 public class TransactionDto {

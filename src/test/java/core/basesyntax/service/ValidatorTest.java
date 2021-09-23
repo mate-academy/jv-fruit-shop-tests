@@ -3,8 +3,6 @@ package core.basesyntax.service;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ValidatorTest {
     private static final int DEFAULT_CAPACITY = 3;
     private static final int AMOUNT = 2;

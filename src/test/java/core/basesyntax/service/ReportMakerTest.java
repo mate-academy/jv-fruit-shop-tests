@@ -1,13 +1,11 @@
 package core.basesyntax.service;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportMakerTest {
     private static final String REPORT_HEAD = "fruit,quantity";
@@ -34,7 +32,7 @@ public class ReportMakerTest {
     }
 
     @Test
-    public void ReportMaker_correctReport_OK() {
+    public void reportMaker_correctReport_OK() {
         String expected = actualResult;
         String actual = reportMaker.make(testReportMap);
         assertEquals(actual, expected);

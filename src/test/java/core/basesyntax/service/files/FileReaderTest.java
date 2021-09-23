@@ -1,11 +1,12 @@
 package core.basesyntax.service.files;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FileReaderTest {
     private static final String FILE_HEAD = "type,fruitRecord,quantity";
@@ -38,5 +39,4 @@ public class FileReaderTest {
     public void read_incorrectPath_NotOk() {
         fileReader.read(FROM_INCORRECT_PATH);
     }
-
 }

@@ -32,7 +32,7 @@ public class ValidatorImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_DataWithoutFirstElement_NotOk() {
+    public void validate_dataWithoutFirstElement_NotOk() {
         actual = validator.validate(invalidData);
     }
 }

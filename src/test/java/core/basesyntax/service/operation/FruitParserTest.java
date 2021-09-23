@@ -33,4 +33,5 @@ public class FruitParserTest {
         actual = fruitParser.createDto(lineList);
         Assert.assertEquals(expected, actual);
     }
+
 }

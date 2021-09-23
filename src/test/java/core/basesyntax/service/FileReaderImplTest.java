@@ -41,7 +41,7 @@ public class FileReaderImplTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void getFileData_FilePathIsNull() {
+    public void getFileData_filePathIsNull_NotOk() {
         List<String> actual = fileReader.getFileData(null);
     }
 }

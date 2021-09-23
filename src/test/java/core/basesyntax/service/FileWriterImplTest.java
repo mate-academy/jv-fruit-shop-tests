@@ -33,7 +33,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeFile_WithValidPath_Ok() {
+    public void writeFile_withValidPath_Ok() {
         filePath = "src/test/resources/report.csv";
         fileWriter.writeFile(filePath, report);
         try {
@@ -45,7 +45,7 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFile_PathToFileIsNotCorrect_NotOk() {
+    public void writeFile_pathToFileIsNotCorrect_NotOk() {
         filePath = "C//helloWorld";
         fileWriter.writeFile(filePath, report);
     }

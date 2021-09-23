@@ -10,21 +10,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static Fruit fruit;
-    private static Fruit fruit1;
+    private static Fruit banana;
+    private static Fruit apple;
     private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {
-        fruit = new Fruit("banana");
-        fruit1 = new Fruit("apple");
+        banana = new Fruit("banana");
+        apple = new Fruit("apple");
         reportService = new ReportServiceImpl();
     }
 
     @Before
     public void setUp() {
-        Storage.storage.put(fruit, 100);
-        Storage.storage.put(fruit1, 200);
+        Storage.storage.put(banana, 100);
+        Storage.storage.put(apple, 200);
     }
 
     @Test

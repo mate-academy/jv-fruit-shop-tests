@@ -30,35 +30,35 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getHandler_BalanceHandler_Ok() {
+    public void getHandler_balanceHandler_Ok() {
         expected = handlerMap.get(Operation.BALANCE);
         actual = operationStrategy.getHandler(Operation.BALANCE);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getHandler_SupplyHandler_Ok() {
+    public void getHandler_supplyHandler_Ok() {
         expected = handlerMap.get(Operation.SUPPLY);
         actual = operationStrategy.getHandler(Operation.SUPPLY);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getHandler_ReturnHandler_Ok() {
+    public void getHandler_returnHandler_Ok() {
         expected = handlerMap.get(Operation.RETURN);
         actual = operationStrategy.getHandler(Operation.RETURN);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getHandler_PurchaseHandler_Ok() {
+    public void getHandler_purchaseHandler_Ok() {
         expected = handlerMap.get(Operation.PURCHASE);
         actual = operationStrategy.getHandler(Operation.PURCHASE);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void getHandler_HandlerNull_NotOk() {
+    public void getHandler_handlerNull_NotOk() {
         actual = operationStrategy.getHandler(null);
     }
 }

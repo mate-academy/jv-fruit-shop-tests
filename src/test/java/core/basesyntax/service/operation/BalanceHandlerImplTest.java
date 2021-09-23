@@ -17,7 +17,7 @@ public class BalanceHandlerImplTest {
     }
 
     @Test
-    public void changeAmount_Balance_Ok() {
+    public void changeAmount_balance_Ok() {
         expected = 100;
         actual = balanceHandler.changeAmount(new FruitRecord("b",
                 new Fruit("banana"), 100));

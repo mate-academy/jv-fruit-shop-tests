@@ -11,6 +11,8 @@ import org.junit.Test;
 
 public class ReturnHandlerImplTest {
     private static Handler purchaseHandler;
+    private int expected;
+    private int actual;
 
     @BeforeClass
     public static void beforeClass() {
@@ -20,22 +22,19 @@ public class ReturnHandlerImplTest {
     }
 
     @Test
-    public void changeAmount_Return_Ok() {
-        int actual = purchaseHandler.changeAmount(new FruitRecord(
+    public void changeAmount_return_Ok() {
+        actual = purchaseHandler.changeAmount(new FruitRecord(
                 "r", new Fruit("banana"), 20));
-        int expected = 220;
+        expected = 220;
         assertEquals(expected, actual);
-
         actual = purchaseHandler.changeAmount(new FruitRecord(
                 "r", new Fruit("apple"), 40));
         expected = 140;
         assertEquals(expected, actual);
-
         actual = purchaseHandler.changeAmount(new FruitRecord(
                 "r", new Fruit("banana"), 20));
         expected = 240;
         assertEquals(expected, actual);
-
         actual = purchaseHandler.changeAmount(new FruitRecord(
                 "r", new Fruit("apple"), 4));
         expected = 144;

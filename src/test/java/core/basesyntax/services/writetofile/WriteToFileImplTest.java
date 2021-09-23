@@ -22,7 +22,7 @@ public class WriteToFileImplTest {
         try {
             actual = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            fail("File not exist!");
+            fail("File not exist!" + e);
         }
         assertEquals(expected, actual);
     }

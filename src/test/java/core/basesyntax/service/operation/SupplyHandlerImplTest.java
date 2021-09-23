@@ -21,31 +21,31 @@ public class SupplyHandlerImplTest {
     }
 
     @Test
-    public void checkFruitReturn_Ok() {
+    public void checkFruitSupply_Ok() {
         expected = new HashMap<>();
         expected.put("banana",10);
         Storage.fruitMap.put("banana",0);
-        fruitRecord = new FruitRecord("b","banana",10);
+        fruitRecord = new FruitRecord("s","banana",10);
         operationHandler.applyOperation(fruitRecord);
         assertEquals(expected, Storage.fruitMap);
     }
 
     @Test
-    public void checkFruitPurchase_NotOk() {
+    public void checkFruitSupply_NotOk() {
         expected = new HashMap<>();
         expected.put("banana",10);
         Storage.fruitMap.put("banana",25);
-        fruitRecord = new FruitRecord("b","banana",10);
+        fruitRecord = new FruitRecord("s","banana",10);
         operationHandler.applyOperation(fruitRecord);
         assertNotEquals(expected, Storage.fruitMap);
     }
 
     @Test
-    public void checkTwoFruitPurcahse_Ok() {
+    public void checkTwoFruitSupply_Ok() {
         expected = new HashMap<>();
         expected.put("banana",12);
         Storage.fruitMap.put("banana",2);
-        fruitRecord = new FruitRecord("b","banana",10);
+        fruitRecord = new FruitRecord("s","banana",10);
         operationHandler.applyOperation(fruitRecord);
         assertEquals(expected, Storage.fruitMap);
         expected.put("banana",22);

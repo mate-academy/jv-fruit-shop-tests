@@ -29,13 +29,14 @@ public class BalanceHandlerImplTest {
     }
 
     @Test
-    public void checkTwoFruitRecordAdd_Ok() {
+    public void checkTwoFruitRecordsAdd_Ok() {
         expected.put("banana",7);
         fruitRecord = new FruitRecord("b","banana",7);
         operationHandler.applyOperation(fruitRecord);
         assertEquals(expected, Storage.fruitMap);
         expected.put("avocado",12);
         operationHandler.applyOperation(new FruitRecord("b", "avocado", 12));
+        assertEquals(expected, Storage.fruitMap);
     }
 
 }

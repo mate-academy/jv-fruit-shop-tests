@@ -32,7 +32,7 @@ public class DataValidatorImplTest {
     }
 
     @Test
-    public void checkAnotherString_Ok() {
+    public void checkAnotherOperationAndFruit_Ok() {
         mockFileLine = "s,avocado,112";
         expected = new String[]{"s", "avocado", "112"};
         actual = dataValidator.validate(mockFileLine);

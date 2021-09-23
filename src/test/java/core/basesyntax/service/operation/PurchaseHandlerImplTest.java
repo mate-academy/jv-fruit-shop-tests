@@ -26,7 +26,7 @@ public class PurchaseHandlerImplTest {
         expected.put("banana",10);
         Storage.fruitMap.clear();
         Storage.fruitMap.put("banana",20);
-        fruitRecord = new FruitRecord("b","banana",10);
+        fruitRecord = new FruitRecord("p","banana",10);
         operationHandler.applyOperation(fruitRecord);
         assertEquals(expected, Storage.fruitMap);
     }
@@ -36,7 +36,7 @@ public class PurchaseHandlerImplTest {
         expected = new HashMap<>();
         expected.put("banana",10);
         Storage.fruitMap.put("banana",25);
-        fruitRecord = new FruitRecord("b","banana",10);
+        fruitRecord = new FruitRecord("p","banana",10);
         operationHandler.applyOperation(fruitRecord);
         assertNotEquals(expected, Storage.fruitMap);
     }
@@ -47,7 +47,7 @@ public class PurchaseHandlerImplTest {
         expected.put("banana",10);
         Storage.fruitMap.clear();
         Storage.fruitMap.put("banana",20);
-        fruitRecord = new FruitRecord("b","banana",10);
+        fruitRecord = new FruitRecord("p","banana",10);
         operationHandler.applyOperation(fruitRecord);
         assertEquals(expected, Storage.fruitMap);
         expected.put("banana",0);

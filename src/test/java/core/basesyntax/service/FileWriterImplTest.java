@@ -26,7 +26,6 @@ public class FileWriterImplTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         fileWriter = new FileWriterImpl();
-
     }
 
     @Test

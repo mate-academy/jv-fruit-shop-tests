@@ -38,7 +38,8 @@ public class ValidatorImplTest {
     public void checkValidOfAmount_positiveAmount_ok() {
         inputDataFromFile.add("b,banana,10");
         inputDataFromFile.add("r,apple,15");
-        validator.checkValidOfAmount(inputDataFromFile);
+        actual = validator.checkValidOfAmount(inputDataFromFile);
+        assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)

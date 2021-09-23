@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
@@ -59,18 +58,6 @@ public class FruitShopServiceImplTest {
         expected.put(apple, 50);
         actual = fruitShopService.transact(transactionDtoList, operationStrategy);
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void transact_notOk() {
-        transactionDtoList.add(new TransactionDto("b",
-                banana, 100));
-        transactionDtoList.add(new TransactionDto("b",
-                apple, 50));
-        expected.put(banana, 10);
-        expected.put(apple, 10);
-        actual = fruitShopService.transact(transactionDtoList, operationStrategy);
-        assertNotEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

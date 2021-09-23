@@ -1,7 +1,7 @@
 package core.basesyntax.services.stockservice;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.model.OperationTypes;
 import core.basesyntax.model.TransactionDto;
@@ -26,7 +26,7 @@ public class StockServiceImplTest {
     private static OperationsStrategy strategyOperations;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         Map<String, Operation> stringOperationMap = new HashMap<>();
         stringOperationMap.put(OperationTypes.BALANCE.getShortName(), new OperationBalanceImpl());
         stringOperationMap.put(OperationTypes.SUPPLY.getShortName(), new OperationSupplyImpl());
@@ -36,7 +36,7 @@ public class StockServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Stock.stockStorage.clear();
     }
 
@@ -119,7 +119,7 @@ public class StockServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = OperationException.class)
     public void applyOperationsOnFruitsDto_OperationNotAvailable_NotOk() {
         TransactionDto transactionDtoFirst = new TransactionDto(
                 "b", "banana", 50);
@@ -129,12 +129,7 @@ public class StockServiceImplTest {
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         transactionDtoList.add(transactionDtoFirst);
         transactionDtoList.add(transactionDtoSecond);
-        boolean haveException = false;
-        try {
-            stockService.applyOperationsOnFruitsDto(transactionDtoList);
-        } catch (OperationException e) {
-            haveException = true;
-        }
-        assertTrue(haveException);
+        stockService.applyOperationsOnFruitsDto(transactionDtoList);
+        fail("Must will be an Exception!");
     }
 }

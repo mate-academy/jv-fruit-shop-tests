@@ -12,7 +12,7 @@ public class ReportingImplTest {
     private static final String START_MESSAGE = "fruit,quantity";
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Stock.stockStorage.clear();
     }
 

@@ -11,8 +11,8 @@ import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
-    private String actual;
-    private String expected;
+    private Class actual;
+    private Class expected;
 
     @BeforeClass
     public static void beforeClass() {
@@ -27,16 +27,16 @@ public class OperationStrategyImplTest {
     @Test
     public void operationStrategyImplTest_Ok() {
         OperationHandler operationHandler = operationStrategy.get(TypeOperations.BALANCE);
-        actual = operationHandler.getClass().getSimpleName();
-        expected = "BalanceHandler";
+        actual = operationHandler.getClass();
+        expected = BalanceHandler.class;
         assertEquals(actual, expected);
     }
 
     @Test
     public void operationStrategyImplTest_notOk() {
         OperationHandler operationHandler = operationStrategy.get(TypeOperations.SUPPLY);
-        actual = operationHandler.getClass().getSimpleName();
-        expected = "BalanceHandler";
+        actual = operationHandler.getClass();
+        expected = BalanceHandler.class;
         assertNotEquals(actual, expected);
     }
 }

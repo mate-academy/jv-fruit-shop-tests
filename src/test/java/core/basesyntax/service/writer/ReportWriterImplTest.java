@@ -2,6 +2,7 @@ package core.basesyntax.service.writer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -53,11 +54,10 @@ public class ReportWriterImplTest {
             while (null != (tmp = reader.readLine())) {
                 readString.append(tmp).append(System.lineSeparator());
             }
-
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            fail();
         } catch (IOException e) {
-            e.printStackTrace();
+            fail();
         }
         assertNotEquals(readString.toString().trim(),
                 (toReportString + System.lineSeparator() + "zzz"));

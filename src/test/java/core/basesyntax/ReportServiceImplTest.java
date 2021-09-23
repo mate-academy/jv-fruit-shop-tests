@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.Storage;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,6 +26,11 @@ public class ReportServiceImplTest {
                 + "apple,10" + System.lineSeparator();
         String actual = reportService.getReport();
         Assert.assertEquals(expected,actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.reportMap.clear();
     }
 }
 

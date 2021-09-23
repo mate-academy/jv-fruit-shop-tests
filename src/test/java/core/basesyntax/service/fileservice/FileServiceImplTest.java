@@ -55,7 +55,8 @@ public class FileServiceImplTest {
     }
 
     @After
-    public void close() throws IOException {
+    public void deleteDataFromFile() throws IOException {
         new FileWriter(OUTPUT_CSV, false).close();
+        new FileWriter(INPUT_CSV, false).close();
     }
 }

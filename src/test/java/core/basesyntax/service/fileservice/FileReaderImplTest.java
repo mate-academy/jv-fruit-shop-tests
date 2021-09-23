@@ -24,4 +24,9 @@ public class FileReaderImplTest {
         expected.add("b,apple,100");
         assertEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void read_WithInvalidFileName_NotOk() {
+        fileReader.read("InvalidData");
+    }
 }

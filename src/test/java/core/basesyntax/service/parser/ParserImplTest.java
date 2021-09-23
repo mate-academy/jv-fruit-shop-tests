@@ -14,6 +14,8 @@ public class ParserImplTest {
     private static Parser<List<String>, List<FruitOperationDto>> parser;
     private static List<String> validList;
     private static List<String> invalidList;
+    private List<FruitOperationDto> expected;
+    private List<FruitOperationDto> actual;
 
     @BeforeClass
     public static void beforeClass() {
@@ -27,12 +29,12 @@ public class ParserImplTest {
 
     @Test
     public void parse_ValidList_Ok() {
-        List<FruitOperationDto> expected = new ArrayList<>();
+        expected = new ArrayList<>();
         expected.add(new FruitOperationDto(OperationType.BALANCE,
                 new Fruit("banana"), 20));
         expected.add(new FruitOperationDto(OperationType.RETURN,
                 new Fruit("apple"), 100));
-        List<FruitOperationDto> actual = parser.parse(validList);
+        actual = parser.parse(validList);
         assertEquals(expected, actual);
     }
 
@@ -43,9 +45,8 @@ public class ParserImplTest {
 
     @Test
     public void parse_EmptyList_Ok() {
-        List<FruitOperationDto> actual = parser.parse(new ArrayList<>());
-        List<FruitOperationDto> expected = new ArrayList<>();
+        actual = parser.parse(new ArrayList<>());
+        expected = new ArrayList<>();
         assertEquals(expected, actual);
     }
-
 }

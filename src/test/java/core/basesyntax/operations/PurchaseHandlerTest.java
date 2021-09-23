@@ -58,7 +58,7 @@ public class PurchaseHandlerTest {
         operationHandler.apply(secondInvalidFruitOperationDto);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void apply_purchaseWithNull_NotOk() {
         operationHandler.apply(null);
     }

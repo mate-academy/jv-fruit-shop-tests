@@ -13,6 +13,8 @@ public class BalanceHandlerTest {
     private static OperationHandler operationHandler;
     private FruitOperationDto fruitOperationDto;
     private Fruit fruit;
+    private int expected;
+    private int actual;
 
     @BeforeClass
     public static void beforeClass() {
@@ -27,8 +29,8 @@ public class BalanceHandlerTest {
 
     @Test
     public void apply_BalanceWithValidData_Ok() {
-        int expected = 20;
-        int actual = operationHandler.apply(fruitOperationDto);
+        expected = 20;
+        actual = operationHandler.apply(fruitOperationDto);
         assertEquals(expected, actual);
     }
 
@@ -36,13 +38,13 @@ public class BalanceHandlerTest {
     public void apply_Rebalance_Ok() {
         FruitOperationDto newFruitOperationDto = new FruitOperationDto(
                 OperationType.BALANCE, fruit, 150);
-        int expected = 150;
+        expected = 150;
         operationHandler.apply(fruitOperationDto);
-        int actual = operationHandler.apply(newFruitOperationDto);
+        actual = operationHandler.apply(newFruitOperationDto);
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void apply_balanceWithNull_NotOk() {
         operationHandler.apply(null);
     }

@@ -15,6 +15,8 @@ public class ObtainingHandlerTest {
     private static OperationHandler operationHandler;
     private FruitOperationDto fruitOperationDto;
     private Fruit fruit;
+    private int expected;
+    private int actual;
 
     @BeforeClass
     public static void beforeClass() {
@@ -34,8 +36,8 @@ public class ObtainingHandlerTest {
 
     @Test
     public void apply_obtainingWithEmptyStorage_Ok() {
-        int expected = 20;
-        int actual = operationHandler.apply(fruitOperationDto);
+        expected = 20;
+        actual = operationHandler.apply(fruitOperationDto);
         assertEquals(expected, actual);
     }
 
@@ -44,12 +46,12 @@ public class ObtainingHandlerTest {
         FruitOperationDto newFruitOperationDto = new FruitOperationDto(
                 OperationType.SUPPLY, fruit, 70);
         operationHandler.apply(fruitOperationDto);
-        int expected = 90;
-        int actual = operationHandler.apply(newFruitOperationDto);
+        expected = 90;
+        actual = operationHandler.apply(newFruitOperationDto);
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void apply_obtainingWithNull_NotOk() {
         operationHandler.apply(null);
     }

@@ -1,6 +1,7 @@
 package core.basesyntax.service.parser.validator;
 
 import core.basesyntax.exception.ValidationException;
+import core.basesyntax.model.FruitOperationDto;
 
 public class FruitOperationDtoValidator implements Validator {
     private static final String SPLITERATOR_REGEX = ",";
@@ -18,6 +19,14 @@ public class FruitOperationDtoValidator implements Validator {
         }
         if (Integer.parseInt(data[QUANTITY_INDEX]) < 0) {
             throw new ValidationException("Еhe quantity must not be negative: " + value);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean validFruitOperationDto(FruitOperationDto fruitOperationDto) {
+        if (fruitOperationDto == null) {
+            throw new RuntimeException("FruitOperationDto is null");
         }
         return true;
     }

@@ -2,22 +2,22 @@ package core.basesyntax.service;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CsvFileWriterTest {
+public class CsvFileWriterImplTest {
     private static final String validPathToFile
             = "src/main/java/core/basesyntax/files/activities.csv";
     private static final String invalidPathToFile
             = "src/main/java/core/files/activities.csv";
     private static final String InvalidPathMessage
             = "Can't write into file: ";
-    private CsvFileWriter csvFileWriter;
-    private Map<String, Integer> report;
+    private static CsvFileWriter csvFileWriter;
+    private static Map<String, Integer> report;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         csvFileWriter = new CsvFileWriterImpl();
         report = new HashMap<>();
         report.put("banana", 10);
@@ -25,16 +25,15 @@ class CsvFileWriterTest {
     }
 
     @Test
-    void writeWorkability_Ok() {
+    public void writeWorkability_Ok() {
         csvFileWriter.write(validPathToFile, report);
     }
 
     @Test
-    void writeInvalidPath_NotOk() {
-        RuntimeException exception
-                = Assertions.assertThrows(RuntimeException.class,
-                    () -> csvFileWriter.write(invalidPathToFile, report));
-        Assertions.assertEquals(InvalidPathMessage + invalidPathToFile,
+    public void writeInvalidPath_NotOk() {
+        RuntimeException exception = Assert.assertThrows(RuntimeException.class,
+                () -> csvFileWriter.write(invalidPathToFile, report));
+        Assert.assertEquals(InvalidPathMessage + invalidPathToFile,
                 exception.getMessage());
     }
 }

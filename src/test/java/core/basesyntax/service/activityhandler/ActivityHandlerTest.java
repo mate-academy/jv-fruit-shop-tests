@@ -3,9 +3,9 @@ package core.basesyntax.service.activityhandler;
 import core.basesyntax.exceptions.NotEnoughFruitsInStorageException;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ActivityHandlerTest {
     private static Map<String, Integer> storage;
@@ -19,67 +19,67 @@ public class ActivityHandlerTest {
     private static final Integer secondAmount = 15;
     private static final Integer zero = 0;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         storage = new HashMap<>();
         storage.put("apple", 10);
         storage.put("pear", 15);
     }
 
     @Test
-    void balanceHandlerProcessActivity_Ok() {
+    public void balanceHandlerProcessActivity_Ok() {
         activityHandler = new BalanceHandler();
         try {
             activityHandler.processActivity(storage, firstFruit, firstAmount);
         } catch (NotEnoughFruitsInStorageException e) {
-            Assertions.fail(noExceptionMessage);
+            Assert.fail(noExceptionMessage);
         }
-        Assertions.assertEquals(firstAmount, storage.get(firstFruit));
+        Assert.assertEquals(firstAmount, storage.get(firstFruit));
     }
 
     @Test
-    void purcahseHandlerProcessActivity_Ok() {
+    public void purcahseHandlerProcessActivity_Ok() {
         activityHandler = new PurchaseHandler();
         try {
             activityHandler.processActivity(storage, secondFruit, firstAmount);
         } catch (NotEnoughFruitsInStorageException e) {
-            Assertions.fail(noExceptionMessage);
+            Assert.fail(noExceptionMessage);
         }
-        Assertions.assertEquals(zero, storage.get(secondFruit));
+        Assert.assertEquals(zero, storage.get(secondFruit));
     }
 
     @Test
-    void purcahseHandlerProcessActivity_NotOk() {
+    public void purcahseHandlerProcessActivity_NotOk() {
         activityHandler = new PurchaseHandler();
         try {
             activityHandler.processActivity(storage, secondFruit, secondAmount);
         } catch (NotEnoughFruitsInStorageException e) {
-            Assertions.assertEquals(notEnoughFruitsMessage, e.getMessage());
+            Assert.assertEquals(notEnoughFruitsMessage, e.getMessage());
             return;
         }
-        Assertions.fail(exceptionMessage);
+        Assert.fail(exceptionMessage);
 
     }
 
     @Test
-    void returnHandlerProcessActivity_Ok() {
+    public void returnHandlerProcessActivity_Ok() {
         activityHandler = new ReturnHandler();
         try {
             activityHandler.processActivity(storage, secondFruit, firstAmount);
         } catch (NotEnoughFruitsInStorageException e) {
-            Assertions.fail(noExceptionMessage);
+            Assert.fail(noExceptionMessage);
         }
-        Assertions.assertEquals(Integer.valueOf(20), storage.get(secondFruit));
+        Assert.assertEquals(Integer.valueOf(20), storage.get(secondFruit));
     }
 
     @Test
-    void supplyHandlerProcessActivity_Ok() {
+    public void supplyHandlerProcessActivity_Ok() {
         activityHandler = new SupplyHandler();
         try {
             activityHandler.processActivity(storage, secondFruit, secondAmount);
         } catch (NotEnoughFruitsInStorageException e) {
-            Assertions.fail(noExceptionMessage);
+            Assert.fail(noExceptionMessage);
         }
-        Assertions.assertEquals(Integer.valueOf(25), storage.get(secondFruit));
+        Assert.assertEquals(Integer.valueOf(25), storage.get(secondFruit));
     }
 }

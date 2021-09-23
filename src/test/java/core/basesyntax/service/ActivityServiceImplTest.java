@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-class ActivityServiceTest {
+public class ActivityServiceImplTest {
     private static final String validHead = "type,fruit,quantity";
     private ActivityService activityService;
     private List<String> activities;
     private ActivityTypeStrategy activityStrategy;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         activityService = new ActivityServiceImpl();
         Map<ActivityType, ActivityHandler> handlerMap = new HashMap<>();
         handlerMap.put(ActivityType.b, new BalanceHandler());
@@ -34,12 +34,11 @@ class ActivityServiceTest {
     }
 
     @Test
-    void processActivitiesWorkabilityOk() {
+    public void processActivitiesWorkabilityOk() {
         Map<String, Integer> mapExpected
                 = Map.of("banana", 10, "apple", 100);
         Map<String, Integer> mapActual
                 = activityService.processActivities(activityStrategy, activities);
-        Assertions.assertEquals(mapExpected, mapActual);
-
+        Assert.assertEquals(mapExpected, mapActual);
     }
 }

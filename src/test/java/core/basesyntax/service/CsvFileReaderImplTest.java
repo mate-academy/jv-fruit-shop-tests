@@ -1,33 +1,33 @@
 package core.basesyntax.service;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CsvFileReaderTest {
+public class CsvFileReaderImplTest {
     private static final String validPathToFile
             = "src/main/java/core/basesyntax/files/activities.csv";
     private static final String invalidPathToFile
             = "src/main/java/core/basesyntax/activities.csv";
     private static final String InvalidPathMessage
             = "Can't read from path: ";
-    private CsvFileReader csvFileReader;
+    private static CsvFileReader csvFileReader;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         csvFileReader = new CsvFileReaderImpl();
     }
 
     @Test
-    void readWorkabilityOk() {
+    public void readWorkabilityOk() {
         csvFileReader.read(validPathToFile);
     }
 
     @Test
-    void readInvalidPathNotOk() {
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
+    public void readInvalidPathNotOk() {
+        RuntimeException exception = Assert.assertThrows(RuntimeException.class,
                 () -> csvFileReader.read(invalidPathToFile));
-        Assertions.assertEquals(InvalidPathMessage + invalidPathToFile,
+        Assert.assertEquals(InvalidPathMessage + invalidPathToFile,
                 exception.getMessage());
     }
 }

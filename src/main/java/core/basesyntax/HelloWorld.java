@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
-    private static final String destFile = "src\\main"
-            + "\\java\\core\\basesyntax\\source\\storage.csv";
-    private static final String sourceFile = "src\\main"
-            + "\\java\\core\\basesyntax\\source\\data.csv";
+    private static final String destFile = "src/main"
+            + "/java/core/basesyntax/source/storage.csv";
+    private static final String sourceFile = "src/main"
+            + "/java/core/basesyntax/source/data.csv";
 
     public static void main(String[] args) {
         FileService fileService = new CSvFileService();

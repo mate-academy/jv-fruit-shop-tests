@@ -7,8 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReadingTest {
-    private static final String INPUT_FILE_CSV = "src/main/resources/inputFile.csv";
-    private static final String NON_EXISTENT_FILE = "src/main/resources/inputFakeFile.csv";
+    private static final String INPUT_FILE_CSV = "src/test/java/resources/inputFile.csv";
+    private static final String NON_EXISTENT_FILE = "src/test/java/resources/inputFakeFile.csv";
     private static FileService fileService;
 
     @BeforeClass

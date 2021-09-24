@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WriteReportToFileTest {
-    private static final String REPORT_FILE_CSV = "src/main/resources/testReport.csv";
+    private static final String REPORT_FILE_CSV = "src/test/java/resources/testReport.csv";
     private static ReportWriter reportWriter;
 
     @BeforeAll

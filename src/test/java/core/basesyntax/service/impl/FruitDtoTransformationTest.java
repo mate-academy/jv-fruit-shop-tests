@@ -28,7 +28,7 @@ public class FruitDtoTransformationTest {
 
     @Test
     public void fruitDtoTransformation_addCorrectData_Ok() {
-        List<FruitOperationDto> transform = mapper.transform(inputValues);
-        assertEquals(actual, transform);
+        List<FruitOperationDto> expected = mapper.transform(inputValues);
+        assertEquals(actual, expected);
     }
 }

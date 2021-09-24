@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class FileReaderImplTest {
     private static FileReader fileReader;

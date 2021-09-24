@@ -25,7 +25,8 @@ public class FileWriterTest {
         expected.add("apple,100");
         fileWriter.write(expected, CORRECT_PATH);
         List<String> actual = fileReader.read(CORRECT_PATH);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Written and expected data differ"
+                + " from each other!", expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

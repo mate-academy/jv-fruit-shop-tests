@@ -30,30 +30,29 @@ public class FruitRecordToListImplTest {
     @Test
     public void fruitRecordToList_normalData_Ok() {
         expected = records;
-        assertEquals(expected, recordToList.fruitRecordToList(normalData));
+        assertEquals("Can't write this data to the list " + normalData,
+                expected, recordToList.fruitRecordToList(normalData));
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitRecordToList_emptyData_not_Ok() {
-        assertEquals(expected, recordToList.fruitRecordToList("").getClass());
+        recordToList.fruitRecordToList("");
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitRecordToList_checkNull_not_Ok() {
-        assertEquals(expected, recordToList.fruitRecordToList(null).getClass());
+        recordToList.fruitRecordToList(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitRecordToList_invalidSyntax_not_Ok() {
         String invalidSyntax = "b,orange,20 b,cherry,1,000";
         actual = recordToList.fruitRecordToList(invalidSyntax);
-        assertEquals(expected, actual.getClass());
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitRecordToList_invalidAmount_not_Ok() {
         String invalidAmount = "b,orange,20 b,cherry,-1000";
         actual = recordToList.fruitRecordToList(invalidAmount);
-        assertEquals(expected, actual.getClass());
     }
 }

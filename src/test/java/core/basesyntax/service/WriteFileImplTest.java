@@ -23,11 +23,12 @@ public class WriteFileImplTest {
 
     @Test
     public void writeFile_normalData_Ok() {
-        assertTrue(writeFile.writeWithMapToFile(inputMap,reportPath));
+        assertTrue("Failed write data to the file",
+                writeFile.writeWithMapToFile(inputMap,reportPath));
     }
 
     @Test(expected = RuntimeException.class)
     public void writeFile_incorrectPath_notOk() {
-        assertTrue(writeFile.writeWithMapToFile(inputMap,"helloWorld/helloWord.csv"));
+        writeFile.writeWithMapToFile(inputMap,"helloWorld/helloWord.csv");
     }
 }

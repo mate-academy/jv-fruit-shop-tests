@@ -30,10 +30,14 @@ public class ActivitiesStrategyImplTest {
 
     @Test
     public void activitiesStrategy_normalData_Ok() {
-        assertEquals(strategy.get(TypeOfActivities.BALANCE).getClass(),BalanceHandler.class);
-        assertEquals(strategy.get(TypeOfActivities.PURCHASE).getClass(),PurchaseHandler.class);
-        assertEquals(strategy.get(TypeOfActivities.RETURN).getClass(),ReturnHandler.class);
-        assertEquals(strategy.get(TypeOfActivities.SUPPLY).getClass(),SupplyHandler.class);
+        assertEquals("Failed to add strategy " + TypeOfActivities.BALANCE,
+                strategy.get(TypeOfActivities.BALANCE).getClass(), BalanceHandler.class);
+        assertEquals("Failed to add strategy " + TypeOfActivities.PURCHASE,
+                strategy.get(TypeOfActivities.PURCHASE).getClass(), PurchaseHandler.class);
+        assertEquals("Failed to add strategy " + TypeOfActivities.SUPPLY,
+                strategy.get(TypeOfActivities.RETURN).getClass(), ReturnHandler.class);
+        assertEquals("Failed to add strategy " + TypeOfActivities.RETURN,
+                strategy.get(TypeOfActivities.SUPPLY).getClass(), SupplyHandler.class);
     }
 
     @Test(expected = RuntimeException.class)

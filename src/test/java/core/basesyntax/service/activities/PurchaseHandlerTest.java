@@ -30,14 +30,16 @@ public class PurchaseHandlerTest {
         balanceHandler.apply(recordOrangeBalance);
         purchaseHandler.apply(recordOrangePurchase);
         int expected = 50;
-        assertEquals(expected, (int)Storage.fruitsQuantity.get(recordOrangePurchase.getFruit()));
+        assertEquals("Can't write this record to db " + recordOrangePurchase,
+                expected, (int)Storage.fruitsQuantity.get(recordOrangePurchase.getFruit()));
     }
 
     @Test
     public void purchaseHandler_toZeroBalance_Ok() {
         balanceHandler.apply(recordOrangeBalance);
         purchaseHandler.apply(recordOrangePurchase1);
-        assertEquals(0,
+        assertEquals("Can't write this record to db " + recordOrangePurchase1,
+                0,
                 (int) Storage.fruitsQuantity.get(recordOrangePurchase1.getFruit()));
     }
 
@@ -45,8 +47,6 @@ public class PurchaseHandlerTest {
     public void purchaseHandler_missingFruitInStorage_NotOk() {
         balanceHandler.apply(recordCherryBalance);
         purchaseHandler.apply(recordOrangePurchase);
-        assertEquals(expected,
-                Storage.fruitsQuantity.get(recordOrangePurchase.getFruit()).getClass());
     }
 
     @Test(expected = RuntimeException.class)
@@ -54,7 +54,5 @@ public class PurchaseHandlerTest {
         balanceHandler.apply(recordOrangeBalance);
         purchaseHandler.apply(recordOrangePurchase);
         purchaseHandler.apply(recordOrangePurchase1);
-        assertEquals(expected,
-                Storage.fruitsQuantity.get(recordOrangePurchase.getFruit()).getClass());
     }
 }

@@ -29,7 +29,8 @@ public class ReturnHandlerTest {
     public void returnHandler_normalData_Ok() {
         balanceHandler.apply(recordOrangeBalance);
         returnHandler.apply(recordOrangeReturn);
-        assertEquals(108, (int) Storage.fruitsQuantity.get(recordOrangeReturn.getFruit()));
+        assertEquals("Can't update data in db " + recordOrangeReturn,
+                108, (int) Storage.fruitsQuantity.get(recordOrangeReturn.getFruit()));
     }
 
     @Test(expected = RuntimeException.class)
@@ -42,6 +43,7 @@ public class ReturnHandlerTest {
     public void returnHandler_veryBigReturn_Ok() {
         balanceHandler.apply(recordOrangeBalance);
         returnHandler.apply(recordOrangeBigReturn);
-        assertEquals(10000100, (int) Storage.fruitsQuantity.get(recordOrangeBigReturn.getFruit()));
+        assertEquals("Can't update data in db " + recordOrangeBigReturn,
+                10000100, (int) Storage.fruitsQuantity.get(recordOrangeBigReturn.getFruit()));
     }
 }

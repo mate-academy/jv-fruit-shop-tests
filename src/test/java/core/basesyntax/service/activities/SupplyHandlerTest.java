@@ -26,7 +26,8 @@ public class SupplyHandlerTest {
     @Test
     public void supplyHandler_addNewSupplyInEmptyDb_Ok() {
         supplyHandler.apply(recordOrangeSupply);
-        assertTrue(Storage.fruitsQuantity.containsKey(recordOrangeSupply.getFruit())
+        assertTrue("Can't write this record to db " + recordOrangeSupply,
+                Storage.fruitsQuantity.containsKey(recordOrangeSupply.getFruit())
                 && Storage.fruitsQuantity.containsValue(recordOrangeSupply.getAmount()));
     }
 
@@ -34,6 +35,7 @@ public class SupplyHandlerTest {
     public void supplyHandler_normalSupply_Ok() {
         balanceHandler.apply(recordOrangeBalance);
         supplyHandler.apply(recordOrangeSupply);
-        assertEquals(150, (int) Storage.fruitsQuantity.get(recordOrangeSupply.getFruit()));
+        assertEquals("Can't write this record to db " + recordOrangeSupply,
+                150, (int) Storage.fruitsQuantity.get(recordOrangeSupply.getFruit()));
     }
 }

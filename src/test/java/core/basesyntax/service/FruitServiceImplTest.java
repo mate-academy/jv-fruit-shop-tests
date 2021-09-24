@@ -65,10 +65,11 @@ public class FruitServiceImplTest {
     public void fruitService_normalData_Ok() {
         fruitService = new FruitServiceImpl(strategy);
         fruitService.recordToMap(records);
-        assertTrue(Storage.fruitsQuantity.containsKey("orange")
+        assertTrue("Missing key 'orange'",
+                Storage.fruitsQuantity.containsKey("orange")
                 && Storage.fruitsQuantity.get("orange") == 18);
-        assertTrue(Storage.fruitsQuantity.containsKey("cherry")
+        assertTrue("missing key 'cherry'",Storage.fruitsQuantity.containsKey("cherry")
                 && Storage.fruitsQuantity.get("cherry") == 45);
-        assertEquals(2, Storage.fruitsQuantity.size());
+        assertEquals("Wrong size, " + 2,2, Storage.fruitsQuantity.size());
     }
 }

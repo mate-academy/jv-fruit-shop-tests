@@ -45,7 +45,8 @@ public class FruitShopImplTest {
     public void fruitShop_normalData_Ok() {
         fruitShop = new FruitShopImpl(strategy, filePathNormalData, reportPath);
         expected = "Report created!";
-        assertEquals(expected, fruitShop.createNewReport());
+        assertEquals("Can't create report at this file "
+                + filePathNormalData, expected, fruitShop.createNewReport());
     }
 
     @Test(expected = RuntimeException.class)

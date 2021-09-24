@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.fruitrecord.FruitRecord;
+import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +25,8 @@ public class BalanceHandlerTest {
     public void balanceHandler_addNewBalance_Ok() {
         FruitRecord fruitRecord = new FruitRecord(normalRecord);
         balanceHandler.apply(fruitRecord);
-        assertTrue(Storage.fruitsQuantity.containsKey(fruitRecord.getFruit())
+        assertTrue("Can't write this record to db " + Arrays.toString(normalRecord),
+                Storage.fruitsQuantity.containsKey(fruitRecord.getFruit())
                 && Storage.fruitsQuantity.containsValue(fruitRecord.getAmount()));
     }
 
@@ -34,7 +36,8 @@ public class BalanceHandlerTest {
         FruitRecord fruitRecord1 = new FruitRecord(normalRecord1);
         balanceHandler.apply(fruitRecord);
         balanceHandler.apply(fruitRecord1);
-        assertEquals(fruitRecord1.getAmount(),
+        assertEquals("Can't update data in db " + Arrays.toString(normalRecord1),
+                fruitRecord1.getAmount(),
                 (int) Storage.fruitsQuantity.get(fruitRecord.getFruit()));
     }
 
@@ -42,6 +45,5 @@ public class BalanceHandlerTest {
     public void balanceHandler_incorrectData_notOk() {
         FruitRecord fruitRecord = new FruitRecord(incorrectRecord1);
         balanceHandler.apply(fruitRecord);
-        assertEquals(expected, Storage.fruitsQuantity.get(fruitRecord.getFruit()));
     }
 }

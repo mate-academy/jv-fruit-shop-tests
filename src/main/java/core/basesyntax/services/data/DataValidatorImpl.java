@@ -7,10 +7,11 @@ public class DataValidatorImpl implements DataValidator {
     public static final int INDEX_OF_AMOUNT = 2;
 
     @Override
-    public void validate(String[] datumArray) {
+    public boolean validate(String[] datumArray) {
         if (datumArray.length != NUMBER_OF_COLUMNS
                 || Integer.parseInt(datumArray[INDEX_OF_AMOUNT]) <= 0) {
             throw new RuntimeException("Wrong data input: " + Arrays.toString(datumArray));
         }
+        return true;
     }
 }

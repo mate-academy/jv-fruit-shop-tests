@@ -9,17 +9,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private TransactionParser transaction;
+    private TransactionParser transactionParser;
 
     @Before
     public void setUp() {
-        transaction = new TransactionParserImpl();
+        transactionParser = new TransactionParserImpl();
     }
 
     @Test
     public void parse_Ok() {
         String data = "b,banana,20";
-        Transaction actual = transaction.parse(data);
+        Transaction actual = transactionParser.parse(data);
         Transaction expected = new Transaction(Transaction.Operation.BALANCE,
                 new Fruit("banana"), 20);
         assertEquals(expected, actual);

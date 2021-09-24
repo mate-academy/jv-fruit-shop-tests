@@ -2,8 +2,6 @@ package core.basesyntax.service.storage;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.parsing.Parsing;
-import core.basesyntax.service.parsing.ParsingImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +22,8 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public boolean applyToDb(List<String> dataFromFile) {
-        Parsing parsing = new ParsingImpl();
         for (int i = 0; i < dataFromFile.size(); i++) {
-            String[] data = parsing.parsing(dataFromFile.get(i));
+            String[] data = dataFromFile.get(i).split(CSV_SEPARATOR);
             Fruit operationFruit =
                     new Fruit(Fruit.OperationType.get(data[OPERATION_INDEX]),
                             data[FRUIT_INDEX],

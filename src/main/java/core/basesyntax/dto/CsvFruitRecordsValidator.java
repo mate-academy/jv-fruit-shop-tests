@@ -16,11 +16,11 @@ public class CsvFruitRecordsValidator implements FruitRecordsValidator {
         if (dataInString.length() == 0) {
             throw new RuntimeException("No data in file: " + dataInString);
         }
+        dataInString = dataInString.substring(dataInString.indexOf(RECORD_SEPARATOR)
+                + APPEND_TO_REMOVE_TITLE);
         if (!dataInString.matches(RECORD_PATTERN)) {
             throw new RuntimeException("Records separated incorrect: " + dataInString);
         }
-        dataInString = dataInString.substring(dataInString.indexOf(RECORD_SEPARATOR)
-                + APPEND_TO_REMOVE_TITLE);
         String[] arrOfRecords = dataInString.split(RECORD_SEPARATOR);
         Set<Character> typesSet = operator.getTypesOfOperations().keySet();
         for (String strToChek : arrOfRecords) {

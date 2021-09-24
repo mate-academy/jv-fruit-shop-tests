@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private Parser parser = new ParserImpl();
+    private final Parser parser = new ParserImpl();
     private List<String> testList;
 
     @Test

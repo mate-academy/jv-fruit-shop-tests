@@ -13,8 +13,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationsStrategyImplTest {
-    private static Map<TransactionDto.OperationTypes, OperationHendler> strategy = new HashMap<>();
-    private OperationsStrategy operationsStrategy = new OperationsStrategyImpl(strategy);
+    private static final Map<TransactionDto.OperationTypes, OperationHendler> strategy =
+            new HashMap<>();
+    private final OperationsStrategy operationsStrategy = new OperationsStrategyImpl(strategy);
 
     @BeforeClass
     public static void beforeClass() throws Exception {

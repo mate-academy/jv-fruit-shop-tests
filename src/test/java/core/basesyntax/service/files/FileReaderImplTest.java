@@ -14,8 +14,8 @@ public class FileReaderImplTest {
             "src/main/java/core/basesyntax/recources/invalid.csv";
     private static final String EMPTY_FILE =
             "src/main/java/core/basesyntax/recources/emptyForReader.csv";
-    private FileReader fileReader = new FileReaderImpl();
-    private List<String> expected = new ArrayList<>();
+    private final FileReader fileReader = new FileReaderImpl();
+    private List<String> testList;
 
     @Test
     public void readFile_notValidPath_NotOk() {
@@ -25,8 +25,10 @@ public class FileReaderImplTest {
 
     @Test
     public void readFile_validPath_ok() {
-        expected.add("b,banana,20");
-        expected.add("b,apple,100");
+        testList = new ArrayList<>();
+        testList.add("b,banana,20");
+        testList.add("b,apple,100");
+        List<String> expected = new ArrayList<>(testList);
         List<String> actual = fileReader.readFile(VALID_PATH);
         assertEquals("For valid path we should return valid list", expected, actual);
     }

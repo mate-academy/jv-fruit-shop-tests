@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class ValidatorImplTest {
-    private Validator validator = new ValidatorImpl();
+    private final Validator validator = new ValidatorImpl();
     private List<String> testList;
 
     @Test

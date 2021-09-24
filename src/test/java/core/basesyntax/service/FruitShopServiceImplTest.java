@@ -22,7 +22,6 @@ public class FruitShopServiceImplTest {
             new HashMap<>();
     private static final OperationsStrategy operationsStrategy =
             new OperationsStrategyImpl(strategy);
-    private static final Map<String, Integer> FRUIT_COUNT = Storage.FRUIT_COUNT;
     private final FruitShopService fruitShopService =
             new FruitShopServiceImpl(operationsStrategy);
     private List<TransactionDto> testList;
@@ -42,10 +41,10 @@ public class FruitShopServiceImplTest {
         testList.add(new TransactionDto(TransactionDto.OperationTypes.BALANCE, "apple", 200));
         fruitShopService.applyOperationsOnFruitsDto(testList);
         int expected = 300;
-        int actual = FRUIT_COUNT.get("apple");
+        int actual = Storage.FRUIT_COUNT.get("apple");
         assertEquals("Method should return: " + expected + " but was: " + actual,
                 expected, actual);
-        FRUIT_COUNT.clear();
+        Storage.FRUIT_COUNT.clear();
     }
 
     @Test
@@ -55,10 +54,10 @@ public class FruitShopServiceImplTest {
         testList.add(new TransactionDto(TransactionDto.OperationTypes.PURCHASE, "apple", 50));
         fruitShopService.applyOperationsOnFruitsDto(testList);
         int expected = 50;
-        int actual = FRUIT_COUNT.get("apple");
+        int actual = Storage.FRUIT_COUNT.get("apple");
         assertEquals("Method should return: " + expected + " but was: " + actual,
                 expected, actual);
-        FRUIT_COUNT.clear();
+        Storage.FRUIT_COUNT.clear();
     }
 
     @Test
@@ -68,6 +67,6 @@ public class FruitShopServiceImplTest {
         assertThrows("Method should return RuntimeExeption when result less than zero",
                 RuntimeException.class,
                 () -> fruitShopService.applyOperationsOnFruitsDto(testList));
-        FRUIT_COUNT.clear();
+        Storage.FRUIT_COUNT.clear();
     }
 }

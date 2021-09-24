@@ -5,13 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.Validator;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
 
 public class FruitOperationDtoValidatorTest {
     private static final String CORRECT_DATA = "b,apple,10";

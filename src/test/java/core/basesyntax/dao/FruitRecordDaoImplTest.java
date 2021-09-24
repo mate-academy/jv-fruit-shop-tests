@@ -7,6 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitRecord;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,6 +27,12 @@ public class FruitRecordDaoImplTest {
         expected.add(new FruitRecord("r", "banana", 5));
     }
 
+    @After
+    public void everyTest() {
+        Storage.fruitRecordList.clear();
+        Storage.fruitMap.clear();
+    }
+
     @Test
     public void checkListOfFruitRecordsAdd_Ok() {
         fruitRecordDao.saveAll(expected);
@@ -36,14 +43,13 @@ public class FruitRecordDaoImplTest {
     @Test
     public void checkListOfFruitRecords_NotOk() {
         fruitRecordDao.saveAll(expected);
+        Storage.fruitRecordList.remove(0);
         actual = Storage.fruitRecordList;
-        actual.remove(0);
         assertNotEquals(expected, actual);
     }
 
     @Test
     public void checkListOfFruitRecordsGet_Ok() {
-        Storage.fruitRecordList.clear();
         Storage.fruitRecordList.addAll(expected);
         actual = fruitRecordDao.getAll();
         assertEquals(expected, actual);

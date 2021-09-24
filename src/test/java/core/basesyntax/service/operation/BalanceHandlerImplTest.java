@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitRecord;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +19,12 @@ public class BalanceHandlerImplTest {
     public static void setUp() {
         operationHandler = new BalanceHandlerImpl();
         expected = new HashMap<>();
+    }
+
+    @After
+    public void everyTest() {
+        Storage.fruitRecordList.clear();
+        Storage.fruitMap.clear();
     }
 
     @Test

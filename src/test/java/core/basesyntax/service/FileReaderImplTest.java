@@ -6,27 +6,27 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReadFileImplTest {
-    private static WriteToFile writeToFile;
-    private static ReadFile readFile;
+public class FileReaderImplTest {
+    private static FileWriter fileWriter;
+    private static FileReader fileReader;
     private String toReadFile;
 
     @BeforeClass
     public static void setUp() {
-        writeToFile = new WriteToFileImpl();
-        readFile = new ReadFileImpl();
+        fileWriter = new FileWriterImpl();
+        fileReader = new FileReaderImpl();
     }
 
     @Test (expected = ValidationException.class)
     public void readFromWrongFilePath_NotOk() {
         toReadFile = "src/main/testfile.csv";
-        readFile.readFromFile(toReadFile);
+        fileReader.readFromFile(toReadFile);
     }
 
     @Test
     public void readFileWithCorrectPath_Ok() {
         toReadFile = "src/main/resources/testfile.csv";
-        List<String> list = readFile.readFromFile(toReadFile);
+        List<String> list = fileReader.readFromFile(toReadFile);
         assertEquals(list.size(), 1);
         assertEquals(list.get(0), "test of file");
     }

@@ -7,6 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitRecord;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +19,12 @@ public class ReturnHandlerImplTest {
     @BeforeClass
     public static void setUp() {
         operationHandler = new ReturnHandlerImpl();
+    }
+
+    @After
+    public void everyTest() {
+        Storage.fruitRecordList.clear();
+        Storage.fruitMap.clear();
     }
 
     @Test

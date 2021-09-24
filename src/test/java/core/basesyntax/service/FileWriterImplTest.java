@@ -5,31 +5,31 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriteToFileImplTest {
-    private static WriteToFile writeToFile;
-    private static ReadFile readFile;
+public class FileWriterImplTest {
+    private static FileWriter fileWriter;
+    private static FileReader fileReader;
     private String toWriteFile;
     private String toWriteData;
 
     @BeforeClass
     public static void setUp() {
-        writeToFile = new WriteToFileImpl();
-        readFile = new ReadFileImpl();
+        fileWriter = new FileWriterImpl();
+        fileReader = new FileReaderImpl();
     }
 
     @Test (expected = ValidationException.class)
     public void writeToWrongPath_NotOk() {
         toWriteData = "test of file";
         toWriteFile = "";
-        writeToFile.writeToFile(toWriteFile, toWriteData);
+        fileWriter.writeToFile(toWriteFile, toWriteData);
     }
 
     @Test
     public void writeToFileCorrectPath_Ok() {
         toWriteData = "test of file";
         toWriteFile = "src/main/resources/testfile.csv";
-        writeToFile.writeToFile(toWriteFile, toWriteData);
-        List<String> list = readFile.readFromFile(toWriteFile);
+        fileWriter.writeToFile(toWriteFile, toWriteData);
+        List<String> list = fileReader.readFromFile(toWriteFile);
         Assert.assertEquals(list.size(), 1);
         Assert.assertEquals(list.get(0), toWriteData);
     }

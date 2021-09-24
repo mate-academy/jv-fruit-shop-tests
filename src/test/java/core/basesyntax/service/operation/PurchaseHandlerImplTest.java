@@ -7,6 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitRecord;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,11 +21,16 @@ public class PurchaseHandlerImplTest {
         operationHandler = new PurchaseHandlerImpl();
     }
 
+    @After
+    public void everyTest() {
+        Storage.fruitRecordList.clear();
+        Storage.fruitMap.clear();
+    }
+
     @Test
     public void checkFruitPurchase_Ok() {
         expected = new HashMap<>();
         expected.put("banana",10);
-        Storage.fruitMap.clear();
         Storage.fruitMap.put("banana",20);
         fruitRecord = new FruitRecord("p","banana",10);
         operationHandler.applyOperation(fruitRecord);
@@ -45,7 +51,6 @@ public class PurchaseHandlerImplTest {
     public void checkTwoFruitPurcahse_Ok() {
         expected = new HashMap<>();
         expected.put("banana",10);
-        Storage.fruitMap.clear();
         Storage.fruitMap.put("banana",20);
         fruitRecord = new FruitRecord("p","banana",10);
         operationHandler.applyOperation(fruitRecord);

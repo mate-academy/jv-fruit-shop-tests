@@ -14,14 +14,6 @@ public class DtoCreatorImplTest {
     private List<String> inputData;
     private List<RecordDto> recordDtos;
 
-    public DtoCreatorImpl getDtoCreator() {
-        return dtoCreator;
-    }
-
-    public List<String> getInputData() {
-        return inputData;
-    }
-
     @Before
     public void setUp() throws Exception {
         dtoCreator = new DtoCreatorImpl();
@@ -50,7 +42,6 @@ public class DtoCreatorImplTest {
         recordDtos.add(thirdDto);
         recordDtos.add(fourthDto);
         recordDtos.add(fifthDto);
-
         Assert.assertEquals(recordDtos, dtoCreator.toDtoDataFormatter(inputData));
     }
 }

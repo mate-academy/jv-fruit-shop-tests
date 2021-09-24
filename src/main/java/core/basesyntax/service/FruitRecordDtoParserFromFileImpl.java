@@ -11,6 +11,9 @@ public class FruitRecordDtoParserFromFileImpl implements FruitRecordDtoParser {
     public FruitRecordDto parse(String line) {
         FruitRecordDto fruitRecordDto = new FruitRecordDto();
         String[] lineSplit = line.split(",");
+        if (lineSplit.length != 3) {
+            throw new RuntimeException("An exception occurred during data parsing " + line);
+        }
         fruitRecordDto.setType(Validator.checkType(lineSplit[ACTIVITIES_TYPE]));
         fruitRecordDto.setFruit(Validator.checkFruitName(line.split(",")[FRUIT]));
         fruitRecordDto.setAmount(Validator.checkAmount(Integer.parseInt(line.split(",")[AMOUNT])));

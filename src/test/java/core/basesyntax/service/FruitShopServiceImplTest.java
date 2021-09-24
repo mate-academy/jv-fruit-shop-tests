@@ -1,15 +1,10 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.bd.Storage;
 import core.basesyntax.model.FruitRecordDto;
-import core.basesyntax.service.type.service.BalanceHandler;
-import core.basesyntax.service.type.service.OperationHandler;
-import core.basesyntax.service.type.service.PurchaseHandler;
-import core.basesyntax.service.type.service.ReturnHandler;
-import core.basesyntax.service.type.service.SupplyHandler;
+import core.basesyntax.service.type.service.*;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.AfterClass;
@@ -55,16 +50,6 @@ public class FruitShopServiceImplTest {
         int expectedApple = apple.getAmount();
         int actualApple = Storage.fruitQuantity.get("apple");
         assertEquals(expectedApple, actualApple);
-    }
-
-    @Test
-    public void transfer_incorrectTransfer_NotOk() {
-        int expectedApple = apple.getAmount();
-        int actualBanana = Storage.fruitQuantity.get("banana");
-        assertNotEquals(expectedApple, actualBanana);
-        int expectedBanana = banana.getAmount();
-        int actualApple = Storage.fruitQuantity.get("apple");
-        assertNotEquals(expectedBanana, actualApple);
     }
 
     @AfterClass

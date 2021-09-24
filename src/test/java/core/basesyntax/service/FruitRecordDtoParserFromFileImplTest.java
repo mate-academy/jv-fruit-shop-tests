@@ -28,10 +28,11 @@ public class FruitRecordDtoParserFromFileImplTest {
     public void parse_incorrectString_NotOk() {
         try {
             fruitRecordDtoParserFromFile.parse(INCORRECT_STRING);
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             return;
         }
-        fail("Should throw NullPointerException");
+        fail("Should throw Exception: "
+                + "'An exception occurred during data parsing + line'");
     }
 
     @Test

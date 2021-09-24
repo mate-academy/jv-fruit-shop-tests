@@ -32,7 +32,7 @@ public class OperationTest {
     }
 
     @Test
-    public void operationBalance() {
+    public void operationBalance_IsOk() {
         fruit = new Fruit("banana");
         dtoFirst = new TransactionDto(OperationType.BALANCE, fruit, 58);
         balance.applyOperation(dtoFirst);
@@ -42,7 +42,7 @@ public class OperationTest {
     }
 
     @Test
-    public void operationSupplyIfStorageIsEmpty() {
+    public void operationSupply_IfStorageIsEmpty_IsOk() {
         fruit = new Fruit("banana");
         dtoFirst = new TransactionDto(OperationType.SUPPLY, fruit, 36);
         supply.applyOperation(dtoFirst);
@@ -52,7 +52,7 @@ public class OperationTest {
     }
 
     @Test
-    public void operationSupplyIfStorageIsNotEmpty() {
+    public void operationSupply_IfStorageIsNotEmpty_IsOk() {
         fruit = new Fruit("banana");
         dtoFirst = new TransactionDto(OperationType.SUPPLY, fruit, 36);
         dtoSecond = new TransactionDto(OperationType.BALANCE, fruit, 45);
@@ -85,7 +85,7 @@ public class OperationTest {
     }
 
     @Test
-    public void operationReturn() {
+    public void operationReturn_IsOk() {
         fruit = new Fruit("banana");
         dtoFirst = new TransactionDto(OperationType.RETURN, fruit, 10);
         dtoSecond = new TransactionDto(OperationType.BALANCE, fruit, 45);

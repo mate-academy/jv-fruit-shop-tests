@@ -47,7 +47,7 @@ public class ServiceTest {
     }
 
     @Test
-    public void readFileTest() {
+    public void readFile_correctPath_Is_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -62,8 +62,13 @@ public class ServiceTest {
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
+    @Test(expected = RuntimeException.class)
+    public void readFile_inCorrectPath_IsNotOk() {
+        List<String> actual = readerService.readFile("src//main//resources//");
+    }
+
     @Test
-    public void writeFileTest() {
+    public void writeFile_correctPath_Is_Ok() {
         String path = "src//main//resources//reportFile.csv";
         String data = "fruit,quantity\nbanana,152\napple,90\n";
         String expected = "fruit,quantity\nbanana,152\napple,90\n";
@@ -76,8 +81,15 @@ public class ServiceTest {
         }
     }
 
+    @Test(expected = RuntimeException.class)
+    public void writeFile_inCorrectPath_IsNotOk() {
+        String path = "src//main//resources//";
+        String data = "fruit,quantity\nbanana,152\napple,90\n";
+        fileWriterService.writeToFile(data, path);
+    }
+
     @Test
-    public void createReportIsOk() {
+    public void createReport_IsOk() {
         Storage.fruitBalance.put("banana", 56);
         Storage.fruitBalance.put("apple", 73);
         Storage.fruitBalance.put("mango", 42);
@@ -90,7 +102,7 @@ public class ServiceTest {
     }
 
     @Test
-    public void createDto() {
+    public void createDto_IsOk() {
         List<String> data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b,banana,20");
@@ -115,7 +127,7 @@ public class ServiceTest {
     }
 
     @Test
-    public void applyOperationsOnTransactionDto() {
+    public void applyOperationsOnTransactionDto_IsOk() {
         List<TransactionDto> dtoList = new ArrayList<>();
         dtoList.add(new TransactionDto(OperationType.BALANCE, new Fruit("banana"), 20));
         dtoList.add(new TransactionDto(OperationType.BALANCE, new Fruit("apple"), 100));

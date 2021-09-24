@@ -22,19 +22,19 @@ public class ValidatorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateSpecificData_IncorrectDataLength() {
+    public void validateSpecificData_IncorrectDataLength_NotOk() {
         String[] data = {"p", "banana"};
         validator.validateTransaction(data);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateSpecificData_IncorrectQuantityOfFruit() {
+    public void validateSpecificData_IncorrectQuantityOfFruit_NotOk() {
         String[] data = {"b", "banana", "-100"};
         validator.validateTransaction(data);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateSpecificData_IncorrectOperation() {
+    public void validateSpecificData_IncorrectOperation_NotOk() {
         String[] data = {"t", "banana", "100"};
         validator.validateTransaction(data);
     }

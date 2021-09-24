@@ -27,28 +27,28 @@ public class StrategyTest {
     }
 
     @Test
-    public void operationSupply() {
+    public void getOperationSupply_IsOk() {
         OperationHandler actual = operationStrategy.get(OperationType.SUPPLY);
         OperationHandler expected = new SupplyOperationHandler();
         Assert.assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    public void operationBalance() {
+    public void getOperationBalance_IsOk() {
         OperationHandler actual = operationStrategy.get(OperationType.BALANCE);
         OperationHandler expected = new BalanceOperationHandler();
         Assert.assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    public void operationPurchase() {
+    public void getOperationPurchase_IsOk() {
         OperationHandler actual = operationStrategy.get(OperationType.PURCHASE);
         OperationHandler expected = new PurchaseOperationHandler();
         Assert.assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    public void operationReturn() {
+    public void getOperationReturn_IsOk() {
         OperationHandler actual = operationStrategy.get(OperationType.RETURN);
         OperationHandler expected = new ReturnOperationHandler();
         Assert.assertEquals(actual.getClass(), expected.getClass());

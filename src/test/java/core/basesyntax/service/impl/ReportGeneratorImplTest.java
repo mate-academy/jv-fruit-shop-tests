@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;

@@ -24,7 +24,6 @@ public class FileWriterImplTest {
                 + System.lineSeparator()
                 + "apple,91"
                 + System.lineSeparator();
-        actual = new ArrayList<>();
         expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,200");

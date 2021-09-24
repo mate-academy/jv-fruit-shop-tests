@@ -34,12 +34,15 @@ public class FruitShopServiceImplTest {
         handlerMap.put(Operation.RETURN, new ReturnHandlerImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        Integer expected = Storage.storage.get(new Fruit("banana"));
         fruitRecordList = new ArrayList<>();
         fruitRecordList.add(new FruitRecord("b", new Fruit("banana"), 200));
         fruitRecordList.add(new FruitRecord("b", new Fruit("apple"), 20));
         fruitRecordList.add(new FruitRecord("s", new Fruit("banana"), 20));
+        fruitRecordList.add(new FruitRecord("s", new Fruit("apple"), 20));
         fruitRecordList.add(new FruitRecord("p", new Fruit("apple"), 10));
+        fruitRecordList.add(new FruitRecord("p", new Fruit("banana"), 10));
+        fruitRecordList.add(new FruitRecord("r", new Fruit("banana"), 10));
+        fruitRecordList.add(new FruitRecord("r", new Fruit("apple"), 5));
     }
 
     @Test
@@ -48,7 +51,7 @@ public class FruitShopServiceImplTest {
         fruitShopService.transfer(fruitRecordList);
         actual = Storage.storage.get(new Fruit("banana"));
         assertEquals(expected, actual);
-        expected = 10;
+        expected = 35;
         fruitShopService.transfer(fruitRecordList);
         actual = Storage.storage.get(new Fruit("apple"));
         assertEquals(expected, actual);

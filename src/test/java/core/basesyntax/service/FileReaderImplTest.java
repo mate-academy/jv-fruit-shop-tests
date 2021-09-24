@@ -39,9 +39,4 @@ public class FileReaderImplTest {
         filePath = "src/main/resources/input1.csv";
         List<String> actual = fileReader.getFileData(filePath);
     }
-
-    @Test (expected = NullPointerException.class)
-    public void getFileData_filePathIsNull_NotOk() {
-        List<String> actual = fileReader.getFileData(null);
-    }
 }

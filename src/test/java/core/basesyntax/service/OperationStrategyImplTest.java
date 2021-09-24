@@ -56,9 +56,4 @@ public class OperationStrategyImplTest {
         actual = operationStrategy.getHandler(Operation.PURCHASE);
         assertEquals(expected, actual);
     }
-
-    @Test (expected = RuntimeException.class)
-    public void getHandler_handlerNull_NotOk() {
-        actual = operationStrategy.getHandler(null);
-    }
 }

@@ -28,7 +28,10 @@ public class BalanceHandlerTest {
         FruitDataBase.storage.put(banana, 200);
         FruitDataBase.storage.put(apple, 200);
         expected = 200;
-        actual = operationHandler.apply(new FruitRecordDto("r", banana, 200));
+        actual = operationHandler.apply(new FruitRecordDto("b", banana, 200));
+        assertEquals(expected, actual);
+        expected = 200;
+        actual = operationHandler.apply(new FruitRecordDto("b", apple, 200));
         assertEquals(expected, actual);
     }
 
@@ -38,15 +41,6 @@ public class BalanceHandlerTest {
         FruitDataBase.storage.put(apple, 200);
         expected = 0;
         actual = operationHandler.apply(new FruitRecordDto("r", banana, 0));
-        assertEquals(expected, actual);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void apply_checkNull_ok() {
-        FruitDataBase.storage.put(banana, 200);
-        FruitDataBase.storage.put(apple, 200);
-        actual = operationHandler.apply(null);
-        expected = 400;
         assertEquals(expected, actual);
     }
 

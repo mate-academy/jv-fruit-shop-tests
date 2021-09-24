@@ -32,40 +32,15 @@ public class OperationStrategyImplTest {
     public void getHandler_ok() {
         expected = operationHandlerMap.get("b");
         actual = operationStrategy.get("b");
-        expected = operationHandlerMap.get("s");
-        actual = operationStrategy.get("s");
-        expected = operationHandlerMap.get("p");
-        actual = operationStrategy.get("p");
-        expected = operationHandlerMap.get("r");
-        actual = operationStrategy.get("r");
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getHandler_balanceHandler_ok() {
-        expected = operationHandlerMap.get("b");
-        actual = operationStrategy.get("b");
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getHandler_supplyHandler_ok() {
         expected = operationHandlerMap.get("s");
         actual = operationStrategy.get("s");
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getHandler_returnHandler_ok() {
-        expected = operationHandlerMap.get("r");
-        actual = operationStrategy.get("r");
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getHandler_purchaseHandler_ok() {
         expected = operationHandlerMap.get("p");
         actual = operationStrategy.get("p");
+        assertEquals(expected, actual);
+        expected = operationHandlerMap.get("r");
+        actual = operationStrategy.get("r");
         assertEquals(expected, actual);
     }
 

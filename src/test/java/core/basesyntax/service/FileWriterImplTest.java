@@ -8,13 +8,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
     private static final String OUTPUT_FILE = "src/main/resources/output.csv";
-    private static final String NOT_EQUALS = "src/test/resources/notEquals.csv";
     private static FileWriter fileWriter;
     private static String report;
     private static List<String> expected;
@@ -44,19 +42,6 @@ public class FileWriterImplTest {
         expected.add("banana,152");
         expected.add("apple,90");
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void write_incorrectPath_notOk() {
-        expected.add("fruit,quantity");
-        expected.add("banana,152");
-        expected.add("apple,90");
-        try {
-            actual = Files.readAllLines(Path.of(NOT_EQUALS));
-        } catch (IOException e) {
-            throw new RuntimeException("Incorrect file " + NOT_EQUALS, e);
-        }
-        Assert.assertNotEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

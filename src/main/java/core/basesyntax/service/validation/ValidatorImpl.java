@@ -8,7 +8,6 @@ public class ValidatorImpl implements Validator {
 
     @Override
     public boolean validate(String[] dataFromFile) {
-
         if (dataFromFile.length != MAX_LENGTH
                 || Integer.parseInt(dataFromFile[AMOUNT_INDEX]) < 0) {
             throw new RuntimeException("Incorrect data in file");

@@ -11,7 +11,7 @@ public class FruitRecordParser implements ParseService {
     private static final String RECORD_SEPARATOR = System.lineSeparator();
     private static final String TITLE = "\\w,(\\w+),(\\w+)";
     private static final String DATA_SEPARATOR = ",";
-    private static final int APPEND_TO_REMOVE_TITLE = 2;
+    private static final int APPEND_TO_REMOVE_TITLE = System.lineSeparator().length();
 
     @Override
     public List<FruitRecord> parseFromCsv(String datInString) {

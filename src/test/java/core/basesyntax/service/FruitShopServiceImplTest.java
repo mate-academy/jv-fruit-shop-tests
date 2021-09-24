@@ -4,7 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.bd.Storage;
 import core.basesyntax.model.FruitRecordDto;
-import core.basesyntax.service.type.service.*;
+import core.basesyntax.service.type.service.BalanceHandler;
+import core.basesyntax.service.type.service.OperationHandler;
+import core.basesyntax.service.type.service.PurchaseHandler;
+import core.basesyntax.service.type.service.ReturnHandler;
+import core.basesyntax.service.type.service.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.AfterClass;

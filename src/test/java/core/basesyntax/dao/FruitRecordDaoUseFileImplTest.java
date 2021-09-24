@@ -5,17 +5,13 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.bd.Storage;
 import core.basesyntax.model.FruitRecordDto;
 import java.io.IOException;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitRecordDaoUseFileImplTest {
     private static FruitRecordDao fruitRecordDao;
     private static FruitRecordDto modelFruitRecordDto;
-    private static final String CORRECT_PATH_FROM = "src/test/resources/filesFruitShop.csv";
-    private static final String CORRECT_PATH_TO = "src/test/resources/report_fruit_shop.csv";
-    private static final String EXPECTED = "src/test/resources/expected.csv";
-    private static final String INCORRECT_EXPECTED = "src/test/resources/incorrect_expected.csv";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -44,8 +40,9 @@ public class FruitRecordDaoUseFileImplTest {
         assertEquals(modelFruitRecordDto, actual);
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         Storage.records.clear();
+        Storage.fruitQuantity.clear();
     }
 }

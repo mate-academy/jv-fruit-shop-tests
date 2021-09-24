@@ -1,14 +1,5 @@
 package core.basesyntax.dto;
 
-import static junit.framework.TestCase.assertEquals;
-
-import core.basesyntax.dto.handlers.BalanceOperationHandler;
-import core.basesyntax.dto.handlers.OperationsHandler;
-import core.basesyntax.dto.handlers.PurchaseOperationHandler;
-import core.basesyntax.dto.handlers.ReturnOperationHandler;
-import core.basesyntax.dto.handlers.SupplyOperationHandler;
-import java.util.Map;
-import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFruitRecordsValidatorTest {
@@ -21,23 +12,6 @@ public class CsvFruitRecordsValidatorTest {
     private static final Operator operator = new Operator();
     private static final FruitRecordsValidator validator
             = new CsvFruitRecordsValidator();
-
-    @Before
-    public void setUp() {
-        Map<Character, OperationsHandler> typesOfOperations
-                = operator.getTypesOfOperations();
-        typesOfOperations.put('b', new BalanceOperationHandler());
-        typesOfOperations.put('p', new PurchaseOperationHandler());
-        typesOfOperations.put('r', new ReturnOperationHandler());
-        typesOfOperations.put('s', new SupplyOperationHandler());
-    }
-
-    @Test
-    public void validation_Ok() {
-        boolean expected = true;
-        boolean actual = validator.validation(validData, operator);
-        assertEquals(expected, actual);
-    }
 
     @Test(expected = RuntimeException.class)
     public void validation_emptyString_Exception() {

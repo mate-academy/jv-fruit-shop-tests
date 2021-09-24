@@ -9,9 +9,9 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.Test;
 
-public class FruitDaoServiceImpTest {
+public class FruitDaoImpTest {
     private static Storage storage = new Storage();
-    private FruitDaoService fruitDaoService = new FruitDaoServiceImp(storage);
+    private FruitDao fruitDao = new FruitDaoImp(storage);
     private FruitRecord bananaRecord
             = new FruitRecord('s', "banana", 23);
     private FruitRecord appleRecord
@@ -21,65 +21,65 @@ public class FruitDaoServiceImpTest {
     @Test(expected = NullPointerException.class)
     public void passNullToConstructor_Exception() {
         Storage storage = null;
-        new FruitDaoServiceImp(storage);
+        new FruitDaoImp(storage);
     }
 
     @Test
     public void validConstructor_Ok() {
         Storage storage = new Storage();
-        new FruitDaoServiceImp(storage);
+        new FruitDaoImp(storage);
     }
 
     @Test(expected = NullPointerException.class)
     public void put_passNull_Exception() {
         FruitRecord fruitRecord = null;
-        FruitDaoServiceImp fruitDaoServiceImp = new FruitDaoServiceImp(new Storage());
+        FruitDaoImp fruitDaoServiceImp = new FruitDaoImp(new Storage());
         fruitDaoServiceImp.put(fruitRecord);
     }
 
     @Test()
     public void put_Ok() {
         int expected = 1;
-        fruitDaoService.save(bananaRecord);
-        fruitDaoService.put(bananaRecord);
-        int actual = fruitDaoService.get().size();
+        fruitDao.save(bananaRecord);
+        fruitDao.put(bananaRecord);
+        int actual = fruitDao.get().size();
         assertEquals(expected,actual);
     }
 
     @Test
     public void put_NotAddingNewDataInStorage_Ok() {
-        fruitDaoService.put(appleRecord);
+        fruitDao.put(appleRecord);
         assertEquals(storage.getFruitsInStorage().contains(apple), false);
     }
 
     @Test(expected = NullPointerException.class)
     public void save_NullRecord_Exception() {
         FruitRecord fruitRecord = null;
-        fruitDaoService.save(fruitRecord);
+        fruitDao.save(fruitRecord);
     }
 
     @Test
     public void save_Ok() {
-        fruitDaoService.save(bananaRecord);
-        assertEquals(fruitDaoService.get().size(), 1);
+        fruitDao.save(bananaRecord);
+        assertEquals(fruitDao.get().size(), 1);
     }
 
     @Test
     public void get_EmptyStorage_Ok() {
-        Set<Fruit> fruits = fruitDaoService.get();
+        Set<Fruit> fruits = fruitDao.get();
         assertEquals(fruits.size(), 0);
     }
 
     @Test
     public void get_ValidData_Ok() {
-        fruitDaoService.save(appleRecord);
-        Set<Fruit> fruits = fruitDaoService.get();
+        fruitDao.save(appleRecord);
+        Set<Fruit> fruits = fruitDao.get();
         assertEquals(fruits.size(), 1);
     }
 
     @After
     public void afterEachTest() {
         storage = new Storage();
-        fruitDaoService = new FruitDaoServiceImp(storage);
+        fruitDao = new FruitDaoImp(storage);
     }
 }

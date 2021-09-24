@@ -2,8 +2,8 @@ package core.basesyntax.dto;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.FruitDaoService;
-import core.basesyntax.dao.FruitDaoServiceImp;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImp;
 import core.basesyntax.dto.handlers.BalanceOperationHandler;
 import core.basesyntax.dto.handlers.OperationsHandler;
 import core.basesyntax.dto.handlers.PurchaseOperationHandler;
@@ -22,8 +22,8 @@ import org.junit.Test;
 public class OperatorTest {
     private static final Storage storage
             = new Storage();
-    private static final FruitDaoService daoService
-            = new FruitDaoServiceImp(storage);
+    private static final FruitDao daoService
+            = new FruitDaoImp(storage);
     private static final FruitRecord bananaRecord
             = new FruitRecord('b', "banana", 20);
     private static final FruitRecord appleRecord

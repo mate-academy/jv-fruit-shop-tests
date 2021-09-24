@@ -38,6 +38,8 @@ public class CSvFileService implements FileService {
             FileWriter writer = new FileWriter(fileToWrite);
             writer.append(dataToWrite);
             writer.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("FileNotFoundException " + e);
         } catch (IOException e) {
             throw new RuntimeException("IOException " + e);
         }

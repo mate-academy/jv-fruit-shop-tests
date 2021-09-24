@@ -1,6 +1,6 @@
 package core.basesyntax.dto;
 
-import core.basesyntax.dao.FruitDaoService;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dto.handlers.OperationsHandler;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.FruitRecord;
@@ -16,7 +16,7 @@ public class Operator {
         return typesOfOperations;
     }
 
-    public Set<Fruit> doAllOperation(List<FruitRecord> recordList, FruitDaoService storage) {
+    public Set<Fruit> doAllOperation(List<FruitRecord> recordList, FruitDao storage) {
         if (storage == null) {
             throw new RuntimeException("null instead of storage");
         }

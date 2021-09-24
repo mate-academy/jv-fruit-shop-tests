@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDaoService;
-import core.basesyntax.dao.FruitDaoServiceImp;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImp;
 import core.basesyntax.dto.CsvFruitRecordsValidator;
 import core.basesyntax.dto.FruitRecordParser;
 import core.basesyntax.dto.FruitRecordsValidator;
@@ -30,7 +30,7 @@ public class HelloWorld {
         Operator operator = new Operator();
         FruitRecordsValidator validator = new CsvFruitRecordsValidator();
         ParseService parseService = new FruitRecordParser();
-        FruitDaoService storageService = new FruitDaoServiceImp(new Storage());
+        FruitDao storageService = new FruitDaoImp(new Storage());
         String dataFromFileSource = fileService.readData(sourceFile);
         operatorInitialization(operator);
         validator.validation(dataFromFileSource,operator);

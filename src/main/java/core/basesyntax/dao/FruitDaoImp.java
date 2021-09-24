@@ -6,10 +6,10 @@ import core.basesyntax.storage.Storage;
 import java.util.Objects;
 import java.util.Set;
 
-public class FruitDaoServiceImp implements FruitDaoService {
+public class FruitDaoImp implements FruitDao {
     private Storage storage;
 
-    public FruitDaoServiceImp(Storage storage) {
+    public FruitDaoImp(Storage storage) {
         this.storage = Objects.requireNonNull(storage);
     }
 

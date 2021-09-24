@@ -3,8 +3,8 @@ package core.basesyntax.dto;
 import java.util.Set;
 
 public class CsvFruitRecordsValidator implements FruitRecordsValidator {
-    private static final String RECORD_SEPARATOR = "\r\n";
-    private static final String RECORD_PATTERN = "(((.+)\r\n)|((.+)\\z))+";
+    private static final String RECORD_SEPARATOR = System.lineSeparator();
+    private static final String RECORD_PATTERN = "(((.+)" + RECORD_SEPARATOR + ")|((.+)\\z))+";
     private static final String RECORD_FORM_PATTER = "\\w,(\\w+),(\\d+)";
     private static final int APPEND_TO_REMOVE_TITLE = 2;
 

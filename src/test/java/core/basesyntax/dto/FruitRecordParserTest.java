@@ -11,10 +11,14 @@ import org.junit.Test;
 
 public class FruitRecordParserTest {
     private static final ParseService parser = new FruitRecordParser();
-    private static final String validData
-            = "type,fruit,quantity\r\n"
-            + "b,banana,20\r\n"
-            + "b,apple,100\r\n";
+    private static final String validData = new StringBuilder()
+            .append("type,fruit,quantity")
+            .append(System.lineSeparator())
+            .append("b,banana,20")
+            .append(System.lineSeparator())
+            .append("b,apple,100")
+            .append(System.lineSeparator())
+            .toString();
     private static final FruitRecord bananaRecord
             = new FruitRecord('b', "banana", 20);
     private static final FruitRecord appleRecord

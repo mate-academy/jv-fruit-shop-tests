@@ -4,11 +4,16 @@ import org.junit.Test;
 
 public class CsvFruitRecordsValidatorTest {
     private static final String emptyString = "";
-    private static final String validData
-            = "type,fruit,quantity\r\n"
-            + "b,banana,20\r\n"
-            + "b,apple,100\r\n"
-            + "s,banana,100\r\n";
+    private static final String validData = new StringBuilder()
+            .append("type,fruit,quantity")
+            .append(System.lineSeparator())
+            .append("b,banana,20")
+            .append(System.lineSeparator())
+            .append("b,apple,100")
+            .append(System.lineSeparator())
+            .append("s,banana,100")
+            .append(System.lineSeparator())
+            .toString();
     private static final Operator operator = new Operator();
     private static final FruitRecordsValidator validator
             = new CsvFruitRecordsValidator();

@@ -33,11 +33,28 @@ public class MarketServiceImplTest {
     }
 
     @Test
-    public void applyOperations() {
+    public void applyOperations_Ok() {
         List<FruitRecord> fruitRecordList = new ArrayList<>();
         fruitRecordList.add(new FruitRecord("r", "apple", 10));
         fruitRecordList.add(new FruitRecord("b", "banana", 35));
         List<FruitRecord> actual = marketService.applyOperations(fruitRecordList);
         Assert.assertEquals(fruitRecordList, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void applyOperationsWithWrongOperatorType_NotOk() {
+        List<FruitRecord> fruitRecordList = new ArrayList<>();
+        fruitRecordList.add(new FruitRecord("c", "apple", 10));
+        fruitRecordList.add(new FruitRecord("b", "banana", 35));
+        List<FruitRecord> actual = marketService.applyOperations(fruitRecordList);
+        Assert.assertEquals(fruitRecordList, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void applyOperationsWithEmptyOperatorType_NotOk() {
+        List<FruitRecord> fruitRecordList = new ArrayList<>();
+        fruitRecordList.add(new FruitRecord("", "apple", 10));
+        fruitRecordList.add(new FruitRecord("b", "banana", 35));
+        List<FruitRecord> actual = marketService.applyOperations(fruitRecordList);
     }
 }

@@ -1,6 +1,7 @@
 package core.service.operation;
 
 import core.model.FruitRecord;
+import core.model.OperationType;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -32,5 +33,18 @@ public class BalanceOperationTypeHandlerTest {
         int expected = 20;
         int actual = balanceHandler.getUpdateAmount(apple, 100);
         Assert.assertNotEquals(expected, actual);
+    }
+
+    @Test
+    public void getOperationType_Ok() {
+        String operationType = "b";
+        Assert.assertEquals(OperationType.BALANCE, balanceHandler.getOperationType(operationType));
+    }
+
+    @Test
+    public void getOperationType_NotOk() {
+        String operationType = "s";
+        Assert.assertNotEquals(OperationType.SUPPLY, balanceHandler
+                .getOperationType(operationType));
     }
 }

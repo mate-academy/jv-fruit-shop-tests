@@ -13,7 +13,6 @@ public class OsFileServiceImpl implements FileService {
 
     @Override
     public List<String> readFile(String filePath) {
-        filePath = PATH_INPUT;
         List<String> records;
         try {
             records = Files.readAllLines(new File(filePath).toPath());

@@ -14,6 +14,8 @@ import org.junit.Test;
 
 public class WriteToFileServiceImplTest {
     public static final String PATH_OUTPUT = "src/main/resources/report_output.csv";
+    public static final String PATH_EMPTY = "";
+    public static final String PATH_WRONG = "src/main/re475096kg/report_output.csv";
     private WriteToFileService writeToFileService = new WriteToFileServiceImpl();
     private List<String> actual;
     private List<String> expected;
@@ -40,5 +42,15 @@ public class WriteToFileServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void writeReport_NotOk() {
         writeToFileService.writeReport(null, PATH_OUTPUT);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeReportWithEmptyPath_NotOk() {
+        writeToFileService.writeReport(expected, PATH_EMPTY);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeReportWithWrong_NotOk() {
+        writeToFileService.writeReport(expected, PATH_WRONG);
     }
 }

@@ -36,4 +36,15 @@ public class CreateReportServiceImplTest {
         expectedReport.add("orange,100");
         Assert.assertNotEquals(expectedReport, reportService.createReport());
     }
+
+    @Test
+    public void createReportWithNull_NotOk() {
+        Storage.getStockStorage().put(null, 200);
+        Storage.getStockStorage().put("apple", 100);
+        ArrayList expectedReport = new ArrayList();
+        expectedReport.add(TITLE);
+        expectedReport.add("banana,200");
+        expectedReport.add("orange,100");
+        Assert.assertNotEquals(expectedReport, reportService.createReport());
+    }
 }

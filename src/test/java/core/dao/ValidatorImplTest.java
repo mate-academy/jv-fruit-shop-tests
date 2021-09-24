@@ -46,4 +46,10 @@ public class ValidatorImplTest {
         String inputData = "r,apple,10,test,300";
         validator.validate(inputData);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void isValidDataWithEmptyData_NotOk() {
+        String inputData = "";
+        validator.validate(inputData);
+    }
 }

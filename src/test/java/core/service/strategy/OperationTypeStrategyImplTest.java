@@ -38,4 +38,12 @@ public class OperationTypeStrategyImplTest {
         strategy = new OperationTypeStrategyImpl(handlerMap);
         strategy.getHandle(OperationType.RETURN);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void getHandleWithNull_NotOk() {
+        Map<OperationType, OperationTypeHandler> handlerMap = new HashMap<>();
+        handlerMap.put(OperationType.BALANCE, new BalanceOperationTypeHandler());
+        strategy = new OperationTypeStrategyImpl(handlerMap);
+        strategy.getHandle(null);
+    }
 }

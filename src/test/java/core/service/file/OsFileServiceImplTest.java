@@ -11,6 +11,8 @@ import org.junit.Test;
 public class OsFileServiceImplTest {
     private static final String PATH_INPUT = "src/test/resources/report_input.csv";
     private static final String PATH_TO_EMPTY_FILE = "src/test/resources/empty_file.csv";
+    private static final String PATH_WRONG = "src/test/rjkdf9f9/empty_file.csv";
+    private static final String PATH_EMPTY = "";
     private static FileService fileService;
     private static List<String> expected;
 
@@ -37,6 +39,24 @@ public class OsFileServiceImplTest {
     @Test
     public void readFile_Ok() {
         List<String> actualReadFile = fileService.readFile(PATH_INPUT);
+        Assert.assertEquals(expected, actualReadFile);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFileFromEmptyFile_NotOk() {
+        List<String> actualReadFile = fileService.readFile(PATH_TO_EMPTY_FILE);
+        Assert.assertEquals(expected, actualReadFile);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFileFromWrongPath_NotOk() {
+        List<String> actualReadFile = fileService.readFile(PATH_WRONG);
+        Assert.assertEquals(expected, actualReadFile);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFileFromEmptyPath_NotOk() {
+        List<String> actualReadFile = fileService.readFile(PATH_EMPTY);
         Assert.assertEquals(expected, actualReadFile);
     }
 

@@ -39,4 +39,26 @@ public class FruitRecordServiceImplTest {
         expected.add(new FruitRecord("r", "apple", 25));
         Assert.assertNotEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parserFruitWithEmpty_NotOk() {
+        List<String> listFruits = new ArrayList<>();
+        listFruits.add("");
+        listFruits.add("r,apple,25");
+        List<FruitRecord> actual = fruitRecordService.parserFruit(listFruits);
+        List<FruitRecord> expected = new ArrayList<>();
+        expected.add(new FruitRecord("r", "banana", 100));
+        expected.add(new FruitRecord("r", "apple", 25));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parserFruitWithWrongLength_NotOk() {
+        List<String> listFruits = new ArrayList<>();
+        listFruits.add("r,banana,35,hghk");
+        listFruits.add("r,apple,25");
+        List<FruitRecord> actual = fruitRecordService.parserFruit(listFruits);
+        List<FruitRecord> expected = new ArrayList<>();
+        expected.add(new FruitRecord("r", "banana", 100));
+        expected.add(new FruitRecord("r", "apple", 25));
+    }
 }

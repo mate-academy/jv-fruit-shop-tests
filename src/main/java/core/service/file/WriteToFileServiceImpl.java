@@ -11,14 +11,14 @@ public class WriteToFileServiceImpl implements WriteToFileService {
 
     @Override
     public void writeReport(List<String> report, String pathTo) {
-        pathTo = PATH_OUTPUT;
+        pathTo = pathTo;
         File file = new File(pathTo);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             for (String record : report) {
                 bufferedWriter.append(record).append(System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("can't write data to file" + PATH_OUTPUT, e);
+            throw new RuntimeException("can't write data to file" + pathTo, e);
         }
     }
 }

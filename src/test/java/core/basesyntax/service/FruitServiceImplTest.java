@@ -43,6 +43,7 @@ public class FruitServiceImplTest {
 
     @Before
     public void setUp() {
+        Storage.fruitsQuantity.clear();
         typeOfActivitiesMap = new HashMap<>();
         typeOfActivitiesMap.put(TypeOfActivities.BALANCE, new BalanceHandler());
         typeOfActivitiesMap.put(TypeOfActivities.SUPPLY, new SupplyHandler());

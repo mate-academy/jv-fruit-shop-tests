@@ -49,22 +49,22 @@ public class FruitShopServiceImplTest {
         Storage.records.add(apple);
         Storage.records.add(banana);
         shopService.transfer(operationStrategy);
-        int expected1 = banana.getAmount();
-        int actual1 = Storage.fruitQuantity.get("banana");
-        assertEquals(expected1, actual1);
-        int expected2 = apple.getAmount();
-        int actual2 = Storage.fruitQuantity.get("apple");
-        assertEquals(expected2, actual2);
+        int expectedBanana = banana.getAmount();
+        int actualBanana = Storage.fruitQuantity.get("banana");
+        assertEquals(expectedBanana, actualBanana);
+        int expectedApple = apple.getAmount();
+        int actualApple = Storage.fruitQuantity.get("apple");
+        assertEquals(expectedApple, actualApple);
     }
 
     @Test
-    public void transfer_incorrectTransfer_Ok() {
-        int expected1 = apple.getAmount();
-        int actual1 = Storage.fruitQuantity.get("banana");
-        assertNotEquals(expected1, actual1);
-        int expected2 = banana.getAmount();
-        int actual2 = Storage.fruitQuantity.get("apple");
-        assertNotEquals(expected2, actual2);
+    public void transfer_incorrectTransfer_NotOk() {
+        int expectedApple = apple.getAmount();
+        int actualBanana = Storage.fruitQuantity.get("banana");
+        assertNotEquals(expectedApple, actualBanana);
+        int expectedBanana = banana.getAmount();
+        int actualApple = Storage.fruitQuantity.get("apple");
+        assertNotEquals(expectedBanana, actualApple);
     }
 
     @AfterClass

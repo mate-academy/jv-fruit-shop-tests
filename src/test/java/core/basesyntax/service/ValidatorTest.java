@@ -10,6 +10,8 @@ import org.junit.Test;
 public class ValidatorTest {
     private static final String TYPE_BALANCE = "b";
     private static final String TYPE_PURCHASE = "p";
+    private static final String TYPE_RETURN = "r";
+    private static final String TYPE_SUPPLY = "s";
     private static final String CORRECT_FRUIT_NAME = "apple";
     private static final String EMPTY_STRING = "";
     private static final int NEGATIVE = -1;
@@ -17,14 +19,35 @@ public class ValidatorTest {
     private static final int ZERO = 0;
 
     @Test
-    public void checkType_correctType_Ok() {
+    public void checkType_correctTypeBalance_Ok() {
         FruitRecordDto.Activities expected = FruitRecordDto.Activities.BALANCE;
         FruitRecordDto.Activities actual = Validator.checkType(TYPE_BALANCE);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void checkType_incorrectType_Ok() {
+    public void checkType_correctTypePurchase_Ok() {
+        FruitRecordDto.Activities expected = FruitRecordDto.Activities.PURCHASE;
+        FruitRecordDto.Activities actual = Validator.checkType(TYPE_PURCHASE);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkType_correctTypeReturn_Ok() {
+        FruitRecordDto.Activities expected = FruitRecordDto.Activities.RETURN;
+        FruitRecordDto.Activities actual = Validator.checkType(TYPE_RETURN);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkType_correctTypeSupply_Ok() {
+        FruitRecordDto.Activities expected = FruitRecordDto.Activities.SUPPLY;
+        FruitRecordDto.Activities actual = Validator.checkType(TYPE_SUPPLY);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkType_incorrectType_NotOk() {
         FruitRecordDto.Activities expected = FruitRecordDto.Activities.BALANCE;
         FruitRecordDto.Activities actual = Validator.checkType(TYPE_PURCHASE);
         assertNotEquals(expected, actual);
@@ -48,7 +71,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void checkFruitName_incorrectFruitName_Ok() {
+    public void checkFruitName_incorrectFruitName_NotOk() {
         String expected = "apple";
         String actual = Validator.checkFruitName(TYPE_BALANCE);
         assertNotEquals(expected, actual);
@@ -62,7 +85,6 @@ public class ValidatorTest {
             return;
         }
         fail("should throw exception: 'Fruit name is NOT listed");
-
     }
 
     @Test

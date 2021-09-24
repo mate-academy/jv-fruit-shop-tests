@@ -21,7 +21,7 @@ public class Main {
         mapTypeHandler.put(FruitRecordDto.Activities.RETURN, new ReturnHandler());
         mapTypeHandler.put(FruitRecordDto.Activities.SUPPLY, new SupplyHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(mapTypeHandler);
-        String pathFrom = "src/main/resources/test-string.csv";
+        String pathFrom = "src/main/resources/filesFruitShop.csv";
         String pathTo = "src/main/resources/report_fruit_shop.csv";
         ReportService reportService = new ReportServiceImpl(operationStrategy);
         reportService.getReport(pathFrom, pathTo);

@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.bd.Storage;
@@ -9,10 +11,12 @@ import core.basesyntax.service.type.service.OperationHandler;
 import core.basesyntax.service.type.service.PurchaseHandler;
 import core.basesyntax.service.type.service.ReturnHandler;
 import core.basesyntax.service.type.service.SupplyHandler;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,6 +26,8 @@ public class ReportServiceImplTest {
     private static final String EMPTY_PATH = "";
     private static final String CORRECT_PATH_FROM = "src/test/resources/filesFruitShop.csv";
     private static final String CORRECT_PATH_TO = "src/test/resources/report_fruit_shop.csv";
+    private static final String EXPECTED = "src/test/resources/expected.csv";
+    private static final String INCORRECT_EXPECTED = "src/test/resources/incorrect_expected.csv";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -35,12 +41,23 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_correctPath_Ok() {
-        Assert.assertTrue(reportService.getReport(CORRECT_PATH_FROM, CORRECT_PATH_TO));
+    public void getReport_correctPath_Ok() throws IOException {
+        String expected = Files.readString(Path.of(EXPECTED));
+        reportService.getReport(CORRECT_PATH_FROM, CORRECT_PATH_TO);
+        String actual = Files.readString(Path.of(CORRECT_PATH_TO));
+        assertEquals(expected,actual);
     }
 
     @Test
-    public void getReport_pathFromIsEmpty_Ok() {
+    public void getReport_incorrectPath_NotOk() throws IOException {
+        String expected = Files.readString(Path.of(INCORRECT_EXPECTED));
+        reportService.getReport(CORRECT_PATH_FROM, CORRECT_PATH_TO);
+        String actual = Files.readString(Path.of(CORRECT_PATH_TO));
+        assertNotEquals(expected,actual);
+    }
+
+    @Test
+    public void getReport_pathFromIsEmpty_NotOk() {
         try {
             reportService.getReport(EMPTY_PATH, CORRECT_PATH_TO);
         } catch (RuntimeException e) {
@@ -50,29 +67,9 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_pathToIsEmpty_Ok() {
+    public void getReport_pathToIsEmpty_NotOk() {
         try {
             reportService.getReport(CORRECT_PATH_FROM, EMPTY_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("should throw exception: 'The path to the database is not correct' + path");
-    }
-
-    @Test
-    public void getReport_pathFromPathNullPathToIsEmpty_Ok() {
-        try {
-            reportService.getReport(null, EMPTY_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("should throw exception: 'The path to the database is not correct' + path");
-    }
-
-    @Test
-    public void getReport_pathFromPathIsEmptyPathToNull_Ok() {
-        try {
-            reportService.getReport(EMPTY_PATH, null);
         } catch (RuntimeException e) {
             return;
         }

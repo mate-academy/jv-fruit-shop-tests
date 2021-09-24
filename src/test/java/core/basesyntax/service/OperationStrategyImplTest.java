@@ -67,7 +67,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getHandler_getIncorrectHandler_Ok() {
+    public void getHandler_getIncorrectHandler_NotOk() {
         mapTypeHandler.put(FruitRecordDto.Activities.SUPPLY, new SupplyHandler());
         mapTypeHandler.put(FruitRecordDto.Activities.PURCHASE, new PurchaseHandler());
         expected = RETURN.getClass();

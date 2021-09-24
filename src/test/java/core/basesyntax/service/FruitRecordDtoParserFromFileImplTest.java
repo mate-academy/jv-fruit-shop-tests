@@ -25,17 +25,7 @@ public class FruitRecordDtoParserFromFileImplTest {
     }
 
     @Test
-    public void parse_StingIsNull_Ok() {
-        try {
-            fruitRecordDtoParserFromFile.parse(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Should throw NullPointerException");
-    }
-
-    @Test
-    public void parse_incorrectString_Ok() {
+    public void parse_incorrectString_NotOk() {
         try {
             fruitRecordDtoParserFromFile.parse(INCORRECT_STRING);
         } catch (NullPointerException e) {
@@ -45,7 +35,7 @@ public class FruitRecordDtoParserFromFileImplTest {
     }
 
     @Test
-    public void parse_whatReturns_Ok() {
+    public void parse_validData_Ok() {
         expected = fruitRecordDtoParserFromFile.parse(CORRECT_STRING);
         actual = modelFruitRecordDto;
         assertEquals(actual, expected);

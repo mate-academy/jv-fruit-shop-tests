@@ -17,23 +17,13 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_emptyPath_Ok() {
+    public void read_emptyPath_NotOk() {
         try {
             fileReader.read(EMPTY_PATH);
         } catch (RuntimeException e) {
             return;
         }
         fail("should throw exception: 'The writing path is not correct' + path");
-    }
-
-    @Test
-    public void read_nullPath_Ok() {
-        try {
-            fileReader.read(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("should throw: 'The writing path is not correct' + path");
     }
 
     @Test

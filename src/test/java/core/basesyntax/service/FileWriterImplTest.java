@@ -19,19 +19,9 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void write_emptyPath_Ok() {
+    public void write_emptyPath_NotOk() {
         try {
             fileWriterImpl.write(TEST_STRING, EMPTY_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("should throw exception: 'The path to the database is not correct' + path");
-    }
-
-    @Test
-    public void write_nullPath_Ok() {
-        try {
-            fileWriterImpl.write(TEST_STRING, null);
         } catch (RuntimeException e) {
             return;
         }
@@ -51,7 +41,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void write_emptyString_Ok() {
+    public void write_emptyString_NotOk() {
         try {
             fileWriterImpl.write(EMPTY_PATH, CORRECT_PATH);
         } catch (RuntimeException e) {

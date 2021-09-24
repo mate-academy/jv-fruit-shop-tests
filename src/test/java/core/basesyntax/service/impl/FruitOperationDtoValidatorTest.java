@@ -30,26 +30,26 @@ public class FruitOperationDtoValidatorTest {
     }
 
     @Test
-    public void fruitOperationDtoValidator_getCorrectData_Ok() {
+    public void validate_getCorrectData_Ok() {
         dataFromFile.add(CORRECT_DATA);
         boolean actual = validator.validate(dataFromFile);
         Assert.assertTrue(actual);
     }
 
     @Test
-    public void fruitOperationDtoValidator_getIncompleteData_notOk() {
+    public void validate_getIncompleteData_notOk() {
         dataFromFile.add(INCOMPLETE_DATA);
         assertThrows(RuntimeException.class, () -> validator.validate(dataFromFile));
     }
 
     @Test
-    public void fruitOperationDtoValidator_getDataWithIncorrectQuantity_notOk() {
+    public void validate_getDataWithIncorrectQuantity_notOk() {
         dataFromFile.add(DATA_WITH_INCORRECT_QUANTITY);
         assertThrows(RuntimeException.class, () -> validator.validate(dataFromFile));
     }
 
     @Test
-    public void fruitOperationDtoValidator_getNullData_notOk() {
+    public void validate_getNullData_notOk() {
         dataFromFile.add(NULL_DATA);
         assertThrows(RuntimeException.class, () -> validator.validate(dataFromFile));
     }

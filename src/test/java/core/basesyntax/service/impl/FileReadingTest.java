@@ -17,12 +17,12 @@ public class FileReadingTest {
     }
 
     @Test
-    public void fileReading_readingInformationFromFile_Ok() {
+    public void readFile_readingInformationFromFile_Ok() {
         fileService.readFile(INPUT_FILE_CSV);
     }
 
     @Test
-    public void fileReading_readingInformationFromNonExistentFile_notOk() {
+    public void readFile_readingInformationFromNonExistentFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileService.readFile(NON_EXISTENT_FILE));
 

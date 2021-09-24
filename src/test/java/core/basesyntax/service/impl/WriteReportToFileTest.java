@@ -17,14 +17,14 @@ public class WriteReportToFileTest {
     }
 
     @Test
-    public void writeReportToFile_writingInformationToFile_Ok() {
+    public void write_writingInformationToFile_Ok() {
         String fruitReport = "banana,160";
         boolean actual = reportWriter.write(REPORT_FILE_CSV, fruitReport);
         assertTrue(actual);
     }
 
     @Test
-    public void writeReportToFile_writingInformation_notOk() {
+    public void write_writingInformation_notOk() {
         assertThrows(RuntimeException.class,
                 () -> reportWriter.write(REPORT_FILE_CSV, null));
     }

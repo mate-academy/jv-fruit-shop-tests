@@ -49,7 +49,7 @@ public class ShopsServiceImplTest {
     }
 
     @Test
-    public void shopsServiceImpl_getNormalData_Ok() {
+    public void updateStorage_getNormalData_Ok() {
         excepted.put("apple", 10);
         dtos.add(BALANCE_OPERATION_APPLE);
         shopsService.updateStorage(dtos);
@@ -58,7 +58,7 @@ public class ShopsServiceImplTest {
     }
 
     @Test
-    public void shopsServiceImpl_getTwoBalance_Ok() {
+    public void updateStorage_getTwoBalance_Ok() {
         excepted.put("apple", 20);
         dtos.add(BALANCE_OPERATION_APPLE);
         dtos.add(CHANGE_BALANCE_APPLE);
@@ -67,7 +67,7 @@ public class ShopsServiceImplTest {
     }
 
     @Test
-    public void shopsServiceImpl_getPurchaseOperation_Ok() {
+    public void updateStorage_getPurchaseOperation_Ok() {
         excepted.put("apple", 5);
         dtos.add(BALANCE_OPERATION_APPLE);
         dtos.add(PURCHASE_OPERATION_APPLE);
@@ -76,7 +76,7 @@ public class ShopsServiceImplTest {
     }
 
     @Test
-    public void shopsServiceImpl_getSupplyOperation_Ok() {
+    public void updateStoragel_getSupplyOperation_Ok() {
         excepted.put("apple", 15);
         dtos.add(BALANCE_OPERATION_APPLE);
         dtos.add(SUPPLY_OPERATION_APPLE);
@@ -85,7 +85,7 @@ public class ShopsServiceImplTest {
     }
 
     @Test
-    public void shopsServiceImpl_getReturnOperation_Ok() {
+    public void updateStorage_getReturnOperation_Ok() {
         excepted.put("apple", 15);
         dtos.add(BALANCE_OPERATION_APPLE);
         dtos.add(RETURN_OPERATION_APPLE);

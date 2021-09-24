@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
@@ -23,8 +24,8 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void reportGeneratorImpl_makingReportFromMap_Ok() {
-        assertEquals(actual, expected);
+    public void fruitReport_makingReportFromMap_Ok() {
+        assertEquals(expected, actual);
         Storage.fruitStorage.clear();
     }
 }

@@ -11,15 +11,15 @@ import org.junit.Test;
 
 public class FruitDtoTransformationTest {
     private static Transformation<String, FruitOperationDto> mapper;
-    private static List<FruitOperationDto> actual;
+    private static List<FruitOperationDto> expected;
     private static List<String> inputValues;
 
     @BeforeClass
     public static void initialize() {
         mapper = new FruitDtoTransformation();
-        actual = new LinkedList<>();
-        actual.add(new FruitOperationDto(FruitOperationDto.Type.BALANCE, "apple", 10));
-        actual.add(new FruitOperationDto(FruitOperationDto.Type.BALANCE, "banana", 10));
+        expected = new LinkedList<>();
+        expected.add(new FruitOperationDto(FruitOperationDto.Type.BALANCE, "apple", 10));
+        expected.add(new FruitOperationDto(FruitOperationDto.Type.BALANCE, "banana", 10));
         inputValues = new LinkedList<>();
         inputValues.add("b,apple,10");
         inputValues.add("b,banana,10");
@@ -27,8 +27,8 @@ public class FruitDtoTransformationTest {
     }
 
     @Test
-    public void fruitDtoTransformation_addCorrectData_Ok() {
-        List<FruitOperationDto> expected = mapper.transform(inputValues);
-        assertEquals(actual, expected);
+    public void transform_addCorrectData_Ok() {
+        List<FruitOperationDto> actual = mapper.transform(inputValues);
+        assertEquals(expected, actual);
     }
 }

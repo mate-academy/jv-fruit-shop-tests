@@ -10,7 +10,7 @@ public class FruitOperationDtoMapperTest {
     private static final String DATA = "b,apple,10";
 
     @Test
-    public void fruitOperationDtoMapper_getData_Ok() {
+    public void apply_getData_Ok() {
         Function<String, FruitOperationDto> mapper = new FruitOperationDtoMapper();
         FruitOperationDto actual
                 = new FruitOperationDto(FruitOperationDto.Type.BALANCE, "apple", 10);

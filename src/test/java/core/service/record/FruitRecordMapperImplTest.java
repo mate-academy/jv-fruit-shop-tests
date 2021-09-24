@@ -22,8 +22,8 @@ public class FruitRecordMapperImplTest {
 
     @Test
     public void mappingToObject_NotOk() {
-        FruitRecord actual = (FruitRecord) fruitMapper.mappingToObject("r,apple,100");
+        FruitRecord actual = (FruitRecord) fruitMapper.mappingToObject("r,banana,100");
         FruitRecord expected = new FruitRecord("r", "apple", 100);
-        Assert.assertEquals(expected, actual);
+        Assert.assertNotEquals(expected, actual);
     }
 }

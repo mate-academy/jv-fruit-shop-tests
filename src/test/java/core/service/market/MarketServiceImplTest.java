@@ -37,7 +37,7 @@ public class MarketServiceImplTest {
         List<FruitRecord> fruitRecordList = new ArrayList<>();
         fruitRecordList.add(new FruitRecord("r", "apple", 10));
         fruitRecordList.add(new FruitRecord("b", "banana", 35));
-        marketService.applyOperations(fruitRecordList);
-        Assert.assertEquals(fruitRecordList, marketService.applyOperations(fruitRecordList));
+        List<FruitRecord> actual = marketService.applyOperations(fruitRecordList);
+        Assert.assertEquals(fruitRecordList, actual);
     }
 }

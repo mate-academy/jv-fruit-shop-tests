@@ -33,7 +33,7 @@ public class FruitDtoParserImplTest {
     }
 
     @Test
-    public void checkData_checkDataLength_ok() {
+    public void parsingData_checkDataLength_ok() {
         int actual = fruitDtoParser.parseFruitDto(dataFromFile).size();
         int expected = 2;
         assertEquals(expected, actual);

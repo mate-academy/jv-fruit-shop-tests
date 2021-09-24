@@ -29,14 +29,14 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readDataFromFile_readFromFile_ok() {
+    public void readData_readFromFile_ok() {
         List<String> expectedList = fruitInfo;
         List<String> actualList = fileReaderService.read(PATH_TO_INPUT_FILE);
         Assert.assertEquals("Test failed. The files are different.", expectedList, actualList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readDataFromNonExistingFile_Not_ok() {
+    public void readData_FromNonExistingFile_notOk() {
         fileReaderService.read(PATH_TO_NONEXIST_FILE);
     }
 }

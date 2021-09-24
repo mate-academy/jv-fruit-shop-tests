@@ -9,17 +9,17 @@ public class ValidatorImplTest {
     private static final Validator validator = new ValidatorImpl();
 
     @Test (expected = RuntimeException.class)
-    public void shouldThrowRunTimeExceptionWhenValueNull_Not_Ok() {
+    public void validateData_nullData_Not_Ok() {
         validator.validate(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void shouldThrowRunTimeExceptionWhenWrongLength_Not_Ok() {
+    public void validateData_wrongLength_Not_Ok() {
         validator.validate(VALUE_WITH_WRONG_LENGTH);
     }
 
     @Test (expected = RuntimeException.class)
-    public void shouldThrowRunTimeExceptionWhenValueLessThanZero_Not_Ok() {
+    public void validateData_inputLessThanZero_Not_Ok() {
         validator.validate(VALUE_WITH_WRONG_QUANTITY);
     }
 }

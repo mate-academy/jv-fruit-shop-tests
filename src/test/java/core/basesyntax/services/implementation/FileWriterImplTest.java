@@ -44,7 +44,7 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeNullDataToFile_NotValidData_Not_Ok() {
+    public void writeDataToFile_NotValidData_notOk() {
         fileWriter.write(null, PATH_TO_TEST_FILE);
     }
 }

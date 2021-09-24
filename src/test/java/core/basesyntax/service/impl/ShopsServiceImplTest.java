@@ -19,15 +19,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ShopsServiceImplTest {
-    public static final FruitOperationDto BALANCE_OPERATION_APPLE
+    private static final FruitOperationDto BALANCE_OPERATION_APPLE
             = new FruitOperationDto(FruitOperationDto.Type.BALANCE, "apple", 10);
-    public static final FruitOperationDto CHANGE_BALANCE_APPLE
+    private static final FruitOperationDto CHANGE_BALANCE_APPLE
             = new FruitOperationDto(FruitOperationDto.Type.BALANCE, "apple", 20);
-    public static final FruitOperationDto PURCHASE_OPERATION_APPLE
+    private static final FruitOperationDto PURCHASE_OPERATION_APPLE
             = new FruitOperationDto(FruitOperationDto.Type.PURCHASE, "apple", 5);
-    public static final FruitOperationDto SUPPLY_OPERATION_APPLE
+    private static final FruitOperationDto SUPPLY_OPERATION_APPLE
             = new FruitOperationDto(FruitOperationDto.Type.SUPPLY, "apple", 5);
-    public static final FruitOperationDto RETURN_OPERATION_APPLE
+    private static final FruitOperationDto RETURN_OPERATION_APPLE
             = new FruitOperationDto(FruitOperationDto.Type.RETURN, "apple", 5);
     private static ShopsService shopsService;
     private static Map<String, Integer> excepted;

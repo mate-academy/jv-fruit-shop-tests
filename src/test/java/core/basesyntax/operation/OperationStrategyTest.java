@@ -1,6 +1,6 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.report.FruitBalance;
+import core.basesyntax.database.Database;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -42,6 +42,6 @@ public class OperationStrategyTest {
 
     @After
     public void tearDown() {
-        FruitBalance.FRUIT_BALANCE.clear();
+        Database.FRUIT_BALANCE.clear();
     }
 }

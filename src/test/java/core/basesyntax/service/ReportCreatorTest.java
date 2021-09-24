@@ -9,7 +9,6 @@ import core.basesyntax.operation.DecreaseHandler;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.operation.OperationStrategyImpl;
-import core.basesyntax.report.FruitBalance;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -65,6 +64,6 @@ public class ReportCreatorTest {
     @After
     public void tearDown() {
         Database.RECORDS.clear();
-        FruitBalance.FRUIT_BALANCE.clear();
+        Database.FRUIT_BALANCE.clear();
     }
 }

@@ -1,7 +1,7 @@
 package core.basesyntax.operation;
 
+import core.basesyntax.database.Database;
 import core.basesyntax.model.Record;
-import core.basesyntax.report.FruitBalance;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,10 +19,10 @@ public class DecreaseHandlerTest {
 
     @Test
     public void apply_purchaseCorrectAmount_Ok() {
-        FruitBalance.FRUIT_BALANCE.put("apple", 20);
+        Database.FRUIT_BALANCE.put("apple", 20);
         decreaseHandler.apply(record);
         int expected = 10;
-        int actual = FruitBalance.FRUIT_BALANCE.get("apple");
+        int actual = Database.FRUIT_BALANCE.get("apple");
         Assert.assertEquals("Fruit amounts should match!", expected, actual);
     }
 
@@ -33,6 +33,6 @@ public class DecreaseHandlerTest {
 
     @After
     public void tearDown() {
-        FruitBalance.FRUIT_BALANCE.clear();
+        Database.FRUIT_BALANCE.clear();
     }
 }

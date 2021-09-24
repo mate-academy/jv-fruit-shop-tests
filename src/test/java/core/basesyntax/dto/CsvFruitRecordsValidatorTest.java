@@ -30,22 +30,34 @@ public class CsvFruitRecordsValidatorTest {
 
     @Test(expected = RuntimeException.class)
     public void validation_incorrectRecordSeparator_Exception() {
-        String data = "type,fruit,quantity\r\n"
-                + "b,banana,20\n";
+        String data = new StringBuilder()
+                .append("type,fruit,quantity")
+                .append(System.lineSeparator())
+                .append("b,banana,20")
+                .append("\r")
+                .toString();
         validator.validation(data, operator);
     }
 
     @Test(expected = RuntimeException.class)
     public void validation_incorrectDataSeparator_Exception() {
-        String data = "type;fruit;quantity\r\n"
-                + "b;banana;20\r\n";
+        String data = new StringBuilder()
+                .append("type;fruit;quantity")
+                .append(System.lineSeparator())
+                .append("b;banana;20")
+                .append(System.lineSeparator())
+                .toString();
         validator.validation(data, operator);
     }
 
     @Test(expected = RuntimeException.class)
     public void validation_incorrectOperation_Exception() {
-        String data = "type,fruit,quantity\r\n"
-                + "k,banana,20\r\n";
+        String data = new StringBuilder()
+                .append("type,fruit,quantity")
+                .append(System.lineSeparator())
+                .append("z,banana,20")
+                .append(System.lineSeparator())
+                .toString();
         validator.validation(data, operator);
     }
 }

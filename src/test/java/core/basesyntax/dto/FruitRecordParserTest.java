@@ -40,8 +40,11 @@ public class FruitRecordParserTest {
 
     @Test(expected = RuntimeException.class)
     public void parseFromCsv_noTitle_Exception() {
-        parser.parseFromCsv("b,banana,20\r\n"
-                + "b,apple,100\r\n");
+        parser.parseFromCsv(new StringBuilder().append("b,banana,20")
+                .append(System.lineSeparator())
+                .append("b,apple,100")
+                .append(System.lineSeparator())
+                .toString());
     }
 
     @Test
@@ -56,8 +59,11 @@ public class FruitRecordParserTest {
     @Test
     public void parseIntoCsv_Ok() {
         boolean expected = true;
-        String expectedString = "banana,20\r\n"
-                + "apple,100";
+        String expectedString = new StringBuilder()
+                .append("banana,20")
+                .append(System.lineSeparator())
+                .append("apple,100")
+                .toString();
         Set<Fruit> fruits = new HashSet<>();
         fruits.add(apple);
         fruits.add(banana);

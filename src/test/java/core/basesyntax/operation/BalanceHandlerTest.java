@@ -33,11 +33,20 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void apply_CheckZero_ok() {
+    public void apply_checkZero_ok() {
         FruitDataBase.storage.put(banana, 200);
         FruitDataBase.storage.put(apple, 200);
         expected = 0;
         actual = operationHandler.apply(new FruitRecordDto("r", banana, 0));
+        assertEquals(expected, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void apply_checkNull_ok() {
+        FruitDataBase.storage.put(banana, 200);
+        FruitDataBase.storage.put(apple, 200);
+        actual = operationHandler.apply(null);
+        expected = 400;
         assertEquals(expected, actual);
     }
 

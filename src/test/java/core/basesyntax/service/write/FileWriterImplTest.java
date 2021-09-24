@@ -1,5 +1,8 @@
 package core.basesyntax.service.write;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +19,19 @@ public class FileWriterImplTest {
 
     @Test
     public void white_correctPath_Ok() {
-        Assert.assertTrue(fileWriter.write("", CORRECT_PATH));
+        Assert.assertTrue(fileWriter.write("b,banana,100", CORRECT_PATH));
+        String expected = "b,banana,100";
+        String actual;
+        try {
+            actual = Files.readString(Path.of(CORRECT_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't reading file");
+        }
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void readerFile() {
     }
 
     @Test

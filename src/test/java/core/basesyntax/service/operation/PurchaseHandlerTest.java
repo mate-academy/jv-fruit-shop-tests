@@ -1,8 +1,10 @@
-package core.basesyntax.service.operationtypes;
+package core.basesyntax.service.operation;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.operation.handler.OperationTypeHandler;
+import core.basesyntax.service.operation.handler.PurchaseHandler;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;

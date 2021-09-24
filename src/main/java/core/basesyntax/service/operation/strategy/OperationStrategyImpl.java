@@ -1,5 +1,7 @@
-package core.basesyntax.service.operationtypes;
+package core.basesyntax.service.operation.strategy;
 
+import core.basesyntax.service.operation.handler.OperationTypeHandler;
+import core.basesyntax.service.operation.handler.Operations;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

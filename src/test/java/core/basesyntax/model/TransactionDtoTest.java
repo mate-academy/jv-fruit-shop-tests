@@ -3,11 +3,11 @@ package core.basesyntax.model;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.operationtypes.BalanceHandler;
-import core.basesyntax.service.operationtypes.OperationStrategy;
-import core.basesyntax.service.operationtypes.OperationStrategyImpl;
-import core.basesyntax.service.operationtypes.OperationTypeHandler;
-import core.basesyntax.service.operationtypes.Operations;
+import core.basesyntax.service.operation.handler.BalanceHandler;
+import core.basesyntax.service.operation.handler.OperationTypeHandler;
+import core.basesyntax.service.operation.handler.Operations;
+import core.basesyntax.service.operation.strategy.OperationStrategy;
+import core.basesyntax.service.operation.strategy.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

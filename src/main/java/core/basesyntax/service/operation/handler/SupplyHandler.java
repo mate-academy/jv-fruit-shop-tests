@@ -1,4 +1,4 @@
-package core.basesyntax.service.operationtypes;
+package core.basesyntax.service.operation.handler;
 
 import core.basesyntax.db.Storage;
 

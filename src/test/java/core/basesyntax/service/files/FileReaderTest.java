@@ -30,13 +30,14 @@ public class FileReaderTest {
         assertEquals(expected, actual);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void read_incorrectPath_NotOk() {
+        fileReader.read(FROM_INCORRECT_PATH);
+    }
+
     @After
     public void afterEachTest() {
         testList.clear();
     }
 
-    @Test(expected = RuntimeException.class)
-    public void read_incorrectPath_NotOk() {
-        fileReader.read(FROM_INCORRECT_PATH);
-    }
 }

@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 // Can't rename this this class to FileWriter. Conflict with io.FileWriter
-public class ToFileWriter {
+public class FileWriter {
     public void writeToCsv(String report, String filename) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(filename));

@@ -10,13 +10,13 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ToFileWriterTest {
+public class FileWriterTest {
     private static final String FILE_HEAD = "fruit,quantity";
     private static final String TO_FILE_NAME = "src/test/resources/result.csv";
     private static final String INCORRECT_FILE_NAME = "";
     private static final String SEPARATOR = ",";
     private static String report;
-    private static ToFileWriter toFileWriter;
+    private static FileWriter toFileWriter;
     private static List<String> correctData;
 
     @Before
@@ -25,7 +25,7 @@ public class ToFileWriterTest {
         correctData.add(FILE_HEAD);
         correctData.add("banana,120");
         correctData.add("apple,60");
-        toFileWriter = new ToFileWriter();
+        toFileWriter = new FileWriter();
         report = new StringBuilder(FILE_HEAD)
                 .append(System.lineSeparator())
                 .append("banana")

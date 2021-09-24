@@ -73,9 +73,10 @@ public class OperationStrategyImplTest {
         expected = RETURN.getClass();
         try {
             actual = operationStrategy.getHandler(FruitRecordDto.Activities.RETURN).getClass();
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             return;
         }
-        fail("Should throw NullPointerException");
+        fail("Should throw RuntimeException with information:"
+                + "'This operation does not exist: + type'");
     }
 }

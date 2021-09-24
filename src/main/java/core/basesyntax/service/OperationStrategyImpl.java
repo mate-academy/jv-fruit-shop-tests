@@ -13,6 +13,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitRecordDto.Activities type) {
-        return mapTypeHandler.get(type);
+        try {
+            return mapTypeHandler.get(type);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("This operation does not exist:" + type);
+        }
     }
 }

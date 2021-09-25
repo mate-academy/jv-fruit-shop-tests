@@ -28,6 +28,7 @@ public class FruitCounterImplTest {
         operationHandlerMap.put("s", new SupplyHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitCounter = new FruitCounterImpl(operationStrategy);
+
     }
 
     @Test

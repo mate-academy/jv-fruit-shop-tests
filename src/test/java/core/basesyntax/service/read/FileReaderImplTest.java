@@ -1,6 +1,5 @@
 package core.basesyntax.service.read;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -30,11 +29,6 @@ public class FileReaderImplTest {
 
     @Test (expected = RuntimeException.class)
     public void read_readInvalidFilePath_ExceptionOk() {
-        List<String> actual = fileReader.read("src/test/java/resources/invalidFilePath.csv");
+        fileReader.read("src/test/java/resources/invalidFilePath.csv");
     }
-
-
-
-
-
 }

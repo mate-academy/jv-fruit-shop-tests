@@ -1,5 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
+import core.basesyntax.Record;
+import core.basesyntax.RecordParser;
 import core.basesyntax.activity.Activities;
 import core.basesyntax.activity.ActivityHandler;
 import core.basesyntax.activity.ActivityStrategy;
@@ -14,25 +16,32 @@ import core.basesyntax.implementation.ReturnActivityHandlerImpl;
 import core.basesyntax.implementation.SupplyActivityHandlerImpl;
 import core.basesyntax.implementation.ValidatorImpl;
 import core.basesyntax.implementation.WriterServiceImpl;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.Validator;
-import core.basesyntax.service.WriterService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class Main {
-    private static final String INPUT_FILE = "src/test/resources/input.txt";
-    private static final String OUTPUT_FILE = "src/test/resources/output.txt";
+public class FruitServiceTest {
+    private static final String INPUT_FILE = "src/test/resources/fruit_service_test_input.txt";
+    private static final String OUTPUT_FILE = "src/test/resources/fruit_service_test_output.txt";
+    private static final String EXPECTED
+            = "fruit,quantity\n"
+            + "banana,152\n"
+            + "apple,90";
+    private static FruitService fruitService;
+    private static CsvFileReader csvReader;
 
-    public static void main(String[] args) {
+    @BeforeClass
+    public static void setUp() {
         Map<String, ActivityHandler> activities = new HashMap<>();
         activities.put(Activities.BALANCE.getActivity(), new BalanceActivityHandlerImpl());
         activities.put(Activities.SUPPLY.getActivity(), new SupplyActivityHandlerImpl());
         activities.put(Activities.PURCHASE.getActivity(), new PurchaseActivityHandlerImpl());
         activities.put(Activities.RETURN.getActivity(), new ReturnActivityHandlerImpl());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
-        CsvFileReader csvReader = new CsvFileReaderImpl();
+        csvReader = new CsvFileReaderImpl();
         String inputData = csvReader.readFromFile(INPUT_FILE);
         RecordParser recordParser = new RecordParser();
         List<Record> recordList = recordParser.parseRecords(inputData);
@@ -40,9 +49,15 @@ public class Main {
         validator.validate(recordList);
         FileWriter fileWriter = new FileWriterFileImpl();
         WriterService writerService = new WriterServiceImpl(fileWriter, OUTPUT_FILE);
-        FruitService fruiTservice =
+        fruitService =
                 new FruitService(recordList, writerService, activityStrategy);
-        fruiTservice.applyOperationsOnFruitsRecords();
-        fruiTservice.generateReport();
+        fruitService.applyOperationsOnFruitsRecords();
+    }
+
+    @Test
+    public void generateReport_ok() {
+        fruitService.generateReport();
+        String actual = csvReader.readFromFile(OUTPUT_FILE);
+        Assert.assertEquals(actual, EXPECTED);
     }
 }

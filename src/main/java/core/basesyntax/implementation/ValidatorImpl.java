@@ -12,11 +12,7 @@ public class ValidatorImpl implements Validator {
             if (record.getActivity() == null
                     || record.getFruit() == null
                     || record.getAmount() < 0) {
-                try {
-                    throw new ValidationException("Invalid input data");
-                } catch (ValidationException e) {
-                    e.printStackTrace();
-                }
+                throw new ValidationException("Invalid input data");
             }
         }
     }

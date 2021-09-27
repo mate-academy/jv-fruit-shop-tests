@@ -19,22 +19,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private static final FruitRecord recordOrangeBalance =
-            new FruitRecord(new String[]{"b", "orange", "100"});
-    private static final FruitRecord recordOrangeReturn =
-            new FruitRecord(new String[]{"r", "orange", "8"});
-    private static final FruitRecord recordOrangeSupply =
-            new FruitRecord(new String[]{"s", "orange", "10"});
-    private static final FruitRecord recordOrangePurchase =
-            new FruitRecord(new String[]{"p", "orange", "100"});
-    private static final FruitRecord recordCherryBalance =
-            new FruitRecord(new String[]{"b", "cherry", "8"});
-    private static final FruitRecord recordCherryReturn =
-            new FruitRecord(new String[]{"r", "cherry", "26"});
-    private static final FruitRecord recordCherrySupply =
-            new FruitRecord(new String[]{"s", "cherry", "1011"});
-    private static final FruitRecord recordCherryPurchase =
-            new FruitRecord(new String[]{"p", "cherry", "1000"});
     private static ActivitiesStrategy strategy;
     private static Map<TypeOfActivities, ActivityHandler> typeOfActivitiesMap;
     private static FruitService fruitService;
@@ -43,7 +27,7 @@ public class FruitServiceImplTest {
 
     @Before
     public void setUp() {
-        Storage.fruitsQuantity.clear();
+        Storage.FRUITS_QUANTITY.clear();
         typeOfActivitiesMap = new HashMap<>();
         typeOfActivitiesMap.put(TypeOfActivities.BALANCE, new BalanceHandler());
         typeOfActivitiesMap.put(TypeOfActivities.SUPPLY, new SupplyHandler());
@@ -51,6 +35,14 @@ public class FruitServiceImplTest {
         typeOfActivitiesMap.put(TypeOfActivities.RETURN, new ReturnHandler());
         strategy = new ActivitiesStrategyImpl(typeOfActivitiesMap);
         records = new ArrayList<>();
+        FruitRecord recordOrangeBalance = new FruitRecord(new String[]{"b", "orange", "100"});
+        FruitRecord recordOrangeReturn = new FruitRecord(new String[]{"r", "orange", "8"});
+        FruitRecord recordOrangeSupply = new FruitRecord(new String[]{"s", "orange", "10"});
+        FruitRecord recordOrangePurchase = new FruitRecord(new String[]{"p", "orange", "100"});
+        FruitRecord recordCherryBalance = new FruitRecord(new String[]{"b", "cherry", "8"});
+        FruitRecord recordCherryReturn = new FruitRecord(new String[]{"r", "cherry", "26"});
+        FruitRecord recordCherrySupply = new FruitRecord(new String[]{"s", "cherry", "1011"});
+        FruitRecord recordCherryPurchase = new FruitRecord(new String[]{"p", "cherry", "1000"});
         records.add(recordOrangeBalance);
         records.add(recordOrangeReturn);
         records.add(recordOrangeSupply);
@@ -66,10 +58,10 @@ public class FruitServiceImplTest {
         fruitService = new FruitServiceImpl(strategy);
         fruitService.recordToMap(records);
         assertTrue("Missing key 'orange'",
-                Storage.fruitsQuantity.containsKey("orange")
-                && Storage.fruitsQuantity.get("orange") == 18);
-        assertTrue("missing key 'cherry'",Storage.fruitsQuantity.containsKey("cherry")
-                && Storage.fruitsQuantity.get("cherry") == 45);
-        assertEquals("Wrong size, " + 2,2, Storage.fruitsQuantity.size());
+                Storage.FRUITS_QUANTITY.containsKey("orange")
+                && Storage.FRUITS_QUANTITY.get("orange") == 18);
+        assertTrue("missing key 'cherry'",Storage.FRUITS_QUANTITY.containsKey("cherry")
+                && Storage.FRUITS_QUANTITY.get("cherry") == 45);
+        assertEquals("Wrong size, " + 2,2, Storage.FRUITS_QUANTITY.size());
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Storage {
-    public static final List<FruitRecord> records = new ArrayList<>();
-    public static final Map<String, Integer> fruitsQuantity = new HashMap<>();
+    public static final List<FruitRecord> RECORDS = new ArrayList<>();
+    public static final Map<String, Integer> FRUITS_QUANTITY = new HashMap<>();
 }
 

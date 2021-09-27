@@ -10,32 +10,32 @@ import org.junit.Test;
 
 public class SupplyHandlerTest {
 
-    private static final ActivityHandler balanceHandler = new BalanceHandler();
-    private static final ActivityHandler supplyHandler = new SupplyHandler();
-    private static final FruitRecord recordOrangeBalance
+    private static final ActivityHandler BALANCE_HANDLER = new BalanceHandler();
+    private static final ActivityHandler SUPPLY_HANDLER = new SupplyHandler();
+    private static final FruitRecord RECORD_ORANGE_BALANCE
             = new FruitRecord(new String[]{"b", "orange", "100"});
-    private static final FruitRecord recordOrangeSupply
+    private static final FruitRecord RECORD_ORANGE_SUPPLY
             = new FruitRecord(new String[]{"s", "orange", "50"});
     private static String expected;
 
     @Before
     public void setUp() {
-        Storage.fruitsQuantity.clear();
+        Storage.FRUITS_QUANTITY.clear();
     }
 
     @Test
     public void supplyHandler_addNewSupplyInEmptyDb_Ok() {
-        supplyHandler.apply(recordOrangeSupply);
-        assertTrue("Can't write this record to db " + recordOrangeSupply,
-                Storage.fruitsQuantity.containsKey(recordOrangeSupply.getFruit())
-                && Storage.fruitsQuantity.containsValue(recordOrangeSupply.getAmount()));
+        SUPPLY_HANDLER.apply(RECORD_ORANGE_SUPPLY);
+        assertTrue("Can't write this record to db " + RECORD_ORANGE_SUPPLY,
+                Storage.FRUITS_QUANTITY.containsKey(RECORD_ORANGE_SUPPLY.getFruit())
+                && Storage.FRUITS_QUANTITY.containsValue(RECORD_ORANGE_SUPPLY.getAmount()));
     }
 
     @Test
     public void supplyHandler_normalSupply_Ok() {
-        balanceHandler.apply(recordOrangeBalance);
-        supplyHandler.apply(recordOrangeSupply);
-        assertEquals("Can't write this record to db " + recordOrangeSupply,
-                150, (int) Storage.fruitsQuantity.get(recordOrangeSupply.getFruit()));
+        BALANCE_HANDLER.apply(RECORD_ORANGE_BALANCE);
+        SUPPLY_HANDLER.apply(RECORD_ORANGE_SUPPLY);
+        assertEquals("Can't write this record to db " + RECORD_ORANGE_SUPPLY,
+                150, (int) Storage.FRUITS_QUANTITY.get(RECORD_ORANGE_SUPPLY.getFruit()));
     }
 }

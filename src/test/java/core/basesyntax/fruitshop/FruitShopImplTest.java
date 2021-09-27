@@ -20,13 +20,13 @@ public class FruitShopImplTest {
     private static FruitShop fruitShop;
     private static ActivitiesStrategy strategy;
     private static Map<TypeOfActivities, ActivityHandler> typeOfActivitiesMap;
-    private static final String filePathNormalData = "src/main/resources/inputData.csv";
-    private static final String emptyFile = "src/main/resources/empty.csv";
-    private static final String incorrectTypeOfActivities =
+    private static final String FILE_PATH_NORMAL_DATA = "src/main/resources/inputData.csv";
+    private static final String EMPTY_FILE = "src/main/resources/empty.csv";
+    private static final String INCORRECT_TYPE_OF_ACTIVITIES =
             "src/main/resources/incorrectInputData1.csv";
-    private static final String failData = "src/main/resources/incorrectInputData2.csv";
-    private static final String deficiencyData = "src/main/resources/incorrectInputData3.csv";
-    private static final String reportPath = "src/main/resources/report.csv";
+    private static final String FAIL_DATA = "src/main/resources/incorrectInputData2.csv";
+    private static final String DEFICIENCY_DATA = "src/main/resources/incorrectInputData3.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
     private String expected;
 
     @Before
@@ -37,39 +37,39 @@ public class FruitShopImplTest {
         typeOfActivitiesMap.put(TypeOfActivities.PURCHASE, new PurchaseHandler());
         typeOfActivitiesMap.put(TypeOfActivities.RETURN, new ReturnHandler());
         strategy = new ActivitiesStrategyImpl(typeOfActivitiesMap);
-        Storage.fruitsQuantity.clear();
-        Storage.records.clear();
+        Storage.FRUITS_QUANTITY.clear();
+        Storage.RECORDS.clear();
     }
 
     @Test
     public void fruitShop_normalData_Ok() {
-        fruitShop = new FruitShopImpl(strategy, filePathNormalData, reportPath);
+        fruitShop = new FruitShopImpl(strategy, FILE_PATH_NORMAL_DATA, REPORT_PATH);
         expected = "Report created!";
         assertEquals("Can't create report at this file "
-                + filePathNormalData, expected, fruitShop.createNewReport());
+                + FILE_PATH_NORMAL_DATA, expected, fruitShop.createNewReport());
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitShop_emptyFileData_Ok() {
-        fruitShop = new FruitShopImpl(strategy, emptyFile, reportPath);
+        fruitShop = new FruitShopImpl(strategy, EMPTY_FILE, REPORT_PATH);
         fruitShop.createNewReport();
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitShop_incorrectTypeOfActivities_Ok() {
-        fruitShop = new FruitShopImpl(strategy, incorrectTypeOfActivities, reportPath);
+        fruitShop = new FruitShopImpl(strategy, INCORRECT_TYPE_OF_ACTIVITIES, REPORT_PATH);
         fruitShop.createNewReport();
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitShop_incorrectInputData_Ok() {
-        fruitShop = new FruitShopImpl(strategy, failData, reportPath);
+        fruitShop = new FruitShopImpl(strategy, FAIL_DATA, REPORT_PATH);
         fruitShop.createNewReport();
     }
 
     @Test(expected = RuntimeException.class)
     public void fruitShop_deficiencyData_Ok() {
-        fruitShop = new FruitShopImpl(strategy, deficiencyData, reportPath);
+        fruitShop = new FruitShopImpl(strategy, DEFICIENCY_DATA, REPORT_PATH);
         fruitShop.createNewReport();
     }
 }

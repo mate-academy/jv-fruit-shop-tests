@@ -8,21 +8,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
-    private static final String[] balanceOrange = new String[]{"b", "orange", "100"};
-    private static final String[] balanceCherry = new String[]{"b", "cherry", "200"};
-    private static final String[] purchaseOrange = new String[]{"p", "orange", "50"};
-    private static final String[] purchaseOrange1 = new String[]{"p", "orange", "100"};
-    private static final ActivityHandler purchaseHandler = new PurchaseHandler();
-    private static final ActivityHandler balanceHandler = new BalanceHandler();
-    private static final FruitRecord recordOrangeBalance = new FruitRecord(balanceOrange);
-    private static final FruitRecord recordCherryBalance = new FruitRecord(balanceCherry);
-    private static final FruitRecord recordOrangePurchase = new FruitRecord(purchaseOrange);
-    private static final FruitRecord recordOrangePurchase1 = new FruitRecord(purchaseOrange1);
-    private static int expected;
+    private ActivityHandler purchaseHandler;
+    private ActivityHandler balanceHandler;
+    private FruitRecord recordOrangeBalance;
+    private FruitRecord recordCherryBalance;
+    private FruitRecord recordOrangePurchase;
+    private FruitRecord recordSecondOrangePurchase;
+    private int expected;
 
     @Before
     public void setUp() {
-        Storage.fruitsQuantity.clear();
+        purchaseHandler = new PurchaseHandler();
+        balanceHandler = new BalanceHandler();
+        recordOrangeBalance = new FruitRecord(new String[]{"b", "orange", "100"});
+        recordCherryBalance = new FruitRecord(new String[]{"b", "cherry", "200"});
+        recordOrangePurchase = new FruitRecord(new String[]{"p", "orange", "50"});
+        recordSecondOrangePurchase = new FruitRecord(new String[]{"p", "orange", "100"});
+        Storage.FRUITS_QUANTITY.clear();
     }
 
     @Test
@@ -31,16 +33,16 @@ public class PurchaseHandlerTest {
         purchaseHandler.apply(recordOrangePurchase);
         int expected = 50;
         assertEquals("Can't write this record to db " + recordOrangePurchase,
-                expected, (int)Storage.fruitsQuantity.get(recordOrangePurchase.getFruit()));
+                expected, (int)Storage.FRUITS_QUANTITY.get(recordOrangePurchase.getFruit()));
     }
 
     @Test
     public void purchaseHandler_toZeroBalance_Ok() {
         balanceHandler.apply(recordOrangeBalance);
-        purchaseHandler.apply(recordOrangePurchase1);
-        assertEquals("Can't write this record to db " + recordOrangePurchase1,
+        purchaseHandler.apply(recordSecondOrangePurchase);
+        assertEquals("Can't write this record to db " + recordSecondOrangePurchase,
                 0,
-                (int) Storage.fruitsQuantity.get(recordOrangePurchase1.getFruit()));
+                (int) Storage.FRUITS_QUANTITY.get(recordSecondOrangePurchase.getFruit()));
     }
 
     @Test(expected = RuntimeException.class)
@@ -53,6 +55,6 @@ public class PurchaseHandlerTest {
     public void purchaseHandler_tooMuchPurchase_NotOk() {
         balanceHandler.apply(recordOrangeBalance);
         purchaseHandler.apply(recordOrangePurchase);
-        purchaseHandler.apply(recordOrangePurchase1);
+        purchaseHandler.apply(recordSecondOrangePurchase);
     }
 }

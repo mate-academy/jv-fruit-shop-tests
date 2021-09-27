@@ -30,11 +30,11 @@ public class FruitShopImpl implements FruitShop {
         String stringFile = file.read(filePath);
         FruitRecordToList recordToList = new FruitRecordToListImpl();
         List<FruitRecord> fruitRecordList = recordToList.fruitRecordToList(stringFile);
-        Storage.records.addAll(fruitRecordList);
+        Storage.RECORDS.addAll(fruitRecordList);
         FruitService record = new FruitServiceImpl(strategy);
-        record.recordToMap(Storage.records);
+        record.recordToMap(Storage.RECORDS);
         WriteFile writeFile = new WriteFileImpl();
-        writeFile.writeWithMapToFile(Storage.fruitsQuantity, reportPath);
+        writeFile.writeWithMapToFile(Storage.FRUITS_QUANTITY, reportPath);
         return "Report created!";
     }
 }

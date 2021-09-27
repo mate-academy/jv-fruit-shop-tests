@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
@@ -53,5 +54,11 @@ public class OperationStrategyImplTest {
         String expected = PurchaseHandler.class.getName();
         String actual = operationStrategy.get(OperationType.PURCHASE).getClass().getName();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void operationStrategy_getNull_isNotOk() {
+        Assertions.assertThrows(RuntimeException.class, () ->
+        operationStrategy.get(null));
     }
 }

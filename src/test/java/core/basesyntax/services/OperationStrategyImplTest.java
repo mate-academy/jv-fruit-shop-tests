@@ -59,6 +59,6 @@ public class OperationStrategyImplTest {
     @Test
     public void operationStrategy_getNull_isNotOk() {
         Assertions.assertThrows(RuntimeException.class, () ->
-        operationStrategy.get(null));
+                    operationStrategy.get(null));
     }
 }

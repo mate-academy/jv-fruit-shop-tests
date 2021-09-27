@@ -9,8 +9,8 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitRecordDto;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class MapperTest {
     private static Mapper mapper = new Mapper();
@@ -44,11 +44,7 @@ public class MapperTest {
         List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("b,banana,-100");
-        try {
-            mapper.apply(stringList);
-        } catch (RuntimeException ex) {
-            e = ex;
-        }
-        Assert.assertTrue(e instanceof RuntimeException);
+        Assertions.assertThrows(RuntimeException.class, () ->
+                    mapper.apply(stringList));
     }
 }

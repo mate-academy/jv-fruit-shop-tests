@@ -17,7 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationsStrategyTest {
-    private static final Fruit BANANA30 = new Fruit("banana", 30);
+    private static final Fruit thirtyBananas = new Fruit("banana", 30);
 
     @Before
     public void tearDown() {
@@ -36,7 +36,7 @@ public class OperationsStrategyTest {
     public void testBalanceOk() {
         FruitDao fruitDao = new FruitDaoImpl();
         OperationHandler operationHandler = new Balance();
-        operationHandler.apply(BANANA30);
+        operationHandler.apply(thirtyBananas);
         Integer expected = 30;
         assertEquals(expected, fruitDao.getAll().get(0).getQuality());
     }
@@ -45,8 +45,8 @@ public class OperationsStrategyTest {
     public void testPurchaseOk() {
         FruitDao fruitDao = new FruitDaoImpl();
         OperationHandler operationHandler = new Purchase();
-        fruitDao.add(BANANA30);
-        operationHandler.apply(BANANA30);
+        fruitDao.add(thirtyBananas);
+        operationHandler.apply(thirtyBananas);
         Integer expected = 0;
         assertEquals(expected, fruitDao.getAll().get(0).getQuality());
     }
@@ -55,8 +55,8 @@ public class OperationsStrategyTest {
     public void testReturnOk() {
         FruitDao fruitDao = new FruitDaoImpl();
         OperationHandler operationHandler = new Return();
-        fruitDao.add(BANANA30);
-        operationHandler.apply(BANANA30);
+        fruitDao.add(thirtyBananas);
+        operationHandler.apply(thirtyBananas);
         Integer expected = 60;
         assertEquals(expected, fruitDao.getAll().get(0).getQuality());
     }
@@ -65,8 +65,8 @@ public class OperationsStrategyTest {
     public void testSupplyOk() {
         FruitDao fruitDao = new FruitDaoImpl();
         OperationHandler operationHandler = new Supply();
-        fruitDao.add(BANANA30);
-        operationHandler.apply(BANANA30);
+        fruitDao.add(thirtyBananas);
+        operationHandler.apply(thirtyBananas);
         Integer expected = 60;
         assertEquals(expected, fruitDao.getAll().get(0).getQuality());
     }

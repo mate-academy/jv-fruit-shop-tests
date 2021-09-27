@@ -1,5 +1,7 @@
 package core.basesyntax.validators;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,6 +24,13 @@ public class ValidatorForFileTest {
         exceptionRule.expectMessage("The quality must be greater than zero!!!");
         ValidatorForFile validator = new ValidatorForFileImpl();
         validator.test("src/main/resources/noCorrect.vcs");
+    }
+
+    @Test
+    public void testValidatorOk() {
+        Boolean expected = true;
+        ValidatorForFile validator = new ValidatorForFileImpl();
+        assertEquals(expected, validator.test("src/main/resources/10.09.99.vcs"));
     }
 
 }

@@ -8,30 +8,30 @@ import org.junit.Test;
 
 public class FruitDaoTest {
 
-    private static final Fruit BANANA0 = new Fruit("banana", 0);
-    private static final Fruit BANANA30 = new Fruit("banana", 30);
+    private static final Fruit banana = new Fruit("banana", 0);
+    private static final Fruit thirtyBananas = new Fruit("banana", 30);
 
     @Test
     public void testAddFruitDaoImpl() {
         FruitDao fruitDao = new FruitDaoImpl();
-        fruitDao.add(BANANA30);
+        fruitDao.add(thirtyBananas);
         Fruit actual = Storage.fruits.get(0);
-        assertEquals(BANANA30, actual);
+        assertEquals(thirtyBananas, actual);
     }
 
     @Test
     public void testGetFruitDaoImpl() {
         FruitDao fruitDao = new FruitDaoImpl();
-        Storage.fruits.add(BANANA30);
-        assertEquals(BANANA30, fruitDao.get(BANANA30));
+        Storage.fruits.add(thirtyBananas);
+        assertEquals(thirtyBananas, fruitDao.get(thirtyBananas));
     }
 
     @Test
     public void testUpdateFruitDaoImpl() {
         Storage.fruits.clear();
         FruitDao fruitDao = new FruitDaoImpl();
-        fruitDao.add(BANANA0);
-        fruitDao.update(BANANA30);
+        fruitDao.add(banana);
+        fruitDao.update(thirtyBananas);
         Integer expected = 30;
         assertEquals("Method UPDATE in class FruitDaoImpl no work",
                 expected,

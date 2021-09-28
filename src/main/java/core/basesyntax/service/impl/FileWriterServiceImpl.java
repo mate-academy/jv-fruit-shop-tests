@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import core.basesyntax.service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override

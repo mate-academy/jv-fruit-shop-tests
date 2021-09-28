@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
-import org.junit.Before;
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
 import core.basesyntax.service.strategy.BalanceHandler;
 import core.basesyntax.service.strategy.PurchaseHandler;
 import core.basesyntax.service.strategy.ReturnHandler;
 import core.basesyntax.service.strategy.SupplyHandler;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static OperationStrategyImpl operationStrategy;

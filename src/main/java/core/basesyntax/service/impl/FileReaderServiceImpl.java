@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import core.basesyntax.service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override

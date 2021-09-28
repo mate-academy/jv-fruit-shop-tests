@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.List;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FormReport;
@@ -11,6 +10,7 @@ import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FormReportImpl;
 import core.basesyntax.service.impl.InputDataValidatorImpl;
 import core.basesyntax.service.impl.ParseImpl;
+import java.util.List;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/res/input.csv";

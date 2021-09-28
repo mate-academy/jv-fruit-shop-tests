@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.Parse;
 import core.basesyntax.service.strategy.Handler;
+import java.util.List;
 
 public class ParseImpl implements Parse {
     private final OperationStrategy strategy = new OperationStrategyImpl();

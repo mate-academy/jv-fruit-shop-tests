@@ -1,12 +1,11 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 import java.util.Set;
-
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class StorageTest {
 

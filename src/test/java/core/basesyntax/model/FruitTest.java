@@ -1,16 +1,17 @@
 package core.basesyntax.model;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class FruitTest {
     private static final String VALID_STRING = "Fruit{name='banana'}";
-    Fruit fruitFirst = new Fruit("banana");
-    Fruit fruitSecond = new Fruit("banana");
+    private final Fruit fruitFirst = new Fruit("banana");
+    private final Fruit fruitSecond = new Fruit("banana");
 
     @Test
-    public void checkQuality () {
+    public void checkQuality() {
         assertEquals(fruitFirst, fruitSecond);
     }
 

@@ -64,6 +64,18 @@ public class DataHandlerServiceImplTest {
     }
 
     @Test
+    public void handleDataNullValue_NotOk() {
+        List<FruitRecord> operations = new ArrayList<>();
+        operations.add(null);
+        try {
+            dataHandlerService.handleData(operations);
+        } catch (RuntimeException e) {
+            return;
+        }
+        fail("You should throw exception for null value");
+    }
+
+    @Test
     public void handleData_NotOk() {
         List<FruitRecord> operations = new ArrayList<>();
         operations.add(new FruitRecord(null, "banana", 200));

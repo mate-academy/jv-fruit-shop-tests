@@ -10,9 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FormReportImplTest {
-    private static final String REPORT_HEAD = "fruit,quantity";
-    private static final String RESULT_BANANA = "banana,152";
-    private static final String RESULT_APPLE = "apple,90";
     private static final String VALID_RESULT = "fruit,quantity\r\nbanana,152\r\napple,90";
     private final FormReport formReport = new FormReportImpl();
 

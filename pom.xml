@@ -91,8 +91,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main.java</exclude>
-                        <exclude>**/model/Fruit.java</exclude>
-                        <exclude>**/db/Storage.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

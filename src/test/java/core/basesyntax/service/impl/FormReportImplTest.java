@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -24,5 +25,11 @@ public class FormReportImplTest {
     @Test
     public void checkReport() {
         assertEquals(formReport.reportFromStorage(), VALID_RESULT);
+    }
+
+    @Test
+    public void checkNotValidReport() {
+        Storage.storage.clear();
+        assertNotEquals(formReport.reportFromStorage(), VALID_RESULT);
     }
 }

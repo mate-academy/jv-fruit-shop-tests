@@ -11,7 +11,7 @@ public class InputDataValidatorImpl implements InputDataValidator {
     public boolean chekDate(List<String> str) {
         for (int i = 1; i < str.size(); i++) {
             if (!VALID_RECORD.matcher(str.get(i)).matches()) {
-                throw new RuntimeException("Input data is wrong!");
+                throw new RuntimeException("Input data is wrong! " + str.get(i));
             }
         }
         return true;

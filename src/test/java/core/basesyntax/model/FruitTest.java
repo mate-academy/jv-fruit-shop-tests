@@ -28,7 +28,6 @@ public class FruitTest {
 
     @Test
     public void checkToString() {
-        System.out.println(fruitSecond.toString());
         assertEquals(fruitSecond.toString(), VALID_STRING);
     }
 }

@@ -37,6 +37,6 @@ public class DataParserServiceImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("You should throw an exception for wrong input data!");
+        fail("parseData method should throw an RuntimeException for wrong input data!");
     }
 }

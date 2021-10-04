@@ -8,7 +8,6 @@ import dao.Reader;
 import dao.ReaderImpl;
 import dao.Writer;
 import dao.WriterImpl;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ import service.operation.SupplyOperationHandler;
 import validator.Validator;
 import validator.ValidatorImpl;
 
-public class FruitShopTests {
+public class DaoTests {
     private static Reader reader;
     private static Validator validator;
     private static Reporter reporter;
@@ -38,8 +37,6 @@ public class FruitShopTests {
     private static OperationStrategy operationStrategy;
     private static List<String> validData;
     private static List<String> nullInput;
-    private static List<String> validatorNegativeOperation;
-    private static List<String> validatorShortString;
     private static Map<String, OperationHandler> operationHandlerMap;
     private static final String nullFilePath = null;
     private static final String correctInputFilePath = "src/main/resources/input.csv";
@@ -63,31 +60,7 @@ public class FruitShopTests {
         reader = new ReaderImpl();
         validator = new ValidatorImpl();
         reporter = new ReporterImpl(validator, operationStrategy);
-        validatorNegativeOperation = new ArrayList<>();
-        validatorShortString = new ArrayList<>();
-        validatorNegativeOperation.add("p,banana,-1");
-        validatorShortString.add("b,");
         validData = reader.read(correctInputFilePath);
-    }
-
-    @Test
-    public void validator_validInput_Ok() {
-        assertTrue(validator.validate(validData));
-    }
-
-    @Test
-    public void validator_Null_NotOk() {
-        assertThrows(RuntimeException.class, () -> validator.validate(nullInput));
-    }
-
-    @Test
-    public void validator_negativeOperation_NotOk() {
-        assertThrows(RuntimeException.class, () -> validator.validate(validatorNegativeOperation));
-    }
-
-    @Test
-    public void validator_shortStringInput_NotOk() {
-        assertThrows(RuntimeException.class, () -> validator.validate(validatorShortString));
     }
 
     @Test

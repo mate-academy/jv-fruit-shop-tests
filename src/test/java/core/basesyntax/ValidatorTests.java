@@ -13,14 +13,13 @@ import validator.Validator;
 import validator.ValidatorImpl;
 
 public class ValidatorTests {
-    private static Reader reader;
-    private static Validator validator;
-
-    private static List<String> validData;
-    private static List<String> nullInput;
-    private static List<String> validatorNegativeOperation;
-    private static List<String> validatorShortString;
-    private static final String correctInputFilePath = "src/main/resources/input.csv";
+    private String correctInputFilePath = "src/main/resources/input.csv";
+    private Reader reader;
+    private Validator validator;
+    private List<String> validData;
+    private List<String> nullInput;
+    private List<String> validatorNegativeOperation;
+    private List<String> validatorShortString;
 
     @Before
     public void init() {

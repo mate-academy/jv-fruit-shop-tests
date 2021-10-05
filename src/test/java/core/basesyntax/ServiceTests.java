@@ -24,18 +24,18 @@ import validator.Validator;
 import validator.ValidatorImpl;
 
 public class ServiceTests {
-    private static Reader reader;
-    private static Validator validator;
-    private static Reporter reporter;
-    private static OperationHandler supplyHandler;
-    private static OperationHandler returnHandler;
-    private static OperationHandler purchaseHandler;
-    private static OperationHandler balanceHandler;
-    private static OperationStrategy operationStrategy;
-    private static List<String> validData;
-    private static List<String> nullInput;
-    private static Map<String, OperationHandler> operationHandlerMap;
-    private static final String correctInputFilePath = "src/main/resources/input.csv";
+    private String correctInputFilePath = "src/main/resources/input.csv";
+    private Reader reader;
+    private Validator validator;
+    private Reporter reporter;
+    private OperationHandler supplyHandler;
+    private OperationHandler returnHandler;
+    private OperationHandler purchaseHandler;
+    private OperationHandler balanceHandler;
+    private OperationStrategy operationStrategy;
+    private List<String> validData;
+    private List<String> nullInput;
+    private Map<String, OperationHandler> operationHandlerMap;
 
     @Before
     public void init() {
@@ -64,15 +64,10 @@ public class ServiceTests {
     }
 
     @Test
-    public void reporter_mapContainsKeyBanana_Ok() {
-        Map<String, Integer> actualMap = reporter.report(validData);
-        assertTrue(actualMap.containsKey("banana"));
-    }
-
-    @Test
-    public void reporter_mapContainsKeyApple_Ok() {
+    public void reporter_mapContainsKeys_Ok() {
         Map<String, Integer> actualMap = reporter.report(validData);
         assertTrue(actualMap.containsKey("apple"));
+        assertTrue(actualMap.containsKey("banana"));
     }
 
     @Test

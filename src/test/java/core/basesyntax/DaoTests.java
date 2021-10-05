@@ -26,23 +26,23 @@ import validator.Validator;
 import validator.ValidatorImpl;
 
 public class DaoTests {
-    private static Reader reader;
-    private static Validator validator;
-    private static Reporter reporter;
-    private static Writer writer;
-    private static OperationHandler supplyHandler;
-    private static OperationHandler returnHandler;
-    private static OperationHandler purchaseHandler;
-    private static OperationHandler balanceHandler;
-    private static OperationStrategy operationStrategy;
-    private static List<String> validData;
-    private static List<String> nullInput;
-    private static Map<String, OperationHandler> operationHandlerMap;
-    private static final String nullFilePath = null;
-    private static final String correctInputFilePath = "src/main/resources/input.csv";
-    private static final String correctReportPath = "src/main/reports/report.csv";
-    private static final String incorrectInputFilePath = "src/main//input.csv";
-    private static final String incorrectReportFilePath = "src/main/report/report.csv";
+    private String nullFilePath = null;
+    private String correctInputFilePath = "src/main/resources/input.csv";
+    private String correctReportPath = "src/main/reports/report.csv";
+    private String incorrectInputFilePath = "src/main//input.csv";
+    private String incorrectReportFilePath = "src/main/report/report.csv";
+    private Reader reader;
+    private Validator validator;
+    private Reporter reporter;
+    private Writer writer;
+    private OperationHandler supplyHandler;
+    private OperationHandler returnHandler;
+    private OperationHandler purchaseHandler;
+    private OperationHandler balanceHandler;
+    private OperationStrategy operationStrategy;
+    private List<String> validData;
+    private List<String> nullInput;
+    private Map<String, OperationHandler> operationHandlerMap;
 
     @Before
     public void init() {

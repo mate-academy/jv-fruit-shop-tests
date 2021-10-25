@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private static ReportCreator REPORT_CREATOR = new ReportCreatorImpl();
+    private static final ReportCreator REPORT_CREATOR = new ReportCreatorImpl();
     private static final String COLUMN_NAMES = "fruit,quantity";
 
     @Test(expected = RuntimeException.class)

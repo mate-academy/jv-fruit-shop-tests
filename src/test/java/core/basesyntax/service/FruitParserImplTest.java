@@ -14,8 +14,8 @@ import org.junit.Test;
 
 public class FruitParserImplTest {
     private static Map<String, OperationHandler> FRUIT_OPERATION_MAP = new HashMap<>();
-    private static FruitStrategy FRUIT_STRATEGY;
-    private static FruitParser FRUIT_PARSER;
+    private static FruitStrategy fruitStrategy;
+    private static FruitParser fruitParser;
 
     @Before
     public void setUp() {
@@ -23,13 +23,13 @@ public class FruitParserImplTest {
         FRUIT_OPERATION_MAP.put("s", new SupplyHandler());
         FRUIT_OPERATION_MAP.put("p", new PurchaseHandler());
         FRUIT_OPERATION_MAP.put("r", new ReturnHandler());
-        FRUIT_STRATEGY = new FruitStrategyImpl(FRUIT_OPERATION_MAP);
-        FRUIT_PARSER = new FruitParserImpl(FRUIT_STRATEGY);
+        fruitStrategy = new FruitStrategyImpl(FRUIT_OPERATION_MAP);
+        fruitParser = new FruitParserImpl(fruitStrategy);
     }
 
     @Test(expected = RuntimeException.class)
     public void nullInputData_NotOk() {
-        FRUIT_PARSER.parse(null);
+        fruitParser.parse(null);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FruitParserImplTest {
         expected.put("banana", 20);
         expected.put("apple", 30);
         expected.put("cherry", 40);
-        Map<String, Integer> actual = FRUIT_PARSER.parse(operations);
+        Map<String, Integer> actual = fruitParser.parse(operations);
         checkEquals(expected, actual);
     }
 
@@ -51,7 +51,7 @@ public class FruitParserImplTest {
         List<String> operations = List.of("type,fruit,quantity", "b,banana,20", "s,banana,30");
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 50);
-        Map<String, Integer> actual = FRUIT_PARSER.parse(operations);
+        Map<String, Integer> actual = fruitParser.parse(operations);
         checkEquals(expected, actual);
     }
 
@@ -60,7 +60,7 @@ public class FruitParserImplTest {
         List<String> operations = List.of("type,fruit,quantity", "b,banana,40", "p,banana,10");
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 30);
-        Map<String, Integer> actual = FRUIT_PARSER.parse(operations);
+        Map<String, Integer> actual = fruitParser.parse(operations);
         checkEquals(expected, actual);
     }
 
@@ -69,12 +69,12 @@ public class FruitParserImplTest {
         List<String> operations = List.of("type,fruit,quantity", "b,banana,40", "r,banana,10");
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 50);
-        Map<String, Integer> actual = FRUIT_PARSER.parse(operations);
+        Map<String, Integer> actual = fruitParser.parse(operations);
         checkEquals(expected, actual);
     }
 
     private void checkEquals(Map<String, Integer> expected, Map<String, Integer> actual) {
-        for (Map.Entry entry : expected.entrySet()) {
+        for (Map.Entry<String, Integer> entry : expected.entrySet()) {
             Assert.assertTrue(actual.containsKey(entry.getKey()));
             Assert.assertEquals(entry.getValue(), actual.get(entry.getKey()));
         }

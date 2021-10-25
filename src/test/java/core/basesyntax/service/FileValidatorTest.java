@@ -4,8 +4,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class FileValidatorTest {
-    private static DataValidator FILE_VALIDATOR = new FileValidator();
-    private static List<String> CORRECT_CONTENT = List.of("type,fruit,quantity"
+    private static DataValidator fileValidator = new FileValidator();
+    private static final List<String> CORRECT_CONTENT = List.of("type,fruit,quantity"
             + System.lineSeparator(),
             "b,banana,20" + System.lineSeparator(),
             "b,apple,100" + System.lineSeparator(),
@@ -15,7 +15,7 @@ public class FileValidatorTest {
             "p,apple,20" + System.lineSeparator(),
             "p,banana,5" + System.lineSeparator(),
             "s,banana,50");
-    private static List<String> NEGATIVE_NUMBERS_CONTENT = List.of("type,fruit,quantity"
+    private static final List<String> NEGATIVE_NUMBERS_CONTENT = List.of("type,fruit,quantity"
             + System.lineSeparator(),
             "b,banana,20" + System.lineSeparator(),
             "b,apple,-100" + System.lineSeparator(),
@@ -25,7 +25,7 @@ public class FileValidatorTest {
             "p,apple,-20" + System.lineSeparator(),
             "p,banana,5" + System.lineSeparator(),
             "s,banana,-50");
-    private static List<String> WRONG_SEQUENCE_CONTENT = List.of("type,fruit,quantity"
+    private static final List<String> WRONG_SEQUENCE_CONTENT = List.of("type,fruit,quantity"
             + System.lineSeparator(),
             "s,banana,20" + System.lineSeparator(),
             "p,apple,100" + System.lineSeparator(),
@@ -35,7 +35,7 @@ public class FileValidatorTest {
             "p,apple,20" + System.lineSeparator(),
             "p,banana,5" + System.lineSeparator(),
             "s,banana,50");
-    private static List<String> INCORRECT_BALANCE_CONTENT = List.of("type,fruit,quantity"
+    private static final List<String> INCORRECT_BALANCE_CONTENT = List.of("type,fruit,quantity"
             + System.lineSeparator(),
             "b,banana,20" + System.lineSeparator(),
             "b,apple,100" + System.lineSeparator(),
@@ -48,26 +48,26 @@ public class FileValidatorTest {
 
     @Test(expected = RuntimeException.class)
     public void nullInputData_NotOk() {
-        FILE_VALIDATOR.validate(null);
+        fileValidator.validate(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void negativeNumbers_NotOk() {
-        FILE_VALIDATOR.validate(NEGATIVE_NUMBERS_CONTENT);
+        fileValidator.validate(NEGATIVE_NUMBERS_CONTENT);
     }
 
     @Test(expected = RuntimeException.class)
     public void incorrectBalance_NotOk() {
-        FILE_VALIDATOR.validate(INCORRECT_BALANCE_CONTENT);
+        fileValidator.validate(INCORRECT_BALANCE_CONTENT);
     }
 
     @Test(expected = RuntimeException.class)
     public void wrongOperationsSequence_NotOk() {
-        FILE_VALIDATOR.validate(WRONG_SEQUENCE_CONTENT);
+        fileValidator.validate(WRONG_SEQUENCE_CONTENT);
     }
 
     @Test
     public void correctValidation_Ok() {
-        FILE_VALIDATOR.validate(CORRECT_CONTENT);
+        fileValidator.validate(CORRECT_CONTENT);
     }
 }

@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReportWriterImplTest {
-    private static String FILE_NAME = "test.csv";
-    private static String FILE_CONTENT = "test";
+    private static final String FILE_NAME = "test.csv";
+    private static final String FILE_CONTENT = "test";
     private static ReportWriter reportWriter = new ReportWriterImpl();
 
     @Test
@@ -18,7 +18,7 @@ public class ReportWriterImplTest {
         File file = new File(FILE_NAME);
         try {
             String actual = Files.readString(file.toPath());
-            String expected = new String(FILE_CONTENT);
+            String expected = String.valueOf(FILE_CONTENT);
             Assert.assertEquals(expected, actual);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file: " + FILE_NAME, e);

@@ -43,7 +43,7 @@ public class FruitParserImplTest {
         expected.put("apple", 30);
         expected.put("cherry", 40);
         Map<String, Integer> actual = fruitParser.parse(operations);
-        expected.equals(actual);
+        Assert.assertTrue(expected.equals(actual));
     }
 
     @Test
@@ -52,7 +52,7 @@ public class FruitParserImplTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 50);
         Map<String, Integer> actual = fruitParser.parse(operations);
-        expected.equals(actual);
+        Assert.assertTrue(expected.equals(actual));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class FruitParserImplTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 30);
         Map<String, Integer> actual = fruitParser.parse(operations);
-        expected.equals(actual);
+        Assert.assertTrue(expected.equals(actual));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class FruitParserImplTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 50);
         Map<String, Integer> actual = fruitParser.parse(operations);
-        expected.equals(actual);
+        Assert.assertTrue(expected.equals(actual));
     }
 
 }

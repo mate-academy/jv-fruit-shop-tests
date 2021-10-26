@@ -6,12 +6,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private static final ReportCreator REPORT_CREATOR = new ReportCreatorImpl();
+    private static ReportCreator reportCreator = new ReportCreatorImpl();
     private static final String COLUMN_NAMES = "fruit,quantity";
 
     @Test(expected = RuntimeException.class)
     public void nullInputMap_NotOk() {
-        REPORT_CREATOR.createReport(null);
+        reportCreator.createReport(null);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ReportCreatorImplTest {
                     .append(",")
                     .append(entry.getValue());
         }
-        String actual = REPORT_CREATOR.createReport(fruitQuantityMap);
+        String actual = reportCreator.createReport(fruitQuantityMap);
         Assert.assertEquals(expected.toString(), actual);
     }
 }

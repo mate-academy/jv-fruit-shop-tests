@@ -21,7 +21,7 @@ public class FruitDaocsvTest {
             + "p,apple,20" + System.lineSeparator()
             + "p,banana,5" + System.lineSeparator()
             + "s,banana,50";
-    private static final FruitDao FRUIT_DAO = new FruitDaocsv();
+    private static FruitDao fruitDaocsv = new FruitDaocsv();
 
     @Before
     public void setUp() {
@@ -42,7 +42,7 @@ public class FruitDaocsvTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         File testLog = new File(TEST_INPUT_FILE);
         try {
             Files.deleteIfExists(testLog.toPath());
@@ -53,18 +53,18 @@ public class FruitDaocsvTest {
 
     @Test(expected = RuntimeException.class)
     public void nullInputFile_NotOk() {
-        FRUIT_DAO.get(null);
+        fruitDaocsv.get(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void wrongFileName_NotOk() {
-        FRUIT_DAO.get("NONE.csv");
+        fruitDaocsv.get("NONE.csv");
     }
 
     @Test
     public void testOutputData_Ok() {
         List<String> expected = Arrays.asList(TEST_INPUT_CONTENT.split(System.lineSeparator()));
-        List<String> actual = FRUIT_DAO.get(TEST_INPUT_FILE);
+        List<String> actual = fruitDaocsv.get(TEST_INPUT_FILE);
         Assert.assertTrue(expected.containsAll(actual));
     }
 

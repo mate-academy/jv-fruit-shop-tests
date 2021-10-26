@@ -13,17 +13,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitParserImplTest {
-    private static Map<String, OperationHandler> FRUIT_OPERATION_MAP = new HashMap<>();
+    private static Map<String, OperationHandler> fruitOperationMap = new HashMap<>();
     private static FruitStrategy fruitStrategy;
     private static FruitParser fruitParser;
 
     @Before
     public void setUp() {
-        FRUIT_OPERATION_MAP.put("b", new BalanceHandler());
-        FRUIT_OPERATION_MAP.put("s", new SupplyHandler());
-        FRUIT_OPERATION_MAP.put("p", new PurchaseHandler());
-        FRUIT_OPERATION_MAP.put("r", new ReturnHandler());
-        fruitStrategy = new FruitStrategyImpl(FRUIT_OPERATION_MAP);
+        fruitOperationMap.put("b", new BalanceHandler());
+        fruitOperationMap.put("s", new SupplyHandler());
+        fruitOperationMap.put("p", new PurchaseHandler());
+        fruitOperationMap.put("r", new ReturnHandler());
+        fruitStrategy = new FruitStrategyImpl(fruitOperationMap);
         fruitParser = new FruitParserImpl(fruitStrategy);
     }
 

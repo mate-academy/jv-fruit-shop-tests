@@ -4,22 +4,22 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.operation.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private String[] lineInfo = new String[]{"b", "apple", "30"};
-    private FruitDao fruitDao;
-    private OperationHandler operationHandler;
-    private boolean thrown = false;
+    private static String[] lineInfo;
+    private static FruitDao fruitDao;
+    private static OperationHandler operationHandler;
+    private Class clazz;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         operationHandler = new BalanceOperationHandler(fruitDao);
-        Storage.getFruits().clear();
+        lineInfo = new String[]{"s", "apple", "30"};
     }
 
     @Test
@@ -34,13 +34,14 @@ public class BalanceOperationHandlerTest {
         try {
             operationHandler.apply(lineInfo);
         } catch (RuntimeException e) {
-            thrown = true;
+            clazz = RuntimeException.class;
         }
-        Assert.assertTrue("The store may have " + lineInfo[1],thrown);
+        Assert.assertEquals("RuntimeException must be thrown",RuntimeException.class,clazz);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void afterClass() {
+        lineInfo = new String[]{"b", "apple", "30"};
         Storage.getFruits().clear();
     }
 }

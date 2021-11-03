@@ -7,13 +7,17 @@ import core.basesyntax.service.operation.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class SupplyOperationHandlerTest {
     private static String[] lineInfo;
     private static FruitDao fruitDao;
     private static OperationHandler operationHandler;
-    private Class clazz;
+
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -32,12 +36,10 @@ public class SupplyOperationHandlerTest {
     @Test
     public void checkInvalidValue_NotOk() {
         lineInfo[1] = "orange";
-        try {
-            operationHandler.apply(lineInfo);
-        } catch (RuntimeException e) {
-            clazz = RuntimeException.class;
-        }
-        Assert.assertEquals("RuntimeException must be thrown",RuntimeException.class,clazz);
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.expectMessage("Invalid fruit " + lineInfo[1]);
+        operationHandler.apply(lineInfo);
+
     }
 
     @After

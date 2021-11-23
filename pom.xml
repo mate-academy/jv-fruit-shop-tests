@@ -48,6 +48,9 @@
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <!--<excludes>
+                        <exclude>**/Main*</exclude>
+                    </excludes>-->
                 </configuration>
             </plugin>
             <plugin>

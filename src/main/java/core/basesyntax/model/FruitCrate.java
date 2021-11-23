@@ -32,6 +32,7 @@ public class FruitCrate {
             return false;
         }
         FruitCrate castedFruitCrate = (FruitCrate) fruitCrate;
-        return Objects.equals(this.name, castedFruitCrate.getName()) && this.quantity == castedFruitCrate.quantity;
+        return Objects.equals(this.name, castedFruitCrate.getName())
+                && this.quantity == castedFruitCrate.quantity;
     }
 }

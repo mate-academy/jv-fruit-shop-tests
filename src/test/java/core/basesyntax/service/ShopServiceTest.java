@@ -17,16 +17,22 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ShopServiceTest {
     private static ShopService shopService;
-    private static final Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
-    private static List<String> INPUT_DATA;
+    private static Map<String, ActivityHandler> activityHandlerMap;
+    private static List<String> inputData;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
         FruitStorageDao fruitDao = new FruitStorageDaoImpl();
+        activityHandlerMap = new HashMap<>();
         activityHandlerMap.put(ActivityType.BALANCE.getName(), new AddingHandler(fruitDao));
         activityHandlerMap.put(ActivityType.PURCHASE.getName(), new RemovingHandler(fruitDao));
         activityHandlerMap.put(ActivityType.SUPPLY.getName(), new AddingHandler(fruitDao));
@@ -42,7 +48,7 @@ public class ShopServiceTest {
 
     @Test
     public void updateShopWarehouse_validData_ok() {
-        INPUT_DATA = List.of("type, fruit, quantity",
+        inputData = List.of("type, fruit, quantity",
                 "b,banana,2",
                 "b,apple,3",
                 "s,banana,2",
@@ -59,13 +65,15 @@ public class ShopServiceTest {
                         new Fruit("apple"),
                         new Fruit("banana"),
                         new Fruit("banana"));
-        List<Fruit> actual = shopService.updateShopWarehouse(INPUT_DATA);
+        List<Fruit> actual = shopService.updateShopWarehouse(inputData);
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void updateShopWarehouse_invalidData_notOk() {
-        INPUT_DATA = List.of("type, fruit, quantity",
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("Not enough banana to purchase: 5");
+        inputData = List.of("type, fruit, quantity",
                 "b,banana,2",
                 "b,apple,3",
                 "s,banana,2",
@@ -74,7 +82,17 @@ public class ShopServiceTest {
                 "p,apple,1",
                 "p,banana,5",
                 "s,banana,2");
-        shopService.updateShopWarehouse(INPUT_DATA);
+        shopService.updateShopWarehouse(inputData);
+    }
+
+    @Test
+    public void updateShopWarehouse_invalidFirstTransactionData_notOk() {
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("Not enough banana to purchase: 20");
+        inputData = List.of("type, fruit, quantity",
+                "p,banana,20",
+                "b,apple,3");
+        shopService.updateShopWarehouse(inputData);
     }
 
     @Test(expected = NullPointerException.class)

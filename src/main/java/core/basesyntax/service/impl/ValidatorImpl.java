@@ -21,7 +21,8 @@ public class ValidatorImpl implements Validator {
     @Override
     public boolean validateData(List<String> inputData) {
         List<String> dataCopy = new ArrayList<>(inputData);
-        if (inputData.isEmpty() || !dataCopy.get(0).equals(INPUT_DATA_HEAD)) {
+        if (inputData.isEmpty() || inputData.size() == 1
+                || !dataCopy.get(0).equals(INPUT_DATA_HEAD)) {
             throw new RuntimeException("Invalid input data, try again");
         }
         Predicate<String> linePredicate = line -> Pattern.matches(LINE_PATTERN, line)

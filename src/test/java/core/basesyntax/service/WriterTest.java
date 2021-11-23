@@ -34,11 +34,6 @@ public class WriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_nullDataAndNullPath_notOk() {
-        writer.writeToFile(null, null);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void writeToFile_nullDataAndValidPath_notOk() {
         writer.writeToFile(null, VALID_OUTPUT_DATA_PATH);
     }

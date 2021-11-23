@@ -67,20 +67,13 @@ public class ValidatorCsvImplTest {
         validator.validate(Collections.emptyList());
     }
 
-    //    @Test
-    //    public void validate_onlyFirstLine_notOk() {
-    //        fileData.clear();
-    //        fileData.add("type,fruit,quantity");
-    //        expectedException.expect(RuntimeException.class);
-    //        expectedException.expectMessage("INPUT DATA IS INVALID");
-    //        validator.validate(fileData);
-    //    }
-
     @Test
     public void validate_onlyFirstLine_notOk() {
         fileData.clear();
         fileData.add("type,fruit,quantity");
-        Assert.assertTrue(validator.validate(fileData));
+        expectedException.expect(RuntimeException.class);
+        expectedException.expectMessage("INPUT DATA IS INVALID");
+        validator.validate(fileData);
     }
 
     @Test

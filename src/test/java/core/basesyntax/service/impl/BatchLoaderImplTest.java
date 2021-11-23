@@ -13,7 +13,6 @@ import core.basesyntax.strategy.ActivitiesStrategy;
 import core.basesyntax.strategy.ActivitiesStrategyImpl;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,6 @@ public class BatchLoaderImplTest {
     private static Map<String, ActivityHandler> activityHandlerMap;
     private static List<String> fileData;
     private static List<core.basesyntax.model.FruitCrate> shopStorage;
-    private static Comparator<core.basesyntax.model.FruitCrate> fruitComparator;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -50,18 +48,6 @@ public class BatchLoaderImplTest {
         fileData = new ArrayList<>();
         shopStorage = new ArrayList<>(List.of(new FruitCrate("banana", 125),
                 new FruitCrate("apple", 83)));
-        fruitComparator = new Comparator() {
-            @Override
-            public int compare(Object fruitCrate1,
-                               Object fruitCrate2) {
-                if (((FruitCrate) fruitCrate1).getName()
-                        .equals(((FruitCrate) fruitCrate2).getName())) {
-                    return ((FruitCrate) fruitCrate1).getQuantity()
-                            - ((FruitCrate) fruitCrate2).getQuantity();
-                }
-                return -1;
-            }
-        };
     }
 
     @Before
@@ -82,11 +68,7 @@ public class BatchLoaderImplTest {
     public void loadBatch_validFileData_Ok() {
         List<FruitCrate> expected = shopStorage;
         List<FruitCrate> actual = batchLoader.loadBatch(fileData);
-        for (int i = 0; i < expected.size(); i++) {
-            if (fruitComparator.compare(expected.get(i), actual.get(i)) != 0) {
-                Assert.fail();
-            }
-        }
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

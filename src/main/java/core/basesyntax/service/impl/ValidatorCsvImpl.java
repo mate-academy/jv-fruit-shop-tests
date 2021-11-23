@@ -18,7 +18,8 @@ public class ValidatorCsvImpl implements Validator {
     }
 
     public boolean validate(List<String> fileData) {
-        if (fileData.isEmpty() || !fileData.get(0).equals("type,fruit,quantity")) {
+        if (fileData.isEmpty() || fileData.size() == 1
+                || !fileData.get(0).equals("type,fruit,quantity")) {
             throw new RuntimeException("INPUT DATA IS INVALID");
         }
         Predicate<String> csvLinePredicate = line -> Pattern.matches(CSV_LINE_PATTERN, line)

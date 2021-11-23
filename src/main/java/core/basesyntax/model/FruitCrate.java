@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitCrate {
     private final String name;
     private int quantity;
@@ -19,5 +21,17 @@ public class FruitCrate {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object fruitCrate) {
+        if (this == fruitCrate) {
+            return true;
+        }
+        if (fruitCrate == null || getClass() != fruitCrate.getClass()) {
+            return false;
+        }
+        FruitCrate castedFruitCrate = (FruitCrate) fruitCrate;
+        return Objects.equals(this.name, castedFruitCrate.getName()) && this.quantity == castedFruitCrate.quantity;
     }
 }

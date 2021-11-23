@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 public class ReaderCsvImplTest {
     private static Reader fileReader;
     private static final String INPUT_FILE_PATH = "src/test/java/resources/input_database.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/java/resources/emptyFile.csv";
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
@@ -40,8 +41,7 @@ public class ReaderCsvImplTest {
     @Test
     public void readFile_emptyFile_Ok() {
         List<String> expected = new ArrayList<>();
-        String pathToEmptyFile = "src/test/java/resources/emptyFile.csv";
-        List<String> actual = fileReader.readFile(pathToEmptyFile);
+        List<String> actual = fileReader.readFile(EMPTY_FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 

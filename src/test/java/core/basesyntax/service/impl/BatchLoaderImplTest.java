@@ -17,6 +17,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -75,7 +77,6 @@ public class BatchLoaderImplTest {
                 "r,apple,20",
                 "p,banana,5",
                 "p,apple,50"));
-        Storage.storage.clear();
     }
 
     @Test
@@ -115,5 +116,10 @@ public class BatchLoaderImplTest {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Not enough " + "banana" + " to sell");
         batchLoader.loadBatch(fileData);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.storage.clear();
     }
 }

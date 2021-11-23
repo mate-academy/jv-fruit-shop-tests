@@ -26,7 +26,7 @@ import org.junit.Test;
 
 public class FruitStoreServiceTest {
     private static FruitDao fruitDao;
-    private static final Map<ActivityType, ActivityHandler> ACTIVITY_MAP = new HashMap<>();
+    private static final Map<ActivityType, ActivityHandler> ACTIVITY_HANDLER_MAP = new HashMap<>();
     private static ActivityStrategy activityStrategy;
     private static List<TransactionDto> transactions;
     private static FruitStoreService fruit;
@@ -34,13 +34,13 @@ public class FruitStoreServiceTest {
     @BeforeClass
     public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
-        activityStrategy = new ActivityStrategyImpl(ACTIVITY_MAP);
+        activityStrategy = new ActivityStrategyImpl(ACTIVITY_HANDLER_MAP);
         transactions = new ArrayList<>();
         fruit = new FruitStoreServiceImpl(fruitDao, activityStrategy);
-        ACTIVITY_MAP.put(ActivityType.BALANCE, new BalanceActivityHandler(fruitDao));
-        ACTIVITY_MAP.put(ActivityType.PURCHASE, new PurchaseActivityHandler(fruitDao));
-        ACTIVITY_MAP.put(ActivityType.RETURN, new AddActivityHandler(fruitDao));
-        ACTIVITY_MAP.put(ActivityType.SUPPLY, new AddActivityHandler(fruitDao));
+        ACTIVITY_HANDLER_MAP.put(ActivityType.BALANCE, new BalanceActivityHandler(fruitDao));
+        ACTIVITY_HANDLER_MAP.put(ActivityType.PURCHASE, new PurchaseActivityHandler(fruitDao));
+        ACTIVITY_HANDLER_MAP.put(ActivityType.RETURN, new AddActivityHandler(fruitDao));
+        ACTIVITY_HANDLER_MAP.put(ActivityType.SUPPLY, new AddActivityHandler(fruitDao));
     }
     
     @Before

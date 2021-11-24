@@ -40,9 +40,7 @@ public class StorageServiceTest {
         List<Fruit> expected = List.of(new Fruit("banana", 200),
                 new Fruit("apple", 40));
         List<Fruit> actual = storageDao.getAll();
-        for (int i = 0; i < expected.size(); i++) {
-            Assert.assertEquals(expected.get(i), actual.get(i));
-        }
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

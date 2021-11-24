@@ -37,13 +37,13 @@ public class StorageServiceTest {
                 new String[]{"s", "banana", "100"},
                 new String[]{"p", "apple", "10"});
         storageService.updateStorage(input);
-        List<Fruit> actual = storageDao.getAll();
-        for (Fruit fruit : actual) {
+        List<Fruit> actualFruitList = storageDao.getAll();
+        for (Fruit fruit : actualFruitList) {
             if (fruit.getName().equals("banana")) {
-                Assert.assertEquals(fruit.getQuantity(), 200);
+                Assert.assertEquals(200, fruit.getQuantity());
             }
             if (fruit.getName().equals("apple")) {
-                Assert.assertEquals(fruit.getQuantity(), 40);
+                Assert.assertEquals(40, fruit.getQuantity());
             }
         }
     }

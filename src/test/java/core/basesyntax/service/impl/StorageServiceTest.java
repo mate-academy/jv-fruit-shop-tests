@@ -9,6 +9,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,6 +22,13 @@ public class StorageServiceTest {
         storageDao = new StorageDaoImpl();
         OperationStrategy operationStrategy = new OperationStrategy(storageDao);
         storageService = new StorageServiceImpl(storageDao, operationStrategy);
+    }
+
+    @Before
+    public void setupStorage() {
+        Storage.fruitStorage.clear();
+        storageDao.add(new Fruit("banana", 100));
+        storageDao.add(new Fruit("apple", 50));
     }
 
     @Test

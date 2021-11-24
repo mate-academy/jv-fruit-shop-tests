@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.exception.ValidationException;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;

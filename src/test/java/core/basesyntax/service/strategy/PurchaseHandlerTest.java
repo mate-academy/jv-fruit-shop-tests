@@ -33,5 +33,4 @@ public class PurchaseHandlerTest {
         Storage.fruits.put(new Fruit("banana"),5);
         purchaseHandler.apply(new Transaction("p","banana",10));
     }
-
 }

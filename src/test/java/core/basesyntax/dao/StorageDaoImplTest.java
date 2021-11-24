@@ -13,8 +13,8 @@ import org.junit.Test;
 
 public class StorageDaoImplTest {
     private static StorageDao storageDao;
-    private final int PRODUCT_COUNT = 10;
-    private final String PRODUCT_NAME = "apple";
+    private static final int PRODUCT_COUNT = 10;
+    private static final String PRODUCT_NAME = "apple";
 
     @BeforeClass
     public static void beforeClass() {

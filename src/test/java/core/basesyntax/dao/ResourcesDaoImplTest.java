@@ -18,7 +18,8 @@ public class ResourcesDaoImplTest {
             "src/test/java/core/basesyntax/test_resources/input_test";
     private static final String OUTUT_TEST_FILE_PATH =
             "src/test/java/core/basesyntax/test_resources/output_test";
-    private static final String NOT_EXISTING_FILE_PATH = "src/test/java/core/basesyntax/test_resources/";
+    private static final String NOT_EXISTING_FILE_PATH =
+            "src/test/java/core/basesyntax/test_resources/";
     private static List<String> data = List.of("b,banana,100", "b,apple,100", "s,banana,100",
             "s,apple,100", "p,banana,100", "p,apple,100", "r,banana,100", "r,apple,100");
 
@@ -29,12 +30,14 @@ public class ResourcesDaoImplTest {
 
     @Test
     public void readFromNotExistingFile_notOk() {
-        assertThrows(RuntimeException.class, () -> resourcesDao.readFromFile(NOT_EXISTING_FILE_PATH));
+        assertThrows(RuntimeException.class, () ->
+                resourcesDao.readFromFile(NOT_EXISTING_FILE_PATH));
     }
 
     @Test
     public void readFromFileWithNullPath_notOk() {
-        assertThrows(RuntimeException.class, () -> resourcesDao.readFromFile(null));
+        assertThrows(RuntimeException.class, () ->
+                resourcesDao.readFromFile(null));
     }
 
     @Test

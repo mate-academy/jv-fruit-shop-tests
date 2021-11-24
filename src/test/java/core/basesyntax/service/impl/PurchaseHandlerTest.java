@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;

@@ -1,8 +1,9 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.strategy.OptionHandler;
 
 public class PurchaseHandler implements OptionHandler {
     private static final int DEFAULT_QUALITY = 0;

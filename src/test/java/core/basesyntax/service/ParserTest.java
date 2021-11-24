@@ -17,7 +17,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseLine_ok() {
+    public void parse_ok() {
         List<String> lines = List.of("type,fruit,quantity", "b,apple,100");
         String expected = new TransactionDto("b", "apple", 100).toString();
         String actual = parser.parse(lines).get(0).toString();
@@ -25,17 +25,17 @@ public class ParserTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void parseLine_invalidQuantity_NotOk() {
+    public void parse_invalidQuantity_NotOk() {
         parser.parse(List.of("type,fruit,quantity", "b,apple,-100"));
     }
 
     @Test(expected = ValidationException.class)
-    public void parseLine_invalidFruit_NotOk() {
+    public void parse_invalidFruit_NotOk() {
         parser.parse(List.of("type,fruit,quantity", "b,Apple,100"));
     }
 
     @Test(expected = ValidationException.class)
-    public void parseLine_invalidType_NotOk() {
+    public void parse_invalidType_NotOk() {
         parser.parse(List.of("type,fruit,quantity", "B,apple,100"));
     }
 }

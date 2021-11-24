@@ -22,13 +22,13 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void makeReport_validData_ok() {
+    public void formReport_validData_ok() {
         String actual = reportService.formReport(storage.entrySet());
         Assert.assertEquals(EXPECTED, actual);
     }
 
     @Test
-    public void makeReport_emptyFruitsList_notOk() {
+    public void formReport_emptyData_notOk() {
         Map<String, Integer> emptyStorage = new HashMap<>();
         String actual = reportService.formReport(emptyStorage.entrySet());
         String expected = "fruit,quantity";
@@ -36,7 +36,7 @@ public class ReportServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void makeReport_nullData_notOk() {
+    public void formReport_nullData_notOk() {
         reportService.formReport(null);
     }
 

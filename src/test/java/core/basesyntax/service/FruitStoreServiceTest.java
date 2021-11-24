@@ -59,6 +59,42 @@ public class FruitStoreServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void changeBalance_supply_ok() {
+        transactions.add(new TransactionDto("s", "banana", 10));
+        List<Fruit> expected = new ArrayList<>();
+        expected.add(new Fruit("banana", 75));
+        List<Fruit> actual = fruit.changeBalance(transactions);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void changeBalance_return_ok() {
+        transactions.add(new TransactionDto("r", "banana", 5));
+        List<Fruit> expected = new ArrayList<>();
+        expected.add(new Fruit("banana", 70));
+        List<Fruit> actual = fruit.changeBalance(transactions);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void changeBalance_purchase_ok() {
+        transactions.add(new TransactionDto("p", "banana", 10));
+        List<Fruit> expected = new ArrayList<>();
+        expected.add(new Fruit("banana", 55));
+        List<Fruit> actual = fruit.changeBalance(transactions);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void changeBalance_balance_ok() {
+        transactions.add(new TransactionDto("b", "banana", 100));
+        List<Fruit> expected = new ArrayList<>();
+        expected.add(new Fruit("banana", 100));
+        List<Fruit> actual = fruit.changeBalance(transactions);
+        assertEquals(expected, actual);
+    }
+
     @Test (expected = RuntimeException.class)
     public void changeBalance_purchaseMoreThanBalance_notOk() {
         transactions.add(new TransactionDto("p", "banana", 75));

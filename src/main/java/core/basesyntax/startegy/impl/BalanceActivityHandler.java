@@ -13,7 +13,11 @@ public class BalanceActivityHandler implements ActivityHandler {
 
     @Override
     public void doActivity(String name, int quantity) {
-        Fruit fruit = new Fruit(name, quantity);
-        fruitDao.add(fruit);
+        if (fruitDao.get(name) == null) {
+            Fruit fruit = new Fruit(name, quantity);
+            fruitDao.add(fruit);
+        } else {
+            fruitDao.get(name).setQuantity(quantity);
+        }
     }
 }

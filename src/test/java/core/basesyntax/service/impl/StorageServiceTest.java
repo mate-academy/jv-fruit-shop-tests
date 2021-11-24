@@ -9,7 +9,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,12 +21,6 @@ public class StorageServiceTest {
         storageDao = new StorageDaoImpl();
         OperationStrategy operationStrategy = new OperationStrategy(storageDao);
         storageService = new StorageServiceImpl(storageDao, operationStrategy);
-    }
-
-    @Before
-    public void setupStorage() {
-        storageDao.add(new Fruit("banana", 100));
-        storageDao.add(new Fruit("apple", 50));
     }
 
     @Test
@@ -50,6 +43,8 @@ public class StorageServiceTest {
 
     @Test
     public void getStatistic_Ok() {
+        storageDao.add(new Fruit("banana", 100));
+        storageDao.add(new Fruit("apple", 50));
         List<String> expected = List.of("banana,100", "apple,50");
         List<String> actual = storageService.getStorageStatistic();
         Assert.assertEquals(expected, actual);

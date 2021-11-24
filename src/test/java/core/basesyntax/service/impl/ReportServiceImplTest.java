@@ -2,8 +2,10 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,5 +31,10 @@ public class ReportServiceImplTest {
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.storage.clear();
     }
 }

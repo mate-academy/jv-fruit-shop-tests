@@ -1,6 +1,6 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
-import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

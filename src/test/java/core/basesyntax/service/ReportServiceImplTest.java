@@ -1,9 +1,9 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;

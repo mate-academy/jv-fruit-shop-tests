@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,10 +16,8 @@ public class ReaderServiceImpl implements ReaderService {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Invalid file name: " + filePath, e);
         } catch (IOException e) {
-            throw new RuntimeException("Read failed", e);
+            throw new RuntimeException("Invalid file name: " + filePath, e);
         }
         return lines;
     }

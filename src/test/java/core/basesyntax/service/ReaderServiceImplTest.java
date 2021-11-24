@@ -1,6 +1,6 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -25,6 +25,5 @@ public class ReaderServiceImplTest {
     public void readFromInvalidPath_NotOk() {
         reader.readFromFile(INVALID_PATH);
     }
-
 }
 

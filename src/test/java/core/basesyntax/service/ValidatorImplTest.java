@@ -1,6 +1,6 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
-import core.basesyntax.service.Validator;
+import core.basesyntax.service.impl.ValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;

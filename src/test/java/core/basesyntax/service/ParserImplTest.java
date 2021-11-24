@@ -1,7 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;

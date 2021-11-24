@@ -8,7 +8,6 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
-import java.util.HashMap;
 import java.util.Map;
 import org.hamcrest.collection.IsMapContaining;
 import org.junit.After;
@@ -17,26 +16,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerTest {
-    private static final Map<String, OperationHandler> HANDLER_MAP = new HashMap<>();
+    private static final FruitStorageDao DAO = new FruitStorageDaoImpl();
     private static OperationHandlerMapProvider mapProvider;
-    private static FruitStorageDao dao;
+    private static BalanceHandler balanceHandler;
     private static PurchaseHandler purchaseHandler;
     private static ReturnHandler returnHandler;
     private static SupplyHandler supplyHandler;
-    private static BalanceHandler balanceHandler;
 
     @BeforeClass
     public static void beforeClass() {
-        HANDLER_MAP.put("p", new PurchaseHandler(dao));
-        HANDLER_MAP.put("b", new BalanceHandler(dao));
-        HANDLER_MAP.put("r", new ReturnHandler(dao));
-        HANDLER_MAP.put("s", new SupplyHandler(dao));
-        dao = new FruitStorageDaoImpl();
-        supplyHandler = new SupplyHandler(new FruitStorageDaoImpl());
-        returnHandler = new ReturnHandler(new FruitStorageDaoImpl());
-        purchaseHandler = new PurchaseHandler(new FruitStorageDaoImpl());
-        balanceHandler = new BalanceHandler(new FruitStorageDaoImpl());
-        mapProvider = new OperationHandlerMapProvider(dao);
+        balanceHandler = new BalanceHandler(DAO);
+        purchaseHandler = new PurchaseHandler(DAO);
+        returnHandler = new ReturnHandler(DAO);
+        supplyHandler = new SupplyHandler(DAO);
+        mapProvider = new OperationHandlerMapProvider(DAO);
     }
 
     @Before
@@ -75,7 +68,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    public void supplyApply_addVlidData_Ok() {
+    public void supplyApply_addValidData_Ok() {
         supplyHandler.apply("banana", 6);
     }
 

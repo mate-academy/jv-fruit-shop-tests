@@ -13,8 +13,8 @@ import org.junit.Test;
 
 public class StorageDaoImplTest {
     private static StorageDao storageDao;
-    private int productCount = 10;
-    private String productName = "apple";
+    private final int PRODUCT_COUNT = 10;
+    private final String PRODUCT_NAME = "apple";
 
     @BeforeClass
     public static void beforeClass() {
@@ -23,7 +23,7 @@ public class StorageDaoImplTest {
 
     @Before
     public void setUp() {
-        Storage.fruitsCount.put(productName, productCount);
+        Storage.fruitsCount.put(PRODUCT_NAME, PRODUCT_COUNT);
     }
 
     @After
@@ -33,19 +33,19 @@ public class StorageDaoImplTest {
 
     @Test
     public void addProductCount_countSubZero_notOk() {
-        assertThrows(RuntimeException.class, () -> storageDao.addProductCount(productName, -5));
+        assertThrows(RuntimeException.class, () -> storageDao.addProductCount(PRODUCT_NAME, -5));
     }
 
     @Test
     public void addProductCount_Ok() {
-        assertTrue(Storage.fruitsCount.containsKey(productName));
-        assertTrue(Storage.fruitsCount.containsValue(productCount));
+        assertTrue(Storage.fruitsCount.containsKey(PRODUCT_NAME));
+        assertTrue(Storage.fruitsCount.containsValue(PRODUCT_COUNT));
     }
 
     @Test
     public void getProductCount_Ok() {
-        int expected = productCount;
-        assertEquals(expected, storageDao.getProductCount(productName));
+        int expected = PRODUCT_COUNT;
+        assertEquals(expected, storageDao.getProductCount(PRODUCT_NAME));
     }
 
     @Test

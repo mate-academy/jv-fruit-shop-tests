@@ -12,6 +12,8 @@ import org.junit.Test;
 
 public class WriterServiceTest {
     private static WriterService writer;
+    private static final String VALID_PATH = "src/test/resources/outputFile.csv";
+    private static final String NOT_VALID_PATH = "src/test/resources1/outputFile1.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -20,20 +22,18 @@ public class WriterServiceTest {
 
     @Test
     public void writeData_validFilePath_ok() {
-        String path = "src/test/resources/outputFile.csv";
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,56";
-        String actual = readData(path);
-        writer.writeData(path, expected);
+        String actual = readData(VALID_PATH);
+        writer.writeData(VALID_PATH, expected);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void writeData_notValidPath_notOk() {
-        String path = "src/test/resources1/outputFile1.csv";
         String data = "fruit,quantity" + System.lineSeparator()
                 + "apple,56";
-        writer.writeData(path, data);
+        writer.writeData(NOT_VALID_PATH, data);
     }
 
     private String readData(String path) {

@@ -17,7 +17,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder builder = new StringBuilder();
         builder.append("fruit,quantity");
         for (Map.Entry<Fruit, Integer> set : dao.getAll().entrySet()) {
-            builder.append("\n").append(set.getKey().getName())
+            builder.append(System.lineSeparator()).append(set.getKey().getName())
                     .append(",").append(set.getValue());
         }
         return builder.toString();

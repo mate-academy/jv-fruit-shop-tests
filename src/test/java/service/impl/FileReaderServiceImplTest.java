@@ -25,7 +25,7 @@ public class FileReaderServiceImplTest {
     public void fileReader_wrongWay_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("can`t read in file");
-        fileReaderService.read("src\\test\\resources\\input.csv");
+        fileReaderService.read("src/test/resources/input.csv");
     }
 
     @Test

@@ -39,7 +39,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void filerWriter_validData_tOk() {
-        Assert.assertTrue(fileWriterService.write("src\\test\\resources\\output.csv"));
+        Assert.assertTrue(fileWriterService.write("src/test/resources/output.csv"));
     }
 
     @After

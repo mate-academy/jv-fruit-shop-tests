@@ -1,5 +1,6 @@
 package core.basesyntax.service.file.output;
 
+import core.basesyntax.exception.MyCustomIOException;
 import core.basesyntax.service.file.input.Reader;
 import core.basesyntax.service.file.input.ReaderImpl;
 import org.junit.Assert;
@@ -33,18 +34,18 @@ public class WriterTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NullPointerException.class)
     public void writeToFile_nullPath_notOk() {
         String expected = stringBuilder.toString();
         writer.write(expected, null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NullPointerException.class)
     public void writeToFile_nullData_notOk() {
         writer.write(null, VALID_OUTPUT_DATA_PATH);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = MyCustomIOException.class)
     public void writeToFile_emptyFilePath_notOk() {
         String expected = stringBuilder.toString();
         writer.write(expected, "");

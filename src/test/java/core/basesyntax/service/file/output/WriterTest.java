@@ -34,7 +34,7 @@ public class WriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_nullPath_notOk() {
+    public void writeToFile_NullPath_notOk() {
         String expected = stringBuilder.toString();
         writer.write(expected, null);
     }
@@ -45,7 +45,7 @@ public class WriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_emptyFilePath_notOk() {
+    public void writeToFile_EmptyFilePath_notOk() {
         String expected = stringBuilder.toString();
         writer.write(expected, "");
     }

@@ -18,7 +18,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void readFromFile_inputDataIsOkFirst_Ok() {
+    public void readFromFile_InputDataIsOkFirst_Ok() {
         List<String> expected =
                 List.of("type,fruit,quantity",
                         "b,banana,100",
@@ -38,7 +38,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void readFromFile_inputDataIsOkSecond_Ok() {
+    public void readFromFile_InputDataIsOkSecond_Ok() {
         List<String> expected =
                 List.of("type,fruit,quantity",
                         "p,apple,-20",

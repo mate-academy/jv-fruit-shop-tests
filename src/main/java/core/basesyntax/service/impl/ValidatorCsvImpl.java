@@ -36,7 +36,7 @@ public class ValidatorCsvImpl implements Validator {
     }
 
     private boolean validateName(String name) {
-        if (name.equals("")) {
+        if (name.equals(" ")) {
             throw new ValidateException("Name of fruit must not be empty");
         }
         if (!name.matches("[a-zA-Z]+")) {
@@ -46,14 +46,11 @@ public class ValidatorCsvImpl implements Validator {
     }
 
     private boolean validateAmount(String amount) {
-        if (amount.equals("")) {
+        if (amount.equals(" ")) {
             throw new ValidateException("Amount of fruit must not be empty");
         }
         if (!amount.matches("[0-9]+")) {
             throw new ValidateException("Amount must contain only numbers");
-        }
-        if (Integer.parseInt(amount) < 0) {
-            throw new ValidateException("Amount must not be negative");
         }
         return true;
     }

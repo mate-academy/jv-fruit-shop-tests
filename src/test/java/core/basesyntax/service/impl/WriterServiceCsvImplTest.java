@@ -23,6 +23,13 @@ public class WriterServiceCsvImplTest {
         reader = new Reader();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_wrongFilePath_ok() {
+        String expected = "abc";
+        String wrongFilePath = "";
+        writerService.writeToFile(expected, wrongFilePath);
+    }
+
     @Test
     public void writeToFile_ok() {
         String expected = "abc";

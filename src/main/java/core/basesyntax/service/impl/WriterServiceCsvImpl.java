@@ -14,13 +14,9 @@ public class WriterServiceCsvImpl implements WriterService {
         File file = new File(filePath);
         try {
             file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create a file", e);
-        }
-        try {
             Files.write(file.toPath(), toWrite.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file", e);
+            throw new RuntimeException("Can't create a file", e);
         }
     }
 }

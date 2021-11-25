@@ -47,4 +47,10 @@ public class ReaderServiceCsvImplTest {
         List<String> expected = data;
         Assert.assertNotEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_wrongFilePath_notOk() {
+        String filePath = "";
+        List<String> actual = readerService.readFromFile(filePath);
+    }
 }

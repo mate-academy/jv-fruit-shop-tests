@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.ValidateException;
 import core.basesyntax.service.Validator;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,13 +39,13 @@ public class ValidatorCsvImplTest {
 
     @Test(expected = ValidateException.class)
     public void validateAction_wrongName_notOk() {
-        String line = "a,%banana,20";
+        String line = "b,%banana,20";
         validator.validateLine(line);
     }
 
     @Test(expected = ValidateException.class)
     public void validateAction_nullName_ok() {
-        String line = "b,,20";
+        String line = "b, ,20";
         validator.validateLine(line);
     }
 
@@ -66,9 +67,15 @@ public class ValidatorCsvImplTest {
         validator.validateLine(line);
     }
 
+    @Test(expected = ValidateException.class)
+    public void validateAmount_amountIsLessThanZero_notOk() {
+        String line = "b,banana,-10";
+        validator.validateLine(line);
+    }
+
     @Test
     public void validateAmount_rightAmount_ok() {
         String line = "b,banana,10";
-        validator.validateLine(line);
+        Assert.assertTrue(validator.validateLine(line));
     }
 }

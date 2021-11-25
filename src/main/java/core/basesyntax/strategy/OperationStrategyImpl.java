@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.exceptions.NotSuchOperationException;
 import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.impl.AddOperationHandler;
 import core.basesyntax.services.impl.PurchaseOperationHandler;
@@ -19,6 +20,10 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     public OperationHandler getOperationHandler(String operation) {
-        return operationMap.get(operation);
+        OperationHandler operationHandlerImpl = operationMap.get(operation);
+        if (operationHandlerImpl == null) {
+            throw new NotSuchOperationException("Operation " + operation + " is not valid.");
+        }
+        return operationHandlerImpl;
     }
 }

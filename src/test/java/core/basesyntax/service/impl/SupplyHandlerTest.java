@@ -46,7 +46,7 @@ public class SupplyHandlerTest {
     }
 
     @After
-    public void refreshStorage() {
+    public void resetStorage() {
         Storage.fruitStorage.clear();
     }
 }

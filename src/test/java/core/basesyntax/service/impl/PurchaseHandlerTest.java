@@ -53,7 +53,7 @@ public class PurchaseHandlerTest {
     }
 
     @After
-    public void refreshStorage() {
+    public void resetStorage() {
         Storage.fruitStorage.clear();
     }
 }

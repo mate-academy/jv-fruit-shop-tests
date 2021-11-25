@@ -2,8 +2,10 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.OperationHandler;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,5 +26,10 @@ public class BalanceHandlerTest {
         int expected = 0;
         Assert.assertTrue(handler.operate(fruitName, expected));
         Assert.assertEquals(expected, storageDao.getByName(fruitName).getQuantity());
+    }
+
+    @After
+    public void resetStorage() {
+        Storage.fruitStorage.clear();
     }
 }

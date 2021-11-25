@@ -46,7 +46,7 @@ public class ReturnHandlerTest {
     }
 
     @After
-    public void refreshStorage() {
+    public void resetStorage() {
         Storage.fruitStorage.clear();
     }
 }

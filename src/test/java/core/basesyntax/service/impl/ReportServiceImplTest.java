@@ -19,7 +19,7 @@ public class ReportServiceImplTest {
     @Test
     public void report_ValidDate_OK() {
         Storage.fruits.put(new Fruit("banana"), 20);
-        String expected = "fruit,quantity\n" + "banana,20";
+        String expected = "fruit,quantity" + System.lineSeparator() + "banana,20";
         Assert.assertEquals(expected, report.createReport());
     }
 }

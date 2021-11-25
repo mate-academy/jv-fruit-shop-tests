@@ -24,10 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/core"
-            + ".basesyntax.resources/inputFile.csv";
-    private static final String OUTPUT_FILE_PATH = "src/main/java/core/basesyntax/core"
-            + ".basesyntax.resources/outputFile.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/inputFile.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/outputFile.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();

@@ -13,18 +13,18 @@ import org.junit.Test;
 
 public class ActivityStrategyImplTest {
     private static FruitDao fruitDao;
-    private static Map<ActivityType, ActivityHandler> ACTIVITY_MAP;
+    private static Map<ActivityType, ActivityHandler> activityMap;
     private static ActivityStrategy activityStrategy;
 
     @BeforeClass
     public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
-        ACTIVITY_MAP = new HashMap<>();
-        ACTIVITY_MAP.put(ActivityType.BALANCE, new BalanceActivityHandler(fruitDao));
-        ACTIVITY_MAP.put(ActivityType.PURCHASE, new PurchaseActivityHandler(fruitDao));
-        ACTIVITY_MAP.put(ActivityType.RETURN, new AddActivityHandler(fruitDao));
-        ACTIVITY_MAP.put(ActivityType.SUPPLY, new AddActivityHandler(fruitDao));
-        activityStrategy = new ActivityStrategyImpl(ACTIVITY_MAP);
+        activityMap = new HashMap<>();
+        activityMap.put(ActivityType.BALANCE, new BalanceActivityHandler(fruitDao));
+        activityMap.put(ActivityType.PURCHASE, new PurchaseActivityHandler(fruitDao));
+        activityMap.put(ActivityType.RETURN, new AddActivityHandler(fruitDao));
+        activityMap.put(ActivityType.SUPPLY, new AddActivityHandler(fruitDao));
+        activityStrategy = new ActivityStrategyImpl(activityMap);
     }
 
     @Test

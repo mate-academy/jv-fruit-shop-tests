@@ -30,4 +30,10 @@ public class ParserTest {
         TransactionDto actual = parser.parseLine(line);
         assertEquals(expected,actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parseLine_emptyLine_not_Ok() {
+        String line = "   ";
+        TransactionDto actual = parser.parseLine(line);
+    }
 }

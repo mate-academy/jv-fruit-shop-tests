@@ -17,7 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerTest {
-    private static final FruitStorageDao DAO = new FruitStorageDaoImpl();
+    private static final FruitStorageDao storageDao = new FruitStorageDaoImpl();
     private static OperationHandlerMapProvider mapProvider;
     private static BalanceHandler balanceHandler;
     private static PurchaseHandler purchaseHandler;
@@ -28,11 +28,11 @@ public class OperationHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         providedMap = Storage.fruitStorage;
-        balanceHandler = new BalanceHandler(DAO);
-        purchaseHandler = new PurchaseHandler(DAO);
-        returnHandler = new ReturnHandler(DAO);
-        supplyHandler = new SupplyHandler(DAO);
-        mapProvider = new OperationHandlerMapProvider(DAO);
+        balanceHandler = new BalanceHandler(storageDao);
+        purchaseHandler = new PurchaseHandler(storageDao);
+        returnHandler = new ReturnHandler(storageDao);
+        supplyHandler = new SupplyHandler(storageDao);
+        mapProvider = new OperationHandlerMapProvider(storageDao);
     }
 
     @Before

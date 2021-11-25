@@ -12,10 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterTest {
-    private static Writer writer;
-    private static Reader reader;
-    private static final String VALID_OUTPUT_DATA_PATH = "src/test/resources/outputData.csv";
+    private static final String VALID_OUTPUT_TEST_DATA_PATH = "src/test/resources/outputTestData.csv";
+    private static final String VALID_INPUT_TEST_DATA_PATH = "src/test/resources/readForWriterTest.csv";
     private static final StringBuilder stringBuilder = new StringBuilder();
+    private static Writer writer;
 
     @BeforeClass
     public static void beforeClass() {
@@ -23,19 +23,15 @@ public class WriterTest {
                 .append("banana,100").append(System.lineSeparator())
                 .append("apple,100").append(System.lineSeparator());
         writer = new WriterImpl();
-        reader = new ReaderImpl();
     }
 
     @Test
     public void writeToFile_validDataAndPath_ok() {
-        StringBuilder sb = new StringBuilder();
-        String actual = stringBuilder.toString();
-        writer.write(actual, VALID_OUTPUT_DATA_PATH);
-        for (String s : readFromTestFile(VALID_OUTPUT_DATA_PATH)) {
-            sb.append(s).append(System.lineSeparator());
-        }
-        String expected = sb.toString();
-        Assert.assertEquals(expected, actual);
+        String write = stringBuilder.toString();
+        writer.write(write, VALID_OUTPUT_TEST_DATA_PATH);
+        List<String> actualList = readFromTestFile(VALID_OUTPUT_TEST_DATA_PATH);
+        List<String> expectedList = readFromTestFile(VALID_INPUT_TEST_DATA_PATH);
+        Assert.assertEquals(expectedList, actualList);
     }
 
     @Test(expected = NullPointerException.class)
@@ -46,7 +42,7 @@ public class WriterTest {
 
     @Test(expected = NullPointerException.class)
     public void writeToFile_nullData_notOk() {
-        writer.write(null, VALID_OUTPUT_DATA_PATH);
+        writer.write(null, VALID_OUTPUT_TEST_DATA_PATH);
     }
 
     @Test(expected = MyCustomIoException.class)

@@ -9,6 +9,9 @@ import java.io.IOException;
 public class WriterImpl implements Writer {
     @Override
     public boolean write(String fileName, String data) {
+        if (data.isEmpty()) {
+            throw new RuntimeException("Invalid data. Report can't be empty");
+        }
         File report = new File(fileName);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(report))) {
             bufferedWriter.write(data);

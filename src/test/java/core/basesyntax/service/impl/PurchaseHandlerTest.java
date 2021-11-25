@@ -30,26 +30,33 @@ public class PurchaseHandlerTest {
     @Test
     public void validQuantity_Ok() {
         String fruitName = "banana";
-        int value = 10;
+        int fruitsAmount = 10;
         int expected = 90;
-        Assert.assertTrue(handler.operate(fruitName, value));
+        Assert.assertTrue(handler.operate(fruitName, fruitsAmount));
         Assert.assertEquals(expected, storageDao.getByName(fruitName).getQuantity());
     }
 
     @Test
     public void equalQuantity_Ok() {
         String fruitName = "banana";
-        int value = 100;
+        int fruitsAmount = 100;
         int expected = 0;
-        Assert.assertTrue(handler.operate(fruitName, value));
+        Assert.assertTrue(handler.operate(fruitName, fruitsAmount));
         Assert.assertEquals(expected, storageDao.getByName(fruitName).getQuantity());
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseMoreThanStorageContains_NotOk() {
         String fruitName = "apple";
-        int value = 6;
-        handler.operate(fruitName, value);
+        int fruitsAmount = 6;
+        handler.operate(fruitName, fruitsAmount);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void negativeAmount_NotOk() {
+        String fruitName = "banana";
+        int fruitsAmount = -1;
+        handler.operate(fruitName, fruitsAmount);
     }
 
     @After

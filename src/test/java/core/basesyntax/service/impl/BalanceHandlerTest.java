@@ -23,9 +23,16 @@ public class BalanceHandlerTest {
     @Test
     public void validData_Ok() {
         String fruitName = "banana";
-        int expected = 0;
-        Assert.assertTrue(handler.operate(fruitName, expected));
-        Assert.assertEquals(expected, storageDao.getByName(fruitName).getQuantity());
+        int fruitsAmount = 0;
+        Assert.assertTrue(handler.operate(fruitName, fruitsAmount));
+        Assert.assertEquals(fruitsAmount, storageDao.getByName(fruitName).getQuantity());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void negativeAmount_NotOk() {
+        String fruitName = "banana";
+        int fruitsAmount = -1;
+        handler.operate(fruitName, fruitsAmount);
     }
 
     @After

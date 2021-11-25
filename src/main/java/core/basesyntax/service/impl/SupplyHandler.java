@@ -13,6 +13,9 @@ public class SupplyHandler implements OperationHandler {
 
     @Override
     public boolean operate(String fruitName, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Fruits amount can't be less than 0");
+        }
         Fruit prevFruit = storageDao.getByName(fruitName);
         int currentQuantity = prevFruit.getQuantity();
         Fruit fruit = new Fruit(fruitName, quantity + currentQuantity);

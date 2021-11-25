@@ -10,7 +10,11 @@ public class ReaderImpl implements core.basesyntax.service.Reader {
     public List<String> read(String source) {
         File fileToRead = new File(source);
         try {
-            return Files.readAllLines(fileToRead.toPath());
+            List<String> strings = Files.readAllLines(fileToRead.toPath());
+            if (strings.isEmpty()) {
+                throw new RuntimeException("File " + source + " is empty");
+            }
+            return strings;
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + source, e);
         }

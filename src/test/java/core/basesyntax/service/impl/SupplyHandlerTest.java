@@ -30,19 +30,26 @@ public class SupplyHandlerTest {
     @Test
     public void validQuantity_Ok() {
         String fruitName = "banana";
-        int value = 10;
+        int fruitsAmount = 10;
         int expected = 110;
-        Assert.assertTrue(handler.operate(fruitName, value));
+        Assert.assertTrue(handler.operate(fruitName, fruitsAmount));
         Assert.assertEquals(expected, storageDao.getByName(fruitName).getQuantity());
     }
 
     @Test
     public void zeroQuantity() {
         String fruitName = "banana";
-        int value = 0;
+        int fruitsAmount = 0;
         int expected = 100;
-        Assert.assertTrue(handler.operate(fruitName, value));
+        Assert.assertTrue(handler.operate(fruitName, fruitsAmount));
         Assert.assertEquals(expected, storageDao.getByName(fruitName).getQuantity());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void negativeAmount_NotOk() {
+        String fruitName = "banana";
+        int fruitsAmount = -1;
+        handler.operate(fruitName, fruitsAmount);
     }
 
     @After

@@ -22,7 +22,7 @@ public class BalanceOperationHandlerTest {
     @Test
     public void getAmountToAdd_max_ok() {
         Integer expected = Integer.MAX_VALUE;
-        Integer actual = operationHandler.getAmountToAdd(2147483647);
+        Integer actual = operationHandler.getAmountToAdd(Integer.MAX_VALUE);
         Assert.assertEquals(expected,actual);
     }
 }

@@ -26,22 +26,45 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeFile_ok() {
-        String fromFileName = "src/test/resources/OutputTestData.csv";
-        String expected = "fruit,quantity" + System.lineSeparator()
+        String toFileName = "src/test/resources/OutputTestData.csv";
+        String fileWithAlreadyInputData = "src/test/resources/FileWithTestedText.csv";
+        String textToWrite = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
-        writerService.writeFile(fromFileName, expected);
-        List<String> temp;
+        writerService.writeFile(toFileName, textToWrite);
+        List<String> fromWrittenFile;
         try {
-            temp = Files.readAllLines(Path.of(fromFileName));
+            fromWrittenFile = Files.readAllLines(Path.of(toFileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from list" + fromFileName, e);
+            throw new RuntimeException("Can't get data from list" + toFileName, e);
         }
-        StringBuilder sb = new StringBuilder();
-        for (String string: temp) {
-            sb.append(string).append(System.lineSeparator());
+        List<String> fromFileWithTestedText;
+        try {
+            fromFileWithTestedText = Files.readAllLines(Path.of(fileWithAlreadyInputData));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't get data from list" + toFileName, e);
         }
-        String actual = sb.toString();
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(fromFileWithTestedText,fromWrittenFile);
+    }
+
+    @Test
+    public void writeFile_emptyFile_ok() {
+        String toFileName = "src/test/resources/OutputTestData.csv";
+        String emptyFile = "src/test/resources/EmptyFile.csv";
+        String textToWrite = "";
+        writerService.writeFile(toFileName, textToWrite);
+        List<String> fromWrittenFile;
+        try {
+            fromWrittenFile = Files.readAllLines(Path.of(toFileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't get data from list" + toFileName, e);
+        }
+        List<String> fromEmptyFile;
+        try {
+            fromEmptyFile = Files.readAllLines(Path.of(emptyFile));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't get data from list" + toFileName, e);
+        }
+        Assert.assertEquals(fromEmptyFile,fromWrittenFile);
     }
 }

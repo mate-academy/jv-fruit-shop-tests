@@ -25,10 +25,26 @@ public class WriterTest {
 
     @Test
     public void writeToFile_validDataAndPath_ok() {
-        String write = stringBuilder.toString();
-        writer.write(write, OUTPUT_TEST_PATH);
+        String report = stringBuilder.toString();
+        writer.write(report, OUTPUT_TEST_PATH);
         List<String> actualList = readFromTestFile(OUTPUT_TEST_PATH);
         List<String> expectedList = readFromTestFile(INPUT_TEST_PATH);
+        Assert.assertEquals(expectedList, actualList);
+    }
+
+    @Test
+    public void writeToFile_emptyData_ok() {
+        writer.write("", OUTPUT_TEST_PATH);
+        List<String> actualList = readFromTestFile(OUTPUT_TEST_PATH);
+        List<String> expectedList = List.of();
+        Assert.assertEquals(expectedList, actualList);
+    }
+
+    @Test
+    public void writeToFile_olyOneWhiteSpaceData_ok() {
+        writer.write(" ", OUTPUT_TEST_PATH);
+        List<String> actualList = readFromTestFile(OUTPUT_TEST_PATH);
+        List<String> expectedList = List.of(" ");
         Assert.assertEquals(expectedList, actualList);
     }
 

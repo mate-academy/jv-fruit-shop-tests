@@ -42,13 +42,14 @@ public class OperationHandlerTest {
 
     @Test
     public void balanceApply_validDAta_ok() {
+        providedMap.clear();
         balanceHandler.apply("banana", 10);
         Assert.assertNotNull("Provided Map is null;", providedMap);
         Assert.assertEquals("Size mismatch for maps;", 1, providedMap.size());
         Assert.assertTrue("Missing keys in storage;" + providedMap.keySet(),
                 providedMap.containsKey("banana"));
         Assert.assertTrue("Missing values in storage;" + providedMap.values(),
-                providedMap.containsValue(5));
+                providedMap.containsValue(10));
     }
 
     @Test

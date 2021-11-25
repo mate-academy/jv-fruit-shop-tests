@@ -7,6 +7,11 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
 public class WriterTest {
     private static Writer writer;
     private static Reader reader;
@@ -27,7 +32,7 @@ public class WriterTest {
         StringBuilder sb = new StringBuilder();
         String actual = stringBuilder.toString();
         writer.write(actual, VALID_OUTPUT_DATA_PATH);
-        for (String s : reader.read(VALID_OUTPUT_DATA_PATH)) {
+        for (String s : readFromTestFile(VALID_OUTPUT_DATA_PATH)) {
             sb.append(s).append(System.lineSeparator());
         }
         String expected = sb.toString();
@@ -49,6 +54,14 @@ public class WriterTest {
     public void writeToFile_emptyFilePath_notOk() {
         String expected = stringBuilder.toString();
         writer.write(expected, "");
+    }
+
+    private static List<String> readFromTestFile(String fileName) {
+        try {
+            return Files.readAllLines(Path.of(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly read data from file " + fileName, e);
+        }
     }
 
 }

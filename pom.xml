@@ -91,6 +91,11 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/StorageDaoImpl*</exclude>
+                        <exclude>**/Storage*</exclude>
+                        <exclude>**/OperationStrategyImpl*</exclude>
+                        <exclude>**/OperationType*</exclude>
+                        <exclude>**/TransactionDto*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

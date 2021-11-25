@@ -24,8 +24,8 @@ public class WriterServiceTest {
     public void writeData_validFilePath_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,56";
-        String actual = readData(VALID_PATH);
         writer.writeData(VALID_PATH, expected);
+        String actual = readData(VALID_PATH);
         assertEquals(expected, actual);
     }
 

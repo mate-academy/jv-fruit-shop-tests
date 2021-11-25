@@ -23,7 +23,8 @@ public class FileWriterImplTest {
     @Test
     public void writeData_validFilePath_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,56";
+                + "banana,152" + System.lineSeparator()
+                + "apple,90";
         writer.writeData(VALID_PATH, expected);
         String actual = readData(VALID_PATH);
         assertEquals(expected, actual);
@@ -32,15 +33,13 @@ public class FileWriterImplTest {
     @Test (expected = RuntimeException.class)
     public void writeData_notValidPath_notOk() {
         String data = "fruit,quantity" + System.lineSeparator()
-                + "apple,56";
+                + "banana,152" + System.lineSeparator()
+                + "apple,90";
         writer.writeData(NOT_VALID_PATH, data);
     }
 
     private String readData(String path) {
         File file = new File(path);
-        if (!file.exists()) {
-            throw new RuntimeException("File doesn't exist");
-        }
         try (BufferedReader reader = new BufferedReader(new FileReader(file.getPath()))) {
             StringBuilder stringBuilder = new StringBuilder();
             String line;

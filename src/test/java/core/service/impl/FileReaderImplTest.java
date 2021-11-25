@@ -3,6 +3,7 @@ package core.service.impl;
 import core.service.ReaderService;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
@@ -11,7 +12,12 @@ public class FileReaderImplTest {
     private static final String CORRECT_INPUT = "src/test/resources/testFile.csv";
     private static final String EMPTY_FILE = "src/test/resources/testEmpty.csv";
     private static final String WRONG_INPUT = "src/test/resources/test_file_wrong_data.csv";
-    private ReaderService fileReader = new FileReaderImpl();
+    private static ReaderService fileReader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     public void readFromFile_correctInput_Ok() {
@@ -50,7 +56,7 @@ public class FileReaderImplTest {
 
     @Test
     public void readFromFile_readEmptyFile_Ok() {
-        List<String> emptyList = fileReader.readFromFile(EMPTY_FILE);
-        Assert.assertTrue(emptyList.isEmpty());
+        List<String> listWithEmptyFile = fileReader.readFromFile(EMPTY_FILE);
+        Assert.assertTrue(listWithEmptyFile.isEmpty());
     }
 }

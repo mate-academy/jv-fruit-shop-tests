@@ -13,18 +13,17 @@ import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static FruitDao fruitDao;
-    private static Map<Operation, OperationHandler> operationsMap;
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
     public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
-        operationsMap = new HashMap<>();
-        operationsMap.put(Operation.BALANCE, new BalanceOperationImpl(fruitDao));
-        operationsMap.put(Operation.PURCHASE, new PurchaseOperationImpl(fruitDao));
-        operationsMap.put(Operation.RETURN, new AddOperationImpl(fruitDao));
-        operationsMap.put(Operation.SUPPLY, new AddOperationImpl(fruitDao));
-        operationStrategy = new OperationStrategyImpl(operationsMap);
+        Map<Operation, OperationHandler> operationMap = new HashMap<>();
+        operationMap.put(Operation.BALANCE, new BalanceOperationImpl(fruitDao));
+        operationMap.put(Operation.PURCHASE, new PurchaseOperationImpl(fruitDao));
+        operationMap.put(Operation.RETURN, new AddOperationImpl(fruitDao));
+        operationMap.put(Operation.SUPPLY, new AddOperationImpl(fruitDao));
+        operationStrategy = new OperationStrategyImpl(operationMap);
     }
 
     @Test

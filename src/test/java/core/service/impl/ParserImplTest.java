@@ -31,8 +31,7 @@ public class ParserImplTest {
 
     @Test(expected = NullPointerException.class)
     public void parseLine_null_notOk() {
-        String line = null;
-        parser.parseLine(line);
+        parser.parseLine(null);
     }
 
     @Test(expected = RuntimeException.class)

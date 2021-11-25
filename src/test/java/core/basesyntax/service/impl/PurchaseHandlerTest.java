@@ -12,20 +12,18 @@ import org.junit.Test;
 
 public class PurchaseHandlerTest {
     private final PurchaseHandler purchaseHandler = new PurchaseHandler(new FruitDaoImpl());
-    private Map<Fruit,Integer> expectedMap;
 
     @Before
     public void setUp() {
-        expectedMap = new HashMap<>();
         Storage.fruits.clear();
     }
 
     @Test
     public void purchase_CorrectData_Ok() {
-        expectedMap.put(new Fruit("banana"),15);
-        Storage.fruits.put(new Fruit("banana"),20);
+        Fruit fruit = new Fruit("banana");
+        Storage.fruits.put(fruit,20);
         purchaseHandler.apply(new Transaction("p","banana",5));
-        Assert.assertEquals(expectedMap, Storage.fruits);
+        Assert.assertEquals(Integer.valueOf(15), Storage.fruits.get(fruit));
     }
 
     @Test(expected = RuntimeException.class)

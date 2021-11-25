@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String INVALID_PATH = " ";
+    private static final String INVALID_PATH = "";
     private static final String VALID_PATH = "src/test/resources/input.csv";
     private final ReaderService reader = new ReaderServiceImpl();
 

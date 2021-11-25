@@ -22,4 +22,16 @@ public class ReportServiceImplTest {
         String expected = "fruit,quantity" + System.lineSeparator() + "banana,20";
         Assert.assertEquals(expected, report.createReport());
     }
+
+    @Test
+    public void report_DateWithManyFruits_OK() {
+        Storage.fruits.put(new Fruit("banana"), 20);
+        Storage.fruits.put(new Fruit("apple"), 5);
+        Storage.fruits.put(new Fruit("pineapple"), 45);
+        String expected = "fruit,quantity"
+                + System.lineSeparator() + "banana,20"
+                + System.lineSeparator() + "apple,5"
+                + System.lineSeparator() + "pineapple,45";
+        Assert.assertEquals(expected, report.createReport());
+    }
 }

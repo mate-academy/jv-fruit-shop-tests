@@ -9,6 +9,9 @@ import java.io.IOException;
 public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String report, String filePath) {
+        if (report.isEmpty()) {
+            throw new RuntimeException("Write failed : report is empty");
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(report);
         } catch (FileNotFoundException e) {

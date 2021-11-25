@@ -33,8 +33,8 @@ public class CsvWriterImplTest {
     public void csvWriter_write_ok() {
         Fruit fruit = new Fruit("MateFruit", 100);
         fruitDao.add(fruit);
-        writer.write("src\\test\\resources\\test.csv");
-        List<String> read = reader.read("src\\test\\resources\\test.csv");
+        writer.write("src/test/resources/test.csv");
+        List<String> read = reader.read("src/test/resources/test.csv");
         Assert.assertTrue(read.contains("MateFruit,100"));
     }
 
@@ -44,8 +44,8 @@ public class CsvWriterImplTest {
         Fruit fruit2 = new Fruit("orange", 50);
         fruitDao.add(fruit);
         fruitDao.add(fruit2);
-        writer.write("src\\test\\resources\\test.csv");
-        List<String> read = reader.read("src\\test\\resources\\test.csv");
+        writer.write("src/test/resources/test.csv");
+        List<String> read = reader.read("src/test/resources/test.csv");
         Assert.assertTrue(read.contains("pineapple,100"));
         Assert.assertTrue(read.contains("orange,50"));
     }

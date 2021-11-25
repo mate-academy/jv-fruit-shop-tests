@@ -21,7 +21,7 @@ public class CsvReaderImplTest {
 
     @Test
     public void csvReader_read_OK() {
-        List<String> read = reader.read("src\\test\\resources\\banana.csv");
+        List<String> read = reader.read("src/test/resources/banana.csv");
         Assert.assertTrue(read.contains("banana"));
     }
 }

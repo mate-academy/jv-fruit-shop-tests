@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MyFileReaderTest {
-    private static final String TEST_FILE_PATH = "src/test/resources/test.txt";
+    private static final String TEST_FILE_PATH = "src\\test\\resources\\test.txt";
     private final MyReader reader = new MyFileReader();
 
     @Test

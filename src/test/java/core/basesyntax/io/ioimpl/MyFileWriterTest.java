@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class MyFileWriterTest {
-    private static final String TEST_FILE_PATH = "src/test/resources/test.txt";
+    private static final String TEST_FILE_PATH = "src\\test\\resources\\test.txt";
     private final MyWriter writer = new MyFileWriter();
 
     @Test

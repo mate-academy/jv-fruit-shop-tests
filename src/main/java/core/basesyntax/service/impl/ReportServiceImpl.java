@@ -1,9 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     private final FruitDao dao;
@@ -14,12 +16,11 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("fruit,quantity");
-        for (Map.Entry<Fruit, Integer> set : dao.getAll().entrySet()) {
-            builder.append(System.lineSeparator()).append(set.getKey().getName())
-                    .append(",").append(set.getValue());
-        }
-        return builder.toString();
+        return "fruit,quantity" + System.lineSeparator()
+                + dao.getAll().entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByKey(
+                        Comparator.comparingInt(fruit -> -fruit.getName().length()))))
+                .map(map -> map.getKey().getName() + "," + map.getValue().toString())
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

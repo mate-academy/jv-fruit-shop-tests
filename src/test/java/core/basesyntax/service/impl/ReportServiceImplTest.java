@@ -29,8 +29,8 @@ public class ReportServiceImplTest {
         Storage.fruits.put(new Fruit("apple"), 5);
         Storage.fruits.put(new Fruit("pineapple"), 45);
         String expected = "fruit,quantity"
-                + System.lineSeparator() + "banana,20"
                 + System.lineSeparator() + "apple,5"
+                + System.lineSeparator() + "banana,20"
                 + System.lineSeparator() + "pineapple,45";
         Assert.assertEquals(expected, report.createReport());
     }

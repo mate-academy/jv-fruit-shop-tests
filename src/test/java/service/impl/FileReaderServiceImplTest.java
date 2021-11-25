@@ -25,7 +25,7 @@ public class FileReaderServiceImplTest {
     public void fileReader_wrongWay_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("can`t read in file");
-        fileReaderService.read("src/test/resources/input.csv");
+        fileReaderService.read("src/test/resources/valid.csv");
     }
 
     @Test
@@ -41,6 +41,6 @@ public class FileReaderServiceImplTest {
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");
-        Assert.assertEquals(expected, fileReaderService.read("src\\test\\resources\\valid.csv"));
+        Assert.assertEquals(expected, fileReaderService.read("src/test/resources/valid.csv"));
     }
 }

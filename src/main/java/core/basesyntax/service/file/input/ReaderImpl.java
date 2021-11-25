@@ -1,7 +1,6 @@
 package core.basesyntax.service.file.input;
 
-import core.basesyntax.exception.MyCustomIOException;
-
+import core.basesyntax.exception.MyCustomIoException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +13,7 @@ public class ReaderImpl implements Reader {
         try {
             dataFromFile = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new MyCustomIOException("Can't read data from file: " + filePath, e);
+            throw new MyCustomIoException("Can't read data from file: " + filePath, e);
         }
         return dataFromFile;
     }

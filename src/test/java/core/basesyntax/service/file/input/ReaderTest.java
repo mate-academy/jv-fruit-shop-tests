@@ -1,8 +1,7 @@
 package core.basesyntax.service.file.input;
 
+import core.basesyntax.exception.MyCustomIoException;
 import java.util.List;
-
-import core.basesyntax.exception.MyCustomIOException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -62,7 +61,7 @@ public class ReaderTest {
         reader.read(null);
     }
 
-    @Test(expected = MyCustomIOException.class)
+    @Test(expected = MyCustomIoException.class)
     public void readFromFile_invalidInputDataPath_notOk() {
         reader.read(INVALID_INPUT_DATA_PATH);
     }

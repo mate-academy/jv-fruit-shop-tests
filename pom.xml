@@ -91,7 +91,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/TransactionDto.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

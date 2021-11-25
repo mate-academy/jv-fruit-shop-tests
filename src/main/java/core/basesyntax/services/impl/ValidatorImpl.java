@@ -8,7 +8,7 @@ public class ValidatorImpl implements Validator {
 
     @Override
     public void validate(String line) throws RuntimeException {
-        if (!line.matches(VALID_LINE_PATTERN)) {
+        if (line == null || !line.matches(VALID_LINE_PATTERN)) {
             throw new LineParseException("Line \"" + line + "\" cannot be parsed.");
         }
     }

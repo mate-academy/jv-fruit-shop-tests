@@ -38,12 +38,12 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void filerWriter_validData_tOk() {
+    public void filerWriter_validData_Ok() {
         Assert.assertTrue(fileWriterService.write("src/test/resources/output.csv"));
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         expected.clear();
     }
 }

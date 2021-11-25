@@ -11,8 +11,8 @@ import service.impl.UpdateStorageServiceImpl;
 import service.impl.ValidatorServiceImpl;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src\\main\\resources\\input.csv";
-    private static final String OUTPUT_FILE_NAME = "src\\main\\resources\\output.csv";
+    private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         HashMap<Operation, ActionStrategyHandler> actionStrategyHashMap = new HashMap<>();

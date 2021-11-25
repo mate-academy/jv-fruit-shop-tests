@@ -5,7 +5,11 @@ import core.basesyntax.dao.StorageDaoCsvImpl;
 import core.basesyntax.model.FruitCrate;
 
 public class AddingHandler implements ActivityHandler {
-    private static final StorageDao storageDao = new StorageDaoCsvImpl();
+    private final StorageDao storageDao;
+
+    public AddingHandler() {
+        this.storageDao = new StorageDaoCsvImpl();
+    }
 
     @Override
     public FruitCrate updateFruitCrate(String fruitName, int quantity) {

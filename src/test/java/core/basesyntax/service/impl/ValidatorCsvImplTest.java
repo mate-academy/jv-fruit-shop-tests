@@ -63,7 +63,7 @@ public class ValidatorCsvImplTest {
     @Test
     public void validate_emptyFileData_notOk() {
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid header");
         validator.validate(Collections.emptyList());
     }
 
@@ -72,7 +72,7 @@ public class ValidatorCsvImplTest {
         fileData.clear();
         fileData.add("type,fruit,quantity");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid header");
         validator.validate(fileData);
     }
 
@@ -80,7 +80,7 @@ public class ValidatorCsvImplTest {
     public void validate_notExistingFirstLine_notOk() {
         fileData.remove(0);
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid header");
         validator.validate(fileData);
     }
 
@@ -88,7 +88,7 @@ public class ValidatorCsvImplTest {
     public void validate_invalidFirstLine_notOk() {
         fileData.set(0, "type,fruit,quantity1");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid header");
         validator.validate(fileData);
     }
 
@@ -96,7 +96,7 @@ public class ValidatorCsvImplTest {
     public void validate_notExistingOperationType_notOk() {
         fileData.set(1, "a,banana,20");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -104,7 +104,7 @@ public class ValidatorCsvImplTest {
     public void validate_upperCaseOperationType_notOk() {
         fileData.set(2, "B,banana,20");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -112,7 +112,7 @@ public class ValidatorCsvImplTest {
     public void validate_twoCharactersOperationType_notOk() {
         fileData.set(3, "bb,banana,20");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -126,7 +126,7 @@ public class ValidatorCsvImplTest {
     public void validate_fruitNameContainsNotAlphabeticCharacter_notOk() {
         fileData.set(1, "b,banana1,20");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -134,7 +134,7 @@ public class ValidatorCsvImplTest {
     public void validate_fruitNameContainsUppercaseCharacter_notOk() {
         fileData.set(2, "b,Banana,20");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -148,7 +148,7 @@ public class ValidatorCsvImplTest {
     public void validate_quantityStartsWithZero_notOk() {
         fileData.set(1, "b,banana,020");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -156,7 +156,7 @@ public class ValidatorCsvImplTest {
     public void validate_quantityContainsLetters_notOk() {
         fileData.set(2, "b,banana,twenty");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -164,7 +164,7 @@ public class ValidatorCsvImplTest {
     public void validate_negativeQuantity_notOk() {
         fileData.set(3, "b,banana,-1");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -172,7 +172,7 @@ public class ValidatorCsvImplTest {
     public void validate_zeroQuantity_notOk() {
         fileData.set(4, "b,banana,0");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -180,7 +180,7 @@ public class ValidatorCsvImplTest {
     public void validate_notWholeNumberQuantity_notOk() {
         fileData.set(5, "b,banana,12.4");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 
@@ -188,7 +188,7 @@ public class ValidatorCsvImplTest {
     public void validate_notWholeNumberQuantityCommaSeparated_notOk() {
         fileData.set(6, "b,banana,12,4");
         expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("INPUT DATA IS INVALID");
+        expectedException.expectMessage("Input file have invalid line(s)");
         validator.validate(fileData);
     }
 

@@ -30,7 +30,7 @@ public class BatchLoaderImplTest {
     private static ActivitiesStrategy activitiesStrategy;
     private static Map<String, ActivityHandler> activityHandlerMap;
     private static List<String> fileData;
-    private static List<core.basesyntax.model.FruitCrate> shopStorage;
+    private static List<FruitCrate> shopStorage;
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();

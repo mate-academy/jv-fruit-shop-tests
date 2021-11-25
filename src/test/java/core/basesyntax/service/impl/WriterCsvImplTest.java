@@ -30,11 +30,12 @@ public class WriterCsvImplTest {
     public void writeToFile_validFilePathAndReport_Ok() {
         fileWriter.writeToFile(report, OUTPUT_FILE_PATH);
         String expected = report;
-        String actual = null;
+        String actual;
         try {
             actual = Files.readString(Path.of(OUTPUT_FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("writeToFile_validFilePathAndReport_Ok");
+            throw new RuntimeException("Files.readString method can't read file "
+                    + "inside writeToFile_validFilePathAndReport_Ok method");
         }
         Assert.assertEquals(expected, actual);
     }
@@ -66,11 +67,12 @@ public class WriterCsvImplTest {
         String report = "";
         fileWriter.writeToFile(report, OUTPUT_FILE_PATH);
         String expected = "";
-        String actual = null;
+        String actual;
         try {
             actual = Files.readString(Path.of(OUTPUT_FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("writeToFile_validFilePathAndReport_Ok");
+            throw new RuntimeException("Files.readString method can't read file inside "
+                    + "writeToFile_validFilePathAndReport_Ok method");
         }
         Assert.assertEquals(expected, actual);
     }

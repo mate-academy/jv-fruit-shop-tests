@@ -20,18 +20,17 @@ public class ValidatorCsvImpl implements Validator {
     public boolean validate(List<String> fileData) {
         if (fileData.isEmpty() || fileData.size() == 1
                 || !fileData.get(0).equals("type,fruit,quantity")) {
-            throw new RuntimeException("INPUT DATA IS INVALID");
+            throw new RuntimeException("Input file have invalid header");
         }
-        Predicate<String> csvLinePredicate = line -> Pattern.matches(CSV_LINE_PATTERN, line)
+        Predicate<String> csvLinePredicate = line -> !(Pattern.matches(CSV_LINE_PATTERN, line)
                 && activityHandlerMap
                 .containsKey(String.valueOf(line.charAt(CSV_LINE_TYPE_LETTER_INDEX)))
-                && line.charAt(line.lastIndexOf(',') + 1) != '0';
-        long validLinesNumber = IntStream.range(1, fileData.size())
+                && line.charAt(line.lastIndexOf(',') + 1) != '0');
+        boolean haveInvalidLines = IntStream.range(1, fileData.size())
                 .mapToObj(fileData::get)
-                .filter(csvLinePredicate)
-                .count();
-        if (!(validLinesNumber + 1 == fileData.size())) {
-            throw new RuntimeException("INPUT DATA IS INVALID");
+                .anyMatch(csvLinePredicate);
+        if (haveInvalidLines) {
+            throw new RuntimeException("Input file have invalid line(s)");
         }
         return true;
     }

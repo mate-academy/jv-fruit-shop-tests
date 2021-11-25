@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ParseImplTest {
+public class ParserTest {
     private static Parser parser;
     private static TransactionDto transactionDto;
     private static String line;

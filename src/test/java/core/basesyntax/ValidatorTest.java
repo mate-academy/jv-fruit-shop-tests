@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ValidatorImplTest {
+public class ValidatorTest {
     private static String line;
     private static Validator validator;
 

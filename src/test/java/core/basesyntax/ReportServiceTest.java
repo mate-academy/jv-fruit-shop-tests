@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReportServiceImplTest {
+public class ReportServiceTest {
     private static String expected;
     private static ReportService report;
 

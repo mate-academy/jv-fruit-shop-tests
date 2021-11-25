@@ -15,7 +15,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriterToFileImplTest {
+public class WriterToFileTest {
     private static WriterToFile writer;
     private static ReportService report;
     private static String expected;

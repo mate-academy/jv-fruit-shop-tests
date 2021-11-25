@@ -28,8 +28,8 @@ public class AddOperationHandlerImplTest {
     @Test
     public void correctWorking_addOperationHandler_ok() {
         operationHandler.apply(transactionDto);
-        Assert.assertEquals(Storage.getDataBase()
-                .get(fruit), expected);
+        Assert.assertEquals(expected, Storage.getDataBase()
+                .get(fruit));
     }
 
     @AfterClass

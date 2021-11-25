@@ -18,7 +18,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void readFromFile_InputDataIsOkFirst_Ok() {
+    public void readFromFile_inputDataIsOkFirst_ok() {
         List<String> expected =
                 List.of("type,fruit,quantity",
                         "b,banana,100",
@@ -38,7 +38,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void readFromFile_InputDataIsOkSecond_Ok() {
+    public void readFromFile_inputDataIsOkSecond_ok() {
         List<String> expected =
                 List.of("type,fruit,quantity",
                         "p,apple,-20",
@@ -48,7 +48,7 @@ public class ReaderTest {
     }
 
     @Test
-    public void readFromFile_emptyInputData_Ok() {
+    public void readFromFile_emptyInputData_ok() {
         List<String> dataFromFile = reader.read(EMPTY_INPUT_DATA_PATH);
         int actual = dataFromFile.size();
         int expected = 0;
@@ -56,12 +56,12 @@ public class ReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_nullPath_NotOk() {
+    public void readFromFile_nullPath_notOk() {
         reader.read(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_invalidInputDataPath_NotOk() {
+    public void readFromFile_invalidInputDataPath_notOk() {
         reader.read(INVALID_INPUT_DATA_PATH);
     }
 }

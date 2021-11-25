@@ -97,7 +97,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void validate_dataWithZeroValue_Ok() {
+    public void validate_dataWithZeroValue_ok() {
         inputData.add("b,banana,0");
         boolean actual = validator.validate(inputData);
         Assert.assertTrue(actual);

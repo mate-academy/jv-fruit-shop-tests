@@ -3,14 +3,13 @@ package core.basesyntax.service.file.output;
 import core.basesyntax.exception.MyCustomIoException;
 import core.basesyntax.service.file.input.Reader;
 import core.basesyntax.service.file.input.ReaderImpl;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class WriterTest {
     private static Writer writer;

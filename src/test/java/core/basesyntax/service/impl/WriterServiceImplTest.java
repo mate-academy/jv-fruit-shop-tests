@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static final String INVALID_PATH = "***1";
+    private static final String INVALID_PATH = null;
     private static final String ACTUAL_PATH = "src/test/resources/actualOutput.csv";
     private static final String EXPECTED_PATH = "src/test/resources/expectedOutput.csv";
     private static final String REPORT = "fruit,quantity\n" + "banana,152";

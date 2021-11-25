@@ -17,7 +17,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_ok() {
+    public void parse_validData_ok() {
         List<String> lines = List.of("type,fruit,quantity", "b,apple,100");
         String expected = new TransactionDto("b", "apple", 100).toString();
         String actual = parser.parse(lines).get(0).toString();

@@ -27,10 +27,6 @@ public class ValidatorImpl implements Validator {
         if (!parametersFromLine[QUANTITY_INDEX].matches("[0-9]*")) {
             throw new RuntimeException("Invalid quantity of fruit, should be numbers");
         }
-        if (Integer.parseInt(parametersFromLine[QUANTITY_INDEX]) < 0) {
-            throw new RuntimeException("Invalid quantity of fruit, "
-                    + "quantity should be more than zero");
-        }
         return true;
     }
 }

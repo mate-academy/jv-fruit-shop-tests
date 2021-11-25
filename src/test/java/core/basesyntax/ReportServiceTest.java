@@ -14,16 +14,28 @@ public class ReportServiceTest {
     private static ReportService report;
 
     @BeforeClass
-        public static void beforeClass() {
-        Storage.getDataBase().put(new Fruit("banana"), 10);
-        expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,10" + System.lineSeparator();
+    public static void beforeClass() {
         report = new ReportServiceImpl();
     }
 
     @Test
-    public void getReportFromDataBase_ok() {
+    public void getReportFromDataBase_oneLine_ok() {
+        Storage.getDataBase().put(new Fruit("banana"), 10);
+        expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator();
         Assert.assertEquals(expected, report.getReport());
+        Storage.getDataBase().clear();
+    }
+
+    @Test
+    public void getReportFromDataBase_moreLinesInStorage_ok() {
+        Storage.getDataBase().put(new Fruit("banana"), 10);
+        Storage.getDataBase().put(new Fruit("apple"), 20);
+        expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator()
+                + "apple,20" + System.lineSeparator();
+        Assert.assertEquals(expected, report.getReport());
+        Storage.getDataBase().clear();
     }
 
     @AfterClass

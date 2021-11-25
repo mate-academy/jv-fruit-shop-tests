@@ -19,8 +19,13 @@ public class WriterToFileTest {
     private static WriterToFile writer;
     private static ReportService report;
     private static String expected;
-    private static final String VALID_PATH_TO_FILE = "src/test/files/resultWriterService";
+    private static String actual;
+    private static final String VALID_PATH_TO_FILE = "src/test/files/resultCorrectTest";
+    private static final String RESULT_WITH_EMPTY_DATABASE =
+            "src/test/files/resultEmptyDataBaseTest";
     private static final String INVALID_PATH_TO_FILE = "src/test/files1/resultWriterService";
+    private static final String PATH_TO_CORRECT_FILE = "src/test/files/correctPathToFile";
+    private static final String PATH_TO_EMPTY_DATABASE_FILE = "src/test/files/emptyDataBaseFile";
 
     @BeforeClass
     public static void beforeClass() {
@@ -36,10 +41,19 @@ public class WriterToFileTest {
     @Test
     public void writeData_correctPathToFile_ok() {
         Storage.getDataBase().put(new Fruit("banana"), 10);
-        expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,10" + System.lineSeparator();
+        expected = readFromFile(PATH_TO_CORRECT_FILE);
         writer.writeData(VALID_PATH_TO_FILE, report.getReport());
-        Assert.assertEquals(expected, readFromFile(VALID_PATH_TO_FILE));
+        actual = readFromFile(VALID_PATH_TO_FILE);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void writeData_withEmptyDataBase_ok() {
+        Storage.getDataBase().clear();
+        expected = readFromFile(PATH_TO_EMPTY_DATABASE_FILE);
+        writer.writeData(RESULT_WITH_EMPTY_DATABASE, report.getReport());
+        actual = readFromFile(RESULT_WITH_EMPTY_DATABASE);
+        Assert.assertEquals(expected, actual);
     }
 
     private String readFromFile(String path) {
@@ -52,7 +66,6 @@ public class WriterToFileTest {
                 stringBuilder.append(line).append(System.lineSeparator());
                 line = reader.readLine();
             }
-            file.delete();
             return stringBuilder.toString();
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file" + e);

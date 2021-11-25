@@ -9,9 +9,11 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-        StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(TITLE)
-                .append(System.lineSeparator())
+        StringBuilder stringBuilder = new StringBuilder(TITLE);
+        if (Storage.getDataBase().isEmpty()) {
+            return stringBuilder.toString();
+        }
+        return stringBuilder.append(System.lineSeparator())
                 .append(Storage.getDataBase()
                         .entrySet()
                         .stream()

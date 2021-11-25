@@ -3,7 +3,11 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReportServiceCsvImplTest {
     private static ReportService reportService;
@@ -24,8 +28,8 @@ public class ReportServiceCsvImplTest {
         int quantity = 10;
         Storage.storage.put(orange, quantity);
         String actual = reportService.formReport();
-        String expected = "fruit,quantity\n" +
-                "orange,10";
+        String expected = "fruit,quantity\n"
+                + "orange,10";
         Assert.assertEquals(expected, actual);
     }
 
@@ -35,7 +39,6 @@ public class ReportServiceCsvImplTest {
         String expected = "fruit,quantity";
         Assert.assertEquals(expected, actual);
     }
-
 
     @After
     public void afterEachTest() {

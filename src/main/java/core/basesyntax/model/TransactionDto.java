@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class TransactionDto {
     private String operation;
     private String fruitName;

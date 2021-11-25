@@ -1,13 +1,11 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.Validator;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ParserImpl;
@@ -31,20 +29,17 @@ public class Main {
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceCsvImpl();
         List<String> readLines = readerService.readFromFile(INPUT_FILE);
-        Validator validator = new ValidatorCsvImpl();
-        Parser parser = new ParserImpl(validator);
+        Parser parser = new ParserImpl(new ValidatorCsvImpl());
         List<TransactionDto> transactions = new ArrayList<>();
         for (String line : readLines) {
-
             transactions.add(parser.parseLine(line));
         }
 
-        FruitDao fruitDao = new FruitDaoImpl();
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("s", new AddOperationHandler(fruitDao));
-        operationHandlerMap.put("b", new BalanceOperationHandler(fruitDao));
-        operationHandlerMap.put("p", new PurchaseOperationHandler(fruitDao));
-        operationHandlerMap.put("r", new AddOperationHandler(fruitDao));
+        operationHandlerMap.put("s", new AddOperationHandler(new FruitDaoImpl()));
+        operationHandlerMap.put("b", new BalanceOperationHandler(new FruitDaoImpl()));
+        operationHandlerMap.put("p", new PurchaseOperationHandler(new FruitDaoImpl()));
+        operationHandlerMap.put("r", new AddOperationHandler(new FruitDaoImpl()));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         for (TransactionDto transactionDto : transactions) {

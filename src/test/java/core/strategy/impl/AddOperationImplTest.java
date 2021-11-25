@@ -1,5 +1,7 @@
 package core.strategy.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.dao.FruitDao;
 import core.dao.FruitDaoImpl;
 import core.db.Storage;
@@ -9,8 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class AddOperationImplTest {
     private static OperationHandler addActivityHandler;

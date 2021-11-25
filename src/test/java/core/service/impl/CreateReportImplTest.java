@@ -1,5 +1,7 @@
 package core.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.model.Fruit;
 import core.service.CreateReport;
 import java.util.ArrayList;
@@ -8,8 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class CreateReportImplTest {
     private static List<Fruit> fruits;

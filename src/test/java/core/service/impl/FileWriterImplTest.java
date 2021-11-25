@@ -1,5 +1,7 @@
 package core.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.service.FileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,8 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class FileWriterImplTest {
     private static FileWriterService writer;

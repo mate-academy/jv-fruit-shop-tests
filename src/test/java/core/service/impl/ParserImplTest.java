@@ -1,11 +1,11 @@
 package core.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.model.TransactionDto;
 import core.service.Parser;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ParserImplTest {
     private static Parser parser;

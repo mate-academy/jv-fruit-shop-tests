@@ -12,13 +12,13 @@ public class FruitTest {
     @BeforeClass
     public static void beforeClass() {
         fruit = new Fruit("banana");
-        expected = "Fruit{"
-                + "fruitName='" + fruit.getFruitName() + '\''
-                + '}';
     }
 
     @Test
     public void toStringFruit_ok() {
+        expected = "Fruit{"
+                + "fruitName='" + fruit.getFruitName() + '\''
+                + '}';
         Assert.assertEquals(expected, fruit.toString());
     }
 }

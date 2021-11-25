@@ -19,29 +19,27 @@ public class WriterToFileTest {
     private static WriterToFile writer;
     private static ReportService report;
     private static String expected;
-    private static String validPathToFile;
-    private static String invalidPathToFile;
+    private static final String VALID_PATH_TO_FILE = "src/test/files/resultWriterService";
+    private static final String INVALID_PATH_TO_FILE = "src/test/files1/resultWriterService";
 
     @BeforeClass
     public static void beforeClass() {
         writer = new WriterToFileImpl();
         report = new ReportServiceImpl();
-        Storage.getDataBase().put(new Fruit("banana"), 10);
-        validPathToFile = "src/test/files/resultWriterService";
-        invalidPathToFile = "src/test/files1/resultWriterService";
-        expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,10" + System.lineSeparator();
     }
 
     @Test(expected = RuntimeException.class)
     public void writeData_incorrectPathToFile_notOk() {
-        writer.writeData(invalidPathToFile, report.getReport());
+        writer.writeData(INVALID_PATH_TO_FILE, report.getReport());
     }
 
     @Test
     public void writeData_correctPathToFile_ok() {
-        writer.writeData(validPathToFile, report.getReport());
-        Assert.assertEquals(expected, readFromFile(validPathToFile));
+        Storage.getDataBase().put(new Fruit("banana"), 10);
+        expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator();
+        writer.writeData(VALID_PATH_TO_FILE, report.getReport());
+        Assert.assertEquals(expected, readFromFile(VALID_PATH_TO_FILE));
     }
 
     private String readFromFile(String path) {
@@ -62,7 +60,7 @@ public class WriterToFileTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.getDataBase().clear();
     }
 }

@@ -22,11 +22,11 @@ public class PurchaseOperationHandlerImplTest {
         operationHandler = new PurchaseOperationHandlerImpl();
         transactionDto = new TransactionDto("p", "banana", 10);
         fruit = new Fruit(transactionDto.getFruitName());
-        expected = 5;
     }
 
     @Test
     public void correctWorking_purchaseOperationHandler_ok() {
+        expected = 5;
         operationHandler.apply(transactionDto);
         Assert.assertEquals(expected, Storage.getDataBase()
                 .get(fruit));

@@ -22,11 +22,11 @@ public class AddOperationHandlerImplTest {
         operationHandler = new AddOperationHandlerImpl();
         transactionDto = new TransactionDto("b", "banana", 10);
         fruit = new Fruit(transactionDto.getFruitName());
-        expected = 25;
     }
 
     @Test
     public void correctWorking_addOperationHandler_ok() {
+        expected = 25;
         operationHandler.apply(transactionDto);
         Assert.assertEquals(expected, Storage.getDataBase()
                 .get(fruit));

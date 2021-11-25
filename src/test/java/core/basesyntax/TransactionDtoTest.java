@@ -12,15 +12,15 @@ public class TransactionDtoTest {
     @BeforeClass
     public static void beforeClass() {
         transactionDto = new TransactionDto("b", "banana", 10);
+    }
+
+    @Test
+    public void toStringTransactionDto_ok() {
         expected = "TransactionDto{"
                 + "operation='" + transactionDto.getOperation() + '\''
                 + ", fruitName='" + transactionDto.getFruitName() + '\''
                 + ", quantity=" + transactionDto.getQuantity()
                 + '}';
-    }
-
-    @Test
-    public void toStringTransactionDto_ok() {
         Assert.assertEquals(expected, transactionDto.toString());
     }
 

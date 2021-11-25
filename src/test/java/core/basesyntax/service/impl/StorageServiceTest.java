@@ -20,8 +20,8 @@ public class StorageServiceTest {
     @BeforeClass
     public static void init() {
         storageDao = new StorageDaoImpl();
-        OperationStrategy operationStrategy = new OperationStrategy(storageDao);
-        storageService = new StorageServiceImpl(storageDao, operationStrategy);
+        storageService = new StorageServiceImpl(storageDao,
+                new OperationStrategy(storageDao));
     }
 
     @Before

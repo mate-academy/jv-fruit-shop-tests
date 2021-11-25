@@ -42,7 +42,6 @@ public class DataParserTest {
                 new String[]{"s", "banana", "56"});
         List<String[]> actual = dataParser.formatInputData(fruitList);
         Assert.assertEquals(expected.size(), actual.size());
-        System.out.println(expected.size());
         for (int i = 0; i < expected.size(); i++) {
             Assert.assertArrayEquals(expected.get(i), actual.get(i));
         }

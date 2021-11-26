@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -44,11 +45,11 @@ public class CsvValidatorImplTest {
 
     @Test(expected = RuntimeException.class)
     public void validate_emptyData_notOk() {
-        validator.isValid(new ArrayList<>());
+        validator.isValid(Collections.emptyList());
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_notExistingHeadData_notOk() {
+    public void validate_missingHeadData_notOk() {
         fileData.remove(0);
         validator.isValid(fileData);
     }

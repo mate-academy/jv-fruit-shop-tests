@@ -29,7 +29,7 @@ public class AddOperationTest {
     }
 
     @Test
-    public void addOperation_add10_Ok() {
+    public void add_somePositiveQuantity_Ok() {
         int expected = 20;
         operationAdd.apply(APPLE, 10);
         int result = Storage.map.get(APPLE);

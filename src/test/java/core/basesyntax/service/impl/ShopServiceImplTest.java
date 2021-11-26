@@ -71,7 +71,7 @@ public class ShopServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateShopWarehouse_invalidData_notOk() {
+    public void updateShopWarehouse_notEnoughFruits_notOk() {
         inputData = List.of(
             "b,banana,1",
             "p,banana,2",

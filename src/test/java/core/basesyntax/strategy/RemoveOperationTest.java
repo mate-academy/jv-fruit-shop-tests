@@ -29,7 +29,7 @@ public class RemoveOperationTest {
     }
 
     @Test
-    public void removeOperation_minus10_Ok() {
+    public void remove_somePositiveQuantity_Ok() {
         int expected = 90;
         operationRemove.apply(APPLE, 10);
         int result = Storage.map.get(APPLE);
@@ -37,7 +37,7 @@ public class RemoveOperationTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void removeOperation_negativeResult_Ok() {
+    public void remove_negativeResultQuantity_notOk() {
         operationRemove.apply(APPLE, 1000);
     }
 }

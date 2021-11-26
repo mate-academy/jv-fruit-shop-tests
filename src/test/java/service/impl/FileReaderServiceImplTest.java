@@ -1,8 +1,6 @@
 package service.impl;
 
-import db.Storage;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,10 +32,5 @@ public class FileReaderServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void readFromFile_notOk() {
         fileReaderService.readFromFile("");
-    }
-
-    @After
-    public void afterEachTest() {
-        Storage.storage.clear();
     }
 }

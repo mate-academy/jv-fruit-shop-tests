@@ -10,6 +10,7 @@ import service.impl.FileWriterServiceImpl;
 import service.impl.ParserImpl;
 import service.impl.ValidatorImpl;
 import strategy.AddOperationHandler;
+import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
 import strategy.PurchaseOperationHandler;
 
@@ -19,7 +20,7 @@ public class Main {
     private static final String outputFilePath = "src\\main\\resources\\outFile.csv";
 
     static {
-        map.put("b", new AddOperationHandler());
+        map.put("b", new BalanceOperationHandler());
         map.put("s", new AddOperationHandler());
         map.put("p", new AddOperationHandler());
         map.put("r", new PurchaseOperationHandler());

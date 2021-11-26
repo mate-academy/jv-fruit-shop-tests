@@ -29,7 +29,8 @@ public class Main {
     private static final String INPUT_PATH = "src/main/resources/inputFile.csv";
 
     public static void main(String[] args) {
-        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
+        FruitStorageDao fruitStorageDao =
+                new FruitStorageDaoImpl();
         Map<Manipulation, ManipulationService> manipulationServiceMap = new HashMap<>();
         manipulationServiceMap.put(Manipulation.BALANCE,
                 new BalanceManipulationService(fruitStorageDao));
@@ -47,7 +48,8 @@ public class Main {
         List<TransactionDto> transactionDtos = new ArrayList<>();
         ParserService parserService = new ParserServiceImpl();
         transactionDtos = parserService.parseLines(data);
-        List<Fruit> fruits = new FruitStoreServiceImpl(fruitStorageDao, manipulationStrategy)
+        List<Fruit> fruits =
+                new FruitStoreServiceImpl(fruitStorageDao, manipulationStrategy)
                 .changeBalance(transactionDtos);
         String report = new ReportServiceImpl().createReport(fruits);
         new FileWriterServiceImpl().writeToFile(OUTPUT_PATH, report);

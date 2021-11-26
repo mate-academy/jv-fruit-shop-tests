@@ -3,6 +3,7 @@ package core.basesyntax.services.operation;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,7 +24,6 @@ public class AddOperationHandlerImplTest {
         Integer expected = 10;
         Integer actual = testStorage.get("banana");
         Assert.assertEquals(expected, actual);
-        testStorage.clear();
     }
 
     @Test
@@ -33,6 +33,10 @@ public class AddOperationHandlerImplTest {
         Integer expected = 300;
         Integer actual = testStorage.get("banana");
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
         testStorage.clear();
     }
 }

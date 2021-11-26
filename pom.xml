@@ -91,6 +91,9 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/model/**</exclude>
+                        <exclude>**/bd/**</exclude>
+                        <exclude>*/service/operationhandler/Operation*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

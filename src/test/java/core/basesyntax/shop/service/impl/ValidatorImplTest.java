@@ -30,7 +30,7 @@ public class ValidatorImplTest {
         Assert.assertTrue(validator.validate(correctData));
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void validate_corruptedData_notOk() {
         String corruptedData = "type,fruit,quantity\n"
                 + "b,banana,20\n"
@@ -44,15 +44,10 @@ public class ValidatorImplTest {
                 + "s,banana,50\n"
                 + "b,pear,50\n"
                 + "p,pear,10";
-        try {
-            validator.validate(corruptedData);
-        } catch (Exception e) {
-            return;
-        }
-        Assert.fail("Runtime exception was expected");
+        validator.validate(corruptedData);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void validate_invalidData_notOk() {
         String invalidData = "Phlebas the Phoenician, a fortnight dead,\n"
                 + "Forgot the cry of gulls, and the deep seas swell\n"
@@ -64,11 +59,6 @@ public class ValidatorImplTest {
                 + "                          Gentile or Jew\n"
                 + "O you who turn the wheel and look to windward,\n"
                 + "Consider Phlebas, who was once handsome and tall as you.";
-        try {
-            validator.validate(invalidData);
-        } catch (Exception e) {
-            return;
-        }
-        Assert.fail("Runtime exception was expected");
+        validator.validate(invalidData);
     }
 }

@@ -1,6 +1,6 @@
 package shop.service.impl;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import shop.dao.FruitDao;
 import shop.model.Fruit;
@@ -16,7 +16,7 @@ public class ReportServiceImpl implements ReportService {
 
     public List<String> makeReport() {
         List<Fruit> listOfFruit = fruitDao.getAll();
-        List<String> listReport = new LinkedList<>();
+        List<String> listReport = new ArrayList<>();
         listReport.add(FIRST_LINE);
         for (Fruit fruit : listOfFruit) {
             listReport.add(fruit.getName() + "," + fruit.getCount());

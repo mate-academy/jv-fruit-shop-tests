@@ -1,6 +1,7 @@
 package shop.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -43,6 +44,11 @@ public class FruitDaoImplTest {
     public void fruitDao_get_ok() {
         fruitDao.add(test_fruit);
         assertEquals(test_fruit, fruitDao.get(test_fruit.getName()));
+    }
+
+    @Test
+    public void fruitDao_get_null_ok() {
+        assertNull(fruitDao.get(""));
     }
 
     @After

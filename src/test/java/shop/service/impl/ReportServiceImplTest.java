@@ -1,7 +1,7 @@
 package shop.service.impl;
 
 import java.util.List;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,8 +21,8 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl(fruitDao);
     }
 
-    @AfterClass
-    public static void afterAll() {
+    @After
+    public void afterAll() {
         DataStorage.storage.clear();
     }
 

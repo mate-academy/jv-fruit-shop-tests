@@ -15,7 +15,7 @@ public class CsvReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_not_existed_file_notOK() {
+    public void csvReader_not_existed_file_notOK() {
         reader.read("pew");
     }
 
@@ -23,5 +23,11 @@ public class CsvReaderImplTest {
     public void csvReader_read_OK() {
         List<String> read = reader.read("src/test/resources/banana.csv");
         Assert.assertTrue(read.contains("banana"));
+    }
+
+    @Test
+    public void csvReader_read_emptyFile_OK() {
+        List<String> read = reader.read("src/test/resources/empty.csv");
+        Assert.assertTrue(read.isEmpty());
     }
 }

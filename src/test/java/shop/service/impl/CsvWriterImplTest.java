@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,8 +20,8 @@ public class CsvWriterImplTest {
         writer = new CsvWriterImpl();
     }
 
-    @AfterClass
-    public static void afterAll() {
+    @After
+    public void afterAll() {
         DataStorage.storage.clear();
     }
 

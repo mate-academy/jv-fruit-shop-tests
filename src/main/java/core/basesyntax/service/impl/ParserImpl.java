@@ -15,13 +15,12 @@ public class ParserImpl implements Parser<TransactionDto> {
         this.validator = validator;
     }
 
-    public TransactionDto parseTo(String line) {
+    public TransactionDto parse(String line) {
         String[] oneLineData = line.split(",");
         if (validator.validate(line)) {
             return new TransactionDto(OperationType.valueOf(oneLineData[OPERATION]),
                     oneLineData[FRUIT_NAME], Integer.parseInt(oneLineData[QUANTITY]));
-        } else {
-            throw new RuntimeException("Input data is invalid");
         }
+        throw new RuntimeException("Input data is invalid");
     }
 }

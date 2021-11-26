@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +15,6 @@ public class MyWriterTest {
     @Before
     public void setUp() {
         writer = new MyWriterImpl();
-    }
-
-    @After
-    public void tearDown() {
     }
 
     @Test

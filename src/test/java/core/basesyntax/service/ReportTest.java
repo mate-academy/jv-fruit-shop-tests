@@ -2,18 +2,18 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.ReportImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ReportTest {
-    private Report report;
+    private ReportService report;
 
     @Before
     public void setUp() {
-        report = new ReportImpl();
+        report = new ReportServiceImpl();
         Storage.storage.put(new Fruit("orange"), 25);
         Storage.storage.put(new Fruit("apple"), 100);
     }

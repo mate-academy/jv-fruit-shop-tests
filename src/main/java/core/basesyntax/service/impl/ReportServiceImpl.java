@@ -2,10 +2,10 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.Report;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class ReportImpl implements Report {
+public class ReportServiceImpl implements ReportService {
     @Override
     public String formReport() {
         StringBuilder result = new StringBuilder();

@@ -8,11 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private OperationHandler purchase;
+    private OperationHandler purchaseHandler;
 
     @Before
     public void setUp() {
-        purchase = new PurchaseOperationHandler();
+        purchaseHandler = new PurchaseOperationHandler();
         Storage.storage.put(new Fruit("banana"),25);
         Storage.storage.put(new Fruit("apple"), 100);
     }
@@ -25,23 +25,23 @@ public class PurchaseOperationHandlerTest {
     @Test
     public void operate_validData_ok() {
         int expected = 5;
-        purchase.operate("banana", 20);
+        purchaseHandler.operate("banana", 20);
         int actual = Storage.storage.get(new Fruit("banana"));
         Assert.assertEquals(actual, expected);
     }
 
     @Test(expected = NullPointerException.class)
     public void operate_nullInputData_notOk() {
-        purchase.operate(null, 25);
+        purchaseHandler.operate(null, 25);
     }
 
     @Test(expected = RuntimeException.class)
     public void operate_newQuantityMoreThanOldQuantity_notOk() {
-        purchase.operate("apple", 120);
+        purchaseHandler.operate("apple", 120);
     }
 
     @Test(expected = NullPointerException.class)
     public void operate_noSuchFruit_notOk() {
-        purchase.operate("orange", 10);
+        purchaseHandler.operate("orange", 10);
     }
 }

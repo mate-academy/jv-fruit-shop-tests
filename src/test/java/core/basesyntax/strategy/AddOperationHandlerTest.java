@@ -8,11 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private OperationHandler add;
+    private OperationHandler addHandler;
 
     @Before
     public void setUp() {
-        add = new AddOperationHandler();
+        addHandler = new AddOperationHandler();
         Storage.storage.put(new Fruit("banana"), 25);
     }
 
@@ -24,7 +24,7 @@ public class AddOperationHandlerTest {
     @Test
     public void operate_validDataReturnAndSupply_ok() {
         int expected = 100;
-        add.operate("banana", 75);
+        addHandler.operate("banana", 75);
         int actual = Storage.storage.get(new Fruit("banana"));
         Assert.assertEquals(expected, actual);
     }
@@ -32,7 +32,7 @@ public class AddOperationHandlerTest {
     @Test
     public void operate_validDataBalance_ok() {
         int expected = 30;
-        add.operate("orange", 30);
+        addHandler.operate("orange", 30);
         Assert.assertTrue(Storage.storage.containsKey(new Fruit("orange")));
         int actual = Storage.storage.get(new Fruit("orange"));
         Assert.assertEquals(expected, actual);

@@ -6,7 +6,7 @@ import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.MyCsvReaderImpl;
 import core.basesyntax.service.impl.MyWriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReportImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -35,7 +35,7 @@ public class Main {
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         for (String line : lines) {
-            transactionDtoList.add(parser.parseTo(line));
+            transactionDtoList.add(parser.parse(line));
         }
 
         for (TransactionDto transactionDto : transactionDtoList) {
@@ -44,7 +44,7 @@ public class Main {
             handler.operate(transactionDto.getFruitName(),transactionDto.getQuantity());
         }
 
-        String report = new ReportImpl().formReport();
+        String report = new ReportServiceImpl().formReport();
         new MyWriterImpl().writeToFile(FILE_PATH_TO_WRITE,report);
     }
 }

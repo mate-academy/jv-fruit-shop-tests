@@ -14,13 +14,9 @@ public class ValidatorImpl implements Validator {
         if (oneLineData.length != NUMBER_OF_PARAMETERS) {
             return false;
         }
-        try {
-            Integer.parseInt(oneLineData[QUANTITY]);
-        } catch (NumberFormatException e) {
-            return false;
-        }
         if (oneLineData[OPERATION].matches("[bspr]")
                 && oneLineData[FRUIT_NAME].matches("[A-Za-z]*")
+                && oneLineData[QUANTITY].matches("\\d+")
                 && !oneLineData[FRUIT_NAME].isEmpty()
                 && Integer.parseInt(oneLineData[QUANTITY]) > 0) {
             return true;

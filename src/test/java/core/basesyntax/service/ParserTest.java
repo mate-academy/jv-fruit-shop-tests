@@ -17,19 +17,19 @@ public class ParserTest {
     }
 
     @Test
-    public void parseTo_validData_ok() {
+    public void parse_validData_ok() {
         TransactionDto expected = new TransactionDto(OperationType.b, "banana", 25);
-        TransactionDto actual = parser.parseTo("b,banana,25");
+        TransactionDto actual = parser.parse("b,banana,25");
         Assert.assertEquals(actual, expected);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseTo_invalidInputData_notOk() {
-        parser.parseTo("a,56,");
+    public void parse_invalidInputData_notOk() {
+        parser.parse("a,56,");
     }
 
     @Test(expected = NullPointerException.class)
-    public void parseTo_nullData_notOk() {
-        parser.parseTo(null);
+    public void parse_nullData_notOk() {
+        parser.parse(null);
     }
 }

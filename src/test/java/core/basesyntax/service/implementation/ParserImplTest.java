@@ -23,7 +23,7 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseTo_invalidInputData_notOk() {
+    public void parseTo_invalidData_notOk() {
         parser.parseTo("a,88,");
     }
 

@@ -16,13 +16,13 @@ public class ReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_invalidFilePath_notOk() {
-        reader.readFromFile(";;");
+        reader.readFromFile("fruitInput.csv");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_emptyCsv_ok() {
         List<String> expected = List.of("");
-        List<String> actual = reader.readFromFile("src/test/resources/empty.csv");
+        List<String> actual = reader.readFromFile("src/test/resources/emptyFile.csv");
         Assert.assertEquals(actual, expected);
     }
 }

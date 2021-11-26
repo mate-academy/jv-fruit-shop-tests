@@ -25,8 +25,8 @@ public class FruitDaoImplTest {
         Fruit orange = new Fruit("Orange", 5);
         fruitDao.add(banana);
         fruitDao.add(orange);
-        Assert.assertTrue(fruitDao.getAll().contains(banana));
-        Assert.assertTrue(fruitDao.getAll().contains(orange));
+        Assert.assertTrue(DataStorage.storage.contains(banana));
+        Assert.assertTrue(DataStorage.storage.contains(orange));
     }
 
     @Test

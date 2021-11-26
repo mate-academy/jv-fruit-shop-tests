@@ -23,7 +23,7 @@ public class ValidatorTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void validator_Null_notOk() {
+    public void validator_null_notOk() {
         String line = null;
         validator.isValid(line);
     }
@@ -58,7 +58,7 @@ public class ValidatorTest {
 
     @Test
     public void validator_incorrectLine_notOk() {
-        String line = "o,apricot,-100";
+        String line = "o,apricot,***#@";
         boolean actual = validator.isValid(line);
         assertFalse(actual);
     }

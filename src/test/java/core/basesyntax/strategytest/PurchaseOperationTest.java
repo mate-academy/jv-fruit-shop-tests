@@ -31,8 +31,13 @@ public class PurchaseOperationTest {
         boolean expected = true;
         TransactionDto transaction = new TransactionDto("p", "apple", 100);
         handler.apply(transaction);
-        System.out.println(Storage.storage.get(fruit));
         boolean actual = Storage.storage.get(fruit) == 0;
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchaseOperation_purchaseMuchThanHave_notOk() {
+        TransactionDto transaction = new TransactionDto("p", "apple", 150);
+        handler.apply(transaction);
     }
 }

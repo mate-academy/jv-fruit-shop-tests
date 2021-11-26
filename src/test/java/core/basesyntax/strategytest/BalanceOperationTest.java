@@ -28,7 +28,6 @@ public class BalanceOperationTest {
     public void balanceOperation_correctWorkOperation_ok() {
         boolean expected = true;
         Fruit fruit = new Fruit("apple");
-        Storage.storage.put(fruit, 100);
         TransactionDto transaction = new TransactionDto("b", "apple", 100);
         handler.apply(transaction);
         boolean actual = Storage.storage.get(fruit) == 100;

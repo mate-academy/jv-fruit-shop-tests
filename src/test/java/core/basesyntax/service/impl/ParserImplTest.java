@@ -22,25 +22,25 @@ public class ParserImplTest {
         List<TransactionDto> expected = List.of(new TransactionDto("b",
                 "apple",
                 120));
-        Assert.assertEquals(expected, parser.parseLine(list));
+        Assert.assertEquals(expected, parser.parseLines(list));
     }
 
     @Test (expected = RuntimeException.class)
     public void parser_emptyList_notOk() {
         List<String> list = Collections.emptyList();
-        parser.parseLine(list);
+        parser.parseLines(list);
     }
 
     @Test (expected = RuntimeException.class)
     public void parser_parserHasNullValue() {
         List<String> list = List.of(null);
-        parser.parseLine(list);
+        parser.parseLines(list);
     }
 
     @Test
     public void parser_onlyTitleLine_Ok() {
         List<String> list = List.of("type,fruit,quantity");
-        List<TransactionDto> actual = parser.parseLine(list);
+        List<TransactionDto> actual = parser.parseLines(list);
         List<TransactionDto> expected = Collections.emptyList();
         Assert.assertEquals(expected,actual);
     }

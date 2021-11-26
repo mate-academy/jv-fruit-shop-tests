@@ -14,8 +14,8 @@ public class ValidatorImpl implements Validator {
         if (lines.isEmpty()) {
             throw new ValidatorException("File is empty, please try another one");
         }
-        for (String str : lines) {
-            if (!Pattern.matches(PATTERN_LINE, str) && !str.equals(INPUT_TITLE)) {
+        for (String line : lines) {
+            if (!Pattern.matches(PATTERN_LINE, line) && !line.equals(INPUT_TITLE)) {
                 throw new ValidatorException("Invalid input data, try again");
             }
         }

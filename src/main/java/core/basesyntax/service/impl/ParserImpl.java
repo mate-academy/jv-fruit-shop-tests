@@ -19,7 +19,7 @@ public class ParserImpl implements Parser<TransactionDto> {
     }
 
     @Override
-    public List<TransactionDto> parseLine(List<String> inputData) {
+    public List<TransactionDto> parseLines(List<String> inputData) {
         validator.validate(inputData);
         List<TransactionDto> transactions = new ArrayList<>();
         inputData.stream()

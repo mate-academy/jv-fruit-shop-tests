@@ -5,15 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import service.FileWriter;
 
 public class FileWriterImplTest {
     private static final String FILE_PATH = "src/test/resources//testWriteFile.csv";
+    private static FileWriter writer;
 
-    private FileWriter writer;
-
-    {
+    @BeforeClass
+    public static void init() {
         writer = new FileWriterImpl();
     }
 

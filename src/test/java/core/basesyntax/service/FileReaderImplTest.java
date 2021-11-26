@@ -5,14 +5,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import service.FileReader;
 
 public class FileReaderImplTest {
     private static final String FILE_PATH = "src/test/resources//testReadFile.csv";
-    private FileReader reader;
+    private static FileReader reader;
 
-    {
+    @BeforeClass
+    public static void init() {
         reader = new FileReaderImpl();
     }
 

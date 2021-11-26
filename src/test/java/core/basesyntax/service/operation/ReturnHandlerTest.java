@@ -11,9 +11,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 public class ReturnHandlerTest {
     private static final FruitStorageDao storageDao = new FruitStorageDaoImpl();
     private static ReturnHandler returnHandler;
@@ -49,10 +46,10 @@ public class ReturnHandlerTest {
     @Test
     public void testEquals() {
         ReturnHandler clazz = new ReturnHandler(storageDao);
-        assertEquals(clazz, returnHandler);
-        assertEquals(clazz, clazz);
-        assertEquals(clazz.hashCode(), returnHandler.hashCode());
-        assertNotEquals(clazz, null);
+        Assert.assertEquals(clazz, returnHandler);
+        Assert.assertEquals(clazz, clazz);
+        Assert.assertEquals(clazz.hashCode(), returnHandler.hashCode());
+        Assert.assertNotEquals(clazz, null);
     }
 
     @After

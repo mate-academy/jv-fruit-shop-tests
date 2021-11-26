@@ -11,9 +11,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 public class PurchaseHandlerTest {
     private static final FruitStorageDao storageDao = new FruitStorageDaoImpl();
     private static PurchaseHandler purchaseHandler;
@@ -49,10 +46,10 @@ public class PurchaseHandlerTest {
     @Test
     public void testEquals() {
         PurchaseHandler clazz = new PurchaseHandler(storageDao);
-        assertEquals(clazz, purchaseHandler);
-        assertEquals(clazz, clazz);
-        assertEquals(clazz.hashCode(), purchaseHandler.hashCode());
-        assertNotEquals(clazz, null);
+        Assert.assertEquals(clazz, purchaseHandler);
+        Assert.assertEquals(clazz, clazz);
+        Assert.assertEquals(clazz.hashCode(), purchaseHandler.hashCode());
+        Assert.assertNotEquals(clazz, null);
     }
 
     @After

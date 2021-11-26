@@ -10,9 +10,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
 public class SupplyHandlerTest {
     private static final FruitStorageDao storageDao = new FruitStorageDaoImpl();
     private static SupplyHandler supplyHandler;
@@ -54,10 +51,10 @@ public class SupplyHandlerTest {
     @Test
     public void testEquals() {
         SupplyHandler clazz = new SupplyHandler(storageDao);
-        assertEquals(clazz, supplyHandler);
-        assertEquals(clazz, clazz);
-        assertEquals(clazz.hashCode(), supplyHandler.hashCode());
-        assertNotEquals(clazz, null);
+        Assert.assertEquals(clazz, supplyHandler);
+        Assert.assertEquals(clazz, clazz);
+        Assert.assertEquals(clazz.hashCode(), supplyHandler.hashCode());
+        Assert.assertNotEquals(clazz, null);
     }
 
     @After

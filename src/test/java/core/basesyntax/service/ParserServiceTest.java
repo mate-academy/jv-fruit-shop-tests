@@ -7,12 +7,14 @@ import core.basesyntax.service.impl.ValidatorServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceTest {
     private static ValidatorService validator;
     private static ParserService<TransactionDto> csvParcer;
+    private static List<String> dataFromFile;
 
     @BeforeClass
     public static void beforeClass() {
@@ -20,14 +22,18 @@ public class ParserServiceTest {
         csvParcer = new CsvParserServiceImpl(validator);
     }
 
-    @Test
-    public void parseLines_validList_ok() {
-        List<String> dataFromFile = new ArrayList();
+    @Before
+    public void setUp() {
+        dataFromFile = new ArrayList<>();
         dataFromFile.add("type,fruit,quantity");
         dataFromFile.add("b,banana,20");
         dataFromFile.add("b,apple,100");
         dataFromFile.add("s,banana,100");
         dataFromFile.add("p,banana,13");
+    }
+
+    @Test
+    public void parseLines_validList_ok() {
         List<TransactionDto> expected = new ArrayList<>();
         expected.add(new TransactionDto("b", "banana", 20));
         expected.add(new TransactionDto("b", "apple", 100));

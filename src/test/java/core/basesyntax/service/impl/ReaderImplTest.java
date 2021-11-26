@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

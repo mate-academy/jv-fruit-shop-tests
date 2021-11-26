@@ -6,10 +6,7 @@ import core.model.Fruit;
 import core.service.CreateReport;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 public class CreateReportImplTest {
     private static List<Fruit> fruits;
@@ -34,6 +31,14 @@ public class CreateReportImplTest {
                 + "apple,85" + System.lineSeparator()
                 + "pineapple,12" + System.lineSeparator()
                 + "blackberry,32";
+        String actual = createReport.createReport(fruits);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void readFromFile_emptyList_ok() {
+        fruits.clear();
+        String expected = "fruit,quantity";
         String actual = createReport.createReport(fruits);
         assertEquals(expected, actual);
     }

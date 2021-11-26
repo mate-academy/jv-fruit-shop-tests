@@ -41,13 +41,20 @@ public class DaoImplTest {
     }
 
     @Test
-    public void contains_test() {
+    public void contains_existingFruits_test() {
         Storage.supplies.put("apple", 2000);
         Storage.supplies.put("orange", 1500);
         Storage.supplies.put("banana", 1000);
         Assert.assertTrue(dao.contains("apple"));
         Assert.assertTrue(dao.contains("orange"));
         Assert.assertTrue(dao.contains("banana"));
+    }
+
+    @Test
+    public void contains_noSuchFruit_test() {
+        Storage.supplies.put("apple", 2000);
+        Storage.supplies.put("orange", 1500);
+        Storage.supplies.put("banana", 1000);
         Assert.assertFalse(dao.contains("pineapple"));
         Assert.assertFalse(dao.contains("beetroot"));
     }

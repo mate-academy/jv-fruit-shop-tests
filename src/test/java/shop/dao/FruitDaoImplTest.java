@@ -32,7 +32,7 @@ public class FruitDaoImplTest {
 
     @Test
     public void fruitDao_add_ok() {
-        DataStorage.storage.add(testFruit);
+        fruitDao.add(testFruit);
         Assert.assertTrue(DataStorage.storage.contains(testFruit));
     }
 
@@ -43,7 +43,7 @@ public class FruitDaoImplTest {
 
     @Test
     public void fruitDao_get_ok() {
-        fruitDao.add(testFruit);
+        DataStorage.storage.add(testFruit);
         assertEquals(testFruit, fruitDao.get(testFruit.getName()));
     }
 

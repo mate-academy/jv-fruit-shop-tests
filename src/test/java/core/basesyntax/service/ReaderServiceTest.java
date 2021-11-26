@@ -21,9 +21,9 @@ public class ReaderServiceTest {
     @Test
     public void inputDataFileFirst_Ok() {
         List<String> expected =
-                List.of("valera go kushat",
+                List.of("some info",
                         "b,banana,10",
-                        "abrikosi zavezli");
+                        "not valid info");
         List<String> actual = readerService.readFromFile(FILE_PATH_FIRST);
         Assert.assertEquals(expected, actual);
     }

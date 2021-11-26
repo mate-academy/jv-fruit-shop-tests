@@ -2,6 +2,7 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.services.Parser;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class ParserImplTest {
 
     @Test (expected = RuntimeException.class)
     public void parser_emptyList_notOk() {
-        List<String> list = List.of();
+        List<String> list = Collections.emptyList();
         parser.parseLine(list);
     }
 
@@ -40,7 +41,7 @@ public class ParserImplTest {
     public void parser_onlyTitleLine_Ok() {
         List<String> list = List.of("type,fruit,quantity");
         List<TransactionDto> actual = parser.parseLine(list);
-        List<TransactionDto> expected = List.of();
+        List<TransactionDto> expected = Collections.emptyList();
         Assert.assertEquals(expected,actual);
     }
 }

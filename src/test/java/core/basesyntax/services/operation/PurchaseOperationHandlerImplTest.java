@@ -36,6 +36,12 @@ public class PurchaseOperationHandlerImplTest {
         operationHandler.apply(null, 10);
     }
 
+    @Test
+    public void apply_PurchaseApplicable_ok() {
+        testStorage.put("banana", 150);
+        operationHandler.apply("banana", 120);
+    }
+
     @After
     public void afterEachTest() {
         testStorage.clear();

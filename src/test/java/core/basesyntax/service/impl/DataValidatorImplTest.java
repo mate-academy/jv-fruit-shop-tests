@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.DataValidator;

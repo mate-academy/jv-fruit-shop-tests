@@ -14,15 +14,15 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_validData_ok() {
-        boolean actual = validator.validate("b,banana,25");
-        Assert.assertTrue(actual);
-    }
-
-    @Test
     public void validate_invalidOperation_notOk() {
         boolean actual = validator.validate("a,banana,25");
         Assert.assertFalse("Invalid operation", actual);
+    }
+
+    @Test
+    public void validate_validData_ok() {
+        boolean actual = validator.validate("b,banana,25");
+        Assert.assertTrue(actual);
     }
 
     @Test

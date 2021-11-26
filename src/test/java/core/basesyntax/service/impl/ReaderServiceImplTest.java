@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReaderService;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,7 +38,7 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFile_emptyFile_Ok() {
-        List<String> expected = List.of();
+        List<String> expected = Collections.emptyList();
         List<String> actual = readerService.readFile(emptyFilePath);
         assertEquals(expected, actual);
     }

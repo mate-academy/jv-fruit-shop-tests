@@ -3,6 +3,7 @@ package core.basesyntax.service.validator.impl;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.validator.Validator;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,7 +53,7 @@ public class ValidatorImplTest {
 
     @Test(expected = RuntimeException.class)
     public void isValid_emptyData_notOk() {
-        List<String> inputData = List.of();
+        List<String> inputData = Collections.emptyList();
         boolean actual = validator.isValid(inputData);
     }
 

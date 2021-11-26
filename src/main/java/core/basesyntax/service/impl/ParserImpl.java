@@ -21,12 +21,12 @@ public class ParserImpl implements Parser<TransactionDto> {
     @Override
     public List<TransactionDto> parseLines(List<String> inputData) {
         validator.validate(inputData);
-        List<TransactionDto> transactions = new ArrayList<>();
+        List<TransactionDto> transactionS = new ArrayList<>();
         inputData.stream()
                 .filter(e -> !e.equals(INPUT_TITLE))
                 .map(e -> e.split(COMA_SEPARATOR))
-                .forEach(e -> transactions.add(new TransactionDto(e[INDEX_OF_OPERATION],
+                .forEach(e -> transactionS.add(new TransactionDto(e[INDEX_OF_OPERATION],
                         e[INDEX_OF_PRODUCT], Integer.parseInt(e[INDEX_OF_QUANTITY]))));
-        return transactions;
+        return transactionS;
     }
 }

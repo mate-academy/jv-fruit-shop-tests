@@ -11,7 +11,7 @@ public class MinusOperation implements OperationService {
         for (Fruit storageFruit: Storage.storage) {
             if (storageFruit.getName().equals(line.getFruitName())) {
                 if ((storageFruit.getNumber() - line.getQuantity()) < 0) {
-                    throw new RuntimeException("You cannot sell that many"
+                    throw new RuntimeException("You cannot sell that many "
                             + storageFruit.getName());
                 } else {
                     int newNumber = storageFruit.getNumber() - line.getQuantity();

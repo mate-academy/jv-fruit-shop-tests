@@ -1,4 +1,4 @@
-package service.implement;
+package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
 import java.util.List;

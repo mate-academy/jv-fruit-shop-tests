@@ -1,9 +1,9 @@
 package service;
 
 import core.basesyntax.model.ParseLine;
+import core.basesyntax.service.InputDataValidatorImpl;
 import java.util.LinkedList;
 import java.util.List;
-import service.implement.InputDataValidatorImpl;
 
 public interface LineParser {
     InputDataValidator inputValidator = new InputDataValidatorImpl();

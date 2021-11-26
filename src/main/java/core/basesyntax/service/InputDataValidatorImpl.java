@@ -1,4 +1,4 @@
-package service.implement;
+package core.basesyntax.service;
 
 import java.util.List;
 import service.InputDataValidator;
@@ -22,7 +22,7 @@ public class InputDataValidatorImpl implements InputDataValidator {
                 throw new RuntimeException("invalid data at line № " + stringNumber);
             }
             if (!Operation.contains(values[OPERATION_INDEX])) {
-                throw new RuntimeException("invalid operation at line №" + stringNumber);
+                throw new RuntimeException("invalid operation at line № " + stringNumber);
             }
             if (values[FRUIT_INDEX].length() <= 0 || !values[FRUIT_INDEX].matches("[a-zA-Z]+")) {
                 throw new RuntimeException("invalid fruit name at line № " + stringNumber);

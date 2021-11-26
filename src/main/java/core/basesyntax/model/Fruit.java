@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Fruit {
     private String name;
     private int number;
@@ -23,6 +25,23 @@ public class Fruit {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) o;
+        return number == fruit.number && Objects.equals(name, fruit.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, number);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class ParseLine {
     private final String operation;
     private final String fruitName;
@@ -21,6 +23,25 @@ public class ParseLine {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ParseLine line = (ParseLine) o;
+        return quantity == line.quantity
+                && Objects.equals(operation, line.operation)
+                && Objects.equals(fruitName, line.fruitName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruitName, quantity);
     }
 
     @Override

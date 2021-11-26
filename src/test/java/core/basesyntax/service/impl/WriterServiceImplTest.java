@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String INVALID_PATH = "";
-    private static final String EXPECTED_PATH = "src/test/resources/actualOutput.csv";
+    private static final String EXPECTED_PATH = "src/test/resources/expectedOutput.csv";
     private static final String ACTUAL_PATH = "src/test/resources/actualOutput.csv";
     private static final String REPORT = "fruit,quantity" + System.lineSeparator() + "banana,152";
     private final WriterService writer = new WriterServiceImpl();

@@ -17,7 +17,7 @@ public class AddHandlerTest {
     }
 
     @Test
-    public void add_NewData_Ok() {
+    public void add_dataToEmptyStorage_Ok() {
         addHandler.apply(new Transaction("b","banana",20));
         addHandler.apply(new Transaction("s","banana",5));
         addHandler.apply(new Transaction("r","banana",5));
@@ -25,7 +25,7 @@ public class AddHandlerTest {
     }
 
     @Test
-    public void add_OldData_Ok() {
+    public void add_dataToNotEmptyStorage_Ok() {
         Fruit fruit = new Fruit("apple");
         Storage.fruits.put(fruit,10);
         addHandler.apply(new Transaction("s","apple",5));

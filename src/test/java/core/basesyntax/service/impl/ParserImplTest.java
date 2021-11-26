@@ -11,7 +11,7 @@ public class ParserImplTest {
     private final Parser parser = new ParserImpl(new ValidatorImpl());
 
     @Test
-    public void parse_ValidDate_OK() {
+    public void parse_ValidDate_Ok() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,20");
@@ -20,5 +20,11 @@ public class ParserImplTest {
         transactions.add(new Transaction("b", "banana", 20));
         transactions.add(new Transaction("s", "banana", 100));
         Assert.assertEquals(parser.parse(lines), transactions);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_InvalidDate_NotOk() {
+        List<String> invalidLines = List.of("type,fruit,quantity","r,onion","end");
+        parser.parse(invalidLines);
     }
 }

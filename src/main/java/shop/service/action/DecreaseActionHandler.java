@@ -1,7 +1,6 @@
 package shop.service.action;
 
 import shop.dao.FruitDao;
-import shop.dao.FruitDaoImpl;
 import shop.model.Fruit;
 
 public class DecreaseActionHandler implements ActionHandler {

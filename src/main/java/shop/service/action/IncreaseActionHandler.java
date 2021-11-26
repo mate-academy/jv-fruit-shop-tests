@@ -1,14 +1,13 @@
 package shop.service.action;
 
 import shop.dao.FruitDao;
-import shop.dao.FruitDaoImpl;
 import shop.model.Fruit;
 
 public class IncreaseActionHandler implements ActionHandler {
     private final FruitDao fruitDao;
 
     public IncreaseActionHandler(FruitDao fruitDao) {
-       this.fruitDao = fruitDao;
+        this.fruitDao = fruitDao;
     }
 
     @Override

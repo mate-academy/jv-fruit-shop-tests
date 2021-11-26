@@ -16,10 +16,11 @@ import shop.service.action.IncreaseActionHandler;
 
 public class UpdateDbServiceImplTest {
     private static UpdateDbService updateDbService;
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeAll() {
-        FruitDao fruitDao = new FruitDaoImpl();
+        fruitDao = new FruitDaoImpl();
         HashMap<String, ActionHandler> actionMap = new HashMap<>();
         actionMap.put(ActionType.BALANCE.getAlias(), new IncreaseActionHandler(fruitDao));
         actionMap.put(ActionType.SUPPLY.getAlias(), new IncreaseActionHandler(fruitDao));
@@ -35,5 +36,13 @@ public class UpdateDbServiceImplTest {
         update.add("s,apple,15");
         update.add("s,banana,15");
         Assert.assertTrue(updateDbService.updateStorage(update));
+    }
+
+    @Test
+    public void updateDB_storage_changed_ok() {
+        List<String> update = new ArrayList<>();
+        update.add("s,mates,10");
+        updateDbService.updateStorage(update);
+        Assert.assertNotNull(fruitDao.get("mates"));
     }
 }

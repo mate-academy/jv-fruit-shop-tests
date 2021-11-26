@@ -36,6 +36,15 @@ public class ValidatorImplTest {
         Assert.assertTrue(validator.valid(testList));
     }
 
+    @Test
+    public void validator_coupleData_ok() {
+        List<String> testList = new ArrayList<>();
+        testList.add("type,fruit,quantity");
+        testList.add("r,apple,10");
+        testList.add("r,special,10");
+        Assert.assertTrue(validator.valid(testList));
+    }
+
     @Test(expected = RuntimeException.class)
     public void validator_wrongData_ok() {
         List<String> testList = new ArrayList<>();

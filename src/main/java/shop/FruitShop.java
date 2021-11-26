@@ -2,7 +2,6 @@ package shop;
 
 import java.util.HashMap;
 import java.util.List;
-
 import shop.dao.FruitDao;
 import shop.dao.FruitDaoImpl;
 import shop.model.ActionType;

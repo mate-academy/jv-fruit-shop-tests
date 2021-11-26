@@ -1,5 +1,7 @@
 package core.basesyntax.service.file.impl;
 
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.model.CsvLineDto;
 import core.basesyntax.service.file.Validator;
 import java.util.List;
@@ -35,7 +37,7 @@ public class ValidatorImplTest {
 
     @Test
     public void checkFileData_ValidData_Ok() {
-        validator.checkFileData(validData);
+        assertTrue(validator.checkFileData(validData));
     }
 
     @Test(expected = RuntimeException.class)

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ValidatorImpl implements Validator {
     @Override
-    public void checkFileData(List<CsvLineDto> dataFromFile) {
+    public boolean checkFileData(List<CsvLineDto> dataFromFile) {
         for (CsvLineDto dataLine : dataFromFile) {
             if (!dataLine.getOperation().isEmpty()
                     && Operation.contains(dataLine.getOperation())
@@ -21,5 +21,6 @@ public class ValidatorImpl implements Validator {
             }
             throw new RuntimeException("Invalid data in file");
         }
+        return true;
     }
 }

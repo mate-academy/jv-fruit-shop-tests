@@ -23,6 +23,14 @@ public class ParserImplTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    public void parseLine_notValidData_ok() {
+        String line = "f,apple,35";
+        TransactionDto expected = new TransactionDto("f", "apple", 35);
+        TransactionDto actual = parser.parseLine(line);
+        assertEquals(expected,actual);
+    }
+
     @Test(expected = RuntimeException.class)
     public void parseLine_emptyLine_notOk() {
         String line = "";

@@ -14,8 +14,8 @@ public class ParserCsv implements Parser<CsvLineDto> {
     @Override
     public List<CsvLineDto> parse(String[] dataFromFile) {
         List<CsvLineDto> resultData = new ArrayList<>();
-        for (String s : dataFromFile) {
-            String[] data = s.split(",");
+        for (String dataLine : dataFromFile) {
+            String[] data = dataLine.split(",");
             if (data.length != REQUIRED_NUMBER_OF_ELEMENT) {
                 throw new RuntimeException("Line in file is invalid!");
             }

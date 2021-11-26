@@ -71,7 +71,7 @@ public class ReaderCsvTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_InvalidPath() {
+    public void readFile_InvalidPath_NotOk() {
         readerService.readFile(invalidDataPath);
     }
 }

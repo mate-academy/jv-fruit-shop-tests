@@ -5,5 +5,5 @@ import core.basesyntax.strategy.FruitWorkStrategy;
 import java.util.List;
 
 public interface StrategyService {
-    void getStrategy(List<CsvLineDto> fileData, FruitWorkStrategy fruitWork);
+    void applyStrategy(List<CsvLineDto> fileData, FruitWorkStrategy fruitWork);
 }

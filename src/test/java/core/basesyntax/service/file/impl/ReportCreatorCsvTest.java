@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.file.ReportCreator;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class ReportCreatorCsvTest {
     private static ReportCreator reportCreator;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportCreator = new ReportCreatorCsv();
     }
 
@@ -38,5 +39,10 @@ public class ReportCreatorCsvTest {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportCreator.createReport();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

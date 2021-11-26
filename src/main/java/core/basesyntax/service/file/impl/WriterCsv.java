@@ -15,7 +15,8 @@ public class WriterCsv implements WriterService {
     public void write(String filePath, String resultData) {
         if (filePath == null || filePath.equals("")) {
             throw new RuntimeException("Invalid file path");
-        } else if (resultData == null) {
+        }
+        if (resultData == null) {
             throw new RuntimeException("Invalid result data");
         }
         String spr = File.separator;

@@ -18,9 +18,8 @@ public class PurchaseOperationHandler implements OperationHandler {
         int oldCountFruit = fruitDao.getFruitsCount(fruitName);
         if (oldCountFruit < fruitNumber) {
             throw new RuntimeException("Not enough fruits in storage");
-        } else {
-            fruitDao.updateFruitCount(oldCountFruit - fruitNumber, fruitName);
         }
+        fruitDao.updateFruitCount(oldCountFruit - fruitNumber, fruitName);
         return currentFruit;
     }
 }

@@ -15,13 +15,13 @@ public class WriterCsvTest {
     private static WriterService writerService;
     private static String filePath;
     private static String pathToResult;
-    private static final String SPR = File.separator;
+    private static final String SEPARATOR = File.separator;
 
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterCsv();
-        filePath = "src" + SPR + "test" + SPR + "resources" + SPR;
-        pathToResult = filePath + "reports" + SPR + "report.csv";
+        filePath = "src" + SEPARATOR + "test" + SEPARATOR + "resources" + SEPARATOR;
+        pathToResult = filePath + "reports" + SEPARATOR + "report.csv";
     }
 
     @Test
@@ -35,7 +35,7 @@ public class WriterCsvTest {
                     .collect(Collectors.joining(System.lineSeparator()));
             assertEquals(expected, actual);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Exception with file: " + filePath);
         }
     }
 
@@ -48,14 +48,19 @@ public class WriterCsvTest {
                     .collect(Collectors.joining(System.lineSeparator()));
             assertEquals(expected, actual);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Exception with file: " + filePath);
         }
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_InvalidPath_NotOk() {
+    public void write_EmptyPath_NotOk() {
         String someData = "What am I?";
         writerService.write("", someData);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void write_NullPath_NotOk() {
+        String someData = "I am single line";
         writerService.write(null, someData);
     }
 

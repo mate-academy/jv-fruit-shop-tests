@@ -44,7 +44,7 @@ public class StorageServiceImpl implements StorageService {
         String[] fileData = readerService.readFile(filePath);
         List<CsvLineDto> listData = parser.parse(fileData);
         validator.checkFileData(listData);
-        strategyService.getStrategy(listData, fruitWork);
+        strategyService.applyStrategy(listData, fruitWork);
         String readyToWrite = reportCreator.createReport();
         writerService.write(filePath, readyToWrite);
     }

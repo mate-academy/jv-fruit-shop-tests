@@ -16,7 +16,7 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_ok() {
+    public void validate_validData_ok() {
         String line = "r,banana,100";
         boolean expected = validator.validate(line);
         Assert.assertTrue(expected);

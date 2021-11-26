@@ -20,7 +20,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parsLine_ok() {
+    public void parsLine_parseLine_ok() {
         String line = "r,banana,100";
         TransactionDto expected = new TransactionDto("r", "banana",100);
         TransactionDto actual = parser.parsLine(line);
@@ -28,7 +28,7 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parsLine_notOk() {
+    public void parsLine_notValid_notOk() {
         String line = "r,banana, 100";
         parser.parsLine(line);
     }

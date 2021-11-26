@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
-    private static final String valueFilePath = "src/test/java/resourcesTest/outputFile.csv";
+    private static final String VALUE_FILE_PATH = "src/test/java/resourcesTest/outputFile.csv";
     private static final String ACTUAL_FILE_DATA = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
 
@@ -22,7 +22,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_incorrectPath_ok() {
-        String path = valueFilePath;
+        String path = VALUE_FILE_PATH;
         String expected = ACTUAL_FILE_DATA;
         String actual = readFile(path);
         Assert.assertEquals(expected, actual);
@@ -30,7 +30,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_presentFile_ok() {
-        String path = valueFilePath;
+        String path = VALUE_FILE_PATH;
         File file = new File(path);
         Assert.assertTrue(file.exists());
     }

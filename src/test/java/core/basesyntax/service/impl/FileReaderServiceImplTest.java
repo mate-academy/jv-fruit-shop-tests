@@ -8,8 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String inputPath = "src/test/java/resourcesTest/inputFileTest.csv";
-    private static final String emptyFile = "src/test/java/resourcesTest/empty.csv";
+    private static final String INPUT_PATH = "src/test/java/resourcesTest/inputFileTest.csv";
+    private static final String EMPTY_FILE = "src/test/java/resourcesTest/empty.csv";
     private static FileReaderService fileReaderService;
     private static List<String> lines;
 
@@ -26,7 +26,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void read_file_ok() {
-        List<String> actual = fileReaderService.readFile(inputPath);
+        List<String> actual = fileReaderService.readFile(INPUT_PATH);
         List<String> expected = lines;
         Assert.assertNotNull(actual);
         Assert.assertEquals("Expected: " + expected + ", but " + actual, expected, actual);
@@ -39,7 +39,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void read_file_emptyFile_ok() {
-        List<String> actual = fileReaderService.readFile(emptyFile);
+        List<String> actual = fileReaderService.readFile(EMPTY_FILE);
         Assert.assertNotNull(actual);
         Assert.assertTrue(actual.isEmpty());
     }

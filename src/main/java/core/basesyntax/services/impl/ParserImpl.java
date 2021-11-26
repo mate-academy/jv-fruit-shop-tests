@@ -1,5 +1,6 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.exceptions.LineParseException;
 import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.Parser;
 import core.basesyntax.services.Validator;
@@ -22,7 +23,9 @@ public class ParserImpl implements Parser<TransactionDto> {
         int lineNumber = 0;
         for (String line : lines) {
             if (lineNumber > 0) {
-                validator.validate(line);
+                if (!validator.validate(line)) {
+                    throw new LineParseException("Line \"" + line + "\" cannot be parsed.");
+                }
                 String[] data = line.split(",");
                 int fruitQuantity = Integer.parseInt(data[FRUIT_QUANTITY_NUMBER]);
                 result.add(new TransactionDto(data[OPERATION_NUMBER],

@@ -7,7 +7,7 @@ public class ValidatorImpl implements Validator {
     private static final String VALID_LINE_PATTERN = "[a-z],\\w+,\\d+";
 
     @Override
-    public void validate(String line) throws RuntimeException {
+    public void validate(String line) {
         if (line == null || !line.matches(VALID_LINE_PATTERN)) {
             throw new LineParseException("Line \"" + line + "\" cannot be parsed.");
         }

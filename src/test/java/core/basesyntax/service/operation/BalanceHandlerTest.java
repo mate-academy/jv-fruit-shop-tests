@@ -3,11 +3,14 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
-import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class BalanceHandlerTest {
     private static final FruitStorageDao storageDao = new FruitStorageDaoImpl();
@@ -29,6 +32,15 @@ public class BalanceHandlerTest {
                 storage.containsKey("banana"));
         Assert.assertTrue("Missing values in storage;" + storage.values(),
                 storage.containsValue(10));
+    }
+
+    @Test
+    public void testEquals() {
+        BalanceHandler clazz = new BalanceHandler(storageDao);
+        assertEquals(clazz, balanceHandler);
+        assertEquals(clazz, clazz);
+        assertEquals(clazz.hashCode(), balanceHandler.hashCode());
+        assertNotEquals(clazz, null);
     }
 
     @After

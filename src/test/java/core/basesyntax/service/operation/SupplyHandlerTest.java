@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 public class SupplyHandlerTest {
     private static final FruitStorageDao storageDao = new FruitStorageDaoImpl();
     private static SupplyHandler supplyHandler;
@@ -46,6 +49,15 @@ public class SupplyHandlerTest {
                 storage.containsKey("cherry"));
         Assert.assertTrue("Missing values in storage;" + storage.values(),
                 storage.containsValue(6));
+    }
+
+    @Test
+    public void testEquals() {
+        SupplyHandler clazz = new SupplyHandler(storageDao);
+        assertEquals(clazz, supplyHandler);
+        assertEquals(clazz, clazz);
+        assertEquals(clazz.hashCode(), supplyHandler.hashCode());
+        assertNotEquals(clazz, null);
     }
 
     @After

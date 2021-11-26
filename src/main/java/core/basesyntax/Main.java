@@ -13,7 +13,6 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
-import java.util.Set;
 
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/fruits-log.csv";

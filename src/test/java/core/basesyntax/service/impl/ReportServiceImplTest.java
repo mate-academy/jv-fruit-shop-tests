@@ -31,7 +31,8 @@ public class ReportServiceImplTest {
 
     @Test
     public void reportService_reportEmpty() {
-        Assert.assertEquals("fruit,quantity", reportService.formReport(new FruitStorageDaoImpl().getAll()));
+        Assert.assertEquals("fruit,quantity",
+                reportService.formReport(new FruitStorageDaoImpl().getAll()));
     }
 
     @After

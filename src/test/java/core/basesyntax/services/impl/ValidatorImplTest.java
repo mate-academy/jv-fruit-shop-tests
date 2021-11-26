@@ -72,6 +72,5 @@ public class ValidatorImplTest {
     public void validate_additionalSymbols_NotOk() {
         validator.validate("b,apple,10 ");
         validator.validate(" b,apple,10");
-        validator.validate("b,apple,10 // 123");
     }
 }

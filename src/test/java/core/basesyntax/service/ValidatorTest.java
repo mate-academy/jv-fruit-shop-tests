@@ -1,14 +1,15 @@
-package core.basesyntax.servicetests;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.ValidatorImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ValidatorTest {
-    private static ValidatorImpl validator;
+    private static Validator validator;
 
     @BeforeClass
     public static void beforeClass() {

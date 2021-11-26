@@ -1,16 +1,18 @@
-package core.basesyntax.servicetests;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dto.TransactionDto;
+import core.basesyntax.service.parser.Parser;
 import core.basesyntax.service.parser.ParserImpl;
+import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.ValidatorImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
-    private static ValidatorImpl validator;
-    private static ParserImpl parser;
+    private static Validator validator;
+    private static Parser parser;
 
     @BeforeClass
     public static void beforeClass() {
@@ -27,7 +29,7 @@ public class ParserTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void parser_Null_notOk() {
+    public void parser_null_notOk() {
         String line = null;
         parser.parseLine(line);
     }
@@ -57,7 +59,7 @@ public class ParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseLine_incorrectLine_notOk() {
+    public void parser_incorrectLine_notOk() {
         String line = "o,apricot,-100";
         parser.parseLine(line);
     }

@@ -1,4 +1,4 @@
-package core.basesyntax.servicetests;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +16,7 @@ public class MyReaderTest {
     }
 
     @Test
-    public void fileReader_correctFile_ok() {
+    public void readFromFile_correctFile_ok() {
         String fileName = "src/test/resourcesTest/inputTestFile.cvs";
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",

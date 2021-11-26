@@ -1,4 +1,4 @@
-package core.basesyntax.servicetests;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,21 +32,21 @@ public class MyWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_NullAndNull_notOk() {
+    public void myWriter_nullAndNull_notOk() {
         String report = null;
         String fileName = null;
         fileWriter.writeToFile(report,fileName);
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_ReportAndNull_notOk() {
+    public void myWriter_reportAndNull_notOk() {
         String report = "report test#3";
         String fileName = null;
         fileWriter.writeToFile(report,fileName);
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_NullAndFileName_notOk() {
+    public void myWriter_nullAndFileName_notOk() {
         String report = null;
         String fileName = "src/test/resourcesTest/outputTestFile.cvs";
         fileWriter.writeToFile(report,fileName);

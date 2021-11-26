@@ -1,4 +1,4 @@
-package core.basesyntax.servicetests;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.fruitservice.FruitService;
 import core.basesyntax.service.fruitservice.FruitServiceImpl;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,9 +18,13 @@ public class FruitServiceTest {
         fruitService = new FruitServiceImpl();
     }
 
+    @AfterClass
+    public static void afterClass() {
+        Storage.storage.clear();
+    }
+
     @Test
     public void fruitService_emptyStorage_ok() {
-        Storage.storage.clear();
         String actual = fruitService.createReport();
         String expected = "fruit,quantity";
         assertEquals(expected, actual);

@@ -1,8 +1,6 @@
 package service.impl;
 
-import db.Storage;
 import model.TransactionDto;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,18 +21,13 @@ public class ParserImplTest {
     public void parsLine_parseLine_ok() {
         String line = "r,banana,100";
         TransactionDto expected = new TransactionDto("r", "banana",100);
-        TransactionDto actual = parser.parsLine(line);
+        TransactionDto actual = parser.parseLine(line);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void parsLine_notValid_notOk() {
         String line = "r,banana, 100";
-        parser.parsLine(line);
-    }
-
-    @After
-    public void afterEachTest() {
-        Storage.storage.clear();
+        parser.parseLine(line);
     }
 }

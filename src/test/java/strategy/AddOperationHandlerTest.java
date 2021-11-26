@@ -10,20 +10,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private static OperationHandler operator;
-    private static Map<Fruit, Integer> expected;
-    private static Fruit fruit;
-    private static Map<Fruit, Integer> actual;
-    private static TransactionDto transactionDto;
+    private static TransactionDto transactionDto = new TransactionDto("b","banana", 100);
+    private static OperationHandler operator = new AddOperationHandler();
+    private static Fruit fruit = new Fruit(transactionDto.getFruitName());
+    private static Map<Fruit, Integer> actual = Storage.storage;
+    private static Map<Fruit, Integer> expected = actual;
 
     @BeforeClass
     public static void beforeAll() {
-        transactionDto = new TransactionDto("b","banana", 100);
-        fruit = new Fruit(transactionDto.getFruitName());
-        operator = new AddOperationHandler();
-        actual = Storage.storage;
         actual.put(fruit, transactionDto.getQuantity());
-        expected = actual;
     }
 
     @Test

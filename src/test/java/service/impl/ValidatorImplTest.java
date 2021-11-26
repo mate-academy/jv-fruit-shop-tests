@@ -1,7 +1,5 @@
 package service.impl;
 
-import db.Storage;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -50,10 +48,5 @@ public class ValidatorImplTest {
     public void validate_notValidLengthLine_notOk() {
         String line = "r,banana,100,20";
         validator.validate(line);
-    }
-
-    @After
-    public void afterEachTest() {
-        Storage.storage.clear();
     }
 }

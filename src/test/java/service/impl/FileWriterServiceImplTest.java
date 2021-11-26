@@ -46,6 +46,7 @@ public class FileWriterServiceImplTest {
                 + "banana,120" + "\n"
                 + "apple,100" + "\n";
         String actual = sb.toString();
+        Storage.storage.clear();
         Assert.assertEquals(expected,actual);
     }
 

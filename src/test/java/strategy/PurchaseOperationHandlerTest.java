@@ -10,18 +10,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static OperationHandler operator;
-    private static Map<Fruit, Integer> expected;
-    private static Fruit fruit;
-    private static Map<Fruit, Integer> actual;
+    private static OperationHandler operator = new PurchaseOperationHandler();
+    private static Map<Fruit, Integer> expected = new HashMap<>();
+    private static Fruit fruit = new Fruit("banana");
+    private static Map<Fruit, Integer> actual = Storage.storage;
 
     @BeforeClass
     public static void beforeAll() {
-        fruit = new Fruit("banana");
-        operator = new PurchaseOperationHandler();
-        actual = Storage.storage;
         actual.put(fruit, 100);
-        expected = new HashMap<>();
         expected.put(fruit, 100);
     }
 

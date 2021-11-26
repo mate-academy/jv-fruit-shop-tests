@@ -18,7 +18,7 @@ public class IncreaseActionHandlerTest {
     public static void beforeAll() {
         fruitDao = new FruitDaoImpl();
         test_fruit = new Fruit("apple", 10);
-        handler = new IncreaseActionHandler();
+        handler = new IncreaseActionHandler(fruitDao);
     }
 
     @AfterClass

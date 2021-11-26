@@ -1,27 +1,23 @@
 package shop.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import shop.dao.FruitDao;
-import shop.dao.FruitDaoImpl;
 import shop.db.DataStorage;
-import shop.model.Fruit;
-import shop.service.Reader;
 import shop.service.Writer;
 
 public class CsvWriterImplTest {
-    private static FruitDao fruitDao;
     private static Writer writer;
-    private static Reader reader;
 
     @BeforeClass
     public static void beforeAll() {
-        fruitDao = new FruitDaoImpl();
         writer = new CsvWriterImpl();
-        reader = new CsvReaderImpl();
     }
 
     @AfterClass
@@ -31,22 +27,33 @@ public class CsvWriterImplTest {
 
     @Test
     public void csvWriter_write_ok() {
-        Fruit fruit = new Fruit("MateFruit", 100);
-        fruitDao.add(fruit);
-        writer.write("src/test/resources/test.csv");
-        List<String> read = reader.read("src/test/resources/test.csv");
-        Assert.assertTrue(read.contains("MateFruit,100"));
+        List<String> list = new ArrayList<>();
+        list.add("Congratulations");
+        writer.write(list,"src/test/resources/test.csv");
+        List<String> read;
+        File fromFile = new File("src/test/resources/test.csv");
+        try {
+            read = Files.readAllLines(fromFile.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Error while reading file ", e);
+        }
+        Assert.assertTrue(read.contains("Congratulations"));
     }
 
     @Test
     public void csvWriter_write_couple_strings_ok() {
-        Fruit fruit = new Fruit("pineapple", 100);
-        Fruit fruit2 = new Fruit("orange", 50);
-        fruitDao.add(fruit);
-        fruitDao.add(fruit2);
-        writer.write("src/test/resources/test.csv");
-        List<String> read = reader.read("src/test/resources/test.csv");
-        Assert.assertTrue(read.contains("pineapple,100"));
-        Assert.assertTrue(read.contains("orange,50"));
+        List<String> list = new ArrayList<>();
+        list.add("something about java");
+        list.add("wanna some tests?");
+        writer.write(list, "src/test/resources/test.csv");
+        List<String> read;
+        File fromFile = new File("src/test/resources/test.csv");
+        try {
+            read = Files.readAllLines(fromFile.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Error while reading file ", e);
+        }
+        Assert.assertTrue(read.contains("something about java"));
+        Assert.assertTrue(read.contains("wanna some tests?"));
     }
 }

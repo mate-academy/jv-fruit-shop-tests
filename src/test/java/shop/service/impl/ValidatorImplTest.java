@@ -19,13 +19,13 @@ public class ValidatorImplTest {
     public void validator_not_valid_data_ok() {
         List<String> testList = new ArrayList<>();
         testList.add("not valid");
-        Assert.assertFalse(validator.valid(testList));
+        validator.valid(testList);
     }
 
     @Test(expected = RuntimeException.class)
     public void validator_empty_data_ok() {
         List<String> testList = new ArrayList<>();
-        Assert.assertFalse(validator.valid(testList));
+        validator.valid(testList);
     }
 
     @Test
@@ -41,6 +41,6 @@ public class ValidatorImplTest {
         List<String> testList = new ArrayList<>();
         testList.add("fruit,quantity");
         testList.add("r,apple,10");
-        Assert.assertTrue(validator.valid(testList));
+        validator.valid(testList);
     }
 }

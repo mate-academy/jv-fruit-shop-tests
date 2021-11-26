@@ -6,6 +6,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import shop.dao.FruitDao;
+import shop.dao.FruitDaoImpl;
 import shop.model.ActionType;
 import shop.service.UpdateDbService;
 import shop.service.action.ActionHandler;
@@ -17,11 +19,12 @@ public class UpdateDbServiceImplTest {
 
     @BeforeClass
     public static void beforeAll() {
+        FruitDao fruitDao = new FruitDaoImpl();
         HashMap<String, ActionHandler> actionMap = new HashMap<>();
-        actionMap.put(ActionType.BALANCE.getAlias(), new IncreaseActionHandler());
-        actionMap.put(ActionType.SUPPLY.getAlias(), new IncreaseActionHandler());
-        actionMap.put(ActionType.RETURN.getAlias(), new IncreaseActionHandler());
-        actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler());
+        actionMap.put(ActionType.BALANCE.getAlias(), new IncreaseActionHandler(fruitDao));
+        actionMap.put(ActionType.SUPPLY.getAlias(), new IncreaseActionHandler(fruitDao));
+        actionMap.put(ActionType.RETURN.getAlias(), new IncreaseActionHandler(fruitDao));
+        actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler(fruitDao));
         updateDbService = new UpdateDbServiceImpl(actionMap);
     }
 

@@ -29,7 +29,7 @@ public class FileReaderImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void read_validPath_notOk() {
+    public void read_invalidPath_notOk() {
         fileReader.read(INVALID_PATH_EXAMPLE);
     }
 

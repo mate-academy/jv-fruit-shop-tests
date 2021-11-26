@@ -28,31 +28,31 @@ public class ValidatorCsvImplTest {
     @Test(expected = ValidateException.class)
     public void validateAction_nullAction_ok() {
         String line = ",banana,20";
-        validator.validateLine(line);
+        Assert.assertTrue(validator.validateLine(line));
     }
 
     @Test
     public void validateAction_rightAction_ok() {
         String line = "b,banana,20";
-        validator.validateLine(line);
+        Assert.assertTrue(validator.validateLine(line));
     }
 
     @Test(expected = ValidateException.class)
     public void validateAction_wrongName_notOk() {
         String line = "b,%banana,20";
-        validator.validateLine(line);
+        Assert.assertTrue(validator.validateLine(line));
     }
 
     @Test(expected = ValidateException.class)
     public void validateAction_nullName_ok() {
         String line = "b, ,20";
-        validator.validateLine(line);
+        Assert.assertTrue(validator.validateLine(line));
     }
 
     @Test
     public void validateAction_rightName_ok() {
         String line = "b,banana,20";
-        validator.validateLine(line);
+        Assert.assertTrue(validator.validateLine(line));
     }
 
     @Test(expected = ValidateException.class)

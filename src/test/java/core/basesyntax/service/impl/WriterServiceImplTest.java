@@ -30,11 +30,6 @@ public class WriterServiceImplTest {
         writerService.writeToFile("", List.of("20"));
     }
 
-    @Test (expected = RuntimeException.class)
-    public void writer_pathContainsOnlySpaces_notOk() {
-        writerService.writeToFile("      ", List.of("20"));
-    }
-
     @Test
     public void writer_emptyList_ok() {
         List<String> expected = List.of();

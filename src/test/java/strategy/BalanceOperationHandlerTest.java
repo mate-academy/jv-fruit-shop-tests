@@ -10,22 +10,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static TransactionDto transactionDto = new TransactionDto("b","banana", 100);
-    private static OperationHandler operator = new BalanceOperationHandler();
-    private static Fruit fruit = new Fruit(transactionDto.getFruitName());
-    private static Map<Fruit, Integer> actual = Storage.storage;
-    private static Map<Fruit, Integer> expected = actual;
+    private static OperationHandler operator;
 
     @BeforeClass
     public static void beforeAll() {
-        actual.put(fruit, transactionDto.getQuantity());
+        operator = new BalanceOperationHandler();
     }
 
     @Test
     public void apply_addNewFruit_ok() {
-        TransactionDto transactionDto = new TransactionDto("b","apple", 90);
-        expected.put(fruit, transactionDto.getQuantity());
-        operator.apply(transactionDto);
+        TransactionDto transactionDto = new TransactionDto("b","banana", 100);
+        Fruit fruit = new Fruit(transactionDto.getFruitName());
+        Map<Fruit, Integer> actual = Storage.storage;
+        Map<Fruit, Integer> expected = actual;
+        actual.put(fruit, transactionDto.getQuantity());
+        TransactionDto addNewFruit = new TransactionDto("b","apple", 90);
+        expected.put(fruit, addNewFruit.getQuantity());
+        operator.apply(addNewFruit);
         Assert.assertEquals(expected, actual);
     }
 

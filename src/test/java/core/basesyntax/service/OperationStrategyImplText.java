@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.implement;
+package core.basesyntax.service;
 
 import core.basesyntax.model.ParseLine;
 import org.junit.Assert;

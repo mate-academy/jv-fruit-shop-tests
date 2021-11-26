@@ -20,4 +20,3 @@ public class ReportServiceImpl implements ReportService {
         return reportCreator.toString();
     }
 }
-

@@ -30,4 +30,3 @@ public class ParserImpl implements Parser<TransactionDto> {
         return transactions;
     }
 }
-

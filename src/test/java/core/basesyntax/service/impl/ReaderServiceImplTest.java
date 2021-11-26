@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReaderService;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,50 +17,46 @@ public class ReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void reader_pathIsNull_notOk() {
+    public void readFromFile_pathIsNull_notOk() {
         readerService.readFromFile(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void reader_pathIsEmpty_notOk() {
+    public void readFromFile_pathIsEmpty_notOk() {
         readerService.readFromFile("");
     }
 
     @Test (expected = RuntimeException.class)
-    public void writer_pathContainsOnlySpaces_notOk() {
+    public void readFromFile_pathContainsOnlySpaces_notOk() {
         readerService.readFromFile("      ");
     }
 
     @Test (expected = RuntimeException.class)
-    public void reader_fileIsNotExist_notOk() {
+    public void readFromFile_fileIsNotExist_notOk() {
         readerService.readFromFile("src/test/resources/???.csv");
     }
 
     @Test
-    public void reader_fileIsEmpty_ok() {
-        List<String> expected = List.of();
-        assertEquals("Expected true, but was false", expected,
-                readerService.readFromFile("src/test/resources/emptyFileReader.csv"));
+    public void readFromFile_fileIsEmpty_ok() {
+        List<String> expected = Collections.emptyList();
+        assertEquals(expected, readerService.readFromFile("src/test/resources/emptyFileReader.csv"));
     }
 
     @Test
-    public void reader_fileWithEmptyLines_ok() {
+    public void readFromFile_fileWithEmptyLines_ok() {
         List<String> expected = List.of("", "", "");
-        assertEquals("Expected true, but was false", expected,
-                readerService.readFromFile("src/test/resources/emptyLinesReader.csv"));
+        assertEquals(expected, readerService.readFromFile("src/test/resources/emptyLinesReader.csv"));
     }
 
     @Test
-    public void reader_fileWithDifferentCharacters_ok() {
+    public void readFromFile_fileWithDifferentCharacters_ok() {
         List<String> expected = List.of("`*^$@!$%^", "?.'~~|_)(");
-        assertEquals("Expected true, but was false", expected,
-                readerService.readFromFile("src/test/resources/differentCharactersReader.csv"));
+        assertEquals(expected, readerService.readFromFile("src/test/resources/differentCharactersReader.csv"));
     }
 
     @Test
-    public void reader_validData_ok() {
+    public void readFromFile_validData_ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
-        assertEquals("Expected true, but was false", expected,
-                readerService.readFromFile("src/test/resources/validDataReader.csv"));
+        assertEquals(expected, readerService.readFromFile("src/test/resources/validDataReader.csv"));
     }
 }

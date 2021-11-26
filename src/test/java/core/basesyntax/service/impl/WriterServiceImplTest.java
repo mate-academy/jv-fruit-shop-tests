@@ -6,6 +6,7 @@ import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,31 +21,31 @@ public class WriterServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void writer_pathIsNull_notOk() {
+    public void writeToFile_pathIsNull_notOk() {
         writerService.writeToFile(null, List.of("20"));
     }
 
     @Test (expected = RuntimeException.class)
-    public void writer_pathIsEmpty_notOk() {
+    public void writeToFile_pathIsEmpty_notOk() {
         writerService.writeToFile("", List.of("20"));
     }
 
     @Test
-    public void writer_emptyList_ok() {
-        List<String> expected = List.of();
+    public void writeToFile_emptyList_ok() {
+        List<String> expected = Collections.emptyList();
         writerService.writeToFile(PATH_TO_WRITER_TEST, expected);
         assertEquals(expected, readFromFile(PATH_TO_WRITER_TEST));
     }
 
     @Test
-    public void writer_oneLineDifferentCharacters_ok() {
+    public void writeToFile_oneLineDifferentCharacters_ok() {
         List<String> expected = List.of("@#$%^&(*^$@");
         writerService.writeToFile(PATH_TO_WRITER_TEST, expected);
         assertEquals(expected, readFromFile(PATH_TO_WRITER_TEST));
     }
 
     @Test
-    public void writer_validData_ok() {
+    public void writeToFile_validData_ok() {
         List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
         writerService.writeToFile(PATH_TO_WRITER_TEST, expected);
         assertEquals(expected, readFromFile(PATH_TO_WRITER_TEST));

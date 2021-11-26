@@ -1,13 +1,12 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.ValidatorServiceException;
+import core.basesyntax.exception.ValidatorServiceException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -40,31 +39,13 @@ public class CsvParserServiceImplTest {
     }
 
     @Test(expected = ValidatorServiceException.class)
-    public void parseNotValidData_notOk() {
+    public void parse_notValidData_notOk() {
         list.add("t,,-34");
         csvParserService.parse(list);
     }
 
     @Test
-    public void parse_ok() {
-        assertTrue(equalsLists(expectedList, csvParserService.parse(list)));
-    }
-
-    private boolean equalsLists(List<TransactionDto> expected, List<TransactionDto> actual) {
-        if (expected.size() != actual.size()) {
-            return false;
-        }
-        for (int i = 0; i < actual.size(); i++) {
-            TransactionDto currentExpected = expected.get(i);
-            TransactionDto currentActual = actual.get(i);
-            if (Objects.equals(currentExpected.getQuantity(), currentActual.getQuantity())
-                    && Objects.equals(currentExpected.getFruitName(), currentActual.getFruitName())
-                    && Objects.equals(currentExpected.getOperation(),
-                    currentActual.getOperation())) {
-                continue;
-            }
-            return false;
-        }
-        return true;
+    public void parse_validData_ok() {
+        assertEquals(expectedList, csvParserService.parse(list));
     }
 }

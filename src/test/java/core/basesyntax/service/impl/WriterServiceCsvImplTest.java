@@ -25,9 +25,9 @@ public class WriterServiceCsvImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_wrongFilePath_ok() {
-        String expected = "abc";
+        String report = "abc";
         String wrongFilePath = "";
-        writerService.writeToFile(expected, wrongFilePath);
+        writerService.writeToFile(report, wrongFilePath);
     }
 
     @Test

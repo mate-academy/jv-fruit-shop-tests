@@ -8,16 +8,10 @@ import org.junit.Test;
 
 public class ParserImplTest {
     private static Parser parser;
-    private static int indexOfOperation;
-    private static int indexOfFruitName;
-    private static int indexOfAmount;
 
     @BeforeClass
     public static void beforeClass() {
         parser = new ParserImpl(new ValidatorCsvImpl());
-        indexOfOperation = 0;
-        indexOfFruitName = 1;
-        indexOfAmount = 2;
     }
 
     @Test

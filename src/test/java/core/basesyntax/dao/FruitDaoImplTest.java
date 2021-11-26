@@ -13,6 +13,7 @@ public class FruitDaoImplTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         fruitDao = new FruitDaoImpl();
+
     }
 
     @Test
@@ -23,6 +24,31 @@ public class FruitDaoImplTest {
         int expected = 10;
         int actual = Storage.storage.get(orange);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_ok() {
+        Fruit orange = new Fruit("orange");
+        int quantity = 10;
+        Storage.storage.put(orange, quantity);
+        int expected = 10;
+        int actual = fruitDao.getInteger(orange);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_nullKey_ok() {
+        int quantity = 10;
+        Storage.storage.put(null, quantity);
+        int expected = 10;
+        int actual = fruitDao.getInteger(null);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_wrongKey_notOk() {
+        Fruit orange = new Fruit("orange");
+        Assert.assertNull(fruitDao.getInteger(orange));
     }
 
     @After

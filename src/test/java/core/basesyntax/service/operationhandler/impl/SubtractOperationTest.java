@@ -17,13 +17,13 @@ public class SubtractOperationTest {
     private static OperationHandler subtractOperation;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storageDao = new StorageDaoImpl();
         subtractOperation = new SubtractOperation(storageDao);
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.fruitStorage.clear();
     }
 
@@ -31,7 +31,6 @@ public class SubtractOperationTest {
     public void apply_firstTime_notOk() {
         Fruit apple = new Fruit("apple");
         subtractOperation.apply(new Transaction(Operation.PURCHASE, apple, 10));
-        storageDao.getFruitQuantity(apple);
     }
 
     @Test

@@ -16,13 +16,13 @@ public class ReportServiceImplTest {
     private static StorageDao storageDao;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storageDao = new StorageDaoImpl();
         reportService = new ReportServiceImpl(storageDao);
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.fruitStorage.clear();
         storageDao.add(new Fruit("apple"), 30);
         storageDao.add(new Fruit("banana"), 25);

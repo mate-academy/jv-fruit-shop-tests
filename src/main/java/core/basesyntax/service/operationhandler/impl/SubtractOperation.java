@@ -20,10 +20,9 @@ public class SubtractOperation implements OperationHandler {
             throw new RuntimeException("There are no fruits to subtract");
         } else if ((storageDao.getFruitQuantity(fruit) - quantity) < 0) {
             throw new RuntimeException("Fruit quantity can`t be negative");
-        } else {
-            quantity = storageDao.getFruitQuantity(fruit) - quantity;
-            storageDao.add(fruit, quantity);
         }
+        quantity = storageDao.getFruitQuantity(fruit) - quantity;
+        storageDao.add(fruit, quantity);
         return true;
     }
 }

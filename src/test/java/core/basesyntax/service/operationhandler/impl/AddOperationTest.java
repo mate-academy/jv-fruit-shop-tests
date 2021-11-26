@@ -23,7 +23,7 @@ public class AddOperationTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.fruitStorage.clear();
     }
 

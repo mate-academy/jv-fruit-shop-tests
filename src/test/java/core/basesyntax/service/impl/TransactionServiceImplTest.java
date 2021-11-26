@@ -28,7 +28,7 @@ public class TransactionServiceImplTest {
     private static TransactionService transactionService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storageDao = new StorageDaoImpl();
         operationHandlerMap = new HashMap<>();
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
@@ -40,7 +40,7 @@ public class TransactionServiceImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.fruitStorage.clear();
         storageDao.add(new Fruit("apple"), 5);
         storageDao.add(new Fruit("banana"), 10);

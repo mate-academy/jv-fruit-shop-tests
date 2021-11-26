@@ -16,7 +16,7 @@ public class CsvParserServiceTest {
     private static ParserService parserService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         validator = new ValidatorImpl();
         parserService = new CsvParserService(validator);
     }

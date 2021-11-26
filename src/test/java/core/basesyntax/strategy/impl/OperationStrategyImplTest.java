@@ -20,7 +20,7 @@ public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storageDao = new StorageDaoImpl();
         operationHandlerMap = new HashMap<>();
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);

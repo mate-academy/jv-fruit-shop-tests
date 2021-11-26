@@ -12,7 +12,7 @@ public class ValidatorImplTest {
     private static Validator validator;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         validator = new ValidatorImpl();
     }
 
@@ -27,28 +27,24 @@ public class ValidatorImplTest {
     public void isValid_invalidStringLength_notOk() {
         List<String> inputData = List.of("s,fruit", "b,apple,5");
         boolean actual = validator.isValid(inputData);
-        assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void isValid_invalidFruitName_notOk() {
         List<String> inputData = List.of("s,,10", "b,apple,5");
         boolean actual = validator.isValid(inputData);
-        assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void isValid_invalidOperationType_notOk() {
         List<String> inputData = List.of("s,apple,10", "q,apple,5");
         boolean actual = validator.isValid(inputData);
-        assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void isValid_invalidQuantity_notOk() {
         List<String> inputData = List.of("s,apple,10", "b,apple,-5");
         boolean actual = validator.isValid(inputData);
-        assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)

@@ -17,7 +17,7 @@ public class ReaderServiceImplTest {
     private static Path emptyFilePath;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         readerService = new ReaderServiceImpl();
         existedFilePath = Paths.get("src/test/resources/inputData.csv");
         notExistedFilePath = Paths.get("src/test/resources/notExisted.csv");

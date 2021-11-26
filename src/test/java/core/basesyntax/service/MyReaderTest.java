@@ -26,12 +26,12 @@ public class MyReaderTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void myReader_fileNameIsNull_notOk() {
+    public void readFromFile_fileNameIsNull_notOk() {
         myReader.readFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void myReader_incorrectFileName_notOk() {
+    public void readFromFile_incorrectFileName_notOk() {
         String fileName = "FileName";
         myReader.readFromFile(fileName);
     }

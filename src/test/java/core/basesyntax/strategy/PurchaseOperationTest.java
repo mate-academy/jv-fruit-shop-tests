@@ -1,4 +1,4 @@
-package core.basesyntax.strategytest;
+package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,7 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.dto.TransactionDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.handler.OperationHandler;
-import core.basesyntax.strategy.handler.impls.PurchaseOperation;
+import core.basesyntax.strategy.handler.impl.PurchaseOperation;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseOperation_correctWorkOperation_ok() {
+    public void apply_correctWorkOperation_ok() {
         Fruit fruit = new Fruit("apple");
         Storage.storage.put(fruit, 100);
         TransactionDto transaction = new TransactionDto("p", "apple", 100);
@@ -35,7 +35,7 @@ public class PurchaseOperationTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_purchaseMuchThanHave_notOk() {
+    public void apply_purchaseMuchThanHave_notOk() {
         TransactionDto transaction = new TransactionDto("p", "apple", 150);
         handler.apply(transaction);
     }

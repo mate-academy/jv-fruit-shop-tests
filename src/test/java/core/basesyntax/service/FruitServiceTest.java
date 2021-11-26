@@ -24,7 +24,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void fruitService_emptyStorage_ok() {
+    public void createReport_emptyStorage_ok() {
         String actual = fruitService.createReport();
         System.out.println(actual);
         String expected = "fruit,quantity";
@@ -32,7 +32,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void fruitService_notEmptyStorage_ok() {
+    public void createReport_notEmptyStorage_ok() {
         Storage.storage.put(new Fruit("banana"), 100);
         String actual = fruitService.createReport();
         String expected = "fruit,quantity" + System.lineSeparator() + "banana,100";

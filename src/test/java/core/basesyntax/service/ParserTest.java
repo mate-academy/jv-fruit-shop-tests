@@ -21,7 +21,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parser_correctWork_ok() {
+    public void parseLine_correctWork_ok() {
         String line = "r,apple,20";
         TransactionDto actual = new TransactionDto("r","apple",20);
         TransactionDto expected = parser.parseLine(line);
@@ -29,37 +29,37 @@ public class ParserTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void parser_null_notOk() {
+    public void parseLine_null_notOk() {
         String line = null;
         parser.parseLine(line);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parser_withOutOperation_notOk() {
+    public void parseLine_withOutOperation_notOk() {
         String line = "apple,100";
         parser.parseLine(line);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parser_withOutFruit_notOk() {
+    public void parseLine_withOutFruit_notOk() {
         String line = "p,,100";
         parser.parseLine(line);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parser_withOutQuantity_notOk() {
+    public void parseLine_withOutQuantity_notOk() {
         String line = "p,apple,";
         parser.parseLine(line);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parser_emptyLine_notOk() {
+    public void parseLine_emptyLine_notOk() {
         String line = "";
         parser.parseLine(line);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parser_incorrectLine_notOk() {
+    public void parseLine_incorrectLine_notOk() {
         String line = "o,apricot,-100";
         parser.parseLine(line);
     }

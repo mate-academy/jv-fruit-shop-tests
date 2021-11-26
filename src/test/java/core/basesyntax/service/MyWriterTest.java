@@ -21,7 +21,7 @@ public class MyWriterTest {
     }
 
     @Test
-    public void myWriter_correctWork_ok() throws IOException {
+    public void writeToFile_correctWork_ok() throws IOException {
         String report = "report test#1";
         String fileName = "src/test/resourcesTest/outputTestFile.cvs";
         fileWriter.writeToFile(report,fileName);
@@ -32,28 +32,28 @@ public class MyWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_nullAndNull_notOk() {
+    public void writeToFile_nullAndNull_notOk() {
         String report = null;
         String fileName = null;
         fileWriter.writeToFile(report,fileName);
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_reportAndNull_notOk() {
+    public void writeToFile_reportAndNull_notOk() {
         String report = "report test#3";
         String fileName = null;
         fileWriter.writeToFile(report,fileName);
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_nullAndFileName_notOk() {
+    public void writeToFile_nullAndFileName_notOk() {
         String report = null;
         String fileName = "src/test/resourcesTest/outputTestFile.cvs";
         fileWriter.writeToFile(report,fileName);
     }
 
     @Test(expected = RuntimeException.class)
-    public void myWriter_incorrectFileName_notOk() {
+    public void writeToFile_incorrectFileName_notOk() {
         String report = "report test#5";
         String fileName = "crs/tset/errscyrtes/fileOutputter.dvd";
         fileWriter.writeToFile(report, fileName);

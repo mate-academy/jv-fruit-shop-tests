@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.handler.impls;
+package core.basesyntax.strategy.handler.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.TransactionDto;

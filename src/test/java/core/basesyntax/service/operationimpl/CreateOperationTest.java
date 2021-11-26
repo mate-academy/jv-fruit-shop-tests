@@ -5,28 +5,33 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.ParseLine;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import service.OperationService;
 import service.operationimpl.CreateOperation;
 
 public class CreateOperationTest {
+    private static OperationService operationService;
     private ParseLine parseLine;
-    private OperationService operationService;
     private Fruit actual;
     private Fruit expected;
 
-    @AfterClass
-    public static void storage_clear() {
-        Storage.storage.clear();
+    @BeforeClass
+    public static void init() {
+        operationService = new CreateOperation();
     }
 
     @Test
     public void create_option_ok() {
         parseLine = new ParseLine("b", "banana", 25);
-        operationService = new CreateOperation();
         operationService.operation(parseLine);
         actual = new Fruit("banana", 25);
         expected = Storage.storage.get(0);
         Assert.assertEquals(expected, actual);
+    }
+
+    @AfterClass
+    public static void storage_clear() {
+        Storage.storage.clear();
     }
 }

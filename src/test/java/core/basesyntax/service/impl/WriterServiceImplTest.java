@@ -7,13 +7,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
+    private static final String PATH_TO_WRITER_TEST = "src/test/resources/testWriter.csv";
     private static WriterService writerService;
-    private static List<String> actual;
 
     @BeforeClass
     public static void beforeClass() {
@@ -33,41 +32,31 @@ public class WriterServiceImplTest {
     @Test
     public void writer_emptyList_ok() {
         List<String> expected = List.of();
-        writerService.writeToFile("src/test/resources/testWriter.csv", expected);
-        try {
-            actual = Files.readAllLines(Path.of("src/test/resources/testWriter.csv"));
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot write to file");
-        }
-        assertEquals(expected, actual);
+        writerService.writeToFile(PATH_TO_WRITER_TEST, expected);
+        assertEquals(expected, readFromFile(PATH_TO_WRITER_TEST));
     }
 
     @Test
     public void writer_oneLineDifferentCharacters_ok() {
         List<String> expected = List.of("@#$%^&(*^$@");
-        writerService.writeToFile("src/test/resources/testWriter.csv", expected);
-        try {
-            actual = Files.readAllLines(Path.of("src/test/resources/testWriter.csv"));
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot write to file");
-        }
-        assertEquals(expected, actual);
+        writerService.writeToFile(PATH_TO_WRITER_TEST, expected);
+        assertEquals(expected, readFromFile(PATH_TO_WRITER_TEST));
     }
 
     @Test
     public void writer_validData_ok() {
         List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
-        writerService.writeToFile("src/test/resources/testWriter.csv", expected);
+        writerService.writeToFile(PATH_TO_WRITER_TEST, expected);
+        assertEquals(expected, readFromFile(PATH_TO_WRITER_TEST));
+    }
+
+    private List<String> readFromFile(String filePath) {
+        List<String> actual;
         try {
-            actual = Files.readAllLines(Path.of("src/test/resources/testWriter.csv"));
+            actual = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Cannot write to file");
         }
-        assertEquals(expected, actual);
-    }
-
-    @After
-    public void tearDown() {
-        actual.clear();
+        return actual;
     }
 }

@@ -72,7 +72,6 @@ public class ValidatorServiceImplTest {
 
     @Test
     public void validator_lineIsValid_Ok() {
-        assertTrue("Line is valid! Expected true, but was false",
-                validatorService.validate("b,banana,20"));
+        assertTrue(validatorService.validate("b,banana,20"));
     }
 }

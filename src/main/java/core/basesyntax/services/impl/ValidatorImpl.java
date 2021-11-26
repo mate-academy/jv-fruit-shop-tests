@@ -1,5 +1,6 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.exceptions.LineParseException;
 import core.basesyntax.services.Validator;
 
 public class ValidatorImpl implements Validator {
@@ -7,6 +8,9 @@ public class ValidatorImpl implements Validator {
 
     @Override
     public boolean validate(String line) {
-        return line != null && line.matches(VALID_LINE_PATTERN);
+        if (line == null || !line.matches(VALID_LINE_PATTERN)) {
+            throw new LineParseException("Line \"" + line + "\" cannot be parsed.");
+        }
+        return true;
     }
 }

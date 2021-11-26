@@ -1,8 +1,9 @@
+
 package core.basesyntax.services.impl;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.exceptions.LineParseException;
 import core.basesyntax.services.Validator;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,52 +26,52 @@ public class ValidatorImplTest {
         assertTrue(validator.validate("b,a,20"));
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_notDigitalOperation_NotOk() {
-        assertFalse(validator.validate("0,apple,20"));
+        validator.validate("0,apple,20");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_noOperation_NotOk() {
-        assertFalse(validator.validate(",apple,20"));
+        validator.validate(",apple,20");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_noFruitName_NotOk() {
-        assertFalse(validator.validate("b,,20"));
+        validator.validate("b,,20");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_noQuantity_NotOk() {
-        assertFalse(validator.validate("b,apple,"));
+        validator.validate("b,apple,");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_noDelimiter_NotOk() {
-        assertFalse(validator.validate("bapple20"));
-        assertFalse(validator.validate("bapple,20"));
-        assertFalse(validator.validate("b,apple20"));
+        validator.validate("bapple20");
+        validator.validate("bapple,20");
+        validator.validate("b,apple20");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_emptyLine_NotOk() {
-        assertFalse(validator.validate(""));
+        validator.validate("");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_null_NotOk() {
-        assertFalse(validator.validate(null));
+        validator.validate(null);
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_negativeQuantity_NotOk() {
-        assertFalse(validator.validate("b,apple,-1"));
+        validator.validate("b,apple,-1");
     }
 
-    @Test
+    @Test(expected = LineParseException.class)
     public void validate_additionalSymbols_NotOk() {
-        assertFalse(validator.validate("b,apple,10 "));
-        assertFalse(validator.validate(" b,apple,10"));
-        assertFalse(validator.validate("b,apple,10 // 123"));
+        validator.validate("b,apple,10 ");
+        validator.validate(" b,apple,10");
+        validator.validate("b,apple,10 // 123");
     }
 }

@@ -1,5 +1,5 @@
 package service.action;
 
 public interface ActionStrategyHandler {
-    boolean doing(String fruitName, int quantity);
+    boolean apply(String fruitName, int quantity);
 }

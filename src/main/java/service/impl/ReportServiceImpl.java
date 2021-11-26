@@ -1,7 +1,6 @@
 package service.impl;
 
 import dao.FruitDao;
-import dao.FruitDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
@@ -10,8 +9,8 @@ import service.ReportService;
 public class ReportServiceImpl implements ReportService {
     private final FruitDao fruitDao;
 
-    public ReportServiceImpl() {
-        fruitDao = new FruitDaoImpl();
+    public ReportServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     public List<String> createReport() {

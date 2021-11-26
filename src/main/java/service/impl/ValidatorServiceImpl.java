@@ -19,11 +19,7 @@ public class ValidatorServiceImpl implements ValidatorService {
         for (String string : inputData) {
             String[] strings = string.split(",");
             int quantity;
-            try {
-                quantity = Integer.parseInt(strings[INDEX_OF_QUANTITY]);
-            } catch (RuntimeException e) {
-                throw new RuntimeException("Error!! the third element is invalid");
-            }
+            quantity = Integer.parseInt(strings[INDEX_OF_QUANTITY]);
             if (strings.length != NUMBER_OF_COLUMN || quantity < 0) {
                 throw new RuntimeException("Invalid data");
             }

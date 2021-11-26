@@ -10,13 +10,12 @@ import service.ReportService;
 public class FileWriterServiceImpl implements FileWriterService {
     private final ReportService reportService;
 
-    public FileWriterServiceImpl() {
-        reportService = new ReportServiceImpl();
+    public FileWriterServiceImpl(ReportService reportService) {
+        this.reportService = reportService;
     }
 
     @Override
-    public boolean write(String outputFile) {
-        List<String> report = reportService.createReport();
+    public boolean write(String outputFile, List<String> report) {
         if (outputFile == null) {
             throw new RuntimeException("the path cannot be null");
         }

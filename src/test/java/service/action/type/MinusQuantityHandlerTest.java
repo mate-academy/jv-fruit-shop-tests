@@ -1,6 +1,7 @@
 package service.action.type;
 
 import bd.LocalStorage;
+import dao.FruitDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
@@ -22,29 +23,29 @@ public class MinusQuantityHandlerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        handler = new MinusQuantityHandler();
+        handler = new MinusQuantityHandler(new FruitDaoImpl());
         LocalStorage.fruits.add(new Fruit("apple", 100));
         storage = new ArrayList<>();
     }
 
     @Test
-    public void minusQuantity_invalidAmount_notOk() {
+    public void apply_invalidAmount_notOk() {
         exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("the quantity of goods cannot be negative");
-        handler.doing("apple", 200);
+        exceptionRule.expectMessage("the quantity of goods cannot be fruit");
+        handler.apply("apple", 200);
     }
 
     @Test
-    public void minusQuantity_nonExistentFruit_notOk() {
+    public void apply_nonExistentFruit_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("there is no such vegetable to sell");
-        handler.doing("banana", 20_000);
+        handler.apply("banana", 20_000);
     }
 
     @Test
-    public void minusQuantity_validData_ok() {
+    public void apply_validData_ok() {
         storage.add(new Fruit("apple", 10));
-        handler.doing("apple", 90);
+        handler.apply("apple", 90);
         Assert.assertEquals(storage, LocalStorage.fruits);
     }
 

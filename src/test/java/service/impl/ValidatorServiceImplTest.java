@@ -51,16 +51,6 @@ public class ValidatorServiceImplTest {
     }
 
     @Test
-    public void isValidData_amountIsNotInteger_notOk() {
-        actual.add("type,fruit,quantity");
-        actual.add("b,banana,twenty");
-        actual.add("b,apple,-100");
-        exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("Error!! the third element is invalid");
-        validatorService.isValidData(actual);
-    }
-
-    @Test
     public void isValidData_validData_notOk() {
         actual.add("type,fruit,quantity");
         actual.add("b,banana,20");

@@ -22,21 +22,21 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void fileReader_wrongWay_notOk() {
+    public void read_wrongWay_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("can`t read in file");
         fileReaderService.read("src/test/resources/vaid.csv");
     }
 
     @Test
-    public void filerWriter_nullWay_notOk() {
+    public void read_nullWay_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("the path cannot be null");
         fileReaderService.read(null);
     }
 
     @Test
-    public void fileReader_validWork_Ok() {
+    public void read_validWork_Ok() {
         expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");

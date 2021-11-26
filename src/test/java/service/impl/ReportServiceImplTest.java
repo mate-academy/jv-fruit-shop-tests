@@ -1,11 +1,11 @@
 package service.impl;
 
 import bd.LocalStorage;
+import dao.FruitDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,12 +17,12 @@ public class ReportServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        reportService = new ReportServiceImpl();
+        reportService = new ReportServiceImpl(new FruitDaoImpl());
         expected = new ArrayList<>();
     }
 
     @Test
-    public void reportService_validWork_ok() {
+    public void createReport_validWork_ok() {
         LocalStorage.fruits.add(new Fruit("apple", 123));
         LocalStorage.fruits.add(new Fruit("banana", 1));
         expected.add("fruit,quantity");
@@ -33,7 +33,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void reportService_emptyStorage_ok() {
+    public void createReport_emptyStorage_ok() {
         expected.add("fruit,quantity");
         Assert.assertEquals(expected, reportService.createReport());
         LocalStorage.fruits.clear();
@@ -42,10 +42,6 @@ public class ReportServiceImplTest {
     @After
     public void tearDown() {
         expected.clear();
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
         LocalStorage.fruits.clear();
     }
 }

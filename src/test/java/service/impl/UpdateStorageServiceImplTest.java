@@ -1,6 +1,7 @@
 package service.impl;
 
 import bd.LocalStorage;
+import dao.FruitDaoImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import service.UpdateStorageService;
 import service.action.ActionStrategyHandler;
 import service.action.type.MinusQuantityHandler;
 import service.action.type.PlusQuantityHandler;
+import service.strategy.ActionStrategyImpl;
 
 public class UpdateStorageServiceImplTest {
     private static UpdateStorageService updateStorageService;
@@ -22,16 +24,18 @@ public class UpdateStorageServiceImplTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         HashMap<Operation, ActionStrategyHandler> actionStrategyHashMap = new HashMap<>();
-        actionStrategyHashMap.put(Operation.B, new PlusQuantityHandler());
-        actionStrategyHashMap.put(Operation.S, new PlusQuantityHandler());
-        actionStrategyHashMap.put(Operation.R, new PlusQuantityHandler());
-        actionStrategyHashMap.put(Operation.P, new MinusQuantityHandler());
-        updateStorageService = new UpdateStorageServiceImpl(actionStrategyHashMap);
+        actionStrategyHashMap.put(Operation.B, new PlusQuantityHandler(new FruitDaoImpl()));
+        actionStrategyHashMap.put(Operation.S, new PlusQuantityHandler(new FruitDaoImpl()));
+        actionStrategyHashMap.put(Operation.R, new PlusQuantityHandler(new FruitDaoImpl()));
+        actionStrategyHashMap.put(Operation.P, new MinusQuantityHandler(new FruitDaoImpl()));
+        updateStorageService = new UpdateStorageServiceImpl(
+                new ActionStrategyImpl(actionStrategyHashMap),
+                new ParserServiceImpl());
         storage = new ArrayList<>();
     }
 
     @Test
-    public void updateStorage_validWord_ok() {
+    public void updateStorageData_validWord_ok() {
         storage.add(new Fruit("banana", 20));
         storage.add(new Fruit("apple", 100));
         updateStorageService.updateStorageData(List.of("b,banana,20", "b,apple,100"));
@@ -39,7 +43,7 @@ public class UpdateStorageServiceImplTest {
     }
 
     @Test
-    public void updateStorage_differentData_notOk() {
+    public void updateStorageData_differentData_notOk() {
         storage.add(new Fruit("banana", 110));
         storage.add(new Fruit("apple", 100));
         updateStorageService.updateStorageData(List.of("b,banana,20", "b,apple,100"));

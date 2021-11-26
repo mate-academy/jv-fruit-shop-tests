@@ -14,7 +14,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parserService_validWork_ok() {
+    public void parser_validWork_ok() {
         String[] expected = new String[]{"p", "apple", "153"};
         Assert.assertArrayEquals(expected, parserService.parser("p,apple,153"));
     }

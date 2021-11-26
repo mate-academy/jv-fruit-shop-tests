@@ -10,8 +10,8 @@ import java.util.Optional;
 public class PurchaseOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public PurchaseOperationHandler() {
-        storageDao = new StorageDaoImpl();
+    public PurchaseOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override

@@ -2,6 +2,7 @@ package core.basesyntax.services.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.OperationHandler;
@@ -14,7 +15,7 @@ public class PurchaseOperationHandlerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        purchaseOperationHandler = new PurchaseOperationHandler();
+        purchaseOperationHandler = new PurchaseOperationHandler(new StorageDaoImpl());
     }
 
     @After

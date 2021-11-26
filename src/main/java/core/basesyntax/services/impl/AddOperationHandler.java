@@ -8,8 +8,8 @@ import core.basesyntax.services.OperationHandler;
 public class AddOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public AddOperationHandler() {
-        storageDao = new StorageDaoImpl();
+    public AddOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override

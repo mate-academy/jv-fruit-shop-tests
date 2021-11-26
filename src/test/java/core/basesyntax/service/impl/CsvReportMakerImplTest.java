@@ -30,21 +30,21 @@ public class CsvReportMakerImplTest {
     }
 
     @Test
-    public void makeReport_validBatch_Ok() {
+    public void reportMaker_validBatch_Ok() {
         String expected = report;
         String actual = reportMaker.makeReport(storage);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void makeReport_emptyBatch_Ok() {
+    public void reportMaker_emptyBatch_Ok() {
         String expected = "fruit,quantity";
         String actual = reportMaker.makeReport(new HashMap<>());
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)
-    public void makeReport_nullBatch_notOk() {
+    public void reportMaker_nullBatch_notOk() {
         reportMaker.makeReport(null);
     }
 }

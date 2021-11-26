@@ -51,7 +51,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void updateShopWarehouse_validData_ok() {
+    public void updateFruitsWarehouse_validData_ok() {
         inputData = List.of(
             "b,banana,20",
             "b,apple,100",
@@ -71,7 +71,7 @@ public class ShopServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateShopWarehouse_invalidData_notOk() {
+    public void updateFruitsWarehouse_notEnoughFruits_notOk() {
         inputData = List.of(
             "b,banana,1",
             "p,banana,2",

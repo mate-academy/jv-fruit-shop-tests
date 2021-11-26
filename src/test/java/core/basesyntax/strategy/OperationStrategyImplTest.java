@@ -32,22 +32,22 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_rOperation_ok() {
+    public void get_returnOperation_ok() {
         Assert.assertEquals(AddOperationHandlerImpl.class, operationStrategy.get("r").getClass());
     }
 
     @Test
-    public void get_bOperation_ok() {
+    public void get_buyOperation_ok() {
         Assert.assertEquals(AddOperationHandlerImpl.class, operationStrategy.get("b").getClass());
     }
 
     @Test
-    public void get_sOperation_ok() {
+    public void get_supplyOperation_ok() {
         Assert.assertEquals(AddOperationHandlerImpl.class, operationStrategy.get("s").getClass());
     }
 
     @Test
-    public void get_pOperation_ok() {
+    public void get_purchaseOperation_ok() {
         Assert.assertEquals(PurchaseOperationHandlerImpl.class,
                 operationStrategy.get("p").getClass());
     }

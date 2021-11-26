@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import java.util.Map;

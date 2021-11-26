@@ -30,9 +30,4 @@ public class ReportCreatorImplTest {
         String actual = reportCreator.makeReport();
         Assert.assertEquals(expected, actual);
     }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
 }

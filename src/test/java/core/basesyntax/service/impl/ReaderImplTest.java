@@ -31,9 +31,4 @@ public class ReaderImplTest {
     public void read_nullFilePath_notOk() {
         reader.readFromFile(null);
     }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
 }

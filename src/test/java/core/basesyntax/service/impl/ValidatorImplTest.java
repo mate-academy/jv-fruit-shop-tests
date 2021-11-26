@@ -37,9 +37,4 @@ public class ValidatorImplTest {
     public void validate_incorrectQuantity_notOk() {
         validator.validate("r,banana,-1");
     }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
 }

@@ -5,6 +5,9 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.Parser;
 import core.basesyntax.services.Validator;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,7 +59,7 @@ public class ParserImplTest {
     @Test
     public void parse_emptyList_Ok() {
         List<TransactionDto> actual = parser.parse(List.of());
-        assertEquals(List.of(), actual);
+        assertEquals(Collections.emptyList(), actual);
     }
 
     @Test(expected = RuntimeException.class)

@@ -3,6 +3,8 @@ package core.basesyntax.services.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.services.FileReader;
+
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,7 +34,7 @@ public class FileReaderImplTest {
     @Test
     public void read_EmptyFile_Ok() {
         List<String> actual = fileReader.read("src/test/resources/empty_file.csv");
-        List<String> expected = List.of();
+        List<String> expected = Collections.emptyList();
         assertEquals(expected, actual);
     }
 

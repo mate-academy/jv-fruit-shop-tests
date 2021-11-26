@@ -3,7 +3,6 @@ package core.basesyntax.services.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.services.FileReader;
-
 import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;

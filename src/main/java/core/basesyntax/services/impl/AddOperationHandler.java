@@ -1,7 +1,6 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.OperationHandler;
 

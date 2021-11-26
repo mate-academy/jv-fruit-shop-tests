@@ -2,8 +2,13 @@ package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.impl.StorageDaoImpl;
+import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.impl.AddOperationHandler;
 import core.basesyntax.services.impl.PurchaseOperationHandler;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,7 +17,15 @@ public class OperationStrategyImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        operationStrategy = new OperationStrategyImpl();
+        StorageDao storageDao = new StorageDaoImpl();
+        OperationHandler addOperationHandler = new AddOperationHandler(storageDao);
+        OperationHandler purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
+        Map<String, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(OperationType.BALANCE.getValue(), addOperationHandler);
+        operationHandlers.put(OperationType.SUPPLY.getValue(), addOperationHandler);
+        operationHandlers.put(OperationType.PURCHASE.getValue(), purchaseOperationHandler);
+        operationHandlers.put(OperationType.RETURN.getValue(), addOperationHandler);
+        operationStrategy = new OperationStrategyImpl(operationHandlers);
     }
 
     @Test

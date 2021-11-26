@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.Parser;
 import core.basesyntax.services.Validator;
-
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;

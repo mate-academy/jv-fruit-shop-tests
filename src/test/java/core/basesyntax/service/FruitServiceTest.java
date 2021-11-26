@@ -6,7 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.fruitservice.FruitService;
 import core.basesyntax.service.fruitservice.FruitServiceImpl;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,14 +18,15 @@ public class FruitServiceTest {
         fruitService = new FruitServiceImpl();
     }
 
-    @After
-    public void after() {
+    @Before
+    public void init() {
         Storage.storage.clear();
     }
 
     @Test
     public void fruitService_emptyStorage_ok() {
         String actual = fruitService.createReport();
+        System.out.println(actual);
         String expected = "fruit,quantity";
         assertEquals(expected, actual);
     }

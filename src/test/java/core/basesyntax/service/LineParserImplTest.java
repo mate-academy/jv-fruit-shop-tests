@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.ParseLine;
+import core.basesyntax.model.ParsedLine;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -11,8 +11,8 @@ import service.LineParser;
 public class LineParserImplTest {
     private static List<String> input;
     private static LineParser parser;
-    private static List<ParseLine> expected;
-    private List<ParseLine> actual;
+    private static List<ParsedLine> expected;
+    private List<ParsedLine> actual;
 
     @BeforeClass
     public static void init() {
@@ -28,8 +28,8 @@ public class LineParserImplTest {
         input.add("b,banana,20");
         input.add("b,apple,100");
 
-        expected.add(new ParseLine("b", "banana", 20));
-        expected.add(new ParseLine("b", "apple", 100));
+        expected.add(new ParsedLine("b", "banana", 20));
+        expected.add(new ParsedLine("b", "apple", 100));
 
         actual = parser.lineParcer(input);
         Assert.assertEquals(expected, actual);

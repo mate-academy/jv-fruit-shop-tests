@@ -1,6 +1,6 @@
 package strategy.implement;
 
-import core.basesyntax.model.ParseLine;
+import core.basesyntax.model.ParsedLine;
 import java.util.HashMap;
 import java.util.Map;
 import service.OperationService;
@@ -20,7 +20,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationService getOperationService(ParseLine line) {
+    public OperationService getOperationService(ParsedLine line) {
         return map.get(line.getOperation());
     }
 }

@@ -2,7 +2,7 @@ package core.basesyntax.service.operationimpl;
 
 import core.basesyntax.bd.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.ParseLine;
+import core.basesyntax.model.ParsedLine;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,7 +12,7 @@ import service.operationimpl.MinusOperation;
 
 public class MinusOperationTest {
     private static OperationService operationService;
-    private ParseLine parseLine;
+    private ParsedLine parsedLine;
     private Fruit actual;
     private Fruit expected;
 
@@ -24,8 +24,8 @@ public class MinusOperationTest {
     @Test
     public void minus_option_ok() {
         Storage.storage.add(new Fruit("banana", 50));
-        parseLine = new ParseLine("p", "banana", 25);
-        operationService.operation(parseLine);
+        parsedLine = new ParsedLine("p", "banana", 25);
+        operationService.operation(parsedLine);
         actual = new Fruit("banana", 25);
         expected = Storage.storage.get(0);
         Assert.assertEquals(expected, actual);
@@ -34,9 +34,9 @@ public class MinusOperationTest {
     @Test
     public void minus_option_storage_fruit_quantity_less() {
         Storage.storage.add(new Fruit("banana", 20));
-        parseLine = new ParseLine("p", "banana", 25);
+        parsedLine = new ParsedLine("p", "banana", 25);
         try {
-            operationService.operation(parseLine);
+            operationService.operation(parsedLine);
         } catch (RuntimeException e) {
             Assert.assertEquals("You cannot sell that many banana", e.getMessage());
         }

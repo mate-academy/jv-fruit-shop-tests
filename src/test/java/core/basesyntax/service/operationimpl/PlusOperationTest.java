@@ -2,7 +2,7 @@ package core.basesyntax.service.operationimpl;
 
 import core.basesyntax.bd.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.ParseLine;
+import core.basesyntax.model.ParsedLine;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -12,7 +12,7 @@ import service.operationimpl.PlusOperation;
 
 public class PlusOperationTest {
     private static OperationService operationService;
-    private ParseLine parseLine;
+    private ParsedLine parsedLine;
     private Fruit actual;
     private Fruit expected;
 
@@ -24,8 +24,8 @@ public class PlusOperationTest {
     @Test
     public void plus_option_ok() {
         Storage.storage.add(new Fruit("banana", 20));
-        parseLine = new ParseLine("b", "banana", 25);
-        operationService.operation(parseLine);
+        parsedLine = new ParsedLine("b", "banana", 25);
+        operationService.operation(parsedLine);
         actual = new Fruit("banana", 45);
         expected = Storage.storage.get(0);
         Assert.assertEquals(expected, actual);

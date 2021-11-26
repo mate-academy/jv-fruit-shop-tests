@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.ParseLine;
+import core.basesyntax.model.ParsedLine;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import strategy.implement.OperationStrategyImpl;
 
 public class OperationStrategyImplText {
     private static OperationStrategy strategy;
-    private ParseLine parseLine;
+    private ParsedLine parsedLine;
     private OperationService expexted;
     private OperationService actual;
 
@@ -24,33 +24,33 @@ public class OperationStrategyImplText {
 
     @Test
     public void strategy_get_b_ok() {
-        parseLine = new ParseLine("b", "banana", 20);
+        parsedLine = new ParsedLine("b", "banana", 20);
         expexted = new CreateOperation();
-        actual = strategy.getOperationService(parseLine);
+        actual = strategy.getOperationService(parsedLine);
         Assert.assertEquals(expexted.getClass(), actual.getClass());
     }
 
     @Test
     public void strategy_get_p_ok() {
-        parseLine = new ParseLine("p", "banana", 20);
+        parsedLine = new ParsedLine("p", "banana", 20);
         expexted = new MinusOperation();
-        actual = strategy.getOperationService(parseLine);
+        actual = strategy.getOperationService(parsedLine);
         Assert.assertEquals(expexted.getClass(), actual.getClass());
     }
 
     @Test
     public void strategy_get_s_ok() {
-        parseLine = new ParseLine("s", "banana", 20);
+        parsedLine = new ParsedLine("s", "banana", 20);
         expexted = new PlusOperation();
-        actual = strategy.getOperationService(parseLine);
+        actual = strategy.getOperationService(parsedLine);
         Assert.assertEquals(expexted.getClass(), actual.getClass());
     }
 
     @Test
     public void strategy_get_r_ok() {
-        parseLine = new ParseLine("r", "banana", 20);
+        parsedLine = new ParsedLine("r", "banana", 20);
         expexted = new PlusOperation();
-        actual = strategy.getOperationService(parseLine);
+        actual = strategy.getOperationService(parsedLine);
         Assert.assertEquals(expexted.getClass(), actual.getClass());
     }
 }

@@ -1,7 +1,7 @@
 package service;
 
-import core.basesyntax.model.ParseLine;
+import core.basesyntax.model.ParsedLine;
 
 public interface OperationService {
-    boolean operation(ParseLine line);
+    boolean operation(ParsedLine line);
 }

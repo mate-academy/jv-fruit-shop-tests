@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class ParseLine {
+public class ParsedLine {
     private final String operation;
     private final String fruitName;
     private final int quantity;
 
-    public ParseLine(String operation, String fruitName, int quantity) {
+    public ParsedLine(String operation, String fruitName, int quantity) {
         this.operation = operation;
         this.fruitName = fruitName;
         this.quantity = quantity;
@@ -33,7 +33,7 @@ public class ParseLine {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ParseLine line = (ParseLine) o;
+        ParsedLine line = (ParsedLine) o;
         return quantity == line.quantity
                 && Objects.equals(operation, line.operation)
                 && Objects.equals(fruitName, line.fruitName);
@@ -46,7 +46,7 @@ public class ParseLine {
 
     @Override
     public String toString() {
-        return "ParseLine{"
+        return "ParsedLine{"
                 + "operation='" + operation + '\''
                 + ", fruitName='" + fruitName + '\''
                 + ", quantity=" + quantity + '}';

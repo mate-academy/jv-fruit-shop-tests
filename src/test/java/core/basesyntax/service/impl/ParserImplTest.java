@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.TransactionDto;
-import org.junit.After;
+import core.basesyntax.service.Parser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private static ParserImpl parser;
+    private static Parser<TransactionDto> parser;
 
     @BeforeClass
     public static void beforeClass() {
@@ -16,7 +15,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parser_correctInput_ok() {
+    public void parseLine_correctInput_ok() {
         String inputLine = "b,banana,1";
         TransactionDto expected = new TransactionDto("b", "banana", 1);
         TransactionDto actual = parser.parseLine(inputLine);
@@ -24,27 +23,22 @@ public class ParserImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parser_incorrectOperation_notOk() {
+    public void parseLine_incorrectOperation_notOk() {
         parser.parseLine("balance,banana,1");
     }
 
     @Test (expected = RuntimeException.class)
-    public void parser_incorrectFruitName_notOk() {
+    public void parseLine_incorrectFruitName_notOk() {
         parser.parseLine("r, ,1");
     }
 
     @Test (expected = RuntimeException.class)
-    public void parser_incorrectQuantity_notOk() {
+    public void parseLine_incorrectQuantity_notOk() {
         parser.parseLine("s,banana,+1");
     }
 
     @Test (expected = RuntimeException.class)
-    public void parser_emptyInput_notOk() {
+    public void parseLine_emptyInput_notOk() {
         parser.parseLine("");
-    }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
     }
 }

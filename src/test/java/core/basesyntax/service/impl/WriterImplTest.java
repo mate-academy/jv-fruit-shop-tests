@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.Writer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterImplTest {
-    private static WriterImpl writer;
+    private static Writer writer;
 
     @BeforeClass
     public static void beforeClass() {
@@ -17,7 +18,7 @@ public class WriterImplTest {
     }
 
     @Test
-    public void write_correctPath_ok() {
+    public void writeToFile_correctPath_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,1";
         writer.writeToFile("src/test/resources/output.csv", expected);
@@ -26,7 +27,7 @@ public class WriterImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_incorrectFilePath_notOk() {
+    public void writeToFile_incorrectFilePath_notOk() {
         writer.writeToFile("", "abc");
     }
 

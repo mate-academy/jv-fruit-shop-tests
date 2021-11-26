@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static SupplyOperationHandler supplyHandler;
+    private static OperationHandler supplyHandler;
     private static FruitStorageDaoImpl fruitDao;
 
     @BeforeClass

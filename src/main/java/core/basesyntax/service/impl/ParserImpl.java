@@ -8,10 +8,10 @@ public class ParserImpl implements Parser<TransactionDto> {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static Validator validator;
+    private Validator validator;
 
     public ParserImpl(Validator validator) {
-        ParserImpl.validator = validator;
+        this.validator = validator;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class Application {
             handler.apply(transaction);
         }
 
-        String report = new ReportCreatorImpl().makeReport();
+        String report = new ReportCreatorImpl(fruitDao).makeReport();
         new WriterImpl().writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

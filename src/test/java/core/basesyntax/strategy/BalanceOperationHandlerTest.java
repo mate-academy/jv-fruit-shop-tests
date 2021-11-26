@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static BalanceOperationHandler balanceHandler;
+    private static OperationHandler balanceHandler;
     private static FruitStorageDaoImpl fruitDao;
 
     @BeforeClass

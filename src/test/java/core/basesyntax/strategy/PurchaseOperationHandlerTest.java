@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static PurchaseOperationHandler purchaseHandler;
+    private static OperationHandler purchaseHandler;
     private static FruitStorageDaoImpl fruitDao;
 
     @BeforeClass

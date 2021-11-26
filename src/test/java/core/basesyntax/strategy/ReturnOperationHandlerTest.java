@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static ReturnOperationHandler returnHandler;
+    private static OperationHandler returnHandler;
     private static FruitStorageDao fruitDao;
 
     @BeforeClass

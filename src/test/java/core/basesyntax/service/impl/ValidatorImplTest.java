@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.Validator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,7 +18,6 @@ public class ValidatorImplTest {
         boolean actual = validator.validate("b,orange,1");
         boolean expected = true;
         Assert.assertEquals(expected, actual);
-        Storage.storage.clear();
     }
 
     @Test (expected = RuntimeException.class)

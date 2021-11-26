@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
 
@@ -15,7 +14,7 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruitName());
-        int oldValue = Storage.storage.get(fruit);
+        int oldValue = fruitDao.get(fruit);
         if (fruitDao.contains(fruit)) {
             fruitDao.add(fruit, oldValue + transactionDto.getQuantity());
         } else {

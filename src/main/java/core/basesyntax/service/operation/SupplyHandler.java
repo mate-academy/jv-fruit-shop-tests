@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
-
 import java.util.Objects;
 
 public class SupplyHandler implements OperationHandler {
@@ -22,8 +21,12 @@ public class SupplyHandler implements OperationHandler {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SupplyHandler that = (SupplyHandler) o;
         return Objects.equals(fruitStorageDao, that.fruitStorageDao);
     }

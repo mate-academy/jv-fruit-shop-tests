@@ -2,7 +2,6 @@ package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.exception.OperationException;
-
 import java.util.Objects;
 
 public class PurchaseHandler implements OperationHandler {
@@ -22,8 +21,12 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         PurchaseHandler that = (PurchaseHandler) o;
         return Objects.equals(fruitStorageDao, that.fruitStorageDao);
     }

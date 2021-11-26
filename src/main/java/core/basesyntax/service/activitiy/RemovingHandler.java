@@ -13,6 +13,9 @@ public class RemovingHandler implements ActivityHandler {
 
     @Override
     public FruitCrate updateFruitCrate(String fruitName, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("You trying to remove " + quantity + " of " + fruitName);
+        }
         FruitCrate storedCrate = storageDao.get(fruitName);
         if (storedCrate == null
                 || storedCrate.getQuantity() - quantity < 0) {

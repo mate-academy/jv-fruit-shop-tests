@@ -13,6 +13,9 @@ public class AddingHandler implements ActivityHandler {
 
     @Override
     public FruitCrate updateFruitCrate(String fruitName, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("You trying to add " + quantity + " of " + fruitName);
+        }
         FruitCrate storedCrate = storageDao.get(fruitName);
         if (storedCrate == null) {
             return storageDao.add(new FruitCrate(fruitName, quantity));

@@ -18,11 +18,11 @@ public class CsvFileWriterTest {
         List<String> expected = new ArrayList<>();
         List<String> actual = null;
         expected.add("some info");
-        fileWriter.write("src/test/java/resources/output.csv", expectedMsg);
+        fileWriter.write("src/test/resources/output.csv", expectedMsg);
         try {
-            actual = Files.readAllLines(Path.of("src/test/java/resources/output.csv"));
+            actual = Files.readAllLines(Path.of("src/test/resources/output.csv"));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can't read info from file, " + e);
         }
         Assert.assertEquals(expected, actual);
     }

@@ -11,14 +11,14 @@ public class CsvFileReaderTest {
 
     @Test
     public void readFile_readFromValidFile_Ok() {
-        List<String> actual = fileReader.readFile("src/test/java/resources/test.csv");
+        List<String> actual = fileReader.readFile("src/test/resources/test.csv");
         List<String> expected = List.of("type,quantity", "banana,15");
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void readFile_readFromEmptyFile_Ok() {
-        List<String> actual = fileReader.readFile("src/test/java/resources/empty.file.scv");
+        List<String> actual = fileReader.readFile("src/test/resources/empty.file.scv");
         List<String> expected = Collections.emptyList();
         Assert.assertEquals(expected, actual);
     }

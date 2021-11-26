@@ -14,7 +14,7 @@ public class StrategyTest {
     private static Strategy strategy;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         Map<String, OperationHandler> mapForStrategy = new HashMap<>();
         mapForStrategy.put("b", new AddOperationHandler());
         mapForStrategy.put("r", new AddOperationHandler());
@@ -29,7 +29,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void balanceOperationTest_Ok() {
+    public void getHandler_getBalanceOperationTest_Ok() {
         TransactionDto transaction
                 = new TransactionDto("b", new Fruit("banana"), 15);
         OperationHandler actual = strategy.getHandler(transaction);
@@ -38,7 +38,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void returnOperationTest() {
+    public void getHandler_getReturnOperationTest_Ok() {
         TransactionDto transaction
                 = new TransactionDto("r", new Fruit("banana"), 15);
         OperationHandler actual = strategy.getHandler(transaction);
@@ -47,7 +47,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void supplyOperationTest() {
+    public void getHandler_getSupplyOperationTest_Ok() {
         TransactionDto transaction
                 = new TransactionDto("s", new Fruit("banana"), 15);
         OperationHandler actual = strategy.getHandler(transaction);
@@ -56,7 +56,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void purchaseOperationTest() {
+    public void getHandler_getPurchaseOperationTest_Ok() {
         Storage.storage.put(new Fruit("banana"), 100);
         TransactionDto transaction
                 = new TransactionDto("p", new Fruit("banana"), 50);

@@ -23,21 +23,24 @@ public class MyWriterImplTest {
     @Test
     public void write_validData_Ok() {
         String filePath = "src/test/resources/output_valid_data.csv";
-        List<String> expectedList = List.of(
-                "Write this1",
-                "Write this2",
-                "And this too"
-        );
-        myWriter.writeToFile(expectedList, filePath);
-        File file = new File(filePath);
-        assertTrue("File doesn't exits.", file.exists());
-        List<String> data;
+        String validFilePath = "src/test/resources/writer_valid_data.csv";
+        List<String> expectData;
         try {
-            data = Files.readAllLines(Path.of(filePath));
+            expectData = Files.readAllLines(Path.of(validFilePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }
-        assertEquals(expectedList, data);
+
+        myWriter.writeToFile(expectData, filePath);
+        File file = new File(filePath);
+        assertTrue("File doesn't exits.", file.exists());
+        List<String> actualData;
+        try {
+            actualData = Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file", e);
+        }
+        assertEquals(expectData, actualData);
     }
 
     @Test(expected = RuntimeException.class)

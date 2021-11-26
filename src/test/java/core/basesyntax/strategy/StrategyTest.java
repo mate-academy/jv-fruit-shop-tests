@@ -32,30 +32,27 @@ public class StrategyTest {
     public void balanceOperationTest_Ok() {
         TransactionDto transaction
                 = new TransactionDto("b", new Fruit("banana"), 15);
-        strategy.getHandler(transaction).apply(transaction);
-        int expected = transaction.getQuantity();
-        int actual = Storage.storage.get(transaction.getFruit());
-        Assert.assertEquals(expected, actual);
+        OperationHandler actual = strategy.getHandler(transaction);
+        OperationHandler expected = new AddOperationHandler();
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void returnOperationTest() {
         TransactionDto transaction
                 = new TransactionDto("r", new Fruit("banana"), 15);
-        strategy.getHandler(transaction).apply(transaction);
-        int expected = transaction.getQuantity();
-        int actual = Storage.storage.get(transaction.getFruit());
-        Assert.assertEquals(expected, actual);
+        OperationHandler actual = strategy.getHandler(transaction);
+        OperationHandler expected = new AddOperationHandler();
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void supplyOperationTest() {
         TransactionDto transaction
                 = new TransactionDto("s", new Fruit("banana"), 15);
-        strategy.getHandler(transaction).apply(transaction);
-        int expected = transaction.getQuantity();
-        int actual = Storage.storage.get(transaction.getFruit());
-        Assert.assertEquals(expected, actual);
+        OperationHandler actual = strategy.getHandler(transaction);
+        OperationHandler expected = new AddOperationHandler();
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
@@ -63,9 +60,8 @@ public class StrategyTest {
         Storage.storage.put(new Fruit("banana"), 100);
         TransactionDto transaction
                 = new TransactionDto("p", new Fruit("banana"), 50);
-        strategy.getHandler(transaction).apply(transaction);
-        int expected = 50;
-        int actual = Storage.storage.get(transaction.getFruit());
-        Assert.assertEquals(expected, actual);
+        OperationHandler actual = strategy.getHandler(transaction);
+        OperationHandler expected = new SubtractOperationHandler();
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 }

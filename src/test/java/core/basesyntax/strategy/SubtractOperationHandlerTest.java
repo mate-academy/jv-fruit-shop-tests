@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SubtractOperationHandlerTest {
-    private static final SubtractOperationHandler SUBTRACT_OPERATION_HANDLER 
+    private static final OperationHandler SubtractOperationHandler
             = new SubtractOperationHandler();
 
     @After
@@ -17,28 +17,28 @@ public class SubtractOperationHandlerTest {
     }
 
     @Test
-    public void subtract_Ok() {
+    public void apply_subtract_Ok() {
         Storage.storage.put(new Fruit("banana"), 100);
         TransactionDto transaction 
                 = new TransactionDto("p", new Fruit("banana"), 50);
-        SUBTRACT_OPERATION_HANDLER.apply(transaction);
+        SubtractOperationHandler.apply(transaction);
         int expected = 50;
         int actual = Storage.storage.get(new Fruit("banana"));
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void subtractLargeQuantity_notOk() {
+    public void apply_subtractLargeQuantity_notOk() {
         Storage.storage.put(new Fruit("banana"), 10);
         TransactionDto transaction
                 = new TransactionDto("p", new Fruit("banana"), Integer.MAX_VALUE);
-        SUBTRACT_OPERATION_HANDLER.apply(transaction);
+        SubtractOperationHandler.apply(transaction);
     }
 
     @Test(expected = RuntimeException.class)
-    public void subtractWhenNoFruit_notOk() {
+    public void apply_subtractWhenNoFruit_notOk() {
         TransactionDto transaction
                 = new TransactionDto("p", new Fruit("banana"), 1);
-        SUBTRACT_OPERATION_HANDLER.apply(transaction);
+        SubtractOperationHandler.apply(transaction);
     }
 }

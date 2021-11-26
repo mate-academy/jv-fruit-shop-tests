@@ -10,21 +10,21 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private static final Parser PARSER = new ParserImpl(new ValidatorImpl());
+    private static final Parser parser = new ParserImpl(new ValidatorImpl());
 
     @Test
-    public void parse_Ok() {
+    public void parse_parseOneLine_Ok() {
         List<String> data = new ArrayList<>();
         data.addAll(List.of("type,fruit,quantity", "b,banana,15"));
         TransactionDto transaction
                 = new TransactionDto("b", new Fruit("banana"), 15);
         List<TransactionDto> expected = List.of(transaction);
-        List<TransactionDto> actual = PARSER.parse(data);
+        List<TransactionDto> actual = parser.parse(data);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void parseWithManyLines_Ok() {
+    public void parse_parseMoreThanOneLine_Ok() {
         List<String> data = new ArrayList<>();
         data.addAll(List.of("b,banana,15", "b,apple,15",
                 "p,banana,15", "p,apple,15"));
@@ -35,7 +35,7 @@ public class ParserImplTest {
         TransactionDto transaction3
                 = new TransactionDto("p", new Fruit("apple"), 15);
         List<TransactionDto> expected = List.of(transaction1, transaction2, transaction3);
-        List<TransactionDto> actual = PARSER.parse(data);
+        List<TransactionDto> actual = parser.parse(data);
         Assert.assertEquals(expected, actual);
     }
 }

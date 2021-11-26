@@ -10,17 +10,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CsvFileWriterTest {
-    private static final FileWriter FILE_WRITER = new CsvFileWriter();
+    private static final FileWriter fileWriter = new CsvFileWriter();
 
     @Test
-    public void writeToFile_Ok() {
+    public void write_writeToFile_Ok() {
         String expectedMsg = "some info";
         List<String> expected = new ArrayList<>();
         List<String> actual = null;
         expected.add("some info");
-        FILE_WRITER.write("src/test/java/output.csv", expectedMsg);
+        fileWriter.write("src/test/java/resources/output.csv", expectedMsg);
         try {
-            actual = Files.readAllLines(Path.of("src/test/java/output.csv"));
+            actual = Files.readAllLines(Path.of("src/test/java/resources/output.csv"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,7 +28,7 @@ public class CsvFileWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidPath_notOk() {
-        FILE_WRITER.write("", "");
+    public void write_writeToFileWithInvalidPath_notOk() {
+        fileWriter.write("", "");
     }
 }

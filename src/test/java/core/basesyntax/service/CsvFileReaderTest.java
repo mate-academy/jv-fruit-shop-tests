@@ -7,24 +7,24 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CsvFileReaderTest {
-    private static final FileReader FILE_READER = new CsvFileReader();
+    private static final FileReader fileReader = new CsvFileReader();
 
     @Test
-    public void readFromFile_Ok() {
-        List<String> actual = FILE_READER.readFile("src/test/java/test.csv");
+    public void readFile_readFromValidFile_Ok() {
+        List<String> actual = fileReader.readFile("src/test/java/resources/test.csv");
         List<String> expected = List.of("type,quantity", "banana,15");
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void readFromEmptyFile_Ok() {
-        List<String> actual = FILE_READER.readFile("src/test/java/empty.file.scv");
+    public void readFile_readFromEmptyFile_Ok() {
+        List<String> actual = fileReader.readFile("src/test/java/resources/empty.file.scv");
         List<String> expected = Collections.emptyList();
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-        public void invalidPath_notOk() {
-        FILE_READER.readFile("");
+        public void readFile_readFromInvalidFilePath_notOk() {
+        fileReader.readFile("");
     }
 }

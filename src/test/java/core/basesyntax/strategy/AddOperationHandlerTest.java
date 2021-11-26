@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private static final AddOperationHandler ADD_OPERATION_HANDLER
+    private static final OperationHandler addOperationHandler
             = new AddOperationHandler();
 
     @After
@@ -17,21 +17,21 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void addFNonExistFruit_Ok() {
+    public void apply_addNonExistFruit_Ok() {
         TransactionDto transaction
                 = new TransactionDto("b", new Fruit("banana"), 15);
-        ADD_OPERATION_HANDLER.apply(transaction);
+        addOperationHandler.apply(transaction);
         int expected = transaction.getQuantity();
         int actual = Storage.storage.get(transaction.getFruit());
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void addExistFruit_Ok() {
+    public void apply_addExistFruit_Ok() {
         Storage.storage.put(new Fruit("banana"), 100);
         TransactionDto transaction
                 = new TransactionDto("b", new Fruit("banana"), 15);
-        ADD_OPERATION_HANDLER.apply(transaction);
+        addOperationHandler.apply(transaction);
         int expected = transaction.getQuantity() + 100;
         int actual = Storage.storage.get(transaction.getFruit());
         Assert.assertEquals(expected, actual);

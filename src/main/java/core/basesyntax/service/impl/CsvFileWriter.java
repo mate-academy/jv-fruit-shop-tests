@@ -9,7 +9,6 @@ public class CsvFileWriter implements FileWriter {
     public boolean write(String path, String report) {
         File file = new File(path);
         try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
-            //file.createNewFile();
             fileWriter.write(report);
 
         } catch (IOException e) {

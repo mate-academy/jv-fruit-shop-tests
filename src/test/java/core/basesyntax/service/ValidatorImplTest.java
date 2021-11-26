@@ -7,35 +7,35 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ValidatorImplTest {
-    private static final Validator VALIDATOR = new ValidatorImpl();
+    private static final Validator validator = new ValidatorImpl();
 
     @Test
-    public void validData_Ok() {
+    public void isValid_validateNormalData_Ok() {
         List<String> data = List.of("b,banana,15");
-        Assert.assertTrue(VALIDATOR.isValid(data));
+        Assert.assertTrue(validator.isValid(data));
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptyData_notOk() {
+    public void isValid_emptyData_notOk() {
         List<String> data = Collections.emptyList();
-        VALIDATOR.isValid(data);
+        validator.isValid(data);
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidOperation_notOk() {
+    public void isValid_invalidOperation_notOk() {
         List<String> data = List.of("a,banana,15");
-        VALIDATOR.isValid(data);
+        validator.isValid(data);
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidFormatOfData() {
+    public void isValid_invalidFormatOfData_notOk() {
         List<String> data = List.of("p,");
-        VALIDATOR.isValid(data);
+        validator.isValid(data);
     }
 
     @Test(expected = RuntimeException.class)
-    public void negativeNumber_notOk() {
+    public void isValid_negativeNumber_notOk() {
         List<String> data = List.of("p,banana,-15");
-        VALIDATOR.isValid(data);
+        validator.isValid(data);
     }
 }

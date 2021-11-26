@@ -19,7 +19,7 @@ public class ReaderImplTest {
         List<String> expected = List.of("b,banana,20", "b,apple,100",
                 "s,banana,100", "p,banana,13", "r,apple,10",
                 "p,apple,20", "p,banana,5", "s,banana,50");
-        List<String> actual = reader.readFromFile("src/test/resources/inputTest.csv");
+        List<String> actual = reader.readFromFile("./src/main/resources/fruitInput.csv");
         Assert.assertEquals(actual, expected);
     }
 
@@ -31,7 +31,7 @@ public class ReaderImplTest {
     @Test(expected = RuntimeException.class)
     public void readFromFile_emptyCsv_ok() {
         List<String> expected = List.of("");
-        List<String> actual = reader.readFromFile("src/test/resources/emptyFile.csv");
+        List<String> actual = reader.readFromFile("");
         Assert.assertEquals(actual, expected);
     }
 }

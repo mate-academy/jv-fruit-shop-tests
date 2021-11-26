@@ -46,11 +46,6 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_emptyPath_NotOk() {
-        fileWriterService.writeToFile(ACTUAL_FILE_DATA, "");
-    }
-
-    @Test(expected = RuntimeException.class)
     public void writeToFile_emptyData_NotOk() {
         fileWriterService.writeToFile("", ACTUAL_FILE_DATA);
     }

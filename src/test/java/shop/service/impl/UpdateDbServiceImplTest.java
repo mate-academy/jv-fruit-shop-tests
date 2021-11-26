@@ -49,7 +49,7 @@ public class UpdateDbServiceImplTest {
         List<String> update = new ArrayList<>();
         update.add("s,mates,10");
         updateDbService.updateStorage(update);
-        Assert.assertNotNull(DataStorage.storage.stream()
-                .filter(e -> e.getName().equals("mates")).findFirst());
+        Assert.assertEquals("mates", DataStorage.storage.stream()
+                .filter(e -> e.getName().equals("mates")).findFirst().get().getName());
     }
 }

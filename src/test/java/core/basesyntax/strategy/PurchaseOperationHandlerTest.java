@@ -4,14 +4,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private OperationHandler purchase;
+    private static OperationHandler purchase;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         purchase = new PurchaseOperationHandler();
         Storage.storage.put(new Fruit("banana"),25);
         Storage.storage.put(new Fruit("apple"), 100);
@@ -40,4 +40,8 @@ public class PurchaseOperationHandlerTest {
         purchase.operate("orange", 10);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void operate_newQuantityMoreThanOldQuantity_notOk() {
+        purchase.operate("apple", 120);
+    }
 }

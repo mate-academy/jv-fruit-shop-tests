@@ -5,14 +5,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.Report;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportImplTest {
-    private Report report;
+    private static Report report;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         report = new ReportImpl();
         Storage.storage.put(new Fruit("orange"), 25);
         Storage.storage.put(new Fruit("apple"), 100);

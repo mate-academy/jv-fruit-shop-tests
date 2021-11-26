@@ -3,14 +3,14 @@ package core.basesyntax.service.implementation;
 import core.basesyntax.service.Reader;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderImplTest {
-    private Reader reader;
+    private static Reader reader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         reader = new ReaderImpl();
     }
 
@@ -21,7 +21,7 @@ public class ReaderImplTest {
                 "p,banana,13", "r,apple,10", "p,apple,20",
                 "p,banana,5", "s,banana,50");
         List<String> actual = reader.readFromFile("./src/main/resources/fruitInput.csv");
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

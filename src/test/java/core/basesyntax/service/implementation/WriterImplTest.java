@@ -7,14 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterImplTest {
-    private Writer writer;
+    private static Writer writer;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         writer = new WriterImpl();
     }
 
@@ -48,6 +48,6 @@ public class WriterImplTest {
             throw new RuntimeException("Can't read from file", e);
         }
         String actual = builder.toString();
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 }

@@ -10,26 +10,26 @@ public class OperationStrategyTest {
 
     @Test
     public void get_operation_ok() {
-        OperationHandler expected;
         OperationHandler actual;
+        OperationHandler expected;
         operation = "b";
-        actual = new AddOperationHandler();
-        expected = operationStrategy.get(operation);
+        expected = new AddOperationHandler();
+        actual = operationStrategy.get(operation);
         assertEquals(expected.getClass(), actual.getClass());
 
         operation = "s";
-        actual = new AddOperationHandler();
-        expected = operationStrategy.get(operation);
+        expected = new AddOperationHandler();
+        actual = operationStrategy.get(operation);
         assertEquals(expected.getClass(), actual.getClass());
 
         operation = "p";
-        actual = new ReduceOperationHandler();
-        expected = operationStrategy.get(operation);
+        expected = new ReduceOperationHandler();
+        actual = operationStrategy.get(operation);
         assertEquals(expected.getClass(), actual.getClass());
 
         operation = "r";
-        actual = new AddOperationHandler();
-        expected = operationStrategy.get(operation);
+        expected = new AddOperationHandler();
+        actual = operationStrategy.get(operation);
         assertEquals(expected.getClass(), actual.getClass());
     }
 }

@@ -23,12 +23,12 @@ public class WriterToFileCsvImplTest {
 
     @Test
     public void write_fileNotExist_ok() {
-        List<String> actual = List.of("fruit,quantity",
+        List<String> expected = List.of("fruit,quantity",
                 "banana,152", "apple,90", "pineapple,20");
-        List<String> expected;
-        writer.write(actual, file);
+        List<String> actual;
+        writer.write(expected, file);
         try {
-            expected = Files.readAllLines(new File(defaultPath + "report.csv").toPath());
+            actual = Files.readAllLines(new File(defaultPath + "report.csv").toPath());
         } catch (IOException e) {
             fail("Test couldn't find the file!!!");
             return;
@@ -38,12 +38,12 @@ public class WriterToFileCsvImplTest {
 
     @Test
     public void write_fileExists_ok() {
-        List<String> actual = List.of("fruit,quantity",
+        List<String> expected = List.of("fruit,quantity",
                 "banana,207", "apple,90");
-        List<String> expected;
-        writer.write(actual, file);
+        List<String> actual;
+        writer.write(expected, file);
         try {
-            expected = Files.readAllLines(new File(defaultPath + "report.csv").toPath());
+            actual = Files.readAllLines(new File(defaultPath + "report.csv").toPath());
         } catch (IOException e) {
             fail("Test couldn't find the file!!!");
             return;

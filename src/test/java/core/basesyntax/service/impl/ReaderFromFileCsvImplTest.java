@@ -24,10 +24,10 @@ public class ReaderFromFileCsvImplTest {
     public void read_fileExists_OK() {
         String fileNameExists = "storeGood.csv";
         File fileExists = new File(DEFAULT_PATH + fileNameExists);
-        List<String> expected = reader.read(fileExists);
-        List<String> actual;
+        List<String> actual = reader.read(fileExists);
+        List<String> expected;
         try {
-            actual = Files.readAllLines(fileExists.toPath());
+            expected = Files.readAllLines(fileExists.toPath());
         } catch (IOException e) {
             fail("Test couldn't find the file!!!");
             return;

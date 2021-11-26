@@ -65,12 +65,12 @@ public class ValidatorImplTest {
     }
 
     @Test(expected = ValidatorException.class)
-    public void validate_AlphabeticalQuantity_notOk() {
+    public void validate_alphabeticalQuantity_notOk() {
         validator.validate(List.of("b,pineapple,two"));
     }
 
     @Test(expected = ValidatorException.class)
-    public void validate_OperationInUpperCase_notOk() {
+    public void validate_operationInUpperCase_notOk() {
         validator.validate(List.of("B,pineapple,two"));
     }
 

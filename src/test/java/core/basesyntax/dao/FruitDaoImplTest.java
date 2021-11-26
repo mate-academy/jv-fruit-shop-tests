@@ -13,7 +13,6 @@ public class FruitDaoImplTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         fruitDao = new FruitDaoImpl();
-
     }
 
     @Test

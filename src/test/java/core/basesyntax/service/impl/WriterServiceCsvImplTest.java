@@ -55,7 +55,6 @@ public class WriterServiceCsvImplTest {
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullToWrite_notOk() {
         writerService.writeToFile(null, filePath);
-
     }
 
     private static class Reader {

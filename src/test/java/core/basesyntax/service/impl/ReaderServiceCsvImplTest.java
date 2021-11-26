@@ -15,11 +15,10 @@ public class ReaderServiceCsvImplTest {
     @BeforeClass
     public static void beforeAll() {
         readerService = new ReaderServiceCsvImpl();
-
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         data = new ArrayList<>();
         data.add("b,banana,20");
         data.add("b,apple,20");

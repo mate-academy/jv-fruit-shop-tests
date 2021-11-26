@@ -17,37 +17,37 @@ public class OperationStrategyImplTest {
     }
 
     @Test (expected = OperationException.class)
-    public void operation_strategy_unknownOperation_notOk() {
+    public void get_unknownOperation_notOk() {
         operationStrategy.get(UNKNOWN_OPERATION_EXAMPLE);
     }
 
     @Test (expected = OperationException.class)
-    public void operation_strategy_emptyOperation_notOk() {
+    public void get_emptyOperation_notOk() {
         operationStrategy.get("");
     }
 
     @Test (expected = OperationException.class)
-    public void operation_strategy_nullOperation_notOk() {
+    public void get_nullOperation_notOk() {
         operationStrategy.get(null);
     }
 
     @Test
-    public void operation_strategy_r_addValidOperation_ok() {
+    public void get_rOperation_ok() {
         Assert.assertEquals(AddOperationHandlerImpl.class, operationStrategy.get("r").getClass());
     }
 
     @Test
-    public void operation_strategy_b_addValidOperation_ok() {
+    public void get_bOperation_ok() {
         Assert.assertEquals(AddOperationHandlerImpl.class, operationStrategy.get("b").getClass());
     }
 
     @Test
-    public void operation_strategy_s_addValidOperation_ok() {
+    public void get_sOperation_ok() {
         Assert.assertEquals(AddOperationHandlerImpl.class, operationStrategy.get("s").getClass());
     }
 
     @Test
-    public void operation_strategy_p_purchaseValidOperation_ok() {
+    public void get_pOperation_ok() {
         Assert.assertEquals(PurchaseOperationHandlerImpl.class,
                 operationStrategy.get("p").getClass());
     }

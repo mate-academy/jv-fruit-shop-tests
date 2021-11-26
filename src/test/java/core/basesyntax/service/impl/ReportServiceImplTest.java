@@ -20,9 +20,9 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void reportService_ValidReport_ok() {
+    public void formReport_formValidReport_ok() {
         reportTestMap.put("banana",152);
-        String actual = reportService.formReport(new FruitStorageDaoImpl().getAll());
+        String actual = reportService.formReport(reportTestMap.entrySet());
         String expected = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,152";
@@ -30,9 +30,9 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void reportService_reportEmpty() {
+    public void formReport_formEmptyReport_ok() {
         Assert.assertEquals("fruit,quantity",
-                reportService.formReport(new FruitStorageDaoImpl().getAll()));
+                reportService.formReport(reportTestMap.entrySet()));
     }
 
     @After

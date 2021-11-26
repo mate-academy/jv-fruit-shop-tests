@@ -24,7 +24,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writer_Writer_ok() {
+    public void write_writeValidData_ok() {
         String report = builder.toString();
         fileWriter.write(report, VALID_FILE_PATH);
         List<String> expected = List.of("fruit,quantity", "banana 100");
@@ -33,26 +33,26 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void writer_ReportIsNull_notOk() {
+    public void write_dataIsNull_notOk() {
         fileWriter.write(null, VALID_FILE_PATH);
     }
 
     @Test(expected = NullPointerException.class)
-    public void writer_PathIsNull_notOk() {
+    public void write_pathIsNull_notOk() {
         fileWriter.write("fruit,type", null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writer_PathIsEmpty_notOk() {
+    public void write_writeWithEmptyPath_notOk() {
         fileWriter.write("fruit,type", "");
     }
 
     @Test
-    public void writer_ReportIsEmpty_Ok() {
+    public void write_writeWithEmptyReport_Ok() {
         fileWriter.write("", VALID_FILE_PATH);
     }
 
-    private static List<String> read(String filePath) {
+    private List<String> read(String filePath) {
         List<String> records;
         try {
             records = Files.readAllLines(Path.of(filePath));

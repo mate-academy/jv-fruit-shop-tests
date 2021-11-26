@@ -5,6 +5,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,21 +20,27 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test(expected = OperationException.class)
-    public void apply_PurchaseMinusResult_notOk() {
+    public void apply_purchaseMinusResult_notOk() {
         testStorage.put("apple", 100);
         operationHandler.apply("apple", 120);
     }
 
     @Test
-    public void apply_PurchaseKeyIsNull_ok() {
+    public void apply_purchaseKeyIsNull_ok() {
         testStorage.put(null, 10);
         operationHandler.apply(null, 10);
+        Integer expected = 0;
+        Integer actual = testStorage.get(null);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void apply_PurchaseApplicable_ok() {
+    public void apply_purchaseApplicable_ok() {
         testStorage.put("banana", 150);
         operationHandler.apply("banana", 120);
+        Integer expected = 30;
+        Integer actual = testStorage.get("banana");
+        Assert.assertEquals(expected, actual);
     }
 
     @After

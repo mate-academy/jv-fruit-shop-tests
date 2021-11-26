@@ -17,7 +17,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parser_ValidData_ok() {
+    public void parseLines_parseValidData_ok() {
         List<String> list = List.of("type,fruit,quantity", "b,apple,120");
         List<TransactionDto> expected = List.of(new TransactionDto("b",
                 "apple",
@@ -26,19 +26,19 @@ public class ParserImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parser_emptyList_notOk() {
+    public void parseLines_parseDataFromEmptyList_notOk() {
         List<String> list = Collections.emptyList();
         parser.parseLines(list);
     }
 
     @Test (expected = RuntimeException.class)
-    public void parser_parserHasNullValue() {
+    public void parseLines_parseValueIsNull_notOk() {
         List<String> list = List.of(null);
         parser.parseLines(list);
     }
 
     @Test
-    public void parser_onlyTitleLine_Ok() {
+    public void parseLines_parseWithOnlyTitleLine_Ok() {
         List<String> list = List.of("type,fruit,quantity");
         List<TransactionDto> actual = parser.parseLines(list);
         List<TransactionDto> expected = Collections.emptyList();

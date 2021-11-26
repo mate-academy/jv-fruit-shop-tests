@@ -29,22 +29,22 @@ public class FileReaderImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void read_pathsIsValid_notOk() {
+    public void read_validPath_notOk() {
         fileReader.read(INVALID_PATH_EXAMPLE);
     }
 
     @Test (expected = RuntimeException.class)
-    public void read_pathIsNull_notOk() {
+    public void read_nullPath_notOk() {
         fileReader.read(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void read_pathIsEmpty_ok() {
+    public void read_emptyPath_ok() {
         fileReader.read("");
     }
 
     @Test
-    public void read_fileIsEmpty_ok() {
+    public void read_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.read(EMPTY_FILE);
         assertEquals(expected, actual);

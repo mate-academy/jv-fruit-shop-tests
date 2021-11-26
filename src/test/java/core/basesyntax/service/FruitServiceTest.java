@@ -6,7 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.fruitservice.FruitService;
 import core.basesyntax.service.fruitservice.FruitServiceImpl;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,8 +18,8 @@ public class FruitServiceTest {
         fruitService = new FruitServiceImpl();
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void after() {
         Storage.storage.clear();
     }
 

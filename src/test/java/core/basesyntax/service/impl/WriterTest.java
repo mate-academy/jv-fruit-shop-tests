@@ -11,6 +11,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterTest {
+    private static final String FILE_PATH_TO_CUSTOM_WRITER
+            = "src/test/resources/customWriterTest.csv";
+    private static final String FILE_PATH_TO_STANDARD_WRITER
+            = "src/test/resources/standardWriterTest.csv";
+    private static final String INVALID_PATH = "";
     private static Writer writer;
 
     @BeforeClass
@@ -20,29 +25,27 @@ public class WriterTest {
 
     @Test
     public void write_Ok() {
-        Assert.assertTrue(writer.write("src/main/resources/report.csv", "Test"));
+        Assert.assertTrue(writer.write(FILE_PATH_TO_CUSTOM_WRITER, "Test"));
     }
 
     @Test(expected = RuntimeException.class)
     public void writeInvalidPath_NotOk() {
-        writer.write("", "Test");
+        writer.write(INVALID_PATH, "Test");
     }
 
     @Test
     public void writeCorrectData_Ok() {
-        String filePathForCustomWriter = "src/main/resources/customWriterTest.csv";
-        String filePathForStandardWriter = "src/main/resources/standardWriterTest.csv";
         String testString = "Tested string";
-        File report = new File(filePathForStandardWriter);
+        File report = new File(FILE_PATH_TO_STANDARD_WRITER);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(report))) {
             bufferedWriter.write(testString);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file "
-                    + filePathForStandardWriter, e);
+                    + FILE_PATH_TO_STANDARD_WRITER, e);
         }
-        writer.write(filePathForCustomWriter, testString);
-        File wroteWithCustomWriter = new File(filePathForCustomWriter);
-        File wroteWithStandardWriter = new File(filePathForStandardWriter);
+        writer.write(FILE_PATH_TO_CUSTOM_WRITER, testString);
+        File wroteWithCustomWriter = new File(FILE_PATH_TO_CUSTOM_WRITER);
+        File wroteWithStandardWriter = new File(FILE_PATH_TO_STANDARD_WRITER);
         try {
             Assert.assertEquals(Files.readAllLines(wroteWithStandardWriter.toPath()),
                     Files.readAllLines(wroteWithCustomWriter.toPath()));
@@ -56,9 +59,8 @@ public class WriterTest {
         String testedString = "FirstLine" + System.lineSeparator()
                 + "SecondLine" + System.lineSeparator()
                 + "ThirdLine";
-        String pathToFile = "src/main/resources/customWriterTest.csv";
-        writer.write(pathToFile, testedString);
-        File testedFile = new File(pathToFile);
+        writer.write(FILE_PATH_TO_CUSTOM_WRITER, testedString);
+        File testedFile = new File(FILE_PATH_TO_CUSTOM_WRITER);
         try {
             Assert.assertEquals(3, Files.readAllLines(testedFile.toPath()).size());
         } catch (IOException e) {
@@ -68,7 +70,6 @@ public class WriterTest {
 
     @Test(expected = RuntimeException.class)
     public void writeEmptyString_NotOk() {
-        String pathToFile = "src/main/resources/customWriterTest.csv";
-        writer.write(pathToFile, "");
+        writer.write(FILE_PATH_TO_CUSTOM_WRITER, "");
     }
 }

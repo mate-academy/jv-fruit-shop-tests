@@ -8,9 +8,6 @@ import shop.service.Writer;
 
 public class CsvWriterImpl implements Writer {
 
-    public CsvWriterImpl() {
-    }
-
     @Override
     public boolean write(List<String> dataToWrite, String outputFile) {
         try {

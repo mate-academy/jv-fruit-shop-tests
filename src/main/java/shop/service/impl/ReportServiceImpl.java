@@ -3,7 +3,6 @@ package shop.service.impl;
 import java.util.LinkedList;
 import java.util.List;
 import shop.dao.FruitDao;
-import shop.dao.FruitDaoImpl;
 import shop.model.Fruit;
 import shop.service.ReportService;
 

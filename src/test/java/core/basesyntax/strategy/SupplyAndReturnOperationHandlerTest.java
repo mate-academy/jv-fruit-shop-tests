@@ -33,5 +33,10 @@ public class SupplyAndReturnOperationHandlerTest {
         Fruit fruit = new Fruit(transaction1.getFruit());
         Integer actual = Storage.storage.get(fruit);
         assertEquals(expected, actual);
+        TransactionDto transaction3 = new TransactionDto("r", "banana", 100);
+        supplyAndReturnHandler.apply(transaction3);
+        expected = 200;
+        actual = Storage.storage.get(fruit);
+        assertEquals(expected, actual);
     }
 }

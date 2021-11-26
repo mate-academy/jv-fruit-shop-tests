@@ -8,6 +8,9 @@ public class ValidatorImpl implements Validator {
     @Override
     public boolean validateLine(String line) {
         String[] lineToBeChecked = line.split(",");
+        if (lineToBeChecked.length < 3) {
+            return false;
+        }
         if (!lineToBeChecked[OPERATION_INDEX].equals("b")
                 && !lineToBeChecked[OPERATION_INDEX].equals("s")
                 && !lineToBeChecked[OPERATION_INDEX].equals("p")

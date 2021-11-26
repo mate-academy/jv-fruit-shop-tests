@@ -27,7 +27,7 @@ public class BalanceOperationHandlerTest {
         TransactionDto transaction = new TransactionDto("b", "banana", 50);
         handler.apply(transaction);
         Integer expected = 50;
-        Fruit fruit = new Fruit(transaction.getFruit());
+        Fruit fruit = new Fruit("banana");
         Integer actual = Storage.storage.get(fruit);
         assertEquals(expected, actual);
     }

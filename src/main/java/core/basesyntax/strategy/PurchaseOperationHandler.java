@@ -10,6 +10,9 @@ public class PurchaseOperationHandler implements OperationHandler {
         Fruit fruit = new Fruit(transactionDto.getFruit());
         Integer quantity = transactionDto.getQuantity();
         Integer oldQuantity = Storage.storage.get(fruit);
+        if (oldQuantity == null) {
+            throw new RuntimeException("Fruit doesn`t exist in storage");
+        }
         if (oldQuantity < quantity) {
             throw new RuntimeException("Not enough " + transactionDto.getFruit());
         }

@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.Validator;
 import org.junit.Test;
@@ -10,17 +11,30 @@ public class ValidatorImplTest {
     
     @Test
     public void validateLine_validLine_ok() {
-        boolean expected = true;
         String line = "p,apple,200";
-        boolean actual = validator.validateLine(line);
-        assertEquals(expected, actual);
+        boolean validationResult = validator.validateLine(line);
+        assertTrue(validationResult);
     }
     
     @Test
     public void validateLine_invalidLine_notOk() {
-        boolean expected = false;
         String line = "qwe,rtyu,uuuuu";
-        boolean actual = validator.validateLine(line);
-        assertEquals(expected, actual);
+        boolean validationResult = validator.validateLine(line);
+        assertFalse(validationResult);
+        line = "p,banana";
+        validationResult = validator.validateLine(line);
+        assertFalse(validationResult);
+        line = ",banana,20";
+        validationResult = validator.validateLine(line);
+        assertFalse(validationResult);
+        line = "p,banana,p2p";
+        validationResult = validator.validateLine(line);
+        assertFalse(validationResult);
+        line = "p,banana,";
+        validationResult = validator.validateLine(line);
+        assertFalse(validationResult);
+        line = "P,banana,20";
+        validationResult = validator.validateLine(line);
+        assertFalse(validationResult);
     }
 }

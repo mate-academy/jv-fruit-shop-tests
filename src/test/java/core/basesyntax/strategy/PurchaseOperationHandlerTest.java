@@ -42,4 +42,10 @@ public class PurchaseOperationHandlerTest {
         TransactionDto transaction2 = new TransactionDto("p", "banana", 60);
         purchaseHandler.apply(transaction2);
     }
+    
+    @Test(expected = RuntimeException.class)
+    public void apply_fruitDoesntExist_notOk() {
+        TransactionDto transaction = new TransactionDto("p", "banana", 60);
+        purchaseHandler.apply(transaction);
+    }
 }

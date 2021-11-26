@@ -29,14 +29,12 @@ public class ReportServiceImplTest {
         expected.add("apple,123");
         expected.add("banana,1");
         Assert.assertEquals(expected, reportService.createReport());
-        LocalStorage.fruits.clear();
     }
 
     @Test
     public void createReport_emptyStorage_ok() {
         expected.add("fruit,quantity");
         Assert.assertEquals(expected, reportService.createReport());
-        LocalStorage.fruits.clear();
     }
 
     @After

@@ -1,6 +1,5 @@
 package service.impl;
 
-import dao.FruitDaoImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,8 +21,7 @@ public class FileWriterServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        fileWriterService = new FileWriterServiceImpl(
-                new ReportServiceImpl(new FruitDaoImpl()));
+        fileWriterService = new FileWriterServiceImpl();
         report = new ArrayList<>();
         report.add("fruit,quantity");
         report.add("apple,10");

@@ -5,14 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import service.FileWriterService;
-import service.ReportService;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    private final ReportService reportService;
-
-    public FileWriterServiceImpl(ReportService reportService) {
-        this.reportService = reportService;
-    }
 
     @Override
     public boolean write(String outputFile, List<String> report) {

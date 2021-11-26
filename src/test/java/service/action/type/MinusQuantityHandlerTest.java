@@ -38,7 +38,7 @@ public class MinusQuantityHandlerTest {
     @Test
     public void apply_nonExistentFruit_notOk() {
         exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("there is no such vegetable to sell");
+        exceptionRule.expectMessage("there is no such fruit to sell");
         handler.apply("banana", 20_000);
     }
 

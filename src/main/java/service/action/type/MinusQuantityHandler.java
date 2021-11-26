@@ -14,7 +14,7 @@ public class MinusQuantityHandler implements ActionStrategyHandler {
     @Override
     public boolean apply(String fruitName, int quantity) {
         Fruit fruit = fruitDao.get(fruitName).orElseThrow(() ->
-                new RuntimeException("there is no such vegetable to sell"));
+                new RuntimeException("there is no such fruit to sell"));
         if (fruit.getCount() < quantity) {
             throw new RuntimeException("the quantity of goods cannot be fruit");
         }

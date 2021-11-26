@@ -30,8 +30,7 @@ public class Main {
                         new ActionStrategyImpl(actionStrategyHashMap),
                         new ParserServiceImpl());
         FileReaderServiceImpl fileReader = new FileReaderServiceImpl();
-        FileWriterService fileWriter = new FileWriterServiceImpl(
-                new ReportServiceImpl(new FruitDaoImpl()));
+        FileWriterService fileWriter = new FileWriterServiceImpl();
         ValidatorServiceImpl validatorService = new ValidatorServiceImpl();
         ReportService reportService = new ReportServiceImpl(new FruitDaoImpl());
 

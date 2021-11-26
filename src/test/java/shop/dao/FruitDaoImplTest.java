@@ -19,11 +19,6 @@ public class FruitDaoImplTest {
         test_fruit = new Fruit("apple", 1);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        DataStorage.storage.clear();
-    }
-
     @Test
     public void fruitDao_getAll_ok() {
         Fruit banana = new Fruit("Banana", 10);
@@ -48,5 +43,10 @@ public class FruitDaoImplTest {
     public void fruitDao_get_ok() {
         fruitDao.add(test_fruit);
         assertEquals(test_fruit, fruitDao.get(test_fruit.getName()));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        DataStorage.storage.clear();
     }
 }

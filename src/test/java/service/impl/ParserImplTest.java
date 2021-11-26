@@ -21,13 +21,13 @@ public class ParserImplTest {
     public void parsLine_parseLine_ok() {
         String line = "r,banana,100";
         TransactionDto expected = new TransactionDto("r", "banana",100);
-        TransactionDto actual = parser.parseLine(line);
+        TransactionDto actual = parser.parseLineToTransaction(line);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void parsLine_notValid_notOk() {
         String line = "r,banana, 100";
-        parser.parseLine(line);
+        parser.parseLineToTransaction(line);
     }
 }

@@ -16,7 +16,7 @@ public class ParserImpl implements Parser {
     }
 
     @Override
-    public TransactionDto parseLine(String line) {
+    public TransactionDto parseLineToTransaction(String line) {
         validator.validate(line);
         String[] sp = line.split(SEPARATOR);
         String operation = sp[INDEX_OF_OPERATION];

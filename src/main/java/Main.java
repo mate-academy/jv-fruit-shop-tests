@@ -31,7 +31,7 @@ public class Main {
         Parser parser = new ParserImpl(new ValidatorImpl());
         List<String> lines = readerService.readFromFile(inputFilePath);
         for (int i = 1; i < lines.size(); i++) {
-            TransactionDto transactionDto = parser.parseLine(lines.get(i));
+            TransactionDto transactionDto = parser.parseLineToTransaction(lines.get(i));
             map.get(transactionDto.getOperation()).apply(transactionDto);
         }
         FileWriterService writerService = new FileWriterServiceImpl();

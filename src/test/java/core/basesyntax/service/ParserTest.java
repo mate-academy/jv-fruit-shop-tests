@@ -32,6 +32,12 @@ public class ParserTest {
     }
 
     @Test(expected = RuntimeException.class)
+    public void parseLine_notValidQuantity_not_Ok() {
+        String line = "b,apple, ";
+        TransactionDto actual = parser.parseLine(line);
+    }
+
+    @Test(expected = RuntimeException.class)
     public void parseLine_emptyLine_not_Ok() {
         String line = "   ";
         TransactionDto actual = parser.parseLine(line);

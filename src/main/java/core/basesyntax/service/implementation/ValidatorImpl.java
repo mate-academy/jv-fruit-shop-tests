@@ -10,12 +10,7 @@ public class ValidatorImpl implements Validator {
     @Override
     public boolean validate(String line) {
         String[] oneLineData = line.split(",");
-        if (oneLineData.length != NUMBER_OF_PARAMETERS) {
-            return false;
-        }
-        if (!Pattern.matches(LINE_MATCHER_REGEX, line)) {
-            return false;
-        }
-        return true;
+        return oneLineData.length == NUMBER_OF_PARAMETERS
+                && Pattern.matches(LINE_MATCHER_REGEX, line);
     }
 }

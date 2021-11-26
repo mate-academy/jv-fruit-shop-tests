@@ -13,8 +13,6 @@ public class PurchaseOperationHandlerTest {
     @BeforeClass
     public static void setUp() {
         purchaseHandler = new PurchaseOperationHandler();
-        Storage.storage.put(new Fruit("banana"),25);
-        Storage.storage.put(new Fruit("apple"), 100);
     }
 
     @After
@@ -24,6 +22,8 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void operate_validData_ok() {
+        Storage.storage.put(new Fruit("banana"),25);
+        Storage.storage.put(new Fruit("apple"), 100);
         int expected = 5;
         purchaseHandler.operate("banana", 20);
         int actual = Storage.storage.get(new Fruit("banana"));

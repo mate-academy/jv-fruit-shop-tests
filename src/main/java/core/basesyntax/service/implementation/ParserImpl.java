@@ -17,11 +17,7 @@ public class ParserImpl implements Parser<TransactionDto> {
 
     public TransactionDto parse(String line) {
         String[] oneLineData = line.split(",");
-        if (validator.validate(line)) {
             return new TransactionDto(OperationType.valueOf(oneLineData[OPERATION]),
                     oneLineData[FRUIT_NAME], Integer.parseInt(oneLineData[QUANTITY]));
-        } else {
-            throw new RuntimeException("Input data is invalid");
-        }
     }
 }

@@ -27,8 +27,14 @@ public class ValidatorImplTest {
 
     @Test
     public void validate_emptyFruitName_notOk() {
-        boolean actual = validator.validate("b,,25");
+        boolean actual = validator.validate("b, ,25");
         Assert.assertFalse("Fruit name is empty", actual);
+    }
+
+    @Test
+    public void validate_invalidFruitQuantity_notOk() {
+        boolean actual = validator.validate("b,banana,not");
+        Assert.assertFalse("Invalid quantity", actual);
     }
 
     @Test

@@ -4,14 +4,14 @@ import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.Parser;
 import core.basesyntax.strategy.OperationType;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private Parser<TransactionDto> parser;
+    private static Parser<TransactionDto> parser;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         parser = new ParserImpl(new ValidatorImpl());
     }
 
@@ -19,7 +19,7 @@ public class ParserImplTest {
     public void parseTo_validData_ok() {
         TransactionDto expected = new TransactionDto(OperationType.b, "banana", 28);
         TransactionDto actual = parser.parseTo("b,banana,28");
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

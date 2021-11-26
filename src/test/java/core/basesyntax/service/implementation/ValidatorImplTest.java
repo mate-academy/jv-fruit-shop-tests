@@ -2,14 +2,14 @@ package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.Validator;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ValidatorImplTest {
-    private Validator validator;
+    private static Validator validator;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         validator = new ValidatorImpl();
     }
 

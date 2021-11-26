@@ -27,7 +27,7 @@ public class PurchaseOperationHandlerTest {
         int expected = 5;
         purchase.operate("banana", 20);
         int actual = Storage.storage.get(new Fruit("banana"));
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)

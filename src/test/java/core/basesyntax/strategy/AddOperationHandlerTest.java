@@ -4,14 +4,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationHandlerTest {
-    private OperationHandler add;
+    private static OperationHandler add;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         add = new AddOperationHandler();
         Storage.storage.put(new Fruit("banana"), 25);
     }

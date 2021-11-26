@@ -49,4 +49,16 @@ public class ValidatorImplTest {
         String line = "r,banana,100,20";
         validator.validate(line);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void validate_emptyProduct_notOk() {
+        String line = "r,,20";
+        validator.validate(line);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void validate_emptyOperation_notOk() {
+        String line = ",banana,20";
+        validator.validate(line);
+    }
 }

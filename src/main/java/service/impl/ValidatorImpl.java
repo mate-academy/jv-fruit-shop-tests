@@ -6,7 +6,7 @@ import service.Validator;
 public class ValidatorImpl implements Validator {
     private static final String SEPARATOR = ",";
     private static final int INDEX_OF_QUANTITY = 2;
-    private static final String PATTERN_LINE = "[bprs],[a-z]*,[0-9]*";
+    private static final String PATTERN_LINE = "[bprs],[a-z]+,[0-9]+";
 
     @Override
     public boolean validate(String line) {

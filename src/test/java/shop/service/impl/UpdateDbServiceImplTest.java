@@ -17,6 +17,9 @@ import shop.service.action.IncreaseActionHandler;
 public class UpdateDbServiceImplTest {
     private static UpdateDbService updateDbService;
     private static FruitDao fruitDao;
+    private static final int ACTION_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int COUNT_INDEX = 2;
 
     @BeforeClass
     public static void beforeAll() {
@@ -26,7 +29,8 @@ public class UpdateDbServiceImplTest {
         actionMap.put(ActionType.SUPPLY.getAlias(), new IncreaseActionHandler(fruitDao));
         actionMap.put(ActionType.RETURN.getAlias(), new IncreaseActionHandler(fruitDao));
         actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler(fruitDao));
-        updateDbService = new UpdateDbServiceImpl(actionMap);
+        updateDbService = new UpdateDbServiceImpl(actionMap,
+                ACTION_INDEX, FRUIT_NAME_INDEX, COUNT_INDEX);
     }
 
     @Test

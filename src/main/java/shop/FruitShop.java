@@ -22,6 +22,9 @@ import shop.service.impl.ValidatorImpl;
 public class FruitShop {
     private static final String INPUT_FILE_NAME = "src\\main\\resources\\input.csv";
     private static final String OUTPUT_FILE_NAME = "src\\main\\resources\\output.csv";
+    private static final int ACTION_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int COUNT_INDEX = 2;
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
@@ -31,7 +34,8 @@ public class FruitShop {
         actionMap.put(ActionType.RETURN.getAlias(), new IncreaseActionHandler(fruitDao));
         actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler(fruitDao));
 
-        UpdateDbService updateDbService = new UpdateDbServiceImpl(actionMap);
+        UpdateDbService updateDbService = new UpdateDbServiceImpl(actionMap,
+                ACTION_INDEX, FRUIT_NAME_INDEX, COUNT_INDEX);
         Reader reader = new CsvReaderImpl();
         Writer writer = new CsvWriterImpl();
         Validator validator = new ValidatorImpl();

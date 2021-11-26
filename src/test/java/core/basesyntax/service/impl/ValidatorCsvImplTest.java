@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoCsvImpl;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.activitiy.ActivityHandler;
 import core.basesyntax.service.activitiy.ActivityType;
@@ -18,6 +20,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ValidatorCsvImplTest {
+    private static StorageDao storageDao;
     private static Validator validator;
     private static Map<String, ActivityHandler> activityHandlerMap;
     private static List<String> fileData;
@@ -27,11 +30,12 @@ public class ValidatorCsvImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        storageDao = new StorageDaoCsvImpl();
         activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler());
+        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler(storageDao));
         validator = new ValidatorCsvImpl(activityHandlerMap);
         fileData = new ArrayList<>();
     }

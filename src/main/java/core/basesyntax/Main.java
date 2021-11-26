@@ -25,14 +25,15 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        StorageDao storageDao = new StorageDaoCsvImpl();
+
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler());
+        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler(storageDao));
 
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(activityHandlerMap);
-        StorageDao storageDao = new StorageDaoCsvImpl();
 
         Reader reader = new ReaderCsvImpl();
         Validator validator = new ValidatorCsvImpl(activityHandlerMap);

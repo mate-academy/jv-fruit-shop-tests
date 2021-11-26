@@ -1,14 +1,13 @@
 package core.basesyntax.service.activitiy;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoCsvImpl;
 import core.basesyntax.model.FruitCrate;
 
 public class RemovingHandler implements ActivityHandler {
     private final StorageDao storageDao;
 
-    public RemovingHandler() {
-        this.storageDao = new StorageDaoCsvImpl();
+    public RemovingHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override

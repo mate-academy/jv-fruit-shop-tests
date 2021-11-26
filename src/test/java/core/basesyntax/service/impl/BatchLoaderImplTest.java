@@ -37,13 +37,13 @@ public class BatchLoaderImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler());
-        activitiesStrategy = new ActivitiesStrategyImpl(activityHandlerMap);
         storageDao = new StorageDaoCsvImpl();
+        activityHandlerMap = new HashMap<>();
+        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler(storageDao));
+        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler(storageDao));
+        activitiesStrategy = new ActivitiesStrategyImpl(activityHandlerMap);
         batchLoader = new BatchLoaderImpl(storageDao, activitiesStrategy);
         fileData = new ArrayList<>();
         shopStorage = new ArrayList<>(List.of(new FruitCrate("banana", 125),

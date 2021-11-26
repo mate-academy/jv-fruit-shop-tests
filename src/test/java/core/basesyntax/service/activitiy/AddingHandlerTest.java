@@ -21,7 +21,7 @@ public class AddingHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         storageDao = new StorageDaoCsvImpl();
-        activityHandler = new AddingHandler();
+        activityHandler = new AddingHandler(storageDao);
     }
 
     @Before

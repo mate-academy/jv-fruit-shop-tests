@@ -21,7 +21,7 @@ public class RemovingHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         storageDao = new StorageDaoCsvImpl();
-        activityHandler = new RemovingHandler();
+        activityHandler = new RemovingHandler(storageDao);
     }
 
     @Before

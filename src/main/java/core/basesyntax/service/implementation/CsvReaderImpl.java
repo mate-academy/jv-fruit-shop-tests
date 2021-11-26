@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderImpl implements Reader {
+public class CsvReaderImpl implements Reader {
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> lines = new ArrayList<>();

@@ -15,7 +15,7 @@ public class ParserImpl implements Parser<TransactionDto> {
         this.validator = validator;
     }
 
-    public TransactionDto parseTo(String line) {
+    public TransactionDto parse(String line) {
         String[] oneLineData = line.split(",");
         if (validator.validate(line)) {
             return new TransactionDto(OperationType.valueOf(oneLineData[OPERATION]),

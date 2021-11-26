@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
+import core.basesyntax.service.implementation.CsvReaderImpl;
 import core.basesyntax.service.implementation.ParserImpl;
-import core.basesyntax.service.implementation.ReaderImpl;
 import core.basesyntax.service.implementation.ReportImpl;
 import core.basesyntax.service.implementation.ValidatorImpl;
 import core.basesyntax.service.implementation.WriterImpl;
@@ -30,12 +30,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Reader reader = new ReaderImpl();
+        Reader reader = new CsvReaderImpl();
         List<String> lines = reader.readFromFile(FILE_PATH_TO_READ);
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         for (String line : lines) {
-            transactionDtoList.add(parser.parseTo(line));
+            transactionDtoList.add(parser.parse(line));
         }
 
         for (TransactionDto transactionDto : transactionDtoList) {

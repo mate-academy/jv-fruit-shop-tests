@@ -38,19 +38,13 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_invalidFruitQuantity_notOk() {
-        boolean actual = validator.validate("b,banana,not");
-        Assert.assertFalse("Invalid quantity", actual);
-    }
-
-    @Test
-    public void validate_NegativeQuantity_notOk() {
+    public void validate_negativeQuantity_notOk() {
         boolean actual = validator.validate("b,banana,-8");
         Assert.assertFalse("Quantity is negative", actual);
     }
 
     @Test
-    public void validate_EmptyQuantity_notOk() {
+    public void validate_emptyQuantity_notOk() {
         boolean actual = validator.validate("b,banana,");
         Assert.assertFalse("Quantity is empty", actual);
     }

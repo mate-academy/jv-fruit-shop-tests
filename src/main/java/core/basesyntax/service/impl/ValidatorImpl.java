@@ -1,7 +1,7 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.ValidatorException;
-import core.basesyntax.services.Validator;
+import core.basesyntax.exception.ValidatorException;
+import core.basesyntax.service.Validator;
 import java.util.List;
 import java.util.regex.Pattern;
 

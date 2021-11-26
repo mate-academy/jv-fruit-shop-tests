@@ -1,4 +1,4 @@
-package core.basesyntax.services.operation;
+package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;

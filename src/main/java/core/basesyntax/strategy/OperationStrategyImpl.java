@@ -1,10 +1,10 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitStorageDaoImpl;
-import core.basesyntax.exceptions.OperationException;
-import core.basesyntax.services.operation.AddOperationHandlerImpl;
-import core.basesyntax.services.operation.OperationHandler;
-import core.basesyntax.services.operation.PurchaseOperationHandlerImpl;
+import core.basesyntax.exception.OperationException;
+import core.basesyntax.service.operation.AddOperationHandlerImpl;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.Map;
 

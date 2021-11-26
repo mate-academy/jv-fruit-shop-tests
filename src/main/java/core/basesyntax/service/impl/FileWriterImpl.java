@@ -1,6 +1,6 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.services.FileWriter;
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

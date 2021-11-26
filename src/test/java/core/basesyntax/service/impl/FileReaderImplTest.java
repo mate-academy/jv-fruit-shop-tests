@@ -1,8 +1,8 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.services.FileReader;
+import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;

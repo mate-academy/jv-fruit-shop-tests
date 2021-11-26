@@ -1,8 +1,8 @@
-package core.basesyntax.services.operation;
+package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.exceptions.OperationException;
+import core.basesyntax.exception.OperationException;
 import java.util.Map;
 import org.junit.After;
 import org.junit.BeforeClass;

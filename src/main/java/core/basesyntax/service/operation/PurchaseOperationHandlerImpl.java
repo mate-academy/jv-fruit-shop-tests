@@ -1,8 +1,8 @@
-package core.basesyntax.services.operation;
+package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
-import core.basesyntax.exceptions.OperationException;
+import core.basesyntax.exception.OperationException;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     private final FruitStorageDao fruitStorageDao;

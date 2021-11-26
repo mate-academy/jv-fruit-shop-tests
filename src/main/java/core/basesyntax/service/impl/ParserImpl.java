@@ -1,8 +1,8 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.services.Parser;
-import core.basesyntax.services.Validator;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.Validator;
 import java.util.ArrayList;
 import java.util.List;
 

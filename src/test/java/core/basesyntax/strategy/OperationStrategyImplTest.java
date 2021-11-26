@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.exceptions.OperationException;
-import core.basesyntax.services.operation.AddOperationHandlerImpl;
-import core.basesyntax.services.operation.PurchaseOperationHandlerImpl;
+import core.basesyntax.exception.OperationException;
+import core.basesyntax.service.operation.AddOperationHandlerImpl;
+import core.basesyntax.service.operation.PurchaseOperationHandlerImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

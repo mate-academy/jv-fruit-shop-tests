@@ -1,7 +1,7 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.services.Parser;
+import core.basesyntax.service.Parser;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Assert;

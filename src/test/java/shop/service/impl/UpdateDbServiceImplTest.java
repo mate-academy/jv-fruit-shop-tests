@@ -39,7 +39,7 @@ public class UpdateDbServiceImplTest {
         update.add("s,apple,15");
         update.add("s,banana,15");
         int size = DataStorage.storage.size();
-        Assert.assertTrue(updateDbService.updateStorage(update));
+        updateDbService.updateStorage(update);
         int after = DataStorage.storage.size();
         Assert.assertTrue(size != after);
     }

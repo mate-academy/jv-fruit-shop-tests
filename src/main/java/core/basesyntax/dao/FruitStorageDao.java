@@ -9,4 +9,6 @@ public interface FruitStorageDao {
     void update(String fruitName, int quantity);
 
     Set<Map.Entry<String, Integer>> getAll();
+
+    int getValue(String fruitName);
 }

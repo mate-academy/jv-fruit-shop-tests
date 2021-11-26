@@ -13,8 +13,7 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void apply(String fruitName, int quantity) {
-        if (Storage.storage.get(fruitName) == null || (Storage.storage.get(fruitName) != null
-                && Storage.storage.get(fruitName) - quantity < 0)) {
+        if (fruitStorageDao.getValue(fruitName) - quantity < 0) {
             throw new OperationException("Can not overgo zero balance"
                     + ", please check the quantity");
         }

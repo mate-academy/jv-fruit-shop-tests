@@ -19,12 +19,6 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test(expected = OperationException.class)
-    public void apply_PurchaseValueIsNull_notOk() {
-        testStorage.put("apple", null);
-        operationHandler.apply("apple", 10);
-    }
-
-    @Test(expected = OperationException.class)
     public void apply_PurchaseMinusResult_notOk() {
         testStorage.put("apple", 100);
         operationHandler.apply("apple", 120);

@@ -21,10 +21,4 @@ public class ParserImplTest {
         transactions.add(new Transaction("s", "banana", 100));
         Assert.assertEquals(parser.parse(lines), transactions);
     }
-
-    @Test(expected = RuntimeException.class)
-    public void parse_InvalidDate_NotOk() {
-        List<String> invalidLines = List.of("type,fruit,quantity","r,onion","end");
-        parser.parse(invalidLines);
-    }
 }

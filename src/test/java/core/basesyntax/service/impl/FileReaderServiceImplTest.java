@@ -8,14 +8,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static String inputPath;
-    private static String emptyFile;
+    private static final String inputPath = "src/test/java/resourcesTest/inputFileTest.csv";
+    private static final String emptyFile = "src/test/java/resourcesTest/empty.csv";
     private static FileReaderService fileReaderService;
     private static List<String> lines;
 
     @BeforeClass
     public static void beforeClass() {
-        emptyFile = "src/test/java/resourcesTest/empty.csv";
         lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,20");
@@ -23,8 +22,6 @@ public class FileReaderServiceImplTest {
         lines.add("p,banana,5");
         lines.add("s,banana,50");
         fileReaderService = new FileReaderServiceImpl();
-        inputPath = "src/test/java/resourcesTest/inputFileTest.csv";
-        emptyFile = "src/test/java/resourcesTest/empty.csv";
     }
 
     @Test

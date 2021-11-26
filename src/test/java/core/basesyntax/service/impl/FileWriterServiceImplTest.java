@@ -11,14 +11,13 @@ import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
-    private static String valueFilePath;
+    private static final String valueFilePath = "src/test/java/resourcesTest/outputFile.csv";
     private static final String ACTUAL_FILE_DATA = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
 
     @BeforeClass
     public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
-        valueFilePath = "src/test/java/resourcesTest/outputFile.csv";
     }
 
     @Test

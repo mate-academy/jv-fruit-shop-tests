@@ -6,7 +6,10 @@ import core.model.Fruit;
 import core.service.CreateReport;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CreateReportImplTest {
     private static List<Fruit> fruits;

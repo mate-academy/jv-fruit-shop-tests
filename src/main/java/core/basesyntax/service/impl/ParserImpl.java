@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.OperationFruitDto;
+import core.basesyntax.service.DataValidator;
 import core.basesyntax.service.Parser;
 
 public class ParserImpl implements Parser {
@@ -10,6 +11,8 @@ public class ParserImpl implements Parser {
 
     @Override
     public OperationFruitDto parse(String stringFromFile) {
+        DataValidator validate = new DataValidatorImpl();
+        validate.validate(stringFromFile);
         String[] strings = stringFromFile.split(",");
         String operation = strings[OPERATION_INDEX];
         return new OperationFruitDto(operation,

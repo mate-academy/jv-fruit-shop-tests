@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
+    private List<String> actual;
 
     @BeforeClass
     public static void beforeClass() {
@@ -18,16 +19,17 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_test_ok() {
+    public void createReport_testOneFruits_ok() {
         Storage.fruits.clear();
         Storage.fruits.add(new Fruit("banana", 207));
-        Storage.fruits.add(new Fruit("apple", 90));
-        List<String> actual;
         actual = reportService.createReport();
         List<String> expectedFirstList = List.of("fruit,quantity",
-                "banana,207", "apple,90");
+                "banana,207");
         assertEquals(expectedFirstList, actual);
+    }
 
+    @Test
+    public void createReport_testTwoFruits_ok() {
         Storage.fruits.clear();
         Storage.fruits.add(new Fruit("banana", 120));
         Storage.fruits.add(new Fruit("apple", 80));
@@ -35,7 +37,10 @@ public class ReportServiceImplTest {
         List<String> expectedSecondList = List.of("fruit,quantity",
                 "banana,120", "apple,80");
         assertEquals(expectedSecondList, actual);
+    }
 
+    @Test
+    public void createReport_testThreeFruits_ok() {
         Storage.fruits.clear();
         Storage.fruits.add(new Fruit("banana", 152));
         Storage.fruits.add(new Fruit("apple", 90));

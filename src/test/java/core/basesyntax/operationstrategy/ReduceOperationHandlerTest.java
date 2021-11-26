@@ -32,16 +32,10 @@ public class ReduceOperationHandlerTest {
 
     @Test
     public void apply_ReduceWithEnoughStorage_ok() {
-        Storage.fruits.add(new Fruit("apple", 20));
         Storage.fruits.add(new Fruit("banana", 100));
         handler.apply(reduceOperation);
-        Fruit expected = new Fruit("banana", 43);
-        Fruit actual = null;
-        for (Fruit fruit : Storage.fruits) {
-            if (fruit.getName().equals(expected.getName())) {
-                actual = fruit;
-            }
-        }
+        int expected = 43;
+        int actual = Storage.fruits.get(0).getQuantity();
         assertEquals(expected, actual);
     }
 

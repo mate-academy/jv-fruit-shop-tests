@@ -10,6 +10,7 @@ import org.junit.Test;
 public class ParserImplTest {
     private static Parser parser;
     private OperationFruitDto actual;
+    private OperationFruitDto expected;
     private String string;
 
     @BeforeClass
@@ -17,27 +18,42 @@ public class ParserImplTest {
         parser = new ParserImpl();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void parse_invalidOperation_notOk() {
+        expected = new OperationFruitDto("q", "apple", 100);
+        string = "q,apple,100";
+        actual = parser.parse(string);
+    }
+
     @Test
-    public void parse_validData_ok() {
-        OperationFruitDto expectedBalanceAppleDto
-                = new OperationFruitDto("b", "apple", 100);
+    public void parse_balanceValidData_ok() {
+        expected = new OperationFruitDto("b", "apple", 100);
         string = "b,apple,100";
         actual = parser.parse(string);
-        assertEquals(expectedBalanceAppleDto, actual);
-        OperationFruitDto expectedReturnBananaDto
-                = new OperationFruitDto("r", "banana", 50);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parse_returnValidData_ok() {
+        expected = new OperationFruitDto("r", "banana", 50);
         string = "r,banana,50";
         actual = parser.parse(string);
-        assertEquals(expectedReturnBananaDto, actual);
-        OperationFruitDto expectedSupplyCherryDto
-                = new OperationFruitDto("s", "cherry", 75);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parse_supplyValidData_ok() {
+        expected = new OperationFruitDto("s", "cherry", 75);
         string = "s,cherry,75";
         actual = parser.parse(string);
-        assertEquals(expectedSupplyCherryDto, actual);
-        OperationFruitDto expectedPurchasePineappleDto
-                = new OperationFruitDto("p", "pineapple", 20);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parse_purchaseValidData_ok() {
+        expected = new OperationFruitDto("p", "pineapple", 20);
         string = "p,pineapple,20";
         actual = parser.parse(string);
-        assertEquals(expectedPurchasePineappleDto, actual);
+        assertEquals(expected, actual);
     }
 }

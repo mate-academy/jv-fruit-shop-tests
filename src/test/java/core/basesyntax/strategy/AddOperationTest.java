@@ -1,10 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitMapDao;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class AddOperationTest {
     }
 
     @Test
-    public void addOperation_add10_Ok(){
+    public void addOperation_add10_Ok() {
         int expected = 20;
         operationAdd.apply(APPLE, 10);
         int result = Storage.map.get(APPLE);

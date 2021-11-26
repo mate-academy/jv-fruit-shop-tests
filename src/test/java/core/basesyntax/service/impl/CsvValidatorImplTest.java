@@ -1,16 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitMapDao;
-import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.model.OperationType;
 import core.basesyntax.service.Validator;
-import core.basesyntax.strategy.AddOperation;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.RemoveOperation;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -18,38 +10,26 @@ import org.junit.Test;
 
 public class CsvValidatorImplTest {
     private static Validator validator;
-    private static FruitStorageDao fruitDao;
-    private static Map<String, OperationHandler> operationHandlerMap;
     private static List<String> fileData;
 
     @BeforeClass
     public static void beforeClass() {
         validator = new CsvValidatorImpl();
         fileData = new ArrayList<>();
-        fruitDao = new FruitMapDao();
-        operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(OperationType.BALANCE.getOperation(),
-            new AddOperation(fruitDao));
-        operationHandlerMap.put(OperationType.PURCHASE.getOperation(),
-            new RemoveOperation(fruitDao));
-        operationHandlerMap.put(OperationType.SUPPLY.getOperation(),
-            new AddOperation(fruitDao));
-        operationHandlerMap.put(OperationType.RETURN.getOperation(),
-            new AddOperation(fruitDao));
     }
 
     @Before
     public void setUp() {
         fileData.clear();
         fileData.addAll(List.of("type,fruit,quantity",
-            "b,banana,20",
-            "b,apple,100",
-            "s,banana,100",
-            "s,apple,13",
-            "r,banana,10",
-            "r,apple,20",
-            "p,banana,5",
-            "p,apple,50"));
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "s,apple,13",
+                "r,banana,10",
+                "r,apple,20",
+                "p,banana,5",
+                "p,apple,50"));
     }
 
     @Test
@@ -99,7 +79,7 @@ public class CsvValidatorImplTest {
 
     @Test(expected = RuntimeException.class)
     public void validate_quantityContainsLetters_notOk() {
-        fileData.set(1, "b,banana,20");
+        fileData.set(1, "b,banana,twenty");
         validator.isValid(fileData);
     }
 

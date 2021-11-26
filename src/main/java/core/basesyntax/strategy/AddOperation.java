@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
-import java.util.stream.Stream;
 
 public class AddOperation implements OperationHandler {
     private final FruitStorageDao fruitStorage;

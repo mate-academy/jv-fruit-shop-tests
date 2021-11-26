@@ -82,7 +82,7 @@ public class FileServiceImplTest {
     @Test
     public void readFile_validFilePath_Ok() {
         List<String> expected =
-            List.of("type,fruit,quantity",
+                List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -112,5 +112,4 @@ public class FileServiceImplTest {
         String emptyPath = "";
         fileReader.read(emptyPath);
     }
-
 }

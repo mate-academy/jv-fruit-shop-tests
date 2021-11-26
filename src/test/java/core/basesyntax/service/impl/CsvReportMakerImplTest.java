@@ -2,8 +2,10 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportMaker;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,24 +13,26 @@ import org.junit.Test;
 public class CsvReportMakerImplTest {
 
     private static ReportMaker reportMaker;
-    private static Map<Fruit, Integer> batch;
+    private static Map<Fruit, Integer> storage;
     private static String report;
 
     @BeforeClass
     public static void beforeClass() {
         reportMaker = new CsvReportMakerImpl();
         report = "fruit,quantity" + System.lineSeparator()
-            + "banana,125" + System.lineSeparator()
-            + "apple,63";
+            + "banana,100" + System.lineSeparator()
+            + "apple,50";
         Fruit apple = new Fruit("apple");
         Fruit banana = new Fruit("banana");
-        batch = Map.of(apple, 63, banana, 125);
+        storage = new TreeMap<>(Comparator.comparingInt(fruit -> fruit.getName().hashCode()));
+        storage.put(apple, 50);
+        storage.put(banana, 100);
     }
 
     @Test
     public void makeReport_validBatch_Ok() {
         String expected = report;
-        String actual = reportMaker.makeReport(batch);
+        String actual = reportMaker.makeReport(storage);
         Assert.assertEquals(expected, actual);
     }
 

@@ -1,10 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitMapDao;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -28,11 +29,15 @@ public class RemoveOperationTest {
     }
 
     @Test
-    public void addOperation_minus10_Ok(){
+    public void removeOperation_minus10_Ok() {
         int expected = 90;
         operationRemove.apply(APPLE, 10);
         int result = Storage.map.get(APPLE);
         assertEquals(expected, result);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void removeOperation_negativeResult_Ok() {
+        operationRemove.apply(APPLE, 1000);
+    }
 }

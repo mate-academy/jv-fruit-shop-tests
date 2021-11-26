@@ -12,6 +12,7 @@ public class FileServiceImplTest {
     private static FileServiceImpl fileService;
     private static final String INPUT_FILE_PATH = "src/test/resources/input_test.csv";
     private static final String OUTPUT_FILE_PATH = "src/test/resources/report_test.csv";
+    private static final String EQUALS_FILE_PATH = "src/test/resources/test_writer.csv";
     private static String report;
 
     @BeforeClass
@@ -25,9 +26,10 @@ public class FileServiceImplTest {
     @Test
     public void write_validFilePathAndReport_Ok() {
         fileService.write(report, OUTPUT_FILE_PATH);
-        String expected = report;
+        String expected;
         String actual;
         try {
+            expected = Files.readString(Path.of(EQUALS_FILE_PATH));
             actual = Files.readString(Path.of(OUTPUT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Files.readString method can't read file "

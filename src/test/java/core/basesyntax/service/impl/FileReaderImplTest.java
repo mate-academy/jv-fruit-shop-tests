@@ -5,22 +5,24 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String INPUT_PATH = "src/test/java/testresources/testfruits-log.csv";
-    private static final String EMPTY_FILE = "src/test/java/testresources/empty_fileTest.csv";
+    private static final String INPUT_PATH = "src/test/resources/testfruits-log.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty_fileTest.csv";
     private static final String INVALID_PATH_EXAMPLE = "123123123123asd";
     private static FileReader fileReader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileReader = new FileReaderImpl();
     }
 
     @Test
-    public void file_path_isValid_ok() {
+    public void read_pathIsValid_ok() {
         List<String> expected = List.of("type,fruit,quantity",
                 "b,apple,120",
                 "s,banana,50",
@@ -29,22 +31,22 @@ public class FileReaderImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void file_path_isNotValid_notOk() {
+    public void read_pathsIsValid_notOk() {
         fileReader.read(INVALID_PATH_EXAMPLE);
     }
 
     @Test (expected = RuntimeException.class)
-    public void file_path_isNull_notOk() {
+    public void read_pathIsNull_notOk() {
         fileReader.read(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void file_path_isEmpty_ok() {
+    public void read_pathIsEmpty_ok() {
         fileReader.read("");
     }
 
     @Test
-    public void file_isEmpty_ok() {
+    public void read_fileIsEmpty_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.read(EMPTY_FILE);
         assertEquals(expected, actual);

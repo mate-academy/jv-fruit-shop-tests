@@ -2,15 +2,16 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
     private static final String VALID_FILE_PATH
-            = "src/test/java/testresources/resultFruits-logTest.csv";
+            = "src/test/resources/resultFruits-logTest.csv";
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileWriter = new FileWriterImpl();
     }
 

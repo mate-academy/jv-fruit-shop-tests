@@ -4,6 +4,7 @@ import core.basesyntax.exception.ValidatorException;
 import core.basesyntax.service.Validator;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ValidatorImplTest {
@@ -11,8 +12,8 @@ public class ValidatorImplTest {
     private static final String TITLE_LINE = "type,fruit,quantity";
     private static final String VALID_STRING = "b,pineapple,200";
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         validator = new ValidatorImpl();
     }
 

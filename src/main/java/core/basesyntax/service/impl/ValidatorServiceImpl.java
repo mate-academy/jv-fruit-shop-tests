@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ValidatorService;
 import core.basesyntax.exception.ValidatorServiceException;
+import core.basesyntax.service.ValidatorService;
 
 public class ValidatorServiceImpl implements ValidatorService<String> {
     private static final int EXPECTED_ARRAY_LENGTH = 3;

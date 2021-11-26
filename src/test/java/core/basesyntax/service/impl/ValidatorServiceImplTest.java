@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.service.ValidatorService;
 import core.basesyntax.exception.ValidatorServiceException;
+import core.basesyntax.service.ValidatorService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

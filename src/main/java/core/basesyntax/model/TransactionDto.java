@@ -27,8 +27,12 @@ public class TransactionDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         TransactionDto that = (TransactionDto) o;
         return quantity == that.quantity && Objects.equals(operation, that.operation)
                                          && Objects.equals(fruitName, that.fruitName);

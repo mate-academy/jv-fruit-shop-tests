@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exception.ValidatorServiceException;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.exception.ValidatorServiceException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;

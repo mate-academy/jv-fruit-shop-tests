@@ -24,9 +24,8 @@ public class ActionStrategyHandlerImplTest {
         Assert.assertEquals(actionStrategyHandler.get("s").getClass(), IncreaseActionHandler.class);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void strategy_get_not_ok() {
-        Assert.assertNotEquals(actionStrategyHandler.get("b").getClass(),
-                IncreaseActionHandler.class);
+        Assert.assertNull(actionStrategyHandler.get("b"));
     }
 }

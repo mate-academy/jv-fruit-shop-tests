@@ -7,7 +7,6 @@ import java.util.List;
 import shop.service.Writer;
 
 public class CsvWriterImpl implements Writer {
-
     @Override
     public boolean write(List<String> dataToWrite, String outputFile) {
         try {

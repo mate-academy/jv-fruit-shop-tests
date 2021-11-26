@@ -8,18 +8,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import shop.dao.FruitDao;
 import shop.dao.FruitDaoImpl;
+import shop.db.DataStorage;
 import shop.model.ActionType;
 import shop.service.UpdateDbService;
 import shop.service.action.ActionHandler;
+import shop.service.action.ActionStrategyHandler;
 import shop.service.action.DecreaseActionHandler;
 import shop.service.action.IncreaseActionHandler;
 
 public class UpdateDbServiceImplTest {
     private static UpdateDbService updateDbService;
     private static FruitDao fruitDao;
-    private static final int ACTION_INDEX = 0;
-    private static final int FRUIT_NAME_INDEX = 1;
-    private static final int COUNT_INDEX = 2;
 
     @BeforeClass
     public static void beforeAll() {
@@ -29,8 +28,8 @@ public class UpdateDbServiceImplTest {
         actionMap.put(ActionType.SUPPLY.getAlias(), new IncreaseActionHandler(fruitDao));
         actionMap.put(ActionType.RETURN.getAlias(), new IncreaseActionHandler(fruitDao));
         actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler(fruitDao));
-        updateDbService = new UpdateDbServiceImpl(actionMap,
-                ACTION_INDEX, FRUIT_NAME_INDEX, COUNT_INDEX);
+        ActionStrategyHandler actionStrategyHandler = new ActionStrategyHandlerImpl(actionMap);
+        updateDbService = new UpdateDbServiceImpl(actionStrategyHandler);
     }
 
     @Test
@@ -39,7 +38,10 @@ public class UpdateDbServiceImplTest {
         update.add("r,apple,10");
         update.add("s,apple,15");
         update.add("s,banana,15");
+        int size = DataStorage.storage.size();
         Assert.assertTrue(updateDbService.updateStorage(update));
+        int after = DataStorage.storage.size();
+        Assert.assertTrue(size != after);
     }
 
     @Test
@@ -47,6 +49,7 @@ public class UpdateDbServiceImplTest {
         List<String> update = new ArrayList<>();
         update.add("s,mates,10");
         updateDbService.updateStorage(update);
-        Assert.assertNotNull(fruitDao.get("mates"));
+        Assert.assertNotNull(DataStorage.storage.stream()
+                .filter(e -> e.getName().equals("mates")).findFirst());
     }
 }

@@ -27,12 +27,6 @@ public class ValidatorImplTest {
         validator.valid(new ArrayList<>());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void validator_empty_data_ok() {
-        List<String> testList = new ArrayList<>();
-        validator.valid(testList);
-    }
-
     @Test
     public void validator_ok() {
         List<String> testList = new ArrayList<>();

@@ -11,13 +11,13 @@ import shop.db.DataStorage;
 import shop.model.Fruit;
 
 public class FruitDaoImplTest {
-    private static FruitDaoImpl fruitDao;
-    private static Fruit test_fruit;
+    private static FruitDao fruitDao;
+    private static Fruit testFruit;
 
     @BeforeClass
     public static void beforeAll() {
         fruitDao = new FruitDaoImpl();
-        test_fruit = new Fruit("apple", 1);
+        testFruit = new Fruit("apple", 1);
     }
 
     @Test
@@ -32,7 +32,8 @@ public class FruitDaoImplTest {
 
     @Test
     public void fruitDao_add_ok() {
-        Assert.assertTrue(fruitDao.add(test_fruit));
+        DataStorage.storage.add(testFruit);
+        Assert.assertTrue(DataStorage.storage.contains(testFruit));
     }
 
     @Test(expected = RuntimeException.class)
@@ -42,8 +43,8 @@ public class FruitDaoImplTest {
 
     @Test
     public void fruitDao_get_ok() {
-        fruitDao.add(test_fruit);
-        assertEquals(test_fruit, fruitDao.get(test_fruit.getName()));
+        fruitDao.add(testFruit);
+        assertEquals(testFruit, fruitDao.get(testFruit.getName()));
     }
 
     @Test

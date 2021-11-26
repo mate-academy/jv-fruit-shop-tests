@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import shop.db.DataStorage;
 import shop.service.Writer;
 
 public class CsvWriterImplTest {
@@ -18,11 +16,6 @@ public class CsvWriterImplTest {
     @BeforeClass
     public static void beforeAll() {
         writer = new CsvWriterImpl();
-    }
-
-    @After
-    public void afterAll() {
-        DataStorage.storage.clear();
     }
 
     @Test

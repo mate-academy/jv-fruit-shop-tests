@@ -14,6 +14,15 @@ public class ReaderImplTest {
         reader = new ReaderImpl();
     }
 
+    @Test
+    public void readFromFile_validData_ok() {
+        List<String> expected = List.of("b,banana,20", "b,apple,100",
+                "s,banana,100", "p,banana,13", "r,apple,10",
+                "p,apple,20", "p,banana,5", "s,banana,50");
+        List<String> actual = reader.readFromFile("src/test/resources/inputTest.csv");
+        Assert.assertEquals(actual, expected);
+    }
+
     @Test(expected = RuntimeException.class)
     public void readFromFile_invalidFilePath_notOk() {
         reader.readFromFile("fruitInput.csv");

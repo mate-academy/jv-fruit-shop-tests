@@ -45,7 +45,7 @@ public class ValidatorImplTest {
 
     @Test
     public void validate_NegativeQuantity_notOk() {
-        boolean actual = validator.validate("b,banana,-10");
+        boolean actual = validator.validate("b,banana,-8");
         Assert.assertFalse("Quantity is negative", actual);
     }
 
@@ -57,7 +57,7 @@ public class ValidatorImplTest {
 
     @Test
     public void validate_moreThanThreeParameters_notOk() {
-        boolean actual = validator.validate("b,banana,25,40");
+        boolean actual = validator.validate("b,banana,28,potato,32");
         Assert.assertFalse("Incorrect input line, more than 3 parameters", actual);
     }
 }

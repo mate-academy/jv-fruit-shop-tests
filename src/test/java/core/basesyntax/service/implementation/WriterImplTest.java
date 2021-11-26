@@ -19,11 +19,11 @@ public class WriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_invalidFilePath_notOk() {
-        writer.writeToFile("", "Some_report");
+        writer.writeToFile(" ", "Some_report");
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullInputValue_notOk() {
-        writer.writeToFile("src/test/resources/reportTest.csv", null);
+        writer.writeToFile(" ", null);
     }
 }

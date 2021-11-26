@@ -1,6 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,24 +12,39 @@ import org.junit.Test;
 
 public class WriterServiceTest {
     private static WriterService writerService;
-    private static final String OUTPUT_FILE_PATH = "src/test/resources/outputFile.csv";
+    private static final String EXPECTED_OUTPUT_FILE_PATH
+            = "src/test/resources/outputExpectedFile.csv";
+    private static final String ACTUAL_OUTPUT_FILE_PATH
+            = "src/test/resources/outputActualFile.csv";
+    private static final String EXPECTED_EMPTY_OUTPUT_FILE_PATH
+            = "src/test/resources/emptyFile.csv";
+    private static final String ACTUAL_EMPTY_OUTPUT_FILE_PATH
+            = "src/test/resources/emptySecondFile.csv";
     private static String expected;
     private static String actual;
 
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
-        expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,50" + System.lineSeparator()
-                + "apple,80";
+        expected = "";
         actual = "";
     }
 
     @Test
     public void writeValidReportToValidPath_Ok() {
-        writerService.writeToFile(OUTPUT_FILE_PATH, expected);
         try {
-            actual = Files.readString(Path.of(OUTPUT_FILE_PATH));
+            actual = Files.readString(Path.of(EXPECTED_OUTPUT_FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+        try (BufferedWriter bufferedWriter =
+                     new BufferedWriter(new FileWriter(ACTUAL_OUTPUT_FILE_PATH))) {
+            bufferedWriter.write(actual);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write data to file!", e);
+        }
+        try {
+            expected = Files.readString(Path.of(ACTUAL_OUTPUT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -36,14 +53,23 @@ public class WriterServiceTest {
 
     @Test
     public void writeEmptyReportToValidPath_Ok() {
-        String emptyReport = "";
-        writerService.writeToFile(OUTPUT_FILE_PATH, emptyReport);
         try {
-            actual = Files.readString(Path.of(OUTPUT_FILE_PATH));
+            actual = Files.readString(Path.of(EXPECTED_EMPTY_OUTPUT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException();
         }
-        Assert.assertEquals(emptyReport, actual);
+        try (BufferedWriter bufferedWriter =
+                     new BufferedWriter(new FileWriter(ACTUAL_EMPTY_OUTPUT_FILE_PATH))) {
+            bufferedWriter.write(actual);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write data to file!", e);
+        }
+        try {
+            expected = Files.readString(Path.of(ACTUAL_EMPTY_OUTPUT_FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+        Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
@@ -65,6 +91,6 @@ public class WriterServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void writeNullReport_NotOk() {
-        writerService.writeToFile(OUTPUT_FILE_PATH, null);
+        writerService.writeToFile(EXPECTED_OUTPUT_FILE_PATH, null);
     }
 }

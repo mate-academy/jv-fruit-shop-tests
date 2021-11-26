@@ -47,4 +47,35 @@ public class ParserServiceTest {
     public void validParse_Ok() {
         Assert.assertEquals(expected, parserService.parseData(actual));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void emptyOperation_NotOk() {
+        actual.add("banana,0");
+        parserService.parseData(actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void emptyFruit_NotOk() {
+        actual.add("b,7");
+        parserService.parseData(actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void emptyAmount_NotOk() {
+        actual.add("b,apple");
+        parserService.parseData(actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullParse_NotOk() {
+        parserService.parseData(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void notValidListParse_NotOk() {
+        List<String> emptyList = new ArrayList<>();
+        emptyList.add("some info");
+        emptyList.add("afsdaf");
+        parserService.parseData(emptyList);
+    }
 }

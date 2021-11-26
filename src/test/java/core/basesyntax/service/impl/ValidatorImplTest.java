@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.exception.ValidatorException;
 import core.basesyntax.service.Validator;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

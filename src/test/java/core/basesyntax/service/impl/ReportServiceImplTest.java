@@ -3,12 +3,11 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.Map;
-
 
 public class ReportServiceImplTest {
     private static ReportService reportService;

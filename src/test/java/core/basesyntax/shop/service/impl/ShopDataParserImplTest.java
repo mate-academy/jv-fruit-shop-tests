@@ -17,7 +17,7 @@ public class ShopDataParserImplTest {
     }
 
     @Test
-    public void distribute_ParsingDataToStorage_ok() {
+    public void distribute_parsingDataToStorage_ok() {
         String table = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"

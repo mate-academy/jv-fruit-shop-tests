@@ -1,7 +1,7 @@
 package core.basesyntax.shop.strategy;
 
 import core.basesyntax.shop.service.FruitShopService;
-import core.basesyntax.shop.service.Operations;
+import core.basesyntax.shop.service.Operation;
 import core.basesyntax.shop.service.impl.FruitShopServiceAdd;
 import core.basesyntax.shop.service.impl.FruitShopServiceSubtract;
 import java.util.HashMap;
@@ -12,13 +12,13 @@ public class FruitShopStrategyImpl implements FruitShopStrategy {
             operationsService = new HashMap<>();
 
     static {
-        operationsService.put(Operations.BALANCE.getOperationCode(),
+        operationsService.put(Operation.BALANCE.getOperationCode(),
                 FruitShopServiceAdd.class);
-        operationsService.put(Operations.SUPPLY.getOperationCode(),
+        operationsService.put(Operation.SUPPLY.getOperationCode(),
                 FruitShopServiceAdd.class);
-        operationsService.put(Operations.RETURN_BACK.getOperationCode(),
+        operationsService.put(Operation.RETURN_BACK.getOperationCode(),
                 FruitShopServiceAdd.class);
-        operationsService.put(Operations.PURCHASE.getOperationCode(),
+        operationsService.put(Operation.PURCHASE.getOperationCode(),
                 FruitShopServiceSubtract.class);
     }
 

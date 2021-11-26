@@ -1,6 +1,7 @@
 package core.basesyntax.shop.dao;
 
 import core.basesyntax.shop.db.FruitShopStorage;
+import core.basesyntax.shop.exception.InsufficientGoodsException;
 import core.basesyntax.shop.model.Fruit;
 import java.util.Map;
 

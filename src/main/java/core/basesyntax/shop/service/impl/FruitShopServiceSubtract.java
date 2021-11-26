@@ -1,7 +1,7 @@
 package core.basesyntax.shop.service.impl;
 
 import core.basesyntax.shop.dao.FruitShopDao;
-import core.basesyntax.shop.dao.InsufficientGoodsException;
+import core.basesyntax.shop.exception.InsufficientGoodsException;
 import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
 

@@ -16,7 +16,7 @@ public class ReaderFromCsvFile implements Reader {
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file" + filepath, e);
+            throw new RuntimeException("Can't read from file " + filepath, e);
         }
         return csvReadBuilder.toString().trim();
     }

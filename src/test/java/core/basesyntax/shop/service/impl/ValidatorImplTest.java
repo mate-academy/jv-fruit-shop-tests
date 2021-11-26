@@ -2,12 +2,19 @@ package core.basesyntax.shop.service.impl;
 
 import core.basesyntax.shop.service.Validator;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ValidatorImplTest {
+    private static Validator validator;
+
+    @BeforeClass
+    public static void beforeClass() {
+        validator = new ValidatorImpl();
+    }
+
     @Test
     public void validate_correctData_ok() {
-        Validator validator = new ValidatorImpl();
         String correctData = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
@@ -25,7 +32,6 @@ public class ValidatorImplTest {
 
     @Test
     public void validate_corruptedData_notOk() {
-        Validator validator = new ValidatorImpl();
         String corruptedData = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
@@ -48,7 +54,6 @@ public class ValidatorImplTest {
 
     @Test
     public void validate_invalidData_notOk() {
-        Validator validator = new ValidatorImpl();
         String invalidData = "Phlebas the Phoenician, a fortnight dead,\n"
                 + "Forgot the cry of gulls, and the deep seas swell\n"
                 + "And the profit and loss.\n"

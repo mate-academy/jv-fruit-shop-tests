@@ -12,11 +12,11 @@ public class WriterToCsvFile implements Writer {
         File file = new File(toFileName);
         try {
             file.createNewFile();
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFileName));
-            bufferedWriter.write(report);
-            bufferedWriter.close();
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFileName))) {
+                bufferedWriter.write(report);
+            }
         } catch (IOException e) {
-            throw new RuntimeException("Can't operate with file" + toFileName, e);
+            throw new RuntimeException("Can't operate with file " + toFileName, e);
         }
         return true;
     }

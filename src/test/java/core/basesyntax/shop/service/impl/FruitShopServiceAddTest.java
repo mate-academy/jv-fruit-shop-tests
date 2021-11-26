@@ -8,9 +8,19 @@ import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceAddTest {
+    private static FruitShopDao fruitShopDao;
+    private static FruitShopService fruitShopService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitShopDao = new FruitShopDaoImpl();
+        fruitShopService = new FruitShopServiceAdd(fruitShopDao);
+    }
+
     @AfterClass
     public static void clearAfterTest() {
         getAll().clear();
@@ -18,8 +28,6 @@ public class FruitShopServiceAddTest {
 
     @Test
     public void apply_addFruitsToStrorage_ok() {
-        FruitShopDao fruitShopDao = new FruitShopDaoImpl();
-        FruitShopService fruitShopService = new FruitShopServiceAdd(fruitShopDao);
         Fruit banana = new Fruit("banana");
         fruitShopService.apply(banana, 10);
         int actual = getAll().get(banana);

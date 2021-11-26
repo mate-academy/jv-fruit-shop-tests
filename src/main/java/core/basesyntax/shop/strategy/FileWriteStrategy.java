@@ -11,7 +11,7 @@ public interface FileWriteStrategy {
             case "csv":
                 return new WriterToCsvFile();
             default:
-                throw new RuntimeException("Invalid file type");
+                throw new RuntimeException("Unsupported file type: " + extension);
         }
     }
 }

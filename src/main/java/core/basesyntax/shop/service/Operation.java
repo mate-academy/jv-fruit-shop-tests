@@ -3,7 +3,7 @@ package core.basesyntax.shop.service;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public enum Operations {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -11,7 +11,7 @@ public enum Operations {
 
     private String operationCode;
 
-    Operations(String operationCode) {
+    Operation(String operationCode) {
         this.operationCode = operationCode;
     }
 
@@ -20,8 +20,8 @@ public enum Operations {
     }
 
     public static String getOperationsString() {
-        return Arrays.stream(Operations.values())
-                .map(Operations::getOperationCode)
+        return Arrays.stream(Operation.values())
+                .map(Operation::getOperationCode)
                 .collect(Collectors.joining());
     }
 }

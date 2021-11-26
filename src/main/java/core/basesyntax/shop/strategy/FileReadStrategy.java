@@ -11,7 +11,7 @@ public interface FileReadStrategy {
             case "csv":
                 return new ReaderFromCsvFile();
             default:
-                throw new RuntimeException("Invalid file type");
+                throw new RuntimeException("Unsupported file type: " + extension);
         }
     }
 }

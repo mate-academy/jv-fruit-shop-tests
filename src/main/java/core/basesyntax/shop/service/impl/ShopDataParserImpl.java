@@ -1,6 +1,6 @@
 package core.basesyntax.shop.service.impl;
 
-import static core.basesyntax.shop.service.Operations.getOperationsString;
+import static core.basesyntax.shop.service.Operation.getOperationsString;
 
 import core.basesyntax.shop.dao.FruitShopDao;
 import core.basesyntax.shop.model.Fruit;

@@ -11,8 +11,8 @@ public class ReportServiceImpl implements ReportService {
     private static final String FIRST_LINE = "fruit,quantity";
     private final FruitDao fruitDao;
 
-    public ReportServiceImpl() {
-        fruitDao = new FruitDaoImpl();
+    public ReportServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     public List<String> makeReport() {

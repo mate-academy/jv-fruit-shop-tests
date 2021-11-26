@@ -35,7 +35,7 @@ public class FruitShop {
         Reader reader = new CsvReaderImpl();
         Writer writer = new CsvWriterImpl();
         Validator validator = new ValidatorImpl();
-        ReportService reportService = new ReportServiceImpl();
+        ReportService reportService = new ReportServiceImpl(fruitDao);
 
         List<String> parsedData = reader.read(INPUT_FILE_NAME);
         if (validator.valid(parsedData)) {

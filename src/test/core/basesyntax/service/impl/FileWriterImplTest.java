@@ -28,7 +28,7 @@ public class FileWriterImplTest {
     }
 
     @AfterClass
-    public static void clearFiles() {
+    public static void clearFile() {
         try {
             Files.deleteIfExists(Paths.get(pathToWrite));
         } catch (IOException e) {
@@ -62,7 +62,7 @@ public class FileWriterImplTest {
         try {
             expected = Files.readString(Path.of(pathToWrite));
         } catch (IOException e) {
-            throw new RuntimeException("reader was crashed", e);
+            throw new RuntimeException("Util reader was crashed", e);
         }
         String actual = text;
         Assert.assertEquals(expected, actual);

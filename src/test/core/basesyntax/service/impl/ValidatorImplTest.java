@@ -13,7 +13,7 @@ public class ValidatorImplTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void initialization() {
+    public static void initializeFields() {
         validator = new ValidatorImpl();
     }
 

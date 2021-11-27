@@ -25,12 +25,12 @@ public class Main {
     public static void main(String[] args) {
         FruitShopFileReader reader = new FruitShopFileReaderImpl();
         List<String> lines = reader.read("./src/main/resources/fruits.csv");
+        Validator validator = new ValidatorImpl();
         Parser<TransactionDto> parser = new ParserImpl();
         List<TransactionDto> transactions = new ArrayList<>();
-        Validator validator = new ValidatorImpl();
         for (String line : lines) {
-            if (parser.parseLine(line, validator) != null) {
-                transactions.add(parser.parseLine(line, validator));
+            if (validator.validateLine(line)) {
+                transactions.add(parser.parseLine(line));
             }
         }
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();

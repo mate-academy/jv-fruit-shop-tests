@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.FruitShopFileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class FruitShopFileReaderImplTest {
-    private final FruitShopFileReaderImpl fruitShopFileReader = new FruitShopFileReaderImpl();
+    private final FruitShopFileReader fruitShopFileReader = new FruitShopFileReaderImpl();
     private final String fileName = "./src/test/resources/testFruits.csv";
     private final String incorrectFileName = "./src/test/resources/incorrectFileName.csv";
     private final Path path = Paths.get("./src/test/resources/testFruits.csv");

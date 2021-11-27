@@ -23,7 +23,7 @@ public class FileWriterImplTest {
     @BeforeClass
     public static void initializeFields() {
         fileWriter = new FileWriterImpl();
-        pathToWrite = "resources/report.csv";
+        pathToWrite = "src/test/resources/activities.csv";
         text = "Test!\\ //" + System.lineSeparator() + "The end";
     }
 

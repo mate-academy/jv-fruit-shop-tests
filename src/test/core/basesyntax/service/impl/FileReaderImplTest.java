@@ -21,28 +21,28 @@ public class FileReaderImplTest {
 
     @Test
     public void read_WhitespaceInsidePath_throwException() {
-        String inputFilePath = "resources/ activities.csv";
+        String inputFilePath = "src/test/resources/ activities.csv";
         expectedException.expect(RuntimeException.class);
         fileReader.read(inputFilePath);
     }
 
     @Test
     public void read_WhitespaceInTheEndOfPath_throwException() {
-        String inputFilePath = "resources/activities.csv ";
+        String inputFilePath = "src/test/resources/activities.csv ";
         expectedException.expect(RuntimeException.class);
         fileReader.read(inputFilePath);
     }
 
     @Test
     public void read_Non_existentPath_throwException() {
-        String inputFilePath = "resources/actiities.csv ";
+        String inputFilePath = "src/test/resources/actiities.csv";
         expectedException.expect(RuntimeException.class);
         fileReader.read(inputFilePath);
     }
 
     @Test
     public void read_PathIsExist_OK() {
-        String inputFilePath = "resources/activities.csv";
+        String inputFilePath = "src/test/resources/activities.csv";
         List<String> expected = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",

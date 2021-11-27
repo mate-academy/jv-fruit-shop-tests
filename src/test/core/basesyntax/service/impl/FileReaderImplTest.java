@@ -1,24 +1,23 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReader;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.List;
-
 public class FileReaderImplTest {
     private static FileReader fileReader;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void initializeFields() {
         fileReader = new FileReaderImpl();
     }
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void read_WhitespaceInsidePath_throwException() {
@@ -55,6 +54,6 @@ public class FileReaderImplTest {
                 "p,banana,5",
                 "s,banana,50");
         List<String> actual = fileReader.read(inputFilePath);
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 }

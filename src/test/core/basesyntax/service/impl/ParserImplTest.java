@@ -10,18 +10,18 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ParserImplTest {
-    public static Parser parser;
-    public static Validator validator;
-    public static TransactionDto transactionDto;
+    private static Parser parser;
+    private static Validator validator;
+    private static TransactionDto transactionDto;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void initializeFields() {
         validator = new ValidatorImpl();
         parser = new ParserImpl(validator);
     }
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void parse_ValidatorIsNull_throwException() {
@@ -31,13 +31,13 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parse_LineWithoutFormat_throwException() {
+    public void parse_LineWithoutFormatStyle_throwException() {
         expectedException.expect(RuntimeException.class);
         parser.parse("b,banana,twelve");
     }
 
     @Test
-    public void parse_formattedLine_Ok() {
+    public void parse_FormattedLine_ok() {
         String expectedOperation = "b";
         String expectedFruit = "banana";
         int expectedAmount = 20;

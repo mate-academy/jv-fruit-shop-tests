@@ -1,6 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,15 +12,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
     private static String pathToWrite;
     private static String text;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void initializeFields() {
@@ -33,8 +35,6 @@ public class FileWriterImplTest {
             throw new RuntimeException("Can't delete file after test!", e);
         }
     }
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void writeToFile_BadPath_throwException() {
@@ -50,13 +50,13 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeToFile_PathIsNull_ThrowException() {
+    public void writeToFile_PathIsNull_throwException() {
         expectedException.expect(RuntimeException.class);
         fileWriter.writeToFile(text,null);
     }
 
     @Test
-    public void writeToFile_PathIsNotExist_CreateNewFileWithData() {
+    public void writeToFile_PathIsNotExist_createNewFileWithData() {
         fileWriter.writeToFile(text, pathToWrite);
         String expected;
         try {
@@ -69,9 +69,9 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeToFile_PathIsExist_RewriteFile() {
+    public void writeToFile_PathIsExist_rewriteFile() {
         try {
-            Files.writeString(Path.of(pathToWrite)," Text is already exist ");
+            Files.writeString(Path.of(pathToWrite)," Text is exist ");
         } catch (IOException e) {
             throw new RuntimeException("Util writer was crashed", e);
         }

@@ -17,7 +17,7 @@ public class ParserImpl implements Parser {
     @Override
     public TransactionDto parse(String line) {
         if (validator == null) {
-           throw new RuntimeException("Validator is null");
+            throw new RuntimeException("Validator is null");
         }
         validator.validate(line);
         String[] lineElements = line.split(",");

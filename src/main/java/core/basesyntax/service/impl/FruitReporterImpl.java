@@ -5,8 +5,8 @@ import core.basesyntax.service.FruitReporter;
 import java.util.Map;
 
 public class FruitReporterImpl implements FruitReporter {
-    private StringBuilder stringBuilder;
     private static final String LINE_SEPARATOR = System.lineSeparator();
+    private StringBuilder stringBuilder;
 
     public FruitReporterImpl() {
         stringBuilder = new StringBuilder();

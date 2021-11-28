@@ -14,7 +14,9 @@ public class PurchaseService implements ActivityService {
     @Override
     public void apply(Activity activity) {
         if (fruitDao.read(activity.getFruit()) - activity.getQuantity() < 0) {
-            throw new RuntimeException("Not enough " + activity.getFruit().getFruitName() + " in storage");
+            throw new RuntimeException("Not enough "
+                    + activity.getFruit().getFruitName()
+                    + " in storage");
         }
         fruitDao.update(activity.getFruit(),
                 fruitDao.read(activity.getFruit()) - activity.getQuantity());

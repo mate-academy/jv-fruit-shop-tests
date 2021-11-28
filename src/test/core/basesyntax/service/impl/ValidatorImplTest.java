@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_lineIsFormatted_throwException() {
-        validator.validate("b,banana,20");
+    public void validate_requireLineFormat_ok() {
+        Assert.assertTrue(validator.validate("b,banana,20"));
     }
 }

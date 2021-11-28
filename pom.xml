@@ -90,11 +90,6 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/ReaderServiceImpl*</exclude>
-                        <exclude>**/WriterServiceImpl*</exclude>
-                        <exclude>**/Fruit*</exclude>
-                        <exclude>**/Storage*</exclude>
-                        <exclude>**/FruitStorageDaoImpl*</exclude>
                         <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>

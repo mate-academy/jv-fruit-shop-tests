@@ -9,9 +9,9 @@ public class ReportServiceImpl implements ReportService {
     private static final String COMA_SEPARATOR = ",";
 
     @Override
-    public String formReport(Set<Map.Entry<String, Integer>> entrySet) {
+    public String formReport(Set<Map.Entry<String, Integer>> elements) {
         StringBuilder reportCreator = new StringBuilder(REPORT_TITLE);
-        for (Map.Entry<String, Integer> element : entrySet) {
+        for (Map.Entry<String, Integer> element : elements) {
             reportCreator.append(System.lineSeparator())
                     .append(element.getKey())
                     .append(COMA_SEPARATOR)

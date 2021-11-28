@@ -20,13 +20,13 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test(expected = OperationException.class)
-    public void apply_purchaseMinusResult_notOk() {
+    public void apply_resultLowerThenZero_notOk() {
         testStorage.put("apple", 100);
         operationHandler.apply("apple", 120);
     }
 
     @Test
-    public void apply_purchaseKeyIsNull_ok() {
+    public void apply_keyIsNull_ok() {
         testStorage.put(null, 10);
         operationHandler.apply(null, 10);
         Integer expected = 0;

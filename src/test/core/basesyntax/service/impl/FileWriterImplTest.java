@@ -52,7 +52,7 @@ public class FileWriterImplTest {
     @Test
     public void writeToFile_PathIsNull_throwException() {
         expectedException.expect(RuntimeException.class);
-        fileWriter.writeToFile(text,null);
+        fileWriter.writeToFile(text, null);
     }
 
     @Test

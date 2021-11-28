@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitReporter;
-import core.basesyntax.service.FruitShopService;
+import core.basesyntax.FruitShopService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.impl.ActivityStrategyImpl;

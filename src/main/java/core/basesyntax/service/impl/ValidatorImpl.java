@@ -12,7 +12,7 @@ public class ValidatorImpl implements Validator {
                 || values[1] == null
                 || values[2] == null
                 || Integer.valueOf(values[2]) <= 0) {
-            throw new RuntimeException("Wrong values");
+            throw new RuntimeException("Wrong value(s), negative value or null");
         }
         return true;
     }

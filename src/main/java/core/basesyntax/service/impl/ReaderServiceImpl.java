@@ -27,7 +27,7 @@ public class ReaderServiceImpl implements ReaderService {
                     .map(activityParser::parse)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Check file " + path + " " + e);
+            throw new RuntimeException("Check path " + path + " " + e);
         }
     }
 }

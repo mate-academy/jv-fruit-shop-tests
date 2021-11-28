@@ -1,8 +1,9 @@
 package core.basesyntax.model;
 
 public enum Fruit {
-    BANANA("banana"),
-    APPLE("apple");
+    APPLE("apple"),
+    BANANA("banana");
+
 
     private String fruitName;
 

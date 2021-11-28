@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class FruitReporterImpl implements FruitReporter {
     private StringBuilder stringBuilder;
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public FruitReporterImpl() {
         stringBuilder = new StringBuilder();
@@ -13,11 +14,10 @@ public class FruitReporterImpl implements FruitReporter {
 
     @Override
     public String report(Map<Fruit, Integer> fruitsStorage) {
-        stringBuilder.append("fruit,quantity");
+        stringBuilder.append("fruit,quantity" + LINE_SEPARATOR);
         for (Map.Entry<Fruit, Integer> fruitEntry : fruitsStorage.entrySet()) {
-            stringBuilder.append(System.lineSeparator()
-                    + fruitEntry.getKey().getFruitName() + ","
-                    + fruitEntry.getValue());
+            stringBuilder.append(fruitEntry.getKey().getFruitName() + ","
+                    + fruitEntry.getValue() + LINE_SEPARATOR);
         }
         return stringBuilder.toString();
     }

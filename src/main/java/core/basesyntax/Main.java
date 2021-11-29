@@ -1,7 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.bd.Storage;
-import core.basesyntax.service.*;
+import core.basesyntax.service.FileReaderImpl;
+import core.basesyntax.service.FileWriterImpl;
+import core.basesyntax.service.FruitCounterImpl;
+import core.basesyntax.service.InputDataValidatorImpl;
+import core.basesyntax.service.LineParserImpl;
+import core.basesyntax.service.ReportServiceImpl;
 import service.FileReader;
 import service.FileWriter;
 import service.FruitCounter;

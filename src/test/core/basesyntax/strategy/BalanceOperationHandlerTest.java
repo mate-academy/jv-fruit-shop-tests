@@ -31,7 +31,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void apply_FruitIsNotPresent_addEntry() {
+    public void apply_fruitIsNotPresent_addEntry() {
         Fruit pear = new Fruit("pear");
         operationHandler.apply(new TransactionDto(BALANCE_OPERATION, pear.getName(), 88));
         int expectedPearAmount = 88;
@@ -40,7 +40,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void apply_FruitIsPresent_reinstallAmount() {
+    public void apply_fruitIsPresent_reinstallAmount() {
         Fruit banana = new Fruit("banana");
         operationHandler.apply(new TransactionDto(BALANCE_OPERATION, banana.getName(), 100));
         int expectedPearAmount = 100;

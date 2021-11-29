@@ -22,7 +22,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void formReport_StorageIsNotEmpty_ok() {
+    public void formReport_storageIsNotEmpty_ok() {
         Storage.fruitStorage.put(new Fruit("banana"), 20);
         Storage.fruitStorage.put(new Fruit("apple"), 133);
         Storage.fruitStorage.put(new Fruit("orange"), 56);
@@ -35,7 +35,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void formReport_StorageIsEmpty_ok() {
+    public void formReport_storageIsEmpty_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.formReport();
         Assert.assertEquals(expected, actual);

@@ -4,44 +4,36 @@ import core.basesyntax.service.FileReader;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FileReaderImplTest {
     private static FileReader fileReader;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void initializeFields() {
         fileReader = new FileReaderImpl();
     }
 
-    @Test
-    public void read_WhitespaceInsidePath_throwException() {
+    @Test(expected = RuntimeException.class)
+    public void read_whitespaceInsidePath_throwException() {
         String inputFilePath = "src/test/resources/ activities.csv";
-        expectedException.expect(RuntimeException.class);
         fileReader.read(inputFilePath);
     }
 
-    @Test
-    public void read_WhitespaceInTheEndOfPath_throwException() {
+    @Test(expected = RuntimeException.class)
+    public void read_whitespaceInTheEndOfPath_throwException() {
         String inputFilePath = "src/test/resources/activities.csv ";
-        expectedException.expect(RuntimeException.class);
         fileReader.read(inputFilePath);
     }
 
-    @Test
-    public void read_Non_existentPath_throwException() {
+    @Test(expected = RuntimeException.class)
+    public void read_non_existentPath_throwException() {
         String inputFilePath = "src/test/resources/actiities.csv";
-        expectedException.expect(RuntimeException.class);
         fileReader.read(inputFilePath);
     }
 
     @Test
-    public void read_PathIsExist_OK() {
+    public void read_pathIsExist_OK() {
         String inputFilePath = "src/test/resources/activities.csv";
         List<String> expected = List.of(
                 "type,fruit,quantity",

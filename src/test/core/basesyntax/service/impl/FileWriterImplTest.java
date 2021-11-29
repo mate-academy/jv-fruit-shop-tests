@@ -8,23 +8,18 @@ import java.nio.file.Paths;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
     private static String pathToWrite;
     private static String text;
 
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-
     @BeforeClass
     public static void initializeFields() {
         fileWriter = new FileWriterImpl();
         pathToWrite = "src/test/resources/activities.csv";
-        text = "Test!\\ //" + System.lineSeparator() + "The end";
+        text = "Test! \\ //" + System.lineSeparator() + "The end";
     }
 
     @AfterClass
@@ -36,27 +31,24 @@ public class FileWriterImplTest {
         }
     }
 
-    @Test
-    public void writeToFile_BadPath_throwException() {
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_badPath_throwException() {
         String path = " ";
-        expectedException.expect(java.nio.file.InvalidPathException.class);
         fileWriter.writeToFile(text, path);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_textIsNull_throwException() {
-        expectedException.expect(RuntimeException.class);
         fileWriter.writeToFile(null, pathToWrite);
     }
 
-    @Test
-    public void writeToFile_PathIsNull_throwException() {
-        expectedException.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_pathIsNull_throwException() {
         fileWriter.writeToFile(text, null);
     }
 
     @Test
-    public void writeToFile_PathIsNotExist_createNewFileWithData() {
+    public void writeToFile_pathIsNotExist_createNewFileWithData() {
         fileWriter.writeToFile(text, pathToWrite);
         String expected;
         try {
@@ -69,7 +61,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeToFile_PathIsExist_rewriteFile() {
+    public void writeToFile_pathIsExist_rewriteFile() {
         try {
             Files.writeString(Path.of(pathToWrite)," Text is exist ");
         } catch (IOException e) {

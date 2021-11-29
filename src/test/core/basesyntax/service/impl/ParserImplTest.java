@@ -5,17 +5,12 @@ import core.basesyntax.service.Parser;
 import core.basesyntax.service.Validator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ParserImplTest {
     private static Parser parser;
     private static Validator validator;
     private static TransactionDto transactionDto;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void initializeFields() {
@@ -23,21 +18,19 @@ public class ParserImplTest {
         parser = new ParserImpl(validator);
     }
 
-    @Test
-    public void parse_ValidatorIsNull_throwException() {
-        expectedException.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void parse_validatorIsNull_throwException() {
         Parser parserWithoutValidator = new ParserImpl(null);
         parserWithoutValidator.parse("p,banana,5");
     }
 
-    @Test
-    public void parse_LineWithoutFormatStyle_throwException() {
-        expectedException.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void parse_lineWithoutFormatStyle_throwException() {
         parser.parse("b,banana,twelve");
     }
 
     @Test
-    public void parse_FormattedLine_ok() {
+    public void parse_formattedLine_ok() {
         String expectedOperation = "b";
         String expectedFruit = "banana";
         int expectedAmount = 20;

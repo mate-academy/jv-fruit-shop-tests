@@ -19,7 +19,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void formReport_ValidReport_ok() {
+    public void formReport_validReport_ok() {
         reportTestMap.put("banana",152);
         String actual = reportService.formReport(reportTestMap.entrySet());
         String expected = "fruit,quantity"
@@ -29,7 +29,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void formReport_EmptyReport_ok() {
+    public void formReport_emptyReport_ok() {
         Assert.assertEquals("fruit,quantity",
                 reportService.formReport(reportTestMap.entrySet()));
     }

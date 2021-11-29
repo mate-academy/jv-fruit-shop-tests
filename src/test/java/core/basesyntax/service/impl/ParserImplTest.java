@@ -26,19 +26,19 @@ public class ParserImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseLines_EmptyList_notOk() {
+    public void parseLines_emptyList_notOk() {
         List<String> list = Collections.emptyList();
         parser.parseLines(list);
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseLines_ValueIsNull_notOk() {
+    public void parseLines_valueIsNull_notOk() {
         List<String> list = List.of(null);
         parser.parseLines(list);
     }
 
     @Test
-    public void parseLines_OnlyTitleLine_Ok() {
+    public void parseLines_onlyTitleLine_Ok() {
         List<String> list = List.of("type,fruit,quantity");
         List<TransactionDto> actual = parser.parseLines(list);
         List<TransactionDto> expected = Collections.emptyList();

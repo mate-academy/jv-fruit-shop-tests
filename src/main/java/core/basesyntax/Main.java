@@ -22,10 +22,10 @@ public class Main {
         FileReader reader = new FileReaderImpl();
         List<String> inputData = reader.read(INPUT_FILE);
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
-        List<TransactionDto> transactionDtoS = parser.parseLines(inputData);
+        List<TransactionDto> transactionDtos = parser.parseLines(inputData);
         OperationStrategy operationStrategy = new OperationStrategyImpl();
 
-        for (TransactionDto transaction : transactionDtoS) {
+        for (TransactionDto transaction : transactionDtos) {
             String operation = transaction.getOperation();
             OperationHandler operationHandler = operationStrategy.get(operation);
             operationHandler.apply(transaction.getFruitName(), transaction.getQuantity());

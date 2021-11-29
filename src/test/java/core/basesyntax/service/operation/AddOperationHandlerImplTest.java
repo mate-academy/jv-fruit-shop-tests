@@ -19,7 +19,7 @@ public class AddOperationHandlerImplTest {
     }
 
     @Test
-    public void apply_EmptyStorage_ok() {
+    public void apply_emptyStorage_ok() {
         operationHandler.apply("banana", 10);
         Integer expected = 10;
         Integer actual = testStorage.get("banana");

@@ -25,7 +25,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandler_updateValidBalance_ok() {
+    public void handleBalanceOperation_updateValidBalance_ok() {
         handler.handleOperation("apple",10);
         int actual = fruitStorageDao.getQuantity(new Fruit("apple"));
         int expected = 10;

@@ -26,7 +26,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void returnHandler_validWork_ok() {
+    public void handleSupplyOperation_validWork_ok() {
         handler.handleOperation("apple", 20);
         int expected = 40;
         int actual = fruitStorageDao.getQuantity(new Fruit("apple"));
@@ -34,7 +34,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void returnHandler_noSuchFruit_notOk() throws RuntimeException {
+    public void handleSupplyOperation_noSuchFruit_notOk() throws RuntimeException {
         handler.handleOperation("not and apple", 20);
     }
 }

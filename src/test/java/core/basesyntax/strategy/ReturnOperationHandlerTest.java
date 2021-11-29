@@ -27,7 +27,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void return_correctInput_ok() {
+    public void apply_correctInput_ok() {
         int expected = 100;
         TransactionDto transaction = new TransactionDto("r", "apple", 50);
         returnHandler.apply(transaction);

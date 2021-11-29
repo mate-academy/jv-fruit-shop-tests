@@ -26,7 +26,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handlePurchaseOperation_validWork_ok() {
+    public void handleOperation_validWork_ok() {
         handler.handleOperation("apple",20);
         int expected = 0;
         int actual = fruitStorageDao.getQuantity(new Fruit("apple"));
@@ -34,7 +34,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handlePurchaseOperation_notEnoughQuantity_notOk() throws RuntimeException {
+    public void handleOperation_notEnoughQuantity_notOk() throws RuntimeException {
         handler.handleOperation("apple",21);
     }
 }

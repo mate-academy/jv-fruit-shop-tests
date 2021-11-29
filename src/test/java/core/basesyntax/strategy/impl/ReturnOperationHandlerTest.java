@@ -26,7 +26,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handleReturnOperation_validWork_ok() {
+    public void handleOperation_validWork_ok() {
         handler.handleOperation("apple", 20);
         int expected = 40;
         int actual = fruitStorageDao.getQuantity(new Fruit("apple"));
@@ -34,7 +34,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleReturnOperation_noSuchFruit_ok() throws RuntimeException {
+    public void handleOperation_noSuchFruit_ok() throws RuntimeException {
         handler.handleOperation("not and apple", 20);
     }
 }

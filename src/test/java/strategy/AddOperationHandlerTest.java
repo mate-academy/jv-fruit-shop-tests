@@ -19,10 +19,9 @@ public class AddOperationHandlerTest {
 
     @Test
     public void apply_operationS_ok() {
-        Map<Fruit, Integer> expected;
         TransactionDto addFruit = new TransactionDto("b","banana", 100);
         Fruit fruit = new Fruit(addFruit.getFruitName());
-        expected = Storage.storage;
+        Map<Fruit, Integer> expected = Storage.storage;
         Storage.storage.put(fruit, addFruit.getQuantity());
         TransactionDto transactionDto = new TransactionDto("s","banana", 20);
         expected.put(fruit, transactionDto.getQuantity() + Storage.storage.get(fruit));
@@ -32,10 +31,9 @@ public class AddOperationHandlerTest {
 
     @Test
     public void apply_operationP_ok() {
-        Map<Fruit, Integer> expected;
         TransactionDto addFruit = new TransactionDto("b","banana", 100);
         Fruit fruit = new Fruit(addFruit.getFruitName());
-        expected = Storage.storage;
+        Map<Fruit, Integer> expected = Storage.storage;
         Storage.storage.put(fruit, addFruit.getQuantity());
         TransactionDto transactionDto = new TransactionDto("p","banana", 10);
         expected.put(fruit, transactionDto.getQuantity() + Storage.storage.get(fruit));

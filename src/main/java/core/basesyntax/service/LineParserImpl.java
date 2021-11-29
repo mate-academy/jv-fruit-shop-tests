@@ -10,7 +10,7 @@ public class LineParserImpl implements LineParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static InputDataValidator inputValidator;
+    private InputDataValidator inputValidator;
 
     public LineParserImpl(InputDataValidator inputValidator) {
         this.inputValidator = inputValidator;

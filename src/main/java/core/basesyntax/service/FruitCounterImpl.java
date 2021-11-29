@@ -6,7 +6,7 @@ import service.FruitCounter;
 import strategy.OperationStrategy;
 
 public class FruitCounterImpl implements FruitCounter {
-    private static OperationStrategy strategy;
+    private OperationStrategy strategy;
 
     public FruitCounterImpl(OperationStrategy strategy) {
         this.strategy = strategy;

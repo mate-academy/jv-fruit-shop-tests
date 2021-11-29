@@ -11,6 +11,7 @@ import core.basesyntax.strategy.impl.SupplyService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,25 +23,25 @@ public class ActivityServiceTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @Test
-    public void testActivityService_wrongActivity() {
-
-        activityHandlerMap.put("b", new BalanceService());
-        activityHandlerMap.put("s", new SupplyService());
-        ActivityStrategy activityStrategy = new ActivityStrategy(activityHandlerMap);
-
-        thrown.expect(RuntimeException.class);
-        thrown.expectMessage(startsWith("Undefined activity"));
-        activityStrategy.getActivityService("p").getNewCount(3, 8);
-    }
-
-    @Test
-    public void testActivityService_exception() {
-
+    @BeforeClass
+    public static void fullActivityMap() {
         activityHandlerMap.put("b", new BalanceService());
         activityHandlerMap.put("s", new SupplyService());
         activityHandlerMap.put("p", new PurchaseService());
         activityHandlerMap.put("r", new ReturnService());
+    }
+
+    @Test
+    public void testActivityService_wrongActivity() {
+        ActivityStrategy activityStrategy = new ActivityStrategy(activityHandlerMap);
+
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage(startsWith("Undefined activity"));
+        activityStrategy.getActivityService("k").getNewCount(3, 8);
+    }
+
+    @Test
+    public void testActivityService_exception() {
         ActivityStrategy activityStrategy = new ActivityStrategy(activityHandlerMap);
 
         thrown.expect(RuntimeException.class);
@@ -50,12 +51,6 @@ public class ActivityServiceTest {
 
     @Test
     public void testActivityService() {
-
-        Map<String, ActivityService> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put("b", new BalanceService());
-        activityHandlerMap.put("s", new SupplyService());
-        activityHandlerMap.put("p", new PurchaseService());
-        activityHandlerMap.put("r", new ReturnService());
         ActivityStrategy activityStrategy = new ActivityStrategy(activityHandlerMap);
         Assert.assertEquals(Integer.valueOf(5),
                 activityStrategy.getActivityService("b").getNewCount(3, 5));

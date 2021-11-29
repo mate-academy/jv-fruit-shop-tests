@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import service.FruitCounter;
+import strategy.implement.OperationStrategyImpl;
 
 public class FruitCounterImplTeset {
     private static List<ParsedLine> parsedLineList;
@@ -17,7 +18,7 @@ public class FruitCounterImplTeset {
 
     @BeforeClass
     public static void init() {
-        fruitCounter = new FruitCounterImpl();
+        fruitCounter = new FruitCounterImpl(new OperationStrategyImpl());
         parsedLineList = new ArrayList<>();
     }
 

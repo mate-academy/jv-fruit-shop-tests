@@ -10,10 +10,14 @@ public class LineParserImpl implements LineParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    InputDataValidator inputValidator;
+
+    public LineParserImpl(InputDataValidator inputValidator) {
+        this.inputValidator = inputValidator;
+    }
 
     @Override
     public List<ParsedLine> lineParcer(List<String> input) {
-        InputDataValidator inputValidator = new InputDataValidatorImpl();
         List<ParsedLine> parsedLineList = new LinkedList<>();
         inputValidator.validate(input);
         for (String string: input) {

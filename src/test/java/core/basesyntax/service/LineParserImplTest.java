@@ -18,7 +18,7 @@ public class LineParserImplTest {
     public static void init() {
         input = new ArrayList<>();
         expected = new ArrayList<>();
-        parser = new LineParserImpl();
+        parser = new LineParserImpl(new InputDataValidatorImpl());
     }
 
     @Test

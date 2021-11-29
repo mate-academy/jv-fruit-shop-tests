@@ -19,7 +19,7 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public List<Activity> read(Path path) {
+    public List<Activity> readFile(Path path) {
         try (Stream<String> stringStream = Files.lines(path)) {
             return stringStream
                     .skip(1)

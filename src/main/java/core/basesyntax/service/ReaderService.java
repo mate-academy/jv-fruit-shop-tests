@@ -5,5 +5,5 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface ReaderService {
-    List<Activity> read(Path path);
+    List<Activity> readFile(Path path);
 }

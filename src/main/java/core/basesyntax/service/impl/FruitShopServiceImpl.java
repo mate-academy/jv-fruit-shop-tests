@@ -22,7 +22,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public String getReport(String filePath) {
         fileReader
-                .read(Paths.get(filePath))
+                .readFile(Paths.get(filePath))
                 .stream()
                 .forEach(a -> activityStrategy
                         .getActivity(a.getActivityType())

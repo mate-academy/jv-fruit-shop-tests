@@ -12,6 +12,9 @@ public class FruitDaoStorage implements FruitDao {
 
     @Override
     public Integer read(Fruit fruit) {
+        if (!Storage.fruitsStorage.containsKey(fruit)) {
+            throw new RuntimeException("Fruit wasn't found");
+        }
         return Storage.fruitsStorage.get(fruit);
     }
 

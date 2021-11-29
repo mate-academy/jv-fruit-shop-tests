@@ -21,10 +21,7 @@ public class ValidatorImpl implements Validator {
             }
             if (splittedLine.length != REQUIRED_LENGTH
                     || splittedLine[INDEX_OF_OPERATION].length() != 1
-                    || !splittedLine[INDEX_OF_OPERATION].contains("b")
-                    && !splittedLine[INDEX_OF_OPERATION].contains("p")
-                    && !splittedLine[INDEX_OF_OPERATION].contains("r")
-                    && !splittedLine[INDEX_OF_OPERATION].contains("s")
+                    || !splittedLine[INDEX_OF_OPERATION].matches("[bprs]")
                     || splittedLine[INDEX_OF_FRUIT].length() < 1
                     || !splittedLine[INDEX_OF_FRUIT].matches("[a-zA-Z]*")
                     || !splittedLine[INDEX_OF_QUANTITY].matches("\\d+")

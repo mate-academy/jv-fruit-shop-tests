@@ -4,16 +4,11 @@ import core.basesyntax.service.ReaderService;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ReaderServiceImplTest {
     private static String filePath;
     private static ReaderService reader;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,7 +17,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_validFilePath_Ok() {
+    public void read_validFilePath_ok() {
         List<String> actual = reader.read(filePath);
         List<String> expected = List.of(
                 "type,fruit,quantity",
@@ -37,21 +32,18 @@ public class ReaderServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void read_invalidPathInnerWhiteSpace_notOk() {
-        thrown.expect(RuntimeException.class);
         reader.read("src/test/java/ resources/testForReader.csv");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void read_invalidPathEmptyLine_notOk() {
-        thrown.expect(RuntimeException.class);
         reader.read("      ");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void read_invalidPathNull_notOk() {
-        thrown.expect(RuntimeException.class);
         reader.read(null);
     }
 }

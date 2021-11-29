@@ -16,17 +16,17 @@ public class ResultGeneratorServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         fruitStorageDao = new FruitStorageDaoImpl();
+        generator = new ResultGeneratorServiceImpl(fruitStorageDao);
     }
 
     @Before
     public void beforeEach() {
         fruitStorageDao.add(new Fruit("banana"), 152);
         fruitStorageDao.add(new Fruit("apple"), 90);
-        generator = new ResultGeneratorServiceImpl(fruitStorageDao);
     }
 
     @Test
-    public void generateResult_validResult_Ok() {
+    public void generateResult_validResult_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
@@ -35,9 +35,8 @@ public class ResultGeneratorServiceImplTest {
     }
 
     @Test
-    public void generateResult_emptyLine_Ok() {
+    public void generateResult_emptyLine_ok() {
         fruitStorageDao.getAll().clear();
-        generator = new ResultGeneratorServiceImpl(fruitStorageDao);
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = generator.generateResult();
         Assert.assertEquals(expected, actual);

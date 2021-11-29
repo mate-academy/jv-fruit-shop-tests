@@ -6,17 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
     private static String filePath;
     private static WriterService writer;
     private static String text;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -28,7 +23,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void write_validPath_Ok() {
+    public void write_validPath_ok() {
         writer.writeToFile(filePath, text);
         String actual;
         try {
@@ -40,21 +35,18 @@ public class WriterServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void write_invalidPath_Ok() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void write_invalidPath_notOk() {
         writer.writeToFile("src/test/java/ resources/testForWriter.csv", text);
     }
 
-    @Test
-    public void write_invalidData_Ok() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void write_invalidData_notOk() {
         writer.writeToFile(filePath, null);
     }
 
-    @Test
-    public void write_nullPath_Ok() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void write_nullPath_notOk() {
         writer.writeToFile(null, text);
     }
 }

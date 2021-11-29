@@ -6,16 +6,11 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ValidatorImplTest {
     private static Validator validator;
     private static List<String> file;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -38,56 +33,49 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_validFile_Ok() {
+    public void validate_validFile_ok() {
         Assert.assertTrue(validator.validate(file));
     }
 
-    @Test
-    public void validate_addInvalidLine_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void validate_addInvalidLine_notOk() {
         file.add("xd,xd,xd");
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void validate_invalidOperationType_NotOk() {
         file.set(1,"0,banana,20");
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 
-    @Test
-    public void validate_invalidQuantity_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void validate_invalidQuantity_notOk() {
         file.set(1,"p,banana,^!@!");
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 
-    @Test
-    public void validate_negativeQuantity_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void validate_negativeQuantity_notOk() {
         file.set(1,"p,banana,-10");
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 
-    @Test
-    public void validate_invalidFruitName_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void validate_invalidFruitName_notOk() {
         file.set(1,"p,@ppl3,20");
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 
-    @Test
-    public void validate_nullLine_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void validate_nullLine_notOk() {
         file.set(1, null);
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 
-    @Test
-    public void validate_emptyLine_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void validate_emptyLine_notOk() {
         file.set(1, "        ");
-        thrown.expect(RuntimeException.class);
         validator.validate(file);
     }
 }

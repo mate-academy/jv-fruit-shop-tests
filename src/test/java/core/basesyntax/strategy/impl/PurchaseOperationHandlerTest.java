@@ -7,16 +7,11 @@ import core.basesyntax.strategy.OperationHandler;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler handler;
     private static FruitStorageDao fruitStorageDao;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -31,17 +26,15 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseHandler_validWork_Ok() {
+    public void purchaseHandler_validWork_ok() {
         handler.handleOperation("apple",20);
         int expected = 0;
         int actual = fruitStorageDao.getQuantity(new Fruit("apple"));
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void purchaseHandler_notEnoughQuantity_Ok() throws RuntimeException {
-        thrown.expectMessage("Not enough fruits to buy that amount");
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void purchaseHandler_notEnoughQuantity_notOk() throws RuntimeException {
         handler.handleOperation("apple",21);
     }
 }

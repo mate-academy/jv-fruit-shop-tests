@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class AddOperationHandlerTest {
     private static OperationHandler operator;
-    private static Map<Fruit, Integer> expected;
 
     @BeforeClass
     public static void beforeAll() {
@@ -20,6 +19,7 @@ public class AddOperationHandlerTest {
 
     @Test
     public void apply_operationS_ok() {
+        Map<Fruit, Integer> expected;
         TransactionDto addFruit = new TransactionDto("b","banana", 100);
         Fruit fruit = new Fruit(addFruit.getFruitName());
         expected = Storage.storage;
@@ -32,6 +32,7 @@ public class AddOperationHandlerTest {
 
     @Test
     public void apply_operationP_ok() {
+        Map<Fruit, Integer> expected;
         TransactionDto addFruit = new TransactionDto("b","banana", 100);
         Fruit fruit = new Fruit(addFruit.getFruitName());
         expected = Storage.storage;

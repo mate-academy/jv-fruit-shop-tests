@@ -18,10 +18,10 @@ public class ParserImpl implements Parser {
     @Override
     public TransactionDto parseLineToTransaction(String line) {
         validator.validate(line);
-        String[] sp = line.split(SEPARATOR);
-        String operation = sp[INDEX_OF_OPERATION];
-        String fruitName = sp[INDEX_OF_PRODUCT];
-        int quantity = Integer.parseInt(sp[INDEX_OF_QUANTITY]);
+        String[] values = line.split(SEPARATOR);
+        String operation = values[INDEX_OF_OPERATION];
+        String fruitName = values[INDEX_OF_PRODUCT];
+        int quantity = Integer.parseInt(values[INDEX_OF_QUANTITY]);
         return new TransactionDto(operation, fruitName, quantity);
     }
 }

@@ -21,6 +21,9 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public String getReport(String filePath) {
+        if (filePath == null) {
+            throw new RuntimeException("File path is null");
+        }
         fileReader
                 .readFile(Paths.get(filePath))
                 .stream()

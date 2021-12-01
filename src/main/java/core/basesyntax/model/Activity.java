@@ -50,11 +50,16 @@ public class Activity {
     }
 
     @Override
-    public String toString() {
-        return "Activity{"
-                + "activityType=" + activityType
-                + ", fruit=" + fruit
-                + ", quantity=" + quantity
-                + '}';
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Activity activity = (Activity) o;
+        return quantity == activity.quantity
+                && activityType == activity.activityType
+                && fruit == activity.fruit;
     }
 }

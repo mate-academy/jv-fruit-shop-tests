@@ -18,6 +18,9 @@ public class FruitParserImpl implements FruitParser {
 
     @Override
     public Fruit parse(String fruitName) {
+        if (fruitName == null) {
+            throw new RuntimeException("Fruit name is null");
+        }
         return fruitMap.get(fruitName);
     }
 }

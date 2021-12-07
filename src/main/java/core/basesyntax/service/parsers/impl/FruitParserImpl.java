@@ -18,8 +18,8 @@ public class FruitParserImpl implements FruitParser {
 
     @Override
     public Fruit parse(String fruitName) {
-        if (fruitName == null) {
-            throw new RuntimeException("Fruit name is null");
+        if (fruitName == null || !fruitMap.containsKey(fruitName)) {
+            throw new RuntimeException("Fruit name is wrong or null");
         }
         return fruitMap.get(fruitName);
     }

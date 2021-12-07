@@ -2,14 +2,14 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.FruitShopService;
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FruitReporter;
-import core.basesyntax.service.ReaderService;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.impl.ActivityStrategyImpl;
 import java.nio.file.Paths;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private ReaderService fileReader;
+    private FileReaderService fileReader;
     private ActivityStrategy activityStrategy;
     private FruitReporter fruitReporter;
 

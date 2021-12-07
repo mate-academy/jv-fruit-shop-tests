@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Activity;
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.parsers.ActivityParser;
 import core.basesyntax.service.parsers.impl.ActivityParserImpl;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ReaderServiceImpl implements ReaderService {
+public class ReaderServiceImpl implements FileReaderService {
     private ActivityParser activityParser;
 
     public ReaderServiceImpl() {
@@ -23,7 +23,6 @@ public class ReaderServiceImpl implements ReaderService {
         try (Stream<String> stringStream = Files.lines(path)) {
             return stringStream
                     .skip(1)
-                    .map(string -> string.trim())
                     .map(activityParser::parse)
                     .collect(Collectors.toList());
         } catch (IOException e) {

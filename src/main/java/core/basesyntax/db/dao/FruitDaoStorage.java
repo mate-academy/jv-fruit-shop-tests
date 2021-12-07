@@ -7,6 +7,9 @@ public class FruitDaoStorage implements FruitDao {
 
     @Override
     public void create(Fruit fruit, int quantity) {
+        if (fruit == null) {
+            throw new RuntimeException("Fruit value is wrong or null");
+        }
         Storage.fruitsStorage.put(fruit, quantity);
     }
 

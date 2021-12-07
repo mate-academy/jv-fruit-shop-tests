@@ -18,7 +18,10 @@ public class ValidatorImpl implements Validator {
                 || !Arrays.stream(Fruit.values()).anyMatch(v -> v.getFruitName().equals(values[1]))
                 || values[2] == null
                 || Integer.valueOf(values[2]) <= 0) {
-            throw new RuntimeException("Wrong value(s), negative value or null");
+            throw new RuntimeException("Wrong value(s), negative value or null: "
+                    + values[0] + " "
+                    + values[1] + " "
+                    + values[2]);
         }
         return true;
     }

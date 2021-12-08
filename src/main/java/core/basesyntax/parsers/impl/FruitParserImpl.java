@@ -1,7 +1,7 @@
-package core.basesyntax.service.parsers.impl;
+package core.basesyntax.parsers.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.parsers.FruitParser;
+import core.basesyntax.parsers.FruitParser;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +18,6 @@ public class FruitParserImpl implements FruitParser {
 
     @Override
     public Fruit parse(String fruitName) {
-        if (fruitName == null || !fruitMap.containsKey(fruitName)) {
-            throw new RuntimeException("Fruit name is wrong or null");
-        }
         return fruitMap.get(fruitName);
     }
 }

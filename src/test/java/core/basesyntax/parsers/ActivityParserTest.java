@@ -1,15 +1,15 @@
-package core.basesyntax.service.parsers;
+package core.basesyntax.parsers;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Activity;
 import core.basesyntax.model.ActivityType;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.parsers.impl.ActivityParserImpl;
+import core.basesyntax.parsers.impl.ActivityParserImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ActivityTypeParserTest {
+public class ActivityParserTest {
     private static ActivityParser activityParser;
 
     @BeforeClass
@@ -27,13 +27,8 @@ public class ActivityTypeParserTest {
         assertEquals(expectedActivity, activityParser.parse(line));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void parse_getActivityWithActivityParserWithNull_NotOK() {
-        activityParser.parse(null);
-    }
-
     @Test
-    public void parse_ActivityParserWithSpaces_OK() {
+    public void parse_getActivityWithActivityParserWithSpaces_OK() {
         Activity expected = new Activity
                 .Builder()
                 .setActivityType(ActivityType.BALANCE)

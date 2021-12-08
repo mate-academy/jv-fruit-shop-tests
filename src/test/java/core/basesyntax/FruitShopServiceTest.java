@@ -3,7 +3,11 @@ package core.basesyntax;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.exceptions.FileReadException;
+import core.basesyntax.exceptions.FruitAvailabilityException;
+import core.basesyntax.exceptions.LineParseException;
+import core.basesyntax.exceptions.NegativeValueException;
+import core.basesyntax.services.impl.FruitShopServiceImpl;
 import java.io.File;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -15,10 +19,14 @@ public class FruitShopServiceTest {
     private static final String RESOURCES_PATH = "src" + File.separator
             + "main" + File.separator
             + "resources" + File.separator;
+    private static final String CSV_EMPTY_FILE = RESOURCES_PATH
+            + "CSV_EMPTY_FILE.csv";
     private static final String CSV_WITH_APPLES_ONLY = RESOURCES_PATH
             + "CSV_WITH_APPLES_ONLY.csv";
     private static final String CSV_WITH_BANANAS_ONLY = RESOURCES_PATH
             + "CSV_WITH_BANANAS_ONLY.csv";
+    private static final String CSV_WITH_EMPTY_VALUES = RESOURCES_PATH
+            + "CSV_WITH_EMPTY_VALUES.csv";
     private static final String CSV_WITH_LOST_ARGUMENTS = RESOURCES_PATH
             + "CSV_WITH_LOST_ARGUMENTS.csv";
     private static final String CSV_WITH_NEGATIVE_VALUE = RESOURCES_PATH
@@ -48,14 +56,24 @@ public class FruitShopServiceTest {
         Storage.fruitsStorage.clear();
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FileReadException.class)
     public void getReport_WithNullPath_NotOK() {
         fruitShopService.getReport(null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FileReadException.class)
     public void getReport_WithWrongCsvPath_Not_OK() {
         fruitShopService.getReport(CSV_WITH_WRONG_CSV_PATH);
+    }
+
+    @Test(expected = FileReadException.class)
+    public void getReport_WithEmptyCsvFile_Not_OK() {
+        fruitShopService.getReport(CSV_EMPTY_FILE);
+    }
+
+    @Test(expected = FileReadException.class)
+    public void getReport_WithEmptyValuesCsvFile_Not_OK() {
+        fruitShopService.getReport(CSV_WITH_EMPTY_VALUES);
     }
 
     @Test
@@ -63,6 +81,7 @@ public class FruitShopServiceTest {
         String expected = "fruit,quantity" + LINE_SEPARATOR
                 + "apple,90" + LINE_SEPARATOR;
         String actual = fruitShopService.getReport(CSV_WITH_APPLES_ONLY);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -73,12 +92,12 @@ public class FruitShopServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = LineParseException.class)
     public void getReport_WithLostArguments_Not_OK() {
         fruitShopService.getReport(CSV_WITH_LOST_ARGUMENTS);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NegativeValueException.class)
     public void getReport_WithNegativeValue_Not_OK() {
         fruitShopService.getReport(CSV_WITH_NEGATIVE_VALUE);
     }
@@ -110,17 +129,17 @@ public class FruitShopServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = LineParseException.class)
     public void getReport_WithWrongFruit_Not_OK() {
         fruitShopService.getReport(CSV_WITH_WRONG_FRUIT);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FruitAvailabilityException.class)
     public void getReport_WithWrongOrderedValues_Not_OK() {
         fruitShopService.getReport(CSV_WITH_WRONG_ORDERED_VALUES);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FruitAvailabilityException.class)
     public void getReport_WithWrongSummaryValues_Not_OK() {
         fruitShopService.getReport(CSV_WITH_WRONG_SUMMARY_VALUE);
     }

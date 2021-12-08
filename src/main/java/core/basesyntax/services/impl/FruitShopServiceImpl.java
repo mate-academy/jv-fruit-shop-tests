@@ -1,9 +1,11 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.services.impl;
 
 import core.basesyntax.FruitShopService;
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.FruitReporter;
+import core.basesyntax.exceptions.FileReadException;
+import core.basesyntax.services.ActivityValidator;
+import core.basesyntax.services.FileReaderService;
+import core.basesyntax.services.FruitReporter;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.impl.ActivityStrategyImpl;
 import java.nio.file.Paths;
@@ -22,11 +24,13 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public String getReport(String filePath) {
         if (filePath == null) {
-            throw new RuntimeException("File path is null");
+            throw new FileReadException("FilePath is null");
         }
+        ActivityValidator activityValidator = new ActivityValidatorImpl();
         fileReader
                 .readFile(Paths.get(filePath))
                 .stream()
+                .filter(s -> activityValidator.validate(s))
                 .forEach(a -> activityStrategy
                         .getActivity(a.getActivityType())
                         .apply(a));

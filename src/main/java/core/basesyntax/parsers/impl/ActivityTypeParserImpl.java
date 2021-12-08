@@ -1,7 +1,7 @@
-package core.basesyntax.service.parsers.impl;
+package core.basesyntax.parsers.impl;
 
 import core.basesyntax.model.ActivityType;
-import core.basesyntax.service.parsers.ActivityTypeParser;
+import core.basesyntax.parsers.ActivityTypeParser;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ public class ActivityTypeParserImpl implements ActivityTypeParser {
     private Map<Character, ActivityType> activityMap;
 
     public ActivityTypeParserImpl() {
-        activityMap = new HashMap();
+        activityMap = new HashMap<>();
         Arrays.stream(ActivityType.values())
                 .forEach(a -> activityMap
                         .put(a.getActivityIdentifier(), a));

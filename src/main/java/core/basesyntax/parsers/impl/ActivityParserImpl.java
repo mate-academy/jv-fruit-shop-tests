@@ -1,34 +1,30 @@
-package core.basesyntax.service.parsers.impl;
+package core.basesyntax.parsers.impl;
 
 import core.basesyntax.model.Activity;
-import core.basesyntax.service.Validator;
-import core.basesyntax.service.impl.ValidatorImpl;
-import core.basesyntax.service.parsers.ActivityParser;
-import core.basesyntax.service.parsers.ActivityTypeParser;
-import core.basesyntax.service.parsers.FruitParser;
+import core.basesyntax.parsers.ActivityParser;
+import core.basesyntax.parsers.ActivityTypeParser;
+import core.basesyntax.parsers.FruitParser;
+import core.basesyntax.services.LineValidator;
+import core.basesyntax.services.impl.LineValidatorImpl;
 import java.util.Arrays;
 
 public class ActivityParserImpl implements ActivityParser {
     private static final String CSV_SEPARATOR = ",";
-    private Validator validator;
+    private LineValidator lineValidator;
     private ActivityTypeParser activityTypeParser;
     private FruitParser fruitParser;
 
     public ActivityParserImpl() {
-        validator = new ValidatorImpl();
+        lineValidator = new LineValidatorImpl();
         activityTypeParser = new ActivityTypeParserImpl();
         fruitParser = new FruitParserImpl();
     }
 
     @Override
     public Activity parse(String line) {
-        if (line == null) {
-            throw new RuntimeException("Line is empty");
-        }
         String[] values = Arrays.stream(line.split(CSV_SEPARATOR))
                 .map(String::trim)
                 .toArray(String[]::new);
-        validator.validate(values);
         Activity activity = new Activity.Builder()
                 .setActivityType(activityTypeParser.parse(values[0].trim().charAt(0)))
                 .setFruit(fruitParser.parse(values[1].trim()))

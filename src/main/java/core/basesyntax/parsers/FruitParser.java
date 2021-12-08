@@ -1,4 +1,4 @@
-package core.basesyntax.service.parsers;
+package core.basesyntax.parsers;
 
 import core.basesyntax.model.Fruit;
 

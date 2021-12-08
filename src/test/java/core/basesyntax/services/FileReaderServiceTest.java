@@ -1,11 +1,12 @@
-package core.basesyntax.service;
+package core.basesyntax.services;
 
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.exceptions.FileReadException;
 import core.basesyntax.model.Activity;
 import core.basesyntax.model.ActivityType;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.services.impl.ReaderServiceImpl;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -82,13 +83,8 @@ public class FileReaderServiceTest {
         assertTrue(expectedActivities.equals(actualActivities));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FileReadException.class)
     public void readFile_WithWrongPath_Not_OK() {
         fileReaderService.readFile(Path.of(CSV_WITH_WRONG_PATH));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void readFile_WithNullPath_Not_OK() {
-        fileReaderService.readFile(Path.of(null));
     }
 }

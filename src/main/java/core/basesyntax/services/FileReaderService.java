@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.services;
 
 import core.basesyntax.model.Activity;
 import java.nio.file.Path;

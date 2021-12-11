@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.StorageService;
 
 public class StorageServiceAddImpl implements StorageService {
     private FruitDao fruitDao;

@@ -1,11 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.OperationsPerDay;
+import core.basesyntax.service.StorageService;
 import core.basesyntax.service.impl.CreateReportImpl;
-import core.basesyntax.service.impl.StorageService;
+import core.basesyntax.service.impl.CsvFileReaderService;
+import core.basesyntax.service.impl.CsvFileWriterService;
+import core.basesyntax.service.impl.OperationsPerDay;
 import core.basesyntax.service.impl.StorageServiceAddImpl;
 import core.basesyntax.service.impl.StorageServicePurchaseImpl;
 import core.basesyntax.service.impl.StorageServiceSupplyImpl;

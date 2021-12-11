@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.service.impl.StorageService;
+import core.basesyntax.service.OperationDay;
+import core.basesyntax.service.StorageService;
 import java.util.List;
 import java.util.Map;
 

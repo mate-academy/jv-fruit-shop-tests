@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.StorageService;
 
 public class StorageServiceSupplyImpl implements StorageService {
     private FruitDao fruitDao;

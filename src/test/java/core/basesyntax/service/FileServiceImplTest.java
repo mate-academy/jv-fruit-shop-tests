@@ -17,7 +17,7 @@ public class FileServiceImplTest {
 
     @Test
     public void readFileCorrect_Ok() {
-        String fileName = "src/test/resources/input.txt";
+        String fileName = "src/test/resources/input.csv";
         List<String> expected = Arrays.asList("100", "200", "300");
         List<String> actual = fileService.readFile(fileName);
         assertEquals(expected, actual);
@@ -32,7 +32,7 @@ public class FileServiceImplTest {
 
     @Test
     public void writeFile_Ok() {
-        String fileName = "src/test/resources/output.txt";
+        String fileName = "src/test/resources/output.csv";
         String outputFile = "5\n4\n3\n2\n1";
         List<String> expected = Arrays.asList("5", "4", "3", "2", "1");
         fileService.writeFile(fileName, outputFile);

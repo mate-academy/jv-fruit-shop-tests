@@ -96,9 +96,6 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/FruitRecordDto*</exclude>
-                        <exclude>**/Storage*</exclude>
-                        <exclude>**/Fruit*</exclude>
                         <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>

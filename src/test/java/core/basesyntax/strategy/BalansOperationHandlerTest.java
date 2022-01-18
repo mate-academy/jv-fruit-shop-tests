@@ -20,12 +20,4 @@ public class BalansOperationHandlerTest {
         int actual = Storage.storage.get(fruit);
         assertEquals(expected, actual);
     }
-
-    @Test (expected = AssertionError.class)
-    public void operation_NotOk() {
-        OPERATION_HANDLER.operation(TRANSACTION_LINE_BALANCE);
-        int expectedNotOk = 1000;
-        int actual = Storage.storage.get(fruit);
-        assertEquals(expectedNotOk, actual);
-    }
 }

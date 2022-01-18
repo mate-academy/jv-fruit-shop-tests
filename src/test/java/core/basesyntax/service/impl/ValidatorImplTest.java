@@ -19,7 +19,7 @@ public class ValidatorImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void wrongStringFormat_NotOk() {
+    public void validateWrongStringFormat_NotOk() {
         String wrongString = "a,qwerty,20";
         VALIDATOR.validate(wrongString);
     }

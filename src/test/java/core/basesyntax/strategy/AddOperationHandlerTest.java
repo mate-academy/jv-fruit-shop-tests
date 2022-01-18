@@ -23,13 +23,4 @@ public class AddOperationHandlerTest {
         int actual = Storage.storage.get(FRUIT);
         assertEquals(expected, actual);
     }
-
-    @Test (expected = AssertionError.class)
-    public void operation_NotOk() {
-        Storage.storage.put(FRUIT, TRANSACTION_LINE_BALANCE.getQuantity());
-        OPERATION_HANDLER.operation(TRANSACTION_LINE_SUPPLY);
-        int expectedNotOk = 1000;
-        int actual = Storage.storage.get(FRUIT);
-        assertEquals(expectedNotOk, actual);
-    }
 }

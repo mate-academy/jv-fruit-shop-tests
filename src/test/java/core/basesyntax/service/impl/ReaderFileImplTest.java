@@ -18,7 +18,7 @@ public class ReaderFileImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void incorectFilePath_NotOk() {
+    public void readIncorectFilePath_NotOk() {
         readerFile.readFromFile("src/test/resources/incorectFileName");
     }
 
@@ -27,7 +27,7 @@ public class ReaderFileImplTest {
         readerFile.readFromFile("src/test/resources/inputNullFile.csv");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test (expected = NullPointerException.class)
     public void readPathIsNull_notOk() {
         readerFile.readFromFile(null);
     }

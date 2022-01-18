@@ -10,6 +10,9 @@ public class ReaderFileImpl implements ReaderFile {
     @Override
     public List<String> readFromFile(String fileName) {
         List<String> listFileRead;
+        if (fileName == null) {
+            throw new NullPointerException("File name is null");
+        }
         try {
             return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {

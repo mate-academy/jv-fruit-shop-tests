@@ -22,6 +22,6 @@ public enum TransactionType {
                 return type;
             }
         }
-        return null;
+        throw new RuntimeException("\'" + code + "\' isn't TransactionType code");
     }
 }

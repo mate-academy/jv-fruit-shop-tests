@@ -5,9 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitsConsumer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,8 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FruitsConsumerCsvTest {
     private static final String CSV_HEADER = "fruit,quantity";
@@ -76,7 +74,8 @@ public class FruitsConsumerCsvTest {
         return csvRows.stream()
                 .skip(1)
                 .map(s -> s.split(FileUtils.COMMA_SEPARATOR))
-                .collect(Collectors.toMap(arr -> new Fruit(arr[0]), arr -> Integer.parseInt(arr[1])));
+                .collect(Collectors.toMap(arr -> new Fruit(arr[0]),
+                        arr -> Integer.parseInt(arr[1])));
     }
 
     private List<String> loadLinesFromFile(String filePath) {

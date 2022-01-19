@@ -5,17 +5,21 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.model.TransactionType;
 import core.basesyntax.service.TransactionsSupplier;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Test;
 
 public class TransactionsSupplierCsvTest {
-    private static final String JOURNAL_FILEPATH = "src/test/resources/transactions/daily_journal.csv";
-    private static final String NOTEXIST_FILEPATH = "src/test/resources/transactions/notexist.csv";
-    private static final String BADFORMAT_FILEPATH = "src/test/resources/transactions/badfileformat.csv";
-    private static final String ILLEGALNUMBER_FILEPATH = "src/test/resources/transactions/illegalNumber.csv";
-    private static final String ILLEGALTYPE_FILEPATH = "src/test/resources/transactions/illegalType.csv";
+    private static final String JOURNAL_FILEPATH =
+            "src/test/resources/transactions/daily_journal.csv";
+    private static final String NOTEXIST_FILEPATH =
+            "src/test/resources/transactions/notexist.csv";
+    private static final String BADFORMAT_FILEPATH =
+            "src/test/resources/transactions/badfileformat.csv";
+    private static final String ILLEGALNUMBER_FILEPATH =
+            "src/test/resources/transactions/illegalNumber.csv";
+    private static final String ILLEGALTYPE_FILEPATH =
+            "src/test/resources/transactions/illegalType.csv";
     private TransactionsSupplier transactionsSupplier;
 
     @Test
@@ -24,7 +28,7 @@ public class TransactionsSupplierCsvTest {
         List<Transaction> expected = getExpectedTransactionList();
         List<Transaction> actual = transactionsSupplier.getTransactionsList();
         assertEquals("Returned List size", expected.size(), actual.size());
-        for(int i = 0; i < expected.size(); i++) {
+        for (int i = 0; i < expected.size(); i++) {
             assertEquals("List item " + i, expected.get(i), actual.get(i));
         }
     }
@@ -40,7 +44,6 @@ public class TransactionsSupplierCsvTest {
         transactionsSupplier = new TransactionsSupplierCsv(BADFORMAT_FILEPATH);
         List<Transaction> actual = transactionsSupplier.getTransactionsList();
     }
-
 
     @Test(expected = NumberFormatException.class)
     public void getTransactionsList_IllegalNumber() {

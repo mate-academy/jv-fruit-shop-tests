@@ -27,10 +27,15 @@ public class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Transaction that = (Transaction) o;
-        return amount == that.amount && type == that.type && Objects.equals(fruitName, that.fruitName);
+        return amount == that.amount && type == that.type
+                && Objects.equals(fruitName, that.fruitName);
     }
 
     @Override
@@ -40,10 +45,8 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "type=" + type +
-                ", fruitName='" + fruitName + '\'' +
-                ", amount=" + amount +
-                '}';
+        return "Transaction{" + type + "=" + type
+                + ", fruitName='" + fruitName + '\''
+                + ", amount=" + amount + '}';
     }
 }

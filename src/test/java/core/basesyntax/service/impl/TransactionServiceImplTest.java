@@ -14,10 +14,10 @@ import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import core.basesyntax.strategy.TransactionHandler;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TransactionServiceImplTest {
     private static final Transaction balanceTransaction = new Transaction(TransactionType.BALANCE,

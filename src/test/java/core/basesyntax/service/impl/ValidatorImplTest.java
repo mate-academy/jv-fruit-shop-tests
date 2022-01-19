@@ -7,11 +7,10 @@ import org.junit.Test;
 
 public class ValidatorImplTest {
     private static final Validator VALIDATOR = new ValidatorImpl();
-    private static final String FIRST_LETTERS_OF_TYPE_ACTIVITY = "bsrp";
 
     @Test
     public void validate_Ok() {
-        String[] typeActivity = FIRST_LETTERS_OF_TYPE_ACTIVITY.split("");
+        String[] typeActivity = {"b","s","r","p"};
         for (String activity : typeActivity) {
             String string = activity + ",qwertyasdfgzxcv," + "0123456789";
             assertTrue(VALIDATOR.validate(string));
@@ -20,7 +19,7 @@ public class ValidatorImplTest {
 
     @Test (expected = RuntimeException.class)
     public void validateWrongStringFormat_NotOk() {
-        String wrongString = "a,qwerty,20";
+        String wrongString = "b,qwerty,20r";
         VALIDATOR.validate(wrongString);
     }
 

@@ -28,7 +28,7 @@ public class MainApp {
     private static final String reportPath = "src/main/resources/daily_report.csv";
 
     public static void main(String[] args) {
-        FruitDao fruitDao = new FruitDaoImpl();
+        FruitDao fruitDao = new FruitDaoImpl(FruitsData.fruitMap);
         TransactionService transactionService = new TransactionServiceImpl(fruitDao, strategyMap());
         for (Transaction transaction : loadTransactions(journalPath)) {
             transactionService.apply(transaction);

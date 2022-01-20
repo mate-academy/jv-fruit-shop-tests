@@ -19,7 +19,6 @@ public class ParserImplTest {
                 new TransactionLine("b", "banana", 20));
         List<TransactionLine> actual = parserLine.parser(list);
         assertEquals(expected, actual);
-        list.clear();
     }
 
     @Test (expected = RuntimeException.class)
@@ -37,6 +36,5 @@ public class ParserImplTest {
     public void parseIncorrectList_NotOk() {
         List<String> list = new ArrayList<>(List.of("p,banana,20,20"));
         parserLine.parser(list);
-        list.clear();
     }
 }

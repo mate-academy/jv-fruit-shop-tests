@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -26,12 +25,5 @@ public class ReportImplTest {
         List<String> expected = new ArrayList<>(List.of(TITLE, "banana,60", "apple,100"));
         List<String> actual = report.createReport();
         assertEquals(expected, actual);
-    }
-
-    @Test (expected = AssertionError.class)
-    public void createReport_NotOk() {
-        List<String> expected = new ArrayList<>(List.of(TITLE, "banana,60", "apple,100"));
-        List<String> actual = report.createReport();
-        assertNotEquals(expected, actual);
     }
 }

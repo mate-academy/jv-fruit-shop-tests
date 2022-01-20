@@ -28,11 +28,9 @@ public class BalanceHandlerTest {
 
     @Test
     public void perform_regularTransaction_Ok() {
-        int expected;
-        int actual;
-        expected = regularTransaction.getAmount();
+        int expected = regularTransaction.getAmount();
         for (int amount : amounts) {
-            actual = balanceHandler.perform(amount, regularTransaction);
+            int actual = balanceHandler.perform(amount, regularTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                     + regularTransaction.getAmount(),
                     expected, actual);
@@ -41,11 +39,9 @@ public class BalanceHandlerTest {
 
     @Test
     public void perform_zeroTransaction_Ok() {
-        int expected;
-        int actual;
-        expected = zeroTransaction.getAmount();
+        int expected = zeroTransaction.getAmount();
         for (int amount : amounts) {
-            actual = balanceHandler.perform(amount, zeroTransaction);
+            int actual = balanceHandler.perform(amount, zeroTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + zeroTransaction.getAmount(),
                     expected, actual);
@@ -54,11 +50,9 @@ public class BalanceHandlerTest {
 
     @Test
     public void perform_negativTransaction_Ok() {
-        int expected;
-        int actual;
-        expected = negativTransaction.getAmount();
+        int expected = negativTransaction.getAmount();
         for (int amount : amounts) {
-            actual = balanceHandler.perform(amount, negativTransaction);
+            int actual = balanceHandler.perform(amount, negativTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + negativTransaction.getAmount(),
                     expected, actual);
@@ -67,11 +61,9 @@ public class BalanceHandlerTest {
 
     @Test
     public void perform_maxTransaction_Ok() {
-        int expected;
-        int actual;
-        expected = maxTransaction.getAmount();
+        int expected = maxTransaction.getAmount();
         for (int amount : amounts) {
-            actual = balanceHandler.perform(amount, maxTransaction);
+            int actual = balanceHandler.perform(amount, maxTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + maxTransaction.getAmount(),
                     expected, actual);
@@ -80,11 +72,9 @@ public class BalanceHandlerTest {
 
     @Test
     public void perform_minTransaction_Ok() {
-        int expected;
-        int actual;
-        expected = minTransaction.getAmount();
+        int expected = minTransaction.getAmount();
         for (int amount : amounts) {
-            actual = balanceHandler.perform(amount, minTransaction);
+            int actual = balanceHandler.perform(amount, minTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + minTransaction.getAmount(),
                     expected, actual);

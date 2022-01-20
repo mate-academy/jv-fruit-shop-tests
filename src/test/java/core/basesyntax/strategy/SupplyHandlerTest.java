@@ -28,11 +28,9 @@ public class SupplyHandlerTest {
 
     @Test
     public void perform_regularTransaction_Ok() {
-        int expected;
-        int actual;
         for (int amount : amounts) {
-            expected = amount + regularTransaction.getAmount();
-            actual = supplyHandler.perform(amount, regularTransaction);
+            int expected = amount + regularTransaction.getAmount();
+            int actual = supplyHandler.perform(amount, regularTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + regularTransaction.getAmount(),
                     expected, actual);
@@ -41,11 +39,9 @@ public class SupplyHandlerTest {
 
     @Test
     public void perform_zeroTransaction_Ok() {
-        int expected;
-        int actual;
         for (int amount : amounts) {
-            expected = amount + zeroTransaction.getAmount();
-            actual = supplyHandler.perform(amount, zeroTransaction);
+            int expected = amount + zeroTransaction.getAmount();
+            int actual = supplyHandler.perform(amount, zeroTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + zeroTransaction.getAmount(),
                     expected, actual);
@@ -54,11 +50,9 @@ public class SupplyHandlerTest {
 
     @Test
     public void perform_negativTransaction_Ok() {
-        int expected;
-        int actual;
         for (int amount : amounts) {
-            expected = amount + negativTransaction.getAmount();
-            actual = supplyHandler.perform(amount, negativTransaction);
+            int expected = amount + negativTransaction.getAmount();
+            int actual = supplyHandler.perform(amount, negativTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + negativTransaction.getAmount(),
                     expected, actual);
@@ -67,11 +61,9 @@ public class SupplyHandlerTest {
 
     @Test
     public void perform_maxTransaction_Ok() {
-        int expected;
-        int actual;
         for (int amount : amounts) {
-            expected = amount + maxTransaction.getAmount();
-            actual = supplyHandler.perform(amount, maxTransaction);
+            int expected = amount + maxTransaction.getAmount();
+            int actual = supplyHandler.perform(amount, maxTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + maxTransaction.getAmount(),
                     expected, actual);
@@ -80,11 +72,9 @@ public class SupplyHandlerTest {
 
     @Test
     public void perform_minTransaction_Ok() {
-        int expected;
-        int actual;
         for (int amount : amounts) {
-            expected = amount + minTransaction.getAmount();
-            actual = supplyHandler.perform(amount, minTransaction);
+            int expected = amount + minTransaction.getAmount();
+            int actual = supplyHandler.perform(amount, minTransaction);
             assertEquals("amount = " + amount + ", transaction.amount = "
                             + minTransaction.getAmount(),
                     expected, actual);

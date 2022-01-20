@@ -14,17 +14,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FruitsConsumerCsvTest {
     private static final String CSV_HEADER = "fruit,quantity";
     private static final String FRUIT_REPORT_PATH = "src/test/resources/fruits.csv";
     private static final FruitsConsumer fruitsConsumer = new FruitsConsumerCsv(FRUIT_REPORT_PATH);
-
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @After
     public void tearDown() throws Exception {
@@ -33,7 +28,7 @@ public class FruitsConsumerCsvTest {
 
     @Test
     public void accept_FruitMap_Ok() {
-        Map<Fruit, Integer> expected = getFruitMap_Ok();
+        Map<Fruit, Integer> expected = getFruitMap();
         fruitsConsumer.accept(expected);
         List<String> csvRows = loadLinesFromFile(FRUIT_REPORT_PATH);
         assertEquals("Report header", CSV_HEADER, csvRows.get(0));
@@ -61,7 +56,7 @@ public class FruitsConsumerCsvTest {
         fruitsConsumer.accept(null);
     }
 
-    private Map<Fruit, Integer> getFruitMap_Ok() {
+    private Map<Fruit, Integer> getFruitMap() {
         Map<Fruit, Integer> expectedMap = new HashMap<>();
         expectedMap.put(new Fruit("apple"), 30);
         expectedMap.put(new Fruit("banana"), 1000);

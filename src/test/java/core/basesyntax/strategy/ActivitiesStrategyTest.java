@@ -105,4 +105,9 @@ public class ActivitiesStrategyTest {
         activitiesStrategy.operation(fruitInfo);
         assertNotEquals(expect.entrySet(), Storage.fruits.entrySet());
     }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
+    }
 }

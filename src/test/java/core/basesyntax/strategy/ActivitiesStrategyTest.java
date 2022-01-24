@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperation;
@@ -8,10 +10,13 @@ import core.basesyntax.strategy.impl.ActivitiesStrategyImpl;
 import core.basesyntax.strategy.impl.BalanceActivitiesShop;
 import core.basesyntax.strategy.impl.PurchaseActivitiesShop;
 import core.basesyntax.strategy.impl.SupplyActivitiesShop;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.*;
-import org.junit.*;
-import static org.junit.Assert.*;
 
 public class ActivitiesStrategyTest {
     private static ActivitiesStrategy activitiesStrategy;
@@ -31,55 +36,34 @@ public class ActivitiesStrategyTest {
 
     @Test
     public void getActivityBalance_Ok() {
-        String expect = BalanceActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.BALANCE).getClass().getSimpleName();
-        assertEquals(expect, actual);
-    }
-
-    @Test
-    public void getWrongActivityBalance_NotOk() {
-        String expect = BalanceActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.PURCHASE).getClass().getSimpleName();
-        assertNotEquals(expect, actual);
+        ActivitiesShop actual = new BalanceActivitiesShop();
+        ActivitiesShop expect = operationTest.get(TypeActivity.BALANCE);
+        assertEquals(expect.getClass().getSimpleName(), actual.getClass().getSimpleName());
     }
 
     @Test
     public void getActivityPurchase_Ok() {
-        String expect = PurchaseActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.PURCHASE).getClass().getSimpleName();
-        assertEquals(expect, actual);
-    }
-
-    @Test
-    public void getWrongActivityPurchase_NotOk() {
-        String expect = PurchaseActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.BALANCE).getClass().getSimpleName();
-        assertNotEquals(expect, actual);
+        ActivitiesShop actual = new PurchaseActivitiesShop();
+        ActivitiesShop expect = operationTest.get(TypeActivity.PURCHASE);
+        assertEquals(expect.getClass().getSimpleName(), actual.getClass().getSimpleName());
     }
 
     @Test
     public void getActivitySupply_Ok() {
-        String expect = SupplyActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.SUPPLY).getClass().getSimpleName();
-        assertEquals(expect, actual);
-    }
-
-    @Test
-    public void getWrongActivitySupply_NotOk() {
-        String expect = SupplyActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.BALANCE).getClass().getSimpleName();
-        assertNotEquals(expect, actual);
+        ActivitiesShop actual = new SupplyActivitiesShop();
+        ActivitiesShop expect = operationTest.get(TypeActivity.SUPPLY);
+        assertEquals(expect.getClass().getSimpleName(), actual.getClass().getSimpleName());
     }
 
     @Test
     public void getTypeActivityReturn_Ok() {
-        String expect = SupplyActivitiesShop.class.getSimpleName();
-        String actual = operationTest.get(TypeActivity.RETURN).getClass().getSimpleName();
-        assertEquals(expect, actual);
+        ActivitiesShop actual = new SupplyActivitiesShop();
+        ActivitiesShop expect = operationTest.get(TypeActivity.RETURN);
+        assertEquals(expect.getClass().getSimpleName(), actual.getClass().getSimpleName());
     }
 
     @Test
-    public void ActivityStrategy_Ok() {
+    public void activityStrategy_Ok() {
         fruitInfo.add(new FruitOperation(TypeActivity.BALANCE, new Fruit("apple"), 10));
         fruitInfo.add(new FruitOperation(TypeActivity.BALANCE, new Fruit("banana"), 30));
         Map<Fruit, Integer> expect = new HashMap<>();
@@ -87,23 +71,6 @@ public class ActivitiesStrategyTest {
         expect.put(new Fruit("banana"), 30);
         activitiesStrategy.operation(fruitInfo);
         assertEquals(expect.entrySet(), Storage.fruits.entrySet());
-    }
-
-    @Test
-    public void ActivityStrategy_NotOk() {
-        fruitInfo.add(new FruitOperation(TypeActivity.BALANCE, new Fruit("apple"), 10));
-        Map<Fruit, Integer> expect = new HashMap<>();
-        expect.put(new Fruit("banana"), 30);
-        activitiesStrategy.operation(fruitInfo);
-        assertNotEquals(expect.entrySet(), Storage.fruits.entrySet());
-    }
-
-    @Test
-    public void ActivityStrategyIsEmpty_NotOk() {
-        fruitInfo.add(new FruitOperation(TypeActivity.BALANCE, new Fruit("apple"), 10));
-        Map<Fruit, Integer> expect = new HashMap<>();
-        activitiesStrategy.operation(fruitInfo);
-        assertNotEquals(expect.entrySet(), Storage.fruits.entrySet());
     }
 
     @After

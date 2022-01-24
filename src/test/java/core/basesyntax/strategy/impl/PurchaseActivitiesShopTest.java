@@ -1,12 +1,16 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.TypeActivity;
 import core.basesyntax.strategy.ActivitiesShop;
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class PurchaseActivitiesShopTest {
     private static ActivitiesShop activitiesShop;
@@ -35,12 +39,12 @@ public class PurchaseActivitiesShopTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void PurchaseNull_NotOk() {
+    public void purchaseNull_NotOk() {
         activitiesShop.calculate(fruitOperation);
     }
 
     @Test(expected = RuntimeException.class)
-    public void PurchaseNegative_NotOk() {
+    public void purchaseNegative_NotOk() {
         Storage.fruits.put(fruit, 55);
         activitiesShop.calculate(fruitOperation);
     }
@@ -48,6 +52,5 @@ public class PurchaseActivitiesShopTest {
     @After
     public void tearDown() throws Exception {
         Storage.fruits.clear();
-
     }
 }

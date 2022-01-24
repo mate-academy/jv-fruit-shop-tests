@@ -1,5 +1,7 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperation;
@@ -9,12 +11,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class SupplyActivitiesShopTest {
     private static ActivitiesShop activitiesShop;
     private static Fruit fruit;
-    FruitOperation fruitOperation;
+    private FruitOperation fruitOperation;
 
     @BeforeClass
     public static void beforeClass() throws Exception {

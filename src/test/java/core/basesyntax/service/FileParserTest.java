@@ -1,18 +1,18 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.TypeActivity;
 import core.basesyntax.service.impl.FileParserImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileParserTest {
     private static FileParser fileParser;
-    private static List<String> listOfParser;
     private static List<FruitOperation> expect;
 
     @BeforeClass
@@ -30,8 +30,8 @@ public class FileParserTest {
     }
 
     @Test
-    public void FileParserCorrect_Ok() {
-        listOfParser = List.of("type,fruit,quantity", "b,banana,20",
+    public void fileParserCorrect_Ok() {
+        List<String> listOfParser = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",
                 "p,apple,20", "p,banana,5", "s,banana,50");
         List<FruitOperation> actual = fileParser.parse(listOfParser);
@@ -45,55 +45,55 @@ public class FileParserTest {
 
     @Test(expected = RuntimeException.class)
     public void parseTypeActivityIsEmpty_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", ",banana,20");
+        List<String> listOfParser = List.of("type,fruit,quantity", ",banana,20");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseTypeActivityIsBlank_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", "   ,banana,20");
+        List<String> listOfParser = List.of("type,fruit,quantity", "   ,banana,20");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseTypeActivityNull_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", ",banana,20");
+        List<String> listOfParser = List.of("type,fruit,quantity", ",banana,20");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseFruitIsEmpty_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", "p,,20");
+        List<String> listOfParser = List.of("type,fruit,quantity", "p,,20");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseFruitIsBlank_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", "p,   ,20");
+        List<String> listOfParser = List.of("type,fruit,quantity", "p,   ,20");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseQuantityZero_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", "p,banana,0");
+        List<String> listOfParser = List.of("type,fruit,quantity", "p,banana,0");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseQuantityNegative_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", "p,banana,-10");
+        List<String> listOfParser = List.of("type,fruit,quantity", "p,banana,-10");
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseStoreInformationNull_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", null);
+        List<String> listOfParser = List.of("type,fruit,quantity", null);
         fileParser.parse(listOfParser);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseStoreInformationIncorect_NotOk() {
-        listOfParser = List.of("type,fruit,quantity", "d,juce,tr");
+        List<String> listOfParser = List.of("type,fruit,quantity", "d,juce,tr");
         fileParser.parse(listOfParser);
     }
 }

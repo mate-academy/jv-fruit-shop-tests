@@ -38,15 +38,6 @@ public class ReaderServiceCsvImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void readFromFile_notOk() {
-        String filePath = "src/test/resources/input.csv";
-        List<String> actual = readerService.readFromFile(filePath);
-        actual.add("r,apple,5");
-        List<String> expected = data;
-        Assert.assertNotEquals(expected, actual);
-    }
-
     @Test(expected = RuntimeException.class)
     public void readFromFile_wrongFilePath_notOk() {
         String filePath = "";

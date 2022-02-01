@@ -21,12 +21,4 @@ public class ParserImplTest {
         TransactionDto expected = new TransactionDto("b", "banana", 10);
         Assert.assertEquals(expected.getFruitName(), actual.getFruitName());
     }
-
-    @Test
-    public void parseLine_notOk() {
-        String line = "b,banana,1";
-        TransactionDto actual = parser.parseLine(line);
-        TransactionDto expected = new TransactionDto("b", "banana", 10);
-        Assert.assertNotEquals(expected, actual);
-    }
 }

@@ -18,7 +18,7 @@ public class CsvWriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_Ok_notOk() {
+    public void writeToFile_emptyPath_notOk() {
         String reportFilePath = "";
         String data = "apple,100";
         try {

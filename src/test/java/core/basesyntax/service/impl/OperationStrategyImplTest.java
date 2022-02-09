@@ -54,13 +54,5 @@ public class OperationStrategyImplTest {
         PurchaseOperationHandler expexted = new PurchaseOperationHandler(fruitDao);
         Assert.assertEquals(expexted.getClass(), actual.getClass());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void getOperationHandler_wrongOperation_notOk() {
-        String operation = "a";
-        PurchaseOperationHandler actual = (PurchaseOperationHandler)
-                operationStrategy.getOperationHandler(operation);
-        PurchaseOperationHandler expexted = new PurchaseOperationHandler(fruitDao);
-        Assert.assertEquals(expexted.getClass(), actual.getClass());
-    }
 }
+

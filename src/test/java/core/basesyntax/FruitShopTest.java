@@ -16,8 +16,8 @@ import core.basesyntax.tranzactions.ReturnTransaction;
 import core.basesyntax.tranzactions.SupplyTransaction;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class FruitShopTest {
     private MakingDailyTransactionsImpl transactions;
@@ -31,8 +31,8 @@ public class FruitShopTest {
     private StorageServiceImpl service;
     private CreateReport creating;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeMethod
+    public void setUp() {
         service = new StorageServiceImpl();
         transactions = new MakingDailyTransactionsImpl();
         toReport = new GettingNewReportImpl();
@@ -234,5 +234,15 @@ public class FruitShopTest {
         assertThrows(RuntimeException.class,()
                 -> creating.createReport(service.getStorage()),
                 "Customer can`t return non-existence fruit");
+    } //good
+
+    @Test
+    public void getReport_Ok() {
+        balance.applyOperations("banana",10);
+        balance.applyOperations("apple",20);
+        String actual = toReport.getReport();
+        String excepted = creating.createReport(service.getStorage());
+        assertEquals(excepted,actual,"Result of getReport will be "
+                + excepted + " , but was " + actual);
     } //good
 }

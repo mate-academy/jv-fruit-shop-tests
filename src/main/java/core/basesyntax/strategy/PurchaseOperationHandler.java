@@ -4,6 +4,8 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.exception.OperationHandlerException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
+import java.util.Locale;
+import java.util.Map;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
@@ -25,4 +27,9 @@ public class PurchaseOperationHandler implements OperationHandler {
         }
         fruitDao.add(fruit, newQuantity);
     }
+
+    public Map<String, OperationHandler> getOperationHandlerMap(Locale a) {
+        return null;
+    }
 }
+

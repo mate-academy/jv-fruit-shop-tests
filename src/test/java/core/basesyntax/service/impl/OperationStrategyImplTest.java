@@ -8,6 +8,7 @@ import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -54,5 +55,24 @@ public class OperationStrategyImplTest {
         PurchaseOperationHandler expexted = new PurchaseOperationHandler(fruitDao);
         Assert.assertEquals(expexted.getClass(), actual.getClass());
     }
-}
 
+    @Test
+    public void getOperationHandler_AddOperationHandler2_ok() {
+        String operation = "r";
+        AddOperationHandler actual = (AddOperationHandler)
+                operationStrategy.getOperationHandler(operation);
+        AddOperationHandler expexted = new AddOperationHandler(fruitDao);
+        Assert.assertEquals(expexted.getClass(), actual.getClass());
+    }
+
+    @Test
+    public void getOperationHandler_wrongOperation_notOk() throws Exception {
+    }
+
+    @Test
+    public void getOperationHandler_wrongOperationL_notOk() throws Exception {
+        PurchaseOperationHandler expected = new PurchaseOperationHandler(fruitDao);
+        Map<String, OperationHandler> operationHandlerMap
+                = expected.getOperationHandlerMap(Locale.forLanguageTag("a"));
+    }
+}

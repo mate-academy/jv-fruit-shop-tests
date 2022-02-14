@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class OperatorImpl implements Operator {
     private static final String CSV_SEPARATOR = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String CSV_REPORT_FILE_HEADER = "fruit,quantity";
     private final TransactionStrategy transactionStrategy = new TransactionStrategyImpl();
     private final FileService fileService = new FileServiceImpl();
     private final FruitShopDao dao = new FruitShopDaoImpl();
@@ -41,7 +42,7 @@ public class OperatorImpl implements Operator {
     @Override
     public int closeShift() {
         StringBuilder builder = new StringBuilder();
-        builder.append("fruit,quantity").append(LINE_SEPARATOR);
+        builder.append(CSV_REPORT_FILE_HEADER).append(LINE_SEPARATOR);
         dao.getRecords().entrySet().stream()
                 .filter(e -> e.getValue() > 0)
                 .map(e -> builder.append(e.getKey().getFruitType().getAsString())

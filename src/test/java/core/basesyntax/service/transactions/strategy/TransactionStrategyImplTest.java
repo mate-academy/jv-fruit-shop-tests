@@ -1,6 +1,7 @@
 package core.basesyntax.service.transactions.strategy;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.transactions.BalanceTransactionHandler;
 import core.basesyntax.service.transactions.MinusTransactionHandler;

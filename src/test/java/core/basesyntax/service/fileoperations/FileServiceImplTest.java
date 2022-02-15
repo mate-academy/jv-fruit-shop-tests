@@ -1,18 +1,15 @@
 package core.basesyntax.service.fileoperations;
 
-import core.basesyntax.db.Storage;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FileServiceImplTest {
     private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";

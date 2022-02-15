@@ -1,15 +1,16 @@
 package core.basesyntax.service.operator;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OperatorImplTest {
     private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
@@ -27,7 +28,7 @@ public class OperatorImplTest {
             = "src/test/resources/input_only_b_transactions.csv";
     private static final String INPUT_ONLY_MINUS_TRANSACTIONS_FILE_NAME
             = "src/test/resources/input_only_minus_transactions.csv";
-    private static OperatorImpl operator = new OperatorImpl();
+    private static final Operator OPERATOR = new OperatorImpl();
 
     @Before
     public void setUp() {
@@ -37,7 +38,7 @@ public class OperatorImplTest {
     @Test
     public void openShift_normalData_Ok() {
         inputFileSetup(INPUT_NORMAL_DATA_FILE_NAME);
-        operator.openShift();
+        OPERATOR.openShift();
         int expected = 5;
         assertEquals(expected, Storage.storage.size());
     }
@@ -45,7 +46,7 @@ public class OperatorImplTest {
     @Test
     public void openShift_emptyData_Ok() {
         inputFileSetup(INPUT_EMPTY_DATA_FILE_NAME);
-        operator.openShift();
+        OPERATOR.openShift();
         int expected = 0;
         assertEquals(expected, Storage.storage.size());
     }
@@ -53,7 +54,7 @@ public class OperatorImplTest {
     @Test
     public void openShift_noBTransactionsInput_Ok() {
         inputFileSetup(INPUT_NO_B_TRANSACTIONS_FILE_NAME);
-        operator.openShift();
+        OPERATOR.openShift();
         int expected = 4;
         assertEquals(expected, Storage.storage.size());
     }
@@ -61,7 +62,7 @@ public class OperatorImplTest {
     @Test
     public void openShift_onlyBTransactionsInput_Ok() {
         inputFileSetup(INPUT_ONLY_B_TRANSACTIONS_FILE_NAME);
-        operator.openShift();
+        OPERATOR.openShift();
         int expected = 4;
         assertEquals(expected, Storage.storage.size());
     }
@@ -69,7 +70,7 @@ public class OperatorImplTest {
     @Test
     public void openShift_onlyMinusTransactionsInput_Ok() {
         inputFileSetup(INPUT_ONLY_MINUS_TRANSACTIONS_FILE_NAME);
-        operator.openShift();
+        OPERATOR.openShift();
         int expected = 0;
         assertEquals(expected, Storage.storage.size());
     }
@@ -77,8 +78,8 @@ public class OperatorImplTest {
     @Test
     public void closeShift_emptyDb_Ok() {
         inputFileSetup(INPUT_EMPTY_DATA_FILE_NAME);
-        operator.openShift();
-        operator.closeShift();
+        OPERATOR.openShift();
+        OPERATOR.closeShift();
         List<String> outputList = readOutput();
         int expected = 1;
         assertEquals(expected, outputList.size());
@@ -87,8 +88,8 @@ public class OperatorImplTest {
     @Test
     public void closeShift_normalData_Ok() {
         inputFileSetup(INPUT_NORMAL_DATA_FILE_NAME);
-        operator.openShift();
-        operator.closeShift();
+        OPERATOR.openShift();
+        OPERATOR.closeShift();
         List<String> outputList = readOutput();
         int expected = 6;
         assertEquals(expected, outputList.size());

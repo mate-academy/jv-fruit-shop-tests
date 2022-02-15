@@ -1,6 +1,7 @@
 package core.basesyntax.service.transactions;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;

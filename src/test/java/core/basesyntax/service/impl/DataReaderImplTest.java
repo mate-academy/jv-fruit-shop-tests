@@ -3,8 +3,6 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.DataReader;
-
-import java.nio.file.Files;
 import java.util.List;
 import org.junit.Test;
 

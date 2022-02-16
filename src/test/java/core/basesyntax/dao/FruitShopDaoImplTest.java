@@ -1,5 +1,7 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.HashMap;
@@ -7,8 +9,6 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class FruitShopDaoImplTest {
     private static final Map<Fruit, Integer> TEST_MAP = new HashMap<>();

@@ -26,6 +26,9 @@ public class FruitDaoImpl implements FruitDao {
         if (quantityToSubtract <= storage.get(fruit)) {
             storage.replace(fruit,
                     storage.get(fruit) - quantityToSubtract);
+        } else {
+            throw new RuntimeException("Quantity to subtract must be less than actual quantity of"
+                    + " fruits. The actual quantity of " + fruit.getName() + " is: " + storage.get(fruit));
         }
     }
 

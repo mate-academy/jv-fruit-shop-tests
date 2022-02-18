@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.DataProcessingService;
@@ -15,16 +13,6 @@ public class ReportCreatorServiceTest {
     private static final String SEPARATOR = ",";
     private static DataProcessingService dataProcessingService;
     private static final ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
-
-    @Test
-    public void createReport_emptyStorage() {
-        try {
-            reportCreatorService.createReport();
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException should be thrown is storage is empty");
-    }
 
     @Test
     public void createReport_correctData_ok() {

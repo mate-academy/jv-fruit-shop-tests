@@ -13,8 +13,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
-    private static final String pathToReadFile = "src/test/resources/dayFile.csv";
+    private final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    private final String pathToReadFile = "src/test/resources/dayFile.csv";
 
     @Test
     public void getDataFromFile_emptyFile_notOk() {

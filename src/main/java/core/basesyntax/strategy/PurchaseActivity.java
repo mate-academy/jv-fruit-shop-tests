@@ -9,6 +9,7 @@ public class PurchaseActivity implements TypeOfActivity {
     public void realizeType(FruitTransaction fruitTransaction) {
         Fruit fruit = new Fruit(fruitTransaction.getFruit());
         int currentAmount = Storage.storage.get(fruit);
+        checkValidData(fruit,currentAmount);
         Storage.storage.put(fruit,currentAmount - fruitTransaction.getQuantity());
     }
 }

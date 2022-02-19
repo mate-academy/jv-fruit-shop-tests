@@ -95,9 +95,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <excludes>
-                        <exclude>**/MainShop*</exclude>
-                    </excludes>
+                    <excludes>**/MainShop*</excludes>
                 </configuration>
             </plugin>
         </plugins>

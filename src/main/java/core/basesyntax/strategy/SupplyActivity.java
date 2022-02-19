@@ -8,6 +8,7 @@ public class SupplyActivity implements TypeOfActivity {
     @Override
     public void realizeType(FruitTransaction fruitTransaction) {
         Fruit fruit = new Fruit(fruitTransaction.getFruit());
+        checkValidData(fruit, fruitTransaction.getQuantity());
         if (!Storage.storage.containsKey(fruit)) {
             Storage.storage.put(fruit, fruitTransaction.getQuantity());
         } else {

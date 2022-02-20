@@ -13,7 +13,7 @@ public class FileWriterServiceImpl implements FileWriterService {
     private final StringBuilder stringBuilder = new StringBuilder();
 
     @Override
-    public void write(String reportFilePath, List<Fruit> fruitsFromStorage) {
+    public boolean write(String reportFilePath, List<Fruit> fruitsFromStorage) {
         for (Fruit fruit : fruitsFromStorage) {
             stringBuilder.append(System.lineSeparator())
                    .append(fruit.getFruitType()).append(SIGN).append(fruit.getAmount());
@@ -21,8 +21,9 @@ public class FileWriterServiceImpl implements FileWriterService {
         reportFile += stringBuilder.toString();
         try {
             Files.write(Paths.get(reportFilePath), reportFile.getBytes());
+            return true;
         } catch (IOException e) {
-            throw new RuntimeException("Can`t rite file by the path " + reportFilePath, e);
+            throw new RuntimeException("Can`t write file by the path " + reportFilePath, e);
         }
     }
 }

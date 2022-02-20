@@ -18,10 +18,11 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void setDataToStorage(List<FruitTransaction> fruitsTransactionList) {
+    public boolean setDataToStorage(List<FruitTransaction> fruitsTransactionList) {
         for (FruitTransaction transaction : fruitsTransactionList) {
             operationHandler = operationStrategy.get(transaction.getOperation());
             operationHandler.changeData(transaction);
         }
+        return true;
     }
 }

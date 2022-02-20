@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitService {
-    void setDataToStorage(List<FruitTransaction> fruitsTransactionList);
+    boolean setDataToStorage(List<FruitTransaction> fruitsTransactionList);
 }

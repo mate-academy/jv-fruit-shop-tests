@@ -5,6 +5,8 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
+import java.util.Objects;
+
 public class BalanceOperationHandler implements OperationHandler {
     private FruitDao fruitDao = new FruitDaoImpl();
 

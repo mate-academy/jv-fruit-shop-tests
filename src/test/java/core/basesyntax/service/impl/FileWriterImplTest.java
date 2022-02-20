@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String INVALID_PATH = "NO|SUCH|FILE|PATH";
+    private static final String INVALID_PATH = "*/[][[313*&7652387/523|532";
     private static final String FILE_PATH = "src/test/java/resources/FileWriterTestFile.txt";
     private final FileWriter fileWriter = new FileWriterImpl();
 

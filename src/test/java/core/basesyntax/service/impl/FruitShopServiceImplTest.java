@@ -30,7 +30,7 @@ public class FruitShopServiceImplTest {
             "src/test/java/resources/fruitShopServiceFiles/ExpectedResult";
     private static final String EMPTY_FILE_PATH =
             "src/test/java/resources/EmptyFile";
-    private static final String INVALID_PATH = "NO|SUCH|PATH";
+    private static final String INVALID_PATH = "*/[][[313*&7652387/523|532";
     private static final Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
     private final FruitShopService fruitShopService = new FruitShopServiceImpl(map);
 

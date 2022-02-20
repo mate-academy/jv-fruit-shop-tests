@@ -5,13 +5,20 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
-import java.util.Objects;
-
 public class BalanceOperationHandler implements OperationHandler {
     private FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
     public void changeData(FruitTransaction fruitTransaction) {
+        if (fruitTransaction == null) {
+            throw new RuntimeException("Fruit transaction can`t be null");
+        }
+        if (fruitTransaction.getFruitType() == null) {
+            throw new RuntimeException("Fruit type can`t be null");
+        }
+        if (fruitTransaction.getAmount() < 0) {
+            throw new RuntimeException("Fruit amount can`t be negative");
+        }
         Fruit newFruit = new Fruit();
         newFruit.setFruitType(fruitTransaction.getFruitType());
         newFruit.setAmount(fruitTransaction.getAmount());

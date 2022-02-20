@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class TransactionServiceImplTest {
     private static final int TEST_FRUIT_AMOUNT_ONE = 10;
@@ -28,7 +27,6 @@ public class TransactionServiceImplTest {
     private static List<String> testStringsListEmpty;
     private static List<FruitTransaction> expectedList;
     private static TransactionService transactionService;
-
 
     @BeforeClass
     public static void beforeClass() {
@@ -68,7 +66,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void processData_negativeAmount() {
+    public void processData_negativeAmount_notOk() {
         testStringsList.add(TEST_STRING_FOUR_NEGATIVE_AMOUNT);
         transactionService.processData(testStringsList);
     }
@@ -80,8 +78,4 @@ public class TransactionServiceImplTest {
         List<FruitTransaction> actualList = transactionService.processData(testStringsList);
         assertEquals(expectedList, actualList);
     }
-
-
-
-
 }

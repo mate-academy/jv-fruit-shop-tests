@@ -12,7 +12,7 @@ public class FruitDaoImpl implements FruitDao {
             Storage.fruits.add(fruit);
             return true;
         }
-            throw new RuntimeException("Fruit can`t be null");
+        throw new RuntimeException("Fruit can`t be null");
     }
 
     @Override
@@ -22,7 +22,7 @@ public class FruitDaoImpl implements FruitDao {
                     .filter(f -> f.getFruitType().equals(fruitType))
                     .findFirst().get();
         }
-            throw new RuntimeException("FruitType can`t be empty");
+        throw new RuntimeException("FruitType can`t be empty");
     }
 
     @Override

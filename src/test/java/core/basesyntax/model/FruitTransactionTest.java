@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
+import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class FruitTransactionTest {
     private static final String EMPTY_OPERATION = "";

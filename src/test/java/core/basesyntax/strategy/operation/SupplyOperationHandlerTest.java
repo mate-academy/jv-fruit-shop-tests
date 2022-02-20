@@ -11,18 +11,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BalanceOperationHandlerTest {
+public class SupplyOperationHandlerTest {
     private static final int TEST_FRUIT_AMOUNT_VALID = 10;
     private static final int TEST_FRUIT_AMOUNT_INVALID = -10;
+    private static final int EXPECTED_AMOUNT = 20;
     private static final String TEST_FRUIT_TYPE = "avocado";
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransactionTest;
     private static FruitDao fruitDao;
-    private Fruit expectedFruit;
+    private Fruit testFruit;
 
     @BeforeClass
     public static void beforeClass() {
-        operationHandler = new BalanceOperationHandler();
+        operationHandler = new SupplyOperationHandler();
         fruitTransactionTest = new FruitTransaction();
         fruitDao = new FruitDaoImpl();
         Storage.fruits.clear();
@@ -54,11 +55,12 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void changeData_transactionValid_ok() {
-        expectedFruit = new Fruit();
-        expectedFruit.setFruitType(TEST_FRUIT_TYPE);
-        expectedFruit.setAmount(TEST_FRUIT_AMOUNT_VALID);
+        testFruit = new Fruit();
+        testFruit.setFruitType(TEST_FRUIT_TYPE);
+        testFruit.setAmount(TEST_FRUIT_AMOUNT_VALID);
+        Storage.fruits.add(testFruit);
         operationHandler.changeData(fruitTransactionTest);
         Fruit actualFruit = fruitDao.get(fruitTransactionTest.getFruitType());
-        assertEquals(expectedFruit, actualFruit);
+        assertEquals(EXPECTED_AMOUNT, actualFruit.getAmount());
     }
 }

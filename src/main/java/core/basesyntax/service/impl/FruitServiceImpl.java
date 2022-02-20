@@ -19,6 +19,10 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public boolean setDataToStorage(List<FruitTransaction> fruitsTransactionList) {
+        if (fruitsTransactionList.isEmpty()) {
+            throw new RuntimeException("Fruits transaction list should contain "
+                    + "at least one transaction");
+        }
         for (FruitTransaction transaction : fruitsTransactionList) {
             operationHandler = operationStrategy.get(transaction.getOperation());
             operationHandler.changeData(transaction);

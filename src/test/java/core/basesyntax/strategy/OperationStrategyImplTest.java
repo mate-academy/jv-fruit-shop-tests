@@ -1,17 +1,17 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationHandler;
 import core.basesyntax.strategy.operation.ReturnOperationHandler;
 import core.basesyntax.strategy.operation.SupplyOperationHandler;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static FruitTransaction fruitTransaction;

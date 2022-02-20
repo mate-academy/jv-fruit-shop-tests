@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReaderService;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static final String VALID_SOURCE_FILE_PATH
@@ -16,8 +16,8 @@ public class FileReaderServiceImplTest {
     private static final String TEST_STRING_ONE = "test,file";
     private static final String TEST_STRING_TWO = "testString,1";
     private static final String TEST_STRING_THREE = "testString,2";
-    public static List<String> testStringsList;
     private static FileReaderService fileReaderService;
+    private static List<String> testStringsList;
 
     @BeforeClass
     public static void beforeClass() {

@@ -31,7 +31,7 @@ public class InitAmountHandlerTest {
     }
 
     @Test
-    public void processData_validData_Ok() {
+    public void processData_validData_ok() {
         initAmountHandler.processData(banana, 20);
         initAmountHandler.processData(apple, 20);
         initAmountHandler.processData(cherry, 20);

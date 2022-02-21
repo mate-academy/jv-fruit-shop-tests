@@ -60,7 +60,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void processFiles_validData_Ok() throws IOException {
+    public void processFiles_validData_ok() throws IOException {
         List<String> actualEmptyFile = Files.readAllLines(Path.of(PATH_TO_REPORT_FILE));
         List<String> expectedEmptyFile = new ArrayList<>();
         assertNotNull(actualEmptyFile);

@@ -44,7 +44,7 @@ public class DataWriterToFileTest {
     }
 
     @Test
-    public void writeData_validData_Ok() {
+    public void writeData_validData_ok() {
         writer.writeData(storage, PATH_TO_REPORT_FILE);
         List<String> actualResult;
         List<String> expectedResult;

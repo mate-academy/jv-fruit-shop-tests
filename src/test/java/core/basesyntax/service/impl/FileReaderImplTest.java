@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,12 +14,13 @@ import org.junit.rules.ExpectedException;
 public class FileReaderImplTest {
     private static final String PATH_TO_GIVEN_DATA_FILE = "src/test/resources/daily_activities.csv";
     private static final String WRONG_PATH_TO_FILE = "1src/WRONG_PATH_TO_FILE";
+    private static final List<List<String>> expectedResult = new ArrayList<>();
     @Rule
     public final ExpectedException exceptionRule = ExpectedException.none();
     private final FileReader reader = new FileReaderImpl();
 
-    @Test
-    public void getData_Ok() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         List<String> record1 = new ArrayList<>();
         record1.add("b, banana, 20");
         List<String> record2 = new ArrayList<>();
@@ -37,7 +39,6 @@ public class FileReaderImplTest {
         record8.add("s, banana, 50");
         List<String> record9 = new ArrayList<>();
         record9.add("b, cherry, 60");
-        List<List<String>> expectedResult = new ArrayList<>();
         expectedResult.add(record1);
         expectedResult.add(record2);
         expectedResult.add(record3);
@@ -47,6 +48,10 @@ public class FileReaderImplTest {
         expectedResult.add(record7);
         expectedResult.add(record8);
         expectedResult.add(record9);
+    }
+
+    @Test
+    public void getData_ok() {
         List<List<String>> actualResult = reader.getData(PATH_TO_GIVEN_DATA_FILE);
         assertNotNull(actualResult);
         assertEquals(expectedResult.toString(), actualResult.toString());

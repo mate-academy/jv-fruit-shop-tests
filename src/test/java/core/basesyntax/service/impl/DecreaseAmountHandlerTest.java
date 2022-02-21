@@ -39,7 +39,7 @@ public class DecreaseAmountHandlerTest {
     }
 
     @Test
-    public void processData_validData_Ok() {
+    public void processData_validData_ok() {
         decreaseAmountHandler.processData(banana, 10);
         decreaseAmountHandler.processData(apple, 20);
         decreaseAmountHandler.processData(cherry, 30);

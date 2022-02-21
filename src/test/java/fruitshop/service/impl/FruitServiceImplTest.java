@@ -63,7 +63,7 @@ public class FruitServiceImplTest {
     public void generateReport_ok() {
         Storage.fruitList.put("banana", 152);
         Storage.fruitList.put("apple", 90);
-        byte[] expected = new byte[]{102, 114, 117, 105, 116, 44, 113, 117, 97, 110, 116, 105,
+        byte[] expected = {102, 114, 117, 105, 116, 44, 113, 117, 97, 110, 116, 105,
                 116, 121, 13, 10, 98, 97, 110, 97, 110, 97, 44, 49, 53, 50, 13, 10, 97, 112, 112,
                 108, 101, 44, 57, 48};
         byte[] actual = fruitService.generateReport();

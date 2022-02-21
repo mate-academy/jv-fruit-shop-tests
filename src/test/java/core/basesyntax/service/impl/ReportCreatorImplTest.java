@@ -10,9 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private static final String EXPECTED = "fruit,quantity\r\n"
-            + "banana,50\r\n"
-            + "melon,30\r\n"
+    private static final String EXPECTED = "fruit,quantity" + System.lineSeparator()
+            + "banana,50" + System.lineSeparator()
+            + "melon,30" + System.lineSeparator()
             + "apple,70";
     private static ReportCreator reportCreator;
 

@@ -22,10 +22,10 @@ public class StorageDaoImplTest {
 
     @Test
     public void addFruitToStorage_validData_ok() {
-        int sizeBeforeAddingData = Storage.fruitStorage.size();
+        int expected = Storage.fruitStorage.size();
         storageDao.addFruitToStorage("apple", 50);
-        int sizeAfterAddingData = Storage.fruitStorage.size();
-        Assert.assertNotEquals(sizeAfterAddingData, sizeBeforeAddingData);
+        int actual = Storage.fruitStorage.size();
+        Assert.assertNotEquals(actual, expected);
     }
 
     @Test

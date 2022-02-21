@@ -25,7 +25,6 @@ public class BalanceOperationHandlerTest {
         operationHandler = new BalanceOperationHandler();
         fruitTransactionTest = new FruitTransaction();
         fruitDao = new FruitDaoImpl();
-        Storage.fruits.clear();
     }
 
     @Before

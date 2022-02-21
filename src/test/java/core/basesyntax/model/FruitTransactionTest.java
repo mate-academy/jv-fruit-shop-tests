@@ -69,5 +69,4 @@ public class FruitTransactionTest {
                 = fruitTransaction.getOperationType(VALID_OPERATION_RETURN);
         assertEquals(RETURN, actualOperation);
     }
-
 }

@@ -27,7 +27,6 @@ public class PurchaseOperationHandlerTest {
         operationHandler = new PurchaseOperationHandler();
         fruitTransactionTest = new FruitTransaction();
         fruitDao = new FruitDaoImpl();
-        Storage.fruits.clear();
     }
 
     @Before

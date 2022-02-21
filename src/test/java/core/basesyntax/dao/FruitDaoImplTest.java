@@ -42,7 +42,6 @@ public class FruitDaoImplTest {
         testFruit.setFruitType(TEST_FRUIT_TYPE_ONE);
         testFruit.setAmount(TEST_FRUIT_AMOUNT_ONE);
         Storage.fruits.clear();
-
     }
 
     @After

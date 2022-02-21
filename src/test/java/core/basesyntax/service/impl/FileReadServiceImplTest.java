@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.TransactionStorage;
 import core.basesyntax.service.file.FileReadService;
 import core.basesyntax.service.file.WriteDataToStorageService;
+import org.junit.After;
 import org.junit.Test;
 
 public class FileReadServiceImplTest {
@@ -46,5 +47,10 @@ public class FileReadServiceImplTest {
         int expected = 0;
         int actual = transactionStorage.getAll().size();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        transactionStorage.getAll().clear();
     }
 }

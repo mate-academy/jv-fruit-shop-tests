@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ProcessDataImplTest {
-    private ProcessDataService processDataService;
-    private final Map<Operation, OperationHandler> operationsMap = new HashMap<>();
+    private static ProcessDataService processDataService;
+    private static final Map<Operation, OperationHandler> operationsMap = new HashMap<>();
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationsMap.put(Operation.BALANCE, new BalanceHandler());
         operationsMap.put(Operation.RETURN, new AdditionHandler());
         operationsMap.put(Operation.SUPPLY, new AdditionHandler());

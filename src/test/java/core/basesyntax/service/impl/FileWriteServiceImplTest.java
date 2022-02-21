@@ -6,7 +6,7 @@ import core.basesyntax.service.file.FileWriteService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriteServiceImplTest {
@@ -14,8 +14,8 @@ public class FileWriteServiceImplTest {
     private static String goodFilePath;
     private FileWriteService fileWriteService = new FileWriteServiceImpl();
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         goodData = "fruit,quality" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";

@@ -19,7 +19,6 @@ public class StorageDaoImplTest {
     public static void beforeClass() throws Exception {
         storageDao = new StorageDaoImpl();
         fruitList = new ArrayList<>();
-
     }
 
     @Before
@@ -33,27 +32,27 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void fruit_add_ok() {
+    public void addFruit_ok() {
         storageDao.add(fruit);
         boolean actual = Storage.fruits.isEmpty();
         Assert.assertFalse("Fruit hasn't added to storage", actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fruit_add_notOk() {
+    public void addExistingFruit_notOk() {
         storageDao.add(fruit);
         storageDao.add(fruit);
     }
 
     @Test
-    public void fruit_get_ok() {
+    public void getFruit_ok() {
         Storage.fruits.add(fruit);
         Fruit actual = storageDao.get(fruit.getFruitName());
         Assert.assertEquals(fruit, actual);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void fruit_get_notOk() {
+    public void getNotExistingFruit_notOk() {
         storageDao.get(fruit.getFruitName());
     }
 

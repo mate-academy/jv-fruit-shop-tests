@@ -15,7 +15,6 @@ public class FruitTransactionTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         fruitTransaction = new FruitTransaction();
-
     }
 
     @Test

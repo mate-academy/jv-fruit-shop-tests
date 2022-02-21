@@ -12,9 +12,6 @@ public class FileReaderServiceCsv implements FileReaderService {
 
     @Override
     public List<String> readFromFile(String filePath) {
-        if (filePath == null || filePath.isBlank()) {
-            throw new RuntimeException("File path is incorrect: " + filePath);
-        }
         List<String> strings;
         try {
             strings = Files.readAllLines(Path.of(filePath)).stream()

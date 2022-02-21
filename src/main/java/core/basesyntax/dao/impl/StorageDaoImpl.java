@@ -4,6 +4,7 @@ import static core.basesyntax.db.Storage.storage;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class StorageDaoImpl implements StorageDao {
@@ -29,7 +30,7 @@ public class StorageDaoImpl implements StorageDao {
                 );
             }
         } catch (NoSuchElementException e) {
-            throw new RuntimeException(
+            throw new NoSuchElementException(
                     "FAILED TO SUBSTRACT: no such fruit in storage: " + fruitName
             );
         }
@@ -44,5 +45,9 @@ public class StorageDaoImpl implements StorageDao {
                                 "FAILED TO GET: no such fruit in data base: "
                                 + fruitName)
                 );
+    }
+
+    public List<Fruit> getStorage() {
+        return storage;
     }
 }

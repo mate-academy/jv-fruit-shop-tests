@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
 public interface ReportWriterDao {
-    void createReport();
+    void createReport(String fileName);
 }

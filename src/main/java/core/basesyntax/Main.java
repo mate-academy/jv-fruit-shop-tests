@@ -4,6 +4,7 @@ import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.ReportWriterDao;
 import core.basesyntax.dao.impl.CsvReaderImpl;
 import core.basesyntax.dao.impl.ReportSupplierDaoImpl;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.service.DataProcessor;
 import core.basesyntax.service.DataProcessorImpl;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -24,12 +25,14 @@ public class Main {
         strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new PurchaseOperationHandler());
         strategyMap.put(DataProcessorImpl.OperationType.RETURN, new ReturnOperationHandler());
 
-        final FileReader inputDao = new CsvReaderImpl();
-        final ReportWriterDao reportSupplier = new ReportSupplierDaoImpl();
+        final FileReader fileReader = new CsvReaderImpl();
+        final ReportWriterDao reportSupplier = new ReportSupplierDaoImpl(new StorageDaoImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
-        final DataProcessor dataHandler = new DataProcessorImpl(operationStrategy);
-        List<String> parsedDataFromFile = inputDao.parse("input.csv");
-        dataHandler.createFruits(parsedDataFromFile);
-        reportSupplier.createReport();
+        final DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
+        List<String> parsedDataFromFile = fileReader.parse(
+                "./src/main/java/core/basesyntax/resources/input.csv"
+        );
+        dataProcessor.createFruits(parsedDataFromFile);
+        reportSupplier.createReport("./src/main/java/core/basesyntax/resources/report.csv");
     }
 }

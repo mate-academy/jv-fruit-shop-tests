@@ -9,13 +9,14 @@ import java.util.List;
 public class CsvReaderImpl implements FileReader {
 
     @Override
-    public List<String> parse(String fileName) {
+    public List<String> parse(String filePath) {
         try {
-            return Files.readAllLines(Path.of(
-                    "./src/main/java/core/basesyntax/resources/" + fileName
-            ));
+            if (!Files.readAllLines(Path.of(filePath)).isEmpty()) {
+                return Files.readAllLines(Path.of(filePath));
+            }
+            throw new RuntimeException("file: " + filePath + " is empty");
         } catch (IOException e) {
-            throw new RuntimeException("cant read from file: " + fileName);
+            throw new RuntimeException("cant read from file: " + filePath);
         }
     }
 }

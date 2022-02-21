@@ -7,8 +7,8 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
+import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,21 +17,17 @@ public class SupplyOperationHandlerTest {
     private static final int DEFAULT_FRUIT_QUANTITY = 40;
     private static final Fruit FRUIT = new Fruit(FRUIT_TYPE, DEFAULT_FRUIT_QUANTITY);
     private static final int SUPPLY_QUANTITY = 15;
-    private OperationHandler operationHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler operationHandler;
+    private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        FruitsStorage.getFruits().add(FRUIT);
         operationHandler = new SupplyOperationHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(FRUIT_TYPE);
         fruitTransaction.setQuantity(SUPPLY_QUANTITY);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-    }
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        FruitsStorage.getFruits().add(FRUIT);
     }
 
     @Test
@@ -56,6 +52,11 @@ public class SupplyOperationHandlerTest {
         fruitTransaction.setQuantity(-SUPPLY_QUANTITY);
         assertThrows(RuntimeException.class,
                 () -> operationHandler.updateBalance(fruitTransaction));
+    }
+
+    @After
+    public void tearDown() {
+        fruitTransaction.setQuantity(SUPPLY_QUANTITY);
     }
 
     @AfterClass

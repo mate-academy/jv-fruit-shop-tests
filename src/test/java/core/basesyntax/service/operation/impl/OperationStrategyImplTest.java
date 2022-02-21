@@ -7,14 +7,14 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private OperationStrategy operationStrategy;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
         operationServiceMap.put(FruitTransaction.Operation.BALANCE,new BalanceOperationHandler());
         operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());

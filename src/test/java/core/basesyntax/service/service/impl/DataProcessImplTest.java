@@ -19,16 +19,16 @@ import java.util.List;
 import java.util.Map;
 import javax.imageio.IIOException;
 import org.junit.AfterClass;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataProcessImplTest {
     private static final String FILE_FROM = "fileFrom.scv";
     private static final String FILE_TO = "fileTo.scv";
-    private DataProcess dataProcess;
+    private static DataProcess dataProcess;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
         operationServiceMap.put(FruitTransaction.Operation.BALANCE,new BalanceOperationHandler());
         operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.IIOException;
 import org.junit.AfterClass;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderImplTest {
@@ -18,11 +18,11 @@ public class ReaderImplTest {
     private static final String OK_FILE_NAME = "testFile.scv";
     private static final String WRONG_FORMAT = "testEmptyFile.txt";
     private static final String EMPTY_INPUT_DATA = "";
-    private List<String> expectedOutputData;
-    private Reader reader;
+    private static List<String> expectedOutputData;
+    private static Reader reader;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         expectedOutputData = new ArrayList<>();
         expectedOutputData.add("type,fruit,quantity");
         expectedOutputData.add("b,banana,20");
@@ -45,6 +45,7 @@ public class ReaderImplTest {
         } catch (IIOException e) {
             throw new RuntimeException("Can`t write to file" + OK_FILE_NAME);
         }
+
     }
 
     @Test

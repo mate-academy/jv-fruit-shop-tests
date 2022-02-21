@@ -7,8 +7,8 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
+import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,21 +18,17 @@ public class PurchaseOperationHandlerTest {
     private static final Fruit FRUIT = new Fruit(FRUIT_TYPE, DEFAULT_FRUIT_QUANTITY);
     private static final int PURCHASE_QUANTITY = 7;
     private static final int PURCHASE_GREATER_THAN_BALANCE = 30;
-    private OperationHandler operationHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler operationHandler;
+    private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        FruitsStorage.getFruits().add(FRUIT);
         operationHandler = new PurchaseOperationHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(FRUIT_TYPE);
         fruitTransaction.setQuantity(PURCHASE_QUANTITY);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-    }
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        FruitsStorage.getFruits().add(FRUIT);
     }
 
     @Test
@@ -65,6 +61,11 @@ public class PurchaseOperationHandlerTest {
         fruitTransaction.setQuantity(PURCHASE_GREATER_THAN_BALANCE);
         assertThrows(RuntimeException.class,
                 () -> operationHandler.updateBalance(fruitTransaction));
+    }
+
+    @After
+    public void tearDown() {
+        fruitTransaction.setQuantity(PURCHASE_QUANTITY);
     }
 
     @AfterClass

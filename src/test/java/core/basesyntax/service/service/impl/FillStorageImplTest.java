@@ -9,7 +9,7 @@ import core.basesyntax.service.FillStorage;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FillStorageImplTest {
@@ -17,12 +17,12 @@ public class FillStorageImplTest {
     private static final String CORRECT_DATA_FOR_BANANA = "b,banana,20";
     private static final String CORRECT_DATA_FOR_APPLE = "b,apple,30";
     private static final String INCORRECT_DATA_FOR_BANANA = "s,   banana1,20";
-    private FillStorage fillStorage;
-    private List<String> inputData;
-    private List<Fruit> expected;
+    private static FillStorage fillStorage;
+    private static List<String> inputData;
+    private static List<Fruit> expected;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         fillStorage = new FillStorageImpl();
         inputData = new ArrayList<>();
         inputData.add(CORRECT_DATA_FOR_BANANA);

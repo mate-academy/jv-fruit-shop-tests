@@ -7,16 +7,16 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreatReportService;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CreateReportServiceImplTest {
     private static final Fruit APPLE = new Fruit("apple", 90);
     private static final Fruit BANANA = new Fruit("banana", 152);
-    private CreatReportService creatReportService;
+    private static CreatReportService creatReportService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         creatReportService = new CreateReportServiceImpl();
         FruitsStorage.getFruits().add(BANANA);
         FruitsStorage.getFruits().add(APPLE);

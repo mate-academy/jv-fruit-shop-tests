@@ -7,8 +7,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.AfterClass;
-import org.junit.Before;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionServiceImplTest {
@@ -22,12 +22,12 @@ public class TransactionServiceImplTest {
     public static final String FRUIT = "apple";
     public static final int QUANTITY = 200;
     private static List<String> dataFromFile;
-    private TransactionService transactionService;
-    private List<FruitTransaction> fruitTransactionList;
-    private FruitTransaction transaction;
+    private static TransactionService transactionService;
+    private static List<FruitTransaction> fruitTransactionList;
+    private static FruitTransaction transaction;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         transactionService = new TransactionServiceImpl();
         dataFromFile = new ArrayList<>();
         transaction = new FruitTransaction();
@@ -100,8 +100,8 @@ public class TransactionServiceImplTest {
                 transactionService.creatListTransaction(dataFromFile));
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         dataFromFile.clear();
     }
 }

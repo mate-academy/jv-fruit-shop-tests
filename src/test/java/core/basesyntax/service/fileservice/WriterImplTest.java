@@ -8,16 +8,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import org.junit.AfterClass;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterImplTest {
     public static final String DATA_TO_WRITE = "Data to write";
     public static final String FILE_NAME = "file.scv";
-    private Writer writer;
+    private static Writer writer;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         writer = new WriterImpl();
     }
 

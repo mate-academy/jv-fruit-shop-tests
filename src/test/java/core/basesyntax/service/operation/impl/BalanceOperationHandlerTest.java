@@ -7,20 +7,21 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
+import org.junit.After;
 import org.junit.AfterClass;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     public static final String FRUIT = "apple";
     public static final int BALANCE_QUANTITY = 20;
     public static final int DEFAULT_FRUIT_QUANTITY = 0;
-    private OperationHandler operationHandler;
-    private FruitTransaction fruitTransaction;
-    private Fruit fruit;
+    private static OperationHandler operationHandler;
+    private static FruitTransaction fruitTransaction;
+    private static Fruit fruit;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         operationHandler = new BalanceOperationHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(FRUIT);
@@ -52,8 +53,13 @@ public class BalanceOperationHandlerTest {
         assertEquals(fruitTransaction.getQuantity(), actual.getQuantity());
     }
 
+    @After
+    public void tearDown() {
+        fruitTransaction.setQuantity(BALANCE_QUANTITY);
+    }
+
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         FruitsStorage.getFruits().clear();
     }
 }

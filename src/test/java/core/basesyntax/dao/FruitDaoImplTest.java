@@ -8,6 +8,7 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
@@ -19,6 +20,11 @@ public class FruitDaoImplTest {
     public void setUp() {
         fruitDao = new FruitDaoImpl();
         fruitApple = new Fruit(FRUIT_TYPE_APPLE);
+    }
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+
     }
 
     @AfterClass

@@ -25,9 +25,9 @@ import java.util.Map;
 
 public class Main {
     private static final String SOURCE_FILE_PATH
-            = "src/main/java/core/basesyntax/resource/input.csv";
+            = "src/main/resource/input.csv";
     private static final String REPORT_FILE_PATH
-            = "src/main/java/core/basesyntax/resource/report.csv";
+            = "src/main/resource/report.csv";
     private static final FruitDao FRUIT_DAO = new FruitDaoImpl();
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();

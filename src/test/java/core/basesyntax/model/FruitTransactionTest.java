@@ -43,28 +43,28 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void getOperationType_validOperationBalance_Ok() {
+    public void getOperationType_validOperationBalance_ok() {
         FruitTransaction.Operation actualOperation
                 = fruitTransaction.getOperationType(VALID_OPERATION_BALANCE);
         assertEquals(BALANCE, actualOperation);
     }
 
     @Test
-    public void getOperationType_validOperationSupply_Ok() {
+    public void getOperationType_validOperationSupply_ok() {
         FruitTransaction.Operation actualOperation
                 = fruitTransaction.getOperationType(VALID_OPERATION_SUPPLY);
         assertEquals(SUPPLY, actualOperation);
     }
 
     @Test
-    public void getOperationType_validOperationPurchase_Ok() {
+    public void getOperationType_validOperationPurchase_ok() {
         FruitTransaction.Operation actualOperation
                 = fruitTransaction.getOperationType(VALID_OPERATION_PURCHASE);
         assertEquals(PURCHASE, actualOperation);
     }
 
     @Test
-    public void getOperationType_validOperationReturn_Ok() {
+    public void getOperationType_validOperationReturn_ok() {
         FruitTransaction.Operation actualOperation
                 = fruitTransaction.getOperationType(VALID_OPERATION_RETURN);
         assertEquals(RETURN, actualOperation);

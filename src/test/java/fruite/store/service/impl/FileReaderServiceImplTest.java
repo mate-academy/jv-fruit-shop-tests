@@ -28,7 +28,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_wrongPathOrFileName_notOk() {
+    public void readFromFile_invalidPathOrFileName_notOk() {
         fileReaderService.readFromFile(INCORRECT_DATA_FILE_NAME);
     }
 

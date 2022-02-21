@@ -11,13 +11,15 @@ import org.junit.After;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
+    private static final String APPLE = "apple";
+    private static final String QUANTITY = "75";
     private static final Map<Fruit, Integer> expectedMap = new HashMap<>();
     private final OperationHandler balanceOperationHandler = new BalanceOperationHandler();
 
     @Test
     public void doOperation_validData_ok() {
-        String fruit = "apple";
-        String quantity = "75";
+        String fruit = APPLE;
+        String quantity = QUANTITY;
         balanceOperationHandler.doOperation(fruit, quantity);
         expectedMap.put(new Fruit(fruit), Integer.parseInt(quantity));
         assertEquals(expectedMap, Storage.fruitsStorage);
@@ -25,14 +27,14 @@ public class BalanceOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void doOperation_quantityLowerZero_notOk() {
-        String fruit = "apple";
-        String quantity = "-75";
+        String fruit = APPLE;
+        String quantity = "-" + QUANTITY;
         balanceOperationHandler.doOperation(fruit, quantity);
     }
 
     @Test(expected = RuntimeException.class)
     public void doOperation_nullQuantity_notOk() {
-        String fruit = "apple";
+        String fruit = APPLE;
         String quantity = null;
         balanceOperationHandler.doOperation(fruit, quantity);
     }
@@ -40,7 +42,7 @@ public class BalanceOperationHandlerTest {
     @Test(expected = RuntimeException.class)
     public void doOperation_fruitNull_notOk() {
         String fruit = null;
-        String quantity = "23";
+        String quantity = QUANTITY;
         balanceOperationHandler.doOperation(fruit, quantity);
     }
 

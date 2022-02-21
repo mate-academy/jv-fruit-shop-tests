@@ -11,15 +11,17 @@ import org.junit.After;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
+    private static final String APPLE = "apple";
+    private static final String QUANTITY = "75";
     private static final Map<Fruit, Integer> expectedMap = new HashMap<>();
     private final OperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
     private final Map<Fruit, Integer> fruitsStorage = Storage.fruitsStorage;
 
     @Test
     public void doOperation_validData_ok() {
-        String fruit = "apple";
-        String quantity = "75";
-        Fruit appleFruit = new Fruit("apple");
+        String fruit = APPLE;
+        String quantity = QUANTITY;
+        Fruit appleFruit = new Fruit(APPLE);
         fruitsStorage.put(appleFruit, 100);
         expectedMap.put(new Fruit(fruit), fruitsStorage.get(appleFruit)
                 - Integer.parseInt(quantity));
@@ -29,22 +31,22 @@ public class PurchaseOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void doOperation_balanceBecameLowerZero_notOk() {
-        String fruit = "apple";
-        String quantity = "100";
+        String fruit = APPLE;
+        String quantity = QUANTITY;
         fruitsStorage.put(new Fruit(fruit), Integer.parseInt(quantity));
         purchaseOperationHandler.doOperation(fruit, "120");
     }
 
     @Test(expected = RuntimeException.class)
     public void doOperation_quantityLowerZero_notOk() {
-        String fruit = "apple";
-        String quantity = "-75";
+        String fruit = APPLE;
+        String quantity = "-" + QUANTITY;
         purchaseOperationHandler.doOperation(fruit, quantity);
     }
 
     @Test(expected = RuntimeException.class)
     public void doOperation_nullQuantity_notOk() {
-        String fruit = "apple";
+        String fruit = APPLE;
         String quantity = null;
         purchaseOperationHandler.doOperation(fruit, quantity);
     }
@@ -52,7 +54,7 @@ public class PurchaseOperationHandlerTest {
     @Test(expected = RuntimeException.class)
     public void doOperation_fruitNull_notOk() {
         String fruit = null;
-        String quantity = "23";
+        String quantity = QUANTITY;
         purchaseOperationHandler.doOperation(fruit, quantity);
     }
 

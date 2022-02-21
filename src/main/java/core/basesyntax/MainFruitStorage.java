@@ -10,9 +10,9 @@ import core.basesyntax.service.impl.ReportReaderServiceImpl;
 import core.basesyntax.service.impl.ReportWriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.BalanceHandlerService;
+import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.strategy.impl.PurchaseHandlerService;
+import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandlerService;
 import core.basesyntax.strategy.impl.SupplyHandlerService;
 import java.util.HashMap;
@@ -40,10 +40,10 @@ public class MainFruitStorage {
 
     private static Map<FruitTransaction.Operation, OperationHandler> getOperationServiceMap() {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
-        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerService());
+        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerService());
         operationServiceMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseHandlerService());
+                new PurchaseHandler());
         operationServiceMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerService());
         return operationServiceMap;
     }

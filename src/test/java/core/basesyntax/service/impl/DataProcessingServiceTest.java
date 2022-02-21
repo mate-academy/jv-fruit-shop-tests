@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.fail;
 
@@ -7,13 +7,11 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.impl.DataProcessingServiceImpl;
-import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.BalanceHandlerService;
+import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.strategy.impl.PurchaseHandlerService;
+import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandlerService;
 import core.basesyntax.strategy.impl.SupplyHandlerService;
 import java.util.ArrayList;
@@ -56,10 +54,10 @@ public class DataProcessingServiceTest {
     @BeforeClass
     public static void beforeClass() {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
-        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerService());
+        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerService());
         operationServiceMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseHandlerService());
+                new PurchaseHandler());
         operationServiceMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerService());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
         dataProcessingService = new DataProcessingServiceImpl(operationStrategy);

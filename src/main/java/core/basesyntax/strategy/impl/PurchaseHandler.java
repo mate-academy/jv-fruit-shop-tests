@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
-public class PurchaseHandlerService implements OperationHandler {
+public class PurchaseHandler implements OperationHandler {
     @Override
     public void processOperation(FruitTransaction fruitTransaction) {
         Integer newBalance = Storage.fruitBalance.get(fruitTransaction.getFruit())

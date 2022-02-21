@@ -1,9 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.fail;
 
 import core.basesyntax.service.ReportWriterService;
-import core.basesyntax.service.impl.ReportWriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

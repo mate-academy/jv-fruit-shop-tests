@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,7 +7,6 @@ import static org.junit.Assert.fail;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportReaderService;
-import core.basesyntax.service.impl.ReportReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -63,6 +62,6 @@ public class ReportReaderServiceTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("RuntimeException should be thrown is pats was wrong");
+        fail("RuntimeException should be thrown is path was wrong");
     }
 }

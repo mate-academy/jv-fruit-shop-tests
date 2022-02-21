@@ -1,18 +1,23 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
+
+import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.DataProcessingException;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.impl.ReportCreatorServiceImpl;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorServiceTest {
     private static final String SEPARATOR = ",";
-    private static DataProcessingService dataProcessingService;
     private static final ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+
+    @Before
+    public void setUp() {
+        Storage.fruitBalance.clear();
+    }
 
     @Test
     public void createReport_correctData_ok() {
@@ -28,8 +33,13 @@ public class ReportCreatorServiceTest {
         Assert.assertEquals(expectedReport, actualReport);
     }
 
-    @After
-    public void afterEachTest() {
-        Storage.fruitBalance.clear();
+    @Test
+    public void createReport_emptyStorage_notOk() {
+        try {
+            reportCreatorService.createReport();
+        } catch (DataProcessingException e) {
+            return;
+        }
+        fail("DataProcessingException should be thrown if storage was empty");
     }
 }

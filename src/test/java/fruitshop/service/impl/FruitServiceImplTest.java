@@ -67,6 +67,7 @@ public class FruitServiceImplTest {
                 116, 121, 13, 10, 98, 97, 110, 97, 110, 97, 44, 49, 53, 50, 13, 10, 97, 112, 112,
                 108, 101, 44, 57, 48};
         byte[] actual = fruitService.generateReport();
+        assertEquals(expected.length, actual.length);
         assertArrayEquals(expected, actual);
     }
 

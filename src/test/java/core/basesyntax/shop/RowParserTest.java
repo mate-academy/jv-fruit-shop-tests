@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class RowParserTest {
-
     private static final String INCORRECT_AMOUNT_LINE = "type,fruit,quantity";
     private static final String INCORRECT_LINE = "!@#$%^&*()_+";
     private static final String EMPTY_LINE = "";

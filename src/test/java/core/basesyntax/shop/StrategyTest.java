@@ -37,7 +37,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void getAddHandler_Ok() {
+    public void get_addHandler_Ok() {
         Class<? extends OperationHandler> expected = AddOperationHandler.class;
         Class<? extends OperationHandler> actual = strategy
                 .getHandler(new FruitTransaction("s", "apple", 25)).getClass();
@@ -45,7 +45,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void getBalanceHandler_Ok() {
+    public void get_balanceHandler_Ok() {
         Class<? extends OperationHandler> expected = BalanceOperationHandler.class;
         Class<? extends OperationHandler> actual = strategy
                 .getHandler(new FruitTransaction("b", "apple", 25)).getClass();
@@ -53,7 +53,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void getSubtractHandler_Ok() {
+    public void get_subtractHandler_Ok() {
         Class<? extends OperationHandler> expected = SubtractOperationHandler.class;
         Class<? extends OperationHandler> actual = strategy
                 .getHandler(new FruitTransaction("p", "apple", 25)).getClass();
@@ -61,7 +61,7 @@ public class StrategyTest {
     }
 
     @Test
-    public void getUnknownHandler_Ok() {
+    public void get_unknownHandler_Ok() {
         OperationHandler expected = null;
         OperationHandler actual = strategy.getHandler(new FruitTransaction("j", "apple", 25));
         Assert.assertNull(actual);

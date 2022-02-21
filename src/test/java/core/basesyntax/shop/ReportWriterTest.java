@@ -28,8 +28,8 @@ public class ReportWriterTest {
     public void makeReport_correctStorage_Ok() {
         Storage.fruitsCount.put(new Fruit("banana"), 30);
         Storage.fruitsCount.put(new Fruit("apple"), 20);
-        String expected = HEADER + System.lineSeparator() + "banana,"
-                + 30 + System.lineSeparator() + "apple," + 20;
+        String expected = HEADER + System.lineSeparator() + "banana,30"
+                + System.lineSeparator() + "apple,20";
         String actual = reportService.makeReport();
         Assert.assertEquals(expected,actual);
     }

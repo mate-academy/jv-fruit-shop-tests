@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataHandler;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class FruitDataHandler implements DataHandler {
@@ -19,6 +18,9 @@ public class FruitDataHandler implements DataHandler {
 
     @Override
     public void processData(List<String> data) {
+        if (data == null) {
+            throw new RuntimeException("Data is null");
+        }
         for (String line : data) {
             String[] splitLine = line.split(REGEX);
             operationStrategy.getStrategy(

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.ReportCreateService;
-
 import java.util.Set;
 
 public class FruitReportCreateService implements ReportCreateService {

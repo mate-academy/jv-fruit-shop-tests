@@ -1,9 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.DataHandler;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReportCreateService;
+import core.basesyntax.service.impl.FileReaderServiceCsv;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitDataHandler;
+import core.basesyntax.service.impl.FruitReportCreateService;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-
 import java.util.List;
 
 public class Application {

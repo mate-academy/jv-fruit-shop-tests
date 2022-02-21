@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataHandler;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportCreateService;
-
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {

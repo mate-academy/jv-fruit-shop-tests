@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +12,9 @@ public class FileReaderServiceCsv implements FileReaderService {
 
     @Override
     public List<String> readFromFile(String filePath) {
+        if (filePath == null || filePath.isBlank()) {
+            throw new RuntimeException("File path is incorrect: " + filePath);
+        }
         List<String> strings;
         try {
             strings = Files.readAllLines(Path.of(filePath)).stream()

@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-
 import java.util.Set;
 
 public class FruitDaoImpl implements FruitDao {

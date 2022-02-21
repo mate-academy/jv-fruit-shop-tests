@@ -59,6 +59,33 @@ public class ProcessDataImplTest {
         processDataService.process(fruitTransactionList);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void processData_emptyDataOperation_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(100);
+        List<FruitTransaction> fruitTransactionList = List.of(fruitTransaction);
+        processDataService.process(fruitTransactionList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void processData_emptyDataFruit_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(Operation.RETURN);
+        fruitTransaction.setQuantity(100);
+        List<FruitTransaction> fruitTransactionList = List.of(fruitTransaction);
+        processDataService.process(fruitTransactionList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void processData_emptyDataQuality_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setOperation(Operation.RETURN);
+        List<FruitTransaction> fruitTransactionList = List.of(fruitTransaction);
+        processDataService.process(fruitTransactionList);
+    }
+
     @Test
     public void processData_emptyData_Ok() {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();

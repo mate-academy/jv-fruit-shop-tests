@@ -10,7 +10,7 @@ public class FileWriteServiceImpl implements FileWriteService {
     @Override
     public void writeDataToFile(String data, String filePath) {
         try (BufferedWriter bufferedWriter
-                     = new BufferedWriter(new FileWriter(filePath, true))) {
+                     = new BufferedWriter(new FileWriter(filePath, false))) {
             bufferedWriter.write(data);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file" + e);

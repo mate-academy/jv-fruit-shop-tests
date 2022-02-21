@@ -28,10 +28,23 @@ public class ProcessDataImpl implements ProcessDataService {
     private void processOperations(List<FruitTransaction> listOfTransactions,
                                    Map<Operation, OperationHandler> operationsMap) {
         for (FruitTransaction fruitTransaction : listOfTransactions) {
+            checkCorrectTransaction(fruitTransaction);
             balancesOfFruits.put(fruitTransaction.getFruit(),
                     operationsMap.get(fruitTransaction.getOperation())
                             .process(fruitTransaction.getQuantity(),
                                     checkBalance(fruitTransaction.getFruit())));
+        }
+    }
+
+    private void checkCorrectTransaction(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() <= 0) {
+            throw new RuntimeException("Quality not can be empty");
+        }
+        if (fruitTransaction.getFruit() == null) {
+            throw new RuntimeException("Fruit not can be empty");
+        }
+        if (fruitTransaction.getOperation() == null) {
+            throw new RuntimeException("Operation not can be empty");
         }
     }
 

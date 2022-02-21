@@ -31,12 +31,14 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void makeReportByDay(String fromFilePath, String toFilePath) {
+    public boolean makeReportByDay(String fromFilePath, String toFilePath) {
         String data = readDateDao.readFromFile(fromFilePath);
+        validateDataFormatFromFile(data);
         strategyInitilization();
         processDate(data);
         byte[] report = generateDataForReport();
         writeDateDao.writeToFile(report, toFilePath);
+        return true;
     }
 
     private void strategyInitilization() {
@@ -67,5 +69,15 @@ public class FruitServiceImpl implements FruitService {
                     .append(entry.getValue());
         }
         return builderResult.toString().getBytes();
+    }
+
+    private void validateDataFormatFromFile(String data) {
+        String[] arrayData = data.split(System.lineSeparator());
+        for (int i = 0; i < arrayData.length; i++) {
+            String[] temp = arrayData[i].split(COMA_SEPARATOR);
+            if (temp.length != 3) {
+                throw new RuntimeException("Invalid incoming data format: " + data);
+            }
+        }
     }
 }

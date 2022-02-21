@@ -1,12 +1,11 @@
 package fruite.store.service.strategy;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyHandlerTest {
-    StrategyHandler strategyHandler = new StrategyHandler();
+    private StrategyHandler strategyHandler = new StrategyHandler();
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -38,10 +37,14 @@ public class StrategyHandlerTest {
 
     @Test
     public void doSpecialOperationOnFruits_validData_ok() {
-        boolean actualBalanceType = strategyHandler.doSpecialOperationOnFruits("b", "banana", "100");
-        boolean actualSupplyType = strategyHandler.doSpecialOperationOnFruits("s", "banana", "100");
-        boolean actualPurchaseType = strategyHandler.doSpecialOperationOnFruits("p", "banana", "50");
-        boolean actualReturnType = strategyHandler.doSpecialOperationOnFruits("r", "banana", "10");
+        boolean actualBalanceType =
+                strategyHandler.doSpecialOperationOnFruits("b", "banana", "100");
+        boolean actualSupplyType =
+                strategyHandler.doSpecialOperationOnFruits("s", "banana", "100");
+        boolean actualPurchaseType =
+                strategyHandler.doSpecialOperationOnFruits("p", "banana", "50");
+        boolean actualReturnType =
+                strategyHandler.doSpecialOperationOnFruits("r", "banana", "10");
         Assert.assertTrue(actualBalanceType);
         Assert.assertTrue(actualSupplyType);
         Assert.assertTrue(actualPurchaseType);

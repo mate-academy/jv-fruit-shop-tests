@@ -6,7 +6,8 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public void addFruitToStorage(String key, Integer value) {
         if (value <= 0) {
-            throw new RuntimeException("Balance quantity can't be less than zero. Actual: " + value);
+            throw new RuntimeException("Balance quantity"
+                    + " can't be less than zero. Actual: " + value);
         }
         Storage.fruitStorage.put(key, value);
     }

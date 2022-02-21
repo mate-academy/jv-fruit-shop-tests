@@ -23,20 +23,20 @@ public class StrategyHandler {
 
     private void validateType(String type) {
         type = type.toLowerCase();
-        if(!Pattern.matches("[a-z]{1,}", type)) {
+        if (!Pattern.matches("[a-z]{1,}", type)) {
             throw new RuntimeException("Invalid operation type: " + type);
         }
     }
 
     private void validateFruit(String fruit) {
         fruit = fruit.toLowerCase();
-        if(!Pattern.matches("[a-z]{2,}", fruit)) {
+        if (!Pattern.matches("[a-z]{2,}", fruit)) {
             throw new RuntimeException("Invalid fruit name: " + fruit);
         }
     }
 
     private void validateQuantity(String quantity) {
-        if(!Pattern.matches("\\d+", quantity)) {
+        if (!Pattern.matches("\\d+", quantity)) {
             throw new RuntimeException("Invalid quantity: " + quantity);
         }
     }

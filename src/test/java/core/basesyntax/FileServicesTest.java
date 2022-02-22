@@ -17,7 +17,7 @@ public class FileServicesTest {
     private static final File FILE_WITH_DATA = new File("tmp.test2");
     private static final File FILE_FOR_DATA = new File("tmp.test3");
     private static final File NULL_FILE = null;
-    private static final File INVALID_NAME_FILE = new File("*?test2");
+    private static final File INVALID_NAME_FILE = new File("");
     private static final String EMPTY_DATA_EXPECTED = "";
     private static final String VALID_DATA_EXPECTED = "type,fruit,quantity\n"
             + "b,banana,20\n"

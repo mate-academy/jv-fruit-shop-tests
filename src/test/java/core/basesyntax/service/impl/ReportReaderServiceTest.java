@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -86,16 +85,5 @@ public class ReportReaderServiceTest {
     public void readeFile_wrongPath_notOk() {
         reportReaderService.readFile(WRONG_PATH);
         reportReaderService.readFile(TEST_INCORRECT_REPORT_PATH);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        try {
-            Files.deleteIfExists(Paths.get(TEST_INPUT_REPORT_PATH));
-            Files.deleteIfExists(Paths.get(TEST_INCORRECT_REPORT_PATH));
-            Files.deleteIfExists(Paths.get(TEST_EMPTY_REPORT_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete file" + e);
-        }
     }
 }

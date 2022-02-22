@@ -23,6 +23,5 @@ public enum Operation {
                 .filter(operation -> operation.getAbbreviation().equals(str))
                 .findFirst()
                 .orElseThrow();
-
     }
 }

@@ -29,7 +29,7 @@ public class FruitDaoImpl implements FruitDao {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return dataFromStorage.toString().trim();
+        return dataFromStorage.length() > 0 ? dataFromStorage.toString().trim() : null;
     }
 
 }

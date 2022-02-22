@@ -53,4 +53,9 @@ public class ParseDataTest {
             Assert.assertEquals(actualToList.get(i), expectedToList.get(i));
         }
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_emptyData_notOk() {
+        parseData.parse(null);
+    }
 }

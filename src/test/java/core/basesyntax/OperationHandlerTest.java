@@ -14,7 +14,7 @@ public class OperationHandlerTest {
     private static final String MELON = "melon";
 
     @Test
-    public void operate_putToStorage_validData_ok() {
+    public void incomeOperate_putToStorage_validData_ok() {
         INCOME.operate(WATERMELON, 10);
         int expectedWeight = 10;
         int actualWeight = Storage.fruits.get(WATERMELON);
@@ -22,12 +22,12 @@ public class OperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void operate_putToStorage_nullValue_notOk() {
+    public void incomeOperate_putToStorage_nullValue_notOk() {
         INCOME.operate(null, 10);
     }
 
     @Test
-    public void operate_getPresentDataFromStorage_ok() {
+    public void expenseOperate_getPresentDataFromStorage_ok() {
         Storage.fruits.put(MELON, 20);
         EXPENSE.operate(MELON, 10);
         int expectedWeight = 10;
@@ -36,13 +36,13 @@ public class OperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void operate_getAbsentDataFromStorage_notOk() {
+    public void expenseOperate_getAbsentDataFromStorage_notOk() {
         Assert.assertFalse(Storage.fruits.containsKey("orange"));
         EXPENSE.operate("orange", 20);
     }
 
     @Test(expected = RuntimeException.class)
-    public void operate_getDataFromStorageMoreThenAvailable_notOk() {
+    public void expenceOperate_getDataFromStorageMoreThenAvailable_notOk() {
         int actualQuantity = Storage.fruits.get(MELON);
         EXPENSE.operate(MELON, actualQuantity + 10);
     }

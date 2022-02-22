@@ -9,6 +9,9 @@ public class ReportMakerImpl implements ReportMaker {
 
     @Override
     public void makeReport(String data) {
+        if (data == null) {
+            throw new RuntimeException("Can't make report from empty data");
+        }
         data = REPORT_TITLE + data;
         FIleWriterService.writeToFile(resultFile, data);
     }

@@ -55,6 +55,6 @@ public class FruitDaoTest {
     @Test
     public void getDataFromStorage_EmptyStorage_ok() {
         Assert.assertEquals(0, Storage.fruits.size());
-        Assert.assertNull(Storage.fruits.get(KEY));
+        Assert.assertNull(FRUIT_DAO.getDataFromStorage());
     }
 }

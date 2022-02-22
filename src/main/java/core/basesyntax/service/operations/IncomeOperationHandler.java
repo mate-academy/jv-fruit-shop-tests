@@ -3,7 +3,6 @@ package core.basesyntax.service.operations;
 import core.basesyntax.db.Storage;
 
 public class IncomeOperationHandler implements OperationHandler {
-
     @Override
     public void operate(String fruitName, Integer weight) {
         if (fruitName == null || weight == null) {

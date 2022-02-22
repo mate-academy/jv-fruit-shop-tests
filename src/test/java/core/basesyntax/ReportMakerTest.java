@@ -31,4 +31,9 @@ public class ReportMakerTest {
             throw new RuntimeException("Can't get data from report", e);
         }
     }
+
+    @Test(expected = RuntimeException.class)
+    public void makeReport_EmptyData_notOk() {
+        reportMaker.makeReport(null);
+    }
 }

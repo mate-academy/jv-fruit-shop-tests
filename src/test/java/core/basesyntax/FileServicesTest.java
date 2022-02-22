@@ -43,17 +43,6 @@ public class FileServicesTest {
                 + "s,banana,50").getBytes(StandardCharsets.UTF_8));
     }
 
-    @AfterClass
-    public static void clearResults() {
-        try {
-            Files.deleteIfExists(EMPTY_FILE.toPath());
-            Files.deleteIfExists(FILE_WITH_DATA.toPath());
-            Files.deleteIfExists(FILE_FOR_DATA.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException("Can't correctly clear result files after test ", e);
-        }
-    }
-
     @Test
     public void getFromFile_emptyData_ok() {
         String actual = FileReaderService.getFromFile(EMPTY_FILE);
@@ -86,6 +75,17 @@ public class FileServicesTest {
     @Test(expected = RuntimeException.class)
     public void writeToFile_invalidFileName_notOk() {
         FIleWriterService.writeToFile(INVALID_NAME_FILE, VALID_DATA_EXPECTED);
+    }
+
+    @AfterClass
+    public static void clearResults() {
+        try {
+            Files.deleteIfExists(EMPTY_FILE.toPath());
+            Files.deleteIfExists(FILE_WITH_DATA.toPath());
+            Files.deleteIfExists(FILE_FOR_DATA.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly clear result files after test ", e);
+        }
     }
 
     private String readFromFile() {

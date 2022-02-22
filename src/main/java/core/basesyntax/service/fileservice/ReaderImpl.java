@@ -6,10 +6,10 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class ReaderImpl implements Reader {
-    public static final String EXPECTED_FILE_FORMAT = "scv";
+    public static final String EXPECTED_FILE_FORMAT = "csv";
     public static final int DOT_SEPARATOR_INDEX = 1;
 
-    public List<String> readFromInput(String fileName) {
+    public List<String> read(String fileName) {
         checkFileName(fileName);
         List<String> recordActivitiesForDay;
         try {

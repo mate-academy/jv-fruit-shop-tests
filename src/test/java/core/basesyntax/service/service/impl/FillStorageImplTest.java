@@ -39,7 +39,7 @@ public class FillStorageImplTest {
     }
 
     @Test
-    public void fillIncorrectData_ok() {
+    public void fill_incorrectDataFormat_ok() {
         inputData.add(INCORRECT_DATA_FOR_BANANA);
         fillStorage.fill(inputData);
         assertEquals(expected, FruitsStorage.getFruits());

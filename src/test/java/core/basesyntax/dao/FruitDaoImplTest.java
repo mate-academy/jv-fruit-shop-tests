@@ -21,30 +21,30 @@ public class FruitDaoImplTest {
         fruitApple = new Fruit(FRUIT_TYPE_APPLE);
     }
 
-    @AfterClass
-    public static void afterClass() {
-        FruitsStorage.getFruits().remove(fruitApple);
-    }
-
     @Test
-    public void addFruit_Ok() {
+    public void add_fruit_ok() {
         fruitDao.add(fruitApple);
         assertTrue(FruitsStorage.getFruits().contains(fruitApple));
     }
 
     @Test
-    public void getFruit_ok() {
+    public void get_fruit_ok() {
         FruitsStorage.getFruits().add(fruitApple);
         assertEquals(fruitApple, fruitDao.get(fruitApple.getFruitType()));
     }
 
     @Test
-    public void getNullNameFruit_notOk() {
+    public void get_fruitNullName_notOk() {
         assertThrows(RuntimeException.class, () -> fruitDao.get(null));
     }
 
     @Test
-    public void getAll() {
+    public void getAll_fruits_ok() {
         assertEquals(FruitsStorage.getFruits(), fruitDao.getAll());
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        FruitsStorage.getFruits().remove(fruitApple);
     }
 }

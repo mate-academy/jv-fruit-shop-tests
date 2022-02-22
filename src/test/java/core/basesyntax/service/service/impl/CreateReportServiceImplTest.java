@@ -30,7 +30,7 @@ public class CreateReportServiceImplTest {
     }
 
     @Test
-    public void createReportFromEmptyStorage_notOk() {
+    public void createReport_emptyStorage_notOk() {
         FruitsStorage.getFruits().clear();
         assertThrows(RuntimeException.class, () -> creatReportService.createReport());
     }

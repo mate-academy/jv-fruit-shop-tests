@@ -12,13 +12,12 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction.Operation getOperationLetter(String letter) {
-        switch (letter) {
-            case BALANCE_MARKER : return Operation.BALANCE;
-            case SUPPLY_MARKER : return Operation.SUPPLY;
-            case RETURN_MARKER : return Operation.RETURN;
-            case PURCHASE_MARKER : return Operation.PURCHASE;
-            default: throw new RuntimeException("Invalid operation type");
+        for (Operation o : Operation.values()) {
+            if (o.operation.equals(letter)) {
+                return o;
+            }
         }
+        throw new RuntimeException("Invalid operation type");
     }
 
     public Operation getOperation() {

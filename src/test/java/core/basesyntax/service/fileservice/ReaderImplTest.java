@@ -13,9 +13,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderImplTest {
-    private static final String NAME_OF_EMPTY_FILE = "testEmptyFile.scv";
-    private static final String NOT_EXISTENT_FILE = "nonExistentFile.scv";
-    private static final String OK_FILE_NAME = "testFile.scv";
+    private static final String NAME_OF_EMPTY_FILE = "testEmptyFile.csv";
+    private static final String NOT_EXISTENT_FILE = "nonExistentFile.csv";
+    private static final String OK_FILE_NAME = "testFile.csv";
     private static final String WRONG_FORMAT = "testEmptyFile.txt";
     private static final String EMPTY_INPUT_DATA = "";
     private static List<String> expectedOutputData;
@@ -49,34 +49,34 @@ public class ReaderImplTest {
     }
 
     @Test
-    public void readFromIncorrectlyFilename_notOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromInput(EMPTY_INPUT_DATA));
+    public void read_incorrectlyFilename_notOk() {
+        assertThrows(RuntimeException.class, () -> reader.read(EMPTY_INPUT_DATA));
     }
 
     @Test
-    public void readFromNull_notOk() {
+    public void read_null_notOk() {
         assertThrows(RuntimeException.class,
-                () -> reader.readFromInput(null));
+                () -> reader.read(null));
     }
 
     @Test
-    public void readFromEmptyFile_notOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromInput(NAME_OF_EMPTY_FILE));
+    public void read_emptyFile_notOk() {
+        assertThrows(RuntimeException.class, () -> reader.read(NAME_OF_EMPTY_FILE));
     }
 
     @Test
-    public void readFromWrongFileFormat_notOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromInput(WRONG_FORMAT));
+    public void read_wrongFileFormat_notOk() {
+        assertThrows(RuntimeException.class, () -> reader.read(WRONG_FORMAT));
     }
 
     @Test
-    public void readFromFileNonExistentFile_notOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromInput(NOT_EXISTENT_FILE));
+    public void read_nonExistentFile_notOk() {
+        assertThrows(RuntimeException.class, () -> reader.read(NOT_EXISTENT_FILE));
     }
 
     @Test
-    public void readFromFile_Ok() {
-        assertEquals(expectedOutputData, reader.readFromInput(OK_FILE_NAME));
+    public void read_file_Ok() {
+        assertEquals(expectedOutputData, reader.read(OK_FILE_NAME));
     }
 
     @AfterClass

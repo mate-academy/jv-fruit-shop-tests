@@ -43,12 +43,12 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void updateBalanceForNullTransaction_notOk() {
+    public void updateBalance_nullTransaction_notOk() {
         assertThrows(RuntimeException.class, () -> operationHandler.updateBalance(null));
     }
 
     @Test
-    public void updateBalanceForNegativeBalance_notOk() {
+    public void updateBalance_negativeBalance_notOk() {
         fruitTransaction.setQuantity(-RETURN_QUANTITY);
         assertThrows(RuntimeException.class,
                 () -> operationHandler.updateBalance(fruitTransaction));

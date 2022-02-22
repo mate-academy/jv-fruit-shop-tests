@@ -23,8 +23,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataProcessImplTest {
-    private static final String FILE_FROM = "fileFrom.scv";
-    private static final String FILE_TO = "fileTo.scv";
+    private static final String FILE_FROM = "fileFrom.csv";
+    private static final String FILE_TO = "fileTo.csv";
     private static DataProcess dataProcess;
 
     @BeforeClass

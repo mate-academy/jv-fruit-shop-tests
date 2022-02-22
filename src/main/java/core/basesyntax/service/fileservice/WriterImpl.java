@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class WriterImpl implements Writer {
-    public static final String EXPECTED_FILE_FORMAT = "scv";
+    public static final String EXPECTED_FILE_FORMAT = "csv";
     public static final int DOT_SEPARATOR_INDEX = 1;
 
     public void write(String fileName, String data) {

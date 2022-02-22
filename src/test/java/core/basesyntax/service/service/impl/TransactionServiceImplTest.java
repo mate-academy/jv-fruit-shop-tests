@@ -39,61 +39,61 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void creatListTransactionFromNull_notOk() {
+    public void creatListTransaction_null_notOk() {
         assertThrows(RuntimeException.class,
                 () -> transactionService.creatListTransaction(null));
     }
 
     @Test
-    public void creatListTransactionFromEmptyList_notOk() {
+    public void creatListTransaction_emptyList_notOk() {
         assertThrows(RuntimeException.class,
                 () -> transactionService.creatListTransaction(new ArrayList<>()));
     }
 
     @Test
-    public void creatTransactionWithoutOperation_notOk() {
+    public void creatListTransaction_dataWithoutOperation_notOk() {
         dataFromFile.add(LINE_WITHOUT_OPERATION);
         assertThrows(RuntimeException.class,
                 () -> transactionService.creatListTransaction(dataFromFile));
     }
 
     @Test
-    public void creatTransactionWrongOperation_notOk() {
+    public void creatListTransaction_wrongOperation_notOk() {
         dataFromFile.add(LINE_WITH_WRONG_OPERATION);
         assertThrows(RuntimeException.class,
                 () -> transactionService.creatListTransaction(dataFromFile));
     }
 
     @Test
-    public void creatTransactionWithoutFruit_notOk() {
+    public void creatListTransaction_withoutFruit_notOk() {
         dataFromFile.add(LINE_WITHOUT_FRUIT);
         assertThrows(RuntimeException.class,
                 () -> transactionService.creatListTransaction(dataFromFile));
     }
 
     @Test
-    public void creatTransactionWithoutQuantity_notOk() {
+    public void creatListTransaction_withoutQuantity_notOk() {
         dataFromFile.add(LINE_WITHOUT_QUANTITY);
         assertThrows(RuntimeException.class,
                 () -> transactionService.creatListTransaction(dataFromFile));
     }
 
     @Test
-    public void creatTransaction_Ok() {
+    public void creatListTransaction_Ok() {
         dataFromFile.add(CORRECT_LINE);
         assertEquals(fruitTransactionList,
                 transactionService.creatListTransaction(dataFromFile));
     }
 
     @Test
-    public void creatTransactionIncorrectFormatCorrectData_Ok() {
+    public void creatListTransaction_incorrectFormatCorrectData_Ok() {
         dataFromFile.add(INCORRECT_FORMAT_CORRECT_DATA);
         assertEquals(fruitTransactionList,
                 transactionService.creatListTransaction(dataFromFile));
     }
 
     @Test
-    public void creatTransactionCorrectData_Ok() {
+    public void creatListTransaction_withColumn_Ok() {
         dataFromFile.add(COLUMN_NAMES_LINE);
         dataFromFile.add(CORRECT_LINE);
         assertEquals(fruitTransactionList,

@@ -19,8 +19,8 @@ public class Main {
                 new PurchaseOperationHandler());
         operationServiceMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         DataProcessImpl dataProcess = new DataProcessImpl(operationServiceMap);
-        String fileFrom = "inputFile.csv";
-        String fileTo = "outputFile.csv";
+        String fileFrom = "src\\main\\resources\\inputFile.csv";
+        String fileTo = "src\\main\\resources\\outputFile.csv";
         dataProcess.processReport(fileFrom, fileTo);
     }
 

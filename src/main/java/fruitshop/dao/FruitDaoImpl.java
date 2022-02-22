@@ -1,6 +1,7 @@
 package fruitshop.dao;
 
 import fruitshop.db.Storage;
+import java.util.NoSuchElementException;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -11,7 +12,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void addValue(String key, Integer value) {
         if (!Storage.fruitList.containsKey(key)) {
-            throw new NullPointerException("Key doesn't exist");
+            throw new NoSuchElementException("Key doesn't exist");
         }
         Integer newValue = Storage.fruitList.get(key) + value;
         Storage.fruitList.put(key, newValue);
@@ -20,7 +21,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void subtractValue(String key, Integer value) {
         if (!Storage.fruitList.containsKey(key)) {
-            throw new NullPointerException("Key doesn't exist");
+            throw new NoSuchElementException("Key doesn't exist");
         }
         if (Storage.fruitList.get(key) < value) {
             throw new RuntimeException("We don't have enough fruits");

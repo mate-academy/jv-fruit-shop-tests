@@ -3,6 +3,7 @@ package fruitshop.dao;
 import static org.junit.Assert.assertEquals;
 
 import fruitshop.db.Storage;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.junit.rules.ExpectedException;
 public class FruitDaoImplTest {
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
     private FruitDao fruitDao = new FruitDaoImpl();
 
     @Test
@@ -51,7 +51,7 @@ public class FruitDaoImplTest {
         Storage.fruitList.put("banana", 10);
         fruitDao.addValue("apple", 10);
         fruitDao.addValue("banana", 35);
-        exceptionRule.expect(NullPointerException.class);
+        exceptionRule.expect(NoSuchElementException.class);
         exceptionRule.expectMessage("Key doesn't exist");
         fruitDao.addValue("orange", 35);
     }
@@ -73,7 +73,7 @@ public class FruitDaoImplTest {
         Storage.fruitList.put("banana", 10);
         fruitDao.subtractValue("apple", 10);
         fruitDao.subtractValue("banana", 5);
-        exceptionRule.expect(NullPointerException.class);
+        exceptionRule.expect(NoSuchElementException.class);
         exceptionRule.expectMessage("Key doesn't exist");
         fruitDao.subtractValue("orange", 35);
     }

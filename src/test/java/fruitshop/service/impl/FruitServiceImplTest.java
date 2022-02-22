@@ -22,10 +22,8 @@ public class FruitServiceImplTest {
     private static final String INCORRECT_PATH_FOR_INPUT = "test/resources/input.txt";
     private static final String CORRECT_PATH_FOR_OUTPUT = "src/test/resources/output.txt";
     private static final String INCORRECT_PATH_FOR_OUTPUT = "";
-
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
     private ReaderService readerService = new ReaderServiceImpl();
     private WriterService writerService = new WriterServiceImpl();
     private OperationStrategy operationStrategy = new OperationStrategyImpl();

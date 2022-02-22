@@ -11,7 +11,6 @@ import org.junit.rules.ExpectedException;
 public class PurchaseOperationHandlerTest {
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
     private OperationHandler operationHandler = new PurchaseOperationHandler();
 
     @Test

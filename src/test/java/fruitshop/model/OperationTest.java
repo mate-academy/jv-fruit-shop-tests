@@ -9,7 +9,6 @@ import org.junit.rules.ExpectedException;
 public class OperationTest {
     private static final String CORRECT_OPERATION = "b";
     private static final String INCORRECT_OPERATION = "c";
-
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 

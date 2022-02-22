@@ -7,6 +7,7 @@ import fruitshop.model.Operation;
 import fruitshop.service.OperationStrategy;
 import fruitshop.service.ReaderService;
 import fruitshop.service.WriterService;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -19,7 +20,6 @@ public class OperationStrategyImplTest {
     private static WriterService writerService = new WriterServiceImpl();
     private static FruitServiceImpl fruitService = new FruitServiceImpl(readerService,
             writerService, operationStrategy);
-
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
@@ -38,7 +38,7 @@ public class OperationStrategyImplTest {
     @Test
     public void chooseStrategy_notExistingFruit_ok() {
         Storage.fruitList.put("apple", 10);
-        exceptionRule.expect(NullPointerException.class);
+        exceptionRule.expect(NoSuchElementException.class);
         operationStrategy.chooseStrategy(Operation.PURCHASE, "banana", 20);
     }
 

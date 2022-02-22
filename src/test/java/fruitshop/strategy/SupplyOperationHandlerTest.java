@@ -11,7 +11,6 @@ import org.junit.rules.ExpectedException;
 public class SupplyOperationHandlerTest {
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
     private OperationHandler operationHandler = new SupplyOperationHandler();
 
     @Test

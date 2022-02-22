@@ -7,14 +7,14 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDataHandlerTest {
-    private FruitDataHandler fruitDataHandler;
+    private static FruitDataHandler fruitDataHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fruitDataHandler = new FruitDataHandler(new OperationStrategyImpl());
     }
 
@@ -59,10 +59,6 @@ public class FruitDataHandlerTest {
         List<String> data = new ArrayList<>();
         data.add("b,banana,50");
         data.add("p,banana,60");
-
-        Integer expected = -10;
         fruitDataHandler.processData(data);
-        Integer actual = Storage.fruits.get("banana");
-        assertEquals(expected, actual);
     }
 }

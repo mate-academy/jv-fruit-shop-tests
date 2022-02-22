@@ -5,16 +5,16 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceCsvTest {
     private static final String FILE_NAME_OK = "src/test/resources/database_ok.csv";
     private static final String EMPTY_FILE_NAME = "src/test/resources/database_empty.csv";
-    private FileReaderService fileReaderService;
+    private static FileReaderService fileReaderService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fileReaderService = new FileReaderServiceCsv();
     }
 
@@ -38,8 +38,7 @@ public class FileReaderServiceCsvTest {
 
     @Test(expected = RuntimeException.class)
     public void readData_fileNotExist() {
-        List<String> expected = new ArrayList<>();
-        assertEquals(expected, fileReaderService.readFromFile(""));
+        fileReaderService.readFromFile("");
     }
 
     @Test
@@ -51,7 +50,6 @@ public class FileReaderServiceCsvTest {
 
     @Test(expected = RuntimeException.class)
     public void readData_null_notOk() {
-        List<String> expected = new ArrayList<>();
-        assertEquals(expected, fileReaderService.readFromFile(null));
+        fileReaderService.readFromFile(null);
     }
 }

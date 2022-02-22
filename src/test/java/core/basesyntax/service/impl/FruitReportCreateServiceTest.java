@@ -7,14 +7,14 @@ import core.basesyntax.service.ReportCreateService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitReportCreateServiceTest {
-    private ReportCreateService reportCreateService;
+    private static ReportCreateService reportCreateService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         reportCreateService = new FruitReportCreateService();
     }
 

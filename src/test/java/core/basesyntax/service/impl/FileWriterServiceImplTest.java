@@ -8,16 +8,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static final String FILE_NAME_TO = "src/test/resources/report.csv";
-    private FileWriterService fileWriterService;
-    private String data;
+    private static FileWriterService fileWriterService;
+    private static String data;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileWriterService = new FileWriterServiceImpl();
         data = "fruit,quantity"
                 + System.lineSeparator() + "banana,152"

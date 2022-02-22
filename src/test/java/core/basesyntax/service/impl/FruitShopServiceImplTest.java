@@ -10,14 +10,14 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
-    private FruitShopService fruitShopService;
+    private static FruitShopService fruitShopService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         ReportCreateService reportCreateService = new FruitReportCreateService();
         DataHandler dataHandler = new FruitDataHandler(new OperationStrategyImpl());
         fruitShopService = new FruitShopServiceImpl(dataHandler, reportCreateService);
@@ -57,8 +57,6 @@ public class FruitShopServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void makeDailyReport_null() {
-        String expected = "fruit,quantity";
-        String actual = fruitShopService.makeDailyReport(null);
-        assertEquals(expected, actual);
+        fruitShopService.makeDailyReport(null);
     }
 }

@@ -38,7 +38,7 @@ public class FruitReportCreateServiceTest {
     }
 
     @Test
-    public void createReport_emptyStorage() {
+    public void createReport_emptyStorage_ok() {
         String expected = "fruit,quantity";
         String actual = reportCreateService.createReport();
         assertEquals(expected, actual);

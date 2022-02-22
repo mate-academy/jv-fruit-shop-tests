@@ -43,13 +43,4 @@ public class ReportWriterServiceTest {
     public void writeFile_wrongPath_notOk() {
         reportWriterService.writeReport(report, WRONG_PATH_TO_FILE);
     }
-
-    @AfterClass
-    public static void afterClass() {
-        try {
-            Files.deleteIfExists(Paths.get(PATH_TO_CORRECT_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete file" + e);
-        }
-    }
 }

@@ -42,7 +42,6 @@ public class ParseServiceTest {
     @Test
     public void parseFromCsv_Ok() {
         List<FruitRecord> actualList = parser.parseFromCsv(validData);
-        System.out.println(actualList.get(0) + " " + bananaRecord);
         boolean expected = true;
         boolean actual = actualList.contains(bananaRecord)
                 && actualList.contains(appleRecord);

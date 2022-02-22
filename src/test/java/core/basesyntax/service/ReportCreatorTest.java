@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static core.basesyntax.db.Storage.storage;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
@@ -28,6 +29,11 @@ public class ReportCreatorTest {
         String actualOrange = reportCreatorService.createReport().get(1);
         assertEquals(expectedBanana, actualBanana);
         assertEquals(expectedOrange, actualOrange);
+    }
+
+    @Test
+    public void reportCreatorService_createReport_emptyStorage_Ok() {
+        assertTrue(reportCreatorService.createReport().isEmpty());
     }
 
     @After

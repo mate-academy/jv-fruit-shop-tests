@@ -12,6 +12,7 @@ import core.basesyntax.service.strategy.impl.PlusOperationHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -41,14 +42,23 @@ public class DataProcessorTest {
         Fruit expected = new Fruit("banana", 100);
         dataProcessor.registerTransaction("s,banana,100");
         Fruit actual = storage.get(0);
-        //add
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getAmount(), actual.getAmount());
-        //substract
         expected.setAmount(90);
         dataProcessor.registerTransaction("p,banana,10");
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getAmount(), actual.getAmount());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void dataProcessor_registerTransaction_invalidAmount_notOk() {
+        dataProcessor.registerTransaction("s,banana,100");
+        dataProcessor.registerTransaction("p,banana,101");
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void dataProcessor_registerTransaction_noSuchElement_notOk() {
+        dataProcessor.registerTransaction("p,banana,100");
     }
 
     @Test

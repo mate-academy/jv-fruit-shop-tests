@@ -1,8 +1,7 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.impl.CsvReaderImpl;
 import java.io.File;
 import java.util.ArrayList;

@@ -30,10 +30,8 @@ public class StorageDaoTest {
         storageDao.add("banana", 100);
         Fruit expected = defaultFruit;
         Fruit actual = storage.get(0);
-        //new fruit
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getAmount(), actual.getAmount());
-        //existing fruit
         storageDao.add("banana", 100);
         expected.setAmount(200);
         assertEquals(expected.getName(), actual.getName());
@@ -46,7 +44,6 @@ public class StorageDaoTest {
         storage.add(defaultFruit);
         storageDao.substract("banana", 10);
         Fruit actual = storage.get(0);
-        //new fruit
         assertEquals(expected.getName(), actual.getName());
         assertEquals(expected.getAmount(), actual.getAmount());
     }

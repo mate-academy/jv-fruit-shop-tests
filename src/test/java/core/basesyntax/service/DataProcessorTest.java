@@ -6,11 +6,9 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.DataProcessorImpl;
 import core.basesyntax.service.strategy.OperationHandler;
-import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.service.strategy.impl.MinusOperationHandler;
 import core.basesyntax.service.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
-import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
-import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
+import core.basesyntax.service.strategy.impl.PlusOperationHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,10 +23,10 @@ public class DataProcessorTest {
     @BeforeClass
     public static void beforeClass() {
         HashMap<DataProcessorImpl.OperationType, OperationHandler> strategyMap = new HashMap<>();
-        strategyMap.put(DataProcessorImpl.OperationType.BALANCE, new BalanceOperationHandler());
-        strategyMap.put(DataProcessorImpl.OperationType.SUPPLY, new SupplyOperationHandler());
-        strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new PurchaseOperationHandler());
-        strategyMap.put(DataProcessorImpl.OperationType.RETURN, new ReturnOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.BALANCE, new PlusOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.SUPPLY, new PlusOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new MinusOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.RETURN, new PlusOperationHandler());
         dataProcessor = new DataProcessorImpl(new OperationStrategyImpl(strategyMap));
 
         parsedData = new ArrayList<>();

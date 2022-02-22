@@ -1,38 +1,36 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.CsvReaderImpl;
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.service.DataProcessor;
+import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.impl.CsvWriter;
+import core.basesyntax.service.impl.CsvReaderImpl;
+import core.basesyntax.service.impl.CsvWriterImpl;
 import core.basesyntax.service.impl.DataProcessorImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
-import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.service.strategy.impl.MinusOperationHandler;
 import core.basesyntax.service.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
-import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
-import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
+import core.basesyntax.service.strategy.impl.PlusOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 
 public class Main {
     public static void main(final String[] args) {
         HashMap<DataProcessorImpl.OperationType, OperationHandler> strategyMap = new HashMap<>();
-        strategyMap.put(DataProcessorImpl.OperationType.BALANCE, new BalanceOperationHandler());
-        strategyMap.put(DataProcessorImpl.OperationType.SUPPLY, new SupplyOperationHandler());
-        strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new PurchaseOperationHandler());
-        strategyMap.put(DataProcessorImpl.OperationType.RETURN, new ReturnOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.BALANCE, new PlusOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.SUPPLY, new PlusOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new MinusOperationHandler());
+        strategyMap.put(DataProcessorImpl.OperationType.RETURN, new PlusOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
 
         StorageDao storageDao = new StorageDaoImpl();
-        final FileReader csvReader = new CsvReaderImpl();
+        final FileReaderService csvReader = new CsvReaderImpl();
         final ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl(storageDao);
-        final FileWriterService csvWriter = new CsvWriter(reportCreatorService);
+        final FileWriterService csvWriter = new CsvWriterImpl(reportCreatorService);
         final DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
         List<String> parsedDataFromFile = csvReader.parse(
                 "./src/main/java/core/basesyntax/resources/input.csv"

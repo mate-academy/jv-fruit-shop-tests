@@ -2,7 +2,8 @@ package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.impl.CsvReaderImpl;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.impl.CsvReaderImpl;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
-    private static FileReader fileReader;
+    private static FileReaderService fileReader;
     private static File testFileOk;
     private static File testFileEmpty;
 

@@ -1,12 +1,12 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FileReader;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CsvReaderImpl implements FileReader {
+public class CsvReaderImpl implements FileReaderService {
 
     @Override
     public List<String> parse(String filePath) {

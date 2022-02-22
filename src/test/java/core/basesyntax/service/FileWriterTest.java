@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.CsvWriter;
+import core.basesyntax.service.impl.CsvWriterImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class FileWriterTest {
 
     @BeforeClass
     public static void beforeClass() {
-        fileWriterService = new CsvWriter(
+        fileWriterService = new CsvWriterImpl(
                 new ReportCreatorServiceImpl(new StorageDaoImpl())
         );
         testReportFile = new File("src/test/java/resources/test_report.csv");

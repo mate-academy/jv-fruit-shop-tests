@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-public class CsvWriter implements FileWriterService {
+public class CsvWriterImpl implements FileWriterService {
     private final ReportCreatorService reportCreatorService;
 
-    public CsvWriter(ReportCreatorService reportCreatorService) {
+    public CsvWriterImpl(ReportCreatorService reportCreatorService) {
         this.reportCreatorService = reportCreatorService;
     }
 

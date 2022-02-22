@@ -4,9 +4,7 @@ import core.basesyntax.service.ReportWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,14 +40,5 @@ public class ReportWriterServiceTest {
     @Test (expected = RuntimeException.class)
     public void writeFile_wrongPath_notOk() {
         reportWriterService.writeReport(report, WRONG_PATH_TO_FILE);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        try {
-            Files.delete(Paths.get(PATH_TO_CORRECT_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete file" + e);
-        }
     }
 }

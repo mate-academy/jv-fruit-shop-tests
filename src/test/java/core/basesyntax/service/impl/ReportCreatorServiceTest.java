@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.DataProcessingException;
 import core.basesyntax.model.Fruit;
@@ -33,13 +31,8 @@ public class ReportCreatorServiceTest {
         Assert.assertEquals(expectedReport, actualReport);
     }
 
-    @Test
+    @Test(expected = DataProcessingException.class)
     public void createReport_emptyStorage_notOk() {
-        try {
-            reportCreatorService.createReport();
-        } catch (DataProcessingException e) {
-            return;
-        }
-        fail("DataProcessingException should be thrown if storage was empty");
+        reportCreatorService.createReport();
     }
 }

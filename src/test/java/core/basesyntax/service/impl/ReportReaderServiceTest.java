@@ -2,13 +2,17 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportReaderService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportReaderServiceTest {
@@ -21,6 +25,30 @@ public class ReportReaderServiceTest {
     private static final String TEST_INCORRECT_REPORT_PATH
             = "src/test/resources/test_incorrect_report.csv";
     private final ReportReaderService reportReaderService = new ReportReaderServiceImpl();
+
+    @BeforeClass
+    public static void beforeClass() {
+        String inputReport = "type,fruit,quantity" + System.lineSeparator()
+                + "b,banana,10" + System.lineSeparator()
+                + "b,apple,20" + System.lineSeparator()
+                + "b,cherry,100" + System.lineSeparator()
+                + "s,apple,70" + System.lineSeparator()
+                + "s,banana,80" + System.lineSeparator()
+                + "p,banana,10" + System.lineSeparator()
+                + "r,apple,30" + System.lineSeparator()
+                + "p,apple,20" + System.lineSeparator()
+                + "p,banana,20" + System.lineSeparator()
+                + "s,banana,40" + System.lineSeparator();
+        String incorrectReport = "Hello, mates!"
+                + "How are you feeling?";
+        try {
+            Files.write(Paths.get(TEST_INPUT_REPORT_PATH), inputReport.getBytes());
+            Files.write(Paths.get(TEST_INCORRECT_REPORT_PATH), incorrectReport.getBytes());
+            Files.write(Paths.get(TEST_EMPTY_REPORT_PATH), "".getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write data to file" + e);
+        }
+    }
 
     @Test
     public void readeFile_correctData_ok() {
@@ -54,14 +82,20 @@ public class ReportReaderServiceTest {
         assertTrue(reportReaderService.readFile(TEST_EMPTY_REPORT_PATH).isEmpty());
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readeFile_wrongPath_notOk() {
+        reportReaderService.readFile(WRONG_PATH);
+        reportReaderService.readFile(TEST_INCORRECT_REPORT_PATH);
+    }
+
+    @AfterClass
+    public static void afterClass() {
         try {
-            reportReaderService.readFile(WRONG_PATH);
-            reportReaderService.readFile(TEST_INCORRECT_REPORT_PATH);
-        } catch (RuntimeException e) {
-            return;
+            Files.delete(Paths.get(TEST_INPUT_REPORT_PATH));
+            Files.delete(Paths.get(TEST_INCORRECT_REPORT_PATH));
+            Files.delete(Paths.get(TEST_EMPTY_REPORT_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't delete file" + e);
         }
-        fail("RuntimeException should be thrown is path was wrong");
     }
 }

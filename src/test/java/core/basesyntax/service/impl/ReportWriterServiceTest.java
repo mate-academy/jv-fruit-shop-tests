@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.service.ReportWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class ReportWriterServiceTest {
     }
 
     @Test
-    public void writeReport() {
+    public void writeReport_validData_ok() {
         reportWriterService.writeReport(report, PATH_TO_CORRECT_FILE);
         List<String> expected = List.of("fruit,quantity", "cherry,100", "banana,100", "apple,100");
         List<String> actual;
@@ -39,13 +39,17 @@ public class ReportWriterServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void writeFile_wrongPath_notOk() {
+        reportWriterService.writeReport(report, WRONG_PATH_TO_FILE);
+    }
+
+    @AfterClass
+    public static void afterClass() {
         try {
-            reportWriterService.writeReport(report, WRONG_PATH_TO_FILE);
-        } catch (RuntimeException e) {
-            return;
+            Files.delete(Paths.get(PATH_TO_CORRECT_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't delete file" + e);
         }
-        fail("RuntimeException should be thrown is pats was wrong");
     }
 }

@@ -30,4 +30,9 @@ public class GenerateReportDataImplTest {
                 + System.lineSeparator();
         assertEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void generateReport_nullData_notOk() {
+        generateReportDataService.report(null);
+    }
 }

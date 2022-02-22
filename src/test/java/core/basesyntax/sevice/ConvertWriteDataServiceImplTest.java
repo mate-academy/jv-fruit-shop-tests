@@ -14,7 +14,9 @@ public class ConvertWriteDataServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         convertWriteDataService = new ConvertWriteDataServiceImpl();
-        expectedString = "fruit,quantity\r\nbanana,10\r\napple,20";
+        expectedString = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator()
+                + "apple,20";
         Storage.fruitStorage.clear();
         Storage.fruitStorage.put("banana", 10);
         Storage.fruitStorage.put("apple", 20);

@@ -43,9 +43,4 @@ public class OperationStrategyImplTest {
         assertEquals(purchaseHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.PURCHASE).getClass());
     }
-
-    @Test(expected = RuntimeException.class)
-    public void get_NullOperation_NotOk() {
-        operationStrategy.get(null).getClass();
-    }
 }

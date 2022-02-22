@@ -11,15 +11,15 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public List<String> createReport() {
-        List<String> report = new ArrayList<>();
-        report.add(COLUMN_NAMES);
-        StringBuilder builder = new StringBuilder();
         if (Storage.storage.isEmpty()) {
             throw new RuntimeException("Storage is empty");
         }
         if (Storage.storage.containsKey(null)) {
-            throw new NullPointerException("Storage can't contain null.");
+            throw new RuntimeException("Storage can't contain null.");
         }
+        List<String> report = new ArrayList<>();
+        report.add(COLUMN_NAMES);
+        StringBuilder builder = new StringBuilder();
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
             builder.append(entry.getKey().getNameFruit()).append(",").append(entry.getValue());
             report.add(builder.toString());

@@ -16,11 +16,6 @@ import org.junit.Test;
 public class TypeOfActivityTest {
     private TypeOfActivity typeOfActivity;
 
-    @After
-    public void afterEachTest() {
-        Storage.storage.clear();
-    }
-
     @Test
     public void realizeTypeBalance_inputDataIsNull_notOk() {
         typeOfActivity = new BalanceActivity();
@@ -103,5 +98,10 @@ public class TypeOfActivityTest {
         int actual = 90;
         int expected = Storage.storage.get(new Fruit("banana"));
         assertEquals(expected,actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.storage.clear();
     }
 }

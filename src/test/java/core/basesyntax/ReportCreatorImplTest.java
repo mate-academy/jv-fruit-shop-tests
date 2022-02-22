@@ -14,9 +14,6 @@ import org.junit.jupiter.api.AfterAll;
 
 public class ReportCreatorImplTest {
     private final ReportCreator reportCreator = new ReportCreatorImpl();
-    private List<String> correctList = new ArrayList<>(List.of("fruit,quantity",
-            "banana,152",
-            "apple,90"));
 
     @AfterAll
     static void afterAll() {
@@ -32,16 +29,18 @@ public class ReportCreatorImplTest {
     @Test
     public void storage_isNull_notOk() {
         Storage.storage.put(null, null);
-        assertThrows(NullPointerException.class,
+        assertThrows(RuntimeException.class,
                 reportCreator::createReport);
     }
 
     @Test
     public void createReport_correctReturnData_ok() {
-        List<String> actual = correctList;
+        List<String> correctList = new ArrayList<>(List.of("fruit,quantity",
+                "banana,152",
+                "apple,90"));
         Storage.storage.put(new Fruit("banana"), 152);
         Storage.storage.put(new Fruit("apple"), 90);
         List<String> expected = reportCreator.createReport();
-        assertEquals(expected, actual);
+        assertEquals(expected, correctList);
     }
 }

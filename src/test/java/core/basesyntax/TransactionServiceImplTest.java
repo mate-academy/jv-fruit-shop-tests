@@ -12,10 +12,6 @@ import org.junit.Test;
 
 public class TransactionServiceImplTest {
     private final TransactionService transactionService = new TransactionServiceImpl();
-    private List<String> correctList = new ArrayList<>(List.of("type,fruit,quantity",
-            "b,banana,20", "b,apple,100", "s,banana,100",
-            "p,banana,13", "r,apple,10", "p,apple,20",
-            "p,banana,5", "s,banana,50"));
 
     @Test
     public void transactionData_parameterListIsNull_notOk() {
@@ -38,6 +34,10 @@ public class TransactionServiceImplTest {
 
     @Test
     public void transactionData_parameterList_Ok() {
+        List<String> correctList = new ArrayList<>(List.of("type,fruit,quantity",
+                "b,banana,20", "b,apple,100", "s,banana,100",
+                "p,banana,13", "r,apple,10", "p,apple,20",
+                "p,banana,5", "s,banana,50"));
         List<FruitTransaction> actual = transactionService.transactionData(correctList);
         List<FruitTransaction> expected = List.of(
                 FruitTransaction.of("b","banana",20),

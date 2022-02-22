@@ -5,6 +5,9 @@ import core.basesyntax.db.Storage;
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
     public void apply(String fruit, int quantity) {
+        if (fruit == null || quantity < 0) {
+            throw new RuntimeException("Invalid input parameters.");
+        }
         if (!Storage.fruitStorage.containsKey(fruit)) {
             throw new RuntimeException("There are no " + fruit + " in storage now.");
         }

@@ -1,32 +1,21 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.ReportSupplierDao;
-import core.basesyntax.dao.ReportWriterDao;
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportCreatorService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class ReportSupplierDaoImpl implements ReportSupplierDao, ReportWriterDao {
-    private final StorageDao storageDao;
+public class CsvWriter implements FileWriterService {
+    private final ReportCreatorService reportCreatorService;
 
-    public ReportSupplierDaoImpl(StorageDao storageDao) {
-        this.storageDao = storageDao;
+    public CsvWriter(ReportCreatorService reportCreatorService) {
+        this.reportCreatorService = reportCreatorService;
     }
 
     @Override
-    public List<String> get() {
-        return storageDao.getStorage().stream()
-                .map(Fruit::getStock)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public void createReport(String filePath) {
+    public void writeToFile(String filePath) {
         File reportFile = new File(filePath);
         try {
             reportFile.delete();
@@ -36,7 +25,10 @@ public class ReportSupplierDaoImpl implements ReportSupplierDao, ReportWriterDao
                     + System.lineSeparator() + filePath);
         }
         writeStringToFile(reportFile, ("fruit,quantity" + System.lineSeparator()));
-        get().forEach(line -> writeStringToFile(reportFile, (line + System.lineSeparator())));
+        reportCreatorService.createReport()
+                .forEach(
+                        line -> writeStringToFile(reportFile, (line + System.lineSeparator()))
+                );
     }
 
     public void writeStringToFile(File file, String line) {

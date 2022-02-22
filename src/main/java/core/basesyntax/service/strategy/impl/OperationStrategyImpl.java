@@ -1,6 +1,6 @@
 package core.basesyntax.service.strategy.impl;
 
-import core.basesyntax.service.DataProcessorImpl;
+import core.basesyntax.service.impl.DataProcessorImpl;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.Map;

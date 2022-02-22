@@ -1,11 +1,12 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import static core.basesyntax.db.Storage.storage;
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.impl.ReportSupplierDaoImpl;
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.impl.CsvWriter;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,13 +16,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReportSupplierTest {
+public class FileWriterTest {
+    private static FileWriterService fileWriterService;
     private static File testReportFile;
-    private static ReportSupplierDaoImpl reportSupplier;
 
     @BeforeClass
     public static void beforeClass() {
-        reportSupplier = new ReportSupplierDaoImpl(new StorageDaoImpl());
+        fileWriterService = new CsvWriter(
+                new ReportCreatorServiceImpl(new StorageDaoImpl())
+        );
         testReportFile = new File("src/test/java/resources/test_report.csv");
     }
 
@@ -31,26 +34,14 @@ public class ReportSupplierTest {
     }
 
     @Test
-    public void reportSupplier_get_Ok() {
-        storage.add(new Fruit("banana", 100));
-        storage.add(new Fruit("orange", 10));
-        String expectedBanana = "banana,100";
-        String expectedOrange = "orange,10";
-        String actualBanana = reportSupplier.get().get(0);
-        String actualOrange = reportSupplier.get().get(1);
-        assertEquals(expectedBanana, actualBanana);
-        assertEquals(expectedOrange, actualOrange);
-    }
-
-    @Test
-    public void reportSupplier_writeStringToFile_Ok() {
+    public void fileWriter_writeStringToFile_Ok() {
         String expected = "string was written to file successfully";
         try {
             testReportFile.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException("cant create new test file");
         }
-        reportSupplier.writeStringToFile(testReportFile, expected);
+        fileWriterService.writeStringToFile(testReportFile, expected);
         String actual = null;
         try {
             actual = Files.readAllLines(testReportFile.toPath()).get(0);
@@ -61,15 +52,15 @@ public class ReportSupplierTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void reportSupplier_writeStringToFile_notOk() {
-        reportSupplier.writeStringToFile(testReportFile, "test string");
+    public void fileWriter_writeStringToFile_notOk() {
+        fileWriterService.writeStringToFile(testReportFile, "test string");
     }
 
     @Test
-    public void reportSupplier_createReport_Ok() {
+    public void fileWriter_WriteToFile_Ok() {
         storage.add(new Fruit("banana", 100));
         storage.add(new Fruit("orange", 10));
-        reportSupplier.createReport(testReportFile.toPath().toString());
+        fileWriterService.writeToFile(testReportFile.toPath().toString());
         final String expectedLine1 = "fruit,quantity";
         final String expectedLine2 = "banana,100";
         final String expectedLine3 = "orange,10";

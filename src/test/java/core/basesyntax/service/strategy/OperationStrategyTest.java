@@ -3,7 +3,7 @@ package core.basesyntax.service.strategy;
 import static core.basesyntax.db.Storage.storage;
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.DataProcessorImpl;
+import core.basesyntax.service.impl.DataProcessorImpl;
 import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.service.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;

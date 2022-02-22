@@ -1,12 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FileReader;
-import core.basesyntax.dao.ReportWriterDao;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.CsvReaderImpl;
-import core.basesyntax.dao.impl.ReportSupplierDaoImpl;
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.service.DataProcessor;
-import core.basesyntax.service.DataProcessorImpl;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.impl.CsvWriter;
+import core.basesyntax.service.impl.DataProcessorImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
@@ -24,15 +27,17 @@ public class Main {
         strategyMap.put(DataProcessorImpl.OperationType.SUPPLY, new SupplyOperationHandler());
         strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new PurchaseOperationHandler());
         strategyMap.put(DataProcessorImpl.OperationType.RETURN, new ReturnOperationHandler());
-
-        final FileReader fileReader = new CsvReaderImpl();
-        final ReportWriterDao reportSupplier = new ReportSupplierDaoImpl(new StorageDaoImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
+
+        StorageDao storageDao = new StorageDaoImpl();
+        final FileReader csvReader = new CsvReaderImpl();
+        final ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl(storageDao);
+        final FileWriterService csvWriter = new CsvWriter(reportCreatorService);
         final DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
-        List<String> parsedDataFromFile = fileReader.parse(
+        List<String> parsedDataFromFile = csvReader.parse(
                 "./src/main/java/core/basesyntax/resources/input.csv"
         );
         dataProcessor.createFruits(parsedDataFromFile);
-        reportSupplier.createReport("./src/main/java/core/basesyntax/resources/report.csv");
+        csvWriter.writeToFile("./src/main/java/core/basesyntax/resources/report.csv");
     }
 }

@@ -19,7 +19,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class SaveToStorageImplTest {
     private SaveToStorageService saveToStorageService;
     private TransactionStrategy transactionStrategy;

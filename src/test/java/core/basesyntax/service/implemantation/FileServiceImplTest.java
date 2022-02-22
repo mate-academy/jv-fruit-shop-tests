@@ -1,18 +1,16 @@
 package core.basesyntax.service.implemantation;
 
-import core.basesyntax.service.FileService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.FileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FileServiceImplTest {
     private FileService fileService;
@@ -44,7 +42,8 @@ public class FileServiceImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = fileService.readFromFile(Path.of("src/main/resources/fruits.csv"));
+        List<String> actual = fileService
+                .readFromFile(Path.of("src/test/resources/fruitsTests.csv"));
         assertEquals(actual, expected);
     }
 
@@ -54,8 +53,10 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void writeToFile_correctData_ok() {
-        assertTrue(fileService.writeToFile("Input data",
-                Path.of("src/test/resources/TestReport.txt")));
+    public void writeToFile_correctData_ok() throws IOException {
+        String expected = "Input data";
+        fileService.writeToFile(expected, Path.of("src/test/resources/TestReport.txt"));
+        String actual = Files.readString(Path.of("src/test/resources/TestReport.txt"));
+        assertEquals(expected, actual);
     }
 }

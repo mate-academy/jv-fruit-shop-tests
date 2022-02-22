@@ -3,11 +3,10 @@ package core.basesyntax.service.implemantation;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReportGenerationService;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportGenerationServiceImplTest {
     private ReportGenerationService reportGenerator;

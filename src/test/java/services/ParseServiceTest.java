@@ -12,12 +12,12 @@ import services.impl.ParseServiceImpl;
 
 public class ParseServiceTest {
     private static final ParseService parser = new ParseServiceImpl();
-    private static final String validData = "type,fruit,quantity" +
-            System.lineSeparator() +
-            "b,banana,20" +
-            System.lineSeparator() +
-            "b,apple,100" +
-            System.lineSeparator();
+    private static final String validData = "type,fruit,quantity"
+            + System.lineSeparator()
+            + "b,banana,20"
+            + System.lineSeparator()
+            + "b,apple,100"
+            + System.lineSeparator();
     private static final FruitRecord bananaRecord
             = new FruitRecord('b', "banana", 20);
     private static final FruitRecord appleRecord

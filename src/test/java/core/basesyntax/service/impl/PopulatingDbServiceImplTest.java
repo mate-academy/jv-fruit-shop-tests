@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import core.basesyntax.dao.BalanceOperationHandlerImpl;
 import core.basesyntax.dao.OperationHandler;
 import core.basesyntax.dao.PurchaseOperationHandlerImpl;
@@ -7,16 +10,13 @@ import core.basesyntax.dao.ReturnOperationHandlerImpl;
 import core.basesyntax.dao.SupplyOperationHandlerImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.models.FruitTransaction;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class PopulatingDbServiceImplTest {
     public static final String BALANCE = "b";
@@ -32,7 +32,6 @@ public class PopulatingDbServiceImplTest {
     private static List<FruitTransaction> purchaseTransactionsInvalidCount;
     private static List<FruitTransaction> supplyTransactions;
     private static List<FruitTransaction> returnTransactions;
-
 
     @BeforeClass
     public static void beforeClass() {
@@ -72,17 +71,17 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void PopulatingDb_InvalidOperation() {
+    public void populatingDb_InvalidOperation() {
         populatingDb.prepareDB(invalidTransactions);
     }
 
     @Test
     public void populatingDb_BalanceOperation() {
         Storage.fruitStorage.clear();
-        Map<String, Integer> initialState = new HashMap<>(Storage.fruitStorage);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
         expected.put("apple", 10);
+        Map<String, Integer> initialState = new HashMap<>(Storage.fruitStorage);
         populatingDb.prepareDB(balanceTransactions);
         assertNotEquals(initialState.size(), Storage.fruitStorage.size());
         assertEquals(expected, Storage.fruitStorage);
@@ -90,7 +89,7 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void populatingDb_purchaseOperation() {
+    public void populatingDb_PurchaseOperation() {
         Storage.fruitStorage.put("banana", 30);
         Storage.fruitStorage.put("apple", 30);
         Map<String, Integer> expected = new HashMap<>();
@@ -103,7 +102,7 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test
-    public void populatingDb_returnOperation() {
+    public void populatingDb_ReturnOperation() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
         expected.put("apple", 10);

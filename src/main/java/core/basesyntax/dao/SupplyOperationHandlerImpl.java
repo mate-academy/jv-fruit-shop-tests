@@ -7,6 +7,7 @@ public class SupplyOperationHandlerImpl implements OperationHandler {
     public void apply(String fruit, int quantity) {
         if (!Storage.fruitStorage.containsKey(fruit)) {
             Storage.fruitStorage.put(fruit, quantity);
+            return;
         }
         int currentQuantity = Storage.fruitStorage.get(fruit);
         Storage.fruitStorage.put(fruit, currentQuantity + quantity);

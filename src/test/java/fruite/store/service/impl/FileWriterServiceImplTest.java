@@ -51,4 +51,10 @@ public class FileWriterServiceImplTest {
         byte[] expectedResultInBytes = expectedResult.getBytes();
         fileWriterService.writeToFile(expectedResultInBytes, INVALID_FILE_NAME_OR_PATH);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullInsteadOfPathOrFileName_notOk() {
+        byte[] emptyResult = new byte[0];
+        fileWriterService.writeToFile(emptyResult, null);
+    }
 }

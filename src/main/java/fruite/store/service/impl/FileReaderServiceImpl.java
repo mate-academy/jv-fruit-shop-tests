@@ -10,6 +10,9 @@ import java.io.IOException;
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public String readFromFile(String fromFileName) {
+        if (fromFileName == null) {
+            throw new RuntimeException("File path can't be null!");
+        }
         File file = new File(fromFileName);
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file));) {

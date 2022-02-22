@@ -40,7 +40,7 @@ public class DataProcessingServiceImpl implements DataProcessingService {
         String[] rowData = line.split(COMMA);
         transaction.setOperation(transaction.getOperationByLetter(rowData[OPERATION_ELEMENT]
                 .trim()));
-        transaction.setFruit(rowData[FRUIT_ELEMENT].trim());
+        transaction.setFruit(rowData[FRUIT_ELEMENT].toLowerCase().trim());
         transaction.setQuantity(Integer.parseInt(rowData[QUANTITY_ELEMENT].trim()));
         return transaction;
     }

@@ -26,33 +26,28 @@ public class StorageDaoImplTest {
         fruit = new Fruit("apple");
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
-    public void addFruit_ok() {
+    public void add_fruit_ok() {
         storageDao.add(fruit);
         boolean actual = Storage.fruits.isEmpty();
         Assert.assertFalse("Fruit hasn't added to storage", actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addExistingFruit_notOk() {
-        storageDao.add(fruit);
+    public void add_existingFruit_notOk() {
+        Storage.fruits.add(fruit);
         storageDao.add(fruit);
     }
 
     @Test
-    public void getFruit_ok() {
+    public void get_fruit_ok() {
         Storage.fruits.add(fruit);
         Fruit actual = storageDao.get(fruit.getFruitName());
         Assert.assertEquals(fruit, actual);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void getNotExistingFruit_notOk() {
+    public void get_notExistingFruit_notOk() {
         storageDao.get(fruit.getFruitName());
     }
 
@@ -75,6 +70,11 @@ public class StorageDaoImplTest {
         fruitList.add(new Fruit("lemon"));
         Storage.fruits.addAll(fruitList);
         Assert.assertEquals(fruitList, storageDao.getAll());
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 
 }

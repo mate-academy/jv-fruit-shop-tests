@@ -22,20 +22,20 @@ public class ReportCreatorImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.fruits.add(new Fruit("banana", 50));
         Storage.fruits.add(new Fruit("melon", 30));
         Storage.fruits.add(new Fruit("apple", 70));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
     }
 
     @Test
     public void createReport_ok() {
         String actual = reportCreator.createReport();
         Assert.assertEquals(EXPECTED, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 }

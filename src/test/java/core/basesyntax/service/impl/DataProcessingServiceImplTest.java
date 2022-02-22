@@ -50,11 +50,6 @@ public class DataProcessingServiceImplTest {
         data.add("s,banana,50");
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void processTransaction_ok() {
         dataProcessingService.processTransaction(data);
@@ -65,5 +60,10 @@ public class DataProcessingServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void processTransaction_NullData_notOk() {
         dataProcessingService.processTransaction(null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

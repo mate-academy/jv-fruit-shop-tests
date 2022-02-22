@@ -23,18 +23,13 @@ public class BalanceOperationHandlerTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         transactionOk.setFruit("apple");
         transactionOk.setOperation(FruitTransaction.Operation.BALANCE);
         transactionOk.setQuantity(50);
         transactionWithBadQuantity.setFruit("banana");
         transactionWithBadQuantity.setOperation(FruitTransaction.Operation.BALANCE);
         transactionWithBadQuantity.setQuantity(-50);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
     }
 
     @Test
@@ -50,5 +45,10 @@ public class BalanceOperationHandlerTest {
     @Test(expected = RuntimeException.class)
     public void updateNegativeQuantity_notOk() {
         operationHandler.updateQuantity(transactionWithBadQuantity);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 }

@@ -24,18 +24,13 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         transactionOk.setFruit("apple");
         transactionOk.setOperation(FruitTransaction.Operation.PURCHASE);
         transactionOk.setQuantity(40);
         transactionWithNegativeQuantity.setFruit("banana");
         transactionWithNegativeQuantity.setOperation(FruitTransaction.Operation.PURCHASE);
         transactionWithNegativeQuantity.setQuantity(-40);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
     }
 
     @Test
@@ -64,5 +59,10 @@ public class PurchaseOperationHandlerTest {
     @Test(expected = RuntimeException.class)
     public void updateNegativeQuantity_notOk() {
         operationHandler.updateQuantity(transactionWithNegativeQuantity);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 }

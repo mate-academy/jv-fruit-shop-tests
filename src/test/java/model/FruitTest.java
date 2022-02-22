@@ -29,11 +29,25 @@ public class FruitTest {
         assertEquals(expected, actual);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void fruitConstructor_minusAmount_Exception() {
+        Fruit fruit = new Fruit(name, -3);
+        boolean expected = false;
+        boolean actual = fruit.getName().equals(name)
+                && fruit.getAmount() == amount;
+        assertEquals(expected, actual);
+    }
+
     @Test
     public void setAmount_Ok() {
         int expected = amount;
         int actual = validFruit.getAmount();
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void setAmount_MinusValue_Exception() {
+        validFruit.setAmount(-3);
     }
 
     @Test
@@ -42,6 +56,40 @@ public class FruitTest {
         String name = "orange";
         validFruit.setName(name);
         boolean actual = validFruit.getName().equals(name);
+        assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void setName_null_Exception() {
+        validFruit.setName(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void setName_EmptyString_Exception() {
+        validFruit.setName("");
+    }
+
+    @Test
+    public void equals_sameObject_Ok() {
+        Fruit fruit = new Fruit(name, amount);
+        boolean expected = true;
+        boolean actual = fruit.equals(fruit);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void equals_null_Ok() {
+        Fruit fruit = new Fruit(name, amount);
+        boolean expected = false;
+        boolean actual = fruit.equals(null);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void equals_Ok() {
+        Fruit fruit = new Fruit(name, amount);
+        boolean expected = true;
+        boolean actual = fruit.equals(validFruit);
         assertEquals(expected, actual);
     }
 

@@ -14,7 +14,6 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<FruitRecord> parseFromCsv(String dataInString) {
-        List<FruitRecord> listOfRecords;
         dataInString = dataInString.substring(dataInString.indexOf(System.lineSeparator())
                 + APPEND_TO_REMOVE_TITLE);
         String[] arrOfRecords = dataInString.split(System.lineSeparator());

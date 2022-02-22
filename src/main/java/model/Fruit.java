@@ -55,9 +55,4 @@ public class Fruit {
     public int hashCode() {
         return Objects.hash(name, amount);
     }
-
-    @Override
-    public Fruit clone() {
-        return new Fruit(name, amount);
-    }
 }

@@ -18,7 +18,6 @@ public class ParseServiceTest {
             .append("b,banana,20")
             .append(System.lineSeparator())
             .append("b,apple,100")
-            .append(System.lineSeparator())
             .toString();
     private static final FruitRecord bananaRecord
             = new FruitRecord('b', "banana", 20);

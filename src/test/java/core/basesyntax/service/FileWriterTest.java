@@ -25,7 +25,7 @@ public class FileWriterTest {
         fileWriterService = new CsvWriterImpl(
                 new ReportCreatorServiceImpl(new StorageDaoImpl())
         );
-        testReportFile = new File("src/test/java/resources/test_report.csv");
+        testReportFile = new File("./src/resources/test_report.csv");
     }
 
     @Before

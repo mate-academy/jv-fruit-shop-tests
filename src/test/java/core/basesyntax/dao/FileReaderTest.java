@@ -18,8 +18,8 @@ public class FileReaderTest {
     @BeforeClass
     public static void beforeClass() {
         fileReader = new CsvReaderImpl();
-        testFileOk = new File("./src/test/java/resources/test_Ok.csv");
-        testFileEmpty = new File("./src/test/java/resources/test_empty.csv");
+        testFileOk = new File("./src/resources/test_Ok.csv");
+        testFileEmpty = new File("./src/resources/test_empty.csv");
     }
 
     @Test

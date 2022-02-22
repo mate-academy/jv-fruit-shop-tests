@@ -14,7 +14,7 @@ public class FruitDataHandlerTest {
     private static FruitDataHandler fruitDataHandler;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         fruitDataHandler = new FruitDataHandler(new OperationStrategyImpl());
     }
 

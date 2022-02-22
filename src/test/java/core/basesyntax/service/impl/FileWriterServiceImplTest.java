@@ -17,7 +17,7 @@ public class FileWriterServiceImplTest {
     private static String data;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
         data = "fruit,quantity"
                 + System.lineSeparator() + "banana,152"

@@ -12,7 +12,7 @@ public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         operationStrategy = new OperationStrategyImpl();
     }
 

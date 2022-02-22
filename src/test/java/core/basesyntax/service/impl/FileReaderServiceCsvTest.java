@@ -37,12 +37,12 @@ public class FileReaderServiceCsvTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readData_fileNotExist() {
+    public void readData_fileNotExist_notOk() {
         fileReaderService.readFromFile("");
     }
 
     @Test
-    public void readData_emptyFile() {
+    public void readData_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReaderService.readFromFile(EMPTY_FILE_NAME);
         assertEquals(expected, actual);

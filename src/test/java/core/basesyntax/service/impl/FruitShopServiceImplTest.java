@@ -17,7 +17,7 @@ public class FruitShopServiceImplTest {
     private static FruitShopService fruitShopService;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         ReportCreateService reportCreateService = new FruitReportCreateService();
         DataHandler dataHandler = new FruitDataHandler(new OperationStrategyImpl());
         fruitShopService = new FruitShopServiceImpl(dataHandler, reportCreateService);
@@ -48,7 +48,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void makeDailyReport_emptyList() {
+    public void makeDailyReport_emptyList_ok() {
         List<String> data = new ArrayList<>();
         String expected = "fruit,quantity";
         String actual = fruitShopService.makeDailyReport(data);
@@ -56,7 +56,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void makeDailyReport_null() {
+    public void makeDailyReport_null_notOk() {
         fruitShopService.makeDailyReport(null);
     }
 }

@@ -14,7 +14,7 @@ public class FruitReportCreateServiceTest {
     private static ReportCreateService reportCreateService;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         reportCreateService = new FruitReportCreateService();
     }
 

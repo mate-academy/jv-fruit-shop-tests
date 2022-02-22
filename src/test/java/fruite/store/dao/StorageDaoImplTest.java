@@ -20,6 +20,11 @@ public class StorageDaoImplTest {
         storageDao.addFruitToStorage("apple", -1);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void addFruitToStorage_nullInKeyOrQuantity_notOk() {
+        storageDao.addFruitToStorage(null, null);
+    }
+
     @Test
     public void addFruitToStorage_validData_ok() {
         int expected = Storage.fruitStorage.size();
@@ -34,6 +39,11 @@ public class StorageDaoImplTest {
         Assert.assertNotEquals(INITIAL_QUANTITY, Storage.fruitStorage.get("banana"));
     }
 
+    @Test(expected = RuntimeException.class)
+    public void addValueByKey_nullInKeyOrQuantity_notOk() {
+        storageDao.addValueByKey(null, null);
+    }
+
     @Test
     public void subtractValueByKey_validData_ok() {
         storageDao.subtractValueByKey("banana", 50);
@@ -43,5 +53,10 @@ public class StorageDaoImplTest {
     @Test(expected = RuntimeException.class)
     public void subtractValueByKey_recievedValueIsLessThanZero_notOk() {
         storageDao.subtractValueByKey("banana", 300);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void substractValueByKey_nullInKeyOrQuantity_notOk() {
+        storageDao.subtractValueByKey(null, null);
     }
 }

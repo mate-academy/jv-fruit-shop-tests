@@ -3,9 +3,13 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import core.basesyntax.service.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import core.basesyntax.service.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,6 +19,7 @@ public class FileReaderImplTest {
     private static final String PATH_TO_GIVEN_DATA_FILE = "src/test/resources/daily_activities.csv";
     private static final String WRONG_PATH_TO_FILE = "1src/WRONG_PATH_TO_FILE";
     private static final List<List<String>> expectedResult = new ArrayList<>();
+    private static String valueToWrite;
     @Rule
     public final ExpectedException exceptionRule = ExpectedException.none();
     private final FileReader reader = new FileReaderImpl();
@@ -48,10 +53,26 @@ public class FileReaderImplTest {
         expectedResult.add(record7);
         expectedResult.add(record8);
         expectedResult.add(record9);
+        valueToWrite =
+                "type,fruit,quantity" + System.lineSeparator()
+                        + "b,banana,20" + System.lineSeparator()
+                        + "b,apple,100" + System.lineSeparator()
+                        + "s,banana,100" + System.lineSeparator()
+                        + "p,banana,13" + System.lineSeparator()
+                        + "r,apple,10" + System.lineSeparator()
+                        + "p,apple,20" + System.lineSeparator()
+                        + "p,banana,5" + System.lineSeparator()
+                        + "s,banana,50" + System.lineSeparator()
+                        + "b,cherry,60";
     }
 
     @Test
     public void getData_ok() {
+        try {
+            Files.write(Path.of(PATH_TO_GIVEN_DATA_FILE), Collections.singleton(valueToWrite));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file");
+        }
         List<List<String>> actualResult = reader.getData(PATH_TO_GIVEN_DATA_FILE);
         assertNotNull(actualResult);
         assertEquals(expectedResult.toString(), actualResult.toString());

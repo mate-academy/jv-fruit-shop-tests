@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Map;
 
 public class DataWriterToFile implements FileWriter {
-
     public static final String FIRST_LINE = "fruit,quantity";
     public static final String COMA = ",";
 

@@ -8,9 +8,8 @@ import core.basesyntax.strategy.operation.OperationHandler;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    private FruitDao fruitDao;
-    private OperationStrategy operationStrategy;
-    private OperationHandler operationHandler;
+    private final FruitDao fruitDao;
+    private final OperationStrategy operationStrategy;
 
     public FruitServiceImpl(FruitDao fruitDao, OperationStrategy operationStrategy) {
         this.fruitDao = fruitDao;
@@ -24,7 +23,7 @@ public class FruitServiceImpl implements FruitService {
                     + "at least one transaction");
         }
         for (FruitTransaction transaction : fruitsTransactionList) {
-            operationHandler = operationStrategy.get(transaction.getOperation());
+            OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
             operationHandler.changeData(transaction);
         }
         return true;

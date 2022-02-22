@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -25,7 +25,6 @@ public class FruitServiceImplTest {
     private static final int TEST_FRUIT_AMOUNT_TWO = 20;
     private static final String TEST_FRUIT_TYPE_ONE = "avocado";
     private static final String TEST_FRUIT_TYPE_TWO = "papaya";
-    private static final boolean GET_OPERATION_HANDLER = true;
     private static final FruitTransaction.Operation BALANCE
             = FruitTransaction.Operation.BALANCE;
     private static FruitService fruitService;
@@ -73,6 +72,6 @@ public class FruitServiceImplTest {
     @Test
     public void setDataToStorage_listValid_ok() {
         boolean hasOperationHandler = fruitService.setDataToStorage(testTransactionList);
-        assertEquals(GET_OPERATION_HANDLER, hasOperationHandler);
+        assertTrue(hasOperationHandler);
     }
 }

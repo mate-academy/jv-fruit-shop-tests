@@ -44,11 +44,6 @@ public class FruitDaoImplTest {
         Storage.fruits.clear();
     }
 
-    @After
-    public void tearDown() {
-        Storage.fruits.clear();
-    }
-
     @Test(expected = RuntimeException.class)
     public void add_fruitNull_notOk() {
         fruitDao.add(null);
@@ -98,5 +93,10 @@ public class FruitDaoImplTest {
         Storage.fruits.addAll(testListWithFruits);
         List<Fruit> actualListWithFruits = fruitDao.getAll();
         assertEquals(testListWithFruits, actualListWithFruits);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 }

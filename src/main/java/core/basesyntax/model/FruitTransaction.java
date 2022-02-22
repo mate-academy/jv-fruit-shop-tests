@@ -1,9 +1,22 @@
 package core.basesyntax.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FruitTransaction {
+    private static Map<String, Operation> operationMap
+            = new HashMap<>();
+
     private Operation operation;
     private String fruitType;
     private int amount;
+
+    static {
+        operationMap.put("b", Operation.BALANCE);
+        operationMap.put("s", Operation.SUPPLY);
+        operationMap.put("p", Operation.PURCHASE);
+        operationMap.put("r", Operation.RETURN);
+    }
 
     public Operation getOperation() {
         return operation;
@@ -30,17 +43,11 @@ public class FruitTransaction {
     }
 
     public Operation getOperationType(String operation) {
-        if (operation.equals("b")) {
-            return Operation.BALANCE;
-        } else if (operation.equals("s")) {
-            return Operation.SUPPLY;
-        } else if (operation.equals("p")) {
-            return Operation.PURCHASE;
-        } else if (operation.equals("r")) {
-            return Operation.RETURN;
-        } else {
+        if (operation == null || operation.isEmpty()
+                || !operationMap.containsKey(operation)) {
             throw new RuntimeException("Invalid operation " + operation);
         }
+        return operationMap.get(operation);
     }
 
     public enum Operation {

@@ -10,6 +10,9 @@ public class CsvReaderImpl implements FileReader {
 
     @Override
     public List<String> parse(String filePath) {
+        if (filePath == null) {
+            throw new RuntimeException("filePath parameter is null");
+        }
         try {
             if (!Files.readAllLines(Path.of(filePath)).isEmpty()) {
                 return Files.readAllLines(Path.of(filePath));

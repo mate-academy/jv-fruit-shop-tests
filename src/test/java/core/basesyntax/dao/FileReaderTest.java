@@ -10,12 +10,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
-    public static final String OK_TEST_PATH = "./src/test/java/resources/test_Ok.csv";
     private static FileReader fileReader;
+    private static File testFileOk;
+    private static File testFileEmpty;
 
     @BeforeClass
     public static void beforeClass() {
         fileReader = new CsvReaderImpl();
+        testFileOk = new File("./src/test/java/resources/test_Ok.csv");
+        testFileEmpty = new File("./src/test/java/resources/test_empty.csv");
     }
 
     @Test
@@ -30,8 +33,13 @@ public class FileReaderTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = fileReader.parse(OK_TEST_PATH);
+        List<String> actual = fileReader.parse(testFileOk.toString());
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void csvReader_parse_NullParameter_notOk() {
+        fileReader.parse(null);
     }
 
     @Test(expected = RuntimeException.class)
@@ -41,7 +49,6 @@ public class FileReaderTest {
 
     @Test(expected = RuntimeException.class)
     public void csvReader_parse_emptyFile_notOk() {
-        File testInput = new File("./src/test/java/resources/test_empty.csv");
-        fileReader.parse("./src/test/java/resources/test_empty.csv");
+        fileReader.parse(testFileEmpty.toString());
     }
 }

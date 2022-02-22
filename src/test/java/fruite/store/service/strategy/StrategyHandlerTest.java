@@ -50,4 +50,19 @@ public class StrategyHandlerTest {
         Assert.assertTrue(actualPurchaseType);
         Assert.assertTrue(actualReturnType);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void doSpecialOperationOnFruits_nullInFruitType_notOk() {
+        strategyHandler.doSpecialOperationOnFruits(null, "banana", "50");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void doSpecialOperationOnFruits_nullInFruitName_notOk() {
+        strategyHandler.doSpecialOperationOnFruits("b", null, "50");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void doSpecialOperationOnFruits_nullInFruitQuantity_notOk() {
+        strategyHandler.doSpecialOperationOnFruits("b", "banana", null);
+    }
 }

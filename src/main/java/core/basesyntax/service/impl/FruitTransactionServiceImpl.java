@@ -26,5 +26,10 @@ public class FruitTransactionServiceImpl {
         }
         return fruitList;
     }
+
+    @Override
+    public String toString() {
+        return "FruitTransactionServiceImpl{}";
+    }
 }
 

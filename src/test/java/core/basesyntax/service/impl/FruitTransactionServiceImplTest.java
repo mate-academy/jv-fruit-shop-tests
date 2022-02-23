@@ -34,21 +34,5 @@ class FruitTransactionServiceImplTest {
             fruitTransactionService.parser("");
         });
     }
-
-    @Test
-    public void parsingCurrentDataInput() {
-        FruitTransactionServiceImpl fruitTransactionService = new FruitTransactionServiceImpl();
-        String dataFromFile = "hard code";
-        result = fruitTransactionService.parser(dataFromFile);
-        List<FruitDto> expected = new ArrayList<>();
-        expected.add(new FruitDto("banana", 20, "b"));
-        expected.add(new FruitDto("apple", 100, "b"));
-        expected.add(new FruitDto("banana", 100, "s"));
-        expected.add(new FruitDto("banana", 13, "p"));
-        expected.add(new FruitDto("apple", 10, "r"));
-        expected.add(new FruitDto("apple", 20, "p"));
-        expected.add(new FruitDto("banana", 5, "p"));
-        expected.add(new FruitDto("banana", 50, "s"));
-        Assertions.assertEquals(expected, result);
-    }
 }
+

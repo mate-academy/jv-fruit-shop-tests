@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 public class ParseInput implements ParseRawInput {
     private static final String SEPARATOR = ",";
     private static final int HEADER_LINE = 0;
-    //private FruitValidator inputValidator;
 
     @Override
     public List<String[]> parse(List<String> inputData) {

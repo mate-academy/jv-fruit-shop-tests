@@ -8,17 +8,6 @@ import core.basesyntax.strategy.handlers.PurchaseOperationHandler;
 import org.junit.Test;
 
 public class StorageValidatorTest {
-    /*
-    @Test(expected = RuntimeException.class)
-    public void fruitDoesNotExists_Exception() {
-        StorageValidator storageValidator = new PurchaseOperationHandler();
-        StorageDaoImpl storageDao = new StorageDaoImpl();
-        FruitModel fruitModel = new FruitModel("apple", 10);
-        storageDao.putFruitModel(fruitModel);
-        storageValidator.doesStorageContainsFruit(new FruitModel("banana", 10), "p");
-    }
-
-     */
 
     @Test
     public void checkPassedSuccessfully_True() {

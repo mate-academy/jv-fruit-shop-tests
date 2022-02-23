@@ -17,13 +17,13 @@ public class ParseInputTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void inputListIsEmpty_Exception() {
+    public void parse_inputListIsEmpty_Exception() {
         List<String> emptyList = new ArrayList<>();
         parseInput.parse(emptyList);
     }
 
     @Test
-    public void deletedHeader_True() {
+    public void parse_deletedHeader_True() {
         String header = "type,fruit,quantity";
         List<String> testData = new ArrayList<>();
         testData.add(header);
@@ -35,7 +35,7 @@ public class ParseInputTest {
     }
 
     @Test
-    public void isParsedDataCorrect_True() {
+    public void parse_isParsedDataCorrect_True() {
         String header = "type,fruit,quantity";
         List<String> testData = new ArrayList<>();
         testData.add(header);
@@ -49,7 +49,7 @@ public class ParseInputTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void hasLineWithIncorrectData_Exception() {
+    public void parse_hasLineWithIncorrectData_Exception() {
         String header = "type,fruit,quantity";
         List<String> testData = new ArrayList<>();
         testData.add(header);

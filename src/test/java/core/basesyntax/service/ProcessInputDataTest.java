@@ -18,35 +18,14 @@ public class ProcessInputDataTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void incorrectOperation_Exception() {
+    public void processInput_incorrectOperation_Exception() {
         List<String[]> testData = new ArrayList<>();
         testData.add(new String[] {"", "apple", "10"});
         processInputData.processInput(testData);
     }
-    /*
-        @Test(expected = RuntimeException.class)
-        public void incorrectFruit_Exception() {
-            List<String[]> testData = new ArrayList<>();
-            testData.add(new String[] {"b", "", "10"});
-            processInputData.processInput(testData);
-        }
 
-        @Test(expected = RuntimeException.class)
-        public void amountIsEmpty_Exception() {
-            List<String[]> testData = new ArrayList<>();
-            testData.add(new String[] {"b", "banana", ""});
-            processInputData.processInput(testData);
-        }
-
-        @Test(expected = RuntimeException.class)
-        public void incorrectAmount_Exception() {
-            List<String[]> testData = new ArrayList<>();
-            testData.add(new String[] {"b", "banana", "a"});
-            processInputData.processInput(testData);
-        }
-    */
     @Test
-    public void workingWithData_True() {
+    public void processInput_workingWithData_True() {
         List<String[]> testData = new ArrayList<>();
         testData.add(new String[] {"b", "banana", "10"});
         testData.add(new String[] {"p", "banana", "5"});

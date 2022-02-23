@@ -16,7 +16,7 @@ public class FruitValidatorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void rawDataIsEmpty_Expected() {
+    public void isFileEmpty_rawDataIsEmptyAndNull_Expected() {
         List<String> testData = null;
         fruitValidator.isFileEmpty(testData);
         testData = new ArrayList<>();
@@ -24,21 +24,21 @@ public class FruitValidatorTest {
     }
 
     @Test
-    public void inputDataIsNotEmpty_True() {
+    public void isFileEmpty_inputDataIsNotEmpty_True() {
         List<String> testData = new ArrayList<>();
         testData.add("Test text");
         assertTrue(fruitValidator.isFileEmpty(testData));
     }
 
     @Test(expected = RuntimeException.class)
-    public void inputDataIsNotCorrect_Exception() {
+    public void isDataCorrect_inputDataIsNotCorrect_Exception() {
         List<String[]> testData = new ArrayList<>();
         testData.add(new String[] {"b", "test"});
         fruitValidator.isDataCorrect(testData);
     }
 
     @Test
-    public void inputDataHasThreeElements_True() {
+    public void isDataCorrect_inputDataHasThreeElements_True() {
         List<String[]> testData = new ArrayList<>();
         testData.add(new String[] {"b", "apple", "10"});
         assertTrue(fruitValidator.isDataCorrect(testData));

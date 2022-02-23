@@ -11,11 +11,11 @@ import org.junit.Test;
 public class StrategyImplTest {
 
     @Test
-    public void executeStrategy() {
+    public void executeStrategy_strategyWorkingCorrectly_True() {
         OperationHandler operationHandler = new BalanceOperationHandler();
         StrategyImpl strategy = new StrategyImpl(operationHandler);
         StorageDaoImpl storageDao = new StorageDaoImpl();
-        FruitModel fruitModel = new FruitModel("potata", 13);
+        FruitModel fruitModel = new FruitModel("patata", 13);
         assertTrue(strategy.executeStrategy(fruitModel));
         assertTrue(storageDao.containsKey(fruitModel.getName()));
         assertEquals(storageDao.getAmount(fruitModel.getName()), 13);

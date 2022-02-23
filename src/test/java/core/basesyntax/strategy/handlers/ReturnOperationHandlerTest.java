@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     @Test
-    public void returnFruit_True() {
+    public void doOperation_returnFruit_True() {
         ReturnOperationHandler returnOperationHandler = new ReturnOperationHandler();
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);

@@ -15,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class GetDataFromFileImplTest {
-    private static final String PATH_TO_FILE = "src/test/java/resources/test/fileInputDataTest.csv";
+    private static final String PATH_TO_FILE = "src/test/resources/fileInputDataTest.csv";
     private static final String WRONG_PATH_TO_FILE = "src/test/java/resources/test.";
     private static AddDataToFile addDataToFile;
     private static GetDataFromFile getDataFromFile;

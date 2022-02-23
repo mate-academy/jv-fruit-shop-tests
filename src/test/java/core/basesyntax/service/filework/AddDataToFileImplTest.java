@@ -17,7 +17,7 @@ import org.junit.Test;
 
 public class AddDataToFileImplTest {
     private static final String PATH_TO_FILE_TEST
-            = "src/test/java/resources/test/fileReportTest.csv";
+            = "src/test/resources/fileReportTest.csv";
     private static final String WRONG_PATH_TO_FILE = "src/test/java/resources/test";
     private static AddDataToFile addDataToFile;
     private static Map<String,Integer> testMap;

@@ -76,6 +76,5 @@ public class ConvertDataImplTest {
             assertEquals(expectedFruitList.get(i).getFruit(), actual.get(i).getFruit());
             assertEquals(expectedFruitList.get(i).getQuantity(), actual.get(i).getQuantity());
         }
-
     }
 }

@@ -17,13 +17,6 @@ public class ProcessInputDataTest {
         processInputData = new ProcessInputData();
     }
 
-    @Test(expected = RuntimeException.class)
-    public void processInput_incorrectOperation_Exception() {
-        List<String[]> testData = new ArrayList<>();
-        testData.add(new String[] {"", "apple", "10"});
-        processInputData.processInput(testData);
-    }
-
     @Test
     public void processInput_workingWithData_True() {
         List<String[]> testData = new ArrayList<>();

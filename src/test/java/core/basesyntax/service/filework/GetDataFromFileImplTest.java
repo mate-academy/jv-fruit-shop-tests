@@ -2,6 +2,7 @@ package core.basesyntax.service.filework;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +38,7 @@ public class GetDataFromFileImplTest {
         assertEquals(expected.get(1), actual.get(0));
         assertEquals(expected.get(2), actual.get(1));
         try {
-            Files.delete(Path.of(PATH_TO_FILE));
+           new FileWriter(PATH_TO_FILE,false);
         } catch (IOException e) {
             throw new RuntimeException("Can't delete file");
         }

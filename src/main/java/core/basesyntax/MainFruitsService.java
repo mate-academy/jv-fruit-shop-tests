@@ -34,28 +34,20 @@ public class MainFruitsService {
         Fruit apple = new Apple("apple");
         Fruit banana = new Banana("banana");
         Fruit orange = new Orange("orange");
-
         Storage.shopStorage.put(apple, DEFAULT_QUANTITY);
         Storage.shopStorage.put(banana, DEFAULT_QUANTITY);
         Storage.shopStorage.put(orange, DEFAULT_QUANTITY);
-
         Map<String, StorageService> operationDistributionMap = new HashMap<>();
         operationDistributionMap.put(PURCHASE, new StorageReductionServiceImpl());
         operationDistributionMap.put(RETURN, new StorageAdditionServiceImpl());
         operationDistributionMap.put(SUPPLY, new StorageAdditionServiceImpl());
         operationDistributionMap.put(BALANCE, new StorageAdditionServiceImpl());
-
         DataConverterService dataConverterService = new DataConverterServiceImpl();
-
         TransDistrStrategy transDistrStrategy =
                 new TransDistrStrategyImpl(operationDistributionMap);
-
         List<String> listStringData = new DataReaderServiceImpl().readDataFromFile(READ_DATA_PATH);
-
         List<FruitDto> operationsList = dataConverterService.convertDto(listStringData);
-
         new IteratorServiceImpl().iterate(operationsList, transDistrStrategy, Storage.shopStorage);
-
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(WRITE_REPORT_PATH, Storage.shopStorage);
     }

@@ -1,6 +1,6 @@
 package core.fruitshop.service.strategy.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import core.fruitshop.dao.FruitDao;
 import core.fruitshop.dao.FruitDaoImpl;
@@ -15,7 +15,7 @@ import org.junit.Test;
 public class PurchaseOperationHandlerTest {
     private static final String APPLE = "apple";
     private static final String QUANTITY = "75";
-    public static final FruitDao dao = new FruitDaoImpl();
+    private static final FruitDao dao = new FruitDaoImpl();
     private static final Map<Fruit, Integer> expectedMap = new HashMap<>();
     private final OperationHandler purchaseOperationHandler = new PurchaseOperationHandler(dao);
     private final Map<Fruit, Integer> fruitsStorage = Storage.fruitsStorage;
@@ -27,7 +27,7 @@ public class PurchaseOperationHandlerTest {
         Fruit appleFruit = new Fruit(APPLE);
         fruitsStorage.put(appleFruit, 100);
         expectedMap.put(new Fruit(fruit), fruitsStorage.get(appleFruit)
-            - Integer.parseInt(quantity));
+                - Integer.parseInt(quantity));
         purchaseOperationHandler.doOperation(fruit, quantity);
         assertEquals(expectedMap, fruitsStorage);
     }

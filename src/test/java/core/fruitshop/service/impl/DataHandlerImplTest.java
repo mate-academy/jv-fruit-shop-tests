@@ -1,6 +1,7 @@
 package core.fruitshop.service.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.fruitshop.dao.FruitDao;
 import core.fruitshop.dao.FruitDaoImpl;
@@ -44,7 +45,7 @@ public class DataHandlerImplTest {
     @Test
     public void processData_validData_ok() {
         List<String> incomingData = List.of("b,banana,50", "b,apple,100",
-            "s,apple,100", "p,banana,30");
+                "s,apple,100", "p,banana,30");
         dataHandler.processData(incomingData);
         Map<Fruit, Integer> mapExpected = new HashMap<>();
         mapExpected.put(new Fruit("banana"), 20);

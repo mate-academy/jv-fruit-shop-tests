@@ -2,6 +2,7 @@ package core.fruitshop.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import core.fruitshop.db.Storage;
 import core.fruitshop.model.Fruit;
 import java.util.HashSet;

@@ -1,6 +1,6 @@
 package core.fruitshop.service.strategy.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import core.fruitshop.dao.FruitDao;
 import core.fruitshop.dao.FruitDaoImpl;
@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static final Map<Fruit, Integer> expectedMap = new HashMap<>();
-    public static final FruitDao dao = new FruitDaoImpl();
+    private static final FruitDao dao = new FruitDaoImpl();
     private static final String APPLE = "apple";
     private static final String QUANTITY = "75";
     private final OperationHandler returnOperationHandler = new ReturnOperationHandler(dao);

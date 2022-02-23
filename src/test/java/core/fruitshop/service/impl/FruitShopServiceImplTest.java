@@ -1,6 +1,7 @@
 package core.fruitshop.service.impl;
 
 import static org.junit.Assert.assertEquals;
+
 import core.fruitshop.dao.FruitDao;
 import core.fruitshop.dao.FruitDaoImpl;
 import core.fruitshop.db.Storage;
@@ -25,18 +26,18 @@ import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static final String PATH_TO_SOURCE_FILE =
-        "src/test/java/resources/fruitShopServiceFiles/FruitShopServiceTestSourceFile";
+            "src/test/java/resources/fruitShopServiceFiles/FruitShopServiceTestSourceFile";
     private static final String PATH_TO_DEST_FILE =
-        "src/test/java/resources/fruitShopServiceFiles/FruitShopServiceTestFileTo";
+            "src/test/java/resources/fruitShopServiceFiles/FruitShopServiceTestFileTo";
     private static final String PATH_TO_EXP_RESULT =
-        "src/test/java/resources/fruitShopServiceFiles/ExpectedResult";
+            "src/test/java/resources/fruitShopServiceFiles/ExpectedResult";
     private static final String EMPTY_FILE_PATH =
-        "src/test/java/resources/EmptyFile";
+            "src/test/java/resources/EmptyFile";
     private static final String INVALID_PATH = "*/[][[313*&7652387/523|532";
     private static final Map<Operation, OperationHandler> map = new HashMap<>();
     private final FruitShopService fruitShopService = new FruitShopServiceImpl(new FileReaderImpl(),
-        new DataHandlerImpl(new OperationStrategyImpl(map)), new ReportCreatorImpl(),
-        new FileWriterImpl());
+            new DataHandlerImpl(new OperationStrategyImpl(map)), new ReportCreatorImpl(),
+            new FileWriterImpl());
 
     @BeforeClass
     public static void beforeClass() {
@@ -77,11 +78,11 @@ public class FruitShopServiceImplTest {
     public void tearDown() throws IOException {
         Storage.fruitsStorage.clear();
         BufferedWriter bufferedWriter =
-            new BufferedWriter(new java.io.FileWriter(PATH_TO_DEST_FILE));
+                new BufferedWriter(new java.io.FileWriter(PATH_TO_DEST_FILE));
         bufferedWriter.write("");
         bufferedWriter.close();
         BufferedWriter bufferedWriterToEmpty =
-            new BufferedWriter(new java.io.FileWriter(EMPTY_FILE_PATH));
+                new BufferedWriter(new java.io.FileWriter(EMPTY_FILE_PATH));
         bufferedWriterToEmpty.write("");
         bufferedWriterToEmpty.close();
     }

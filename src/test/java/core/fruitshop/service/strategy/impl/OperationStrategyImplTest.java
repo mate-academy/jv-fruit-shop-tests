@@ -1,6 +1,6 @@
 package core.fruitshop.service.strategy.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import core.fruitshop.dao.FruitDao;
 import core.fruitshop.dao.FruitDaoImpl;
@@ -21,9 +21,9 @@ import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static final Map<Operation, OperationHandler> operationHandlerMap
-        = new HashMap<>();
+            = new HashMap<>();
     private static final OperationStrategy operationStrategy
-        = new OperationStrategyImpl(operationHandlerMap);
+            = new OperationStrategyImpl(operationHandlerMap);
 
     @BeforeClass
     public static void beforeClass() {
@@ -33,14 +33,15 @@ public class OperationStrategyImplTest {
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler(dao));
         operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler(dao));
         FruitShopService fruitShopService = new FruitShopServiceImpl(new FileReaderImpl(),
-            new DataHandlerImpl(new OperationStrategyImpl(operationHandlerMap)), new ReportCreatorImpl(),
-            new FileWriterImpl());
+                new DataHandlerImpl(new OperationStrategyImpl(operationHandlerMap)),
+                new ReportCreatorImpl(),
+                new FileWriterImpl());
     }
 
     @Test
     public void getBalanceOperationHandler_ok() {
         Class<?> actualClass = operationStrategy
-            .getOperationHandler(FruitTransaction.Operation.BALANCE).getClass();
+                .getOperationHandler(FruitTransaction.Operation.BALANCE).getClass();
         Class<?> expectedClass = BalanceOperationHandler.class;
         assertEquals(expectedClass, actualClass);
     }
@@ -48,7 +49,7 @@ public class OperationStrategyImplTest {
     @Test
     public void getPurchaseOperationHandler_ok() {
         Class<?> actualClass = operationStrategy
-            .getOperationHandler(FruitTransaction.Operation.PURCHASE).getClass();
+                .getOperationHandler(FruitTransaction.Operation.PURCHASE).getClass();
         Class<?> expectedClass = PurchaseOperationHandler.class;
         assertEquals(expectedClass, actualClass);
     }
@@ -56,7 +57,7 @@ public class OperationStrategyImplTest {
     @Test
     public void getReturnOperationHandler_ok() {
         Class<?> actualClass = operationStrategy
-            .getOperationHandler(FruitTransaction.Operation.RETURN).getClass();
+                .getOperationHandler(FruitTransaction.Operation.RETURN).getClass();
         Class<?> expectedClass = ReturnOperationHandler.class;
         assertEquals(expectedClass, actualClass);
     }
@@ -64,7 +65,7 @@ public class OperationStrategyImplTest {
     @Test
     public void getSupplyOperationHandler_ok() {
         Class<?> actualClass = operationStrategy
-            .getOperationHandler(FruitTransaction.Operation.SUPPLY).getClass();
+                .getOperationHandler(FruitTransaction.Operation.SUPPLY).getClass();
         Class<?> expectedClass = SupplyOperationHandler.class;
         assertEquals(expectedClass, actualClass);
     }
@@ -72,6 +73,6 @@ public class OperationStrategyImplTest {
     @Test(expected = RuntimeException.class)
     public void getOperationHandlerOfNullOperation_notOk() {
         operationStrategy
-            .getOperationHandler(null);
+                .getOperationHandler(null);
     }
 }

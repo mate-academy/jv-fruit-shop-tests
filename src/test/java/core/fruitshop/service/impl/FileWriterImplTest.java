@@ -1,6 +1,7 @@
 package core.fruitshop.service.impl;
 
 import static org.junit.Assert.assertEquals;
+
 import core.fruitshop.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,8 +19,8 @@ public class FileWriterImplTest {
     @Test
     public void writeToFile_ok() throws IOException {
         String report = "fruit,quantity" + System.lineSeparator()
-            + "apple,30" + System.lineSeparator()
-            + "peach,130";
+                + "apple,30" + System.lineSeparator()
+                + "peach,130";
         fileWriter.writeToFile(report, FILE_PATH);
         List<String> actual = Files.readAllLines(Path.of(FILE_PATH));
         List<String> expected = List.of("fruit,quantity", "apple,30", "peach,130");

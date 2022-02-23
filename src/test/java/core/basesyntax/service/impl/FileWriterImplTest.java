@@ -44,6 +44,6 @@ public class FileWriterImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("Runtime Exception");
+        fail("Storage was empty");
     }
 }

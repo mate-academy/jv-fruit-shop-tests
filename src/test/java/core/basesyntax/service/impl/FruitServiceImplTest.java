@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -32,6 +32,10 @@ public class FruitServiceImplTest {
             throw new RuntimeException("Can't write to file");
         }
         assertEquals(expected, actual);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
         File file = new File("src/test/java/resources/report.csv");
         file.delete();
     }

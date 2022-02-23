@@ -17,7 +17,7 @@ public class StringReportBuilderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createReport_FromEmptyStorage_notOk(){
+    public void createReport_FromEmptyStorage_notOk() {
         reportBuilder.buildReport();
     }
 

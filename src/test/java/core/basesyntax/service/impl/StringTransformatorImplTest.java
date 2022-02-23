@@ -5,13 +5,12 @@ import static org.junit.Assert.assertNull;
 
 import core.basesyntax.service.StringTransformator;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StringTransformatorImplTest {
-    private List<String> testListOfStrings;
     private static StringTransformator transformator;
+    private List<String> testListOfStrings;
 
     @BeforeClass
     public static void beforeClass() {

@@ -4,13 +4,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.storage.FruitStorage;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ProcessInputDataTest {
     private static ProcessInputData processInputData;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        FruitStorage.fruitStorage.clear();
+    }
 
     @Before
     public void setUp() throws Exception {

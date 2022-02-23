@@ -16,15 +16,4 @@ public class PurchaseHandler implements Operation {
         }
         fruitDao.save(new Fruit(fruitDto.getName(), value - fruitDto.getQuantity()));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        return true;
-    }
 }

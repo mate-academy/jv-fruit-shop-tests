@@ -17,15 +17,4 @@ public class BalanceHandler implements Operation {
         }
         storageDao.save(new Fruit(fruitDto.getName(), fruitDto.getQuantity()));
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        return true;
-    }
 }

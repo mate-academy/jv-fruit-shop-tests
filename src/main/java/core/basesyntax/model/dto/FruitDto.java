@@ -49,20 +49,9 @@ public class FruitDto {
 
         FruitDto fruitDto = (FruitDto) o;
 
-        if (quantity != fruitDto.quantity) {
-            return false;
-        }
         if (name != null ? !name.equals(fruitDto.name) : fruitDto.name != null) {
             return false;
         }
         return type != null ? type.equals(fruitDto.type) : fruitDto.type == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + quantity;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        return result;
     }
 }

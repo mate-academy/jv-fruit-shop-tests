@@ -42,22 +42,4 @@ public class Fruit {
         }
         return name != null ? name.equals(fruit.name) : fruit.name == null;
     }
-
-    @Override
-    public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + quantity;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Fruit{"
-                +
-                "name='" + name + '\''
-                +
-                ", quantity=" + quantity
-                +
-                '}';
-    }
 }

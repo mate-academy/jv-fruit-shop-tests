@@ -18,14 +18,4 @@ public class ReturnHandler implements Operation {
         storageDao.save(new Fruit(fruitDto.getName(), fruitDto.getQuantity() + value));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        return true;
-    }
 }

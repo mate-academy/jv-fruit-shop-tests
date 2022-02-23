@@ -3,6 +3,7 @@ package core.basesyntax.service.file;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -42,10 +43,13 @@ public class FileServiceTest {
         assertEquals(readedData.get(0), expectedToWrite);
         String emptyLine = "";
         try {
-            Files.write(Paths.get(WRITE_FILEPATH), emptyLine.getBytes(), StandardOpenOption.WRITE);
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(WRITE_FILEPATH));
+            writer.write("");
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException("Can't write report data to file ", e);
         }
+
     }
 
     @Test(expected = RuntimeException.class)

@@ -1,5 +1,6 @@
 package core.basesyntax.service.file;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +29,9 @@ public class FileService implements FileOperations {
             throw new RuntimeException("Can't create file to write report", e);
         }
         try {
-            Files.write(Paths.get(path), dataToWrite.getBytes(), StandardOpenOption.APPEND);
+            BufferedWriter writer = Files.newBufferedWriter(Paths.get(path));
+            writer.write(dataToWrite);
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException("Can't write report data to file ", e);
         }

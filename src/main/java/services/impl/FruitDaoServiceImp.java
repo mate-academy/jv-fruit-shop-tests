@@ -7,7 +7,7 @@ import model.FruitRecord;
 import services.FruitDaoService;
 
 public class FruitDaoServiceImp implements FruitDaoService {
-    private Storage storage = new Storage();
+    private Storage storage;
 
     public FruitDaoServiceImp(Storage storage) {
         this.storage = storage;

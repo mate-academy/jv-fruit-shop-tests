@@ -10,7 +10,7 @@ import services.ParseService;
 
 public class ParseServiceImpl implements ParseService {
     private static final String DATA_SEPARATOR = ",";
-    private static final int APPEND_TO_REMOVE_TITLE = 2;
+    private static final int APPEND_TO_REMOVE_TITLE = System.lineSeparator().length();
 
     @Override
     public List<FruitRecord> parseFromCsv(String dataInString) {

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class StorageTest {
     @Test
-    public void storageCreating_ok() {
+    public void storageCreating_Ok() {
         Storage storage = new Storage();
         assertEquals(storage.getFruitsInStorage().size(), 0);
     }

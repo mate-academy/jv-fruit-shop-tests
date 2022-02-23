@@ -23,8 +23,6 @@ public class FileHandlerImpl implements FileHandler {
                 sourceDataInString.append((char) data);
                 data = fileReader.read();
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("No such file " + e);
         } catch (IOException e) {
             throw new RuntimeException("IOException " + e);
         }
@@ -41,8 +39,6 @@ public class FileHandlerImpl implements FileHandler {
             FileWriter writer = new FileWriter(fileToWrite);
             writer.append(dataToWrite);
             writer.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("No such file " + e);
         } catch (Exception e) {
             throw new RuntimeException("IOException " + e);
         }

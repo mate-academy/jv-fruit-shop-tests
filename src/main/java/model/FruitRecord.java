@@ -42,9 +42,4 @@ public class FruitRecord {
                 && amount == that.amount
                 && Objects.equals(nameOfFruit, that.nameOfFruit);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(typeOfOperation, nameOfFruit, amount);
-    }
 }

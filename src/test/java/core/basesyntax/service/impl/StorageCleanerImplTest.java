@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.StorageCleaner;
 import org.junit.Test;
-
-import static org.junit.Assert.assertTrue;
 
 public class StorageCleanerImplTest {
     private StorageCleaner cleaner = new StorageCleanerImpl();

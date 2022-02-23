@@ -1,12 +1,12 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import java.util.List;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 public class FruitDaoImplTest {
     private FruitDao fruitDao = new FruitDaoImpl();
     private List<String> testList;
@@ -54,4 +54,3 @@ public class FruitDaoImplTest {
         assertEquals(expected, actual);
     }
 }
-

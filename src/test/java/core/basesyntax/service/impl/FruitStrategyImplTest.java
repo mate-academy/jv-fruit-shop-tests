@@ -1,9 +1,14 @@
 package core.basesyntax.service.impl;
 
-import org.junit.Test;
-import core.basesyntax.service.FruitStrategy;
-import core.basesyntax.strategy.*;
 import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.service.FruitStrategy;
+import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.FruitOperation;
+import core.basesyntax.strategy.PurchaseOperation;
+import core.basesyntax.strategy.ReturnOperation;
+import core.basesyntax.strategy.SupplyOperation;
+import org.junit.Test;
 
 public class FruitStrategyImplTest {
     private final FruitStrategy strategy = new FruitStrategyImpl();
@@ -11,7 +16,8 @@ public class FruitStrategyImplTest {
     private FruitOperation actualOperation;
 
     @Test(expected = RuntimeException.class)
-    public void makeOperationWithWrongAbbreviation_notOk() {strategy.makeOperation("d");
+    public void makeOperationWithWrongAbbreviation_notOk() {
+        strategy.makeOperation("d");
     }
 
     @Test

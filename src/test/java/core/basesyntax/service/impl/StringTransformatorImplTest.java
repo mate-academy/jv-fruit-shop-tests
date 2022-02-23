@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.StringTransformator;
-import org.junit.Test;
-import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import core.basesyntax.service.StringTransformator;
+import java.util.List;
+import org.junit.Test;
+
 public class StringTransformatorImplTest {
-    private List<String> testListOfStrings = List.of("b,orange,0", "s,orange,50", "p,orange,20", "b,banana,70");
+    private List<String> testListOfStrings;
     private final StringTransformator transformator = new StringTransformatorImpl();
 
     @Test

@@ -1,6 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitDto;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,9 +13,6 @@ import org.junit.Test;
 
 public class ReadServiceTest extends Assert {
     private static ReadService readService;
-    private static final String testFileOne = "src/test/resources/Input_test1.csv";
-    private static final String testFileTwo = "src/test/resources/Input_test2.csv";
-    private static final String testFileThree = "src/test/resources/Input_test3.csv";
     private static final List<FruitDto> correctReadData = List.of(new FruitDto("banana",
             "b", Integer.parseInt("200")),
             new FruitDto("apple", "b", Integer.parseInt("100")),
@@ -28,7 +30,17 @@ public class ReadServiceTest extends Assert {
 
     @Test
     public void readData_file_ok() {
-        final List<FruitDto> list = readService.readData(testFileOne);
+        final File file = new File("src/test/resources/Input_test1.csv");
+        final String text = "b,banana,200" + System.lineSeparator() + "b,apple,100"
+                + System.lineSeparator() + "s,banana,50" + System.lineSeparator() + "p,banana,133"
+                + System.lineSeparator() + "r,apple,104" + System.lineSeparator() + "p,apple,29"
+                + System.lineSeparator() + "p,banana,51" + System.lineSeparator() + "s,banana,50";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
+            writer.write(text);
+        } catch (IOException e) {
+            throw new RuntimeException("Error!", e);
+        }
+        final List<FruitDto> list = readService.readData(String.valueOf(file));
         final int actual = list.size();
         final int excepted = correctReadData.size();
         assertEquals(excepted, actual);
@@ -36,7 +48,14 @@ public class ReadServiceTest extends Assert {
 
     @Test(expected = RuntimeException.class)
     public void readData_emptyFile_notOk() {
-        final List<FruitDto> data = readService.readData(testFileTwo);
+        final File file = new File("src/test/resources/Input_test3.csv");
+        final String text = "";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
+            writer.write(text);
+        } catch (IOException e) {
+            throw new RuntimeException("Error!", e);
+        }
+        final List<FruitDto> data = readService.readData(String.valueOf(file));
         final int excepted = 0;
         final int actual = data.size();
         assertEquals(excepted, actual);
@@ -44,7 +63,17 @@ public class ReadServiceTest extends Assert {
 
     @Test(expected = RuntimeException.class)
     public void readData_invalidContent_notOk() {
-        final List<FruitDto> data = readService.readData(testFileThree);
+        final File file = new File("src/test/resources/Input_test2.csv");
+        final String text = "b,banana,200" + System.lineSeparator() + "b,apple,100"
+                + System.lineSeparator() + ",banana,50" + System.lineSeparator() + "p,banana,133"
+                + System.lineSeparator() + "r,apple," + System.lineSeparator() + "p,apple,29"
+                + System.lineSeparator() + "p,banana,51" + System.lineSeparator() + "s,50";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
+            writer.write(text);
+        } catch (IOException e) {
+            throw new RuntimeException("Error!", e);
+        }
+        final List<FruitDto> data = readService.readData(String.valueOf(file));
         final int excepted = 6;
         final int actual = data.size();
         assertEquals(excepted, actual);

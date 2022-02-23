@@ -10,6 +10,7 @@ public class ReadServiceTest extends Assert {
     private static ReadService readService;
     private static final String testFileOne = "src/test/resources/Input_test1.csv";
     private static final String testFileTwo = "src/test/resources/Input_test2.csv";
+    private static final String testFileThree = "src/test/resources/Input_test3.csv";
     private static final List<FruitDto> correctReadData = List.of(new FruitDto("banana",
             "b", Integer.parseInt("200")),
             new FruitDto("apple", "b", Integer.parseInt("100")),
@@ -43,7 +44,7 @@ public class ReadServiceTest extends Assert {
 
     @Test(expected = RuntimeException.class)
     public void reader_fileWithCorruptData_notOk() {
-        final List<FruitDto> data = readService.readData(testFileTwo);
+        final List<FruitDto> data = readService.readData(testFileThree);
         final int excepted = 6;
         final int actual = data.size();
         assertEquals(excepted, actual);

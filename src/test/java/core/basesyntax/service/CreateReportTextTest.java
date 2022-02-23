@@ -32,6 +32,16 @@ public class CreateReportTextTest {
         DataStorage.fruitMap.clear();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void generateReport_notValidDtos_notOk() {
+        data.add(0, new FruitDto("apple", "", 15));
+        data.add(1, new FruitDto("apple", "s", 15));
+        data.add(2, new FruitDto("", "b", 20));
+        data.add(3, new FruitDto("banana", "s", -5));
+        reportText.generateReport(data);
+        assertEquals(excepted, DataStorage.fruitMap);
+    }
+
     @Test
     public void creator_correctText_ok() {
         data.add(0, new FruitDto("apple", "b", 15));
@@ -42,16 +52,6 @@ public class CreateReportTextTest {
         data.add(3, new FruitDto("banana", "s", 20));
         data.add(3, new FruitDto("banana", "r", 20));
         data.add(3, new FruitDto("banana", "p", 20));
-        reportText.generateReport(data);
-        assertEquals(excepted, DataStorage.fruitMap);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void creator_correctText_notOk() {
-        data.add(0, new FruitDto("apple", "", 15));
-        data.add(1, new FruitDto("apple", "s", 15));
-        data.add(2, new FruitDto("", "b", 20));
-        data.add(3, new FruitDto("banana", "s", -5));
         reportText.generateReport(data);
         assertEquals(excepted, DataStorage.fruitMap);
     }

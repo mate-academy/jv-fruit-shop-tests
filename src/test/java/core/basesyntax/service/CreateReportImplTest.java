@@ -34,7 +34,7 @@ public class CreateReportImplTest {
     }
 
     @Test
-    public void report_text_ok() {
+    public void report_validDataInStorage_ok() {
         DataStorage.fruitMap.put("apple", 150);
         DataStorage.fruitMap.put("banana", 100);
         final String excepted = currentReportText;

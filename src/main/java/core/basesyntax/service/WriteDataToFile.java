@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteDataToFile {
-
     public void writeToFile(String report, String toFileName) {
         File reportFile = new File(toFileName);
         if (report.isEmpty() || toFileName.isEmpty()) {

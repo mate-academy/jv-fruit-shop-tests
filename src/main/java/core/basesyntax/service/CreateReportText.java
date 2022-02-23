@@ -5,7 +5,6 @@ import core.basesyntax.service.strategy.Strategy;
 import java.util.List;
 
 public class CreateReportText {
-
     private final Strategy strategy = new Strategy();
 
     public void generateReport(List<FruitDto> fruitDtos) {

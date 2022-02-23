@@ -56,7 +56,7 @@ public class AddDataToFileImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void addInStorage_addDataToWrongPath_not_ok() {
+    public void addInStorage_addDataToWrongPath_notOk() {
         addDataToFile.addInStorage(testMap,WRONG_PATH_TO_FILE);
     }
 }

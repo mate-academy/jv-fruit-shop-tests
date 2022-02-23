@@ -14,18 +14,18 @@ public class ConvertDataImplTest {
     private static ConvertData convertData;
     private static FruitTransaction fruitTransaction;
     private static List<String> testList;
-    private static List<FruitTransaction> expectedFruitList;
+    private static List<FruitTransaction> actual;
 
     @Before
     public void setUp() {
         testList = new ArrayList<>();
-        expectedFruitList = new ArrayList<>();
+        actual = new ArrayList<>();
     }
 
     @After
     public void tearDown() {
         testList.clear();
-        expectedFruitList.clear();
+        actual.clear();
     }
 
     @BeforeClass
@@ -34,12 +34,12 @@ public class ConvertDataImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void convert_putNullToConvert_not_ok() {
+    public void convert_putNullToConvert_notOk() {
         convertData.convert(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void convert_nonCorrectPattern_not_ok() {
+    public void convert_nonCorrectPattern_notOk() {
         testList.add("testString");
         convertData.convert(testList);
     }
@@ -50,8 +50,8 @@ public class ConvertDataImplTest {
         testList.add("r,apple,25");
         testList.add("b,banana,34");
         testList.add("s,banana,32");
-        expectedFruitList = convertData.convert(testList);
-        int actual = expectedFruitList.size();
+        actual = convertData.convert(testList);
+        int actual = ConvertDataImplTest.actual.size();
         assertEquals(4, actual);
     }
 
@@ -61,20 +61,20 @@ public class ConvertDataImplTest {
         testList.add("r,apple,25");
         testList.add("b,banana,34");
         testList.add("s,banana,32");
-        expectedFruitList = convertData.convert(testList);
-        List<FruitTransaction> actual = new ArrayList<>();
-        actual.add(new FruitTransaction(FruitTransaction.Operation.BALANCE.getOperation(),
+        actual = convertData.convert(testList);
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE.getOperation(),
                 "apple", 12));
-        actual.add(new FruitTransaction(FruitTransaction.Operation.RETURN.getOperation(),
+        expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN.getOperation(),
                 "apple", 25));
-        actual.add(new FruitTransaction(FruitTransaction.Operation.BALANCE.getOperation(),
+        expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE.getOperation(),
                 "banana", 34));
-        actual.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY.getOperation(),
+        expected.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY.getOperation(),
                 "banana", 32));
-        for (int i = 0; i < expectedFruitList.size() - 1; i++) {
-            assertEquals(expectedFruitList.get(i).getOperation(), actual.get(i).getOperation());
-            assertEquals(expectedFruitList.get(i).getFruit(), actual.get(i).getFruit());
-            assertEquals(expectedFruitList.get(i).getQuantity(), actual.get(i).getQuantity());
+        for (int i = 0; i < actual.size() - 1; i++) {
+            assertEquals(expected.get(i).getOperation(),actual.get(i).getOperation());
+            assertEquals(expected.get(i).getFruit(),actual.get(i).getFruit());
+            assertEquals(expected.get(i).getQuantity(),actual.get(i).getQuantity());
         }
     }
 }

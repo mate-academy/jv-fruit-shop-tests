@@ -23,12 +23,12 @@ public class PurchaseHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handler_addNull_not_ok() {
+    public void handler_addNull_notOk() {
         purchaseHandler.handler(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void handler_addNegativeQuantity() {
+    public void handler_addNegativeQuantity_notOk() {
         purchaseHandler.handler(new FruitTransaction("p","test",-34));
     }
 

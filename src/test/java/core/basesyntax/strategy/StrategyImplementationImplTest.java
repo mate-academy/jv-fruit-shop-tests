@@ -39,12 +39,12 @@ public class StrategyImplementationImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void strategy_NullCheck_not_ok() {
+    public void strategy_NullCheck_notOk() {
         strategyImplementation.strategy(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void strategy_findInvalidOperation_not_ok() {
+    public void strategy_findInvalidOperation_notOk() {
         fruitTransactions.add(new FruitTransaction("a","test",43));
         strategyImplementation.strategy(fruitTransactions);
     }

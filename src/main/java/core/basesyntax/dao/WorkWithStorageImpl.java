@@ -2,8 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
-
-public class WokWithStorageImpl implements WorkWithStorageDB {
+public class WorkWithStorageImpl implements WorkWithStorageDB {
 
     @Override
     public void addInStorage(String fruits, Integer quantity) {

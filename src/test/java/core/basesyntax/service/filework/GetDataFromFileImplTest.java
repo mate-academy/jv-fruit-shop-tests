@@ -45,7 +45,7 @@ public class GetDataFromFileImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getDataFromWrongPath_not_ok() {
+    public void getDataFromWrongPath_notOk() {
         getDataFromFile.getFromStorage(WRONG_PATH_TO_FILE);
     }
 

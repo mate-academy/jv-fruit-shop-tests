@@ -1,4 +1,4 @@
-import core.basesyntax.dao.WokWithStorageImpl;
+import core.basesyntax.dao.WorkWithStorageImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.convert.ConvertData;
 import core.basesyntax.service.convert.ConvertDataImpl;
@@ -29,7 +29,7 @@ public class FruitMain {
         StrategyImplementation implementStrategy =
                 new StrategyImplementationImpl(new HandlersStore(addPatternHandler()));
         implementStrategy.strategy(dataConvert);
-        WokWithStorageImpl storageService = new WokWithStorageImpl();
+        WorkWithStorageImpl storageService = new WorkWithStorageImpl();
         AddDataToFileImpl addDataService = new AddDataToFileImpl();
         addDataService.addInStorage(storageService.getAllFromStorage(),PATH_TO_REPORT);
     }

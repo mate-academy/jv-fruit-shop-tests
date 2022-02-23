@@ -1,11 +1,11 @@
 package core.basesyntax.strategy.handler;
 
-import core.basesyntax.dao.WokWithStorageImpl;
+import core.basesyntax.dao.WorkWithStorageImpl;
 import core.basesyntax.dao.WorkWithStorageDB;
 import core.basesyntax.model.FruitTransaction;
 
 public class AddingHandlers implements Handler {
-    private WorkWithStorageDB storageService = new WokWithStorageImpl();
+    private WorkWithStorageDB storageService = new WorkWithStorageImpl();
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {

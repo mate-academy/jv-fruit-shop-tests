@@ -25,12 +25,12 @@ public class AddingHandlersTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_addNegativeQuantity_not_ok() {
+    public void handle_addNegativeQuantity_notOk() {
         addingHandlers.handler(new FruitTransaction("b","test",-23));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_addNullFruitTransaction_not_ok() {
+    public void handle_addNullFruitTransaction_notOk() {
         addingHandlers.handler(null);
     }
 

@@ -29,6 +29,7 @@ public class StrategyImplementationImplTest {
         temporaryMap.put(FruitTransaction.Operation.SUPPLY,new SupplyHandlerImpl());
         temporaryMap.put(FruitTransaction.Operation.RETURN,new ReturnHandlerImpl());
         handlersStore = new HandlersStore(temporaryMap);
+        strategyImplementation = new StrategyImplementationImpl(handlersStore);
         fruitTransactions = new ArrayList<>();
     }
 

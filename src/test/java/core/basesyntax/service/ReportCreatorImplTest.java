@@ -1,23 +1,24 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ReportCreatorImplTest {
-    private ReportCreator reportCreator;
+public class ReportCreatorImplTest {
+    private static ReportCreator reportCreator;
     private List<Fruit> fruits = new ArrayList<>();
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         reportCreator = new ReportCreatorImpl();
     }
 
     @Test
-    void createReportIdenticalOk() {
+    public void createReport_identicalOk() {
         Fruit fruitBanana = new Fruit();
         Fruit fruitApple = new Fruit();
         fruitBanana.setQuantity(152);
@@ -32,25 +33,22 @@ class ReportCreatorImplTest {
                 "banana,152\n"
                 +
                 "apple,90\n";
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
-    @Test
-    void createReportNullArgument() {
+    @Test(expected = IllegalArgumentException.class)
+    public void createReport_nullArgument_ok() {
         ReportCreator reportCreator = new ReportCreatorImpl();
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            reportCreator.createReport(null);
-        });
+        reportCreator.createReport(null);
     }
 
-    @Test
-    void createReportFromEmptyList() {
+    @Test(expected = IllegalArgumentException.class)
+    public void createReport_fromEmptyList_notOk() {
         ReportCreator reportCreator = new ReportCreatorImpl();
         List<Fruit> emptyFruitList = new ArrayList<>();
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            reportCreator.createReport(emptyFruitList);
-        });
+        reportCreator.createReport(emptyFruitList);
     }
 }
+
 
 

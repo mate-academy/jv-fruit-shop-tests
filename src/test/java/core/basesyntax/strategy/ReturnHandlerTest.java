@@ -1,39 +1,35 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.dto.FruitDto;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ReturnHandlerTest {
-    private ReturnHandler returnHandler;
-    private FruitDto fruit;
-    private FruitDao storageDao;
+public class ReturnHandlerTest {
+    private static ReturnHandler returnHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         returnHandler = new ReturnHandler();
-        fruit = new FruitDto();
-        storageDao = new FruitDaoImpl();
     }
 
     @Test
-    void process_validDto_ok() {
+    public void process_validDto_ok() {
+        FruitDto fruit = new FruitDto();
         fruit.setQuantity(50);
         fruit.setName("banana");
         fruit.setType("b");
         returnHandler.process(fruit);
         Integer actual = Storage.fruitStorage.get("banana");
-        Integer expected = 100;
-        Assertions.assertEquals(expected,actual);
+        Integer expected = 50;
+        assertEquals(expected, actual);
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
         Storage.fruitStorage.clear();
     }
 }

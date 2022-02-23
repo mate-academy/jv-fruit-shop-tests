@@ -1,28 +1,23 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.dto.FruitDto;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class BalanceHandlerTest {
-    private BalanceHandler balanceHandler;
-    private FruitDto fruit;
-    private FruitDao storageDao;
+public class BalanceHandlerTest {
+    private static BalanceHandler balanceHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         balanceHandler = new BalanceHandler();
-        fruit = new FruitDto();
-        storageDao = new FruitDaoImpl();
     }
 
     @Test
-    void process_validDto_ok() {
+    public void process_validDto_ok() {
         FruitDto fruitDto = new FruitDto();
         fruitDto.setQuantity(30);
         fruitDto.setName("banana");
@@ -30,11 +25,11 @@ class BalanceHandlerTest {
         balanceHandler.process(fruitDto);
         Integer actual = Storage.fruitStorage.get("banana");
         Integer expected = 30;
-        Assertions.assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
         Storage.fruitStorage.clear();
     }
 }

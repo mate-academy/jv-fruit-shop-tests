@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -7,11 +9,10 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitDto;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Test;
 
-class OperationHandlerTest {
+public class OperationHandlerTest {
     @Test
     public void processFruitOperation_ContentIsSame_Ok() {
         List<FruitDto> fruitDtos = new ArrayList<>();
@@ -25,11 +26,11 @@ class OperationHandlerTest {
         expected.add(new Fruit("banana",40));
         FruitDao dao = new FruitDaoImpl();
         List<Fruit> actual = dao.getAll();
-        Assertions.assertEquals(expected,actual);
+        assertEquals(expected,actual);
     }
 
-    @AfterEach
-    void tearDown() {
+    @After
+    public void tearDown() {
         Storage.fruitStorage.clear();
     }
 }

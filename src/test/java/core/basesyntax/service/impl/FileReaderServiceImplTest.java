@@ -1,26 +1,27 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.junit.AfterClass;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class FileReaderServiceImplTest {
+public class FileReaderServiceImplTest {
     private static final String fileInput = "src/main/resources/dataInputTest.csv";
-    private FileReaderService readData;
+    private static FileReaderService readData;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         readData = new FileReaderServiceImpl();
     }
 
     @Test
-    public void readFromFileGeneralTest() {
+    public void readFromFile_generaltest_Ok() {
         File file = new File(fileInput);
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file));) {
@@ -35,21 +36,17 @@ class FileReaderServiceImplTest {
         String expected = builder.toString();
         FileReaderService readData = new FileReaderServiceImpl();
         String result = readData.readFromFile(fileInput);
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_PathNull_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () ->
-                readData.readFromFile(null)
-        );
+        readData.readFromFile(null);
     }
 
-    @Test
-    public void wrongPath() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            readData.readFromFile("abcdea");
-        });
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_wrongPath_Ok() {
+        readData.readFromFile("abcdea");
     }
 
     @AfterClass

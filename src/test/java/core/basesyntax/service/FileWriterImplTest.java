@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.impl.FileReaderService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.io.BufferedReader;
@@ -8,28 +10,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import org.junit.AfterClass;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class FileWriterImplTest {
+public class FileWriterImplTest {
     private static final String filePathNameOutput = "src/main/resources/dataOutputTest.csv";
     private static final String inputData = "fruit,quantity\n"
             +
             "banana,152\n"
             +
             "apple,90\n";
-    private FileWriterService fileWriterService;
-    private FileReaderService readerService;
+    private static FileWriterService fileWriterService;
+    private static FileReaderService readerService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileWriterService = new FileWriterImpl();
         readerService = new FileReaderServiceImpl();
     }
 
     @Test
-    void writingIdenticalContentIntoFile_Ok() {
+    public void writeDataToFile_identicalcontent_Ok() {
         fileWriterService.writeDataToFile(inputData, filePathNameOutput);
         File file = new File(filePathNameOutput);
         StringBuilder builder = new StringBuilder();
@@ -45,14 +46,12 @@ class FileWriterImplTest {
             throw new RuntimeException("Can't read the date from file: " + filePathNameOutput, e);
         }
         String actual = builder.toString();
-        Assertions.assertEquals(inputData, actual);
+        assertEquals(inputData, actual);
     }
 
-    @Test
-    public void writeToFilePathNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            fileWriterService.writeDataToFile(null, filePathNameOutput);
-        });
+    @Test(expected = IllegalArgumentException.class)
+    public void writeDataToFile_path_null_ok() {
+        fileWriterService.writeDataToFile(null, filePathNameOutput);
     }
 
     @AfterClass

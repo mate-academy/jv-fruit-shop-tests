@@ -10,7 +10,7 @@ public class FruitTransactionServiceImpl {
     private static final int FRUIT_INDEX = 1;
     private static final int FRUIT_QUANTITY = 2;
 
-    public List<FruitDto> parser(String inputData) {
+    public List<FruitDto> parse(String inputData) {
         if (inputData == null || inputData.isEmpty()) {
             throw new IllegalArgumentException("sorry something gone wrong wiht your inputData");
         }
@@ -25,11 +25,6 @@ public class FruitTransactionServiceImpl {
             fruitList.add(fruitDto);
         }
         return fruitList;
-    }
-
-    @Override
-    public String toString() {
-        return "FruitTransactionServiceImpl{}";
     }
 }
 

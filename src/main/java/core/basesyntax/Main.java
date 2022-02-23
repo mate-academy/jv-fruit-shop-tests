@@ -24,7 +24,7 @@ public class Main {
         String s = readData.readFromFile(fileInput);
         System.out.println(s);
         FruitTransactionServiceImpl fruitTransactionService = new FruitTransactionServiceImpl();
-        List<FruitDto> parsedData = fruitTransactionService.parser(s);
+        List<FruitDto> parsedData = fruitTransactionService.parse(s);
         strategyType.processFruitOperation(parsedData);
         ReportCreatorImpl creator = new ReportCreatorImpl();
         FruitDao fruitDao = new FruitDaoImpl();

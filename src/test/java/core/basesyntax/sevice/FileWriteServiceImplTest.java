@@ -19,7 +19,9 @@ public class FileWriteServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         fileWriteService = new FileWriteServiceImpl();
-        testText = "Test line one.\r\nTest line two.\r\nTest line three.";
+        testText = "Test line one." + System.lineSeparator()
+                + "Test line two." + System.lineSeparator()
+                + "Test line three.";
         tempFile = new File(PATH_TO_FILE);
     }
 

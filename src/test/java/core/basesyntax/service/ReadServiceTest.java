@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitDto;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,7 +34,7 @@ public class ReadServiceTest extends Assert {
                 + System.lineSeparator() + "s,banana,50" + System.lineSeparator() + "p,banana,133"
                 + System.lineSeparator() + "r,apple,104" + System.lineSeparator() + "p,apple,29"
                 + System.lineSeparator() + "p,banana,51" + System.lineSeparator() + "s,banana,50";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(text);
         } catch (IOException e) {
             throw new RuntimeException("Error!", e);
@@ -44,38 +43,62 @@ public class ReadServiceTest extends Assert {
         final int actual = list.size();
         final int excepted = correctReadData.size();
         assertEquals(excepted, actual);
+        try {
+            FileWriter fstream = new FileWriter(file);
+            BufferedWriter out1 = new BufferedWriter(fstream);
+            out1.write("");
+            out1.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Delete text", e);
+        }
     }
 
     @Test(expected = RuntimeException.class)
     public void readData_emptyFile_notOk() {
-        final File file = new File("src/test/resources/Input_test3.csv");
-        final String text = "";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
-            writer.write(text);
+        final File emptyFile = new File("src/test/resources/Input_test3.csv");
+        final String emptyText = "";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(emptyFile, true))) {
+            writer.write(emptyText);
         } catch (IOException e) {
             throw new RuntimeException("Error!", e);
         }
-        final List<FruitDto> data = readService.readData(String.valueOf(file));
+        final List<FruitDto> data = readService.readData(String.valueOf(emptyFile));
         final int excepted = 0;
         final int actual = data.size();
         assertEquals(excepted, actual);
+        try {
+            FileWriter fstreamTwo = new FileWriter(emptyFile);
+            BufferedWriter out1 = new BufferedWriter(fstreamTwo);
+            out1.write("");
+            out1.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Delete text", e);
+        }
     }
 
     @Test(expected = RuntimeException.class)
     public void readData_invalidContent_notOk() {
-        final File file = new File("src/test/resources/Input_test2.csv");
-        final String text = "b,banana,200" + System.lineSeparator() + "b,apple,100"
+        final File corruptedFile = new File("src/test/resources/Input_test2.csv");
+        final String corruptedText = "b,banana,200" + System.lineSeparator() + "b,apple,100"
                 + System.lineSeparator() + ",banana,50" + System.lineSeparator() + "p,banana,133"
                 + System.lineSeparator() + "r,apple," + System.lineSeparator() + "p,apple,29"
                 + System.lineSeparator() + "p,banana,51" + System.lineSeparator() + "s,50";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))){
-            writer.write(text);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(corruptedFile, true))) {
+            writer.write(corruptedText);
         } catch (IOException e) {
             throw new RuntimeException("Error!", e);
         }
-        final List<FruitDto> data = readService.readData(String.valueOf(file));
+        final List<FruitDto> data = readService.readData(String.valueOf(corruptedFile));
         final int excepted = 6;
         final int actual = data.size();
         assertEquals(excepted, actual);
+        try {
+            FileWriter fstreamThree = new FileWriter(corruptedFile);
+            BufferedWriter out1 = new BufferedWriter(fstreamThree);
+            out1.write("");
+            out1.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Delete text", e);
+        }
     }
 }

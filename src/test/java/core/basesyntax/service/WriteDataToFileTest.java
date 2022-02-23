@@ -71,6 +71,5 @@ public class WriteDataToFileTest {
         } catch (IOException e) {
             throw new RuntimeException("Delete text", e);
         }
-
     }
 }

@@ -36,7 +36,7 @@ public class FruitDaoImplTest {
 
     @Test
     public void remove_Ok() {
-        fruitDao.add(FRUIT, AMOUNT);
+        storage.getFruitsStorage().put(FRUIT,AMOUNT);
         fruitDao.remove(FRUIT,AMOUNT);
         assertEquals(EXPECTED_SIZE_FOR_NOT_EXISTS, storage
                 .getFruitsStorage().get(FRUIT).intValue());
@@ -44,13 +44,13 @@ public class FruitDaoImplTest {
 
     @Test
     public void getFruitCount_Ok() {
-        fruitDao.add(FRUIT, AMOUNT);
+        storage.getFruitsStorage().put(FRUIT, AMOUNT);
         assertEquals(AMOUNT, storage.getFruitsStorage().get(FRUIT).intValue());
     }
 
     @Test
     public void getAll_Ok() {
-        fruitDao.add(FRUIT, AMOUNT);
+        storage.getFruitsStorage().put(FRUIT, AMOUNT);
         expectedStorage.put(FRUIT,AMOUNT);
         assertEquals(expectedStorage.entrySet(), fruitDao.getAll().entrySet());
     }

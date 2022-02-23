@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
@@ -28,14 +26,9 @@ public class ReportServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void reportService_emptyStorage_notOk() {
-        try {
-            reportService.getReport();
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Storage was empty");
+        reportService.getReport();
     }
 }
 

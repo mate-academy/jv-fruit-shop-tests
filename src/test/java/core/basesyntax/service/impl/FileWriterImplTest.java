@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,13 +35,8 @@ public class FileWriterImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void writeFile_incorrectPath_notOk() {
-        try {
-            fileWriter.write(report, INCORRECT_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Storage was empty");
+        fileWriter.write(report, INCORRECT_PATH);
     }
 }

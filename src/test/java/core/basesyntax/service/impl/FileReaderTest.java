@@ -72,6 +72,3 @@ public class FileReaderTest {
         assertEquals(expected.toString(), actual.toString());
     }
 }
-
-
-

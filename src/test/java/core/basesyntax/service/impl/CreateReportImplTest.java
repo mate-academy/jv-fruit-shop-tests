@@ -18,7 +18,7 @@ public class CreateReportImplTest {
     }
 
     @Test
-    public void createReport_FromEmptyStorage() {
+    public void createReport_emptyStorage_Ok() {
         String expected = "fruit,quantity";
         String actual = createReport.createReport();
         assertEquals(expected, actual);

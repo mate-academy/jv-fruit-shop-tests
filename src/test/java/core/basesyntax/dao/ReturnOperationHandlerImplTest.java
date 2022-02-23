@@ -19,7 +19,7 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    public void returnHandler_Ok() {
+    public void apply_Ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
         Map<String, Integer> initialState = new HashMap<>(Storage.fruitStorage);
@@ -29,12 +29,12 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void returnHandler_InvalidFruitName() {
+    public void apply_invalidFruitName_notOk() {
         returnOperationHandler.apply(null, 10);
     }
 
     @Test(expected = RuntimeException.class)
-    public void returnHandler_InvalidQuantity() {
+    public void apply_invalidQuantity_notOk() {
         returnOperationHandler.apply("banana", -10);
     }
 }

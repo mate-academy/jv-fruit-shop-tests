@@ -39,7 +39,7 @@ public class WorkWithCsvFileTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_InvalidFilename() {
+    public void readFromFile_invalidFilename_notOk() {
         workWithCsvFiles.readFromFile(null);
     }
 
@@ -60,12 +60,12 @@ public class WorkWithCsvFileTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_InvalidFileName() {
+    public void writeToFile_invalidFileName_notOk() {
         workWithCsvFiles.writeToFile(null, "content");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_InvalidContent() {
+    public void writeToFile_invalidContent_notOk() {
         workWithCsvFiles.writeToFile("output.csv", null);
     }
 }

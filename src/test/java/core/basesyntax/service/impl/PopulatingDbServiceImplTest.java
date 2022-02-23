@@ -71,12 +71,12 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void populatingDb_InvalidOperation() {
+    public void populatingDb_invalidOperation_notOk() {
         populatingDb.prepareDB(invalidTransactions);
     }
 
     @Test
-    public void populatingDb_BalanceOperation() {
+    public void populatingDb_balanceOperation_Ok() {
         Storage.fruitStorage.clear();
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
@@ -88,7 +88,7 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void populatingDb_PurchaseOperation() {
+    public void populatingDb_purchaseOperation_Ok() {
         Storage.fruitStorage.put("banana", 30);
         Storage.fruitStorage.put("apple", 30);
         Map<String, Integer> expected = new HashMap<>();
@@ -101,7 +101,7 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test
-    public void populatingDb_ReturnOperation() {
+    public void populatingDb_returnOperation_Ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
         expected.put("apple", 10);
@@ -110,7 +110,7 @@ public class PopulatingDbServiceImplTest {
     }
 
     @Test
-    public void populatingDb_SupplyOperation() {
+    public void populatingDb_supplyOperation_Ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
         expected.put("apple", 10);

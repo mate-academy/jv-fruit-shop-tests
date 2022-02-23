@@ -24,7 +24,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test
-    public void purchaseOperation_Ok() {
+    public void apply_Ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 20);
         purchaseOperation.apply("banana", 10);
@@ -33,22 +33,22 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_InvalidFruitName() {
+    public void apply_invalidFruitName_notOk() {
         purchaseOperation.apply(null, 10);
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_InvalidQuantity() {
+    public void apply_invalidQuantity_notOk() {
         purchaseOperation.apply("banana", -10);
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_FruitIsNotExist() {
+    public void apply_fruitIsNotExist_notOk() {
         purchaseOperation.apply("apple", 10);
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_NotEnoughInStorage() {
+    public void apply_notEnoughInStorage_notOk() {
         purchaseOperation.apply("banana", 40);
     }
 }

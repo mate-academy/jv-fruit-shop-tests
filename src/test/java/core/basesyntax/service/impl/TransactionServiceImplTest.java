@@ -17,12 +17,12 @@ public class TransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransaction_FromNullList() {
+    public void createTransaction_nullList_notOk() {
         transactionService.createTransactionsList(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransaction_FromEmptyList() {
+    public void createTransaction_emptyList_notOk() {
         transactionService.createTransactionsList(List.of("", "", ""));
     }
 

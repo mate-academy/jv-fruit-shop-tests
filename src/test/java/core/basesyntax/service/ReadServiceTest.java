@@ -27,7 +27,7 @@ public class ReadServiceTest extends Assert {
     }
 
     @Test
-    public void reader_readFile_ok() {
+    public void readData_file_ok() {
         final List<FruitDto> list = readService.readData(testFileOne);
         final int actual = list.size();
         final int excepted = correctReadData.size();
@@ -35,7 +35,7 @@ public class ReadServiceTest extends Assert {
     }
 
     @Test(expected = RuntimeException.class)
-    public void reader_fileWithoutContent_notOk() {
+    public void readData_emptyFile_notOk() {
         final List<FruitDto> data = readService.readData(testFileTwo);
         final int excepted = 0;
         final int actual = data.size();
@@ -43,11 +43,10 @@ public class ReadServiceTest extends Assert {
     }
 
     @Test(expected = RuntimeException.class)
-    public void reader_fileWithCorruptData_notOk() {
+    public void readData_invalidContent_notOk() {
         final List<FruitDto> data = readService.readData(testFileThree);
         final int excepted = 6;
         final int actual = data.size();
         assertEquals(excepted, actual);
     }
-
 }

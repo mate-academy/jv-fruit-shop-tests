@@ -6,6 +6,8 @@ import core.basesyntax.model.FruitDto;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -24,12 +26,31 @@ public class WriteDataToFileTest {
         writer = new WriteDataToFile();
     }
 
+    @Test
+    public void writer_data_ok() throws IOException {
+        writer.writeToFile(currentReportText, toFileName);
+        String expected = currentReportText;
+        String actual;
+        try {
+            actual = Files.readString(Paths.get(toFileName));
+        } catch (IOException e) {
+            throw new RuntimeException("error!!", e);
+        }
+        assertEquals(expected, actual);
+    }
+
     @Test(expected = RuntimeException.class)
     public void writer_dataWithEmptyReportText_notOk() throws IOException {
         writer.writeToFile("", toFileName);
         final int excepted = 0;
-        final int actual = testListWithFruits.size();
-        assertEquals(excepted, actual);
+        String actual;
+        try {
+            actual = Files.readString(Paths.get(toFileName));
+        } catch (IOException e) {
+            throw new RuntimeException("error!!", e);
+        }
+        final int actualSize = actual.length();
+        assertEquals(excepted, actualSize);
     }
 
     @Test(expected = RuntimeException.class)

@@ -2,6 +2,9 @@ package core.basesyntax.service.filework;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -25,13 +28,24 @@ public class GetDataFromFileImplTest {
         expected.add("type,fruit,quantity");
         expected.add("b,testBanana,25");
         expected.add("p,testApple,12");
+        try {
+            Files.write(Path.of(PATH_TO_FILE),expected);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write file");
+        }
         List<String> actual = getDataFromFile.getFromStorage(PATH_TO_FILE);
         assertEquals(expected.get(1), actual.get(0));
         assertEquals(expected.get(2), actual.get(1));
+        try {
+            Files.delete(Path.of(PATH_TO_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't delete file");
+        }
     }
 
     @Test(expected = RuntimeException.class)
     public void getDataFromWrongPath_not_ok() {
         getDataFromFile.getFromStorage(WRONG_PATH_TO_FILE);
     }
+
 }

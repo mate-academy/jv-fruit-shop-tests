@@ -14,6 +14,10 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void doOperation(String fruitType, String value) {
+        if (Integer.parseInt(value) < 0 || value == null || fruitType == null) {
+            throw new RuntimeException("Invalid params. Params: quantity = " + value
+                + " fruitType = " + fruitType);
+        }
         Fruit fruit = new Fruit(fruitType);
         int prevQuantity = fruitDao.getQuantity(fruit);
         if (prevQuantity - Integer.parseInt(value) < 0) {

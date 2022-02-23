@@ -15,6 +15,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getOperationHandler(Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("Operation can't be null");
+        }
         return operationHandlerMap.get(operation);
     }
 }

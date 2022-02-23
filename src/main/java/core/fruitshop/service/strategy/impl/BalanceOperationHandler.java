@@ -14,6 +14,10 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void doOperation(String fruitType, String value) {
+        if (Integer.parseInt(value) < 0 || value == null || fruitType == null) {
+            throw new RuntimeException("Invalid params. Params: quantity = " + value
+                + " fruitType = " + fruitType);
+        }
         Fruit fruit = new Fruit(fruitType);
         fruitDao.addFruit(fruit);
         int prevQuantity = fruitDao.getQuantity(fruit);

@@ -1,26 +1,12 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.Transaction;
-import core.basesyntax.service.ManipulationService;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.Strategy;
-import core.basesyntax.strategy.impl.BalanceOperation;
-import core.basesyntax.strategy.impl.PurchaseOperation;
-import core.basesyntax.strategy.impl.ReturnOperation;
-import core.basesyntax.strategy.impl.StrategyImpl;
-import core.basesyntax.strategy.impl.SupplyOperation;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import core.basesyntax.db.*;
+import core.basesyntax.model.*;
+import core.basesyntax.service.*;
+import core.basesyntax.strategy.*;
+import core.basesyntax.strategy.impl.*;
+import java.util.*;
+import org.junit.*;
 
 public class ManipulationServiceTest {
     private static ManipulationService manipulationService;
@@ -58,15 +44,10 @@ public class ManipulationServiceTest {
         ReportService reportService = new ReportServiceImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void manipulationData_emptyData_notOk() {
         List<Transaction> emptyList = new ArrayList<>();
-        try {
-            manipulationService.manipulation(emptyList);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Runtime Exception");
+        manipulationService.manipulation(emptyList);
     }
 
     @Test

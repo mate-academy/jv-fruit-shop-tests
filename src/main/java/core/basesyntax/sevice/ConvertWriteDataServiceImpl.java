@@ -9,7 +9,6 @@ public class ConvertWriteDataServiceImpl implements ConvertWriteDataService {
     @Override
     public String convertDataToFile(Map<String, Integer> fruitStorage) {
         StringBuilder kayValueString = new StringBuilder();
-
         for (Map.Entry<String, Integer> entries : fruitStorage.entrySet()) {
             kayValueString.append(entries.getKey()).append(SEPARATING_SIGN)
                     .append(entries.getValue()).append(System.lineSeparator());

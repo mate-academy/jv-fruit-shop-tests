@@ -24,7 +24,7 @@ public class FileWriteServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_Ok() {
+    public void writeDataToFile_validData_Ok() {
         fileWriteService.writeDataToFile(testText, PATH_TO_FILE);
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tempFile))) {

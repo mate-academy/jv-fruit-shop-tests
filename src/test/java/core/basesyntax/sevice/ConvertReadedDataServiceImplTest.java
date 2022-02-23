@@ -26,10 +26,9 @@ public class ConvertReadedDataServiceImplTest {
     }
 
     @Test
-    public void convertDataFromFile_Ok() {
+    public void convertDataFromFile_validData_Ok() {
         List<FruitTransaction> resultList
                 = convertReadedDataService.convertDataFromFile(inputDataList);
-        assertEquals(expectedList.get(0), resultList.get(0));
-        assertEquals(expectedList.get(1), resultList.get(1));
+        assertEquals(expectedList, resultList);
     }
 }

@@ -26,7 +26,7 @@ public class FileReadServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readDataFromFile_NonExistFile_NotOk() {
+    public void readDataFromFile_NonExistFile_Ok() {
         fileReadService.readDataFromFile(NON_EXIST_FILE);
     }
 

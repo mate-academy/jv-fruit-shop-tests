@@ -21,7 +21,7 @@ public class ConvertWriteDataServiceImplTest {
     }
 
     @Test
-    public void convertDataToFile_Ok() {
+    public void convertDataToFile_validData_Ok() {
         String actual = convertWriteDataService.convertDataToFile(Storage.fruitStorage);
         assertEquals(expectedString, actual);
     }

@@ -10,7 +10,7 @@ import org.junit.Test;
 public class StorageValidatorTest {
 
     @Test
-    public void checkPassedSuccessfully_True() {
+    public void putFruitModel_checkPassedSuccessfully_Ok() {
         StorageValidator storageValidator = new PurchaseOperationHandler();
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);

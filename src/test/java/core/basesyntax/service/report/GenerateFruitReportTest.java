@@ -19,7 +19,7 @@ public class GenerateFruitReportTest {
     }
 
     @Test
-    public void getReport_True() {
+    public void getReport_correctReport_Ok() {
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);
         storageDao.putFruitModel(fruitModel);
@@ -28,7 +28,7 @@ public class GenerateFruitReportTest {
     }
 
     @Test
-    public void generateResultForCommodity_generateLine_True() {
+    public void generateResultForCommodity_generateLine_Ok() {
         StringBuilder expectedResult = new StringBuilder("apple,10");
         StringBuilder actualResult = generateFruitReport.generateResultForCommodity("apple", 10);
         assertEquals(actualResult.toString(), expectedResult.toString());

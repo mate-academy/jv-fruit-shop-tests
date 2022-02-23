@@ -17,7 +17,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void doOperation_negativeResult_Exception() {
+    public void doOperation_negativeResult_NotOk() {
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);
         storageDao.putFruitModel(fruitModel);
@@ -25,7 +25,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void doOperation_fruitIsAlreadyExists_Exception() {
+    public void doOperation_fruitIsAlreadyExists_NotOk() {
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);
         storageDao.putFruitModel(fruitModel);
@@ -33,7 +33,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void doOperation_operationDoneCorrectly_True() {
+    public void doOperation_operationDoneCorrectly_Ok() {
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);
         storageDao.putFruitModel(fruitModel);

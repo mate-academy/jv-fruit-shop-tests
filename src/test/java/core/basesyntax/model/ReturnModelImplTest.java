@@ -15,27 +15,27 @@ public class ReturnModelImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getModel_incorrectOperation_Exception() {
+    public void getModel_incorrectOperation_NotOk() {
         returnModel.getModel(new String[] {"", "apple", "10"});
     }
 
     @Test(expected = RuntimeException.class)
-    public void getModel_incorrectFruit_Exception() {
+    public void getModel_incorrectFruit_NotOk() {
         returnModel.getModel(new String[] {"b", "", "10"});
     }
 
     @Test(expected = RuntimeException.class)
-    public void getModel_amountIsEmpty_Exception() {
+    public void getModel_amountIsEmpty_NotOk() {
         returnModel.getModel(new String[] {"b", "banana", ""});
     }
 
     @Test(expected = RuntimeException.class)
-    public void getModel_incorrectAmount_Exception() {
+    public void getModel_incorrectAmount_NotOk() {
         returnModel.getModel(new String[] {"b", "banana", "a"});
     }
 
     @Test
-    public void getModel_gotCorrectModel_True() {
+    public void getModel_gotCorrectModel_Ok() {
         FruitModel expectedModel = new FruitModel("banana", 20);
         FruitModel returnedModel = returnModel.getModel(new String[] {"b", "banana", "20"});
         assertEquals(expectedModel.getName(), returnedModel.getName());
@@ -43,7 +43,7 @@ public class ReturnModelImplTest {
     }
 
     @Test
-    public void elementIsEmptyOrNull_incorrectElement_True() {
+    public void elementIsEmptyOrNull_incorrectElement_Ok() {
         assertTrue(returnModel.elementIsEmptyOrNull(null));
         assertTrue(returnModel.elementIsEmptyOrNull(""));
     }

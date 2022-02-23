@@ -25,35 +25,35 @@ public class StorageDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getAmount_getAbsentKey_Exception() {
+    public void getAmount_getAbsentKey_NotOk() {
         storageDao.getAmount("Bob_The_minion");
     }
 
     @Test(expected = RuntimeException.class)
-    public void getAmount_keyToGetValueIsNull_Ok() {
+    public void getAmount_keyToGetValueIsNull_NotOk() {
         String key = null;
         storageDao.getAmount(key);
     }
 
     @Test
-    public void getAmount_getCorrectValue_True() {
+    public void getAmount_getCorrectValue_Ok() {
         assertEquals(storageDao.getAmount("apple"), 10);
     }
 
     @Test(expected = RuntimeException.class)
-    public void putFruitModel_fruitModelIsNull_Exception() {
+    public void putFruitModel_fruitModelIsNull_NotOk() {
         FruitModel fruitModel = null;
         storageDao.putFruitModel(fruitModel);
     }
 
     @Test(expected = RuntimeException.class)
-    public void putFruitModel_amountIsNegative_Exception() {
+    public void putFruitModel_amountIsNegative_NotOk() {
         FruitModel fruitModel = new FruitModel("apple", -5);
         storageDao.putFruitModel(fruitModel);
     }
 
     @Test
-    public void putFruitModel_testIfFruitModelWasAdded_True() {
+    public void putFruitModel_testIfFruitModelWasAdded_Ok() {
         FruitModel fruitModel = new FruitModel("banana", 5);
         assertTrue(storageDao.putFruitModel(fruitModel));
         assertTrue(FruitStorage.fruitStorage.containsKey("banana")
@@ -61,19 +61,19 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void replaceWithNewAmount_replacedCorrect_True() {
+    public void replaceWithNewAmount_replacedCorrect_Ok() {
         assertTrue(storageDao.replaceWithNewAmount("apple", 20));
         assertTrue(FruitStorage.fruitStorage.containsKey("apple")
                 && FruitStorage.fruitStorage.get("apple") == 20);
     }
 
     @Test
-    public void containsKey_doesContainsKey_True() {
+    public void containsKey_doesContainsKey_Ok() {
         assertTrue(storageDao.containsKey("apple"));
     }
 
     @Test
-    public void containsKey_keyIsAbsent_False() {
+    public void containsKey_keyIsAbsent_NotOk() {
         assertFalse(storageDao.containsKey("Stuart_the_minion"));
     }
 }

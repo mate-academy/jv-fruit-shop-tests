@@ -11,7 +11,7 @@ import org.junit.Test;
 public class StrategyImplTest {
 
     @Test
-    public void executeStrategy_strategyWorkingCorrectly_True() {
+    public void executeStrategy_strategyWorkingCorrectly_Ok() {
         OperationHandler operationHandler = new BalanceOperationHandler();
         StrategyImpl strategy = new StrategyImpl(operationHandler);
         StorageDaoImpl storageDao = new StorageDaoImpl();

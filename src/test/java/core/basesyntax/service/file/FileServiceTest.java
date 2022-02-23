@@ -12,17 +12,17 @@ public class FileServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_noFileToRead_Exception() {
+    public void read_noFileToRead_NotOk() {
         fileService.read("src/activities.csv");
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_noFileToWrite_Exception() {
+    public void write_noFileToWrite_NotOk() {
         fileService.write("","wrongsrc/activities.csv");
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_nullDataToWrite_Exception() {
+    public void write_nullDataToWrite_NotOk() {
         fileService.write(null, "src/main/resources/report.csv");
     }
 }

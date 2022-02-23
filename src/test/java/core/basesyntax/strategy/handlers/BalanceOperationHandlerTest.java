@@ -24,19 +24,19 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void isFruitAmountCorrect_negativeAmount_Exception() {
+    public void isFruitAmountCorrect_negativeAmount_NotOk() {
         FruitModel fruitModel = new FruitModel("apple", -10);
         commodityValidator.isFruitAmountCorrect(fruitModel, "b");
     }
 
     @Test
-    public void isFruitAmountCorrect_correctData_True() {
+    public void isFruitAmountCorrect_correctData_Ok() {
         FruitModel fruitModel = new FruitModel("Kevin_the_minion", 10);
         assertTrue(commodityValidator.isFruitAmountCorrect(fruitModel, "b"));
     }
 
     @Test(expected = RuntimeException.class)
-    public void doOperation_fruitIsAlreadyExists_Exception() {
+    public void doOperation_fruitIsAlreadyExists_NotOk() {
         BalanceOperationHandler balanceOperation = new BalanceOperationHandler();
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);

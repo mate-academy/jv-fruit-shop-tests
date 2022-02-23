@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     @Test
-    public void doOperation_operationDoneCorrectly_True() {
+    public void doOperation_operationDoneCorrectly_Ok() {
         SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
         StorageDaoImpl storageDao = new StorageDaoImpl();
         FruitModel fruitModel = new FruitModel("apple", 10);

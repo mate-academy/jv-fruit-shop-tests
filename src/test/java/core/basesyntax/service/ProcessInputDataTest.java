@@ -25,14 +25,14 @@ public class ProcessInputDataTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void processInput_incorrectOperation_Exception() {
+    public void processInput_incorrectOperation_NotOk() {
         List<String[]> testData = new ArrayList<>();
         testData.add(new String[] {"", "banana", "10"});
         processInputData.processInput(testData);
     }
 
     @Test
-    public void processInput_workingWithData_True() {
+    public void processInput_workingWithData_Ok() {
         List<String[]> testData = new ArrayList<>();
         testData.add(new String[] {"b", "banana", "10"});
         testData.add(new String[] {"p", "banana", "5"});

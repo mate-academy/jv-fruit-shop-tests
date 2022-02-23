@@ -38,7 +38,7 @@ public class GetDataFromFileImplTest {
         assertEquals(expected.get(1), actual.get(0));
         assertEquals(expected.get(2), actual.get(1));
         try {
-           new FileWriter(PATH_TO_FILE,false);
+            new FileWriter(PATH_TO_FILE,false);
         } catch (IOException e) {
             throw new RuntimeException("Can't delete file");
         }

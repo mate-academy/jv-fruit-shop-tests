@@ -31,21 +31,21 @@ public class FileServiceTest {
         List<String> actual;
         actual = fileService.read(READ_FILEPATH);
         assertTrue(actual.containsAll(expected));
+    }
+
+    @Test
+    public void write_writeCorrect_Ok() {
+        String expectedToWrite = "report";
+        assertTrue(fileService.write(expectedToWrite, WRITE_FILEPATH));
+        List<String> readedData = fileService.read(WRITE_FILEPATH);
+        assertEquals(readedData.size(), 1);
+        assertEquals(readedData.get(0), expectedToWrite);
         String emptyLine = "";
         try {
             Files.write(Paths.get(WRITE_FILEPATH), emptyLine.getBytes(), StandardOpenOption.WRITE);
         } catch (IOException e) {
             throw new RuntimeException("Can't write report data to file ", e);
         }
-    }
-
-    @Test
-    public void write_writeCorrect_Ok() {
-        String expectedToWrite = "anyway, no one will read this";
-        assertTrue(fileService.write(expectedToWrite, WRITE_FILEPATH));
-        List<String> readedData = fileService.read(WRITE_FILEPATH);
-        assertEquals(readedData.size(), 1);
-        assertEquals(readedData.get(0), expectedToWrite);
     }
 
     @Test(expected = RuntimeException.class)

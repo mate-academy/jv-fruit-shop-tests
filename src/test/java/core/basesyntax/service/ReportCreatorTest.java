@@ -20,7 +20,7 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void reportCreatorService_createReport_Ok() {
+    public void createReport_Ok() {
         storage.add(new Fruit("banana", 100));
         storage.add(new Fruit("orange", 10));
         String expectedBanana = "banana,100";
@@ -32,7 +32,7 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void reportCreatorService_createReport_emptyStorage_Ok() {
+    public void createReport_emptyStorage_Ok() {
         assertTrue(reportCreatorService.createReport().isEmpty());
     }
 

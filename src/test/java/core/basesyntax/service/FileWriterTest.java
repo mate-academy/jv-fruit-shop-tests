@@ -34,7 +34,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void fileWriter_writeStringToFile_Ok() {
+    public void writeStringToFile_Ok() {
         String expected = "string was written to file successfully";
         try {
             testReportFile.createNewFile();
@@ -52,12 +52,12 @@ public class FileWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileWriter_writeStringToFile_notOk() {
+    public void writeStringToFile_notOk() {
         fileWriterService.writeStringToFile(testReportFile, "test string");
     }
 
     @Test
-    public void fileWriter_WriteToFile_Ok() {
+    public void WriteToFile_Ok() {
         storage.add(new Fruit("banana", 100));
         storage.add(new Fruit("orange", 10));
         fileWriterService.writeToFile(testReportFile.toPath().toString());

@@ -26,7 +26,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void storageDao_add_Ok() {
+    public void add_Ok() {
         storageDao.add("banana", 100);
         Fruit expected = defaultFruit;
         Fruit actual = storage.get(0);
@@ -39,7 +39,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void storageDao_substract_Ok() {
+    public void substract_Ok() {
         Fruit expected = new Fruit("banana", 90);
         storage.add(defaultFruit);
         storageDao.substract("banana", 10);
@@ -49,13 +49,13 @@ public class StorageDaoTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void storageDao_substract_wrongAmount_notOk() {
+    public void substract_wrongAmount_notOk() {
         storage.add(defaultFruit);
         storageDao.substract("banana", 101);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void storageDao_substract_notExists_notOk() {
+    public void substract_notExists_notOk() {
         storageDao.substract("banana", 1);
     }
 
@@ -68,7 +68,7 @@ public class StorageDaoTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void storageDao_get_notOk() {
+    public void get_notOk() {
         storageDao.get("banana");
     }
 

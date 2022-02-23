@@ -9,7 +9,7 @@ import java.util.List;
 public class CsvReaderImpl implements FileReaderService {
 
     @Override
-    public List<String> parse(String filePath) {
+    public List<String> read(String filePath) {
         if (filePath == null) {
             throw new RuntimeException("filePath parameter is null");
         }

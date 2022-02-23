@@ -38,7 +38,7 @@ public class DataProcessorTest {
     }
 
     @Test
-    public void dataProcessor_registerTransaction_Ok() {
+    public void registerTransaction_Ok() {
         Fruit expected = new Fruit("banana", 100);
         dataProcessor.registerTransaction("s,banana,100");
         Fruit actual = storage.get(0);
@@ -51,18 +51,18 @@ public class DataProcessorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void dataProcessor_registerTransaction_invalidAmount_notOk() {
+    public void registerTransaction_invalidAmount_notOk() {
         dataProcessor.registerTransaction("s,banana,100");
         dataProcessor.registerTransaction("p,banana,101");
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void dataProcessor_registerTransaction_noSuchElement_notOk() {
+    public void registerTransaction_noSuchElement_notOk() {
         dataProcessor.registerTransaction("p,banana,100");
     }
 
     @Test
-    public void dataProcessor_createFruits_Ok() {
+    public void createFruits_Ok() {
         dataProcessor.createFruits(parsedData);
         Fruit expectedOrange = new Fruit("orange", 95);
         Fruit expectedBanana = new Fruit("banana", 10);

@@ -26,7 +26,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void operationStrategy_get_Ok() {
+    public void get_Ok() {
         OperationHandler expected = new PlusOperationHandler();
         OperationHandler actual = operationStrategy.get(DataProcessorImpl.OperationType.BALANCE);
         assertEquals(expected.getClass(), actual.getClass());

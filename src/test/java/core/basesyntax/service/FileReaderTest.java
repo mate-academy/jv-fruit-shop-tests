@@ -22,7 +22,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void csvReader_parse_Ok() {
+    public void read_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -33,22 +33,22 @@ public class FileReaderTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = fileReader.parse(testFileOk.toString());
+        List<String> actual = fileReader.read(testFileOk.toString());
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void csvReader_parse_NullParameter_notOk() {
-        fileReader.parse(null);
+    public void read_NullParameter_notOk() {
+        fileReader.read(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void csvReader_parse_fileDoesNotExist_notOk() {
-        fileReader.parse("non existent file");
+    public void read_fileDoesNotExist_notOk() {
+        fileReader.read("non existent file");
     }
 
     @Test(expected = RuntimeException.class)
-    public void csvReader_parse_emptyFile_notOk() {
-        fileReader.parse(testFileEmpty.toString());
+    public void read_emptyFile_notOk() {
+        fileReader.read(testFileEmpty.toString());
     }
 }

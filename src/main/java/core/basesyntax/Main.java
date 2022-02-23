@@ -32,7 +32,7 @@ public class Main {
         final ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl(storageDao);
         final FileWriterService csvWriter = new CsvWriterImpl(reportCreatorService);
         final DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
-        List<String> parsedDataFromFile = csvReader.parse(
+        List<String> parsedDataFromFile = csvReader.read(
                 "./src/main/java/core/basesyntax/resources/input.csv"
         );
         dataProcessor.createFruits(parsedDataFromFile);

@@ -31,14 +31,14 @@ public class ProcessInputDataTest {
         testData.add(new String[] {"p", "banana", "5"});
         testData.add(new String[] {"s", "banana", "10"});
         testData.add(new String[] {"r", "banana", "20"});
-        testData.add(new String[] {"b", "apple", "20"});
-        testData.add(new String[] {"p", "apple", "5"});
+        testData.add(new String[] {"b", "someFruit", "20"});
+        testData.add(new String[] {"p", "someFruit", "5"});
         processInputData.processInput(testData);
         StorageDaoImpl storageDao = new StorageDaoImpl();
         assertTrue(storageDao.containsKey("banana"));
-        assertTrue(storageDao.containsKey("apple"));
+        assertTrue(storageDao.containsKey("someFruit"));
         assertEquals(storageDao.getAmount("banana"), 35);
-        assertEquals(storageDao.getAmount("apple"),15);
+        assertEquals(storageDao.getAmount("someFruit"),15);
 
     }
 }

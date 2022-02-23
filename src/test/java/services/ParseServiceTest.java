@@ -1,6 +1,7 @@
 package services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ParseServiceTest {
             = new Fruit("apple", 100);
 
     @Test(expected = RuntimeException.class)
-    public void parseFromCsv_nullString_Exception() {
+    public void parseFromCsv_nullString_notOk() {
         parser.parseFromCsv(null);
     }
 
@@ -40,10 +41,8 @@ public class ParseServiceTest {
     @Test
     public void parseFromCsv_Ok() {
         List<FruitRecord> actualList = parser.parseFromCsv(validData);
-        boolean expected = true;
-        boolean actual = actualList.contains(bananaRecord)
-                && actualList.contains(appleRecord);
-        assertEquals(expected, actual);
+        assertTrue(actualList.contains(bananaRecord)
+                && actualList.contains(appleRecord));
     }
 
     @Test

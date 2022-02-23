@@ -3,6 +3,10 @@ package dao;
 import static org.junit.Assert.assertEquals;
 
 import dao.impl.FileHandlerImpl;
+import java.io.File;
+import java.nio.file.Files;
+import javax.imageio.IIOException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileHandlerTest {
@@ -14,21 +18,29 @@ public class FileHandlerTest {
     private static final FileHandler fileHandler = new FileHandlerImpl();
     private static final String source = "type,fruit,quantity";
 
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        try {
+            Files.write(new File(filePathData).toPath(), source.getBytes());
+        } catch (IIOException e) {
+            throw new RuntimeException("Can`t write to file" + filePathData);
+        }
+
+    }
+
     @Test
-    public void readData_Ok() {
+    public void readData_validData_ok() {
         String readData = fileHandler.readData(filePathData);
-        boolean expected = true;
-        boolean actual = source.equals(readData);
-        assertEquals(expected, actual);
+        assertEquals(source, readData);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readData_noSuchFile_Ok() {
+    public void readData_noSuchFile_notOk() {
         fileHandler.readData(noFileLink);
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_noSuchFile_Ok() {
+    public void write_noSuchFile_notOk() {
         fileHandler.writeData(source, noFileLink);
     }
 

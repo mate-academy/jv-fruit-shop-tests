@@ -39,6 +39,5 @@ public class CsvWriterImpl implements FileWriterService {
                     + line + ", to file: "
                     + System.lineSeparator() + file.getName());
         }
-
     }
 }

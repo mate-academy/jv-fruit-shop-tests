@@ -57,7 +57,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void WriteToFile_Ok() {
+    public void writeToFile_Ok() {
         storage.add(new Fruit("banana", 100));
         storage.add(new Fruit("orange", 10));
         fileWriterService.writeToFile(testReportFile.toPath().toString());

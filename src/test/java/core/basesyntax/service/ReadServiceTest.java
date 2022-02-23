@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -14,8 +13,8 @@ import org.junit.Test;
 
 public class ReadServiceTest extends Assert {
     private static ReadService readService;
-    final File file = new File("src/test/resources/Input_test1.csv");
-    private static final List<FruitDto> correctReadData = List.of(new FruitDto("banana",
+    private final File file = new File("src/test/resources/Input_test1.csv");
+    private final List<FruitDto> correctReadData = List.of(new FruitDto("banana",
             "b", Integer.parseInt("200")),
             new FruitDto("apple", "b", Integer.parseInt("100")),
             new FruitDto("banana", "s", Integer.parseInt("50")),

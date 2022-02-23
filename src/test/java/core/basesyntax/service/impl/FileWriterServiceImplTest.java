@@ -38,7 +38,7 @@ public class FileWriterServiceImplTest {
     private FileWriterService fileWriterService;
 
     @BeforeClass
-    public static void setup() throws IOException {
+    public static void setup() {
         String stringInputData = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,20" + System.lineSeparator()
                 + "b,apple,100" + System.lineSeparator()
@@ -52,17 +52,25 @@ public class FileWriterServiceImplTest {
                 + "p,banana,5" + System.lineSeparator()
                 + "r,orange,5" + System.lineSeparator()
                 + "s,banana,50";
-        BufferedWriter fewLinesWriter = new BufferedWriter(new FileWriter(READ_DATA_PATH));
-        fewLinesWriter.write(stringInputData);
-        fewLinesWriter.close();
+        try {
+            BufferedWriter fewLinesWriter = new BufferedWriter(new FileWriter(READ_DATA_PATH));
+            fewLinesWriter.write(stringInputData);
+            fewLinesWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't create a file: " + READ_DATA_PATH);
+        }
         String stringExpectedData = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator()
                 + "orange,90";
-        BufferedWriter expectedDataWriter =
-                new BufferedWriter(new FileWriter(TEST_REPORT_EXPECTED_PATH));
-        expectedDataWriter.write(stringExpectedData);
-        expectedDataWriter.close();
+        try {
+            BufferedWriter expectedDataWriter =
+                    new BufferedWriter(new FileWriter(TEST_REPORT_EXPECTED_PATH));
+            expectedDataWriter.write(stringExpectedData);
+            expectedDataWriter.close();
+        } catch (IOException ex) {
+            throw new RuntimeException("Can't create a file: " + TEST_REPORT_EXPECTED_PATH);
+        }
     }
 
     @Before

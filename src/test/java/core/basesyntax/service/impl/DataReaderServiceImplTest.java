@@ -20,14 +20,22 @@ public class DataReaderServiceImplTest {
     private DataReaderService dataReaderService;
 
     @BeforeClass
-    public static void setup() throws IOException {
+    public static void setup() {
         String stringData = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,20" + System.lineSeparator()
                 + "b,apple,100";
-        BufferedWriter fewLinesWriter = new BufferedWriter(new FileWriter(TEST_FEW_LINES));
-        fewLinesWriter.write(stringData);
-        fewLinesWriter.close();
-        new BufferedWriter(new FileWriter(EMPTY_FILE_PATH)).close();
+        try {
+            BufferedWriter fewLinesWriter = new BufferedWriter(new FileWriter(TEST_FEW_LINES));
+            fewLinesWriter.write(stringData);
+            fewLinesWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't create a file: " + TEST_FEW_LINES);
+        }
+        try {
+            new BufferedWriter(new FileWriter(EMPTY_FILE_PATH)).close();
+        } catch (IOException ex) {
+            throw new RuntimeException("Can't create a file: " + EMPTY_FILE_PATH);
+        }
     }
 
     @Before

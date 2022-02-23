@@ -2,15 +2,12 @@ package core.basesyntax.service.filework;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,27 +23,8 @@ public class GetDataFromFileImplTest {
         getDataFromFile = new GetDataFromFileImpl();
     }
 
-    @Before
-    public void setUp() {
-        File file = new File(PATH_TO_FILE);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create new test file");
-        }
-    }
-
-    @After
-    public void tearDown() {
-        try {
-            Files.delete(Path.of(PATH_TO_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete test file");
-        }
-    }
-
     @Test
-    public void getData_ok() {
+    public void getFromStorage_getData_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,testBanana,25");

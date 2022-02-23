@@ -2,7 +2,6 @@ package core.basesyntax.service.filework;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,19 +28,13 @@ public class AddDataToFileImplTest {
 
     @Before
     public void setUp() {
-        File file = new File(PATH_TO_FILE_TEST);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create new test file");
-        }
         testMap.put("banana",320);
         testMap.put("apple",213);
         testMap.put("pineapple",32);
     }
 
     @Test
-    public void name() {
+    public void addInStorage_addDataToPath_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,320");
@@ -56,19 +48,15 @@ public class AddDataToFileImplTest {
             throw new RuntimeException("Can't read from test file");
         }
         assertEquals(expected,actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void addDataToWrongPath_not_ok() {
-        addDataToFile.addInStorage(testMap,WRONG_PATH_TO_FILE);
-    }
-
-    @After
-    public void tearDown() {
         try {
             Files.delete(Path.of(PATH_TO_FILE_TEST));
         } catch (IOException e) {
             throw new RuntimeException("Can't delete test file");
         }
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void addInStorage_addDataToWrongPath_not_ok() {
+        addDataToFile.addInStorage(testMap,WRONG_PATH_TO_FILE);
     }
 }

@@ -5,20 +5,27 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
     private List<String> testList;
 
+    @BeforeClass
+    public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
+    }
+
     @Test(expected = RuntimeException.class)
-    public void putNullList_notOk() {
+    public void putDataIntoStorage_putNullList_notOk() {
         testList = null;
         fruitDao.putDataIntoStorage(testList);
     }
 
     @Test
-    public void putList_Ok() {
+    public void putDataIntoStorage_putList_Ok() {
         testList = List.of("b,orange,20", "b,banana,70",
                 "b,apple,100", "s,orange,50", "p,orange,20",
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20",
@@ -37,7 +44,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getDataFromNonEmptyStorage_Ok() {
+    public void getDataFromStorage_getDataFromNonEmptyStorage_Ok() {
         Storage.FRUIT_STORAGE.put(new Fruit("lemon"), 25);
         Storage.FRUIT_STORAGE.put(new Fruit("banana"), 3);
         Storage.FRUIT_STORAGE.put(new Fruit("pineapple"), 53);
@@ -48,7 +55,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getDataFromEmptyStorage_Ok() {
+    public void getDataFromStorage_getDataFromEmptyStorage_Ok() {
         String expected = "[]";
         String actual = fruitDao.getDataFromStorage().toString();
         assertEquals(expected, actual);

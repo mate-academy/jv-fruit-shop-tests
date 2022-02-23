@@ -5,10 +5,16 @@ import static org.junit.Assert.assertTrue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.StorageCleaner;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageCleanerImplTest {
-    private StorageCleaner cleaner = new StorageCleanerImpl();
+    private static StorageCleaner cleaner;
+
+    @BeforeClass
+    public static void beforeClass() {
+        cleaner = new StorageCleanerImpl();
+    }
 
     @Test
     public void clearStorage_Ok() {

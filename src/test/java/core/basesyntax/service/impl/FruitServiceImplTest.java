@@ -8,13 +8,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private FruitService fruitService = new FruitServiceImpl();
+    private static FruitService fruitService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitService = new FruitServiceImpl();
+    }
 
     @Test
-    public void createReportOk() {
+    public void createReport_Ok() {
         List<String> actual;
         fruitService.createReportFile("src/test/java/resources/FileWithData.csv",
                 "src/test/java/resources/report.csv");

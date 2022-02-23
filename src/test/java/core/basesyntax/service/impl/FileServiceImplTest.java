@@ -9,14 +9,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileServiceImplTest {
-    private final FileService fileService = new FileServiceImpl();
+    private static FileService fileService;
     private List<String> expectedList;
 
+    @BeforeClass
+    public static void beforeClass() {
+        fileService = new FileServiceImpl();
+    }
+
     @Test
-    public void readFromFileWithData_Ok() {
+    public void read_readFromFileWithData_Ok() {
         expectedList = List.of("b,orange,20", "b,banana,70",
                 "b,apple,100", "s,orange,50", "p,orange,20",
                 "s,banana,100", "p,banana,13", "r,apple,10",
@@ -26,7 +34,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void readFromEmptyFile_Ok() {
+    public void read_readFromEmptyFile_Ok() {
         expectedList = new ArrayList<>();
         List<String> actualList = fileService.read("src/test/java/resources/EmptyFile.csv");
         assertEquals(expectedList, actualList);
@@ -38,7 +46,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void writeStringToFile_Ok() {
+    public void write_writeStringToFile_Ok() {
         String data = "Hello, world!";
         fileService.write("src/test/java/resources/NewFile.csv", data);
         String actual;
@@ -48,13 +56,17 @@ public class FileServiceImplTest {
             throw new RuntimeException("Can't read from file", e);
         }
         assertEquals(data, actual);
-        File file = new File("src/test/java/resources/NewFile.csv");
-        file.delete();
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeNullStringToFile_notOk() {
+    public void write_writeNullStringToFile_notOk() {
         String nullString = null;
         fileService.write("src/test/java/resources/NewFile.csv", nullString);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        File file = new File("src/test/java/resources/report.csv");
+        file.delete();
     }
 }

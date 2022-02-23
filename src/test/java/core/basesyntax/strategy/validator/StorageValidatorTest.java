@@ -8,7 +8,6 @@ import core.basesyntax.strategy.handlers.PurchaseOperationHandler;
 import org.junit.Test;
 
 public class StorageValidatorTest {
-
     @Test
     public void putFruitModel_checkPassedSuccessfully_Ok() {
         StorageValidator storageValidator = new PurchaseOperationHandler();

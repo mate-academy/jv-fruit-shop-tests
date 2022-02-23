@@ -20,18 +20,13 @@ public class FileServiceImplTest {
         fileService = new FileServiceImpl();
     }
 
-    @After
-    public void tearDown() throws IOException {
-        Files.deleteIfExists(Path.of("src/test/resources/TestReport.txt"));
-    }
-
     @Test(expected = RuntimeException.class)
     public void readFromFile_fileNotExists_notOk() {
         fileService.readFromFile(Path.of("src/main/resources/FakeURL.csv"));
     }
 
     @Test
-    public void readFromFile_correctData_ok() {
+    public void readFromFile_correctData_ok() throws IOException {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -42,6 +37,16 @@ public class FileServiceImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
+        String testFileData = "type,fruit,quantity" + System.lineSeparator()
+                + "b,banana,20" + System.lineSeparator()
+                + "b,apple,100" + System.lineSeparator()
+                + "s,banana,100" + System.lineSeparator()
+                + "p,banana,13" + System.lineSeparator()
+                + "r,apple,10" + System.lineSeparator()
+                + "p,apple,20" + System.lineSeparator()
+                + "p,banana,5" + System.lineSeparator()
+                + "s,banana,50";
+        Files.writeString(Path.of("src/test/resources/fruitsTests.csv"), testFileData);
         List<String> actual = fileService
                 .readFromFile(Path.of("src/test/resources/fruitsTests.csv"));
         assertEquals(actual, expected);
@@ -58,5 +63,11 @@ public class FileServiceImplTest {
         fileService.writeToFile(expected, Path.of("src/test/resources/TestReport.txt"));
         String actual = Files.readString(Path.of("src/test/resources/TestReport.txt"));
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws IOException {
+        Files.deleteIfExists(Path.of("src/test/resources/TestReport.txt"));
+        Files.deleteIfExists(Path.of("src/test/resources/fruitsTests.csv"));
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service.strategy;
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-
     private Map<String, TransactionHandler> transactionHandlerMap;
 
     public TransactionStrategyImpl(

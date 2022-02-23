@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class SaveToStorageImplTest {
@@ -25,8 +24,8 @@ public class SaveToStorageImplTest {
     private Map<String, TransactionHandler> handlerMap;
     private List<String> stringList;
 
-    @Before
-    public void setUp() {
+    @Test
+    public void storeAll_correctData_ok() {
         handlerMap = new HashMap<>();
         handlerMap.put("b", new TransactionBalance());
         handlerMap.put("p", new TransactionSell());
@@ -35,15 +34,6 @@ public class SaveToStorageImplTest {
         transactionStrategy = new TransactionStrategyImpl(handlerMap);
         saveToStorageService = new SaveToStorageImpl(transactionStrategy);
         stringList = new ArrayList<>();
-    }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
-
-    @Test
-    public void storeAll_correctData_ok() {
         stringList.add("header");
         stringList.add("b,banana,17");
         stringList.add("p,banana,13");
@@ -58,5 +48,10 @@ public class SaveToStorageImplTest {
     @Test(expected = RuntimeException.class)
     public void storeAll_inputListNull_notOk() {
         saveToStorageService.storeAll(null);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

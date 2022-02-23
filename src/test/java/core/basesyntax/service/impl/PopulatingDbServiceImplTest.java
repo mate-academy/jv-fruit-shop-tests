@@ -85,7 +85,6 @@ public class PopulatingDbServiceImplTest {
         populatingDb.prepareDB(balanceTransactions);
         assertNotEquals(initialState.size(), Storage.fruitStorage.size());
         assertEquals(expected, Storage.fruitStorage);
-
     }
 
     @Test(expected = RuntimeException.class)

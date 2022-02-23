@@ -68,5 +68,4 @@ public class WorkWithCsvFileTest {
     public void writeToFile_InvalidContent() {
         workWithCsvFiles.writeToFile("output.csv", null);
     }
-
 }

@@ -43,7 +43,8 @@ public class FileWriterImplTest {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Can't open the file: " + FILE_PATH_NAME_OUTPUT, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the date from file: " + FILE_PATH_NAME_OUTPUT, e);
+            throw new RuntimeException("Can't read the date from file: "
+                    + FILE_PATH_NAME_OUTPUT, e);
         }
         String actual = builder.toString();
         assertEquals(INPUT_DATA, actual);

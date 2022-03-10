@@ -14,8 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String filePathNameOutput = "src/main/resources/dataOutputTest.csv";
-    private static final String inputData = "fruit,quantity\n"
+    private static final String FILE_PATH_NAME_OUTPUT = "src/main/resources/dataOutputTest.csv";
+    private static final String INPUT_DATA = "fruit,quantity\n"
             +
             "banana,152\n"
             +
@@ -30,9 +30,9 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeDataToFile_identicalcontent_Ok() {
-        fileWriterService.writeDataToFile(inputData, filePathNameOutput);
-        File file = new File(filePathNameOutput);
+    public void writeDataToFile_identicalContent_Ok() {
+        fileWriterService.writeDataToFile(INPUT_DATA, FILE_PATH_NAME_OUTPUT);
+        File file = new File(FILE_PATH_NAME_OUTPUT);
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file));) {
             String value = reader.readLine();
@@ -41,22 +41,22 @@ public class FileWriterImplTest {
                 value = reader.readLine();
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't open the file: " + filePathNameOutput, e);
+            throw new RuntimeException("Can't open the file: " + FILE_PATH_NAME_OUTPUT, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the date from file: " + filePathNameOutput, e);
+            throw new RuntimeException("Can't read the date from file: " + FILE_PATH_NAME_OUTPUT, e);
         }
         String actual = builder.toString();
-        assertEquals(inputData, actual);
+        assertEquals(INPUT_DATA, actual);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void writeDataToFile_path_null_ok() {
-        fileWriterService.writeDataToFile(null, filePathNameOutput);
+        fileWriterService.writeDataToFile(null, FILE_PATH_NAME_OUTPUT);
     }
 
     @AfterClass
     public static void afterClass() {
-        File file = new File(filePathNameOutput);
+        File file = new File(FILE_PATH_NAME_OUTPUT);
         file.delete();
     }
 }

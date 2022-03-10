@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
-    private static final String filePath = "src/main/resources/dataInputTest.csv";
+    private static final String FILE_PATH = "src/main/resources/dataInputTest.csv";
     private static FruitTransactionServiceImpl fruitTransactionService;
 
     @BeforeClass
@@ -32,7 +32,6 @@ public class FruitTransactionServiceImplTest {
 
     @Test
     public void parse_currentData_Ok() {
-        FileReaderService reader = new FileReaderServiceImpl();
         final String s = "b,banana,20\n"
                 +
                 "b,apple,100\n"

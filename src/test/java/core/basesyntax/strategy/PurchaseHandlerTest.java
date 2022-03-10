@@ -12,13 +12,13 @@ import org.junit.Test;
 
 public class PurchaseHandlerTest {
     private static PurchaseHandler purchaseHandler;
-    private static FruitDto fruit;
+    private static FruitDto fruitDto;
     private static FruitDao storageDao;
 
     @BeforeClass
     public static void setUp() {
         purchaseHandler = new PurchaseHandler();
-        fruit = new FruitDto();
+        fruitDto = new FruitDto();
         storageDao = new FruitDaoImpl();
     }
 

@@ -20,7 +20,7 @@ public class FileReaderServiceImpl implements FileReaderService {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Can't open the file: " + filePath, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the date from file: " + filePath, e);
+            throw new RuntimeException("Can't read the data from file: " + filePath, e);
         }
         return builder.toString();
     }

@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String fileInput = "src/main/resources/dataInputTest.csv";
+    private static final String FILE_INPUT = "src/main/resources/dataInputTest.csv";
     private static FileReaderService readData;
 
     @BeforeClass
@@ -22,7 +22,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFromFile_generaltest_Ok() {
-        File file = new File(fileInput);
+        File file = new File(FILE_INPUT);
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file));) {
             String value = reader.readLine();
@@ -31,11 +31,11 @@ public class FileReaderServiceImplTest {
                 value = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Unable to open file " + fileInput, e);
+            throw new RuntimeException("Can't read file" + FILE_INPUT, e);
         }
         String expected = builder.toString();
         FileReaderService readData = new FileReaderServiceImpl();
-        String result = readData.readFromFile(fileInput);
+        String result = readData.readFromFile(FILE_INPUT);
         assertEquals(expected, result);
     }
 
@@ -52,7 +52,7 @@ public class FileReaderServiceImplTest {
     @AfterClass
     public static void afterClass() {
         try {
-            new FileWriter(fileInput, false).close();
+            new FileWriter(FILE_INPUT, false).close();
         } catch (IOException e) {
             throw new RuntimeException();
         }

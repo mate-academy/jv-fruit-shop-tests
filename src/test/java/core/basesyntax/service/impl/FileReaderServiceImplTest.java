@@ -5,9 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,14 +45,5 @@ public class FileReaderServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void readFromFile_wrongPath_Ok() {
         readData.readFromFile("abcdea");
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        try {
-            new FileWriter(FILE_INPUT, false).close();
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
     }
 }

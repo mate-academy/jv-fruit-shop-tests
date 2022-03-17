@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.*;
 import core.basesyntax.exceptions.IncorrectOperationException;
 import core.basesyntax.exceptions.WrongNameException;
 import core.basesyntax.exceptions.WrongQuantityException;
@@ -7,9 +8,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.impl.ParserServiceImpl;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 public class ParserServiceTest {
     private static ParserService parserService;
@@ -18,6 +17,11 @@ public class ParserServiceTest {
     @BeforeClass
     public static void beforeClass() {
         parserService = new ParserServiceImpl();
+    }
+
+    @Before
+    public void setUp() {
+        FruitStorage.fruits.clear();
     }
 
     @Test(expected = NullPointerException.class)

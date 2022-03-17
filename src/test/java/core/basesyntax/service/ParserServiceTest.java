@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.*;
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.exceptions.IncorrectOperationException;
 import core.basesyntax.exceptions.WrongNameException;
 import core.basesyntax.exceptions.WrongQuantityException;
@@ -8,7 +8,10 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.impl.ParserServiceImpl;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ParserServiceTest {
     private static ParserService parserService;

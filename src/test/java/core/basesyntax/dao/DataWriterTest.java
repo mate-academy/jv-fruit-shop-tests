@@ -16,7 +16,7 @@ public class DataWriterTest {
     private String dataOutput;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         dataWriter = new FruitFileWriter();
     }
 
@@ -29,7 +29,7 @@ public class DataWriterTest {
     @Test(expected = RuntimeException.class)
     public void writeIn_FileWithWrongDirectory_NotOk() {
         dataOutput = "Some data output";
-        dataWriter.writeData(dataOutput, "src\\main\\files\\result.csv");
+        dataWriter.writeData(dataOutput, ".");
     }
 
     @Test

@@ -23,20 +23,20 @@ public class DataReaderTest {
     @Test(expected = InvalidLineException.class)
     public void read_FileWithEmptyLine_NotOk() {
         dataReader = new FruitFileReader(
-                "src\\main\\resources\\test_with_empty_line.csv");
+                ".");
         dataReader.readDataLines();
     }
 
     @Test(expected = InvalidLineException.class)
     public void read_FileWithWrongTransactionElements_NotOk() {
         dataReader = new FruitFileReader(
-                "src\\main\\resources\\test_with_wrong_transaction_elements.csv");
+                ".");
         dataReader.readDataLines();
     }
 
     @Test
     public void read_BasicFile_Ok() {
-        dataReader = new FruitFileReader("src\\main\\resources\\test.csv");
+        dataReader = new FruitFileReader(".");
         List<String> transactionList = dataReader.readDataLines();
         int expectedTransactionListSize = 8;
         Assert.assertEquals(expectedTransactionListSize, transactionList.size());

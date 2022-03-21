@@ -43,66 +43,40 @@ public class ParserServiceTest {
         parserService.parseToTransaction(transactionLine);
     }
 
-    @Test
-    public void parse_LineWithInvalidQuantity_NotOk() {
-        int expectedExceptionNumber = 3;
-        int exceptionNumber = 0;
-        try {
-            transactionLine = "b,apple,pear";
-            parserService.parseToTransaction(transactionLine);
-        } catch (NumberFormatException e) {
-            exceptionNumber++;
-            try {
-                transactionLine = "b,apple,0";
-                parserService.parseToTransaction(transactionLine);
-            } catch (WrongQuantityException ex) {
-                exceptionNumber++;
-                try {
-                    transactionLine = "b,apple,-4";
-                    parserService.parseToTransaction(transactionLine);
-                } catch (WrongQuantityException exc) {
-                    exceptionNumber++;
-                    try {
-                        transactionLine = "b,apple,14";
-                        parserService.parseToTransaction(transactionLine);
-                    } catch (WrongQuantityException exception) {
-                        exceptionNumber++;
-                    }
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = NumberFormatException.class)
+    public void parse_LineWithWordInsteadOfQuantity_NotOk() {
+        transactionLine = "b,apple,pear";
+        parserService.parseToTransaction(transactionLine);
     }
 
-    @Test
-    public void parse_LineWithInvalidFruitName_NotOk() {
-        int expectedExceptionNumber = 3;
-        int exceptionNumber = 0;
-        try {
-            transactionLine = "b,apple_pie,14";
-            parserService.parseToTransaction(transactionLine);
-        } catch (WrongNameException e) {
-            exceptionNumber++;
-            try {
-                transactionLine = "b,apple0,14";
-                parserService.parseToTransaction(transactionLine);
-            } catch (WrongNameException ex) {
-                exceptionNumber++;
-                try {
-                    transactionLine = "b,-apple,-14";
-                    parserService.parseToTransaction(transactionLine);
-                } catch (WrongNameException exc) {
-                    exceptionNumber++;
-                    try {
-                        transactionLine = "b,apple,14";
-                        parserService.parseToTransaction(transactionLine);
-                    } catch (WrongNameException exception) {
-                        exceptionNumber++;
-                    }
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = WrongQuantityException.class)
+    public void parse_LineWithZeroQuantity_NotOk() {
+        transactionLine = "b,apple,0";
+        parserService.parseToTransaction(transactionLine);
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void parse_LineWithNegativeQuantity_NotOk() {
+        transactionLine = "b,apple,-4";
+        parserService.parseToTransaction(transactionLine);
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void parse_LineWithUnderscoredName_NotOk() {
+        transactionLine = "b,apple_pie,14";
+        parserService.parseToTransaction(transactionLine);
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void parse_LineWithNameContainsNumber_NotOk() {
+        transactionLine = "b,apple0,14";
+        parserService.parseToTransaction(transactionLine);
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void parse_LineWithFirstWrongSymbolInFruitName_NotOk() {
+        transactionLine = "b,-apple,-14";
+        parserService.parseToTransaction(transactionLine);
     }
 
     @Test

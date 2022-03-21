@@ -34,58 +34,34 @@ public class PurchaseOperationTest {
         purchaseOperationHandler.doOperation(null);
     }
 
-    @Test
-    public void purchase_FruitWithWrongName_NotOk() {
-        int expectedExceptionNumber = 4;
-        int exceptionNumber = 0;
-        try {
-            purchaseOperationHandler.doOperation(new Fruit(null, 14));
-        } catch (NullPointerException e) {
-            exceptionNumber++;
-            try {
-                purchaseOperationHandler.doOperation(new Fruit("apple_pie", 14));
-            } catch (WrongNameException ex) {
-                exceptionNumber++;
-                try {
-                    purchaseOperationHandler.doOperation(new Fruit("apple0", 14));
-                } catch (WrongNameException exc) {
-                    exceptionNumber++;
-                    try {
-                        purchaseOperationHandler.doOperation(new Fruit("-apple", 14));
-                    } catch (WrongNameException exception) {
-                        exceptionNumber++;
-                        try {
-                            purchaseOperationHandler.doOperation(new Fruit("apple", 14));
-                        } catch (WrongNameException notException) {
-                            exceptionNumber++;
-                        }
-                    }
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = NullPointerException.class)
+    public void purchase_FruitWithNullName_NotOk() {
+        purchaseOperationHandler.doOperation(new Fruit(null, 14));
     }
 
-    @Test
-    public void purchase_FruitWithWrongQuantity_NotOk() {
-        int expectedExceptionNumber = 2;
-        int exceptionNumber = 0;
-        try {
-            purchaseOperationHandler.doOperation(new Fruit("apple", -7));
-        } catch (WrongQuantityException e) {
-            exceptionNumber++;
-            try {
-                purchaseOperationHandler.doOperation(new Fruit("apple", 0));
-            } catch (WrongQuantityException ex) {
-                exceptionNumber++;
-                try {
-                    purchaseOperationHandler.doOperation(new Fruit("apple", 14));
-                } catch (WrongQuantityException exception) {
-                    exceptionNumber++;
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = WrongNameException.class)
+    public void purchase_LineWithUnderscoredName_NotOk() {
+        purchaseOperationHandler.doOperation(new Fruit("apple_pie", 14));
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void purchase_LineWithNameContainsNumber_NotOk() {
+        purchaseOperationHandler.doOperation(new Fruit("apple0", 14));
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void purchase_LineWithFirstWrongSymbolInFruitName_NotOk() {
+        purchaseOperationHandler.doOperation(new Fruit("-apple", 14));
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void purchase_LineWithNegativeQuantity_NotOk() {
+        purchaseOperationHandler.doOperation(new Fruit("apple", -7));
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void purchase_LineWithZeroQuantity_NotOk() {
+        purchaseOperationHandler.doOperation(new Fruit("apple", 0));
     }
 
     @Test

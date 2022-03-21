@@ -22,8 +22,8 @@ public class Main {
     private static final String WRITE_FILE_NAME = "src\\main\\resources\\result.csv";
 
     public static void main(String[] args) {
-        DataReader fruitReader = new FruitFileReader(READ_FILE_NAME);
-        List<String> activityList = fruitReader.readDataLines();
+        DataReader fruitReader = new FruitFileReader();
+        List<String> activityList = fruitReader.readData(READ_FILE_NAME);
         ParserService parserService = new ParserServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(
                 new OperationHandlerProvider().getOperationHandlers());

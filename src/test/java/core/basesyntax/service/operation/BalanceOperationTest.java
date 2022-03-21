@@ -30,58 +30,34 @@ public class BalanceOperationTest {
         balanceOperationHandler.doOperation(null);
     }
 
-    @Test
-    public void balance_FruitWithWrongName_NotOk() {
-        int expectedExceptionNumber = 4;
-        int exceptionNumber = 0;
-        try {
-            balanceOperationHandler.doOperation(new Fruit(null, 14));
-        } catch (NullPointerException e) {
-            exceptionNumber++;
-            try {
-                balanceOperationHandler.doOperation(new Fruit("apple_pie", 14));
-            } catch (WrongNameException ex) {
-                exceptionNumber++;
-                try {
-                    balanceOperationHandler.doOperation(new Fruit("apple0", 14));
-                } catch (WrongNameException exc) {
-                    exceptionNumber++;
-                    try {
-                        balanceOperationHandler.doOperation(new Fruit("-apple", 14));
-                    } catch (WrongNameException exception) {
-                        exceptionNumber++;
-                        try {
-                            balanceOperationHandler.doOperation(new Fruit("apple", 14));
-                        } catch (WrongNameException notException) {
-                            exceptionNumber++;
-                        }
-                    }
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = NullPointerException.class)
+    public void balance_FruitWithNullName_NotOk() {
+        balanceOperationHandler.doOperation(new Fruit(null, 14));
     }
 
-    @Test
-    public void balance_FruitWithWrongQuantity_NotOk() {
-        int expectedExceptionNumber = 2;
-        int exceptionNumber = 0;
-        try {
-            balanceOperationHandler.doOperation(new Fruit("apple", -7));
-        } catch (WrongQuantityException e) {
-            exceptionNumber++;
-            try {
-                balanceOperationHandler.doOperation(new Fruit("apple", 0));
-            } catch (WrongQuantityException ex) {
-                exceptionNumber++;
-                try {
-                    balanceOperationHandler.doOperation(new Fruit("apple", 14));
-                } catch (WrongQuantityException exception) {
-                    exceptionNumber++;
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = WrongNameException.class)
+    public void balance_LineWithUnderscoredName_NotOk() {
+        balanceOperationHandler.doOperation(new Fruit("apple_pie", 14));
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void balance_LineWithNameContainsNumber_NotOk() {
+        balanceOperationHandler.doOperation(new Fruit("apple0", 14));
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void balance_LineWithFirstWrongSymbolInFruitName_NotOk() {
+        balanceOperationHandler.doOperation(new Fruit("-apple", 14));
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void balance_LineWithNegativeQuantity_NotOk() {
+        balanceOperationHandler.doOperation(new Fruit("apple", -7));
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void balance_LineWithZeroQuantity_NotOk() {
+        balanceOperationHandler.doOperation(new Fruit("apple", 0));
     }
 
     @Test

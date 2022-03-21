@@ -39,7 +39,7 @@ public class DataWriterTest {
         FruitStorage.fruits.add(new Fruit("banana", 11));
         FruitStorage.fruits.add(new Fruit("pear", 16));
 
-        dataOutput = testOutput();
+        dataOutput = testStorageInfoOutput();
         String filePath = "src\\main\\resources\\result.csv";
         dataWriter.writeData(dataOutput, filePath);
 
@@ -49,11 +49,11 @@ public class DataWriterTest {
             Assert.assertEquals(bufferedReader.readLine(), "banana,11");
             Assert.assertEquals(bufferedReader.readLine(), "pear,16");
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Can't read file " + filePath);
         }
     }
 
-    private String testOutput() {
+    private String testStorageInfoOutput() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator());
         stringBuilder.append("apple,14").append(System.lineSeparator());

@@ -33,58 +33,34 @@ public class ReturnOperationTest {
         returnOperationHandler.doOperation(null);
     }
 
-    @Test
-    public void return_FruitWithWrongName_NotOk() {
-        int expectedExceptionNumber = 4;
-        int exceptionNumber = 0;
-        try {
-            returnOperationHandler.doOperation(new Fruit(null, 14));
-        } catch (NullPointerException e) {
-            exceptionNumber++;
-            try {
-                returnOperationHandler.doOperation(new Fruit("apple_pie", 14));
-            } catch (WrongNameException ex) {
-                exceptionNumber++;
-                try {
-                    returnOperationHandler.doOperation(new Fruit("apple0", 14));
-                } catch (WrongNameException exc) {
-                    exceptionNumber++;
-                    try {
-                        returnOperationHandler.doOperation(new Fruit("-apple", 14));
-                    } catch (WrongNameException exception) {
-                        exceptionNumber++;
-                        try {
-                            returnOperationHandler.doOperation(new Fruit("apple", 14));
-                        } catch (WrongNameException notException) {
-                            exceptionNumber++;
-                        }
-                    }
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = NullPointerException.class)
+    public void return_FruitWithNullName_NotOk() {
+        returnOperationHandler.doOperation(new Fruit(null, 14));
     }
 
-    @Test
-    public void return_FruitWithWrongQuantity_NotOk() {
-        int expectedExceptionNumber = 2;
-        int exceptionNumber = 0;
-        try {
-            returnOperationHandler.doOperation(new Fruit("apple", -7));
-        } catch (WrongQuantityException e) {
-            exceptionNumber++;
-            try {
-                returnOperationHandler.doOperation(new Fruit("apple", 0));
-            } catch (WrongQuantityException ex) {
-                exceptionNumber++;
-                try {
-                    returnOperationHandler.doOperation(new Fruit("apple", 14));
-                } catch (WrongQuantityException exception) {
-                    exceptionNumber++;
-                }
-            }
-        }
-        Assert.assertEquals(expectedExceptionNumber, exceptionNumber);
+    @Test(expected = WrongNameException.class)
+    public void return_LineWithUnderscoredName_NotOk() {
+        returnOperationHandler.doOperation(new Fruit("apple_pie", 14));
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void return_LineWithNameContainsNumber_NotOk() {
+        returnOperationHandler.doOperation(new Fruit("apple0", 14));
+    }
+
+    @Test(expected = WrongNameException.class)
+    public void return_LineWithFirstWrongSymbolInFruitName_NotOk() {
+        returnOperationHandler.doOperation(new Fruit("-apple", 14));
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void return_LineWithNegativeQuantity_NotOk() {
+        returnOperationHandler.doOperation(new Fruit("apple", -7));
+    }
+
+    @Test(expected = WrongQuantityException.class)
+    public void return_LineWithZeroQuantity_NotOk() {
+        returnOperationHandler.doOperation(new Fruit("apple", 0));
     }
 
     @Test

@@ -1,6 +1,9 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.exceptions.NullFileNameException;
+import java.io.File;
+import java.util.List;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,14 +25,12 @@ public class DataReaderTest {
         dataReader.readData("src\\main\\resources\\tasty.csv");
     }
 
-    // This test can be built during mvn clean package,
-    // but it doesn't pass through GitHub tests, and I don't know why
-    /*
     @Test
     public void read_BasicFile_Ok() {
-        List<String> transactionList = dataReader.readData("src\\main\\resources\\test.csv");
+        String[] pathToFileElements = {"src", "main", "resources", "test.csv"};
+        String pathToFile = String.join(File.separator, pathToFileElements);
+        List<String> transactionList = dataReader.readData(pathToFile);
         int expectedTransactionListSize = 8;
         Assert.assertEquals(expectedTransactionListSize, transactionList.size());
     }
-     */
 }

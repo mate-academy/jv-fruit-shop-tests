@@ -54,7 +54,7 @@ public class WriterImplTest {
             exception = e;
         }
         Assert.assertEquals(
-                String.format("For an invalid file path %s should be thrown, but was %s\n",
+                String.format("For an invalid file path %s should've been thrown, but was %s\n",
                         RuntimeException.class, exception.getClass()),
                 RuntimeException.class, exception.getClass());
     }

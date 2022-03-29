@@ -8,7 +8,6 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport(List<FruitTransaction> fruitTransactions) {
-
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER)
                 .append(System.lineSeparator());

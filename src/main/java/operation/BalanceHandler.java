@@ -6,7 +6,7 @@ import model.FruitTransaction;
 
 public class BalanceHandler implements OperationHandler {
     @Override
-    public OperationHandler handle(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         if (fruitShopDao.getValue(fruitTransaction) == null) {
             fruitShopDao.save(fruitTransaction);
@@ -14,6 +14,5 @@ public class BalanceHandler implements OperationHandler {
         fruitTransaction.setQuantity(fruitShopDao.getValue(fruitTransaction)
                 + fruitTransaction.getQuantity());
         fruitShopDao.save(fruitTransaction);
-        return null;
     }
 }

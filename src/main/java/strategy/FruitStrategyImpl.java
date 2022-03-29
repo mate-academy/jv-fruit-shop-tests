@@ -13,8 +13,8 @@ public class FruitStrategyImpl implements FruitStrategy {
     }
 
     @Override
-    public OperationHandler proceed(FruitTransaction fruitTransaction) {
-        return operationOperationHandlerMap.get(
+    public void proceed(FruitTransaction fruitTransaction) {
+        operationOperationHandlerMap.get(
                 fruitTransaction.getOperation()).handle(fruitTransaction);
     }
 }

@@ -16,10 +16,6 @@ public class FruitStrategyImplTest {
     private static Map<FruitTransaction.Operation, OperationHandler> operationHashMap;
     private static FruitStrategyImpl fruitStrategy;
     private static FruitTransaction fruitTransaction;
-    private static OperationHandler balanceOperation;
-    private static OperationHandler purchaseOperation;
-    private static OperationHandler returnOperation;
-    private static OperationHandler supplyOperation;
 
     @Before
     public void before() throws Exception {
@@ -34,37 +30,37 @@ public class FruitStrategyImplTest {
 
     @Test
     public void handleBalance_Ok() {
-        balanceOperation = new BalanceHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        OperationHandler actual = fruitStrategy.proceed(fruitTransaction);
-        OperationHandler expected = balanceOperation.handle(fruitTransaction);
+        fruitStrategy.proceed(fruitTransaction);
+        FruitTransaction.Operation actual = fruitTransaction.getOperation();
+        FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void handlePurchase_Ok() {
-        purchaseOperation = new PurchaseHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        OperationHandler actual = fruitStrategy.proceed(fruitTransaction);
-        OperationHandler expected = purchaseOperation.handle(fruitTransaction);
-        Assert.assertEquals(expected,actual);
+        fruitStrategy.proceed(fruitTransaction);
+        FruitTransaction.Operation actual = fruitTransaction.getOperation();
+        FruitTransaction.Operation expected = FruitTransaction.Operation.PURCHASE;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void handleReturn_Ok() {
-        returnOperation = new ReturnHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        OperationHandler actual = fruitStrategy.proceed(fruitTransaction);
-        OperationHandler expected = returnOperation.handle(fruitTransaction);
-        Assert.assertEquals(expected,actual);
+        fruitStrategy.proceed(fruitTransaction);
+        FruitTransaction.Operation actual = fruitTransaction.getOperation();
+        FruitTransaction.Operation expected = FruitTransaction.Operation.RETURN;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void handleSupply_Ok() {
-        supplyOperation = new SupplyHandler();
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        OperationHandler actual = fruitStrategy.proceed(fruitTransaction);
-        OperationHandler expected = supplyOperation.handle(fruitTransaction);
-        Assert.assertEquals(expected,actual);
+        fruitStrategy.proceed(fruitTransaction);
+        FruitTransaction.Operation actual = fruitTransaction.getOperation();
+        FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
+        Assert.assertEquals(expected, actual);
     }
 }

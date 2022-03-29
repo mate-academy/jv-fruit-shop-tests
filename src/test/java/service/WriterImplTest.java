@@ -30,7 +30,7 @@ public class WriterImplTest {
     }
 
     @Test
-    public void writeValidData_OK() {
+    public void writeValidData_Ok() {
         String data = builder.toString();
         writer.write(data, OUTPUT_FILE);
         String actualResult = new String();

@@ -10,13 +10,11 @@ public class ReaderImpl implements Reader {
     @Override
     public List<String> read(String fileName) {
         List<String> lines;
-        List<String> stringList;
         try {
             lines = Files.readAllLines(Path.of(fileName));
-            stringList = lines.stream().skip(1).collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file." + fileName);
         }
-        return stringList;
+        return lines.stream().skip(1).collect(Collectors.toList());
     }
 }

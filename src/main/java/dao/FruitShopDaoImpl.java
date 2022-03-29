@@ -19,13 +19,13 @@ public class FruitShopDaoImpl implements FruitShopDao {
 
     @Override
     public List<FruitTransaction> getAll() {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        List<FruitTransaction> transactions = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setFruit(entry.getKey());
             fruitTransaction.setQuantity(entry.getValue());
-            fruitTransactionList.add(fruitTransaction);
+            transactions.add(fruitTransaction);
         }
-        return fruitTransactionList;
+        return transactions;
     }
 }

@@ -44,18 +44,9 @@ public class WriterImplTest {
         Assert.assertEquals(expectedResult, actualResult);
     }
 
-    @Test
-    public void invalidFilePath_NotOK() {
+    @Test(expected = RuntimeException.class)
+    public void invalidFilePath_NotOk() {
         String data = builder.toString();
-        Exception exception = new Exception();
-        try {
-            writer.write(data, INVALID_PATH);
-        } catch (Exception e) {
-            exception = e;
-        }
-        Assert.assertEquals(
-                String.format("For an invalid file path %s should've been thrown, but was %s\n",
-                        RuntimeException.class, exception.getClass()),
-                RuntimeException.class, exception.getClass());
+        writer.write(data, INVALID_PATH);
     }
 }

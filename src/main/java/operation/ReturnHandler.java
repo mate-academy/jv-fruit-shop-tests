@@ -4,9 +4,9 @@ import dao.FruitShopDao;
 import dao.FruitShopDaoImpl;
 import model.FruitTransaction;
 
-public class ReturnHandler implements Operation {
+public class ReturnHandler implements OperationHandler {
     @Override
-    public Operation proceed(FruitTransaction fruitTransaction) {
+    public OperationHandler handle(FruitTransaction fruitTransaction) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         if (fruitShopDao.getValue(fruitTransaction) == null) {
             fruitShopDao.save(fruitTransaction);

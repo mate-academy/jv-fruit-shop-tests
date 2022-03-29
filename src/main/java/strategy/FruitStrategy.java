@@ -1,8 +1,8 @@
 package strategy;
 
 import model.FruitTransaction;
-import operation.Operation;
+import operation.OperationHandler;
 
 public interface FruitStrategy {
-    Operation proceed(FruitTransaction fruitTransaction);
+    OperationHandler proceed(FruitTransaction fruitTransaction);
 }

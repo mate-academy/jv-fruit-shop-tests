@@ -26,8 +26,8 @@ public class SupplyHandlerTest {
         secondFruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         secondFruitTransaction.setFruit("banana");
         secondFruitTransaction.setQuantity(10);
-        Operation actual = supplyHandler.proceed(fruitTransaction);
-        Operation expected = supplyHandler.proceed(secondFruitTransaction);
+        OperationHandler actual = supplyHandler.handle(fruitTransaction);
+        OperationHandler expected = supplyHandler.handle(secondFruitTransaction);
         Assert.assertEquals(expected, actual);
     }
 

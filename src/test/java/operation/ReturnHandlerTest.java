@@ -30,8 +30,8 @@ public class ReturnHandlerTest {
         secondFruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         secondFruitTransaction.setFruit("banana");
         secondFruitTransaction.setQuantity(3);
-        Operation actual = returnHandler.proceed(fruitTransaction);
-        Operation expected = returnHandler.proceed(secondFruitTransaction);
+        OperationHandler actual = returnHandler.handle(fruitTransaction);
+        OperationHandler expected = returnHandler.handle(secondFruitTransaction);
         Assert.assertEquals(expected, actual);
     }
 

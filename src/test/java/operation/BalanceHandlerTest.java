@@ -26,8 +26,8 @@ public class BalanceHandlerTest {
         secondFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         secondFruitTransaction.setFruit("banana");
         secondFruitTransaction.setQuantity(30);
-        Operation actual = balanceHandler.proceed(fruitTransaction);
-        Operation expected = balanceHandler.proceed(secondFruitTransaction);
+        OperationHandler actual = balanceHandler.handle(fruitTransaction);
+        OperationHandler expected = balanceHandler.handle(secondFruitTransaction);
         Assert.assertEquals(expected, actual);
     }
 

@@ -21,7 +21,7 @@ public class ReaderImplTest {
     }
 
     @Test
-    public void readFromTestFile_OK() {
+    public void readFromFile_OK() {
         result.add("b,banana,20");
         result.add("b,apple,100");
         result.add("s,banana,100");

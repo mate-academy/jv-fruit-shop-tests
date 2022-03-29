@@ -20,7 +20,7 @@ public class FruitParserImpl implements FruitParser {
                     || split[2].isEmpty()) {
                 throw new NullPointerException("This line cannot be empty");
             }
-            fruitTransaction.setOperation(FruitTransaction.Operation.findByAbbr(split[0]));
+            fruitTransaction.setOperation(FruitTransaction.Operation.findByAbbreviation(split[0]));
             fruitTransaction.setFruit(split[1]);
             fruitTransaction.setQuantity(Integer.parseInt(split[2]));
         }

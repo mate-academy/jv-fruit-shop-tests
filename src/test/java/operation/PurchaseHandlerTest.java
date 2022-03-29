@@ -26,8 +26,8 @@ public class PurchaseHandlerTest {
         secondFruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         secondFruitTransaction.setFruit("banana");
         secondFruitTransaction.setQuantity(3);
-        Operation actual = purchaseHandler.proceed(fruitTransaction);
-        Operation expected = purchaseHandler.proceed(secondFruitTransaction);
+        OperationHandler actual = purchaseHandler.handle(fruitTransaction);
+        OperationHandler expected = purchaseHandler.handle(secondFruitTransaction);
         Assert.assertEquals(expected, actual);
     }
 

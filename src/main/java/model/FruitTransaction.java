@@ -64,9 +64,9 @@ public class FruitTransaction {
             return operation;
         }
 
-        public static Operation findByAbbr(String abbr) {
+        public static Operation findByAbbreviation(String abbreviation) {
             for (Operation o : values()) {
-                if (o.getOperation().equals(abbr)) {
+                if (o.getOperation().equals(abbreviation)) {
                     return o;
                 }
             }

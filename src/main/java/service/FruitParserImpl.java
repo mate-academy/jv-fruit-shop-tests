@@ -3,9 +3,9 @@ package service;
 import model.FruitTransaction;
 
 public class FruitParserImpl implements FruitParser {
-    public static final int OPERATION_INDEX = 0;
-    public static final int FRUIT_INDEX = 1;
-    public static final int QUANTITY_INDEX = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public FruitTransaction parseFruitTransaction(String line) {
@@ -24,9 +24,10 @@ public class FruitParserImpl implements FruitParser {
                     || split[QUANTITY_INDEX].isEmpty()) {
                 throw new NullPointerException("This line cannot be empty");
             }
-            fruitTransaction.setOperation(FruitTransaction.Operation.findByAbbreviation(split[0]));
-            fruitTransaction.setFruit(split[1]);
-            fruitTransaction.setQuantity(Integer.parseInt(split[2]));
+            fruitTransaction.setOperation(
+                    FruitTransaction.Operation.findByAbbreviation(split[OPERATION_INDEX]));
+            fruitTransaction.setFruit(split[FRUIT_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX]));
         }
         return fruitTransaction;
     }

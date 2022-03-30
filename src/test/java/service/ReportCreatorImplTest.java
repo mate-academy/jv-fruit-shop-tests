@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ReportCreatorImplTest {
     @Test
-    public void correctReport_Ok() {
+    public void createReport_Ok() {
         FruitTransaction secondFruitTransaction;
         FruitTransaction fruitTransaction = new FruitTransaction();
         secondFruitTransaction = new FruitTransaction();
@@ -16,9 +16,9 @@ public class ReportCreatorImplTest {
         fruitTransaction.setQuantity(172);
         secondFruitTransaction.setFruit("apple");
         secondFruitTransaction.setQuantity(190);
-        List<FruitTransaction> transactionList = new ArrayList<>();
-        transactionList.add(fruitTransaction);
-        transactionList.add(secondFruitTransaction);
+        List<FruitTransaction> transactions = new ArrayList<>();
+        transactions.add(fruitTransaction);
+        transactions.add(secondFruitTransaction);
         StringBuilder builder = new StringBuilder();
         builder.append("fruit,quantity");
         builder.append(System.lineSeparator());
@@ -28,7 +28,7 @@ public class ReportCreatorImplTest {
         builder.append(System.lineSeparator());
         String expected = builder.toString();
         ReportCreator reportCreator = new ReportCreatorImpl();
-        String actual = reportCreator.createReport(transactionList);
+        String actual = reportCreator.createReport(transactions);
         Assert.assertEquals(expected, actual);
     }
 }

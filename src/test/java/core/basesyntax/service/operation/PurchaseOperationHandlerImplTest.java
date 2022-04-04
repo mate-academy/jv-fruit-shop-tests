@@ -15,12 +15,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerImplTest {
-    private static final StorageDao fruitStorageDao = new StorageDaoImpl();
+    private static StorageDao fruitStorageDao;
     private static OperationHandler purchaseOperationHandler;
     private static Map<Fruit, Integer> storage;
 
     @BeforeClass
     public static void beforeClass() {
+        fruitStorageDao = new StorageDaoImpl();
         purchaseOperationHandler = new PurchaseOperationHandlerImpl(fruitStorageDao);
         storage = Storage.storage;
     }

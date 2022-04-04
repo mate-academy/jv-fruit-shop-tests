@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.service.impl.ValidatorImpl;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -22,19 +24,19 @@ public class ValidatorTest {
                 "s,banana,100",
                 "p,banana,13",
                 "r,apple,10");
-        validator.validate(data);
+        assertTrue(validator.validate(data));
     }
 
     @Test
     public void validator_onlyFirstLine_Ok() {
         data = List.of("type,fruit,quantity");
-        validator.validate(data);
+        assertTrue(validator.validate(data));
     }
 
     @Test
     public void validator_validPattern_Ok() {
         data = List.of("type,fruit,quantity", "r,cream,80");
-        validator.validate(data);
+        assertTrue(validator.validate(data));
     }
 
     @Test (expected = NullPointerException.class)

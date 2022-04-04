@@ -14,12 +14,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationHandlerImplTest {
-    private static final StorageDao fruitStorageDao = new StorageDaoImpl();
+    private static StorageDao fruitStorageDao;
     private static OperationHandler addOperationHandler;
     private static Map<Fruit, Integer> storage;
 
     @BeforeClass
     public static void beforeClass() {
+        fruitStorageDao = new StorageDaoImpl();
         addOperationHandler = new AddOperationHandlerImpl(fruitStorageDao);
         storage = Storage.storage;
     }

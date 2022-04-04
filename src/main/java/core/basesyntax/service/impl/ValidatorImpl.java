@@ -9,7 +9,7 @@ public class ValidatorImpl implements Validator {
     private static final String DATA_PATTERN = "[bprs],[a-z]*,[0-9]*";
 
     @Override
-    public void validate(List<String> data) {
+    public boolean validate(List<String> data) {
         if (data.isEmpty()) {
             throw new RuntimeException("Input file is empty");
         }
@@ -18,5 +18,6 @@ public class ValidatorImpl implements Validator {
                 throw new RuntimeException("Invalid input data");
             }
         }
+        return true;
     }
 }

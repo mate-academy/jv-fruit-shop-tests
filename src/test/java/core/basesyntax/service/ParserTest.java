@@ -12,7 +12,6 @@ import org.junit.Test;
 
 public class ParserTest {
     private static Parser<FruitTransaction> parser;
-    private static List<String> data;
 
     @BeforeClass
     public static void beforeClass() {
@@ -21,7 +20,7 @@ public class ParserTest {
 
     @Test
     public void parse_validOutput_Ok() {
-        data = List.of("type,fruit,quantity",
+        List<String> data = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100");
         List<FruitTransaction> expected = new ArrayList<>();

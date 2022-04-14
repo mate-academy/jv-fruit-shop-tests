@@ -2,6 +2,8 @@ package core.basesyntax.service;
 
 import core.basesyntax.cvswork.FileReader;
 import core.basesyntax.cvswork.FileReaderImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
@@ -19,30 +21,32 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ManipulationServiceImplTest {
-    private static ManipulationService manipulationService;
+public class FruitTransactionServiceImplTest {
+    private static FruitTransactionService fruitTransactionService;
     private static List<FruitTransaction> transactionList;
     private static List<FruitTransaction> emptyFile;
     private static List<FruitTransaction> withoutName;
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         TransactionStrategy strategy = new TransactionStrategyImpl(operationHandlerMap);
-        manipulationService = new ManipulationServiceImpl(strategy);
+        fruitTransactionService = new FruitTransactionServiceImpl(strategy, fruitDao);
     }
 
     @Before
     public void setUp() {
         FileReader read = new FileReaderImpl();
-        LineSeparator lineSeparator = new LineSeparatorImpl();
-        emptyFile = lineSeparator.separator(
+        FruitTransactionParser lineSeparator = new FruitTransactionParserImpl();
+        emptyFile = lineSeparator.parse(
                 read.read("src/test/java/core/basesyntax/resourse/emptyLine.cvs"));
-        withoutName = lineSeparator.separator(
+        withoutName = lineSeparator.parse(
                 read.read("src/test/java/core/basesyntax/resourse/withoutName.cvs"));
         Storage.fruits.clear();
         transactionList = new ArrayList<>();
@@ -70,7 +74,7 @@ public class ManipulationServiceImplTest {
         expectedData.add(new Fruit(90, "cherry"));
         expectedData.add(new Fruit(152, "guava"));
         List<Fruit> actualData = Storage.fruits;
-        manipulationService.manipulation(transactionList);
+        fruitTransactionService.process(transactionList);
         Assert.assertEquals(expectedData.toString(), actualData.toString());
     }
 
@@ -80,7 +84,7 @@ public class ManipulationServiceImplTest {
         expectedData.add(new Fruit(20, "guava"));
         expectedData.add(new Fruit(100, "cherry"));
         List<Fruit> actualData = Storage.fruits;
-        manipulationService.manipulation(withoutName);
+        fruitTransactionService.process(withoutName);
         Assert.assertEquals(expectedData.toString(), actualData.toString());
     }
 
@@ -88,7 +92,7 @@ public class ManipulationServiceImplTest {
     public void manipulationData_withEmptyList() {
         List<Fruit> expectedData = new ArrayList<>();
         List<Fruit> actualData = Storage.fruits;
-        manipulationService.manipulation(emptyFile);
+        fruitTransactionService.process(emptyFile);
         Assert.assertEquals(expectedData.toString(), actualData.toString());
     }
 }

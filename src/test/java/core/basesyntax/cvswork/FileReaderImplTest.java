@@ -1,7 +1,7 @@
 package core.basesyntax.cvswork;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ManipulationService;
+import core.basesyntax.service.FruitTransactionService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private List<Fruit> fruits = new ArrayList();
-    private ManipulationService manipulation;
+    private FruitTransactionService manipulation;
     private List<String> fruitTransactions = new ArrayList();
     private List<String> emptyFile = new ArrayList();
     private List<String> transactions = new ArrayList();

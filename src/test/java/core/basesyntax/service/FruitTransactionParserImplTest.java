@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LineSeparatorImplTest {
+public class FruitTransactionParserImplTest {
     private List<FruitTransaction> fruitTransactions = new ArrayList();
     private List<FruitTransaction> emptyFile = new ArrayList();
     private List<FruitTransaction> transactions = new ArrayList();
@@ -17,12 +17,12 @@ public class LineSeparatorImplTest {
     @Before
     public void setUp() {
         FileReader read = new FileReaderImpl();
-        LineSeparator lineSeparator = new LineSeparatorImpl();
-        transactions = lineSeparator.separator(
+        FruitTransactionParser lineSeparator = new FruitTransactionParserImpl();
+        transactions = lineSeparator.parse(
                 read.read("src/test/java/core/basesyntax/resourse/withoutName.cvs"));
-        emptyFile = lineSeparator.separator(
+        emptyFile = lineSeparator.parse(
                 read.read("src/test/java/core/basesyntax/resourse/emptyLine.cvs"));
-        fruitTransactions = lineSeparator.separator(
+        fruitTransactions = lineSeparator.parse(
                 read.read("src/test/java/core/basesyntax/resourse/normalFile.cvs"));
     }
 

@@ -1,27 +1,28 @@
 package core.basesyntax.cvswork;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import org.junit.Before;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileWrittenImplTest {
     private static FileWriter writer;
 
     @BeforeAll
-    public static void init() {
+    static void beforeAll() {
         writer = new FileWrittenImpl();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Storage.fruits.clear();
     }
 
     @Test
-    public void is_valid_ok() {
-        init();
+    public void write_emptyFile_ok() {
         Fruit guavaFruit = new Fruit(110, "guava");
         Fruit bananaFruit = new Fruit(440, "banana");
         Fruit appleFruit = new Fruit(170, "apple");
@@ -33,13 +34,8 @@ public class FileWrittenImplTest {
         writer.write("src/test/java/core/basesyntax/resourse/FileWritten.cvs");
     }
 
-    @Test(expected = RuntimeException.class)
-    public void is_incorrect_Path_NotOk() {
-        writer.write("FileFailed.cvs");
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void is_EmptyList_ok() {
-        writer.write("FileFailed.cvs");
+    @Test
+    public void write_nonExistentFile_notOk() {
+        assertThrows(RuntimeException.class, () -> writer.write("FileFailed.cvs"));
     }
 }

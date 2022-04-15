@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.cvswork.FileReader;
 import core.basesyntax.cvswork.FileReaderImpl;
 import core.basesyntax.dao.FruitDao;
@@ -16,10 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FruitTransactionServiceImplTest {
     private static FruitTransactionService fruitTransactionService;
@@ -30,8 +31,10 @@ public class FruitTransactionServiceImplTest {
     private static FileReader read;
     private static FruitTransactionParser lineSeparator;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @BeforeAll
+    public static void beforeAll() {
+        read = new FileReaderImpl();
+        lineSeparator = new FruitTransactionParserImpl();
         fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -44,10 +47,8 @@ public class FruitTransactionServiceImplTest {
         lineSeparator = new FruitTransactionParserImpl();
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        FileReader read = new FileReaderImpl();
-        FruitTransactionParser lineSeparator = new FruitTransactionParserImpl();
         emptyFile = lineSeparator.parse(
                 read.read("src/test/java/core/basesyntax/resourse/emptyLine.cvs"));
         withoutName = lineSeparator.parse(
@@ -79,7 +80,7 @@ public class FruitTransactionServiceImplTest {
         expectedData.add(new Fruit(152, "guava"));
         List<Fruit> actualData = Storage.fruits;
         fruitTransactionService.process(transactionList);
-        Assert.assertEquals(expectedData.toString(), actualData.toString());
+        assertEquals(expectedData.toString(), actualData.toString());
     }
 
     @Test
@@ -89,7 +90,7 @@ public class FruitTransactionServiceImplTest {
         expectedData.add(new Fruit(100, "cherry"));
         List<Fruit> actualData = Storage.fruits;
         fruitTransactionService.process(withoutName);
-        Assert.assertEquals(expectedData.toString(), actualData.toString());
+        assertEquals(expectedData.toString(), actualData.toString());
     }
 
     @Test
@@ -97,6 +98,6 @@ public class FruitTransactionServiceImplTest {
         List<Fruit> expectedData = new ArrayList<>();
         List<Fruit> actualData = Storage.fruits;
         fruitTransactionService.process(emptyFile);
-        Assert.assertEquals(expectedData.toString(), actualData.toString());
+        assertEquals(expectedData.toString(), actualData.toString());
     }
 }

@@ -1,45 +1,39 @@
 package core.basesyntax.cvswork;
 
-import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitTransactionService;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 public class FileReaderImplTest {
-    private List<Fruit> fruits = new ArrayList();
-    private FruitTransactionService manipulation;
-    private List<String> fruitTransactions = new ArrayList();
-    private List<String> emptyFile = new ArrayList();
-    private List<String> transactions = new ArrayList();
+    private static FileReader read;
 
-    @Before
-    public void setUp() {
-        FileReader read = new FileReaderImpl();
-        transactions = read.read("src/test/java/core/basesyntax/resourse/withoutName.cvs");
-        emptyFile = read.read("src/test/java/core/basesyntax/resourse/emptyLine.cvs");
-        fruitTransactions = read.read("src/test/java/core/basesyntax/resourse/normalFile.cvs");
-
+    @BeforeAll
+    public static void init() {
+        read = new FileReaderImpl();
     }
 
     @Test
-    public void is_valid_null_List() {
+    public void is_valid_null_List_ok() {
+        init();
         int expected = 0;
+        List<String> emptyFile =
+                read.read("src/test/java/core/basesyntax/resourse/emptyLine.cvs");
         int actual = emptyFile.size();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void is_valid() {
+    public void is_valid_ok() {
+        List<String> fruitTransactions =
+                read.read("src/test/java/core/basesyntax/resourse/normalFile.cvs");
         int expected = 15;
         int actual = fruitTransactions.size();
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void is_incorrect_Path() {
-        transactions = new FileReaderImpl().read("Incorrect.cvsPath");
+    public void is_incorrect_Path_NotOk() {
+        List<String> transactions = read.read("Incorrect.cvsPath");
     }
 }

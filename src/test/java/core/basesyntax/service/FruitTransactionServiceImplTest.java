@@ -27,6 +27,8 @@ public class FruitTransactionServiceImplTest {
     private static List<FruitTransaction> emptyFile;
     private static List<FruitTransaction> withoutName;
     private static FruitDao fruitDao;
+    private static FileReader read;
+    private static FruitTransactionParser lineSeparator;
 
     @BeforeClass
     public static void beforeClass() {
@@ -38,6 +40,8 @@ public class FruitTransactionServiceImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         TransactionStrategy strategy = new TransactionStrategyImpl(operationHandlerMap);
         fruitTransactionService = new FruitTransactionServiceImpl(strategy, fruitDao);
+        read = new FileReaderImpl();
+        lineSeparator = new FruitTransactionParserImpl();
     }
 
     @Before
@@ -79,7 +83,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void manipulationData_withName() {
+    public void manipulationData_withName_Ok() {
         List<Fruit> expectedData = new ArrayList<>();
         expectedData.add(new Fruit(20, "guava"));
         expectedData.add(new Fruit(100, "cherry"));
@@ -89,7 +93,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void manipulationData_withEmptyList() {
+    public void manipulationData_withEmptyList_Ok() {
         List<Fruit> expectedData = new ArrayList<>();
         List<Fruit> actualData = Storage.fruits;
         fruitTransactionService.process(emptyFile);

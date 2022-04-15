@@ -1,21 +1,24 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.WriterServiceImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.Assert.assertTrue;
+import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class WriterServiceTest {
-    private static final String VALID_FILE = "src/test/java/core/basesyntax/resources/writer/valid_report_file.csv";
-    private static final String VALID_FILE_REFERENCE = "src/test/java/core/basesyntax/resources/writer/valid_report_file_reference.csv";
-    private static final String NON_EXISTENT_FOLDER = "src/test/this_folder_doesnt_exist/output.csv";
-    private static final String EMPTY_FILE_REFERENCE = "src/test/java/core/basesyntax/resources/writer/empty_file_reference.csv";
-    private static final long IS_IDENTICAL = -1L;
+    private static final String VALID_FILE = "src/test/java/core/basesyntax/resources/"
+                                                                  + "writer/valid_report_file.csv";
+    private static final String VALID_FILE_REFERENCE = "src/test/java/core/basesyntax/resources/"
+                                                        + "writer/valid_report_file_reference.csv";
+    private static final String NON_EXISTENT_FOLDER = "src/test/"
+                                                           + "this_folder_doesnt_exist/output.csv";
+    private static final String EMPTY_FILE_REFERENCE = "src/test/java/core/basesyntax/resources/"
+                                                               + "writer/empty_file_reference.csv";
     private static String testReport;
     private static WriterService writerService;
 
@@ -30,7 +33,9 @@ public class WriterServiceTest {
     @Test
     public void writeToFile_ValidFilePathAndReport_Ok() {
         writerService.writeToFile(VALID_FILE, testReport);
-        assertTrue(isIdenticalFiles(VALID_FILE, VALID_FILE_REFERENCE));
+        List<String> expected = readFromFile(VALID_FILE_REFERENCE);
+        List<String> actual = readFromFile(VALID_FILE);
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
@@ -56,19 +61,16 @@ public class WriterServiceTest {
     @Test
     public void writeToFile_EmptyReport_Ok() {
         writerService.writeToFile(VALID_FILE, "");
-        assertTrue(isIdenticalFiles(VALID_FILE, EMPTY_FILE_REFERENCE));
+        List<String> expected = readFromFile(EMPTY_FILE_REFERENCE);
+        List<String> actual = readFromFile(VALID_FILE);
+        assertEquals(expected, actual);
     }
 
-
-    private boolean isIdenticalFiles(String firstPath, String secondPath) {
-        long result = 0;
+    private List<String> readFromFile(String filePath) {
         try {
-            result = Files.mismatch(Path.of(firstPath), Path.of(secondPath));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Something went wrong when comparing files by path: "
-                                                            + firstPath + " and " + secondPath, e);
+            throw new RuntimeException("Can't read from file by path: " + filePath, e);
         }
-        return result == IS_IDENTICAL;
     }
 }
-

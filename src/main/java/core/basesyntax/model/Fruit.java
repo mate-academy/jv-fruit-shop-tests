@@ -13,18 +13,6 @@ public final class Fruit {
         return name;
     }
 
-    public Test test2() {
-        return new Test("hellow");
-    }
-
-    public static class Test {
-        String name;
-
-        public Test(String name) {
-            this.name = name;
-        }
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

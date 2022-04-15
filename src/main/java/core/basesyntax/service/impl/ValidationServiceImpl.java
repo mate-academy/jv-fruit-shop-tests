@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class ValidationServiceImpl implements Predicate<String> {
-    private static final String PATTERN = "^[%s],\\w+,\\d+$";
+    private static final String PATTERN = "^[%s],[a-zA-Z]+,\\d+$";
 
     @Override
     public boolean test(String line) {

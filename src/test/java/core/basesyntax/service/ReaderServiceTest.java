@@ -1,16 +1,18 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.ReaderServiceImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import java.util.Collections;
+import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 public class ReaderServiceTest {
-    private static final String VALID_FILE = "src/test/java/core/basesyntax/resources/reader/valid_data_file.csv";
-    private static final String EMPTY_FILE = "src/test/java/core/basesyntax/resources/reader/empty_file.csv";
+    private static final String VALID_FILE = "src/test/java/core/basesyntax/resources/"
+                                                                + "reader/valid_data_file.csv";
+    private static final String EMPTY_FILE = "src/test/java/core/basesyntax/resources/"
+                                                                + "reader/empty_file.csv";
     private static final String NON_EXISTENT_FILE = "src/test/this_file_doesnt_exist.csv";
     private static ReaderService readerService;
 

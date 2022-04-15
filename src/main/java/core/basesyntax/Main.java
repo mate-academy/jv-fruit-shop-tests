@@ -51,11 +51,6 @@ public class Main {
         List<FruitTransaction> transactions = parserService.parse(data);
         operationService.executeTransactions(transactions);
         String report = reportService.makeReport();
-        System.out.println(storageDao.getClass());
-//        writerService.writeToFile(REPORT_PATH, report);
-    }
-
-    public static void main(String[] args, String test) {
-
+        writerService.writeToFile(REPORT_PATH, report);
     }
 }

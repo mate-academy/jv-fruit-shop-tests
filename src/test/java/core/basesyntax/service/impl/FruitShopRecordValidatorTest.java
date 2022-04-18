@@ -2,11 +2,12 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.service.Validator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopRecordValidatorTest {
-    private static FruitShopRecordValidator validator;
+    private static Validator validator;
     private static final String VALID_STRING = "s,f,123";
     private static final String INVALID_STRING = "bspr,f,123";
 

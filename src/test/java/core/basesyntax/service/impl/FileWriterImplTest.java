@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.fail;
 
+import core.basesyntax.service.FileWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +16,7 @@ public class FileWriterImplTest {
     private static final String VALID_PATH = "src\\main\\resources\\fileWriterTestFile.csv";
     private static final String INVALID_PATH = "src/main/,resources/fileWriterTestFileOne.csv";
     private static File resultFile;
-    private static FileWriterImpl writer;
+    private static FileWriter writer;
     private static List<String> records;
 
     @BeforeClass
@@ -27,43 +27,31 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeLines_shouldWriteNormally_Ok() {
+    public void writeLines_validPath_Ok() {
         writer.writeLines(VALID_PATH, records);
-        List<String> lines = null;
-        try {
-            lines = Files.readAllLines(resultFile.toPath());
-        } catch (IOException e) {
-            fail("Cannot read the file " + VALID_PATH);
-        }
-        assertEquals("Should be the same records that was written", records, lines);
+        List<String> actual = readLines();
+        List<String> expected = records;
+        assertEquals("Should be the same records that was written", expected, actual);
     }
 
     @Test
-    public void writeLines_shouldReplaceData_Ok() {
+    public void writeLines_validPathSeveralTimes_Ok() {
         for (int i = 0; i < 10; i++) {
             writer.writeLines(VALID_PATH, records);
         }
-        List<String> lines = null;
-        try {
-            lines = Files.readAllLines(resultFile.toPath());
-        } catch (IOException e) {
-            fail("Cannot read the file " + VALID_PATH);
-        }
+        List<String> expected = records;
+        List<String> actual = readLines();
         assertEquals("Should be the same records that was written at first call",
-                records, lines);
+                expected, actual);
     }
 
     @Test
     public void writeLines_emptyList_Ok() {
         writer.writeLines(VALID_PATH, new ArrayList<>());
-        List<String> lines = null;
-        try {
-            lines = Files.readAllLines(resultFile.toPath());
-        } catch (IOException e) {
-            fail("Cannot read the file " + VALID_PATH);
-        }
+        int expected = 0;
+        int actual = readLines().size();
         assertEquals("Should have no data in destination file",
-                0, lines.size());
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -72,9 +60,17 @@ public class FileWriterImplTest {
     }
 
     @After
-    public void removeFile() {
+    public void cleanUp() {
         if (resultFile.exists()) {
             resultFile.delete();
+        }
+    }
+
+    private List<String> readLines() {
+        try {
+            return Files.readAllLines(resultFile.toPath());
+        } catch (IOException ignored) {
+            throw new RuntimeException("Cannot read the file " + VALID_PATH);
         }
     }
 }

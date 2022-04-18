@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
+import core.basesyntax.service.FileReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,12 +18,11 @@ public class FileReaderImplTest {
     private static final String NOT_EXISTED_FILE_PATH = "src\\main\\resources\\notExists.csv";
     private static final String EMPTY_FILE_PATH
             = "src\\main\\resources\\emptyFileForFileReaderTest.csv";
-    private static FileReaderImpl reader;
+    private static FileReader reader;
     private static List<String> records;
 
     @BeforeClass
     public static void setUp() {
-        System.out.println("beforeClass");
         reader = new FileReaderImpl();
         records = List.of("fruit,quantity", "mellon,32", "peach,190", "grapes,99");
     }
@@ -36,9 +35,10 @@ public class FileReaderImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Cant write to file " + VALID_PATH, e);
         }
+        List<String> expected = records;
+        List<String> actual = reader.readLines(VALID_PATH);
         assertEquals("Should return data which equals that was written",
-                records, reader.readLines(VALID_PATH));
-
+                expected, actual);
     }
 
     @Test
@@ -49,9 +49,10 @@ public class FileReaderImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Cant create empty file in test method", e);
         }
+        int expected = 0;
+        int actual = reader.readLines(EMPTY_FILE_PATH).size();
         assertEquals("Should return empty list using empty file",
-                0, reader.readLines(EMPTY_FILE_PATH).size());
-
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -61,17 +62,11 @@ public class FileReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readLines_notExistedFile_NotOk() {
-        File file = new File(NOT_EXISTED_FILE_PATH);
-        if (file.exists()) {
-            fail("This file should not exist for correct work of this test. File="
-                    + NOT_EXISTED_FILE_PATH);
-        }
         reader.readLines(NOT_EXISTED_FILE_PATH);
-
     }
 
     @AfterClass
-    public static void removeFile() {
+    public static void cleanUp() {
         String[] paths = new String[]{VALID_PATH, INVALID_PATH, EMPTY_FILE_PATH};
         for (String filePath : paths) {
             new File(filePath).delete();

@@ -8,6 +8,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationService;
 import core.basesyntax.strategy.OperationPerformerStrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationServiceImplTest {
-    private static OperationServiceImpl service;
+    private static OperationService service;
 
     @BeforeClass
     public static void setUp() {
@@ -33,8 +34,9 @@ public class OperationServiceImplTest {
         list.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, banana, 100));
         list.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, banana, 100));
         list.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, banana, 100));
-        Integer expectedAmount = 400;
-        assertEquals(expectedAmount, service.processOperations(list).get(banana));
+        Integer expected = 400;
+        Integer actual = service.processOperations(list).get(banana);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -70,7 +72,7 @@ public class OperationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void processOperations_shouldThrowPurchaseOutOfBalance_NotOk() {
+    public void processOperations_purchaseGreaterThenBalance_NotOk() {
         List<FruitTransaction> list = new ArrayList<>();
         Fruit banana = new Fruit("banana");
         list.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, banana, 100));
@@ -79,7 +81,7 @@ public class OperationServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void processOperations_invalidOperations_NotOk() {
+    public void processOperations_invalidOperation_NotOk() {
         Fruit banana = new Fruit("banana");
         List<FruitTransaction> list = List.of(new FruitTransaction(null, banana, 100));
         service.processOperations(list);

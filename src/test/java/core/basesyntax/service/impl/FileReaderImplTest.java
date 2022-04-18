@@ -13,11 +13,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String VALID_PATH = "src\\main\\resources\\fileReaderTestFile.csv";
-    private static final String INVALID_PATH = "src/main/,resources/fileReaderTestFileOne.csv";
-    private static final String NOT_EXISTED_FILE_PATH = "src\\main\\resources\\notExists.csv";
+    private static final String VALID_PATH = "src\\test\\resources\\fileReaderTestFile.csv";
+    private static final String INVALID_PATH = "src/test/,resources/fileReaderTestFileOne.csv";
+    private static final String NOT_EXISTED_FILE_PATH = "src\\test\\resources\\notExists.csv";
     private static final String EMPTY_FILE_PATH
-            = "src\\main\\resources\\emptyFileForFileReaderTest.csv";
+            = "src\\test\\resources\\emptyFileForFileReaderTest.csv";
     private static FileReader reader;
     private static List<String> records;
 

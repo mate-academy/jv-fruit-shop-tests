@@ -13,8 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String VALID_PATH = "src\\main\\resources\\fileWriterTestFile.csv";
-    private static final String INVALID_PATH = "src/main/,resources/fileWriterTestFileOne.csv";
+    private static final String VALID_PATH = "src\\test\\resources\\fileWriterTestFile.csv";
+    private static final String INVALID_PATH = "src/test/,resources/fileWriterTestFileOne.csv";
     private static File resultFile;
     private static FileWriter writer;
     private static List<String> records;
@@ -29,7 +29,7 @@ public class FileWriterImplTest {
     @Test
     public void writeLines_validPath_Ok() {
         writer.writeLines(VALID_PATH, records);
-        List<String> actual = readLines();
+        List<String> actual = readLines(VALID_PATH);
         List<String> expected = records;
         assertEquals("Should be the same records that was written", expected, actual);
     }
@@ -40,7 +40,7 @@ public class FileWriterImplTest {
             writer.writeLines(VALID_PATH, records);
         }
         List<String> expected = records;
-        List<String> actual = readLines();
+        List<String> actual = readLines(VALID_PATH);
         assertEquals("Should be the same records that was written at first call",
                 expected, actual);
     }
@@ -49,7 +49,7 @@ public class FileWriterImplTest {
     public void writeLines_emptyList_Ok() {
         writer.writeLines(VALID_PATH, new ArrayList<>());
         int expected = 0;
-        int actual = readLines().size();
+        int actual = readLines(VALID_PATH).size();
         assertEquals("Should have no data in destination file",
                 expected, actual);
     }
@@ -66,11 +66,11 @@ public class FileWriterImplTest {
         }
     }
 
-    private List<String> readLines() {
+    private List<String> readLines(String path) {
         try {
-            return Files.readAllLines(resultFile.toPath());
+            return Files.readAllLines(new File(path).toPath());
         } catch (IOException ignored) {
-            throw new RuntimeException("Cannot read the file " + VALID_PATH);
+            throw new RuntimeException("Cannot read the file " + path);
         }
     }
 }

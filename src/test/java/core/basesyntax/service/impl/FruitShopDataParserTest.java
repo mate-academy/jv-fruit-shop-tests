@@ -5,12 +5,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.Parser;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopDataParserTest {
-    private static FruitShopDataParser parser;
+    private static Parser parser;
 
     @BeforeClass
     public static void setUp() {

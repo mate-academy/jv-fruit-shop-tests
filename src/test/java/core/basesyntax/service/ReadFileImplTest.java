@@ -8,14 +8,11 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReadFileImplTest {
-    private ReadFile readFile = new ReadFileImpl();
-    private String correctPathToReadingFile = "src/main/resources/fullreport.csv";
-    private String incorrectPathToReadingFile = "src/main/resources/t.csv";
-    private String correctPathToUnreadableFile = "src/main/resources/unreadable_file.cvs";
-    private String correctPathToEmptyFile = "src/main/resources/emptyfile.scv";
+    private final ReadFile readFile = new ReadFileImpl();
 
     @Test
     public void readFileToList_Ok() {
+        String correctPathToReadingFile = "src/main/resources/fullreport.csv";
         List<String> actual = readFile.readFileToList(correctPathToReadingFile);
         List<String> expected = Arrays.asList("type,fruit,quantity",
                 "b,banana,20",
@@ -31,11 +28,13 @@ public class ReadFileImplTest {
 
     @Test (expected = RuntimeException.class)
     public void fileIsMissing_NotOk() {
+        String incorrectPathToReadingFile = "src/main/resources/t.csv";
         readFile.readFileToList(incorrectPathToReadingFile);
     }
 
     @Test
     public void fileIsEmpty_NotOk() {
+        String correctPathToEmptyFile = "src/main/resources/emptyfile.scv";
         List<String> actual = readFile.readFileToList(correctPathToEmptyFile);
         assertTrue(actual.isEmpty());
     }

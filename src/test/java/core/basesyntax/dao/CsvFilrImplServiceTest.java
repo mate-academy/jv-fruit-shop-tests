@@ -9,9 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class CsvFilrImplServiceTest {
-    private CsvFileService csvFileService = new CsvFilrImplService();
-    private String correctFileFormat = "src/main/resources/fullreport.csv";
-    private String wrongFileFormat = "src/main/resources/wrong.csv";
+    private final CsvFileService csvFileService = new CsvFilrImplService();
     private final List<FruitTransaction> expected = new ArrayList<>();
 
     @Test
@@ -32,12 +30,14 @@ public class CsvFilrImplServiceTest {
                 "banana",5));
         expected.add(new FruitTransaction(FruitTransaction.Operation.getFruitOperation("s"),
                 "banana",50));
+        String correctFileFormat = "src/main/resources/fullreport.csv";
         List<FruitTransaction> actual = csvFileService.readFileToList(correctFileFormat);
         assertEquals(expected,actual);
     }
 
     @Test
     public void wrongFileFormat_NotOk() {
+        String wrongFileFormat = "src/main/resources/wrong.csv";
         List<FruitTransaction> actual = csvFileService.readFileToList(wrongFileFormat);
         assertTrue(actual.isEmpty());
     }

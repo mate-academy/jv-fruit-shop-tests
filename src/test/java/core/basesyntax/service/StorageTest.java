@@ -10,8 +10,8 @@ import java.util.Map;
 import org.junit.Test;
 
 public class StorageTest {
-    private Storage storage = new Storage();
-    private List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+    private final Storage storage = new Storage();
+    private final List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
     @Test
     public void getMapFromList_Ok() {

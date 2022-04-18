@@ -9,8 +9,8 @@ import java.util.Map;
 import org.junit.Test;
 
 public class DailyReportTest {
-    private DailyReport dailyReport = new DailyReport();
-    private Map<String, Integer> fruitMap = new HashMap<>();
+    private final DailyReport dailyReport = new DailyReport();
+    private final Map<String, Integer> fruitMap = new HashMap<>();
 
     {
         fruitMap.put("banana", 152);

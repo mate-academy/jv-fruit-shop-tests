@@ -6,7 +6,7 @@ import core.basesyntax.service.FruitTransaction;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
 
     @Test
     public void returnOperationHandlerReturn_Ok() {

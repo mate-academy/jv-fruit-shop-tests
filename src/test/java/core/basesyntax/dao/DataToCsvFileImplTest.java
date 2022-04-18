@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class DataToCsvFileImplTest {
-    private DataToCsvFile dataToCsvFile = new DataToCsvFileImpl();
-    private List<String> listToWrite = Arrays.asList("apple,50", "banana,2");
+    private final DataToCsvFile dataToCsvFile = new DataToCsvFileImpl();
+    private final List<String> listToWrite = Arrays.asList("apple,50", "banana,2");
 
     @Test
     public void returnListWithTitle_Ok() {

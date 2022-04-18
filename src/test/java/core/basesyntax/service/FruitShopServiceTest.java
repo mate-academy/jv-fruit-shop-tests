@@ -1,6 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exceptions.EmptyFileException;
+import core.basesyntax.exceptions.ExistFileException;
 import core.basesyntax.exceptions.OperationException;
 import core.basesyntax.exceptions.QuantityException;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
@@ -16,6 +18,8 @@ import org.junit.jupiter.api.Test;
 public class FruitShopServiceTest {
     private static FruitShopService service;
     private static final String INPUT_FILE = "src/test/resources/InputData.csv";
+    private static final String EMPTY_FILE = "src/test/resources/EmptyFile.csv";
+    private static final String WRONG_FILE = "src/test/resources/WrongFile.csv";
     private static final String OUTPUT_FILE = "src/test/resources/OutputData.csv";
     private static final String WRONG_OPERATION_FILE = "src/test/resources/WrongOperation.csv";
     private static final String WRONG_QUANTITY_FILE = "src/test/resources/WrongQuantity.csv";
@@ -40,6 +44,24 @@ public class FruitShopServiceTest {
         expected.put("apple", 90);
         Map<String, Integer> actual = Storage.fruits;
         Assertions.assertEquals(actual, expected);
+    }
+
+    @Test
+    void update_emptyFile_notOk() {
+        Assertions.assertThrows(EmptyFileException.class,
+                () -> service.update(EMPTY_FILE, OUTPUT_FILE));
+    }
+
+    @Test
+    void update_wrongFile_notOk() {
+        Assertions.assertThrows(ExistFileException.class,
+                () -> service.update(WRONG_FILE, OUTPUT_FILE));
+    }
+
+    @Test
+    void update_nullFiles_notOk() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> service.update(null, null));
     }
 
     @Test

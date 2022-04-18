@@ -58,4 +58,16 @@ public class CsvFileWriterServiceTest {
         Assertions.assertThrows(ReportException.class,
                 () -> writer.writeToFile(OUTPUT_FILE, new String[0]));
     }
+
+    @Test
+    public void writeToFile_nullReport_notOk() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> writer.writeToFile(OUTPUT_FILE, null));
+    }
+
+    @Test
+    public void writeToFile_nullFile_notOk() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> writer.writeToFile(null, reportCreator.getReport()));
+    }
 }

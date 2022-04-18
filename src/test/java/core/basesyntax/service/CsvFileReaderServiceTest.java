@@ -17,7 +17,7 @@ public class CsvFileReaderServiceTest {
     private static final String WRONG_FILE = "src/test/resources/WrongFile.csv";
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reader = new CsvFileReaderServiceImpl();
     }
 
@@ -25,6 +25,12 @@ public class CsvFileReaderServiceTest {
     public void readFromFile_emptyFile_notOk() {
         Assertions.assertThrows(EmptyFileException.class,
                 () -> reader.readFromFile(EMPTY_FILE));
+    }
+
+    @Test
+    public void readFromFile_nullFile_notOk() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> reader.readFromFile(null));
     }
 
     @Test

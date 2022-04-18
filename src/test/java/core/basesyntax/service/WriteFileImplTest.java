@@ -15,9 +15,4 @@ public class WriteFileImplTest {
         report.add("apple,50");
         assertTrue(writeFile.writeFileReport(report,"src/main/resources/daylireport.csv"));
     }
-
-    @Test (expected = RuntimeException.class)
-    public void errorWriteFile_NotOk() {
-        writeFile.writeFileReport(report,"src/main/resources/wrong.csv");
-    }
 }

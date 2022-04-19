@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.handlers.BalanceHandler;
 import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.handlers.PurchaseHandler;
@@ -22,6 +23,14 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public void process(FruitTransaction.Operation operation, String fruit, Integer quantity) {
+        checkFruitTransaction(operation, fruit, quantity);
         operationHandlerMap.get(operation).process(fruit, quantity);
+    }
+
+    private void checkFruitTransaction(FruitTransaction.Operation operation,
+                                       String fruit, Integer quantity) {
+        if (operation == null || fruit == null || quantity == null) {
+            throw new NullException("Invalid fruit transaction");
+        }
     }
 }

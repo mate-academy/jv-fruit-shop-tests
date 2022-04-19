@@ -3,11 +3,11 @@ package core.basesyntax.service;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.EmptyFileException;
 import core.basesyntax.exceptions.ExistFileException;
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.exceptions.OperationException;
 import core.basesyntax.exceptions.QuantityException;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -32,8 +32,6 @@ public class FruitShopServiceTest {
     @AfterEach
     void tearDown() throws FileNotFoundException {
         Storage.fruits.clear();
-        PrintWriter pw = new PrintWriter(OUTPUT_FILE);
-        pw.close();
     }
 
     @Test
@@ -60,7 +58,7 @@ public class FruitShopServiceTest {
 
     @Test
     void update_nullFiles_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
+        Assertions.assertThrows(NullException.class,
                 () -> service.update(null, null));
     }
 

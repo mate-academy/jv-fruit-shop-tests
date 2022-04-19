@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.exceptions.EmptyFileException;
 import core.basesyntax.exceptions.ExistFileException;
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class CsvFileReaderServiceTest {
 
     @Test
     public void readFromFile_nullFile_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
+        Assertions.assertThrows(NullException.class,
                 () -> reader.readFromFile(null));
     }
 

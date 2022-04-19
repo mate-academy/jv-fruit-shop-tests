@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
@@ -17,11 +18,18 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void update(String pathToInputFile, String pathToOutputFile) {
+        checkPathToFile(pathToInputFile, pathToOutputFile);
 
         List<FruitTransaction> list = reader.readFromFile(pathToInputFile);
 
         list.forEach(f -> strategy.process(f.getOperation(), f.getFruit(), f.getQuantity()));
 
         writer.writeToFile(pathToOutputFile, reporter.getReport());
+    }
+
+    private void checkPathToFile(String pathToInputFile, String pathToOutputFile) {
+        if (pathToInputFile == null || pathToOutputFile == null) {
+            throw new NullException("Path to input/output file is null");
+        }
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.EmptyFileException;
 import core.basesyntax.exceptions.ExistFileException;
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.DataParser;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     private static final int HEAD_LINE = 1;
+    private static final DataParser parser = new DataParserImpl();
 
     @Override
     public List<FruitTransaction> readFromFile(String pathToFile) {
+        checkPathToFile(pathToFile);
         List<String> inputData;
         File file = new File(pathToFile);
         try {
@@ -27,7 +30,7 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
         }
         return inputData.stream()
                 .skip(HEAD_LINE)
-                .map(DataParser::getData)
+                .map(parser::getData)
                 .collect(Collectors.toList());
     }
 
@@ -35,6 +38,11 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
         if (inputData.isEmpty()) {
             throw new EmptyFileException("File " + file.getName() + " is empty");
         }
+    }
 
+    private void checkPathToFile(String pathToFile) {
+        if (pathToFile == null) {
+            throw new NullException("Path to file is null");
+        }
     }
 }

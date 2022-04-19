@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.exceptions.ReportException;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -36,8 +36,6 @@ public class CsvFileWriterServiceTest {
     @After
     public void tearDown() throws Exception {
         Storage.fruits.clear();
-        PrintWriter pw = new PrintWriter(OUTPUT_FILE);
-        pw.close();
     }
 
     @Test
@@ -47,10 +45,10 @@ public class CsvFileWriterServiceTest {
         byte[] file1Bytes = Files.readAllBytes(Paths.get(EXPECTED_FILE));
         byte[] file2Bytes = Files.readAllBytes(Paths.get(OUTPUT_FILE));
 
-        String file1 = new String(file1Bytes, StandardCharsets.UTF_8);
-        String file2 = new String(file2Bytes, StandardCharsets.UTF_8);
+        String expectedFile = new String(file1Bytes, StandardCharsets.UTF_8);
+        String actualFile = new String(file2Bytes, StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(file1, file2);
+        Assertions.assertEquals(expectedFile, actualFile);
     }
 
     @Test
@@ -61,13 +59,13 @@ public class CsvFileWriterServiceTest {
 
     @Test
     public void writeToFile_nullReport_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
+        Assertions.assertThrows(NullException.class,
                 () -> writer.writeToFile(OUTPUT_FILE, null));
     }
 
     @Test
     public void writeToFile_nullFile_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
+        Assertions.assertThrows(NullException.class,
                 () -> writer.writeToFile(null, reportCreator.getReport()));
     }
 }

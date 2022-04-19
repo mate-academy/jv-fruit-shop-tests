@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exceptions.NullException;
 import core.basesyntax.handlers.BalanceHandler;
 import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.handlers.PurchaseHandler;
@@ -56,9 +57,21 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void process_nullData_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> strategy.process(null, null, null));
+    public void process_nullOperation_notOk() {
+        Assertions.assertThrows(NullException.class,
+                () -> strategy.process(null, "banana", 1));
+    }
+
+    @Test
+    public void process_nullFruit_notOk() {
+        Assertions.assertThrows(NullException.class,
+                () -> strategy.process(FruitTransaction.Operation.BALANCE, null, 11));
+    }
+
+    @Test
+    public void process_nullQuantity_notOk() {
+        Assertions.assertThrows(NullException.class,
+                () -> strategy.process(FruitTransaction.Operation.BALANCE, "banana", null));
     }
 
     @Test

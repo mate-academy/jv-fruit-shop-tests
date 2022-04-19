@@ -5,7 +5,10 @@ import core.basesyntax.exceptions.NullException;
 import core.basesyntax.exceptions.ReportException;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -34,8 +37,10 @@ public class CsvFileWriterServiceTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() throws FileNotFoundException {
         Storage.fruits.clear();
+        PrintWriter pw = new PrintWriter(OUTPUT_FILE);
+        pw.close();
     }
 
     @Test

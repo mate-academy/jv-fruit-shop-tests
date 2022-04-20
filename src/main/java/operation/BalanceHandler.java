@@ -5,7 +5,9 @@ import dao.FruitShopDaoImpl;
 import model.FruitTransaction;
 
 public class BalanceHandler implements OperationHandler {
+
     @Override
+
     public void handle(FruitTransaction fruitTransaction) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         if (fruitShopDao.getValue(fruitTransaction) == null) {

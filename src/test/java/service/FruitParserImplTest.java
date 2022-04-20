@@ -9,7 +9,7 @@ public class FruitParserImplTest {
     private static FruitParser fruitParser;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitParser = new FruitParserImpl();
     }
 
@@ -24,7 +24,7 @@ public class FruitParserImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void nullOperationData_NotOk() {
         String actualData = " ,banana,20";
         fruitParser.parseFruitTransaction(actualData);

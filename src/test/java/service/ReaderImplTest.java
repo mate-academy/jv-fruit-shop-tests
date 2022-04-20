@@ -39,7 +39,7 @@ public class ReaderImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test (expected = NullPointerException.class)
     public void readFromFile_readFromNullPathFile_NotOk() {
         reader.read(null);
     }

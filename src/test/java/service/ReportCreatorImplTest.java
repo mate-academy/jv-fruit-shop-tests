@@ -1,25 +1,22 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.FruitTransaction;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ReportCreatorImplTest {
-    private final FruitTransaction secondFruitTransaction = new FruitTransaction();
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
-
     @Test
-
     public void createReport_Ok() {
-        fruitTransaction.setFruit("banana");
-        fruitTransaction.setQuantity(172);
-        secondFruitTransaction.setFruit("apple");
-        secondFruitTransaction.setQuantity(190);
-        List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(fruitTransaction);
-        transactions.add(secondFruitTransaction);
+        List<FruitTransaction> transactions = List.of(
+                getFruitTransaction("banana", 172),
+                getFruitTransaction("banana", 172),
+                getFruitTransaction("apple", 190)
+        );
+
+        List<FruitTransaction> cleanListWithoutDuplicates = transactions.stream()
+                .distinct().collect(Collectors.toList());
 
         String expected = "fruit,quantity"
                 + System.lineSeparator()
@@ -28,8 +25,15 @@ public class ReportCreatorImplTest {
                 + "apple,190"
                 + System.lineSeparator();
         ReportCreator reportCreator = new ReportCreatorImpl();
-        String actual = reportCreator.createReport(transactions);
+        String actual = reportCreator.createReport(cleanListWithoutDuplicates);
 
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    private FruitTransaction getFruitTransaction(String fruit, int quantity) {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setFruit(fruit);
+        fruitTransaction.setQuantity(quantity);
+        return fruitTransaction;
     }
 }

@@ -41,5 +41,10 @@ public class CsvFilrImplServiceTest {
         List<FruitTransaction> actual = csvFileService.readFileToList(wrongFileFormat);
         assertTrue(actual.isEmpty());
     }
+
+    @Test (expected = NullPointerException.class)
+    public void nullFileName_Ok() {
+        csvFileService.readFileToList(null);
+    }
 }
 

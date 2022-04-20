@@ -31,5 +31,10 @@ public class OperationStrategyImplTest {
         FruitOperationHandler actual = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
         assertEquals(FruitOperationHandlerSupply.class,actual.getClass());
     }
-}
 
+    @Test (expected = NullPointerException.class)
+    public void nullOperationHandler_Ok() {
+        FruitOperationHandler actual = operationStrategy.get(null);
+        assertEquals(FruitOperationHandlerSupply.class,actual.getClass());
+    }
+}

@@ -15,4 +15,16 @@ public class WriteFileImplTest {
         report.add("apple,50");
         assertTrue(writeFile.writeFileReport(report,"src/main/resources/daylireport.csv"));
     }
+
+    @Test(expected = NullPointerException.class)
+    public void nullFileName_Ok() {
+        report.add("apple,50");
+        assertTrue(writeFile.writeFileReport(report,null));
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void emptyFileName_Ok() {
+        report.add("apple,50");
+        assertTrue(writeFile.writeFileReport(report,"src/main/resources/"));
+    }
 }

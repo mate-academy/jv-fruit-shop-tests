@@ -23,4 +23,9 @@ public class DailyReportTest {
         List<String> expcted = Arrays.asList("banana,152", "apple,90");
         assertEquals(expcted,actual);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void nullStorage_Ok() {
+        dailyReport.listOperation(null);
+    }
 }

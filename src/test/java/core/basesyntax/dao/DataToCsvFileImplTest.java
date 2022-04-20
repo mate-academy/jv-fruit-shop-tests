@@ -17,4 +17,10 @@ public class DataToCsvFileImplTest {
                 "src/main/resources/testfiledatatocsv.csv");
         assertEquals(exepted, actual);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void nullFileName_Ok() {
+        dataToCsvFile.generateListToWriteFile(listToWrite,
+                null);
+    }
 }

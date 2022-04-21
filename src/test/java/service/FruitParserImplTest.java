@@ -30,7 +30,7 @@ public class FruitParserImplTest {
         fruitParser.parseFruitTransaction(actualData);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void nullFruitData_NotOk() {
         String actualData = " b,,20";
         fruitParser.parseFruitTransaction(actualData);

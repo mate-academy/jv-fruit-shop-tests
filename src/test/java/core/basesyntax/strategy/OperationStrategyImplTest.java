@@ -13,15 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
     private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         FruitShopService fruitShopService = new FruitShopServiceImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -48,7 +48,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void purchaseOperationHandle_NotOk() {
+    public void purchaseOperationHandleWithNotEnoughQuantity_NotOk() {
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         operationStrategy.proceedTransaction(fruitTransaction);
     }

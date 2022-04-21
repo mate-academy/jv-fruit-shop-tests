@@ -26,6 +26,11 @@ public class FileReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
+    public void readNullPath() {
+        fileReaderService.read(null);
+    }
+
+    @Test (expected = RuntimeException.class)
     public void readNonexistentFile_NotOk() {
         fileReaderService.read(INCORRECT_FILE_INPUT_PATH);
     }

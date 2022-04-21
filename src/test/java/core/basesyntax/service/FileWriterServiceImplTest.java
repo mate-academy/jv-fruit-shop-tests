@@ -31,6 +31,11 @@ public class FileWriterServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test (expected = RuntimeException.class)
+    public void writeNullPath() {
+        fileWriterService.write(stringBuilder.toString(), null);
+    }
+
     private List<String> readFromFile(String filePath) {
         List<String> lines;
         try {

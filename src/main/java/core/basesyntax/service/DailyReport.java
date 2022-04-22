@@ -10,7 +10,7 @@ public class DailyReport {
         if (fruitMap == null || fruitMap.isEmpty()) {
             throw new RuntimeException(" Storage is empty  ");
         }
-            return fruitMap.entrySet()
+        return fruitMap.entrySet()
                      .stream()
                      .map(entry -> entry.getKey() + "," + entry.getValue())
                      .collect(Collectors.toList());

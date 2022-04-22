@@ -16,11 +16,10 @@ public class CsvFilrImplService implements CsvFileService {
     public List<FruitTransaction> readFileToList(String fileCsvPath) {
         List<FruitTransaction> fruitList = new ArrayList<>();
         List<String> listFromFile;
-        try {
-            listFromFile = readFile.readFileToList(fileCsvPath);
-        } catch (NullPointerException e) {
-            throw new RuntimeException(" File name is null ", e);
+        if (fileCsvPath == null) {
+            throw new RuntimeException(" File mane could not be null ");
         }
+        listFromFile = readFile.readFileToList(fileCsvPath);
         if (listFromFile != null) {
             for (int i = 0; i < listFromFile.size(); i++) {
                 if (i != 0) {

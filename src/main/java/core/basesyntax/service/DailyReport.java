@@ -7,15 +7,12 @@ import java.util.stream.Collectors;
 public class DailyReport {
 
     public List<String> listOperation(Map<String, Integer> fruitMap) {
-        List<String> result;
-        try {
-            result = fruitMap.entrySet()
+        if (fruitMap == null || fruitMap.isEmpty()) {
+            throw new RuntimeException(" Storage is empty  ");
+        }
+            return fruitMap.entrySet()
                      .stream()
                      .map(entry -> entry.getKey() + "," + entry.getValue())
                      .collect(Collectors.toList());
-        } catch (NullPointerException e) {
-            throw new RuntimeException(" Storage is empty  ", e);
-        }
-        return result;
     }
 }

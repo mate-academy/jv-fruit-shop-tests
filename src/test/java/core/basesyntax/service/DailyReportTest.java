@@ -24,7 +24,7 @@ public class DailyReportTest {
         assertEquals(expcted,actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void nullStorage_Ok() {
         dailyReport.listOperation(null);
     }

@@ -18,7 +18,7 @@ public class DataToCsvFileImplTest {
         assertEquals(exepted, actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void nullFileName_Ok() {
         dataToCsvFile.generateListToWriteFile(listToWrite,
                 null);

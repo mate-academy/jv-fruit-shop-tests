@@ -10,7 +10,12 @@ public class WriteFileImpl implements WriteFile {
     @Override
     public boolean writeFileReport(List<String> report, String filePath) {
 
-        File file = new File(filePath);
+        File file;
+        try {
+            file = new File(filePath);
+        } catch (NullPointerException e) {
+            throw new RuntimeException(" File path is null ", e);
+        }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String line: report) {

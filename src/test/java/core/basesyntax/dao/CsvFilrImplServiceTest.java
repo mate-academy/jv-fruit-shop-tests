@@ -42,7 +42,7 @@ public class CsvFilrImplServiceTest {
         assertTrue(actual.isEmpty());
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void nullFileName_Ok() {
         csvFileService.readFileToList(null);
     }

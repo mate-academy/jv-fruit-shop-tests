@@ -48,4 +48,9 @@ public class ReaderImplTest {
     public void readFromFile_readFromNonExistingPathFife_NotOk() {
         reader.read(NON_EXISTING_FILE_PATH);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parseFromCsv_emptyString_Exception() {
+        reader.read("");
+    }
 }

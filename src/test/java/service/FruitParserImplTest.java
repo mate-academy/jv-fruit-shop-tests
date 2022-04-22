@@ -1,5 +1,7 @@
 package service;
 
+import java.util.HashSet;
+import java.util.Set;
 import model.FruitTransaction;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -36,9 +38,26 @@ public class FruitParserImplTest {
         fruitParser.parseFruitTransaction(actualData);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = RuntimeException.class)
     public void nullQuantityData_NotOk() {
         String actualData = " b,banana, ";
         fruitParser.parseFruitTransaction(actualData);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parse_nullData_NotOk() {
+        fruitParser.parseFruitTransaction(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parseToString_emptySet_Exception() {
+        String actualString = String.valueOf(fruitParser.parseFruitTransaction(null));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parseToString_setWithNull_Exception() {
+        Set<FruitTransaction> fruitSet = new HashSet<>();
+        fruitSet.add(null);
+        String actualString = String.valueOf(fruitParser.parseFruitTransaction(null));
     }
 }

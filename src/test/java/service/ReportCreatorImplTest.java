@@ -3,8 +3,8 @@ package service;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class ReportCreatorImplTest {
     @Test

@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
+
     @Test
     public void balanceOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
@@ -21,7 +22,7 @@ public class BalanceHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

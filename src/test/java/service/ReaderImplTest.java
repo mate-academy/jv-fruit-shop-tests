@@ -10,6 +10,7 @@ public class ReaderImplTest {
     private static final String FIRST_INPUT_PATH = "src/test/resources/testInput.csv";
     private static final String EMPTY_INPUT_PATH = "src/test/resources/emptyInput.csv";
     private static final String NON_EXISTING_FILE_PATH = "src/test/resources/inputNONExisting.csv";
+    private static final String INCORRECT_FILE_INPUT_PATH = "src/test/resources/not-input.csv";
     private static Reader reader;
 
     @BeforeClass
@@ -52,5 +53,15 @@ public class ReaderImplTest {
     @Test(expected = RuntimeException.class)
     public void parseFromCsv_emptyString_Exception() {
         reader.read("");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void readNullPath() {
+        reader.read(null);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void readNonexistentFile_NotOk() {
+        reader.read(INCORRECT_FILE_INPUT_PATH);
     }
 }

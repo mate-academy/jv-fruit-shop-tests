@@ -1,7 +1,5 @@
 package service;
 
-import java.util.HashSet;
-import java.util.Set;
 import model.FruitTransaction;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -27,14 +25,26 @@ public class FruitParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullOperationData_NotOk() {
-        String actualData = " ,banana,20";
+    public void nullFruitAndQuantity_NotOk() {
+        String actualData = " b, , ";
         fruitParser.parseFruitTransaction(actualData);
     }
 
     @Test(expected = RuntimeException.class)
     public void nullFruitData_NotOk() {
-        String actualData = " b,,20";
+        String actualData = " b, ,20";
+        fruitParser.parseFruitTransaction(actualData);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void nullTypeAndFruit_NotOk() {
+        String actualData = " , ,20";
+        fruitParser.parseFruitTransaction(actualData);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void nullType_NotOk() {
+        String actualData = " ,banana,20";
         fruitParser.parseFruitTransaction(actualData);
     }
 
@@ -44,20 +54,14 @@ public class FruitParserImplTest {
         fruitParser.parseFruitTransaction(actualData);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void nullData_NotOk() {
+        String actualData = " , , ";
+        fruitParser.parseFruitTransaction(actualData);
+    }
+
     @Test (expected = RuntimeException.class)
     public void parse_nullData_NotOk() {
         fruitParser.parseFruitTransaction(null);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void parseToString_emptySet_Exception() {
-        String actualString = String.valueOf(fruitParser.parseFruitTransaction(null));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void parseToString_setWithNull_Exception() {
-        Set<FruitTransaction> fruitSet = new HashSet<>();
-        fruitSet.add(null);
-        String actualString = String.valueOf(fruitParser.parseFruitTransaction(null));
     }
 }

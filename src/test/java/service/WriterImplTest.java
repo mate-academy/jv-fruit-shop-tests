@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterImplTest {
+    private static StringBuilder stringBuilder;
     private static final String FILE_SEPARATOR = FileSystems.getDefault().getSeparator();
     private static final String OUTPUT_FILE = "src" + FILE_SEPARATOR
             + "test" + FILE_SEPARATOR + "resources" + FILE_SEPARATOR + "testOutput.csv";
@@ -47,5 +48,10 @@ public class WriterImplTest {
     public void invalidFilePath_NotOk() {
         String data = reportBuilder.toString();
         writer.write(data, "");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void writeNullPath() {
+        writer.write(stringBuilder.toString(), null);
     }
 }

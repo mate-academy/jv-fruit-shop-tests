@@ -13,13 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitStrategyImplTest {
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHashMap;
     private static FruitStrategyImpl fruitStrategy;
     private static FruitTransaction fruitTransaction;
 
     @Before
     public void before() throws Exception {
-        operationHashMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHashMap = new HashMap<>();
         operationHashMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHashMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHashMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());

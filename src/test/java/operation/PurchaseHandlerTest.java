@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
+
     @Test
     public void purchaseOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
@@ -22,7 +23,7 @@ public class PurchaseHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

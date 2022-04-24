@@ -26,7 +26,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Balance_OK() {
+    public void handle_Balance_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -43,7 +43,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Supply_OK() {
+    public void handle_Supply_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -60,7 +60,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Return_OK() {
+    public void handle_Return_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -77,7 +77,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Purchase_OK() {
+    public void handle_Purchase_Ok() {
         Storage.storage.put(new Fruit("banana"), 20);
 
         FruitTransaction fruitTransaction = new FruitTransaction();

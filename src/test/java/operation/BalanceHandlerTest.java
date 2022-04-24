@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-
     @Test
     public void balanceOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();

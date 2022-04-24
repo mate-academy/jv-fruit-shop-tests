@@ -55,13 +55,13 @@ public class FruitParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullData_NotOk() {
+    public void withoutData_NotOk() {
         String actualData = " , , ";
         fruitParser.parseFruitTransaction(actualData);
     }
 
-    @Test (expected = RuntimeException.class)
-    public void parse_nullData_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void nullData_NoOk() {
         fruitParser.parseFruitTransaction(null);
     }
 }

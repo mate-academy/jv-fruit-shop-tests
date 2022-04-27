@@ -6,16 +6,11 @@ import core.basesyntax.database.Storage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class BalanceOperationHandlerTest {
     private static FruitTransactionDao fruitTransactionDao;
     private static OperationHandler operationHandler;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void setUp() {
@@ -24,7 +19,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandler_passValidValue_Ok() {
+    public void applyNewAmount_passValidValue_Ok() {
         Storage.fruitTransactionStorage.put("banana", 0);
         Integer actual = operationHandler.applyNewAmount("banana", 20);
         Integer expected = 20;
@@ -32,16 +27,14 @@ public class BalanceOperationHandlerTest {
                 + " but should be " + expected + ".", expected, actual);
     }
 
-    @Test
-    public void balanceHandler_inValidValuesPass_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void applyNewAmount_passInvalidValue_NotOk() {
         Storage.fruitTransactionStorage.put("banana", 0);
-        thrown.expect(RuntimeException.class);
         operationHandler.applyNewAmount("", 20);
     }
 
-    @Test
-    public void balanceHandler_nullValue_NotOk() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void applyNewAmount_nullValue_NotOk() {
         operationHandler.applyNewAmount(null, null);
     }
 

@@ -4,9 +4,7 @@ import core.basesyntax.database.Storage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FruitTransactionDaoImplTest {
     private static FruitTransactionDao fruitTransactionDao;
@@ -17,16 +15,13 @@ public class FruitTransactionDaoImplTest {
     private static final int FIRST_FRUIT_AMOUNT = 90;
     private static final int SECOND_FRUIT_AMOUNT = 152;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @BeforeClass
     public static void setUp() {
         fruitTransactionDao = new FruitTransactionDaoImpl();
     }
 
     @Test
-    public void dao_putElementsToStorage_Ok() {
+    public void addToStorage_putElements_Ok() {
         fruitTransactionDao.addToStorage("orange",20);
         fruitTransactionDao.addToStorage("grapes",15);
         fruitTransactionDao.addToStorage("watermelon",30);
@@ -44,26 +39,23 @@ public class FruitTransactionDaoImplTest {
                 Integer.valueOf(50), Storage.fruitTransactionStorage.get("peach"));
     }
 
-    @Test
-    public void dao_putInvalidFruitName_NotOk() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void addToStorage_putInvalidFruitName_NotOk() {
         fruitTransactionDao.addToStorage(FIRST_INVALID_FRUIT,15);
     }
 
-    @Test
-    public void dao_putShortFruitName_NotOk() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void addToStorage_putShortFruitName_NotOk() {
         fruitTransactionDao.addToStorage(SECOND_INVALID_FRUIT,15);
     }
 
-    @Test
-    public void dao_putNullKey_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void addToStorage_putNullKey_not0k() {
         fruitTransactionDao.addToStorage(null,15);
     }
 
     @Test
-    public void dao_getValueByKeyFromStorage_Ok() {
+    public void getFromStorage_getValueByKey_Ok() {
         Storage.fruitTransactionStorage.put(FIRST_FRUIT,FIRST_FRUIT_AMOUNT);
         Storage.fruitTransactionStorage.put(SECOND_FRUIT,SECOND_FRUIT_AMOUNT);
         Integer actual = fruitTransactionDao.getFromStorage("apple");
@@ -72,16 +64,15 @@ public class FruitTransactionDaoImplTest {
     }
 
     @Test
-    public void dao_getZeroByNotExistenceKeyFromStorage_Ok() {
+    public void getFromStorage_getZeroByNotExistenceKey_Ok() {
         Storage.fruitTransactionStorage.put(SECOND_FRUIT,SECOND_FRUIT_AMOUNT);
         Integer actual = fruitTransactionDao.getFromStorage("apple");
         Integer expected = 0;
         Assert.assertEquals("Wrong amount.Element added not correctly.",expected,actual);
     }
 
-    @Test
-    public void dao_getByNullKey_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void getFromStorage_getByNullKey_not0k() {
         fruitTransactionDao.getFromStorage(null);
     }
 

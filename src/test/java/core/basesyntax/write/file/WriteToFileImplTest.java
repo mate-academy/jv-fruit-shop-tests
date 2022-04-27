@@ -8,18 +8,13 @@ import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class WriteToFileImplTest {
     private static final String OUTPUT_FILE_PATH = "src/test/resources/reportData.csv";
     private static final String INVALID_PATH = "src/test/";
     private static File reportData;
     private static WriteToFile writeToFile;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void beforeAll() {
@@ -35,7 +30,7 @@ public class WriteToFileImplTest {
     }
 
     @Test
-    public void writer_writeCorrectData_Ok() {
+    public void write_passCorrectData_Ok() {
         Storage.fruitTransactionStorage.put("banana",152);
         Storage.fruitTransactionStorage.put("apple",90);
         writeToFile.write(Storage.fruitTransactionStorage,OUTPUT_FILE_PATH);
@@ -46,15 +41,13 @@ public class WriteToFileImplTest {
                 expectedResult, actualResult);
     }
 
-    @Test
-    public void writer_writeToInvalidPath_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void write_passToInvalidPath_not0k() {
         writeToFile.write(Storage.fruitTransactionStorage,INVALID_PATH);
     }
 
-    @Test
-    public void writer_nullValuePath_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void write_nullValuePath_not0k() {
         writeToFile.write(Storage.fruitTransactionStorage,null);
     }
 

@@ -4,18 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ReaderFromFileImplTest {
     private static final String INPUT_FILE_PATH = "src/test/resources/inputData.csv";
     private static final String INVALID_PATH = " ";
     private static ReaderFromFile readerFromFile;
     private static List<String> dataList;
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void setUp() {
@@ -32,22 +27,20 @@ public class ReaderFromFileImplTest {
     }
 
     @Test
-    public void reader_readFromFile_Ok() {
+    public void readFromFile_readingFile_Ok() {
         List<String[]> fromReader = readerFromFile.readFromFile(INPUT_FILE_PATH);
         List<String> actual = convertList(fromReader);
         List<String> expected = dataList;
         Assert.assertEquals("Actual list doesn't equal expected list.", actual, expected);
     }
 
-    @Test
-    public void reader_readFromFile_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_readingFile_not0k() {
         readerFromFile.readFromFile(INVALID_PATH);
     }
 
-    @Test
-    public void reader_nullValuePath_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_nullValuePath_not0k() {
         readerFromFile.readFromFile(null);
     }
 

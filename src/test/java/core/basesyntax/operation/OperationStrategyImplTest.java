@@ -10,22 +10,17 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
     private static FruitTransactionDao fruitTransactionDao;
     private static Map<FruitTransaction.Operation,OperationHandler> operationHandlerMap;
-    private static final String VALID_FIRST_OPERATION = "b";
-    private static final String VALID_SECOND_OPERATION = "p";
-    private static final String VALID_THIRD_OPERATION = "r";
-    private static final String VALID_FOURTH_OPERATION = "s";
-    private static final String INVALID_FIRST_OPERATION = "m";
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    private static final String BALANCE_OPERATION = "b";
+    private static final String PURCHASE_OPERATION = "p";
+    private static final String RETURN_OPERATION = "r";
+    private static final String SUPPLY_OPERATION = "s";
+    private static final String INVALID_OPERATION = "m";
 
     @BeforeClass
     public static void setUp() {
@@ -47,30 +42,28 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void operationStrategy_passValidSymbol_Ok() {
-        OperationHandler first = operationStrategy.getOperationHandler(VALID_FIRST_OPERATION);
-        Assert.assertTrue("Operation handler was not added correctly.",
+    public void getOperationHandler_passValidSymbol_Ok() {
+        OperationHandler first = operationStrategy.getOperationHandler(BALANCE_OPERATION);
+        Assert.assertTrue("Balance operation handler was not added",
                 operationHandlerMap.containsValue(first));
-        OperationHandler second = operationStrategy.getOperationHandler(VALID_SECOND_OPERATION);
-        Assert.assertTrue("Operation handler was not added correctly.",
+        OperationHandler second = operationStrategy.getOperationHandler(PURCHASE_OPERATION);
+        Assert.assertTrue("Purchase operation handler was not added",
                 operationHandlerMap.containsValue(second));
-        OperationHandler third = operationStrategy.getOperationHandler(VALID_THIRD_OPERATION);
-        Assert.assertTrue("Operation handler was not added correctly.",
+        OperationHandler third = operationStrategy.getOperationHandler(RETURN_OPERATION);
+        Assert.assertTrue("Return operation handler was not added",
                 operationHandlerMap.containsValue(third));
-        OperationHandler fourth = operationStrategy.getOperationHandler(VALID_FOURTH_OPERATION);
-        Assert.assertTrue("Operation handler was not added correctly.",
+        OperationHandler fourth = operationStrategy.getOperationHandler(SUPPLY_OPERATION);
+        Assert.assertTrue("Supply operation handler was not added",
                 operationHandlerMap.containsValue(fourth));
     }
 
-    @Test
-    public void operationStrategy_passInvalidSymbol_NotOk() {
-        thrown.expect(RuntimeException.class);
-        operationStrategy.getOperationHandler(INVALID_FIRST_OPERATION);
+    @Test(expected = RuntimeException.class)
+    public void getOperationHandler_passInvalidSymbol_NotOk() {
+        operationStrategy.getOperationHandler(INVALID_OPERATION);
     }
 
-    @Test
-    public void operationStrategy_nullValue_not0k() {
-        thrown.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void getOperationHandler_nullValue_not0k() {
         operationStrategy.getOperationHandler(null);
     }
 

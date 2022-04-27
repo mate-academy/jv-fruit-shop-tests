@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WriteToFileImplTest {
-    private static final String OUTPUT_FILE_PATH = "src\\test\\resources\\reportData.csv";
-    private static final String INVALID_PATH = " ";
+    private static final String OUTPUT_FILE_PATH = "src/test/resources/reportData.csv";
+    private static final String INVALID_PATH = "src/test/";
     private static File reportData;
     private static WriteToFile writeToFile;
 
@@ -40,8 +40,8 @@ public class WriteToFileImplTest {
         Storage.fruitTransactionStorage.put("apple",90);
         writeToFile.write(Storage.fruitTransactionStorage,OUTPUT_FILE_PATH);
         String actualResult = readFromFile(OUTPUT_FILE_PATH);
-        String expectedResult = "fruit,quantity" + "\r\n"
-                + "banana,152" + "\r\n" + "apple,90" + "\r\n";
+        String expectedResult = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator() + "apple,90" + System.lineSeparator();
         Assert.assertEquals("Written data to the file is incorrect.",
                 expectedResult, actualResult);
     }
@@ -68,8 +68,6 @@ public class WriteToFileImplTest {
             return Files.readString(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't correctly read data from file " + filePath);
-        } finally {
-            System.out.println("Data was read from file.");
         }
     }
 }

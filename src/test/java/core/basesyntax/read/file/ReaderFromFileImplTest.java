@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReaderFromFileImplTest {
-    private static final String INPUT_FILE_PATH = "src\\test\\resources\\inputData.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/inputData.csv";
     private static final String INVALID_PATH = " ";
     private static ReaderFromFile readerFromFile;
     private static List<String> dataList;

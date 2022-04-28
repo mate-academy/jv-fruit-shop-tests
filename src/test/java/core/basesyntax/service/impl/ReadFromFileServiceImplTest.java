@@ -6,12 +6,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReadFromFileServiceImplTest {
-    private static final String FILE_WITH_VALID_DATA = "src/test/java/core"
-            + "/basesyntax/valid_data_file.csv";
-    private static final String FILE_WITH_EMPTY_LINE_INPUT = "src/test/java/core"
-            + "/basesyntax/empty_file_input.csv";
-    private static final String NON_EXISTING_FILE = "src/test/java/core"
-            + "/basesyntax/no_existing_file.csv";
+    private static final String FILE_WITH_VALID_DATA = "src/test/resources"
+            + "/valid_data_file.csv";
+    private static final String FILE_WITH_EMPTY_LINE_INPUT = "src/test/resources"
+            + "/empty_file_input.csv";
+    private static final String NON_EXISTING_FILE = "src/test/resources"
+            + "/no_existing_file.csv";
     private static ReadFromFileService readFromFileService;
 
     @BeforeClass
@@ -20,7 +20,7 @@ public class ReadFromFileServiceImplTest {
     }
 
     @Test
-    public void readFromFile_ValidDataFile_Ok() {
+    public void readFromFile_validDataFile_Ok() {
         String expected = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
@@ -36,23 +36,19 @@ public class ReadFromFileServiceImplTest {
     }
 
     @Test
-    public void readFromFile_EmptyFileInput_Ok() {
+    public void readFromFile_emptyFileInput_Ok() {
         String expected = "";
         String actual = readFromFileService.readFromFile(FILE_WITH_EMPTY_LINE_INPUT);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NonExistingFile_NotOk() {
+    public void readFromFile_nonExistingFile_NotOk() {
         readFromFileService.readFromFile(NON_EXISTING_FILE);
     }
 
     @Test(expected = NullPointerException.class)
-    public void readFromNullFile_NotOk() {
+    public void readFromFile_nullPathFile_NotOk() {
         readFromFileService.readFromFile(null);
     }
 }
-
-
-
-

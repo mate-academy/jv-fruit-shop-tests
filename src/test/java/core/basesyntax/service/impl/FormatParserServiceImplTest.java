@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FormatParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -9,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FormatParserServiceImplTest {
-    private static FormatParserServiceImpl formatParserService;
+    private static FormatParserService formatParserService;
 
     @BeforeClass
     public static void beforeClass() {
@@ -17,12 +18,12 @@ public class FormatParserServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void parse_NullInputData_NotOk() {
+    public void parse_nullInputData_NotOk() {
         formatParserService.parseData(null);
     }
 
     @Test
-    public void parse_ValidInputData_Ok() {
+    public void parse_validInputData_Ok() {
         String inputData = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "r,apple,10\n";

@@ -22,7 +22,7 @@ public class BalanceOperationImplTest {
     }
 
     @Test
-    public void handle_Balance_Ok() {
+    public void handle_balanceOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit(new Fruit("banana"));

@@ -18,11 +18,11 @@ public class SupplyOperationImplTest {
     @BeforeClass
     public static void beforeClass() {
         storageDao = new StorageDaoImpl();
-        strategyOperation = new BalanceOperationImpl(storageDao);
+        strategyOperation = new SupplyOperationImpl(storageDao);
     }
 
     @Test
-    public void handle_Supply_Ok() {
+    public void handle_supplyOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setFruit(new Fruit("banana"));

@@ -10,6 +10,6 @@ public interface StorageDao {
     void increaseFruitQuantity(Fruit fruit, Integer quantity);
 
     Set<Map.Entry<Fruit, Integer>> getAll();
+
+    Integer get(Fruit fruit);
 }
-
-

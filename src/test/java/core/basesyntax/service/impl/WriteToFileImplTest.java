@@ -12,8 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteToFileImplTest {
-    private static final String FILE_PATH = "src/test/java/core"
-            + "/basesyntax/valid_fruitReport_file.csv";
+    private static final String FILE_PATH = "src/test/resources"
+            + "/valid_fruitReport_file.csv";
     private static final String REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152"
             + System.lineSeparator()

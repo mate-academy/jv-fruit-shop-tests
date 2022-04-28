@@ -23,7 +23,7 @@ public class PurchaseOperationImplTest {
     }
 
     @Test
-    public void handle_Purchase_Ok() {
+    public void handle_purchaseOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -37,6 +37,16 @@ public class PurchaseOperationImplTest {
         Assert.assertEquals(expectedQuantity, actualQuantity);
         Assert.assertTrue(Storage.storage.containsKey(fruitTransaction.getFruit()));
         Assert.assertEquals(1, Storage.storage.size());
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void handle_purchaseOperationWithNotEnoughFruits_NotOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        fruitTransaction.setFruit(new Fruit("banana"));
+        fruitTransaction.setQuantity(30);
+
+        strategyOperation.handle(fruitTransaction);
     }
 
     @After

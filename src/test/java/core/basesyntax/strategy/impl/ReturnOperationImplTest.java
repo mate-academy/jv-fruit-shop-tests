@@ -18,11 +18,11 @@ public class ReturnOperationImplTest {
     @BeforeClass
     public static void beforeClass() {
         storageDao = new StorageDaoImpl();
-        strategyOperation = new BalanceOperationImpl(storageDao);
+        strategyOperation = new ReturnOperationImpl(storageDao);
     }
 
     @Test
-    public void handle_Return_Ok() {
+    public void handle_returnOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit(new Fruit("banana"));

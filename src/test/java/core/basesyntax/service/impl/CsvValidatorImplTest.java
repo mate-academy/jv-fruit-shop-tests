@@ -51,7 +51,7 @@ public class CsvValidatorImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_inValidFruitName_NotOk() {
+    public void validate_invalidFruitName_NotOk() {
         dataInput = "b,Coconut,100";
         csvValidator.validate(dataInput);
     }

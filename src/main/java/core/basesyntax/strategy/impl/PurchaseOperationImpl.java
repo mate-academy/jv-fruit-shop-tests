@@ -13,6 +13,10 @@ public class PurchaseOperationImpl implements StrategyOperation {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (storageDao.get(fruitTransaction.getFruit()) < fruitTransaction.getQuantity()) {
+            throw new RuntimeException("Not enough fruits");
+        }
+
         storageDao.decreaseFruitQuantity(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity());
     }

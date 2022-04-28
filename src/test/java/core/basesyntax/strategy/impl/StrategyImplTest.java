@@ -1,6 +1,5 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.Main;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
@@ -8,6 +7,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyOperation;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
@@ -21,12 +21,16 @@ public class StrategyImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        operationHandlerMap = Main.getMap();
+        operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put("RETURN", new ReturnOperationImpl(fruitStorageDao));
+        operationHandlerMap.put("PURCHASE", new PurchaseOperationImpl(fruitStorageDao));
+        operationHandlerMap.put("BALANCE", new BalanceOperationImpl(fruitStorageDao));
+        operationHandlerMap.put("SUPPLY", new SupplyOperationImpl(fruitStorageDao));
         strategy = new StrategyImpl(fruitStorageDao, operationHandlerMap);
     }
 
     @Test
-    public void handle_Balance_Ok() {
+    public void handle_balance_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -43,7 +47,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Supply_Ok() {
+    public void handle_supply_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -60,7 +64,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Return_Ok() {
+    public void handle_return_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit(new Fruit("banana"));
@@ -77,7 +81,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void handle_Purchase_Ok() {
+    public void handle_purchase_Ok() {
         Storage.storage.put(new Fruit("banana"), 20);
 
         FruitTransaction fruitTransaction = new FruitTransaction();

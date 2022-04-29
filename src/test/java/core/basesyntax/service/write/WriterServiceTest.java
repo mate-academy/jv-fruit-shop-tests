@@ -21,17 +21,17 @@ public class WriterServiceTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_EmptyFilePathString_NotOk() {
+    public void write_emptyFilePathString_NotOk() {
         writerService.write("", DEFAULT_REPORT);
     }
 
     @Test (expected = NullPointerException.class)
-    public void writeToFile_NullFilePath_NotOk() {
+    public void writeToFile_nullFilePath_NotOk() {
         writerService.write(null, DEFAULT_REPORT);
     }
 
     @Test (expected = NullPointerException.class)
-    public void write_NullReport_NotOk() {
+    public void write_nullReport_NotOk() {
         writerService.write(REPORT_PATH, null);
     }
 

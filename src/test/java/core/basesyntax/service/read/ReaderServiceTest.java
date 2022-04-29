@@ -5,13 +5,14 @@ import static org.junit.Assert.assertEquals;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceTest {
     private static ReaderService readerService;
-    private static final String VALID_FILE = "src/main/resources/testFile.csv";
+    private static final String VALID_FILE = "src/test/resources/testFile.csv";
     private static final String EMPTY_FILE = "src/test/resources/empty.csv";
 
     @BeforeClass
@@ -21,7 +22,9 @@ public class ReaderServiceTest {
 
     @Test
     public void readFromFile_emptyFile_Ok() {
-        readerService.readFile(EMPTY_FILE);
+        List<String> actual = readerService.readFile(EMPTY_FILE);
+        List<String> expected = Collections.emptyList();
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

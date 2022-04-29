@@ -18,7 +18,7 @@ public class ParserServiceTest {
     }
 
     @Test
-    public void parse_validCase_OK() {
+    public void parse_validCase_Ok() {
         List<String> input = new ArrayList<>();
         input.add("operation,fruit,quantity");
         input.add("b,apple,18");

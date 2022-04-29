@@ -13,7 +13,6 @@ import core.basesyntax.service.reader.ReaderServiceICsvImpl;
 import core.basesyntax.service.writer.WriterServiceCsvImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,10 +62,5 @@ public class FruitTransactionServiceImplTest {
         actual[0] = "banana," + Storage.fruits.get("banana").getQuantity();
         actual[1] = "apple," + Storage.fruits.get("apple").getQuantity();
         Assert.assertArrayEquals(resultExpected, actual);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
     }
 }

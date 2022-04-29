@@ -29,7 +29,6 @@ public class Main {
     private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-
         new WriterServiceImpl().write(INPUT_DATA_PATH,"type,fruit,quantity\n"
                 + "b,banana,18\n"
                 + "b,apple,100\n"

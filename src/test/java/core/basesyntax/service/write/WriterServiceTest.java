@@ -21,22 +21,22 @@ public class WriterServiceTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_EmptyFilePathString_NotOK() {
+    public void write_EmptyFilePathString_NotOk() {
         writerService.write("", DEFAULT_REPORT);
     }
 
     @Test (expected = NullPointerException.class)
-    public void writeToFile_NullFilePath_NotOK() {
+    public void writeToFile_NullFilePath_NotOk() {
         writerService.write(null, DEFAULT_REPORT);
     }
 
     @Test (expected = NullPointerException.class)
-    public void write_NullReport_NotOK() {
+    public void write_NullReport_NotOk() {
         writerService.write(REPORT_PATH, null);
     }
 
     @Test
-    public void write_validInput_OK() {
+    public void write_validInput_Ok() {
         String report = "fruit,quantity\n"
                 + "banana,18" + System.lineSeparator()
                 + "apple,14" + System.lineSeparator()
@@ -48,7 +48,7 @@ public class WriterServiceTest {
     }
 
     @Test
-    public void write_emptyReport_OK() {
+    public void write_emptyReport_Ok() {
         writerService.write(REPORT_PATH, "");
         List<String> actual = read(REPORT_PATH);
         List<String> expected = Collections.EMPTY_LIST;

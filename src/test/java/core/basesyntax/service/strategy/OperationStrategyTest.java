@@ -15,7 +15,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private static StorageDao storageDao;
     private static OperationStrategy operationStrategy;
     private static OperationHandler balanceOperationHandler;
     private static OperationHandler returnOperationHandler;
@@ -24,7 +23,7 @@ public class OperationStrategyTest {
 
     @BeforeClass
     public static void beforeClass() {
-        storageDao = new StorageDaoImpl();
+        StorageDao storageDao = new StorageDaoImpl();
         balanceOperationHandler = new BalanceOperationHandler(storageDao);
         returnOperationHandler = new ReturnOperationHandler(storageDao);
         purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
@@ -38,28 +37,28 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void get_balanceOperationHandler_OK() {
+    public void get_balanceOperationHandler_Ok() {
         OperationHandler expected = balanceOperationHandler;
         OperationHandler actual = operationStrategy.get("b");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void get_purchaseOperationHandler_OK() {
+    public void get_purchaseOperationHandler_Ok() {
         OperationHandler expected = purchaseOperationHandler;
         OperationHandler actual = operationStrategy.get("p");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void get_supplyOperationHandler_OK() {
+    public void get_supplyOperationHandler_Ok() {
         OperationHandler expected = supplyOperationHandler;
         OperationHandler actual = operationStrategy.get("s");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void get_returnOperationHandler_OK() {
+    public void get_returnOperationHandler_Ok() {
         OperationHandler expected = returnOperationHandler;
         OperationHandler actual = operationStrategy.get("r");
         assertEquals(expected, actual);

@@ -45,12 +45,12 @@ public class ParserServiceTest {
     }
 
     @Test (expected = IndexOutOfBoundsException.class)
-    public void parse_EmptyInput_NotOk() {
+    public void parse_emptyInput_NotOk() {
         parserService.parse(new ArrayList<>());
     }
 
     @Test (expected = NullPointerException.class)
-    public void parse_NullInput_NotOk() {
+    public void parse_nullInput_NotOk() {
         parserService.parse(null);
     }
 }

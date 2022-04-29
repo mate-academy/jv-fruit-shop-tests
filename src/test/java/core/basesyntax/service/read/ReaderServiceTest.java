@@ -2,8 +2,9 @@ package core.basesyntax.service.read;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.write.WriterService;
-import core.basesyntax.service.write.WriterServiceImpl;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,32 +12,31 @@ import org.junit.Test;
 public class ReaderServiceTest {
     private static ReaderService readerService;
     private static final String VALID_FILE = "src/main/resources/testFile.csv";
-    private static final String EMPTY_FILE = "empty.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
 
     @BeforeClass
     public static void setUp() {
         readerService = new ReaderServiceImpl();
     }
 
-    @Test (expected = RuntimeException.class)
-    public void readFromFile_EmptyFile_NotOk() {
+    @Test
+    public void readFromFile_emptyFile_Ok() {
         readerService.readFile(EMPTY_FILE);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_EmptyPath_NotOk() {
+    public void readFromFile_emptyPath_NotOk() {
         readerService.readFile("");
     }
 
     @Test (expected = NullPointerException.class)
-    public void readFromFile_NullFilePath_NotOk() {
+    public void readFromFile_nullFilePath_NotOk() {
         readerService.readFile(null);
     }
 
     @Test
-    public void readFromFile_ValidCase_Ok() {
-        WriterService writerService = new WriterServiceImpl();
-        writerService.write(VALID_FILE,
+    public void readFromFile_validCase_Ok() {
+        write(VALID_FILE,
                 "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,18" + System.lineSeparator()
                 + "b,apple,100" + System.lineSeparator()
@@ -57,5 +57,13 @@ public class ReaderServiceTest {
                 "s,banana,544");
         List<String> actual = readerService.readFile(VALID_FILE);
         assertEquals(expected, actual);
+    }
+
+    private void write(String fileName, String report) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(report);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file: " + fileName, e);
+        }
     }
 }

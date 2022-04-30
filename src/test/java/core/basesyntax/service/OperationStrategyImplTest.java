@@ -18,25 +18,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private Map<Operation, OperationHandler> operationHandlerMapTest = new HashMap<>();
-    private OperationStrategy operationStrategy =
-            new OperationStrategyImpl(operationHandlerMapTest);
-    private FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
+    private Map<Operation, OperationHandler> operationHandlerMap;
+    private OperationStrategy operationStrategy;
+    private FruitTransactionDao fruitTransactionDao;
 
     @Before
     public void setUp() {
-        operationHandlerMapTest.put(Operation.SUPPLY,
+        operationHandlerMap = new HashMap<>();
+        operationStrategy =
+                new OperationStrategyImpl(operationHandlerMap);
+        fruitTransactionDao = new FruitTransactionDaoImpl();
+        operationHandlerMap.put(Operation.SUPPLY,
                 new SupplyOperationHandler(fruitTransactionDao));
-        operationHandlerMapTest.put(Operation.BALANCE,
+        operationHandlerMap.put(Operation.BALANCE,
                 new BalanceOperationHandler(fruitTransactionDao));
-        operationHandlerMapTest.put(Operation.PURCHASE,
+        operationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler(fruitTransactionDao));
-        operationHandlerMapTest.put(Operation.RETURN,
+        operationHandlerMap.put(Operation.RETURN,
                 new ReturnOperationHandler(fruitTransactionDao));
     }
 
     @Test
-    public void getOperationHandlerNull_OK() {
+    public void getHandler_operationNull_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(null);
         fruitTransaction.setFruit("apple");
@@ -46,7 +49,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getReturnOperationHandler_Ok() {
+    public void getHandler_returnOperationHandler_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.RETURN, "banana", 80);
         OperationHandler expected = new ReturnOperationHandler(fruitTransactionDao);
         OperationHandler actualHandler = operationStrategy.getHandler(fruitTransaction);
@@ -55,7 +58,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getPurchaseOperationHandler_Ok() {
+    public void getHandler_purchaseOperationHandler_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE, "banana", 80);
         OperationHandler expected = new PurchaseOperationHandler(fruitTransactionDao);
         OperationHandler actualHandler = operationStrategy.getHandler(fruitTransaction);
@@ -64,7 +67,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getBalanceOperationHandler_Ok() {
+    public void getHandler_balanceOperationHandler_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE, "banana", 55);
         OperationHandler expected = new BalanceOperationHandler(fruitTransactionDao);
         OperationHandler actualHandler = operationStrategy.getHandler(fruitTransaction);
@@ -73,7 +76,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getSupplyOperationHandler_OK() {
+    public void getHandler_supplyOperationHandler_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(Operation.SUPPLY);
         fruitTransaction.setFruit("apple");

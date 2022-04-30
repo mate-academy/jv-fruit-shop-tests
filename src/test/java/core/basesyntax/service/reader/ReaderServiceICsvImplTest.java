@@ -1,31 +1,32 @@
 package core.basesyntax.service.reader;
 
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceICsvImplTest {
-    private static final String EMPTY_FILE_NAME = "test1";
-    private static final String SECOND_FILE_NAME = "test2.csv";
-    private static final List<String> RESULT_EMPTY_ARRAY = new ArrayList<>();
-    private ReaderService readerService = new ReaderServiceICsvImpl();
+    private String emptyFileName;
+    private String secondFileName;
+    private ReaderService readerService;
 
-    @Test
-    public void readFromNoExistsFile_notOk() {
-        try {
-            String inputFile = "someNameFile";
-            readerService.readFromFile(inputFile);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("test should fail -> file not exists");
+    @Before
+    public void setUp() throws Exception {
+        emptyFileName = "test1";
+        secondFileName = "test2.csv";
+        readerService = new ReaderServiceICsvImpl();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_readFromNoExistsFile_notOk() {
+        String inputFile = "someNameFile";
+        readerService.readFromFile(inputFile);
     }
 
     @Test
-    public void readFromFileListOfStrings_lines_Ok() {
+    public void readFromFile_validFile_ok() {
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("b,banana,20");
         expectedResult.add("b,apple,100");
@@ -35,24 +36,20 @@ public class ReaderServiceICsvImplTest {
         expectedResult.add("p,apple,20");
         expectedResult.add("p,banana,5");
         expectedResult.add("s,banana,50");
-        List<String> actual = readerService.readFromFile(SECOND_FILE_NAME);
+        List<String> actual = readerService.readFromFile(secondFileName);
         assertEquals(expectedResult, actual);
     }
 
     @Test
-    public void inputFileIsEmpty_notOk() {
-        List<String> actual = readerService.readFromFile(EMPTY_FILE_NAME);
-        assertEquals(RESULT_EMPTY_ARRAY, actual);
+    public void readFromFile_inputFileIsEmpty_notOk() {
+        List<String> emptyList = new ArrayList<>();
+        List<String> actual = readerService.readFromFile(emptyFileName);
+        assertEquals(emptyList, actual);
     }
 
-    @Test
-    public void inputFileIsNull_notOk() {
-        try {
-            readerService.readFromFile(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("test should fail -> pathFile is null");
+    @Test(expected = NullPointerException.class)
+    public void readFromFile_inputFileIsNull_notOk() {
+        readerService.readFromFile(null);
     }
 
 }

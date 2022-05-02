@@ -91,7 +91,19 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/strategy/BalanceOperationHandler*</exclude>
+                        <exclude>**/strategy/PurchaseOperationHandler*</exclude>
+                        <exclude>**/strategy/ReturnOperationHandler*</exclude>
+                        <exclude>**/strategy/SupplyOperationHandler*</exclude>
+                        <exclude>**/strategy/OperationHandler*</exclude>
+                        <exclude>**/service/OutputService*</exclude>
+                        <exclude>**/model/Transaction*</exclude>
+                        <exclude>**/model/Fruit*</exclude>
+                        <exclude>**/db/Storage*</exclude>
                     </excludes>
+<!--                    <includes>-->
+<!--                        <include>**/service/impl/BalanceOperationImpl*</include>-->
+<!--                    </includes>-->
                 </configuration>
             </plugin>
         </plugins>

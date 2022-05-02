@@ -58,7 +58,7 @@ public class OperationServiceImplTest {
         String expected = "fruit,quantity\nbanana,40"
                 + System.lineSeparator()
                 + "apple,50"
-                +System.lineSeparator();
+                + System.lineSeparator();
         assertEquals(expected, actual);
     }
 

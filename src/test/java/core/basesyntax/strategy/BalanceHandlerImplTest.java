@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BalanceHandlerTest {
+public class BalanceHandlerImplTest {
     private static StorageDao dao;
-    private static OperationHandler operationHandler;
+    private static BalanceHandler operationHandler;
     private static Map<Fruit, Integer> storage;
 
     @BeforeClass
@@ -33,5 +33,14 @@ public class BalanceHandlerTest {
         Assert.assertTrue(storage.containsKey(new Fruit("banana")));
         Assert.assertTrue(storage.containsValue(100));
         Assert.assertEquals(1, storage.size());
+    }
+
+    @Test
+    public void testEquals() {
+        BalanceHandler clazz = new BalanceHandler(dao);
+        Assert.assertEquals(clazz.hashCode(), operationHandler.hashCode());
+        Assert.assertNotEquals(clazz, null);
+        Assert.assertEquals(clazz, operationHandler);
+        Assert.assertEquals(clazz, clazz);
     }
 }

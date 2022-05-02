@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReportServiceTest {
+public class ReportServiceImplTest {
     private static final Map<Fruit, Integer> emptyMap = new HashMap<>();
     private static final Map<Fruit, Integer> storage = new HashMap<>();
     private static ReportService reportService;

@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ParserTest {
+public class ParserImplTest {
     private static Parser parser;
 
     @BeforeClass

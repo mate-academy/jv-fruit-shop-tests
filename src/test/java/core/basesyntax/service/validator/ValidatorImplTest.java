@@ -4,7 +4,7 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ValidatorTest {
+public class ValidatorImplTest {
     private static Validator validator;
 
     @BeforeClass

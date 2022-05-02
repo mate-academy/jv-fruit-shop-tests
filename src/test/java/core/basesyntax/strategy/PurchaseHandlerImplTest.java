@@ -44,4 +44,13 @@ public class PurchaseHandlerImplTest {
         Assert.assertEquals(70, (int) storage.get(new Fruit("banana")));
         Assert.assertEquals(1, storage.size());
     }
+
+    @Test
+    public void testEquals() {
+        PurchaseHandlerImpl clazz = new PurchaseHandlerImpl(dao);
+        Assert.assertEquals(clazz, operationHandler);
+        Assert.assertEquals(clazz.hashCode(), operationHandler.hashCode());
+        Assert.assertEquals(clazz, clazz);
+        Assert.assertNotEquals(clazz, null);
+    }
 }

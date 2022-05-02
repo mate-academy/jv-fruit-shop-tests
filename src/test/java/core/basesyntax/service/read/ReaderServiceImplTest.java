@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReaderServiceTest {
+public class ReaderServiceImplTest {
     private static ReaderService readerService;
     private static final String VALID_DATA_PATH = "src/test/java/resources/validData.csv";
     private static final String INCORRECT_PATH = "src/test/java/validData.csv";

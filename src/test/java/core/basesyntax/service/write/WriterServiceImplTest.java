@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriterServiceTest {
+public class WriterServiceImplTest {
 
     private static final String INPUT_PATH = "src/test/java/resources/validData.csv";
     private static final String OUTPUT_PATH = "src/test/java/resources/emptyFile.csv";

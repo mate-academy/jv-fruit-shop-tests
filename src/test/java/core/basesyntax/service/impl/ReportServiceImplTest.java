@@ -32,7 +32,12 @@ public class ReportServiceImplTest {
         Storage.dataBase.put(new Fruit("orange"), 67);
         Storage.dataBase.put(new Fruit("banana"), 14);
         String actual = reportService.report();
-        String expected = "fruit,quantity\nbanana,14\r\napple,10\r\norange,67\r\n";
+        String expected = "fruit,quantity\nbanana,14"
+                + System.lineSeparator()
+                + "apple,10"
+                + System.lineSeparator()
+                + "orange,67"
+                + System.lineSeparator();
         assertEquals(expected, actual);
     }
 
@@ -42,7 +47,7 @@ public class ReportServiceImplTest {
         Storage.dataBase.put(null, 67);
         Storage.dataBase.put(new Fruit("banana"), null);
         String actual = reportService.report();
-        String expected = "fruit,quantity\napple,10\r\n";
+        String expected = "fruit,quantity\napple,10" + System.lineSeparator();
         assertEquals(expected, actual);
     }
 }

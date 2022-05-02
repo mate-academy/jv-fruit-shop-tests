@@ -55,8 +55,11 @@ public class OperationServiceImplTest {
         List<FruitTransaction> fruitTransactions = parseService.getInfo(list);
         operationService.calculate(fruitTransactions);
         String actual = reportService.report();
-        String expected = "fruit,quantity\nbanana,40\r\napple,50\r\n";
-        assertEquals(actual, expected);
+        String expected = "fruit,quantity\nbanana,40"
+                + System.lineSeparator()
+                + "apple,50"
+                +System.lineSeparator();
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

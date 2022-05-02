@@ -13,7 +13,7 @@ public class StorageDaoImplTest {
     private static StorageDao storageDao;
 
     @BeforeClass
-    public static void setUpFirst() {
+    public static void setUp() {
         storageDao = new StorageDaoImpl();
     }
 
@@ -50,7 +50,7 @@ public class StorageDaoImplTest {
     }
 
     @After
-    public void clearStorage() {
+    public void cleanStorage() {
         storageDao.clear();
     }
 }

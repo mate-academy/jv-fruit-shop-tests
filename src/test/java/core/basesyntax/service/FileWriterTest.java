@@ -47,7 +47,7 @@ public class FileWriterTest {
     }
 
     @AfterClass
-    public static void clear() {
+    public static void cleanUp() {
         try {
             Files.delete(Path.of(newFilePath));
         } catch (IOException e) {

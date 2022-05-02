@@ -48,7 +48,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @After
-    public void clear() {
+    public void cleanUp() {
         storageDao.clear();
     }
 }

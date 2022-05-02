@@ -13,7 +13,7 @@ public class ParserTest {
     private static Function<List<String>, List<FruitTransaction>> parser;
 
     @BeforeClass
-    public static void setUpFirst() {
+    public static void setUp() {
         parser = new Parser();
     }
 
@@ -23,8 +23,23 @@ public class ParserTest {
     }
 
     @Test
+    public void apply_emptyList_OK() {
+        List<FruitTransaction> expected = List.of();
+        List<FruitTransaction> actual = parser.apply(List.of());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void apply_onlyHeaderList_Ok() {
+        List<FruitTransaction> expected = List.of();
+        List<FruitTransaction> actual = parser.apply(List.of("type,fruit,quantity"));
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void apply_correctData_Ok() {
-        List<FruitTransaction> expected = List.of(new FruitTransaction(new Fruit("apple"), 5,"b"));
+        FruitTransaction appleTransaction = new FruitTransaction(new Fruit("apple"), 5, "b");
+        List<FruitTransaction> expected = List.of(appleTransaction);
         List<FruitTransaction> actual = parser.apply(List.of("b,apple,5"));
         assertEquals(expected, actual);
     }

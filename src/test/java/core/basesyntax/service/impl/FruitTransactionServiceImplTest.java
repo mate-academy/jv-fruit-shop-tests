@@ -21,7 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
-    private static FruitTransactionService fruitTransaction;
+    private static FruitTransactionService fruitService;
     private static OperationStrategy operationStrategy;
     private static StorageDao storageDao;
 
@@ -34,12 +34,12 @@ public class FruitTransactionServiceImplTest {
         operationHandlerMap.put("r", new ReturnOperationHandler(storageDao));
         operationHandlerMap.put("s", new SupplyOperationHandler(storageDao));
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        fruitTransaction = new FruitTransactionServiceImpl(operationStrategy);
+        fruitService = new FruitTransactionServiceImpl(operationStrategy);
     }
 
     @Test(expected = RuntimeException.class)
     public void transfer_nullValue_NotOk() {
-        fruitTransaction.transfer(null);
+        fruitService.transfer(null);
     }
 
     @Test(expected = RuntimeException.class)
@@ -47,7 +47,7 @@ public class FruitTransactionServiceImplTest {
         Fruit orange = new Fruit("orange");
         List<FruitTransaction> transactionList = List.of(
                 new FruitTransaction(orange, 0, "r"));
-        fruitTransaction.transfer(transactionList);
+        fruitService.transfer(transactionList);
     }
 
     @Test
@@ -57,12 +57,12 @@ public class FruitTransactionServiceImplTest {
                 new FruitTransaction(orange, 0, "b"),
                 new FruitTransaction(orange, 2, "s"),
                 new FruitTransaction(orange, 2, "p"));
-        fruitTransaction.transfer(transactionList);
+        fruitService.transfer(transactionList);
         Assert.assertEquals(0, storageDao.get(orange).intValue());
     }
 
     @After
-    public void clear() {
+    public void cleanUp() {
         storageDao.clear();
     }
 }

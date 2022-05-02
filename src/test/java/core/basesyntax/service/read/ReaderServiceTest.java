@@ -1,9 +1,9 @@
 package core.basesyntax.service.read;
 
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.List;
 
 public class ReaderServiceTest {
     private static ReaderService readerService;

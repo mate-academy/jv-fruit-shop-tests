@@ -1,8 +1,8 @@
 package core.basesyntax.service.validator;
 
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.List;
 
 public class ValidatorTest {
     private static Validator validator;

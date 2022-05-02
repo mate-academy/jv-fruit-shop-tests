@@ -1,11 +1,11 @@
 package core.basesyntax.service.report;
 
 import core.basesyntax.model.Fruit;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ReportServiceTest {
     private static final Map<Fruit, Integer> emptyMap = new HashMap<>();

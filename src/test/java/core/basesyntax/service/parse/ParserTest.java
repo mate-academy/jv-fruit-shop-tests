@@ -2,11 +2,11 @@ package core.basesyntax.service.parse;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParserTest {
     private static Parser parser;

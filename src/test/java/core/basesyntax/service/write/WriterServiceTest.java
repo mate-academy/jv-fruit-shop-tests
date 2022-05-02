@@ -2,11 +2,11 @@ package core.basesyntax.service.write;
 
 import core.basesyntax.service.read.ReaderService;
 import core.basesyntax.service.read.ReaderServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WriterServiceTest {
 

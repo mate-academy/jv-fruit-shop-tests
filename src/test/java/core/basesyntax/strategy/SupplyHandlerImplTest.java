@@ -4,11 +4,11 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.Map;
 
 public class SupplyHandlerImplTest {
     private static OperationHandler operationHandler;

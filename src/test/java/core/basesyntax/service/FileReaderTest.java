@@ -29,8 +29,8 @@ public class FileReaderTest {
         fileReader.read("wrong name");
     }
 
-    @Test(expected = NullPointerException.class)
-    public void read_nullValue_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void read_nullFileName_NotOk() {
         fileReader.read(null);
     }
 

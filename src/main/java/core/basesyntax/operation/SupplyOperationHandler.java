@@ -12,6 +12,8 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public boolean apply(Fruit fruit, int quantity) {
-        return storageDao.add(fruit, storageDao.get(fruit) + quantity);
+        Integer quantityFromStorage = storageDao.get(fruit);
+        return storageDao.add(fruit,
+                quantityFromStorage == null ? quantity : quantityFromStorage + quantity);
     }
 }

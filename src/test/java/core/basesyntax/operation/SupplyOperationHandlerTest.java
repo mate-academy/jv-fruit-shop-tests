@@ -28,8 +28,8 @@ public class SupplyOperationHandlerTest {
         supplyHandler.apply(new Fruit("orange"), -1);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void apply_correctDataEmptyStorage_NotOk() {
+    @Test
+    public void apply_correctDataEmptyStorage_Ok() {
         supplyHandler.apply(new Fruit("orange"), 0);
     }
 

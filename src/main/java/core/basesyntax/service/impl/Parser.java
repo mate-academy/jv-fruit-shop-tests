@@ -14,6 +14,9 @@ public class Parser implements Function<List<String>, List<FruitTransaction>> {
 
     @Override
     public List<FruitTransaction> apply(List<String> stringList) {
+        if (stringList == null) {
+            throw new RuntimeException("Input list is null");
+        }
         return stringList.stream()
                 .filter(e -> !e.startsWith("type"))
                 .map(e -> {

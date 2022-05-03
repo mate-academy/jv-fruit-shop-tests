@@ -29,14 +29,21 @@ public class FileWriterTest {
     @Test
     public void write_createFile_Ok() {
         Assert.assertTrue(fileWriter.write(newFilePath, "create new file"));
+        String actual;
+        try {
+            actual = Files.readString(Path.of(newFilePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file " + newFilePath, e);
+        }
+        Assert.assertEquals("create new file", actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void write_nullReport_NotOk() {
         fileWriter.write(outputPath, null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void write_nullFilePath_NotOk() {
         fileWriter.write(null, "test");
     }

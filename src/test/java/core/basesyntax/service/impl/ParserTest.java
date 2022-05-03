@@ -23,7 +23,7 @@ public class ParserTest {
     }
 
     @Test
-    public void apply_emptyList_OK() {
+    public void apply_emptyList_Ok() {
         List<FruitTransaction> expected = List.of();
         List<FruitTransaction> actual = parser.apply(List.of());
         assertEquals(expected, actual);
@@ -44,7 +44,7 @@ public class ParserTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void apply_nullData_NotOk() {
         parser.apply(null);
     }

@@ -12,6 +12,9 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public boolean apply(Fruit fruit, int quantity) {
+        if (storageDao.get(fruit) == null) {
+            throw new RuntimeException("Can't return " + fruit);
+        }
         return storageDao.add(fruit, storageDao.get(fruit) + quantity);
     }
 }

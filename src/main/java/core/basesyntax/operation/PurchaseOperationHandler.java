@@ -12,11 +12,11 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public boolean apply(Fruit fruit, int quantity) {
-        int quantityFromDB = storageDao.get(fruit);
-        if (quantity > quantityFromDB) {
+        Integer quantityFromDB = storageDao.get(fruit);
+        if (quantity > (quantityFromDB == null ? 0 : quantityFromDB)) {
             throw new RuntimeException("Shop don't have enough fruit, please peek less than "
                     + quantityFromDB);
         }
-        return storageDao.add(fruit, storageDao.get(fruit) - quantity);
+        return storageDao.add(fruit, quantityFromDB == null ? 0 : quantityFromDB - quantity);
     }
 }

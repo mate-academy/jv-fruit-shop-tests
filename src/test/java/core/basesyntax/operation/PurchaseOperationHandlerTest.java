@@ -17,8 +17,8 @@ public class PurchaseOperationHandlerTest {
         purchaseHandler = new PurchaseOperationHandler(storageDao);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void apply_emptyData_NotOk() {
+    @Test
+    public void apply_emptyData_Ok() {
         purchaseHandler.apply(new Fruit("apple"), 0);
     }
 

@@ -9,16 +9,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-
     private static final String INPUT_PATH = "src/test/java/resources/validData.csv";
     private static final String OUTPUT_PATH = "src/test/java/resources/emptyFile.csv";
     private static final String SEPARATOR = System.lineSeparator();
-    private static String strings = new String();
+    private static String strings;
     private static WriterService writerService;
     private static ReaderService readerService;
 
     @BeforeClass
     public static void beforeClass() {
+        strings = new String();
         readerService = new ReaderServiceImpl();
         writerService = new WriterServiceImpl();
         strings = "type,fruit,quantity"

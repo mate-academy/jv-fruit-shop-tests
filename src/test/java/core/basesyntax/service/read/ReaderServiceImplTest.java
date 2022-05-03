@@ -22,7 +22,6 @@ public class ReaderServiceImplTest {
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100");
-
         List<String> actual = readerService.read(VALID_DATA_PATH);
         Assert.assertEquals(expected, actual);
     }

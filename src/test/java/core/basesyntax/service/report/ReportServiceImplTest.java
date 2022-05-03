@@ -8,8 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static final Map<Fruit, Integer> emptyMap = new HashMap<>();
-    private static final Map<Fruit, Integer> storage = new HashMap<>();
+    private static Map<Fruit, Integer> emptyMap;
+    private static Map<Fruit, Integer> storage;
     private static ReportService reportService;
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String EXPECTED = "fruit,quantity"
@@ -17,6 +17,8 @@ public class ReportServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        emptyMap = new HashMap<>();
+        storage = new HashMap<>();
         reportService = new ReportServiceImpl();
         storage.put(new Fruit("banana"), 50);
         storage.put(new Fruit("apple"), 70);

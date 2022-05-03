@@ -1,6 +1,7 @@
 package core.basesyntax.service.validator;
 
 import java.util.List;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -36,6 +37,7 @@ public class ValidatorImplTest {
                 "s,apple,100",
                 "s,banana,100"
         );
-        validator.validate(data);
+        boolean actual = validator.validate(data);
+        Assert.assertTrue(actual);
     }
 }

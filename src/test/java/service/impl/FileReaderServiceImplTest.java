@@ -8,6 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
+    private static final String VALID_PATH = "src/test/resources/input.csv";
+    private static final String INVALID_PATH = "src/test/resources/inpu.csv";
     private static FileReaderServiceImpl fileReader;
     private static List<String> inputData;
     private static String filePath;
@@ -29,7 +31,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFile_correctData_isOk() {
-        filePath = "src/test/resources/input.csv";
+        filePath = VALID_PATH;
         List<String> expected = inputData;
         List<String> actual = fileReader.getFileData(filePath);
         assertEquals(expected, actual);
@@ -37,7 +39,12 @@ public class FileReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readFile_incorrectData_notOk() {
-        filePath = "src/test/resources/inpu.csv";
+        filePath = INVALID_PATH;
         List<String> actual = fileReader.getFileData(filePath);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void readFile_nullPath_NotOk() {
+        fileReader.getFileData(null);
     }
 }

@@ -11,6 +11,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
+    private static final String VALID_PATH = "src/test/resources/report.csv";
+    private static final String INVALID_PATH = "C:Users/QQ";
     private static String report;
     private static FileWriterServiceImpl fileWriter;
     private static List<String> expected;
@@ -33,7 +35,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeFile_withValidPath_isOk() {
-        filePath = "src/test/resources/report.csv";
+        filePath = VALID_PATH;
         fileWriter.writeFile(filePath, report);
         try {
             actual = Files.readAllLines(Path.of(filePath));
@@ -45,7 +47,7 @@ public class FileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeFile_withInvalidPath_notOk() {
-        filePath = "C:Users/QQ";
+        filePath = INVALID_PATH;
         fileWriter.writeFile(filePath, report);
     }
 }

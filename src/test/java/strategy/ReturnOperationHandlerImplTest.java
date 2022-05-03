@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import model.Fruit;
 import model.FruitTransaction;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import storage.Storage;
@@ -16,6 +17,10 @@ public class ReturnOperationHandlerImplTest {
     @BeforeClass
     public static void beforeClass() {
         purchaseHandler = new ReturnOperationHandlerImpl();
+    }
+
+    @Before
+    public void setUp() {
         Storage.storage.put(new Fruit("banana"), 200);
         Storage.storage.put(new Fruit("apple"), 100);
     }

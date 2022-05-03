@@ -3,6 +3,7 @@ package strategy;
 import model.Fruit;
 import model.FruitTransaction;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import storage.Storage;
@@ -15,6 +16,10 @@ public class BalanceOperationHandlerImplTest {
     @BeforeClass
     public static void beforeClass() {
         balanceHandler = new BalanceOperationHandlerImpl();
+    }
+
+    @Before
+    public void setUp() {
         Storage.storage.put(new Fruit("banana"), 100);
         Storage.storage.put(new Fruit("apple"), 42);
     }

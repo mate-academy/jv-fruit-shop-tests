@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import service.FileWriterService;
 
 public class FileWriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/report.csv";
     private static final String INVALID_PATH = "C:Users/QQ";
     private static String report;
-    private static FileWriterServiceImpl fileWriter;
+    private static FileWriterService fileWriter;
     private static List<String> expected;
-    private static List<String> actual;
-    private static String filePath;
 
     @BeforeClass
     public static void beforeClass() {
@@ -35,19 +34,18 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeFile_withValidPath_isOk() {
-        filePath = VALID_PATH;
-        fileWriter.writeFile(filePath, report);
+        fileWriter.writeFile(VALID_PATH, report);
+        List<String> actual;
         try {
-            actual = Files.readAllLines(Path.of(filePath));
+            actual = Files.readAllLines(Path.of(VALID_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find data in file" + filePath, e);
+            throw new RuntimeException("Can't find data in file" + VALID_PATH, e);
         }
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeFile_withInvalidPath_notOk() {
-        filePath = INVALID_PATH;
-        fileWriter.writeFile(filePath, report);
+        fileWriter.writeFile(INVALID_PATH, report);
     }
 }

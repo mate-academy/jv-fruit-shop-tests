@@ -11,6 +11,7 @@ import model.FruitTransaction;
 import model.Operation;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import service.FruitShopService;
 import service.OperationService;
 import storage.Storage;
 import strategy.BalanceOperationHandlerImpl;
@@ -21,9 +22,7 @@ import strategy.SupplyOperationHandlerImpl;
 
 public class FruitShopServiceImplTest {
     private static List<FruitTransaction> fruitRecordList;
-    private static FruitShopServiceImpl fruitShopService;
-    private static int expected;
-    private static int actual;
+    private static FruitShopService fruitShopService;
 
     @BeforeClass
     public static void beforeClass() {
@@ -47,9 +46,9 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void process_correctAmount_isOk() {
-        expected = 220;
+        int expected = 220;
         fruitShopService.process(fruitRecordList);
-        actual = Storage.storage.get(new Fruit("banana"));
+        int actual = Storage.storage.get(new Fruit("banana"));
         assertEquals(expected, actual);
     }
 }

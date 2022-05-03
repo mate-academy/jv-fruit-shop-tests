@@ -7,12 +7,13 @@ import model.FruitTransaction;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import service.ParseService;
 
 public class ParseServiceImplTest {
     private static List<String> lineList;
     private static List<FruitTransaction> expected;
     private static List<FruitTransaction> actual;
-    private static ParseServiceImpl fruitParser;
+    private static ParseService fruitParser;
 
     @BeforeClass
     public static void beforeClass() {

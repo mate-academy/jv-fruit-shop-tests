@@ -6,12 +6,13 @@ import model.Fruit;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import service.ReportService;
 import storage.Storage;
 
 public class ReportServiceImplTest {
     private static Fruit banana;
     private static Fruit apple;
-    private static ReportServiceImpl reportService;
+    private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {

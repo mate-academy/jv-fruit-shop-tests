@@ -7,6 +7,7 @@ import java.util.Map;
 import model.Operation;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import service.OperationService;
 import strategy.BalanceOperationHandlerImpl;
 import strategy.OperationHandler;
 import strategy.PurchaseOperationHandlerImpl;
@@ -14,7 +15,7 @@ import strategy.ReturnOperationHandlerImpl;
 import strategy.SupplyOperationHandlerImpl;
 
 public class OperationServiceImplTest {
-    private static OperationServiceImpl operationStrategy;
+    private static OperationService operationStrategy;
     private static Map<Operation, OperationHandler> handlerMap;
     private static OperationHandler expected;
     private static OperationHandler actual;

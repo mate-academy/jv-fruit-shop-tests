@@ -7,8 +7,8 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
-    private static final String VALID_DATA_PATH = "src/test/java/resources/validData.csv";
-    private static final String INCORRECT_PATH = "src/test/java/validData.csv";
+    private static final String VALID_DATA_PATH = "src/test/resources/validData.csv";
+    private static final String INCORRECT_PATH = "src/test/validData.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -24,11 +24,6 @@ public class ReaderServiceImplTest {
                 "s,banana,100");
         List<String> actual = readerService.read(VALID_DATA_PATH);
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void read_incorrectPath_NotOk() {
-        readerService.read(INCORRECT_PATH);
     }
 
     @Test(expected = NullPointerException.class)

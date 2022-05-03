@@ -52,13 +52,4 @@ public class SupplyHandlerImplTest {
         Assert.assertTrue(storage.containsValue(70));
         Assert.assertEquals(2, storage.size());
     }
-
-    @Test
-    public void testEquals() {
-        SupplyHandlerImpl clazz = new SupplyHandlerImpl(dao);
-        Assert.assertEquals(clazz.hashCode(), operationHandler.hashCode());
-        Assert.assertNotEquals(clazz, null);
-        Assert.assertEquals(clazz, operationHandler);
-        Assert.assertEquals(clazz, clazz);
-    }
 }

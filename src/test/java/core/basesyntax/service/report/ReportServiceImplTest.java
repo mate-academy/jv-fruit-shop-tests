@@ -8,37 +8,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static Map<Fruit, Integer> emptyMap;
-    private static Map<Fruit, Integer> storage;
     private static ReportService reportService;
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String EXPECTED = "fruit,quantity"
-            + LINE_SEPARATOR + "banana,50" + LINE_SEPARATOR + "apple,70";
 
     @BeforeClass
     public static void beforeClass() {
-        emptyMap = new HashMap<>();
-        storage = new HashMap<>();
         reportService = new ReportServiceImpl();
-        storage.put(new Fruit("banana"), 50);
-        storage.put(new Fruit("apple"), 70);
     }
 
     @Test
     public void createReport_validOutput_Ok() {
+        Map<Fruit, Integer> storage = new HashMap<>();
+        storage.put(new Fruit("banana"), 50);
+        storage.put(new Fruit("apple"), 70);
+        String expected = "fruit,quantity"
+                + System.lineSeparator() + "banana,50"
+                + System.lineSeparator() + "apple,70";
         String actual = reportService.createReport(storage.entrySet());
-        Assert.assertEquals(EXPECTED, actual);
-    }
-
-    @Test
-    public void createReport_emptyInput_NotOk() {
-        String expected = "fruit,quantity";
-        String actual = reportService.createReport(emptyMap.entrySet());
         Assert.assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void createReport_null_NotOk() {
-        reportService.createReport(null);
+    @Test
+    public void createReport_emptyInput_Ok() {
+        Map<Fruit, Integer> emptyMap = new HashMap<>();;
+        String expected = "fruit,quantity";
+        String actual = reportService.createReport(emptyMap.entrySet());
+        Assert.assertEquals(expected, actual);
     }
 }

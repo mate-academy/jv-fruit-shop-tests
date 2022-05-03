@@ -24,11 +24,6 @@ public class ValidatorImplTest {
         validator.validate(data);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void validate_nullData_NotOk() {
-        validator.validate(null);
-    }
-
     @Test
     public void validate_correctData_Ok() {
         List<String> data = List.of(

@@ -9,22 +9,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private static List<String> data;
     private static Parser parser;
 
     @BeforeClass
     public static void beforeClass() {
         parser = new ParserImpl();
-        data = new ArrayList<>();
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void parse_NullInputData_NotOk() {
-        parser.parse(null);
     }
 
     @Test
-    public void parse_ValidInputData_NotOk() {
+    public void parse_ValidInputData_Ok() {
+        List<String> data = new ArrayList<>();;
         data.add("type,fruit,quantity");
         data.add("b,banana,20");
         data.add("b,apple,100");
@@ -34,6 +28,15 @@ public class ParserImplTest {
                 20));
         expected.add(new FruitTransaction("b", new Fruit("apple"),
                 100));
+        List<FruitTransaction> actual = parser.parse(data);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parse_ValidInputOneLine_Ok() {
+        List<String> data = new ArrayList<>();;
+        data.add("type,fruit,quantity");
+        List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> actual = parser.parse(data);
         Assert.assertEquals(expected, actual);
     }

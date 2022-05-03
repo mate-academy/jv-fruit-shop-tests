@@ -8,15 +8,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyTest {
-    private static final StorageDao dao = new StorageDaoImpl();
-    private static SupplyHandlerImpl supplyHandler;
-    private static PurchaseHandlerImpl purchaseHandler;
-    private static BalanceHandler balanceHandler;
+    private static StorageDao dao;
+    private static OperationHandler supplyHandler;
+    private static OperationHandler purchaseHandler;
+    private static OperationHandler balanceHandler;
     private static Strategy strategy;
     private static Map<String, OperationHandler> operation;
 
     @BeforeClass
     public static void beforeClass() {
+        dao = new StorageDaoImpl();
         supplyHandler = new SupplyHandlerImpl(dao);
         purchaseHandler = new PurchaseHandlerImpl(dao);
         balanceHandler = new BalanceHandler(dao);

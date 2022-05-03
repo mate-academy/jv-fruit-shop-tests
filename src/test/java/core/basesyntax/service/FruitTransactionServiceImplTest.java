@@ -20,8 +20,6 @@ import org.junit.Test;
 public class FruitTransactionServiceImplTest {
     private static final String NORMAL_FILE = "test2.csv";
     private static final String BALANCE_RETURN_FILE = "test3.csv";
-    private String[] expectedResult;
-    private String[] resultExpected;
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMapTest =
             new HashMap<>();
     private FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
@@ -45,22 +43,22 @@ public class FruitTransactionServiceImplTest {
     @Test
     public void balanceReturnFile_Ok() {
         String outputFile = "resultBalanceReturnFile.csv";
-        expectedResult = new String[] {"banana,20", "apple,130"};
         String[] actual = new String[2];
         fruitTransactionService.process(BALANCE_RETURN_FILE, outputFile);
         actual[0] = "banana," + Storage.fruits.get("banana").getQuantity();
         actual[1] = "apple," + Storage.fruits.get("apple").getQuantity();
+        String[] expectedResult = new String[] {"banana,20", "apple,130"};
         Assert.assertArrayEquals(expectedResult, actual);
     }
 
     @Test
     public void outputFileIsCorrect_Ok() {
         String outputFile = "resultTest.csv";
-        resultExpected = new String[] {"banana,152", "apple,90"};
         fruitTransactionService.process(NORMAL_FILE, outputFile);
         String[] actual = new String[2];
         actual[0] = "banana," + Storage.fruits.get("banana").getQuantity();
         actual[1] = "apple," + Storage.fruits.get("apple").getQuantity();
-        Assert.assertArrayEquals(resultExpected, actual);
+        String[] expected = new String[] {"banana,152", "apple,90"};
+        Assert.assertArrayEquals(expected, actual);
     }
 }

@@ -10,7 +10,7 @@ public class WriterServiceCsvImplTest {
     private WriterService writer;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         writer = new WriterServiceCsvImpl();
     }
 

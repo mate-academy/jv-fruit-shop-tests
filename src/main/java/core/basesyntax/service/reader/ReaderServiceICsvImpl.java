@@ -10,6 +10,9 @@ import java.util.List;
 public class ReaderServiceICsvImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String inputFile) {
+        if (inputFile == null) {
+            throw new RuntimeException("This file not exist inputFile: " + inputFile);
+        }
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
             String value = reader.readLine();

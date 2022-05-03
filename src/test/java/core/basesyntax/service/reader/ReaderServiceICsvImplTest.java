@@ -13,7 +13,7 @@ public class ReaderServiceICsvImplTest {
     private ReaderService readerService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         emptyFileName = "test1";
         secondFileName = "test2.csv";
         readerService = new ReaderServiceICsvImpl();
@@ -46,10 +46,4 @@ public class ReaderServiceICsvImplTest {
         List<String> actual = readerService.readFromFile(emptyFileName);
         assertEquals(emptyList, actual);
     }
-
-    @Test(expected = NullPointerException.class)
-    public void readFromFile_inputFileIsNull_notOk() {
-        readerService.readFromFile(null);
-    }
-
 }

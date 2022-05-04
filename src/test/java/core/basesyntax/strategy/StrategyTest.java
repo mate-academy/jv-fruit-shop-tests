@@ -29,16 +29,16 @@ public class StrategyTest {
     public void get_validOutput_Ok() {
         OperationHandler expected = purchaseHandler;
         OperationHandler actual = strategy.get("p");
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void getMap_validOutput_Ok() {
         Map<String, OperationHandler> actual = operation;
-        Assert.assertEquals(actual.get("s"), supplyHandler);
-        Assert.assertEquals(actual.get("p"), purchaseHandler);
-        Assert.assertEquals(actual.get("b"), balanceHandler);
-        Assert.assertEquals(actual.get("r"), supplyHandler);
+        Assert.assertEquals(actual.get("s").getClass(), supplyHandler.getClass());
+        Assert.assertEquals(actual.get("p").getClass(), purchaseHandler.getClass());
+        Assert.assertEquals(actual.get("b").getClass(), balanceHandler.getClass());
+        Assert.assertEquals(actual.get("r").getClass(), supplyHandler.getClass());
         Assert.assertTrue(actual.containsKey("p"));
         Assert.assertTrue(actual.containsKey("s"));
         Assert.assertTrue(actual.containsKey("b"));

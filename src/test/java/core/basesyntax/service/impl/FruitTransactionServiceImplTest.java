@@ -1,53 +1,62 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
+import java.util.Collections;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-
 public class FruitTransactionServiceImplTest {
-    FruitDao fruitDao;
-    FruitTransactionService transactionService;
-    List<FruitTransaction> testTransactionFruits;
-    List<Fruit> fruitList;
-    List<FruitTransaction> balanceList;
-    List<FruitTransaction> supplyList;
-    List<FruitTransaction> purchaseList;
-    List<FruitTransaction> returnList;
+    private FruitDao fruitDao;
+    private FruitTransactionService transactionService;
+    private List<FruitTransaction> testTransactionFruits;
+    private List<Fruit> fruitList;
+    private List<FruitTransaction> balanceList;
+    private List<FruitTransaction> supplyList;
+    private List<FruitTransaction> purchaseList;
+    private List<FruitTransaction> returnList;
+    private FruitTransaction tetstBalanceOperation;
+    private FruitTransaction testSupplyOperation;
+    private FruitTransaction testPurchaseOperation;
+    private FruitTransaction testReturnOperation;
 
     @Before
-    public void setUp() throws Exception {
-        Fruit banana = new Fruit("banana", 55);
-
-        fruitList = List.of(new Fruit("banana", 110));
-
-        FruitTransaction balanceOperation = new FruitTransaction(FruitTransaction.Operation.BALANCE, new Fruit("banana", 55));
-        FruitTransaction supplyOperation = new FruitTransaction(FruitTransaction.Operation.SUPPLY, new Fruit("banana", 55));
-        FruitTransaction purchaseOperation = new FruitTransaction(FruitTransaction.Operation.PURCHASE, new Fruit("banana", 55));
-        FruitTransaction returnOperation = new FruitTransaction(FruitTransaction.Operation.RETURN, new Fruit("banana", 55));
-
-        balanceList = List.of(balanceOperation);
-        supplyList = List.of(balanceOperation, supplyOperation);
-        purchaseList = List.of(balanceOperation, purchaseOperation);
-        returnList = List.of(balanceOperation, returnOperation);
-
-        testTransactionFruits = List.of(balanceOperation, supplyOperation, purchaseOperation, returnOperation);
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         transactionService = new FruitTransactionServiceImpl(fruitDao);
+        fruitList = List.of(new Fruit("banana", 110));
+
+        tetstBalanceOperation = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                new Fruit("banana", 55));
+
+        testSupplyOperation = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                new Fruit("banana", 55));
+
+        testPurchaseOperation = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                new Fruit("banana", 55));
+
+        testReturnOperation = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                new Fruit("banana", 55));
+
+        balanceList = List.of(tetstBalanceOperation);
+        supplyList = List.of(tetstBalanceOperation, testSupplyOperation);
+        purchaseList = List.of(tetstBalanceOperation, testPurchaseOperation);
+        returnList = List.of(tetstBalanceOperation, testReturnOperation);
+
+        testTransactionFruits = List.of(tetstBalanceOperation,
+                testSupplyOperation, testPurchaseOperation, testReturnOperation);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 

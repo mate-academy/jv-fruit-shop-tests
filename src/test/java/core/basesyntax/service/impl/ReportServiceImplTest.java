@@ -1,29 +1,29 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-
 public class ReportServiceImplTest {
-    List<String> testReportData = List.of("fruit,quantity", "banana,100", "apple,50");
-    List<String> testReportEmpty = List.of("fruit,quantity");
-    ReportServiceImpl reportService;
+    private List<String> testReportData;
+    private List<String> testReportEmpty;
+    private ReportServiceImpl reportService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         FruitDao fruitDao = new FruitDaoImpl();
         reportService = new ReportServiceImpl(fruitDao);
         Storage.fruits.put("banana", 100);
         Storage.fruits.put("apple", 50);
+        testReportData = List.of("fruit,quantity", "banana,100", "apple,50");
+        testReportEmpty = List.of("fruit,quantity");
     }
-
 
     @After
     public void tearDown() {

@@ -1,22 +1,21 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReaderService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.service.FileReaderService;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-
-    File testFile;
-    FileReaderService fileReaderServiceImpl;
+    private File testFile;
+    private FileReaderService fileReaderServiceImpl;
 
     @Before
     public void setUp() {

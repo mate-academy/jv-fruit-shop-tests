@@ -1,0 +1,18 @@
+package core.basesyntax.service.impl;
+
+import core.basesyntax.service.CsvFileReaderService;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
+
+public class CsvFileReaderServiceImpl implements CsvFileReaderService {
+    @Override
+    public List<String> readFromFile(String fileName) {
+        try {
+            return Files.readAllLines(new File(fileName).toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't get this file " + fileName);
+        }
+    }
+}

@@ -29,7 +29,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void add_validDInputDataToElementAlreadyInStorage_Ok() {
+    public void add_validInputDataToElementAlreadyInStorage_Ok() {
         Storage.fruitStorage.put(banana, 10);
         storageDao.add(banana, 20);
         int expected = 30;
@@ -45,7 +45,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void add_validInputDataInExcitingStorage_SizeSame() {
+    public void add_validInputDataInExcitingStorageSizeSame_Ok() {
         Storage.fruitStorage.put(banana, 15);
         storageDao.add(banana, 10);
         int size = Storage.fruitStorage.size();

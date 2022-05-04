@@ -7,20 +7,31 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationServiceTest {
+    private FruitTransaction fruitTransaction;
+    private StorageDao storageDao;
+    private OperationService operationService;
+
+    @Before
+    public void setUp() {
+        fruitTransaction = new FruitTransaction();
+        storageDao = new StorageDaoImpl();
+        operationService = new PurchaseOperationService(storageDao);
+    }
+
     @Test
     public void process_purchaseOperationServiceValidData_Ok() {
         Fruit fruit = new Fruit("Banana");
-        FruitTransaction fruitTransaction = new FruitTransaction();
+
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(10);
-        StorageDao storageDao = new StorageDaoImpl();
+
         Storage.fruitStorage.put(fruit,20);
 
-        OperationService operationService = new PurchaseOperationService(storageDao);
         operationService.process(fruitTransaction);
 
         Assert.assertTrue(Storage.fruitStorage.containsKey(fruit));
@@ -30,14 +41,11 @@ public class PurchaseOperationServiceTest {
     @Test(expected = RuntimeException.class)
     public void process_purchaseMoreThanInStorage_ExceptionThrown() {
         Fruit fruit = new Fruit("Banana");
-        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(50);
-        StorageDao storageDao = new StorageDaoImpl();
         Storage.fruitStorage.put(fruit,10);
 
-        OperationService operationService = new PurchaseOperationService(storageDao);
         operationService.process(fruitTransaction);
     }
 

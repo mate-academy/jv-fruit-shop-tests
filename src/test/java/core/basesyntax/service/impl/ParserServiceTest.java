@@ -24,12 +24,11 @@ public class ParserServiceTest {
         fruitTransaction.setFruit(new Fruit("banana"));
         fruitTransaction.setQuantity(10);
 
-        List<FruitTransaction> expectedData = new ArrayList<>();
-        expectedData.add(fruitTransaction);
-        Class<?> expected = expectedData.get(0).getClass();
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(fruitTransaction);
 
-        List<String> data = List.of("fruit,quantity","b,banana,10");
-        Class<?> actual = parserService.parse(data).get(0).getClass();
+        List<String> data = List.of("fruit,quantity", "b,banana,10");
+        List<FruitTransaction> actual = parserService.parse(data);
 
         Assert.assertEquals(expected, actual);
     }

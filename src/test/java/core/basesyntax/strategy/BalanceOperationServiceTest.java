@@ -7,25 +7,32 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceOperationServiceTest {
+    private FruitTransaction fruitTransaction = new FruitTransaction();
+    private StorageDao storageDao = new StorageDaoImpl();
+    private OperationService operationService = new BalanceOperationService(storageDao);
+
+    @Before
+    public void setUp() {
+        fruitTransaction = new FruitTransaction();
+        storageDao = new StorageDaoImpl();
+        operationService = new BalanceOperationService(storageDao);
+    }
+
     @Test
     public void process_balanceOperationServiceValidData_Ok() {
         Fruit fruit = new Fruit("Banana");
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        StorageDao storageDao = new StorageDaoImpl();
 
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(10);
 
-        OperationService operationService = new BalanceOperationService(storageDao);
-
         operationService.process(fruitTransaction);
 
         Assert.assertTrue(Storage.fruitStorage.containsKey(fruit));
-        Assert.assertTrue(Storage.fruitStorage.containsValue(10));
     }
 
     @After

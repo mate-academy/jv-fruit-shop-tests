@@ -30,7 +30,7 @@ public class FileWriterServiceTest {
     @Test(expected = RuntimeException.class)
     public void write_invalidPathToWriteFile_ExceptionThrown() {
         String dataToWrite = "The quick brown fox jumps over the lazy dog";
-        Path path = null;
+        Path path = Path.of("invalid/directory/file.csv");
         fileWriterService.write(path, dataToWrite);
     }
 

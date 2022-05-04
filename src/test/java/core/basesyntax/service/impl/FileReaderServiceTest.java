@@ -25,6 +25,6 @@ public class FileReaderServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void read_invalidPathToReadFile_ThrowException() {
-        fileReaderService.read(null);
+        fileReaderService.read(Path.of("invalid/directory/file.csv"));
     }
 }

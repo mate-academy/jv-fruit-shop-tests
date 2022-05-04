@@ -7,14 +7,21 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceTest {
+    private StorageDao storageDao;
+    private ReportService reportService;
+
+    @Before
+    public void setUp() {
+        storageDao = new StorageDaoImpl();
+        reportService = new ReportServiceImpl(storageDao);
+    }
 
     @Test
     public void report_validInputDataAlreadyInStorage_Ok() {
-        StorageDao storageDao = new StorageDaoImpl();
-        ReportService reportService = new ReportServiceImpl(storageDao);
         Fruit fruit = new Fruit("Banana");
         Storage.fruitStorage.put(fruit, 10);
 

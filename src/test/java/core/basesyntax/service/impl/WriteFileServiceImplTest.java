@@ -3,8 +3,6 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.WriteFileService;
-
-import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,9 +24,9 @@ public class WriteFileServiceImplTest {
                 + System.lineSeparator()
                 + "banana,14"
                 + System.lineSeparator()
-                +"apple,10"
+                + "apple,10"
                 + System.lineSeparator()
-                +"orange,67"
+                + "orange,67"
                 + System.lineSeparator();
         writeFileService.write(report, "src/test/java/resources/EmptyInput.csv");
     }
@@ -43,11 +41,11 @@ public class WriteFileServiceImplTest {
     public void write_CorrectReport_Ok() {
         String report = "fruit,quantity"
                 + System.lineSeparator()
-                +"banana,14"
+                + "banana,14"
                 + System.lineSeparator()
-                +"apple,10"
+                + "apple,10"
                 + System.lineSeparator()
-                +"orange,67"
+                + "orange,67"
                 + System.lineSeparator();
         writeFileService.write(report, "src/test/resources/ToFile.csv");
         List<String> actual = reader("src/test/resources/ToFile.csv");

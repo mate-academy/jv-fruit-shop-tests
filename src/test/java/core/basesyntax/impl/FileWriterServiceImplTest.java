@@ -13,7 +13,6 @@ import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
-    private static final String TO_FILE = "src/test/resources/report.csv";
     private static String report;
     private static List<String> expected;
 
@@ -29,12 +28,13 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFileWithValidPath_ok() {
-        fileWriterService.writeFile(TO_FILE, report);
+        fileWriterService.writeFile("src/test/resources/report.csv", report);
         List<String> actual;
         try {
-            actual = Files.readAllLines(Path.of(TO_FILE));
+            actual = Files.readAllLines(Path.of("src/test/resources/report.csv"));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + TO_FILE, e);
+            throw new RuntimeException("Can't read data from file "
+                    + "src/test/resources/report.csv", e);
         }
         expected = new ArrayList<>();
         expected.add("fruit, quantity");
@@ -50,6 +50,6 @@ public class FileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFileNullReport_notOk() {
-        fileWriterService.writeFile(TO_FILE, null);
+        fileWriterService.writeFile("src/test/resources/report.csv", null);
     }
 }

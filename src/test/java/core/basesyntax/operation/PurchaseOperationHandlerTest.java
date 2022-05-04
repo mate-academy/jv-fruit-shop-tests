@@ -2,6 +2,7 @@ package core.basesyntax.operation;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -25,14 +26,14 @@ public class PurchaseOperationHandlerTest {
     @Test(expected = RuntimeException.class)
     public void apply_notEnoughQuantity_NotOK() {
         Fruit apple = new Fruit("apple");
-        storageDao.add(apple, 0);
+        Storage.storage.put(apple, 0);
         purchaseHandler.apply(new Fruit("apple"), 1);
     }
 
     @Test
     public void apply_enoughQuantity_Ok() {
         Fruit apple = new Fruit("apple");
-        storageDao.add(apple, 0);
+        Storage.storage.put(apple, 0);
         Assert.assertTrue(purchaseHandler.apply(apple, 0));
     }
 }

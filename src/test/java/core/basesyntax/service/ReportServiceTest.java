@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.After;
@@ -29,7 +30,7 @@ public class ReportServiceTest {
 
     @Test
     public void report_notEmptyStorage_Ok() {
-        storageDao.add(new Fruit("orange"), 5);
+        Storage.storage.put(new Fruit("orange"), 5);
         String actual = reportService.report();
         String expected = "fruit,quantity\norange,5";
         assertEquals(expected, actual);

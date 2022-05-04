@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -19,7 +20,9 @@ public class StorageDaoImplTest {
 
     @Test
     public void add_correctValue_Ok() {
-        assertTrue(storageDao.add(new Fruit("apple"), 0));
+        Fruit apple = new Fruit("apple");
+        assertTrue(storageDao.add(apple, 0));
+        assertEquals(Integer.valueOf(0), Storage.storage.get(apple));
     }
 
     @Test(expected = RuntimeException.class)
@@ -36,7 +39,7 @@ public class StorageDaoImplTest {
     public void get_correctValue_Ok() {
         Fruit orange = new Fruit("orange");
         storageDao.add(orange, 0);
-        assertEquals(Integer.valueOf(0), storageDao.get(orange));
+        assertEquals(Storage.storage.get(orange), storageDao.get(orange));
     }
 
     @Test

@@ -2,6 +2,7 @@ package core.basesyntax.operation;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
@@ -35,14 +36,14 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void apply_correctData_Ok() {
-        storageDao.add(new Fruit("orange"), 0);
+        Storage.storage.put(new Fruit("orange"), 0);
         Assert.assertTrue(supplyHandler.apply(new Fruit("orange"), 0));
     }
 
     @Test
     public void apply_validDataFromStorageAfterApply_Ok() {
         Fruit orange = new Fruit("orange");
-        storageDao.add(orange, 0);
+        Storage.storage.put(orange, 0);
         supplyHandler.apply(orange, 5);
         Assert.assertEquals(5, storageDao.get(orange).intValue());
     }

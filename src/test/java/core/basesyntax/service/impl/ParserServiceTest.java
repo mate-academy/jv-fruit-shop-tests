@@ -18,7 +18,7 @@ public class ParserServiceTest {
     }
 
     @Test
-    public void parse_validData_ok() {
+    public void parse_validInputData_SameClassAsExpected() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit(new Fruit("banana"));

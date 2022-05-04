@@ -21,7 +21,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void add_ok() {
+    public void add_validInputData_Ok() {
         storageDao.add(banana, 10);
         int expected = 10;
         int actual = Storage.fruitStorage.get(banana);
@@ -29,7 +29,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void addMore_ok() {
+    public void add_validDInputDataToElementAlreadyInStorage_Ok() {
         Storage.fruitStorage.put(banana, 10);
         storageDao.add(banana, 20);
         int expected = 30;
@@ -38,14 +38,14 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void add_sizeAfter_ok() {
+    public void add_validInputData_SizeIncrease() {
         storageDao.add(banana, 10);
         int size = Storage.fruitStorage.size();
         Assert.assertEquals(1, size);
     }
 
     @Test
-    public void add_sizeAfterMore_ok() {
+    public void add_validInputDataInExcitingStorage_SizeSame() {
         Storage.fruitStorage.put(banana, 15);
         storageDao.add(banana, 10);
         int size = Storage.fruitStorage.size();
@@ -53,7 +53,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void remove_ok() {
+    public void remove_validInputDataAlreadyInStorage_Ok() {
         Storage.fruitStorage.put(banana, 10);
         storageDao.remove(banana, 5);
         int expected = 5;
@@ -62,7 +62,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void get_ok() {
+    public void get_validElementAlreadyInStorage_Ok() {
         Storage.fruitStorage.put(banana, 10);
         int expected = 10;
         int actual = storageDao.get(banana);
@@ -70,7 +70,7 @@ public class StorageDaoTest {
     }
 
     @Test
-    public void getAll() {
+    public void getAll_checkDataFromStorage_Ok() {
         Storage.fruitStorage.put(banana, 10);
         Map<Fruit, Integer> expectedMap = new HashMap<>();
         expectedMap.put(banana, 10);

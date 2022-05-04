@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyTransactionHandlerTest {
-
     private static TransactionHandler handler;
 
     @BeforeClass

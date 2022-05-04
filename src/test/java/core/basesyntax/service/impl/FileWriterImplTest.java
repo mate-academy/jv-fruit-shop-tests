@@ -23,7 +23,6 @@ public class FileWriterImplTest {
 
     @Test
     public void write_ProperFilePath_Ok() {
-
         String content = "fruit,quantity" + System.lineSeparator() + "Apple,20";
         fileWriter.write(content, LEGIT_TEST_PATH);
         File file = new File(LEGIT_TEST_PATH);

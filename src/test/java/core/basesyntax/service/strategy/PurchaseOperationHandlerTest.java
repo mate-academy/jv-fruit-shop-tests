@@ -21,11 +21,6 @@ public class PurchaseOperationHandlerTest {
         operationHandler = new PurchaseOperationHandler(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        Storage.dataBase.clear();
-    }
-
     @Test
     public void purchase_Correct_Ok() {
         Fruit apple = new Fruit("apple");
@@ -39,11 +34,16 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchase_WrongInput_Not_Ok() {
+    public void purchase_WrongInput_NotOk() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 10);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, apple, 32);
         operationHandler.apply(fruitTransaction);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.dataBase.clear();
     }
 }

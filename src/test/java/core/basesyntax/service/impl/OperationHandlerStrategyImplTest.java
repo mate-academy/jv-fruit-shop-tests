@@ -56,7 +56,7 @@ public class OperationHandlerStrategyImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void get_Null_Not_Ok() {
+    public void get_Null_NotOk() {
         operationHandlerStrategy.get(null);
 
     }

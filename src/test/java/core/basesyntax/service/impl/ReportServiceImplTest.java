@@ -21,11 +21,6 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        Storage.dataBase.clear();
-    }
-
     @Test
     public void report_Ok() {
         Storage.dataBase.put(new Fruit("apple"), 10);
@@ -49,5 +44,10 @@ public class ReportServiceImplTest {
         String actual = reportService.report();
         String expected = "fruit,quantity\napple,10" + System.lineSeparator();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.dataBase.clear();
     }
 }

@@ -32,20 +32,15 @@ public class OperationServiceImplTest {
         operationService = new OperationServiceImpl(operationHandlerStrategy);
     }
 
-    @After
-    public void tearDown() {
-        Storage.dataBase.clear();
-    }
-
     @Test(expected = RuntimeException.class)
-    public void calculate_Empty_Input_NotOk() {
+    public void calculate_EmptyInput_NotOk() {
         List<String> list = new ArrayList<>();
         List<FruitTransaction> info = parseService.getInfo(list);
         operationService.calculate(info);
     }
 
     @Test
-    public void calculate_Correct_Input_Ok() {
+    public void calculate_CorrectInput_Ok() {
         List<String> list = new ArrayList<>();
         list.add("b-banana-20");
         list.add("s-banana-20");
@@ -63,11 +58,16 @@ public class OperationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void calculate_Wrong_Input_NotOk() {
+    public void calculate_WrongInput_NotOk() {
         List<String> list = new ArrayList<>();
         list.add("b-banana-20");
         list.add("p-banana-21");
         List<FruitTransaction> fruitTransactions = parseService.getInfo(list);
         operationService.calculate(fruitTransactions);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.dataBase.clear();
     }
 }

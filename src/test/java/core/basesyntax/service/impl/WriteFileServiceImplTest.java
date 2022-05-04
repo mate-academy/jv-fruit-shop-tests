@@ -3,6 +3,8 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.WriteFileService;
+
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,29 +21,45 @@ public class WriteFileServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_Wrong_Path_To_File_NotOk() {
-        String report = "fruit,quantity\nbanana,14\r\napple,10\r\norange,67\r\n";
-        writeFileService.write(report, "src/test/resources/EmptyInput.csv");
+    public void write_WrongPathToFile_NotOk() {
+        String report = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,14"
+                + System.lineSeparator()
+                +"apple,10"
+                + System.lineSeparator()
+                +"orange,67"
+                + System.lineSeparator();
+        writeFileService.write(report, "src/test/java/resources/EmptyInput.csv");
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_Empty_Report_NotOk() {
+    public void write_EmptyReport_NotOk() {
         String report = "";
         writeFileService.write(report, "src/test/java/resources/ToFile.csv");
     }
 
     @Test
-    public void write_Correct_Report_Ok() {
-        String report = "fruit,quantity\nbanana,14\r\napple,10\r\norange,67\r\n";
-        writeFileService.write(report, "src/test/java/resources/ToFile.csv");
-        List<String> actual;
-        List<String> expected;
+    public void write_CorrectReport_Ok() {
+        String report = "fruit,quantity"
+                + System.lineSeparator()
+                +"banana,14"
+                + System.lineSeparator()
+                +"apple,10"
+                + System.lineSeparator()
+                +"orange,67"
+                + System.lineSeparator();
+        writeFileService.write(report, "src/test/resources/ToFile.csv");
+        List<String> actual = reader("src/test/resources/ToFile.csv");
+        List<String> expected = reader("src/test/resources/ExpectedFile.csv");
+        assertEquals(actual, expected);
+    }
+
+    private List<String> reader(String filePath) {
         try {
-            actual = Files.readAllLines(Path.of("src/test/java/resources/ToFile.csv"));
-            expected = Files.readAllLines(Path.of("src/test/java/resources/ExpectedFile.csv"));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException();
         }
-        assertEquals(actual, expected);
     }
 }

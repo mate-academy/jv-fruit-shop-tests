@@ -21,11 +21,6 @@ public class SupplyOperationHandlerTest {
         operationHandler = new SupplyOperationHandler(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        Storage.dataBase.clear();
-    }
-
     @Test
     public void supply_Correct_Ok() {
         Fruit apple = new Fruit("apple");
@@ -36,5 +31,10 @@ public class SupplyOperationHandlerTest {
         int expected = 72;
         int actual = Storage.dataBase.get(apple);
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.dataBase.clear();
     }
 }

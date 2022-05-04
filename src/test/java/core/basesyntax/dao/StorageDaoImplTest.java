@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -24,7 +25,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void update_Add_Fruit_Ok() {
+    public void update_AddFruit_Ok() {
         Fruit apple = new Fruit("apple");
         storageDao.update(apple, 10);
         int expected = 10;
@@ -33,7 +34,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void update_Add_More_Ok() {
+    public void update_AddMore_Ok() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 20);
         storageDao.update(apple, 20);
@@ -52,17 +53,16 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void get_Not_Existing_Not_Ok() {
+    public void get_NotExisting_NotOk() {
         Fruit apple = new Fruit("apple");
         Fruit orange = new Fruit("orange");
         Storage.dataBase.put(apple, 20);
         Integer actual = storageDao.get(orange);
-        Integer expected = null;
-        assertEquals(expected, actual);
+        assertNull(actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void get_Null_Not_Ok() {
+    public void get_Null_NotOk() {
         storageDao.get(null);
     }
 
@@ -71,7 +71,7 @@ public class StorageDaoImplTest {
         Storage.dataBase.put(new Fruit("apple"), 10);
         Storage.dataBase.put(new Fruit("orange"), 13);
         Storage.dataBase.put(new Fruit("banana"), 40);
-        Set<Map.Entry<Fruit, Integer>> entries = storageDao.addAll();
+        Set<Map.Entry<Fruit, Integer>> entries = storageDao.getAll();
         int actual = entries.size();
         int expected = 3;
         assertEquals(expected, actual);

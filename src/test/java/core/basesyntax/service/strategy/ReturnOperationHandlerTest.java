@@ -21,11 +21,6 @@ public class ReturnOperationHandlerTest {
         operationHandler = new ReturnOperationHandler(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        Storage.dataBase.clear();
-    }
-
     @Test
     public void return_Correct_Ok() {
         Fruit apple = new Fruit("apple");
@@ -38,4 +33,8 @@ public class ReturnOperationHandlerTest {
         assertEquals(expected, actual);
     }
 
+    @After
+    public void tearDown() {
+        Storage.dataBase.clear();
+    }
 }

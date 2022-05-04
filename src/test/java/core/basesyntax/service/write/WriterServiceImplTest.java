@@ -25,22 +25,12 @@ public class WriterServiceImplTest {
                 + SEPARATOR + "s,banana,100";
     }
 
-    @Test (expected = NullPointerException.class)
-    public void write_nullString_NotOk() {
-        writerService.write(OUTPUT_PATH, null);
-    }
-
     @Test
     public void write_validPathFile_OK() {
         writerService.write(OUTPUT_PATH, content);
         List<String> expected = readFromTestFile(INPUT_PATH);
         List<String> actual = readFromTestFile(OUTPUT_PATH);
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void write_nullPath_NotOk() {
-        writerService.write(null, content);
     }
 
     @Test (expected = RuntimeException.class)
@@ -57,12 +47,10 @@ public class WriterServiceImplTest {
     }
 
     private List<String> readFromTestFile(String fromFilePath) {
-        List<String> data;
         try {
-            data = Files.readAllLines(Path.of(fromFilePath));
+            return Files.readAllLines(Path.of(fromFilePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fromFilePath, e);
         }
-        return data;
     }
 }

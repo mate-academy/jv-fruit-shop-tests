@@ -27,39 +27,42 @@ public class StrategyTest {
 
     @Test
     public void get_validOutput_Ok() {
-        OperationHandler expected = purchaseHandler;
-        OperationHandler actual = strategy.get("p");
-        Assert.assertEquals(expected.getClass(), actual.getClass());
+        Class<?> expected = PurchaseHandlerImpl.class;
+        Class<?> actual = strategy.get("p").getClass();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void getMap_validOutput_Ok() {
+    public void getMap_supplyHandler_Ok() {
         Map<String, OperationHandler> actual = operation;
         Assert.assertEquals(actual.get("s").getClass(), supplyHandler.getClass());
-        Assert.assertEquals(actual.get("p").getClass(), purchaseHandler.getClass());
-        Assert.assertEquals(actual.get("b").getClass(), balanceHandler.getClass());
-        Assert.assertEquals(actual.get("r").getClass(), supplyHandler.getClass());
-        Assert.assertTrue(actual.containsKey("p"));
         Assert.assertTrue(actual.containsKey("s"));
-        Assert.assertTrue(actual.containsKey("b"));
-        Assert.assertTrue(actual.containsKey("r"));
-        Assert.assertEquals(actual.size(), 4);
     }
 
     @Test
-    public void get_invalidOutput_Ok() {
-        OperationHandler expected = balanceHandler;
-        OperationHandler actual = strategy.get("r");
-        Assert.assertNotEquals(expected, actual);
-    }
-
-    @Test
-    public void getMap_invalidOutput_NotOk() {
+    public void getMap_balanceHandler_Ok() {
         Map<String, OperationHandler> actual = operation;
-        Assert.assertFalse(actual.containsKey(null));
-        Assert.assertFalse(actual.containsKey("e"));
-        Assert.assertFalse(actual.containsKey(""));
-        Assert.assertFalse(actual.containsKey(" "));
-        Assert.assertNotEquals(actual.get("r"), balanceHandler);
+        Assert.assertEquals(actual.get("p").getClass(), purchaseHandler.getClass());
+        Assert.assertTrue(actual.containsKey("p"));
+    }
+
+    @Test
+    public void getMap_purchaseHandler_Ok() {
+        Map<String, OperationHandler> actual = operation;
+        Assert.assertEquals(actual.get("b").getClass(), balanceHandler.getClass());
+        Assert.assertTrue(actual.containsKey("b"));
+    }
+
+    @Test
+    public void getMap_SecondSupplyHandler_Ok() {
+        Map<String, OperationHandler> actual = operation;
+        Assert.assertEquals(actual.get("r").getClass(), supplyHandler.getClass());
+        Assert.assertTrue(actual.containsKey("r"));
+    }
+
+    @Test
+    public void get_invalidOutput_NotOk() {
+        OperationHandler actual = strategy.get("t");
+        Assert.assertNull(actual);
     }
 }

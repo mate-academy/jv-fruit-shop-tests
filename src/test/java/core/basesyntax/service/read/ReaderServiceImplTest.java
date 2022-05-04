@@ -30,9 +30,4 @@ public class ReaderServiceImplTest {
         List<String> actual = readerService.read(VALID_DATA_PATH);
         Assert.assertEquals(expected, actual);
     }
-
-    @Test(expected = NullPointerException.class)
-    public void read_NullPath_NotOk() {
-        readerService.read(null);
-    }
 }

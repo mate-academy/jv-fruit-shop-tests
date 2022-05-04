@@ -4,7 +4,6 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,13 +11,11 @@ import org.junit.Test;
 public class BalanceHandlerImplTest {
     private static StorageDao dao;
     private static BalanceHandler operationHandler;
-    private static Map<Fruit, Integer> storage;
 
     @BeforeClass
     public static void beforeClass() {
         dao = new StorageDaoImpl();
         operationHandler = new BalanceHandler(dao);
-        storage = Storage.storage;
     }
 
     @Test

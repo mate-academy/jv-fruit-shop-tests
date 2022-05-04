@@ -11,7 +11,7 @@ public class ValidatorImplTest {
     public void validate_ok() {
         String[] operationType = {"b", "s", "r", "p"};
         for (String activity : operationType) {
-            String string = activity + ",text," + 1123;
+            String string = activity + ",text," + 1234;
             Assert.assertTrue(validator.validate(string));
         }
     }

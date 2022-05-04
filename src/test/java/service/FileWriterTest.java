@@ -51,16 +51,6 @@ public class FileWriterTest {
         fileWriter.writeToFile("", builder.toString());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullWriter_NotOk() {
-        fileWriter.writeToFile(OUTPUT_PATH, null);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void writeInvalidPath_NotOk() {
-        fileWriter.writeToFile(null, builder.toString());
-    }
-
     private List<String> readerForTest(String fromFilePath) {
         List<String> data;
         try {

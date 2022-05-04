@@ -29,9 +29,4 @@ public class ParserTest {
         List<FruitTransaction> actual = parser.parse(data);
         assertEquals(expected, actual);
     }
-
-    @Test (expected = NullPointerException.class)
-    public void parse_nullData_NotOk() {
-        parser.parse(null);
-    }
 }

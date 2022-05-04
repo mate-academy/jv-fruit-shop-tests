@@ -25,6 +25,10 @@ public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation operation) {
-        return map.get(operation);
+        OperationHandler operationHandler = map.get(operation);
+        if (operationHandler == null) {
+            throw new RuntimeException("Wrong operation");
+        }
+        return operationHandler;
     }
 }

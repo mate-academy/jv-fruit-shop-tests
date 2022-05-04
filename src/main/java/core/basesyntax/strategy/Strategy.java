@@ -25,22 +25,4 @@ public class Strategy {
     public OperationHandler get(String operation) {
         return getMap().get(operation);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Strategy strategy = (Strategy) o;
-        return Objects.equals(dao, strategy.dao)
-                && Objects.equals(operationHandlerMap, strategy.operationHandlerMap);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(dao, operationHandlerMap);
-    }
 }

@@ -19,7 +19,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_validOutput_Ok() {
+    public void validDataParser_Ok() {
         List<String> data = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100");

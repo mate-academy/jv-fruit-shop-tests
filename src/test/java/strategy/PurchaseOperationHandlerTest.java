@@ -42,7 +42,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void exception_NotOk() {
+    public void invalidPurchase_NotOk() {
         storage.put(new Fruit("banana"), 100);
         purchaseOperationHandler.apply(new Fruit("banana"), 110);
     }

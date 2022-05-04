@@ -39,7 +39,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void validWriter_Ok() {
+    public void validDataWriter_Ok() {
         fileWriter.writeToFile(OUTPUT_PATH, builder.toString());
         List<String> expected = readerForTest(INPUT_PATH);
         List<String> actual = readerForTest(OUTPUT_PATH);

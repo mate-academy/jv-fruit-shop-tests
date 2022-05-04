@@ -10,11 +10,11 @@ import org.junit.Test;
 import service.impl.ReportMakerImpl;
 
 public class ReportMakerTest {
-    private static final StringBuilder EXPECTED = new StringBuilder("fruit,quantity")
-            .append(System.lineSeparator())
-            .append("banana,152")
-            .append(System.lineSeparator())
-            .append("apple,90");
+    private static final String EXPECTED = "fruit,quantity"
+            + System.lineSeparator()
+            + "banana,152"
+            + System.lineSeparator()
+            + "apple,90";
     private static final Map<Fruit, Integer> storage = new HashMap<>();
     private static ReportMaker reportMaker;
 
@@ -37,10 +37,5 @@ public class ReportMakerTest {
         String expected = "fruit,quantity";
         String actual = reportMaker.createReport(emptyMap.entrySet());
         assertEquals(expected, actual);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void emptyPath_NotOk() {
-        reportMaker.createReport(null);
     }
 }

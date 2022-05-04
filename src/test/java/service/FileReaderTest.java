@@ -10,7 +10,7 @@ import service.impl.FileReaderImpl;
 public class FileReaderTest {
     private static final String VALID_TEST_CSV_INPUT_PATH = "src/test/resources/inputValidTest.csv";
     private static final String EMPTY_INPUT_PATH = "src/test/resources/emptyTest.csv";
-    private static service.FileReader fileReader;
+    private static FileReader fileReader;
 
     @BeforeClass
     public static void beforeClass() {

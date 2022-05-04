@@ -11,7 +11,6 @@ import org.junit.Test;
 import storage.Storage;
 
 public class SupplyOperationHandlerTest {
-
     private static OperationHandler supplyOperation;
     private static Map<Fruit, Integer> storage;
 

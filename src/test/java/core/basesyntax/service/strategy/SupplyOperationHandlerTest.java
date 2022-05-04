@@ -7,6 +7,7 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,6 +19,11 @@ public class SupplyOperationHandlerTest {
     public void setUp() {
         storageDao = new StorageDaoImpl();
         operationHandler = new SupplyOperationHandler(storageDao);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.dataBase.clear();
     }
 
     @Test

@@ -11,8 +11,6 @@ import storage.Storage;
 
 public class PurchaseOperationHandlerImplTest {
     private static OperationHandler purchaseHandler;
-    private int actual;
-    private int expected;
 
     @BeforeClass
     public static void beforeClass() {
@@ -27,9 +25,9 @@ public class PurchaseOperationHandlerImplTest {
 
     @Test
     public void changeAmount_purchase_isOk() {
-        actual = purchaseHandler.handle(new FruitTransaction(
+        int actual = purchaseHandler.handle(new FruitTransaction(
                 "p", new Fruit("banana"), 20));
-        expected = 180;
+        int expected = 180;
         assertEquals(expected, actual);
         actual = purchaseHandler.handle(new FruitTransaction(
                 "p", new Fruit("apple"), 20));

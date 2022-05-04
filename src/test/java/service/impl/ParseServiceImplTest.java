@@ -12,12 +12,10 @@ import service.ParseService;
 public class ParseServiceImplTest {
     private static List<String> lineList;
     private static List<FruitTransaction> expected;
-    private static List<FruitTransaction> actual;
     private static ParseService fruitParser;
 
     @BeforeClass
     public static void beforeClass() {
-        actual = new ArrayList<>();
         fruitParser = new ParseServiceImpl();
         lineList = new ArrayList<>();
         lineList.add("type,fruit,quantity");
@@ -32,7 +30,7 @@ public class ParseServiceImplTest {
 
     @Test
     public void parseValidData_isOk() {
-        actual = fruitParser.parse(lineList);
+        List<FruitTransaction> actual = fruitParser.parse(lineList);
         Assert.assertEquals(expected, actual);
     }
 }

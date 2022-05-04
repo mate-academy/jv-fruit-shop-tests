@@ -42,13 +42,8 @@ public class FileReaderServiceImplTest {
         List<String> actual = fileReader.getFileData(INVALID_PATH);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void readFile_nullPath_NotOk() {
-        fileReader.getFileData(null);
-    }
-
     @Test
-    public void readFile_emptyFile() {
+    public void readFile_emptyFile_isOk() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.getFileData(EMPTY_FILE);
         assertEquals(expected,actual);

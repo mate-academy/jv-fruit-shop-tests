@@ -10,21 +10,17 @@ import service.ReportService;
 import storage.Storage;
 
 public class ReportServiceImplTest {
-    private static Fruit banana;
-    private static Fruit apple;
     private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {
-        banana = new Fruit("banana");
-        apple = new Fruit("apple");
         reportService = new ReportServiceImpl();
     }
 
     @Before
     public void setUp() {
-        Storage.storage.put(banana, 100);
-        Storage.storage.put(apple, 200);
+        Storage.storage.put(new Fruit("banana"), 100);
+        Storage.storage.put(new Fruit("apple"), 200);
     }
 
     @Test

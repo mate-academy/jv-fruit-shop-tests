@@ -60,4 +60,9 @@ public class FileReaderTest {
     public void readFromEmptyPath_NotOk() {
         fileReader.readFromFile(null);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void readFromFile_readFromNullPathFile_NotOk() {
+        fileReader.readFromFile(null);
+    }
 }

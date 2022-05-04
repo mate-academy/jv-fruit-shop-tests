@@ -41,6 +41,12 @@ public class PurchaseOperationHandlerTest {
         assertEquals(2, storage.size());
     }
 
+    @Test (expected = RuntimeException.class)
+    public void Exception_NotOk() {
+        storage.put(new Fruit("banana"), 100);
+        purchaseOperationHandler.apply(new Fruit("banana"), 110);
+    }
+
     @After
     public void afterEach() {
         storage.clear();

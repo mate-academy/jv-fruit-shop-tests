@@ -12,19 +12,19 @@ import storage.Storage;
 
 public class SupplyOperationHandlerTest {
 
-    private static OperationHandler returnOperationHandler;
+    private static OperationHandler supplyOperation;
     private static Map<Fruit, Integer> storage;
 
     @BeforeClass
     public static void beforeClass() {
-        returnOperationHandler = new ReturnOperationHandler();
+        supplyOperation = new SupplyOperationHandler();
         storage = Storage.data;
     }
 
     @Test
     public void validSupply_Ok() {
         storage.put(new Fruit("banana"), 50);
-        returnOperationHandler.apply(new Fruit("banana"), 50);
+        supplyOperation.apply(new Fruit("banana"), 50);
         assertTrue(storage.containsKey(new Fruit("banana")));
         assertTrue(storage.containsValue(100));
         assertEquals(1, storage.size());

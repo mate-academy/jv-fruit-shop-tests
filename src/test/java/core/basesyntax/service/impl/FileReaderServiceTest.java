@@ -16,7 +16,7 @@ public class FileReaderServiceTest {
     }
 
     @Test
-    public void read_pathIsValid_ok() {
+    public void read_readingFromValidPath_Ok() {
         Path path = Path.of("src/test/resources/testInputFile.csv");
         List<String> expected = List.of("b,banana,100", "s,banana,200");
         List<String> actual = fileReaderService.read(path);
@@ -24,7 +24,7 @@ public class FileReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_pathIsInvalid_ok() {
+    public void read_readingFromInvalidPath_ThrowException() {
         fileReaderService.read(null);
     }
 }

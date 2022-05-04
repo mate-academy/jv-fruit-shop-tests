@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class ReturnOperationServiceTest {
     @Test
-    public void process_returnOperation_ok() {
+    public void process_returnOperationServiceValidData_Ok() {
         Fruit fruit = new Fruit("Banana");
         FruitTransaction fruitTransaction = new FruitTransaction();
         StorageDao storageDao = new StorageDaoImpl();

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class SupplyOperationServiceTest {
     @Test
-    public void process_supplyOperation_ok() {
+    public void process_supplyOperationServiceValidData_Ok() {
         Fruit fruit = new Fruit("Banana");
         FruitTransaction fruitTransaction = new FruitTransaction();
         StorageDao storageDao = new StorageDaoImpl();

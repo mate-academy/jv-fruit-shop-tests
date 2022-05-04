@@ -12,7 +12,7 @@ import org.junit.Test;
 public class ReportServiceTest {
 
     @Test
-    public void report_ok() {
+    public void report_generateReportFromValidData_Ok() {
         StorageDao storageDao = new StorageDaoImpl();
         ReportService reportService = new ReportServiceImpl(storageDao);
         Fruit fruit = new Fruit("Banana");

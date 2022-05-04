@@ -18,7 +18,7 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void write_correctPath_ok() {
+    public void write_writeDataInFileCorrectPath_Ok() {
         String dataToWrite = "The quick brown fox jumps over the lazy dog";
         Path path = Path.of("src/test/resources/testOutputFile.csv");
         fileWriterService.write(path, dataToWrite);
@@ -28,13 +28,13 @@ public class FileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_invalidPath_ok() {
+    public void write_writeDataInFileCorrectPath_ExceptionThrown() {
         String dataToWrite = "The quick brown fox jumps over the lazy dog";
         Path path = null;
         fileWriterService.write(path, dataToWrite);
     }
 
-    private static List<String> fileReader(Path path) {
+    private List<String> fileReader(Path path) {
         List<String> dataFromFile;
         try {
             dataFromFile = Files.readAllLines(path);

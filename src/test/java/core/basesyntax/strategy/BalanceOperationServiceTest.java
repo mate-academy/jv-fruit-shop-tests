@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class BalanceOperationServiceTest {
     @Test
-    public void process_balanceOperation_ok() {
+    public void process_balanceOperationServiceValidData_Ok() {
         Fruit fruit = new Fruit("Banana");
         FruitTransaction fruitTransaction = new FruitTransaction();
         StorageDao storageDao = new StorageDaoImpl();

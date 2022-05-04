@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class PurchaseOperationServiceTest {
     @Test
-    public void process_purchaseOperation_ok() {
+    public void process_purchaseOperationServiceValidData_Ok() {
         Fruit fruit = new Fruit("Banana");
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
@@ -28,7 +28,7 @@ public class PurchaseOperationServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void process_purchaseMoreThanInStorageOperation_ThrowException() {
+    public void process_purchaseMoreThanInStorageOperationServiceValidData_ExceptionThrown() {
         Fruit fruit = new Fruit("Banana");
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

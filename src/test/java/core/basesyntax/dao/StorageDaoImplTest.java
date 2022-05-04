@@ -38,7 +38,7 @@ public class StorageDaoImplTest {
     @Test
     public void get_correctValue_Ok() {
         Fruit orange = new Fruit("orange");
-        storageDao.add(orange, 0);
+        Storage.storage.put(orange, 0);
         assertEquals(Storage.storage.get(orange), storageDao.get(orange));
     }
 
@@ -54,6 +54,6 @@ public class StorageDaoImplTest {
 
     @After
     public void cleanStorage() {
-        storageDao.clear();
+        Storage.storage.clear();
     }
 }

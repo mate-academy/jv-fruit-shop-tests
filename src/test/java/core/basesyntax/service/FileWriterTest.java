@@ -58,7 +58,7 @@ public class FileWriterTest {
         try {
             Files.delete(Path.of(newFilePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't delete file newFile.csv");
+            throw new RuntimeException("Can't delete file newFile.csv", e);
         }
     }
 }

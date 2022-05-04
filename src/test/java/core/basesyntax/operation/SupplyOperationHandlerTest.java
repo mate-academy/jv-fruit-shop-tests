@@ -50,6 +50,6 @@ public class SupplyOperationHandlerTest {
 
     @After
     public void cleanUp() {
-        storageDao.clear();
+        Storage.storage.clear();
     }
 }

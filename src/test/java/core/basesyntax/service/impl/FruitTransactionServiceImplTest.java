@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperationHandler;
@@ -63,6 +64,6 @@ public class FruitTransactionServiceImplTest {
 
     @After
     public void cleanUp() {
-        storageDao.clear();
+        Storage.storage.clear();
     }
 }

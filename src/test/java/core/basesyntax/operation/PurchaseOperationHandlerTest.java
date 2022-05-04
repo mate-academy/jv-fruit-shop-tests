@@ -4,6 +4,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,5 +36,10 @@ public class PurchaseOperationHandlerTest {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 0);
         Assert.assertTrue(purchaseHandler.apply(apple, 0));
+    }
+
+    @After
+    public void cleanUp() {
+        Storage.storage.clear();
     }
 }

@@ -2,7 +2,9 @@ package core.basesyntax.operation;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,5 +32,10 @@ public class BalanceOperationHandlerTest {
     @Test
     public void apply_correctData_Ok() {
         Assert.assertTrue(balanceHandler.apply(new Fruit("banana"), 0));
+    }
+
+    @After
+    public void cleanUp() {
+        Storage.storage.clear();
     }
 }

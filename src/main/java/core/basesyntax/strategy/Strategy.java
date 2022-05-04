@@ -22,6 +22,9 @@ public class Strategy {
     }
 
     public OperationHandler get(String operation) {
+        if (operation == null) {
+            throw new RuntimeException();
+        }
         return getMap().get(operation);
     }
 }

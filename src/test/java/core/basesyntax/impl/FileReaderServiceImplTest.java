@@ -9,6 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
+    private static final String FROM_FILE = "src/test/resources/database.csv";
+    private static final String EMPTY_FILE = "src/test/resources/emptyFile.csv";
     private static FileReaderService fileReaderService;
     private static List<String> dataFromFile;
 
@@ -30,7 +32,7 @@ public class FileReaderServiceImplTest {
     @Test
     public void readFileCorrectData_isOk() {
         List<String> expected = dataFromFile;
-        List<String> actual = fileReaderService.read("src/test/resources/database.csv");
+        List<String> actual = fileReaderService.read(FROM_FILE);
         assertEquals(expected, actual);
     }
 
@@ -42,7 +44,7 @@ public class FileReaderServiceImplTest {
     @Test
     public void readEmptyFile_ok() {
         List<String> expected = new ArrayList<>();
-        List<String> actual = fileReaderService.read("src/test/resources/emptyFile.csv");
+        List<String> actual = fileReaderService.read(EMPTY_FILE);
         assertEquals(expected, actual);
     }
 }

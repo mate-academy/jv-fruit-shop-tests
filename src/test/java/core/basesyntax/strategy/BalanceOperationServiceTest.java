@@ -11,9 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceOperationServiceTest {
-    private FruitTransaction fruitTransaction = new FruitTransaction();
-    private StorageDao storageDao = new StorageDaoImpl();
-    private OperationService operationService = new BalanceOperationService(storageDao);
+    private FruitTransaction fruitTransaction;
+    private StorageDao storageDao;
+    private OperationService operationService;
 
     @Before
     public void setUp() {
@@ -32,7 +32,9 @@ public class BalanceOperationServiceTest {
 
         operationService.process(fruitTransaction);
 
-        Assert.assertTrue(Storage.fruitStorage.containsKey(fruit));
+        int actual = Storage.fruitStorage.get(fruit);
+
+        Assert.assertEquals(10, actual);
     }
 
     @After

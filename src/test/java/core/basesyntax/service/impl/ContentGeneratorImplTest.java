@@ -21,11 +21,6 @@ public class ContentGeneratorImplTest {
         contentGenerator = new ContentGeneratorImpl(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
-
     @Test
     public void generateContent_ProperHeader_Ok() {
         String expectedHeader = "fruit,quantity";
@@ -52,5 +47,10 @@ public class ContentGeneratorImplTest {
         String[] expectedLength = new String[5];
         String[] actualLength = contentGenerator.generateContent().split(System.lineSeparator());
         assertEquals(expectedLength.length, actualLength.length);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

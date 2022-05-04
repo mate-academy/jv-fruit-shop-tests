@@ -7,6 +7,7 @@ import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,7 +29,6 @@ public class PurchaseTransactionHandlerTest {
         int expected = 10;
         int actual = Storage.storage.get(fruit);
         assertEquals(expected, actual);
-        Storage.storage.clear();
     }
 
     @Test(expected = RuntimeException.class)
@@ -44,5 +44,10 @@ public class PurchaseTransactionHandlerTest {
         Storage.storage.put(fruit, 100);
         Transaction transactionNonExisting = new Transaction("p", fruit, 101);
         handler.handleTransaction(transactionNonExisting);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

@@ -22,11 +22,6 @@ public class TransactionsCalculatorImplTest {
         transactionsCalculator = new TransactionsCalculatorImpl(storageDaoImpl);
     }
 
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
-
     @Test
     public void handleTransactions_BallanceTransaction_Ok() {
         List<Transaction> transactionList = List.of(new Transaction("b",
@@ -96,5 +91,10 @@ public class TransactionsCalculatorImplTest {
                 new Fruit("Apple"), 20));
         assertNull(TransactionsCalculatorImpl.transactionHandlerMap
                 .get(transactionList.get(0).getType()));
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

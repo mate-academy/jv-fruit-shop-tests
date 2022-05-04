@@ -10,16 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FileWriterImplTest {
     private static final String LEGIT_TEST_PATH = "src/main/resources/testWriter.csv";
     private static FileWriter fileWriter;
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -32,14 +27,10 @@ public class FileWriterImplTest {
         String content = "fruit,quantity" + System.lineSeparator() + "Apple,20";
         fileWriter.write(content, LEGIT_TEST_PATH);
         File file = new File(LEGIT_TEST_PATH);
-        try {
-            List<String> contentActual = Files.readAllLines(Paths.get(LEGIT_TEST_PATH));
-            List<String> expected = List.of("fruit,quantity", "Apple,20");
-            assertEquals(expected, contentActual);
-            file.delete();
-        } catch (IOException e) {
-            throw new RuntimeException("Test reader in WriterClass failed", e);
-        }
+        List<String> contentActual = testRead(LEGIT_TEST_PATH);
+        List<String> expected = List.of("fruit,quantity", "Apple,20");
+        assertEquals(expected, contentActual);
+        file.delete();
     }
 
     @Test(expected = RuntimeException.class)
@@ -50,12 +41,15 @@ public class FileWriterImplTest {
     @Test
     public void write_ValidPathEmptyString_Ok() {
         fileWriter.write("", LEGIT_TEST_PATH);
-        try {
-            List<String> stringsActual = Files.readAllLines(Paths.get(LEGIT_TEST_PATH));
-            assertTrue(stringsActual.isEmpty());
-        } catch (IOException e) {
-            throw new RuntimeException("Test reader in WriterClass failed", e);
-        }
+        List<String> stringsActual = testRead(LEGIT_TEST_PATH);
+        assertTrue(stringsActual.isEmpty());
     }
 
+    private List<String> testRead(String path) {
+        try {
+            return Files.readAllLines(Paths.get(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Test reader failed", e);
+        }
+    }
 }

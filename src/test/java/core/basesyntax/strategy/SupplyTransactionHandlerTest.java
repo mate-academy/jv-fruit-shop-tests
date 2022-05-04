@@ -7,6 +7,7 @@ import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,6 +30,10 @@ public class SupplyTransactionHandlerTest {
         int expected = 40;
         int actual = Storage.storage.get(fruit);
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

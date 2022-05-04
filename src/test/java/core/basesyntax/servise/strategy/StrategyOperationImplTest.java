@@ -13,7 +13,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class StrategyOperationImplTest {
     private Map<String, OperationHandler> map = new HashMap<>();
     private Fruit fruit;

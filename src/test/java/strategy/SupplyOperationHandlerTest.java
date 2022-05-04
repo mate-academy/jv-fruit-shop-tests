@@ -1,7 +1,6 @@
 package strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 import model.Fruit;
@@ -24,9 +23,8 @@ public class SupplyOperationHandlerTest {
     public void validSupply_Ok() {
         storage.put(new Fruit("banana"), 50);
         supplyOperation.apply(new Fruit("banana"), 50);
-        assertTrue(storage.containsKey(new Fruit("banana")));
-        assertTrue(storage.containsValue(100));
-        assertEquals(1, storage.size());
+        Integer actual = 100;
+        assertEquals(actual, storage.get(new Fruit("banana")));
     }
 
     @After

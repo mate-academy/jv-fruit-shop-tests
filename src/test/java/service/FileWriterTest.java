@@ -13,12 +13,13 @@ import service.impl.FileWriterImpl;
 public class FileWriterTest {
     private static final String OUTPUT_PATH = "src/test/resources/outputTest.csv";
     private static final String INPUT_PATH = "src/test/resources/inputValidTest.csv";
-    private static final StringBuilder builder = new StringBuilder();
+    private static StringBuilder builder;
     private static FileWriter fileWriter;
 
     @BeforeClass
     public static void beforeClass() {
         fileWriter = new FileWriterImpl();
+        builder = new StringBuilder();
         builder.append("type,fruit,quantity")
                 .append(System.lineSeparator()).append("b,banana,30")
                 .append(System.lineSeparator()).append("b,apple,300")

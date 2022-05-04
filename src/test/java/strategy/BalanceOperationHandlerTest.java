@@ -1,7 +1,6 @@
 package strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import model.Fruit;
 import org.junit.After;
@@ -20,9 +19,8 @@ public class BalanceOperationHandlerTest {
     @Test
     public void validBalance_Ok() {
         balanceOperationHandler.apply(new Fruit("banana"), 100);
-        assertTrue(Storage.data.containsKey(new Fruit("banana")));
-        assertTrue(Storage.data.containsValue(100));
-        assertEquals(1, Storage.data.size());
+        Integer actual = 100;
+        assertEquals(actual, Storage.data.get(new Fruit("banana")));
     }
 
     @After

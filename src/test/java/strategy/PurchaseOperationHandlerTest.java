@@ -1,7 +1,6 @@
 package strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 import model.Fruit;
@@ -24,9 +23,8 @@ public class PurchaseOperationHandlerTest {
     public void validOnePurchase_Ok() {
         storage.put(new Fruit("apple"), 50);
         purchaseOperationHandler.apply(new Fruit("apple"), 20);
-        assertTrue(storage.containsKey(new Fruit("apple")));
-        assertTrue(storage.containsValue(30));
-        assertEquals(1, storage.size());
+        Integer actual = 30;
+        assertEquals(actual, storage.get(new Fruit("apple")));
     }
 
     @Test

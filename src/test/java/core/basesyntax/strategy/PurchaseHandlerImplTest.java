@@ -27,6 +27,12 @@ public class PurchaseHandlerImplTest {
         Storage.storage.clear();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void apply_lacksFruit_NotOk() {
+        Storage.storage.put(new Fruit("apple"), 10);
+        operationHandler.apply(new Fruit("apple"), 20);
+    }
+
     @Test
     public void apply_validOutputWithOne_Ok() {
         storage.put(new Fruit("apple"), 50);

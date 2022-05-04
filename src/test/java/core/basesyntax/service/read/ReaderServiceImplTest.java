@@ -15,6 +15,11 @@ public class ReaderServiceImplTest {
         readerService = new ReaderServiceImpl();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void read_incorrectPath_NotOk() {
+        readerService.read(INCORRECT_PATH);
+    }
+
     @Test
     public void read_readInput_Ok() {
         List<String> expected = List.of(

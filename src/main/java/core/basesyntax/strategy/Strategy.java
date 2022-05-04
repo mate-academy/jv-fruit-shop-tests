@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import core.basesyntax.dao.StorageDao;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Strategy {
     private final StorageDao dao;

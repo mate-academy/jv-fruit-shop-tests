@@ -1,3 +1,5 @@
+package core.basesyntax;
+
 import core.basesyntax.impl.FileReaderServiceImpl;
 import core.basesyntax.impl.FileWriterServiceImpl;
 import core.basesyntax.impl.FruitShopServiceImpl;

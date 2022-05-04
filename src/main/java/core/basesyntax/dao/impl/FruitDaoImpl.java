@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 public class FruitDaoImpl implements FruitDao {
     @Override
     public Fruit create(String name, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity can`t be < 0");
+        }
         return new Fruit(name, quantity);
     }
 

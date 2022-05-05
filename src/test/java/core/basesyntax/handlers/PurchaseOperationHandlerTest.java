@@ -26,13 +26,16 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void purchase_ManyFruit_Ok() {
-        Storage.storage.put(new Fruit("banana"), 100);
-        Storage.storage.put(new Fruit("apple"), 150);
+        Storage.storage.put(new Fruit("banana"), 50);
+        Storage.storage.put(new Fruit("apple"), 100);
+        Storage.storage.put(new Fruit("mango"), 150);
         purchaseOperationHandler.process(new Fruit("banana"), 10);
-        purchaseOperationHandler.process(new Fruit("apple"), 50);
-        assertEquals(90, (int) Storage.storage.get(new Fruit("banana")));
-        assertEquals(100, (int) Storage.storage.get(new Fruit("apple")));
-        assertEquals(2, Storage.storage.size());
+        purchaseOperationHandler.process(new Fruit("apple"), 20);
+        purchaseOperationHandler.process(new Fruit("mango"), 50);
+        assertEquals(40, (int) Storage.storage.get(new Fruit("banana")));
+        assertEquals(80, (int) Storage.storage.get(new Fruit("apple")));
+        assertEquals(100, (int) Storage.storage.get(new Fruit("mango")));
+        assertEquals(3, Storage.storage.size());
     }
 
     @Test (expected = RuntimeException.class)

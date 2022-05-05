@@ -18,11 +18,11 @@ public class ParserServiceImplTest extends ParserServiceImpl {
 
     @Test
     public void parse_correctData_ok() {
-        Transaction actual = parserService.parse(INPUT_LINE);
         Transaction expected = new Transaction();
         expected.setFruit(new Fruit("banana"));
         expected.setQuantity(100);
         expected.setOperation("s");
+        Transaction actual = parserService.parse(INPUT_LINE);
         Assert.assertEquals(expected, actual);
     }
 }

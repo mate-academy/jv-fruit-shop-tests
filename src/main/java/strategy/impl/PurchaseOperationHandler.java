@@ -1,7 +1,8 @@
-package strategy;
+package strategy.impl;
 
 import db.Storage;
 import model.Fruit;
+import strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override

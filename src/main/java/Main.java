@@ -10,11 +10,11 @@ import service.impl.OutputServiceImpl;
 import service.impl.ParserServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.WriterServiceImpl;
-import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
-import strategy.PurchaseOperationHandler;
-import strategy.ReturnOperationHandler;
-import strategy.SupplyOperationHandler;
+import strategy.impl.BalanceOperationHandler;
+import strategy.impl.PurchaseOperationHandler;
+import strategy.impl.ReturnOperationHandler;
+import strategy.impl.SupplyOperationHandler;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";

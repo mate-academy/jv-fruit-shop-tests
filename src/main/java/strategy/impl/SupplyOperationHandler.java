@@ -1,9 +1,10 @@
-package strategy;
+package strategy.impl;
 
 import db.Storage;
 import model.Fruit;
+import strategy.OperationHandler;
 
-public class ReturnOperationHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void process(Fruit fruit, Integer quantity) {
         Integer initialQuantity = Storage.storage.get(fruit);

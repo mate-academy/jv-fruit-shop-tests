@@ -21,11 +21,6 @@ public class ParserServiceImplTest extends ParserServiceImpl {
         expected.setOperation("s");
     }
 
-    @Test(expected = NullPointerException.class)
-    public void parse_nullInput_notOk() {
-        parserService.parse(null);
-    }
-
     @Test
     public void parse_correctData_ok() {
         Transaction actual = parserService.parse(INPUT_LINE);

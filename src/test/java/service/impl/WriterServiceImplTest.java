@@ -43,11 +43,6 @@ public class WriterServiceImplTest extends WriterServiceImpl {
         writerService.write(INVALID_FILE_PATH, "output");
     }
 
-    @Test(expected = NullPointerException.class)
-    public void write_nullOutput_notOk() {
-        writerService.write(FILE_PATH, null);
-    }
-
     @Test(expected = RuntimeException.class)
     public void write_emptyFilePath_notOk() {
         writerService.write(null, "output");

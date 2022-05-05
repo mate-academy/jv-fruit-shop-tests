@@ -16,7 +16,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void supplyOperation_Correct_ok() {
+    public void supplyOperation_supply_ok() {
         Fruit apple = new Fruit("apple");
         Storage.store.put(apple, 9);
         LineData lineData = new LineData("s",apple, 9);

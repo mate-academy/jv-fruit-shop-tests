@@ -3,10 +3,16 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.Reader;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderImplTest {
-    private static final Reader reader = new ReaderImpl();
+    private static Reader reader;
+
+    @BeforeClass
+    public static void setUp() {
+        reader = new ReaderImpl();
+    }
 
     @Test
     public void readCorrect_ok() {
@@ -16,7 +22,7 @@ public class ReaderImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void readEmptyFile_notOk() {
+    public void readNullFile_notOk() {
         reader.readFromFile(null);
     }
 

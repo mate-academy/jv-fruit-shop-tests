@@ -8,10 +8,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportMakerImplTest {
-    private static final ReportMaker report = new ReportMakerImpl();
+    private static ReportMaker report;
 
     @BeforeClass
     public static void setup() {
+        report = new ReportMakerImpl();
         Storage.store.put(new Fruit("apple"), 12);
         Storage.store.put(new Fruit("orange"), 9);
     }

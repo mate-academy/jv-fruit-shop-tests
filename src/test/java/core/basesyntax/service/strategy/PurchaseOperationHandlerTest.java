@@ -16,7 +16,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperation_buyCorrect_ok() {
+    public void purchaseOperation_buy_ok() {
         Fruit apple = new Fruit("apple");
         Storage.store.put(apple, 25);
         LineData lineData = new LineData("p",apple, 12);

@@ -16,7 +16,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    public void returnOperation_Correct_ok() {
+    public void returnOperation_return_ok() {
         Fruit apple = new Fruit("apple");
         Storage.store.put(apple, 27);
         LineData lineData = new LineData("r",apple, 12);

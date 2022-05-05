@@ -3,16 +3,21 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.Writer;
-import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteImplTest {
-    private final Writer writer = new WriteImpl();
+    private static Writer writer;
+
+    @BeforeClass
+    public static void setUp() {
+        writer = new WriteImpl();
+    }
 
     @Test
     public void writeDataToFile_ok() {
-        List<String> dataList = List.of("fruit,quantity", "orange,12", "apple,8");
-        boolean actual = writer.writeData(dataList.toString(),
+        String dataList = "fruit,quantity" + "orange,12" + "apple,8";
+        boolean actual = writer.writeData(dataList,
                 "src/test/resources/testDataWriter.csv");
         assertTrue(actual);
     }
@@ -24,7 +29,7 @@ public class WriteImplTest {
 
     @Test (expected = RuntimeException.class)
     public void writeDataToFileWrongDirectory_notOk() {
-        List<String> dataList = List.of("fruit,quantity", "orange,12", "apple,8");
-        writer.writeData(dataList.toString(), "wrongDirectory/testDataWriter.csv");
+        String dataList = "fruit,quantity" + "orange,12" + "apple,8";
+        writer.writeData(dataList, "wrongDirectory/testDataWriter.csv");
     }
 }

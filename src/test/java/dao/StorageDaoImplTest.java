@@ -47,7 +47,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void get_not_existing_not_ok() {
+    public void get_notExisting_notOk() {
         Fruit apple = new Fruit("apple");
         Fruit orange = new Fruit("orange");
         Storage.dataBase.put(apple, 20);
@@ -57,12 +57,12 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void get_null_not_ok() {
+    public void get_nullFruit_notOk() {
         storageDao.get(null);
     }
 
     @Test
-    public void addAll_correct_ok() {
+    public void addAll_correctData_ok() {
         Storage.dataBase.put(new Fruit("apple"), 10);
         Storage.dataBase.put(new Fruit("orange"), 13);
         Storage.dataBase.put(new Fruit("banana"), 40);

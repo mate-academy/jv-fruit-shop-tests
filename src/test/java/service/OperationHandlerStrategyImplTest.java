@@ -2,8 +2,6 @@ package service;
 
 import static org.junit.Assert.assertEquals;
 
-import dao.StorageDao;
-import dao.StorageDaoImpl;
 import model.FruitTransaction;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,12 +12,10 @@ import service.strategy.SupplyOperationHandler;
 
 public class OperationHandlerStrategyImplTest {
     private static OperationHandlerStrategy operationHandlerStrategy;
-    private static StorageDao storageDao;
 
     @Before
     public void setUp() {
         operationHandlerStrategy = new OperationHandlerStrategyImpl();
-        storageDao = new StorageDaoImpl();
     }
 
     @Test
@@ -55,7 +51,7 @@ public class OperationHandlerStrategyImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void get_null_notOk() {
+    public void get_nullHandler_notOk() {
         operationHandlerStrategy.get(null);
     }
 }

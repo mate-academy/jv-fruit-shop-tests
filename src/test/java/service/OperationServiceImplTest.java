@@ -2,11 +2,11 @@ package service;
 
 import static org.junit.Assert.assertEquals;
 
-import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
+import model.Fruit;
 import model.FruitTransaction;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -17,21 +17,18 @@ public class OperationServiceImplTest {
     private static OperationHandlerStrategy operationHandlerStrategy;
     private static ParseService parseService;
     private static ReportService reportService;
-    private static StorageDao storageDao;
 
     @BeforeClass
     public static void beforeClass() {
-        storageDao = new StorageDaoImpl();
-        reportService = new ReportServiceImpl(storageDao);
+        reportService = new ReportServiceImpl(new StorageDaoImpl());
         parseService = new ParseServiceImpl();
         operationHandlerStrategy = new OperationHandlerStrategyImpl();
         operationService = new OperationServiceImpl(operationHandlerStrategy);
     }
 
     @Test
-    public void calculate_emptyInput_notOk() {
-        List<String> list = new ArrayList<>();
-        List<FruitTransaction> info = parseService.getInfo(list);
+    public void calculate_emptyList_ok() {
+        List<FruitTransaction> info = new ArrayList<>();
         operationService.calculate(info);
     }
 
@@ -55,11 +52,9 @@ public class OperationServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void calculate_wrongInput_notOk() {
-        List<String> list = new ArrayList<>();
-        list.add("b-banana-20");
-        list.add("p-banana-21");
-        List<FruitTransaction> fruitTransactions = parseService.getInfo(list);
-        operationService.calculate(fruitTransactions);
+        Fruit banana = new Fruit("banana");
+        List<FruitTransaction> list = List.of(new FruitTransaction(null, banana, 100));
+        operationService.calculate(list);
     }
 
     @After

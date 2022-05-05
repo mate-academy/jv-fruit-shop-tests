@@ -15,7 +15,7 @@ public class ReadFileServiceImplTest {
     }
 
     @Test
-    public void read_fileWithCorrectInput_ok() {
+    public void read_fileWithCorrectFilePath_ok() {
         List<String> actual = readFileService.read("src/test/resources/TestInput.csv");
         int expected = 7;
         assertEquals("Size not equals expected size!", actual.size(), expected);

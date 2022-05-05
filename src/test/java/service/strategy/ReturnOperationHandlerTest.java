@@ -2,7 +2,6 @@ package service.strategy;
 
 import static org.junit.Assert.assertEquals;
 
-import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
 import model.Fruit;
@@ -13,12 +12,10 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static OperationHandler operationHandler;
-    private static StorageDao storageDao;
 
     @Before
     public void setUp() {
-        storageDao = new StorageDaoImpl();
-        operationHandler = new ReturnOperationHandler(storageDao);
+        operationHandler = new ReturnOperationHandler(new StorageDaoImpl());
     }
 
     @Test

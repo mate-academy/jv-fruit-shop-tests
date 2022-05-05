@@ -2,7 +2,6 @@ package service.strategy;
 
 import static org.junit.Assert.assertEquals;
 
-import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
 import model.Fruit;
@@ -13,12 +12,10 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler operationHandler;
-    private static StorageDao storageDao;
 
     @Before
     public void setUp() {
-        storageDao = new StorageDaoImpl();
-        operationHandler = new PurchaseOperationHandler(storageDao);
+        operationHandler = new PurchaseOperationHandler(new StorageDaoImpl());
     }
 
     @Test
@@ -34,7 +31,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchase_wrongInput_not_ok() {
+    public void purchase_wrongInput_notOk() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 10);
         FruitTransaction fruitTransaction =

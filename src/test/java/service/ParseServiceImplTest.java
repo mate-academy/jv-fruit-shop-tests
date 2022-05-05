@@ -17,7 +17,7 @@ public class ParseServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_unknown_operation_notOk() {
+    public void parse_unknownOperation_notOk() {
         List<String> list = new ArrayList<>();
         list.add("b-apple-50");
         list.add("r-apple-20");
@@ -26,7 +26,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parse_correct_value_ok() {
+    public void parse_correctValue_ok() {
         List<String> list = new ArrayList<>();
         list.add("b-apple-50");
         list.add("p-apple-20");

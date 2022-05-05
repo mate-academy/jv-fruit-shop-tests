@@ -2,7 +2,6 @@ package service;
 
 import static org.junit.Assert.assertEquals;
 
-import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
 import model.Fruit;
@@ -12,12 +11,10 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
-    private static StorageDao storageDao;
 
     @BeforeClass
     public static void beforeClass() {
-        storageDao = new StorageDaoImpl();
-        reportService = new ReportServiceImpl(storageDao);
+        reportService = new ReportServiceImpl(new StorageDaoImpl());
     }
 
     @Test

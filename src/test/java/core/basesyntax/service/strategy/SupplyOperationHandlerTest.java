@@ -22,7 +22,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supply_Correct_Ok() {
+    public void supply_correct_Ok() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 40);
         FruitTransaction fruitTransaction =

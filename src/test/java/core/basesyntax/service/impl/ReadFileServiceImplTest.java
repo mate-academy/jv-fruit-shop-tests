@@ -16,19 +16,19 @@ public class ReadFileServiceImplTest {
     }
 
     @Test
-    public void read_FileWithCorrectInput_Ok() {
+    public void read_fileWithCorrectInput_Ok() {
         List<String> actual = readFileService.read("src/test/resources/TestInput.csv");
         int expected = 7;
         assertEquals("Size not equals expected size!", actual.size(), expected);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_WrongInputPath_NotOk() {
+    public void read_wrongInputPath_NotOk() {
         readFileService.read("src/test/java/core/resources/WrongInput.csv");
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_EmptyFile_NotOk() {
+    public void read_emptyFile_NotOk() {
         readFileService.read("src/test/java/resources/EmptyInput.csv");
     }
 }

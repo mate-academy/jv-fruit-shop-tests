@@ -22,7 +22,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balance_Correct_Ok() {
+    public void balance_correct_Ok() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 40);
         FruitTransaction fruitTransaction =

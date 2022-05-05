@@ -19,7 +19,7 @@ public class WriteFileServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_WrongPathToFile_NotOk() {
+    public void write_wrongPathToFile_NotOk() {
         String report = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,14"
@@ -32,13 +32,13 @@ public class WriteFileServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_EmptyReport_NotOk() {
+    public void write_emptyReport_NotOk() {
         String report = "";
-        writeFileService.write(report, "src/test/java/resources/ToFile.csv");
+        writeFileService.write(report, "src/test/resources/ToFile.csv");
     }
 
     @Test
-    public void write_CorrectReport_Ok() {
+    public void write_correctReport_Ok() {
         String report = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,14"

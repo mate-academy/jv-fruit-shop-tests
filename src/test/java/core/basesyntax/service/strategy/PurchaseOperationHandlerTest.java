@@ -22,7 +22,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_Correct_Ok() {
+    public void purchase_correct_Ok() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 40);
         FruitTransaction fruitTransaction =
@@ -34,7 +34,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchase_WrongInput_NotOk() {
+    public void purchase_wrongInput_NotOk() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 10);
         FruitTransaction fruitTransaction =

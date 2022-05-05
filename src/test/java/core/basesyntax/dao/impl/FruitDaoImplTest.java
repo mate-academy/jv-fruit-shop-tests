@@ -81,6 +81,6 @@ public class FruitDaoImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("Quantity cannot be less than 0");
+        fail("We should get an exception while creating fruit with negative quantity.");
     }
 }

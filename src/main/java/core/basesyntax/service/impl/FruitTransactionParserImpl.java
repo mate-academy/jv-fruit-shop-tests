@@ -13,7 +13,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     public List<FruitTransaction> parse(List<String> lines) {
         if (lines.isEmpty()) {
-            throw new RuntimeException("Lines with file empty");
+            throw new RuntimeException("We can`t parse an empty list");
         }
         return lines.stream()
                 .skip(1)

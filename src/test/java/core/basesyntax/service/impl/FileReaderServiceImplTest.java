@@ -25,7 +25,8 @@ public class FileReaderServiceImplTest {
         try (FileWriter fileWriter = new FileWriter(testFile)) {
             fileWriter.write("b,banana,152");
         } catch (IOException ex) {
-            throw new RuntimeException("Unable to write missing file", ex);
+            throw new RuntimeException("We should get an exception while "
+                    + "trying to read data from not existent file.", ex);
         }
     }
 
@@ -49,6 +50,6 @@ public class FileReaderServiceImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("File missing");
+        fail("We should get an exception while trying to read data from not existent file.");
     }
 }

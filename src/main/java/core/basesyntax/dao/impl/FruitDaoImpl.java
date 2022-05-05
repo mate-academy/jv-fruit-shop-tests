@@ -12,7 +12,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public Fruit create(String name, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("Quantity can`t be < 0");
+            throw new RuntimeException("we can`t create a fruit with a negative quantity.");
         }
         return new Fruit(name, quantity);
     }

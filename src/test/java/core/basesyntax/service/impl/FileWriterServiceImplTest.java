@@ -44,7 +44,8 @@ public class FileWriterServiceImplTest {
         try {
             actual = Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("We should get an exception "
+                    + "when we try to write data to a file.");
         }
         assertEquals(testLines, actual);
     }
@@ -56,6 +57,6 @@ public class FileWriterServiceImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("Unable to create file");
+        fail("We should get an exception while trying to read data from not existent file.");
     }
 }

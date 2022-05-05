@@ -32,13 +32,8 @@ public class FruitTransactionParserImplTest {
     @Test
     public void parse_OK() {
         List<FruitTransaction> actual = parser.parse(testStrings);
-        assertEquals(testFruits, actual);
-    }
-
-    @Test
-    public void parse_getSize_Ok() {
-        List<FruitTransaction> actual = parser.parse(testStrings);
         assertEquals(testFruits.size(), actual.size());
+        assertEquals(testFruits, actual);
     }
 
     @Test
@@ -48,7 +43,7 @@ public class FruitTransactionParserImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("This operation is not allowed");
+        fail("We should get an exception when trying to find an operation that doesn't exist.");
     }
 
     @Test
@@ -58,6 +53,6 @@ public class FruitTransactionParserImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail("This operation is not allowed");
+        fail("We should get an exception when we try to get an empty list.");
     }
 }

@@ -34,8 +34,9 @@ public class PurchaseOperationServiceTest {
 
         operationService.process(fruitTransaction);
 
-        Assert.assertTrue(Storage.fruitStorage.containsKey(fruit));
-        Assert.assertTrue(Storage.fruitStorage.containsValue(10));
+        int actual = Storage.fruitStorage.get(fruit);
+
+        Assert.assertEquals(10, actual);
     }
 
     @Test(expected = RuntimeException.class)

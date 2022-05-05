@@ -31,7 +31,9 @@ public class SupplyOperationServiceTest {
 
         operationService.process(fruitTransaction);
 
-        Assert.assertTrue(Storage.fruitStorage.containsKey(fruit));
+        int actual = Storage.fruitStorage.get(fruit);
+
+        Assert.assertEquals(10, actual);
     }
 
     @After

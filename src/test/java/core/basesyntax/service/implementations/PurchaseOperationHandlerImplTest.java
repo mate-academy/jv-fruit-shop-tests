@@ -14,10 +14,11 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerImplTest {
     private static OperationHandler handler;
+    private static FruitsDao fruitsDao;
 
     @BeforeClass
     public static void beforeAll() {
-        FruitsDao fruitsDao = new FruitsDaoImpl();
+        fruitsDao = new FruitsDaoImpl();
         handler = new PurchaseOperationHandlerImpl(fruitsDao);
     }
 

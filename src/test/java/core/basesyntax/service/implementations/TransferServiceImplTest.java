@@ -27,9 +27,9 @@ public class TransferServiceImplTest {
         );
         List<FruitTransferDto> actual = transferService.parse(list);
         List<FruitTransferDto> expected = List.of(
-                new FruitTransferDto("b",new Fruit("banana"), 20),
-                new FruitTransferDto("b",new Fruit("apple"), 100),
-                new FruitTransferDto("s",new Fruit("banana"), 100)
+                new FruitTransferDto("b", new Fruit("banana"), 20),
+                new FruitTransferDto("b", new Fruit("apple"), 100),
+                new FruitTransferDto("s", new Fruit("banana"), 100)
         );
         Assert.assertEquals(expected, actual);
     }

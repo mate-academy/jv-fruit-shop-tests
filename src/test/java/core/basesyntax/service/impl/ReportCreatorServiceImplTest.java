@@ -17,7 +17,7 @@ public class ReportCreatorServiceImplTest {
     }
 
     @Test
-    public void createReport_ok() {
+    public void createReport_validData_ok() {
         Storage.storage.put(new Fruit("banana"), 52);
         Storage.storage.put(new Fruit("apple"), 9);
         String expected = "fruit,quantity \n"

@@ -23,7 +23,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_ok() {
+    public void writeToFile_WithValidPath_ok() {
         String toFileName = "testOutputFile";
         String report = "fruit,quantity\n"
                 + "banana,52\n"
@@ -39,7 +39,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_notOk() {
+    public void writeToFile_WithInvalidPath_notOk() {
         String report = "fruit,quantity \n"
                 + "banana,52\n"
                 + "apple,9\n";

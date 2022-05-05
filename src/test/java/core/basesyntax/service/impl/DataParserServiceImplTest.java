@@ -21,7 +21,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void parse_validData_ok() {
+    public void parseData_validData_ok() {
         List<String> testData = new ArrayList<>();
         testData.add("type,fruit,quantity");
         testData.add("b,banana,20");

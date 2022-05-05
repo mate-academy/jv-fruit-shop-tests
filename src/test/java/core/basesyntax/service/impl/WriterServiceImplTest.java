@@ -11,14 +11,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
+    private static final String OUTPUT_FILE = "src/test/resources/outputTest.csv";
+    private static final String INVALID_PATH = "src/test/java/invalidPath/inputTest.csv";
+    private static final String PATH_WITH_WHITESPACE = "src/test/ resources/ inputTest.csv";
+
     private static WriterService writerService;
-    private static String outputFile;
     private static String report;
 
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
-        outputFile = "src/test/resources/outputTest.csv";
         report = "fruit,quantity" + System.lineSeparator()
                 + "banana,183" + System.lineSeparator()
                 + "apple,49" + System.lineSeparator();
@@ -26,12 +28,12 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeToFile_Ok() {
-        writerService.writeToFile(outputFile, report);
+        writerService.writeToFile(OUTPUT_FILE, report);
         List<String> actual;
         try {
-            actual = Files.readAllLines(Paths.get(outputFile));
+            actual = Files.readAllLines(Paths.get(OUTPUT_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from the file " + outputFile, e);
+            throw new RuntimeException("Can't read from the file " + OUTPUT_FILE, e);
         }
         List<String> expected = List.of("fruit,quantity",
                 "banana,183",
@@ -41,11 +43,11 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToInvalidPath_notOk() {
-        writerService.writeToFile("src/test/java/invalidPath/outputTest.csv", report);
+        writerService.writeToFile(INVALID_PATH, report);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToPathWithWhitespace_notOk() {
-        writerService.writeToFile(" src/test/ resources/outputTest.csv", report);
+        writerService.writeToFile(PATH_WITH_WHITESPACE, report);
     }
 }

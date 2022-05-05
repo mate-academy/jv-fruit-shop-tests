@@ -8,12 +8,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static String inputFile;
+    private static final String INPUT_FILE = "src/test/resources/inputTest.csv";
+    private static final String INVALID_PATH = "src/test/java/invalidPath/inputTest.csv";
+    private static final String PATH_WITH_WHITESPACE = "src/test/ resources/ inputTest.csv";
     private static ReaderService readerService;
 
     @BeforeClass
     public static void beforeClass() {
-        inputFile = "src/test/resources/inputTest.csv";
         readerService = new ReaderServiceImpl();
     }
 
@@ -28,17 +29,17 @@ public class ReaderServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actualList = readerService.read(inputFile);
+        List<String> actualList = readerService.read(INPUT_FILE);
         assertEquals(expectedList, actualList);
     }
 
     @Test(expected = RuntimeException.class)
     public void readInvalidPath_notOk() {
-        readerService.read("src/test/java/invalidPath/inputTest.csv");
+        readerService.read(INVALID_PATH);
     }
 
     @Test(expected = RuntimeException.class)
     public void readPathWithWhitespace_notOk() {
-        readerService.read("src/test/resources/ inputTest.csv");
+        readerService.read(PATH_WITH_WHITESPACE);
     }
 }

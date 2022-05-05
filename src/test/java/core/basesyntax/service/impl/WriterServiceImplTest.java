@@ -19,9 +19,11 @@ public class WriterServiceImplTest {
     @BeforeClass
     public static void setUp() {
         writerService = new WriterServiceImpl();
-        testReport = "fruit,quantity" + System.lineSeparator()
-                + "banana,152" + System.lineSeparator()
-                + "apple,90";
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append("fruit,quantity").append(System.lineSeparator())
+                .append("banana,152").append(System.lineSeparator())
+                .append("apple,90");
+        testReport = stringBuilder.toString();
     }
 
     @Test (expected = RuntimeException.class)

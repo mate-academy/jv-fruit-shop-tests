@@ -15,8 +15,6 @@ public class ReportServiceImplTest {
     @BeforeClass
     public static void setUp() {
         reportService = new ReportServiceImpl();
-        Storage.fruitStorage.put(new Fruit("banana"), 100);
-        Storage.fruitStorage.put(new Fruit("apple"), 50);
     }
 
     @Test
@@ -27,6 +25,8 @@ public class ReportServiceImplTest {
                 .append(System.lineSeparator())
                 .append("apple,50")
                 .append(System.lineSeparator());
+        Storage.fruitStorage.put(new Fruit("banana"), 100);
+        Storage.fruitStorage.put(new Fruit("apple"), 50);
         String actual = reportService.createReport();
         assertEquals(expected.toString(), actual);
     }

@@ -7,15 +7,9 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.servise.FruitShopService;
 import core.basesyntax.servise.OperationHandlerStrategy;
-import core.basesyntax.strategy.BalanceOperationHandler;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.PurchaseOperationHandler;
-import core.basesyntax.strategy.ReturnOperationHandler;
-import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,14 +19,6 @@ public class FruitShopServiceImplTest {
 
     @BeforeClass
     public static void setUp() {
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-
-        {
-            map.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-            map.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-            map.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-            map.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        }
         OperationHandlerStrategy operationHandlerStrategy = new OperationHandlerStrategyImpl();
         fruitShopService = new FruitShopServiceImpl(operationHandlerStrategy);
         fruitTransactionList = new ArrayList<>();
@@ -52,5 +38,10 @@ public class FruitShopServiceImplTest {
         fruitShopService.apply(fruitTransactionList);
         int actual = Storage.fruitStorage.get(new Fruit("apple"));
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void cleanUp() {
+        Storage.fruitStorage.clear();
     }
 }

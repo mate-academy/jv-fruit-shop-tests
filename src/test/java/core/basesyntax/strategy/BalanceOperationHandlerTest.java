@@ -23,8 +23,8 @@ public class BalanceOperationHandlerTest {
                 = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"), 100);
         operationHandler.process(fruitTransaction);
-        int expected = Storage.fruitStorage.get(fruitTransaction.getFruit());
-        int actual = fruitTransaction.getQuantity();
+        int actual = Storage.fruitStorage.get(fruitTransaction.getFruit());
+        int expected = fruitTransaction.getQuantity();
         assertEquals(expected, actual);
     }
 

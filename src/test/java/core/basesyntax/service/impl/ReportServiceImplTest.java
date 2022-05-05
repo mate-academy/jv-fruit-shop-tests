@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
+
+import java.util.Collections;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +24,7 @@ public class ReportServiceImplTest {
         Storage.fruits.put("banana", 100);
         Storage.fruits.put("apple", 50);
         testReportData = List.of("fruit,quantity", "banana,100", "apple,50");
-        testReportEmpty = List.of("fruit,quantity");
+//        testReportEmpty = List.of("fruit,quantity");
     }
 
     @After
@@ -32,15 +34,14 @@ public class ReportServiceImplTest {
 
     @Test
     public void generatedReport_OK() {
-        List<String> lines = reportService.generatedReport();
-
-        assertEquals(testReportData, lines);
+        List<String> actual = reportService.generatedReport();
+        assertEquals(testReportData, actual);
     }
 
     @Test
     public void generatedEmptyReport_Ok() {
         Storage.fruits.clear();
-        List<String> lines = reportService.generatedReport();
-        assertEquals(testReportEmpty, lines);
+        List<String> actual = reportService.generatedReport();
+        assertEquals(Collections.emptyList(), actual);
     }
 }

@@ -12,6 +12,9 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int SECOND_INDEX = 2;
 
     public List<FruitTransaction> parse(List<String> lines) {
+        if (lines.isEmpty()) {
+            throw new RuntimeException("Lines with file empty");
+        }
         return lines.stream()
                 .skip(1)
                 .map(s -> s.replaceAll("\\s+", "").split(","))

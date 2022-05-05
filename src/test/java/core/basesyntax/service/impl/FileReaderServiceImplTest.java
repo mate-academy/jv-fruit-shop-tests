@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.service.FileReaderService;
 import java.io.File;
@@ -25,7 +25,7 @@ public class FileReaderServiceImplTest {
         try (FileWriter fileWriter = new FileWriter(testFile)) {
             fileWriter.write("b,banana,152");
         } catch (IOException ex) {
-            throw new RuntimeException("Not", ex);
+            throw new RuntimeException("Unable to write missing file", ex);
         }
     }
 
@@ -39,19 +39,16 @@ public class FileReaderServiceImplTest {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,152");
         List<String> actual = fileReaderServiceImpl.readFromFile(testFile.getPath());
-
         assertEquals(expected, actual);
     }
 
     @Test
     public void readFromFile_notOk() {
-        boolean thrown = false;
         try {
             fileReaderServiceImpl.readFromFile("notExistingFile.txt");
         } catch (RuntimeException e) {
-            thrown = true;
+            return;
         }
-
-        assertTrue(thrown);
+        fail("File missing");
     }
 }

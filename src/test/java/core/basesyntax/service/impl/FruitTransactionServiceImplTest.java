@@ -64,7 +64,6 @@ public class FruitTransactionServiceImplTest {
     public void process_Ok() {
         transactionService.process(testTransactionFruits);
         List<Fruit> fruitDaoAll = fruitDao.getAll();
-
         assertEquals(fruitList, fruitDaoAll);
     }
 
@@ -72,7 +71,6 @@ public class FruitTransactionServiceImplTest {
     public void processBalance_Ok() {
         transactionService.process(balanceList);
         List<Fruit> fruitDaoAll = fruitDao.getAll();
-
         assertEquals(55, fruitDaoAll.get(0).getQuantity());
     }
 
@@ -80,7 +78,6 @@ public class FruitTransactionServiceImplTest {
     public void processSupply_Ok() {
         transactionService.process(supplyList);
         List<Fruit> fruitDaoAll = fruitDao.getAll();
-
         assertEquals(110, fruitDaoAll.get(0).getQuantity());
     }
 
@@ -88,7 +85,6 @@ public class FruitTransactionServiceImplTest {
     public void processPurchase_Ok() {
         transactionService.process(purchaseList);
         List<Fruit> fruitDaoAll = fruitDao.getAll();
-
         assertEquals(0, fruitDaoAll.get(0).getQuantity());
     }
 
@@ -96,7 +92,6 @@ public class FruitTransactionServiceImplTest {
     public void processReturn_Ok() {
         transactionService.process(returnList);
         List<Fruit> fruitDaoAll = fruitDao.getAll();
-
         assertEquals(110, fruitDaoAll.get(0).getQuantity());
     }
 
@@ -104,7 +99,6 @@ public class FruitTransactionServiceImplTest {
     public void processEmpty_Ok() {
         transactionService.process(Collections.emptyList());
         List<Fruit> fruitDaoAll = fruitDao.getAll();
-
         assertEquals(fruitDaoAll, Collections.emptyList());
     }
 }

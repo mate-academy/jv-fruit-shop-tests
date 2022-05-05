@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.service.FileWriterService;
 import java.io.File;
@@ -33,32 +34,28 @@ public class FileWriterServiceImplTest {
     @Test
     public void createFile_Ok() {
         fileWriterService.writeToFile(TEST_FILE, testLines);
-
         assertTrue(file.exists());
     }
 
     @Test
     public void writeToFile_Ok() {
         fileWriterService.writeToFile(TEST_FILE, testLines);
-        List<String> lines = null;
+        List<String> actual = null;
         try {
-            lines = Files.readAllLines(file.toPath());
+            actual = Files.readAllLines(file.toPath());
         } catch (IOException e) {
             throw new RuntimeException();
         }
-
-        assertEquals(testLines, lines);
+        assertEquals(testLines, actual);
     }
 
     @Test
     public void createFile_notOk() {
-        boolean thrown = false;
         try {
             fileWriterService.writeToFile("b:/notExistingFile.txt", testLines);
         } catch (RuntimeException e) {
-            thrown = true;
+            return;
         }
-
-        assertTrue(thrown);
+        fail("Unable to create file");
     }
 }

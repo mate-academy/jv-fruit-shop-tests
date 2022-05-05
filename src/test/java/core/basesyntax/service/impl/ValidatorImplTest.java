@@ -22,7 +22,7 @@ public class ValidatorImplTest {
         }
     }
 
-        @Test (expected = RuntimeException.class)
+    @Test (expected = RuntimeException.class)
     public void validate_EmptyString_NotOk() {
         validator.validate("");
     }

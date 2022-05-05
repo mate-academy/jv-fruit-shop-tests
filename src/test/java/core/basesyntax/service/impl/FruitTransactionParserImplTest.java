@@ -20,6 +20,10 @@ public class FruitTransactionParserImplTest {
     @Before
     public void setUp() {
         parser = new FruitTransactionParserImpl();
+    }
+
+    @Test
+    public void parse_OK() {
         Fruit banana = new Fruit("banana", 100);
         Fruit apple = new Fruit("apple", 50);
         FruitTransaction balanceOperation =
@@ -27,10 +31,6 @@ public class FruitTransactionParserImplTest {
         FruitTransaction returnOperation =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, apple);
         testFruits = List.of(balanceOperation, returnOperation);
-    }
-
-    @Test
-    public void parse_OK() {
         List<FruitTransaction> actual = parser.parse(testStrings);
         assertEquals(testFruits.size(), actual.size());
         assertEquals(testFruits, actual);

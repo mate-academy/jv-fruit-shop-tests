@@ -13,12 +13,12 @@ public class CsvFileReaderServiceImplTest {
     private static CsvFileReaderServiceImpl csvFileReaderService;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         csvFileReaderService = new CsvFileReaderServiceImpl();
     }
 
     @Test
-    public void readFromFile_isOk() {
+    public void readFromFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity",
                                         "b,banana,20",
                                         "b,apple,100",
@@ -33,7 +33,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromEmptyFile() {
+    public void readFromEmptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = csvFileReaderService.readFromFile(EMPTY_FILE);
         assertEquals(expected, actual);

@@ -6,7 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
@@ -14,14 +14,14 @@ public class ReportServiceImplTest {
     private static FruitShopDao fruitShopDao;
     private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fruitShopDao = new FruitShopDaoImpl();
         reportService = new ReportServiceImpl(fruitShopDao);
     }
 
     @Test
-    public void reportService_isOk() {
+    public void reportService_Ok() {
         Storage.fruitStorage.put("apple", 10);
         Storage.fruitStorage.put("banana", 20);
         Storage.fruitStorage.put("orange", 30);
@@ -31,6 +31,12 @@ public class ReportServiceImplTest {
                 + "orange," + 30 + System.lineSeparator()
                 + "apple," + 10 + System.lineSeparator();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void reportService_createForEmptyStorage_Ok() {
+        boolean empty = Storage.fruitStorage.isEmpty();
+        Assert.assertTrue(empty);
     }
 
     @After

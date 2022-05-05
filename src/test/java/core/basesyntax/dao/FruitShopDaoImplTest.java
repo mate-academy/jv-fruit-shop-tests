@@ -15,7 +15,7 @@ public class FruitShopDaoImplTest {
     }
 
     @Test
-    public void fruitShopDao_add_isOk() {
+    public void fruitShopDao_add_Ok() {
         fruitShopDao.add("apple", 100);
         fruitShopDao.add("banana", 200);
         int expected = 2;
@@ -24,12 +24,19 @@ public class FruitShopDaoImplTest {
     }
 
     @Test
-    public void fruitShopDao_getAll_isOk() {
+    public void fruitShopDao_getAll_Ok() {
         Storage.fruitStorage.put("apple", 100);
         Storage.fruitStorage.put("banana", 200);
         Storage.fruitStorage.put("orange", 55);
         int expected = 3;
         int actual = fruitShopDao.getAll().size();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void fruitShopDao_emptyStorageFromGetAll_Ok() {
+        int actual = fruitShopDao.getAll().size();
+        int expected = 0;
         Assert.assertEquals(expected, actual);
     }
 

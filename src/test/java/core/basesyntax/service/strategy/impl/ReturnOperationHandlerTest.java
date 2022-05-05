@@ -16,7 +16,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnOperationHandler_isOk() {
+    public void returnOperationHandler_Ok() {
         Storage.fruitStorage.put("apple", 100);
         returnOperationHandler.handle("apple", 20);
         int expected = 120;

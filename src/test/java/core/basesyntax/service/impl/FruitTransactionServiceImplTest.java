@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -37,17 +38,14 @@ public class FruitTransactionServiceImplTest {
                 new PurchaseOperationHandler());
         operationHandlerHashMap.put(Operations.RETURN.getOperation(),
                 new ReturnOperationHandler());
-    }
 
-    @Before
-    public void setUp() {
         operationStrategy = new OperationStrategyImpl(operationHandlerHashMap);
         fruitTransactionService = new FruitTransactionServiceImpl(operationStrategy);
         fruitShopDao = new FruitShopDaoImpl();
     }
 
     @Test
-    public void fruitTransactionService_isOk() {
+    public void fruitTransactionService_processTransactions_Ok() {
         List<String> listFruits = new ArrayList<>();
         listFruits.add("type,fruit,quantity");
         listFruits.add("b,apple,100");
@@ -61,5 +59,10 @@ public class FruitTransactionServiceImplTest {
 
         Map<String, Integer> actual = fruitShopDao.getAll();
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruitStorage.clear();
     }
 }

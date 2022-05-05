@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterServiceImplTest {
@@ -18,14 +18,14 @@ public class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService csvFileWriterService;
     private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         csvFileWriterService = new CsvFileWriterServiceImpl();
         reportService = new ReportServiceImpl(new FruitShopDaoImpl());
     }
 
     @Test
-    public void csvFileWriter_isOk() {
+    public void csvFileWriter_Ok() {
         Storage.fruitStorage.put("apple", 35);
         Storage.fruitStorage.put("banana", 135);
         csvFileWriterService.writeToFile(WRITE_TO_FILE, reportService);
@@ -36,8 +36,13 @@ public class CsvFileWriterServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test (expected = RuntimeException.class)
+    public void writeToFile_fromNullPath_NotOk() {
+        csvFileWriterService.writeToFile(null, reportService);
+    }
+
     @Test(expected = RuntimeException.class)
-    public void writeToFile_isNotOk() {
+    public void writeToFile_invalidPath_NotOk() {
         csvFileWriterService.writeToFile(INCORRECT_PATH, reportService);
     }
 

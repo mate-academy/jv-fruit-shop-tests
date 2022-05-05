@@ -16,7 +16,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyOperationHandler_isOk() {
+    public void supplyOperationHandler_Ok() {
         Storage.fruitStorage.put("apple", 25);
         supplyOperationHandler.handle("apple", 25);
         int expected = 50;

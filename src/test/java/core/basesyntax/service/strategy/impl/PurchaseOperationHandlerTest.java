@@ -15,7 +15,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperationHandler_isOk() {
+    public void purchaseOperationHandler_Ok() {
         Storage.fruitStorage.put("apple", 100);
         purchaseOperationHandler.handle("apple", 20);
         int expected = 80;

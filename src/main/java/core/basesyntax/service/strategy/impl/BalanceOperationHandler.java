@@ -11,6 +11,6 @@ public class BalanceOperationHandler implements OperationHandler {
     public void handle(String fruitName, int quantity) {
         fruitShopDao.add(fruitName,
                 Storage.fruitStorage.get(fruitName) == null ? quantity :
-                Storage.fruitStorage.get(quantity));
+                        Storage.fruitStorage.get(fruitName));
     }
 }

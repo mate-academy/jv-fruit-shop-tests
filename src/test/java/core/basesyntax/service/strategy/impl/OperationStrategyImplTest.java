@@ -1,16 +1,19 @@
 package core.basesyntax.service.strategy.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
+    private static final String INVALID_OPERATION_CHARACTER = "D";
     private static OperationStrategy operationStrategy;
     private static Map<String, OperationHandler> operationHandlerMap;
 
@@ -33,29 +36,44 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void balanceOperationHandler_isOk() {
+    public void balanceOperationHandler_Ok() {
         OperationHandler balanceOperation
                 = operationStrategy.get(Operations.BALANCE.getOperation());
         Assert.assertTrue(operationHandlerMap.containsValue(balanceOperation));
     }
 
     @Test
-    public void supplyOperationHandler_isOk() {
+    public void supplyOperationHandler_Ok() {
         OperationHandler supplyOperation
                 = operationStrategy.get(Operations.SUPPLY.getOperation());
         Assert.assertTrue(operationHandlerMap.containsValue(supplyOperation));
     }
 
     @Test
-    public void purchaseOperationHandler_isOk() {
+    public void purchaseOperationHandler_Ok() {
         OperationHandler purchaseOperation
                 = operationStrategy.get(Operations.PURCHASE.getOperation());
         Assert.assertTrue(operationHandlerMap.containsValue(purchaseOperation));
     }
 
     @Test
-    public void returnOperationHandler_isOk() {
+    public void returnOperationHandler_Ok() {
         OperationHandler returnOperation = operationStrategy.get(Operations.RETURN.getOperation());
         Assert.assertTrue(operationHandlerMap.containsValue(returnOperation));
+    }
+
+    @Test
+    public void operationStrategy_invalidOperation_NotOk() {
+        operationStrategy.get(INVALID_OPERATION_CHARACTER);
+    }
+
+    @Test
+    public void operationStrategy_operationIsEmpty_NotOk() {
+        operationStrategy.get(null);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruitStorage.clear();
     }
 }

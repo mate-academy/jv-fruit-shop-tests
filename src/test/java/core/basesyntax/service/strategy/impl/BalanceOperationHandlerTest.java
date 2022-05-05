@@ -16,8 +16,8 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceOperationHandler_isOk() {
-        Storage.fruitStorage.put("apple", null);
+    public void balanceOperationHandler_Ok() {
+        Storage.fruitStorage.put("apple", 20);
         balanceOperationHandler.handle("apple", 20);
         int expected = 20;
         int actual = Storage.fruitStorage.get("apple");

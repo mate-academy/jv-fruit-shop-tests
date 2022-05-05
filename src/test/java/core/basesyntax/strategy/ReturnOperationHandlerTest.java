@@ -15,7 +15,6 @@ public class ReturnOperationHandlerTest {
         operationHandler = new ReturnOperationHandler();
     }
 
-
     @Test
     public void handleReturnOperationEmptyStorage_ok() {
         Fruit banana = new Fruit("banana");

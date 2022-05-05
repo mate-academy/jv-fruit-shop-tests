@@ -27,11 +27,11 @@ public class FileWriterServiceImplTest {
     @Test
     public void writeReportInvalidPath_ok() {
         fileWriter.write(REPORT_FILE, report);
-        List<String> actual = getReportData(REPORT_FILE);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,152");
         expected.add("apple,90");
+        List<String> actual = getReportData(REPORT_FILE);
         Assert.assertEquals(expected, actual);
     }
 

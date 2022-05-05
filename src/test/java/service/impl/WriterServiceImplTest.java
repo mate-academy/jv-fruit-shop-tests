@@ -21,13 +21,8 @@ public class WriterServiceImplTest extends WriterServiceImpl {
     @Test
     public void write_validPath_ok() {
         writerService.write(FILE_PATH, "output");
-        String expected;
-        try {
-            expected = Files.readString(Path.of(FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Can not read from " + FILE_PATH, e);
-        }
-        String actual = "output";
+        String expected = "output";
+        String actual = readFromTestFile(FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 
@@ -35,22 +30,17 @@ public class WriterServiceImplTest extends WriterServiceImpl {
     public void write_successWrite_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,200" + System.lineSeparator()
-                + "pinapple,300";
+                + "pineapple,300";
         writerService.write(FILE_PATH, expected);
-        String actual = readFromTestFile();
+        String actual = readFromTestFile(FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void write_emptyOutput_ok() {
         writerService.write(FILE_PATH, "");
-        String expected;
-        try {
-            expected = Files.readString(Path.of(FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Can not read from " + FILE_PATH, e);
-        }
-        String actual = "";
+        String expected = "";
+        String actual = readFromTestFile(FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 
@@ -59,12 +49,12 @@ public class WriterServiceImplTest extends WriterServiceImpl {
         writerService.write(INVALID_FILE_PATH, "output");
     }
 
-    private String readFromTestFile() {
+    private String readFromTestFile(String filePath) {
         String data;
         try {
-            data = Files.readString(Path.of(WriterServiceImplTest.FILE_PATH));
+            data = Files.readString(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + FILE_PATH, e);
+            throw new RuntimeException("Can't read from file " + filePath, e);
         }
         return data;
     }

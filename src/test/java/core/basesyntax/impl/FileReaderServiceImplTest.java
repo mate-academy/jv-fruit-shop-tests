@@ -38,7 +38,7 @@ public class FileReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void validateNullInputData_notOk() {
-        fileReaderService.read(null);
+        fileReaderService.read("invalid/directory/file.csv");
     }
 
     @Test

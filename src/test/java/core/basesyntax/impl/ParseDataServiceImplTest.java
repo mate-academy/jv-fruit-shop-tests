@@ -18,11 +18,6 @@ public class ParseDataServiceImplTest {
         parseDataService = new ParseDataServiceImpl();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void parseNullInputData_notOk() {
-        parseDataService.parse(null);
-    }
-
     @Test
     public void parseValidInputData_ok() {
         List<String> dataFromFile = new ArrayList<>();

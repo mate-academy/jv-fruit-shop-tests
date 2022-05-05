@@ -21,7 +21,7 @@ public class PurchaseOperationHandlerTest {
     public void handlePurchaseOperation_ok() {
         Storage.fruitStorage.put(new Fruit("apple"), 50);
         FruitTransaction fruitTransaction
-                = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 new Fruit("apple"), 10);
         operationHandler.process(fruitTransaction);
         int expected = 40;
@@ -33,7 +33,7 @@ public class PurchaseOperationHandlerTest {
     public void handlePurchaseOperationWithNotEnoughFruits_notOk() {
         Storage.fruitStorage.put(new Fruit("apple"), 50);
         FruitTransaction fruitTransaction
-                = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 new Fruit("apple"), 60);
         operationHandler.process(fruitTransaction);
     }

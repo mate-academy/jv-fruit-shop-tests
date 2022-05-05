@@ -20,7 +20,7 @@ public class SupplyOperationHandlerTest {
     @Test
     public void handleSupplyOperation_ok() {
         FruitTransaction fruitTransaction
-                = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 new Fruit("apple"), 10);
         operationHandler.process(fruitTransaction);
         int actual = Storage.fruitStorage.get(fruitTransaction.getFruit());

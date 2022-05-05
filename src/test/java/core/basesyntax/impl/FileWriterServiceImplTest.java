@@ -20,7 +20,8 @@ public class FileWriterServiceImplTest {
     @BeforeClass
     public static void setUp() {
         fileWriterService = new FileWriterServiceImpl();
-        report = "fruit, quantity" + System.lineSeparator()
+        report = "fruit, quantity"
+                + System.lineSeparator()
                 + "banana,152"
                 + System.lineSeparator()
                 + "apple,90"
@@ -30,27 +31,25 @@ public class FileWriterServiceImplTest {
     @Test
     public void writeToFileWithValidPath_ok() {
         fileWriterService.writeFile(TO_FILE, report);
-        List<String> actual;
-        try {
-            actual = Files.readAllLines(Path.of(TO_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file "
-                    + TO_FILE, e);
-        }
         expected = new ArrayList<>();
         expected.add("fruit, quantity");
         expected.add("banana,152");
         expected.add("apple,90");
+        List<String> actual = fileReader(TO_FILE);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFileWithInvalidPath_notOk() {
-        fileWriterService.writeFile(null, report);
+        fileWriterService.writeFile("invalid/directory/file.csv", report);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void writeToFileNullReport_notOk() {
-        fileWriterService.writeFile(TO_FILE, null);
+    private static List<String> fileReader(String path) {
+        try {
+            return Files.readAllLines(Path.of(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file "
+                    + path, e);
+        }
     }
 }

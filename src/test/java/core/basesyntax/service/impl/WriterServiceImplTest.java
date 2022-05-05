@@ -34,12 +34,13 @@ public class WriterServiceImplTest {
         expected.add("fruit,quantity");
         expected.add("banana,100");
         expected.add("apple,100");
-        Assert.assertEquals(expected, readerService.readFromFile(OUTPUT_FILE_PATH));
+        List<String> actual = readerService.readFromFile(OUTPUT_FILE_PATH);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_notOk() {
-        writerService.writeToFile("folder/incorrectFilePath", reportService.getReport());
+    public void writeToFile_filePathNotOk() {
+        writerService.writeToFile("folder/incorrect/File/Path", reportService.getReport());
     }
 
     @After

@@ -10,28 +10,31 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler purchaseOperationHandler;
+    private static Fruit fruit;
+    private static FruitTransfer fruitTransfer;
 
     @BeforeClass
     public static void setUp() {
         purchaseOperationHandler = new PurchaseOperationHandler();
+        fruit = new Fruit("banana");
     }
 
     @Test
     public void process_ok() {
-        Storage.fruits.put(new Fruit("banana"), 100);
-        FruitTransfer fruit = new FruitTransfer(FruitTransfer.Operation.PURCHASE,
-                new Fruit("banana"), 100);
-        purchaseOperationHandler.process(fruit);
+        Storage.fruits.put(fruit, 100);
+        fruitTransfer = new FruitTransfer(FruitTransfer.Operation.PURCHASE, fruit, 100);
+        purchaseOperationHandler.process(fruitTransfer);
         Integer expected = 0;
-        Assert.assertEquals(expected, Storage.fruits.get(fruit.getFruit()));
+        Integer actual = Storage.fruits.get(fruitTransfer.getFruit());
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void process_notOk() {
-        Storage.fruits.put(new Fruit("banana"), 100);
-        FruitTransfer fruit = new FruitTransfer(FruitTransfer.Operation.PURCHASE,
-                new Fruit("banana"), 101);
-        purchaseOperationHandler.process(fruit);
+        Storage.fruits.put(fruit, 100);
+        fruitTransfer = new FruitTransfer(FruitTransfer.Operation.PURCHASE,
+                fruit, 101);
+        purchaseOperationHandler.process(fruitTransfer);
     }
 
     @After

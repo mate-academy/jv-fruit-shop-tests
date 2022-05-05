@@ -20,8 +20,11 @@ public class ReportServiceImplTest {
 
     @Test
     public void getReport_ok() {
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,100" + System.lineSeparator() + "apple,100";
+        String expected = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,100"
+                + System.lineSeparator()
+                + "apple,100";
         Assert.assertEquals(expected, reportService.getReport());
     }
 

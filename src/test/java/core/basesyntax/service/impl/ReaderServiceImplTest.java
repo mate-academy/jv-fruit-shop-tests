@@ -23,19 +23,11 @@ public class ReaderServiceImplTest {
         expected.add("b,banana,20");
         expected.add("b,apple,100");
         expected.add("s,banana,100");
-        expected.add("p,banana,13");
-        expected.add("r,apple,10");
-        expected.add("p,apple,20");
-        expected.add("p,banana,5");
-        expected.add("s,banana,51");
-        expected.add("b,orange,100");
-        expected.add("p,orange,10");
-        expected.add("r,orange,4");
         Assert.assertEquals(expected, readerService.readFromFile(INPUT_FILE_PATH));
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_notOk() {
-        readerService.readFromFile("invalid_filepath");
+        readerService.readFromFile("invalid/filepath");
     }
 }

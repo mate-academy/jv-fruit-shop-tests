@@ -19,7 +19,7 @@ public class ReaderImplTest {
 
     @Test
     public void readFromFile_ok() {
-        List<String> expected = readFromFile(PATH_INPUT_FILE);
+        List<String> expected = fileReader(PATH_INPUT_FILE);
         List<String> actual = reader.readFromFile(PATH_INPUT_FILE);
         Assert.assertEquals(expected, actual);
     }
@@ -29,7 +29,7 @@ public class ReaderImplTest {
         reader.readFromFile("invalid/directory/file.csv");
     }
 
-    private List<String> readFromFile(String path) {
+    private List<String> fileReader(String path) {
         try {
             return Files.readAllLines(Path.of(path));
         } catch (IOException e) {

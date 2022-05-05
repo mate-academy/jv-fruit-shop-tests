@@ -32,7 +32,7 @@ public class FileWriterServiceImplTest {
                 "banana,52",
                 "apple,9");
         fileWriterService.writeToFile(toFileName, report);
-        File testOutputFile = new File("testOutputFile");
+        File testOutputFile = new File("readOutput");
         List<String> actual = new ArrayList<>();
         actual = read("testOutputFile");
         assertEquals(expected, actual);

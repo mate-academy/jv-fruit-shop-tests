@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
-
 import java.util.Collections;
 import java.util.List;
 import org.junit.Before;

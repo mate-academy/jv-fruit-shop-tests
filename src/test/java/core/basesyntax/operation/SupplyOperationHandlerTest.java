@@ -17,7 +17,7 @@ public class SupplyOperationHandlerTest {
     public void setUp() {
         operationHandler = new SupplyOperationHandler();
         fruit = new Fruit("apple");
-        fruitTransaction = new FruitTransaction("b", fruit, 8);
+        fruitTransaction = new FruitTransaction("s", fruit, 8);
     }
 
     @Test

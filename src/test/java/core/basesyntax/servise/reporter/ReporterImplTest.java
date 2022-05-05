@@ -17,13 +17,10 @@ public class ReporterImplTest {
     @Test
     public void createReporter_ok() {
         Storage.data.put(new Fruit("apple"), 20);
-        String lineSeparator = System.lineSeparator();
         String expected = "fruit,quantity"
-                + lineSeparator
-                + "apple"
-                + ","
-                + "20"
-                + lineSeparator;
+                + System.lineSeparator()
+                + "apple,20"
+                + System.lineSeparator();
         String actual = reporter.createReport();
         Assert.assertEquals(expected, actual);
     }

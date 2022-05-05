@@ -26,7 +26,7 @@ public class ReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_NotOk() {
-        reader.readFromFile("");
+        reader.readFromFile("invalid/directory/file.csv");
     }
 
     private List<String> readFromFile(String path) {

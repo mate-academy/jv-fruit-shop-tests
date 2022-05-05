@@ -24,12 +24,12 @@ public class ConverterImplTest {
         expected.add(new FruitTransaction("b", fruit, 20));
         expected.add(new FruitTransaction("p", fruit, 10));
         expected.add(new FruitTransaction("r", fruit, 5));
-        expected.add(new FruitTransaction("s", new Fruit("banana"), 7));
+        expected.add(new FruitTransaction("s", fruit, 7));
         List<String> sourceList = List.of("operation,name,quantity",
                 "b,apple,20",
                 "p,apple,10",
                 "r,apple,5",
-                "s,banana,7");
+                "s,apple,7");
         List<FruitTransaction> actual = converter.convert(sourceList);
         Assert.assertEquals(expected, actual);
     }

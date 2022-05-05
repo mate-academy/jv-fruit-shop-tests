@@ -17,7 +17,7 @@ public class PurchaseOperationHandlerTest {
     public void setUp() {
         operationHandler = new PurchaseOperationHandler();
         fruit = new Fruit("apple");
-        fruitTransaction = new FruitTransaction("b", fruit, 10);
+        fruitTransaction = new FruitTransaction("p", fruit, 10);
     }
 
     @Test

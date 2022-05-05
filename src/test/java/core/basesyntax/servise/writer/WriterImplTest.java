@@ -32,7 +32,7 @@ public class WriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_NotOk() {
-        writer.writeToFile("", "some string");
+        writer.writeToFile("invalid/directory/file.csv", "some string");
     }
 
     private String readFromFile(String path) {

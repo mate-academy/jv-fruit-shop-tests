@@ -14,7 +14,7 @@ public class BalanceOperationHandlerTest {
     private FruitTransaction fruitTransaction;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         operationHandler = new BalanceOperationHandler();
         fruit = new Fruit("apple");
         fruitTransaction = new FruitTransaction("b", fruit, 8);

@@ -17,7 +17,7 @@ public class ReturnOperationHandlerTest {
     public void setUp() {
         operationHandler = new ReturnOperationHandler();
         fruit = new Fruit("apple");
-        fruitTransaction = new FruitTransaction("b", fruit, 8);
+        fruitTransaction = new FruitTransaction("r", fruit, 8);
     }
 
     @Test

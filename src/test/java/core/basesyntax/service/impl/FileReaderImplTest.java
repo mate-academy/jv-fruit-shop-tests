@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.FileReader;
@@ -24,21 +23,20 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_EmptyFilePath_Ok() {
+    public void read_emptyFilePath_Ok() {
         List<String> actual = fileReader.read(EMPTY_FILE_PATH);
         assertTrue(actual.isEmpty());
     }
 
     @Test
-    public void read_ProperFilePath_Ok() {
+    public void read_properFilePath_Ok() {
         List<String> stringsExpected = testRead(LEGIT_PATH);
         List<String> stringsActual = fileReader.read(LEGIT_PATH);
-        assertFalse(stringsActual.isEmpty());
         assertEquals(stringsExpected, stringsActual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_InvalidFilePath_NotOk() {
+    public void read_invalidFilePath_NotOk() {
         fileReader.read(INVALID_PATH);
     }
 

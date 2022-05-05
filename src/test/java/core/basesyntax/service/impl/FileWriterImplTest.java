@@ -22,7 +22,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void write_ProperFilePath_Ok() {
+    public void write_properFilePath_Ok() {
         String content = "fruit,quantity" + System.lineSeparator() + "Apple,20";
         fileWriter.write(content, LEGIT_TEST_PATH);
         File file = new File(LEGIT_TEST_PATH);
@@ -33,12 +33,12 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_InvalidPath_NotOk() {
+    public void write_invalidPath_NotOk() {
         fileWriter.write("content",null);
     }
 
     @Test
-    public void write_ValidPathEmptyString_Ok() {
+    public void write_validPathEmptyString_Ok() {
         fileWriter.write("", LEGIT_TEST_PATH);
         List<String> stringsActual = testRead(LEGIT_TEST_PATH);
         assertTrue(stringsActual.isEmpty());

@@ -21,7 +21,7 @@ public class PurchaseTransactionHandlerTest {
     }
 
     @Test
-    public void handleTransaction_PurchaseProper_Ok() {
+    public void handleTransaction_purchaseProper_Ok() {
         Fruit fruit = new Fruit("Apple");
         Storage.storage.put(fruit, 20);
         Transaction transaction = new Transaction("p", fruit, 10);
@@ -32,14 +32,14 @@ public class PurchaseTransactionHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransaction_NonExistingFruit_NotOk() {
+    public void handleTransaction_nonExistingFruit_NotOk() {
         Fruit notAFruit = new Fruit("It`s not a fruit");
         Transaction transactionNonExisting = new Transaction("p", notAFruit, 10);
         handler.handleTransaction(transactionNonExisting);
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransaction_Overbuy_NotOk() {
+    public void handleTransaction_overbuy_NotOk() {
         Fruit fruit = new Fruit("Banana");
         Storage.storage.put(fruit, 100);
         Transaction transactionNonExisting = new Transaction("p", fruit, 101);

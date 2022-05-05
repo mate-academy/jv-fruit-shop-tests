@@ -11,50 +11,48 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageDaoImplTest {
-    private static StorageDao storage;
-    private static Fruit testFruit1;
+    private static StorageDao storageDao;
 
     @BeforeClass
     public static void beforeClass() {
-        storage = new StorageDaoImpl();
+        storageDao = new StorageDaoImpl();
     }
 
     @Test
-    public void add_FruitIntegerPair_Ok() {
-        testFruit1 = new Fruit("Peach");
+    public void add_newFruitIntegerPair_Ok() {
+        Fruit testFruit = new Fruit("Peach");
         Integer expected = 7;
-        storage.add(testFruit1, expected);
-        Integer actual = Storage.storage.get(testFruit1);
+        storageDao.add(testFruit, expected);
+        Integer actual = Storage.storage.get(testFruit);
         assertEquals(expected, actual);
     }
 
     @Test
     public void get_existingFruitQuantity_Ok() {
-        testFruit1 = new Fruit("Peach");
+        Fruit testFruit = new Fruit("Peach");
         Integer expected = 7;
-        storage.add(testFruit1, expected);
-        Integer actual = storage.get(testFruit1);
+        Storage.storage.put(testFruit, expected);
+        Integer actual = storageDao.get(testFruit);
         assertEquals(expected, actual);
     }
 
     @Test
     public void get_nonExistingFruitQuantity_NotOk() {
-        testFruit1 = new Fruit("Peach");
-        Integer actual = storage.get(testFruit1);
+        Fruit testFruit = new Fruit("Peach");
+        Integer actual = storageDao.get(testFruit);
         assertNull(actual);
     }
 
     @Test
     public void getAll_getAllFruitsQuantity_Ok() {
-        Storage.storage.put(new Fruit("Coconut"),7);
-        Storage.storage.put(new Fruit("Orange"),13);
-        Storage.storage.put(new Fruit("Kiwi"),17);
-        Set<Map.Entry<Fruit, Integer>> storageEntrySet = storage.getAll();
-        Set<Map.Entry<Fruit, Integer>> getAllResult = storage.getAll();
-        int expectedSize = storageEntrySet.size();
+        Storage.storage.put(new Fruit("Coconut"),1);
+        Storage.storage.put(new Fruit("Orange"),1);
+        Storage.storage.put(new Fruit("Kiwi"),1);
+        Set<Map.Entry<Fruit, Integer>> getAllResult = storageDao.getAll();
+        int expectedSize = 3;
         int actualSize = getAllResult.size();
         assertEquals(expectedSize, actualSize);
-        int expectedSumOfValues = storageEntrySet.stream().mapToInt(Map.Entry::getValue).sum();
+        int expectedSumOfValues = 3;
         int actualSumOfValues = getAllResult.stream().mapToInt(Map.Entry::getValue).sum();
         assertEquals(expectedSumOfValues, actualSumOfValues);
     }

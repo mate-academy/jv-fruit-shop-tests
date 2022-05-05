@@ -21,7 +21,7 @@ public class BalanceTransactionHandlerTest {
     }
 
     @Test
-    public void handleTransaction_BalanceProper_Ok() {
+    public void handleTransaction_balanceProper_Ok() {
         Fruit fruit = new Fruit("Apple");
         Transaction transaction = new Transaction("b", fruit, 10);
         handler.handleTransaction(transaction);

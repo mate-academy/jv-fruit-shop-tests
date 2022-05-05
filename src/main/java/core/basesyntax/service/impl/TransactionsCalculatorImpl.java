@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionsCalculatorImpl implements TransactionsCalculator {
-    public static final Map<String, TransactionHandler> transactionHandlerMap = new HashMap<>();
+    private final Map<String, TransactionHandler> transactionHandlerMap = new HashMap<>();
     private StorageDao storageDao;
 
-    public TransactionsCalculatorImpl(StorageDaoImpl storageDao) {
+    public TransactionsCalculatorImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
@@ -31,6 +31,9 @@ public class TransactionsCalculatorImpl implements TransactionsCalculator {
 
     public void handleTransactions(List<Transaction> transactionsList) {
         for (Transaction transaction: transactionsList) {
+            if (transactionHandlerMap.get(transaction.getType()) == null) {
+                throw new RuntimeException("Transaction type not found");
+            }
             transactionHandlerMap.get(transaction.getType()).handleTransaction(transaction);
         }
     }

@@ -21,7 +21,7 @@ public class ReturnTransactionHandlerTest {
     }
 
     @Test
-    public void handleTransaction_ReturnProper_Ok() {
+    public void handleTransaction_returnProper_Ok() {
         Fruit fruit = new Fruit("Apple");
         Storage.storage.put(fruit, 20);
         Transaction transaction = new Transaction("r", fruit, 10);
@@ -32,7 +32,7 @@ public class ReturnTransactionHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransaction_NonExistingFruit_NotOk() {
+    public void handleTransaction_nonExistingFruit_NotOk() {
         Fruit notAFruit = new Fruit("It`s not a fruit");
         Transaction transactionNonExisting = new Transaction("r", notAFruit, 10);
         handler.handleTransaction(transactionNonExisting);

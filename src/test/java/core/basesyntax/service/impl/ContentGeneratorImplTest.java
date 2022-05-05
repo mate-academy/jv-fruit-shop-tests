@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.StorageDao;
@@ -22,15 +23,14 @@ public class ContentGeneratorImplTest {
     }
 
     @Test
-    public void generateContent_ProperHeader_Ok() {
+    public void generateContent_properHeader_Ok() {
         String expectedHeader = "fruit,quantity";
-        contentGenerator.generateContent();
         String[] actualArray = contentGenerator.generateContent().split(System.lineSeparator());
         assertEquals(expectedHeader, actualArray[0]);
     }
 
     @Test
-    public void generateContent_OneItem_Ok() {
+    public void generateContent_oneItem_Ok() {
         Fruit testFruit = new Fruit("Coconut");
         Storage.storage.put(testFruit, 10);
         String expected = "Coconut,10";
@@ -39,13 +39,21 @@ public class ContentGeneratorImplTest {
     }
 
     @Test
-    public void generateContent_MultipleItemsSize_Ok() {
+    public void generateContent_multipleItemsSize_Ok() {
         Storage.storage.put(new Fruit("Apple"), 10);
         Storage.storage.put(new Fruit("Apricot"), 11);
         Storage.storage.put(new Fruit("Avocado"), 12);
         Storage.storage.put(new Fruit("Arbuz"), 13);
+
+        String actualContent = contentGenerator.generateContent();
+        assertTrue(actualContent.contains("fruit,quantity"));
+        assertTrue(actualContent.contains("Apple,10"));
+        assertTrue(actualContent.contains("Apricot,11"));
+        assertTrue(actualContent.contains("Avocado,12"));
+        assertTrue(actualContent.contains("Arbuz,13"));
+
         String[] expectedLength = new String[5];
-        String[] actualLength = contentGenerator.generateContent().split(System.lineSeparator());
+        String[] actualLength = actualContent.split(System.lineSeparator());
         assertEquals(expectedLength.length, actualLength.length);
     }
 

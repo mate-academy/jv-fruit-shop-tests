@@ -20,29 +20,19 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parse_ValidData_Ok() {
+    public void parse_validData_Ok() {
         List<Transaction> expectedList = new ArrayList<>();
         expectedList.add(new Transaction("a", new Fruit("Apple"), 20));
         expectedList.add(new Transaction("b", new Fruit("Banana"), 30));
-
         List<String> inputData = new ArrayList<>();
         inputData.add("a,Apple,20");
         inputData.add("b,Banana,30");
-
         List<Transaction> actualList = parser.parse(inputData);
-        assertEquals(expectedList.getClass(), actualList.getClass());
-        assertEquals(expectedList.get(0).getType(), actualList.get(0).getType());
-        assertEquals(expectedList.get(1).getType(), actualList.get(1).getType());
-
-        assertEquals(expectedList.get(0).getQuantity(), actualList.get(0).getQuantity());
-        assertEquals(expectedList.get(1).getQuantity(), actualList.get(1).getQuantity());
-
-        assertEquals(expectedList.get(0).getFruit(), actualList.get(0).getFruit());
-        assertEquals(expectedList.get(1).getFruit(), actualList.get(1).getFruit());
+        assertEquals(expectedList, actualList);
     }
 
     @Test
-    public void parse_InvalidData_NotOk() {
+    public void parse_invalidData_NotOk() {
         List<String> inputData = new ArrayList<>();
         inputData.add("as,Apple,2sad0");
         inputData.add("bwq,dsBanana,3dgs0");
@@ -52,7 +42,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parse_MixedData_Ok() {
+    public void parse_mixedData_Ok() {
         List<String> inputData = new ArrayList<>();
         inputData.add("as,Apple,2sad0");
         inputData.add("b,Apple,20");

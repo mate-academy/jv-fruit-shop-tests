@@ -21,7 +21,7 @@ public class SupplyTransactionHandlerTest {
     }
 
     @Test
-    public void handleTransaction_ReturnProper_Ok() {
+    public void handleTransaction_returnProper_Ok() {
         Fruit fruit = new Fruit("Apple");
         Storage.storage.put(fruit, 20);
         Transaction transaction = new Transaction("r", fruit, 20);

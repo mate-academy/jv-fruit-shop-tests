@@ -7,19 +7,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 public class FileWriterServiceImplTest {
     private static final String REPORT_FILE = "src/test/resources/report.csv";
+    private static final String EMPTY_FILE_PATH = "";
     private static FileWriterService fileWriter;
     private static String report;
-
-    @Rule
-    public final TestName name = new TestName();
 
     @BeforeClass
     public static void beforeClass() {
@@ -29,26 +24,10 @@ public class FileWriterServiceImplTest {
                 + "apple,90" + System.lineSeparator();
     }
 
-    @Before
-    public void clearReportFile() {
-        try {
-            Files.write(Path.of(REPORT_FILE), "".getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to clear file by path: " + REPORT_FILE, e);
-        }
-    }
-
     @Test
-    public void writeReport_ok() {
+    public void writeReportInvalidPath_ok() {
         fileWriter.write(REPORT_FILE, report);
-        List<String> actual;
-
-        try {
-            actual = Files.readAllLines(Path.of(REPORT_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read file executing: " + name.getMethodName(), e);
-        }
-
+        List<String> actual = getReportData(REPORT_FILE);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,152");
@@ -57,7 +36,17 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeReport_emptyPath_notOk() {
-        fileWriter.write("", report);
+    public void writeReportValidPath_notOk() {
+        fileWriter.write(EMPTY_FILE_PATH, report);
+    }
+
+    private List<String> getReportData(String filePath) {
+        List<String> reportData;
+        try {
+            reportData = Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read file by path: " + filePath, e);
+        }
+        return reportData;
     }
 }

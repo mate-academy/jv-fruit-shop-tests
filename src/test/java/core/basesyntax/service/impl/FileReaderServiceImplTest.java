@@ -42,7 +42,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_wrongFilePath_notOk() {
+    public void readFileInvalidPath_notOk() {
         fileReader.read(WRONG_WAREHOUSE_PATH);
     }
 }

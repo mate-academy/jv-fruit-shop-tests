@@ -33,11 +33,6 @@ public class ValidationServiceImplTest {
         readData.add("s,banana,50");
     }
 
-    @After
-    public void tearDown() {
-        readData.clear();
-    }
-
     @Test
     public void validateData_ok() {
         List<String> actual = validationService.validate(readData);
@@ -59,8 +54,7 @@ public class ValidationServiceImplTest {
 
     @Test
     public void validateEmptyData_ok() {
-        readData.clear();
-        List<String> actual = validationService.validate(readData);
+        List<String> actual = validationService.validate(new ArrayList<>());
         List<String> expected = new ArrayList<>();
         Assert.assertEquals(expected, actual);
     }
@@ -73,5 +67,10 @@ public class ValidationServiceImplTest {
         List<String> actual = validationService.validate(elementsStartWithBlank);
         List<String> expected = new ArrayList<>();
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        readData.clear();
     }
 }

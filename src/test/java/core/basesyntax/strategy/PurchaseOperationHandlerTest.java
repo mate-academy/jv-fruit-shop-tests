@@ -15,13 +15,8 @@ public class PurchaseOperationHandlerTest {
         operationHandler = new PurchaseOperationHandler();
     }
 
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
-
     @Test
-    public void handlePurchaseOperation_enoughFruits_ok() {
+    public void handlePurchaseOperationEnoughFruits_ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 30);
         operationHandler.process(banana, 30);
@@ -31,9 +26,14 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handlePurchaseOperation_notEnoughFruits_notOk() {
+    public void handlePurchaseOperationNotEnoughFruits_notOk() {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 7);
-        operationHandler.process(apple, 12);
+        operationHandler.process(apple, 8);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

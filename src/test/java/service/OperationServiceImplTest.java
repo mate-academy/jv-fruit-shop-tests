@@ -27,20 +27,21 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void calculate_emptyList_ok() {
+    public void calculate_emptyList_Ok() {
         List<FruitTransaction> info = new ArrayList<>();
         operationService.calculate(info);
     }
 
     @Test
-    public void calculate_correctInput_ok() {
-        List<String> list = new ArrayList<>();
-        list.add("b-banana-20");
-        list.add("s-banana-20");
-        list.add("b-apple-50");
-        list.add("r-apple-10");
-        list.add("p-apple-10");
-        List<FruitTransaction> fruitTransactions = parseService.getInfo(list);
+    public void calculate_correctTransactionList_Ok() {
+        Fruit banana = new Fruit("banana");
+        Fruit apple = new Fruit("apple");
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,banana,20));
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,banana,20));
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,apple,50));
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.RETURN,apple,10));
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,apple,10));
         operationService.calculate(fruitTransactions);
         String actual = reportService.createReport();
         String expected = "fruit,quantity\nbanana,40"
@@ -51,7 +52,7 @@ public class OperationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void calculate_wrongInput_notOk() {
+    public void calculate_wrongTransaction_notOk() {
         Fruit banana = new Fruit("banana");
         List<FruitTransaction> list = List.of(new FruitTransaction(null, banana, 100));
         operationService.calculate(list);

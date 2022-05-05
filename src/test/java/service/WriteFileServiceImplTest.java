@@ -18,7 +18,7 @@ public class WriteFileServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_wrongPathToFile_notOk() {
+    public void write_wrongFilePath_notOk() {
         String report = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,14"
@@ -31,7 +31,7 @@ public class WriteFileServiceImplTest {
     }
 
     @Test
-    public void write_correctReport_ok() {
+    public void write_correctReport_Ok() {
         String report = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,14"

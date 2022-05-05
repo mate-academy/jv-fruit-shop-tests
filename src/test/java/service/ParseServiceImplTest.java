@@ -26,7 +26,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parse_correctValue_ok() {
+    public void parse_correctValue_Ok() {
         List<String> list = new ArrayList<>();
         list.add("b-apple-50");
         list.add("p-apple-20");

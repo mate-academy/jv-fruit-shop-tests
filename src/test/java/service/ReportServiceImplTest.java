@@ -18,17 +18,17 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void report_ok() {
+    public void createReport_correctData_Ok() {
         Storage.dataBase.put(new Fruit("apple"), 10);
         Storage.dataBase.put(new Fruit("orange"), 67);
         Storage.dataBase.put(new Fruit("banana"), 14);
         String actual = reportService.createReport();
-        String expected = "fruit,quantity\nbanana,14"
-                + System.lineSeparator()
-                + "apple,10"
-                + System.lineSeparator()
-                + "orange,67"
-                + System.lineSeparator();
+        String expected = new StringBuilder("fruit,quantity\nbanana,14")
+                .append(System.lineSeparator())
+                .append("apple,10")
+                .append(System.lineSeparator())
+                .append("orange,67")
+                .append(System.lineSeparator()).toString();
         assertEquals(expected, actual);
     }
 

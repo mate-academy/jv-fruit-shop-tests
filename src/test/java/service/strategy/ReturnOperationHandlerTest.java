@@ -19,7 +19,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void return_correct_ok() {
+    public void apply_correctTransaction_Ok() {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 40);
         FruitTransaction fruitTransaction =

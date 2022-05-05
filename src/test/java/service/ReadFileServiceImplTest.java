@@ -15,14 +15,14 @@ public class ReadFileServiceImplTest {
     }
 
     @Test
-    public void read_fileWithCorrectFilePath_ok() {
+    public void read_correctFilePath_Ok() {
         List<String> actual = readFileService.read("src/test/resources/TestInput.csv");
         int expected = 7;
         assertEquals("Size not equals expected size!", actual.size(), expected);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_wrongInputPath_NotOk() {
+    public void read_wrongPath_NotOk() {
         readFileService.read("src/test/java/core/resources/WrongInput.csv");
     }
 

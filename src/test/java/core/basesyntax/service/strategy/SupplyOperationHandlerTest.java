@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static OperationHandler operationHandler;
-    private static LineInformation lineInformationBalance;
     private static LineInformation lineInformationSupply;
     private static Fruit bananaFruit;
 
@@ -19,13 +18,12 @@ public class SupplyOperationHandlerTest {
     public static void setUp() {
         operationHandler = new SupplyOperationHandler();
         bananaFruit = new Fruit("banana");
-        lineInformationBalance = new LineInformation("b", bananaFruit, 10);
         lineInformationSupply = new LineInformation("s", bananaFruit, 15);
     }
 
     @Test
     public void operate_ok() {
-        Storage.storage.put(bananaFruit, lineInformationBalance.getQuantity());
+        Storage.storage.put(bananaFruit, 10);
         operationHandler.operate(lineInformationSupply);
         int expected = 25;
         int actual = Storage.storage.get(bananaFruit);

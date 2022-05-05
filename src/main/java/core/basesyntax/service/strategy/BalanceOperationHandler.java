@@ -10,7 +10,8 @@ public class BalanceOperationHandler implements OperationHandler {
     public boolean operate(LineInformation lineInformation) {
         Fruit fruit = lineInformation.getFruit();
         int quantity = lineInformation.getQuantity();
-        Storage.storage.put(fruit, quantity);
+        Storage.storage.compute(fruit, (k, v) ->
+                (v == null ? quantity : v + quantity));
         return true;
     }
 }

@@ -11,21 +11,18 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static OperationHandler operationHandlerReturn;
-    private static Fruit banana;
-    private static LineInformation lineInformationReturn;
-    private static LineInformation lineInformationBalance;
 
     @BeforeClass
     public static void setUp() {
         operationHandlerReturn = new ReturnOperationHandler();
-        banana = new Fruit("banana");
-        lineInformationBalance = new LineInformation("b", banana, 40);
-        lineInformationReturn = new LineInformation("r", banana, 10);
     }
 
     @Test
     public void operate_ok() {
-        Storage.storage.put(banana, lineInformationBalance.getQuantity());
+        Fruit banana = new Fruit("banana");
+        LineInformation lineInformationReturn =
+                new LineInformation("r", banana, 10);
+        Storage.storage.put(banana, 40);
         operationHandlerReturn.operate(lineInformationReturn);
         int expected = 50;
         int actual = Storage.storage.get(banana);

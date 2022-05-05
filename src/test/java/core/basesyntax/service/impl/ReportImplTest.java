@@ -7,6 +7,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.Report;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,5 +26,10 @@ public class ReportImplTest {
         List<String> expected = new ArrayList<>(List.of("fruit,quantity", "banana,56", "apple,25"));
         List<String> actual = report.createNewReport();
         assertEquals(expected,actual);
+    }
+
+    @AfterClass
+    public static void runAfterAllTheTest() {
+        Storage.storage.clear();
     }
 }

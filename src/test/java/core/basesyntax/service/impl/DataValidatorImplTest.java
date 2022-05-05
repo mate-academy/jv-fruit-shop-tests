@@ -33,5 +33,4 @@ public class DataValidatorImplTest {
     public void validateEmptyData_notOk() {
         dataValidator.validate("");
     }
-
 }

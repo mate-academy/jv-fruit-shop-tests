@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -34,11 +33,5 @@ public class WriteDataImplTest {
     public void writeDataToWrongPath_notOk() {
         boolean actual = dataWriter.writeData(expectedResult, WRONG_PATH);
         assertFalse(actual);
-    }
-
-    @Test
-    public void writeDataToCorrectPath_ok() {
-        boolean actual = dataWriter.writeData(expectedResult, CORRECT_PATH);
-        assertEquals(true, actual);
     }
 }

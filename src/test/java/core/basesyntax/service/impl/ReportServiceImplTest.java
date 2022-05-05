@@ -5,6 +5,7 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,6 +15,10 @@ public class ReportServiceImplTest {
     @BeforeClass
     public static void setUp() {
         reportService = new ReportServiceImpl();
+    }
+
+    @Before
+    public void initializeStorage() {
         Storage.fruits.put(new Fruit("banana"), 100);
         Storage.fruits.put(new Fruit("apple"), 100);
     }

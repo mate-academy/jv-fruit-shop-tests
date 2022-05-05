@@ -18,7 +18,7 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void process_emptyStorageOk() {
-        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
+        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.SUPPLY,
                 new Fruit("banana"), 100);
         supplyOperationHandler.process(fruitTransfer);
         Integer expected = 100;
@@ -29,7 +29,7 @@ public class SupplyOperationHandlerTest {
     @Test
     public void process_ok() {
         Storage.fruits.put(new Fruit("banana"), 1);
-        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
+        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.SUPPLY,
                 new Fruit("banana"), 100);
         supplyOperationHandler.process(fruitTransfer);
         Integer expected = 101;

@@ -14,12 +14,11 @@ public class ReturnOperationHandlerTest {
     @BeforeClass
     public static void setUp() {
         returnOperationHandler = new ReturnOperationHandler();
-        new Fruit("banana");
     }
 
     @Test
     public void process_emptyStorageOk() {
-        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
+        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.RETURN,
                 new Fruit("banana"), 100);
         returnOperationHandler.process(fruitTransfer);
         Integer expected = 100;
@@ -30,7 +29,7 @@ public class ReturnOperationHandlerTest {
     @Test
     public void process_ok() {
         Storage.fruits.put(new Fruit("banana"), 1);
-        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
+        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.RETURN,
                 new Fruit("banana"), 100);
         returnOperationHandler.process(fruitTransfer);
         Integer expected = 101;

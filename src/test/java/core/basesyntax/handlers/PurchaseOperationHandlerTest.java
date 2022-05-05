@@ -17,7 +17,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void validOnePurchase_Ok() {
+    public void purchase_OneFruit_Ok() {
         Storage.storage.put(new Fruit("apple"), 101);
         purchaseOperationHandler.process(new Fruit("apple"), 100);
         Integer actual = 1;
@@ -25,7 +25,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_Ok() {
+    public void purchase_ManyFruit_Ok() {
         Storage.storage.put(new Fruit("banana"), 100);
         Storage.storage.put(new Fruit("apple"), 150);
         purchaseOperationHandler.process(new Fruit("banana"), 10);

@@ -25,7 +25,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void emptyStorage_Ok() {
+    public void supply_EmptyStorage_Ok() {
         supplyOperation.process(new Fruit("orange"), 0);
         int actual = Storage.storage.get(new Fruit("orange"));
         assertEquals(0, actual);

@@ -92,9 +92,6 @@
                     <excludes>
                         <exclude>**/Main*</exclude>
                     </excludes>
-<!--                    <includes>-->
-<!--                        <include>**/service/impl/BalanceOperationImpl*</include>-->
-<!--                    </includes>-->
                 </configuration>
             </plugin>
         </plugins>

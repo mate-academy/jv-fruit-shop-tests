@@ -21,6 +21,14 @@ public class WriterServiceImplTest extends WriterServiceImpl {
     @Test
     public void write_validPath_ok() {
         writerService.write(FILE_PATH, "output");
+        String expected;
+        try {
+            expected = Files.readString(Path.of(FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can not read from " + FILE_PATH, e);
+        }
+        String actual = "output";
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -34,8 +42,16 @@ public class WriterServiceImplTest extends WriterServiceImpl {
     }
 
     @Test
-    public void write_emptyOutput_notOk() {
+    public void write_emptyOutput_ok() {
         writerService.write(FILE_PATH, "");
+        String expected;
+        try {
+            expected = Files.readString(Path.of(FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can not read from " + FILE_PATH, e);
+        }
+        String actual = "";
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -43,18 +59,12 @@ public class WriterServiceImplTest extends WriterServiceImpl {
         writerService.write(INVALID_FILE_PATH, "output");
     }
 
-    @Test(expected = RuntimeException.class)
-    public void write_emptyFilePath_notOk() {
-        writerService.write(null, "output");
-    }
-
     private String readFromTestFile() {
         String data;
         try {
             data = Files.readString(Path.of(WriterServiceImplTest.FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file "
-                    + WriterServiceImplTest.FILE_PATH, e);
+            throw new RuntimeException("Can't read from file " + FILE_PATH, e);
         }
         return data;
     }

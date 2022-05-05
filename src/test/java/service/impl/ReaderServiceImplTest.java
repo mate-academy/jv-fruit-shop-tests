@@ -39,9 +39,4 @@ public class ReaderServiceImplTest extends ReaderServiceImpl {
     public void read_incorrectFilePath_notOk() {
         read(INCORRECT_FILE_PATH);
     }
-
-    @Test(expected = RuntimeException.class)
-    public void read_NullPath_NotOk() {
-        readerService.read(null);
-    }
 }

@@ -38,4 +38,14 @@ public class FileReaderTest {
         List<String> actual = fileReader.readFromFile(EMPTY_INPUT_PATH);
         assertEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void readIncorrectPathName_NotOk() {
+        fileReader.readFromFile("src/23/main/34/der.csv");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readWithoutPathName_NotOk() {
+        fileReader.readFromFile(null);
+    }
 }

@@ -29,4 +29,9 @@ public class ParserTest {
         List<FruitTransaction> actual = parser.parse(data);
         assertEquals(expected, actual);
     }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void incorrectData_NotOk() {
+        parser.parse(List.of("b,apple"));
+    }
 }

@@ -35,8 +35,9 @@ public class ReportServiceImplTest {
 
     @Test
     public void reportService_createForEmptyStorage_Ok() {
-        boolean empty = Storage.fruitStorage.isEmpty();
-        Assert.assertTrue(empty);
+        String actual = reportService.createReport();
+        String expected = HEADER + System.lineSeparator();
+        Assert.assertEquals(expected, actual);
     }
 
     @After

@@ -62,9 +62,10 @@ public class OperationStrategyImplTest {
         Assert.assertTrue(operationHandlerMap.containsValue(returnOperation));
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void operationStrategy_invalidOperation_NotOk() {
-        operationStrategy.get(INVALID_OPERATION_CHARACTER);
+        operationStrategy.get(INVALID_OPERATION_CHARACTER)
+                .handle("apple", 100);
     }
 
     @Test

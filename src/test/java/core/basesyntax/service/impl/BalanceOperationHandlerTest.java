@@ -19,7 +19,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-        public void process_initialStorageIsEmpty_Ok() {
+        public void process_initialStorageIsEmpty_ok() {
         Integer expected = 8;
         balanceOperationHandler.process(new FruitTransaction("b", new Fruit("apple"), 8));
         Integer actual = Storage.storage.get(new Fruit("apple"));
@@ -27,7 +27,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void process_initialStorageNotEmpty_Ok() {
+    public void process_initialStorageNotEmpty_ok() {
         Storage.storage.put(new Fruit("apple"), 50);
         Integer expected = 0;
         balanceOperationHandler.process(new FruitTransaction("b", new Fruit("apple"), 0));

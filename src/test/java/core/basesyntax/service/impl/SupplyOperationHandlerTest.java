@@ -19,7 +19,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void process_initialStorageIsEmpty_Ok() {
+    public void process_initialStorageIsEmpty_ok() {
         Integer expected = 17;
         supplyOperationHandler.process(new FruitTransaction("s", new Fruit("apple"), 17));
         Integer actual = Storage.storage.get(new Fruit("apple"));
@@ -27,7 +27,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void process_initialStorageNotEmpty_Ok() {
+    public void process_initialStorageNotEmpty_ok() {
         Storage.storage.put(new Fruit("apple"), 50);
         Integer expected = 120;
         supplyOperationHandler.process(new FruitTransaction("s", new Fruit("apple"), 70));
@@ -36,7 +36,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void process_initialStorageNotEmptyTwoItems_Ok() {
+    public void process_initialStorageNotEmptyTwoItems_ok() {
         Storage.storage.put(new Fruit("apple"), 50);
         supplyOperationHandler.process(new FruitTransaction("s", new Fruit("apple"), 70));
         supplyOperationHandler.process(new FruitTransaction("s", new Fruit("banana"), 80));

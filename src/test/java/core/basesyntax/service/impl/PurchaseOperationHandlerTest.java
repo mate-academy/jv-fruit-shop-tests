@@ -19,12 +19,12 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void process_initialStorageIsEmpty_Ok() {
+    public void process_initialStorageIsEmpty_notOk() {
         purchaseOperationHandler.process(new FruitTransaction("p", new Fruit("apple"), 8));
     }
 
     @Test
-    public void process_initialQuantityIsEqualsToPurchase_Ok() {
+    public void process_initialQuantityIsEqualsToPurchase_ok() {
         Storage.storage.put(new Fruit("apple"), 50);
         Integer expected = 0;
         purchaseOperationHandler.process(new FruitTransaction("p", new Fruit("apple"), 50));
@@ -33,7 +33,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void process_initialQuantityIsMoreThanPurchase_Ok() {
+    public void process_initialQuantityIsMoreThanPurchase_ok() {
         Storage.storage.put(new Fruit("apple"), 50);
         Integer expected = 10;
         purchaseOperationHandler.process(new FruitTransaction("p", new Fruit("apple"), 10));
@@ -43,7 +43,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void process_initialQuantityIsLess_Ok() {
+    public void process_initialQuantityIsLess_notOk() {
         Storage.storage.put(new Fruit("apple"), 50);
         purchaseOperationHandler.process(new FruitTransaction("p", new Fruit("apple"), 18));
         purchaseOperationHandler.process(new FruitTransaction("p", new Fruit("apple"), 37));

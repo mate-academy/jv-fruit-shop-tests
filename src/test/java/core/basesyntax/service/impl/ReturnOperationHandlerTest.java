@@ -19,7 +19,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void process_initialQuantityIsNull_Ok() {
+    public void process_initialQuantityIsNull_ok() {
         Storage.storage.clear();
         Integer expected = 38;
         returnOperationHandler.process(new FruitTransaction("r", new Fruit("apple"), 38));
@@ -28,7 +28,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void process_initialQuantityIsNotNull_Ok() {
+    public void process_initialQuantityIsNotNull_ok() {
         Storage.storage.put(new Fruit("apple"), 50);
         Storage.storage.put(new Fruit("banana"), 14);
         Integer expected = 164;

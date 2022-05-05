@@ -19,7 +19,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFromFile_ok() {
         List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
@@ -29,13 +29,12 @@ public class FileReaderServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        fileReaderService.readFromFile(VALID_PATH);
         List<String> actual = fileReaderService.readFromFile(VALID_PATH);;
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readFromEmptyFile_Ok() {
+    public void readFromEmptyFile_ok() {
         List<String> expected = List.of();
         fileReaderService.readFromFile(PATH_TO_EMPTY_FILE);
         List<String> actual = fileReaderService.readFromFile(PATH_TO_EMPTY_FILE);;
@@ -43,7 +42,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_InvalidPath_NotOk() {
+    public void readFromFileInvalidPath_notOk() {
         fileReaderService.readFromFile(INVALID_PATH);
     }
 }

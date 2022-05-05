@@ -37,21 +37,13 @@ public class FruitShopServiceImplTest {
         fruitShopService = new FruitShopServiceImpl(operationHandlerStrategy);
         fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                new Fruit("banana"), 100));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("apple"), 50));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                new Fruit("banana"), 30));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 new Fruit("apple"), 15));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                new Fruit("banana"), 30));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 new Fruit("apple"), 10));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
                 new Fruit("apple"), 15));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                new Fruit("banana"), 10));
     }
 
     @Test

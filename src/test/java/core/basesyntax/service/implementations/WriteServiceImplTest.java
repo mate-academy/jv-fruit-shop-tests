@@ -7,15 +7,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
     private static final String TO_FILE_ROUTE
-            = "src/test/java/core/basesyntax/resources/ToFile.cvs";
+            = "src/test/resources/ToFile.csv";
     private static String input;
-    private static WriteService write;
+    private static WriteService writerService;
 
     @BeforeClass
     public static void beforeAll() {
@@ -23,16 +22,12 @@ public class WriteServiceImplTest {
                 "banana,120",
                 "apple,70"
         ).stream().collect(Collectors.joining(System.lineSeparator()));
-    }
-
-    @Before
-    public void beforeEach() {
-        write = new WriteServiceImpl();
+        writerService = new WriteServiceImpl();
     }
 
     @Test
     public void writeToFile_CorrectData_Ok() {
-        write.writeToFile(TO_FILE_ROUTE, input);
+        writerService.writeToFile(TO_FILE_ROUTE, input);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,120",
@@ -42,14 +37,9 @@ public class WriteServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void writeToFile_nullRoute_NotOk() {
-        write.writeToFile(null, input);
-    }
-
     @Test
     public void writeToFile_nullData_NotOk() {
-        write.writeToFile(TO_FILE_ROUTE, null);
+        writerService.writeToFile(TO_FILE_ROUTE, null);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "null"

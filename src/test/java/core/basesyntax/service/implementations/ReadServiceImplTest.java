@@ -9,11 +9,11 @@ import org.junit.Test;
 public class ReadServiceImplTest {
     private static ReadService read;
     private static final String RIGHT_DATA_ROUTE
-            = "src/test/java/core/basesyntax/resources/RightInput.cvs";
+            = "src/test/resources/RightInput.csv";
     private static final String EMPTY_FILE_ROUTE
-            = "src/test/java/core/basesyntax/resources/EmptyFile.cvs";
+            = "src/test/resources/EmptyFile.csv";
     private static final String WRONG_ROUTE
-            = "src/test/java/core/basesyntax/resources/EmptyFile2222.cvs";
+            = "src/test/resources/EmptyFile2222.csv";
 
     @Before
     public void beforeEach() {
@@ -43,10 +43,5 @@ public class ReadServiceImplTest {
     @Test (expected = RuntimeException.class)
     public void readFile_IncorrectRoute_NotOk() {
         read.readFile(WRONG_ROUTE);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void readFile_NullRoute_NotOk() {
-        read.readFile(null);
     }
 }

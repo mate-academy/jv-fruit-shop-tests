@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransferServiceImplTest {
-    private static List<String> input;
     private static TransferService transferService;
 
     @BeforeClass
@@ -32,10 +31,5 @@ public class TransferServiceImplTest {
                 new FruitTransferDto("s", new Fruit("banana"), 100)
         );
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void parse_nullData_NotOk() {
-        transferService.parse(null);
     }
 }

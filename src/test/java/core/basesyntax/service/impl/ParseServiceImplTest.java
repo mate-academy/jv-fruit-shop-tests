@@ -20,14 +20,14 @@ public class ParseServiceImplTest {
 
     @Test
     public void parseData_Ok() {
-        final List<Transaction> expectedList = parseService.parse(List.of("type,fruit,quantity",
+        final List<Transaction> actual = parseService.parse(List.of("type,fruit,quantity",
                 "b,apple,100",
                 "s,banana,100",
                 "p,banana,13"));
-        List<Transaction> actualList = new ArrayList<>();
-        actualList.add(new Transaction("b", new Fruit("apple"), 100));
-        actualList.add(new Transaction("s", new Fruit("banana"), 100));
-        actualList.add(new Transaction("p", new Fruit("banana"), 13));
-        assertEquals(expectedList, actualList);
+        List<Transaction> expected = new ArrayList<>();
+        expected.add(new Transaction("b", new Fruit("apple"), 100));
+        expected.add(new Transaction("s", new Fruit("banana"), 100));
+        expected.add(new Transaction("p", new Fruit("banana"), 13));
+        assertEquals(expected, actual);
     }
 }

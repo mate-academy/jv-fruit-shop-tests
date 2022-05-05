@@ -20,7 +20,7 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFromFile_Ok() {
-        List<String> expectedList = List.of("type,fruit,quantity",
+        List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -29,8 +29,8 @@ public class ReaderServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actualList = readerService.read(INPUT_FILE);
-        assertEquals(expectedList, actualList);
+        List<String> actual = readerService.read(INPUT_FILE);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

@@ -1,0 +1,51 @@
+package core.basesyntax.service.implementations;
+
+import core.basesyntax.dao.FruitsDao;
+import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.inerfaces.OperationHandler;
+import java.util.HashMap;
+import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class ReturnOperationHandlerImplTest {
+    private static OperationHandler handler;
+
+    @BeforeClass
+    public static void beforeAll() {
+        FruitsDao fruitsDao = new FruitsDaoImpl();
+        handler = new ReturnOperationHandlerImpl(fruitsDao);
+    }
+
+    @After
+    public void afterEach() {
+        Storage.storage.clear();
+    }
+
+    @Test
+    public void doOperation_RightData_Ok() {
+        Fruit apple = new Fruit("apple");
+        Fruit pear = new Fruit("pear");
+        Storage.storage.put(apple, 10);
+        Storage.storage.put(pear, 10);
+        Map<Fruit, Integer> expected = new HashMap<>() {
+            {
+                put(apple, 33);
+                put(pear, 10);
+            }
+        };
+        handler.doOperation(apple, 23);
+        Map<Fruit, Integer> actual = Storage.storage;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void doOperation_MapNull_NotOk() {
+        Fruit apple = new Fruit("apple");
+        handler.doOperation(apple, 424);
+    }
+}

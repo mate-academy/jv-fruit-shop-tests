@@ -10,19 +10,16 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static OperationHandler balanceOperationHandler;
-    private static Fruit fruit;
-    private static FruitTransfer fruitTransfer;
 
     @BeforeClass
     public static void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
-        fruit = new Fruit("banana");
     }
 
     @Test
     public void process_emptyStorageOk() {
-        fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
-                BalanceOperationHandlerTest.fruit, 100);
+        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
+                new Fruit("banana"), 100);
         balanceOperationHandler.process(fruitTransfer);
         Integer expected = 100;
         Integer actual = Storage.fruits.get(fruitTransfer.getFruit());
@@ -31,9 +28,9 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void process_ok() {
-        Storage.fruits.put(fruit, 1);
-        fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
-                BalanceOperationHandlerTest.fruit, 100);
+        Storage.fruits.put(new Fruit("banana"), 1);
+        FruitTransfer fruitTransfer = new FruitTransfer(FruitTransfer.Operation.BALANCE,
+                new Fruit("banana"), 100);
         balanceOperationHandler.process(fruitTransfer);
         Integer expected = 101;
         Integer actual = Storage.fruits.get(fruitTransfer.getFruit());

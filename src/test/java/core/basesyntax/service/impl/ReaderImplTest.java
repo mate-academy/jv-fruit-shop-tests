@@ -1,8 +1,7 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
-
 import core.basesyntax.service.Reader;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 

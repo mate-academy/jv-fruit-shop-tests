@@ -2,9 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
-
 import core.basesyntax.service.Writer;
+import java.util.List;
 import org.junit.Test;
 
 public class WriteImplTest {

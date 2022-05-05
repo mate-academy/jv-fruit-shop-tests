@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class WriteDataImplTest {
     private static DataWriter dataWriter;
-    private static final String FIRST_LINE = "fruit,quantity";;
+    private static final String FIRST_LINE = "fruit,quantity";
     private static final String CORRECT_PATH = "src/test/resources/reportTest.csv";
     private static final String WRONG_PATH = "src////test/reso/reportTest.csv";
     private static List<String> expectedResult;

@@ -16,7 +16,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_Correct_ok() {
+    public void balanceOperation_balance_ok() {
         Fruit apple = new Fruit("apple");
         Storage.store.put(apple, 25);
         LineData lineData = new LineData("b",apple, 12);

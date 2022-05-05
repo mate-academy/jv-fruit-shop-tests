@@ -22,12 +22,12 @@ public class ReaderImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void readNullFile_notOk() {
+    public void read_NullFile_notOk() {
         reader.readFromFile(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFileWithIncorrectPath_notOk() {
+    public void readFile_WithIncorrectPath_notOk() {
         reader.readFromFile("src/test/wrongDirectory/testData.csv");
     }
 }

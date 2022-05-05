@@ -25,7 +25,7 @@ public class ParserImplTest {
     }
 
     @Test
-    public void parse_Ok() {
+    public void parse_correct_Ok() {
         List<LineData> actual = fruitParser.parse(dataList);
         Assert.assertEquals(expected, actual);
     }

@@ -15,7 +15,7 @@ public class WriteImplTest {
     }
 
     @Test
-    public void writeDataToFile_ok() {
+    public void writeDataToFile_correct_ok() {
         String dataList = "fruit,quantity" + "orange,12" + "apple,8";
         boolean actual = writer.writeData(dataList,
                 "src/test/resources/testDataWriter.csv");
@@ -23,12 +23,12 @@ public class WriteImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeDataToFile_notOk() {
+    public void writeDataToFile_nullList_notOk() {
         writer.writeData(null, "src/test/resources/testDataWriter.csv");
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeDataToFileWrongDirectory_notOk() {
+    public void writeDataToFile_WrongDirectory_notOk() {
         String dataList = "fruit,quantity" + "orange,12" + "apple,8";
         writer.writeData(dataList, "wrongDirectory/testDataWriter.csv");
     }

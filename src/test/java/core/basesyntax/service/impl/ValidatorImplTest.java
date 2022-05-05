@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
-import java.util.regex.Pattern;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +14,7 @@ public class ValidatorImplTest {
     }
 
     @Test
-    public void validate_ok() {
+    public void validate_correct_ok() {
         String[] operationType = {"b", "s", "r", "p"};
         for (String activity : operationType) {
             String string = activity + ",text," + 1234;
@@ -23,17 +22,8 @@ public class ValidatorImplTest {
         }
     }
 
-    @Test
-    public void validate_notOk() {
-        String[] operationType = {"b", "s", "r", "p"};
-        for (String activity : operationType) {
-            String string = activity + ",text," + 1234;
-            Assert.assertFalse(!Pattern.matches("[bpsr],[a-z]+,[0-9]+", string));
-        }
-    }
-
-    @Test (expected = RuntimeException.class)
-    public void validateEmptyString_NotOk() {
+        @Test (expected = RuntimeException.class)
+    public void validate_EmptyString_NotOk() {
         validator.validate("");
     }
 }

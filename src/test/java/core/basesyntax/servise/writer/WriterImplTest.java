@@ -31,7 +31,7 @@ public class WriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_NotOk() {
+    public void writeToFile_NotValidPath() {
         writer.writeToFile("invalid/directory/file.csv", "some string");
     }
 

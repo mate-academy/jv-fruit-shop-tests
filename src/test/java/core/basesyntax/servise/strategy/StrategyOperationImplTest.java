@@ -10,16 +10,16 @@ import core.basesyntax.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyOperationImplTest {
-    private Map<String, OperationHandler> map = new HashMap<>();
-    private Fruit fruit;
-    private StrategyOperation strategyOperation;
+    private static Fruit fruit;
+    private static StrategyOperation strategyOperation;
 
-    @Before
-    public void beforeAll() {
+    @BeforeClass
+    public static void beforeAll() {
+        Map<String, OperationHandler> map = new HashMap<>();
         strategyOperation = new StrategyOperationImpl(map);
         fruit = new Fruit("apple");
         map.put("b", new BalanceOperationHandler());

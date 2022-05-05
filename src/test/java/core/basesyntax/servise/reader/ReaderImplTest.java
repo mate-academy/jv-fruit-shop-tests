@@ -1,8 +1,5 @@
 package core.basesyntax.servise.reader;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,21 +16,21 @@ public class ReaderImplTest {
 
     @Test
     public void readFromFile_ok() {
-        List<String> expected = fileReader(PATH_INPUT_FILE);
+        List<String> expected = List.of("type,fruit,quantity",
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
         List<String> actual = reader.readFromFile(PATH_INPUT_FILE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NotOk() {
+    public void readFromFile_NotValidPath() {
         reader.readFromFile("invalid/directory/file.csv");
-    }
-
-    private List<String> fileReader(String path) {
-        try {
-            return Files.readAllLines(Path.of(path));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read all line" + path, e);
-        }
     }
 }

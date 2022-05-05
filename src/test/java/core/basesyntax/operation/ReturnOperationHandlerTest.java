@@ -5,16 +5,16 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private OperationHandler operationHandler;
-    private Fruit fruit;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler operationHandler;
+    private static Fruit fruit;
+    private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationHandler = new ReturnOperationHandler();
         fruit = new Fruit("apple");
         fruitTransaction = new FruitTransaction("r", fruit, 8);

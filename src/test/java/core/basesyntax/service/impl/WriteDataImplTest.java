@@ -12,36 +12,33 @@ import org.junit.Test;
 
 public class WriteDataImplTest {
     private static DataWriter dataWriter;
-    private static String firstLine;
-    private static String correctPath;
-    private static String wrongPath;
+    private static final String FIRST_LINE = "fruit,quantity";;
+    private static final String CORRECT_PATH = "src/test/resources/reportTest.csv";
+    private static final String WRONG_PATH = "src////test/reso/reportTest.csv";
     private static List<String> expectedResult;
 
     @BeforeClass
     public static void setUp() {
         dataWriter = new WriteDataImpl();
-        firstLine = "fruit,quantity";
-        correctPath = "src/test/resources/reportTest.csv";
-        wrongPath = "src////test/reso/reportTest.csv";
-        expectedResult = new ArrayList<>(List.of(firstLine,
+        expectedResult = new ArrayList<>(List.of(FIRST_LINE,
                 "b,apple,10", "b,banana,30", "s,banana,100", "p,apple,3"));
     }
 
     @Test
     public void writeData_ok() {
-        boolean actual = dataWriter.writeData(expectedResult, correctPath);
+        boolean actual = dataWriter.writeData(expectedResult, CORRECT_PATH);
         assertTrue(actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void writeDataToWrongPath_notOk() {
-        boolean actual = dataWriter.writeData(expectedResult, wrongPath);
+        boolean actual = dataWriter.writeData(expectedResult, WRONG_PATH);
         assertFalse(actual);
     }
 
     @Test
     public void writeDataToCorrectPath_ok() {
-        boolean actual = dataWriter.writeData(expectedResult, correctPath);
+        boolean actual = dataWriter.writeData(expectedResult, CORRECT_PATH);
         assertEquals(true, actual);
     }
 }

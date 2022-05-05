@@ -16,7 +16,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaiseOperation_buyCorrect_ok() {
+    public void purchaseOperation_buyCorrect_ok() {
         Fruit apple = new Fruit("apple");
         Storage.store.put(apple, 25);
         LineData lineData = new LineData("p",apple, 12);
@@ -27,7 +27,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaiseOperation_buyMoreThanAvailable_notOk() {
+    public void purchaseOperation_buyMoreThanAvailable_notOk() {
         Fruit apple = new Fruit("apple");
         Storage.store.put(apple, 5);
         LineData lineData = new LineData("p",apple, 8);

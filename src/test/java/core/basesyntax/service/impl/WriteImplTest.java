@@ -3,10 +3,12 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+
+import core.basesyntax.service.Writer;
 import org.junit.Test;
 
 public class WriteImplTest {
-    private final WriteImpl writer = new WriteImpl();
+    private final Writer writer = new WriteImpl();
 
     @Test
     public void writeDataToFile_ok() {

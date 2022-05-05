@@ -20,5 +20,4 @@ public class ValidatorImplTest {
     public void validateEmptyString_NotOk() {
         validator.validate("");
     }
-
 }

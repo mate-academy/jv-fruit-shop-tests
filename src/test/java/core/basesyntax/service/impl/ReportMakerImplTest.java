@@ -21,7 +21,5 @@ public class ReportMakerImplTest {
         String expected = "fruit, quantity" + "\n" + "apple, 12" + "\n" + "orange, 9" + "\n";
         String actual = report.createNewReport();
         Assert.assertEquals(actual, expected);
-
     }
-
 }

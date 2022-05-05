@@ -52,7 +52,7 @@ public class WriterServiceImplTest {
                 + "banana,100"
                 + System.lineSeparator()
                 + "apple,100";
-        writerService.writeToFile("folder/incorrect/File/Path", textForWriting);
+        writerService.writeToFile("folder1/incorrect/File/Path", textForWriting);
     }
 
     @After

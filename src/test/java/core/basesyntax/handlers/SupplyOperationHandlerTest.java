@@ -2,7 +2,6 @@ package core.basesyntax.handlers;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -12,12 +11,10 @@ import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static OperationHandler supplyHandler;
-    private static StorageDao storageDao;
 
     @BeforeClass
     public static void setUpFirst() {
-        storageDao = new StorageDaoImpl();
-        supplyHandler = new SupplyOperationHandler(storageDao);
+        supplyHandler = new SupplyOperationHandler(new StorageDaoImpl());
     }
 
     @Test
@@ -44,7 +41,9 @@ public class SupplyOperationHandlerTest {
         Fruit orange = new Fruit("orange");
         Storage.storage.put(orange, 0);
         supplyHandler.doOperation(orange, 5);
-        assertEquals(5, storageDao.get(orange).intValue());
+        int actual = Storage.storage.get(orange);
+        int expected = 5;
+        assertEquals(expected, actual);
     }
 
     @After

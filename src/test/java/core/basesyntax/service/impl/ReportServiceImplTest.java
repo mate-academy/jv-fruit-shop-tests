@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-import java.util.HashMap;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,7 +19,8 @@ public class ReportServiceImplTest {
 
     @Test
     public void createReport_emptyStorage_Ok() {
-        String actual = reportService.makeReport(new HashMap<>());
+        Storage.storage.clear();
+        String actual = reportService.makeReport(Storage.storage);
         String expected = "fruit,balance" + System.lineSeparator();
         assertEquals(expected, actual);
     }
@@ -35,5 +36,10 @@ public class ReportServiceImplTest {
                 + "apple,14" + System.lineSeparator()
                 + "default,0" + System.lineSeparator();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

@@ -32,11 +32,6 @@ public class FileWriterServiceImplTest {
         writerService.writeToFile(null, DEFAULT_REPORT);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void write_nullReport_NotOk() {
-        writerService.writeToFile(OUTPUT_PATH, null);
-    }
-
     @Test
     public void write_validInput_Ok() {
         String report = HEADER + System.lineSeparator()

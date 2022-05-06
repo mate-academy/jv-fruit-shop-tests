@@ -2,7 +2,6 @@ package core.basesyntax.handlers;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -12,12 +11,10 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static OperationHandler operationHandler;
-    private static StorageDao storageDao;
 
     @Before
     public void setUp() {
-        storageDao = new StorageDaoImpl();
-        operationHandler = new ReturnOperationHandler(storageDao);
+        operationHandler = new ReturnOperationHandler(new StorageDaoImpl());
     }
 
     @Test

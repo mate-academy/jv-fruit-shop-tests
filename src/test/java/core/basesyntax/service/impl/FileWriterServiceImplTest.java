@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileWriterService;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,16 +22,16 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_withValidPath_ok() {
-        String toFileName = "src/test/resources/testOutputFile";
+        String toFileName = "src/test/resources/OutputData";
         String report = "fruit,quantity\n"
                 + "banana,52\n"
                 + "apple,9\n";
         List<String> expected = List.of("fruit,quantity",
                 "banana,52",
                 "apple,9");
-        fileWriterService.writeToFile(toFileName, report);
-        File testOutputFile = new File("testOutputFile");
-        List<String> actual = readDataFromFile("testOutputFile");
+        FileWriterService fileWriterService1 = new FileWriterServiceImpl();
+        fileWriterService1.writeToFile(toFileName, report);
+        List<String> actual = readDataFromFile(toFileName);
         assertEquals(expected, actual);
     }
 

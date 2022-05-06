@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,5 +26,10 @@ public class ReportCreatorServiceImplTest {
                 + "apple,9\n";
         String actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEach() {
+        Storage.storage.clear();
     }
 }

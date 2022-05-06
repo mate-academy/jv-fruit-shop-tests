@@ -20,7 +20,6 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void process_initialQuantityIsNull_ok() {
-        Storage.storage.clear();
         Integer expected = 38;
         returnOperationHandler.process(new FruitTransaction("r", new Fruit("apple"), 38));
         Integer actual = Storage.storage.get(new Fruit("apple"));

@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,7 +23,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_withValidPath_ok() {
-        String toFileName = "testOutputFile";
+        String toFileName = "src/test/resources/testOutputFile";
         String report = "fruit,quantity\n"
                 + "banana,52\n"
                 + "apple,9\n";
@@ -33,8 +32,7 @@ public class FileWriterServiceImplTest {
                 "apple,9");
         fileWriterService.writeToFile(toFileName, report);
         File testOutputFile = new File("testOutputFile");
-        List<String> actual = new ArrayList<>();
-        actual = read("testOutputFile");
+        List<String> actual = readDataFromFile("testOutputFile");
         assertEquals(expected, actual);
     }
 
@@ -46,8 +44,8 @@ public class FileWriterServiceImplTest {
         fileWriterService.writeToFile("", report);
     }
 
-    private static List<String> read(String filePath) {
-        List<String> readData = new ArrayList<>();
+    private static List<String> readDataFromFile(String filePath) {
+        List<String> readData;
         try (Stream<String> lines = Files.lines(Path.of(filePath))) {
             readData = lines.collect(Collectors.toList());
         } catch (IOException e) {

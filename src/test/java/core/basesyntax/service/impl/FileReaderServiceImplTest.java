@@ -29,7 +29,7 @@ public class FileReaderServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = fileReaderService.readFromFile(VALID_PATH);;
+        List<String> actual = fileReaderService.readFromFile(VALID_PATH);
         assertEquals(expected, actual);
     }
 
@@ -37,7 +37,7 @@ public class FileReaderServiceImplTest {
     public void readFromFile_emptyFile_ok() {
         List<String> expected = List.of();
         fileReaderService.readFromFile(PATH_TO_EMPTY_FILE);
-        List<String> actual = fileReaderService.readFromFile(PATH_TO_EMPTY_FILE);;
+        List<String> actual = fileReaderService.readFromFile(PATH_TO_EMPTY_FILE);
         assertEquals(expected, actual);
     }
 

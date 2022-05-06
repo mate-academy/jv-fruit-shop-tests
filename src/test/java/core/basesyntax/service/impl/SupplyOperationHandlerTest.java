@@ -23,7 +23,7 @@ public class SupplyOperationHandlerTest {
         Integer expected = 17;
         supplyOperationHandler.process(new FruitTransaction("s", new Fruit("apple"), 17));
         Integer actual = Storage.storage.get(new Fruit("apple"));
-        assertEquals(expected, Storage.storage.get(new Fruit("apple")));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class SupplyOperationHandlerTest {
         Integer expected = 120;
         supplyOperationHandler.process(new FruitTransaction("s", new Fruit("apple"), 70));
         Integer actual = Storage.storage.get(new Fruit("apple"));
-        assertEquals(expected, Storage.storage.get(new Fruit("apple")));
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -17,7 +17,7 @@ public class FileReadingImplTest {
     }
 
     @Test
-    public void readFromFileOk() {
+    public void readFromFileIsOk() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -26,7 +26,7 @@ public class FileReadingImplTest {
         expected.add("p,banana,13");
         expected.add("r,apple,10");
         List<String> actual = fileReader.readFromFile(PATH_OF_INPUT_FILE);
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -35,7 +35,7 @@ public class FileReadingImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFilePathNull() {
+    public void readFromFilePathNullNotOk() {
         fileReader.readFromFile(null);
     }
 }

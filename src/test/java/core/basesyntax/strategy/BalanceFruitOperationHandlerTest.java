@@ -16,7 +16,7 @@ public class BalanceFruitOperationHandlerTest {
     }
 
     @Test
-    public void operateBalanceHandlerOk() {
+    public void operateBalanceHandlerIsOk() {
         Fruit fruit = new Fruit("b", "passionFruit", 28);
         fruitOperationHandler.operate(fruit);
         Integer expected = fruit.getQuantity();
@@ -25,7 +25,7 @@ public class BalanceFruitOperationHandlerTest {
     }
 
     @Test
-    public void operateBalanceHandlerAddOk() {
+    public void operateBalanceHandlerAddIsOk() {
         Fruit fruit = new Fruit("b", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 20);
         fruitOperationHandler.operate(fruit);

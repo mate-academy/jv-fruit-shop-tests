@@ -16,7 +16,7 @@ public class SupplyFruitOperationHandlerTest {
     }
 
     @Test
-    public void operateSupplyHandlerIsOk() {
+    public void operateSupplyHandlerFirstFruitIsOk() {
         Fruit fruit = new Fruit("s", "passionFruit", 10);
         fruitOperationHandler.operate(fruit);
         Integer expected = fruit.getQuantity();
@@ -25,7 +25,7 @@ public class SupplyFruitOperationHandlerTest {
     }
 
     @Test
-    public void operateSupplyHandlerAddOk() {
+    public void operateSupplyHandlerAddSecondFruitIsOk() {
         Fruit fruit = new Fruit("b", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 20);
         fruitOperationHandler.operate(fruit);

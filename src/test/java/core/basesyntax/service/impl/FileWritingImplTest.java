@@ -20,7 +20,7 @@ public class FileWritingImplTest {
     }
 
     @Test
-    public void writeToFile_ok() {
+    public void writeToFileMethodIsOk() {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,52" + System.lineSeparator()
                 + "apple,9" + System.lineSeparator();
@@ -38,7 +38,7 @@ public class FileWritingImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFileNull() {
+    public void writeToFilePathNullNotOk() {
         fileWriter.writeToFile(null, "report");
     }
 

@@ -16,7 +16,7 @@ public class ReportImplTest {
     }
 
     @Test
-    public void validReport() {
+    public void getReportValidReportIsOk() {
         Storage.fruitStorage.put("banana", 20);
         Storage.fruitStorage.put("apple", 20);
         Storage.fruitStorage.put("tomato", 20);

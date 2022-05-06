@@ -16,7 +16,7 @@ public class ReturnFruitOperationHandlerTest {
     }
 
     @Test
-    public void returnOperationHandlerOperateValid() {
+    public void operateReturnHandlerAddFirstFruitIsOk() {
         Fruit fruit = new Fruit("r", "mara", 20);
         fruitOperationHandler.operate(fruit);
         Integer expected = fruit.getQuantity();
@@ -25,7 +25,7 @@ public class ReturnFruitOperationHandlerTest {
     }
 
     @Test
-    public void operateReturnHandlerAddOk() {
+    public void operateReturnHandlerAddSecondFruitIsOk() {
         Fruit fruit = new Fruit("b", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 20);
         fruitOperationHandler.operate(fruit);

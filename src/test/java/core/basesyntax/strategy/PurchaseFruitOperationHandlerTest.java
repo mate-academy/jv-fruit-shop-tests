@@ -16,7 +16,7 @@ public class PurchaseFruitOperationHandlerTest {
     }
 
     @Test
-    public void operatePurchaseHandlerOk() {
+    public void operatePurchaseHandlerIsOk() {
         Storage.fruitStorage.put("passionFruit", 30);
         Fruit fruit = new Fruit("p", "passionFruit", 28);
         fruitOperationHandler.operate(fruit);
@@ -26,7 +26,7 @@ public class PurchaseFruitOperationHandlerTest {
     }
 
     @Test
-    public void operatePurchaseHandlerSubtractOk() {
+    public void operatePurchaseHandlerSubtractIsOk() {
         Fruit fruit = new Fruit("b", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 40);
         fruitOperationHandler.operate(fruit);

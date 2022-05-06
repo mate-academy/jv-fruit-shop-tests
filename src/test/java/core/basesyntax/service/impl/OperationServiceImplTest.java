@@ -26,13 +26,11 @@ import org.junit.Test;
 public class OperationServiceImplTest {
     private static OperationService operationService;
     private static FruitTransaction testTransaction;
-    private static Fruit testFruit;
-    private static int testQuantity;
+    private static final Fruit testFruit = new Fruit("apple");
+    private static final int testQuantity = 10;
 
     @BeforeClass
     public static void setUp() {
-        testFruit = new Fruit("apple");
-        testQuantity = 10;
         testTransaction = new FruitTransaction();
         testTransaction.setFruit(testFruit);
         testTransaction.setQuantity(testQuantity);

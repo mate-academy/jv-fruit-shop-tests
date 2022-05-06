@@ -10,39 +10,26 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/input.csv";
-    private static final String INVALID_PATH = "src/test/resources/invalidInput.csv";
     private static final String EMPTY_FILE = "src/test/resources/empty.csv";
     private static FileReaderService fileReader;
-    private static List<String> inputData;
 
     @BeforeClass
     public static void beforeClass() {
         fileReader = new FileReaderServiceImpl();
-        inputData = new ArrayList<>();
-        inputData.add("type,fruit,quantity");
-        inputData.add("b,banana,100");
-        inputData.add("b,apple,100");
-        inputData.add("p,banana,25");
-        inputData.add("s,banana,25");
-        inputData.add("r,banana,200");
-        inputData.add("p,banana,25");
     }
 
     @Test
-    public void readFile_isOk() {
-        List<String> expected = inputData;
+    public void readFile_Ok() {
+        List<String> expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
+        expected.add("b,banana,100");
+        expected.add("b,apple,100");
+        expected.add("p,banana,25");
+        expected.add("s,banana,25");
+        expected.add("r,banana,200");
+        expected.add("p,banana,25");
         List<String> actual = fileReader.read(VALID_PATH);
         assertEquals(expected, actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void readFile_notOk() {
-        List<String> actual = fileReader.read(INVALID_PATH);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void read_nullFileName_NotOk() {
-        fileReader.read(null);
     }
 
     @Test

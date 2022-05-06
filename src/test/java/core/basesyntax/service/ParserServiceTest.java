@@ -19,7 +19,7 @@ public class ParserServiceTest {
     }
 
     @Test
-    public void parse_HeaderList_Ok() {
+    public void parse_headerList_Ok() {
         List<FruitTransaction> expected = List.of();
         List<FruitTransaction> actual = parseService.parse(List.of("type,fruit,quantity"));
         assertEquals(expected, actual);
@@ -34,11 +34,6 @@ public class ParserServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void parse_wrongData_NotOk() {
-        parseService.parse(List.of("type,fruit,quantity", "b,apple"));
-    }
-
     @Test
     public void parse_emptyList_Ok() {
         List<FruitTransaction> expected = List.of();
@@ -46,8 +41,4 @@ public class ParserServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void parse_nullData_NotOk() {
-        parseService.parse(null);
-    }
 }

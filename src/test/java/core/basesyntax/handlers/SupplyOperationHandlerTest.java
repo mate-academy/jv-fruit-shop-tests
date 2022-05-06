@@ -20,15 +20,17 @@ public class SupplyOperationHandlerTest {
     public void supply_Ok() {
         Storage.storage.put(new Fruit("banana"), 10);
         supplyOperation.process(new Fruit("banana"), 20);
-        Integer actual = 30;
-        assertEquals(actual, Storage.storage.get(new Fruit("banana")));
+        int expected = 30;
+        int actual = Storage.storage.get(new Fruit("banana"));
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void supply_EmptyStorage_Ok() {
+    public void supply_emptyStorage_Ok() {
         supplyOperation.process(new Fruit("orange"), 0);
+        int expected = 0;
         int actual = Storage.storage.get(new Fruit("orange"));
-        assertEquals(0, actual);
+        assertEquals(expected, actual);
     }
 
     @After

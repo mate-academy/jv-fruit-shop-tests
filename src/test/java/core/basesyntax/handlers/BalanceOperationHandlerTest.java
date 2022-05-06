@@ -20,15 +20,17 @@ public class BalanceOperationHandlerTest {
     public void balance_Ok() {
         Storage.storage.put(new Fruit("mango"), 40);
         balanceOperationHandler.process(new Fruit("mango"), 30);
-        Integer expected = 30;
-        assertEquals(expected, Storage.storage.get(new Fruit("mango")));
+        int expected = 30;
+        int actual = Storage.storage.get(new Fruit("mango"));
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void balance_NewFruit_Ok() {
+    public void balance_newFruit_Ok() {
         balanceOperationHandler.process(new Fruit("mango"), 1);
-        Integer actual = 1;
-        assertEquals(actual, Storage.storage.get(new Fruit("mango")));
+        int expected = 1;
+        int actual = Storage.storage.get(new Fruit("mango"));
+        assertEquals(expected, actual);
     }
 
     @After

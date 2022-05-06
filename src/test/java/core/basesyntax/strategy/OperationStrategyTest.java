@@ -49,7 +49,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void invalidInputValue_NotOk() {
+    public void invalidInputValue_notOk() {
         Assert.assertNull(operationStrategy.get("invalid"));
     }
 }

@@ -20,8 +20,9 @@ public class ReturnOperationHandlerTest {
     public void return_Ok() {
         Storage.storage.put(new Fruit("apple"), 5);
         returnOperationHandler.process(new Fruit("apple"), 5);
-        Integer actual = 10;
-        assertEquals(actual, Storage.storage.get(new Fruit("apple")));
+        Integer expected = 10;
+        Integer actual = Storage.storage.get(new Fruit("apple"));
+        assertEquals(expected, actual);
     }
 
     @Test

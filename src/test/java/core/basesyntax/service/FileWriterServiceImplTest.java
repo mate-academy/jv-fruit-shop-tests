@@ -13,7 +13,6 @@ import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/report.csv";
-    private static final String INVALID_PATH = "C:Users/resources/invalidReport.csv";
     private static String report;
     private static FileWriterService fileWriter;
     private static List<String> expected;
@@ -36,29 +35,17 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeFile_isOk() {
+    public void writeFile_Ok() {
         fileWriter.writeToFile(VALID_PATH, report);
-        List<String> actual;
-        try {
-            actual = Files.readAllLines(Path.of(VALID_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't find data", e);
-        }
+        List<String> actual = readFromFile(VALID_PATH);
         assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void writeFile_notOk() {
-        fileWriter.writeToFile(INVALID_PATH, report);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void writeToFile_nullFilePath_NotOk() {
-        fileWriter.writeToFile(null, report);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void write_nullReport_NotOk() {
-        fileWriter.writeToFile(VALID_PATH, null);
+    private List<String> readFromFile(String path) {
+        try {
+            return Files.readAllLines(Path.of(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't find data", e);
+        }
     }
 }

@@ -69,7 +69,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void operationStrategy_operationIsEmpty_NotOk() {
+    public void operationStrategy_operationIsEmpty_Ok() {
         operationStrategy.get(null);
     }
 

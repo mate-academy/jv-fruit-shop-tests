@@ -18,6 +18,11 @@ public class PurchaseOperationHandlerTest {
         purchaseOperationHandler = new PurchaseOperationHandler();
     }
 
+    @Test (expected = RuntimeException.class)
+    public void process_initialStorageIsEmpty_notOk() {
+        purchaseOperationHandler.process(new FruitTransaction("p", new Fruit("apple"), 8));
+    }
+
     @Test
     public void process_initialQuantityIsEqualsToPurchase_ok() {
         Storage.storage.put(new Fruit("apple"), 50);

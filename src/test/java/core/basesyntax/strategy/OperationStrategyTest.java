@@ -25,31 +25,31 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void balanceClass_Ok() {
+    public void balanceClass_validOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy.get("b").getClass();
         Assert.assertEquals(BalanceOperationHandler.class, actual);
     }
 
     @Test
-    public void purchaseClass_Ok() {
+    public void purchaseClass_validOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy.get("p").getClass();
         Assert.assertEquals(PurchaseOperationHandler.class, actual);
     }
 
     @Test
-    public void returnClass_Ok() {
+    public void returnClass_validOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy.get("r").getClass();
         Assert.assertEquals(ReturnOperationHandler.class, actual);
     }
 
     @Test
-    public void supplyClass_Ok() {
+    public void supplyClass_validOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy.get("s").getClass();
         Assert.assertEquals(SupplyOperationHandler.class, actual);
     }
 
     @Test
-    public void invalidInputValue_notOk() {
+    public void operation_inValid_notOk() {
         Assert.assertNull(operationStrategy.get("invalid"));
     }
 }

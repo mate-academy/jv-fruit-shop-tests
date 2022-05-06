@@ -17,7 +17,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balance_Ok() {
+    public void balance_validData_Ok() {
         Storage.storage.put(new Fruit("mango"), 40);
         balanceOperationHandler.process(new Fruit("mango"), 30);
         int expected = 30;

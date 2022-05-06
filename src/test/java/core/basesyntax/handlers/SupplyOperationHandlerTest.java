@@ -17,7 +17,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supply_Ok() {
+    public void supply_validData_Ok() {
         Storage.storage.put(new Fruit("banana"), 10);
         supplyOperation.process(new Fruit("banana"), 20);
         int expected = 30;

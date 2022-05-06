@@ -17,7 +17,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void return_Ok() {
+    public void return_validData_Ok() {
         Storage.storage.put(new Fruit("apple"), 5);
         returnOperationHandler.process(new Fruit("apple"), 5);
         Integer expected = 10;

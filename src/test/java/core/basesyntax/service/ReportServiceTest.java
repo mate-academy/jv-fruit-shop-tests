@@ -18,7 +18,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void getReport_Ok() {
+    public void getReport_validData_Ok() {
         Storage.storage.put(new Fruit("banana"), 50);
         Storage.storage.put(new Fruit("apple"), 75);
         Storage.storage.put(new Fruit("mango"), 0);

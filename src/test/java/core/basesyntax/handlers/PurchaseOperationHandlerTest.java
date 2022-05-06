@@ -51,7 +51,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void purchase_notOk() {
+    public void purchase_oneFruit_notOk() {
         Storage.storage.put(new Fruit("banana"), 1);
         purchaseOperationHandler.process(new Fruit("banana"), 2);
     }

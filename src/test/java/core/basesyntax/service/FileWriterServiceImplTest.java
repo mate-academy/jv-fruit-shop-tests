@@ -13,6 +13,7 @@ import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/report.csv";
+    private static final String INVALID_PATH = "C:Users/resources/invalidReport.csv";
     private static String report;
     private static FileWriterService fileWriter;
     private static List<String> expected;
@@ -35,10 +36,15 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeFile_Ok() {
+    public void writeFile_validPath_Ok() {
         fileWriter.writeToFile(VALID_PATH, report);
         List<String> actual = readFromFile(VALID_PATH);
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeFile_inValidPath_notOk() {
+        fileWriter.writeToFile(INVALID_PATH, report);
     }
 
     private List<String> readFromFile(String path) {

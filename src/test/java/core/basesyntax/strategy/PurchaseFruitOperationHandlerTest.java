@@ -25,6 +25,16 @@ public class PurchaseFruitOperationHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void operatePurchaseHandlerSubtractOk() {
+        Fruit fruit = new Fruit("b", "passionFruit", 20);
+        Storage.fruitStorage.put("passionFruit", 40);
+        fruitOperationHandler.operate(fruit);
+        Integer expected = 20;
+        Integer actual = Storage.fruitStorage.get(fruit.getName());
+        Assert.assertEquals(expected, actual);
+    }
+
     @Test(expected = RuntimeException.class)
     public void operatePurchaseHandlerNotOk() {
         Fruit fruit = new Fruit("p", "passionFruit", 28);

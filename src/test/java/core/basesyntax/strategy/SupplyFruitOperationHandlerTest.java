@@ -2,7 +2,7 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,8 +24,18 @@ public class SupplyFruitOperationHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @Test
+    public void operateSupplyHandlerAddOk() {
+        Fruit fruit = new Fruit("b", "passionFruit", 20);
+        Storage.fruitStorage.put("passionFruit", 20);
+        fruitOperationHandler.operate(fruit);
+        Integer expected = 40;
+        Integer actual = Storage.fruitStorage.get(fruit.getName());
+        Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void after() {
         Storage.fruitStorage.clear();
     }
 }

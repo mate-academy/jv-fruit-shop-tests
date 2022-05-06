@@ -23,12 +23,10 @@ public class FruitBuilderImplTest {
         sourceData.add("b,banana,20");
         sourceData.add("s,apple,100");
         sourceData.add("p,papaya,100");
-
         List<Fruit> expected = new ArrayList<>();
         expected.add(new Fruit("b", "banana", 20));
         expected.add(new Fruit("s", "apple", 100));
         expected.add(new Fruit("p", "papaya", 100));
-
         List<Fruit> actual = fruitBuilder.buildFruit(sourceData);
         Assert.assertEquals(expected, actual);
     }

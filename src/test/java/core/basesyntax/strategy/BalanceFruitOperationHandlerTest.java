@@ -24,6 +24,16 @@ public class BalanceFruitOperationHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void operateBalanceHandlerAddOk() {
+        Fruit fruit = new Fruit("b", "passionFruit", 20);
+        Storage.fruitStorage.put("passionFruit", 20);
+        fruitOperationHandler.operate(fruit);
+        Integer expected = 40;
+        Integer actual = Storage.fruitStorage.get(fruit.getName());
+        Assert.assertEquals(expected, actual);
+    }
+
     @AfterClass
     public static void afterClass() {
         Storage.fruitStorage.clear();

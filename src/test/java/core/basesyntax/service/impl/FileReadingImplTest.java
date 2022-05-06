@@ -9,33 +9,33 @@ import org.junit.Test;
 
 public class FileReadingImplTest {
     private static final String PATH_OF_INPUT_FILE = "src/test/resources/input.csv";
-    private static FileReading reader;
+    private static FileReading fileReader;
 
     @BeforeClass
     public static void setUp() {
-        reader = new FileReadingImpl();
+        fileReader = new FileReadingImpl();
     }
 
     @Test
     public void readFromFileOk() {
-        List<String> stringList = new ArrayList<>();
-        stringList.add("type,fruit,quantity");
-        stringList.add("b,banana,20");
-        stringList.add("b,apple,100");
-        stringList.add("s,banana,100");
-        stringList.add("p,banana,13");
-        stringList.add("r,apple,10");
-        List<String> actual = reader.readFromFile(PATH_OF_INPUT_FILE);
-        Assert.assertEquals(actual, stringList);
+        List<String> expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
+        expected.add("b,banana,20");
+        expected.add("b,apple,100");
+        expected.add("s,banana,100");
+        expected.add("p,banana,13");
+        expected.add("r,apple,10");
+        List<String> actual = fileReader.readFromFile(PATH_OF_INPUT_FILE);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFileNotOk() {
-        reader.readFromFile("notValid/test/resources/input.csv");
+    public void readFromFilePathNotOk() {
+        fileReader.readFromFile("notValid/test/resources/input.csv");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFilePathNull() {
-        reader.readFromFile(null);
+        fileReader.readFromFile(null);
     }
 }

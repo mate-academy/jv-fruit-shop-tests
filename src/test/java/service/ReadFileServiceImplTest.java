@@ -17,8 +17,9 @@ public class ReadFileServiceImplTest {
     @Test
     public void read_correctFilePath_Ok() {
         List<String> actual = readFileService.read("src/test/resources/TestInput.csv");
-        int expected = 7;
-        assertEquals("Size not equals expected size!", actual.size(), expected);
+        List<String> expected = List.of("b-banana-20", "b-apple-100", "s-banana-100",
+                "p-apple-20", "p-banana-5", "s-banana-50", "r-apple-30");
+        assertEquals(actual,expected);
     }
 
     @Test(expected = RuntimeException.class)

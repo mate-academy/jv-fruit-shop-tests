@@ -23,7 +23,7 @@ public class PurchaseOperationHandlerTest {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 40);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, apple, 32);
+                new FruitTransaction(FruitTransaction.Operation.RETURN, apple, 32);
         operationHandler.apply(fruitTransaction);
         int expected = 8;
         int actual = Storage.dataBase.get(apple);
@@ -35,7 +35,7 @@ public class PurchaseOperationHandlerTest {
         Fruit apple = new Fruit("apple");
         Storage.dataBase.put(apple, 10);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, apple, 32);
+                new FruitTransaction(FruitTransaction.Operation.RETURN, apple, 32);
         operationHandler.apply(fruitTransaction);
     }
 

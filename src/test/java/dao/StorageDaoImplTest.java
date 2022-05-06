@@ -1,6 +1,7 @@
 package dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import db.Storage;
 import java.util.Map;
@@ -42,12 +43,11 @@ public class StorageDaoImplTest {
         Fruit orange = new Fruit("orange");
         Storage.dataBase.put(apple, 20);
         Integer actual = storageDao.get(orange);
-        Integer expected = null;
-        assertEquals(expected, actual);
+        assertNull(actual);
     }
 
     @Test
-    public void addAll_correctData_Ok() {
+    public void getAll_correctData_Ok() {
         Storage.dataBase.put(new Fruit("apple"), 10);
         Storage.dataBase.put(new Fruit("orange"), 13);
         Storage.dataBase.put(new Fruit("banana"), 40);

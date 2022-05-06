@@ -40,30 +40,30 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_BalanceOperation_Ok() {
-        OperationHandler expected = balanceHandler;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
+    public void get_balanceOperation_Ok() {
+        Class<?> expected = balanceHandler.getClass();
+        Class<?> actual = operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void get_PurchaseOperation_Ok() {
-        OperationHandler expected = purchaseHandler;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
+    public void get_purchaseOperation_Ok() {
+        Class<?> expected = purchaseHandler.getClass();
+        Class<?> actual = operationStrategy.get(FruitTransaction.Operation.PURCHASE).getClass();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void get_ReturnOperation_Ok() {
-        OperationHandler expected = returnHandler;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.RETURN);
+    public void get_returnOperation_Ok() {
+        Class<?> expected = returnHandler.getClass();
+        Class<?> actual = operationStrategy.get(FruitTransaction.Operation.RETURN).getClass();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void get_SupplyOperation_Ok() {
-        OperationHandler expected = supplyHandler;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
+    public void get_supplyOperation_Ok() {
+        Class<?> expected = supplyHandler.getClass();
+        Class<?> actual = operationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass();
         assertEquals(expected, actual);
     }
 }

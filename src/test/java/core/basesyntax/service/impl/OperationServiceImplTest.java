@@ -51,13 +51,13 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void executeTransaction_EmptyTransactions_Ok() {
+    public void executeTransaction_emptyTransactions_Ok() {
         operationService.executeTransactions(Collections.EMPTY_LIST);
         assertTrue(Storage.storage.isEmpty());
     }
 
     @Test
-    public void executeTransaction_BalanceTransaction_Ok() {
+    public void executeTransaction_balanceTransaction_Ok() {
         testTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         List<FruitTransaction> transactions = List.of(testTransaction);
 
@@ -73,7 +73,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void executeTransaction_ReturnTransaction_Ok() {
+    public void executeTransaction_returnTransaction_Ok() {
         testTransaction.setOperation(FruitTransaction.Operation.RETURN);
         List<FruitTransaction> transactions = List.of(testTransaction);
 
@@ -89,7 +89,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void executeTransaction_SupplyTransaction_Ok() {
+    public void executeTransaction_supplyTransaction_Ok() {
         testTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         List<FruitTransaction> transactions = List.of(testTransaction);
 
@@ -102,6 +102,38 @@ public class OperationServiceImplTest {
         expected = testQuantity * 2;
         actual = Storage.storage.get(testFruit);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void executeTransaction_purchaseTransaction_Ok() {
+        testTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        List<FruitTransaction> transactions = List.of(testTransaction);
+        operationService.executeTransactions(transactions);
+
+        FruitTransaction purchaseTransaction = new FruitTransaction();
+        purchaseTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        purchaseTransaction.setFruit(testFruit);
+        purchaseTransaction.setQuantity(testQuantity - 5);
+        transactions = List.of(purchaseTransaction);
+        operationService.executeTransactions(transactions);
+
+        int expected = 5;
+        int actual = Storage.storage.get(testFruit);
+        assertEquals(expected, actual);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void executeTransaction_purchaseOperationInsufficientStock_NotOk() {
+        testTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        List<FruitTransaction> transactions = List.of(testTransaction);
+        operationService.executeTransactions(transactions);
+
+        FruitTransaction purchaseTransaction = new FruitTransaction();
+        purchaseTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        purchaseTransaction.setFruit(testFruit);
+        purchaseTransaction.setQuantity(testQuantity + 5);
+        transactions = List.of(purchaseTransaction);
+        operationService.executeTransactions(transactions);
     }
 
     @After

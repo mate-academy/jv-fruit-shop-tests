@@ -20,14 +20,16 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parse_ValidData_Ok() {
+    public void parse_validData_Ok() {
         List<String> input = new ArrayList<>();
         input.add("type,fruit,quantity");
         input.add("s,lemon,8");
         input.add("p,apple,7");
 
-        FruitTransaction lemonTransaction =
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, new Fruit("lemon"), 8);
+        FruitTransaction lemonTransaction = new FruitTransaction();
+        lemonTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        lemonTransaction.setFruit(new Fruit("lemon"));
+        lemonTransaction.setQuantity(8);
 
         FruitTransaction appleTransaction = new FruitTransaction();
         appleTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

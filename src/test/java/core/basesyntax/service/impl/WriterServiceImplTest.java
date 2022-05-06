@@ -19,20 +19,18 @@ public class WriterServiceImplTest {
     @BeforeClass
     public static void setUp() {
         writerService = new WriterServiceImpl();
-        StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append("fruit,quantity").append(System.lineSeparator())
-                .append("banana,152").append(System.lineSeparator())
-                .append("apple,90");
-        testReport = stringBuilder.toString();
+        testReport = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator()
+                + "apple,90";
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeToFile_EmptyFilePathString_NotOk() {
+    public void writeToFile_emptyFilePathString_NotOk() {
         writerService.writeToFile("", testReport);
     }
 
     @Test
-    public void writeToFile_EmptyReport_Ok() {
+    public void writeToFile_emptyReport_Ok() {
         writerService.writeToFile(VALID_FILE, "");
         List<String> expected = readFromFile(EMPTY_FILE_REFERENCE);
         List<String> actual = readFromFile(VALID_FILE);

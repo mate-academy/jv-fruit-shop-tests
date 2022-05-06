@@ -19,23 +19,22 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void makeReport_NoTransactionsWereMade_Ok() {
+    public void makeReport_noTransactionsWereMade_Ok() {
         String actual = reportService.createReport();
         String expected = "fruit,quantity" + System.lineSeparator();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void makeReport_ValidTransactions_Ok() {
+    public void makeReport_validTransactions_Ok() {
         Storage.storage.put(new Fruit("lemon"), 11);
         Storage.storage.put(new Fruit("cocos"), 35);
 
-        StringBuilder expected = new StringBuilder();
-        expected.append("fruit,quantity").append(System.lineSeparator())
-                .append("lemon,11").append(System.lineSeparator())
-                .append("cocos,35").append(System.lineSeparator());
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "lemon,11" + System.lineSeparator()
+                + "cocos,35" + System.lineSeparator();
         String actual = reportService.createReport();
-        assertEquals(expected.toString(), actual);
+        assertEquals(expected, actual);
     }
 
     @After

@@ -37,19 +37,19 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_EmptyFile_Ok() {
+    public void readFromFile_emptyFile_Ok() {
         List<String> expected = Collections.EMPTY_LIST;
         List<String> actual = readerService.readFromFile(EMPTY_FILE_PATH);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_FileDoesntExist_NotOk() {
+    public void readFromFile_fileDoesntExist_NotOk() {
         readerService.readFromFile(NON_EXISTENT_FILE_PATH);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_EmptyFilePathString_NotOk() {
+    public void readFromFile_emptyFilePathString_NotOk() {
         readerService.readFromFile("");
     }
 

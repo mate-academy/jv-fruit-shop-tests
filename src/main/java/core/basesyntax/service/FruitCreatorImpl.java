@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
 
-public class CreateFruitImpl implements CreateFruit {
+public class FruitCreatorImpl implements FruitCreator {
     @Override
     public Fruit createFruit(String fruitName, String amount) {
         Fruit fruit = new Fruit();

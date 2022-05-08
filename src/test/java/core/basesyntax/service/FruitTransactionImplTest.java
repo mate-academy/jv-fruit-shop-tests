@@ -7,12 +7,20 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.MapStrategy;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionImplTest {
-    private static final MapStrategy mapStrategy = new MapStrategy();
-    private static final FruitDao fruitDao = new FruitDaoImpl();
-    private FruitTransaction fruitTransaction = new FruitTransactionImpl();
+    private static MapStrategy mapStrategy;
+    private static FruitDao fruitDao;
+    private static FruitTransaction fruitTransaction;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        mapStrategy = new MapStrategy();
+        fruitDao = new FruitDaoImpl();
+        fruitTransaction = new FruitTransactionImpl();
+    }
 
     @Test
     public void processTransaction_Ok() {
@@ -34,14 +42,18 @@ public class FruitTransactionImplTest {
         Fruit fruit = Storage.fruits.stream()
                 .filter(f -> f.getName().equals(banana))
                 .findFirst().get();
-        Assert.assertEquals(expectedFruit, fruit);
-        Assert.assertEquals(fruitDao.getByName(banana).getAmount(), bananaAmount);
+        Assert.assertEquals("Test failed! Expected Fruit: " + expectedFruit,
+                expectedFruit, fruit);
+        Assert.assertEquals("Test failed! Expected banana amount: " + bananaAmount,
+                bananaAmount, fruitDao.getByName(banana).getAmount());
         String pineapple = "pineapple";
         int pineappleAmount = 1000;
-        Assert.assertEquals(fruitDao.getByName(pineapple).getAmount(), pineappleAmount);
+        Assert.assertEquals("Test failed! Expected pineapple amount: " + pineappleAmount,
+                pineappleAmount, fruitDao.getByName(pineapple).getAmount());
         String cucumber = "cucumber";
         int cucumberAmount = 200;
-        Assert.assertEquals(fruitDao.getByName(cucumber).getAmount(), cucumberAmount);
+        Assert.assertEquals("Test failed! Expected cucumber amount: " + cucumberAmount,
+                cucumberAmount, fruitDao.getByName(cucumber).getAmount());
     }
 
     @Test(expected = RuntimeException.class)

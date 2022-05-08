@@ -18,7 +18,7 @@ public class FruitTransactionImpl implements FruitTransaction {
         for (int i = 1; i < listFromFile.size(); i++) {
             String[] line = listFromFile.get(i).split(",");
             Operation operation = Operation.getOperation(line[OPERATION_INDEX]);
-            Fruit fruit = new CreateFruitImpl()
+            Fruit fruit = new FruitCreatorImpl()
                     .createFruit(line[FRUIT_NAME_INDEX], line[FRUIT_AMOUNT_INDEX]);
             new OperationStrategyImpl(activityServiceMap)
                     .get(operation)

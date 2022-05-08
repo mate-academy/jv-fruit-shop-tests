@@ -7,34 +7,44 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String fileName = "temp.csv";
-    private static final String wrongName = "src/temp/temp.csv";
-    private static final Path path = Paths.get(fileName);
-    private static final FileWriter fileWriter = new FileWriterImpl();
-    private static final List<String> lines = List.of(
+    private static final List<String> LINES = List.of(
             "type,name,quantity",
             "b,banana,100",
             "b,apple,10",
             "s,banana,100",
             "p,banana,1");
+    private static Path path;
+    private static FileWriter fileWriter;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        fileWriter = new FileWriterImpl();
+    }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_NotOK() throws IOException {
-        fileWriter.writeToFile(wrongName, lines);
+        String wrongName = "src/temp/temp.csv";
+        fileWriter.writeToFile(wrongName, LINES);
     }
 
     @Test
     public void writeToFile_OK() throws IOException {
+        String fileName = "temp.csv";
+        path = Paths.get(fileName);
         File file = new File(fileName);
-        fileWriter.writeToFile(fileName, lines);
-        Assert.assertTrue(Files.exists(path));
+        fileWriter.writeToFile(fileName, LINES);
+        Assert.assertTrue("Test failed! File: " + fileName + " - doesn't exist",
+                Files.exists(path));
         List<String> linesFromFile = Files.readAllLines(file.toPath());
+        Assert.assertEquals("Test failed! Expected size of List: " + LINES.size(),
+                LINES.size(), linesFromFile.size());
         for (int i = 0; i < linesFromFile.size(); i++) {
-            Assert.assertEquals(lines.get(i), linesFromFile.get(i));
+            Assert.assertEquals("Test failed! The line №: " + i + " is not as expected",
+                    LINES.get(i), linesFromFile.get(i));
         }
-        Files.deleteIfExists(path);
     }
 }

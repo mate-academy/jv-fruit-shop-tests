@@ -72,9 +72,8 @@ public class FruitServiceTest {
 
     private String read() {
         StringBuilder readData = new StringBuilder();
-        try {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(OUTPUT_FILE))) {
             String line;
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(OUTPUT_FILE));
             while ((line = bufferedReader.readLine()) != null) {
                 readData.append(line).append(System.lineSeparator());
             }

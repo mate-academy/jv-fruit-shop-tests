@@ -37,14 +37,7 @@ public class ParserServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                         new Fruit("lemon"), 100));
         List<FruitTransaction> actual = parserService.parse(data);
-
-        if (actual.size() == expected.size()) {
-            for (int i = 0; i < expected.size(); i++) {
-                assertEquals(expected.get(i).getFruit(), actual.get(i).getFruit());
-                assertEquals(expected.get(i).getOperation(), actual.get(i).getOperation());
-                assertEquals(expected.get(i).getQuantity(), actual.get(i).getQuantity());
-            }
-        }
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

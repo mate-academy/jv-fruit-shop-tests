@@ -12,7 +12,7 @@ public class WriterServiceTest {
     private static WriterService writerService;
     private static final String OUTPUT_FILE = "src/test/resources/after.csv";
     private static final String WRONG_OUTPUT_FILE = "folder/pictures/after.csv";
-    private static String expected = "";
+    private static String expected;
 
     @BeforeClass
     public static void beforeClass() throws Exception {

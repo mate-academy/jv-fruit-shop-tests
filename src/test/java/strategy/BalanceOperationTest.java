@@ -17,7 +17,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_RemnantsOfFruits_OK() {
+    public void balanceOperation_OK() {
         int storeQuantity = 0;
         FruitTransaction transaction =
                 new FruitTransaction(

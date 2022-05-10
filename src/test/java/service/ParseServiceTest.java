@@ -1,12 +1,11 @@
 package service;
 
-import dao.DatabaseDao;
-import dao.DatabaseDaoImpl;
 import db.Database;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import model.FruitTransaction;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -23,19 +22,14 @@ import strategy.impl.SupplyOperationImpl;
 
 public class ParseServiceTest {
     private static ParseService parseService;
-    private static Map<String, Integer> expected;
     private static List<FruitTransaction> transactions;
     private static StrategyService strategyService;
-    private static DatabaseDao dao;
 
     @BeforeClass
     public static void beforeClass() {
         parseService = new ParseServiceImpl();
-        expected = new HashMap<>();
         transactions = new ArrayList<>();
-        dao = new DatabaseDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> strategyMap = new HashMap<>();
-
         strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationImpl());
         strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl());
         strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationImpl());
@@ -61,10 +55,12 @@ public class ParseServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.getByValue("p"), "banana", 5));
         transactions.add(
                 new FruitTransaction(FruitTransaction.Operation.getByValue("s"), "banana", 50));
+        Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 152);
         expected.put("apple", 90);
         parseService.parse(transactions, strategyService);
-        Map<String, Integer> actual = dao.getAllFruits();
+        Map<String, Integer> actual = Database.database.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         Assert.assertEquals(expected, actual);
     }
 

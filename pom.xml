@@ -91,10 +91,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/Configuration*</exclude>
-                        <exclude>**/TransactionHandlerImpl*</exclude>
-                        <exclude>**/Fruit*</exclude>
-                        <exclude>**/FruitTransaction*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

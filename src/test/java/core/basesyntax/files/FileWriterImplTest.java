@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class FileWriterImplTest {
             "b,apple,10",
             "s,banana,100",
             "p,banana,1");
-    private static Path path;
+
     private static FileWriter fileWriter;
 
     @BeforeClass
@@ -34,7 +35,7 @@ public class FileWriterImplTest {
     @Test
     public void writeToFile_OK() throws IOException {
         String fileName = "temp.csv";
-        path = Paths.get(fileName);
+        Path path = Paths.get(fileName);
         File file = new File(fileName);
         fileWriter.writeToFile(fileName, LINES);
         Assert.assertTrue("Test failed! File: " + fileName + " - doesn't exist",
@@ -46,5 +47,12 @@ public class FileWriterImplTest {
             Assert.assertEquals("Test failed! The line №: " + i + " is not as expected",
                     LINES.get(i), linesFromFile.get(i));
         }
+    }
+
+    @AfterClass//I want after the tests all the garbage in the form of test files was removed !!!
+    public static void afterClass() throws Exception {
+        String fileName = "temp.csv";
+        Path path = Paths.get(fileName);
+        Files.deleteIfExists(path);
     }
 }

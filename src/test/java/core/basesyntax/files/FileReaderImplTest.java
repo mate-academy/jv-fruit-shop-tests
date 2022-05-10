@@ -6,8 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,6 +21,10 @@ public class FileReaderImplTest {
     public static void beforeClass() throws Exception {
         path = Paths.get(FILE_NAME);
         fileReader = new FileReaderImpl();
+    }
+
+    @Before
+    public void setUp() throws Exception {
         Files.deleteIfExists(path);
     }
 
@@ -49,8 +54,8 @@ public class FileReaderImplTest {
         fileReader.readFromFile(FILE_NAME);
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass//I want after the tests all the garbage in the form of test files was removed !!!
+    public static void afterClass() throws Exception {
         Files.deleteIfExists(path);
     }
 }

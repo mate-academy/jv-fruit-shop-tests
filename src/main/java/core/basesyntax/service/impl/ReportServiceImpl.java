@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class ReportServiceImpl implements ReportService {
-
     @Override
     public List<String> makeReport(Set<Map.Entry<Fruit, Integer>> storageStatus) {
         if (storageStatus == null) {

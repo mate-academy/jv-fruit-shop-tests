@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="946595ab-0e2e-411d-9b53-0861061f3117" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="293bAnAvvJqTD5by5RVWMIrRjX5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/vdats/OneDrive/Desktop/projects/my-project/lab016-jv-fruit-shop",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vdats\OneDrive\Desktop\projects\my-project\lab017-jv-fruit-shop-tests\src\main\java\core\basesyntax" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="core.basesyntax" />
+      <recent name="core.basesyntax.db" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.All in jv-fruit-shop-tests">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="core.basesyntax.Main" />
+      <module name="jv-fruit-shop-tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="core.basesyntax.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in jv-fruit-shop-tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jv-fruit-shop-tests" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StorageDaoImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jv-fruit-shop-tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="core.basesyntax.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="core.basesyntax.dao" />
+      <option name="MAIN_CLASS_NAME" value="core.basesyntax.dao.StorageDaoImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="core.basesyntax in jv-fruit-shop-tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jv-fruit-shop-tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="core.basesyntax.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="core.basesyntax" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in jv-fruit-shop-tests" />
+        <item itemvalue="JUnit.StorageDaoImplTest" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.core.basesyntax in jv-fruit-shop-tests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="946595ab-0e2e-411d-9b53-0861061f3117" name="Changes" comment="" />
+      <created>1652344585431</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652344585431</updated>
+      <workItem from="1652344589972" duration="4263000" />
+      <workItem from="1652351412176" duration="2783000" />
+      <workItem from="1652367819332" duration="2195000" />
+      <workItem from="1652385187586" duration="4965000" />
+      <workItem from="1652436258990" duration="3835000" />
+      <workItem from="1652442457342" duration="3184000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

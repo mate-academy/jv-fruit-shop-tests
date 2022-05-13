@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8774d51-b031-4c6c-b00c-3db29a6527f0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/dao/StorageDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/dao/StorageDaoImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/db/Storage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/model/Fruit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/model/FruitTransaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/FileReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/FruitTransactionParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/Operation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/OperationStrategyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/ReportCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/Writer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/impl/FileReaderImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/impl/FruitTransactionParserImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/impl/OperationImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/impl/OperationStrategyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/impl/ReportCreatorImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/impl/WriterImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/strategy/BalanceHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/strategy/OperationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/strategy/PurchaseHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/strategy/ReturnHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/java/core/basesyntax/service/strategy/SupplyHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../main/resources/input.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/dao/StorageDaoImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/impl/FileReaderImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/impl/FruitTransactionParserImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/impl/OperationImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/impl/OperationStrategyServiceImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/impl/ReportCreatorImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/impl/WriterImplTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/strategy/BalanceHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/strategy/PurchaseHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/strategy/ReturnHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java/core/basesyntax/service/strategy/SupplyHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/ExpectedFile.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/TestInput.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="294mBiD4SI0aWPmkeCrPC2ura5b" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/vdats/OneDrive/Desktop/projects/my-project/test"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8774d51-b031-4c6c-b00c-3db29a6527f0" name="Changes" comment="" />
+      <created>1652380598071</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652380598071</updated>
+      <workItem from="1652380599880" duration="56000" />
+      <workItem from="1652380687990" duration="19000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

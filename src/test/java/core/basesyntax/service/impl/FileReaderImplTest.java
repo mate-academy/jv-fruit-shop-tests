@@ -26,5 +26,4 @@ public class FileReaderImplTest {
     public void read_wrongInputPath_NotOk() {
         fileReader.read("src/test2/resources/TestInput.csv");
     }
-
 }

@@ -21,20 +21,10 @@ public class StorageDaoImplTest {
 
     @Test
     public void update_addFruit_Ok() {
-        Fruit apple = new Fruit("orange");
-        storageDao.update(apple, 101);
+        Fruit orange = new Fruit("orange");
+        storageDao.update(orange, 101);
         int expected = 101;
-        int actual = Storage.dataBase.get(apple);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void update_addMore_Ok() {
-        Fruit apple = new Fruit("banana");
-        Storage.dataBase.put(apple, 14);
-        storageDao.update(apple, 16);
-        int expected = 30;
-        int actual = Storage.dataBase.get(apple);
+        int actual = Storage.dataBase.get(orange);
         assertEquals(expected, actual);
     }
 
@@ -49,10 +39,7 @@ public class StorageDaoImplTest {
 
     @Test
     public void get_notExisting_NotOk() {
-        Fruit apple = new Fruit("apple");
-        Fruit orange = new Fruit("orange");
-        Storage.dataBase.put(apple, 99);
-        Integer actual = storageDao.get(orange);
+        Integer actual = storageDao.get(new Fruit("orange"));
         assertNull(actual);
     }
 
@@ -62,7 +49,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void addAll_correct_Ok() {
+    public void addAll_Ok() {
         Storage.dataBase.put(new Fruit("apple"), 50);
         Storage.dataBase.put(new Fruit("orange"), 12);
         Storage.dataBase.put(new Fruit("banana"), 67);

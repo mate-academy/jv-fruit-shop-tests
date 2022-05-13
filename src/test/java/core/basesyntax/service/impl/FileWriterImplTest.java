@@ -42,12 +42,12 @@ public class FileWriterImplTest {
                 + "orange,10"
                 + System.lineSeparator();
         fileWriter.write(report, "src/test/resources/ToFile.csv");
-        List<String> actual = reader("src/test/resources/ToFile.csv");
-        List<String> expected = reader("src/test/resources/ExpectedFile.csv");
+        List<String> actual = readFromFile("src/test/resources/ToFile.csv");
+        List<String> expected = readFromFile("src/test/resources/ExpectedFile.csv");
         assertEquals(actual, expected);
     }
 
-    private List<String> reader(String filePath) {
+    private List<String> readFromFile(String filePath) {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {

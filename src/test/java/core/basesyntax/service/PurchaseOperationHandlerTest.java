@@ -20,6 +20,7 @@ public class PurchaseOperationHandlerTest {
     @BeforeClass
     public static void init() {
         storageDao = new StorageDaoImpl();
+        operationHandler = new PurchaseOperationHandler(storageDao);
     }
 
     @After
@@ -34,7 +35,6 @@ public class PurchaseOperationHandlerTest {
                 FruitTransaction.Operation.PURCHASE,
                 new Fruit("apple"),
                 40);
-        operationHandler = new PurchaseOperationHandler(storageDao);
         operationHandler.handle(transaction);
         int expected = 60;
         int actual = FruitStorage.fruits.get(new Fruit("apple"));
@@ -48,7 +48,6 @@ public class PurchaseOperationHandlerTest {
                 FruitTransaction.Operation.PURCHASE,
                 new Fruit("orange"),
                 200);
-        operationHandler = new PurchaseOperationHandler(storageDao);
         operationHandler.handle(transaction);
     }
 
@@ -59,7 +58,6 @@ public class PurchaseOperationHandlerTest {
                 FruitTransaction.Operation.PURCHASE,
                 new Fruit("pineapple"),
                 20);
-        operationHandler = new PurchaseOperationHandler(storageDao);
         operationHandler.handle(transaction);
     }
 }

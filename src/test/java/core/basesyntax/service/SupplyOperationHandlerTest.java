@@ -20,6 +20,7 @@ public class SupplyOperationHandlerTest {
     @BeforeClass
     public static void init() {
         storageDao = new StorageDaoImpl();
+        operationHandler = new SupplyOperationHandler(storageDao);
     }
 
     @After
@@ -34,7 +35,6 @@ public class SupplyOperationHandlerTest {
                 FruitTransaction.Operation.SUPPLY,
                 new Fruit("orange"),
                 60);
-        operationHandler = new SupplyOperationHandler(storageDao);
         operationHandler.handle(transaction);
         int expected = 102;
         int actual = FruitStorage.fruits.get(new Fruit("orange"));

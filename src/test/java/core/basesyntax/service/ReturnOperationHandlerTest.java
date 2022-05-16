@@ -20,6 +20,7 @@ public class ReturnOperationHandlerTest {
     @BeforeClass
     public static void init() {
         storageDao = new StorageDaoImpl();
+        operationHandler = new ReturnOperationHandler(storageDao);
     }
 
     @After
@@ -34,7 +35,6 @@ public class ReturnOperationHandlerTest {
                 FruitTransaction.Operation.RETURN,
                 new Fruit("kiwi"),
                 10);
-        operationHandler = new ReturnOperationHandler(storageDao);
         operationHandler.handle(transaction);
         int expected = 30;
         int actual = FruitStorage.fruits.get(new Fruit("kiwi"));

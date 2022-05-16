@@ -20,6 +20,7 @@ public class BalanceOperationHandlerTest {
     @BeforeClass
     public static void init() {
         storageDao = new StorageDaoImpl();
+        operationHandler = new BalanceOperationHandler(storageDao);
     }
 
     @After
@@ -33,7 +34,6 @@ public class BalanceOperationHandlerTest {
                 FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"),
                 200);
-        operationHandler = new BalanceOperationHandler(storageDao);
         operationHandler.handle(transaction);
         int expected = 200;
         int actual = FruitStorage.fruits.get(new Fruit("banana"));

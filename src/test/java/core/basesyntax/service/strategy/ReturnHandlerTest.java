@@ -3,6 +3,7 @@ package core.basesyntax.service.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,24 +21,27 @@ public class ReturnHandlerTest {
     @Before
     public void setUp() {
         fruitTransaction = new FruitTransaction();
-        fruitTransaction.setFruit("apple");
-        fruitTransaction.setQuantity(20);
-        returnHandler.handle(fruitTransaction);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 
     @Test
     public void handle_validData_Ok() {
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(20);
+        returnHandler.handle(fruitTransaction);
         Assert.assertTrue(Storage.fruits.containsKey(new Fruit("apple")));
+        Integer amountActual = Storage.fruits.get(new Fruit("apple"));
+        Integer amountExpected = 20;
+        Assert.assertEquals(amountExpected, amountActual);
     }
 
-    @Test
-    public void handle_NotExistedFruit_notOk() {
-        Assert.assertFalse(Storage.fruits.containsKey(new Fruit("banana")));
-    }
-
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_null_notOk() {
-        FruitTransaction fruitTransaction = null;
+        fruitTransaction = null;
         returnHandler.handle(fruitTransaction);
     }
 }

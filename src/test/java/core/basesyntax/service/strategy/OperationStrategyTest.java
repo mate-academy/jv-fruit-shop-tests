@@ -12,6 +12,9 @@ public class OperationStrategyTest {
     private static Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
     private OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
     private OperationHandler balanceHandler = new BalanceHandler();
+    private OperationHandler purchaseHandler = new PurchaseHandler();
+    private OperationHandler returnHandler = new ReturnHandler();
+    private OperationHandler supplyHandler = new SupplyHandler();
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,12 +25,22 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void get_validDataTheSameClass_Ok() {
-        OperationHandler handlerActual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
-        assertEquals(balanceHandler.getClass(), handlerActual.getClass());
+    public void get_validDataCheckTheSameClasses_Ok() {
+        OperationHandler handlerBalanceActual =
+                operationStrategy.get(FruitTransaction.Operation.BALANCE);
+        assertEquals(balanceHandler.getClass(), handlerBalanceActual.getClass());
+        OperationHandler handlerSupplyActual =
+                operationStrategy.get(FruitTransaction.Operation.SUPPLY);
+        assertEquals(supplyHandler.getClass(), handlerSupplyActual.getClass());
+        OperationHandler handlerReturnActual =
+                operationStrategy.get(FruitTransaction.Operation.RETURN);
+        assertEquals(returnHandler.getClass(), handlerReturnActual.getClass());
+        OperationHandler handlerPurchaseActual =
+                operationStrategy.get(FruitTransaction.Operation.PURCHASE);
+        assertEquals(purchaseHandler.getClass(), handlerPurchaseActual.getClass());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void get_null_notOk() {
         OperationHandler handler = operationStrategy.get(null);
         handler.getClass();

@@ -14,6 +14,9 @@ public class BalanceHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction == null) {
+            throw new RuntimeException("Can't handle null data.");
+        }
         storageService.add(new Fruit(fruitTransaction.getFruit()), fruitTransaction.getQuantity());
     }
 }

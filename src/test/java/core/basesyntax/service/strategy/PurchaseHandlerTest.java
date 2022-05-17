@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,8 +15,12 @@ public class PurchaseHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         purchaseHandler = new PurchaseHandler();
-        fruitTransaction = new FruitTransaction();
         Storage.fruits.put(new Fruit("apple"), 100);
+    }
+
+    @Before
+    public void setUp() {
+        fruitTransaction = new FruitTransaction();
     }
 
     @Test
@@ -36,15 +41,9 @@ public class PurchaseHandlerTest {
         purchaseHandler.handle(fruitTransaction);
     }
 
-    @Test
-    public void handle_NotExistedFruit_notOk() {
-        fruitTransaction.setFruit("banana");
-        Assert.assertFalse(Storage.fruits.containsKey(fruitTransaction.getFruit()));
-    }
-
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_null_notOk() {
-        FruitTransaction fruitTransaction = null;
+        fruitTransaction = null;
         purchaseHandler.handle(fruitTransaction);
     }
 }

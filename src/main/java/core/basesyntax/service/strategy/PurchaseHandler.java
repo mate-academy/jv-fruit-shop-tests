@@ -14,6 +14,9 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction == null) {
+            throw new RuntimeException("Can't handle null data.");
+        }
         int totalAmount = storageService
                 .get(new Fruit(fruitTransaction.getFruit()), fruitTransaction.getQuantity());
         int remnant = totalAmount - fruitTransaction.getQuantity();

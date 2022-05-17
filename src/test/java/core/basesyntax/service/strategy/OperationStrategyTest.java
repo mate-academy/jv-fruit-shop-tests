@@ -42,7 +42,6 @@ public class OperationStrategyTest {
 
     @Test(expected = RuntimeException.class)
     public void get_null_notOk() {
-        OperationHandler handler = operationStrategy.get(null);
-        handler.getClass();
+        operationStrategy.get(null);
     }
 }

@@ -28,6 +28,9 @@ public class StorageServiceTest {
         int amount = 5;
         storageService.add(fruit, amount);
         assertTrue(Storage.fruits.containsKey(fruit));
+        Integer amountActual = Storage.fruits.get(fruit);
+        Integer amountExpected = 5;
+        assertEquals(amountExpected, amountActual);
     }
 
     @Test
@@ -35,9 +38,9 @@ public class StorageServiceTest {
         Fruit fruit = new Fruit("banana");
         int amount = 5;
         storageService.add(fruit, amount);
-        Fruit fruit1 = new Fruit("banana");
-        int amount1 = 50;
-        storageService.add(fruit1, amount1);
+        Fruit sameFruit = new Fruit("banana");
+        int sameAmount = 50;
+        storageService.add(sameFruit, sameAmount);
         Integer expectedAmount = 55;
         Integer actualAmount = Storage.fruits.get(fruit);
         assertEquals(expectedAmount, actualAmount);
@@ -47,9 +50,12 @@ public class StorageServiceTest {
     public void get_validDataFromStorage_Ok() {
         Fruit fruit = new Fruit("apple");
         int amount = 5;
-        storageService.add(fruit, amount);
+        Storage.fruits.put(fruit, amount);
         storageService.get(new Fruit("apple"), 5);
         assertTrue(Storage.fruits.containsKey(fruit));
+        Integer expectedAmount = 5;
+        Integer actualAmount = Storage.fruits.get(fruit);
+        assertEquals(expectedAmount, actualAmount);
     }
 
     @Test(expected = RuntimeException.class)
@@ -67,8 +73,7 @@ public class StorageServiceTest {
         Fruit fruit = new Fruit("apple");
         int amountAdd = 50;
         int amountGet = 5;
-        storageService.add(fruit, amountAdd);
-        storageService.get(new Fruit("apple"), amountGet);
+        Storage.fruits.put(fruit, amountAdd);
         storageService.update(fruit, amountAdd - amountGet);
         Integer remnantActual = Storage.fruits.get(fruit);
         Integer expected = 45;

@@ -15,50 +15,57 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void updateOneFruit_Ok() {
-        fruitDao.update("banana", 33);
+    public void update_OneFruit_Ok() {
+        int fruitNumber = 33;
+        fruitDao.update("banana", fruitNumber);
         int actual = Storage.fruits.get("banana");
-        assertEquals(33, actual);
+        assertEquals(fruitNumber, actual);
     }
 
     @Test
-    public void updateTwoFruits_Ok() {
+    public void update_TwoFruits_Ok() {
         fruitDao.update("banana", 13);
-        int actualBanana = Storage.fruits.get("banana");
         fruitDao.update("apple", 18);
+        int actualBanana = Storage.fruits.get("banana");
         int actualApple = Storage.fruits.get("apple");
-        assertEquals(13, actualBanana);
-        assertEquals(18, actualApple);
+        int expectedBanana = 13;
+        int expectedApple = 18;
+        assertEquals(expectedBanana, actualBanana);
+        assertEquals(expectedApple, actualApple);
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateNullValue_NotOk() {
-        fruitDao.update(null, null);
-        fruitDao.update(null, 41);
+    public void update_NullValue_NotOk() {
         fruitDao.update("banana", null);
+        fruitDao.update(null, 6);
+        fruitDao.update(null, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateNegative_NotOk() {
+    public void update_Negative_NotOk() {
         fruitDao.update("banana", -18);
     }
 
     @Test
-    public void updateZeroAmount_Ok() {
+    public void update_ZeroAmount_Ok() {
+        int expected = 0;
         fruitDao.update("banana", 0);
+        int actual = Storage.fruits.get("banana");
+        assertEquals(expected, actual);
     }
 
     @Test
     public void getQuantity_Ok() {
-        fruitDao.update("apple", 23);
+        int expected = 23;
+        Storage.fruits.put("apple", 23);
         int actual = fruitDao.getQuantity("apple");
-        assertEquals(23, actual);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void getQuantity_DoesntExist_NotOk() {
-        fruitDao.update("apple", 45);
-        fruitDao.update("banana", 54);
+        Storage.fruits.put("apple", 45);
+        Storage.fruits.put("banana", 54);
         fruitDao.getQuantity("pineapple");
     }
 }

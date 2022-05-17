@@ -39,7 +39,7 @@ public class ReturnHandlerTest {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
-        int actual = fruitDao.getQuantity(transaction.getFruit());
+        int actual = Storage.fruits.get(transaction.getFruit());
         assertEquals(8, actual);
     }
 }

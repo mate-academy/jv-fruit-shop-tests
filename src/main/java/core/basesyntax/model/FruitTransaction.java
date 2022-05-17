@@ -37,7 +37,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private final String operation;
 
         Operation(String operation) {
             this.operation = operation;
@@ -58,7 +58,7 @@ public class FruitTransaction {
                     return op;
                 }
             }
-            return null;
+            throw new RuntimeException("There's no such an operation: " + letter);
         }
     }
 

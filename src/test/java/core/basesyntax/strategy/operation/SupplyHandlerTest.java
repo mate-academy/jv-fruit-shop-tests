@@ -39,7 +39,7 @@ public class SupplyHandlerTest {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
-        int actual = fruitDao.getQuantity(fruitName);
+        int actual = Storage.fruits.get(fruitName);
         assertEquals(16, actual);
     }
 }

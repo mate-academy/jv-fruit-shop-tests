@@ -37,7 +37,7 @@ public class BalanceHandlerTest {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
-        int actual = fruitDao.getQuantity(fruitName);
+        int actual = Storage.fruits.get(fruitName);
         assertEquals(31, actual);
     }
 }

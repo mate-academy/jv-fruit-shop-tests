@@ -18,7 +18,7 @@ public class OperationStrategyImplTest {
     private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Test
-    public void getHandler_Ok() {
+    public void getHandler_Balance_Ok() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
@@ -31,16 +31,49 @@ public class OperationStrategyImplTest {
                 .Operation.BALANCE);
         BalanceHandler expectedB = new BalanceHandler(fruitDao);
         assertEquals(expectedB.getClass(), actualB.getClass());
+    }
 
-        OperationHandler actualS = operationStrategy.getHandler(FruitTransaction
-                .Operation.SUPPLY);
-        SupplyHandler expectedS = new SupplyHandler(fruitDao);
-        assertEquals(expectedS.getClass(), actualS.getClass());
+    @Test
+    public void getHandler_Purchase_Ok() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
+
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         OperationHandler actualP = operationStrategy.getHandler(FruitTransaction
                 .Operation.PURCHASE);
         PurchaseHandler expectedP = new PurchaseHandler(fruitDao);
         assertEquals(expectedP.getClass(), actualP.getClass());
+    }
+
+    @Test
+    public void getHandler_Supply_Ok() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
+
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+
+        OperationHandler actualS = operationStrategy.getHandler(FruitTransaction
+                .Operation.SUPPLY);
+        SupplyHandler expectedS = new SupplyHandler(fruitDao);
+        assertEquals(expectedS.getClass(), actualS.getClass());
+    }
+
+    @Test
+    public void getHandler_Return_Ok() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
+
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         OperationHandler actualR = operationStrategy.getHandler(FruitTransaction
                 .Operation.RETURN);

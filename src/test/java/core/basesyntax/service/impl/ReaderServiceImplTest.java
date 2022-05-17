@@ -27,7 +27,12 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void wrongFileName_NotOk() {
+    public void readFromFile_invalidFileName_NotOk() {
         List<String> actual = readerService.readFromFile("src/main/resources/file1.csv");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_nullFilePath_NotOk() {
+        readerService.readFromFile(null);
     }
 }

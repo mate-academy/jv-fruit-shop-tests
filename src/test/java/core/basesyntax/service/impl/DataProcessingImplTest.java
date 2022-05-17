@@ -48,55 +48,56 @@ public class DataProcessingImplTest {
         data.add("p,banana,5");
         data.add("s,banana,50");
 
-        FruitTransaction transaction1 = new FruitTransaction();
-        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setQuantity(20);
+        // transaction code: "transaction" + operationFirstLetter + fruitFirstLetter + amount
+        FruitTransaction transactionBB20 = new FruitTransaction();
+        transactionBB20.setOperation(FruitTransaction.Operation.BALANCE);
+        transactionBB20.setFruit("banana");
+        transactionBB20.setQuantity(20);
 
-        FruitTransaction transaction2 = new FruitTransaction();
-        transaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction2.setFruit("apple");
-        transaction2.setQuantity(100);
+        FruitTransaction transactionBA100 = new FruitTransaction();
+        transactionBA100.setOperation(FruitTransaction.Operation.BALANCE);
+        transactionBA100.setFruit("apple");
+        transactionBA100.setQuantity(100);
 
-        FruitTransaction transaction3 = new FruitTransaction();
-        transaction3.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction3.setFruit("banana");
-        transaction3.setQuantity(100);
+        FruitTransaction transactionSB100 = new FruitTransaction();
+        transactionSB100.setOperation(FruitTransaction.Operation.SUPPLY);
+        transactionSB100.setFruit("banana");
+        transactionSB100.setQuantity(100);
 
-        FruitTransaction transaction4 = new FruitTransaction();
-        transaction4.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction4.setFruit("banana");
-        transaction4.setQuantity(13);
+        FruitTransaction transactionPB13 = new FruitTransaction();
+        transactionPB13.setOperation(FruitTransaction.Operation.PURCHASE);
+        transactionPB13.setFruit("banana");
+        transactionPB13.setQuantity(13);
 
-        FruitTransaction transaction5 = new FruitTransaction();
-        transaction5.setOperation(FruitTransaction.Operation.RETURN);
-        transaction5.setFruit("apple");
-        transaction5.setQuantity(10);
+        FruitTransaction transactionRA10 = new FruitTransaction();
+        transactionRA10.setOperation(FruitTransaction.Operation.RETURN);
+        transactionRA10.setFruit("apple");
+        transactionRA10.setQuantity(10);
 
-        FruitTransaction transaction6 = new FruitTransaction();
-        transaction6.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction6.setFruit("apple");
-        transaction6.setQuantity(20);
+        FruitTransaction transactionPA20 = new FruitTransaction();
+        transactionPA20.setOperation(FruitTransaction.Operation.PURCHASE);
+        transactionPA20.setFruit("apple");
+        transactionPA20.setQuantity(20);
 
-        FruitTransaction transaction7 = new FruitTransaction();
-        transaction7.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction7.setFruit("banana");
-        transaction7.setQuantity(5);
+        FruitTransaction transactionPB5 = new FruitTransaction();
+        transactionPB5.setOperation(FruitTransaction.Operation.PURCHASE);
+        transactionPB5.setFruit("banana");
+        transactionPB5.setQuantity(5);
 
-        FruitTransaction transaction8 = new FruitTransaction();
-        transaction8.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction8.setFruit("banana");
-        transaction8.setQuantity(50);
+        FruitTransaction transactionSB50 = new FruitTransaction();
+        transactionSB50.setOperation(FruitTransaction.Operation.SUPPLY);
+        transactionSB50.setFruit("banana");
+        transactionSB50.setQuantity(50);
 
         List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(transaction1);
-        expected.add(transaction2);
-        expected.add(transaction3);
-        expected.add(transaction4);
-        expected.add(transaction5);
-        expected.add(transaction6);
-        expected.add(transaction7);
-        expected.add(transaction8);
+        expected.add(transactionBB20);
+        expected.add(transactionBA100);
+        expected.add(transactionSB100);
+        expected.add(transactionPB13);
+        expected.add(transactionRA10);
+        expected.add(transactionPA20);
+        expected.add(transactionPB5);
+        expected.add(transactionSB50);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         DataProcessing dataProcessing = new DataProcessingImpl(operationStrategy);

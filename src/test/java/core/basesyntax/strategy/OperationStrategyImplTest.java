@@ -12,21 +12,26 @@ import core.basesyntax.strategy.operation.ReturnHandler;
 import core.basesyntax.strategy.operation.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private final FruitDao fruitDao = new FruitDaoImpl();
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+            = new HashMap<>();
+    private final OperationStrategy operationStrategy
+            = new OperationStrategyImpl(operationHandlerMap);
 
-    @Test
-    public void getHandler_Balance_Ok() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+    @Before
+    public void setUp() {
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
+    }
 
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-
+    @Test
+    public void getHandler_Balance_Ok() {
         OperationHandler actualB = operationStrategy.getHandler(FruitTransaction
                 .Operation.BALANCE);
         BalanceHandler expectedB = new BalanceHandler(fruitDao);
@@ -35,14 +40,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandler_Purchase_Ok() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-
         OperationHandler actualP = operationStrategy.getHandler(FruitTransaction
                 .Operation.PURCHASE);
         PurchaseHandler expectedP = new PurchaseHandler(fruitDao);
@@ -51,14 +48,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandler_Supply_Ok() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-
         OperationHandler actualS = operationStrategy.getHandler(FruitTransaction
                 .Operation.SUPPLY);
         SupplyHandler expectedS = new SupplyHandler(fruitDao);
@@ -67,14 +56,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandler_Return_Ok() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-
         OperationHandler actualR = operationStrategy.getHandler(FruitTransaction
                 .Operation.RETURN);
         ReturnHandler expectedR = new ReturnHandler(fruitDao);

@@ -13,7 +13,7 @@ public class WriterServiceImplTest {
     private final WriterService writerService = new WriterServiceImpl();
 
     @Test
-    public void writeToFile_Ok() throws IOException {
+    public void writeToFile_Ok() {
         String filePath = "src/main/resources/test_report.csv";
         StringBuilder stringBuilderExpected = new StringBuilder();
         stringBuilderExpected.append("fruit,quantity").append(System.lineSeparator())
@@ -23,12 +23,19 @@ public class WriterServiceImplTest {
         writerService.writeToFile(filePath, expectedReport);
 
         StringBuilder stringBuilderActual = new StringBuilder();
+
         File file = new File(filePath);
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        String st;
-        while ((st = bufferedReader.readLine()) != null) {
-            stringBuilderActual.append(st).append(System.lineSeparator());
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(file));
+            String st;
+            while ((st = bufferedReader.readLine()) != null) {
+                stringBuilderActual.append(st).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Something went wrong...");
         }
+
         String actualReport = stringBuilderActual.substring(0, stringBuilderActual
                 .lastIndexOf(System.lineSeparator()));
 

@@ -37,7 +37,15 @@ public class FruitDaoImplTest {
     @Test(expected = RuntimeException.class)
     public void update_NullValue_NotOk() {
         fruitDao.update("banana", null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void update_NullKey_NotOk() {
         fruitDao.update(null, 6);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void update_NullData_NotOk() {
         fruitDao.update(null, null);
     }
 

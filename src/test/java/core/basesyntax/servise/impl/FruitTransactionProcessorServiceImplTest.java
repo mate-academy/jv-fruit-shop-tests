@@ -46,26 +46,10 @@ public class FruitTransactionProcessorServiceImplTest {
         Map<String, Integer> expectedDB = new HashMap<>();
         expectedDB.put("banana", 20);
         expectedDB.put("apple", 25);
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setFruit("banana");
-        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        firstTransaction.setQuantity(40);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setFruit("banana");
-        secondTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        secondTransaction.setQuantity(20);
-        FruitTransaction thirdTransaction = new FruitTransaction();
-        thirdTransaction.setFruit("apple");
-        thirdTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        thirdTransaction.setQuantity(15);
-        FruitTransaction fourthTransaction = new FruitTransaction();
-        fourthTransaction.setFruit("apple");
-        fourthTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fourthTransaction.setQuantity(10);
-        fruitTransactions.add(firstTransaction);
-        fruitTransactions.add(secondTransaction);
-        fruitTransactions.add(thirdTransaction);
-        fruitTransactions.add(fourthTransaction);
+        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 40);
+        setTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20);
+        setTransaction(FruitTransaction.Operation.RETURN, "apple", 15);
+        setTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10);
         processorService.process(fruitTransactions);
         Assert.assertEquals(expectedDB.entrySet(), Storage.fruitStorage.entrySet());
         Assert.assertEquals(expectedDB.size(), Storage.fruitStorage.size());
@@ -73,16 +57,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithNullOperation_notOk() {
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setOperation(null);
-        firstTransaction.setFruit("banana");
-        firstTransaction.setQuantity(15);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        secondTransaction.setFruit("banana");
-        secondTransaction.setQuantity(15);
-        fruitTransactions.add(firstTransaction);
-        fruitTransactions.add(secondTransaction);
+        setTransaction(null, "banana", 15);
+        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -93,16 +69,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithNullFruitName_notOk() {
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        firstTransaction.setFruit(null);
-        firstTransaction.setQuantity(15);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        secondTransaction.setFruit("banana");
-        secondTransaction.setQuantity(15);
-        fruitTransactions.add(firstTransaction);
-        fruitTransactions.add(secondTransaction);
+        setTransaction(FruitTransaction.Operation.SUPPLY, null, 15);
+        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -113,16 +81,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithNegativeQuantity_notOk() {
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        firstTransaction.setFruit("banana");
-        firstTransaction.setQuantity(-15);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        secondTransaction.setFruit("banana");
-        secondTransaction.setQuantity(5);
-        fruitTransactions.add(firstTransaction);
-        fruitTransactions.add(secondTransaction);
+        setTransaction(FruitTransaction.Operation.SUPPLY, "banana", -15);
+        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 5);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -133,21 +93,21 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithEmptyFruitName_notOk() {
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        firstTransaction.setFruit("");
-        firstTransaction.setQuantity(15);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        secondTransaction.setFruit("banana");
-        secondTransaction.setQuantity(15);
-        fruitTransactions.add(firstTransaction);
-        fruitTransactions.add(secondTransaction);
+        setTransaction(FruitTransaction.Operation.SUPPLY, "", 15);
+        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
             return;
         }
         Assert.fail("Should be thrown RuntimeException");
+    }
+
+    private void setTransaction(FruitTransaction.Operation operation, String fruit, int quantity) {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(operation);
+        fruitTransaction.setQuantity(quantity);
+        fruitTransaction.setFruit(fruit);
+        fruitTransactions.add(fruitTransaction);
     }
 }

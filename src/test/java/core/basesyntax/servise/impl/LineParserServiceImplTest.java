@@ -11,29 +11,23 @@ import org.junit.Test;
 
 public class LineParserServiceImplTest {
     private static LineParserService lineParserService;
+    private static List<FruitTransaction> expected;
 
     @BeforeClass
     public static void beforeClass() {
         lineParserService = new LineParserServiceImpl();
+        expected = new ArrayList<>();
     }
 
     @After
-    public void tearDown() {
+    public void after() {
+        expected.clear();
     }
 
     @Test
     public void parse_validStringList_Ok() {
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setFruit("banana");
-        firstTransaction.setQuantity(20);
-        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setFruit("apple");
-        secondTransaction.setQuantity(100);
-        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(firstTransaction);
-        expected.add(secondTransaction);
+        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        setTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
         List<String> toParse = new ArrayList<>();
         toParse.add("type,fruit,quantity");
         toParse.add("b,banana,20");
@@ -75,5 +69,13 @@ public class LineParserServiceImplTest {
             return;
         }
         Assert.fail("Should be thrown RuntimeException");
+    }
+
+    private void setTransaction(FruitTransaction.Operation operation, String fruit, int quantity) {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(operation);
+        fruitTransaction.setQuantity(quantity);
+        fruitTransaction.setFruit(fruit);
+        expected.add(fruitTransaction);
     }
 }

@@ -44,6 +44,17 @@ public class StorageDaoImplTest {
     }
 
     @Test
+    public void getQuantity_getQuantityByInvalidFruit_notOk() {
+        Storage.fruitStorage.put("apple", 13);
+        try {
+            storageDao.getQuantity("banana");
+        } catch (RuntimeException e) {
+            return;
+        }
+        Assert.fail("Should be thrown RuntimeException");
+    }
+
+    @Test
     public void isPresent_checkIfPresentInStorage_Ok() {
         Storage.fruitStorage.put("apple", 100);
         boolean actual = storageDao.isPresent("apple");

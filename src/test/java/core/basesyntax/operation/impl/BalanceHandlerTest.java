@@ -25,12 +25,9 @@ public class BalanceHandlerTest {
 
     @Before
     public void setUp() {
-        final String fruit = "apple";
-        final int quantity = 10;
-        final FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        fruitTransaction.setFruit(fruit);
-        fruitTransaction.setQuantity(quantity);
-        fruitTransaction.setOperation(operation);
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(10);
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         exception = new Exception();
     }
 
@@ -105,8 +102,8 @@ public class BalanceHandlerTest {
         } catch (Exception e) {
             exception = e;
         }
-        FruitTransaction.Operation operation;
-        operation = Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
+        FruitTransaction.Operation operation =
+                Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
         Assert.assertSame(Exception.class, exception.getClass());
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());

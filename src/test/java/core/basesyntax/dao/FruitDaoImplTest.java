@@ -22,12 +22,9 @@ public class FruitDaoImplTest {
 
     @Before
     public void setUp() {
-        final String fruit = "apple";
-        final int quantity = 10;
-        final FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-        fruitTransaction.setFruit(fruit);
-        fruitTransaction.setQuantity(quantity);
-        fruitTransaction.setOperation(operation);
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(10);
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         exception = new Exception();
     }
 
@@ -125,18 +122,17 @@ public class FruitDaoImplTest {
 
     @Test
     public void getAll_emptyStorage_OK() {
-        List<FruitTransaction> fruitTransactionList = fruitDao.getAll();
-        Assert.assertEquals(0, fruitTransactionList.size());
+        List<FruitTransaction> fruitTransactions = fruitDao.getAll();
+        Assert.assertEquals(0, fruitTransactions.size());
     }
 
     @Test
     public void getAll_nonEmptyStorage_OK() {
         fruitDao.add(fruitTransaction);
-        List<FruitTransaction> fruitList = fruitDao.getAll();
-        Assert.assertEquals(1, fruitList.size());
-        Assert.assertEquals("apple", fruitList.get(0).getFruit());
-        Assert.assertEquals(10, fruitList.get(0).getQuantity());
-        Assert.assertEquals(FruitTransaction.Operation.BALANCE, fruitList.get(0).getOperation());
+        List<FruitTransaction> fruitTransactions = fruitDao.getAll();
+        Assert.assertEquals(1, fruitTransactions.size());
+        Assert.assertEquals("apple", fruitTransactions.get(0).getFruit());
+        Assert.assertEquals(10, fruitTransactions.get(0).getQuantity());
     }
 
     @After

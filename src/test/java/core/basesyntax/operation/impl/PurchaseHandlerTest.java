@@ -27,12 +27,9 @@ public class PurchaseHandlerTest {
 
     @Before
     public void setUp() {
-        final String fruit = "apple";
-        final int quantity = 10;
-        final FruitTransaction.Operation operation = FruitTransaction.Operation.PURCHASE;
-        fruitTransaction.setFruit(fruit);
-        fruitTransaction.setQuantity(quantity);
-        fruitTransaction.setOperation(operation);
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(10);
+        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         purchaseFruitTransaction.setFruit("apple");
         purchaseFruitTransaction.setQuantity(11);
         purchaseFruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
@@ -128,8 +125,8 @@ public class PurchaseHandlerTest {
         } catch (Exception e) {
             exception = e;
         }
-        FruitTransaction.Operation operation;
-        operation = Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
+        FruitTransaction.Operation operation =
+                Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
         Assert.assertSame(Exception.class, exception.getClass());
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());

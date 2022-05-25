@@ -22,20 +22,13 @@ public class ReturnHandlerTest {
         FruitDao fruitDao = new FruitDaoImpl();
         operationHandler = new ReturnHandler(fruitDao);
         fruitTransaction = new FruitTransaction();
-        returnFruitTransaction = new FruitTransaction();
     }
 
     @Before
     public void setUp() {
-        final String fruit = "apple";
-        final int quantity = 10;
-        final FruitTransaction.Operation operation = FruitTransaction.Operation.RETURN;
-        fruitTransaction.setFruit(fruit);
-        fruitTransaction.setQuantity(quantity);
-        fruitTransaction.setOperation(operation);
-        returnFruitTransaction.setFruit("apple");
-        returnFruitTransaction.setQuantity(11);
-        returnFruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(10);
+        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         exception = new Exception();
     }
 
@@ -115,15 +108,18 @@ public class ReturnHandlerTest {
 
     @Test
     public void getHandler_notNullFruitInDB_OK() {
-        Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction);
+        FruitTransaction returnFruitTransaction = new FruitTransaction();
+        returnFruitTransaction.setFruit("apple");
         returnFruitTransaction.setQuantity(9);
+        returnFruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
+        Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction);
         try {
             operationHandler.getHandler(returnFruitTransaction);
         } catch (Exception e) {
             exception = e;
         }
-        FruitTransaction.Operation operation;
-        operation = Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
+        FruitTransaction.Operation operation =
+                Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
         Assert.assertSame(Exception.class, exception.getClass());
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());

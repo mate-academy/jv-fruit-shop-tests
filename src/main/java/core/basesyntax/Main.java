@@ -8,7 +8,7 @@ import core.basesyntax.operation.impl.BalanceHandler;
 import core.basesyntax.operation.impl.PurchaseHandler;
 import core.basesyntax.operation.impl.ReturnHandler;
 import core.basesyntax.operation.impl.SupplyHandler;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
@@ -37,7 +37,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         ReaderService readerService = new ReaderServiceImpl();
-        ParseService parseService = new ParseServiceImpl();
+        ParserService parseService = new ParseServiceImpl();
 
         List<String> stringsFromFile = readerService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions = parseService.parse(stringsFromFile);

@@ -14,7 +14,6 @@ import org.junit.Test;
 public class SupplyHandlerTest {
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
-    private static FruitTransaction supplyFruitTransaction;
     private static Exception exception;
 
     @BeforeClass
@@ -22,20 +21,13 @@ public class SupplyHandlerTest {
         FruitDao fruitDao = new FruitDaoImpl();
         operationHandler = new SupplyHandler(fruitDao);
         fruitTransaction = new FruitTransaction();
-        supplyFruitTransaction = new FruitTransaction();
     }
 
     @Before
     public void setUp() {
-        final String fruit = "apple";
-        final int quantity = 10;
-        final FruitTransaction.Operation operation = FruitTransaction.Operation.SUPPLY;
-        fruitTransaction.setFruit(fruit);
-        fruitTransaction.setQuantity(quantity);
-        fruitTransaction.setOperation(operation);
-        supplyFruitTransaction.setFruit("apple");
-        supplyFruitTransaction.setQuantity(11);
-        supplyFruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(10);
+        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         exception = new Exception();
     }
 
@@ -115,15 +107,18 @@ public class SupplyHandlerTest {
 
     @Test
     public void getHandler_notNullFruitInDB_OK() {
-        Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction);
+        FruitTransaction supplyFruitTransaction = new FruitTransaction();
+        supplyFruitTransaction.setFruit("apple");
         supplyFruitTransaction.setQuantity(9);
+        supplyFruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction);
         try {
             operationHandler.getHandler(supplyFruitTransaction);
         } catch (Exception e) {
             exception = e;
         }
-        FruitTransaction.Operation operation;
-        operation = Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
+        FruitTransaction.Operation operation =
+                Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
         Assert.assertSame(Exception.class, exception.getClass());
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());

@@ -26,8 +26,8 @@ public class LineParserServiceImplTest {
 
     @Test
     public void parse_validStringList_Ok() {
-        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
-        setTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
         List<String> toParse = new ArrayList<>();
         toParse.add("type,fruit,quantity");
         toParse.add("b,banana,20");
@@ -71,7 +71,8 @@ public class LineParserServiceImplTest {
         Assert.fail("Should be thrown RuntimeException");
     }
 
-    private void setTransaction(FruitTransaction.Operation operation, String fruit, int quantity) {
+    private void addFruitTransaction(FruitTransaction.Operation operation, String fruit,
+                                     int quantity) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(operation);
         fruitTransaction.setQuantity(quantity);

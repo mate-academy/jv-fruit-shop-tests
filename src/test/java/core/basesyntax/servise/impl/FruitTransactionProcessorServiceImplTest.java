@@ -46,10 +46,10 @@ public class FruitTransactionProcessorServiceImplTest {
         Map<String, Integer> expectedDB = new HashMap<>();
         expectedDB.put("banana", 20);
         expectedDB.put("apple", 25);
-        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 40);
-        setTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20);
-        setTransaction(FruitTransaction.Operation.RETURN, "apple", 15);
-        setTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 40);
+        addFruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20);
+        addFruitTransaction(FruitTransaction.Operation.RETURN, "apple", 15);
+        addFruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10);
         processorService.process(fruitTransactions);
         Assert.assertEquals(expectedDB.entrySet(), Storage.fruitStorage.entrySet());
         Assert.assertEquals(expectedDB.size(), Storage.fruitStorage.size());
@@ -57,8 +57,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithNullOperation_notOk() {
-        setTransaction(null, "banana", 15);
-        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
+        addFruitTransaction(null, "banana", 15);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -69,8 +69,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithNullFruitName_notOk() {
-        setTransaction(FruitTransaction.Operation.SUPPLY, null, 15);
-        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
+        addFruitTransaction(FruitTransaction.Operation.SUPPLY, null, 15);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -81,8 +81,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithNegativeQuantity_notOk() {
-        setTransaction(FruitTransaction.Operation.SUPPLY, "banana", -15);
-        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 5);
+        addFruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", -15);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 5);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -93,8 +93,8 @@ public class FruitTransactionProcessorServiceImplTest {
 
     @Test
     public void process_transactionWithEmptyFruitName_notOk() {
-        setTransaction(FruitTransaction.Operation.SUPPLY, "", 15);
-        setTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
+        addFruitTransaction(FruitTransaction.Operation.SUPPLY, "", 15);
+        addFruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 15);
         try {
             processorService.process(fruitTransactions);
         } catch (RuntimeException e) {
@@ -103,7 +103,8 @@ public class FruitTransactionProcessorServiceImplTest {
         Assert.fail("Should be thrown RuntimeException");
     }
 
-    private void setTransaction(FruitTransaction.Operation operation, String fruit, int quantity) {
+    private void addFruitTransaction(FruitTransaction.Operation operation, String fruit,
+                                     int quantity) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(operation);
         fruitTransaction.setQuantity(quantity);

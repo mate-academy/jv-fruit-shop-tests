@@ -5,22 +5,15 @@ import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
-    private static Exception exception;
 
     @BeforeClass
     public static void beforeClass() {
         reportService = new ReportServiceImpl();
-    }
-
-    @Before
-    public void setUp() {
-        exception = new Exception();
     }
 
     @Test
@@ -28,9 +21,8 @@ public class ReportServiceImplTest {
         try {
             reportService.getReport(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
@@ -46,13 +38,7 @@ public class ReportServiceImplTest {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(appleTransaction);
         fruitTransactions.add(bananaTransaction);
-        String report = null;
-        try {
-            report = reportService.getReport(fruitTransactions);
-        } catch (Exception e) {
-            exception = e;
-        }
-        Assert.assertSame(Exception.class, exception.getClass());
+        String report = reportService.getReport(fruitTransactions);
         Assert.assertEquals("fruit,quantity" + System.lineSeparator()
                 + "apple,10" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator(), report);

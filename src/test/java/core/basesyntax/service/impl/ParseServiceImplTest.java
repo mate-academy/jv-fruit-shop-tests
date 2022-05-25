@@ -5,22 +5,15 @@ import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParseServiceImplTest {
     private static ParserService parseService;
-    private static Exception exception;
 
     @BeforeClass
     public static void beforeClass() {
         parseService = new ParseServiceImpl();
-    }
-
-    @Before
-    public void setUp() {
-        exception = new Exception();
     }
 
     @Test
@@ -28,24 +21,17 @@ public class ParseServiceImplTest {
         try {
             parseService.parse(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
     public void parse_goodList_OK() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         List<String> lines = new ArrayList<>();
         lines.add("operation,fruit,quantity");
         lines.add("b,apple,10");
         lines.add("s,banana,20");
-        try {
-            fruitTransactions = parseService.parse(lines);
-        } catch (Exception e) {
-            exception = e;
-        }
-        Assert.assertSame(Exception.class, exception.getClass());
+        List<FruitTransaction> fruitTransactions = parseService.parse(lines);
         Assert.assertEquals(2, fruitTransactions.size());
         Assert.assertEquals("apple", fruitTransactions.get(0).getFruit());
         Assert.assertEquals(10, fruitTransactions.get(0).getQuantity());

@@ -14,7 +14,6 @@ import org.junit.Test;
 public class BalanceHandlerTest {
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
-    private static Exception exception;
 
     @BeforeClass
     public static void beforeClass() {
@@ -28,7 +27,6 @@ public class BalanceHandlerTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(10);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        exception = new Exception();
     }
 
     @After
@@ -41,9 +39,8 @@ public class BalanceHandlerTest {
         try {
             operationHandler.getHandler(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -53,9 +50,8 @@ public class BalanceHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -65,9 +61,8 @@ public class BalanceHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -77,9 +72,8 @@ public class BalanceHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -89,22 +83,16 @@ public class BalanceHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
     @Test
     public void getHandler_goodData_OK() {
-        try {
-            operationHandler.getHandler(fruitTransaction);
-        } catch (Exception e) {
-            exception = e;
-        }
+        operationHandler.getHandler(fruitTransaction);
         FruitTransaction.Operation operation =
                 Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
-        Assert.assertSame(Exception.class, exception.getClass());
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());
         Assert.assertEquals(10,Storage.fruits.get(fruitTransaction.getFruit()).getQuantity());

@@ -14,7 +14,6 @@ import org.junit.Test;
 public class SupplyHandlerTest {
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
-    private static Exception exception;
 
     @BeforeClass
     public static void beforeClass() {
@@ -28,7 +27,6 @@ public class SupplyHandlerTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(10);
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        exception = new Exception();
     }
 
     @After
@@ -41,9 +39,8 @@ public class SupplyHandlerTest {
         try {
             operationHandler.getHandler(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
@@ -52,9 +49,8 @@ public class SupplyHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
@@ -63,9 +59,8 @@ public class SupplyHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
@@ -74,9 +69,8 @@ public class SupplyHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
@@ -85,19 +79,13 @@ public class SupplyHandlerTest {
         try {
             operationHandler.getHandler(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
     public void getHandler_nullFruitInDB_OK() {
-        try {
-            operationHandler.getHandler(fruitTransaction);
-        } catch (Exception e) {
-            exception = e;
-        }
-        Assert.assertSame(Exception.class, exception.getClass());
+        operationHandler.getHandler(fruitTransaction);
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());
         Assert.assertEquals(10,Storage.fruits.get(fruitTransaction.getFruit()).getQuantity());
@@ -112,14 +100,9 @@ public class SupplyHandlerTest {
         supplyFruitTransaction.setQuantity(9);
         supplyFruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction);
-        try {
-            operationHandler.getHandler(supplyFruitTransaction);
-        } catch (Exception e) {
-            exception = e;
-        }
+        operationHandler.getHandler(supplyFruitTransaction);
         FruitTransaction.Operation operation =
                 Storage.fruits.get(fruitTransaction.getFruit()).getOperation();
-        Assert.assertSame(Exception.class, exception.getClass());
         Assert.assertEquals(1, Storage.fruits.size());
         Assert.assertEquals("apple", Storage.fruits.get(fruitTransaction.getFruit()).getFruit());
         Assert.assertEquals(19,Storage.fruits.get(fruitTransaction.getFruit()).getQuantity());

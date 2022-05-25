@@ -12,7 +12,6 @@ import org.junit.Test;
 public class FruitDaoImplTest {
     private static FruitDao fruitDao;
     private static FruitTransaction fruitTransaction;
-    private static Exception exception;
 
     @BeforeClass
     public static void beforeClass() {
@@ -25,7 +24,6 @@ public class FruitDaoImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(10);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        exception = new Exception();
     }
 
     @Test
@@ -33,9 +31,8 @@ public class FruitDaoImplTest {
         try {
             fruitDao.add(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -45,9 +42,8 @@ public class FruitDaoImplTest {
         try {
             fruitDao.add(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -57,9 +53,8 @@ public class FruitDaoImplTest {
         try {
             fruitDao.add(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -69,9 +64,8 @@ public class FruitDaoImplTest {
         try {
             fruitDao.add(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
@@ -81,20 +75,14 @@ public class FruitDaoImplTest {
         try {
             fruitDao.add(fruitTransaction);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
         Assert.assertEquals(0, Storage.fruits.size());
     }
 
     @Test
     public void add_goodData_OK() {
-        try {
-            fruitDao.add(fruitTransaction);
-        } catch (Exception e) {
-            exception = e;
-        }
-        Assert.assertSame(Exception.class, exception.getClass());
+        fruitDao.add(fruitTransaction);
         Assert.assertEquals(1, Storage.fruits.size());
     }
 
@@ -104,9 +92,8 @@ public class FruitDaoImplTest {
         try {
             fruitDao.get(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
@@ -115,9 +102,8 @@ public class FruitDaoImplTest {
         try {
             fruitDao.get("apple1");
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test

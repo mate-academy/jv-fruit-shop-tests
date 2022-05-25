@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.impl.BalanceHandler;
 import core.basesyntax.operation.impl.PurchaseHandler;
-import core.basesyntax.operation.impl.SupplyHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.junit.Test;
 public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
-    private static Exception exception;
 
     @BeforeClass
     public static void beforeClass() {
@@ -31,7 +29,6 @@ public class OperationStrategyImplTest {
                 new BalanceHandler(new FruitDaoImpl()));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseHandler(new FruitDaoImpl()));
-        exception = new Exception();
     }
 
     @Test
@@ -39,20 +36,13 @@ public class OperationStrategyImplTest {
         try {
             operationStrategy.process(null);
         } catch (Exception e) {
-            exception = e;
+            Assert.assertSame(RuntimeException.class, e.getClass());
         }
-        Assert.assertSame(RuntimeException.class, exception.getClass());
     }
 
     @Test
     public void process_goodOperation_OK() {
-        OperationHandler operationHandler = new SupplyHandler(new FruitDaoImpl());
-        try {
-            operationHandler = operationStrategy.process(FruitTransaction.Operation.BALANCE);
-        } catch (Exception e) {
-            exception = e;
-        }
-        Assert.assertSame(Exception.class, exception.getClass());
-        Assert.assertSame(BalanceHandler.class, operationHandler.getClass());
+        OperationHandler handler = operationStrategy.process(FruitTransaction.Operation.BALANCE);
+        Assert.assertSame(BalanceHandler.class, handler.getClass());
     }
 }

@@ -25,7 +25,7 @@ public class FruitTransactionParserImplTest {
     private static FruitService fruitService;
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUp() {
         fruitService = new FruitServiceImpl(fruitDao);
     }
 
@@ -80,7 +80,12 @@ public class FruitTransactionParserImplTest {
         FruitTransaction transactionRA10 = new FruitTransaction();
         transactionRA10.setOperation(FruitTransaction.Operation.RETURN);
         transactionRA10.setFruit("apple");
-        transactionRA10.setQuantity(20);
+        transactionRA10.setQuantity(10);
+
+        FruitTransaction transactionPA20 = new FruitTransaction();
+        transactionPA20.setOperation(FruitTransaction.Operation.PURCHASE);
+        transactionPA20.setFruit("banana");
+        transactionPA20.setQuantity(20);
 
         FruitTransaction transactionPB5 = new FruitTransaction();
         transactionPB5.setOperation(FruitTransaction.Operation.PURCHASE);
@@ -90,7 +95,7 @@ public class FruitTransactionParserImplTest {
         FruitTransaction transactionSB50 = new FruitTransaction();
         transactionSB50.setOperation(FruitTransaction.Operation.SUPPLY);
         transactionSB50.setFruit("banana");
-        transactionSB50.setQuantity(20);
+        transactionSB50.setQuantity(50);
 
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(transactionBB20);
@@ -98,6 +103,7 @@ public class FruitTransactionParserImplTest {
         expected.add(transactionSB100);
         expected.add(transactionPB13);
         expected.add(transactionRA10);
+        expected.add(transactionPA20);
         expected.add(transactionPB5);
         expected.add(transactionSB50);
 
@@ -106,7 +112,6 @@ public class FruitTransactionParserImplTest {
         FruitTransactionParser fruitTransactionParser =
                 new FruitTransactionParserImpl(operationStrategy);
         List<FruitTransaction> actual = fruitTransactionParser.parse(dataParse);
-
         assertEquals(expected,actual);
     }
 }

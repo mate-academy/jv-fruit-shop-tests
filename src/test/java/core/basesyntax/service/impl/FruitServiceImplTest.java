@@ -1,0 +1,82 @@
+package core.basesyntax.service.impl;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.FruitService;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.After;
+import org.junit.jupiter.api.Test;
+
+public class FruitServiceImplTest {
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitService fruitService = new FruitServiceImpl(fruitDao);
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
+    }
+
+    @Test
+    public void update_Ok() {
+        Storage.fruits.put("apple", 15);
+        fruitService.update("apple", 18);
+        int actualResult = Storage.fruits.get("apple");
+        assertEquals(18, actualResult);
+    }
+
+    @Test
+    public void update_FruitNull_NotOk() {
+        Storage.fruits.put("apple", 15);
+        assertThrows(RuntimeException.class, () -> fruitService.update(null, 23));
+    }
+
+    @Test
+    public void update_AmountNull_NotOk() {
+        Storage.fruits.put("apple", 15);
+        assertThrows(RuntimeException.class, () -> fruitService.update("apple", null));
+    }
+
+    @Test
+    public void update_FruitAndAmountNull_NotOk() {
+        Storage.fruits.put("apple", 15);
+        assertThrows(RuntimeException.class, () -> fruitService.update(null, null));
+    }
+
+    @Test
+    public void update_NegativeAmount_NotOk() {
+        assertThrows(RuntimeException.class, () -> fruitService.update("apple", -15));
+    }
+
+    @Test
+    public void getAll_ok() {
+        Storage.fruits.put("banana", 67);
+        Storage.fruits.put("apple", 17);
+        List<Fruit> expectedList = new ArrayList<>();
+        Fruit banana = new Fruit("banana", 67);
+        Fruit apple = new Fruit("apple", 17);
+        expectedList.add(banana);
+        expectedList.add(apple);
+        List<Fruit> actualList = fruitService.getAll();
+        System.out.println(expectedList);
+        System.out.println(actualList);
+        assertEquals(expectedList,actualList);
+    }
+
+    @Test
+    public void getQuantity_Existing_Ok() {
+        Storage.fruits.put("banana", 67);
+        int actual = fruitService.getQuantity("banana");
+        assertEquals(67, actual);
+    }
+
+    @Test
+    public void getQuantity_NonExisting_NotOk() {
+        assertThrows(RuntimeException.class, () -> fruitService.getQuantity("apple"));
+    }
+}

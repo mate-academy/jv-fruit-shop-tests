@@ -3,8 +3,6 @@ package core.basesyntax.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import org.junit.After;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +12,7 @@ public class FruitDaoImplTest {
     private static FruitDao fruitDao;
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUp() {
         fruitDao = new FruitDaoImpl();
     }
 

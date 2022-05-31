@@ -69,17 +69,16 @@ public class FruitTransaction {
         if (this == o) {
             return true;
         }
-        if (o == null || o.getClass() != getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FruitTransaction transaction = (FruitTransaction) o;
-        return Objects.equals(transaction.fruit, fruit)
-                && Objects.equals(transaction.operation, operation)
-                && transaction.quantity == quantity;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruit, operation, quantity);
+        return Objects.hash(operation, fruit, quantity);
     }
 }

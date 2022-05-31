@@ -17,7 +17,7 @@ public class FruitReportImplTest {
     private static FruitReport fruitReport = new FruitReportImpl(fruitService);
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUp() {
         fruitReport = new FruitReportImpl(fruitService);
     }
 

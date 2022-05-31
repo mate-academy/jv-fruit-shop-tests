@@ -8,21 +8,33 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    public void findOperatorByLetter() {
+    public void findOperatorBalanceByLetter() {
         FruitTransaction.Operation exceptedBalance = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actualBalance =
                 FruitTransaction.Operation.findOperationByLetter("b");
         assertEquals(exceptedBalance, actualBalance);
+    }
+
+    @Test
+    public void findOperatorSupplyByLetter() {
         FruitTransaction.Operation exceptedSupply =
                 FruitTransaction.Operation.SUPPLY;
         FruitTransaction.Operation actualSupply =
                 FruitTransaction.Operation.findOperationByLetter("s");
         assertEquals(exceptedSupply, actualSupply);
+    }
+
+    @Test
+    public void findOperatorPurchaseByLetter() {
         FruitTransaction.Operation exceptedPurchase =
                 FruitTransaction.Operation.PURCHASE;
         FruitTransaction.Operation actualPurchase =
                 FruitTransaction.Operation.findOperationByLetter("p");
-        assertEquals(exceptedPurchase,actualPurchase);
+        assertEquals(exceptedPurchase, actualPurchase);
+    }
+
+    @Test
+    public void findOperatorReturnByLetter() {
         FruitTransaction.Operation exceptedReturn =
                 FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actualReturn =

@@ -51,4 +51,10 @@ public class FileReaderServiceImplTest {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readFromFile("src/main/resources/file1.csv"));
     }
+
+    @Test
+    public void readFile_WrongPathToFile_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> fileReaderService.readFromFile("src/resources/file.csv"));
+    }
 }

@@ -42,4 +42,24 @@ public class ReturnHandlerTest {
         int actualResult = Storage.fruits.get(fruitName);
         Assert.assertEquals(157, actualResult);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void handleReturnAmountNull_notOk() {
+        String fruitName = "banana";
+        fruitService.update(fruitName,null);
+
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
+        fruitTransaction.setFruit(fruitName);
+        fruitTransaction.setQuantity(23);
+
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap
+                .put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitService));
+
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        operationStrategy.getHandler(fruitTransaction.getOperation()).handle(fruitTransaction);
+        int actualResult = Storage.fruits.get(fruitName);
+        Assert.assertEquals(157, actualResult);
+    }
 }

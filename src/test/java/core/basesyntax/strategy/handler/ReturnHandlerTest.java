@@ -1,7 +1,5 @@
 package core.basesyntax.strategy.handler;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -13,6 +11,7 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ReturnHandlerTest {
@@ -41,6 +40,6 @@ public class ReturnHandlerTest {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationStrategy.getHandler(fruitTransaction.getOperation()).handle(fruitTransaction);
         int actualResult = Storage.fruits.get(fruitName);
-        assertEquals(157, actualResult);
+        Assert.assertEquals(157, actualResult);
     }
 }

@@ -18,16 +18,10 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 public class FruitTransactionParserImplTest {
-    private static final FruitDao fruitDao = new FruitDaoImpl();
-    private static FruitService fruitService;
-
-    @BeforeAll
-    static void setUp() {
-        fruitService = new FruitServiceImpl(fruitDao);
-    }
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitService fruitService = new FruitServiceImpl(fruitDao);
 
     @After
     public void tearDown() {

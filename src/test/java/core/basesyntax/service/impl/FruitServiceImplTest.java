@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -11,7 +10,7 @@ import core.basesyntax.service.FruitService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class FruitServiceImplTest {
     private final FruitDao fruitDao = new FruitDaoImpl();
@@ -30,27 +29,27 @@ public class FruitServiceImplTest {
         assertEquals(18, actualResult);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void update_FruitNull_NotOk() {
         Storage.fruits.put("apple", 15);
-        assertThrows(RuntimeException.class, () -> fruitService.update(null, 23));
+        fruitService.update(null, 23);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void update_AmountNull_NotOk() {
         Storage.fruits.put("apple", 15);
-        assertThrows(RuntimeException.class, () -> fruitService.update("apple", null));
+        fruitService.update("apple", null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void update_FruitAndAmountNull_NotOk() {
         Storage.fruits.put("apple", 15);
-        assertThrows(RuntimeException.class, () -> fruitService.update(null, null));
+        fruitService.update(null, null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void update_NegativeAmount_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitService.update("apple", -15));
+        fruitService.update("apple", -15);
     }
 
     @Test
@@ -75,8 +74,8 @@ public class FruitServiceImplTest {
         assertEquals(67, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getQuantity_NonExisting_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitService.getQuantity("apple"));
+        fruitService.getQuantity("apple");
     }
 }

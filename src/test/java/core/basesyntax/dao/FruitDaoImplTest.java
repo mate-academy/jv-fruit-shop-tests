@@ -1,20 +1,13 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import org.junit.After;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private static FruitDao fruitDao;
-
-    @BeforeAll
-    static void setUp() {
-        fruitDao = new FruitDaoImpl();
-    }
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @After
     public void tearDown() {
@@ -49,24 +42,24 @@ public class FruitDaoImplTest {
         assertEquals(fruitService,actualFruitNumber);
     }
 
-    @Test()
+    @Test(expected = RuntimeException.class)
     public void update_Negative_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitDao.update("apple", -10));
+        fruitDao.update("apple", -10);
     }
 
-    @Test()
+    @Test(expected = RuntimeException.class)
     public void update_AmountFruitNull_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitDao.update("apple", null));
+        fruitDao.update("apple", null);
     }
 
-    @Test()
+    @Test(expected = RuntimeException.class)
     public void update_FruitNameNull_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitDao.update(null, 12));
+        fruitDao.update(null, 12);
     }
 
-    @Test()
+    @Test(expected = RuntimeException.class)
     public void update_NameAndAmountNull_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitDao.update(null, null));
+        fruitDao.update(null, null);
     }
 
     @Test
@@ -77,27 +70,27 @@ public class FruitDaoImplTest {
         assertEquals(exceptedQuantity,actualQuantity);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getQuantityDoesExist_notOk() {
         Storage.fruits.put("apple", 1);
-        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity("tomato"));
+        fruitDao.getQuantity("tomato");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getQuantityRequestNull_notOk() {
         Storage.fruits.put("apple", 1);
-        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity(null));
+        fruitDao.getQuantity(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getQuantityRequestNumber_notOk() {
         Storage.fruits.put("apple", 1);
-        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity("1"));
+        fruitDao.getQuantity("1");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getQuantityRequestChar_notOk() {
         Storage.fruits.put("apple", 1);
-        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity("$"));
+        fruitDao.getQuantity("$");
     }
 }

@@ -9,17 +9,11 @@ import core.basesyntax.service.FruitReport;
 import core.basesyntax.service.FruitService;
 import org.junit.After;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 public class FruitReportImplTest {
-    private static final FruitDao fruitDao = new FruitDaoImpl();
-    private static final FruitService fruitService = new FruitServiceImpl(fruitDao);
-    private static FruitReport fruitReport = new FruitReportImpl(fruitService);
-
-    @BeforeAll
-    static void setUp() {
-        fruitReport = new FruitReportImpl(fruitService);
-    }
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitService fruitService = new FruitServiceImpl(fruitDao);
+    private final FruitReport fruitReport = new FruitReportImpl(fruitService);
 
     @After
     public void tearDown() {

@@ -2,21 +2,14 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static FileReaderService fileReaderService;
-
-    @BeforeAll
-    static void setUp() {
-        fileReaderService = new FileReaderServiceImpl();
-    }
+    private final FileReaderService fileReaderService = new FileReaderServiceImpl();
 
     @Test
     public void readFile_ok() {
@@ -35,28 +28,24 @@ public class FileReaderServiceImplTest {
         assertEquals(exceptedFile,actualFile);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_WrongFormatFile_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> fileReaderService.readFromFile("src/main/resources/file.css"));
+        fileReaderService.readFromFile("src/main/resources/file.css");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_NullFile_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> fileReaderService.readFromFile(null));
+        fileReaderService.readFromFile(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_WrongNameFile_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> fileReaderService.readFromFile("src/main/resources/file1.csv"));
+        fileReaderService.readFromFile("src/main/resources/file1.csv");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_WrongPathToFile_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> fileReaderService.readFromFile("src/resources/file.csv"));
+        fileReaderService.readFromFile("src/resources/file.csv");
     }
 
     @Test

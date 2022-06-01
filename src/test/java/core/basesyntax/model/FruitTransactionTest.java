@@ -1,11 +1,10 @@
 package core.basesyntax.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class FruitTransactionTest {
+public class FruitTransactionTest {
 
     @Test
     public void findOperatorBalanceByLetter_ok() {
@@ -42,34 +41,29 @@ class FruitTransactionTest {
         assertEquals(exceptedReturn,actualReturn);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperator_ByLetter_NonExistOperator_notOK() {
-        assertThrows(RuntimeException.class,
-                () -> FruitTransaction.Operation.findOperationByLetter("l"));
+        FruitTransaction.Operation.findOperationByLetter("l");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperator_ByNumber_NonExistOperator_notOK() {
-        assertThrows(RuntimeException.class,
-                () -> FruitTransaction.Operation.findOperationByLetter("6"));
+        FruitTransaction.Operation.findOperationByLetter("6");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperator_ByCharacter_NonExistOperator_notOK() {
-        assertThrows(RuntimeException.class,
-                () -> FruitTransaction.Operation.findOperationByLetter("#"));
+        FruitTransaction.Operation.findOperationByLetter("#");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperator_ByNull_NonExistOperator_notOK() {
-        assertThrows(RuntimeException.class,
-                () -> FruitTransaction.Operation.findOperationByLetter(null));
+        FruitTransaction.Operation.findOperationByLetter(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperator_ByEmpty_NonExistOperator_notOK() {
-        assertThrows(RuntimeException.class,
-                () -> FruitTransaction.Operation.findOperationByLetter(""));
+        FruitTransaction.Operation.findOperationByLetter("");
     }
 
 }

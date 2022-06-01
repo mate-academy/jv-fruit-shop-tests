@@ -1,7 +1,5 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -16,7 +14,8 @@ import core.basesyntax.strategy.handler.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private final FruitDao fruitDao = new FruitDaoImpl();
@@ -38,7 +37,7 @@ public class OperationStrategyImplTest {
         OperationHandler actualBalance =
                 operationStrategy.getHandler(FruitTransaction.Operation.BALANCE);
         BalanceHandler expectedBalance = new BalanceHandler(fruitService);
-        assertEquals(expectedBalance.getClass(),actualBalance.getClass());
+        Assert.assertEquals(expectedBalance.getClass(), actualBalance.getClass());
     }
 
     @Test
@@ -48,7 +47,7 @@ public class OperationStrategyImplTest {
         OperationHandler actualSupply =
                 operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
         SupplyHandler expectedSupply = new SupplyHandler(fruitService);
-        assertEquals(expectedSupply.getClass(),actualSupply.getClass());
+        Assert.assertEquals(expectedSupply.getClass(),actualSupply.getClass());
     }
 
     @Test
@@ -58,7 +57,7 @@ public class OperationStrategyImplTest {
         OperationHandler actualPurchase =
                 operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE);
         PurchaseHandler expectedPurchase = new PurchaseHandler(fruitService);
-        assertEquals(expectedPurchase.getClass(),actualPurchase.getClass());
+        Assert.assertEquals(expectedPurchase.getClass(),actualPurchase.getClass());
     }
 
     @Test
@@ -68,6 +67,6 @@ public class OperationStrategyImplTest {
         OperationHandler actualReturn =
                 operationStrategy.getHandler(FruitTransaction.Operation.RETURN);
         ReturnHandler expectedReturn = new ReturnHandler(fruitService);
-        assertEquals(expectedReturn.getClass(),actualReturn.getClass());
+        Assert.assertEquals(expectedReturn.getClass(),actualReturn.getClass());
     }
 }

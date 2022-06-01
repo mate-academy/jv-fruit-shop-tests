@@ -1,15 +1,13 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.service.FileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static final String FILE_TO_PATH = "src/main/resources/report.csv";
@@ -41,24 +39,21 @@ public class FileWriterServiceImplTest {
         String reportActual = stringBuilderActual
                 .substring(0, stringBuilderActual.lastIndexOf(System.lineSeparator()));
 
-        assertEquals(reportExcepted,reportActual);
+        Assert.assertEquals(reportExcepted, reportActual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeFileNull_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> writerService.writeToFile(FILE_TO_PATH, null));
+        writerService.writeToFile(FILE_TO_PATH, null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeFileWrongPath_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> writerService.writeToFile(FILE_WRONG_TO_PATH, ""));
+        writerService.writeToFile(FILE_WRONG_TO_PATH, "");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeFileNullPath_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> writerService.writeToFile(null, ""));
+        writerService.writeToFile(null, "");
     }
 }

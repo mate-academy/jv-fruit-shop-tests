@@ -40,4 +40,23 @@ public class BalanceHandlerTest {
         int actualResult = Storage.fruits.get(fruitName);
         Assert.assertEquals(23, actualResult);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void handleBalanceQuantityNull_notOk() {
+        String fruitName = "banana";
+        Integer fruitNumber = null;
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        fruitTransaction.setFruit(fruitName);
+        fruitTransaction.setQuantity(fruitNumber);
+
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap
+                .put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitService));
+
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        operationStrategy.getHandler(fruitTransaction.getOperation()).handle(fruitTransaction);
+        int actualResult = Storage.fruits.get(fruitName);
+        Assert.assertEquals(23, actualResult);
+    }
 }

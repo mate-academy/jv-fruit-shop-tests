@@ -66,4 +66,9 @@ public class FruitTransactionTest {
         FruitTransaction.Operation.findOperationByLetter("");
     }
 
+    @Test(expected = RuntimeException.class)
+    public void findOperator_ByCapitalLetter_notOk() {
+        FruitTransaction.Operation.findOperationByLetter("R");
+    }
+
 }

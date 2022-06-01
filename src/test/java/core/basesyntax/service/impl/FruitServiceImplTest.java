@@ -78,4 +78,11 @@ public class FruitServiceImplTest {
     public void getQuantity_NonExisting_NotOk() {
         fruitService.getQuantity("apple");
     }
+
+    @Test(expected = RuntimeException.class)
+    public void getQuantityNull_notOk() {
+        Storage.fruits.put("banana", null);
+        int actual = fruitService.getQuantity("banana");
+        assertEquals(67, actual);
+    }
 }

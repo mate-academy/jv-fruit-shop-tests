@@ -98,4 +98,21 @@ public class FileReaderServiceImplTest {
         List<String> actualFile = fileReaderService.readFromFile("src/main/resources/file.csv");
         assertNotEquals(exceptedFile,actualFile);
     }
+
+    @Test
+    public void readFileWithWrongName_NotOk() {
+        List<String> exceptedFile = new ArrayList<>();
+        exceptedFile.add("type,fruit,quantity");
+        exceptedFile.add("b,banana,20");
+        exceptedFile.add("b,apple,100");
+        exceptedFile.add("s,banaana,100");
+        exceptedFile.add("p,banana,13");
+        exceptedFile.add("r,apple,10");
+        exceptedFile.add("p,apple,20");
+        exceptedFile.add("p,banana,5");
+        exceptedFile.add("s,banana,50");
+
+        List<String> actualFile = fileReaderService.readFromFile("src/main/resources/file.csv");
+        assertNotEquals(exceptedFile,actualFile);
+    }
 }

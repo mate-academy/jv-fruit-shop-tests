@@ -96,7 +96,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>/Users/misha/jv-fruit-shop-tests/src/main/java/core/basesyntax/Main.java</exclude>
+                        <exclude>src/main/java/core/basesyntax/Main.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

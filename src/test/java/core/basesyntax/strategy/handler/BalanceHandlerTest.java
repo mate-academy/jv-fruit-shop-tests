@@ -53,7 +53,12 @@ public class BalanceHandlerTest {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap
                 .put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitService));
-
+        operationHandlerMap
+                .put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitService));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitService));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitService));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationStrategy.getHandler(fruitTransaction.getOperation()).handle(fruitTransaction);
         int actualResult = Storage.fruits.get(fruitName);

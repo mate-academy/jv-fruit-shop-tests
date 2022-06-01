@@ -82,4 +82,22 @@ public class FruitDaoImplTest {
         Storage.fruits.put("apple", 1);
         assertThrows(RuntimeException.class, () -> fruitDao.getQuantity("tomato"));
     }
+
+    @Test
+    public void getQuantityRequestNull_notOk() {
+        Storage.fruits.put("apple", 1);
+        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity(null));
+    }
+
+    @Test
+    public void getQuantityRequestNumber_notOk() {
+        Storage.fruits.put("apple", 1);
+        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity("1"));
+    }
+
+    @Test
+    public void getQuantityRequestChar_notOk() {
+        Storage.fruits.put("apple", 1);
+        assertThrows(RuntimeException.class, () -> fruitDao.getQuantity("$"));
+    }
 }

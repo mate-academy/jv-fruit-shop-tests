@@ -35,7 +35,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_WrongNameFile_notOk() {
+    public void readFile_WrongFormatFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readFromFile("src/main/resources/file.css"));
     }
@@ -44,5 +44,11 @@ public class FileReaderServiceImplTest {
     public void readFile_NullFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readFromFile(null));
+    }
+
+    @Test
+    public void readFile_WrongNameFile_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> fileReaderService.readFromFile("src/main/resources/file1.csv"));
     }
 }

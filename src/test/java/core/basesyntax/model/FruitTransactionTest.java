@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    public void findOperatorBalanceByLetter() {
+    public void findOperatorBalanceByLetter_ok() {
         FruitTransaction.Operation exceptedBalance = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actualBalance =
                 FruitTransaction.Operation.findOperationByLetter("b");
@@ -16,7 +16,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    public void findOperatorSupplyByLetter() {
+    public void findOperatorSupplyByLetter_ok() {
         FruitTransaction.Operation exceptedSupply =
                 FruitTransaction.Operation.SUPPLY;
         FruitTransaction.Operation actualSupply =
@@ -25,7 +25,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    public void findOperatorPurchaseByLetter() {
+    public void findOperatorPurchaseByLetter_ok() {
         FruitTransaction.Operation exceptedPurchase =
                 FruitTransaction.Operation.PURCHASE;
         FruitTransaction.Operation actualPurchase =
@@ -34,7 +34,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    public void findOperatorReturnByLetter() {
+    public void findOperatorReturnByLetter_ok() {
         FruitTransaction.Operation exceptedReturn =
                 FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actualReturn =
@@ -64,6 +64,12 @@ class FruitTransactionTest {
     public void findOperator_ByNull_NonExistOperator_notOK() {
         assertThrows(RuntimeException.class,
                 () -> FruitTransaction.Operation.findOperationByLetter(null));
+    }
+
+    @Test
+    public void findOperator_ByEmpty_NonExistOperator_notOK() {
+        assertThrows(RuntimeException.class,
+                () -> FruitTransaction.Operation.findOperationByLetter(""));
     }
 
 }

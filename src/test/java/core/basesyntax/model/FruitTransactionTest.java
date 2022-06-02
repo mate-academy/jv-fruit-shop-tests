@@ -7,7 +7,7 @@ import org.junit.Test;
 public class FruitTransactionTest {
 
     @Test
-    public void findOperatorBalanceByLetter_ok() {
+    public void findOperationByLetter_Balance_ok() {
         FruitTransaction.Operation exceptedBalance = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actualBalance =
                 FruitTransaction.Operation.findOperationByLetter("b");
@@ -15,7 +15,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void findOperatorSupplyByLetter_ok() {
+    public void findOperationByLetter_Supply_ok() {
         FruitTransaction.Operation exceptedSupply =
                 FruitTransaction.Operation.SUPPLY;
         FruitTransaction.Operation actualSupply =
@@ -24,7 +24,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void findOperatorPurchaseByLetter_ok() {
+    public void findOperationByLetter_Purchase_ok() {
         FruitTransaction.Operation exceptedPurchase =
                 FruitTransaction.Operation.PURCHASE;
         FruitTransaction.Operation actualPurchase =
@@ -33,7 +33,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void findOperatorReturnByLetter_ok() {
+    public void findOperationByLetter_Return_ok() {
         FruitTransaction.Operation exceptedReturn =
                 FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actualReturn =
@@ -70,5 +70,4 @@ public class FruitTransactionTest {
     public void findOperator_ByCapitalLetter_notOk() {
         FruitTransaction.Operation.findOperationByLetter("R");
     }
-
 }

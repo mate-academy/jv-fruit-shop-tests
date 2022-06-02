@@ -35,7 +35,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void update_ZeroFruit_Ok() {
+    public void update_ZeroAmount_Ok() {
         int fruitService = 0;
         fruitDao.update("apple", 0);
         int actualFruitNumber = Storage.fruits.get("apple");

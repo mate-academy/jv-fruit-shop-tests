@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -22,37 +21,24 @@ public class FruitReportImplTest {
     }
 
     @Test
-    public void getFruitReport_ok() {
+    public void getReport_ok() {
         Storage.fruits.put("banana",47);
         Storage.fruits.put("apple",15);
-        String actualResult = fruitReport.getReport();
+        String actual = fruitReport.getReport();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator())
                 .append("banana,47").append(System.lineSeparator())
                 .append("apple,15");
-        String expectedResult = stringBuilder.toString();
-        assertEquals(expectedResult,actualResult);
+        String expected = stringBuilder.toString();
+        assertEquals(expected,actual);
     }
 
     @Test
-    public void getEmptyFruitReport_notOk() {
-        String actualResult = fruitReport.getReport();
+    public void getReport_emptyStorage_Ok() {
+        String actual = fruitReport.getReport();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity");
-        String expectedResult = stringBuilder.toString();
-        assertEquals(expectedResult,actualResult);
-    }
-
-    @Test
-    public void getFruitDifferentReports_notOk() {
-        Storage.fruits.put("banana",42);
-        Storage.fruits.put("apple",13);
-        String actualResult = fruitReport.getReport();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,quantity").append(System.lineSeparator())
-                .append("banana,47").append(System.lineSeparator())
-                .append("apple,15");
-        String expectedResult = stringBuilder.toString();
-        assertNotEquals(expectedResult,actualResult);
+        String expected = stringBuilder.toString();
+        assertEquals(expected,actual);
     }
 }

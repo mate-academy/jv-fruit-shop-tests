@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
@@ -13,19 +12,19 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFile_ok() {
-        List<String> exceptedFile = new ArrayList<>();
-        exceptedFile.add("type,fruit,quantity");
-        exceptedFile.add("b,banana,20");
-        exceptedFile.add("b,apple,100");
-        exceptedFile.add("s,banana,100");
-        exceptedFile.add("p,banana,13");
-        exceptedFile.add("r,apple,10");
-        exceptedFile.add("p,apple,20");
-        exceptedFile.add("p,banana,5");
-        exceptedFile.add("s,banana,50");
+        List<String> excepted = new ArrayList<>();
+        excepted.add("type,fruit,quantity");
+        excepted.add("b,banana,20");
+        excepted.add("b,apple,100");
+        excepted.add("s,banana,100");
+        excepted.add("p,banana,13");
+        excepted.add("r,apple,10");
+        excepted.add("p,apple,20");
+        excepted.add("p,banana,5");
+        excepted.add("s,banana,50");
 
-        List<String> actualFile = fileReaderService.readFromFile("src/main/resources/file.csv");
-        assertEquals(exceptedFile,actualFile);
+        List<String> actual = fileReaderService.readFromFile("src/main/resources/file.csv");
+        assertEquals(excepted,actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -46,56 +45,5 @@ public class FileReaderServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void readFile_WrongPathToFile_notOk() {
         fileReaderService.readFromFile("src/resources/file.csv");
-    }
-
-    @Test
-    public void readFileWithWrongType_NotOk() {
-        List<String> exceptedFile = new ArrayList<>();
-        exceptedFile.add("type,fruit,quantity");
-        exceptedFile.add("w,banana,20");
-        exceptedFile.add("b,apple,100");
-        exceptedFile.add("s,bananas,1100");
-        exceptedFile.add("p,banana,13");
-        exceptedFile.add("r,apple,10");
-        exceptedFile.add("p,apple,20");
-        exceptedFile.add("p,banana,5");
-        exceptedFile.add("s,banana,50");
-
-        List<String> actualFile = fileReaderService.readFromFile("src/main/resources/file.csv");
-        assertNotEquals(exceptedFile,actualFile);
-    }
-
-    @Test
-    public void readFileWithWrongFruit_NotOk() {
-        List<String> exceptedFile = new ArrayList<>();
-        exceptedFile.add("type,fruit,quantity");
-        exceptedFile.add("b,banana,20");
-        exceptedFile.add("b,apple,100");
-        exceptedFile.add("s,bananas,1100");
-        exceptedFile.add("p,banana,13");
-        exceptedFile.add("r,applse,10");
-        exceptedFile.add("p,apple,20");
-        exceptedFile.add("p,banana,5");
-        exceptedFile.add("s,banana,50");
-
-        List<String> actualFile = fileReaderService.readFromFile("src/main/resources/file.csv");
-        assertNotEquals(exceptedFile,actualFile);
-    }
-
-    @Test
-    public void readFileWithWrongQuantity_NotOk() {
-        List<String> exceptedFile = new ArrayList<>();
-        exceptedFile.add("type,fruit,quantity");
-        exceptedFile.add("b,banana,20");
-        exceptedFile.add("b,apple,100");
-        exceptedFile.add("s,banana,1100");
-        exceptedFile.add("p,banana,13");
-        exceptedFile.add("r,apple,10");
-        exceptedFile.add("p,apple,20");
-        exceptedFile.add("p,banana,5");
-        exceptedFile.add("s,banana,50");
-
-        List<String> actualFile = fileReaderService.readFromFile("src/main/resources/file.csv");
-        assertNotEquals(exceptedFile,actualFile);
     }
 }

@@ -30,7 +30,7 @@ public class FruitServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void update_FruitNull_NotOk() {
+    public void update_nullFruit_NotOk() {
         Storage.fruits.put("apple", 15);
         fruitService.update(null, 23);
     }

@@ -15,15 +15,28 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final FruitService fruitService = new FruitServiceImpl(fruitDao);
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
-            new HashMap<>();
-    private final OperationStrategy operationStrategy =
-            new OperationStrategyImpl(operationHandlerMap);
+    private static FruitService fruitService;
+    private static OperationStrategy operationStrategy;
+
+    @BeforeClass
+    public static void setUp() {
+        FruitDao fruitDao = new FruitDaoImpl();
+        fruitService = new FruitServiceImpl(fruitDao);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        operationHandlerMap
+                .put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitService));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitService));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitService));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitService));
+    }
 
     @After
     public void tearDown() {
@@ -32,8 +45,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandlerBalance_Ok() {
-        operationHandlerMap
-                .put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitService));
         OperationHandler actualBalance =
                 operationStrategy.getHandler(FruitTransaction.Operation.BALANCE);
         BalanceHandler expectedBalance = new BalanceHandler(fruitService);
@@ -42,8 +53,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandlerSupply_Ok() {
-        operationHandlerMap
-                .put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitService));
         OperationHandler actualSupply =
                 operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
         SupplyHandler expectedSupply = new SupplyHandler(fruitService);
@@ -52,8 +61,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandlerPurchase_Ok() {
-        operationHandlerMap
-                .put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitService));
         OperationHandler actualPurchase =
                 operationStrategy.getHandler(FruitTransaction.Operation.PURCHASE);
         PurchaseHandler expectedPurchase = new PurchaseHandler(fruitService);
@@ -62,8 +69,6 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getHandlerReturn_Ok() {
-        operationHandlerMap
-                .put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitService));
         OperationHandler actualReturn =
                 operationStrategy.getHandler(FruitTransaction.Operation.RETURN);
         ReturnHandler expectedReturn = new ReturnHandler(fruitService);

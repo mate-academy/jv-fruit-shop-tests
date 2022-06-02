@@ -62,8 +62,6 @@ public class FruitServiceImplTest {
         expectedList.add(banana);
         expectedList.add(apple);
         List<Fruit> actualList = fruitService.getAll();
-        System.out.println(expectedList);
-        System.out.println(actualList);
         assertEquals(expectedList,actualList);
     }
 

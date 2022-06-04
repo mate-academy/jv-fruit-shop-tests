@@ -28,22 +28,22 @@ public class FruitServiceImplTest {
         Assert.assertEquals(10, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NullFruitName_NotOk() {
         fruitService.add(null, 10);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NullAmountValue_NotOk() {
         fruitService.add("banana", null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_BlankFruitName_NotOk() {
         fruitService.add(" ", 10);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NegativeAmountValue_NotOk() {
         fruitService.add("banana", -2);
     }
@@ -65,14 +65,10 @@ public class FruitServiceImplTest {
         }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getQuantity_NullValue_NotOk() {
         Storage.fruits.put("banana", 15);
-        try {
-            fruitService.getQuantity(null);
-        } catch (Exception e) {
-            Assert.assertSame(RuntimeException.class, e.getClass());
-        }
+        fruitService.getQuantity(null);
     }
 
     @Test

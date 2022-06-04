@@ -1,9 +1,7 @@
 package core.basesyntax.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
-import java.util.NoSuchElementException;
 import org.junit.Test;
 
 public class FruitTransactionTest {
@@ -35,39 +33,23 @@ public class FruitTransactionTest {
         assertEquals(expectedReturn, actualReturn);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperation_NonValidLetter_NotOK() {
-        try {
-            FruitTransaction.Operation.findByLetter("v");
-        } catch (Exception e) {
-            assertSame(NoSuchElementException.class, e.getClass());
-        }
+        FruitTransaction.Operation.findByLetter("v");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperation_NullValue_NotOk() {
-        try {
-            FruitTransaction.Operation.findByLetter(null);
-        } catch (Exception e) {
-            assertSame(NoSuchElementException.class, e.getClass());
-        }
+        FruitTransaction.Operation.findByLetter(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperation_NonValidCharacter_NotOk() {
-        try {
-            FruitTransaction.Operation.findByLetter("-");
-        } catch (Exception e) {
-            assertSame(NoSuchElementException.class, e.getClass());
-        }
+        FruitTransaction.Operation.findByLetter("-");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void findOperation_NumberValue_NotOk() {
-        try {
-            FruitTransaction.Operation.findByLetter("10");
-        } catch (Exception e) {
-            assertSame(NoSuchElementException.class, e.getClass());
-        }
+        FruitTransaction.Operation.findByLetter("10");
     }
 }

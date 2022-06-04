@@ -12,6 +12,9 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
+        if (lines == null) {
+            throw new RuntimeException("List cannot be null");
+        }
         return lines.stream()
                 .skip(1)
                 .map(s -> s.split(","))

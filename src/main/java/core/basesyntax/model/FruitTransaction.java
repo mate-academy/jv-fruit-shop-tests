@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.NoSuchElementException;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -48,9 +46,11 @@ public class FruitTransaction {
             for (Operation operation : Operation.values()) {
                 if (operation.getLetter().equals(letter)) {
                     return operation;
+                } else if (letter == null) {
+                    throw new RuntimeException("Letter cannot be null!");
                 }
             }
-            throw new NoSuchElementException("Can't find operation " + letter);
+            throw new RuntimeException("Can't find operation " + letter);
         }
     }
 }

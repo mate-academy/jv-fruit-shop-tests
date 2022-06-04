@@ -58,4 +58,9 @@ public class StrategyImplTest {
         Assert.assertEquals(strategy.process(FruitTransaction.Operation.PURCHASE).getClass(),
                 PurchaseHandler.class);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void process_nonExistentOperationType() {
+        strategy.process(FruitTransaction.Operation.findByLetter("w"));
+    }
 }

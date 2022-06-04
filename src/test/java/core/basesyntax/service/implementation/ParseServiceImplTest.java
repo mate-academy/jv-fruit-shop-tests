@@ -10,13 +10,9 @@ import org.junit.Test;
 public class ParseServiceImplTest {
     private final ParseService parseService = new ParseServiceImpl();
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void parse_NullList_NotOk() {
-        try {
-            parseService.parse(null);
-        } catch (Exception e) {
-            Assert.assertSame(NullPointerException.class, e.getClass());
-        }
+        parseService.parse(null);
     }
 
     @Test

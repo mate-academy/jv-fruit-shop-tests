@@ -14,6 +14,13 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void add(String fruitName, Integer amount) {
+        if (fruitName == null || amount == null) {
+            throw new RuntimeException("Value cannot be null!");
+        } else if (amount < 0) {
+            throw new RuntimeException("Amount value cannot be less than 0!");
+        } else if (fruitName.isBlank()) {
+            throw new RuntimeException("Fruit name cannot be blank!");
+        }
         Storage.fruits.put(fruitName, amount);
     }
 }

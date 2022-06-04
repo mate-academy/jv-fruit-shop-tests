@@ -8,13 +8,9 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
     private final ReaderService readerService = new ReaderServiceImpl();
 
-    @Test
-    public void readFromFile_NullFilePath_NotOk() {
-        try {
-            readerService.readFromFile(null);
-        } catch (Exception e) {
-            Assert.assertSame(NullPointerException.class, e.getClass());
-        }
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_nonExistentFile_NotOk() {
+        readerService.readFromFile(null);
     }
 
     @Test

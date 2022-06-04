@@ -1,41 +1,40 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private static FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @After
     public void tearDown() {
         Storage.fruits.clear();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NullFruitName_NotOk() {
         fruitDao.add(null, 10);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_BlankFruitName_NotOk() {
         fruitDao.add(" ", 10);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NullAmountValue_NotOk() {
         fruitDao.add("banana", null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NullData_NotOk() {
         fruitDao.add(null, null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void add_NegativeAmount_NotOk() {
         fruitDao.add("apple", -10);
     }
@@ -48,19 +47,15 @@ public class FruitDaoImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void getQuantity_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void getQuantity_nonExistentFruitName_NotOk() {
         Storage.fruits.put("apple", 40);
         Storage.fruits.put("banana", 25);
-        try {
-            fruitDao.getQuantity("orange");
-        } catch (Exception e) {
-            assertSame(RuntimeException.class, e.getClass());
-        }
+        fruitDao.getQuantity("orange");
     }
 
     @Test
-    public void add_Fruit_Ok() {
+    public void add_validFruit_Ok() {
         int fruitNumber = 15;
         fruitDao.add("banana", fruitNumber);
         int actual = Storage.fruits.get("banana");

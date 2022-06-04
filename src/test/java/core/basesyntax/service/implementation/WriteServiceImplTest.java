@@ -7,13 +7,9 @@ import org.junit.Test;
 public class WriteServiceImplTest {
     private final WriteService writeService = new WriteServiceImpl();
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_NullFilePath_NotOk() {
-        try {
-            writeService.writeToFile(null,"");
-        } catch (Exception e) {
-            Assert.assertSame(NullPointerException.class, e.getClass());
-        }
+        writeService.writeToFile(null,"");
     }
 
     @Test

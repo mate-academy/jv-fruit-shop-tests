@@ -4,9 +4,15 @@ import java.io.File;
 import java.util.List;
 
 public class ReportMaker {
-    private static final MyFileReader myFileReader = new MyFileReader();
-    private static final FruitCounter fruitCounter = new FruitCounter();
-    private static final MyFileWriter myFileWriter = new MyFileWriter();
+    private final MyFileReader myFileReader;
+    private final FruitCounter fruitCounter;
+    private final MyFileWriter myFileWriter;
+
+    public ReportMaker() {
+        myFileReader = new MyFileReaderImpl();
+        fruitCounter = new FruitCounterImpl();
+        myFileWriter = new MyFileWriterImpl();
+    }
 
     public File makeReport(File file) {
         List<String> info = myFileReader.getDryInfo(file);

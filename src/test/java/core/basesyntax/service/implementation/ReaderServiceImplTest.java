@@ -9,12 +9,12 @@ public class ReaderServiceImplTest {
     private final ReaderService readerService = new ReaderServiceImpl();
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_nonExistentFile_NotOk() {
+    public void readFromFile_nullFile_NotOk() {
         readerService.readFromFile(null);
     }
 
     @Test
-    public void readFromFile_BadFilePath_NotOk() {
+    public void readFromFile_nonExistentFile_NotOk() {
         String invalidFilePath = "src/test/resources/fruitInput123.csv";
         try {
             readerService.readFromFile(invalidFilePath);

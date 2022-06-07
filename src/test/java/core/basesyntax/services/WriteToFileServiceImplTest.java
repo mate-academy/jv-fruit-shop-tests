@@ -32,7 +32,7 @@ public class WriteToFileServiceImplTest {
     }
 
     @Test
-    public void writeToFileStringNull_NotOk() {
+    public void writeToFile_NullString_NotOk() {
         try {
             writeToFileService.writeToFile(null,
                     "src/test/java/core/basesyntax/services/resources/WriteToFile.csv");
@@ -43,7 +43,7 @@ public class WriteToFileServiceImplTest {
     }
 
     @Test
-    public void writeToFileNull_NotOk() {
+    public void writeToFile_NullPath_NotOk() {
         try {
             writeToFileService.writeToFile(actual, null);
         } catch (RuntimeException e) {

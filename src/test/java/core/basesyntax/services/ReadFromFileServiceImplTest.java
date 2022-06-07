@@ -21,14 +21,14 @@ public class ReadFromFileServiceImplTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFile_Ok() {
         List<String> listFromTestFile = readFromFileService
                 .readFile("src/test/java/core/basesyntax/services/resources/ReadFromFileTest.csv");
         Assert.assertEquals(test, listFromTestFile);
     }
 
     @Test
-    public void readFromNullFile_NotOk() {
+    public void readFile_NullPath_NotOk() {
         try {
             readFromFileService.readFile(null);
         } catch (RuntimeException e) {
@@ -38,7 +38,7 @@ public class ReadFromFileServiceImplTest {
     }
 
     @Test
-    public void readFromNonExistentFile_NotOk() {
+    public void readFile_NonExistentFile_NotOk() {
         try {
             readFromFileService.readFile("NotExistingFileName.csv");
         } catch (RuntimeException e) {

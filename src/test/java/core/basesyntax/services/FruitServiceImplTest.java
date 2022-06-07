@@ -33,7 +33,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void addToStorageUniqueFruits_Ok() {
+    public void addUniqueFruitsToStorage_Ok() {
         Map<String, Integer> actual = new HashMap<>();
         actual.put("banana", 20);
         actual.put("apple", 20);

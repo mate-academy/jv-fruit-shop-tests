@@ -1,11 +1,11 @@
 package core.basesyntax.java.core.basesyntax.service.impl;
 
 import core.basesyntax.java.core.basesyntax.model.FruitTransaction;
-import core.basesyntax.java.core.basesyntax.service.SplitDataValidator;
+import core.basesyntax.java.core.basesyntax.service.DataValidator;
 
-public class SplitDataValidatorCsvImpl implements SplitDataValidator {
+public class DataValidatorCsvImpl implements DataValidator {
     @Override
-    public boolean isNotValid(String[] data) {
+    public boolean isNotValidDataFromCsv(String[] data) {
         if (data.length != 3) {
             return true;
         }

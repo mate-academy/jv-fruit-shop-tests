@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.java.core.basesyntax.dao.FruitTransactionDaoCsvImpl;
 import core.basesyntax.java.core.basesyntax.db.Storage;
 import core.basesyntax.java.core.basesyntax.model.FruitTransaction;
-import core.basesyntax.java.core.basesyntax.service.handler.BalanceHandler;
-import core.basesyntax.java.core.basesyntax.service.handler.OperationHandler;
-import core.basesyntax.java.core.basesyntax.service.handler.PurchaseHandler;
-import core.basesyntax.java.core.basesyntax.service.handler.ReturnHandler;
-import core.basesyntax.java.core.basesyntax.service.handler.SupplyHandler;
 import core.basesyntax.java.core.basesyntax.service.impl.FruitTransactionServiceCsvImpl;
 import core.basesyntax.java.core.basesyntax.service.impl.ReportServiceCsvImpl;
 import core.basesyntax.java.core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.java.core.basesyntax.strategy.handler.BalanceHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.OperationHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.PurchaseHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.ReturnHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.SupplyHandler;
 import core.basesyntax.java.core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,6 +30,8 @@ import org.junit.rules.ExpectedException;
 public class ReportServiceTest {
     private static final String TRANSACTION_FULL
             = "src/test/java/resources/transaction.csv";
+    private static final String NEGATIVE_TRANSACTION
+            = "src/test/java/resources/negative_transaction.csv";
     private static final String TRANSACTION_MANY_DATA
             = "src/test/java/resources/transactions_many_data.csv";
     private static final String TRANSACTION_EMPTY
@@ -64,7 +66,7 @@ public class ReportServiceTest {
 
     @Test
     public void writeReport_fullCsvFile_Ok() {
-        reportService.writeReport();
+        reportService.writeReport(ACTUAL_REPORT);
         StringBuilder expected = new StringBuilder()
                 .append("fruit,quantity")
                 .append(System.lineSeparator())
@@ -79,13 +81,20 @@ public class ReportServiceTest {
     public void writeReport_emptyCsvFile_notOk() {
         exception.expect(RuntimeException.class);
         transactionService.addTransaction(TRANSACTION_EMPTY);
-        reportService.writeReport();
+        reportService.writeReport(ACTUAL_REPORT);
+    }
+
+    @Test
+    public void writeReport_negativeQuantity_notOk() {
+        exception.expect(RuntimeException.class);
+        transactionService.addTransaction(NEGATIVE_TRANSACTION);
+        reportService.writeReport(ACTUAL_REPORT);
     }
 
     @Test
     public void writeReport_manyDataInCsvFile_Ok() {
         transactionService.addTransaction(TRANSACTION_MANY_DATA);
-        reportService.writeReport();
+        reportService.writeReport(ACTUAL_REPORT);
         StringBuilder expected = new StringBuilder()
                 .append("fruit,quantity")
                 .append(System.lineSeparator())

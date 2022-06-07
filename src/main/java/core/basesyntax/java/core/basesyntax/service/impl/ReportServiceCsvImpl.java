@@ -22,14 +22,19 @@ public class ReportServiceCsvImpl implements ReportService {
     }
 
     @Override
-    public void writeReport() {
-        String report = fruitTransactionDao.isEmpty()
-                ? ""
-                : getFruitsLeftovers(fruitTransactionDao.get());
-        writerService.write(report);
+    public void writeReport(String reportPath) {
+        Map<String, Integer> leftoversMap = fruitsLeftovers(fruitTransactionDao.get());
+
+        StringBuilder report = fruitTransactionDao.isEmpty()
+                ? new StringBuilder()
+                : new StringBuilder()
+                .append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append(mapToString(leftoversMap));
+        writerService.write(report.toString(), reportPath);
     }
 
-    private String getFruitsLeftovers(List<FruitTransaction> transactions) {
+    private Map<String, Integer> fruitsLeftovers(List<FruitTransaction> transactions) {
         Map<String, Integer> fruitAmount = new HashMap<>();
         for (FruitTransaction transaction : transactions) {
             int newQuantity = operationStrategy
@@ -38,7 +43,8 @@ public class ReportServiceCsvImpl implements ReportService {
                             .getOrDefault(transaction.getFruit(), 0), transaction.getQuantity());
             fruitAmount.put(transaction.getFruit(), newQuantity);
         }
-        return mapToString(fruitAmount);
+        isValidQuantity(fruitAmount);
+        return fruitAmount;
     }
 
     private String mapToString(Map<String, Integer> amountFruits) {
@@ -49,5 +55,14 @@ public class ReportServiceCsvImpl implements ReportService {
                     .append(System.lineSeparator());
         }
         return builder.toString().trim();
+    }
+
+    private void isValidQuantity(Map<String, Integer> fruitAmount) {
+        for (Integer value : fruitAmount.values()) {
+            if (value < 0) {
+                throw new RuntimeException("The total amount of fruit is negative. "
+                        + "Please check transactions data");
+            }
+        }
     }
 }

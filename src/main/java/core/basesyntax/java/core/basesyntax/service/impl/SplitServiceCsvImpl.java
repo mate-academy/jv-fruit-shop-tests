@@ -1,21 +1,21 @@
 package core.basesyntax.java.core.basesyntax.service.impl;
 
 import core.basesyntax.java.core.basesyntax.model.FruitTransaction;
-import core.basesyntax.java.core.basesyntax.service.SplitDataValidator;
+import core.basesyntax.java.core.basesyntax.service.DataValidator;
 import core.basesyntax.java.core.basesyntax.service.SplitService;
 import java.util.Arrays;
 
 public class SplitServiceCsvImpl implements SplitService {
-    private SplitDataValidator checkSplitData;
+    private DataValidator checkSplitData;
 
     public SplitServiceCsvImpl() {
-        this.checkSplitData = new SplitDataValidatorCsvImpl();
+        this.checkSplitData = new DataValidatorCsvImpl();
     }
 
     @Override
     public FruitTransaction getTransactionFromRow(String line) {
         String[] splitData = line.split(",");
-        if (checkSplitData.isNotValid(splitData)) {
+        if (checkSplitData.isNotValidDataFromCsv(splitData)) {
             throw new RuntimeException("Bad data in *.csv file");
         }
         FruitTransaction fruitTransaction = new FruitTransaction();

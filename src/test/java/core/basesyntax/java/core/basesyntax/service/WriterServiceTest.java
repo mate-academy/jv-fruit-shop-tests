@@ -22,8 +22,6 @@ public class WriterServiceTest {
     @Test
     public void write_report_ok() {
         StringBuilder expected = new StringBuilder()
-                .append("fruit,quantity")
-                .append(System.lineSeparator())
                 .append("banana,152")
                 .append(System.lineSeparator())
                 .append("apple,90");
@@ -31,16 +29,16 @@ public class WriterServiceTest {
                 .append("banana,152")
                 .append(System.lineSeparator())
                 .append("apple,90");
-        writerService.write(data.toString());
+        writerService.write(data.toString(), ACTUAL_REPORT);
         String actual = getActualReport();
         assertEquals(expected.toString(),actual);
     }
 
     @Test
     public void write_emptyReport_ok() {
-        String expected = "fruit,quantity";
+        String expected = "";
         String data = "";
-        writerService.write(data);
+        writerService.write(data, ACTUAL_REPORT);
         String actual = getActualReport();
         assertEquals(expected, actual);
     }

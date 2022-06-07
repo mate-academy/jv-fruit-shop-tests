@@ -1,4 +1,4 @@
-package core.basesyntax.java.core.basesyntax.service.handler;
+package core.basesyntax.java.core.basesyntax.strategy.handler;
 
 public class SupplyHandler implements OperationHandler {
     @Override

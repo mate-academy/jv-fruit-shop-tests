@@ -2,6 +2,11 @@ package core.basesyntax.java.core.basesyntax.service.handler;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.java.core.basesyntax.strategy.handler.BalanceHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.OperationHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.PurchaseHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.ReturnHandler;
+import core.basesyntax.java.core.basesyntax.strategy.handler.SupplyHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -3,10 +3,10 @@ package dao;
 import db.Storage;
 import model.ProductAccount;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class ProductAccountDaoImplTest {
+public class ProductAccountDaoImplTest {
 
     private Storage memdb;
     private ProductAccountDaoImpl dao;
@@ -14,7 +14,7 @@ class ProductAccountDaoImplTest {
     private ProductAccount product1;
     private ProductAccount product2;
 
-    @BeforeEach
+    @Before
     public void setup() {
 
         memdb = new Storage();
@@ -29,7 +29,7 @@ class ProductAccountDaoImplTest {
     }
 
     @Test
-    void add() {
+    public void testAdd() {
 
         Assert.assertEquals("Product is equal",product0,memdb.products.get(0));
         Assert.assertEquals("Product is equal",product1,memdb.products.get(1));
@@ -37,7 +37,7 @@ class ProductAccountDaoImplTest {
     }
 
     @Test
-    void get() {
+    public void testGet() {
 
         Assert.assertEquals("Product is equal",product0,dao.get(product0.getName()).get());
         Assert.assertEquals("Product is equal",product1,dao.get(product1.getName()).get());
@@ -46,7 +46,7 @@ class ProductAccountDaoImplTest {
     }
 
     @Test
-    void update() {
+    public void testUpdate() {
 
         dao.update(product0.setAmount(18));
         dao.update(product1.setAmount(36));
@@ -57,11 +57,6 @@ class ProductAccountDaoImplTest {
 
     }
 
-    @Test
-    void getBalance() {
-        Assert.assertEquals("",memdb.products,dao.getBalance());
-
-    }
 }
 
 

@@ -9,12 +9,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-class FileServiceImplTest {
+public class FileServiceImplTest {
+
+    @Rule
+    public ExpectedException exceptionReadRule = ExpectedException.none();
+
+    @Rule
+    public ExpectedException exceptionWriteRule = ExpectedException.none();
 
     @Test
-    void readFile() {
+    public void testReadFile_OK() {
         String inputCsvFile = "inputTestFile.csv";
 
         try (BufferedWriter fileBufferedWriter = new BufferedWriter(new FileWriter(inputCsvFile))) {
@@ -39,7 +47,17 @@ class FileServiceImplTest {
     }
 
     @Test
-    void writeFile() {
+    public void testReadFile_Exception() {
+        String inputCsvFile = "unknown.csv";
+        FileServiceImpl csvFileService = new FileServiceImpl();
+        exceptionReadRule.expect(RuntimeException.class);
+        exceptionReadRule.expectMessage("Can't open input csv file " + inputCsvFile);
+        List<String> inFileStringList = csvFileService.readFile(inputCsvFile);
+
+    }
+
+    @Test
+    public void testWriteFile_OK() {
         String outCsvFile = "outTestFile.csv";
         File outFile = new File(outCsvFile);
         if (outFile.exists()) {
@@ -63,4 +81,16 @@ class FileServiceImplTest {
             throw new RuntimeException("Can't open input csv file " + outCsvFile,e);
         }
     }
+
+    @Test
+    public void testWriteFile_Exception() {
+        List<String> outList = new ArrayList<String>();
+        FileServiceImpl csvFileService = new FileServiceImpl();
+        String writeFilePath = "/root/file";
+        exceptionWriteRule.expect(RuntimeException.class);
+        exceptionWriteRule.expectMessage("Can't open output file" + writeFilePath);
+        csvFileService.writeFile(writeFilePath,outList);
+
+    }
+
 }

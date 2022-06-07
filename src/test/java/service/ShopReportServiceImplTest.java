@@ -5,12 +5,12 @@ import db.Storage;
 import java.util.List;
 import model.ProductAccount;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class ShopReportServiceImplTest {
+public class ShopReportServiceImplTest {
 
     @Test
-    void getShopBalanceReport() {
+    public void testGetShopBalanceReport() {
 
         Storage memdb = new Storage();
         memdb.products.clear();
@@ -24,5 +24,6 @@ class ShopReportServiceImplTest {
         Assert.assertEquals("",repHeaders,reportList.get(0));
         Assert.assertEquals("","ReportProduct0,13",reportList.get(1));
     }
+
 }
 

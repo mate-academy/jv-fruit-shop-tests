@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class FileServiceImpl implements FileRadService,FileWriteService {
                 csvfilelist.add(csvline);
             }
             return csvfilelist;
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Can't open input csv file " + readfilepath,e);
         }
 
@@ -32,7 +31,7 @@ public class FileServiceImpl implements FileRadService,FileWriteService {
             for (String filestring: writelist) {
                 fileBufferedWriter.write(filestring + System.lineSeparator());
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Can't open output file" + writeFilePath,e);
         }
     }

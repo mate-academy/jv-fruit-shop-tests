@@ -3,12 +3,12 @@ package service;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class OperationHandlerStrategyImplTest {
+public class OperationHandlerStrategyImplTest {
 
     @Test
-    void get() {
+    public void testGet() {
         Map<Operation, AmountHandler> amountHandlerMap = new HashMap<Operation, AmountHandler>();
         amountHandlerMap.put(Operation.BALANCE,new AmountHandlerBalance());
         amountHandlerMap.put(Operation.SUPPLY,new AmountHandlerSupply());
@@ -27,4 +27,5 @@ class OperationHandlerStrategyImplTest {
         Assert.assertEquals("",(int)-10,
                 (int)amountStrategy.get(Operation.PURCHASE).getAmount(10));
     }
+
 }

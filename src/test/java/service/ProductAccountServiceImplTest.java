@@ -4,12 +4,12 @@ import dao.ProductAccountDaoImpl;
 import db.Storage;
 import model.ProductAccount;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class ProductAccountServiceImplTest {
+public class ProductAccountServiceImplTest {
 
     @Test
-    void createNewProduct() {
+    public void testCreateNewProduct() {
         Storage memdb = new Storage();
         memdb.products.clear();
         ProductAccountDaoImpl dao = new ProductAccountDaoImpl(memdb);
@@ -20,5 +20,6 @@ class ProductAccountServiceImplTest {
         Assert.assertEquals("",Integer.valueOf(14), product.setAmount(14).getAmount());
 
     }
+
 }
 

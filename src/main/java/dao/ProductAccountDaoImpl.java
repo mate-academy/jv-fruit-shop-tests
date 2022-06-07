@@ -9,7 +9,6 @@ public class ProductAccountDaoImpl implements ProductAccountDao {
     private Storage db;
 
     public ProductAccountDaoImpl(Storage db) {
-
         this.db = db;
     }
 

@@ -5,8 +5,12 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.java.core.basesyntax.dao.FruitTransactionDaoCsvImpl;
 import core.basesyntax.java.core.basesyntax.db.Storage;
 import core.basesyntax.java.core.basesyntax.model.FruitTransaction;
-import core.basesyntax.java.core.basesyntax.service.impl.FruitTransactionServiceCsvImpl;
+import core.basesyntax.java.core.basesyntax.service.impl.DataValidatorImpl;
+import core.basesyntax.java.core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.java.core.basesyntax.service.impl.ReaderServiceCsvImpl;
 import core.basesyntax.java.core.basesyntax.service.impl.ReportServiceCsvImpl;
+import core.basesyntax.java.core.basesyntax.service.impl.SplitServiceImpl;
+import core.basesyntax.java.core.basesyntax.service.impl.WriterServiceCsvImpl;
 import core.basesyntax.java.core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.java.core.basesyntax.strategy.handler.BalanceHandler;
 import core.basesyntax.java.core.basesyntax.strategy.handler.OperationHandler;
@@ -50,9 +54,11 @@ public class ReportServiceTest {
     public static void beforeClass() throws Exception {
         operationHandlerMap = new HashMap<>();
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        transactionService = new FruitTransactionServiceCsvImpl();
+        transactionService = new FruitTransactionServiceImpl(new FruitTransactionDaoCsvImpl(),
+                new ReaderServiceCsvImpl(), new SplitServiceImpl(new DataValidatorImpl()));
         reportService
-                = new ReportServiceCsvImpl(new FruitTransactionDaoCsvImpl(), operationStrategy);
+                = new ReportServiceCsvImpl(new FruitTransactionDaoCsvImpl(),
+                operationStrategy, new WriterServiceCsvImpl());
     }
 
     @Before

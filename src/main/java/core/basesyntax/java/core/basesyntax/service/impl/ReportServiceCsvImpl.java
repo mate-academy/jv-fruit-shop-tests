@@ -15,10 +15,10 @@ public class ReportServiceCsvImpl implements ReportService {
     private WriterService writerService;
 
     public ReportServiceCsvImpl(FruitTransactionDao fruitTransactionDao,
-                                OperationStrategy operationStrategy) {
+                                OperationStrategy operationStrategy, WriterService writerService) {
         this.fruitTransactionDao = fruitTransactionDao;
         this.operationStrategy = operationStrategy;
-        this.writerService = new WriterServiceCsvImpl();
+        this.writerService = writerService;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ReportServiceCsvImpl implements ReportService {
                     .append(amounts.getValue())
                     .append(System.lineSeparator());
         }
-        return builder.toString().trim();
+        return builder.toString();
     }
 
     private void isValidQuantity(Map<String, Integer> fruitAmount) {

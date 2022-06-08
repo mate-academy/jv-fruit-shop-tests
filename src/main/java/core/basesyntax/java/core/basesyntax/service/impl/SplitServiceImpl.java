@@ -3,13 +3,12 @@ package core.basesyntax.java.core.basesyntax.service.impl;
 import core.basesyntax.java.core.basesyntax.model.FruitTransaction;
 import core.basesyntax.java.core.basesyntax.service.DataValidator;
 import core.basesyntax.java.core.basesyntax.service.SplitService;
-import java.util.Arrays;
 
-public class SplitServiceCsvImpl implements SplitService {
+public class SplitServiceImpl implements SplitService {
     private DataValidator checkSplitData;
 
-    public SplitServiceCsvImpl() {
-        this.checkSplitData = new DataValidatorCsvImpl();
+    public SplitServiceImpl(DataValidator checkSplitData) {
+        this.checkSplitData = checkSplitData;
     }
 
     @Override
@@ -19,10 +18,7 @@ public class SplitServiceCsvImpl implements SplitService {
             throw new RuntimeException("Bad data in *.csv file");
         }
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(Arrays.stream(FruitTransaction.Operation.values())
-                .filter(o -> o.getOperation().equals(splitData[Index.TYPE.ordinal()]))
-                .findFirst()
-                .get());
+        fruitTransaction.setOperation(splitData[Index.TYPE.ordinal()]);
         fruitTransaction.setFruit(splitData[Index.FRUIT.ordinal()]);
         fruitTransaction.setQuantity(Integer.parseInt(splitData[Index.QUANTITY.ordinal()]));
         return fruitTransaction;

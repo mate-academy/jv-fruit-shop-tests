@@ -3,7 +3,7 @@ package core.basesyntax.java.core.basesyntax.service.impl;
 import core.basesyntax.java.core.basesyntax.model.FruitTransaction;
 import core.basesyntax.java.core.basesyntax.service.DataValidator;
 
-public class DataValidatorCsvImpl implements DataValidator {
+public class DataValidatorImpl implements DataValidator {
     @Override
     public boolean isNotValidDataFromCsv(String[] data) {
         if (data.length != 3) {
@@ -12,12 +12,12 @@ public class DataValidatorCsvImpl implements DataValidator {
         FruitTransaction.Operation[] operations = FruitTransaction.Operation.values();
         boolean valid = true;
         for (FruitTransaction.Operation operation : operations) {
-            if (data[SplitServiceCsvImpl.Index.TYPE.ordinal()].equals(operation.getOperation())) {
+            if (data[SplitServiceImpl.Index.TYPE.ordinal()].equals(operation.getOperation())) {
                 valid = false;
                 break;
             }
         }
-        if (!valid && data[SplitServiceCsvImpl.Index.QUANTITY.ordinal()].matches("\\d+")) {
+        if (!valid && data[SplitServiceImpl.Index.QUANTITY.ordinal()].matches("\\d+")) {
             return false;
         }
         return true;

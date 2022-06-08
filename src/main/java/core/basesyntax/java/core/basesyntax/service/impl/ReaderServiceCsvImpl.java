@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderServiceCsvImpl implements ReaderService {
-    public static final int TABLE_NAME = 0;
 
     @Override
     public List<String> readFromFile(String filePath) {
@@ -18,7 +17,6 @@ public class ReaderServiceCsvImpl implements ReaderService {
             throw new RuntimeException("Can't read data from file " + filePath);
         }
         if (transactions.size() != 0) {
-            transactions.remove(TABLE_NAME);
             return transactions;
         }
         throw new RuntimeException("*.csv file is empty " + filePath);

@@ -32,6 +32,7 @@ public class ReaderServiceTest {
     @Test
     public void readFromFile_ok() {
         List<String> expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");
         expected.add("s,banana,100");

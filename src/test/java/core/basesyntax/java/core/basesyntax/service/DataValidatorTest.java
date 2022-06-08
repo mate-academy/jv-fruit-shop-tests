@@ -2,7 +2,7 @@ package core.basesyntax.java.core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.java.core.basesyntax.service.impl.DataValidatorCsvImpl;
+import core.basesyntax.java.core.basesyntax.service.impl.DataValidatorImpl;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class DataValidatorTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        splitDataValidator = new DataValidatorCsvImpl();
+        splitDataValidator = new DataValidatorImpl();
     }
 
     @Test

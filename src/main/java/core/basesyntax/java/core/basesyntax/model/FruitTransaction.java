@@ -1,5 +1,6 @@
 package core.basesyntax.java.core.basesyntax.model;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -19,8 +20,11 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public void setOperation(String operation) {
+        this.operation = Arrays.stream(Operation.values())
+                .filter(o -> o.getOperation().equals(operation))
+                .findFirst()
+                .get();
     }
 
     public void setFruit(String fruit) {

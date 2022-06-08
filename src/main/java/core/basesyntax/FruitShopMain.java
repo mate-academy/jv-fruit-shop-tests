@@ -25,18 +25,17 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopMain {
-    private static final String FROM_FILE =
-            "src/main/java/core/basesyntax/resources/dailyOperations.csv";
-    private static final String TO_FILE = "src/main/java/core/basesyntax/resources/dailyReport.csv";
-    private static final StorageDao STORAGE_DAO = new StorageDaoImpl();
-    private static final Map<FruitTransaction.Operation, OperationHandler> strategyMap =
-            new HashMap<>();
+    private static final String FROM_FILE = "src/main/resources/dailyOperations.csv";
+    private static final String TO_FILE = "src/main/resources/dailyReport.csv";
 
     public static void main(String[] args) {
-        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(STORAGE_DAO));
-        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(STORAGE_DAO));
-        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(STORAGE_DAO));
-        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(STORAGE_DAO));
+        StorageDao storageDao = new StorageDaoImpl();
+        Map<FruitTransaction.Operation, OperationHandler> strategyMap =
+                new HashMap<>();
+        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(storageDao));
+        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageDao));
+        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(storageDao));
+        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(storageDao));
         OperationHandlerStrategy operationHandlerStrategy =
                 new OperationHandlerStrategyImpl(strategyMap);
 
@@ -51,7 +50,7 @@ public class FruitShopMain {
                 new OperationProcessorImpl(operationHandlerStrategy);
         operationProcessor.processData(fruitTransactions);
 
-        ReportCreator reportCreator = new ReportCreatorImpl(STORAGE_DAO);
+        ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
         String report = reportCreator.createReport();
 
         Writer writer = new WriterImpl();

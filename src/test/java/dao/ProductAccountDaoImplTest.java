@@ -10,9 +10,9 @@ public class ProductAccountDaoImplTest {
 
     private Storage memdb;
     private ProductAccountDaoImpl dao;
-    private ProductAccount product0;
-    private ProductAccount product1;
-    private ProductAccount product2;
+    private ProductAccount firstProduct;
+    private ProductAccount secondPoduct;
+    private ProductAccount thirdProduct;
 
     @Before
     public void setup() {
@@ -20,40 +20,49 @@ public class ProductAccountDaoImplTest {
         memdb = new Storage();
         memdb.products.clear();
         dao = new ProductAccountDaoImpl(memdb);
-        product0 = new ProductAccount("OriginalProduct0").setAmount(13);
-        product1 = new ProductAccount("OriginalProduct1").setAmount(26);
-        product2 = new ProductAccount("OriginalProduct2").setAmount(17);
-        dao.add(product0);
-        dao.add(product1);
-        dao.add(product2);
+        firstProduct = new ProductAccount("OriginalProduct0").setAmount(13);
+        secondPoduct = new ProductAccount("OriginalProduct1").setAmount(26);
+        thirdProduct = new ProductAccount("OriginalProduct2").setAmount(17);
+        dao.add(firstProduct);
+        dao.add(secondPoduct);
+        dao.add(thirdProduct);
     }
 
     @Test
     public void testAdd() {
 
-        Assert.assertEquals("Product is equal",product0,memdb.products.get(0));
-        Assert.assertEquals("Product is equal",product1,memdb.products.get(1));
-        Assert.assertEquals("Product is equal",product2,memdb.products.get(2));
+        Assert.assertEquals("firstProduct is equal to stored in db",
+                firstProduct,memdb.products.get(0));
+        Assert.assertEquals("secondPoduct is equal to stored in db",
+                secondPoduct,memdb.products.get(1));
+        Assert.assertEquals("thirdProduct is equal to stored in db",
+                thirdProduct,memdb.products.get(2));
     }
 
     @Test
     public void testGet() {
 
-        Assert.assertEquals("Product is equal",product0,dao.get(product0.getName()).get());
-        Assert.assertEquals("Product is equal",product1,dao.get(product1.getName()).get());
-        Assert.assertEquals("Product is equal",product2,dao.get(product2.getName()).get());
+        Assert.assertEquals("firstProduct is equal to stored in db",
+                firstProduct,dao.get(firstProduct.getName()).get());
+        Assert.assertEquals("secondPoduct is equal to stored in db",
+                secondPoduct,dao.get(secondPoduct.getName()).get());
+        Assert.assertEquals("thirdProduct is equal to stored in db",
+                thirdProduct,dao.get(thirdProduct.getName()).get());
 
     }
 
     @Test
     public void testUpdate() {
 
-        dao.update(product0.setAmount(18));
-        dao.update(product1.setAmount(36));
-        dao.update(product2.setAmount(72));
-        Assert.assertEquals("",Integer.valueOf(18),dao.get(product0.getName()).get().getAmount());
-        Assert.assertEquals("",Integer.valueOf(36),dao.get(product1.getName()).get().getAmount());
-        Assert.assertEquals("",Integer.valueOf(72),dao.get(product2.getName()).get().getAmount());
+        dao.update(firstProduct.setAmount(18));
+        dao.update(secondPoduct.setAmount(36));
+        dao.update(thirdProduct.setAmount(72));
+        Assert.assertEquals("firstProduct is equal to stored in db",
+                Integer.valueOf(18),dao.get(firstProduct.getName()).get().getAmount());
+        Assert.assertEquals("secondPoduct is equal to stored in db",
+                Integer.valueOf(36),dao.get(secondPoduct.getName()).get().getAmount());
+        Assert.assertEquals("thirdProduct is equal to stored in db",
+                Integer.valueOf(72),dao.get(thirdProduct.getName()).get().getAmount());
 
     }
 

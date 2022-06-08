@@ -8,6 +8,7 @@ public class AmountHandlerBalanceTest {
     @Test
     public void getAmount() {
         AmountHandlerBalance amountHandlerBalance = new AmountHandlerBalance();
-        Assert.assertEquals("",(int)10,(int)amountHandlerBalance.getAmount(10));
+        Assert.assertEquals("Balance value is wrong",Integer.valueOf(10),
+                amountHandlerBalance.getAmount(10));
     }
 }

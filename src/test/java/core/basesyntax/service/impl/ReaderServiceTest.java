@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReaderServiceImplTest {
+public class ReaderServiceTest {
     private static ReaderService readerService;
 
     @BeforeClass

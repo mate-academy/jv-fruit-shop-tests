@@ -13,6 +13,9 @@ public class FruitTransactionStrategyImpl implements FruitTransactionStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("Input operation is null");
+        }
         return fruitTransactionMap.get(operation);
     }
 }

@@ -24,7 +24,7 @@ public class BalanceOperationHandlerTest {
         transaction.setFruit("banana");
         transaction.setQuantity(22);
         balanceOperationHandler.processOperation(transaction, fruitsStorage);
-        int actual = fruitsStorage.getFruitsStorage().get("banana");
+        int actual = fruitsStorage.getFruitsStorage().get(transaction.getFruit());
         Assert.assertEquals(22,actual);
     }
 

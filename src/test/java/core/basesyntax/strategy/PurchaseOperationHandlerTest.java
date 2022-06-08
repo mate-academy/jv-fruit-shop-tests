@@ -25,7 +25,7 @@ public class PurchaseOperationHandlerTest {
         transaction.setFruit("banana");
         transaction.setQuantity(90);
         purchaseOperationHandler.processOperation(transaction, fruitsStorage);
-        int actual = fruitsStorage.getFruitsStorage().get("banana");
+        int actual = fruitsStorage.getFruitsStorage().get(transaction.getFruit());
         Assert.assertEquals(10,actual);
     }
 

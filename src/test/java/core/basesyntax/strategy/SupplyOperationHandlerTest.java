@@ -25,7 +25,7 @@ public class SupplyOperationHandlerTest {
         transaction.setFruit("banana");
         transaction.setQuantity(22);
         supplyOperationHandler.processOperation(transaction, fruitsStorage);
-        int actual = fruitsStorage.getFruitsStorage().get("banana");
+        int actual = fruitsStorage.getFruitsStorage().get(transaction.getFruit());
         Assert.assertEquals(32,actual);
     }
 

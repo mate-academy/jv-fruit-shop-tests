@@ -17,7 +17,8 @@ public class ProductAccountServiceImplTest {
         ProductAccount product =
                 productAccountService.createNewProduct("ProductCreatedBySercie").get();
         Assert.assertEquals("Product is equal",product,memdb.products.get(0));
-        Assert.assertEquals("",Integer.valueOf(14), product.setAmount(14).getAmount());
+        Assert.assertEquals("Amount of product set failed",
+                Integer.valueOf(14), product.setAmount(14).getAmount());
 
     }
 

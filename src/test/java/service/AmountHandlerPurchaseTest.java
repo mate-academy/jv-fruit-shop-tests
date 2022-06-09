@@ -8,6 +8,7 @@ public class AmountHandlerPurchaseTest {
     @Test
     public void getAmount() {
         AmountHandlerPurchase amountHandlerPurchase = new AmountHandlerPurchase();
-        Assert.assertEquals("",Integer.valueOf(-10),amountHandlerPurchase.getAmount(10));
+        Assert.assertEquals("Purchase handler return wrong value",
+                Integer.valueOf(-10),amountHandlerPurchase.getAmount(10));
     }
 }

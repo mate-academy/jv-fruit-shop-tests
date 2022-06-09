@@ -9,18 +9,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class FileServiceImplTest {
-    public static final FileServiceImpl csvFileService = new FileServiceImpl();
+
+    private static FileServiceImpl csvFileService;
 
     @Rule
     public ExpectedException exceptionReadRule = ExpectedException.none();
 
     @Rule
     public ExpectedException exceptionWriteRule = ExpectedException.none();
+
+    @BeforeClass
+    public static void setUp() {
+        csvFileService = new FileServiceImpl();
+    }
 
     private void createTestFile(String inputFilePath) {
         try (BufferedWriter fileBufferedWriter = new BufferedWriter(

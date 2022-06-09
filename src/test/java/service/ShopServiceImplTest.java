@@ -31,11 +31,15 @@ public class ShopServiceImplTest {
         ProductAccountDaoImpl dao = new ProductAccountDaoImpl(memdb);
         ShopServiceImpl fruitShop = new ShopServiceImpl(dao, amountStrategy);
 
-        Assert.assertTrue(fruitShop.execProductTransaction("product0",13,"b"));
+        Assert.assertTrue(fruitShop.execProductTransaction("product0",
+                13,"b"));
         Assert.assertEquals("product0",memdb.products.get(0).getName());
-        Assert.assertEquals("",Integer.valueOf(13),memdb.products.get(0).getAmount());
-        fruitShop.execProductTransaction("product0",13,"p");
-        Assert.assertEquals("",Integer.valueOf(0),memdb.products.get(0).getAmount());
+        Assert.assertEquals("Transaction returned fail value",
+                Integer.valueOf(13),memdb.products.get(0).getAmount());
+        fruitShop.execProductTransaction("product0",
+                13,"p");
+        Assert.assertEquals("Transaction returned fail value",
+                Integer.valueOf(0),memdb.products.get(0).getAmount());
 
     }
 

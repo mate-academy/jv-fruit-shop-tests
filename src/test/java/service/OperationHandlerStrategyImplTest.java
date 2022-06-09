@@ -18,13 +18,13 @@ public class OperationHandlerStrategyImplTest {
         OperationHandlerStrategyImpl amountStrategy =
                 new OperationHandlerStrategyImpl(amountHandlerMap);
 
-        Assert.assertEquals("",Integer.valueOf(10),
+        Assert.assertEquals("BALANCE handler return wrong value",Integer.valueOf(10),
                 amountStrategy.get(Operation.BALANCE).getAmount(10));
-        Assert.assertEquals("",Integer.valueOf(10),
+        Assert.assertEquals("RETURN handler return wrong value",Integer.valueOf(10),
                 amountStrategy.get(Operation.RETURN).getAmount(10));
-        Assert.assertEquals("",Integer.valueOf(10),
+        Assert.assertEquals("SUPPLY handler return wrong value",Integer.valueOf(10),
                 amountStrategy.get(Operation.SUPPLY).getAmount(10));
-        Assert.assertEquals("",Integer.valueOf(-10),
+        Assert.assertEquals("PURCHASE handler return wrong value",Integer.valueOf(-10),
                 amountStrategy.get(Operation.PURCHASE).getAmount(10));
     }
 

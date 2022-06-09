@@ -21,8 +21,8 @@ public class ShopReportServiceImplTest {
         List<String> reportList = shopReportService.getShopBalanceReport();
         String repHeaders = (HeaderParts.FRUIT.name().toLowerCase()
                 + "," + HeaderParts.QUANTITY.name().toLowerCase());
-        Assert.assertEquals("",repHeaders,reportList.get(0));
-        Assert.assertEquals("","ReportProduct0,13",reportList.get(1));
+        Assert.assertEquals("Returned report header are wrong",repHeaders,reportList.get(0));
+        Assert.assertEquals("Returned report row is wrong","ReportProduct0,13",reportList.get(1));
     }
 
 }

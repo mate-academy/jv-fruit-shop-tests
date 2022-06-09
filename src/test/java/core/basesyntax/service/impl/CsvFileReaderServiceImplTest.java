@@ -36,14 +36,6 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void readTransactionsFromFile_NoInputFile_NotOk() {
-        String filePath = "src/test/resources/";
-        exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("Can't get data from file: " + filePath);
-        fileReaderService.readTransactionsFromFile(filePath);
-    }
-
-    @Test
     public void readTransactionsFromFile_validInputData_Ok() {
         List<FruitTransaction> actualResult = fileReaderService.readTransactionsFromFile(
                 "src/test/resources/inputValidData.csv");

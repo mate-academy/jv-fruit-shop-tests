@@ -18,7 +18,7 @@ public class ParserServiceTest {
     }
 
     @Test
-    public void getTransactionFromString_Ok() {
+    public void parse_Ok() {
         List<String> dataFromFile = new ArrayList<>();
         dataFromFile.add("b,banana,20");
         dataFromFile.add("b,apple,100");
@@ -28,17 +28,22 @@ public class ParserServiceTest {
         FruitTransaction fruitTransaction = createFruitTransaction("banana", 20,
                 FruitTransaction.Operation.BALANCE);
         expectedResult.add(fruitTransaction);
-        FruitTransaction fruitTransaction1 = createFruitTransaction("apple", 100,
+        FruitTransaction firstFruitTransaction = createFruitTransaction("apple", 100,
                 FruitTransaction.Operation.BALANCE);
-        expectedResult.add(fruitTransaction1);
-        FruitTransaction fruitTransaction2 = createFruitTransaction("banana", 100,
+        expectedResult.add(firstFruitTransaction);
+        FruitTransaction secondFruitTransaction = createFruitTransaction("banana", 100,
                 FruitTransaction.Operation.SUPPLY);
-        expectedResult.add(fruitTransaction2);
-        FruitTransaction fruitTransaction3 = createFruitTransaction("banana", 13,
+        expectedResult.add(secondFruitTransaction);
+        FruitTransaction thirdFruitTransaction = createFruitTransaction("banana", 13,
                 FruitTransaction.Operation.PURCHASE);
-        expectedResult.add(fruitTransaction3);
-        List<FruitTransaction> actualResult = parserService.getTransactionFromString(dataFromFile);
+        expectedResult.add(thirdFruitTransaction);
+        List<FruitTransaction> actualResult = parserService.parse(dataFromFile);
         Assert.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_emptyInput_notOk() {
+        parserService.parse(Collections.emptyList());
     }
 
     private FruitTransaction createFruitTransaction(String fruit, int quantity,
@@ -48,10 +53,5 @@ public class ParserServiceTest {
         fruitTransaction.setQuantity(quantity);
         fruitTransaction.setOperation(operation);
         return fruitTransaction;
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void getTransactionFromString_emptyInput_notOk() {
-        parserService.getTransactionFromString(Collections.emptyList());
     }
 }

@@ -11,7 +11,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getTransactionFromString(List<String> fruitTransactions) {
+    public List<FruitTransaction> parse(List<String> fruitTransactions) {
         if (fruitTransactions.isEmpty()) {
             throw new RuntimeException("Input list is empty");
         }

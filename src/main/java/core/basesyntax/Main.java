@@ -34,7 +34,7 @@ public class Main {
                 new FruitTransactionServiceImpl(transactionStrategy, fruitsStorage);
 
         fruitService.processTransaction(new ParserServiceImpl()
-                .getTransactionFromString(new ReaderServiceImpl()
+                .parse(new ReaderServiceImpl()
                 .readFromFile("src/main/resources/data.csv")));
         new WriterServiceImpl().writeToFile(new ReportServiceImpl()
                 .createReport(fruitsStorage.getFruitsStorage()),"src/main/resources/report.csv");

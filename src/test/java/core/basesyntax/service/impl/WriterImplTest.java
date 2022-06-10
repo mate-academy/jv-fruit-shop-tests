@@ -1,12 +1,15 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
-
-import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
-import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class WriterImplTest {
     private static final String DESTINATION_FILE =
@@ -18,12 +21,10 @@ public class WriterImplTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static String report;
     private static Writer writer;
-    private static Reader reader;
 
     @BeforeClass
     public static void beforeClass() {
         writer = new WriterImpl();
-        reader = new ReaderImpl();
         StringBuilder builder = new StringBuilder();
         report = builder.append("type,fruit,quantity")
                 .append(LINE_SEPARATOR)
@@ -43,17 +44,25 @@ public class WriterImplTest {
     @Test
     public void writeEmptyData_ok() {
         writer.writeToFile("", DESTINATION_FILE);
-        List<String> expected = reader.readFromFile(EMPTY_FILE);
-        List<String> actual = reader.readFromFile(DESTINATION_FILE);
+        List<String> expected = readFromFile(EMPTY_FILE);
+        List<String> actual = readFromFile(DESTINATION_FILE);
         assertEquals(expected, actual);
     }
 
     @Test
     public void writeReport_ok() {
         writer.writeToFile(report, DESTINATION_FILE);
-        List<String> expected = reader.readFromFile(TEST_FILE);
-        List<String> actual = reader.readFromFile(DESTINATION_FILE);
+        List<String> expected = readFromFile(TEST_FILE);
+        List<String> actual = readFromFile(DESTINATION_FILE);
         assertEquals(expected, actual);
+    }
+
+    private List<String> readFromFile (String fileName) {
+        try {
+            return Files.readAllLines(Path.of(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file " + fileName);
+        }
     }
 }
 

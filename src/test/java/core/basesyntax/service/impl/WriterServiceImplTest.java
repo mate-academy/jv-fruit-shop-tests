@@ -46,6 +46,9 @@ public class WriterServiceImplTest {
 
     private String readFromFile(Path fileName) {
         try {
+            if (!Files.exists(resources)) {
+                throw new RuntimeException("File doesn't exit. Error read from file " + fileName);
+            }
             return Files.readString(fileName);
         } catch (IOException e) {
             throw new RuntimeException("Error read from file " + fileName, e);
@@ -53,11 +56,11 @@ public class WriterServiceImplTest {
     }
 
     private void deleteTestFile() {
-        if (!Files.exists(fileNameFailed)) {
+        if (!Files.exists(fileNameNormal)) {
             return;
         }
         try {
-            Files.delete(fileNameFailed);
+            Files.delete(fileNameNormal);
         } catch (IOException e) {
             throw new RuntimeException(
                     String.format("Error remove file '%s'", fileNameFailed), e);

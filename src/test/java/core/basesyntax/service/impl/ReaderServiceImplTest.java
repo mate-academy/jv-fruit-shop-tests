@@ -47,10 +47,16 @@ public class ReaderServiceImplTest {
 
     private void createTestFile(String data) {
         try {
+            if (!Files.exists(resources)) {
+                Files.createDirectories(resources);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error create directory" + fileName, e);
+        }
+        try {
             Files.write(fileName, data.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException(
-                    String.format("Error write data to file '%s'", fileName), e);
+            throw new RuntimeException("Error write data to file" + fileName, e);
         }
     }
 

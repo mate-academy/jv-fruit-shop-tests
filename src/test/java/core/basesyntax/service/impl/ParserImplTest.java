@@ -26,11 +26,6 @@ public class ParserImplTest {
         testList.add("type,fruit,quantity");
     }
 
-    @After
-    public void tearDown() {
-        testList.clear();
-    }
-
     @Test(expected = RuntimeException.class)
     public void parseEmptyString_notOk() {
         testList.add("");
@@ -50,5 +45,10 @@ public class ParserImplTest {
         testList.add("s,orange,10");
         List<FruitTransaction> actual = parser.parseData(testList);
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        testList.clear();
     }
 }

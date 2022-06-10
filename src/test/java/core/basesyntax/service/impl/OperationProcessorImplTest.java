@@ -41,12 +41,6 @@ public class OperationProcessorImplTest {
                 new OperationProcessorImpl(operationHandlerStrategy);
     }
 
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-        fruitTransactions.clear();
-    }
-
     @Test(expected = RuntimeException.class)
     public void setNegativeBalance_notOk() {
         fruitTransactions.add(new FruitTransaction(
@@ -117,5 +111,11 @@ public class OperationProcessorImplTest {
         int expected = 3;
         int actual = storageDao.getRemainingFruits("lemon");
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
+        fruitTransactions.clear();
     }
 }

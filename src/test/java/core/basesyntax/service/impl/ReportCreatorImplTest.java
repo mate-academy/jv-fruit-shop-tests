@@ -21,11 +21,6 @@ public class ReportCreatorImplTest {
         reportCreator = new ReportCreatorImpl(storageDao);
     }
 
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
-
     @Test
     public void noTransactionsMade_ok() {
         String expected = "fruit,quantity";
@@ -42,5 +37,10 @@ public class ReportCreatorImplTest {
                 + "strawberry,10";
         String actual = reportCreator.createReport();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

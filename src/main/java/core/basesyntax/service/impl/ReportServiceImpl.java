@@ -18,6 +18,7 @@ public class ReportServiceImpl implements ReportService {
     public String create() {
         return productStorageDao.getAll().entrySet().stream()
                 .map(e -> e.getKey() + FIELDS_DELIMITER + e.getValue())
+                .sorted()
                 .collect(Collectors.joining(NEW_LINE, HEADER_IN_FILE + NEW_LINE, ""));
     }
 }

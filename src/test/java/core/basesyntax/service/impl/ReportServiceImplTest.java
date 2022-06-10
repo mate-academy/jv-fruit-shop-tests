@@ -25,8 +25,8 @@ public class ReportServiceImplTest {
         @SuppressWarnings("StringBufferReplaceableByString")
         StringBuilder expected = new StringBuilder();
         expected.append(reportHeader).append(newLine);
-        expected.append("banana,").append(100).append(newLine);
         expected.append("apple,").append(50).append(newLine);
+        expected.append("banana,").append(100).append(newLine);
         expected.append("mango,").append(150);
 
         ProductStorage.products.put("banana", 100);

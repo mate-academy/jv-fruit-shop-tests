@@ -90,7 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/FruitShopMain*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

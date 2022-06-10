@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
+    private static ReaderService readerService;
     private final Path project = Path.of("").toAbsolutePath();
     private final Path resources = Paths.get(project.toString(), "src", "test", "resources");
     private final Path fileName = resources.resolve("temporary-file.txt");
-    private ReaderService readerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         readerService = new ReaderServiceImpl();
     }
 

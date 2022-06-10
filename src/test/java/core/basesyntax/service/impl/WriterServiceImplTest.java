@@ -12,14 +12,16 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static WriterService writerService;
-    private final Path project = Path.of("").toAbsolutePath();
-    private final Path resources = Paths.get(project.toString(), "src", "test", "resources");
+    private static final Path project = Path.of("").toAbsolutePath();
+    private static final Path resources =
+            Paths.get(project.toString(), "src", "test", "resources");
     private final Path fileNameNormal = resources.resolve("temporary-file.txt");
     private final Path fileNameFailed =
             Paths.get(resources.toString(), "bad").resolve("temporary-file.txt");
 
     @BeforeClass
     public static void beforeClass() {
+        createResourceDirectory();
         writerService = new WriterServiceImpl();
     }
 
@@ -42,6 +44,16 @@ public class WriterServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void write_notExistedFile_notOk() {
         writerService.write(fileNameFailed, "");
+    }
+
+    private static void createResourceDirectory() {
+        try {
+            if (!Files.exists(resources)) {
+                Files.createDirectories(resources);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error create directory" + resources, e);
+        }
     }
 
     private String readFromFile(Path fileName) {

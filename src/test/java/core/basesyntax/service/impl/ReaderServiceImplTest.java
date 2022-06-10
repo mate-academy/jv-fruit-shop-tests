@@ -14,12 +14,14 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
-    private final Path project = Path.of("").toAbsolutePath();
-    private final Path resources = Paths.get(project.toString(), "src", "test", "resources");
+    private static final Path project = Path.of("").toAbsolutePath();
+    private static final Path resources =
+            Paths.get(project.toString(), "src", "test", "resources");
     private final Path fileName = resources.resolve("temporary-file.txt");
 
     @BeforeClass
     public static void beforeClass() {
+        createResourceDirectory();
         readerService = new ReaderServiceImpl();
     }
 
@@ -45,14 +47,17 @@ public class ReaderServiceImplTest {
         readerService.read(fileName);
     }
 
-    private void createTestFile(String data) {
+    private static void createResourceDirectory() {
         try {
             if (!Files.exists(resources)) {
                 Files.createDirectories(resources);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error create directory" + fileName, e);
+            throw new RuntimeException("Error create directory" + resources, e);
         }
+    }
+
+    private void createTestFile(String data) {
         try {
             Files.write(fileName, data.getBytes());
         } catch (IOException e) {

@@ -1,15 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Writer;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.Writer;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class WriterImplTest {
     private static final String DESTINATION_FILE =
@@ -57,7 +56,7 @@ public class WriterImplTest {
         assertEquals(expected, actual);
     }
 
-    private List<String> readFromFile (String fileName) {
+    private List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {

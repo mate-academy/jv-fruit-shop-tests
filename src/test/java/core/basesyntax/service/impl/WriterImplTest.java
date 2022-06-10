@@ -10,11 +10,11 @@ import org.junit.Test;
 
 public class WriterImplTest {
     private static final String DESTINATION_FILE =
-            "src/test/java/core/basesyntax/resources/writerTestFile.csv";
+            "src/test/resources/writerTestFile.csv";
     private static final String EMPTY_FILE =
-            "src/test/java/core/basesyntax/resources/emptyFile.csv";
+            "src/test/resources/emptyFile.csv";
     private static final String TEST_FILE =
-            "src/test/java/core/basesyntax/resources/testFile.csv";
+            "src/test/resources/testFile.csv";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static String report;
     private static Writer writer;

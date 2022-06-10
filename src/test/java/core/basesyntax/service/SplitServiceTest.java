@@ -12,11 +12,6 @@ import org.junit.rules.ExpectedException;
 
 public class SplitServiceTest {
     private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
-    private static final String NOT_VALID_QUANTITY = "b,banana,n";
-    private static final String APPLE = "apple";
-    private static final String NOT_VALID_OPERATION = "k,banana,10";
-    private static final String TRANSACTION = "b,apple,50";
-    private static final String NOT_VALID_TRANSACTION = "b,apple,50,b,apple,50";
     private static SplitService splitService;
 
     @Rule
@@ -29,26 +24,26 @@ public class SplitServiceTest {
 
     @Test
     public void getTransactionFromRow_ok() {
-        FruitTransaction expected = new FruitTransaction(BALANCE, APPLE, 50);
-        FruitTransaction actual = splitService.getTransactionFromRow(TRANSACTION);
+        FruitTransaction expected = new FruitTransaction(BALANCE, "apple", 50);
+        FruitTransaction actual = splitService.getTransactionFromRow("b,apple,50");
         assertEquals(expected, actual);
     }
 
     @Test
     public void getTransactionFromRow_badDataInQuantity_notOk() {
         exception.expect(RuntimeException.class);
-        splitService.getTransactionFromRow(NOT_VALID_QUANTITY);
+        splitService.getTransactionFromRow("b,banana,n");
     }
 
     @Test
     public void getTransactionFromRow_badDataInOperation_notOk() {
         exception.expect(RuntimeException.class);
-        splitService.getTransactionFromRow(NOT_VALID_OPERATION);
+        splitService.getTransactionFromRow("b,banana,n");
     }
 
     @Test
     public void getTransactionFromRow_badTransaction_notOk() {
         exception.expect(RuntimeException.class);
-        splitService.getTransactionFromRow(NOT_VALID_TRANSACTION);
+        splitService.getTransactionFromRow("b,apple,50,b,apple,50");
     }
 }

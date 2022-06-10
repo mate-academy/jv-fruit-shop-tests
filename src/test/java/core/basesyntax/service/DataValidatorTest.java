@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.impl.DataValidatorImpl;
 import org.junit.BeforeClass;
@@ -17,26 +18,19 @@ public class DataValidatorTest {
 
     @Test
     public void getTransactionFromRow_invalidData_notOk() {
-        boolean expected = false;
-        boolean actual = splitDataValidator
-                .isValidDataFromCsv(new String[]{"b", BANANA, "n", "b", BANANA, "n" });
-        assertEquals(expected, actual);
-        actual = splitDataValidator
-                .isValidDataFromCsv(new String[]{"b", BANANA, "n"});
-        assertEquals(expected, actual);
-        actual = splitDataValidator
-                .isValidDataFromCsv(new String[]{"t", BANANA, "10"});
-        assertEquals(expected, actual);
-        actual = splitDataValidator
-                .isValidDataFromCsv(new String[]{"t", BANANA, "t"});
-        assertEquals(expected, actual);
+        assertFalse(splitDataValidator
+                .isValidDataFromCsv(new String[]{"b", BANANA, "n", "b", BANANA, "n" }));
+        assertFalse(splitDataValidator
+                .isValidDataFromCsv(new String[]{"b", BANANA, "n"}));
+        assertFalse(splitDataValidator
+                .isValidDataFromCsv(new String[]{"t", BANANA, "10"}));
+        assertFalse(splitDataValidator
+                .isValidDataFromCsv(new String[]{"t", BANANA, "t"}));
     }
 
     @Test
     public void getTransactionFromRow_validData_Ok() {
-        boolean expected = true;
-        boolean actual = splitDataValidator
-                .isValidDataFromCsv(new String[]{"b", "banana", "10"});
-        assertEquals(expected, actual);
+        assertTrue(splitDataValidator
+                .isValidDataFromCsv(new String[]{"b", "banana", "10"}));
     }
 }

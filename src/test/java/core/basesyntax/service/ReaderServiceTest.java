@@ -11,8 +11,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReaderServiceTest {
-    private static final String TRANSACTION_EMPTY = "src/test/java/resources/transaction_empty.csv";
-    private static final String TRANSACTION_FULL = "src/test/java/resources/transaction.csv";
+    private static final String TRANSACTION_EMPTY = "src/test/resources/transaction_empty.csv";
+    private static final String TRANSACTION_FULL = "src/test/resources/transaction.csv";
     private static ReaderService readerService;
 
     @Rule

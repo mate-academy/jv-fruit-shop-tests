@@ -12,28 +12,22 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class LeftoversHandlerTest {
-    public static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
-    public static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
-    public static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
-    public static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
-    public static final String BANANA = "banana";
-    public static final String APPLE = "apple";
-
+    private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
+    private static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
+    private static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
     private static OperationStrategy operationStrategy;
     private static LeftoversHandler leftoversHandler;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static List<FruitTransaction> fruitTransactionList;
 
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
-
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
@@ -45,7 +39,7 @@ public class LeftoversHandlerTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitTransactionList.add(new FruitTransaction(BALANCE, BANANA, 20));
         fruitTransactionList.add(new FruitTransaction(BALANCE, APPLE, 100));
         fruitTransactionList.add(new FruitTransaction(SUPPLY, BANANA, 100));
@@ -57,7 +51,7 @@ public class LeftoversHandlerTest {
     }
 
     @Test
-    public void getLeftovers_ok() {
+    public void getLeftovers_validData_ok() {
         String expected = "banana,152"
                 + System.lineSeparator()
                 + "apple,90"
@@ -66,10 +60,9 @@ public class LeftoversHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getLeftovers_negativeQuantity_notOk() {
         fruitTransactionList.add(new FruitTransaction(PURCHASE, BANANA, 500));
-        exception.expect(RuntimeException.class);
         leftoversHandler.getLeftovers(fruitTransactionList);
     }
 
@@ -99,7 +92,7 @@ public class LeftoversHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         fruitTransactionList.clear();
     }
 }

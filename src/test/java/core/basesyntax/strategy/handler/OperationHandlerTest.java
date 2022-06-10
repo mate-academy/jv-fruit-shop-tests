@@ -1,26 +1,21 @@
-package core.basesyntax.service.handler;
+package core.basesyntax.strategy.handler;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.strategy.handler.BalanceHandler;
-import core.basesyntax.strategy.handler.OperationHandler;
-import core.basesyntax.strategy.handler.PurchaseHandler;
-import core.basesyntax.strategy.handler.ReturnHandler;
-import core.basesyntax.strategy.handler.SupplyHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerTest {
 
-    public static final int DEFAULT_QUANTITY = 0;
-    public static final int DEFAULT_VALUE = 100;
+    private static final int DEFAULT_QUANTITY = 0;
+    private static final int DEFAULT_VALUE = 100;
     private static OperationHandler operationHandlerBalance;
     private static OperationHandler operationHandlerPurchase;
     private static OperationHandler operationHandlerReturn;
     private static OperationHandler operationHandlerSupply;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandlerBalance = new BalanceHandler();
         operationHandlerPurchase = new PurchaseHandler();
         operationHandlerReturn = new ReturnHandler();
@@ -28,7 +23,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    public void getOperationHandler_ok() {
+    public void getOperationHandler_getValidBehaviour_ok() {
         Integer expected = DEFAULT_VALUE;
         Integer actual = operationHandlerBalance
                 .getOperationHandler(DEFAULT_QUANTITY, DEFAULT_VALUE);

@@ -13,21 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FruitTransactionServiceTest {
-    public static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
     private static FruitTransactionDao fruitTransactionDao;
     private static SplitService splitService;
     private static FruitTransactionService fruitTransactionService;
 
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
-
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitTransactionDao = new FruitTransactionDaoImpl();
         splitService = new SplitServiceImpl(new DataValidatorImpl());
         fruitTransactionService =
@@ -35,7 +30,7 @@ public class FruitTransactionServiceTest {
     }
 
     @Test
-    public void addTransaction_ok() {
+    public void addTransaction_validTransactions_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(BALANCE, "banana", 100));
         expected.add(new FruitTransaction(BALANCE, "apple", 50));
@@ -49,7 +44,7 @@ public class FruitTransactionServiceTest {
     }
 
     @Test
-    public void addTransaction_empty_ok() {
+    public void addTransaction_noTransactions_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         List<String> dataFromCsv = new ArrayList<>();
         dataFromCsv.add("type,fruit,quantity");
@@ -58,17 +53,16 @@ public class FruitTransactionServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void addTransaction_invalidData_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void addTransaction_invalidTransactions_notOk() {
         List<String> dataFromCsv = new ArrayList<>();
         dataFromCsv.add("######");
         dataFromCsv.add("######");
-        exception.expect(RuntimeException.class);
         fruitTransactionService.addTransaction(dataFromCsv);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruitTransactions.clear();
     }
 }

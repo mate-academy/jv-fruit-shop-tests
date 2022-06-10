@@ -8,11 +8,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataValidatorTest {
-    public static final String BANANA = "banana";
+    private static final String BANANA = "banana";
     private static DataValidator splitDataValidator;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         splitDataValidator = new DataValidatorImpl();
     }
 
@@ -29,7 +29,7 @@ public class DataValidatorTest {
     }
 
     @Test
-    public void getTransactionFromRow_validData_Ok() {
+    public void getTransactionFromRow_validData_ok() {
         assertTrue(splitDataValidator
                 .isValidDataFromCsv(new String[]{"b", "banana", "10"}));
     }

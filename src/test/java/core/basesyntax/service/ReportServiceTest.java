@@ -10,12 +10,12 @@ public class ReportServiceTest {
     private static ReportService reportService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
     }
 
     @Test
-    public void writeReport_ok() {
+    public void writeReport_validData_ok() {
         String leftovers = "banana,152"
                 + System.lineSeparator()
                 + "apple,90"
@@ -28,7 +28,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void writeReport_emptyCsvFile_ok() {
+    public void writeReport_emptyData_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.getReport("");
         assertEquals(expected, actual);

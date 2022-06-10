@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class ReportServiceImpl implements ReportService {
     public static final String HEADER_IN_FILE = "fruit,quantity";
     public static final String FIELDS_DELIMITER = ",";
+    public static final String NEW_LINE = System.lineSeparator();
     private final ProductStorageDao productStorageDao;
 
     public ReportServiceImpl(ProductStorageDao productStorageDao) {
@@ -17,7 +18,6 @@ public class ReportServiceImpl implements ReportService {
     public String create() {
         return productStorageDao.getAll().entrySet().stream()
                 .map(e -> e.getKey() + FIELDS_DELIMITER + e.getValue())
-                .collect(Collectors.joining(System.lineSeparator(),
-                        HEADER_IN_FILE + System.lineSeparator(), ""));
+                .collect(Collectors.joining(NEW_LINE, HEADER_IN_FILE + NEW_LINE, ""));
     }
 }

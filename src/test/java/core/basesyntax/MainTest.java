@@ -17,6 +17,7 @@ import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.FruitAdder;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitSubtractor;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -60,12 +61,17 @@ public class MainTest {
 
     @Test
     public void makeReport_valid_ok() {
-        writeReport("src/main/resources/input.csv", "src/main/resources/report.csv");
+        writeReport("src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "input.csv",
+                "src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "report.csv");
         List<String> expected;
         List<String> actual;
         try {
-            expected = Files.readAllLines(Path.of("src/main/resources/expected.csv"));
-            actual = Files.readAllLines(Path.of("src/main/resources/report.csv"));
+            expected = Files.readAllLines(Path.of("src" + File.separator + "main"
+                    + File.separator + "resources" + File.separator + "expected.csv"));
+            actual = Files.readAllLines(Path.of("src" + File.separator + "main"
+                    + File.separator + "resources" + File.separator + "report.csv"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -74,10 +80,12 @@ public class MainTest {
 
     @Test
     public void makeReport_forEmpty_notOk() {
-        // expectionRule.expect(RuntimeException.class);
-        // expectionRule.reportMissingExceptionWithMessage("Should get exception for empty");
-        writeReport("src\\main\\resources\\empty.csv",
-                "src\\main\\resources\\empty_report.csv");
+        expectionRule.expect(RuntimeException.class);
+        expectionRule.reportMissingExceptionWithMessage("Should get exception for empty");
+        writeReport("src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "empty.csv",
+                "src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "empty_report.csv");
     }
 
     @Test
@@ -86,8 +94,10 @@ public class MainTest {
         expectionRule.reportMissingExceptionWithMessage(
                 "Should get exception for inappropriate 1 line");
         writeReport(
-                "src\\main\\resources\\inappropriate_1_line.csv",
-                "src\\main\\resources\\inappropriate_1_line_report.csv");
+                "src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "inappropriate_1_line.csv",
+                "src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "inappropriate_1_line_report.csv");
     }
 
     @Test
@@ -95,8 +105,10 @@ public class MainTest {
         expectionRule.expect(RuntimeException.class);
         expectionRule.reportMissingExceptionWithMessage(
                 "Should get exception for inappropriate operation");
-        writeReport("src\\main\\resources\\inappropriate_operation.csv",
-                "src\\main\\resources\\inappropriate_operation_report.csv");
+        writeReport("src" + File.separator + "main" + File.separator + "resources"
+                        + File.separator + "inappropriate_operation.csv",
+                "src" + File.separator + "main" + File.separator + "resources" + File.separator
+                        + "inappropriate_operation_report.csv");
     }
 
     @Test
@@ -104,8 +116,10 @@ public class MainTest {
         expectionRule.expect(RuntimeException.class);
         expectionRule.reportMissingExceptionWithMessage(
                 "Should get exception for negative fruit number");
-        writeReport("src\\main\\resources\\negative_fruit_number.csv",
-                "src\\main\\resources\\negative_fruit_number_report.csv");
+        writeReport("src" + File.separator + "main" + File.separator + "resources" + File.separator
+                        + "negative_fruit_number.csv",
+                "src" + File.separator + "main" + File.separator + "resources" + File.separator
+                        + "negative_fruit_number_report.csv");
     }
 
     @Test
@@ -113,8 +127,10 @@ public class MainTest {
         expectionRule.expect(RuntimeException.class);
         expectionRule.reportMissingExceptionWithMessage(
                 "Should get exception for purchasing fruits that was not introduced");
-        writeReport("src\\main\\resources\\purchasing_unexisting_fruits.csv",
-                "src\\main\\resources\\purchasing_unexisting_fruits_report.csv");
+        writeReport("src" + File.separator + "main" + File.separator + "resources" + File.separator
+                        + "purchasing_unexisting_fruits.csv",
+                "src" + File.separator + "main" + File.separator + "resources" + File.separator
+                        + "purchasing_unexisting_fruits_report.csv");
     }
 
     @After

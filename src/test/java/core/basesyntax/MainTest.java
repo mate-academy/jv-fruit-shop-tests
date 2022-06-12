@@ -30,13 +30,13 @@ import org.junit.jupiter.api.Test;
 
 class MainTest {
     private static Map<String, FruitHandler> handlersMap;
-    private MyFileReader myFileReader = new MyFileReaderImpl();
-    private FruitTransactionProcessor fruitTransactionProcessor
+    private final MyFileReader myFileReader = new MyFileReaderImpl();
+    private final FruitTransactionProcessor fruitTransactionProcessor
             = new FruitTransactionProcessorImpl(handlersMap);
-    private MyFileWriter myFileWriter = new MyFileWriterImpl();
-    private DataValidator dataValidator = new DataValidatorImpl();
-    private ReportCreator reportCreator = new ReportCreatorImpl();
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private final MyFileWriter myFileWriter = new MyFileWriterImpl();
+    private final DataValidator dataValidator = new DataValidatorImpl();
+    private final ReportCreator reportCreator = new ReportCreatorImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @BeforeAll
     static void beforeAll() {

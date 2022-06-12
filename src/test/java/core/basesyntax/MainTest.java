@@ -1,36 +1,42 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.db.FruitDaoImpl;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.DataValidator;
+import core.basesyntax.service.FruitTransactionProcessor;
+import core.basesyntax.service.MyFileReader;
+import core.basesyntax.service.MyFileWriter;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.DataValidatorImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
+import core.basesyntax.service.impl.MyFileReaderImpl;
+import core.basesyntax.service.impl.MyFileWriterImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.FruitAdder;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitSubtractor;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class MainTest {
-    static Map<String, FruitHandler> handlersMap;
-    MyFileReader myFileReader = new MyFileReaderImpl();
-    FruitTransactionProcessor fruitTransactionProcessor
+    private static Map<String, FruitHandler> handlersMap;
+    private MyFileReader myFileReader = new MyFileReaderImpl();
+    private FruitTransactionProcessor fruitTransactionProcessor
             = new FruitTransactionProcessorImpl(handlersMap);
-    MyFileWriter myFileWriter = new MyFileWriterImpl();
-    DataValidator dataValidator = new DataValidatorImpl();
-    ReportCreator reportCreator = new ReportCreatorImpl();
-    FruitDao fruitDao = new FruitDaoImpl();
+    private MyFileWriter myFileWriter = new MyFileWriterImpl();
+    private DataValidator dataValidator = new DataValidatorImpl();
+    private ReportCreator reportCreator = new ReportCreatorImpl();
+    private FruitDao fruitDao = new FruitDaoImpl();
 
     @BeforeAll
     static void beforeAll() {
@@ -52,7 +58,8 @@ class MainTest {
     @Test
     void makeReport_valid_ok() {
         writeReport("src\\main\\resources\\input.csv", "src\\main\\resources\\report.csv");
-        List<String> expected, actual;
+        List<String> expected;
+        List<String> actual;
         try {
             expected = Files.readAllLines(Path.of("src\\main\\resources\\expected.csv"));
             actual = Files.readAllLines(Path.of("src\\main\\resources\\report.csv"));
@@ -70,25 +77,32 @@ class MainTest {
 
     @Test
     void makeReport_InvalidFirstLine_notOk() {
-        assertThrows(RuntimeException.class, () -> writeReport("src\\main\\resources\\inappropriate_1_line.csv",
-                "src\\main\\resources\\inappropriate_1_line_report.csv"),"Should get exception for inappropriate 1 line");
+        assertThrows(RuntimeException.class,
+                () -> writeReport("src\\main\\resources\\inappropriate_1_line.csv",
+                "src\\main\\resources\\inappropriate_1_line_report.csv"),
+                "Should get exception for inappropriate 1 line");
     }
 
     @Test
     void makeReport_invalidOperation_notOk() {
-        assertThrows(RuntimeException.class, () -> writeReport("src\\main\\resources\\inappropriate_operation.csv",
-                "src\\main\\resources\\inappropriate_operation_report.csv"),"Should get exception for inappropriate operation");
+        assertThrows(RuntimeException.class,
+                () -> writeReport("src\\main\\resources\\inappropriate_operation.csv",
+                "src\\main\\resources\\inappropriate_operation_report.csv"),
+                "Should get exception for inappropriate operation");
     }
 
     @Test
     void makeReport_negativeFruitNumber_notOk() {
-        assertThrows(RuntimeException.class, () -> writeReport("src\\main\\resources\\negative_fruit_number.csv",
-                "src\\main\\resources\\negative_fruit_number_report.csv"),"Should get exception for negative fruit number");
+        assertThrows(RuntimeException.class,
+                () -> writeReport("src\\main\\resources\\negative_fruit_number.csv",
+                "src\\main\\resources\\negative_fruit_number_report.csv"),
+                "Should get exception for negative fruit number");
     }
 
     @Test
     void makeReport_purchasingUnexistingFruits_notOk() {
-        assertThrows(RuntimeException.class, () -> writeReport("src\\main\\resources\\purchasing_unexisting_fruits.csv",
+        assertThrows(RuntimeException.class,
+                () -> writeReport("src\\main\\resources\\purchasing_unexisting_fruits.csv",
                 "src\\main\\resources\\purchasing_unexisting_fruits_report.csv"),
                 "Should get exception for purchasing fruits that was not introduced");
     }

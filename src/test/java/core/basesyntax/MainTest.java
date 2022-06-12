@@ -60,12 +60,12 @@ public class MainTest {
 
     @Test
     public void makeReport_valid_ok() {
-        writeReport("src\\main\\resources\\input.csv", "src\\main\\resources\\report.csv");
+        writeReport("src/main/resources/input.csv", "src/main/resources/report.csv");
         List<String> expected;
         List<String> actual;
         try {
-            expected = Files.readAllLines(Path.of("src\\main\\resources\\expected.csv"));
-            actual = Files.readAllLines(Path.of("src\\main\\resources\\report.csv"));
+            expected = Files.readAllLines(Path.of("src/main/resources/expected.csv"));
+            actual = Files.readAllLines(Path.of("src/main/resources/report.csv"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

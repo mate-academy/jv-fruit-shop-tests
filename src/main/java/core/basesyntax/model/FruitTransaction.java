@@ -29,31 +29,31 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private static final Map<String, Operation> LOOKUP_MAP;
+        private static final Map<String, Operation> OPERATIONS_MAP;
 
         static {
-            LOOKUP_MAP = Arrays.stream(Operation.values())
-                    .collect(Collectors.toMap(Operation::getOperation, Function.identity()));
+            OPERATIONS_MAP = Arrays.stream(Operation.values())
+                    .collect(Collectors.toMap(Operation::getLetter, Function.identity()));
         }
 
-        private final String operation;
+        private final String letter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
 
-        public static Operation retrieveByOperation(String operation) {
-            if (operation == null) {
+        public static Operation getOperationByLetter(String letter) {
+            if (letter == null) {
                 throw new RuntimeException("Fruit operation cannot be null");
             }
-            if (LOOKUP_MAP.get(operation) == null) {
-                throw new IllegalArgumentException("No such fruit operation type: " + operation);
+            if (OPERATIONS_MAP.get(letter) == null) {
+                throw new IllegalArgumentException("No such fruit operation type: " + letter);
             }
-            return LOOKUP_MAP.get(operation);
+            return OPERATIONS_MAP.get(letter);
         }
     }
 

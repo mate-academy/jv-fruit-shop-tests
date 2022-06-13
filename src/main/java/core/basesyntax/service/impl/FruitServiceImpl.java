@@ -4,22 +4,25 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.strategy.QuantityStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
-    private final QuantityStrategy quantityStrategy;
+    private final OperationStrategy operationStrategy;
 
-    public FruitServiceImpl(QuantityStrategy quantityStrategy) {
-        this.quantityStrategy = quantityStrategy;
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public List<Fruit> getFruitBalance() {
-        Storage.fruitTransactions.forEach(fruitTransaction -> {
+    public List<Fruit> getAll(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null) {
+            throw new RuntimeException("FruitTransactions cannot be null");
+        }
+        fruitTransactions.forEach(fruitTransaction -> {
             if (fruitTransaction == null) {
                 throw new RuntimeException("FruitTransaction cannot be null");
             }
@@ -30,7 +33,7 @@ public class FruitServiceImpl implements FruitService {
                 throw new RuntimeException("Fruit name cannot be null");
             }
         });
-        Map<String, Integer> fruitBalanceMap = Storage.fruitTransactions.stream()
+        Map<String, Integer> fruitBalanceMap = fruitTransactions.stream()
                 .collect(Collectors.groupingBy(
                         fruitTransaction -> fruitTransaction.getFruit().getName(),
                         Collectors.mapping(this::calculateQuantityByStrategy,
@@ -42,9 +45,16 @@ public class FruitServiceImpl implements FruitService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public String getFruitsReport() {
+        return Storage.fruits.stream()
+                .map(fruit -> System.lineSeparator() + fruit.getName() + "," + fruit.getQuantity())
+                .reduce("fruit,quantity", (row1, row2) -> row1 + row2);
+    }
+
     private Integer calculateQuantityByStrategy(FruitTransaction fruitTransaction) {
-        return quantityStrategy
-                .getQuantityHandler(fruitTransaction.getOperation())
+        return operationStrategy
+                .getOperationHandler(fruitTransaction.getOperation())
                 .getQuantity(fruitTransaction);
     }
 }

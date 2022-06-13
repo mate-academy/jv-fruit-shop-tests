@@ -9,6 +9,9 @@ import java.io.IOException;
 public class CsvReportWriterService implements ReportWriterService {
     @Override
     public void writeReport(String report, String reportPath) {
+        if (report == null) {
+            throw new RuntimeException("Report can't be null");
+        }
         try (BufferedWriter bufferedWriter
                      = new BufferedWriter(new FileWriter(new File(reportPath)))) {
             bufferedWriter.write(report);

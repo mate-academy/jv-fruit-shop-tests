@@ -12,6 +12,9 @@ public class ParseStatisticServiceImpl implements ParseStatisticService {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
+        if (lines == null) {
+            throw new RuntimeException("Input parameter is null");
+        }
         List<FruitTransaction> fruitTransactionStatistic = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             String[] splittedLine = lines.get(i).split("\\W+");

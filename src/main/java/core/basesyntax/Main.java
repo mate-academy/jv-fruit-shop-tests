@@ -54,7 +54,6 @@ public class Main {
         FruitTransactionService fruitTransactionService
                 = new FruitTransactionServiceImpl(operationStrategy);
         fruitTransactionService.process(fruitTransactionStatistic);
-
         CreateReportService createReport = new CreateReportServiceImpl(fruitService);
         String report = createReport.createReport();
         ReportWriterService reportWriterService = new CsvReportWriterService();

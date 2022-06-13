@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +11,10 @@ import java.util.List;
 public class CsvFileReaderService implements FileReaderService {
     @Override
     public List<String> read(String filePath) {
+        File file = new File(filePath);
+        if (file.length() == 0) {
+            throw new RuntimeException("This file is empty!!!");
+        }
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader
                      = new BufferedReader(new FileReader(filePath));) {
@@ -19,7 +24,7 @@ public class CsvFileReaderService implements FileReaderService {
                 value = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file");
+            throw new RuntimeException("Can't read file", e);
         }
         return lines;
     }

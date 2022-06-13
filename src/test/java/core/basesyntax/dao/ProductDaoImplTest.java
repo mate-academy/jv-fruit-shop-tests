@@ -9,14 +9,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ProductStorageDaoImplTest {
-    private static ProductStorageDao productStorageDao;
+public class ProductDaoImplTest {
+    private static ProductDao productDao;
     private static Map<String, Integer> testStorage;
 
     @BeforeClass
     public static void beforeClass() {
         testStorage = new HashMap<>();
-        productStorageDao = new ProductStorageDaoImpl();
+        productDao = new ProductDaoImpl();
     }
 
     @Before
@@ -24,9 +24,9 @@ public class ProductStorageDaoImplTest {
         testStorage.put("banana", 100);
         testStorage.put("apple", 150);
         testStorage.put("mango", 200);
-        productStorageDao.setQuantity("banana", 100);
-        productStorageDao.setQuantity("apple", 150);
-        productStorageDao.setQuantity("mango", 200);
+        productDao.setQuantity("banana", 100);
+        productDao.setQuantity("apple", 150);
+        productDao.setQuantity("mango", 200);
     }
 
     @Test
@@ -37,17 +37,15 @@ public class ProductStorageDaoImplTest {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Test
     public void getQuantity_ok() {
-        Assert.assertEquals(Integer.valueOf(100),
-                productStorageDao.getQuantity("banana").get());
         Assert.assertEquals(Integer.valueOf(150),
-                productStorageDao.getQuantity("apple").get());
+                productDao.getQuantity("apple").get());
         Assert.assertEquals(Integer.valueOf(200),
-                productStorageDao.getQuantity("mango").get());
+                productDao.getQuantity("mango").get());
     }
 
     @Test
     public void getAll_ok() {
-        Assert.assertEquals(testStorage, productStorageDao.getAll());
+        Assert.assertEquals(testStorage, productDao.getAll());
     }
 
     @After

@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ProductStorageDao;
-import core.basesyntax.dao.ProductStorageDaoImpl;
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.ProductTransaction;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
@@ -39,9 +39,9 @@ public class Main {
         actionHandlerMap.put(ProductTransaction.Operation.PURCHASE, new PurchaseHandler());
         actionHandlerMap.put(ProductTransaction.Operation.RETURN, new ReturnHandler());
 
-        ProductStorageDao productStorageDao = new ProductStorageDaoImpl();
+        ProductDao productDao = new ProductDaoImpl();
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
-        ReportService report = new ReportServiceImpl(productStorageDao);
+        ReportService report = new ReportServiceImpl(productDao);
         WriterService writerService = new WriterServiceImpl();
 
         List<String> data = new ReaderServiceImpl().read(FILE_NAME_INPUT);
@@ -49,7 +49,7 @@ public class Main {
         while (!transactions.isEmpty()) {
             ProductTransaction productTransaction = transactions.poll();
             ActionHandler actionHandler = actionStrategy.get(productTransaction.getOperation());
-            actionHandler.process(productStorageDao, productTransaction);
+            actionHandler.process(productDao, productTransaction);
         }
         writerService.write(FILE_NAME_OUTPUT, report.create());
     }

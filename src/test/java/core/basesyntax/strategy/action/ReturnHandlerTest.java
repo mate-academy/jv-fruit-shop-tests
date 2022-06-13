@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductStorageDao;
-import core.basesyntax.dao.ProductStorageDaoImpl;
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.ProductStorage;
 import core.basesyntax.exception.ActionProductNotFoundException;
 import core.basesyntax.model.ProductTransaction;
@@ -12,14 +12,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnHandlerTest {
-    private static ProductStorageDao productStorageDao;
+    private static ProductDao productDao;
     private static ActionHandler actionHandler;
     private ProductTransaction transaction;
     private final ProductTransaction.Operation operation = ProductTransaction.Operation.RETURN;
 
     @BeforeClass
     public static void beforeClass() {
-        productStorageDao = new ProductStorageDaoImpl();
+        productDao = new ProductDaoImpl();
         actionHandler = new ReturnHandler();
     }
 
@@ -31,19 +31,18 @@ public class ReturnHandlerTest {
     @Test
     public void process_productExist_ok() {
         transaction = new ProductTransaction(operation, "mango", 50);
-        actionHandler.process(productStorageDao, transaction);
+        actionHandler.process(productDao, transaction);
         Assert.assertEquals(Integer.valueOf(250), ProductStorage.products.get("mango"));
     }
 
     @Test(expected = ActionProductNotFoundException.class)
     public void process_productNotExist_notOk() {
         transaction = new ProductTransaction(operation, "apple", 50);
-        actionHandler.process(productStorageDao, transaction);
+        actionHandler.process(productDao, transaction);
     }
 
     @After
     public void tearDown() {
         ProductStorage.products.clear();
     }
-
 }

@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.ProductStorageDao;
-import core.basesyntax.dao.ProductStorageDaoImpl;
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.ProductStorage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
@@ -16,8 +16,8 @@ public class ReportServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        ProductStorageDao productStorageDao = new ProductStorageDaoImpl();
-        reportService = new ReportServiceImpl(productStorageDao);
+        ProductDao productDao = new ProductDaoImpl();
+        reportService = new ReportServiceImpl(productDao);
     }
 
     @Test

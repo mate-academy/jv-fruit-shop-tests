@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductStorageDao;
-import core.basesyntax.dao.ProductStorageDaoImpl;
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.ProductStorage;
 import core.basesyntax.exception.ActionNegativeQuantityException;
 import core.basesyntax.exception.ActionProductNotFoundException;
@@ -13,14 +13,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
-    private static ProductStorageDao productStorageDao;
+    private static ProductDao productDao;
     private static ActionHandler actionHandler;
     private ProductTransaction transaction;
     private final ProductTransaction.Operation operation = ProductTransaction.Operation.PURCHASE;
 
     @BeforeClass
     public static void beforeClass() {
-        productStorageDao = new ProductStorageDaoImpl();
+        productDao = new ProductDaoImpl();
         actionHandler = new PurchaseHandler();
     }
 
@@ -32,20 +32,20 @@ public class PurchaseHandlerTest {
     @Test
     public void process_productExist_ok() {
         transaction = new ProductTransaction(operation, "mango", 50);
-        actionHandler.process(productStorageDao, transaction);
+        actionHandler.process(productDao, transaction);
         Assert.assertEquals(Integer.valueOf(150), ProductStorage.products.get("mango"));
     }
 
     @Test(expected = ActionProductNotFoundException.class)
     public void process_productNotExist_notOk() {
         transaction = new ProductTransaction(operation, "apple", 50);
-        actionHandler.process(productStorageDao, transaction);
+        actionHandler.process(productDao, transaction);
     }
 
     @Test(expected = ActionNegativeQuantityException.class)
     public void process_negativeResult_notOk() {
         transaction = new ProductTransaction(operation, "mango", 300);
-        actionHandler.process(productStorageDao, transaction);
+        actionHandler.process(productDao, transaction);
     }
 
     @After

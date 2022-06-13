@@ -4,7 +4,7 @@ import core.basesyntax.db.ProductStorage;
 import java.util.Map;
 import java.util.Optional;
 
-public class ProductStorageDaoImpl implements ProductStorageDao {
+public class ProductDaoImpl implements ProductDao {
     @Override
     public void setQuantity(String productName, Integer productQuantity) {
         ProductStorage.products.put(productName, productQuantity);

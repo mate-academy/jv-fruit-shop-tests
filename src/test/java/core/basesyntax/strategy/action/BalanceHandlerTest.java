@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductStorageDao;
-import core.basesyntax.dao.ProductStorageDaoImpl;
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.ProductStorage;
 import core.basesyntax.model.ProductTransaction;
 import org.junit.After;
@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-    private static ProductStorageDao productStorageDao;
+    private static ProductDao productDao;
     private static ActionHandler actionHandler;
     @SuppressWarnings("FieldCanBeLocal")
     private ProductTransaction transaction;
@@ -19,7 +19,7 @@ public class BalanceHandlerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        productStorageDao = new ProductStorageDaoImpl();
+        productDao = new ProductDaoImpl();
         actionHandler = new BalanceHandler();
     }
 
@@ -31,7 +31,7 @@ public class BalanceHandlerTest {
     @Test
     public void process_ok() {
         transaction = new ProductTransaction(operation, "mango", 100);
-        actionHandler.process(productStorageDao, transaction);
+        actionHandler.process(productDao, transaction);
         Assert.assertEquals(Integer.valueOf(100), ProductStorage.products.get("mango"));
     }
 

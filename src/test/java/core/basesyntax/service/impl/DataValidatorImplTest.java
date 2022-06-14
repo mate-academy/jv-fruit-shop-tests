@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 
 public class DataValidatorImplTest {
     @Rule
-    public ExpectedException expectionRule = ExpectedException.none();
+    public ExpectedException exceptionRule = ExpectedException.none();
     private final DataValidator dataValidator = new DataValidatorImpl();
 
     @Test
@@ -20,15 +20,16 @@ public class DataValidatorImplTest {
 
     @Test
     public void validate_empty_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage("Should get exception for empty");
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
+                "Should get exception for empty input file");
         dataValidator.validate(List.of());
     }
 
     @Test
     public void validate_invalidFirstLine_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage(
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
                 "Should get exception for inappropriate 1 line");
         dataValidator.validate(List.of("aSd,das,dasd", "b,banana,23", "p,banana,13"));
     }

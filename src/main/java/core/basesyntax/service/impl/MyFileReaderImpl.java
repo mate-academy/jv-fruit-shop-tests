@@ -13,7 +13,7 @@ public class MyFileReaderImpl implements MyFileReader {
         try {
             lines = Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Could not assess the file", e);
+            throw new RuntimeException("Could not assess the file " + file.getName(), e);
         }
         return lines;
     }

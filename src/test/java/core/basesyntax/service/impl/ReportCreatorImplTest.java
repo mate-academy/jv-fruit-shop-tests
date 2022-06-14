@@ -21,6 +21,13 @@ public class ReportCreatorImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void createReportList_emptyStorage_ok() {
+        List<String> expected = List.of("fruit,quantity" + System.lineSeparator());
+        List<String> actual = reportCreator.createReportList();
+        assertEquals(expected, actual);
+    }
+
     @After
     public void tearDown() {
         Storage.storage.clear();

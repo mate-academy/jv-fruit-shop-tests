@@ -33,7 +33,7 @@ import org.junit.rules.ExpectedException;
 public class MainTest {
     private static Map<String, FruitHandler> handlersMap;
     @Rule
-    public ExpectedException expectionRule = ExpectedException.none();
+    public ExpectedException exceptionRule = ExpectedException.none();
     private final MyFileReader myFileReader = new MyFileReaderImpl();
     private final FruitTransactionProcessor fruitTransactionProcessor
             = new FruitTransactionProcessorImpl(handlersMap);
@@ -51,7 +51,7 @@ public class MainTest {
         handlersMap.put("p", new FruitSubtractor());
     }
 
-    void writeReport(String fileNameFrom, String fileNameTo) {
+    private void writeReport(String fileNameFrom, String fileNameTo) {
         List<String> info = myFileReader.readFromFile(fileNameFrom);
         dataValidator.validate(info);
         fruitTransactionProcessor.process(info);
@@ -73,15 +73,16 @@ public class MainTest {
             actual = Files.readAllLines(Path.of("src" + File.separator + "main"
                     + File.separator + "resources" + File.separator + "report.csv"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can not read the file", e);
         }
         assertEquals(expected, actual);
     }
 
     @Test
     public void makeReport_forEmpty_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage("Should get exception for empty");
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
+                "Should get exception for empty input file");
         writeReport("src" + File.separator + "main" + File.separator + "resources"
                         + File.separator + "empty.csv",
                 "src" + File.separator + "main" + File.separator + "resources"
@@ -90,8 +91,8 @@ public class MainTest {
 
     @Test
     public void makeReport_InvalidFirstLine_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage(
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
                 "Should get exception for inappropriate 1 line");
         writeReport(
                 "src" + File.separator + "main" + File.separator + "resources"
@@ -102,8 +103,8 @@ public class MainTest {
 
     @Test
     public void makeReport_invalidOperation_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage(
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
                 "Should get exception for inappropriate operation");
         writeReport("src" + File.separator + "main" + File.separator + "resources"
                         + File.separator + "inappropriate_operation.csv",
@@ -113,8 +114,8 @@ public class MainTest {
 
     @Test
     public void makeReport_negativeFruitNumber_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage(
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
                 "Should get exception for negative fruit number");
         writeReport("src" + File.separator + "main" + File.separator + "resources" + File.separator
                         + "negative_fruit_number.csv",
@@ -124,13 +125,13 @@ public class MainTest {
 
     @Test
     public void makeReport_purchasingUnexistingFruits_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage(
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
                 "Should get exception for purchasing fruits that was not introduced");
         writeReport("src" + File.separator + "main" + File.separator + "resources" + File.separator
-                        + "purchasing_unexisting_fruits.csv",
+                        + "purchasing_nonExistent_fruits.csv",
                 "src" + File.separator + "main" + File.separator + "resources" + File.separator
-                        + "purchasing_unexisting_fruits_report.csv");
+                        + "purchasing_nonExistent_fruits_report.csv");
     }
 
     @After

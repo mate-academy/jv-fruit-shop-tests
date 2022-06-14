@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 public class FruitTransactionProcessorImplTest {
     private static Map<String, FruitHandler> handlersMap;
     @Rule
-    public ExpectedException expectionRule = ExpectedException.none();
+    public ExpectedException exceptionRule = ExpectedException.none();
     private final FruitTransactionProcessor fruitTransactionProcessor
             = new FruitTransactionProcessorImpl(handlersMap);
     private final List<String> lines = new ArrayList<>();
@@ -41,13 +41,14 @@ public class FruitTransactionProcessorImplTest {
                 "s,banana,50"));
         fruitTransactionProcessor.process(lines);
         Map<String, Integer> expected = Map.of("banana",100, "apple",90);
-        assertEquals(expected, Storage.storage);
+        Map<String, Integer> actual = Storage.storage;
+        assertEquals(expected, actual);
     }
 
     @Test
     public void transaction_nonValidOperation_notOk() {
-        expectionRule.expect(RuntimeException.class);
-        expectionRule.reportMissingExceptionWithMessage(
+        exceptionRule.expect(RuntimeException.class);
+        exceptionRule.reportMissingExceptionWithMessage(
                 "Should get exception for inappropriate operation");
         lines.addAll(List.of("type,fruit,quantity", "b,banana,20", "b,apple,100",
                 "s,banana,100", "y,banana,13"));

@@ -33,19 +33,19 @@ public class BalanceOperationHandlerTest {
         actual.setOperation(FruitTransaction.Operation.BALANCE);
         actual.setQuantity(152);
         operationHandler.handle(actual);
-        FruitTransaction expected = fruitDao.get("banana");
+        FruitTransaction expected = Storage.warehouse.get(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void handle_parameterNull_notOk() {
+    public void handle_null_notOk() {
         assertThrows(RuntimeException.class, () -> {
             operationHandler.handle(null);
         });
     }
 
     @Test
-    public void handle_parameterNotSetFields_notOk() {
+    public void handle_notSetFields_notOk() {
         assertThrows(RuntimeException.class, () -> {
             operationHandler.handle(new FruitTransaction());
         });

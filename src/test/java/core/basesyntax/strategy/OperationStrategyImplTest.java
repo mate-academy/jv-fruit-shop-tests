@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImp;
@@ -71,5 +72,12 @@ public class OperationStrategyImplTest {
         Class<? extends OperationHandler> actual
                 = operationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_null_Ok() {
+        assertThrows(RuntimeException.class, () -> {
+            operationStrategy.get(null);
+        });
     }
 }

@@ -23,7 +23,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void getAll_emptyStorage_notOk() {
+    public void getAll_emptyStorage_ok() {
         String expected = "";
         String actual = fruitService.getAll();
         assertEquals(expected, actual);

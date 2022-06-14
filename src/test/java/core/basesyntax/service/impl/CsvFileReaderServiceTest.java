@@ -18,7 +18,7 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void read_filePathEmptyString_notOk() {
+    public void read_emptyFilePath_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReaderService.read("");
         });

@@ -18,14 +18,14 @@ public class FruitDaoImpTest {
     }
 
     @Test
-    public void aad_null_notOk() {
+    public void add_null_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fruitDao.add(null);
         });
     }
 
     @Test
-    public void add_parameterFruitNull_notOk() {
+    public void add_nullFruit_notOk() {
         FruitTransaction parameterFruitNull = new FruitTransaction();
         parameterFruitNull.setFruit(null);
         parameterFruitNull.setQuantity(10);
@@ -36,7 +36,7 @@ public class FruitDaoImpTest {
     }
 
     @Test
-    public void add_parameterQuantityNull_notOk() {
+    public void add_nullQuantity_notOk() {
         FruitTransaction parameterFruitNull = new FruitTransaction();
         parameterFruitNull.setFruit("banana");
         parameterFruitNull.setQuantity(0);
@@ -47,7 +47,7 @@ public class FruitDaoImpTest {
     }
 
     @Test
-    public void add_parameterOperationNull_notOk() {
+    public void add_nullOperation_notOk() {
         FruitTransaction parameterFruitNull = new FruitTransaction();
         parameterFruitNull.setFruit("banana");
         parameterFruitNull.setQuantity(100);
@@ -58,7 +58,7 @@ public class FruitDaoImpTest {
     }
 
     @Test
-    public void add_correctParameter_ok() {
+    public void add_validData_ok() {
         FruitTransaction actual = new FruitTransaction();
         actual.setFruit("banana");
         actual.setQuantity(15);

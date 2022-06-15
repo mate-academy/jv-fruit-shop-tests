@@ -25,7 +25,7 @@ public class WriterServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void invalidPath_notOk() {
+    public void writeToFile_invalidPath_notOk() {
         writerService.writeToFile("", "type,fruit,quantity"
                 + System.lineSeparator() + "b,banana,20");
     }

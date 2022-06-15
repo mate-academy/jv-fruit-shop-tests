@@ -10,10 +10,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private static final Map<Operation, OperationHandler> quantityHandlerMap;
+    private static final Map<Operation, OperationHandler> operationHandlerMap;
 
     static {
-        quantityHandlerMap = Arrays.stream(Operation.values())
+        operationHandlerMap = Arrays.stream(Operation.values())
                 .collect(Collectors.toMap(Function.identity(), operation ->
                         operation == Operation.BALANCE
                                 || operation == Operation.RETURN
@@ -25,8 +25,8 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public OperationHandler getOperationHandler(Operation operation) {
         if (operation == null) {
-            throw new RuntimeException("Fruit operation cannot be null");
+            throw new IllegalArgumentException("Fruit operation cannot be null");
         }
-        return quantityHandlerMap.get(operation);
+        return operationHandlerMap.get(operation);
     }
 }

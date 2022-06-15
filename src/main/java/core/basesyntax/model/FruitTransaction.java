@@ -29,10 +29,10 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private static final Map<String, Operation> OPERATIONS_MAP;
+        private static final Map<String, Operation> operationsMap;
 
         static {
-            OPERATIONS_MAP = Arrays.stream(Operation.values())
+            operationsMap = Arrays.stream(Operation.values())
                     .collect(Collectors.toMap(Operation::getLetter, Function.identity()));
         }
 
@@ -47,13 +47,10 @@ public class FruitTransaction {
         }
 
         public static Operation getOperationByLetter(String letter) {
-            if (letter == null) {
-                throw new RuntimeException("Fruit operation cannot be null");
-            }
-            if (OPERATIONS_MAP.get(letter) == null) {
+            if (operationsMap.get(letter) == null) {
                 throw new IllegalArgumentException("No such fruit operation type: " + letter);
             }
-            return OPERATIONS_MAP.get(letter);
+            return operationsMap.get(letter);
         }
     }
 

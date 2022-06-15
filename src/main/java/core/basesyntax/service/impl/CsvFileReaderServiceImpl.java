@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
+        Objects.requireNonNull(filePath, "Filepath cannot be null");
         try (var rows = Files.lines(Paths.get(filePath))) {
             return rows.collect(Collectors.toList());
         } catch (IOException e) {

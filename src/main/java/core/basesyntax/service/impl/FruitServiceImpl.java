@@ -8,6 +8,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
@@ -19,19 +20,12 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public List<Fruit> getAll(List<FruitTransaction> fruitTransactions) {
-        if (fruitTransactions == null) {
-            throw new RuntimeException("FruitTransactions cannot be null");
-        }
+        Objects.requireNonNull(fruitTransactions, "FruitTransactions cannot be null");
         fruitTransactions.forEach(fruitTransaction -> {
-            if (fruitTransaction == null) {
-                throw new RuntimeException("FruitTransaction cannot be null");
-            }
-            if (fruitTransaction.getFruit() == null) {
-                throw new RuntimeException("Fruit cannot be null");
-            }
-            if (fruitTransaction.getFruit().getName() == null) {
-                throw new RuntimeException("Fruit name cannot be null");
-            }
+            Objects.requireNonNull(fruitTransaction, "FruitTransaction cannot be null");
+            Objects.requireNonNull(fruitTransaction.getFruit(), "Fruit cannot be null");
+            Objects.requireNonNull(
+                    fruitTransaction.getFruit().getName(), "Fruit name cannot be null");
         });
         Map<String, Integer> fruitBalanceMap = fruitTransactions.stream()
                 .collect(Collectors.groupingBy(

@@ -37,13 +37,13 @@ public class FruitTransactionTest {
 
     @Test
     public void getOperationByLetter_validOperation_Ok() {
-        Operation actualResult1 = Operation.getOperationByLetter("b");
-        assertEquals(Operation.BALANCE, actualResult1);
-        Operation actualResult2 = Operation.getOperationByLetter("r");
-        assertEquals(Operation.RETURN, actualResult2);
-        Operation actualResult3 = Operation.getOperationByLetter("s");
-        assertEquals(Operation.SUPPLY, actualResult3);
-        Operation actualResult4 = Operation.getOperationByLetter("p");
-        assertEquals(Operation.PURCHASE, actualResult4);
+        Operation actualResultFirst = Operation.getOperationByLetter("b");
+        assertEquals(Operation.BALANCE, actualResultFirst);
+        Operation actualResultSecond = Operation.getOperationByLetter("r");
+        assertEquals(Operation.RETURN, actualResultSecond);
+        Operation actualResultThird = Operation.getOperationByLetter("s");
+        assertEquals(Operation.SUPPLY, actualResultThird);
+        Operation actualResultFourth = Operation.getOperationByLetter("p");
+        assertEquals(Operation.PURCHASE, actualResultFourth);
     }
 }

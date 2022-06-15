@@ -17,14 +17,14 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getOperationHandler_validOperation_Ok() {
-        OperationHandler actualResult1 = operationStrategy.getOperationHandler(Operation.BALANCE);
-        assertEquals(PositiveOperationHandlerImpl.class, actualResult1.getClass());
-        OperationHandler actualResult2 = operationStrategy.getOperationHandler(Operation.RETURN);
-        assertEquals(PositiveOperationHandlerImpl.class, actualResult2.getClass());
-        OperationHandler actualResult3 = operationStrategy.getOperationHandler(Operation.SUPPLY);
-        assertEquals(PositiveOperationHandlerImpl.class, actualResult3.getClass());
-        OperationHandler actualResult4 = operationStrategy.getOperationHandler(Operation.PURCHASE);
-        assertEquals(NegativeOperationHandlerImpl.class, actualResult4.getClass());
+        OperationHandler actualResultFirst = operationStrategy.getOperationHandler(Operation.BALANCE);
+        assertEquals(PositiveOperationHandlerImpl.class, actualResultFirst.getClass());
+        OperationHandler actualResultSecond = operationStrategy.getOperationHandler(Operation.RETURN);
+        assertEquals(PositiveOperationHandlerImpl.class, actualResultSecond.getClass());
+        OperationHandler actualResultThird = operationStrategy.getOperationHandler(Operation.SUPPLY);
+        assertEquals(PositiveOperationHandlerImpl.class, actualResultThird.getClass());
+        OperationHandler actualResultFourth = operationStrategy.getOperationHandler(Operation.PURCHASE);
+        assertEquals(NegativeOperationHandlerImpl.class, actualResultFourth.getClass());
     }
 
     @Test

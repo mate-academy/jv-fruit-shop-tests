@@ -2,8 +2,6 @@ package service;
 
 import java.util.List;
 
-public interface FileService {
+public interface FileReaderService {
     List<String[]> readFile(String filePath);
-
-    void writeFile(String filePath, List<String[]> message);
 }

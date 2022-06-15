@@ -61,7 +61,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_quantityNull_notOk() {
+    public void handle_quantityZero_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(0);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

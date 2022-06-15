@@ -22,12 +22,13 @@ public class OperationStrategyImplTest {
     private FruitDao fruitDao;
     private FruitService fruitService;
     private OperationStrategy operationStrategy;
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     @Before
     public void setUp() throws Exception {
         fruitDao = new FruitDaoImp();
         fruitService = new FruitServiceImpl(fruitDao);
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap = new HashMap<>();
         operationHandlerMap
                 .put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitService));
         operationHandlerMap
@@ -75,9 +76,17 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_null_Ok() {
+    public void get_nullOperation_notOk() {
         assertThrows(RuntimeException.class, () -> {
             operationStrategy.get(null);
+        });
+    }
+
+    @Test
+    public void get_notExistedOperations_notOk() {
+        operationHandlerMap.remove(FruitTransaction.Operation.RETURN);
+        assertThrows(RuntimeException.class, () -> {
+            operationStrategy.get(FruitTransaction.Operation.RETURN);
         });
     }
 }

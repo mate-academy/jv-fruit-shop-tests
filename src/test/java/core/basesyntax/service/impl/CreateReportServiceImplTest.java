@@ -24,7 +24,7 @@ public class CreateReportServiceImplTest {
     }
 
     @Test
-    public void createReport_workWell_Ok() {
+    public void createReport_validData_Ok() {
         FruitTransaction banana = new FruitTransaction();
         banana.setFruit("banana");
         banana.setOperation(FruitTransaction.Operation.BALANCE);

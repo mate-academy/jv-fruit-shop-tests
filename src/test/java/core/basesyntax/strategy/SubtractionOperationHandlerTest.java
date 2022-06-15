@@ -24,7 +24,7 @@ public class SubtractionOperationHandlerTest {
     }
 
     @Test
-    public void subtractionOperation_Ok() {
+    public void apply_Ok() {
         subtractionOperationHandler.apply(new FruitTransaction("b","banana",20));
         Integer actual = Storage.storage.get(new Fruit("banana"));
         Integer expected = 20;

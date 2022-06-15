@@ -23,7 +23,7 @@ public class AdditionOperationHandlerTest {
     }
 
     @Test
-    public void additionOperation_Ok() {
+    public void apply_Ok() {
         additionOperationHandler.apply(new FruitTransaction("b","banana",20));
         additionOperationHandler.apply(new FruitTransaction("b","banana",20));
         Integer actual = Storage.storage.get(new Fruit("banana"));

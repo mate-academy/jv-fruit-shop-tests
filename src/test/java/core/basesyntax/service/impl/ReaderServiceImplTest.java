@@ -26,4 +26,9 @@ public class ReaderServiceImplTest {
         readerService.readFromFile("wrong path");
         readerService.readFromFile(null);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void nullPath_notOk() {
+        readerService.readFromFile(null);
+    }
 }

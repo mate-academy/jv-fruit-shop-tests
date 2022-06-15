@@ -31,5 +31,12 @@ public class ReportServiceImplTest {
                 + System.lineSeparator() + "apple,90";
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void emptyStorage_Ok() {
+        String expected = "fruit,quantity";
+        String actual = reportService.createReport();
+        assertEquals(expected, actual);
+    }
 }
 

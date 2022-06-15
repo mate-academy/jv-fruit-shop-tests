@@ -16,7 +16,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class FruitTransactionServiceImplTest {
-    private static final FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+    private static final FruitTransactionService fruitTransactionService =
+            new FruitTransactionServiceImpl();
     private static final List<FruitTransaction> expectedFruitTransactions = List.of(
             new FruitTransaction(Operation.BALANCE, new Fruit("banana", 20)),
             new FruitTransaction(Operation.BALANCE, new Fruit("apple", 100)),

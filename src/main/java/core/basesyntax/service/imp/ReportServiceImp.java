@@ -18,7 +18,7 @@ public class ReportServiceImp implements ReportService {
         List<String> report = productDao.getAll()
                 .entrySet()
                 .stream()
-                .map(e -> e.getKey() + SEPARATOR + e.getValue().toString())
+                .map(e -> e.getKey() + SEPARATOR + e.getValue())
                 .collect(Collectors.toList());
 
         report.add(0, header);

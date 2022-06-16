@@ -21,6 +21,7 @@ public class ActivitiesStrategyImpTest {
     @BeforeClass
     public static void beforeClass() {
         ProductDao productDao = new ProductDaoImp(storage);
+
         addActivitiesHandler = new AddActivitiesHandler(productDao);
         subActivitiesHandler = new SubstractActivitiesHandler(productDao);
         Map<ProductTransaction.Operation, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();

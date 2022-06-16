@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImp;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.ProductTransaction;
 import core.basesyntax.service.imp.CsvValidatorImp;
 import core.basesyntax.service.imp.ReaderServiceImp;
@@ -25,7 +26,7 @@ public class Main {
     private static final String REPORT_HEADER = "fruit,quantity";
 
     public static void main(String[] args) {
-        ProductDao productDao = new ProductDaoImp();
+        ProductDao productDao = new ProductDaoImp(Storage.product);
         ActivitiesHandler addActivitiesHandler = new AddActivitiesHandler(productDao);
         ActivitiesHandler subActivitiesHandler = new SubstractActivitiesHandler(productDao);
 

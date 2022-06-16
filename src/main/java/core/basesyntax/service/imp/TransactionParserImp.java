@@ -21,6 +21,9 @@ public class TransactionParserImp implements TransactionParser {
     @Override
     public ProductTransaction parse(String line) {
         String[] elements = line.split(SPLITERATOR);
+        if (elements.length < 3) {
+            throw new RuntimeException("Invalid records of activity: " + line);
+        }
         if (!OPERATION_MAP.containsKey(elements[INDEX_OF_OPERATION])) {
             throw new RuntimeException("Incorrect type of activity: " + line);
         }

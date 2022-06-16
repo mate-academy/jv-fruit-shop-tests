@@ -13,17 +13,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ActivitiesStrategyImpTest {
-    private static Map<String, Integer> storage;
-    private static ActivitiesHandler addActivitiesHandler;
-    private static ActivitiesHandler subActivitiesHandler;
     private static ActivitiesStrategy activitiesStrategy;
 
     @BeforeClass
     public static void beforeClass() {
-        ProductDao productDao = new ProductDaoImp(storage);
-
-        addActivitiesHandler = new AddActivitiesHandler(productDao);
-        subActivitiesHandler = new SubstractActivitiesHandler(productDao);
+        ProductDao productDao = new ProductDaoImp(new HashMap<>());
+        ActivitiesHandler addActivitiesHandler = new AddActivitiesHandler(productDao);
+        ActivitiesHandler subActivitiesHandler = new SubstractActivitiesHandler(productDao);
         Map<ProductTransaction.Operation, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
         activitiesHandlerMap.put(ProductTransaction.Operation.BALANCE, addActivitiesHandler);
         activitiesHandlerMap.put(ProductTransaction.Operation.SUPPLY, addActivitiesHandler);
@@ -35,6 +31,6 @@ public class ActivitiesStrategyImpTest {
     @Test
     public void getSubActivityFromBalance_ok() {
         Assert.assertEquals(activitiesStrategy.get(ProductTransaction.Operation.BALANCE)
-                        .getClass(), addActivitiesHandler.getClass());
+                        .getClass(), AddActivitiesHandler.class);
     }
 }

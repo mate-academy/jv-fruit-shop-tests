@@ -36,23 +36,4 @@ public class ActivitiesStrategyImpTest {
         Assert.assertEquals(activitiesStrategy.get(ProductTransaction.Operation.BALANCE)
                         .getClass(), addActivitiesHandler.getClass());
     }
-
-    @Test
-    public void getSubActivityFromSypply_ok() {
-        Assert.assertEquals(activitiesStrategy.get(ProductTransaction.Operation.SUPPLY)
-                        .getClass(), addActivitiesHandler.getClass());
-    }
-
-    @Test
-    public void getSubActivityFromPurchase_ok() {
-        Assert.assertEquals(activitiesStrategy.get(ProductTransaction.Operation.PURCHASE)
-                        .getClass(), subActivitiesHandler.getClass());
-    }
-
-    @Test
-    public void getSubActivityFromReturn_ok() {
-        Assert.assertEquals(activitiesStrategy.get(ProductTransaction.Operation.RETURN)
-                        .getClass(), addActivitiesHandler.getClass());
-    }
-
 }

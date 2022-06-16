@@ -11,8 +11,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImpTest {
-    private static final String VALID_FILE_DESTINATION = "src/main/resources/DayRecords.csv";
-    private static final String INVALID_FILE_DESTINATION = "C://";
+    private static final String VALID_FILE_DESTINATION = "src/test/resources/TestReport.csv";
+    private static final String INVALID_FILE_DESTINATION = "/";
     private static WriterService writerService;
     private static List<String> records;
 

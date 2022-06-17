@@ -4,18 +4,28 @@ import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
+    private Map<String, Integer> storage;
+
+    public FruitDaoImpl() {
+        this.storage = Storage.fruitsAvailable;
+    }
+
+    public FruitDaoImpl(Map<String, Integer> storage) {
+        this.storage = storage;
+    }
+
     @Override
     public void update(String key, int value) {
-        Storage.fruitsAvailable.put(key, value);
+        storage.put(key, value);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return Storage.fruitsAvailable;
+        return storage;
     }
 
     @Override
     public int get(String key) {
-        return Storage.fruitsAvailable.get(key) == null ? 0 : Storage.fruitsAvailable.get(key);
+        return storage.get(key) == null ? 0 : storage.get(key);
     }
 }

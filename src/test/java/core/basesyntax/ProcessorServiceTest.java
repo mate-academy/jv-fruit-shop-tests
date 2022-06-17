@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ProcessorService;
 import core.basesyntax.service.impl.ProcessorServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
@@ -22,8 +21,8 @@ import org.junit.Test;
 
 public class ProcessorServiceTest {
     private static FruitDao dao;
-    private static TransactionStrategy strategy;
     private static ProcessorService processorService;
+    private static Map<String, Integer> storage;
 
     @BeforeClass
     public static void beforeAll() {
@@ -32,8 +31,9 @@ public class ProcessorServiceTest {
         transactionHandlersMap.put("s", new SupplyTransactionHandler());
         transactionHandlersMap.put("p", new PurchaseTransactionHandler());
         transactionHandlersMap.put("r", new ReturnTransactionHandler());
-        dao = new FruitDaoImpl();
-        strategy = new TransactionStrategyImpl(transactionHandlersMap);
+        storage = new HashMap<>();
+        dao = new FruitDaoImpl(storage);
+        TransactionStrategy strategy = new TransactionStrategyImpl(transactionHandlersMap);
         processorService = new ProcessorServiceImpl(dao, strategy);
     }
 
@@ -63,8 +63,20 @@ public class ProcessorServiceTest {
         Assert.assertEquals(dao.get("grapefruit"), 1085);
     }
 
+    @Test
+    public void process_invalidHeader_ok() {
+        processorService.processData(List.of("aamcgoreimvleiotumovoci"));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void process_invalidNumberOfRows_notOk() {
+        processorService.processData(List.of(
+                "type,fruit",
+                "b,banana"));
+    }
+
     @After
     public void afterEach() {
-        Storage.fruitsAvailable.clear();
+        storage.clear();
     }
 }

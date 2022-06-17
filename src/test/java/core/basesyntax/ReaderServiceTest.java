@@ -42,15 +42,9 @@ public class ReaderServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void readNotExistingFile_shouldThrowRuntimeException_ok() {
-        try {
-            readerService.readFile(INVALID_FILE_NAME);
-        } catch (RuntimeException e) {
-            return;
-        }
-
-        Assert.fail("Should throw new RuntimeException");
+    @Test(expected = RuntimeException.class)
+    public void readNotExistingFile_shouldThrowRuntimeException_notOk() {
+        readerService.readFile(INVALID_FILE_NAME);
     }
 
     @Test

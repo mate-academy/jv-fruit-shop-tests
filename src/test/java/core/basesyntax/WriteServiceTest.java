@@ -42,17 +42,14 @@ public class WriteServiceTest {
         }
     }
 
-    @Test
-    public void writeExistingFile_shouldThrowRuntimeException_ok() {
+    @Test(expected = RuntimeException.class)
+    public void writeExistingFile_shouldThrowRuntimeException_notOk() {
         try {
             Files.createFile(Path.of(FILE_NAME));
             writerService.writeFile("sth", FILE_NAME);
-        } catch (RuntimeException e) {
-            return;
         } catch (IOException e) {
             throw new RuntimeException("Cannot create file from path: " + FILE_NAME);
         }
-        Assert.fail("Should throw new RuntimeException");
     }
 
     @After

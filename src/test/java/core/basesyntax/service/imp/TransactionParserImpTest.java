@@ -13,11 +13,6 @@ public class TransactionParserImpTest {
     private static final String CORRECT_LINE_SUPPLY = "s,apple,20";
     private static final String CORRECT_LINE_PURCHASE = "p,apple,20";
     private static final String CORRECT_LINE_RETURN = "r,apple,20";
-    private static final String INVALID_TYPE_LINE = "j,apple,20";
-    private static final String ZERO_QUANTITY_LINE = "b,apple,0";
-    private static final String INVALID_RECORDS = "banana, 0";
-    private static final String APPLE = "apple";
-    private static final int QUANTITY = 20;
     private static TransactionParser transactionParser;
 
     @BeforeClass
@@ -27,11 +22,13 @@ public class TransactionParserImpTest {
 
     @Test
     public void parseValidBalanceFull_ok() {
+        String productName = "apple";
+        int quantity = 20;
         ProductTransaction transaction = transactionParser.parse(CORRECT_LINE_BALANCE);
         Assert.assertEquals("Product type: ", ProductTransaction.Operation.BALANCE,
                 transaction.getOperation());
-        Assert.assertEquals("Product name: ", APPLE, transaction.getProduct());
-        Assert.assertEquals("Product quantity: ", QUANTITY, transaction.getQuantity());
+        Assert.assertEquals("Product name: ", productName, transaction.getProduct());
+        Assert.assertEquals("Product quantity: ", quantity, transaction.getQuantity());
     }
 
     @Test
@@ -69,17 +66,20 @@ public class TransactionParserImpTest {
 
     @Test(expected = RuntimeException.class)
     public void parseInvalidOperationType_notOk() {
-        transactionParser.parse(INVALID_TYPE_LINE);
+        String invalidTypeLine = "j,apple,20";
+        transactionParser.parse(invalidTypeLine);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseInvalidQuantity_notOk() {
-        transactionParser.parse(ZERO_QUANTITY_LINE);
+        String zeroQuantityLine = "b,apple,0";
+        transactionParser.parse(zeroQuantityLine);
     }
 
     @Test(expected = RuntimeException.class)
     public void parseInvalidRecords_notOk() {
-        transactionParser.parse(INVALID_RECORDS);
+        String invalidRecords = "banana, 0";
+        transactionParser.parse(invalidRecords);
     }
 
 }

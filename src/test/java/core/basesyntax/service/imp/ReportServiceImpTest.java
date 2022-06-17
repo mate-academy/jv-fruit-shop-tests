@@ -25,7 +25,7 @@ public class ReportServiceImpTest {
     public void createReportFromEmptyStorage_ok() {
         List<String> reportLines = reportService.createReport(HEADER);
         Assert.assertEquals(1,reportLines.size());
-        Assert.assertEquals("Header: ",reportLines.get(0), HEADER);
+        Assert.assertEquals("Header: ", reportLines.get(0), HEADER);
     }
 
     @Test

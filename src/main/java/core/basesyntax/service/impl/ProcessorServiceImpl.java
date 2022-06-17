@@ -10,6 +10,9 @@ public class ProcessorServiceImpl implements ProcessorService {
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String TYPE_COLUMN = "type";
+    private static final String FRUIT_COLUMN = "fruit";
+    private static final String QUANTITY_COLUMN = "quantity";
     private TransactionStrategy transactionStrategy;
     private FruitDao dao;
 
@@ -20,6 +23,10 @@ public class ProcessorServiceImpl implements ProcessorService {
 
     @Override
     public void processData(List<String> rawData) {
+        if (!rawData.get(0).equals(TYPE_COLUMN + SEPARATOR
+                + FRUIT_COLUMN + SEPARATOR + QUANTITY_COLUMN)) {
+            throw new RuntimeException("Invalid header");
+        }
         rawData.stream()
                 .skip(1)
                 .map(n -> n.split(SEPARATOR))

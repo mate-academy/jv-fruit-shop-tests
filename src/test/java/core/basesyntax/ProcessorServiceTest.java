@@ -63,7 +63,7 @@ public class ProcessorServiceTest {
         Assert.assertEquals(dao.get("grapefruit"), 1085);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void process_invalidHeader_ok() {
         processorService.processData(List.of("aamcgoreimvleiotumovoci"));
     }

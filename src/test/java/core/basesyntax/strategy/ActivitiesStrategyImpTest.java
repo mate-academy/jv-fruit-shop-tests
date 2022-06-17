@@ -29,7 +29,7 @@ public class ActivitiesStrategyImpTest {
     }
 
     @Test
-    public void getSubActivityFromBalance_ok() {
+    public void get_subActivityFromBalance_ok() {
         Assert.assertEquals(activitiesStrategy.get(ProductTransaction.Operation.BALANCE)
                         .getClass(), AddActivitiesHandler.class);
     }

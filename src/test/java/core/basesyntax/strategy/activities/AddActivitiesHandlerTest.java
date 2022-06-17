@@ -24,7 +24,7 @@ public class AddActivitiesHandlerTest {
     }
 
     @Test
-    public void processAddingValidTransaction_ok() {
+    public void process_addingValidTransaction_ok() {
         activitiesHandler.process(transaction);
         Assert.assertEquals("Quantity of banana: ", QUANTITY, storage.get(BANANA).intValue());
     }

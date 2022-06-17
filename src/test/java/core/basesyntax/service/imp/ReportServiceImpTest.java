@@ -22,14 +22,14 @@ public class ReportServiceImpTest {
     }
 
     @Test
-    public void createReportFromEmptyStorage_ok() {
+    public void createReport_emptyStorage_ok() {
         List<String> reportLines = reportService.createReport(HEADER);
         Assert.assertEquals(1,reportLines.size());
         Assert.assertEquals("Header: ", reportLines.get(0), HEADER);
     }
 
     @Test
-    public void createReportFromStorage_ok() {
+    public void createReport_storage_ok() {
         storage.put("apple", 1);
         storage.put("orange", 10);
         storage.put("banana", 5);
@@ -38,7 +38,7 @@ public class ReportServiceImpTest {
     }
 
     @Test
-    public void createReportWithNullValueQuantity_ok() {
+    public void createReport_nullQuantity_ok() {
         storage.put("banana", null);
         List<String> reportLines = reportService.createReport(HEADER);
         Assert.assertEquals("Size of list: ",storage.size() + 1, reportLines.size());

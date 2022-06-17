@@ -25,20 +25,20 @@ public class SubstractActivitiesHandlerTest {
     }
 
     @Test
-    public void processSubValidTransaction_ok() {
+    public void process_subValidTransaction_ok() {
         storage.put(BANANA, QUANTITY);
         activitiesHandler.process(transaction);
         Assert.assertEquals("Quantity:", 0, storage.get(BANANA).intValue());
     }
 
     @Test(expected = RuntimeException.class)
-    public void processSubMoreThenExist_notOk() {
+    public void process_subMoreThenExist_notOk() {
         storage.put(BANANA, 1);
         activitiesHandler.process(transaction);
     }
 
     @Test(expected = RuntimeException.class)
-    public void processSubFromEmptyStorage_notOk() {
+    public void process_subEmptyStorage_notOk() {
         activitiesHandler.process(transaction);
     }
 

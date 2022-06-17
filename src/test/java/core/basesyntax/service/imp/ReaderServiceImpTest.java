@@ -17,12 +17,12 @@ public class ReaderServiceImpTest {
     }
 
     @Test
-    public void readRecordsFromValidSource_ok() {
+    public void readRecords_validSource_ok() {
         Assert.assertTrue(readerService.readRecords(Path.of(VALID_FILE_SOURCE)).size() > 0);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readRecordsFromInvalidSource_notOk() {
+    public void readRecords_invalidSource_notOk() {
         readerService.readRecords(Path.of(INVALID_FILE_SOURCE));
     }
 }

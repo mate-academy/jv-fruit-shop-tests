@@ -21,14 +21,14 @@ public class CsvValidatorImpTest {
     }
 
     @Test
-    public void validateValidCsv_ok() {
+    public void validate_validCsv_ok() {
         csvData.add(0, HEADER);
         csvData.add(SOME_CSV_LINE);
         Assert.assertTrue(csvData.containsAll(csvValidator.validate(csvData)));
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateInvalidCsv_notOK() {
+    public void validate_invalidCsv_notOk() {
         csvData.add(SOME_CSV_LINE);
         csvValidator.validate(csvData);
     }

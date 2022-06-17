@@ -21,7 +21,7 @@ public class TransactionParserImpTest {
     }
 
     @Test
-    public void parseValidBalanceFull_ok() {
+    public void parse_validBalanceFull_ok() {
         String productName = "apple";
         int quantity = 20;
         ProductTransaction transaction = transactionParser.parse(CORRECT_LINE_BALANCE);
@@ -32,28 +32,28 @@ public class TransactionParserImpTest {
     }
 
     @Test
-    public void parseValidSupply_ok() {
+    public void parse_validSupply_ok() {
         ProductTransaction transaction = transactionParser.parse(CORRECT_LINE_SUPPLY);
         Assert.assertEquals("Product type: ", ProductTransaction.Operation.SUPPLY,
                 transaction.getOperation());
     }
 
     @Test
-    public void parseValidPurchase_ok() {
+    public void parse_validPurchase_ok() {
         ProductTransaction transaction = transactionParser.parse(CORRECT_LINE_PURCHASE);
         Assert.assertEquals("Product type: ", ProductTransaction.Operation.PURCHASE,
                 transaction.getOperation());
     }
 
     @Test
-    public void parseValidReturn_ok() {
+    public void parse_validReturn_ok() {
         ProductTransaction transaction = transactionParser.parse(CORRECT_LINE_RETURN);
         Assert.assertEquals("Product type: ", ProductTransaction.Operation.RETURN,
                 transaction.getOperation());
     }
 
     @Test
-    public void parseAllValidInput_ok() {
+    public void parseAll_validInput_ok() {
         List<String> records = new ArrayList<>();
         records.add(CORRECT_LINE_BALANCE);
         records.add(CORRECT_LINE_SUPPLY);
@@ -65,21 +65,20 @@ public class TransactionParserImpTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseInvalidOperationType_notOk() {
+    public void parse_invalidOperationType_notOk() {
         String invalidTypeLine = "j,apple,20";
         transactionParser.parse(invalidTypeLine);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseInvalidQuantity_notOk() {
+    public void parse_invalidQuantity_notOk() {
         String zeroQuantityLine = "b,apple,0";
         transactionParser.parse(zeroQuantityLine);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseInvalidRecords_notOk() {
+    public void parse_invalidRecords_notOk() {
         String invalidRecords = "banana, 0";
         transactionParser.parse(invalidRecords);
     }
-
 }

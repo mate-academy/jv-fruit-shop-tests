@@ -24,7 +24,7 @@ public class WriterServiceImpTest {
     }
 
     @Test
-    public void writeValidDestination_ok() {
+    public void write_validDestination_ok() {
         Path path = Path.of(VALID_FILE_DESTINATION);
         writerService.writeToFile(records, path);
         List<String> readedLines;
@@ -37,7 +37,7 @@ public class WriterServiceImpTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeInvalidDestination_notOk() {
+    public void write_invalidDestination_notOk() {
         writerService.writeToFile(records, Path.of(INVALID_FILE_DESTINATION));
     }
 }

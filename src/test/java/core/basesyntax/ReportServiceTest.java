@@ -33,7 +33,7 @@ public class ReportServiceTest {
                 + "grapefruit,1085" + System.lineSeparator()
                 + "orange,6";
         String actual = reportService.makeReport();
-        Assert.assertEquals("expected: " + expected + ", actual: " + actual, expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @After

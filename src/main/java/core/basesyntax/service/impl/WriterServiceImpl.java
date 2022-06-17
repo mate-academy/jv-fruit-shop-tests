@@ -9,10 +9,11 @@ import java.nio.file.Path;
 public class WriterServiceImpl implements WriterService {
     @Override
     public void writeFile(String data, String fileName) {
-        Path filePath = Path.of(fileName);
         try {
-            Files.createFile(filePath);
-            Files.write(filePath, data.getBytes(StandardCharsets.UTF_8));
+            if (Files.exists(Path.of(fileName))) {
+                throw new RuntimeException("File " + fileName + " already exists");
+            }
+            Files.write(Path.of(fileName), data.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException("Can't write report to file: " + fileName, e);
         }

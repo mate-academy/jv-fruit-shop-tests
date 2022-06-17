@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriteServiceTest {
+public class WriterServiceTest {
     private static final String FILE_NAME = "src/test/resources/testreport.csv";
     private static WriterService writerService;
 
@@ -43,21 +43,13 @@ public class WriteServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeExistingFile_shouldThrowRuntimeException_notOk() {
-        try {
-            Files.createFile(Path.of(FILE_NAME));
-            writerService.writeFile("sth", FILE_NAME);
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot create file from path: " + FILE_NAME);
-        }
+    public void writeExistingFile_shouldThrowRuntimeException_notOk() throws IOException {
+        Files.createFile(Path.of(FILE_NAME));
+        writerService.writeFile("sth", FILE_NAME);
     }
 
     @After
-    public void afterEach() {
-        try {
-            Files.delete(Path.of(FILE_NAME));
-        } catch (IOException e) {
-            return;
-        }
+    public void afterEach() throws IOException {
+        Files.delete(Path.of(FILE_NAME));
     }
 }

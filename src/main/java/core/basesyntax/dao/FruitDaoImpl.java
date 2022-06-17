@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private Map<String, Integer> storage;
+    private final Map<String, Integer> storage;
 
     public FruitDaoImpl() {
         this.storage = Storage.fruitsAvailable;
@@ -26,6 +26,6 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public int get(String key) {
-        return storage.get(key) == null ? 0 : storage.get(key);
+        return storage.getOrDefault(key, 0);
     }
 }

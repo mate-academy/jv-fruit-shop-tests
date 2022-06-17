@@ -18,17 +18,17 @@ public class FileReadingServiceImplTest {
     public static void setFileHandler() {
         fileReader = new FileReadingServiceImpl();
         EXPECTED_DATA = new ArrayList<>();
-        EXPECTED_DATA.add(" type,fruit,quantity");
-        EXPECTED_DATA.add("    b,banana,20");
-        EXPECTED_DATA.add("    b,apple,100");
-        EXPECTED_DATA.add("    s,banana,200");
-        EXPECTED_DATA.add("    p,banana,13");
+        EXPECTED_DATA.add("type,fruit,quantity");
+        EXPECTED_DATA.add("b,banana,20");
+        EXPECTED_DATA.add("b,apple,100");
+        EXPECTED_DATA.add("s,banana,200");
+        EXPECTED_DATA.add("p,banana,13");
     }
 
     @Test
     public void readFile_ok() {
         List<String> actualData = fileReader.readFile(FILE_NAME);
-        assertEquals("Expected: " + EXPECTED_DATA.toString() + "\n"
+        assertEquals("Expected: " + EXPECTED_DATA.toString() + System.lineSeparator()
                 + "Actual: " + actualData.toString(), EXPECTED_DATA, actualData);
     }
 

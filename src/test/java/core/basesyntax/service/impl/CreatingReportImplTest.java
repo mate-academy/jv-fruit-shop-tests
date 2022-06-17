@@ -20,14 +20,10 @@ public class CreatingReportImplTest {
         creatingReport = new CreatingReportImpl();
     }
 
-    @Before
-    public void fillStorage() {
-        FruitsStorage.fruitsStorage.put("banana", 100);
-        FruitsStorage.fruitsStorage.put("apple", 100);
-    }
-
     @Test
     public void createReport_ok() {
+        FruitsStorage.fruitsStorage.put("banana", 100);
+        FruitsStorage.fruitsStorage.put("apple", 100);
         String actualResult = creatingReport.createReport();
         assertEquals(EXPECTED_REPORT, actualResult);
     }

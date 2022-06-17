@@ -36,12 +36,8 @@ public class FruitDaoImplTest {
         int bananaActual = fromStorageForTest.get(BANANA);
         int appleActual = fromStorageForTest.get(APPLE);
 
-        assertEquals("Bananas quantity should be " + bananaExpected
-                + ", but was: " + bananaActual,
-                bananaExpected, bananaActual);
-        assertEquals("Apples quantity should be " + appleExpected
-                        + ", but was: " + appleActual,
-                appleExpected, appleActual);
+        assertEquals(bananaExpected, bananaActual);
+        assertEquals(appleExpected, appleActual);
     }
 
     @Test (expected = RuntimeException.class)

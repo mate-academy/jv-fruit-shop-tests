@@ -20,11 +20,11 @@ public class ProcessingDataImplTest {
         processingData = new ProcessingDataImpl();
         incomeData = new ArrayList<>();
         expectedData = new ArrayList<>();
-        incomeData.add(" type,fruit,quantity");
-        incomeData.add("    b,banana,20");
-        incomeData.add("    b,apple,100");
-        incomeData.add("    s,banana,200");
-        incomeData.add("    p,banana,13");
+        incomeData.add("type,fruit,quantity");
+        incomeData.add("b,banana,20");
+        incomeData.add("b,apple,100");
+        incomeData.add("s,banana,200");
+        incomeData.add("p,banana,13");
         expectedData.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
         expectedData.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
         expectedData.add(new FruitTransaction(Operation.SUPPLY, "banana", 200));

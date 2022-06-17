@@ -15,7 +15,7 @@ public class SupplyTest {
             = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20);
     private static final FruitTransaction CORRECT_FRUIT_THAT_NOT_EXIST
             = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "pineapple", 150);
-    private static final FruitTransaction INCORRECT_ENOTHER_OPER
+    private static final FruitTransaction INCORRECT_OPERATION
             = new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 20);
     private static final String NEW_FRUIT = "pineapple";
     private static Supply supply;
@@ -47,7 +47,7 @@ public class SupplyTest {
 
     @Test (expected = RuntimeException.class)
     public void makeOperation_incorrectTransaction_notOk() {
-        supply.makeOperation(INCORRECT_ENOTHER_OPER);
+        supply.makeOperation(INCORRECT_OPERATION);
     }
 
     @After

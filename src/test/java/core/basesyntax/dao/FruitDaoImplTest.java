@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dbfortest.FruitStorageForTests;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
@@ -16,16 +16,18 @@ public class FruitDaoImplTest {
     private static final String APPLE_UPPERCASE = "APPLE";
     private static final String NON_EXIST_FRUIT = "pineapple";
     private static FruitDao fruitDao;
+    private static Map<String, Integer> storage;
 
     @BeforeClass
     public static void initFruitDao() {
-        fruitDao = new FruitDaoImpl(FruitStorageForTests.fruitsStorage);
+        storage = new HashMap<>();
+        fruitDao = new FruitDaoImpl(storage);
     }
 
     @Before
     public void fillStorage() {
-        FruitStorageForTests.fruitsStorage.put("banana", 100);
-        FruitStorageForTests.fruitsStorage.put("apple", 100);
+        storage.put("banana", 100);
+        storage.put("apple", 100);
     }
 
     @Test
@@ -42,7 +44,7 @@ public class FruitDaoImplTest {
 
     @Test (expected = RuntimeException.class)
     public void getDataFromEmptyStorage_NotOk() {
-        FruitStorageForTests.fruitsStorage.clear();
+        storage.clear();
         Map<String, Integer> fromStorageForTest = fruitDao.getData();
     }
 
@@ -83,7 +85,7 @@ public class FruitDaoImplTest {
     public void update_ok() {
         int bananaExpected = 350;
         fruitDao.update(BANANA, 350);
-        int bananaActual = FruitStorageForTests.fruitsStorage.get(BANANA);
+        int bananaActual = storage.get(BANANA);
         assertEquals("Bananas quantity should be " + bananaExpected
                         + ", but was: " + bananaActual,
                 bananaExpected, bananaActual);
@@ -93,7 +95,7 @@ public class FruitDaoImplTest {
     public void update_addNewFruit_ok() {
         int pineappleExpected = 100;
         fruitDao.update(NON_EXIST_FRUIT, 100);
-        int pineappleActual = FruitStorageForTests.fruitsStorage.get(NON_EXIST_FRUIT);
+        int pineappleActual = storage.get(NON_EXIST_FRUIT);
         assertEquals("Bananas quantity should be " + pineappleExpected
                         + ", but was: " + pineappleActual,
                 pineappleExpected, pineappleActual);
@@ -111,6 +113,6 @@ public class FruitDaoImplTest {
 
     @After
     public void clearStorage() {
-        FruitStorageForTests.fruitsStorage.clear();
+        storage.clear();
     }
 }

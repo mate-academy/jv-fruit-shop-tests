@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.db.FruitsStorage;
+import core.basesyntax.dbfortest.FruitStorageForTests;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
@@ -19,13 +19,13 @@ public class FruitDaoImplTest {
 
     @BeforeClass
     public static void initFruitDao() {
-        fruitDao = new FruitDaoImpl();
+        fruitDao = new FruitDaoImpl(FruitStorageForTests.fruitsStorage);
     }
 
     @Before
     public void fillStorage() {
-        FruitsStorage.fruitsStorage.put("banana", 100);
-        FruitsStorage.fruitsStorage.put("apple", 100);
+        FruitStorageForTests.fruitsStorage.put("banana", 100);
+        FruitStorageForTests.fruitsStorage.put("apple", 100);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FruitDaoImplTest {
 
     @Test (expected = RuntimeException.class)
     public void getDataFromEmptyStorage_NotOk() {
-        FruitsStorage.fruitsStorage.clear();
+        FruitStorageForTests.fruitsStorage.clear();
         Map<String, Integer> fromStorageForTest = fruitDao.getData();
     }
 
@@ -83,7 +83,7 @@ public class FruitDaoImplTest {
     public void update_ok() {
         int bananaExpected = 350;
         fruitDao.update(BANANA, 350);
-        int bananaActual = FruitsStorage.fruitsStorage.get(BANANA);
+        int bananaActual = FruitStorageForTests.fruitsStorage.get(BANANA);
         assertEquals("Bananas quantity should be " + bananaExpected
                         + ", but was: " + bananaActual,
                 bananaExpected, bananaActual);
@@ -93,7 +93,7 @@ public class FruitDaoImplTest {
     public void update_addNewFruit_ok() {
         int pineappleExpected = 100;
         fruitDao.update(NON_EXIST_FRUIT, 100);
-        int pineappleActual = FruitsStorage.fruitsStorage.get(NON_EXIST_FRUIT);
+        int pineappleActual = FruitStorageForTests.fruitsStorage.get(NON_EXIST_FRUIT);
         assertEquals("Bananas quantity should be " + pineappleExpected
                         + ", but was: " + pineappleActual,
                 pineappleExpected, pineappleActual);
@@ -111,6 +111,6 @@ public class FruitDaoImplTest {
 
     @After
     public void clearStorage() {
-        FruitsStorage.fruitsStorage.clear();
+        FruitStorageForTests.fruitsStorage.clear();
     }
 }

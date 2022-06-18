@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreatingReport;
 import core.basesyntax.service.FileReadingService;
@@ -50,9 +48,5 @@ public class Main {
 
         FileWritingService fileWriter = new FileWritingServiceImpl();
         fileWriter.writeFile(REPORT_PATH, report);
-
-        FruitDao fruitDao = new FruitDaoImpl();
-        System.out.println(fruitDao.getFruitQuantity("Banana"));
-        System.out.println(fruitDao.getFruitQuantity("apple"));
     }
 }

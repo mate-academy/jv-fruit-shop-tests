@@ -4,17 +4,27 @@ import core.basesyntax.db.FruitsStorage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
+    private final Map<String, Integer> storage;
+
+    public FruitDaoImpl() {
+        this.storage = FruitsStorage.fruitsStorage;
+    }
+
+    public FruitDaoImpl(Map<String, Integer> storage) {
+        this.storage = storage;
+    }
+
     @Override
     public Map<String, Integer> getData() {
-        if (FruitsStorage.fruitsStorage.isEmpty()) {
+        if (storage.isEmpty()) {
             throw new RuntimeException("Fruit storage is empty!");
         }
-        return FruitsStorage.fruitsStorage;
+        return storage;
     }
 
     @Override
     public Integer getFruitQuantity(String fruit) {
-        return FruitsStorage.fruitsStorage.entrySet().stream()
+        return storage.entrySet().stream()
                 .filter(a -> a.getKey().equalsIgnoreCase(fruit))
                 .map(Map.Entry::getValue)
                 .findFirst()
@@ -26,8 +36,8 @@ public class FruitDaoImpl implements FruitDao {
         if (fruit == null || quantity == null) {
             throw new RuntimeException("You can't put to storage NULL!");
         }
-        FruitsStorage.fruitsStorage.put(fruit, quantity);
-        return (FruitsStorage.fruitsStorage.containsKey(fruit)
-                && FruitsStorage.fruitsStorage.get(fruit).equals(quantity));
+        storage.put(fruit, quantity);
+        return (storage.containsKey(fruit)
+                && storage.get(fruit).equals(quantity));
     }
 }

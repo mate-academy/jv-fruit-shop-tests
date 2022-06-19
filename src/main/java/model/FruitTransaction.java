@@ -19,8 +19,11 @@ public class FruitTransaction {
                 return Operation.SUPPLY;
             case "r":
                 return Operation.RETURN;
-            default:
+            case "p":
                 return Operation.PURCHASE;
+            default:
+                throw new RuntimeException("There isn't such supported"
+                        + " operation for input symbol " + symbol);
         }
     }
 
@@ -28,24 +31,12 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public enum Operation {
@@ -54,7 +45,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private final String operation;
 
         Operation(String operation) {
             this.operation = operation;
@@ -63,5 +54,35 @@ public class FruitTransaction {
         public String getOperation() {
             return operation;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        FruitTransaction transaction = (FruitTransaction) obj;
+        if (!this.operation.equals(transaction.getOperation())) {
+            return false;
+        } else if (!this.fruit.equals(transaction.getFruit())) {
+            return false;
+        } else {
+            return this.quantity == transaction.getQuantity();
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 17;
+        hash += 31 + (operation.getOperation() == null ? 0 : operation.getOperation().hashCode());
+        hash += 31 + (fruit == null ? 0 : fruit.hashCode());
+        hash += 31 + quantity;
+        return hash;
     }
 }

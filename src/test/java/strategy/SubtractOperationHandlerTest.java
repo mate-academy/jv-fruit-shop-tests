@@ -1,4 +1,4 @@
-package service.impl;
+package strategy;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,11 +13,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.OperationHandler;
-import strategy.AddOperationHandler;
-import strategy.SetBalanceOperationHandler;
-import strategy.SubtractOperationHandler;
 
-public class OperationHandlerTest {
+public class SubtractOperationHandlerTest {
     private static FruitDao fruitDao;
     private static Map<String, Integer> storage;
 
@@ -28,23 +25,6 @@ public class OperationHandlerTest {
     public static void initial() {
         storage = new HashMap<>();
         fruitDao = new FruitDaoImpl(storage);
-    }
-
-    @Test
-    public void doTransaction_supplyOperationsWorkRight_ok() {
-        String message = "expected quantity and actual are different";
-        OperationHandler operationHandler = new AddOperationHandler(fruitDao);
-        operationHandler.doTransaction(new FruitTransaction("s", "watermelon", 10));
-        assertEquals(message, 10, fruitDao.get("watermelon").intValue());
-    }
-
-    @Test
-    public void doTransaction_returnOperationsWorkRight_ok() {
-        String message = "expected quantity and actual are different";
-        storage.put("pineapple", 50);
-        OperationHandler operationHandler = new AddOperationHandler(fruitDao);
-        operationHandler.doTransaction(new FruitTransaction("r", "pineapple", 20));
-        assertEquals(message, 70, fruitDao.get("pineapple").intValue());
     }
 
     @Test
@@ -62,15 +42,6 @@ public class OperationHandlerTest {
         exception.expect(RuntimeException.class);
         exception.expectMessage("you have no fruit's quantity available for PURCHASE operation");
         subtractOperationHandler.doTransaction(new FruitTransaction("p", "potato", 10));
-    }
-
-    @Test
-    public void doTransaction_balanceOperationWhenSomeQuantityIsPresent_ok() {
-        String message = "something wrong";
-        storage.put("fungi", 150);
-        OperationHandler balanceOperationHandler = new SetBalanceOperationHandler(fruitDao);
-        balanceOperationHandler.doTransaction(new FruitTransaction("s", "fungi", 50));
-        assertEquals(message, 50, fruitDao.get("fungi").intValue());
     }
 
     @After

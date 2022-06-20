@@ -38,7 +38,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    public void parse_throwsRuntimeExceptionIfFetchedDataFormatWasIncorrect_notOk() {
+    public void parse_invalidFormat_notOk() {
         List<String[]> list = new ArrayList<>();
         list.add(new String[]{"33", "cows"});
         exception.expect(RuntimeException.class);
@@ -47,7 +47,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    public void parse_throwsRuntimeExceptionIfFetchedOperationWasIncorrect_notOk() {
+    public void parse_invalidOperation_notOk() {
         List<String[]> list = new ArrayList<>();
         list.add(new String[]{"k","apricots", "100"});
         exception.expect(RuntimeException.class);
@@ -56,7 +56,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    public void parse_throwsRuntimeExceptionWithBlankArrays_notOk() {
+    public void parse_blankArrays_notOk() {
         List<String[]> list = new ArrayList<>();
         list.add(new String[]{});
         exception.expect(RuntimeException.class);

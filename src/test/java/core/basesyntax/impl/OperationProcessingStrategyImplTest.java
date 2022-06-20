@@ -12,6 +12,7 @@ import core.basesyntax.strategy.OperationProcessingStrategy;
 import core.basesyntax.strategy.impl.OperationProcessingStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -41,5 +42,37 @@ public class OperationProcessingStrategyImplTest {
     @Test(expected = RuntimeException.class)
     public void get_inputValueIsNull_notOk() {
         operationProcessingStrategy.get(null);
+    }
+
+    @Test
+    public void get_normalValueBalance_ok() {
+        OperationProcessing actual =
+                operationProcessingStrategy.get(FruitTransaction.Operation.BALANCE);
+        OperationProcessing expected = new BalanceProcessing(fruitsDao);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_normalValuePurchase_ok() {
+        OperationProcessing actual =
+                operationProcessingStrategy.get(FruitTransaction.Operation.PURCHASE);
+        OperationProcessing expected = new PurchaseProcessing(fruitsDao);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_normalValueReturn_ok() {
+        OperationProcessing actual =
+                operationProcessingStrategy.get(FruitTransaction.Operation.RETURN);
+        OperationProcessing expected = new ReturnProcessing(fruitsDao);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void get_normalValueSupply_ok() {
+        OperationProcessing actual =
+                operationProcessingStrategy.get(FruitTransaction.Operation.SUPPLY);
+        OperationProcessing expected = new SupplyProcessing(fruitsDao);
+        Assert.assertEquals(expected, actual);
     }
 }

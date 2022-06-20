@@ -7,8 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
-    private static final String PATHNAME = "src/main/resources/operationsTest.csv";
-    private static final String NON_EXISTING_PATHNAME = "src/main/resources/operationsNonExist.csv";
+    private static final String PATHNAME = "src/test/resources/operationsTest.csv";
+    private static final String NON_EXISTING_PATHNAME = "src/test/resources/operationsNonExist.csv";
     private static CsvFileReaderService fileReaderService;
 
     @BeforeClass

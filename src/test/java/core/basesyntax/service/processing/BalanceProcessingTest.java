@@ -45,4 +45,3 @@ public class BalanceProcessingTest {
         Assert.assertEquals(expected, actual);
     }
 }
-

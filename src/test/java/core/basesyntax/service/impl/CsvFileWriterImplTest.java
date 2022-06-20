@@ -9,8 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterImplTest {
-    private static final String PATHNAME = "src/main/resources/report.csv";
-    private static final String PATHNAME_NOT_EXIST = "src/main/resources/reportNon.csv";
+    private static final String PATHNAME = "src/test/resources/reportTest.csv";
+    private static final String PATHNAME_NOT_EXIST = "src/test/resources/reportNon.csv";
     private static CsvFileWriter fileWriter;
 
     private List<String> generatedListForWritingToFile;

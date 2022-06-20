@@ -20,8 +20,8 @@ import strategy.SetBalanceOperationHandler;
 import strategy.SubtractOperationHandler;
 
 public class Main {
-    private static final String FROM_FILE = "src/main/java/resources/fruit_shop.csv";
-    private static final String TO_FILE = "src/main/java/resources/fruit_shop_report.csv";
+    private static final String FROM_FILE = "src/test/resources/fruit_shop.csv";
+    private static final String TO_FILE = "src/test/resources/fruit_shop_report.csv";
 
     public static void main(String[] args) {
         FileReaderService fileService = new CsvFileReaderServiceImpl();

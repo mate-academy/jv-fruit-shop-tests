@@ -25,11 +25,13 @@ public class DataHandlerServiceImplTest {
     private static OperationProcessingStrategy operationProcessingStrategy;
     private static Map<FruitTransaction.Operation, OperationProcessing> operationProcessingMap;
     private static FruitsDao fruitsDao;
+    private static Map<String, Integer> storageWithFruits;
     private List<FruitTransaction> fruitTransactionsList;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        fruitsDao = new FruitsDaoImpl();
+    public static void beforeClass() {
+        storageWithFruits = new HashMap<>();
+        fruitsDao = new FruitsDaoImpl(storageWithFruits);
         operationProcessingMap =
                 new HashMap<>();
         operationProcessingMap.put(FruitTransaction.Operation.BALANCE,
@@ -45,7 +47,7 @@ public class DataHandlerServiceImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitTransactionsList = new ArrayList<>();
         fruitTransactionsList
                 .add(FruitTransaction.of(FruitTransaction.Operation.BALANCE,

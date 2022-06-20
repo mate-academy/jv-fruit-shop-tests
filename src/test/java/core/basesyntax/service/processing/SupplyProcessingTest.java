@@ -12,18 +12,17 @@ import org.junit.Test;
 public class SupplyProcessingTest {
     private static OperationProcessing supplyProcessing;
     private static FruitsDao fruitsDao;
-    private Map<String, Integer> fruitsAtStorage;
+    private static Map<String, Integer> fruitsAtStorage;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        fruitsDao = new FruitsDaoImpl();
+    public static void beforeClass() {
+        fruitsAtStorage = new HashMap<>();
+        fruitsDao = new FruitsDaoImpl(fruitsAtStorage);
         supplyProcessing = new SupplyProcessing(fruitsDao);
     }
 
     @Before
-    public void setUp() throws Exception {
-        fruitsAtStorage = new HashMap<>();
-        fruitsAtStorage.put("banana", 20);
+    public void setUp() {
         fruitsDao.add("banana", 10);
     }
 
@@ -41,7 +40,8 @@ public class SupplyProcessingTest {
     public void doAction_normalValues_ok() {
         supplyProcessing.doAction("banana", 10);
         Map<String, Integer> actual = fruitsDao.getFruitsAndQuantityAsMap();
-        Map<String, Integer> expected = fruitsAtStorage;
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("banana", 20);
         Assert.assertEquals(expected, actual);
     }
 }

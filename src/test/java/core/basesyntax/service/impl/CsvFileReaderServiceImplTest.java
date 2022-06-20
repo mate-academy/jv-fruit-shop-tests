@@ -12,7 +12,7 @@ public class CsvFileReaderServiceImplTest {
     private static CsvFileReaderService fileReaderService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileReaderService = new CsvFileReaderServiceImpl();
     }
 

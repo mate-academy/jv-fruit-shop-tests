@@ -15,12 +15,12 @@ public class ReportGeneratorServiceImplTest {
     private List<String> reportStrings;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportGenerator = new ReportGeneratorServiceImpl();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitsAtStorageMap = new HashMap<>();
         fruitsAtStorageMap.put("banana", 10);
         fruitsAtStorageMap.put("apple", 20);

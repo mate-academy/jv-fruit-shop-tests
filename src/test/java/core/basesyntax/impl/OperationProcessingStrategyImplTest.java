@@ -19,10 +19,12 @@ public class OperationProcessingStrategyImplTest {
     private static OperationProcessingStrategy operationProcessingStrategy;
     private static Map<FruitTransaction.Operation, OperationProcessing> operationProcessingMap;
     private static FruitsDao fruitsDao;
+    private static Map<String, Integer> fruitsAtStorage;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        fruitsDao = new FruitsDaoImpl();
+    public static void beforeClass() {
+        fruitsAtStorage = new HashMap<>();
+        fruitsDao = new FruitsDaoImpl(fruitsAtStorage);
         operationProcessingMap =
                 new HashMap<>();
         operationProcessingMap.put(FruitTransaction.Operation.BALANCE,

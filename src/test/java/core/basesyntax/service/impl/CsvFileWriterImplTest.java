@@ -16,12 +16,12 @@ public class CsvFileWriterImplTest {
     private List<String> generatedListForWritingToFile;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileWriter = new CsvFileWriterImpl();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         generatedListForWritingToFile = new ArrayList<>();
         generatedListForWritingToFile.add("fruits,quantity");
         generatedListForWritingToFile.add("banana,340");

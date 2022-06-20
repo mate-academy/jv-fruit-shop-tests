@@ -15,14 +15,14 @@ public class BalanceProcessingTest {
     private static Map<String, Integer> fruitsAtStorageMap;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        fruitsDao = new FruitsDaoImpl();
+    public static void beforeClass() {
+        fruitsAtStorageMap = new HashMap<>();
+        fruitsDao = new FruitsDaoImpl(fruitsAtStorageMap);
         balanceProcessing = new BalanceProcessing(fruitsDao);
     }
 
     @Before
-    public void setUp() throws Exception {
-        fruitsAtStorageMap = new HashMap<>();
+    public void setUp() {
         fruitsAtStorageMap.put("banana", 10);
     }
 
@@ -40,7 +40,8 @@ public class BalanceProcessingTest {
     public void doAction_normalValues_ok() {
         balanceProcessing.doAction("banana", 10);
         Map<String, Integer> actual = fruitsDao.getFruitsAndQuantityAsMap();
-        Map<String, Integer> expected = fruitsAtStorageMap;
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("banana", 10);
         Assert.assertEquals(expected, actual);
     }
 }

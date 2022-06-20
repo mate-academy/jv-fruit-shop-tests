@@ -21,7 +21,7 @@ public class DataParserServiceImplTest {
     private List<FruitTransaction> fruitTransactions;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationMap = new HashMap<>();
         operationMap.put("b", FruitTransaction.Operation.BALANCE);
         operationMap.put("p", FruitTransaction.Operation.PURCHASE);
@@ -32,7 +32,7 @@ public class DataParserServiceImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         dataFromFile = new ArrayList<>();
         dataFromFile.add("type,fruit,quantity");
         dataFromFile.add("b,banana,200");

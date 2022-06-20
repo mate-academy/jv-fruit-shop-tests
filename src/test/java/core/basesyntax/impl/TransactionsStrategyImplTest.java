@@ -14,7 +14,7 @@ public class TransactionsStrategyImplTest {
     private static Map<String, FruitTransaction.Operation> operationMap;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationMap = new HashMap<>();
         operationMap.put("b", FruitTransaction.Operation.BALANCE);
         operationMap.put("p", FruitTransaction.Operation.PURCHASE);

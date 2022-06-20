@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
@@ -11,14 +10,16 @@ import org.junit.Test;
 
 public class FruitsDaoImplTest {
     private static FruitsDao fruitsDao;
+    private static Map<String, Integer> fruitsAtStorage;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        fruitsDao = new FruitsDaoImpl();
+    public static void beforeClass() {
+        fruitsAtStorage = new HashMap<>();
+        fruitsDao = new FruitsDaoImpl(fruitsAtStorage);
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitsDao.add("banana", 50);
     }
 
@@ -53,11 +54,6 @@ public class FruitsDaoImplTest {
     }
 
     @Test
-    public void add_normalValue_ok() {
-        Assert.assertTrue(fruitsDao.add("apple", 50));
-    }
-
-    @Test
     public void get_existingValue_ok() {
         int actual = fruitsDao.get("banana");
         int expected = 50;
@@ -79,12 +75,17 @@ public class FruitsDaoImplTest {
     }
 
     @Test
+    public void add_normalValue_ok() {
+        Assert.assertTrue(fruitsDao.add("apple", 50));
+    }
+
+    @Test
     public void isFruitAvailable_checkForAvailability_ok() {
         Assert.assertTrue(fruitsDao.isFruitAvailable("banana"));
     }
 
     @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
+    public void tearDown() {
+        fruitsAtStorage.clear();
     }
 }

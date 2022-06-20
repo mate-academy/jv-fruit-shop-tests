@@ -1,5 +1,6 @@
 import dao.FruitDao;
 import dao.FruitDaoImpl;
+import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class Main {
         ParseService parseService = new CsvParseServiceImpl();
         final List<FruitTransaction> transactions =
                 parseService.parse(listTransactions.subList(1, listTransactions.size()));
-        FruitDao fruitDao = new FruitDaoImpl();
+        FruitDao fruitDao = new FruitDaoImpl(Storage.fruits);
         Map<FruitTransaction.Operation, OperationHandler> mapOperation = new HashMap<>();
         mapOperation.put(FruitTransaction.Operation.BALANCE,
                 new SetBalanceOperationHandler(fruitDao));

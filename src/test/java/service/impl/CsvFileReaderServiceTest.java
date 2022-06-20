@@ -3,23 +3,18 @@ package service.impl;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.FileReaderService;
-import service.FileWriterService;
 
-public class CsvFileServiceTest {
+public class CsvFileReaderServiceTest {
     private static FileReaderService fileReadService;
-    private static FileWriterService fileWriterService;
     private static final String[][] STENCIL = {{"JavaCore", "JavaSOLID", "JavaFruitShopTests"},
             {"test", "read-writeCsvFile", "2022"}};
     private static final String FILE_PATH_FROM = "src/test/resources/readingTest.csv";
-    private static final String FILE_PATH_TO = "src/test/resources/writingTest.csv";
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -27,9 +22,6 @@ public class CsvFileServiceTest {
     @BeforeClass
     public static void initial() {
         fileReadService = new CsvFileReaderServiceImpl();
-        fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeFile(FILE_PATH_FROM,
-                Arrays.stream(STENCIL).collect(Collectors.toUnmodifiableList()));
     }
 
     @Test
@@ -55,13 +47,5 @@ public class CsvFileServiceTest {
         exception.expect(RuntimeException.class);
         exception.expectMessage("Cannot read file");
         fileReadService.readFile(filePathError);
-    }
-
-    @Test
-    public void writeFile_allDataHasBeenWritten_ok() {
-        String message = "original data and data from file are differed";
-        fileWriterService.writeFile(FILE_PATH_TO, Arrays.asList(STENCIL));
-        assertArrayEquals(message, STENCIL[0], fileReadService.readFile(FILE_PATH_TO).get(0));
-        assertArrayEquals(message, STENCIL[1], fileReadService.readFile(FILE_PATH_TO).get(1));
     }
 }

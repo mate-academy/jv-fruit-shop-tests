@@ -5,7 +5,9 @@ import static org.junit.Assert.assertArrayEquals;
 import dao.FruitDao;
 import dao.FruitDaoImpl;
 import db.Storage;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,13 +17,15 @@ import service.ShopService;
 public class ShopServiceTest {
     private static FruitDao fruitDao;
     private static ShopService shopService;
+    private static Map<String, Integer> storage;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void initial() {
-        fruitDao = new FruitDaoImpl();
+        storage = new HashMap<>();
+        fruitDao = new FruitDaoImpl(storage);
         shopService = new ShopServiceImpl(fruitDao);
     }
 
@@ -29,7 +33,6 @@ public class ShopServiceTest {
     public void doReport_getReportFromDB_ok() {
         final String message1 = "there had to be head message in the report but it wasn't";
         final String message2 = "failed output data.\n";
-        Storage.fruits.clear();
         fruitDao.add("apples", 100);
         fruitDao.add("oranges", 100);
         fruitDao.add("nuts", 100);

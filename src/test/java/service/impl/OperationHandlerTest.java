@@ -1,10 +1,11 @@
-package activities;
+package service.impl;
 
 import static org.junit.Assert.assertEquals;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
-import db.Storage;
+import java.util.HashMap;
+import java.util.Map;
 import model.FruitTransaction;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -18,35 +19,39 @@ import strategy.SubtractOperationHandler;
 
 public class OperationHandlerTest {
     private static FruitDao fruitDao;
+    private static Map<String, Integer> storage;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void initial() {
-        fruitDao = new FruitDaoImpl();
-    }
-
-    @After
-    public void clearStorage() {
-        Storage.fruits.clear();
+        storage = new HashMap<>();
+        fruitDao = new FruitDaoImpl(storage);
     }
 
     @Test
-    public void doTransaction_SupplyOrReturnOperationsWorkRight_ok() {
+    public void doTransaction_supplyOperationsWorkRight_ok() {
         String message = "expected quantity and actual are different";
         OperationHandler operationHandler = new AddOperationHandler(fruitDao);
         operationHandler.doTransaction(new FruitTransaction("s", "watermelon", 10));
-        operationHandler.doTransaction(new FruitTransaction("r", "watermelon", 5));
-        assertEquals(message, 15, fruitDao.get("watermelon").intValue());
+        assertEquals(message, 10, fruitDao.get("watermelon").intValue());
+    }
+
+    @Test
+    public void doTransaction_returnOperationsWorkRight_ok() {
+        String message = "expected quantity and actual are different";
+        storage.put("pineapple", 50);
+        OperationHandler operationHandler = new AddOperationHandler(fruitDao);
+        operationHandler.doTransaction(new FruitTransaction("r", "pineapple", 20));
+        assertEquals(message, 70, fruitDao.get("pineapple").intValue());
     }
 
     @Test
     public void doTransaction_purchaseOperationQuantityFruitsEnough_ok() {
         String message = "expected quantity and actual are different";
-        OperationHandler addOperationHandler = new AddOperationHandler(fruitDao);
+        storage.put("banana", 50);
         OperationHandler subtractOperationHandler = new SubtractOperationHandler(fruitDao);
-        addOperationHandler.doTransaction(new FruitTransaction("s", "banana", 50));
         subtractOperationHandler.doTransaction(new FruitTransaction("p", "banana", 10));
         assertEquals(message, 40, fruitDao.get("banana").intValue());
     }
@@ -62,10 +67,14 @@ public class OperationHandlerTest {
     @Test
     public void doTransaction_balanceOperationWhenSomeQuantityIsPresent_ok() {
         String message = "something wrong";
-        OperationHandler supplyOperationHandler = new AddOperationHandler(fruitDao);
+        storage.put("fungi", 150);
         OperationHandler balanceOperationHandler = new SetBalanceOperationHandler(fruitDao);
-        supplyOperationHandler.doTransaction(new FruitTransaction("s", "fungi", 10));
         balanceOperationHandler.doTransaction(new FruitTransaction("s", "fungi", 50));
         assertEquals(message, 50, fruitDao.get("fungi").intValue());
+    }
+
+    @After
+    public void clearStorage() {
+        storage.clear();
     }
 }

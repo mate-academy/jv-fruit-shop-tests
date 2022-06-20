@@ -23,7 +23,7 @@ public class OperationStrategyTest {
 
     @BeforeClass
     public static void initial() {
-        FruitDao fruitDao = new FruitDaoImpl();
+        FruitDao fruitDao = new FruitDaoImpl(new HashMap<>());
         Map<FruitTransaction.Operation, OperationHandler> mapOperation = new HashMap<>();
         mapOperation.put(FruitTransaction.Operation.BALANCE,
                 new SetBalanceOperationHandler(fruitDao));

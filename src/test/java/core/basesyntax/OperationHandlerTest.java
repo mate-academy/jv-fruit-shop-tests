@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import dao.FruitDao;
 import dao.FruitDaoImpl;
 import db.Storage;
-import java.util.HashMap;
-import java.util.Map;
 import model.FruitTransaction;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -27,15 +25,6 @@ public class OperationHandlerTest {
     @BeforeClass
     public static void initial() {
         fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> mapOperation = new HashMap<>();
-        mapOperation.put(FruitTransaction.Operation.BALANCE,
-                new SetBalanceOperationHandler(fruitDao));
-        mapOperation.put(FruitTransaction.Operation.PURCHASE,
-                new SubtractOperationHandler(fruitDao));
-        mapOperation.put(FruitTransaction.Operation.RETURN,
-                new AddOperationHandler(fruitDao));
-        mapOperation.put(FruitTransaction.Operation.SUPPLY,
-                new AddOperationHandler(fruitDao));
     }
 
     @After

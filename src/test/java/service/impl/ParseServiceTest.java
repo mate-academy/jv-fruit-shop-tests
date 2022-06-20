@@ -1,4 +1,4 @@
-package core.basesyntax;
+package service.impl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +10,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.ParseService;
-import service.impl.CsvParseServiceImpl;
 
 public class ParseServiceTest {
     private static ParseService parseService;

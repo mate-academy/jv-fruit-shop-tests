@@ -1,21 +1,17 @@
-package core.basesyntax;
+package service.impl;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.FileReaderService;
 import service.FileWriterService;
-import service.impl.CsvFileReaderServiceImpl;
-import service.impl.FileWriterServiceImpl;
 
 public class CsvFileServiceTest {
     private static FileReaderService fileReadService;
@@ -39,9 +35,9 @@ public class CsvFileServiceTest {
     @Test
     public void readFile_readFromCsvFile_ok() {
         List<String[]> list = fileReadService.readFile(FILE_PATH_FROM);
-        assertEquals("strings from first row of the csv file and obtained"
+        assertArrayEquals("strings from first row of the csv file and obtained"
                 + " result aren't the same", STENCIL[0], list.get(0));
-        assertEquals("strings from second row of the csv file and obtained"
+        assertArrayEquals("strings from second row of the csv file and obtained"
                 + " result aren't the same", STENCIL[1], list.get(1));
         assertEquals("expected row's quantity and quantity of rows from"
                 + " stencil aren't the same", STENCIL.length, list.size());
@@ -65,15 +61,7 @@ public class CsvFileServiceTest {
     public void writeFile_allDataHasBeenWritten_ok() {
         String message = "original data and data from file are differed";
         fileWriterService.writeFile(FILE_PATH_TO, Arrays.asList(STENCIL));
-        assertArrayEquals(message, fileReadService.readFile(FILE_PATH_TO).get(0), STENCIL[0]);
-        assertArrayEquals(message, fileReadService.readFile(FILE_PATH_TO).get(1), STENCIL[1]);
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        File destroyReadingFile = new File("src/test/resources/readingTest.csv");
-        File destroyWritingFile = new File("src/test/resources/writingTest.csv");
-        destroyReadingFile.delete();
-        destroyWritingFile.delete();
+        assertArrayEquals(message, STENCIL[0], fileReadService.readFile(FILE_PATH_TO).get(0));
+        assertArrayEquals(message, STENCIL[1], fileReadService.readFile(FILE_PATH_TO).get(1));
     }
 }

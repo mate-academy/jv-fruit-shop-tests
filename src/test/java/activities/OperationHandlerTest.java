@@ -1,4 +1,4 @@
-package core.basesyntax;
+package activities;
 
 import static org.junit.Assert.assertEquals;
 

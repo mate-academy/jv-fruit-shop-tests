@@ -1,4 +1,4 @@
-package core.basesyntax;
+package strategy;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -14,10 +14,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.OperationHandler;
 import service.OperationStrategy;
-import strategy.AddOperationHandler;
-import strategy.OperationStrategyImpl;
-import strategy.SetBalanceOperationHandler;
-import strategy.SubtractOperationHandler;
 
 public class OperationStrategyTest {
     private static OperationStrategy operationStrategy;

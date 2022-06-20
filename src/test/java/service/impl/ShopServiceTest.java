@@ -1,7 +1,6 @@
-package core.basesyntax;
+package service.impl;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
@@ -12,7 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import service.ShopService;
-import service.impl.ShopServiceImpl;
 
 public class ShopServiceTest {
     private static FruitDao fruitDao;
@@ -36,7 +34,7 @@ public class ShopServiceTest {
         fruitDao.add("oranges", 100);
         fruitDao.add("nuts", 100);
         List<String[]> reportStrings = shopService.doReport();
-        assertEquals(message1, reportStrings.get(0), new String[]{"fruit", "quantity"});
+        assertArrayEquals(message1, reportStrings.get(0), new String[]{"fruit", "quantity"});
         assertArrayEquals(message2, reportStrings.get(1), new String[]{"oranges", "100"});
         assertArrayEquals(message2, reportStrings.get(2), new String[]{"nuts", "100"});
         assertArrayEquals(message2, reportStrings.get(3), new String[]{"apples", "100"});

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -68,6 +69,11 @@ public class ShopTest {
         operationStrategy = new OperationStrategyImpl(mapOperation);
         fileWriterService.writeFile(FILE_PATH_FROM,
                 Arrays.stream(STENCIL).collect(Collectors.toUnmodifiableList()));
+    }
+
+    @After
+    public void clearStorage() {
+        Storage.fruits.clear();
     }
 
     @Test

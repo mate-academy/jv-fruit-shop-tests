@@ -39,7 +39,7 @@ public class ProcessingDataImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseData_lengthOfListLess2_notOk() {
+    public void parseData_lengthOfListLess_notOk() {
         List<String> incorrectData = List.of("type,fruit,quantity");
         processingData.parseData(incorrectData);
     }

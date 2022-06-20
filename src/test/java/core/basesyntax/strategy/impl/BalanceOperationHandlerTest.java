@@ -25,7 +25,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void makeOperation_inValidData_notOk() {
+    public void makeOperation_invalidData_notOk() {
         assertTrue(balanceOperationHandler.makeOperation(INCORRECT_TRANSACTION));
     }
 }

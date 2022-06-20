@@ -28,14 +28,14 @@ public class OperationStrategyImplTest {
     }
     
     @Test
-    public void get_purchaseClas_ok() {
+    public void get_purchaseClass_ok() {
         Class<Purchase> purchaseClass = Purchase.class;
         OperationHandler purchaseOperation = operationStrategy.get(Operation.PURCHASE);
         assertEquals(purchaseOperation.getClass(), purchaseClass);
     }
 
     @Test
-    public void get_BalanceClas_ok() {
+    public void get_BalanceClass_ok() {
         Class<BalanceOperationHandler> balanceClass
                 = BalanceOperationHandler.class;
         OperationHandler balanceOperation = operationStrategy.get(Operation.BALANCE);
@@ -43,14 +43,14 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_ReturnClas_ok() {
+    public void get_ReturnClass_ok() {
         Class<ReturnFruit> returnClass = ReturnFruit.class;
         OperationHandler returnOperation = operationStrategy.get(Operation.RETURN);
         assertEquals(returnOperation.getClass(), returnClass);
     }
 
     @Test
-    public void get_supplyClas_ok() {
+    public void get_supplyClass_ok() {
         Class<Supply> supplyClass = Supply.class;
         OperationHandler supplyOperation = operationStrategy.get(Operation.SUPPLY);
         assertEquals(supplyOperation.getClass(), supplyClass);

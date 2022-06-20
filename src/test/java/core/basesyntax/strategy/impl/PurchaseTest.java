@@ -16,14 +16,13 @@ public class PurchaseTest {
             = new FruitTransaction(Operation.PURCHASE, "banana", 20);
     private static final FruitTransaction INCORRECT_MORE_THAN_PRESENT
             = new FruitTransaction(Operation.PURCHASE, "banana", 150);
-    private static final FruitTransaction INCORRECT_ENOTHER_OPER
+    private static final FruitTransaction INCORRECT_ANOTHER_OPERATION
             = new FruitTransaction(Operation.RETURN, "banana", 20);
     private static Purchase purchase;
 
     @BeforeClass
     public static void initBalanceHandler() {
         purchase = new Purchase();
-        FruitsStorage.fruitsStorage.clear();
     }
 
     @Before
@@ -45,7 +44,7 @@ public class PurchaseTest {
 
     @Test (expected = RuntimeException.class)
     public void makeOperation_incorrectTransaction_notOk() {
-        purchase.makeOperation(INCORRECT_ENOTHER_OPER);
+        purchase.makeOperation(INCORRECT_ANOTHER_OPERATION);
     }
 
     @After

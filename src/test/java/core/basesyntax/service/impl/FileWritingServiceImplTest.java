@@ -21,7 +21,6 @@ public class FileWritingServiceImplTest {
     private static final String ACTUAL_REPORT_NAME = "src/test/resources/report.csv";
     private static final String EXPECTED_REPORT_NAME = "src/test/resources/report.csv";
     private static FileWritingService fileWriter;
-    private static File actualFile;
 
     @BeforeClass
     public static void setFileHandler() {
@@ -35,10 +34,10 @@ public class FileWritingServiceImplTest {
 
     @Test
     public void writeFile_ok() throws IOException {
-        actualFile = fileWriter.writeFile(ACTUAL_REPORT_NAME, DATA);
-        byte[] f1 = Files.readAllBytes(Path.of(EXPECTED_REPORT_NAME));
-        byte[] f2 = Files.readAllBytes(Path.of(ACTUAL_REPORT_NAME));
+        File actualFile = fileWriter.writeFile(ACTUAL_REPORT_NAME, DATA);
+        byte[] bytesOfExpectedFile = Files.readAllBytes(Path.of(EXPECTED_REPORT_NAME));
+        byte[] bytesOfActualFile = Files.readAllBytes(Path.of(ACTUAL_REPORT_NAME));
         assertTrue(actualFile.exists());
-        assertArrayEquals(f1, f2);
+        assertArrayEquals(bytesOfExpectedFile, bytesOfActualFile);
     }
 }

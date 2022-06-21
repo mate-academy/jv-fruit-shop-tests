@@ -23,7 +23,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    public void parse_parseCorrectFetchedData_ok() {
+    public void parse_correctData_ok() {
         List<String[]> list = new ArrayList<>();
         list.add(new String[]{"s", "apple", "35"});
         list.add(new String[]{"b", "apple", "50"});

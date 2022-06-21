@@ -28,7 +28,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void doTransaction_supplyOperationsWorkRight_ok() {
+    public void doTransaction_supplyOperationsAddsQuantity_ok() {
         String message = "expected quantity and actual are different";
         OperationHandler operationHandler = new AddOperationHandler(fruitDao);
         operationHandler.doTransaction(new FruitTransaction("s", "watermelon", 10));
@@ -36,7 +36,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void doTransaction_returnOperationsWorkRight_ok() {
+    public void doTransaction_returnOperationsAddsQuantity_ok() {
         String message = "expected quantity and actual are different";
         storage.put("pineapple", 50);
         OperationHandler operationHandler = new AddOperationHandler(fruitDao);

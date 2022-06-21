@@ -37,7 +37,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getOperationHandler_obtainCorrespondingOperation_ok() {
+    public void getOperationHandler_fetchCorrespondingOperation_ok() {
         final String message = "method getOperationHandler returned incorrect handler";
         final OperationHandler operationForSupply = operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.SUPPLY);
@@ -54,7 +54,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getOperationHandler_getSomeHandlerIfOperationNull_notOk() {
+    public void getOperationHandler_ifOperationNull_notOk() {
         final String message = "method getOperationHandler shouldn't return any operationHandler"
                 + " if input data is NULL. Result of method should be NULL also\n";
         assertNull(message, operationStrategy.getOperationHandler(null));

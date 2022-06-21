@@ -25,7 +25,7 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void readFile_readFromCsvFile_ok() {
+    public void readFile_readCsvFile_ok() {
         List<String[]> list = fileReadService.readFile(FILE_PATH_FROM);
         assertArrayEquals("strings from first row of the csv file and obtained"
                 + " result aren't the same", STENCIL[0], list.get(0));
@@ -36,13 +36,13 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void readFile_throwsNullPointerExceptionIfPathIsNull_ok() {
+    public void readFile_pathIsNull_notOk() {
         exception.expect(NullPointerException.class);
         fileReadService.readFile(null);
     }
 
     @Test
-    public void readFile_throwsRuntimeExceptionIfPathIsNotCorrect_ok() {
+    public void readFile_filePathNotCorrect_notOk() {
         String filePathError = "mistaken/path/file.csv";
         exception.expect(RuntimeException.class);
         exception.expectMessage("Cannot read file");

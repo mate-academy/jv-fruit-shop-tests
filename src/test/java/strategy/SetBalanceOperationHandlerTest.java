@@ -28,7 +28,7 @@ public class SetBalanceOperationHandlerTest {
     }
 
     @Test
-    public void doTransaction_balanceOperationWhenSomeQuantityIsPresent_ok() {
+    public void doTransaction_balanceOperationSetQuantity_ok() {
         String message = "something wrong";
         storage.put("fungi", 150);
         OperationHandler balanceOperationHandler = new SetBalanceOperationHandler(fruitDao);

@@ -4,7 +4,6 @@ import static org.junit.Assert.assertArrayEquals;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +40,6 @@ public class ShopServiceTest {
         assertArrayEquals(message2, reportStrings.get(1), new String[]{"oranges", "100"});
         assertArrayEquals(message2, reportStrings.get(2), new String[]{"nuts", "100"});
         assertArrayEquals(message2, reportStrings.get(3), new String[]{"apples", "100"});
-        Storage.fruits.clear();
+        storage.clear();
     }
 }

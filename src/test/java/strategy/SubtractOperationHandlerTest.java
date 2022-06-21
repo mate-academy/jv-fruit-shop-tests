@@ -28,7 +28,7 @@ public class SubtractOperationHandlerTest {
     }
 
     @Test
-    public void doTransaction_purchaseOperationQuantityFruitsEnough_ok() {
+    public void doTransaction_purchaseOperationQuantityEnough_ok() {
         String message = "expected quantity and actual are different";
         storage.put("banana", 50);
         OperationHandler subtractOperationHandler = new SubtractOperationHandler(fruitDao);
@@ -37,7 +37,7 @@ public class SubtractOperationHandlerTest {
     }
 
     @Test
-    public void doTransaction_purchaseOperationQuantityFruitsNotEnough_notOk() {
+    public void doTransaction_purchaseOperationQuantityNotEnough_notOk() {
         OperationHandler subtractOperationHandler = new SubtractOperationHandler(fruitDao);
         exception.expect(RuntimeException.class);
         exception.expectMessage("you have no fruit's quantity available for PURCHASE operation");

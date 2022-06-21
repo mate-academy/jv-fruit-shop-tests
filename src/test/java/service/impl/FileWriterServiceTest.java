@@ -30,7 +30,7 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void writeFile_allDataHasBeenWritten_ok() {
+    public void writeFile_filePathCorrect_ok() {
         String message = "original data and data from file are differed";
         fileWriterService.writeFile(FILE_PATH, Arrays.asList(STENCIL));
         List<String[]> list = new ArrayList<>();

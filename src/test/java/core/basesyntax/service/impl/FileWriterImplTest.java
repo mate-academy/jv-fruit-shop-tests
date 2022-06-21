@@ -10,8 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    public static final String VALID_PATH = "src/test/resources/report.csv";
-    public static final String INVALID_PATH = "src/test/invalid/report.csv";
+    public static final String VALID_PATH = "src/test/resources/reportFile.csv";
+    public static final String INVALID_PATH = "src/test/invalid/game.csv";
     private static String report;
     private static FileWriterImpl fileWriter;
     private static List<String> excepted;

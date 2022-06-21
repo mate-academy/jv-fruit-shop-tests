@@ -17,8 +17,7 @@ import service.FileWriterService;
 
 public class FileWriterServiceTest {
     private static FileWriterService fileWriterService;
-    private static final String[][] STENCIL = {{"JavaCore", "JavaSOLID", "JavaFruitShopTests"},
-            {"test", "read-writeCsvFile", "2022"}};
+    private static final String[][] STENCIL = {{"banana", "250"}, {"apple", "190"}};
     private static final String FILE_PATH = "src/test/resources/writingTest.csv";
 
     @Rule
@@ -42,5 +41,13 @@ public class FileWriterServiceTest {
         }
         assertArrayEquals(message, STENCIL[0], list.get(0));
         assertArrayEquals(message, STENCIL[1], list.get(1));
+    }
+
+    @Test
+    public void writeFile_filePathNotCorrect_notOk() {
+        String wrongPath = "src/java/resources/writingTest.csv";
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("Can't write data to file");
+        fileWriterService.writeFile(wrongPath, Arrays.asList(STENCIL));
     }
 }

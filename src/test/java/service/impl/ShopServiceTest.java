@@ -8,18 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import service.ShopService;
 
 public class ShopServiceTest {
     private static FruitDao fruitDao;
     private static ShopService shopService;
     private static Map<String, Integer> storage;
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void initial() {

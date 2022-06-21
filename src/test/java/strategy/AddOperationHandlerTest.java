@@ -9,17 +9,12 @@ import java.util.Map;
 import model.FruitTransaction;
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import service.OperationHandler;
 
 public class AddOperationHandlerTest {
     private static FruitDao fruitDao;
     private static Map<String, Integer> storage;
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void initial() {

@@ -12,8 +12,7 @@ import service.FileReaderService;
 
 public class CsvFileReaderServiceTest {
     private static FileReaderService fileReadService;
-    private static final String[][] STENCIL = {{"JavaCore", "JavaSOLID", "JavaFruitShopTests"},
-            {"test", "read-writeCsvFile", "2022"}};
+    private static final String[][] STENCIL = {{"banana", "250"}, {"apple", "190"}};
     private static final String FILE_PATH_FROM = "src/test/resources/readingTest.csv";
 
     @Rule

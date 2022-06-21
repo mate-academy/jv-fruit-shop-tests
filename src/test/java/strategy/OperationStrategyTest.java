@@ -9,17 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import service.OperationHandler;
 import service.OperationStrategy;
 
 public class OperationStrategyTest {
     private static OperationStrategy operationStrategy;
-
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
     public static void initial() {

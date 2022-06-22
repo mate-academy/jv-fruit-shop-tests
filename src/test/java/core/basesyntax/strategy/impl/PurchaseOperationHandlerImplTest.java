@@ -26,7 +26,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test
-    public void changeBalancePurchase_isOk() {
+    public void changeBalancePurchase_ok() {
         int excepted = 100;
         TransactionInfo transactionInfo = new TransactionInfo("p", testFruit, 100);
         purchaseHandle.handle(transactionInfo);
@@ -36,6 +36,13 @@ public class PurchaseOperationHandlerImplTest {
 
     @Test(expected = RuntimeException.class)
     public void changeBalancePurchase_notOk() {
+        TransactionInfo transactionInfo = new TransactionInfo("p", testFruit, 300);
+        purchaseHandle.handle(transactionInfo);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void changeBalanceInvalidFruit_notOk() {
+        testFruit = new Fruit("orange");
         TransactionInfo transactionInfo = new TransactionInfo("p", testFruit, 300);
         purchaseHandle.handle(transactionInfo);
     }

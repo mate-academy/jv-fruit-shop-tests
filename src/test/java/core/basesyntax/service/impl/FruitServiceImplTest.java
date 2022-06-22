@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -45,10 +46,20 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void process_currentAmount_isOk() {
+    public void process_currentAmount_ok() {
         int expected = 90;
         fruitService.process(transactionInfoList);
         int actual = Storage.storage.get(new Fruit("apple"));
         Assert.assertEquals(expected, actual);
+
+        expected = 152;
+        fruitService.process(transactionInfoList);
+        actual = Storage.storage.get(new Fruit("banana"));
+        Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

@@ -20,7 +20,7 @@ public class BalanceOperationHandlerImplTest {
     }
 
     @Test
-    public void addedBalance_isOk() {
+    public void addedBalance_ok() {
         int excepted = 100;
         balanceHandle.handle(new TransactionInfo("b", fruitForTest, 100));
         int actual = Storage.storage.get(fruitForTest);

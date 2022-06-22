@@ -29,19 +29,19 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFromFile_isOk() {
+    public void readFromFile_ok() {
         List<String> excepted = inputData;
         List<String> actual = fileReader.getDataFromFile(VALID_PATH);
         Assert.assertEquals(excepted, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_incorrectData_isNotOk() {
+    public void readFromFileWithIncorrectData_notOk() {
         List<String> actual = fileReader.getDataFromFile(INVALID_PATH);
     }
 
     @Test
-    public void readFromFile_FromEmptyFile_isOk() {
+    public void readFromFileFromEmptyFile_ok() {
         List<String> excepted = new ArrayList<>();
         List<String> actual = fileReader.getDataFromFile(EMPTY_FILE);
         Assert.assertEquals(excepted, actual);

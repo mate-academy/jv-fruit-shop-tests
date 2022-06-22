@@ -24,7 +24,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void getReport_isOk() {
+    public void getReport_ok() {
         String excepted = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();

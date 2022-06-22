@@ -26,9 +26,9 @@ public class SupplyOperationHandlerImplTest {
     }
 
     @Test
-    public void changeBalanceReturn_isOk() {
+    public void changeBalanceReturn_ok() {
         int excepted = 400;
-        TransactionInfo transactionInfo = new TransactionInfo("p", testFruit, 200);
+        TransactionInfo transactionInfo = new TransactionInfo("s", testFruit, 200);
         supplyHandle.handle(transactionInfo);
         int actual = Storage.storage.get(testFruit);
         Assert.assertEquals(excepted, actual);

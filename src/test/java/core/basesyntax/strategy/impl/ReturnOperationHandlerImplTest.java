@@ -26,9 +26,9 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    public void changeBalanceReturn_isOk() {
+    public void changeBalanceReturn_ok() {
         int excepted = 300;
-        TransactionInfo transactionInfo = new TransactionInfo("p", testFruit, 100);
+        TransactionInfo transactionInfo = new TransactionInfo("r", testFruit, 100);
         returnHandle.handle(transactionInfo);
         int actual = Storage.storage.get(testFruit);
         Assert.assertEquals(excepted, actual);

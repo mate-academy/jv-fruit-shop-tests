@@ -10,8 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    public static final String VALID_PATH = "src/test/resources/reportFile.csv";
-    public static final String INVALID_PATH = "src/test/invalid/game.csv";
+    private static final String VALID_PATH = "src/test/resources/reportFile.csv";
+    private static final String INVALID_PATH = "src/test/invalid/game.csv";
     private static String report;
     private static FileWriterImpl fileWriter;
     private static List<String> excepted;
@@ -29,7 +29,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeDataToFile_isOk() {
+    public void writeDataToFile_ok() {
         fileWriter.writerDataToFile(VALID_PATH, report);
         List<String> actual;
         try {
@@ -41,7 +41,7 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writerDataToFile_invalidPath_notOk() {
+    public void writerDataToFileWithInvalidPath_notOk() {
         fileWriter.writerDataToFile(INVALID_PATH, report);
     }
 }

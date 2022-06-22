@@ -29,8 +29,18 @@ public class FruitParserImplTest {
     }
 
     @Test
-    public void parseValidData_isOk() {
+    public void parseValidData_ok() {
         List<TransactionInfo> actual = fruitParser.parse(listWithLines);
         Assert.assertEquals(excepted, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parseValidData_notOk() {
+        listWithLines = new ArrayList<>();
+        listWithLines.add("type,fruit,quantity");
+        listWithLines.add("y,B a N a N a,20");
+        listWithLines.add("x,APPLE,100");
+        listWithLines.add("w, ,100");
+        List<TransactionInfo> actual = fruitParser.parse(listWithLines);
     }
 }

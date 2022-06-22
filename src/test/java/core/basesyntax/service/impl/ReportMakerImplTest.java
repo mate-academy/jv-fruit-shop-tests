@@ -4,9 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.ActionsDao;
 import core.basesyntax.dao.ActionsDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportMaker;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,8 +20,8 @@ public class ReportMakerImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
-        Storage.data.clear();
+    public void setUp() {
+        actionsDao.clear();
     }
 
     @Test
@@ -39,10 +37,5 @@ public class ReportMakerImplTest {
         actionsDao.add("apple", 15);
         String actual = prepareReport.makeReport();
         assertEquals(expected, actual);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.data.clear();
     }
 }

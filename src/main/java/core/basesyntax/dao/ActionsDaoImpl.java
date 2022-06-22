@@ -29,4 +29,9 @@ public class ActionsDaoImpl implements ActionsDao {
     public Set<Map.Entry<String, Integer>> getAllFruits() {
         return Storage.data.entrySet();
     }
+
+    @Override
+    public void clear() {
+        Storage.data.clear();
+    }
 }

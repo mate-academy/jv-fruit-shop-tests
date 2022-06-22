@@ -13,4 +13,6 @@ public interface ActionsDao {
     boolean isPresentFruit(String fruit);
 
     Set<Map.Entry<String, Integer>> getAllFruits();
+
+    void clear();
 }

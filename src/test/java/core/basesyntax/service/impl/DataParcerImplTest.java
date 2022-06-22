@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.Fruit;
 import core.basesyntax.service.DataParcer;
 import java.util.ArrayList;
@@ -45,7 +44,5 @@ public class DataParcerImplTest {
     @After
     public void tearDown() throws Exception {
         testValues.clear();
-        Storage.data.clear();
     }
-
 }

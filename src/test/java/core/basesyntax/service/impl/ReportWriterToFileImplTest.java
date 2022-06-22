@@ -2,26 +2,21 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportWriterToFile;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportWriterToFileImplTest {
-    private static final String FILE_VALID = "src"
-            + File.separator + "main" + File.separator
-            + "resources" + File.separator + "TestReport.csv";
+    private static final String FILE_VALID = "src/main/resources/TestReport.csv";
     private static ReportWriterToFile writeToFile;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         writeToFile = new ReportWriterToFileImpl();
     }
 
@@ -39,10 +34,5 @@ public class ReportWriterToFileImplTest {
             throw new RuntimeException("Cant read file" + FILE_VALID, e);
         }
         assertEquals(expected, actual);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.data.clear();
     }
 }

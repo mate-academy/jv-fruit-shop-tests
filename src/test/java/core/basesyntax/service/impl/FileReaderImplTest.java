@@ -18,7 +18,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFromFileIsOk() {
+    public void readFromFile_validFile_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -30,12 +30,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFilePathNotOk() {
+    public void readFromFile_notExistPath_notOk() {
         fileReader.readFromFile(NOT_VALID_PATH_OF_INPUT_FILE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFilePathNullNotOk() {
+    public void readFromFilePath_nullPath_notOk() {
         fileReader.readFromFile(null);
     }
 }

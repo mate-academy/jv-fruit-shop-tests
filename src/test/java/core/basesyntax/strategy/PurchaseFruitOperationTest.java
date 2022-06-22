@@ -16,8 +16,8 @@ public class PurchaseFruitOperationTest {
     }
 
     @Test
-    public void operatePurchaseAddIsOk() {
-        Fruit fruit = new Fruit("b", "passionFruit", 20);
+    public void operatePurchaseAdd_valid_ok() {
+        Fruit fruit = new Fruit("p", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 20);
         fruitOperation.operate(fruit);
         Integer expected = 0;
@@ -26,8 +26,8 @@ public class PurchaseFruitOperationTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void operatePurchaseAddIsNotOk() {
-        Fruit fruit = new Fruit("b", "passionFruit", 20);
+    public void operatePurchaseAdd_notValidDate_notOk() {
+        Fruit fruit = new Fruit("p", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 0);
         fruitOperation.operate(fruit);
     }

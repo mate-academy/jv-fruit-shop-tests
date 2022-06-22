@@ -16,7 +16,7 @@ public class BalanceFruitOperationTest {
     }
 
     @Test
-    public void operateBalanceAddIsOk() {
+    public void operateBalanceAdd_validDate_ok() {
         Fruit fruit = new Fruit("b", "passionFruit", 20);
         fruitOperation.operate(fruit);
         Integer expected = 20;

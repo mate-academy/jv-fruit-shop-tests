@@ -19,7 +19,7 @@ public class OperationSupplierImplTest {
     }
 
     @Test
-    public void getBalanceFruitOperationIsOk() {
+    public void getBalanceFruitOperation_validDate_ok() {
         Class<?> expectedClass = BalanceFruitOperation.class;
         Class<?> actualClass = operationSupplier
                 .getOperation(new Fruit("b", "banana", 10))
@@ -28,7 +28,7 @@ public class OperationSupplierImplTest {
     }
 
     @Test
-    public void getPurchaseFruitOperationIsOk() {
+    public void getPurchaseFruitOperation_validDate_ok() {
         Class<?> expectedClass = PurchaseFruitOperation.class;
         Class<?> actualClass = operationSupplier
                 .getOperation(new Fruit("p", "banana", 10))
@@ -37,7 +37,7 @@ public class OperationSupplierImplTest {
     }
 
     @Test
-    public void getReturnFruitOperationIsOk() {
+    public void getReturnFruitOperation_validDate_ok() {
         Class<?> expectedClass = ReturnFruitOperation.class;
         Class<?> actualClass = operationSupplier
                 .getOperation(new Fruit("r", "banana", 10))
@@ -46,7 +46,7 @@ public class OperationSupplierImplTest {
     }
 
     @Test
-    public void getSupplyFruitOperationIsOk() {
+    public void getSupplyFruitOperation_validDate_ok() {
         Class<?> expectedClass = SupplyFruitOperation.class;
         Class<?> actualClass = operationSupplier
                 .getOperation(new Fruit("s", "banana", 10))

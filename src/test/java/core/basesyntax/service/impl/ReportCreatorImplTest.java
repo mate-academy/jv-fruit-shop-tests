@@ -16,7 +16,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void getReportValidReportIsOk() {
+    public void getReportValidReport_validDate_ok() {
         Storage.fruitStorage.put("banana", 20);
         Storage.fruitStorage.put("orange", 20);
         Storage.fruitStorage.put("apple", 20);

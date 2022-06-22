@@ -16,8 +16,8 @@ public class SupplyFruitOperationTest {
     }
 
     @Test
-    public void operateSupplyAddIsOk() {
-        Fruit fruit = new Fruit("b", "passionFruit", 20);
+    public void operateSupplyAdd_validDate_ok() {
+        Fruit fruit = new Fruit("s", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 20);
         fruitOperation.operate(fruit);
         Integer expected = 40;

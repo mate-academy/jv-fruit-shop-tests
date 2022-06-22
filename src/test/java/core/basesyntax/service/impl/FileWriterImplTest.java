@@ -20,7 +20,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeToFileMethodIsOk() {
+    public void writeToFile_validDate_ok() {
         String report = "fruit, quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()
                 + "orange,20" + System.lineSeparator()
@@ -35,12 +35,12 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFromFilePathNotOk() {
+    public void writeFromFile_notExistPath_notOk() {
         fileWriter.writeToFile(NOT_VALID_PATH_OF_INPUT_FILE, "report");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFromFilePathNullNotOk() {
+    public void writeFromFile_nullPath_notOk() {
         fileWriter.writeToFile(null, "report");
     }
 

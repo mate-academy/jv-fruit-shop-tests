@@ -16,8 +16,8 @@ public class ReturnFruitOperationTest {
     }
 
     @Test
-    public void operateReturnAddIsOk() {
-        Fruit fruit = new Fruit("b", "passionFruit", 20);
+    public void operateReturnAdd_validDate_ok() {
+        Fruit fruit = new Fruit("r", "passionFruit", 20);
         Storage.fruitStorage.put("passionFruit", 20);
         fruitOperation.operate(fruit);
         Integer expected = 40;

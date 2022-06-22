@@ -17,7 +17,7 @@ public class FruitBuilderImplTest {
     }
 
     @Test
-    public void fruitBuilderIsOk() {
+    public void fruitBuilder_validDate_ok() {
         List<String> sourceDate = new ArrayList<>();
         sourceDate.add("b,banana,20");
         sourceDate.add("b,apple,100");

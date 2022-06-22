@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.ActionsDao;
+import core.basesyntax.dao.ActionsDaoImpl;
 import core.basesyntax.fruit.Fruit;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.BalanceCounter;
@@ -48,7 +50,8 @@ public class Main {
         BalanceCounter getBalance = new BalanceCounterImpl();
         getBalance.calculateBalance(fruitsMoving, actionStrategy);
 
-        ReportMaker prepareReport = new ReportMakerImpl();
+        ActionsDao actionsDao = new ActionsDaoImpl();
+        ReportMaker prepareReport = new ReportMakerImpl(actionsDao);
         String stringReport = prepareReport.makeReport();
 
         ReportWriterToFile writeToFile = new ReportWriterToFileImpl();

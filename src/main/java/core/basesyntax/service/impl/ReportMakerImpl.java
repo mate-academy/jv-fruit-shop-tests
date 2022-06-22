@@ -1,12 +1,15 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ActionsDao;
-import core.basesyntax.dao.ActionsDaoImpl;
 import core.basesyntax.service.ReportMaker;
 import java.util.Map;
 
 public class ReportMakerImpl implements ReportMaker {
-    private ActionsDao actionsDao = new ActionsDaoImpl();
+    private ActionsDao actionsDao;
+
+    public ReportMakerImpl(ActionsDao actionsDao) {
+        this.actionsDao = actionsDao;
+    }
 
     @Override
     public String makeReport() {

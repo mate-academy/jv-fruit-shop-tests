@@ -1,0 +1,48 @@
+package core.basesyntax.service.impl;
+
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.dao.ActionsDao;
+import core.basesyntax.dao.ActionsDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportMaker;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class ReportMakerImplTest {
+    private static ActionsDao actionsDao;
+    private static ReportMaker prepareReport;
+
+    @BeforeClass
+    public static void beforeClass() {
+        actionsDao = new ActionsDaoImpl();
+        prepareReport = new ReportMakerImpl(actionsDao);
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        Storage.data.clear();
+    }
+
+    @Test
+    public void createEmptyReport_Ok() {
+        String expected = "fruit,quantity";
+        String actual = prepareReport.makeReport();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void createReport_Ok() {
+        String expected = "fruit,quantity" + System.lineSeparator() + "apple" + "," + "15";
+        actionsDao.add("apple", 15);
+        String actual = prepareReport.makeReport();
+        assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.data.clear();
+    }
+}

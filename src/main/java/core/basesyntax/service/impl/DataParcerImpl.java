@@ -15,6 +15,9 @@ public class DataParcerImpl implements DataParcer {
         String[] fields;
         for (String line : list) {
             fields = line.split(",");
+            if (fields[0].matches("[^bpsr]")) {
+                throw new RuntimeException("Unknown type of action:" + fields[0]);
+            }
             listFruitsMoving
                     .add(new Fruit(fields[0], fields[1], Integer.parseInt(fields[2])));
         }

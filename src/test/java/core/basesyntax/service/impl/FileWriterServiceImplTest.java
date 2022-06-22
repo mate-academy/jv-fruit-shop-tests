@@ -22,7 +22,7 @@ public class FileWriterServiceImplTest {
     private static String report;
     private static FileWriterService fileWriter;
 
-    public List<String> readFileTest(String filePath) {
+    private List<String> readFileTest(String filePath) {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {

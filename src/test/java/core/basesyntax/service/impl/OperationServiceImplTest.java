@@ -30,7 +30,7 @@ public class OperationServiceImplTest {
     private static OperationMap operationMap;
     private static ShopDao shopDao;
 
-    public List<String> readFileTest(String filePath) {
+    private List<String> readFileTest(String filePath) {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {

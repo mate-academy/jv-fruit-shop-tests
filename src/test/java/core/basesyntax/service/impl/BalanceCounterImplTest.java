@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.ActionsDao;
 import core.basesyntax.dao.ActionsDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.Fruit;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.BalanceCounter;
@@ -27,8 +28,8 @@ public class BalanceCounterImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        BalanceCounter makeBalance = new BalanceCounterImpl();
-        actionsDao = new ActionsDaoImpl();
+        actionsDao = new ActionsDaoImpl(Storage.data);
+        BalanceCounter makeBalance = new BalanceCounterImpl(actionsDao);
         mapStrategy.put("b", new ActionStrategyBalance());
         mapStrategy.put("p", new ActionStrategyProducer());
         mapStrategy.put("s", new ActionStrategySupplier());
@@ -46,7 +47,7 @@ public class BalanceCounterImplTest {
     public void correctStrategyBalance_Ok() {
         List<Fruit> fruits = new ArrayList<>();
         fruits.add(new Fruit("b", "apple", 10));
-        BalanceCounter makeBalance = new BalanceCounterImpl();
+        BalanceCounter makeBalance = new BalanceCounterImpl(actionsDao);
         makeBalance.calculateBalance(fruits, actionStrategy);
         assertEquals(actionsDao.getAmount("apple"), 15);
     }
@@ -55,7 +56,7 @@ public class BalanceCounterImplTest {
     public void correctStrategyProducer_Ok() {
         List<Fruit> fruits = new ArrayList<>();
         fruits.add(new Fruit("p", "apple", 10));
-        BalanceCounter makeBalance = new BalanceCounterImpl();
+        BalanceCounter makeBalance = new BalanceCounterImpl(actionsDao);
         makeBalance.calculateBalance(fruits, actionStrategy);
         assertEquals(actionsDao.getAmount("apple"), 25);
     }
@@ -64,7 +65,7 @@ public class BalanceCounterImplTest {
     public void correctStrategySupplier_Ok() {
         List<Fruit> fruits = new ArrayList<>();
         fruits.add(new Fruit("s", "apple", 10));
-        BalanceCounter makeBalance = new BalanceCounterImpl();
+        BalanceCounter makeBalance = new BalanceCounterImpl(actionsDao);
         makeBalance.calculateBalance(fruits, actionStrategy);
         assertEquals(actionsDao.getAmount("apple"), 5);
     }
@@ -73,7 +74,7 @@ public class BalanceCounterImplTest {
     public void correctStrategyReturner_Ok() {
         List<Fruit> fruits = new ArrayList<>();
         fruits.add(new Fruit("r", "apple", 20));
-        BalanceCounter makeBalance = new BalanceCounterImpl();
+        BalanceCounter makeBalance = new BalanceCounterImpl(actionsDao);
         makeBalance.calculateBalance(fruits, actionStrategy);
         assertEquals(actionsDao.getAmount("apple"), 35);
     }

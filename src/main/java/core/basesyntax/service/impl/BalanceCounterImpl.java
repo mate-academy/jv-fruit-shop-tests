@@ -1,14 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ActionsDao;
-import core.basesyntax.dao.ActionsDaoImpl;
 import core.basesyntax.fruit.Fruit;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.BalanceCounter;
 import java.util.List;
 
 public class BalanceCounterImpl implements BalanceCounter {
-    private ActionsDao actionsDao = new ActionsDaoImpl();
+    private ActionsDao actionsDao;
+
+    public BalanceCounterImpl(ActionsDao actionsDao) {
+        this.actionsDao = actionsDao;
+    }
 
     @Override
     public void calculateBalance(List<Fruit> fruitsMoving, ActionStrategy mapStrategy) {

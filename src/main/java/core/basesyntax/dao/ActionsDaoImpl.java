@@ -1,37 +1,43 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class ActionsDaoImpl implements ActionsDao {
+    private Map<String, Integer> dataDao = new HashMap<>();
+
+    public ActionsDaoImpl(Map<String, Integer> dataDao) {
+        this.dataDao = dataDao;
+    }
+
     @Override
     public void add(String fruit, Integer amount) {
-        Storage.data.put(fruit, amount);
+        dataDao.put(fruit, amount);
     }
 
     @Override
     public void update(String fruit, Integer amount) {
-        Storage.data.put(fruit, amount);
+        dataDao.put(fruit, amount);
     }
 
     @Override
     public int getAmount(String fruit) {
-        return Storage.data.get(fruit);
+        return dataDao.get(fruit);
     }
 
     @Override
     public boolean isPresentFruit(String fruit) {
-        return Storage.data.containsKey(fruit);
+        return dataDao.containsKey(fruit);
     }
 
     @Override
     public Set<Map.Entry<String, Integer>> getAllFruits() {
-        return Storage.data.entrySet();
+        return dataDao.entrySet();
     }
 
     @Override
     public void clear() {
-        Storage.data.clear();
+        dataDao.clear();
     }
 }

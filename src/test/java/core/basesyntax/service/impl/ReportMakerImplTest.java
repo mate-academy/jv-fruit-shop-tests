@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.ActionsDao;
 import core.basesyntax.dao.ActionsDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportMaker;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -15,7 +16,7 @@ public class ReportMakerImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        actionsDao = new ActionsDaoImpl();
+        actionsDao = new ActionsDaoImpl(Storage.data);
         prepareReport = new ReportMakerImpl(actionsDao);
     }
 

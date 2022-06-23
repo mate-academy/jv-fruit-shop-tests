@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ActionsDao;
 import core.basesyntax.dao.ActionsDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.Fruit;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.BalanceCounter;
@@ -20,18 +21,13 @@ import core.basesyntax.service.impl.DataParcerImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.ReportMakerImpl;
 import core.basesyntax.service.impl.ReportWriterToFileImpl;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_ACTION_PER_DAY = "src"
-            + File.separator + "main" + File.separator
-            + "resources" + File.separator + "ActionsPerDay.csv";
-    private static final String FILE_REPORT_PER_DAY = "src"
-            + File.separator + "main" + File.separator
-            + "resources" + File.separator + "ReportPerDay.csv";
+    private static final String FILE_ACTION_PER_DAY = "src/main/resources/ActionsPerDay.csv";
+    private static final String FILE_REPORT_PER_DAY = "src/main/resources/ReportPerDay.csv";
     private static final Map<String, ActionType> mapStrategy = new HashMap<>();
 
     public static void main(String[] args) {
@@ -41,16 +37,16 @@ public class Main {
         mapStrategy.put("r", new ActionStrategyReturner());
         ActionStrategy actionStrategy = new ActionStrategyImpl(mapStrategy);
 
+        ActionsDao actionsDao = new ActionsDaoImpl(Storage.data);
         FileReader readFile = new FileReaderImpl();
         List<String> inputValues = readFile.getData(FILE_ACTION_PER_DAY);
 
         DataParcer parceFruitMoving = new DataParcerImpl();
         List<Fruit> fruitsMoving = parceFruitMoving.getFruitsMoving(inputValues);
 
-        BalanceCounter getBalance = new BalanceCounterImpl();
+        BalanceCounter getBalance = new BalanceCounterImpl(actionsDao);
         getBalance.calculateBalance(fruitsMoving, actionStrategy);
 
-        ActionsDao actionsDao = new ActionsDaoImpl();
         ReportMaker prepareReport = new ReportMakerImpl(actionsDao);
         String stringReport = prepareReport.makeReport();
 

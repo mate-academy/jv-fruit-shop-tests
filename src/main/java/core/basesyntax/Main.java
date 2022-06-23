@@ -34,9 +34,8 @@ public class Main {
         StorageStrategy storageStrategy = new StorageStrategyImpl(operationStrategy);
 
         //getting dataaggregating data to storage
-        File input = new File(inputPath);
         FileReaderService fileReadToStorage = new FileReaderImpl();
-        storageStrategy.saveAll(fileReadToStorage.read(input));
+        storageStrategy.saveAll(fileReadToStorage.read(inputPath));
 
         //data is in Storage and we're transferring it to file
         ReportCreator reportCreator = new ReportCreatorImpl();

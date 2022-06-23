@@ -40,7 +40,6 @@ public class StorageStrategyTest {
 
     @Test
     public void storageStrategyWorks_Ok() {
-        System.out.println("at the beginning of firts file" + Storage.fruits.get("banana"));
         List<String[]> twoFruits = new ArrayList<>();
         twoFruits.add(new String[]{"s", "banana", "50"});
         twoFruits.add(new String[]{"p", "banana", "40"});

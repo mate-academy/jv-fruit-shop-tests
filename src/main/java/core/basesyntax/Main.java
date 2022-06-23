@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.ActionsDao;
 import core.basesyntax.dao.ActionsDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.fruit.FruitTransaction;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.BalanceCounter;
 import core.basesyntax.service.DataParcer;
@@ -11,7 +11,7 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.ReportMaker;
 import core.basesyntax.service.ReportWriterToFile;
 import core.basesyntax.service.actiontype.ActionStrategyBalance;
-import core.basesyntax.service.actiontype.ActionStrategyProducer;
+import core.basesyntax.service.actiontype.ActionStrategyPurchase;
 import core.basesyntax.service.actiontype.ActionStrategyReturner;
 import core.basesyntax.service.actiontype.ActionStrategySupplier;
 import core.basesyntax.service.actiontype.ActionType;
@@ -31,18 +31,18 @@ public class Main {
     private static final Map<String, ActionType> mapStrategy = new HashMap<>();
 
     public static void main(String[] args) {
-        mapStrategy.put("b", new ActionStrategyBalance());
-        mapStrategy.put("p", new ActionStrategyProducer());
-        mapStrategy.put("s", new ActionStrategySupplier());
-        mapStrategy.put("r", new ActionStrategyReturner());
+        ActionsDao actionsDao = new ActionsDaoImpl(Storage.data);
+        mapStrategy.put("b", new ActionStrategyBalance(actionsDao));
+        mapStrategy.put("p", new ActionStrategyPurchase(actionsDao));
+        mapStrategy.put("s", new ActionStrategySupplier(actionsDao));
+        mapStrategy.put("r", new ActionStrategyReturner(actionsDao));
         ActionStrategy actionStrategy = new ActionStrategyImpl(mapStrategy);
 
-        ActionsDao actionsDao = new ActionsDaoImpl(Storage.data);
         FileReader readFile = new FileReaderImpl();
         List<String> inputValues = readFile.getData(FILE_ACTION_PER_DAY);
 
         DataParcer parceFruitMoving = new DataParcerImpl();
-        List<Fruit> fruitsMoving = parceFruitMoving.getFruitsMoving(inputValues);
+        List<FruitTransaction> fruitsMoving = parceFruitMoving.getFruitsMoving(inputValues);
 
         BalanceCounter getBalance = new BalanceCounterImpl(actionsDao);
         getBalance.calculateBalance(fruitsMoving, actionStrategy);

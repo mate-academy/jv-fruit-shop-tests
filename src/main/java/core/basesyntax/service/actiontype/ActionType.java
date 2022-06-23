@@ -1,5 +1,7 @@
 package core.basesyntax.service.actiontype;
 
+import core.basesyntax.fruit.FruitTransaction;
+
 public interface ActionType {
-    int getNewValue(int value);
+    int getNewValue(FruitTransaction fruitTransaction);
 }

@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
-    private static final String FILE_EXIST = "src/test/resources/test.csv";
+    private static final String FILE_TEST = "src/test/resources/test.csv";
     private static final String FILE_NOT_EXIST = "src/test/resources/wrong.csv";
     private static FileReader readFile;
     private static List<String> lines;
@@ -24,23 +24,27 @@ public class FileReaderTest {
     }
 
     @Test
-    public void readExistedFile_Ok() {
-        File file = new File(FILE_EXIST);
+    public void reader_readExistedFile_ok() {
         String testString = "Hello Mates!";
         List<String> testList = new ArrayList<>();
         testList.add(testString);
-        try {
-            Files.write(file.toPath(), testString.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write report to file" + FILE_EXIST, e);
-        }
-        lines = readFile.getData(FILE_EXIST);
+        File file = new File(FILE_TEST);
+        createTestFile(file, testString);
+        lines = readFile.getData(FILE_TEST);
         assertTrue(!lines.isEmpty());
         assertEquals(lines, testList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNonExistedFile_NotOk() {
+    public void reader_readNoneExistedFile_notOk() {
         readFile.getData(FILE_NOT_EXIST);
+    }
+
+    private void createTestFile(File file, String testString) {
+        try {
+            Files.write(file.toPath(), testString.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write report to file" + FILE_TEST, e);
+        }
     }
 }

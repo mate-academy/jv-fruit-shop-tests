@@ -13,6 +13,7 @@ import org.junit.Test;
 
 public class ReportWriterToFileImplTest {
     private static final String FILE_VALID = "src/test/resources/TestReport.csv";
+    private static final String FILE_NONE_VALID = "src/test/resources/Test*#$%.csv";
     private static ReportWriterToFile writeToFile;
 
     @BeforeClass
@@ -20,19 +21,31 @@ public class ReportWriterToFileImplTest {
         writeToFile = new ReportWriterToFileImpl();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void writer_notValidNameFile_notOk() {
+        String data = "fruit,quantity" + System.lineSeparator() + "apple" + "," + "15";
+        writeToFile.writeReportToFile(data, FILE_NONE_VALID);
+    }
+
     @Test
-    public void createValidFile_Ok() {
+    public void writer_createValidFile_ok() {
         String data = "fruit,quantity" + System.lineSeparator() + "apple" + "," + "15";
         writeToFile.writeReportToFile(data, FILE_VALID);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("apple" + "," + "15");
         List<String> actual;
-        try {
-            actual = Files.readAllLines(Paths.get(FILE_VALID));
-        } catch (IOException e) {
-            throw new RuntimeException("Cant read file" + FILE_VALID, e);
-        }
+        actual = getListFromFile(FILE_VALID);
         assertEquals(expected, actual);
+    }
+
+    private List<String> getListFromFile(String file) {
+        List<String> actual;
+        try {
+            actual = Files.readAllLines(Paths.get(file));
+        } catch (IOException e) {
+            throw new RuntimeException("Cant read file" + file, e);
+        }
+        return actual;
     }
 }

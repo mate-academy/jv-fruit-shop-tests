@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.fruit.FruitTransaction;
 import core.basesyntax.service.DataParcer;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +27,16 @@ public class DataParcerImplTest {
     }
 
     @Test
-    public void parsingData_Ok() {
+    public void pareser_parseValidData_ok() {
         testValues.add("b,orange,23");
-        List<Fruit> expected = new ArrayList<>();
-        expected.add(new Fruit("b", "orange", 23));
-        List<Fruit> actual = parcer.getFruitsMoving(testValues);
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction("b", "orange", 23));
+        List<FruitTransaction> actual = parcer.getFruitsMoving(testValues);
         assertEquals(actual, expected);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseWrongData_NotOk() {
+    public void pareser_parseWrongData_notOk() {
         testValues.add("w,orange,23");
         parcer.getFruitsMoving(testValues);
     }

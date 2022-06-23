@@ -8,16 +8,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.FruitTransaction;
 import org.junit.Test;
 
-public class ActionStrategyReturnerTest {
+public class ActionStrategyPurchaseTest {
     private static ActionsDao actionsDao;
 
     @Test
-    public void strategyReturner_correctCalculating_ok() {
+    public void strategyPurchase_correctCalculating_ok() {
         actionsDao = new ActionsDaoImpl(Storage.data);
         actionsDao.add("orange", 10);
-        ActionStrategyReturner actionStrategyReturner = new ActionStrategyReturner(actionsDao);
-        int actual = actionStrategyReturner.getNewValue(new FruitTransaction("r", "orange", 50));
-        assertEquals(60, actual);
+        ActionStrategyPurchase actionStrategyPurchase = new ActionStrategyPurchase(actionsDao);
+        int actual = actionStrategyPurchase.getNewValue(new FruitTransaction("p", "orange", 5));
+        assertEquals(5, actual);
     }
 }
-

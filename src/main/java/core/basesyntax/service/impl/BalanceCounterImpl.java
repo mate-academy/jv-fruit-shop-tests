@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ActionsDao;
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.fruit.FruitTransaction;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.BalanceCounter;
 import java.util.List;
@@ -14,14 +14,14 @@ public class BalanceCounterImpl implements BalanceCounter {
     }
 
     @Override
-    public void calculateBalance(List<Fruit> fruitsMoving, ActionStrategy mapStrategy) {
-        int deltaValue;
-        for (Fruit fruit : fruitsMoving) {
-            deltaValue = mapStrategy.get(fruit.getTypeAction()).getNewValue(fruit.getAmount());
-            if (!actionsDao.isPresentFruit(fruit.getName())) {
-                actionsDao.add(fruit.getName(), fruit.getAmount());
+    public void calculateBalance(List<FruitTransaction> fruitsMoving, ActionStrategy mapStrategy) {
+        for (FruitTransaction fruitTransaction : fruitsMoving) {
+            if (!actionsDao.isPresentFruit(fruitTransaction.getName())) {
+                actionsDao.add(fruitTransaction.getName(), fruitTransaction.getAmount());
             }
-            actionsDao.update(fruit.getName(), actionsDao.getAmount(fruit.getName()) + deltaValue);
+            actionsDao.update(fruitTransaction.getName(),
+                    mapStrategy.get(fruitTransaction.getTypeAction())
+                            .getNewValue(fruitTransaction));
         }
     }
 }

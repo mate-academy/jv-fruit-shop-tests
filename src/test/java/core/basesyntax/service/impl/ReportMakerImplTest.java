@@ -26,14 +26,14 @@ public class ReportMakerImplTest {
     }
 
     @Test
-    public void createEmptyReport_Ok() {
+    public void reportMaker_createEmptyReport_ok() {
         String expected = "fruit,quantity";
         String actual = prepareReport.makeReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void createReport_Ok() {
+    public void reportMaker_createValidReport_ok() {
         String expected = "fruit,quantity" + System.lineSeparator() + "apple" + "," + "15";
         actionsDao.add("apple", 15);
         String actual = prepareReport.makeReport();

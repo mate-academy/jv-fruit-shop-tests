@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.fruit.FruitTransaction;
 import java.util.List;
 
 public interface DataParcer {
-    List<Fruit> getFruitsMoving(List<String> list);
+    List<FruitTransaction> getFruitsMoving(List<String> list);
 }

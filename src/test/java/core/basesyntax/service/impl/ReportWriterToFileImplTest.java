@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class ReportWriterToFileImplTest {
     private static final String FILE_VALID = "src/test/resources/TestReport.csv";
-    private static final String FILE_NONE_VALID = "src/test/resources/Test*#$%.csv";
+    private static final String FILE_NONE_VALID = "src/test/resources/Tes*.csv";
     private static ReportWriterToFile writeToFile;
 
     @BeforeClass

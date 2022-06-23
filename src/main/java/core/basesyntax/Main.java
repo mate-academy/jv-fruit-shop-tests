@@ -46,7 +46,6 @@ public class Main {
 
         BalanceCounter getBalance = new BalanceCounterImpl(actionsDao);
         getBalance.calculateBalance(fruitsMoving, actionStrategy);
-
         ReportMaker prepareReport = new ReportMakerImpl(actionsDao);
         String stringReport = prepareReport.makeReport();
 

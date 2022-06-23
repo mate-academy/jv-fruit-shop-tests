@@ -13,7 +13,6 @@ import org.junit.Test;
 
 public class ReportWriterToFileImplTest {
     private static final String FILE_VALID = "src/test/resources/TestReport.csv";
-    private static final String FILE_NONE_VALID = "src/test/resources/Tes*.csv";
     private static ReportWriterToFile writeToFile;
 
     @BeforeClass
@@ -24,7 +23,7 @@ public class ReportWriterToFileImplTest {
     @Test(expected = RuntimeException.class)
     public void writer_notValidNameFile_notOk() {
         String data = "fruit,quantity" + System.lineSeparator() + "apple" + "," + "15";
-        writeToFile.writeReportToFile(data, FILE_NONE_VALID);
+        writeToFile.writeReportToFile(data, "");
     }
 
     @Test

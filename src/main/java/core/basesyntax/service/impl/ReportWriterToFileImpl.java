@@ -11,7 +11,7 @@ public class ReportWriterToFileImpl implements ReportWriterToFile {
         File file = new File(fileName);
         try {
             Files.write(file.toPath(), report.getBytes());
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Can't write report to file" + fileName, e);
         }
     }

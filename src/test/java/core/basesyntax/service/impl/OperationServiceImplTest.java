@@ -17,7 +17,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,14 +29,6 @@ public class OperationServiceImplTest {
     private static OperationService operationService;
     private static OperationMap operationMap;
     private static ShopDao shopDao;
-
-    private List<String> readFileTest(String filePath) {
-        try {
-            return Files.readAllLines(Path.of(filePath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + filePath);
-        }
-    }
 
     @BeforeClass
     public static void beforeClass() {
@@ -56,14 +48,16 @@ public class OperationServiceImplTest {
         operationService.action(infoFromFile);
     }
 
-    @Test
-    public void action_fromFileAll_ok() {
-        List<String> infoFromFile = readFileTest(INPUT_FILE_PATH_TEST);
-        operationService.action(infoFromFile);
+    @After
+    public void after() {
+        Shop.fruits.clear();
     }
 
-    @AfterClass
-    public static void afterClass() {
-        Shop.fruits.clear();
+    private List<String> readFileTest(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file " + filePath);
+        }
     }
 }

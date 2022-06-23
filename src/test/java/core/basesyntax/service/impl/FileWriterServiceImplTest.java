@@ -22,14 +22,6 @@ public class FileWriterServiceImplTest {
     private static String report;
     private static FileWriterService fileWriter;
 
-    private List<String> readFileTest(String filePath) {
-        try {
-            return Files.readAllLines(Path.of(filePath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + filePath);
-        }
-    }
-
     @BeforeClass
     public static void beforeClass() {
         fileWriter = new FileWriterServiceImpl();
@@ -61,5 +53,13 @@ public class FileWriterServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void writeFile_toInvalidFile_notOk() {
         fileWriter.writeFile("", report);
+    }
+
+    private List<String> readFileTest(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file " + filePath);
+        }
     }
 }

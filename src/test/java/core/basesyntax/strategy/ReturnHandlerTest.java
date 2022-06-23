@@ -6,7 +6,7 @@ import core.basesyntax.dao.ShopDao;
 import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.db.Shop;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -32,17 +32,8 @@ public class ReturnHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void handle_nonExistFruit_notOk() {
-        FruitTransaction fruitNonExistTransaction = new FruitTransaction();
-        fruitNonExistTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitNonExistTransaction.setFruit("I am not apple or banana");
-        fruitNonExistTransaction.setQuantity(10);
-        handler.handle(fruitNonExistTransaction);
-    }
-
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void after() {
         Shop.fruits.clear();
     }
 }

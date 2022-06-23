@@ -6,7 +6,7 @@ import core.basesyntax.dao.ShopDao;
 import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.db.Shop;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -51,8 +51,8 @@ public class PurchaseHandlerTest {
         handler.handle(fruitTransaction);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void after() {
         Shop.fruits.clear();
     }
 }

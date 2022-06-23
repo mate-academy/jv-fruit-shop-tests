@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportWriterToFileImplTest {
-    private static final String FILE_VALID = "src/main/resources/TestReport.csv";
+    private static final String FILE_VALID = "src/test/resources/TestReport.csv";
     private static ReportWriterToFile writeToFile;
 
     @BeforeClass

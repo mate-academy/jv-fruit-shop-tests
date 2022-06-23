@@ -27,26 +27,14 @@ public class ActionStrategyImplTest {
     }
 
     @Test
-    public void testValidStrategyBalance_Ok() {
-        ActionType actionType = actionStrategy.get("b");
-        assertEquals(ActionStrategyBalance.class, actionType.getClass());
+    public void inputWrongStrategy_NotOk() {
+        ActionType actionType = actionStrategy.get("w");
+        assertEquals(null, actionType);
     }
 
     @Test
-    public void testValidStrategyProducer_Ok() {
+    public void getValidStrategyProducer_Ok() {
         ActionType actionType = actionStrategy.get("p");
         assertEquals(ActionStrategyProducer.class, actionType.getClass());
-    }
-
-    @Test
-    public void testValidStrategySupplier_Ok() {
-        ActionType actionType = actionStrategy.get("s");
-        assertEquals(ActionStrategySupplier.class, actionType.getClass());
-    }
-
-    @Test
-    public void testValidStrategyReturner_Ok() {
-        ActionType actionType = actionStrategy.get("r");
-        assertEquals(ActionStrategyReturner.class, actionType.getClass());
     }
 }

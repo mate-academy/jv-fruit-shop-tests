@@ -27,7 +27,7 @@ public class DataParcerImplTest {
     }
 
     @Test
-    public void parcingData_Ok() {
+    public void parsingData_Ok() {
         testValues.add("b,orange,23");
         List<Fruit> expected = new ArrayList<>();
         expected.add(new Fruit("b", "orange", 23));

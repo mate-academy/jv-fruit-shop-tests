@@ -13,8 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
-    private static final String FILE_EXIST = "src/main/resources/test.csv";
-    private static final String FILE_NOT_EXIST = "src/main/resources/wrong.csv";
+    private static final String FILE_EXIST = "src/test/resources/test.csv";
+    private static final String FILE_NOT_EXIST = "src/test/resources/wrong.csv";
     private static FileReader readFile;
     private static List<String> lines;
 

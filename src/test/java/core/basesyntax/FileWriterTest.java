@@ -30,27 +30,27 @@ public class FileWriterTest {
     }
 
     @Test
-    public void wrightFile_OK() throws IOException, CsvException {
-        List<String[]> reportToWrite = new ArrayList<>();
-        reportToWrite.add(new String[]{"fruit", "quantity"});
-        reportToWrite.add(new String[]{"banana", "105"});
-        reportToWrite.add(new String[]{"apple", "120"});
+    public void write_File_OK() throws IOException, CsvException {
+        List<String[]> expected = new ArrayList<>();
+        expected.add(new String[]{"fruit", "quantity"});
+        expected.add(new String[]{"banana", "105"});
+        expected.add(new String[]{"apple", "120"});
 
-        fileWriterService.write(new File(RESULT_FILE), reportToWrite);
+        fileWriterService.write(new File(RESULT_FILE), expected);
 
-        List<String[]> fileWrited = new ArrayList<>();
+        List<String[]> actual = new ArrayList<>();
         try {
-            List<String> resultWrited = Files.readAllLines(Path.of(RESULT_FILE));
-            for (String line : resultWrited) {
-                fileWrited.add(line.split(","));
+            List<String> tempActual = Files.readAllLines(Path.of(RESULT_FILE));
+            for (String line : tempActual) {
+                actual.add(line.split(","));
             }
         } catch (IOException e) {
             throw new RuntimeException("somethin went wrong, not sure what: " + e);
         }
 
-        for (int i = 0; i < reportToWrite.size(); i++) {
-            String[] lineFromReport = reportToWrite.get(i);
-            String[] lineFromFileWrited = fileWrited.get(i);
+        for (int i = 0; i < expected.size(); i++) {
+            String[] lineFromReport = expected.get(i);
+            String[] lineFromFileWrited = actual.get(i);
             for (int j = 0; j < lineFromReport.length; j++) {
                 assertTrue(lineFromReport[j].equals(lineFromFileWrited[j]));
             }

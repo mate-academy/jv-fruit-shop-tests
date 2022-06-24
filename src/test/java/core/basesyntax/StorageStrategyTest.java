@@ -22,7 +22,7 @@ import org.junit.Test;
 
 public class StorageStrategyTest {
     private static Storage localStorage;
-    private static StorageSupplyService localStorageSupply;
+    private static StorageSupplyService storageSupplyService;
     private static OperationStrategy operationStrategy;
     private static StorageStrategy storageStrategy;
 
@@ -34,7 +34,7 @@ public class StorageStrategyTest {
         operationHandlers.put("r", new AdditionHandler());
         operationHandlers.put("p", new SubtractionHandler());
         localStorage = new Storage();
-        localStorageSupply = new StorageSupplyServiceImpl(localStorage);
+        storageSupplyService = new StorageSupplyServiceImpl(localStorage);
         operationStrategy = new OperationStrategyImpl(operationHandlers);
         storageStrategy = new StorageStrategyImpl(operationStrategy);
     }
@@ -46,19 +46,19 @@ public class StorageStrategyTest {
 
     @Test
     public void storageStrategyWorks_Ok() {
-        List<String[]> twoFruits = new ArrayList<>();
-        twoFruits.add(new String[]{"s", "banana", "50"});
-        twoFruits.add(new String[]{"p", "banana", "40"});
-        storageStrategy.saveAll(twoFruits, localStorageSupply);
+        List<String[]> fruits = new ArrayList<>();
+        fruits.add(new String[]{"s", "banana", "50"});
+        fruits.add(new String[]{"p", "banana", "40"});
+        storageStrategy.saveAll(fruits, storageSupplyService);
         assertTrue(localStorage.getFruitsInStorage().get("banana").equals(10));
     }
 
     @Test
     public void storageStrategyMinusWorks_Ok() {
-        List<String[]> twoFruits = new ArrayList<>();
-        twoFruits.add(new String[]{"p", "banana", "50"});
-        twoFruits.add(new String[]{"p", "banana", "40"});
-        storageStrategy.saveAll(twoFruits, localStorageSupply);
+        List<String[]> fruits = new ArrayList<>();
+        fruits.add(new String[]{"p", "banana", "50"});
+        fruits.add(new String[]{"p", "banana", "40"});
+        storageStrategy.saveAll(fruits, storageSupplyService);
         assertTrue(localStorage.getFruitsInStorage().get("banana").equals(-90));
     }
 }

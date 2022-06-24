@@ -13,43 +13,37 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorTest {
-    private static Storage localStorage = new Storage();
-    private static StorageSupplyService storageSupplyService =
-            new StorageSupplyServiceImpl(localStorage);
-    private static ReportCreator localReportCreator;
+    private static Storage storage = new Storage();
+    private static StorageSupplyService storageSupplyService;
+    private static ReportCreator reportCreator;
 
     @BeforeClass
-    public static void fill() {
-        localReportCreator = new ReportCreatorImpl();
+    public static void fillStorage() {
+        storageSupplyService = new StorageSupplyServiceImpl(storage);
+        reportCreator = new ReportCreatorImpl();
         storageSupplyService.add("banana", 50);
         storageSupplyService.add("apple", 50);
         storageSupplyService.add("ananas", 50);
     }
 
     @Test
-    public void makeReportHead_Ok() {
-        List<String[]> reportToCheck = localReportCreator.getReport(localStorage);
-        String[] headGot = reportToCheck.get(0);
-        String[] headExpected = new String[]{"fruit", "quantity"};
+    public void make_Report_Ok() {
+        List<String[]> actualReport = reportCreator.getReport(storage);
+        String[] actualHead = actualReport.get(0);
+        String[] expectedHead = new String[]{"fruit", "quantity"};
         for (int i = 0; i < 2; i++) {
-            assertEquals(headGot[i], headExpected[i]);
+            assertEquals("head is wrong, check it", actualHead[i], expectedHead[i]);
         }
-    }
-
-    @Test
-    public void makeReportBody_Ok() {
-        localReportCreator.reportFlush();
-        List<String[]> bodyActual = localReportCreator.getReport(localStorage);
-        bodyActual.remove(0);
+        actualReport.remove(0);
         List<String[]> bodyExpected = new ArrayList<>();
         bodyExpected.add(new String[]{"banana", "50"});
         bodyExpected.add(new String[]{"apple", "50"});
         bodyExpected.add(new String[]{"ananas", "50"});
-        for (int j = 0; j < bodyActual.size(); j++) {
-            String[] actualLine = bodyActual.get(j);
+        for (int j = 0; j < actualReport.size(); j++) {
+            String[] actualLine = actualReport.get(j);
             String[] expectedLine = bodyExpected.get(j);
             for (int i = 0; i < actualLine.length; i++) {
-                assertEquals(actualLine[i], expectedLine[i]);
+                assertEquals("reports body is wrong, check it", actualLine[i], expectedLine[i]);
             }
         }
     }

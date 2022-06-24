@@ -1,15 +1,12 @@
 package core.basesyntax;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.opencsv.exceptions.CsvException;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.impl.FileReaderImpl;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -28,7 +25,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void readRightFile_OK() throws IOException, CsvException {
+    public void read_ValidFile_ok() throws IOException, CsvException {
         List<String[]> expected = new ArrayList<>();
         expected.add(new String[]{"b", "banana", "20"});
         expected.add(new String[]{"b", "apple", "140"});
@@ -51,37 +48,13 @@ public class FileReaderTest {
     }
 
     @Test
-    public void readWrongLineSize_notOk() throws IOException, CsvException {
+    public void read_WrongLineSize_notOk() throws IOException, CsvException {
         List<String[]> actual = fileReaderService.read(WRONG_FILE);
         assertFalse(actual.stream().allMatch(b -> b.length == 3));
     }
 
     @Test(expected = RuntimeException.class)
-    public void readAbsentFile_notOk() {
+    public void read_AbsentFile_notOk() {
         fileReaderService.read(ABSENT_FILE);
-    }
-
-    @Test
-    public void readFileWithWrongHead_Ok() throws IOException {
-        String[] expectedHead = new String[]{"type", "fruit", "quantity"};
-        List<String> lines = Files.readAllLines(Path.of(VALID_FILE));
-        String[] gotHead = lines.get(0).split(",");
-        for (int i = 0; i < expectedHead.length; i++) {
-            assertTrue("the head of file is wrong in cell: "
-                    + i, expectedHead[i].equals(gotHead[i]));
-        }
-    }
-
-    @Test
-    public void readFileWithWrongHead_notOk() throws IOException {
-        String[] expectedHead = new String[]{"type", "fruit", "quantity"};
-        List<String> lines = Files.readAllLines(Path.of(VALID_FILE));
-        String[] gotHead = lines.get(0).split(",");
-        for (int i = 0; i < expectedHead.length; i++) {
-            if (!expectedHead[i].equals(gotHead[i])) {
-                assertNotEquals("the head of file is wrong in cell: "
-                        + i, expectedHead[i], gotHead[i]);
-            }
-        }
     }
 }

@@ -13,13 +13,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorTest {
-    private static Storage storage = new Storage();
-    private static StorageSupplyService storageSupplyService;
+    private static Storage storage;
     private static ReportCreator reportCreator;
 
     @BeforeClass
     public static void fillStorage() {
-        storageSupplyService = new StorageSupplyServiceImpl(storage);
+        storage = new Storage();
+        StorageSupplyService storageSupplyService = new StorageSupplyServiceImpl(storage);
         reportCreator = new ReportCreatorImpl();
         storageSupplyService.add("banana", 50);
         storageSupplyService.add("apple", 50);

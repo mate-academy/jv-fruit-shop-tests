@@ -21,7 +21,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageStrategyTest {
-    private static Storage localStorage;
+    private static Storage storage;
     private static StorageSupplyService storageSupplyService;
     private static OperationStrategy operationStrategy;
     private static StorageStrategy storageStrategy;
@@ -33,15 +33,15 @@ public class StorageStrategyTest {
         operationHandlers.put("b", new AdditionHandler());
         operationHandlers.put("r", new AdditionHandler());
         operationHandlers.put("p", new SubtractionHandler());
-        localStorage = new Storage();
-        storageSupplyService = new StorageSupplyServiceImpl(localStorage);
+        storage = new Storage();
+        storageSupplyService = new StorageSupplyServiceImpl(storage);
         operationStrategy = new OperationStrategyImpl(operationHandlers);
         storageStrategy = new StorageStrategyImpl(operationStrategy);
     }
 
     @Before
     public void clean() {
-        localStorage.flush();
+        storage.flush();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class StorageStrategyTest {
         fruits.add(new String[]{"s", "banana", "50"});
         fruits.add(new String[]{"p", "banana", "40"});
         storageStrategy.saveAll(fruits, storageSupplyService);
-        assertTrue(localStorage.getFruitsInStorage().get("banana").equals(10));
+        assertTrue(storage.getFruitsInStorage().get("banana").equals(10));
     }
 
     @Test
@@ -59,6 +59,6 @@ public class StorageStrategyTest {
         fruits.add(new String[]{"p", "banana", "50"});
         fruits.add(new String[]{"p", "banana", "40"});
         storageStrategy.saveAll(fruits, storageSupplyService);
-        assertTrue(localStorage.getFruitsInStorage().get("banana").equals(-90));
+        assertTrue(storage.getFruitsInStorage().get("banana").equals(-90));
     }
 }

@@ -4,26 +4,26 @@ import core.basesyntax.dao.ShopDao;
 import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class PurchaseCalculatorTest {
+public class PurchaseCalculatorTest {
     private static FruitTransaction transactionBalance;
     private static FruitTransaction transactionSupply;
     private static FruitTransaction transactionPurchase;
     private static ShopDao shopDao;
     private static TransactionCalculation transactionCalculation;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         shopDao = new ShopDaoImpl();
         transactionCalculation = new PurchaseCalculator();
     }
 
     @Test
-    void purchaseGreaterThanBalanceSupply_NotOk() {
+    public void purchaseGreaterThanBalanceSupply_NotOk() {
         transactionBalance = new FruitTransaction("b", "banana", 20);
         transactionSupply = new FruitTransaction("s", "banana", 20);
         transactionPurchase = new FruitTransaction("p", "banana", 100);
@@ -33,7 +33,7 @@ class PurchaseCalculatorTest {
     }
 
     @Test
-    void purchaseCalculator_Ok() {
+    public void purchaseCalculator_Ok() {
         shopDao.add("banana", 100);
         transactionPurchase = new FruitTransaction("p", "banana", 50);
         transactionCalculation.calculate(transactionPurchase);
@@ -42,9 +42,8 @@ class PurchaseCalculatorTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterClass
+    public static void afterClass() throws Exception {
         Storage.storage.clear();
     }
 }
-

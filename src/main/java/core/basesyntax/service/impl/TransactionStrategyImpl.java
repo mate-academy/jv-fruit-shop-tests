@@ -5,14 +5,14 @@ import core.basesyntax.service.calculation.TransactionCalculation;
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private final Map<String, TransactionCalculation> transactionCalculationMap;
+    private final Map<String, TransactionCalculation> strategyMap;
 
-    public TransactionStrategyImpl(Map<String, TransactionCalculation> calculationMap) {
-        this.transactionCalculationMap = calculationMap;
+    public TransactionStrategyImpl(Map<String, TransactionCalculation> strategyMap) {
+        this.strategyMap = strategyMap;
     }
 
     public TransactionCalculation get(String operation) {
 
-        return transactionCalculationMap.get(operation);
+        return strategyMap.get(operation);
     }
 }

@@ -4,24 +4,24 @@ import core.basesyntax.dao.ShopDao;
 import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class SupplyCalculatorTest {
+public class SupplyCalculatorTest {
     private static TransactionCalculation transactionCalculation;
     private static ShopDao shopDao;
     private static FruitTransaction fruitTransaction;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         transactionCalculation = new SupplyCalculator();
         shopDao = new ShopDaoImpl();
     }
 
     @Test
-    void supplyCalculator_Ok() {
+    public void supplyCalculator_Ok() {
         shopDao.add("lemon", 20);
         fruitTransaction = new FruitTransaction("s", "lemon", 20);
         transactionCalculation.calculate(fruitTransaction);
@@ -30,8 +30,8 @@ class SupplyCalculatorTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterClass
+    public static void afterClass() throws Exception {
         Storage.storage.clear();
     }
 }

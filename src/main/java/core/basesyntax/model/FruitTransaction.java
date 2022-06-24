@@ -10,21 +10,9 @@ public class FruitTransaction {
     public FruitTransaction() {
     }
 
-    public FruitTransaction(String operation, String fruite, int quantity) {
+    public FruitTransaction(String operation, String fruit, int quantity) {
         this.operation = operation;
-        this.fruit = fruite;
-        this.quantity = quantity;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
-    public void setFruit(String fruit) {
         this.fruit = fruit;
-    }
-
-    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

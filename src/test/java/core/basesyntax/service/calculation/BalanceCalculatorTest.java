@@ -2,22 +2,22 @@ package core.basesyntax.service.calculation;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class BalanceCalculatorTest {
+public class BalanceCalculatorTest {
     private static TransactionCalculation transactionCalculation;
     private static FruitTransaction fruitTransaction;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         transactionCalculation = new BalanceCalculator();
     }
 
     @Test
-    void balanceCalculator_Ok() {
+    public void balanceCalculator_Ok() {
         fruitTransaction = new FruitTransaction("b", "banana", 10);
         transactionCalculation.calculate(fruitTransaction);
         Integer actual = Storage.storage.get("banana");
@@ -25,8 +25,8 @@ class BalanceCalculatorTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterClass
+    public static void afterClass() throws Exception {
         Storage.storage.clear();
     }
 }

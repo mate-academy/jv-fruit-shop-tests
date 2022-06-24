@@ -4,24 +4,24 @@ import core.basesyntax.dao.ShopDao;
 import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.storage.Storage;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ReportCreatorImplTest {
+public class ReportCreatorImplTest {
     private static final String NOTATION = "fruit, quantity";
     private static ReportCreator reportCreator;
     private static ShopDao shopDao;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         reportCreator = new ReportCreatorImpl();
         shopDao = new ShopDaoImpl();
     }
 
     @Test
-    void createReport_Ok() {
+    public void createReport_Ok() {
         shopDao.add("lemon", 30);
         String expected = "fruit, quantity" + System.lineSeparator() + "lemon,30";
         String actual = reportCreator.createReport();
@@ -29,19 +29,19 @@ class ReportCreatorImplTest {
     }
 
     @Test
-    void correctNotation_Ok() {
+    public void correctNotation_Ok() {
         String[] splitReport = reportCreator.createReport().split(System.lineSeparator());
         boolean actual = splitReport[0].equals(NOTATION);
         Assert.assertTrue(actual);
     }
 
     @Test
-    void emptyReport_NotOk() {
+    public void emptyReport_NotOk() {
         Assert.assertFalse(reportCreator.createReport().isBlank());
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterClass
+    public static void afterClass() {
         Storage.storage.clear();
     }
 }

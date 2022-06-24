@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface StorageStrategy {
-    void saveAll(List<String[]> fruits);
+    void saveAll(List<String[]> fruits, StorageSupplyService supplyService);
 }

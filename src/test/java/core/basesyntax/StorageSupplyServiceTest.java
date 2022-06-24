@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.StorageSupplyService;
 import core.basesyntax.service.impl.StorageSupplyServiceImpl;
 import core.basesyntax.strategy.AdditionHandler;
@@ -14,7 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageSupplyServiceTest {
-    private static Map<String, Integer> localTestStorage;
+    private static Storage localTestStorage;
     private static StorageSupplyService supplyService;
 
     @BeforeClass
@@ -24,13 +25,13 @@ public class StorageSupplyServiceTest {
         operationHandlers.put("b", new AdditionHandler());
         operationHandlers.put("r", new AdditionHandler());
         operationHandlers.put("p", new SubtractionHandler());
-        localTestStorage = new HashMap<>();
+        localTestStorage = new Storage();
         supplyService = new StorageSupplyServiceImpl(localTestStorage);
     }
 
     @After
     public void renovate() {
-        localTestStorage = new HashMap<>();
+        localTestStorage = new Storage();
         supplyService = new StorageSupplyServiceImpl(localTestStorage);
     }
 
@@ -38,13 +39,13 @@ public class StorageSupplyServiceTest {
     public void storageSuppliesAddition_Ok() {
         supplyService.add("banana", 20);
         supplyService.add("banana", 20);
-        assertTrue(localTestStorage.get("banana").equals(40));
+        assertTrue(localTestStorage.getFruitsInStorage().get("banana").equals(40));
     }
 
     @Test
     public void storageSuppliesSubtraction_Ok() {
         supplyService.add("banana", 40);
         supplyService.subtract("banana", 30);
-        assertTrue(localTestStorage.get("banana").equals(10));
+        assertTrue(localTestStorage.getFruitsInStorage().get("banana").equals(10));
     }
 }

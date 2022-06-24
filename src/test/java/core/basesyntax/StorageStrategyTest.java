@@ -5,8 +5,10 @@ import static org.junit.Assert.assertTrue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.StorageStrategy;
+import core.basesyntax.service.StorageSupplyService;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.StorageStrategyImpl;
+import core.basesyntax.service.impl.StorageSupplyServiceImpl;
 import core.basesyntax.strategy.AdditionHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.SubtractionHandler;
@@ -19,6 +21,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageStrategyTest {
+    private static Storage localStorage;
+    private static StorageSupplyService localStorageSupply;
     private static OperationStrategy operationStrategy;
     private static StorageStrategy storageStrategy;
 
@@ -29,13 +33,15 @@ public class StorageStrategyTest {
         operationHandlers.put("b", new AdditionHandler());
         operationHandlers.put("r", new AdditionHandler());
         operationHandlers.put("p", new SubtractionHandler());
+        localStorage = new Storage();
+        localStorageSupply = new StorageSupplyServiceImpl(localStorage);
         operationStrategy = new OperationStrategyImpl(operationHandlers);
         storageStrategy = new StorageStrategyImpl(operationStrategy);
     }
 
     @Before
     public void clean() {
-        Storage.fruits.clear();
+        localStorage.flush();
     }
 
     @Test
@@ -43,8 +49,8 @@ public class StorageStrategyTest {
         List<String[]> twoFruits = new ArrayList<>();
         twoFruits.add(new String[]{"s", "banana", "50"});
         twoFruits.add(new String[]{"p", "banana", "40"});
-        storageStrategy.saveAll(twoFruits);
-        assertTrue(Storage.fruits.get("banana").equals(10));
+        storageStrategy.saveAll(twoFruits, localStorageSupply);
+        assertTrue(localStorage.getFruitsInStorage().get("banana").equals(10));
     }
 
     @Test
@@ -52,7 +58,7 @@ public class StorageStrategyTest {
         List<String[]> twoFruits = new ArrayList<>();
         twoFruits.add(new String[]{"p", "banana", "50"});
         twoFruits.add(new String[]{"p", "banana", "40"});
-        storageStrategy.saveAll(twoFruits);
-        assertTrue(Storage.fruits.get("banana").equals(-90));
+        storageStrategy.saveAll(twoFruits, localStorageSupply);
+        assertTrue(localStorage.getFruitsInStorage().get("banana").equals(-90));
     }
 }

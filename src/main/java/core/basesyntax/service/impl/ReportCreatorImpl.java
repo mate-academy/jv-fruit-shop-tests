@@ -8,10 +8,15 @@ import java.util.List;
 public class ReportCreatorImpl implements ReportCreator {
     private final List<String[]> report = new ArrayList<>();
 
-    public List<String[]> getReport() {
+    public List<String[]> getReport(Storage outerStorage) {
         writeHead();
-        writeBody(Storage.getAll());
-        return new ArrayList<String[]>(report);
+        writeBody(outerStorage.getAll());
+        return new ArrayList<>(report);
+    }
+
+    @Override
+    public void reportFlush() {
+        report.clear();
     }
 
     private void writeHead() {

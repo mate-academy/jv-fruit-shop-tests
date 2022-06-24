@@ -10,7 +10,7 @@ import java.util.List;
 public class FileReaderImpl implements FileReaderService {
     @Override
     public List<String[]> read(String input) {
-        List<String> reader = new ArrayList<>();
+        List<String> reader;
         List<String[]> fileReaded = new ArrayList<>();
         try {
             reader = Files.readAllLines(Path.of(input));

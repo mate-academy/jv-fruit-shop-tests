@@ -18,7 +18,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 
 public class FileWriterTest {
-    private static final String EXPECTED_FILE = "src/test/resources/result.csv";
     private static final String RESULT_FILE = "src/test/resources/testwriter.csv";
     private static FileWriterService fileWriterService;
 

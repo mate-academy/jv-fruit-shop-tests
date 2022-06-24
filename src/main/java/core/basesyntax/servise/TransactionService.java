@@ -1,7 +1,8 @@
 package core.basesyntax.servise;
 
+import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface TransactionService {
-    void process(List<String> records);
+    List<Transaction> processData(List<String> records);
 }

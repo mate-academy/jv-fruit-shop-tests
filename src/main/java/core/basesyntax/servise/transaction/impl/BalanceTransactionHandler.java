@@ -9,7 +9,9 @@ public class BalanceTransactionHandler implements TransactionHandler {
         if (quantity < 0) {
             throw new RuntimeException("Can't install negative balance for " + item);
         }
-
+        if (Storage.items.get(item) != null) {
+            throw new RuntimeException("Balance for " + item + "was already entered");
+        }
         Storage.items.put(item, quantity);
     }
 }

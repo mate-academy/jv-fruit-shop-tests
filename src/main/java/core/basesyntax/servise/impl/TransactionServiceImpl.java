@@ -1,7 +1,8 @@
 package core.basesyntax.servise.impl;
 
+import core.basesyntax.model.Transaction;
 import core.basesyntax.servise.TransactionService;
-import core.basesyntax.strategy.TransactionStrategy;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
@@ -9,21 +10,23 @@ public class TransactionServiceImpl implements TransactionService {
     private static final int OPERATION_INDEX = 0;
     private static final int ITEM_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final TransactionStrategy transactionStrategy;
-
-    public TransactionServiceImpl(TransactionStrategy transactionStrategy) {
-        this.transactionStrategy = transactionStrategy;
-    }
 
     @Override
-    public void process(List<String> records) {
+    public List<Transaction> processData(List<String> records) {
+        List<Transaction> transactions = new ArrayList<>();
         records.remove(0);
         for (String record : records) {
             String[] recordSplit = record.split(COMMA_DELIMITER);
-            String operation = recordSplit[OPERATION_INDEX];
+            Transaction.Operation operation =
+                    Transaction.getOperationType(recordSplit[OPERATION_INDEX]);
             String item = recordSplit[ITEM_INDEX];
             int quantity = Integer.parseInt(recordSplit[QUANTITY_INDEX]);
-            transactionStrategy.get(operation).proceedTransaction(item, quantity);
+            if (quantity < 0) {
+                throw new RuntimeException("Can't proceed transaction with negative quantity");
+            }
+            Transaction transaction = new Transaction(operation, item, quantity);
+            transactions.add(transaction);
         }
+        return transactions;
     }
 }

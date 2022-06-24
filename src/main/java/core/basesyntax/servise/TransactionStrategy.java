@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.servise;
 
 import core.basesyntax.servise.transaction.TransactionHandler;
 

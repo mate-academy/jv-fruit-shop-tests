@@ -2,20 +2,18 @@ package core.basesyntax;
 
 import static org.junit.Assert.assertTrue;
 
-import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 
 public class FileWriterTest {
     private static final String RESULT_FILE = "src/test/resources/testwriter.csv";
@@ -26,7 +24,7 @@ public class FileWriterTest {
         fileWriterService = new FileWriterImpl();
     }
 
-    @AfterEach
+    @After
     public void deleteCreatedFile() throws IOException {
         Files.delete(Path.of(RESULT_FILE));
     }
@@ -40,14 +38,23 @@ public class FileWriterTest {
 
         fileWriterService.write(new File(RESULT_FILE), reportToWrite);
 
-        List<String[]> fileWritedList = new CSVReader(new FileReader(RESULT_FILE)).readAll();
+        List<String[]> fileWrited = new ArrayList<>();
+        try {
+            List<String> resultWrited = Files.readAllLines(Path.of(RESULT_FILE));
+            for (String line : resultWrited) {
+                fileWrited.add(line.split(","));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("somethin went wrong, not sure what: " + e);
+        }
 
         for (int i = 0; i < reportToWrite.size(); i++) {
-            String[] fromReport = reportToWrite.get(i);
-            String[] fromFileWrited = fileWritedList.get(i);
-            for (int j = 0; j < fromReport.length; j++) {
-                assertTrue(fromReport[j].equals(fromFileWrited[j]));
+            String[] lineFromReport = reportToWrite.get(i);
+            String[] lineFromFileWrited = fileWrited.get(i);
+            for (int j = 0; j < lineFromReport.length; j++) {
+                assertTrue(lineFromReport[j].equals(lineFromFileWrited[j]));
             }
         }
+
     }
 }

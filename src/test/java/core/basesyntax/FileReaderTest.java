@@ -3,7 +3,6 @@ package core.basesyntax;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.opencsv.exceptions.CsvException;
 import core.basesyntax.service.FileReaderService;
@@ -57,9 +56,9 @@ public class FileReaderTest {
         assertFalse(actual.stream().allMatch(b -> b.length == 3));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readAbsentFile_notOk() {
-        assertThrows(RuntimeException.class, () -> fileReaderService.read(ABSENT_FILE));
+        fileReaderService.read(ABSENT_FILE);
     }
 
     @Test

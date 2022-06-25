@@ -13,11 +13,16 @@ public class PurchaseOperationHandler implements FruitHandler {
 
     @Override
     public void handleOperation(FruitTransaction transaction) {
+        if (transaction == null
+                || transaction.getQuantity() < 0
+                || !transaction.getOperation().equals(FruitTransaction.Operation.PURCHASE)) {
+            throw new RuntimeException("You need to indicate valid data");
+        }
         int amountFromStorage = fruitsDao.get(transaction.getFruit());
         if (amountFromStorage < transaction.getQuantity()) {
             throw new RuntimeException(
                     "Not enough fruits for purchasing. Only "
-                            + transaction.getQuantity() + " available");
+                            + fruitsDao.get(transaction.getFruit()) + " available");
         }
         int newAmountFromStorage = amountFromStorage - transaction.getQuantity();
         fruitsDao.add(transaction.getFruit(), newAmountFromStorage);

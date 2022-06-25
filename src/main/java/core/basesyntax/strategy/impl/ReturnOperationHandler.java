@@ -13,6 +13,10 @@ public class ReturnOperationHandler implements FruitHandler {
 
     @Override
     public void handleOperation(FruitTransaction transaction) {
+        if (transaction == null
+                || !transaction.getOperation().equals(FruitTransaction.Operation.RETURN)) {
+            throw new RuntimeException("You need to indicate proper transaction");
+        }
         int amountFromStorage = fruitsDao.get(transaction.getFruit());
         int newAmountOfStorage = amountFromStorage + transaction.getQuantity();
         fruitsDao.add(transaction.getFruit(), newAmountOfStorage);

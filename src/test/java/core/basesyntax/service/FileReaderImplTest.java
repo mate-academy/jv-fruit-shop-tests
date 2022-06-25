@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.FileReaderImpl;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,7 +29,11 @@ public class FileReaderImplTest {
 
     @Test
     public void pathNameIsValid_isOk() {
-        fileReaderService.readTheFruitsStorage(TEST_FILE_FOR_READER);
+        List<String> actual = fileReaderService.readTheFruitsStorage(TEST_FILE_FOR_READER);
+        List<String> expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
+        expected.add("b,mango,20");
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

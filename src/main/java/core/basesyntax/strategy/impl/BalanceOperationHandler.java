@@ -13,6 +13,10 @@ public class BalanceOperationHandler implements FruitHandler {
 
     @Override
     public void handleOperation(FruitTransaction transaction) {
+        if (transaction == null
+                || !transaction.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
+            throw new RuntimeException("You need to indicate proper transaction");
+        }
         fruitsDao.add(transaction.getFruit(), transaction.getQuantity());
     }
 }

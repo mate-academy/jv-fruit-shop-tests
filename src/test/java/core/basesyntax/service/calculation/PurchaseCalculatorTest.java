@@ -17,7 +17,7 @@ public class PurchaseCalculatorTest {
     private static TransactionCalculation transactionCalculation;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         shopDao = new ShopDaoImpl();
         transactionCalculation = new PurchaseCalculator();
     }
@@ -33,7 +33,7 @@ public class PurchaseCalculatorTest {
     }
 
     @Test
-    public void purchaseCalculator_Ok() {
+    public void calculate_validTransaction_ok() {
         shopDao.add("banana", 100);
         transactionPurchase = new FruitTransaction("p", "banana", 50);
         transactionCalculation.calculate(transactionPurchase);
@@ -43,7 +43,7 @@ public class PurchaseCalculatorTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.storage.clear();
     }
 }

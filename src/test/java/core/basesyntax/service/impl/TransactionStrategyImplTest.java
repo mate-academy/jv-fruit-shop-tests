@@ -15,12 +15,10 @@ import org.junit.Test;
 
 public class TransactionStrategyImplTest {
     private static TransactionStrategy transactionStrategy;
-    private static Map<String, TransactionCalculation> strategyMap = new HashMap<>();
-    private static TransactionCalculation transactionCalculation;
 
     @BeforeClass
     public static void beforeClass() {
-        strategyMap = new HashMap<>();
+        Map<String, TransactionCalculation> strategyMap = new HashMap<>();
         strategyMap.put((FruitTransaction.Operation.BALANCE.getOperations()),
                 new BalanceCalculator());
         strategyMap.put(FruitTransaction.Operation.SUPPLY.getOperations(),

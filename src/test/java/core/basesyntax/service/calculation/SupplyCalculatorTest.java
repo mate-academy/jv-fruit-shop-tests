@@ -15,13 +15,13 @@ public class SupplyCalculatorTest {
     private static FruitTransaction fruitTransaction;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         transactionCalculation = new SupplyCalculator();
         shopDao = new ShopDaoImpl();
     }
 
     @Test
-    public void supplyCalculator_Ok() {
+    public void calculate_validTransaction_ok() {
         shopDao.add("lemon", 20);
         fruitTransaction = new FruitTransaction("s", "lemon", 20);
         transactionCalculation.calculate(fruitTransaction);
@@ -31,7 +31,7 @@ public class SupplyCalculatorTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.storage.clear();
     }
 }

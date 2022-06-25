@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class ReportCreatorImplTest {
     private static final String NOTATION = "fruit, quantity";
+    private static final int FIRST_RECORD_INDEX = 0;
     private static ReportCreator reportCreator;
     private static ShopDao shopDao;
 
@@ -31,13 +32,8 @@ public class ReportCreatorImplTest {
     @Test
     public void correctNotation_Ok() {
         String[] splitReport = reportCreator.createReport().split(System.lineSeparator());
-        boolean actual = splitReport[0].equals(NOTATION);
+        boolean actual = splitReport[FIRST_RECORD_INDEX].equals(NOTATION);
         Assert.assertTrue(actual);
-    }
-
-    @Test
-    public void emptyReport_NotOk() {
-        Assert.assertFalse(reportCreator.createReport().isBlank());
     }
 
     @AfterClass

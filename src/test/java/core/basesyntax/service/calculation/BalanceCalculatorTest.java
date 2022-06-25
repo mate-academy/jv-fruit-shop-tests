@@ -17,7 +17,7 @@ public class BalanceCalculatorTest {
     }
 
     @Test
-    public void balanceCalculator_Ok() {
+    public void calculate_validTransaction_ok() {
         fruitTransaction = new FruitTransaction("b", "banana", 10);
         transactionCalculation.calculate(fruitTransaction);
         Integer actual = Storage.storage.get("banana");
@@ -26,7 +26,7 @@ public class BalanceCalculatorTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.storage.clear();
     }
 }

@@ -11,6 +11,7 @@ import org.junit.Test;
 public class ReportWriterImplTest {
     private static ReportWriter reportWriter;
     private static final String PATH_NAME = "src/test/java/core/basesyntax/report/testReport.csv";
+    private static final String INVALID_PATH_NAME = "";
     private static final String TEST_STRING = "fruit, quantity";
 
     @BeforeClass
@@ -28,5 +29,16 @@ public class ReportWriterImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from testFile", e);
         }
+    }
+
+    @Test
+    public void invalidPath_notOk() {
+        Exception exception = new Exception();
+        try {
+            reportWriter.reportWriter(INVALID_PATH_NAME, TEST_STRING);
+        } catch (Exception e) {
+            exception = e;
+        }
+        Assert.assertEquals(exception.getClass(), RuntimeException.class);
     }
 }

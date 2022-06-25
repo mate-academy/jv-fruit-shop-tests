@@ -12,6 +12,7 @@ import org.junit.Test;
 public class ReadFileImplTest {
     private static ReadFile readFile;
     private static final String PATH_NAME = "src/main/java/core/basesyntax/db/database.csv";
+    private static final String INVALID_PATH_NAME = "";
 
     @BeforeClass
     public static void beforeClass() {
@@ -19,7 +20,7 @@ public class ReadFileImplTest {
     }
 
     @Test
-    public void readFile_Ok() {
+    public void readFile_ok() {
         try {
             List<String> expected = Files.readAllLines(Path.of(PATH_NAME));
             List<String> actual = readFile.readFile(PATH_NAME);
@@ -30,8 +31,13 @@ public class ReadFileImplTest {
     }
 
     @Test
-    public void fileIsEmpty_NotOk() {
-        List<String> expected = readFile.readFile(PATH_NAME);
-        Assert.assertFalse(expected.isEmpty());
+    public void invalidFilePath_notOk() {
+        Exception exception = new Exception();
+        try {
+            readFile.readFile(INVALID_PATH_NAME);
+        } catch (Exception e) {
+            exception = e;
+        }
+        Assert.assertEquals(exception.getClass(), RuntimeException.class);
     }
 }

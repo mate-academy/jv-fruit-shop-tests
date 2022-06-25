@@ -48,12 +48,18 @@ public class FileWriterImplTest {
     public void writeDataToFile_isOk() {
         dataForTest.add("s,mango,20");
         fileWriterService.writeToFile(TEST_FILE_FOR_WRITER, dataForTest);
+        actual = readFileForTest(TEST_FILE_FOR_WRITER);
+        List<String> expected = List.of("s,mango,20");
+        Assert.assertEquals(expected, actual);
+    }
+
+    private List<String> readFileForTest(String pathName) {
+        List<String> dataFromFile;
         try {
-            actual = Files.readAllLines(Path.of(TEST_FILE_FOR_WRITER));
+            dataFromFile = Files.readAllLines(Path.of(pathName));
         } catch (IOException e) {
             throw new RuntimeException("Wrong path name for file");
         }
-        List<String> expected = List.of("s,mango,20");
-        Assert.assertEquals(expected, actual);
+        return dataFromFile;
     }
 }

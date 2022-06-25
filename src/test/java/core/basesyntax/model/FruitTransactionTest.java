@@ -9,7 +9,7 @@ public class FruitTransactionTest {
 
     @Before
     public void setUp() {
-        fruitTransaction = new FruitTransaction("b", "banana", 1);
+        fruitTransaction = new FruitTransaction("b", "banana", 10);
     }
 
     @Test(expected = RuntimeException.class)
@@ -49,5 +49,9 @@ public class FruitTransactionTest {
     @Test
     public void fruitAmountIsValid_isOk() {
         fruitTransaction.setQuantity(1);
+        int actual = fruitTransaction.getQuantity();
+        int expected = 1;
+        Assert.assertEquals(expected, actual);
+
     }
 }

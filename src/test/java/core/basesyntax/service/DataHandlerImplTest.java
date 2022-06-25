@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.DataHandlerImpl;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,17 +29,11 @@ public class DataHandlerImplTest {
 
     @Test
     public void dataHandlerCorrectInput() {
-        List<String> listForOkTest = new ArrayList<>();
-        listForOkTest.add("type,fruit,quantity");
-        listForOkTest.add("b,banana,20");
-        List<String> actual = dataHandler.handleData(listForOkTest).stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
+        listForActual.add("type,fruit,quantity");
+        listForActual.add("b,banana,20");
+        List<FruitTransaction> actual = dataHandler.handleData(listForActual);
         listForExpected.add(new FruitTransaction("b", "banana", 20));
-        List<String> expected = listForExpected.stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(listForExpected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -56,5 +50,10 @@ public class DataHandlerImplTest {
     public void dataHandlerWrongInput_notOk() {
         listForActual.add("b,banana,20");
         dataHandler.handleData(listForActual);
+    }
+
+    @After
+    public void tearDown() {
+        listForActual.clear();
     }
 }

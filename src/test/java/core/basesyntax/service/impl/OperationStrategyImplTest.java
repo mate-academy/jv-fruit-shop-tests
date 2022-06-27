@@ -29,28 +29,28 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void balanceOperationHandler_Ok() {
+    public void get_balanceOperationHandler_Ok() {
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.BALANCE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void purchaseOperationHandler_Ok() {
+    public void get_purchaseOperationHandler_Ok() {
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.PURCHASE);
         Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void returnOperationHandler_Ok() {
+    public void get_returnOperationHandler_Ok() {
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.RETURN);
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.RETURN);
         Assert.assertEquals(actual, expected);
     }
 
     @Test
-    public void supplyOperationHandler_Ok() {
+    public void get_supplyOperationHandler_Ok() {
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.SUPPLY);
         Assert.assertEquals(actual, expected);

@@ -26,7 +26,7 @@ public class WriterImplTest {
     }
 
     @Test
-    public void writeDataToFile_Ok() {
-        writer.writeToFile(report,PATH_TO_OUTPUT_FILE);
+    public void writeToFile_Ok() {
+        writer.writeToFile(report, PATH_TO_OUTPUT_FILE);
     }
 }

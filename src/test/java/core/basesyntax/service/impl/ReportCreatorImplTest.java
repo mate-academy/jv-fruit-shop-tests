@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static ReportCreator reportCreator;
 
     @BeforeClass
@@ -21,9 +20,9 @@ public class ReportCreatorImplTest {
         Storage.storage.put("banana", 15);
         Storage.storage.put("apple", 20);
         String expected = "fruit,quantity"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "banana,15"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "apple,20";
         String actual = reportCreator.createReport();
         Assert.assertEquals(expected, actual);

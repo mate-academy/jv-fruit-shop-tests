@@ -26,13 +26,13 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptyString_notOk() {
+    public void parseData_emptyString_notOk() {
         data.add("");
         parser.parseData(data);
     }
 
     @Test
-    public void validData_ok() {
+    public void parseData_validData_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("apple", 30,
                 FruitTransaction.Operation.BALANCE));
@@ -42,7 +42,7 @@ public class ParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidData_notOk() {
+    public void parseData_invalidData_notOk() {
         data.add("k,orange,30");
         parser.parseData(data);
     }

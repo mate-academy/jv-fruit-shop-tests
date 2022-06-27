@@ -6,6 +6,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.Filler;
 import core.basesyntax.service.FruitOperationStrategy;
 import core.basesyntax.strategy.BalanceOperationHandler;
@@ -65,6 +66,14 @@ public class FillerImplTest {
         Integer expected = 130;
 
         assertEquals(expected,actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fillStorage_quantity_notOk() {
+        List<FruitTransaction> invalid = List.of(
+                new FruitTransaction(Operation.BALANCE, "banana", 100),
+                new FruitTransaction(Operation.PURCHASE, "banana", 200));
+        filler.fillStorage(invalid);
     }
 
     @AfterClass

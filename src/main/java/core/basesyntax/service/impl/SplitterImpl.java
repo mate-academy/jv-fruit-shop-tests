@@ -22,6 +22,9 @@ public class SplitterImpl implements Splitter {
     private FruitTransaction splitInfo(String information) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         String[] s = information.split(SPLIT_VLAUE);
+        if (s[1] == null || s[1].equals("")) {
+            throw new RuntimeException("Invalid fruit name");
+        }
         fruitTransaction.setOperation(
                 fruitTransaction.setValueForOperation(s[FIRST_ELEMENT_FROM_LINE]));
         fruitTransaction.setFruit(s[SECOND_ELEMENT_FROM_LINE]);

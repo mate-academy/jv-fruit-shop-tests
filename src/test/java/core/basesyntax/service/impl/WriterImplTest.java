@@ -50,6 +50,15 @@ public class WriterImplTest {
                 + "banana,130" + System.lineSeparator() + "strawberry,100"
                 + System.lineSeparator() + "passionfruit,55";
 
-        writer.writeFruitsReport(report, "");
+        writer.writeFruitsReport(report, "src/jasda/3243");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeFruitsReport_nullPath_ok() {
+        String report = "fruit,quantity" + System.lineSeparator()
+                + "banana,130" + System.lineSeparator() + "strawberry,100"
+                + System.lineSeparator() + "passionfruit,55";
+
+        writer.writeFruitsReport(report, null);
     }
 }

@@ -71,4 +71,11 @@ public class FruitOperationStrategyImplTest {
 
         assertEquals(expected,actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void get_null_notOk() {
+        Class<? extends FruitsOperationHandler> actual =
+                fruitOperationStrategy.get(null).getClass();
+
+    }
 }

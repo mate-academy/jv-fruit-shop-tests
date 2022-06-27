@@ -36,7 +36,7 @@ public class WriterImplTest {
     }
 
     @Test
-    public void writeToFile_report_Ok() {
+    public void writeToFile_report_ok() {
         writer.writeToFile(reportAfterDay, REPORT_AFTER_DAY);
         List<String> expected = readReportFile(TEST_REPORT_FILE);
         List<String> actual = readReportFile(REPORT_AFTER_DAY);
@@ -44,7 +44,7 @@ public class WriterImplTest {
     }
 
     @Test
-    public void writeToFile_emptyReport_Ok() {
+    public void writeToFile_emptyReport_ok() {
         writer.writeToFile("", REPORT_AFTER_DAY);
         List<String> expected = readReportFile(EMPTY_FILE);
         List<String> actual = readReportFile(REPORT_AFTER_DAY);

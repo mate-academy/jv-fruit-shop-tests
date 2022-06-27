@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreateServiceImplTest {
-    private static final String SPLITERATOR = System.lineSeparator();
     private static final String TITLE = "fruit,quantity";
     private static ReportCreateService reportCreateService;
     private static StorageDao storageDao;
@@ -23,21 +22,20 @@ public class ReportCreateServiceImplTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_ok() {
         storageDao.updateData("banana", 20);
         storageDao.updateData("apple", 15);
-        String expected = TITLE + SPLITERATOR
-                + "banana,20" + SPLITERATOR
+        String expected = TITLE + System.lineSeparator()
+                + "banana,20" + System.lineSeparator()
                 + "apple,15";
         String actual = reportCreateService.createReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void createReport_withoutOperation_Ok() {
-        String expected = TITLE;
+    public void createReport_withoutOperation_ok() {
         String actual = reportCreateService.createReport();
-        assertEquals(expected, actual);
+        assertEquals(TITLE, actual);
     }
 
     @After

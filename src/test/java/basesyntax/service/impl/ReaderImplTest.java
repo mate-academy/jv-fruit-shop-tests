@@ -23,7 +23,7 @@ public class ReaderImplTest {
     }
 
     @Test
-    public void fileReader_Ok() {
+    public void fileReader_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -39,7 +39,7 @@ public class ReaderImplTest {
     }
 
     @Test
-    public void fileReader_emptyFile_Ok() {
+    public void fileReader_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = reader.fileReader(EMPTY_FILE);
         assertEquals(expected, actual);

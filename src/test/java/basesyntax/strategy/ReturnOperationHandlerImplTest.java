@@ -20,7 +20,7 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    public void return_operation_Ok() {
+    public void changeQuantity_returnOperation_ok() {
         int bananaQuantity = 20;
         Storage.storageMap.put("banana", bananaQuantity);
         FruitTransaction fruitTransaction = new FruitTransaction(

@@ -20,7 +20,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test
-    public void purchase_operation_Ok() {
+    public void changeQuantity_purchaseOperation_ok() {
         int quantityBanana = 20;
         Storage.storageMap.put("banana", quantityBanana);
         FruitTransaction fruitTransaction = new FruitTransaction(
@@ -32,7 +32,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchase_overOperation_notOk() {
+    public void changeQuantity_overPurchaseOperation_notOk() {
         Storage.storageMap.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 21);

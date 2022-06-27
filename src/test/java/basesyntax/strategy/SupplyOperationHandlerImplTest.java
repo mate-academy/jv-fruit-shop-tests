@@ -20,7 +20,7 @@ public class SupplyOperationHandlerImplTest {
     }
 
     @Test
-    public void supply_operation_Ok() {
+    public void changeQuantity_supplyOperation_ok() {
         int bananaQuantity = 20;
         Storage.storageMap.put("banana", bananaQuantity);
         FruitTransaction fruitTransaction = new FruitTransaction(

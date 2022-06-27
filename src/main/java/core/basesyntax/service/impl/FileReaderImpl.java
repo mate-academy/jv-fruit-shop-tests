@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReaderService {
     @Override
-    public List<String> readTheFruitsStorage(String pathName) {
+    public List<String> readDataFromStorage(String pathName) {
         List<String> storageData;
         try {
             storageData = Files.readAllLines(Path.of(pathName));

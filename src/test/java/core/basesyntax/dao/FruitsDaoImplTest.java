@@ -2,7 +2,8 @@ package core.basesyntax.dao;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.AfterClass;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -65,8 +66,9 @@ public class FruitsDaoImplTest {
         Assert.assertTrue(fruitsDao.add("cherry", 10));
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         fruitStorage.clear();
+        fruitsDao.getCurrentFruitAmount().clear();
     }
 }

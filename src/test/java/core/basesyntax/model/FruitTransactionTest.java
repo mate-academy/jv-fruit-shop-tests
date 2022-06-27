@@ -30,7 +30,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void fruitNameIsValid_Ok() {
+    public void get_fruitNameIsValid_Ok() {
         String expected = "banana";
         String actual = fruitTransaction.getFruit();
         Assert.assertEquals(expected, actual);

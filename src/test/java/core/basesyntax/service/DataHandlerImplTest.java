@@ -28,7 +28,7 @@ public class DataHandlerImplTest {
     }
 
     @Test
-    public void dataHandler_validInput_isOk() {
+    public void handleData_validInput_isOk() {
         listForActual.add("type,fruit,quantity");
         listForActual.add("b,banana,20");
         List<FruitTransaction> actual = dataHandler.handleData(listForActual);
@@ -37,17 +37,17 @@ public class DataHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void dataHandler_nullDataInput_notOK() {
+    public void handleData_nullDataInput_notOK() {
         dataHandler.handleData(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void dataHandler_wrongDataInput_notOk() {
+    public void  handleData_wrongDataInput_notOk() {
         dataHandler.handleData(emptyList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void dataHandler_wrongInput_notOk() {
+    public void  handleData_wrongInput_notOk() {
         listForActual.add("b,banana,20");
         dataHandler.handleData(listForActual);
     }

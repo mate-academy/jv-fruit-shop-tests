@@ -24,19 +24,19 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_emptyFile_ok() {
+    public void readFromFile_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = reader.readFromFile(Paths.get(EMPTY_FILE));
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNotExistingFile_notOk() {
+    public void readFromFile_NotExistingFile_notOk() {
         reader.readFromFile(Paths.get(NOT_EXISTING_FILE));
     }
 
     @Test
-    public void readFile_ok() {
+    public void readFromFile_File_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,apple,50");

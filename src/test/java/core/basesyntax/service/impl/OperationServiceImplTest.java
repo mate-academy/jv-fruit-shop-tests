@@ -22,7 +22,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationServiceImplTest {
-
     private static OperationService operationService;
     private static List<FruitShopTransactions> fruitShopTransactions;
     private static StorageDao storageDao;
@@ -41,21 +40,21 @@ public class OperationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void setNegativeBalance_notOk() {
+    public void processData_NegativeBalance_notOk() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.BALANCE, "apple", -1));
         operationService.processData(fruitShopTransactions);
     }
 
     @Test(expected = RuntimeException.class)
-    public void setNegativePurchase_notOk() {
+    public void processData_NegativePurchase_notOk() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.PURCHASE, "apple", -1));
         operationService.processData(fruitShopTransactions);
     }
 
     @Test(expected = RuntimeException.class)
-    public void setToBigPurchase_notOk() {
+    public void processData_ToBigPurchase_notOk() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.BALANCE, "apple", 50));
         fruitShopTransactions.add(new FruitShopTransactions(
@@ -64,21 +63,21 @@ public class OperationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void setNegativeReturn_notOk() {
+    public void processData_NegativeReturn_notOk() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.RETURN, "banana", -1));
         operationService.processData(fruitShopTransactions);
     }
 
     @Test(expected = RuntimeException.class)
-    public void setNegativeSupply_notOk() {
+    public void processData_NegativeSupply_notOk() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.SUPPLY, "banana", -1));
         operationService.processData(fruitShopTransactions);
     }
 
     @Test
-    public void setBalance_ok() {
+    public void processData_Balance_ok() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.BALANCE, "orange", 5));
         operationService.processData(fruitShopTransactions);
@@ -88,7 +87,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void setSupply_ok() {
+    public void processData_Supply_ok() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.SUPPLY, "lemon", 10));
         operationService.processData(fruitShopTransactions);
@@ -98,7 +97,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void setPurchase_ok() {
+    public void processData_Purchase_ok() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.BALANCE, "cherry", 50));
         fruitShopTransactions.add(new FruitShopTransactions(
@@ -110,7 +109,7 @@ public class OperationServiceImplTest {
     }
 
     @Test
-    public void setReturn_ok() {
+    public void processData_Return_ok() {
         fruitShopTransactions.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.RETURN, "plum", 5));
         operationService.processData(fruitShopTransactions);

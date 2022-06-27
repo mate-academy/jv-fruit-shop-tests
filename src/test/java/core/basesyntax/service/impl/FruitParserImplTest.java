@@ -33,13 +33,19 @@ public class FruitParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseInvalidData_notOk() {
+    public void parse_InvalidOperator_notOk() {
         testList.add("t,banana,10");
         parser.parse(testList);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void parse_InvalidNumber_notOk() {
+        testList.add("b,banana,");
+        parser.parse(testList);
+    }
+
     @Test
-    public void parseValidData_ok() {
+    public void parse_ValidData_ok() {
         List<FruitShopTransactions> expected = new ArrayList<>();
         expected.add(new FruitShopTransactions(
                 FruitShopTransactions.Operation.BALANCE,

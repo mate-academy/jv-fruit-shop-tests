@@ -13,15 +13,6 @@ public class FruitParserImpl implements FruitParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-    private FruitShopTransactions.Operation getOperationByLetter(String inputOperation) {
-        return Arrays.stream(FruitShopTransactions.Operation.values())
-                .filter(operation -> operation.getOperation().equals(inputOperation))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Operation "
-                        + inputOperation
-                        + " not found"));
-    }
-
     @Override
     public List<FruitShopTransactions> parse(List<String> lines) {
         lines.remove(TITLE_INDEX);
@@ -34,5 +25,14 @@ public class FruitParserImpl implements FruitParser {
                         Integer.parseInt(s[QUANTITY_INDEX]));
                     })
                 .collect(Collectors.toList());
+    }
+
+    private FruitShopTransactions.Operation getOperationByLetter(String inputOperation) {
+        return Arrays.stream(FruitShopTransactions.Operation.values())
+                .filter(operation -> operation.getOperation().equals(inputOperation))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Operation "
+                        + inputOperation
+                        + " not found"));
     }
 }

@@ -22,7 +22,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void reportTransactions_ok() {
+    public void createReport_ok() {
         storageDao.update("orange", 10);
         storageDao.update("lemon", 10);
         storageDao.update("lime", 20);

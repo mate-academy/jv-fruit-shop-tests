@@ -2,9 +2,10 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,12 +17,10 @@ public class FileWriterImplTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static String report;
     private static FileWriter writer;
-    private static FileReader reader;
 
     @BeforeClass
     public static void beforeClass() {
         writer = new FileWriterImpl();
-        reader = new FileReaderImpl();
         StringBuilder builder = new StringBuilder();
         report = builder.append("type,fruit,quantity")
                 .append(LINE_SEPARATOR)
@@ -32,24 +31,31 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToNotValidFile_notOk() {
+    public void writerDataToFile_ToNotValidFile_notOk() {
         writer.writerDataToFile(report, "");
     }
 
     @Test
-    public void writeEmptyData_ok() {
+    public void writerDataToFile_EmptyData_ok() {
         writer.writerDataToFile("", PURPOSE_FILE);
-        List<String> expected = reader.readFromFile(Paths.get(EMPTY_FILE));
-        List<String> actual = reader.readFromFile(Paths.get(PURPOSE_FILE));
+        List<String> expected = readFromFile(EMPTY_FILE);
+        List<String> actual = readFromFile(PURPOSE_FILE);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void writeReport_ok() {
+    public void writerDataToFile_Report_ok() {
         writer.writerDataToFile(report, PURPOSE_FILE);
-        List<String> expected = reader.readFromFile(Paths.get(TEST_FILE));
-        List<String> actual = reader.readFromFile(Paths.get(PURPOSE_FILE));
+        List<String> expected = readFromFile(TEST_FILE);
+        List<String> actual = readFromFile(PURPOSE_FILE);
         assertEquals(expected, actual);
     }
 
+    private List<String> readFromFile(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't find file by path: " + filePath);
+        }
+    }
 }

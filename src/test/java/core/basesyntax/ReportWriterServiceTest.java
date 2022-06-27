@@ -39,7 +39,7 @@ public class ReportWriterServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + expectedPath, e);
         }
-        Assert.assertEquals(result, expected);
+        Assert.assertEquals(expected, result);
     }
 
     @Test(expected = RuntimeException.class)

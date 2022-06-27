@@ -23,7 +23,7 @@ public class ParseDataServiceTest {
         List<String> dataFromFile = new ArrayList<>();
         List<Fruit> result = parseDataService.parseData(dataFromFile);
         List<Fruit> expected = new ArrayList<>();
-        Assert.assertEquals(result, expected);
+        Assert.assertEquals(expected, result);
     }
 
     @Test

@@ -35,7 +35,7 @@ public class ProcessDataServiceTest {
     }
 
     @Test
-    public void addOnlyNewFruits_ok() {
+    public void processData_addOnlyNewFruits_ok() {
         List<Fruit> listToProcess = new ArrayList<>();
         listToProcess.add(new Fruit(Operation.BALANCE, "banana", 100));
         listToProcess.add(new Fruit(Operation.BALANCE, "apple", 100));
@@ -47,7 +47,7 @@ public class ProcessDataServiceTest {
     }
 
     @Test
-    public void differentOperationsOnSameFruit_ok() {
+    public void processData_makeDifferentOperationsOnSameFruit_ok() {
         List<Fruit> listToProcess = new ArrayList<>();
         listToProcess.add(new Fruit(Operation.BALANCE, "banana", 100));
         listToProcess.add(new Fruit(Operation.SUPPLY, "banana", 100));

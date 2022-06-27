@@ -25,27 +25,27 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToNullPath_notOk() {
+    public void write_nullPath_notOk() {
         fileWriterService.writeToFile(null, dataForTest);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToWrongPath_notOk() {
+    public void write_wrongPath_notOk() {
         fileWriterService.writeToFile(WRONG_FILE_FOR_WRITER, dataForTest);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeNullAsData_notOk() {
+    public void write_nullAsData_notOk() {
         fileWriterService.writeToFile(TEST_FILE_FOR_WRITER, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeEmptyData_notOk() {
+    public void write_emptyData_notOk() {
         fileWriterService.writeToFile(TEST_FILE_FOR_WRITER, dataForTest);
     }
 
     @Test
-    public void writeDataToFile_isOk() {
+    public void write_validDataToFile_isOk() {
         dataForTest.add("s,mango,20");
         fileWriterService.writeToFile(TEST_FILE_FOR_WRITER, dataForTest);
         actual = readFileForTest(TEST_FILE_FOR_WRITER);
@@ -57,9 +57,9 @@ public class FileWriterImplTest {
         List<String> dataFromFile;
         try {
             dataFromFile = Files.readAllLines(Path.of(pathName));
+            return dataFromFile;
         } catch (IOException e) {
             throw new RuntimeException("Wrong path name for file");
         }
-        return dataFromFile;
     }
 }

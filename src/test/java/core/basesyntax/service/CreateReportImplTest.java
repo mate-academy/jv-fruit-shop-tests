@@ -23,12 +23,12 @@ public class CreateReportImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createReport_NullInput_notOk() {
+    public void createReport_nullInput_notOk() {
         createReport.createReport(null);
     }
 
     @Test
-    public void createReport_ValidInput_isOk() {
+    public void createReport_validInput_isOk() {
         expectedList = List.of("fruits,quantity", "\r\npineapple,5", "\r\nmango,25");
         actualList = createReport.createReport(mapForTest);
         Assert.assertEquals(expectedList, actualList);

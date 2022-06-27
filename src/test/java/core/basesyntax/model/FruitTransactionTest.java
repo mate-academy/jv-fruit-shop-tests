@@ -37,17 +37,17 @@ public class FruitTransactionTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void fruitAmountIsZero_notOk() {
+    public void setQuantity_zeroValue_notOk() {
         fruitTransaction.setQuantity(0);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fruitAmountIsNegative_notOk() {
+    public void setQuantity_negativeValue_notOk() {
         fruitTransaction.setQuantity(-200);
     }
 
     @Test
-    public void fruitAmountIsValid_isOk() {
+    public void getQuantity_valid_ok() {
         fruitTransaction.setQuantity(1);
         int actual = fruitTransaction.getQuantity();
         int expected = 1;

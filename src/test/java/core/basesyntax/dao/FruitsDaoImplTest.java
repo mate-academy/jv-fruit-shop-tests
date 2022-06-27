@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;

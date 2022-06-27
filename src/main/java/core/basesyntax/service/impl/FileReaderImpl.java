@@ -8,11 +8,9 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReaderService {
     @Override
-    public List<String> readDataFromStorage(String pathName) {
-        List<String> storageData;
+    public List<String> readDataFromFile(String pathName) {
         try {
-            storageData = Files.readAllLines(Path.of(pathName));
-            return storageData;
+            return Files.readAllLines(Path.of(pathName));
         } catch (IOException e) {
             throw new RuntimeException("Can't extract data from file correctly " + pathName, e);
         }

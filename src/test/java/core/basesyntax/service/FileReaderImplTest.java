@@ -19,17 +19,17 @@ public class FileReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readDataFromStorage_pathNameIsNull_notOk() {
-        fileReaderService.readDataFromStorage(null);
+        fileReaderService.readDataFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void readDataFromStorage_pathNameIsWrong_notOk() {
-        fileReaderService.readDataFromStorage(WRONG_FILE_FOR_READER);
+        fileReaderService.readDataFromFile(WRONG_FILE_FOR_READER);
     }
 
     @Test
     public void readDataFromStorage_pathNameIsValid_isOk() {
-        List<String> actual = fileReaderService.readDataFromStorage(TEST_FILE_FOR_READER);
+        List<String> actual = fileReaderService.readDataFromFile(TEST_FILE_FOR_READER);
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,mango,20");
@@ -39,7 +39,7 @@ public class FileReaderImplTest {
     @Test
     public void readDataFromStorage_validDataAndPath_isOk() {
         List<String> expected = List.of("type,fruit,quantity", "b,mango,20");
-        List<String> actual = fileReaderService.readDataFromStorage(TEST_FILE_FOR_READER);
+        List<String> actual = fileReaderService.readDataFromFile(TEST_FILE_FOR_READER);
         Assert.assertEquals(expected, actual);
     }
 }

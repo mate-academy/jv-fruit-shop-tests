@@ -42,12 +42,12 @@ public class DataHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void  handleData_wrongDataInput_notOk() {
+    public void handleData_wrongDataInput_notOk() {
         dataHandler.handleData(emptyList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void  handleData_wrongInput_notOk() {
+    public void handleData_wrongInput_notOk() {
         listForActual.add("b,banana,20");
         dataHandler.handleData(listForActual);
     }

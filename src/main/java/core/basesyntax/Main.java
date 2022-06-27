@@ -42,13 +42,13 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(fruitHandlerMap);
         DataHandler dataHandler = new DataHandlerImpl();
         List<FruitTransaction> list =
-                dataHandler.handleData(fileReaderService.readDataFromStorage(OPERATION_PATH));
+                dataHandler.handleData(fileReaderService.readDataFromFile(OPERATION_PATH));
         for (FruitTransaction fruitTransaction : list) {
             operationStrategy.get(fruitTransaction.getOperation())
                     .handleOperation(fruitTransaction);
         }
         CreateReport reportCreator = new CreateReportImpl();
-        dataHandler.handleData(fileReaderService.readDataFromStorage(OPERATION_PATH));
+        dataHandler.handleData(fileReaderService.readDataFromFile(OPERATION_PATH));
 
         List<String> listOfFruits = reportCreator.createReport(fruitsDao.getCurrentFruitAmount());
         FileWriterService fileWriterService = new FileWriterImpl();

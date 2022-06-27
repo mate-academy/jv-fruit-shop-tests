@@ -1,0 +1,39 @@
+package core.basesyntax.service.impl;
+
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.ParseDataService;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ParseDataServiceImpl implements ParseDataService {
+    private static final int TYPE_OF_OPERATION = 0;
+    private static final int TYPE_OF_FRUIT = 1;
+    private static final int QUANTITY_OF_FRUITS = 2;
+    private static final String CSV_SEPARATOR = ",";
+
+    @Override
+    public List<Fruit> parseData(List<String> dataFromFile) {
+        List<Fruit> parsedData = new ArrayList<>();
+        for (int i = 1; i < dataFromFile.size(); i++) {
+            String[] splitedString = dataFromFile.get(i).split(CSV_SEPARATOR);
+            Fruit parsedValue = new Fruit(getOperation(splitedString),
+                    getTypeOfFruit(splitedString),
+                    getQuantityOfFruit(splitedString));
+            parsedData.add(parsedValue);
+        }
+        return parsedData;
+    }
+
+    private Operation getOperation(String[] splitedString) {
+        return Operation.getOperationByName(splitedString[TYPE_OF_OPERATION]);
+    }
+
+    private String getTypeOfFruit(String[] splitedString) {
+        return splitedString[TYPE_OF_FRUIT];
+    }
+
+    private int getQuantityOfFruit(String[] splitedString) {
+        return Integer.parseInt(splitedString[QUANTITY_OF_FRUITS]);
+    }
+}

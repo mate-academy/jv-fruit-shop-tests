@@ -32,7 +32,7 @@ public class ReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void convertFromFileToList_invalidPath_ok() {
+    public void convertFromFileToList_invalidPath_notOk() {
         String invalidPath = "src/test/java/resources/NonExistingFile.csv";
 
         reader.convertFromFileToList(invalidPath);

@@ -37,7 +37,7 @@ public class FruitOperationStrategyImplTest {
     }
 
     @Test
-    public void get_BalanceHandler_ok() {
+    public void get_balanceHandler_ok() {
         Class<BalanceOperationHandler> expected = BalanceOperationHandler.class;
         Class<? extends FruitsOperationHandler> actual =
                 fruitOperationStrategy.get(FruitTransaction.Operation.BALANCE).getClass();
@@ -46,7 +46,7 @@ public class FruitOperationStrategyImplTest {
     }
 
     @Test
-    public void get_PurchaseHandler_ok() {
+    public void get_purchaseHandler_ok() {
         Class<PurchaseOperationHandler> expected = PurchaseOperationHandler.class;
         Class<? extends FruitsOperationHandler> actual =
                 fruitOperationStrategy.get(FruitTransaction.Operation.PURCHASE).getClass();
@@ -55,7 +55,7 @@ public class FruitOperationStrategyImplTest {
     }
 
     @Test
-    public void get_ReturnHandler_ok() {
+    public void get_returnHandler_ok() {
         Class<ReturnOperationHandler> expected = ReturnOperationHandler.class;
         Class<? extends FruitsOperationHandler> actual =
                 fruitOperationStrategy.get(FruitTransaction.Operation.RETURN).getClass();
@@ -64,7 +64,7 @@ public class FruitOperationStrategyImplTest {
     }
 
     @Test
-    public void get_SupplyHandler_ok() {
+    public void get_supplyHandler_ok() {
         Class<SupplyOperationHandler> expected = SupplyOperationHandler.class;
         Class<? extends FruitsOperationHandler> actual =
                 fruitOperationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass();
@@ -76,6 +76,5 @@ public class FruitOperationStrategyImplTest {
     public void get_null_notOk() {
         Class<? extends FruitsOperationHandler> actual =
                 fruitOperationStrategy.get(null).getClass();
-
     }
 }

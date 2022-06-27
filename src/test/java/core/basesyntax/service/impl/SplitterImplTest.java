@@ -36,7 +36,6 @@ public class SplitterImplTest {
         List<String> info = new ArrayList<>(List.of("type,fruit,quantity",
                 "l,banana,100", "n,banana,10"));
         List<FruitTransaction> actual = splitter.createTransactionList(info);
-
     }
 
     @Test (expected = RuntimeException.class)
@@ -44,7 +43,6 @@ public class SplitterImplTest {
         List<String> info = new ArrayList<>(List.of("type,fruit,quantity",
                 "b,banana,quan", "r,banana,thousand"));
         List<FruitTransaction> actual = splitter.createTransactionList(info);
-
     }
 
     @Test (expected = RuntimeException.class)
@@ -52,6 +50,5 @@ public class SplitterImplTest {
         List<String> info = new ArrayList<>(List.of("type,fruit,quantity",
                 "b,,100", "r,,10"));
         List<FruitTransaction> actual = splitter.createTransactionList(info);
-
     }
 }

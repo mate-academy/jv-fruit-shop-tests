@@ -13,7 +13,7 @@ public class ReturnOperationHandlerTest {
     private static FruitTransaction fruitTransaction;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandler = new ReturnOperationHandler();
     }
 

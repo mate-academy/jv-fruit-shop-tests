@@ -32,7 +32,7 @@ public class OperationStrategyImplTest {
     public void balanceOperationHandler_Ok() {
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.BALANCE);
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test

@@ -26,7 +26,7 @@ public class ReportCreatorImplTest {
                 + LINE_SEPARATOR
                 + "apple,20";
         String actual = reportCreator.createReport();
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 
     @AfterClass

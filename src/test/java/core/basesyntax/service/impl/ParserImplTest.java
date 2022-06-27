@@ -48,7 +48,7 @@ public class ParserImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         data.clear();
     }
 }

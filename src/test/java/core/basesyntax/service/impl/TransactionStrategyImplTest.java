@@ -76,7 +76,7 @@ public class TransactionStrategyImplTest {
     }
 
     @Test
-    public void process_BalanceTransactionNewFruit_ok() {
+    public void process_balanceTransactionNewFruit_ok() {
         transactions = List.of(balanceTransaction);
         transactionStrategy.process(transactions);
         assertEquals(transactions.size(), Storage.fruitStorage.size());
@@ -84,19 +84,19 @@ public class TransactionStrategyImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void process_BalanceTransactionExistedFruit_notOk() {
+    public void process_balanceTransactionExistedFruit_notOk() {
         Storage.fruitStorage.put(FRUIT_NAME, QUANTITY);
         transactionStrategy.process(List.of(balanceTransaction));
     }
 
     @Test(expected = RuntimeException.class)
-    public void process_PurchaseTransactionsNonExistedFruit_notOk() {
+    public void process_purchaseTransactionsNonExistedFruit_notOk() {
         Storage.fruitStorage.put(FRUIT_NAME2, QUANTITY);
         transactionStrategy.process(List.of(purchaseTransaction));
     }
 
     @Test(expected = RuntimeException.class)
-    public void process_PurchaseTransactionsNotEnoughQuantity_notOk() {
+    public void process_purchaseTransactionsNotEnoughQuantity_notOk() {
         Storage.fruitStorage.put(FRUIT_NAME, QUANTITY);
         Transaction transaction = new Transaction(Transaction.Operation.PURCHASE,
                 FRUIT_NAME, QUANTITY2);
@@ -104,12 +104,12 @@ public class TransactionStrategyImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void process_PurchaseTransactionsEmptyStore_notOk() {
+    public void process_purchaseTransactionsEmptyStore_notOk() {
         transactionStrategy.process(List.of(purchaseTransaction));
     }
 
     @Test
-    public void process_PurchaseTransactionValid_ok() {
+    public void process_purchaseTransactionValid_ok() {
         Storage.fruitStorage.put(FRUIT_NAME, QUANTITY2);
         transactionStrategy.process(List.of(purchaseTransaction));
         int expectedQuantity = QUANTITY2 - QUANTITY;
@@ -117,14 +117,14 @@ public class TransactionStrategyImplTest {
     }
 
     @Test
-    public void process_PurchaseTransactionExactQuantity_ok() {
+    public void process_purchaseTransactionExactQuantity_ok() {
         Storage.fruitStorage.put(FRUIT_NAME, QUANTITY);
         transactionStrategy.process(List.of(purchaseTransaction));
         assertTrue(Storage.fruitStorage.isEmpty());
     }
 
     @Test
-    public void process_ReturnTransactionNewFruit_ok() {
+    public void process_returnTransactionNewFruit_ok() {
         transactions = List.of(returnTransaction);
         transactionStrategy.process(transactions);
         assertEquals(transactions.size(), Storage.fruitStorage.size());
@@ -132,7 +132,7 @@ public class TransactionStrategyImplTest {
     }
 
     @Test
-    public void process_ReturnTransactionExistedFruit_ok() {
+    public void process_returnTransactionExistedFruit_ok() {
         Storage.fruitStorage.put(FRUIT_NAME, QUANTITY);
         transactions = List.of(returnTransaction);
         transactionStrategy.process(transactions);
@@ -142,7 +142,7 @@ public class TransactionStrategyImplTest {
     }
 
     @Test
-    public void process_SupplyTransactionNewFruit_ok() {
+    public void process_supplyTransactionNewFruit_ok() {
         transactions = List.of(supplyTransaction);
         transactionStrategy.process(transactions);
         assertEquals(transactions.size(), Storage.fruitStorage.size());
@@ -150,7 +150,7 @@ public class TransactionStrategyImplTest {
     }
 
     @Test
-    public void process_SupplyTransactionExistedFruit_ok() {
+    public void process_supplyTransactionExistedFruit_ok() {
         Storage.fruitStorage.put(FRUIT_NAME, QUANTITY);
         transactions = List.of(supplyTransaction);
         transactionStrategy.process(transactions);

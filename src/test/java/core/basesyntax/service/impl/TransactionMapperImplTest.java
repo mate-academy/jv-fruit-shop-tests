@@ -30,14 +30,14 @@ public class TransactionMapperImplTest {
     }
 
     @Test
-    public void map_SingleRecord_ok() {
+    public void map_singleRecord_ok() {
         records = List.of("b,banana,20");
         List<Transaction> actual = transactionMapper.map(records);
         assertTrue(actual.size() == records.size());
     }
 
     @Test
-    public void map_MultipleRecords_ok() {
+    public void map_multipleRecords_ok() {
         records = List.of("b,banana,20", "b,apple,100");
         List<Transaction> actual = transactionMapper.map(records);
         assertTrue(actual.size() == records.size());

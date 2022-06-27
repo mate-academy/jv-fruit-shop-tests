@@ -15,10 +15,9 @@ import org.junit.Test;
 public class WriterServiceImplTest {
     private static WriterService writerService;
     private static final String FILE_PATH = "src/test/resources/output";
-    private static final String SEPARATOR = System.lineSeparator();
     private static final String EMPTY_REPORT = "";
-    private static final String VALID_REPORT = "fruit,quantity" + SEPARATOR
-            + "banana,152" + SEPARATOR + "apple,90";
+    private static final String VALID_REPORT = "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator() + "apple,90";
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -44,7 +43,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void write_ValidReport_ok() throws IOException {
+    public void write_validReport_ok() throws IOException {
         writerService.write(VALID_REPORT, FILE_PATH);
         List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
         List<String> actual = Files.readAllLines(Path.of(FILE_PATH));

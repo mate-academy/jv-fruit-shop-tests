@@ -18,7 +18,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_FilePathIsNull_notOk() {
+    public void read_filePathIsNull_notOk() {
         filePath = null;
         readerService.read(filePath);
     }
@@ -30,21 +30,21 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_EmptyFile_ok() {
+    public void read_emptyFile_ok() {
         filePath = "src/test/resources/inputEmpty";
         List<String> actual = readerService.read(filePath);
         assertTrue(actual.isEmpty());
     }
 
     @Test
-    public void read_FileHasOnlyHeader_ok() {
+    public void read_fileHasOnlyHeader_ok() {
         filePath = "src/test/resources/inputHeaderOnly";
         List<String> actual = readerService.read(filePath);
         assertTrue(actual.isEmpty());
     }
 
     @Test
-    public void read_FileHasValidContent_ok() {
+    public void read_fileHasValidContent_ok() {
         List<String> expected = List.of(
                 "b,banana,20",
                 "b,apple,100");

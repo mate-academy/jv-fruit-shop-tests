@@ -1,25 +1,24 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Dao;
-import core.basesyntax.db.DaoImpl;
+import core.basesyntax.db.FruitDao;
+import core.basesyntax.db.FruitDaoImpl;
 import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private static final String SEPARATOR = System.lineSeparator();
     private static final String TITLE = "fruit,quantity";
 
     @Override
     public String create() {
-        Dao dao = new DaoImpl();
-        if (dao.isStorageEmpty()) {
+        FruitDao dao = new FruitDaoImpl();
+        if (dao.isEmpty()) {
             return "";
         }
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(TITLE);
-        for (Map.Entry<String, Integer> entry : dao.getAllEntries()) {
+        for (Map.Entry<String, Integer> entry : dao.getAll()) {
             String record = createRecord(entry);
-            reportBuilder.append(SEPARATOR).append(record);
+            reportBuilder.append(System.lineSeparator()).append(record);
         }
         return reportBuilder.toString();
     }

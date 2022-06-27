@@ -18,6 +18,12 @@ public class ReportWriterServiceTest {
         reportWriterService = new ReportWriterServiceImpl();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void reportFile_wrongPath_notOk() {
+        String wrongPath = "src/test/wrong/test-report-expected.csv";
+        reportWriterService.writeReport(new ArrayList<>(), wrongPath);
+    }
+
     @Test
     public void writeReport_validPath_ok() {
         List<String> report = new ArrayList<>();
@@ -27,24 +33,18 @@ public class ReportWriterServiceTest {
         String resultPath = "src/test/test-resources/test-report-result.csv";
         String expectedPath = "src/test/test-resources/test-report-expected.csv";
         reportWriterService.writeReport(report, resultPath);
-        List<String> result;
-        try {
-            result = Files.readAllLines(Path.of(resultPath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + resultPath, e);
-        }
-        List<String> expected;
-        try {
-            expected = Files.readAllLines(Path.of(expectedPath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + expectedPath, e);
-        }
+        List<String> result = readFile(resultPath);
+        List<String> expected = readFile(expectedPath);
         Assert.assertEquals(expected, result);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void reportFile_wrongPath_notOk() {
-        String wrongPath = "src/test/wrong/test-report-expected.csv";
-        reportWriterService.writeReport(new ArrayList<>(), wrongPath);
+    private List<String> readFile(String path) {
+        List<String> result;
+        try {
+            result = Files.readAllLines(Path.of(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file " + path, e);
+        }
+        return result;
     }
 }

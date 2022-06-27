@@ -41,6 +41,6 @@ public class ReportGeneratingServiceTest {
         expected.add(System.lineSeparator() + "orange,100");
         expected.add(System.lineSeparator() + "pineapple,100");
         List<String> result = reportGeneratingService.createReport(storage);
-        Assert.assertEquals(expected,result);
+        Assert.assertEquals(expected, result);
     }
 }

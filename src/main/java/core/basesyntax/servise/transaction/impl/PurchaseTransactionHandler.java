@@ -7,12 +7,12 @@ public class PurchaseTransactionHandler implements TransactionHandler {
 
     @Override
     public void proceedTransaction(String item, int quantity) {
-        if (quantity < 0) {
-            throw new RuntimeException("Can't purchase negative quantity of " + item);
+        Integer quantityBeforeTransaction = Storage.items.get(item);
+        if (quantityBeforeTransaction == null) {
+            throw new RuntimeException("The balance for " + item + "wasn't installed");
         }
-        int quantityBeforeTransaction = Storage.items.getOrDefault(item, 0);
         if (quantityBeforeTransaction < quantity) {
-            throw new RuntimeException("Can't purchase. Deficiency in storage");
+            throw new RuntimeException("Can't purchase " + item + ". Deficiency in storage");
         }
         Storage.items.put(item, quantityBeforeTransaction - quantity);
     }

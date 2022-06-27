@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
@@ -14,8 +15,8 @@ public class FileWriterServiceImplTest {
     private static final String INVALID_FILEPATH = "src/resources/test/test.csv";
     private static FileWriterService fileWriterService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void init() {
         fileWriterService = new FileWriterServiceImpl();
     }
 
@@ -46,6 +47,15 @@ public class FileWriterServiceImplTest {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("File not accessible " + filePath, e);
+        }
+    }
+
+    @AfterClass
+    public static void deleteCreatedFile() {
+        try {
+            Files.delete(Path.of(VALID_FILEPATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't delete file " + VALID_FILEPATH,e);
         }
     }
 }

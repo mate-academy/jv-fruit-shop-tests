@@ -25,8 +25,8 @@ public class PurchaseTransactionHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void proceed_negativeQuantity_notOk() {
-        transactionHandler.proceedTransaction(ITEM, -PURCHASE_QUANTITY);
+    public void proceed_notSuchItemInStorage_notOk() {
+        transactionHandler.proceedTransaction("hello", Integer.MAX_VALUE);
     }
 
     @Test(expected = RuntimeException.class)

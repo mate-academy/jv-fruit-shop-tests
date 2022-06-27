@@ -6,10 +6,10 @@ import core.basesyntax.servise.transaction.TransactionHandler;
 public class SupplyTransactionHandler implements TransactionHandler {
     @Override
     public void proceedTransaction(String item, int quantity) {
-        if (quantity < 0) {
-            throw new RuntimeException("Can't return negative quantity of " + item);
+        Integer quantityBeforeTransaction = Storage.items.get(item);
+        if (quantityBeforeTransaction == null) {
+            throw new RuntimeException("The balance for " + item + "wasn't installed");
         }
-        int quantityBeforeTransaction = Storage.items.getOrDefault(item, 0);
         Storage.items.put(item, quantityBeforeTransaction + quantity);
     }
 }

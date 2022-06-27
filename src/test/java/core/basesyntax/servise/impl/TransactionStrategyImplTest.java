@@ -10,7 +10,7 @@ public class TransactionStrategyImplTest {
     private static TransactionStrategy transactionStrategy;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void init() {
         transactionStrategy = new TransactionStrategyImpl();
     }
 

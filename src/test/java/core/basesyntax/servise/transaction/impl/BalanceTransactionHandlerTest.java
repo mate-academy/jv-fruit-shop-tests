@@ -18,13 +18,8 @@ public class BalanceTransactionHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void proceed_negativeQuantity_notOk() {
-        transactionHandler.proceedTransaction(ITEM, -BALANCE_QUANTITY);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void proceed_duplicateBalanceForSameItem_notOk() {
-        transactionHandler.proceedTransaction(ITEM, BALANCE_QUANTITY);
+        Storage.items.put(ITEM, BALANCE_QUANTITY);
         transactionHandler.proceedTransaction(ITEM, BALANCE_QUANTITY);
     }
 

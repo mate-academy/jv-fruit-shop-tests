@@ -30,16 +30,16 @@ public class FileWriterServiceImplTest {
     @Test
     public void writeToFile_goodTest_ok() {
         fileWriterService.writeToFile(FILE_FOR_WRITER_PATH, report);
-        List<String> expected = reader(TEST_FILE_PATH);
-        List<String> actual = reader(FILE_FOR_WRITER_PATH);
+        List<String> expected = readFromFile(TEST_FILE_PATH);
+        List<String> actual = readFromFile(FILE_FOR_WRITER_PATH);
         assertEquals(expected, actual);
     }
 
     @Test
     public void writeToFile_emptyReport_ok() {
         fileWriterService.writeToFile(FILE_FOR_WRITER_PATH, "");
-        List<String> expected = reader(EMPTY_FILE_PATH);
-        List<String> actual = reader(FILE_FOR_WRITER_PATH);
+        List<String> expected = readFromFile(EMPTY_FILE_PATH);
+        List<String> actual = readFromFile(FILE_FOR_WRITER_PATH);
         assertEquals(expected, actual);
     }
 
@@ -48,7 +48,7 @@ public class FileWriterServiceImplTest {
         fileWriterService.writeToFile("", report);
     }
 
-    private List<String> reader(String filePath) {
+    private List<String> readFromFile(String filePath) {
         try {
             List<String> fileList = Files.readAllLines(Path.of(filePath));
             return fileList;

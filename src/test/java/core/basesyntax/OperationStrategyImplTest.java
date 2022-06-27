@@ -36,7 +36,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void balanceOperator_is_ok() {
+    public void getOperationType_balance_ok() {
         Class<? extends OperationHandler> expected = BalanceOperation.class;
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationType(FruitTransaction.Operation.BALANCE).getClass();
@@ -44,7 +44,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void supplyOperator_is_ok() {
+    public void getOperationType_supply_ok() {
         Class<? extends OperationHandler> expected = SupplyOperation.class;
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationType(FruitTransaction.Operation.SUPPLY).getClass();
@@ -52,7 +52,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void purchaseOperator_is_ok() {
+    public void getOperationType_purchase_ok() {
         Class<? extends OperationHandler> expected = PurchaseOperation.class;
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationType(FruitTransaction.Operation.PURCHASE).getClass();
@@ -60,7 +60,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void returnOperator_is_ok() {
+    public void getOperationType_return_ok() {
         Class<? extends OperationHandler> expected = ReturnOperation.class;
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationType(FruitTransaction.Operation.RETURN).getClass();

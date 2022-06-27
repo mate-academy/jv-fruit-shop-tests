@@ -13,7 +13,6 @@ import org.junit.Test;
 public class ReportCreatorImplTest {
     private static StorageDao storageDao;
     private static ReportCreator reportCreator;
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @BeforeClass
     public static void beforeClass() {
@@ -27,11 +26,11 @@ public class ReportCreatorImplTest {
         storageDao.update("lemon", 10);
         storageDao.update("lime", 20);
         String expected = "fruit,quantity"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "orange,10"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "lemon,10"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "lime,20";
         String actual = reportCreator.createReport();
         assertEquals(expected, actual);

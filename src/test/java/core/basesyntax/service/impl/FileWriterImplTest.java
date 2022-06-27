@@ -14,7 +14,6 @@ public class FileWriterImplTest {
     private static final String EMPTY_FILE = "src/test/resources/emptyFile.csv";
     private static final String PURPOSE_FILE = "src/test/resources/writerTestFile.csv";
     private static final String TEST_FILE = "src/test/resources/testFile.csv";
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static String report;
     private static FileWriter writer;
 
@@ -23,20 +22,20 @@ public class FileWriterImplTest {
         writer = new FileWriterImpl();
         StringBuilder builder = new StringBuilder();
         report = builder.append("type,fruit,quantity")
-                .append(LINE_SEPARATOR)
+                .append(System.lineSeparator())
                 .append("b,apple,50")
-                .append(LINE_SEPARATOR)
+                .append(System.lineSeparator())
                 .append("s,apple,25")
                 .toString();
     }
 
     @Test(expected = RuntimeException.class)
-    public void writerDataToFile_ToNotValidFile_notOk() {
+    public void writerDataToFile_toNotValidFile_notOk() {
         writer.writerDataToFile(report, "");
     }
 
     @Test
-    public void writerDataToFile_EmptyData_ok() {
+    public void writerDataToFile_emptyData_ok() {
         writer.writerDataToFile("", PURPOSE_FILE);
         List<String> expected = readFromFile(EMPTY_FILE);
         List<String> actual = readFromFile(PURPOSE_FILE);
@@ -44,7 +43,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writerDataToFile_Report_ok() {
+    public void writerDataToFile_report_ok() {
         writer.writerDataToFile(report, PURPOSE_FILE);
         List<String> expected = readFromFile(TEST_FILE);
         List<String> actual = readFromFile(PURPOSE_FILE);

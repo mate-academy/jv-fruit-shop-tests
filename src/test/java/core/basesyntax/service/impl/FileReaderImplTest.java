@@ -31,12 +31,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NotExistingFile_notOk() {
+    public void readFromFile_notExistingFile_notOk() {
         reader.readFromFile(Paths.get(NOT_EXISTING_FILE));
     }
 
     @Test
-    public void readFromFile_File_ok() {
+    public void readFromFile_file_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,apple,50");

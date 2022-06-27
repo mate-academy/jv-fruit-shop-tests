@@ -31,7 +31,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getOperationHandler_BalanceOperation_ok() {
+    public void getOperationHandler_balanceOperation_ok() {
         assertEquals(BalanceHandler.class,
                 operationStrategy
                         .getOperationHandler(FruitShopTransactions.Operation.BALANCE)
@@ -39,7 +39,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getOperationHandler_SupplyOperation_ok() {
+    public void getOperationHandler_supplyOperation_ok() {
         assertEquals(SupplyHandler.class,
                 operationStrategy
                         .getOperationHandler(FruitShopTransactions.Operation.SUPPLY)
@@ -47,7 +47,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getOperationHandler_PurchaseOperator_ok() {
+    public void getOperationHandler_purchaseOperator_ok() {
         assertEquals(PurchaseHandler.class,
                 operationStrategy
                         .getOperationHandler(FruitShopTransactions.Operation.PURCHASE)

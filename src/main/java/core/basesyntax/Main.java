@@ -11,10 +11,9 @@ import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionConvertorImpl;
-
 import java.util.List;
 
-public class FruitShop {
+public class Main {
     private static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/"
             + "resources/Input.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/java/core/basesyntax/"

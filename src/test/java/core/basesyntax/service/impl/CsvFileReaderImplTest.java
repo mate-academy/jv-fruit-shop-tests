@@ -1,19 +1,21 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
 public class CsvFileReaderImplTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void readFile_Ok() {
+        String inputFile = "src/main/java/core/basesyntax/resources/Input.csv";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -24,12 +26,9 @@ public class CsvFileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = new CsvFileReaderImpl().readFromFile("src/main/java/core/basesyntax/resources/Input.csv");
+        List<String> actual = new CsvFileReaderImpl().readFromFile(inputFile);
         assertEquals(expected, actual);
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void readFile_notOk() {

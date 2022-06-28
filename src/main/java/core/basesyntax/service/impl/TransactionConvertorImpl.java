@@ -14,7 +14,9 @@ public class TransactionConvertorImpl implements TransactionConvertor {
     @Override
     public List<Transaction> convert(List<String> lines) {
         List<Transaction> transactions = new ArrayList<>();
-        lines.remove(0);
+        if (!lines.isEmpty()) {
+            lines.remove(0);
+        }
         for (String line : lines) {
             String[] splittedLine = line.split(",");
             Transaction transaction = new Transaction(Transaction.Operation.getOperation(

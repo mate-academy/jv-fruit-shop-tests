@@ -2,6 +2,7 @@ package core.basesyntax.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Transaction {
     private static final Map<String, Operation> operationsMap = new HashMap<>();
@@ -60,5 +61,24 @@ public class Transaction {
                 operationsMap.put(enumOperation.getOperation(), enumOperation);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Transaction that = (Transaction) o;
+        return operation == that.operation
+                && Objects.equals(fruit, that.fruit)
+                && Objects.equals(quantity, that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

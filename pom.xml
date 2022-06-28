@@ -105,6 +105,9 @@
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
+                        <excludes>
+                            <exclude>**/FruitShop*</exclude>
+                        </excludes>
                     </configuration>
                 </plugin>
             </plugins>

@@ -4,12 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Warehouse;
 import core.basesyntax.model.Fruit;
+import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
 
+    @Before
+    public void setUp() {
+        Warehouse.getWarehouse().clear();
+    }
+
     @Test
-    public void createReport_Ok() {
+    public void createReportForWarehouseWithValues_Ok() {
         Fruit fruitBanana = new Fruit("banana");
         Fruit fruitOrange = new Fruit("orange");
         Fruit fruitMelon = new Fruit("melon");
@@ -25,4 +32,11 @@ public class ReportCreatorImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void createReportForEmptyWarehouse() {
+        Map<Fruit, Integer> warehouse = Warehouse.getWarehouse();
+        String expected = "fruit,quantity\n";
+        String actual = new ReportCreatorImpl().create();
+        assertEquals(expected, actual);
+    }
 }

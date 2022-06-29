@@ -17,16 +17,16 @@ public class CsvFileWriterImplTest {
 
     @Test
     public void writeToFile_Ok() {
-        String output = "src/main/java/core/basesyntax/"
+        String filePath = "src/main/java/core/basesyntax/"
                 + "resources/Report.csv";
         String expected = "fruit,quantity\n"
                 + "banana,152\n"
                 + "apple,90";
         StringWriter stringWriter = new StringWriter();
-        new CsvFileWriterImpl().writeToFile(output, expected);
+        new CsvFileWriterImpl().writeToFile(filePath, expected);
         String actual;
         try {
-            actual = Files.readString(Path.of(output));
+            actual = Files.readString(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from report file", e);
         }

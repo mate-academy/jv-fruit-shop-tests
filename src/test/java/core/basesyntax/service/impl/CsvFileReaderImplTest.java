@@ -15,7 +15,7 @@ public class CsvFileReaderImplTest {
 
     @Test
     public void readFile_Ok() {
-        String inputFile = "src/main/java/core/basesyntax/resources/Input.csv";
+        String filePath = "src/main/java/core/basesyntax/resources/Input.csv";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -26,7 +26,7 @@ public class CsvFileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = new CsvFileReaderImpl().readFromFile(inputFile);
+        List<String> actual = new CsvFileReaderImpl().readFromFile(filePath);
         assertEquals(expected, actual);
     }
 
@@ -36,5 +36,4 @@ public class CsvFileReaderImplTest {
         thrown.expectMessage("Can't read from file \"" + filePath + "\"");
         new CsvFileReaderImpl().readFromFile(filePath);
     }
-
 }

@@ -6,11 +6,22 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileWriterImplTest {
+
+    private static String expected;
+
+    @BeforeClass
+    public static void beforeClass() {
+        expected = "fruit,quantity\n"
+                + "banana,152\n"
+                + "apple,90";
+    }
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -19,9 +30,7 @@ public class CsvFileWriterImplTest {
     public void writeToFile_Ok() {
         String filePath = "src/main/java/core/basesyntax/"
                 + "resources/Report.csv";
-        String expected = "fruit,quantity\n"
-                + "banana,152\n"
-                + "apple,90";
+
         StringWriter stringWriter = new StringWriter();
         new CsvFileWriterImpl().writeToFile(filePath, expected);
         String actual;
@@ -36,9 +45,6 @@ public class CsvFileWriterImplTest {
     @Test
     public void writeToFile_notOk() {
         String filePath = "";
-        String expected = "fruit,quantity\n"
-                + "banana,152\n"
-                + "apple,90";
         thrown.expectMessage("Can't write to file \"" + filePath + "\"");
         new CsvFileWriterImpl().writeToFile(filePath, expected);
     }

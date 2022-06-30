@@ -4,19 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileReaderImplTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    private static List<String> expected = new ArrayList<>();
 
-    @Test
-    public void readFile_Ok() {
-        String filePath = "src/main/java/core/basesyntax/resources/Input.csv";
-        List<String> expected = new ArrayList<>();
+    @BeforeClass
+    public static void setUp() {
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -26,6 +26,14 @@ public class CsvFileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void readFile_Ok() {
+        String filePath = "src/main/java/core/basesyntax/resources/Input.csv";
         List<String> actual = new CsvFileReaderImpl().readFromFile(filePath);
         assertEquals(expected, actual);
     }

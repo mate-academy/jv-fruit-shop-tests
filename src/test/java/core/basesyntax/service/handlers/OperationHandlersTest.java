@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class SupplyOperationHandlerTest {
+public class OperationHandlersTest {
 
     private static List<Transaction> transactionList = new ArrayList<>();
 
@@ -73,5 +73,4 @@ public class SupplyOperationHandlerTest {
         Map<Fruit, Integer> actual = Warehouse.getWarehouse();
         assertEquals(expected, actual);
     }
-
 }

@@ -9,21 +9,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
 
-    private List<Transaction> transactionList = new ArrayList<>();
+    private static List<Transaction> transactionList = new ArrayList<>();
 
-    @Before
-    public void setUp() {
-        Warehouse.getWarehouse().clear();
-        transactionList.clear();
-    }
-
-    @Test
-    public void handle_Ok() {
+    @BeforeClass
+    public static void setUp() {
         transactionList.add(new Transaction(Transaction.Operation.getOperation("b"),
                 new Fruit("banana"), Integer.valueOf("100")));
         transactionList.add(new Transaction(Transaction.Operation.getOperation("p"),
@@ -40,6 +38,15 @@ public class OperationStrategyImplTest {
                 new Fruit("apple"), Integer.valueOf("10")));
         transactionList.add(new Transaction(Transaction.Operation.getOperation("s"),
                 new Fruit("apple"), Integer.valueOf("5")));
+    }
+
+    @After
+    public void tearDown() {
+        Warehouse.getWarehouse().clear();
+    }
+
+    @Test
+    public void handle_Ok() {
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         transactionList.forEach(transaction -> operationStrategy.get(transaction.getOperation())
                 .handle(transaction.getFruit(),
@@ -54,8 +61,13 @@ public class OperationStrategyImplTest {
 
     @Test
     public void handleEmptyTransactionList_Ok() {
+        List<Transaction> emptyTransactionList = new ArrayList<>();
+        for (Transaction transaction : transactionList) {
+            emptyTransactionList.add(transaction.clone());
+        }
+        emptyTransactionList.clear();
         OperationStrategy operationStrategy = new OperationStrategyImpl();
-        transactionList.forEach(transaction -> operationStrategy.get(transaction.getOperation())
+        emptyTransactionList.forEach(transaction -> operationStrategy.get(transaction.getOperation())
                 .handle(transaction.getFruit(),
                         transaction.getQuantity()
                 ));

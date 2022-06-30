@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Transaction {
+public class Transaction implements Cloneable {
     private static final Map<String, Operation> operationsMap = new HashMap<>();
     private Operation operation;
     private Fruit fruit;
@@ -80,5 +80,18 @@ public class Transaction {
     @Override
     public int hashCode() {
         return Objects.hash(operation, fruit, quantity);
+    }
+
+    @Override
+    public Transaction clone() {
+        try {
+            Object clone = super.clone();
+            return new Transaction(Operation.getOperation(operation.name()),
+                    new Fruit(fruit.getName()),
+                    quantity);
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

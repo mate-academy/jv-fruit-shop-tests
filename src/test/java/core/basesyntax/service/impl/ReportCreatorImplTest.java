@@ -5,9 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Warehouse;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
-
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,6 +12,9 @@ import org.junit.rules.ExpectedException;
 public class CsvFileReaderImplTest {
 
     private static List<String> expected = new ArrayList<>();
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @BeforeClass
     public static void setUp() {
@@ -27,9 +28,6 @@ public class CsvFileReaderImplTest {
         expected.add("p,banana,5");
         expected.add("s,banana,50");
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void readFile_Ok() {

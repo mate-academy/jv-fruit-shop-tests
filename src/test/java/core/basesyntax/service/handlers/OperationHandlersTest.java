@@ -1,18 +1,17 @@
 package core.basesyntax.service.handlers;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Warehouse;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class OperationHandlersTest {
 
@@ -65,7 +64,8 @@ public class OperationHandlersTest {
         }
         emptyTransactionList.clear();
         OperationStrategy operationStrategy = new OperationStrategyImpl();
-        emptyTransactionList.forEach(transaction -> operationStrategy.get(transaction.getOperation())
+        emptyTransactionList.forEach(transaction -> operationStrategy
+                .get(transaction.getOperation())
                 .handle(transaction.getFruit(),
                         transaction.getQuantity()
                 ));

@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,15 +15,15 @@ public class CsvFileWriterImplTest {
 
     private static String expected;
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @BeforeClass
     public static void beforeClass() {
         expected = "fruit,quantity\n"
                 + "banana,152\n"
                 + "apple,90";
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void writeToFile_Ok() {

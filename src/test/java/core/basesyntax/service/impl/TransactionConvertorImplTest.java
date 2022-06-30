@@ -7,15 +7,13 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionConvertorImplTest {
 
-    public static List<Transaction> expected = new ArrayList<>();
-    public static List<String> input = new ArrayList<>();
-
+    private static List<Transaction> expected = new ArrayList<>();
+    private static List<String> input = new ArrayList<>();
 
     @BeforeClass
     public static void beforeClass() {

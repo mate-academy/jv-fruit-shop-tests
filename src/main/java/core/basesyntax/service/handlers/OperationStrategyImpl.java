@@ -20,4 +20,8 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationHandler get(Transaction.Operation operation) {
         return operationHandlersMap.get(operation);
     }
+
+    public Map<Transaction.Operation, OperationHandler> getOperationHandlersMap() {
+        return operationHandlersMap;
+    }
 }

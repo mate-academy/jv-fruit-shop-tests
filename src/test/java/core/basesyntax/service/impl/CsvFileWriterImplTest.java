@@ -2,36 +2,30 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileWriterImplTest {
-
-    private static String expected;
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @BeforeClass
-    public static void beforeClass() {
-        expected = "fruit,quantity\n"
-                + "banana,152\n"
-                + "apple,90";
-    }
+    private final FileWriter csvFileWriter = new CsvFileWriterImpl();
 
     @Test
     public void writeToFile_Ok() {
+        String expected = "fruit,quantity\n"
+                + "banana,152\n"
+                + "apple,90";
+
         String filePath = "src/main/java/core/basesyntax/"
                 + "resources/Report.csv";
 
-        StringWriter stringWriter = new StringWriter();
-        new CsvFileWriterImpl().writeToFile(filePath, expected);
+        csvFileWriter.writeToFile(filePath, expected);
         String actual;
         try {
             actual = Files.readString(Path.of(filePath));
@@ -45,6 +39,6 @@ public class CsvFileWriterImplTest {
     public void writeToFile_invalidPath_notOk() {
         String filePath = "";
         thrown.expectMessage("Can't write to file \"" + filePath + "\"");
-        new CsvFileWriterImpl().writeToFile(filePath, expected);
+        csvFileWriter.writeToFile(filePath, "writeToFile_invalidPath_notOk test");
     }
 }

@@ -2,22 +2,22 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileReaderImplTest {
-
-    private static List<String> expected = new ArrayList<>();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    @BeforeClass
-    public static void setUp() {
+    private final FileReader csvFileReader = new CsvFileReaderImpl();
+
+    @Test
+    public void readFromFile_Ok() {
+        List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -27,12 +27,8 @@ public class CsvFileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-    }
-
-    @Test
-    public void readFromFile_Ok() {
         String filePath = "src/main/java/core/basesyntax/resources/Input.csv";
-        List<String> actual = new CsvFileReaderImpl().readFromFile(filePath);
+        List<String> actual = csvFileReader.readFromFile(filePath);
         assertEquals(expected, actual);
     }
 
@@ -40,6 +36,13 @@ public class CsvFileReaderImplTest {
     public void readFromFile_invalidPath_notOk() {
         String filePath = "invalidFilePath@ukrnet.ua";
         thrown.expectMessage("Can't read from file \"" + filePath + "\"");
-        new CsvFileReaderImpl().readFromFile(filePath);
+        csvFileReader.readFromFile(filePath);
+    }
+
+    @Test
+    public void readFromFile_emptyPath_notOk() {
+        String filePath = "";
+        thrown.expectMessage("Can't read from file \"" + filePath + "\"");
+        csvFileReader.readFromFile(filePath);
     }
 }

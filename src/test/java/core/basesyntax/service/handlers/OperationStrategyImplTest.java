@@ -1,5 +1,7 @@
 package core.basesyntax.service.handlers;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Transaction;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,6 +28,7 @@ public class OperationStrategyImplTest {
                 .get(Transaction.Operation.BALANCE);
         Class<BalanceOperationHandler> actual = (Class<BalanceOperationHandler>)
                                                     operationHandler.getClass();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -35,6 +38,7 @@ public class OperationStrategyImplTest {
                 .get(Transaction.Operation.PURCHASE);
         Class<PurchaseOperationHandler> actual = (Class<PurchaseOperationHandler>)
                                                     operationHandler.getClass();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -43,6 +47,7 @@ public class OperationStrategyImplTest {
         OperationHandler operationHandler = operationStrategyImpl.get(Transaction.Operation.RETURN);
         Class<ReturnOperationHandler> actual = (Class<ReturnOperationHandler>)
                                                     operationHandler.getClass();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -51,5 +56,6 @@ public class OperationStrategyImplTest {
         OperationHandler operationHandler = operationStrategyImpl.get(Transaction.Operation.SUPPLY);
         Class<SupplyOperationHandler> actual = (Class<SupplyOperationHandler>)
                                                     operationHandler.getClass();
+        assertEquals(expected, actual);
     }
 }

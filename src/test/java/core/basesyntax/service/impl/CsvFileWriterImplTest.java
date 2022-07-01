@@ -36,13 +36,13 @@ public class CsvFileWriterImplTest {
         try {
             actual = Files.readString(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from report file", e);
+            throw new RuntimeException("Can't read from report file " + filePath, e);
         }
         assertEquals(expected, actual);
     }
 
     @Test
-    public void writeToFile_notOk() {
+    public void writeToFile_invalidPath_notOk() {
         String filePath = "";
         thrown.expectMessage("Can't write to file \"" + filePath + "\"");
         new CsvFileWriterImpl().writeToFile(filePath, expected);

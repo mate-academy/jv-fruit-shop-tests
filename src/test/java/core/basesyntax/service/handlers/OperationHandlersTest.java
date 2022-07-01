@@ -43,7 +43,7 @@ public class OperationHandlersTest {
     }
 
     @Test
-    public void handle_Ok() {
+    public void handle_normalTransactionList_Ok() {
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         transactionList.forEach(transaction -> operationStrategy.get(transaction.getOperation())
                 .handle(transaction.getFruit(),
@@ -52,24 +52,6 @@ public class OperationHandlersTest {
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(new Fruit("banana"), 80);
         expected.put(new Fruit("apple"), 40);
-        Map<Fruit, Integer> actual = Warehouse.getWarehouse();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void handleEmptyTransactionList_Ok() {
-        List<Transaction> emptyTransactionList = new ArrayList<>();
-        for (Transaction transaction : transactionList) {
-            emptyTransactionList.add(transaction.clone());
-        }
-        emptyTransactionList.clear();
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
-        emptyTransactionList.forEach(transaction -> operationStrategy
-                .get(transaction.getOperation())
-                .handle(transaction.getFruit(),
-                        transaction.getQuantity()
-                ));
-        Map<Fruit, Integer> expected = new HashMap<>();
         Map<Fruit, Integer> actual = Warehouse.getWarehouse();
         assertEquals(expected, actual);
     }

@@ -30,14 +30,14 @@ public class CsvFileReaderImplTest {
     }
 
     @Test
-    public void readFile_Ok() {
+    public void readFromFile_Ok() {
         String filePath = "src/main/java/core/basesyntax/resources/Input.csv";
         List<String> actual = new CsvFileReaderImpl().readFromFile(filePath);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readFile_notOk() {
+    public void readFromFile_invalidPath_notOk() {
         String filePath = "invalidFilePath@ukrnet.ua";
         thrown.expectMessage("Can't read from file \"" + filePath + "\"");
         new CsvFileReaderImpl().readFromFile(filePath);

@@ -20,7 +20,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getBalanceOperation_Ok() {
+    public void get_balanceOperation_Ok() {
         Class<BalanceOperationHandler> expected = BalanceOperationHandler.class;
         OperationHandler operationHandler = operationStrategyImpl
                 .get(Transaction.Operation.BALANCE);
@@ -29,7 +29,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getPurchaseOperation_Ok() {
+    public void get_purchaseOperation_Ok() {
         Class<PurchaseOperationHandler> expected = PurchaseOperationHandler.class;
         OperationHandler operationHandler = operationStrategyImpl
                 .get(Transaction.Operation.PURCHASE);
@@ -38,7 +38,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getReturnOperation_Ok() {
+    public void get_returnOperation_Ok() {
         Class<ReturnOperationHandler> expected = ReturnOperationHandler.class;
         OperationHandler operationHandler = operationStrategyImpl.get(Transaction.Operation.RETURN);
         Class<ReturnOperationHandler> actual = (Class<ReturnOperationHandler>)
@@ -46,7 +46,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getSupplyOperation_Ok() {
+    public void get_supplyOperation_Ok() {
         Class<SupplyOperationHandler> expected = SupplyOperationHandler.class;
         OperationHandler operationHandler = operationStrategyImpl.get(Transaction.Operation.SUPPLY);
         Class<SupplyOperationHandler> actual = (Class<SupplyOperationHandler>)

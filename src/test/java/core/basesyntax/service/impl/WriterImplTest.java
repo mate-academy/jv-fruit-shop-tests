@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterImplTest {
@@ -19,18 +18,14 @@ public class WriterImplTest {
     private static final String TEST_FILE =
             "src/test/resources/testFile.csv";
     private static final Writer writer = new WriterImpl();
-    private static String report;
-
-    @BeforeClass
-    public static void beforeClass() {
-        report = "type,fruit,quantity"
-                + LINE_SEPARATOR
-                + "b,pineapple,10"
-                + LINE_SEPARATOR
-                + "b,watermelon,87"
-                + LINE_SEPARATOR
-                + "b,lemon,30";
-    }
+    private static final String report =
+                            "type,fruit,quantity"
+                            + LINE_SEPARATOR
+                            + "b,pineapple,10"
+                            + LINE_SEPARATOR
+                            + "b,watermelon,87"
+                            + LINE_SEPARATOR
+                            + "b,lemon,30";
 
     @Test
     public void writeEmpty_ok() {

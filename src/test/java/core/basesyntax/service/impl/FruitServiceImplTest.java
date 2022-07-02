@@ -34,8 +34,7 @@ public class FruitServiceImplTest {
         mapStrategy.put(Transaction.Operation.PURCHASE, new PurchaseHandlerImpl(fruitDao));
         mapStrategy.put(Transaction.Operation.RETURN, new ReturnHandlerImpl(fruitDao));
         OperationService operationService = new OperationServiceImpl(mapStrategy);
-        fruitService =
-                new FruitServiceImpl(operationService);
+        fruitService = new FruitServiceImpl(operationService);
     }
 
     @Test

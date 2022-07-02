@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Transaction {
     private final Operation operation;
     private final String nameFruit;
@@ -21,6 +23,25 @@ public class Transaction {
 
     public int getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Transaction)) {
+            return false;
+        }
+        Transaction that = (Transaction) o;
+        return getAmount() == that.getAmount()
+                && getOperation() == that.getOperation()
+                && Objects.equals(getNameFruit(), that.getNameFruit());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOperation(), getNameFruit(), getAmount());
     }
 
     public enum Operation {

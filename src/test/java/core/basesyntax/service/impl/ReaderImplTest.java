@@ -12,8 +12,9 @@ public class ReaderImplTest {
             "src/test/resources/emptyTestFile.csv";
     private static final String TEST_FILE =
             "src/test/resources/testFile.csv";
-    private static final String VALID_TEST_FILE =
-            "src/test/resources/validTestFile.csv";
+    private static final String INVALID_TEST_FILE =
+            "src/test/resources/invalidTestFile.csv";
+    private static final String NULL_DESTINATION_FILE = " ";
     private final Reader reader = new ReaderImpl();
 
     @Test
@@ -36,6 +37,11 @@ public class ReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readValidFile_notOk() {
-        reader.getDataFromFile(VALID_TEST_FILE);
+        reader.getDataFromFile(INVALID_TEST_FILE);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readNullDestinationFile_NotOk() {
+        reader.getDataFromFile(NULL_DESTINATION_FILE);
     }
 }

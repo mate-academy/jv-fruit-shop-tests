@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,8 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.OperationService;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.OperationServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceHandlerImpl;
 import core.basesyntax.strategy.impl.PurchaseHandlerImpl;
@@ -21,7 +21,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FruitServiceImplTest {
+public class FruitServiceTest {
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static final List<Transaction> transactions = new ArrayList<>();
     private static FruitService fruitService;

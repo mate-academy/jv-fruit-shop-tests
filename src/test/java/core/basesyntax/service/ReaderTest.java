@@ -1,13 +1,13 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.impl.ReaderImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-public class ReaderImplTest {
+public class ReaderTest {
     private static final String EMPTY_TEST_FILE =
             "src/test/resources/emptyTestFile.csv";
     private static final String TEST_FILE =

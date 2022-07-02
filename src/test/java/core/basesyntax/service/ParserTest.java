@@ -1,16 +1,16 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.impl.ParserImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ParserImplTest {
+public class ParserTest {
     private static final Parser parser = new ParserImpl();
     private static final List<String> rawData = new ArrayList<>();
 

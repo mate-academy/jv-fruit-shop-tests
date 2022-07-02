@@ -1,15 +1,15 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import org.junit.After;
 import org.junit.Test;
 
-public class ReportCreatorImplTest {
+public class ReportCreatorTest {
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static final ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
     private static final String SEPARATOR = System.lineSeparator();

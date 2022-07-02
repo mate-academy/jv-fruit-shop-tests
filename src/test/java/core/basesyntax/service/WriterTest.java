@@ -1,15 +1,15 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.impl.WriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Test;
 
-public class WriterImplTest {
+public class WriterTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String DESTINATION =
             "src/test/resources/writerTestFile.csv";

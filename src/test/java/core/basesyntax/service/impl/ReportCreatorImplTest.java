@@ -12,6 +12,7 @@ import org.junit.Test;
 public class ReportCreatorImplTest {
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static final ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
+    private static final String SEPARATOR = System.lineSeparator();
 
     @Test
     public void noTransactions_ok() {
@@ -24,8 +25,8 @@ public class ReportCreatorImplTest {
     public void reportWithTransactions_ok() {
         fruitDao.update("banana", 10);
         fruitDao.update("strawberry", 10);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,10" + System.lineSeparator()
+        String expected = "fruit,quantity" + SEPARATOR
+                + "banana,10" + SEPARATOR
                 + "strawberry,10";
         String actual = reportCreator.createReport();
         assertEquals(expected, actual);

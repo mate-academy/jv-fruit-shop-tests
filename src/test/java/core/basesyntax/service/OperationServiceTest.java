@@ -17,11 +17,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationServiceTest {
-    private static final FruitDao fruitDao = new FruitDaoImpl();
     private static OperationService operationService;
 
     @BeforeClass
     public static void beforeClass() {
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<Transaction.Operation, OperationHandler> mapStrategy = new HashMap<>();
         mapStrategy.put(Transaction.Operation.BALANCE, new BalanceHandlerImpl(fruitDao));
         mapStrategy.put(Transaction.Operation.SUPPLY, new SupplyHandlerImpl(fruitDao));

@@ -7,12 +7,19 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorTest {
-    private static final FruitDao fruitDao = new FruitDaoImpl();
-    private static final ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
     private static final String SEPARATOR = System.lineSeparator();
+    private static FruitDao fruitDao;
+    private static ReportCreator reportCreator;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
+        reportCreator = new ReportCreatorImpl(fruitDao);
+    }
 
     @Test
     public void noTransactions_ok() {

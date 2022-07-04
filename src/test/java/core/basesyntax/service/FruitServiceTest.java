@@ -22,12 +22,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
-    private static final FruitDao fruitDao = new FruitDaoImpl();
-    private static final List<Transaction> transactions = new ArrayList<>();
+    private static List<Transaction> transactions;
     private static FruitService fruitService;
 
     @BeforeClass
     public static void beforeClass() {
+        FruitDao fruitDao = new FruitDaoImpl();
+        transactions = new ArrayList<>();
         Map<Transaction.Operation, OperationHandler> mapStrategy = new HashMap<>();
         mapStrategy.put(Transaction.Operation.BALANCE, new BalanceHandlerImpl(fruitDao));
         mapStrategy.put(Transaction.Operation.SUPPLY, new SupplyHandlerImpl(fruitDao));
@@ -43,7 +44,7 @@ public class FruitServiceTest {
                 Transaction.Operation.BALANCE, "apple", 23));
         fruitService.process(transactions);
         int expected = 23;
-        int actual = fruitDao.getQuantity("apple");
+        int actual = Storage.fruits.get("apple");
         assertEquals(expected, actual);
     }
 
@@ -53,7 +54,7 @@ public class FruitServiceTest {
                 Transaction.Operation.SUPPLY, "orange", 5));
         fruitService.process(transactions);
         int expected = 5;
-        int actual = fruitDao.getQuantity("orange");
+        int actual = Storage.fruits.get("orange");
         assertEquals(expected, actual);
     }
 
@@ -65,7 +66,7 @@ public class FruitServiceTest {
                 Transaction.Operation.PURCHASE, "pineapple", 45));
         fruitService.process(transactions);
         int expected = 55;
-        int actual = fruitDao.getQuantity("pineapple");
+        int actual = Storage.fruits.get("pineapple");
         assertEquals(expected, actual);
     }
 
@@ -75,7 +76,7 @@ public class FruitServiceTest {
                 Transaction.Operation.RETURN, "apple", 13));
         fruitService.process(transactions);
         int expected = 13;
-        int actual = fruitDao.getQuantity("apple");
+        int actual = Storage.fruits.get("apple");
         assertEquals(expected, actual);
     }
 

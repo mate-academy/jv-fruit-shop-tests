@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterTest {
@@ -17,15 +18,20 @@ public class WriterTest {
             "src/test/resources/emptyTestFile.csv";
     private static final String TEST_FILE =
             "src/test/resources/testFile.csv";
-    private static final Writer writer = new WriterImpl();
     private static final String report =
-                            "type,fruit,quantity"
-                            + LINE_SEPARATOR
-                            + "b,pineapple,10"
-                            + LINE_SEPARATOR
-                            + "b,watermelon,87"
-                            + LINE_SEPARATOR
-                            + "b,lemon,30";
+                    "type,fruit,quantity"
+                    + LINE_SEPARATOR
+                    + "b,pineapple,10"
+                    + LINE_SEPARATOR
+                    + "b,watermelon,87"
+                    + LINE_SEPARATOR
+                    + "b,lemon,30";
+    private static Writer writer;
+
+    @BeforeClass
+    public static void beforeClass() {
+        writer = new WriterImpl();
+    }
 
     @Test
     public void writeEmpty_ok() {
@@ -36,7 +42,7 @@ public class WriterTest {
     }
 
     @Test
-    public void writeReport_ok() {
+    public void writeValidReport_ok() {
         writer.writeDataToFile(report, DESTINATION);
         List<String> expected = getDataFromFile(TEST_FILE);
         List<String> actual = getDataFromFile(DESTINATION);
@@ -44,7 +50,7 @@ public class WriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeValidFile_notOk() {
+    public void writeToInvalidFilePath_notOk() {
         writer.writeDataToFile(report, "");
     }
 

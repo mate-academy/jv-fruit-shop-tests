@@ -8,11 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTest {
-    private static final Parser parser = new ParserImpl();
-    private static final List<String> rawData = new ArrayList<>();
+    private static Parser parser;
+    private static List<String> rawData;
+
+    @BeforeClass
+    public static void beforeClass() {
+        parser = new ParserImpl();
+        rawData = new ArrayList<>();
+    }
 
     @Before
     public void setUp() {
@@ -35,7 +42,7 @@ public class ParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseInvalidValue_notOk() {
+    public void parseInvalidData_notOk() {
         rawData.add("m,pineapple,30");
         parser.parse(rawData);
     }

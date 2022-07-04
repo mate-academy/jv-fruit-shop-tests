@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.impl.ReaderImpl;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderTest {
@@ -15,7 +16,12 @@ public class ReaderTest {
     private static final String INVALID_TEST_FILE =
             "src/test/resources/invalidTestFile.csv";
     private static final String NULL_DESTINATION_FILE = " ";
-    private final Reader reader = new ReaderImpl();
+    private static Reader reader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        reader = new ReaderImpl();
+    }
 
     @Test
     public void read_emptyTestFile_ok() {
@@ -36,7 +42,7 @@ public class ReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readValidFile_notOk() {
+    public void readInvalidFile_notOk() {
         reader.getDataFromFile(INVALID_TEST_FILE);
     }
 

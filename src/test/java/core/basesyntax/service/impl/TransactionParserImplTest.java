@@ -28,22 +28,22 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void anotherTypeOperation_NotOk() {
+    public void parseFile_invalidTypeOperation_NotOk() {
         transactionParser.parseFile(List.of("skip Line", "f,banana,20"));
     }
 
     @Test(expected = RuntimeException.class)
-    public void negativeQuantity_NotOk() {
+    public void parseFile_negativeQuantity_NotOk() {
         transactionParser.parseFile(List.of("skip Line", "p,banana,-20"));
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullLine_notOk() {
+    public void parseFile_nullLine_notOk() {
         transactionParser.parseFile(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fruitIsBlank_NotOk() {
+    public void parseFile_fruitIsBlank_NotOk() {
         transactionParser.parseFile(List.of("skip Line", "p, ,20"));
     }
 }

@@ -30,7 +30,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void correctNotation_Ok() {
+    public void createReport_correctNotation_Ok() {
         String[] splitReport = reportCreator.createReport().split(System.lineSeparator());
         boolean actual = splitReport[FIRST_RECORD_INDEX].equals(NOTATION);
         Assert.assertTrue(actual);

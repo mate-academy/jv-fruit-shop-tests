@@ -31,7 +31,7 @@ public class ReadFileImplTest {
     }
 
     @Test
-    public void invalidFilePath_notOk() {
+    public void readFile_invalidFilePath_notOk() {
         Exception exception = new Exception();
         try {
             readFile.readFile(INVALID_PATH_NAME);

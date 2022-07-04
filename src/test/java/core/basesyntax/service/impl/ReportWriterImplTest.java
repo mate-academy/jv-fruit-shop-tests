@@ -32,7 +32,7 @@ public class ReportWriterImplTest {
     }
 
     @Test
-    public void invalidPath_notOk() {
+    public void reportWriter_invalidPath_notOk() {
         Exception exception = new Exception();
         try {
             reportWriter.reportWriter(INVALID_PATH_NAME, TEST_STRING);

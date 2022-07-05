@@ -8,25 +8,20 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionConvertor;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionConvertorImplTest {
-
     private static TransactionConvertor transactionConvertor;
-    private static List<Transaction> expected;
-    private static List<String> input;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         transactionConvertor = new TransactionConvertorImpl();
-        expected = new ArrayList<>();
-        input = new ArrayList<>();
     }
 
     @Test
     public void convert_Ok() {
+        List<String> input = new ArrayList<>();
         input.add("type,fruit,quantity");
         input.add("b,banana,20");
         input.add("b,apple,100");
@@ -37,6 +32,7 @@ public class TransactionConvertorImplTest {
         input.add("p,banana,5");
         input.add("s,banana,50");
 
+        List<Transaction> expected = new ArrayList<>();
         expected.add(new Transaction(Transaction.Operation.getOperation("b"),
                 new Fruit("banana"), Integer.valueOf("20")));
         expected.add(new Transaction(Transaction.Operation.getOperation("b"),
@@ -60,6 +56,8 @@ public class TransactionConvertorImplTest {
 
     @Test
     public void convert_emptyString_Ok() {
+        List<Transaction> expected = new ArrayList<>();
+        List<String> input = new ArrayList<>();
         input.clear();
         expected.clear();
         List<Transaction> actual = transactionConvertor.convert(input);

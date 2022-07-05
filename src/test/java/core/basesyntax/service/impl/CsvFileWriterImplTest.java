@@ -6,7 +6,6 @@ import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,16 +13,13 @@ import org.junit.rules.ExpectedException;
 
 public class CsvFileWriterImplTest {
     private static FileWriter csvFileWriter;
-
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
         csvFileWriter = new CsvFileWriterImpl();
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
 
     @Test
     public void writeToFile_Ok() {
@@ -47,7 +43,7 @@ public class CsvFileWriterImplTest {
     @Test
     public void writeToFile_invalidPath_notOk() {
         String filePath = "";
-        thrown.expectMessage("Can't write to file \"" + filePath + "\"");
+        expectedException.expectMessage("Can't write to file \"" + filePath + "\"");
         csvFileWriter.writeToFile(filePath, "writeToFile_invalidPath_notOk test");
     }
 }

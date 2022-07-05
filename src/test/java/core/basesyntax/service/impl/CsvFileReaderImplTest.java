@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 public class CsvFileReaderImplTest {
     private static FileReader csvFileReader;
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -40,14 +40,14 @@ public class CsvFileReaderImplTest {
     @Test
     public void readFromFile_invalidPath_notOk() {
         String filePath = "invalidFilePath@ukrnet.ua";
-        thrown.expectMessage("Can't read from file \"" + filePath + "\"");
+        expectedException.expectMessage("Can't read from file \"" + filePath + "\"");
         csvFileReader.readFromFile(filePath);
     }
 
     @Test
     public void readFromFile_emptyPath_notOk() {
         String filePath = "";
-        thrown.expectMessage("Can't read from file \"" + filePath + "\"");
+        expectedException.expectMessage("Can't read from file \"" + filePath + "\"");
         csvFileReader.readFromFile(filePath);
     }
 }

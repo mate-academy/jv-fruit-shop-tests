@@ -10,19 +10,21 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final Fruit banana = new Fruit("banana");
-    private final OperationHandler balanceOperationHandler = new BalanceOperationHandler();
+    private static Fruit BANANA;
+    private static OperationHandler balanceOperationHandler;
 
     @BeforeClass
     public static void setUp() {
-        Warehouse.getWarehouse().put(banana, 100);
+        BANANA = new Fruit("banana");
+        balanceOperationHandler = new BalanceOperationHandler();
+        Warehouse.getWarehouse().put(BANANA, 100);
     }
 
     @Test
     public void handle_normalTransactionList_Ok() {
-        balanceOperationHandler.handle(banana, 200);
+        balanceOperationHandler.handle(BANANA, 200);
         Map<Fruit, Integer> expected = new HashMap<>();
-        expected.put(banana, 200);
+        expected.put(BANANA, 200);
         Map<Fruit, Integer> actual = Warehouse.getWarehouse();
         assertEquals(expected, actual);
     }

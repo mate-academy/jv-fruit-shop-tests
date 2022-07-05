@@ -10,11 +10,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static final Fruit BANANA = new Fruit("banana");
-    private final OperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
+    private static Fruit BANANA;
+    private static OperationHandler purchaseOperationHandler;
 
     @BeforeClass
     public static void setUp() {
+        BANANA = new Fruit("banana");
+        purchaseOperationHandler = new PurchaseOperationHandler();
         Warehouse.getWarehouse().put(BANANA, 100);
     }
 

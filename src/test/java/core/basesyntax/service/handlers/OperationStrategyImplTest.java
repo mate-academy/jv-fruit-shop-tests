@@ -7,10 +7,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl();
+    private static OperationStrategyImpl operationStrategyImpl;
 
     @BeforeClass
     public static void beforeClass() {
+        operationStrategyImpl = new OperationStrategyImpl();
         operationStrategyImpl.getOperationHandlersMap().put(Transaction.Operation.BALANCE,
                 new BalanceOperationHandler());
         operationStrategyImpl.getOperationHandlersMap().put(Transaction.Operation.SUPPLY,

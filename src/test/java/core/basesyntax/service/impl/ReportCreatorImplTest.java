@@ -10,16 +10,20 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private final ReportCreator reportCreator = new ReportCreatorImpl();
+    private static ReportCreator reportCreator;
+    private static Fruit FRUIT_BANANA = new Fruit("banana");
+    private static Fruit FRUIT_ORANGE = new Fruit("orange");
+    private static Fruit FRUIT_MELON = new Fruit("melon");
 
     @BeforeClass
     public static void beforeClass() {
-        Fruit fruitBanana = new Fruit("banana");
-        Fruit fruitOrange = new Fruit("orange");
-        Fruit fruitMelon = new Fruit("melon");
-        Warehouse.getWarehouse().put(fruitBanana, 123);
-        Warehouse.getWarehouse().put(fruitOrange, 456);
-        Warehouse.getWarehouse().put(fruitMelon, 789);
+        reportCreator = new ReportCreatorImpl();
+        FRUIT_BANANA = new Fruit("banana");
+        FRUIT_ORANGE = new Fruit("orange");
+        FRUIT_MELON = new Fruit("melon");
+        Warehouse.getWarehouse().put(FRUIT_BANANA, 123);
+        Warehouse.getWarehouse().put(FRUIT_ORANGE, 456);
+        Warehouse.getWarehouse().put(FRUIT_MELON, 789);
     }
 
     @After

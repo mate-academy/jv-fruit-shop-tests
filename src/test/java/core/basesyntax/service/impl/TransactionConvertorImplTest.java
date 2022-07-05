@@ -8,13 +8,22 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionConvertor;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionConvertorImplTest {
 
-    private final TransactionConvertor transactionConvertor = new TransactionConvertorImpl();
-    private List<Transaction> expected = new ArrayList<>();
-    private List<String> input = new ArrayList<>();
+    private static TransactionConvertor transactionConvertor;
+    private static List<Transaction> expected;
+    private static List<String> input;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        transactionConvertor = new TransactionConvertorImpl();
+        expected = new ArrayList<>();
+        input = new ArrayList<>();
+    }
 
     @Test
     public void convert_Ok() {

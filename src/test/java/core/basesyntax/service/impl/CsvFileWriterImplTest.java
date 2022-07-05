@@ -6,15 +6,24 @@ import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileWriterImplTest {
+    private static FileWriter csvFileWriter;
+
+
+    @BeforeClass
+    public static void beforeClass() {
+        csvFileWriter = new CsvFileWriterImpl();
+    }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final FileWriter csvFileWriter = new CsvFileWriterImpl();
 
     @Test
     public void writeToFile_Ok() {

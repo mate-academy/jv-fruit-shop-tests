@@ -5,15 +5,24 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileReaderImplTest {
+    private static FileReader csvFileReader;
+
+
+    @BeforeClass
+    public static void beforeClass() {
+        csvFileReader = new CsvFileReaderImpl();
+    }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final FileReader csvFileReader = new CsvFileReaderImpl();
 
     @Test
     public void readFromFile_Ok() {

@@ -2,13 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.service.TransactionProcessorService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileReaderServiceImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FileWriterServiceImpl;
+import core.basesyntax.service.TransactionProcessorService;
 import core.basesyntax.service.TransactionProcessorServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;

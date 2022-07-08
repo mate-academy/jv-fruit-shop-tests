@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,5 +50,4 @@ public class FileWriterServiceTest {
     public void afterEach() throws IOException {
         Files.delete(Path.of(FILE_NAME));
     }
-
 }

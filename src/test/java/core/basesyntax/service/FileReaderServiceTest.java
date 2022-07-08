@@ -20,24 +20,23 @@ public class FileReaderServiceTest {
     @Test
     public void readFile_ok() {
         List<String> actual = readerService.readFile(VALID_FILE_NAME);
-        List<String> expected = List.of(
-                "type,fruit,quantity",
-                "b,apple,10",
-                "b,banana,1",
-                "b,orange,102",
-                "b,grapefruit,102",
-                "s,apple,100",
-                "s,grapefruit,1001",
-                "s,banana,50",
-                "s,orange,3",
-                "p,grapefruit,20",
-                "p,apple,50",
-                "p,banana,1",
-                "p,orange,100",
-                "r,apple,5",
-                "r,banana,12",
-                "r,orange,1",
-                "r,grapefruit,2");
+        List<String> expected = List.of("type,fruit,quantity",
+        "b,apple,10",
+        "b,banana,1",
+        "b,orange,102",
+        "b,grapefruit,102",
+        "s,apple,100",
+        "s,grapefruit,1001",
+        "s,banana,50",
+        "s,orange,3",
+        "p,grapefruit,20",
+        "p,apple,50",
+        "p,banana,1",
+        "p,orange,100",
+        "r,apple,5",
+        "r,banana,12",
+        "r,orange,1",
+        "r,grapefruit,2");
         Assert.assertEquals(expected, actual);
     }
 
@@ -52,5 +51,4 @@ public class FileReaderServiceTest {
         List<String> expected = List.of();
         Assert.assertEquals(expected, actual);
     }
-
 }

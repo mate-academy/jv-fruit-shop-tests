@@ -2,9 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.service.ReportService;
-
 public class ReportServiceImpl implements ReportService {
     private static final String FIRST_COLUMN_NAME = "fruit";
     private static final String SECOND_COLUMN_NAME = "quantity";

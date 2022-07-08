@@ -4,11 +4,9 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import core.basesyntax.transaction.BalanceTransactionHandler;
 import core.basesyntax.transaction.PurchaseTransactionHandler;
 import core.basesyntax.transaction.ReturnTransactionHandler;
@@ -79,5 +77,4 @@ public class TransactionProcessorServiceTest {
     public void afterEach() {
         storage.clear();
     }
-
 }

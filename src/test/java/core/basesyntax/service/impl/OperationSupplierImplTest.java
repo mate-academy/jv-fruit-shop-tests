@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.*;
-
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.OperationSupplier;
 import core.basesyntax.strategy.BalanceFruitOperation;

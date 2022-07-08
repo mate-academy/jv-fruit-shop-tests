@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.transaction.TransactionHandler;
+
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {

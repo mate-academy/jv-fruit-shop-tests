@@ -1,8 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDaoImpl;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;

@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
-import org.junit.Assert;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 
 public class FileReaderServiceTest {
     private static final String VALID_FILE_NAME = "src/test/java/resources/testfile.csv";

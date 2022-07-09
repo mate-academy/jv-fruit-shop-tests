@@ -1,1 +1,4 @@
-" type,fruit,quantity",,b,banana,20b,apple,100s,banana,100p,banana,13r,apple,10p,apple,20p,banana,5s,banana,50
+fruit,quantity
+banana,30
+pineapple,22
+apple,50

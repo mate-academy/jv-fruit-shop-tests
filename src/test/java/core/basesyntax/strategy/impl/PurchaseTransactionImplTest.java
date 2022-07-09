@@ -6,12 +6,19 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseTransactionImplTest {
+    private static final Map<String, Integer> testStorageMap = new HashMap<>();
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        Storage.setFruitStore(testStorageMap);
+    }
+
     @Test
-    public void purchaseTransaction_OK() {
-        Map<String, Integer> testStorageMap = new HashMap<>();
+    public void handle_purchaseTransaction_OK() {
         testStorageMap.put("banana", 30);
         Storage.setFruitStore(testStorageMap);
         OperationHandler operationHandler = new PurchaseTransactionImpl();

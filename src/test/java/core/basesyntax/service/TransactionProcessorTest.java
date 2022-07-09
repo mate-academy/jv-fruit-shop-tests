@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceTransactionImpl;
@@ -19,8 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionProcessorTest {
-    private static final String testTransactionFilePath = "src/main/resources/transaction.csv";
-    private static final int FRUIT_OPERATION_INDEX = 0;
     private static final String TEST_FILE_HEADER = "fruit,quantity";
     private final Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
 
@@ -30,22 +27,6 @@ public class TransactionProcessorTest {
         operationHandlerMap.put(Operation.PURCHASE.getOperation(), new PurchaseTransactionImpl());
         operationHandlerMap.put(Operation.SUPPLY.getOperation(), new SupplyTransactionImpl());
         operationHandlerMap.put(Operation.RETURN.getOperation(), new ReturnTransactionImpl());
-    }
-
-    @Test
-    public void allOperationElementsInListValid_OK() {
-        boolean isValid = true;
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> testListOfTransaction = fileReaderService
-                .readFromFile(testTransactionFilePath);
-        for (int i = 1; i < testListOfTransaction.size(); i++) {
-            String[] testArrayFromList = testListOfTransaction.get(i).split(",");
-            if (!operationHandlerMap
-                    .containsKey(testArrayFromList[FRUIT_OPERATION_INDEX])) {
-                isValid = false;
-            }
-        }
-        assertTrue(isValid);
     }
 
     @Test
@@ -107,5 +88,12 @@ public class TransactionProcessorTest {
         transactionProcessor.process(testListBalance);
         assertTrue(Storage.getFruitStore().containsKey("banana")
                 && Storage.getFruitStore().containsValue(40));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void process_transactionListNull_NotOK() {
+        TransactionProcessor transactionProcessor
+                = new TransactionProcessorImpl(operationHandlerMap);
+        transactionProcessor.process(null);
     }
 }

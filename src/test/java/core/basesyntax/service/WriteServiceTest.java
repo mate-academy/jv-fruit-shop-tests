@@ -1,21 +1,22 @@
 package core.basesyntax.service;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import core.basesyntax.impl.WriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class FileWriterServiceTest {
-    private static final String FILE_NAME = "src/test/java/resources/testreport.csv";
-    private static FileWriterService writerService;
+public class WriteServiceTest {
+    private static final String FILE_NAME = "src/test/resources/testreport.csv";
+    private static WriterService writerService;
 
     @BeforeClass
     public static void beforeAll() {
-        writerService = new FileWriterServiceImpl();
+        writerService = new WriterServiceImpl();
     }
 
     @Test
@@ -40,14 +41,25 @@ public class FileWriterServiceTest {
         }
     }
 
-    @Test(expected = RuntimeException.class)
-    public void writeExistingFile_shouldThrowRuntimeException_notOk() throws IOException {
-        Files.createFile(Path.of(FILE_NAME));
-        writerService.writeFile("sth", FILE_NAME);
+    @Test
+    public void writeExistingFile_shouldThrowRuntimeException_ok() {
+        try {
+            Files.createFile(Path.of(FILE_NAME));
+            writerService.writeFile("sth", FILE_NAME);
+        } catch (RuntimeException e) {
+            return;
+        } catch (IOException e) {
+            throw new RuntimeException("Cannot create file from path: " + FILE_NAME);
+        }
+        Assert.fail("Should throw new RuntimeException");
     }
 
     @After
-    public void afterEach() throws IOException {
-        Files.delete(Path.of(FILE_NAME));
+    public void afterEach() {
+        try {
+            Files.delete(Path.of(FILE_NAME));
+        } catch (IOException e) {
+            return;
+        }
     }
 }

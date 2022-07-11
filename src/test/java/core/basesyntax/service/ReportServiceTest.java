@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import java.util.HashMap;
+import core.basesyntax.db.Storage;
+import core.basesyntax.impl.ReportServiceImpl;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
@@ -9,18 +11,18 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
+    private static FruitDao dao;
     private static ReportService reportService;
-    private static Map<String, Integer> storage;
 
     @BeforeClass
     public static void beforeAll() {
-        storage = new HashMap<>();
-        reportService = new ReportServiceImpl(new FruitDaoImpl(storage));
+        dao = new FruitDaoImpl();
+        reportService = new ReportServiceImpl(new FruitDaoImpl());
     }
 
     @Test
     public void makeReport_ok() {
-        storage.putAll(Map.of(
+        Storage.fruitsAvailable.putAll(Map.of(
                 "apple", 65,
                 "banana", 62,
                 "orange", 6,
@@ -31,11 +33,11 @@ public class ReportServiceTest {
                 + "grapefruit,1085" + System.lineSeparator()
                 + "orange,6";
         String actual = reportService.makeReport();
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("expected: " + expected + ", actual: " + actual, expected, actual);
     }
 
     @After
     public void afterEach() {
-        storage.clear();
+        Storage.fruitsAvailable.clear();
     }
 }

@@ -2,25 +2,27 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.impl.ProcessorServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.transaction.BalanceTransactionHandler;
 import core.basesyntax.transaction.PurchaseTransactionHandler;
 import core.basesyntax.transaction.ReturnTransactionHandler;
 import core.basesyntax.transaction.SupplyTransactionHandler;
 import core.basesyntax.transaction.TransactionHandler;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TransactionProcessorServiceTest {
+public class ProcessorServiceTest {
     private static FruitDao dao;
-    private static TransactionProcessorService processorService;
-    private static Map<String, Integer> storage;
+    private static TransactionStrategy strategy;
+    private static ProcessorService processorService;
 
     @BeforeClass
     public static void beforeAll() {
@@ -29,15 +31,14 @@ public class TransactionProcessorServiceTest {
         transactionHandlersMap.put("s", new SupplyTransactionHandler());
         transactionHandlersMap.put("p", new PurchaseTransactionHandler());
         transactionHandlersMap.put("r", new ReturnTransactionHandler());
-        storage = new HashMap<>();
-        dao = new FruitDaoImpl(storage);
-        TransactionStrategy strategy = new TransactionStrategyImpl(transactionHandlersMap);
-        processorService = new TransactionProcessorServiceImpl(dao, strategy);
+        dao = new FruitDaoImpl();
+        strategy = new TransactionStrategyImpl(transactionHandlersMap);
+        processorService = new ProcessorServiceImpl(dao, strategy);
     }
 
     @Test
     public void processData_ok() {
-        processorService.process(List.of(
+        processorService.processData(List.of(
                 "type,fruit,quantity",
                 "b,apple,10",
                 "b,banana,1",
@@ -61,20 +62,8 @@ public class TransactionProcessorServiceTest {
         Assert.assertEquals(dao.get("grapefruit"), 1085);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void process_invalidHeader_ok() {
-        processorService.process(List.of("aamcgoreimvleiotumovoci"));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void process_invalidNumberOfRows_notOk() {
-        processorService.process(List.of(
-                "type,fruit",
-                "b,banana"));
-    }
-
     @After
     public void afterEach() {
-        storage.clear();
+        Storage.fruitsAvailable.clear();
     }
 }

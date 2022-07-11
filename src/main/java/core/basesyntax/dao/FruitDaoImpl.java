@@ -6,16 +6,16 @@ import java.util.Map;
 public class FruitDaoImpl implements FruitDao {
     @Override
     public void update(String key, int value) {
-        Storage.fruitsAvailable.put(key, value);
+        Storage.fruitsMap.put(key, value);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return Storage.fruitsAvailable;
+        return Storage.fruitsMap;
     }
 
     @Override
     public int get(String key) {
-        return Storage.fruitsAvailable.get(key) == null ? 0 : Storage.fruitsAvailable.get(key);
+        return Storage.fruitsMap.get(key) == null ? 0 : Storage.fruitsMap.get(key);
     }
 }

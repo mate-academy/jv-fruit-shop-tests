@@ -22,7 +22,7 @@ public class ReportServiceTest {
 
     @Test
     public void makeReport_ok() {
-        Storage.fruitsAvailable.putAll(Map.of(
+        Storage.fruitsMap.putAll(Map.of(
                 "apple", 65,
                 "banana", 62,
                 "orange", 6,
@@ -38,6 +38,6 @@ public class ReportServiceTest {
 
     @After
     public void afterEach() {
-        Storage.fruitsAvailable.clear();
+        Storage.fruitsMap.clear();
     }
 }

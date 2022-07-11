@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.impl.WriterServiceImpl;
+import core.basesyntax.impl.FileWriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,11 +12,11 @@ import org.junit.Test;
 
 public class WriteServiceTest {
     private static final String FILE_NAME = "src/test/resources/testreport.csv";
-    private static WriterService writerService;
+    private static FileWriterService writerService;
 
     @BeforeClass
     public static void beforeAll() {
-        writerService = new WriterServiceImpl();
+        writerService = new FileWriterServiceImpl();
     }
 
     @Test

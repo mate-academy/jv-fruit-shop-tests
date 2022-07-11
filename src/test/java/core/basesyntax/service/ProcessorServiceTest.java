@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.impl.ProcessorServiceImpl;
+import core.basesyntax.impl.TransactionProcessorServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
 import core.basesyntax.transaction.BalanceTransactionHandler;
@@ -22,7 +22,7 @@ import org.junit.Test;
 public class ProcessorServiceTest {
     private static FruitDao dao;
     private static TransactionStrategy strategy;
-    private static ProcessorService processorService;
+    private static TransactionProcessorService processorService;
 
     @BeforeClass
     public static void beforeAll() {
@@ -33,7 +33,7 @@ public class ProcessorServiceTest {
         transactionHandlersMap.put("r", new ReturnTransactionHandler());
         dao = new FruitDaoImpl();
         strategy = new TransactionStrategyImpl(transactionHandlersMap);
-        processorService = new ProcessorServiceImpl(dao, strategy);
+        processorService = new TransactionProcessorServiceImpl(dao, strategy);
     }
 
     @Test
@@ -64,6 +64,6 @@ public class ProcessorServiceTest {
 
     @After
     public void afterEach() {
-        Storage.fruitsAvailable.clear();
+        Storage.fruitsMap.clear();
     }
 }

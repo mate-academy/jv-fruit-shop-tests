@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.impl.ReaderServiceImpl;
+import core.basesyntax.impl.FileReaderServiceImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,11 +10,11 @@ public class ReaderServiceTest {
     private static final String VALID_FILE_NAME = "src/test/resources/testfile.csv";
     private static final String INVALID_FILE_NAME = "src/test/resources/ababagalamaga.geometrydash";
     private static final String EMPTY_FILE_NAME = "src/test/resources/emptyfile.csv";
-    private static ReaderService readerService;
+    private static FileReaderService readerService;
 
     @BeforeClass
     public static void beforeAll() {
-        readerService = new ReaderServiceImpl();
+        readerService = new FileReaderServiceImpl();
     }
 
     @Test

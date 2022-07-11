@@ -26,4 +26,26 @@ public class ReturnTransactionImplTest {
         assertTrue(Storage.getFruitStore().containsKey("banana")
                 && Storage.getFruitStore().containsValue(40));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_fruitValue_null_NotOK() {
+        String wrongFruit = null;
+        OperationHandler operationHandler = new ReturnTransactionImpl();
+        operationHandler.handle(wrongFruit, 30);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_cantFindFruitInMap_NotOK() {
+        testStorageMap.put("banana", 30);
+        Storage.setFruitStore(testStorageMap);
+        OperationHandler operationHandler = new ReturnTransactionImpl();
+        operationHandler.handle("coconut", 2);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_fruitQuantityLessThanMin_NotOK() {
+        int wrongQuantity = -30;
+        OperationHandler operationHandler = new ReturnTransactionImpl();
+        operationHandler.handle("banana", wrongQuantity);
+    }
 }

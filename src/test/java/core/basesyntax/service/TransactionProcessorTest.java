@@ -90,10 +90,50 @@ public class TransactionProcessorTest {
                 && Storage.getFruitStore().containsValue(40));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void process_transactionListNull_NotOK() {
+        List<String> transactions = null;
         TransactionProcessor transactionProcessor
                 = new TransactionProcessorImpl(operationHandlerMap);
-        transactionProcessor.process(null);
+        transactionProcessor.process(transactions);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void process_handlerMap_null_NotOK() {
+        List<String> transactions = new ArrayList<>();
+        Map<String, OperationHandler> testMap1 = null;
+        TransactionProcessor transactionProcessor
+                = new TransactionProcessorImpl(testMap1);
+        transactionProcessor.process(transactions);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void process_transactionListContains_null_NotOK() {
+        List<String> transactions = new ArrayList<>();
+        transactions.add(TEST_FILE_HEADER);
+        transactions.add(null);
+        TransactionProcessor transactionProcessor
+                = new TransactionProcessorImpl(operationHandlerMap);
+        transactionProcessor.process(transactions);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void process_transactionListContainsEmptyLines_NotOK() {
+        List<String> transactions = new ArrayList<>();
+        transactions.add(TEST_FILE_HEADER);
+        transactions.add("");
+        TransactionProcessor transactionProcessor
+                = new TransactionProcessorImpl(operationHandlerMap);
+        transactionProcessor.process(transactions);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void process_handlerNotCorrect_NotOK() {
+        List<String> transactions = new ArrayList<>();
+        transactions.add(TEST_FILE_HEADER);
+        transactions.add("k,banana,60");
+        TransactionProcessor transactionProcessor
+                = new TransactionProcessorImpl(operationHandlerMap);
+        transactionProcessor.process(transactions);
     }
 }

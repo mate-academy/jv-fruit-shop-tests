@@ -24,4 +24,18 @@ public class BalanceTransactionImplTest {
         assertTrue(Storage.getFruitStore().containsKey("banana")
                 && Storage.getFruitStore().containsValue(30));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_fruitValue_null_NotOK() {
+        String wrongFruit = null;
+        OperationHandler operationHandler = new BalanceTransactionImpl();
+        operationHandler.handle(wrongFruit, 30);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_fruitQuantityLessThanMin_NotOK() {
+        int wrongQuantity = -30;
+        OperationHandler operationHandler = new BalanceTransactionImpl();
+        operationHandler.handle("banana", wrongQuantity);
+    }
 }

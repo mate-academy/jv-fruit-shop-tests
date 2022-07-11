@@ -13,14 +13,13 @@ import org.junit.Test;
 public class ReportCreatorServiceTest {
     private static final Map<String, Integer> testMap = new HashMap<>(3);
     private static final List<String> expected = new ArrayList<>();
-    private static final String testFileHeader = "fruit,quantity";
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         testMap.put("banana", 30);
         testMap.put("apple", 50);
         testMap.put("pineapple", 22);
-        expected.add(testFileHeader);
+        expected.add("fruit,quantity");
         expected.add(System.lineSeparator());
         expected.add("banana" + "," + "30");
         expected.add(System.lineSeparator());
@@ -36,10 +35,18 @@ public class ReportCreatorServiceTest {
         assertEquals(testList, expected);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void reportMap_null_NotOK() {
         Map<String, Integer> testMap1 = null;
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         reportCreatorService.createReport(testMap1);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void reportMap_contains_null_NotOK() {
+        Map<String, Integer> testMap2 = new HashMap<>();
+        testMap2.put(null, null);
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        reportCreatorService.createReport(testMap2);
     }
 }

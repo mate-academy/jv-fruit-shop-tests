@@ -36,14 +36,21 @@ public class FileWriterTest {
         assertTrue(reportFile.exists());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void writeToFile_nullList_NotOK() {
         List<String> testList2 = null;
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(dayReportTestFilePath, testList2);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_emptyList_NotOK() {
+        List<String> testList2 = new ArrayList<>();
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(dayReportTestFilePath, testList2);
+    }
+
+    @Test(expected = RuntimeException.class)
     public void writeToFile_testListContains_null_NotOK() {
         List<String> testList1 = new ArrayList<>();
         testList1.add(null);
@@ -55,5 +62,12 @@ public class FileWriterTest {
     public void writeToFile_reportFileSize_OK() {
         File file = new File(dayReportTestFilePath);
         assertTrue(file.length() == FILE_REPORT_SIZE);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_filePath_null_NotOK() {
+        String wrongDayReportTestFilePath = null;
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(wrongDayReportTestFilePath, testList);
     }
 }

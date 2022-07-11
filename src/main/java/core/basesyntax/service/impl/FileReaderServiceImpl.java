@@ -11,7 +11,14 @@ import java.util.List;
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
+        if (filePath == null) {
+            throw new RuntimeException("Path to file can not be null!");
+        }
         File sourceFile = new File(filePath);
+        if (!sourceFile.exists()) {
+            throw new RuntimeException("Source file does not exist: path to file " + filePath
+            + "is wrong!");
+        }
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(sourceFile))) {
             String lineFromFile = bufferedReader.readLine();

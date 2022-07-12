@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorServiceTest {
-    private static final Map<String, Integer> testMap = new HashMap<>(3);
+    private static final Map<String, Integer> testMap = new HashMap<>();
     private static final List<String> expected = new ArrayList<>();
+    private static ReportCreatorService reportCreatorService;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -23,30 +25,31 @@ public class ReportCreatorServiceTest {
         expected.add(System.lineSeparator());
         expected.add("banana" + "," + "30");
         expected.add(System.lineSeparator());
-        expected.add("pineapple" + "," + "22");
-        expected.add(System.lineSeparator());
         expected.add("apple" + "," + "50");
+        expected.add(System.lineSeparator());
+        expected.add("pineapple" + "," + "22");
+    }
+
+    @Before
+    public void setUp() throws Exception {
+        reportCreatorService = new ReportCreatorServiceImpl();
     }
 
     @Test
-    public void reportCreatorService_ListValuesMatch_OK() {
-        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+    public void createReport_OK() {
         List<String> testList = reportCreatorService.createReport(testMap);
         assertEquals(testList, expected);
     }
 
     @Test(expected = RuntimeException.class)
-    public void reportMap_null_NotOK() {
-        Map<String, Integer> testMap1 = null;
-        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
-        reportCreatorService.createReport(testMap1);
+    public void createReport_nullReportMap_NotOK() {
+        reportCreatorService.createReport(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void reportMap_contains_null_NotOK() {
         Map<String, Integer> testMap2 = new HashMap<>();
         testMap2.put(null, null);
-        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         reportCreatorService.createReport(testMap2);
     }
 }

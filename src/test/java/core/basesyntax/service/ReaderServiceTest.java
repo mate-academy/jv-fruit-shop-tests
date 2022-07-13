@@ -42,7 +42,7 @@ public class ReaderServiceTest {
     }
 
     @Test
-    public void readNotExistingFile_shouldThrowRuntimeException_ok() {
+    public void readFile_notExistingFile_notOk() {
         try {
             readerService.readFile(INVALID_FILE_NAME);
         } catch (RuntimeException e) {
@@ -53,7 +53,7 @@ public class ReaderServiceTest {
     }
 
     @Test
-    public void readEmptyFile_ok() {
+    public void readFile_emptyFile_ok() {
         List<String> actual = readerService.readFile(EMPTY_FILE_NAME);
         List<String> expected = List.of();
         Assert.assertEquals(expected, actual);

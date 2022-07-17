@@ -15,8 +15,8 @@ import org.junit.Test;
 public class FileWriterServiceImplTest {
     private static final String REPORT = "fruit,quantity, banana,152, apple,90";
     private static final String HEADER = "fruit,quantity";
-    private static final String FIRST_FRUIT = "banana,152";
-    private static final String SECOND_FRUIT = "apple,90";
+    private static final String BANANA_FRUIT = "banana,152";
+    private static final String APPLE_FRUIT = "apple,90";
     private static FileWriterService fileWriterService;
     private static String pathToWriteFileOk;
     private static String pathToWriteFileNotOk;
@@ -32,8 +32,8 @@ public class FileWriterServiceImplTest {
         pathToWriteFileNotOk = "";
         expected = new ArrayList<>();
         expected.add(HEADER);
-        expected.add(FIRST_FRUIT);
-        expected.add(SECOND_FRUIT);
+        expected.add(BANANA_FRUIT);
+        expected.add(APPLE_FRUIT);
     }
 
     @Test

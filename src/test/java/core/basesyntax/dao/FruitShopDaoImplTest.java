@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import java.util.HashMap;
@@ -12,9 +11,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopDaoImplTest {
-    private static final String FIRST_KEY = "banana";
-    private static final String SECOND_KEY = "apple";
-    private static final int PUT_NUMBER = 11;
+    private static final String BANANA_KEY = "banana";
+    private static final String APPLE_KEY = "apple";
+    private static final int PUT_VALUE = 11;
     private static FruitShopDao fruitShopDao;
     private static Map<String, Integer> expected;
 
@@ -22,28 +21,26 @@ public class FruitShopDaoImplTest {
     public static void beforeClass() {
         fruitShopDao = new FruitShopDaoImpl();
         expected = new HashMap<>();
-        expected.put(FIRST_KEY, 20);
-        expected.put(SECOND_KEY, 10);
+        expected.put(BANANA_KEY, 20);
+        expected.put(APPLE_KEY, 10);
     }
 
     @Before
     public void setUp() {
-        Storage.fruits.put(FIRST_KEY, 20);
-        Storage.fruits.put(SECOND_KEY, 10);
+        Storage.fruits.put(BANANA_KEY, 20);
+        Storage.fruits.put(APPLE_KEY, 10);
     }
 
     @Test
     public void put_Ok() {
-        assertEquals(expected.get(SECOND_KEY), Storage.fruits.get(SECOND_KEY));
-        fruitShopDao.put(SECOND_KEY, PUT_NUMBER);
-        assertNotEquals(expected.get(SECOND_KEY), Storage.fruits.get(SECOND_KEY));
-        assertEquals(PUT_NUMBER, Storage.fruits.get(SECOND_KEY));
+        fruitShopDao.put(APPLE_KEY, PUT_VALUE);
+        assertEquals(PUT_VALUE, Storage.fruits.get(APPLE_KEY));
     }
 
     @Test
     public void get_Ok() {
-        assertEquals(expected.get(FIRST_KEY), fruitShopDao.get(FIRST_KEY));
-        assertEquals(expected.get(SECOND_KEY), fruitShopDao.get(SECOND_KEY));
+        assertEquals(expected.get(BANANA_KEY), fruitShopDao.get(BANANA_KEY));
+        assertEquals(expected.get(APPLE_KEY), fruitShopDao.get(APPLE_KEY));
     }
 
     @Test

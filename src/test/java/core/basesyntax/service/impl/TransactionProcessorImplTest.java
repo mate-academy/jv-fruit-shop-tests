@@ -20,12 +20,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessorImplTest {
-    private static final String FIRST_KEY = "banana";
-    private static final String SECOND_KEY = "apple";
+    private static final String BANANA_KEY = "banana";
+    private static final String APPLE_KEY = "apple";
     private static FruitShopDao fruitShopDao;
     private static TransactionProcessor transactionProcessor;
     private static List<FruitTransaction> fruitTransactions;
@@ -46,25 +47,29 @@ public class TransactionProcessorImplTest {
         OperationStrategy operationStrategy = new OperationStrategy(handlerMap);
         transactionProcessor = new TransactionProcessorImpl(operationStrategy);
         fruitTransactions = new ArrayList<>(List.of(
-                new FruitTransaction(BALANCE,FIRST_KEY,20),
-                new FruitTransaction(SUPPLY,FIRST_KEY,100),
-                new FruitTransaction(PURCHASE,FIRST_KEY,13),
-                new FruitTransaction(RETURN,SECOND_KEY,10)));
+                new FruitTransaction(BALANCE, BANANA_KEY,20),
+                new FruitTransaction(SUPPLY, BANANA_KEY,100),
+                new FruitTransaction(PURCHASE, BANANA_KEY,13),
+                new FruitTransaction(RETURN, APPLE_KEY,10)));
         expected = new HashMap<>();
-        expected.put(FIRST_KEY, 107);
-        expected.put(SECOND_KEY, 10);
+        expected.put(BANANA_KEY, 107);
+        expected.put(APPLE_KEY, 10);
     }
 
     @Test
     public void process_Ok() {
         transactionProcessor.process(fruitTransactions);
-        System.out.println(fruitShopDao.getAll().toString());
         assertEquals(expected.toString(), Storage.fruits.toString());
     }
 
     @Test
     public void process_NotOk() {
-        assertThrows(NullPointerException.class,
+        assertThrows(RuntimeException.class,
                 () -> transactionProcessor.process(null));
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
     }
 }

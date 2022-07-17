@@ -14,49 +14,49 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static final String HEADER = "type,fruit,quantity";
-    private static final String FIRST_KEY = "banana";
-    private static final String SECOND_KEY = "apple";
+    private static final String BANANA_KEY = "banana";
+    private static final String APPLE_KEY = "apple";
     private static FileReaderService fileReaderService;
-    private static String pathToReadFileOk;
-    private static String pathToReadFileNotOk;
+    private static String validFilePath;
+    private static String nonExistentFilePath;
     private static List<String> expected;
 
     @BeforeClass
     public static void beforeClass() {
         fileReaderService = new FileReaderServiceImpl();
-        pathToReadFileOk = "src"
+        validFilePath = "src"
                 + File.separator + "main"
                 + File.separator + "resources"
                 + File.separator + "outputFile.csv";
-        pathToReadFileNotOk = "src"
+        nonExistentFilePath = "src"
                 + File.separator + "main"
                 + File.separator + "resources"
                 + File.separator + "outputFil.csv";
         expected = new ArrayList<>(List.of(HEADER,
-                "b," + FIRST_KEY + ",20",
-                "b," + SECOND_KEY + ",100",
-                "s," + FIRST_KEY + ",100"));
+                "b," + BANANA_KEY + ",20",
+                "b," + APPLE_KEY + ",100",
+                "s," + BANANA_KEY + ",100"));
         String date = HEADER + ", "
-                + "b," + FIRST_KEY + ",20, "
-                + "b," + SECOND_KEY + ",100, "
-                + "s," + FIRST_KEY + ",100";
-        File file = new File(pathToReadFileOk);
+                + "b," + BANANA_KEY + ",20, "
+                + "b," + APPLE_KEY + ",100, "
+                + "s," + BANANA_KEY + ",100";
+        File file = new File(validFilePath);
         try {
             Files.writeString(file.toPath(), date);
         } catch (IOException e) {
-            throw new RuntimeException("Can not write file: " + pathToReadFileOk, e);
+            throw new RuntimeException("Can not write file: " + validFilePath, e);
         }
     }
 
     @Test
     public void readFromFile_NotOk() {
         assertThrows(RuntimeException.class,
-                () -> fileReaderService.readFromFile(pathToReadFileNotOk));
+                () -> fileReaderService.readFromFile(nonExistentFilePath));
     }
 
     @Test
     public void returnList_Ok() {
         assertEquals(expected.toString(),
-                fileReaderService.readFromFile(pathToReadFileOk).toString());
+                fileReaderService.readFromFile(validFilePath).toString());
     }
 }

@@ -19,12 +19,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SubtractionOperationHandlerTest {
-    private static final int EXPECTED = 119;
     private static final String BANANA_KEY = "banana";
 
     @BeforeClass
     public static void beforeClass() {
-
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -47,8 +45,8 @@ public class SubtractionOperationHandlerTest {
     }
 
     @Test
-    public void handle() {
-        assertEquals(EXPECTED, Storage.fruits.get(BANANA_KEY));
+    public void handle_Ok() {
+        assertEquals(119, Storage.fruits.get(BANANA_KEY));
     }
 
     @AfterClass

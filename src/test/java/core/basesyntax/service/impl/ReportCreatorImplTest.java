@@ -38,8 +38,7 @@ public class ReportCreatorImplTest {
 
     @Test
     public void emptyReport_Ok() {
-        assertTrue(Storage.fruits.isEmpty());
-        reportCreator.create();
+        assertEquals(HEADER, reportCreator.create());
     }
 
     @Test

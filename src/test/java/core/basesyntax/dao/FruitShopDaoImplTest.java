@@ -11,9 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopDaoImplTest {
-    private static final String BANANA_KEY = "banana";
-    private static final String APPLE_KEY = "apple";
-    private static final int PUT_VALUE = 11;
     private static FruitShopDao fruitShopDao;
     private static Map<String, Integer> expected;
 
@@ -21,26 +18,26 @@ public class FruitShopDaoImplTest {
     public static void beforeClass() {
         fruitShopDao = new FruitShopDaoImpl();
         expected = new HashMap<>();
-        expected.put(BANANA_KEY, 20);
-        expected.put(APPLE_KEY, 10);
+        expected.put("banana", 20);
+        expected.put("apple", 10);
     }
 
     @Before
     public void setUp() {
-        Storage.fruits.put(BANANA_KEY, 20);
-        Storage.fruits.put(APPLE_KEY, 10);
+        Storage.fruits.put("banana", 20);
+        Storage.fruits.put("apple", 10);
     }
 
     @Test
     public void put_Ok() {
-        fruitShopDao.put(APPLE_KEY, PUT_VALUE);
-        assertEquals(PUT_VALUE, Storage.fruits.get(APPLE_KEY));
+        fruitShopDao.put("apple", 11);
+        assertEquals(11, Storage.fruits.get("apple"));
     }
 
     @Test
     public void get_Ok() {
-        assertEquals(expected.get(BANANA_KEY), fruitShopDao.get(BANANA_KEY));
-        assertEquals(expected.get(APPLE_KEY), fruitShopDao.get(APPLE_KEY));
+        assertEquals(expected.get("banana"), fruitShopDao.get("banana"));
+        assertEquals(expected.get("apple"), fruitShopDao.get("apple"));
     }
 
     @Test

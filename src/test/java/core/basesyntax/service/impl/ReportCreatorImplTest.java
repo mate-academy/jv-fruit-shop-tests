@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreator;
 import org.junit.After;
 import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReportCreatorImplTest {
     private static final String HEADER = "fruit,quantity";
@@ -37,6 +36,7 @@ public class ReportCreatorImplTest {
 
     @Test
     public void emptyReport_Ok() {
+        assertTrue(Storage.fruits.isEmpty());
         reportCreator.create();
     }
 

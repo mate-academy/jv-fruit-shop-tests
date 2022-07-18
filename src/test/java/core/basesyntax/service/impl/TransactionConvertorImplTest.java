@@ -48,7 +48,7 @@ public class TransactionConvertorImplTest {
     }
 
     @Test
-    public void otherLetter_NotOk() {
+    public void notSupportedLetter_NotOk() {
         List<String> lines = new ArrayList<>(List.of(HEADER,
                 "g," + BANANA_KEY + ",20"));
         assertThrows(RuntimeException.class,

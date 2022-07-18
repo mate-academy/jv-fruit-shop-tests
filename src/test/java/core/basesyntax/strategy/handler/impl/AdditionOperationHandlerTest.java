@@ -18,7 +18,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class OperationHandlerTest {
+public class AdditionOperationHandlerTest {
     private static final int EXPECTED = 119;
     private static final String BANANA_KEY = "banana";
 

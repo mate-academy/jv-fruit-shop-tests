@@ -55,5 +55,4 @@ public class SubtractionOperationHandlerTest {
     public static void afterClass() {
         Storage.fruits.clear();
     }
-
 }

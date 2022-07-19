@@ -47,9 +47,6 @@ public class ParserServiceImplTest {
                             + actualTransaction.getQuantity(), expectedTransaction.getQuantity(),
                     actualTransaction.getQuantity());
         }
-        fileInfo.clear();
-        actualFruitTransactions.clear();
-        expectedFruitTransactions.clear();
     }
 
     @Test(expected = RuntimeException.class)

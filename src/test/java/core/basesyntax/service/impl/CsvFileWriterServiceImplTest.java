@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService writerService;
-    private static final String REPORT = "Hello, world!";
+    private static final String REPORT_CONTENT = "Hello, world!";
     private static final String NOT_VALID_PATH = "src/main/java/reports/report.csv";
     private static final String VALID_PATH = "src/test/resources/testReport.csv";
 
@@ -19,12 +19,12 @@ public class CsvFileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_NotValidPath_NotOk() {
-        writerService.writeToFile(REPORT, NOT_VALID_PATH);
+        writerService.writeToFile(REPORT_CONTENT, NOT_VALID_PATH);
     }
 
     @Test
     public void writeToFile_ReportFileExists_Ok() {
-        writerService.writeToFile(REPORT, VALID_PATH);
+        writerService.writeToFile(REPORT_CONTENT, VALID_PATH);
         File file = new File(VALID_PATH);
         Assert.assertTrue(file.exists());
     }

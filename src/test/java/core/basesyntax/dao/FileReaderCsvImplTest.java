@@ -1,15 +1,17 @@
 package core.basesyntax.dao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class FileReaderCsvImplTest {
     private static final String FILENAME = "src/test/resources/testReaderFile.csv";
+    private static final String NON_EXISTENT_FILENAME =
+                                "src/test/resources/testReaderNonExistentFile.csv";
     private final FileReader fileReader = new FileReaderCsvImpl();
 
     @Test
@@ -56,10 +58,9 @@ public class FileReaderCsvImplTest {
 
     @Test
     public void readFromNonExistentFile_NotOk() {
-        String notExistedFile = "NonExistent" + FILENAME;
         RuntimeException thrown = assertThrows(RuntimeException.class, () ->
-                fileReader.readFromFile(notExistedFile),
+                fileReader.readFromFile(NON_EXISTENT_FILENAME),
                 "Exception is expecting");
-        assertEquals("Can't read from file " + notExistedFile, thrown.getMessage());
+        assertEquals("Can't read from file " + NON_EXISTENT_FILENAME, thrown.getMessage());
     }
 }

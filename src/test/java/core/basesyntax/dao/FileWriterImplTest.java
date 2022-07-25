@@ -43,7 +43,7 @@ public class FileWriterImplTest {
                 + "apple,110";
 
         RuntimeException thrown = assertThrows(RuntimeException.class, () ->
-                        outputCsvFile.writeToFile(invalidFile, "report"),
+                        outputCsvFile.writeToFile(invalidFile, report),
                 "Exception is expecting");
         assertEquals("Can't write to file " + invalidFile, thrown.getMessage());
     }

@@ -49,7 +49,9 @@ public class Transaction {
             return false;
         }
         Transaction that = (Transaction) o;
-        return quantity == that.quantity && operation == that.operation && Objects.equals(fruit, that.fruit);
+        return quantity == that.quantity
+                && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override

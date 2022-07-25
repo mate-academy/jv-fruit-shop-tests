@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
@@ -26,8 +26,8 @@ public class TransitionConvertorImplTest {
         List<Transaction> expectedTransactions = getListTransaction();
         List<Transaction> actualTransactions = new TransitionConvertorImpl().convert(stringList);
 
-        assertEquals(expectedTransactions, actualTransactions,
-                "Converted List of Transactions doesn't equal to expected");
+        assertEquals("Converted List of Transactions doesn't equal to expected",
+                expectedTransactions, actualTransactions);
     }
 
     private List<Transaction> getListTransaction() {

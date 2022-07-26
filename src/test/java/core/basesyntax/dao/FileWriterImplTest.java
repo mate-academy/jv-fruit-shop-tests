@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,7 +31,6 @@ public class FileWriterImplTest {
     @Test
     public void writeToFile_Ok() {
         Path filePath = Path.of(FILENAME);
-
         outputCsvFile.writeToFile(filePath.toString(), report);
         List<String> lines;
         try {

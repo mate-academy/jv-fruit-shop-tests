@@ -39,7 +39,7 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFileExceptionTest_NotOk() {
+    public void writeToFile_InvalidFileName_NotOk() {
         String invalidFile = FILENAME + "/%";
         String report = "fruit,quantity\n"
                 + "cherry,47\n"
@@ -49,7 +49,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void exceptionMessageWriteToInvalidFileName_NotOk() {
+    public void writeToFile_InvalidFileNameExceptionMessage_Ok() {
         String invalidFile = FILENAME + "/%";
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Can't write to file " + invalidFile);

@@ -7,6 +7,7 @@ import core.basesyntax.model.Fruit;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
+    private final ReportService reportService = new ReportServiceImpl();
 
     @Test
     public void makeReport_Ok() {
@@ -22,7 +23,7 @@ public class ReportServiceImplTest {
                 + cherry.getName() + "," + 10 + System.lineSeparator()
                 + banana.getName() + "," + 20 + System.lineSeparator()
                 + apple.getName() + "," + 30;
-        String actual = new ReportServiceImpl().makeReport();
+        String actual = reportService.makeReport();
 
         assertEquals("The report was compiled incorrectly", expected, actual);
     }

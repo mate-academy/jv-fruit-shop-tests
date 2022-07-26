@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.Test;
 
 public class TransitionConvertorImplTest {
+    private final TransitionConvertor transitionConvertor = new TransitionConvertorImpl();
+
     @Test
     public void convertNormalListOfStrings_Ok() {
         List<String> stringList = new ArrayList<>();
@@ -24,7 +26,7 @@ public class TransitionConvertorImplTest {
         stringList.add("r,apple,20");
 
         List<Transaction> expectedTransactions = getListTransaction();
-        List<Transaction> actualTransactions = new TransitionConvertorImpl().convert(stringList);
+        List<Transaction> actualTransactions = transitionConvertor.convert(stringList);
 
         assertEquals("Converted List of Transactions doesn't equal to expected",
                 expectedTransactions, actualTransactions);

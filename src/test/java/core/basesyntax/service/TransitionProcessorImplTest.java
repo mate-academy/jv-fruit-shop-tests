@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,6 +23,10 @@ public class TransitionProcessorImplTest {
     @BeforeClass
     public static void beforeClass() {
         transactionProcessor = new TransactionProcessorImpl(new OperationStrategyImpl());
+    }
+
+    @Before
+    public void setUp() {
         Storage.fruits.clear();
     }
 
@@ -38,14 +42,17 @@ public class TransitionProcessorImplTest {
                 expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void process_NullTransactionList_NotOk() {
+    @Test
+    public void process_NullTransactionList_Ok() {
         transactionProcessor.process(null);
-        fail("Process method of NULL must throw NullPointerException exception");
+        Map<Fruit, Integer> expected = new HashMap<>();
+        Map<Fruit, Integer> actual = Storage.fruits;
+        assertEquals("Result of TransactionProcessorImpl.process doesn't equal to expected",
+                expected, actual);
     }
 
     @Test
-    public void process_EmptyTransactionList_NotOk() {
+    public void process_EmptyTransactionList_Ok() {
         List<Transaction> transactions = new ArrayList<>();
         transactionProcessor.process(transactions);
         Map<Fruit, Integer> expected = new HashMap<>();

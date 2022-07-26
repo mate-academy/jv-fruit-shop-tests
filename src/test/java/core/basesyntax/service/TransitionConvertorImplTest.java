@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
@@ -41,17 +40,21 @@ public class TransitionConvertorImplTest {
                 expectedTransactions, actualTransactions);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void convert_NullStringList_NotOk() {
-        transitionConvertor.convert(null);
-        fail("Convert method of NULL must throw NullPointerException exception");
+    @Test
+    public void convert_NullStringList_Ok() {
+        List<Transaction> actual = transitionConvertor.convert(null);
+        List<Transaction> expected = new ArrayList<>();
+        assertEquals("Converted List of Transactions doesn't equal to expected",
+                expected, actual);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void convert_EmptyStringList_NotOk() {
+    @Test
+    public void convert_EmptyStringList_Ok() {
         List<String> stringList = new ArrayList<>();
-        transitionConvertor.convert(stringList);
-        fail("Convert method of empty String must throw IndexOutOfBoundsException exception");
+        List<Transaction> actual = transitionConvertor.convert(stringList);
+        List<Transaction> expected = new ArrayList<>();
+        assertEquals("Converted List of Transactions doesn't equal to expected",
+                expected, actual);
     }
 
     private List<Transaction> getTransactionList() {

@@ -24,10 +24,8 @@ public class TransitionConvertorImplTest {
         stringList.add("p,apple,40");
         stringList.add("r,banana,10");
         stringList.add("r,apple,20");
-
         List<Transaction> expectedTransactions = getListTransaction();
         List<Transaction> actualTransactions = transitionConvertor.convert(stringList);
-
         assertEquals("Converted List of Transactions doesn't equal to expected",
                 expectedTransactions, actualTransactions);
     }
@@ -36,7 +34,6 @@ public class TransitionConvertorImplTest {
         Fruit banana = new Fruit("banana");
         Fruit apple = new Fruit("apple");
         List<Transaction> transactionList = new ArrayList<>();
-
         transactionList.add(getTransaction(Operation.BALANCE, banana, 80));
         transactionList.add(getTransaction(Operation.BALANCE, apple, 160));
         transactionList.add(getTransaction(Operation.SUPPLY, banana, 40));
@@ -45,7 +42,6 @@ public class TransitionConvertorImplTest {
         transactionList.add(getTransaction(Operation.PURCHASE, apple, 40));
         transactionList.add(getTransaction(Operation.RETURN, banana, 10));
         transactionList.add(getTransaction(Operation.RETURN, apple, 20));
-
         return transactionList;
     }
 

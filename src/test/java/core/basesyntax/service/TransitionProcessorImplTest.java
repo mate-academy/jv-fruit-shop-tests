@@ -15,29 +15,31 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransitionProcessorImplTest {
+    private static TransactionProcessor transactionProcessor;
     private final Fruit banana = new Fruit("banana");
     private final Fruit apple = new Fruit("apple");
 
     @BeforeClass
     public static void beforeClass() {
+        transactionProcessor = new TransactionProcessorImpl(new OperationStrategyImpl());
         Storage.fruits.clear();
     }
 
     @Test
     public void processNormalTransactions_Ok() {
-        List<Transaction> transactions = getListTransaction();
+        List<Transaction> transactions = getTransactionList();
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(banana, 110);
         expected.put(apple, 220);
 
-        new TransactionProcessorImpl(new OperationStrategyImpl()).process(transactions);
+        transactionProcessor.process(transactions);
         Map<Fruit, Integer> actual = Storage.fruits;
 
         assertEquals("Result of TransactionProcessorImpl.process doesn't equal to expected",
                 expected, actual);
     }
 
-    private List<Transaction> getListTransaction() {
+    private List<Transaction> getTransactionList() {
         List<Transaction> transactionList = new ArrayList<>();
         transactionList.add(getTransaction(Operation.BALANCE, banana, 80));
         transactionList.add(getTransaction(Operation.BALANCE, apple, 160));

@@ -34,7 +34,6 @@ public class FileWriterImplTest {
             throw new RuntimeException("Can't read from file " + FILENAME, e);
         }
         String actualLines = String.join("\n", lines);
-
         assertEquals("Wrote lines to file " + FILENAME + " don't equals to expected",
                 expectedLines, actualLines);
     }
@@ -59,6 +58,5 @@ public class FileWriterImplTest {
                 + "banana,152\n"
                 + "apple,110";
         outputCsvFile.writeToFile(invalidFile, report);
-        throw new RuntimeException("Can't write to file " + invalidFile);
     }
 }

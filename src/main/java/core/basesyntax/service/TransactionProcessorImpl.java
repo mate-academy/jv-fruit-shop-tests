@@ -13,6 +13,9 @@ public class TransactionProcessorImpl implements TransactionProcessor {
 
     @Override
     public void process(List<Transaction> transactions) {
+        if (transactions == null || transactions.size() == 0) {
+            return;
+        }
         transactions.forEach(transaction ->
                 operationStrategy.get(transaction.getOperation()).handle(transaction));
     }

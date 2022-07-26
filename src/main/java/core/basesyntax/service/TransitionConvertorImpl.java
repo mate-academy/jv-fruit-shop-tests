@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,9 @@ public class TransitionConvertorImpl implements TransitionConvertor {
 
     @Override
     public List<Transaction> convert(List<String> lines) {
+        if (lines == null || lines.size() == 0) {
+            return new ArrayList<>();
+        }
         lines.remove(0);
         return lines.stream()
                 .map(this::getTransactionFromCsvRow)

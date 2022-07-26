@@ -15,7 +15,6 @@ public class ReportServiceImplTest {
         Fruit cherry = new Fruit("cherry");
         Fruit banana = new Fruit("banana");
         Fruit apple = new Fruit("apple");
-
         Storage.fruits.put(cherry, 10);
         Storage.fruits.put(banana, 20);
         Storage.fruits.put(apple, 30);
@@ -24,7 +23,6 @@ public class ReportServiceImplTest {
                 + banana.getName() + "," + 20 + System.lineSeparator()
                 + apple.getName() + "," + 30;
         String actual = reportService.makeReport();
-
         assertEquals("The report was compiled incorrectly", expected, actual);
     }
 }

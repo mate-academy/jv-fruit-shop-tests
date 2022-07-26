@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
@@ -13,7 +14,7 @@ public class TransitionConvertorImplTest {
     private final TransitionConvertor transitionConvertor = new TransitionConvertorImpl();
 
     @Test
-    public void convertNormalListOfStrings_Ok() {
+    public void convert_Ok() {
         List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("b,banana,80");
@@ -24,13 +25,36 @@ public class TransitionConvertorImplTest {
         stringList.add("p,apple,40");
         stringList.add("r,banana,10");
         stringList.add("r,apple,20");
-        List<Transaction> expectedTransactions = getListTransaction();
+        List<Transaction> expectedTransactions = getTransactionList();
         List<Transaction> actualTransactions = transitionConvertor.convert(stringList);
         assertEquals("Converted List of Transactions doesn't equal to expected",
                 expectedTransactions, actualTransactions);
     }
 
-    private List<Transaction> getListTransaction() {
+    @Test
+    public void convert_WithoutTransactions_Ok() {
+        List<String> stringList = new ArrayList<>();
+        stringList.add("type,fruit,quantity");
+        List<Transaction> expectedTransactions = new ArrayList<>();
+        List<Transaction> actualTransactions = transitionConvertor.convert(stringList);
+        assertEquals("Converted List of Transactions doesn't equal to expected",
+                expectedTransactions, actualTransactions);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void convert_NullStringList_NotOk() {
+        transitionConvertor.convert(null);
+        fail("Convert method of NULL must throw NullPointerException exception");
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void convert_EmptyStringList_NotOk() {
+        List<String> stringList = new ArrayList<>();
+        transitionConvertor.convert(stringList);
+        fail("Convert method of empty String must throw IndexOutOfBoundsException exception");
+    }
+
+    private List<Transaction> getTransactionList() {
         Fruit banana = new Fruit("banana");
         Fruit apple = new Fruit("apple");
         List<Transaction> transactionList = new ArrayList<>();

@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -26,15 +27,29 @@ public class TransitionProcessorImplTest {
     }
 
     @Test
-    public void processNormalTransactions_Ok() {
+    public void process_Ok() {
         List<Transaction> transactions = getTransactionList();
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(banana, 110);
         expected.put(apple, 220);
-
         transactionProcessor.process(transactions);
         Map<Fruit, Integer> actual = Storage.fruits;
+        assertEquals("Result of TransactionProcessorImpl.process doesn't equal to expected",
+                expected, actual);
+    }
 
+    @Test(expected = NullPointerException.class)
+    public void process_NullTransactionList_NotOk() {
+        transactionProcessor.process(null);
+        fail("Process method of NULL must throw NullPointerException exception");
+    }
+
+    @Test
+    public void process_EmptyTransactionList_NotOk() {
+        List<Transaction> transactions = new ArrayList<>();
+        transactionProcessor.process(transactions);
+        Map<Fruit, Integer> expected = new HashMap<>();
+        Map<Fruit, Integer> actual = Storage.fruits;
         assertEquals("Result of TransactionProcessorImpl.process doesn't equal to expected",
                 expected, actual);
     }

@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class CsvReaderServiceTest {
     private static final Path TEST_FRUIT_CSV_FILE_PATH =
-            Path.of("src\\test\\resources\\fruits_test.csv");
+            Path.of("src/test/resources/fruits_test.csv");
     private static List<String> testFruitsCsvLines;
     private static CsvReaderService csvReaderService;
 
@@ -44,11 +44,11 @@ public class CsvReaderServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void read_fileNotExist_notOk() {
-        csvReaderService.read(Path.of("\\src\\test\\resources\\test.dat"));
+        csvReaderService.read(Path.of("/src/test/resources/test.dat"));
     }
 
     @Test(expected = RuntimeException.class)
     public void read_wrongFilePath_notOk() {
-        csvReaderService.read(Path.of("\\sr^c\\tes:*t\\res%ources\\te*st.dat"));
+        csvReaderService.read(Path.of("/sr^c/tes:*t/res%ources/te*st.dat"));
     }
 }

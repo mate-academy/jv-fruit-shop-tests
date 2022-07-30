@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class CsvWriterServiceTest {
     private static final Path TEST_REPORT_FILE_PATH =
-            Path.of("src\\test\\resources\\report_test.csv");
+            Path.of("src/test/resources/report_test.csv");
     private static String testReport;
     private static CsvWriterService csvWriterService;
 
@@ -54,6 +54,6 @@ public class CsvWriterServiceTest {
 
     @Test (expected = RuntimeException.class)
     public void write_wrongPath_notOk() {
-        csvWriterService.write(Path.of("\\sr^c\\tes:*t\\res%ources\\te*st.dat"), testReport);
+        csvWriterService.write(Path.of("/sr^c/tes:*t/res%ources/te*st.dat"), testReport);
     }
 }

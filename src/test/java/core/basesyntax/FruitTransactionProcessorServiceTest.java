@@ -28,9 +28,9 @@ import org.junit.Test;
 
 public class FruitTransactionProcessorServiceTest {
     private static final Path TEST_FRUIT_CSV_FILE_PATH =
-            Path.of("src\\test\\resources\\fruits_test.csv");
+            Path.of("src/test/resources/fruits_test.csv");
     private static final Path TEST_REPORT_FILE_PATH =
-            Path.of("src\\test\\resources\\report_test.csv");
+            Path.of("src/test/resources/report_test.csv");
     private static List<String> fruitsOperationsList;
     private static Map<String, Integer> expectedFruitsQuantityMap;
     private static FruitTransactionProcessorService fruitTransactionProcessorService;

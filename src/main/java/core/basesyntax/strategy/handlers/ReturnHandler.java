@@ -1,12 +1,12 @@
-package core.strategy.handlers;
+package core.basesyntax.strategy.handlers;
 
-import core.service.FruitService;
+import core.basesyntax.service.FruitService;
 
-public class SupplyHandler implements OperationHandler {
+public class ReturnHandler implements OperationHandler {
     private FruitService fruitService;
 
-    public SupplyHandler(FruitService fruitDao) {
-        this.fruitService = fruitDao;
+    public ReturnHandler(FruitService fruitService) {
+        this.fruitService = fruitService;
     }
 
     @Override

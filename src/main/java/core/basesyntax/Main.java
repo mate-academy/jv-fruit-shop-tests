@@ -1,23 +1,24 @@
-package core;
+package core.basesyntax;
 
-import core.dao.FruitDaoImpl;
-import core.service.CsvReaderService;
-import core.service.CsvWriterService;
-import core.service.FruitService;
-import core.service.FruitTransactionProcessorService;
-import core.service.ReportCreatorService;
-import core.service.impl.CsvReaderServiceImpl;
-import core.service.impl.CsvWriterServiceImpl;
-import core.service.impl.FruitServiceImpl;
-import core.service.impl.FruitTransactionProcessorServiceImpl;
-import core.service.impl.ReportCreatorServiceImpl;
-import core.strategy.OperationHandlerStrategy;
-import core.strategy.OperationHandlerStrategyImpl;
-import core.strategy.handlers.BalanceHandler;
-import core.strategy.handlers.OperationHandler;
-import core.strategy.handlers.PurchaseHandler;
-import core.strategy.handlers.ReturnHandler;
-import core.strategy.handlers.SupplyHandler;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.CsvReaderService;
+import core.basesyntax.service.CsvWriterService;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitTransactionProcessorService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.impl.CsvReaderServiceImpl;
+import core.basesyntax.service.impl.CsvWriterServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.strategy.OperationHandlerStrategy;
+import core.basesyntax.strategy.OperationHandlerStrategyImpl;
+import core.basesyntax.strategy.handlers.BalanceHandler;
+import core.basesyntax.strategy.handlers.OperationHandler;
+import core.basesyntax.strategy.handlers.PurchaseHandler;
+import core.basesyntax.strategy.handlers.ReturnHandler;
+import core.basesyntax.strategy.handlers.SupplyHandler;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class Main {
 
     public static void main(String[] args) {
         CsvReaderService csvReaderService = new CsvReaderServiceImpl();
-        List<String> fruitsOperations = csvReaderService.readFromFile(FRUITS_FILE_NAME);
+        List<String> fruitsOperations = csvReaderService.read(Path.of(FRUITS_FILE_NAME));
 
         Map<String, OperationHandler> operationsHandlerMap = initOperationsHandlerMap();
         OperationHandlerStrategy operationHandlerStrategy =
@@ -43,7 +44,7 @@ public class Main {
         String report = reportCreatorService.createReport();
 
         CsvWriterService csvWriterService = new CsvWriterServiceImpl();
-        csvWriterService.write(REPORT_FILE_NAME,report);
+        csvWriterService.write(Path.of(REPORT_FILE_NAME),report);
     }
 
     private static Map<String, OperationHandler> initOperationsHandlerMap() {

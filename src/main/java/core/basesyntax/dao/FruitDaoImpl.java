@@ -1,7 +1,8 @@
-package core.dao;
+package core.basesyntax.dao;
 
-import core.db.Storage;
+import core.basesyntax.db.Storage;
 import java.util.Map;
+import java.util.Optional;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -10,8 +11,8 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public int get(String fruitName) {
-        return Storage.fruitsMap.get(fruitName);
+    public Optional<Integer> get(String fruitName) {
+        return Optional.ofNullable(Storage.fruitsMap.get(fruitName));
     }
 
     @Override

@@ -1,18 +1,18 @@
-package core.strategy.handlers;
+package core.basesyntax.strategy.handlers;
 
-import core.service.FruitService;
+import core.basesyntax.service.FruitService;
 
-public class ReturnHandler implements OperationHandler {
+public class PurchaseHandler implements OperationHandler {
     private FruitService fruitService;
 
-    public ReturnHandler(FruitService fruitService) {
+    public PurchaseHandler(FruitService fruitService) {
         this.fruitService = fruitService;
     }
 
     @Override
     public void handle(String fruitName, int quantity) {
         int fruitsQuantityInStorage = fruitService.get(fruitName);
-        fruitsQuantityInStorage += quantity;
+        fruitsQuantityInStorage -= quantity;
         fruitService.update(fruitName,fruitsQuantityInStorage);
     }
 }

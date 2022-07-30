@@ -1,6 +1,6 @@
-package core.strategy;
+package core.basesyntax.strategy;
 
-import core.strategy.handlers.OperationHandler;
+import core.basesyntax.strategy.handlers.OperationHandler;
 import java.util.Map;
 
 public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {

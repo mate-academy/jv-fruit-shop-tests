@@ -1,6 +1,6 @@
-package core.strategy.handlers;
+package core.basesyntax.strategy.handlers;
 
-import core.service.FruitService;
+import core.basesyntax.service.FruitService;
 
 public class BalanceHandler implements OperationHandler {
     private FruitService fruitService;

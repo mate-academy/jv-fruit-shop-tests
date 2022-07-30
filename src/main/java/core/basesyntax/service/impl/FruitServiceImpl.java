@@ -1,8 +1,9 @@
-package core.service.impl;
+package core.basesyntax.service.impl;
 
-import core.dao.FruitDao;
-import core.service.FruitService;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.service.FruitService;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class FruitServiceImpl implements FruitService {
 
@@ -19,7 +20,9 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public int get(String fruitName) {
-        return fruitDao.get(fruitName);
+        return fruitDao.get(fruitName).orElseThrow(() -> new NoSuchElementException(
+                "Could not get fruits quantity by fruitName = " + fruitName
+        ));
     }
 
     @Override

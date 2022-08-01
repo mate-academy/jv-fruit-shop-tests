@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class ReportCreatorServiceTest {
     private static ReportCreatorService reportCreatorService;
-    private static final String REPORT_CSV_HEADER = "fruit,quantity\n";
+    private static final String REPORT_CSV_HEADER = "fruit,quantity" + System.lineSeparator();
 
     @BeforeClass
     public static void initReportCreatorService() {
@@ -42,7 +42,7 @@ public class ReportCreatorServiceTest {
                 + Storage.fruitsMap.entrySet()
                 .stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
         Assert.assertEquals(expectedReport, reportCreatorService.createReport());
     }
 

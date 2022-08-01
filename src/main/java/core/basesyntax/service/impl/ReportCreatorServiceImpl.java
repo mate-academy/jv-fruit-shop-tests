@@ -12,9 +12,11 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     }
 
     public String createReport() {
-        return "fruit,quantity\n" + fruitService.getAll().entrySet()
+        return "fruit,quantity"
+                + System.lineSeparator()
+                + fruitService.getAll().entrySet()
                 .stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

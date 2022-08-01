@@ -31,17 +31,6 @@ public class CsvWriterServiceTest {
     }
 
     @Test
-    public void write_fileExist_Ok() {
-        try {
-            Files.deleteIfExists(TEST_REPORT_FILE_PATH);
-            csvWriterService.write(TEST_REPORT_FILE_PATH, testReport);
-            Assert.assertTrue(Files.exists(TEST_REPORT_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Could not delete file", e);
-        }
-    }
-
-    @Test
     public void write_dataMatch_Ok() {
         try {
             Files.deleteIfExists(TEST_REPORT_FILE_PATH);

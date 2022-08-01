@@ -36,41 +36,10 @@ public class FruitTransactionProcessorServiceTest {
     private static FruitTransactionProcessorService fruitTransactionProcessorService;
 
     @BeforeClass
-    public static void initFruitTransactionProcessorService() {
-        FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl());
-        Map<String, OperationHandler> operationsHandlerMap = new HashMap<>();
-        operationsHandlerMap.put("b", new BalanceHandler(fruitService));
-        operationsHandlerMap.put("s", new SupplyHandler(fruitService));
-        operationsHandlerMap.put("r", new ReturnHandler(fruitService));
-        operationsHandlerMap.put("p", new PurchaseHandler(fruitService));
-        OperationHandlerStrategy operationHandlerStrategy =
-                new OperationHandlerStrategyImpl(operationsHandlerMap);
-        fruitTransactionProcessorService =
-                new FruitTransactionProcessorServiceImpl(operationHandlerStrategy);
-    }
-
-    @BeforeClass
-    public static void initFruitsOperationsList() {
-        try {
-            fruitOperationsList = Files.readAllLines(TEST_FRUIT_CSV_FILE_PATH);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not read file", e);
-        }
-    }
-
-    @BeforeClass
-    public static void initExpectedFruitsQuantityMap() {
-        try {
-            List<String> reportLines = Files.readAllLines(TEST_REPORT_FILE_PATH);
-            reportLines.remove(0);
-            expectedFruitsQuantityMap = reportLines.stream()
-                    .map(s -> s.split(","))
-                    .collect(
-                            Collectors.toMap(x -> x[0], x -> Integer.parseInt(x[1]))
-                    );
-        } catch (IOException e) {
-            throw new RuntimeException("Could not read file", e);
-        }
+    public static void init() {
+        initFruitTransactionProcessorService();
+        initFruitsOperationsList();
+        initExpectedFruitsQuantityMap();
     }
 
     @After
@@ -120,5 +89,40 @@ public class FruitTransactionProcessorServiceTest {
         csvOnlyHeaderLines.add("type,fruit,quantity");
         fruitTransactionProcessorService.fillStorage(csvOnlyHeaderLines);
         Assert.assertTrue(Storage.fruitsMap.isEmpty());
+    }
+
+    private static void initFruitTransactionProcessorService() {
+        FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl());
+        Map<String, OperationHandler> operationsHandlerMap = new HashMap<>();
+        operationsHandlerMap.put("b", new BalanceHandler(fruitService));
+        operationsHandlerMap.put("s", new SupplyHandler(fruitService));
+        operationsHandlerMap.put("r", new ReturnHandler(fruitService));
+        operationsHandlerMap.put("p", new PurchaseHandler(fruitService));
+        OperationHandlerStrategy operationHandlerStrategy =
+                new OperationHandlerStrategyImpl(operationsHandlerMap);
+        fruitTransactionProcessorService =
+                new FruitTransactionProcessorServiceImpl(operationHandlerStrategy);
+    }
+
+    private static void initFruitsOperationsList() {
+        try {
+            fruitOperationsList = Files.readAllLines(TEST_FRUIT_CSV_FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not read file", e);
+        }
+    }
+
+    private static void initExpectedFruitsQuantityMap() {
+        try {
+            List<String> reportLines = Files.readAllLines(TEST_REPORT_FILE_PATH);
+            reportLines.remove(0);
+            expectedFruitsQuantityMap = reportLines.stream()
+                    .map(s -> s.split(","))
+                    .collect(
+                            Collectors.toMap(x -> x[0], x -> Integer.parseInt(x[1]))
+                    );
+        } catch (IOException e) {
+            throw new RuntimeException("Could not read file", e);
+        }
     }
 }

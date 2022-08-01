@@ -46,9 +46,4 @@ public class CsvReaderServiceTest {
     public void read_fileNotExist_notOk() {
         csvReaderService.read(Path.of("/src/test/resources/test.dat"));
     }
-
-    @Test(expected = RuntimeException.class)
-    public void read_wrongFilePath_notOk() {
-        csvReaderService.read(Path.of("/sr^c/tes:*t/res%ources/te*st.dat"));
-    }
 }

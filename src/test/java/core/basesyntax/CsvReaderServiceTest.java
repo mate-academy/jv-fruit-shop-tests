@@ -32,11 +32,6 @@ public class CsvReaderServiceTest {
     }
 
     @Test
-    public void read_fileExist_Ok() {
-        Assert.assertNotNull(csvReaderService.read(TEST_FRUIT_CSV_FILE_PATH));
-    }
-
-    @Test
     public void read_dataMatch_Ok() {
         Assert.assertEquals(testFruitsCsvLines,
                 csvReaderService.read(TEST_FRUIT_CSV_FILE_PATH));

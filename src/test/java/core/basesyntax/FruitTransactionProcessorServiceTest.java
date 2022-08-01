@@ -31,7 +31,7 @@ public class FruitTransactionProcessorServiceTest {
             Path.of("src/test/resources/fruits_test.csv");
     private static final Path TEST_REPORT_FILE_PATH =
             Path.of("src/test/resources/report_test.csv");
-    private static List<String> fruitsOperationsList;
+    private static List<String> fruitOperationsList;
     private static Map<String, Integer> expectedFruitsQuantityMap;
     private static FruitTransactionProcessorService fruitTransactionProcessorService;
 
@@ -52,7 +52,7 @@ public class FruitTransactionProcessorServiceTest {
     @BeforeClass
     public static void initFruitsOperationsList() {
         try {
-            fruitsOperationsList = Files.readAllLines(TEST_FRUIT_CSV_FILE_PATH);
+            fruitOperationsList = Files.readAllLines(TEST_FRUIT_CSV_FILE_PATH);
         } catch (IOException e) {
             throw new RuntimeException("Could not read file", e);
         }
@@ -80,7 +80,7 @@ public class FruitTransactionProcessorServiceTest {
 
     @Test
     public void fillStorage_dataCorrectly_Ok() {
-        fruitTransactionProcessorService.fillStorage(fruitsOperationsList);
+        fruitTransactionProcessorService.fillStorage(fruitOperationsList);
         Assert.assertEquals(expectedFruitsQuantityMap, Storage.fruitsMap);
     }
 

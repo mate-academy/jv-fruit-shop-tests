@@ -5,10 +5,16 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReportService;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ScvReportServiceImplTest {
-    private static final ReportService reportService = new ScvReportServiceImpl();
+    private static ReportService reportService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        reportService = new ScvReportServiceImpl();
+    }
 
     @Test
     public void getReport_correctConvert_Ok() {
@@ -23,5 +29,14 @@ public class ScvReportServiceImplTest {
         assertEquals("Test fail! Expected report: " + System.lineSeparator()
                 + expectedReport + ", actual report: " + System.lineSeparator()
                 + actualReport, expectedReport, actualReport);
+    }
+
+    @Test
+    public void getReport_emptyStorage_Ok() {
+        String actual = reportService.getReport(new HashMap<>());
+        String expected = "fruit,quantity" + System.lineSeparator();
+        assertEquals("Test fail! Expected report: " + System.lineSeparator()
+                + expected + ", actual report: " + System.lineSeparator()
+                + actual, expected, actual);
     }
 }

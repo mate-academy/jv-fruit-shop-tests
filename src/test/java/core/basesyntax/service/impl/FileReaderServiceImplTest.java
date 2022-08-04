@@ -5,12 +5,18 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static final String CORRECT_PATH = "src/test/resources/correctInputFile.csv";
     private static final String WRONG_PATH = "src/test/resources/randomFile.csv";
-    private final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    private static FileReaderService fileReaderService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     public void readFromFile_existingFile_ok() {

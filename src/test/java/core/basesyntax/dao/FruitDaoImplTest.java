@@ -9,16 +9,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private static final FruitDao fruitDao = new FruitDaoImpl();
-    private static final Fruit apple = new Fruit("apple", 24);
-    private static final Fruit banana = new Fruit("banana", 50);
-    private static final Fruit coconut = new Fruit("coconut", 5);
+    private static final Fruit APPLE = new Fruit("apple", 24);
+    private static final Fruit BANANA = new Fruit("banana", 50);
+    private static final Fruit COCONUT = new Fruit("coconut", 5);
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeClass() {
-        fruitDao.add(apple);
-        fruitDao.add(banana);
-        fruitDao.add(coconut);
+        fruitDao = new FruitDaoImpl();
+        fruitDao.add(APPLE);
+        fruitDao.add(BANANA);
+        fruitDao.add(COCONUT);
     }
 
     @Test
@@ -36,11 +37,16 @@ public class FruitDaoImplTest {
         Fruit actualBanana = fruitDao.get("banana");
         Fruit actualCoconut = fruitDao.get("coconut");
         assertEquals("Test fail! Expected fruit: "
-                + apple + ", actual: " + actualApple, apple, actualApple);
-        assertEquals("Test fail! Expected fruit: " + banana
-                + ", actual: " + actualBanana, banana, actualBanana);
-        assertEquals("Test fail! Expected fruit: " + coconut
-                + ", actual: " + actualCoconut, coconut, actualCoconut);
+                + APPLE + ", actual: " + actualApple, APPLE, actualApple);
+        assertEquals("Test fail! Expected fruit: " + BANANA
+                + ", actual: " + actualBanana, BANANA, actualBanana);
+        assertEquals("Test fail! Expected fruit: " + COCONUT
+                + ", actual: " + actualCoconut, COCONUT, actualCoconut);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void get_notExistingFruit_notOk() {
+        fruitDao.get("lemon");
     }
 
     @Test

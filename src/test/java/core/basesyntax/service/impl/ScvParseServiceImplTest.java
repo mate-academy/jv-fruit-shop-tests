@@ -6,10 +6,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ScvParseServiceImplTest {
-    private final ParserService parserService = new ScvParseServiceImpl();
+    private static ParserService parserService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        parserService = new ScvParseServiceImpl();
+    }
 
     @Test
     public void parse_correctParse_ok() {

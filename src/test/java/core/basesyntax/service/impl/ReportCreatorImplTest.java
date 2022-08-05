@@ -6,12 +6,14 @@ import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreator;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private final ReportCreator reportCreator;
+    private ReportCreator reportCreator;
 
-    public ReportCreatorImplTest() {
+    @Before
+    public void setUp() {
         reportCreator = new ReportCreatorImpl(new FruitsDaoImpl());
     }
 

@@ -3,16 +3,24 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import core.basesyntax.service.CsvFileReader;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
+    private CsvFileReader fileReader;
+
+    @Before
+    public void setUp() {
+        fileReader = new CsvFileReaderImpl();
+    }
 
     @Test
     public void readData_emptyPath_notOk() {
         try {
-            new CsvFileReaderImpl().readData("");
+            fileReader.readData("");
         } catch (RuntimeException e) {
             return;
         }
@@ -22,7 +30,7 @@ public class CsvFileReaderImplTest {
     @Test
     public void readData_nullPath_notOk() {
         try {
-            new CsvFileReaderImpl().readData(null);
+            fileReader.readData(null);
         } catch (RuntimeException e) {
             return;
         }
@@ -41,7 +49,7 @@ public class CsvFileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = new CsvFileReaderImpl().readData("src/main/resources/file.csv");
+        List<String> actual = fileReader.readData("src/main/resources/file.csv");
         assertEquals(expected, actual);
     }
 }

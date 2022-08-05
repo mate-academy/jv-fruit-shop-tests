@@ -19,14 +19,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFileDataHandlerImplTest {
-    private final List<String> fileData;
-    private final FruitsDao fruitsDao;
-    private final CsvFileDataHandler dataHandler;
+    private List<String> fileData;
+    private FruitsDao fruitsDao;
+    private CsvFileDataHandler dataHandler;
 
-    public CsvFileDataHandlerImplTest() {
+    @Before
+    public void setUp() {
         fruitsDao = new FruitsDaoImpl();
         Map<String, OperationHandler> operations = new HashMap<>();
         operations.put("b", new BalanceHandler(fruitsDao));
@@ -62,8 +64,6 @@ public class CsvFileDataHandlerImplTest {
             dataHandler.processData(fileData);
         } catch (RuntimeException e) {
             return;
-        } finally {
-            fileData.remove(fileData.size() - 1);
         }
         fail("Impossible sell more fruits then we have!");
     }
@@ -75,14 +75,13 @@ public class CsvFileDataHandlerImplTest {
             dataHandler.processData(fileData);
         } catch (RuntimeException e) {
             return;
-        } finally {
-            fileData.remove(fileData.size() - 1);
         }
         fail("Impossible sell fruits then we don't have!");
     }
 
     @After
     public void afterEachTest() {
+        fileData.remove(fileData.size() - 1);
         Storage.fruits.clear();
     }
 }

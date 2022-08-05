@@ -14,16 +14,13 @@ import org.junit.Test;
 
 public class FileWriterImplTest {
     private static final String HEADER = "fruit,quantity";
-    private final FileWriter fileWriter;
+    private FileWriter fileWriter;
     private String report;
 
-    public FileWriterImplTest() {
-        fileWriter = new FileWriterImpl();
-    }
-
     @Before
-    public void setReport() {
+    public void setUp() {
         report = System.lineSeparator() + "banana,152" + System.lineSeparator() + "apple,90";
+        fileWriter = new FileWriterImpl();
     }
 
     @Test

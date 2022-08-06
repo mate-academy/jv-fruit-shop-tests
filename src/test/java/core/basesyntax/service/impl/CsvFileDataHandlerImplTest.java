@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
@@ -57,26 +56,16 @@ public class CsvFileDataHandlerImplTest {
         assertEquals(2, fruitsDao.getFruitsNames().length);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void processData_tooMuchPurchase_notOk() {
         fileData.add("p,banana,200");
-        try {
-            dataHandler.processData(fileData);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Impossible sell more fruits then we have!");
+        dataHandler.processData(fileData);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void processData_nonexistentFruitPurchase_notOk() {
         fileData.add("p,strawberry,20");
-        try {
-            dataHandler.processData(fileData);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Impossible sell fruits then we don't have!");
+        dataHandler.processData(fileData);
     }
 
     @After

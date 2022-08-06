@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.CsvFileReader;
 import java.util.ArrayList;
@@ -17,24 +16,14 @@ public class CsvFileReaderImplTest {
         fileReader = new CsvFileReaderImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readData_emptyPath_notOk() {
-        try {
-            fileReader.readData("");
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You can't read data from empty path");
+        fileReader.readData("");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readData_nullPath_notOk() {
-        try {
-            fileReader.readData(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You can't read data from null path");
+        fileReader.readData(null);
     }
 
     @Test

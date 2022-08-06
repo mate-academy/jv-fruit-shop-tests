@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.FileWriter;
 import java.io.IOException;
@@ -36,27 +35,17 @@ public class FileWriterImplTest {
             assertEquals(actual, expected);
             Files.delete(filePath);
         } catch (IOException e) {
-            fail("Can't read data from report file");
+            throw new RuntimeException("Can't read data from report file");
         }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeReport_emptyPath_notOk() {
-        try {
-            fileWriter.writeReport("", "banana,99", HEADER);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Cannot write data to file by empty path");
+        fileWriter.writeReport("", "banana,99", HEADER);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeReport_nullPath_notOk() {
-        try {
-            fileWriter.writeReport(null, "apple,90", HEADER);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Cannot write data to file by null path");
+        fileWriter.writeReport(null, "apple,90", HEADER);
     }
 }

@@ -6,6 +6,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreatorService;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -45,5 +46,10 @@ public class ReportCreatorServiceImplTest {
     public void createStringReport_NotOk() {
         reportCreatorService = new ReportCreatorServiceImpl(null);
         reportCreatorService.create();
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        storage.getFruitStorage().clear();
     }
 }

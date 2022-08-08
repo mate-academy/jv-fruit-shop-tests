@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.service.Util.INPUT_FILE_LINES;
 import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedWriter;
@@ -14,15 +15,8 @@ import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
     private static FileReaderService readerService;
-    private static final List<String> INPUT_FILE_LINES = List.of("type,fruit,quantity",
-            "b,banana,20",
-            "p,apple,10",
-            "s,apple,15",
-            "p,apple,5",
-            "r,lemon,50",
-            "p,lemon,20");
-    private static final String PATH_TO_FILE = "src/test/resources/inputFile.csv";
     private static final String DIRECTORY_PATH = "src/test/resources";
+    private static final String PATH_TO_FILE = "src/test/resources/inputFile.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -49,12 +43,12 @@ public class CsvFileReaderServiceImplTest {
         readerService.readFromFile(PATH_TO_FILE);
     }
 
-    private void writeToFileText() {
-        String inputFileText = INPUT_FILE_LINES.stream()
+    public static void writeToFileText() {
+        String joinedText = INPUT_FILE_LINES.stream()
                 .collect(Collectors.joining(System.lineSeparator()));
         new File(DIRECTORY_PATH).mkdir();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_FILE))) {
-            writer.write(inputFileText);
+            writer.write(joinedText);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file: " + PATH_TO_FILE, e);
         }

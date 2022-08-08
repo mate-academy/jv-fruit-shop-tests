@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
+import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
@@ -48,21 +49,14 @@ public class FruitTransaction {
 
         FruitTransaction that = (FruitTransaction) o;
 
-        if (quantity != that.quantity) {
-            return false;
-        }
-        if (operation != that.operation) {
-            return false;
-        }
-        return fruit != null ? fruit.equals(that.fruit) : that.fruit == null;
+        return Objects.equals(fruit, that.fruit)
+                && Objects.equals(operation, that.operation)
+                && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        int result = operation != null ? operation.hashCode() : 0;
-        result = 31 * result + (fruit != null ? fruit.hashCode() : 0);
-        result = 31 * result + quantity;
-        return result;
+        return Objects.hash(operation, fruit, quantity);
     }
 
     @Override

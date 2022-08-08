@@ -1,6 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Fruit;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Util {
     public static final List<String> INPUT_FILE_LINES = List.of("type,fruit,quantity",
@@ -10,4 +12,16 @@ public class Util {
             "p,apple,5",
             "r,lemon,50",
             "p,lemon,20");
+    public static final List<String> REPORT = List.of("fruit,quantity",
+            "banana,50",
+            "apple,65",
+            "lemon,80");
+    public static final Fruit banana = new Fruit("banana");
+    public static final Fruit apple = new Fruit("apple");
+    public static final Fruit lemon = new Fruit("lemon");
+
+    public static String createTextFromLines(List<String> lines) {
+        return lines.stream()
+                .collect(Collectors.joining(System.lineSeparator()));
+    }
 }

@@ -14,7 +14,6 @@ import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
     private static FileReaderService readerService;
-    private static final String DIRECTORY_PATH = "src/test/resources";
     private static final String PATH_TO_FILE = "src/test/resources/inputFile.csv";
 
     @BeforeClass
@@ -43,7 +42,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     public static void writeToFileText() {
-        new File(DIRECTORY_PATH).mkdir();
+        Util.createNewFolder();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_FILE))) {
             writer.write(Util.createTextFromLines(INPUT_FILE_LINES));
         } catch (IOException e) {

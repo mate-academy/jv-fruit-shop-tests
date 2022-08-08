@@ -29,6 +29,7 @@ public class CsvFileWriterServiceImplTest {
 
     @Test
     public void writeToFile_defaultCase_Ok() {
+        Util.createNewFolder();
         writerService.writeToFile(OUTPUT_FILE_PATH, Util.createTextFromLines(Util.REPORT));
         List<String> lines;
         try (BufferedReader reader = new BufferedReader(new FileReader(OUTPUT_FILE_PATH))) {
@@ -45,6 +46,7 @@ public class CsvFileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_FileCanNotBeReached_notOk() {
+        Util.createNewFolder();
         writerService.writeToFile(WRONG_OUTPUT_FILE_PATH, Util.createTextFromLines(Util.REPORT));
     }
 }

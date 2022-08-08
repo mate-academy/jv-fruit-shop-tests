@@ -1,13 +1,13 @@
 package core.basesyntax.strategy;
 
+import static core.basesyntax.strategy.OperationHandlersUtil.BALANCE_OPERATION_HANDLER;
+import static core.basesyntax.strategy.OperationHandlersUtil.PURCHASE_OPERATION_HANDLER;
+import static core.basesyntax.strategy.OperationHandlersUtil.RETURN_OPERATION_HANDLER;
+import static core.basesyntax.strategy.OperationHandlersUtil.SUPPLY_OPERATION_HANDLER;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FruitTransaction;
-import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
-import core.basesyntax.strategy.operation.PurchaseOperationHandler;
-import core.basesyntax.strategy.operation.ReturnOperationHandler;
-import core.basesyntax.strategy.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.BeforeClass;
@@ -16,10 +16,6 @@ import org.junit.Test;
 public class OperationStrategyImplTest {
     private static OperationStrategy strategy;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
-    private static BalanceOperationHandler balanceOperationHandler;
-    private static PurchaseOperationHandler purchaseOperationHandler;
-    private static ReturnOperationHandler returnOperationHandler;
-    private static SupplyOperationHandler supplyOperationHandler;
 
     @BeforeClass
     public static void beforeClass() {
@@ -29,7 +25,7 @@ public class OperationStrategyImplTest {
 
     @Test
     public void get_differentOperationHandlers_Ok() {
-        OperationHandler expectedBalanceOperationHandler = balanceOperationHandler;
+        OperationHandler expectedBalanceOperationHandler = BALANCE_OPERATION_HANDLER;
         OperationHandler actualBalanceOperationHandler = strategy
                 .get(FruitTransaction.Operation.BALANCE);
         assertEquals("Expected should be equal to "
@@ -37,7 +33,7 @@ public class OperationStrategyImplTest {
                 + actualBalanceOperationHandler,
                 expectedBalanceOperationHandler,
                 actualBalanceOperationHandler);
-        OperationHandler expectedPurchaseOperationHandler = purchaseOperationHandler;
+        OperationHandler expectedPurchaseOperationHandler = PURCHASE_OPERATION_HANDLER;
         OperationHandler actualPurchaseOperationHandler = strategy
                 .get(FruitTransaction.Operation.PURCHASE);
         assertEquals("Expected should be equal to "
@@ -45,7 +41,7 @@ public class OperationStrategyImplTest {
                 + actualPurchaseOperationHandler,
                 expectedPurchaseOperationHandler,
                 actualPurchaseOperationHandler);
-        OperationHandler expectedReturnOperationHandler = returnOperationHandler;
+        OperationHandler expectedReturnOperationHandler = RETURN_OPERATION_HANDLER;
         OperationHandler actualReturnOperationHandler = strategy
                 .get(FruitTransaction.Operation.RETURN);
         assertEquals("Expected should be equal to "
@@ -53,7 +49,7 @@ public class OperationStrategyImplTest {
                 + actualReturnOperationHandler,
                 expectedReturnOperationHandler,
                 actualReturnOperationHandler);
-        OperationHandler expectedSupplyOperationHandler = supplyOperationHandler;
+        OperationHandler expectedSupplyOperationHandler = SUPPLY_OPERATION_HANDLER;
         OperationHandler actualSupplyOperationHandler = strategy
                 .get(FruitTransaction.Operation.SUPPLY);
         assertEquals("Expected should be equal to "
@@ -65,22 +61,15 @@ public class OperationStrategyImplTest {
     }
 
     private static void initializeMap() {
-        initializeOperationHandlers();
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                balanceOperationHandler);
+                BALANCE_OPERATION_HANDLER);
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                purchaseOperationHandler);
+                PURCHASE_OPERATION_HANDLER);
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                returnOperationHandler);
+                RETURN_OPERATION_HANDLER);
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                supplyOperationHandler);
+                SUPPLY_OPERATION_HANDLER);
     }
 
-    private static void initializeOperationHandlers() {
-        balanceOperationHandler = new BalanceOperationHandler();
-        purchaseOperationHandler = new PurchaseOperationHandler();
-        returnOperationHandler = new ReturnOperationHandler();
-        supplyOperationHandler = new SupplyOperationHandler();
-    }
 }

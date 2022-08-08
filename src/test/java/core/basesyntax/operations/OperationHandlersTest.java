@@ -11,16 +11,21 @@ import core.basesyntax.operations.impl.ReturnHandler;
 import core.basesyntax.operations.impl.SupplyHandler;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlersTest {
     private static final String FRUIT_BANANA = "banana";
-    private FruitsDao fruitsDao;
+    private static FruitsDao fruitsDao;
     private OperationHandler operationHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fruitsDao = new FruitsDaoImpl();
+    }
+
+    @Before
+    public void beforeEachTest() {
         Storage.fruits.put(FRUIT_BANANA, 100);
     }
 

@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.CsvFileReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
-    private CsvFileReader fileReader;
+    private static CsvFileReader fileReader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileReader = new CsvFileReaderImpl();
     }
 

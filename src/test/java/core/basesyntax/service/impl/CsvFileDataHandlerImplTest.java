@@ -18,16 +18,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileDataHandlerImplTest {
-    private List<String> fileData;
-    private FruitsDao fruitsDao;
-    private CsvFileDataHandler dataHandler;
+    private static List<String> fileData;
+    private static FruitsDao fruitsDao;
+    private static CsvFileDataHandler dataHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fruitsDao = new FruitsDaoImpl();
         Map<String, OperationHandler> operations = new HashMap<>();
         operations.put("b", new BalanceHandler(fruitsDao));
@@ -38,6 +38,10 @@ public class CsvFileDataHandlerImplTest {
         dataHandler = new CsvFileDataHandlerImpl(operationStrategy);
         fileData = new ArrayList<>();
         fileData.add("type,fruit,quantity");
+    }
+
+    @Test
+    public void processData_checkAllOperations_ok() {
         fileData.add("b,banana,20");
         fileData.add("b,apple,100");
         fileData.add("s,banana,100");
@@ -46,10 +50,6 @@ public class CsvFileDataHandlerImplTest {
         fileData.add("p,apple,20");
         fileData.add("p,banana,5");
         fileData.add("s,banana,50");
-    }
-
-    @Test
-    public void processData_checkAllOperations_ok() {
         dataHandler.processData(fileData);
         assertEquals(152, fruitsDao.getAmount("banana"));
         assertEquals(90, fruitsDao.getAmount("apple"));

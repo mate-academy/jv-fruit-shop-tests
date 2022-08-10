@@ -30,7 +30,7 @@ public class OperationHandlersTest {
     }
 
     @Test
-    public void handle_defaultCase_Ok() {
+    public void handle_balanceOperationHandler_Ok() {
         BALANCE_OPERATION_HANDLER.handle(balanceFruitTransaction);
         int expectedBananas = 100;
         int actualBananas = FruitStorage.fruitsMap.get(Util.banana);
@@ -40,15 +40,23 @@ public class OperationHandlersTest {
                         + actualBananas,
                 expectedBananas,
                 actualBananas);
+    }
+
+    @Test
+    public void handle_purchaseOperationHandler_Ok() {
         PURCHASE_OPERATION_HANDLER.handle(purchaseFruitTransaction);
-        expectedBananas = 80;
-        actualBananas = FruitStorage.fruitsMap.get(Util.banana);
+        int expectedBananas = -20;
+        int actualBananas = FruitStorage.fruitsMap.get(Util.banana);
         assertEquals("get should return quantity "
                         + "of bananas after transaction with purchase operation: "
                         + expectedBananas + " but was: "
                         + actualBananas,
                 expectedBananas,
                 actualBananas);
+    }
+
+    @Test
+    public void handle_supplyOperationHandler_Ok() {
         SUPPLY_OPERATION_HANDLER.handle(supplyFruitTransaction);
         int expectedLemons = 50;
         int actualLemons = FruitStorage.fruitsMap.get(Util.lemon);
@@ -58,6 +66,10 @@ public class OperationHandlersTest {
                         + actualLemons,
                 expectedLemons,
                 actualLemons);
+    }
+
+    @Test
+    public void handle_returnOperationHandler_Ok() {
         RETURN_OPERATION_HANDLER.handle(returnFruitTransaction);
         int expectedApples = 30;
         int actualApples = FruitStorage.fruitsMap.get(Util.apple);

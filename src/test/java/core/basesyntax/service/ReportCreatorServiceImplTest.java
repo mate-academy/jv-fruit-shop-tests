@@ -27,6 +27,15 @@ public class ReportCreatorServiceImplTest {
                 + actual, expected, actual);
     }
 
+    @Test
+    public void makeReport_emptyFruitStorage_Ok() {
+        String expected = "fruit,quantity";
+        String actual = reportCreatorService.makeReport();
+        assertEquals("makeReport should return empty report: "
+                + expected + " but was: "
+                + actual, expected, actual);
+    }
+
     @After
     public void tearDown() {
         FruitStorage.fruitsMap.clear();

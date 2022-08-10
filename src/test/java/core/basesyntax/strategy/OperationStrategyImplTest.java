@@ -24,7 +24,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_differentOperationHandlers_Ok() {
+    public void get_balanceOperationHandler_Ok() {
         OperationHandler expectedBalanceOperationHandler = BALANCE_OPERATION_HANDLER;
         OperationHandler actualBalanceOperationHandler = strategy
                 .get(FruitTransaction.Operation.BALANCE);
@@ -33,6 +33,10 @@ public class OperationStrategyImplTest {
                 + actualBalanceOperationHandler,
                 expectedBalanceOperationHandler,
                 actualBalanceOperationHandler);
+    }
+
+    @Test
+    public void get_purchaseOperationHandler_Ok() {
         OperationHandler expectedPurchaseOperationHandler = PURCHASE_OPERATION_HANDLER;
         OperationHandler actualPurchaseOperationHandler = strategy
                 .get(FruitTransaction.Operation.PURCHASE);
@@ -41,6 +45,10 @@ public class OperationStrategyImplTest {
                 + actualPurchaseOperationHandler,
                 expectedPurchaseOperationHandler,
                 actualPurchaseOperationHandler);
+    }
+
+    @Test
+    public void get_returnOperationHandler_Ok() {
         OperationHandler expectedReturnOperationHandler = RETURN_OPERATION_HANDLER;
         OperationHandler actualReturnOperationHandler = strategy
                 .get(FruitTransaction.Operation.RETURN);
@@ -49,6 +57,10 @@ public class OperationStrategyImplTest {
                 + actualReturnOperationHandler,
                 expectedReturnOperationHandler,
                 actualReturnOperationHandler);
+    }
+
+    @Test
+    public void get_supplyOperationHandler_Ok() {
         OperationHandler expectedSupplyOperationHandler = SUPPLY_OPERATION_HANDLER;
         OperationHandler actualSupplyOperationHandler = strategy
                 .get(FruitTransaction.Operation.SUPPLY);
@@ -57,7 +69,6 @@ public class OperationStrategyImplTest {
                 + actualSupplyOperationHandler,
                 expectedSupplyOperationHandler,
                 actualSupplyOperationHandler);
-
     }
 
     private static void initializeMap() {

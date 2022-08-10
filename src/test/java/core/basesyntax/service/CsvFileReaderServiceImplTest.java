@@ -28,7 +28,7 @@ public class CsvFileReaderServiceImplTest {
 
     @Test
     public void readFromFile_defaultCase_Ok() {
-        writeToFileText();
+        writeTestDataToFile();
         List<String> expected = INPUT_FILE_LINES;
         List<String> actual = readerService.readFromFile(PATH_TO_FILE);
         assertEquals("Expected should be equal to "
@@ -41,7 +41,7 @@ public class CsvFileReaderServiceImplTest {
         readerService.readFromFile(PATH_TO_FILE);
     }
 
-    public static void writeToFileText() {
+    public static void writeTestDataToFile() {
         Util.createNewFolder();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_FILE))) {
             writer.write(Util.createTextFromLines(INPUT_FILE_LINES));

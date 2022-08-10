@@ -10,11 +10,13 @@ import org.junit.Test;
 public class FruitTransactionsServiceImplTest {
     private static FruitTransactionsService fruitTransactionsService;
     private static List<FruitTransaction> fruitTransactions;
+    private static List<String> emptyList;
 
     @BeforeClass
     public static void beforeClass() {
         fruitTransactionsService = new FruitTransactionsServiceImpl();
         initializeFruitTransactions();
+        emptyList = new ArrayList<>();
     }
 
     @Test
@@ -23,6 +25,15 @@ public class FruitTransactionsServiceImplTest {
         List<FruitTransaction> actual = fruitTransactionsService
                 .getFruitTransactions(Util.INPUT_FILE_LINES);
         assertEquals("getFruitTransactions should return List of FruitTransactions: "
+                + expected + " but was: "
+                + actual, expected, actual);
+    }
+
+    @Test
+    public void getFruitTransactions_emptyList_Ok() {
+        List<FruitTransaction> expected = new ArrayList<>();
+        List<FruitTransaction> actual = fruitTransactionsService.getFruitTransactions(emptyList);
+        assertEquals("getFruitTransactions should return empty List of FruitTransactions: "
                 + expected + " but was: "
                 + actual, expected, actual);
     }

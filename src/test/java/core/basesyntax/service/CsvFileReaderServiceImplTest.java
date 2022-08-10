@@ -27,7 +27,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_defaultCase_Ok() {
+    public void readFromFile_validData_Ok() {
         writeTestDataToFile();
         List<String> expected = INPUT_FILE_LINES;
         List<String> actual = readerService.readFromFile(PATH_TO_FILE);

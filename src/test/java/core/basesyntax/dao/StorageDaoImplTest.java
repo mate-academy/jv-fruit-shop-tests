@@ -1,14 +1,13 @@
 package core.basesyntax.dao;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StorageDaoImplTest {
     private static final String DEFAULT_DATA = "b,banana,20" + System.lineSeparator()

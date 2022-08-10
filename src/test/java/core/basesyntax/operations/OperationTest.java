@@ -1,19 +1,18 @@
 package core.basesyntax.operations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.storage.StorageImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class OperationTest {
     private static final FruitTransaction BALANCE_100_APPLE =
@@ -67,7 +66,8 @@ public class OperationTest {
 
     @Test
     public void operation_return20Banana_Ok() {
-        operationStrategy.get(RETURN_20_BANANA.getActivity()).performOperation(storage, RETURN_20_BANANA);
+        operationStrategy.get(RETURN_20_BANANA.getActivity())
+                .performOperation(storage, RETURN_20_BANANA);
         Integer actual = storage.getAllData().get(RETURN_20_BANANA.getFruit());
         Integer expected = 20;
         assertEquals(expected, actual);
@@ -75,7 +75,8 @@ public class OperationTest {
 
     @Test
     public void operation_supply100Banana_Ok() {
-        operationStrategy.get(SUPPLY_100_BANANA.getActivity()).performOperation(storage, SUPPLY_100_BANANA);
+        operationStrategy.get(SUPPLY_100_BANANA.getActivity())
+                .performOperation(storage, SUPPLY_100_BANANA);
         Integer actual = storage.getAllData().get(SUPPLY_100_BANANA.getFruit());
         Integer expected = 100;
         assertEquals(expected, actual);

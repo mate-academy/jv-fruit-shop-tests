@@ -15,6 +15,7 @@ import org.junit.Test;
 public class CsvFileWriterServiceImplTest {
     private static final String OUTPUT_FILE_PATH = "src/test/resources/outputFile.csv";
     private static final String WRONG_OUTPUT_FILE_PATH = "src/test/resources/docs/outputFile.csv";
+    private static final String REPORT = Util.createTextFromLines(Util.REPORT);
     private static FileWriterService writerService;
 
     @BeforeClass
@@ -30,14 +31,14 @@ public class CsvFileWriterServiceImplTest {
     @Test
     public void writeToFile_defaultCase_Ok() {
         Util.createNewFolder();
-        writerService.writeToFile(OUTPUT_FILE_PATH, Util.createTextFromLines(Util.REPORT));
+        writerService.writeToFile(OUTPUT_FILE_PATH, REPORT);
         List<String> lines;
         try (BufferedReader reader = new BufferedReader(new FileReader(OUTPUT_FILE_PATH))) {
             lines = reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + OUTPUT_FILE_PATH, e);
         }
-        String expected = Util.createTextFromLines(Util.REPORT);
+        String expected = REPORT;
         String actual = lines.stream().collect(Collectors.joining(System.lineSeparator()));
         assertEquals("Expected should be equal to "
                 + expected + " but was: "
@@ -47,6 +48,6 @@ public class CsvFileWriterServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void writeToFile_FileCanNotBeReached_notOk() {
         Util.createNewFolder();
-        writerService.writeToFile(WRONG_OUTPUT_FILE_PATH, Util.createTextFromLines(Util.REPORT));
+        writerService.writeToFile(WRONG_OUTPUT_FILE_PATH, REPORT);
     }
 }

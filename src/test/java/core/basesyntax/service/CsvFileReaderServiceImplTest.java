@@ -28,6 +28,7 @@ public class CsvFileReaderServiceImplTest {
 
     @Test
     public void readFromFile_validData_Ok() {
+        Util.createNewFolder();
         writeTestDataToFile();
         List<String> expected = INPUT_FILE_LINES;
         List<String> actual = readerService.readFromFile(PATH_TO_FILE);
@@ -42,7 +43,6 @@ public class CsvFileReaderServiceImplTest {
     }
 
     public static void writeTestDataToFile() {
-        Util.createNewFolder();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_FILE))) {
             writer.write(Util.createTextFromLines(INPUT_FILE_LINES));
         } catch (IOException e) {

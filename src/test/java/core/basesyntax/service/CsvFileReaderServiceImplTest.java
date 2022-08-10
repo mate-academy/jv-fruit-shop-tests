@@ -32,7 +32,7 @@ public class CsvFileReaderServiceImplTest {
         writeTestDataToFile();
         List<String> expected = INPUT_FILE_LINES;
         List<String> actual = readerService.readFromFile(PATH_TO_FILE);
-        assertEquals("Expected should be equal to "
+        assertEquals("readFromLine should return List of file's lines: "
                 + expected + " but was: "
                 + actual, expected, actual);
     }

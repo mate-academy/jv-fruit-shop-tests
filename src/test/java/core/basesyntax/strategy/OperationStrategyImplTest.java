@@ -28,7 +28,7 @@ public class OperationStrategyImplTest {
         OperationHandler expectedBalanceOperationHandler = BALANCE_OPERATION_HANDLER;
         OperationHandler actualBalanceOperationHandler = strategy
                 .get(FruitTransaction.Operation.BALANCE);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return BalanceOperationHandler: "
                 + expectedBalanceOperationHandler + " but was: "
                 + actualBalanceOperationHandler,
                 expectedBalanceOperationHandler,
@@ -36,7 +36,7 @@ public class OperationStrategyImplTest {
         OperationHandler expectedPurchaseOperationHandler = PURCHASE_OPERATION_HANDLER;
         OperationHandler actualPurchaseOperationHandler = strategy
                 .get(FruitTransaction.Operation.PURCHASE);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return PurchaseOperationHandler: "
                 + expectedPurchaseOperationHandler + " but was: "
                 + actualPurchaseOperationHandler,
                 expectedPurchaseOperationHandler,
@@ -44,7 +44,7 @@ public class OperationStrategyImplTest {
         OperationHandler expectedReturnOperationHandler = RETURN_OPERATION_HANDLER;
         OperationHandler actualReturnOperationHandler = strategy
                 .get(FruitTransaction.Operation.RETURN);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return ReturnOperationHandler: "
                 + expectedReturnOperationHandler + " but was: "
                 + actualReturnOperationHandler,
                 expectedReturnOperationHandler,
@@ -52,7 +52,7 @@ public class OperationStrategyImplTest {
         OperationHandler expectedSupplyOperationHandler = SUPPLY_OPERATION_HANDLER;
         OperationHandler actualSupplyOperationHandler = strategy
                 .get(FruitTransaction.Operation.SUPPLY);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return SupplyOperationHandler: "
                 + expectedSupplyOperationHandler + " but was: "
                 + actualSupplyOperationHandler,
                 expectedSupplyOperationHandler,

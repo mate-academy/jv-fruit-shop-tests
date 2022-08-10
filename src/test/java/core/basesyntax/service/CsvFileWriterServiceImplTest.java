@@ -40,7 +40,7 @@ public class CsvFileWriterServiceImplTest {
         }
         String expected = REPORT;
         String actual = lines.stream().collect(Collectors.joining(System.lineSeparator()));
-        assertEquals("Expected should be equal to "
+        assertEquals("writeToFile should write to file text report: "
                 + expected + " but was: "
                 + actual, expected, actual);
     }

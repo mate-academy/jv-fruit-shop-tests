@@ -22,7 +22,7 @@ public class FruitTransactionsServiceImplTest {
         List<FruitTransaction> expected = fruitTransactions;
         List<FruitTransaction> actual = fruitTransactionsService
                 .getFruitTransactions(Util.INPUT_FILE_LINES);
-        assertEquals("Expected should be equal to "
+        assertEquals("getFruitTransactions should return List of FruitTransactions: "
                 + expected + " but was: "
                 + actual, expected, actual);
     }

@@ -22,7 +22,7 @@ public class ReportCreatorServiceImplTest {
         FruitStorage.fruitsMap.put(Util.lemon, 80);
         String expected = Util.createTextFromLines(Util.REPORT);
         String actual = reportCreatorService.makeReport();
-        assertEquals("Expected should be equal to "
+        assertEquals("makeReport should return text report: "
                 + expected + " but was: "
                 + actual, expected, actual);
     }

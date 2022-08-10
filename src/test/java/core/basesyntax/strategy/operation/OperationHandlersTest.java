@@ -34,7 +34,8 @@ public class OperationHandlersTest {
         BALANCE_OPERATION_HANDLER.handle(balanceFruitTransaction);
         int expectedBananas = 100;
         int actualBananas = FruitStorage.fruitsMap.get(Util.banana);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return quantity "
+                        + "of bananas after transaction with balance operation: "
                         + expectedBananas + " but was: "
                         + actualBananas,
                 expectedBananas,
@@ -42,7 +43,8 @@ public class OperationHandlersTest {
         PURCHASE_OPERATION_HANDLER.handle(purchaseFruitTransaction);
         expectedBananas = 80;
         actualBananas = FruitStorage.fruitsMap.get(Util.banana);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return quantity "
+                        + "of bananas after transaction with purchase operation: "
                         + expectedBananas + " but was: "
                         + actualBananas,
                 expectedBananas,
@@ -50,7 +52,8 @@ public class OperationHandlersTest {
         SUPPLY_OPERATION_HANDLER.handle(supplyFruitTransaction);
         int expectedLemons = 50;
         int actualLemons = FruitStorage.fruitsMap.get(Util.lemon);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return quantity "
+                        + "of lemons after transaction with supply operation: "
                         + expectedLemons + " but was: "
                         + actualLemons,
                 expectedLemons,
@@ -58,7 +61,8 @@ public class OperationHandlersTest {
         RETURN_OPERATION_HANDLER.handle(returnFruitTransaction);
         int expectedApples = 30;
         int actualApples = FruitStorage.fruitsMap.get(Util.apple);
-        assertEquals("Expected should be equal to "
+        assertEquals("get should return quantity "
+                        + "of apples after transaction with return operation: "
                         + expectedApples + " but was: "
                         + actualApples,
                 expectedApples,

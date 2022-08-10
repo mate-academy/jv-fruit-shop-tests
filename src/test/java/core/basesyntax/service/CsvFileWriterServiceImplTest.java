@@ -47,7 +47,6 @@ public class CsvFileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_FileCanNotBeReached_notOk() {
-        Util.createNewFolder();
         writerService.writeToFile(WRONG_OUTPUT_FILE_PATH, REPORT);
     }
 }

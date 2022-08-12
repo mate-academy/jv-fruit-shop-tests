@@ -44,8 +44,9 @@ public class OperationHandlersTest {
 
     @Test
     public void handle_purchaseOperationHandler_Ok() {
+        FruitStorage.fruitsMap.put(Util.banana, 100);
         PURCHASE_OPERATION_HANDLER.handle(purchaseFruitTransaction);
-        int expectedBananas = -20;
+        int expectedBananas = 80;
         int actualBananas = FruitStorage.fruitsMap.get(Util.banana);
         assertEquals("get should return quantity "
                         + "of bananas after transaction with purchase operation: "

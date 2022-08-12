@@ -42,7 +42,7 @@ public class CsvFileReaderServiceImplTest {
         readerService.readFromFile(PATH_TO_FILE);
     }
 
-    public static void writeTestDataToFile() {
+    private void writeTestDataToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_TO_FILE))) {
             writer.write(Util.createTextFromLines(INPUT_FILE_LINES));
         } catch (IOException e) {

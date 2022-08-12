@@ -16,7 +16,7 @@ public class ReportCreatorServiceImplTest {
     }
 
     @Test
-    public void makeReport_defaultCase_Ok() {
+    public void makeReport_validData_Ok() {
         FruitStorage.fruitsMap.put(Util.banana, 50);
         FruitStorage.fruitsMap.put(Util.apple, 65);
         FruitStorage.fruitsMap.put(Util.lemon, 80);

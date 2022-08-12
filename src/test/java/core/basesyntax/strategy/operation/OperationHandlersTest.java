@@ -10,7 +10,7 @@ import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.Util;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class OperationHandlersTest {
@@ -19,8 +19,8 @@ public class OperationHandlersTest {
     private static FruitTransaction supplyFruitTransaction;
     private static FruitTransaction returnFruitTransaction;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void init() {
         initializeFruitTransactions();
     }
 

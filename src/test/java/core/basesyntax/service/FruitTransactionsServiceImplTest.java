@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,8 +16,12 @@ public class FruitTransactionsServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         fruitTransactionsService = new FruitTransactionsServiceImpl();
-        initializeFruitTransactions();
         emptyList = new ArrayList<>();
+    }
+
+    @Before
+    public void init() {
+        initializeFruitTransactions();
     }
 
     @Test

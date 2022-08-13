@@ -38,9 +38,11 @@ public class OperationStrategyTest {
     @Test
     public void getOperationType_Ok() {
         OperationStrategy operationStrategy = new OperationStrategy(operationsMap);
-        OperationHandler operationType = operationStrategy.getOperationType(BALANCE);
-        boolean actual = operationType instanceof OperationHandler;
-        assertTrue(actual);
+        for (FruitTransaction.Operation key: operationsMap.keySet()) {
+            OperationHandler operationType = operationStrategy.getOperationType(key);
+            boolean actual = operationType instanceof OperationHandler;
+            assertTrue(actual);
+        }
     }
 
     @Test

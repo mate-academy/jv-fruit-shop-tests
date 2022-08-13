@@ -36,7 +36,6 @@ public class ReportCreatorServiceImplTest {
 
     @Test
     public void createStringReportEmpty_Ok() {
-
         expected = "fruit,quantity";
         String actual = reportCreatorService.create();
         assertEquals(expected, actual);

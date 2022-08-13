@@ -11,8 +11,8 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.AdditionalOperation;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.SubtractionOperation;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.junit.AfterClass;
@@ -23,7 +23,6 @@ public class FruitTransactionProcessorImplTest {
     private static FruitDao fruitDao;
     private static FruitTransactionProcessor processor;
     private static List<FruitTransaction> fruitTransactions;
-    private static Map<String, Integer> expected;
     private static Storage storage;
 
     @BeforeClass
@@ -41,27 +40,38 @@ public class FruitTransactionProcessorImplTest {
                 new AdditionalOperation(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategy(handlerMap);
         processor = new FruitTransactionProcessorImpl(operationStrategy);
-        fruitTransactions = new ArrayList<>(List.of(
+        fruitTransactions = new LinkedList<>(List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana",20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana",100),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana",13),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple",10)));
-        expected = new HashMap<>();
-        expected.put("banana", 107);
-        expected.put("apple", 10);
     }
 
     @Test
-    public void processWork_Ok() {
+    public void process_Ok() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("banana", 107);
+        map.put("apple", 10);
         processor.process(fruitTransactions);
         String actual = storage.getFruitStorage().toString();
+        String expected = map.toString();
         assertEquals("Test failed! The result of the method is a string "
-                + expected.toString() + " but was: " + actual, expected.toString(), actual);
+                + expected + " but was: " + actual, expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void processWork_NotOk() {
+    public void process_nullList_NotOk() {
         processor.process(null);
+    }
+
+    @Test
+    public void process_emptyList_Ok() {
+        List<FruitTransaction> empty = new LinkedList<>();
+        String expected = storage.getFruitStorage().toString();
+        processor.process(empty);
+        String actual = storage.getFruitStorage().toString();
+        assertEquals("Test failed! An empty string is expected to return bet was: "
+                + actual, expected, actual);
     }
 
     @AfterClass

@@ -17,8 +17,8 @@ public class AdditionalOperationTest {
     private static FruitDao fruitDao;
     private static FruitTransaction banana;
     private static FruitTransaction apple;
-    private static Integer expected;
-    private static Integer expected1;
+    private static final Integer EXPECTED = 70;
+    private static final Integer EXPECTED_1 = 50;
 
     @BeforeClass
     public static void beforeClass() {
@@ -34,15 +34,13 @@ public class AdditionalOperationTest {
         banana = new FruitTransaction(BALANCE,"banana", 30);
         apple = new FruitTransaction(BALANCE, "apple", 20);
         operationHandler.handle(banana);
-        expected = 70;
         Integer actual = fruitDao.get("banana");
         assertEquals("Test failed!Number of bananas should be 70 and there was: "
-                + actual, expected, actual);
+                + actual, EXPECTED, actual);
         operationHandler.handle(apple);
-        expected1 = 50;
         Integer actual1 = fruitDao.get("apple");
         assertEquals("Test failed!Number of apples should be 50 and there was: "
-                + actual, expected1, actual1);
+                + actual, EXPECTED_1, actual1);
     }
 
     @Test(expected = RuntimeException.class)

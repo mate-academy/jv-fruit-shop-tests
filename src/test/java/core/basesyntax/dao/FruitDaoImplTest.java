@@ -13,15 +13,13 @@ import org.junit.Test;
 public class FruitDaoImplTest {
     private static FruitDao fruitDao;
     private static Storage storage;
-    private static Map<String, Integer> excepted;
+    private static Map<String, Integer> testDataMap =
+            new HashMap<>(Map.of("banana", 100, "apple", 50));
 
     @BeforeClass
     public static void beforeClass() {
         storage = new Storage();
         fruitDao = new FruitDaoImpl(storage);
-        excepted = new HashMap<>();
-        excepted.put("banana", 100);
-        excepted.put("apple", 50);
     }
 
     @Before
@@ -31,24 +29,33 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void putFruitToMap_Ok() {
+    public void put_Ok() {
         fruitDao.put("banana", 100);
-        assertEquals((Integer) 100, fruitDao.get("banana"));
+        Integer actual = fruitDao.get("banana");
+        Integer expected = 100;
+        assertEquals("Test failed! expected result 100, but was: " + actual,
+                expected, actual);
     }
 
     @Test
-    public void getOneFruitFromMap_Ok() {
-        assertEquals(excepted.get("banana"), storage.getFruitStorage().get("banana"));
+    public void get_Ok() {
+        Integer expected = testDataMap.get("banana");
+        Integer actual = storage.getFruitStorage().get("banana");
+        assertEquals("Test failed! expected result "
+                + expected + " but was: " + actual, expected, actual);
     }
 
     @Test
     public void getAllFruitFromMap_Ok() {
-        assertEquals(excepted, fruitDao.getAll());
+        Map<String, Integer> expected = FruitDaoImplTest.testDataMap;
+        Map<String, Integer> actual = fruitDao.getAll();
+        assertEquals("Test failed! expected result "
+                + expected + " but was: " + actual, expected, actual);
     }
 
     @AfterClass
     public static void afterClass() {
         storage.getFruitStorage().clear();
-        excepted.clear();
+        testDataMap.clear();
     }
 }

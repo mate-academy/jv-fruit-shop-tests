@@ -36,7 +36,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getOperationType_Ok() {
+    public void getOperationType_ifParameterCorrect_Ok() {
         OperationStrategy operationStrategy = new OperationStrategy(operationsMap);
         for (FruitTransaction.Operation key: operationsMap.keySet()) {
             OperationHandler operationType = operationStrategy.getOperationType(key);
@@ -46,7 +46,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getOperationType_NotOk() {
+    public void getOperationType_ifParameterMethodNull_NotOk() {
         OperationStrategy operationStrategy = new OperationStrategy(operationsMap);
         OperationHandler operationType = operationStrategy.getOperationType(null);
         boolean actual = operationType instanceof OperationHandler;

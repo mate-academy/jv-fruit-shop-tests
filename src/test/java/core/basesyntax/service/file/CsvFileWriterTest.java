@@ -17,7 +17,7 @@ public class CsvFileWriterTest {
     private static String activities;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         csvFileWriter = new CsvFileWriter();
         activities = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
@@ -25,7 +25,7 @@ public class CsvFileWriterTest {
     }
 
     @Test
-    public void fileWtiter_validPath_ok() {
+    public void writeFile_validPath_Ok() {
         String expectedValue = activities;
         csvFileWriter.writeFile(VALID_PATH_TO_FILE, activities);
         String actualValue = readFile(VALID_PATH_TO_FILE);
@@ -33,18 +33,16 @@ public class CsvFileWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileWtiter_invalidPath_ok() {
-        String expectedValue = activities;
+    public void fileWtiter_invalidPath_Ok() {
         csvFileWriter.writeFile(INVALID_PATH_TO_FILE, activities);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileWtiter_nullPath_ok() {
-        String expectedValue = activities;
+    public void fileWtiter_nullPath_Ok() {
         csvFileWriter.writeFile(null, activities);
     }
 
-    public String readFile(String path) {
+    private String readFile(String path) {
         File file = new File(path);
         try {
             List<String> list = Files.readAllLines(file.toPath());

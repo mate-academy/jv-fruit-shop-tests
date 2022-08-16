@@ -12,12 +12,12 @@ public class CsvFileReaderTest {
     private static CsvFileReader csvFileReader;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         csvFileReader = new CsvFileReader();
     }
 
     @Test
-    public void fileReader_validFile_Ok() {
+    public void readeFile_validFile_Ok() {
         List<String> expectedValue =
                 List.of("type,fruit,quantity",
                         "b,banana,20",

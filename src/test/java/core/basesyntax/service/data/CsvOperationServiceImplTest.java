@@ -19,14 +19,10 @@ import org.junit.Test;
 public class CsvOperationServiceImplTest {
     private static CsvOperationServiceImpl csvOperationService;
     private static FruitDaoImpl fruitDao;
-    private static List<FruitTransaction> fruitTransactions;
-    private static Map<String, Integer> storage;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
-        storage = FruitStorage.storage;
-        storage.clear();
         HashMap<FruitTransaction.Operation, OperationHandler> operationHandlerMap
                 = new HashMap<>() {{
                         put(FruitTransaction.Operation.BALANCE,
@@ -42,36 +38,43 @@ public class CsvOperationServiceImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
-        storage.clear();
+    public void setUp() {
+        FruitStorage.storage.clear();
     }
 
     @Test
-    public void processOperation_validOperation_ok() {
+    public void processOperation_validOperation_Ok() {
+        List<FruitTransaction> fruitTransactions;
         fruitTransactions = List.of(new FruitTransaction("b", "banana", 10));
         csvOperationService.processOperation(fruitTransactions);
-        String expectedValue = "{banana=10}";
-        String actualValues = storage.toString();
+        Map<String, Integer> expectedValue = new HashMap<>() {{
+                put("banana", 10);
+                }};
+        Map<String, Integer> actualValues = FruitStorage.storage;
         Assert.assertEquals(expectedValue, actualValues);
         fruitTransactions = List.of(new FruitTransaction("s", "banana", 50));
         csvOperationService.processOperation(fruitTransactions);
-        expectedValue = "{banana=60}";
-        actualValues = storage.toString();
+        expectedValue = new HashMap<>() {{
+                put("banana", 60);
+                }};
         Assert.assertEquals(expectedValue, actualValues);
         fruitTransactions = List.of(new FruitTransaction("p", "banana", 20));
         csvOperationService.processOperation(fruitTransactions);
-        expectedValue = "{banana=40}";
-        actualValues = storage.toString();
+        expectedValue = new HashMap<>() {{
+                put("banana", 40);
+                }};
         Assert.assertEquals(expectedValue, actualValues);
         fruitTransactions = List.of(new FruitTransaction("r", "banana", 30));
         csvOperationService.processOperation(fruitTransactions);
-        expectedValue = "{banana=70}";
-        actualValues = storage.toString();
+        expectedValue = new HashMap<>() {{
+                put("banana", 70);
+                }};
         Assert.assertEquals(expectedValue, actualValues);
     }
 
     @Test(expected = RuntimeException.class)
-    public void processOperation_invalidOperation_ok() {
+    public void processOperation_invalidOperation_Ok() {
+        List<FruitTransaction> fruitTransactions;
         fruitTransactions = List.of(new FruitTransaction("w", "banana", 10));
         csvOperationService.processOperation(fruitTransactions);
     }
@@ -83,6 +86,7 @@ public class CsvOperationServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void processOperation_negativeBalance_notOk() {
+        List<FruitTransaction> fruitTransactions;
         fruitTransactions = List.of(new FruitTransaction("b", "banana", 10),
                 new FruitTransaction("p", "banana", 20));
         csvOperationService.processOperation(fruitTransactions);
@@ -90,6 +94,7 @@ public class CsvOperationServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void processOperation_multipleBalance_notOk() {
+        List<FruitTransaction> fruitTransactions;
         fruitTransactions = List.of(new FruitTransaction("b", "banana", 10),
                 new FruitTransaction("b", "banana", 20));
         csvOperationService.processOperation(fruitTransactions);

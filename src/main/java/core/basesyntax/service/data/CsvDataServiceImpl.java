@@ -16,6 +16,7 @@ public class CsvDataServiceImpl implements DataService<String> {
                 .map(this::parser).collect(Collectors.toList());
     }
 
+    @Override
     public FruitTransaction parser(String row) {
         String[] fields = row.split(",");
         return new FruitTransaction(fields[INDEX_OPERATION], fields[INDEX_FRUIT],

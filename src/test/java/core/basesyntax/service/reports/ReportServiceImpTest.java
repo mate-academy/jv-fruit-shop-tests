@@ -10,26 +10,25 @@ import org.junit.Test;
 
 public class ReportServiceImpTest {
     private static ReportServiceImp reportServiceImp;
-    private static String header;
+    private static final String HEADER = "fruit,quantity";
     private static Map<String, Integer> storage;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportServiceImp = new ReportServiceImp(new FruitDaoImpl());
-        header = "fruit,quantity";
         storage = FruitStorage.storage;
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         storage.clear();
     }
 
     @Test
-    public void reportService_validStore_ok() {
+    public void create_validStore_Ok() {
         storage.put("banana",152);
         storage.put("apple", 90);
-        String expectedValue = new StringBuffer().append(header)
+        String expectedValue = new StringBuffer().append(HEADER)
                 .append(System.lineSeparator())
                 .append("banana,152")
                 .append(System.lineSeparator())
@@ -39,9 +38,9 @@ public class ReportServiceImpTest {
     }
 
     @Test
-    public void reportService_nullStore_ok() {
+    public void reportService_nullStore_Ok() {
         storage = null;
-        String expectedValue = header;
+        String expectedValue = HEADER;
         String actualValue = reportServiceImp.create();
         Assert.assertEquals(actualValue, expectedValue);
     }

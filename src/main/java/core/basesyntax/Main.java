@@ -38,7 +38,6 @@ public class Main {
                 new ReturnFruitOperationHandler(fruitDao));
         operationsMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyFruitOperationHandler(fruitDao));
-
         FruitTransactionMapper fruitTransactionMapper = new FruitTransactionMapperImpl();
         FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
         List<FruitTransaction> fruitTransactionList = fruitTransactionMapper

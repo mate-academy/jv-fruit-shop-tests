@@ -1,4 +1,6 @@
-package core;
+package core.model;
+
+import java.util.Objects;
 
 public class FruitTransaction {
     private Activity activity;
@@ -33,6 +35,19 @@ public class FruitTransaction {
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return activity == that.activity && Objects.equals(fruit, that.fruit)
+                && Objects.equals(count, that.count);
     }
 
     /**

@@ -1,6 +1,8 @@
-package core.service;
+package core.service.impl;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
+import core.service.ParserService;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,6 +15,9 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {
+        if (dataFromFile == null) {
+            return new ArrayList<>();
+        }
         return dataFromFile.stream()
                 .map(s -> s.split(CHAR_FOR_SPLIT))
                 .map(strings -> new FruitTransaction(Arrays.stream(FruitTransaction

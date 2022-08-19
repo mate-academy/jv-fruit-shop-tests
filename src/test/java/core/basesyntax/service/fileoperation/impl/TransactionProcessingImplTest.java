@@ -1,5 +1,8 @@
 package core.basesyntax.service.fileoperation.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.FruitShopStorage;
@@ -12,15 +15,13 @@ import core.basesyntax.service.operation.impl.PurchaseHandler;
 import core.basesyntax.service.operation.impl.ReturnHandler;
 import core.basesyntax.service.operation.impl.SupplyHandler;
 import core.basesyntax.strategy.StrategyOperationImpl;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TransactionProcessingImplTest {
     private static TransactionProcessing processing;
@@ -59,7 +60,7 @@ public class TransactionProcessingImplTest {
         testListTransaction.add(retryBanana);
         testListTransaction.add(balanceOrange);
         processing.transactionProcessing(testListTransaction);
-        Fruit expectedBanana = new Fruit ("banana", 250);
+        Fruit expectedBanana = new Fruit("banana", 250);
         Fruit actualBanana = dao.getFruit("banana");
         Fruit expectedOrange = new Fruit("orange", 50);
         Fruit actualOrange = dao.getFruit("orange");
@@ -69,12 +70,12 @@ public class TransactionProcessingImplTest {
 
     @Test
     public void purchase_transaction_Ok() {
-        String expectedName = "banana";
-        int expectedAmount = 50;
         List<Transaction> testListTransaction = new ArrayList<>();
         testListTransaction.add(balanceBanana);
         testListTransaction.add(purchaseBanana);
         processing.transactionProcessing(testListTransaction);
+        String expectedName = "banana";
+        int expectedAmount = 50;
         boolean expected = dao.getFruit(expectedName).getAmountFruit() == expectedAmount;
         assertTrue(expected);
     }

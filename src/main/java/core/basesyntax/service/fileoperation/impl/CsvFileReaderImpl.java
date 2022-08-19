@@ -16,7 +16,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
             List<String> lineString = reader.lines()
                     .collect(Collectors.toList());
             if (lineString.size() <= MINIMUM_SIZE) {
-                throw  new RuntimeException("File is empty " + filePath);
+                throw new RuntimeException("File is empty " + filePath);
             }
             return lineString;
         } catch (IOException e) {

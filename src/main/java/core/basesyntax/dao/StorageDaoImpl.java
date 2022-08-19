@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitShopStorage;
 import core.basesyntax.model.Fruit;
-
 import java.util.List;
 
 public class StorageDaoImpl implements StorageDao {
@@ -25,7 +24,8 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public List<Fruit> getAll() {
-        if (FruitShopStorage.getStorageFruits() == null || FruitShopStorage.getStorageFruits().isEmpty()) {
+        if (FruitShopStorage.getStorageFruits() == null
+                || FruitShopStorage.getStorageFruits().isEmpty()) {
             throw new RuntimeException("Storage is empty ");
         }
         return FruitShopStorage.getStorageFruits();

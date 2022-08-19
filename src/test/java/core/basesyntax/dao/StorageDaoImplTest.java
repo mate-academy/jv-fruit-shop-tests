@@ -1,11 +1,13 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.db.FruitShopStorage;
 import core.basesyntax.model.Fruit;
+import java.util.List;
 import org.junit.After;
 import org.junit.Test;
-import java.util.List;
-import static org.junit.Assert.*;
 
 public class StorageDaoImplTest {
     private static final StorageDao daoTest = new StorageDaoImpl();
@@ -30,7 +32,7 @@ public class StorageDaoImplTest {
         daoTest.addFruit(apple);
         String expected = "apple";
         String actual = daoTest.getFruit("apple").getName();
-        assertEquals( expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

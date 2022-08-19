@@ -7,11 +7,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FruitShopStorageTest {
-    StorageDaoImpl daoTest = new StorageDaoImpl();
-    Fruit apple = new Fruit("apple", 35);
-    Fruit orange = new Fruit("orange", 41);
-    Fruit peach = new Fruit("peach", 20);
-    Fruit apricot = new Fruit("apricot", 27);
+    private static final StorageDaoImpl daoTest = new StorageDaoImpl();
+    private static final Fruit apple = new Fruit("apple", 35);
+    private static final Fruit orange = new Fruit("orange", 41);
+    private static final Fruit peach = new Fruit("peach", 20);
+    private static final Fruit apricot = new Fruit("apricot", 27);
 
     @AfterClass
     public static void tearDown() {

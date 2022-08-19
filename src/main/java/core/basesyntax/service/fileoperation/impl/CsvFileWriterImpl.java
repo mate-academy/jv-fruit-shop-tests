@@ -1,7 +1,6 @@
 package core.basesyntax.service.fileoperation.impl;
 
 import core.basesyntax.service.fileoperation.CsvFileWriter;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

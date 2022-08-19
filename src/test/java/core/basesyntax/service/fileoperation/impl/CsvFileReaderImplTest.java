@@ -1,14 +1,15 @@
 package core.basesyntax.service.fileoperation.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.fileoperation.CsvFileReader;
-import org.junit.After;
-import org.junit.Test;
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Test;
 
 public class CsvFileReaderImplTest {
     private static final Path TEST_FILE_PATH = Path.of("src/test/resources.csv");
@@ -33,6 +34,7 @@ public class CsvFileReaderImplTest {
             throw new RuntimeException("Data is not written. ");
         }
     }
+
     public String getStringForWrite(List<String> data) {
         return data.stream()
                 .map(s -> s + System.lineSeparator())

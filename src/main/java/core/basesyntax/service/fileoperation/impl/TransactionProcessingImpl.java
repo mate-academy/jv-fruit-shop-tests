@@ -3,7 +3,6 @@ package core.basesyntax.service.fileoperation.impl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.fileoperation.TransactionProcessing;
 import core.basesyntax.strategy.StrategyOperation;
-
 import java.util.List;
 
 public class TransactionProcessingImpl implements TransactionProcessing {

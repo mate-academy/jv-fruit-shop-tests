@@ -1,15 +1,16 @@
 package core.basesyntax.service.fileoperation.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.fileoperation.CreateReport;
 import core.basesyntax.service.fileoperation.CsvFileWriter;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.List;
 import java.util.stream.Collectors;
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CsvFileWriterImplTest {
     private static final String OUTPUT_SOURCE = "src/test/resources/test-output.csv";
@@ -30,16 +31,15 @@ public class CsvFileWriterImplTest {
         List<String> actual = new CsvFileReaderImpl().inputFile(OUTPUT_SOURCE);
         List<String> expected = dao.getAll()
                 .stream()
-                .map(s ->s.getName() + "," + s.getAmountFruit())
+                .map(s -> s.getName() + "," + s.getAmountFruit())
                 .collect(Collectors.toList());
-        String TITLE = "fruit,quantity";
-        expected.add(0, TITLE);
+        String title = "fruit,quantity";
+        expected.add(0, title);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_invalidPath_notOk(){
+    public void write_invalidPath_notOk() {
         writer.writeFile("",report.getReport());
     }
-
 }

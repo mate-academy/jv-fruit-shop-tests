@@ -3,7 +3,6 @@ package serviceimpl;
 import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
-import model.FruitTransaction;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,14 +24,6 @@ public class ReportCreatorImplTest {
 
     @Test
     public void reportCreator_Ok() {
-        FruitTransaction banana = new FruitTransaction();
-        banana.setFruit("banana");
-        banana.setOperation(FruitTransaction.Operation.BALANCE);
-        banana.setQuantity(152);
-        FruitTransaction apple = new FruitTransaction();
-        apple.setFruit("apple");
-        apple.setOperation(FruitTransaction.Operation.BALANCE);
-        apple.setQuantity(90);
         storageDao.update("banana", 152);
         storageDao.update("apple", 90);
         String expected = HEADER + System.lineSeparator()

@@ -26,7 +26,7 @@ public class BalanceOperationHandlerTest {
     public void balanceOperation_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
         operationHandler.handle(fruitTransaction);
-        Integer actual = storageDao.getFruitQuantity("banana");
+        Integer actual = Storage.storage.get("banana");
         Integer expected = 20;
         Assert.assertEquals(expected,actual);
     }

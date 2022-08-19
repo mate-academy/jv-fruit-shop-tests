@@ -46,6 +46,7 @@ public class Main {
         FruitTransactionProcessor fruitTransactionProcessor =
                 new FruitTransactionProcessorImpl(operationStrategy);
         fruitTransactionProcessor.makeDailyFruitsUpdate(fruitTransactionList);
+
         FruitsService fruitsService = new FruitsServiceImpl();
         String fruitsReport = fruitsService.generateFruitsReport(FruitsStorage.getFruits());
         FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();

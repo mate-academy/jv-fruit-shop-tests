@@ -40,5 +40,4 @@ public class ReadFileImplTest {
         List<String> actual = readFile.readFromFile(INVALID_WAY);
         Assert.assertNotEquals(expected, actual);
     }
-
 }

@@ -42,19 +42,6 @@ public class ReportCreatorImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void reportCreator_Not_OK() {
-        reportCreator = new ReportCreatorImpl(null);
-        reportCreator.create();
-    }
-
-    @Test
-    public void reportEmpty_NotOk() {
-        String expected = "";
-        String actual = reportCreator.create();
-        Assert.assertNotEquals(expected,actual);
-    }
-
     @AfterClass
     public static void afterClass() {
         Storage.storage.clear();

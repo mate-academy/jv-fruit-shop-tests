@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class FileWriterServiceImplTest {
-    private static final String NO_FILE_TO_WRITE = "src/...";
+    private static final String NO_FILE_TO_WRITE = "";
     private static final String FILE_TO_WRITE = "src/main/resources/output_test_data.csv";
 
     @Rule

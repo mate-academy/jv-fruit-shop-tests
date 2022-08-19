@@ -9,9 +9,11 @@ public class FruitsServiceImpl implements FruitsService {
     public String generateFruitsReport(Map<String, Integer> fruits) {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(TITLE_FOR_REPORT);
-        for (Map.Entry<String, Integer> fruit : fruits.entrySet()) {
-            reportBuilder.append(System.lineSeparator()).append(fruit.getKey())
-                    .append(",").append(fruit.getValue());
+        if (!fruits.isEmpty()) {
+            for (Map.Entry<String, Integer> fruit : fruits.entrySet()) {
+                reportBuilder.append(System.lineSeparator()).append(fruit.getKey())
+                        .append(",").append(fruit.getValue());
+            }
         }
         return reportBuilder.toString();
     }

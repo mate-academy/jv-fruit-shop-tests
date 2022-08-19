@@ -23,7 +23,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceOperation_ok() {
+    public void handle_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
         operationHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get("banana");

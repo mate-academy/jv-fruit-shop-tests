@@ -23,13 +23,20 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseIs_Ok() {
+    public void purchase_enoughInStorage_Ok() {
         storageDao.update("banana", 100);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20);
         operationHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get("banana");
         Integer expected = 80;
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void enoughFruit_NotOK() {
+        storageDao.update("apple", null);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,"apple", 10);
+        operationHandler.handle(fruitTransaction);
     }
 
     @AfterClass

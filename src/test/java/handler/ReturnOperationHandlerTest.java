@@ -23,7 +23,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnOperation_Ok() {
+    public void handle_Ok() {
         storageDao.update("apple", 50);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 13);
         operationHandler.handle(fruitTransaction);

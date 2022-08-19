@@ -10,8 +10,8 @@ import service.FileWriter;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
-    private static final String WAY_TO_REPORT = "src/main/resources/CloseDay.csv";
-    private static final String WRONG_WAY_TO_WRITE = "src/main/resources/CloseDay.csv";
+    private static final String CORRECT_REPORT_PATH = "src/main/resources/CloseDay.csv";
+    private static final String WRONG_REPORT_PATH = "src/main/resources/CloseDay.csv";
     private static String expectedString;
 
     @BeforeClass
@@ -24,18 +24,18 @@ public class FileWriterImplTest {
     @Test
     public void fileWriter_Ok() {
         String expected = expectedString;
-        String actual = getReadFile(WAY_TO_REPORT);
+        String actual = getReadFile(WRONG_REPORT_PATH);
         Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void wrongPath_NotOk() {
-        fileWriter.writeToFile(WAY_TO_REPORT,WRONG_WAY_TO_WRITE);
+    public void write_wrongPath_NotOk() {
+        fileWriter.writeToFile(CORRECT_REPORT_PATH,WRONG_REPORT_PATH);
     }
 
     @Test (expected = RuntimeException.class)
-    public void fileIsNull_notOK() {
-        fileWriter.writeToFile(null, WAY_TO_REPORT);
+    public void write_fileNull_notOK() {
+        fileWriter.writeToFile(null, CORRECT_REPORT_PATH);
     }
 
     @Test (expected = RuntimeException.class)

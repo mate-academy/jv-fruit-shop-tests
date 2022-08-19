@@ -52,7 +52,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(activityOperationMap);
         fruitTransactions.forEach(fruitTransaction ->
                 operationStrategy
-                .get(fruitTransaction.getActivity())
-                .performOperation(fruitTransaction));
+                        .get(fruitTransaction.getActivity())
+                        .performOperation(fruitTransaction));
     }
 }

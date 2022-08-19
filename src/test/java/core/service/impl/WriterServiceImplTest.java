@@ -37,8 +37,13 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writerService_writeFileWithNullArguments_NotOk() {
-        writerService.writeToFile(null, null);
+    public void writerService_writeFileNameNull_NotOk() {
+        writerService.writeToFile(null, "");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writerService_writeFileWithNullReport_NotOk() {
+        writerService.writeToFile(FILE_NAME, null);
     }
 
     @Test

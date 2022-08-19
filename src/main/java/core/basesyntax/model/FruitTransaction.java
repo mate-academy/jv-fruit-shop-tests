@@ -39,13 +39,21 @@ public class FruitTransaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FruitTransaction)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FruitTransaction)) {
+            return false;
+        }
 
         FruitTransaction that = (FruitTransaction) o;
 
-        if (quantity != that.quantity) return false;
-        if (operation != that.operation) return false;
+        if (quantity != that.quantity) {
+            return false;
+        }
+        if (operation != that.operation) {
+            return false;
+        }
         return fruit != null ? fruit.equals(that.fruit) : that.fruit == null;
     }
 

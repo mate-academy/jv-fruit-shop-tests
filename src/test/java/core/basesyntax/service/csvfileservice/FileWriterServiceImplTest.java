@@ -11,8 +11,8 @@ public class FileWriterServiceImplTest {
     @Rule
     public final ExpectedException expectedException = ExpectedException.none();
 
-    FileWriterService fileWriterService = new FileWriterServiceImpl();
-    String fruitsReport = "fruit,quantity" + System.lineSeparator()
+    private FileWriterService fileWriterService = new FileWriterServiceImpl();
+    private String fruitsReport = "fruit,quantity" + System.lineSeparator()
             + "banana,100" + System.lineSeparator()
             + "orange,70" + System.lineSeparator()
             + "apple,50";

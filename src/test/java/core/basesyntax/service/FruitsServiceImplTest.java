@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FruitsServiceImplTest {
-    FruitsService fruitsService = new FruitsServiceImpl();
+    private FruitsService fruitsService = new FruitsServiceImpl();
 
     @After
     public void afterEachTest() {

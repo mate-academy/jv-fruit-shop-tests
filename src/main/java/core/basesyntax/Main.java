@@ -19,7 +19,6 @@ import core.basesyntax.service.operationsservice.ReturnFruitOperationHandler;
 import core.basesyntax.service.operationsservice.SupplyFruitOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

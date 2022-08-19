@@ -1,14 +1,14 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitsStorage;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import java.util.HashMap;
-import java.util.Map;
 
 public class FruitDaoImplTest {
-    FruitDao fruitDao = new FruitDaoImpl();
+    private FruitDao fruitDao = new FruitDaoImpl();
 
     @After
     public void afterEachTest() {

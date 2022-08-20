@@ -3,10 +3,17 @@ package core.basesyntax.service;
 import core.basesyntax.db.FruitsStorage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitsServiceImplTest {
-    private FruitsService fruitsService = new FruitsServiceImpl();
+
+    private static FruitsService fruitsService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitsService = new FruitsServiceImpl();
+    }
 
     @After
     public void afterEachTest() {
@@ -14,7 +21,7 @@ public class FruitsServiceImplTest {
     }
 
     @Test
-    public void generateFruitsReportWithDifferentTypesOfFruits_Ok() {
+    public void generateReport_differentFruits_Ok() {
         FruitsStorage.fruits.put("banana", 100);
         FruitsStorage.fruits.put("orange", 70);
         FruitsStorage.fruits.put("apple", 50);
@@ -27,7 +34,7 @@ public class FruitsServiceImplTest {
     }
 
     @Test
-    public void generateFruitsReportWithoutFruits_Ok() {
+    public void generateReport_noFruits_Ok() {
         FruitsStorage.fruits.clear();
         String actualResult = fruitsService.generateFruitsReport(FruitsStorage.fruits);
         String expectedResult = null;

@@ -5,10 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
+    }
 
     @After
     public void afterEachTest() {
@@ -16,7 +22,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getFruitsStorageWithDifferentFruits_Ok() {
+    public void getStorageData_notEmpty_Ok() {
         FruitsStorage.fruits.put("banana", 100);
         FruitsStorage.fruits.put("orange", 70);
         FruitsStorage.fruits.put("apple", 50);
@@ -26,14 +32,14 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getFruitsStorageEmpty_Ok() {
+    public void getStorageData_empty_Ok() {
         Map<String, Integer> actualResult = fruitDao.getStorageData();
         HashMap<String, Integer> expectedResult = new HashMap<>();
         Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void getQuantityForApple_Ok() {
+    public void getQuantity_apple_Ok() {
         FruitsStorage.fruits.put("banana", 100);
         FruitsStorage.fruits.put("orange", 70);
         FruitsStorage.fruits.put("apple", 50);
@@ -43,7 +49,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void setQuantityForOrange_Ok() {
+    public void setQuantity_orange_Ok() {
         FruitsStorage.fruits.put("banana", 100);
         FruitsStorage.fruits.put("orange", 70);
         FruitsStorage.fruits.put("apple", 50);

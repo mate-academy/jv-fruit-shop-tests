@@ -1,9 +1,11 @@
-package core.basesyntax.service.fruittransactionservice;
+package core.basesyntax.service.transaction;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.fruittransactionservice.FruitTransactionProcessor;
+import core.basesyntax.service.fruittransactionservice.FruitTransactionProcessorImpl;
 import core.basesyntax.service.operationsservice.BalanceFruitOperationHandler;
 import core.basesyntax.service.operationsservice.FruitOperationHandler;
 import core.basesyntax.service.operationsservice.PurchaseFruitOperationHandler;
@@ -15,17 +17,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionProcessorImplTest {
-    private Map<FruitTransaction.Operation, FruitOperationHandler> operationsMap = new HashMap<>();
-    private FruitDao fruitDao = new FruitDaoImpl();
-    private OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
-    private FruitTransactionProcessor fruitTransaction
-            = new FruitTransactionProcessorImpl(operationStrategy);
+    private static FruitTransactionProcessor fruitTransaction;
 
-    @Test
-    public void makeDailyFruitsUpdateIncludingAllTypesOfOperations() {
+    @BeforeClass
+    public static void beforeClass() {
+        FruitDao fruitDao = new FruitDaoImpl();
+        Map<FruitTransaction.Operation, FruitOperationHandler> operationsMap = new HashMap<>();
         operationsMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceFruitOperationHandler(fruitDao));
         operationsMap.put(FruitTransaction.Operation.PURCHASE,
@@ -34,7 +35,21 @@ public class FruitTransactionProcessorImplTest {
                 new ReturnFruitOperationHandler(fruitDao));
         operationsMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyFruitOperationHandler(fruitDao));
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
+        fruitTransaction
+                = new FruitTransactionProcessorImpl(operationStrategy);
+    }
 
+    @Test
+    public void makeFruitsUpdate_allTypesOfOperations_Ok() {
+        fruitTransaction.makeDailyFruitsUpdate(getTransactions());
+        Map<String, Integer> actualFruitsMap = FruitsStorage.fruits;
+        Map<String, Integer> expectedFruitsMap = new HashMap<>();
+        expectedFruitsMap.put("apple", 150);
+        Assert.assertEquals(expectedFruitsMap, actualFruitsMap);
+    }
+
+    private List<FruitTransaction> getTransactions() {
         FruitTransaction bananaTransaction = new FruitTransaction();
         bananaTransaction.setFruit("apple");
         bananaTransaction.setQuantity(120);
@@ -51,13 +66,6 @@ public class FruitTransactionProcessorImplTest {
         kiwiTransaction.setFruit("apple");
         kiwiTransaction.setQuantity(10);
         kiwiTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        List<FruitTransaction> listOfTransactions
-                = List.of(bananaTransaction, appleTransaction, orangeTransaction, kiwiTransaction);
-
-        fruitTransaction.makeDailyFruitsUpdate(listOfTransactions);
-        Map<String, Integer> actualFruitsMap = FruitsStorage.fruits;
-        Map<String, Integer> expectedFruitsMap = new HashMap<>();
-        expectedFruitsMap.put("apple", 150);
-        Assert.assertEquals(expectedFruitsMap, actualFruitsMap);
+        return List.of(bananaTransaction, appleTransaction, orangeTransaction, kiwiTransaction);
     }
 }

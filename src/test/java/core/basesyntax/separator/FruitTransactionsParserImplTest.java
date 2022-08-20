@@ -13,6 +13,9 @@ public class FruitTransactionsParserImplTest {
             "type,fruit,quantity",
             "b,apple,100",
             "b,banana,100");
+    private static final List<String> invalidTestData = List.of(
+            "type,fruit,quantity",
+            "b,100,apple");
     private static final int FIRST_INDEX = 0;
     private static final int SECOND_INDEX = 1;
     private static final FruitTransactionsParser parser = new FruitTransactionsParserImpl();
@@ -23,7 +26,7 @@ public class FruitTransactionsParserImplTest {
     }
 
     @Test
-    public void transaction_Ok() {
+    public void create_validTransaction_Ok() {
         String expectedApple = "apple";
         String expectedBanana = "banana";
         List<Transaction> actualList = parser.transactionsParser(validTestData);
@@ -32,4 +35,11 @@ public class FruitTransactionsParserImplTest {
         assertEquals(expectedApple, actualFirstName);
         assertEquals(expectedBanana, actualSecondName);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void create_invalidTransaction_notOk() {
+        List<Transaction> actualList = parser.transactionsParser(invalidTestData);
+        System.out.println(actualList);
+    }
+
 }

@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.FruitShopStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.fileoperation.CreateReport;
 import core.basesyntax.service.fileoperation.CsvFileWriter;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +25,11 @@ public class CsvFileWriterImplTest {
         dao.addFruit(new Fruit("apple", 40));
         dao.addFruit(new Fruit("peach", 50));
         dao.addFruit(new Fruit("apricot", 10));
+    }
+
+    @After
+    public void clear_storage() {
+        FruitShopStorage.storageFruits.clear();
     }
 
     @Test

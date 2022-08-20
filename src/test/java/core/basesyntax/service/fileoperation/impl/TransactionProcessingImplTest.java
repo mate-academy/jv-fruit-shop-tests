@@ -48,7 +48,7 @@ public class TransactionProcessingImplTest {
     }
 
     @After
-    public void tearDown() {
+    public void clear_storage() {
         FruitShopStorage.storageFruits.clear();
     }
 

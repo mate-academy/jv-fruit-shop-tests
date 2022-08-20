@@ -14,12 +14,18 @@ public class FruitTransactionsParserImpl implements FruitTransactionsParser {
 
     @Override
     public List<Transaction> transactionsParser(List<String> readLine) {
-        return readLine.stream()
-                .skip(TITLE_LINE)
-                .map(s -> s.split(SEPARATOR))
-                .map(s -> new Transaction(new Fruit(s[FRUIT_NAME],
-                        Integer.parseInt(s[FRUIT_QUANTITY])),
-                        Transaction.Type.getTypeOperation(s[TYPE_OPERATION_INDEX])))
-                .collect(Collectors.toList());
+        List<Transaction> transactions;
+        try {
+            transactions = readLine.stream()
+                    .skip(TITLE_LINE)
+                    .map(s -> s.split(SEPARATOR))
+                    .map(s -> new Transaction(new Fruit(s[FRUIT_NAME],
+                            Integer.parseInt(s[FRUIT_QUANTITY])),
+                            Transaction.Type.getTypeOperation(s[TYPE_OPERATION_INDEX])))
+                    .collect(Collectors.toList());
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Can't parse this line " + readLine);
+        }
+        return transactions;
     }
 }

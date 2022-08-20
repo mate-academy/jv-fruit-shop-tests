@@ -51,4 +51,9 @@ public class StorageDaoImplTest {
         boolean actual = testList.size() == expected;
         assertTrue(actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void get_allFruit_emptyStorage_notOk() {
+        daoTest.getAll();
+    }
 }

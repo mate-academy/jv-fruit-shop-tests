@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FileReaderServiceImplTest {
     private static final String FILE_TO_READ = "src/test/resources/input_test_data.csv";
@@ -16,18 +14,13 @@ public class FileReaderServiceImplTest {
     private static final String NO_FILE_TO_READ = "";
     private static FileReaderService fileReaderService;
 
-    @Rule
-    public final ExpectedException expectedException = ExpectedException.none();
-
     @BeforeClass
     public static void beforeClass() {
         fileReaderService = new FileReaderServiceImpl();
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readFromFile_fileNotExisted_notOk() {
-        expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("Can`t get data from file" + NO_FILE_TO_READ);
         fileReaderService.readFromFile(NO_FILE_TO_READ);
     }
 

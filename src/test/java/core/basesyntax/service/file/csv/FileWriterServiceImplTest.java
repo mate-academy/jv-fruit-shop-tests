@@ -3,9 +3,7 @@ package core.basesyntax.service.file.csv;
 import core.basesyntax.service.csvfileservice.FileWriterService;
 import core.basesyntax.service.csvfileservice.FileWriterServiceImpl;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FileWriterServiceImplTest {
     private static final String NO_FILE_TO_WRITE = "";
@@ -16,18 +14,13 @@ public class FileWriterServiceImplTest {
             + "apple,50";
     private static FileWriterService fileWriterService;
 
-    @Rule
-    public final ExpectedException expectedException = ExpectedException.none();
-
     @BeforeClass
     public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void writeToFile_fileNotExisted_notOk() {
-        expectedException.expect(RuntimeException.class);
-        expectedException.expectMessage("Can't write data to the file " + NO_FILE_TO_WRITE);
         fileWriterService.writeToFile(FRUITS_REPORT, NO_FILE_TO_WRITE);
     }
 

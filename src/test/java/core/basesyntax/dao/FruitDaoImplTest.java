@@ -23,11 +23,14 @@ public class FruitDaoImplTest {
 
     @Test
     public void getStorageData_notEmpty_Ok() {
-        FruitsStorage.fruits.put("banana", 100);
-        FruitsStorage.fruits.put("orange", 70);
-        FruitsStorage.fruits.put("apple", 50);
+        Map<String, Integer> expectedResult = new HashMap<>();
+        expectedResult.put("banana", 100);
+        expectedResult.put("orange", 70);
+        expectedResult.put("apple", 50);
+        for (Map.Entry<String, Integer> entry : expectedResult.entrySet()) {
+            FruitsStorage.fruits.put(entry.getKey(), entry.getValue());
+        }
         Map<String, Integer> actualResult = fruitDao.getStorageData();
-        Map<String, Integer> expectedResult = FruitsStorage.fruits;
         Assert.assertEquals(expectedResult, actualResult);
     }
 

@@ -49,4 +49,14 @@ public class CsvFileWriterImplTest {
     public void write_invalidPath_notOk() {
         writer.writeFile("",report.getReport());
     }
+
+    @Test(expected = RuntimeException.class)
+    public void write_nullPath_notOk() {
+        writer.writeFile(null,report.getReport());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void write_nullReport_notOk() {
+        writer.writeFile(OUTPUT_SOURCE,null);
+    }
 }

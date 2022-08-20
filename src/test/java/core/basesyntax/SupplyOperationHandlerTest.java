@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -41,9 +41,9 @@ public class SupplyOperationHandlerTest {
     public void supplyWithSuchFruitInStorage_Ok() {
         Storage.fruits.add(new Fruit("orange", 10));
         supplyOperationHandler.handle(fruitTransaction);
-        Fruit expected = new Fruit("orange", 30);
-        Fruit actual = Storage.fruits.get(0);
-        assertEquals(expected, actual);
+        boolean result = Storage.fruits.get(0).getFruitType().equals("orange")
+                && Storage.fruits.get(0).getFruitQuantity() == 30;
+        assertTrue(result);
     }
 
     @After

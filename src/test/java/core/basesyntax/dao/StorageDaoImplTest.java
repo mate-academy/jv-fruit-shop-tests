@@ -12,6 +12,7 @@ import org.junit.Test;
 
 public class StorageDaoImplTest {
     private static StorageDao daoTest;
+
     @BeforeClass
     public static void setUp() {
         daoTest = new StorageDaoImpl();

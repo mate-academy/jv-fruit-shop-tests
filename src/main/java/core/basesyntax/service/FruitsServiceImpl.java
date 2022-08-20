@@ -7,13 +7,14 @@ public class FruitsServiceImpl implements FruitsService {
 
     @Override
     public String generateFruitsReport(Map<String, Integer> fruits) {
+        if (fruits.isEmpty()) {
+            return null;
+        }
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(TITLE_FOR_REPORT);
-        if (!fruits.isEmpty()) {
-            for (Map.Entry<String, Integer> fruit : fruits.entrySet()) {
-                reportBuilder.append(System.lineSeparator()).append(fruit.getKey())
-                        .append(",").append(fruit.getValue());
-            }
+        for (Map.Entry<String, Integer> fruit : fruits.entrySet()) {
+            reportBuilder.append(System.lineSeparator()).append(fruit.getKey())
+                    .append(",").append(fruit.getValue());
         }
         return reportBuilder.toString();
     }

@@ -25,4 +25,11 @@ public class FruitsServiceImplTest {
                 + "apple,50";
         Assert.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void generateFruitsReportWithoutFruits_Ok() {
+        String actualResult = fruitsService.generateFruitsReport(FruitsStorage.fruits);
+        String expectedResult = null;
+        Assert.assertEquals(expectedResult, actualResult);
+    }
 }

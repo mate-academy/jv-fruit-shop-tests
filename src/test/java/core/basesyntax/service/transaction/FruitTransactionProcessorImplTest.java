@@ -22,10 +22,12 @@ import org.junit.Test;
 
 public class FruitTransactionProcessorImplTest {
     private static FruitTransactionProcessor fruitTransaction;
+    private static FruitDao fruitDao;
+    private static OperationStrategy operationStrategy;
 
     @BeforeClass
     public static void beforeClass() {
-        FruitDao fruitDao = new FruitDaoImpl();
+        fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, FruitOperationHandler> operationsMap = new HashMap<>();
         operationsMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceFruitOperationHandler(fruitDao));
@@ -35,7 +37,7 @@ public class FruitTransactionProcessorImplTest {
                 new ReturnFruitOperationHandler(fruitDao));
         operationsMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyFruitOperationHandler(fruitDao));
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
+        operationStrategy = new OperationStrategyImpl(operationsMap);
         fruitTransaction
                 = new FruitTransactionProcessorImpl(operationStrategy);
     }

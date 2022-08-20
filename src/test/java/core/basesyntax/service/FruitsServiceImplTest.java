@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitsServiceImplTest {
-
     private static FruitsService fruitsService;
 
     @BeforeClass

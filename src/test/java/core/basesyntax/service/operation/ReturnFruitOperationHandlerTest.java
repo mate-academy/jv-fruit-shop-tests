@@ -11,10 +11,11 @@ import org.junit.Test;
 
 public class ReturnFruitOperationHandlerTest {
     private static ReturnFruitOperationHandler returnFruitOperationHandler;
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeClass() {
-        FruitDao fruitDao = new FruitDaoImpl();
+        fruitDao = new FruitDaoImpl();
         returnFruitOperationHandler = new ReturnFruitOperationHandler(fruitDao);
     }
 

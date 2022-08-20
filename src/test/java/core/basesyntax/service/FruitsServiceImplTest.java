@@ -28,6 +28,7 @@ public class FruitsServiceImplTest {
 
     @Test
     public void generateFruitsReportWithoutFruits_Ok() {
+        FruitsStorage.fruits.clear();
         String actualResult = fruitsService.generateFruitsReport(FruitsStorage.fruits);
         String expectedResult = null;
         Assert.assertEquals(expectedResult, actualResult);

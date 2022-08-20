@@ -14,7 +14,7 @@ import org.junit.Test;
 public class CsvFileReaderImplTest {
     private static final Path TEST_FILE_PATH = Path.of("src/test/resources.csv");
     private static final Path INVALID_TEST_FILE_PATH = Path.of("src/test/invalidResources.csv");
-    private static final CsvFileReader reader = new CsvFileReaderImpl();
+    private static CsvFileReader reader;
     private static final List<String> validTestData = List.of(
             "type,fruit,quantity",
             "b,apple,100",
@@ -27,7 +27,7 @@ public class CsvFileReaderImplTest {
             "r,orange,3");
     private static final List<String> emptyTestData = List.of("type,fruit,quantity");
 
-    public void createTestFile(String stringForWrite) {
+    private void createTestFile(String stringForWrite) {
         try {
             Files.write(TEST_FILE_PATH, stringForWrite.getBytes());
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public class CsvFileReaderImplTest {
         }
     }
 
-    public String getStringForWrite(List<String> data) {
+    private String getStringForWrite(List<String> data) {
         return data.stream()
                 .map(s -> s + System.lineSeparator())
                 .collect(Collectors.joining());
@@ -48,6 +48,7 @@ public class CsvFileReaderImplTest {
 
     @Test
     public void read_validFile_Ok() {
+        reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(validTestData));
         List<String> actual = reader.inputFile(TEST_FILE_PATH.toString());
         assertEquals(validTestData, actual);
@@ -55,12 +56,14 @@ public class CsvFileReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void read_emptyFile_notOk() {
+        reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(emptyTestData));
         reader.inputFile(TEST_FILE_PATH.toString());
     }
 
     @Test(expected = RuntimeException.class)
     public void read_invalidFilePath_notOk() {
+        reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(validTestData));
         reader.inputFile(INVALID_TEST_FILE_PATH.toString());
     }

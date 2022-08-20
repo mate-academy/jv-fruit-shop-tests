@@ -16,12 +16,16 @@ import org.junit.Test;
 
 public class CsvFileWriterImplTest {
     private static final String OUTPUT_SOURCE = "src/test/resources/test-output.csv";
-    private final StorageDao dao = new StorageDaoImpl();
-    private final CreateReport report = new CreateReportImpl(new StringBuilder(), dao);
-    private final CsvFileWriter writer = new CsvFileWriterImpl();
+    private static StorageDao dao;
+    private static CreateReport report;
+    private static CsvFileWriter writer;
 
     @Before
      public void setDao() {
+        StringBuilder builder = new StringBuilder();
+        dao = new StorageDaoImpl();
+        report = new CreateReportImpl(builder, dao);
+        writer = new CsvFileWriterImpl();
         dao.addFruit(new Fruit("apple", 40));
         dao.addFruit(new Fruit("peach", 50));
         dao.addFruit(new Fruit("apricot", 10));

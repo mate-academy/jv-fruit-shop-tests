@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class StorageDaoImplTest {
-    private static final StorageDao daoTest = new StorageDaoImpl();
+    private static StorageDao daoTest;
 
     @After
     public void clearStorage() {
@@ -19,6 +19,7 @@ public class StorageDaoImplTest {
 
     @Test
     public void add_fruit_Ok() {
+        daoTest = new StorageDaoImpl();
         Fruit apple = new Fruit("apple", 20);
         daoTest.addFruit(apple);
         boolean actual = FruitShopStorage.storageFruits.size() == 1;
@@ -27,6 +28,7 @@ public class StorageDaoImplTest {
 
     @Test
     public void get_fruit_Ok() {
+        daoTest = new StorageDaoImpl();
         Fruit apple = new Fruit("apple", 20);
         daoTest.addFruit(apple);
         String expected = "apple";
@@ -41,7 +43,8 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void get_allFruit_Ok() {
+    public void get_nonEmptyStorage_Ok() {
+        daoTest = new StorageDaoImpl();
         int expected = 2;
         Fruit orange = new Fruit("orange", 40);
         Fruit peach = new Fruit("peach", 18);
@@ -53,7 +56,7 @@ public class StorageDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void get_allFruit_emptyStorage_notOk() {
+    public void getAll_emptyStorage_notOk() {
         daoTest.getAll();
     }
 }

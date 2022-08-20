@@ -20,25 +20,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessingImplTest {
     private static TransactionProcessing processing;
-    private static final StorageDao dao = new StorageDaoImpl();
-    private static final Transaction balanceBanana = new Transaction(new Fruit("banana", 100),
-            Transaction.Type.getTypeOperation("b"));
-    private static final Transaction supplyBanana = new Transaction(new Fruit("banana", 50),
-            Transaction.Type.getTypeOperation("s"));
-    private static final Transaction retryBanana = new Transaction(new Fruit("banana", 100),
-            Transaction.Type.getTypeOperation("r"));
-    private static final Transaction purchaseBanana = new Transaction(new Fruit("banana", 50),
-            Transaction.Type.getTypeOperation("p"));
-    private static final Transaction balanceOrange = new Transaction(new Fruit("orange", 50),
-            Transaction.Type.getTypeOperation("b"));
+    private static StorageDao dao;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
+        dao = new StorageDaoImpl();
         Map<Transaction.Type, OperationHandler> typeOperationMap = new HashMap<>();
         typeOperationMap.put(Transaction.Type.BALANCE, new BalanceHandler(dao));
         typeOperationMap.put(Transaction.Type.SUPPLY, new SupplyHandler(dao));
@@ -54,6 +45,14 @@ public class TransactionProcessingImplTest {
 
     @Test
     public void add_transaction_Ok() {
+        Transaction balanceBanana = new Transaction(new Fruit("banana", 100),
+                Transaction.Type.getTypeOperation("b"));
+        Transaction supplyBanana = new Transaction(new Fruit("banana", 50),
+                Transaction.Type.getTypeOperation("s"));
+        Transaction retryBanana = new Transaction(new Fruit("banana", 100),
+                Transaction.Type.getTypeOperation("r"));
+        Transaction balanceOrange = new Transaction(new Fruit("orange", 50),
+                Transaction.Type.getTypeOperation("b"));
         List<Transaction> testListTransaction = new ArrayList<>();
         testListTransaction.add(balanceBanana);
         testListTransaction.add(supplyBanana);
@@ -70,6 +69,10 @@ public class TransactionProcessingImplTest {
 
     @Test
     public void purchase_transaction_Ok() {
+        Transaction purchaseBanana = new Transaction(new Fruit("banana", 50),
+                Transaction.Type.getTypeOperation("p"));
+        Transaction balanceBanana = new Transaction(new Fruit("banana", 100),
+                Transaction.Type.getTypeOperation("b"));
         List<Transaction> testListTransaction = new ArrayList<>();
         testListTransaction.add(balanceBanana);
         testListTransaction.add(purchaseBanana);

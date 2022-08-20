@@ -7,10 +7,15 @@ import core.basesyntax.db.FruitShopStorage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageDaoImplTest {
     private static StorageDao daoTest;
+    @BeforeClass
+    public static void setUp() {
+        daoTest = new StorageDaoImpl();
+    }
 
     @After
     public void clearStorage() {
@@ -19,7 +24,6 @@ public class StorageDaoImplTest {
 
     @Test
     public void add_fruit_Ok() {
-        daoTest = new StorageDaoImpl();
         Fruit apple = new Fruit("apple", 20);
         daoTest.addFruit(apple);
         boolean actual = FruitShopStorage.storageFruits.size() == 1;
@@ -28,7 +32,6 @@ public class StorageDaoImplTest {
 
     @Test
     public void get_fruit_Ok() {
-        daoTest = new StorageDaoImpl();
         Fruit apple = new Fruit("apple", 20);
         daoTest.addFruit(apple);
         String expected = "apple";
@@ -43,8 +46,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void get_nonEmptyStorage_Ok() {
-        daoTest = new StorageDaoImpl();
+    public void getAll_nonEmptyStorage_Ok() {
         int expected = 2;
         Fruit orange = new Fruit("orange", 40);
         Fruit peach = new Fruit("peach", 18);
@@ -53,10 +55,5 @@ public class StorageDaoImplTest {
         List<Fruit> testList = daoTest.getAll();
         boolean actual = testList.size() == expected;
         assertTrue(actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void getAll_emptyStorage_notOk() {
-        daoTest.getAll();
     }
 }

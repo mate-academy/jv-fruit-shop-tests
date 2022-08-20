@@ -9,23 +9,15 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
     private static final Path TEST_FILE_PATH = Path.of("src/test/resources.csv");
     private static final Path INVALID_TEST_FILE_PATH = Path.of("src/test/invalidResources.csv");
     private static CsvFileReader reader;
-    private static final List<String> validTestData = List.of(
-            "type,fruit,quantity",
-            "b,apple,100",
-            "b,banana,100",
-            "b,grapefruit,100",
-            "r,banana,1",
-            "s,apple,10",
-            "p,orange,10",
-            "s,grapefruit,10",
-            "r,orange,3");
-    private static final List<String> emptyTestData = List.of("type,fruit,quantity");
+    private static List<String> validTestData;
+    private static List<String> emptyTestData;
 
     private void createTestFile(String stringForWrite) {
         try {
@@ -44,6 +36,21 @@ public class CsvFileReaderImplTest {
     @After
     public void afterClass() throws IOException {
         Files.delete(TEST_FILE_PATH);
+    }
+
+    @BeforeClass
+    public static void setUp() {
+        validTestData = List.of(
+                "type,fruit,quantity",
+                "b,apple,100",
+                "b,banana,100",
+                "b,grapefruit,100",
+                "r,banana,1",
+                "s,apple,10",
+                "p,orange,10",
+                "s,grapefruit,10",
+                "r,orange,3");
+        emptyTestData = List.of("type,fruit,quantity");
     }
 
     @Test

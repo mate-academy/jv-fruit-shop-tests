@@ -8,22 +8,29 @@ import core.basesyntax.db.FruitShopStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.fileoperation.CreateReport;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CreateReportImplTest {
     private static final String TITLE = "fruit,quantity"
             + System.lineSeparator();
-    private static final StringBuilder builder = new StringBuilder();
-    private static final StorageDao dao = new StorageDaoImpl();
-    private static final CreateReport report = new CreateReportImpl(builder, dao);
+    private static StorageDao dao;
+    private static CreateReport report;
+    private static CreateReport nullReport;
 
     @After
     public void clear_storage() {
         FruitShopStorage.storageFruits.clear();
     }
 
+    @BeforeClass
+    public static void setUp() {
+        dao = new StorageDaoImpl();
+        report = new CreateReportImpl(dao);
+    }
+
     @Test
-    public void get_report_Ok() {
+    public void getReport_validReport_Ok() {
         dao.addFruit(new Fruit("apple", 40));
         dao.addFruit(new Fruit("peach", 50));
         dao.addFruit(new Fruit("apricot", 10));
@@ -36,7 +43,7 @@ public class CreateReportImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void get_reportNull_notOk() {
-        report.getReport();
+    public void getNullReport_NotOk() {
+        nullReport.getReport();
     }
 }

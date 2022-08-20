@@ -36,7 +36,7 @@ public class Main {
                 new TransactionProcessingImpl(new StrategyOperationImpl(typeOperationMap));
         processor.transactionProcessing(new FruitTransactionsParserImpl()
                 .transactionsParser(readInputFile));
-        CreateReport report = new CreateReportImpl(new StringBuilder(), storageDao);
+        CreateReport report = new CreateReportImpl(storageDao);
         CsvFileWriter writer = new CsvFileWriterImpl();
         writer.writeFile("src/main/resources/output.csv", report.getReport());
     }

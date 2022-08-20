@@ -22,9 +22,8 @@ public class CsvFileWriterImplTest {
 
     @Before
      public void setDao() {
-        StringBuilder builder = new StringBuilder();
         dao = new StorageDaoImpl();
-        report = new CreateReportImpl(builder, dao);
+        report = new CreateReportImpl(dao);
         writer = new CsvFileWriterImpl();
         dao.addFruit(new Fruit("apple", 40));
         dao.addFruit(new Fruit("peach", 50));

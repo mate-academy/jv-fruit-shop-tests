@@ -6,18 +6,17 @@ import core.basesyntax.service.fileoperation.CreateReport;
 
 public class CreateReportImpl implements CreateReport {
     private static final String TITLE = "fruit,quantity";
-    private final StringBuilder builder;
+    private final StringBuilder builder = new StringBuilder();
     private final StorageDao dao;
 
-    public CreateReportImpl(StringBuilder builder, StorageDao dao) {
-        this.builder = builder;
+    public CreateReportImpl(StorageDao dao) {
         this.dao = dao;
     }
 
     @Override
     public String getReport() {
-        if (dao.getAll().isEmpty()) {
-            throw new RuntimeException("Storage is empty.");
+        if (dao == null) {
+            throw new RuntimeException("Storage dao is null ");
         }
         builder.append(TITLE);
         builder.append(System.lineSeparator());

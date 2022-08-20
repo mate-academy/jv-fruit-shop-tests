@@ -22,8 +22,7 @@ public class StorageDaoImplTest {
         Fruit apple = new Fruit("apple", 20);
         daoTest.addFruit(apple);
         boolean actual = FruitShopStorage.storageFruits.size() == 1;
-        assertTrue("Storage size must be "
-                + 1 + " actual size " + FruitShopStorage.storageFruits.size() + " .\n", actual);
+        assertTrue(actual);
     }
 
     @Test

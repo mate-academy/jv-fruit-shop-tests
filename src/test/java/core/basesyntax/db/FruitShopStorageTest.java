@@ -2,7 +2,7 @@ package core.basesyntax.db;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,8 +13,8 @@ public class FruitShopStorageTest {
     private static final Fruit peach = new Fruit("peach", 20);
     private static final Fruit apricot = new Fruit("apricot", 27);
 
-    @AfterClass
-    public static void tearDown() {
+    @After
+    public void clear_storage() {
         FruitShopStorage.storageFruits.clear();
     }
 

@@ -26,6 +26,7 @@ public class CsvFileReaderImplTest {
 
     @BeforeClass
     public static void setUp() {
+        reader = new CsvFileReaderImpl();
         validTestData = List.of(
                 "type,fruit,quantity",
                 "b,apple,100",
@@ -41,7 +42,6 @@ public class CsvFileReaderImplTest {
 
     @Test
     public void readInputFile_validFile_Ok() {
-        reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(validTestData));
         List<String> actual = reader.inputFile(TEST_FILE_PATH.toString());
         assertEquals(validTestData, actual);
@@ -49,21 +49,19 @@ public class CsvFileReaderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readInputFile_emptyFile_notOk() {
-        reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(emptyTestData));
         reader.inputFile(TEST_FILE_PATH.toString());
     }
 
     @Test(expected = RuntimeException.class)
     public void readInputFile_invalidFilePath_notOk() {
-        reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(validTestData));
         reader.inputFile(INVALID_TEST_FILE_PATH.toString());
     }
 
-    private void createTestFile(String stringForWrite) {
+    private void createTestFile(String path) {
         try {
-            Files.write(TEST_FILE_PATH, stringForWrite.getBytes());
+            Files.write(TEST_FILE_PATH, path.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Cant write data to file " + TEST_FILE_PATH, e);
         }

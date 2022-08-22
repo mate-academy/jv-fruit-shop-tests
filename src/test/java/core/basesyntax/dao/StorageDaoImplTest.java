@@ -11,11 +11,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageDaoImplTest {
-    private static StorageDao daoTest;
+    private static StorageDao storageDao;
 
     @BeforeClass
     public static void setUp() {
-        daoTest = new StorageDaoImpl();
+        storageDao = new StorageDaoImpl();
     }
 
     @After
@@ -26,36 +26,32 @@ public class StorageDaoImplTest {
     @Test
     public void add_fruit_Ok() {
         Fruit apple = new Fruit("apple", 20);
-        daoTest.addFruit(apple);
-        boolean actual = FruitShopStorage.storageFruits.size() == 1;
-        assertTrue(actual);
+        storageDao.addFruit(apple);
         assertTrue(FruitShopStorage.storageFruits.contains(apple));
     }
 
     @Test
     public void get_fruit_Ok() {
         Fruit apple = new Fruit("apple", 20);
-        daoTest.addFruit(apple);
-        String expected = "apple";
-        String actual = daoTest.getFruit("apple").getName();
-        assertEquals(expected, actual);
+        storageDao.addFruit(apple);
+        Fruit actual = storageDao.getFruit(apple.getName());
+        assertEquals(apple, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void get_wrongFruits_notOk() {
         String wrongFruit = "pineapple";
-        daoTest.getFruit(wrongFruit);
+        storageDao.getFruit(wrongFruit);
     }
 
     @Test
     public void getAll_nonEmptyStorage_Ok() {
-        int expected = 2;
         Fruit orange = new Fruit("orange", 40);
         Fruit peach = new Fruit("peach", 18);
-        daoTest.addFruit(orange);
-        daoTest.addFruit(peach);
-        List<Fruit> testList = daoTest.getAll();
-        boolean actual = testList.size() == expected;
-        assertTrue(actual);
+        storageDao.addFruit(orange);
+        storageDao.addFruit(peach);
+        List<Fruit> testList = storageDao.getAll();
+        assertTrue(testList.contains(orange));
+        assertTrue(testList.contains(peach));
     }
 }

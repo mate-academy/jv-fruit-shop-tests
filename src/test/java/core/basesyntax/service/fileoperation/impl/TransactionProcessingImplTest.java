@@ -1,7 +1,6 @@
 package core.basesyntax.service.fileoperation.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -25,16 +24,15 @@ import org.junit.Test;
 
 public class TransactionProcessingImplTest {
     private static TransactionProcessing transactionProcessor;
-    private static StorageDao dao;
 
     @BeforeClass
     public static void setUp() {
-        dao = new StorageDaoImpl();
+        StorageDao storageDao = new StorageDaoImpl();
         Map<Transaction.Type, OperationHandler> typeOperationMap = new HashMap<>();
-        typeOperationMap.put(Transaction.Type.BALANCE, new BalanceHandler(dao));
-        typeOperationMap.put(Transaction.Type.SUPPLY, new SupplyHandler(dao));
-        typeOperationMap.put(Transaction.Type.PURCHASE, new PurchaseHandler(dao));
-        typeOperationMap.put(Transaction.Type.RETURN, new ReturnHandler(dao));
+        typeOperationMap.put(Transaction.Type.BALANCE, new BalanceHandler(storageDao));
+        typeOperationMap.put(Transaction.Type.SUPPLY, new SupplyHandler(storageDao));
+        typeOperationMap.put(Transaction.Type.PURCHASE, new PurchaseHandler(storageDao));
+        typeOperationMap.put(Transaction.Type.RETURN, new ReturnHandler(storageDao));
         transactionProcessor = new TransactionProcessingImpl(
                 new StrategyOperationImpl(typeOperationMap));
     }
@@ -61,26 +59,24 @@ public class TransactionProcessingImplTest {
         testListTransaction.add(balanceOrange);
         transactionProcessor.transactionProcessing(testListTransaction);
         Fruit expectedBanana = new Fruit("banana", 250);
-        Fruit actualBanana = dao.getFruit("banana");
+        Fruit actualBanana = FruitShopStorage.storageFruits.get(0);
         Fruit expectedOrange = new Fruit("orange", 50);
-        Fruit actualOrange = dao.getFruit("orange");
+        Fruit actualOrange = FruitShopStorage.storageFruits.get(1);
         assertEquals(expectedBanana, actualBanana);
         assertEquals(expectedOrange, actualOrange);
     }
 
     @Test
     public void purchase_transaction_Ok() {
-        Transaction purchaseBanana = new Transaction(new Fruit("banana", 50),
-                Transaction.Type.getTypeOperation("p"));
         Transaction balanceBanana = new Transaction(new Fruit("banana", 100),
                 Transaction.Type.getTypeOperation("b"));
+        Transaction purchaseBanana = new Transaction(new Fruit("banana", 50),
+                Transaction.Type.getTypeOperation("p"));
         List<Transaction> testListTransaction = new ArrayList<>();
         testListTransaction.add(balanceBanana);
         testListTransaction.add(purchaseBanana);
         transactionProcessor.transactionProcessing(testListTransaction);
-        String expectedName = "banana";
-        int expectedAmount = 50;
-        boolean expected = dao.getFruit(expectedName).getAmountFruit() == expectedAmount;
-        assertTrue(expected);
+        Fruit expectedFruit = new Fruit("banana", 50);
+        assertEquals(FruitShopStorage.storageFruits.get(0), expectedFruit);
     }
 }

@@ -14,9 +14,7 @@ import org.junit.Test;
 public class CreateReportImplTest {
     private static final String TITLE = "fruit,quantity"
             + System.lineSeparator();
-    private static StorageDao dao;
     private static CreateReport report;
-    private static CreateReport nullReport;
 
     @After
     public void clear_storage() {
@@ -25,25 +23,20 @@ public class CreateReportImplTest {
 
     @BeforeClass
     public static void setUp() {
-        dao = new StorageDaoImpl();
-        report = new CreateReportImpl(dao);
+        StorageDao storageDao = new StorageDaoImpl();
+        report = new CreateReportImpl(storageDao);
     }
 
     @Test
     public void getReport_validReport_Ok() {
-        dao.addFruit(new Fruit("apple", 40));
-        dao.addFruit(new Fruit("peach", 50));
-        dao.addFruit(new Fruit("apricot", 10));
+        FruitShopStorage.storageFruits.add(new Fruit("apple", 40));
+        FruitShopStorage.storageFruits.add(new Fruit("peach", 50));
+        FruitShopStorage.storageFruits.add(new Fruit("apricot", 10));
         String expected = TITLE
                 + "apple,40" + System.lineSeparator()
                 + "peach,50" + System.lineSeparator()
                 + "apricot,10" + System.lineSeparator();
         String actual = report.getReport();
         assertEquals(expected, actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void getReport_emptyStorage_notOk() {
-        nullReport.getReport();
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Transaction {
     private final Fruit fruit;
@@ -41,6 +42,22 @@ public class Transaction {
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("This letter isn't valid " + letter));
         }
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Transaction that = (Transaction) o;
+        return Objects.equals(fruit, that.fruit) && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fruit, type);
     }
 }

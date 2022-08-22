@@ -7,20 +7,20 @@ import core.basesyntax.service.fileoperation.CreateReport;
 public class CreateReportImpl implements CreateReport {
     private static final String TITLE = "fruit,quantity";
     private final StringBuilder builder = new StringBuilder();
-    private final StorageDao dao;
+    private final StorageDao storageDao;
 
-    public CreateReportImpl(StorageDao dao) {
-        this.dao = dao;
+    public CreateReportImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
     public String getReport() {
-        if (dao == null) {
+        if (storageDao == null) {
             throw new RuntimeException("Storage dao is null ");
         }
         builder.append(TITLE);
         builder.append(System.lineSeparator());
-        for (Fruit fruit: dao.getAll()) {
+        for (Fruit fruit: storageDao.getAll()) {
             builder.append(fruit.getName());
             builder.append(",");
             builder.append(fruit.getAmountFruit());

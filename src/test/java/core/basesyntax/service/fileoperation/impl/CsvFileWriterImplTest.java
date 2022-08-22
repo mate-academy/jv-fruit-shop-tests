@@ -10,33 +10,27 @@ import core.basesyntax.service.fileoperation.CreateReport;
 import core.basesyntax.service.fileoperation.CsvFileWriter;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 public class CsvFileWriterImplTest {
     private static final String OUTPUT_SOURCE = "src/test/resources/test-output.csv";
-    private static StorageDao dao;
     private static CreateReport report;
     private static CsvFileWriter writer;
 
-    @Before
-     public void setDao() {
-        dao = new StorageDaoImpl();
-        report = new CreateReportImpl(dao);
-        writer = new CsvFileWriterImpl();
-        dao.addFruit(new Fruit("apple", 40));
-        dao.addFruit(new Fruit("peach", 50));
-        dao.addFruit(new Fruit("apricot", 10));
-    }
-
-    @After
-    public void clear_storage() {
+    @AfterClass
+    public static void clear_storage() {
         FruitShopStorage.storageFruits.clear();
     }
 
     @Test
     public void write_report_Ok() {
+        StorageDao dao = new StorageDaoImpl();
+        writer = new CsvFileWriterImpl();
+        report = new CreateReportImpl(dao);
+        dao.addFruit(new Fruit("apple", 40));
+        dao.addFruit(new Fruit("peach", 50));
+        dao.addFruit(new Fruit("apricot", 10));
         writer.writeFile(OUTPUT_SOURCE, report.getReport());
         List<String> actual = new CsvFileReaderImpl().inputFile(OUTPUT_SOURCE);
         List<String> expected = dao.getAll()

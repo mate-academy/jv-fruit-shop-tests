@@ -19,20 +19,6 @@ public class CsvFileReaderImplTest {
     private static List<String> validTestData;
     private static List<String> emptyTestData;
 
-    private void createTestFile(String stringForWrite) {
-        try {
-            Files.write(TEST_FILE_PATH, stringForWrite.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("Data is not written. ");
-        }
-    }
-
-    private String getStringForWrite(List<String> data) {
-        return data.stream()
-                .map(s -> s + System.lineSeparator())
-                .collect(Collectors.joining());
-    }
-
     @After
     public void afterClass() throws IOException {
         Files.delete(TEST_FILE_PATH);
@@ -54,7 +40,7 @@ public class CsvFileReaderImplTest {
     }
 
     @Test
-    public void read_validFile_Ok() {
+    public void readInputFile_validFile_Ok() {
         reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(validTestData));
         List<String> actual = reader.inputFile(TEST_FILE_PATH.toString());
@@ -62,16 +48,30 @@ public class CsvFileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_emptyFile_notOk() {
+    public void readInputFile_emptyFile_notOk() {
         reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(emptyTestData));
         reader.inputFile(TEST_FILE_PATH.toString());
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_invalidFilePath_notOk() {
+    public void readInputFile_invalidFilePath_notOk() {
         reader = new CsvFileReaderImpl();
         createTestFile(getStringForWrite(validTestData));
         reader.inputFile(INVALID_TEST_FILE_PATH.toString());
+    }
+
+    private void createTestFile(String stringForWrite) {
+        try {
+            Files.write(TEST_FILE_PATH, stringForWrite.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Cant write data to file " + TEST_FILE_PATH, e);
+        }
+    }
+
+    private String getStringForWrite(List<String> data) {
+        return data.stream()
+                .map(s -> s + System.lineSeparator())
+                .collect(Collectors.joining());
     }
 }

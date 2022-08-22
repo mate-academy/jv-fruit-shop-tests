@@ -43,7 +43,7 @@ public class CreateReportImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getNullReport_NotOk() {
+    public void getReport_emptyStorage_notOk() {
         nullReport.getReport();
     }
 }

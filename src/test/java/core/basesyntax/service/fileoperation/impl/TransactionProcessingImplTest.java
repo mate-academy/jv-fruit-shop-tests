@@ -24,7 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessingImplTest {
-    private static TransactionProcessing processing;
+    private static TransactionProcessing transactionProcessor;
     private static StorageDao dao;
 
     @BeforeClass
@@ -35,7 +35,8 @@ public class TransactionProcessingImplTest {
         typeOperationMap.put(Transaction.Type.SUPPLY, new SupplyHandler(dao));
         typeOperationMap.put(Transaction.Type.PURCHASE, new PurchaseHandler(dao));
         typeOperationMap.put(Transaction.Type.RETURN, new ReturnHandler(dao));
-        processing = new TransactionProcessingImpl(new StrategyOperationImpl(typeOperationMap));
+        transactionProcessor = new TransactionProcessingImpl(
+                new StrategyOperationImpl(typeOperationMap));
     }
 
     @After
@@ -58,7 +59,7 @@ public class TransactionProcessingImplTest {
         testListTransaction.add(supplyBanana);
         testListTransaction.add(retryBanana);
         testListTransaction.add(balanceOrange);
-        processing.transactionProcessing(testListTransaction);
+        transactionProcessor.transactionProcessing(testListTransaction);
         Fruit expectedBanana = new Fruit("banana", 250);
         Fruit actualBanana = dao.getFruit("banana");
         Fruit expectedOrange = new Fruit("orange", 50);
@@ -76,7 +77,7 @@ public class TransactionProcessingImplTest {
         List<Transaction> testListTransaction = new ArrayList<>();
         testListTransaction.add(balanceBanana);
         testListTransaction.add(purchaseBanana);
-        processing.transactionProcessing(testListTransaction);
+        transactionProcessor.transactionProcessing(testListTransaction);
         String expectedName = "banana";
         int expectedAmount = 50;
         boolean expected = dao.getFruit(expectedName).getAmountFruit() == expectedAmount;

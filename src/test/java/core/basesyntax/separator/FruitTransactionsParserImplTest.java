@@ -13,7 +13,7 @@ public class FruitTransactionsParserImplTest {
     private static FruitTransactionsParser parser;
 
     @BeforeClass
-    public static void setUo() {
+    public static void setUp() {
         validTestData = List.of(
                 "type,fruit,quantity",
                 "b,apple,100",
@@ -25,7 +25,7 @@ public class FruitTransactionsParserImplTest {
     }
 
     @Test
-    public void create_validTransaction_Ok() {
+    public void transactionParser_validTransaction_Ok() {
         String expectedApple = "apple";
         String expectedBanana = "banana";
         List<Transaction> actualList = parser.transactionsParser(validTestData);
@@ -36,9 +36,8 @@ public class FruitTransactionsParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void create_invalidTransaction_notOk() {
+    public void transactionParser_invalidTransaction_notOk() {
         List<Transaction> actualList = parser.transactionsParser(invalidTestData);
         System.out.println(actualList);
     }
-
 }

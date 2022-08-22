@@ -29,6 +29,7 @@ public class StorageDaoImplTest {
         daoTest.addFruit(apple);
         boolean actual = FruitShopStorage.storageFruits.size() == 1;
         assertTrue(actual);
+        assertTrue(FruitShopStorage.storageFruits.contains(apple));
     }
 
     @Test

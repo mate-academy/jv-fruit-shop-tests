@@ -17,7 +17,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parseService_Ok() {
+    public void parse_Ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));

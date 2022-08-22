@@ -23,7 +23,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void reportCreator_Ok() {
+    public void create_Ok() {
         storageDao.update("banana", 152);
         storageDao.update("apple", 90);
         String expected = HEADER + System.lineSeparator()

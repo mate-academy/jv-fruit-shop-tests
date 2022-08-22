@@ -51,7 +51,7 @@ public class TransactionImplTest {
     }
 
     @Test
-    public void transactionProcessor_Ok() {
+    public void process_Ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 100));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,

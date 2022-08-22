@@ -36,12 +36,12 @@ public class FileWriterImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_toFileNull_notOk() {
+    public void write_fileNull_notOk() {
         fileWriter.writeToFile(null, CORRECT_REPORT_PATH);
     }
 
     @Test (expected = RuntimeException.class)
-    public void wayToReportIsNull_NotOk() {
+    public void write_toFileNull_notOk() {
         fileWriter.writeToFile(expectedString, null);
     }
 

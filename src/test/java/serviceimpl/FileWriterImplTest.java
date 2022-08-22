@@ -32,7 +32,7 @@ public class FileWriterImplTest {
 
     @Test (expected = RuntimeException.class)
     public void write_wrongPath_NotOk() {
-        fileWriter.writeToFile(expectedString,WRONG_REPORT_PATH);
+        fileWriter.writeToFile(WRONG_REPORT_PATH, expectedString);
     }
 
     @Test (expected = RuntimeException.class)

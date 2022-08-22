@@ -41,7 +41,7 @@ public class FileWriterImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void wayToReportIsNull_notOk() {
+    public void wayToReportIsNull_NotOk() {
         fileWriter.writeToFile(expectedString, null);
     }
 

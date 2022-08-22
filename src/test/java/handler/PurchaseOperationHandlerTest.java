@@ -23,7 +23,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_enoughInStorage_Ok() {
+    public void handle_Ok() {
         storageDao.update("banana", 100);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20);
         operationHandler.handle(fruitTransaction);

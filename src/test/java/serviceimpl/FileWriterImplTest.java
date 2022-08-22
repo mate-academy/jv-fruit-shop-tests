@@ -11,30 +11,32 @@ import service.FileWriter;
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
     private static final String CORRECT_REPORT_PATH = "src/main/resources/CloseDay.csv";
-    private static final String WRONG_REPORT_PATH = "src/main/resources/CloseDay.csv";
+    private static final String WRONG_REPORT_PATH = "src/main/resources";
     private static String expectedString;
 
     @BeforeClass
     public static void beforeClass() {
-        expectedString = "fruits, quantity" + System.lineSeparator()
-                + "banana" + "," + "152" + System.lineSeparator()
-                + "apple" + "," + "90";
+        fileWriter = new FileWriterImpl();
     }
 
     @Test
     public void fileWriter_Ok() {
-        String expected = expectedString;
-        String actual = getReadFile(WRONG_REPORT_PATH);
-        Assert.assertEquals(expected, actual);
+        expectedString = "fruits, quantity" + System.lineSeparator()
+                + "banana" + "," + "152" + System.lineSeparator()
+                + "apple" + "," + "90";
+        String filePath = CORRECT_REPORT_PATH;
+        fileWriter.writeToFile(filePath, expectedString);
+        String actual = getReadFile(filePath);
+        Assert.assertEquals(expectedString, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void write_wrongPath_NotOk() {
-        fileWriter.writeToFile(CORRECT_REPORT_PATH,WRONG_REPORT_PATH);
+        fileWriter.writeToFile(expectedString,WRONG_REPORT_PATH);
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_fileNull_notOK() {
+    public void write_toFileNull_notOk() {
         fileWriter.writeToFile(null, CORRECT_REPORT_PATH);
     }
 

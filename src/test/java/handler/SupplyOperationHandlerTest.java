@@ -23,7 +23,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyOperation_Ok() {
+    public void handle_Ok() {
         storageDao.update("apple",20);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100);
         operationHandler.handle(fruitTransaction);

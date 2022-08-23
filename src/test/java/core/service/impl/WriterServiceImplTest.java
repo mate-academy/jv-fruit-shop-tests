@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
@@ -29,10 +30,10 @@ public class WriterServiceImplTest {
             "p,apple,20",
             "p,banana,5",
             "s,banana,50");
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         writerService = new WriterServiceImpl();
     }
 

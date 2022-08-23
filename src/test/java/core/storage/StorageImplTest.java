@@ -29,11 +29,13 @@ public class StorageImplTest {
 
     @Test
     public void storageImpl_addNewFruitAndCheck_Ok() {
-        Map<String, Integer> allDataBeforeAdd = storage.getAllData();
-        allDataBeforeAdd.put("coconut", 10);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("apple", 100);
+        expected.put("banana", 50);
+        expected.put("coconut", 10);
         storage.add("coconut", 10);
-        Map<String, Integer> allDataAfterAdd = storage.getAllData();
-        assertEquals(allDataBeforeAdd, allDataAfterAdd);
+        Map<String, Integer> actual = storage.getAllData();
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

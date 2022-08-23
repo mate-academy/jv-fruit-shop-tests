@@ -6,7 +6,7 @@ import core.model.FruitTransaction;
 import core.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
@@ -27,22 +27,22 @@ public class ParserServiceImplTest {
             new FruitTransaction(FruitTransaction.Activity.PURCHASE, "apple", 20),
             new FruitTransaction(FruitTransaction.Activity.PURCHASE, "banana", 5),
             new FruitTransaction(FruitTransaction.Activity.SUPPLY, "banana", 50));
-    private ParserService parserService;
+    private static ParserService parserService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         parserService = new ParserServiceImpl();
     }
 
     @Test
     public void parseService_parseDataFromDefaultList_Ok() {
         List<FruitTransaction> actual = parserService.parse(DEFAULT_LIST_WITH_DATA);
-        assertEquals(actual, DEFAULT_RESULT);
+        assertEquals(DEFAULT_RESULT, actual);
     }
 
     @Test
     public void parseService_parseDataWithNullData_Ok() {
-        List<FruitTransaction> parse = parserService.parse(null);
-        assertEquals(new ArrayList<>(), parse);
+        List<FruitTransaction> actual = parserService.parse(null);
+        assertEquals(new ArrayList<>(), actual);
     }
 }

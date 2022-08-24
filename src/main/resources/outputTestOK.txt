@@ -1,0 +1,4 @@
+fruit,quantity
+fruit,quantity
+banana,20
+apple,10

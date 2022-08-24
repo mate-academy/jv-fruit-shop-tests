@@ -50,10 +50,6 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
-        }
-
         public static Optional<Operation> get(String shortName) {
             return Arrays.stream(Operation.values())
                     .filter(x -> x.operation.equals(shortName))

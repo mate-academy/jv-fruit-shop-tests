@@ -17,6 +17,6 @@ public class ReportServiceImpl implements ReportService {
             builder.append(entry.getKey()).append(",")
                     .append(entry.getValue()).append(System.lineSeparator());
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 }

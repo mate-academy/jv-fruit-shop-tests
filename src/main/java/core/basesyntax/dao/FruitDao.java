@@ -7,5 +7,7 @@ public interface FruitDao {
 
     Integer get(String fruitName);
 
+    void clear();
+
     Map<String, Integer> getAll();
 }

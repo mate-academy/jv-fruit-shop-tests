@@ -10,6 +10,11 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
+    public void clear() {
+        Storage.fruits.clear();
+    }
+
+    @Override
     public Integer get(String fruitName) {
         return Storage.fruits.get(fruitName);
     }

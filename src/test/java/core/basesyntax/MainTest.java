@@ -138,7 +138,7 @@ public class MainTest {
     public void report_CreateOK() {
         fruitDao.add("banana", 50);
         fruitDao.add("apple", 30);
-        String expected = "banana,50\r\napple,30";
+        String expected = "banana,50" + System.lineSeparator() + "apple,30";
         String actual = reportService.createReport();
         assertEquals(expected, actual);
     }

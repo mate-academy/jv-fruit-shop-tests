@@ -11,10 +11,15 @@ import java.util.Map;
 
 public class DataWritingImpl implements DataWriting {
     private static final int TITLE = 0;
-    private ClearDataFile clearDataFile = new ClearDataFileImpl();
+    private ClearDataFile clearDataFile;
+
+    public void setClearDataFile(ClearDataFile clearDataFile) {
+        this.clearDataFile = clearDataFile;
+    }
 
     @Override
     public void writeData(String fileName) {
+        setClearDataFile(new ClearDataFileImpl());
         String[] strings = new String[DataBase.fruitsAmount.size() + 1];
         strings[TITLE] = "fruit,quantity";
         int index = 1;

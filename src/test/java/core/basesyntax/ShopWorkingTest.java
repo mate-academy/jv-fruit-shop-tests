@@ -20,14 +20,6 @@ public class ShopWorkingTest {
     public void clearData() {
         DataBase.transitions.clear();
         DataBase.fruitsAmount.clear();
-        try {
-            Files.deleteIfExists(Path.of(APPLES_ORANGES_REPORT));
-            Files.deleteIfExists(Path.of(APPLES_GRAPES_REPORT));
-            Files.deleteIfExists(Path.of(APPLES_BANANAS_REPORT));
-            Files.deleteIfExists(Path.of(BANANAS_ORANGES_REPORT));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't clear data before tests", e);
-        }
     }
 
     @Test

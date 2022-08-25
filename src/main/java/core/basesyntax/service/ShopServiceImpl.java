@@ -25,12 +25,12 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void servicing(String fileName) {
+    public void servicing(String fileData, String fileReport) {
         setDataReading(new DataReadingImpl());
         setProcessData(new ProcessDataImpl());
         setDataWriting(new DataWritingImpl());
-        dataReading.readData(fileName);
+        dataReading.readData(fileData);
         processData.processingData();
-        dataWriting.writeData(fileName);
+        dataWriting.writeData(fileReport);
     }
 }

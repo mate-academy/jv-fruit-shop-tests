@@ -92,6 +92,7 @@
                     <excludes>
                         <exclude>**/Main*</exclude>
                         <exclude>**/FruitTransaction*</exclude>
+                        <exclude>**/OperationStrategyImpl*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

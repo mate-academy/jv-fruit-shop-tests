@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.ParserService;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import java.util.List;
 import org.junit.BeforeClass;

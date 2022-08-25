@@ -1,8 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.List;
 import org.junit.BeforeClass;

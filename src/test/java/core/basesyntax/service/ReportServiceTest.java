@@ -1,10 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.After;
 import org.junit.Before;

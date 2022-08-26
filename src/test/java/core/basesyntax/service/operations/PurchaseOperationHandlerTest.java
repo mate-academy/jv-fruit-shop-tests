@@ -35,7 +35,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseHandlerOK() {
+    public void process_purchaseFruits_Ok() {
         int bananaQuantity = 100;
         int purchaseBananaQuantity = 99;
         String fruitName = "banana";
@@ -49,7 +49,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseHandlerNotEnoughFruit() {
+    public void process_notEnoughFruits_notOk() {
         int bananaQuantity = 100;
         int purchaseBananaQuantity = 120;
         String fruitName = "banana";

@@ -31,10 +31,17 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void report_CreateOK() {
+    public void createReport_createReport_Ok() {
         fruitDao.add("banana", 50);
         fruitDao.add("apple", 30);
         String expected = "banana,50" + System.lineSeparator() + "apple,30";
+        String actual = reportService.createReport();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void createReport_createEmptyReport_Ok() {
+        String expected = "";
         String actual = reportService.createReport();
         assertEquals(expected, actual);
     }

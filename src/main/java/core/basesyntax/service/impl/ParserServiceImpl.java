@@ -17,9 +17,6 @@ public class ParserServiceImpl implements ParserService {
         if (data == null) {
             throw new RuntimeException("Input param is null.");
         }
-        if (data.isEmpty()) {
-            throw new RuntimeException("Input param is empty.");
-        }
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String string : data) {
             String[] splittedData = string.split(",");

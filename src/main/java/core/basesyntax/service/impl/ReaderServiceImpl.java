@@ -20,9 +20,6 @@ public class ReaderServiceImpl implements ReaderService {
                 resultList.add(data);
                 data = bufferedReader.readLine();
             }
-            if (resultList.isEmpty()) {
-                throw new RuntimeException("File " + path + " is empty.");
-            }
             return resultList;
         } catch (IOException e) {
             throw new RuntimeException("Can't read the file " + path, e);

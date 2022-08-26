@@ -31,7 +31,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void supplyHandlerOK() {
+    public void process_supplyFruits_Ok() {
         int bananaQuantity = 30;
         String fruitName = "banana";
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,

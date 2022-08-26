@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final String inputFile = "./src/main/resources/input.txt";
+        final String inputFile = "./src/main/resources/empty.txt";
         final String outputFile = "./src/main/resources/output.txt";
 
         FruitDao fruitDao = new FruitDaoImpl();

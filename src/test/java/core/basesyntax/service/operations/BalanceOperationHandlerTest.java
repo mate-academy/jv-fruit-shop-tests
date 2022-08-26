@@ -31,7 +31,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceHandlerOK() {
+    public void process_addFruits_Ok() {
         int bananaQuantity = 10;
         String fruitName = "banana";
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,

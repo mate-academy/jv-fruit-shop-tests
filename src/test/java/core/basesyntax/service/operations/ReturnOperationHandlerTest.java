@@ -31,7 +31,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnHandlerOK() {
+    public void process_returnFruits_Ok() {
         int bananaQuantity = 20;
         String fruitName = "banana";
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,

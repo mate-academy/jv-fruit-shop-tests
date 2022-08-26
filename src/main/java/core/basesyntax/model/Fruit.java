@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class Fruit {
     private final String fruitType;
     private int fruitQuantity;
@@ -28,16 +26,19 @@ public class Fruit {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Fruit)) {
+        if (!(o.getClass() == Fruit.class && o.hashCode() == this.hashCode())) {
             return false;
         }
         Fruit fruit = (Fruit) o;
         return fruitQuantity == fruit.fruitQuantity
-                && Objects.equals(fruitType, fruit.fruitType);
+                && fruit.getFruitType() == null || fruit.getFruitType().equals(this.fruitType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruitType, fruitQuantity);
+        int result = 17;
+        result = 31 * result + fruitQuantity;
+        result = 31 * result + (fruitType == null ? 0 : fruitType.hashCode());
+        return result;
     }
 }

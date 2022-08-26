@@ -39,8 +39,10 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void supplyWithSuchFruitInStorage_Ok() {
+        System.out.println("SupplyWithFruit Initial Storage: " + Storage.fruits);
         Storage.fruits.add(new Fruit("orange", 10));
         supplyOperationHandler.handle(fruitTransaction);
+        System.out.println("SupplyWithFruit Storage after: " + Storage.fruits);
         boolean result = Storage.fruits.get(0).getFruitType().equals("orange")
                 && Storage.fruits.get(0).getFruitQuantity() == 30;
         assertTrue(result);
@@ -49,5 +51,6 @@ public class SupplyOperationHandlerTest {
     @After
     public void tearDown() {
         Storage.fruits.clear();
+        System.out.println("Cleared Storage: " + Storage.fruits);
     }
 }

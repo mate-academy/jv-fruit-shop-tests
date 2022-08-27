@@ -1,13 +1,12 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import org.junit.Assert;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FruitDaoImplTest {
     private static FruitDao fruitDao;
@@ -17,12 +16,8 @@ public class FruitDaoImplTest {
     public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         expectedStorage = new HashMap<>();
-    }
-
-   @Before
-    public void setUp() {
-       expectedStorage.put("banana", 555);
-       expectedStorage.put("apple", 111);
+        expectedStorage.put("banana", 555);
+        expectedStorage.put("apple", 111);
     }
 
     @Test
@@ -40,7 +35,6 @@ public class FruitDaoImplTest {
 
     @After
     public void tearDown() {
-        expectedStorage.clear();
         Storage.fruits.clear();
     }
 }

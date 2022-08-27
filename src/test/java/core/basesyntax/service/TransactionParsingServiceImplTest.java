@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
-import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
@@ -44,11 +44,8 @@ public class TransactionParsingServiceImplTest {
 
     @Test
     public void transactionParsingService_Ok() {
-        List<String> expected = List.of("type,fruit,quantity"
-                , "b,banana,200"
-                , "s,apple,100"
-                , "p,banana,100"
-                , "r,apple,0");
+        List<String> expected = List.of("type,fruit,quantity", "b,banana,200", "s,apple,100",
+                "p,banana,100", "r,apple,0");
         assertEquals(parsingService.parse(expected).toString(), actualFruitTransactions.toString());
     }
 

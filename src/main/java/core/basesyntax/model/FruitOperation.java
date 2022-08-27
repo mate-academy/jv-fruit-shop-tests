@@ -7,6 +7,15 @@ public class FruitOperation {
     private String fruit;
     private int amount;
 
+    public FruitOperation(Operation operation, String fruit, int amount) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.amount = amount;
+    }
+
+    public FruitOperation() {
+    }
+
     public Operation getOperation() {
         return operation;
     }

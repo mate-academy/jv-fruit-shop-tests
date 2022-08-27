@@ -31,7 +31,8 @@ public class ReportServiceImplTest {
 
     @Test
     public void getReport_Ok() {
-        String expected = "fruit,quantity\r\norange,1520\r\nkiwi,900";
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "orange,1520" + System.lineSeparator() + "kiwi,900";
         List<Fruit> fruitsList = new ArrayList<>();
         fruitsList.add(new Fruit("orange", 1520));
         fruitsList.add(new Fruit("kiwi", 900));

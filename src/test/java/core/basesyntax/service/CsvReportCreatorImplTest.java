@@ -1,12 +1,13 @@
 package core.basesyntax.service;
 
+import static java.lang.System.lineSeparator;
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import org.junit.AfterClass;
 import org.junit.Test;
-import static java.lang.System.lineSeparator;
-import static org.junit.Assert.assertEquals;
 
 public class CsvReportCreatorImplTest {
     private static final String HEADER = "fruit,quantity";

@@ -1,13 +1,14 @@
 package core.basesyntax.service;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static java.io.File.separator;
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import static java.io.File.separator;
-import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileWriterImplTest {
     private static String pathToTestReportFile;

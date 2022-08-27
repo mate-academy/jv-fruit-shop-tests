@@ -16,9 +16,17 @@ import core.basesyntax.hadler.impl.DecreaseOperationHandler;
 import core.basesyntax.hadler.impl.IncreaseOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class OperationHandlerImplTest {
+    private OperationHandler operationHandler;
+    private StorageDao storageDao;
+
+    @Before
+    public void setup() {
+        storageDao = new StorageDaoImpl();
+    }
 
     @After
     public void cleanStorage() {
@@ -27,7 +35,7 @@ public class OperationHandlerImplTest {
 
     @Test
     public void balanceOperationHandler_ok() {
-        OperationHandler operationHandler = new BalanceOperationHandler(new StorageDaoImpl());
+        operationHandler = new BalanceOperationHandler(storageDao);
         for (int i = 0; i < 10; i++) {
             operationHandler.handle(new FruitTransaction(BALANCE, "Fruit " + i, i));
         }
@@ -39,7 +47,7 @@ public class OperationHandlerImplTest {
 
     @Test
     public void decreaseOperationHandler_ok() {
-        OperationHandler operationHandler = new DecreaseOperationHandler(new StorageDaoImpl());
+        operationHandler = new DecreaseOperationHandler(storageDao);
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 20);
         Storage.storage.put("mango", 30);
@@ -55,7 +63,7 @@ public class OperationHandlerImplTest {
 
     @Test
     public void increaseOperationHandler_ok() {
-        OperationHandler operationHandler = new IncreaseOperationHandler(new StorageDaoImpl());
+        operationHandler = new IncreaseOperationHandler(storageDao);
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 20);
         Storage.storage.put("mango", 30);
@@ -71,7 +79,6 @@ public class OperationHandlerImplTest {
 
     @Test
     public void allTransactions_ok() {
-        StorageDao storageDao = new StorageDaoImpl();
         OperationHandler balanceHandler = new BalanceOperationHandler(storageDao);
         OperationHandler increaseHandler = new IncreaseOperationHandler(storageDao);
         OperationHandler decreaseHandler = new DecreaseOperationHandler(storageDao);

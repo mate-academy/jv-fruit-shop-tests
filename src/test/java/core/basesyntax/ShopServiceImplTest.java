@@ -3,7 +3,6 @@ package core.basesyntax;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ShopService;
@@ -15,12 +14,10 @@ import org.junit.Test;
 
 public class ShopServiceImplTest {
     private ShopService shopService;
-    private StorageDao storageDao;
 
     @Before
     public void setup() {
-        storageDao = new StorageDaoImpl();
-        shopService = new FruitShopService(storageDao);
+        shopService = new FruitShopService(new StorageDaoImpl());
     }
 
     @After
@@ -31,16 +28,16 @@ public class ShopServiceImplTest {
     @Test
     public void getBalance_ok() {
         for (int i = 0; i < 10; i++) {
-            storageDao.save("Fruit " + i, i);
+            Storage.storage.put("Fruit " + i, i);
         }
         Map<String, Integer> balance = shopService.getBalance();
         assertTrue(balance.size() == 10);
         for (int i = 0; i < 10; i++) {
-            assertEquals(Integer.valueOf(i), storageDao.getQuantity("Fruit " + i));
+            assertEquals(Integer.valueOf(i), Storage.storage.get("Fruit " + i));
         }
         Storage.storage.clear();
         for (int i = 0; i < 50; i++) {
-            storageDao.save("apple", i);
+            Storage.storage.put("apple", i);
             assertEquals(i, shopService.getBalance().get("apple").intValue());
         }
         Storage.storage.clear();

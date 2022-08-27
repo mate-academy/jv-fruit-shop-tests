@@ -43,14 +43,10 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String abbreviationOperation;
+        private final String abbreviationOperation;
 
         Operation(String abbreviationOperation) {
             this.abbreviationOperation = abbreviationOperation;
-        }
-
-        public String getAbbreviationOperation() {
-            return abbreviationOperation;
         }
 
         public static FruitTransaction.Operation getOperation(String abbreviationOperation) {
@@ -59,5 +55,18 @@ public class FruitTransaction {
                     .findFirst()
                     .get();
         }
+
+        public String getAbbreviationOperation() {
+            return abbreviationOperation;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{" +
+                "operation=" + operation +
+                ", fruit='" + fruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }

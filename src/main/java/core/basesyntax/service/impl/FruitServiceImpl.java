@@ -14,10 +14,6 @@ public class FruitServiceImpl implements FruitService {
         this.storageDao = storageDao;
     }
 
-    public FruitServiceImpl() {
-
-    }
-
     @Override
     public void update(String fruitName, Integer amount) {
         storageDao.update(fruitName, amount);

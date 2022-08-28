@@ -19,7 +19,7 @@ public class CsvReportCreatorImplTest {
     private static ReportCreator reportCreator;
 
     @Test
-    public void createCsvReport_Ok() {
+    public void create_Ok() {
         FruitDao fruitDao = new FruitDaoImpl();
         fruitDao.put(KEY_BANANA, 100);
         fruitDao.put(KEY_APPLE, 200);

@@ -36,7 +36,7 @@ public class AddOperationHandlerTest {
     }
 
     @Test
-    public void addOperationHandle_Ok() {
+    public void handle_Ok() {
         Integer expected = 30;
         assertEquals(expected, Storage.fruits.get(KEY_APPLE));
     }

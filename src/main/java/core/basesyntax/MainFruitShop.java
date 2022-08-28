@@ -29,35 +29,33 @@ public class MainFruitShop {
     private static final String OUTPUT_DATA_FILE = "src/main/resources/output_data.csv";
 
     public static void main(String[] args) {
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        StorageDao storageDao = new StorageDaoImpl();
+        FruitService fruitService = new FruitServiceImpl(storageDao);
 
+        Map<FruitOperation.Operation, OperationHandler> operationCalculateMap = new HashMap<>();
+        operationCalculateMap.put(FruitOperation.Operation.SUPPLY,
+                new SupplyOperationHandlerImpl(fruitService));
+        operationCalculateMap.put(FruitOperation.Operation.PURCHASE,
+                new PurchaseOperationHandlerImpl(fruitService));
+        operationCalculateMap.put(FruitOperation.Operation.RETURN,
+                new ReturnOperationHandlerImpl(fruitService));
+        operationCalculateMap.put(FruitOperation.Operation.BALANCE,
+                new BalanceOperationHandlerImpl(fruitService));
 
-//        FileReaderService fileReaderService = new FileReaderServiceImpl();
-//        StorageDao storageDao = new StorageDaoImpl();
-//        FruitService fruitService = new FruitServiceImpl(storageDao);
-//
-//        Map<FruitOperation.Operation, OperationHandler> operationCalculateMap = new HashMap<>();
-//        operationCalculateMap.put(FruitOperation.Operation.SUPPLY,
-//                new SupplyOperationHandlerImpl(fruitService));
-//        operationCalculateMap.put(FruitOperation.Operation.PURCHASE,
-//                new PurchaseOperationHandlerImpl(fruitService));
-//        operationCalculateMap.put(FruitOperation.Operation.RETURN,
-//                new ReturnOperationHandlerImpl(fruitService));
-//        operationCalculateMap.put(FruitOperation.Operation.BALANCE,
-//                new BalanceOperationHandlerImpl(fruitService));
-//
-//        Strategy strategy = new StrategyImpl(operationCalculateMap);
-//        TransactionParser operationDataFileParser = new CsvTransactionParserImpl();
-//
-//        List<String> data = fileReaderService.readFromFile(INPUT_DATA_FILE);
-//        List<FruitOperation> fruitOperations = operationDataFileParser.parseDataFile(data);
-//
-//        for (FruitOperation fruitOperation : fruitOperations) {
-//            strategy.get(fruitOperation.getOperation()).handle(fruitOperation);
-//        }
-//
-//        ReportCreator report = new CsvReportCreatorImpl(fruitService);
-//        String reportByDay = report.makeReport();
-//        FileWriterService fileWriterService = new FileWriterServiceImpl();
-//        fileWriterService.writeToFile(OUTPUT_DATA_FILE,reportByDay);
+        Strategy strategy = new StrategyImpl(operationCalculateMap);
+        TransactionParser operationDataFileParser = new CsvTransactionParserImpl();
+
+        List<String> data = fileReaderService.readFromFile(INPUT_DATA_FILE);
+        List<FruitOperation> fruitOperations = operationDataFileParser.parseDataFile(data);
+
+        for (FruitOperation fruitOperation : fruitOperations) {
+            strategy.get(fruitOperation.getOperation()).handle(fruitOperation);
+        }
+
+        ReportCreator report = new CsvReportCreatorImpl(fruitService);
+        String reportByDay = report.makeReport();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(OUTPUT_DATA_FILE,reportByDay);
     }
 }

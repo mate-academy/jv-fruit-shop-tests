@@ -8,7 +8,15 @@ import java.util.stream.Collectors;
 public class StorageDaoImpl implements StorageDao {
     @Override
     public void update(String fruitName, Integer amount) {
-        Storage.fruitsStorage.put(fruitName, amount);
+        if (fruitName == null) {
+            throw new RuntimeException("Fruit name cannot be null.");
+        } else if (amount == null) {
+            throw new RuntimeException("Operation value cannot be null");
+        } else if (amount < 0) {
+            throw new RuntimeException("Operation value cannot be less than zero");
+        } else {
+            Storage.fruitsStorage.put(fruitName, amount);
+        }
     }
 
     @Override

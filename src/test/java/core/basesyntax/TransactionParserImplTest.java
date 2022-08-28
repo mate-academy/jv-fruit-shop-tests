@@ -24,7 +24,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseEmpty_ok() {
+    public void parse_EmptyRecords_Ok() {
         List<String> title = List.of(
                 "type,fruit,quantity"
         );
@@ -36,7 +36,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parse_ok() {
+    public void parse_TestRecords_Ok() {
         List<String> records = List.of(
                 "type,fruit,quantity",
                 "b,apple,100",
@@ -71,7 +71,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parse_WithEmptyLineInsideInput_ok() {
+    public void parse_WithEmptyLineInsideInput_Ok() {
         List<String> records = List.of(
                 "",
                 "",

@@ -39,7 +39,7 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void handle_withBalanceOperationHandler_ok() {
+    public void handle_WithBalanceOperationHandler_Ok() {
         for (int i = 0; i < 10; i++) {
             balanceHandler.handle(new FruitTransaction(BALANCE, "Fruit " + i, i));
         }
@@ -50,7 +50,7 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void handle_withDecreaseOperationHandler_ok() {
+    public void handle_WithDecreaseOperationHandler_Ok() {
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 20);
         Storage.storage.put("mango", 30);
@@ -65,7 +65,7 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void handle_withIncreaseOperationHandler_ok() {
+    public void handle_WithIncreaseOperationHandler_Ok() {
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 20);
         Storage.storage.put("mango", 30);
@@ -80,7 +80,7 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void handle_withAllHandlers_ok() {
+    public void handle_WithAllHandlers_Ok() {
         for (int i = 0; i < 10; i++) {
             balanceHandler.handle(new FruitTransaction(BALANCE, "Fruit " + i, 10));
         }

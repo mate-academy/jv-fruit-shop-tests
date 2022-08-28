@@ -37,7 +37,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeReport_ToFile_ok() {
+    public void writeReport_ExistingInput_Ok() {
         fileWriter.writeReport(FIRST_REPORT_PATH, FIRST_REPORT);
         String actual = readFile(FIRST_REPORT_PATH);
         file = new File(FIRST_REPORT_PATH);
@@ -46,7 +46,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeReport_withEmptyInputs_ok() {
+    public void writeReport_WithEmptyInputs_Ok() {
         file = new File(EMPTY_REPORT_PATH);
         fileWriter.writeReport(EMPTY_REPORT_PATH, "");
         String actual = readFile(EMPTY_REPORT_PATH);

@@ -17,14 +17,6 @@ public class ReportCreatorImplTest {
                     + "lemon,20" + System.lineSeparator()
                     + "pineapple,25" + System.lineSeparator()
                     + "grape,30" + System.lineSeparator();
-
-    private static final String EXPECTED_SECOND_REPORT =
-            "type,fruit,quantity" + System.lineSeparator()
-                    + "apple,100" + System.lineSeparator()
-                    + "kiwi,90" + System.lineSeparator()
-                    + "fruit,80" + System.lineSeparator()
-                    + "peach,70" + System.lineSeparator()
-                    + "mango,60" + System.lineSeparator();
     private static final String EXPECTED_EMPTY_REPORT =
             "type,fruit,quantity" + System.lineSeparator();
     private ReportCreator reportCreator;
@@ -35,30 +27,19 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void createReport_ok() {
+    public void createReport_TestInputs_Ok() {
         Map<String, Integer> balances = new HashMap<>();
         balances.put("banana", 10);
         balances.put("apple", 15);
         balances.put("lemon", 20);
         balances.put("pineapple", 25);
         balances.put("grape", 30);
-
         String report = reportCreator.createReport(balances);
         assertEquals(EXPECTED_FIRST_REPORT, report);
-
-        balances.clear();
-        balances.put("apple", 100);
-        balances.put("kiwi", 90);
-        balances.put("fruit", 80);
-        balances.put("peach", 70);
-        balances.put("mango", 60);
-        report = reportCreator.createReport(balances);
-        assertEquals(EXPECTED_SECOND_REPORT, report);
-
     }
 
     @Test
-    public void createReport_withEmptyInputs_ok() {
+    public void createReport_WithEmptyInputs_Ok() {
         Map<String, Integer> empty = new HashMap<>();
         String report = reportCreator.createReport(empty);
         assertEquals(EXPECTED_EMPTY_REPORT, report);

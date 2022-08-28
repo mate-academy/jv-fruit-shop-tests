@@ -14,7 +14,6 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private static final String NON_EXISTING_FILE = "nonexisting.csv";
-    private static final String TRANSACTIONS_FILE = "src/test/resources/inputs/transaction.csv";
     private static final String TEST_FILE = "src/test/resources/inputs/test.csv";
     private static final String EMPTY_FILE = "src/test/resources/inputs/empty.csv";
 
@@ -31,19 +30,14 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFile_ok() {
-        List<String> expected = readAllLines(TRANSACTIONS_FILE);
-        List<String> actual = fileReader.readFile(TRANSACTIONS_FILE);
-        assertTrue(actual.size() == 10);
-        assertEquals(expected, actual);
-        expected = readAllLines(TEST_FILE);
-        actual = fileReader.readFile(TEST_FILE);
-        assertTrue(actual.size() == 10);
+    public void readFile_TestInput_Ok() {
+        List<String> expected = readAllLines(TEST_FILE);
+        List<String> actual = fileReader.readFile(TEST_FILE);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readFile_FromEmptyFile_ok() {
+    public void readFile_FromEmptyFile_Ok() {
         List<String> linesFromFile = fileReader.readFile(EMPTY_FILE);
         assertTrue(linesFromFile.isEmpty());
     }

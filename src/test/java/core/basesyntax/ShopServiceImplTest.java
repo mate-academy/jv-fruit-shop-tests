@@ -26,7 +26,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void getBalance_ok() {
+    public void getBalance_FilledStorage_Ok() {
         for (int i = 0; i < 10; i++) {
             Storage.storage.put("Fruit " + i, i);
         }
@@ -44,7 +44,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void getBalance_fromEmptyStorage_ok() {
+    public void getBalance_FromEmptyStorage_Ok() {
         Map<String, Integer> emptyBalance = shopService.getBalance();
         assertTrue(emptyBalance.isEmpty());
     }

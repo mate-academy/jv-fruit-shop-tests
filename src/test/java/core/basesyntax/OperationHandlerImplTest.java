@@ -20,12 +20,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationHandlerImplTest {
-    private OperationHandler operationHandler;
+    private OperationHandler balanceHandler;
+    private OperationHandler increaseHandler;
+    private OperationHandler decreaseHandler;
     private StorageDao storageDao;
 
     @Before
     public void setup() {
         storageDao = new StorageDaoImpl();
+        balanceHandler = new BalanceOperationHandler(storageDao);
+        increaseHandler = new IncreaseOperationHandler(storageDao);
+        decreaseHandler = new DecreaseOperationHandler(storageDao);
     }
 
     @After
@@ -34,10 +39,9 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void balanceOperationHandler_ok() {
-        operationHandler = new BalanceOperationHandler(storageDao);
+    public void handle_withBalanceOperationHandler_ok() {
         for (int i = 0; i < 10; i++) {
-            operationHandler.handle(new FruitTransaction(BALANCE, "Fruit " + i, i));
+            balanceHandler.handle(new FruitTransaction(BALANCE, "Fruit " + i, i));
         }
         assertTrue(Storage.storage.size() == 10);
         for (int i = 0; i < 10; i++) {
@@ -46,15 +50,14 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void decreaseOperationHandler_ok() {
-        operationHandler = new DecreaseOperationHandler(storageDao);
+    public void handle_withDecreaseOperationHandler_ok() {
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 20);
         Storage.storage.put("mango", 30);
         for (int i = 0; i < 10; i++) {
-            operationHandler.handle(new FruitTransaction(PURCHASE, "apple", 1));
-            operationHandler.handle(new FruitTransaction(PURCHASE, "banana", 1));
-            operationHandler.handle(new FruitTransaction(PURCHASE, "mango", 1));
+            decreaseHandler.handle(new FruitTransaction(PURCHASE, "apple", 1));
+            decreaseHandler.handle(new FruitTransaction(PURCHASE, "banana", 1));
+            decreaseHandler.handle(new FruitTransaction(PURCHASE, "mango", 1));
         }
         assertEquals(Integer.valueOf(0), Storage.storage.get("apple"));
         assertEquals(Integer.valueOf(10), Storage.storage.get("banana"));
@@ -62,15 +65,14 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void increaseOperationHandler_ok() {
-        operationHandler = new IncreaseOperationHandler(storageDao);
+    public void handle_withIncreaseOperationHandler_ok() {
         Storage.storage.put("apple", 10);
         Storage.storage.put("banana", 20);
         Storage.storage.put("mango", 30);
         for (int i = 0; i < 10; i++) {
-            operationHandler.handle(new FruitTransaction(SUPPLY, "apple", 1));
-            operationHandler.handle(new FruitTransaction(RETURN, "banana", 1));
-            operationHandler.handle(new FruitTransaction(SUPPLY, "mango", 1));
+            increaseHandler.handle(new FruitTransaction(SUPPLY, "apple", 1));
+            increaseHandler.handle(new FruitTransaction(RETURN, "banana", 1));
+            increaseHandler.handle(new FruitTransaction(SUPPLY, "mango", 1));
         }
         assertEquals(Integer.valueOf(20), Storage.storage.get("apple"));
         assertEquals(Integer.valueOf(30), Storage.storage.get("banana"));
@@ -78,11 +80,7 @@ public class OperationHandlerImplTest {
     }
 
     @Test
-    public void allTransactions_ok() {
-        OperationHandler balanceHandler = new BalanceOperationHandler(storageDao);
-        OperationHandler increaseHandler = new IncreaseOperationHandler(storageDao);
-        OperationHandler decreaseHandler = new DecreaseOperationHandler(storageDao);
-
+    public void handle_withAllHandlers_ok() {
         for (int i = 0; i < 10; i++) {
             balanceHandler.handle(new FruitTransaction(BALANCE, "Fruit " + i, 10));
         }

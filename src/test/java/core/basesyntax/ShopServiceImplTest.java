@@ -44,7 +44,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void getEmptyBalance_ok() {
+    public void getBalance_fromEmptyStorage_ok() {
         Map<String, Integer> emptyBalance = shopService.getBalance();
         assertTrue(emptyBalance.isEmpty());
     }

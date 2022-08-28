@@ -71,7 +71,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseWithEmptyLineInsideList_ok() {
+    public void parse_WithEmptyLineInsideInput_ok() {
         List<String> records = List.of(
                 "",
                 "",

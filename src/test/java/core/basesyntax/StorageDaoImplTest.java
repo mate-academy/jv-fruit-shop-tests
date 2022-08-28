@@ -24,7 +24,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void storageDaoSave_ok() {
+    public void saveGet_ok() {
         for (int i = 0; i < 10; i++) {
             storageDao.save("Fruit " + i, i);
         }

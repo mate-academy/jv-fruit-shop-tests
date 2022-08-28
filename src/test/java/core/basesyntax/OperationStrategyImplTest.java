@@ -38,7 +38,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getOperation_ok() {
+    public void get_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(BALANCE, "apple", 0),
                 new FruitTransaction(SUPPLY, "apple", 0),
@@ -59,7 +59,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getNonexistingOperation_returnNull() {
+    public void get_nonExistingOperation_returnNull() {
         OperationHandler operationHandler = operationStrategy.get(null);
         assertTrue(operationHandler == null);
     }

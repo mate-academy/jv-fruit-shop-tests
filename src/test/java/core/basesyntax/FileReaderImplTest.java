@@ -31,23 +31,19 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFromFile_ok() {
+    public void readFile_ok() {
         List<String> expected = readAllLines(TRANSACTIONS_FILE);
         List<String> actual = fileReader.readFile(TRANSACTIONS_FILE);
         assertTrue(actual.size() == 10);
-        for (int i = 0; i < 10; i++) {
-            assertEquals(expected.get(i), actual.get(i));
-        }
+        assertEquals(expected, actual);
+        expected = readAllLines(TEST_FILE);
         actual = fileReader.readFile(TEST_FILE);
         assertTrue(actual.size() == 10);
-        for (int i = 1; i <= 10; i++) {
-            assertEquals("Line " + i + ",",
-                    actual.get(i - 1));
-        }
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void readEmptyFromFile_ok() {
+    public void readFile_FromEmptyFile_ok() {
         List<String> linesFromFile = fileReader.readFile(EMPTY_FILE);
         assertTrue(linesFromFile.isEmpty());
     }

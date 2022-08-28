@@ -58,7 +58,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void createEmptyReport_ok() {
+    public void createReport_withEmptyInputs_ok() {
         Map<String, Integer> empty = new HashMap<>();
         String report = reportCreator.createReport(empty);
         assertEquals(EXPECTED_EMPTY_REPORT, report);

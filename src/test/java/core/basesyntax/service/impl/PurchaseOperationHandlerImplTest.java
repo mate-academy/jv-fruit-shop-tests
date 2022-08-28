@@ -10,23 +10,22 @@ import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
 import org.junit.After;
 import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class SupplyOperationHandlerImplTest {
+public class PurchaseOperationHandlerImplTest {
     private final StorageDao storageDao = new StorageDaoImpl();
     private FruitService fruitService = new FruitServiceImpl(storageDao);
 
     @Test
-    public void handleSupply_Ok() {
-        String fruitName = "apple";
-        storageDao.update(fruitName, 10);
+    public void handlePurchase_Ok() {
+        String fruitName = "banana";
+        storageDao.update(fruitName, 100);
         FruitOperation operation = new FruitOperation();
-        operation.setOperation(FruitOperation.Operation.SUPPLY);
-        operation.setAmount(15);
+        operation.setOperation(FruitOperation.Operation.PURCHASE);
+        operation.setAmount(60);
         operation.setFruit(fruitName);
         Map<FruitOperation.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitOperation.Operation.BALANCE, new BalanceOperationHandlerImpl(fruitService));
@@ -36,11 +35,11 @@ public class SupplyOperationHandlerImplTest {
         Strategy strategy = new StrategyImpl(operationHandlerMap);
         strategy.get(operation.getOperation()).handle(operation);
         int actual = Storage.fruitsStorage.get(fruitName);
-        assertEquals(25, actual);
+        assertEquals(40, actual);
     }
 
     @After
-    public void tearDown() {
+    public void after() {
         Storage.fruitsStorage.clear();
     }
 }

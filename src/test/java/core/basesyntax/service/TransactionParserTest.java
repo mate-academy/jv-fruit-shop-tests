@@ -20,19 +20,6 @@ public class TransactionParserTest {
         transactionParser = new CsvTransactionParserImpl();
     }
 
-//    @Test
-//    public void parse_validOutput_Ok() {
-//        FileReaderService fileReaderService = new FileReaderServiceImpl();
-//        List<String> data = fileReaderService.readFromFile(INPUT_TEST_PATH);
-//        List<FruitOperation> actual = transactionParser.parseDataFile(data);
-//        List<FruitOperation> expected = new ArrayList<>();
-//        expected.add(new FruitOperation(FruitOperation.Operation.BALANCE,
-//                "apple",90));
-//        expected.add(new FruitOperation(FruitOperation.Operation.BALANCE,
-//                "banana",30));
-//        assertEquals(expected, actual);
-//    }
-
     @Test (expected = NullPointerException.class)
     public void parse_nullData_NotOk() {
         transactionParser.parseDataFile(null);

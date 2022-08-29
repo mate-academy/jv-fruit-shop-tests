@@ -16,6 +16,32 @@ public class FruitOperation {
     public FruitOperation() {
     }
 
+    @Override
+    public int hashCode() {
+        int result = 7;
+        result = 15 * result + (operation == null ? 0 : operation.hashCode());
+        result = 15 * result + (fruit == null ? 0 : fruit.hashCode());
+        result = 15 * result + amount;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        FruitOperation current = (FruitOperation) obj;
+        return (operation == current.operation || operation != null && operation.equals(current.operation))
+                && (fruit == current.fruit || fruit != null && fruit.equals(current.fruit))
+                && (amount == current.amount && amount == current.amount);
+        }
+
     public Operation getOperation() {
         return operation;
     }

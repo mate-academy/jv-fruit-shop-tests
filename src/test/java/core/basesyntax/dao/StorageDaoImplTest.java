@@ -1,11 +1,12 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import org.junit.After;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class StorageDaoImplTest {
     private final StorageDao storageDao = new StorageDaoImpl();

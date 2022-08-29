@@ -37,10 +37,12 @@ public class FruitOperation {
             return false;
         }
         FruitOperation current = (FruitOperation) obj;
-        return (operation == current.operation || operation != null && operation.equals(current.operation))
-                && (fruit == current.fruit || fruit != null && fruit.equals(current.fruit))
+        return (operation == current.operation || operation != null
+                && operation.equals(current.operation))
+                && (fruit == current.fruit || fruit != null
+                && fruit.equals(current.fruit))
                 && (amount == current.amount && amount == current.amount);
-        }
+    }
 
     public Operation getOperation() {
         return operation;

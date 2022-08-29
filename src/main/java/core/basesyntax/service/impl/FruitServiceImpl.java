@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
-    private  StorageDao storageDao;
+    private StorageDao storageDao;
 
     public FruitServiceImpl(StorageDao storageDao) {
         this.storageDao = storageDao;

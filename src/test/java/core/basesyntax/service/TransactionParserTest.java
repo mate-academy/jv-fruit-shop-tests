@@ -1,29 +1,16 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitOperation;
-import core.basesyntax.service.impl.*;
-import core.basesyntax.strategy.Strategy;
-import core.basesyntax.strategy.StrategyImpl;
-import org.junit.After;
+import core.basesyntax.service.impl.CsvTransactionParserImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
-
 public class TransactionParserTest {
-    private static final String INPUT_TEST_PATH = "src/test/resources/inputTest3.csv";
     private static TransactionParser transactionParser;
-    private static StorageDao storageDao = new StorageDaoImpl();
-    private static FruitService fruitService = new FruitServiceImpl(storageDao);
 
     @BeforeClass
     public static void beforeClass() {
@@ -43,10 +30,5 @@ public class TransactionParserTest {
     @Test (expected = NullPointerException.class)
     public void parse_nullData_NotOk() {
         transactionParser.parseDataFile(null);
-    }
-
-    @After
-    public void tearDown() {
-        Storage.fruitsStorage.clear();
     }
 }

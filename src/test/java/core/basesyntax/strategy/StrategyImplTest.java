@@ -1,17 +1,21 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.impl.*;
-import org.junit.Before;
-import org.junit.Test;
+import core.basesyntax.service.impl.BalanceOperationHandlerImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.PurchaseOperationHandlerImpl;
+import core.basesyntax.service.impl.ReturnOperationHandlerImpl;
+import core.basesyntax.service.impl.SupplyOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StrategyImplTest {
     private final StorageDao storageDao = new StorageDaoImpl();
@@ -22,10 +26,14 @@ public class StrategyImplTest {
 
     @Before
     public void setUp() {
-        operationHandlerMap.put(FruitOperation.Operation.BALANCE, new BalanceOperationHandlerImpl(fruitService));
-        operationHandlerMap.put(FruitOperation.Operation.SUPPLY, new SupplyOperationHandlerImpl(fruitService));
-        operationHandlerMap.put(FruitOperation.Operation.PURCHASE, new PurchaseOperationHandlerImpl(fruitService));
-        operationHandlerMap.put(FruitOperation.Operation.RETURN, new ReturnOperationHandlerImpl(fruitService));
+        operationHandlerMap.put(FruitOperation.Operation.BALANCE,
+                new BalanceOperationHandlerImpl(fruitService));
+        operationHandlerMap.put(FruitOperation.Operation.SUPPLY,
+                new SupplyOperationHandlerImpl(fruitService));
+        operationHandlerMap.put(FruitOperation.Operation.PURCHASE,
+                new PurchaseOperationHandlerImpl(fruitService));
+        operationHandlerMap.put(FruitOperation.Operation.RETURN,
+                new ReturnOperationHandlerImpl(fruitService));
     }
 
     @Test
@@ -35,6 +43,7 @@ public class StrategyImplTest {
         OperationHandler expectedBalance = new BalanceOperationHandlerImpl(fruitService);
         assertEquals(expectedBalance.getClass(), actualBalance.getClass());
     }
+
     @Test
     public void getHandler_Purchase_Ok() {
         OperationHandler actualPurchase = strategy.get(FruitOperation
@@ -42,6 +51,7 @@ public class StrategyImplTest {
         OperationHandler expectedPurchase = new PurchaseOperationHandlerImpl(fruitService);
         assertEquals(expectedPurchase.getClass(), actualPurchase.getClass());
     }
+
     @Test
     public void getHandler_Supply_Ok() {
         OperationHandler actualSupply = strategy.get(FruitOperation

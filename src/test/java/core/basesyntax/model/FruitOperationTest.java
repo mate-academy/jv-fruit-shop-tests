@@ -1,8 +1,8 @@
 package core.basesyntax.model;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class FruitOperationTest {
     @Test
@@ -24,7 +24,7 @@ public class FruitOperationTest {
 
         FruitOperation.Operation actualReturn = FruitOperation.Operation
                 .defineOperationByLetter("r");
-       FruitOperation.Operation expectedReturn = FruitOperation.Operation.RETURN;
+        FruitOperation.Operation expectedReturn = FruitOperation.Operation.RETURN;
         assertEquals(expectedReturn, actualReturn);
     }
 

@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
@@ -7,8 +9,6 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReportCreator;
 import org.junit.After;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class CsvReportCreatorImplTest {
     private final StorageDao storageDao = new StorageDaoImpl();

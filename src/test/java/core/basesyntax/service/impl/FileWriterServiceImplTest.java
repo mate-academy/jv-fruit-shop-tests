@@ -13,26 +13,26 @@ import org.junit.Test;
 public class FileWriterServiceImplTest {
     private static final String OUTPUT_TEST_PATH = "src/test/resources/outputTest.csv";
     private static final String INPUT_TEST_PATH = "src/test/resources/inputTest.csv";
-    private static final StringBuilder builder = new StringBuilder();
+    private static String string;
     private static FileWriterService fileWriterService;
 
     @BeforeClass
     public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
-        builder.append("type,fruit,amount")
-                .append(System.lineSeparator()).append("b,apple,90")
-                .append(System.lineSeparator()).append("b,banana,30")
-                .append(System.lineSeparator()).append("s,banana,60")
-                .append(System.lineSeparator()).append("s,banana,40")
-                .append(System.lineSeparator()).append("p,banana,25")
-                .append(System.lineSeparator()).append("r,apple,10")
-                .append(System.lineSeparator()).append("p,apple,20")
-                .append(System.lineSeparator()).append("p,banana,15");
+        string = ("type,fruit,amount\n"
+                + "b,apple,90\n"
+                + "b,banana,30\n"
+                + "s,banana,60\n"
+                + "s,banana,40\n"
+                + "p,banana,25\n"
+                + "r,apple,10\n"
+                + "p,apple,20\n"
+                + "p,banana,15");
     }
 
     @Test
     public void writeToFile_existingPathFile_Ok() {
-        fileWriterService.writeToFile(OUTPUT_TEST_PATH, builder.toString());
+        fileWriterService.writeToFile(OUTPUT_TEST_PATH, string);
         List<String> expected = readFromTestFile(INPUT_TEST_PATH);
         List<String> actual = readFromTestFile(OUTPUT_TEST_PATH);
         assertEquals(expected, actual);
@@ -53,12 +53,12 @@ public class FileWriterServiceImplTest {
 
     @Test (expected = NullPointerException.class)
     public void writeToFile_nullPath_NotOk() {
-        fileWriterService.writeToFile(null, builder.toString());
+        fileWriterService.writeToFile(null, string);
     }
 
     @Test (expected = RuntimeException.class)
     public void writeToFile_emptyPath_NotOk() {
-        fileWriterService.writeToFile("", builder.toString());
+        fileWriterService.writeToFile("", string);
     }
 
     private List<String> readFromTestFile(String fromFilePath) {

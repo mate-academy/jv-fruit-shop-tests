@@ -10,11 +10,19 @@ import core.basesyntax.service.FruitService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private final StorageDao storageDao = new StorageDaoImpl();
-    private final FruitService fruitService = new FruitServiceImpl(storageDao);
+    private static StorageDao storageDao;
+    private static FruitService fruitService;
+
+    @Before
+    public void init() {
+        storageDao = new StorageDaoImpl();
+        fruitService = new FruitServiceImpl(storageDao);
+
+    }
 
     @Test
     public void getAmount_Ok() {

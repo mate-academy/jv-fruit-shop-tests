@@ -6,11 +6,18 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class StorageDaoImplTest {
-    private final StorageDao storageDao = new StorageDaoImpl();
-    private FruitService fruitService = new FruitServiceImpl(storageDao);
+    private static StorageDao storageDao;
+    private static FruitService fruitService;
+
+    @Before
+    public void init() {
+        storageDao = new StorageDaoImpl();
+        fruitService = new FruitServiceImpl(storageDao);
+    }
 
     @Test
     public void update_OneFruit_Ok() {

@@ -18,14 +18,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StrategyImplTest {
-    private final StorageDao storageDao = new StorageDaoImpl();
-    private final FruitService fruitService = new FruitServiceImpl(storageDao);
-    private final Map<FruitOperation.Operation, OperationHandler> operationHandlerMap
-            = new HashMap<>();
-    private final Strategy strategy = new StrategyImpl(operationHandlerMap);
+    private static StorageDao storageDao;
+    private static FruitService fruitService;
+    private static Map<FruitOperation.Operation, OperationHandler> operationHandlerMap;
+    private static Strategy strategy;
 
     @Before
     public void setUp() {
+        storageDao = new StorageDaoImpl();
+        fruitService = new FruitServiceImpl(storageDao);
+        operationHandlerMap = new HashMap<>();
+        strategy = new StrategyImpl(operationHandlerMap);
         operationHandlerMap.put(FruitOperation.Operation.BALANCE,
                 new BalanceOperationHandlerImpl(fruitService));
         operationHandlerMap.put(FruitOperation.Operation.SUPPLY,

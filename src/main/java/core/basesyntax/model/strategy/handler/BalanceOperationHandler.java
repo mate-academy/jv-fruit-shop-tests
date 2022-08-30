@@ -1,12 +1,12 @@
-package core.basesyntax.operation;
+package core.basesyntax.model.strategy.handler;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.storage.DataBase;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.service.Storage;
 
 public class BalanceOperationHandler implements OperationHandler {
-    private DataBase dataBase;
+    private Storage dataBase;
 
-    public BalanceOperationHandler(DataBase dataBase) {
+    public BalanceOperationHandler(Storage dataBase) {
         this.dataBase = dataBase;
     }
 

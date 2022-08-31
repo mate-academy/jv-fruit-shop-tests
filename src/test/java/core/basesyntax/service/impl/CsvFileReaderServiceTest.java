@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
-    private static final String FOLDER = "src/main/resources";
-    private static final String INPUT_FILE = "input.csv";
+    private static final String FOLDER = "src/test/resources";
+    private static final String INPUT_FILE = "readerTestInput.csv";
     private static FileReaderService csvFileReaderService;
 
     @Before

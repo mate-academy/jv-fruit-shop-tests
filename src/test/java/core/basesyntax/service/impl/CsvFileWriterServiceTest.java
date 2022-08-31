@@ -13,8 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFileWriterServiceTest {
-    private static final String FOLDER = "src/main/resources";
-    private static final String OUTPUT_FILE = "output.csv";
+    private static final String FOLDER = "src/test/resources";
+    private static final String ACTUAL_OUTPUT_FILE = "writerTestActualOutput.csv";
+    private static final String EXPECTED_OUTPUT_FILE = "writerTestExpectedOutput.csv";
     private static FileWriterService csvFileWriterService;
     private static List<String> report;
 
@@ -35,7 +36,7 @@ public class CsvFileWriterServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void writeReport_nullFilegf_notOk() {
-        File file = new File(FOLDER, OUTPUT_FILE);
+        File file = new File(FOLDER, ACTUAL_OUTPUT_FILE);
         csvFileWriterService.writeReport(file, null);
     }
 
@@ -48,8 +49,8 @@ public class CsvFileWriterServiceTest {
 
     @Test
     public void writeReport_ok() {
-        File actual = new File(FOLDER, OUTPUT_FILE);
-        File expected = new File(FOLDER, "expected.csv");
+        File actual = new File(FOLDER, ACTUAL_OUTPUT_FILE);
+        File expected = new File(FOLDER, EXPECTED_OUTPUT_FILE);
         csvFileWriterService.writeReport(expected, report);
         Assert.assertTrue(filesCompareByLine(actual.toPath(), expected.toPath()));
     }

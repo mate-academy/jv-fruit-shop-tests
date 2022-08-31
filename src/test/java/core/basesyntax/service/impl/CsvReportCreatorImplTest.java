@@ -33,7 +33,8 @@ public class CsvReportCreatorImplTest {
                 .append(System.lineSeparator())
                 .append("orange,40")
                 .append(System.lineSeparator())
-                .append("apple,67");
+                .append("apple,67")
+                .append('\n');
         String expected = stringBuilder.toString();
         assertEquals(expected, actual);
     }
@@ -42,7 +43,7 @@ public class CsvReportCreatorImplTest {
     public void createReport_EmptyStorage_Ok() {
         String actual = reportCreator.makeReport();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,balance");
+        stringBuilder.append("fruit,balance").append('\n');
         String expected = stringBuilder.toString();
         assertEquals(expected, actual);
     }

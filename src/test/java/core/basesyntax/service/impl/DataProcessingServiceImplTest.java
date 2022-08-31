@@ -9,6 +9,7 @@ import core.basesyntax.strategy.impl.ReturnStrategy;
 import core.basesyntax.strategy.impl.SupplyStrategy;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,5 +64,10 @@ public class DataProcessingServiceImplTest {
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruits.clear();
     }
 }

@@ -17,6 +17,23 @@ public class CsvFileReaderServiceTest {
         csvFileReaderService = new CsvFileReaderService();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void read_nullFile_NotOk() {
+        csvFileReaderService.read(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void read_noFile_NotOk() {
+        File noFile = new File(FOLDER, "nameNotExistingFile.txt");
+        csvFileReaderService.read(noFile);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void read_notValidFileName_NotOk() {
+        File noFile = new File(FOLDER, "ad*-dffgb_/ sdgf0( \\.txt");
+        csvFileReaderService.read(noFile);
+    }
+
     @Test
     public void read_File_Ok() {
         File file = new File(FOLDER, INPUT_FILE);
@@ -33,11 +50,5 @@ public class CsvFileReaderServiceTest {
         Assert.assertEquals(expected, actual);
         Assert.assertEquals(actual.contains("type,fruit,quantity"), expected.contains("type,fruit,quantity"));
         Assert.assertEquals(actual.contains("s,banana,50"), expected.contains("s,banana,50"));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void read_noFile_NotOk() {
-        File noFile = new File(FOLDER, "nameNotExistingFile.txt");
-        csvFileReaderService.read(noFile);
     }
 }

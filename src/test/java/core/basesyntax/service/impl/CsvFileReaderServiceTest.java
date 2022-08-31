@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
     private static final String FOLDER = "src/main/resources";
@@ -48,7 +48,9 @@ public class CsvFileReaderServiceTest {
         expected.add("s,banana,50");
         List<String> actual = csvFileReaderService.read(file);
         Assert.assertEquals(expected, actual);
-        Assert.assertEquals(actual.contains("type,fruit,quantity"), expected.contains("type,fruit,quantity"));
-        Assert.assertEquals(actual.contains("s,banana,50"), expected.contains("s,banana,50"));
+        Assert.assertEquals(actual.contains("type,fruit,quantity"),
+                expected.contains("type,fruit,quantity"));
+        Assert.assertEquals(actual.contains("s,banana,50"),
+                expected.contains("s,banana,50"));
     }
 }

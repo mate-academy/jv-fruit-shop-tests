@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.model.service.Storage;
-import core.basesyntax.model.serviceimpl.StorageImpl;
+import core.basesyntax.storage.Storage;
+import core.basesyntax.storage.StorageImpl;
 import java.util.Map;
 import java.util.Set;
 import org.junit.After;

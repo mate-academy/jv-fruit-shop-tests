@@ -1,15 +1,15 @@
 package core.basesyntax.operation;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.service.Storage;
-import core.basesyntax.model.serviceimpl.StorageImpl;
-import core.basesyntax.model.strategy.OperationStrategy;
-import core.basesyntax.model.strategy.OperationStrategyImpl;
-import core.basesyntax.model.strategy.handler.BalanceOperationHandler;
-import core.basesyntax.model.strategy.handler.OperationHandler;
-import core.basesyntax.model.strategy.handler.PurchaseOperationHandler;
-import core.basesyntax.model.strategy.handler.ReturnOperationHandler;
-import core.basesyntax.model.strategy.handler.SupplyOperationHandler;
+import core.basesyntax.storage.Storage;
+import core.basesyntax.storage.StorageImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.handler.BalanceOperationHandler;
+import core.basesyntax.strategy.handler.OperationHandler;
+import core.basesyntax.strategy.handler.PurchaseOperationHandler;
+import core.basesyntax.strategy.handler.ReturnOperationHandler;
+import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;

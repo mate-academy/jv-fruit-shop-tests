@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.model.service.ReportData;
-import core.basesyntax.model.serviceimpl.ReportDataImpl;
+import core.basesyntax.service.ReportData;
+import core.basesyntax.service.impl.ReportDataImpl;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;

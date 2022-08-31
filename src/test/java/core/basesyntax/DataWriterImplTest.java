@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.model.service.DataWriter;
-import core.basesyntax.model.serviceimpl.DataWriterImpl;
+import core.basesyntax.service.DataWriter;
+import core.basesyntax.service.impl.DataWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.model.service.DataReader;
-import core.basesyntax.model.serviceimpl.DataReaderImpl;
+import core.basesyntax.service.DataReader;
+import core.basesyntax.service.impl.DataReaderImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;

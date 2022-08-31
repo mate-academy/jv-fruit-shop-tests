@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.service.DataParser;
-import core.basesyntax.model.serviceimpl.DataParserImpl;
+import core.basesyntax.service.DataParser;
+import core.basesyntax.service.impl.DataParserImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;

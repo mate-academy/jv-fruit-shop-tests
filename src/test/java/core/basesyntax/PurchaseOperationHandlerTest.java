@@ -22,7 +22,6 @@ public class PurchaseOperationHandlerTest {
         StorageDao storageDao = new StorageDaoImpl();
         purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
         fruitTransaction = new FruitTransaction();
-        Storage.fruits.add(new Fruit("orange", 30));
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruitType("orange");
         fruitTransaction.setFruitQuantity(20);
@@ -40,6 +39,8 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void purchaseWithFruitInStorage_Ok() {
+        Storage.fruits.clear();
+        Storage.fruits.add(new Fruit("orange", 30));
         purchaseOperationHandler.handle(fruitTransaction);
         Fruit actual = Storage.fruits.get(0);
         Fruit expected = new Fruit("orange", 10);

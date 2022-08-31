@@ -29,6 +29,7 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void balanceOperation_Ok() {
+        Storage.fruits.clear();
         balanceOperationHandler.handle(fruitTransaction);
         Fruit expected = new Fruit("orange", 20);
         Fruit actual = Storage.fruits.get(0);

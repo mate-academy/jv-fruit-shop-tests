@@ -30,6 +30,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void returnWithNoSuchFruitInStorage_Ok() {
+        Storage.fruits.clear();
         try {
             returnOperationHandler.handle(fruitTransaction);
         } catch (NoSuchElementException e) {
@@ -39,6 +40,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void returnWithSuchFruitInStorage_Ok() {
+        Storage.fruits.clear();
         Storage.fruits.add(new Fruit("orange", 10));
         returnOperationHandler.handle(fruitTransaction);
         Fruit expected = new Fruit("orange", 30);

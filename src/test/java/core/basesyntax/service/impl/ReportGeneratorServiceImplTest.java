@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,6 @@ public class ReportGeneratorServiceImplTest {
     @Before
     public void setUp() throws Exception {
         reportGeneratorService = new ReportGeneratorServiceImpl();
-        Storage.fruits.clear();
     }
 
     @Test
@@ -29,5 +29,10 @@ public class ReportGeneratorServiceImplTest {
         List<String> actual = reportGeneratorService.generate();
         Assert.assertEquals(2, actual.size());
         Assert.assertEquals("watermelon,99", actual.get(1));
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruits.clear();
     }
 }

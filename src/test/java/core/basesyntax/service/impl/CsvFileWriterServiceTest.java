@@ -14,8 +14,6 @@ import org.junit.Test;
 
 public class CsvFileWriterServiceTest {
     private static final String FOLDER = "src/test/resources";
-    private static final String ACTUAL_OUTPUT_FILE = "writerTestActualOutput.csv";
-    private static final String EXPECTED_OUTPUT_FILE = "writerTestExpectedOutput.csv";
     private static FileWriterService csvFileWriterService;
     private static List<String> report;
 
@@ -35,8 +33,8 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeReport_nullFilegf_notOk() {
-        File file = new File(FOLDER, ACTUAL_OUTPUT_FILE);
+    public void writeReport_nullReport_notOk() {
+        File file = new File(FOLDER, "writerTestNullOutput.csv");
         csvFileWriterService.writeReport(file, null);
     }
 
@@ -49,9 +47,10 @@ public class CsvFileWriterServiceTest {
 
     @Test
     public void writeReport_ok() {
-        File actual = new File(FOLDER, ACTUAL_OUTPUT_FILE);
-        File expected = new File(FOLDER, EXPECTED_OUTPUT_FILE);
-        csvFileWriterService.writeReport(expected, report);
+        File actual = new File(FOLDER, "writerTestActualOutput.csv");
+        File expected = new File(FOLDER, "writerTestExpectedOutput.csv");
+        csvFileWriterService.writeReport(actual, report);
+        filesCompareByLine(actual.toPath(), expected.toPath());
         Assert.assertTrue(filesCompareByLine(actual.toPath(), expected.toPath()));
     }
 
@@ -62,7 +61,7 @@ public class CsvFileWriterServiceTest {
             String lineSecondFile = "";
             while ((lineFirstFile = firstBufferedReader.readLine()) != null
                     && (lineSecondFile = secondBufferedReader.readLine()) != null) {
-                if (lineFirstFile.equals(lineSecondFile)) {
+                if (!lineFirstFile.equals(lineSecondFile)) {
                     return false;
                 }
             }

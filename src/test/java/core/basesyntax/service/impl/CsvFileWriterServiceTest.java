@@ -47,7 +47,7 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test
-    public void writeReport() {
+    public void writeReport_ok() {
         File actual = new File(FOLDER, OUTPUT_FILE);
         File expected = new File(FOLDER, "expected.csv");
         csvFileWriterService.writeReport(expected, report);
@@ -66,7 +66,7 @@ public class CsvFileWriterServiceTest {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("", e);
+            throw new RuntimeException("Can not read file " + firstFile + " " + secondFile, e);
         }
         return true;
     }

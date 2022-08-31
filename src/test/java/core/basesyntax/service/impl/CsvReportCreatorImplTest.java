@@ -29,8 +29,10 @@ public class CsvReportCreatorImplTest {
         Storage.fruitsStorage.put("apple", 67);
         String actual = reportCreator.makeReport();
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,balance").append(System.lineSeparator())
-                .append("orange,40").append(System.lineSeparator())
+        stringBuilder.append("fruit,balance")
+                .append(System.lineSeparator())
+                .append("orange,40")
+                .append(System.lineSeparator())
                 .append("apple,67");
         String expected = stringBuilder.toString();
         assertEquals(expected, actual);

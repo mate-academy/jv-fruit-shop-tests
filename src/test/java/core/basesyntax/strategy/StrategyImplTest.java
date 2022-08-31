@@ -43,31 +43,27 @@ public class StrategyImplTest {
     public void getHandler_Balance_Ok() {
         OperationHandler actualBalance = strategy.get(FruitOperation
                 .Operation.BALANCE);
-        OperationHandler expectedBalance = new BalanceOperationHandlerImpl(fruitService);
-        assertEquals(expectedBalance.getClass(), actualBalance.getClass());
+        assertEquals(BalanceOperationHandlerImpl.class, actualBalance.getClass());
     }
 
     @Test
     public void getHandler_Purchase_Ok() {
         OperationHandler actualPurchase = strategy.get(FruitOperation
                 .Operation.PURCHASE);
-        OperationHandler expectedPurchase = new PurchaseOperationHandlerImpl(fruitService);
-        assertEquals(expectedPurchase.getClass(), actualPurchase.getClass());
+        assertEquals(PurchaseOperationHandlerImpl.class, actualPurchase.getClass());
     }
 
     @Test
     public void getHandler_Supply_Ok() {
         OperationHandler actualSupply = strategy.get(FruitOperation
                 .Operation.SUPPLY);
-        OperationHandler expectedSupply = new SupplyOperationHandlerImpl(fruitService);
-        assertEquals(expectedSupply.getClass(), actualSupply.getClass());
+        assertEquals(SupplyOperationHandlerImpl.class, actualSupply.getClass());
     }
 
     @Test
     public void getHandler_Return_Ok() {
         OperationHandler actualReturn = strategy.get(FruitOperation
                 .Operation.RETURN);
-        OperationHandler expectedReturn = new ReturnOperationHandlerImpl(fruitService);
-        assertEquals(expectedReturn.getClass(), actualReturn.getClass());
+        assertEquals(ReturnOperationHandlerImpl.class, actualReturn.getClass());
     }
 }

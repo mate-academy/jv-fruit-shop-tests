@@ -27,7 +27,7 @@ public class FileWriterServiceImplTest {
                 + "p,banana,25\n"
                 + "r,apple,10\n"
                 + "p,apple,20\n"
-                + "p,banana,15");
+                + "p,banana,15\n");
     }
 
     @Test

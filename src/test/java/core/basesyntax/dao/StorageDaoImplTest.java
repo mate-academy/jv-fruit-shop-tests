@@ -1,10 +1,14 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,6 +84,32 @@ public class StorageDaoImplTest {
         Storage.fruitsStorage.put("orange", 55);
         Storage.fruitsStorage.put("banana", 90);
         storageDao.getAmount("apple");
+    }
+
+    @Test
+    public void getAll_Ok() {
+        Storage.fruitsStorage.put("orange", 76);
+        Storage.fruitsStorage.put("apple", 44);
+        List<Fruit> expected = new ArrayList<>();
+        Fruit banana = new Fruit("orange", 76);
+        Fruit apple = new Fruit("apple", 44);
+        expected.add(banana);
+        expected.add(apple);
+        List<Fruit> actual = fruitService.getAll();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getAll_NotOk() {
+        Storage.fruitsStorage.put("banana", 76);
+        Storage.fruitsStorage.put("apple", 44);
+        List<Fruit> expected = new ArrayList<>();
+        Fruit banana = new Fruit("orange", 76);
+        Fruit apple = new Fruit("apple", 44);
+        expected.add(banana);
+        expected.add(apple);
+        List<Fruit> actual = fruitService.getAll();
+        assertNotEquals(expected, actual);
     }
 
     @After

@@ -24,6 +24,7 @@ public class CsvReportCreatorImpl implements ReportCreator {
                     .append(SEPARATOR)
                     .append(fruit.getAmount());
         }
+        report.append('\n');
         return report.toString();
     }
 }

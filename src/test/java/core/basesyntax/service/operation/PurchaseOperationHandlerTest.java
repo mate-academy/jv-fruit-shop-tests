@@ -5,16 +5,23 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
+    private static FruitDao fruitDao;
+    private static FruitOperationHandler fruitOperationHandler;
+
+    @BeforeClass
+    public static void setUp() {
+        fruitDao = new FruitDaoImpl();
+        fruitOperationHandler = new PurchaseOperationHandler(fruitDao);
+    }
 
     @Test
-    public void purchaseHandleOperationValid_Ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
+    public void purchaseHandleOperation_Ok() {
         fruitDao.addFruit("apple",100);
         fruitDao.addFruit("banana",200);
-        final FruitOperationHandler fruitOperationHandler = new PurchaseOperationHandler(fruitDao);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(30);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

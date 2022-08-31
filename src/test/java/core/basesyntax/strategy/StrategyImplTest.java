@@ -12,17 +12,19 @@ import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyImplTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final Map<FruitTransaction.Operation, FruitOperationHandler>
-            fruitOperationHandlerMap = new HashMap<>();
+    private static FruitDao fruitDao;
+    private static Map<FruitTransaction.Operation, FruitOperationHandler>
+            fruitOperationHandlerMap;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
+        fruitDao = new FruitDaoImpl();
         fruitDao.addFruit("banana",1000);
+        fruitOperationHandlerMap = new HashMap<>();
         FruitOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
         FruitOperationHandler returnOperationHandler = new ReturnOperationHandler(fruitDao);
         FruitOperationHandler supplyOperationHandler = new SupplyOperationHandler(fruitDao);
@@ -34,7 +36,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void getPurchaseOperationValid() {
+    public void getPurchaseOperation_Ok() {
         Strategy strategy = new StrategyImpl(fruitOperationHandlerMap);
         FruitOperationHandler actual = strategy.get(FruitTransaction.Operation.PURCHASE);
         FruitOperationHandler expected = new PurchaseOperationHandler(fruitDao);
@@ -42,7 +44,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void getReturnOperationValid() {
+    public void getReturnOperation_Ok() {
         Strategy strategy = new StrategyImpl(fruitOperationHandlerMap);
         FruitOperationHandler actual = strategy.get(FruitTransaction.Operation.RETURN);
         FruitOperationHandler expected = new ReturnOperationHandler(fruitDao);
@@ -50,7 +52,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void getBalanceOperationValid() {
+    public void getBalanceOperation_Ok() {
         Strategy strategy = new StrategyImpl(fruitOperationHandlerMap);
         FruitOperationHandler actual = strategy.get(FruitTransaction.Operation.BALANCE);
         FruitOperationHandler expected = new BalanceOperationHandler(fruitDao);
@@ -58,7 +60,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void getSupplyOperationValid() {
+    public void getSupplyOperation_Ok() {
         Strategy strategy = new StrategyImpl(fruitOperationHandlerMap);
         FruitOperationHandler actual = strategy.get(FruitTransaction.Operation.SUPPLY);
         FruitOperationHandler expected = new SupplyOperationHandler(fruitDao);

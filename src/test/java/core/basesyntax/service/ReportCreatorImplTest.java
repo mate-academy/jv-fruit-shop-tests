@@ -4,13 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
+    private static ReportCreator reportCreator;
+
+    @BeforeClass
+    public static void setUp() {
+        reportCreator = new ReportCreatorImpl();
+    }
 
     @Test
-    public void reportCreatorValid() {
-        ReportCreator reportCreator = new ReportCreatorImpl();
+    public void reportCreator_Ok() {
         Map<String, Integer> map = new HashMap<>();
         map.put("banana",152);
         map.put("apple",90);
@@ -21,6 +27,5 @@ public class ReportCreatorImplTest {
                 + System.lineSeparator()
                 + "apple,90";
         assertEquals(expected,actual);
-
     }
 }

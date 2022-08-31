@@ -11,7 +11,7 @@ public class ParseServiceImplTest {
     private static final String NOT_VALID_TEST_DATA = "s,apple,-100";
 
     @Test
-    public void parseValidData_Ok() {
+    public void parse_Ok() {
         ParseService parseService = new ParseServiceImpl();
         FruitTransaction expected = new FruitTransaction();
         expected.setOperation(FruitTransaction.Operation
@@ -23,8 +23,9 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseNotValidData_NotOk() {
+    public void parse_NotValidData_NotOk() {
         ParseService parseService = new ParseServiceImpl();
-        assertThrows(RuntimeException.class,() -> parseService.parse(NOT_VALID_TEST_DATA));
+        assertThrows(RuntimeException.class,() ->
+                parseService.parse(NOT_VALID_TEST_DATA));
     }
 }

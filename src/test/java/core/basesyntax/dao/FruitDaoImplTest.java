@@ -2,6 +2,7 @@ package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import java.util.HashMap;
@@ -10,10 +11,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void setUp() {
+        fruitDao = new FruitDaoImpl();
         Storage.fruits.clear();
         Storage.fruits.put("apple",150);
     }
@@ -28,10 +30,16 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getQuantityValid_Ok() {
+    public void getQuantity_ValidData_Ok() {
         Integer expected = fruitDao.getQuantity("apple");
         Integer actual = 150;
         assertEquals(expected,actual);
+    }
+
+    @Test
+    public void getQuantity_NotValidData_NotOk() {
+        assertThrows(RuntimeException.class,
+                () -> fruitDao.getQuantity("watermelon"));
     }
 
     @Test

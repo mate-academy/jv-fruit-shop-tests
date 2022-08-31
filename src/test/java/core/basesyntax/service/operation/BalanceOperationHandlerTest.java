@@ -7,17 +7,25 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
+    private static FruitDao fruitDao;
+    private static FruitTransaction fruitTransaction;
+    private static FruitOperationHandler fruitOperationHandler;
+
+    @BeforeClass
+    public static void setUp() {
+        fruitDao = new FruitDaoImpl();
+        fruitTransaction = new FruitTransaction();
+        fruitOperationHandler = new BalanceOperationHandler(fruitDao);
+    }
 
     @Test
-    public void validBalanceOperationHandler_Ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        FruitTransaction fruitTransaction = new FruitTransaction();
+    public void balanceOperationHandler_Ok() {
         fruitDao.addFruit("apple",150);
         fruitDao.addFruit("banana",130);
-        FruitOperationHandler fruitOperationHandler = new BalanceOperationHandler(fruitDao);
         fruitTransaction.setFruit("chery");
         fruitTransaction.setQuantity(500);
         fruitOperationHandler.handle(fruitTransaction);
@@ -32,5 +40,4 @@ public class BalanceOperationHandlerTest {
         assertTrue(fruits.containsValue(130));
         assertTrue(fruits.containsValue(500));
     }
-
 }

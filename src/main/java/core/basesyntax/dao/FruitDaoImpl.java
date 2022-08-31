@@ -11,7 +11,11 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public int getQuantity(String fruit) {
-        return Storage.fruits.get(fruit);
+        if (Storage.fruits.containsKey(fruit)) {
+            return Storage.fruits.get(fruit);
+        } else {
+            throw new RuntimeException("Can not find: " + fruit);
+        }
     }
 
     @Override

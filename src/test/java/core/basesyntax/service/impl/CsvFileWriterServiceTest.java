@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import org.junit.Test;
 public class CsvFileWriterServiceTest {
     private static final String FOLDER = "src/main/resources";
     private static final String OUTPUT_FILE = "output.csv";
-    private static CsvFileWriterService csvFileWriterService;
+    private static FileWriterService csvFileWriterService;
     private static List<String> report;
 
     @Before

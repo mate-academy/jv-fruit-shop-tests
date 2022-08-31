@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileReaderService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.junit.Test;
 public class CsvFileReaderServiceTest {
     private static final String FOLDER = "src/main/resources";
     private static final String INPUT_FILE = "input.csv";
-    private static CsvFileReaderService csvFileReaderService;
+    private static FileReaderService csvFileReaderService;
 
     @Before
     public void setUp() {

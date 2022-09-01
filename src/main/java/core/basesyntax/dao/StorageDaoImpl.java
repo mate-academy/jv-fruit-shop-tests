@@ -12,7 +12,8 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void supply(String fruit, Integer amount) {
-        Storage.storage.put(fruit, Storage.storage.get(fruit) + amount);
+        Storage.storage.put(fruit, Storage.storage.get(fruit) == null
+                ? amount : Storage.storage.get(fruit) + amount);
     }
 
     @Override

@@ -5,6 +5,8 @@ import core.basesyntax.service.ParserService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class ParserServiceImplTest {
@@ -39,5 +41,13 @@ public class ParserServiceImplTest {
     public void parse_correctData_ok() {
         List<FruitTransaction> actual = parserService.parse(READ_DATA);
         Assert.assertEquals(EXPECTED_RESULT, actual);
+    }
+
+    @Test
+    public void parse_getTransaction_ok() {
+        String[] line = {"b,banana,20"};
+        FruitTransaction.Operation transaction = FruitTransaction.Operation.BALANCE;
+        ParserServiceImpl.getTransaction(line);
+        Assert.assertEquals(transaction, line);
     }
 }

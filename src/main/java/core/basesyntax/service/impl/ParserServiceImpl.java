@@ -25,7 +25,7 @@ public class ParserServiceImpl implements ParserService {
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction.Operation getTransaction(String[] strings) {
+    public static FruitTransaction.Operation getTransaction(String[] strings) {
         return Arrays.stream(FruitTransaction.Operation.values())
                 .filter(o -> o.getOperation().equals(strings[INDEX_OF_OPERATION]))
                 .findFirst().get();

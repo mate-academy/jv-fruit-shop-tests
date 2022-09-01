@@ -46,7 +46,6 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandler);
         List<FruitTransaction> parsedData = parseService.parse(data);
-        parsedData.forEach(System.out::println);
 
         parsedData.forEach(value -> operationStrategy.getByOperation(value.getOperation())
                 .executeTransaction(value));

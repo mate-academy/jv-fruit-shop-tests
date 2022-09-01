@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.impl.DataWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DataWriterImplTest {
-    private static final String APPLES_GRAPES_REPORT = "applesGrapesReport.csv";
+    private static final String APPLES_GRAPES_REPORT = "src/test/resources/applesGrapesReport.csv";
     private DataWriter dataWriter;
 
     @Before

@@ -1,10 +1,8 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.storage.StorageImpl;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;

@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.DataReader;
 import core.basesyntax.service.impl.DataReaderImpl;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DataReaderTest {
-    private static final String APPLES_ORANGES = "applesOranges.csv";
+    private static final String APPLES_ORANGES = "src/test/resources/applesOranges.csv";
     private DataReader dataReader;
 
     @Before

@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.service.ReportData;
 import core.basesyntax.service.impl.ReportDataImpl;
 import java.util.Map;
 import org.junit.Assert;

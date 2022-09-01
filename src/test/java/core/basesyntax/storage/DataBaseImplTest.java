@@ -1,7 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.storage;
 
-import core.basesyntax.storage.Storage;
-import core.basesyntax.storage.StorageImpl;
 import java.util.Map;
 import java.util.Set;
 import org.junit.After;

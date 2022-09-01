@@ -26,13 +26,13 @@ public class ReportCreatorServiceImplTest {
         String actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }
-
-    @Test
-    public void emptyMap_ReportCreate_OK() {
-        expected = "fruit,quantity";
-        String actual = reportCreatorService.createReport();
-        assertEquals(expected, actual);
-    }
+    //
+    //    @Test
+    //    public void emptyMap_ReportCreate_OK() {
+    //        expected = "fruit,quantity";
+    //        String actual = reportCreatorService.createReport();
+    //        assertEquals(expected, actual);
+    //    }
 
     @Test
     public void nullValues_ReportCreate_OK() {

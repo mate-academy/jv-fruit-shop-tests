@@ -3,6 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,10 +16,11 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<Transaction> parse(List<String> lines) {
-        lines.remove(ZERO_INDEX);
-        return lines.stream()
-                .map(this::getTransaction)
-                .collect(Collectors.toList());
+        List<Transaction> transactionList = new ArrayList<>();
+        for (int i = 1; i < lines.size(); i++) {
+            transactionList.add(getTransaction(lines.get(i)));
+        }
+        return transactionList;
     }
 
     private Transaction getTransaction(String string) {

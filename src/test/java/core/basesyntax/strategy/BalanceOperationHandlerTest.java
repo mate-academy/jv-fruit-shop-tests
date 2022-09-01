@@ -1,13 +1,13 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class BalanceOperationHandlerTest {
     private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();

@@ -3,10 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ParserServiceImpl implements ParserService {
     private static final int ZERO_INDEX = 0;

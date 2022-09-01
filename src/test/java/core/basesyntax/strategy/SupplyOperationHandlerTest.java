@@ -1,13 +1,13 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 public class SupplyOperationHandlerTest {
     private SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();

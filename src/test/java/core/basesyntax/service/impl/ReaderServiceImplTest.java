@@ -1,11 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ReaderService;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String INPUT_FILE_NAME = "src/test/resources/test_data.csv";
@@ -20,12 +21,12 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFromFile_OK() {
-        int expected = 2;
-        int actual = 0;
         List<String> expectedList = new ArrayList<>();
         expectedList.add("test file should contains");
         expectedList.add("at least two lines");
         List<String> actualList = readerService.readFromFile(INPUT_FILE_NAME);
+        int expected = 2;
+        int actual = 0;
         for (int i = 0; i < actualList.size(); i++) {
             if (actualList.get(i).equals(expectedList.get(i))) {
                 actual++;

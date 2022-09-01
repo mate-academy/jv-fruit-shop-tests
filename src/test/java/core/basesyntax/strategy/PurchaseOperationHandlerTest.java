@@ -11,13 +11,11 @@ import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
-    private Transaction inputTransaction;
     private Fruit fruit;
 
     @Before
     public void beforeClass() throws Exception {
-        inputTransaction = new Transaction("p", new Fruit("apple"), 9);
-        fruit = inputTransaction.getFruit();
+        fruit = new Fruit("apple");
     }
 
     @Test
@@ -25,18 +23,25 @@ public class PurchaseOperationHandlerTest {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 14);
         purchaseOperationHandler.apply(new Transaction("p", new Fruit("apple"), 9));
-        Integer expected = Integer.valueOf(5);
+        Integer expected = 5;
         Integer actual = Storage.storage.get(fruit);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void negativeValue_NotOK() {
+    public void negativePurchaseValue_NotOK() {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 14);
         purchaseOperationHandler.apply(new Transaction("p", new Fruit("apple"), -9));
         Integer expected = Integer.valueOf(5);
         Integer actual = Storage.storage.get(fruit);
         assertFalse(expected.equals(actual));
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void nullPurchaseValue_NotOK() {
+        Fruit apple = new Fruit("apple");
+        Storage.storage.put(apple, 14);
+        purchaseOperationHandler.apply(new Transaction("p", new Fruit("apple"), null));
     }
 }

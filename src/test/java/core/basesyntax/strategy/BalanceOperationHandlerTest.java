@@ -11,13 +11,11 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
-    private Transaction expectedTransaction;
     private Fruit fruit;
 
     @Before
     public void setUp() throws Exception {
-        expectedTransaction = new Transaction("b", new Fruit("apple"), 14);
-        fruit = expectedTransaction.getFruit();
+        fruit = new Fruit("apple");
     }
 
     @Test

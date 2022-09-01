@@ -25,13 +25,15 @@ public class CompilerOfReportTest {
     @Test
     public void generateReport_EmptySet_Ok() {
         String expected = REPORT_TOPIC + System.lineSeparator();
-        assertEquals(expected, reporter.generateReport(Collections.EMPTY_SET));
+        assertEquals("You should return only TOPPER of table for the empty set.",
+                expected, reporter.generateReport(Collections.EMPTY_SET));
     }
 
     @Test
     public void generateReport_NullInput_Ok() {
         String expected = REPORT_TOPIC + System.lineSeparator();
-        assertEquals(expected, reporter.generateReport(null));
+        assertEquals("You should return only TOPPER of table for null input.",
+                expected, reporter.generateReport(null));
     }
 
     @Test
@@ -40,7 +42,8 @@ public class CompilerOfReportTest {
         map.put(new Fruit("fruit"), 10);
         request = map.entrySet();
         String expected = REPORT_TOPIC + System.lineSeparator() + "fruit,10";
-        assertEquals(expected, reporter.generateReport(request));
+        assertEquals("The result must contain topper of table and one correct row.",
+                expected, reporter.generateReport(request));
     }
 
     @Test
@@ -59,6 +62,7 @@ public class CompilerOfReportTest {
 
         request = map.entrySet();
         String expected = builder.toString();
-        assertTrue(expected.length() == reporter.generateReport(request).length());
+        assertTrue("The result must contain the topper and " + numberOfCounts + " rows.",
+                expected.length() == reporter.generateReport(request).length());
     }
 }

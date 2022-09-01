@@ -45,9 +45,9 @@ public class WriterTest {
         try {
             List<String> actualStrings = Files.readAllLines(new File(fileName).toPath());
             assertTrue(actualStrings.size() == 3);
-            assertEquals("123", actualStrings.get(0));
-            assertEquals("456", actualStrings.get(1));
-            assertEquals("789", actualStrings.get(2));
+            assertEquals("The first row must be 123","123", actualStrings.get(0));
+            assertEquals("The second row must be 456", "456", actualStrings.get(1));
+            assertEquals("The firth row must be 789", "789", actualStrings.get(2));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -39,9 +39,12 @@ public class FruitMovementParserTest {
         List<FruitMovement> expected = new ArrayList<>();
         expected.add(new FruitMovement(new Fruit("banana"), MovementType.BALANCE, 20));
         List<FruitMovement> actual = parser.parse(request);
-        assertEquals(expected.get(0).getFruit(), actual.get(0).getFruit());
-        assertEquals(expected.get(0).getType(), actual.get(0).getType());
-        assertEquals(expected.get(0).getAmount(), actual.get(0).getAmount());
+        assertEquals("The fruit is banana",
+                expected.get(0).getFruit(), actual.get(0).getFruit());
+        assertEquals("The type for b is balance",
+                expected.get(0).getType(), actual.get(0).getType());
+        assertEquals("The amount must be 20",
+                expected.get(0).getAmount(), actual.get(0).getAmount());
     }
 
     @Test
@@ -62,9 +65,12 @@ public class FruitMovementParserTest {
         assertEquals("Incorrect number of elements in this list of fruit movements.",
                 expected.size(), actual.size());
         for (int i = 0; i < numberOfCounts; i++) {
-            assertEquals(expected.get(i).getAmount(), expected.get(i).getAmount());
-            assertEquals(expected.get(i).getFruit(), expected.get(i).getFruit());
-            assertEquals(expected.get(i).getType(), expected.get(i).getType());
+            assertEquals("The amount must be " + i,
+                    expected.get(i).getAmount(), expected.get(i).getAmount());
+            assertEquals("The fruit must be " + i,
+                    expected.get(i).getFruit(), expected.get(i).getFruit());
+            assertEquals("The type must be " + expected.get(i).getType(),
+                    expected.get(i).getType(), expected.get(i).getType());
         }
     }
 }

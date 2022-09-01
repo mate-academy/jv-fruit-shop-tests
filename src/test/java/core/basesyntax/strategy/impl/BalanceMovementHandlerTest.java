@@ -33,12 +33,15 @@ public class BalanceMovementHandlerTest {
         Fruit fruit = new Fruit("fruit");
         request = new FruitMovement(fruit, MovementType.BALANCE, 10);
         handler.makePosting(request);
-        assertTrue(storage.getAmount(fruit) == 10);
+        assertTrue("You should add into the storage one element with value 10",
+                storage.getAmount(fruit) == 10);
 
         request = new FruitMovement(fruit, MovementType.BALANCE, 50);
         handler.makePosting(request);
-        assertTrue(storage.getEntries().size() == 1);
-        assertTrue(storage.getAmount(fruit) == 50);
+        assertTrue("You should update the value, don't add new",
+                storage.getEntries().size() == 1);
+        assertTrue("The new value is 50",
+                storage.getAmount(fruit) == 50);
     }
 
     @Test
@@ -48,13 +51,15 @@ public class BalanceMovementHandlerTest {
             request = new FruitMovement(new Fruit(String.valueOf(i)), MovementType.BALANCE, 10);
             handler.makePosting(request);
         }
-        assertTrue(storage.getEntries().size() == numberOfFruits);
+        assertTrue("Must be only one entry for each fruit.",
+                storage.getEntries().size() == numberOfFruits);
 
         for (int i = 0; i < numberOfFruits; i++) {
             request = new FruitMovement(new Fruit(String.valueOf(i)), MovementType.BALANCE, 100);
             handler.makePosting(request);
         }
-        assertTrue(storage.getEntries().size() == numberOfFruits);
+        assertTrue("Must be only one entry for each fruit.",
+                storage.getEntries().size() == numberOfFruits);
     }
 
     @After

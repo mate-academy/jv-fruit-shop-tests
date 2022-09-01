@@ -32,7 +32,8 @@ public class CsvFileReaderTest {
     @Test
     public void readCsvFile_EmptyFile_Ok() {
         List<String[]> expected = new ArrayList<>();
-        assertEquals(expected, reader.readCsvFile("src/test/resources/empty.csv"));
+        assertEquals("You should return empty list for the argument empty list.",
+                expected, reader.readCsvFile("src/test/resources/empty.csv"));
     }
 
     @Test
@@ -40,12 +41,14 @@ public class CsvFileReaderTest {
         List<String[]> expected = new ArrayList<>();
         expected.add(new String[]{"b", "banana", "20"});
         List<String[]> actual = reader.readCsvFile("src/test/resources/onedataline.csv");
-        assertEquals(expected.get(0), actual.get(0));
+        assertEquals("The received from one row data you should put to one list element.",
+                expected.get(0), actual.get(0));
     }
 
     @Test
     public void readCsvFile_manyLinesInFile_Ok() {
         List<String[]> actual = reader.readCsvFile("src/test/resources/tendatalines.csv");
-        assertTrue(actual.size() == 10);
+        assertTrue("The list must have 10 elements, because file contains 10 rows",
+                actual.size() == 10);
     }
 }

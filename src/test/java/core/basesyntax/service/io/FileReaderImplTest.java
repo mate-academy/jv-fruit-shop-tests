@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private static final String PATH_TO_TEST_INPUT_FILE = "src/resourcesTest/operationsTest.csv";
-    private static final String PATH_TO_NOT_EXIST_TEST_INPUT_FILE = "src/resourcesTest/???.csv";
+    private static final String PATH_TO_NOT_EXIST_TEST_INPUT_FILE = "src/resourcesTest/klhkbj.csv";
     private static FileReader fileReader;
 
     @BeforeClass

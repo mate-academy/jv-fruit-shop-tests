@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class FileWriterImplTest {
     private static final String PATH_TO_TEST_INPUT_FILE = "src/resourcesTest/testActualReport.csv";
-    private static final String PATH_TO_NOT_EXIST_TEST_INPUT_FILE = "src/resourcesTest/????.csv";
+    private static final String PATH_TO_NOT_EXIST_TEST_INPUT_FILE = "src/resourcesTest/mhbkjbjl.csv";
     private static final String TEST_DATA = "TEST_DATA";
     private static FileWriter fileWriter;
 

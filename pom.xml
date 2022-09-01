@@ -26,6 +26,7 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -42,6 +43,10 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <excludes>
+                        <exclude>**/Main*</exclude>
+                        <exclude>**/FruitTransaction*</exclude>
+                    </excludes>
                     <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
@@ -49,6 +54,9 @@
                     <linkXRef>false</linkXRef>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
+
+
+
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

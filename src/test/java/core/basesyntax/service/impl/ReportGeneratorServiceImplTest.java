@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
 import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,16 +20,16 @@ public class ReportGeneratorServiceImplTest {
     @Test
     public void generate_header_ok() {
         List<String> actual = reportGeneratorService.generate();
-        Assert.assertEquals(1, actual.size());
-        Assert.assertEquals("fruit,quantity", actual.get(0));
+        assertEquals("", 1, actual.size());
+        assertEquals("", "fruit,quantity", actual.get(0));
     }
 
     @Test
     public void generate_list_ok() {
         Storage.fruits.put("watermelon", 99);
         List<String> actual = reportGeneratorService.generate();
-        Assert.assertEquals(2, actual.size());
-        Assert.assertEquals("watermelon,99", actual.get(1));
+        assertEquals("", 2, actual.size());
+        assertEquals("", "watermelon,99", actual.get(1));
     }
 
     @After

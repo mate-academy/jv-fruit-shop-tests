@@ -1,7 +1,9 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.strategy.impl.BalanceStrategy;
 import core.basesyntax.strategy.impl.PurchaseStrategy;
@@ -10,7 +12,6 @@ import core.basesyntax.strategy.impl.SupplyStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new BalanceStrategy(), "fruit", expected));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        Assert.assertEquals(expected, actual);
+        assertEquals("", expected, actual);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new PurchaseStrategy(), "fruit", purchased));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        Assert.assertEquals(expected, actual);
+        assertEquals("", expected, actual);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new ReturnStrategy(), "fruit", returned));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        Assert.assertEquals(expected, actual);
+        assertEquals("", expected, actual);
     }
 
     @Test
@@ -63,7 +64,7 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new SupplyStrategy(), "fruit", deliveredBySupplier));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        Assert.assertEquals(expected, actual);
+        assertEquals("", expected, actual);
     }
 
     @After

@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ParserService;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.BalanceStrategy;
@@ -10,7 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class ParserServiceImplTest {
     public void parse_emptyListStrings_Ok() {
         Integer expected = 0;
         Integer actual = parserService.parse(strings).size();
-        Assert.assertEquals(expected, actual);
+        assertEquals("", expected, actual);
     }
 
     @Test
@@ -47,6 +48,6 @@ public class ParserServiceImplTest {
         strings.add("r,apple,10");
         Integer expected = 4;
         Integer actual = parserService.parse(strings).size();
-        Assert.assertEquals(expected, actual);
+        assertEquals("", expected, actual);
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.service.FileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,7 +52,7 @@ public class CsvFileWriterServiceTest {
         File expected = new File(FOLDER, "writerTestExpectedOutput.csv");
         csvFileWriterService.writeReport(actual, report);
         filesCompareByLine(actual.toPath(), expected.toPath());
-        Assert.assertTrue(filesCompareByLine(actual.toPath(), expected.toPath()));
+        assertTrue("", filesCompareByLine(actual.toPath(), expected.toPath()));
     }
 
     private static boolean filesCompareByLine(Path firstFile, Path secondFile) {

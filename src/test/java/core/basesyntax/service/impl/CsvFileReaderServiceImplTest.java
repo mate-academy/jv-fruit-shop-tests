@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
     private static final String FILE_NAME_TEST
-            = "src/main/resources/test/testInfo.csv";
+            = "src/test/resources/testInfo.csv";
     private CsvFileReaderService csvFileReaderService;
 
     @Before

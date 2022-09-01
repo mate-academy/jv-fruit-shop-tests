@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.StorageFruits;
 import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,5 +87,10 @@ public class StoreServiceImplTest {
         }
         int expected = 2;
         assertEquals(expected,actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        StorageFruits.fruits.clear();
     }
 }

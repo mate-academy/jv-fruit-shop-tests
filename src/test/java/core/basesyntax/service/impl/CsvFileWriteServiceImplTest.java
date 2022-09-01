@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class CsvFileWriteServiceImplTest {
     private static final String FILE_NAME_TEST
-            = "src/main/resources/test/testReport.csv";
+            = "src/test/resources/testReport.csv";
     private CsvFileWriterService csvFileWriterService;
     private String reportData;
 

@@ -4,13 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReaderService;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String PATH_TO_EMPTY_FILE = "src/test/resources/EmptyFile.csv";
     private static final String PATH_TO_FILE = "src/test/resources/InputDataTest.csv";
     private static final String WRONG_PATH_TO_FILE = "src/test/resources/test.csv";
-    private ReaderService readerService = new ReaderServiceImpl();
+    private static ReaderService readerService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        readerService = new ReaderServiceImpl();
+    }
 
     @Test
     public void read_FileWithData_Ok() {

@@ -21,19 +21,21 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionsProcessorImplTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-    private FruitsDao fruitsDao = new FruitsDaoImpl();
-    private OperationStrategy operationStrategy;
-    private FruitTransactionsProcessor fruitTransactionsProcessor;
-    private FruitTransaction bananaBalance = new FruitTransaction();
-    private FruitTransaction bananaOperation = new FruitTransaction();
-    private List<FruitTransaction> fruitTransactions = new ArrayList<>();
+    private static FruitsDao fruitsDao;
+    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static FruitTransactionsProcessor fruitTransactionsProcessor;
+    private static FruitTransaction bananaBalance;
+    private static FruitTransaction bananaOperation;
+    private static List<FruitTransaction> fruitTransactions;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
+        fruitsDao = new FruitsDaoImpl();
+        operationHandlerMap = new HashMap<>();
         operationHandlerMap
                 .put(FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitsDao));
         operationHandlerMap
@@ -42,8 +44,15 @@ public class FruitTransactionsProcessorImplTest {
                 .put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitsDao));
         operationHandlerMap
                 .put(FruitTransaction.Operation.RETURN, new ReturnOperation(fruitsDao));
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitTransactionsProcessor = new FruitTransactionsProcessorImpl(operationStrategy);
+        bananaBalance = new FruitTransaction();
+        bananaOperation = new FruitTransaction();
+        fruitTransactions = new ArrayList<>();
+    }
+
+    @Before
+    public void setUp() {
         bananaBalance.setOperation(FruitTransaction.Operation.BALANCE);
         bananaBalance.setFruit("banana");
         bananaBalance.setQuantity(100);

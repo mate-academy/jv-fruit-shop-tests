@@ -8,10 +8,16 @@ import core.basesyntax.exceptions.NoFruitsException;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitsDaoImplTest {
-    private FruitsDao fruitsDao = new FruitsDaoImpl();
+    private static FruitsDao fruitsDao;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitsDao = new FruitsDaoImpl();
+    }
 
     @Before
     public void setUp() {

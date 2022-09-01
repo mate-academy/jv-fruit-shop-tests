@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
@@ -16,7 +17,12 @@ public class FileWriterImplTest {
     private static final String TEXT_TO_WRITE = "fruit,quantity" + System.lineSeparator()
             + "banana,50" + System.lineSeparator()
             + "apple,40";
-    private FileWriter fileWriter = new FileWriterImpl();
+    private static FileWriter fileWriter;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileWriter = new FileWriterImpl();
+    }
 
     @Test
     public void writeToFile_Ok() {

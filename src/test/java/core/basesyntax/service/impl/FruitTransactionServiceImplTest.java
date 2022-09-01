@@ -8,17 +8,30 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
     private static final String TITLE = "type,fruit,quantity";
-    private List<String> inputData = new ArrayList<>();
-    private FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+    private static List<String> inputData;
+    private static FruitTransactionService fruitTransactionService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitTransactionService = new FruitTransactionServiceImpl();
+        inputData = new ArrayList<>();
+    }
 
     @Before
     public void setUp() {
         inputData.add(TITLE);
+    }
+
+    @After
+    public void afterClass() {
+        inputData.clear();
     }
 
     @Test

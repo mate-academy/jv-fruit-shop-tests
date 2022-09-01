@@ -9,11 +9,15 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
     private String filePath;
     private ReaderServiceImpl readerService;
+    private List<String> expected;
 
     @Before
     public void setUp() {
         filePath = "src/test/resources/Input.csv";
         readerService = new ReaderServiceImpl();
+        expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
+        expected.add("b,banana,88");
     }
 
     @Test (expected = RuntimeException.class)
@@ -24,18 +28,12 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFileValidPath() {
-        List<String> expected = new ArrayList<>();
-        expected.add("type,fruit,quantity");
-        expected.add("b,banana,88");
         List<String> actual = readerService.readFromFile(filePath);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void readFileOk() {
-        List<String> expected = new ArrayList<>();
-        expected.add("type,fruit,quantity");
-        expected.add("b,banana,88");
         List<String> actual = readerService.readFromFile(filePath);
         Assert.assertEquals(expected, actual);
     }

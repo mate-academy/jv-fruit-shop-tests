@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
+    private Fruit fruit;
     private PurchaseOperationHandler purchaseOperationHandler;
     private FruitTransaction fruitTransaction;
 
@@ -14,7 +15,8 @@ public class PurchaseOperationHandlerTest {
     public void setUp() {
         purchaseOperationHandler = new PurchaseOperationHandler();
         Storage.storage.put(new Fruit("banana"), 88);
-        fruitTransaction = new FruitTransaction("p", new Fruit("banana"), 89);
+        fruit = new Fruit("banana");
+        fruitTransaction = new FruitTransaction("p", fruit, 89);
     }
 
     @Test(expected = RuntimeException.class)

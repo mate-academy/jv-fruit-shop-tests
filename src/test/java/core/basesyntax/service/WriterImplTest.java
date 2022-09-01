@@ -16,6 +16,14 @@ public class WriterImplTest {
         Assert.assertEquals(message, readFile(path));
     }
 
+    @Test
+    public void write_twoLine_ok() {
+        String path = "src/test/resources/test.csv";
+        String message = "Hello, mates!" + System.lineSeparator() + "java = heaven";
+        new WriterImpl().writeToFile(message, path);
+        Assert.assertEquals(message, readFile(path));
+    }
+
     @Test(expected = NullPointerException.class)
     public void write_fileNameIsNull_notOk() {
         String information = "Hello, mates!";
@@ -34,6 +42,9 @@ public class WriterImplTest {
             while (line != null) {
                 information.append(line);
                 line = reader.readLine();
+                if (line != null) {
+                    information.append(System.lineSeparator());
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file: " + path, e);

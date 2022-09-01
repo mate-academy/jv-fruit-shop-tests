@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     @Test
-    public void return_putValidData_ok() {
+    public void returnOperationHandler_putValidData_ok() {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
         new BalanceOperationHandler().apply(balanceTransaction);
@@ -16,6 +16,19 @@ public class ReturnOperationHandlerTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20);
         new ReturnOperationHandler().apply(returnTransaction);
         Integer expected = 220;
+        Integer actual = Storage.storage.get(returnTransaction.getFruit());
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void returnOperationHandler_zeroQuantity_ok() {
+        FruitTransaction balanceTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
+        new BalanceOperationHandler().apply(balanceTransaction);
+        FruitTransaction returnTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 0);
+        new ReturnOperationHandler().apply(returnTransaction);
+        Integer expected = 200;
         Integer actual = Storage.storage.get(returnTransaction.getFruit());
         Assert.assertEquals(expected, actual);
     }

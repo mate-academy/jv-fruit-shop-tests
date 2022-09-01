@@ -8,7 +8,14 @@ import org.junit.Test;
 
 public class ReportGeneratorImplTest {
     @Test
-    public void report_generateActualReport_ok() {
+    public void makeReport_getHeader_ok() {
+        String expected = "fruit,quantity" + System.lineSeparator();
+        String actual = new ReportGeneratorImpl().makeReport();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void makeReport_generateActualReport_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,200" + System.lineSeparator();
         Storage.storage.put("apple", 200);

@@ -17,6 +17,28 @@ public class BalanceOperationHandleTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void balanceOperationHandler_putZeroQuantity_ok() {
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 0);
+        new BalanceOperationHandler().apply(transaction);
+        Integer expected = transaction.getQuantity();
+        Integer actual = Storage.storage.get(transaction.getFruit());
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void balanceOperationHandler_replaceBalance_ok() {
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
+        new BalanceOperationHandler().apply(transaction);
+        transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 300);
+        new BalanceOperationHandler().apply(transaction);
+        Integer expected = 300;
+        Integer actual = Storage.storage.get(transaction.getFruit());
+        Assert.assertEquals(expected, actual);
+    }
+
     @After
     public void tearDown() {
         Storage.storage.clear();

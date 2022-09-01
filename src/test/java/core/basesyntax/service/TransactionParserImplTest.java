@@ -59,7 +59,8 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void parse_parsedListIsNull_notOk() {
-        new TransactionParserImpl().parse(null);
+    public void parse_listIsNull_notOk() {
+        List<String> list = null;
+        new TransactionParserImpl().parse(list);
     }
 }

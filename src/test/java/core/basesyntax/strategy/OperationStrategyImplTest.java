@@ -9,27 +9,18 @@ import core.basesyntax.operations.impl.BalanceTransactionHandleImpl;
 import core.basesyntax.operations.impl.PurchaseTransactionHandleImpl;
 import core.basesyntax.operations.impl.ReturnTransactionHandleImpl;
 import core.basesyntax.operations.impl.SupplyTransactionHandleImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
     private static StorageDao storage;
-    private static Map<FruitTransaction.Operation, TransactionHandle> operationHandler = new HashMap<>();
-
-    private static final FruitTransaction B_BANANA_20 =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
-    private static final FruitTransaction R_BANANA_90 =
-            new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 90);
-    private static final FruitTransaction S_APPLE_100 =
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100);
-    private static final FruitTransaction P_APPLE_50 =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 50);
+    private static Map<FruitTransaction.Operation, TransactionHandle> operationHandler
+            = new HashMap<>();
 
     @BeforeClass
     public static void beforeClass() {
@@ -52,45 +43,38 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void transaction_balance_ok() {
-        operationStrategy.getByOperation(B_BANANA_20.getOperation())
-                .executeTransaction(B_BANANA_20);
-        int actual = sumValueOf(storage);
-        int expected = 20;
+    public void strategy_executeBalanceTransaction_ok() {
+        Class actual = new OperationStrategyImpl(operationHandler)
+                .getByOperation(FruitTransaction.Operation.BALANCE)
+                .getClass();
+        Class expected = BalanceTransactionHandleImpl.class;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void transaction_return_ok() {
-        operationStrategy.getByOperation(R_BANANA_90.getOperation())
-                .executeTransaction(R_BANANA_90);
-        int actual = sumValueOf(storage);
-        int expected = 90;
+    public void strategy_executeReturnTransaction_ok() {
+        Class actual = new OperationStrategyImpl(operationHandler)
+                .getByOperation(FruitTransaction.Operation.RETURN)
+                .getClass();
+        Class expected = ReturnTransactionHandleImpl.class;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void transaction_supply_ok() {
-        operationStrategy.getByOperation(S_APPLE_100.getOperation())
-                .executeTransaction(S_APPLE_100);
-        int actual = sumValueOf(storage);
-        int expected = 100;
+    public void strategy_executePurchaseTransaction_ok() {
+        Class actual = new OperationStrategyImpl(operationHandler)
+                .getByOperation(FruitTransaction.Operation.PURCHASE)
+                .getClass();
+        Class expected = PurchaseTransactionHandleImpl.class;
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void transaction_purchase_ok() {
-        operationStrategy.getByOperation(P_APPLE_50.getOperation())
-                .executeTransaction(P_APPLE_50);
-        int actual = sumValueOf(storage);
-        int expected = 50;
+    @Test
+    public void strategy_executeSupplyTransaction_ok() {
+        Class actual = new OperationStrategyImpl(operationHandler)
+                .getByOperation(FruitTransaction.Operation.SUPPLY)
+                .getClass();
+        Class expected = SupplyTransactionHandleImpl.class;
         Assert.assertEquals(expected, actual);
-    }
-
-    private int sumValueOf(StorageDao storage) {
-        return storage.getEntries().stream()
-                .map(v -> v.getValue())
-                .mapToInt(v -> v)
-                .sum();
     }
 }

@@ -1,11 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReporterService;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Map;
 
 public class ReporterServiceImplTest {
     private static ReporterService reporterService;

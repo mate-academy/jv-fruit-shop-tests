@@ -16,7 +16,7 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parse(List<String> data) {
         data.remove(HEADER_INDEX);
-        return data.stream()
+        return data.stream().skip(1)
                 .map(s -> s.split(COMA))
                 .map(v -> new FruitTransaction(
                         getTransaction(v),

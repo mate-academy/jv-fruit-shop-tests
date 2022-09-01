@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
+import java.io.File;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.io.File;
-import java.util.List;
 
 public class CsvReaderServiceImplTest {
     private static final String OK_FILE_NAME = "src/test/resources/actualInput.csv";
@@ -14,8 +14,8 @@ public class CsvReaderServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-         readerService = new CsvReaderServiceImpl();
-         readCorrectData = List.of("type,fruit,quantity",
+        readerService = new CsvReaderServiceImpl();
+        readCorrectData = List.of("type,fruit,quantity",
                                      "b,banana,20",
                                      "b,apple,100",
                                      "s,banana,100",

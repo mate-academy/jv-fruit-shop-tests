@@ -23,7 +23,7 @@ public class BalaceOperationHandlerTest {
         balaceOperationHandler.apply(fruitTransaction);
         Integer expected = 10;
         Integer actual = Storage.storage.get(new Fruit("banana"));
-        assertEquals("", expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)
@@ -38,7 +38,7 @@ public class BalaceOperationHandlerTest {
         Integer expected = 15;
         balaceOperationHandler.apply(bananaTransaction);
         Integer actual = Storage.storage.get(new Fruit("banana"));
-        assertEquals("", expected, actual);
+        assertEquals(expected, actual);
     }
 
     @After

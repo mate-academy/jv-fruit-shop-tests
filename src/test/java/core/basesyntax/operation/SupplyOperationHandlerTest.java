@@ -24,7 +24,7 @@ public class SupplyOperationHandlerTest {
         supplyOperationHandler.apply(fruitTransaction);
         Integer expected = 15;
         Integer actual = Storage.storage.get(new Fruit("banana"));
-        assertEquals("", expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)
@@ -39,7 +39,7 @@ public class SupplyOperationHandlerTest {
         Integer expected = 15;
         supplyOperationHandler.apply(bananaTransaction);
         Integer actual = Storage.storage.get(new Fruit("banana"));
-        assertEquals("", expected, actual);
+        assertEquals(expected, actual);
     }
 
     @After

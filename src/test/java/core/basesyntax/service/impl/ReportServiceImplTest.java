@@ -20,7 +20,7 @@ public class ReportServiceImplTest {
     @Test
     public void getReport_EmptyStorage_Ok() {
         Storage.storage.clear();
-        assertEquals("", "fruit,quantity", reportService.getReport());
+        assertEquals("fruit,quantity", reportService.getReport());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class ReportServiceImplTest {
         Storage.storage.put(new Fruit("apple"), 5);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,10" + System.lineSeparator() + "apple,5";
-        assertEquals("", expected, reportService.getReport());
+        assertEquals(expected, reportService.getReport());
     }
 
     @After

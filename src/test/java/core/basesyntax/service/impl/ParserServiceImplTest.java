@@ -29,9 +29,9 @@ public class ParserServiceImplTest {
         expectedList.add(new FruitTransaction("s", new Fruit("apple"), 100));
         List<FruitTransaction> actualList = parserService.parseLines(lines);
         for (int i = 0; i < expectedList.size(); i++) {
-            assertEquals("", expectedList.get(0).getFruit(), actualList.get(0).getFruit());
-            assertEquals("", expectedList.get(0).getQuantity(), actualList.get(0).getQuantity());
-            assertEquals("", expectedList.get(0).getOperation(), actualList.get(0).getOperation());
+            assertEquals(expectedList.get(0).getFruit(), actualList.get(0).getFruit());
+            assertEquals(expectedList.get(0).getQuantity(), actualList.get(0).getQuantity());
+            assertEquals(expectedList.get(0).getOperation(), actualList.get(0).getOperation());
         }
     }
 

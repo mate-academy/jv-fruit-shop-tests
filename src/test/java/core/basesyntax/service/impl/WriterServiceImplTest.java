@@ -32,8 +32,8 @@ public class WriterServiceImplTest {
         try {
             expected = Files.readAllLines(Path.of(fileName)).stream().collect(Collectors.joining());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't read for test from " + fileName, e);
         }
-        assertEquals("", expected, report);
+        assertEquals(expected, report);
     }
 }

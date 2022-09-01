@@ -30,7 +30,7 @@ public class ReaderServiceImplTest {
         expected.add("p,banana,5");
         expected.add("s,banana,50");
         List<String> actual = readerService.readData(fileName);
-        assertEquals("", expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

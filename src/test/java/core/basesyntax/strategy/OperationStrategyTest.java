@@ -30,18 +30,18 @@ public class OperationStrategyTest {
         String operation = "s";
         OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);
-        assertEquals("", expected.getClass(), actual.getClass());
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void getByOperation_nullOperation_NotOk() {
         String operation = null;
-        assertEquals("", null, strategy.getByOperation(operation));
+        assertEquals(null, strategy.getByOperation(operation));
     }
 
     @Test
     public void getByOperation_NonValidOperation_NotOk() {
         String operation = "bspr";
-        assertEquals("", null, strategy.getByOperation(operation));
+        assertEquals(null, strategy.getByOperation(operation));
     }
 }

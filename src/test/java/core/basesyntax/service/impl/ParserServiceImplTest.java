@@ -34,20 +34,20 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parse_emptyListStrings_Ok() {
+    public void parse_emptyListStrings_ok() {
         Integer expected = 0;
         Integer actual = parserService.parse(strings).size();
-        assertEquals("", expected, actual);
+        assertEquals("Parse of empty list, expected size must be " + expected + " but is " + actual, expected, actual);
     }
 
     @Test
-    public void parse_listStrings_Ok() {
+    public void parse_listStrings_ok() {
         strings.add("b,apple,100");
         strings.add("s,banana,100");
         strings.add("p,banana,13");
         strings.add("r,apple,10");
         Integer expected = 4;
         Integer actual = parserService.parse(strings).size();
-        assertEquals("", expected, actual);
+        assertEquals("Expected size must be " + expected + " but is " + actual, expected, actual);
     }
 }

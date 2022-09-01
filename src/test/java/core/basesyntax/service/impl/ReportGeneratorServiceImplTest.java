@@ -20,16 +20,16 @@ public class ReportGeneratorServiceImplTest {
     @Test
     public void generate_header_ok() {
         List<String> actual = reportGeneratorService.generate();
-        assertEquals("", 1, actual.size());
-        assertEquals("", "fruit,quantity", actual.get(0));
+        assertEquals("Expected size must be 1 but is " + actual.size(), 1, actual.size());
+        assertEquals("Header not found", "fruit,quantity", actual.get(0));
     }
 
     @Test
     public void generate_list_ok() {
         Storage.fruits.put("watermelon", 99);
         List<String> actual = reportGeneratorService.generate();
-        assertEquals("", 2, actual.size());
-        assertEquals("", "watermelon,99", actual.get(1));
+        assertEquals("Expected size must be 2 but is " + actual.size(), 2, actual.size());
+        assertEquals("One fruit not found", "watermelon,99", actual.get(1));
     }
 
     @After

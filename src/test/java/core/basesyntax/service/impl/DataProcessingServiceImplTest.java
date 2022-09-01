@@ -26,45 +26,45 @@ public class DataProcessingServiceImplTest {
     }
 
     @Test
-    public void processData_balanceStrategy_Ok() {
+    public void processData_balanceStrategy_ok() {
         Integer expected = 20;
         transactions.add(new Transaction(new BalanceStrategy(), "fruit", expected));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("", expected, actual);
+        assertEquals("Balance must be " + expected + " but is " + actual, expected, actual);
     }
 
     @Test
-    public void processData_purchaseStrategy_Ok() {
+    public void processData_purchaseStrategy_ok() {
         Storage.fruits.put("fruit", 100);
         Integer purchased = 20;
         Integer expected = 80;
         transactions.add(new Transaction(new PurchaseStrategy(), "fruit", purchased));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("", expected, actual);
+        assertEquals("Balance must be 100-" + purchased + "=" + expected + " but is " + actual, expected, actual);
     }
 
     @Test
-    public void processData_returnStrategy_Ok() {
+    public void processData_returnStrategy_ok() {
         Storage.fruits.put("fruit", 80);
         Integer returned = 20;
         Integer expected = 100;
         transactions.add(new Transaction(new ReturnStrategy(), "fruit", returned));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("", expected, actual);
+        assertEquals("Balance must be 80+" + returned + "=" + expected + " but is " + actual, expected, actual);
     }
 
     @Test
-    public void processData_supplyStrategy_Ok() {
+    public void processData_supplyStrategy_ok() {
         Storage.fruits.put("fruit", 80);
         Integer deliveredBySupplier = 20;
         Integer expected = 100;
         transactions.add(new Transaction(new SupplyStrategy(), "fruit", deliveredBySupplier));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("", expected, actual);
+        assertEquals("Balance must be 80+" + deliveredBySupplier + "=" + expected + " but is " + actual, expected, actual);
     }
 
     @After

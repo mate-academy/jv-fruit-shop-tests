@@ -52,7 +52,7 @@ public class CsvFileWriterServiceTest {
         File expected = new File(FOLDER, "writerTestExpectedOutput.csv");
         csvFileWriterService.writeReport(actual, report);
         filesCompareByLine(actual.toPath(), expected.toPath());
-        assertTrue("", filesCompareByLine(actual.toPath(), expected.toPath()));
+        assertTrue("Files are different", filesCompareByLine(actual.toPath(), expected.toPath()));
     }
 
     private static boolean filesCompareByLine(Path firstFile, Path secondFile) {

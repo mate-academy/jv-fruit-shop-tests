@@ -20,24 +20,24 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_nullFile_NotOk() {
+    public void read_nullFile_notOk() {
         csvFileReaderService.read(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_noFile_NotOk() {
+    public void read_noFile_notOk() {
         File noFile = new File(FOLDER, "nameNotExistingFile.txt");
         csvFileReaderService.read(noFile);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_notValidFileName_NotOk() {
+    public void read_notValidFileName_notOk() {
         File noFile = new File(FOLDER, "ad*-dffgb_/ sdgf0( \\.txt");
         csvFileReaderService.read(noFile);
     }
 
     @Test
-    public void read_File_Ok() {
+    public void read_File_ok() {
         File file = new File(FOLDER, INPUT_FILE);
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
@@ -49,10 +49,10 @@ public class CsvFileReaderServiceTest {
         expected.add("p,banana,5");
         expected.add("s,banana,50");
         List<String> actual = csvFileReaderService.read(file);
-        assertEquals("", expected, actual);
-        assertEquals("", actual.contains("type,fruit,quantity"),
+        assertEquals("List strings is not equals", expected, actual);
+        assertEquals("List contain header", actual.contains("type,fruit,quantity"),
                 expected.contains("type,fruit,quantity"));
-        assertEquals("", actual.contains("s,banana,50"),
+        assertEquals("List does not contain \"s,banana,50\"", actual.contains("s,banana,50"),
                 expected.contains("s,banana,50"));
     }
 }

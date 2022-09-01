@@ -42,7 +42,8 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new PurchaseStrategy(), "fruit", purchased));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("Balance must be 100-" + purchased + "=" + expected + " but is " + actual, expected, actual);
+        assertEquals("Balance must be 100-" + purchased + "=" + expected
+                + " but is " + actual, expected, actual);
     }
 
     @Test
@@ -53,7 +54,8 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new ReturnStrategy(), "fruit", returned));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("Balance must be 80+" + returned + "=" + expected + " but is " + actual, expected, actual);
+        assertEquals("Balance must be 80+" + returned + "=" + expected
+                + " but is " + actual, expected, actual);
     }
 
     @Test
@@ -64,7 +66,8 @@ public class DataProcessingServiceImplTest {
         transactions.add(new Transaction(new SupplyStrategy(), "fruit", deliveredBySupplier));
         dataProcessingService.processData(transactions);
         Integer actual = Storage.fruits.get("fruit");
-        assertEquals("Balance must be 80+" + deliveredBySupplier + "=" + expected + " but is " + actual, expected, actual);
+        assertEquals("Balance must be 80+" + deliveredBySupplier + "=" + expected
+                + " but is " + actual, expected, actual);
     }
 
     @After

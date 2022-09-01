@@ -37,7 +37,8 @@ public class ParserServiceImplTest {
     public void parse_emptyListStrings_ok() {
         Integer expected = 0;
         Integer actual = parserService.parse(strings).size();
-        assertEquals("Parse of empty list, expected size must be " + expected + " but is " + actual, expected, actual);
+        assertEquals("Parse of empty list, expected size must be " + expected
+                + " but is " + actual, expected, actual);
     }
 
     @Test

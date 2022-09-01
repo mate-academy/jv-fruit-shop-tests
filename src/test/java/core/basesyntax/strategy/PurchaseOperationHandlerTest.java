@@ -5,34 +5,38 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 
 public class PurchaseOperationHandlerTest {
-    private static Transaction transaction;
+    private PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
+    private Transaction inputTransaction;
+    private Fruit fruit;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        transaction = new Transaction("p", new Fruit("apple"), 9);
+    @Before
+    public void beforeClass() throws Exception {
+        inputTransaction = new Transaction("p", new Fruit("apple"), 9);
+        fruit = inputTransaction.getFruit();
     }
 
     @Test
     public void applyPurchase_OK() {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 14);
-        Integer currentQuantity = Storage.storage.get(apple);
-        Storage.storage.put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
-        assertEquals(Integer.valueOf(5), Storage.storage.get(apple));
+        purchaseOperationHandler.apply(new Transaction("p", new Fruit("apple"), 9));
+        Integer expected = Integer.valueOf(5);
+        Integer actual = Storage.storage.get(fruit);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void negativeValue_NotOK() {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 14);
-        Integer currentQuantity = Storage.storage.get(apple);
-        transaction.setQuantity(-9);
-        Storage.storage.put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
-        assertFalse(Integer.valueOf(5).equals(Storage.storage.get(apple)));
+        purchaseOperationHandler.apply(new Transaction("p", new Fruit("apple"), -9));
+        Integer expected = Integer.valueOf(5);
+        Integer actual = Storage.storage.get(fruit);
+        assertFalse(expected.equals(actual));
     }
 }

@@ -17,11 +17,6 @@ public class FruitStoreReportHandlerTest {
         storageDao = new StorageDaoImpl();
     }
 
-    @After
-    public void tearDown() {
-        storageDao.getAll().clear();
-    }
-
     @Test
     public void makeReport_someDataToReport_ok() {
         storageDao.add("banana", 100);
@@ -46,5 +41,10 @@ public class FruitStoreReportHandlerTest {
         String expected = "fruit,quantity";
         String actual = reportHandler.makeReport();
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        storageDao.getAll().clear();
     }
 }

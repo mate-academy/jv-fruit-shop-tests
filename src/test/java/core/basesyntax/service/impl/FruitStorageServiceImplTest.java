@@ -37,11 +37,6 @@ public class FruitStorageServiceImplTest {
         fruitStorageService = new FruitStorageServiceImpl(operationHandlers);
     }
 
-    @After
-    public void tearDown() {
-        Storage.getStorage().clear();
-    }
-
     @Test
     public void process_validData() {
         List<String> data = new ArrayList<>();
@@ -127,5 +122,10 @@ public class FruitStorageServiceImplTest {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("Input data is incorrect");
         fruitStorageService.process(data);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.getStorage().clear();
     }
 }

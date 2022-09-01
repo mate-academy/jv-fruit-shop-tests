@@ -21,10 +21,10 @@ public class WriterTest {
         fileWriter = new Writer();
     }
 
-//    @Test(expected = RuntimeException.class)
-//    public void writeToFile_IncorrectFileName_NotOk() {
-//        fileWriter.writeToFile("", "src/test/resources/12*34.txt");
-//    }
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_IncorrectFileName_NotOk() {
+        fileWriter.writeToFile("", "");
+    }
 
     @Test
     public void writeToFile_EmptyData_Ok() {

@@ -30,7 +30,8 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
     private FruitTransaction.Operation getOperation(String operationLetter) {
         return Arrays.stream(FruitTransaction.Operation.values())
                 .filter(o -> o.getOperation().equals(operationLetter))
-                .findFirst().orElseThrow(() ->
+                .findFirst()
+                .orElseThrow(() ->
                         new RuntimeException("Don't have this kind of operation "
                                 + operationLetter));
     }

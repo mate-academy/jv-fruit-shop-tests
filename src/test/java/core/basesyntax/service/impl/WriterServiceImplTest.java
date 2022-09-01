@@ -56,6 +56,11 @@ public class WriterServiceImplTest {
         writerService.writeToFile(null, FILE_PATH);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void writerService_writeInvalidPath_NotOk() {
+        writerService.writeToFile(TEST_DATA, ".......");
+    }
+
     private List<String> readFromFile() {
         List<String> list;
         try {

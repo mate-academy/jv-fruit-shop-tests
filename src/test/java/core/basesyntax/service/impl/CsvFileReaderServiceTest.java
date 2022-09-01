@@ -6,16 +6,15 @@ import core.basesyntax.service.FileReaderService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
     private static final String FOLDER = "src/test/resources";
-    private static final String INPUT_FILE = "readerTestInput.csv";
     private static FileReaderService csvFileReaderService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         csvFileReaderService = new CsvFileReaderService();
     }
 
@@ -38,7 +37,7 @@ public class CsvFileReaderServiceTest {
 
     @Test
     public void read_File_ok() {
-        File file = new File(FOLDER, INPUT_FILE);
+        File file = new File(FOLDER, "readerTestInput.csv");
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -50,9 +49,5 @@ public class CsvFileReaderServiceTest {
         expected.add("s,banana,50");
         List<String> actual = csvFileReaderService.read(file);
         assertEquals("List strings is not equals", expected, actual);
-        assertEquals("List contain header", actual.contains("type,fruit,quantity"),
-                expected.contains("type,fruit,quantity"));
-        assertEquals("List does not contain \"s,banana,50\"", actual.contains("s,banana,50"),
-                expected.contains("s,banana,50"));
     }
 }

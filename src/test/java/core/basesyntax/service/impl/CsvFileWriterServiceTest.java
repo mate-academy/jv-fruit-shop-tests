@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterServiceTest {
@@ -18,14 +19,17 @@ public class CsvFileWriterServiceTest {
     private static FileWriterService csvFileWriterService;
     private static List<String> report;
 
+    @BeforeClass
+    public static void beforeClass() {
+        csvFileWriterService = new CsvFileWriterService();
+    }
+
     @Before
     public void setUp() {
         report = new ArrayList<>();
         report.add("fruit,quantity");
         report.add("banana,152");
         report.add("apple,90");
-
-        csvFileWriterService = new CsvFileWriterService();
     }
 
     @Test(expected = RuntimeException.class)
@@ -51,15 +55,14 @@ public class CsvFileWriterServiceTest {
         File actual = new File(FOLDER, "writerTestActualOutput.csv");
         File expected = new File(FOLDER, "writerTestExpectedOutput.csv");
         csvFileWriterService.writeReport(actual, report);
-        filesCompareByLine(actual.toPath(), expected.toPath());
         assertTrue("Files are different", filesCompareByLine(actual.toPath(), expected.toPath()));
     }
 
     private static boolean filesCompareByLine(Path firstFile, Path secondFile) {
         try (BufferedReader firstBufferedReader = Files.newBufferedReader(firstFile);
                 BufferedReader secondBufferedReader = Files.newBufferedReader(secondFile)) {
-            String lineFirstFile = "";
-            String lineSecondFile = "";
+            String lineFirstFile;
+            String lineSecondFile;
             while ((lineFirstFile = firstBufferedReader.readLine()) != null
                     && (lineSecondFile = secondBufferedReader.readLine()) != null) {
                 if (!lineFirstFile.equals(lineSecondFile)) {

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
@@ -20,16 +21,18 @@ public class ParserServiceImplTest {
     private static Map<String, Strategy> strategies;
     private static ParserService parserService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         strategies = new HashMap<>();
         strategies.put("b", new BalanceStrategy());
         strategies.put("s", new SupplyStrategy());
         strategies.put("p", new PurchaseStrategy());
         strategies.put("r", new ReturnStrategy());
-
         parserService = new ParserServiceImpl(strategies);
+    }
 
+    @Before
+    public void setUp() {
         strings = new ArrayList<>();
     }
 

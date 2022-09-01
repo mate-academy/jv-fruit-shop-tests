@@ -13,15 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataProcessingServiceImplTest {
     private static DataProcessingService dataProcessingService;
     private static List<Transaction> transactions;
 
+    @BeforeClass
+    public static void beforeClass() {
+        dataProcessingService = new DataProcessingServiceImpl();
+    }
+
     @Before
     public void setUp() {
-        dataProcessingService = new DataProcessingServiceImpl();
         transactions = new ArrayList<>();
     }
 

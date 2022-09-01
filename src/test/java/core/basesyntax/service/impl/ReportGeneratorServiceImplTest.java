@@ -6,14 +6,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportGeneratorServiceImplTest {
     private static ReportGeneratorService reportGeneratorService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() {
         reportGeneratorService = new ReportGeneratorServiceImpl();
     }
 

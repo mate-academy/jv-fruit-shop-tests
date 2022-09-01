@@ -10,11 +10,6 @@ import org.junit.Test;
 public class SupplyAmountHandlerTest {
     private static final Fruit TEST_FRUIT = new Fruit("carrot", 25);
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void supplyAmountHandler_usingStrategy_ok() {
         Storage.fruits.add(TEST_FRUIT);
@@ -22,5 +17,10 @@ public class SupplyAmountHandlerTest {
         int actual = amountHandler.changeAmount(Storage.fruits.get(0), 10);
         int expected = 35;
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

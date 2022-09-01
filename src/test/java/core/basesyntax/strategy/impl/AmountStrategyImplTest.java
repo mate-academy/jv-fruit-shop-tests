@@ -1,10 +1,12 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.AmountHandler;
 import core.basesyntax.strategy.AmountStrategy;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,4 +44,8 @@ public class AmountStrategyImplTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
+    }
 }

@@ -21,11 +21,6 @@ public class WriterServiceImplTest {
         writerService = new WriterServiceImpl();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void writerService_writeToFile_ok() {
         String actual;
@@ -42,5 +37,10 @@ public class WriterServiceImplTest {
     @Test(expected = NullPointerException.class)
     public void writerService_writeToFile_NotOk() {
         writerService.writeToFile(TEST_TEXT, null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

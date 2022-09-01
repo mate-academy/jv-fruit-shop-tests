@@ -59,11 +59,6 @@ public class FruitServiceImplTest {
         strategy = new AmountStrategyImpl(amountHandlerMap);
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void fruitService_processDataTest_ok() {
         List<String> actual;
@@ -80,5 +75,10 @@ public class FruitServiceImplTest {
         expected.add("banana,152");
         expected.add("apple,90");
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

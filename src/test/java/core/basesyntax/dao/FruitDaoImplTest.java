@@ -16,11 +16,6 @@ public class FruitDaoImplTest {
         fruitDao = new FruitDaoImpl();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void fruitDao_addingNewFruit_ok() {
         fruitDao.add(TEST_FRUIT);
@@ -37,4 +32,8 @@ public class FruitDaoImplTest {
         Assert.assertEquals(TEST_FRUIT, actual);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
+    }
 }

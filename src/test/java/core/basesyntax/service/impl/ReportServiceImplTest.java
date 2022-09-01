@@ -19,16 +19,16 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void reportService_creatingReport_ok() {
         Storage.fruits.add(TEST_FRUIT);
         String expected = DEFAULT_REPORT;
         String actual = reportService.report();
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

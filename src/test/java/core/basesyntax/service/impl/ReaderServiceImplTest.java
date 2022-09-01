@@ -21,11 +21,6 @@ public class ReaderServiceImplTest {
         readerService = new ReaderServiceImpl();
     }
 
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-    }
-
     @Test
     public void readerService_readFromFile_ok() {
         File file = new File(TEST_FILE);
@@ -44,5 +39,10 @@ public class ReaderServiceImplTest {
     @Test(expected = NullPointerException.class)
     public void readerService_readFromFile_NotOk() {
         readerService.readFromFile(null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

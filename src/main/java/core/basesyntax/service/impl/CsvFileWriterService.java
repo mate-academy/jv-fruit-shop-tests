@@ -15,7 +15,7 @@ public class CsvFileWriterService implements FileWriterService {
                 bufferedWriter.write(string + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Problem to write to file " + outputFile, e);
+            throw new RuntimeException("Can`t write data to file " + outputFile, e);
         }
     }
 }

@@ -13,12 +13,11 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(HEADER_FRUIT).append(COMA).append(HEADER_QUANTITY)
-                .append(System.lineSeparator());
+        stringBuilder.append(HEADER_FRUIT).append(COMA).append(HEADER_QUANTITY);
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
-            stringBuilder.append(entry.getKey()).append(COMA)
-                    .append(entry.getValue()).append(System.lineSeparator());
+            stringBuilder.append(System.lineSeparator()).append(entry.getKey())
+                    .append(COMA).append(entry.getValue());
         }
-        return stringBuilder.toString().trim();
+        return stringBuilder.toString();
     }
 }

@@ -14,6 +14,9 @@ public class ValidatorServiceImpl implements ValidatorService {
 
     @Override
     public boolean validateData(List<String> data) {
+        if (data.size() == 0 || data.get(0) == null) {
+            return false;
+        }
         if (!data.get(TITLE_INDEX).equals(TITLE_STRING)) {
             return false;
         }

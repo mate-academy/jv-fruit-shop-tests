@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,10 +21,6 @@ public class CsvFileWriterServiceTest {
     @BeforeClass
     public static void beforeClass() {
         csvFileWriterService = new CsvFileWriterService();
-    }
-
-    @Before
-    public void setUp() {
         report = new ArrayList<>();
         report.add("fruit,quantity");
         report.add("banana,152");

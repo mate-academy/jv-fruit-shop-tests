@@ -18,6 +18,7 @@
         </maven.checkstyle.plugin.configLocation>
         <jacoco.version>0.8.6</jacoco.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -90,7 +91,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/Storage*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

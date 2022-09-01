@@ -1,10 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
-
-import java.io.BufferedWriter;
-import java.io.FileDescriptor;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,7 +40,6 @@ public class WriterServiceImplTest {
                         + "p,banana,5" + System.lineSeparator()
                         + "s,banana,50";
     }
-
 
     @Test(expected = RuntimeException.class)
     public void writer_fileNameNull_notOk() {

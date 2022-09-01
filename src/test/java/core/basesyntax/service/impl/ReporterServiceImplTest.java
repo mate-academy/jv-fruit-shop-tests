@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReporterService;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,16 +9,17 @@ import org.junit.Test;
 
 public class ReporterServiceImplTest {
     private static ReporterService reporterService;
-    private static Map<String, Integer> data;
 
     @BeforeClass
     public static void beforeClass() {
         reporterService = new ReporterServiceImpl();
-        data = Map.of("apple", 20, "banana", 100);
     }
 
     @Test
     public void createReport_correctData_ok() {
+        Map<String, Integer> data = new HashMap<>();
+        data.put("banana", 100);
+        data.put("apple", 20);
         String actual = reporterService.createReport(data.entrySet());
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity")
                 .append(System.lineSeparator())

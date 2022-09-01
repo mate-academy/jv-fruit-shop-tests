@@ -21,18 +21,9 @@ public class ParserServiceImplTest {
 
     @Test
     public void parse_OK() {
-        int expected = 1;
-        List<Transaction> expectedList = new ArrayList<>();
-        expectedList.add(new Transaction("b", new Fruit("banana"), 20));
-        List<Transaction> actualList = parserService.parse(transactionsList);
-        int actual = 0;
-        for (int i = 0; i < actualList.size(); i++) {
-            if (actualList.get(i).getOperation().equals(expectedList.get(i).getOperation()) &&
-            actualList.get(i).getFruit().getName().equals(expectedList.get(i).getFruit().getName()) &&
-            actualList.get(i).getQuantity().equals(expectedList.get(i).getQuantity())) {
-                actual++;
-            }
-        }
+        List<Transaction> expected = new ArrayList<>();
+        expected.add(new Transaction("b", new Fruit("banana"), 20));
+        List<Transaction> actual = parserService.parse(transactionsList);
         Assert.assertEquals(expected, actual);
     }
 
@@ -56,5 +47,10 @@ public class ParserServiceImplTest {
         stringList.add("type,fruit,quantity");
         stringList.add(null);
         parserService.parse(stringList);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void null_parse_NotOK() {
+        parserService.parse(null);
     }
 }

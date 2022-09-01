@@ -23,12 +23,12 @@ public class ReturnHandlerTest {
 
     @Before
     public void beforeEachTest() {
+        operationHandler = new ReturnHandler(fruitsDao);
         Storage.fruits.put(FRUIT_APPLE, 100);
     }
 
     @Test
     public void return_ok() {
-        operationHandler = new ReturnHandler(fruitsDao);
         operationHandler.process(FRUIT_APPLE, 20);
         int expected = 120;
         int actual = fruitsDao.get(FRUIT_APPLE);

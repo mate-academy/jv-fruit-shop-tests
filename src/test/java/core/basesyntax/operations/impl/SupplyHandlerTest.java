@@ -23,12 +23,12 @@ public class SupplyHandlerTest {
 
     @Before
     public void beforeEachTest() {
+        operationHandler = new SupplyHandler(fruitsDao);
         Storage.fruits.put(FRUIT_APPLE, 100);
     }
 
     @Test
     public void supply_ok() {
-        operationHandler = new SupplyHandler(fruitsDao);
         operationHandler.process(FRUIT_APPLE, 50);
         int expected = 150;
         int actual = fruitsDao.get(FRUIT_APPLE);

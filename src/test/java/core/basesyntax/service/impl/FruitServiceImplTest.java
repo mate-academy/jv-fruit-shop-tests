@@ -44,11 +44,6 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void processTransactions() {
-
-    }
-
-    @Test
     public void createReport() {
         test.put(new Fruit("banana"), 152);
         test.put(new Fruit("apple"), 90);

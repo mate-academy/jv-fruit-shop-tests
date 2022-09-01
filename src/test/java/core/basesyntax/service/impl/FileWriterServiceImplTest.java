@@ -8,8 +8,8 @@ import org.junit.Test;
 public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
     private static FileReaderService fileReaderService = new FileReaderServiceImpl();
-    private static String default_path = "src/test/resources/fruitsReportTest.csv";
-    private static String default_result = "fruits,quantity" + System.lineSeparator()
+    private static final String DEFAULT_PATH = "src/test/resources/fruitsReportTest.csv";
+    private static final String DEFAULT_RESULT = "fruits,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90";
 
@@ -20,6 +20,6 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_isValid() {
-        fileWriterService.writeToFile(default_result, default_path);
+        fileWriterService.writeToFile(DEFAULT_RESULT, DEFAULT_PATH);
     }
 }

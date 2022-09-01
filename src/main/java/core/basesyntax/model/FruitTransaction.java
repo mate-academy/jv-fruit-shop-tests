@@ -41,6 +41,7 @@ public class FruitTransaction {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
+        HELL("h"),
         RETURN("r");
 
         private String operation;

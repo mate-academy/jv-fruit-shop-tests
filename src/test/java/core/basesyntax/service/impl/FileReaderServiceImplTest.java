@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static FileReaderService fileReaderService;
-    private static final String fileName = "src/test/resources/fruitsBalanceTest.csv";
+    private static final String FILE_NAME = "src/test/resources/fruitsBalanceTest.csv";
     private static List<String> DEFAULT_DATA_TEST = List.of("b,banana,20",
             "b,apple,100",
             "s,banana,100",
@@ -26,7 +26,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFruitsData_isValid() {
-        List<String> actual = fileReaderService.readData(fileName);
+        List<String> actual = fileReaderService.readData(FILE_NAME);
         assertEquals(DEFAULT_DATA_TEST, actual);
     }
 

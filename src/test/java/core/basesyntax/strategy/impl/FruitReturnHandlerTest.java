@@ -7,6 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,5 +32,10 @@ public class FruitReturnHandlerTest {
         assertEquals("Expected value : 15",
                 Integer.valueOf(15),
                 Storage.fruits.get(fruit));
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

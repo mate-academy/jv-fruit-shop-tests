@@ -10,7 +10,6 @@ import core.basesyntax.operations.impl.PurchaseTransactionHandleImpl;
 import core.basesyntax.operations.impl.ReturnTransactionHandleImpl;
 import core.basesyntax.operations.impl.SupplyTransactionHandleImpl;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,10 +55,7 @@ public class OperationStrategyImplTest {
     public void transaction_balance_ok() {
         operationStrategy.getByOperation(B_BANANA_20.getOperation())
                 .executeTransaction(B_BANANA_20);
-        int actual = storage.getEntries().stream()
-                .map(v -> v.getValue())
-                .mapToInt(v -> v)
-                .sum();
+        int actual = sumValueOf(storage);
         int expected = 20;
         Assert.assertEquals(expected, actual);
     }
@@ -68,10 +64,7 @@ public class OperationStrategyImplTest {
     public void transaction_return_ok() {
         operationStrategy.getByOperation(R_BANANA_90.getOperation())
                 .executeTransaction(R_BANANA_90);
-        int actual = storage.getEntries().stream()
-                .map(v -> v.getValue())
-                .mapToInt(v -> v)
-                .sum();
+        int actual = sumValueOf(storage);
         int expected = 90;
         Assert.assertEquals(expected, actual);
     }
@@ -80,10 +73,7 @@ public class OperationStrategyImplTest {
     public void transaction_supply_ok() {
         operationStrategy.getByOperation(S_APPLE_100.getOperation())
                 .executeTransaction(S_APPLE_100);
-        int actual = storage.getEntries().stream()
-                .map(v -> v.getValue())
-                .mapToInt(v -> v)
-                .sum();
+        int actual = sumValueOf(storage);
         int expected = 100;
         Assert.assertEquals(expected, actual);
     }
@@ -92,11 +82,15 @@ public class OperationStrategyImplTest {
     public void transaction_purchase_ok() {
         operationStrategy.getByOperation(P_APPLE_50.getOperation())
                 .executeTransaction(P_APPLE_50);
-        int actual = storage.getEntries().stream()
+        int actual = sumValueOf(storage);
+        int expected = 50;
+        Assert.assertEquals(expected, actual);
+    }
+
+    private int sumValueOf(StorageDao storage) {
+        return storage.getEntries().stream()
                 .map(v -> v.getValue())
                 .mapToInt(v -> v)
                 .sum();
-        int expected = 50;
-        Assert.assertEquals(expected, actual);
     }
 }

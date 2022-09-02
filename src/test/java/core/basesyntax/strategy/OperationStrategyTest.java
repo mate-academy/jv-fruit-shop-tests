@@ -3,15 +3,15 @@ package core.basesyntax.strategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
     private static OperationStrategy operationStrategy;
     private static Map<String, OperationHandler> map;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() {
         map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());
         map.put("s", new SupplyOperationHandler());

@@ -3,16 +3,16 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler operationHandler;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() {
         operationHandler = new PurchaseOperationHandler();
     }
 
@@ -33,8 +33,8 @@ public class PurchaseOperationHandlerTest {
         operationHandler.apply(new FruitTransaction("p", fruit, 50));
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() {
         Storage.storage.clear();
     }
 }

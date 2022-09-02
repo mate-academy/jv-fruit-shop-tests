@@ -5,14 +5,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() {
         reportService = new ReportServiceImpl();
     }
 

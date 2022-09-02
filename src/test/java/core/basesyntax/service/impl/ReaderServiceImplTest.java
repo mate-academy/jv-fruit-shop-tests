@@ -4,15 +4,15 @@ import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String INPUT_FILE = "src/test/resources/input.csv";
     private static ReaderService readerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

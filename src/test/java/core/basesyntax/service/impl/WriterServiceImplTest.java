@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
+    private static final String fileName = "src/test/resources/testReport.csv";
+    private static final String report = "report for file";
     private WriterService writerService;
 
     @Before
@@ -25,8 +27,6 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeToFile_ValidInputData_Ok() {
-        String report = "report for file";
-        String fileName = "src/test/resources/testReport.csv";
         writerService.writeToFile(report, fileName);
         String expected = null;
         try {

@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
+    private static final String fileName = "src/test/resources/outputReport.csv";
     private ReaderService readerService;
 
     @Before
@@ -18,7 +19,6 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readData_validInput_Ok() {
-        String fileName = "src/test/resources/outputReport.csv";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");

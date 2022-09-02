@@ -9,8 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileCreationServiceImplTest {
+    private static final String newFileName = "src/test/resources/testReport.csv";
+    private static final String existingFileName = "src/test/resources/report.csv";
     private FileCreationService fileCreationService;
-    private String fileName;
 
     @Before
     public void setUp() {
@@ -19,15 +20,13 @@ public class FileCreationServiceImplTest {
 
     @Test
     public void creatFile_validFileName_Ok() {
-        String fileName = "src/test/resources/testReport.csv";
-        fileCreationService.createFile(fileName);
-        assertTrue(Files.exists(Paths.get(fileName)));
+        fileCreationService.createFile(newFileName);
+        assertTrue(Files.exists(Paths.get(newFileName)));
     }
 
     @Test(expected = RuntimeException.class)
     public void createFile_fileExist_NotOk() {
-        String fileName = "src/test/resources/report.csv";
-        fileCreationService.createFile(fileName);
+        fileCreationService.createFile(existingFileName);
     }
 
     @Test(expected = RuntimeException.class)

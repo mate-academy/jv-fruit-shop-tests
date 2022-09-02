@@ -2,7 +2,6 @@ package core.basesyntax.strategy.operations;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.StorageFruits;
 import core.basesyntax.model.Fruit;
@@ -13,14 +12,10 @@ import org.junit.Test;
 
 public class PurchaseOperationTest {
     private PurchaseOperation purchaseOperation;
-    private FruitDao fruitDao;
-    private Fruit actual;
 
     @Before
     public void setUp() {
-        fruitDao = new FruitDaoImpl();
-        purchaseOperation = new PurchaseOperation(fruitDao);
-        actual = new Fruit();
+        purchaseOperation = new PurchaseOperation(new FruitDaoImpl());
         StorageFruits.fruits.add(new Fruit("orange", 200));
     }
 
@@ -34,7 +29,7 @@ public class PurchaseOperationTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "orange", 100);
         purchaseOperation.apply(fruitTransaction);
-        actual = StorageFruits.fruits.get(0);
+        Fruit actual = StorageFruits.fruits.get(0);
         Fruit expected = new Fruit("orange", 100);
         assertEquals(expected, actual);
     }
@@ -44,7 +39,7 @@ public class PurchaseOperationTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "orange", 300);
         purchaseOperation.apply(fruitTransaction);
-        actual = StorageFruits.fruits.get(0);
+        Fruit actual = StorageFruits.fruits.get(0);
         Fruit expected = new Fruit("orange", 100);
         assertEquals(expected, actual);
     }

@@ -1,9 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.operations.BalanceOperation;
@@ -19,13 +17,11 @@ public class OperationStrategyImplTest {
     private BalanceOperation balanceOperation;
     private ReturnOperation returnOperation;
     private Map<FruitTransaction.Operation, DailyOperationHandler> operationHandlerMap;
-    private FruitDao fruitDao;
 
     @Before
     public void setUp() {
-        fruitDao = new FruitDaoImpl();
-        balanceOperation = new BalanceOperation(fruitDao);
-        returnOperation = new ReturnOperation(fruitDao);
+        balanceOperation = new BalanceOperation(new FruitDaoImpl());
+        returnOperation = new ReturnOperation(new FruitDaoImpl());
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 balanceOperation);
@@ -45,13 +41,5 @@ public class OperationStrategyImplTest {
                 operationStrategy.get(FruitTransaction.Operation.BALANCE);
         DailyOperationHandler expected = balanceOperation;
         assertEquals(expected,actual);
-    }
-
-    @Test
-    public void get_operationIsNotCorrect_NotOk() {
-        DailyOperationHandler actual =
-                operationStrategy.get(FruitTransaction.Operation.RETURN);
-        DailyOperationHandler expected = balanceOperation;
-        assertNotEquals(expected,actual);
     }
 }

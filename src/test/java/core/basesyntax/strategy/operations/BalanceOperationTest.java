@@ -2,7 +2,6 @@ package core.basesyntax.strategy.operations;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.StorageFruits;
 import core.basesyntax.model.Fruit;
@@ -13,12 +12,10 @@ import org.junit.Test;
 
 public class BalanceOperationTest {
     private BalanceOperation balanceOperation;
-    private FruitDao fruitDao;
 
     @Before
     public void setUp() {
-        fruitDao = new FruitDaoImpl();
-        balanceOperation = new BalanceOperation(fruitDao);
+        balanceOperation = new BalanceOperation(new FruitDaoImpl());
     }
 
     @Test (expected = RuntimeException.class)

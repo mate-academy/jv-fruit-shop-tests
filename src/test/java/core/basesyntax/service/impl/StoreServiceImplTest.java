@@ -57,9 +57,9 @@ public class StoreServiceImplTest {
 
     @Test
     public void processTransaction_dailyTransactionsRight_Ok() {
-        List<Fruit> expectedList = new ArrayList<>();
-        expectedList.add(new Fruit("orange", 1520));
-        expectedList.add(new Fruit("kiwi", 900));
+        List<Fruit> expected = new ArrayList<>();
+        expected.add(new Fruit("orange", 1520));
+        expected.add(new Fruit("kiwi", 900));
         List<FruitTransaction> dailyTransactionsList = new ArrayList<>();
         dailyTransactionsList.add(new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, "orange", 200));
@@ -77,14 +77,7 @@ public class StoreServiceImplTest {
                 .Operation.PURCHASE, "orange", 50));
         dailyTransactionsList.add(new FruitTransaction(FruitTransaction
                 .Operation.SUPPLY, "orange", 500));
-        int actual = 0;
-        List<Fruit> actualList = storeService.processTransaction(dailyTransactionsList);
-        for (int i = 0; i < actualList.size(); i++) {
-            if (actualList.get(i).equals(expectedList.get(i))) {
-                actual++;
-            }
-        }
-        int expected = 2;
+        List<Fruit> actual = storeService.processTransaction(dailyTransactionsList);
         assertEquals(expected,actual);
     }
 

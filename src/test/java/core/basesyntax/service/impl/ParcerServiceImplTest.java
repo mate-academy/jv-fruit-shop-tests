@@ -35,23 +35,16 @@ public class ParcerServiceImplTest {
 
     @Test
     public void parseTransactions_transactionsRight_Ok() {
-        List<FruitTransaction> expectedList = new ArrayList<>();
-        expectedList.add(new FruitTransaction(Operation.BALANCE, "orange", 200));
-        expectedList.add(new FruitTransaction(Operation.BALANCE, "kiwi", 1000));
-        expectedList.add(new FruitTransaction(Operation.SUPPLY, "orange", 1000));
-        expectedList.add(new FruitTransaction(Operation.PURCHASE, "orange", 130));
-        expectedList.add(new FruitTransaction(Operation.RETURN, "kiwi", 100));
-        expectedList.add(new FruitTransaction(Operation.PURCHASE, "kiwi", 200));
-        expectedList.add(new FruitTransaction(Operation.PURCHASE, "orange", 50));
-        expectedList.add(new FruitTransaction(Operation.SUPPLY, "orange", 500));
-        List<FruitTransaction> actualList = parcerService.parseTransactions(transactions);
-        int actual = 0;
-        for (int i = 0; i < actualList.size(); i++) {
-            if (actualList.get(i).equals(expectedList.get(i))) {
-                actual++;
-            }
-        }
-        int expected = 8;
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction(Operation.BALANCE, "orange", 200));
+        expected.add(new FruitTransaction(Operation.BALANCE, "kiwi", 1000));
+        expected.add(new FruitTransaction(Operation.SUPPLY, "orange", 1000));
+        expected.add(new FruitTransaction(Operation.PURCHASE, "orange", 130));
+        expected.add(new FruitTransaction(Operation.RETURN, "kiwi", 100));
+        expected.add(new FruitTransaction(Operation.PURCHASE, "kiwi", 200));
+        expected.add(new FruitTransaction(Operation.PURCHASE, "orange", 50));
+        expected.add(new FruitTransaction(Operation.SUPPLY, "orange", 500));
+        List<FruitTransaction> actual = parcerService.parseTransactions(transactions);
         assertEquals(expected,actual);
     }
 

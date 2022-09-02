@@ -2,7 +2,6 @@ package core.basesyntax.strategy.operations;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.StorageFruits;
 import core.basesyntax.model.Fruit;
@@ -13,12 +12,10 @@ import org.junit.Test;
 
 public class ReturnOperationTest {
     private ReturnOperation returnOperation;
-    private FruitDao fruitDao;
 
     @Before
     public void setUp() {
-        fruitDao = new FruitDaoImpl();
-        returnOperation = new ReturnOperation(fruitDao);
+        returnOperation = new ReturnOperation(new FruitDaoImpl());
     }
 
     @Test (expected = RuntimeException.class)
@@ -32,8 +29,7 @@ public class ReturnOperationTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "orange", 100);
         returnOperation.apply(fruitTransaction);
-        Fruit actual = new Fruit();
-        actual = StorageFruits.fruits.get(0);
+        Fruit actual = StorageFruits.fruits.get(0);
         Fruit expected = new Fruit("orange", 300);
         assertEquals(expected, actual);
     }

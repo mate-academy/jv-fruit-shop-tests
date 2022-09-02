@@ -19,12 +19,14 @@ public class BalanceOperationHandleTest {
 
     @Before
     public void setUp() {
-        transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
-        operationHandler.apply(transaction);
+        Storage.storage.put("apple", 200);
     }
 
     @Test
     public void balanceOperationHandler_putValidData_ok() {
+        tearDown();
+        transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
+        operationHandler.apply(transaction);
         Integer expected = transaction.getQuantity();
         Integer actual = Storage.storage.get(transaction.getFruit());
         Assert.assertEquals(expected, actual);

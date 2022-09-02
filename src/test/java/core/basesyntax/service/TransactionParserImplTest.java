@@ -20,45 +20,37 @@ public class TransactionParserImplTest {
     @Test
     public void parse_balanceActualData_ok() {
         List<String> information = List.of("b,apple,200");
-        FruitTransaction transaction = new FruitTransaction(
+        FruitTransaction expected = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 200);
-        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
-        Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
-        Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
-        Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
+        List<FruitTransaction> actual = transactionParser.parse(information);
+        Assert.assertEquals(expected, actual.get(0));
     }
 
     @Test
     public void parse_supplyActualData_ok() {
         List<String> information = List.of("s,apple,200");
-        FruitTransaction transaction = new FruitTransaction(
+        FruitTransaction expected = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "apple", 200);
-        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
-        Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
-        Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
-        Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
+        List<FruitTransaction> actual = transactionParser.parse(information);
+        Assert.assertEquals(expected, actual.get(0));
     }
 
     @Test
     public void parse_returnActualData_ok() {
         List<String> information = List.of("r,apple,200");
-        FruitTransaction transaction = new FruitTransaction(
+        FruitTransaction expected = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "apple", 200);
-        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
-        Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
-        Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
-        Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
+        List<FruitTransaction> actual = transactionParser.parse(information);
+        Assert.assertEquals(expected, actual.get(0));
     }
 
     @Test
     public void parse_purchaseActualData_ok() {
         List<String> information = List.of("p,apple,200");
-        FruitTransaction transaction = new FruitTransaction(
+        FruitTransaction expected = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 200);
-        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
-        Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
-        Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
-        Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
+        List<FruitTransaction> actual = transactionParser.parse(information);
+        Assert.assertEquals(expected, actual.get(0));
     }
 
     @Test(expected = NoSuchElementException.class)

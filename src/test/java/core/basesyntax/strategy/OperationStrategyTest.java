@@ -30,9 +30,7 @@ public class OperationStrategyTest {
 
     @Before
     public void setUp() {
-        FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 200);
-        operationStrategy.process(transaction);
+        Storage.storage.put("apple", 200);
     }
 
     @Test

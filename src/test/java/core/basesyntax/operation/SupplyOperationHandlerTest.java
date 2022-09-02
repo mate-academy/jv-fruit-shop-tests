@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static SupplyOperationHandler supplyOperationHandler;
+    private static OperationHandler supplyOperationHandler;
 
     @BeforeClass
     public static void beforeClass() {
@@ -18,9 +18,7 @@ public class SupplyOperationHandlerTest {
 
     @Before
     public void setUp() {
-        FruitTransaction balanceTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
-        new BalanceOperationHandler().apply(balanceTransaction);
+        Storage.storage.put("apple", 200);
     }
 
     @Test

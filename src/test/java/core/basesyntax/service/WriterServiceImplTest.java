@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -54,7 +53,6 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void write_incorrectFilePath_notOk() {
-        String incorrectUrl = "src/test/resources/WriterServiceImpl/nosuchfile.csv";
         Path path = Paths.get(null);
         writerService.write(path, "123");
     }

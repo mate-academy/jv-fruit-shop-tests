@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,44 +10,41 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
+    private static final String PATH = "src/test/resources/test_report.csv";
     private WriterService writerService;
-    private ReportCreatorService reportCreatorService;
 
     @Before
     public void setUp() throws Exception {
         writerService = new WriterServiceImpl();
-        reportCreatorService = new ReportCreatorServiceImpl();
     }
 
     @Test
     public void writeToFile_OK() {
-        String path = "src/main/resources/report.csv";
         String expected = null;
+        String actual = "fruit,quantity";
+        writerService.writeToFile(PATH, actual);
         try {
-            expected = Files.readString(Path.of("src/main/resources/report.csv"));
+            expected = Files.readString(Path.of(PATH));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String actual = reportCreatorService.createReport();
-        writerService.writeToFile(path, actual);
         assertEquals(expected, actual);
     }
 
     @Test (expected = NullPointerException.class)
     public void nullPath_WriteToFile_NotOK() {
-        writerService.writeToFile(null, reportCreatorService.createReport());
+        writerService.writeToFile(null, "fruit,quantity");
     }
 
     @Test (expected = RuntimeException.class)
     public void wrongPath_WriteToFile_NotOK() {
-        String path = "src/main/resources/smth/report.csv";
-        writerService.writeToFile(path, reportCreatorService.createReport());
+        String wrongPath = "src/main/resources/smth/report.csv";
+        writerService.writeToFile(wrongPath, "fruit,quantity");
     }
 
     @Test (expected = NullPointerException.class)
     public void nullReport_WriteToFile_NotOK() {
-        String path = "src/main/resources/report.csv";
-        writerService.writeToFile(path, null);
+        writerService.writeToFile(PATH, null);
     }
 
     @Test (expected = NullPointerException.class)

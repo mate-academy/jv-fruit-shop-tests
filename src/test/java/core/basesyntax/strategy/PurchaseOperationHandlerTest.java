@@ -28,7 +28,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void balanceOperationIsLessThanQuantity_NotOk() {
+    public void purchaseOperationIsInvalid_NotOk() {
         purchase.apply(null);
     }
 

@@ -9,13 +9,16 @@ import org.junit.Test;
 
 public class ReaderImplTest {
     private static final String PATH = "src/test/resources/fruits.csv";
-    private static List<String> expectedResult;
     private static Reader reader;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         reader = new ReaderImpl();
-        expectedResult = List.of("type,fruit,quantity",
+    }
+
+    @Test
+    public void readFile_Ok() {
+        List<String> expectedResult =  List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -24,10 +27,6 @@ public class ReaderImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-    }
-
-    @Test
-    public void readFile_Ok() {
         List<String> actual = reader.read(PATH);
         assertEquals(expectedResult, actual);
     }

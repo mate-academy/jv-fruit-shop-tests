@@ -24,6 +24,10 @@ public class OperationHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         fruitTransaction = new FruitTransaction();
+        returnOperationHandler = new ReturnHandlerImpl();
+        supplyOperationHandler = new SupplyHandlerImpl();
+        purchaseOperationHandler = new PurchaseHandlerImpl();
+        balanceOperationHandler = new BalanceHandlerImpl();
     }
 
     @Before
@@ -36,14 +40,12 @@ public class OperationHandlerTest {
     @After
     public void tearDown() {
         Storage.fruitsStorage.clear();
-        operationHandler = null;
     }
 
     @Test
     public void handle_BalanceHandler_Ok() {
-        operationHandler = new BalanceHandlerImpl();
         fruitTransaction.setOperation(Operation.BALANCE);
-        operationHandler.handle(fruitTransaction);
+        balanceOperationHandler.handle(fruitTransaction);
         int expected = 33;
         int actual = Storage.fruitsStorage.get("apple");
         assertEquals(expected,actual);
@@ -51,9 +53,8 @@ public class OperationHandlerTest {
 
     @Test
     public void handle_SupplyHandler_Ok() {
-        operationHandler = new SupplyHandlerImpl();
         fruitTransaction.setOperation(Operation.SUPPLY);
-        operationHandler.handle(fruitTransaction);
+        supplyOperationHandler.handle(fruitTransaction);
         int expected = 133;
         int actual = Storage.fruitsStorage.get("apple");
         assertEquals(expected,actual);
@@ -61,9 +62,8 @@ public class OperationHandlerTest {
 
     @Test
     public void handle_ReturnHandler_Ok() {
-        operationHandler = new ReturnHandlerImpl();
         fruitTransaction.setOperation(Operation.RETURN);
-        operationHandler.handle(fruitTransaction);
+        returnOperationHandler.handle(fruitTransaction);
         int expected = 133;
         int actual = Storage.fruitsStorage.get("apple");
         assertEquals(expected,actual);
@@ -71,9 +71,8 @@ public class OperationHandlerTest {
 
     @Test
     public void handle_PurchaseHandler_Ok() {
-        operationHandler = new PurchaseHandlerImpl();
         fruitTransaction.setOperation(Operation.PURCHASE);
-        operationHandler.handle(fruitTransaction);
+        purchaseOperationHandler.handle(fruitTransaction);
         int expected = 67;
         int actual = Storage.fruitsStorage.get("apple");
         assertEquals(expected,actual);
@@ -81,9 +80,8 @@ public class OperationHandlerTest {
 
     @Test (expected = RuntimeException.class)
     public void handle_PurchaseHandler_NegativeStock_ExceptionThrows() {
-        operationHandler = new PurchaseHandlerImpl();
         fruitTransaction.setQuantity(150);
         fruitTransaction.setOperation(Operation.PURCHASE);
-        operationHandler.handle(fruitTransaction);
+        purchaseOperationHandler.handle(fruitTransaction);
     }
 }

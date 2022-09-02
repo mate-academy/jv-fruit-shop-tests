@@ -34,7 +34,7 @@ public class ReaderServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void incorrectFileName_notOk() {
-       readerService.readFromFile("");
+        readerService.readFromFile("");
     }
 
     @Test (expected = RuntimeException.class)

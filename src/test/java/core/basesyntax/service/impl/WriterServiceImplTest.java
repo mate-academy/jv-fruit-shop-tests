@@ -33,11 +33,6 @@ public class WriterServiceImplTest {
         writerService.writeToFile(FILE_NAME, null);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void writeToFile_InvalidFileName_ThrowRuntimeExc() {
-        writerService.writeToFile(".....", getReportForTest());
-    }
-
     @Test
     public void writeToFile_writeToFile_ok() {
         writerService.writeToFile(FILE_NAME, "Done it");

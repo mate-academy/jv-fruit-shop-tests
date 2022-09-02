@@ -12,7 +12,6 @@ import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
-
 import java.io.File;
 import java.util.List;
 

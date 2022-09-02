@@ -4,8 +4,11 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class BalanceOperationHandlerImplTest {
     private static OperationHandler operationHandler;
@@ -25,7 +28,7 @@ public class BalanceOperationHandlerImplTest {
 
     @Test
     public void operation_ApplyBalance_ok() {
-        boolean emptyStorage =  Storage.storage.isEmpty();
+        boolean emptyStorage = Storage.storage.isEmpty();
         Assert.assertTrue(emptyStorage);
         operationHandler.apply(transaction);
         int actualSize = Storage.storage.size();
@@ -40,7 +43,6 @@ public class BalanceOperationHandlerImplTest {
         int actualSize = Storage.storage.size();
         Assert.assertNotEquals(expected, actualSize);
     }
-
 
     @After
     public void clear() {

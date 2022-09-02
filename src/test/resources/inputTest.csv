@@ -1,0 +1,7 @@
+type,fruit,quantity
+b,mango,80
+b,pineapple,30
+p,mango,20
+p,pineapple,5
+s,mango,40
+s,pineapple,10

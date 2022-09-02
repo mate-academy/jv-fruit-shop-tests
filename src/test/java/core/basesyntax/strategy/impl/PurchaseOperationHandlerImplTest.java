@@ -4,9 +4,11 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
-import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class PurchaseOperationHandlerImplTest {
     private static OperationHandler operationHandler;
@@ -46,6 +48,4 @@ public class PurchaseOperationHandlerImplTest {
     public void clear() {
         Storage.storage.clear();
     }
-
-
 }

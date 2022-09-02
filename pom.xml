@@ -92,7 +92,7 @@
                     <excludes>
                         <exclude>**/Main*</exclude>
                         <exclude>**/model/Fruit*</exclude>
-                        <exclude>**/model/FruitTransaction*</exclude>
+                        <exclude>**/modelFruitTransaction*</exclude>
                         <exclude>**/storage/Storage*</exclude>
                     </excludes>
                 </configuration>

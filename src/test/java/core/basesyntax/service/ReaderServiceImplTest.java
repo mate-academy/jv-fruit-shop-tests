@@ -6,12 +6,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
+    private static String correctUrl = "src/test/resources/ReaderServiceImpl/correctinput.csv";
+    private static String incorrectUrl = "src/test/resources/ReaderServiceImpl/nosuchfile.csv";
+    private static ReaderService readerService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        readerService = new ReaderServiceImpl();
+    }
+
     @Test
     public void read_correctFilePath_ok() {
-        String correctUrl = "src/test/resources/ReaderServiceImpl/correctinput.csv";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -22,7 +31,7 @@ public class ReaderServiceImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = new ReaderServiceImpl().read(Paths.get(correctUrl));
+        List<String> actual = readerService.read(Paths.get(correctUrl));
         Assert.assertEquals("Data read error!" + System.lineSeparator()
                 + "Expected: " + expected + System.lineSeparator()
                 + "Actual:  " + actual, expected, actual);
@@ -30,8 +39,7 @@ public class ReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void read_incorrectFilePath_notOk() {
-        String incorrectUrl = "src/test/resources/ReaderServiceImpl/nosuchfile.csv";
         Path path = Paths.get(incorrectUrl);
-        new ReaderServiceImpl().read(path);
+        readerService.read(path);
     }
 }

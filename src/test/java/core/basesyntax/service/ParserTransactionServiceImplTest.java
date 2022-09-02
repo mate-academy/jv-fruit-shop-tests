@@ -6,6 +6,7 @@ import core.basesyntax.service.impl.ParserTransactionsServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTransactionServiceImplTest {
@@ -13,6 +14,12 @@ public class ParserTransactionServiceImplTest {
     public static final int OPERATION_INDEX = 0;
     public static final int NAME_INDEX = 1;
     public static final int AMOUNT_INDEX = 2;
+    private static ParserTransactionsService parserTransactionsService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        parserTransactionsService = new ParserTransactionsServiceImpl();
+    }
 
     @Test
     public void parse_correctData_ok() {
@@ -35,8 +42,8 @@ public class ParserTransactionServiceImplTest {
         expected.add(new FruitTransaction(
                 FruitTransaction.Operation.RETURN, new Fruit("apple"), 10));
         List<FruitTransaction> actual
-                = new ParserTransactionsServiceImpl().parse(correctListForParsing);
-        Assert.assertEquals(actual, expected);
+                = parserTransactionsService.parse(correctListForParsing);
+        Assert.assertEquals("Incorrect parsing.", actual, expected);
     }
 
     @Test(expected = RuntimeException.class)
@@ -44,6 +51,6 @@ public class ParserTransactionServiceImplTest {
         List<String> incorrectListForParsing = new ArrayList<>();
         incorrectListForParsing.add("type,fruit,quantity");
         incorrectListForParsing.add("c,banana,20");
-        new ParserTransactionsServiceImpl().parse(incorrectListForParsing);
+        parserTransactionsService.parse(incorrectListForParsing);
     }
 }

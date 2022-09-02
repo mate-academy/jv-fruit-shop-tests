@@ -24,7 +24,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_operation_fruit_absent_exception() {
+    public void purchase_operation_fruit_absent_exception_OK() {
         Transaction transaction = new Transaction("p", new Fruit("banana"), 20);
         exceptionRule.expect(NoSuchElementException.class);
         exceptionRule.expectMessage("Not enough fruits for purchase");
@@ -32,7 +32,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_operation_fruit_lack_exception() {
+    public void purchase_operation_fruit_lack_exception_OK() {
         fruitStorage.put(new Fruit("banana"), 30);
         Transaction transaction = new Transaction("p", new Fruit("banana"), 50);
         exceptionRule.expect(NoSuchElementException.class);

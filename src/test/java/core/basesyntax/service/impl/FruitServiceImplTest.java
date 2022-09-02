@@ -30,23 +30,16 @@ import org.junit.Test;
 public class FruitServiceImplTest {
     private static final String OUTPUT_FILE = "src/test/resources/output.csv";
     private static final String TEST_FILE = "src/test/resources/testInput.csv";
-    private static final String TEST_TEXT = "carrot,25";
-    private static final String DEFAULT_REPORT = "fruit,quantity" + System.lineSeparator()
-                + "carrot,25" + System.lineSeparator();
-    private static final Fruit TEST_FRUIT = new Fruit("carrot", 25);
-    private static final String OPERATION_BALANCE = "b";
-    private static final String OPERATION_PURCHASE = "p";
-    private static final String OPERATION_RETURN = "r";
-    private static final String OPERATION_SUPPLY = "s";
+    private static final Fruit EXPECTED_TEST_FRUIT = new Fruit("banana", 152);
     private static FruitDao fruitDao;
     private static WriterService writerService;
     private static ReaderService readerService;
     private static ReportService reportService;
     private static AmountStrategy strategy;
-    private AmountHandler amountHandler;
+    private static FruitService fruitService;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         fruitDao = new FruitDaoImpl();
         readerService = new ReaderServiceImpl();
         writerService = new WriterServiceImpl();
@@ -57,14 +50,14 @@ public class FruitServiceImplTest {
         amountHandlerMap.put("r", new ReturnAmountHandler());
         amountHandlerMap.put("s", new SupplyAmountHandler());
         strategy = new AmountStrategyImpl(amountHandlerMap);
+        fruitService = new FruitServiceImpl(
+                strategy, fruitDao, readerService, writerService, reportService);
     }
 
     @Test
     public void fruitService_processDataTest_ok() {
-        List<String> actual;
-        FruitService fruitService = new FruitServiceImpl(
-                strategy, fruitDao, readerService, writerService, reportService);
         fruitService.processData(TEST_FILE, OUTPUT_FILE);
+        List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(OUTPUT_FILE));
         } catch (IOException e) {
@@ -75,10 +68,15 @@ public class FruitServiceImplTest {
         expected.add("banana,152");
         expected.add("apple,90");
         Assert.assertEquals(expected, actual);
+        int expectedStorageSize = 2;
+        int actualStorageSize = Storage.fruits.size();
+        Assert.assertEquals(expectedStorageSize, actualStorageSize);
+        Fruit actualFruit = Storage.fruits.get(0);
+        Assert.assertEquals(EXPECTED_TEST_FRUIT, actualFruit);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

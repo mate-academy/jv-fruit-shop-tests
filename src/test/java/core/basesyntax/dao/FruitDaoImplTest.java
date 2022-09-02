@@ -4,15 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
     private static final Fruit TEST_FRUIT = new Fruit("carrot", 25);
     private static FruitDao fruitDao;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() {
         fruitDao = new FruitDaoImpl();
     }
 
@@ -33,7 +33,7 @@ public class FruitDaoImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

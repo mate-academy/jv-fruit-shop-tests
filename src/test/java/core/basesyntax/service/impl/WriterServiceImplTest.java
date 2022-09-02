@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.After;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,17 +17,18 @@ public class WriterServiceImplTest {
     private static WriterService writerService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         writerService = new WriterServiceImpl();
     }
 
     @Test
     public void writerService_writeToFile_ok() {
-        String actual;
-        String expected = TEST_TEXT;
+        List<String> actual;
+        List<String> expected = new ArrayList<>();
+        expected.add(TEST_TEXT);
         writerService.writeToFile(TEST_TEXT, OUTPUT_FILE);
         try {
-            actual = Files.readAllLines(Path.of(OUTPUT_FILE)).get(0);
+            actual = Files.readAllLines(Path.of(OUTPUT_FILE));
         } catch (IOException e) {
             throw new RuntimeException("No such file at " + OUTPUT_FILE, e);
         }
@@ -35,12 +36,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void writerService_writeToFile_NotOk() {
+    public void writerService_writeToNullFile_notOk() {
         writerService.writeToFile(TEST_TEXT, null);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
     }
 }

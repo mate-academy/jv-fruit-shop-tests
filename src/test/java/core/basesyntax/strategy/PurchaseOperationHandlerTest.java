@@ -29,7 +29,6 @@ public class PurchaseOperationHandlerTest {
         exceptionRule.expect(NoSuchElementException.class);
         exceptionRule.expectMessage("Not enough fruits for purchase");
         handler.apply(transaction);
-
     }
 
     @Test
@@ -39,7 +38,6 @@ public class PurchaseOperationHandlerTest {
         exceptionRule.expect(NoSuchElementException.class);
         exceptionRule.expectMessage("Not enough fruits for purchase");
         handler.apply(transaction);
-
     }
 
     @Test
@@ -50,7 +48,6 @@ public class PurchaseOperationHandlerTest {
         Integer expected = 20;
         Integer actual = fruitStorage.get(new Fruit("apple"));
         Assert.assertEquals(expected, actual);
-
     }
 
     @Test
@@ -61,7 +58,6 @@ public class PurchaseOperationHandlerTest {
         Integer expected = 0;
         Integer actual = fruitStorage.get(new Fruit("kiwi"));
         Assert.assertEquals(expected, actual);
-
     }
 
     @After

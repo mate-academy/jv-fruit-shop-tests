@@ -1,23 +1,22 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReaderServiceTest {
     private static ReaderService readerService;
 
-    @BeforeAll
+    @BeforeClass
     public static void init() {
         readerService = new ReaderServiceImpl();
     }
 
     @Test
-    void readFromFile_Ok() {
+    public void readFromFile_Ok() {
         String fileName = "src/test/java/core/basesyntax/recourses/input-test.csv";
         List<String> expected = List.of(
                 "type,fruit,quantity", "b,banana,20", "b,apple,100",
@@ -28,8 +27,8 @@ public class ReaderServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void readFromNonExistentFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(""));
+    @Test(expected = RuntimeException.class)
+     public void readFromNonExistentFile_NotOk() {
+        readerService.readFromFile("");
     }
 }

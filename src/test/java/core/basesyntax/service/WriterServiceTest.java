@@ -1,25 +1,24 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class WriterServiceTest {
     private static WriterService writerService;
 
-    @BeforeAll
+    @BeforeClass
     public static void init() {
         writerService = new WriterServiceImpl();
     }
 
     @Test
-    void writeToFile_Ok() {
+    public void writeToFile_Ok() {
         String actual = "test";
         String fileName = "src/test/java/core/basesyntax/recourses/output-test.csv";
         writerService.writeToFile(actual, fileName);
@@ -32,9 +31,8 @@ public class WriterServiceTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void writeToNonExistentFile_NotOk() {
-        assertThrows(RuntimeException.class,
-                () -> writerService.writeToFile("test", ""));
+    @Test (expected = RuntimeException.class)
+    public void writeToNonExistentFile_NotOk() {
+        writerService.writeToFile("test", "");
     }
 }

@@ -1,16 +1,16 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class OperationStrategyHandlerTest {
     private static OperationStrategyHandler strategy;
 
-    @BeforeAll
+    @BeforeClass
     public static void init() {
         Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());
@@ -21,7 +21,7 @@ public class OperationStrategyHandlerTest {
     }
 
     @Test
-    void getByOperationBalanceOperation_Ok() {
+    public void getByOperationBalanceOperation_Ok() {
         String operation = "b";
         OperationHandler expected = new BalanceOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);
@@ -29,7 +29,7 @@ public class OperationStrategyHandlerTest {
     }
 
     @Test
-    void getByOperationPurchaseOperation_Ok() {
+    public void getByOperationPurchaseOperation_Ok() {
         String operation = "p";
         OperationHandler expected = new PurchaseOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);
@@ -37,7 +37,7 @@ public class OperationStrategyHandlerTest {
     }
 
     @Test
-    void getByOperationSupplyOperation_Ok() {
+    public void getByOperationSupplyOperation_Ok() {
         String operation = "s";
         OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);
@@ -45,7 +45,7 @@ public class OperationStrategyHandlerTest {
     }
 
     @Test
-    void getByOperationReturnOperation_Ok() {
+    public void getByOperationReturnOperation_Ok() {
         String operation = "r";
         OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);

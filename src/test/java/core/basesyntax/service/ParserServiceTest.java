@@ -1,25 +1,25 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ParserServiceTest {
     private static ParserService parserService;
 
-    @BeforeAll
+    @BeforeClass
     public static void init() {
         parserService = new ParserServiceImpl();
     }
 
     @Test
-    void parseFile_Ok() {
+    public void parseFile_Ok() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,20");
@@ -38,7 +38,7 @@ public class ParserServiceTest {
     }
 
     @Test
-    void parseNonExistentFile_NotOk() {
+    public void parseNonExistentFile_NotOk() {
         List<String> lines = new ArrayList<>();
         parserService.parse(lines);
     }

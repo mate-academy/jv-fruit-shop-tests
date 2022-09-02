@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,7 +25,7 @@ public class CsvFileReaderServiceImplTest {
     private static FileReaderService csvFileReader;
 
     @BeforeClass
-    public static void beforeClass(){
+    public static void beforeClass() {
         csvFileReader = new CsvFileReaderServiceImpl();
     }
 

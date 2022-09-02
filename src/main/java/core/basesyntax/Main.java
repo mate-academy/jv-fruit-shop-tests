@@ -9,8 +9,12 @@ import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.impl.ReportCreatorService;
 import core.basesyntax.service.impl.WriteToFileImpl;
-import core.basesyntax.strategy.*;
-
+import core.basesyntax.strategy.BalanceOperationImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.PurchaseOperationImpl;
+import core.basesyntax.strategy.ReturnOperationImpl;
+import core.basesyntax.strategy.SupplyOperationImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

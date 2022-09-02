@@ -1,12 +1,13 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class BalanceOperationImplTest {
     private OperationHandler operationHandler;
@@ -30,5 +31,4 @@ public class BalanceOperationImplTest {
     public void tearDown() throws Exception {
         Storage.storage.clear();
     }
-
 }

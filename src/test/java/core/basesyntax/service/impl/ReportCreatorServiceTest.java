@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
-
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.ReportCreatorService;
 import core.basesyntax.storage.Storage;
 import org.junit.AfterClass;
 import org.junit.Assert;

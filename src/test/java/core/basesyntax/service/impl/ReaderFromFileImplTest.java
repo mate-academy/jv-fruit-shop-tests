@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.impl.ReadFromFileImpl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import org.junit.Before;
-import org.junit.Test;
 
+import core.basesyntax.service.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReaderFromFileImplTest {
     private static final String INPUT_FILE_PATH = "src/test/resources/test_readFromFile.csv";

@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.lang.annotation.Native;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class WriteToFileImplTest {
     private static final String PATH = "src/test/resources/test_writeToFile.csv";
     private static final String INCORRECT_PATH = "src/main/resources/report.csv";
-    WriteToFileImpl writeToFile;
+    private WriteToFileImpl writeToFile;
     private ReportCreatorService reportCreatorService;
 
     @Before
@@ -44,7 +43,4 @@ public class WriteToFileImplTest {
     public void wrongPath_WriteToFile_NotOK() {
         writeToFile.writeToFile(INCORRECT_PATH, reportCreatorService.createReport());
     }
-
-
-
 }

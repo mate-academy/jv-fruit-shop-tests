@@ -17,14 +17,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyImplTest {
-    private static Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
-    private static StorageDao storageDao;
     private static Strategy strategy;
 
     @BeforeClass
     public static void beforeClass() {
-        storageDao = new StorageDaoImpl();
-        transactionHandlerMap = new HashMap<>();
+        StorageDao storageDao = new StorageDaoImpl();
+        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap = new HashMap<>();
         transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceHandlerImpl(storageDao));
         transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE,
@@ -40,28 +38,28 @@ public class StrategyImplTest {
     public void get_balanceTransactionHandler_Ok() {
         Class expected = BalanceHandlerImpl.class;
         Class actual = strategy.get(FruitTransaction.Operation.BALANCE).getClass();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void get_supplyTransactionHandler_Ok() {
         Class expected = SupplyHandlerImpl.class;
         Class actual = strategy.get(FruitTransaction.Operation.SUPPLY).getClass();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void get_returnTransactionHandler_Ok() {
         Class expected = ReturnHandlerImpl.class;
         Class actual = strategy.get(FruitTransaction.Operation.RETURN).getClass();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void get_purchaseTransactionHandler_Ok() {
         Class expected = PurchaseHandlerImpl.class;
         Class actual = strategy.get(FruitTransaction.Operation.PURCHASE).getClass();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test

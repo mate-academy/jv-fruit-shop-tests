@@ -13,12 +13,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseHandlerImplTest {
-    private static StorageDao storageDao;
     private static TransactionHandler purchaseHandler;
 
     @BeforeClass
     public static void beforeClass() {
-        storageDao = new StorageDaoImpl();
+        StorageDao storageDao = new StorageDaoImpl();
         purchaseHandler = new PurchaseHandlerImpl(storageDao);
     }
 
@@ -32,7 +31,6 @@ public class PurchaseHandlerImplTest {
     public void makeTransaction_nonExistentFruit_NotOk() {
         purchaseHandler.makeTransaction(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20));
-
     }
 
     @Test
@@ -48,7 +46,6 @@ public class PurchaseHandlerImplTest {
     public void makeTransaction_transactionAmountBiggerThenFruit_NotOk() {
         purchaseHandler.makeTransaction(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 101));
-
     }
 
     @After

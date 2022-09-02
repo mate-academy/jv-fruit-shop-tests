@@ -8,12 +8,17 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportCreatorService;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorServiceImplTest {
-    private static final StorageDao storageDao = new StorageDaoImpl();
-    private static final ReportCreatorService reportCreatorService
-            = new ReportCreatorServiceImpl(storageDao);
+    private static ReportCreatorService reportCreatorService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        StorageDao storageDao = new StorageDaoImpl();
+        reportCreatorService = new ReportCreatorServiceImpl(storageDao);
+    }
 
     @Test
     public void createReport_validData_Ok() {

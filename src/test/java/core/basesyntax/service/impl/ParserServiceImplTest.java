@@ -31,4 +31,24 @@ public class ParserServiceImplTest {
         List<FruitTransaction> actual = parserService.parse(inputData);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parserService_checkNull_NotOk() {
+        List<String> inputData = new ArrayList<>();
+        inputData.add("type,fruit,quantity");
+        inputData.add("b,banana,null");
+        inputData.add("b,apple,100");
+        inputData.add("s,banana,100");
+        List<FruitTransaction> actual = parserService.parse(inputData);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parserService_checkQuantityIsString_NotOk() {
+        List<String> inputData = new ArrayList<>();
+        inputData.add("type,fruit,quantity");
+        inputData.add("b,banana,dfdff");
+        inputData.add("b,apple,100");
+        inputData.add("s,banana,100");
+        List<FruitTransaction> actual = parserService.parse(inputData);
+    }
 }

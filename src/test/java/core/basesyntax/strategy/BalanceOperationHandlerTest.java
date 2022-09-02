@@ -8,18 +8,12 @@ import core.basesyntax.model.Transaction;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static OperationHandler operationHandler;
+    private static final OperationHandler operationHandler = new BalanceOperationHandler();
     private static Transaction transaction;
     private static final Map<Fruit, Integer> storage = Storage.getAll();
-
-    @BeforeClass
-    public static void beforeClass() {
-        operationHandler = new BalanceOperationHandler();
-    }
 
     @Before
     public void setUp() {

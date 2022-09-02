@@ -9,23 +9,17 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class PurchaseOperationHandlerTest {
-    private static OperationHandler operationHandler;
+    private static final OperationHandler operationHandler = new PurchaseOperationHandler();
     private static Transaction transaction;
     private static final Map<Fruit, Integer> storage = Storage.getAll();
 
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
-
-    @BeforeClass
-    public static void beforeClass() {
-        operationHandler = new PurchaseOperationHandler();
-    }
 
     @Before
     public void setUp() {

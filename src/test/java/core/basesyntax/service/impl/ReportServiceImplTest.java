@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
-    private static Map<Fruit, Integer> storage = Storage.getAll();
+    private static final Map<Fruit, Integer> storage = Storage.getAll();
     private static ReportService reportService;
 
     @BeforeClass

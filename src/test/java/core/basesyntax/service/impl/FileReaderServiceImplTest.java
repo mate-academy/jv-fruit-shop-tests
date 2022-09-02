@@ -14,7 +14,6 @@ public class FileReaderServiceImplTest {
             = "src/test/resources/one_line_to_read_test.csv";
     private static final String FILE_WITH_TWO_LINE_NAME
             = "src/test/resources/two_line_to_read_test.csv";
-
     private static FileReaderService fileReaderService;
     private static List<String> lines;
 

@@ -60,7 +60,7 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writerService_writeInvalidPath_NotOk() {
-        writerService.writeToFile(TEST_DATA, "     ");
+        writerService.writeToFile(TEST_DATA, "src\\\\main/,resources/.,output.csv");
     }
 
     private List<String> readFromFile() {

@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private ReaderService readerService;
+    private static ReaderService readerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

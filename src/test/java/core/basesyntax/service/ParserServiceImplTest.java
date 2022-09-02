@@ -5,7 +5,7 @@ import core.basesyntax.service.impl.ParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
@@ -16,10 +16,10 @@ public class ParserServiceImplTest {
     private static final List<FruitTransaction> DEFAULT_OUTPUT = List.of(
             new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 45),
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 42));
-    private FileParserService fileParserService;
+    private static FileParserService fileParserService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileParserService = new ParserServiceImpl();
     }
 

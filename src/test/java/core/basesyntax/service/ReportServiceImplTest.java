@@ -6,14 +6,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private ReportService reportService;
+    private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         reportService = new ReportServiceImpl();
     }
 

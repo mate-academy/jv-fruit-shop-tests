@@ -9,15 +9,15 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private Storage storage;
-    private PurchaseOperationHandler purchaseOperationHandler;
+    private static Storage storage;
+    private static PurchaseOperationHandler purchaseOperationHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         storage = new StorageImpl();
         purchaseOperationHandler = new PurchaseOperationHandler(storage);
     }

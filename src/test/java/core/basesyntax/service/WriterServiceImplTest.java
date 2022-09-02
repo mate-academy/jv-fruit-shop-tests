@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String FILE_PATH = "src/test/resources/writeTestFile.csv";
     private static final String DEFAULT_TEXT = "testtext";
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         writerService = new WriterServiceImpl();
     }
 

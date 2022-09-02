@@ -12,16 +12,16 @@ import core.basesyntax.strategy.handlers.ReturnOperationHandler;
 import core.basesyntax.strategy.handlers.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private Storage storage;
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
-    private OperationStrategy operationStrategy;
+    private static Storage storage;
+    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         storage = new StorageImpl();
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,

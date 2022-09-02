@@ -10,13 +10,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static String correctUrl = "src/test/resources/ReaderServiceImpl/correctinput.csv";
-    private static String incorrectUrl = "src/test/resources/ReaderServiceImpl/nosuchfile.csv";
+    private static String correctUrl;
+    private static String incorrectUrl;
     private static ReaderService readerService;
 
     @BeforeClass
     public static void beforeClass() {
         readerService = new ReaderServiceImpl();
+        incorrectUrl = "src/test/resources/ReaderServiceImpl/nosuchfile.csv";
+        correctUrl = "src/test/resources/ReaderServiceImpl/correctinput.csv";
     }
 
     @Test

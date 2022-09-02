@@ -12,13 +12,15 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
 
-    private static String correctUrl = "src/test/resources/WriterServiceImpl/correctoutput.csv";
-    private static String forEqualsUrl = "src/test/resources/WriterServiceImpl/forequals.csv";
+    private static String correctUrl;
+    private static String forEqualsUrl;
     private static WriterService writerService;
 
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
+        correctUrl = "src/test/resources/WriterServiceImpl/correctoutput.csv";
+        forEqualsUrl = "src/test/resources/WriterServiceImpl/forequals.csv";
     }
 
     @Test

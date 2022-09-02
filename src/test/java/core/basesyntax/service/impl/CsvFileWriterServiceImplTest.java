@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class CsvFileWriterServiceImplTest {
     private static final String OUTPUT_FILE = "src/test/resources/outputFile.csv";
-    private static final String WRONG_PATH = " ";
+    private static final String WRONG_PATH = "src\\\\main/,resources/.,output.csv\n";
     private static final String DATA_TO_WRITE
             = "line 1" + System.lineSeparator()
             + "line 2" + System.lineSeparator()

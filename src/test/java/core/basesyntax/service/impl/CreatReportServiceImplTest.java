@@ -13,7 +13,7 @@ public class CreatReportServiceImplTest {
     private static CreatReportService creatReportService;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         creatReportService = new CreatReportServiceImpl();
     }
 
@@ -27,7 +27,7 @@ public class CreatReportServiceImplTest {
     }
 
     @AfterClass
-    public static void tearDown() throws Exception {
+    public static void tearDown() {
         Storage.storage.clear();
     }
 }

@@ -13,7 +13,7 @@ public class BalanceOperationHandlerTest {
     private FruitTransaction fruitTransaction;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         balanceOperation = new BalanceOperationHandler();
         fruitTransaction = new FruitTransaction("b", new Fruit("banana"), 100);
     }

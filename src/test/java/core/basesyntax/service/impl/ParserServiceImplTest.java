@@ -5,8 +5,10 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,12 +16,12 @@ public class ParserServiceImplTest {
     private static ParserService parserService;
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         parserService = new ParserServiceImpl();
     }
 
     @Test
-    public void parseInfo_Ok() {
+    public void parsing_OfCorrectInfo_Ok() {
         List<String> test = new ArrayList<>();
         test.add("type,fruit,quantity");
         test.add("b,banana,100");
@@ -32,7 +34,7 @@ public class ParserServiceImplTest {
     }
 
     @Test(expected = NumberFormatException.class)
-    public void expected_Exception_NotOk() {
+    public void expected_InvalidData_NotOk() {
         List<String> test = new ArrayList<>();
         test.add("b,apple,number");
         test.add("s,banana,  ");

@@ -14,7 +14,7 @@ public class ReturnOperationHandlerTest {
     private Fruit fruit;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         returnOperation = new ReturnOperationHandler();
         fruit = new Fruit("banana");
         Storage.storage.put(fruit, 100);
@@ -39,7 +39,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

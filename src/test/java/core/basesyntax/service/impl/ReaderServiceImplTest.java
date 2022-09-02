@@ -3,8 +3,10 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReaderService;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,7 +16,7 @@ public class ReaderServiceImplTest {
     private static final String EMPTY = "src/test/resources/test_emptyFile.csv";
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

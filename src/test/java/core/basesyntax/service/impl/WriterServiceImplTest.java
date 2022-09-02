@@ -10,7 +10,7 @@ public class WriterServiceImplTest {
     private static final String RESOURCES_TO_WRITE = "fruit,quantity\nbanana,100\napple,5\n";
 
     @BeforeClass
-    public static void setUp() throws Exception {
+    public static void setUp() {
         writerService = new WriterServiceImpl();
     }
 

@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class PurchaseOperationHandlerImplTest {
+public class ReturnOperationHandlerImplTest {
     private Map<Fruit, Integer> dataBase = Storage.dataBase;
 
     @BeforeClass
@@ -18,25 +18,16 @@ public class PurchaseOperationHandlerImplTest {
         Storage.dataBase.clear();
     }
 
-    @Test(expected = RuntimeException.class)
-    public void apply_littleFruitQuantity_ok() {
-        Fruit fruit = new Fruit("banana");
-        OperationHandler operationHandler = new PurchaseOperationHandlerImpl();
-        FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, fruit, 20);
-        operationHandler.apply(transaction);
-    }
-
     @Test
-    public void apply_normalFruitQuantity_ok() {
+    public void apply_dataInDatabase_ok() {
         Fruit fruit = new Fruit("banana");
         dataBase.put(fruit, 107);
-        OperationHandler operationHandler = new PurchaseOperationHandlerImpl();
+        OperationHandler operationHandler = new ReturnOperationHandlerImpl();
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, new Fruit("banana"), 20);
+                FruitTransaction.Operation.RETURN, new Fruit("banana"), 20);
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
-        expected.put(fruit, 87);
+        expected.put(fruit, 127);
         Assert.assertEquals("Incorrect output.", expected, dataBase);
     }
 
@@ -45,4 +36,3 @@ public class PurchaseOperationHandlerImplTest {
         dataBase.clear();
     }
 }
-

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,5 +43,10 @@ public class ProcessDataServiceImplTest {
         processDataService.processData(data);
         Map<Fruit, Integer> actual = Storage.dataBase;
         Assert.assertEquals("Wrong data processing.", expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.dataBase.clear();
     }
 }

@@ -27,7 +27,7 @@ public class BalanceOperationHandlerImplTest {
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(fruit, 20);
-        Assert.assertEquals(expected, dataBase);
+        Assert.assertEquals("Incorrect output.", expected, dataBase);
     }
 
     @Test
@@ -36,11 +36,11 @@ public class BalanceOperationHandlerImplTest {
         dataBase.put(fruit, 107);
         OperationHandler operationHandler = new BalanceOperationHandlerImpl();
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, new Fruit("banana"), 20);
+                FruitTransaction.Operation.BALANCE, fruit, 20);
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(fruit, 20);
-        Assert.assertEquals(expected, dataBase);
+        Assert.assertEquals("Incorrect output.", expected, dataBase);
     }
 
     @After

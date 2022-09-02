@@ -26,13 +26,15 @@ public class ReaderServiceImplTest {
     public void readFromFile_emptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = readerService.readFromFile(FRUIT_EMPTY_FILE);
-        assertEquals(expected, actual);
+        assertEquals("Invalid read from empty file "
+                + FRUIT_EMPTY_FILE + " operation ", expected, actual);
     }
 
     @Test
     public void readFromFile_filledFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
         List<String> actual = readerService.readFromFile(FRUIT_FILE);
-        assertEquals(expected, actual);
+        assertEquals("Invalid read from file "
+                + FRUIT_FILE + " operation ", expected, actual);
     }
 }

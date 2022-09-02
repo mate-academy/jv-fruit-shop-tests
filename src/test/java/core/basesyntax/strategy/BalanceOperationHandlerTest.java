@@ -23,7 +23,7 @@ public class BalanceOperationHandlerTest {
         operationHandler.apply(new Transaction("b", banana, 30));
         Integer expected = 30;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Invalid balance operation ", expected, actual);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class BalanceOperationHandlerTest {
         operationHandler.apply(new Transaction("b", new Fruit("banana"), 15));
         Integer expected = 40;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Invalid balance operation ", expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -42,7 +42,8 @@ public class BalanceOperationHandlerTest {
         operationHandler.apply(new Transaction("b", new Fruit("banana"), null));
         Integer expected = 15;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Valid balance operation with not correct quantity",
+                expected, actual);
     }
 
     @After

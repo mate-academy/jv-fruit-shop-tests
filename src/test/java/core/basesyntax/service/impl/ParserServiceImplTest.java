@@ -21,7 +21,8 @@ public class ParserServiceImplTest {
     public void parse_emptyInput_Ok() {
         List<Transaction> expected = List.of();
         List<Transaction> actual = parserService.parse(List.of());
-        assertEquals(expected, actual);
+        assertEquals("Invalid parse operation with empty input ",
+                expected, actual);
     }
 
     @Test
@@ -31,6 +32,6 @@ public class ParserServiceImplTest {
         List<Transaction> expected = List.of(banana, apple);
         List<Transaction> actual = parserService.parse(List.of(
                 "type,fruit,quantity", "p,banana,10", "s,apple,15"));
-        assertEquals(expected, actual);
+        assertEquals("Invalid parse operation ", expected, actual);
     }
 }

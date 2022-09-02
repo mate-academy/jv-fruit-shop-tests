@@ -45,7 +45,8 @@ public class WriterServiceImplTest {
         writerService.writeToFile(FRUIT_EMPTY_FILE, text);
         List<String> expected = List.of();
         List<String> actual = readFromFile(FRUIT_EMPTY_FILE);
-        assertEquals(expected, actual);
+        assertEquals("Invalid write to file "
+                + FRUIT_EMPTY_FILE + " operation ", expected, actual);
     }
 
     @Test
@@ -55,7 +56,8 @@ public class WriterServiceImplTest {
         writerService.writeToFile(FRUIT_FILE, text);
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
         List<String> actual = readFromFile(FRUIT_FILE);
-        assertEquals(expected, actual);
+        assertEquals("Invalid write to file "
+                + FRUIT_FILE + " operation ", expected, actual);
     }
 
     private List<String> readFromFile(String fileName) {

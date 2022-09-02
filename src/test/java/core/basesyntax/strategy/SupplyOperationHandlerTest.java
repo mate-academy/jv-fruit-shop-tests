@@ -21,41 +21,43 @@ public class SupplyOperationHandlerTest {
     public void apply_validSupplyOperation_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
-        operationHandler.apply(new Transaction("b", new Fruit("banana"), 5));
+        operationHandler.apply(new Transaction("s", new Fruit("banana"), 5));
         Integer expected = 15;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Invalid supply operation ", expected, actual);
     }
 
     @Test
     public void apply_validSupplyOperationMoreThanOneFruit_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
-        operationHandler.apply(new Transaction("b", new Fruit("banana"), 5));
-        operationHandler.apply(new Transaction("b", new Fruit("banana"), 15));
+        operationHandler.apply(new Transaction("s", new Fruit("banana"), 5));
+        operationHandler.apply(new Transaction("s", new Fruit("banana"), 15));
         Integer expected = 30;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Invalid supply operation ", expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void apply_nullFruitSupplyOperation_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
-        operationHandler.apply(new Transaction("b", null, 5));
+        operationHandler.apply(new Transaction("s", null, 5));
         Integer expected = 15;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Valid supply operation with not correct fruit ",
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void apply_nullQuantitySupplyOperation_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
-        operationHandler.apply(new Transaction("b", new Fruit("banana"), null));
+        operationHandler.apply(new Transaction("s", new Fruit("banana"), null));
         Integer expected = 15;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Valid supply operation with not correct quantity ",
+                expected, actual);
     }
 
     @After

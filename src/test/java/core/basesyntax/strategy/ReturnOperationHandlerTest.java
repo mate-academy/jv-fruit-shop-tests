@@ -24,7 +24,7 @@ public class ReturnOperationHandlerTest {
         operationHandler.apply(new Transaction("r", new Fruit("banana"), 10));
         Integer expected = 20;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Invalid return operation ", expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -34,7 +34,8 @@ public class ReturnOperationHandlerTest {
         operationHandler.apply(new Transaction("r", null, 10));
         Integer expected = 20;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Valid return operation with not correct fruit ",
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -44,7 +45,8 @@ public class ReturnOperationHandlerTest {
         operationHandler.apply(new Transaction("r", new Fruit("banana"), null));
         Integer expected = 20;
         Integer actual = Storage.storage.get(banana);
-        assertEquals(expected, actual);
+        assertEquals("Valid return operation with not correct quantity ",
+                expected, actual);
     }
 
     @After

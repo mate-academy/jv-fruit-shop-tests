@@ -21,7 +21,7 @@ public class ReportServiceImplTest {
     public void createReport_emptyStorage_Ok() {
         String expected = "fruit,quantity";
         String actual = reportService.createReport();
-        assertEquals(expected, actual);
+        assertEquals("Invalid report operation ", expected, actual);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class ReportServiceImplTest {
         Storage.storage.put(new Fruit("banana"), 10);
         Storage.storage.put(new Fruit("apple"), 15);
         String actual = reportService.createReport();
-        assertEquals(expected, actual);
+        assertEquals("Invalid report operation ",expected, actual);
     }
 
     @After

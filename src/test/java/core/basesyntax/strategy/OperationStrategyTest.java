@@ -25,48 +25,55 @@ public class OperationStrategyTest {
     public void getByOperation_emptyOperation_NotOk() {
         Class<?> expected = BalanceOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation("").getClass();
-        assertEquals(expected,actual);
+        assertEquals("Valid method reaction, no such operation with input parameter ",
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void getByOperation_nullOperation_NotOk() {
         Class<?> expected = BalanceOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation(null).getClass();
-        assertEquals(expected,actual);
+        assertEquals("Valid method reaction, no such operation with input parameter ",
+                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void getByOperation_noSuchOperation_NotOk() {
         Class<?> expected = BalanceOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation("a").getClass();
-        assertEquals(expected,actual);
+        assertEquals("Valid method reaction, no such operation with input parameter ",
+                expected, actual);
     }
 
     @Test
     public void getByOperation_validBalanceOperation_Ok() {
         Class<?> expected = BalanceOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation("b").getClass();
-        assertEquals(expected,actual);
+        assertEquals("Invalid operation with input parameter ",
+                expected, actual);
     }
 
     @Test
     public void getByOperation_validSupplyOperation_Ok() {
         Class<?> expected = SupplyOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation("s").getClass();
-        assertEquals(expected,actual);
+        assertEquals("Invalid operation with input parameter ",
+                expected, actual);
     }
 
     @Test
     public void getByOperation_validPurchaseOperation_Ok() {
         Class<?> expected = PurchaseOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation("p").getClass();
-        assertEquals(expected,actual);
+        assertEquals("Invalid operation with input parameter ",
+                expected, actual);
     }
 
     @Test
     public void getByOperation_validReturnOperation_Ok() {
         Class<?> expected = ReturnOperationHandler.class;
         Class<?> actual = operationStrategy.getByOperation("r").getClass();
-        assertEquals(expected,actual);
+        assertEquals("Invalid operation with input parameter ",
+                expected, actual);
     }
 }

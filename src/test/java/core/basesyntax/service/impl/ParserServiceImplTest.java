@@ -8,13 +8,14 @@ import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-    private ParserService parserService;
+    private static ParserService parserService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         parserService = new ParserServiceImpl();
     }
 

@@ -2,18 +2,17 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private WriterService writerService;
-    private String testOutput;
-    private String resourcesToWrite;
+    private static WriterService writerService;
+    private static final String testOutput = "src/test/resources/test_output.csv";
+    private static final String resourcesToWrite = "fruit,quantity\nbanana,100\napple,5\n";
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         writerService = new WriterServiceImpl();
-        testOutput = "src/test/resources/test_output.csv";
-        resourcesToWrite = "fruit,quantity\nbanana,100\napple,5\n";
     }
 
     @Test

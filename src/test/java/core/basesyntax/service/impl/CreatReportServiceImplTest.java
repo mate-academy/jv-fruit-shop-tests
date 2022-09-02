@@ -6,14 +6,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreatReportService;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CreatReportServiceImplTest {
-    private CreatReportService creatReportService;
+    private static CreatReportService creatReportService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         creatReportService = new CreatReportServiceImpl();
     }
 
@@ -26,8 +27,8 @@ public class CreatReportServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
         Storage.storage.clear();
     }
 }

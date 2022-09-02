@@ -29,4 +29,14 @@ public class ReaderServiceImplTest {
         Assert.assertEquals("Expected third line is 'r,banana,20'",
                 "r,banana,20", strings.get(THIRD_LINE));
     }
+
+    @Test (expected = RuntimeException.class)
+    public void wrongPath_notOk() {
+        reader.readFromFile("wrong/path.csv");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void nullPath_notOk() {
+        reader.readFromFile(null);
+    }
 }

@@ -6,7 +6,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -45,8 +44,13 @@ public class PurchaseOperationHandlerTest {
         purchase.apply(new Transaction("b", banana, 10));
     }
 
-    @AfterClass
-    public static void clean() {
-        Storage.storage.clear();
+    @Test (expected = RuntimeException.class)
+    public void purchaseNullAmount_notOk() {
+        purchase.apply(new Transaction("b", new Fruit("banana"), null));
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void purchaseNullTransaction_notOk() {
+        purchase.apply(null);
     }
 }

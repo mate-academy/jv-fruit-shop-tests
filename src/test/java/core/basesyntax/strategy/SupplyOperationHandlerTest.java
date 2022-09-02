@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,6 +17,11 @@ public class SupplyOperationHandlerTest {
         supply = new SupplyOperationHandler();
     }
 
+    @After
+    public void clean() {
+        Storage.storage.clear();
+    }
+
     @Test
     public void supplyFruits_ok() {
         Fruit banana = new Fruit("banana");
@@ -26,8 +31,13 @@ public class SupplyOperationHandlerTest {
                 Storage.storage.get(banana));
     }
 
-    @AfterClass
-    public static void clean() {
-        Storage.storage.clear();
+    @Test (expected = NullPointerException.class)
+    public void supplyNullAmount_notOk() {
+        supply.apply(new Transaction("b", new Fruit("banana"), null));
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void supplyNullTransaction_notOk() {
+        supply.apply(null);
     }
 }

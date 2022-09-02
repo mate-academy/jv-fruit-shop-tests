@@ -19,7 +19,7 @@ public class FileCreationServiceImplTest {
     }
 
     @Test
-    public void creatFile_validFileName_Ok() {
+    public void creatFile_FileNameIsValid_Ok() {
         fileCreationService.createFile(newFileName);
         assertTrue(Files.exists(Paths.get(newFileName)));
     }
@@ -30,7 +30,7 @@ public class FileCreationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createFile_NotValidFileName_NotOk() {
+    public void createFile_FileNameIsNotValid_NotOk() {
         String fileName = "";
         fileCreationService.createFile(fileName);
     }

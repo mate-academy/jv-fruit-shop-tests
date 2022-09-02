@@ -19,7 +19,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parseLines_ValidList_Ok() {
+    public void parseLines_ListIsValid_Ok() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,20");
@@ -28,15 +28,11 @@ public class ParserServiceImplTest {
         expectedList.add(new FruitTransaction("b", new Fruit("banana"), 20));
         expectedList.add(new FruitTransaction("s", new Fruit("apple"), 100));
         List<FruitTransaction> actualList = parserService.parseLines(lines);
-        for (int i = 0; i < expectedList.size(); i++) {
-            assertEquals(expectedList.get(0).getFruit(), actualList.get(0).getFruit());
-            assertEquals(expectedList.get(0).getQuantity(), actualList.get(0).getQuantity());
-            assertEquals(expectedList.get(0).getOperation(), actualList.get(0).getOperation());
-        }
+        assertEquals(expectedList, actualList);
     }
 
     @Test(expected = NullPointerException.class)
-    public void parseLines_NullList_NotOk() {
+    public void parseLines_ListIsNull_NotOk() {
         List<String> lines = null;
         parserService.parseLines(lines);
     }

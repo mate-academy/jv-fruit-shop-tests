@@ -22,12 +22,12 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_NonValidInputData_NotOk() {
+    public void writeToFile_InputDataIsNotValid_NotOk() {
         writerService.writeToFile(report, "");
     }
 
     @Test
-    public void writeToFile_ValidInputData_Ok() {
+    public void writeToFile_InputDataIsValid_Ok() {
         writerService.writeToFile(report, fileName);
         String expected = null;
         try {

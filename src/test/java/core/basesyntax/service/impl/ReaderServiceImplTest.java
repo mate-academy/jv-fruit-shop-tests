@@ -18,7 +18,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readData_validInput_Ok() {
+    public void readData_InputDataIsValid_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -34,7 +34,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readData_NotValidFileName_NotOk() {
+    public void readData_InputDataIsNotValid_NotOk() {
         readerService.readData("");
     }
 }

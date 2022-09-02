@@ -18,13 +18,13 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_EmptyStorage_Ok() {
+    public void getReport_StorageIsEmpty_Ok() {
         Storage.storage.clear();
         assertEquals("fruit,quantity", reportService.getReport());
     }
 
     @Test
-    public void getReport_StorageNotEmpty() {
+    public void getReport_StorageIsNotEmpty() {
         Storage.storage.put(new Fruit("banana"), 10);
         Storage.storage.put(new Fruit("apple"), 5);
         String expected = "fruit,quantity" + System.lineSeparator()

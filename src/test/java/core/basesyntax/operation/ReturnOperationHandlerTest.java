@@ -10,11 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static final FruitTransaction fruitTransaction
-            = new FruitTransaction("p", new Fruit("banana"), 10);
-    private static final Fruit fruit = new Fruit("banana");
-
-    private static ReturnOperationHandler returnOperationHandler;
+    private static OperationHandler returnOperationHandler;
+    private FruitTransaction fruitTransaction;
+    private Fruit fruit;
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,7 +20,9 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void apply_validFruitTransaction_Ok() {
+    public void apply_FruitTransactionIsValid_Ok() {
+        fruitTransaction = new FruitTransaction("p", new Fruit("banana"), 10);
+        fruit = new Fruit("banana");
         Storage.storage.put(fruit, 5);
         returnOperationHandler.apply(fruitTransaction);
         Integer expected = 15;
@@ -31,17 +31,8 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void apply_NullFruitTransaction_NotOk() {
+    public void apply_FruitTransactionIsNull_NotOk() {
         returnOperationHandler.apply(null);
-    }
-
-    @Test
-    public void apply_FruitTransactionIsPresentInStorage_Ok() {
-        Storage.storage.put(fruit, 5);
-        Integer expected = 15;
-        returnOperationHandler.apply(fruitTransaction);
-        Integer actual = Storage.storage.get(fruit);
-        assertEquals(expected, actual);
     }
 
     @After

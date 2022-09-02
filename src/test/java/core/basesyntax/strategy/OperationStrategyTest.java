@@ -26,7 +26,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getByOperation_validOperation_Ok() {
+    public void getByOperation_OperationIsValid_Ok() {
         String operation = "s";
         OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);
@@ -34,13 +34,13 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getByOperation_nullOperation_NotOk() {
+    public void getByOperation_OperationIsNull_Ok() {
         String operation = null;
         assertEquals(null, strategy.getByOperation(operation));
     }
 
     @Test
-    public void getByOperation_NonValidOperation_NotOk() {
+    public void getByOperation_OperationIsNotValid_Ok() {
         String operation = "bspr";
         assertEquals(null, strategy.getByOperation(operation));
     }

@@ -33,7 +33,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_operation_fruit_lack_exceptionK() {
+    public void purchase_operation_fruit_lack_exception() {
         fruitStorage.put(new Fruit("banana"), 30);
         Transaction transaction = new Transaction("p", new Fruit("banana"), 50);
         exceptionRule.expect(NoSuchElementException.class);

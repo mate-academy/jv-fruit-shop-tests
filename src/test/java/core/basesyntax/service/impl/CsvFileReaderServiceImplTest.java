@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
@@ -21,7 +23,12 @@ public class CsvFileReaderServiceImplTest {
             "p,apple,20",
             "p,banana,5",
             "s,banana,50");
-    private final FileReaderService csvFileReader = new CsvFileReaderServiceImpl();
+    private static FileReaderService csvFileReader;
+
+    @BeforeClass
+    public static void beforeClass(){
+        csvFileReader = new CsvFileReaderServiceImpl();
+    }
 
     @Test
     public void readFile_emptyFile_Ok() {

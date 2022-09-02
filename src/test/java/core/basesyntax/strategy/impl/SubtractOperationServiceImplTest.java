@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class SubtractOperationServiceImplTest {
     private SubtractOperationServiceImpl subtractOperationService;
+
     @Before
     public void setUp() throws Exception {
         subtractOperationService = new SubtractOperationServiceImpl();

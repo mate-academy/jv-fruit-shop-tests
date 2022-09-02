@@ -20,7 +20,6 @@ public class WriterServieImplTest {
         thrown.expect(RuntimeException.class);
         thrown.expectMessage("File " + FILE_NOT_EXIST + " could not be written to");
         File directory = new File(FILE_NOT_EXIST);
-        //Creating a folder using mkdir() method
         boolean bool = directory.mkdir();
         writerService.writeToFile(FILE_NOT_EXIST, "yo");
     }

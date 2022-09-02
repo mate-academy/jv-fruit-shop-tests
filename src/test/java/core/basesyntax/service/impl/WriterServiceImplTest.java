@@ -47,7 +47,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writer_dataEqualsFromFile() {
+    public void writer_dataEqualsFromFile_ok() {
         writerService.writeToFile(INPUT_FILE_NAME, writeDataToFile);
         List<String> actual = readFromFile(READ_FILE_NAME);
         Assert.assertEquals(readCorrectData, actual);

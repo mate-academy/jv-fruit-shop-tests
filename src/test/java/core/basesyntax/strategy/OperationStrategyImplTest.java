@@ -33,12 +33,11 @@ public class OperationStrategyImplTest {
                 new ReturnTransactionHandleImpl(storage));
         operationHandler.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseTransactionHandleImpl(storage));
-
         operationStrategy = new OperationStrategyImpl(operationHandler);
     }
 
     @After
-    public void afterClass() {
+    public void after() {
         Storage.storage.clear();
     }
 

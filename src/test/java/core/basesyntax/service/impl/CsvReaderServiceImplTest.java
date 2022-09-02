@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
-import java.io.File;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -31,16 +30,9 @@ public class CsvReaderServiceImplTest {
         readerService.readFromFile(null);
     }
 
-    @Test
-    public void read_okFileNameExists_ok() {
-        File actual = new File(OK_FILE_NAME);
-        Assert.assertTrue(actual.exists());
-    }
-
     @Test(expected = RuntimeException.class)
-    public void read_badFileNameExists_notOk() {
-        File actual = new File(OK_FILE_NAME, "csv");
-        readerService.readFromFile(String.valueOf(actual));
+    public void read_badFilePath_notOk() {
+        readerService.readFromFile("");
     }
 
     @Test

@@ -22,10 +22,11 @@ public class SupplyTransactionHandleImplTest {
     @Test
     public void supplyTransaction_equalsExecuteOperation() {
         Storage.storage.put("banana", 30);
-        FruitTransaction actual =
+        FruitTransaction transaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10);
-        transactionHandle.executeTransaction(actual);
-        Integer excepted = 40;
-        Assert.assertEquals(excepted, Storage.storage.get("banana"));
+        transactionHandle.executeTransaction(transaction);
+        Integer actual = Storage.storage.get("banana");
+        Integer expected = 40;
+        Assert.assertEquals(expected, actual);
     }
 }

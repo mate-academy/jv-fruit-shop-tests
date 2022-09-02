@@ -1,8 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
-import org.junit.*;
-
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -54,5 +57,4 @@ public class FileWriterImplTest {
             throw new RuntimeException("Can't read data from file " + pathToFile, e);
         }
     }
-
 }

@@ -18,7 +18,7 @@ public class ReaderImplTest {
 
     @Test
     public void readFile_Ok() {
-        List<String> expectedResult =  List.of("type,fruit,quantity",
+        List<String> expectedResult = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",

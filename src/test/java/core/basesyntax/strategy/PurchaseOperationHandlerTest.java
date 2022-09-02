@@ -18,11 +18,13 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     void validPurchaseTransaction_Ok() {
-        Storage.getStorage().put(new Fruit("banana"), 100);
-        Transaction transaction = new Transaction("p", new Fruit("banana"), 50);
+        Fruit fruit = new Fruit();
+        fruit.setName("banana");
+        Storage.getStorage().put(fruit, 100);
+        Transaction transaction = new Transaction("p", fruit, 50);
         purchaseOperationHandler.apply(transaction);
         int expected = 50;
-        int actual = Storage.getStorage().get(new Fruit("banana"));
+        int actual = Storage.getStorage().get(fruit);
         assertEquals(expected, actual);
     }
 }

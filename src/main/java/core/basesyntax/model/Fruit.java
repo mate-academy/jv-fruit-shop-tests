@@ -5,6 +5,9 @@ import java.util.Objects;
 public class Fruit {
     private String name;
 
+    public Fruit() {
+    }
+
     public Fruit(String name) {
         this.name = name;
     }
@@ -13,7 +16,7 @@ public class Fruit {
         return name;
     }
 
-    public void getName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

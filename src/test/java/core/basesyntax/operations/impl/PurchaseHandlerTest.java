@@ -14,21 +14,22 @@ import org.junit.Test;
 public class PurchaseHandlerTest {
     private static final String FRUIT_APPLE = "apple";
     private static FruitDao fruitDao;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
 
     @BeforeClass
     public static void setUp() {
+        operationHandler = new PurchaseHandler(fruitDao);
         fruitDao = new FruitDaoImpl();
     }
 
     @Before
     public void beforeEachTest() {
-        operationHandler = new PurchaseHandler(fruitDao);
         Storage.fruits.put(FRUIT_APPLE, 100);
     }
 
     @Test
     public void purchase_ok() {
+        operationHandler = new PurchaseHandler(fruitDao);
         operationHandler.process(FRUIT_APPLE, 30);
         int actual = fruitDao.get(FRUIT_APPLE);
         int expected = 70;

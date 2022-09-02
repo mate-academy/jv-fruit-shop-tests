@@ -14,10 +14,11 @@ import org.junit.Test;
 public class BalanceHandlerTest {
     private static final String FRUIT_APPLE = "apple";
     private static FruitDao fruitDao;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
 
     @BeforeClass
     public static void setUp() {
+        operationHandler = new BalanceHandler(fruitDao);
         fruitDao = new FruitDaoImpl();
     }
 
@@ -28,11 +29,11 @@ public class BalanceHandlerTest {
 
     @Test
     public void balance_ok() {
-        String newFruit = "apple";
         operationHandler = new BalanceHandler(fruitDao);
+        String newFruit = "apple";
         int expected = 158;
         operationHandler.process(newFruit, expected);
-        int actual = fruitDao.get(newFruit);
+        int actual = Storage.fruits.get(newFruit);
         assertEquals(expected, actual);
     }
 

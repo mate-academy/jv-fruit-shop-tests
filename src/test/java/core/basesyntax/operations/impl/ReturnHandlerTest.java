@@ -14,24 +14,25 @@ import org.junit.Test;
 public class ReturnHandlerTest {
     private static final String FRUIT_APPLE = "apple";
     private static FruitDao fruitsDao;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
 
     @BeforeClass
     public static void setUp() {
+        operationHandler = new ReturnHandler(fruitsDao);
         fruitsDao = new FruitDaoImpl();
     }
 
     @Before
     public void beforeEachTest() {
-        operationHandler = new ReturnHandler(fruitsDao);
         Storage.fruits.put(FRUIT_APPLE, 100);
     }
 
     @Test
     public void return_ok() {
+        operationHandler = new ReturnHandler(fruitsDao);
         operationHandler.process(FRUIT_APPLE, 20);
         int expected = 120;
-        int actual = fruitsDao.get(FRUIT_APPLE);
+        int actual = Storage.fruits.get(FRUIT_APPLE);
         assertEquals("After return 20 apples should be 120 for beginning balance 100",
                 expected, actual);
     }

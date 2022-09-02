@@ -18,10 +18,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileDataHandlerImplTest {
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_BANANA = "banana";
     private static List<String> fileData;
     private static FruitDao fruitDao;
     private static CsvFileDataHandler dataHandler;
@@ -40,8 +43,14 @@ public class CsvFileDataHandlerImplTest {
         fileData.add("type,fruit,quantity");
     }
 
+    @Before
+    public void beforeEachTest() {
+        fileData.remove(fileData.size() - 1);
+    }
+
     @Test
     public void processData_checkAllOperations_ok() {
+        fileData.add("type,fruit,quantity");
         fileData.add("b,banana,20");
         fileData.add("b,apple,100");
         fileData.add("s,banana,100");
@@ -51,26 +60,29 @@ public class CsvFileDataHandlerImplTest {
         fileData.add("p,banana,5");
         fileData.add("s,banana,50");
         dataHandler.processData(fileData);
-        assertEquals(152, fruitDao.get("banana"));
-        assertEquals(90, fruitDao.get("apple"));
-        assertEquals(2, fruitDao.getAll().size());
+        int bananaAmount = Storage.fruits.get(FRUIT_BANANA);
+        int appleAmount = Storage.fruits.get(FRUIT_APPLE);
+        assertEquals(152, bananaAmount);
+        assertEquals(90, appleAmount);
+        assertEquals(2, Storage.fruits.size());
     }
 
     @Test(expected = RuntimeException.class)
     public void processData_tooMuchPurchase_notOk() {
+        fileData.add("type,fruit,quantity");
         fileData.add("p,banana,200");
         dataHandler.processData(fileData);
     }
 
     @Test(expected = RuntimeException.class)
     public void processData_nonexistentFruitPurchase_notOk() {
+        fileData.add("type,fruit,quantity");
         fileData.add("p,strawberry,20");
         dataHandler.processData(fileData);
     }
 
     @After
     public void afterEachTest() {
-        fileData.remove(fileData.size() - 1);
         Storage.fruits.clear();
     }
 }

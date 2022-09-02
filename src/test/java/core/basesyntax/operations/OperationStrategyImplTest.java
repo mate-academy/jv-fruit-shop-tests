@@ -30,7 +30,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getStrategy_inputWrongStrategy_notOk() {
+    public void getStrategy_inputWrongStrategy_Ok() {
         OperationHandler operationHandler = operationStrategy.getOperationHandler("w");
         assertNull(operationHandler);
     }

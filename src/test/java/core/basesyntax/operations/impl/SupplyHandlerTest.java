@@ -14,21 +14,22 @@ import org.junit.Test;
 public class SupplyHandlerTest {
     private static final String FRUIT_APPLE = "apple";
     private static FruitDao fruitsDao;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
 
     @BeforeClass
     public static void setUp() {
+        operationHandler = new SupplyHandler(fruitsDao);
         fruitsDao = new FruitDaoImpl();
     }
 
     @Before
     public void beforeEachTest() {
-        operationHandler = new SupplyHandler(fruitsDao);
         Storage.fruits.put(FRUIT_APPLE, 100);
     }
 
     @Test
     public void supply_ok() {
+        operationHandler = new SupplyHandler(fruitsDao);
         operationHandler.process(FRUIT_APPLE, 50);
         int expected = 150;
         int actual = fruitsDao.get(FRUIT_APPLE);

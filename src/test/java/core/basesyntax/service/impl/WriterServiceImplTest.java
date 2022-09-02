@@ -20,8 +20,7 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeToFile_isCheck_ok() {
-        String report =
-                "fruit, quantity"
+        String report = "fruit, quantity"
                         + System.lineSeparator()
                         + "banana,152"
                         + System.lineSeparator()

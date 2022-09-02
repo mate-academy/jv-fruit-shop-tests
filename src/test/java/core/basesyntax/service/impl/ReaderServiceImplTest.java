@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReaderServiceImplTest {
-    private static final String FILE_PATH = "src/main/resources/input.csv";
+    private static final String FILE_PATH = "src/test/resources/inputTest.csv";
     private static ReaderService readerService;
 
     @Rule

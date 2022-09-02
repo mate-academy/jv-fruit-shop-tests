@@ -3,7 +3,7 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -43,7 +43,7 @@ public class PurchaseOperationTest {
     public void execute_nullIgnoringFruit_Ok() {
         Storage.stock.put(fruit, 100);
         purchaseOperation.execute(null, 10);
-        Assert.assertTrue(Storage.stock.get(null) == null);
+        Assert.assertNull(Storage.stock.get(null));
     }
 
     @Test
@@ -60,8 +60,8 @@ public class PurchaseOperationTest {
         purchaseOperation.execute(fruit, -10);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         Storage.stock.clear();
     }
 }

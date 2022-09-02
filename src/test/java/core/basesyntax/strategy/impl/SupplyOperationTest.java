@@ -3,7 +3,7 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -49,8 +49,8 @@ public class SupplyOperationTest {
         supplyOperation.execute(fruit, -10);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         Storage.stock.clear();
     }
 }

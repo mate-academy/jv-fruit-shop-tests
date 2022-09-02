@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
-    private static final String REPORT_FILEPATH = "src/main/resources/report.csv";
+    private static final String REPORT_FILEPATH = "src/test/resources/reportTest.csv";
     private static WriterService writerService;
     private static String report;
 

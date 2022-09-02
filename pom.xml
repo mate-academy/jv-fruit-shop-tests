@@ -91,8 +91,8 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/model/Fruit*</exclude>
-                        <exclude>**/model/Transaction*</exclude>
+                        <exclude>**/Fruit*</exclude>
+                        <exclude>**/Transaction*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

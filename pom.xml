@@ -91,6 +91,8 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/storage/*</exclude>
+                        <exclude>**/model/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

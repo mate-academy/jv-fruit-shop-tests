@@ -1,28 +1,17 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static String correctUrl;
-    private static String incorrectUrl;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        correctUrl = "src/test/resources/correctinput.csv";
-        incorrectUrl = "src/test/resources/nosuchfile.csv";
-    }
-
     @Test
     public void read_correctFilePath_ok() {
-        List<String> actual = new ReaderServiceImpl().read(Paths.get(correctUrl));
+        String correctUrl = "src/test/resources/ReaderServiceImpl/correctinput.csv";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -33,13 +22,15 @@ public class ReaderServiceImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        Assert.assertTrue("Data read error!" + System.lineSeparator()
+        List<String> actual = new ReaderServiceImpl().read(Paths.get(correctUrl));
+        Assert.assertEquals("Data read error!" + System.lineSeparator()
                 + "Expected: " + expected + System.lineSeparator()
-                + "Actual:  " + actual, actual.equals(expected));
+                + "Actual:  " + actual, expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void read_incorrectFilePath_notOk() {
+        String incorrectUrl = "src/test/resources/ReaderServiceImpl/nosuchfile.csv";
         Path path = Paths.get(incorrectUrl);
         new ReaderServiceImpl().read(path);
     }

@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static WriterService writerService;
-    private static final String testOutput = "src/test/resources/test_output.csv";
-    private static final String resourcesToWrite = "fruit,quantity\nbanana,100\napple,5\n";
+    private static final String TEST_OUTPUT = "src/test/resources/test_output.csv";
+    private static final String RESOURCES_TO_WRITE = "fruit,quantity\nbanana,100\napple,5\n";
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -17,21 +17,21 @@ public class WriterServiceImplTest {
     @Test
     public void write_In_NonExistenFile_Ok() {
         String file = "src/test/resources/nonExistedFile.csv";
-        writerService.writeToFile(file, resourcesToWrite);
+        writerService.writeToFile(file, RESOURCES_TO_WRITE);
     }
 
     @Test(expected = RuntimeException.class)
     public void write_in_NullableFile_NotOk() {
-        writerService.writeToFile(null, resourcesToWrite);
+        writerService.writeToFile(null, RESOURCES_TO_WRITE);
     }
 
     @Test
     public void writeToFile_Ok() {
-        writerService.writeToFile(testOutput, resourcesToWrite);
+        writerService.writeToFile(TEST_OUTPUT, RESOURCES_TO_WRITE);
     }
 
     @Test(expected = NullPointerException.class)
     public void write_Nullable_NotOk() {
-        writerService.writeToFile(testOutput, null);
+        writerService.writeToFile(TEST_OUTPUT, null);
     }
 }

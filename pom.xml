@@ -90,7 +90,15 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                            <exclude>**/Storage*</exclude>
+                            <exclude>**/Fruit*</exclude>
+                            <exclude>**/Transaction*</exclude>
+                            <exclude>**/FileReaderService*</exclude>
+                            <exclude>**/FileWriterService*</exclude>
+                            <exclude>**/ParserService*</exclude>
+                            <exclude>**/ReportService*</exclude>
+                            <exclude>**/OperationHandler*</exclude>
+                            <exclude>**/App*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

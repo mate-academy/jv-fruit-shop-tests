@@ -1,11 +1,9 @@
 package core.basesyntax.strategy;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
@@ -13,52 +11,44 @@ public class OperationStrategyTest {
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
     private static final String SUPPLY = "s";
-    private Map<String, OperationHandler> map;
-    private OperationStrategy operationStrategy;
+    private static Map<String, OperationHandler> map;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         map = new HashMap<>();
+        map.put(BALANCE, new BalanceOperationHandler());
+        map.put(PURCHASE, new PurchaseOperationHandler());
+        map.put(RETURN, new ReturnOperationHandler());
+        map.put(SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategy(map);
     }
 
     @Test
-    public void getByOperationBalance_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("b");
-        OperationHandler actualHandler = operationStrategy.getByOperation(BALANCE);
-        map.put(BALANCE, actualHandler);
-        Set<String> actual = map.keySet();
-        Assert.assertEquals(expected, actual);
+    public void getByOperation_Balance_Ok() {
+        OperationHandler expected = new BalanceOperationHandler();
+        OperationHandler actual = operationStrategy.getByOperation(BALANCE);
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void getByOperationPurchase_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("p");
-        OperationHandler actualHandler = operationStrategy.getByOperation(PURCHASE);
-        map.put(PURCHASE, actualHandler);
-        Set<String> actual = map.keySet();
-        Assert.assertEquals(expected, actual);
+    public void getByOperation_Purchase_Ok() {
+        OperationHandler expected = new PurchaseOperationHandler();
+        OperationHandler actual = operationStrategy.getByOperation(PURCHASE);
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void getByOperationReturn_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("r");
-        OperationHandler actualHandler = operationStrategy.getByOperation(RETURN);
-        map.put(RETURN, actualHandler);
-        Set<String> actual = map.keySet();
-        Assert.assertEquals(expected, actual);
+    public void getByOperation_Return_Ok() {
+        OperationHandler expected = new ReturnOperationHandler();
+        OperationHandler actual = operationStrategy.getByOperation(RETURN);
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void getByOperationSupply_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("s");
-        OperationHandler actualHandler = operationStrategy.getByOperation(SUPPLY);
-        map.put(SUPPLY, actualHandler);
-        Set<String> actual = map.keySet();
-        Assert.assertEquals(expected, actual);
+    public void getByOperation_Supply_Ok() {
+        OperationHandler expected = new SupplyOperationHandler();
+        OperationHandler actual = operationStrategy.getByOperation(SUPPLY);
+        Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 }

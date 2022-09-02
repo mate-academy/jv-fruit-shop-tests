@@ -6,21 +6,21 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private OperationHandler operationHandler;
-    private Fruit apple;
+    private static OperationHandler operationHandler;
+    private static Fruit apple;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         operationHandler = new BalanceOperationHandler();
         apple = new Fruit("apple");
     }
 
     @Test
-    public void applyBalance_OK() {
+    public void apply_Ok() {
         operationHandler.apply(new Transaction("b", apple, 14));
         Integer actual = Storage.storage.get(apple);
         Integer expected = 14;
@@ -28,15 +28,14 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void nullValue_ApplyBalance_OK() {
-        Storage.storage.put(apple, null);
+    public void apply_nullValue_Ok() {
         Integer expected = null;
         Integer actual = Storage.storage.get(apple);
         assertEquals(expected, actual);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

@@ -7,21 +7,21 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private OperationHandler operationHandler;
-    private Fruit apple;
+    private static OperationHandler operationHandler;
+    private static Fruit apple;
 
-    @Before
-    public void beforeClass() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         operationHandler = new PurchaseOperationHandler();
         apple = new Fruit("apple");
     }
 
     @Test
-    public void applyPurchase_OK() {
+    public void apply_Ok() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("p", apple, 9));
         Integer expected = 5;
@@ -30,7 +30,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void negativePurchaseValue_NotOK() {
+    public void apply_negativeValue_notOk() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("p", apple, -9));
         Integer expected = Integer.valueOf(5);
@@ -39,13 +39,13 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullPurchaseValue_NotOK() {
+    public void apply_nullValue_notOk() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("p", apple, null));
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

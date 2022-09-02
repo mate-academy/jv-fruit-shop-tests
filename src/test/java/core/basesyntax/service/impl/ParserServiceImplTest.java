@@ -1,40 +1,44 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-    private ParserService parserService;
+    private static ParserService parserService;
     private List<String> transactionsList;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         parserService = new ParserServiceImpl();
-        transactionsList = List.of("type,fruit,quantity", "b,banana,20");
     }
 
     @Test
-    public void parse_OK() {
+    public void parse_ok() {
+        transactionsList = List.of("type,fruit,quantity", "b,banana,20");
         List<Transaction> expected = new ArrayList<>();
         expected.add(new Transaction("b", new Fruit("banana"), 20));
         List<Transaction> actual = parserService.parse(transactionsList);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void emptyList_parse_OK() {
+    public void parse_emptyList_ok() {
+        List<Transaction> expected = new ArrayList<>();
         List<String> emptyList = new ArrayList<>();
-        parserService.parse(emptyList);
+        List<Transaction> actual = parserService.parse(emptyList);
+        assertEquals(expected, actual);
+
     }
 
     @Test (expected = NumberFormatException.class)
-    public void invalidNumberType_parse_NotOK() {
+    public void parse_invalidNumberType_notOk() {
         List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("s,apple,one");
@@ -42,7 +46,7 @@ public class ParserServiceImplTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullStringValue_parse_NotOK() {
+    public void parse_nullStringValue_notOk() {
         List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add(null);
@@ -50,7 +54,7 @@ public class ParserServiceImplTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void null_parse_NotOK() {
+    public void parse_null_notOk() {
         parserService.parse(null);
     }
 }

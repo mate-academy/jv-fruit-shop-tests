@@ -1,27 +1,26 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private OperationHandler operationHandler;
-    private Fruit apple;
+    private static OperationHandler operationHandler;
+    private static Fruit apple;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         operationHandler = new SupplyOperationHandler();
         apple = new Fruit("apple");
     }
 
     @Test
-    public void applySupply_OK() {
+    public void apply_Ok() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("s", apple, 13));
         Integer expected = 27;
@@ -30,22 +29,22 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void negativeSupplyValue_NotOK() {
+    public void apply_negativeValue_Ok() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("s", apple, -13));
-        Integer expected = Integer.valueOf(27);
+        Integer expected = Integer.valueOf(1);
         Integer actual = Storage.storage.get(apple);
-        assertFalse(expected.equals(actual));
+        assertEquals(expected, actual);
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullSupplyValue_NotOK() {
+    public void apply_nullValue_notOk() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("s", apple, null));
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

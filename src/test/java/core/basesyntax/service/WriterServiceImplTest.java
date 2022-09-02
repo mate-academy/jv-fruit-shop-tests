@@ -46,12 +46,6 @@ public class WriterServiceImplTest {
         Path path = Paths.get("//\\");
     }
 
-    @Test(expected = RuntimeException.class)
-    public void write_emptyFilePath_notOk() {
-        Path path = Paths.get("");
-        writerService.write(path, "123");
-    }
-
     private static List<String> readFile(String url) {
         Path correctUrlPath = Paths.get(url);
         try {

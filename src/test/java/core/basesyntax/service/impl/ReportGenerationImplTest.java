@@ -14,7 +14,7 @@ public class ReportGenerationImplTest {
     private StringBuilder testReport;
 
     @Before
-    public void sutup() {
+    public void sutUp() {
         map = new HashMap<>();
         map.put(new Fruit("banana"), 132);
         map.put(new Fruit("apple"), 90);

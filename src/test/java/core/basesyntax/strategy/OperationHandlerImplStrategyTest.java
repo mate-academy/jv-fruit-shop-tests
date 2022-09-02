@@ -18,7 +18,6 @@ public class OperationHandlerImplStrategyTest {
     private OperationHandlerImplSupply operationHandlerImplSupply;
     private Map<String, OperationHandler> operationHandlerMap;
     private OperationHandlerImplStrategy operationHandlerImplStrategy;
-    private OperationHandler actualHandler;
 
     @Before
     public void setUp() {
@@ -29,7 +28,6 @@ public class OperationHandlerImplStrategyTest {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new OperationHandlerImplBalance());
         operationHandlerImplStrategy = new OperationHandlerImplStrategy(operationHandlerMap);
-        actualHandler = operationHandlerImplStrategy.get("b");
     }
 
     @Test
@@ -58,6 +56,7 @@ public class OperationHandlerImplStrategyTest {
 
     @Test
     public void testStrategy_Ok() {
+        OperationHandler actualHandler = operationHandlerImplStrategy.get("b");
         int actual = actualHandler.apply(5,5);
         Assert.assertEquals(10, actual);
     }

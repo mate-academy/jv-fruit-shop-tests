@@ -11,13 +11,20 @@ public class FileReaderImplTest {
     private static final String FILE_EXIST = "src/main/resourses/input.csv";
     private static final String FILE_NOT_EXIST = "src/main/resourses/input_fake_file.csv";
     private FileReader fileReaderTest;
-    private List<String> expectedList;
-    private List<String> actualList;
 
     @Before
     public void setUp() {
         fileReaderTest = new FileReaderImpl();
-        expectedList = new ArrayList<>();
+    }
+
+    @Test
+    public void readWrongFile_Not_Ok() {
+        fileReaderTest.readFromFile(FILE_NOT_EXIST);
+    }
+
+    @Test
+    public void readFile_Ok() {
+        List<String> expectedList = new ArrayList<>();
         expectedList.add("type,fruit,quantity");
         expectedList.add("b,banana,20");
         expectedList.add("b,apple,100");
@@ -27,17 +34,7 @@ public class FileReaderImplTest {
         expectedList.add("p,apple,20");
         expectedList.add("p,banana,5");
         expectedList.add("s,banana,50");
-        actualList = new ArrayList<>();
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void readWrongFile_Not_Ok() {
-        fileReaderTest.readFromFile(FILE_NOT_EXIST);
-    }
-
-    @Test
-    public void readFile_Ok() {
-        actualList = fileReaderTest.readFromFile(FILE_EXIST);
+        List<String> actualList = fileReaderTest.readFromFile(FILE_EXIST);
         Assert.assertEquals(expectedList, actualList);
     }
 }

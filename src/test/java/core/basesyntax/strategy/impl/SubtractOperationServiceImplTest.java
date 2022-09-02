@@ -10,9 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SubtractOperationServiceImplTest {
-
+    private SubtractOperationServiceImpl subtractOperationService;
     @Before
     public void setUp() throws Exception {
+        subtractOperationService = new SubtractOperationServiceImpl();
         Storage.clear();
         Storage.add(new Fruit("apple"), 20);
         Storage.add(new Fruit("banana"), 30);
@@ -21,7 +22,6 @@ public class SubtractOperationServiceImplTest {
 
     @Test
     public void subtractOperationServiceImpl_addOperationTest_Ok() {
-        SubtractOperationServiceImpl subtractOperationService = new SubtractOperationServiceImpl();
         subtractOperationService.interact(new Transaction(new Fruit("apple"), 20, "p"));
         int expected = 0;
         int actual = Storage.get(new Fruit("apple"));
@@ -30,7 +30,6 @@ public class SubtractOperationServiceImplTest {
 
     @Test(expected = NoSuchElementException.class)
     public void subtractOperationServiceImpl_addFruitDoesNotExistTest_Ok() {
-        SubtractOperationServiceImpl subtractOperationService = new SubtractOperationServiceImpl();
         subtractOperationService.interact(new Transaction(new Fruit("peach"), 20, "p"));
     }
 }

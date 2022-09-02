@@ -4,18 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        ParserService parserService = new ParserServiceImpl();
-    }
 
     @Test
     public void parser_validParseTest_Ok() {
@@ -30,5 +23,4 @@ public class ParserServiceImplTest {
         List<Transaction> actual = new ParserServiceImpl().parse(data);
         assertEquals(expected, actual);
     }
-
 }

@@ -16,7 +16,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void fileWriterServiceImpl_writeToValidFile_Ok() {
-        new FileWriterServiceImpl().writeToFile(DATA,VALID_FILE_NAME);
+        new FileWriterServiceImpl().writeToFile(DATA, VALID_FILE_NAME);
         assertEquals(DATA,
                 readFromFile(VALID_FILE_NAME));
     }
@@ -33,5 +33,4 @@ public class FileWriterServiceImplTest {
             throw new RuntimeException("Can't correctly read data from file " + fileName, e);
         }
     }
-
 }

@@ -9,9 +9,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AddOperationServiceImplTest {
+    private AddOperationServiceImpl addOperationService;
 
     @Before
     public void setUp() throws Exception {
+        addOperationService = new AddOperationServiceImpl();
         Storage.clear();
         Storage.add(new Fruit("apple"), 20);
         Storage.add(new Fruit("banana"), 30);
@@ -20,7 +22,6 @@ public class AddOperationServiceImplTest {
 
     @Test
     public void addOperationServiceImpl_addOperationTest_Ok() {
-        AddOperationServiceImpl addOperationService = new AddOperationServiceImpl();
         addOperationService.interact(new Transaction(new Fruit("apple"), 20, "s"));
         int expected = 40;
         int actual = Storage.get(new Fruit("apple"));
@@ -29,7 +30,6 @@ public class AddOperationServiceImplTest {
 
     @Test
     public void addOperationServiceImpl_addFruitDoesNotExistTest_Ok() {
-        AddOperationServiceImpl addOperationService = new AddOperationServiceImpl();
         addOperationService.interact(new Transaction(new Fruit("peach"), 50, "s"));
         int expected = 50;
         int actual = Storage.get(new Fruit("peach"));

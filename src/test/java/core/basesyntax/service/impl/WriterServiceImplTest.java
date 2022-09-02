@@ -34,7 +34,9 @@ public class WriterServiceImplTest {
         expected.add("HalfLive 3");
         expected.add("Data 4");
         List<String> actual = readeFromFile(REPORT_FILE_CSV);
-        assertEquals(expected, actual);
+        assertEquals("expected another length",
+                expected.size(),
+                actual.size());
     }
 
     @Test
@@ -42,7 +44,9 @@ public class WriterServiceImplTest {
         writerService.writeToFile(REPORT_FILE_CSV, "");
         List<String> actual = readeFromFile(REPORT_FILE_CSV);
         List<String> expected = new ArrayList<>();
-        assertEquals(expected, actual);
+        assertEquals("expected another length",
+                expected.size(),
+                actual.size());
     }
 
     @Test (expected = RuntimeException.class)

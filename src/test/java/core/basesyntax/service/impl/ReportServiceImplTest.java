@@ -6,6 +6,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -39,6 +40,13 @@ public class ReportServiceImplTest {
     public void convertEmptyStorageToString_ok() {
         String actual = reportService.getReport();
         String expected = "fruit,quantity" + System.lineSeparator();
-        assertEquals(expected, actual);
+        assertEquals("expected another String",
+                expected,
+                actual);
+    }
+
+    @AfterClass
+    public static void clean() {
+        Storage.storage.clear();
     }
 }

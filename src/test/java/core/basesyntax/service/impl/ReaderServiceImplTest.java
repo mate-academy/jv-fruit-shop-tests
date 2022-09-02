@@ -29,7 +29,9 @@ public class ReaderServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expected, actual);
+        assertEquals("expected another length",
+                expected.size(),
+                actual.size());
     }
 
     @Test (expected = RuntimeException.class)
@@ -51,6 +53,8 @@ public class ReaderServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(expected, actual);
+        assertEquals("expected another length",
+                expected.size(),
+                actual.size());
     }
 }

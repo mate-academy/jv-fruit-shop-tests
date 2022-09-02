@@ -14,7 +14,7 @@ public class ReturnOperationHandlerTest {
 
     @BeforeClass
     public static void setUp() {
-        returnOperation = new BalanceOperationHandler();
+        returnOperation = new ReturnOperationHandler();
     }
 
     @After
@@ -34,5 +34,10 @@ public class ReturnOperationHandlerTest {
     @Test (expected = NullPointerException.class)
     public void returnNullTransaction_notOk() {
         returnOperation.apply(null);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void supplyNullAmount_notOk() {
+        returnOperation.apply(new Transaction("b", new Fruit("banana"), null));
     }
 }

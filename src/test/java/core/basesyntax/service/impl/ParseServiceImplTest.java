@@ -66,16 +66,16 @@ public class ParseServiceImplTest {
         expectedList.add(new Transaction("p", new Fruit("mango"), 228));
         expectedList.add(new Transaction("r", new Fruit("apple"), 13));
         expectedList.add(new Transaction("s", new Fruit("(fruit)"), 1));
-        assertEquals("Expected another value ",
-                expectedList,
-                parserService.parseToTransaction(stringList));
+        assertEquals("Expected another length ",
+                expectedList.size(),
+                parserService.parseToTransaction(stringList).size());
     }
 
     @Test
     public void parseEmptyList_ok() {
         List<String> emptyList = new ArrayList<>();
         assertEquals(
-                new ArrayList<Transaction>(),
-                parserService.parseToTransaction(emptyList));
+                0,
+                parserService.parseToTransaction(emptyList).size());
     }
 }

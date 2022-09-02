@@ -1,15 +1,16 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,26 +48,21 @@ public class CsvFileWriterServiceTest {
 
     @Test
     public void writeReport_ok() {
-        File actual = new File(FOLDER, "writerTestActualOutput.csv");
-        File expected = new File(FOLDER, "writerTestExpectedOutput.csv");
-        csvFileWriterService.writeReport(actual, report);
-        assertTrue("Files are different", filesCompareByLine(actual.toPath(), expected.toPath()));
+        File outputFile = new File(FOLDER, "writerTestActualOutput.csv");
+        csvFileWriterService.writeReport(outputFile, report);
+        assertEquals("Files are different", report, readFile(outputFile));
     }
 
-    private static boolean filesCompareByLine(Path firstFile, Path secondFile) {
-        try (BufferedReader firstBufferedReader = Files.newBufferedReader(firstFile);
-                BufferedReader secondBufferedReader = Files.newBufferedReader(secondFile)) {
-            String lineFirstFile;
-            String lineSecondFile;
-            while ((lineFirstFile = firstBufferedReader.readLine()) != null
-                    && (lineSecondFile = secondBufferedReader.readLine()) != null) {
-                if (!lineFirstFile.equals(lineSecondFile)) {
-                    return false;
-                }
-            }
+    private static List<String> readFile(File file) {
+        List<String> list;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            list = bufferedReader.lines()
+                    .collect(Collectors.toList());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File " + file.getName() + " does not exist.", e);
         } catch (IOException e) {
-            throw new RuntimeException("Can not read file " + firstFile + " " + secondFile, e);
+            throw new RuntimeException("Could not read from file " + file.getName(), e);
         }
-        return true;
+        return list;
     }
 }

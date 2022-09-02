@@ -31,7 +31,7 @@ public class WriterServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    public List<String> readFromFile(String fileName) {
+    private List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {

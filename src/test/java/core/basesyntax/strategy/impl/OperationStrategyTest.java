@@ -6,6 +6,8 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,5 +83,10 @@ public class OperationStrategyTest {
         Integer expected = 100;
         Integer actual = Storage.storage.get(new Fruit(fruitName));
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

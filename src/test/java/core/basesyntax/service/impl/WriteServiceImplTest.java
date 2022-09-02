@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
-    private static final String FOLDER = "src/test/resources";
     private WriteServiceImpl writeService;
     private String fileName;
 

@@ -19,7 +19,7 @@ public class BalanceOperationHandlerTester {
     }
 
     @Test
-    public void balance_operation_fruit_absent_OK(){
+    public void balance_operation_fruit_absent_OK() {
         Transaction transaction = new Transaction("b", new Fruit("banana"), 20);
         handler.apply(transaction);
         Integer expected = 20;
@@ -29,7 +29,7 @@ public class BalanceOperationHandlerTester {
     }
 
     @Test
-    public void balance_operation_fruit_present_OK(){
+    public void balance_operation_fruit_present_OK() {
         fruitStorage.put(new Fruit("banana"), 30);
         Transaction transaction = new Transaction("b", new Fruit("banana"), 50);
         handler.apply(transaction);
@@ -38,8 +38,9 @@ public class BalanceOperationHandlerTester {
         Assert.assertEquals(expected, actual);
 
     }
+
     @Test
-    public void balance_operation_fruit_present_balanceZero_OK(){
+    public void balance_operation_fruit_present_balanceZero_OK() {
         fruitStorage.put(new Fruit("apple"), 40);
         Transaction transaction = new Transaction("b", new Fruit("apple"), 0);
         handler.apply(transaction);

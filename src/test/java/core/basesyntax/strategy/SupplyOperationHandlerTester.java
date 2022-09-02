@@ -19,7 +19,7 @@ public class SupplyOperationHandlerTester {
     }
 
     @Test
-    public void supply_operation_fruit_absent_OK(){
+    public void supply_operation_fruit_absent_OK() {
         Transaction transaction = new Transaction("s", new Fruit("banana"), 20);
         handler.apply(transaction);
         Integer expected = 20;
@@ -29,17 +29,17 @@ public class SupplyOperationHandlerTester {
     }
 
     @Test
-    public void supply_operation_fruit_present_OK(){
+    public void supply_operation_fruit_present_OK() {
         fruitStorage.put(new Fruit("banana"), 30);
         Transaction transaction = new Transaction("s", new Fruit("banana"), 50);
         handler.apply(transaction);
         Integer expected = 80;
         Integer actual = fruitStorage.get(new Fruit("banana"));
         Assert.assertEquals(expected, actual);
-
     }
+
     @Test
-    public void supply_zero_operation_fruit_present_OK(){
+    public void supply_zero_operation_fruit_present_OK() {
         fruitStorage.put(new Fruit("apple"), 40);
         Transaction transaction = new Transaction("r", new Fruit("apple"), 0);
         handler.apply(transaction);

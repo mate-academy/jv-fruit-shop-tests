@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-
 import java.util.NoSuchElementException;
 
 public class PurchaseOperationHandler implements OperationHandler {

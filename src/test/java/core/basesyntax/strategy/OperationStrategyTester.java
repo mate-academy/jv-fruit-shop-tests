@@ -1,12 +1,11 @@
 package core.basesyntax.strategy;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.util.HashMap;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
+
+import java.util.HashMap;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class OperationStrategyTester {
     private static OperationStrategy strategy;
@@ -22,26 +21,26 @@ public class OperationStrategyTester {
     }
 
     @Test
-    public void strategy_returns_balance_operation_handler_OK () {
-        OperationHandler subClass =  strategy.getByOperation("b");
+    public void strategy_returns_balance_operation_handler_OK() {
+        OperationHandler subClass = strategy.getByOperation("b");
         assertThat(subClass, instanceOf(BalanceOperationHandler.class));
     }
 
     @Test
-    public void strategy_returns_purchase_operation_handler_OK () {
-        OperationHandler subClass =  strategy.getByOperation("p");
+    public void strategy_returns_purchase_operation_handler_OK() {
+        OperationHandler subClass = strategy.getByOperation("p");
         assertThat(subClass, instanceOf(PurchaseOperationHandler.class));
     }
 
     @Test
-    public void strategy_returns_return_operation_handler_OK () {
-        OperationHandler subClass =  strategy.getByOperation("r");
+    public void strategy_returns_return_operation_handler_OK() {
+        OperationHandler subClass = strategy.getByOperation("r");
         assertThat(subClass, instanceOf(ReturnOperationHandler.class));
     }
 
     @Test
-    public void strategy_returns_supply_operation_handler_OK () {
-        OperationHandler subClass =  strategy.getByOperation("s");
+    public void strategy_returns_supply_operation_handler_OK() {
+        OperationHandler subClass = strategy.getByOperation("s");
         assertThat(subClass, instanceOf(SupplyOperationHandler.class));
     }
 }

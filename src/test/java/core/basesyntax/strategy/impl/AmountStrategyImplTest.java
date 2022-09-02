@@ -1,20 +1,15 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.AmountHandler;
 import core.basesyntax.strategy.AmountStrategy;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AmountStrategyImplTest {
     private static AmountStrategy strategy;
-    private static AmountHandler amountHandler;
-    private static final Fruit TEST_FRUIT = new Fruit("carrot", 25);
     private static final String OPERATION_BALANCE = "b";
     private static final String OPERATION_PURCHASE = "p";
     private static final String OPERATION_RETURN = "r";
@@ -44,10 +39,5 @@ public class AmountStrategyImplTest {
         actual = strategy.get(OPERATION_SUPPLY).getClass();
         expected = SupplyAmountHandler.class;
         Assert.assertEquals(expected, actual);
-    }
-
-    @After
-    public void tearDown() {
-        Storage.fruits.clear();
     }
 }

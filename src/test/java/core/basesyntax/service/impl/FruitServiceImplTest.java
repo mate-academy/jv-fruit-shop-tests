@@ -71,8 +71,7 @@ public class FruitServiceImplTest {
         int expectedStorageSize = 2;
         int actualStorageSize = Storage.fruits.size();
         Assert.assertEquals(expectedStorageSize, actualStorageSize);
-        Fruit actualFruit = Storage.fruits.get(0);
-        Assert.assertEquals(EXPECTED_TEST_FRUIT, actualFruit);
+        Assert.assertTrue(Storage.fruits.contains(EXPECTED_TEST_FRUIT));
     }
 
     @After

@@ -20,7 +20,7 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void writeToFileOk() throws IOException {
+    public void writeToFileOk() {
         writeService.writeToFile(FILE_PATH, TEST_DATA);
         List<String> actual = readFromFileInTest();
         Assert.assertEquals(EXPECTED_DATA, actual);

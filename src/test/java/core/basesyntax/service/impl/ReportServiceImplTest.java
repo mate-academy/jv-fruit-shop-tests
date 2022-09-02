@@ -12,7 +12,7 @@ public class ReportServiceImplTest {
     private HashMap<Fruit, Integer> fruitsDataMap;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         reportService = new ReportServiceImpl();
         fruitsDataMap = new HashMap<>();
         fruitsDataMap.put(new Fruit("banana"), 88);

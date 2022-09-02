@@ -10,11 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static OperationHandler purchaseOperationHandler;
+    private static OperationHandler purchase;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        purchaseOperationHandler = new PurchaseOperationHandler();
+        purchase = new PurchaseOperationHandler();
     }
 
     @Test
@@ -23,13 +23,13 @@ public class PurchaseOperationHandlerTest {
         Transaction transaction = new Transaction(Transaction.Operation.PURCHASE,
                 new Fruit("apple"), 5);
         Integer expected = 5;
-        purchaseOperationHandler.apply(transaction);
+        purchase.apply(transaction);
         assertEquals(expected, Storage.getFruitsMap().get(new Fruit("apple")));
     }
 
     @Test(expected = RuntimeException.class)
     public void balanceOperationIsLessThanQuantity_NotOk() {
-        purchaseOperationHandler.apply(null);
+        purchase.apply(null);
     }
 
     @AfterClass

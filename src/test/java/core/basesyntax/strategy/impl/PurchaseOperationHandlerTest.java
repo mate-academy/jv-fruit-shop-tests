@@ -28,7 +28,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperationHandler_equalsApply_notOk() {
+    public void purchaseOperationHandler_moreThanInStock_notOk() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
         Transaction balanceOperation = new Transaction("b", banana, 20);

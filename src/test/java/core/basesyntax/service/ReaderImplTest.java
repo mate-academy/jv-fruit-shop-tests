@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,10 +17,6 @@ public class ReaderImplTest {
     @BeforeClass
     public static void beforeClass() {
         reader = new ReaderImpl();
-    }
-
-    @Before
-    public void setUp() {
         try {
             Files.write(Path.of(PATH), MESSAGE.getBytes());
         } catch (IOException e) {
@@ -31,7 +26,7 @@ public class ReaderImplTest {
 
     @Test
     public void reader_readDataFromFile_Ok() {
-        List<String> information = new ReaderImpl().read(PATH);
+        List<String> information = reader.read(PATH);
         Assert.assertEquals(MESSAGE, information.get(0));
     }
 

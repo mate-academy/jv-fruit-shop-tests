@@ -26,9 +26,7 @@ public class Main {
         strategyMap.put("p", new PurchaseOperationHandler());
         strategyMap.put("r", new ReturnOperationHandler());
         strategyMap.put("s", new SupplyOperationHandler());
-
         OperationStrategy operationStrategy = new OperationStrategy(strategyMap);
-
         List<Transaction> transactions = new ParserServiceImpl()
                 .parseToTransaction(new ReaderServiceImpl()
                         .readFromFile(INPUT_FILE));

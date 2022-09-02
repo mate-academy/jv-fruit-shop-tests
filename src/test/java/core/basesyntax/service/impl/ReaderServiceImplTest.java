@@ -32,6 +32,16 @@ public class ReaderServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test (expected = RuntimeException.class)
+    public void incorrectFileName_notOk() {
+       readerService.readFromFile("");
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void nullFileName_notOk() {
+        readerService.readFromFile(null);
+    }
+
     @Test
     public void readFile_ok() {
         List<String> actual = readerService.readFromFile(INPUT_FILE_CSV);

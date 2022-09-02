@@ -24,15 +24,13 @@ public class ParserServiceImplTest {
     private static ParserServiceImpl parserService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         lines = new ArrayList<>();
-
         handlerMap = new HashMap<>();
         handlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         handlerMap.put(Operation.RETURN, new ReturnOperationHandler());
         handlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
         handlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
-
         parserService = new ParserServiceImpl();
     }
 

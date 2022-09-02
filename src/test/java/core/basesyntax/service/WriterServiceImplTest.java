@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String FILE_PATH = "src/test/resources/writeTestFile.csv";
     private static final String DEFAULT_TEXT = "testtext";
-    private static WriterService writerService;
+    private WriterService writerService;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         writerService = new WriterServiceImpl();
     }
 
@@ -24,12 +24,8 @@ public class WriterServiceImplTest {
     public void writerService_writeToFile_OK() {
         writerService.writeToFile(FILE_PATH, DEFAULT_TEXT);
         List<String> actual = List.of(DEFAULT_TEXT);
-        try {
-            List<String> expected = Files.readAllLines(Path.of(FILE_PATH));
-            assertEquals(expected, actual);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + FILE_PATH, e);
-        }
+        List<String> expected = readFromFile(FILE_PATH);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -40,5 +36,13 @@ public class WriterServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void writerService_writeNullText_NotOK() {
         writerService.writeToFile(FILE_PATH, null);
+    }
+
+    private List<String> readFromFile(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read from file " + FILE_PATH, e);
+        }
     }
 }

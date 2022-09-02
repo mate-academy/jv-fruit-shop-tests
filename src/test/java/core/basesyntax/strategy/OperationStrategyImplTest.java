@@ -12,15 +12,16 @@ import core.basesyntax.strategy.handlers.ReturnOperationHandler;
 import core.basesyntax.strategy.handlers.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static Storage storage;
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private Storage storage;
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private OperationStrategy operationStrategy;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         storage = new StorageImpl();
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -31,11 +32,12 @@ public class OperationStrategyImplTest {
                 new PurchaseOperationHandler(storage));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler(storage));
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
     @Test
     public void operationStrategy_getBalanceOperation_OK() {
-        Class actual = new OperationStrategyImpl(operationHandlerMap)
+        Class actual = operationStrategy
                 .getByOperation(FruitTransaction.Operation.BALANCE).getClass();
         Class expected = BalanceOperationHandler.class;
         assertEquals(expected, actual);
@@ -43,7 +45,7 @@ public class OperationStrategyImplTest {
 
     @Test
     public void operationStrategy_getPurchaseOperation_OK() {
-        Class actual = new OperationStrategyImpl(operationHandlerMap)
+        Class actual = operationStrategy
                 .getByOperation(FruitTransaction.Operation.PURCHASE).getClass();
         Class expected = PurchaseOperationHandler.class;
         assertEquals(expected, actual);
@@ -51,7 +53,7 @@ public class OperationStrategyImplTest {
 
     @Test
     public void operationStrategy_getReturnOperation_OK() {
-        Class actual = new OperationStrategyImpl(operationHandlerMap)
+        Class actual = operationStrategy
                 .getByOperation(FruitTransaction.Operation.RETURN).getClass();
         Class expected = ReturnOperationHandler.class;
         assertEquals(expected, actual);
@@ -59,7 +61,7 @@ public class OperationStrategyImplTest {
 
     @Test
     public void operationStrategy_getSupplyOperation_OK() {
-        Class actual = new OperationStrategyImpl(operationHandlerMap)
+        Class actual = operationStrategy
                 .getByOperation(FruitTransaction.Operation.SUPPLY).getClass();
         Class expected = SupplyOperationHandler.class;
         assertEquals(expected, actual);

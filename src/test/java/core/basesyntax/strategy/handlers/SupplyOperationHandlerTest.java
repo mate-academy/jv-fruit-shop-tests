@@ -9,22 +9,22 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static Storage storage;
-    private static SupplyOperationHandler supplyOperationHandler;
+    private Storage storage;
+    private SupplyOperationHandler supplyOperationHandler;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void setUp() {
         storage = new StorageImpl();
-        storage.add(new Fruit("banana"), 100);
         supplyOperationHandler = new SupplyOperationHandler(storage);
     }
 
     @Test
     public void supplyOperationHandler_applySupplyOperation_OK() {
+        storage.add(new Fruit("banana"), 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "banana", 50);
         supplyOperationHandler.applyOperation(fruitTransaction);

@@ -6,7 +6,7 @@ import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
@@ -18,8 +18,8 @@ public class WriterServiceImplTest {
         return "fruit,quantity,banana,1,apple,1";
     }
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         writerService = new WriterServiceImpl();
     }
 
@@ -39,12 +39,7 @@ public class WriterServiceImplTest {
     @Test
     public void create_emptyFile_isOk() {
         writerService.writeToFile("", EMPTY_FILE_NAME);
-        String actual;
-        try {
-            actual = Files.readString(Path.of(EMPTY_FILE_NAME));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file " + EMPTY_FILE_NAME);
-        }
+        String actual = readFromFile();
         assertEquals("Invalid data", "", actual);
     }
 
@@ -56,5 +51,15 @@ public class WriterServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void writeToFile_reportIsNull_isNotOk() {
         writerService.writeToFile(TEST_FILE_NAME, null);
+    }
+
+    private String readFromFile() {
+        String lines;
+        try {
+            lines = Files.readString(Path.of(EMPTY_FILE_NAME));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't get data from file " + EMPTY_FILE_NAME);
+        }
+        return lines;
     }
 }

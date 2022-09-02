@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
@@ -18,8 +18,8 @@ public class ReaderServiceImplTest {
     private static ReaderService readerService;
     private static List<String> lines;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         readerService = new ReaderServiceImpl();
         lines = new ArrayList<>();
     }

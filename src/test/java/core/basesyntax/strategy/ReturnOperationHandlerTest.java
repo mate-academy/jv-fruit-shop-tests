@@ -25,13 +25,6 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void applyReturnOperationHandler_getFruitBanana_isOk() {
-        Fruit expected = new Fruit("banana");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void applyReturnOperationHandler_currentQuantity0_isOk() {
         Storage.storage.put(new Fruit("apple"), 0);
         Integer expected = 0;

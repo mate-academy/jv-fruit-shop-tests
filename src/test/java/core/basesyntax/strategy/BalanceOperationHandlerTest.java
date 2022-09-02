@@ -25,13 +25,6 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void applyBalanceOperationHandler_getFruitBanana_isOk() {
-        Fruit expected = new Fruit("banana");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void applyBalanceOperationHandler_currentQuantity0_isOk() {
         Storage.storage.put(new Fruit("banana"),0);
         Integer expected = 0;

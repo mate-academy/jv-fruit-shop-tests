@@ -6,21 +6,21 @@ import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ParserImplTest {
     private static Parser parserService;
     private static List<String> parserList;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         parserService = new ParserImpl();
         parserList = List.of("type,fruit,quantity", "p,banana,10");
     }
 
     @Test
-    public void parseMethod_isOk() {
+    public void parseMethod_validData_isOk() {
         List<Transaction> expected = new ArrayList<>();
         expected.add(new Transaction("p", new Fruit("banana"), 10));
         List<Transaction> actual = parserService.parse(parserList);

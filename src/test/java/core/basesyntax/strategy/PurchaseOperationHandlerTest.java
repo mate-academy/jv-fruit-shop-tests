@@ -25,14 +25,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void applyPurchaseOperationHandler_getFruitBanana_isOk() {
-        Fruit expected = new Fruit("banana");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyReturnOperationHandler_banana25_isOk() {
+    public void applyPurchaseOperationHandler_banana25_isOk() {
         Storage.storage.put(new Fruit("banana"), 10);
         transaction.setQuantity(5);
         operationHandler.apply(transaction);

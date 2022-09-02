@@ -27,7 +27,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void getBalanceFromNullebleFruit_Ok() {
+    public void getBalanceFromNullFruit_Ok() {
         FruitTransaction emptyFruit = new FruitTransaction("b", null, 5);
         Integer expected = 5;
         balanceOperation.apply(emptyFruit);
@@ -36,7 +36,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void apply_Null_NotOk() {
+    public void apply_NullObject_NotOk() {
         balanceOperation.apply(null);
     }
 }

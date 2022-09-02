@@ -34,7 +34,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void apply_Null_NotOk() {
+    public void apply_NullObject_NotOk() {
         returnOperation.apply(null);
     }
 

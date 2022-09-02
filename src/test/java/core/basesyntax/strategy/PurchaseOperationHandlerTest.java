@@ -34,7 +34,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void apply_Null_NotOk() {
+    public void apply_NullObject_NotOk() {
         purchaseOperation.apply(null);
     }
 

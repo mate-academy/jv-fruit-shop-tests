@@ -14,19 +14,13 @@ public class WriterServiceImplTest {
         writerService = new WriterServiceImpl();
     }
 
-    @Test
-    public void write_In_NonExistenFile_Ok() {
-        String file = "src/test/resources/nonExistedFile.csv";
-        writerService.writeToFile(file, RESOURCES_TO_WRITE);
-    }
-
     @Test(expected = RuntimeException.class)
     public void write_in_NullableFile_NotOk() {
         writerService.writeToFile(null, RESOURCES_TO_WRITE);
     }
 
     @Test
-    public void writeToFile_Ok() {
+    public void write_CorrectData_Ok() {
         writerService.writeToFile(TEST_OUTPUT, RESOURCES_TO_WRITE);
     }
 

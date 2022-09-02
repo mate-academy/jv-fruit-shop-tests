@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreatReportService;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,16 +17,11 @@ public class CreatReportServiceImplTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_validData_Ok() {
         String expected = "fruit,quantity\nbanana,15\napple,100\n";
         Storage.storage.put(new Fruit("apple"), 100);
         Storage.storage.put(new Fruit("banana"), 15);
         String actual = creatReportService.createReport();
         assertEquals(expected, actual);
-    }
-
-    @AfterClass
-    public static void tearDown() {
-        Storage.storage.clear();
     }
 }

@@ -36,7 +36,7 @@ public class ReturnOperationTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handleReturnCheck_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 75);

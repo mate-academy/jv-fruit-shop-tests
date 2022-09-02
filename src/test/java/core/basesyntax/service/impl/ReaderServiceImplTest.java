@@ -12,8 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String FILE_NAME = "src/test/resources/result.csv";
-    private static final List<String> DEFAULT_DATA_FROM_FILE = List.of("b,banana,20",
+    private static String filePath;
+    private static ReaderService readerService;
+
+    private final List<String> defaultDataFromFile = List.of("b,banana,20",
             "b,apple,100",
             "s,banana,100",
             "p,banana,13",
@@ -21,7 +23,7 @@ public class ReaderServiceImplTest {
             "p,apple,20",
             "p,banana,5",
             "s,banana,50");
-    private static final String DEFAULT_DATA =
+    private final String defaultData =
               "b,banana,20" + System.lineSeparator()
             + "b,apple,100" + System.lineSeparator()
             + "s,banana,100" + System.lineSeparator()
@@ -30,10 +32,10 @@ public class ReaderServiceImplTest {
             + "p,apple,20" + System.lineSeparator()
             + "p,banana,5" + System.lineSeparator()
             + "s,banana,50";
-    private static ReaderService readerService;
 
     @BeforeClass
     public static void beforeClass() {
+        filePath = "src/test/resources/result.csv";
         readerService = new ReaderServiceImpl();
     }
 
@@ -43,26 +45,26 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readerService_equalsReadDataFromFile_Ok() {
-        List<String> actual = readerService.readFromFile(FILE_NAME);
-        assertEquals(DEFAULT_DATA_FROM_FILE, actual);
+    public void readerService_equalsReadDataFromFile_ok() {
+        List<String> actual = readerService.readFromFile(filePath);
+        assertEquals(defaultDataFromFile, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readerService_wrongFileName_NotOk() {
+    public void readerService_wrongFileName_notOk() {
         readerService.readFromFile("randomFile");
     }
 
     @Test(expected = RuntimeException.class)
-    public void readerService_nullFileName_NotOk() {
+    public void readerService_nullFileName_notOk() {
         readerService.readFromFile(null);
     }
 
     private void writeDefaultDataToFile() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            bufferedWriter.write(DEFAULT_DATA);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
+            bufferedWriter.write(defaultData);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file " + FILE_NAME, e);
+            throw new RuntimeException("Can`t write data to file " + filePath, e);
         }
     }
 }

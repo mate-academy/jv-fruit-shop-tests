@@ -20,14 +20,6 @@ public class ParserServiceImplTest {
         transactionParserService = new ParserServiceImpl();
     }
 
-    @Test (expected = RuntimeException.class)
-    public void parse_invalidDataSheet_notOk() {
-        List<String> list = Arrays.asList("type,fruit,sum",
-                "type,fruit,sum",
-                "type,fruit,sum");
-        transactionParserService.parse(list);
-    }
-
     @Test
     public void parse_validDataSheet_ok() {
         Transaction transaction = new Transaction();

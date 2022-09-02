@@ -4,17 +4,30 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    @Test
-    public void supplyOperationHandler_putValidData_ok() {
+    private static SupplyOperationHandler supplyOperationHandler;
+
+    @BeforeClass
+    public static void beforeClass() {
+        supplyOperationHandler = new SupplyOperationHandler();
+    }
+
+    @Before
+    public void setUp() {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
         new BalanceOperationHandler().apply(balanceTransaction);
+    }
+
+    @Test
+    public void supplyOperationHandler_putValidData_ok() {
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20);
-        new SupplyOperationHandler().apply(supplyTransaction);
+        supplyOperationHandler.apply(supplyTransaction);
         Integer expected = 220;
         Integer actual = Storage.storage.get(supplyTransaction.getFruit());
         Assert.assertEquals(expected, actual);
@@ -22,12 +35,9 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void supplyOperationHandler_zeroQuantity_ok() {
-        FruitTransaction balanceTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 200);
-        new BalanceOperationHandler().apply(balanceTransaction);
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 0);
-        new SupplyOperationHandler().apply(supplyTransaction);
+        supplyOperationHandler.apply(supplyTransaction);
         Integer expected = 200;
         Integer actual = Storage.storage.get(supplyTransaction.getFruit());
         Assert.assertEquals(expected, actual);

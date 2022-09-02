@@ -12,38 +12,41 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private Map<FruitTransaction.Operation, OperationHandler> operations;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() {
-        operations = new HashMap<>();
+    @BeforeClass
+    public static void beforeClass() {
+        Map<FruitTransaction.Operation, OperationHandler> operations = new HashMap<>();
         operations.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operations.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         operations.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operations.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operationStrategy = new OperationStrategy(operations);
+    }
+
+    @Before
+    public void setUp() {
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "apple", 200);
+        operationStrategy.process(transaction);
     }
 
     @Test
     public void strategy_balanceOperationStrategy_ok() {
-        FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 200);
-        new OperationStrategy(operations).process(transaction);
-        Integer expected = transaction.getQuantity();
+        Integer expected = 200;
         Integer actual = Storage.storage.get("apple");
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void strategy_supplyOperationStrategy_ok() {
-        FruitTransaction balance = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 200);
-        new OperationStrategy(operations).process(balance);
         FruitTransaction supply = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "apple", 20);
-        new OperationStrategy(operations).process(supply);
+        operationStrategy.process(supply);
         Integer expected = 220;
         Integer actual = Storage.storage.get("apple");
         Assert.assertEquals(expected, actual);
@@ -51,12 +54,9 @@ public class OperationStrategyTest {
 
     @Test
     public void strategy_returnOperationStrategy_ok() {
-        FruitTransaction balanceOperation = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 200);
-        new OperationStrategy(operations).process(balanceOperation);
         FruitTransaction returnOperation = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "apple", 20);
-        new OperationStrategy(operations).process(returnOperation);
+        operationStrategy.process(returnOperation);
         Integer expected = 220;
         Integer actual = Storage.storage.get("apple");
         Assert.assertEquals(expected, actual);
@@ -64,12 +64,9 @@ public class OperationStrategyTest {
 
     @Test
     public void strategy_purchaseOperationStrategy_ok() {
-        FruitTransaction balanceOperation = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "apple", 200);
-        new OperationStrategy(operations).process(balanceOperation);
         FruitTransaction returnOperation = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 20);
-        new OperationStrategy(operations).process(returnOperation);
+        operationStrategy.process(returnOperation);
         Integer expected = 180;
         Integer actual = Storage.storage.get("apple");
         Assert.assertEquals(expected, actual);
@@ -77,23 +74,26 @@ public class OperationStrategyTest {
 
     @Test(expected = NullPointerException.class)
     public void strategy_returnToEmptyStorage_notOk() {
+        tearDown();
         FruitTransaction returnOperation = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "apple", 20);
-        new OperationStrategy(operations).process(returnOperation);
+        operationStrategy.process(returnOperation);
     }
 
     @Test(expected = NullPointerException.class)
     public void strategy_purchaseFromEmptyStorage_notOk() {
+        tearDown();
         FruitTransaction returnOperation = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 20);
-        new OperationStrategy(operations).process(returnOperation);
+        operationStrategy.process(returnOperation);
     }
 
     @Test(expected = NullPointerException.class)
     public void strategy_supplyToEmptyStorage_notOk() {
+        tearDown();
         FruitTransaction supply = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "apple", 20);
-        new OperationStrategy(operations).process(supply);
+        operationStrategy.process(supply);
     }
 
     @After

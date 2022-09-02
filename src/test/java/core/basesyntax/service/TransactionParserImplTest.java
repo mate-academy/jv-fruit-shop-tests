@@ -1,19 +1,28 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.parsing.TransactionParser;
 import core.basesyntax.service.parsing.TransactionParserImpl;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
+    private static TransactionParser transactionParser;
+
+    @BeforeClass
+    public static void beforeClass() {
+        transactionParser = new TransactionParserImpl();
+    }
+
     @Test
     public void parse_balanceActualData_ok() {
         List<String> information = List.of("b,apple,200");
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 200);
-        List<FruitTransaction> parsedInformation = new TransactionParserImpl().parse(information);
+        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
         Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
         Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
         Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
@@ -24,7 +33,7 @@ public class TransactionParserImplTest {
         List<String> information = List.of("s,apple,200");
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "apple", 200);
-        List<FruitTransaction> parsedInformation = new TransactionParserImpl().parse(information);
+        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
         Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
         Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
         Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
@@ -35,7 +44,7 @@ public class TransactionParserImplTest {
         List<String> information = List.of("r,apple,200");
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "apple", 200);
-        List<FruitTransaction> parsedInformation = new TransactionParserImpl().parse(information);
+        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
         Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
         Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
         Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
@@ -46,7 +55,7 @@ public class TransactionParserImplTest {
         List<String> information = List.of("p,apple,200");
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "apple", 200);
-        List<FruitTransaction> parsedInformation = new TransactionParserImpl().parse(information);
+        List<FruitTransaction> parsedInformation = transactionParser.parse(information);
         Assert.assertEquals(transaction.getFruit(), parsedInformation.get(0).getFruit());
         Assert.assertEquals(transaction.getOperation(), parsedInformation.get(0).getOperation());
         Assert.assertEquals(transaction.getQuantity(), parsedInformation.get(0).getQuantity());
@@ -55,12 +64,12 @@ public class TransactionParserImplTest {
     @Test(expected = NoSuchElementException.class)
     public void parse_wrongOperationTypeData_notOk() {
         List<String> information = List.of("n,apple,200");
-        new TransactionParserImpl().parse(information);
+        transactionParser.parse(information);
     }
 
     @Test(expected = NullPointerException.class)
     public void parse_listIsNull_notOk() {
         List<String> list = null;
-        new TransactionParserImpl().parse(list);
+        transactionParser.parse(list);
     }
 }

@@ -60,7 +60,7 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writer_illegalPath_notOk() {
-        writerService.writeToFile("?!£?_.", writeDataToFile);
+        writerService.writeToFile(" ", writeDataToFile);
     }
 
     private List<String> readFromFile(String fileName) {

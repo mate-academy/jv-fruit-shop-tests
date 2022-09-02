@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
@@ -7,28 +10,35 @@ import core.basesyntax.service.impl.ParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ParserServiceTest {
-    private ParserService parserServiceTest = new ParserServiceImpl();
-    private List<String> testListLines = new ArrayList<>();
-    private List<Transaction> expected = new ArrayList<>();
-    private List<Transaction> actual = new ArrayList<>();
+    private ParserService parserServiceTest;
+    private List<String> testListLines;
+    private List<Transaction> expected;
+    private List<Transaction> actual;
+
+    @Before
+    public void setUp() {
+        actual = new ArrayList<>();
+        expected = new ArrayList<>();
+        testListLines = new ArrayList<>();
+        parserServiceTest = new ParserServiceImpl();
+    }
 
     @Test
     public void parseEmptyLine_notOk() {
-        expected.clear();
         testListLines.add("");
         actual = parserServiceTest.parse(testListLines);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void parseNull_notOk() {
         testListLines.add(null);
         parserServiceTest.parse(testListLines);
-        Assert.assertNull(testListLines.get(0));
+        assertNull(testListLines.get(0));
     }
 
     @Test
@@ -39,7 +49,7 @@ public class ParserServiceTest {
         expected.add(new Transaction("b", new Fruit("banana"), 20));
         expected.add(new Transaction("b", new Fruit("apple"), 100));
         actual = parserServiceTest.parse(testListLines);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test (expected = IndexOutOfBoundsException.class)
@@ -50,7 +60,7 @@ public class ParserServiceTest {
         expected.add(new Transaction("b", null, 20));
         expected.add(new Transaction("b", new Fruit("apple"), 100));
         actual = parserServiceTest.parse(testListLines);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
     }
 

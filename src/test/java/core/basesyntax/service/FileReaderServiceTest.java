@@ -13,10 +13,11 @@ public class FileReaderServiceTest {
     private static final String EMPTY_FILE_TEST = "src/test/resources/testInputEmptyFile";
     private static final String FILE_TEST = "src/test/resources/testInputFile";
     private FileReaderService fileReaderServiceTest = new FileReaderServiceImpl();
-    private List<String> expected = new ArrayList<>();
+    private List<String> expected;
 
     @Before
     public void setUp() {
+        expected = new ArrayList<>();
         expected.clear();
     }
 

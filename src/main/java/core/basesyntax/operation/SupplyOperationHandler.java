@@ -1,6 +1,7 @@
 package core.basesyntax.operation;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
@@ -12,6 +13,10 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        fruitDao.addition(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        if (!Storage.fruits.containsKey(fruitTransaction.getFruit())) {
+            fruitDao.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        } else {
+            fruitDao.addition(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        }
     }
 }

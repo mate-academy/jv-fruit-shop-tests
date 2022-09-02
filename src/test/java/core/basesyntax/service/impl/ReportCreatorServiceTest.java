@@ -39,9 +39,4 @@ public class ReportCreatorServiceTest {
         String actual = reportCreatorService.createReport();
         Assert.assertNotEquals(expected, actual);
     }
-
-    @AfterClass
-    public static void clean_storage() {
-        Storage.storage.clear();
-    }
 }

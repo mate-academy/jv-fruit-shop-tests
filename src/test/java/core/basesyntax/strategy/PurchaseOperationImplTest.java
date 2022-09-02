@@ -13,7 +13,7 @@ public class PurchaseOperationImplTest {
     private Fruit apple;
 
     @Before
-    public void beforeClass() throws Exception {
+    public void setUp() {
         operationHandler = new PurchaseOperationImpl();
         apple = new Fruit("apple");
     }

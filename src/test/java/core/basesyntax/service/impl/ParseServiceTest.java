@@ -13,7 +13,7 @@ public class ParseServiceTest {
     private List<String> transactionsList;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         parserService = new ParseServiceImpl();
         transactionsList = List.of("type,fruit,quantity", "b,apple,30");
     }

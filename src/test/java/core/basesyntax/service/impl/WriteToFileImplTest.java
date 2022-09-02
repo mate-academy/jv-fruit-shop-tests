@@ -12,24 +12,21 @@ public class WriteToFileImplTest {
     private static final String PATH = "src/test/resources/test_writeToFile.csv";
     private static final String INCORRECT_PATH = "src/main/resources/report.csv";
     private WriteToFileImpl writeToFile;
-    private ReportCreatorService reportCreatorService;
 
     @Before
     public void setUp() throws Exception {
         writeToFile = new WriteToFileImpl();
-        reportCreatorService = new ReportCreatorService();
     }
 
     @Test
     public void writeToFile_Ok() {
         String expected = null;
         try {
-            expected = Files.readString(
-                    Path.of("src/test/resources/test_writeToFile.csv"));
+            expected = Files.readString(Path.of(PATH));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String actual = reportCreatorService.createReport();
+        String actual = "fruit,quantity";
         writeToFile.writeToFile(PATH, actual);
         assertEquals(expected, actual);
     }
@@ -41,6 +38,6 @@ public class WriteToFileImplTest {
 
     @Test (expected = RuntimeException.class)
     public void wrongPath_WriteToFile_NotOK() {
-        writeToFile.writeToFile(INCORRECT_PATH, reportCreatorService.createReport());
+        writeToFile.writeToFile(INCORRECT_PATH, "fruit,quantity");
     }
 }

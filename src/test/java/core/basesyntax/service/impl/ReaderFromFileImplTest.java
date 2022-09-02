@@ -14,7 +14,7 @@ public class ReaderFromFileImplTest {
     private Reader reader;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         reader = new ReadFromFileImpl();
     }
 
@@ -28,7 +28,7 @@ public class ReaderFromFileImplTest {
     }
 
     @Test
-    public void readFromFileFile_NotOk() {
+    public void readFromFile_NotOk() {
         List<String> expected = new ArrayList<>();
         expected.add("first line");
         expected.add("another string");
@@ -37,12 +37,12 @@ public class ReaderFromFileImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_NotOk() {
+    public void readFile_nullInput_NotOk() {
         reader.readFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_non_existent_path_NotOk() {
+    public void read_nonExistentPath_NotOk() {
         reader.readFromFile("");
     }
 }

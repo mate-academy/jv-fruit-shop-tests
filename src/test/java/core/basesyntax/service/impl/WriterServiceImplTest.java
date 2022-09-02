@@ -16,7 +16,8 @@ public class WriterServiceImplTest {
             + "test" + File.separator
             + "resources" + File.separator
             + "test.csv";
-    private static final String TEST_DATA = "b,banana,20" + System.lineSeparator()
+    private static final String TEST_DATA
+            = "b,banana,20" + System.lineSeparator()
             + "b,apple,100" + System.lineSeparator()
             + "s,banana,100" + System.lineSeparator()
             + "p,banana,13" + System.lineSeparator()
@@ -24,7 +25,8 @@ public class WriterServiceImplTest {
             + "p,apple,20" + System.lineSeparator()
             + "p,banana,5" + System.lineSeparator()
             + "s,banana,50";
-    private static final List<String> EXPECTED_DATA = List.of("b,banana,20",
+    private static final List<String> EXPECTED_DATA
+            = List.of("b,banana,20",
             "b,apple,100",
             "s,banana,100",
             "p,banana,13",
@@ -58,7 +60,7 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writerService_writeInvalidPath_NotOk() {
-        writerService.writeToFile(TEST_DATA, ".......");
+        writerService.writeToFile(TEST_DATA, "     ");
     }
 
     private List<String> readFromFile() {

@@ -17,14 +17,24 @@ public class ReaderServiceImplTest {
             + "test" + File.separator
             + "resources" + File.separator
             + "test.csv";
-    private static final List<String> EXPECTED_DATA
-            = List.of("First string",
-            "Second string",
-            "Third string");
     private static final String TEST_DATA
-            = "First string" + System.lineSeparator()
-            + "Second string" + System.lineSeparator()
-            + "Third string";
+            = "b,banana,20" + System.lineSeparator()
+            + "b,apple,100" + System.lineSeparator()
+            + "s,banana,100" + System.lineSeparator()
+            + "p,banana,13" + System.lineSeparator()
+            + "r,apple,10" + System.lineSeparator()
+            + "p,apple,20" + System.lineSeparator()
+            + "p,banana,5" + System.lineSeparator()
+            + "s,banana,50";
+    private static final List<String> EXPECTED_DATA
+            = List.of("b,banana,20",
+            "b,apple,100",
+            "s,banana,100",
+            "p,banana,13",
+            "r,apple,10",
+            "p,apple,20",
+            "p,banana,5",
+            "s,banana,50");
     private static ReaderService readerService;
 
     @BeforeClass

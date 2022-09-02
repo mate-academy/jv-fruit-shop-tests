@@ -22,8 +22,12 @@ public class ParserServiceImplTest {
         List<String> inputData = new ArrayList<>();
         inputData.add("type,fruit,quantity");
         inputData.add("b,banana,20");
+        inputData.add("b,apple,100");
+        inputData.add("s,banana,100");
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("b", new Fruit("banana"), 20));
+        expected.add(new FruitTransaction("b", new Fruit("apple"), 100));
+        expected.add(new FruitTransaction("s", new Fruit("banana"), 100));
         List<FruitTransaction> actual = parserService.parse(inputData);
         Assert.assertEquals(expected, actual);
     }

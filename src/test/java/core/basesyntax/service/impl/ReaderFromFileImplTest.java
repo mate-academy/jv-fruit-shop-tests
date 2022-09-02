@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderFromFileImplTest {
-    private static final String INPUT_FILE_PATH = "src/test/resources/test_resourse.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/test_readFromFile.csv";
     private Reader reader;
 
     @Before

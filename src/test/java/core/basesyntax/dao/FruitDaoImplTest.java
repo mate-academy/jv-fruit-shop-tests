@@ -7,18 +7,17 @@ import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
     private static FruitDao fruitDao;
     private static Fruit fruit;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         fruit = new Fruit("orange", 10);
-
     }
 
     @Test(expected = RuntimeException.class)
@@ -27,7 +26,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void add_fruitIsOk() {
+    public void add_notNullFruit_Ok() {
         List<Fruit> expectedFruits = new ArrayList<>();
         expectedFruits.add(fruit);
         fruitDao.add(fruit);
@@ -47,7 +46,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void get_RightFruitName_Ok() {
+    public void get_notNullFruitName_Ok() {
         StorageFruits.fruits.add(fruit);
         Fruit expected = fruit;
         Fruit actual = fruitDao.get(fruit.getFruitName());
@@ -67,7 +66,7 @@ public class FruitDaoImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         StorageFruits.fruits.clear();
     }
 }

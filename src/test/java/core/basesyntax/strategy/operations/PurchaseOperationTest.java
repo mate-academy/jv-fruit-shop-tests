@@ -17,7 +17,7 @@ public class PurchaseOperationTest {
     private Fruit actual;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         purchaseOperation = new PurchaseOperation(fruitDao);
         actual = new Fruit();
@@ -50,7 +50,7 @@ public class PurchaseOperationTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         StorageFruits.fruits.clear();
     }
 }

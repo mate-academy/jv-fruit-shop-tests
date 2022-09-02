@@ -13,7 +13,7 @@ public class ReportServiceImplTest {
     private ReportService reportService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         reportService = new ReportServiceImpl();
     }
 
@@ -29,7 +29,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_Ok() {
+    public void getReport_fruitsRight_Ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "orange,1520" + System.lineSeparator() + "kiwi,900";
         List<Fruit> fruitsList = new ArrayList<>();

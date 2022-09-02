@@ -16,7 +16,7 @@ public class BalanceOperationTest {
     private FruitDao fruitDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         balanceOperation = new BalanceOperation(fruitDao);
     }
@@ -38,7 +38,7 @@ public class BalanceOperationTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         StorageFruits.fruits.clear();
     }
 }

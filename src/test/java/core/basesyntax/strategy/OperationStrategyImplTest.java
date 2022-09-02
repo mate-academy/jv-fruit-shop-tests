@@ -22,7 +22,7 @@ public class OperationStrategyImplTest {
     private FruitDao fruitDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         balanceOperation = new BalanceOperation(fruitDao);
         returnOperation = new ReturnOperation(fruitDao);

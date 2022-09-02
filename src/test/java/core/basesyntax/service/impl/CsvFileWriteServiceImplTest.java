@@ -18,7 +18,7 @@ public class CsvFileWriteServiceImplTest {
     private String reportData;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         csvFileWriterService = new CsvFileWriteServiceImpl();
         reportData = "fruit,quantity\\r\\norange,1520\\r\\nkiwi,900";
     }
@@ -39,15 +39,20 @@ public class CsvFileWriteServiceImplTest {
     }
 
     @Test
-    public void writeReportToFile_Ok() {
+    public void writeReportToFile_rightFileNameAndReportData_Ok() {
         String expected = reportData;
-        List<String> actual = new ArrayList<>();
         csvFileWriterService.writeReportToFile(reportData, FILE_NAME_TEST);
+        String actual = getStringFromFile(FILE_NAME_TEST);
+        assertEquals(expected, actual);
+    }
+
+    private static String getStringFromFile(String fileName) {
+        List<String> actualList = new ArrayList<>();
         try {
-            actual = Files.readAllLines(Path.of(FILE_NAME_TEST));
+            actualList = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file in test", e);
         }
-        assertEquals(reportData, actual.get(0));
+        return actualList.get(0);
     }
 }

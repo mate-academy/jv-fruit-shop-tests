@@ -15,7 +15,7 @@ public class ParcerServiceImplTest {
     private List<String> transactions;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         parcerService = new ParcerServiceImpl();
         transactions = List.of("type,fruit,quantity","b,orange,200",
                 "b,kiwi,1000", "s,orange,1000", "p,orange,130", "r,kiwi,100",
@@ -34,7 +34,7 @@ public class ParcerServiceImplTest {
     }
 
     @Test
-    public void parseTransactions_Ok() {
+    public void parseTransactions_transactionsRight_Ok() {
         List<FruitTransaction> expectedList = new ArrayList<>();
         expectedList.add(new FruitTransaction(Operation.BALANCE, "orange", 200));
         expectedList.add(new FruitTransaction(Operation.BALANCE, "kiwi", 1000));

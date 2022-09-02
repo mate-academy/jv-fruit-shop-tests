@@ -13,38 +13,31 @@ public class CsvFileReaderServiceImplTest {
     private CsvFileReaderService csvFileReaderService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         csvFileReaderService = new CsvFileReaderServiceImpl();
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_nullFileNAme_notOk() {
+    public void readFromFile_nullFileName_notOk() {
         csvFileReaderService.readFromFile(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_emptyFileNAme_notOk() {
+    public void readFromFile_emptyFileName_notOk() {
         csvFileReaderService.readFromFile("");
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_wrongFileNAme_notOk() {
+    public void readFromFile_wrongFileName_notOk() {
         csvFileReaderService.readFromFile("1234463.csv");
     }
 
     @Test
-    public void readFromFile_Ok() {
-        int expected = 9;
-        int actual = 0;
-        List<String> expectedList = List.of("type,fruit,quantity","b,orange,200",
+    public void readFromFile_rightFileName_Ok() {
+        List<String> expected = List.of("type,fruit,quantity","b,orange,200",
                 "b,kiwi,1000", "s,orange,1000", "p,orange,130", "r,kiwi,100",
                 "p,kiwi,200", "p,orange,50", "s,orange,500");
-        List<String> actualString = csvFileReaderService.readFromFile(FILE_NAME_TEST);
-        for (int i = 0; i < actualString.size(); i++) {
-            if (actualString.get(i).equals(expectedList.get(i))) {
-                actual++;
-            }
-        }
+        List<String> actual = csvFileReaderService.readFromFile(FILE_NAME_TEST);
         assertEquals(expected,actual);
     }
 }

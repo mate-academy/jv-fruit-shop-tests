@@ -28,7 +28,7 @@ public class StoreServiceImplTest {
     private FruitDao fruitDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, DailyOperationHandler> operationHandlerMap
                 = new HashMap<>();
@@ -56,7 +56,7 @@ public class StoreServiceImplTest {
     }
 
     @Test
-    public void processTransaction_Ok() {
+    public void processTransaction_dailyTransactionsRight_Ok() {
         List<Fruit> expectedList = new ArrayList<>();
         expectedList.add(new Fruit("orange", 1520));
         expectedList.add(new Fruit("kiwi", 900));
@@ -89,7 +89,7 @@ public class StoreServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         StorageFruits.fruits.clear();
     }
 }

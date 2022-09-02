@@ -16,7 +16,7 @@ public class ReturnOperationTest {
     private FruitDao fruitDao;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         returnOperation = new ReturnOperation(fruitDao);
     }
@@ -39,7 +39,7 @@ public class ReturnOperationTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         StorageFruits.fruits.clear();
     }
 }

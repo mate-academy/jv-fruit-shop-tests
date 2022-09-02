@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-
     @Test
     public void write_correctFilePath_ok() {
         StringBuilder stringToWrite = new StringBuilder();

@@ -23,7 +23,6 @@ public class ParserTransactionServiceImplTest {
         correctListForParsing.add("s,banana,100");
         correctListForParsing.add("p,banana,13");
         correctListForParsing.add("r,apple,10");
-
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, new Fruit("banana"), 20));
@@ -46,6 +45,5 @@ public class ParserTransactionServiceImplTest {
         incorrectListForParsing.add("type,fruit,quantity");
         incorrectListForParsing.add("c,banana,20");
         new ParserTransactionsServiceImpl().parse(incorrectListForParsing);
-
     }
 }

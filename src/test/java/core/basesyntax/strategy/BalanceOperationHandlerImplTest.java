@@ -7,17 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerImplTest {
-    private Map<Fruit, Integer> dataBase = Storage.dataBase;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        Storage.dataBase.clear();
-    }
-
     @Test
     public void apply_noDataInDatabase_ok() {
         Fruit fruit = new Fruit("banana");
@@ -27,24 +19,24 @@ public class BalanceOperationHandlerImplTest {
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(fruit, 20);
-        Assert.assertEquals("Incorrect output.", expected, dataBase);
+        Assert.assertEquals("Incorrect output.", expected, Storage.dataBase);
     }
 
     @Test
     public void apply_dataInDatabase_ok() {
         Fruit fruit = new Fruit("banana");
-        dataBase.put(fruit, 107);
+        Storage.dataBase.put(fruit, 107);
         OperationHandler operationHandler = new BalanceOperationHandlerImpl();
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, fruit, 20);
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(fruit, 20);
-        Assert.assertEquals("Incorrect output.", expected, dataBase);
+        Assert.assertEquals("Incorrect output.", expected, Storage.dataBase);
     }
 
     @After
     public void tearDown() throws Exception {
-        dataBase.clear();
+        Storage.dataBase.clear();
     }
 }

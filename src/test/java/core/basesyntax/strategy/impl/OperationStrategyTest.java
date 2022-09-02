@@ -84,9 +84,4 @@ public class OperationStrategyTest {
         Integer actual = Storage.storage.get(new Fruit(fruitName));
         Assert.assertEquals(expected, actual);
     }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
-    }
 }

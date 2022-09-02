@@ -55,7 +55,7 @@ public class WriterServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void write_incorrectFilePath_notOk() {
         String incorrectUrl = "src/test/resources/WriterServiceImpl/nosuchfile.csv";
-        Path path = Paths.get(incorrectUrl);
-        new ReaderServiceImpl().read(path);
+        Path path = Paths.get(null);
+        writerService.write(path, "123");
     }
 }

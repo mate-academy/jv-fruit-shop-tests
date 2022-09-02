@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src/main/resources/Input.csv";
-    private static final String OUTPUT_FILE_NAME = "src/main/resources/Output.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/Input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/Output.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> mapOperationHandler = new HashMap<>();
@@ -29,13 +29,13 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategy(mapOperationHandler);
         List<FruitTransaction> transactions = new ParserServiceImpl()
-                .parse(new ReaderServiceImpl().readFromFile(INPUT_FILE_NAME));
+                .parse(new ReaderServiceImpl().readFromFile(INPUT_FILE_PATH));
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getByOperation(transaction.getOperation());
             handler.apply(transaction);
         }
         String report = new ReportServiceImpl().create(Storage.storage.entrySet());
-        new WriteServiceImpl().writeToFile(OUTPUT_FILE_NAME, report);
+        new WriteServiceImpl().writeToFile(OUTPUT_FILE_PATH, report);
     }
 }
 

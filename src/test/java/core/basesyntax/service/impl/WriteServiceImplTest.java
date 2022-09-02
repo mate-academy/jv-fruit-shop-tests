@@ -3,36 +3,32 @@ package core.basesyntax.service.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
+    private static final String FILE_PATH = "src/test/resources/Output.csv";
+    private static final String TEST_DATA = "fruit,quantity" + System.lineSeparator() + "banana,88";
+    private static final List<String> EXPECTED_DATA = List.of("fruit,quantity", "banana,88");
     private WriteServiceImpl writeService;
-    private String fileName;
 
     @Before
     public void setUp() {
         writeService = new WriteServiceImpl();
-        fileName = "Output.csv";
     }
 
     @Test
     public void writeToFileOk() throws IOException {
-        String report = "fruit,quantity" + System.lineSeparator() + "b,banana,88";
-        writeService.writeToFile(fileName, report);
-        List<String> expected = new ArrayList<>();
-        expected.add("fruit,quantity");
-        expected.add("b,banana,88");
-        List<String> actual = Files.readAllLines(Path.of(fileName));
-        Assert.assertEquals(expected, actual);
+        writeService.writeToFile(FILE_PATH, TEST_DATA);
+        List<String> actual = readFromFileInTest();
+        Assert.assertEquals(EXPECTED_DATA, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writerService_writeFileWithNullReport_NotOk() {
-        writeService.writeToFile(fileName, null);
+        writeService.writeToFile(FILE_PATH, null);
     }
 
     @Test(expected = RuntimeException.class)
@@ -40,4 +36,13 @@ public class WriteServiceImplTest {
         writeService.writeToFile(null, "");
     }
 
+    private List<String> readFromFileInTest() {
+        List<String> list;
+        try {
+            list = Files.readAllLines(Path.of(FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read from file: " + FILE_PATH, e);
+        }
+        return list;
+    }
 }

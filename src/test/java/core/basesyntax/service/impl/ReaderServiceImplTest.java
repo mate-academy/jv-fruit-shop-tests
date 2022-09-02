@@ -1,40 +1,42 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private String filePath;
+    private static final String FILE_PATH = "src/test/resources/Input.csv";
+    private static final List<String> EXPECTED_DATA = List.of("type,fruit,quantity", "b,banana,88");
+    private static final String TEST_DATA = "type,fruit,quantity" + System.lineSeparator()
+            + "b,banana,88";
     private ReaderServiceImpl readerService;
-    private List<String> expected;
 
     @Before
     public void setUp() {
-        filePath = "src/test/resources/Input.csv";
         readerService = new ReaderServiceImpl();
-        expected = new ArrayList<>();
-        expected.add("type,fruit,quantity");
-        expected.add("b,banana,88");
+        writToFile();
     }
 
     @Test (expected = RuntimeException.class)
     public void readFileNotValidPath() {
-        filePath = "src/test/resource/Inpute.csv";
-        readerService.readFromFile(filePath);
-    }
-
-    @Test
-    public void readFileValidPath() {
-        List<String> actual = readerService.readFromFile(filePath);
-        Assert.assertEquals(expected, actual);
+        readerService.readFromFile("");
     }
 
     @Test
     public void readFileOk() {
-        List<String> actual = readerService.readFromFile(filePath);
-        Assert.assertEquals(expected, actual);
+        List<String> actual = readerService.readFromFile(FILE_PATH);
+        Assert.assertEquals(EXPECTED_DATA, actual);
+    }
+
+    private void writToFile() {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH))) {
+            bufferedWriter.write(TEST_DATA);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file: " + FILE_PATH, e);
+        }
     }
 }

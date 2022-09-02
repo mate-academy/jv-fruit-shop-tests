@@ -43,7 +43,12 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void write_incorrectFilePath_notOk() {
-        Path path = Paths.get(null);
+        Path path = Paths.get("//\\");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void write_emptyFilePath_notOk() {
+        Path path = Paths.get("");
         writerService.write(path, "123");
     }
 

@@ -15,7 +15,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerTest {
-    private static OperationHandler operationHandler;
+    private static OperationHandler returnOperationHandler;
+    private static OperationHandler supplyOperationHandler;
+    private static OperationHandler purchaseOperationHandler;
+    private static OperationHandler balanceOperationHandler;
     private static FruitTransaction fruitTransaction;
 
     @BeforeClass

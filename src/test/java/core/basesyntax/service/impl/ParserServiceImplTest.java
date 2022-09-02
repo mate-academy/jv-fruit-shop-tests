@@ -57,6 +57,7 @@ public class ParserServiceImplTest {
         strings.add("r,apple,10");
         expectedTransactionList.add(new Transaction(new ReturnStrategy(), "apple", 10));
         List<Transaction> actualTransactionList = parserService.parse(strings);
-        assertEquals("Expected size must be " + expectedTransactionList + " but is " + actualTransactionList, expectedTransactionList, actualTransactionList);
+        assertEquals("Expected size must be " + expectedTransactionList + " but is "
+                + actualTransactionList, expectedTransactionList, actualTransactionList);
     }
 }

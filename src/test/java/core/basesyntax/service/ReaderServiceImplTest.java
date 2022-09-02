@@ -30,6 +30,5 @@ public class ReaderServiceImplTest {
         Assert.assertEquals("yo",
                 Files.readAllLines(Paths.get("src/test/java/resources/yo.txt")).get(0));
     }
-
 }
 

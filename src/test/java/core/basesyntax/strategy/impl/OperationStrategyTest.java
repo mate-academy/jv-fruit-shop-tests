@@ -6,8 +6,6 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

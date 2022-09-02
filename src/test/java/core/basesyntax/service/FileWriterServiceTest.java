@@ -34,12 +34,6 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void fileWriterService_fileWrite_Ok() {
-        fileWriter.writeToFile(stringToWrite,FILE_PATH);
-        assertTrue(new File(FILE_PATH).isFile());
-    }
-
-    @Test
     public void fileWriterService_fileWriteAndCompareInputAndResult_Ok() {
         fileWriter.writeToFile(stringToWrite,FILE_PATH);
         File file = new File(FILE_PATH);

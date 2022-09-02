@@ -30,11 +30,7 @@ public class ParserServiceTest {
         expected.add(new Transaction("b", new Fruit("apple"), 100));
         expected.add(new Transaction("s", new Fruit("banana"), 100));
         List<Transaction> actual = parserService.parse(lines);
-        for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(0).getOperation(), actual.get(0).getOperation());
-            assertEquals(expected.get(0).getFruit(), actual.get(0).getFruit());
-            assertEquals(expected.get(0).getQuantity(), actual.get(0).getQuantity());
-        }
+        assertEquals(expected.get(0), actual.get(0));
     }
 
     @Test

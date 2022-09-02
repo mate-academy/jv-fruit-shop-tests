@@ -1,5 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.Reader;
 import core.basesyntax.service.impl.ReadFromFileImpl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

@@ -27,28 +27,32 @@ public class OperationStrategyTest {
 
     @Test
     public void operationHandlerSupply() {
-        Class actualSupply = operationStrategy.getByOperation(Transaction.Operation.SUPPLY).getClass();
+        Class actualSupply = operationStrategy.getByOperation(Transaction.Operation.SUPPLY)
+                .getClass();
         Class expectedSupply = SupplyOperationHandler.class;
         assertEquals(actualSupply,expectedSupply);
     }
 
     @Test
     public void operationHandlerBalance() {
-        Class expectedBalance = operationStrategy.getByOperation(Transaction.Operation.BALANCE).getClass();
+        Class expectedBalance = operationStrategy.getByOperation(Transaction.Operation.BALANCE)
+                .getClass();
         Class actualBalance = BalanceOperationHandler.class;
         assertEquals(actualBalance, expectedBalance);
     }
 
     @Test
     public void operationHandlerReturn() {
-        Class expectedReturn = operationStrategy.getByOperation(Transaction.Operation.RETURN).getClass();
+        Class expectedReturn = operationStrategy.getByOperation(Transaction.Operation.RETURN)
+                .getClass();
         Class actualReturn = ReturnOperationHandler.class;
         assertEquals(actualReturn, expectedReturn);
     }
 
     @Test
     public void operationHandlerPurchase() {
-        Class expectedPurchase = operationStrategy.getByOperation(Transaction.Operation.PURCHASE).getClass();
+        Class expectedPurchase = operationStrategy.getByOperation(Transaction.Operation.PURCHASE)
+                .getClass();
         Class actualPurchase = PurchaseOperationHandler.class;
         assertEquals(actualPurchase,expectedPurchase);
     }

@@ -25,7 +25,7 @@ public class BalanceOperationHandlerTest {
                 new Fruit("banana"), 21);
         balanceHandler.apply(transaction);
         Integer expected = 33;
-        Integer actual =Storage.getStorage().get(new Fruit("banana"));
+        Integer actual = Storage.getStorage().get(new Fruit("banana"));
         assertEquals(expected, actual);
     }
 

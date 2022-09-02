@@ -22,9 +22,9 @@ public class SupplyOperationHandlerTest {
     public void supplyOperationHandler_equalsApply_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 15);
-        Transaction balanceOperation = new Transaction("b", banana, 30);
-        operationHandler.apply(balanceOperation);
-        assertEquals((Integer) 45, Storage.storage.get(banana));
+        Transaction supplyOperation = new Transaction("s", banana, 30);
+        operationHandler.apply(supplyOperation);
+        assertEquals(Integer.valueOf(45), Storage.storage.get(banana));
     }
 
     @After

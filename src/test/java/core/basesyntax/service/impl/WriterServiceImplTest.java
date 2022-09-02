@@ -42,7 +42,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writerService_equalsWriteToFileFile() {
+    public void writerService_equalsWriteToFile() {
         writerService.writeToFile(TEST_DATA, FILE_PATH);
         List<String> actual = readFromFile();
         assertEquals(EXPECTED_DATA, actual);

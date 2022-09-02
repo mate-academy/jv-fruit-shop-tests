@@ -23,7 +23,7 @@ public class BalanceOperationHandlerTest {
         Fruit banana = new Fruit("banana");
         Transaction balanceOperation = new Transaction("b", banana, 10);
         operationHandler.apply(balanceOperation);
-        assertEquals((Integer) 10, Storage.storage.get(banana));
+        assertEquals(Integer.valueOf(10), Storage.storage.get(banana));
     }
 
     @After

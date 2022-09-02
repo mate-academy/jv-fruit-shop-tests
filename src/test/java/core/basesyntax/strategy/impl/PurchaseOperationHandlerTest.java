@@ -22,17 +22,17 @@ public class PurchaseOperationHandlerTest {
     public void purchaseOperationHandler_equalsApply_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 45);
-        Transaction balanceOperation = new Transaction("b", banana, 15);
-        operationHandler.apply(balanceOperation);
-        assertEquals((Integer) 30, Storage.storage.get(banana));
+        Transaction purchaseOperation = new Transaction("p", banana, 15);
+        operationHandler.apply(purchaseOperation);
+        assertEquals(Integer.valueOf(30), Storage.storage.get(banana));
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperationHandler_moreThanInStock_notOk() {
+    public void purchaseOperationHandler_moreThanInStock_NotOk() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
-        Transaction balanceOperation = new Transaction("b", banana, 20);
-        operationHandler.apply(balanceOperation);
+        Transaction purchaseOperation = new Transaction("p", banana, 20);
+        operationHandler.apply(purchaseOperation);
     }
 
     @After

@@ -44,7 +44,7 @@ public class ReaderServiceImplTest {
 
     @Before
     public void setUp() {
-        writToFile();
+        writeToFile();
     }
 
     @Test
@@ -63,7 +63,7 @@ public class ReaderServiceImplTest {
         readerService.readFromFile(null);
     }
 
-    private void writToFile() {
+    private void writeToFile() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH))) {
             bufferedWriter.write(TEST_DATA);
         } catch (IOException e) {

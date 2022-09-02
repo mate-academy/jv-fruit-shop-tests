@@ -22,9 +22,9 @@ public class ReturnOperationHandlerTest {
     public void returnOperationHandler_equalsApply_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
-        Transaction balanceOperation = new Transaction("b", banana, 10);
-        operationHandler.apply(balanceOperation);
-        assertEquals((Integer) 20, Storage.storage.get(banana));
+        Transaction returnOperation = new Transaction("r", banana, 10);
+        operationHandler.apply(returnOperation);
+        assertEquals(Integer.valueOf(20), Storage.storage.get(banana));
     }
 
     @After

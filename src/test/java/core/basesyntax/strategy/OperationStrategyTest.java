@@ -26,25 +26,25 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void operationHandler_BalanceHandlerCall_Ok() {
+    public void operationHandler_balanceHandlerCall_Ok() {
         assertTrue(operationStrategy.getByOperation("b").getClass()
                 == BalanceOperationHandler.class);
     }
 
     @Test
-    public void operationHandler_SupplyHandlerCall_Ok() {
+    public void operationHandler_supplyHandlerCall_Ok() {
         assertTrue(operationStrategy.getByOperation("s").getClass()
                 == SupplyOperationHandler.class);
     }
 
     @Test
-    public void operationHandler_PurchaseHandlerCall_Ok() {
+    public void operationHandler_purchaseHandlerCall_Ok() {
         assertTrue(operationStrategy.getByOperation("p").getClass()
                 == PurchaseOperationHandler.class);
     }
 
     @Test
-    public void operationHandler_ReturnHandlerCall_Ok() {
+    public void operationHandler_returnHandlerCall_Ok() {
         assertTrue(operationStrategy.getByOperation("r").getClass()
                 == ReturnOperationHandler.class);
     }

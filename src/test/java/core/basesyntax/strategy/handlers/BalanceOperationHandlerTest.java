@@ -9,7 +9,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BalanceOperationHandlerTester {
+public class BalanceOperationHandlerTest {
     private static Storage fruitStorage;
     private static OperationHandler handler;
 

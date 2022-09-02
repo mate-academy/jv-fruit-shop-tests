@@ -6,7 +6,7 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ReportServiceImplTester {
+public class ReportServiceImplTest {
     private ReportService reportService = new ReportServiceImpl();
 
     @Test

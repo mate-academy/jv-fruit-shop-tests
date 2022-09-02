@@ -7,7 +7,7 @@ import java.util.HashMap;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class OperationStrategyTester {
+public class OperationStrategyTest {
     private static OperationStrategy strategy;
 
     @BeforeClass

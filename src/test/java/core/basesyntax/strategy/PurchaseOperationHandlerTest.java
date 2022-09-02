@@ -11,7 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class PurchaseOperationHandlerTester {
+public class PurchaseOperationHandlerTest {
     private static Storage fruitStorage;
     private static OperationHandler handler;
     @Rule

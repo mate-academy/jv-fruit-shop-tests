@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ParseserviceImplTester {
+public class ParseserviceImplTest {
     private ParseService parseService = new ParserServiceImpl();
 
     @Test

@@ -19,14 +19,15 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writerService_Ok() {
+    public void writerServiceIsValid_Ok() {
         writerService.writeToFile(report,"src/test/java/resources/report");
         String actual = "";
+        String expected = report;
         try {
             actual = String.join("", Files.readAllLines(Path.of("src/test/java/resources/report")));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertEquals(report, actual);
+        assertEquals(expected, actual);
     }
 }

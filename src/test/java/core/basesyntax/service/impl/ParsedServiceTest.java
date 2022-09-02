@@ -17,7 +17,7 @@ public class ParsedServiceTest {
     private static List<Transaction> transactions;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         parsedService = new ParsedServiceImpl();
         transactions = new ArrayList<>();
         transactions.add(new Transaction(Transaction.Operation.BALANCE, new Fruit("banana"), 20));
@@ -28,17 +28,19 @@ public class ParsedServiceTest {
 
     @Test
     public void parsedServiceIsValid_Ok() {
-        List<String> actual = new ArrayList<>();
-        actual.add("type,fruit,quantity");
-        actual.add("b,banana,20");
-        actual.add("s,banana,100");
-        actual.add("r,apple,10");
-        actual.add("p,banana,13");
-        assertEquals(transactions, parsedService.parse(actual));
+        List<String> data = new ArrayList<>();
+        data.add("type,fruit,quantity");
+        data.add("b,banana,20");
+        data.add("s,banana,100");
+        data.add("r,apple,10");
+        data.add("p,banana,13");
+        List<Transaction> expected = transactions;
+        List<Transaction> actual = parsedService.parse(data);
+        assertEquals(expected, actual);
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.getStorage().clear();
     }
 }

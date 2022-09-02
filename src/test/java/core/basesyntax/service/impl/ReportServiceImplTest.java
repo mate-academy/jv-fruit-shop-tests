@@ -6,27 +6,28 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static ReportService reportService;
+    private ReportService reportService;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void setUp() {
         reportService = new ReportServiceImpl();
     }
 
     @Test
-    public void reportService_Ok() {
+    public void reportServiceIsValid_Ok() {
         Storage.getStorage().put(new Fruit("banana"), 44);
         String expected = "fruit,quantity"
                 + System.lineSeparator() + "banana,44" + System.lineSeparator();
-        assertEquals(expected,reportService.generateReport());
+        String actual = reportService.generateReport();
+        assertEquals(expected,actual);
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void cleanUp() {
         Storage.getStorage().clear();
     }
 }

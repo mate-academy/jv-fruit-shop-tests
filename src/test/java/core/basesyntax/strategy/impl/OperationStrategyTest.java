@@ -16,42 +16,45 @@ public class OperationStrategyTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         map = new HashMap<>();
+        map.put(Transaction.Operation.BALANCE, new BalanceOperationHandler());
+        map.put(Transaction.Operation.SUPPLY, new SupplyOperationHandler());
+        map.put(Transaction.Operation.RETURN, new ReturnOperationHandler());
+        map.put(Transaction.Operation.PURCHASE, new PurchaseOperationHandler());
         operationStrategy = new OperationStrategy(map);
     }
 
     @Test
     public void operationHandlerSupply() {
-        OperationHandler supply = new SupplyOperationHandler();
-        map.put(Transaction.Operation.SUPPLY, supply);
-        assertEquals(supply, operationStrategy.getByOperation(Transaction.Operation.SUPPLY));
+        Class actualSupply = operationStrategy.getByOperation(Transaction.Operation.SUPPLY).getClass();
+        Class expectedSupply = SupplyOperationHandler.class;
+        assertEquals(actualSupply,expectedSupply);
     }
 
     @Test
     public void operationHandlerBalance() {
-        OperationHandler balance = new BalanceOperationHandler();
-        map.put(Transaction.Operation.BALANCE, balance);
-        assertEquals(balance, operationStrategy.getByOperation(Transaction.Operation.BALANCE));
+        Class expectedBalance = operationStrategy.getByOperation(Transaction.Operation.BALANCE).getClass();
+        Class actualBalance = BalanceOperationHandler.class;
+        assertEquals(actualBalance, expectedBalance);
     }
 
     @Test
     public void operationHandlerReturn() {
-        OperationHandler returnOperationHandler = new ReturnOperationHandler();
-        map.put(Transaction.Operation.RETURN, returnOperationHandler);
-        assertEquals(returnOperationHandler, operationStrategy
-                .getByOperation(Transaction.Operation.RETURN));
+        Class expectedReturn = operationStrategy.getByOperation(Transaction.Operation.RETURN).getClass();
+        Class actualReturn = ReturnOperationHandler.class;
+        assertEquals(actualReturn, expectedReturn);
     }
 
     @Test
     public void operationHandlerPurchase() {
-        OperationHandler purchase = new BalanceOperationHandler();
-        map.put(Transaction.Operation.PURCHASE, purchase);
-        assertEquals(purchase, operationStrategy.getByOperation(Transaction.Operation.PURCHASE));
+        Class expectedPurchase = operationStrategy.getByOperation(Transaction.Operation.PURCHASE).getClass();
+        Class actualPurchase = PurchaseOperationHandler.class;
+        assertEquals(actualPurchase,expectedPurchase);
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.getStorage().clear();
     }
 }

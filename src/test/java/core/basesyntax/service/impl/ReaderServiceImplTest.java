@@ -26,13 +26,14 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readerIsValid_Ok() {
-        List<String> read = reader.read(INPUT_FILE_PATH);
-        assertEquals(string,read);
+    public void readerServiceIsValid_Ok() {
+        List<String> actual = reader.read(INPUT_FILE_PATH);
+        List<String> expected = string;
+        assertEquals(expected,actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readerIsNotValid() {
+    public void readerIsValid_NotOk() {
         reader.read("can't read file");
     }
 

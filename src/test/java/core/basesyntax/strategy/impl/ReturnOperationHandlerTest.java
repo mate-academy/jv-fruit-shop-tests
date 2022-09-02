@@ -14,27 +14,28 @@ public class ReturnOperationHandlerTest {
     private static OperationHandler returnHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         returnHandler = new ReturnOperationHandler();
     }
 
     @Test
-    public void returnIs_Ok() {
+    public void returnIsValid_Ok() {
         Transaction transaction = new Transaction(Transaction
                 .Operation.RETURN, new Fruit("apple"), 33);
         Storage.getStorage().put(new Fruit("apple"), 30);
-        Integer expected = 63;
         returnHandler.apply(transaction);
-        assertEquals(expected, Storage.getStorage().get(new Fruit("apple")));
+        Integer expected = 63;
+        Integer actual = Storage.getStorage().get(new Fruit("apple"));
+        assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void return_NotOk() {
+    public void returnIsValid_NotOk() {
         returnHandler.apply(null);
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.getStorage().clear();
     }
 }

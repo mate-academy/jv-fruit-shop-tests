@@ -14,27 +14,28 @@ public class SupplyOperationHandlerTest {
     private static OperationHandler supplyHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         supplyHandler = new SupplyOperationHandler();
     }
 
     @Test
-    public void supplierIs_Ok() {
+    public void supplierIsValid_Ok() {
         Transaction transaction = new Transaction(Transaction.Operation
                 .SUPPLY, new Fruit("apple"), 33);
         Storage.getStorage().put(new Fruit("apple"), 22);
-        Integer expected = 55;
         supplyHandler.apply(transaction);
-        assertEquals(expected, Storage.getStorage().get(new Fruit("apple")));
+        Integer actual = Storage.getStorage().get(new Fruit("apple"));
+        Integer expected = 55;
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void supplier_NotOk() {
+    public void supplierIsValid_NotOk() {
         supplyHandler.apply(null);
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.getStorage().clear();
     }
 }

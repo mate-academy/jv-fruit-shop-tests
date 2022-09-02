@@ -13,7 +13,7 @@ public class PurchaseOperationHandlerTest {
     private static OperationHandler purchaseHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         purchaseHandler = new PurchaseOperationHandler();
     }
 
@@ -22,9 +22,10 @@ public class PurchaseOperationHandlerTest {
         Transaction transaction = new Transaction(Transaction.Operation
                 .PURCHASE, new Fruit("banana"), 6);
         Storage.getStorage().put(new Fruit("banana"), 10);
-        Integer expected = 4;
         purchaseHandler.apply(transaction);
-        assertEquals(expected, Storage.getStorage().get(new Fruit("banana")));
+        Integer expected = 4;
+        Integer actual = Storage.getStorage().get(new Fruit("banana"));
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

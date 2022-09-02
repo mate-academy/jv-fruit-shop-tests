@@ -14,7 +14,7 @@ public class BalanceOperationHandlerTest {
     private static OperationHandler balanceHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         balanceHandler = new BalanceOperationHandler();
     }
 
@@ -23,9 +23,10 @@ public class BalanceOperationHandlerTest {
         Storage.getStorage().put(new Fruit("banana"), 12);
         Transaction transaction = new Transaction(Transaction.Operation.BALANCE,
                 new Fruit("banana"), 21);
-        Integer expected = 33;
         balanceHandler.apply(transaction);
-        assertEquals(expected, Storage.getStorage().get(new Fruit("banana")));
+        Integer expected = 33;
+        Integer actual =Storage.getStorage().get(new Fruit("banana"));
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -34,7 +35,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.getStorage().clear();
     }
 }

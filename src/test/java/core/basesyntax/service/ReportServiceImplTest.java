@@ -13,7 +13,7 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
     }
 

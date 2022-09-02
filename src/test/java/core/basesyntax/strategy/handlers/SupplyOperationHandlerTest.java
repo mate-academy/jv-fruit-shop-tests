@@ -10,14 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private Storage storage;
-    private SupplyOperationHandler supplyOperationHandler;
+    private static Storage storage;
+    private static SupplyOperationHandler supplyOperationHandler;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         storage = new StorageImpl();
         storage.add(new Fruit("banana"), 100);
         supplyOperationHandler = new SupplyOperationHandler(storage);

@@ -10,14 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private Storage storage;
-    private ReturnOperationHandler returnOperationHandler;
+    private static Storage storage;
+    private static ReturnOperationHandler returnOperationHandler;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         storage = new StorageImpl();
         storage.add(new Fruit("banana"), 40);
         returnOperationHandler = new ReturnOperationHandler(storage);

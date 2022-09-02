@@ -13,14 +13,15 @@ import core.basesyntax.strategy.handlers.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private Storage storage;
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static Storage storage;
+    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         storage = new StorageImpl();
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,

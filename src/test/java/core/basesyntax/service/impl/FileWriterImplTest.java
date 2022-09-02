@@ -36,14 +36,6 @@ public class FileWriterImplTest {
         writer.writeToFile("hello world", "");
     }
 
-    private String readFromFile(String pathToFile) {
-        try {
-            return String.join("\n", Files.readAllLines(Path.of(pathToFile)));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + pathToFile, e);
-        }
-    }
-
     @After
     public void afterEachTest() {
         try {
@@ -52,6 +44,14 @@ public class FileWriterImplTest {
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't delete a file " + path, e);
+        }
+    }
+
+    private String readFromFile(String pathToFile) {
+        try {
+            return String.join("\n", Files.readAllLines(Path.of(pathToFile)));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file " + pathToFile, e);
         }
     }
 

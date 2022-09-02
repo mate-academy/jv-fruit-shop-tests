@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BalanceOperationHandlerImplTest {
+public class PurchaseOperationHandlerImplTest {
     private Map<Fruit, Integer> dataBase = Storage.dataBase;
 
     @BeforeClass
@@ -18,28 +18,25 @@ public class BalanceOperationHandlerImplTest {
         Storage.dataBase.clear();
     }
 
-    @Test
-    public void apply_noDataInDatabase_ok() {
+    @Test(expected = RuntimeException.class)
+    public void apply_littleFruitQuantity_ok() {
         Fruit fruit = new Fruit("banana");
-        OperationHandler operationHandler = new BalanceOperationHandlerImpl();
+        OperationHandler operationHandler = new PurchaseOperationHandlerImpl();
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, fruit, 20);
+                FruitTransaction.Operation.PURCHASE, fruit, 20);
         operationHandler.apply(transaction);
-        Map<Fruit, Integer> expected = new HashMap<>();
-        expected.put(fruit, 20);
-        Assert.assertEquals(expected, dataBase);
     }
 
     @Test
-    public void apply_dataInDatabase_ok() {
+    public void apply_normalFruitQuantity_ok() {
         Fruit fruit = new Fruit("banana");
         dataBase.put(fruit, 107);
-        OperationHandler operationHandler = new BalanceOperationHandlerImpl();
+        OperationHandler operationHandler = new PurchaseOperationHandlerImpl();
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, new Fruit("banana"), 20);
+                FruitTransaction.Operation.PURCHASE, new Fruit("banana"), 20);
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
-        expected.put(fruit, 20);
+        expected.put(fruit, 87);
         Assert.assertEquals(expected, dataBase);
     }
 
@@ -48,3 +45,4 @@ public class BalanceOperationHandlerImplTest {
         dataBase.clear();
     }
 }
+

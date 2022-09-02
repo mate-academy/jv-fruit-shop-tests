@@ -1,7 +1,5 @@
 package strategy;
 
-import static org.junit.Assert.assertEquals;
-
 import model.Fruit;
 import model.FruitTransaction;
 import org.junit.Before;

@@ -48,11 +48,11 @@ public class WriterServiceImplTest {
     }
 
     private static List<String> readFile(String url) {
-        Path correctUrlPath = Paths.get(url);
+        Path path = Paths.get(url);
         try {
-            return Files.readAllLines(correctUrlPath);
+            return Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + correctUrlPath, e);
+            throw new RuntimeException("Can't read file" + path, e);
         }
     }
 }

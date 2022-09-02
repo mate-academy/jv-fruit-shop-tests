@@ -26,7 +26,6 @@ public class DataBaseImplTest {
         Set<Map.Entry<String, Integer>> actualResult = storage.getEntrySet();
         Set<Map.Entry<String, Integer>> expectedResult = Map.of("apple", 100).entrySet();
         Assert.assertEquals(expectedResult, actualResult);
-        storage.remove("apple", 100);
     }
 
     @Test

@@ -10,22 +10,12 @@ import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static final FruitTransaction B_APPLE_100 =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
-    private static final FruitTransaction S_APPLE_50 =
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50);
-    private static final FruitTransaction R_APPLE_5 =
-            new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 5);
-    private static final FruitTransaction P_APPLE_30 =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30);
-    private static final FruitTransaction B_ORANGE_40 =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "orange", 40);
-
     private OperationStrategy strategy;
     private Storage storage;
 
@@ -44,10 +34,17 @@ public class OperationStrategyImplTest {
         strategy = new OperationStrategyImpl(operationHandler);
     }
 
+    @After
+    public void tearDown() {
+        storage.clearStorage();
+    }
+
     @Test
     public void operationBalance_Ok() {
-        strategy.get(B_APPLE_100.getOperation())
-                .processingOperation(B_APPLE_100);
+        final FruitTransaction b_apple_100 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
+        strategy.get(b_apple_100.getOperation())
+                .processingOperation(b_apple_100);
         int actualResult = storage.getEntrySet().stream()
                 .map(e -> e.getValue())
                 .mapToInt(value -> value).sum();
@@ -57,8 +54,10 @@ public class OperationStrategyImplTest {
 
     @Test
     public void operationReturn_Ok() {
-        strategy.get(R_APPLE_5.getOperation())
-                .processingOperation(R_APPLE_5);
+        final FruitTransaction r_apple_5 =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 5);
+        strategy.get(r_apple_5.getOperation())
+                .processingOperation(r_apple_5);
         int actualResult = storage.getEntrySet().stream()
                 .map(e -> e.getValue())
                 .mapToInt(value -> value).sum();
@@ -68,8 +67,10 @@ public class OperationStrategyImplTest {
 
     @Test
     public void operationSupply_Ok() {
-        strategy.get(S_APPLE_50.getOperation())
-                .processingOperation(S_APPLE_50);
+        final FruitTransaction s_apple_50 =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50);
+        strategy.get(s_apple_50.getOperation())
+                .processingOperation(s_apple_50);
         int actualResult = storage.getEntrySet().stream()
                 .map(e -> e.getValue())
                 .mapToInt(value -> value).sum();
@@ -79,7 +80,11 @@ public class OperationStrategyImplTest {
 
     @Test (expected = RuntimeException.class)
     public void operationPurchaseFromEmptyStorage_NotOk() {
-        strategy.get(P_APPLE_30.getOperation())
-                .processingOperation(B_ORANGE_40);
+        final FruitTransaction b_orange_40 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "orange", 40);
+        final FruitTransaction p_apple_30 =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30);
+        strategy.get(p_apple_30.getOperation())
+                .processingOperation(b_orange_40);
     }
 }

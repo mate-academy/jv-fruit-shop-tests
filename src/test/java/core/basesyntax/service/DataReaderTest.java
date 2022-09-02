@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DataReaderTest {
-    private static final String APPLES_ORANGES = "src/test/resources/applesOranges.csv";
+    private static final String CORRECT_INPUT_FILE = "src/test/resources/correctData.csv";
     private DataReader dataReader;
 
     @Before
@@ -18,24 +18,23 @@ public class DataReaderTest {
 
     @Test
     public void readData_Ok() {
-        List<String> dataList = dataReader.readData(APPLES_ORANGES);
-        String actualResult = dataList.stream().collect(Collectors.joining(System.lineSeparator()));
-        String expectedResult = "b,apple,35" + System.lineSeparator()
-                + "b,orange,42" + System.lineSeparator()
-                + "s,apple,70" + System.lineSeparator()
-                + "p,apple,15" + System.lineSeparator()
-                + "r,orange,22";
+        List<String> dataList = dataReader.readData(CORRECT_INPUT_FILE);
+        String actualResult = dataList.stream()
+                .collect(Collectors.joining(System.lineSeparator()));
+        List<String> expectdList = List.of("b,apple,35", "b,orange,42", "s,apple,70",
+                "p,apple,15", "r,orange,22");
+        String expectedResult = expectdList.stream()
+                .collect(Collectors.joining(System.lineSeparator()));
         Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readDataFromWrongFileName_notOk() {
+    public void readData_nonExistentFile_notOk() {
         List<String> dataList = dataReader.readData("wrongFileName.csv");
     }
 
     @Test (expected = RuntimeException.class)
-    public void readDataNull_notOk() {
+    public void readData_nullFile_notOk() {
         List<String> dataList = dataReader.readData(null);
     }
-
 }

@@ -10,27 +10,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
-    private Fruit fruit;
+    private OperationHandler operationHandler;
+    private Fruit apple;
 
     @Before
     public void setUp() throws Exception {
-        fruit = new Fruit("apple");
+        operationHandler = new BalanceOperationHandler();
+        apple = new Fruit("apple");
     }
 
     @Test
     public void applyBalance_OK() {
-        balanceOperationHandler.apply(new Transaction("b", new Fruit("apple"), 14));
-        Integer actual = Storage.storage.get(new Fruit("apple"));
+        operationHandler.apply(new Transaction("b", apple, 14));
+        Integer actual = Storage.storage.get(apple);
         Integer expected = 14;
         assertEquals(expected, actual);
     }
 
     @Test
     public void nullValue_ApplyBalance_OK() {
-        Storage.storage.put(fruit, null);
+        Storage.storage.put(apple, null);
         Integer expected = null;
-        Integer actual = Storage.storage.get(fruit);
+        Integer actual = Storage.storage.get(apple);
         assertEquals(expected, actual);
     }
 

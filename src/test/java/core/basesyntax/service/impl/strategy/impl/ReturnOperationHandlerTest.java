@@ -18,7 +18,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperationHandler_validFruitTransaction_Ok() {
+    public void returnOperationHandler_validFruitTransaction_Ok() {
         Storage.getStorage().put(new Fruit("apple"), 20);
         Transaction transaction = new Transaction("r", new Fruit("apple"), 10);
         returnOperationHandler.apply(transaction);
@@ -28,12 +28,12 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperationHandler_NullFruitTransaction_NotOk() {
+    public void returnOperationHandler_NullFruitTransaction_NotOk() {
         returnOperationHandler.apply(null);
     }
 
     @Test
-    public void purchaseOperationHandler_FruitTransactionPresentInStorage() {
+    public void returnOperationHandler_FruitTransactionPresentInStorage() {
         Transaction transaction = new Transaction("r", new Fruit("apple"), 20);
         Storage.getStorage().put(new Fruit("apple"), 10);
         Integer expected = 30;

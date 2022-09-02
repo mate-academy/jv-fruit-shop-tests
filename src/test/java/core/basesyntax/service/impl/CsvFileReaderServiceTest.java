@@ -36,7 +36,7 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void read_File_ok() {
+    public void read_ok() {
         File file = new File(FOLDER, "readerTestInput.csv");
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");

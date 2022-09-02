@@ -2,18 +2,17 @@ package core.basesyntax.io;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class FileReaderTest {
-    private FileReader fileReader;
+public class FileReaderImplTest {
     private static final String CORRECT_PATH_TO_FILE = "src/test/resources/InputFile.csv";
     private static final String INCORRECT_PATH_TO_FILE = "src/test/resources/OutputFile.csv";
     private static final String EMPTY_PATH_TO_FILE = "";
     private static final String PATH_TO_EMPTY_FILE = "src/test/resources/EmptyInputFile.csv";
+    private FileReader fileReader;
 
     @Before
     public void setUp() {
@@ -51,6 +50,4 @@ public class FileReaderTest {
         List<String> actual = fileReader.readFromFile(PATH_TO_EMPTY_FILE);
         assertEquals(expected, actual);
     }
-
-
 }

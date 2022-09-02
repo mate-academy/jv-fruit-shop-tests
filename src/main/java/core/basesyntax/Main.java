@@ -47,5 +47,9 @@ public class Main {
         ReportWriter reportWriter = new ReportWriterImpl();
         reportWriter.writeToFile(report, pathToReport);
 
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap2 = new HashMap<>();
+        System.out.println(handlerMap2.size());
+        System.out.println(handlerMap2.get(null));
+
     }
 }

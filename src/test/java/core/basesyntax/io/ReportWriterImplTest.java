@@ -9,13 +9,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 
-public class ReportWriterTest {
-    private ReportWriter reportWriter;
+public class ReportWriterImplTest {
     private static String correctReport;
     private static final String CORRECT_PATH_TO_FILE = "src/test/resources/ReportFile.csv";
+    private ReportWriter reportWriter;
 
     @BeforeClass
     public static void beforeClass() {

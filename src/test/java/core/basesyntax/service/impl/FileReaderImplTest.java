@@ -12,7 +12,6 @@ public class FileReaderImplTest {
     private static final String TEST_FILE = "src/test/resources/test_input.csv";
     private static final String EMPTY_FILE = "src/test/resources/empty_test_file.csv";
 
-
     @BeforeClass
     public static void beforeClass() {
         reader = new FileReaderImpl();
@@ -38,7 +37,4 @@ public class FileReaderImplTest {
     public void readNonexistenceFile_NotOk() {
         reader.readFromFile("");
     }
-
-
-
 }

@@ -64,5 +64,4 @@ public class FruitDaoImplTest {
     public void afterEachTest() {
         Storage.fruits.clear();
     }
-
 }

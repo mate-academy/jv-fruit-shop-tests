@@ -18,5 +18,4 @@ public class ReportServiceImplTest {
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator(), reportService.getReport());
     }
-
 }

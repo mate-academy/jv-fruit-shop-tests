@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,5 +36,16 @@ public class WriterServiceImplTest {
             throw new RuntimeException("Can't read for test from " + fileName, e);
         }
         assertEquals(expected, report);
+    }
+
+    @After
+    public void tearDown() {
+        if (Files.exists(Path.of(fileName))) {
+            try {
+                Files.delete(Path.of(fileName));
+            } catch (IOException e) {
+                throw new RuntimeException("Can't delete file " + fileName, e);
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

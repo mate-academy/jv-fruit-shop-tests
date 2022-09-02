@@ -5,14 +5,13 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
-    private static final String FILE_INPUT ="src/test/resources/test_input.csv";
-    private static final String EMPTY ="src/test/resources/test_emptyFile.csv";
+    private static final String FILE_INPUT = "src/test/resources/test_input.csv";
+    private static final String EMPTY = "src/test/resources/test_emptyFile.csv";
 
     @BeforeClass
     public static void setUp() throws Exception {
@@ -40,7 +39,7 @@ public class ReaderServiceImplTest {
     public void read_EmptyFile_NotOk() {
         List<String> expected = new ArrayList<>();
         List<String> actual = readerService.readFromFile(EMPTY);
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)

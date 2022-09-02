@@ -10,9 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
+    private static ReaderService readerService;
     private static String correctUrl;
     private static String incorrectUrl;
-    private static ReaderService readerService;
 
     @BeforeClass
     public static void beforeClass() {

@@ -35,21 +35,9 @@ public class WriterServiceImplTest {
                 .append("p,apple,20").append(System.lineSeparator())
                 .append("p,banana,5").append(System.lineSeparator())
                 .append("s,banana,50");
-        Path correctUrlPath = Paths.get(correctUrl);
-        Path forEqualsUrlPath = Paths.get(forEqualsUrl);
-        writerService.write(correctUrlPath, stringToWrite.toString());
-        List<String> actual;
-        try {
-            actual = Files.readAllLines(correctUrlPath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + correctUrlPath, e);
-        }
-        List<String> expected;
-        try {
-            expected = Files.readAllLines(forEqualsUrlPath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + forEqualsUrl, e);
-        }
+        writerService.write(Paths.get(correctUrl), stringToWrite.toString());
+        List<String> actual = readFile(correctUrl);
+        List<String> expected = readFile(forEqualsUrl);
         Assert.assertEquals(expected, actual);
     }
 
@@ -57,5 +45,14 @@ public class WriterServiceImplTest {
     public void write_incorrectFilePath_notOk() {
         Path path = Paths.get(null);
         writerService.write(path, "123");
+    }
+
+    private static List<String> readFile(String url) {
+        Path correctUrlPath = Paths.get(url);
+        try {
+            return Files.readAllLines(correctUrlPath);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file" + correctUrlPath, e);
+        }
     }
 }

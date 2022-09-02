@@ -21,6 +21,7 @@ public class ReturnOperationTest {
     public static void beforeClass() {
         returnOperation = new ReturnOperation();
         fruit = new Fruit("apple");
+
     }
 
     @Test

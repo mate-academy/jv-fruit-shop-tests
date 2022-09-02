@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH =
-            "src/main/java/core/basesyntax/resources/input.csv";
+            "src/main/java/core/basesyntax/resources/test_input.csv";
     private static final String OUTPUT_FILE_PATH =
             "src/main/java/core/basesyntax/resources/report.csv";
 

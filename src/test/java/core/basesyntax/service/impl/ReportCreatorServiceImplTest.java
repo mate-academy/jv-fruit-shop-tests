@@ -28,14 +28,14 @@ public class ReportCreatorServiceImplTest {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator()
                 + "orange,100" + System.lineSeparator();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void createReport_emptyStorage_Ok() {
         String actual = reportCreatorService.createReport();
         String expected = "fruit,quantity" + System.lineSeparator();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @After

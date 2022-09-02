@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
@@ -18,12 +17,12 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl();
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void getReport_fruitsNull_notOk() {
         reportService.getReport(null);
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void getReport_fruitsEmpty_notOk() {
         List<Fruit> emptyList = new ArrayList<>();
         reportService.getReport(emptyList);

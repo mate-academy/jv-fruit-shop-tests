@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.StorageFruits;
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(Fruit fruit) {
         if (fruit == null) {
-            throw new WrongDataException("Can't write wrong data to Storage");
+            throw new RuntimeException("Can't write wrong data to Storage");
         }
         StorageFruits.fruits.add(fruit);
     }
@@ -18,7 +17,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public Fruit get(String fruitName) {
         if (fruitName == null || fruitName.isEmpty()) {
-            throw new WrongDataException("Can't get from Storage Fruit, "
+            throw new RuntimeException("Can't get from Storage Fruit, "
                     + "fruitName == null");
         }
         return StorageFruits.fruits.stream()

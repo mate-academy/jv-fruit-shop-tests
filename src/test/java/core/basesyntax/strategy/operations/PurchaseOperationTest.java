@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.StorageFruits;
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
@@ -25,7 +24,7 @@ public class PurchaseOperationTest {
         StorageFruits.fruits.add(new Fruit("orange", 200));
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void apply_dailyTransactionNull_notOk() {
         purchaseOperation.apply(null);
     }

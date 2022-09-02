@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParcerService;
 import java.util.Arrays;
@@ -17,7 +16,7 @@ public class ParcerServiceImpl implements ParcerService {
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactions) {
         if (transactions == null || transactions.size() == 0) {
-            throw new WrongDataException("Empty transactions in file");
+            throw new RuntimeException("Empty transactions in file");
         }
         return transactions.stream()
                 .skip(HEADER)

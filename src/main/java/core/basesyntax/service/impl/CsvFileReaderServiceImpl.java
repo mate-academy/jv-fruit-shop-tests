@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.WrongFileNameException;
 import core.basesyntax.service.CsvFileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,13 +12,13 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     @Override
     public List<String> readFromFile(String fileName) {
         if (fileName == null || fileName.isEmpty()) {
-            throw new WrongFileNameException("Null or empty fileName");
+            throw new RuntimeException("Null or empty fileName");
         }
         List<String> dailyTransactions = new ArrayList<>();
         try {
             dailyTransactions = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new WrongFileNameException("Can't find file by path: " + fileName);
+            throw new RuntimeException("Can't find file by path: " + fileName);
         }
         return dailyTransactions;
     }

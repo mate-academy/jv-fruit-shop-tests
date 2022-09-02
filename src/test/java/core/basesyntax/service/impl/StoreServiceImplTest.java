@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.StorageFruits;
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StoreService;
@@ -45,12 +44,12 @@ public class StoreServiceImplTest {
         storeService = new StoreServiceImpl(fruitDao, operationStrategy);
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void processTransaction_dailyTransactionsNull_notOk() {
         storeService.processTransaction(null);
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void processTransaction_dailyTransactionsEmpty_notOk() {
         List<FruitTransaction> emptyList = new ArrayList<>();
         storeService.processTransaction(emptyList);

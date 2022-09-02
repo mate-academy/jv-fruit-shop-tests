@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.StorageFruits;
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class FruitDaoImplTest {
 
     }
 
-    @Test(expected = WrongDataException.class)
+    @Test(expected = RuntimeException.class)
     public void add_nullFruit_notOk() {
         fruitDao.add(null);
     }
@@ -37,12 +36,12 @@ public class FruitDaoImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = WrongDataException.class)
+    @Test(expected = RuntimeException.class)
     public void get_nullFruitName_notOk() {
         fruitDao.get(null);
     }
 
-    @Test(expected = WrongDataException.class)
+    @Test(expected = RuntimeException.class)
     public void get_EmptyFruitName_notOk() {
         fruitDao.get("");
     }

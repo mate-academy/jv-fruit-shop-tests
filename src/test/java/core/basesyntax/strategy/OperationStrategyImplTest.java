@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.operations.BalanceOperation;
 import core.basesyntax.strategy.operations.DailyOperationHandler;
@@ -35,7 +34,7 @@ public class OperationStrategyImplTest {
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
-    @Test(expected = WrongDataException.class)
+    @Test(expected = RuntimeException.class)
     public void get_operationIsNull_notOk() {
         operationStrategy.get(null);
     }

@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.exceptions.WrongFileNameException;
 import core.basesyntax.service.CsvFileReaderService;
 import java.util.List;
 import org.junit.Before;
@@ -18,12 +17,12 @@ public class CsvFileReaderServiceImplTest {
         csvFileReaderService = new CsvFileReaderServiceImpl();
     }
 
-    @Test (expected = WrongFileNameException.class)
+    @Test (expected = RuntimeException.class)
     public void readFromFile_nullFileNAme_notOk() {
         csvFileReaderService.readFromFile(null);
     }
 
-    @Test (expected = WrongFileNameException.class)
+    @Test (expected = RuntimeException.class)
     public void readFromFile_emptyFileNAme_notOk() {
         csvFileReaderService.readFromFile("");
     }

@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.ParcerService;
@@ -23,12 +22,12 @@ public class ParcerServiceImplTest {
                 "p,kiwi,200", "p,orange,50", "s,orange,500");
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void parseTransactions_transactionsNull_notOk() {
         parcerService.parseTransactions(null);
     }
 
-    @Test (expected = WrongDataException.class)
+    @Test (expected = RuntimeException.class)
     public void parseTransactions_transactionsEmpty_notOk() {
         List<String> emptyList = new ArrayList<>();
         parcerService.parseTransactions(emptyList);

@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.exceptions.WrongDataException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StoreService;
@@ -20,7 +19,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<Fruit> processTransaction(List<FruitTransaction> dailyTransactions) {
         if (dailyTransactions == null || dailyTransactions.isEmpty()) {
-            throw new WrongDataException("Wrong dailyTransactions import to StoreService");
+            throw new RuntimeException("Wrong dailyTransactions import to StoreService");
         }
         for (FruitTransaction dailyTransaction : dailyTransactions) {
             operationStrategy.get(dailyTransaction.getOperation()).apply(dailyTransaction);

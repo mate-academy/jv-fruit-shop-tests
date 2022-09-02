@@ -26,7 +26,7 @@ public class WriterServiceImplTest {
 
     @Test
     public void write_validFileName_Ok() {
-        writerService.writeToFile(REPORT,VALID_FILE_NAME);
+        writerService.writeToFile(REPORT, VALID_FILE_NAME);
         List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(VALID_FILE_NAME));
@@ -38,16 +38,16 @@ public class WriterServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void write_invalidFileName_notOk() {
-        writerService.writeToFile(REPORT,INVALID_FILE_NAME);
+        writerService.writeToFile(REPORT, INVALID_FILE_NAME);
     }
 
     @Test (expected = RuntimeException.class)
     public void write_nullReport_notOk() {
-        writerService.writeToFile(null,VALID_FILE_NAME);
+        writerService.writeToFile(null, VALID_FILE_NAME);
     }
 
     @Test (expected = RuntimeException.class)
     public void write_nullFileName_notOk() {
-        writerService.writeToFile(REPORT,null);
+        writerService.writeToFile(REPORT, null);
     }
 }

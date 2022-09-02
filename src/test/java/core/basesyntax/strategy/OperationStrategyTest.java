@@ -1,10 +1,9 @@
 package core.basesyntax.strategy;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
@@ -12,48 +11,40 @@ public class OperationStrategyTest {
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
     private static final String SUPPLY = "s";
-    private OperationStrategy operationStrategy;
-    private OperationHandler balanceOperationHandler;
-    private OperationHandler purchaseOperationHandler;
-    private OperationHandler returnOperationHandler;
-    private OperationHandler supplyOperationHandler;
-    private Map<String,OperationHandler> operationHandlerMap;
+    private static OperationStrategy operationStrategy;
+    private static Map<String,OperationHandler> operationHandlerMap;
 
-    @Before
-    public void setUp() throws Exception {
-        balanceOperationHandler = new BalanceOperationHandler();
-        purchaseOperationHandler = new PurchaseOperationHandler();
-        returnOperationHandler = new ReturnOperationHandler();
-        supplyOperationHandler = new SupplyOperationHandler();
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(BALANCE,balanceOperationHandler);
-        operationHandlerMap.put(PURCHASE,purchaseOperationHandler);
-        operationHandlerMap.put(RETURN,returnOperationHandler);
-        operationHandlerMap.put(SUPPLY,supplyOperationHandler);
+        operationHandlerMap.put(BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(PURCHASE, new PurchaseOperationHandler());
+        operationHandlerMap.put(RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategy(operationHandlerMap);
     }
 
     @Test
     public void get_validBalanceOperation_Ok() {
         OperationHandler actual = operationStrategy.getByOperation(BALANCE);
-        assertEquals(balanceOperationHandler, actual);
+        assertEquals(BalanceOperationHandler.class, actual.getClass());
     }
 
     @Test
     public void get_validPurchaseOperation_Ok() {
         OperationHandler actual = operationStrategy.getByOperation(PURCHASE);
-        assertEquals(purchaseOperationHandler, actual);
+        assertEquals(PurchaseOperationHandler.class, actual.getClass());
     }
 
     @Test
     public void get_validReturnOperation_Ok() {
         OperationHandler actual = operationStrategy.getByOperation(RETURN);
-        assertEquals(returnOperationHandler, actual);
+        assertEquals(ReturnOperationHandler.class, actual.getClass());
     }
 
     @Test
     public void get_validSupplyOperation_Ok() {
         OperationHandler actual = operationStrategy.getByOperation(SUPPLY);
-        assertEquals(supplyOperationHandler, actual);
+        assertEquals(SupplyOperationHandler.class, actual.getClass());
     }
 }

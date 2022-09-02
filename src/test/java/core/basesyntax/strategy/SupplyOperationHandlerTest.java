@@ -31,7 +31,7 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void supply_validValue_Ok() {
-        Storage.storage.put(fruit,50);
+        Storage.storage.put(fruit, 50);
         operationHandler.apply(transaction);
         Integer expected = 70;
         assertEquals(expected, Storage.storage.get(fruit));

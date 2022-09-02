@@ -12,9 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-    private static final String OPERATION_TYPE = "r";
-    private static final String FRUIT = "banana";
-    private static final Integer QUANTITY = 20;
     private static final String VALID_INPUT = "r,banana,20";
     private static final String INVALID_INPUT_DIGIT = "r,banana,b";
     private static final String INVALID_INPUT_PUNCTUATION = "r.banana.b";
@@ -31,8 +28,8 @@ public class ParserServiceImplTest {
         listString = new ArrayList<>();
         listString.add(HEADER);
         parserService = new ParserServiceImpl();
-        fruit = new Fruit(FRUIT);
-        transaction = new Transaction(OPERATION_TYPE,fruit,QUANTITY);
+        fruit = new Fruit("banana");
+        transaction = new Transaction("r", fruit, 20);
         listTransaction = new ArrayList<>();
         listTransaction.add(transaction);
     }

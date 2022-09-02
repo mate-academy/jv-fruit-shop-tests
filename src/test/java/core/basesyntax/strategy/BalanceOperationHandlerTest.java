@@ -26,14 +26,14 @@ public class BalanceOperationHandlerTest {
     @Before
     public void setUp() throws Exception {
         fruit = new Fruit(FRUIT);
-        transaction = new Transaction(OPERATION_TYPE,fruit,QUANTITY);
+        transaction = new Transaction(OPERATION_TYPE, fruit, QUANTITY);
     }
 
     @Test
     public void balance_validValue_Ok() {
         Integer expected = 20;
         operationHandler.apply(transaction);
-        assertEquals(expected,Storage.storage.get(fruit));
+        assertEquals(expected, Storage.storage.get(fruit));
     }
 
     @Test

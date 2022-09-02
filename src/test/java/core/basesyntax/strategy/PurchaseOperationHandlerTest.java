@@ -26,13 +26,13 @@ public class PurchaseOperationHandlerTest {
     @Before
     public void setUp() throws Exception {
         fruit = new Fruit(FRUIT);
-        transaction = new Transaction(OPERATION_TYPE,fruit,QUANTITY);
+        transaction = new Transaction(OPERATION_TYPE, fruit, QUANTITY);
     }
 
     @Test
     public void purchase_validValue_Ok() {
         Integer expected = 30;
-        Storage.storage.put(fruit,50);
+        Storage.storage.put(fruit, 50);
         operationHandler.apply(transaction);
         assertEquals(expected, Storage.storage.get(fruit));
     }

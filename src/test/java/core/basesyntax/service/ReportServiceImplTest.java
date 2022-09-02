@@ -37,7 +37,7 @@ public class ReportServiceImplTest {
 
     @Test (expected = NullPointerException.class)
     public void report_nullInStorage_notOk() {
-        Storage.storage.put(null,null);
+        Storage.storage.put(null, null);
         reportService.getReport();
     }
 

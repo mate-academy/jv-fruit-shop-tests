@@ -31,7 +31,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void return_validValue_Ok() {
-        Storage.storage.put(fruit,50);
+        Storage.storage.put(fruit, 50);
         operationHandler.apply(transaction);
         Integer expected = 70;
         assertEquals(expected, Storage.storage.get(fruit));
@@ -48,7 +48,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void return_zeroValue_Ok() {
-        Storage.storage.put(fruit,50);
+        Storage.storage.put(fruit, 50);
         transaction.setQuantity(0);
         operationHandler.apply(transaction);
         Integer expected = 50;

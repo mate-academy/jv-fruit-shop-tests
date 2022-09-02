@@ -38,7 +38,7 @@ public class FruitServiceImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitDao = new FruitDaoImpl();
         fruitService = new FruitServiceImpl(defaultMap, fruitDao);
     }

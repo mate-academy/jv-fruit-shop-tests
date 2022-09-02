@@ -11,7 +11,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitBalanceHandlerTest {
@@ -19,8 +19,8 @@ public class FruitBalanceHandlerTest {
     private static FruitDao fruitDao;
     private static Fruit fruit;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         operationHandler = new FruitBalanceHandler(new FruitDaoImpl());
         fruitDao = new FruitDaoImpl();
         fruit = new Fruit("banana");
@@ -45,7 +45,7 @@ public class FruitBalanceHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

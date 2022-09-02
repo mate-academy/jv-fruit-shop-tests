@@ -7,7 +7,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,6 +16,7 @@ public class FruitTransactionParserServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        parser = new FruitTransactionParserServiceImpl();
         TRANSACTIONS_EXPECTED_RESULT = new ArrayList<>();
         TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"), 20));
@@ -34,11 +34,6 @@ public class FruitTransactionParserServiceImplTest {
                 new Fruit("banana"), 5));
         TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 new Fruit("banana"), 50));
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        parser = new FruitTransactionParserServiceImpl();
     }
 
     @Test

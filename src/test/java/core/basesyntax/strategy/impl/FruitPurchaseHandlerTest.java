@@ -17,7 +17,7 @@ public class FruitPurchaseHandlerTest {
     private static Fruit fruit;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandler = new FruitPurchaseHandler(new FruitDaoImpl());
         fruit = new Fruit("banana");
     }
@@ -46,7 +46,7 @@ public class FruitPurchaseHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

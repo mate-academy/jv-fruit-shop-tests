@@ -4,6 +4,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParseService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,11 +15,12 @@ public class ParseServiceImpl implements ParseService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<Transaction> transactionsParser(List<String> transactions) {
-        transactions.remove(COLUMN_NAMES_LINE);
-        return transactions.stream()
-                .map(this::getTransaction)
-                .collect(Collectors.toList());
+    public List<Transaction> transactionsParser(List<String> lines) {
+        List<Transaction> transactionList = new ArrayList<>();
+        for (int i = 1; i < lines.size(); i++) {
+            transactionList.add(getTransaction(lines.get(i)));
+        }
+        return transactionList;
     }
 
     private Transaction getTransaction(String string) {

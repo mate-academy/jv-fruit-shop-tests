@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.service.Reader;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class ReaderFromFileImplTest {
     }
 
     @Test
-    public void readFile_Ok() {
+    public void readFromFile_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("first line");
         expected.add("second line");
@@ -33,7 +33,7 @@ public class ReaderFromFileImplTest {
         expected.add("first line");
         expected.add("another string");
         List<String> actual = reader.readFromFile(INPUT_FILE_PATH);
-        assertFalse(expected.equals(actual));
+        assertNotEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

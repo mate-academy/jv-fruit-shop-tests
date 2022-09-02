@@ -21,11 +21,7 @@ public class WriteToFileImplTest {
     @Test
     public void writeToFile_Ok() {
         String expected = null;
-        try {
-            expected = Files.readString(Path.of(PATH));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        expected = getString();
         String actual = "fruit,quantity";
         writeToFile.writeToFile(PATH, actual);
         assertEquals(expected, actual);
@@ -39,5 +35,15 @@ public class WriteToFileImplTest {
     @Test (expected = RuntimeException.class)
     public void wrongPath_WriteToFile_NotOK() {
         writeToFile.writeToFile(INCORRECT_PATH, "fruit,quantity");
+    }
+
+    private String getString() {
+        String expected;
+        try {
+            expected = Files.readString(Path.of(PATH));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return expected;
     }
 }

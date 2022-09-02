@@ -11,7 +11,7 @@ public class ReportCreatorServiceTest {
     private ReportCreatorService reportCreatorService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         reportCreatorService = new ReportCreatorService();
     }
 

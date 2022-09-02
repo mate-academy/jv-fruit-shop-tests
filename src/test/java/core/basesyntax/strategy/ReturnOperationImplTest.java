@@ -13,7 +13,7 @@ public class ReturnOperationImplTest {
     private Fruit apple;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         operationHandler = new ReturnOperationImpl();
         apple = new Fruit("apple");
     }

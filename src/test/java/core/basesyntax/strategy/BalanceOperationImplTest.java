@@ -14,7 +14,7 @@ public class BalanceOperationImplTest {
     private Fruit apple;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         operationHandler = new BalanceOperationImpl();
         apple = new Fruit("apple");
     }
@@ -28,7 +28,7 @@ public class BalanceOperationImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

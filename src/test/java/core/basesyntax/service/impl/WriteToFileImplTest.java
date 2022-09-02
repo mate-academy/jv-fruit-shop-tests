@@ -14,7 +14,7 @@ public class WriteToFileImplTest {
     private WriteToFileImpl writeToFile;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         writeToFile = new WriteToFileImpl();
     }
 

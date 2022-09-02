@@ -13,7 +13,7 @@ public class SupplyOperationImplTest {
     private Fruit apple;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         operationHandler = new SupplyOperationImpl();
         apple = new Fruit("apple");
     }

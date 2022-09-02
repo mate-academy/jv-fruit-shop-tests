@@ -8,22 +8,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String fileName = "src/test/resources/testReport.csv";
     private static final String report = "report for file";
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         writerService = new WriterServiceImpl();
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_NonValidInputData_NotOk() {
-        writerService.writeToFile("", "");
+        writerService.writeToFile(report, "");
     }
 
     @Test

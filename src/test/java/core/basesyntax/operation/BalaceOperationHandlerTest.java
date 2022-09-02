@@ -6,17 +6,17 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalaceOperationHandlerTest {
     private static final FruitTransaction fruitTransaction
             = new FruitTransaction("b", new Fruit("banana"), 10);
     private static final Fruit fruit = new Fruit("banana");
-    private BalaceOperationHandler balaceOperationHandler;
+    private static BalaceOperationHandler balaceOperationHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         balaceOperationHandler = new BalaceOperationHandler();
     }
 

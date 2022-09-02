@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
@@ -14,10 +14,10 @@ public class ReturnOperationHandlerTest {
             = new FruitTransaction("p", new Fruit("banana"), 10);
     private static final Fruit fruit = new Fruit("banana");
 
-    private ReturnOperationHandler returnOperationHandler;
+    private static ReturnOperationHandler returnOperationHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         returnOperationHandler = new ReturnOperationHandler();
     }
 

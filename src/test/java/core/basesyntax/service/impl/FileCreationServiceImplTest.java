@@ -5,16 +5,16 @@ import static org.junit.Assert.assertTrue;
 import core.basesyntax.service.FileCreationService;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileCreationServiceImplTest {
     private static final String newFileName = "src/test/resources/testReport.csv";
     private static final String existingFileName = "src/test/resources/report.csv";
-    private FileCreationService fileCreationService;
+    private static FileCreationService fileCreationService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fileCreationService = new FileCreationServiceImpl();
     }
 

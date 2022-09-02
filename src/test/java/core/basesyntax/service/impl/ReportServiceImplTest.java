@@ -6,14 +6,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private ReportService reportService;
+    private static ReportService reportService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         reportService = new ReportServiceImpl();
     }
 

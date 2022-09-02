@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String fileName = "src/test/resources/outputReport.csv";
-    private ReaderService readerService;
+    private static ReaderService readerService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         readerService = new ReaderServiceImpl();
     }
 

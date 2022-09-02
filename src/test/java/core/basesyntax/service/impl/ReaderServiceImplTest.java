@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String TEST_TO_READ = "src/test/resources/read.csv";
+    private static final String TEST_FILE_PATH = "src/test/resources/read.csv";
     private ReaderService readerService;
 
     @Before
@@ -20,8 +20,8 @@ public class ReaderServiceImplTest {
 
     @Test
     public void read_File_OK() throws IOException {
-        List<String> expected = Files.readAllLines(Path.of(TEST_TO_READ));
-        List<String> actual = readerService.readFromFile(TEST_TO_READ);
+        List<String> expected = Files.readAllLines(Path.of(TEST_FILE_PATH));
+        List<String> actual = readerService.readFromFile(TEST_FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 

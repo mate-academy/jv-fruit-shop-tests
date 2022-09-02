@@ -20,11 +20,12 @@ public class OperationStrategyTest {
     private static final String PURCHASE_OPERATION = "p";
     private static final String SUPPLY_OPERATION = "s";
     private static final String RETURN_OPERATION = "r";
-    private static final Map<String, OperationHandler> Map = new HashMap<>();
+    private static Map<String, OperationHandler> Map;
     private List<Transaction> transactions;
 
     @BeforeClass
     public static void beforeClass() {
+        Map = new HashMap<>();
         Map.put(BALANCE_OPERATION, new BalanceOperationHandler());
         Map.put(SUPPLY_OPERATION, new SupplyOperationHandler());
         Map.put(PURCHASE_OPERATION, new PurchaseOperationHandler());

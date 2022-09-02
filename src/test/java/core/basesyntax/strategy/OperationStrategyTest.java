@@ -21,7 +21,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void returnClassOfBalanceOperationHandler_ok() {
+    public void getOperation_balanceOperationHandler_ok() {
         Class balanceClass = operationStrategy.getByOperation("b").getClass();
         assertEquals("Expected another class BalanceOperationHandler",
                 balanceClass,
@@ -29,7 +29,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void returnClassOfPurchaseOperationHandler_ok() {
+    public void getOperation_purchaseOperationHandler_ok() {
         Class purchaseClass = operationStrategy.getByOperation("p").getClass();
         assertEquals("Expected another class PurchaseOperationHandler",
                 purchaseClass,
@@ -37,7 +37,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void returnClassOfReturnOperationHandler_ok() {
+    public void getOperation_returnOperationHandler_ok() {
         Class returnClass = operationStrategy.getByOperation("r").getClass();
         assertEquals("Expected another class ReturnOperationHandler",
                 returnClass,
@@ -45,7 +45,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void returnClassOfSupplyOperationHandler_ok() {
+    public void getOperation_supplyOperationHandler_ok() {
         Class supplyClass = operationStrategy.getByOperation("s").getClass();
         assertEquals("Expected another class SupplyOperationHandler",
                 supplyClass,

@@ -23,7 +23,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnFruits_ok() {
+    public void operationReturn_fruits_ok() {
         Fruit banana = new Fruit("banana");
         returnOperation.apply(new Transaction("b", banana, 10));
         assertEquals("Expected another value 10",
@@ -32,12 +32,12 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void returnNullTransaction_notOk() {
+    public void operationReturn_nullTransaction_notOk() {
         returnOperation.apply(null);
     }
 
     @Test (expected = NullPointerException.class)
-    public void supplyNullAmount_notOk() {
+    public void operationReturn_nullAmount_notOk() {
         returnOperation.apply(new Transaction("b", new Fruit("banana"), null));
     }
 }

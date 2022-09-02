@@ -23,7 +23,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyFruits_ok() {
+    public void operationSupply_fruits_ok() {
         Fruit banana = new Fruit("banana");
         supply.apply(new Transaction("b", banana, 10));
         assertEquals("Expected another value 10",
@@ -32,12 +32,12 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void supplyNullAmount_notOk() {
+    public void operationSupply_nullAmount_notOk() {
         supply.apply(new Transaction("b", new Fruit("banana"), null));
     }
 
     @Test (expected = NullPointerException.class)
-    public void supplyNullTransaction_notOk() {
+    public void operationSupply_nullTransaction_notOk() {
         supply.apply(null);
     }
 }

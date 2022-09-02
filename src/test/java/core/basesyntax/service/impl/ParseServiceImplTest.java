@@ -19,7 +19,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseToBalance_ok() {
+    public void parseService_toBalance_ok() {
         List<String> stringList = new ArrayList<>();
         stringList.add("b,banana,10");
         assertEquals("Expected another value b,banana,10",
@@ -28,7 +28,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseToPurchase_ok() {
+    public void parseService_toPurchase_ok() {
         List<String> stringList = new ArrayList<>();
         stringList.add("p,mango,228");
         assertEquals("Expected another value p,banana,10",
@@ -37,7 +37,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseToReturn_ok() {
+    public void parseService_toReturn_ok() {
         List<String> stringList = new ArrayList<>();
         stringList.add("r,apple,13");
         assertEquals("Expected another value r,apple,13",
@@ -46,7 +46,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseToSupply_ok() {
+    public void parseService_toSupply_ok() {
         List<String> stringList = new ArrayList<>();
         stringList.add("s,(fruit),1");
         assertEquals("Expected another value s,(fruit),1",
@@ -55,7 +55,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseStringList_ok() {
+    public void parseService_stringList_ok() {
         List<String> stringList = new ArrayList<>();
         stringList.add("b,banana,10");
         stringList.add("p,mango,228");

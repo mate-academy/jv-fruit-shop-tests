@@ -24,7 +24,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void convertStorageToString_ok() {
+    public void convertStorage_toString_ok() {
         Storage.storage.put(new Fruit("banana"), 10);
         Storage.storage.put(new Fruit("apple"), 20);
         Storage.storage.put(new Fruit("cherry"), 30);
@@ -37,7 +37,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void convertEmptyStorageToString_ok() {
+    public void convertStorage_emptyToString_ok() {
         String actual = reportService.getReport();
         String expected = "fruit,quantity" + System.lineSeparator();
         assertEquals("expected another String",

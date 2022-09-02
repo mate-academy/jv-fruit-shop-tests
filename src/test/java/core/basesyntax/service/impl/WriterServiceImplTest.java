@@ -13,7 +13,6 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String REPORT_FILE_CSV = "src/test/java/resources/report.csv";
-
     private static WriterService writerService;
 
     @BeforeClass
@@ -22,7 +21,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_ok() {
+    public void writeService_toFile_ok() {
         String data = "Data " + System.lineSeparator()
                 + "Data 2 " + System.lineSeparator()
                 + "HalfLive 3" + System.lineSeparator()
@@ -40,7 +39,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeEmptyStringToFile_ok() {
+    public void writeService_EmptyString_ok() {
         writerService.writeToFile(REPORT_FILE_CSV, "");
         List<String> actual = readeFromFile(REPORT_FILE_CSV);
         List<String> expected = new ArrayList<>();
@@ -50,12 +49,12 @@ public class WriterServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void incorrectFileName_notOk() {
+    public void writeService_incorrectFileName_notOk() {
         writerService.writeToFile("", "");
     }
 
     @Test (expected = RuntimeException.class)
-    public void nullFileName_notOk() {
+    public void writeService_nullFileName_notOk() {
         writerService.writeToFile(null, "");
     }
 

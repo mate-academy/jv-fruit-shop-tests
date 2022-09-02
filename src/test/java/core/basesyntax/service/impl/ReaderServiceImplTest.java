@@ -21,7 +21,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readEmptyFile_ok() {
+    public void readFromFile_emptyFile_ok() {
         List<String> actual = readerService.readFromFile(EMPTY_FILE_CSV);
         List<String> expected;
         try {
@@ -35,17 +35,17 @@ public class ReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void incorrectFileName_notOk() {
+    public void readFromFile_incorrectFileName_notOk() {
         readerService.readFromFile("");
     }
 
     @Test (expected = RuntimeException.class)
-    public void nullFileName_notOk() {
+    public void readFromFile_nullFileName_notOk() {
         readerService.readFromFile(null);
     }
 
     @Test
-    public void readFile_ok() {
+    public void readFromFile_data_ok() {
         List<String> actual = readerService.readFromFile(INPUT_FILE_CSV);
         List<String> expected;
         try {

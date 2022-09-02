@@ -23,7 +23,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceFruits_ok() {
+    public void operationBalance_fruits_ok() {
         Fruit banana = new Fruit("banana");
         balance.apply(new Transaction("b", banana, 10));
         assertEquals("Expected another value 10",
@@ -32,7 +32,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void balanceNullTransaction_notOk() {
+    public void operationBalance_nullTransaction_notOk() {
         balance.apply(null);
     }
 }

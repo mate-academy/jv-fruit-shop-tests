@@ -23,7 +23,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseFruits_ok() {
+    public void operationPurchase_fruits_ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
         purchase.apply(new Transaction("b", banana, 10));
@@ -33,24 +33,24 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void purchaseFruitsThatNotInStore_notOk() {
+    public void operationPurchase_fruitsThatNotInStore_notOk() {
         purchase.apply(new Transaction("b", new Fruit("banana"), 10));
     }
 
     @Test (expected = RuntimeException.class)
-    public void purchaseFruitsThatNotEnoughInStore_notOk() {
+    public void operationPurchase_fruitsThatNotEnoughInStore_notOk() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 5);
         purchase.apply(new Transaction("b", banana, 10));
     }
 
     @Test (expected = RuntimeException.class)
-    public void purchaseNullAmount_notOk() {
+    public void operationPurchase_nullAmount_notOk() {
         purchase.apply(new Transaction("b", new Fruit("banana"), null));
     }
 
     @Test (expected = NullPointerException.class)
-    public void purchaseNullTransaction_notOk() {
+    public void operationPurchase_nullTransaction_notOk() {
         purchase.apply(null);
     }
 }

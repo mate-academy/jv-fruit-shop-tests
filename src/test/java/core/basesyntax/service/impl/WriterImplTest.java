@@ -4,7 +4,7 @@ import core.basesyntax.service.Writer;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -20,24 +20,14 @@ public class WriterImplTest {
 
     @Test
     public void write_validData_ok() {
-        // expected
         String content = "testContent123  .. to add" + System.lineSeparator()
                 + "second line of test writer" + System.lineSeparator()
                 + "the last one is here";
-        File expectedFile = new File("src/test/resources/writer_validDataExpected.csv");
-        try {
-            Files.write(expectedFile.toPath(), Collections.singleton(content));
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file " + expectedFile.getName(), e);
-        }
-        List<String> expected;
-        try {
-            expected = Files.readAllLines(expectedFile.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t read data from file " + expectedFile.getName(), e);
-        }
+        List<String> expected = new ArrayList<>();
+        expected.add("testContent123  .. to add");
+        expected.add("second line of test writer");
+        expected.add("the last one is here");
 
-        // actual
         File actualFile = writer.write(content, "src/test/resources/writer_validDataActual.csv");
         List<String> actual;
         try {
@@ -46,7 +36,6 @@ public class WriterImplTest {
             throw new RuntimeException("Can`t read data from file " + actualFile.getName());
         }
 
-        // comparison
         for (int i = 0; i < actual.size(); i++) {
             Assert.assertEquals(expected.get(i), actual.get(i));
         }
@@ -63,7 +52,7 @@ public class WriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_unValidFilePath() {
+    public void write_unValidFilePath_notOk() {
         writer.write("hello", "unValid/path");
     }
 }

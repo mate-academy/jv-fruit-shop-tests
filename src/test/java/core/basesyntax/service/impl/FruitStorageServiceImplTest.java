@@ -38,7 +38,7 @@ public class FruitStorageServiceImplTest {
     }
 
     @Test
-    public void process_validData() {
+    public void process_validData_ok() {
         List<String> data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b,banana,100");
@@ -53,7 +53,7 @@ public class FruitStorageServiceImplTest {
         expected.put("apple", 120);
         expected.put("banana", 130);
         fruitStorageService.process(data);
-        Map<String, Integer> actual = storageDao.getAll();
+        Map<String, Integer> actual = Storage.getStorage();
         Assert.assertEquals(expected, actual);
     }
 
@@ -72,7 +72,7 @@ public class FruitStorageServiceImplTest {
     }
 
     @Test
-    public void process_mapIsNull() {
+    public void process_mapIsNull_notOk() {
         List<String> data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b,banana,100");
@@ -98,12 +98,12 @@ public class FruitStorageServiceImplTest {
         expected.put("banana", 130);
         expected.put("apple", 120);
         fruitStorageService.process(data);
-        Map<String, Integer> actual = storageDao.getAll();
+        Map<String, Integer> actual = Storage.getStorage();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void process_unValidReportHead() {
+    public void process_unValidReportHead_notOk() {
         List<String> data = new ArrayList<>();
         data.add("unValid Report Head");
         data.add("b,banana,100");
@@ -114,7 +114,7 @@ public class FruitStorageServiceImplTest {
     }
 
     @Test
-    public void process_unValidDataRows() {
+    public void process_unValidDataRows_notOk() {
         List<String> data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b ,banana -100");

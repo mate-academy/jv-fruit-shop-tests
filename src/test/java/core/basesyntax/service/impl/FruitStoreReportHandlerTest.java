@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportHandler;
 import org.junit.After;
 import org.junit.Assert;
@@ -15,13 +16,13 @@ public class FruitStoreReportHandlerTest {
     @BeforeClass
     public static void setUp() {
         storageDao = new StorageDaoImpl();
+        reportHandler = new FruitStoreReportHandler(storageDao);
     }
 
     @Test
     public void makeReport_someDataToReport_ok() {
-        storageDao.add("banana", 100);
-        storageDao.add("apple", 150);
-        reportHandler = new FruitStoreReportHandler(storageDao);
+        Storage.getStorage().put("banana", 100);
+        Storage.getStorage().put("apple", 150);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator()
                 + "apple,150";
@@ -29,22 +30,21 @@ public class FruitStoreReportHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void makeReport_nullStorageDao_notOk() {
-        reportHandler = new FruitStoreReportHandler(null);
-        reportHandler.makeReport();
-    }
-
     @Test
     public void makeReport_emptyStorage_ok() {
-        reportHandler = new FruitStoreReportHandler(storageDao);
         String expected = "fruit,quantity";
         String actual = reportHandler.makeReport();
         Assert.assertEquals(expected, actual);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void makeReport_nullStorageDao_notOk() {
+        ReportHandler storageDaoNullHandler = new FruitStoreReportHandler(null);
+        storageDaoNullHandler.makeReport();
+    }
+
     @After
     public void tearDown() {
-        storageDao.getAll().clear();
+        Storage.getStorage().clear();
     }
 }

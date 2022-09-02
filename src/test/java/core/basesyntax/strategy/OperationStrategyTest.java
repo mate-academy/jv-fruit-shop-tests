@@ -11,15 +11,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private static Map<String, OperationHandler> map = new HashMap<>();
-    private OperationStrategy strategy = new OperationStrategy(map);
+    private static OperationStrategy strategy;
 
     @BeforeClass
     public static void beforeClass() {
+        Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());
         map.put("p", new PurchaseOperationHandler());
         map.put("s", new SupplyOperationHandler());
         map.put("r", new ReturnOperationHandler());
+        strategy = new OperationStrategy(map);
     }
 
     @Test

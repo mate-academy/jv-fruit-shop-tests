@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,10 +16,5 @@ public class ReportServiceImplTest {
                 && report.contains("orange,10")
                 && report.contains("apple,20")
                 && report.contains("watermelon,30"));
-    }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
     }
 }

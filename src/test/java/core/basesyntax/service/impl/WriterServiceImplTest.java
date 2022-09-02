@@ -31,6 +31,21 @@ public class WriterServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullFileName_NotOk() {
+        writerService.writeToFile(null, PATH_OF_OUTPUT_FILE);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullReport_NotOk() {
+        writerService.writeToFile(PATH_OF_OUTPUT_FILE,null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullCheckAndNullFileName_NotOk() {
+        writerService.writeToFile(null, null);
+    }
+
     private List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));

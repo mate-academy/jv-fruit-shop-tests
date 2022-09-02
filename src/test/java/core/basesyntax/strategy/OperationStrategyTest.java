@@ -47,4 +47,9 @@ public class OperationStrategyTest {
         Class<?> actual = operationStrategy.getByOperation("r").getClass();
         Assert.assertEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void getByOperation_checkAnotherOperation_NotOk() {
+        Class<?> actual = operationStrategy.getByOperation("fff").getClass();
+    }
 }

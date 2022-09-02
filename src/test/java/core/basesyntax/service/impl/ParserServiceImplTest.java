@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.BalanceStrategy;
@@ -46,12 +47,16 @@ public class ParserServiceImplTest {
 
     @Test
     public void parse_listStrings_ok() {
+        List<Transaction> expectedTransactionList = new ArrayList<>();
         strings.add("b,apple,100");
+        expectedTransactionList.add(new Transaction(new BalanceStrategy(), "apple", 100));
         strings.add("s,banana,100");
+        expectedTransactionList.add(new Transaction(new SupplyStrategy(), "banana", 100));
         strings.add("p,banana,13");
+        expectedTransactionList.add(new Transaction(new PurchaseStrategy(), "banana", 13));
         strings.add("r,apple,10");
-        Integer expected = 4;
-        Integer actual = parserService.parse(strings).size();
-        assertEquals("Expected size must be " + expected + " but is " + actual, expected, actual);
+        expectedTransactionList.add(new Transaction(new ReturnStrategy(), "apple", 10));
+        List<Transaction> actualTransactionList = parserService.parse(strings);
+        assertEquals("Expected size must be " + expectedTransactionList + " but is " + actualTransactionList, expectedTransactionList, actualTransactionList);
     }
 }

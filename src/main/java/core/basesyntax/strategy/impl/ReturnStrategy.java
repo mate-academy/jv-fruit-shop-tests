@@ -10,4 +10,9 @@ public class ReturnStrategy implements Strategy {
         Integer previousValue = Storage.fruits.get(transaction.getFruit());
         Storage.fruits.put(transaction.getFruit(), previousValue + transaction.getValue());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getClass() == obj.getClass();
+    }
 }

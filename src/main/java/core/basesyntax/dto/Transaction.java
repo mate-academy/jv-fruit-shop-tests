@@ -1,6 +1,7 @@
 package core.basesyntax.dto;
 
 import core.basesyntax.strategy.Strategy;
+import java.util.Objects;
 
 public class Transaction {
     private Strategy strategy;
@@ -23,5 +24,19 @@ public class Transaction {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Transaction that = (Transaction) o;
+        return value == that.value
+                && Objects.equals(strategy, that.strategy)
+                && Objects.equals(fruit, that.fruit);
     }
 }

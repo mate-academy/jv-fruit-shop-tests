@@ -9,4 +9,9 @@ public class BalanceStrategy implements Strategy {
     public void makeOperation(Transaction transaction) {
         Storage.fruits.put(transaction.getFruit(), transaction.getValue());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.getClass() == obj.getClass();
+    }
 }

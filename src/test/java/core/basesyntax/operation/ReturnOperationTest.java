@@ -35,12 +35,4 @@ public class ReturnOperationTest {
         Integer actual = Storage.fruits.get("banana");
         assertEquals(expected, actual);
     }
-
-    @Test(expected = RuntimeException.class)
-    public void handleReturnCheck_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "banana", 75);
-        handler.handle(fruitTransaction);
-
-    }
 }

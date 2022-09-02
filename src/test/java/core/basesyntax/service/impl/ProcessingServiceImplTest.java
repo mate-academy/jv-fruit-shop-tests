@@ -16,9 +16,7 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ProcessingServiceImplTest {
     private static ProcessingService processingService;
@@ -26,9 +24,6 @@ public class ProcessingServiceImplTest {
     private static List<String> validStringValues;
     private static Fruit banana;
     private static Fruit apple;
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
     
     @BeforeClass
     public static void beforeClass() {
@@ -67,20 +62,19 @@ public class ProcessingServiceImplTest {
                 checkedStorage);
     }
 
-    @Test
+    @Test(expected = NumberFormatException.class)
     public void process_numberFormatExceptionExpected_notOk() {
-        exceptionRule.expect(NumberFormatException.class);
         processingService.process(fruitStrategy, List.of("b,banana,s"));
     }
 
     @Test
     public void process_ignoringInvalidOperation_ok() {
         processingService.process(fruitStrategy, List.of("q,banana,100"));
-        Assert.assertTrue("The fruit cannot exist in storage.",
-                !Storage.stock.containsKey(banana));
+        Assert.assertFalse("The fruit cannot exist in storage.",
+                Storage.stock.containsKey(banana));
         processingService.process(fruitStrategy, List.of("b,banana,100", "q,banana,45"));
-        Assert.assertTrue("Unknown operation must be ignored.",
-                Storage.stock.get(banana) == 100);
+        Assert.assertEquals("Unknown operation must be ignored.",
+                100, (int) Storage.stock.get(banana));
     }
 
     @After

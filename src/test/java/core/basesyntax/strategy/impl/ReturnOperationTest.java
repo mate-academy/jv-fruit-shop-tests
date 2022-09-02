@@ -6,16 +6,11 @@ import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ReturnOperationTest {
     private static OperationHandler returnOperation;
     private static Fruit fruit;
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -42,9 +37,8 @@ public class ReturnOperationTest {
         Assert.assertEquals(100, (int) Storage.stock.get(fruit));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void execute_negativeNumber_notOk() {
-        exceptionRule.expect(RuntimeException.class);
         Storage.stock.put(fruit, 100);
         returnOperation.execute(fruit, -10);
     }

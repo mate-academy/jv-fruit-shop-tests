@@ -6,16 +6,11 @@ import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class PurchaseOperationTest {
     private static OperationHandler purchaseOperation;
     private static Fruit fruit;
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -33,9 +28,8 @@ public class PurchaseOperationTest {
                 expected, Storage.stock.get(fruit));
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void execute_notValidFruit_notOk() {
-        exceptionRule.expect(RuntimeException.class);
         purchaseOperation.execute(new Fruit("banana"), 10);
     }
 
@@ -46,16 +40,14 @@ public class PurchaseOperationTest {
         Assert.assertNull(Storage.stock.get(null));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void execute_moreThanTotal_notOk() {
-        exceptionRule.expect(RuntimeException.class);
         Storage.stock.put(fruit, 9);
         purchaseOperation.execute(fruit, 10);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void execute_negativeNumber_notOk() {
-        exceptionRule.expect(RuntimeException.class);
         Storage.stock.put(fruit, 100);
         purchaseOperation.execute(fruit, -10);
     }

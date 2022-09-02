@@ -20,13 +20,13 @@ public class ReportServiceImplTest {
     public void createReport_correctData_ok() {
         Storage.stock.put(new Fruit("banana"), 100);
         Storage.stock.put(new Fruit("apple"), 100);
-        Assert.assertEquals("Report is not correct.",
-                "fruit,quantity"
+        String expected = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,100"
                 + System.lineSeparator()
                 + "apple,100"
-                + System.lineSeparator(), reportService.createReport());
+                + System.lineSeparator();
+        Assert.assertEquals("Report is not correct.", expected, reportService.createReport());
     }
 
     @Test

@@ -4,16 +4,11 @@ import core.basesyntax.service.ReaderService;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class ReaderServiceImplTest {
     private static final String FILE_PATH = "src/test/resources/inputTest.csv";
     private static ReaderService readerService;
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -29,9 +24,8 @@ public class ReaderServiceImplTest {
                 testList, list);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFrom_notValidFilePath_ok() {
-        exceptionRule.expect(RuntimeException.class);
         readerService.readFrom("file/path");
     }
 }

@@ -6,17 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
     private static final String REPORT_FILEPATH = "src/test/resources/reportTest.csv";
     private static WriterService writerService;
     private static String report;
-
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -30,18 +25,21 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeTo_correctReport_ok() throws IOException {
+    public void writeTo_correctReport_ok() {
         writerService.writeTo(REPORT_FILEPATH, report);
         Assert.assertEquals(report, readFile());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeTo_incorrectPath_notOk() {
-        exceptionRule.expect(RuntimeException.class);
         writerService.writeTo("some/path", report);
     }
 
-    private String readFile() throws IOException {
-        return Files.readString(Path.of(REPORT_FILEPATH));
+    private String readFile() {
+        try {
+            return Files.readString(Path.of(REPORT_FILEPATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read test file.");
+        }
     }
 }

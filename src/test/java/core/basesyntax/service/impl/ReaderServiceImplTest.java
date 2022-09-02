@@ -10,12 +10,12 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
     private static final String FILE_NAME = "src/test/resources/test.csv";
-    private static List<String> DEFAULT_DATA;
+    private static List<String> defaultData;
 
     @BeforeClass
     public static void beforeClass() {
         readerService = new ReaderServiceImpl();
-        DEFAULT_DATA = List.of("b,banana,20",
+        defaultData = List.of("b,banana,20",
                 "b,apple,20",
                 "p,banana,3",
                 "p,apple,5",
@@ -25,9 +25,9 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readreaderService_readFromFile_isOk() {
+    public void readreaderService_readFromFile_Ok() {
         List<String> actual = readerService.readFromFile(FILE_NAME);
-        assertEquals(DEFAULT_DATA, actual);
+        assertEquals(defaultData, actual);
     }
 
     @Test (expected = RuntimeException.class)

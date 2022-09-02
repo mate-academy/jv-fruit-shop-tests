@@ -20,12 +20,12 @@ public class ParserServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void parserService_Null_NotOk() {
+    public void parserService_null_NotOk() {
         assertEquals(parserService.parse(null), Collections.EMPTY_LIST);
     }
 
     @Test
-    public void parserService_EmptyList_Ok() {
+    public void parserService_emptyList_Ok() {
         assertEquals(parserService.parse(Collections.EMPTY_LIST), Collections.EMPTY_LIST);
     }
 
@@ -40,9 +40,7 @@ public class ParserServiceImplTest {
         expected.add(new Transaction("b", new Fruit("apple"), 20));
         List<Transaction> actual = parserService.parse(lines);
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i).getOperation(), actual.get(i).getOperation());
-            assertEquals(expected.get(i).getFruit(), actual.get(i).getFruit());
-            assertEquals(expected.get(i).getQuantity(), actual.get(i).getQuantity());
+            assertEquals(expected, actual);
         }
 
     }

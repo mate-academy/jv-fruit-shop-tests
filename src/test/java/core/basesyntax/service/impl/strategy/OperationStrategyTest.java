@@ -41,7 +41,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getByOperation_NonValidOperation_NotOk() {
+    public void getByOperation_nonValidOperation_NotOk() {
         String operation = "bspr";
         assertEquals(null, strategy.getByOperation(operation));
     }

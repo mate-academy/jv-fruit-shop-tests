@@ -49,6 +49,6 @@ public class FruitShopServiceImplTest {
         int expected = 220;
         fruitShopService.process(fruitRecordList);
         int actual = Storage.storage.get(new Fruit("banana"));
-        assertEquals(expected, actual);
+        assertEquals("Must be equal",expected, actual);
     }
 }

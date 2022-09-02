@@ -31,4 +31,9 @@ public class ReaderServiceImplTest {
         List<String> actual = readerService.readFromFile(INPUT_FILE);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_nullFile_notOK() {
+        readerService.readFromFile(null);
+    }
 }

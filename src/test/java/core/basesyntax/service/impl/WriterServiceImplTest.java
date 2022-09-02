@@ -7,15 +7,15 @@ import java.nio.file.Files;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static WriterService writerService;
     private static final String FILE_NAME = "src/test/resources/writerServiceTest.csv";
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         writerService = new WriterServiceImpl();
     }
 
@@ -28,14 +28,12 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeData_ok() {
-        writerService.writeReport("Hello world", FILE_NAME);
-        List<String> dataFromFile;
-        try {
-            dataFromFile = Files.readAllLines(new File(FILE_NAME).toPath());
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read a file " + FILE_NAME, e);
-        }
-        Assert.assertEquals("Wrong data in file " + FILE_NAME, "Hello world", dataFromFile.get(0));
+        String expected = "Hello world";
+        writerService.writeReport(expected, FILE_NAME);
+        List<String> actualDataFromFile = readLines(FILE_NAME);
+        String actual = actualDataFromFile.get(0);
+        Assert.assertEquals("Wrong data in file " + FILE_NAME, expected,
+                actual);
     }
 
     @After
@@ -43,6 +41,14 @@ public class WriterServiceImplTest {
         File file = new File(FILE_NAME);
         if (file.exists()) {
             file.delete();
+        }
+    }
+
+    private List<String> readLines(String name) {
+        try {
+            return Files.readAllLines(new File(name).toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read a file " + name, e);
         }
     }
 }

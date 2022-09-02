@@ -5,7 +5,7 @@ import core.basesyntax.service.ParsingService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ParsingServiceImplTest {
@@ -13,8 +13,8 @@ public class ParsingServiceImplTest {
     private static final int SECOND_TRANSACTION = 1;
     private static ParsingService parsingService;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         parsingService = new ParsingServiceImpl();
     }
 

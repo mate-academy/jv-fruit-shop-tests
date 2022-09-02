@@ -6,14 +6,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.TransactionHandler;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnTransactionHandlerTest {
-    private static TransactionHandler transactionHandler;
+    private TransactionHandler transactionHandler;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         transactionHandler = new ReturnTransactionHandler(new FruitStorageDaoImpl());
     }
 

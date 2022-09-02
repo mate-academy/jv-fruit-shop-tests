@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static ReportService reportService;
+    private ReportService reportService;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         reportService = new ReportServiceImpl();
     }
 
@@ -30,7 +30,7 @@ public class ReportServiceImplTest {
         Assert.assertEquals("Expected equals with valid string", expectedString, actualString);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void nullValue_notOk() {
         reportService.createReport(null);
     }

@@ -17,17 +17,17 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionServiceImplTest {
-    private static FruitStorageDao dao;
-    private static Map<FruitTransaction.Operation, TransactionHandler> map;
-    private static TransactionHandlerStrategy strategy;
-    private static TransactionService transactionService;
+    private FruitStorageDao dao;
+    private Map<FruitTransaction.Operation, TransactionHandler> map;
+    private TransactionHandlerStrategy strategy;
+    private TransactionService transactionService;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         dao = new FruitStorageDaoImpl();
         map = new HashMap<>();
         map.put(FruitTransaction.Operation.BALANCE, new BalanceTransactionHandler(dao));

@@ -4,14 +4,14 @@ import core.basesyntax.service.ValidatorService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ValidatorServiceImplTest {
-    private static ValidatorService validator;
+    private ValidatorService validator;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void beforeClass() {
         validator = new ValidatorServiceImpl();
     }
 

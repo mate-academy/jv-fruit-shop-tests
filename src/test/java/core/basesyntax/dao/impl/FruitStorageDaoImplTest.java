@@ -7,14 +7,14 @@ import java.util.Optional;
 import java.util.Set;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitStorageDaoImplTest {
-    private static FruitStorageDao dao;
+    private FruitStorageDao dao;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         dao = new FruitStorageDaoImpl();
     }
 

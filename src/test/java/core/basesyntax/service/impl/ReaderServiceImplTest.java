@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ReaderService;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
@@ -13,8 +13,8 @@ public class ReaderServiceImplTest {
     private static final int THIRD_LINE = 2;
     private static ReaderService reader;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         reader = new ReaderServiceImpl();
     }
 

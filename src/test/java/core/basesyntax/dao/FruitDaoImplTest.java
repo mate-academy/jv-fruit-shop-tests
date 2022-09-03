@@ -14,6 +14,7 @@ public class FruitDaoImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        Storage.fruitStorage.clear();
         fruitDao = new FruitDaoImpl();
     }
 

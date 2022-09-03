@@ -4,20 +4,20 @@ import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
     private static final String FILE_EXIST = "src/main/resourses/input.csv";
-    private static final String FILE_NOT_EXIST = "src/main/resourses/input_fake_file.csv";
-    private FileReader fileReaderTest;
+    private static final String FILE_NOT_EXIST = "any/wrong_file.csv";
+    private static FileReader fileReaderTest;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileReaderTest = new FileReaderImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readWrongFile_Not_Ok() {
         fileReaderTest.readFromFile(FILE_NOT_EXIST);
     }

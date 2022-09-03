@@ -8,19 +8,22 @@ import core.basesyntax.strategy.impl.OperationHandlerImplSupply;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerImplStrategyTest {
-    private OperationHandlerImplBalance operationHandlerImplBalance;
-    private OperationHandlerImplPurchase operationHandlerImplPurchase;
-    private OperationHandlerImplReturn operationHandlerImplReturn;
-    private OperationHandlerImplSupply operationHandlerImplSupply;
-    private Map<String, OperationHandler> operationHandlerMap;
-    private OperationHandlerImplStrategy operationHandlerImplStrategy;
+    private static OperationHandlerImplBalance operationHandlerImplBalance;
+    private static OperationHandlerImplPurchase operationHandlerImplPurchase;
+    private static OperationHandlerImplReturn operationHandlerImplReturn;
+    private static OperationHandlerImplSupply operationHandlerImplSupply;
+    private static Map<String, OperationHandler> operationHandlerMap;
+    private static OperationHandlerImplStrategy operationHandlerImplStrategy;
+    private static final int ZERO = 0;
+    private static final int FIVE = 0;
+    private static final int TEN = 0;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationHandlerImplBalance = new OperationHandlerImplBalance();
         operationHandlerImplPurchase = new OperationHandlerImplPurchase();
         operationHandlerImplReturn = new OperationHandlerImplReturn();
@@ -32,32 +35,37 @@ public class OperationHandlerImplStrategyTest {
 
     @Test
     public void testBalance_Ok() {
-        int actual = operationHandlerImplBalance.apply(5,5);
-        Assert.assertEquals(10, actual);
+        int actual = operationHandlerImplBalance.apply(FIVE,FIVE);
+        int expected = TEN;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testPurchase_Ok() {
-        int actual = operationHandlerImplPurchase.apply(5,5);
-        Assert.assertEquals(0, actual);
+        int actual = operationHandlerImplPurchase.apply(FIVE,FIVE);
+        int expected = ZERO;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testReturn_Ok() {
-        int actual = operationHandlerImplReturn.apply(5,5);
-        Assert.assertEquals(10, actual);
+        int actual = operationHandlerImplReturn.apply(FIVE,FIVE);
+        int expected = TEN;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testSupply_Ok() {
-        int actual = operationHandlerImplSupply.apply(5,5);
-        Assert.assertEquals(10, actual);
+        int actual = operationHandlerImplSupply.apply(FIVE,FIVE);
+        int expected = TEN;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testStrategy_Ok() {
         OperationHandler actualHandler = operationHandlerImplStrategy.get("b");
-        int actual = actualHandler.apply(5,5);
-        Assert.assertEquals(10, actual);
+        int actual = actualHandler.apply(FIVE,FIVE);
+        int expected = TEN;
+        Assert.assertEquals(expected, actual);
     }
 }

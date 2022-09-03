@@ -5,16 +5,16 @@ import core.basesyntax.service.ReportGeneration;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportGenerationImplTest {
-    private Map<Fruit,Integer> map;
-    private ReportGeneration reportGeneration;
-    private StringBuilder testReport;
+    private static Map<Fruit,Integer> map;
+    private static ReportGeneration reportGeneration;
+    private static StringBuilder testReport;
 
-    @Before
-    public void sutUp() {
+    @BeforeClass
+    public static void sutUp() {
         map = new HashMap<>();
         map.put(new Fruit("banana"), 132);
         map.put(new Fruit("apple"), 90);

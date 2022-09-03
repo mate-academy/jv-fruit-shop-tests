@@ -6,15 +6,15 @@ import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private List<String> testParsedData;
-    private TransactionParser transactionParser;
+    private static List<String> testParsedData;
+    private static TransactionParser transactionParser;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         testParsedData = new ArrayList<>();
         transactionParser = new TransactionParserImpl();
         testParsedData.add("type,fruit,quantity");
@@ -27,11 +27,9 @@ public class TransactionParserImplTest {
     public void transactionsParsing_Ok() {
         List<Transaction> expected = new ArrayList<>();
         expected.add(new Transaction("b", new Fruit("banana"), 20));
-        expected.add(new Transaction("b", new Fruit("apple"), 100));
-        expected.add(new Transaction("s", new Fruit("banana"), 100));
         List<Transaction> actual = transactionParser.transactionParser(testParsedData);
         Assert.assertEquals(expected.get(0).getFruit(), actual.get(0).getFruit());
-        Assert.assertEquals(expected.get(1).getQuantity(), actual.get(1).getQuantity());
-        Assert.assertEquals(expected.get(2).getOperation(), actual.get(2).getOperation());
+        Assert.assertEquals(expected.get(0).getOperation(), actual.get(0).getOperation());
+        Assert.assertEquals(expected.get(0).getQuantity(), actual.get(0).getQuantity());
     }
 }

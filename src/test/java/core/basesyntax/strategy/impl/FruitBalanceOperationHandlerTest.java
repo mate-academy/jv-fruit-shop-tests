@@ -7,6 +7,8 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.FruitOperationHandler;
 import java.util.Map;
+
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,5 +28,10 @@ public class FruitBalanceOperationHandlerTest {
         Map<String, Integer> storage = Storage.getStorage();
         assertEquals(Integer.valueOf(20), storage.get("banana"));
         assertEquals(Integer.valueOf(30), storage.get("apple"));
+    }
+
+    @After
+    public void tearDown() {
+        Storage.getStorage().clear();
     }
 }

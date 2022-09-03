@@ -20,7 +20,7 @@ public class FruitPurchaseOperationHandlerTest {
     }
 
     @Test
-    public void operate_validData() {
+    public void operate_validData_ok() {
         Map<String, Integer> storage = Storage.getStorage();
         storage.put("banana", 30);
         storage.put("apple", 40);

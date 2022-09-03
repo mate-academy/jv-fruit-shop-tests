@@ -5,15 +5,21 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.strategy.OperationService;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AddOperationServiceImplTest {
-    private AddOperationServiceImpl addOperationService;
+    private static OperationService addOperationService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        addOperationService = new AddOperationServiceImpl();
+    }
 
     @Before
-    public void setUp() throws Exception {
-        addOperationService = new AddOperationServiceImpl();
+    public void setUp() {
         Storage.clear();
         Storage.add(new Fruit("apple"), 20);
         Storage.add(new Fruit("banana"), 30);

@@ -5,16 +5,22 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.strategy.OperationService;
 import java.util.NoSuchElementException;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SubtractOperationServiceImplTest {
-    private SubtractOperationServiceImpl subtractOperationService;
+    private static OperationService subtractOperationService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        subtractOperationService = new SubtractOperationServiceImpl();
+    }
 
     @Before
-    public void setUp() throws Exception {
-        subtractOperationService = new SubtractOperationServiceImpl();
+    public void setUp() {
         Storage.clear();
         Storage.add(new Fruit("apple"), 20);
         Storage.add(new Fruit("banana"), 30);

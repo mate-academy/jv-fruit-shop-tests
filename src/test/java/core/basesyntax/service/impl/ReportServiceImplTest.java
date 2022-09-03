@@ -4,10 +4,18 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportService;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
+    private static ReportService reportService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        reportService = new ReportServiceImpl();
+    }
 
     @Before
     public void setUp() {
@@ -19,7 +27,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void reportServiceImpl_validData_Ok() {
-        String actual = new ReportServiceImpl().createReport();
+        String actual = reportService.createReport();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,30" + System.lineSeparator()
                 + "apple,20" + System.lineSeparator()
@@ -31,6 +39,6 @@ public class ReportServiceImplTest {
     public void reportServiceImpl_emptyStorage_Ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         Storage.clear();
-        assertEquals(expected, new ReportServiceImpl().createReport());
+        assertEquals(expected, reportService.createReport());
     }
 }

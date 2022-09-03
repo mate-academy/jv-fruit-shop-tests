@@ -4,58 +4,63 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.strategy.impl.AddOperationServiceImpl;
 import core.basesyntax.strategy.impl.SubtractOperationServiceImpl;
-import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationServiceStrategyTest {
-    private Map<String,OperationService> operationServiceMap;
+    private static OperationServiceStrategy operationService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        operationService = new OperationServiceStrategy();
+    }
 
     @Test
     public void operationServiceStrategy_testBalanceOperation_Ok() {
-        Class actual = new OperationServiceStrategy()
+        Class<? extends OperationService> actual = operationService
                 .getOperationServiceByOperationType("b")
                 .getClass();
-        Class expected = AddOperationServiceImpl.class;
+        Class<AddOperationServiceImpl> expected = AddOperationServiceImpl.class;
         assertEquals(expected, actual);
     }
 
     @Test
     public void operationServiceStrategy_testPurchaseOperation_Ok() {
-        Class actual = new OperationServiceStrategy()
+        Class<? extends OperationService> actual = operationService
                 .getOperationServiceByOperationType("p")
                 .getClass();
-        Class expected = SubtractOperationServiceImpl.class;
+        Class<SubtractOperationServiceImpl> expected = SubtractOperationServiceImpl.class;
         assertEquals(expected, actual);
     }
 
     @Test
     public void operationServiceStrategy_testReturnOperation_Ok() {
-        Class actual = new OperationServiceStrategy()
+        Class<? extends OperationService> actual = operationService
                 .getOperationServiceByOperationType("r")
                 .getClass();
-        Class expected = AddOperationServiceImpl.class;
+        Class<AddOperationServiceImpl> expected = AddOperationServiceImpl.class;
         assertEquals(expected, actual);
     }
 
     @Test
     public void operationServiceStrategy_testSupplyOperation_Ok() {
-        Class actual = new OperationServiceStrategy()
+        Class<? extends OperationService> actual = operationService
                 .getOperationServiceByOperationType("s")
                 .getClass();
-        Class expected = AddOperationServiceImpl.class;
+        Class<AddOperationServiceImpl> expected = AddOperationServiceImpl.class;
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void operationServiceStrategy_testNullOperation_NotOk() {
-        Class nullOperation = new OperationServiceStrategy()
+        Class<? extends OperationService> nullOperation = operationService
                 .getOperationServiceByOperationType(null)
                 .getClass();
     }
 
     @Test(expected = RuntimeException.class)
     public void operationServiceStrategy_testInvalidOperation_NotOk() {
-        Class invalidOperation = new OperationServiceStrategy()
+        Class<? extends OperationService> invalidOperation = operationService
                 .getOperationServiceByOperationType("k")
                 .getClass();
     }

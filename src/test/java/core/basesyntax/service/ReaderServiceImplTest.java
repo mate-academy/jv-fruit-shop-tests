@@ -34,7 +34,6 @@ public class ReaderServiceImplTest {
         List<String> expected = new ArrayList<>();
         expected.add("hello");
         expected.add("hi");
-        expected.add("yo");
         List<String> actual = readerService.readFromFile("src/test/java/resources/hello.txt");
         Assert.assertEquals(expected, actual);
     }

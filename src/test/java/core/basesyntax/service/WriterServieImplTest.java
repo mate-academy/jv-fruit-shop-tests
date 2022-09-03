@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
-
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;

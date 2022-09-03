@@ -24,7 +24,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_StorageIsNotEmpty() {
+    public void getReport_getReport_StorageIsNotEmpty_Ok() {
         Storage.storage.put(new Fruit("banana"), 10);
         Storage.storage.put(new Fruit("apple"), 5);
         String expected = "fruit,quantity" + System.lineSeparator()

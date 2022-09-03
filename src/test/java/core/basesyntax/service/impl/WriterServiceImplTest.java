@@ -17,7 +17,7 @@ public class WriterServiceImplTest {
     private static WriterService writerService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         writerService = new WriterServiceImpl();
     }
 

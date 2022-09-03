@@ -39,18 +39,16 @@ public class CsvFileDataHandlerImplTest {
         operations.put("p", new PurchaseHandler(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
         dataHandler = new CsvFileDataHandlerImpl(operationStrategy);
-        fileData = new ArrayList<>();
-        fileData.add("type,fruit,quantity");
     }
 
     @Before
     public void beforeEachTest() {
-        fileData.remove(fileData.size() - 1);
+        fileData = new ArrayList<>();
+        fileData.add("type,fruit,quantity");
     }
 
     @Test
     public void processData_checkAllOperations_ok() {
-        fileData.add("type,fruit,quantity");
         fileData.add("b,banana,20");
         fileData.add("b,apple,100");
         fileData.add("s,banana,100");

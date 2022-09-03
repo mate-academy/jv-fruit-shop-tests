@@ -19,7 +19,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void createEmptyReport_ok() {
+    public void createReport_emptyReport_ok() {
         assertEquals("Empty storage should have empty report!",
                 HEADER + "", reportCreator.createReport());
     }

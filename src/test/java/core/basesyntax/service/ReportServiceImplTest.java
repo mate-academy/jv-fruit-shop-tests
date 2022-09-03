@@ -4,10 +4,16 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private ReportService reportService = new ReportServiceImpl();
+    private ReportService reportService;
+
+    @Before
+    public void setup(){
+        reportService = new ReportServiceImpl();
+    }
 
     @Test
     public void report_written_Okey() {

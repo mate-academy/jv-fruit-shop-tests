@@ -12,15 +12,13 @@ import org.junit.rules.ExpectedException;
 public class WriterServieImplTest {
     private static final String FILE_NOT_EXIST = "report";
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    public ExpectedException expectedException = ExpectedException.none();
     private WriterService writerService = new WriterServiceImpl();
 
     @Test
     public void writing_to_file_which_not_exist_Not_OKey() {
-        thrown.expect(RuntimeException.class);
-        thrown.expectMessage("File " + FILE_NOT_EXIST + " could not be written to");
-        File directory = new File(FILE_NOT_EXIST);
-        boolean bool = directory.mkdir();
+        expectedException.expect(RuntimeException.class);
+        expectedException.expectMessage("File " + FILE_NOT_EXIST + " could not be written to");
         writerService.writeToFile(FILE_NOT_EXIST, "yo");
     }
 

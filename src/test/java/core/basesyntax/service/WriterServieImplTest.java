@@ -4,6 +4,7 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -32,5 +33,18 @@ public class WriterServieImplTest {
     }
     private List<String> readFile(String file) throws Exception  {
         return Files.readAllLines(Paths.get(file));
+    }
+
+    @Test
+    public void writing_to_file_lines_Okey() throws Exception {
+        String report = "yo" + System.lineSeparator() + "hello"
+                + System.lineSeparator() + "hi";
+        List<String> expected = new ArrayList<>();
+        expected.add("yo");
+        expected.add("hello");
+        expected.add("hi");
+        writerService.writeToFile("src/test/java/resources/yo.txt", report);
+        List <String> actual = readFile("src/test/java/resources/yo.txt");
+        Assert.assertEquals(expected, actual);
     }
 }

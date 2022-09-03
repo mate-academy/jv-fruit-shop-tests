@@ -13,7 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ContentWriterImplTest {
-
     private static final String line = "Hello" + System.lineSeparator();
     private static final String resourcesPath = "src" + File.separator + "test" + File.separator
                 + "resources" + File.separator;
@@ -21,7 +20,7 @@ public class ContentWriterImplTest {
     private static ContentWriter contentWriter;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void setUp() throws Exception {
         contentWriter = new ContentWriterImpl();
     }
 
@@ -30,15 +29,15 @@ public class ContentWriterImplTest {
         contentWriter.write(line, resourcesPath + resultFile);
         try {
             List<String> list = Files.readAllLines(Path.of(resourcesPath + resultFile));
-            String actualLine = list.get(list.size() - 1) + System.lineSeparator();
-            Assert.assertEquals("Must be equals", line, actualLine);
+            String actual = list.get(list.size() - 1) + System.lineSeparator();
+            Assert.assertEquals("Must be equals", line, actual);
         } catch (IOException e) {
             throw new RuntimeException("File not found", e);
         }
     }
 
     @After
-    public void clean() {
+    public void cleanUp() {
         try {
             Files.newBufferedWriter(
                     Path.of(resourcesPath + resultFile),

@@ -12,29 +12,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyActivityHandlerImplTest {
-
     private static Fruit fruit;
     private static FruitTransaction fruitTransaction;
     private static ActivityDaoDb activityDaoDb;
     private static SupplyActivityHandlerImpl supplyActivityHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         activityDaoDb = new ActivityDaoDbImpl();
         supplyActivityHandler = new SupplyActivityHandlerImpl(activityDaoDb);
         fruit = new Fruit("orange");
-        fruitTransaction = new FruitTransaction(TypeActivity.PURCHASE, fruit,25);
     }
 
     @Test
     public void test_supply_ok() {
+        fruitTransaction = new FruitTransaction(TypeActivity.PURCHASE, fruit,25);
         supplyActivityHandler.calculate(fruitTransaction);
-        int actualCount = Storage.data.get(fruit);
-        Assert.assertEquals("must be 25", 25, actualCount);
+        int expected = 25;
+        int actual = Storage.data.get(fruit);
+        Assert.assertEquals("Must be equals", expected, actual);
     }
 
     @After
-    public void clear() {
+    public void clearUp() {
         Storage.data.clear();
     }
 }

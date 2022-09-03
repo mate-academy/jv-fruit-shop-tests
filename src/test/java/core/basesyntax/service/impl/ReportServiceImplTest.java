@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-
     private static final String CSV_SEPARATOR = ",";
     private static final String CSV_HEAD_REPORT = "fruit,quantity";
     private static final String CSV_END_LINE = System.lineSeparator();
@@ -21,7 +20,7 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         activityDaoDb = new ActivityDaoDbImpl();
         reportService = new ReportServiceImpl(activityDaoDb);
         fruitFirst = new Fruit("peach");
@@ -29,24 +28,25 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void test_empty_report() {
-        String report = reportService.makeReport();
-        Assert.assertEquals("Must be equals", CSV_HEAD_REPORT + CSV_END_LINE, report);
+    public void test_make_report_empty_storage_ok() {
+        String expected = CSV_HEAD_REPORT + CSV_END_LINE;
+        String actual = reportService.makeReport();
+        Assert.assertEquals("Must be equals", expected, actual);
     }
 
     @Test
-    public void test_create_report() {
+    public void test_make_report_ok() {
         Storage.data.put(fruitFirst, 10);
         Storage.data.put(fruitSecond, 15);
-        String report = reportService.makeReport();
-        String stringBuilder = CSV_HEAD_REPORT + CSV_END_LINE
+        String actual = reportService.makeReport();
+        String expected = CSV_HEAD_REPORT + CSV_END_LINE
                 + fruitFirst.getName() + CSV_SEPARATOR + 10 + CSV_END_LINE
                 + fruitSecond.getName() + CSV_SEPARATOR + 15;
-        Assert.assertEquals("Must be equals", stringBuilder, report);
+        Assert.assertEquals("Must be equals", expected, actual);
     }
 
     @After
-    public void clear() {
+    public void clearUp() {
         Storage.data.clear();
     }
 }

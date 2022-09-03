@@ -8,12 +8,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ContentReaderImplTest {
-
     private static ContentReader contentReader;
     private static String resourcesPath;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         contentReader = new ContentReaderImpl();
         resourcesPath = "src" + File.separator + "test" + File.separator
                 + "resources" + File.separator;
@@ -21,14 +20,16 @@ public class ContentReaderImplTest {
 
     @Test
     public void test_empty_read_ok() {
+        int expected = 0;
         List<String> listData = contentReader.read(resourcesPath + "empty.txt");
-        Assert.assertEquals("Must be read 0 rows", 0, listData.size());
+        Assert.assertEquals("Must be equals", expected, listData.size());
     }
 
     @Test
     public void test_any_file_read_ok() {
+        int expected = 3;
         List<String> listData = contentReader.read(resourcesPath + "helloworld.txt");
-        Assert.assertEquals("Must be read 0 rows", 3, listData.size());
+        Assert.assertEquals("Must be equals", expected, listData.size());
     }
 }
 

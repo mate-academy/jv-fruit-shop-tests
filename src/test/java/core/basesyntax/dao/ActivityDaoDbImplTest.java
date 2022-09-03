@@ -10,13 +10,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ActivityDaoDbImplTest {
-
     private static ActivityDaoDb activityDaoDb;
     private static Fruit fruitFirst;
     private static Fruit fruitSecond;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         activityDaoDb = new ActivityDaoDbImpl();
         fruitFirst = new Fruit("tangerine");
         fruitSecond = new Fruit("peach");
@@ -24,16 +23,17 @@ public class ActivityDaoDbImplTest {
 
     @Test
     public void test_put_ok() {
-        activityDaoDb.put(fruitFirst, 11);
-        int actualCount = Storage.data.get(fruitFirst);
-        Assert.assertEquals("Must be present Tangerine", 11, actualCount);
+        int expected = 11;
+        activityDaoDb.put(fruitFirst, expected);
+        int actual = Storage.data.get(fruitFirst);
+        Assert.assertEquals("Must be present Tangerine", expected, actual);
     }
 
     @Test
-    public void test_getCount_ok() {
-        activityDaoDb.put(fruitFirst, 12);
-        int actualCount = Storage.data.get(fruitFirst);
-        Assert.assertEquals("Must be 12", 12, actualCount);
+    public void test_getCount_empty_storage_ok() {
+        int expected = 0;
+        int actual = activityDaoDb.getCount(fruitSecond);
+        Assert.assertEquals("Must be equals", expected, actual);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ActivityDaoDbImplTest {
     }
 
     @After
-    public void afterClass() {
+    public void cleanUp() {
         Storage.data.clear();
     }
 }

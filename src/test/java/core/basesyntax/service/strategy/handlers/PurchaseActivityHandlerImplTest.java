@@ -12,30 +12,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseActivityHandlerImplTest {
-
     private static Fruit fruit;
     private static FruitTransaction fruitTransaction;
     private static ActivityDaoDb activityDaoDb;
     private static PurchaseActivityHandlerImpl purchaseActivityHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         activityDaoDb = new ActivityDaoDbImpl();
         purchaseActivityHandler = new PurchaseActivityHandlerImpl(activityDaoDb);
         fruit = new Fruit("orange");
-        fruitTransaction = new FruitTransaction(TypeActivity.PURCHASE, fruit,10);
-        Storage.data.put(fruit, 15);
     }
 
     @Test
     public void test_purchase_ok() {
+        Storage.data.put(fruit, 15);
+        fruitTransaction = new FruitTransaction(TypeActivity.PURCHASE, fruit,10);
+        int expected = 5;
         purchaseActivityHandler.calculate(fruitTransaction);
-        int actualCount = Storage.data.get(fruit);
-        Assert.assertEquals("Must be 5", 5, actualCount);
+        int actual = Storage.data.get(fruit);
+        Assert.assertEquals("Must be equals", expected, actual);
     }
 
     @After
-    public void clear() {
+    public void clearUp() {
         Storage.data.clear();
     }
 }

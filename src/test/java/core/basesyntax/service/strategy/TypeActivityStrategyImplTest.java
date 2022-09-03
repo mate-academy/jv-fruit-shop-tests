@@ -10,13 +10,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TypeActivityStrategyImplTest {
-
     private static TypeActivityStrategy typeActivityStrategy;
     private static TypeActivityToOperation typeActivityToOperation;
     private static ActivityDaoDb activityDaoDb;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         activityDaoDb = new ActivityDaoDbImpl();
         typeActivityToOperation = new TypeActivityToOperation(activityDaoDb);
         typeActivityStrategy = new TypeActivityStrategyImpl(typeActivityToOperation);
@@ -24,19 +23,19 @@ public class TypeActivityStrategyImplTest {
 
     @Test
     public void test_balance_ok() {
+        String expected = "core.basesyntax.service.strategy.handlers.BalanceActivityHandlerImpl";
         ActivityHandler actualHandler
                 = typeActivityStrategy.getHandlerByTypeActivity(TypeActivity.BALANCE);
         Assert.assertEquals("Must be BalanceActivityHandler",
-                "core.basesyntax.service.strategy.handlers.BalanceActivityHandlerImpl",
-                actualHandler.getClass().getName());
+                expected, actualHandler.getClass().getName());
     }
 
     @Test
     public void test_return_ok() {
+        String expected = "core.basesyntax.service.strategy.handlers.ReturnActivityHandlerImpl";
         ActivityHandler actualHandler
                 = typeActivityStrategy.getHandlerByTypeActivity(TypeActivity.RETURN);
         Assert.assertEquals("Must be ReturnActivityHandler",
-                "core.basesyntax.service.strategy.handlers.ReturnActivityHandlerImpl",
-                actualHandler.getClass().getName());
+                expected, actualHandler.getClass().getName());
     }
 }

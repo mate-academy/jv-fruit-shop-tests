@@ -12,7 +12,7 @@ public class ReaderImplTest {
     private static Reader reader;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reader = new ReaderImpl();
     }
 

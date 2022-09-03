@@ -15,15 +15,15 @@ public class WriterImplTest {
     private static final String PATH = "src/test/resources/newFIle.csv";
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         writer = new WriterImpl();
     }
 
     @Test
     public void writerIsOk() {
         writer.write(REPORT, PATH);
-        String expected = read();
-        assertEquals(expected, REPORT);
+        String actual = read();
+        assertEquals(actual, REPORT);
     }
 
     private String read() {

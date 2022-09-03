@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Transaction;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ public class OperationStrategyTest {
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         map = new HashMap<>();
         operationStrategy = new OperationStrategy(map);
     }
@@ -50,10 +49,5 @@ public class OperationStrategyTest {
         map.put(Transaction.Operation.BALANCE, operationHandler);
         OperationHandler expected = operationHandler;
         assertEquals(expected, operationStrategy.getByOperation(Transaction.Operation.BALANCE));
-    }
-
-    @AfterClass
-    public static void afterClass() throws Exception {
-        map.clear();
     }
 }

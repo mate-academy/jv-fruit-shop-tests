@@ -5,35 +5,37 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static OperationHandler purchase;
+    private static OperationHandler purchaseHandler;
+    private static Fruit fruit;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        purchase = new PurchaseOperationHandler();
+    public static void beforeClass() {
+        purchaseHandler = new PurchaseOperationHandler();
+        fruit = new Fruit("apple");
     }
 
     @Test
     public void purchaseOperationHandlerIsValid_Ok() {
-        Storage.getFruitsMap().put(new Fruit("apple"), 10);
+        Storage.getFruitsMap().put(fruit, 10);
         Transaction transaction = new Transaction(Transaction.Operation.PURCHASE,
-                new Fruit("apple"), 5);
+                fruit, 5);
         Integer expected = 5;
-        purchase.apply(transaction);
-        assertEquals(expected, Storage.getFruitsMap().get(new Fruit("apple")));
+        purchaseHandler.apply(transaction);
+        assertEquals(expected, Storage.getFruitsMap().get(fruit));
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperationIsInvalid_NotOk() {
-        purchase.apply(null);
+        purchaseHandler.apply(null);
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() {
         Storage.getFruitsMap().clear();
     }
 }

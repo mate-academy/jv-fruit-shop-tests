@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
     }
 
@@ -26,8 +26,8 @@ public class ReportServiceImplTest {
         assertEquals(expected, report);
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() {
         Storage.getFruitsMap().clear();
     }
 }

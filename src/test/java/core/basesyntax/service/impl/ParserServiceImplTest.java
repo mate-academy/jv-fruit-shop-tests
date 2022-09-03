@@ -15,7 +15,7 @@ public class ParserServiceImplTest {
     private static List<String> list;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         parserService = new ParserServiceImpl();
         list = new ArrayList<>();
     }
@@ -23,7 +23,7 @@ public class ParserServiceImplTest {
     @Test
     public void correctOutput_Ok() {
         List<Transaction> expected = List.of(new Transaction(Transaction.Operation.BALANCE,
-                new Fruit("banana"), 20));;
+                new Fruit("banana"), 20));
         list.add("type,fruit,quantity");
         list.add("b,banana,20");
         List<Transaction> actual = parserService.parse(list);

@@ -4,6 +4,8 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -23,9 +25,12 @@ public class WriterServieImplTest {
     }
 
     @Test
-    public void writing_to_file_Okey() throws Exception {
+    public void writing_to_file_line_Okey() throws Exception {
         writerService.writeToFile("src/test/java/resources/yo.txt", "yo");
         Assert.assertEquals("yo",
-                Files.readAllLines(Paths.get("src/test/java/resources/yo.txt")).get(0));
+                readFile("src/test/java/resources/yo.txt").get(0));
+    }
+    private List<String> readFile(String file) throws Exception  {
+        return Files.readAllLines(Paths.get(file));
     }
 }

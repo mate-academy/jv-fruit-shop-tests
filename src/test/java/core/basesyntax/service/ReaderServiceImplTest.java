@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,13 +27,21 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void reading_file_Okey() throws Exception {
-        readerService.readFromFile("src/test/java/resources/yo.txt");
-        Assert.assertEquals("yo",
-                readFileline());
+    public void reading_file_line_Okey() throws Exception {
+        List<String> actual = readerService.readFromFile("src/test/java/resources/yo.txt");
+        List<String> expected = new ArrayList<>();
+        expected.add("yo");
+        Assert.assertEquals(expected, actual);
     }
-    private String readFileline() throws IOException {
-     return Files.readAllLines(Paths.get("src/test/java/resources/yo.txt")).get(0);
+
+    @Test
+    public void reading_file_lines_Okey() throws Exception {
+        List<String> actual = readerService.readFromFile("src/test/java/resources/hello.txt");
+        List<String> expected = new ArrayList<>();
+        expected.add("hello");
+        expected.add("hi");
+        expected.add("yo");
+        Assert.assertEquals(expected, actual);
     }
 }
 

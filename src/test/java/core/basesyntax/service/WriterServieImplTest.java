@@ -1,6 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
+
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WriterServieImplTest {
-    private static final String FILE_NOT_EXIST = "report";
+    private static final String FILE_NOT_EXIST = "src/test/java/";
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
     private WriterService writerService = new WriterServiceImpl();
@@ -20,7 +22,7 @@ public class WriterServieImplTest {
     public void writing_to_file_which_not_exist_Not_OKey() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("File " + FILE_NOT_EXIST + " could not be written to");
-        writerService.writeToFile(FILE_NOT_EXIST, "yo");
+        writerService.writeToFile("src/test/java/", "yo");
     }
 
     @Test

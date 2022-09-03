@@ -7,7 +7,6 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.FruitOperationHandler;
 import java.util.Map;
-
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;

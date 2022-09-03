@@ -34,7 +34,7 @@ public class ParserServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_NullInput_ThrowRuntimeException_ok() {
+    public void parse_NullInput_ThrowRuntimeException() {
         parserService.parse(null);
     }
 

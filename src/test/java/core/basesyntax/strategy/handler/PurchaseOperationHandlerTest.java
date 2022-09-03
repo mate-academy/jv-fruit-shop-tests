@@ -33,7 +33,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void apply_PurchaseMoreThanBalance_ThrowException_ok() {
+    public void apply_PurchaseMoreThanBalance_ThrowException() {
         Fruit banana = new Fruit("banana");
         Storage.getStorage().put(banana, 10);
         operationHandler.apply(new Transaction("p", banana, 15));

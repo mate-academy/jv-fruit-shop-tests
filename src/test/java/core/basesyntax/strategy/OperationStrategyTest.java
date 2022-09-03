@@ -15,10 +15,10 @@ import org.junit.Test;
 public class OperationStrategyTest {
     private static OperationStrategy operationStrategy;
     private static Map<String, OperationHandler> handlers;
-    private static OperationHandler purchOp;
-    private static OperationHandler balOp;
-    private static OperationHandler returnOp;
-    private static OperationHandler supplyOp;
+    private static OperationHandler purchaseOperationHandler;
+    private static OperationHandler balanceOperationHandler;
+    private static OperationHandler returnOperationHandler;
+    private static OperationHandler supplyOperationHandler;
     private static OperationHandler handler;
 
     @BeforeClass
@@ -29,34 +29,34 @@ public class OperationStrategyTest {
 
     @Test
     public void getByOperation_GetPurchaseHandlerBy_p_ok() {
-        purchOp = new PurchaseOperationHandler();
-        handlers.put("p", purchOp);
+        purchaseOperationHandler = new PurchaseOperationHandler();
+        handlers.put("p", purchaseOperationHandler);
         handler = operationStrategy.getByOperation("p");
-        assertEquals(handler, purchOp);
+        assertEquals(handler, purchaseOperationHandler);
     }
 
     @Test
     public void getByOperation_GetBalanceHandlerBy_b_ok() {
-        balOp = new BalanceOperationHandler();
-        handlers.put("b", balOp);
+        balanceOperationHandler = new BalanceOperationHandler();
+        handlers.put("b", balanceOperationHandler);
         handler = operationStrategy.getByOperation("b");
-        assertEquals(handler, balOp);
+        assertEquals(handler, balanceOperationHandler);
     }
 
     @Test
     public void getByOperation_GetReturnHandlerBy_r_ok() {
-        returnOp = new ReturnOperationHandler();
-        handlers.put("r", returnOp);
+        returnOperationHandler = new ReturnOperationHandler();
+        handlers.put("r", returnOperationHandler);
         handler = operationStrategy.getByOperation("r");
-        assertEquals(handler, returnOp);
+        assertEquals(handler, returnOperationHandler);
     }
 
     @Test
     public void getByOperation_GetSupplyHandlerBy_s_ok() {
-        supplyOp = new SupplyOperationHandler();
-        handlers.put("s", supplyOp);
+        supplyOperationHandler = new SupplyOperationHandler();
+        handlers.put("s", supplyOperationHandler);
         handler = operationStrategy.getByOperation("s");
-        assertEquals(handler, supplyOp);
+        assertEquals(handler, supplyOperationHandler);
     }
 
     @After

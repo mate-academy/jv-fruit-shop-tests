@@ -14,22 +14,18 @@ public class WriterServiceImplTest {
     private static final String FILE_NAME = "src/test/resources/writerServResult.csv";
     private static WriterService writerService;
 
-    private static String getReportForTest() {
-        return "fruit,quantity,banana,125";
-    }
-
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_FileNameIsNull_ThrowRuntimeExc() {
+    public void writeToFile_FileNameIsNull_ThrowRuntimeException() {
         writerService.writeToFile(null, getReportForTest());
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_ReportNull_ThrowRuntimeExc() {
+    public void writeToFile_ReportNull_ThrowRuntimeException() {
         writerService.writeToFile(FILE_NAME, null);
     }
 
@@ -45,5 +41,9 @@ public class WriterServiceImplTest {
         }
         String expected = "Done it";
         assertEquals(expected, actual);
+    }
+
+    private static String getReportForTest() {
+        return "fruit,quantity,banana,125";
     }
 }

@@ -1,13 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,11 +31,11 @@ public class ReaderServiceImplTest {
 
     @Test
     public void reading_file_lines_Okey() throws Exception {
-        List<String> actual = readerService.readFromFile("src/test/java/resources/hello.txt");
         List<String> expected = new ArrayList<>();
         expected.add("hello");
         expected.add("hi");
         expected.add("yo");
+        List<String> actual = readerService.readFromFile("src/test/java/resources/hello.txt");
         Assert.assertEquals(expected, actual);
     }
 }

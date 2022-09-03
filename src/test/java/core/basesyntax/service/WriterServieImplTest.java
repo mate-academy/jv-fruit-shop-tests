@@ -1,12 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,20 +29,21 @@ public class WriterServieImplTest {
         Assert.assertEquals("yo",
                 readFile("src/test/java/resources/yo.txt").get(0));
     }
-    private List<String> readFile(String file) throws Exception  {
+
+    private List<String> readFile(String file) throws Exception {
         return Files.readAllLines(Paths.get(file));
     }
 
     @Test
     public void writing_to_file_lines_Okey() throws Exception {
-        String report = "yo" + System.lineSeparator() + "hello"
-                + System.lineSeparator() + "hi";
         List<String> expected = new ArrayList<>();
         expected.add("yo");
         expected.add("hello");
         expected.add("hi");
+        String report = "yo" + System.lineSeparator() + "hello"
+                + System.lineSeparator() + "hi";
         writerService.writeToFile("src/test/java/resources/yo.txt", report);
-        List <String> actual = readFile("src/test/java/resources/yo.txt");
+        List<String> actual = readFile("src/test/java/resources/yo.txt");
         Assert.assertEquals(expected, actual);
     }
 }

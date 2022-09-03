@@ -11,7 +11,7 @@ public class ReportServiceImplTest {
     private ReportService reportService;
 
     @Before
-    public void setup(){
+    public void setup() {
         reportService = new ReportServiceImpl();
     }
 

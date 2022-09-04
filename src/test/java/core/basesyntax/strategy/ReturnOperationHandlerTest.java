@@ -14,6 +14,7 @@ public class ReturnOperationHandlerTest {
     private static final OperationHandler operationHandler = new ReturnOperationHandler();
     private static Transaction transaction;
     private static final Map<Fruit, Integer> storage = Storage.getAll();
+    private static final Fruit DEFAULT_FRUIT = new Fruit("apple");
 
     @Before
     public void setUp() {
@@ -21,50 +22,19 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void applyReturnOperationHandler_getFruitBanana_isValid() {
-        Fruit expected = new Fruit("banana");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyReturnOperationHandler_getFruitApple_isValid() {
-        transaction.getFruit().setName("apple");
-        Fruit expected = new Fruit("apple");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyReturnOperationHandler_currentQuantity15_isValid() {
-        storage.put(new Fruit("banana"),15);
-        Integer expected = 15;
-        Integer actual = storage.get(transaction.getFruit());
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyReturnOperationHandler_currentQuantityNull_isValid() {
-        storage.put(new Fruit("apple"), 0);
-        Integer expected = 0;
-        Integer actual = storage.get(new Fruit("apple"));
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyReturnOperationHandler_AppleIs25_isValid() {
-        storage.put(new Fruit("apple"), 20);
-        operationHandler.apply(new Transaction("r", new Fruit("apple"), 5));
+    public void applyReturnOperationHandler_appleIs25_isValid() {
+        storage.put(DEFAULT_FRUIT, 20);
+        operationHandler.apply(new Transaction("r", DEFAULT_FRUIT, 5));
         Integer expected = 25;
-        Integer actual = storage.get(new Fruit("apple"));
+        Integer actual = storage.get(DEFAULT_FRUIT);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void applyReturnOperationHandler_AppleIs10_isValid() {
-        operationHandler.apply(new Transaction("r", new Fruit("apple"), 10));
+    public void applyReturnOperationHandler_appleIs10_isValid() {
+        operationHandler.apply(new Transaction("r", DEFAULT_FRUIT, 10));
         Integer expected = 10;
-        Integer actual = storage.get(new Fruit("apple"));
+        Integer actual = storage.get(DEFAULT_FRUIT);
         assertEquals(expected, actual);
     }
 

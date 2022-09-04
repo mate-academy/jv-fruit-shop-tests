@@ -39,7 +39,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_EmptyFile_isNotValid() {
+    public void readFromFile_nullFile_isNotValid() {
         fileReaderService.readFromFile(null);
     }
 

@@ -14,10 +14,6 @@ public class FileWriterServiceImplTest {
     private static final String FILE_NAME = "src/test/resources/output.csv";
     private static FileWriterService fileWriterService;
 
-    private static String getReportForTest() {
-        return "fruit,quantity,banana,15,apple,13";
-    }
-
     @BeforeClass
     public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
@@ -41,13 +37,7 @@ public class FileWriterServiceImplTest {
     @Test
     public void writeToFile_writeReportToFile_isValid() {
         fileWriterService.writeToFile(FILE_NAME, getReportForTest());
-        String actual = "";
-        try {
-            actual = Files.readAllLines(Path.of(FILE_NAME)).stream()
-                    .flatMap(String::lines).collect(Collectors.joining());
-        } catch (IOException e) {
-            throw new RuntimeException("Cant read this file " + FILE_NAME, e);
-        }
+        String actual = readFromFileTest();
         String expected = getReportForTest();
         assertEquals(expected, actual);
     }
@@ -55,13 +45,7 @@ public class FileWriterServiceImplTest {
     @Test
     public void writeToFile_createEmptyFile_isValid() {
         fileWriterService.writeToFile(FILE_NAME, "");
-        String actual = "";
-        try {
-            actual = Files.readAllLines(Path.of(FILE_NAME)).stream()
-                    .flatMap(String::lines).collect(Collectors.joining());
-        } catch (IOException e) {
-            throw new RuntimeException("Cant read this file " + FILE_NAME, e);
-        }
+        String actual = readFromFileTest();
         String expected = "";
         assertEquals(expected, actual);
     }
@@ -69,14 +53,22 @@ public class FileWriterServiceImplTest {
     @Test
     public void writeToFile_writeOneWord_isValid() {
         fileWriterService.writeToFile(FILE_NAME, "fruit");
-        String actual = "";
+        String actual = readFromFileTest();
+        String expected = "fruit";
+        assertEquals(expected, actual);
+    }
+
+    private static String readFromFileTest() {
         try {
-            actual = Files.readAllLines(Path.of(FILE_NAME)).stream()
-                    .flatMap(String::lines).collect(Collectors.joining());
+            return Files.readAllLines(Path.of(FILE_NAME)).stream()
+                    .flatMap(String::lines)
+                    .collect(Collectors.joining());
         } catch (IOException e) {
             throw new RuntimeException("Cant read this file " + FILE_NAME, e);
         }
-        String expected = "fruit";
-        assertEquals(expected, actual);
+    }
+
+    private static String getReportForTest() {
+        return "fruit,quantity,banana,15,apple,13";
     }
 }

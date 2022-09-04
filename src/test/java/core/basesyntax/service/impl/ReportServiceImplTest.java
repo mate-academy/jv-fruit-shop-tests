@@ -36,7 +36,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_correctReport_issValid() {
+    public void getReport_correctReport_isValid() {
         storage.put(new Fruit("banana"), 15);
         storage.put(new Fruit("apple"), 13);
         String expected = new StringBuilder().append(HEADER)

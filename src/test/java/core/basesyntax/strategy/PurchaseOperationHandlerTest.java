@@ -17,36 +17,15 @@ public class PurchaseOperationHandlerTest {
     private static final OperationHandler operationHandler = new PurchaseOperationHandler();
     private static Transaction transaction;
     private static final Map<Fruit, Integer> storage = Storage.getAll();
+    private static final Fruit DEFAULT_FRUIT = new Fruit("apple");
 
     @Rule
+
     public ExpectedException exceptionRule = ExpectedException.none();
 
     @Before
     public void setUp() {
         transaction = new Transaction("p", new Fruit("banana"), null);
-    }
-
-    @Test
-    public void applyPurchaseOperationHandler_getFruitBanana_isValid() {
-        Fruit expected = new Fruit("banana");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyPurchaseOperationHandler_getFruitApple_isValid() {
-        transaction.getFruit().setName("apple");
-        Fruit expected = new Fruit("apple");
-        Fruit actual = transaction.getFruit();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void applyPurchaseOperationHandler_currentQuantity15_isValid() {
-        storage.put(new Fruit("banana"),15);
-        Integer expected = 15;
-        Integer actual = storage.get(transaction.getFruit());
-        assertEquals(expected, actual);
     }
 
     @Test
@@ -66,20 +45,20 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void applyPurchaseOperationHandler_Apple15_isValid() {
-        storage.put(new Fruit("apple"), 20);
-        operationHandler.apply(new Transaction("p", new Fruit("apple"), 5));
+    public void applyPurchaseOperationHandler_apple15_isValid() {
+        storage.put(DEFAULT_FRUIT, 20);
+        operationHandler.apply(new Transaction("p", DEFAULT_FRUIT, 5));
         Integer expected = 15;
-        Integer actual = storage.get(new Fruit("apple"));
+        Integer actual = storage.get(DEFAULT_FRUIT);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void applyPurchaseOperationHandler_AppleIs0_isValid() {
-        storage.put(new Fruit("apple"), 5);
-        operationHandler.apply(new Transaction("p", new Fruit("apple"), 5));
+    public void applyPurchaseOperationHandler_appleIs0_isValid() {
+        storage.put(DEFAULT_FRUIT, 5);
+        operationHandler.apply(new Transaction("p", DEFAULT_FRUIT, 5));
         Integer expected = 0;
-        Integer actual = storage.get(new Fruit("apple"));
+        Integer actual = storage.get(DEFAULT_FRUIT);
         assertEquals(expected, actual);
     }
 

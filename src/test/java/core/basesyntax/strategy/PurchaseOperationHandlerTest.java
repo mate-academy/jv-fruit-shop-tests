@@ -32,10 +32,6 @@ public class PurchaseOperationHandlerTest {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 30);
         operationHandler.apply(new Transaction("p", null, 15));
-        Integer expected = 15;
-        Integer actual = Storage.storage.get(banana);
-        assertEquals("Valid purchase operation with not correct fruit",
-                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -43,14 +39,10 @@ public class PurchaseOperationHandlerTest {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 30);
         operationHandler.apply(new Transaction("p", new Fruit("banana"), null));
-        Integer expected = 15;
-        Integer actual = Storage.storage.get(banana);
-        assertEquals("Valid purchase operation with not correct quantity",
-                expected, actual);
     }
 
     @Test
-    public void apply_higherQuantityPurchaseOperation_NotOk() {
+    public void apply_higherQuantityPurchaseOperation_Ok() {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 30);
         operationHandler.apply(new Transaction("p", new Fruit("banana"), 50));

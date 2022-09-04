@@ -38,12 +38,7 @@ public class BalanceOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void apply_nullQuantityBalanceOperation_NotOk() {
-        Fruit banana = new Fruit("banana");
         operationHandler.apply(new Transaction("b", new Fruit("banana"), null));
-        Integer expected = 15;
-        Integer actual = Storage.storage.get(banana);
-        assertEquals("Valid balance operation with not correct quantity",
-                expected, actual);
     }
 
     @After

@@ -43,10 +43,6 @@ public class SupplyOperationHandlerTest {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
         operationHandler.apply(new Transaction("s", null, 5));
-        Integer expected = 15;
-        Integer actual = Storage.storage.get(banana);
-        assertEquals("Valid supply operation with not correct fruit ",
-                expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -54,10 +50,6 @@ public class SupplyOperationHandlerTest {
         Fruit banana = new Fruit("banana");
         Storage.storage.put(banana, 10);
         operationHandler.apply(new Transaction("s", new Fruit("banana"), null));
-        Integer expected = 15;
-        Integer actual = Storage.storage.get(banana);
-        assertEquals("Valid supply operation with not correct quantity ",
-                expected, actual);
     }
 
     @After

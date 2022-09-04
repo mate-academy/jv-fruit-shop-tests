@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,18 +24,12 @@ public class OperationStrategyTest {
 
     @Test(expected = RuntimeException.class)
     public void getByOperation_emptyOperation_NotOk() {
-        Class<?> expected = BalanceOperationHandler.class;
-        Class<?> actual = operationStrategy.getByOperation("").getClass();
-        assertEquals("Valid method reaction, no such operation with input parameter ",
-                expected, actual);
+        assertNull(operationStrategy.getByOperation("").getClass());
     }
 
     @Test(expected = RuntimeException.class)
     public void getByOperation_nullOperation_NotOk() {
-        Class<?> expected = BalanceOperationHandler.class;
-        Class<?> actual = operationStrategy.getByOperation(null).getClass();
-        assertEquals("Valid method reaction, no such operation with input parameter ",
-                expected, actual);
+        assertNull(operationStrategy.getByOperation(null).getClass());
     }
 
     @Test(expected = RuntimeException.class)

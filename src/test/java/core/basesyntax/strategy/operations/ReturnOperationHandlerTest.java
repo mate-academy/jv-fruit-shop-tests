@@ -23,7 +23,7 @@ public class ReturnOperationHandlerTest {
     public void setUp() {
         fruit = new Fruit("apple");
         transaction = new Transaction();
-        transaction.setOperation(Transaction.Operation.BALANCE);
+        transaction.setOperation(Transaction.Operation.RETURN);
         transaction.setFruit(fruit);
         transaction.setSum(0);
     }

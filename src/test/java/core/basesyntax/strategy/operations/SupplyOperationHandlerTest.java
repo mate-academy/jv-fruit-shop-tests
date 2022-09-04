@@ -23,7 +23,7 @@ public class SupplyOperationHandlerTest {
     public void setUp() {
         fruit = new Fruit("apple");
         transaction = new Transaction();
-        transaction.setOperation(Transaction.Operation.BALANCE);
+        transaction.setOperation(Transaction.Operation.SUPPLY);
         transaction.setFruit(fruit);
         transaction.setSum(0);
     }

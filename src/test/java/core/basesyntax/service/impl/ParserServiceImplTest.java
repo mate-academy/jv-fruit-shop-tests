@@ -3,11 +3,9 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.storage.Storage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -35,14 +33,9 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parse_empty_notOk() {
+    public void parse_empty_ok() {
         List<String> list = List.of("");
         List<Transaction> actual = transactionParserService.parse(list);
         Assert.assertTrue(actual.isEmpty());
-    }
-
-    @After
-    public void afterEachTest() {
-        Storage.storage.clear();
     }
 }

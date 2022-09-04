@@ -45,18 +45,18 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readerService_equalsReadDataFromFile_ok() {
+    public void readFromFile_equalsReadDataFromFile_ok() {
         List<String> actual = readerService.readFromFile(filePath);
         assertEquals(defaultDataFromFile, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readerService_wrongFileName_notOk() {
+    public void readFromFile_wrongFileName_notOk() {
         readerService.readFromFile("randomFile");
     }
 
     @Test(expected = RuntimeException.class)
-    public void readerService_nullFileName_notOk() {
+    public void readFromFile_nullFileName_notOk() {
         readerService.readFromFile(null);
     }
 

@@ -7,19 +7,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static final OperationHandler operationHandler = new ReturnOperationHandler();
-    private static Transaction transaction;
     private static final Map<Fruit, Integer> storage = Storage.getAll();
     private static final Fruit DEFAULT_FRUIT = new Fruit("apple");
-
-    @Before
-    public void setUp() {
-        transaction = new Transaction("r", new Fruit("banana"), null);
-    }
 
     @Test
     public void applyReturnOperationHandler_appleIs25_isValid() {

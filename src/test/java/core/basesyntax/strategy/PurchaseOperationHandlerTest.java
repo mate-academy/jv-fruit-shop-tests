@@ -20,7 +20,6 @@ public class PurchaseOperationHandlerTest {
     private static final Fruit DEFAULT_FRUIT = new Fruit("apple");
 
     @Rule
-
     public ExpectedException exceptionRule = ExpectedException.none();
 
     @Before

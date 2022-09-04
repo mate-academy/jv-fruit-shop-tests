@@ -7,19 +7,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static final OperationHandler operationHandler = new BalanceOperationHandler();
-    private static Transaction transaction;
     private static final Map<Fruit, Integer> storage = Storage.getAll();
     private static final Fruit DEFAULT_FRUIT = new Fruit("apple");
-
-    @Before
-    public void setUp() {
-        transaction = new Transaction("b", new Fruit("banana"), null);
-    }
 
     @Test
     public void applyBalanceOperationHandler_appleIs25_isValid() {

@@ -30,12 +30,12 @@ public class ParserServiceTest {
         expected.add(new Transaction("b", new Fruit("apple"), 100));
         expected.add(new Transaction("s", new Fruit("banana"), 100));
         List<Transaction> actual = parserService.parse(lines);
-        assertEquals(expected.get(0), actual.get(0));
+        assertEquals(expected, actual);
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void parseNonExistentFile_NotOk() {
-        List<String> lines = new ArrayList<>();
+        List<String> lines = null;
         parserService.parse(lines);
     }
 }

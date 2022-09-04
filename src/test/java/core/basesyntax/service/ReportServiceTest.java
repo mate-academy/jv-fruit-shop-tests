@@ -31,7 +31,7 @@ public class ReportServiceTest {
     public void createReportFromEmptyStorage_Ok() {
         Storage.getStorage().clear();
         String actual = reportService.getReport();
-        String expected = "fruit,quantity\n";
+        String expected = "fruit,quantity" + System.lineSeparator();
         assertEquals(expected, actual);
     }
 

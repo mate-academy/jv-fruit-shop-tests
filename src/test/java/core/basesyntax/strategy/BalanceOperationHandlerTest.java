@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,5 +29,10 @@ public class BalanceOperationHandlerTest {
     @Test (expected = NullPointerException.class)
     public void applyNullTransaction_NotOk() {
         balanceOperationHandler.apply(null);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.getStorage().clear();
     }
 }

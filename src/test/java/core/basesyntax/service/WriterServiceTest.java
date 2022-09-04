@@ -20,7 +20,7 @@ public class WriterServiceTest {
     @Test
     public void writeToFile_Ok() {
         String actual = "test";
-        String fileName = "src/test/java/core/basesyntax/recourses/output-test.csv";
+        String fileName = "src/test/recourses/output-test.csv";
         writerService.writeToFile(actual, fileName);
         String expected;
         try {

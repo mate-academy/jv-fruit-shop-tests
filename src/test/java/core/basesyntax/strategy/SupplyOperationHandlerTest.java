@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,5 +25,10 @@ public class SupplyOperationHandlerTest {
         int expected = 150;
         int actual = Storage.getStorage().get(new Fruit("banana"));
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.getStorage().clear();
     }
 }

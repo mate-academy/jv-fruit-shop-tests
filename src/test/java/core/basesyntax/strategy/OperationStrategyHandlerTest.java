@@ -2,8 +2,10 @@ package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.storage.Storage;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -50,5 +52,10 @@ public class OperationStrategyHandlerTest {
         OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actual = strategy.getByOperation(operation);
         assertEquals(expected.getClass(), actual.getClass());
+    }
+
+    @After
+    public void tearDown() {
+        Storage.getStorage().clear();
     }
 }

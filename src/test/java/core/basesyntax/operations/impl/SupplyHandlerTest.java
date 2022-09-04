@@ -18,8 +18,8 @@ public class SupplyHandlerTest {
 
     @BeforeClass
     public static void setUp() {
-        operationHandler = new SupplyHandler(fruitsDao);
         fruitsDao = new FruitDaoImpl();
+        operationHandler = new SupplyHandler(fruitsDao);
     }
 
     @Before
@@ -29,7 +29,6 @@ public class SupplyHandlerTest {
 
     @Test
     public void supply_ok() {
-        operationHandler = new SupplyHandler(fruitsDao);
         operationHandler.process(FRUIT_APPLE, 50);
         int expected = 150;
         int actual = fruitsDao.get(FRUIT_APPLE);

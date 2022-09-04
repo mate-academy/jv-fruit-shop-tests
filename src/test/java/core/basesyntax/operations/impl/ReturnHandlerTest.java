@@ -18,8 +18,8 @@ public class ReturnHandlerTest {
 
     @BeforeClass
     public static void setUp() {
-        operationHandler = new ReturnHandler(fruitsDao);
         fruitsDao = new FruitDaoImpl();
+        operationHandler = new ReturnHandler(fruitsDao);
     }
 
     @Before
@@ -29,7 +29,6 @@ public class ReturnHandlerTest {
 
     @Test
     public void return_ok() {
-        operationHandler = new ReturnHandler(fruitsDao);
         operationHandler.process(FRUIT_APPLE, 20);
         int expected = 120;
         int actual = Storage.fruits.get(FRUIT_APPLE);

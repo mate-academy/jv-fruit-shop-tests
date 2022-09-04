@@ -67,14 +67,12 @@ public class CsvFileDataHandlerImplTest {
 
     @Test(expected = RuntimeException.class)
     public void processData_tooMuchPurchase_notOk() {
-        fileData.add("type,fruit,quantity");
         fileData.add("p,banana,200");
         dataHandler.processData(fileData);
     }
 
     @Test(expected = RuntimeException.class)
     public void processData_nonexistentFruitPurchase_notOk() {
-        fileData.add("type,fruit,quantity");
         fileData.add("p,strawberry,20");
         dataHandler.processData(fileData);
     }

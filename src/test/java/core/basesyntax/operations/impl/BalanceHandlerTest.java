@@ -18,8 +18,8 @@ public class BalanceHandlerTest {
 
     @BeforeClass
     public static void setUp() {
-        operationHandler = new BalanceHandler(fruitDao);
         fruitDao = new FruitDaoImpl();
+        operationHandler = new BalanceHandler(fruitDao);
     }
 
     @Before
@@ -29,7 +29,6 @@ public class BalanceHandlerTest {
 
     @Test
     public void balance_ok() {
-        operationHandler = new BalanceHandler(fruitDao);
         String newFruit = "apple";
         int expected = 158;
         operationHandler.process(newFruit, expected);

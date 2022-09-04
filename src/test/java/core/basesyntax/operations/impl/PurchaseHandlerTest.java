@@ -18,8 +18,8 @@ public class PurchaseHandlerTest {
 
     @BeforeClass
     public static void setUp() {
-        operationHandler = new PurchaseHandler(fruitDao);
         fruitDao = new FruitDaoImpl();
+        operationHandler = new PurchaseHandler(fruitDao);
     }
 
     @Before
@@ -29,7 +29,6 @@ public class PurchaseHandlerTest {
 
     @Test
     public void purchase_ok() {
-        operationHandler = new PurchaseHandler(fruitDao);
         operationHandler.process(FRUIT_APPLE, 30);
         int actual = fruitDao.get(FRUIT_APPLE);
         int expected = 70;

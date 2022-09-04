@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
@@ -18,15 +18,15 @@ public class ReportServiceImplTest {
             + "apple,100";
     private static ReportServiceImpl reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
     }
 
     @Test
     public void report_correctHeader_ok() {
         String report = reportService.createReport();
-        String[] splitReport = report.split("\n");
+        String[] splitReport = report.split(System.lineSeparator());
         assertEquals(HEADER, splitReport[0].trim());
     }
 

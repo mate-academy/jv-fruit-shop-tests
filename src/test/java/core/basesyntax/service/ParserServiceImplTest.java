@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
@@ -23,8 +23,8 @@ public class ParserServiceImplTest {
     private static Map<Operation, OperationHandler> handlerMap;
     private static ParserServiceImpl parserService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         lines = new ArrayList<>();
         handlerMap = new HashMap<>();
         handlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
@@ -34,24 +34,10 @@ public class ParserServiceImplTest {
         parserService = new ParserServiceImpl();
     }
 
-    @Test
-    public void parse_listString_ok() {
-        lines.add("type,fruit,quantity");
-        lines.add("b,banana,20");
-        lines.add("b,apple,100");
-        lines.add("s,banana,100");
-        lines.add("p,banana,13");
-        lines.add("r,apple,10");
-        lines.add("p,apple,20");
-        lines.add("p,banana,5");
-        lines.add("s,banana,50");
-        Integer expected = 8;
-        Integer actual = parserService.parseLines(lines).size();
-        assertEquals(expected, actual);
-    }
-
     @Test (expected = IndexOutOfBoundsException.class)
+
     public void parse_emptyList_ok() {
+        List<String> lines = new ArrayList<>();
         parserService.parseLines(lines).size();
     }
 

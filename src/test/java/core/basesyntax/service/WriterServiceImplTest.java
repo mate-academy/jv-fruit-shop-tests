@@ -45,7 +45,6 @@ public class WriterServiceImplTest {
     @Test (expected = RuntimeException.class)
     public void write_invalidFileName_notOk() {
         String invalidFileName = "";
-        File invalidFile = new File(DIRECTORY, invalidFileName);
         writerService.writeToFile(REPORT, invalidFileName);
     }
 }

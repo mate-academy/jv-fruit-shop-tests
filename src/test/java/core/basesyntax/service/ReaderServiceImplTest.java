@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
@@ -13,8 +13,8 @@ public class ReaderServiceImplTest {
     private static final String WRONG_FILE = "noFile.txt";
     private static ReaderServiceImpl readerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         readerService = new ReaderServiceImpl();
     }
 
@@ -29,7 +29,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_File_ok() {
+    public void read_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");

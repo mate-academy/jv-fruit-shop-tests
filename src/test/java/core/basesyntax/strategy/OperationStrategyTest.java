@@ -1,11 +1,12 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertSame;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertSame;
 
 public class OperationStrategyTest {
     private static OperationStrategy operationStrategy;
@@ -23,21 +24,25 @@ public class OperationStrategyTest {
 
     @Test
     public void operationHandler_balanceHandlerCall_OK() {
-        Assert.assertSame(operationStrategy.getByOperation("b").getClass(), BalanceOperationHandler.class);
+        Assert.assertSame(operationStrategy.getByOperation("b").getClass(),
+                BalanceOperationHandler.class);
     }
 
     @Test
-    public void operationHandler_supplyHandlerCall_OK(){
-        assertSame(operationStrategy.getByOperation("s").getClass(), SupplyOperationHandler.class);
+    public void operationHandler_supplyHandlerCall_OK() {
+        assertSame(operationStrategy.getByOperation("s").getClass(),
+                SupplyOperationHandler.class);
     }
 
     @Test
     public void operationHandler_purchaseHandlerCall_OK() {
-        assertSame(operationStrategy.getByOperation("p").getClass(), PurchaseOperationHandler.class);
+        assertSame(operationStrategy.getByOperation("p").getClass(),
+                PurchaseOperationHandler.class);
     }
 
     @Test
     public void operationHandler_returnHandlerCall_OK() {
-        assertSame(operationStrategy.getByOperation("r").getClass(), ReturnOperationHandler.class);
+        assertSame(operationStrategy.getByOperation("r").getClass(),
+                ReturnOperationHandler.class);
     }
 }

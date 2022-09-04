@@ -1,6 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.FileWriterService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +23,14 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_isValid() {
-        fileWriterService.writeToFile(DEFAULT_RESULT, DEFAULT_PATH);
+        String expected = null;
+        String actual = DEFAULT_RESULT;
+        fileWriterService.writeToFile(actual, DEFAULT_PATH);
+        try {
+            expected = Files.readString(Path.of(DEFAULT_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data", e);
+        }
+        assertEquals(expected, actual);
     }
 }

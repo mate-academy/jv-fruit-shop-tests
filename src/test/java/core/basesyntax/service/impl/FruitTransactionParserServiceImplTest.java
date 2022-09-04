@@ -12,27 +12,27 @@ import org.junit.Test;
 
 public class FruitTransactionParserServiceImplTest {
     private static FruitTransactionParserService parser;
-    private static List<FruitTransaction> TRANSACTIONS_EXPECTED_RESULT;
+    private static List<FruitTransaction> expected_transactions;
 
     @BeforeClass
     public static void beforeClass() {
         parser = new FruitTransactionParserServiceImpl();
-        TRANSACTIONS_EXPECTED_RESULT = new ArrayList<>();
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        expected_transactions = new ArrayList<>();
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"), 20));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("apple"), 100));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 new Fruit("banana"), 100));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 new Fruit("banana"), 13));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
                 new Fruit("apple"), 10));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 new Fruit("apple"), 20));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 new Fruit("banana"), 5));
-        TRANSACTIONS_EXPECTED_RESULT.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+        expected_transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 new Fruit("banana"), 50));
     }
 
@@ -47,7 +47,7 @@ public class FruitTransactionParserServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50"));
-        assertEquals(TRANSACTIONS_EXPECTED_RESULT, actual);
+        assertEquals(expected_transactions, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -66,6 +66,6 @@ public class FruitTransactionParserServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50"));
-        assertEquals(TRANSACTIONS_EXPECTED_RESULT, actual);
+        assertEquals(expected_transactions, actual);
     }
 }

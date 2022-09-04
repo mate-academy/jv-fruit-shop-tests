@@ -15,7 +15,7 @@ import core.basesyntax.strategy.impl.FruitReturnHandler;
 import core.basesyntax.strategy.impl.FruitSupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,6 +26,8 @@ public class FruitServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
+        fruitService = new FruitServiceImpl(defaultMap, fruitDao);
         defaultMap = new HashMap<>();
         defaultMap.put(FruitTransaction.Operation.BALANCE,
                 new FruitBalanceHandler(fruitDao));
@@ -37,19 +39,18 @@ public class FruitServiceImplTest {
                 new FruitSupplyHandler(fruitDao));
     }
 
-    @Before
-    public void setUp() {
-        fruitDao = new FruitDaoImpl();
-        fruitService = new FruitServiceImpl(defaultMap, fruitDao);
-    }
-
     @Test
-    public void createReport() {
+    public void createReport_isValid() {
         Storage.fruits.put(new Fruit("banana"), 152);
         Storage.fruits.put(new Fruit("apple"), 90);
         String expected = fruitService.createReport();
         String actual = "fruits,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator() + "apple,90";
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 }

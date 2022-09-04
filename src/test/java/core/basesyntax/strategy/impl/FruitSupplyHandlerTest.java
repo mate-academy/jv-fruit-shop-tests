@@ -25,7 +25,7 @@ public class FruitSupplyHandlerTest {
     public void proceed_isValid() {
         Storage.fruits.put(fruit, 10);
         operationHandler.proceed(
-                new FruitTransaction(FruitTransaction.Operation.RETURN,
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                         fruit,
                         5)
         );

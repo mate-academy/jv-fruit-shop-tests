@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -42,7 +41,6 @@ public class FruitPurchaseHandlerTest {
                         fruit,
                         5)
         );
-        assertNull("Expected NPE", Storage.fruits.get(fruit));
     }
 
     @After

@@ -47,7 +47,8 @@ public class FruitTransaction {
             return false;
         }
         FruitTransaction that = (FruitTransaction) o;
-        return amount == that.amount && operation == that.operation && Objects.equals(fruit, that.fruit);
+        return amount == that.amount && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override

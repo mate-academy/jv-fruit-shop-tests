@@ -1,5 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.db.Storage.fruits;
+import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
+import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
+import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -11,19 +18,13 @@ import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static core.basesyntax.db.Storage.fruits;
-import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
-import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
-import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
-import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
     private static FruitTransactionService service;

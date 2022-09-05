@@ -1,13 +1,14 @@
 package core.basesyntax.model;
 
-import org.junit.Test;
-import java.util.NoSuchElementException;
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
 import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 import static core.basesyntax.model.FruitTransaction.getOperationByLetter;
 import static org.junit.Assert.assertEquals;
+
+import java.util.NoSuchElementException;
+import org.junit.Test;
 
 public class FruitTransactionTest {
 

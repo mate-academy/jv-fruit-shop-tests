@@ -1,15 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import static org.junit.Assert.assertEquals;
 
 public class FruitTransactionParserImplTest {
     private static FruitTransactionParser parser;
@@ -73,14 +74,14 @@ public class FruitTransactionParserImplTest {
     }
 
     private List<FruitTransaction> getListOfFruitTransactions() {
-        FruitTransaction bananaTransaction = FruitTransaction.of
-                (FruitTransaction.Operation.BALANCE, "banana", 18);
-        FruitTransaction peachTransaction = FruitTransaction.of
-                (FruitTransaction.Operation.SUPPLY, "peach", 35);
-        FruitTransaction appleTransaction = FruitTransaction.of
-                (FruitTransaction.Operation.RETURN, "apple", 6);
-        FruitTransaction mangoTransaction = FruitTransaction.of
-                (FruitTransaction.Operation.PURCHASE, "mango", 7);
+        FruitTransaction bananaTransaction = FruitTransaction.of(
+                FruitTransaction.Operation.BALANCE, "banana", 18);
+        FruitTransaction peachTransaction = FruitTransaction.of(
+                FruitTransaction.Operation.SUPPLY, "peach", 35);
+        FruitTransaction appleTransaction = FruitTransaction.of(
+                FruitTransaction.Operation.RETURN, "apple", 6);
+        FruitTransaction mangoTransaction = FruitTransaction.of(
+                FruitTransaction.Operation.PURCHASE, "mango", 7);
         return List.of(bananaTransaction, peachTransaction, appleTransaction, mangoTransaction);
     }
 }

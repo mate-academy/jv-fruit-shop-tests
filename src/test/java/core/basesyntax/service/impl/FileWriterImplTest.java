@@ -1,15 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.service.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class FileWriterImplTest {
     private static final String TEST_FILE = "src/test/resources/test_output.csv";
@@ -28,7 +29,7 @@ public class FileWriterImplTest {
 
     @Test
     public void writeData_Ok() {
-        String actual = "fruit,quantity\n" +  "banana,152\n" + "apple,90\n" + "путін хуйло";
+        String actual = "fruit,quantity\n" + "banana,152\n" + "apple,90\n" + "путін хуйло";
         writer.writeToFile(actual, TEST_FILE);
         String expected = readFromFile();
         assertTrue(Files.exists(path));

@@ -1,10 +1,11 @@
 package core.basesyntax.dao;
 
+import static core.basesyntax.db.Storage.fruits;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static core.basesyntax.db.Storage.fruits;
 
 public class FruitDaoImplTest {
     private static FruitDao fruitDao;

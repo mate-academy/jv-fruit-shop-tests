@@ -1,5 +1,7 @@
 package core.basesyntax.service.operation;
 
+import static core.basesyntax.db.Storage.fruits;
+
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
@@ -7,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static core.basesyntax.db.Storage.fruits;
 
 public class BalanceOperationHandlerTest {
     private static BalanceOperationHandler balanceHandler;

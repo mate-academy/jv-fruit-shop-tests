@@ -20,7 +20,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void apply_Ok() {
+    public void apply_ok() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("s", apple, 13));
         Integer expected = 27;

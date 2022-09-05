@@ -20,7 +20,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFromFile_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("test file should contains");
         expected.add("at least two lines");
@@ -29,24 +29,24 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_EmptyFile_Ok() {
+    public void readFromFile_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = readerService.readFromFile(EMPTY_FILE_NAME);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromFile_WrongFileName_notOk() {
+    public void readFromFile_wrongFileName_notOk() {
         readerService.readFromFile(WRONG_FILE_NAME);
     }
 
     @Test (expected = RuntimeException.class)
-    public void emptyFileName_NotOk() {
+    public void readFromFile_emptyFileName_notOk() {
         readerService.readFromFile("");
     }
 
     @Test (expected = RuntimeException.class)
-    public void nullFileName_NotOk() {
+    public void readFromFile_nullFileName_notOk() {
         readerService.readFromFile(null);
     }
 }

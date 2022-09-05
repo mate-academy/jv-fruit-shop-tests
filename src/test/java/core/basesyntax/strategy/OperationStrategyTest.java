@@ -25,28 +25,28 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getByOperation_Balance_Ok() {
+    public void getByOperation_balance_ok() {
         OperationHandler expected = new BalanceOperationHandler();
         OperationHandler actual = operationStrategy.getByOperation(BALANCE);
         Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void getByOperation_Purchase_Ok() {
+    public void getByOperation_purchase_ok() {
         OperationHandler expected = new PurchaseOperationHandler();
         OperationHandler actual = operationStrategy.getByOperation(PURCHASE);
         Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void getByOperation_Return_Ok() {
+    public void getByOperation_return_ok() {
         OperationHandler expected = new ReturnOperationHandler();
         OperationHandler actual = operationStrategy.getByOperation(RETURN);
         Assert.assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void getByOperation_Supply_Ok() {
+    public void getByOperation_supply_ok() {
         OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actual = operationStrategy.getByOperation(SUPPLY);
         Assert.assertEquals(expected.getClass(), actual.getClass());

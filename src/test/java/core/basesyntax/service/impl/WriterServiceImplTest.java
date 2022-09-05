@@ -19,7 +19,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_OK() {
+    public void writeToFile_ok() {
         String expected = null;
         String actual = "fruit,quantity";
         writerService.writeToFile(PATH, actual);

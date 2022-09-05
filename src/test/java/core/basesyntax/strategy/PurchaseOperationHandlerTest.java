@@ -21,7 +21,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void apply_Ok() {
+    public void apply_ok() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("p", apple, 9));
         Integer expected = 5;

@@ -20,17 +20,10 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void apply_Ok() {
+    public void apply_ok() {
         operationHandler.apply(new Transaction("b", apple, 14));
         Integer actual = Storage.storage.get(apple);
         Integer expected = 14;
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void apply_nullValue_Ok() {
-        Integer expected = null;
-        Integer actual = Storage.storage.get(apple);
         assertEquals(expected, actual);
     }
 

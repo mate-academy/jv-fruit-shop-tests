@@ -21,7 +21,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void apply_Ok() {
+    public void apply_ok() {
         Storage.storage.put(apple, 14);
         operationHandler.apply(new Transaction("p", apple, 13));
         Integer expected = 27;

@@ -1,11 +1,12 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class ReportCreatorImplTest {
     private ReportCreator reportCreator;

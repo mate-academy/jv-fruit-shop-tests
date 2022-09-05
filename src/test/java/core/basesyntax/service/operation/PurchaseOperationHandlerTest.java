@@ -1,5 +1,7 @@
 package core.basesyntax.service.operation;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -7,8 +9,6 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PurchaseOperationHandlerTest {
     private FruitDao fruitDao;

@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -9,17 +11,14 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.strategy.OperationStratategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
@@ -67,11 +66,9 @@ public class FruitShopServiceImplTest {
         assertEquals(expected,actual);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = RuntimeException.class)
     public void process_listWithEmptyTransaction_NotOk() {
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 15));
         transactions.add(new FruitTransaction());
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 15));
         fruitShopService.process(transactions);
     }
 

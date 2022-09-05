@@ -26,7 +26,8 @@ public class WriterServiceImplTest {
         try {
             expected = Files.readString(Path.of(PATH));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("You can't write to the file in this " + PATH
+                    + " destination.", e);
         }
         assertEquals(expected, actual);
     }

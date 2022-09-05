@@ -40,8 +40,8 @@ public class SupplyOperationHandlerImplTest {
         transaction.setQuantity(-1);
         operationHandler.apply(transaction);
         int actual = Storage.storage.get(fruit);
-        Exception expected = new NumberFormatException();
-        Assert.assertNotSame(expected, actual);
+        int expected = 44;
+        Assert.assertEquals(expected, actual);
     }
 
     @After

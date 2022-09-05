@@ -40,8 +40,8 @@ public class PurchaseOperationHandlerImplTest {
         transaction.setQuantity(151);
         operationHandler.apply(transaction);
         int actual = Storage.storage.get(fruit);
-        int expected = 0;
-        Assert.assertNotEquals(expected, actual);
+        int expected = -1;
+        Assert.assertEquals(expected, actual);
     }
 
     @After

@@ -27,21 +27,22 @@ public class BalanceOperationHandlerImplTest {
     }
 
     @Test
-    public void operation_ApplyBalance_ok() {
+    public void operation_applyBalance_ok() {
         boolean emptyStorage = Storage.storage.isEmpty();
         Assert.assertTrue(emptyStorage);
         operationHandler.apply(transaction);
-        int actualSize = Storage.storage.size();
-        Assert.assertEquals(1, actualSize);
+        int actual = Storage.storage.get(fruit);
+        int expected = transaction.getQuantity();
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void operation_ApplyNegativeBalance_notOk() {
+    public void operation_applyNegativeBalance_notOk() {
         transaction.setQuantity(-1);
         operationHandler.apply(transaction);
-        int expected = 0;
-        int actualSize = Storage.storage.size();
-        Assert.assertNotEquals(expected, actualSize);
+        int expected = -1;
+        int actual = Storage.storage.get(fruit);
+        Assert.assertEquals(expected, actual);
     }
 
     @After

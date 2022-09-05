@@ -31,8 +31,8 @@ public class ReportWriterImplTest {
     @Test
     public void service_reportWriterWrite_ok() {
         reportWriter.write(report, file);
-        String actual = fromFileToString(file);
-        String expected = fromFileToString(new File("src/test/resources/testForWriter.csv"));
+        String actual = read(file);
+        String expected = report;
         Assert.assertEquals(expected, actual);
     }
 
@@ -42,7 +42,7 @@ public class ReportWriterImplTest {
         reportWriter.write(report, file);
     }
 
-    public String fromFileToString(File file) {
+    private String read(File file) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             StringBuilder stringBuilder = new StringBuilder();
             String value = bufferedReader.readLine();
@@ -52,7 +52,7 @@ public class ReportWriterImplTest {
             }
             return stringBuilder.toString();
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Can't read from file" + file, e);
         }
     }
 

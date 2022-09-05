@@ -47,11 +47,10 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void service_fileReaderReadEmpty_notOk() {
+    public void service_fileReaderReadEmpty_ok() {
         file = new File("src/test/resources/emptyInputTest.csv");
         List<String> actual = fileReader.read(file);
-        Exception expectedException = new RuntimeException();
-        Assert.assertNotSame(expectedException,actual);
+        Assert.assertTrue("Read is not correct!", actual.isEmpty());
     }
 
     @After

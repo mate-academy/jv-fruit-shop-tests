@@ -46,14 +46,14 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void service_ParserParse_ok() {
+    public void service_parserParse_ok() {
         List<Transaction> actual = transactionParser.parse(list);
         List<Transaction> expected = transactionList;
         Assert.assertEquals(expected,actual);
     }
 
     @Test(expected = NullPointerException.class)
-    public void service_ParserParseNull_ok() {
+    public void service_parserParseNull_ok() {
         list = null;
         transactionParser.parse(list);
     }

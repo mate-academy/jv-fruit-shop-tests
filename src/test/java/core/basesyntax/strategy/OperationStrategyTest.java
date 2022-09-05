@@ -31,11 +31,6 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getOperationEmptyTest_ok() {
-        operationStrategy.getByOperation(null);
-    }
-
-    @Test
     public void getByOperationBalanceTest_ok() {
         OperationHandler expected = new BalanceOperationHandler();
         OperationHandler actualHandler = operationStrategy.getByOperation(BALANCE);

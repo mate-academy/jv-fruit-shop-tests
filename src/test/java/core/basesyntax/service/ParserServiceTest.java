@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
@@ -30,13 +29,6 @@ public class ParserServiceTest {
         testListLines.add("");
         actual = parserServiceTest.parse(testListLines);
         assertEquals(expected, actual);
-    }
-
-    @Test
-    public void parseNull_ok() {
-        testListLines.add(null);
-        parserServiceTest.parse(testListLines);
-        assertNull(testListLines.get(0));
     }
 
     @Test

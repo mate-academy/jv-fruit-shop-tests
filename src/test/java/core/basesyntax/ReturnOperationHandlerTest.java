@@ -23,14 +23,10 @@ public class ReturnOperationHandlerTest {
         StorageDao storageDao = new StorageDaoImpl();
         returnOperationHandler = new ReturnOperationHandler(storageDao);
         fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction.setFruitType("orange");
-        fruitTransaction.setFruitQuantity(20);
     }
 
     @Test
     public void returnWithNoSuchFruitInStorage_Ok() {
-        Storage.fruits.clear();
         try {
             returnOperationHandler.handle(fruitTransaction);
         } catch (NoSuchElementException e) {
@@ -40,7 +36,9 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void returnWithSuchFruitInStorage_Ok() {
-        Storage.fruits.clear();
+        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
+        fruitTransaction.setFruitType("orange");
+        fruitTransaction.setFruitQuantity(20);
         Storage.fruits.add(new Fruit("orange", 10));
         returnOperationHandler.handle(fruitTransaction);
         Fruit expected = new Fruit("orange", 30);

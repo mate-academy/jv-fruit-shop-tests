@@ -22,14 +22,10 @@ public class PurchaseOperationHandlerTest {
         StorageDao storageDao = new StorageDaoImpl();
         purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
         fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        fruitTransaction.setFruitType("orange");
-        fruitTransaction.setFruitQuantity(20);
     }
 
     @Test
     public void purchaseWithNoSuchFruitInStorage_Ok() {
-        Storage.fruits.clear();
         try {
             purchaseOperationHandler.handle(fruitTransaction);
         } catch (RuntimeException e) {
@@ -39,7 +35,9 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void purchaseWithFruitInStorage_Ok() {
-        Storage.fruits.clear();
+        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        fruitTransaction.setFruitType("orange");
+        fruitTransaction.setFruitQuantity(20);
         Storage.fruits.add(new Fruit("orange", 30));
         purchaseOperationHandler.handle(fruitTransaction);
         Fruit actual = Storage.fruits.get(0);

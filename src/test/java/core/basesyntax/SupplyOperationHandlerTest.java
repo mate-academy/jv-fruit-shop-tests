@@ -23,14 +23,10 @@ public class SupplyOperationHandlerTest {
         StorageDao storageDao = new StorageDaoImpl();
         supplyOperationHandler = new SupplyOperationHandler(storageDao);
         fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitTransaction.setFruitType("orange");
-        fruitTransaction.setFruitQuantity(20);
     }
 
     @Test
     public void supplyWithNoSuchFruitInStorage_Ok() {
-        Storage.fruits.clear();
         try {
             supplyOperationHandler.handle(fruitTransaction);
         } catch (NoSuchElementException e) {
@@ -40,7 +36,9 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void supplyWithSuchFruitInStorage_Ok() {
-        Storage.fruits.clear();
+        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        fruitTransaction.setFruitType("orange");
+        fruitTransaction.setFruitQuantity(20);
         Storage.fruits.add(new Fruit("orange", 10));
         supplyOperationHandler.handle(fruitTransaction);
         boolean result = Storage.fruits.get(0).getFruitType().equals("orange")

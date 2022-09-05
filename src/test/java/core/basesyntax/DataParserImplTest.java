@@ -11,11 +11,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DataParserImplTest {
-    private final DataParser parser = new DataParserImpl();
+    private DataParser parser;
     private FruitTransaction expectedFruitTransaction;
 
     @Before
     public void setUp() {
+        parser = new DataParserImpl();
         expectedFruitTransaction = new FruitTransaction();
         expectedFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         expectedFruitTransaction.setFruitType("orange");

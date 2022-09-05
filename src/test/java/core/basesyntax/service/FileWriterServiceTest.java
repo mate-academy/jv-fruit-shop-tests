@@ -6,15 +6,15 @@ import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceTest {
-    private FileWriterService writerServiceTest;
+    private static FileWriterService writerService;
 
-    @Before
-    public void beforeClass() {
-        writerServiceTest = new FileWriterServiceImpl();
+    @BeforeClass
+    public static void beforeClass() {
+        writerService = new FileWriterServiceImpl();
     }
 
     @Test
@@ -22,10 +22,9 @@ public class FileWriterServiceTest {
         String path = "src/test/resources/testReport";
         String report = "fruit, quantity";
         String expected = "fruit, quantity";
-        writerServiceTest.write(report, path);
+        writerService.write(report, path);
         String actual = read(path);
-        assertEquals(
-                expected, actual);
+        assertEquals(expected, actual);
     }
 
     private String read(String path) {
@@ -39,17 +38,17 @@ public class FileWriterServiceTest {
     @Test (expected = NullPointerException.class)
     public void nullPath_WriteToFile_NotOk() {
         String nullTest = null;
-        writerServiceTest.write(null, nullTest);
+        writerService.write(null, nullTest);
     }
 
     @Test (expected = NullPointerException.class)
     public void nullReport_WriteToFile_NotOk() {
         String path = "src/main/resources/report.csv";
-        writerServiceTest.write(path, null);
+        writerService.write(path, null);
     }
 
     @Test (expected = NullPointerException.class)
     public void nullValues_WriteToFile_NotOk() {
-        writerServiceTest.write(null, null);
+        writerService.write(null, null);
     }
 }

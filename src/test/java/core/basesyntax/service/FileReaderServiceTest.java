@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class FileReaderServiceTest {
     private static FileReaderService fileReaderService;
+    private static final String INPUT_FILE = "src/test/resources/testInputFile";
 
     @BeforeClass
     public static void beforeClass() {
@@ -25,13 +26,12 @@ public class FileReaderServiceTest {
     @Test
     public void readFile_ok() {
         List<String> expected = new ArrayList<>();
-        String fileTest = "src/test/resources/testInputFile";
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");
         expected.add("s,banana,100");
         expected.add("p,banana,13");
-        List<String> actual = fileReaderService.read(fileTest);
+        List<String> actual = fileReaderService.read(INPUT_FILE);
         assertEquals(expected, actual);
     }
 }

@@ -22,7 +22,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void balanceTestQuantity_Ok() {
+    public void balanceTestQuantity_ok() {
         fruit = new Fruit("apple");
         balanceOperationTest.apply(testTransaction);
         Integer expected = 10;
@@ -35,7 +35,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void noSuchOperationTest_notOk() {
+    public void noSuchOperationTest_ok() {
         fruit = new Fruit("papaia");
         testTransaction = new Transaction("o", fruit, 200);
         balanceOperationTest.apply(testTransaction);

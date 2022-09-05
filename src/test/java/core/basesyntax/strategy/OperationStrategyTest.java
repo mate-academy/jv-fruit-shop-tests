@@ -3,12 +3,14 @@ package core.basesyntax.strategy;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.strategy.operations.BalanceOperationHandler;
+import core.basesyntax.strategy.operations.PurchaseOperationHandler;
+import core.basesyntax.strategy.operations.ReturnOperationHandler;
+import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
@@ -16,62 +18,49 @@ public class OperationStrategyTest {
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
     private static final String SUPPLY = "s";
-    private Map<String, OperationHandler> map = new HashMap<>();
-    private OperationStrategy operationStrategy;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
+        Map<String, OperationHandler> map = new HashMap<>();
+        map.put(BALANCE, new BalanceOperationHandler());
+        map.put(PURCHASE, new PurchaseOperationHandler());
+        map.put(RETURN, new ReturnOperationHandler());
+        map.put(SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategy(map);
     }
 
     @Test
-    public void getOperationEmptyTest_Ok() {
-        Set<String> expected = new HashSet<>();
-        expected.add(null);
-        OperationHandler actualHandler = operationStrategy.getByOperation(null);
-        map.put(null, actualHandler);
-        Set<String> actual = map.keySet();
-        assertEquals(expected, actual);
+    public void getOperationEmptyTest_ok() {
+        operationStrategy.getByOperation(null);
     }
 
     @Test
-    public void getByOperationBalanceTest_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("b");
+    public void getByOperationBalanceTest_ok() {
+        OperationHandler expected = new BalanceOperationHandler();
         OperationHandler actualHandler = operationStrategy.getByOperation(BALANCE);
-        map.put(BALANCE, actualHandler);
-        Set<String> actual = map.keySet();
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actualHandler.getClass());
     }
 
     @Test
-    public void getByOperationPurchaseTest_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("p");
+    public void getByOperationPurchaseTest_ok() {
+        OperationHandler expected = new PurchaseOperationHandler();
         OperationHandler actualHandler = operationStrategy.getByOperation(PURCHASE);
-        map.put(PURCHASE, actualHandler);
-        Set<String> actual = map.keySet();
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actualHandler.getClass());
     }
 
     @Test
-    public void getByOperationReturnTest_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("r");
+    public void getByOperationReturnTest_ok() {
+        OperationHandler expected = new ReturnOperationHandler();
         OperationHandler actualHandler = operationStrategy.getByOperation(RETURN);
-        map.put(RETURN, actualHandler);
-        Set<String> actual = map.keySet();
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actualHandler.getClass());
     }
 
     @Test
-    public void getByOperationSupplyTest_OK() {
-        Set<String> expected = new HashSet<>();
-        expected.add("s");
+    public void getByOperationSupplyTest_ok() {
+        OperationHandler expected = new SupplyOperationHandler();
         OperationHandler actualHandler = operationStrategy.getByOperation(SUPPLY);
-        map.put(SUPPLY, actualHandler);
-        Set<String> actual = map.keySet();
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actualHandler.getClass());
     }
 
     @After

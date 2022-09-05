@@ -16,17 +16,17 @@ public class SupplyOperationTest {
 
     @Before
     public void setUp() {
-        testTransaction = new Transaction("b", new Fruit("apple"), 10);
+        testTransaction = new Transaction("b", new Fruit("kiwi"), 10);
         supplyOperationTest = new SupplyOperationHandler();
     }
 
     @Test
-    public void supplyTestQuantity_Ok() {
-        Fruit cucumber = new Fruit("apple");
-        Storage.storage.put(cucumber, 5);
+    public void supplyTestQuantity_ok() {
+        Fruit kiwi = new Fruit("kiwi");
+        Storage.storage.put(kiwi, 5);
         supplyOperationTest.apply(testTransaction);
         Integer exepted = 15;
-        assertEquals(exepted, Storage.storage.get(cucumber));
+        assertEquals(exepted, Storage.storage.get(kiwi));
     }
 
     @Test (expected = NullPointerException.class)

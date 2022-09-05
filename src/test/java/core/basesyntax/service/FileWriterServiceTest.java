@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -15,38 +15,41 @@ public class FileWriterServiceTest {
     private ReportService reportTest;
 
     @Before
-    public void setUp() {
+    public void beforeClass() {
         writerServiceTest = new FileWriterServiceImpl();
+    }
+
+    @Before
+    public void setUp() {
         reportTest = new ReportServiceImpl();
     }
 
     @Test
-    public void writeToFile_OK() {
-        String path = "src/main/resources/report.csv";
-        String expectedFile = "src/main/resources/report.csv";
+    public void writeToFile_ok() {
+        String path = "src/test/resources/testReport";
+        String expected = "fruit ,quantity";
         writerServiceTest.write(reportTest.getReport(), path);
-        boolean expected;
         try {
-            expected = Files.isSameFile(Path.of(path), Path.of(expectedFile));
+            assertEquals(
+                    expected, Files.readString(Path.of(path)).trim());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertTrue(expected);
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullPath_WriteToFile_NotOK() {
+    public void nullPath_WriteToFile_NotOk() {
         writerServiceTest.write(null, reportTest.getReport());
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullReport_WriteToFile_NotOK() {
+    public void nullReport_WriteToFile_NotOk() {
         String path = "src/main/resources/report.csv";
         writerServiceTest.write(path, null);
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullValues_WriteToFile_NotOK() {
+    public void nullValues_WriteToFile_NotOk() {
         writerServiceTest.write(null, null);
     }
 }

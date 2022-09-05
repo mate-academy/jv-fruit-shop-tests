@@ -18,7 +18,6 @@ public class FileReaderServiceTest {
     @Before
     public void setUp() {
         expected = new ArrayList<>();
-        expected.clear();
     }
 
     @Test
@@ -28,7 +27,7 @@ public class FileReaderServiceTest {
     }
 
     @Test
-    public void readFile_Ok() {
+    public void readFile_ok() {
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
         expected.add("b,apple,100");

@@ -11,10 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnOperationTest {
-
     private OperationHandler returnOperationTest;
     private Transaction testTransaction;
-    private Fruit fruit;
 
     @Before
     public void setUp() {
@@ -23,12 +21,12 @@ public class ReturnOperationTest {
     }
 
     @Test
-    public void supplyTestQuantity_Ok() {
-        fruit = new Fruit("apple");
+    public void returnTestQuantity_ok() {
+        Fruit fruit = new Fruit("apple");
         Storage.storage.put(fruit, 0);
         returnOperationTest.apply(testTransaction);
-        Integer exepted = 10;
-        assertEquals(exepted, Storage.storage.get(fruit));
+        Integer expected = 10;
+        assertEquals(expected, Storage.storage.get(fruit));
     }
 
     @Test (expected = NullPointerException.class)

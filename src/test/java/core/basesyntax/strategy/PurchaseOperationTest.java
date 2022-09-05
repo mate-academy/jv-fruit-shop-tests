@@ -20,7 +20,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseTestQuantity_Ok() {
+    public void purchaseTestQuantity_ok() {
         Fruit apple = new Fruit("AdamDontEatIt");
         Storage.storage.put(apple, 30);
         purchaseOperationTest.apply(new Transaction("p", apple, 9));
@@ -30,7 +30,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void negativeTestPurchaseValue_NotOK() {
+    public void negativeTestPurchaseValue_NotOk() {
         Fruit apple = new Fruit("apple");
         Storage.storage.put(apple, 1000);
         purchaseOperationTest.apply(new Transaction("p", new Fruit("apple"), -999));

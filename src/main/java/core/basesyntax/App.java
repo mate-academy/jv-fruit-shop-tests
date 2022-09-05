@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class App {
     private static final String INPUT_DATA_PATH
-            = "src/main/resources/fileFrom.csv";
+            = "src/main/resources/InputFile";
     private static final String OUTPUT_DATA_PATH
             = "src/main/resources/report.csv";
     private static final String BALANCE = "b";

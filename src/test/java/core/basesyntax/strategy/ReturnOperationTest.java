@@ -7,15 +7,15 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.operations.ReturnOperationHandler;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationTest {
-    private OperationHandler returnOperationTest;
-    private Transaction testTransaction;
+    private static OperationHandler returnOperationTest;
+    private static Transaction testTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         testTransaction = new Transaction("b", new Fruit("apple"), 10);
         returnOperationTest = new ReturnOperationHandler();
     }

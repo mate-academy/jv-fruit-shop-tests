@@ -7,15 +7,15 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationTest {
-    private Transaction testTransaction;
-    private OperationHandler supplyOperationTest;
+    private static Transaction testTransaction;
+    private static OperationHandler supplyOperationTest;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         testTransaction = new Transaction("b", new Fruit("kiwi"), 10);
         supplyOperationTest = new SupplyOperationHandler();
     }

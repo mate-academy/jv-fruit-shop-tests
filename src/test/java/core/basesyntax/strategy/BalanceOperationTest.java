@@ -7,23 +7,23 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.operations.BalanceOperationHandler;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationTest {
-    private Transaction testTransaction;
-    private OperationHandler balanceOperationTest;
+    private static Transaction testTransaction;
+    private static OperationHandler balanceOperationTest;
     private Fruit fruit;
 
-    @Before
-    public void setUp() {
-        testTransaction = new Transaction("b", new Fruit("apple"), 10);
+    @BeforeClass
+    public static void setUp() {
         balanceOperationTest = new BalanceOperationHandler();
     }
 
     @Test
     public void balanceTestQuantity_ok() {
         fruit = new Fruit("apple");
+        testTransaction = new Transaction("b", new Fruit("apple"), 10);
         balanceOperationTest.apply(testTransaction);
         Integer expected = 10;
         assertEquals(expected, Storage.storage.get(fruit));

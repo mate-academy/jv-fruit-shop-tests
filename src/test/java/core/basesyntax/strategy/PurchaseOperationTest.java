@@ -8,14 +8,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.operations.PurchaseOperationHandler;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationTest {
-    private OperationHandler purchaseOperationTest;
+    private static OperationHandler purchaseOperationTest;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         purchaseOperationTest = new PurchaseOperationHandler();
     }
 

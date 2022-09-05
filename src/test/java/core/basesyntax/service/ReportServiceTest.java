@@ -11,10 +11,11 @@ import org.junit.Test;
 
 public class ReportServiceTest {
     private static StringBuilder expectedReport = new StringBuilder();
-    private ReportService reportServiceTest = new ReportServiceImpl();
+    private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {
+        reportService = new ReportServiceImpl();
         expectedReport.append("fruit ,quantity ");
         expectedReport.append(System.lineSeparator());
         expectedReport.append("banana,100");
@@ -29,7 +30,7 @@ public class ReportServiceTest {
         Storage.storage.put(new Fruit("apple"), 100);
         Storage.storage.put(new Fruit("banana"), 13);
         Storage.storage.put(new Fruit("banana"), 100);
-        String actual = reportServiceTest.getReport();
+        String actual = reportService.getReport();
         assertEquals(expectedReport.toString(), actual);
     }
 

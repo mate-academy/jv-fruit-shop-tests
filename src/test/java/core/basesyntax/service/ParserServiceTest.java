@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ParserServiceTest {
-    private ParserService parserServiceTest;
+    private ParserService parserService;
     private List<String> testListLines;
     private List<Transaction> expected;
     private List<Transaction> actual;
@@ -21,13 +21,13 @@ public class ParserServiceTest {
         actual = new ArrayList<>();
         expected = new ArrayList<>();
         testListLines = new ArrayList<>();
-        parserServiceTest = new ParserServiceImpl();
+        parserService = new ParserServiceImpl();
     }
 
     @Test
     public void parseEmptyLine_ok() {
         testListLines.add("");
-        actual = parserServiceTest.parse(testListLines);
+        actual = parserService.parse(testListLines);
         assertEquals(expected, actual);
     }
 
@@ -38,7 +38,7 @@ public class ParserServiceTest {
         testListLines.add("b,apple,100");
         expected.add(new Transaction("b", new Fruit("banana"), 20));
         expected.add(new Transaction("b", new Fruit("apple"), 100));
-        actual = parserServiceTest.parse(testListLines);
+        actual = parserService.parse(testListLines);
         assertEquals(expected, actual);
     }
 
@@ -47,7 +47,7 @@ public class ParserServiceTest {
         testListLines.add("type,fruit,quantity");
         testListLines.add("b,20");
         testListLines.add("b,apple,100");
-        actual = parserServiceTest.parse(testListLines);
+        parserService.parse(testListLines);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -55,7 +55,7 @@ public class ParserServiceTest {
         testListLines.add("type,fruit,quantity");
         testListLines.add("banana,20");
         testListLines.add("b,apple,100");
-        parserServiceTest.parse(testListLines);
+        parserService.parse(testListLines);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -63,6 +63,6 @@ public class ParserServiceTest {
         testListLines.add("type,fruit,quantity");
         testListLines.add("b,banana");
         testListLines.add("b,apple,100");
-        parserServiceTest.parse(testListLines);
+        parserService.parse(testListLines);
     }
 }

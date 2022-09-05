@@ -3,13 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import static org.junit.Assert.assertEquals;
 
 public class FruitTransactionParserImplTest {
     private static FruitTransactionParser parser;
@@ -34,14 +34,14 @@ public class FruitTransactionParserImplTest {
     public void parseValidList_Ok() {
         List<FruitTransaction> actual = parser.parse(transactionStrings);
         List<FruitTransaction> expected = getListOfFruitTransactions();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void parseEmptyList_Ok() {
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         List<FruitTransaction> expected = List.of();
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test (expected = NullPointerException.class)

@@ -12,7 +12,6 @@ import core.basesyntax.service.operation.SupplyOperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
 import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
+import static org.junit.Assert.assertEquals;
 
 public class FruitTransactionServiceImplTest {
     private static FruitTransactionService service;
@@ -44,14 +44,14 @@ public class FruitTransactionServiceImplTest {
     public void processTransactions_Ok() {
         service.process(getListOfFruitTransactions());
         Map<String, Integer> expected = Map.of("mango", 69, "orange", 40);
-        Assert.assertEquals(expected, fruits);
+        assertEquals(expected, fruits);
     }
 
     @Test
     public void processEmptyList_Ok() {
         service.process(new ArrayList<>());
         Map<String, Integer> expected = Map.of();
-        Assert.assertEquals(expected, fruits);
+        assertEquals(expected, fruits);
     }
 
     @Test (expected = NullPointerException.class)
@@ -60,7 +60,6 @@ public class FruitTransactionServiceImplTest {
         list.set(4, null);
         service.process(list);
     }
-
 
     @After
     public void afterEachTest() {

@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportService;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static core.basesyntax.db.Storage.fruits;
+import static org.junit.Assert.assertEquals;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
@@ -30,7 +30,7 @@ public class ReportServiceImplTest {
         String actual = reportService.createReport(fruits);
         String expected = "fruit,quantity\nbanana,24\napricot,80\napple,120\ngrape,46\n" +
                 "mango,30\nпутін хуйло";
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class ReportServiceImplTest {
         fruits.clear();
         String actual = reportService.createReport(fruits);
         String expected = "fruit,quantity\nпутін хуйло";
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @After

@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReader;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 public class FileReaderImplTest {
     private static FileReader reader;
@@ -22,14 +22,14 @@ public class FileReaderImplTest {
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5",
                 "s,banana,50");
         List<String> actual = reader.readFromFile(TEST_FILE);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void readEmptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = reader.readFromFile(EMPTY_FILE);
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

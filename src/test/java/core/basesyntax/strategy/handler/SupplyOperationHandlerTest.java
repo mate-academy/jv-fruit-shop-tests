@@ -14,7 +14,7 @@ public class SupplyOperationHandlerTest {
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandler = new SupplyOperationHandler();
     }
 
@@ -24,7 +24,7 @@ public class SupplyOperationHandlerTest {
         Storage.storage.put(banana, 40);
         Transaction transaction = new Transaction(Operation.SUPPLY, banana, 21);
         operationHandler.apply(transaction);
-        assertEquals((Integer) 61, Storage.storage.get(banana));
+        assertEquals(Integer.valueOf(61), Storage.storage.get(banana));
     }
 
     @After

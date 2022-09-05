@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
@@ -18,7 +19,12 @@ public class WriterServiceImplTest {
             + "banana,152"
             + System.lineSeparator()
             + "apple,90";
-    private static final WriterServiceImpl writerService = new WriterServiceImpl();
+    private static WriterService writerService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        writerService = new WriterServiceImpl();
+    }
 
     @Test
     public void write_correctReport_ok() throws IOException {

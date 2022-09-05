@@ -24,7 +24,7 @@ public class PurchaseOperationHandlerTest {
         Storage.storage.put(banana, 40);
         Transaction transaction = new Transaction(Operation.PURCHASE, banana, 21);
         operationHandler.apply(transaction);
-        assertEquals((Integer) 19, Storage.storage.get(banana));
+        assertEquals(Integer.valueOf(19), Storage.storage.get(banana));
     }
 
     @Test (expected = RuntimeException.class)

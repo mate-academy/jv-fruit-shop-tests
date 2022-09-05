@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
     private static final String INPUT_FILE = "src/test/resources/input.csv";
     private static final String WRONG_FILE = "noFile.txt";
-    private static ReaderServiceImpl readerService;
+    private static ReaderService readerService;
 
     @BeforeClass
     public static void beforeClass() {

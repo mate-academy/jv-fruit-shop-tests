@@ -16,7 +16,7 @@ public class ReportServiceImplTest {
             + "banana,20"
             + System.lineSeparator()
             + "apple,100";
-    private static ReportServiceImpl reportService;
+    private static ReportService reportService;
 
     @BeforeClass
     public static void beforeClass() {

@@ -21,7 +21,7 @@ import org.junit.Test;
 public class ParserServiceImplTest {
     private static List<String> lines;
     private static Map<Operation, OperationHandler> handlerMap;
-    private static ParserServiceImpl parserService;
+    private static ParserService parserService;
 
     @BeforeClass
     public static void beforeClass() {
@@ -35,7 +35,6 @@ public class ParserServiceImplTest {
     }
 
     @Test (expected = IndexOutOfBoundsException.class)
-
     public void parse_emptyList_ok() {
         List<String> lines = new ArrayList<>();
         parserService.parseLines(lines).size();

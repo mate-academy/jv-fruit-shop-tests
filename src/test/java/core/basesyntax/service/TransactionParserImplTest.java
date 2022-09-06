@@ -10,11 +10,11 @@ import org.junit.Test;
 
 public class TransactionParserImplTest {
     private static TransactionParser transactionParser;
-    private static List<String> transaktions =
+    private static List<String> transactions =
             List.of("type,fruit,quantity", "b,apple,10", "s,orange,20");
-    private static FruitTransaction transaction1 =
+    private static FruitTransaction appleTransaction =
             new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10);
-    private static FruitTransaction transaction2 =
+    private static FruitTransaction orangeTransaction =
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "orange", 20);
 
     @BeforeClass
@@ -25,8 +25,9 @@ public class TransactionParserImplTest {
     @Test
     public void getTransactions_twoValidTransactions_Ok() {
         List<FruitTransaction> actualTransactionList = transactionParser
-                .getTransactions(transaktions);
-        List<FruitTransaction> expectedTransactionList = List.of(transaction1, transaction2);
+                .getTransactions(transactions);
+        List<FruitTransaction> expectedTransactionList =
+                List.of(appleTransaction, orangeTransaction);
         assertEquals(actualTransactionList, expectedTransactionList);
     }
 

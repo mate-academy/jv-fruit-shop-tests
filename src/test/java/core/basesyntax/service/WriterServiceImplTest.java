@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-
     private static String correctUrl;
     private static String forEqualsUrl;
     private static WriterService writerService;

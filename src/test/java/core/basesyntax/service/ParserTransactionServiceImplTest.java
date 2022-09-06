@@ -10,10 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserTransactionServiceImplTest {
-    public static final String SEPARATOR = ",";
-    public static final int OPERATION_INDEX = 0;
-    public static final int NAME_INDEX = 1;
-    public static final int AMOUNT_INDEX = 2;
     private static ParserTransactionsService parserTransactionsService;
 
     @BeforeClass

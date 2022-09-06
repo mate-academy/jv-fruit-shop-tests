@@ -23,7 +23,7 @@ public class SupplyOperationHandlerImplTest {
         Fruit fruit = new Fruit("banana");
         Storage.dataBase.put(fruit, 113);
         FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, new Fruit("banana"), 15);
+                FruitTransaction.Operation.SUPPLY, new Fruit("banana"), 15);
         operationHandler.apply(transaction);
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(fruit, 128);
@@ -31,7 +31,7 @@ public class SupplyOperationHandlerImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.dataBase.clear();
     }
 }

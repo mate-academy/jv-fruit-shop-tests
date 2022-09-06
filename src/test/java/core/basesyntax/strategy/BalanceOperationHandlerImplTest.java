@@ -42,7 +42,7 @@ public class BalanceOperationHandlerImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.dataBase.clear();
     }
 }

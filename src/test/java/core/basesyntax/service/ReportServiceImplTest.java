@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-
     private static ReportService reportService;
 
     @BeforeClass

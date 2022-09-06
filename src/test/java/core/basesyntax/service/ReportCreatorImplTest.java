@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private ReportCreator reportCreator;
+    private static ReportCreator reportCreator;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         reportCreator = new ReportCreatorImpl();
     }
 

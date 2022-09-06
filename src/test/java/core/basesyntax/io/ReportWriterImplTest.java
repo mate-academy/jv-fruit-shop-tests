@@ -7,14 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportWriterImplTest {
     private static String correctReport;
     private static final String CORRECT_PATH_TO_FILE = "src/test/resources/ReportFile.csv";
-    private ReportWriter reportWriter;
+    private static ReportWriter reportWriter;
 
     @BeforeClass
     public static void beforeClass() {
@@ -24,10 +23,6 @@ public class ReportWriterImplTest {
                 .append(System.lineSeparator())
                 .append("apple,90")
                 .toString();
-    }
-
-    @Before
-    public void setUp() {
         reportWriter = new ReportWriterImpl();
     }
 

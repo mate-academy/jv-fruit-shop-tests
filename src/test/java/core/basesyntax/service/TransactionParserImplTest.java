@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
@@ -17,8 +17,8 @@ public class TransactionParserImplTest {
     private static FruitTransaction transaction2 =
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "orange", 20);
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         transactionParser = new TransactionParserImpl();
     }
 

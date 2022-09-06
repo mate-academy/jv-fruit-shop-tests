@@ -7,16 +7,16 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private FruitDao fruitDao;
-    private OperationHandler handler;
+    private static FruitDao fruitDao;
+    private static OperationHandler handler;
     private FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         handler = new PurchaseOperationHandler(fruitDao);
     }

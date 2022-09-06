@@ -9,13 +9,12 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
-    private OperationStratategy operationStratategy;
+    private static OperationStratategy operationStratategy;
 
     @BeforeClass
     public static void beforeClass() {
@@ -28,10 +27,6 @@ public class OperationStrategyImplTest {
                 new AddingOperationHandler(new FruitDaoImpl()));
         handlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler(new FruitDaoImpl()));
-    }
-
-    @Before
-    public void setUp() {
         operationStratategy = new OperationStrategyImpl(handlerMap);
     }
 

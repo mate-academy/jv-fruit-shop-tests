@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
@@ -12,10 +12,10 @@ public class FileReaderImplTest {
     private static final String INCORRECT_PATH_TO_FILE = "src/test/resources/OutputFile.csv";
     private static final String EMPTY_PATH_TO_FILE = "";
     private static final String PATH_TO_EMPTY_FILE = "src/test/resources/EmptyInputFile.csv";
-    private FileReader fileReader;
+    private static FileReader fileReader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         fileReader = new FileReaderImpl();
     }
 

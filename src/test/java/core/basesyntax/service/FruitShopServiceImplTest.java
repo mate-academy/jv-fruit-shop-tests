@@ -16,15 +16,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
-    private OperationStratategy operationStratategy;
-    private FruitShopService fruitShopService;
-    private List<FruitTransaction> transactions;
+    private static OperationStratategy operationStratategy;
+    private static FruitShopService fruitShopService;
+    private static List<FruitTransaction> transactions;
 
     @BeforeClass
     public static void beforeClass() {
@@ -37,10 +36,6 @@ public class FruitShopServiceImplTest {
                 new AddingOperationHandler(new FruitDaoImpl()));
         handlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler(new FruitDaoImpl()));
-    }
-
-    @Before
-    public void setUp() {
         operationStratategy = new OperationStrategyImpl(handlerMap);
         fruitShopService = new FruitShopServiceImpl(operationStratategy);
         transactions = new ArrayList<>();
@@ -74,6 +69,7 @@ public class FruitShopServiceImplTest {
 
     @After
     public void tearDown() {
+        transactions.clear();
         Storage.fruitsQuantity.clear();
     }
 }

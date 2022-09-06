@@ -10,14 +10,14 @@ import org.junit.Before;
 import org.junit.Test;
 import service.strategy.TransactionHandler;
 
-public class ReturnHandlerTest {
-    private TransactionHandler returnHandler;
+public class AddHandlerTest {
+    private TransactionHandler addHandler;
     private Fruit fruit;
 
     @Before
     public void setUp() {
         FruitDao fruitDao = new FruitDaoImpl();
-        returnHandler = new ReturnHandler(fruitDao);
+        addHandler = new AddHandler(fruitDao);
         fruit = new Fruit("banana");
         Storage.fruits.clear();
         Storage.fruits.put(fruit, 15);
@@ -26,7 +26,7 @@ public class ReturnHandlerTest {
     @Test
     public void return_valid_ok() {
         Integer expected = Storage.fruits.get(fruit) + 5;
-        returnHandler.apply(new Transaction(Transaction.Operation.RETURN,
+        addHandler.execute(new Transaction(Transaction.Operation.RETURN,
                 fruit, 5));
         Assert.assertEquals(expected, Storage.fruits.get(fruit));
     }

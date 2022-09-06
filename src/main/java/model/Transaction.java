@@ -42,10 +42,10 @@ public class Transaction {
             return label;
         }
 
-        public static Operation valueOfLabel(String label) {
+        public static Operation getByLabel(String label) {
             return Arrays.stream(values())
                     .filter(o -> o.label.equals(label))
-                    .findFirst()
+                    .findAny()
                     .get();
         }
     }
@@ -59,7 +59,8 @@ public class Transaction {
             return false;
         }
         Transaction that = (Transaction) o;
-        return quantity == that.quantity && operation == that.operation
+        return quantity == that.quantity
+                && operation == that.operation
                 && Objects.equals(fruit, that.fruit);
     }
 

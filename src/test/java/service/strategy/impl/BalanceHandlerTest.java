@@ -35,7 +35,7 @@ public class BalanceHandlerTest {
                 new Fruit("banana"), 52));
         transactions.add(new Transaction(Transaction.Operation.BALANCE,
                 new Fruit("apple"), 99));
-        transactions.forEach(t -> balanceHandler.apply(t));
+        transactions.forEach(t -> balanceHandler.execute(t));
         Assert.assertEquals(expected, Storage.fruits);
     }
 }

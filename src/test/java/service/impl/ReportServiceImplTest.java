@@ -10,8 +10,8 @@ import org.junit.Test;
 import service.ReportService;
 
 public class ReportServiceImplTest {
-    private FruitDao fruitDao;
     private ReportService reportService;
+    private FruitDao fruitDao;
 
     @Before
     public void setUp() {

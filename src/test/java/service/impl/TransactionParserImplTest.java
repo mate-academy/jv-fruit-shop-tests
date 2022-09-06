@@ -7,15 +7,15 @@ import model.Transaction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import service.ParserService;
+import service.TransactionParser;
 
-public class ParserServiceImplTest {
-    private ParserService parserService;
+public class TransactionParserImplTest {
+    private TransactionParser transactionParser;
     private Fruit fruit;
 
     @Before
     public void setUp() {
-        parserService = new ParserServiceImpl();
+        transactionParser = new TransactionParserImpl();
         fruit = new Fruit("banana");
     }
 
@@ -28,6 +28,6 @@ public class ParserServiceImplTest {
         inputList.add("type,fruit,quantity");
         inputList.add("b,banana,16");
         inputList.add("s,banana,15");
-        Assert.assertEquals(expected, parserService.parse(inputList));
+        Assert.assertEquals(expected, transactionParser.parse(inputList));
     }
 }

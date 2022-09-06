@@ -27,14 +27,14 @@ public class PurchaseHandlerTest {
     @Test
     public void purchase_valid_ok() {
         Integer expected = Storage.fruits.get(fruit) - 10;
-        purchaseHandler.apply(new Transaction(Transaction.Operation.PURCHASE,
+        purchaseHandler.execute(new Transaction(Transaction.Operation.PURCHASE,
                 fruit, 10));
         Assert.assertEquals(expected, Storage.fruits.get(fruit));
     }
 
     @Test(expected = RuntimeException.class)
     public void purchase_invalid_notOk() {
-        purchaseHandler.apply(new Transaction(Transaction.Operation.PURCHASE,
+        purchaseHandler.execute(new Transaction(Transaction.Operation.PURCHASE,
                 fruit, 20));
     }
 }

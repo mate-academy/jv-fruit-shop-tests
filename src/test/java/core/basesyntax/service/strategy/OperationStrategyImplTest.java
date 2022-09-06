@@ -61,4 +61,10 @@ public class OperationStrategyImplTest {
         Class<? extends OperationHandler> expectedHandler = ReturnOperationHandler.class;
         Assert.assertEquals(expectedHandler, actualHandler);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void getNonExistentOperation_NotOk() {
+        Operation operation = null;
+        strategy.get(operation).getClass();
+    }
 }

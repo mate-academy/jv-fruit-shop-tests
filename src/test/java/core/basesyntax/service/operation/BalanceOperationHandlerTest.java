@@ -1,8 +1,7 @@
 package core.basesyntax.service.operation;
 
-import static core.basesyntax.db.Storage.fruits;
-
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Assert;
@@ -25,14 +24,15 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void handleBalanceTransaction_Ok() {
+    public void handle_balanceTransaction_Ok() {
+        int expected = 40;
         balanceHandler.handle(fruitTransaction);
-        int actual = fruits.get("guava");
-        Assert.assertEquals(40, actual);
+        int actual = Storage.fruits.get("guava");
+        Assert.assertEquals(expected, actual);
     }
 
     @After
     public void afterEachTest() {
-        fruits.clear();
+        Storage.fruits.clear();
     }
 }

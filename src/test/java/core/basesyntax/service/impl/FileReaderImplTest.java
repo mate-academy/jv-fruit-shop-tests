@@ -18,7 +18,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readExistingFile_Ok() {
+    public void readFromFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100",
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5",
                 "s,banana,50");
@@ -27,14 +27,14 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readEmptyFile_Ok() {
+    public void readFromFile_emptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = reader.readFromFile(EMPTY_FILE);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readNonexistenceFile_NotOk() {
+    public void readFromFile_absentFile_NotOk() {
         reader.readFromFile("");
     }
 }

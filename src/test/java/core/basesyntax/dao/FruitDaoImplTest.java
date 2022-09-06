@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
-import static core.basesyntax.db.Storage.fruits;
-
+import core.basesyntax.db.Storage;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -17,52 +16,51 @@ public class FruitDaoImplTest {
 
     @Test
     public void addFruit_Ok() {
-        fruits.put("banana", 80);
-        fruits.put("apple", 75);
-        fruits.put("grape", 30);
-        fruits.put("mango", 16);
+        Storage.fruits.put("banana", 80);
+        Storage.fruits.put("apple", 75);
+        Storage.fruits.put("grape", 30);
+        Storage.fruits.put("mango", 16);
         fruitDao.add("mango", 18);
         fruitDao.add("pear", 16);
-        long actual = fruits.get("mango");
+        long actual = Storage.fruits.get("mango");
         Assert.assertEquals(18, actual);
-        Assert.assertTrue(fruits.containsKey("pear"));
     }
 
     @Test
-    public void getAmountOfFruit_Ok() {
-        fruits.put("banana", 80);
-        fruits.put("apple", 75);
-        fruits.put("grape", 30);
-        fruits.put("mango", 16);
+    public void getFruitAmount_Ok() {
+        int actualQuantity = 30;
+        String fruitName = "grape";
+        Storage.fruits.put(fruitName, actualQuantity);
+        Storage.fruits.put("banana", 80);
+        Storage.fruits.put("apple", 75);
+        Storage.fruits.put("mango", 16);
         long actual = fruitDao.getFruitAmount("grape");
-        Assert.assertEquals(30, actual);
+        Assert.assertEquals(actualQuantity, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void getAmountOfAbsentFruit_NotOk() {
-        fruits.put("banana", 80);
-        fruits.put("apple", 75);
-        fruits.put("grape", 30);
-        fruits.put("mango", 16);
+    public void getFruitAmount_absentFruit_NotOk() {
+        Storage.fruits.put("banana", 80);
+        Storage.fruits.put("apple", 75);
+        Storage.fruits.put("grape", 30);
+        Storage.fruits.put("mango", 16);
         fruitDao.getFruitAmount("plum");
     }
 
-    @Test (expected = NullPointerException.class)
-    public void getNullFruit_NotOk() {
-        fruits.put("banana", 80);
-        fruits.put("apple", 75);
-        fruits.put("grape", 30);
-        fruits.put("mango", 16);
-        fruitDao.getFruitAmount("null");
+    @Test (expected = RuntimeException.class)
+    public void getFruitAmount_nullAmount_NotOk() {
+        Storage.fruits.put("banana", 80);
+        Storage.fruits.put("grape", null);
+        fruitDao.getFruitAmount("grape");
     }
 
-    @Test (expected = NullPointerException.class)
-    public void getFruitOfEmptyStorage_NotOk() {
+    @Test (expected = RuntimeException.class)
+    public void getFruitAmount_emptyStorage_NotOk() {
         fruitDao.getFruitAmount("plum");
     }
 
     @After
     public void afterEachTest() {
-        fruits.clear();
+        Storage.fruits.clear();
     }
 }

@@ -32,38 +32,38 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void parseValidList_Ok() {
+    public void parse_validList_Ok() {
         List<FruitTransaction> actual = parser.parse(transactionStrings);
         List<FruitTransaction> expected = getListOfFruitTransactions();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parseEmptyList_Ok() {
+    public void parse_emptyList_Ok() {
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         List<FruitTransaction> expected = List.of();
         assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void parseNull_NotOk() {
+    @Test (expected = RuntimeException.class)
+    public void parse_nullList_NotOk() {
         parser.parse(null);
     }
 
     @Test (expected = NoSuchElementException.class)
-    public void parseOperationWithInvalidLetter_NotOk() {
+    public void parse_invalidLetterOperation_NotOk() {
         transactionStrings.set(2, "u,kiwi,32");
         parser.parse(transactionStrings);
     }
 
     @Test (expected = ArrayIndexOutOfBoundsException.class)
-    public void parseListWithMissingData_NotOk() {
+    public void parse_invalidString_NotOk() {
         transactionStrings.set(2, "b,kiwi");
         parser.parse(transactionStrings);
     }
 
     @Test (expected = NumberFormatException.class)
-    public void parseAmountFromNotNumberValue_NotOk() {
+    public void parse_notNumericalAmount_NotOk() {
         transactionStrings.set(2, "s,peach,abc");
         parser.parse(transactionStrings);
     }

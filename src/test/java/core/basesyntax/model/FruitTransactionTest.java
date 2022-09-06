@@ -13,7 +13,7 @@ import org.junit.Test;
 public class FruitTransactionTest {
 
     @Test
-    public void getExistingOperation_Ok() {
+    public void getOperationByLetter_Ok() {
         assertEquals(BALANCE, getOperationByLetter("b"));
         assertEquals(SUPPLY, getOperationByLetter("s"));
         assertEquals(PURCHASE, getOperationByLetter("p"));
@@ -21,12 +21,12 @@ public class FruitTransactionTest {
     }
 
     @Test (expected = NoSuchElementException.class)
-    public void getByInvalidLetter_NotOk() {
+    public void getOperationByLetter_invalidLetter_NotOk() {
         getOperationByLetter("u");
     }
 
     @Test (expected = NoSuchElementException.class)
-    public void getByNull_NotOk() {
+    public void getOperationByLetter_nullLetter_NotOk() {
         getOperationByLetter(null);
     }
 }

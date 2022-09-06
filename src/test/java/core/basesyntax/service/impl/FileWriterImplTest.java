@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,13 +21,9 @@ public class FileWriterImplTest {
         writer = new FileWriterImpl();
     }
 
-    @Before
-    public void setUp() {
-        path = Path.of(TEST_FILE);
-    }
-
     @Test
-    public void writeData_Ok() {
+    public void writeToFile_Ok() {
+        path = Path.of(TEST_FILE);
         String actual = "fruit,quantity\n" + "banana,152\n" + "apple,90\n" + "путін хуйло";
         writer.writeToFile(actual, TEST_FILE);
         String expected = readFromFile();
@@ -37,17 +32,18 @@ public class FileWriterImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeDataToEmptyPath_NotOK() {
+    public void writeToFile_emptyPath_NotOK() {
         writer.writeToFile("hello world", "");
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeNullData_NotOK() {
+    public void writeToFile_nullData_NotOK() {
         writer.writeToFile(null, TEST_FILE);
     }
 
     @After
     public void afterEachTest() {
+        path = Path.of(TEST_FILE);
         try {
             if (Files.exists(path)) {
                 Files.delete(path);

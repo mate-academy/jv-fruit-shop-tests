@@ -1,10 +1,10 @@
 package core.basesyntax.service.operation;
 
-import static core.basesyntax.db.Storage.fruits;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
@@ -23,20 +23,21 @@ public class PurchaseOperationHandlerTest {
 
     @Before
     public void setUp() {
-        fruits.put("peach", 73);
-        fruits.put("pear", 27);
+        Storage.fruits.put("peach", 73);
+        Storage.fruits.put("pear", 27);
         fruitTransaction = FruitTransaction.of(PURCHASE, "peach", 12);
     }
 
     @Test
-    public void handlePurchaseTransaction_Ok() {
+    public void handle_purchaseTransaction_Ok() {
+        int expected = 61;
         purchaseHandler.handle(fruitTransaction);
-        int actual = fruits.get("peach");
-        assertEquals(61, actual);
+        int actual = Storage.fruits.get("peach");
+        assertEquals(expected, actual);
     }
 
     @After
     public void afterEachTest() {
-        fruits.clear();
+        Storage.fruits.clear();
     }
 }

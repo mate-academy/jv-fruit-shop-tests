@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static core.basesyntax.db.Storage.fruits;
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
@@ -9,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -42,21 +42,23 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void processTransactions_Ok() {
+    public void process_validData_Ok() {
         service.process(getListOfFruitTransactions());
+        Map<String, Integer> actual = Storage.fruits;
         Map<String, Integer> expected = Map.of("mango", 69, "orange", 40);
-        assertEquals(expected, fruits);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void processEmptyList_Ok() {
+    public void process_emptyList_Ok() {
         service.process(new ArrayList<>());
+        Map<String, Integer> actual = Storage.fruits;
         Map<String, Integer> expected = Map.of();
-        assertEquals(expected, fruits);
+        assertEquals(expected, actual);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void processNullTransaction_NotOk() {
+    @Test (expected = RuntimeException.class)
+    public void process_nullTransaction_NotOk() {
         List<FruitTransaction> list = getListOfFruitTransactions();
         list.set(4, null);
         service.process(list);
@@ -64,7 +66,7 @@ public class FruitTransactionServiceImplTest {
 
     @After
     public void afterEachTest() {
-        fruits.clear();
+        Storage.fruits.clear();
     }
 
     private List<FruitTransaction> getListOfFruitTransactions() {

@@ -14,7 +14,6 @@ import org.junit.Test;
 public class FileWriterImplTest {
     private static final String TEST_FILE = "src/test/resources/test_output.csv";
     private static FileWriter writer;
-    private Path path;
 
     @BeforeClass
     public static void beforeClass() {
@@ -23,11 +22,10 @@ public class FileWriterImplTest {
 
     @Test
     public void writeToFile_Ok() {
-        path = Path.of(TEST_FILE);
         String actual = "fruit,quantity\n" + "banana,152\n" + "apple,90\n" + "путін хуйло";
         writer.writeToFile(actual, TEST_FILE);
         String expected = readFromFile();
-        assertTrue(Files.exists(path));
+        assertTrue(Files.exists(Path.of(TEST_FILE)));
         assertEquals(expected, actual);
     }
 
@@ -43,7 +41,7 @@ public class FileWriterImplTest {
 
     @After
     public void afterEachTest() {
-        path = Path.of(TEST_FILE);
+        Path path = Path.of(TEST_FILE);
         try {
             if (Files.exists(path)) {
                 Files.delete(path);

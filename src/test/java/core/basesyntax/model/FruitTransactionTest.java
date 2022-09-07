@@ -11,7 +11,6 @@ import java.util.NoSuchElementException;
 import org.junit.Test;
 
 public class FruitTransactionTest {
-
     @Test
     public void getOperationByLetter_Ok() {
         assertEquals(BALANCE, getOperationByLetter("b"));

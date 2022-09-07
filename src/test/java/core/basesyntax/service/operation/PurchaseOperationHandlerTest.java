@@ -12,9 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-
-    private static PurchaseOperationHandler purchaseHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler purchaseHandler;
 
     @BeforeClass
     public static void beforeClass() {
@@ -25,11 +23,11 @@ public class PurchaseOperationHandlerTest {
     public void setUp() {
         Storage.fruits.put("peach", 73);
         Storage.fruits.put("pear", 27);
-        fruitTransaction = FruitTransaction.of(PURCHASE, "peach", 12);
     }
 
     @Test
     public void handle_purchaseTransaction_Ok() {
+        FruitTransaction fruitTransaction = FruitTransaction.of(PURCHASE, "peach", 12);
         int expected = 61;
         purchaseHandler.handle(fruitTransaction);
         int actual = Storage.fruits.get("peach");

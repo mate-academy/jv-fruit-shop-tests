@@ -12,8 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static ReturnOperationHandler returnHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler returnHandler;
 
     @BeforeClass
     public static void beforeClass() {
@@ -24,11 +23,11 @@ public class ReturnOperationHandlerTest {
     public void setUp() {
         Storage.fruits.put("peach", 73);
         Storage.fruits.put("pear", 27);
-        fruitTransaction = FruitTransaction.of(RETURN, "peach", 12);
     }
 
     @Test
     public void handle_returnTransaction_Ok() {
+        FruitTransaction fruitTransaction = FruitTransaction.of(RETURN, "peach", 12);
         int expected = 85;
         returnHandler.handle(fruitTransaction);
         int actual = Storage.fruits.get("peach");

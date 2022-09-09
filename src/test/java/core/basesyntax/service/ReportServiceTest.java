@@ -18,7 +18,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void makeReportNormalDate_ok() {
+    public void makeReport_validDate_ok() {
         String expected = "fruit,quantity".concat(System.lineSeparator())
                 + "banana,152".concat(System.lineSeparator())
                 + "apple,90".concat(System.lineSeparator());
@@ -27,7 +27,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void makeReportEmptyStorage_ok() {
+    public void makeReport_nullDate_notOk() {
         Storage.fruits.clear();
         String actual = reportService.createReport();
         String expected = "fruit,quantity".concat(System.lineSeparator());

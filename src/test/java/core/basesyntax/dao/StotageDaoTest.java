@@ -11,11 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StotageDaoTest {
-    private final StorageDao storageDao = new StorageDaoImpl();
-    private final Map<String, Integer> expected = new HashMap<>();
+    private StorageDao storageDao;
+    private Map<String, Integer> expected;
 
     @Before
     public void setUp() {
+        storageDao = new StorageDaoImpl();
+        expected = new HashMap<>();
         storageDao.add("banana", 100);
         storageDao.add("apple", 150);
         storageDao.add("orange", 200);
@@ -25,25 +27,25 @@ public class StotageDaoTest {
     }
 
     @Test
-    public void storageDao_checkedEquals() {
+    public void equals_validDate_ok() {
         Assert.assertEquals(storageDao.getAll(), new ArrayList<>(expected.keySet()));
     }
 
     @Test
-    public void storageDao_checkedAmount_ok() {
+    public void amount_validDate_ok() {
         int expect = 100;
         int present = storageDao.getAmount("banana");
         Assert.assertEquals(expect, present);
     }
 
     @Test
-    public void storageDao_checkedPresent_notOk() {
+    public void isPresent_validDate_notOk() {
         String falseFruit = "lemon";
         Assert.assertFalse(storageDao.isPresent(falseFruit));
     }
 
     @Test
-    public void storageDao_checkedAdded_ok() {
+    public void added_validDate_ok() {
         String fruit = "cherry";
         storageDao.add(fruit, 20);
         Assert.assertTrue(storageDao.isPresent(fruit));

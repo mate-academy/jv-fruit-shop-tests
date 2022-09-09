@@ -20,7 +20,7 @@ public class FileReaderFileServiceTest {
     }
 
     @Test
-    public void readOfFile_ok() {
+    public void read_validDate_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("[type,fruit,quantity");
         expected.add("b,banana,20");
@@ -36,14 +36,14 @@ public class FileReaderFileServiceTest {
     }
 
     @Test
-    public void readOfEmptyFile_ok() {
+    public void read_emptyFile_ok() {
         List<String> expected = Collections.emptyList();
         List<String> actual = fileReader.read(EMPTY_FILE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readOfFile_NotOk() {
+    public void read_notExistFile_NotOk() {
         fileReader.read(NOT_EXIST_FILE);
     }
 

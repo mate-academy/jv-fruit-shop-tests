@@ -21,7 +21,7 @@ public class FileWriterFileServiceTest {
     }
 
     @Test
-    public void writeToFile_ok() {
+    public void write_validDate_ok() {
         fileWriter.write(RESULT_FILE, report);
         List<String> expected = readFromFile(RESULT_FILE);
         List<String> actual = List.of(report);
@@ -29,7 +29,7 @@ public class FileWriterFileServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_NotOk() {
+    public void write_notExistFile_NotOk() {
         fileWriter.write(NOT_EXIST_FILE, report);
     }
 

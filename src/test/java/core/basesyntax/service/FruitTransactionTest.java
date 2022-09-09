@@ -40,7 +40,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void transactionApply_ok() {
+    public void apply_validDate_ok() {
         fruitTransaction.process(lines);
         int actualBanana = Storage.fruits.get("banana");
         int actualApple = Storage.fruits.get("apple");
@@ -51,7 +51,7 @@ public class FruitTransactionTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void transactionNull_ok() {
+    public void apply_nullDate_notOk() {
         fruitTransaction.process(null);
     }
 

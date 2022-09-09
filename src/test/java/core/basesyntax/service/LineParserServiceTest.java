@@ -22,7 +22,7 @@ public class LineParserServiceTest {
     }
 
     @Test
-    public void lineParserNormalDate_ok() {
+    public void parse_validDate_ok() {
         List<String[]> expected = new ArrayList<>();
         List<String[]> actual = lineParser.parseDate(lines);
         expected.add(new String[] {"b", "banana", "20"});
@@ -36,7 +36,7 @@ public class LineParserServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void lineParserNull_ok() {
+    public void parseDate_nullDate_notOk() {
         lineParser.parseDate(null);
     }
 }

@@ -16,14 +16,14 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parserService_emptyList_Ok() {
+    public void parse_emptyTransactionList_Ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         List<String> transactions = new ArrayList<>();
         Assert.assertEquals(expected, parserService.parse(transactions));
     }
 
     @Test
-    public void parserService_transactionsList_Ok() {
+    public void parse_notEmptyTransactionsList_Ok() {
         Assert.assertEquals(createExpectedTransactions(),
                 parserService.parse(createDataTransactions()));
     }

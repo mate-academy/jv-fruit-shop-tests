@@ -45,7 +45,7 @@ public class OperationProcessorImplTest {
     }
 
     @Test
-    public void operationProcessor_processData_Ok() {
+    public void process_fruitOperation_Ok() {
         operationProcessor.process(createTransactionData());
         int expectedBananaQuantity = 160;
         int actualBananaQuantity = Storage.getFruitsStorage().get("banana");

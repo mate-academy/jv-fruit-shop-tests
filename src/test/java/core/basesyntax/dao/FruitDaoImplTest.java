@@ -19,25 +19,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void fruitDao_containsFruit_Ok() {
-        createDataStorage();
-        Assert.assertTrue(fruitDao.containsFruit(FRUIT_BANANA));
-        Assert.assertTrue(fruitDao.containsFruit(FRUIT_APPLE));
-        Assert.assertTrue(fruitDao.containsFruit(FRUIT_STRAWBERRY));
-    }
-
-    @Test
-    public void fruitDao_containsFruit_notOk() {
-        createDataStorage();
-        Assert.assertFalse(fruitDao.containsFruit("qwerty"));
-        Assert.assertFalse(fruitDao.containsFruit("mango"));
-        Assert.assertFalse(fruitDao.containsFruit("applle"));
-        Assert.assertFalse(fruitDao.containsFruit(""));
-        Assert.assertFalse(fruitDao.containsFruit(null));
-    }
-
-    @Test
-    public void fruitDao_getQuantity_Ok() {
+    public void getQuantity_fruitExist_Ok() {
         Storage.getFruitsStorage().put(FRUIT_BANANA, 50);
         int expected = 50;
         int actual = fruitDao.getQuantity(FRUIT_BANANA);
@@ -45,13 +27,17 @@ public class FruitDaoImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void fruitDao_getQuantity_notOk() {
+    public void getQuantity_nullFruit_notOk() {
         fruitDao.getQuantity(null);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void getQuantity_fruitNotExist_notOk() {
         fruitDao.getQuantity("qwerty");
     }
 
     @Test
-    public void fruitDao_update_Ok() {
+    public void update_fruitExist_Ok() {
         createDataStorage();
         fruitDao.update(FRUIT_BANANA, 1);
         int expected = 1;

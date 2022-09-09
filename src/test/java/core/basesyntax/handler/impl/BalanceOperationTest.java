@@ -29,7 +29,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_emptyStorage_Ok() {
+    public void balanceHandler_emptyStorage_Ok() {
         fruitTransaction.setQuantity(70);
         operationHandler.handle(fruitTransaction);
         int expectedQuantityBanana = 70;
@@ -38,7 +38,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_notEmptyStorage_Ok() {
+    public void balanceHandler_notEmptyStorage_Ok() {
         Storage.getFruitsStorage().put("banana", 20);
         fruitTransaction.setQuantity(150);
         operationHandler.handle(fruitTransaction);

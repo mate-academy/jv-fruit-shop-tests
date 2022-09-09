@@ -35,7 +35,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseOperation_notEmptyStorage_Ok() {
+    public void purchaseHandler_notEmptyStorage_Ok() {
         Storage.getFruitsStorage().put("apple", 64);
         fruitTransaction.setQuantity(38);
         operationHandler.handle(fruitTransaction);
@@ -45,7 +45,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseOperation_negativeBalance_Ok() {
+    public void purchaseHandler_negativeFruitBalance_Ok() {
         Storage.getFruitsStorage().put("apple", 10);
         fruitTransaction.setQuantity(38);
         operationHandler.handle(fruitTransaction);

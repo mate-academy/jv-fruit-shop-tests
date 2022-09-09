@@ -29,13 +29,13 @@ public class SupplyOperationTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void returnOperation_emptyStorage_Ok() {
+    public void supplyHandler_emptyStorage_Ok() {
         fruitTransaction.setQuantity(200);
         operationHandler.handle(fruitTransaction);
     }
 
     @Test
-    public void returnOperation_notEmptyStorage() {
+    public void supplyHandler_notEmptyStorage() {
         Storage.getFruitsStorage().put("strawberry", 146);
         fruitTransaction.setQuantity(30);
         int expected = 176;

@@ -19,24 +19,24 @@ public class FileReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void fileReader_incorrectFile_notOk() {
+    public void read_nonExistentFilePath_notOk() {
         fileReaderService.read("incorrect/file/path");
     }
 
     @Test (expected = RuntimeException.class)
-    public void fileReader_null_notOk() {
+    public void read_nullFilePath_notOk() {
         fileReaderService.read(null);
     }
 
     @Test
-    public void fileReader_emptyFile_Ok() {
+    public void read_emptyFile_Ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReaderService.read(PATH_EMPTY_FILE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void fileReader_equalsData_Ok() {
+    public void read_fileWithData_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");

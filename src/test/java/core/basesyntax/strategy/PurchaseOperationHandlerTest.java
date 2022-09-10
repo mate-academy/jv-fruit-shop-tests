@@ -30,8 +30,5 @@ public class PurchaseOperationHandlerTest {
     public void purchaseOperationHandler_NotEnoughFruit_NotOk() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana",10);
         purchaseOperationHandler.handle(fruitTransaction);
-        int expected = 15;
-        int actual = Storage.storageFruits.get("banana");
-        assertEquals(expected, actual);
     }
 }

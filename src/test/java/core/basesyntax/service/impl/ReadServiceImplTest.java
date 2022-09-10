@@ -27,7 +27,7 @@ public class ReadServiceImplTest {
     }
 
     @Test
-    public void readService_Is_Empty_File_Ok() {
+    public void readService_EmptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = readService.readFromFile(INPUT_FILE_PATH_IS_EMPTY);
         assertEquals(expected, actual);

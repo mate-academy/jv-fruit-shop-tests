@@ -16,7 +16,6 @@ import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.impl.AddOperationProcessor;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.SubstractOperationProcessor;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

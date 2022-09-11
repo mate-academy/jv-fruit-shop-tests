@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.service.ReportCreatorService;
-
 import java.util.Map;
 
 public class CsvReportCreatorServiceImpl implements ReportCreatorService {

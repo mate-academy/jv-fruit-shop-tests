@@ -14,13 +14,13 @@ import org.junit.Test;
 public class FruitStorageDaoImplTest {
     private static final String FRUIT = "banana";
     private static final Integer AMOUNT = 20;
-    private static final Integer AMOUNT_1 = 40;
+    private static final Integer BANANA_AMOUNT = 40;
     private FruitStorageDao fruitStorageDao;
 
     @Before
     public void setUp() {
         fruitStorageDao = new FruitStorageDaoImpl();
-        Storage.fruitMap.put("banana", AMOUNT_1);
+        Storage.fruitMap.put(FRUIT, BANANA_AMOUNT);
     }
 
     @After
@@ -72,7 +72,7 @@ public class FruitStorageDaoImplTest {
     @Test
     public void getDataFromStorage_OK() {
         Map<String, Integer> expected = new HashMap<>();
-        expected.put(FRUIT, AMOUNT_1);
+        expected.put(FRUIT, BANANA_AMOUNT);
         Map<String, Integer> actual = fruitStorageDao.getDataFromStorage();
         Assert.assertEquals(expected, actual);
     }

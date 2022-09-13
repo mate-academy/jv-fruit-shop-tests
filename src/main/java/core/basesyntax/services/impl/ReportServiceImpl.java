@@ -13,6 +13,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
+        if (fruitStorageDao.getDataFromStorage().isEmpty()) {
+            throw new RuntimeException("Storage is empty");
+        }
         StringBuilder report = new StringBuilder("fruit,quantity");
         for (Map.Entry<String, Integer> entry : fruitStorageDao.getDataFromStorage().entrySet()) {
             report.append(System.lineSeparator()).append(entry.getKey())

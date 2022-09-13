@@ -1,5 +1,7 @@
 package core.basesyntax.strategy.impl;
 
+import static junit.framework.TestCase.fail;
+
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -32,5 +34,18 @@ public class ReturnOperationHandlerTest {
         returnOperationHandler.handle(fruitTransaction);
         Assert.assertEquals(expected.containsKey("banana"), Storage.fruitMap.containsKey("banana"));
         Assert.assertEquals(expected.get("banana"), Storage.fruitMap.get("banana"));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_null_notOK() {
+        returnOperationHandler.handle(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidOperation_notOK() {
+        FruitTransaction transactionWithInvalidOperation
+                = new FruitTransaction("t", "banana", 20);
+        returnOperationHandler.handle(transactionWithInvalidOperation);
+        fail("We need inform user about unknown operation and throw RuntimeException");
     }
 }

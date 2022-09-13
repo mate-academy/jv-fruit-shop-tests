@@ -13,6 +13,9 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (!fruitTransaction.getOperation().equals("p")) {
+            throw new RuntimeException("Unknown operation - " + fruitTransaction.getOperation());
+        }
         String fruit = fruitTransaction.getFruit();
         fruitStorageDao.remove(fruit, fruitTransaction.getQuantity());
     }

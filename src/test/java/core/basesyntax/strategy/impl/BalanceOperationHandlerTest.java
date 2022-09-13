@@ -1,5 +1,7 @@
 package core.basesyntax.strategy.impl;
 
+import static junit.framework.TestCase.fail;
+
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -34,12 +36,16 @@ public class BalanceOperationHandlerTest {
         Assert.assertEquals(expected.get("banana"), Storage.fruitMap.get("banana"));
     }
 
-    @Test
-    public void handle_nullQuantity_OK() {
-        Integer expected = 0;
-        FruitTransaction fruitTransactionWithNullQuantity =
-                new FruitTransaction("b", "banana", null);
-        balanceOperationHandler.handle(fruitTransactionWithNullQuantity);
-        Assert.assertEquals(expected, Storage.fruitMap.get("banana"));
+    @Test(expected = RuntimeException.class)
+    public void handle_null_notOK() {
+        balanceOperationHandler.handle(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidOperation_notOK() {
+        FruitTransaction transactionWithInvalidOperation
+                = new FruitTransaction("t", "banana", 20);
+        balanceOperationHandler.handle(transactionWithInvalidOperation);
+        fail("We need inform user about unknown operation and throw RuntimeException");
     }
 }

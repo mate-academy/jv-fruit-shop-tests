@@ -15,11 +15,10 @@ public class FileWriterTest {
     private static final String PATH_TO_TEST_FILE = "src/resources/testReport.txt";
     private static final String EXPECTED_REPORT = "fruit,quantity, banana,152, apple,90";
     private static final File TEST_FILE = new File(PATH_TO_TEST_FILE);
-    private FileWriter fileWriter;
+    private final FileWriter fileWriter = new FileWriterImpl();
 
     @Before
     public void createFiles() throws Exception {
-        fileWriter = new FileWriterImpl();
         TEST_FILE.createNewFile();
 
     }
@@ -56,7 +55,7 @@ public class FileWriterTest {
         try {
             return String.join("", Files.readAllLines(pathToTestFile));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read file" + pathToTestFile, e);
         }
     }
 }

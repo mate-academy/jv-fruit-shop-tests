@@ -12,6 +12,9 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     public OperationHandler getByOperation(String operation) {
+        if (operation.isEmpty()) {
+            throw new RuntimeException("Operation is empty");
+        }
         return operationHandlersMap.get(operation);
     }
 }

@@ -31,4 +31,9 @@ public class OperationStrategyImplTest {
             Assert.assertEquals(map.get(operation).getClass(), actual.getClass());
         }
     }
+
+    @Test(expected = RuntimeException.class)
+    public void getByOperation_operationsNull_notOK() {
+        operationStrategy.getByOperation(null);
+    }
 }

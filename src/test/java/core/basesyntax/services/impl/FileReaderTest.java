@@ -1,14 +1,21 @@
 package core.basesyntax.services.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.services.FileReader;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FileReaderTest extends Assert {
+public class FileReaderTest {
     private static final String VALID_PATH_TO_FILE = "src/resources/data.txt";
-    private final FileReader fileReader = new FileReaderImpl();
+    private static FileReader fileReader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     public void readFromFile_readValidPathAndFile_OK() {

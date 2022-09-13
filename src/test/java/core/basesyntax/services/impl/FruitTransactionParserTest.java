@@ -5,10 +5,16 @@ import core.basesyntax.services.FruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionParserTest {
-    private final FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
+    private static FruitTransactionParser fruitTransactionParser;
+
+    @Before
+    public void setUp() {
+        fruitTransactionParser = new FruitTransactionParserImpl();
+    }
 
     @Test
     public void fruitTransactionParser_parseOK() {

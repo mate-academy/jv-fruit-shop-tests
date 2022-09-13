@@ -24,7 +24,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void operationPurchaseIs_Ok() {
+    public void handle_Ok() {
         fruitDao.add(FRUIT, AMOUNT);
         operationHandler.handle(fruitTransaction);
         Assert.assertEquals(Optional.of(0), fruitDao.get(FRUIT));

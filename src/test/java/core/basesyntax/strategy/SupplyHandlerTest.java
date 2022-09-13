@@ -23,7 +23,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void operationSupplyIs_Ok() {
+    public void handle_Ok() {
         operationHandler.handle(fruitTransaction);
         Assert.assertEquals(Optional.of(AMOUNT), fruitDao.get(FRUIT));
     }

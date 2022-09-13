@@ -23,7 +23,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void operationBalanceIs_Ok() {
+    public void handle_Ok() {
         operationHandler.handle(fruitTransaction);
         Assert.assertEquals("Amount of fruit: ", Optional.of(AMOUNT), fruitDao.get(FRUIT));
     }

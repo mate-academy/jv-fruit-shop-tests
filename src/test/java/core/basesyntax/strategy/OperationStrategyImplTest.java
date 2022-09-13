@@ -30,7 +30,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getOperationBalance_Ok() {
+    public void getHandle_Ok() {
         Assert.assertEquals(operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass(),
                 BalanceHandler.class);
     }

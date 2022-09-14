@@ -13,7 +13,7 @@ public class FileReaderTest {
     private static FileReader fileReader;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setup() {
         fileReader = new FileReaderImpl();
     }
 

@@ -9,19 +9,23 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
     private static final String PATH_TO_TEST_FILE = "src/resources/testReport.txt";
     private static final String EXPECTED_REPORT = "fruit,quantity, banana,152, apple,90";
     private static final File TEST_FILE = new File(PATH_TO_TEST_FILE);
-    private FileWriter fileWriter;
+    private static FileWriter fileWriter;
+
+    @BeforeClass
+    public static void setup() throws Exception {
+        fileWriter = new FileWriterImpl();
+    }
 
     @Before
     public void createFiles() throws Exception {
-        fileWriter = new FileWriterImpl();
         TEST_FILE.createNewFile();
-
     }
 
     @After

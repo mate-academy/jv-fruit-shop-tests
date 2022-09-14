@@ -7,14 +7,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportService;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         reportService = new ReportServiceImpl(new FruitStorageDaoImpl());
     }
 

@@ -18,13 +18,13 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromPathIs_Ok() {
+    public void readFromFileIs_Ok() {
         Assert.assertTrue(readerService.readFromFile(RIGHT_FILE_NAME).size() > 0);
 
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromPathIs_NotOk() {
+    public void readFromFileIs_NotOk() {
         readerService.readFromFile(WRONG_FILE_NAME);
     }
 }

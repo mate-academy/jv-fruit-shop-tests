@@ -41,6 +41,6 @@ public class FileWriterTest {
     public void invalidFileName_Not_Ok() {
         String contentToWrite = "p,apple,20" + System.lineSeparator() + "s,banana,150";
         String outputFile = "/";
-        writer.writeData(outputFile, contentToWrite);
+        writer.writeData(contentToWrite, outputFile);
     }
 }

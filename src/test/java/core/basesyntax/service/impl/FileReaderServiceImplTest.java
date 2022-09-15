@@ -47,5 +47,4 @@ public class FileReaderServiceImplTest {
             Assert.assertSame(RuntimeException.class, e.getClass());
         }
     }
-
 }

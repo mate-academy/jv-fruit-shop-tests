@@ -16,9 +16,9 @@ import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.impl.AddOperationProcessor;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.SubstractOperationProcessor;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class FruitShop {
     private static final String STORAGE_FILE_NAME = "src/main/resources/storage.csv";
@@ -26,7 +26,7 @@ public class FruitShop {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<Transaction.Operation, OperationProcessor> operationProcessMap = new HashMap<>();
+        Map<Transaction.Operation, OperationProcessor> operationProcessMap = new TreeMap<>();
         operationProcessMap.put(Transaction.Operation.BALANCE,
                 new AddOperationProcessor(fruitDao));
         operationProcessMap.put(Transaction.Operation.SUPPLY,

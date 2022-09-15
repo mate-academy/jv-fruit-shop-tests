@@ -25,7 +25,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeToFileIs_Ok() {
+    public void writeToFile_Ok() {
         writerService.writeToFile(list, OUTPUT_NORMAL_FILE);
         List<String> reader;
         try {
@@ -37,7 +37,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFileIs_NotOk() {
+    public void writeToFile_NotOk() {
         writerService.writeToFile(list, OUTPUT_WRONG_FILE);
     }
 }

@@ -21,7 +21,7 @@ public class ProductParserImplTest {
     }
 
     @Test
-    public void parseBalanceIs_Ok() {
+    public void parse_Balance_Ok() {
         String nameOfFruit = "banana";
         int amount = 20;
         FruitTransaction fruitTransaction = productParser.parse(BALANCE_TRANSACTION);
@@ -32,7 +32,7 @@ public class ProductParserImplTest {
     }
 
     @Test
-    public void parsePurchaseIs_Ok() {
+    public void parse_Purchase_Ok() {
         String nameOfFruit = "banana";
         int amount = 13;
         FruitTransaction fruitTransaction = productParser.parse(PURCHASE_TRANSACTION);
@@ -43,7 +43,7 @@ public class ProductParserImplTest {
     }
 
     @Test
-    public void parseReturnIs_Ok() {
+    public void parse_Return_Ok() {
         String nameOfFruit = "apple";
         int amount = 10;
         FruitTransaction fruitTransaction = productParser.parse(RETURN_TRANSACTION);
@@ -54,7 +54,7 @@ public class ProductParserImplTest {
     }
 
     @Test
-    public void parseSupplyIs_Ok() {
+    public void parse_Supply_Ok() {
         String nameOfFruit = "banana";
         int amount = 100;
         FruitTransaction fruitTransaction = productParser.parse(SUPPLY_TRANSACTION);
@@ -65,7 +65,7 @@ public class ProductParserImplTest {
     }
 
     @Test
-    public void parseIs_Ok() {
+    public void parse_AllTransactions_Ok() {
         List<String> list = new ArrayList<>();
         list.add(BALANCE_TRANSACTION);
         list.add(PURCHASE_TRANSACTION);
@@ -76,7 +76,7 @@ public class ProductParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseFormatIs_NotOk() {
+    public void parse_Format_NotOk() {
         String line = "b,0,banana";
         productParser.parse(line);
     }

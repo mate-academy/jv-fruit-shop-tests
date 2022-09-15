@@ -23,14 +23,14 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReportEmptyIs_Ok() {
+    public void createReport_Empty_Ok() {
         List<String> reportLines = reportService.createReport();
         Assert.assertEquals(1, reportLines.size());
         Assert.assertEquals("Header: ", reportLines.get(0), OUTPUT_TITLE);
     }
 
     @Test
-    public void createReportIs_Ok() {
+    public void createReport_Ok() {
         storage.put("apple", 5);
         storage.put("banana", 10);
         storage.put("mango", 15);

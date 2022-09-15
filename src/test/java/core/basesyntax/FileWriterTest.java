@@ -20,13 +20,12 @@ public class FileWriterTest {
     }
 
     @Test
-    public void writeData_Ok() {
+    public void writeData_CorrectContent_Ok() {
         String contentToWrite = "type,fruit,quantity"
                 + System.lineSeparator() + "p,apple,20"
                 + System.lineSeparator() + "s,banana,150";
         String outputFile = "src/test/resources/output.csv";
         writer.writeData(contentToWrite, outputFile);
-
         List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(outputFile));
@@ -38,7 +37,7 @@ public class FileWriterTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void invalidFileName_Not_Ok() {
+    public void writeData_InvalidFileName_Not_Ok() {
         String contentToWrite = "p,apple,20" + System.lineSeparator() + "s,banana,150";
         String outputFile = "/";
         writer.writeData(contentToWrite, outputFile);

@@ -42,7 +42,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void operationStrategyForPurchase_Ok() {
+    public void get_OperationStrategyForPurchase_Ok() {
         OperationProcessor expected = addOperationProcessor;
         OperationProcessor actual;
         actual = strategy.get(addOperation);
@@ -50,7 +50,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void operationStrategyForSupply_Ok() {
+    public void get_OperationStrategyForSupply_Ok() {
         OperationProcessor expected = substractOperationProcessor;
         OperationProcessor actual;
         actual = strategy.get(substractOperation);

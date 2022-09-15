@@ -23,28 +23,28 @@ public class TransactionTest {
     }
 
     @Test
-    public void getSupplyOperation_Ok() {
+    public void getOperation_Supply_Ok() {
         supplyTransaction = new Transaction(supplyOperation, APPLE, 10);
         Transaction.Operation expectedOperation = Transaction.Operation.getByCode(SUPPLY);
         assertEquals(expectedOperation, supplyTransaction.getOperation());
     }
 
     @Test
-    public void getPurchaseOperation_Ok() {
+    public void getOperation_Purchase_Ok() {
         purchaseTransaction = new Transaction(purchaseOperation, BANANA, 200);
         Transaction.Operation expected = Transaction.Operation.getByCode(PURCHASE);
         assertEquals(expected, purchaseTransaction.getOperation());
     }
 
     @Test
-    public void getProductName_Ok() {
+    public void getProductName_supplyTransaction_Ok() {
         supplyTransaction = new Transaction(supplyOperation, APPLE, 10);
         String expected = "apple";
         assertEquals(expected, supplyTransaction.getProductName());
     }
 
     @Test
-    public void getQuantity_Ok() {
+    public void getQuantity_purchaseTransaction_Ok() {
         purchaseTransaction = new Transaction(purchaseOperation, BANANA, 200);
         int expected = 200;
         assertEquals(expected, purchaseTransaction.getQuantity());

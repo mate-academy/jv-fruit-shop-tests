@@ -20,33 +20,32 @@ public class OperationTest {
     }
 
     @Test
-    public void getSupplyOperationCode_Ok() {
+    public void getCode_SupplyOperation_Ok() {
         String expectedOperationCode = "s";
         assertEquals(expectedOperationCode, supplyOperation.getCode());
     }
 
     @Test
-    public void getPurchaseOperationCode_Ok() {
+    public void getCode_PurchaseOperationCode_Ok() {
         String expectedOperationCode = "p";
         assertEquals(expectedOperationCode, purchaseOperation.getCode());
     }
 
     @Test (expected = RuntimeException.class)
-    public void invalidOperationCode_Not_Ok() {
+    public void getCode_InvalidOperationCode_Not_Ok() {
         String expectedOperationCode = "p";
         purchaseOperation = Transaction.Operation.valueOf(INVALID_OPERATION);
         assertEquals(expectedOperationCode, purchaseOperation.getCode());
     }
 
     @Test
-    public void getSupplyOperationByCode_Ok() {
-
+    public void getByCode_SupplyOperation_Ok() {
         Transaction.Operation expectedOperation = Transaction.Operation.SUPPLY;
         assertEquals(expectedOperation, supplyOperation.getByCode(SUPPLY));
     }
 
     @Test
-    public void getPurchaseOperationByCode_Ok() {
+    public void getByCode_PurchaseOperation_Ok() {
         Transaction.Operation expectedOperation = Transaction.Operation.PURCHASE;
         assertEquals(expectedOperation, purchaseOperation.getByCode(PURCHASE));
     }

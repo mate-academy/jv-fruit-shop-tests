@@ -38,7 +38,7 @@ public class AddOperationProcessorTest {
     }
 
     @Test
-    public void supplySingle_Ok() {
+    public void process_SupplyOperationSingle_Ok() {
         int expected = 30;
         Transaction transaction = new Transaction(supplyOperation, APPLE, 10);
         addOperationProcessor.process(transaction);
@@ -47,7 +47,7 @@ public class AddOperationProcessorTest {
     }
 
     @Test
-    public void supplyMultiple_Ok() {
+    public void process_SupplyOperationMultiple_Ok() {
         final int expectedApple = 80;
         final int expectedBanana = 40;
         Transaction transactionApple = new Transaction(supplyOperation, APPLE, 30);
@@ -60,7 +60,7 @@ public class AddOperationProcessorTest {
     }
 
     @Test
-    public void returnSingle_Ok() {
+    public void process_ReturnOperationSingle_Ok() {
         int expected = 50;
         Transaction transaction = new Transaction(returnOperation, APPLE, 30);
         addOperationProcessor.process(transaction);
@@ -69,7 +69,7 @@ public class AddOperationProcessorTest {
     }
 
     @Test
-    public void returnMultiple_Ok() {
+    public void process_ReturnOperationMultiple_Ok() {
         final int expectedApple = 80;
         final int expectedBanana = 40;
         Transaction transactionApple = new Transaction(returnOperation, APPLE, 30);
@@ -82,7 +82,7 @@ public class AddOperationProcessorTest {
     }
 
     @Test
-    public void returnAndSupplyOperations_Ok() {
+    public void process_ReturnAndSupplyOperations_Ok() {
         final int expectedApple = 60;
         final int expectedBanana = 30;
         Transaction transactionReturnApple = new Transaction(returnOperation, APPLE, 10);

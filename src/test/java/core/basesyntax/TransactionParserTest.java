@@ -29,7 +29,7 @@ public class TransactionParserTest {
     }
 
     @Test
-    public void validDataTransactionParser_Ok() {
+    public void getTransaction_ValidDataTransaction_Ok() {
         expectedParsedData.add(transaction);
         List<Transaction> actualParsedData;
         actualParsedData = parser.getTransactions(dataToParse);
@@ -43,13 +43,13 @@ public class TransactionParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidLine_NotEnoughElements_Not_Ok() {
+    public void getTransaction_NotEnoughElements_Not_Ok() {
         dataToParse.add("p,fruit,");
         parser.getTransactions(dataToParse);
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidLine_NotNumber_Not_Ok() {
+    public void getTransaction_NotNumber_Not_Ok() {
         dataToParse.add("p,fruit,five");
         parser.getTransactions(dataToParse);
     }

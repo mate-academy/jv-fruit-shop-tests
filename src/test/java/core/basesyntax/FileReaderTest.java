@@ -17,13 +17,13 @@ public class FileReaderTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void invalidPath_Not_Ok() {
+    public void readData_InvalidPath_Not_Ok() {
         String fromFile = "incorrect/path/to/file.csv";
         fileReader.readData(fromFile);
     }
 
     @Test
-    public void correctInputPath_Ok() {
+    public void readData_CorrectInputPath_Ok() {
         String fromFile = "src/test/resources/storageTest.csv";
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
         List<String> actual = fileReader.readData(fromFile);

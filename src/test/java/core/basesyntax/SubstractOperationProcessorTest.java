@@ -34,7 +34,7 @@ public class SubstractOperationProcessorTest {
     }
 
     @Test
-    public void purchaseBasic_Ok() {
+    public void process_PurchaseBasic_Ok() {
         final int expectedApple = 10;
         final int expectedBanana = 25;
         Transaction transactionApple = new Transaction(purchaseOperation, APPLE, 10);
@@ -48,7 +48,7 @@ public class SubstractOperationProcessorTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseMoreThanAvailable_Ok() {
+    public void process_PurchaseMoreThanAvailable_Ok() {
         final int expectedApple = 0;
         final int expectedBanana = 0;
         Transaction transactionApple = new Transaction(purchaseOperation, APPLE, 25);

@@ -57,7 +57,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    public void runTransaction_Ok() {
+    public void runTransaction_SupplyAndPurchase_Ok() {
         final Integer expectedApple = 5;
         transactionList.add(new Transaction(supplyOperation, APPLE, 15));
         transactionList.add(new Transaction(purchaseOperation, APPLE, 10));

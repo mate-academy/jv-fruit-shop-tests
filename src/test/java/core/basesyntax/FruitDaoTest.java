@@ -28,7 +28,7 @@ public class FruitDaoTest {
     }
 
     @Test
-    public void add_Ok() {
+    public void add_FruitToStorage_Ok() {
         final Integer expectedApple = 10;
         final Integer expectedBanana = 15;
         fruitDao.add(APPLE, 10);
@@ -38,7 +38,7 @@ public class FruitDaoTest {
     }
 
     @Test
-    public void get_Ok() {
+    public void get_FruitFromStorage_Ok() {
         final Integer expectedApple = 20;
         final Integer expectedBanana = 25;
         Storage.fruitStorage.put(APPLE, 20);

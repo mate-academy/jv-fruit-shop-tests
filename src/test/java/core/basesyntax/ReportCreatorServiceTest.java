@@ -31,7 +31,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void correctReport_Ok() {
+    public void getReport_CorrectReport_Ok() {
         Storage.fruitStorage.put(APPLE, 10);
         Storage.fruitStorage.put(BANANA, 20);
         String expected = "fruit,quantity" + NEW_LINE
@@ -42,7 +42,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void emptyStorage_Ok() {
+    public void getReport_EmptyStorage_Ok() {
         String expected = "fruit,quantity";
         String actual = fruitService.getReport();
         assertEquals(expected, actual);

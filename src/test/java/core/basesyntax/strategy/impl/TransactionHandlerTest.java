@@ -21,7 +21,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void balanceOperationHandlerImplTestOk() {
+    public void balanceOperationHandler_Ok() {
         int expectedQuantity = POSITIVE_QUANTITY;
         Transaction transaction =
                 new Transaction(Transaction.Operation.BALANCE,"Lemon", POSITIVE_QUANTITY);
@@ -38,7 +38,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void balanceOperatorHandlerImplTestNotOk() {
+    public void balanceOperatorHandler_NotOk() {
         Transaction transaction =
                 new Transaction(Transaction.Operation.BALANCE,"Lemon", ZERO_QUANTITY);
         BalanceOperationHandlerImpl balanceOperationHandler =
@@ -57,7 +57,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void purchaseOperationHandlerImplTestOk() {
+    public void purchaseOperationHandler_Ok() {
         storageDao.update("Lemon", POSITIVE_QUANTITY * 2);
         int expectedQuantity = POSITIVE_QUANTITY;
         Transaction transaction =
@@ -70,7 +70,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void purchaseOperationHandlerImplTestNotOk() {
+    public void purchaseOperationHandler_NotOk() {
         storageDao.update("Lemon", ZERO_QUANTITY);
         Transaction transaction =
                 new Transaction(Transaction.Operation.PURCHASE,"Lemon", POSITIVE_QUANTITY);
@@ -96,7 +96,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void returnOperationHandlerImplTestOk() {
+    public void returnOperationHandler_Ok() {
         int expectedQuantity = POSITIVE_QUANTITY;
         Transaction transaction =
                 new Transaction(Transaction.Operation.RETURN,"Lemon", POSITIVE_QUANTITY);
@@ -112,7 +112,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void returnOperationHandlerImplTestNotOk() {
+    public void returnOperationHandler_NotOk() {
         Transaction transaction =
                 new Transaction(Transaction.Operation.RETURN,"Lemon", ZERO_QUANTITY);
         ReturnOperationHandlerImpl returnOperationHandler =
@@ -131,7 +131,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void supplyOperationHandlerImplTestOk() {
+    public void supplyOperationHandler_Ok() {
         int expectedQuantity = POSITIVE_QUANTITY;
         Transaction transaction =
                 new Transaction(Transaction.Operation.SUPPLY,"Lemon", POSITIVE_QUANTITY);
@@ -147,7 +147,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void supplyOperationHandlerTestNotOk() {
+    public void supplyOperationHandler_NotOk() {
         Transaction transaction =
                 new Transaction(Transaction.Operation.SUPPLY,"Lemon", ZERO_QUANTITY);
         SupplyOperationHandlerImpl supplyOperationHandler =

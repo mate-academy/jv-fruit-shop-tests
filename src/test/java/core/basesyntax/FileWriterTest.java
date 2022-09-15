@@ -40,7 +40,7 @@ public class FileWriterTest {
     @Test (expected = RuntimeException.class)
     public void invalidFileName_Not_Ok() {
         String contentToWrite = "p,apple,20" + System.lineSeparator() + "s,banana,150";
-        String outputFile = "/zero";
+        String outputFile = "/";
         writer.writeData(outputFile, contentToWrite);
     }
 }

@@ -21,7 +21,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test
-    public void purchaseOperationTest_Ok() {
+    public void operationWithQuantity_purchaseOperation_Ok() {
         int quantity = 50;
         int purchaseQuantity = 20;
         String apple = "apple";

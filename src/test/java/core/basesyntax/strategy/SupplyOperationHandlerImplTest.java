@@ -21,7 +21,7 @@ public class SupplyOperationHandlerImplTest {
     }
 
     @Test
-    public void supplyOperationTest_Ok() {
+    public void operationWithQuantity_supplyOperation_Ok() {
         int quantity = 150;
         int supplyQuantity = 30;
         String apple = "apple";

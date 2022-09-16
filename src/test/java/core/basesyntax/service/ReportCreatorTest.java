@@ -13,7 +13,7 @@ public class ReportCreatorTest {
     private static ReportCreatorImpl reportCreator = new ReportCreatorImpl(storageDao);
 
     @Test
-    public void reportCreateTest_Ok() {
+    public void newReport_reportCreate_Ok() {
         storageDao.update("banana", 25);
         storageDao.update("apple", 30);
         String expected = TITLE + System.lineSeparator()

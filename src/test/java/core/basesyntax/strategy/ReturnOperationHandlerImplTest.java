@@ -21,7 +21,7 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    public void returnOperationTest_Ok() {
+    public void operationWithQuantity_returnOperation_Ok() {
         int quantity = 70;
         int returnQuantity = 30;
         String apple = "apple";

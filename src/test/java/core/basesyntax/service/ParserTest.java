@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parser_parseData_Ok() {
+    public void parse_parseData_Ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,"apple",25));
         List<String> actualData = new ArrayList<>();

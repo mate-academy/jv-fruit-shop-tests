@@ -34,7 +34,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void writer_writeReport_Ok() {
+    public void write_writeReport_Ok() {
         writer.write(reportAfterDay, REPORT_AFTER_DAY);
         List<String> expected = reader.read(TEST_REPORT_FILE);
         List<String> actual = reader.read(REPORT_AFTER_DAY);
@@ -42,7 +42,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void writer_writeEmptyFile_Ok() {
+    public void write_writeEmptyFile_Ok() {
         writer.write("", REPORT_AFTER_DAY);
         List<String> expected = reader.read(EMPTY_FILE);
         List<String> actual = reader.read(REPORT_AFTER_DAY);
@@ -50,7 +50,7 @@ public class FileWriterTest {
     }
 
     @Test
-    public void writer_invalidPathToFile_NotOk() {
+    public void write_invalidPathToFile_NotOk() {
         try {
             writer.write(REPORT_AFTER_DAY, INVALID_PATH);
         } catch (Exception e) {

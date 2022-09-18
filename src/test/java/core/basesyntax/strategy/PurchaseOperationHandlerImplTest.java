@@ -15,13 +15,13 @@ public class PurchaseOperationHandlerImplTest {
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storageDao = new StorageDaoImpl();
         operationHandler = new PurchaseOperationHandlerImpl(storageDao);
     }
 
     @Test
-    public void operationWithQuantity_purchaseOperation_Ok() {
+    public void handle_purchaseOperation_Ok() {
         int quantity = 50;
         int purchaseQuantity = 20;
         String apple = "apple";

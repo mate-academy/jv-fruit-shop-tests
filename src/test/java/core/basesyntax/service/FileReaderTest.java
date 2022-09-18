@@ -22,7 +22,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void reade_fileWithData_Ok() {
+    public void read_fileWithData_Ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,40");
@@ -38,7 +38,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void reade_fileWithInvalidData_NotOk() {
+    public void read_fileWithInvalidData_NotOk() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,150");
@@ -54,21 +54,21 @@ public class FileReaderTest {
     }
 
     @Test
-    public void reade_emptyFile_Ok() {
+    public void read_emptyFile_Ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.read(EMPTY_FILE);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void emptyFileTest_NotOk() {
+    public void read_emptyFileTest_NotOk() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.read(FILE_WITH_DATA);
         assertNotEquals(expected, actual);
     }
 
     @Test
-    public void readInvalidPath_NotOk() {
+    public void read_InvalidPath_NotOk() {
         try {
             fileReader.read(INVALID_PATH);
         } catch (Exception e) {

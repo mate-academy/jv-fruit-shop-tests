@@ -15,7 +15,7 @@ public class BalanceOperationHandlerImplTest {
     private static StorageDao storageDao;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         storageDao = new StorageDaoImpl();
         operationHandler = new BalanceOperationHandlerImpl(storageDao);
     }

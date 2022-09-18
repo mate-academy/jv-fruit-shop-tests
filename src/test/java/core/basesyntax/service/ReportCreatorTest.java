@@ -5,12 +5,20 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorTest {
     private static final String TITLE = "fruit,quantity";
-    private static StorageDao storageDao = new StorageDaoImpl();
-    private static ReportCreatorImpl reportCreator = new ReportCreatorImpl(storageDao);
+    private static StorageDao storageDao;
+
+    private static ReportCreatorImpl reportCreator;
+
+    @BeforeClass
+    public static void beforeClass() {
+        storageDao = new StorageDaoImpl();
+        reportCreator = new ReportCreatorImpl(storageDao);
+    }
 
     @Test
     public void newReport_reportCreate_Ok() {

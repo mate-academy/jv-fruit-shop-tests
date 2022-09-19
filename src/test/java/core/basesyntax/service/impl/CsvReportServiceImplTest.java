@@ -24,32 +24,11 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class CsvReportServiceImplTest {
-    Map<Transaction.Operation, TransactionsHandler> strategy = new HashMap<>();
     StorageDao storageDao = new StorageDaoImpl();
-    TransactionsHandler balanceOperationHandler = new BalanceOperationHandlerImpl(storageDao);
-    TransactionsHandler supplyOperationHandler = new SupplyOperationHandlerImpl(storageDao);
-    TransactionsHandler purchaseOperationHandler = new PurchaseOperationHandlerImpl(storageDao);
-    TransactionsHandler returnOperationHandler = new ReturnOperationHandlerImpl(storageDao);
-
-    @Before
-    public void setUp() {
-        strategy.put(Transaction.Operation.BALANCE, balanceOperationHandler);
-        strategy.put(Transaction.Operation.SUPPLY, supplyOperationHandler);
-        strategy.put(Transaction.Operation.PURCHASE, purchaseOperationHandler);
-        strategy.put(Transaction.Operation.RETURN, returnOperationHandler);
-    }
 
     @Test
     public void getReport_Ok() {
-        OperationProcessingStrategy operationProcessingStrategy =
-                new OperationProcessingStrategyImpl(strategy);
-        OperationProcessor operationProcessor =
-                new OperationProcessingServiceImpl(operationProcessingStrategy);
-        List<Transaction> transactionList = new ArrayList<>();
-        Transaction transaction =
-                new Transaction(Transaction.Operation.BALANCE, "Lemon", 100);
-        transactionList.add(0, transaction);
-        operationProcessor.process(transactionList);
+        storageDao.update("Lemon",100);
         ReportService reportService = new CsvReportServiceImpl(storageDao);
         String actual = reportService.createReport();
         StringBuilder stringBuilder = new StringBuilder();

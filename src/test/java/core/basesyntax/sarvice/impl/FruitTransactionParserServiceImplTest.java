@@ -6,26 +6,28 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionParserServiceImplTest {
     private static FruitTransactionParserServiceImpl parser;
-    private List<FruitTransaction> expected;
+    private static List<FruitTransaction> expected;
 
-    {
+    @BeforeClass
+    public static void beforeClass() {
+        parser = new FruitTransactionParserServiceImpl();
         expected = new LinkedList<>();
+    }
+
+    @Before
+    public void setUp() {
         expected.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 100));
         expected.add(new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "banana", 100));
-    }
-
-    @BeforeClass
-    public static void beforeClass() {
-        parser = new FruitTransactionParserServiceImpl();
     }
 
     @Test

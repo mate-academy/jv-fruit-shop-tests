@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
+import java.io.File;
 import org.junit.Assert;
 import org.junit.Test;
-import java.io.File;
 
 public class FileWriterServiceImplTest {
-    FileWriterService writerService = new FileWriterServiceImpl();
+    private FileWriterService writerService = new FileWriterServiceImpl();
 
     @Test
     public void writeToFile_pathToFileIsEmpty_notOk() {

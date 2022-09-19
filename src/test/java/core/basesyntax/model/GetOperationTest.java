@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class getOperationTest {
+public class GetOperationTest {
 
     @Test
     public void findOperationByName_Ok() {

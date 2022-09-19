@@ -1,19 +1,20 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.After;
 
 public class TransactionHandlerTest {
+    public static final int POSITIVE_QUANTITY = 1;
+    public static final int ZERO_QUANTITY = 0;
+    public static final int NEGATIVE_QUANTITY = -1;
     private final StorageDao storageDao = new StorageDaoImpl();
-    private static final int POSITIVE_QUANTITY = 1;
-    private static final int ZERO_QUANTITY = 0;
-    private static final int NEGATIVE_QUANTITY = -1;
 
     @After
     public void after() {
@@ -26,7 +27,7 @@ public class TransactionHandlerTest {
         Transaction transaction =
                 new Transaction(Transaction.Operation.BALANCE,"Lemon", POSITIVE_QUANTITY);
         BalanceOperationHandlerImpl balanceOperationHandler =
-        new BalanceOperationHandlerImpl(storageDao);
+                new BalanceOperationHandlerImpl(storageDao);
         balanceOperationHandler.handle(transaction);
         int actualQuantity = storageDao.getRemainingGoods("Lemon");
         assertEquals(expectedQuantity, actualQuantity);
@@ -49,11 +50,11 @@ public class TransactionHandlerTest {
             Assert.assertSame(RuntimeException.class, e.getClass());
         }
         transaction.setQuantity(NEGATIVE_QUANTITY);
-            try {
-                balanceOperationHandler.handle(transaction);
-            } catch (Exception e) {
-                Assert.assertSame(RuntimeException.class, e.getClass());
-            }
+        try {
+            balanceOperationHandler.handle(transaction);
+        } catch (Exception e) {
+            Assert.assertSame(RuntimeException.class, e.getClass());
+        }
     }
 
     @Test

@@ -1,17 +1,14 @@
 package core.basesyntax.service.impl;
 
-
 import core.basesyntax.model.Transaction;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TransactionParseServiceImplTest {
 
-    TransactionParseServiceImpl transactionParseService =
-            new TransactionParseServiceImpl();
+    private TransactionParseServiceImpl transactionParseService = new TransactionParseServiceImpl();
 
     @Test
     public void parse_List_Ok() {

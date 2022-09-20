@@ -4,11 +4,17 @@ import core.basesyntax.model.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParseServiceImplTest {
 
-    private TransactionParseServiceImpl transactionParseService = new TransactionParseServiceImpl();
+    private TransactionParseServiceImpl transactionParseService;
+
+    @Before
+    public void before() {
+        transactionParseService = new TransactionParseServiceImpl();
+    }
 
     @Test
     public void parse_List_Ok() {
@@ -44,7 +50,7 @@ public class TransactionParseServiceImplTest {
                 transactions.get(4).getTypeOperation());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test (expected = RuntimeException.class)
     public void parse_NullList_NotOk() {
         transactionParseService.parser(null);
     }

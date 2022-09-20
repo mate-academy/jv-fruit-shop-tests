@@ -3,8 +3,7 @@ package core.basesyntax.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class GetOperationTest {
-
+public class TransactionTest {
     @Test
     public void findOperationByName_Ok() {
         Transaction.Operation expected = Transaction.Operation.BALANCE;
@@ -12,12 +11,8 @@ public class GetOperationTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void findOperationByName_NotOk() {
-        try {
-            Transaction.Operation actual = Transaction.findOperationByName("wrongOperation");
-        } catch (Exception e) {
-            Assert.assertSame(RuntimeException.class, e.getClass());
-        }
+        Transaction.Operation actual = Transaction.findOperationByName("wrongOperation");
     }
 }

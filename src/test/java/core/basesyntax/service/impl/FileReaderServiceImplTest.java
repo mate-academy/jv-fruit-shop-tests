@@ -2,10 +2,16 @@ package core.basesyntax.service.impl;
 
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private final FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
+    private FileReaderServiceImpl fileReaderService;
+
+    @Before
+    public void before() {
+        fileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     public void readFromFile_correctFilePath_Ok() {
@@ -23,27 +29,19 @@ public class FileReaderServiceImplTest {
         Assert.assertEquals("s,banana,50", transactionList.get(8));
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readFromFile_nonExistentFile_NotOk() {
         String invalidFilePath = "src/test/resources/nonExistentFile.csv";
-        try {
-            fileReaderService.read(invalidFilePath);
-        } catch (Exception e) {
-            Assert.assertSame(RuntimeException.class, e.getClass());
-        }
+        fileReaderService.read(invalidFilePath);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test (expected = RuntimeException.class)
     public void readFromFile_nullFile_NotOk() {
         fileReaderService.read(null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readFromFile_EmptyPath_NotOk() {
-        try {
-            fileReaderService.read("");
-        } catch (Exception e) {
-            Assert.assertSame(RuntimeException.class, e.getClass());
-        }
+        fileReaderService.read("");
     }
 }

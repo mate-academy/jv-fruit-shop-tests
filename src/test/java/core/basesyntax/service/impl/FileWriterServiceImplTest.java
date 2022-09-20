@@ -3,27 +3,29 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.FileWriterService;
 import java.io.File;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
-    private FileWriterService writerService = new FileWriterServiceImpl();
+    private FileWriterService writerService;
 
-    @Test
+    @Before
+    public void before() {
+        writerService = new FileWriterServiceImpl();
+    }
+
+    @Test (expected = RuntimeException.class)
     public void writeToFile_pathToFileIsEmpty_notOk() {
         String pathToFile = "";
         String report = "fruit, quantity";
-        try {
-            writerService.write(pathToFile, report);
-        } catch (Exception e) {
-            Assert.assertSame(RuntimeException.class, e.getClass());
-        }
+        writerService.write(report, pathToFile);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test (expected = RuntimeException.class)
     public void writeToFile_pathToFileIsNull_notOk() {
         String pathToFile = null;
         String report = "fruit, quantity";
-        writerService.write(pathToFile, report);
+        writerService.write(report, pathToFile);
     }
 
     @Test

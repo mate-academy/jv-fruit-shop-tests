@@ -6,15 +6,22 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvReportServiceImplTest {
-    private StorageDao storageDao = new StorageDaoImpl();
+    private StorageDao storageDao;
+    private ReportService reportService;
+
+    @Before
+    public void before() {
+        storageDao = new StorageDaoImpl();
+    }
 
     @Test
     public void getReport_Ok() {
         storageDao.update("Lemon",100);
-        ReportService reportService = new CsvReportServiceImpl(storageDao);
+        reportService = new CsvReportServiceImpl(storageDao);
         String actual = reportService.createReport();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity")

@@ -4,18 +4,20 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.storage.Storage;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class StorageTest {
-    private StorageDao storage = new StorageDaoImpl();
+    private StorageDao storage;
 
-    @Test
+    @Before
+    public void before() {
+        storage = new StorageDaoImpl();
+    }
+
+    @Test (expected = RuntimeException.class)
     public void get_nullProduct_NotOk() {
-        try {
-            storage.update(null, 1681);
-        } catch (Exception e) {
-            Assert.assertSame(RuntimeException.class, e.getClass());
-        }
+        storage.update(null, 1681);
     }
 
     @Test

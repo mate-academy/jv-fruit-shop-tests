@@ -7,6 +7,9 @@ import java.util.Map;
 public class StorageDaoImpl implements StorageDao {
     @Override
     public void update(String product, Integer quantity) {
+        if (product == null) {
+            throw new RuntimeException("Product not to be a NULL");
+        }
         Storage.storage.put(product, quantity);
     }
 

@@ -41,7 +41,7 @@ public class OperationProcessingTest {
     }
 
     @Test
-    public void operationProcessingStrategy_Ok() {
+    public void processing_strategy_Ok() {
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(strategy);
         TransactionsHandler actual =
@@ -60,7 +60,7 @@ public class OperationProcessingTest {
     }
 
     @Test
-    public void operationProcessingStrategy_NullOperation_Ok() {
+    public void processing_strategyNullOperation_Ok() {
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(strategy);
         TransactionsHandler actual =
@@ -69,7 +69,7 @@ public class OperationProcessingTest {
     }
 
     @Test
-    public void operationProcessingService_Ok() {
+    public void processing_service_Ok() {
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(strategy);
         OperationProcessor operationProcessor =

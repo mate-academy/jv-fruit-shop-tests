@@ -16,12 +16,12 @@ public class CsvReportServiceImplTest {
     @Before
     public void before() {
         storageDao = new StorageDaoImpl();
+        reportService = new CsvReportServiceImpl(storageDao);
     }
 
     @Test
-    public void getReport_Ok() {
+    public void get_report_Ok() {
         storageDao.update("Lemon",100);
-        reportService = new CsvReportServiceImpl(storageDao);
         String actual = reportService.createReport();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity")

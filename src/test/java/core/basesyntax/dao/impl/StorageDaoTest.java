@@ -2,12 +2,13 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.storage.Storage;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StorageTest {
+public class StorageDaoTest {
     private StorageDao storage;
 
     @Before
@@ -29,6 +30,9 @@ public class StorageTest {
         Integer actual = storage.getRemainingGoods(product);
         Integer expected = 1618;
         Assert.assertEquals(expected, actual);
+        Map actualMap = storage.getAllData();
+        Map expectedMap = Storage.storage;
+        Assert.assertEquals(expectedMap, actualMap);
     }
 
     @After

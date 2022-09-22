@@ -23,17 +23,17 @@ import org.junit.Test;
 public class OperationProcessingTest {
     private Map<Transaction.Operation, TransactionsHandler> strategy = new HashMap<>();
     private StorageDao storageDao = new StorageDaoImpl();
-    private TransactionsHandler balanceOperationHandler =
-            new BalanceOperationHandlerImpl(storageDao);
-    private TransactionsHandler supplyOperationHandler =
-            new SupplyOperationHandlerImpl(storageDao);
-    private TransactionsHandler purchaseOperationHandler =
-            new PurchaseOperationHandlerImpl(storageDao);
-    private TransactionsHandler returnOperationHandler =
-            new ReturnOperationHandlerImpl(storageDao);
+    private TransactionsHandler balanceOperationHandler;
+    private TransactionsHandler supplyOperationHandler;
+    private TransactionsHandler purchaseOperationHandler;
+    private TransactionsHandler returnOperationHandler;
 
     @Before
     public void setUp() {
+        balanceOperationHandler = new BalanceOperationHandlerImpl(storageDao);
+        supplyOperationHandler = new SupplyOperationHandlerImpl(storageDao);
+        purchaseOperationHandler = new PurchaseOperationHandlerImpl(storageDao);
+        returnOperationHandler = new ReturnOperationHandlerImpl(storageDao);
         strategy.put(Transaction.Operation.BALANCE, balanceOperationHandler);
         strategy.put(Transaction.Operation.SUPPLY, supplyOperationHandler);
         strategy.put(Transaction.Operation.PURCHASE, purchaseOperationHandler);

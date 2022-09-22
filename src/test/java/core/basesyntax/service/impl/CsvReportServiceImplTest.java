@@ -20,7 +20,7 @@ public class CsvReportServiceImplTest {
     }
 
     @Test
-    public void get_report_Ok() {
+    public void createReport_Ok() {
         storageDao.update("Lemon",100);
         String actual = reportService.createReport();
         StringBuilder stringBuilder = new StringBuilder();

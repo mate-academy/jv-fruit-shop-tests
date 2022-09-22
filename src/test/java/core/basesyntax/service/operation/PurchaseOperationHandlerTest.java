@@ -19,7 +19,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void currentQuantityNull_NotOk() {
+    public void handle_CurrentQuantityNull_NotOk() {
         Storage.fruits.put("orange", null);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");
@@ -29,7 +29,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void currentQuantityLessThanPurchase_NotOk() {
+    public void handle_CurrentQuantityLessThanPurchase_NotOk() {
         Storage.fruits.put("orange", 5);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");
@@ -39,7 +39,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void tenMinusPurchaseSixShouldEqualFour_Ok() {
+    public void handle_ValidTransactionQuantity_Ok() {
         Storage.fruits.put("orange", 10);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");

@@ -19,7 +19,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void handleBalanceOperation_Ok() {
+    public void handle_BalanceOperation_Ok() {
         FruitTransaction orange = new FruitTransaction();
         orange.setName("orange");
         orange.setQuantity(10);

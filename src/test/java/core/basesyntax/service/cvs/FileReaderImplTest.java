@@ -19,12 +19,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void filePath_NotOk() {
+    public void readInvalidFilePath_NotOk() {
         fileReader.read(FILE_PATH_INVALID);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileInvalid_NotOk() {
+    public void readInvalidFile_NotOk() {
         fileReader.read(INVALID_FILE);
     }
 

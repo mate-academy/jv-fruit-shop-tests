@@ -1,5 +1,8 @@
 package core.basesyntax.service.cvs;
 
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +20,8 @@ public class FileWriterImplTest {
     @Test
     public void writeToFile_Ok() {
         fileWriter.writeToFile(FILE_REPORT, DATA_REPORT);
+        assertTrue(new File(FILE_REPORT).exists());
+        assertTrue(new File(FILE_REPORT).canRead());
     }
 
     @Test(expected = RuntimeException.class)

@@ -19,7 +19,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void zeroPlusSupplyFiveShouldEqualFive_Ok() {
+    public void handle_validTransactionQuantityNonExistFruit_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");
         fruitTransaction.setQuantity(5);
@@ -32,7 +32,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void fivePlusSupplySixShouldEqualEleven_Ok() {
+    public void handle_validTransactionQuantity_Ok() {
         Storage.fruits.put("orange", 5);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");

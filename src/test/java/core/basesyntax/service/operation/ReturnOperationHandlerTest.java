@@ -19,7 +19,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void zeroPlusReturnFiveShouldEqualFive_Ok() {
+    public void handle_validTransactionQuantityNonExistFruit_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");
         fruitTransaction.setQuantity(5);
@@ -32,7 +32,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void fivePlusReturnSixShouldEqualEleven_Ok() {
+    public void handle_validTransactionQuantity_Ok() {
         Storage.fruits.put("orange", 5);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setName("orange");

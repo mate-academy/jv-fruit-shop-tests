@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Test;
 
 public class TransactionGenerateReportServiceImplTest {
+    private static final String FIRST_LINE_REPORT = "fruit,quantity";
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final String SIGN_SEPARATOR = ",";
@@ -48,7 +49,8 @@ public class TransactionGenerateReportServiceImplTest {
     @Test
     public void report_correctData_ok() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder
+        stringBuilder.append(FIRST_LINE_REPORT)
+                .append(System.lineSeparator())
                 .append(BANANA)
                 .append(SIGN_SEPARATOR)
                 .append(BANANA_COUNT)

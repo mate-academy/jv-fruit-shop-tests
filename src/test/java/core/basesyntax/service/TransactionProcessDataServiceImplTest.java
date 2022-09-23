@@ -20,8 +20,6 @@ public class TransactionProcessDataServiceImplTest {
     private static final String FILE_PATH = "src/main/java/core/basesyntax/db/source.csv";
     private static final String INCORRECT_OPERATION_FILE_PATH =
             "src/main/java/core/basesyntax/db/sourceIncorrectOperation.csv";
-    private static final String INCORRECT_FRUIT_FILE_PATH =
-            "src/main/java/core/basesyntax/db/sourceIncorrectFruit.csv";
     private static final String INCORRECT_QUANTITY_FILE_PATH =
             "src/main/java/core/basesyntax/db/sourceIncorrectQuantity.csv";
     private static final String HEAD_VALUE = "type,fruit,quantity";
@@ -72,12 +70,6 @@ public class TransactionProcessDataServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void process_dataWithIncorrectOperation() {
         List<String> fromFile = reader.readFromFile(INCORRECT_OPERATION_FILE_PATH);
-        Map<String, Integer> processData = transactionProcessDataService.processData(fromFile);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void process_dataWithIncorrectFruit() {
-        List<String> fromFile = reader.readFromFile(INCORRECT_FRUIT_FILE_PATH);
         Map<String, Integer> processData = transactionProcessDataService.processData(fromFile);
     }
 

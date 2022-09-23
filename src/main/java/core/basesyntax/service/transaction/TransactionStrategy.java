@@ -8,10 +8,16 @@ public class TransactionStrategy {
 
     public TransactionStrategy(Map<FruitTransaction.Operation,
             TransactionHandler> transactionHandlerMap) {
+        if (transactionHandlerMap == null) {
+            throw new RuntimeException("TransactionHandlerMap is null");
+        }
         this.transactionHandlerMap = transactionHandlerMap;
     }
 
     public TransactionHandler get(FruitTransaction.Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("FruitTransaction operation is null");
+        }
         return transactionHandlerMap.get(operation);
     }
 }

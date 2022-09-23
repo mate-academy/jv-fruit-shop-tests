@@ -22,6 +22,9 @@ public class TransactionProcessDataServiceImpl implements TransactionProcessData
 
     @Override
     public Map<String, Integer> processData(List<String> data) {
+        if (data == null || data.isEmpty()) {
+            throw new RuntimeException("Data is null or empty");
+        }
         List<FruitTransaction> fruitTransactions = parseDataToTransactions(data);
         return executeTransactions(fruitTransactions);
     }

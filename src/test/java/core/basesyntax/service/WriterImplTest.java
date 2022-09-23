@@ -1,17 +1,16 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class WriterImplTest {
+public class WriterImplTest {
     private static final String FILE_PATH = "src/main/java/core/basesyntax/db/destination.csv";
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
@@ -21,8 +20,8 @@ class WriterImplTest {
     private static final Writer writer = new WriterImpl();
     private static String report;
 
-    @BeforeAll
-    static void setUp() {
+    @Before
+    public void setUp() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append(BANANA)
@@ -36,18 +35,18 @@ class WriterImplTest {
         report = stringBuilder.toString();
     }
 
-    @Test
-    void write_nullPath_notOk() {
-        assertThrows(RuntimeException.class, () -> writer.writeToFile(null, report));
+    @Test(expected = RuntimeException.class)
+    public void write_nullPath_notOk() {
+        writer.writeToFile(null, report);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void write_nullData_notOk() {
+        writer.writeToFile(FILE_PATH, null);
     }
 
     @Test
-    void write_nullData_notOk() {
-        assertThrows(RuntimeException.class, () -> writer.writeToFile(FILE_PATH, null));
-    }
-
-    @Test
-    void write_correctData_ok() {
+    public void write_correctData_ok() {
         writer.writeToFile(FILE_PATH, report);
         File destFile = new File(FILE_PATH);
         assertNotNull(destFile);

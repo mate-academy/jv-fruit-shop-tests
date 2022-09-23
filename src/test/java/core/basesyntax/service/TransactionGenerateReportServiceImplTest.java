@@ -1,14 +1,13 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class TransactionGenerateReportServiceImplTest {
+public class TransactionGenerateReportServiceImplTest {
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final String SIGN_SEPARATOR = ",";
@@ -25,15 +24,13 @@ class TransactionGenerateReportServiceImplTest {
         return fruitsCount;
     }
 
-    @Test
-    void report_nullData_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            String report = generateReportService.generateReport(null);
-        });
+    @Test(expected = RuntimeException.class)
+    public void report_nullData_notOk() {
+        String report = generateReportService.generateReport(null);
     }
 
     @Test
-    void report_incorrectData_notOk() {
+    public void report_incorrectData_notOk() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append(APPLE)
@@ -49,7 +46,7 @@ class TransactionGenerateReportServiceImplTest {
     }
 
     @Test
-    void report_correctData_ok() {
+    public void report_correctData_ok() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append(BANANA)

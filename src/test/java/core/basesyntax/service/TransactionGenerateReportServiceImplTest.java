@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionGenerateReportServiceImplTest {
@@ -15,14 +16,18 @@ public class TransactionGenerateReportServiceImplTest {
     private static final int APPLE_COUNT = 5;
     private static final int BANANA_COUNT = 7;
 
-    private static final TransactionGenerateReportService generateReportService
-            = new TransactionGenerateReportServiceImpl();
+    private static TransactionGenerateReportService generateReportService;
 
     private Map<String, Integer> createFruitsCountData() {
         Map<String, Integer> fruitsCount = new HashMap<>();
         fruitsCount.put(BANANA, BANANA_COUNT);
         fruitsCount.put(APPLE, APPLE_COUNT);
         return fruitsCount;
+    }
+
+    @Before
+    public void setUp() {
+        generateReportService = new TransactionGenerateReportServiceImpl();
     }
 
     @Test(expected = RuntimeException.class)

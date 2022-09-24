@@ -2,12 +2,18 @@ package core.basesyntax.service.transaction;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnTransactionHandlerTest {
-    private static final TransactionHandler transactionHandler = new ReturnTransactionHandler();
     private static final int FIRST_VALUE = 5;
     private static final int SECOND_VALUE = 10;
+    private static TransactionHandler transactionHandler;
+
+    @Before
+    public void setUp() {
+        transactionHandler = new ReturnTransactionHandler();
+    }
 
     @Test
     public void transactionValue_ok() {

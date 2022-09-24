@@ -24,7 +24,7 @@ public class TransactionProcessDataServiceImplTest {
             "src/main/java/core/basesyntax/db/sourceIncorrectQuantity.csv";
     private static final String HEAD_VALUE = "type,fruit,quantity";
     private static TransactionProcessDataService transactionProcessDataService;
-    private static Reader reader = new ReaderImpl();
+    private static Reader reader;
 
     private static Map<FruitTransaction.Operation, TransactionHandler> createTransactionHandler() {
         Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap =
@@ -46,6 +46,7 @@ public class TransactionProcessDataServiceImplTest {
                 = createTransactionHandler();
         transactionProcessDataService =
                 new TransactionProcessDataServiceImpl(transactionHandler);
+        reader = new ReaderImpl();
     }
 
     @Test(expected = RuntimeException.class)

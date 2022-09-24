@@ -10,11 +10,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionStrategyTest {
-    private static final Map<FruitTransaction.Operation, TransactionHandler> 
-            transactionHandlerMap = new HashMap<>();
+    private static Map<FruitTransaction.Operation, TransactionHandler>
+            transactionHandlerMap;
+    private static TransactionStrategy transactionStrategy;
 
     @Before
     public void setUp() {
+        transactionHandlerMap = new HashMap<>();
         transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceTransactionHandler());
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY,
@@ -23,7 +25,7 @@ public class TransactionStrategyTest {
 
     @Test(expected = RuntimeException.class)
     public void get_nullHandlerMap_notOk() {
-        TransactionStrategy transactionStrategy = new TransactionStrategy(null);
+        transactionStrategy = new TransactionStrategy(null);
         TransactionHandler transactionHandler =
                 transactionStrategy.get(FruitTransaction.Operation.BALANCE);
     }
@@ -39,13 +41,13 @@ public class TransactionStrategyTest {
 
     @Test(expected = RuntimeException.class)
     public void get_nullValue_notOk() {
-        TransactionStrategy transactionStrategy = new TransactionStrategy(transactionHandlerMap);
+        transactionStrategy = new TransactionStrategy(transactionHandlerMap);
         TransactionHandler transactionHandler = transactionStrategy.get(null);
     }
 
     @Test
     public void get_value_ok() {
-        TransactionStrategy transactionStrategy = new TransactionStrategy(transactionHandlerMap);
+        transactionStrategy = new TransactionStrategy(transactionHandlerMap);
         TransactionHandler transactionHandler =
                 transactionStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(transactionHandler.getClass(), BalanceTransactionHandler.class);

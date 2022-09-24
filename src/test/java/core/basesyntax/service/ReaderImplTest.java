@@ -3,10 +3,16 @@ package core.basesyntax.service;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderImplTest {
-    private final Reader reader = new ReaderImpl();
+    private Reader reader;
+
+    @Before
+    public void setUp() {
+        reader = new ReaderImpl();
+    }
 
     @Test(expected = RuntimeException.class)
     public void read_nullValue_notOk() {

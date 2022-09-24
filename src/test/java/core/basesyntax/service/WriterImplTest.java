@@ -17,7 +17,7 @@ public class WriterImplTest {
     private static final String SIGN_SEPARATOR = ",";
     private static final int APPLE_COUNT = 5;
     private static final int BANANA_COUNT = 7;
-    private static final Writer writer = new WriterImpl();
+    private static Writer writer;
     private static String report;
 
     @Before
@@ -33,6 +33,7 @@ public class WriterImplTest {
                 .append(APPLE_COUNT)
                 .append(System.lineSeparator());
         report = stringBuilder.toString();
+        writer = new WriterImpl();
     }
 
     @Test(expected = RuntimeException.class)

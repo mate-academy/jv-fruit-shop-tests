@@ -65,27 +65,4 @@ public class FileWriterImplTest {
         }
         fail("Report name can't be null. NullPointerException");
     }
-
-    @Test
-    public void inValidFileName_NotOk() {
-        String inValidFileName = "*???????";
-        try {
-            fileWriter.writeToFileCsv(report,inValidFileName);
-        } catch (Exception e) {
-            return;
-        }
-        fail("Can't write data to the file, invalid file name "
-                + "or replace report and file name");
-    }
-
-    @Test
-    public void changePlaceReportFile_NotOk() {
-        try {
-            fileWriter.writeToFileCsv(FILE_TO_WRITE,report);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Can't write data to the file, invalid file name "
-                + "or replace report and file name");
-    }
 }

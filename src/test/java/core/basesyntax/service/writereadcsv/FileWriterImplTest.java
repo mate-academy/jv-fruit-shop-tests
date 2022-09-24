@@ -72,7 +72,7 @@ public class FileWriterImplTest {
         String inValidFileName = "*???????";
         try {
             fileWriter.writeToFileCsv(report,inValidFileName);
-        } catch (InvalidPathException e) {
+        } catch (Exception e) {
             return;
         }
         fail("Can't write data to the file, invalid file name "
@@ -83,7 +83,7 @@ public class FileWriterImplTest {
     public void changePlaceReportFile_NotOk() {
         try {
             fileWriter.writeToFileCsv(FILE_TO_WRITE,report);
-        } catch (InvalidPathException e) {
+        } catch (RuntimeException e) {
             return;
         }
         fail("Can't write data to the file, invalid file name "

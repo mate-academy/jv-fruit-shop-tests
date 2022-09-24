@@ -57,12 +57,12 @@ public class ReportServiceImplTest {
 
     @Test
     public void addSameNameFruit_Ok() {
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 6; i++) {
             FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                     "banana",i);
             Storage.storage.put(fruit.getName(), fruit.getQuantity());
         }
-        String expected = REPORT_TITLE + "banana,59";
+        String expected = REPORT_TITLE + "banana,5";
         String actual = reportService.getReport();
         Assert.assertEquals("Reports are different: ",expected, actual);
     }

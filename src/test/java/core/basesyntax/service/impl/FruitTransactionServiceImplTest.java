@@ -29,7 +29,7 @@ public class FruitTransactionServiceImplTest extends FruitTransaction {
     }
 
     @Test (expected = RuntimeException.class)
-    public void TransactionService_ParseNull_NotOK() {
+    public void transactionService_ParseNull_NotOK() {
         transactionService.parseFruitTransactions(null);
     }
 

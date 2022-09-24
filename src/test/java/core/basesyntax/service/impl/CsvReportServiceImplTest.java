@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ReportService;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
 
 public class CsvReportServiceImplTest extends CsvReportServiceImpl {
     ReportService csvReportService;
@@ -24,12 +24,12 @@ public class CsvReportServiceImplTest extends CsvReportServiceImpl {
     }
 
     @Test
-    public void ReportService_OKData_OK() {
+    public void reportService_OKData_OK() {
         assertEquals(csvReportService.createReport(map), expected);
     }
 
     @Test (expected = RuntimeException.class)
-    public void ReportService_NullData_NotOK() {
+    public void reportService_NullData_NotOK() {
         csvReportService.createReport(null);
     }
 }

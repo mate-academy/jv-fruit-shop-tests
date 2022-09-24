@@ -1,12 +1,12 @@
 package core.basesyntax.strategy.handlers;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class PurchaseHandlerImplTest extends PurchaseHandlerImpl {
     private OperationHandler purchaseOperationHandler;
@@ -19,7 +19,7 @@ public class PurchaseHandlerImplTest extends PurchaseHandlerImpl {
     }
 
     @Test
-    public void PurchaseHandler_ValidTransaction_OK() {
+    public void purchaseHandler_ValidTransaction_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction("apple", 30);
         purchaseOperationHandler.handle(fruitTransaction);
         int expected = 40;
@@ -28,7 +28,7 @@ public class PurchaseHandlerImplTest extends PurchaseHandlerImpl {
     }
 
     @Test (expected = RuntimeException.class)
-    public void PurchaseHandler_NotEnoughFruit_NotOK() {
+    public void purchaseHandler_NotEnoughFruit_NotOK() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana", 40);
         purchaseOperationHandler.handle(fruitTransaction);
     }

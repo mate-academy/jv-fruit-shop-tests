@@ -1,12 +1,12 @@
 package core.basesyntax.strategy.handlers;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ReturnHandlerImplTest extends ReturnHandlerImpl {
     OperationHandler returnOperationHandler;
@@ -18,7 +18,7 @@ public class ReturnHandlerImplTest extends ReturnHandlerImpl {
     }
 
     @Test
-    public void ReturnHandler_ValidData_OK() {
+    public void returnHandler_ValidData_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana", 30);
         returnOperationHandler.handle(fruitTransaction);
         int expected = 40;

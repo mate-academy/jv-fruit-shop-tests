@@ -1,12 +1,12 @@
 package core.basesyntax.strategy.handlers;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class BalanceHandlerImplTest extends BalanceHandlerImpl {
     private OperationHandler balanceOperationHandler;

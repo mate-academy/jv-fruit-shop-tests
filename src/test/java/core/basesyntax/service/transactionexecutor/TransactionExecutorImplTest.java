@@ -7,6 +7,7 @@ import core.basesyntax.strategy.operationmap.OperationMapImpl;
 import core.basesyntax.strategy.operationstrategy.OperationStrategy;
 import core.basesyntax.strategy.operationstrategy.OperationStrategyImpl;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
@@ -21,18 +22,15 @@ public class TransactionExecutorImplTest {
     private List<Integer> quantity;
     private List<String> fruitsName;
 
-    public TransactionExecutorImplTest() {
-        fruitList = new ArrayList<>();
+    @Before
+    public void setUp() throws Exception {
         operationMap = new OperationMapImpl();
         operationStrategy = new OperationStrategyImpl(operationMap.getOperationMap());
         transactionExecutor = new TransactionExecutorImpl(operationStrategy);
-    }
-
-    @Before
-    public void setUp() throws Exception {
-        quantity = new ArrayList<>();
+        fruitList = new ArrayList<>();
         fruitsName = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        quantity = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
             FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                     "apple " + i, i);
             fruitList.add(fruit);
@@ -56,12 +54,8 @@ public class TransactionExecutorImplTest {
         transactionExecutor.executeTransaction(fruitList);
         fruitList.clear();
         quantity.clear();
-        for (int i = 0; i < 10; i++) {
-            FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                    "apple " + i, i);
-            fruitList.add(fruit);
-            quantity.add(0);
-        }
+        addTenFruitsToList();
+        Collections.fill(quantity, 0);
         transactionExecutor.executeTransaction(fruitList);
         boolean quantityFruits = Storage.storage.values().containsAll(quantity);
         boolean namesFruits = Storage.storage.keySet().containsAll(fruitsName);
@@ -75,12 +69,7 @@ public class TransactionExecutorImplTest {
         transactionExecutor.executeTransaction(fruitList);
         fruitList.clear();
         quantity.clear();
-        for (int i = 0; i < 10; i++) {
-            FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                    "apple " + i, i);
-            fruitList.add(fruit);
-            quantity.add(i * 2);
-        }
+        addTenFruitsToList();
         transactionExecutor.executeTransaction(fruitList);
         boolean quantityFruits = Storage.storage.values().containsAll(quantity);
         boolean namesFruits = Storage.storage.keySet().containsAll(fruitsName);
@@ -94,12 +83,7 @@ public class TransactionExecutorImplTest {
         transactionExecutor.executeTransaction(fruitList);
         fruitList.clear();
         quantity.clear();
-        for (int i = 0; i < 10; i++) {
-            FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                    "apple " + i, i);
-            fruitList.add(fruit);
-            quantity.add(i * 2);
-        }
+        addTenFruitsToList();
         transactionExecutor.executeTransaction(fruitList);
         boolean quantityFruits = Storage.storage.values().containsAll(quantity);
         boolean namesFruits = Storage.storage.keySet().containsAll(fruitsName);
@@ -113,5 +97,14 @@ public class TransactionExecutorImplTest {
         fruitsName.clear();
         fruitList.clear();
         quantity.clear();
+    }
+
+    private void addTenFruitsToList() {
+        for (int i = 0; i < 10; i++) {
+            FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                    "apple " + i, i);
+            fruitList.add(fruit);
+            quantity.add(i * 2);
+        }
     }
 }

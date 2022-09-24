@@ -1,7 +1,6 @@
 package core.basesyntax.service.fruittransactionparser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
@@ -17,14 +16,11 @@ public class FruitTransactionParserImplTest {
     private List<FruitTransaction> fruitTransactions;
     private FruitTransactionParser fruitParser;
 
-    public FruitTransactionParserImplTest() {
+    @Before
+    public void setUp() throws Exception {
         this.rowList = new ArrayList<>();
         this.fruitTransactions = new ArrayList<>();
         this.fruitParser = new FruitTransactionParserImpl();
-    }
-
-    @Before
-    public void setUp() throws Exception {
         rowList.add(TITLE);
     }
 
@@ -37,34 +33,21 @@ public class FruitTransactionParserImplTest {
         fruitTransactions.add(fruit);
         List<FruitTransaction> expected = fruitTransactions;
         List<FruitTransaction> actual = fruitParser.parseToFruitTransactions(rowList);
-        assertEquals(expected.toString(),actual.toString());
+        assertEquals(expected,actual);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void nullString_NotOk() {
         String firstNull = null;
-        String secondNull = null;
         rowList.add(firstNull);
-        rowList.add(secondNull);
-        try {
-            fruitParser.parseToFruitTransactions(rowList);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("You should throw NullPointerException");
+        fruitParser.parseToFruitTransactions(rowList);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void notValidTransaction_NotOk() {
         String fruitLine = "super,banana,100";
         rowList.add(fruitLine);
-        try {
-            fruitParser.parseToFruitTransactions(rowList);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException: Activities at the store is not valid,"
-                + " add new activity to Enum (Operation)");
+        fruitParser.parseToFruitTransactions(rowList);
     }
 
     @Test
@@ -76,31 +59,21 @@ public class FruitTransactionParserImplTest {
         fruitTransactions.add(fruit);
         List<FruitTransaction> expected = fruitTransactions;
         List<FruitTransaction> actual = fruitParser.parseToFruitTransactions(rowList);
-        assertEquals(expected.toString(),actual.toString());
+        assertEquals(expected,actual);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void nullNameFruit_NotOk() {
         String fruit = "b," + null + "," + 10;
         rowList.add(fruit);
-        try {
-            fruitParser.parseToFruitTransactions(rowList);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("create NullPointerException name of fruit can't be null or empty");
+        fruitParser.parseToFruitTransactions(rowList);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void emptyNameFruit_NotOk() {
         String fruit = "b," + "" + "," + 10;
         rowList.add(fruit);
-        try {
-            fruitParser.parseToFruitTransactions(rowList);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("create NullPointerException name of fruit can't be null or empty");
+        fruitParser.parseToFruitTransactions(rowList);
     }
 
     @After

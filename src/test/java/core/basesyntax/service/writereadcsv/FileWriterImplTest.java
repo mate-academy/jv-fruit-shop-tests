@@ -1,13 +1,12 @@
 package core.basesyntax.service.writereadcsv;
 
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterImplTest {
@@ -18,7 +17,8 @@ public class FileWriterImplTest {
             + System.lineSeparator() + "banana,152"
             + System.lineSeparator() + "apple,90";
 
-    public FileWriterImplTest() {
+    @Before
+    public void setUp() throws Exception {
         fileWriter = new FileWriterImpl();
     }
 
@@ -33,36 +33,21 @@ public class FileWriterImplTest {
         }
         List<String> expected = Arrays.asList("fruit,quantity",
                 "banana,152","apple,90");
-        Assert.assertEquals(expected.toString(),actual.toString());
+        Assert.assertEquals(expected,actual);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void nullFileName_NotOk() {
-        try {
-            fileWriter.writeToFileCsv(report,null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("File name can't be null. NullPointerException");
+        fileWriter.writeToFileCsv(report,null);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void nullReport_NotOk() {
-        try {
-            fileWriter.writeToFileCsv(null,FILE_TO_WRITE);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Report name can't be null. NullPointerException");
+        fileWriter.writeToFileCsv(null,FILE_TO_WRITE);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void nullReportAndFileName_NotOk() {
-        try {
-            fileWriter.writeToFileCsv(null,FILE_TO_WRITE);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Report name can't be null. NullPointerException");
+        fileWriter.writeToFileCsv(null,null);
     }
 }

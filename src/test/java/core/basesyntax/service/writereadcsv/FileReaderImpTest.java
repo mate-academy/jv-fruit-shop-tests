@@ -1,10 +1,9 @@
 package core.basesyntax.service.writereadcsv;
 
-import static org.junit.Assert.fail;
-
 import java.util.Arrays;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderImpTest {
@@ -13,47 +12,33 @@ public class FileReaderImpTest {
     private FileReader fileReader;
     private List<String> expected;
 
-    public FileReaderImpTest() {
+    @Before
+    public void setUp() throws Exception {
         fileReader = new FileReaderImp();
     }
 
     @Test
     public void readFromFileCsv_Ok() {
         List<String> actual = fileReader.readFromFileCsv(FILE_TO_READ);
-        Assert.assertEquals(expected.toString(),actual.toString());
+        Assert.assertEquals(expected,actual);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void readNullFileName_notOk() {
-        try {
-            fileReader.readFromFileCsv(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("You need throw NullPointerException");
+        fileReader.readFromFileCsv(null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readNotValidFileName_notOk() {
-        try {
-            String notValidFileName = "SuperFruit";
-            fileReader.readFromFileCsv(notValidFileName);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException: Can't read data from file, not valid Path or file format");
+        String notValidFileName = "SuperFruit";
+        fileReader.readFromFileCsv(notValidFileName);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readFromNotValidFormatFile() {
         String notValidFormatFile =
                 "src/test/java/core/basesyntax/resources/input/fruit.fruit";
-        try {
-            fileReader.readFromFileCsv(notValidFormatFile);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException: Can't read data from file, not valid Path or file format");
+        fileReader.readFromFileCsv(notValidFormatFile);
     }
 
     {

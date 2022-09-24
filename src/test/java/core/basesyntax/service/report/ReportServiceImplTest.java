@@ -7,18 +7,20 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-
     private static final String REPORT_TITLE =
             "fruit,quantity" + System.lineSeparator();
     private FruitStorageDao storageDao;
     private ReportService reportService;
 
-    public ReportServiceImplTest() {
+    @Before
+    public void setUp() throws Exception {
         this.storageDao = new FruitStorageDaoImpl();
         this.reportService = new ReportServiceImpl(storageDao);
+
     }
 
     @Test

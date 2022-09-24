@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Assert;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

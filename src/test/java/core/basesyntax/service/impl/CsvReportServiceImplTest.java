@@ -3,9 +3,9 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReportService;
-import org.junit.Before;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvReportServiceImplTest extends CsvReportServiceImpl {

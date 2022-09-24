@@ -2,10 +2,10 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Assert;
-import org.junit.Test;
 import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReaderServiceImplTest {
     public static final String INPUT_FILE_PATH = "src/test/java/resources/fruits.csv";

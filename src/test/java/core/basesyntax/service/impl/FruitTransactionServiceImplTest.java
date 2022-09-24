@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import org.junit.Before;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class FruitTransactionServiceImplTest extends FruitTransaction {
-    FruitTransactionService transactionService;
+    private FruitTransactionService transactionService;
     private List<String> list;
     private List<FruitTransaction> actual;
 
@@ -34,7 +34,7 @@ public class FruitTransactionServiceImplTest extends FruitTransaction {
     }
 
     @Test
-    public void TransactionService_ParseData_OK() {
+    public void transactionService_ParseData_OK() {
         List<FruitTransaction> expected = transactionService.parseFruitTransactions(list);
         assertEquals(expected, actual);
     }

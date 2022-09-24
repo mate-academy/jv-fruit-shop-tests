@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnHandlerImplTest extends ReturnHandlerImpl {
-    OperationHandler returnOperationHandler;
+    private OperationHandler returnOperationHandler;
 
     @Before
     public void setUp() {

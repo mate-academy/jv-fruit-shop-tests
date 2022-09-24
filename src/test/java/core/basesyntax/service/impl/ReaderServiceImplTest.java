@@ -3,8 +3,8 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
 import java.util.List;
 
 public class ReaderServiceImplTest {
@@ -18,19 +18,19 @@ public class ReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void readerService_EmptyPath_NotOK() {
+    public void readerService_EmptyPath_NotOk() {
         readerService.readFromFile("");
     }
 
     @Test
-    public void readerService_EmptyFile_OK() {
+    public void readerService_EmptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = readerService.readFromFile(INPUT_EMPTY_FILE_PATH);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readerService_OKFile_OK() {
+    public void readerService_OkFile_Ok() {
         Assert.assertNotNull(readerService.readFromFile(INPUT_FILE_PATH));
     }
 }

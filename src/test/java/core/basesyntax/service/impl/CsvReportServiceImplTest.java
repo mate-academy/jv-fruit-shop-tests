@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReportService;
 import org.junit.Before;
-import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Test;
 
 public class CsvReportServiceImplTest extends CsvReportServiceImpl {
-    ReportService csvReportService;
-    String expected;
-    Map<String, Integer> map;
+    private ReportService csvReportService;
+    private String expected;
+    private Map<String, Integer> map;
 
     @Before
     public void setUp() {
@@ -24,12 +24,12 @@ public class CsvReportServiceImplTest extends CsvReportServiceImpl {
     }
 
     @Test
-    public void reportService_OKData_OK() {
+    public void reportService_OkData_Ok() {
         assertEquals(csvReportService.createReport(map), expected);
     }
 
     @Test (expected = RuntimeException.class)
-    public void reportService_NullData_NotOK() {
+    public void reportService_NullData_NotOk() {
         csvReportService.createReport(null);
     }
 }

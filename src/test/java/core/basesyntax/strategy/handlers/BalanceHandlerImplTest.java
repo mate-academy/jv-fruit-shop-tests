@@ -17,7 +17,7 @@ public class BalanceHandlerImplTest extends BalanceHandlerImpl {
     }
 
     @Test
-    public void BalanceHandler_ValidTransaction_OK() {
+    public void balanceHandler_ValidTransaction_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana", 20);
         balanceOperationHandler.handle(fruitTransaction);
         int expected = 20;

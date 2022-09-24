@@ -8,7 +8,7 @@ public class FileWriterServiceImplTest extends FileWriterServiceImpl {
     private static final String OUTPUT_FILE_PATH = "src/test/java/resources/report.csv";
     private static final String FILE_CONTENT = "fruit,quantity" + System.lineSeparator()
             + "banana,30" + System.lineSeparator() + "apple,60";
-    FileWriterService fileWriterService;
+    private FileWriterService fileWriterService;
 
     @Before
     public void setUp() {
@@ -16,7 +16,7 @@ public class FileWriterServiceImplTest extends FileWriterServiceImpl {
     }
 
     @Test
-    public void writerService_OKData_Ok() {
+    public void writerService_OkData_Ok() {
         fileWriterService.writeToFile(FILE_CONTENT, OUTPUT_FILE_PATH);
     }
 

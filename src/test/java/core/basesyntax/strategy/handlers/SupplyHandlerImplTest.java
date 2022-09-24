@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SupplyHandlerImplTest extends SupplyHandlerImpl {
-    OperationHandler supplyHandlerOperation;
+    private OperationHandler supplyHandlerOperation;
 
     @Before
     public void setUp() {

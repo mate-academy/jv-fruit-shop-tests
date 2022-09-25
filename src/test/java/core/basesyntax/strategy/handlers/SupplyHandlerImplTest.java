@@ -18,7 +18,7 @@ public class SupplyHandlerImplTest extends SupplyHandlerImpl {
     }
 
     @Test
-    public void supplyHandler_ValidData_OK() {
+    public void handle_ValidData_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana", 30);
         supplyHandlerOperation.handle(fruitTransaction);
         int expected = 40;

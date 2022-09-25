@@ -18,7 +18,7 @@ public class ReturnHandlerImplTest extends ReturnHandlerImpl {
     }
 
     @Test
-    public void returnHandler_ValidData_OK() {
+    public void handle_ValidData_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana", 30);
         returnOperationHandler.handle(fruitTransaction);
         int expected = 40;

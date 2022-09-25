@@ -19,7 +19,7 @@ public class PurchaseHandlerImplTest extends PurchaseHandlerImpl {
     }
 
     @Test
-    public void purchaseHandler_ValidTransaction_OK() {
+    public void handle_ValidTransaction_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction("apple", 30);
         purchaseOperationHandler.handle(fruitTransaction);
         int expected = 40;
@@ -27,8 +27,8 @@ public class PurchaseHandlerImplTest extends PurchaseHandlerImpl {
         assertEquals(expected, actual);
     }
 
-    @Test (expected = RuntimeException.class)
-    public void purchaseHandler_NotEnoughFruit_NotOK() {
+    @Test(expected = RuntimeException.class)
+    public void handle_NotEnoughFruit_NotOK() {
         FruitTransaction fruitTransaction = new FruitTransaction("banana", 40);
         purchaseOperationHandler.handle(fruitTransaction);
     }

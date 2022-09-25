@@ -16,17 +16,17 @@ public class FileWriterServiceImplTest extends FileWriterServiceImpl {
     }
 
     @Test
-    public void writerService_OkData_Ok() {
+    public void writeToFile_ValidData_OK() {
         fileWriterService.writeToFile(FILE_CONTENT, OUTPUT_FILE_PATH);
     }
 
-    @Test (expected = RuntimeException.class)
-    public void writerService_NullReport_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_NullReport_NotOK() {
         fileWriterService.writeToFile(null, OUTPUT_FILE_PATH);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writerService_EmptyPath_NotOk() {
+    public void writeToFile_EmptyPath_NotOK() {
         fileWriterService.writeToFile(FILE_CONTENT, "");
     }
 }

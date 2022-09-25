@@ -17,20 +17,20 @@ public class ReaderServiceImplTest {
         readerService = new ReaderServiceImpl();
     }
 
-    @Test (expected = RuntimeException.class)
-    public void readerService_EmptyPath_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void readFile_EmptyPath_NotOK() {
         readerService.readFromFile("");
     }
 
     @Test
-    public void readerService_EmptyFile_Ok() {
+    public void readFile_EmptyFile_OK() {
         List<String> expected = List.of();
         List<String> actual = readerService.readFromFile(INPUT_EMPTY_FILE_PATH);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readerService_OkFile_Ok() {
+    public void readFile_ValidFile_OK() {
         Assert.assertNotNull(readerService.readFromFile(INPUT_FILE_PATH));
     }
 }

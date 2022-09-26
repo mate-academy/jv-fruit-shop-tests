@@ -21,6 +21,7 @@ public class TransactionStrategyTest {
                 new BalanceTransactionHandler());
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyTransactionHandler());
+        transactionStrategy = new TransactionStrategy(transactionHandlerMap);
     }
 
     @Test(expected = RuntimeException.class)
@@ -41,13 +42,11 @@ public class TransactionStrategyTest {
 
     @Test(expected = RuntimeException.class)
     public void get_nullValue_notOk() {
-        transactionStrategy = new TransactionStrategy(transactionHandlerMap);
         TransactionHandler transactionHandler = transactionStrategy.get(null);
     }
 
     @Test
     public void get_value_ok() {
-        transactionStrategy = new TransactionStrategy(transactionHandlerMap);
         TransactionHandler transactionHandler =
                 transactionStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(transactionHandler.getClass(), BalanceTransactionHandler.class);

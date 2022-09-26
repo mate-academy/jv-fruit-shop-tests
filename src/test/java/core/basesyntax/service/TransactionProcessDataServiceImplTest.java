@@ -31,20 +31,6 @@ public class TransactionProcessDataServiceImplTest {
     private static TransactionProcessDataService transactionProcessDataService;
     private static Reader reader;
 
-    private static Map<FruitTransaction.Operation, TransactionHandler> createTransactionHandler() {
-        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap =
-                new HashMap<>();
-        transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceTransactionHandler());
-        transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyTransactionHandler());
-        transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseTransactionHandler());
-        transactionHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnTransactionHandler());
-        return transactionHandlerMap;
-    }
-
     @Before
     public void setUp() {
         Map<FruitTransaction.Operation, TransactionHandler> transactionHandler
@@ -95,5 +81,19 @@ public class TransactionProcessDataServiceImplTest {
         expected.put(BANANA, BANANA_RESULT);
         expected.put(APPLE, APPLE_RESULT);
         assertEquals(expected, processData);
+    }
+
+    private Map<FruitTransaction.Operation, TransactionHandler> createTransactionHandler() {
+        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap =
+                new HashMap<>();
+        transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceTransactionHandler());
+        transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyTransactionHandler());
+        transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseTransactionHandler());
+        transactionHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnTransactionHandler());
+        return transactionHandlerMap;
     }
 }

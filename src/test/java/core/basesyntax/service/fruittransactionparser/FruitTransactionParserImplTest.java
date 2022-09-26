@@ -25,7 +25,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void validString_Ok() {
+    public void parseToFruitTransactions_ValidString_Ok() {
         String fruitLine = "s,banana,100";
         rowList.add(fruitLine);
         FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
@@ -36,22 +36,22 @@ public class FruitTransactionParserImplTest {
         assertEquals(expected,actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullString_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void parseToFruitTransactions_NullString_NotOk() {
         String firstNull = null;
         rowList.add(firstNull);
         fruitParser.parseToFruitTransactions(rowList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void notValidTransaction_NotOk() {
+    public void parseToFruitTransactions_notValidOperation_NotOk() {
         String fruitLine = "super,banana,100";
         rowList.add(fruitLine);
         fruitParser.parseToFruitTransactions(rowList);
     }
 
     @Test
-    public void maxFruitQuantity_Ok() {
+    public void parseToFruitTransactions_MaxQuantity_Ok() {
         String fruitLine = "b,apple," + Integer.MAX_VALUE;
         rowList.add(fruitLine);
         FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -62,15 +62,15 @@ public class FruitTransactionParserImplTest {
         assertEquals(expected,actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullNameFruit_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void parseToFruitTransactions_NullFruitName_NotOk() {
         String fruit = "b," + null + "," + 10;
         rowList.add(fruit);
         fruitParser.parseToFruitTransactions(rowList);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void emptyNameFruit_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void parseToFruitTransactions_emptyNameFruit_NotOk() {
         String fruit = "b," + "" + "," + 10;
         rowList.add(fruit);
         fruitParser.parseToFruitTransactions(rowList);

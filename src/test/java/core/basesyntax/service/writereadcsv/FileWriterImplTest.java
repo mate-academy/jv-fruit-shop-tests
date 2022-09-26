@@ -23,7 +23,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeToFileCsv_Ok() {
+    public void writeToFileCsv_ValidDate_Ok() {
         fileWriter.writeToFileCsv(report,FILE_TO_WRITE);
         List<String> actual;
         try {
@@ -36,18 +36,18 @@ public class FileWriterImplTest {
         Assert.assertEquals(expected,actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullFileName_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void writeToFileCsv_NullFileName_NotOk() {
         fileWriter.writeToFileCsv(report,null);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullReport_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void writeToFileCsv_NullReport_NotOk() {
         fileWriter.writeToFileCsv(null,FILE_TO_WRITE);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullReportAndFileName_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void writeToFileCsv_NullReportAndFileName_NotOk() {
         fileWriter.writeToFileCsv(null,null);
     }
 }

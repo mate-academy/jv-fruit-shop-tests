@@ -11,56 +11,57 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceTransactionHandlerImplTest {
-    private FruitTransaction fruit;
-    private FruitStorageDao dao;
-    private TransactionHandler balance;
+    private FruitTransaction fruitTransaction;
+    private FruitStorageDao storageDao;
+    private TransactionHandler balanceHandler;
 
     @Before
     public void setUp() throws Exception {
-        fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        Storage.storage.clear();
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "orange",50);
-        dao = new FruitStorageDaoImpl();
-        balance = new BalanceTransactionHandlerImpl();
+        storageDao = new FruitStorageDaoImpl();
+        balanceHandler = new BalanceTransactionHandlerImpl();
     }
 
     @Test
-    public void addFruitName_Ok() {
-        balance.transaction(fruit);
-        List<String> expected = List.of(fruit.getName());
-        List<String> actual = dao.getAllFruitsNames();
+    public void transaction_FruitName_Ok() {
+        balanceHandler.transaction(fruitTransaction);
+        List<String> expected = List.of(fruitTransaction.getName());
+        List<String> actual = storageDao.getAllFruitsNames();
         Assert.assertEquals(expected,actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void addNullFruit_NotOk() {
-        balance.transaction(null);
+    @Test(expected = RuntimeException.class)
+    public void transaction_NullFruit_NotOk() {
+        balanceHandler.transaction(null);
     }
 
     @Test
-    public void addFruitQuantity_Ok() {
-        balance.transaction(fruit);
-        int actual = dao.get(fruit.getName());
-        int expected = fruit.getQuantity();
+    public void transaction_FruitQuantity_Ok() {
+        balanceHandler.transaction(fruitTransaction);
+        int actual = storageDao.get(fruitTransaction.getName());
+        int expected = fruitTransaction.getQuantity();
         Assert.assertEquals(expected,actual);
     }
 
     @Test
-    public void addMaxQuantityCheckName_Ok() {
+    public void transaction_FruitNameMaxquantity_Ok() {
         FruitTransaction maxQuantityFruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple",Integer.MAX_VALUE);
         List<String> expected = List.of(maxQuantityFruit.getName());
-        balance.transaction(maxQuantityFruit);
-        List<String> actual = dao.getAllFruitsNames();
+        balanceHandler.transaction(maxQuantityFruit);
+        List<String> actual = storageDao.getAllFruitsNames();
         Assert.assertEquals(expected,actual);
     }
 
     @Test
-    public void addMaxCheckQuantity_Ok() {
+    public void transaction_MaxQuantity_Ok() {
         FruitTransaction maxQuantityFruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple",Integer.MAX_VALUE);
-        balance.transaction(maxQuantityFruit);
+        balanceHandler.transaction(maxQuantityFruit);
         int expectedInt = maxQuantityFruit.getQuantity();
-        int actualInt = dao.get(maxQuantityFruit.getName());
+        int actualInt = storageDao.get(maxQuantityFruit.getName());
         Assert.assertEquals(expectedInt,actualInt);
     }
 

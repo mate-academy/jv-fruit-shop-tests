@@ -18,24 +18,24 @@ public class FileReaderImpTest {
     }
 
     @Test
-    public void readFromFileCsv_Ok() {
+    public void readFromFileCsv_ValidDate_Ok() {
         List<String> actual = fileReader.readFromFileCsv(FILE_TO_READ);
         Assert.assertEquals(expected,actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void readNullFileName_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void readFromFileCsv_NullFileName_notOk() {
         fileReader.readFromFileCsv(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readNotValidFileName_notOk() {
+    public void readFromFileCsv_NotValidFileName_notOk() {
         String notValidFileName = "SuperFruit";
         fileReader.readFromFileCsv(notValidFileName);
     }
 
     @Test (expected = RuntimeException.class)
-    public void readFromNotValidFormatFile() {
+    public void readFromFileCsv_NotValidFormatFile_NotOk() {
         String notValidFormatFile =
                 "src/test/java/core/basesyntax/resources/input/fruit.fruit";
         fileReader.readFromFileCsv(notValidFormatFile);

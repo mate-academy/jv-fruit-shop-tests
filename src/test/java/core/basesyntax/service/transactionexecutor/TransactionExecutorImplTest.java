@@ -15,8 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionExecutorImplTest {
-    private OperationStrategy operationStrategy;
-    private OperationMap operationMap;
     private TransactionExecutor transactionExecutor;
     private List<FruitTransaction> fruitList;
     private List<Integer> quantity;
@@ -24,8 +22,9 @@ public class TransactionExecutorImplTest {
 
     @Before
     public void setUp() throws Exception {
-        operationMap = new OperationMapImpl();
-        operationStrategy = new OperationStrategyImpl(operationMap.getOperationMap());
+        OperationMap operationMap = new OperationMapImpl();
+        OperationStrategy operationStrategy =
+                new OperationStrategyImpl(operationMap.getOperationMap());
         transactionExecutor = new TransactionExecutorImpl(operationStrategy);
         fruitList = new ArrayList<>();
         fruitsName = new ArrayList<>();
@@ -40,7 +39,7 @@ public class TransactionExecutorImplTest {
     }
 
     @Test
-    public void executeBalance_Ok() {
+    public void executeTransaction_BalanceTransaction_Ok() {
         transactionExecutor.executeTransaction(fruitList);
         boolean quantityFruits = Storage.storage.values().containsAll(quantity);
         boolean namesFruits = Storage.storage.keySet().containsAll(fruitsName);
@@ -50,7 +49,7 @@ public class TransactionExecutorImplTest {
     }
 
     @Test
-    public void executePurchase_Ok() {
+    public void executeTransaction_PurchaseTransaction_Ok() {
         transactionExecutor.executeTransaction(fruitList);
         fruitList.clear();
         quantity.clear();
@@ -65,7 +64,7 @@ public class TransactionExecutorImplTest {
     }
 
     @Test
-    public void executeReturn_Ok() {
+    public void executeTransaction_ReturnTransaction_Ok() {
         transactionExecutor.executeTransaction(fruitList);
         fruitList.clear();
         quantity.clear();
@@ -79,7 +78,7 @@ public class TransactionExecutorImplTest {
     }
 
     @Test
-    public void executeSupply_Ok() {
+    public void executeTransaction_SupplyTransaction_Ok() {
         transactionExecutor.executeTransaction(fruitList);
         fruitList.clear();
         quantity.clear();
@@ -90,6 +89,11 @@ public class TransactionExecutorImplTest {
         boolean expected = quantityFruits & namesFruits;
         Assert.assertTrue("You don't execute supply transaction "
                 + "or add to the storage",expected);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void executeTransaction_NullTransactionList_notOk() {
+        transactionExecutor.executeTransaction(null);
     }
 
     @After

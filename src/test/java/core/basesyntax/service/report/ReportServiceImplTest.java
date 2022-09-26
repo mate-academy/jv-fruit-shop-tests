@@ -24,7 +24,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void emptyStorage_Ok() {
+    public void getReport_emptyStorage_Ok() {
         Storage.storage.clear();
         String expected = REPORT_TITLE;
         String actual = reportService.getReport();
@@ -32,7 +32,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void addOneFruit_Ok() {
+    public void getReport_OneFruit_Ok() {
         FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana",10);
         String expected = REPORT_TITLE + "banana,10";
@@ -42,7 +42,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void add60kFruits_Ok() {
+    public void getReport_60kFruits_Ok() {
         for (int i = 0; i < 60000; i++) {
             FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                     "banana " + i,10 + i);
@@ -58,7 +58,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void ignoreNullNameFruit_Ok() {
+    public void getReport_IgnoreNullNameFruit_Ok() {
         FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 null,10);
         Storage.storage.put(fruit.getName(), fruit.getQuantity());
@@ -68,7 +68,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void addMaxQuantity_Ok() {
+    public void getReport_MaxQuantity_Ok() {
         FruitTransaction fruit = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "orange",Integer.MAX_VALUE);
         Storage.storage.put(fruit.getName(), fruit.getQuantity());

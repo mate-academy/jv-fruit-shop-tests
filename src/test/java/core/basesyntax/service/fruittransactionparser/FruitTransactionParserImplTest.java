@@ -2,6 +2,7 @@ package core.basesyntax.service.fruittransactionparser;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class FruitTransactionParserImplTest {
 
     @Before
     public void setUp() throws Exception {
+        Storage.storage.clear();
         this.rowList = new ArrayList<>();
         this.fruitTransactions = new ArrayList<>();
         this.fruitParser = new FruitTransactionParserImpl();

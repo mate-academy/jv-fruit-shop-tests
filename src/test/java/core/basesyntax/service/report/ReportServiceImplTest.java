@@ -18,6 +18,7 @@ public class ReportServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
+        Storage.storage.clear();
         this.storageDao = new FruitStorageDaoImpl();
         this.reportService = new ReportServiceImpl(storageDao);
 

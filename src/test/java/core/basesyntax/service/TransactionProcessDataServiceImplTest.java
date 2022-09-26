@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
@@ -23,6 +24,10 @@ public class TransactionProcessDataServiceImplTest {
     private static final String INCORRECT_QUANTITY_FILE_PATH =
             "src/main/java/core/basesyntax/db/sourceIncorrectQuantity.csv";
     private static final String HEAD_VALUE = "type,fruit,quantity";
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final Integer BANANA_RESULT = 152;
+    private static final Integer APPLE_RESULT = 90;
     private static TransactionProcessDataService transactionProcessDataService;
     private static Reader reader;
 
@@ -86,5 +91,9 @@ public class TransactionProcessDataServiceImplTest {
         Map<String, Integer> processData = transactionProcessDataService.processData(fromFile);
         boolean isValid = processData != null && !processData.isEmpty();
         assertTrue(isValid);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put(BANANA, BANANA_RESULT);
+        expected.put(APPLE, APPLE_RESULT);
+        assertEquals(expected, processData);
     }
 }

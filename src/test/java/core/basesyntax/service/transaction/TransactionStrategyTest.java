@@ -33,8 +33,6 @@ public class TransactionStrategyTest {
 
     @Test
     public void get_notExistKey_notOk() {
-        TransactionStrategy transactionStrategy =
-                new TransactionStrategy(transactionHandlerMap);
         TransactionHandler transactionHandler =
                 transactionStrategy.get(FruitTransaction.Operation.RETURN);
         assertNull(transactionHandler);

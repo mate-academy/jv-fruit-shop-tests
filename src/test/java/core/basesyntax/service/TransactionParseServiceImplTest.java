@@ -19,7 +19,7 @@ public class TransactionParseServiceImplTest {
     }
 
     @Test
-    public void parseList_OK() {
+    public void parseList_Ok() {
         dailyTransactionList.add("type,fruit,quantity");
         dailyTransactionList.add("b,banana,20");
         dailyTransactionList.add("b,apple,100");
@@ -29,20 +29,20 @@ public class TransactionParseServiceImplTest {
     }
 
     @Test
-    public void parseListNoFruits_OK() {
+    public void parseListNoFruits_Ok() {
         dailyTransactionList.add("type,fruit,quantity");
         List<FruitTransaction> lists = parserService.parse(dailyTransactionList);
         assertEquals(0,lists.size());
     }
 
     @Test
-    public void parseListEmpty_NotOK() {
+    public void parseListEmpty_NotOk() {
         List<FruitTransaction> lists = parserService.parse(dailyTransactionList);
         assertEquals(0,lists.size());
     }
 
     @Test (expected = NoSuchElementException.class)
-    public void parseListBadData_NotOK() {
+    public void parseListBadData_NotOk() {
         dailyTransactionList.add("type,fruit,quantity");
         dailyTransactionList.add("apple,100");
         List<FruitTransaction> lists = parserService.parse(dailyTransactionList);

@@ -16,7 +16,7 @@ public class FileReaderImplTest {
     private FileReader fileReader;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         StringBuilder data = new StringBuilder();
         data.append("type,fruit,quantity")
                 .append(System.lineSeparator())
@@ -45,12 +45,12 @@ public class FileReaderImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fileReader = new FileReaderImpl();
     }
 
     @Test
-    public void readNormalFilePath_OK() {
+    public void readNormalFilePath_Ok() {
         List<String> dailyTransactionList = fileReader.read(NORMAL_FILE_PATH);
         assertEquals(9,dailyTransactionList.size());
     }

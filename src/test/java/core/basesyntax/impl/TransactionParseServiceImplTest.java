@@ -1,7 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
-import core.basesyntax.impl.TransactionParseServiceImpl;
+import core.basesyntax.FruitTransaction;
 import core.basesyntax.service.ParseService;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,7 +16,6 @@ public class TransactionParseServiceImplTest {
         parseService = new TransactionParseServiceImpl();
     }
 
-    /*
     @Test
     public void parse_ParseValidData_Ok() {
         FruitTransaction expected = new FruitTransaction();
@@ -25,7 +25,6 @@ public class TransactionParseServiceImplTest {
         FruitTransaction actual = parseService.parse(VALID_DATA);
         Assert.assertEquals(actual,expected);
     }
-    */
 
     @Test (expected = RuntimeException.class)
     public void parse_ParseInvalidData_NoyOk() {

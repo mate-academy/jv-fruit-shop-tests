@@ -1,8 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.operation;
 
+import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.operation.SupplyOperationHandler;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

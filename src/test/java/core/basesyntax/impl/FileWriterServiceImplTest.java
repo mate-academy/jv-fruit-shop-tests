@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
-import core.basesyntax.impl.FileWriterServiceImpl;
 import core.basesyntax.service.FileWriterService;
 import org.junit.BeforeClass;
 import org.junit.Test;

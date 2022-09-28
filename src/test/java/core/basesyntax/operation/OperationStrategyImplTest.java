@@ -1,16 +1,15 @@
-package core.basesyntax;
+package core.basesyntax.operation;
+
+import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.operation.BalanceOperationHandler;
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.PurchaseOperationHandler;
-import core.basesyntax.operation.ReturnOperationHandler;
-import core.basesyntax.operation.SupplyOperationHandler;
-import java.util.HashMap;
-import java.util.Map;
+import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,9 +18,8 @@ public class OperationStrategyImplTest {
     private static OperationStrategy strategy;
 
     @BeforeClass
-    public static void setUp() {
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
-        fruitDao.addFruit("melon", 70);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         OperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
         OperationHandler purchaseOperationHandler = new PurchaseOperationHandler(fruitDao);
@@ -32,6 +30,11 @@ public class OperationStrategyImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, returnOperationHandler);
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyOperationHandler);
         strategy = new OperationStrategyImpl(operationHandlerMap);
+    }
+
+    @Before
+    public void setUp() {
+        Storage.fruitStorage.put("kiwi", 70);
     }
 
     @Test

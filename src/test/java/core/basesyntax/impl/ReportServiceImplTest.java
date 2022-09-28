@@ -1,7 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Assert;

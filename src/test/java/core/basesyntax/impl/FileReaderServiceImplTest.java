@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
-import core.basesyntax.impl.FileReaderServiceImpl;
 import core.basesyntax.service.FileReaderService;
 import java.util.List;
 import org.junit.Assert;
@@ -8,7 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String INPUT_FILE_PATH = "src/test/java/core/basesyntax/testexample.csv";
+    private static final String INPUT_FILE_PATH
+            = "src/test/java/core/basesyntax/resources/testexample.csv";
     private static final String NO_FILE = "";
     private static FileReaderService readerService;
 

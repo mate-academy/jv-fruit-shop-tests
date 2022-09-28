@@ -26,6 +26,7 @@ public class TransactionParseServiceImplTest {
         List<FruitTransaction> lists = parserService.parse(dailyTransactionList);
         assertEquals(2,lists.size());
         assertEquals("banana",lists.get(0).getFruit());
+        assertEquals("apple",lists.get(1).getFruit());
     }
 
     @Test
@@ -36,7 +37,7 @@ public class TransactionParseServiceImplTest {
     }
 
     @Test
-    public void parseListEmpty_NotOk() {
+    public void parseListEmpty_Ok() {
         List<FruitTransaction> lists = parserService.parse(dailyTransactionList);
         assertEquals(0,lists.size());
     }

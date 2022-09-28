@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
@@ -26,20 +27,12 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void supplyPositive_Ok() {
-        Integer expected = 20;
-        fruitTransaction.setQuantity(10);
+        Integer quantity = 10;
+        fruitTransaction.setQuantity(quantity);
         supplyOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
-    }
-
-    @Test
-    public void supplyZero_Ok() {
-        Integer expected = 10;
-        fruitTransaction.setQuantity(0);
-        supplyOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
+        Integer actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        Integer expected = fruitTransaction.getQuantity() + quantity;
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
@@ -54,16 +47,8 @@ public class SupplyOperationHandlerTest {
         supplyOperationHandler.getOperation(fruitTransaction);
     }
 
-    @Test
-    public void supplyEmptyValue_Ok() {
-        Integer expected = 10;
-        supplyOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
-    }
-
     @After
     public void tearDown() {
-        storageDao.getAllFruitsFromStorage().clear();
+        Storage.fruitsStorage.clear();;
     }
 }

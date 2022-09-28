@@ -70,7 +70,7 @@ public class StorageDaoImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruitsStorage.clear();
     }
 }

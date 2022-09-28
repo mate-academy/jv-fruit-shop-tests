@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
@@ -26,29 +27,12 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void purchasePositive_Ok() {
-        Integer expected = 10;
-        fruitTransaction.setQuantity(10);
+        Integer quantity = 10;
+        fruitTransaction.setQuantity(quantity);
+        Integer actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
         purchaseOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
-    }
-
-    @Test
-    public void purchaseZero_Ok() {
-        Integer expected = 20;
-        fruitTransaction.setQuantity(0);
-        purchaseOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
-    }
-
-    @Test
-    public void purchaseNegative_NotOk() {
-        Integer expected = 45;
-        fruitTransaction.setQuantity(-25);
-        purchaseOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
+        Integer expected = fruitTransaction.getQuantity() + quantity;
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -57,16 +41,8 @@ public class PurchaseOperationHandlerTest {
         purchaseOperationHandler.getOperation(fruitTransaction);
     }
 
-    @Test
-    public void purchaseEmptyValue_Ok() {
-        Integer expected = 20;
-        purchaseOperationHandler.getOperation(fruitTransaction);
-        Integer count = storageDao.getCountFruit(fruitTransaction.getFruit());
-        assertEquals(expected,count);
-    }
-
     @After
-    public void tearDown() throws Exception {
-        storageDao.getAllFruitsFromStorage().clear();
+    public void tearDown() {
+        Storage.fruitsStorage.clear();;
     }
 }

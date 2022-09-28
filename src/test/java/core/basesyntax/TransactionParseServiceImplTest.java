@@ -2,10 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.impl.TransactionParseServiceImpl;
 import core.basesyntax.service.ParseService;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 
 public class TransactionParseServiceImplTest {
     private static final String VALID_DATA = "b,banana,10";

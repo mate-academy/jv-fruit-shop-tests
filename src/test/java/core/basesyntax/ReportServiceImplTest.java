@@ -13,6 +13,7 @@ public class ReportServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
+        Storage.fruitStorage.clear();
         reportService = new ReportServiceImpl();
     }
 
@@ -30,7 +31,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_CreateFinalEmptyReport_Ok() {
+    public void createReport_CreateEmptyReport_Ok() {
         String actualResult = reportService.createReport(Storage.fruitStorage);
         String expectedResult = "fruit,quantity";
         Assert.assertEquals(actualResult, expectedResult);

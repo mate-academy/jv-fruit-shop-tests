@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String INPUT_FILE_PATH = "src/test/java/core/basesyntax/example.csv";
+    private static final String INPUT_FILE_PATH = "src/test/java/core/basesyntax/testexample.csv";
     private static final String NO_FILE = "";
     private static FileReaderService readerService;
 

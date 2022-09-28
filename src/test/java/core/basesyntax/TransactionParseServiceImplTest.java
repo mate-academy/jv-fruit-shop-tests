@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.impl.TransactionParseServiceImpl;
 import core.basesyntax.service.ParseService;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,7 +26,6 @@ public class TransactionParseServiceImplTest {
         expected.typeQuantity(10);
         FruitTransaction actual = parseService.parse(VALID_DATA);
         Assert.assertEquals(actual,expected);
-        //Assert.assertEquals(actual,expected);
     }
     */
 

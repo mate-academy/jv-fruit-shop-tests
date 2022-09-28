@@ -22,7 +22,7 @@ public class FruitDaoImplTest {
 
     @Before
     public void setUp() {
-        Storage.fruitStorage.put("banana", 80); // kiwi
+        Storage.fruitStorage.put("banana", 80);
     }
 
     @Test

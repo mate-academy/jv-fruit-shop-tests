@@ -10,7 +10,8 @@ import org.junit.Test;
 public class BalanceOperationHandlerTest {
     private final FruitDao fruitDao = new FruitDaoImpl();
     private final FruitTransaction transaction = new FruitTransaction();
-    private final BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
+    private final BalanceOperationHandler balanceOperationHandler
+            = new BalanceOperationHandler(fruitDao);
 
     @Test
     public void handle_BalanceOperation_Ok() {

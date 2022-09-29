@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
-    private FruitTransaction transaction = new FruitTransaction();
-    private ReturnOperationHandler returnOperationHandler = new ReturnOperationHandler(fruitDao);
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitTransaction transaction = new FruitTransaction();
+    private final ReturnOperationHandler returnOperationHandler = new ReturnOperationHandler(fruitDao);
 
     @Test
     public void handle_ReturnOperation_Ok() {

@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
-    private FruitTransaction transaction = new FruitTransaction();
-    private PurchaseOperationHandler purchaseOperationHandler
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitTransaction transaction = new FruitTransaction();
+    private final PurchaseOperationHandler purchaseOperationHandler
             = new PurchaseOperationHandler(fruitDao);
 
     @Test

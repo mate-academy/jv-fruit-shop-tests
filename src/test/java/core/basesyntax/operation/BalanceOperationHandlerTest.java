@@ -8,9 +8,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
-    private FruitTransaction transaction = new FruitTransaction();
-    private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitTransaction transaction = new FruitTransaction();
+    private final BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
 
     @Test
     public void handle_BalanceOperation_Ok() {

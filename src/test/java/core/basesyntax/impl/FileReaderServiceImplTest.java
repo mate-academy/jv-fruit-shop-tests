@@ -9,7 +9,7 @@ public class FileReaderServiceImplTest {
     private static final String INPUT_FILE_PATH
             = "src/test/java/core/basesyntax/resources/testexample.csv";
     private static final String NO_FILE = "";
-    private FileReaderService readerService = new FileReaderServiceImpl();
+    private final FileReaderService readerService = new FileReaderServiceImpl();
 
     @Test (expected = RuntimeException.class)
     public void readFromFile_NotExistingFile_NotOk() {

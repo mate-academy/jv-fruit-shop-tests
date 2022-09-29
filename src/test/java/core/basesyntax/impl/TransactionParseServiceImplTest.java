@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TransactionParseServiceImplTest {
     private static final String VALID_DATA = "b,banana,10";
     private static final String INVALID_DATA = "b,banana,-50";
-    private TransactionParseServiceImpl parseService = new TransactionParseServiceImpl();
+    private final TransactionParseServiceImpl parseService = new TransactionParseServiceImpl();
 
     @Test
     public void parse_ValidData_Ok() {

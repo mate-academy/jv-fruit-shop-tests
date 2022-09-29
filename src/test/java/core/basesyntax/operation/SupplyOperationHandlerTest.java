@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private FruitDao fruitDao = new FruitDaoImpl();
-    private FruitTransaction transaction = new FruitTransaction();
-    private SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler(fruitDao);
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitTransaction transaction = new FruitTransaction();
+    private final SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler(fruitDao);
 
     @Test
     public void handle_SupplyOperation_Ok() {

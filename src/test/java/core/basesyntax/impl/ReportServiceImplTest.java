@@ -8,7 +8,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private ReportService reportService = new ReportServiceImpl();
+    private final ReportService reportService = new ReportServiceImpl();
 
     @BeforeClass
     public static void beforeClass() {

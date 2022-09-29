@@ -4,23 +4,16 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static FruitDao fruitDao;
-    private static FruitTransaction transaction;
-    private static PurchaseOperationHandler purchaseOperationHandler;
-
-    @BeforeClass
-    public static void beforeClass() {
-        fruitDao = new FruitDaoImpl();
-        transaction = new FruitTransaction();
-        purchaseOperationHandler = new PurchaseOperationHandler(fruitDao);
-    }
+    private FruitDao fruitDao = new FruitDaoImpl();
+    private FruitTransaction transaction = new FruitTransaction();
+    private PurchaseOperationHandler purchaseOperationHandler
+            = new PurchaseOperationHandler(fruitDao);
 
     @Test
-    public void handle_handlePurchaseOperation_Ok() {
+    public void handle_PurchaseOperation_Ok() {
         fruitDao.addFruit("kiwi", 50);
         fruitDao.addFruit("apple", 5);
         transaction.setFruit("kiwi");
@@ -33,7 +26,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_handlePurchaseOperationWithEnoughItems_NotOk() {
+    public void handle_PurchaseOperationWithEnoughItems_NotOk() {
         fruitDao.addFruit("banana", 5);
         transaction.setFruit("banana");
         transaction.setQuantity(10);

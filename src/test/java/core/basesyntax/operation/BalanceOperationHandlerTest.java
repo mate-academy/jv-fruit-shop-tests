@@ -5,23 +5,15 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static FruitDao fruitDao;
-    private static FruitTransaction transaction;
-    private static BalanceOperationHandler balanceOperationHandler;
-
-    @BeforeClass
-    public static void beforeClass() {
-        fruitDao = new FruitDaoImpl();
-        transaction = new FruitTransaction();
-        balanceOperationHandler = new BalanceOperationHandler(fruitDao);
-    }
+    private FruitDao fruitDao = new FruitDaoImpl();
+    private FruitTransaction transaction = new FruitTransaction();
+    private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
 
     @Test
-    public void handle_HandleBalanceOperation_Ok() {
+    public void handle_BalanceOperation_Ok() {
         fruitDao.addFruit("banana", 20);
         fruitDao.addFruit("apple",50);
         transaction.setFruit("kiwi");

@@ -8,16 +8,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static ReportService reportService;
+    private ReportService reportService = new ReportServiceImpl();
 
     @BeforeClass
     public static void beforeClass() {
         Storage.fruitStorage.clear();
-        reportService = new ReportServiceImpl();
     }
 
     @Test
-    public void createReport_CreateFinalReport_Ok() {
+    public void create_FinalReport_Ok() {
         Storage.fruitStorage.put("kiwi", 20);
         Storage.fruitStorage.put("apple", 50);
         Storage.fruitStorage.put("banana", 5);
@@ -30,7 +29,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_CreateEmptyReport_Ok() {
+    public void create_EmptyReport_Ok() {
         String actualResult = reportService.createReport(Storage.fruitStorage);
         String expectedResult = "fruit,quantity";
         Assert.assertEquals(actualResult, expectedResult);

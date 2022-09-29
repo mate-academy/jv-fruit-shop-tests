@@ -38,7 +38,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void get_getBalanceOperation_Ok() {
+    public void get_BalanceOperation_Ok() {
         OperationHandler actual = strategy.get(FruitTransaction.Operation.BALANCE);
         OperationHandler expected = new BalanceOperationHandler(fruitDao);
         Assert.assertEquals(actual, expected);

@@ -4,23 +4,15 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static FruitDao fruitDao;
-    private static FruitTransaction transaction;
-    private static SupplyOperationHandler supplyOperationHandler;
-
-    @BeforeClass
-    public static void beforeClass() {
-        fruitDao = new FruitDaoImpl();
-        transaction = new FruitTransaction();
-        supplyOperationHandler = new SupplyOperationHandler(fruitDao);
-    }
+    private FruitDao fruitDao = new FruitDaoImpl();
+    private FruitTransaction transaction = new FruitTransaction();
+    private SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler(fruitDao);
 
     @Test
-    public void handle_HandleSupplyOperation_Ok() {
+    public void handle_SupplyOperation_Ok() {
         fruitDao.addFruit("apple", 50);
         fruitDao.addFruit("kiwi", 200);
         transaction.setFruit("apple");

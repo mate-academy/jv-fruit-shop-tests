@@ -10,12 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private static FruitDao fruitDao;
+    private FruitDao fruitDao = new FruitDaoImpl();
 
     @BeforeClass
     public static void beforeClass() {
         Storage.fruitStorage.clear();
-        fruitDao = new FruitDaoImpl();
     }
 
     @Before
@@ -24,10 +23,11 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void addFruit_AddToDB_Ok() {
-        fruitDao.addFruit("orange", 20);
+    public void addFruit_NotEmptyData_Ok() {
+        fruitDao.addFruit("kiwi", 20);
         int actual = Storage.fruitStorage.size();
-        Assert.assertEquals(2, actual);
+        int expectedSize = 2;
+        Assert.assertEquals(expectedSize, actual);
     }
 
     @Test
@@ -35,36 +35,37 @@ public class FruitDaoImplTest {
         fruitDao.addFruit("kiwi", 200);
         fruitDao.addFruit("lemon", 5);
         int actual = Storage.fruitStorage.size();
+        int unexpected = 2;
         Assert.assertFalse(Storage.fruitStorage.isEmpty());
-        Assert.assertNotEquals(2, 3);
+        Assert.assertNotEquals(unexpected, actual);
     }
 
     @Test
-    public void getQuantity_GetFruitQuantity_Ok() {
+    public void getQuantity_Ok() {
         int actual = fruitDao.getQuantity("banana");
-        Assert.assertEquals(80, actual);
+        int expected = 80;
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void getQuantity_GetFruitQuantity_NotOk() {
+    public void getQuantity_NotOk() {
         int actual = fruitDao.getQuantity("banana");
-        Assert.assertNotEquals(20, 80);
+        int unexpected = 20;
+        Assert.assertNotEquals(unexpected, actual);
     }
 
     @Test
-    public void contains_ContainsFruit_Ok() {
+    public void containsFruit_Ok() {
         Assert.assertTrue(fruitDao.contains("banana"));
     }
 
     @Test
-    public void contains_ContainsFruit_NotOk() {
-        fruitDao.addFruit("lemon", 10);
-        fruitDao.addFruit("banana", 300);
+    public void containsFruit_NotOk() {
         Assert.assertFalse(fruitDao.contains("apple"));
     }
 
     @Test
-    public void getAll_GetAllFruits_Ok() {
+    public void getAllFruits_Ok() {
         fruitDao.addFruit("apple", 20);
         Map<String, Integer> actualResult = fruitDao.getAll();
         Map<String, Integer> expectedResult = new HashMap<>();

@@ -10,15 +10,15 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static FruitDao fruitDao;
-    private static OperationStrategy strategy;
+    private FruitDao fruitDao;
+    private OperationStrategy strategy;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
+        Storage.fruitStorage.put("kiwi", 70);
         fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         OperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitDao);
@@ -30,11 +30,6 @@ public class OperationStrategyImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, returnOperationHandler);
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyOperationHandler);
         strategy = new OperationStrategyImpl(operationHandlerMap);
-    }
-
-    @Before
-    public void setUp() {
-        Storage.fruitStorage.put("kiwi", 70);
     }
 
     @Test

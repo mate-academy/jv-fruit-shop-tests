@@ -1,6 +1,7 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.service.FileWriterService;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
@@ -9,7 +10,12 @@ public class FileWriterServiceImplTest {
     private static final String FRUITS_REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator();
-    private final FileWriterService fileWriterService = new FileWriterServiceImpl();
+    private FileWriterService fileWriterService;
+
+    @Before
+    public void setUp() {
+        fileWriterService = new FileWriterServiceImpl();
+    }
 
     @Test (expected = RuntimeException.class)
     public void writeToFile_NotExistingFile_NotOk() {

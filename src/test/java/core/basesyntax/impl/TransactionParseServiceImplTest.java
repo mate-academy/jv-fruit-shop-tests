@@ -2,12 +2,18 @@ package core.basesyntax.impl;
 
 import core.basesyntax.FruitTransaction;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParseServiceImplTest {
     private static final String VALID_DATA = "b,banana,10";
     private static final String INVALID_DATA = "b,banana,-50";
-    private final TransactionParseServiceImpl parseService = new TransactionParseServiceImpl();
+    private TransactionParseServiceImpl parseService;
+
+    @Before
+    public void setUp() {
+        parseService = new TransactionParseServiceImpl();
+    }
 
     @Test
     public void parse_ValidData_Ok() {

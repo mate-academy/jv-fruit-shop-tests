@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private FruitDao fruitDao = new FruitDaoImpl();
 
     @BeforeClass
     public static void beforeClass() {

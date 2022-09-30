@@ -4,13 +4,20 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final FruitTransaction transaction = new FruitTransaction();
-    private final SupplyOperationHandler supplyOperationHandler
-            = new SupplyOperationHandler(fruitDao);
+    private FruitDao fruitDao;
+    private FruitTransaction transaction;
+    private SupplyOperationHandler supplyOperationHandler;
+
+    @Before
+    public void setUp() {
+        fruitDao = new FruitDaoImpl();
+        transaction = new FruitTransaction();
+        supplyOperationHandler = new SupplyOperationHandler(fruitDao);
+    }
 
     @Test
     public void handle_SupplyOperation_Ok() {

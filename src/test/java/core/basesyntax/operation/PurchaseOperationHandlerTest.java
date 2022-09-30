@@ -4,13 +4,20 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final FruitTransaction transaction = new FruitTransaction();
-    private final PurchaseOperationHandler purchaseOperationHandler
-            = new PurchaseOperationHandler(fruitDao);
+    private FruitDao fruitDao;
+    private FruitTransaction transaction;
+    private PurchaseOperationHandler purchaseOperationHandler;
+
+    @Before
+    public void setUp() {
+        fruitDao = new FruitDaoImpl();
+        transaction = new FruitTransaction();
+        purchaseOperationHandler = new PurchaseOperationHandler(fruitDao);
+    }
 
     @Test
     public void handle_PurchaseOperation_Ok() {

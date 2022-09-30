@@ -4,14 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private final ReportService reportService = new ReportServiceImpl();
+    private ReportService reportService;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
+        reportService = new ReportServiceImpl();
         Storage.fruitStorage.clear();
     }
 
@@ -20,19 +21,19 @@ public class ReportServiceImplTest {
         Storage.fruitStorage.put("kiwi", 20);
         Storage.fruitStorage.put("apple", 50);
         Storage.fruitStorage.put("banana", 5);
-        String actualResult = reportService.createReport(Storage.fruitStorage);
-        String expectedResult = "fruit,quantity" + System.lineSeparator()
+        String actual = reportService.createReport(Storage.fruitStorage);
+        String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,5" + System.lineSeparator()
                 + "apple,50" + System.lineSeparator()
                 + "kiwi,20";
-        Assert.assertEquals(actualResult, expectedResult);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
     public void create_EmptyReport_Ok() {
-        String actualResult = reportService.createReport(Storage.fruitStorage);
-        String expectedResult = "fruit,quantity";
-        Assert.assertEquals(actualResult, expectedResult);
+        String actual = reportService.createReport(Storage.fruitStorage);
+        String expected = "fruit,quantity";
+        Assert.assertEquals(actual, expected);
     }
 
     @After

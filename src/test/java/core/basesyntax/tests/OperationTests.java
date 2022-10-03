@@ -2,6 +2,7 @@ package core.basesyntax.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.FruitTransaction;

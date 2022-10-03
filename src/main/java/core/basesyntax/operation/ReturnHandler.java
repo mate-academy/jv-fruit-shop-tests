@@ -12,8 +12,12 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        fruitsDao.addFruit(transaction.getFruit(),
-                transaction.getQuantity()
-                        + fruitsDao.getQuantityByFruit(transaction.getFruit()));
+        if (fruitsDao.contains(transaction.getFruit())) {
+            fruitsDao.addFruit(transaction.getFruit(),
+                    transaction.getQuantity()
+                            + fruitsDao.getQuantityByFruit(transaction.getFruit()));
+        } else {
+            fruitsDao.addFruit(transaction.getFruit(), transaction.getQuantity());
+        }
     }
 }

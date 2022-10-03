@@ -1,5 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.ParsingService;
 import core.basesyntax.service.ReadingService;
 import core.basesyntax.service.ReportService;
@@ -9,13 +12,11 @@ import core.basesyntax.service.impl.ReadingServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WritingServiceImpl;
 import org.junit.Test;
-
-import java.util.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class ServicesTest {
     private ReadingService readingService = new ReadingServiceImpl();
@@ -26,7 +27,7 @@ public class ServicesTest {
 
     @Test
     public void readingService_CorrectPath_OK() {
-        String filePath = "src/test/java/core/basesyntax/testResouces/test_read_from.csv";
+        String filePath = "src/test/java/core/basesyntax/test_resouces/test_read_from.csv";
         List<String> list = new ArrayList<>(Collections.singleton("type,fruit,quantity, b,banana,20, b,apple,100"));
         assertEquals(readingService.readFromFile(filePath).toString(), list.toString());
     }
@@ -96,7 +97,7 @@ public class ServicesTest {
 
     @Test
     public void writingService_CorrectData_Ok() {
-        String filePath = "src/test/java/core/basesyntax/testResouces/toFile.csv";
+        String filePath = "src/test/java/core/basesyntax/test_resouces/toFile.csv";
         String text = "test Text";
         boolean thrown = false;
         try {
@@ -114,13 +115,16 @@ public class ServicesTest {
 
     @Test
     public void writingService_NullDataOfText_NotOk() {
-        String filePath = "src/test/java/core/basesyntax/testResouces/toFile.csv";
+        String filePath = "src/test/java/core/basesyntax/test_resouces/toFile.csv";
         assertThrows(RuntimeException.class, () -> writingService.writeToFile(null, filePath));
     }
 
     @Test
     public void writingService_EmptyDataOfPath_NotOk() {
-        String filePath = "src/test/java/core/basesyntax/testResouces/toFile.csv";
         assertThrows(RuntimeException.class, () -> writingService.writeToFile("1324", ""));
+    }
+
+    @Test
+    public void name() {
     }
 }

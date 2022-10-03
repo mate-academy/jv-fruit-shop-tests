@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface FruitsDao {

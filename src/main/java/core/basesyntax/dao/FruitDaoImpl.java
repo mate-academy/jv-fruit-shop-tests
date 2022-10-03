@@ -1,8 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.storage.Storage;
-
-import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitsDao {

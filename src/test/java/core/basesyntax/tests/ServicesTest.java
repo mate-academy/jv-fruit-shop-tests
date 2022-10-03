@@ -14,8 +14,8 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WritingServiceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
@@ -29,8 +29,8 @@ public class ServicesTest {
     public void readingService_CorrectPath_OK() {
         String filePath = "src/test/java/core/basesyntax"
                 + "/test_resouces/test_read_from.csv";
-        List<String> list = new ArrayList<>
-                (Collections.singleton("type,fruit,quantity, b,banana,20, b,apple,100"));
+        List<String> list = new ArrayList<>(Collections
+                .singleton("type,fruit,quantity, b,banana,20, b,apple,100"));
         assertEquals(readingService.readFromFile(filePath).toString(), list.toString());
     }
 

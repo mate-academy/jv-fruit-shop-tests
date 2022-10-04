@@ -6,7 +6,6 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.Test;
 
 public class FruitTransactionTest {
-
     @Test
     public void fruitTransaction_CorrectData_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();

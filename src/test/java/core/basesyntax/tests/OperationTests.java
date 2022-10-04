@@ -1,7 +1,6 @@
 package core.basesyntax.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dao.FruitsDao;
@@ -35,11 +34,11 @@ public class OperationTests {
         assertEquals(fruitsDao.getQuantityByFruit(banana.getFruit()), expected);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void balanceHandler_NullData_NotOk() {
         FruitsDao fruitsDao = new FruitDaoImpl();
         operationHandler = new BalanceHandler(fruitsDao);
-        assertThrows(RuntimeException.class, () -> operationHandler.handle(null));
+        operationHandler.handle(null);
     }
 
     @Test
@@ -52,21 +51,21 @@ public class OperationTests {
         assertEquals(fruitsDao.getQuantityByFruit(banana.getFruit()), expected);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void purchaseHandler_NullData_NotOk() {
         FruitsDao fruitsDao = new FruitDaoImpl();
         fruitsDao.addFruit("banana", 20);
         operationHandler = new PurchaseHandler(fruitsDao);
-        assertThrows(RuntimeException.class, () -> operationHandler.handle(null));
+        operationHandler.handle(null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void purchaseHandler_FruitsDaoDontContainEnough_NotOk() {
         FruitsDao fruitsDao = new FruitDaoImpl();
         fruitsDao.addFruit("banana", 20);
         operationHandler = new PurchaseHandler(fruitsDao);
         banana.setQuantity(30);
-        assertThrows(RuntimeException.class, () -> operationHandler.handle(banana));
+        operationHandler.handle(banana);
     }
 
     @Test
@@ -88,11 +87,11 @@ public class OperationTests {
         assertEquals(expected,fruitsDao.getQuantityByFruit(banana.getFruit()));
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void returnHandler_NullData_NotOk() {
         FruitsDao fruitsDao = new FruitDaoImpl();
         operationHandler = new ReturnHandler(fruitsDao);
-        assertThrows(RuntimeException.class, () -> operationHandler.handle(null));
+        operationHandler.handle(null);
     }
 
     @Test
@@ -114,10 +113,10 @@ public class OperationTests {
         assertEquals(expected, fruitsDao.getQuantityByFruit(banana.getFruit()));
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void supplyHandler_NullData_NotOk() {
         FruitsDao fruitsDao = new FruitDaoImpl();
         operationHandler = new SupplyHandler(fruitsDao);
-        assertThrows(RuntimeException.class, () -> operationHandler.handle(null));
+        operationHandler.handle(null);
     }
 }

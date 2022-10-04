@@ -2,7 +2,6 @@ package core.basesyntax.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.ParsingService;
 import core.basesyntax.service.ReadingService;
@@ -34,22 +33,21 @@ public class ServicesTest {
         assertEquals(readingService.readFromFile(filePath).toString(), list.toString());
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readingService_IncorrectPath_NotOk() {
         String filePath = "wrongPath";
-        assertThrows(RuntimeException.class, () -> readingService.readFromFile(filePath));
+        readingService.readFromFile(filePath);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readingService_Null_NotOk() {
-        String filePath = null;
-        assertThrows(RuntimeException.class, () -> readingService.readFromFile(filePath));
+        readingService.readFromFile(null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readingService_Empty_NotOk() {
         String filePath = "";
-        assertThrows(RuntimeException.class, () -> readingService.readFromFile(filePath));
+        readingService.readFromFile(filePath);
     }
 
     @Test
@@ -59,22 +57,21 @@ public class ServicesTest {
         assertEquals(parsingService.parse(line).toString(), expected);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parsingService_IncorrectData_NotOk() {
         String line = "03,213,one";
-        assertThrows(RuntimeException.class, () -> parsingService.parse(line));
+        parsingService.parse(line);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parsingService_Null_NotOk() {
-        String line = null;
-        assertThrows(RuntimeException.class, () -> parsingService.parse(line));
+        parsingService.parse(null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parsingService_Empty_NotOk() {
         String line = "";
-        assertThrows(RuntimeException.class, () -> parsingService.parse(line));
+        parsingService.parse(line);
     }
 
     @Test
@@ -110,23 +107,20 @@ public class ServicesTest {
         assertFalse(thrown);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void writingService_NullDataOfPath_NotOk() {
-        assertThrows(RuntimeException.class, () -> writingService.writeToFile("123", null));
+        writingService.writeToFile("123", null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void writingService_NullDataOfText_NotOk() {
         String filePath = "src/test/java/core/basesyntax/test_resouces/toFile.csv";
-        assertThrows(RuntimeException.class, () -> writingService.writeToFile(null, filePath));
+        writingService.writeToFile(null, filePath);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void writingService_EmptyDataOfPath_NotOk() {
-        assertThrows(RuntimeException.class, () -> writingService.writeToFile("1324", ""));
+        writingService.writeToFile("1324", "");
     }
 
-    @Test
-    public void name() {
-    }
 }

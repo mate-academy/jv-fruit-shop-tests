@@ -7,15 +7,17 @@ import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceHandler;
 import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Test;
 
-public class StrategyTest {
+public class OperationStrategyImplTest {
     @Test
-    public void operationHandler_CorrectData_Ok() {
+    public void operationStrategy_CorrectData_Ok() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         FruitsDao fruitsDao = new FruitDaoImpl();
         OperationHandler operationHandler = new BalanceHandler(fruitsDao);
@@ -23,5 +25,10 @@ public class StrategyTest {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(operationStrategy.get(FruitTransaction.Operation.BALANCE), operationHandler);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruitsStorage.clear();
     }
 }

@@ -3,12 +3,19 @@ package core.basesyntax.tests;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionTest {
+    private FruitTransaction fruitTransaction;
+
+    @Before
+    public void setUp() throws Exception {
+        fruitTransaction = new FruitTransaction();
+    }
+
     @Test
     public void fruitTransaction_CorrectData_Ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation("b");
         assertEquals(FruitTransaction.Operation.BALANCE, fruitTransaction.getOperation());
         fruitTransaction.setOperation("r");
@@ -21,7 +28,6 @@ public class FruitTransactionTest {
 
     @Test (expected = RuntimeException.class)
     public void fruitTransaction_IncorrectData_NotOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation("inCorrect");
     }
 }

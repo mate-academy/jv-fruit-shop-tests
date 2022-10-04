@@ -30,4 +30,9 @@ public class ReportTest {
                 + "apple,1" + System.lineSeparator();
         assertEquals(expected, reportService.createReport(fruitStorage));
     }
+
+    @Test (expected = RuntimeException.class)
+    public void reportService_NullData_Ok() {
+        reportService.createReport(null);
+    }
 }

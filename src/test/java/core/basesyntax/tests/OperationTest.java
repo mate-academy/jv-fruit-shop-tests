@@ -14,7 +14,7 @@ import core.basesyntax.storage.Storage;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OperationTests {
+public class OperationTest {
     private OperationHandler operationHandler;
     private FruitTransaction banana = new FruitTransaction();
 

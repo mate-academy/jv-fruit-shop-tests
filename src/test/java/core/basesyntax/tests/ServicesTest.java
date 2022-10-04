@@ -26,8 +26,7 @@ public class ServicesTest {
 
     @Test
     public void readingService_CorrectPath_OK() {
-        String filePath = "src/test/java/core/basesyntax"
-                + "/test_resouces/test_read_from.csv";
+        String filePath = "src/test/java/test_resouces/test_read_from.csv";
         List<String> list = new ArrayList<>(Collections
                 .singleton("type,fruit,quantity, b,banana,20, b,apple,100"));
         assertEquals(readingService.readFromFile(filePath).toString(), list.toString());
@@ -96,7 +95,7 @@ public class ServicesTest {
 
     @Test
     public void writingService_CorrectData_Ok() {
-        String filePath = "src/test/java/core/basesyntax/test_resouces/toFile.csv";
+        String filePath = "src/test/java/test_resouces/toFile.csv";
         String text = "test Text";
         boolean thrown = false;
         try {
@@ -114,7 +113,7 @@ public class ServicesTest {
 
     @Test (expected = RuntimeException.class)
     public void writingService_NullDataOfText_NotOk() {
-        String filePath = "src/test/java/core/basesyntax/test_resouces/toFile.csv";
+        String filePath = "src/test/java/test_resoucestoFile.csv";
         writingService.writeToFile(null, filePath);
     }
 

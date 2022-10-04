@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
 
-public class StrategyTests {
+public class StrategyTest {
     @Test
     public void operationHandler_CorrectData_Ok() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();

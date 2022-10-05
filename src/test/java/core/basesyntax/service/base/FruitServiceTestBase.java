@@ -5,19 +5,18 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public abstract class FruitServiceTestBase<T extends FruitService> {
+    private List<String> transactions;
     private T instance;
 
     protected abstract T createInstance();
-
-    List<String> transactions;
 
     @Before
     public void setUp() {
@@ -66,12 +65,12 @@ public abstract class FruitServiceTestBase<T extends FruitService> {
     @Test
     public void generate_Report_Full_Storage_ok() {
         instance.addToStorage(transactions);
-        String expected = "fruit,quantity" +
-                System.lineSeparator() +
-                "banana,10" +
-                System.lineSeparator() +
-                "apple,10" +
-                System.lineSeparator();
+        String expected = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,10"
+                + System.lineSeparator()
+                + "apple,10"
+                + System.lineSeparator();
         assertEquals(expected, instance.generateReport());
     }
 }

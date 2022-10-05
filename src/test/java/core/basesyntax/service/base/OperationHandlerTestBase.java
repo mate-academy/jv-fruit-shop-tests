@@ -7,23 +7,28 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.OperationHandler;
+import java.util.Map;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.Map;
 
 public abstract class OperationHandlerTestBase {
-    private Map<Operation, ? extends OperationHandler> instances;
-
-    protected abstract Map<Operation, ? extends OperationHandler> getInstances();
-
     private Operation operation;
     private Fruit fruit;
     private FruitTransaction fruitTransaction;
+    private Map<Operation, ? extends OperationHandler> instances;
+
+    protected abstract Map<Operation, ? extends OperationHandler> getInstances();
 
     @Before
     public void setUp() {
         instances = getInstances();
         fruit = new Fruit("banana");
+    }
+
+    @AfterClass
+    public static void afterClass(){
+        Storage.storage.clear();
     }
 
     @Test

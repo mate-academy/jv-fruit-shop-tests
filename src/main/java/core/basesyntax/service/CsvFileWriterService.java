@@ -9,13 +9,16 @@ public class CsvFileWriterService implements WriterService {
     @Override
     public void writeToFile(final String data, final String filePath) {
         File file = new File(filePath);
+        if (!file.exists()) {
+            throw new RuntimeException("File " + filePath + " not found.");
+        }
         try (
                 FileWriter fileWriter = new FileWriter(file);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)
         ) {
             bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("File " + e + " not found.");
+            throw new RuntimeException("File " + filePath + " not found.");
         }
     }
 }

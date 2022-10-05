@@ -8,6 +8,9 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         int existingAmount = Storage.storage.get(fruitTransaction.getFruit());
         int purchaseAmount = fruitTransaction.getQuantity();
+        if (purchaseAmount < 0) {
+            throw new RuntimeException("Fruit purchase amount is negative");
+        }
         if (purchaseAmount > existingAmount) {
             throw new RuntimeException("Not enough fruits in the storage."
                     + " Existing amount:" + existingAmount

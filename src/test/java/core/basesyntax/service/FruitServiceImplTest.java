@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.base.FruitServiceTestBase;
 import java.util.Map;
 
 public class FruitServiceImplTest extends FruitServiceTestBase<FruitServiceImpl> {

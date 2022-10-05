@@ -1,9 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.service.base;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.FruitService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

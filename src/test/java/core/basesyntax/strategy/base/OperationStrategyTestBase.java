@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.base;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,7 @@ import core.basesyntax.service.BalanceOperationHandler;
 import core.basesyntax.service.PurchaseOperationHandler;
 import core.basesyntax.service.ReturnOperationHandler;
 import core.basesyntax.service.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import org.junit.Before;
 import org.junit.Test;
 

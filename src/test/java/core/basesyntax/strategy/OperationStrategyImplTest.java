@@ -6,9 +6,10 @@ import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.PurchaseOperationHandler;
 import core.basesyntax.service.ReturnOperationHandler;
 import core.basesyntax.service.SupplyOperationHandler;
+import core.basesyntax.strategy.base.OperationStrategyTestBase;
 import java.util.Map;
 
-public class OperationStrategyImplTest extends OperationStrategyTestBase<OperationStrategyImpl>  {
+public class OperationStrategyImplTest extends OperationStrategyTestBase<OperationStrategyImpl> {
     @Override
     protected OperationStrategyImpl createInstance() {
         Map<Operation, OperationHandler> operations = Map.of(

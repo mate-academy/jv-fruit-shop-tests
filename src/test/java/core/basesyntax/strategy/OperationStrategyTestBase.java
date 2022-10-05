@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceOperationHandler;
@@ -12,35 +12,31 @@ import org.junit.Test;
 
 public abstract class OperationStrategyTestBase<T extends OperationStrategy> {
     private T instance;
+
     protected abstract T createInstance();
 
     @Before
-    public void setUp(){
+    public void setUp() {
         instance = createInstance();
     }
 
     @Test
-    public void get_Purchase_Operation_Handler_ok(){
-        assertEquals(PurchaseOperationHandler.class,instance.get(Operation.PURCHASE).getClass());
+    public void get_Purchase_Operation_Handler_ok() {
+        assertEquals(PurchaseOperationHandler.class, instance.get(Operation.PURCHASE).getClass());
     }
 
     @Test
-    public void get_Balance_Operation_Handler_ok(){
-        assertEquals(BalanceOperationHandler.class,instance.get(Operation.BALANCE).getClass());
+    public void get_Balance_Operation_Handler_ok() {
+        assertEquals(BalanceOperationHandler.class, instance.get(Operation.BALANCE).getClass());
     }
 
     @Test
-    public void get_Return_Operation_Handler_ok(){
-        assertEquals(ReturnOperationHandler.class,instance.get(Operation.RETURN).getClass());
+    public void get_Return_Operation_Handler_ok() {
+        assertEquals(ReturnOperationHandler.class, instance.get(Operation.RETURN).getClass());
     }
 
     @Test
-    public void get_Supply_Operation_Handler_ok(){
-        assertEquals(SupplyOperationHandler.class,instance.get(Operation.SUPPLY).getClass());
+    public void get_Supply_Operation_Handler_ok() {
+        assertEquals(SupplyOperationHandler.class, instance.get(Operation.SUPPLY).getClass());
     }
-
-//    @Test
-//    public void get_Null_For_Inexistent_Operation_ok(){
-//        assertNull(instance.get(Operation.SUPPLY));
-//    }
 }

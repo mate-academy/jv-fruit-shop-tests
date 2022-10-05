@@ -2,13 +2,13 @@ package core.basesyntax.service.base;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriterService;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.List;
 
-public abstract class WriterAndReadServiceTestBase<W extends CsvFileWriterService,R extends CsvFileReaderService> {
+public abstract class WriterAndReadServiceTestBase<W extends WriterService,R extends ReaderService> {
     private W writerInstance;
     private R readerInstance;
 

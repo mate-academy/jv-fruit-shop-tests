@@ -13,38 +13,34 @@ import org.junit.Test;
 
 public class SupplyHandlerTest {
     private OperationHandler operationHandler;
-    private FruitTransaction banana = new FruitTransaction();
+    private FruitTransaction fruitTransaction;
+    private FruitsDao fruitsDao;
 
     @Before
     public void setUp() throws Exception {
-        banana.setFruit("banana");
-        banana.setQuantity(10);
+        fruitsDao = new FruitDaoImpl();
+        fruitTransaction = new FruitTransaction();
+        operationHandler = new SupplyHandler(fruitsDao);
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(10);
         Storage.fruitsStorage.clear();
     }
 
     @Test
-    public void supplyHandler_CorrectDataButFruitDontExist_Ok() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
-        operationHandler = new SupplyHandler(fruitsDao);
-        operationHandler.handle(banana);
-        int expected = 10;
-        assertEquals(expected, fruitsDao.getQuantityByFruit(banana.getFruit()));
+    public void supplyHandler_CorrectDataButFruitDoNotExist_Ok() {
+        operationHandler.handle(fruitTransaction);
+        assertEquals(10, fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()));
     }
 
     @Test
     public void supplyHandler_CorrectDataFruitExist_Ok() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
-        operationHandler = new SupplyHandler(fruitsDao);
         fruitsDao.addFruit("banana", 0);
-        operationHandler.handle(banana);
-        int expected = 10;
-        assertEquals(expected, fruitsDao.getQuantityByFruit(banana.getFruit()));
+        operationHandler.handle(fruitTransaction);
+        assertEquals(10, fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()));
     }
 
     @Test (expected = RuntimeException.class)
     public void supplyHandler_NullData_NotOk() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
-        operationHandler = new SupplyHandler(fruitsDao);
         operationHandler.handle(null);
     }
 }

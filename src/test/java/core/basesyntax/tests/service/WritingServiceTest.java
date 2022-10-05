@@ -1,25 +1,23 @@
 package core.basesyntax.tests.service;
 
-import static org.junit.Assert.assertFalse;
-
 import core.basesyntax.service.WritingService;
 import core.basesyntax.service.impl.WritingServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 
-public class WritingTest {
-    private WritingService writingService = new WritingServiceImpl();
+public class WritingServiceTest {
+    private WritingService writingService;
+
+    @Before
+    public void setUp() throws Exception {
+        writingService = new WritingServiceImpl();
+    }
 
     @Test
     public void writingService_CorrectData_Ok() {
         String filePath = "src/test/java/test_resouces/toFile.csv";
         String text = "test Text";
-        boolean thrown = false;
-        try {
-            writingService.writeToFile(text, filePath);
-        } catch (IndexOutOfBoundsException e) {
-            thrown = true;
-        }
-        assertFalse(thrown);
+        writingService.writeToFile(text, filePath);
     }
 
     @Test (expected = RuntimeException.class)

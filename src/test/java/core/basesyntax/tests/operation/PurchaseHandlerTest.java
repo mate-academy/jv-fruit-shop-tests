@@ -8,44 +8,47 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseHandler;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
     private OperationHandler operationHandler;
-    private FruitTransaction banana = new FruitTransaction();
+    private FruitsDao fruitsDao;
+    private FruitTransaction fruitTransaction;
 
     @Before
     public void setUp() throws Exception {
-        banana.setFruit("banana");
-        banana.setQuantity(10);
-        Storage.fruitsStorage.clear();
+        fruitTransaction = new FruitTransaction();
+        fruitsDao = new FruitDaoImpl();
+        operationHandler = new PurchaseHandler(fruitsDao);
+        fruitsDao.addFruit("banana", 20);
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(10);
     }
 
     @Test
     public void purchaseHandler_CorrectData_Ok() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
         fruitsDao.addFruit("banana", 20);
-        operationHandler = new PurchaseHandler(fruitsDao);
-        operationHandler.handle(banana);
-        int expected = 10;
-        assertEquals(fruitsDao.getQuantityByFruit(banana.getFruit()), expected);
+        operationHandler.handle(fruitTransaction);
+        assertEquals(fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()), 10);
+        Storage.fruitsStorage.clear();
     }
 
     @Test (expected = RuntimeException.class)
     public void purchaseHandler_NullData_NotOk() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
         fruitsDao.addFruit("banana", 20);
-        operationHandler = new PurchaseHandler(fruitsDao);
         operationHandler.handle(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void purchaseHandler_FruitsDaoDontContainEnough_NotOk() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
-        fruitsDao.addFruit("banana", 20);
-        operationHandler = new PurchaseHandler(fruitsDao);
-        banana.setQuantity(30);
-        operationHandler.handle(banana);
+    public void purchaseHandler_FruitsDaoDoNotContainEnough_NotOk() {
+        fruitTransaction.setQuantity(30);
+        operationHandler.handle(fruitTransaction);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruitsStorage.clear();
     }
 }

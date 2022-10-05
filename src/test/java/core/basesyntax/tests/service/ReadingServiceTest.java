@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 
-public class ReadingTest {
+public class ReadingServiceTest {
     private ReadingService readingService = new ReadingServiceImpl();
 
     @Test

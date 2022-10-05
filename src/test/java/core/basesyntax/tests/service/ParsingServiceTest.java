@@ -2,11 +2,18 @@ package core.basesyntax.tests.service;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.ParsingService;
 import core.basesyntax.service.impl.ParsingServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 
-public class ParsingService {
-    private core.basesyntax.service.ParsingService parsingService = new ParsingServiceImpl();
+public class ParsingServiceTest {
+    private ParsingService parsingService;
+
+    @Before
+    public void setUp() throws Exception {
+        parsingService = new ParsingServiceImpl();
+    }
 
     @Test
     public void parsingService_CorrectData_Ok() {

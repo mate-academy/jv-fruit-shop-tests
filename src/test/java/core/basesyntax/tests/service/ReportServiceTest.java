@@ -6,14 +6,21 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
-public class ReportTest {
-    private ReportService reportService = new ReportServiceImpl();
+public class ReportServiceTest {
+    private ReportService reportService;
+    private Map<String, Integer> fruitStorage;
+
+    @Before
+    public void setUp() throws Exception {
+        reportService = new ReportServiceImpl();
+        fruitStorage = new HashMap<>();
+    }
 
     @Test
     public void reportService_CorrectDataOneLine_Ok() {
-        Map<String, Integer> fruitStorage = new HashMap<>();
         fruitStorage.put("banana", 120);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,120" + System.lineSeparator();
@@ -22,7 +29,6 @@ public class ReportTest {
 
     @Test
     public void reportService_CorrectDataTwoLines_Ok() {
-        Map<String, Integer> fruitStorage = new HashMap<>();
         fruitStorage.put("banana", 120);
         fruitStorage.put("apple", 1);
         String expected = "fruit,quantity" + System.lineSeparator()

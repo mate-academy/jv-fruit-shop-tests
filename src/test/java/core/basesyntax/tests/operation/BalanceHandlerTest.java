@@ -1,29 +1,44 @@
 package core.basesyntax.tests.operation;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceHandler;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
     private OperationHandler operationHandler;
-    private FruitTransaction banana = new FruitTransaction();
+    private FruitsDao fruitsDao;
+    private FruitTransaction fruitTransaction;
 
     @Before
     public void setUp() throws Exception {
-        banana.setFruit("banana");
-        banana.setQuantity(10);
-        Storage.fruitsStorage.clear();
+        fruitTransaction = new FruitTransaction();
+        fruitsDao = new FruitDaoImpl();
+        operationHandler = new BalanceHandler(fruitsDao);
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(10);
     }
 
     @Test (expected = RuntimeException.class)
     public void balanceHandler_NullData_NotOk() {
-        FruitsDao fruitsDao = new FruitDaoImpl();
-        operationHandler = new BalanceHandler(fruitsDao);
         operationHandler.handle(null);
+    }
+
+    @Test
+    public void balanceHandler_CorrectData_Ok() {
+        operationHandler.handle(fruitTransaction);
+        assertEquals(fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()), 10);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruitsStorage.clear();
     }
 }

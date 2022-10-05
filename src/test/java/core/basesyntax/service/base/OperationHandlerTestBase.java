@@ -27,7 +27,7 @@ public abstract class OperationHandlerTestBase {
     }
 
     @AfterClass
-    public static void afterClass(){
+    public static void afterClass() {
         Storage.storage.clear();
     }
 

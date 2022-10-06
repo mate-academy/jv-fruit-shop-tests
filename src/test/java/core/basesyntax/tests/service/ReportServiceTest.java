@@ -4,39 +4,40 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import java.util.HashMap;
-import java.util.Map;
-import org.junit.Before;
+import core.basesyntax.storage.Storage;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
-    private ReportService reportService;
-    private Map<String, Integer> fruitStorage;
+    private static ReportService reportService;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
-        fruitStorage = new HashMap<>();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruitsStorage.clear();
     }
 
     @Test
     public void reportService_CorrectDataOneLine_Ok() {
-        fruitStorage.put("banana", 120);
+        Storage.fruitsStorage.put("banana", 20);
+        Storage.fruitsStorage.put("apple", 120);
+        String actual = reportService.createReport(Storage.fruitsStorage);
         String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,120" + System.lineSeparator();
-        String actual = reportService.createReport(fruitStorage);
-        assertEquals(expected, actual);
+                + "banana,20" + System.lineSeparator()
+                + "apple,120" + System.lineSeparator();
+        assertEquals(actual, expected);
     }
 
     @Test
-    public void reportService_CorrectDataTwoLines_Ok() {
-        fruitStorage.put("banana", 120);
-        fruitStorage.put("apple", 1);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,120" + System.lineSeparator()
-                + "apple,1" + System.lineSeparator();
-        String actual = reportService.createReport(fruitStorage);
-        assertEquals(expected, actual);
+    public void reportService_EmptyData_Ok() {
+        String actual = reportService.createReport(Storage.fruitsStorage);
+        String expected = "fruit,quantity" + System.lineSeparator();
+        assertEquals(actual, expected);
     }
 
     @Test (expected = RuntimeException.class)

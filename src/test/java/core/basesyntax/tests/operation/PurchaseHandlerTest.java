@@ -22,22 +22,21 @@ public class PurchaseHandlerTest {
         fruitTransaction = new FruitTransaction();
         fruitsDao = new FruitDaoImpl();
         operationHandler = new PurchaseHandler(fruitsDao);
-        fruitsDao.addFruit("banana", 20);
+        Storage.fruitsStorage.put("banana", 20);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(10);
     }
 
     @Test
     public void purchaseHandler_CorrectData_Ok() {
-        fruitsDao.addFruit("banana", 20);
         operationHandler.handle(fruitTransaction);
-        assertEquals(fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()), 10);
-        Storage.fruitsStorage.clear();
+        int expected = 10;
+        int actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void purchaseHandler_NullData_NotOk() {
-        fruitsDao.addFruit("banana", 20);
         operationHandler.handle(null);
     }
 

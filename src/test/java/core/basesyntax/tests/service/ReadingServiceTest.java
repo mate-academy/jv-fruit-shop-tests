@@ -10,14 +10,16 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReadingServiceTest {
-    private ReadingService readingService = new ReadingServiceImpl();
+    private static final String FILE_PATH
+            = "src/test/java/test_resouces/test_read_from.csv";
+    private ReadingService readingService;
 
     @Test
     public void readingService_CorrectPath_OK() {
-        String filePath = "src/test/java/test_resouces/test_read_from.csv";
+        readingService = new ReadingServiceImpl();
         List<String> list = new ArrayList<>(Collections
                 .singleton("type,fruit,quantity, b,banana,20, b,apple,100"));
-        assertEquals(readingService.readFromFile(filePath).toString(), list.toString());
+        assertEquals(readingService.readFromFile(FILE_PATH).toString(), list.toString());
     }
 
     @Test (expected = RuntimeException.class)

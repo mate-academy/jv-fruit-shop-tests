@@ -8,6 +8,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.SupplyHandler;
 import core.basesyntax.storage.Storage;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,24 +24,32 @@ public class SupplyHandlerTest {
         operationHandler = new SupplyHandler(fruitsDao);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(10);
-        Storage.fruitsStorage.clear();
     }
 
     @Test
     public void supplyHandler_CorrectDataButFruitDoNotExist_Ok() {
         operationHandler.handle(fruitTransaction);
-        assertEquals(10, fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()));
+        int expected = 10;
+        int actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        assertEquals(expected, actual);
     }
 
     @Test
     public void supplyHandler_CorrectDataFruitExist_Ok() {
-        fruitsDao.addFruit("banana", 0);
+        Storage.fruitsStorage.put("banana", 0);
         operationHandler.handle(fruitTransaction);
-        assertEquals(10, fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()));
+        int expected = 10;
+        int actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void supplyHandler_NullData_NotOk() {
         operationHandler.handle(null);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruitsStorage.clear();
     }
 }

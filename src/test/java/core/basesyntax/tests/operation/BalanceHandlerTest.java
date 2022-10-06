@@ -34,7 +34,9 @@ public class BalanceHandlerTest {
     @Test
     public void balanceHandler_CorrectData_Ok() {
         operationHandler.handle(fruitTransaction);
-        assertEquals(fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()), 10);
+        int expected = 10;
+        int actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        assertEquals(expected, actual);
     }
 
     @After

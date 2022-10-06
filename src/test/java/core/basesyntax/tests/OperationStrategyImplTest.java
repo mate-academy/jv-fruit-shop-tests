@@ -10,12 +10,10 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseHandler;
 import core.basesyntax.operation.ReturnHandler;
 import core.basesyntax.operation.SupplyHandler;
-import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,11 +50,5 @@ public class OperationStrategyImplTest {
                 .get(FruitTransaction.Operation.RETURN), operationHandlerReturn);
         assertEquals(operationStrategy
                 .get(FruitTransaction.Operation.SUPPLY), operationHandlerSupply);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        operationHandlerMap.clear();
-        Storage.fruitsStorage.clear();
     }
 }

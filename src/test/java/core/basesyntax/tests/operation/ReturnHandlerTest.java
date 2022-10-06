@@ -28,16 +28,19 @@ public class ReturnHandlerTest {
 
     @Test
     public void returnHandler_CorrectData_Ok() {
-        fruitsDao.addFruit("banana", 0);
+        Storage.fruitsStorage.put("banana", 0);
         operationHandler.handle(fruitTransaction);
         int expected = 10;
-        assertEquals(expected,fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()));
+        int actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        assertEquals(expected,actual);
     }
 
     @Test
     public void returnHandler_CorrectDataFruitDoNotExist_Ok() {
         operationHandler.handle(fruitTransaction);
-        assertEquals(10, fruitsDao.getQuantityByFruit(fruitTransaction.getFruit()));
+        int expected = 10;
+        int actual = Storage.fruitsStorage.get(fruitTransaction.getFruit());
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

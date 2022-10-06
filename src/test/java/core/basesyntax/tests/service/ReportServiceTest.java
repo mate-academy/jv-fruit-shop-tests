@@ -24,7 +24,8 @@ public class ReportServiceTest {
         fruitStorage.put("banana", 120);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,120" + System.lineSeparator();
-        assertEquals(expected, reportService.createReport(fruitStorage));
+        String actual = reportService.createReport(fruitStorage);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -34,7 +35,8 @@ public class ReportServiceTest {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,120" + System.lineSeparator()
                 + "apple,1" + System.lineSeparator();
-        assertEquals(expected, reportService.createReport(fruitStorage));
+        String actual = reportService.createReport(fruitStorage);
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

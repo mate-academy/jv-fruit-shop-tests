@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ReadingServiceTest {
     private static final String FILE_PATH
-            = "src/test/java/test_resouces/test_read_from.csv";
+            = "src/test/resources/test_read_from.csv";
     private ReadingService readingService;
 
     @Test

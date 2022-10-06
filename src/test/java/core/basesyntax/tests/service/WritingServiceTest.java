@@ -15,7 +15,7 @@ public class WritingServiceTest {
 
     @Test
     public void writingService_CorrectData_Ok() {
-        String filePath = "src/test/java/test_resouces/toFile.csv";
+        String filePath = "src/test/resources/toFile.csv";
         String text = "test Text";
         writingService.writeToFile(text, filePath);
     }

@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,6 +21,12 @@ public class BalanceOperationHandlerTest {
         operation = Operation.BALANCE;
         fruit = new Fruit("banana");
         handler = new BalanceOperationHandler();
+        Storage.storage.clear();
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.storage.clear();
     }
 
     @Test

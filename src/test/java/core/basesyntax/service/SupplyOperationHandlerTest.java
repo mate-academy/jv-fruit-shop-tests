@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;

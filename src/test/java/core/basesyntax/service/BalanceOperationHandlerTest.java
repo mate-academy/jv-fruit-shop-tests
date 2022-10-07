@@ -30,14 +30,14 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void handle_Balance_Operation_ok() {
+    public void handle_ok() {
         transaction = new FruitTransaction(operation, fruit, 10);
         handler.handle(transaction);
         assertEquals(Integer.valueOf(10), Storage.storage.get(fruit));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_Balance_Operation_notOk() {
+    public void handle_notOk() {
         transaction = new FruitTransaction(operation, fruit, -10);
         handler.handle(transaction);
     }

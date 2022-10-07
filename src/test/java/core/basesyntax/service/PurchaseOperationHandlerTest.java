@@ -31,20 +31,20 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_Purchase_Operation_ok() {
+    public void handle_ok() {
         transaction = new FruitTransaction(operation, fruit, 1);
         handler.handle(transaction);
         assertEquals(Integer.valueOf(9), Storage.storage.get(fruit));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_Purchase_Operation_notOk() {
+    public void handle_notOk() {
         transaction = new FruitTransaction(operation, fruit, -10);
         handler.handle(transaction);
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_Purchase_Operation_Not_Enough_Quantity_notOk() {
+    public void handle_notEnoughQuantity_notOk() {
         transaction = new FruitTransaction(operation, fruit, 100);
         handler.handle(transaction);
     }

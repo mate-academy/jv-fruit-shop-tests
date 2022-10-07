@@ -31,14 +31,14 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_Return_Operation_ok() {
+    public void handle_ok() {
         transaction = new FruitTransaction(operation, fruit, 1);
         handler.handle(transaction);
         assertEquals(Integer.valueOf(10), Storage.storage.get(fruit));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_Return_Operation_notOk() {
+    public void handle_notOk() {
         transaction = new FruitTransaction(operation, fruit, -1);
         handler.handle(transaction);
     }

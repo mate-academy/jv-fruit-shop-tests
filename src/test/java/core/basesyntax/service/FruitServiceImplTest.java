@@ -49,7 +49,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void add_Correct_Data_To_Storage_ok() {
+    public void addToStorage_correctData_ok() {
         service.addToStorage(transactions);
         Map<Fruit, Integer> expected = Map.of(
                 new Fruit("banana"), 10,
@@ -59,7 +59,7 @@ public class FruitServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void add_Null_To_Storage_notOk() {
+    public void addToStorage_nullTransaction_notOk() {
         transactions = new ArrayList<>();
         transactions.add("fruit,quantity");
         transactions.add(null);
@@ -67,12 +67,12 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void generate_Report_Empty_Storage_ok() {
+    public void generateReport_emptyStorage_ok() {
         assertEquals("fruit,quantity" + System.lineSeparator(), service.generateReport());
     }
 
     @Test
-    public void generate_Report_Full_Storage_ok() {
+    public void generateReport_fullStorage_ok() {
         service.addToStorage(transactions);
         String expected = "fruit,quantity"
                 + System.lineSeparator()

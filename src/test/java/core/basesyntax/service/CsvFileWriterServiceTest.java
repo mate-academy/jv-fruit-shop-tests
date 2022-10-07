@@ -15,7 +15,7 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test
-    public void write_Data_To_Correct_File_ok() {
+    public void writeToFile_correctFile_ok() {
         String testString = "test"
                 + System.lineSeparator()
                 + "writing"
@@ -33,7 +33,7 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_Data_To_Incorrect_File_notOk() {
+    public void writeToFile_incorrectFile_notOk() {
         writer.writeToFile("test", "src/test/resources/write-test1.csv");
     }
 }

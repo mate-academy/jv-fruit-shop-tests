@@ -31,14 +31,14 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void handle_Supply_Operation_ok() {
+    public void handle_ok() {
         transaction = new FruitTransaction(operation, fruit, 1);
         handler.handle(transaction);
         assertEquals(Integer.valueOf(11), Storage.storage.get(fruit));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_Supply_Operation_notOk() {
+    public void handle_notOk() {
         transaction = new FruitTransaction(operation, fruit, -1);
         handler.handle(transaction);
     }

@@ -16,7 +16,7 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void read_Data_From_Correct_File_ok() {
+    public void readFromFile_correctFile_ok() {
         List<String> expected = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -32,7 +32,7 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_Data_From_Incorrect_File_notOk() {
+    public void readFromFile_incorrectFile_notOk() {
         reader.readFromFile("src/test/resources/read-test1.csv");
     }
 }

@@ -19,6 +19,9 @@ public class InputDataServiceImpl implements InputDataService {
 
     private FruitTransaction getFromString(String line) {
         String[] fields = line.split(",");
+        if (!line.contains(new StringBuilder(","))) {
+            throw new RuntimeException("Invalid input data format " + line);
+        }
         Operation operation = Operation.getEnumByTitle(fields[OPERATION_POSITION]);
         String fruitName = fields[FRUIT_POSITION];
         int quantity = Integer.parseInt(fields[FRUIT_QUANTITY_POSITION]);

@@ -14,12 +14,12 @@ public class PurchaseService implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         int beginAmount;
         int newAmount;
-        beginAmount = fruitDao.getAmount(fruitTransaction.getFruit());
+        beginAmount = fruitDao.getAmount(fruitTransaction.getFruitName());
         if (fruitTransaction.getQuantity() > beginAmount) {
             throw new RuntimeException(
                     "Impossible transaction. There aren`t needed value of fruits");
         }
         newAmount = beginAmount - fruitTransaction.getQuantity();
-        fruitDao.changeAmount(fruitTransaction.getFruit(), newAmount);
+        fruitDao.changeAmount(fruitTransaction.getFruitName(), newAmount);
     }
 }

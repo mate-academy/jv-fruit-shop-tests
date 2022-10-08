@@ -21,11 +21,11 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-    public String getFruit() {
+    public String getFruitName() {
         return fruitName;
     }
 
-    public void setFruit(String fruitName) {
+    public void setFruitName(String fruitName) {
         this.fruitName = fruitName;
     }
 

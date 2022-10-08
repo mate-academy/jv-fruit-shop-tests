@@ -3,6 +3,8 @@ package core.basesyntax.fileservice.impl;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.fileservice.CsvFileWriterService;
+
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,6 +27,7 @@ public class CsvFileWriterServiceImplTest {
     private final File writerFirstTestFIle = new File(FIRST_PATH);
     private final File writerSecondTestFIle = new File(SECOND_PATH);
     private final CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
+
 
     @Test
     public void correctFIlePath_Ok() throws IOException {

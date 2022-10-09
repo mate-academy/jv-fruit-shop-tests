@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class FileWriterServiceImplTest {
 
@@ -25,6 +25,18 @@ public class FileWriterServiceImplTest {
     public void writeToFile_invalidFilePath_notOk() {
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         String invalidFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tets/testFile.csv";
-        fileWriterService.writeToFile(invalidFilePath,"invalidTestText");
+        fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
+    }
+
+    @Test
+    public void read_correctExceptionMessage_ok() {
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        String invalidFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tets/testFile.csv";
+        try {
+            fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
+            fail("Exception not thrown");
+        } catch (RuntimeException e) {
+            assertEquals("Can't write to file " + invalidFilePath, e.getMessage());
+        }
     }
 }

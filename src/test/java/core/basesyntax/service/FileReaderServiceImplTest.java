@@ -1,24 +1,24 @@
 package core.basesyntax.service;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         Files.writeString(Path.of("/home/nata/Java/Projects/jv-fruit-shop-tests/testFile.csv"),
-                "b,banana,0" + System.lineSeparator() +
-                        "b,apple,10" + System.lineSeparator() +
-                        "s,banana,15" + System.lineSeparator() +
-                        "p,banana,5" + System.lineSeparator() +
-                        "r,apple,20" + System.lineSeparator());
+                "b,banana,0" + System.lineSeparator()
+                        + "b,apple,10" + System.lineSeparator()
+                        + "s,banana,15" + System.lineSeparator()
+                        + "p,banana,5" + System.lineSeparator()
+                        + "r,apple,20" + System.lineSeparator());
     }
 
     @Test
@@ -39,5 +39,17 @@ public class FileReaderServiceImplTest {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         String invalidFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tests/testFiles.csv";
         fileReaderService.read(invalidFilePath);
+    }
+
+    @Test
+    public void read_correctExceptionMessage_ok() {
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        String invalidFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tests/testFiles.csv";
+        try {
+            fileReaderService.read(invalidFilePath);
+            fail("Exception not thrown");
+        } catch (RuntimeException e) {
+            assertEquals("Can't read from file " + invalidFilePath, e.getMessage());
+        }
     }
 }

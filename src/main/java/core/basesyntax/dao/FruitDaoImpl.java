@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -20,7 +20,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public HashMap<String, Integer> getStorageData() {
+    public TreeMap<String, Integer> getStorageData() {
         return Storage.getFruits();
     }
 }

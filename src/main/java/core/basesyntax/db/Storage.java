@@ -1,11 +1,11 @@
 package core.basesyntax.db;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Storage {
-    private static final HashMap<String, Integer> fruits = new HashMap<>();
+    private static final TreeMap<String, Integer> fruits = new TreeMap<>();
 
-    public static HashMap<String, Integer> getFruits() {
+    public static TreeMap<String, Integer> getFruits() {
         return fruits;
     }
 }

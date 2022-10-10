@@ -1,14 +1,10 @@
 package core.basesyntax.service;
 
-import org.junit.Test;
-
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-
-
+import java.util.List;
+import org.junit.Test;
 
 public class InputDataServiceImplTest {
     @Test
@@ -18,7 +14,8 @@ public class InputDataServiceImplTest {
         String validLineTwo = "r,banana,100";
         String validLineThree = "p,orange,50";
         List<String> validInputTextList = List.of(validLineOne, validLineTwo, validLineThree);
-        assertEquals(3, inputDataService.stringToFruitTransactionConverter(validInputTextList).size());
+        assertEquals(3,
+                inputDataService.stringToFruitTransactionConverter(validInputTextList).size());
     }
 
     @Test

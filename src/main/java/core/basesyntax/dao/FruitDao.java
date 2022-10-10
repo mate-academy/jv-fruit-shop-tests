@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public interface FruitDao {
     int getAmount(String fruitName);
@@ -9,5 +9,5 @@ public interface FruitDao {
 
     void changeAmount(String fruitName, int newAmount);
 
-    HashMap<String, Integer> getStorageData();
+    TreeMap<String, Integer> getStorageData();
 }

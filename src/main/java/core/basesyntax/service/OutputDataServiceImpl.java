@@ -21,6 +21,10 @@ public class OutputDataServiceImpl implements OutputDataService {
     }
 
     private String getFromMap(Map.Entry<String, Integer> set) {
+        if (set.getValue() == null) {
+            throw new NullPointerException("Can't get data from the storage, because "
+                    + set.getKey() + " has \"null\" value");
+        }
         String fruitName = set.getKey();
         String quantity = set.getValue().toString();
         return fruitName + "," + quantity + System.lineSeparator();

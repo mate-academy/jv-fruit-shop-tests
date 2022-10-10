@@ -73,7 +73,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void supplyOperation_Ok() {
+    public void calculate_supplyOperation_Ok() {
         fruitService.calculate(appleSupply);
         Integer actual = Storage.fruits.get(APPLE);
         Integer expected = 50;
@@ -81,7 +81,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void returnOperation_Ok() {
+    public void calculate_returnOperation_Ok() {
         fruitService.calculate(appleReturn);
         Integer actual = Storage.fruits.get(APPLE);
         Integer expected = 50;
@@ -89,7 +89,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void purchaseOperation_Ok() {
+    public void calculate_purchaseOperation_Ok() {
         Storage.fruits.put(APPLE, 100);
         fruitService.calculate(applePurchase);
         Integer actual = Storage.fruits.get(APPLE);
@@ -97,13 +97,9 @@ public class FruitServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void purchaseOperation_purchaseValueMoreThanValueInStorage_NotOk() {
-        try {
-            fruitService.calculate(applePurchase);
-        } catch (RuntimeException e) {
-            return;
-        }
+    @Test(expected = RuntimeException.class)
+    public void calculate_purchaseOperation_purchaseValueMoreThanValueInStorage_NotOk() {
+        fruitService.calculate(applePurchase);
         fail("If statement in storage less than purchase value "
                 + " Runtime exception should be thrown");
     }

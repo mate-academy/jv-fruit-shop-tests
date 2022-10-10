@@ -1,7 +1,5 @@
 package core.basesyntax.fileservice.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.fileservice.CsvFileWriterService;
 import java.io.File;
 import java.io.IOException;
@@ -27,22 +25,16 @@ public class CsvFileWriterServiceImplTest {
     private final CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
 
     @Test
-    public void correctFIlePath_Ok() throws IOException {
+    public void writeToFile_correctFilePath_Ok() throws IOException {
         csvFileWriterService.writeToFile(TEXT, FIRST_PATH);
-        csvFileWriterService.writeToFile(TEXT, SECOND_PATH);
-        List<String> infoFromFirstPath = Files.readAllLines(Path.of(FIRST_PATH));
-        List<String> infoFromSecondPath = Files.readAllLines(Path.of(SECOND_PATH));
-        Assert.assertEquals(infoFromSecondPath, infoFromFirstPath);
+        List<String> actual = Files.readAllLines(Path.of(FIRST_PATH));
+        List<String> expected = List.of(TEXT);
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void incorrectPath_NotOK() {
-        try {
-            csvFileWriterService.writeToFile(TEXT, INCORRECT_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("IOException should be thrown if path is incorrect");
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_incorrectPath_NotOK() {
+        csvFileWriterService.writeToFile(TEXT, INCORRECT_PATH);
     }
 
     @After

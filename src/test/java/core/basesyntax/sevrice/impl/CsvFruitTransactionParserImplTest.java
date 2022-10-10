@@ -43,25 +43,17 @@ public class CsvFruitTransactionParserImplTest {
         Assert.assertEquals(expected.get(FIRST_ELEMENT_INDEX), actual.get(FIRST_ELEMENT_INDEX));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void usedIncorrectInfo_NotOk() {
         testList.add(INCORRECT_INFO);
-        try {
-            csvFruitTransactionParser.parse(testList);
-        } catch (RuntimeException e) {
-            return;
-        }
+        csvFruitTransactionParser.parse(testList);
         fail("You should check on correct input data");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void nullList_notOk() {
         List<String> nullList = null;
-        try {
-            csvFruitTransactionParser.parse(nullList);
-        } catch (RuntimeException e) {
-            return;
-        }
+        csvFruitTransactionParser.parse(nullList);
         fail("If input data is equal to null Runtime exception must be thrown");
     }
 

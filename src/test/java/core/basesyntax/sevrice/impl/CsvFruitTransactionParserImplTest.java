@@ -14,8 +14,6 @@ import org.junit.Test;
 
 public class CsvFruitTransactionParserImplTest {
     private static final int FIRST_ELEMENT_INDEX = 0;
-    private static final String INCORRECT_INFO = "Balance,pig,-100500";
-    private static final String APPLE_BALANCE = "b,apple,100";
     private static final Fruit APPLE = new Fruit("apple");
     private static final FruitTransaction APPLE_BALANCE_OPERATION
             = new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -36,8 +34,9 @@ public class CsvFruitTransactionParserImplTest {
     }
 
     @Test
-    public void usedCorrectInfo_OK() {
-        testList.add(APPLE_BALANCE);
+    public void parse_correctInfo_OK() {
+        String appleBalance = "b,apple,100";
+        testList.add(appleBalance);
         List<FruitTransaction> actual = csvFruitTransactionParser.parse(testList);
         List<FruitTransaction> expected = transactions;
         Assert.assertEquals(expected.get(FIRST_ELEMENT_INDEX), actual.get(FIRST_ELEMENT_INDEX));
@@ -45,7 +44,8 @@ public class CsvFruitTransactionParserImplTest {
 
     @Test(expected = RuntimeException.class)
     public void usedIncorrectInfo_NotOk() {
-        testList.add(INCORRECT_INFO);
+        String incorrectInfo = "Balance,pig,-100500";
+        testList.add(incorrectInfo);
         csvFruitTransactionParser.parse(testList);
         fail("You should check on correct input data");
     }

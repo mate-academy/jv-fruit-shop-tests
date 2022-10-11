@@ -30,11 +30,11 @@ public class Main {
         SupplyService supplyService = new SupplyService(fruitDao);
         ReturnService returnService = new ReturnService(fruitDao);
 
-        Map<Operation, OperationHandler> operationOperationsMap = new HashMap<>();
-        operationOperationsMap.put(Operation.BALANCE, balanceService);
-        operationOperationsMap.put(Operation.PURCHASE, purchaseService);
-        operationOperationsMap.put(Operation.SUPPLY, supplyService);
-        operationOperationsMap.put(Operation.RETURN, returnService);
+        Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
+        operationOperationHandlerMap.put(Operation.BALANCE, balanceService);
+        operationOperationHandlerMap.put(Operation.PURCHASE, purchaseService);
+        operationOperationHandlerMap.put(Operation.SUPPLY, supplyService);
+        operationOperationHandlerMap.put(Operation.RETURN, returnService);
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
 
@@ -51,7 +51,8 @@ public class Main {
                 .stringToFruitTransactionConverter(fileReaderService
                         .read("/home/nata/Java/Projects/jv-fruit-shop/inputData.csv"));
 
-        fruitTransactionList.forEach(fruitTransaction -> new ShopServiceImpl(operationOperationsMap)
+        fruitTransactionList.forEach(fruitTransaction ->
+                new ShopServiceImpl(operationOperationHandlerMap)
                 .transaction(fruitTransaction)
                 .handle(fruitTransaction));
 

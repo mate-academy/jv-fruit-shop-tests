@@ -13,7 +13,8 @@ public class FileReaderServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        Files.writeString(Path.of("/home/nata/Java/Projects/jv-fruit-shop-tests/testFile.csv"),
+        Files.writeString(Path.of(
+                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFile.csv"),
                 "b,banana,0" + System.lineSeparator()
                         + "b,apple,10" + System.lineSeparator()
                         + "s,banana,15" + System.lineSeparator()
@@ -24,7 +25,8 @@ public class FileReaderServiceImplTest {
     @Test
     public void read_validFilePath_ok() {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        String validFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tests/testFile.csv";
+        String validFilePath =
+                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFile.csv";
         List<String> expectedResultList = List.of(
                 "b,banana,0",
                 "b,apple,10",
@@ -37,14 +39,16 @@ public class FileReaderServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void read_invalidFilePath_notOk() {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        String invalidFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tests/testFiles.csv";
+        String invalidFilePath =
+                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFiles.csv";
         fileReaderService.read(invalidFilePath);
     }
 
     @Test
     public void read_correctExceptionMessage_ok() {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        String invalidFilePath = "/home/nata/Java/Projects/jv-fruit-shop-tests/testFiles.csv";
+        String invalidFilePath =
+                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFiles.csv";
         try {
             fileReaderService.read(invalidFilePath);
             fail("Exception not thrown");

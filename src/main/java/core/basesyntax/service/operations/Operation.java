@@ -25,8 +25,4 @@ public enum Operation {
                 throw new RuntimeException("Unknown operation: " + title);
         }
     }
-
-    public String getOperationTitle() {
-        return operationTitle;
-    }
 }

@@ -12,7 +12,13 @@ public class ReturnService implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        SupplyService supplyService = new SupplyService(fruitDao);
-        supplyService.handle(fruitTransaction);
+        if (!fruitDao.getStorageData().containsKey(fruitTransaction.getFruitName())) {
+            throw new NullPointerException(
+                    "Impossible transaction. Unknown fruit: " + fruitTransaction.getFruitName());
+        }
+        int beginAmount = fruitDao.getAmount(fruitTransaction.getFruitName());
+        int newAmount;
+        newAmount = beginAmount + fruitTransaction.getQuantity();
+        fruitDao.changeAmount(fruitTransaction.getFruitName(), newAmount);
     }
 }

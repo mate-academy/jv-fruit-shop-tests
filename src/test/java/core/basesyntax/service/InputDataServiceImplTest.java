@@ -54,4 +54,36 @@ public class InputDataServiceImplTest {
             assertEquals("Invalid input data format: " + emptyLine, e.getMessage());
         }
     }
+
+    @Test
+    public void stringToFruitTransactionConverter_invalidOperationExceptionMessage_Ok() {
+        InputDataService inputDataService = new InputDataServiceImpl();
+        String invalidOperationLetter = "m,pineapple,10";
+        String[] invalidOperationLetterArray = invalidOperationLetter.split(",");
+        String invalidOperationNumber = "9,pineapple,10";
+        String[] invalidOperationNumberArray = invalidOperationNumber.split(",");
+        String invalidOperationSymbol = "~,pineapple,10";
+        String[] invalidOperationSymbolArray = invalidOperationSymbol.split(",");
+
+        try {
+            inputDataService.stringToFruitTransactionConverter(List.of(invalidOperationLetter));
+            fail("Exception not thrown");
+        } catch (RuntimeException e) {
+            assertEquals("Unknown operation: " + invalidOperationLetterArray[0], e.getMessage());
+        }
+
+        try {
+            inputDataService.stringToFruitTransactionConverter(List.of(invalidOperationNumber));
+            fail("Exception not thrown");
+        } catch (RuntimeException e) {
+            assertEquals("Unknown operation: " + invalidOperationNumberArray[0], e.getMessage());
+        }
+
+        try {
+            inputDataService.stringToFruitTransactionConverter(List.of(invalidOperationSymbol));
+            fail("Exception not thrown");
+        } catch (RuntimeException e) {
+            assertEquals("Unknown operation: " + invalidOperationSymbolArray[0], e.getMessage());
+        }
+    }
 }

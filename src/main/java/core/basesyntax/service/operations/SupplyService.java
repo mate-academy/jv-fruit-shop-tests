@@ -12,6 +12,10 @@ public class SupplyService implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (!fruitDao.getStorageData().containsKey(fruitTransaction.getFruitName())) {
+            fruitDao.add(fruitTransaction.getFruitName(),fruitTransaction.getQuantity());
+            return;
+        }
         int beginAmount = fruitDao.getAmount(fruitTransaction.getFruitName());
         int newAmount;
         newAmount = beginAmount + fruitTransaction.getQuantity();

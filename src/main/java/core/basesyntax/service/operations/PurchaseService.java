@@ -12,12 +12,17 @@ public class PurchaseService implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (!fruitDao.getStorageData().containsKey(fruitTransaction.getFruitName())) {
+            throw new NullPointerException(
+                    "Impossible transaction. Unknown fruit: " + fruitTransaction.getFruitName());
+        }
         int beginAmount;
         int newAmount;
         beginAmount = fruitDao.getAmount(fruitTransaction.getFruitName());
         if (fruitTransaction.getQuantity() > beginAmount) {
             throw new RuntimeException(
-                    "Impossible transaction. There aren`t needed value of fruits");
+                    "Impossible transaction. There aren`t needed value of fruits"
+                            + fruitTransaction.getFruitName());
         }
         newAmount = beginAmount - fruitTransaction.getQuantity();
         fruitDao.changeAmount(fruitTransaction.getFruitName(), newAmount);

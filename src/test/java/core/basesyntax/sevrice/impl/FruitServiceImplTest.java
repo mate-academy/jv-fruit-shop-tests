@@ -65,7 +65,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void balanceOperation_Ok() {
+    public void calculate_balanceOperation_Ok() {
         fruitService.calculate(appleBalance);
         Integer actual = Storage.fruits.get(APPLE);
         Integer expected = 50;

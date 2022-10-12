@@ -1,7 +1,5 @@
 package core.basesyntax.dao.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -30,7 +28,6 @@ public class FruitDaoImplTest {
     @Test(expected = RuntimeException.class)
     public void nullFruit_NotOk() {
         fruitDao.update(null, STARTED_VALUE);
-        fail("Runtime exception should be thrown if fruit is null");
     }
 
     @Test
@@ -59,14 +56,12 @@ public class FruitDaoImplTest {
     @Test(expected = RuntimeException.class)
     public void getQuantity_wrongKey_NotOk() {
         fruitDao.getQuantity(APPLE);
-        fail("Runtime exception should be thrown when key is not present in storage");
     }
 
     @Test(expected = RuntimeException.class)
     public void getQuantity_nullValue_NotOk() {
         Storage.fruits.put(APPLE, null);
         fruitDao.getQuantity(APPLE);
-        fail("Runtime exception should be thrown when quantity is null");
     }
 
     @Test

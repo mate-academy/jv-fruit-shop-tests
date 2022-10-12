@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,14 +9,12 @@ public class GetByOperationTest {
     public void searchOperation_inUpperCaseLetter_NotOk() {
         String balanceInUpperCase = "B";
         FruitTransaction.Operation.getByOperation(balanceInUpperCase);
-        fail("Runtime exception should thrown if method take incorrect info");
     }
 
     @Test(expected = RuntimeException.class)
     public void getByOperator_incorrectOperationWord_NotOK() {
         String incorrectOperation = "divide";
         FruitTransaction.Operation.getByOperation(incorrectOperation);
-        fail("Runtime exception should thrown if method take incorrect info");
     }
 
     @Test

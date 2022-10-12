@@ -24,9 +24,6 @@ public class CsvFruitTransactionParserImplTest {
     private final CsvFruitTransactionParser csvFruitTransactionParser
             = new CsvFruitTransactionParserImpl();
 
-    public CsvFruitTransactionParserImplTest() {
-    }
-
     @Before
     public void setUp() {
         testList.add(FIRST_STRING);
@@ -34,7 +31,7 @@ public class CsvFruitTransactionParserImplTest {
     }
 
     @Test
-    public void parse_correctInfo_OK() {
+    public void parse_correctInfo_ok() {
         String appleBalance = "b,apple,100";
         testList.add(appleBalance);
         List<FruitTransaction> actual = csvFruitTransactionParser.parse(testList);
@@ -43,7 +40,7 @@ public class CsvFruitTransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void usedIncorrectInfo_NotOk() {
+    public void parse_usedIncorrectInfo_notOk() {
         String incorrectInfo = "Balance,pig,-100500";
         testList.add(incorrectInfo);
         csvFruitTransactionParser.parse(testList);
@@ -51,7 +48,7 @@ public class CsvFruitTransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullList_notOk() {
+    public void parser_nullList_notOk() {
         List<String> nullList = null;
         csvFruitTransactionParser.parse(nullList);
         fail("If input data is equal to null Runtime exception must be thrown");

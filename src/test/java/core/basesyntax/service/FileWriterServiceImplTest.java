@@ -14,13 +14,11 @@ public class FileWriterServiceImplTest {
     public void writeToFile_validFilePath_Ok() throws IOException {
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         String validFilePath =
-                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFile.csv";
+                this.getClass().getClassLoader().getResource("testFile.csv").getPath();
         String checkedText = "newTextForTest";
         fileWriterService.writeToFile(validFilePath, checkedText);
 
-        assertEquals(checkedText, Files.readString(
-                Path.of("/home/nata/Java/Projects/jv-fruit-shop-tests"
-                        + "/src/test/resources/testFile.csv")));
+        assertEquals(checkedText, Files.readString(Path.of(validFilePath)));
     }
 
     @Test(expected = RuntimeException.class)

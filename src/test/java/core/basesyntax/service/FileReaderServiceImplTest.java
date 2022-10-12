@@ -6,15 +6,15 @@ import static org.junit.Assert.fail;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void before() throws Exception {
         Files.writeString(Path.of(
-                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFile.csv"),
+                        this.getClass().getClassLoader().getResource("testFile.csv").getPath()),
                 "b,banana,0" + System.lineSeparator()
                         + "b,apple,10" + System.lineSeparator()
                         + "s,banana,15" + System.lineSeparator()
@@ -26,7 +26,7 @@ public class FileReaderServiceImplTest {
     public void read_validFilePath_ok() {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         String validFilePath =
-                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFile.csv";
+                this.getClass().getClassLoader().getResource("testFile.csv").getPath();
         List<String> expectedResultList = List.of(
                 "b,banana,0",
                 "b,apple,10",
@@ -40,7 +40,7 @@ public class FileReaderServiceImplTest {
     public void read_invalidFilePath_notOk() {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         String invalidFilePath =
-                "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFiles.csv";
+                "/src/test/resources/testFiles.csv";
         fileReaderService.read(invalidFilePath);
     }
 

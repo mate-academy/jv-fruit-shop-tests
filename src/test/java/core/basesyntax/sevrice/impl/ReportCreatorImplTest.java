@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-
     private static ReportCreator reportCreator;
 
     @BeforeClass

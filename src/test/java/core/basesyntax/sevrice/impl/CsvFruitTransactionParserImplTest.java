@@ -1,7 +1,5 @@
 package core.basesyntax.sevrice.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.sevrice.CsvFruitTransactionParser;
@@ -43,13 +41,11 @@ public class CsvFruitTransactionParserImplTest {
         String incorrectInfo = "Balance,pig,-100500";
         testList.add(incorrectInfo);
         csvFruitTransactionParser.parse(testList);
-        fail("You should check on correct input data");
     }
 
     @Test(expected = RuntimeException.class)
     public void parser_nullList_notOk() {
         List<String> nullList = null;
         csvFruitTransactionParser.parse(nullList);
-        fail("If input data is equal to null Runtime exception must be thrown");
     }
 }

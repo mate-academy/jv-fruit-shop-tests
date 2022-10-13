@@ -17,7 +17,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFromFile_correctPath_Ok() {
         String correctPath = "src/test/resources/readTest.csv";
         List<String> actual = csvFileReaderService.readFromFile(correctPath);
         Assert.assertEquals(expectedList, actual);

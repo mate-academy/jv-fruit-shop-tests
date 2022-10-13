@@ -26,7 +26,7 @@ public class FruitDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullFruit_NotOk() {
+    public void update_nullFruit_NotOk() {
         fruitDao.update(null, STARTED_VALUE);
     }
 

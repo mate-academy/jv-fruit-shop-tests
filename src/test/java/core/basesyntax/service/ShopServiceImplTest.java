@@ -18,6 +18,7 @@ import org.junit.Test;
 
 public class ShopServiceImplTest {
     private final Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
+    private final ShopService shopService = new ShopServiceImpl(operationOperationHandlerMap);
 
     @Before
     public void before() {
@@ -35,9 +36,7 @@ public class ShopServiceImplTest {
 
     @Test
     public void transaction_correctOperations_Ok() {
-        ShopService shopService = new ShopServiceImpl(operationOperationHandlerMap);
         FruitDao fruitDao = new FruitDaoImpl();
-
         FruitTransaction fruitTransactionBalance =
                 new FruitTransaction(Operation.BALANCE,"orange,",70);
         OperationHandler expectedBalanceHandler = new BalanceHandler(fruitDao);

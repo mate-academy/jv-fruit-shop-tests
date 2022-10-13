@@ -11,6 +11,9 @@ import org.junit.Test;
 
 public class BalanceHandlerTest {
 
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final OperationHandler balanceHandler = new BalanceHandler(fruitDao);
+
     @Before
     public void before() {
         Storage.getFruits().clear();
@@ -18,8 +21,6 @@ public class BalanceHandlerTest {
 
     @Test
     public void handle_correctNumberOfFruits_ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler balanceHandler = new BalanceHandler(fruitDao);
         FruitTransaction peachTransaction = new FruitTransaction(Operation.BALANCE, "peach", 20);
         FruitTransaction appleTransaction = new FruitTransaction(Operation.BALANCE, "apple", 10);
         FruitTransaction bananaTransaction = new FruitTransaction(Operation.BALANCE, "banana", 30);
@@ -34,8 +35,6 @@ public class BalanceHandlerTest {
 
     @Test
     public void handle_correctQuantityOfFruits_ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler balanceHandler = new BalanceHandler(fruitDao);
         FruitTransaction peachTransaction = new FruitTransaction(Operation.BALANCE, "peach", 20);
         FruitTransaction appleTransaction = new FruitTransaction(Operation.BALANCE, "apple", 10);
         FruitTransaction bananaTransaction = new FruitTransaction(Operation.BALANCE, "banana", 30);

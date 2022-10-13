@@ -13,6 +13,9 @@ import org.junit.Test;
 
 public class PurchaseServiceTest {
 
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final OperationHandler purchaseService = new PurchaseService(fruitDao);
+
     @Before
     public void before() {
         Storage.getFruits().clear();
@@ -20,13 +23,10 @@ public class PurchaseServiceTest {
                 "apple", 10,
                 "banana", 700,
                 "orange", 1000));
-
     }
 
     @Test
     public void handle_correctNumberOfFruits_ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler purchaseService = new PurchaseService(fruitDao);
         FruitTransaction peachTransaction =
                 new FruitTransaction(Operation.PURCHASE, "peach", 10);
         purchaseService.handle(peachTransaction);
@@ -56,8 +56,6 @@ public class PurchaseServiceTest {
 
     @Test
     public void handle_subtractNonexistentFruit_notOk() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler purchaseService = new PurchaseService(fruitDao);
         FruitTransaction watermelonTransaction =
                 new FruitTransaction(Operation.PURCHASE, "watermelon", 10);
         try {
@@ -71,8 +69,6 @@ public class PurchaseServiceTest {
 
     @Test
     public void handle_subtractMoreFruitsThanAvailable_notOk() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler purchaseService = new PurchaseService(fruitDao);
         FruitTransaction appleTransaction = new FruitTransaction(Operation.PURCHASE, "apple", 15);
         try {
             purchaseService.handle(appleTransaction);

@@ -11,22 +11,23 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
 
-    @Before
+    private final FileReaderService fileReaderService = new FileReaderServiceImpl();
+
+  /*  @Before
     public void before() throws Exception {
         Files.writeString(Path.of(
-                        this.getClass().getClassLoader().getResource("testFile.csv").getPath()),
+                        this.getClass().getClassLoader().getResource("FileReaderTestFile.csv").getPath()),
                 "b,banana,0" + System.lineSeparator()
                         + "b,apple,10" + System.lineSeparator()
                         + "s,banana,15" + System.lineSeparator()
                         + "p,banana,5" + System.lineSeparator()
                         + "r,apple,20" + System.lineSeparator());
-    }
+    }*/
 
     @Test
     public void read_validFilePath_ok() {
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
         String validFilePath =
-                this.getClass().getClassLoader().getResource("testFile.csv").getPath();
+                this.getClass().getClassLoader().getResource("FileReaderTestFile.csv").getPath();
         List<String> expectedResultList = List.of(
                 "b,banana,0",
                 "b,apple,10",
@@ -38,7 +39,6 @@ public class FileReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void read_invalidFilePath_notOk() {
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
         String invalidFilePath =
                 "/src/test/resources/testFiles.csv";
         fileReaderService.read(invalidFilePath);
@@ -46,7 +46,6 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void read_correctExceptionMessage_ok() {
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
         String invalidFilePath =
                 "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFiles.csv";
         try {

@@ -13,6 +13,9 @@ import org.junit.Test;
 
 public class ReturnServiceTest {
 
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final OperationHandler returnService = new ReturnService(fruitDao);
+
     @Before
     public void before() {
         Storage.getFruits().clear();
@@ -24,8 +27,6 @@ public class ReturnServiceTest {
 
     @Test
     public void handle_additionSomeExistFruits_Ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler returnService = new ReturnService(fruitDao);
         FruitTransaction peachTransaction =
                 new FruitTransaction(Operation.RETURN, "peach", 1000);
         returnService.handle(peachTransaction);
@@ -53,8 +54,6 @@ public class ReturnServiceTest {
 
     @Test
     public void handle_additionSomeNonexistentFruits_notOk() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler returnService = new ReturnService(fruitDao);
         FruitTransaction watermelonTransaction =
                 new FruitTransaction(Operation.RETURN, "watermelon", 47);
         try {

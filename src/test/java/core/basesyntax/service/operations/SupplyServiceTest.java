@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SupplyServiceTest {
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final OperationHandler supplyService = new SupplyService(fruitDao);
 
     @Before
     public void before() {
@@ -23,8 +25,6 @@ public class SupplyServiceTest {
 
     @Test
     public void handle_additionSomeExistFruits_Ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler supplyService = new SupplyService(fruitDao);
         FruitTransaction peachTransaction =
                 new FruitTransaction(Operation.SUPPLY, "peach", 1000);
         supplyService.handle(peachTransaction);
@@ -52,8 +52,6 @@ public class SupplyServiceTest {
 
     @Test
     public void handle_additionSomeNonexistentFruits_Ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        OperationHandler supplyService = new SupplyService(fruitDao);
         FruitTransaction watermelonTransaction =
                 new FruitTransaction(Operation.PURCHASE, "watermelon", 47);
         supplyService.handle(watermelonTransaction);

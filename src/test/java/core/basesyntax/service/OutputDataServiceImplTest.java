@@ -8,9 +8,10 @@ import java.util.Map;
 import org.junit.Test;
 
 public class OutputDataServiceImplTest {
+    private final OutputDataService outputDataService = new OutputDataServiceImpl();
+
     @Test
     public void toStringConverter_convertCorrectData_ok() {
-        OutputDataService outputDataService = new OutputDataServiceImpl();
         Storage.getFruits().clear();
         Map<String, Integer> testStorageData = Map.of("apple", 10,
                 "banana", 20,
@@ -24,7 +25,6 @@ public class OutputDataServiceImplTest {
 
     @Test
     public void toStringConverter_convertEmptyData_ok() {
-        OutputDataService outputDataService = new OutputDataServiceImpl();
         Storage.getFruits().clear();
         String expected = "";
         assertEquals(expected, outputDataService.toStringConverter());
@@ -32,7 +32,6 @@ public class OutputDataServiceImplTest {
 
     @Test
     public void toStringConverter_convertNullValuesData_notOk() {
-        OutputDataService outputDataService = new OutputDataServiceImpl();
         Storage.getFruits().clear();
         Storage.getFruits().put("banana", null);
         Storage.getFruits().put("apple", 50);

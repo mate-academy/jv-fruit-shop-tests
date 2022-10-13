@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class InputDataServiceImplTest {
     private final InputDataService inputDataService = new InputDataServiceImpl();
+
     @Test
     public void stringToFruitTransactionConverter_validInputTextFormat_ok() {
         String validLineOne = "b,pineapple,10";

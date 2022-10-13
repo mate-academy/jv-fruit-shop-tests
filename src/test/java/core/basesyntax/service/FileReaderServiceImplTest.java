@@ -3,26 +3,11 @@ package core.basesyntax.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-
     private final FileReaderService fileReaderService = new FileReaderServiceImpl();
-
-  /*  @Before
-    public void before() throws Exception {
-        Files.writeString(Path.of(
-                        this.getClass().getClassLoader().getResource("FileReaderTestFile.csv").getPath()),
-                "b,banana,0" + System.lineSeparator()
-                        + "b,apple,10" + System.lineSeparator()
-                        + "s,banana,15" + System.lineSeparator()
-                        + "p,banana,5" + System.lineSeparator()
-                        + "r,apple,20" + System.lineSeparator());
-    }*/
 
     @Test
     public void read_validFilePath_ok() {

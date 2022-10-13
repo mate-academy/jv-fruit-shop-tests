@@ -9,13 +9,12 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
-
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
 
     @Test
     public void writeToFile_validFilePath_Ok() throws IOException {
-        String validFilePath =
-                this.getClass().getClassLoader().getResource("FileWriterTestFile.csv").getPath();
+        String validFilePath = this.getClass().getClassLoader()
+                .getResource("FileWriterTestFile.csv").getPath();
         String checkedText = "newTextForTest";
         fileWriterService.writeToFile(validFilePath, checkedText);
 
@@ -24,15 +23,13 @@ public class FileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_invalidFilePath_notOk() {
-        String invalidFilePath =
-                "/home/nata/Java/Projects/jv-fruit-shop-tets/src/test/resources/FileWriterTestFile.csv";
+        String invalidFilePath = "/jv-fruit-shop-tests/src/test/resources/FileWriterTestFile.csv";
         fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
     }
 
     @Test
     public void read_correctExceptionMessage_ok() {
-        String invalidFilePath =
-                "/home/nata/Java/Projects/jv-fruit-shop-tets/src/test/resources/FileWriterTestFile.csv";
+        String invalidFilePath = "/jv-fruit-shop-tests/src/test/resources/FileWriterTestFile.csv";
         try {
             fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
             fail("Exception not thrown");

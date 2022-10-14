@@ -4,10 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    static FileReaderService fileReaderService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     public void read_validFilePath_ok() {

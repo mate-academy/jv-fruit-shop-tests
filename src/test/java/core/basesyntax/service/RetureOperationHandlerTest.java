@@ -4,10 +4,16 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class RetureOperationHandlerTest {
-    private OperationHandler handler = new RetureOperationHandler();
+    private OperationHandler handler;
+
+    @Before
+    public void beforEachTest() {
+        handler = new RetureOperationHandler();
+    }
 
     @Test
     public void retureOperationHandler_correctData_Ok() {

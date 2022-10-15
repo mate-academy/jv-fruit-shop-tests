@@ -5,15 +5,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFruitTransactionParserImplTest {
-    private FruitTransactionParser parser = new CsvFruitTransactionParserImpl();
+    private FruitTransactionParser parser;
+
+    @Before
+    public void beforEachTest() {
+        parser = new CsvFruitTransactionParserImpl();
+    }
 
     @Test
-    public void csvFruitTransactionParserImpl_correctData_Ok() {
-        List<String> list = new ArrayList<>();
-        Collections.addAll(list, "b,apple,150", "s,apple,50", "p,apple,100", "r,apple,50");
+    public void parse_correctData_Ok() {
+        List<String> list = List.of("b,apple,150", "s,apple,50", "p,apple,100", "r,apple,50");
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         Collections.addAll(fruitTransactions,
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 150),
@@ -25,7 +30,7 @@ public class CsvFruitTransactionParserImplTest {
     }
 
     @Test
-    public void csvFruitTransactionParserImpl_falseData_NotOk() {
+    public void parse_falseData_NotOk() {
         List<String> list = new ArrayList<>();
         Collections.addAll(list, "b,apple,150", "k,banana,80", "p,apple,100", "r,apple,50");
         List<FruitTransaction> fruitTransactions = new ArrayList<>();

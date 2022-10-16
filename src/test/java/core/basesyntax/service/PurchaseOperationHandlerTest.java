@@ -21,7 +21,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purcheseOperationHandler_correctData_Ok() {
+    public void purcheseOperationHandler_correctData_ok() {
         Storage.getStorage().put("apple", 100);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHES, "apple", 100);
@@ -31,7 +31,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purcheseOperationHandler_notEnoughFruits_NotOk() {
+    public void purcheseOperationHandler_notEnoughFruits_notOk() {
         Storage.getStorage().put("apple",50);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHES, "apple", 100);

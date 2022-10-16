@@ -25,7 +25,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void operationStrategy_correctData_Ok() {
+    public void operationStrategy_correctData_ok() {
         OperationHandler handler = operationStrategy.get("b");
         Class<? extends OperationHandler> clazz = handler.getClass();
         Assert.assertEquals(BalanceOperationHandler.class, clazz);

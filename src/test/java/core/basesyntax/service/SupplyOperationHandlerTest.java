@@ -16,7 +16,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyOperationHandler_correctData_Ok() {
+    public void supplyOperationHandler_correctData_ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPLLY, "apple", 100);
         handler.apply(fruitTransaction);

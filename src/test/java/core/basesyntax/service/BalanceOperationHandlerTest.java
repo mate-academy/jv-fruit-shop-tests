@@ -20,8 +20,9 @@ public class BalanceOperationHandlerTest {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100);
         handler.apply(fruitTransaction);
-        int amountAfter = Storage.getStorage().get("apple");
-        Assert.assertEquals(100, amountAfter);
+        int actual = Storage.getStorage().get("apple");
+        int expected = 100;
+        Assert.assertEquals(expected, actual);
     }
 
     @After

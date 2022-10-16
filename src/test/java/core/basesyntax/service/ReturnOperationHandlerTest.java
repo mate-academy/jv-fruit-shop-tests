@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RetureOperationHandlerTest {
+public class ReturnOperationHandlerTest {
     private OperationHandler handler;
 
     @Before
@@ -16,7 +16,7 @@ public class RetureOperationHandlerTest {
     }
 
     @Test
-    public void retureOperationHandler_correctData_Ok() {
+    public void retureOperationHandler_correctData_ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURE, "apple", 100);
         handler.apply(fruitTransaction);

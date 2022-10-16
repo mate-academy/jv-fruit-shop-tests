@@ -5,10 +5,16 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OutputDataServiceImplTest {
-    private final OutputDataService outputDataService = new OutputDataServiceImpl();
+    private static OutputDataService outputDataService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        outputDataService = new OutputDataServiceImpl();
+    }
 
     @Test
     public void toStringConverter_convertCorrectData_ok() {
@@ -20,7 +26,8 @@ public class OutputDataServiceImplTest {
         String expected = "apple,10" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()
                 + "orange,0" + System.lineSeparator();
-        assertEquals(expected, outputDataService.toStringConverter());
+        String actual = outputDataService.toStringConverter();
+        assertEquals(expected, actual);
     }
 
     @Test

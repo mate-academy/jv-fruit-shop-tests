@@ -8,50 +8,38 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseServiceTest {
+    private static OperationHandler purchaseService;
 
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final OperationHandler purchaseService = new PurchaseService(fruitDao);
-
-    @Before
-    public void before() {
+    @BeforeClass
+    public static void beforeClass() {
         Storage.getFruits().clear();
-        Storage.getFruits().putAll(Map.of("peach", 20,
-                "apple", 10,
+        Storage.getFruits().putAll(Map.of(
                 "banana", 700,
                 "orange", 1000));
+
+        FruitDao fruitDao = new FruitDaoImpl();
+        purchaseService = new PurchaseService(fruitDao);
     }
 
     @Test
     public void handle_correctNumberOfFruits_ok() {
-        FruitTransaction peachTransaction =
-                new FruitTransaction(Operation.PURCHASE, "peach", 10);
-        purchaseService.handle(peachTransaction);
-        Integer expectedPeachValue = 10;
-        assertEquals(expectedPeachValue, Storage.getFruits().get(peachTransaction.getFruitName()));
-
-        FruitTransaction appleTransaction =
-                new FruitTransaction(Operation.PURCHASE, "apple", 5);
-        purchaseService.handle(appleTransaction);
-        Integer expectedAppleValue = 5;
-        assertEquals(expectedAppleValue, Storage.getFruits().get(appleTransaction.getFruitName()));
-
         FruitTransaction bananaTransaction =
                 new FruitTransaction(Operation.PURCHASE, "banana", 600);
         purchaseService.handle(bananaTransaction);
         Integer expectedBananaValue = 100;
-        assertEquals(expectedBananaValue,
-                Storage.getFruits().get(bananaTransaction.getFruitName()));
+        Integer actualBananaValue = Storage.getFruits().get(bananaTransaction.getFruitName());
+        assertEquals(expectedBananaValue, actualBananaValue);
 
         FruitTransaction orangeTransaction =
                 new FruitTransaction(Operation.PURCHASE, "orange", 1000);
         purchaseService.handle(orangeTransaction);
         Integer expectedOrangeValue = 0;
-        assertEquals(expectedOrangeValue,
-                Storage.getFruits().get(orangeTransaction.getFruitName()));
+        Integer actualOrangeValue = Storage.getFruits().get(orangeTransaction.getFruitName());
+        assertEquals(expectedOrangeValue, actualOrangeValue);
     }
 
     @Test
@@ -69,7 +57,8 @@ public class PurchaseServiceTest {
 
     @Test
     public void handle_subtractMoreFruitsThanAvailable_notOk() {
-        FruitTransaction appleTransaction = new FruitTransaction(Operation.PURCHASE, "apple", 15);
+        FruitTransaction appleTransaction =
+                new FruitTransaction(Operation.PURCHASE, "orange", 1001);
         try {
             purchaseService.handle(appleTransaction);
             fail("Exception not thrown");

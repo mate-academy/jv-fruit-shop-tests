@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    static FileReaderService fileReaderService;
+    private static FileReaderService fileReaderService;
 
     @BeforeClass
     public static void beforeClass() {
@@ -26,7 +25,8 @@ public class FileReaderServiceImplTest {
                 "s,banana,15",
                 "p,banana,5",
                 "r,apple,20");
-        assertEquals(expectedResultList, fileReaderService.read(validFilePath));
+        List<String> actualResultList = fileReaderService.read(validFilePath);
+        assertEquals(expectedResultList, actualResultList);
     }
 
     @Test(expected = RuntimeException.class)

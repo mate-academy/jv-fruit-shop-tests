@@ -14,9 +14,9 @@ public class ReportGeneratorImplTest {
     private static ReportGenerator reportGenerator;
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String ADDITIONAL_LINE = System.lineSeparator();
-    private final static Fruit APPLE = new Fruit("apple");
-    private final static Fruit BANANA = new Fruit("banana");
-    private final static Fruit MANGO = new Fruit("mango");
+    private static final Fruit APPLE = new Fruit("apple");
+    private static final Fruit BANANA = new Fruit("banana");
+    private static final Fruit MANGO = new Fruit("mango");
 
     @BeforeClass
     public static void beforeClass() {

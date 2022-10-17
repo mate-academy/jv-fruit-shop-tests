@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ReportCsvParserImplTest {
+    private static final Fruit BANANA = new Fruit("banana");
+    private static final Fruit MANGO = new Fruit("mango");
+    private static final Fruit APPLE = new Fruit("apple");
+    private final Fruit ORANGE = new Fruit("orange");
     private static ReportCsvParser parser;
     private List<String> transactions;
-    private final static Fruit BANANA = new Fruit("banana");
-    private final static Fruit MANGO = new Fruit("mango");
-    private final static Fruit APPLE = new Fruit("apple");
-    private final static Fruit ORANGE = new Fruit("orange");
 
     @BeforeClass
     public static void beforeClass() {

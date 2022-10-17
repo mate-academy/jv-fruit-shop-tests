@@ -13,9 +13,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
+    private static final Fruit ORANGE = new Fruit("orange");
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
-    private final static Fruit ORANGE = new Fruit("orange");
 
     @BeforeClass
     public static void beforeClass() {

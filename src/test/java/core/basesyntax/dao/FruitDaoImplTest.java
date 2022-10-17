@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDaoImplTest {
+    private static final Fruit BANANA = new Fruit("Banana");
+    private static final Fruit APPLE = new Fruit("Apple");
+    private static final Fruit ORANGE = new Fruit("Orange");
     private static FruitDao fruitDao = new FruitDaoImpl();
     private static Map<Fruit, Integer> testStorage = new HashMap<>();
-    private static Fruit BANANA = new Fruit("Banana");
-    private static Fruit APPLE = new Fruit("Apple");
-    private static Fruit ORANGE = new Fruit("Orange");
 
     @Before
     public void setUp() {

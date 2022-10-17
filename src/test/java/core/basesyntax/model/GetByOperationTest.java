@@ -18,7 +18,7 @@ public class GetByOperationTest {
     }
 
     @Test
-    public void correctInputData_Ok() {
+    public void getByOperator_correctOperationWord_OK() {
         String balance = "b";
         FruitTransaction.Operation actual = FruitTransaction.Operation.getByOperation(balance);
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;

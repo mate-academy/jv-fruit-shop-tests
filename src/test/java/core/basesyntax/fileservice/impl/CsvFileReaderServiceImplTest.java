@@ -3,12 +3,18 @@ package core.basesyntax.fileservice.impl;
 import core.basesyntax.fileservice.CsvFileReaderService;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
-    private final CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
+    private static CsvFileReaderService csvFileReaderService;
     private final List<String> expectedList = List
             .of("type,fruit,quantity", "b,banana,20", "b,apple,100");
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        csvFileReaderService = new CsvFileReaderServiceImpl();
+    }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_wrongPathToFile_NotOk() {

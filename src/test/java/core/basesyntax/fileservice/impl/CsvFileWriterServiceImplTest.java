@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterServiceImplTest {
@@ -16,7 +17,12 @@ public class CsvFileWriterServiceImplTest {
             + "She'd play this bobbing game with us that had a fun song to go along with it. "
             + "Whenever I get in a pool, I still sing that song in my head.";
 
-    private final CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
+    private static CsvFileWriterService csvFileWriterService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        csvFileWriterService = new CsvFileWriterServiceImpl();
+    }
 
     @Test
     public void writeToFile_correctFilePath_Ok() throws IOException {

@@ -1,7 +1,5 @@
 package core.basesyntax.sevrice.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
@@ -15,59 +13,57 @@ import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
 import core.basesyntax.strategy.strategyimpl.PurchaseOperationHandler;
 import core.basesyntax.strategy.strategyimpl.ReturnOperationHandler;
 import core.basesyntax.strategy.strategyimpl.SupplyOperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private static final Fruit APPLE = new Fruit("apple");
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private static Fruit apple;
+    private static FruitDao fruitDao;
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-            = new HashMap<>() {
-                {
-                    put(FruitTransaction.Operation.BALANCE,
-                            new BalanceOperationHandler(fruitDao));
-                    put(FruitTransaction.Operation.PURCHASE,
-                            new PurchaseOperationHandler(fruitDao));
-                    put(FruitTransaction.Operation.SUPPLY,
-                            new SupplyOperationHandler(fruitDao));
-                    put(FruitTransaction.Operation.RETURN,
-                            new ReturnOperationHandler(fruitDao));
-                }
-                    };
+            = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
+            FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
+            FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
+            FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
     private final OperationStrategy operationStrategy
             = new OperationStrategyImpl(operationHandlerMap);
     private final FruitService fruitService = new FruitServiceImpl(fruitDao, operationStrategy);
 
     private final FruitTransaction appleBalance = new FruitTransaction(
             FruitTransaction.Operation.BALANCE,
-            APPLE,
+            apple,
             50);
     private final FruitTransaction appleSupply = new FruitTransaction(
             FruitTransaction.Operation.SUPPLY,
-            APPLE,
+            apple,
             50);
     private final FruitTransaction applePurchase = new FruitTransaction(
             FruitTransaction.Operation.PURCHASE,
-            APPLE,
+            apple,
             50);
     private final FruitTransaction appleReturn = new FruitTransaction(
             FruitTransaction.Operation.RETURN,
-            APPLE,
+            apple,
             50);
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        apple = new Fruit("apple");
+        fruitDao = new FruitDaoImpl();
+    }
 
     @Before
     public void setUp() throws Exception {
-        Storage.fruits.put(APPLE, 0);
+        Storage.fruits.put(apple, 0);
     }
 
     @Test
     public void calculate_balanceOperation_Ok() {
         fruitService.calculate(appleBalance);
-        Integer actual = Storage.fruits.get(APPLE);
+        Integer actual = Storage.fruits.get(apple);
         Integer expected = 50;
         Assert.assertEquals(expected, actual);
     }
@@ -75,7 +71,7 @@ public class FruitServiceImplTest {
     @Test
     public void calculate_supplyOperation_Ok() {
         fruitService.calculate(appleSupply);
-        Integer actual = Storage.fruits.get(APPLE);
+        Integer actual = Storage.fruits.get(apple);
         Integer expected = 50;
         Assert.assertEquals(expected, actual);
     }
@@ -83,16 +79,16 @@ public class FruitServiceImplTest {
     @Test
     public void calculate_returnOperation_Ok() {
         fruitService.calculate(appleReturn);
-        Integer actual = Storage.fruits.get(APPLE);
+        Integer actual = Storage.fruits.get(apple);
         Integer expected = 50;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void calculate_purchaseOperation_Ok() {
-        Storage.fruits.put(APPLE, 100);
+        Storage.fruits.put(apple, 100);
         fruitService.calculate(applePurchase);
-        Integer actual = Storage.fruits.get(APPLE);
+        Integer actual = Storage.fruits.get(apple);
         Integer expected = 50;
         Assert.assertEquals(expected, actual);
     }
@@ -100,8 +96,6 @@ public class FruitServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void calculate_purchaseOperation_purchaseValueMoreThanValueInStorage_NotOk() {
         fruitService.calculate(applePurchase);
-        fail("If statement in storage less than purchase value "
-                + " Runtime exception should be thrown");
     }
 
     @After

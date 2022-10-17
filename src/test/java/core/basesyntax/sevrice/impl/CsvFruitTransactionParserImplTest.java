@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFruitTransactionParserImplTest {
@@ -16,10 +17,14 @@ public class CsvFruitTransactionParserImplTest {
             = new FruitTransaction(FruitTransaction.Operation.BALANCE,
             APPLE, 100);
     private static final String FIRST_STRING = "this,must,deleted";
+    private static CsvFruitTransactionParser csvFruitTransactionParser;
     private final List<FruitTransaction> transactions = new ArrayList<>();
     private final List<String> testList = new ArrayList<>();
-    private final CsvFruitTransactionParser csvFruitTransactionParser
-            = new CsvFruitTransactionParserImpl();
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        csvFruitTransactionParser = new CsvFruitTransactionParserImpl();
+    }
 
     @Before
     public void setUp() {

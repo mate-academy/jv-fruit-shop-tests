@@ -4,8 +4,8 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,9 +13,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private final static Fruit MANGO = new Fruit("mango");
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
+    private final static Fruit MANGO = new Fruit("mango");
 
     @BeforeClass
     public static void beforeClass() {
@@ -45,6 +45,7 @@ public class SupplyOperationHandlerTest {
         int actual = Storage.fruits.get(MANGO);
         Assert.assertEquals(expected, actual);
     }
+
     @After
     public void tearDown() {
         Storage.fruits.clear();

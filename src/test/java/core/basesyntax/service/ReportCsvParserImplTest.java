@@ -3,8 +3,8 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportCsvParserImpl;
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitTransaction;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ReportCsvParserImplTest {
+    private static ReportCsvParser parser;
+    private List<String> transactions;
     private final static Fruit BANANA = new Fruit("banana");
     private final static Fruit MANGO = new Fruit("mango");
     private final static Fruit APPLE = new Fruit("apple");
     private final static Fruit ORANGE = new Fruit("orange");
-    private static ReportCsvParser parser;
-    private List<String> transactions;
 
     @BeforeClass
     public static void beforeClass() {
@@ -37,10 +37,10 @@ public class ReportCsvParserImplTest {
 
     @Test
     public void parse_validList_Ok() {
-            List<FruitTransaction> actual = parser.parse(transactions);
-            List<FruitTransaction> expected = getListOfFruitTransactions();
-            assertEquals(expected, actual);
-        }
+        List<FruitTransaction> actual = parser.parse(transactions);
+        List<FruitTransaction> expected = getListOfFruitTransactions();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void parse_emptyList_Ok() {

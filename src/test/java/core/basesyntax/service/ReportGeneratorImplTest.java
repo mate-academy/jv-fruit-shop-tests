@@ -11,13 +11,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
 public class ReportGeneratorImplTest {
-    private final static Fruit APPLE = new Fruit("apple");
-    private final static Fruit BANANA = new Fruit("banana");
-    private final static Fruit MANGO = new Fruit("mango");
-
     private static ReportGenerator reportGenerator;
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String ADDITIONAL_LINE = System.lineSeparator();
+    private final static Fruit APPLE = new Fruit("apple");
+    private final static Fruit BANANA = new Fruit("banana");
+    private final static Fruit MANGO = new Fruit("mango");
 
     @BeforeClass
     public static void beforeClass() {

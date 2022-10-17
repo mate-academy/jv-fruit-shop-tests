@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;

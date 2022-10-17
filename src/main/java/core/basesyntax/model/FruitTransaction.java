@@ -68,6 +68,7 @@ public class FruitTransaction {
                     .get();
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

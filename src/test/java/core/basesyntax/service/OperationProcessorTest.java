@@ -95,13 +95,6 @@ public class OperationProcessorTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void calculate_purchaseOperation_purchaseValueMoreThanValueInStorage_NotOk() {
-        operationProcessor.process(applePurchase);
-        Assert.fail("If statement in storage less than purchase value "
-                + " Runtime exception should be thrown");
-    }
-
     @After
     public void tearDown() throws Exception {
         Storage.fruits.clear();

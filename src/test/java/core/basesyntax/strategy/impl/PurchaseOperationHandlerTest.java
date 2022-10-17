@@ -50,8 +50,8 @@ public class PurchaseOperationHandlerTest {
     public void purchaseHandler_negativeFruitBalance_Ok() {
         Storage.fruits.put(APPLE, 10);
         fruitTransaction.setQuantity(20);
-        operationHandler.handle(fruitTransaction);
         int expectedQuantityApple = -10;
+        operationHandler.handle(fruitTransaction);
         int actualQuantityApple = Storage.fruits.get(APPLE);
         Assert.assertEquals(expectedQuantityApple, actualQuantityApple);
     }

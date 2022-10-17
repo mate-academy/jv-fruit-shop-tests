@@ -7,16 +7,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportGeneratorImplTest {
     private static ReportGenerator reportGenerator;
-    private static final String FIRST_LINE = "fruit,quantity";
-    private static final String ADDITIONAL_LINE = System.lineSeparator();
-    private static final Fruit APPLE = new Fruit("apple");
-    private static final Fruit BANANA = new Fruit("banana");
-    private static final Fruit MANGO = new Fruit("mango");
 
     @BeforeClass
     public static void beforeClass() {
@@ -24,24 +20,21 @@ public class ReportGeneratorImplTest {
         reportGenerator = new ReportGeneratorImpl(fruitDao);
     }
 
-    @Test
-    public void report_emptyStorage_Ok() {
-        String expected = FIRST_LINE;
-        String actualReport = reportGenerator.generateReport();
-        Assert.assertEquals(expected, actualReport);
+    @Before
+    public void setUp() {
+        Storage.fruits.put(new Fruit("apple"), 35);
+        Storage.fruits.put(new Fruit("mango"), 25);
     }
 
     @Test
-    public void report_storageWithData_Ok() {
-        Storage.fruits.put(APPLE, 120);
-        Storage.fruits.put(BANANA, 50);
-        Storage.fruits.put(MANGO, 90);
-        String expected = FIRST_LINE + ADDITIONAL_LINE
-                + "apple,120" + ADDITIONAL_LINE
-                + "banana,50" + ADDITIONAL_LINE
-                + "mango,90";
+    public void createReport_Ok() {
         String actual = reportGenerator.generateReport();
-        Assert.assertEquals(expected, actual);
+        StringBuilder expected = new StringBuilder("fruit,quantity");
+        expected.append(System.lineSeparator())
+                .append("apple,35")
+                .append(System.lineSeparator())
+                .append("mango,25");
+        Assert.assertEquals(expected.toString(), actual);
     }
 
     @After

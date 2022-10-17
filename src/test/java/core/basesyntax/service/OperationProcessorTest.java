@@ -23,22 +23,23 @@ import org.junit.Test;
 public class OperationProcessorTest {
     private static final Fruit APPLE = new Fruit("apple");
     private final FruitDao fruitDao = new FruitDaoImpl();
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>() {
+    private final Map<FruitTransaction.Operation, OperationHandler>
+            operationHandlerMap = new HashMap<>() {
             {
                 put(FruitTransaction.Operation.BALANCE,
-                    new BalanceOperationHandler(fruitDao));
+                        new BalanceOperationHandler(fruitDao));
                 put(FruitTransaction.Operation.PURCHASE,
-                    new PurchaseOperationHandler(fruitDao));
+                        new PurchaseOperationHandler(fruitDao));
                 put(FruitTransaction.Operation.SUPPLY,
-                    new SupplyOperationHandler(fruitDao));
+                        new SupplyOperationHandler(fruitDao));
                 put(FruitTransaction.Operation.RETURN,
-                    new ReturnOperationHandler(fruitDao));
+                        new ReturnOperationHandler(fruitDao));
             }
     };
     private final OperationStrategy operationStrategy
             = new OperationStrategyImpl(operationHandlerMap);
-    private final OperationProcessor operationProcessor = new OperationProcessorImpl(fruitDao, operationStrategy);
-
+    private final OperationProcessor operationProcessor
+            = new OperationProcessorImpl(fruitDao, operationStrategy);
     private final FruitTransaction appleBalance = new FruitTransaction(
             FruitTransaction.Operation.BALANCE,
             APPLE,

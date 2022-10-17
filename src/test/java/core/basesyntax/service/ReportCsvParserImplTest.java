@@ -1,22 +1,22 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.ReportCsvParserImpl;
-import org.junit.After;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.impl.ReportCsvParserImpl;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ReportCsvParserImplTest {
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit MANGO = new Fruit("mango");
     private static final Fruit APPLE = new Fruit("apple");
-    private final Fruit ORANGE = new Fruit("orange");
+    private static final Fruit ORANGE = new Fruit("orange");
     private static ReportCsvParser parser;
     private List<String> transactions;
 
@@ -32,7 +32,7 @@ public class ReportCsvParserImplTest {
         transactions.add("b,banana,25");
         transactions.add("s,mango,35");
         transactions.add("p,apple,15");
-        transactions.add("r,apple,15");
+        transactions.add("r,orange,15");
     }
 
     @Test
@@ -80,13 +80,12 @@ public class ReportCsvParserImplTest {
     private List<FruitTransaction> getListOfFruitTransactions() {
         FruitTransaction bananaTransaction = FruitTransaction.of(
                 FruitTransaction.Operation.BALANCE, BANANA, 25);
-        FruitTransaction peachTransaction = FruitTransaction.of(
+        FruitTransaction mangoTransaction = FruitTransaction.of(
                 FruitTransaction.Operation.SUPPLY, MANGO, 35);
         FruitTransaction appleTransaction = FruitTransaction.of(
                 FruitTransaction.Operation.PURCHASE, APPLE, 15);
         FruitTransaction orangeTransaction = FruitTransaction.of(
                 FruitTransaction.Operation.RETURN, ORANGE, 15);
-        return List.of(bananaTransaction, peachTransaction, appleTransaction, orangeTransaction);
-
+        return List.of(bananaTransaction, mangoTransaction, appleTransaction, orangeTransaction);
     }
 }

@@ -1,10 +1,10 @@
 package core.basesyntax.fileservice;
 
 import core.basesyntax.fileservice.impl.FileReaderServiceImpl;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.List;
 
 public class FileReaderServiceImplTest {
     public static final String ACTIVITIES_FILE_PATH = "src/test/java/resources/activities.csv";

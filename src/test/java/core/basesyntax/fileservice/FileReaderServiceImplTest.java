@@ -1,6 +1,5 @@
 package core.basesyntax.fileservice;
 
-
 import core.basesyntax.fileservice.impl.FileReaderServiceImpl;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;

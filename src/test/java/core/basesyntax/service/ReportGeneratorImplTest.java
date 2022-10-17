@@ -7,8 +7,8 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testng.annotations.BeforeClass;
 
 public class ReportGeneratorImplTest {
     private static ReportGenerator reportGenerator;

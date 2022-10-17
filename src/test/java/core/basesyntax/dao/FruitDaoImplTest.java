@@ -1,15 +1,14 @@
 package core.basesyntax.dao;
 
-
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import org.junit.After;
-import  org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FruitDaoImplTest {
     private static final Fruit BANANA = new Fruit("Banana");

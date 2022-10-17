@@ -1,7 +1,6 @@
 package core.basesyntax.service.operations;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -49,16 +48,10 @@ public class ReturnServiceTest {
         assertEquals(expectedOrangeValue, actualOrangeValue);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void handle_additionSomeNonexistentFruits_notOk() {
         FruitTransaction watermelonTransaction =
                 new FruitTransaction(Operation.RETURN, "watermelon", 47);
-        try {
-            returnService.handle(watermelonTransaction);
-            fail("Exception not thrown");
-        } catch (NullPointerException e) {
-            assertEquals("Impossible transaction. Unknown fruit: "
-                    + watermelonTransaction.getFruitName(), e.getMessage());
-        }
+        returnService.handle(watermelonTransaction);
     }
 }

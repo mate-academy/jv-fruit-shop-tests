@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,14 +32,9 @@ public class FileWriterServiceImplTest {
         fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void read_correctExceptionMessage_ok() {
         String invalidFilePath = "/jv-fruit-shop-tests/src/test/resources/FileWriterTestFile.csv";
-        try {
-            fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
-            fail("Exception not thrown");
-        } catch (RuntimeException e) {
-            assertEquals("Can't write to file " + invalidFilePath, e.getMessage());
-        }
+        fileWriterService.writeToFile(invalidFilePath, "invalidTestText");
     }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
@@ -37,18 +36,11 @@ public class OutputDataServiceImplTest {
         assertEquals(expected, outputDataService.toStringConverter());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void toStringConverter_convertNullValuesData_notOk() {
         Storage.getFruits().clear();
         Storage.getFruits().put("banana", null);
         Storage.getFruits().put("apple", 50);
-        try {
-            outputDataService.toStringConverter();
-            fail("Exception not thrown");
-        } catch (NullPointerException e) {
-            assertEquals("Can't get data from the storage, because "
-                            + "banana" + " has \"null\" value",
-                    e.getMessage());
-        }
+        outputDataService.toStringConverter();
     }
 }

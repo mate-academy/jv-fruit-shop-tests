@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 import org.junit.BeforeClass;
@@ -36,15 +35,10 @@ public class FileReaderServiceImplTest {
         fileReaderService.read(invalidFilePath);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void read_correctExceptionMessage_ok() {
         String invalidFilePath =
                 "/home/nata/Java/Projects/jv-fruit-shop-tests/src/test/resources/testFiles.csv";
-        try {
-            fileReaderService.read(invalidFilePath);
-            fail("Exception not thrown");
-        } catch (RuntimeException e) {
-            assertEquals("Can't read from file " + invalidFilePath, e.getMessage());
-        }
+        fileReaderService.read(invalidFilePath);
     }
 }

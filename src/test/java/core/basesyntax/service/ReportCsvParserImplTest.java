@@ -4,7 +4,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportCsvParserImpl;
 import org.junit.After;
 import core.basesyntax.model.FruitTransaction;
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,14 +39,14 @@ public class ReportCsvParserImplTest {
     public void parse_validList_Ok() {
         List<FruitTransaction> actual = parser.parse(transactions);
         List<FruitTransaction> expected = getListOfFruitTransactions();
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void parse_emptyList_Ok() {
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         List<FruitTransaction> expected = List.of();
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

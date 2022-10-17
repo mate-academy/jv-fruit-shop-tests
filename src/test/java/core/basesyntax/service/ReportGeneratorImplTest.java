@@ -5,9 +5,9 @@ import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.Test;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 
 public class ReportGeneratorImplTest {

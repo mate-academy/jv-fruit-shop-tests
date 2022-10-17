@@ -2,7 +2,7 @@ package core.basesyntax.fileservice;
 
 import core.basesyntax.fileservice.impl.FileReaderServiceImpl;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,14 +22,14 @@ public class FileReaderServiceImplTest {
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20",
                 "p,banana,5", "s,banana,50");
         List<String> actual = fileReaderService.readFromFile(ACTIVITIES_FILE_PATH);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void readService_EmptyFile_Ok() {
         List<String> expected = List.of();
         List<String> actual = fileReaderService.readFromFile(EMPTY_FILE_PATH);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

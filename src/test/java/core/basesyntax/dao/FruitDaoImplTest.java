@@ -5,7 +5,7 @@ import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
+import  org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.HashMap;
@@ -30,22 +30,22 @@ public class FruitDaoImplTest {
 
     @Test
     public void updateData_ok() {
-        assertEquals(testStorage, Storage.fruits);
+        Assert.assertEquals(testStorage, Storage.fruits);
     }
 
     @Test
     public void getRemainFruit_ok() {
-        assertEquals(Integer.valueOf(100),
+        Assert.assertEquals(Integer.valueOf(100),
                 fruitDao.getQuantity(BANANA));
-        assertEquals(Integer.valueOf(150),
+        Assert.assertEquals(Integer.valueOf(150),
                 fruitDao.getQuantity(APPLE));
-        assertEquals(Integer.valueOf(200),
+        Assert.assertEquals(Integer.valueOf(200),
                 fruitDao.getQuantity(ORANGE));
     }
 
     @Test
     public void getStorage_ok() {
-        assertEquals(testStorage, fruitDao.getAll());
+        Assert.assertEquals(testStorage, fruitDao.getAll());
     }
 
     @After

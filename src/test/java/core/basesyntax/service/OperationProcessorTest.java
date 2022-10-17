@@ -20,12 +20,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OperationProcessorTest<TransactionService> {
+public class OperationProcessorTest {
     private static final Fruit APPLE = new Fruit("apple");
     private final FruitDao fruitDao = new FruitDaoImpl();
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-            = new HashMap<>() {
-        {
+    private final Map<FruitTransaction.Operation, OperationHandler>
+            operationHandlerMap = new HashMap<>() {
+    {
             put(FruitTransaction.Operation.BALANCE,
                     new BalanceOperationHandler(fruitDao));
             put(FruitTransaction.Operation.PURCHASE,
@@ -34,7 +34,7 @@ public class OperationProcessorTest<TransactionService> {
                     new SupplyOperationHandler(fruitDao));
             put(FruitTransaction.Operation.RETURN,
                     new ReturnOperationHandler(fruitDao));
-        }
+    }
     };
     private final OperationStrategy operationStrategy
             = new OperationStrategyImpl(operationHandlerMap);

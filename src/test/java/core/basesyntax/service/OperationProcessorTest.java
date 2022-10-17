@@ -13,13 +13,12 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-import org.junit.After;
-import org.junit.Assert;
-import static org.junit.Assert.fail;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OperationProcessorTest<TransactionService> {
     private static final Fruit APPLE = new Fruit("apple");
@@ -99,7 +98,7 @@ public class OperationProcessorTest<TransactionService> {
     @Test(expected = RuntimeException.class)
     public void calculate_purchaseOperation_purchaseValueMoreThanValueInStorage_NotOk() {
         operationProcessor.process(applePurchase);
-        fail("If statement in storage less than purchase value "
+        Assert.fail("If statement in storage less than purchase value "
                 + " Runtime exception should be thrown");
     }
 

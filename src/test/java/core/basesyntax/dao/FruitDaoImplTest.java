@@ -8,14 +8,21 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
     private static final Fruit BANANA = new Fruit("Banana");
     private static final Fruit APPLE = new Fruit("Apple");
     private static final Fruit ORANGE = new Fruit("Orange");
-    private static FruitDao fruitDao = new FruitDaoImpl();
-    private static Map<Fruit, Integer> testStorage = new HashMap<>();
+    private static FruitDao fruitDao;
+    private static Map<Fruit, Integer> testStorage;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
+        testStorage = new HashMap<>();
+    }
 
     @Before
     public void setUp() {

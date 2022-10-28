@@ -1,19 +1,18 @@
 package basesyntax.service;
 
 import core.basesyntax.service.FileReader;
-
+import core.basesyntax.service.impl.FileReaderImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import core.basesyntax.service.impl.FileReaderImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String FILE_EXIST = "test/resources/input.csv";
+    private static final String FILE_EXIST = "src/test/resources/input.csv";
     private static final String FILE_NOT_EXIST = "wrong/file.csv";
     private static FileReader fileReaderTest;
 

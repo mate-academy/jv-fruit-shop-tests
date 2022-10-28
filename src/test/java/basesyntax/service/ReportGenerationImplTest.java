@@ -3,12 +3,11 @@ package basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGenerationImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ReportGenerationImplTest {
     private static Map<Fruit, Integer> testMap;

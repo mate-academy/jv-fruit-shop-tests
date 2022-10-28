@@ -2,18 +2,17 @@ package basesyntax.service;
 
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.FileWriterImpl;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String FILE_WRITE_TEST = "test/resources/result_write.csv";
-    private static final String FILE_READ_TEST = "test/resources/result_read.csv";
+    private static final String FILE_WRITE_TEST = "src/test/resources/result_write.csv";
+    private static final String FILE_READ_TEST = "src/test/resources/result_read.csv";
     private static final String FILE_NOT_WRITE = "wrong/file.csv";
     private static FileWriter fileWriterTest;
     private static StringBuilder testReport;

@@ -15,6 +15,7 @@ public class OperationValidatorImplTest {
     public static void setUp() {
         testValidator = new OperationValidatorImpl();
     }
+
     @Test
     public void setCorrectOperation_ok() {
         String actual = testValidator.validate(CORRECT_OPERATION);
@@ -22,7 +23,7 @@ public class OperationValidatorImplTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setIncorrectOperation_notOk(){
+    public void setIncorrectOperation_notOk() {
         testValidator.validate(WRONG_OPERATION);
     }
 }

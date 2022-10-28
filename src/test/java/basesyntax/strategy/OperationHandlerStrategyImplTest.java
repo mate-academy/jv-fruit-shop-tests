@@ -6,12 +6,11 @@ import core.basesyntax.strategy.impl.OperationHandlerPurchaseImpl;
 import core.basesyntax.strategy.impl.OperationHandlerReturnImpl;
 import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
 import core.basesyntax.strategy.impl.OperationHandlerSupplyImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class OperationHandlerStrategyImplTest {
     private static OperationHandlerBalanceImpl testBalanceStrategy;
@@ -26,7 +25,6 @@ public class OperationHandlerStrategyImplTest {
     private static final int RETURN_RESULT = 110;
     private static final int SUPPLY_RESULT = 110;
     private static final int PURCHASE_RESULT = 90;
-
 
     @BeforeClass
     public static void setUp() {
@@ -52,12 +50,14 @@ public class OperationHandlerStrategyImplTest {
         int expected = PURCHASE_RESULT;
         Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void tesReturnStrategy_ok() {
         int actual = testReturnStrategy.apply(BALANCE, COUNT);
         int expected = RETURN_RESULT;
         Assert.assertEquals(expected, actual);
     }
+
     @Test
     public void testSupplyStrategy_ok() {
         int actual = testSupplyStrategy.apply(BALANCE, COUNT);

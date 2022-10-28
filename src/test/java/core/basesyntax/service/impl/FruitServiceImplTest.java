@@ -12,6 +12,7 @@ import core.basesyntax.strategy.impl.OperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,15 @@ import org.junit.Test;
 
 public class FruitServiceImplTest {
     private final FruitService fruitService = fruitServiceInitialise();
+
+    @Test
+    public void processData_emptyFruitTransactions_ok() {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fruitService.processData(fruitTransactions);
+        Map<String, Integer> expected = new HashMap<>();
+        Map<String, Integer> actual = Storage.fruits;
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void processData_normalFruitTransactions_ok() {

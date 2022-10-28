@@ -27,12 +27,15 @@ public class ReportWriterImplTest {
                 + "apple,110" + LINE_SEPARATOR;
 
         reportWriter.writeReport(report, NORMAL_FILE_PATH);
-        String actual;
-        try {
-            actual = Files.readString(Path.of(NORMAL_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file: " + NORMAL_FILE_PATH, e);
-        }
+        String actual = readFile(NORMAL_FILE_PATH);
         assertEquals(report, actual);
+    }
+
+    private String readFile(String path) {
+        try {
+            return Files.readString(Path.of(path));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file: " + path, e);
+        }
     }
 }

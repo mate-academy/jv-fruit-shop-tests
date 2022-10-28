@@ -12,6 +12,16 @@ public class DataParserImplTest {
     private final DataParser dataParser = new DataParserImpl();
 
     @Test
+    public void parseData_emptyData_ok() {
+        List<String> testData = new ArrayList<>();
+        testData.add("type,fruit,quantity");
+
+        List<FruitTransaction> expected = new ArrayList<>();
+        List<FruitTransaction> actual = dataParser.parseData(testData);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void parseData_normalData_ok() {
         List<String> testData = new ArrayList<>();
         testData.add("type,fruit,quantity");

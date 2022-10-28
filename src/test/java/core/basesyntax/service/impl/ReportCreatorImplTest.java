@@ -13,6 +13,14 @@ public class ReportCreatorImplTest {
     private final ReportCreator reportCreator = new ReportCreatorImpl();
 
     @Test
+    public void createReport_emptyStorage_ok() {
+        StorageDao storageDao = new StorageDaoImpl();
+        String expected = "fruit,quantity" + LINE_SEPARATOR;
+        String actual = reportCreator.createReport(storageDao);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void createReport_normalData_ok() {
         Storage.fruits.put("banana", 115);
         Storage.fruits.put("apple", 110);

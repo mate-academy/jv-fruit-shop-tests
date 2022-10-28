@@ -21,12 +21,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readWrongFile_Not_Ok() {
+    public void readWrongFile_not_Ok() {
         fileReaderTest.readFromFile(FILE_NOT_EXIST);
     }
 
     @Test
-    public void readFile_Ok() throws IOException {
+    public void readFile_ok() throws IOException {
         List<String> expectedList = new ArrayList<>();
         expectedList.add("type,fruit,quantity");
         expectedList.add("b,banana,20");

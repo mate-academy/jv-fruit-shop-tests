@@ -39,26 +39,26 @@ public class OperationHandlerStrategyImplTest {
     }
 
     @Test
-    public void testBalanceStrategy_Ok() {
+    public void testBalanceStrategy_ok() {
         int actual = testBalanceStrategy.apply(BALANCE, COUNT);
         int expected = BALANCE_RESULT;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testPurchaseStrategy_Ok() {
+    public void testPurchaseStrategy_ok() {
         int actual = testPurchaseStrategy.apply(BALANCE, COUNT);
         int expected = PURCHASE_RESULT;
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void tesReturnStrategy_Ok() {
+    public void tesReturnStrategy_ok() {
         int actual = testReturnStrategy.apply(BALANCE, COUNT);
         int expected = RETURN_RESULT;
         Assert.assertEquals(expected, actual);
     }
     @Test
-    public void testSupplyStrategy_Ok() {
+    public void testSupplyStrategy_ok() {
         int actual = testSupplyStrategy.apply(BALANCE, COUNT);
         int expected = SUPPLY_RESULT;
         Assert.assertEquals(expected, actual);

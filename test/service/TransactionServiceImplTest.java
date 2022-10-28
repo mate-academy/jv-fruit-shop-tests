@@ -47,7 +47,7 @@ public class TransactionServiceImplTest {
 
     }
     @Test
-    public void setTestTransaction_Ok(){
+    public void setTestTransaction_ok(){
         int expected = 300;
         int actual = FruitStorage.fruitStorage.get(new Fruit("banana"));
         Assert.assertEquals(expected,actual);

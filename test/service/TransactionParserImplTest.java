@@ -25,7 +25,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parsTransaction_Ok() {
+    public void parsTransaction_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("b", new Fruit("apple"), 100));
         List<FruitTransaction> actual = testParser.parseTransactions(testData);

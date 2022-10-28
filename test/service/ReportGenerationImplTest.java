@@ -29,7 +29,7 @@ public class ReportGenerationImplTest {
     }
 
     @Test
-    public void correctReportGeneration_Ok() {
+    public void correctReportGeneration_ok() {
         String actual = testReportGenerator.generateReport(testMap);
         String expected = testReport.toString();
         Assert.assertEquals(expected, actual);

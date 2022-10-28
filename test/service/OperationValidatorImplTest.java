@@ -14,13 +14,13 @@ public class OperationValidatorImplTest {
         testValidator = new OperationValidatorImpl();
     }
     @Test
-    public void setCorrectOperation_Ok() {
+    public void setCorrectOperation_ok() {
         String actual = testValidator.validate(CORRECT_OPERATION);
         Assert.assertEquals(CORRECT_OPERATION, actual);
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void setIncorrectOperation_NotOk(){
+    public void setIncorrectOperation_notOk(){
         testValidator.validate(WRONG_OPERATION);
     }
 }

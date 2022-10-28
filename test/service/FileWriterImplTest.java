@@ -28,13 +28,13 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeWrongFile_NotOk() {
+    public void writeWrongFile_notOk() {
         fileWriterTest.writeDataToFile(testReport.toString(), FILE_NOT_WRITE);
     }
 
     @Test
-    public void writeToFile_Ok() throws IOException {
-       fileWriterTest.writeDataToFile(testReport.toString(), FILE_WRITE_TEST);
+    public void writeToFile_ok() throws IOException {
+        fileWriterTest.writeDataToFile(testReport.toString(), FILE_WRITE_TEST);
         List<String> expected = Files.readAllLines(Path.of(FILE_WRITE_TEST));
         List<String> actual = Files.readAllLines(Path.of(FILE_READ_TEST));
         Assert.assertEquals(expected, actual);

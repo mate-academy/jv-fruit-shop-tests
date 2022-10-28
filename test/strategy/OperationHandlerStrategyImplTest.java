@@ -1,5 +1,4 @@
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.strategy.impl.OperationHandlerBalanceImpl;
 import core.basesyntax.strategy.impl.OperationHandlerPurchaseImpl;
 import core.basesyntax.strategy.impl.OperationHandlerReturnImpl;

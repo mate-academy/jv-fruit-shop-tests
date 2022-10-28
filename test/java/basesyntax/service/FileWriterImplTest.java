@@ -1,3 +1,5 @@
+package basesyntax.service;
+
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.FileWriterImpl;
 import org.junit.Assert;

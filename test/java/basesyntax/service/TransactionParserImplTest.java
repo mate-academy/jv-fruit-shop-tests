@@ -1,3 +1,5 @@
+package basesyntax.service;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationValidator;

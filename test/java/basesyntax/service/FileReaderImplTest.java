@@ -1,3 +1,5 @@
+package basesyntax.service;
+
 import core.basesyntax.service.FileReader;
 
 import java.io.IOException;

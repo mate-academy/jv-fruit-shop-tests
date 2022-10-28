@@ -1,3 +1,5 @@
+package basesyntax.service;
+
 import core.basesyntax.service.OperationValidator;
 import core.basesyntax.service.impl.OperationValidatorImpl;
 import org.junit.Assert;

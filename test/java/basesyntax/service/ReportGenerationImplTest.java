@@ -1,3 +1,5 @@
+package basesyntax.service;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGenerationImpl;

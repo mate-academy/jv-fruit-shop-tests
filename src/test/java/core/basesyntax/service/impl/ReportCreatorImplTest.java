@@ -9,6 +9,7 @@ import core.basesyntax.service.ReportCreator;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private final ReportCreator reportCreator = new ReportCreatorImpl();
 
     @Test
@@ -17,9 +18,9 @@ public class ReportCreatorImplTest {
         Storage.fruits.put("apple", 110);
         StorageDao storageDao = new StorageDaoImpl();
 
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,115" + System.lineSeparator()
-                + "apple,110" + System.lineSeparator();
+        String expected = "fruit,quantity" + LINE_SEPARATOR
+                + "banana,115" + LINE_SEPARATOR
+                + "apple,110" + LINE_SEPARATOR;
         String actual = reportCreator.createReport(storageDao);
         assertEquals(expected, actual);
         Storage.fruits.clear();

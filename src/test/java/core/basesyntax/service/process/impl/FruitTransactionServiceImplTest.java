@@ -23,67 +23,59 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
+    private static final Integer START_QUANTITY = 20;
+    private static final String FRUIT_NAME = "banana";
     private static final StorageDao storageDao = new StorageDaoImpl();
     private static Map<FruitTransaction.Operation,
-            OperationHandler> operationOperationsHandlerMap = new HashMap<>();
+            OperationHandler> operationHandlerMap = new HashMap<>();
     private static OperationStrategy operationStrategy =
-            new OperationStrategyImpl(operationOperationsHandlerMap);
+            new OperationStrategyImpl(operationHandlerMap);
     private static final FruitTransactionService fruitTransactionService =
             new FruitTransactionServiceImpl(operationStrategy);
 
     @BeforeClass
     public static void beforeClass() {
-        operationOperationsHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseHandler(storageDao));
-        operationOperationsHandlerMap.put(FruitTransaction.Operation.RETURN,
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnHandler(storageDao));
-        operationOperationsHandlerMap.put(FruitTransaction.Operation.BALANCE,
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceHandler(storageDao));
-        operationOperationsHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyHandler(storageDao));
-    }
-
-    @After
-    public void tearDown() {
-        Storage.storage.clear();
     }
 
     @Test
     public void processTransactions_balance_ok() {
         FruitTransaction.Operation balanceOperation = FruitTransaction.Operation.BALANCE;
-        String fruitName = "banana";
         Integer fruitQuantity = 20;
         List<FruitTransaction> testData =
-                List.of(new FruitTransaction(balanceOperation, fruitName, fruitQuantity));
+                List.of(new FruitTransaction(balanceOperation, FRUIT_NAME, START_QUANTITY));
         fruitTransactionService.processTransactions(testData);
-        Integer actualQuantity = Storage.storage.get(fruitName);
+        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
         assertEquals(fruitQuantity, actualQuantity);
     }
 
     @Test
     public void processTransactions_purchase_ok() {
         FruitTransaction.Operation purchaseOperation = FruitTransaction.Operation.PURCHASE;
-        String fruitName = "banana";
-        Integer startQuantity = 20;
         Integer purchaseQuantity = 13;
-        Storage.storage.put(fruitName, startQuantity);
+        Storage.storage.put(FRUIT_NAME, START_QUANTITY);
         List<FruitTransaction> testData =
-                List.of(new FruitTransaction(purchaseOperation, fruitName, purchaseQuantity));
+                List.of(new FruitTransaction(purchaseOperation, FRUIT_NAME, purchaseQuantity));
         fruitTransactionService.processTransactions(testData);
-        Integer expectedQuantity = startQuantity - purchaseQuantity;
-        Integer actualQuantity = Storage.storage.get(fruitName);
+        Integer expectedQuantity = START_QUANTITY - purchaseQuantity;
+        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     public void processTransactions_purchaseMore_notOk() {
         FruitTransaction.Operation purchaseOperation = FruitTransaction.Operation.PURCHASE;
-        String fruitName = "banana";
-        Integer startQuantity = 20;
         Integer purchaseQuantity = 100;
-        Storage.storage.put(fruitName, startQuantity);
+        Storage.storage.put(FRUIT_NAME, START_QUANTITY);
         List<FruitTransaction> testData =
-                List.of(new FruitTransaction(purchaseOperation, fruitName, purchaseQuantity));
+                List.of(new FruitTransaction(purchaseOperation, FRUIT_NAME, purchaseQuantity));
         assertThrows(RuntimeException.class,
                 () -> fruitTransactionService.processTransactions(testData));
     }
@@ -91,11 +83,9 @@ public class FruitTransactionServiceImplTest {
     @Test
     public void processTransactions_purchaseNonExistent_notOk() {
         FruitTransaction.Operation purchaseOperation = FruitTransaction.Operation.PURCHASE;
-        String fruitName = "banana";
-        Integer startQuantity = 20;
         Integer purchaseQuantity = 100;
-        String notValidFruitName = "peach";
-        Storage.storage.put(fruitName, startQuantity);
+        String notValidFruitName = "plane";
+        Storage.storage.put(FRUIT_NAME, START_QUANTITY);
         List<FruitTransaction> testData =
                 List.of(new FruitTransaction(purchaseOperation,
                         notValidFruitName, purchaseQuantity));
@@ -106,30 +96,31 @@ public class FruitTransactionServiceImplTest {
     @Test
     public void processTransactions_return_ok() {
         FruitTransaction.Operation returnOperation = FruitTransaction.Operation.RETURN;
-        String fruitName = "banana";
-        Integer startQuantity = 10;
-        Integer returnQuantity = 20;
-        Storage.storage.put(fruitName, startQuantity);
+        Integer returnQuantity = 30;
+        Storage.storage.put(FRUIT_NAME, START_QUANTITY);
         List<FruitTransaction> testData =
-                List.of(new FruitTransaction(returnOperation, fruitName, returnQuantity));
+                List.of(new FruitTransaction(returnOperation, FRUIT_NAME, returnQuantity));
         fruitTransactionService.processTransactions(testData);
-        Integer expectedQuantity = startQuantity + returnQuantity;
-        Integer actualQuantity = Storage.storage.get(fruitName);
+        Integer expectedQuantity = START_QUANTITY + returnQuantity;
+        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     public void processTransactions_supply_ok() {
         FruitTransaction.Operation supplyOperation = FruitTransaction.Operation.SUPPLY;
-        String fruitName = "banana";
-        Integer startQuantity = 10;
-        Integer supplyQuantity = 20;
-        Storage.storage.put(fruitName, startQuantity);
+        Integer supplyQuantity = 40;
+        Storage.storage.put(FRUIT_NAME, START_QUANTITY);
         List<FruitTransaction> testData =
-                List.of(new FruitTransaction(supplyOperation, fruitName, supplyQuantity));
+                List.of(new FruitTransaction(supplyOperation, FRUIT_NAME, supplyQuantity));
         fruitTransactionService.processTransactions(testData);
-        Integer expectedQuantity = startQuantity + supplyQuantity;
-        Integer actualQuantity = Storage.storage.get(fruitName);
+        Integer expectedQuantity = START_QUANTITY + supplyQuantity;
+        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
         assertEquals(expectedQuantity, actualQuantity);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

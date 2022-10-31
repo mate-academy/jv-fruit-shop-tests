@@ -6,16 +6,22 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.read.FruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionParserImplTest {
-    private static final String csvSeparator = ",";
-    private static final String operationTypeName = "type";
-    private static final String fruitName = "fruit";
-    private static final String fruitQuantityName = "quantity";
-    private FruitTransactionParser fruitTransactionParser =
-            new FruitTransactionParserImpl(csvSeparator, operationTypeName,
-                    fruitQuantityName, fruitName);
+    private static final String CSV_SEPARATOR = ",";
+    private static final String OPERATION_TYPE_NAME = "type";
+    private static final String FRUIT_NAME = "fruit";
+    private static final String FRUIT_QUANTITY_NAME = "quantity";
+    private FruitTransactionParser fruitTransactionParser;
+
+    @Before
+    public void setUp() {
+        fruitTransactionParser =
+                new FruitTransactionParserImpl(CSV_SEPARATOR, OPERATION_TYPE_NAME,
+                        FRUIT_QUANTITY_NAME, FRUIT_NAME);
+    }
 
     @Test
     public void parse_emptyData_ok() {

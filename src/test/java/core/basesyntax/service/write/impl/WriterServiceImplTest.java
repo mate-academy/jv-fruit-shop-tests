@@ -13,11 +13,12 @@ public class WriterServiceImplTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String DIRECTORY_PATH = "src/test/resources/";
     private static final String INVALID_DIRECTORY_PATH = "src/test/resources/reports/";
+    private static final String FIRST_LINE = "fruit,quantity";
     private static final WriterService writerService = new WriterServiceImpl();
 
     @Test
     public void writeToFile_validData_ok() throws IOException {
-        String report = "fruit,quantity" + LINE_SEPARATOR
+        String report = FIRST_LINE + LINE_SEPARATOR
                 + "apple,999" + LINE_SEPARATOR
                 + "banana,200";
         String reportFileName = "report.csv";
@@ -28,7 +29,7 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeToFile_invalidData_notOk() {
-        String report = "fruit,quantity" + LINE_SEPARATOR
+        String report = FIRST_LINE + LINE_SEPARATOR
                 + "apple,999" + LINE_SEPARATOR
                 + "banana,200";
         String reportFileName = "report.csv";

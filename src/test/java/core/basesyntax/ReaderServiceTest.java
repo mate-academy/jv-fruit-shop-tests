@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 

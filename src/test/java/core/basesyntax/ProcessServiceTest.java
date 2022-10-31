@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -38,7 +37,7 @@ public class ProcessServiceTest {
 
     @Test
     public void processingService_removeListWithHeading_ok() {
-        List<String> expected = List.of("b,banana,20", "b,apple,100", "b,oranges,240");
+        final List<String> expected = List.of("b,banana,20", "b,apple,100", "b,oranges,240");
         List<String> actual = new ArrayList<>();
         actual.add("type,fruit,quantity");
         actual.add("b,banana,20");

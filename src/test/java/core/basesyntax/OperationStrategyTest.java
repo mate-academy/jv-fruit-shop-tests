@@ -12,13 +12,12 @@ import core.basesyntax.strategy.operations.ReturnHandler;
 import core.basesyntax.strategy.operations.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private String operationLine;
     private static OperationStrategy strategy;
+    private String operationLine;
 
     @BeforeClass
     public static void setUp() {

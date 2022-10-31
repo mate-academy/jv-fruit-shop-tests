@@ -3,20 +3,21 @@ package core.basesyntax.dao.impl;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.GetFruitShopActivities;
+import core.basesyntax.dao.ShopActivitiesParser;
+import core.basesyntax.db.Storage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class GetFruitShopActivitiesImplTest {
+public class ShopActivitiesParserImplTest {
     private static final String END_LINE = System.lineSeparator();
-    private static GetFruitShopActivities getFruitShopActivities;
+    private static ShopActivitiesParser shopActivitiesParser;
     private String stringToSplit;
 
     @BeforeClass
     public static void setUp() {
-        getFruitShopActivities = new GetFruitShopActivitiesImpl();
+        shopActivitiesParser = new ShopActivitiesParserImpl();
     }
 
     @Before
@@ -25,15 +26,15 @@ public class GetFruitShopActivitiesImplTest {
     }
 
     @Test
-    public void getActivities_Ok() {
+    public void parseActivities_Ok() {
         String[] expected = {"b,apple,12", "p,banana,45"};
-        String[] actual = getFruitShopActivities.getActivities(stringToSplit);
+        String[] actual = shopActivitiesParser.parseActivities(stringToSplit);
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void getActivities_NullDataFromFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> getFruitShopActivities.getActivities(null));
+    public void parseActivities_NullDataFromFile_NotOk() {
+        assertThrows(RuntimeException.class, () -> shopActivitiesParser.parseActivities(null));
     }
 
     @AfterClass

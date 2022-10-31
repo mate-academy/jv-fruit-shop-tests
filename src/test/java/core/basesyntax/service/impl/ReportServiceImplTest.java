@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.impl.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static final String END_LINE = System.lineSeparator();
-    private static final String COLUMNS = "fruit,quantity";
+    private static final String COLUMNS = "fruit,quantity" + END_LINE;
     private static ReportService reportService;
 
     @BeforeClass
@@ -30,7 +30,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void getReport_Ok() {
-        String expected = COLUMNS + END_LINE
+        String expected = COLUMNS
                 + "apple,90" + END_LINE
                 + "banana,23" + END_LINE
                 + "kiwi,12" + END_LINE

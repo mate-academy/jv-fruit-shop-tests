@@ -1,12 +1,12 @@
 package core.basesyntax.dao.impl;
 
-import core.basesyntax.dao.GetFruitShopActivities;
+import core.basesyntax.dao.ShopActivitiesParser;
 
-public class GetFruitShopActivitiesImpl implements GetFruitShopActivities {
+public class ShopActivitiesParserImpl implements ShopActivitiesParser {
     private static final String END_LINE = System.lineSeparator();
 
     @Override
-    public String[] getActivities(String dataFromFile) {
+    public String[] parseActivities(String dataFromFile) {
         if (dataFromFile != null) {
             return dataFromFile.split(END_LINE);
         } else {

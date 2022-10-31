@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.Before;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceTest {
@@ -17,11 +18,11 @@ public class WriterServiceTest {
     private static final String OUTPUT_FILE_EXPECTED = "src/test/java/core/basesyntax"
             + "/recources/outputFile2.csv";
     private static final String exceptionMessage = "Can't get the info from the file path ";
-    private WriterService writerService;
-    private String report;
+    private static WriterService writerService;
+    private static String report;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         writerService = new WriterServiceImpl();
         report = "fruit,quantity\n"
                 + "banana,152\n"
@@ -41,7 +42,7 @@ public class WriterServiceTest {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException(exceptionMessage + filePath, e);
+            throw new RuntimeException(exceptionMessage + filePath);
         }
     }
 }

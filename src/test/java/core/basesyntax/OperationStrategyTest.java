@@ -12,15 +12,16 @@ import core.basesyntax.strategy.operations.ReturnHandler;
 import core.basesyntax.strategy.operations.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
     private String operationLine;
-    private OperationStrategy strategy;
+    private static OperationStrategy strategy;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseHandler());
@@ -32,22 +33,22 @@ public class OperationStrategyTest {
     @Test
     public void operationStrategy_getOperationHandler_ok() {
         operationLine = "b,apple,100\n";
-        OperationHandler operationHandler = strategy.getHandler(operationLine);
-        assertSame(operationHandler.getClass(), BalanceHandler.class);
+        OperationHandler actual = strategy.getHandler(operationLine);
+        assertSame(actual.getClass(), BalanceHandler.class);
         operationLine = "s,banana,50\n";
-        operationHandler = strategy.getHandler(operationLine);
-        assertSame(operationHandler.getClass(), SupplyHandler.class);
+        actual = strategy.getHandler(operationLine);
+        assertSame(actual.getClass(), SupplyHandler.class);
         operationLine = "r,apple,10\n";
-        operationHandler = strategy.getHandler(operationLine);
-        assertSame(operationHandler.getClass(), ReturnHandler.class);
+        actual = strategy.getHandler(operationLine);
+        assertSame(actual.getClass(), ReturnHandler.class);
         operationLine = "p,apple,20\n";
-        operationHandler = strategy.getHandler(operationLine);
-        assertSame(operationHandler.getClass(), PurchaseHandler.class);
+        actual = strategy.getHandler(operationLine);
+        assertSame(actual.getClass(), PurchaseHandler.class);
     }
 
     @Test(expected = RuntimeException.class)
     public void operationStrategy_getNonExistingOperationHandler_notOk() {
         operationLine = "m,apple,100\n";
-        OperationHandler operationHandler = strategy.getHandler(operationLine);
+        OperationHandler actual = strategy.getHandler(operationLine);
     }
 }

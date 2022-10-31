@@ -11,9 +11,17 @@ import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.operation.*;
-
-import java.io.*;
+import core.basesyntax.strategy.operation.BalanceOperationImpl;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.PurchaseOperationImpl;
+import core.basesyntax.strategy.operation.ReturnOperationImpl;
+import core.basesyntax.strategy.operation.SupplyOperationImpl;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

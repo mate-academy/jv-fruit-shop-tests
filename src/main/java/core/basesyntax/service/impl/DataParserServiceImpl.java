@@ -4,7 +4,6 @@ import core.basesyntax.db.Store;
 import core.basesyntax.service.DataParserService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.OperationHandler;
-
 import java.util.Map;
 
 public class DataParserServiceImpl implements DataParserService {

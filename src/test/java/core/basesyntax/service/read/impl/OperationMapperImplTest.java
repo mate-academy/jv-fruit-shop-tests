@@ -47,5 +47,4 @@ public class OperationMapperImplTest {
     public void mapToOperation_wrongOperation_notOk() {
         assertThrows(RuntimeException.class, () -> operationMapper.mapToOperation(WRONG_OPERATION));
     }
-
 }

@@ -27,7 +27,6 @@ public class FruitTransactionParserImplTest {
     public void parse_emptyData_ok() {
         List<String> testData = new ArrayList<>();
         testData.add("type,fruit,quantity");
-
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> actual = fruitTransactionParser.parse(testData);
         assertEquals(expected, actual);
@@ -42,7 +41,6 @@ public class FruitTransactionParserImplTest {
         testData.add("s,banana,103");
         testData.add("p,banana,13");
         testData.add("r,apple,10");
-
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
@@ -50,7 +48,6 @@ public class FruitTransactionParserImplTest {
         expected.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13));
         expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10));
         List<FruitTransaction> actual = fruitTransactionParser.parse(testData);
-
         assertEquals(expected, actual);
     }
 

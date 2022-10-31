@@ -32,14 +32,12 @@ public class FileReaderImplTest {
         expected.add(LINES_6);
         List<String> actual = fileReader.readFromFile(DIRECTORY_PATH, VALID_FILENAME);
         assertEquals(expected, actual);
-
     }
 
     @Test
     public void readFromFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReader.readFromFile(DIRECTORY_PATH, NO_VALID_FILENAME));
-
     }
 
     @Test

@@ -6,6 +6,9 @@ public class PurchaseStrategy extends FruitShopStrategy {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("Can't purchase less than 0 fruits");
+        }
         int currentQuantity = storageDao.get(transaction.getFruit())
                 .orElseThrow(()
                         -> new RuntimeException("Theres no such fruit: "

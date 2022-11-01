@@ -19,7 +19,7 @@ public class OperationServiceBalanceImplTest {
         balanceService = new OperationServiceBalanceImpl();
 
         input = new FruitTransaction();
-        input.setFruit(new Fruit("banana"));
+        input.setFruit(BANANA);
         input.setOperation(FruitTransaction.Operation.BALANCE);
         input.setQuantity(100);
     }

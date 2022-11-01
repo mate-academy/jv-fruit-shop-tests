@@ -40,11 +40,7 @@ public class FruitTransactionParserServiceImplTest {
         fourth.setQuantity(10);
         fourth.setOperation(FruitTransaction.Operation.RETURN);
 
-        expectedList = new ArrayList<>();
-        expectedList.add(first);
-        expectedList.add(second);
-        expectedList.add(third);
-        expectedList.add(fourth);
+        expectedList = List.of(first, second, third, fourth);
     }
 
     @Before

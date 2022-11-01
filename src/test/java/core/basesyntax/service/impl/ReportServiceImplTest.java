@@ -11,6 +11,7 @@ import org.junit.Test;
 public class ReportServiceImplTest {
     private static ReportService reportService;
     private static final String FIRST_LINE = "fruit,quantity";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @BeforeClass
     public static void init() {
@@ -27,8 +28,8 @@ public class ReportServiceImplTest {
         FruitStorage.storage.put(new Fruit("banana"), 152);
         FruitStorage.storage.put(new Fruit("apple"), 50);
         StringBuilder stringBuilder = new StringBuilder(FIRST_LINE);
-        stringBuilder.append(System.lineSeparator()).append("banana,152");
-        stringBuilder.append(System.lineSeparator()).append("apple,50");
+        stringBuilder.append(LINE_SEPARATOR).append("banana,152");
+        stringBuilder.append(LINE_SEPARATOR).append("apple,50");
         Assert.assertEquals(stringBuilder.toString(), reportService.createReport());
     }
 
@@ -40,6 +41,6 @@ public class ReportServiceImplTest {
     @Test
     public void createReport_WithoutFirstLine_notOk() {
         FruitStorage.storage.put(new Fruit("banana"), 152);
-        Assert.assertNotEquals(System.lineSeparator() + "banana,152", reportService.createReport());
+        Assert.assertNotEquals(LINE_SEPARATOR + "banana,152", reportService.createReport());
     }
 }

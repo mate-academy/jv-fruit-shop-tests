@@ -1,6 +1,8 @@
 package core.basesyntax.operation.impl;
 
 import core.basesyntax.db.FruitStorage;
+import core.basesyntax.exception.FruitLessThanNeedException;
+import core.basesyntax.exception.NoSuchFruitInStorageException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationService;
@@ -19,7 +21,7 @@ public class OperationServicePurchaseImplTest {
         purchaseService = new OperationServicePurchaseImpl();
 
         input = new FruitTransaction();
-        input.setFruit(new Fruit("banana"));
+        input.setFruit(BANANA);
         input.setOperation(FruitTransaction.Operation.PURCHASE);
         input.setQuantity(15);
     }
@@ -37,12 +39,12 @@ public class OperationServicePurchaseImplTest {
         Assert.assertEquals(85, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NoSuchFruitInStorageException.class)
     public void apply_fruitTransactionWithNoInfoAboutFruit_notOk() {
         purchaseService.apply(input);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FruitLessThanNeedException.class)
     public void apply_lessFruitThanInStorage_notOk() {
         FruitStorage.storage.put(BANANA, 10);
         purchaseService.apply(input);

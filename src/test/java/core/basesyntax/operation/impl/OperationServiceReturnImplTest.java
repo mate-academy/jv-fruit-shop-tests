@@ -19,7 +19,7 @@ public class OperationServiceReturnImplTest {
         returnService = new OperationServiceReturnImpl();
 
         input = new FruitTransaction();
-        input.setFruit(new Fruit("banana"));
+        input.setFruit(BANANA);
         input.setOperation(FruitTransaction.Operation.RETURN);
         input.setQuantity(15);
     }

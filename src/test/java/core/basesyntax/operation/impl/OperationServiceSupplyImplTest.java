@@ -19,8 +19,8 @@ public class OperationServiceSupplyImplTest {
         supplyService = new OperationServiceSupplyImpl();
 
         input = new FruitTransaction();
-        input.setFruit(new Fruit("banana"));
-        input.setOperation(FruitTransaction.Operation.RETURN);
+        input.setFruit(BANANA);
+        input.setOperation(FruitTransaction.Operation.SUPPLY);
         input.setQuantity(15);
     }
 

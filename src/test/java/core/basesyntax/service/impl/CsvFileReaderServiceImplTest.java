@@ -13,6 +13,7 @@ public class CsvFileReaderServiceImplTest {
     private static final String FROM_FILE = "src/main/resources/input.csv";
     private static final String FROM_EMPTY_FILE = "src/main/resources/empty_input.csv";
     private static final String SEPARATOR = System.lineSeparator();
+    private static final String INVALID_PATH = "invalid path";
     private ReaderService readerService;
 
     @Test
@@ -25,21 +26,34 @@ public class CsvFileReaderServiceImplTest {
                 + "p,apple,20" + SEPARATOR
                 + "p,banana,5" + SEPARATOR
                 + "s,banana,50" + SEPARATOR;
-        String actual = read(FROM_FILE);
+        try {
+            readerService = new CsvFileReaderServiceImpl(
+                    new BufferedReader(new FileReader(FROM_FILE)));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found");
+        }
+        String actual = readerService.read();
         assertEquals("The read method should return: " + expected, expected, actual);
     }
 
     @Test
     public void read_emptyFile_ok() {
-        boolean actual = read(FROM_EMPTY_FILE).isEmpty();
+        try {
+            readerService = new CsvFileReaderServiceImpl(
+                    new BufferedReader(new FileReader(FROM_EMPTY_FILE)));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found");
+        }
+        boolean actual = readerService.read().isEmpty();
         assertTrue(actual);
     }
 
-    private String read(String fileName) {
+    @Test(expected = RuntimeException.class)
+    public void read_invalidPath_notOk() {
         try {
             readerService = new CsvFileReaderServiceImpl(
-                    new BufferedReader(new FileReader(fileName)));
-            return readerService.read();
+                    new BufferedReader(new FileReader(INVALID_PATH)));
+            readerService.read();
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found");
         }

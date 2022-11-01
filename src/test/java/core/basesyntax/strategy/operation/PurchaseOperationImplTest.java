@@ -3,6 +3,7 @@ package core.basesyntax.strategy.operation;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Store;
+import core.basesyntax.exception.NotEnoughFruitQuantityException;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,10 +27,10 @@ public class PurchaseOperationImplTest {
                 expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void getResultBalance_resultOperation_ifFruitDontExist_notOk() {
+    @Test(expected = NotEnoughFruitQuantityException.class)
+    public void getResultBalance_resultOperation_ifPurchaseQuantityGreaterThanStorage_notOk() {
         Store.FRUIT_STORAGE.put(APPLE_FRUIT, 200);
-        purchaseOperation.getResultBalance("banana", 100);
+        purchaseOperation.getResultBalance(APPLE_FRUIT, 250);
     }
 
     @After

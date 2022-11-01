@@ -9,6 +9,7 @@ import org.junit.Test;
 
 public class ReturnOperationImplTest {
     private static final String BANANA_FRUIT = "banana";
+    private static final String APPLE_FRUIT = "apple";
     private static OperationHandler returnOperation;
 
     @BeforeClass
@@ -26,10 +27,15 @@ public class ReturnOperationImplTest {
                 expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void getResultBalance_returnOperation_ifFruitDontExist_notOk() {
+    @Test()
+    public void getResultBalance_returnOperation_ifFruitDontExist_ok() {
         Store.FRUIT_STORAGE.put(BANANA_FRUIT, 200);
-        returnOperation.getResultBalance("apple", 100);
+        returnOperation.getResultBalance(APPLE_FRUIT, 100);
+        int expectedAppleQuantity = 100;
+        int actual = Store.FRUIT_STORAGE.get(APPLE_FRUIT);
+        assertEquals("Expected quantity: " + expectedAppleQuantity + ", but was" + actual,
+                expectedAppleQuantity, actual);
+
     }
 
     @After

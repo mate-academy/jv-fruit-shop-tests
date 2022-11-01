@@ -4,10 +4,10 @@ import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class FileWriterServiceImpl implements WriterService {
+public class CsvFileWriterServiceImpl implements WriterService {
     private final BufferedWriter bufferedWriter;
 
-    public FileWriterServiceImpl(BufferedWriter bufferedWriter) {
+    public CsvFileWriterServiceImpl(BufferedWriter bufferedWriter) {
         this.bufferedWriter = bufferedWriter;
     }
 

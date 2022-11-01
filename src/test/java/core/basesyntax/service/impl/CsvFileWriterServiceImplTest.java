@@ -10,17 +10,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Test;
 
-public class FileWriterServiceImplTest {
+public class CsvFileWriterServiceImplTest {
     private static final String OUTPUT_FOUR_PRODUCTS = "src/main/resources/output_4.csv";
     private static final String OUTPUT_ONE_PRODUCT = "src/main/resources/output_1.csv";
     private static final String OUTPUT_WITHOUT_PRODUCTS = "src/main/resources/output_0.csv";
+    private static final String SEPARATOR = System.lineSeparator();
 
     @Test
     public void write_fourProducts_ok() {
-        String generatedData = "fruit,quantity" + System.lineSeparator()
-                + "banana,30" + System.lineSeparator()
-                + "apple,100" + System.lineSeparator()
-                + "lemon,150" + System.lineSeparator()
+        String generatedData = "fruit,quantity" + SEPARATOR
+                + "banana,30" + SEPARATOR
+                + "apple,100" + SEPARATOR
+                + "lemon,150" + SEPARATOR
                 + "tomato,1000";;
         getWriter(OUTPUT_FOUR_PRODUCTS).write(generatedData);
         String actual = readFromFile(OUTPUT_FOUR_PRODUCTS);
@@ -29,7 +30,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void write_oneProduct_ok() {
-        String generatedData = "fruit,quantity" + System.lineSeparator()
+        String generatedData = "fruit,quantity" + SEPARATOR
                 + "carrot,5000";
         getWriter(OUTPUT_ONE_PRODUCT).write(generatedData);
         String actual = readFromFile(OUTPUT_ONE_PRODUCT);
@@ -46,7 +47,7 @@ public class FileWriterServiceImplTest {
 
     private WriterService getWriter(String toFile) {
         try {
-            return new FileWriterServiceImpl(new BufferedWriter(new FileWriter(toFile)));
+            return new CsvFileWriterServiceImpl(new BufferedWriter(new FileWriter(toFile)));
         } catch (IOException e) {
             throw new RuntimeException("Cannot create file with name: " + toFile);
         }

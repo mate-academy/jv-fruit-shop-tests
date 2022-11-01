@@ -19,14 +19,15 @@ import org.junit.Test;
 
 public class DataParserServiceImplTest {
     private static final String EMPTY_DATA = "";
-    private static final String DATA = "b,banana,20" + System.lineSeparator()
-            + "b,apple,100" + System.lineSeparator()
-            + "s,banana,100" + System.lineSeparator()
-            + "p,banana,13" + System.lineSeparator()
-            + "r,apple,10" + System.lineSeparator()
-            + "p,apple,20" + System.lineSeparator()
-            + "p,banana,5" + System.lineSeparator()
-            + "s,banana,50" + System.lineSeparator();
+    private static final String SEPARATOR = System.lineSeparator();
+    private static final String DATA = "b,banana,20" + SEPARATOR
+            + "b,apple,100" + SEPARATOR
+            + "s,banana,100" + SEPARATOR
+            + "p,banana,13" + SEPARATOR
+            + "r,apple,10" + SEPARATOR
+            + "p,apple,20" + SEPARATOR
+            + "p,banana,5" + SEPARATOR
+            + "s,banana,50" + SEPARATOR;
     private static DataParserService dataParserService;
 
     @BeforeClass

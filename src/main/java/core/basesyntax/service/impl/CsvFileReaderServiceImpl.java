@@ -4,10 +4,10 @@ import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class FileReaderServiceImpl implements ReaderService {
+public class CsvFileReaderServiceImpl implements ReaderService {
     private final BufferedReader bufferedReader;
 
-    public FileReaderServiceImpl(BufferedReader bufferedReader) {
+    public CsvFileReaderServiceImpl(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
     }
 

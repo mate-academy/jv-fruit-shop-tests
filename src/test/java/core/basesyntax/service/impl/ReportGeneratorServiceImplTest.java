@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportGeneratorServiceImplTest {
+    private static final String SEPARATOR = System.lineSeparator();
     private static ReportGeneratorService reportGeneratorService;
 
     @BeforeClass
@@ -22,25 +23,25 @@ public class ReportGeneratorServiceImplTest {
         Store.FRUIT_STORAGE.put("apple", 100);
         Store.FRUIT_STORAGE.put("lemon", 150);
         Store.FRUIT_STORAGE.put("tomato", 1000);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,30" + System.lineSeparator()
-                + "apple,100" + System.lineSeparator()
-                + "lemon,150" + System.lineSeparator()
+        String expected = "fruit,quantity" + SEPARATOR
+                + "banana,30" + SEPARATOR
+                + "apple,100" + SEPARATOR
+                + "lemon,150" + SEPARATOR
                 + "tomato,1000";
         String actual = reportGeneratorService.generateReport(Store.FRUIT_STORAGE);
-        assertEquals("Expected report: " + System.lineSeparator() + expected
-                + "but was:" + System.lineSeparator() + actual,
+        assertEquals("Expected report: " + SEPARATOR + expected
+                + "but was:" + SEPARATOR + actual,
                 expected, actual);
     }
 
     @Test
     public void generateReport_oneProduct_ok() {
         Store.FRUIT_STORAGE.put("carrot", 5000);
-        String expected = "fruit,quantity" + System.lineSeparator()
+        String expected = "fruit,quantity" + SEPARATOR
                 + "carrot,5000";
         String actual = reportGeneratorService.generateReport(Store.FRUIT_STORAGE);
-        assertEquals("Expected report: " + System.lineSeparator() + expected
-                        + "but was:" + System.lineSeparator() + actual,
+        assertEquals("Expected report: " + SEPARATOR + expected
+                        + "but was:" + SEPARATOR + actual,
                 expected, actual);
     }
 
@@ -48,8 +49,8 @@ public class ReportGeneratorServiceImplTest {
     public void generateReport_withoutProduct_notOk() {
         String expected = "fruit,quantity";
         String actual = reportGeneratorService.generateReport(Store.FRUIT_STORAGE);
-        assertEquals("Expected report: " + System.lineSeparator() + expected
-                        + "but was:" + System.lineSeparator() + actual,
+        assertEquals("Expected report: " + SEPARATOR + expected
+                        + "but was:" + SEPARATOR + actual,
                 expected, actual);
     }
 

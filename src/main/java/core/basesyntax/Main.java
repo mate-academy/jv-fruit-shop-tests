@@ -5,9 +5,9 @@ import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.DataParserServiceImpl;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
-import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -42,7 +42,7 @@ public class Main {
         ReaderService readerService;
         String readData;
         try {
-            readerService = new FileReaderServiceImpl(
+            readerService = new CsvFileReaderServiceImpl(
                     new BufferedReader(new FileReader(fromFile)));
             readData = readerService.read();
         } catch (FileNotFoundException e) {
@@ -55,7 +55,7 @@ public class Main {
         String report = generatorService.generateReport(parseDataMap);
         WriterService writerService;
         try {
-            writerService = new FileWriterServiceImpl(
+            writerService = new CsvFileWriterServiceImpl(
                     new BufferedWriter(new FileWriter(toFile)));
             writerService.write(report);
         } catch (IOException e) {

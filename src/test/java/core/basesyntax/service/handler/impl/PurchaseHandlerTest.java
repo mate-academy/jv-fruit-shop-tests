@@ -1,7 +1,6 @@
 package core.basesyntax.service.handler.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.exception.NoSuchAFruitAtShop;
 import core.basesyntax.dao.exception.NotEnoughFruit;
@@ -34,17 +33,15 @@ public class PurchaseHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = NotEnoughFruit.class)
     public void processOperation_TakeMoreFruitThanIs_NotOk() {
         Storage.fruits.put("apple", 1);
-        assertThrows(NotEnoughFruit.class, () ->
-                purchaseHandler.processOperation(transaction));
+        purchaseHandler.processOperation(transaction);
     }
 
-    @Test
+    @Test(expected = NoSuchAFruitAtShop.class)
     public void processOperation_NonExistFruit_NotOk() {
-        assertThrows(NoSuchAFruitAtShop.class, () ->
-                purchaseHandler.processOperation(transaction));
+        purchaseHandler.processOperation(transaction);
     }
 
     @After

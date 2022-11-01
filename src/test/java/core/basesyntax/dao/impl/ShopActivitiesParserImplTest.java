@@ -1,7 +1,6 @@
 package core.basesyntax.dao.impl;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.ShopActivitiesParser;
 import core.basesyntax.db.Storage;
@@ -32,9 +31,9 @@ public class ShopActivitiesParserImplTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void parseActivities_NullDataFromFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> shopActivitiesParser.parseActivities(null));
+        shopActivitiesParser.parseActivities(null);
     }
 
     @AfterClass

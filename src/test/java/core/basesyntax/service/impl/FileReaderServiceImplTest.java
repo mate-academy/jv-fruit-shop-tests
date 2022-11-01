@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReaderService;
 import org.junit.BeforeClass;
@@ -24,18 +23,18 @@ public class FileReaderServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_InvalidPath_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReaderService.readFile(""));
+        fileReaderService.readFile("");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_NullPath_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReaderService.readFile(null));
+        fileReaderService.readFile(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_EmptyData_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReaderService.readFile(EMPTY_FILE_PATH));
+        fileReaderService.readFile(EMPTY_FILE_PATH);
     }
 }

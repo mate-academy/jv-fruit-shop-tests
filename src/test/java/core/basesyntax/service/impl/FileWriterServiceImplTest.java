@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
@@ -27,28 +26,24 @@ public class FileWriterServiceImplTest {
         assertEquals(DATA_TO_WRITE, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeInFile_EmptyData_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                fileWriterService.writeToFile("", PATH));
+        fileWriterService.writeToFile("", PATH);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeInFile_NullData_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                fileWriterService.writeToFile(null, PATH));
+        fileWriterService.writeToFile(null, PATH);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_InvalidPath_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                fileWriterService.writeToFile(DATA_TO_WRITE, ""));
+        fileWriterService.writeToFile(DATA_TO_WRITE, "");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_NullPath_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                fileWriterService.writeToFile(DATA_TO_WRITE, null));
+        fileWriterService.writeToFile(DATA_TO_WRITE, null);
     }
 
     private String readFile(String path) {

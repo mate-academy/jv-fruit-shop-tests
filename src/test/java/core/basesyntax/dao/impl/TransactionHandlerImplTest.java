@@ -1,7 +1,6 @@
 package core.basesyntax.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.TransactionHandler;
 import core.basesyntax.dao.exception.NoSuchAFruitAtShop;
@@ -47,16 +46,14 @@ public class TransactionHandlerImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void addToBalance_NullFruit_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                transactionHandler.addToBalance(null, DEFAULT_QUANTITY));
+        transactionHandler.addToBalance(null, DEFAULT_QUANTITY);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void addToBalance_NullQuantity_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                transactionHandler.addToBalance(DEFAULT_FRUIT, null));
+        transactionHandler.addToBalance(DEFAULT_FRUIT, null);
     }
 
     @Test
@@ -67,22 +64,19 @@ public class TransactionHandlerImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = NoSuchAFruitAtShop.class)
     public void takeFromBalance_NonExistentFruit_NotOk() {
-        assertThrows(NoSuchAFruitAtShop.class, () ->
-                transactionHandler.takeFromBalance("kiwi", 5));
+        transactionHandler.takeFromBalance("kiwi", 5);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void takeFromBalance_NullFruit_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                transactionHandler.takeFromBalance(null, DEFAULT_QUANTITY));
+        transactionHandler.takeFromBalance(null, DEFAULT_QUANTITY);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void takeFromBalance_NullQuantity_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                transactionHandler.takeFromBalance(DEFAULT_FRUIT, null));
+        transactionHandler.takeFromBalance(DEFAULT_FRUIT, null);
     }
 
     @After

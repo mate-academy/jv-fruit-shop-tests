@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
@@ -39,10 +38,10 @@ public class ReportServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getReport_NullStorage_NotOk() {
         Storage.fruits.clear();
-        assertThrows(RuntimeException.class, () -> reportService.getReport());
+        reportService.getReport();
     }
 
     @After

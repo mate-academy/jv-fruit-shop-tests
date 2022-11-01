@@ -1,13 +1,11 @@
 package core.basesyntax.dao.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitActionParser;
 import core.basesyntax.dao.exception.NoSuchEnumValue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,23 +26,17 @@ public class FruitActionParserImplTest {
     public void init() {
         activity = new String[]{"b,banana,12", "s,apple,50", "p,kiwi,15", "r,apple,2"};
 
-        expected = new ArrayList<>();
-
         FruitTransaction firstTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 12);
-        expected.add(firstTransaction);
-
         FruitTransaction secondTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 50);
-        expected.add(secondTransaction);
-
         FruitTransaction thirdTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "kiwi", 15);
-        expected.add(thirdTransaction);
-
         FruitTransaction fourthTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 2);
-        expected.add(fourthTransaction);
+
+        expected = List.of(firstTransaction, secondTransaction,
+                thirdTransaction, fourthTransaction);
     }
 
     @Test
@@ -53,10 +45,9 @@ public class FruitActionParserImplTest {
         assertEquals(expected.toString(), actual.toString());
     }
 
-    @Test
-    public void parseAction_NullActivity_NotOk() {
-        assertThrows(RuntimeException.class, () ->
-                fruitActionParser.parseAction(null));
+    @Test(expected = RuntimeException.class)
+    public void parseAction_NullActivity() {
+        fruitActionParser.parseAction(null);
     }
 
     @Test
@@ -87,10 +78,9 @@ public class FruitActionParserImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = NoSuchEnumValue.class)
     public void getEnumValue_NonExistOperation_NotOk() {
-        assertThrows(NoSuchEnumValue.class, () ->
-                FruitActionParserImpl.getEnumValue(""));
+        FruitActionParserImpl.getEnumValue("");
     }
 
     @AfterClass

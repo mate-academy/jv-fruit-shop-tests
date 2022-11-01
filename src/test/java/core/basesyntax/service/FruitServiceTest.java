@@ -16,6 +16,8 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class FruitServiceTest {
+    private static final String FIRST_FRUIT = "fruit1";
+    private static final String SECOND_FRUIT = "fruit2";
     private final Map<Operation, FruitShopStrategy> fruitShopStrategyMap = Map.of(
             Operation.BALANCE, new BalanceStrategy(),
             Operation.SUPPLY, new SupplyStrategy(),
@@ -24,8 +26,6 @@ public class FruitServiceTest {
     );
     private final FruitService fruitService = new FruitServiceImpl(fruitShopStrategyMap);
     private final Storage storage = Storage.getInstance();
-    private final String FIRST_FRUIT = "fruit1";
-    private final String SECOND_FRUIT = "fruit2";
     private List<FruitTransaction> testTransactions;
 
     @Before

@@ -57,7 +57,6 @@ public class OperationStrategyTest {
         assertSame(actual.getClass(), PurchaseHandler.class);
     }
 
-
     @Test(expected = RuntimeException.class)
     public void operationStrategy_getNonExistingOperationHandler_notOk() {
         operationLine = "m,apple,100\n";

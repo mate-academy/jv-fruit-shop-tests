@@ -43,7 +43,7 @@ public class FileWriterServiceTest {
         }
     }
 
-    @Test(expected = InvalidPathException.class)
+    @Test(expected = RuntimeException.class)
     public void writeToFile_invalidPath_notOk() {
         fileWriterService.writeToFile(INVALID_PATH, VALID_DATA);
     }

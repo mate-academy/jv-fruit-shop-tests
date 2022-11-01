@@ -18,7 +18,7 @@ public class ReportServiceTest {
 
     @BeforeClass
     public static void beforeClass() {
-         reportService = new FruitReportService();
+        reportService = new FruitReportService();
     }
 
     @Before

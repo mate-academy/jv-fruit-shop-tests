@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvReaderServiceImplTest {
-    private static final String CORRECT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String CORRECT_FILE_PATH = "src/test/resources/inputTest.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
     private static FileReaderService readerService;
 

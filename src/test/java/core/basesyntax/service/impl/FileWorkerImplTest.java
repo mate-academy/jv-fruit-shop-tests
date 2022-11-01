@@ -3,9 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileWorker;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -51,27 +49,5 @@ public class FileWorkerImplTest {
     public void writeToFile_mapIsNull_notOk() {
         exceptionRule.expect(RuntimeException.class);
         fileWorker.writeToFile(PATH_TO_REPORT_FILE, HEADER_FOR_REPORT_FILE, COLUMN_SEPARATOR, null);
-    }
-
-    @Test
-    public void writeToFile_fileAlreadyInUse_notOk() {
-        exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("Something went wrong "
-                + "when writing report to "
-                + PATH_TO_REPORT_FILE);
-        final RandomAccessFile lockFile;
-        try {
-            lockFile = new RandomAccessFile(PATH_TO_REPORT_FILE, "rw");
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            lockFile.getChannel().lock();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        fileWorker.writeToFile(PATH_TO_REPORT_FILE,
-                HEADER_FOR_REPORT_FILE, COLUMN_SEPARATOR,
-                Map.of("banana", 12));
     }
 }

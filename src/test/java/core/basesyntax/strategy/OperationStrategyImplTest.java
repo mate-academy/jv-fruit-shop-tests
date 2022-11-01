@@ -40,42 +40,37 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void provideEmptyStrategyMap_notOk() {
+    public void operationStrategy_emptyStrategyMap_notOk() {
         operationStrategy.provideStrategyList(new HashMap<>());
-        OperationHandler actual = operationStrategy.get(RETURN_OPERATION);
-        assertNull(actual);
+        assertNull(operationStrategy.get(RETURN_OPERATION));
     }
 
     @Test(expected = RuntimeException.class)
-    public void notExistingOperation_notOk() {
-        OperationHandler actual = operationStrategy.get("a");
+    public void operationStrategy_NotExistingOperation_notOk() {
+        operationStrategy.get("a");
     }
 
     @Test
-    public void getReturnHandler_ok() {
+    public void operationStrategy_returnOperation_ok() {
         OperationHandler actual = operationStrategy.get(RETURN_OPERATION);
-        OperationHandler expected = new OperationHandlerReturn();
-        assertEquals(actual.getClass(), expected.getClass());
+        assertEquals(OperationHandlerReturn.class, actual.getClass());
     }
 
     @Test
-    public void getBalanceHandler_ok() {
+    public void operationStrategy_balanceOperation_ok() {
         OperationHandler actual = operationStrategy.get(BALANCE_OPERATION);
-        OperationHandler expected = new OperationHandlerBalance();
-        assertEquals(actual.getClass(), expected.getClass());
+        assertEquals(OperationHandlerBalance.class, actual.getClass());
     }
 
     @Test
-    public void getPurchaseHandler_ok() {
+    public void operationStrategy_purchaseOperation_ok() {
         OperationHandler actual = operationStrategy.get(PURCHASE_OPERATION);
-        OperationHandler expected = new OperationHandlerPurchase();
-        assertEquals(actual.getClass(), expected.getClass());
+        assertEquals(OperationHandlerPurchase.class, actual.getClass());
     }
 
     @Test
-    public void getSupplyHandler_ok() {
+    public void operationStrategy_supplyOperation_ok() {
         OperationHandler actual = operationStrategy.get(SUPPLY_OPERATION);
-        OperationHandler expected = new OperationHandlerSupply();
-        assertEquals(actual.getClass(), expected.getClass());
+        assertEquals(OperationHandlerSupply.class, actual.getClass());
     }
 }

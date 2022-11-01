@@ -16,12 +16,12 @@ public class StorageReadServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readDataFromNonExistingFile_notOk() {
-        List<String> actual = storageReadService.readData("src/main/resources/NotExisting.csv");
+    public void readData_notExistingFile_notOk() {
+        storageReadService.readData("src/main/resources/NotExisting.csv");
     }
 
     @Test
-    public void readDataFromExistingFile_ok() {
+    public void readData_validFile_ok() {
         List<String> actual = storageReadService.readData("src/main/resources/storage.csv");
         List<String> expected = List.of("type,fruit,quantity",
                                         "b,banana,40",

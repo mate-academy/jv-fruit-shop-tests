@@ -20,23 +20,23 @@ public class StorageWriteServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void notValidFilePathInput_notOK() {
-        String actual = storageWriteService.writeFromDb(VALID_REPORT_EXAMPLE, "");
+    public void writeFromDb_notValidFilePath_notOK() {
+        storageWriteService.writeFromDb(VALID_REPORT_EXAMPLE, "");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeNullString_notOk() {
-        String actual = storageWriteService.writeFromDb(NULL_VALUE, FILE_PATH_WRITE);
+    public void writeFromDb_nullValue_notOk() {
+        storageWriteService.writeFromDb(NULL_VALUE, FILE_PATH_WRITE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToNullFilePathInput_notOk() {
-        String actual = storageWriteService.writeFromDb(VALID_REPORT_EXAMPLE, NULL_VALUE);
+    public void writeFromDb_nullFilePath_notOk() {
+        storageWriteService.writeFromDb(VALID_REPORT_EXAMPLE, NULL_VALUE);
     }
 
     @Test
-    public void writeValidData_ok() {
+    public void writeFromDb_validParameters_ok() {
         String actual = storageWriteService.writeFromDb(VALID_REPORT_EXAMPLE, FILE_PATH_WRITE);
-        assertEquals(actual, SUCCESS_MESSAGE + FILE_PATH_WRITE);
+        assertEquals(SUCCESS_MESSAGE + FILE_PATH_WRITE, actual);
     }
 }

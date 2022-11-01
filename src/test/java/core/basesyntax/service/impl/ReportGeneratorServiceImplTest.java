@@ -21,23 +21,22 @@ public class ReportGeneratorServiceImplTest {
         reportGeneratorService = new ReportGeneratorServiceImpl();
     }
 
-    @After
-    public void tearDown() {
-        FruitStorage.fruitStorage.clear();
-    }
-
     @Test
-    public void emptyDataBaseReport_ok() {
+    public void generateReport_emptyDataBase_ok() {
         String actual = reportGeneratorService.generateReport();
-        String expected = EXPECTED_LINE;
-        assertEquals(actual, expected);
+        assertEquals(EXPECTED_LINE, actual);
     }
 
     @Test
-    public void validDataReport_ok() {
+    public void generateReport_validDataBase_ok() {
         FruitStorage.fruitStorage.put(BANANA_KEY, BANANA_VALUE);
         String actual = reportGeneratorService.generateReport();
         String expected = EXPECTED_LINE + VALID_REPORT_DATA;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        FruitStorage.fruitStorage.clear();
     }
 }

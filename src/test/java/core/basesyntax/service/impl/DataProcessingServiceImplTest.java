@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class DataProcessingServiceImplTest {
     private static final String FILE_HEADER = "type,fruit,quantity";
     private static final String VALID_DATA = "b,banana,50";
     private static final String BANANA_KEY = "banana";
-    private static final Integer BANANA_VALUE = 50;
+    private static final int BANANA_VALUE = 50;
     private static DataProcessingService dataProcessingService;
     private static OperationStrategy strategyPicker;
     private List<String> data;
@@ -47,57 +48,61 @@ public class DataProcessingServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptyList_notOk() {
+    public void processData_emptyList_notOk() {
         dataProcessingService.processData(data, strategyPicker);
     }
 
     @Test(expected = RuntimeException.class)
-    public void dataWithWrongOperation_notOk() {
+    public void processData_dataWithWrongOperation_notOk() {
         data.add(FILE_HEADER);
         data.add("k,banana,50");
         dataProcessingService.processData(data, strategyPicker);
     }
 
     @Test
-    public void validDataProcessing_ok() {
+    public void processData_validData_ok() {
         data.add(FILE_HEADER);
         data.add(VALID_DATA);
         dataProcessingService.processData(data, strategyPicker);
         int actual = FruitStorage.fruitStorage.get(BANANA_KEY);
-        int expected = BANANA_VALUE;
-        assertEquals(actual, expected);
+        assertEquals(BANANA_VALUE, actual);
     }
 
     @Test
-    public void dataWithReturnOperation_ok() {
+    public void processData_dataWithReturnOperation_ok() {
         data.add(FILE_HEADER);
         data.add(VALID_DATA);
         data.add("r,banana,25");
         dataProcessingService.processData(data, strategyPicker);
-        int expected = 75;
+        int expected = BANANA_VALUE + 25;
         int actual = FruitStorage.fruitStorage.get(BANANA_KEY);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void dataWithSupplyOperator_ok() {
+    public void processData_dataWithSupplyOperation_ok() {
         data.add(FILE_HEADER);
         data.add(VALID_DATA);
         data.add("s,banana,50");
         dataProcessingService.processData(data, strategyPicker);
-        int expected = 100;
+        int expected = BANANA_VALUE + 50;
         int actual = FruitStorage.fruitStorage.get(BANANA_KEY);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void dataWithPurchaseOperator_ok() {
+    public void processData_dataWithPurchaseOperation_ok() {
         data.add(FILE_HEADER);
         data.add(VALID_DATA);
         data.add("p,banana,30");
         dataProcessingService.processData(data, strategyPicker);
-        int expected = 20;
+        int expected = BANANA_VALUE - 30;
         int actual = FruitStorage.fruitStorage.get(BANANA_KEY);
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        FruitStorage.fruitStorage.clear();
     }
 }

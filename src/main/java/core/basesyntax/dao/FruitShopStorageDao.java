@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-
 import java.util.OptionalInt;
 
 public class FruitShopStorageDao implements StorageDao {

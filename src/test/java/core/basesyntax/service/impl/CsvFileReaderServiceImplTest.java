@@ -3,10 +3,8 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.service.ReaderService;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import core.basesyntax.service.impl.creator.CsvFileReaderServiceImplCreator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
@@ -14,7 +12,12 @@ public class CsvFileReaderServiceImplTest {
     private static final String FROM_EMPTY_FILE = "src/main/resources/empty_input.csv";
     private static final String SEPARATOR = System.lineSeparator();
     private static final String INVALID_PATH = "invalid path";
-    private ReaderService readerService;
+    private static CsvFileReaderServiceImplCreator reader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        reader = new CsvFileReaderServiceImplCreator();
+    }
 
     @Test
     public void read_validData_ok() {
@@ -26,36 +29,21 @@ public class CsvFileReaderServiceImplTest {
                 + "p,apple,20" + SEPARATOR
                 + "p,banana,5" + SEPARATOR
                 + "s,banana,50" + SEPARATOR;
-        try {
-            readerService = new CsvFileReaderServiceImpl(
-                    new BufferedReader(new FileReader(FROM_FILE)));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found");
-        }
-        String actual = readerService.read();
+        String actual = reader.createReader(FROM_FILE)
+                .read();
         assertEquals("The read method should return: " + expected, expected, actual);
     }
 
     @Test
     public void read_emptyFile_ok() {
-        try {
-            readerService = new CsvFileReaderServiceImpl(
-                    new BufferedReader(new FileReader(FROM_EMPTY_FILE)));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found");
-        }
-        boolean actual = readerService.read().isEmpty();
+        boolean actual = reader.createReader(FROM_EMPTY_FILE)
+                .read()
+                .isEmpty();
         assertTrue(actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void read_invalidPath_notOk() {
-        try {
-            readerService = new CsvFileReaderServiceImpl(
-                    new BufferedReader(new FileReader(INVALID_PATH)));
-            readerService.read();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found");
-        }
+        reader.createReader(INVALID_PATH).read();
     }
 }

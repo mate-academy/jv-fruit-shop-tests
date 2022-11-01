@@ -28,7 +28,7 @@ public class CsvWriterServiceTest {
     }
 
     @After
-    public void afterAll() {
+    public void afterEach() {
         try {
             Files.deleteIfExists(path);
         } catch (IOException e) {

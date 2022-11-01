@@ -58,5 +58,4 @@ public class FruitTransactionParserTest {
                 .setFruitName(name)
                 .setValueOfFruit(value);
     }
-
 }

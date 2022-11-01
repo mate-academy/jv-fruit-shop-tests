@@ -23,8 +23,8 @@ public class CsvWriter implements WriterService {
             linesToFile = title + System.lineSeparator() + linesToFile;
         }
         try {
-            Files.write(path,linesToFile.getBytes());
-        } catch (IOException e) {
+            Files.write(path, linesToFile.getBytes());
+        } catch (IOException | NullPointerException e) {
             throw new RuntimeException("Can`t write to file", e);
         }
     }

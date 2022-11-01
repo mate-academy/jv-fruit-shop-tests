@@ -16,11 +16,11 @@ public class ReportServiceImplTest {
     public void createReport_ok() {
         Storage.storage.put("banana", 200);
         Storage.storage.put("apple", 999);
-        String expectedReport = FIRST_LINE + LINE_SEPARATOR
+        String expected = FIRST_LINE + LINE_SEPARATOR
                 + "apple,999" + LINE_SEPARATOR
                 + "banana,200";
-        String actualReport = reportService.createReport();
-        assertEquals(expectedReport, actualReport);
+        String actual = reportService.createReport();
+        assertEquals(expected, actual);
     }
 
     @Test

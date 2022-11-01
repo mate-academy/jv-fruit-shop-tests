@@ -18,13 +18,13 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeToFile_validData_ok() throws IOException {
-        String report = FIRST_LINE + LINE_SEPARATOR
+        String expected = FIRST_LINE + LINE_SEPARATOR
                 + "apple,999" + LINE_SEPARATOR
                 + "banana,200";
         String reportFileName = "report.csv";
-        writerService.writeToFile(DIRECTORY_PATH, reportFileName, report);
+        writerService.writeToFile(DIRECTORY_PATH, reportFileName, expected);
         String actual = Files.readString(Path.of(DIRECTORY_PATH, reportFileName));
-        assertEquals(report, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

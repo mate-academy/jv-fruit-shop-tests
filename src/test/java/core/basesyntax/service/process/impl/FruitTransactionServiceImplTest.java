@@ -48,12 +48,11 @@ public class FruitTransactionServiceImplTest {
     @Test
     public void processTransactions_balance_ok() {
         FruitTransaction.Operation balanceOperation = FruitTransaction.Operation.BALANCE;
-        Integer fruitQuantity = 20;
         List<FruitTransaction> testData =
                 List.of(new FruitTransaction(balanceOperation, FRUIT_NAME, START_QUANTITY));
         fruitTransactionService.processTransactions(testData);
-        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
-        assertEquals(fruitQuantity, actualQuantity);
+        Integer actual = Storage.storage.get(FRUIT_NAME);
+        assertEquals(START_QUANTITY, actual);
     }
 
     @Test
@@ -64,9 +63,9 @@ public class FruitTransactionServiceImplTest {
         List<FruitTransaction> testData =
                 List.of(new FruitTransaction(purchaseOperation, FRUIT_NAME, purchaseQuantity));
         fruitTransactionService.processTransactions(testData);
-        Integer expectedQuantity = START_QUANTITY - purchaseQuantity;
-        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
-        assertEquals(expectedQuantity, actualQuantity);
+        Integer expected = START_QUANTITY - purchaseQuantity;
+        Integer actual = Storage.storage.get(FRUIT_NAME);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -101,9 +100,9 @@ public class FruitTransactionServiceImplTest {
         List<FruitTransaction> testData =
                 List.of(new FruitTransaction(returnOperation, FRUIT_NAME, returnQuantity));
         fruitTransactionService.processTransactions(testData);
-        Integer expectedQuantity = START_QUANTITY + returnQuantity;
-        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
-        assertEquals(expectedQuantity, actualQuantity);
+        Integer expected = START_QUANTITY + returnQuantity;
+        Integer actual = Storage.storage.get(FRUIT_NAME);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -114,9 +113,9 @@ public class FruitTransactionServiceImplTest {
         List<FruitTransaction> testData =
                 List.of(new FruitTransaction(supplyOperation, FRUIT_NAME, supplyQuantity));
         fruitTransactionService.processTransactions(testData);
-        Integer expectedQuantity = START_QUANTITY + supplyQuantity;
-        Integer actualQuantity = Storage.storage.get(FRUIT_NAME);
-        assertEquals(expectedQuantity, actualQuantity);
+        Integer expected = START_QUANTITY + supplyQuantity;
+        Integer actual = Storage.storage.get(FRUIT_NAME);
+        assertEquals(expected, actual);
     }
 
     @After

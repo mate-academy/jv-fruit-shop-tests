@@ -1,8 +1,6 @@
 package basesyntax.service;
 
 import static core.basesyntax.model.Operation.BALANCE;
-import static core.basesyntax.model.Operation.PURCHASE;
-import static core.basesyntax.model.Operation.RETURN;
 import static core.basesyntax.model.Operation.SUPPLY;
 
 import core.basesyntax.db.FruitStorage;
@@ -13,15 +11,15 @@ import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.strategy.impl.OperationHandlerBalanceImpl;
-import core.basesyntax.strategy.impl.OperationHandlerPurchaseImpl;
-import core.basesyntax.strategy.impl.OperationHandlerReturnImpl;
 import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
 import core.basesyntax.strategy.impl.OperationHandlerSupplyImpl;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -30,28 +28,36 @@ public class TransactionServiceImplTest {
     private static Map<String, OperationHandler> testDateOperation;
     private static OperationHandlerStrategy testStrategy;
     private static TransactionService testTransaction;
+    private static Fruit banana;
 
     @BeforeClass
     public static void setUp() {
+        banana = new Fruit("banana");
         testTransactionData = new ArrayList<>();
-        testTransactionData.add(new FruitTransaction("b", new Fruit("banana"), 100));
-        testTransactionData.add(new FruitTransaction("p", new Fruit("banana"), 50));
-        testTransactionData.add(new FruitTransaction("r", new Fruit("banana"), 250));
-        testTransactionData.add(new FruitTransaction("s", new Fruit("apple"), 100));
+        testTransactionData.add(new FruitTransaction("b", banana, 100));
+        testTransactionData.add(new FruitTransaction("s", banana, 100));
         testDateOperation = new HashMap<>();
         testDateOperation.put(BALANCE.chooseOperation(), new OperationHandlerBalanceImpl());
-        testDateOperation.put(PURCHASE.chooseOperation(), new OperationHandlerPurchaseImpl());
-        testDateOperation.put(RETURN.chooseOperation(), new OperationHandlerReturnImpl());
         testDateOperation.put(SUPPLY.chooseOperation(), new OperationHandlerSupplyImpl());
         testStrategy = new OperationHandlerStrategyImpl(testDateOperation);
         testTransaction = new TransactionServiceImpl(testStrategy);
-        testTransaction.addTransferToStorage(testTransactionData);
+    }
+
+    @Before
+    public void beforeAll() {
+        FruitStorage.fruitStorage.remove(banana);
     }
 
     @Test
     public void setTestTransaction_ok() {
-        int expected = 300;
-        int actual = FruitStorage.fruitStorage.get(new Fruit("banana"));
+        int expected = 200;
+        testTransaction.addTransferToStorage(testTransactionData);
+        int actual = FruitStorage.fruitStorage.get(banana);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test()
+    public void setEmptyTransaction_ok() {
+        testTransaction.addTransferToStorage(Collections.emptyList());
     }
 }

@@ -35,5 +35,9 @@ public class ReportGenerationImplTest {
         String expected = testReport.toString();
         Assert.assertEquals(expected, actual);
     }
-}
 
+    @Test(expected = RuntimeException.class)
+    public void reportNullData_notOk() {
+        testReportGenerator.generateReport(null);
+    }
+}

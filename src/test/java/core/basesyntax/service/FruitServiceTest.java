@@ -16,20 +16,26 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
     private static final String FIRST_FRUIT = "fruit1";
     private static final String SECOND_FRUIT = "fruit2";
-    private final Map<Operation, FruitShopStrategy> fruitShopStrategyMap = Map.of(
-            Operation.BALANCE, new BalanceStrategy(),
-            Operation.SUPPLY, new SupplyStrategy(),
-            Operation.PURCHASE, new PurchaseStrategy(),
-            Operation.RETURN, new ReturnStrategy()
-    );
-    private final FruitService fruitService = new FruitServiceImpl(fruitShopStrategyMap);
+    private static FruitService fruitService;
     private final Storage storage = Storage.getInstance();
     private List<FruitTransaction> testTransactions;
+
+    @BeforeClass
+    public static void beforeClass() {
+        Map<Operation, FruitShopStrategy> fruitShopStrategyMap = Map.of(
+                Operation.BALANCE, new BalanceStrategy(),
+                Operation.SUPPLY, new SupplyStrategy(),
+                Operation.PURCHASE, new PurchaseStrategy(),
+                Operation.RETURN, new ReturnStrategy()
+        );
+        fruitService = new FruitServiceImpl(fruitShopStrategyMap);
+    }
 
     @Before
     public void setUp() {

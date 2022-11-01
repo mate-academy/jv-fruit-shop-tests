@@ -5,13 +5,20 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.impl.FileLinesReaderServiceImpl;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileLinesReaderServiceTest {
     private static final String TEST_DATA_FILE_PATH = "src/main/resources/test_data.txt";
     private static final String EMPTY_FILE_PATH = "src/main/resources/empty_file";
     private static final String NON_EXISTENCE_FILE_PATH = "this_file_not_exists";
-    private final FileLinesReaderService fileLinesReaderService = new FileLinesReaderServiceImpl();
+    private static FileLinesReaderService fileLinesReaderService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileLinesReaderService = new FileLinesReaderServiceImpl();
+    }
 
     @Test
     public void readFile_FileExistsHasContent_returnListOfLines_ok() {

@@ -8,11 +8,17 @@ import core.basesyntax.service.impl.CsvParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvParserServiceTest {
-    private final CsvParserService<FruitTransaction> csvParserService = new CsvParserServiceImpl();
+    private static CsvParserService<FruitTransaction> csvParserService;
     private List<String> testData;
+
+    @BeforeClass
+    public static void beforeClass() {
+        csvParserService = new CsvParserServiceImpl();
+    }
 
     @Before
     public void setUp() {

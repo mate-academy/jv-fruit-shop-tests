@@ -7,13 +7,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
     private static final String FIRST_FRUIT = "fruit1";
 
-    private final ReportService reportService = new FruitReportService();
+    private static ReportService reportService;
     private Map<String, Integer> testData;
+
+    @BeforeClass
+    public static void beforeClass() {
+         reportService = new FruitReportService();
+    }
 
     @Before
     public void setUp() {

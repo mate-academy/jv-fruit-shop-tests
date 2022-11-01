@@ -21,7 +21,7 @@ public class ReaderServiceTest {
     }
 
     @Test
-    public void readerService_readFromCorrectPath_ok() {
+    public void readFromFile_correctPath_ok() {
         List<String> expected = List.of(
                 "type,fruit,quantity", "b,banana,20", "b,apple,100", "b,oranges,240",
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,oranges,20",
@@ -31,7 +31,7 @@ public class ReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readerService_readFromIncorrectPath_notOk() {
+    public void readFromFile_incorrectPath_notOk() {
         readerService.readFromFile(INCORRECT_TEST_PATH);
     }
 }

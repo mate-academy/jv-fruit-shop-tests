@@ -36,7 +36,7 @@ public class ProcessServiceTest {
     }
 
     @Test
-    public void processingService_removeListWithHeading_ok() {
+    public void removeHeading_threeElementsWithHeading_ok() {
         final List<String> expected = List.of("b,banana,20", "b,apple,100", "b,oranges,240");
         List<String> actual = new ArrayList<>();
         actual.add("type,fruit,quantity");
@@ -48,35 +48,35 @@ public class ProcessServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void processingService_removeListWithoutHeading_notOk() {
+    public void removeHeading_threeElementsWithNoHeading_notOk() {
         List<String> testList = List.of("b,banana,20", "b,apple,100", "b,oranges,240");
         processingService.removeHeading(testList);
     }
 
     @Test
-    public void processingService_processData_ok() {
+    public void processData_elevenElements_ok() {
         List<String> testList = List.of(
                 "b,banana,20", "b,apple,100", "b,oranges,240",
                 "s,banana,100", "p,banana,13", "r,apple,10", "p,oranges,20",
                 "p,apple,20", "p,banana,5", "s,banana,50", "r,oranges,50");
         processingService.processData(testList, strategy);
-        int expected = Storage.storageContents.get("banana");
-        assertEquals(expected, 152);
-        expected = Storage.storageContents.get("apple");
-        assertEquals(expected, 90);
-        expected = Storage.storageContents.get("oranges");
-        assertEquals(expected, 270);
+        int actual = Storage.storageContents.get("banana");
+        assertEquals(152, actual);
+        actual = Storage.storageContents.get("apple");
+        assertEquals(90, actual);
+        actual = Storage.storageContents.get("oranges");
+        assertEquals(270, actual);
         Storage.storageContents.clear();
     }
 
     @Test(expected = RuntimeException.class)
-    public void processingService_processEmptyData_notOk() {
+    public void processData_zeroElements_notOk() {
         List<String> emptyList = List.of();
         processingService.processData(emptyList, strategy);
     }
 
     @Test(expected = RuntimeException.class)
-    public void processService_emptyStorage_notOk() {
+    public void processData_storageIsEmpty_notOk() {
         List<String> testList = List.of("b,banana,20", "p,banana,20", "p,banana,1");
         processingService.processData(testList, strategy);
     }

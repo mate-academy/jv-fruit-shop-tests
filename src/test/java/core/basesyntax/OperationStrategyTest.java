@@ -30,20 +30,33 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void operationStrategy_getOperationHandler_ok() {
+    public void getOperationHandler_returnHandler_ok() {
+        operationLine = "r,apple,10\n";
+        OperationHandler actual = strategy.getHandler(operationLine);
+        assertSame(actual.getClass(), ReturnHandler.class);
+    }
+
+    @Test
+    public void getOperationHandler_balanceHandler_ok() {
         operationLine = "b,apple,100\n";
         OperationHandler actual = strategy.getHandler(operationLine);
         assertSame(actual.getClass(), BalanceHandler.class);
+    }
+
+    @Test
+    public void getOperationHandler_supplyHandler_ok() {
         operationLine = "s,banana,50\n";
-        actual = strategy.getHandler(operationLine);
+        OperationHandler actual = strategy.getHandler(operationLine);
         assertSame(actual.getClass(), SupplyHandler.class);
-        operationLine = "r,apple,10\n";
-        actual = strategy.getHandler(operationLine);
-        assertSame(actual.getClass(), ReturnHandler.class);
+    }
+
+    @Test
+    public void getOperationHandler_purchaseHandler_ok() {
         operationLine = "p,apple,20\n";
-        actual = strategy.getHandler(operationLine);
+        OperationHandler actual = strategy.getHandler(operationLine);
         assertSame(actual.getClass(), PurchaseHandler.class);
     }
+
 
     @Test(expected = RuntimeException.class)
     public void operationStrategy_getNonExistingOperationHandler_notOk() {

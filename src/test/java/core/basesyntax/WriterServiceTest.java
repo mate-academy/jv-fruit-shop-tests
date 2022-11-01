@@ -30,11 +30,11 @@ public class WriterServiceTest {
     }
 
     @Test
-    public void writerService_writeToFile_ok() {
+    public void writeToFile_correctPath_ok() {
         writerService.writeToFile(report, OUTPUT_FILE_ACTUAL);
         List<String> actual = readFile(OUTPUT_FILE_ACTUAL);
-        List<String> expected = readFile(OUTPUT_FILE_EXPECTED);
-        assertEquals(actual, expected);
+        List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90", "oranges,270");
+        assertEquals(expected, actual);
     }
 
     public List<String> readFile(String filePath) {

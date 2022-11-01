@@ -1,15 +1,14 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.CsvParserServiceImpl;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static core.basesyntax.model.FruitTransaction.Operation;
 import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.impl.CsvParserServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CsvParserServiceTest {
     private final CsvParserService<FruitTransaction> csvParserService = new CsvParserServiceImpl();
@@ -37,7 +36,7 @@ public class CsvParserServiceTest {
     }
 
     @Test
-    public void parse_listOfCorrectTransactionRecordsWithoutHeaderHasHeaderTrue_FirstRecordSkipped_ok() {
+    public void parse_withoutHeaderHasHeaderTrue_FirstRecordSkipped_ok() {
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "fruit2", 100),
                 new FruitTransaction(Operation.PURCHASE, "fruit1", 20)

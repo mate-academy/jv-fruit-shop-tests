@@ -1,19 +1,18 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.FileWriterServiceImpl;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class FileWriterServiceTest {
-    private final static String VALID_DATA = "line1" + System.lineSeparator() + "line2";
-    private final static String VALID_PATH = "test_output.txt";
-    private final static String INVALID_PATH = "T:////invalidPath?><..";
+    private static final String VALID_DATA = "line1" + System.lineSeparator() + "line2";
+    private static final String VALID_PATH = "test_output.txt";
+    private static final String INVALID_PATH = "T:////invalidPath?><..";
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
 
     @Test

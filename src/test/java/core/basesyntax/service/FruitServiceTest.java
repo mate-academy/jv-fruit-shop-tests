@@ -1,19 +1,22 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.strategy.*;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
+import core.basesyntax.strategy.BalanceStrategy;
+import core.basesyntax.strategy.FruitShopStrategy;
+import core.basesyntax.strategy.PurchaseStrategy;
+import core.basesyntax.strategy.ReturnStrategy;
+import core.basesyntax.strategy.SupplyStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FruitServiceTest {
     private static final String FIRST_FRUIT = "fruit1";
@@ -51,8 +54,9 @@ public class FruitServiceTest {
                 SECOND_FRUIT, 300
         );
         Map<String, Integer> actualStorage = storage.getContent();
-        assertEquals("Test failed! Expected storage state after " + testTransactions + " transactions: " + expectedStorage
-                + ", but was: " + actualStorage,
+        assertEquals("Test failed! Expected storage state after "
+                        + testTransactions + " transactions: " + expectedStorage
+                        + ", but was: " + actualStorage,
                 expectedStorage, actualStorage);
     }
 

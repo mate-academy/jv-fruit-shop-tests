@@ -1,14 +1,13 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.FruitReportService;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.impl.FruitReportService;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportServiceTest {
     private static final String FIRST_FRUIT = "fruit1";

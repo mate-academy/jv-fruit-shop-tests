@@ -1,17 +1,16 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.FileLinesReaderServiceImpl;
-import org.junit.Test;
-
-import java.util.Collections;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.impl.FileLinesReaderServiceImpl;
+import java.util.Collections;
+import java.util.List;
+import org.junit.Test;
+
 public class FileLinesReaderServiceTest {
-    private final static String TEST_DATA_FILE_PATH = "src/main/resources/test_data.txt";
-    private final static String EMPTY_FILE_PATH = "src/main/resources/empty_file";
-    private final static String NON_EXISTENCE_FILE_PATH = "this_file_not_exists";
+    private static final String TEST_DATA_FILE_PATH = "src/main/resources/test_data.txt";
+    private static final String EMPTY_FILE_PATH = "src/main/resources/empty_file";
+    private static final String NON_EXISTENCE_FILE_PATH = "this_file_not_exists";
     private final FileLinesReaderService fileLinesReaderService = new FileLinesReaderServiceImpl();
 
     @Test

@@ -1,4 +1,4 @@
-package basesyntax.service;
+package core.basesyntax.service;
 
 import java.util.List;
 

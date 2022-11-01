@@ -1,4 +1,4 @@
-package basesyntax.strategy.transactions.impl;
+package core.basesyntax.strategy.transactions.impl;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.strategy.transactions.FruitTransaction;

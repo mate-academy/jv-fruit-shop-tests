@@ -1,4 +1,4 @@
-package basesyntax;
+package core.basesyntax;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReaderService;

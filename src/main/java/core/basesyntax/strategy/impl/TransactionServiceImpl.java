@@ -1,4 +1,4 @@
-package basesyntax.strategy.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.strategy.Operation;

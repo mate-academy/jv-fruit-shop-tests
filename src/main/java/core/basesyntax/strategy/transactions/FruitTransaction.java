@@ -1,4 +1,4 @@
-package basesyntax.strategy.transactions;
+package core.basesyntax.strategy.transactions;
 
 import core.basesyntax.strategy.Operation;
 

@@ -4,6 +4,7 @@ import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class FileReaderServiceImpl implements FileReaderService {
 
@@ -14,6 +15,9 @@ public class FileReaderServiceImpl implements FileReaderService {
             dataFromFile = Files.readString(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException("Can`t read data from file" + path, e);
+        }
+        if (Objects.equals(dataFromFile, "")) {
+            throw new RuntimeException("Empty file!");
         }
         return dataFromFile;
     }

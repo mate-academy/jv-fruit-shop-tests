@@ -16,17 +16,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static FruitShopService fruitShopService;
     private static List<FruitTransaction> differentFruitTransactions;
-    private Map<String, Integer> expected;
+    private static Map<String, Integer> expected;
 
     @BeforeClass
     public static void setUp() {
+        expected = new HashMap<>();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
@@ -56,16 +56,11 @@ public class FruitShopServiceImplTest {
         differentFruitTransactions.add(fifthTransaction);
     }
 
-    @Before
-    public void init() {
-        expected = new HashMap<>();
+    @Test
+    public void transfer_DifferentData_Ok() {
         expected.put("apple", 52);
         expected.put("banana", 12);
         expected.put("kiwi", 13);
-    }
-
-    @Test
-    public void transfer_DifferentData_Ok() {
         fruitShopService.transfer(differentFruitTransactions);
         Map<String, Integer> actual = Storage.fruits;
         assertEquals(expected, actual);

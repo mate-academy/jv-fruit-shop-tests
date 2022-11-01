@@ -32,7 +32,7 @@ public class FruitActionParserImpl implements FruitActionParser {
         return fruitTransactions;
     }
 
-    private FruitTransaction.Operation getEnumValue(String fileOperation) {
+    public static FruitTransaction.Operation getEnumValue(String fileOperation) {
         Optional<FruitTransaction.Operation> optionalOperation =
                 Arrays.stream(FruitTransaction.Operation.values())
                         .filter(o -> o.getOperation().equals(fileOperation))

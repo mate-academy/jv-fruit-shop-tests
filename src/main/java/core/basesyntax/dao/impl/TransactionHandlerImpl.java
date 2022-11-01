@@ -2,6 +2,7 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.TransactionHandler;
 import core.basesyntax.dao.exception.NoSuchAFruitAtShop;
+import core.basesyntax.dao.exception.NotEnoughFruit;
 import core.basesyntax.db.Storage;
 
 public class TransactionHandlerImpl implements TransactionHandler {
@@ -23,6 +24,8 @@ public class TransactionHandlerImpl implements TransactionHandler {
         if (!Storage.fruits.containsKey(fruit)) {
             throw new NoSuchAFruitAtShop(
                     "Can`t take fruit from shop, cause there is no such a fruit");
+        } else if (Storage.fruits.get(fruit) < quantity) {
+            throw new NotEnoughFruit("There is not enough fruit to take in shop");
         } else {
             Storage.fruits.replace(fruit, Storage.fruits.get(fruit) - quantity);
         }

@@ -9,6 +9,7 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     public static final String PATH = "src/test/resources/dataFrom.csv";
+    public static final String EMPTY_FILE_PATH = "src/test/resources/EmptyFile.csv";
     private static FileReaderService fileReaderService;
 
     @BeforeClass
@@ -31,5 +32,10 @@ public class FileReaderServiceImplTest {
     @Test
     public void readFile_NullPath_NotOk() {
         assertThrows(RuntimeException.class, () -> fileReaderService.readFile(null));
+    }
+
+    @Test
+    public void readFile_EmptyData_NotOk() {
+        assertThrows(RuntimeException.class, () -> fileReaderService.readFile(EMPTY_FILE_PATH));
     }
 }

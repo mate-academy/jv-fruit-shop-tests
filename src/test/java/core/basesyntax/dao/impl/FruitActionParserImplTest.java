@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitActionParser;
+import core.basesyntax.dao.exception.NoSuchEnumValue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
@@ -56,6 +57,40 @@ public class FruitActionParserImplTest {
     public void parseAction_NullActivity_NotOk() {
         assertThrows(RuntimeException.class, () ->
                 fruitActionParser.parseAction(null));
+    }
+
+    @Test
+    public void getEnumValue_BalanceOperation_Ok() {
+        FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
+        FruitTransaction.Operation actual = FruitActionParserImpl.getEnumValue("b");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getEnumValue_PurchaseOperation_Ok() {
+        FruitTransaction.Operation expected = FruitTransaction.Operation.PURCHASE;
+        FruitTransaction.Operation actual = FruitActionParserImpl.getEnumValue("p");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getEnumValue_ReturnOperation_Ok() {
+        FruitTransaction.Operation expected = FruitTransaction.Operation.RETURN;
+        FruitTransaction.Operation actual = FruitActionParserImpl.getEnumValue("r");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getEnumValue_SupplyOperation_Ok() {
+        FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
+        FruitTransaction.Operation actual = FruitActionParserImpl.getEnumValue("s");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getEnumValue_NonExistOperation_NotOk() {
+        assertThrows(NoSuchEnumValue.class, () ->
+                FruitActionParserImpl.getEnumValue(""));
     }
 
     @AfterClass

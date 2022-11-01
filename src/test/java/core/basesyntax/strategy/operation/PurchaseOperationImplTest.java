@@ -26,6 +26,12 @@ public class PurchaseOperationImplTest {
                 expected, actual);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void getResultBalance_resultOperation_ifFruitDontExist_notOk() {
+        Store.FRUIT_STORAGE.put(APPLE_FRUIT, 200);
+        purchaseOperation.getResultBalance("banana", 100);
+    }
+
     @After
     public void tearDown() {
         Store.FRUIT_STORAGE.clear();

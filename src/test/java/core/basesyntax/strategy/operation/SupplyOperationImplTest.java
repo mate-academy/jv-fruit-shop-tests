@@ -12,7 +12,7 @@ public class SupplyOperationImplTest {
     private static OperationHandler supplyOperation;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         supplyOperation = new SupplyOperationImpl();
     }
 
@@ -24,6 +24,12 @@ public class SupplyOperationImplTest {
         int actual = Store.FRUIT_STORAGE.get(APPLE_FRUIT);
         assertEquals("Expected quantity: " + expected + ", but was" + actual,
                 expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getResultBalance_supplyOperation_ifFruitDontExist_notOk() {
+        Store.FRUIT_STORAGE.put(APPLE_FRUIT, 200);
+        supplyOperation.getResultBalance("lemon", 100);
     }
 
     @After

@@ -18,8 +18,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataParserServiceImplTest {
-    private static DataParserService dataParserService;
-    private final String data = "b,banana,20" + System.lineSeparator()
+    private static final String EMPTY_DATA = "";
+    private static final String DATA = "b,banana,20" + System.lineSeparator()
             + "b,apple,100" + System.lineSeparator()
             + "s,banana,100" + System.lineSeparator()
             + "p,banana,13" + System.lineSeparator()
@@ -27,6 +27,7 @@ public class DataParserServiceImplTest {
             + "p,apple,20" + System.lineSeparator()
             + "p,banana,5" + System.lineSeparator()
             + "s,banana,50" + System.lineSeparator();
+    private static DataParserService dataParserService;
 
     @BeforeClass
     public static void beforeClass() {
@@ -45,7 +46,7 @@ public class DataParserServiceImplTest {
 
     @Test
     public void parseData_validData_ok() {
-        Map<String, Integer> actualStorage = dataParserService.parseData(data);
+        Map<String, Integer> actualStorage = dataParserService.parseData(DATA);
         int expectedSize = 2;
         int actualSize = actualStorage.size();
         assertEquals("Expected size: " + expectedSize,expectedSize, actualSize);
@@ -59,6 +60,20 @@ public class DataParserServiceImplTest {
         assertEquals("Expected apple quantity" + expectedAppleQuantity
                         + ", but was: " + actualAppleQuantity,
                 expectedAppleQuantity, actualAppleQuantity);
+    }
+
+    @Test
+    public void parseData_emptyString_ok() {
+        Map<String, Integer> actualStorage = dataParserService.parseData(EMPTY_DATA);
+        int expectedSize = 0;
+        int actualSize = actualStorage.size();
+        assertEquals("If DATA is empty, storage size should be 0, but was" + actualSize,
+                expectedSize, actualSize);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parseData_nullData_notOk() {
+        dataParserService.parseData(null);
     }
 
     @After

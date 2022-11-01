@@ -12,7 +12,7 @@ public class ReturnOperationImplTest {
     private static OperationHandler returnOperation;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         returnOperation = new ReturnOperationImpl();
     }
 
@@ -24,6 +24,12 @@ public class ReturnOperationImplTest {
         int actual = Store.FRUIT_STORAGE.get(BANANA_FRUIT);
         assertEquals("Expected quantity: " + expected + ", but was" + actual,
                 expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getResultBalance_returnOperation_ifFruitDontExist_notOk() {
+        Store.FRUIT_STORAGE.put(BANANA_FRUIT, 200);
+        returnOperation.getResultBalance("apple", 100);
     }
 
     @After

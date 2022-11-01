@@ -19,6 +19,12 @@ public class DataParserServiceImpl implements DataParserService {
 
     @Override
     public Map<String, Integer> parseData(String data) {
+        if (data == null) {
+            throw new RuntimeException("Data cannot be null");
+        }
+        if (data.isEmpty()) {
+            return Store.FRUIT_STORAGE;
+        }
         String[] dataToArray = data.split(System.lineSeparator());
         for (String lineInArr : dataToArray) {
             String[] arrWithOperatorAndFruitQuantity = lineInArr.split(COMMA);

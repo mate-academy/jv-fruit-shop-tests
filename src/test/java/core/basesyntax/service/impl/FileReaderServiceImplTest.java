@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
@@ -9,7 +10,8 @@ import java.io.FileReader;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String fromFile = "src/main/resources/input.csv";
+    private static final String FROM_FILE = "src/main/resources/input.csv";
+    private static final String FROM_EMPTY_FILE = "src/main/resources/empty_input.csv";
     private ReaderService readerService;
 
     @Test
@@ -22,8 +24,14 @@ public class FileReaderServiceImplTest {
                 + "p,apple,20" + System.lineSeparator()
                 + "p,banana,5" + System.lineSeparator()
                 + "s,banana,50" + System.lineSeparator();
-        String actual = read(fromFile);
+        String actual = read(FROM_FILE);
         assertEquals("The read method should return: " + expected, expected, actual);
+    }
+
+    @Test
+    public void read_emptyFile_ok() {
+        boolean actual = read(FROM_EMPTY_FILE).isEmpty();
+        assertTrue(actual);
     }
 
     private String read(String fileName) {

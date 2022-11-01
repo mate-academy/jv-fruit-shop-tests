@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.exception.InvalidQuantityException;
+import core.basesyntax.service.exception.PurchasingException;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.FruitShopStrategy;
@@ -91,7 +92,7 @@ public class FruitServiceTest {
         fruitService.process(testTransactions);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = PurchasingException.class)
     public void process_listOfTransactionsPurchaseMoreThanHave_notOk() {
         Storage.getInstance().getContent().put(SECOND_FRUIT, 100);
         testTransactions.add(new FruitTransaction(Operation.PURCHASE, SECOND_FRUIT, 200));

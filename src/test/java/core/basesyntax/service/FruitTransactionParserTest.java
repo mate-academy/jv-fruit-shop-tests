@@ -3,11 +3,10 @@ package core.basesyntax.service;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.transactions.FruitTransaction;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.List;
 
 public class FruitTransactionParserTest {
     private static final String CORRECT_LINE = "b,banana,20";
@@ -52,7 +51,8 @@ public class FruitTransactionParserTest {
         Assert.assertTrue(actual.containsAll(FRUIT_TRANSACTIONS_ONE_LINE_LIST));
     }
 
-    private static FruitTransaction getFruitTransaction(Operation operation, String name, int value) {
+    private static FruitTransaction getFruitTransaction(Operation operation,
+                                                        String name, int value) {
         return new FruitTransaction()
                 .setOperation(operation)
                 .setFruitName(name)

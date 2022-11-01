@@ -9,17 +9,16 @@ import core.basesyntax.strategy.transactions.TransactionHandler;
 import core.basesyntax.strategy.transactions.impl.AdderHandler;
 import core.basesyntax.strategy.transactions.impl.ReduceHandler;
 import core.basesyntax.strategy.transactions.impl.SaverHandler;
+import java.util.HashMap;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.List;
-
 public class TransactionServiceTest {
-    public static TransactionService transactionService;
-    public static StorageDao storageDao;
+    private static TransactionService transactionService;
+    private static StorageDao storageDao;
 
     @BeforeClass
     public static void beforeAll() {
@@ -29,7 +28,7 @@ public class TransactionServiceTest {
 
     @After
     public void afterEach() {
-        Storage.fruitStorage.clear();
+        Storage.getFruitStorage().clear();
     }
 
     @Test
@@ -126,7 +125,8 @@ public class TransactionServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
-    private static FruitTransaction getFruitTransaction(Operation operation, String name, int value) {
+    private static FruitTransaction getFruitTransaction(Operation operation,
+                                                        String name, int value) {
         return new FruitTransaction()
                 .setOperation(operation)
                 .setFruitName(name)

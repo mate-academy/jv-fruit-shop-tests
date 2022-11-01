@@ -1,14 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.CsvReader;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 public class CsvReaderServiceTest {
     private static final String CORRECT_EXAMPLE_FILE = "example.csv";
@@ -36,14 +32,16 @@ public class CsvReaderServiceTest {
     public void read_skipCorrectNumberOfLines_ok() {
         List<String> expectedList = CORRECT_EXAMPLE_LIST.subList(
                 CORRECT_NUMBER_OF_SKIP_LINES, CORRECT_EXAMPLE_LIST.size());
-        List<String> actualList = readerService.readFile(CORRECT_EXAMPLE_FILE, CORRECT_NUMBER_OF_SKIP_LINES);
+        List<String> actualList = readerService.readFile(
+                CORRECT_EXAMPLE_FILE, CORRECT_NUMBER_OF_SKIP_LINES);
         Assert.assertEquals(expectedList, actualList);
     }
 
     @Test
     public void read_skipNonCorrectNumberOfLines_ok() {
         List<String> expected = List.of();
-        List<String> actual = readerService.readFile(CORRECT_EXAMPLE_FILE, NON_CORRECT_NUMBER_OF_SKIP_LINES);
+        List<String> actual = readerService.readFile(
+                CORRECT_EXAMPLE_FILE, NON_CORRECT_NUMBER_OF_SKIP_LINES);
         Assert.assertEquals(expected, actual);
     }
 

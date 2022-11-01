@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class ReportServiceTest {
     private static final String EMPTY_LINE = "";
-    public static ReportService reportService;
-    public static StorageDao storageDao;
+    private static ReportService reportService;
+    private static StorageDao storageDao;
 
     @BeforeClass
     public static void beforeAll() {
@@ -21,7 +21,7 @@ public class ReportServiceTest {
 
     @After
     public void afterEach() {
-        Storage.fruitStorage.clear();
+        Storage.getFruitStorage().clear();
     }
 
     @Test

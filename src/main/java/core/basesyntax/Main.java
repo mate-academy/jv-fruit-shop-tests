@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.db.StorageDao;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionService;
@@ -9,14 +10,12 @@ import core.basesyntax.service.impl.CsvReader;
 import core.basesyntax.service.impl.CsvWriter;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.strategy.Operation;
 import core.basesyntax.service.impl.TransactionServiceImpl;
-import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.transactions.TransactionHandler;
 import core.basesyntax.strategy.transactions.impl.AdderHandler;
 import core.basesyntax.strategy.transactions.impl.ReduceHandler;
 import core.basesyntax.strategy.transactions.impl.SaverHandler;
-
 import java.util.HashMap;
 import java.util.List;
 

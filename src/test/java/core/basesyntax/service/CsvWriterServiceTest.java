@@ -1,25 +1,24 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.CsvWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class CsvWriterServiceTest {
     private static final String EMPTY_TITLE = null;
     private static final String EXAMPLE_FILE = "write_to.csv";
     private static final String ONE_LINE_TO_FILE_EXAMPLE_1 = "Example line 1";
     private static final String ONE_LINE_TO_FILE_EXAMPLE_2 = "Example line 2";
-    private static final String TWO_LINE_TO_FILE = "First line" + System.lineSeparator() + "Second line";
+    private static final String TWO_LINE_TO_FILE = "First line"
+            + System.lineSeparator() + "Second line";
     private static final String TITLE_TO_FILE = "Title";
     private static WriterService writerService;
     private static Path path;
-
 
     @BeforeClass
     public static void beforeAll() {
@@ -32,7 +31,7 @@ public class CsvWriterServiceTest {
         try {
             Files.deleteIfExists(path);
         } catch (IOException e) {
-            throw new RuntimeException("Error, can`t delete test file" , e);
+            throw new RuntimeException("Error, can`t delete test file", e);
         }
     }
 

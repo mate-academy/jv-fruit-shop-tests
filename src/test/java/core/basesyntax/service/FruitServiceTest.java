@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
+import core.basesyntax.service.exception.InvalidQuantityException;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.FruitShopStrategy;
@@ -66,25 +67,25 @@ public class FruitServiceTest {
                 expectedStorage, actualStorage);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidQuantityException.class)
     public void process_listOfTransactionsBalanceNegative_notOk() {
         testTransactions.add(new FruitTransaction(Operation.BALANCE, SECOND_FRUIT, -100));
         fruitService.process(testTransactions);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidQuantityException.class)
     public void process_listOfTransactionsSupplyNegative_notOk() {
         testTransactions.add(new FruitTransaction(Operation.SUPPLY, FIRST_FRUIT, -100));
         fruitService.process(testTransactions);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidQuantityException.class)
     public void process_listOfTransactionsPurchaseNegative_notOk() {
         testTransactions.add(new FruitTransaction(Operation.PURCHASE, FIRST_FRUIT, -100));
         fruitService.process(testTransactions);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidQuantityException.class)
     public void process_listOfTransactionsReturnNegative_notOk() {
         testTransactions.add(new FruitTransaction(Operation.RETURN, FIRST_FRUIT, -100));
         fruitService.process(testTransactions);

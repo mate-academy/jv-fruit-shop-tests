@@ -13,6 +13,8 @@ public class OperationServiceBalanceImplTest {
     private static OperationService balanceService;
     private static final Fruit BANANA = new Fruit("banana");
     private static FruitTransaction input;
+    private static final int COUNT_BANANA = 100;
+    private static final int EXPECTED_COUNT_BANANA = 101;
 
     @BeforeClass
     public static void init() {
@@ -21,7 +23,7 @@ public class OperationServiceBalanceImplTest {
         input = new FruitTransaction();
         input.setFruit(BANANA);
         input.setOperation(FruitTransaction.Operation.BALANCE);
-        input.setQuantity(100);
+        input.setQuantity(COUNT_BANANA);
     }
 
     @Before
@@ -34,13 +36,13 @@ public class OperationServiceBalanceImplTest {
         FruitStorage.storage.put(BANANA,1);
         balanceService.apply(input);
         int actual = FruitStorage.storage.get(BANANA);
-        Assert.assertEquals(101, actual);
+        Assert.assertEquals(EXPECTED_COUNT_BANANA, actual);
     }
 
     @Test
     public void apply_correctFruitTransactionNotContainInStorage_ok() {
         balanceService.apply(input);
         int actual = FruitStorage.storage.get(BANANA);
-        Assert.assertEquals(100, actual);
+        Assert.assertEquals(COUNT_BANANA, actual);
     }
 }

@@ -15,6 +15,10 @@ public class OperationServicePurchaseImplTest {
     private static OperationService purchaseService;
     private static final Fruit BANANA = new Fruit("banana");
     private static FruitTransaction input;
+    private static final int COUNT_BANANA_FIRST_TEST = 100;
+    private static final int COUNT_BANANA_SECOND_TEST = 10;
+    private static final int COUNT_PURCHASE_BANANA = 15;
+    private static final int EXPECTED_COUNT_BANANA = 85;
 
     @BeforeClass
     public static void init() {
@@ -23,7 +27,7 @@ public class OperationServicePurchaseImplTest {
         input = new FruitTransaction();
         input.setFruit(BANANA);
         input.setOperation(FruitTransaction.Operation.PURCHASE);
-        input.setQuantity(15);
+        input.setQuantity(COUNT_PURCHASE_BANANA);
     }
 
     @Before
@@ -33,10 +37,10 @@ public class OperationServicePurchaseImplTest {
 
     @Test
     public void apply_correctFruitTransaction_ok() {
-        FruitStorage.storage.put(BANANA, 100);
+        FruitStorage.storage.put(BANANA, COUNT_BANANA_FIRST_TEST);
         purchaseService.apply(input);
         int actual = FruitStorage.storage.get(BANANA);
-        Assert.assertEquals(85, actual);
+        Assert.assertEquals(EXPECTED_COUNT_BANANA, actual);
     }
 
     @Test(expected = NoSuchFruitInStorageException.class)
@@ -46,7 +50,7 @@ public class OperationServicePurchaseImplTest {
 
     @Test(expected = FruitLessThanNeedException.class)
     public void apply_lessFruitThanInStorage_notOk() {
-        FruitStorage.storage.put(BANANA, 10);
+        FruitStorage.storage.put(BANANA, COUNT_BANANA_SECOND_TEST);
         purchaseService.apply(input);
     }
 }

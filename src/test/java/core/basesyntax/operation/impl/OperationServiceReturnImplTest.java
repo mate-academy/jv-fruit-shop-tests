@@ -13,6 +13,10 @@ public class OperationServiceReturnImplTest {
     private static OperationService returnService;
     private static final Fruit BANANA = new Fruit("banana");
     private static FruitTransaction input;
+    private static final int COUNT_BANANA_TEST = 10;
+    private static final int COUNT_RETURN_BANANA = 15;
+    private static final int EXPECTED_COUNT_BANANA_FIRST_TEST = 25;
+    private static final int EXPECTED_COUNT_BANANA_SECOND_TEST = 15;
 
     @BeforeClass
     public static void init() {
@@ -21,7 +25,7 @@ public class OperationServiceReturnImplTest {
         input = new FruitTransaction();
         input.setFruit(BANANA);
         input.setOperation(FruitTransaction.Operation.RETURN);
-        input.setQuantity(15);
+        input.setQuantity(COUNT_RETURN_BANANA);
     }
 
     @Before
@@ -31,16 +35,16 @@ public class OperationServiceReturnImplTest {
 
     @Test
     public void apply_correctFruitTransactionContainInStorage_ok() {
-        FruitStorage.storage.put(BANANA,10);
+        FruitStorage.storage.put(BANANA,COUNT_BANANA_TEST);
         returnService.apply(input);
         int actual = FruitStorage.storage.get(BANANA);
-        Assert.assertEquals(25, actual);
+        Assert.assertEquals(EXPECTED_COUNT_BANANA_FIRST_TEST, actual);
     }
 
     @Test
     public void apply_correctFruitTransactionNotContainInStorage_ok() {
         returnService.apply(input);
         int actual = FruitStorage.storage.get(BANANA);
-        Assert.assertEquals(15, actual);
+        Assert.assertEquals(EXPECTED_COUNT_BANANA_SECOND_TEST, actual);
     }
 }

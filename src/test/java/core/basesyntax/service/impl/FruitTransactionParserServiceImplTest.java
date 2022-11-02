@@ -16,28 +16,32 @@ public class FruitTransactionParserServiceImplTest {
     private static DataParserService parserService;
     private static List<String> parseInput;
     private static List<FruitTransaction> expectedList;
+    private static final int COUNT_FIRST_BANANA = 20;
+    private static final int COUNT_SECOND_APPLE = 100;
+    private static final int COUNT_THIRD_BANANA = 13;
+    private static final int COUNT_FOURTH_APPLE = 10;
 
     @BeforeClass
     public static void init() {
         parserService = new FruitTransactionParserServiceImpl();
         FruitTransaction first = new FruitTransaction();
         first.setFruit(new Fruit("banana"));
-        first.setQuantity(20);
+        first.setQuantity(COUNT_FIRST_BANANA);
         first.setOperation(FruitTransaction.Operation.BALANCE);
 
         FruitTransaction second = new FruitTransaction();
         second.setFruit(new Fruit("apple"));
-        second.setQuantity(100);
+        second.setQuantity(COUNT_SECOND_APPLE);
         second.setOperation(FruitTransaction.Operation.BALANCE);
 
         FruitTransaction third = new FruitTransaction();
         third.setFruit(new Fruit("banana"));
-        third.setQuantity(13);
+        third.setQuantity(COUNT_THIRD_BANANA);
         third.setOperation(FruitTransaction.Operation.PURCHASE);
 
         FruitTransaction fourth = new FruitTransaction();
         fourth.setFruit(new Fruit("apple"));
-        fourth.setQuantity(10);
+        fourth.setQuantity(COUNT_FOURTH_APPLE);
         fourth.setOperation(FruitTransaction.Operation.RETURN);
 
         expectedList = List.of(first, second, third, fourth);

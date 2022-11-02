@@ -12,6 +12,8 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final int COUNT_BANANA = 152;
+    private static final int COUNT_APPLE = 50;
 
     @BeforeClass
     public static void init() {
@@ -25,8 +27,8 @@ public class ReportServiceImplTest {
 
     @Test
     public void createReport_correctStorage_ok() {
-        FruitStorage.storage.put(new Fruit("banana"), 152);
-        FruitStorage.storage.put(new Fruit("apple"), 50);
+        FruitStorage.storage.put(new Fruit("banana"), COUNT_BANANA);
+        FruitStorage.storage.put(new Fruit("apple"), COUNT_APPLE);
         StringBuilder stringBuilder = new StringBuilder(FIRST_LINE);
         stringBuilder.append(LINE_SEPARATOR).append("banana,152");
         stringBuilder.append(LINE_SEPARATOR).append("apple,50");
@@ -40,7 +42,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void createReport_WithoutFirstLine_notOk() {
-        FruitStorage.storage.put(new Fruit("banana"), 152);
+        FruitStorage.storage.put(new Fruit("banana"), COUNT_BANANA);
         Assert.assertNotEquals(LINE_SEPARATOR + "banana,152", reportService.createReport());
     }
 }

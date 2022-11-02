@@ -17,6 +17,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionServiceTest {
+    private static final String TEST_NAME_1 = "banana";
+    private static final String TEST_NAME_2 = "apple";
     private static TransactionService transactionService;
     private static StorageDao storageDao;
 
@@ -33,52 +35,49 @@ public class TransactionServiceTest {
 
     @Test
     public void transaction_applyPurchaseLessZeroPlus_Ok() {
-        storageDao.add("banana", 10);
+        storageDao.add(TEST_NAME_1, 10);
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.PURCHASE, "banana", -10)
+                getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, -10)
         ));
         Integer expected = 20;
-        Integer actual = storageDao.getValue("banana");
+        Integer actual = storageDao.getValue(TEST_NAME_1);
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void transaction_applyBalanceLessZero_ok() {
-        storageDao.add("banana", 0);
+        storageDao.add(TEST_NAME_1, 0);
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.PURCHASE, "banana", 10)
+                getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, 10)
         ));
-        Integer expected = -10;
-        Integer actual = storageDao.getValue("banana");
-        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void transaction_applyBalanceChangeValue_ok() {
         storageDao.add("banana", 20);
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.BALANCE, "banana", 10)
+                getFruitTransaction(Operation.BALANCE, TEST_NAME_1, 10)
         ));
         Integer expected = 10;
-        Integer actual = storageDao.getValue("banana");
+        Integer actual = storageDao.getValue(TEST_NAME_1);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void transaction_applyCorrectMultipleTransactions_ok() {
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.BALANCE, "apple", 10),
-                getFruitTransaction(Operation.BALANCE, "banana", 20),
-                getFruitTransaction(Operation.SUPPLY, "apple", 10),
-                getFruitTransaction(Operation.SUPPLY, "banana", 5),
-                getFruitTransaction(Operation.PURCHASE, "apple", 10),
-                getFruitTransaction(Operation.PURCHASE, "banana", 5),
-                getFruitTransaction(Operation.RETURN, "banana", 2)
+                getFruitTransaction(Operation.BALANCE, TEST_NAME_2, 10),
+                getFruitTransaction(Operation.BALANCE, TEST_NAME_1, 20),
+                getFruitTransaction(Operation.SUPPLY, TEST_NAME_2, 10),
+                getFruitTransaction(Operation.SUPPLY, TEST_NAME_1, 5),
+                getFruitTransaction(Operation.PURCHASE, TEST_NAME_2, 10),
+                getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, 5),
+                getFruitTransaction(Operation.RETURN, TEST_NAME_1, 2)
         ));
         Integer expectedBanana = 22;
-        Integer actualBanana = storageDao.getValue("banana");
+        Integer actualBanana = storageDao.getValue(TEST_NAME_1);
         Integer expectedApple = 10;
-        Integer actualApple = storageDao.getValue("apple");
+        Integer actualApple = storageDao.getValue(TEST_NAME_2);
         Assert.assertEquals(expectedBanana, actualBanana);
         Assert.assertEquals(expectedApple, actualApple);
     }
@@ -87,10 +86,10 @@ public class TransactionServiceTest {
     public void transaction_applyCorrectTransactionSupply_ok() {
         storageDao.add("apple", 10);
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.SUPPLY, "apple", 10)
+                getFruitTransaction(Operation.SUPPLY, TEST_NAME_2, 10)
         ));
         Integer expected = 20;
-        Integer actual = storageDao.getValue("apple");
+        Integer actual = storageDao.getValue(TEST_NAME_2);
         Assert.assertEquals(expected, actual);
     }
 
@@ -98,10 +97,10 @@ public class TransactionServiceTest {
     public void transaction_applyCorrectTransactionReturn_ok() {
         storageDao.add("apple", 50);
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.RETURN, "apple", 10)
+                getFruitTransaction(Operation.RETURN, TEST_NAME_2, 10)
         ));
         Integer expected = 60;
-        Integer actual = storageDao.getValue("apple");
+        Integer actual = storageDao.getValue(TEST_NAME_2);
         Assert.assertEquals(expected, actual);
     }
 
@@ -109,19 +108,19 @@ public class TransactionServiceTest {
     public void transaction_applyCorrectTransactionPurchase_ok() {
         storageDao.add("banana", 50);
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.PURCHASE, "banana", 20)));
+                getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, 20)));
         Integer expected = 30;
-        Integer actual = storageDao.getValue("banana");
+        Integer actual = storageDao.getValue(TEST_NAME_1);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void transaction_applyCorrectTransactionBalance_ok() {
         transactionService.applyTransactions(List.of(
-                getFruitTransaction(Operation.BALANCE, "milk", 10)
+                getFruitTransaction(Operation.BALANCE, TEST_NAME_2, 10)
         ));
         Integer expected = 10;
-        Integer actual = storageDao.getValue("milk");
+        Integer actual = storageDao.getValue(TEST_NAME_2);
         Assert.assertEquals(expected, actual);
     }
 

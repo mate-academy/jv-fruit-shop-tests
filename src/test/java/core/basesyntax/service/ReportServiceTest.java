@@ -10,6 +10,15 @@ import org.junit.Test;
 
 public class ReportServiceTest {
     private static final String EMPTY_LINE = "";
+    private static final String TEST_NAME_1 = "banana";
+    private static final int TEST_VALUE_1 = 20;
+    private static final String TEST_RESULT_1 = "banana,20";
+    private static final String TEST_NAME_2 = "apple";
+    private static final int TEST_VALUE_2 = 30;
+    private static final String TEST_RESULT_2 = "apple,30";
+    private static final String TEST_NAME_3 = "milk";
+    private static final int TEST_VALUE_3 = 100;
+    private static final String TEST_RESULT_3 = "milk,100";
     private static ReportService reportService;
     private static StorageDao storageDao;
 
@@ -40,21 +49,21 @@ public class ReportServiceTest {
 
     @Test
     public void report_getCorrectReportFromLines_ok() {
-        storageDao.add("banana", 20);
-        storageDao.add("apple", 30);
-        storageDao.add("milk", 100);
+        storageDao.add(TEST_NAME_1, TEST_VALUE_1);
+        storageDao.add(TEST_NAME_2, TEST_VALUE_2);
+        storageDao.add(TEST_NAME_3, TEST_VALUE_3);
         String expected =
-                "banana,20" + System.lineSeparator()
-                        + "apple,30" + System.lineSeparator()
-                        + "milk,100" + System.lineSeparator();
+                TEST_RESULT_1 + System.lineSeparator()
+                        + TEST_RESULT_2 + System.lineSeparator()
+                        + TEST_RESULT_3 + System.lineSeparator();
         String actual = reportService.createReport(storageDao);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void report_getCorrectReportFromOneLine_ok() {
-        storageDao.add("banana", 20);
-        String expected = "banana,20" + System.lineSeparator();
+        storageDao.add(TEST_NAME_1, TEST_VALUE_1);
+        String expected = TEST_RESULT_1 + System.lineSeparator();
         String actual = reportService.createReport(storageDao);
         Assert.assertEquals(expected, actual);
     }

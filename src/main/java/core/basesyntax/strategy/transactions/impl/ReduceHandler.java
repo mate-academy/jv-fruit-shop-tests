@@ -15,6 +15,10 @@ public class ReduceHandler implements TransactionHandler {
     public void apply(FruitTransaction fruitTransaction) {
         Integer oldValue = storageDao.getValue(fruitTransaction.getFruitName());
         Integer newValue = oldValue - fruitTransaction.getValueOfFruit();
+        if (newValue < 0) {
+            throw new RuntimeException("You put wrong data. "
+                    + "Value in storage can`t be less 0");
+        }
         storageDao.setValue(fruitTransaction.getFruitName(),
                 newValue);
     }

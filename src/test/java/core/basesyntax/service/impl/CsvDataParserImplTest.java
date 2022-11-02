@@ -11,43 +11,48 @@ import org.junit.rules.ExpectedException;
 
 public class CsvDataParserImplTest {
     private static final String COLUMN_SEPARATOR = ",";
+    private static final String TEST_PRODUCT = "banana";
+    private static final int TEST_AMOUNT = 20;
+    private static final String BALANCE_STRING = "b,banana, 20";
+    private static final String SUPPLY_STRING = "s,banana, 20";
+    private static final String RETURN_STRING = "r,banana, 20";
+    private static final String PURCHASE_STRING = "p,banana, 20";
+    private static final String EXPECTED_INCORRECT_STRING_MESSAGE
+            = "Incorrect string format";
+
     private static final DataParser parser = new CsvDataParserImpl(COLUMN_SEPARATOR);
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
     @Test
     public void parse_balanceStringToParse_ok() {
-        String stringToParse = "b,banana,22";
         FruitTransaction expected = new FruitTransaction(OperationType.BALANCE,
-                "banana", 22);
-        FruitTransaction actual = parser.parse(stringToParse);
+                TEST_PRODUCT, TEST_AMOUNT);
+        FruitTransaction actual = parser.parse(BALANCE_STRING);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parse_returnStringToParse_ok() {
-        String stringToParse = "r,banana,2";
         FruitTransaction expected = new FruitTransaction(OperationType.RETURN,
-                "banana", 2);
-        FruitTransaction actual = parser.parse(stringToParse);
+                TEST_PRODUCT, TEST_AMOUNT);
+        FruitTransaction actual = parser.parse(RETURN_STRING);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parse_purchaseStringToParse_ok() {
-        String stringToParse = "p,banana,12";
         FruitTransaction expected = new FruitTransaction(OperationType.PURCHASE,
-                "banana", 12);
-        FruitTransaction actual = parser.parse(stringToParse);
+                TEST_PRODUCT, TEST_AMOUNT);
+        FruitTransaction actual = parser.parse(PURCHASE_STRING);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parse_supplyStringToParse_ok() {
-        String stringToParse = "s,banana,12";
         FruitTransaction expected = new FruitTransaction(OperationType.SUPPLY,
-                "banana", 12);
-        FruitTransaction actual = parser.parse(stringToParse);
+                TEST_PRODUCT, TEST_AMOUNT);
+        FruitTransaction actual = parser.parse(SUPPLY_STRING);
         assertEquals(expected, actual);
     }
 
@@ -55,41 +60,37 @@ public class CsvDataParserImplTest {
     public void parse_stringContainsMaxIntegerValue_ok() {
         String stringToParse = "s,banana," + Integer.MAX_VALUE;
         FruitTransaction expected = new FruitTransaction(OperationType.SUPPLY,
-                "banana", Integer.MAX_VALUE);
+                TEST_PRODUCT, Integer.MAX_VALUE);
         FruitTransaction actual = parser.parse(stringToParse);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parse_stringContainsBlanks_ok() {
-        String stringToParse = "s, banana, 12";
         FruitTransaction expected = new FruitTransaction(OperationType.SUPPLY,
-                "banana", 12);
-        FruitTransaction actual = parser.parse(stringToParse);
+                TEST_PRODUCT, TEST_AMOUNT);
+        FruitTransaction actual = parser.parse("s, banana, 20");
         assertEquals(expected, actual);
     }
 
     @Test
     public void parse_incorrectTypeToParse_notOk() {
         exceptionRule.expect(RuntimeException.class);
-        String stringToParse = "a,banana,12";
-        parser.parse(stringToParse);
+        parser.parse("a,banana,12");
     }
 
     @Test
     public void parse_incorrectSeparator_notOk() {
         exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("Incorrect string format");
-        String stringToParse = "s;banana;12";
-        parser.parse(stringToParse);
+        exceptionRule.expectMessage(EXPECTED_INCORRECT_STRING_MESSAGE);
+        parser.parse("s;banana;12");
     }
 
     @Test
     public void parse_blankString_notOk() {
         exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("Incorrect string format");
-        String stringToParse = "";
-        parser.parse(stringToParse);
+        exceptionRule.expectMessage(EXPECTED_INCORRECT_STRING_MESSAGE);
+        parser.parse("");
     }
 
     @Test

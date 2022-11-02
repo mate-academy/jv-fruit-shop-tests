@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class StrategyTest {
     @Test
-    public void getImplementationByKey_ok() {
+    public void getService_getImplementationByKey_ok() {
         Strategy<String, FruitDao>
                 strategy = new ServiceStrategy<>(InitialisationService.getFruitDaoStrategyMap());
         Assert.assertEquals(FruitDaoImplPurchase.class,

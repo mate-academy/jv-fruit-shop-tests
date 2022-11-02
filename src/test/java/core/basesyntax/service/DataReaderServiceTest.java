@@ -19,13 +19,13 @@ public class DataReaderServiceTest {
     }
 
     @Test
-    public void readFromFile_ok() {
+    public void readData_readFromFile_ok() {
         List<String> dataList = fileReader.readData(FILE_NAME);
         Assert.assertEquals(checkList, dataList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileNotExist_notOk() {
+    public void readData_fileNotExist_notOk() {
         fileReader.readData(NON_EXISTING_PATH);
     }
 }

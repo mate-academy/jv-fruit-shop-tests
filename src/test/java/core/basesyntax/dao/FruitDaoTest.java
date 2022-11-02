@@ -31,7 +31,7 @@ public class FruitDaoTest {
     }
 
     @Test
-    public void purchaseFruits_ok() {
+    public void purchaseFruits_getFromStorage_ok() {
         processingService.processingData(getFilteredByOperationList(InitialisationService.BALANCE));
         processingService.processingData(
                 getFilteredByOperationList(InitialisationService.PURCHASE));
@@ -51,21 +51,21 @@ public class FruitDaoTest {
     }
 
     @Test
-    public void balanceFruits_ok() {
+    public void balanceFruits_putToStorage_ok() {
         processingService.processingData(getFilteredByOperationList(InitialisationService.BALANCE));
         Assert.assertEquals(expectedBananaAmountMap.get(InitialisationService.BALANCE),
                 Storage.storage.get(banana));
     }
 
     @Test
-    public void supplyFruits_ok() {
+    public void supplyFruits_addToStorage_ok() {
         processingService.processingData(getFilteredByOperationList(InitialisationService.SUPPLY));
         Assert.assertEquals(expectedBananaAmountMap.get(InitialisationService.SUPPLY),
                 Storage.storage.get(banana));
     }
 
     @Test
-    public void returnFruits_ok() {
+    public void returnFruits_addToStorage_ok() {
         processingService.processingData(getFilteredByOperationList(InitialisationService.RETURN));
         Assert.assertEquals(expectedBananaAmountMap.get(InitialisationService.RETURN),
                 Storage.storage.get(banana));

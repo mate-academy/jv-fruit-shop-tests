@@ -27,19 +27,19 @@ public class DataWriterServiceTest {
     }
 
     @Test
-    public void writeToFile_ok() throws IOException {
+    public void writeData_writeToFile_ok() throws IOException {
         fileWriter.writeData(dataList);
-        Assert.assertTrue(Files.exists(TEMP_FILE_PATH));
+        Assert.assertEquals(dataList, Files.readAllLines(TEMP_FILE_PATH));
         Files.deleteIfExists(TEMP_FILE_PATH);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToIncorrectDirectory_notOk() {
+    public void writeData_writeToIncorrectDirectory_notOk() {
         incorrectFileWriter.writeData(dataList);
     }
 
     @Test
-    public void displayData_ok() {
+    public void writeData_displayInConsole_ok() {
         screenWriter.writeData(dataList);
     }
 }

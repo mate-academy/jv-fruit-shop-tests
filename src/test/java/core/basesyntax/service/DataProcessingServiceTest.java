@@ -25,7 +25,7 @@ public class DataProcessingServiceTest {
     }
 
     @Test
-    public void processingData_ok() {
+    public void processingData_addToStorage_ok() {
         processingService.processingData(dataList);
         Integer expectedAmount = InitialisationService.getExpectedBananaAmountMap()
                 .get(InitialisationService.TOTAL);

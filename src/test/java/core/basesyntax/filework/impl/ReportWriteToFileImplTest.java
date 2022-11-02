@@ -28,6 +28,8 @@ public class ReportWriteToFileImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeReportToNullPath_notOk() {
-        reportWriteToFile.writeToFile(expected, path);
+        String invalid = "src/main/resources/noFIle.csv";
+        expected = "qwer";
+        reportWriteToFile.writeToFile(expected, invalid);
     }
 }

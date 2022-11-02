@@ -1,25 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 
 public class CsvFileReaderServiceImpl implements ReaderService {
-    private final BufferedReader bufferedReader;
-
-    public CsvFileReaderServiceImpl(BufferedReader bufferedReader) {
-        this.bufferedReader = bufferedReader;
-    }
-
     @Override
-    public String read() {
+    public String read(String fromFile) {
         StringBuilder builder = new StringBuilder();
-        try (bufferedReader) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                builder.append(line).append(System.lineSeparator());
-                line = bufferedReader.readLine();
-            }
+        try {
+            List<String> list = Files.readAllLines(Path.of(fromFile));
+            list.forEach(str -> builder.append(str).append(System.lineSeparator()));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file. " + e);
         }

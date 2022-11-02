@@ -16,12 +16,6 @@ import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationImpl;
 import core.basesyntax.strategy.operation.ReturnOperationImpl;
 import core.basesyntax.strategy.operation.SupplyOperationImpl;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,27 +33,14 @@ public class Main {
                 new PurchaseOperationImpl());
         operationServiceMap.put(Operation.RETURN.getOperation(),
                 new ReturnOperationImpl());
-        ReaderService readerService;
-        String readData;
-        try {
-            readerService = new CsvFileReaderServiceImpl(
-                    new BufferedReader(new FileReader(fromFile)));
-            readData = readerService.read();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found");
-        }
+        ReaderService readerService = new CsvFileReaderServiceImpl();
+        String readData = readerService.read(fromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
         DataParserService dataParserService = new DataParserServiceImpl(operationStrategy);
         Map<String, Integer> parseDataMap = dataParserService.parseData(readData);
         ReportGeneratorService generatorService = new ReportGeneratorServiceImpl();
         String report = generatorService.generateReport(parseDataMap);
-        WriterService writerService;
-        try {
-            writerService = new CsvFileWriterServiceImpl(
-                    new BufferedWriter(new FileWriter(toFile)));
-            writerService.write(report);
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot create file");
-        }
+        WriterService writerService = new CsvFileWriterServiceImpl();
+        writerService.write(toFile, report);
     }
 }

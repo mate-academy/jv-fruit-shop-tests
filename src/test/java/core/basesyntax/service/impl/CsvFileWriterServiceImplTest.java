@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.impl.creator.CsvFileWriterServiceImplCreator;
+import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,11 +14,11 @@ public class CsvFileWriterServiceImplTest {
     private static final String OUTPUT_ONE_PRODUCT = "src/main/resources/output_1.csv";
     private static final String OUTPUT_WITHOUT_PRODUCTS = "src/main/resources/output_0.csv";
     private static final String SEPARATOR = System.lineSeparator();
-    private static CsvFileWriterServiceImplCreator writer;
+    private static WriterService writerService;
 
     @BeforeClass
     public static void beforeClass() {
-        writer = new CsvFileWriterServiceImplCreator();
+        writerService = new CsvFileWriterServiceImpl();
     }
 
     @Test
@@ -28,7 +28,7 @@ public class CsvFileWriterServiceImplTest {
                 + "apple,100" + SEPARATOR
                 + "lemon,150" + SEPARATOR
                 + "tomato,1000";
-        writer.createWriter(OUTPUT_FOUR_PRODUCTS).write(generatedData);
+        writerService.write(OUTPUT_FOUR_PRODUCTS, generatedData);
         String actual = readFromFile(OUTPUT_FOUR_PRODUCTS);
         assertEquals(generatedData, actual);
     }
@@ -37,7 +37,7 @@ public class CsvFileWriterServiceImplTest {
     public void write_oneProduct_ok() {
         String generatedData = "fruit,quantity" + SEPARATOR
                 + "carrot,5000";
-        writer.createWriter(OUTPUT_ONE_PRODUCT).write(generatedData);
+        writerService.write(OUTPUT_ONE_PRODUCT, generatedData);
         String actual = readFromFile(OUTPUT_ONE_PRODUCT);
         assertEquals(generatedData, actual);
     }
@@ -45,7 +45,7 @@ public class CsvFileWriterServiceImplTest {
     @Test
     public void write_withoutProducts_notOk() {
         String generatedData = "fruit,quantity";
-        writer.createWriter(OUTPUT_WITHOUT_PRODUCTS).write(generatedData);
+        writerService.write(OUTPUT_WITHOUT_PRODUCTS, generatedData);
         String actual = readFromFile(OUTPUT_WITHOUT_PRODUCTS);
         assertEquals(generatedData, actual);
     }

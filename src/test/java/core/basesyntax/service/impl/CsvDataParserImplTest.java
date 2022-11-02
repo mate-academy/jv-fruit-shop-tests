@@ -52,7 +52,7 @@ public class CsvDataParserImplTest {
     }
 
     @Test
-    public void stringContainsMaxIntegerValue_ok() {
+    public void parse_stringContainsMaxIntegerValue_ok() {
         String stringToParse = "s,banana," + Integer.MAX_VALUE;
         FruitTransaction expected = new FruitTransaction(OperationType.SUPPLY,
                 "banana", Integer.MAX_VALUE);
@@ -61,7 +61,7 @@ public class CsvDataParserImplTest {
     }
 
     @Test
-    public void stringContainsBlanks_ok() {
+    public void parse_stringContainsBlanks_ok() {
         String stringToParse = "s, banana, 12";
         FruitTransaction expected = new FruitTransaction(OperationType.SUPPLY,
                 "banana", 12);
@@ -77,7 +77,7 @@ public class CsvDataParserImplTest {
     }
 
     @Test
-    public void incorrectSeparator_notOk() {
+    public void parse_incorrectSeparator_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("Incorrect string format");
         String stringToParse = "s;banana;12";
@@ -85,7 +85,7 @@ public class CsvDataParserImplTest {
     }
 
     @Test
-    public void blankString_notOk() {
+    public void parse_blankString_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("Incorrect string format");
         String stringToParse = "";
@@ -93,7 +93,7 @@ public class CsvDataParserImplTest {
     }
 
     @Test
-    public void nullString_notOk() {
+    public void parse_nullString_notOk() {
         exceptionRule.expect(RuntimeException.class);
         parser.parse(null);
     }

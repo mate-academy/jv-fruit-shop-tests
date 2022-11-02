@@ -48,6 +48,5 @@ public class Main {
 
         fileWorker.writeToFile(REPORT_FILE_PATH, REPORT_HEADER,
                 COLUMN_SEPARATOR, storageDao.dumpData());
-
     }
 }

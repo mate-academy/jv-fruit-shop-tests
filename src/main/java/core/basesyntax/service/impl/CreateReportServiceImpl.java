@@ -18,6 +18,6 @@ public class CreateReportServiceImpl implements CreateReportService {
                     .append(entry.getValue())
                     .append(REPORT_SEPARATOR);
         }
-        return report.toString().trim();
+        return report.toString();
     }
 }

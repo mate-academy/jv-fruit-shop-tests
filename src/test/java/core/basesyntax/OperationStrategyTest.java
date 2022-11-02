@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -26,17 +25,13 @@ public class OperationStrategyTest {
         assertEquals(expected, operationMap);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getOperation_notCorrectType_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            operationStrategy.get(Operation.valueOf(NOT_CORRECT_OPERATION_TYPE));
-        });
+        operationStrategy.get(Operation.valueOf(NOT_CORRECT_OPERATION_TYPE));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getOperation_NullData_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            operationStrategy.get(Operation.valueOf(null));
-        });
+        operationStrategy.get(Operation.valueOf(null));
     }
 }

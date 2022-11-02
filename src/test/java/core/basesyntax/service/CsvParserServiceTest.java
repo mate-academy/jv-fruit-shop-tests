@@ -29,7 +29,7 @@ public class CsvParserServiceTest {
     }
 
     @Test
-    public void parse_listOfCorrectTransactionRecords_listOfFruitTransactions_ok() {
+    public void parse_listOfCorrectTransactionRecords_ok() {
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "fruit1", 100),
                 new FruitTransaction(Operation.BALANCE, "fruit2", 100),

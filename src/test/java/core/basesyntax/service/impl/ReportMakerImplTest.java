@@ -35,6 +35,15 @@ public class ReportMakerImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void makeReportWithOneFruit_ok() {
+        Storage.fruitStore.add(new Fruit("banana", 20));
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,20" + System.lineSeparator();
+        String actual = reportMaker.makeReport();
+        assertEquals(expected, actual);
+    }
+
     @After
     public void tearDown() {
         Storage.fruitStore.clear();

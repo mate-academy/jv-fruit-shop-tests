@@ -28,8 +28,7 @@ public class ShopFileReaderImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-            (expected = RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void readNonExistentFile_notOk() {
         shopFileReader.readFromFile(NONEXISTENT_FILE_PATH);
     }

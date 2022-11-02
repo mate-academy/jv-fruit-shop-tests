@@ -57,8 +57,7 @@ public class FruitTransactionDataImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-            (expected = RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void parseNullData_notOk() {
         fruitTransactionData.parseDataFromFile(null);
     }

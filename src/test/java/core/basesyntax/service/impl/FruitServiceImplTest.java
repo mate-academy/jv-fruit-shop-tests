@@ -36,7 +36,6 @@ public class FruitServiceImplTest {
         operationStrategyMap = new HashMap<>();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitService = new FruitServiceImpl(operationStrategy);
-
     }
 
     @Before
@@ -86,11 +85,9 @@ public class FruitServiceImplTest {
         fruitService.doOperationService(fruitTransactions);
         int actual = fruitDao.get("banana").get().getQuantity();
         assertEquals(expected, actual);
-        
     }
 
-    @Test
-            (expected = RuntimeException.class)
+    @Test(expected = RuntimeException.class)
     public void operationWithEmptyStorage_notOk() {
         fruitTransactions.add(new FruitTransaction(Operation.SUPPLY, "banana", 30));
         fruitService.doOperationService(fruitTransactions);

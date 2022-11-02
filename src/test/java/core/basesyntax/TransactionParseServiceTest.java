@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -9,7 +9,7 @@ import core.basesyntax.service.TransactionParseService;
 import core.basesyntax.service.impl.TransactionParseServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class TransactionParseServiceTest {
     private static final String TEST_DATA = "b,banana,10";
@@ -18,7 +18,7 @@ public class TransactionParseServiceTest {
     private final TransactionParseService transactionParse = new TransactionParseServiceImpl();
 
     @Test
-    void parseInputData_correctData_Ok() {
+    public void parseInputData_correctData_Ok() {
         List<String> testData = new ArrayList<>();
         testData.add(TEST_DATA);
         List<FruitTransaction> expected = new ArrayList<>();
@@ -29,7 +29,7 @@ public class TransactionParseServiceTest {
     }
 
     @Test
-    void createReport_NullData_notOk() {
+    public void createReport_NullData_notOk() {
         assertThrows(RuntimeException.class, () -> {
             transactionParse.parseInputData(null);
         });

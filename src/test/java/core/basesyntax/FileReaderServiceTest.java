@@ -1,12 +1,12 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class FileReaderServiceTest {
     private static final String INPUT_FILE_EXIST = "src/main/resources/input.csv";
@@ -17,13 +17,13 @@ public class FileReaderServiceTest {
     private final FileReaderService fileReaderService = new FileReaderServiceImpl();
 
     @Test
-    void readFromFile_ExistFile_Ok() {
+    public void readFromFile_ExistFile_Ok() {
         List<String> actual = fileReaderService.readFromFile(INPUT_FILE_EXIST);
         assertEquals(TEST_LIST, actual);
     }
 
     @Test
-    void readFromFile_NotExistFile_notOk() {
+    public void readFromFile_NotExistFile_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReaderService.readFromFile(INPUT_FILE_NOT_EXIST);
         });

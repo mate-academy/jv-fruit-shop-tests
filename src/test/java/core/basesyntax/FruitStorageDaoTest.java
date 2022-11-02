@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import static core.basesyntax.db.FruitStorage.storage;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class FruitStorageDaoTest {
     private static final String TEST_FRUIT_NAME = "banana";
@@ -25,13 +24,8 @@ public class FruitStorageDaoTest {
     private final OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
     private final FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl(operationStrategy);
 
-    @AfterEach
-    void clearAfterEach() {
-        storage.clear();
-    }
-
     @Test
-    void addToStorage_correctData_Ok() {
+    public void addToStorage_correctData_Ok() {
         List<FruitTransaction> activities = new ArrayList<>();
         activities.add(new FruitTransaction(Operation.PURCHASE,
                 TEST_FRUIT_NAME, TEST_QUANTITY));
@@ -41,7 +35,7 @@ public class FruitStorageDaoTest {
     }
 
     @Test
-    void addToStorage_NullData_notOk() {
+    public void addToStorage_NullData_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fruitStorageDao.addToStorage(null);
         });

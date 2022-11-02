@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class FileWriterServiceTest {
     private static final String FILE_PATH_EXIST = "src/main/resources/report.csv";
@@ -20,14 +20,14 @@ public class FileWriterServiceTest {
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
 
     @Test
-    void writeToFile_ExistPath_Ok() {
+    public void writeToFile_ExistPath_Ok() {
         fileWriterService.writeToFile(FILE_PATH_EXIST, TEST_REPORT);
         String actual = readFromFile();
         assertEquals(TEST_REPORT, actual);
     }
 
     @Test
-    void readFromFile_NotExistFile_notOk() {
+    public void readFromFile_NotExistFile_notOk() {
         String report = "wrong_report";
         assertThrows(RuntimeException.class, () -> {
             fileWriterService.writeToFile(FILE_PATH_NOT_EXIST, report);

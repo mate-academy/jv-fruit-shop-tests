@@ -2,6 +2,7 @@ package basesyntax.service;
 
 import static core.basesyntax.model.Operation.BALANCE;
 import static core.basesyntax.model.Operation.SUPPLY;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.Fruit;
@@ -56,8 +57,14 @@ public class TransactionServiceImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test()
+    @Test
     public void setEmptyTransaction_ok() {
         testTransaction.addTransferToStorage(Collections.emptyList());
+    }
+
+    @Test
+    public void setEmptyTransaction_emptyDb_ok() {
+        testTransaction.addTransferToStorage(Collections.emptyList());
+        assertTrue(FruitStorage.fruitStorage.isEmpty());
     }
 }

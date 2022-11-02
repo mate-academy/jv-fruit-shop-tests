@@ -3,6 +3,7 @@ package basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGenerationImpl;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -30,10 +31,15 @@ public class ReportGenerationImplTest {
     }
 
     @Test
-    public void correctReportGeneration_ok() {
+    public void generateReport_validData_ok() {
         String actual = testReportGenerator.generateReport(testMap);
         String expected = testReport.toString();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void generateReport_emptyStorage_ok() {
+        testReportGenerator.generateReport(Collections.emptyMap());
     }
 
     @Test(expected = RuntimeException.class)

@@ -26,12 +26,15 @@ public class ReportWriteToFileImplTest {
     @Test
             (expected = RuntimeException.class)
     public void writeNonExistedReport_notOk() {
+        path = "src/main/resources/testFile.csv";
         reportWriteToFile.writeToFile(expected, path);
     }
 
     @Test
             (expected = RuntimeException.class)
     public void writeReportToNullPath_notOk() {
+        expected = "Expected report222, "
+                + System.lineSeparator() + "write!";
         reportWriteToFile.writeToFile(expected, path);
     }
 }

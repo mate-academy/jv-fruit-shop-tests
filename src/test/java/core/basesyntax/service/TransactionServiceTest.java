@@ -58,9 +58,6 @@ public class TransactionServiceTest {
         transactionService.applyTransactions(List.of(
                 getFruitTransaction(Operation.BALANCE, TEST_NAME_1, 10)
         ));
-        Integer expected = 10;
-        Integer actual = storageDao.getValue(TEST_NAME_1);
-        Assert.assertEquals(expected, actual);
     }
 
     @Test

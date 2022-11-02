@@ -54,7 +54,7 @@ public class TransactionServiceTest {
 
     @Test
     public void transaction_applyBalanceChangeValue_ok() {
-        storageDao.add("banana", 20);
+        storageDao.add(TEST_NAME_1, 20);
         transactionService.applyTransactions(List.of(
                 getFruitTransaction(Operation.BALANCE, TEST_NAME_1, 10)
         ));
@@ -81,7 +81,7 @@ public class TransactionServiceTest {
 
     @Test
     public void transaction_applyCorrectTransactionSupply_ok() {
-        storageDao.add("apple", 10);
+        storageDao.add(TEST_NAME_2, 10);
         transactionService.applyTransactions(List.of(
                 getFruitTransaction(Operation.SUPPLY, TEST_NAME_2, 10)
         ));
@@ -103,7 +103,7 @@ public class TransactionServiceTest {
 
     @Test
     public void transaction_applyCorrectTransactionPurchase_ok() {
-        storageDao.add("banana", 50);
+        storageDao.add(TEST_NAME_1, 50);
         transactionService.applyTransactions(List.of(
                 getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, 20)));
         Integer expected = 30;

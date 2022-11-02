@@ -9,28 +9,30 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionParserTest {
+    private static final String TEST_NAME_1 = "banana";
+    private static final String TEST_NAME_2 = "apple";
     private static final String CORRECT_LINE = "b,banana,20";
     private static final FruitTransaction correctFruitTransaction =
-            getFruitTransaction(Operation.BALANCE, "banana", 20);
+            getFruitTransaction(Operation.BALANCE, TEST_NAME_1, 20);
     private static final List<FruitTransaction> FRUIT_TRANSACTIONS_ONE_LINE_LIST =
             List.of(correctFruitTransaction);
     private static final List<String> CORRECT_EXAMPLE_LIST = List.of(
-            "b,apple,100",
-            "s,banana,100",
-            "p,banana,13",
-            "r,apple,10",
-            "p,apple,20",
-            "p,banana,5",
-            "s,banana,50");
+            "b," + TEST_NAME_2 + ",100",
+            "s," + TEST_NAME_1 + ",100",
+            "p," + TEST_NAME_1 + ",13",
+            "r," + TEST_NAME_2 + ",10",
+            "p," + TEST_NAME_2 + ",20",
+            "p," + TEST_NAME_1 + ",5",
+            "s," + TEST_NAME_1 + ",50");
     private static final List<FruitTransaction> FRUIT_TRANSACTION_CORRECT_LIST =
             List.of(
-                    getFruitTransaction(Operation.BALANCE, "apple", 100),
-                    getFruitTransaction(Operation.SUPPLY, "banana", 100),
-                    getFruitTransaction(Operation.PURCHASE, "banana", 13),
-                    getFruitTransaction(Operation.RETURN, "apple", 10),
-                    getFruitTransaction(Operation.PURCHASE, "apple", 20),
-                    getFruitTransaction(Operation.PURCHASE, "banana", 5),
-                    getFruitTransaction(Operation.SUPPLY, "banana", 50));
+                    getFruitTransaction(Operation.BALANCE, TEST_NAME_2, 100),
+                    getFruitTransaction(Operation.SUPPLY, TEST_NAME_1, 100),
+                    getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, 13),
+                    getFruitTransaction(Operation.RETURN, TEST_NAME_2, 10),
+                    getFruitTransaction(Operation.PURCHASE, TEST_NAME_2, 20),
+                    getFruitTransaction(Operation.PURCHASE, TEST_NAME_1, 5),
+                    getFruitTransaction(Operation.SUPPLY, TEST_NAME_1, 50));
 
     private static FruitTransactionParser fruitTransactionParser;
 

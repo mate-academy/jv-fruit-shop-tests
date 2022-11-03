@@ -6,13 +6,11 @@ import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
@@ -37,11 +35,5 @@ public class FileWriterImplTest {
         fileWriter.writeData(PATH_OUTPUT, VALID_REPORT);
         List<String> actual = Files.readAllLines(Path.of(PATH_OUTPUT));
         assertEquals(expectedList, actual);
-    }
-
-    @Test
-    public void writeDate_WrongPath_NotOk() throws IOException {
-        Assertions.assertThrows(InvalidPathException.class,
-                () -> fileWriter.writeData(WRONG_PATH_OUTPUT, VALID_REPORT));
     }
 }

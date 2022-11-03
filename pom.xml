@@ -91,6 +91,11 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/Fruit*</exclude>
+                        <exclude>**/DataFormatTypes*</exclude>
+                        <exclude>**/InputDataTypes*</exclude>
+                        <exclude>**/OutputDataTypes*</exclude>
+                        <exclude>**/UpdateOperations*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

@@ -88,7 +88,7 @@ public class FruitServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void operationWithEmptyStorage_notOk() {
+    public void doOperationService_WithEmptyStorage_notOk() {
         fruitTransactions.add(new FruitTransaction(Operation.SUPPLY, "banana", 30));
         fruitService.doOperationService(fruitTransactions);
         int actual = fruitDao.get("banana").get().getQuantity();

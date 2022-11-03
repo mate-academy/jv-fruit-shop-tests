@@ -29,14 +29,14 @@ public class ReportMakerImplTest {
     }
 
     @Test
-    public void makeReportFromEmptyStorage_ok() {
+    public void makeReport_FromEmptyStorage_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportMaker.makeReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void makeReportWithOneFruit_ok() {
+    public void makeReport_WithOneFruit_ok() {
         Storage.fruitStore.add(new Fruit("banana", 20));
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator();

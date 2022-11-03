@@ -20,7 +20,7 @@ public class ShopFileReaderImplTest {
     }
 
     @Test
-    public void readCorrectFile_Ok() {
+    public void readFromFile_CorrectFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity",
                 "    b,banana,20", "    b,apple,100", "    s,banana,100", "    p,banana,13",
                 "    r,apple,10", "    p,apple,20", "    p,banana,5", "    s,banana,50");
@@ -29,13 +29,14 @@ public class ShopFileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNonExistentFile_notOk() {
+    public void readFromFile_NonExistentFile_notOk() {
         shopFileReader.readFromFile(NONEXISTENT_FILE_PATH);
     }
 
     @Test
-    public void readEmptyFile_Ok() {
+    public void readFromFile_EmptyFile_Ok() {
         List<String> empty = shopFileReader.readFromFile(EMPTY_FILE_PATH);
         assertNotNull(empty);
+        assertEquals(0, empty.size());
     }
 }

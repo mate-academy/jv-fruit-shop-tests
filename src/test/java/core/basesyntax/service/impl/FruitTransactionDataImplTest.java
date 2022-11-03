@@ -6,6 +6,7 @@ import core.basesyntax.enums.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionData;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -28,14 +29,14 @@ public class FruitTransactionDataImplTest {
     }
 
     @Test
-    public void parseEmptyData_ok() {
+    public void parseDataFromFile_EmptyData_ok() {
         dataFromFile.add("type,fruit,quantity");
         List<FruitTransaction> actual = fruitTransactionData.parseDataFromFile(dataFromFile);
-        assertEquals(expected, actual);
+        assertEquals(Collections.emptyList(), actual);
     }
 
     @Test
-    public void parseData_ok() {
+    public void parseDataFromFile_ok() {
         dataFromFile.add("type,fruit,quantity");
         dataFromFile.add("b,banana,20");
         dataFromFile.add("b,apple,100");
@@ -57,8 +58,17 @@ public class FruitTransactionDataImplTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void parseDataFromFile_PartOfData_ok() {
+        dataFromFile.add("type,fruit,quantity");
+        dataFromFile.add("s,banana,100");
+        expected.add(new FruitTransaction(Operation.SUPPLY, "banana", 100));
+        List<FruitTransaction> actual = fruitTransactionData.parseDataFromFile(dataFromFile);
+        assertEquals(expected, actual);
+    }
+
     @Test(expected = RuntimeException.class)
-    public void parseNullData_notOk() {
+    public void parseDataFromFile_NullData_notOk() {
         fruitTransactionData.parseDataFromFile(null);
     }
 }

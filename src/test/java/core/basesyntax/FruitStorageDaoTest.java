@@ -39,11 +39,6 @@ public class FruitStorageDaoTest {
         operationMap.put(Operation.RETURN, new ReturnOperationHandler());
     }
 
-    @After
-    public void afterEach() {
-        storage.clear();
-    }
-
     @Test
     public void addToStorage_correctData_Ok() {
         List<FruitTransaction> activities = new ArrayList<>();
@@ -87,7 +82,12 @@ public class FruitStorageDaoTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void addToStorage_NullData_notOk() {
+    public void addToStorage_nullData_notOk() {
         fruitStorageDao.addToStorage(null);
+    }
+
+    @After
+    public void afterEach() {
+        storage.clear();
     }
 }

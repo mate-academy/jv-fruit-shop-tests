@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
+import org.junit.After;
 import org.junit.Test;
 
 public class CreateReportServiceTest {
@@ -24,7 +25,6 @@ public class CreateReportServiceTest {
                 + REPORT_SPLITTER + TEST_QUANTITY_20 + REPORT_SEPARATOR;
         String actual = createReportService.createReport(storage);
         assertEquals(expected, actual);
-        storage.clear();
     }
 
     @Test
@@ -37,11 +37,15 @@ public class CreateReportServiceTest {
                 + TEST_QUANTITY_20 + REPORT_SEPARATOR;
         String actual = createReportService.createReport(storage);
         assertEquals(expected, actual);
-        storage.clear();
     }
 
     @Test(expected = RuntimeException.class)
-    public void createReport_NullData_notOk() {
+    public void createReport_nullData_notOk() {
         createReportService.createReport(null);
+    }
+
+    @After
+    public void afterEach() {
+        storage.clear();
     }
 }

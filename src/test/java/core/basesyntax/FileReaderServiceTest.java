@@ -37,13 +37,13 @@ public class FileReaderServiceTest {
     }
 
     @Test
-    public void readFromFile_ExistFile_Ok() {
+    public void readFromFile_existFile_Ok() {
         List<String> actual = fileReaderService.readFromFile(INPUT_FILE_EXIST);
         assertEquals(TEST_LIST, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NotExistFile_notOk() {
+    public void readFromFile_notExistFile_notOk() {
         fileReaderService.readFromFile(INPUT_FILE_NOT_EXIST);
     }
 

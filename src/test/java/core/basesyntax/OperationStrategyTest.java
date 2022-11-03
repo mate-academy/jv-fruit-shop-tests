@@ -31,7 +31,7 @@ public class OperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getOperation_NullData_notOk() {
+    public void getOperation_nullData_notOk() {
         operationStrategy.get(Operation.valueOf(null));
     }
 }

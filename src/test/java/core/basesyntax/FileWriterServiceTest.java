@@ -23,17 +23,8 @@ public class FileWriterServiceTest {
         testPath = Path.of(TEST_FILE);
     }
 
-    @After
-    public void afterEach() {
-        try {
-            Files.deleteIfExists(testPath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete test file", e);
-        }
-    }
-
     @Test
-    public void writeToFile_ExistFile_Ok() {
+    public void writeToFile_existFile_Ok() {
         try {
             Files.createFile(testPath);
         } catch (IOException e) {
@@ -45,7 +36,7 @@ public class FileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NotExistFile_notOk() {
+    public void readFromFile_notExistFile_notOk() {
         String report = "wrong_report";
         fileWriterService.writeToFile(TEST_FILE, report);
     }
@@ -56,6 +47,15 @@ public class FileWriterServiceTest {
             return Files.readString(pathToFile);
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file", e);
+        }
+    }
+
+    @After
+    public void afterEach() {
+        try {
+            Files.deleteIfExists(testPath);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't delete test file", e);
         }
     }
 }

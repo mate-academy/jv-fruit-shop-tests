@@ -30,6 +30,7 @@ public class TransactionParseServiceTest {
         assertEquals(expected.toString(), actual.toString());
     }
 
+    @Test
     public void parseInputMultiplyData_correctData_Ok() {
         List<String> testData = new ArrayList<>();
         testData.add(TEST_DATA);
@@ -38,13 +39,13 @@ public class TransactionParseServiceTest {
         expected.add(new FruitTransaction(Operation.BALANCE,
                 TEST_FRUIT_NAME_BANANA, TEST_QUANTITY_10));
         expected.add(new FruitTransaction(Operation.BALANCE,
-                TEST_FRUIT_NAME_APPLE, TEST_QUANTITY_20));
+                TEST_FRUIT_NAME_APPLE, TEST_QUANTITY_10));
         List<FruitTransaction> actual = transactionParse.parseInputData(testData);
         assertEquals(expected.toString(), actual.toString());
     }
 
     @Test(expected = RuntimeException.class)
-    public void createReport_NullData_notOk() {
+    public void createReport_nullData_notOk() {
         transactionParse.parseInputData(null);
     }
 }

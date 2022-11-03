@@ -19,7 +19,12 @@ public class CsvParserUtil {
 
         String symbol = lineArray[OPERATION_INDEX].trim();
         String fruit = lineArray[FRUIT_INDEX].trim();
-        int quantity = Integer.parseInt(lineArray[QUANTITY_INDEX].trim());
+        int quantity;
+        try {
+            quantity = Integer.parseInt(lineArray[QUANTITY_INDEX].trim());
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(INVALID_LINE_FORMAT, e);
+        }
         return new FruitTransaction(getOperation(symbol), fruit, quantity);
     }
 
@@ -29,6 +34,6 @@ public class CsvParserUtil {
                 return operation;
             }
         }
-        return null;
+        throw new RuntimeException(INVALID_LINE_FORMAT);
     }
 }

@@ -23,6 +23,28 @@ public class FruitTransaction {
         return quantity;
     }
 
+    @Override
+    public int hashCode() {
+        int result = operation != null ? operation.hashCode() : 0;
+        result = 31 * result + (fruit != null ? fruit.hashCode() : 0);
+        result = 31 * result + quantity;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        FruitTransaction transaction = (FruitTransaction) obj;
+        return this.operation != null && this.operation == transaction.operation
+                && this.fruit != null && this.fruit.equals(transaction.fruit)
+                && this.quantity == transaction.quantity;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

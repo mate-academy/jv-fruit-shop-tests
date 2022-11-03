@@ -14,7 +14,13 @@ public class WriteToFileImpl implements WriteToFile {
 
     @Override
     public boolean writeToFile(String filePath, List<String> report) {
+        if (filePath == null) {
+            throw new RuntimeException("FilePath must be matched");
+        }
         if (report == null) {
+            throw new RuntimeException("Report must be matched");
+        }
+        if (report.isEmpty()) {
             return false;
         }
         report.add(INDEX_OF_HEAD, HEAD);
@@ -23,7 +29,7 @@ public class WriteToFileImpl implements WriteToFile {
             try {
                 Files.writeString(path, s, StandardOpenOption.APPEND);
             } catch (IOException e) {
-                throw new RuntimeException("Can't find such file" + filePath);
+                throw new RuntimeException("Can't find such file" + filePath, e);
             }
         });
         return true;

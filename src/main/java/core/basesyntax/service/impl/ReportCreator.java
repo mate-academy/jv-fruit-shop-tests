@@ -8,6 +8,9 @@ public class ReportCreator implements CreatReport {
     private final FruitStorageDao storageDao;
 
     public ReportCreator(FruitStorageDao storageDao) {
+        if (storageDao == null) {
+            throw new RuntimeException("No storage is not matched");
+        }
         this.storageDao = storageDao;
     }
 

@@ -13,12 +13,21 @@ public class WriteToDbFromList implements WriteToDB {
     private String spliterator;
 
     public WriteToDbFromList(String spliterator) {
+        if (spliterator == null) {
+            throw new RuntimeException("Spliterator must be matched");
+        }
         this.spliterator = spliterator;
     }
 
     @Override
     public boolean writeToDB(List<String> data, Map<String, DoActivities> strategy) {
         if (data == null) {
+            throw new RuntimeException("Data must be matched");
+        }
+        if (strategy == null) {
+            throw new RuntimeException("Strategy must be matched");
+        }
+        if (data.isEmpty() || strategy.isEmpty()) {
             return false;
         }
         data.remove(INDEX_OF_HEADER);

@@ -1,16 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.impl.FileReaderImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.impl.FileReaderImpl;
+import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderImplTest {
     private static FileReader fileReader;
@@ -32,7 +29,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_FromFakeFile_NotOk () {
+    public void read_FromFakeFile_NotOk() {
         assertThrows(RuntimeException.class, () -> fileReader.read(FAKE_FILE_PATH));
     }
 }

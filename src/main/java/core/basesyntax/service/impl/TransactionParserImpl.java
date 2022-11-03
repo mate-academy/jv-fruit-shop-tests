@@ -20,6 +20,9 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> list) {
+        if (list == null) {
+            throw new RuntimeException("List is null");
+        }
         List<FruitTransaction> resultList = new ArrayList();
         String[] transation;
         for (String s : list) {

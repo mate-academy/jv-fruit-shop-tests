@@ -45,4 +45,12 @@ public class FruitTransaction {
             return operation;
         }
     }
+
+    @Override
+    public java.lang.String toString() {
+        return "FruitTransaction "
+                + "operation = " + operation
+                + " fruit = " + fruit
+                + " count = " + quantity;
+    }
 }

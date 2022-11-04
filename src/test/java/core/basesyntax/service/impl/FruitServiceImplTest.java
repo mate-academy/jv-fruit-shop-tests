@@ -13,6 +13,7 @@ import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
 import core.basesyntax.strategy.impl.ReturnOperationStrategy;
 import core.basesyntax.strategy.impl.SupplyOperationStrategy;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +41,12 @@ public class FruitServiceImplTest {
                 new SupplyOperationStrategy());
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitService = new FruitServiceImpl(operationStrategy);
+        expectedStorage = new HashMap<>();
     }
 
     @Before
     public void setUp() {
         fruitTransactionList = new ArrayList<>();
-        expectedStorage = new HashMap<>();
     }
 
     @Test
@@ -68,7 +69,7 @@ public class FruitServiceImplTest {
     public void processFruitTransactions_emptyList_ok() {
         fruitService.processFruitTransactions(fruitTransactionList);
         Map<String, Integer> newStorage = Storage.fruits;
-        assertEquals(expectedStorage, newStorage);
+        assertEquals(Collections.emptyMap(), newStorage);
     }
 
     @After

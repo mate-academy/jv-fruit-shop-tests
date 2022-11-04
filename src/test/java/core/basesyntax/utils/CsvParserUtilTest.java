@@ -3,7 +3,6 @@ package core.basesyntax.utils;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -79,9 +78,5 @@ public class CsvParserUtilTest {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage(INVALID_LINE_FORMAT);
         csvParserUtil.extractTransaction(line);
-    }
-
-    @After
-    public void tearDown() {
     }
 }

@@ -6,7 +6,6 @@ import core.basesyntax.dao.impl.FruitStorageDao;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.handlers.TransactionHandler;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,12 +15,11 @@ public class SupplyTransactionHandlerTest {
     private static final int VALID_QUANTITY = 5;
     private TransactionHandler handler;
     private FruitTransaction validTransaction;
-    private Map<String, Integer> storageMap;
+    private FruitStorage storage;
 
     @Before
     public void setUp() {
-        FruitStorage storage = new FruitStorage();
-        storageMap = storage.getStorage();
+        storage = new FruitStorage();
         handler = new SupplyTransactionHandler(new FruitStorageDao(storage));
         validTransaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, APPLE, VALID_QUANTITY);
@@ -30,7 +28,7 @@ public class SupplyTransactionHandlerTest {
     @Test
     public void handle_validTransactionWithEmptyStorage_quantityOk() {
         handler.handle(validTransaction);
-        Integer actual = storageMap.get(APPLE);
+        Integer actual = storage.getStorage().get(APPLE);
         Integer expected = VALID_QUANTITY;
         assertEquals(expected, actual);
     }
@@ -41,13 +39,13 @@ public class SupplyTransactionHandlerTest {
         for (int i = 0; i < times; i++) {
             handler.handle(validTransaction);
         }
-        Integer actual = storageMap.get(APPLE);
+        Integer actual = storage.getStorage().get(APPLE);
         Integer expected = VALID_QUANTITY * times;
         assertEquals(expected, actual);
     }
 
     @After
     public void tearDown() {
-        storageMap.clear();
+        storage.getStorage().clear();
     }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -25,8 +24,7 @@ import org.junit.Test;
 public class FruitServiceImplTest {
     private static FruitService fruitService;
     private static OperationStrategy operationStrategy;
-    private static int oldStorageSize;
-    private static int newStorageSize;
+    private static Map<String, Integer> expectedStorage;
     private static List<FruitTransaction> fruitTransactionList;
 
     @BeforeClass
@@ -42,6 +40,7 @@ public class FruitServiceImplTest {
                 new SupplyOperationStrategy());
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitService = new FruitServiceImpl(operationStrategy);
+        expectedStorage = new HashMap<>();
     }
 
     @Before
@@ -51,6 +50,7 @@ public class FruitServiceImplTest {
 
     @Test
     public void processFruitTransactions_validList_ok() {
+        expectedStorage.put("banana", 115);
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
@@ -60,14 +60,15 @@ public class FruitServiceImplTest {
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 100));
         fruitService.processFruitTransactions(fruitTransactionList);
-        newStorageSize = Storage.fruits.size();
-        assertNotEquals(oldStorageSize, newStorageSize);
+        Map<String, Integer> actualStorage = Storage.fruits;
+        assertEquals(expectedStorage, actualStorage);
     }
 
     @Test
     public void processFruitTransactions_emptyList_notOk() {
+        int oldStorageSize = 0;
         fruitService.processFruitTransactions(fruitTransactionList);
-        newStorageSize = Storage.fruits.size();
+        int newStorageSize = Storage.fruits.size();
         assertEquals(oldStorageSize, newStorageSize);
     }
 

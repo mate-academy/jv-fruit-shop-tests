@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
@@ -9,9 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter;
@@ -39,12 +37,11 @@ public class FileWriterImplTest {
     public void writeDate_Ok() throws IOException {
         fileWriter.writeData(PATH_OUTPUT, validReport.toString());
         List<String> actual = Files.readAllLines(Path.of(PATH_OUTPUT));
-        assertEquals(expectedList, actual);
+        Assert.assertEquals(expectedList, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeData_WrongPath_NotOk() throws IOException {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> fileWriter.writeData(null, validReport.toString()));
+        fileWriter.writeData(null, validReport.toString());
     }
 }

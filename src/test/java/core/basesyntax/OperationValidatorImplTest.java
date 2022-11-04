@@ -1,15 +1,13 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationValidator;
 import core.basesyntax.service.impl.OperationValidatorImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class OperationValidatorImplTest {
     private static OperationValidator operationValidator;
@@ -30,18 +28,16 @@ public class OperationValidatorImplTest {
     public void validate_ValidOperation_Ok() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = operationValidator.validate(BALANCE_OPERATION);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void validate_UnvalidOperation_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> operationValidator.validate(UNVALID_OPERATION));
+        operationValidator.validate(UNVALID_OPERATION);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void validate_NullOperation_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> operationValidator.validate(null));
+        operationValidator.validate(null);
     }
 }

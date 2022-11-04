@@ -1,11 +1,9 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.FileReaderImpl;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,11 +23,11 @@ public class FileReaderImplTest {
                  "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
         List<String> actual = fileReader.read(INPUT_FILE_PATH);
         actual.remove(0);
-        assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void read_FromFakeFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.read(FAKE_FILE_PATH));
+    @Test(expected = RuntimeException.class)
+    public void writeWrongFile_notOk() {
+        fileReader.read(FAKE_FILE_PATH);
     }
 }

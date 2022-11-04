@@ -1,10 +1,9 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.database.Storage;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -37,13 +36,13 @@ public class ReportServiceImplTest {
         storage.storage.clear();
         String expected = validReportEmptyFile.toString();
         String actual = reportService.generateReport();
-        assertEquals(expected,actual);
+        Assert.assertEquals(expected,actual);
     }
 
     @Test
     public void generateReport_Ok() {
         String expected = validReport.toString();
         String actual = reportService.generateReport();
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 }

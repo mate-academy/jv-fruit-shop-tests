@@ -14,7 +14,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class TransactionParserImplTest {
     private static OperationValidator validator;
@@ -66,14 +65,14 @@ public class TransactionParserImplTest {
         assertEquals(expected.toString(),actual.toString());
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void validateNullParameter_NotOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> transactionParser.parse(null));
+        transactionParser.parse(null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void validateWrongTransactionString_NotOk() {
         testList.add(WRONG_TRANSACTION_STRING);
-        Assertions.assertThrows(RuntimeException.class, () -> transactionParser.parse(testList));
+        transactionParser.parse(testList);
     }
 }

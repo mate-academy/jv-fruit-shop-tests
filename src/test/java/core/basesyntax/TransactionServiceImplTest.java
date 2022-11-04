@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
@@ -15,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -56,13 +55,13 @@ public class TransactionServiceImplTest {
         transactionService.handleTransaction(testData);
         int actual = storage.storage.get(FRUIT);
         int expected = QUANTITY;
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void handleTransation_EmptyStorage_NotOk() {
         storage.storage.clear();
         Integer actual = storage.storage.get(FRUIT);
-        assertEquals(null, actual);
+        Assert.assertEquals(null, actual);
     }
 }

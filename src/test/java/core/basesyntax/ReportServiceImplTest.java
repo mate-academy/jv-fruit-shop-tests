@@ -11,10 +11,7 @@ import org.junit.Test;
 public class ReportServiceImplTest {
     private static ReportService reportService;
     private static Storage storage;
-
-    private static final String VALID_REPORT = "fruit,quantity \n"
-            + "banana,25\r\n"
-            + "apple,25\r";
+    private static StringBuilder validReport;
     private static final String VALID_REPORT_EMPTY = "fruit,quantity \n";
 
     @BeforeClass
@@ -23,6 +20,10 @@ public class ReportServiceImplTest {
         storage = new Storage();
         storage.storage.put("banana", 25);
         storage.storage.put("apple", 25);
+        validReport = new StringBuilder();
+        validReport.append("fruit,quantity \n");
+        validReport.append("banana,25\r\n");
+        validReport.append("apple,25\r\n");
     }
 
     @Test
@@ -35,7 +36,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void generateReport_Ok() {
-        String expected = VALID_REPORT;
+        String expected = validReport.toString()    ;
         String actual = reportService.generateReport();
         assertEquals(expected, actual);
     }

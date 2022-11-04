@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileCsvWriterImplTest {
-
     private final FileCsvWriter writer = new FileCsvWriterImpl();
     private final File fileToWriteIn = new File("src/test/resources/testFileToWRiteIn.csv");
     private final File wrongPath = new File("src/wrongpath/resources/wrongFile.csv");
@@ -23,20 +22,20 @@ public class FileCsvWriterImplTest {
         message = "balance, return supply";
     }
 
-    @After
-    public void tearDown() {
-        fileToWriteIn.delete();
-    }
-
     @Test
-    public void writeInFile_Ok() throws IOException {
+    public void writeInFile_ok() throws IOException {
         writer.writeInFile(message, fileToWriteIn.getPath());
         assertTrue(Files.readAllLines(fileToWriteIn.toPath())
                 .stream().allMatch(x -> x.contains(message)));
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeInFIle_WrongPath() {
+    public void writeInFile_wrongPath_notOk() {
         writer.writeInFile(message,wrongPath.getPath());
+    }
+
+    @After
+    public void tearDown() {
+        fileToWriteIn.delete();
     }
 }

@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileCsvReaderImplTest {
-
     private final String filePath = "src/test/resources/testFiletoRead1.csv";
     private List<String> expected;
     private FileCsvReader reader;
@@ -29,7 +28,7 @@ public class FileCsvReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_ThrowOk() {
+    public void readFromFile_wrongPath_notOk() {
         reader.readFromFile("src/test/resources/wrongName.csv");
     }
 }

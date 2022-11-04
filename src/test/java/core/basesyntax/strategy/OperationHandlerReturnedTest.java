@@ -19,15 +19,15 @@ public class OperationHandlerReturnedTest {
         DataBase.fruitsInShop.put("lemon", lemon);
     }
 
-    @After
-    public void tearDown() {
-        DataBase.fruitsInShop.clear();
-    }
-
     @Test
     public void handle_ok() {
         handlerCondition.getHandler("r").handle("lemon", "50");
         int expected = 100;
         assertEquals(expected, lemon.getReturned());
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.fruitsInShop.clear();
     }
 }

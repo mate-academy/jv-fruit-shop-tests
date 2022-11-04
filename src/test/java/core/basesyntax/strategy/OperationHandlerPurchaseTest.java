@@ -19,15 +19,15 @@ public class OperationHandlerPurchaseTest {
         DataBase.fruitsInShop.put("lemon", lemon);
     }
 
-    @After
-    public void tearDown() {
-        DataBase.fruitsInShop.clear();
-    }
-
     @Test
     public void handle_ok() {
         handlerCondition.getHandler("p").handle("lemon", "50");
         int expected = 100;
         assertEquals(expected, lemon.getPurchase());
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.fruitsInShop.clear();
     }
 }

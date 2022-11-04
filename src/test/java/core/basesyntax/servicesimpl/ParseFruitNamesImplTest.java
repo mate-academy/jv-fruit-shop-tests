@@ -13,9 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ParseFruitNamesImplTest {
-
     private final ParseFruitNames parser = new ParseFruitNamesImpl();
-
     private final List<String> listWithFruits = List.of("type,fruit,quantity", "b,banana,20",
             "b,apple,100", "b,kivi,100", "s,banana,100",
             "p,kivi,100", "p,banana,13", "r,apple,10", "p,apple,20",
@@ -35,20 +33,20 @@ public class ParseFruitNamesImplTest {
         wrongMap.put("kivi", new Fruit());
     }
 
-    @After
-    public void tearDown() {
-        DataBase.fruitsInShop.clear();
-    }
-
     @Test
-    public void getFruitNamesMap_Ok() {
+    public void getFruitNamesMap_ok() {
         parser.getFruitNamesMap(listWithFruits);
         assertEquals(rightMap, DataBase.fruitsInShop);
     }
 
     @Test
-    public void getFruitNamesMap_NotEquals() {
+    public void getFruitNamesMap_notEquals_ok() {
         parser.getFruitNamesMap(listWithFruits);
         assertNotEquals(wrongMap, DataBase.fruitsInShop);
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.fruitsInShop.clear();
     }
 }

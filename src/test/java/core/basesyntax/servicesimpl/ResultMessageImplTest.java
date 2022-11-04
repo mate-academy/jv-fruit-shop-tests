@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ResultMessageImplTest {
-
     private ResultMessage resultMessage;
     private Fruit lemon;
 
@@ -25,11 +24,6 @@ public class ResultMessageImplTest {
         resultMessage = new ResultMessageImpl();
     }
 
-    @After
-    public void tearDown() {
-        DataBase.fruitsInShop.clear();
-    }
-
     @Test(expected = ElementDoesNotExist.class)
     public void makeMessage_keyIsNull_notOk() {
         DataBase.fruitsInShop.put("hello", null);
@@ -37,18 +31,23 @@ public class ResultMessageImplTest {
     }
 
     @Test
-    public void makeMessage_EmptyDataBase() {
+    public void makeMessage_emptyDataBase_ok() {
         String actual = resultMessage.makeMessage(new FruitDaoImpl());
         String expected = "fruit,quantity";
         assertEquals(expected, actual);
     }
 
     @Test
-    public void makeMessage_Ok() {
+    public void makeMessage_ok() {
         DataBase.fruitsInShop.put("lemon", lemon);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "lemon,80";
         String actual = resultMessage.makeMessage(new FruitDaoImpl());
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.fruitsInShop.clear();
     }
 }

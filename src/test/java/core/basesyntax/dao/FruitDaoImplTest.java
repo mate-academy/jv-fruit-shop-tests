@@ -27,13 +27,8 @@ public class FruitDaoImplTest {
         fruitTwo.setPurchase(100);
     }
 
-    @After
-    public void tearDown() {
-        DataBase.fruitsInShop.clear();
-    }
-
     @Test
-    public void add_Ok() {
+    public void add_ok() {
         fruitDao.add(lemon, fruitOne);
         int expected = 1;
         assertEquals(expected, DataBase.fruitsInShop.size());
@@ -41,22 +36,22 @@ public class FruitDaoImplTest {
     }
 
     @Test(expected = ElementDoesNotExist.class)
-    public void add_KeyIsNull_NotOk() {
+    public void add_keyIsNull_notOk() {
         fruitDao.add(null, fruitOne);
     }
 
     @Test(expected = ElementDoesNotExist.class)
-    public void add_ValueIsNull_NotOk() {
+    public void add_valueIsNull_notOk() {
         fruitDao.add("lemon", null);
     }
 
     @Test(expected = ElementDoesNotExist.class)
-    public void get_ValueIsnull_notOk() {
+    public void get_valueIsnull_notOk() {
         fruitDao.get(null);
     }
 
     @Test
-    public void get_Ok() {
+    public void get_ok() {
         DataBase.fruitsInShop.put(lemon, fruitOne);
         DataBase.fruitsInShop.put(kivi, fruitTwo);
         assertEquals(fruitOne, fruitDao.get(lemon));
@@ -64,12 +59,17 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getAll_Ok() {
+    public void getAll_ok() {
         Map<String, Fruit> expectedMap = new TreeMap<>();
         expectedMap.put(lemon, fruitOne);
         expectedMap.put(kivi, fruitTwo);
         DataBase.fruitsInShop.put(lemon, fruitOne);
         DataBase.fruitsInShop.put(kivi, fruitTwo);
         assertEquals(expectedMap, fruitDao.getAll());
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.fruitsInShop.clear();
     }
 }

@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitShopSupplierImplTest {
-
     private final FruitShopSupplier supplier = new FruitShopSupplierImpl();
     private final List<String> listWithFruits = List.of("type,fruit,quantity",
             "b,banana,20", "b,apple,100", "b,kivi,100", "s,banana,100",
@@ -24,9 +23,9 @@ public class FruitShopSupplierImplTest {
             "s,kivi,5", "s,kivi,20", "s,banana,50");
     private List<String> listWithFruitsNull;
     private Map<String, Fruit> rightMap;
-    private Fruit apple = new Fruit();
-    private Fruit kivi = new Fruit();
-    private Fruit banana = new Fruit();
+    private Fruit apple;
+    private Fruit kivi;
+    private Fruit banana;
 
     @Before
     public void setUp() {
@@ -54,13 +53,8 @@ public class FruitShopSupplierImplTest {
         listWithFruitsNull.add(null);
     }
 
-    @After
-    public void tearDown() {
-        DataBase.fruitsInShop.clear();
-    }
-
     @Test
-    public void fillTheMap_Ok() {
+    public void fillTheMap_ok() {
         DataBase.fruitsInShop.put("apple", new Fruit());
         DataBase.fruitsInShop.put("banana", new Fruit());
         DataBase.fruitsInShop.put("kivi", new Fruit());
@@ -69,7 +63,7 @@ public class FruitShopSupplierImplTest {
     }
 
     @Test
-    public void fillTheMap_SkipFIrstIndex() {
+    public void fillTheMap_skipFirstIndex_ok() {
         supplier.fillTheMap(listWithFruits);
         String example = "type,fruit,quantity";
         String[] array = example.split(",");
@@ -77,7 +71,12 @@ public class FruitShopSupplierImplTest {
     }
 
     @Test(expected = ElementDoesNotExist.class)
-    public void fillTheMap_indexIsNull() {
+    public void fillTheMap_indexIsNull_notOk() {
         supplier.fillTheMap(listWithFruitsNull);
+    }
+
+    @After
+    public void tearDown() {
+        DataBase.fruitsInShop.clear();
     }
 }

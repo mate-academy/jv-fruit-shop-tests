@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataWriterTest {
@@ -17,34 +18,34 @@ public class DataWriterTest {
             + "banana,107" + System.lineSeparator()
             + "orange,170" + System.lineSeparator()
             + "apple,100";
-    private DataWriter dataWriter = new DataWriterCsvImpl();
+    private static DataWriter dataWriter;
+
+    @BeforeClass
+    public static void setUp() {
+        dataWriter = new DataWriterCsvImpl();
+    }
 
     @Test
-    public void writeOk() {
+    public void write_correctDataTest_Ok() {
         dataWriter.write(REPORT_EXAMPLE_OK, ACTUAL_REPORT_PATH);
-        byte[] reportExpected = null;
-        byte[] reportActual = null;
+        byte[] expected = null;
+        byte[] actual = null;
         try {
-            reportExpected = Files.readAllBytes(Path.of(EXPECTED_REPORT_PATH));
+            expected = Files.readAllBytes(Path.of(EXPECTED_REPORT_PATH));
         } catch (IOException e) {
             fail("Can't read file: " + EXPECTED_REPORT_PATH);
         }
         try {
-            reportActual = Files.readAllBytes(Path.of(ACTUAL_REPORT_PATH));
+            actual = Files.readAllBytes(Path.of(ACTUAL_REPORT_PATH));
         } catch (IOException e) {
             fail("Can't read file: " + ACTUAL_REPORT_PATH);
         }
-        assertArrayEquals("Reports not equals", reportExpected, reportActual);
+        assertArrayEquals("Reports not equals", expected, actual);
     }
 
-    @Test
-    public void nullPathTest_NotOk() {
-        try {
-            dataWriter.write(REPORT_EXAMPLE_OK, null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("DataReader should be thrown: \"Can't read data to file: filePath\"");
+    @Test(expected = RuntimeException.class)
+    public void write_nullPathTest_notOk() {
+        dataWriter.write(REPORT_EXAMPLE_OK, null);
     }
 
     @After
@@ -52,7 +53,7 @@ public class DataWriterTest {
         try {
             Files.deleteIfExists(Path.of(ACTUAL_REPORT_PATH));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't delete file:" + ACTUAL_REPORT_PATH);
         }
     }
 }

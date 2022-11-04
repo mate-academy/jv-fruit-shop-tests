@@ -12,7 +12,7 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
     private static Storage storage;
     private static StringBuilder validReport;
-    private static final String VALID_REPORT_EMPTY = "fruit,quantity" + System.lineSeparator();
+    private static StringBuilder validReportEmptyFile;
 
     @BeforeClass
     public static void setUp() {
@@ -27,12 +27,15 @@ public class ReportServiceImplTest {
         validReport.append(System.lineSeparator());
         validReport.append("apple,25");
         validReport.append(System.lineSeparator());
+        validReportEmptyFile = new StringBuilder();
+        validReportEmptyFile.append("fruit,quantity");
+        validReportEmptyFile.append(System.lineSeparator());
     }
 
     @Test
     public void generateReportEmptyStorage_Ok() {
         storage.storage.clear();
-        String expected = VALID_REPORT_EMPTY;
+        String expected = validReportEmptyFile.toString();
         String actual = reportService.generateReport();
         assertEquals(expected,actual);
     }

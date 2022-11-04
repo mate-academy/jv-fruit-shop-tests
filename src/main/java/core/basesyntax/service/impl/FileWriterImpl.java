@@ -8,6 +8,9 @@ import java.nio.file.Path;
 public class FileWriterImpl implements FileWriter {
     @Override
     public void writeData(String path, String report) {
+        if (path == null) {
+            throw new RuntimeException("The path is null");
+        }
         try {
             Files.write(Path.of(path), report.getBytes());
         } catch (IOException e) {

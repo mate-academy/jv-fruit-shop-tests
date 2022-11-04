@@ -36,7 +36,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void generateReport_Ok() {
-        String expected = validReport.toString()    ;
+        String expected = validReport.toString();
         String actual = reportService.generateReport();
         assertEquals(expected, actual);
     }

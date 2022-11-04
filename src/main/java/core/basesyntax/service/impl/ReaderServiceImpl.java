@@ -12,6 +12,9 @@ public class ReaderServiceImpl implements ReaderService {
         List<String> dataShop;
         try {
             dataShop = Files.readAllLines(Path.of(filePath));
+            if (dataShop.isEmpty()) {
+                throw new RuntimeException("File is empty! " + filePath);
+            }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file: " + filePath, e);
         }

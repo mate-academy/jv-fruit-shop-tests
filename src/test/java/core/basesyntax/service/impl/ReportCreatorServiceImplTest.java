@@ -11,6 +11,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorServiceImplTest {
+    private static final String FRUIT_TYPE_BANANA = "banana";
+    private static final String FRUIT_TYPE_APPLE = "apple";
     private static Map<String, Integer> storage;
     private ReportCreatorService reportCreatorService;
     private StorageDao storageDao;
@@ -23,9 +25,9 @@ public class ReportCreatorServiceImplTest {
     }
 
     @Test
-    public void report_Created_Ok() {
-        storageDao.getStorage().put("banana", 50);
-        storageDao.getStorage().put("apple", 10);
+    public void report_created_Ok() {
+        storageDao.getStorage().put(FRUIT_TYPE_BANANA, 50);
+        storageDao.getStorage().put(FRUIT_TYPE_APPLE, 10);
         String expected = "fruit,quantity" + System.lineSeparator() + "banana,50"
                 + System.lineSeparator() + "apple,10";
         String actual = reportCreatorService.createReport();
@@ -33,9 +35,9 @@ public class ReportCreatorServiceImplTest {
     }
 
     @Test
-    public void report_Created_notOk() {
-        storageDao.getStorage().put("banana", 70);
-        storageDao.getStorage().put("apple", 50);
+    public void report_created_wrongReport_notOk() {
+        storageDao.getStorage().put(FRUIT_TYPE_BANANA, 70);
+        storageDao.getStorage().put(FRUIT_TYPE_APPLE, 50);
         String expected = "fruit,quantity" + System.lineSeparator() + "banana,50"
                 + System.lineSeparator() + "apple,10";
         String actual = reportCreatorService.createReport();

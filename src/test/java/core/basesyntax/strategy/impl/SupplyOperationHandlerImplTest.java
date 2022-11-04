@@ -21,7 +21,7 @@ public class SupplyOperationHandlerImplTest {
     }
 
     @Test
-    public void supply_Operation_Ok() {
+    public void supplyOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 FRUIT_TYPE,50);
         storageDao.getStorage().put(FRUIT_TYPE,50);
@@ -32,7 +32,7 @@ public class SupplyOperationHandlerImplTest {
     }
 
     @Test
-    public void supply_Operation_New_Fruit_Ok() {
+    public void supplyOperation_newFruit_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 FRUIT_TYPE,50);
         operationHandler.changeQuantity(fruitTransaction);

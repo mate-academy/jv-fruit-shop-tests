@@ -22,7 +22,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test
-    public void purchase_Operation_Ok() {
+    public void purchase_operation_Ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT_TYPE,14);
         operationHandler.changeQuantity(fruitTransaction);
@@ -32,7 +32,7 @@ public class PurchaseOperationHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchase_Operation_notOk() {
+    public void purchaseOperation_overBalanceQuantity_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT_TYPE,16);
         operationHandler.changeQuantity(fruitTransaction);

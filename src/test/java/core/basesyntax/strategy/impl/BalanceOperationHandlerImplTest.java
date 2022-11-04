@@ -21,7 +21,7 @@ public class BalanceOperationHandlerImplTest {
     }
 
     @Test
-    public void balance_Check_Ok() {
+    public void balanceOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT_TYPE,14);
         operationHandler.changeQuantity(fruitTransaction);

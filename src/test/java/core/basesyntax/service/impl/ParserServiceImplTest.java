@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
+    private static final String FRUIT_TYPE = "apple";
     private static ParserService parserService;
 
     @Before
@@ -18,20 +19,20 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void parse_ValidData_Ok() {
+    public void parse_validData_Ok() {
         List<String> testList = new ArrayList<>();
         testList.add("type,fruit,quantity");
-        testList.add("b,apple,120");
-        testList.add("r,apple,10");
+        testList.add("b,"+ FRUIT_TYPE +",120");
+        testList.add("r,"+ FRUIT_TYPE +",10");
         List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,"apple",120));
-        expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN,"apple",10));
+        expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,FRUIT_TYPE,120));
+        expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN,FRUIT_TYPE,10));
         List<FruitTransaction> actual = parserService.parseData(testList);
         Assert.assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_InvalidData_notOk() {
+    public void parse_invalidData_notOk() {
         List<String> testList = new ArrayList<>();
         testList.add("b,banana,someNumber");
         testList.add("s,apple,seven");
@@ -39,7 +40,7 @@ public class ParserServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_EmptyList_notOk() {
+    public void parse_emptyList_notOk() {
         parserService.parseData(Collections.emptyList());
     }
 

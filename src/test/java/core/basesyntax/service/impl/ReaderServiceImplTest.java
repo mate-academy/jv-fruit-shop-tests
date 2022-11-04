@@ -10,6 +10,8 @@ public class ReaderServiceImplTest {
     private static final String VALID_INPUT_FILEPATH =
             "src/test/java/core/basesyntax/resources/test_Input.csv";
     private static final String INVALID_INPUT_FILEPATH = "";
+    private static final String EMPTY_INPUT_FILEPATH =
+            "src/test/java/core/basesyntax/resources/test_empty.csv";
     private static ReaderService readerService;
 
     @Before
@@ -18,7 +20,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_Valid_File_Ok() {
+    public void read_validFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,10",
                 "b,apple,50",
@@ -33,7 +35,12 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_Invalid_File_notOk() {
+    public void read_invalidFile_notOk() {
         readerService.fileReader(INVALID_INPUT_FILEPATH);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void read_emptyFile_notOk() {
+        readerService.fileReader(EMPTY_INPUT_FILEPATH);
     }
 }

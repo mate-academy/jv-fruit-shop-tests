@@ -23,7 +23,7 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    public void return_Operation_ok() {
+    public void return_operation_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 FRUIT_TYPE,15);
         operationHandler.changeQuantity(fruitTransaction);
@@ -33,7 +33,7 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void return_Operation_notOk() {
+    public void returnOperation_invalidFruit_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 FRUIT_TYPE_INVALID,15);
         operationHandler.changeQuantity(fruitTransaction);

@@ -32,4 +32,11 @@ public class ReportServiceImplTest {
         String actual = reportService.generateReport();
         assertEquals(expected,actual);
     }
+
+    @Test
+    public void generateReport_Ok() {
+        String expected = VALID_REPORT;
+        String actual = reportService.generateReport();
+        assertEquals(expected, actual);
+    }
 }

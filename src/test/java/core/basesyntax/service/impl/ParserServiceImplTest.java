@@ -22,8 +22,8 @@ public class ParserServiceImplTest {
     public void parse_validData_Ok() {
         List<String> testList = new ArrayList<>();
         testList.add("type,fruit,quantity");
-        testList.add("b,"+ FRUIT_TYPE +",120");
-        testList.add("r,"+ FRUIT_TYPE +",10");
+        testList.add("b," + FRUIT_TYPE + ",120");
+        testList.add("r," + FRUIT_TYPE + ",10");
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,FRUIT_TYPE,120));
         expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN,FRUIT_TYPE,10));

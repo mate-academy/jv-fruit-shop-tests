@@ -9,11 +9,18 @@ import core.basesyntax.service.CreatReport;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorTest {
     private CreatReport creator;
     private FruitStorageDao storageDao;
+
+    @Before
+    public void setUp() throws Exception {
+        storageDao = new FruitStorageDaoImpl();
+        creator = new ReportCreator(storageDao);
+    }
 
     @Test
     public void creatReport_storageIsNull_NotOk() {
@@ -29,8 +36,6 @@ public class ReportCreatorTest {
     public void creatReport_rightReport_Ok() {
         Storage.storage.put("banana", 152);
         Storage.storage.put("apple", 90);
-        storageDao = new FruitStorageDaoImpl();
-        creator = new ReportCreator(storageDao);
         List<String> rightReport = List.of("banana,152" + System.lineSeparator(),
                 "apple,90" + System.lineSeparator());
         List<String> createdReport = creator.creatReport();
@@ -39,8 +44,6 @@ public class ReportCreatorTest {
 
     @Test
     public void creatReport_storageIsEmpty_Ok() {
-        storageDao = new FruitStorageDaoImpl();
-        creator = new ReportCreator(storageDao);
         List<String> rightReport = new ArrayList<>();
         List<String> createdReport = creator.creatReport();
         assertEquals(rightReport, createdReport);

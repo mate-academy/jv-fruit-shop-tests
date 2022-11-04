@@ -14,6 +14,7 @@ import core.basesyntax.strategy.strategy.impl.PurchaseActivity;
 import core.basesyntax.strategy.strategy.impl.ReturnActivity;
 import core.basesyntax.strategy.strategy.impl.SupplyActivity;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,19 +86,18 @@ public class WriteToDbFromListTest {
     }
 
     @Test
-    public void writeToDb_dataIsEmpty() {
+    public void writeToDb_dataIsEmpty_notOk() {
         List<String> emptyData = new ArrayList<>();
         assertFalse(writer.writeToDB(emptyData, strategy));
     }
 
     @Test
-    public void writeToDb_srategyIsEmpty() {
-        Map<String, DoActivities> emptyMap = new HashMap<>();
-        writer.writeToDB(data,emptyMap);
+    public void writeToDb_srategyIsEmpty_notOk() {
+        writer.writeToDB(data, Collections.emptyMap());
     }
 
     @Test
-    public void writeToDb_Ok() {
+    public void writeToDb_ok() {
         assertTrue(writer.writeToDB(data, strategy));
     }
 

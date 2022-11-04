@@ -5,13 +5,19 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.WriteToFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class WriteToFileImplTest {
-    private static final String REPORT_FILE = "src/main/resources/report.txt";
+    private static final String REPORT_FILE = "src/test/java/resources/report.txt";
     private WriteToFile writer;
     private List<String> report;
 
@@ -60,5 +66,14 @@ public class WriteToFileImplTest {
     @Test
     public void writeToFile_rightWrighting_ok() {
         assertTrue(writer.writeToFile(REPORT_FILE, report));
+        List<String> reportFromFile;
+        try {
+            reportFromFile = Files.readAllLines(Paths.get(REPORT_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(report, reportFromFile.stream()
+                .map(s -> s + System.lineSeparator())
+                .collect(Collectors.toList()));
     }
 }

@@ -40,12 +40,12 @@ public class FruitServiceImplTest {
                 new SupplyOperationStrategy());
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitService = new FruitServiceImpl(operationStrategy);
-        expectedStorage = new HashMap<>();
     }
 
     @Before
     public void setUp() {
         fruitTransactionList = new ArrayList<>();
+        expectedStorage = new HashMap<>();
     }
 
     @Test
@@ -65,11 +65,10 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void processFruitTransactions_emptyList_notOk() {
-        int oldStorageSize = 0;
+    public void processFruitTransactions_emptyList_ok() {
         fruitService.processFruitTransactions(fruitTransactionList);
-        int newStorageSize = Storage.fruits.size();
-        assertEquals(oldStorageSize, newStorageSize);
+        Map<String, Integer> newStorage = Storage.fruits;
+        assertEquals(expectedStorage, newStorage);
     }
 
     @After

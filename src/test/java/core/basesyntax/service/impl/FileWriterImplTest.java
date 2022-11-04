@@ -6,13 +6,13 @@ import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
     private static FileWriter fileWriter = new FileWriterImpl();
     private static String report;
-    private static String path;
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,21 +22,24 @@ public class FileWriterImplTest {
 
     @Test
     public void writeFile_validReportFile_ok() {
-        path = "src/test/resources/reportForTests";
+        String path = "src/test/resources/reportForTests";
         fileWriter.writeFile(path, report);
-        int expected = 2;
-        int actual = 0;
+        List<String> actualList;
         try {
-            actual = (Files.readAllLines(Path.of(path))).size();
+            actualList = Files.readAllLines(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException("Can't read report", e);
         }
-        assertEquals(expected, actual);
+        StringBuilder actual = new StringBuilder();
+        for (String line : actualList) {
+            actual.append(line).append(System.lineSeparator());
+        }
+        String actualString = actual.toString();
+        assertEquals(report, actualString);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeFile_invalidPath_notOk() {
-        path = "";
-        fileWriter.writeFile(path, report);
+        fileWriter.writeFile("", report);
     }
 }

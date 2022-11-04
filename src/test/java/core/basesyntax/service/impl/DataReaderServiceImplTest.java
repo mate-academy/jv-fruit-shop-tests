@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.service.DataReaderService;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,8 +37,8 @@ public class DataReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_emptyInputFile_notOk() {
+    public void readFile_emptyInputFile_ok() {
         List<String> actual = dataReaderService.readFile(EMPTY_FILE_PATH);
-        assertNotEquals(expectedList, actual);
+        assertEquals(Collections.emptyList(), actual);
     }
 }

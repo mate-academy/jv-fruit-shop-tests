@@ -14,7 +14,7 @@ public class ReportServiceImplTest {
 
     private static final String VALID_REPORT = "fruit,quantity \n"
             + "banana,25\r\n"
-            + "apple,25\r\n";
+            + "apple,25\r";
     private static final String VALID_REPORT_EMPTY = "fruit,quantity \n";
 
     @BeforeClass

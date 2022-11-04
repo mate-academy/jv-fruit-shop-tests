@@ -28,7 +28,7 @@ public class ListUtilTest {
     }
 
     @Test
-    public void processList() {
+    public void processList_validList_ok() {
         List<String> content = new ArrayList<>();
         content.add("type,fruit,quantity");
         content.add("b,banana,20");

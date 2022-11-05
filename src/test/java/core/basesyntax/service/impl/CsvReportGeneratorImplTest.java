@@ -3,21 +3,28 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.CsvReportGenerator;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvReportGeneratorImplTest {
     private static final String NULL_DATA_EXCEPTION_MESSAGE = "Data can`t be null";
-    private static final Map<String, Integer> VALID_STORAGE_DATA = Map.of("apple", 90,
-            "banana", 152);
+    private static final Map<String, Integer> VALID_STORAGE_DATA = new HashMap<>();
     private static final String EXPECTED_DATA = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
     private CsvReportGenerator<String, Map<String, Integer>> csvReportGenerator;
+
+    @BeforeClass
+    public static void beforeClass() {
+        VALID_STORAGE_DATA.put("banana", 152);
+        VALID_STORAGE_DATA.put("apple", 90);
+    }
 
     @Before
     public void setUp() {

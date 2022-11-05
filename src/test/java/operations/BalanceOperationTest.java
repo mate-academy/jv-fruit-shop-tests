@@ -7,8 +7,8 @@ import db.Storage;
 import model.FruitTransaction;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.testng.annotations.BeforeClass;
 
 public class BalanceOperationTest {
     private static OperationHandler balanceHandler;

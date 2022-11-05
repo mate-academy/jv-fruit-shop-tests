@@ -4,17 +4,20 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
-import core.basesyntax.service.handler.*;
+import core.basesyntax.service.handler.BalanceOperationHandler;
+import core.basesyntax.service.handler.OperationHandler;
+import core.basesyntax.service.handler.PurchaseOperationHandler;
+import core.basesyntax.service.handler.ReturnOperationHandler;
+import core.basesyntax.service.handler.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class TransactionServiceImplTest {
     private static final Fruit DEFAULT_FRUIT = new Fruit("banana", 20);
@@ -23,7 +26,7 @@ public class TransactionServiceImplTest {
     private List<FruitTransaction> transactions;
 
     @BeforeClass
-    public static void Initialization() {
+    public static void initialization() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());

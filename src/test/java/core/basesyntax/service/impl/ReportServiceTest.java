@@ -12,7 +12,7 @@ public class ReportServiceTest {
     private static ReportService reportService;
 
     @BeforeClass
-    public static void ReportServiceInitialization() {
+    public static void reportServiceInitialization() {
         reportService = new ReportServiceImpl();
     }
 
@@ -29,9 +29,9 @@ public class ReportServiceTest {
 
     @Test
     public void createReport_EmptyStorage_Ok() {
-        String expected = "fruit,quantity"+ System.lineSeparator();
+        String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.createReport();
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @After

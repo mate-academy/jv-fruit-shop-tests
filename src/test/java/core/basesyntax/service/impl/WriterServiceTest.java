@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class WriterServiceTest {
 

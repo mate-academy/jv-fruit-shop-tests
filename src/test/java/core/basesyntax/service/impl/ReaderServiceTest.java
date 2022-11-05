@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.List;
 
 public class ReaderServiceTest {
     private static final String EMPTY_FILE_NAME = "src/test/resources/empty.csv";

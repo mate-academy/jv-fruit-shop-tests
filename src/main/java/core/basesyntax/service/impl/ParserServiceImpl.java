@@ -19,7 +19,7 @@ public class ParserServiceImpl implements ParserService {
         String[] info;
         String columnNames = readeData.get(COLUMN_NAMES_ROW_INDEX);
         for (String line : readeData) {
-            if(line.equals(columnNames)){
+            if (line.equals(columnNames)) {
                 continue;
             }
             info = line.split(SPLITERATOR);

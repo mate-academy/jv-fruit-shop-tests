@@ -8,7 +8,7 @@ public class ReturnOperationHandlerTest {
     private static OperationHandler handler;
 
     @BeforeClass
-    public static void ReturnHandlerInitialization() {
+    public static void returnHandlerInitialization() {
         handler = new ReturnOperationHandler();
     }
 

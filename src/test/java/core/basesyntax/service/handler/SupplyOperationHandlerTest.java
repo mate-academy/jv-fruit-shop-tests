@@ -8,7 +8,7 @@ public class SupplyOperationHandlerTest {
     private static OperationHandler handler;
 
     @BeforeClass
-    public static void SupplyHandlerInitialization() {
+    public static void supplyHandlerInitialization() {
         handler = new SupplyOperationHandler();
     }
 

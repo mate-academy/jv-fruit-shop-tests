@@ -8,7 +8,7 @@ public class PurchaseOperationHandlerTest {
     private static OperationHandler handler;
 
     @BeforeClass
-    public static void PurchaseHandlerInitialization() {
+    public static void purchaseHandlerInitialization() {
         handler = new PurchaseOperationHandler();
     }
 

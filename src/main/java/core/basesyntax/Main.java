@@ -23,8 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_FROM_READ = "src/main/java/core/basesyntax/resources/input.csv";
-    private static final String FILE_TO_WRITE = "src/main//java/core/basesyntax/resources/report.csv";
+    private static final String FILE_FROM_READ =
+            "src/main/java/core/basesyntax/resources/input.csv";
+    private static final String FILE_TO_WRITE =
+            "src/main//java/core/basesyntax/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();

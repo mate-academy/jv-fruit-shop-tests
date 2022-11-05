@@ -8,7 +8,7 @@ public class BalanceOperationHandlerTest {
     private static OperationHandler handler;
 
     @BeforeClass
-    public static void BalanceHandlerInitialization() {
+    public static void balanceHandlerInitialization() {
         handler = new BalanceOperationHandler();
     }
 

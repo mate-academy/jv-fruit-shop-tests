@@ -27,7 +27,7 @@ public class StorageImplTest {
     }
 
     @Test
-    public void getStorage() {
+    public void getStorageMethodTest_Ok() {
         assertEquals(testMap, testStorage.getStorage());
     }
 

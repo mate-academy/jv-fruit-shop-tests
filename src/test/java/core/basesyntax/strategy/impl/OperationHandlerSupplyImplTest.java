@@ -24,12 +24,26 @@ public class OperationHandlerSupplyImplTest {
         storage = new StorageImpl();
         testFruitDao = new FruitDaoImpl();
         operationHandlerSupply = new OperationHandlerSupplyImpl();
+        testFruitDao.put(apple, 10);
     }
 
     @Test
     public void applyMethod_Ok() {
         int expectedAmount = 235;
-        testFruitDao.put(apple, 10);
+        operationHandlerSupply.apply(apple, 225);
+        int actualAmount = storage.getStorage().get(apple);
+        assertEquals(expectedAmount, actualAmount);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void applyNegativeAmount_NotOk() {
+        operationHandlerSupply.apply(apple, -1);
+    }
+
+    @Test
+    public void applyWithoutCurrentFruitInStorage() {
+        int expectedAmount = 225;
+        storage.getStorage().clear();
         operationHandlerSupply.apply(apple, 225);
         int actualAmount = storage.getStorage().get(apple);
         assertEquals(expectedAmount, actualAmount);

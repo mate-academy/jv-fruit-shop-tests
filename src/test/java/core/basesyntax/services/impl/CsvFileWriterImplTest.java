@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CsvFileWriterImplTest {
 
     @Test
-    public void createReportFile() {
+    public void createReportFileMethodTest_Ok() {
         List<String> expectedList = List.of("fruit,quantity",
                 "How are u doing",
                 "wass up","100%N....");

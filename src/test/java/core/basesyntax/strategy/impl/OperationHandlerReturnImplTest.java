@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationHandlerReturnImplTest {
-    private Storage storage;
+    private Storage testStorage;
     private Fruit apple;
     private FruitDao testFruitDao;
     private OperationHandler operationHandlerReturn;
@@ -21,7 +21,7 @@ public class OperationHandlerReturnImplTest {
     @Before
     public void setUp() {
         apple = new Fruit("apple");
-        storage = new StorageImpl();
+        testStorage = new StorageImpl();
         testFruitDao = new FruitDaoImpl();
         operationHandlerReturn = new OperationHandlerReturnImpl();
     }
@@ -31,13 +31,19 @@ public class OperationHandlerReturnImplTest {
         int expectedAmount = 25;
         testFruitDao.put(apple, 10);
         operationHandlerReturn.apply(apple, 15);
-        int actualAmount = storage.getStorage().get(apple);
+        int actualAmount = testStorage.getStorage().get(apple);
         assertEquals(expectedAmount, actualAmount);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void applyNegativeAmount() {
+        testFruitDao.put(apple, 10);
+        operationHandlerReturn.apply(apple, -1);
     }
 
     @After
     public void deleteAll() {
-        storage.getStorage().clear();
+        testStorage.getStorage().clear();
     }
 }
 

@@ -10,13 +10,9 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class OperationHandlerPurchaseImplTest {
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
     private Fruit apple;
     private Fruit kiwi;
     private Storage storage;
@@ -42,10 +38,14 @@ public class OperationHandlerPurchaseImplTest {
         assertEquals(expectedAmountOfApple, actualAmount);
     }
 
-    @Test
-    public void applyInvalidValur_notOk() {
-        expectedException.expect(RuntimeException.class);
+    @Test(expected = RuntimeException.class)
+    public void applyInvalidValue_notOk() {
         operationHandlerPurchase.apply(apple, 100);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void applyNegativeValue_notOk() {
+        operationHandlerPurchase.apply(apple, -100);
     }
 
     @After

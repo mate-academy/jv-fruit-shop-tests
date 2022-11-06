@@ -8,7 +8,7 @@ import org.junit.Test;
 public class CsvFileReaderImplTest {
 
     @Test
-    public void getAcceptedFileAsList() {
+    public void getAcceptedFileAsListMethodTest_Ok() {
         List<String> expectedList = List.of("How are u doing",
                 "wass up", "100%N....");
         List<String> actualList = new CsvFileReaderImpl()

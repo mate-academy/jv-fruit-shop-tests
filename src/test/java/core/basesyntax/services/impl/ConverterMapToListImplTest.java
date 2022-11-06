@@ -12,7 +12,7 @@ public class ConverterMapToListImplTest {
     private final Fruit kiwi = new Fruit("kiwi");
 
     @Test
-    public void convert() {
+    public void convertMethodTest_Ok() {
         List<String> expectedList = List.of("apple,10", "kiwi,10");
         Map<Fruit, Integer> storage = Map.of(apple, 10, kiwi, 10);
         List<String> actualList = new ConverterMapToListImpl().convert(storage);

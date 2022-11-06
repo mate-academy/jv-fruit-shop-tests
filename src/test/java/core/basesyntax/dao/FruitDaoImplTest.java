@@ -32,11 +32,17 @@ public class FruitDaoImplTest {
         assertEquals(expectedSize, storage.getStorage().size());
     }
 
-    @Test
+    @Test()
     public void getAmountCurrentFruitInShopMethodTest_Ok() {
         int expectedAmount = 15;
         int actualAmount = fruitDao.getAmountCurrentFruitInShop(kiwi);
         assertEquals(expectedAmount, actualAmount);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getAmountNoCurrentFruitTest_NotOk() {
+        storage.getStorage().clear();
+        fruitDao.getAmountCurrentFruitInShop(kiwi);
     }
 
     @Test
@@ -45,6 +51,12 @@ public class FruitDaoImplTest {
         fruitDao.update(apple, 33);
         int actualAmount = fruitDao.getAmountCurrentFruitInShop(apple);
         assertEquals(expectedAmount, actualAmount);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void updateWithNothingToTest_Ok() {
+        storage.getStorage().clear();
+        fruitDao.update(apple, 33);
     }
 
     @Test

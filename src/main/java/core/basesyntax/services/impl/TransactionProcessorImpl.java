@@ -1,8 +1,8 @@
-package com.basesyntax.services.impl;
+package core.basesyntax.services.impl;
 
-import com.basesyntax.model.Fruit;
-import com.basesyntax.services.TransactionProcessor;
-import com.basesyntax.strategy.Strategy;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.services.TransactionProcessor;
+import core.basesyntax.strategy.Strategy;
 import java.util.List;
 
 public class TransactionProcessorImpl implements TransactionProcessor {

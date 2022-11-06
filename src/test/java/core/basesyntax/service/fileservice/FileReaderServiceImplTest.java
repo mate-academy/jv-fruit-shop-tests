@@ -14,19 +14,19 @@ public class FileReaderServiceImplTest {
     private static FileReaderService fileReader;
     private static String validFilePath;
     private static String invalidFilePath;
-    private static List<String> expected;
+    private static List<String> expectedList;
 
     @BeforeClass
     public static void beforeClass() {
         fileReader = new FileReaderServiceImpl();
-        expected = new ArrayList<>();
+        expectedList = new ArrayList<>();
         validFilePath = "src/main/resources/testInput.csv";
         invalidFilePath = "notExistingPath";
-        expected.add("type,fruit,quantity");
-        expected.add("b,banana,20");
-        expected.add("b,apple,100");
-        expected.add("s,banana,100");
-        expected.add("p,banana,13");
+        expectedList.add("type,fruit,quantity");
+        expectedList.add("b,banana,20");
+        expectedList.add("b,apple,100");
+        expectedList.add("s,banana,100");
+        expectedList.add("p,banana,13");
         String lines = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
@@ -41,8 +41,8 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFileIs_Ok() {
-        assertEquals(expected.toString(), fileReader.readFile(validFilePath).toString());
+    public void readFile_IsOk() {
+        assertEquals(expectedList.toString(), fileReader.readFile(validFilePath).toString());
     }
 
     @Test(expected = RuntimeException.class)

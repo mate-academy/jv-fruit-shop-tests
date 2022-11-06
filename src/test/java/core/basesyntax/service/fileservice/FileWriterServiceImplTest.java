@@ -14,19 +14,22 @@ public class FileWriterServiceImplTest {
     private static String invalidFilePath;
     private static String report;
     private static FileWriterService writerService;
+    private static String separator = System.lineSeparator();
 
     @BeforeClass
     public static void beforeClass() {
         pathToTestReportFile = "src/main/resources/testReport.csv";
         invalidFilePath = "";
-        report = "fruit,quantity\n"
-                + "banana,352\n"
+        report = "fruit,quantity"
+                + separator
+                + "banana,352"
+                + separator
                 + "apple,90";
         writerService = new FileWriterServiceImpl();
     }
 
     @Test
-    public void writeDataToFileIs_Ok() {
+    public void writeDataToFile_IsOk() {
         writerService.writeDataToFile(pathToTestReportFile,report);
         List<String> lines;
         try {
@@ -34,7 +37,7 @@ public class FileWriterServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file", e);
         }
-        String actualLines = String.join("\n", lines);
+        String actualLines = String.join(separator, lines);
         assertEquals("There is error: read and expected data differ among themselves",
                 report, actualLines);
     }

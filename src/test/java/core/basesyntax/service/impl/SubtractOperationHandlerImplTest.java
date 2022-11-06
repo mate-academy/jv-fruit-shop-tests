@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -36,13 +36,13 @@ public class SubtractOperationHandlerImplTest {
     }
 
     @Test
-    public void operationWithFruitTransactionIs_Ok() {
+    public void operationWithFruitTransaction_IsOk() {
         Integer expected = 0;
         assertEquals(expected, FruitStorage.storage.get(KEY_APPLE));
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         FruitStorage.storage.clear();
     }
 }

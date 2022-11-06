@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -45,15 +45,15 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void parseDataIs_Ok() {
+    public void parseData_IsOk() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,200", "s,apple,100",
                 "p,banana,100", "r,apple,0");
         assertEquals(fruitTransactionParser.parseData(expected).toString(),
                 actualFruitTransactions.toString());
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         FruitStorage.storage.clear();
     }
 }

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.FruitStorage;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
@@ -20,7 +20,7 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
 
     @Test
-    public void getReportIs_Ok() {
+    public void getReport_IsOk() {
         FruitDao fruitDao = new FruitDaoImpl();
         fruitDao.put(KEY_APPLE,200);
         fruitDao.put(KEY_BANANA,100);
@@ -28,8 +28,8 @@ public class ReportServiceImplTest {
         assertEquals("Can't create report file", EXPECTED,reportService.getReport());
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         FruitStorage.storage.clear();
     }
 }

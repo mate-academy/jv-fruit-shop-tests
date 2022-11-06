@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,5 +32,10 @@ public class OperationHandlerBalanceImplTest {
         operationHandlerBalance.apply(kiwi, 15);
         int actualAmount = storage.getStorage().get(kiwi);
         assertEquals(expectedAmount, actualAmount);
+    }
+
+    @After
+    public void deleteAll() {
+        storage.getStorage().clear();
     }
 }

@@ -54,13 +54,13 @@ public class FruitDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateWithNothingToTest_Ok() {
+    public void updateWithNothingToTest_NotOk() {
         storage.getStorage().clear();
         fruitDao.update(apple, 33);
     }
 
     @Test
-    public void remove() {
+    public void removeMethodTest_Ok() {
         assertNull(null, fruitDao.remove());
     }
 

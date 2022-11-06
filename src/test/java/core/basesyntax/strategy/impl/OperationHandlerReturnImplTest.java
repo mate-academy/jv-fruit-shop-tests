@@ -36,7 +36,7 @@ public class OperationHandlerReturnImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyNegativeAmount() {
+    public void applyNegativeAmount_NotOk() {
         testFruitDao.put(apple, 10);
         operationHandlerReturn.apply(apple, -1);
     }

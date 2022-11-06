@@ -39,12 +39,12 @@ public class OperationHandlerPurchaseImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyInvalidValue_notOk() {
+    public void applyInvalidValue_NotOk() {
         operationHandlerPurchase.apply(apple, 100);
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyNegativeValue_notOk() {
+    public void applyNegativeValue_NotOk() {
         operationHandlerPurchase.apply(apple, -100);
     }
 

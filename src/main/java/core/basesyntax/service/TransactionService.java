@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface TransactionService<L>{
+public interface TransactionService<L> {
     void transaction(L fruitTransactions);
 }

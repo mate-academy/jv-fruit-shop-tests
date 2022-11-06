@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class FileReaderImplTest {
     private static final FileReader reader = new FileReaderImpl();
@@ -26,8 +26,7 @@ public class FileReaderImplTest {
 
     @Test
     public void readFromFile_EmptyFile() {
-        List<String> expected = new ArrayList<>();
         List<String> actual = reader.readFromFile(EMPTY_FILE_PATH);
-        assertEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 }

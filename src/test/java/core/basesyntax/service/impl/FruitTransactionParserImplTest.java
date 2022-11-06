@@ -23,4 +23,9 @@ public class FruitTransactionParserImplTest {
         assertEquals(expectedTransaction,
                 parser.parseTransaction(listToParse).get(FIRST_TRANSACTION_INDEX));
     }
+
+    @Test(expected = RuntimeException.class)
+    public void parseTransaction_Null_notOk() {
+        parser.parseTransaction(List.of(null));
+    }
 }

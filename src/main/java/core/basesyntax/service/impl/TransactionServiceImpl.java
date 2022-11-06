@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionServiceImpl implements TransactionService<List<FruitTransaction>> {
     private static final int DEFAULT_EMPTY_VALUE = 0;
     private final OperationStrategy operationStrategy;
     private final FruitStorageDao fruitStorageDao;

@@ -43,7 +43,7 @@ public class Main {
                 new CsvTransactionParserImpl();
         List<FruitTransaction> fruitTransactions = csvTransactionParser.csvParse(dataReader
                 .readData());
-        TransactionService transactionService =
+        TransactionService<List<FruitTransaction>> transactionService =
                 new TransactionServiceImpl(operationStrategy, fruitStorageDao);
         transactionService.transaction(fruitTransactions);
         CsvReportGenerator<String, Map<String, Integer>> csvReportGenerator =

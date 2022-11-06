@@ -14,11 +14,13 @@ public class OperationPurchase implements OperationHandler {
     @Override
     public void operationWithFruitTransaction(FruitTransaction fruitTransaction) {
         Integer currentQuantity = storageDao.getQuantity(fruitTransaction.getFruit());
-        if (currentQuantity < fruitTransaction.getQuantity()) {
+        if (fruitTransaction.getOperation().equals(FruitTransaction.Operation.PURCHASE)
+                && fruitTransaction.getQuantity() >= currentQuantity) {
             storageDao.put(fruitTransaction.getFruit(),
-                    currentQuantity - fruitTransaction.getQuantity() + currentQuantity);
+                    currentQuantity - currentQuantity);
+        } else {
+            storageDao.put(fruitTransaction.getFruit(),
+                    currentQuantity - fruitTransaction.getQuantity());
         }
-        storageDao.put(fruitTransaction.getFruit(),
-                currentQuantity - fruitTransaction.getQuantity());
     }
 }

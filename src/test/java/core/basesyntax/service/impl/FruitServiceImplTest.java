@@ -19,13 +19,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static final FruitService fruitService = initFruitService();
 
     @Test
-    public void doOperationWithNoTransactions_Ok() {
+    public void doOperation_NoTransactions_Ok() {
         List<FruitTransaction> emptyTransactions = new ArrayList<>();
         fruitService.doOperation(emptyTransactions);
         Map<Fruit, Integer> expected = new HashMap<>();
@@ -34,7 +35,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void doOperationWithNormalTransactions() {
+    public void doOperation_NormalTransactions() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
                         new Fruit("apple"), 100),
@@ -48,7 +49,6 @@ public class FruitServiceImplTest {
         Map<Fruit, Integer> expected = Map.of(new Fruit("apple"), 81);
         Map<Fruit, Integer> actual = FruitStorage.storage;
         assertEquals(expected, actual);
-        FruitStorage.storage.clear();
     }
 
     @Test
@@ -63,6 +63,68 @@ public class FruitServiceImplTest {
         fruitService.doOperation(transactions);
         Map<Fruit, Integer> expected = Map.of(new Fruit("apple"), 0);
         Map<Fruit, Integer> actual = FruitStorage.storage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void doOperation_Balance_Ok() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
+                        new Fruit("apple"), 100),
+                new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
+                        new Fruit("orange"), 20),
+                new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
+                        new Fruit("banana"), 40));
+        fruitService.doOperation(transactions);
+        Map<Fruit, Integer> expected = Map.of(new Fruit("apple"), 100,
+                new Fruit("orange"), 20,
+                new Fruit("banana"), 40);
+        Map<Fruit, Integer> actual = FruitStorage.storage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void doOperation_Supply_Ok() {
+        FruitStorage.storage.put(new Fruit("apple"), 100);
+        FruitStorage.storage.put(new Fruit("orange"), 100);
+        FruitStorage.storage.put(new Fruit("banana"), 100);
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.getOperation("s"),
+                        new Fruit("apple"), 10),
+                new FruitTransaction(FruitTransaction.Operation.getOperation("s"),
+                        new Fruit("orange"), 20),
+                new FruitTransaction(FruitTransaction.Operation.getOperation("s"),
+                        new Fruit("banana"), 30));
+        fruitService.doOperation(transactions);
+        Map<Fruit, Integer> expected = Map.of(new Fruit("apple"), 110,
+                new Fruit("orange"), 120,
+                new Fruit("banana"), 130);
+        Map<Fruit, Integer> actual = FruitStorage.storage;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void doOperation_Return_Ok() {
+        FruitStorage.storage.put(new Fruit("apple"), 100);
+        FruitStorage.storage.put(new Fruit("orange"), 100);
+        FruitStorage.storage.put(new Fruit("banana"), 100);
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.getOperation("r"),
+                        new Fruit("apple"), 10),
+                new FruitTransaction(FruitTransaction.Operation.getOperation("r"),
+                        new Fruit("orange"), 20),
+                new FruitTransaction(FruitTransaction.Operation.getOperation("r"),
+                        new Fruit("banana"), 30));
+        fruitService.doOperation(transactions);
+        Map<Fruit, Integer> expected = Map.of(new Fruit("apple"), 110,
+                new Fruit("orange"), 120,
+                new Fruit("banana"), 130);
+        Map<Fruit, Integer> actual = FruitStorage.storage;
+        assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() throws Exception {
         FruitStorage.storage.clear();
     }
 

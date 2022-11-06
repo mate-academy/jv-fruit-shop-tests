@@ -14,18 +14,18 @@ public class FileReaderImplTest {
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
 
     @Test
-    public void readFromExistingFile_Ok() {
+    public void readFromFile_ExistingFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "s,apple,15");
         assertEquals(expected, reader.readFromFile(EXISTING_FILE_PATH));
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromNonExistingFile_notOk() {
+    public void readFromFile_NonExistingFile_notOk() {
         reader.readFromFile(NON_EXISTING_FILE_PATH);
     }
 
     @Test
-    public void readFromEmptyFile() {
+    public void readFromFile_EmptyFile() {
         List<String> expected = new ArrayList<>();
         List<String> actual = reader.readFromFile(EMPTY_FILE_PATH);
         assertEquals(expected, actual);

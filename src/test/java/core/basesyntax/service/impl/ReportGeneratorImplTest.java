@@ -14,7 +14,7 @@ public class ReportGeneratorImplTest {
     private static final String REPORT_HEADER = "fruit,quantity";
 
     @Test
-    public void generateReportFromEmptyStorage() {
+    public void generateReport_EmptyStorage_Ok() {
         Map<Fruit, Integer> info = new HashMap<>();
         String expectedReport = REPORT_HEADER + LINE_SEPARATOR;
         String actualReport = generator.reportFromStorage(info);
@@ -22,13 +22,29 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void generateReport_Ok() {
+    public void generateReport_OneItemInStorage_Ok() {
         Map<Fruit, Integer> info = new HashMap<>();
         info.put(new Fruit("apple"), 100);
         StringBuilder expectedReport = new StringBuilder();
         expectedReport.append(REPORT_HEADER)
                 .append(LINE_SEPARATOR)
                 .append("apple,100")
+                .append(LINE_SEPARATOR);
+        String actualReport = generator.reportFromStorage(info);
+        assertEquals(expectedReport.toString(), actualReport);
+    }
+
+    @Test
+    public void generateReport_TwoItemsInStorage_Ok() {
+        Map<Fruit, Integer> info = new HashMap<>();
+        info.put(new Fruit("apple"), 100);
+        info.put(new Fruit("orange"), 50);
+        StringBuilder expectedReport = new StringBuilder();
+        expectedReport.append(REPORT_HEADER)
+                .append(LINE_SEPARATOR)
+                .append("apple,100")
+                .append(LINE_SEPARATOR)
+                .append("orange,50")
                 .append(LINE_SEPARATOR);
         String actualReport = generator.reportFromStorage(info);
         assertEquals(expectedReport.toString(), actualReport);

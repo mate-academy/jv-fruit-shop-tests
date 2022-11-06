@@ -13,7 +13,7 @@ public class FruitTransactionParserImplTest {
     private static final int FIRST_TRANSACTION_INDEX = 0;
 
     @Test
-    public void parseTransactionNotParseHeader_Ok() {
+    public void parseTransaction_Ok() {
         List<String> listToParse = List.of("type,fruit,quantity",
                 "b,banana,20");
         FruitTransaction expectedTransaction = new FruitTransaction(

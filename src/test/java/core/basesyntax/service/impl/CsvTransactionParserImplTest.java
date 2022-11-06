@@ -41,7 +41,7 @@ public class CsvTransactionParserImplTest {
             "Such operation does not exist";
     private static final String INVALID_INT_VALUE_EXCEPTION_MESSAGE =
             "Wrong input type, int type expected";
-    private static CsvTransactionParser csvTransactionParser;
+    private static CsvTransactionParser<List<FruitTransaction>,List<String>> csvTransactionParser;
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 

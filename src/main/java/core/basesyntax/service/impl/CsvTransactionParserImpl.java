@@ -5,7 +5,8 @@ import core.basesyntax.service.CsvTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvTransactionParserImpl implements CsvTransactionParser {
+public class CsvTransactionParserImpl
+        implements CsvTransactionParser<List<FruitTransaction>,List<String>> {
     private static final String CSV_SPLITTER = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int PRODUCT_NAME_INDEX = 1;

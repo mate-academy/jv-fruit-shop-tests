@@ -39,7 +39,8 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
         DataReader<List<String>> dataReader = new FileReaderImpl(CSV_FILE_PATH);
-        CsvTransactionParser csvTransactionParser = new CsvTransactionParserImpl();
+        CsvTransactionParser<List<FruitTransaction>,List<String>> csvTransactionParser =
+                new CsvTransactionParserImpl();
         List<FruitTransaction> fruitTransactions = csvTransactionParser.csvParse(dataReader
                 .readData());
         TransactionService transactionService =

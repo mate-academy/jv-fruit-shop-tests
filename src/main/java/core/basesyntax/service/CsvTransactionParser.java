@@ -1,8 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-import java.util.List;
-
-public interface CsvTransactionParser {
-    List<FruitTransaction> csvParse(List<String> data);
+public interface CsvTransactionParser<L,T> {
+    L csvParse(T data);
 }

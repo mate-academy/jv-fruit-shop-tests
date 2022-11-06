@@ -15,7 +15,7 @@ import org.junit.Test;
 public class OperationHandlerPurchaseImplTest {
     private Fruit apple;
     private Fruit kiwi;
-    private Storage storage;
+    private Storage testStorage;
     private FruitDao fruitDao;
     private OperationHandler operationHandlerPurchase;
 
@@ -23,7 +23,7 @@ public class OperationHandlerPurchaseImplTest {
     public void setUp() {
         apple = new Fruit("apple");
         kiwi = new Fruit("kiwi");
-        storage = new StorageImpl();
+        testStorage = new StorageImpl();
         fruitDao = new FruitDaoImpl();
         fruitDao.put(apple, 10);
         fruitDao.put(kiwi, 15);
@@ -34,7 +34,7 @@ public class OperationHandlerPurchaseImplTest {
     public void applyMethodTest_Ok() {
         int expectedAmountOfApple = 5;
         operationHandlerPurchase.apply(apple, 5);
-        int actualAmount = storage.getStorage().get(apple);
+        int actualAmount = testStorage.getStorage().get(apple);
         assertEquals(expectedAmountOfApple, actualAmount);
     }
 
@@ -49,7 +49,7 @@ public class OperationHandlerPurchaseImplTest {
     }
 
     @After
-    public void deleteAll() {
-        storage.getStorage().clear();
+    public void deleteAllDataFromStorage() {
+        testStorage.getStorage().clear();
     }
 }

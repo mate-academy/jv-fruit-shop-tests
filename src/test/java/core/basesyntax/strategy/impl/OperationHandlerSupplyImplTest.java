@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationHandlerSupplyImplTest {
-    private Storage storage;
+    private Storage testStorage;
     private Fruit apple;
     private FruitDao testFruitDao;
     private OperationHandler operationHandlerSupply;
@@ -21,7 +21,7 @@ public class OperationHandlerSupplyImplTest {
     @Before
     public void setUp() {
         apple = new Fruit("apple");
-        storage = new StorageImpl();
+        testStorage = new StorageImpl();
         testFruitDao = new FruitDaoImpl();
         operationHandlerSupply = new OperationHandlerSupplyImpl();
         testFruitDao.put(apple, 10);
@@ -31,7 +31,7 @@ public class OperationHandlerSupplyImplTest {
     public void applyMethod_Ok() {
         int expectedAmount = 235;
         operationHandlerSupply.apply(apple, 225);
-        int actualAmount = storage.getStorage().get(apple);
+        int actualAmount = testStorage.getStorage().get(apple);
         assertEquals(expectedAmount, actualAmount);
     }
 
@@ -43,14 +43,14 @@ public class OperationHandlerSupplyImplTest {
     @Test
     public void applyWithoutCurrentFruitInStorage() {
         int expectedAmount = 225;
-        storage.getStorage().clear();
+        testStorage.getStorage().clear();
         operationHandlerSupply.apply(apple, 225);
-        int actualAmount = storage.getStorage().get(apple);
+        int actualAmount = testStorage.getStorage().get(apple);
         assertEquals(expectedAmount, actualAmount);
     }
 
     @After
-    public void deleteAll() {
-        storage.getStorage().clear();
+    public void deleteAllDataFromStorage() {
+        testStorage.getStorage().clear();
     }
 }

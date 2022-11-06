@@ -42,7 +42,7 @@ public class OperationHandlerReturnImplTest {
     }
 
     @After
-    public void deleteAll() {
+    public void deleteAllDataFromStorage() {
         testStorage.getStorage().clear();
     }
 }

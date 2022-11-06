@@ -39,7 +39,7 @@ public class StorageImplTest {
     }
 
     @After
-    public void deleteAll() {
+    public void deleteAllDataFromStorage() {
         testStorage.getStorage().clear();
     }
 }

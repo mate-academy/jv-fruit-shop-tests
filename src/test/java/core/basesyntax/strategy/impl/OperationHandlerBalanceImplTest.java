@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationHandlerBalanceImplTest {
-    private Storage storage;
+    private Storage testStorage;
     private Fruit apple;
     private Fruit kiwi;
     private OperationHandler operationHandlerBalance;
@@ -20,7 +20,7 @@ public class OperationHandlerBalanceImplTest {
     public void setUp() {
         apple = new Fruit("apple");
         kiwi = new Fruit("kiwi");
-        storage = new StorageImpl();
+        testStorage = new StorageImpl();
         operationHandlerBalance = new OperationHandlerBalanceImpl();
 
     }
@@ -30,12 +30,12 @@ public class OperationHandlerBalanceImplTest {
         int expectedAmount = 15;
         operationHandlerBalance.apply(apple, 10);
         operationHandlerBalance.apply(kiwi, 15);
-        int actualAmount = storage.getStorage().get(kiwi);
+        int actualAmount = testStorage.getStorage().get(kiwi);
         assertEquals(expectedAmount, actualAmount);
     }
 
     @After
-    public void deleteAll() {
-        storage.getStorage().clear();
+    public void deleteAllDataFromStorage() {
+        testStorage.getStorage().clear();
     }
 }

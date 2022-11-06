@@ -65,7 +65,7 @@ public class FruitDaoImplTest {
     }
 
     @After
-    public void deleteAll() {
+    public void deleteAllDataFromStorage() {
         storage.getStorage().clear();
     }
 }

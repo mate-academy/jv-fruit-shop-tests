@@ -8,6 +8,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,5 +46,10 @@ public class OperationHandlerPurchaseImplTest {
     public void applyInvalidValur_notOk() {
         expectedException.expect(RuntimeException.class);
         operationHandlerPurchase.apply(apple, 100);
+    }
+
+    @After
+    public void deleteAll() {
+        storage.getStorage().clear();
     }
 }

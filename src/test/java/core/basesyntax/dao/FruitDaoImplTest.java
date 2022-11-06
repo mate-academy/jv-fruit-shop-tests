@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,5 +50,10 @@ public class FruitDaoImplTest {
     @Test
     public void remove() {
         assertNull(null, fruitDao.remove());
+    }
+
+    @After
+    public void deleteAll() {
+        storage.getStorage().clear();
     }
 }

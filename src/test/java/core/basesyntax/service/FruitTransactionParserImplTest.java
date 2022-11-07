@@ -23,7 +23,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Before
-    public void beforeAll() {
+    public void prepareData() {
         testData.clear();
         testData.add("type,fruit,quantity");
     }

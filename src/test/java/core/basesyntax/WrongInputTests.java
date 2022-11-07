@@ -17,11 +17,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FruitServiceImplTest {
+public class WrongInputTests {
     private static FruitService fruitService;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static List<FruitTransaction> fruitTransactionList;
@@ -40,52 +40,37 @@ public class FruitServiceImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(dao));
     }
 
-    @Test
-    public void fruitService_balanceTest_ok() {
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 15));
-        fruitService.applyTransaction(fruitTransactionList);
-        Integer amountInStorage = dao.getFromStorage("banana");
-        Integer expect = 15;
-        Assert.assertEquals(expect, amountInStorage);
-    }
-
-    @Test
-    public void fruitService_returnTest_ok() {
-        Storage.storage.put("kiwi", 15);
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "kiwi", 70));
-        fruitService.applyTransaction(fruitTransactionList);
-        Integer except = 85;
-        Integer amountInStorage = dao.getFromStorage("kiwi");
-        Assert.assertEquals(except, amountInStorage);
-    }
-
-    @Test
-    public void fruitService_supplyTest_ok() {
-        Storage.storage.put("coconut", 15);
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "coconut", 20));
-        fruitService.applyTransaction(fruitTransactionList);
-        Integer except = 35;
-        Integer amountInStorage = dao.getFromStorage("coconut");
-        Assert.assertEquals(except, amountInStorage);
-    }
-
-    @Test
-    public void fruitService_purchaseTest_ok() {
-        Storage.storage.put("pear", 100);
+    @Test(expected = RuntimeException.class)
+    public void fruitService_purchaseAbsentFruit_notOk() {
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "pear", 20));
+                "carrot", 10));
         fruitService.applyTransaction(fruitTransactionList);
-        Integer except = 80;
-        Integer amountInStorage = dao.getFromStorage("pear");
-        Assert.assertEquals(except, amountInStorage);
     }
 
-    @Test
-    public void dao_getAllTest_ok() {
-        HashMap<String, Integer> all = dao.getAll();
-        Assert.assertEquals(all, Storage.storage);
+    @Test(expected = RuntimeException.class)
+    public void fruitService_returnAbsentFruit_notOk() {
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "melon", 10));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fruitService_supplyAbsentFruit_notOk() {
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "watermelon", 10));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void fruitService_purchaseTooMachFruits_notOk() {
+        dao.addToStorage("orange", 15);
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "orange", 35));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @After
+    public void clean() {
+        Storage.storage.clear();
     }
 }

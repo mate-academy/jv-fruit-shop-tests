@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.FileReaderImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;

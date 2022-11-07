@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.database.Storage;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import org.junit.Assert;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

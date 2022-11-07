@@ -1,4 +1,4 @@
-package myfirstproject.service.impl;
+package myfirstproject.service.strategy;
 
 import java.util.HashMap;
 import java.util.Map;

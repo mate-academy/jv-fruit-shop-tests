@@ -34,14 +34,7 @@ public class FruitTransactionParserImplTest {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("b", new Fruit("banana"), 20));
         List<FruitTransaction> actual = fruitTransactionParser.parseFruitTransactions(testData);
-        Assert.assertEquals(expected.get(0).getFruit(), actual.get(0).getFruit());
-        Assert.assertEquals(expected.get(0).getAmount(), actual.get(0).getAmount());
-        Assert.assertEquals(expected.get(0).getOperation(), actual.get(0).getOperation());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void parseTransaction_null_notOk() {
-        fruitTransactionParser.parseFruitTransactions(null);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -50,7 +43,7 @@ public class FruitTransactionParserImplTest {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("b", new Fruit("banana"), 20));
         List<FruitTransaction> actual = fruitTransactionParser.parseFruitTransactions(testData);
-        Assert.assertFalse(expected.toString(), Boolean.parseBoolean(actual.toString()));
+        Assert.assertNotEquals(expected.toString(), actual.toString());
     }
 
     @Test

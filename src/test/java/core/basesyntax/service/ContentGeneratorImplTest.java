@@ -38,9 +38,4 @@ public class ContentGeneratorImplTest {
     public void generateContent_emptyData_ok() {
         contentGenerator.generateContent(Collections.emptyMap());
     }
-
-    @Test(expected = NullPointerException.class)
-    public void generateContent_null_notOk() {
-        contentGenerator.generateContent(null);
-    }
 }

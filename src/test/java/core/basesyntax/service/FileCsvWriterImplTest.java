@@ -9,10 +9,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileCsvWriterImplTest {
-    private static final Path PATH_REPORT_FILE = Path.of("src/test/resources/report.csv");
-    private static final Path PATH_TEST_REPORT_FILE = Path.of("src/test/resources/test_report.csv");
     private static final String TEST_REPORT_FILE = "src/test/resources/test_report.csv";
     private static final String WRONG_PATH = "src/tast/resources/report.csv";
+    private static final Path PATH_REPORT_FILE = Path.of("src/test/resources/report.csv");
+    private static final Path PATH_TEST_REPORT_FILE = Path.of(TEST_REPORT_FILE);
     private static FileCsvWriter fileCsvWriter;
     private static String testReport;
 

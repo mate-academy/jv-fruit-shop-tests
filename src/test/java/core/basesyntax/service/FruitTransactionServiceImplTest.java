@@ -15,8 +15,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -42,11 +42,6 @@ public class FruitTransactionServiceImplTest {
         fruitTransactionService = new FruitTransactionServiceImpl(operationStrategy);
     }
 
-    @Before
-    public void beforeAll() {
-        FruitStorage.fruitStorage.remove(apple);
-    }
-
     @Test
     public void addToStorage_ok() {
         int expected = 10;
@@ -59,5 +54,10 @@ public class FruitTransactionServiceImplTest {
     public void addToStorage_emptyList_ok() {
         fruitTransactionService.addToStorage(Collections.emptyList());
         Assert.assertTrue(FruitStorage.fruitStorage.isEmpty());
+    }
+
+    @After
+    public void cleanStorage() {
+        FruitStorage.fruitStorage.remove(apple);
     }
 }

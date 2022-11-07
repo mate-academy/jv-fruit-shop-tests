@@ -24,15 +24,15 @@ public class FileCsvReaderImplTest {
 
     @Test
     public void readFromFile_fileExist_ok() {
-        List<String> testList = new ArrayList<>();
-        testList.add("type,fruit,quantity");
-        testList.add("b,banana,20");
-        testList.add("b,apple,100");
-        testList.add("s,banana,100");
-        testList.add("p,banana,13");
-        testList.add("r,apple,10");
-        List<String> dataList = fileCsvReader.readFromFile(FILE_EXIST);
-        Assert.assertEquals(dataList, testList);
+        List<String> expectedList = new ArrayList<>();
+        expectedList.add("type,fruit,quantity");
+        expectedList.add("b,banana,20");
+        expectedList.add("b,apple,100");
+        expectedList.add("s,banana,100");
+        expectedList.add("p,banana,13");
+        expectedList.add("r,apple,10");
+        List<String> actualList = fileCsvReader.readFromFile(FILE_EXIST);
+        Assert.assertEquals(actualList, expectedList);
     }
 
 }

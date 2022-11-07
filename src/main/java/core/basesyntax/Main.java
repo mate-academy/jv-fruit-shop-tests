@@ -28,8 +28,10 @@ public class Main {
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
+        operationHandlerMap.put(
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler()
+        );
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         OperationStrategy strategyMap = new OperationStrategyImpl(operationHandlerMap);
@@ -39,6 +41,5 @@ public class Main {
         new TransactionServiceImpl(strategyMap, STORAGE_DAO).applyTransactions(transactionsList);
         new FileWriterServiceImpl(Path.of(OUTPUT_FILE_PATH))
                 .writeToFile(new ReportGeneratorServiceImpl(STORAGE_DAO).generateReport());
-        ;
     }
 }

@@ -49,6 +49,7 @@ public class TransactionServiceImplTest {
 
     @Test
     public void balanceOperationHandler_correctWork_ok() {
+        Storage.storage.add(new Fruit("apple", 100));
         fruitTransactions.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 100));
         int expected = 100;

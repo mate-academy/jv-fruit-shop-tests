@@ -26,8 +26,8 @@ public class FileWriterImplTest {
                 .append("apple,90");
         report = builder.toString();
         fileWriter.writeToFile(TEST_FILE, report);
-        List<String> expectedReport = Files.readAllLines(Path.of(FILE_REPORT));
-        List<String> actualReport = Files.readAllLines(Path.of(TEST_FILE));
+        List<String> expectedReport = Files.readAllLines(Path.of(TEST_FILE));
+        List<String> actualReport = Files.readAllLines(Path.of(FILE_REPORT));
         assertEquals(expectedReport, actualReport);
     }
 

@@ -35,35 +35,20 @@ public class CsvTransactionParserImplTest {
     @Test
     public void csvParse_invalidOperationThrowException_notOk() {
         expectedException.expect(RuntimeException.class);
+        expectedException.expectMessage(INVALID_OPERATION_EXCEPTION_MESSAGE);
         csvTransactionParser.csvParse(INVALID_OPERATION_TRANSACTIONS);
     }
 
     @Test
     public void csvParse_invalidIntegerValueThrowException_notOk() {
         expectedException.expect(RuntimeException.class);
+        expectedException.expectMessage(INVALID_INT_VALUE_EXCEPTION_MESSAGE);
         csvTransactionParser.csvParse(INVALID_INT_VALUE_TRANSACTIONS);
     }
 
     @Test
     public void csvParse_invalidNumberOfDataInRowThrowException_notOk() {
         expectedException.expect(RuntimeException.class);
-        csvTransactionParser.csvParse(INVALID_NUMBER_OF_VALUES_TRANSACTIONS);
-    }
-
-    @Test
-    public void readData_ExceptionMessageWithInvalidInvalidOperation_ok() {
-        expectedException.expectMessage(INVALID_OPERATION_EXCEPTION_MESSAGE);
-        csvTransactionParser.csvParse(INVALID_OPERATION_TRANSACTIONS);
-    }
-
-    @Test
-    public void readData_ExceptionMessageWithInvalidIntegerValue_ok() {
-        expectedException.expectMessage(INVALID_INT_VALUE_EXCEPTION_MESSAGE);
-        csvTransactionParser.csvParse(INVALID_INT_VALUE_TRANSACTIONS);
-    }
-
-    @Test
-    public void readData_ExceptionMessageWithInvalidNumberOfDataInRow_ok() {
         expectedException.expectMessage(INVALID_NUMBER_OF_VALUES_EXCEPTION_MESSAGE);
         csvTransactionParser.csvParse(INVALID_NUMBER_OF_VALUES_TRANSACTIONS);
     }

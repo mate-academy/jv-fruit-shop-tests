@@ -39,6 +39,7 @@ public class FileReaderImplTest {
     @Test
     public void readData_nullFilePathThrowsException_notOk() {
         expectedException.expect(RuntimeException.class);
+        expectedException.expectMessage(NULL_PATH_EXCEPTION_MESSAGE);
         dataReader = new FileReaderImpl(null);
         dataReader.readData();
     }
@@ -51,16 +52,10 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readData_ExceptionMessageWithInvalidPath_ok() {
+    public void readData_invalidPathThrowsException_notOk() {
+        expectedException.expect(RuntimeException.class);
         expectedException.expectMessage(INVALID_PATH_EXCEPTION_MESSAGE + INVALID_CSV_FILE_PATH);
         dataReader = new FileReaderImpl(INVALID_CSV_FILE_PATH);
-        dataReader.readData();
-    }
-
-    @Test
-    public void readData_ExceptionMessageWithNullPath_ok() {
-        expectedException.expectMessage(NULL_PATH_EXCEPTION_MESSAGE);
-        dataReader = new FileReaderImpl(null);
         dataReader.readData();
     }
 

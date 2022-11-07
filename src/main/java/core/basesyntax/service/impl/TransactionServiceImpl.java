@@ -26,12 +26,10 @@ public class TransactionServiceImpl implements TransactionService<List<FruitTran
                 () -> new NoSuchElementException("Transaction list can`t be null"));
         for (FruitTransaction transaction : fruitTransactions) {
             OperationHandler operation = operationStrategy.getOperation(transaction.getOperation());
-            fruitStorageDao
-                    .add(transaction.getFruit(), operation
-                            .operate(Optional.ofNullable(fruitStorageDao
-                                            .get(transaction.getFruit()))
-                                            .orElse(DEFAULT_EMPTY_VALUE),
-                                    transaction.getQuantity()));
+            Integer balance = Optional.ofNullable(fruitStorageDao.get(transaction.getFruit()))
+                    .orElse(DEFAULT_EMPTY_VALUE);
+            fruitStorageDao.add(transaction.getFruit(),
+                    operation.operate(balance, transaction.getQuantity()));
         }
     }
 }

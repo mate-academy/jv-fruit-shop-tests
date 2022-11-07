@@ -14,10 +14,12 @@ import core.basesyntax.service.operations.impl.ReturnOperationHandler;
 import core.basesyntax.service.operations.impl.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Set;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,6 +29,13 @@ public class TransactionServiceImplTest {
     private static TransactionService<List<FruitTransaction>> transactionService;
     private static final Map<String, Integer> EXPECTED_STORAGE_DATA = Map.of("apple", 90,
             "banana", 152);
+    private static final String EXPECTED_EXCEPTION_MESSAGE = "Transaction list can`t be null";
+    private static final Map<String, Integer> EMPTY_STORAGE_DATA = new HashMap<>();
+    private static final List<FruitTransaction> EMPTY_TRANSITION_LIST = new ArrayList<>();
+    private static final Map<String, Integer> ONE_TRANSITION_STORAGE_DATA = Map.of("banana", 20);
+    private static final List<FruitTransaction> ONE_TRANSITION_LIST =
+            List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -41,20 +50,31 @@ public class TransactionServiceImplTest {
     @Test
     public void transaction_ActualDataEqualsToExpected_ok() {
         transactionService.transaction(getValidFruitTransactionList());
-        Set<Map.Entry<String, Integer>> actualStorageData = FruitStorage.fruitStorage.entrySet();
-        assertEquals(EXPECTED_STORAGE_DATA.entrySet(), actualStorageData);
+        assertEquals(EXPECTED_STORAGE_DATA, FruitStorage.fruitStorage);
+    }
+
+    @Test
+    public void transaction_withOneTransition_ok() {
+        transactionService.transaction(ONE_TRANSITION_LIST);
+        assertEquals(ONE_TRANSITION_STORAGE_DATA, FruitStorage.fruitStorage);
+    }
+
+    @Test
+    public void transaction_withZeroTransitions_ok() {
+        transactionService.transaction(EMPTY_TRANSITION_LIST);
+        assertEquals(EMPTY_STORAGE_DATA, FruitStorage.fruitStorage);
     }
 
     @Test
     public void transaction_nullDataThrowsException_notOk() {
         expectedException.expect(NoSuchElementException.class);
+        expectedException.expectMessage(EXPECTED_EXCEPTION_MESSAGE);
         transactionService.transaction(null);
     }
 
-    @Test
-    public void transaction_nullDataExceptionMessage_ok() {
-        expectedException.expectMessage("Transaction list can`t be null");
-        transactionService.transaction(null);
+    @After
+    public void tearDown() {
+        FruitStorage.fruitStorage.clear();
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {

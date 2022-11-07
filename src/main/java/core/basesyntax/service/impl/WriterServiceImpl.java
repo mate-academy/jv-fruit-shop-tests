@@ -10,7 +10,7 @@ public class WriterServiceImpl implements WriterService {
     public boolean write(String fileName, String record) {
         try {
             Files.write(Path.of(fileName), record.getBytes());
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             throw new RuntimeException("Can't write data in file " + fileName, e);
         }
         return true;

@@ -17,12 +17,12 @@ public class ParserServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseNull_notOk() {
+    public void parse_Null_notOk() {
         parserService.parse(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseNotValidStrings_notOk() {
+    public void parse_notValidStrings_notOk() {
         List<String> readData = List.of(
                 "type,fruit,quantity",
                 "eat,candy,hundred");
@@ -30,7 +30,7 @@ public class ParserServiceTest {
     }
 
     @Test
-    public void parseStringsToTransactions_Ok() {
+    public void parse_stringsToTransactions_ok() {
         List<String> readData = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",

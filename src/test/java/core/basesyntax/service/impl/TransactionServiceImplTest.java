@@ -38,7 +38,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void balanceBananas_Ok() {
+    public void balance_bananas_ok() {
         transactions = List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 DEFAULT_FRUIT, 20));
         transactionService.executeOperation(transactions);
@@ -48,7 +48,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void supplyBananas_Ok() {
+    public void supply_bananas_ok() {
         transactions = List.of(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 DEFAULT_FRUIT, 100));
         transactionService.executeOperation(transactions);
@@ -58,7 +58,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void purchaseBananas_Ok() {
+    public void purchase_bananas_ok() {
         transactions = List.of(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 DEFAULT_FRUIT, 5));
         transactionService.executeOperation(transactions);
@@ -68,7 +68,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void returnBananas_Ok() {
+    public void return_bananas_ok() {
         transactions = List.of(new FruitTransaction(FruitTransaction.Operation.RETURN,
                 DEFAULT_FRUIT, 5));
         transactionService.executeOperation(transactions);
@@ -78,7 +78,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void balancePurchaseReturnBananas_Ok() {
+    public void balancePurchaseReturn_bananas_ok() {
         transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, DEFAULT_FRUIT, 20),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, DEFAULT_FRUIT, 15),
@@ -90,12 +90,12 @@ public class TransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void executeOperation_NullTransaction_NotOk() {
+    public void executeOperation_nullTransaction_notOk() {
         transactionService.executeOperation(null);
     }
 
     @Test
-    public void executeOperation_NoTransactions_StorageEmpty() {
+    public void executeOperation_noTransactions_storageEmpty() {
         transactions = List.of();
         transactionService.executeOperation(transactions);
         List<Fruit> actual = Storage.fruitList;

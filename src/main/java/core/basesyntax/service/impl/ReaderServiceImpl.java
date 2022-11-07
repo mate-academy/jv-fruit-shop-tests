@@ -11,7 +11,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> read(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             throw new RuntimeException("Can't read file " + fileName, e);
         }
     }

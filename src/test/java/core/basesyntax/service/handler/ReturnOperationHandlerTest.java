@@ -13,14 +13,14 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void calculateQuantity_returnHandler_Ok() {
+    public void calculateQuantity_validData_ok() {
         int expected = 103;
         int actual = handler.calculateQuantity(100, 3);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void calculateQuantity_balanceHandler_NegativeValueNotOk() {
+    public void calculateQuantity_negativeValue_notOk() {
         handler.calculateQuantity(100, -30);
     }
 }

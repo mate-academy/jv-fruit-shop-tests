@@ -17,24 +17,29 @@ public class ReaderServiceTest {
         readerService = new ReaderServiceImpl();
     }
 
-    @Test(expected = RuntimeException.class)
-    public void readNullFile_notOk() {
-        readerService.read(null);
+    @Test
+    public void read_nullFile_notOk() {
+        try {
+            readerService.read(null);
+            Assert.fail("Expected NullPointerException");
+        } catch (RuntimeException e) {
+            Assert.assertEquals("Can't read file null", e.getMessage());
+        }
     }
 
     @Test
-    public void readEmptyFile_sizeIsNull() {
+    public void read_emptyFile_sizeIsNull() {
         List<String> actual = readerService.read(EMPTY_FILE_NAME);
         Assert.assertEquals(0, actual.size());
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNotExistedFile_notOk() {
+    public void read_notExistedFile_notOk() {
         readerService.read(NOT_EXISTED_FILE_NAME);
     }
 
     @Test
-    public void readFile_Ok() {
+    public void read_file_ok() {
         List<String> expected = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",

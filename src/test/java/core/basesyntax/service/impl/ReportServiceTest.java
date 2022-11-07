@@ -17,7 +17,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void create_report_ok() {
         Storage.fruitList.add(new Fruit("banana", 20));
         Storage.fruitList.add(new Fruit("apple", 10));
         String expected = "fruit,quantity" + System.lineSeparator()
@@ -28,7 +28,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void createReport_EmptyStorage_Ok() {
+    public void createReport_emptyStorage_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.createReport();
         Assert.assertEquals(expected, actual);

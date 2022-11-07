@@ -13,19 +13,19 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void calculateQuantity_purchaseHandler_Ok() {
+    public void calculateQuantity_validData_ok() {
         int expected = 80;
         int actual = handler.calculateQuantity(100, 20);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void calculateQuantity_purchaseHandler_NegativeValueNotOk() {
+    public void calculateQuantity_negativeValue_notOk() {
         handler.calculateQuantity(2, -5);
     }
 
     @Test(expected = RuntimeException.class)
-    public void calculateQuantity_purchaseHandler_NotEnoughFruitInStore() {
+    public void calculateQuantity_notEnoughFruitInStore_notOk() {
         handler.calculateQuantity(20, 23);
     }
 }

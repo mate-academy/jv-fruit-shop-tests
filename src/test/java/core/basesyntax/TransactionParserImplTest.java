@@ -22,7 +22,7 @@ public class TransactionParserImplTest {
     private static FruitTransaction testTransaction;
 
     private static final String WRONG_TRANSACTION_STRING = "-,banana,20";
-    private static final String WRIGHT_TRANSACTION_STRING = "b,banana,20";
+    private static final String RIGHT_TRANSACTION_STRING = "b,banana,20";
 
     @BeforeClass
     public static void setUp() {
@@ -33,7 +33,7 @@ public class TransactionParserImplTest {
         operations.put("p",FruitTransaction.Operation.PURCHASE);
         validator = new OperationValidatorImpl(operations);
         transactionParser = new TransactionParserImpl(validator);
-        testList = new ArrayList<String>();
+        testList = new ArrayList<>();
         testTransaction = new FruitTransaction();
         testTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         testTransaction.setFruit("banana");
@@ -46,8 +46,8 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void validateGetTransactionsFields_Ok() {
-        testList.add(WRIGHT_TRANSACTION_STRING);
+    public void validate_getTransactionsFields_ok() {
+        testList.add(RIGHT_TRANSACTION_STRING);
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(testTransaction);
         List<FruitTransaction> actual = transactionParser.parse(testList);
@@ -56,22 +56,13 @@ public class TransactionParserImplTest {
         assertEquals(expected.get(0).getQuantity(), actual.get(0).getQuantity());
     }
 
-    @Test
-    public void validateList_Ok() {
-        testList.add(WRIGHT_TRANSACTION_STRING);
-        List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(testTransaction);
-        List<FruitTransaction> actual = transactionParser.parse(testList);
-        assertEquals(expected.toString(),actual.toString());
-    }
-
     @Test(expected = RuntimeException.class)
-    public void validateNullParameter_NotOk() {
+    public void validateNullParameter_notOk() {
         transactionParser.parse(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateWrongTransactionString_NotOk() {
+    public void validateWrongTransactionString_notOk() {
         testList.add(WRONG_TRANSACTION_STRING);
         transactionParser.parse(testList);
     }

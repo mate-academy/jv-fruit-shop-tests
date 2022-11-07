@@ -10,16 +10,14 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
-    private static Storage storage;
     private static StringBuilder validReport;
     private static StringBuilder validReportEmptyFile;
 
     @BeforeClass
     public static void setUp() {
         reportService = new ReportServiceImpl();
-        storage = new Storage();
-        storage.storage.put("banana", 25);
-        storage.storage.put("apple", 25);
+        Storage.storage.put("banana", 25);
+        Storage.storage.put("apple", 25);
         validReport = new StringBuilder();
         validReport.append("fruit,quantity");
         validReport.append(System.lineSeparator());
@@ -32,22 +30,22 @@ public class ReportServiceImplTest {
         validReportEmptyFile.append(System.lineSeparator());
     }
 
-    @After
-    public void tearDown() {
-        storage.storage.clear();
-    }
-
     @Test
-    public void generateReportEmptyStorage_Ok() {
+    public void generateReport_EmptyStorage_ok() {
         String expected = validReportEmptyFile.toString();
         String actual = reportService.generateReport();
         Assert.assertEquals(expected,actual);
     }
 
     @Test
-    public void generateReport_Ok() {
+    public void generateReport_ok() {
         String expected = validReport.toString();
         String actual = reportService.generateReport();
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

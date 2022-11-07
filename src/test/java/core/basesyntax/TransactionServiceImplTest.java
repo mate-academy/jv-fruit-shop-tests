@@ -18,14 +18,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionServiceImplTest {
+    private static final String FRUIT = "apple";
+    private static final int QUANTITY = 20;
+
     private static TransactionService transactionService;
     private static List<FruitTransaction> testData;
     private static FruitTransaction validTransaction;
     private static FruitTransaction invalidTransaction;
     private static Storage storage;
-
-    private static final String FRUIT = "apple";
-    private static final int QUANTITY = 20;
 
     @BeforeClass
     public static void setUp() {
@@ -51,17 +51,16 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void handleTransation_Ok() {
+    public void handleTransation_ok() {
         transactionService.handleTransaction(testData);
         int actual = storage.storage.get(FRUIT);
         int expected = QUANTITY;
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void handleTransation_EmptyStorage_NotOk() {
-        storage.storage.clear();
-        Integer actual = storage.storage.get(FRUIT);
-        Assert.assertEquals(null, actual);
+    @Test(expected = RuntimeException.class)
+    public void handleTransation_InvalidTransaction_notOk() {
+        testData.add(invalidTransaction);
+        transactionService.handleTransaction(testData);
     }
 }

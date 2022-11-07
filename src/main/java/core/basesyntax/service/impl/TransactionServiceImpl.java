@@ -18,6 +18,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void handleTransaction(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
+            if (fruitTransaction.getOperation() == null) {
+                throw new RuntimeException("Operation is null");
+            }
             if (!Storage.storage.containsKey(fruitTransaction.getFruit())) {
                 Storage.storage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
             } else {

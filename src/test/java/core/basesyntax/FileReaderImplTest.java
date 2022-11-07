@@ -10,9 +10,9 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private static FileReader fileReader;
-    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
-    private static final String EMPTY_FILE_PATH = "src/main/resources/empty.csv";
-    private static final String FAKE_FILE_PATH = "src/main/***/resources/input.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/input.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
+    private static final String FAKE_FILE_PATH = "src/test/***/resources/input.csv";
 
     @BeforeClass
     public static void setUp() {
@@ -20,23 +20,25 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_FromFile_Ok() {
-        List<String> expected = List.of("b,banana,20", "b,apple,100", "s,banana,100",
-                 "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
+    public void read_FromFile_ok() {
+        List<String> expected = List.of("type,fruit,quantity","b,banana,20",
+                "b,apple,100", "s,banana,100", "p,banana,13",
+                "r,apple,10", "p,apple,20",
+                "p,banana,5", "s,banana,50");
         List<String> actual = fileReader.read(INPUT_FILE_PATH);
-        actual.remove(0);
         Assert.assertEquals(expected, actual);
+
     }
 
     @Test
-    public void read_FromEmptyFile_NotOk() {
+    public void read_fromEmptyFile_notOk() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.read(EMPTY_FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeWrongFile_notOk() {
+    public void read_wrongFilePath_notOk() {
         fileReader.read(FAKE_FILE_PATH);
     }
 }

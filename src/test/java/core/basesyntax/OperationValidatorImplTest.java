@@ -25,19 +25,19 @@ public class OperationValidatorImplTest {
     }
 
     @Test
-    public void validate_ValidOperation_Ok() {
+    public void validate_validOperation_ok() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = operationValidator.validate(BALANCE_OPERATION);
         Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_UnvalidOperation_NotOk() {
+    public void validate_invalidOperation_notOk() {
         operationValidator.validate(UNVALID_OPERATION);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validate_NullOperation_NotOk() {
+    public void validate_nullOperation_notOk() {
         operationValidator.validate(null);
     }
 }

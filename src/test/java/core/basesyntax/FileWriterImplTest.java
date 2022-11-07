@@ -42,12 +42,12 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeData_nullPath_notOk() throws IOException {
+    public void writeData_nullPath_notOk() {
         fileWriter.writeData(null, validReport.toString());
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeData_incorrectPath_notOk() throws IOException {
+    public void writeData_incorrectPath_notOk() {
         fileWriter.writeData(INVALID_PATH_OUTPUT, validReport.toString());
     }
 }

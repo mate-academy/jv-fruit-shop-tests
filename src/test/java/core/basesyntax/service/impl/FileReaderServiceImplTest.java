@@ -19,7 +19,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_Ok() {
+    public void readFile_ok() {
         final List<String> actual = fileReaderService.readFile(PATH_DATA_FILE);
         List<String> expected = new ArrayList<>();
         expected.add("testing");
@@ -29,17 +29,17 @@ public class FileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFileEmptyData_NotOk() {
+    public void readFile_emptyData_notOk() {
         List<String> actual = fileReaderService.readFile(PATH_EMPTY_FILE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFilePathIsNull_NotOk() {
+    public void readFile_pathIsNull_notOk() {
         List<String> actual = fileReaderService.readFile(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFilePathIsInvalid_NotOk() {
+    public void readFile_pathIsInvalid_notOk() {
         List<String> actual = fileReaderService.readFile("src/test");
     }
 }

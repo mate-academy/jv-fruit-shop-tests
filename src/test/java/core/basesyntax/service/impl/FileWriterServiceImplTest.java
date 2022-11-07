@@ -22,7 +22,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeFile_Ok() {
+    public void writeFile_ok() {
         List<String> expected = readFile(REPORT_EXPECTED_PATH);
         fileWriterService.writeFile(DATA_TO_WRITE, REPORT_ACTUAL_PATH);
         List<String> actual = readFile(REPORT_ACTUAL_PATH);
@@ -30,17 +30,17 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFileEmptyData_NotOk() {
+    public void writeFile_emptyData_notOk() {
         fileWriterService.writeFile("", REPORT_ACTUAL_PATH);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFilePathIsNull_NotOk() {
+    public void writeFile_pathIsNull_notOk() {
         fileWriterService.writeFile(DATA_TO_WRITE, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFilePathIsInvalid_NotOk() {
+    public void writeFile_pathIsInvalid_notOk() {
         fileWriterService.writeFile(DATA_TO_WRITE, "src/test");
     }
 

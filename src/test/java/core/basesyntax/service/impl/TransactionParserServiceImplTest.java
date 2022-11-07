@@ -41,7 +41,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test
-    public void parseTransaction_Ok() {
+    public void parseTransaction_ok() {
         data.add("column_name");
         data.add("b,banana,50");
         data.add("s,banana,10");
@@ -52,12 +52,12 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseTransactionDataIsNull_NotOk() {
+    public void parseTransaction_dataIsNull_notOk() {
         parserService.parseTransaction(null);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void parseTransactionNonExistOperation_NotOk() {
+    public void parseTransaction_nonExistOperation_notOk() {
         data.add("column_name");
         data.add("q,apple,20");
         parserService.parseTransaction(data);

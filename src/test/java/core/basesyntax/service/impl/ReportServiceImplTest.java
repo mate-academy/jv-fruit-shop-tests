@@ -22,7 +22,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_ok() {
         STORAGE.put(new Fruit("banana"), 50);
         STORAGE.put(new Fruit("peach"), 35);
         STORAGE.put(new Fruit("melon"), 15);
@@ -35,7 +35,7 @@ public class ReportServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createReportStorageIsNull_NotOk() {
+    public void createReport_storageIsNull_notOk() {
         reportService.createReport();
     }
 

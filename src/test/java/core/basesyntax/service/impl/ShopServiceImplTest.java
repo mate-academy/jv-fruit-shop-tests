@@ -52,7 +52,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void processData_Ok() {
+    public void processData_ok() {
         expected.put(fruit, 45);
         shopService.processData(testFruitTransactions);
         Map<Fruit, Integer> actual = STORAGE;
@@ -60,7 +60,7 @@ public class ShopServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void processDataIsNull_NotOk() {
+    public void processData_isNull_notOk() {
         shopService.processData(null);
     }
 

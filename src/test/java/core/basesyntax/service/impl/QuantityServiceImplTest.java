@@ -32,35 +32,35 @@ public class QuantityServiceImplTest {
     }
 
     @Test
-    public void add_Ok() {
+    public void add_ok() {
         quantityService.add(fruit, 20);
         assertEquals(expected, ACTUAL);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addFruitIsNull_NotOk() {
+    public void add_fruitIsNull_notOk() {
         quantityService.add(null, 20);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addQuantityIsNull_NotOk() {
+    public void add_quantityIsNull_notOk() {
         quantityService.add(fruit, null);
     }
 
     @Test
-    public void subtract_Ok() {
+    public void subtract_ok() {
         quantityService.add(fruit, 30);
         quantityService.subtract(fruit, 10);
         assertEquals(expected, ACTUAL);
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void subtractFruitIsNull_NotOk() {
+    public void subtract_fruitIsNull_notOk() {
         quantityService.subtract(new Fruit("apple"), 10);
     }
 
     @Test(expected = RuntimeException.class)
-    public void subtractQuantityIsNull_NotOk() {
+    public void subtract_quantityIsNull_notOk() {
         quantityService.add(fruit, 30);
         quantityService.subtract(fruit, null);
     }

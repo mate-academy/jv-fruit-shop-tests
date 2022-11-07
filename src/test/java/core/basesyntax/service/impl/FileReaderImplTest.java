@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
     private static FileReader reader;
-    private static final String INPUT_PATH_TOFILE = "src/main/resources/input.csv";
-    private static final String PATH_TO_EMPTY_FILE = "src/main/resources/emptyFileForTest.csv";
+    private static final String INPUT_PATH_TOFILE = "src/test/resources/input.csv";
+    private static final String PATH_TO_EMPTY_FILE = "src/test/resources/emptyFileForTest.csv";
 
     @BeforeClass
     public static void createFileReader() {

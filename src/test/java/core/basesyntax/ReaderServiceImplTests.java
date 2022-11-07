@@ -24,18 +24,13 @@ public class ReaderServiceImplTests {
         expected = new ArrayList<>();
     }
 
-    @Before
-    public void setUp() {
-
-    }
-
     @Test(expected = RuntimeException.class)
     public void read_nonExistentFile_notOk() {
         dataReader.read(NON_EXISTENT_FILE);
     }
 
     @Test
-    public void read_emptyFile_ok() {
+    public void read_emptyFile_notOk() {
         List<String> actual = dataReader.read(EMPTY_FILE_PATH);
         assertEquals(expected, actual);
     }

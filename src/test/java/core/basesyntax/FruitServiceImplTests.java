@@ -70,7 +70,6 @@ public class FruitServiceImplTests {
         Map<Fruit, Integer> expected = Map.of(new Fruit("banana"), 120, new Fruit("apple"), 200);
         Map<Fruit, Integer> actual = Storage.fruits;
         assertEquals(expected, actual);
-        Storage.fruits.clear();
     }
 
     @Test
@@ -88,7 +87,6 @@ public class FruitServiceImplTests {
         Map<Fruit, Integer> expected = Map.of(new Fruit("banana"), 10, new Fruit("apple"), 80);
         Map<Fruit, Integer> actual = Storage.fruits;
         assertEquals(expected, actual);
-        Storage.fruits.clear();
     }
 
     @Test
@@ -106,7 +104,6 @@ public class FruitServiceImplTests {
         Map<Fruit, Integer> expected = Map.of(new Fruit("banana"), 40, new Fruit("apple"), 150);
         Map<Fruit, Integer> actual = Storage.fruits;
         assertEquals(expected, actual);
-        Storage.fruits.clear();
     }
 
     @Test
@@ -126,12 +123,12 @@ public class FruitServiceImplTests {
         Map<Fruit, Integer> expected = Map.of(new Fruit("banana"), 115, new Fruit("apple"), 110);
         Map<Fruit, Integer> actual = Storage.fruits;
         assertEquals(expected, actual);
-        Storage.fruits.clear();
     }
 
     @After
     public void tearDown() {
         fruitTransactions.clear();
+        Storage.fruits.clear();
     }
 
 }

@@ -36,11 +36,10 @@ public class ReportGeneratorImplTests {
                 + "apple,110";
         String actual = reportGenerator.generateReport(fruitDao);
         assertEquals(expected, actual);
-        Storage.fruits.clear();
     }
 
     @Test
-    public void generateReport_emptyStorage_ok() {
+    public void generateReport_emptyStorage_notOk() {
         String expected = "fruit,quantity";
         String actual = reportGenerator.generateReport(fruitDao);
         assertEquals(expected, actual);

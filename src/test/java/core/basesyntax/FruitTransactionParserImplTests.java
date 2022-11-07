@@ -23,7 +23,7 @@ public class FruitTransactionParserImplTests {
     }
 
     @Test
-    public void parseFruitTransaction_emptyData_ok() {
+    public void parseFruitTransaction_emptyData_notOk() {
         testData.add("type,fruit,quantity");
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> actual = transactionParser.parseFruitTransaction(testData);

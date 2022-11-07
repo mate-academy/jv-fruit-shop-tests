@@ -22,19 +22,18 @@ public class ReportWriterServiceImplTests {
 
     @Test(expected = RuntimeException.class)
     public void writeReport_nonExistentFolder_notOk() {
-        String report = "report";
-        reportWriter.writeReport(report, NON_EXISTENT_FOLDER);
+        String expected = "report";
+        reportWriter.writeReport(expected, NON_EXISTENT_FOLDER);
     }
 
     @Test
     public void writeReport_normalData_ok() {
-        String report = "fruit,quantity" + System.lineSeparator()
+        String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,115" + System.lineSeparator()
                 + "apple,110";
-
-        reportWriter.writeReport(report, NORMAL_FILE_PATH);
+        reportWriter.writeReport(expected, NORMAL_FILE_PATH);
         String actual = readFile(NORMAL_FILE_PATH);
-        assertEquals(report, actual);
+        assertEquals(expected, actual);
     }
 
     private String readFile(String path) {

@@ -1,7 +1,7 @@
 package core.basesyntax.operations;
 
 import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
-import static org.testng.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitImplemDao;
 import core.basesyntax.db.Storage;

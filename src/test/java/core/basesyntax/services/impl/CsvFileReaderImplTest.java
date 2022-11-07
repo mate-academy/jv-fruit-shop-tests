@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
-
     @Test
     public void getAcceptedFileAsListMethodTest_Ok() {
         List<String> expectedList = List.of("How are u doing",

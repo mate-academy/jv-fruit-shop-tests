@@ -12,19 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessorImplTest {
-    private TransactionProcessorImpl transactionProcessor;
-    private Strategy testStrategy;
+    private static TransactionProcessorImpl transactionProcessor;
+    private static Strategy testStrategy;
+    private static Storage testStorageForProcessor;
     private List<String> data;
-    private Storage testStorageForProcessor;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void globalSetUp() {
         transactionProcessor = new TransactionProcessorImpl();
         testStrategy = new StrategyImpl();
         testStorageForProcessor = new StorageImpl();
+    }
+
+    @Before
+    public void setUp() {
         data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b,banana,20");

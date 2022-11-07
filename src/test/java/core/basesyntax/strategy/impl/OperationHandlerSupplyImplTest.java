@@ -2,29 +2,30 @@ package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerSupplyImplTest {
-    private Storage testStorage;
+    private static Storage testStorage;
+    private static OperationHandler operationHandlerSupply;
     private Fruit apple;
-    private FruitDao testFruitDao;
-    private OperationHandler operationHandlerSupply;
+
+    @BeforeClass
+    public static void globalSetUp() {
+        testStorage = new StorageImpl();
+        operationHandlerSupply = new OperationHandlerSupplyImpl();
+    }
 
     @Before
     public void setUp() {
         apple = new Fruit("apple");
-        testStorage = new StorageImpl();
-        testFruitDao = new FruitDaoImpl();
-        operationHandlerSupply = new OperationHandlerSupplyImpl();
-        testFruitDao.put(apple, 10);
+        testStorage.getStorage().put(apple, 10);
     }
 
     @Test

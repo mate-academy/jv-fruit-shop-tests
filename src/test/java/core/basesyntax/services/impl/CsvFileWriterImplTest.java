@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.Test;
 
 public class CsvFileWriterImplTest {
-
     @Test
     public void createReportFileMethodTest_Ok() {
         List<String> expectedList = List.of("fruit,quantity",

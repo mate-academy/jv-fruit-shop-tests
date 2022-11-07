@@ -8,19 +8,24 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StorageImplTest {
+    private static Storage testStorage;
     private Fruit apple;
     private Fruit kiwi;
     private Map<Fruit, Integer> testMap;
-    private Storage testStorage;
+
+    @BeforeClass
+    public static void globalSetUp() {
+        testStorage = new StorageImpl();
+    }
 
     @Before
     public void setUp() {
         apple = new Fruit("apple");
         kiwi = new Fruit("kiwi");
-        testStorage = new StorageImpl();
         testStorage.getStorage().put(apple, 33);
         testStorage.getStorage().put(kiwi, 66);
         testMap = Map.of(apple, 33, kiwi, 66);

@@ -8,6 +8,4 @@ public interface FruitDao {
     Integer getAmountCurrentFruitInShop(Fruit fruit);
 
     void update(Fruit fruit, Integer newValue);
-
-    Fruit remove();
 }

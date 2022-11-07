@@ -24,11 +24,6 @@ public class FruitDaoImpl implements FruitDao {
         storage.getStorage().replace(fruit, newValue);
     }
 
-    @Override
-    public Fruit remove() {
-        return null;
-    }
-
     private void storageHasThisFruit(Fruit fruit) {
         if (storage.getStorage().get(fruit) == null) {
             throw new RuntimeException("can not find this fruit:" + fruit + " to update it");

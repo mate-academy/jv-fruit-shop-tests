@@ -1,27 +1,31 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
+    private static FruitDao fruitDao;
+    private static Storage storage;
     private Fruit apple;
     private Fruit kiwi;
-    private Storage storage;
-    private FruitDao fruitDao;
+
+    @BeforeClass
+    public static void globalSetUp() {
+        storage = new StorageImpl();
+        fruitDao = new FruitDaoImpl();
+    }
 
     @Before
     public void setUp() {
         apple = new Fruit("apple");
         kiwi = new Fruit("kiwi");
-        storage = new StorageImpl();
-        fruitDao = new FruitDaoImpl();
         fruitDao.put(apple, 10);
         fruitDao.put(kiwi, 15);
     }
@@ -48,20 +52,16 @@ public class FruitDaoImplTest {
     @Test
     public void updateMethodTest_Ok() {
         int expectedAmount = 33;
-        fruitDao.update(apple, 33);
+        fruitDao.update(apple, expectedAmount);
         int actualAmount = fruitDao.getAmountCurrentFruitInShop(apple);
         assertEquals(expectedAmount, actualAmount);
     }
 
     @Test(expected = RuntimeException.class)
     public void updateWithNothingToTest_NotOk() {
+        int expectedAmount = 33;
         storage.getStorage().clear();
-        fruitDao.update(apple, 33);
-    }
-
-    @Test
-    public void removeMethodTest_Ok() {
-        assertNull(null, fruitDao.remove());
+        fruitDao.update(apple, expectedAmount);
     }
 
     @After

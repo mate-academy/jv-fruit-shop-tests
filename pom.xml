@@ -96,8 +96,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
-                        <exclude>core/myfirstproject/model/*.class</exclude>
+                        <exclude>**/Application*</exclude>
+                        <exclude>myfirstproject/model/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>

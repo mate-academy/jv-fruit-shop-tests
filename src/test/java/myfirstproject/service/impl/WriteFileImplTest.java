@@ -44,7 +44,7 @@ public class WriteFileImplTest {
         operation.put(Operation.PURCHASE.getOperation(), new PurchaseOperation());
         operation.put(Operation.RETURN.getOperation(), new ReturnOperation());
         reader.readFile(temporalList, PATH_TO_NEW_FILE);
-        separation.toDoEachOperation(temporalList, operation);
+        separation.toDoEachOperation(fruitDao, temporalList, operation);
         writer.writeToFile(PATH_TO_RESULT, fruitDao.getAll());
         WriteFile writeFile = new WriteFileImpl();
         Map<Fruit, Integer> mapToWrite = new HashMap<>();

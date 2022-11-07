@@ -48,8 +48,8 @@ public class FruitTransactionParserImplTest {
     public void parseData_IsOk() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,200", "s,apple,100",
                 "p,banana,100", "r,apple,0");
-        assertEquals(fruitTransactionParser.parseData(expected).toString(),
-                actualFruitTransactions.toString());
+        assertEquals(fruitTransactionParser.parseData(expected),
+                actualFruitTransactions);
     }
 
     @After

@@ -15,18 +15,20 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AddOperationHandlerImplTest {
+public class BalanceOperationHandlerImplTest {
     private static final String KEY_APPLE = "apple";
 
     @BeforeClass
     public static void beforeClass() {
         FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.SUPPLY, new AddOperationHandlerImpl(fruitDao));
+        handlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandlerImpl(fruitDao));
         List<FruitTransaction> list = new ArrayList<>();
-        list.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,KEY_APPLE,10));
-        AddOperationHandlerImpl addOperationHandler = new AddOperationHandlerImpl(fruitDao);
-        addOperationHandler.operationWithFruitTransaction(list.get(0));
+        list.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,KEY_APPLE,10));
+        BalanceOperationHandlerImpl balanceOperationHandler =
+                new BalanceOperationHandlerImpl(fruitDao);
+        balanceOperationHandler.operationWithFruitTransaction(list.get(0));
     }
 
     @Test

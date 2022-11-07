@@ -21,9 +21,15 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void putAndGetIs_Ok() {
+    public void put_IsOk() {
         fruitDao.put("apple",111);
         Assert.assertEquals(expectedStorage.get("apple"),fruitDao.get("apple"));
+    }
+
+    @Test
+    public void get_IsOk() {
+        fruitDao.put("banana",555);
+        Assert.assertEquals(expectedStorage.get("banana"),fruitDao.get("banana"));
     }
 
     @Test
@@ -33,7 +39,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getAllIs_Ok() {
+    public void getAll_IsOk() {
         fruitDao.put("banana",555);
         fruitDao.put("apple", 111);
         Assert.assertEquals(expectedStorage,fruitDao.getAll());

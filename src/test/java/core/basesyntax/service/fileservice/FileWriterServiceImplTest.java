@@ -18,7 +18,7 @@ public class FileWriterServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        pathToTestReportFile = "src/main/resources/testReport.csv";
+        pathToTestReportFile = "src/test/resources/testReport.csv";
         invalidFilePath = "";
         report = "fruit,quantity"
                 + separator

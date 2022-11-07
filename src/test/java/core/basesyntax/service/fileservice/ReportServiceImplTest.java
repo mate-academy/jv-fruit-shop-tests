@@ -14,18 +14,26 @@ public class ReportServiceImplTest {
     private static final String KEY_APPLE = "apple";
     private static final String KEY_BANANA = "banana";
     private static final String SEPARATOR = ",";
-    private static final String EXPECTED = HEADER + lineSeparator()
-            + KEY_BANANA + SEPARATOR + "100" + lineSeparator()
-            + KEY_APPLE + SEPARATOR + "200";
     private static ReportService reportService;
 
     @Test
-    public void getReport_IsOk() {
+    public void getReport_EmptyStorage_IsOk() {
+        final String Expected = HEADER;
         FruitDao fruitDao = new FruitDaoImpl();
-        fruitDao.put(KEY_APPLE,200);
-        fruitDao.put(KEY_BANANA,100);
         reportService = new ReportServiceImpl(fruitDao);
-        assertEquals("Can't create report file", EXPECTED,reportService.getReport());
+        assertEquals(Expected,reportService.getReport());
+    }
+
+    @Test
+    public void getReport_IsOk() {
+        final String Expected = HEADER + lineSeparator()
+                + KEY_BANANA + SEPARATOR + "100" + lineSeparator()
+                + KEY_APPLE + SEPARATOR + "200";
+        FruitDao fruitDao = new FruitDaoImpl();
+        FruitStorage.storage.put(KEY_APPLE,200);
+        FruitStorage.storage.put(KEY_BANANA,100);
+        reportService = new ReportServiceImpl(fruitDao);
+        assertEquals("Can't create report file", Expected,reportService.getReport());
     }
 
     @After

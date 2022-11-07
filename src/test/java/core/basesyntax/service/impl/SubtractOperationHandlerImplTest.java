@@ -7,8 +7,6 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.TransactionService;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,9 +28,11 @@ public class SubtractOperationHandlerImplTest {
         List<FruitTransaction> list = new ArrayList<>();
         list.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,KEY_APPLE,10));
         list.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,KEY_APPLE,10));
-        TransactionService transactionService =
-                new TransactionServiceImpl(new OperationStrategyImpl(handlerMap));
-        transactionService.doOperationService(list);
+        AddOperationHandlerImpl addOperationHandler = new AddOperationHandlerImpl(fruitDao);
+        addOperationHandler.operationWithFruitTransaction(list.get(0));
+        SubtractOperationHandlerImpl subtractOperationHandler =
+                new SubtractOperationHandlerImpl(fruitDao);
+        subtractOperationHandler.operationWithFruitTransaction(list.get(1));
     }
 
     @Test

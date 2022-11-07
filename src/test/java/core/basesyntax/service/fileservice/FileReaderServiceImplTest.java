@@ -20,7 +20,7 @@ public class FileReaderServiceImplTest {
     public static void beforeClass() {
         fileReader = new FileReaderServiceImpl();
         expectedList = new ArrayList<>();
-        validFilePath = "src/main/resources/testInput.csv";
+        validFilePath = "src/test/resources/testInput.csv";
         invalidFilePath = "notExistingPath";
         expectedList.add("type,fruit,quantity");
         expectedList.add("b,banana,20");

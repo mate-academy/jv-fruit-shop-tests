@@ -97,6 +97,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>core/basesyntax/model/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>

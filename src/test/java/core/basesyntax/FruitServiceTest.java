@@ -48,7 +48,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void calculateFruits_Ok() {
+    public void calculateFruits_ok() {
         List<Fruit> expectedListOfFruitsInShop = new ArrayList<>(List.of(
                 new Fruit("orange", 17),
                 new Fruit("pineapple", 55),

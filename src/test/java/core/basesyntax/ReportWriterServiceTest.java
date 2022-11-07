@@ -28,14 +28,14 @@ public class ReportWriterServiceTest {
     }
 
     @Test
-    public void saveReport_Ok() {
+    public void saveReport_ok() {
         reportWriterService.saveReport(REPORT, PATH_TO_TEST_REPORT_FILE);
         List<String> actualResult = readFromFile(PATH_TO_TEST_REPORT_FILE);
         Assert.assertEquals(REPORT, actualResult);
     }
 
     @Test
-    public void saveReport_ToInvalidFile_ExceptionExpected_Ok() {
+    public void saveReport_toInvalidFile_exceptionExpected_Ok() {
         try {
             reportWriterService.saveReport(REPORT, INVALID_PATH);
         } catch (RuntimeException e) {

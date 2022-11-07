@@ -37,14 +37,14 @@ public class DataReaderServiceTest {
     }
 
     @Test
-    public void readData_FromEmptyFile_Ok() {
+    public void readData_fromEmptyFile_ok() {
         List<String> actualResult = dataReaderService.readData(PATH_TO_EMPTY_FILE);
         Assert.assertEquals("Incorrect result list from empty file",
                 EMPTY_LIST_RESULT, actualResult);
     }
 
     @Test
-    public void readData_FromFirstAndSecondFiles_Ok() {
+    public void readData_fromFirstAndSecondFiles_ok() {
         List<String> actualFirstResult = dataReaderService.readData(PATH_TO_FIRST_TEST_FILE);
         Assert.assertEquals("Incorrect result list from the file. Should be ",
                 RESULT_FROM_FIRST_FILE, actualFirstResult);
@@ -56,7 +56,7 @@ public class DataReaderServiceTest {
     }
 
     @Test
-    public void readData_FromInvalidFile_ExceptionExpected_Ok() {
+    public void readData_fromInvalidFile_exceptionExpected_ok() {
         try {
             dataReaderService.readData(PATH_TO_THIRD_INVALID_FILE);
         } catch (RuntimeException e) {

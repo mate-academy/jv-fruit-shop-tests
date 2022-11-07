@@ -19,7 +19,7 @@ public class DataProcessServiceTest {
     }
 
     @Test
-    public void processData_Ok() {
+    public void processData_ok() {
         List<String> inputList = new ArrayList<>(List.of(
                 "type,fruit,quantity", "b,orange,20", "b,pineapple,10",
                 "s,orange,10", "p,orange,13", "r,apple,20", "p,pineapple,5", "s,pineapple,50"));
@@ -33,7 +33,7 @@ public class DataProcessServiceTest {
     }
 
     @Test
-    public void processData_WithInvalidInput_NotOk() {
+    public void processData_withInvalidInput_notOk() {
         List<String> invalidInputList = new ArrayList<>(List.of("Hello, world!", "Hello, mate!"));
         try {
             dataProcessService.processData(invalidInputList);
@@ -43,7 +43,7 @@ public class DataProcessServiceTest {
     }
 
     @Test
-    public void processData_WithNullOrEmptyInput_NotOk() {
+    public void processData_withNullOrEmptyInput_notOk() {
         List<String> emptyList = Collections.emptyList();
         try {
             dataProcessService.processData(emptyList);

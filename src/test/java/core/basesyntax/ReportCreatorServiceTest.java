@@ -19,7 +19,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_InitFruitsList_Ok() {
+    public void createReport_initFruitsList_ok() {
         List<Fruit> initFruitsList = initFruitList();
         List<String> actualList = reportCreatorService.createReport(initFruitsList);
         List<String> expectedList = List.of("fruit,quantity", "apple,20", "banana,30", "orange,55");
@@ -31,7 +31,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_WithoutHeadline_NotOk() {
+    public void createReport_withoutHeadline_notOk() {
         List<Fruit> initFruitsList = initFruitList();
         List<String> actualList = reportCreatorService.createReport(initFruitsList);
         List<String> expectedList = List.of("fruit,quantity", "apple,20", "banana,30", "orange,55");
@@ -40,7 +40,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_WithNullOrEmptyInput_NotOk() {
+    public void createReport_withNullOrEmptyInput_notOk() {
         List<Fruit> emptyList = Collections.emptyList();
         List<String> expectedList = List.of(
                 "Given list of fruits in the shop is empty. Check input data");

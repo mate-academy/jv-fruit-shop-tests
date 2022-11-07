@@ -9,11 +9,10 @@ import org.junit.Test;
 
 public class ReportCreatorServiceImplTest {
     private static ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
-    private static String expected;
 
     @Test
     public void createReport_validReport_ok() {
-        expected = "fruit,quantity" + System.lineSeparator()
+        String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator();
         Storage.fruits.put("banana", 100);
         String actual = reportCreatorService.createReport();
@@ -22,7 +21,7 @@ public class ReportCreatorServiceImplTest {
 
     @Test
     public void createReport_emptyStorage_ok() {
-        expected = "fruit,quantity" + System.lineSeparator();
+        String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }

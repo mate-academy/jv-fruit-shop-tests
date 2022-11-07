@@ -18,15 +18,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static FruitService fruitService;
     private static OperationStrategy operationStrategy;
-    private static Map<String, Integer> expectedStorage;
-    private static List<FruitTransaction> fruitTransactionList;
 
     @BeforeClass
     public static void beforeClass() {
@@ -41,17 +38,13 @@ public class FruitServiceImplTest {
                 new SupplyOperationStrategy());
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitService = new FruitServiceImpl(operationStrategy);
-        expectedStorage = new HashMap<>();
-    }
-
-    @Before
-    public void setUp() {
-        fruitTransactionList = new ArrayList<>();
     }
 
     @Test
     public void processFruitTransactions_validList_ok() {
+        Map<String, Integer> expectedStorage = new HashMap<>();
         expectedStorage.put("banana", 115);
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
@@ -67,9 +60,8 @@ public class FruitServiceImplTest {
 
     @Test
     public void processFruitTransactions_emptyList_ok() {
-        fruitService.processFruitTransactions(fruitTransactionList);
-        Map<String, Integer> newStorage = Storage.fruits;
-        assertEquals(Collections.emptyMap(), newStorage);
+        fruitService.processFruitTransactions(Collections.emptyList());
+        assertEquals(Collections.emptyMap(), Storage.fruits);
     }
 
     @After

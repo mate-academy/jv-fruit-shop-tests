@@ -7,28 +7,20 @@ import core.basesyntax.service.OperationTypeIdentifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationTypeIdentifierImplTest {
     private static OperationTypeIdentifier operationTypeIdentifier =
             new OperationTypeIdentifierImpl();
-    private static String inputOperation;
-    private static List<String> inputOperations;
-    private static List<FruitTransaction.Operation> expectedOperations;
-
-    @BeforeClass
-    public static void beforeClass() {
-        inputOperations = new ArrayList<>();
-        expectedOperations = new ArrayList<>();
-    }
 
     @Test
     public void identifyOperationType_validOperationType_ok() {
+        List<String> inputOperations = new ArrayList<>();
         inputOperations.add("b");
         inputOperations.add("s");
         inputOperations.add("r");
         inputOperations.add("p");
+        List<FruitTransaction.Operation> expectedOperations = new ArrayList<>();
         expectedOperations.add(FruitTransaction.Operation.BALANCE);
         expectedOperations.add(FruitTransaction.Operation.SUPPLY);
         expectedOperations.add(FruitTransaction.Operation.RETURN);
@@ -41,7 +33,7 @@ public class OperationTypeIdentifierImplTest {
 
     @Test(expected = RuntimeException.class)
     public void identifyOperationType_invalidInputOperation_notOk() {
-        inputOperation = "a";
+        String inputOperation = "a";
         operationTypeIdentifier.identifyOperationType(inputOperation);
     }
 }

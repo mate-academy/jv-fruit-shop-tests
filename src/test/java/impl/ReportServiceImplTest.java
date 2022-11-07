@@ -11,6 +11,7 @@ import service.ReportService;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
+    private static final String ENTER = System.lineSeparator();
 
     @BeforeClass
     public static void beforeClass() {
@@ -29,8 +30,9 @@ public class ReportServiceImplTest {
     @Test
     public void createReport_Ok() {
         String actual = reportService.writeReport(Storage.fruits);
-        String expected = "fruit,quantity\nbanana,24\napricot,80\napple,120\ngrape,46\n"
-                + "mango,30\n";
+        String expected = "fruit,quantity" + ENTER + "banana,24" + ENTER
+                + "apricot,80" + ENTER + "apple,120" + ENTER + "grape,46" + ENTER
+                + "mango,30" + ENTER;
         assertEquals(expected, actual);
     }
 
@@ -38,7 +40,7 @@ public class ReportServiceImplTest {
     public void createReport_emptyStorage_Ok() {
         Storage.fruits.clear();
         String actual = reportService.writeReport(Storage.fruits);
-        String expected = "fruit,quantity\n";
+        String expected = "fruit,quantity" + ENTER;
         assertEquals(expected, actual);
     }
 

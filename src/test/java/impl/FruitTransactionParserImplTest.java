@@ -31,6 +31,18 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
+    public void parse_validList_Ok() {
+        List<FruitTransaction> actual = parser.parse(transactionStrings);
+        for (FruitTransaction fruitTransaction: actual) {
+            System.out.println(fruitTransaction.getFruit());
+            System.out.println(fruitTransaction.getAmount());
+            System.out.println(fruitTransaction.getOperation());
+        }
+        List<FruitTransaction> expected = getListOfFruitTransactions();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void parse_emptyList_Ok() {
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         List<FruitTransaction> expected = List.of();
@@ -66,6 +78,7 @@ public class FruitTransactionParserImplTest {
     }
 
     private List<FruitTransaction> getListOfFruitTransactions() {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         FruitTransaction bananaTransaction = FruitTransaction.of(
                 FruitTransaction.Operation.BALANCE, "banana", 18);
         FruitTransaction peachTransaction = FruitTransaction.of(
@@ -74,6 +87,10 @@ public class FruitTransactionParserImplTest {
                 FruitTransaction.Operation.RETURN, "apple", 6);
         FruitTransaction mangoTransaction = FruitTransaction.of(
                 FruitTransaction.Operation.PURCHASE, "mango", 7);
-        return List.of(bananaTransaction, peachTransaction, appleTransaction, mangoTransaction);
+        fruitTransactions.add(bananaTransaction);
+        fruitTransactions.add(peachTransaction);
+        fruitTransactions.add(appleTransaction);
+        fruitTransactions.add(mangoTransaction);
+        return fruitTransactions;
     }
 }

@@ -5,7 +5,7 @@ import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String COMMA = ",";
-    private static final String ENTER = "\n";
+    private static final String ENTER = System.lineSeparator();
     private static final String COLUMN_NAME = "fruit,quantity";
 
     @Override

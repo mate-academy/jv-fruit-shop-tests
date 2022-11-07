@@ -30,7 +30,7 @@ public class WriterServiceTest {
             writerService.write(null, record);
             Assert.fail("Expected NullPointerException");
         } catch (RuntimeException e) {
-            Assert.assertEquals("Can't write data in file null", e.getMessage());
+            Assert.assertEquals("Can't write to file by null path", e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class WriterServiceTest {
     }
 
     @Test
-    public void write_checkContent_Ok() {
+    public void write_checkContent_ok() {
         String record = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";

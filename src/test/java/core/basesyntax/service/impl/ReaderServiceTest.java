@@ -23,12 +23,12 @@ public class ReaderServiceTest {
             readerService.read(null);
             Assert.fail("Expected NullPointerException");
         } catch (RuntimeException e) {
-            Assert.assertEquals("Can't read file null", e.getMessage());
+            Assert.assertEquals("Can't read file by null path", e.getMessage());
         }
     }
 
     @Test
-    public void read_emptyFile_sizeIsNull() {
+    public void read_emptyFile_ok() {
         List<String> actual = readerService.read(EMPTY_FILE_NAME);
         Assert.assertEquals(0, actual.size());
     }

@@ -9,9 +9,12 @@ import java.util.List;
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> read(String fileName) {
+        if (fileName == null) {
+            throw new RuntimeException("Can't read file by null path");
+        }
         try {
             return Files.readAllLines(Path.of(fileName));
-        } catch (IOException | NullPointerException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Can't read file " + fileName, e);
         }
     }

@@ -17,7 +17,7 @@ public class ParserServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_Null_notOk() {
+    public void parse_nullValue_notOk() {
         parserService.parse(null);
     }
 

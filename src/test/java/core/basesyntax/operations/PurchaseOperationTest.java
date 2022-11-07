@@ -1,4 +1,4 @@
-package core.basesyntax.dao.operations;
+package core.basesyntax.operations;
 
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static org.testng.Assert.assertEquals;
@@ -6,8 +6,6 @@ import static org.testng.Assert.assertEquals;
 import core.basesyntax.dao.FruitImplemDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.OperationHandler;
-import core.basesyntax.operations.PurchaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;

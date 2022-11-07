@@ -1,8 +1,10 @@
-package core.basesyntax.dao;
+package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import core.basesyntax.dao.DaoFruit;
+import core.basesyntax.dao.FruitImplemDao;
 import core.basesyntax.db.Storage;
 import org.junit.After;
 import org.junit.BeforeClass;

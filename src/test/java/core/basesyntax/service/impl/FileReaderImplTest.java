@@ -1,9 +1,8 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.fail;
 
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.impl.FileReaderImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;

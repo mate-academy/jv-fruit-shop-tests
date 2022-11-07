@@ -1,9 +1,8 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.impl;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Before;

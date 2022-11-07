@@ -1,12 +1,10 @@
-package core.basesyntax.dao.operations;
+package core.basesyntax.operations;
 
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 
 import core.basesyntax.dao.FruitImplemDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.BalanceOperation;
-import core.basesyntax.operations.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;

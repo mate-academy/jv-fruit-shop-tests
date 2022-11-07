@@ -1,10 +1,9 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

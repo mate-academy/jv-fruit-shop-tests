@@ -1,4 +1,4 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.impl;
 
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.DaoFruit;
 import core.basesyntax.dao.FruitImplemDao;
 import core.basesyntax.db.Storage;
-import core.basesyntax.impl.FruitTransactionServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.OperationHandler;

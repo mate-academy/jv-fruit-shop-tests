@@ -1,8 +1,7 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.impl.FruitTransactionParserImpl;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;

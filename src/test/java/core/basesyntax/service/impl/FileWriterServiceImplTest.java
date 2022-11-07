@@ -22,7 +22,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeFile_ok() {
+    public void writeFile_validData_ok() {
         List<String> expected = readFile(REPORT_EXPECTED_PATH);
         fileWriterService.writeFile(DATA_TO_WRITE, REPORT_ACTUAL_PATH);
         List<String> actual = readFile(REPORT_ACTUAL_PATH);

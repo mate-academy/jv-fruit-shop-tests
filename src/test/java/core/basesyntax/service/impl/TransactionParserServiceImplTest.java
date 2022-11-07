@@ -41,7 +41,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test
-    public void parseTransaction_ok() {
+    public void parseTransaction_validData_ok() {
         data.add("column_name");
         data.add("b,banana,50");
         data.add("s,banana,10");

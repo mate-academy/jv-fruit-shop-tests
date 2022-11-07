@@ -19,7 +19,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_ok() {
+    public void readFile_validData_ok() {
         final List<String> actual = fileReaderService.readFile(PATH_DATA_FILE);
         List<String> expected = new ArrayList<>();
         expected.add("testing");

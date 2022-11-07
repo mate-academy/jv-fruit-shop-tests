@@ -22,7 +22,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_ok() {
+    public void createReport_validData_ok() {
         STORAGE.put(new Fruit("banana"), 50);
         STORAGE.put(new Fruit("peach"), 35);
         STORAGE.put(new Fruit("melon"), 15);

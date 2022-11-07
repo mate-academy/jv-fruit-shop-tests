@@ -52,7 +52,7 @@ public class ShopServiceImplTest {
     }
 
     @Test
-    public void processData_ok() {
+    public void processData_validData_ok() {
         expected.put(fruit, 45);
         shopService.processData(testFruitTransactions);
         Map<Fruit, Integer> actual = STORAGE;

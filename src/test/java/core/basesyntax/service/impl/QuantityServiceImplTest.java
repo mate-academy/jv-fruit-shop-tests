@@ -32,7 +32,7 @@ public class QuantityServiceImplTest {
     }
 
     @Test
-    public void add_ok() {
+    public void add_validData_ok() {
         quantityService.add(fruit, 20);
         assertEquals(expected, ACTUAL);
     }

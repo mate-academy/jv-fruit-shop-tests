@@ -2,38 +2,36 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.impl.FruitStorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.CreatReport;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorTest {
     private CreatReport creator;
-    private FruitStorageDao storageDao;
 
     @Before
-    public void setUp() throws Exception {
-        storageDao = new FruitStorageDaoImpl();
-        creator = new ReportCreator(storageDao);
+    public void setUp() {
+        creator = new ReportCreator(new FruitStorageDaoImpl());
     }
 
     @Test
-    public void creatReport_storageIsNull_NotOk() {
-        storageDao = null;
+    public void createReport_storageIsNull_NotOk() {
         try {
-            creator = new ReportCreator(storageDao);
+            creator = new ReportCreator(null);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("No storage is not matched", e.getMessage());
         }
     }
 
     @Test
-    public void creatReport_rightReport_Ok() {
+    public void createReport_rightReport_Ok() {
         Storage.storage.put("banana", 152);
         Storage.storage.put("apple", 90);
         List<String> rightReport = List.of("banana,152" + System.lineSeparator(),
@@ -43,10 +41,9 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void creatReport_storageIsEmpty_Ok() {
-        List<String> rightReport = new ArrayList<>();
+    public void createReport_storageIsEmpty_Ok() {
         List<String> createdReport = creator.creatReport();
-        assertEquals(rightReport, createdReport);
+        assertEquals(Collections.emptyList(), createdReport);
     }
 
     @After

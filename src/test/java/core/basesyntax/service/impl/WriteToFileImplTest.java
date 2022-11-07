@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Before;
@@ -49,6 +50,11 @@ public class WriteToFileImplTest {
     public void writeToFile_reportIsEmpty_notOk() {
         List<String> emptyReport = new ArrayList<>();
         assertFalse(writer.writeToFile(REPORT_FILE, emptyReport));
+        try {
+            assertEquals(Collections.emptyList(), Files.readAllLines(Paths.get(REPORT_FILE)));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
@@ -62,7 +68,7 @@ public class WriteToFileImplTest {
     }
 
     @Test
-    public void writeToFile_rightWrighting_ok() {
+    public void writeToFile_rightWriting_ok() {
         assertTrue(writer.writeToFile(REPORT_FILE, report));
         List<String> reportFromFile;
         try {

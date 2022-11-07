@@ -18,16 +18,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.AfterClass;
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteToDbFromListTest {
+    private static final String SPLITERATOR = ",";
     private static Map<String, DoActivities> strategy;
     private static FruitStorageDao storageDao;
     private static List<String> data;
-    private String spliterator = ",";
     private WriteToDB writer;
 
     @BeforeClass
@@ -52,14 +53,14 @@ public class WriteToDbFromListTest {
 
     @Before
     public void setUp() {
-        writer = new WriteToDbFromList(spliterator);
+        writer = new WriteToDbFromList(SPLITERATOR);
     }
 
     @Test
     public void writeToDb_spliteratorIsNull_notOk() {
-        spliterator = null;
         try {
-            WriteToDB writerToDB = new WriteToDbFromList(spliterator);
+            new WriteToDbFromList(null);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("Spliterator must be matched", e.getMessage());
         }
@@ -67,9 +68,9 @@ public class WriteToDbFromListTest {
 
     @Test
     public void writeToDb_dataIsNull_notOk() {
-        List<String> nullData = null;
         try {
-            writer.writeToDB(nullData, strategy);
+            writer.writeToDB(null, strategy);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("Data must be matched", e.getMessage());
         }
@@ -77,9 +78,9 @@ public class WriteToDbFromListTest {
 
     @Test
     public void writeToDb_strategyMapIsNull_notOk() {
-        Map<String, DoActivities> nullStrategy = null;
         try {
-            writer.writeToDB(data, nullStrategy);
+            writer.writeToDB(data, null);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("Strategy must be matched", e.getMessage());
         }
@@ -89,20 +90,23 @@ public class WriteToDbFromListTest {
     public void writeToDb_dataIsEmpty_notOk() {
         List<String> emptyData = new ArrayList<>();
         assertFalse(writer.writeToDB(emptyData, strategy));
+        assertEquals(Collections.emptyMap(), Storage.storage);
     }
 
     @Test
-    public void writeToDb_srategyIsEmpty_notOk() {
-        writer.writeToDB(data, Collections.emptyMap());
+    public void writeToDb_strategyIsEmpty_notOk() {
+        assertFalse(writer.writeToDB(data, Collections.emptyMap()));
+        assertEquals(Collections.emptyMap(), Storage.storage);
     }
 
     @Test
     public void writeToDb_ok() {
         assertTrue(writer.writeToDB(data, strategy));
+        assertFalse(Storage.storage.isEmpty());
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         Storage.storage.clear();
     }
 }

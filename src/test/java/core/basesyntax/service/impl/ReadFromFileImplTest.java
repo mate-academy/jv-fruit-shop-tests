@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReadFromFile;
 import java.util.List;
-import java.util.stream.IntStream;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,6 +21,7 @@ public class ReadFromFileImplTest {
         String wrongPath = "src/test/java/resources/file123.txt";
         try {
             reader.readFormFile(wrongPath);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("No such file found!", e.getMessage());
         }
@@ -31,6 +32,7 @@ public class ReadFromFileImplTest {
         String nullPath = null;
         try {
             reader.readFormFile(nullPath);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("No path has been put", e.getMessage());
         }
@@ -49,7 +51,6 @@ public class ReadFromFileImplTest {
                 "s,banana,50");
         String rightPath = "src/test/java/resources/file.txt";
         List<String> readList = reader.readFormFile(rightPath);
-        IntStream.range(0, rightList.size())
-                .forEach(i -> assertEquals(rightList.get(i), readList.get(i)));
+        assertEquals(rightList, readList);
     }
 }

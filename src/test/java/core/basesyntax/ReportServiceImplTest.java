@@ -4,6 +4,7 @@ import core.basesyntax.database.Storage;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.Assert;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,9 +32,13 @@ public class ReportServiceImplTest {
         validReportEmptyFile.append(System.lineSeparator());
     }
 
+    @After
+    public void tearDown() {
+        storage.storage.clear();
+    }
+
     @Test
     public void generateReportEmptyStorage_Ok() {
-        storage.storage.clear();
         String expected = validReportEmptyFile.toString();
         String actual = reportService.generateReport();
         Assert.assertEquals(expected,actual);

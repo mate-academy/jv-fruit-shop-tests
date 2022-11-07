@@ -2,6 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.FileReaderImpl;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,6 +12,7 @@ import org.junit.Test;
 public class FileReaderImplTest {
     private static FileReader fileReader;
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String EMPTY_FILE_PATH = "src/main/resources/empty.csv";
     private static final String FAKE_FILE_PATH = "src/main/***/resources/input.csv";
 
     @BeforeClass
@@ -23,6 +26,13 @@ public class FileReaderImplTest {
                  "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
         List<String> actual = fileReader.read(INPUT_FILE_PATH);
         actual.remove(0);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void read_FromEmptyFile_NotOk() {
+        List<String> expected = new ArrayList<>();
+        List<String> actual = fileReader.read(EMPTY_FILE_PATH);
         Assert.assertEquals(expected, actual);
     }
 

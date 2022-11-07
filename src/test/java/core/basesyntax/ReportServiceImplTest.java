@@ -36,7 +36,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void generateReport_ok() {
+    public void generateReport_filledStorage_ok() {
         Storage.storage.put("banana", 25);
         Storage.storage.put("apple", 25);
         String expected = validReport.toString();

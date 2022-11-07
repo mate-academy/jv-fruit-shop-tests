@@ -57,12 +57,12 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateNullParameter_notOk() {
+    public void validate_nullParameter_notOk() {
         transactionParser.parse(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void validateWrongTransactionString_notOk() {
+    public void validate_wrongTransactionString_notOk() {
         testList.add(WRONG_TRANSACTION_STRING);
         transactionParser.parse(testList);
     }

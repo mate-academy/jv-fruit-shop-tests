@@ -51,7 +51,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void handleTransation_ok() {
+    public void handleTransation_validTransaction_ok() {
         transactionService.handleTransaction(testData);
         int actual = storage.storage.get(FRUIT);
         int expected = QUANTITY;
@@ -59,7 +59,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransation_InvalidTransaction_notOk() {
+    public void handleTransation_invalidTransaction_notOk() {
         testData.add(invalidTransaction);
         transactionService.handleTransaction(testData);
     }

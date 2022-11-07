@@ -35,7 +35,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeDate_ok() throws IOException {
+    public void writeDate_validReport_ok() throws IOException {
         fileWriter.writeData(PATH_OUTPUT, validReport.toString());
         List<String> actual = Files.readAllLines(Path.of(PATH_OUTPUT));
         Assert.assertEquals(expectedList, actual);

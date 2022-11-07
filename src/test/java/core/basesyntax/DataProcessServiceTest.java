@@ -14,12 +14,12 @@ public class DataProcessServiceTest {
     private static DataProcessService dataProcessService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         dataProcessService = new DataProcessServiceImpl();
     }
 
     @Test
-    public void processData_ok() {
+    public void processData_validInput_ok() {
         List<String> inputList = new ArrayList<>(List.of(
                 "type,fruit,quantity", "b,orange,20", "b,pineapple,10",
                 "s,orange,10", "p,orange,13", "r,apple,20", "p,pineapple,5", "s,pineapple,50"));
@@ -32,29 +32,24 @@ public class DataProcessServiceTest {
                 expectedList.size(), actualList.size());
     }
 
-    @Test
-    public void processData_withInvalidInput_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void processData_invalidInput_notOk() {
         List<String> invalidInputList = new ArrayList<>(List.of("Hello, world!", "Hello, mate!"));
-        try {
-            dataProcessService.processData(invalidInputList);
-        } catch (Exception e) {
-            Assert.assertTrue("You should throw an Exception with explanation", true);
-        }
+        dataProcessService.processData(invalidInputList);
+        Assert.assertTrue("You should throw an Exception with explanation", true);
     }
 
-    @Test
-    public void processData_withNullOrEmptyInput_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void processData_emptyInput_notOk() {
         List<String> emptyList = Collections.emptyList();
-        try {
-            dataProcessService.processData(emptyList);
-        } catch (Exception e) {
-            Assert.assertTrue("You should throw an Exception with explanation", true);
-        }
-        try {
-            dataProcessService.processData(null);
-        } catch (Exception e) {
-            Assert.assertTrue("You should throw an Exception with explanation", true);
-        }
+        dataProcessService.processData(emptyList);
+        Assert.assertTrue("You should throw an Exception with explanation", true);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void processData_nullInput_notOk() {
+        dataProcessService.processData(null);
+        Assert.assertTrue("You should throw an Exception with explanation", true);
     }
 
     private List<FruitTransaction> generateFruitTransactionList() {

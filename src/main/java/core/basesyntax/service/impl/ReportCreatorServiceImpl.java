@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.datavalidator.DataValidationException;
+import core.basesyntax.datavalidator.OutputDataValidator;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.ArrayList;
@@ -11,18 +13,22 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
 
     @Override
     public List<String> createReport(List<Fruit> fruitInShopList) {
-        if (fruitInShopList == null || fruitInShopList.size() == 0) {
-            return List.of("Given list of fruits in the shop is empty. Check input data");
-        }
         List<String> reportList = new ArrayList<>();
-        reportList.add(REPORT_HEAD);
-        for (Fruit fruit : fruitInShopList) {
-            StringBuilder stringBuilder = new StringBuilder();
-            reportList.add(stringBuilder.append(fruit.getName())
-                    .append(COMMA_SEPARATOR)
-                    .append(fruit.getAmountInShop())
-                    .toString());
+        try {
+            OutputDataValidator outputDataValidator = new OutputDataValidator();
+            outputDataValidator.validateOutput(fruitInShopList);
+            reportList.add(REPORT_HEAD);
+            for (Fruit fruit : fruitInShopList) {
+                StringBuilder stringBuilder = new StringBuilder();
+                reportList.add(stringBuilder.append(fruit.getName())
+                        .append(COMMA_SEPARATOR)
+                        .append(fruit.getAmountInShop())
+                        .toString());
+            }
+        } catch (DataValidationException e) {
+            throw new RuntimeException("Invalid data. Can't create a report.", e);
         }
+
         return reportList;
     }
 }

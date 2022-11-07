@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.datavalidator.InputDataValidationException;
+import core.basesyntax.datavalidator.DataValidationException;
 import core.basesyntax.datavalidator.InputDataValidator;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessService;
@@ -19,7 +19,7 @@ public class DataProcessServiceImpl implements DataProcessService {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         try {
             InputDataValidator validator = new InputDataValidator();
-            validator.validate(inputData);
+            validator.validateInput(inputData);
             inputData.remove(FIRST_LINE_INDEX);
             for (String line : inputData) {
                 String[] data = line.split(LINE_SEPARATOR);
@@ -30,8 +30,8 @@ public class DataProcessServiceImpl implements DataProcessService {
                 fruitTransaction.setQuantity(Integer.parseInt(data[QUANTITY_INDEX]));
                 fruitTransactions.add(fruitTransaction);
             }
-        } catch (InputDataValidationException e) {
-            System.out.println("Input data is incorrect\n" + e);
+        } catch (DataValidationException e) {
+            throw new RuntimeException("Incorrect input data ", e);
         }
 
         return fruitTransactions;

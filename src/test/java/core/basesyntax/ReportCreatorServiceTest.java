@@ -14,7 +14,7 @@ public class ReportCreatorServiceTest {
     private static ReportCreatorService reportCreatorService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportCreatorService = new ReportCreatorServiceImpl();
     }
 
@@ -39,15 +39,18 @@ public class ReportCreatorServiceTest {
                 expectedList.get(0), actualList.get(0));
     }
 
-    @Test
-    public void createReport_withNullOrEmptyInput_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void createReport_withNull_exceptionExpected_ok() {
+        reportCreatorService.createReport(null);
+        Assert.assertTrue(
+                "The list can't be null. You should throw a Runtime exception", true);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void createReport_fromEmptyList_exceptionExpected_ok() {
         List<Fruit> emptyList = Collections.emptyList();
-        List<String> expectedList = List.of(
-                "Given list of fruits in the shop is empty. Check input data");
-        Assert.assertEquals("List of fruits is empty",
-                expectedList, reportCreatorService.createReport(emptyList));
-        Assert.assertEquals("List of fruits can't be null",
-                expectedList, reportCreatorService.createReport(null));
+        reportCreatorService.createReport(emptyList);
+        Assert.assertTrue("You should throw a Runtime exception if the list is empty", true);
     }
 
     private List<Fruit> initFruitList() {

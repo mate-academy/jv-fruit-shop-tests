@@ -28,7 +28,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
-    private static final String PATH_TO_FIRST_TEST_FILE = "src/test/resources/test1.csv";
+    private static final String PATH_TO_FIRST_TEST_FILE = "src/test/resources/inputDataFile.csv";
     private static FruitDao fruitDao;
     private static FruitService fruitService;
     private static DataProcessService dataProcessService;
@@ -37,7 +37,7 @@ public class FruitServiceTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitDao = new FruitDaoImpl();
         dataProcessService = new DataProcessServiceImpl();
         dataReaderService = new DataReaderServiceImpl();
@@ -48,7 +48,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void calculateFruits_ok() {
+    public void calculateFruits_validInput_ok() {
         List<Fruit> expectedListOfFruitsInShop = new ArrayList<>(List.of(
                 new Fruit("orange", 17),
                 new Fruit("pineapple", 55),
@@ -61,7 +61,7 @@ public class FruitServiceTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         FruitStorage.fruitsInShop.clear();
     }
 

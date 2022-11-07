@@ -25,14 +25,14 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void transactionParserCorrectTest_Ok() {
+    public void transactionParser_correctTest_ok() {
         List<FruitTransaction> fruitTransactions =
                 transactionParser.interfaceTransactionParser(test);
         Assert.assertEquals(CORRECT_PARSER, fruitTransactions.toString());
     }
 
     @Test(expected = RuntimeException.class)
-    public void transactionParserNullTest_NotOk() {
+    public void transactionParser_nullTest_notOk() {
         transactionParser.interfaceTransactionParser(null);
     }
 }

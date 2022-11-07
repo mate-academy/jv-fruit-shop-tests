@@ -24,12 +24,12 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToWrongPath_NotOk() {
+    public void fileWriter_wrongPath_notOk() {
         fileWriter.write(REPORT, WRONG_PATH);
     }
 
     @Test
-    public void writeToCorrectPath_Ok() throws IOException {
+    public void fileWriter_correctPath_ok() throws IOException {
         fileWriter.write(REPORT, METHOD_WRITE_PATH);
         List<String> expected = Files.readAllLines(Path.of(COMPARE_PATH));
         List<String> actual = Files.readAllLines(Path.of(METHOD_WRITE_PATH));

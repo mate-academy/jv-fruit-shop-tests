@@ -41,7 +41,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void fruitServiceBalanceTest_Ok() {
+    public void fruitService_balanceTest_ok() {
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 15));
         fruitService.applyTransaction(fruitTransactionList);
@@ -51,7 +51,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void fruitServiceReturnTest_Ok() {
+    public void fruitService_returnTest_ok() {
         Storage.storage.put("kiwi", 15);
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "kiwi", 70));
@@ -62,7 +62,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void fruitServiceSupplyTest_Ok() {
+    public void fruitService_supplyTest_ok() {
         Storage.storage.put("coconut", 15);
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "coconut", 20));
@@ -73,7 +73,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void fruitServicePurchaseCorrectTest_Ok() {
+    public void fruitService_purchaseTest_ok() {
         Storage.storage.put("pear", 100);
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "pear", 20));
@@ -84,7 +84,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void daoGetAllTest_Ok() {
+    public void dao_getAllTest_ok() {
         HashMap<String, Integer> all = dao.getAll();
         Assert.assertEquals(all, Storage.storage);
     }

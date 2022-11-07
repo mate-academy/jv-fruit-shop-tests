@@ -24,13 +24,13 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void reportCreatorCorrectTest_Ok() {
+    public void reportCreator_correctTest_ok() {
         String report = reportCreator.createReport(testStorage);
         Assert.assertEquals(CORRECT_REPORT, report);
     }
 
     @Test(expected = RuntimeException.class)
-    public void reportCreatorNullTest_NotOk() {
+    public void reportCreator_nullTest_notOk() {
         reportCreator.createReport(null);
     }
 }

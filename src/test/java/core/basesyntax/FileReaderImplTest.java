@@ -22,12 +22,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromWrongPath_NotOk() {
+    public void fileReader_wrongPath_notOk() {
         fileReader.readFromFile(WRONG_PATH);
     }
 
     @Test
-    public void readCorrectPath_Ok() {
+    public void fileReader_correctPath_ok() {
         List<String> readFromCorrectFile = fileReader.readFromFile(CORRECT_PATH);
         Assert.assertEquals(readFromCorrectFile, test);
     }

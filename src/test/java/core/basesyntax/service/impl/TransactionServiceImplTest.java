@@ -24,21 +24,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class TransactionServiceImplTest {
-    private static TransactionService transactionService;
-    private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map
-            .of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
-                    FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
-                    FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
-                    FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-    private static final List<FruitTransaction> VALID_FRUIT_TRANSACTION_LIST = List.of(
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13),
-            new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
+    private static TransactionService<List<FruitTransaction>> transactionService;
     private static final Map<String, Integer> EXPECTED_STORAGE_DATA = Map.of("apple", 90,
             "banana", 152);
     @Rule
@@ -47,14 +33,14 @@ public class TransactionServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(getOperationHandlerMap());
         transactionService = new TransactionServiceImpl(operationStrategy, fruitStorageDao);
 
     }
 
     @Test
     public void transaction_ActualDataEqualsToExpected_ok() {
-        transactionService.transaction(VALID_FRUIT_TRANSACTION_LIST);
+        transactionService.transaction(getValidFruitTransactionList());
         Set<Map.Entry<String, Integer>> actualStorageData = FruitStorage.fruitStorage.entrySet();
         assertEquals(EXPECTED_STORAGE_DATA.entrySet(), actualStorageData);
     }
@@ -69,5 +55,25 @@ public class TransactionServiceImplTest {
     public void transaction_nullDataExceptionMessage_ok() {
         expectedException.expectMessage("Transaction list can`t be null");
         transactionService.transaction(null);
+    }
+
+    private static Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {
+        return Map
+                .of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                        FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                        FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
+                        FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+    }
+
+    private static List<FruitTransaction> getValidFruitTransactionList() {
+        return List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
     }
 }

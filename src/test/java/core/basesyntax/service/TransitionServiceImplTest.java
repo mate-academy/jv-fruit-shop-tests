@@ -18,12 +18,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TransitionServiceTest {
+public class TransitionServiceImplTest {
     private static List<FruitTransition> transitionData;
     private static Map<String, OperationHandler> dataOperation;
     private static OperationHandlerStrategy strategy;
@@ -43,9 +43,9 @@ public class TransitionServiceTest {
         transitionService = new TransitionServiceImpl(strategy);
     }
 
-    @Before
-    public void beforeAll() {
-        FruitStorage.storage.remove(banana);
+    @After
+    public void afterEach() {
+        FruitStorage.storage.clear();
     }
 
     @Test
@@ -62,7 +62,7 @@ public class TransitionServiceTest {
     }
 
     @Test
-    public void setEmptyTransaction_emptyDb_ok() {
+    public void setEmptyTransaction_emptyDB_ok() {
         transitionService.doTransition(Collections.emptyList());
         assertTrue(FruitStorage.storage.isEmpty());
     }

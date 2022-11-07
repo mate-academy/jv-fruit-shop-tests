@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReportCreatorTest {
+public class ReportCreatorImplTest {
     private static Map<Fruit, Integer> storage;
     private static StringBuilder report;
     private static ReportCreator reportCreator;

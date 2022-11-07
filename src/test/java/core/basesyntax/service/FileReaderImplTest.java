@@ -48,6 +48,6 @@ public class FileReaderImplTest {
                 + "s,banana,50";
         Files.writeString(Path.of(FILE_EXIST), fileData);
         List<String> actual = fileReader.readFromFile(FILE_EXIST);
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(expected, actual);
     }
 }

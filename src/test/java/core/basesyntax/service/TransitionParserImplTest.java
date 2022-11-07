@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TransitionParserTest {
+public class TransitionParserImplTest {
     private static List<String> data;
     private static TransitionParser transitionParser;
 

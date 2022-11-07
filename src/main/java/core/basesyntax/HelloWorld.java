@@ -1,28 +1,28 @@
 package core.basesyntax;
 
-import dao.DaoFruit;
-import dao.FruitImplemDao;
-import db.Storage;
-import impl.FruitTransactionParserImpl;
-import impl.FruitTransactionServiceImpl;
-import impl.ReportServiceImpl;
+import core.basesyntax.dao.DaoFruit;
+import core.basesyntax.dao.FruitImplemDao;
+import core.basesyntax.db.Storage;
+import core.basesyntax.impl.FruitTransactionParserImpl;
+import core.basesyntax.impl.FruitTransactionServiceImpl;
+import core.basesyntax.impl.ReportServiceImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.operations.BalanceOperation;
+import core.basesyntax.operations.OperationHandler;
+import core.basesyntax.operations.PurchaseOperation;
+import core.basesyntax.operations.ReturnOperation;
+import core.basesyntax.operations.SupplyOperation;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.strategy.Strategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import operations.BalanceOperation;
-import operations.OperationHandler;
-import operations.PurchaseOperation;
-import operations.ReturnOperation;
-import operations.SupplyOperation;
-import service.FileReader;
-import service.FileWriter;
-import service.FruitParser;
-import service.FruitService;
-import service.ReportService;
-import service.impl.FileReaderImpl;
-import service.impl.FileWriterImpl;
-import strategy.Strategy;
 
 /**
  * Feel free to remove this class and create your own.

@@ -9,7 +9,8 @@ public class PrepareDataImpl implements PreparingData {
     private static final String COMMA = ",";
 
     @Override
-    public String prepare(StringBuilder data, Map<Fruit, Integer> mapToWrite) {
+    public String prepare(Map<Fruit, Integer> mapToWrite) {
+        StringBuilder data = new StringBuilder();
         data.append(TITLE);
         for (Map.Entry<Fruit, Integer> map : mapToWrite.entrySet()) {
             data.append(map.getKey().getName())

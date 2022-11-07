@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +28,11 @@ public class WriteFileImplTest {
     private static final String PATH_TO_RESULT = "src/test/resources/reportFile.csv";
     private static final String WRONG_PATH = "src/resources/reportFile.csv";
     private static WriteFile writer;
+    private static File file;
 
     @BeforeClass
     public static void before() {
+        file = new File(PATH_TO_NEW_FILE);
         final FruitDao fruitDao = new FruitDaoImpl();
         final ReadFile reader = new ReadFileImpl();
         final SeparationOfOperations separation = new SeparationOfOperations();
@@ -43,7 +46,6 @@ public class WriteFileImplTest {
         reader.readFile(temporalList, PATH_TO_NEW_FILE);
         separation.toDoEachOperation(temporalList, operation);
         writer.writeToFile(PATH_TO_RESULT, fruitDao.getAll());
-
         WriteFile writeFile = new WriteFileImpl();
         Map<Fruit, Integer> mapToWrite = new HashMap<>();
         Fruit fruit = new Fruit("banana");
@@ -54,12 +56,11 @@ public class WriteFileImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readWrongFile_not_Ok() {
-        writer.writeToFile(WRONG_PATH, new HashMap<>());
+        writer.writeToFile(WRONG_PATH, Collections.EMPTY_MAP);
     }
 
     @Test
     public void isCreatedFileExist_Ok() {
-        assertTrue(new File(PATH_TO_NEW_FILE).exists());
+        assertTrue(file.exists());
     }
-
 }

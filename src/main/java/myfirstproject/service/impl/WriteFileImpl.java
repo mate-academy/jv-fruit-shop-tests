@@ -12,9 +12,8 @@ public class WriteFileImpl implements WriteFile {
     @Override
     public void writeToFile(String path, Map<Fruit, Integer> mapToWrite) {
         PreparingData preparingData = new PrepareDataImpl();
-        StringBuilder data = new StringBuilder();
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
-            bufferedWriter.write(preparingData.prepare(data, mapToWrite));
+            bufferedWriter.write(preparingData.prepare(mapToWrite));
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file. " + path, e);
         }

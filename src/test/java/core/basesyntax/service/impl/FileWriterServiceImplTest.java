@@ -30,23 +30,23 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_withNullPath_notOk() {
+    public void writeToFile_withNullPath_notOk() {
         writer = new FileWriterServiceImpl(null);
         writer.writeToFile(testData);
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_withNullData_notOk() {
+    public void writeToFile_withNullData_notOk() {
         writer.writeToFile(null);
     }
 
     @Test
-    public void write_ToExistingFile_ok() {
+    public void writeToFile_toExistingFile_ok() {
         writer.writeToFile(testData);
     }
 
     @Test
-    public void write_ToUnExistingFile_Ok() {
+    public void writeToFile_toUnExistingFile_ok() {
         writer = new FileWriterServiceImpl(UNEXISTING_PATH);
         writer.writeToFile(testData);
         assertTrue(Files.exists(UNEXISTING_PATH));

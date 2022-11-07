@@ -9,19 +9,19 @@ public class FileReaderServiceImplTest {
     private static FileReaderService reader;
 
     @Test(expected = RuntimeException.class)
-    public void read_withNullPath_notOk() {
+    public void readFile_withNullPath_notOk() {
         reader = new FileReaderServiceImpl(null);
         reader.readFile();
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_UnExistedFile_notOk() {
+    public void readFile_withUnexistedFile_notOk() {
         reader = new FileReaderServiceImpl(Path.of(RESOURCES_PATH + "unexisting.csv"));
         reader.readFile();
     }
 
     @Test
-    public void read_withExistingFile_Ok() {
+    public void readFile_withExistingFile_Ok() {
         reader = new FileReaderServiceImpl(Path.of(RESOURCES_PATH + "input.csv"));
         reader.readFile();
     }

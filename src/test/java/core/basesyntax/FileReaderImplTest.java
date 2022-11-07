@@ -20,7 +20,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_FromFile_ok() {
+    public void read_fromFile_ok() {
         List<String> expected = List.of("type,fruit,quantity","b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13",
                 "r,apple,10", "p,apple,20",
@@ -31,7 +31,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_fromEmptyFile_notOk() {
+    public void read_fromEmptyFile_Ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReader.read(EMPTY_FILE_PATH);
         Assert.assertEquals(expected, actual);

@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.FileWriter;
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class FileWriterImplTest {
         String testMessage = "Test message";
         writer.writeToFile(testMessage, TEST_REPORT_FILE_PATH);
         List<String> currentInFile = Files.readAllLines(Path.of(TEST_REPORT_FILE_PATH));
+        assertTrue(currentInFile.size() == 1);
         assertEquals(currentInFile.get(0), testMessage);
     }
 }

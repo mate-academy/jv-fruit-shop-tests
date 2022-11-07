@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
@@ -15,9 +16,8 @@ public class ReportGeneratorImplTest {
 
     @Test
     public void generateReport_EmptyStorage_Ok() {
-        Map<Fruit, Integer> info = new HashMap<>();
         String expectedReport = REPORT_HEADER + LINE_SEPARATOR;
-        String actualReport = generator.reportFromStorage(info);
+        String actualReport = generator.reportFromStorage(Collections.emptyMap());
         assertEquals(expectedReport, actualReport);
     }
 

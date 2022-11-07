@@ -15,7 +15,7 @@ import core.basesyntax.strategy.impl.OperationPurchase;
 import core.basesyntax.strategy.impl.OperationReturn;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.OperationSupply;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,15 +27,13 @@ public class FruitServiceImplTest {
 
     @Test
     public void doOperation_NoTransactions_Ok() {
-        List<FruitTransaction> emptyTransactions = new ArrayList<>();
-        fruitService.doOperation(emptyTransactions);
-        Map<Fruit, Integer> expected = new HashMap<>();
+        fruitService.doOperation(Collections.emptyList());
         Map<Fruit, Integer> actual = FruitStorage.storage;
-        assertEquals(expected, actual);
+        assertEquals(Collections.emptyMap(), actual);
     }
 
     @Test
-    public void doOperation_NormalTransactions() {
+    public void doOperation_NormalTransactions_Ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
                         new Fruit("apple"), 100),

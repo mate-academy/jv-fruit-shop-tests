@@ -28,7 +28,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void generateReport_emptyStorage_notOk() {
+    public void generateReport_emptyStorage_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportGenerator.generateReport();
         assertEquals(expected, actual);

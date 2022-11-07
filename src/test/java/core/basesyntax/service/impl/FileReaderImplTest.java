@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String DATA_BASE = "src/main/resources/database.csv";
+    private static final String DATA_BASE = "src/test/java/resources/database.csv";
     private static final String NO_EXIST_FILE = "noExistPath/database.csv";
     private FileReader fileReader = new FileReaderImpl();
 
@@ -35,7 +35,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFromFile_emptyFile_notOk() {
+    public void readFromFile_emptyFile_ok() {
         List<String> emptyList = new ArrayList<>();
         assertNotNull(emptyList);
         assertEquals(0, emptyList.size());

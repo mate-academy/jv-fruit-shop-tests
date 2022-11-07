@@ -18,6 +18,12 @@ public class ParseServiceImplTest {
         assertEquals(expectedData(), actualData);
     }
 
+    @Test (expected = RuntimeException.class)
+    public void parseTransaction_noSupportingOperation_notOk() {
+        FruitTransaction.Operation operation = FruitTransaction.Operation.getByOperation(
+                UNKNOWN_OPERATION);
+    }
+
     private List<String> dataFromFile() {
         List<String> dataFromFile = new ArrayList<>();
         dataFromFile.add("type,fruit,quantity");
@@ -43,11 +49,5 @@ public class ParseServiceImplTest {
         expectedData.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5));
         expectedData.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
         return expectedData;
-    }
-
-    @Test (expected = RuntimeException.class)
-    public void parseTransaction_noSupportingOperation_notOk() {
-        FruitTransaction.Operation operation = FruitTransaction.Operation.getByOperation(
-                UNKNOWN_OPERATION);
     }
 }

@@ -16,35 +16,36 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionRowParserTest {
-    private static final List<String> VALID_DATA_ROWS = List.of(
-            "b,banana,20",
-            "b,apple,100",
-            "s,banana,100",
-            "p,banana,13",
-            "r,apple,10",
-            "p,apple,20",
-            "p,banana,5",
-            "s,banana,50"
-    );
     private static final int INDEX_TO_PUT_IN_LIST_MIDDLE_FIRST = 2;
     private static final int INDEX_TO_PUT_IN_LIST_MIDDLE_SECOND = 6;
     private static final int INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD = 8;
     private static final int INDEX_TO_PUT_IN_LIST_START = 0;
     private static final int INDEX_TO_PUT_IN_LIST_AFTER_BALANCE = 3;
     private static final String TEST_FRUIT_AND_COUNT_UNFINISHED_ROW = "apple,32";
+    private static List<String> validDataRows;
     private static FruitShopStorageDaoImpl dao;
     private static TransactionRowParserImpl transactionRowParser;
     private List<String> currentDataRows;
 
     @BeforeClass
     public static void beforeClass() {
+        validDataRows = List.of(
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50"
+        );
         dao = new FruitShopStorageDaoImpl();
         transactionRowParser = new TransactionRowParserImpl(dao);
     }
 
     @Before
     public void setUp() {
-        currentDataRows = new ArrayList<>(VALID_DATA_ROWS);
+        currentDataRows = new ArrayList<>(validDataRows);
     }
 
     @Test(expected = RuntimeException.class)

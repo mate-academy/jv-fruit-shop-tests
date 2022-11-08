@@ -48,9 +48,9 @@ public class FruitTransactionParserImplTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, apple, 50),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, apple, 11),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, apple, 123),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, banana,278),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, banana, 278),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, banana, 20),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, kiwi,270));
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, kiwi, 270));
         List<FruitTransaction> actual = fruitTransactionParser.parse(testData);
         assertEquals(expected, actual);
     }

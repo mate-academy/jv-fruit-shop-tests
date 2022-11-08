@@ -24,7 +24,6 @@ public class ReportServiceImplTest {
         Storage.storage.put(new Fruit("banana"), 115);
         Storage.storage.put(new Fruit("apple"), 110);
         Set<Map.Entry<Fruit, Integer>> entries = Storage.storage.entrySet();
-
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,115" + System.lineSeparator()
                 + "apple,110" + System.lineSeparator();
@@ -35,7 +34,6 @@ public class ReportServiceImplTest {
     @Test
     public void reportService_emptyData_ok() {
         Set<Map.Entry<Fruit, Integer>> entries = Storage.storage.entrySet();
-
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.createReport(entries);
         assertEquals(expected, actual);

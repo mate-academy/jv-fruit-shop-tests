@@ -29,9 +29,8 @@ public class ReadFromFileImplTest {
 
     @Test
     public void readFromFile_nullPath_notOk() {
-        String nullPath = null;
         try {
-            reader.readFormFile(nullPath);
+            reader.readFormFile(null);
             Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("No path has been put", e.getMessage());

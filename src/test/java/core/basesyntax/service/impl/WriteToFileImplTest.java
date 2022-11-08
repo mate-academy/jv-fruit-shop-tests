@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,6 +32,7 @@ public class WriteToFileImplTest {
     public void writeToFile_filePathIsNull_notOk() {
         try {
             writer.writeToFile(null, report);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("FilePath must be matched", e.getMessage());
         }
@@ -41,20 +42,16 @@ public class WriteToFileImplTest {
     public void writeToFile_reportIsNull_notOk() {
         try {
             writer.writeToFile(REPORT_FILE, null);
+            Assert.fail("Expected RunTimeException");
         } catch (RuntimeException e) {
             assertEquals("Report must be matched", e.getMessage());
         }
     }
 
     @Test
-    public void writeToFile_reportIsEmpty_notOk() {
+    public void writeToFile_reportIsEmpty_ok() {
         List<String> emptyReport = new ArrayList<>();
         assertFalse(writer.writeToFile(REPORT_FILE, emptyReport));
-        try {
-            assertEquals(Collections.emptyList(), Files.readAllLines(Paths.get(REPORT_FILE)));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Test
@@ -62,6 +59,7 @@ public class WriteToFileImplTest {
         String wrongFilePath = "";
         try {
             writer.writeToFile(wrongFilePath, report);
+            Assert.fail();
         } catch (RuntimeException e) {
             assertEquals("Can't find such file", e.getMessage());
         }

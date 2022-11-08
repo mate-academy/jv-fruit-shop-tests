@@ -87,14 +87,14 @@ public class WriteToDbFromListTest {
     }
 
     @Test
-    public void writeToDb_dataIsEmpty_notOk() {
+    public void writeToDb_dataIsEmpty_ok() {
         List<String> emptyData = new ArrayList<>();
         assertFalse(writer.writeToDB(emptyData, strategy));
         assertEquals(Collections.emptyMap(), Storage.storage);
     }
 
     @Test
-    public void writeToDb_strategyIsEmpty_notOk() {
+    public void writeToDb_strategyIsEmpty_ok() {
         assertFalse(writer.writeToDB(data, Collections.emptyMap()));
         assertEquals(Collections.emptyMap(), Storage.storage);
     }

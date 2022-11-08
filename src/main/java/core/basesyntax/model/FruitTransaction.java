@@ -3,19 +3,18 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private Fruit fruit;
     private Operation operation;
+    private Fruit fruit;
     private int quantity;
 
-
-    public static FruitTransaction of(Operation operation, Fruit fruit, int quantity) {
-        return new FruitTransaction(operation, fruit, quantity);
+    public FruitTransaction() {
     }
 
     public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
-
-    public FruitTransaction() {}
 
     public Operation getOperation() {
         return operation;
@@ -62,14 +61,9 @@ public class FruitTransaction {
     @Override
     public String toString() {
         return "FruitTransaction{"
-                + "operation="
-                + operation
-                + ", fruit='"
-                + fruit
-                + '\''
-                + ", amount="
-                + quantity
-                + '}';
+                + "fruit=" + fruit
+                + ", operation=" + operation
+                + ", quantity=" + quantity + '}';
     }
 
     public enum Operation {

@@ -3,10 +3,10 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileReaderService;
-import org.junit.Before;
-import org.junit.Test;
 import java.util.Collections;
 import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static final String DATA_PATH = "src/test/resources/test_file.csv";
@@ -14,8 +14,8 @@ public class FileReaderServiceImplTest {
     private static final String PATH_TO_NON_EXISTENT_FILE = "file/not/exist";
     private static FileReaderService fileReader;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         fileReader = new FileReaderServiceImpl();
     }
 

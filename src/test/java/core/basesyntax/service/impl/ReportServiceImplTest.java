@@ -1,23 +1,21 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-
 import java.util.Map;
 import java.util.Set;
-
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         reportService = new ReportServiceImpl();
     }
 
@@ -30,6 +28,15 @@ public class ReportServiceImplTest {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,115" + System.lineSeparator()
                 + "apple,110" + System.lineSeparator();
+        String actual = reportService.createReport(entries);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void reportService_emptyData_ok() {
+        Set<Map.Entry<Fruit, Integer>> entries = Storage.storage.entrySet();
+
+        String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.createReport(entries);
         assertEquals(expected, actual);
     }

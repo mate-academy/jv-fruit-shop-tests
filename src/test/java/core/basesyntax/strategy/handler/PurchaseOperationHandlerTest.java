@@ -1,39 +1,50 @@
 package core.basesyntax.strategy.handler;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.Before;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
-import static org.junit.Assert.assertEquals;
 
 public class PurchaseOperationHandlerTest {
     private static OperationHandler purchaseHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         purchaseHandler = new PurchaseOperationHandler(new StorageDaoImpl());
-        Storage.storage.put(new Fruit("apple"), 25);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void execute_notEnoughInStock_ok() {
+        Fruit banana = new Fruit("banana");
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, banana, 100);
+        purchaseHandler.execute(transaction);
     }
 
     @Test
-    public void execute_purchaseTransaction_ok() {
-        FruitTransaction fruitTransaction = FruitTransaction.of(PURCHASE, "apple", 10);
-        int expected = 15;
-        purchaseHandler.execute(fruitTransaction);
-        int actual = Storage.storage.get("apple");
+    public void execute_validDataAndNotEmptyStorage_ok() {
+        Fruit banana = new Fruit("banana");
+        Storage.storage.put(banana, 120);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, banana, 100);
+        purchaseHandler.execute(transaction);
+        int expected = 20;
+        int actual = Storage.storage.get(banana);
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void execute_purchaseTransaction_notOk() {
-        FruitTransaction fruitTransaction = FruitTransaction.of(PURCHASE, "apple", 35);
-        int expected = -15;
-        purchaseHandler.execute(fruitTransaction);
-        int actual = Storage.storage.get("apple");
-        assertEquals(expected, actual);
+    @Test(expected = NullPointerException.class)
+    public void execute_null_notOk() {
+        purchaseHandler.execute(null);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

@@ -1,36 +1,53 @@
 package core.basesyntax.strategy.handler;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.Before;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
-import static org.junit.Assert.*;
 
 public class SupplyOperationHandlerTest {
     private static OperationHandler supplyHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         supplyHandler = new SupplyOperationHandler(new StorageDaoImpl());
-        Storage.storage.put(new Fruit( "apple"), 20);
     }
 
     @Test
-    public void execute_supplyTransaction_ok() {
-        FruitTransaction fruitTransaction = FruitTransaction.of(SUPPLY, new Fruit("apple"), 10);
-        int expected = 30;
-        supplyHandler.execute(fruitTransaction);
-        int actual = Storage.storage.get("apple");
+    public void execute_validDataAndEmptyStorage_ok() {
+        Fruit banana = new Fruit("banana");
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, banana, 100);
+        supplyHandler.execute(transaction);
+        int expected = 100;
+        int actual = Storage.storage.get(banana);
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void execute_validDataAndNotEmptyStorage_ok() {
+        Fruit banana = new Fruit("banana");
+        Storage.storage.put(banana, 20);
+        FruitTransaction transaction =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, banana, 100);
+        supplyHandler.execute(transaction);
+        int expected = 120;
+        int actual = Storage.storage.get(banana);
+        assertEquals(expected, actual);
+    }
 
     @Test(expected = NullPointerException.class)
-    public void execute_null_ok() {
+    public void execute_null_notOk() {
         supplyHandler.execute(null);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -31,12 +32,11 @@ public class OperationHandlerBalanceImplTest {
     }
 
     @Test
-    public void applyMethodTest_Ok() {
-        int expectedAmount = 15;
+    public void createBalanceMethodTest_Ok() {
+        Map<Fruit, Integer> expectedMap = Map.of(apple, 10, kiwi, 15);
         operationHandlerBalance.apply(apple, 10);
-        operationHandlerBalance.apply(kiwi, expectedAmount);
-        int actualAmount = testStorage.getStorage().get(kiwi);
-        assertEquals(expectedAmount, actualAmount);
+        operationHandlerBalance.apply(kiwi, 15);
+        assertEquals(expectedMap, testStorage.getStorage());
     }
 
     @After

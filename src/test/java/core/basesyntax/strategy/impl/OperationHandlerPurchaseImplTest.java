@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,20 +33,19 @@ public class OperationHandlerPurchaseImplTest {
     }
 
     @Test
-    public void applyMethodTest_Ok() {
-        int expectedAmountOfApple = 5;
-        operationHandlerPurchase.apply(apple, expectedAmountOfApple);
-        int actualAmount = testStorage.getStorage().get(apple);
-        assertEquals(expectedAmountOfApple, actualAmount);
+    public void purchaseMethodTest_Ok() {
+        Map<Fruit, Integer> expectedMap = Map.of(apple, 5, kiwi, 15);
+        operationHandlerPurchase.apply(apple, 5);
+        assertEquals(expectedMap, testStorage.getStorage());
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyInvalidValue_NotOk() {
+    public void purchaseInvalidValue_NotOk() {
         operationHandlerPurchase.apply(apple, 100);
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyNegativeValue_NotOk() {
+    public void purchaseWithNegativeValue_NotOk() {
         operationHandlerPurchase.apply(apple, -100);
     }
 

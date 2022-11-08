@@ -11,6 +11,7 @@ import core.basesyntax.strategy.impl.StrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,14 +19,14 @@ import org.junit.Test;
 public class TransactionProcessorImplTest {
     private static TransactionProcessorImpl transactionProcessor;
     private static Strategy testStrategy;
-    private static Storage testStorageForProcessor;
+    private static Storage testStorage;
     private List<String> data;
 
     @BeforeClass
     public static void globalSetUp() {
         transactionProcessor = new TransactionProcessorImpl();
         testStrategy = new StrategyImpl();
-        testStorageForProcessor = new StorageImpl();
+        testStorage = new StorageImpl();
     }
 
     @Before
@@ -43,8 +44,13 @@ public class TransactionProcessorImplTest {
         transactionProcessor.processingData(data, testStrategy);
         List<String> expectedList = List.of("banana,20", "apple,100");
         expectedList = expectedList.stream().sorted().collect(Collectors.toList());
-        List<String> actualList = testStorageForProcessor.getStorageAsList();
+        List<String> actualList = testStorage.getStorageAsList();
         assertEquals(expectedList, actualList);
+    }
+
+    @After
+    public void deleteAllDataFromStorage() {
+        testStorage.getStorage().clear();
     }
 }
 

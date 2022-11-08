@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -25,20 +26,18 @@ public class OperationHandlerReturnImplTest {
     @Before
     public void setUp() {
         apple = new Fruit("apple");
+        testStorage.getStorage().put(apple, 10);
     }
 
     @Test
-    public void applyMethod_Ok() {
-        int expectedAmount = 25;
-        testStorage.getStorage().put(apple, 10);
+    public void returnMethod_Ok() {
+        Map<Fruit, Integer> expectedMap = Map.of(apple, 25);
         operationHandlerReturn.apply(apple, 15);
-        int actualAmount = testStorage.getStorage().get(apple);
-        assertEquals(expectedAmount, actualAmount);
+        assertEquals(expectedMap, testStorage.getStorage());
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyNegativeAmount_NotOk() {
-        testStorage.getStorage().put(apple, 10);
+    public void returnNegativeAmount_NotOk() {
         operationHandlerReturn.apply(apple, -1);
     }
 

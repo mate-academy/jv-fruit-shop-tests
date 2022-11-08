@@ -37,7 +37,7 @@ public class OperationHandlerSupplyImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void supplyNegativeAmount_NotOk() {
+    public void supplyNegativeAmount_notOk() {
         operationHandlerSupply.apply(apple, -1);
     }
 

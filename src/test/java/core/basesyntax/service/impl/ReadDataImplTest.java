@@ -1,9 +1,6 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.service.ReadData;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,17 +25,15 @@ public class ReadDataImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_incorrectPath_NotOk() {
         String filePath = "incorrectPath";
-        assertThrows(RuntimeException.class, () ->
-                readData.read(filePath), "IncorrectPath" + Path.of(filePath));
+        readData.read(filePath);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_Null_NotOk() {
         String filePath = null;
-        assertThrows(RuntimeException.class, () ->
-                readData.read(filePath), "IncorrectPath" + filePath);
+        readData.read(filePath);
     }
 }

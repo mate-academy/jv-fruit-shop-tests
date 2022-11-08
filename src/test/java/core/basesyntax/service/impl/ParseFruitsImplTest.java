@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParseFruits;
@@ -16,10 +15,9 @@ public class ParseFruitsImplTest {
     private static final String FILE_PATH = "src/test/resources/fruitInfo.csv";
     private ParseFruits parseFruits = new ParseFruitsImpl();
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void parseIncorrectData_NotOk() {
-        assertThrows(RuntimeException.class,
-                () -> parseFruits.transactions(null), "Incorrect data");
+        parseFruits.transactions(null);
     }
 
     @Test

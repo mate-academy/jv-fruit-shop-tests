@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriteData;
 import java.io.IOException;
@@ -39,9 +38,8 @@ public class WriteDataImplTest {
         assertEquals(exceptedReport,actualReport);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeDataToFile_null_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                writeData.writeToFile(FILE_PATH,null), "File is null");
+        writeData.writeToFile(FILE_PATH,null);
     }
 }

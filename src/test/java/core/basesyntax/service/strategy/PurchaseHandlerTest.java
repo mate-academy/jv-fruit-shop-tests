@@ -1,7 +1,6 @@
 package core.basesyntax.service.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -25,13 +24,12 @@ public class PurchaseHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void purchaseOperationHandler_NotEnoughFruit_NotOk() {
         Storage.storageFruits.put("banana", 10);
         fruitTransaction.setOperation(Operation.PURCHASE);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(20);
-        assertThrows(RuntimeException.class,
-                () -> operationHandler.apply(fruitTransaction), "Not enough fruit on store");
+        operationHandler.apply(fruitTransaction);
     }
 }

@@ -14,6 +14,9 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport(HashMap<String, Integer> storage) {
+        if (storage == null) {
+            throw new RuntimeException("Empty storage");
+        }
         StringBuilder builder = new StringBuilder();
         builder.append(START).append(SYSTEM_SEPARATOR);
 

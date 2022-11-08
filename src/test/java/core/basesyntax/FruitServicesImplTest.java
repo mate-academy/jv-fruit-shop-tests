@@ -82,10 +82,4 @@ public class FruitServicesImplTest {
         Integer amountInStorage = dao.getFromStorage("pear");
         Assert.assertEquals(except, amountInStorage);
     }
-
-    @Test
-    public void dao_getAllTest_ok() {
-        HashMap<String, Integer> all = dao.getAll();
-        Assert.assertEquals(all, Storage.storage);
-    }
 }

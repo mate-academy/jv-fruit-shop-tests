@@ -14,7 +14,7 @@ public class FileWriterImplTest {
     private static final String WRONG_PATH = "java/abcd.csv";
     private static final String COMPARE_PATH = "src/test/java/resources/outputTest.csv";
     private static final String REPORT = "fruit,quantity\n" + "107,banana\n" + "100,apple\n";
-    private static final String METHOD_WRITE_PATH =
+    private static final String CORRECT_PATH =
             "src/test/java/resources/outputFromFileWriterTest";
     private static FileWriter fileWriter;
 
@@ -30,9 +30,9 @@ public class FileWriterImplTest {
 
     @Test
     public void fileWriter_correctPath_ok() throws IOException {
-        fileWriter.write(REPORT, METHOD_WRITE_PATH);
+        fileWriter.write(REPORT, COMPARE_PATH);
         List<String> expected = Files.readAllLines(Path.of(COMPARE_PATH));
-        List<String> actual = Files.readAllLines(Path.of(METHOD_WRITE_PATH));
+        List<String> actual = Files.readAllLines(Path.of(CORRECT_PATH));
         Assert.assertEquals(expected, actual);
     }
 }

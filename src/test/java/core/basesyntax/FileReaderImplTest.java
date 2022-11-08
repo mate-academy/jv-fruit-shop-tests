@@ -11,6 +11,7 @@ import org.junit.Test;
 public class FileReaderImplTest {
     private static final String WRONG_PATH = "java/abcd.csv";
     private static final String CORRECT_PATH = "src/test/java/resources/inputTest.csv";
+    private static final String EMPTY_FILE = "src/test/java/resources/emptyFile.csv";
     private static final List<String> test = Arrays.asList(
             "b,banana,20", "b,apple,100", "s,banana,100","p,banana,13");
 
@@ -30,5 +31,10 @@ public class FileReaderImplTest {
     public void fileReader_correctPath_ok() {
         List<String> readFromCorrectFile = fileReader.readFromFile(CORRECT_PATH);
         Assert.assertEquals(readFromCorrectFile, test);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fileReader_emptyFile_notOk() {
+        fileReader.readFromFile(EMPTY_FILE);
     }
 }

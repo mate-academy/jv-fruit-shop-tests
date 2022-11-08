@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private static final String CORRECT_PARSER = "[FruitTransaction{operation=BALANCE,"
+    private static final String LIST_OF_FRUIT_TRANSACTION = "[FruitTransaction{operation=BALANCE,"
             + " fruit='banana', amount=20},"
             + " FruitTransaction{operation=BALANCE, fruit='apple', amount=100},"
             + " FruitTransaction{operation=SUPPLY, fruit='banana', amount=100},"
@@ -28,11 +28,6 @@ public class TransactionParserImplTest {
     public void transactionParser_correctTest_ok() {
         List<FruitTransaction> fruitTransactions =
                 transactionParser.interfaceTransactionParser(test);
-        Assert.assertEquals(CORRECT_PARSER, fruitTransactions.toString());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void transactionParser_nullTest_notOk() {
-        transactionParser.interfaceTransactionParser(null);
+        Assert.assertEquals(LIST_OF_FRUIT_TRANSACTION, fruitTransactions.toString());
     }
 }

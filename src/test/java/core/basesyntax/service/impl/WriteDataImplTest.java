@@ -2,22 +2,29 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.ReadData;
 import core.basesyntax.service.WriteData;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class WriteDataImplTest {
 
     private static final String FILE_PATH = "src/test/resources/report.csv";
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     private String report = "fruit,quantity"
             + System.lineSeparator()
             + "banana,500"
             + System.lineSeparator()
             + "apple,18";
     private WriteData writeData = new WriteDataImpl();
+    private ReadData readData = new ReadDataImpl();
 
     @Test
     public void writeDataToFile_Ok() {
@@ -33,19 +40,24 @@ public class WriteDataImplTest {
                     .stream()
                     .collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't read file");
         }
         assertEquals(exceptedReport,actualReport);
     }
 
-    @Test()
+    @Test(expected = RuntimeException.class)
     public void writeDataToFile_null_notOk() {
-        String emptyReport = "";
-        writeData.writeToFile(emptyReport,FILE_PATH);
+        writeData.writeToFile(null,FILE_PATH);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void writeDataToFile_NullPath_notOk() {
-        writeData.writeToFile(report, null);
+        String emptyReport = "";
+        String emptyPath = "";
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("Failed to write file: " + emptyPath
+                + " to file: " + emptyPath);
+        writeData.writeToFile(emptyReport, emptyPath);
+
     }
 }

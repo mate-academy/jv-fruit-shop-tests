@@ -101,8 +101,11 @@ public class WriteToDbFromListTest {
 
     @Test
     public void writeToDb_ok() {
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("banana", 152);
+        expected.put("apple", 90);
         assertTrue(writer.writeToDB(data, strategy));
-        assertFalse(Storage.storage.isEmpty());
+        assertEquals(expected, Storage.storage);
     }
 
     @After

@@ -37,7 +37,7 @@ public class FruitDaoImplTest {
     }
 
     @Test()
-    public void getAmountCurrentFruitInShopMethodTest_Ok() {
+    public void getMethodTest_Ok() {
         int expectedAmount = 15;
         int actualAmount = fruitDao.getAmountCurrentFruitInShop(kiwi);
         assertEquals(expectedAmount, actualAmount);

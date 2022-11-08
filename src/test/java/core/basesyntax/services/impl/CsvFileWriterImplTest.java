@@ -26,8 +26,8 @@ public class CsvFileWriterImplTest {
         List<String> data = List.of("How are u doing",
                 "wass up",
                 "100%N....");
-        List<String> actualList = Files.readAllLines(Path.of("src/test/testSource/reportTest.csv"));
         csvFileWriter.createReportFile("src/test/testSource/reportTest.csv", data);
+        List<String> actualList = Files.readAllLines(Path.of("src/test/testSource/reportTest.csv"));
         assertEquals(expectedList, actualList);
     }
 }

@@ -42,7 +42,7 @@ public class OperationHandlerSupplyImplTest {
     }
 
     @Test
-    public void supplyWithoutCurrentFruitInStorage() {
+    public void supplyWithoutCurrentFruitInStorage_Ok() {
         int expectedAmount = 225;
         testStorage.getStorage().clear();
         operationHandlerSupply.apply(apple, 225);

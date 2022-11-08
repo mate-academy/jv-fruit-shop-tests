@@ -12,12 +12,11 @@ import core.basesyntax.strategy.impl.OperationHandlerBalance;
 import core.basesyntax.strategy.impl.OperationHandlerPurchase;
 import core.basesyntax.strategy.impl.OperationHandlerReturn;
 import core.basesyntax.strategy.impl.OperationHandlerSupply;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;

@@ -18,7 +18,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestTransactionsCalculatorService {
+public class TransactionsCalculatorServiceTest {
     private static TransactionsCalculatorServiceImpl transactionsCalculator;
 
     @BeforeClass

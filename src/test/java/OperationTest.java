@@ -4,7 +4,7 @@ import static org.junit.Assert.fail;
 import fruitshop.model.Operation;
 import org.junit.Test;
 
-public class TestOperation {
+public class OperationTest {
     private static final char UNEXCITING_OPERATION = 'f';
 
     @Test(expected = RuntimeException.class)

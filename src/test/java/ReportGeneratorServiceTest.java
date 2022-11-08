@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestReportGeneratorService {
+public class ReportGeneratorServiceTest {
     private static final Map<String, List<FruitReport>> GENERATOR_EXPECTED_RESULTS =
             Map.of(
                     "banana,3832\napple,10020\npineapple,-652559\npeach,0",

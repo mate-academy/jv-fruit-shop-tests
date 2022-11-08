@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestTransactionRowParser {
+public class TransactionRowParserTest {
     private static final FruitShopStorageDaoImpl DAO = new FruitShopStorageDaoImpl();
     private static final List<String> VALID_DATA_ROWS = List.of(
             "b,banana,20",

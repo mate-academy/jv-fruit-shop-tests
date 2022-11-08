@@ -24,28 +24,28 @@ public class TransactionStrategyImplTest {
     }
 
     @Test
-    public void get_BalanceHandler_isOk() {
+    public void get_balanceHandler_isOk() {
         GeneralOperation expected = new BalanceHandler();
         GeneralOperation actual = transactionStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void get_PurchaseHandler_isOk() {
+    public void get_purchaseHandler_isOk() {
         GeneralOperation expected = new PurchaseHandler();
         GeneralOperation actual = transactionStrategy.get(FruitTransaction.Operation.PURCHASE);
         assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void get_ReturnHandler_isOk() {
+    public void get_returnHandler_isOk() {
         GeneralOperation expected = new ReturnHandler();
         GeneralOperation actual = transactionStrategy.get(FruitTransaction.Operation.RETURN);
         assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
-    public void get_SupplyHandler_isOk() {
+    public void get_supplyHandler_isOk() {
         GeneralOperation expected = new SupplyHandler();
         GeneralOperation actual = transactionStrategy.get(FruitTransaction.Operation.SUPPLY);
         assertEquals(expected.getClass(), actual.getClass());

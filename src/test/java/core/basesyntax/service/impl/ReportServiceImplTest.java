@@ -39,7 +39,7 @@ public class ReportServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getReport_NullStorage_NotOk() {
+    public void getReport_nullStorage_notOk() {
         ShopStorage.fruitsStorage.clear();
         reportService.getReport();
     }

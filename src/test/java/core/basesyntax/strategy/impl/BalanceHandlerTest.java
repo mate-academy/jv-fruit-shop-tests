@@ -23,7 +23,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void generalOperation_ExistFruit_isOk() {
+    public void generalOperation_existFruit_isOk() {
         ShopStorage.fruitsStorage.put("apple", 2);
         expected.put("apple", 7);
         balanceHandler.generalOperation(fruitTransaction);
@@ -32,7 +32,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void generalOperation_NonExistFruit_isOk() {
+    public void generalOperation_nonExistFruit_isOk() {
         expected.put("apple", 5);
         balanceHandler.generalOperation(fruitTransaction);
         Map<String, Integer> actual = ShopStorage.fruitsStorage;

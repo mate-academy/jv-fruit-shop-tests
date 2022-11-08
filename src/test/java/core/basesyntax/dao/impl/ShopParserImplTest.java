@@ -32,7 +32,7 @@ public class ShopParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_NullDataFromFile_NotOk() {
+    public void parse_nullDataFromFile_notOk() {
         shopParser.parse(null);
     }
 

@@ -23,7 +23,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void generalOperation_ExistFruit_isOk() {
+    public void generalOperation_existFruit_isOk() {
         ShopStorage.fruitsStorage.put("apple", 23);
         expected.put("apple", 20);
         purchaseHandler.generalOperation(fruitTransaction);
@@ -32,13 +32,13 @@ public class PurchaseHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void generalOperation_TakeMoreFruitThanIs_NotOk() {
+    public void generalOperation_takeMoreFruitThanIs_notOk() {
         ShopStorage.fruitsStorage.put("apple", 1);
         purchaseHandler.generalOperation(fruitTransaction);
     }
 
     @Test(expected = RuntimeException.class)
-    public void generalOperation_NonExistFruit_NotOk() {
+    public void generalOperation_nonExistFruit_notOk() {
         purchaseHandler.generalOperation(fruitTransaction);
     }
 

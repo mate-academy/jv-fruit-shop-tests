@@ -44,40 +44,40 @@ public class FruitParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_Null() {
+    public void parse_null() {
         fruitParser.parse(null);
     }
 
     @Test
-    public void getEnum_BalanceOperation_isOk() {
+    public void getEnum_balanceOperation_isOk() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = FruitParserImpl.getEnum("b");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getEnum_PurchaseOperation_isOk() {
+    public void getEnum_purchaseOperation_isOk() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.PURCHASE;
         FruitTransaction.Operation actual = FruitParserImpl.getEnum("p");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getEnum_ReturnOperation_isOk() {
+    public void getEnum_returnOperation_isOk() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actual = FruitParserImpl.getEnum("r");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getEnum_SupplyOperation_isOk() {
+    public void getEnum_supplyOperation_isOk() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
         FruitTransaction.Operation actual = FruitParserImpl.getEnum("s");
         assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)
-    public void getEnum_NonExistOperation_NotOk() {
+    public void getEnum_nonExistOperation_notOk() {
         FruitParserImpl.getEnum("");
     }
 }

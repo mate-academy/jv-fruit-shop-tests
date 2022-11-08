@@ -27,17 +27,17 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeInFile_NullData_NotOk() {
+    public void writeInFile_nullData_NotOk() {
         fileWriterService.writeToFile(null, REPORT_PATH);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_InvalidPath_NotOk() {
+    public void writeToFile_invalidPath_NotOk() {
         fileWriterService.writeToFile(DATA_TO_WRITE, "");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_NullPath_NotOk() {
+    public void writeToFile_nullPath_NotOk() {
         fileWriterService.writeToFile(DATA_TO_WRITE, null);
     }
 

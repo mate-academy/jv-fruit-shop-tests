@@ -54,7 +54,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void transfer_DifferentData_isOk() {
+    public void transfer_differentData_isOk() {
         expected.put("apple", 201);
         expected.put("banana", 100);
         expected.put("kiwi", 299);
@@ -64,7 +64,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void transfer_NullData_NotOk() {
+    public void transfer_nullData_notOk() {
         fruitShopService.transfer(null);
     }
 

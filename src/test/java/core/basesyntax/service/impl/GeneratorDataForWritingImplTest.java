@@ -35,8 +35,8 @@ public class GeneratorDataForWritingImplTest {
 
     @Test
     public void generateData_fromNotEmptyDb_ok() {
-        fruitsDao.save(NAME_BANANA, QUANTITY_OF_BANANA);
-        fruitsDao.save(NAME_APPLE, QUANTITY_OF_APPLE);
+        Storage.fruitsStorage.put(NAME_BANANA, QUANTITY_OF_BANANA);
+        Storage.fruitsStorage.put(NAME_APPLE, QUANTITY_OF_APPLE);
         String actual = generatorDataForWriting.generateData();
         assertEquals(EXPECTED_STRING_FOR_WRITING, actual);
     }

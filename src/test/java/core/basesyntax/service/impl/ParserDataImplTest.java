@@ -9,12 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserDataImplTest {
-    private static final List<String> LIST_FOR_PARSE
-            = List.of("b,banana,20", "b,apple,100", "r,apple,10");
-    private static final List<FruitTransaction> EXPECTED_LIST
-            = List.of(new FruitTransaction("b", "banana", 20),
-                    new FruitTransaction("b", "apple", 100),
-                    new FruitTransaction("r", "apple", 10));
     private static ParserData parserData;
 
     @BeforeClass
@@ -30,7 +24,13 @@ public class ParserDataImplTest {
 
     @Test
     public void parse_someData_ok() {
-        List<FruitTransaction> actual = parserData.parseData(LIST_FOR_PARSE);
-        assertEquals(EXPECTED_LIST, actual);
+        List<String> listForParse
+                = List.of("b,banana,20", "b,apple,100", "r,apple,10");
+        List<FruitTransaction> expectedList
+                = List.of(new FruitTransaction("b", "banana", 20),
+                new FruitTransaction("b", "apple", 100),
+                new FruitTransaction("r", "apple", 10));
+        List<FruitTransaction> actual = parserData.parseData(listForParse);
+        assertEquals(expectedList, actual);
     }
 }

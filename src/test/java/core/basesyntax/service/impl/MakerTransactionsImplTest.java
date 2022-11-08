@@ -20,28 +20,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MakerTransactionsImplTest {
-    private static final List<FruitTransaction> FRUIT_TRANSACTION_LIST =
-            List.of(new FruitTransaction("b", "banana", 20),
-                    new FruitTransaction("b", "apple", 100),
-                    new FruitTransaction("r", "apple", 10),
-                    new FruitTransaction("s", "banana", 10),
-                    new FruitTransaction("p", "apple", 40));
     private static final String NAME_APPLE = "apple";
     private static final String NAME_BANANA = "banana";
     private static final int EXPECTED_APPLE_QUANTITY = 70;
     private static final int EXPECTED_BANANA_QUANTITY = 30;
     private static final int EXPECTED_SIZE_OF_STORAGE = 2;
     private static FruitsDao fruitsDao;
-    private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-            = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
-                    FruitTransaction.Operation.SUPPLY, new SupplierOperationHandler(),
-                    FruitTransaction.Operation.PURCHASE, new PurchaserOperationHandler(),
-                    FruitTransaction.Operation.RETURN, new ReturnerOperationHandler());
+
     private static OperationStrategy operationStrategy;
     private static MakerTransaction makerTransaction;
 
     @BeforeClass
     public static void setUp() {
+        final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+                = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplierOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaserOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnerOperationHandler());
         fruitsDao = new FruitDaoImpl();
         operationStrategy = new OperationStrategy(operationHandlerMap);
         makerTransaction = new MakerTransactionsImpl(operationStrategy, fruitsDao);
@@ -55,7 +50,13 @@ public class MakerTransactionsImplTest {
 
     @Test
     public void do_transactionFromNotEmptyList_ok() {
-        makerTransaction.doTransactions(FRUIT_TRANSACTION_LIST);
+        final List<FruitTransaction> fruitTransactions =
+                List.of(new FruitTransaction("b", "banana", 20),
+                        new FruitTransaction("b", "apple", 100),
+                        new FruitTransaction("r", "apple", 10),
+                        new FruitTransaction("s", "banana", 10),
+                        new FruitTransaction("p", "apple", 40));
+        makerTransaction.doTransactions(fruitTransactions);
         assertEquals(EXPECTED_SIZE_OF_STORAGE, Storage.fruitsStorage.size());
         assertEquals(EXPECTED_APPLE_QUANTITY, fruitsDao.get(NAME_APPLE));
         assertEquals(EXPECTED_BANANA_QUANTITY, fruitsDao.get(NAME_BANANA));

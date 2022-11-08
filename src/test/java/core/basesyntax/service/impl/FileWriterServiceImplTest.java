@@ -68,14 +68,8 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_toUnExistingOuterFile_ok() {
+    public void writeToFile_toUnExistingOuterFile_notOk() {
         writer = new FileWriterServiceImpl(Path.of("DISC:/z/x/c.csv"));
         writer.writeToFile(testData);
-        assertTrue(Files.exists(UNEXISTING_PATH));
-        try {
-            Files.delete(UNEXISTING_PATH);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete testFile!", e);
-        }
     }
 }

@@ -38,13 +38,14 @@ public class WriteDataImplTest {
         assertEquals(exceptedReport,actualReport);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test()
     public void writeDataToFile_null_notOk() {
-        writeData.writeToFile(FILE_PATH,null);
+        String emptyReport = "";
+        writeData.writeToFile(emptyReport,FILE_PATH);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeDataToFile_NullPath_notOk() {
-        writeData.writeToFile(null, report);
+        writeData.writeToFile(report, null);
     }
 }

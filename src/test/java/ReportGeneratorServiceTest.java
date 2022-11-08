@@ -39,7 +39,8 @@ public class ReportGeneratorServiceTest {
         for (Map.Entry<String, List<FruitReport>> entry : generatorExpectedResults.entrySet()) {
             String stringRow = entry.getKey();
             List<FruitReport> reportList = entry.getValue();
-            String expected = COMPILE_NEW_LINE.matcher(stringRow).replaceAll(System.lineSeparator());
+            String expected =
+                    COMPILE_NEW_LINE.matcher(stringRow).replaceAll(System.lineSeparator());
             String actual = generatorService.generate(reportList);
             assertEquals(TEST_MESSAGE, expected, actual);
         }

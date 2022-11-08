@@ -19,7 +19,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_initFruitsList_ok() {
+    public void createReport_validFruitsListWithHeadline_ok() {
         List<Fruit> initFruitsList = initFruitList();
         List<String> actualList = reportCreatorService.createReport(initFruitsList);
         List<String> expectedList = List.of("fruit,quantity", "apple,20", "banana,30", "orange,55");
@@ -28,13 +28,6 @@ public class ReportCreatorServiceTest {
                 expectedList, actualList);
         Assert.assertEquals("Incorrect size of ReportList.Size should be ",
                 expectedList.size(), actualList.size());
-    }
-
-    @Test
-    public void createReport_withoutHeadline_notOk() {
-        List<Fruit> initFruitsList = initFruitList();
-        List<String> actualList = reportCreatorService.createReport(initFruitsList);
-        List<String> expectedList = List.of("fruit,quantity", "apple,20", "banana,30", "orange,55");
         Assert.assertEquals("Your report should start with a headline: \"fruit,quantity\" ",
                 expectedList.get(0), actualList.get(0));
     }

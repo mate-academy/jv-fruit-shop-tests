@@ -44,13 +44,13 @@ public class FruitDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void getAmountNoCurrentFruitTest_NotOk() {
+    public void getAmountNoCurrentFruitTest_notOk() {
         storage.getStorage().clear();
         fruitDao.getAmountCurrentFruitInShop(kiwi);
     }
 
     @Test
-    public void updateMethodTest_Ok() {
+    public void updateMethodTest_ok() {
         int expectedAmount = 33;
         fruitDao.update(apple, expectedAmount);
         int actualAmount = fruitDao.getAmountCurrentFruitInShop(apple);

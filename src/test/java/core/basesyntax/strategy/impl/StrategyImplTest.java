@@ -18,7 +18,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void addStrategyTypeMethod_Ok() {
+    public void addStrategyTypeMethod_ok() {
         testStrategy.addStrategyType("b", balance);
         assertEquals(testStrategy.getStrategyType("b"), balance);
     }

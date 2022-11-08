@@ -30,14 +30,14 @@ public class ConverterMapToListImplTest {
     }
 
     @Test
-    public void convertMethodTest_Ok() {
+    public void convertMethodTest_ok() {
         List<String> expectedList = List.of("apple,10", "kiwi,10");
         List<String> actualList = converterMapToList.convert(testStorage);
         assertEquals(expectedList, actualList);
     }
 
     @Test
-    public void convertWithEmpty_Ok() {
+    public void convertWithEmpty_ok() {
         List<String> expectedList = Collections.EMPTY_LIST;
         Map<Fruit, Integer> testStorage = Collections.EMPTY_MAP;
         List<String> actualList = converterMapToList.convert(testStorage);

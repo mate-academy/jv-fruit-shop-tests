@@ -19,7 +19,7 @@ public class CsvFileWriterImplTest {
     }
 
     @Test
-    public void createReportFileMethodTest_Ok() throws IOException {
+    public void createReportFileMethodTest_ok() throws IOException {
         List<String> expectedList = List.of("fruit,quantity",
                 "How are u doing",
                 "wass up","100%N....");

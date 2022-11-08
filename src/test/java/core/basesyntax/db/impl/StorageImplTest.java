@@ -32,12 +32,12 @@ public class StorageImplTest {
     }
 
     @Test
-    public void getStorageMethodTest_Ok() {
+    public void getStorageMethodTest_ok() {
         assertEquals(testMap, testStorage.getStorage());
     }
 
     @Test
-    public void getStorageAsListMethodTest_Ok() {
+    public void getStorageAsListMethodTest_ok() {
         List<String> expectedList = List.of("apple,33", "kiwi,66");
         List<String> storageAsList = testStorage.getStorageAsList();
         assertEquals(expectedList, storageAsList);

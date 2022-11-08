@@ -30,7 +30,7 @@ public class OperationHandlerSupplyImplTest {
     }
 
     @Test
-    public void supplyMethod_Ok() {
+    public void supplyMethod_ok() {
         Map<Fruit, Integer> expectedMap = Map.of(apple, 235);
         operationHandlerSupply.apply(apple, 225);
         assertEquals(expectedMap, testStorage.getStorage());
@@ -42,7 +42,7 @@ public class OperationHandlerSupplyImplTest {
     }
 
     @Test
-    public void supplyWithoutCurrentFruitInStorage_Ok() {
+    public void supplyWithoutCurrentFruitInStorage_ok() {
         int expectedAmount = 225;
         testStorage.getStorage().clear();
         operationHandlerSupply.apply(apple, 225);

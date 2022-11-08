@@ -16,7 +16,7 @@ public class CsvFileReaderImplTest {
     }
 
     @Test
-    public void getAcceptedFileAsListMethodTest_Ok() {
+    public void getAcceptedFileAsListMethodTest_ok() {
         List<String> expectedList = List.of("How are u doing",
                 "wass up", "100%N....");
         List<String> actualList = csvFileReader

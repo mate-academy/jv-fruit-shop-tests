@@ -33,7 +33,7 @@ public class OperationHandlerPurchaseImplTest {
     }
 
     @Test
-    public void purchaseMethodTest_Ok() {
+    public void purchaseMethodTest_ok() {
         Map<Fruit, Integer> expectedMap = Map.of(apple, 5, kiwi, 15);
         operationHandlerPurchase.apply(apple, 5);
         assertEquals(expectedMap, testStorage.getStorage());

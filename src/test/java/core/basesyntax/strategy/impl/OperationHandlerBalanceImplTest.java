@@ -32,7 +32,7 @@ public class OperationHandlerBalanceImplTest {
     }
 
     @Test
-    public void createBalanceMethodTest_Ok() {
+    public void createBalanceMethodTest_ok() {
         Map<Fruit, Integer> expectedMap = Map.of(apple, 10, kiwi, 15);
         operationHandlerBalance.apply(apple, 10);
         operationHandlerBalance.apply(kiwi, 15);

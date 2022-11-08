@@ -40,7 +40,7 @@ public class TransactionProcessorImplTest {
     }
 
     @Test
-    public void processingDataMethodTest_Ok() {
+    public void processingDataMethodTest_ok() {
         transactionProcessor.processingData(data, testStrategy);
         List<String> expectedList = List.of("banana,20", "apple,100");
         expectedList = expectedList.stream().sorted().collect(Collectors.toList());

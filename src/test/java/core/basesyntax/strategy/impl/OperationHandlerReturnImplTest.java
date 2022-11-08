@@ -30,7 +30,7 @@ public class OperationHandlerReturnImplTest {
     }
 
     @Test
-    public void returnMethod_Ok() {
+    public void returnMethod_ok() {
         Map<Fruit, Integer> expectedMap = Map.of(apple, 25);
         operationHandlerReturn.apply(apple, 15);
         assertEquals(expectedMap, testStorage.getStorage());

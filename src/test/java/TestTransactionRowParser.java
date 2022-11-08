@@ -8,12 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestTransactionRowParser {
     private static final FruitShopStorageDaoImpl DAO = new FruitShopStorageDaoImpl();
-    private static final TransactionRowParserImpl TRANSACTION_ROW_PARSER =
-            new TransactionRowParserImpl(DAO);
     private static final List<String> VALID_DATA_ROWS = List.of(
             "b,banana,20",
             "b,apple,100",
@@ -30,7 +29,13 @@ public class TestTransactionRowParser {
     private static final int INDEX_TO_PUT_IN_LIST_START = 0;
     private static final int INDEX_TO_PUT_IN_LIST_AFTER_BALANCE = 3;
     private static final String TEST_FRUIT_AND_COUNT_UNFINISHED_ROW = "apple,32";
+    private static TransactionRowParserImpl transactionRowParser;
     private List<String> currentDataRows;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        transactionRowParser = new TransactionRowParserImpl(DAO);
+    }
 
     @Before
     public void setUp() {
@@ -41,14 +46,14 @@ public class TestTransactionRowParser {
     @Test(expected = RuntimeException.class)
     public void parse_incorrectColumnSizeInList_emptyRow_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_FIRST, "");
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
     public void parse_incorrectColumnSizeInList_less_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_SECOND,
                 TEST_FRUIT_AND_COUNT_UNFINISHED_ROW);
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
@@ -56,7 +61,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "p," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW + ",extra-column"
         );
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
@@ -64,7 +69,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "purchase," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
@@ -72,7 +77,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
@@ -80,7 +85,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_START,
                 "s," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
@@ -89,13 +94,13 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
         currentDataRows.add(index,
                 "b," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
-        TRANSACTION_ROW_PARSER.parse(currentDataRows);
+        transactionRowParser.parse(currentDataRows);
     }
 
     @Test()
     public void parse_everythingOk_toBeOk() {
         try {
-            TRANSACTION_ROW_PARSER.parse(currentDataRows);
+            transactionRowParser.parse(currentDataRows);
         } catch (Exception e) {
             fail("Expected to be ok, but got " + e
                     + '\n' + getStackTraceString(e));

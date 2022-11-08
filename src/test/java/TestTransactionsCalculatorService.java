@@ -6,6 +6,7 @@ import fruitshop.model.FruitReport;
 import fruitshop.model.FruitTransaction;
 import fruitshop.model.Operation;
 import fruitshop.service.impl.TransactionsCalculatorServiceImpl;
+import fruitshop.strategy.operation.OperationHandler;
 import fruitshop.strategy.operation.handlers.impl.BalanceOperation;
 import fruitshop.strategy.operation.handlers.impl.PurchaseOperation;
 import fruitshop.strategy.operation.handlers.impl.ReturnOperation;
@@ -14,19 +15,25 @@ import fruitshop.strategy.operation.impl.OperationStrategyImpl;
 import java.util.List;
 import java.util.Map;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestTransactionsCalculatorService {
-    private static final TransactionsCalculatorServiceImpl transactionsCalculator =
-            new TransactionsCalculatorServiceImpl(
-                    new OperationStrategyImpl(
-                            Map.of(
-                                    Operation.BALANCE, new BalanceOperation(),
-                                    Operation.PURCHASE, new PurchaseOperation(),
-                                    Operation.RETURN, new ReturnOperation(),
-                                    Operation.SUPPLY, new SupplyOperation()
-                            )),
-                    new FruitShopStorageDaoImpl());
+    private static TransactionsCalculatorServiceImpl transactionsCalculator;
+
+    @BeforeClass
+    public static void beforeClass() {
+        Map<Operation, OperationHandler> handlers = Map.of(
+                Operation.BALANCE, new BalanceOperation(),
+                Operation.PURCHASE, new PurchaseOperation(),
+                Operation.RETURN, new ReturnOperation(),
+                Operation.SUPPLY, new SupplyOperation()
+        );
+        transactionsCalculator = new TransactionsCalculatorServiceImpl(
+                new OperationStrategyImpl(handlers),
+                new FruitShopStorageDaoImpl()
+        );
+    }
 
     @Before
     public void setUp() {

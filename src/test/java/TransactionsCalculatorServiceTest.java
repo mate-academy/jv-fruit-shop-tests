@@ -70,4 +70,3 @@ public class TransactionsCalculatorServiceTest {
         FruitShopStorage.fruitTransactions.clear();
     }
 }
-

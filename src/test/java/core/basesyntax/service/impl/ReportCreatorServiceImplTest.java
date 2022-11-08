@@ -5,11 +5,17 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreatorService;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorServiceImplTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+    private static ReportCreatorService reportCreatorService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        reportCreatorService = new ReportCreatorServiceImpl();
+    }
 
     @Test
     public void createReport_validReport_ok() {

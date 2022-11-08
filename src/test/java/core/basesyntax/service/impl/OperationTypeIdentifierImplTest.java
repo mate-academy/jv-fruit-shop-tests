@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 public class OperationTypeIdentifierImplTest {
-    private static OperationTypeIdentifier operationTypeIdentifier =
-            new OperationTypeIdentifierImpl();
+    private static OperationTypeIdentifier operationTypeIdentifier;
 
     @Test
     public void identifyOperationType_validOperationType_ok() {
+        operationTypeIdentifier = new OperationTypeIdentifierImpl();
         List<String> inputOperations = new ArrayList<>();
         inputOperations.add("b");
         inputOperations.add("s");

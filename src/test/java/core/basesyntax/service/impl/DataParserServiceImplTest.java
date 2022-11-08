@@ -12,11 +12,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataParserServiceImplTest {
-    private static DataParserService dataParserService = new DataParserServiceImpl();
-    private static List<FruitTransaction> expectedList = new ArrayList<>();
+    private static DataParserService dataParserService;
+    private static List<FruitTransaction> expectedList;
 
     @BeforeClass
     public static void beforeClass() {
+        dataParserService = new DataParserServiceImpl();
+        expectedList = new ArrayList<>();
         expectedList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 15));
         expectedList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10));
         expectedList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 40));

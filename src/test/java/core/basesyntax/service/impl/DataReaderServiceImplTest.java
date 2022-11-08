@@ -13,11 +13,13 @@ public class DataReaderServiceImplTest {
     private static final String INPUT_PATH = "src/test/resources/inputForTests.csv";
     private static final String INVALID_INPUT_PATH = "src/test/resources/input";
     private static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.csv";
-    private static DataReaderService dataReaderService = new DataReaderServiceImpl();
-    private static List<String> expectedList = new ArrayList<>();
+    private static DataReaderService dataReaderService;
+    private static List<String> expectedList;
 
     @BeforeClass
     public static void beforeClass() {
+        dataReaderService = new DataReaderServiceImpl();
+        expectedList = new ArrayList<>();
         expectedList.add("type,fruit,quantity");
         expectedList.add("b,banana,20");
         expectedList.add("b,apple,100");

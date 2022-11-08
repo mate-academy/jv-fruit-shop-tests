@@ -24,6 +24,7 @@ import org.junit.Test;
 public class FruitServiceImplTest {
     private static FruitService fruitService;
     private static OperationStrategy operationStrategy;
+    private static int exspectedValue;
 
     @BeforeClass
     public static void beforeClass() {
@@ -41,18 +42,54 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void processFruitTransactions_validList_ok() {
+    public void processFruitTransactionsBalance_validList_ok() {
         Map<String, Integer> expectedStorage = new HashMap<>();
         expectedStorage.put("apple", 200);
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 165));
+                "apple", 200));
+        fruitService.processFruitTransactionsList(fruitTransactionList);
+        Map<String, Integer> actualStorage = Storage.fruits;
+        assertEquals(expectedStorage, actualStorage);
+    }
+
+    @Test
+    public void processFruitTransactionsPurchase_validList_ok() {
+        Map<String, Integer> expectedStorage = new HashMap<>();
+        expectedStorage.put("apple", 125);
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "apple", 200));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "apple", 75));
+        fruitService.processFruitTransactionsList(fruitTransactionList);
+        Map<String, Integer> actualStorage = Storage.fruits;
+        assertEquals(expectedStorage, actualStorage);
+    }
+
+    @Test
+    public void processFruitTransactionsReturn_validList_ok() {
+        Map<String, Integer> expectedStorage = new HashMap<>();
+        expectedStorage.put("apple", 275);
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "apple", 200));
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "apple", 80));
-        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 30));
+                "apple", 75));
+        fruitService.processFruitTransactionsList(fruitTransactionList);
+        Map<String, Integer> actualStorage = Storage.fruits;
+        assertEquals(expectedStorage, actualStorage);
+    }
+
+    @Test
+    public void processFruitTransactionsSupply_validList_ok() {
+        Map<String, Integer> expectedStorage = new HashMap<>();
+        expectedStorage.put("apple", 300);
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "apple", 200));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "apple", 100));
         fruitService.processFruitTransactionsList(fruitTransactionList);
         Map<String, Integer> actualStorage = Storage.fruits;
         assertEquals(expectedStorage, actualStorage);

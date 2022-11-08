@@ -68,7 +68,7 @@ public void parse_incorrectColumnSizeInListExtraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_incorrectOperationLength_bigger_notOk() {
+    public void parse_incorrectOperationLengthBigger_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "purchase," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );

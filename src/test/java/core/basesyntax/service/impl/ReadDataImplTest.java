@@ -6,7 +6,7 @@ import core.basesyntax.service.ReadData;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ReadDataImplTest {
     private static final String INPUT = "src/test/resources/fruitInfo.csv";

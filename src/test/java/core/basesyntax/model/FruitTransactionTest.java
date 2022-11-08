@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction.Operation;
 import org.junit.Before;
@@ -28,13 +29,13 @@ public class FruitTransactionTest {
         assertEquals(SUPPLY, Operation.getOperation("s"));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void incorrectOInputData_NotOk() {
-        assertEquals(Operation.BALANCE, Operation.getOperation("c"));
+        assertThrows(RuntimeException.class, () -> Operation.getOperation("t"));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void incorrectInputData_NNull_NotOk() {
-        assertEquals(Operation.BALANCE,Operation.getOperation(null));
+        assertThrows(RuntimeException.class, () -> Operation.getOperation(null));
     }
 }

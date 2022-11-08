@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriteData;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class WriteDataImplTest {
 
@@ -38,13 +39,15 @@ public class WriteDataImplTest {
         assertEquals(exceptedReport,actualReport);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void writeDataToFile_null_notOk() {
-        writeData.writeToFile(null,FILE_PATH);
+        assertThrows(RuntimeException.class, () ->
+                writeData.writeToFile(FILE_PATH,null), "File is null");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void writeDataToFile_EmptyPath_notOk() {
-        writeData.writeToFile(null,"");
+        assertThrows(RuntimeException.class, () ->
+                writeData.writeToFile("",report), "Path can't be null");
     }
 }

@@ -25,8 +25,6 @@ import org.junit.Test;
 
 public class TransitionServiceImplTest {
     private static List<FruitTransition> transitionData;
-    private static Map<String, OperationHandler> dataOperation;
-    private static OperationHandlerStrategy strategy;
     private static TransitionService transitionService;
     private static Fruit banana;
 
@@ -36,10 +34,10 @@ public class TransitionServiceImplTest {
         transitionData = new ArrayList<>();
         transitionData.add(new FruitTransition("b", banana, 100));
         transitionData.add(new FruitTransition("s", banana, 100));
-        dataOperation = new HashMap<>();
+        Map<String, OperationHandler> dataOperation = new HashMap<>();
         dataOperation.put(BALANCE.getOperation(), new BalanceHandlerImpl());
         dataOperation.put(SUPPLY.getOperation(), new SupplyHandlerImpl());
-        strategy = new OperationHandlerStrategyImpl(dataOperation);
+        OperationHandlerStrategy strategy = new OperationHandlerStrategyImpl(dataOperation);
         transitionService = new TransitionServiceImpl(strategy);
     }
 

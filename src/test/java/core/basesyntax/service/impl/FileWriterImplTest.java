@@ -49,7 +49,7 @@ public class FileWriterImplTest {
                 stringBuilder.append(str).append(ENTER);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Cannot read data from file");
         }
         return stringBuilder.toString();
     }

@@ -1,13 +1,15 @@
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import fruitshop.dao.FruitShopStorageDaoImpl;
 import fruitshop.db.FruitShopStorage;
+import fruitshop.model.FruitTransaction;
+import fruitshop.model.Operation;
 import fruitshop.service.impl.TransactionRowParserImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -102,6 +104,24 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
     public void parse_everythingOk_toBeOk() {
         try {
             transactionRowParser.parse(currentDataRows);
+            List<FruitTransaction> expected = List.of(
+                    new FruitTransaction(Operation.getByValue('b'), "banana", 20),
+                    new FruitTransaction(Operation.getByValue('b'), "apple", 100),
+                    new FruitTransaction(Operation.getByValue('s'), "banana", 100),
+                    new FruitTransaction(Operation.getByValue('p'), "banana", 13),
+                    new FruitTransaction(Operation.getByValue('r'), "apple", 10),
+                    new FruitTransaction(Operation.getByValue('p'), "apple", 20),
+                    new FruitTransaction(Operation.getByValue('p'), "banana", 5),
+                    new FruitTransaction(Operation.getByValue('s'), "banana", 50)
+            );
+            assertEquals("Expected sizes to be equal to size of incoming list of rows",
+                    currentDataRows.size(), FruitShopStorage.fruitTransactions.size()
+            );
+            assertEquals("Expected to add in right order and valid elements of FruitsTransactions"
+                            + " to fruit storage",
+                    expected,
+                    FruitShopStorage.fruitTransactions
+            );
         } catch (Exception e) {
             fail("Expected to be ok, but got " + e
                     + '\n' + getStackTraceString(e));

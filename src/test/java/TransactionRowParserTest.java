@@ -47,20 +47,20 @@ public class TransactionRowParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_incorrectColumnSizeInList_emptyRow_notOk() {
+    public void parse_incorrectColumnSizeInListEmptyRow_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_FIRST, "");
         transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_incorrectColumnSizeInList_less_notOk() {
+    public void parse_incorrectColumnSizeInListLess_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_SECOND,
                 TEST_FRUIT_AND_COUNT_UNFINISHED_ROW);
         transactionRowParser.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
-public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
+public void parse_incorrectColumnSizeInListExtraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "p," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW + ",extra-column"
         );
@@ -76,7 +76,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_incorrectOperationLength_empty_notOk() {
+    public void parse_incorrectOperationLengthEmpty_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
@@ -84,7 +84,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_wrongOperationOrder_firstOperationIsNotBalance_notOk() {
+    public void parse_wrongOperationOrderFirstOperationIsNotBalance_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_START,
                 "s," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
@@ -92,7 +92,7 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_wrongOperationOrder_balanceInMiddleAfterAlreadyBalanced_notOk() {
+    public void parse_wrongOperationOrderBalanceInMiddleAfterAlreadyBalanced_notOk() {
         int index = INDEX_TO_PUT_IN_LIST_AFTER_BALANCE + INDEX_TO_PUT_IN_LIST_MIDDLE_FIRST;
         currentDataRows.add(index,
                 "b," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW

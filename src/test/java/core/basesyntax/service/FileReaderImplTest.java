@@ -21,12 +21,12 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_WrongPath_notOk() {
+    public void readFile_wrongPath_notOk() {
         fileReader.readFromFile(WRONG_FILE_PATH);
     }
 
     @Test
-    public void readFile_FileExist_ok() throws IOException {
+    public void readFile_fileExist_ok() throws IOException {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -37,16 +37,7 @@ public class FileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        String fileData = "type,fruit,quantity" + System.lineSeparator()
-                + "b,banana,20" + System.lineSeparator()
-                + "b,apple,100" + System.lineSeparator()
-                + "s,banana,100" + System.lineSeparator()
-                + "p,banana,13" + System.lineSeparator()
-                + "r,apple,10" + System.lineSeparator()
-                + "p,apple,20" + System.lineSeparator()
-                + "p,banana,5" + System.lineSeparator()
-                + "s,banana,50";
-        Files.writeString(Path.of(FILE_EXIST), fileData);
+        Files.write(Path.of(FILE_EXIST), expected);
         List<String> actual = fileReader.readFromFile(FILE_EXIST);
         Assert.assertEquals(expected, actual);
     }

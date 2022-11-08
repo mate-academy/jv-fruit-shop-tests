@@ -61,9 +61,4 @@ public class TransitionParserImplTest {
         List<FruitTransition> actual = transitionParser.parseTransition(data);
         assertEquals(expected.toString(), actual.toString());
     }
-
-    @Test(expected = RuntimeException.class)
-    public void parseTransition_null_notOk() {
-        transitionParser.parseTransition(null);
-    }
 }

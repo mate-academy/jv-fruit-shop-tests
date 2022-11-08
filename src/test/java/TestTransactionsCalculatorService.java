@@ -34,7 +34,7 @@ public class TestTransactionsCalculatorService {
     }
 
     @Test
-    public void calculate_Basic_isOk() {
+    public void calculate_basic_isOk() {
         FruitShopStorage.fruitTransactions.addAll(List.of(
                 new FruitTransaction(Operation.getByValue('b'), "banana", 20),
                 new FruitTransaction(Operation.getByValue('b'), "apple", 100),
@@ -55,7 +55,7 @@ public class TestTransactionsCalculatorService {
     }
 
     @Test
-    public void calculate_LongerReport_NegativeAndEmptyAmountInReport_isOk() {
+    public void calculate_longerReport_negativeAndEmptyAmountInReport_isOk() {
         FruitShopStorage.fruitTransactions.addAll(List.of(
                 new FruitTransaction(Operation.getByValue('b'), "banana", 3682),
                 new FruitTransaction(Operation.getByValue('b'), "apple", 100),

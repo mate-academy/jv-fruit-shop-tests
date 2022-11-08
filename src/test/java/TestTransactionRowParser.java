@@ -39,20 +39,20 @@ public class TestTransactionRowParser {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_IncorrectColumnSizeInList_EmptyRow_notOk() {
+    public void parse_incorrectColumnSizeInList_emptyRow_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_FIRST, "");
         TRANSACTION_ROW_PARSER.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_IncorrectColumnSizeInList_Less_notOk() {
+    public void parse_incorrectColumnSizeInList_less_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_SECOND,
                 TEST_FRUIT_AND_COUNT_UNFINISHED_ROW);
         TRANSACTION_ROW_PARSER.parse(currentDataRows);
     }
 
     @Test(expected = RuntimeException.class)
-public void parse_IncorrectColumnSizeInList_ExtraColumn_notOk() {
+public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "p," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW + ",extra-column"
         );
@@ -60,7 +60,7 @@ public void parse_IncorrectColumnSizeInList_ExtraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_IncorrectOperationLength_Bigger_notOk() {
+    public void parse_incorrectOperationLength_bigger_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "purchase," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
@@ -68,7 +68,7 @@ public void parse_IncorrectColumnSizeInList_ExtraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_IncorrectOperationLength_Empty_notOk() {
+    public void parse_incorrectOperationLength_empty_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
@@ -76,7 +76,7 @@ public void parse_IncorrectColumnSizeInList_ExtraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_WrongOperationOrder_FirstOperationIsNotBalance_notOk() {
+    public void parse_wrongOperationOrder_firstOperationIsNotBalance_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_START,
                 "s," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW
         );
@@ -84,7 +84,7 @@ public void parse_IncorrectColumnSizeInList_ExtraColumn_notOk() {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_WrongOperationOrder_BalanceInMiddleAfterAlreadyBalanced_notOk() {
+    public void parse_wrongOperationOrder_balanceInMiddleAfterAlreadyBalanced_notOk() {
         int index = INDEX_TO_PUT_IN_LIST_AFTER_BALANCE + INDEX_TO_PUT_IN_LIST_MIDDLE_FIRST;
         currentDataRows.add(index,
                 "b," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW

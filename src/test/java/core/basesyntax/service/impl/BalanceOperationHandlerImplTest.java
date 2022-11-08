@@ -6,10 +6,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationHandler;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -17,25 +14,23 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerImplTest {
     private static final String KEY_APPLE = "apple";
+    private static BalanceOperationHandlerImpl balanceOperationHandler;
 
     @BeforeClass
     public static void beforeClass() {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandlerImpl(fruitDao));
+        fruitDao.put(KEY_APPLE,10);
+        balanceOperationHandler = new BalanceOperationHandlerImpl(fruitDao);
     }
 
     @Test
     public void operationWithFruitTransaction_isOk() {
-        FruitDao fruitDao = new FruitDaoImpl();
-        List<FruitTransaction> list = new ArrayList<>();
-        list.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,KEY_APPLE,10));
-        BalanceOperationHandlerImpl balanceOperationHandler =
-                new BalanceOperationHandlerImpl(fruitDao);
-        balanceOperationHandler.operationWithFruitTransaction(list.get(0));
-        Integer expected = 10;
-        assertEquals(expected, FruitStorage.storage.get(KEY_APPLE));
+        Map<String,Integer> expectedMap = new HashMap<>();
+        expectedMap.put(KEY_APPLE,20);
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,KEY_APPLE,10);
+        balanceOperationHandler.operationWithFruitTransaction(fruitTransaction);
+        assertEquals(expectedMap, FruitStorage.storage);
     }
 
     @After

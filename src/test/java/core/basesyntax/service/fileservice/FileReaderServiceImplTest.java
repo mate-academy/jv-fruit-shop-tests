@@ -11,7 +11,6 @@ public class FileReaderServiceImplTest {
     private static FileReaderService fileReader;
     private static String validFilePath;
     private static String invalidFilePath;
-    private static List<String> expectedList;
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,7 +21,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFile_isOk() {
-        expectedList = new ArrayList<>();
+        List<String> expectedList = new ArrayList<>();
         expectedList.add("type,fruit,quantity");
         expectedList.add("b,banana,20");
         expectedList.add("b,apple,100");

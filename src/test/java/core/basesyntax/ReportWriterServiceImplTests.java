@@ -22,8 +22,8 @@ public class ReportWriterServiceImplTests {
 
     @Test(expected = RuntimeException.class)
     public void writeReport_nonExistentFolder_notOk() {
-        String expected = "report";
-        reportWriter.writeReport(expected, NON_EXISTENT_FOLDER);
+        String report = "report";
+        reportWriter.writeReport(report, NON_EXISTENT_FOLDER);
     }
 
     @Test

@@ -29,7 +29,7 @@ public class ReaderServiceImplTests {
     }
 
     @Test
-    public void read_emptyFile_notOk() {
+    public void read_emptyFile_ok() {
         List<String> actual = dataReader.read(EMPTY_FILE_PATH);
         assertEquals(expected, actual);
     }

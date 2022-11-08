@@ -7,6 +7,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -23,11 +24,10 @@ public class FruitTransactionParserImplTests {
     }
 
     @Test
-    public void parseFruitTransaction_emptyData_notOk() {
+    public void parseFruitTransaction_emptyData_ok() {
         testData.add("type,fruit,quantity");
-        List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> actual = transactionParser.parseFruitTransaction(testData);
-        assertEquals(expected, actual);
+        assertEquals(Collections.emptyList(), actual);
     }
 
     @Test

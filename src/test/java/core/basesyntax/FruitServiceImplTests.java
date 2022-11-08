@@ -17,6 +17,7 @@ import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,14 +50,12 @@ public class FruitServiceImplTests {
 
     @Test
     public void processData_emptyFruitTransaction_ok() {
-        fruitService.processData(fruitTransactions);
-        Map<Fruit, Integer> expected = new HashMap<>();
-        Map<Fruit, Integer> actual = Storage.fruits;
-        assertEquals(expected, actual);
+        fruitService.processData(Collections.emptyList());
+        assertEquals(Collections.emptyMap(), Storage.fruits);
     }
 
     @Test
-    public void processData_oneFruitTransactionSupply_ok() {
+    public void processData_fruitTransactionSupply_ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"), 20));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -73,7 +72,7 @@ public class FruitServiceImplTests {
     }
 
     @Test
-    public void processData_oneFruitTransactionPurchase_ok() {
+    public void processData_fruitTransactionPurchase_ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"), 20));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -90,7 +89,7 @@ public class FruitServiceImplTests {
     }
 
     @Test
-    public void processData_oneFruitTransactionReturn_ok() {
+    public void processData_fruitTransactionReturn_ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 new Fruit("banana"), 20));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -121,8 +120,7 @@ public class FruitServiceImplTests {
 
         fruitService.processData(fruitTransactions);
         Map<Fruit, Integer> expected = Map.of(new Fruit("banana"), 115, new Fruit("apple"), 110);
-        Map<Fruit, Integer> actual = Storage.fruits;
-        assertEquals(expected, actual);
+        assertEquals(expected, Storage.fruits);
     }
 
     @After

@@ -9,7 +9,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -20,10 +19,6 @@ public class ReportGeneratorImplTests {
     @BeforeClass
     public static void beforeClass() {
         reportGenerator = new ReportGeneratorImpl();
-    }
-
-    @Before
-    public void setUp() {
         fruitDao = new FruitDaoImpl();
     }
 
@@ -39,7 +34,7 @@ public class ReportGeneratorImplTests {
     }
 
     @Test
-    public void generateReport_emptyStorage_notOk() {
+    public void generateReport_emptyStorage_ok() {
         String expected = "fruit,quantity";
         String actual = reportGenerator.generateReport(fruitDao);
         assertEquals(expected, actual);

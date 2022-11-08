@@ -60,7 +60,7 @@ public class TransactionRowParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-public void parse_incorrectColumnSizeInListExtraColumn_notOk() {
+    public void parse_incorrectColumnSizeInListExtraColumn_notOk() {
         currentDataRows.add(INDEX_TO_PUT_IN_LIST_MIDDLE_THIRD,
                 "p," + TEST_FRUIT_AND_COUNT_UNFINISHED_ROW + ",extra-column"
         );

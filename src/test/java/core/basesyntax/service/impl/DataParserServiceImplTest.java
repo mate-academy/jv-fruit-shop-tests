@@ -30,7 +30,6 @@ public class DataParserServiceImplTest {
         passedList.add("b,banana,10");
         passedList.add("b,apple,40");
         List<FruitTransaction> actual = dataParserService.parseFruits(passedList);
-        System.out.println(expectedList);
         assertEquals(expectedList, actual);
     }
 

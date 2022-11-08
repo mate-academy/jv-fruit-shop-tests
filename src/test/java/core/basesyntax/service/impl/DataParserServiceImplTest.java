@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
@@ -38,6 +37,6 @@ public class DataParserServiceImplTest {
     @Test
     public void parseFruits_emptyList_ok() {
         List<FruitTransaction> actual = dataParserService.parseFruits(Collections.emptyList());
-        assertNotEquals(expectedList, actual);
+        assertEquals(Collections.emptyList(), actual);
     }
 }

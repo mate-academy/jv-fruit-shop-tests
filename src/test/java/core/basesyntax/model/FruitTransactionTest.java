@@ -3,8 +3,8 @@ package core.basesyntax.model;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction.Operation;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 public class FruitTransactionTest {
     private static FruitTransaction.Operation BALANCE;

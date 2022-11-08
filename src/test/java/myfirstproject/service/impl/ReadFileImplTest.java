@@ -12,10 +12,11 @@ public class ReadFileImplTest {
     private static final String PATH_TO_NEW_FILE = "src/test/resources/sourceFile.csv";
     private static final String FILE_NOT_EXIST = "wrong/file.csv";
     private static ReadFile fileReaderTest;
-    private static final List<String[]> temporalList = new ArrayList<>();
+    private static List<String[]> temporalList;
 
     @BeforeClass
     public static void before() {
+        temporalList = new ArrayList<>();
         fileReaderTest = new ReadFileImpl();
     }
 

@@ -23,15 +23,16 @@ public class ReturnOperationHandlerImplTest {
         FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.RETURN,new ReturnOperationHandlerImpl(fruitDao));
+    }
+
+    @Test
+    public void operationWithFruitTransaction_isOk() {
+        FruitDao fruitDao = new FruitDaoImpl();
         List<FruitTransaction> list = new ArrayList<>();
         list.add(new FruitTransaction(FruitTransaction.Operation.RETURN,KEY_APPLE,10));
         ReturnOperationHandlerImpl returnOperationHandler =
                 new ReturnOperationHandlerImpl(fruitDao);
         returnOperationHandler.operationWithFruitTransaction(list.get(0));
-    }
-
-    @Test
-    public void operationWithFruitTransaction_isOk() {
         Integer expected = 10;
         assertEquals(expected, FruitStorage.storage.get(KEY_APPLE));
     }

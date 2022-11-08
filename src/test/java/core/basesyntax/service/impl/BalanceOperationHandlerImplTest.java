@@ -24,15 +24,16 @@ public class BalanceOperationHandlerImplTest {
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandlerImpl(fruitDao));
+    }
+
+    @Test
+    public void operationWithFruitTransaction_isOk() {
+        FruitDao fruitDao = new FruitDaoImpl();
         List<FruitTransaction> list = new ArrayList<>();
         list.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,KEY_APPLE,10));
         BalanceOperationHandlerImpl balanceOperationHandler =
                 new BalanceOperationHandlerImpl(fruitDao);
         balanceOperationHandler.operationWithFruitTransaction(list.get(0));
-    }
-
-    @Test
-    public void operationWithFruitTransaction_isOk() {
         Integer expected = 10;
         assertEquals(expected, FruitStorage.storage.get(KEY_APPLE));
     }

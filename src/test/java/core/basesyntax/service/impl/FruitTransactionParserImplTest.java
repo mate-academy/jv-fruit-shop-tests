@@ -22,15 +22,15 @@ public class FruitTransactionParserImplTest {
 
     @Test
     public void parseData_isOk() {
-        List<String> expected = List.of("type,fruit,quantity", "b,banana,200", "s,apple,100",
+        List<String> inputData = List.of("type,fruit,quantity", "b,banana,200", "s,apple,100",
                 "p,banana,100", "r,apple,0");
-        List<FruitTransaction> actualFruitTransactions = new ArrayList<>(List.of(
+        List<FruitTransaction> expected = new ArrayList<>(List.of(
                         new FruitTransaction(BALANCE, KEY_BANANA,200),
                         new FruitTransaction(SUPPLY, KEY_APPLE,100),
                         new FruitTransaction(PURCHASE, KEY_BANANA,100),
                         new FruitTransaction(RETURN, KEY_APPLE,0)));
-        assertEquals(fruitTransactionParser.parseData(expected),
-                actualFruitTransactions);
+        List<FruitTransaction> actual = fruitTransactionParser.parseData(inputData);
+        assertEquals(expected,actual);
     }
 
     @After

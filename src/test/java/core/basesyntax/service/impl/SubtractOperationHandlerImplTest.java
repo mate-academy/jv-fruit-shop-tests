@@ -25,6 +25,11 @@ public class SubtractOperationHandlerImplTest {
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new AddOperationHandlerImpl(fruitDao));
         handlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new SubtractOperationHandlerImpl(fruitDao));
+    }
+
+    @Test
+    public void operationWithFruitTransaction_isOk() {
+        FruitDao fruitDao = new FruitDaoImpl();
         List<FruitTransaction> list = new ArrayList<>();
         list.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,KEY_APPLE,10));
         list.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,KEY_APPLE,10));
@@ -33,10 +38,6 @@ public class SubtractOperationHandlerImplTest {
         SubtractOperationHandlerImpl subtractOperationHandler =
                 new SubtractOperationHandlerImpl(fruitDao);
         subtractOperationHandler.operationWithFruitTransaction(list.get(1));
-    }
-
-    @Test
-    public void operationWithFruitTransaction_isOk() {
         Integer expected = 0;
         assertEquals(expected, FruitStorage.storage.get(KEY_APPLE));
     }

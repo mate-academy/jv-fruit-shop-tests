@@ -36,37 +36,33 @@ public class FruitServiceImplTest {
     private static StorageDao storageDao;
     private static Map<String, Integer> expectedStorage;
 
-    public static void initializationMethod() {
+    @BeforeClass
+    public static void beforeClass() {
+        data = new ArrayList<>();
+        storageDao = new StorageDaoImpl();
+        expectedStorage = new HashMap<>();
         strategies = new HashMap<>();
+        data.add(HEAD);
+        data.add(SECOND_LINE);
+        chooseOperation = new OperationStrategyImpl(strategies);
+        fruitService = new FruitServiceImpl(chooseOperation);
+        fruitTransactions = new ParseFileImpl().parseData(data);
         strategies.put(FruitTransaction.Operation.BALANCE, new OperationHandlerBalance());
         strategies.put(FruitTransaction.Operation.SUPPLY, new OperationHandlerSupply());
         strategies.put(FruitTransaction.Operation.PURCHASE, new OperationHandlerPurchase());
         strategies.put(FruitTransaction.Operation.RETURN, new OperationHandlerReturn());
     }
 
-    @BeforeClass
-    public static void beforeClass() {
-        data = new ArrayList<>();
-        storageDao = new StorageDaoImpl();
-        expectedStorage = new HashMap<>();
+    @Test
+    public void serviceWithExistOperation_ok() {
+        Storage.fruitStorage.put(APPLE, TEST_START_VALUE);
+        expectedStorage.put(APPLE, TEST_PURCHASE_VALUE);
+        fruitService.apply(fruitTransactions);
+        Assert.assertEquals(expectedStorage, storageDao.getFruitStorage());
     }
 
     @AfterClass
     public static void afterClass() {
         Storage.fruitStorage.clear();
-    }
-
-    @Test
-    public void serviceWithExistOperation_ok() {
-        Storage.fruitStorage.put(APPLE, TEST_START_VALUE);
-        data.add(HEAD);
-        data.add(SECOND_LINE);
-        expectedStorage.put(APPLE, TEST_PURCHASE_VALUE);
-        fruitTransactions = new ParseFileImpl().parseData(data);
-        initializationMethod();
-        chooseOperation = new OperationStrategyImpl(strategies);
-        fruitService = new FruitServiceImpl(chooseOperation);
-        fruitService.apply(fruitTransactions);
-        Assert.assertEquals(expectedStorage, storageDao.getFruitStorage());
     }
 }

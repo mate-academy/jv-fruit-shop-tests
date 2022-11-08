@@ -23,11 +23,6 @@ public class ReportGeneratorServiceTest {
         report = new ReportGeneratorServiceImpl();
     }
 
-    @After
-    public void tearDown() {
-        Storage.fruitStorage.clear();
-    }
-
     @Test
     public void generateReportFromEmptyDataBase_ok() {
         String actual = report.reportGenerate();
@@ -40,5 +35,10 @@ public class ReportGeneratorServiceTest {
         String actual = report.reportGenerate();
         String expected = EXPECTED_LINE_WITH_SEPARATOR + VALID_REPORT;
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

@@ -16,12 +16,16 @@ public class ParseFileImplTest {
     private static ParseFile parser;
     private static List<String> EMPTY_LIST;
     private static List<String> dataList;
+    private static List<String> current;
 
     @BeforeClass
     public static void beforeClass() {
         parser = new ParseFileImpl();
         EMPTY_LIST = new ArrayList<>();
         dataList = new ArrayList<>();
+        dataList.add(HEAD_LINE);
+        dataList.add(SECOND_LINE);
+        current = new ArrayList<>();
     }
 
     @After
@@ -36,9 +40,6 @@ public class ParseFileImplTest {
 
     @Test
     public void parseExistList_ok() {
-        dataList.add(HEAD_LINE);
-        dataList.add(SECOND_LINE);
-        List<String> current = new ArrayList<>();
         current.add(CURRENT_VALUE);
         parser.parseData(dataList);
         assertEquals(dataList, current);

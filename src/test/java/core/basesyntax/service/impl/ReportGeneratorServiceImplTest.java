@@ -26,12 +26,6 @@ public class ReportGeneratorServiceImplTest {
         storage.put(FRUIT_BANANA, DEFAULT_QUANTITY);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void generateReport_storageIsNull_notOk() {
-        reportGenerator = new ReportGeneratorServiceImpl(null);
-        reportGenerator.generateReport();
-    }
-
     @Test
     public void generateReport_oneFruitInStorage_ok() {
         String actual = reportGenerator.generateReport();

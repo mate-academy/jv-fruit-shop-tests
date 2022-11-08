@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
 import java.nio.file.Path;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
@@ -23,6 +24,8 @@ public class FileReaderServiceImplTest {
     @Test
     public void readFile_withExistingFile_Ok() {
         reader = new FileReaderServiceImpl(Path.of(RESOURCES_PATH + "input.csv"));
-        reader.readFile();
+        int expectedSize = 3;
+        int actualSize = reader.readFile().size();
+        Assert.assertEquals(expectedSize, actualSize);
     }
 }

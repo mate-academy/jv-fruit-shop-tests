@@ -1,12 +1,13 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
-
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -55,9 +56,13 @@ public class TransactionParserServiceImplTest {
     @Test
     public void parse_withSingleLineValidData_Ok() {
         testDataList.add(BALANCE_OPERATION + DELIMITER + BANANA + DELIMITER + DEFAULT_QUANTITY);
+        List<FruitTransaction> parseResult = parser.parse(testDataList);
         int expectedSize = 1;
-        int actualSize = parser.parse(testDataList).size();
-        assertEquals(expectedSize, actualSize);
+        int actualSize = parseResult.size();
+        Assert.assertEquals(expectedSize, actualSize);
+        Assert.assertTrue(parseResult.contains(
+                new FruitTransaction(
+                        FruitTransaction.Operation.BALANCE, new Fruit(BANANA), DEFAULT_QUANTITY)));
     }
 
     @Test
@@ -67,9 +72,32 @@ public class TransactionParserServiceImplTest {
         testDataList.add(RETURN_OPERATION + DELIMITER + APPLE + DELIMITER + DEFAULT_QUANTITY);
         testDataList.add(SUPPLY_OPERATION + DELIMITER + BANANA + DELIMITER + DEFAULT_QUANTITY);
         testDataList.add(PURCHASE_OPERATION + DELIMITER + BANANA + DELIMITER + DEFAULT_QUANTITY);
+        List<FruitTransaction> parseResult = parser.parse(testDataList);
         int expectedSize = 5;
-        int actualSize = parser.parse(testDataList).size();
-        assertEquals(expectedSize, actualSize);
+        int actualSize = parseResult.size();
+        Assert.assertEquals(expectedSize, actualSize);
+        List<FruitTransaction> expected = new ArrayList<>();
+        expected.add(new FruitTransaction(
+                FruitTransaction.Operation.BALANCE,
+                new Fruit(BANANA),
+                DEFAULT_QUANTITY));
+        expected.add(new FruitTransaction(
+                FruitTransaction.Operation.BALANCE,
+                new Fruit(APPLE),
+                DEFAULT_QUANTITY));
+        expected.add(new FruitTransaction(
+                FruitTransaction.Operation.RETURN,
+                new Fruit(APPLE),
+                DEFAULT_QUANTITY));
+        expected.add(new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY,
+                new Fruit(BANANA),
+                DEFAULT_QUANTITY));
+        expected.add(new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE,
+                new Fruit(BANANA),
+                DEFAULT_QUANTITY));
+        Assert.assertTrue(parseResult.containsAll(expected));
     }
 
     @After

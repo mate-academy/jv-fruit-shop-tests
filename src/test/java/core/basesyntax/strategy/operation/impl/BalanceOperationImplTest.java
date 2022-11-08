@@ -1,8 +1,7 @@
 package core.basesyntax.strategy.operation.impl;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.db.Storage;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -21,6 +20,6 @@ public class BalanceOperationImplTest {
         balanceOperation.putNewBalanceToFruit(APPLE, APPLE_VALUE);
         int expected = APPLE_VALUE;
         int actual = Storage.FRUIT_STORAGE.get(APPLE);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 }

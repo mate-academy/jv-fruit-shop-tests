@@ -1,9 +1,8 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,7 +22,7 @@ public class ReportGeneratorServiceImplTest {
         String expected = FIRST_LINE + SEPARATOR
                 + "coconut,60";
         String actual = reportGeneratorService.generateReport(Storage.FRUIT_STORAGE);
-        assertEquals("Expected report: " + SEPARATOR + expected
+        Assert.assertEquals("Expected report: " + SEPARATOR + expected
                         + "but was:" + SEPARATOR + actual,
                 expected, actual);
     }
@@ -32,7 +31,7 @@ public class ReportGeneratorServiceImplTest {
     public void reportGenerate_withoutProduct_notOk() {
         String expected = FIRST_LINE;
         String actual = reportGeneratorService.generateReport(Storage.FRUIT_STORAGE);
-        assertEquals("Expected report: " + SEPARATOR + expected
+        Assert.assertEquals("Expected report: " + SEPARATOR + expected
                         + "but was:" + SEPARATOR + actual,
                 expected, actual);
     }

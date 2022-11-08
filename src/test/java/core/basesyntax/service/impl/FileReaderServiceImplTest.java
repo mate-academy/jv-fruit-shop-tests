@@ -1,8 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import core.basesyntax.service.ReaderService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -33,14 +30,14 @@ public class FileReaderServiceImplTest {
     public void readFromFile_validData_ok() {
         String expected = data;
         String actual = fileReaderService.read(CORRECT_FILE_PATH);
-        assertEquals("The read method should return: " + expected, expected, actual);
+        Assert.assertEquals("The read method should return: " + expected, expected, actual);
     }
 
     @Test
     public void readFromFile_emptyData_ok() {
         boolean actual = fileReaderService.read(EMPTY_FILE_PATH)
                 .isEmpty();
-        assertTrue(actual);
+        Assert.assertTrue(actual);
     }
 
     @Test

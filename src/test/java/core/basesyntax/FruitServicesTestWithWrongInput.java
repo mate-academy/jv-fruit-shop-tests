@@ -21,7 +21,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WrongInputTests {
+public class FruitServicesTestWithWrongInput {
     private static FruitService fruitService;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static List<FruitTransaction> fruitTransactionList;

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -81,5 +82,39 @@ public class FruitServicesImplTest {
         Integer except = 80;
         Integer amountInStorage = dao.getFromStorage("pear");
         Assert.assertEquals(except, amountInStorage);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fruitService_purchaseAbsentFruit_notOk() {
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "carrot", 10));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fruitService_returnAbsentFruit_notOk() {
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "melon", 10));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fruitService_supplyAbsentFruit_notOk() {
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "watermelon", 10));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void fruitService_purchaseTooMachFruits_notOk() {
+        dao.addToStorage("orange", 15);
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "orange", 35));
+        fruitService.applyTransaction(fruitTransactionList);
+    }
+
+    @After
+    public void clean() {
+        fruitTransactionList.clear();
     }
 }

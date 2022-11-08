@@ -58,7 +58,7 @@ public class FruitDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateWithNothingToTest_NotOk() {
+    public void updateWithNothingToTest_notOk() {
         int expectedAmount = 33;
         storage.getStorage().clear();
         fruitDao.update(apple, expectedAmount);

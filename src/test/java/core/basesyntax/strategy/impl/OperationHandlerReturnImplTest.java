@@ -37,7 +37,7 @@ public class OperationHandlerReturnImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void returnNegativeAmount_NotOk() {
+    public void returnNegativeAmount_notOk() {
         operationHandlerReturn.apply(apple, -1);
     }
 

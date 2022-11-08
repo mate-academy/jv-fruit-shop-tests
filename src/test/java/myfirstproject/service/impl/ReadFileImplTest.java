@@ -26,7 +26,7 @@ public class ReadFileImplTest {
     }
 
     @Test
-    public void readFile_Ok() {
+    public void readFile_fileExists_ok() {
         StringBuilder actualBuilder = new StringBuilder();
         String expected = "[type, fruit, quantity]" + System.lineSeparator()
                 + "[b, banana, 20]" + System.lineSeparator()

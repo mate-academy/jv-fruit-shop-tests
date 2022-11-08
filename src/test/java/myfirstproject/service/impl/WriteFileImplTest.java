@@ -4,22 +4,27 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import myfirstproject.model.Fruit;
 import myfirstproject.service.WriteFile;
 import org.junit.Test;
 
 public class WriteFileImplTest {
     private static final String PATH_TO_NEW_FILE = "src/test/resources/reportFile.csv";
     private static final String WRONG_PATH = "src/resources/reportFile.csv";
-    private static final WriteFile writer = new WriteFileImpl();
+    private static final WriteFile WRITE_FILE = new WriteFileImpl();
 
     @Test(expected = RuntimeException.class)
     public void readWrongFile_not_Ok() {
-        writer.writeToFile(WRONG_PATH, Collections.EMPTY_MAP);
+        WRITE_FILE.writeToFile(WRONG_PATH, Collections.EMPTY_MAP);
     }
 
     @Test
     public void isCreatedFileExist_Ok() {
         final File file = new File(PATH_TO_NEW_FILE);
+        Map<Fruit,Integer> testMap = new HashMap<>();
+        WRITE_FILE.writeToFile(PATH_TO_NEW_FILE, testMap);
         assertTrue(file.exists());
     }
 }

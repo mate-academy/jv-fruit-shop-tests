@@ -1,31 +1,40 @@
 package core.basesyntax.model;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction.Operation;
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionTest {
+    private static FruitTransaction.Operation BALANCE;
+    private static FruitTransaction.Operation PURCHASE;
+    private static FruitTransaction.Operation RETURN;
+    private static FruitTransaction.Operation SUPPLY;
+
+    @Before
+    public void setUp() {
+        BALANCE = Operation.BALANCE;
+        PURCHASE = Operation.PURCHASE;
+        RETURN = Operation.RETURN;
+        SUPPLY = Operation.SUPPLY;
+    }
+
     @Test
     public void correctInputData_Ok() {
-        String balance = "b";
-        FruitTransaction.Operation actual = FruitTransaction.Operation.getOperation(balance);
-        FruitTransaction.Operation expected = Operation.BALANCE;
-        Assert.assertEquals(expected, actual);
+        assertEquals(BALANCE, Operation.getOperation("b"));
+        assertEquals(PURCHASE, Operation.getOperation("p"));
+        assertEquals(RETURN, Operation.getOperation("r"));
+        assertEquals(SUPPLY, Operation.getOperation("s"));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void incorrectOInputData_NotOk() {
-        String incorrectOperator = "incorect";
-        assertThrows(RuntimeException.class, () ->
-                FruitTransaction.Operation.getOperation(incorrectOperator), "Invalid input");
+        assertEquals(Operation.BALANCE, Operation.getOperation("c"));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void incorrectInputData_NNull_NotOk() {
-        String incorrectOperator = null;
-        assertThrows(RuntimeException.class, () ->
-                FruitTransaction.Operation.getOperation(incorrectOperator), "Invalid input");
+        assertEquals(Operation.BALANCE,Operation.getOperation(null));
     }
 }

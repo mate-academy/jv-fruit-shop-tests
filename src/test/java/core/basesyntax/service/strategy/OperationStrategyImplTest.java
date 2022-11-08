@@ -40,4 +40,11 @@ public class OperationStrategyImplTest {
                 .get(FruitTransaction.Operation.RETURN).getClass();
         Assert.assertEquals(ReturnHandler.class, actual);
     }
+
+    @Test
+    public void operationPurchase_correctData_Ok() {
+        Class<? extends OperationHandler> actual = strategy
+                .get(FruitTransaction.Operation.PURCHASE).getClass();
+        Assert.assertEquals(PurchaseHandler.class, actual);
+    }
 }

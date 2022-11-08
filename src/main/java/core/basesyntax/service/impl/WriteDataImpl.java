@@ -7,11 +7,11 @@ import java.nio.file.Files;
 
 public class WriteDataImpl implements WriteData {
     @Override
-    public void writeToFile(String report, String filePath) {
-        File file = new File(filePath);
+    public void writeToFile(String filePath, String report) {
+        File file = new File(report);
         try {
             file.createNewFile();
-            Files.write(file.toPath(), report.getBytes());
+            Files.write(file.toPath(), filePath.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Failed to write file: " + filePath
                     + " to file: " + report);

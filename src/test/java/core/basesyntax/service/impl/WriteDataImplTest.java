@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriteData;
 import java.io.IOException;
@@ -11,6 +10,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 public class WriteDataImplTest {
+
     private static final String FILE_PATH = "src/test/resources/report.csv";
     private String report = "fruit,quantity"
             + System.lineSeparator()
@@ -38,10 +38,13 @@ public class WriteDataImplTest {
         assertEquals(exceptedReport,actualReport);
     }
 
-    @Test
-    public void writeDataToFile_nullPath_notOk() {
-        String filePath = null;
-        assertThrows(RuntimeException.class, () ->
-                writeData.writeToFile(filePath, report), "IncorrectPath" + filePath);
+    @Test(expected = RuntimeException.class)
+    public void writeDataToFile_null_notOk() {
+        writeData.writeToFile(null,FILE_PATH);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeDataToFile_EmptyPath_notOk() {
+        writeData.writeToFile(null,"");
     }
 }

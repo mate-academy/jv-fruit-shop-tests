@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.ShopStorage;
 import core.basesyntax.service.ReportService;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -42,10 +41,5 @@ public class ReportServiceImplTest {
     public void getReport_nullStorage_notOk() {
         ShopStorage.fruitsStorage.clear();
         reportService.getReport();
-    }
-
-    @After
-    public void clear() {
-        ShopStorage.fruitsStorage.clear();
     }
 }

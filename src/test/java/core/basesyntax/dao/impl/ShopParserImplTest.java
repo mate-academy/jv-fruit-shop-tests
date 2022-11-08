@@ -3,8 +3,6 @@ package core.basesyntax.dao.impl;
 import static org.junit.Assert.assertArrayEquals;
 
 import core.basesyntax.dao.ShopParser;
-import core.basesyntax.db.ShopStorage;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,10 +32,5 @@ public class ShopParserImplTest {
     @Test(expected = RuntimeException.class)
     public void parse_nullDataFromFile_notOk() {
         shopParser.parse(null);
-    }
-
-    @AfterClass
-    public static void clear() {
-        ShopStorage.fruitsStorage.clear();
     }
 }

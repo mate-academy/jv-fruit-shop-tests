@@ -18,7 +18,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_emptyFile_isOk() {
+    public void readFile_emptyFile_ok() {
         String expected = "";
         String actual = fileReaderService.readFile(EMPTY_FILE_PATH);
         assertEquals(expected, actual);

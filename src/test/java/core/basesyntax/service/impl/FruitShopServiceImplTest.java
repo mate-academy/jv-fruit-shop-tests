@@ -14,25 +14,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
-    private static FruitShopService fruitShopService;
-    private static List<FruitTransaction> fruitTransactions;
-    private static Map<String, Integer> expected;
 
-    @BeforeClass
-    public static void setUp() {
-        expected = new HashMap<>();
+    @Test
+    public void transfer_differentData_isOk() {
+        Map<String, Integer> expected = new HashMap<>();
 
-        Map<FruitTransaction.Operation, GeneralOperation> operationHandlersMap = new HashMap<>();
-        operationHandlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-
-        fruitShopService = new FruitShopServiceImpl(operationHandlersMap);
+        final FruitShopService fruitShopService =
+                new FruitShopServiceImpl(createOperationHandlersMap());
 
         FruitTransaction firstTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100);
@@ -49,12 +40,9 @@ public class FruitShopServiceImplTest {
         FruitTransaction fifthTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "kiwi", 1);
 
-        fruitTransactions = List.of(firstTransaction, secondTransaction,
-                thirdTransaction, fourthTransaction, fifthTransaction);
-    }
+        final List<FruitTransaction> fruitTransactions = List.of(firstTransaction,
+                secondTransaction, thirdTransaction, fourthTransaction, fifthTransaction);
 
-    @Test
-    public void transfer_differentData_isOk() {
         expected.put("apple", 201);
         expected.put("banana", 100);
         expected.put("kiwi", 299);
@@ -63,13 +51,17 @@ public class FruitShopServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void transfer_nullData_notOk() {
-        fruitShopService.transfer(null);
-    }
-
     @After
     public void clear() {
         ShopStorage.fruitsStorage.clear();
+    }
+
+    private Map<FruitTransaction.Operation, GeneralOperation> createOperationHandlersMap() {
+        Map<FruitTransaction.Operation, GeneralOperation> operationHandlersMap = new HashMap<>();
+        operationHandlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        operationHandlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        operationHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        operationHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        return operationHandlersMap;
     }
 }

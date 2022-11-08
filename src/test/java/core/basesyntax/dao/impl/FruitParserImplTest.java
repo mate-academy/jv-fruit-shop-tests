@@ -6,23 +6,20 @@ import static org.junit.Assert.assertNotEquals;
 import core.basesyntax.dao.FruitParser;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitParserImplTest {
     private static FruitParser fruitParser;
-    private String[] data;
-    private List<FruitTransaction> expected;
 
     @BeforeClass
     public static void setUp() {
         fruitParser = new FruitParserImpl();
     }
 
-    @Before
-    public void init() {
-        data = new String[]{"b,banana,100", "s,apple,200", "p,kiwi,300", "r,apple,1"};
+    @Test
+    public void parse_notRelevantData_notOk() {
+        String[] data = new String[]{"b,banana,100", "s,apple,200", "p,kiwi,300", "r,apple,1"};
 
         FruitTransaction firstTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100);
@@ -33,12 +30,8 @@ public class FruitParserImplTest {
         FruitTransaction fourthTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 1);
 
-        expected = List.of(firstTransaction, secondTransaction,
+        List<FruitTransaction> expected = List.of(firstTransaction, secondTransaction,
                 thirdTransaction, fourthTransaction);
-    }
-
-    @Test
-    public void parse_notOk() {
         List<FruitTransaction> actual = fruitParser.parse(data);
         assertNotEquals(expected.toString(), actual.toString());
     }

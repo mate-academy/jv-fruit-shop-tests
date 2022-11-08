@@ -44,10 +44,4 @@ public class WriteDataImplTest {
         assertThrows(RuntimeException.class, () ->
                 writeData.writeToFile(FILE_PATH,null), "File is null");
     }
-
-    @Test
-    public void writeDataToFile_EmptyPath_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                writeData.writeToFile("",report), "Path can't be null");
-    }
 }

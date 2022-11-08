@@ -56,7 +56,7 @@ public class TransactionsCalculatorServiceTest {
         ));
         List<FruitReport> actual = transactionsCalculator.calculate();
         List<FruitReport> expected = List.of(
-                new FruitReport("banana",3832),
+                new FruitReport("banana", 3832),
                 new FruitReport("apple",10020),
                 new FruitReport("pineapple",-652559),
                 new FruitReport("peach",0)

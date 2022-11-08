@@ -34,28 +34,7 @@ public class TestTransactionsCalculatorService {
     }
 
     @Test
-    public void calculate_basic_isOk() {
-        FruitShopStorage.fruitTransactions.addAll(List.of(
-                new FruitTransaction(Operation.getByValue('b'), "banana", 20),
-                new FruitTransaction(Operation.getByValue('b'), "apple", 100),
-                new FruitTransaction(Operation.getByValue('s'), "banana", 100),
-                new FruitTransaction(Operation.getByValue('p'), "banana", 13),
-                new FruitTransaction(Operation.getByValue('r'), "apple", 10),
-                new FruitTransaction(Operation.getByValue('p'), "apple", 20),
-                new FruitTransaction(Operation.getByValue('p'), "banana", 5),
-                new FruitTransaction(Operation.getByValue('s'), "banana", 50)
-        ));
-        List<FruitReport> actual = transactionsCalculator.calculate();
-        List<FruitReport> expected = List.of(
-                new FruitReport("banana", 152),
-                new FruitReport("apple", 90)
-        );
-        assertEquals("Expected sizes to be equal", expected.size(), actual.size());
-        assertEquals("Expected report to write is not correct", expected, actual);
-    }
-
-    @Test
-    public void calculate_longerReport_negativeAndEmptyAmountInReport_isOk() {
+    public void calculate_negativeAndEmptyAmountInReport_isOk() {
         FruitShopStorage.fruitTransactions.addAll(List.of(
                 new FruitTransaction(Operation.getByValue('b'), "banana", 3682),
                 new FruitTransaction(Operation.getByValue('b'), "apple", 100),

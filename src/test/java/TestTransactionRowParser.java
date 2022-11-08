@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,14 +35,13 @@ public class TestTransactionRowParser {
     private List<String> currentDataRows;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         transactionRowParser = new TransactionRowParserImpl(DAO);
     }
 
     @Before
     public void setUp() {
         currentDataRows = new ArrayList<>(VALID_DATA_ROWS);
-        FruitShopStorage.fruitTransactions.clear();
     }
 
     @Test(expected = RuntimeException.class)
@@ -112,5 +113,10 @@ public void parse_incorrectColumnSizeInList_extraColumn_notOk() {
                 .stream(e.getStackTrace())
                 .map(StackTraceElement::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    @After
+    public void tearDown() {
+        FruitShopStorage.fruitTransactions.clear();
     }
 }

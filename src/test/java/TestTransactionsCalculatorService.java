@@ -14,7 +14,7 @@ import fruitshop.strategy.operation.handlers.impl.SupplyOperation;
 import fruitshop.strategy.operation.impl.OperationStrategyImpl;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,11 +33,6 @@ public class TestTransactionsCalculatorService {
                 new OperationStrategyImpl(handlers),
                 new FruitShopStorageDaoImpl()
         );
-    }
-
-    @Before
-    public void setUp() {
-        FruitShopStorage.fruitTransactions.clear();
     }
 
     @Test
@@ -68,6 +63,11 @@ public class TestTransactionsCalculatorService {
         );
         assertEquals("Expected sizes to be equal", expected.size(), actual.size());
         assertEquals("Expected report to write is not correct", expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        FruitShopStorage.fruitTransactions.clear();
     }
 }
 

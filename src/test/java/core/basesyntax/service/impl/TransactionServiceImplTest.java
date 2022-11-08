@@ -43,12 +43,9 @@ public class TransactionServiceImplTest {
         testTransactionsList = new ArrayList<>();
         expectedStorageMap = new HashMap<>();
     }
-    //TODO: add map & check that it equals to storage
 
     @Test
     public void applyTransactions_withEmptyTransactionsList_Ok() {
-        storage.put(FRUIT_BANANA, DEFAULT_QUANTITY);
-        expectedStorageMap.put(FRUIT_BANANA, DEFAULT_QUANTITY);
         transactionService.applyTransactions(Collections.emptyList());
         assertEquals(expectedStorageMap, storage);
     }

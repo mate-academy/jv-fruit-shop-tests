@@ -97,7 +97,7 @@ public class TransactionParserServiceImplTest {
                 FruitTransaction.Operation.PURCHASE,
                 new Fruit(BANANA),
                 DEFAULT_QUANTITY));
-        Assert.assertTrue(parseResult.containsAll(expected));
+        Assert.assertEquals(expected, parseResult);
     }
 
     @After

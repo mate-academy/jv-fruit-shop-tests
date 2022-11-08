@@ -15,7 +15,7 @@ public class FileWriterImplTest {
     private static final String TEST_REPORT_FILE_PATH = "src/test/resources/reportTest.csv";
 
     @Test
-    public void writeToFile_Ok() throws IOException {
+    public void writeToFile_ok() throws IOException {
         String testMessage = "Test message";
         writer.writeToFile(testMessage, TEST_REPORT_FILE_PATH);
         List<String> currentInFile = Files.readAllLines(Path.of(TEST_REPORT_FILE_PATH));

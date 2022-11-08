@@ -15,14 +15,14 @@ public class ReportGeneratorImplTest {
     private static final String REPORT_HEADER = "fruit,quantity";
 
     @Test
-    public void generateReport_EmptyStorage_Ok() {
+    public void generateReport_emptyStorage_ok() {
         String expectedReport = REPORT_HEADER + LINE_SEPARATOR;
         String actualReport = generator.reportFromStorage(Collections.emptyMap());
         assertEquals(expectedReport, actualReport);
     }
 
     @Test
-    public void generateReport_OneItemInStorage_Ok() {
+    public void generateReport_oneItemInStorage_ok() {
         Map<Fruit, Integer> info = new HashMap<>();
         info.put(new Fruit("apple"), 100);
         StringBuilder expectedReport = new StringBuilder();
@@ -35,7 +35,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void generateReport_TwoItemsInStorage_Ok() {
+    public void generateReport_twoItemsInStorage_ok() {
         Map<Fruit, Integer> info = new HashMap<>();
         info.put(new Fruit("apple"), 100);
         info.put(new Fruit("orange"), 50);

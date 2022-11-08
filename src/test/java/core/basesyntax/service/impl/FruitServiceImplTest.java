@@ -26,14 +26,14 @@ public class FruitServiceImplTest {
     private static final FruitService fruitService = initFruitService();
 
     @Test
-    public void doOperation_NoTransactions_Ok() {
+    public void doOperation_noTransactions_ok() {
         fruitService.doOperation(Collections.emptyList());
         Map<Fruit, Integer> actual = FruitStorage.storage;
         assertEquals(Collections.emptyMap(), actual);
     }
 
     @Test
-    public void doOperation_NormalTransactions_Ok() {
+    public void doOperation_normalTransactions_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
                         new Fruit("apple"), 100),
@@ -50,7 +50,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void doOperation_PurchaseMoreFruitsThanCurrentlyInStorage_notOk() {
+    public void doOperation_purchaseMoreFruitsThanCurrentlyInStorage_notOk() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
                         new Fruit("apple"), 100),
@@ -65,7 +65,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void doOperation_Balance_Ok() {
+    public void doOperation_balance_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.getOperation("b"),
                         new Fruit("apple"), 100),
@@ -82,7 +82,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void doOperation_Supply_Ok() {
+    public void doOperation_supply_ok() {
         FruitStorage.storage.put(new Fruit("apple"), 100);
         FruitStorage.storage.put(new Fruit("orange"), 100);
         FruitStorage.storage.put(new Fruit("banana"), 100);
@@ -102,7 +102,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void doOperation_Return_Ok() {
+    public void doOperation_return_ok() {
         FruitStorage.storage.put(new Fruit("apple"), 100);
         FruitStorage.storage.put(new Fruit("orange"), 100);
         FruitStorage.storage.put(new Fruit("banana"), 100);

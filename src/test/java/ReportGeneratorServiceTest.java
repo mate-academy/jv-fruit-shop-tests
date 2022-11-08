@@ -19,11 +19,10 @@ public class ReportGeneratorServiceTest {
     public static void beforeClass() {
         generatorExpectedResults =
                 Map.of(
-                        "banana,3832\napple,10020\npineapple,-652559\npeach,0",
+                        "banana,3832\napple,10020\npeach,0",
                         List.of(
                                 new FruitReport("banana",3832),
                                 new FruitReport("apple",10020),
-                                new FruitReport("pineapple",-652559),
                                 new FruitReport("peach",0)
                         ),
                         "banana,152\napple,90",

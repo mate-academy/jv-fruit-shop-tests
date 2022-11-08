@@ -14,6 +14,9 @@ public class ParseFileImpl implements ParseFile {
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
+        if (data.size() == 0) {
+            throw new RuntimeException();
+        }
         data.remove(INDEX_FIRST_LINE);
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         data.stream()

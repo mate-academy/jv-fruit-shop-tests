@@ -41,8 +41,11 @@ public class WriteToFileImplTest {
         expectedList.add("banana,50");
         expectedList.add("apple,40");
         writer.write(VALID_REPORT, FILE_PATH_WRITE);
-        List<String> actualList = Files.readAllLines(Path.of(
+        assertEquals(expectedList, actualList());
+    }
+
+    private List<String> actualList() throws IOException {
+        return Files.readAllLines(Path.of(
                 "src/test/java/core/basesyntax/resourses/report.csv"));
-        assertEquals(expectedList, actualList);
     }
 }

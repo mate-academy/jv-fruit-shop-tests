@@ -9,6 +9,9 @@ public class WriteToFileImpl implements WriteToFile {
 
     @Override
     public boolean write(String report, String path) {
+        if (report == null) {
+            throw new RuntimeException("Report is null");
+        }
         Path filePath = Path.of(path);
         try {
             Files.writeString(filePath, report);

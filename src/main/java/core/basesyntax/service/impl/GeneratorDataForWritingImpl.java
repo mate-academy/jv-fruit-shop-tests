@@ -4,12 +4,12 @@ import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.service.GeneratorDataForWriting;
 import java.util.Map;
 
-public class GeneratorDataFroWritingImpl implements GeneratorDataForWriting {
+public class GeneratorDataForWritingImpl implements GeneratorDataForWriting {
     private static final String TEMPLATE = System.lineSeparator() + "%s,%d";
     private static final String FIRST_LINE = "fruit,quantity";
     private final FruitsDao fruitsDao;
 
-    public GeneratorDataFroWritingImpl(FruitsDao fruitsDao) {
+    public GeneratorDataForWritingImpl(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 

@@ -16,6 +16,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MakerTransactionsImplTest {
@@ -30,15 +31,21 @@ public class MakerTransactionsImplTest {
     private static final int EXPECTED_APPLE_QUANTITY = 70;
     private static final int EXPECTED_BANANA_QUANTITY = 30;
     private static final int EXPECTED_SIZE_OF_STORAGE = 2;
-    private final FruitsDao fruitsDao = new FruitDaoImpl();
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+    private static FruitsDao fruitsDao;
+    private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
             = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                     FruitTransaction.Operation.SUPPLY, new SupplierOperationHandler(),
                     FruitTransaction.Operation.PURCHASE, new PurchaserOperationHandler(),
                     FruitTransaction.Operation.RETURN, new ReturnerOperationHandler());
-    private final OperationStrategy operationStrategy = new OperationStrategy(operationHandlerMap);
-    private final MakerTransaction makerTransaction
-            = new MakerTransactionsImpl(operationStrategy, fruitsDao);
+    private static OperationStrategy operationStrategy;
+    private static MakerTransaction makerTransaction;
+
+    @BeforeClass
+    public static void setUp() {
+        fruitsDao = new FruitDaoImpl();
+        operationStrategy = new OperationStrategy(operationHandlerMap);
+        makerTransaction = new MakerTransactionsImpl(operationStrategy, fruitsDao);
+    }
 
     @Test
     public void do_transactionFromEmptyList_ok() {

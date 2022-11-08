@@ -9,7 +9,7 @@ import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ParserData;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.GeneratorDataFroWritingImpl;
+import core.basesyntax.service.impl.GeneratorDataForWritingImpl;
 import core.basesyntax.service.impl.MakerTransactionsImpl;
 import core.basesyntax.service.impl.ParserDataImpl;
 import core.basesyntax.service.impl.ReaderFromCsvService;
@@ -44,7 +44,7 @@ public class Main {
                 = new MakerTransactionsImpl(operationStrategy, fruitsDao);
         makerTransaction.doTransactions(transactions);
         GeneratorDataForWriting generatorDataForWriting =
-                new GeneratorDataFroWritingImpl(fruitsDao);
+                new GeneratorDataForWritingImpl(fruitsDao);
         String dataForWriting = generatorDataForWriting.generateData();
         WriterService writerService = new WriterToCsvService();
         writerService.createReportAfterDay(OUT_PUT_FILE_NAME, dataForWriting);

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReaderService;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderFromCsvServiceTest {
@@ -13,7 +14,12 @@ public class ReaderFromCsvServiceTest {
     private static final String SECOND_LINE_IN_FILE = "b,apple,100";
     private static final int SIZE_OF_EMPTY_LIST = 0;
 
-    private final ReaderService readerService = new ReaderFromCsvService();
+    private static ReaderService readerService;
+
+    @BeforeClass
+    public static void setUp() {
+        readerService = new ReaderFromCsvService();
+    }
 
     @Test
     public void read_fileWithoutDate_ok() {

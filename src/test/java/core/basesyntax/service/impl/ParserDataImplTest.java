@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserData;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserDataImplTest {
@@ -14,7 +15,12 @@ public class ParserDataImplTest {
             = List.of(new FruitTransaction("b", "banana", 20),
                     new FruitTransaction("b", "apple", 100),
                     new FruitTransaction("r", "apple", 10));
-    private final ParserData parserData = new ParserDataImpl();
+    private static ParserData parserData;
+
+    @BeforeClass
+    public static void setUp() {
+        parserData = new ParserDataImpl();
+    }
 
     @Test
     public void parse_emptyList_ok() {

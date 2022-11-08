@@ -16,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionRowParserTest {
-    private static final FruitShopStorageDaoImpl DAO = new FruitShopStorageDaoImpl();
     private static final List<String> VALID_DATA_ROWS = List.of(
             "b,banana,20",
             "b,apple,100",
@@ -33,12 +32,14 @@ public class TransactionRowParserTest {
     private static final int INDEX_TO_PUT_IN_LIST_START = 0;
     private static final int INDEX_TO_PUT_IN_LIST_AFTER_BALANCE = 3;
     private static final String TEST_FRUIT_AND_COUNT_UNFINISHED_ROW = "apple,32";
+    private static FruitShopStorageDaoImpl dao;
     private static TransactionRowParserImpl transactionRowParser;
     private List<String> currentDataRows;
 
     @BeforeClass
     public static void beforeClass() {
-        transactionRowParser = new TransactionRowParserImpl(DAO);
+        dao = new FruitShopStorageDaoImpl();
+        transactionRowParser = new TransactionRowParserImpl(dao);
     }
 
     @Before

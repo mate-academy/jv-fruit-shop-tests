@@ -42,4 +42,9 @@ public class WriteDataImplTest {
     public void writeDataToFile_null_notOk() {
         writeData.writeToFile(FILE_PATH,null);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void writeDataToFile_NullPath_notOk() {
+        writeData.writeToFile(null, report);
+    }
 }

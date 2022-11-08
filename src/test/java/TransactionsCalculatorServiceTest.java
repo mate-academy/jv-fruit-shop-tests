@@ -36,7 +36,7 @@ public class TransactionsCalculatorServiceTest {
     }
 
     @Test
-    public void calculate_negativeAndEmptyAmountInReport_isOk() {
+    public void calculate_negativeAndEmptyAmountInReport_ok() {
         FruitShopStorage.fruitTransactions.addAll(List.of(
                 new FruitTransaction(Operation.getByValue('b'), "banana", 3682),
                 new FruitTransaction(Operation.getByValue('b'), "apple", 100),

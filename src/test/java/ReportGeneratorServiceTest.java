@@ -36,7 +36,7 @@ public class ReportGeneratorServiceTest {
     }
 
     @Test
-    public void report_testCases_isOk() {
+    public void report_testCases_ok() {
         generatorExpectedResults.forEach((s, reportList) -> {
             String expected = COMPILE_NEW_LINE.matcher(s).replaceAll(System.lineSeparator());
             String actual = generatorService.generate(reportList);

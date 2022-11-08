@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.FileReaderService;
 import java.nio.file.Path;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 

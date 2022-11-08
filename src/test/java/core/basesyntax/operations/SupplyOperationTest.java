@@ -26,7 +26,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void handle_supplyTransaction_Ok() {
+    public void handleSupplyTransaction_ok() {
         FruitTransaction fruitTransaction = FruitTransaction.of(SUPPLY, "apple", 120);
         int expected = 440;
         supplyHandler.handle(fruitTransaction);

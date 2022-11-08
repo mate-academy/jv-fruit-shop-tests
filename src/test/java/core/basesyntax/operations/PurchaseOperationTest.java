@@ -26,7 +26,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void handle_purchaseTransaction_Ok() {
+    public void handlePurchaseTransaction_ok() {
         FruitTransaction fruitTransaction = FruitTransaction.of(PURCHASE, "peach", 12);
         int expected = 61;
         purchaseHandler.handle(fruitTransaction);

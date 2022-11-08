@@ -19,7 +19,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void handle_balanceTransaction_Ok() {
+    public void handleBalanceTransaction_ok() {
         FruitTransaction fruitTransaction = FruitTransaction.of(BALANCE, "guava", 40);
         int expected = 40;
         balanceHandler.handle(fruitTransaction);

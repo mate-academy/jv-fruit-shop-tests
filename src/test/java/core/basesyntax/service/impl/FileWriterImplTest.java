@@ -22,22 +22,12 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeToFile_Ok() {
+    public void writeToFile_ok() {
         String actual = "fruit,quantity" + ENTER + "banana,152" + ENTER + "apple,90" + ENTER;
         writer.writeToFile(actual, TEST_FILE);
         String expected = readFromFile();
         assertTrue(Files.exists(Path.of(TEST_FILE)));
         assertEquals(expected, actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void writeToFile_emptyPath_NotOK() {
-        writer.writeToFile("hello world", "");
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void writeToFile_nullData_NotOK() {
-        writer.writeToFile(null, TEST_FILE);
     }
 
     @After

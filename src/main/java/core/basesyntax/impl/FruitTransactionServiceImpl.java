@@ -14,6 +14,9 @@ public class FruitTransactionServiceImpl implements FruitService {
 
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null) {
+            throw new NullPointerException("Fruit transaction cannot be null");
+        }
         fruitTransactions.forEach(f -> operationStrategy.get(f.getOperation()).handle(f));
     }
 }

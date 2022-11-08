@@ -19,7 +19,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFromFile_ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10", "p,apple,20",
                 "p,banana,5", "s,banana,50");
@@ -39,20 +39,14 @@ public class FileReaderImplTest {
         fail("Expected validation exception was not thrown");
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void readFromFileEmptyName_notOk() {
         String wrongPath = "";
-        try {
-            List<String> actual = reader.readFromFile(wrongPath);
-        } catch (Exception e) {
-            Assert.assertEquals("Can't read data from file " + wrongPath, e.getMessage());
-            return;
-        }
-        fail("Expected validation exception was not thrown");
+        List<String> actual = reader.readFromFile(wrongPath);
     }
 
     @Test
-    public void readFromEmptyFile_Ok() {
+    public void readFromEmptyFile_ok() {
         List<String> expected = List.of();
         List<String> actual = reader.readFromFile(PATH_TO_EMPTY_FILE);
         Assert.assertEquals(expected, actual);

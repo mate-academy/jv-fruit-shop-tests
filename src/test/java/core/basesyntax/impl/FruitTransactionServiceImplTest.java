@@ -41,7 +41,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void process_validData_Ok() {
+    public void process_validData_ok() {
         service.process(getListOfFruitTransactions());
         Map<String, Integer> actual = Storage.fruits;
         Map<String, Integer> expected = Map.of("mango", 69, "orange", 40);
@@ -49,15 +49,15 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void process_emptyList_Ok() {
+    public void process_emptyList_ok() {
         service.process(new ArrayList<>());
         Map<String, Integer> actual = Storage.fruits;
         Map<String, Integer> expected = Map.of();
         assertEquals(expected, actual);
     }
 
-    @Test (expected = RuntimeException.class)
-    public void process_nullTransaction_NotOk() {
+    @Test (expected = NullPointerException.class)
+    public void processNullTransaction_notOk() {
         List<FruitTransaction> list = getListOfFruitTransactions();
         list.set(4, null);
         service.process(list);

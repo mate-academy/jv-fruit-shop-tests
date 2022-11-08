@@ -19,7 +19,7 @@ public class FruitImplemDaoTest {
     }
 
     @Test
-    public void addFruit_Ok() {
+    public void addFruit_ok() {
         fruitDao.addFruits("banana",17);
         fruitDao.addFruits("grapes",10);
         fruitDao.addFruits("strawberry",13);
@@ -28,7 +28,7 @@ public class FruitImplemDaoTest {
     }
 
     @Test
-    public void getFruitAmount_absentFruit_NotOk() {
+    public void getFruitAmount_absentFruit_notOk() {
         fruitDao.addFruits("banana",17);
         fruitDao.addFruits("grapes",10);
         fruitDao.addFruits("strawberry",13);
@@ -42,21 +42,13 @@ public class FruitImplemDaoTest {
         fail("Expected validation exception was not thrown");
     }
 
-    @Test
-    public void getFruitAmount_NullAmount_notOk() {
-        try {
-            fruitDao.addFruits("Banana",0);
-        } catch (RuntimeException e) {
-            assertEquals("Ammount of added fruit cannot be 0",
-                    e.getMessage());
-            return;
-        }
-        fail("Expected validation exception was not thrown");
-
+    @Test(expected = RuntimeException.class)
+    public void getFruitAmountNullAmount_notOk() {
+        fruitDao.addFruits("Banana",0);
     }
 
     @Test (expected = RuntimeException.class)
-    public void getFruitAmount_emptyStorage_NotOk() {
+    public void getFruitAmount_emptyStorage_notOk() {
         fruitDao.getAmountOfFruit("plum");
     }
 

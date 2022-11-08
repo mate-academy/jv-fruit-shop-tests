@@ -26,7 +26,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    public void handle_returnTransaction_Ok() {
+    public void handleReturnTransaction_ok() {
         FruitTransaction fruitTransaction = FruitTransaction.of(RETURN, "peach", 12);
         int expected = 85;
         returnHandler.handle(fruitTransaction);

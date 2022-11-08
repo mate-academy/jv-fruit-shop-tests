@@ -28,7 +28,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_ok() {
         String actual = reportService.writeReport(Storage.fruits);
         String expected = "fruit,quantity" + ENTER + "banana,24" + ENTER
                 + "apricot,80" + ENTER + "apple,120" + ENTER + "grape,46" + ENTER
@@ -37,7 +37,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_emptyStorage_Ok() {
+    public void createReportEmptyStorage_ok() {
         Storage.fruits.clear();
         String actual = reportService.writeReport(Storage.fruits);
         String expected = "fruit,quantity" + ENTER;

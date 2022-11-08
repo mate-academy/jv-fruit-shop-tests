@@ -13,6 +13,9 @@ public class FruitTransactionParserImpl implements FruitParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
+        if (lines == null) {
+            throw new NullPointerException("List of operations cannot be null");
+        }
         return lines.stream()
                 .skip(1)
                 .map(this::parseTransaction)

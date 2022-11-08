@@ -31,44 +31,33 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void parse_validList_Ok() {
+    public void parseValidList_ok() {
         List<FruitTransaction> actual = parser.parse(transactionStrings);
-        for (FruitTransaction fruitTransaction: actual) {
-            System.out.println(fruitTransaction.getFruit());
-            System.out.println(fruitTransaction.getAmount());
-            System.out.println(fruitTransaction.getOperation());
-        }
         List<FruitTransaction> expected = getListOfFruitTransactions();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parse_emptyList_Ok() {
+    public void parseEmptyList_ok() {
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         List<FruitTransaction> expected = List.of();
         assertEquals(expected, actual);
     }
 
-    @Test (expected = RuntimeException.class)
-    public void parse_nullList_NotOk() {
+    @Test (expected = NullPointerException.class)
+    public void parseNullList_notOk() {
         parser.parse(null);
     }
 
     @Test (expected = NoSuchElementException.class)
-    public void parse_invalidLetterOperation_NotOk() {
+    public void parseInvalidLetterOperation_notOk() {
         transactionStrings.set(2, "u,kiwi,32");
         parser.parse(transactionStrings);
     }
 
     @Test (expected = ArrayIndexOutOfBoundsException.class)
-    public void parse_invalidString_NotOk() {
+    public void parseInvalidString_notOk() {
         transactionStrings.set(2, "b,kiwi");
-        parser.parse(transactionStrings);
-    }
-
-    @Test(expected = NumberFormatException.class)
-    public void parse_notNumericalAmount_NotOk() {
-        transactionStrings.set(2, "s,peach,abc");
         parser.parse(transactionStrings);
     }
 

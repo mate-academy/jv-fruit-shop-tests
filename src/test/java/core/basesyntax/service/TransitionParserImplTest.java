@@ -35,9 +35,7 @@ public class TransitionParserImplTest {
         List<FruitTransition> expected = new ArrayList<>();
         expected.add(new FruitTransition("b", new Fruit("apple"), 100));
         List<FruitTransition> actual = transitionParser.parseTransition(data);
-        assertEquals(expected.get(0).getFruit(), actual.get(0).getFruit());
-        assertEquals(expected.get(0).getCount(), actual.get(0).getCount());
-        assertEquals(expected.get(0).getOperation(), actual.get(0).getOperation());
+        assertEquals(expected, actual);
     }
 
     @Test

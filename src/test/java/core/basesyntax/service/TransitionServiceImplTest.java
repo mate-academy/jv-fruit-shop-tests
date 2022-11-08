@@ -48,15 +48,11 @@ public class TransitionServiceImplTest {
 
     @Test
     public void setTestTransaction_ok() {
-        int expected = 200;
+        Map<Fruit, Integer> expected = new HashMap<>();
+        expected.put(banana, 200);
         transitionService.doTransition(transitionData);
-        int actual = FruitStorage.storage.get(banana);
+        Map<Fruit, Integer> actual = FruitStorage.storage;
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setEmptyTransaction_ok() {
-        transitionService.doTransition(Collections.emptyList());
     }
 
     @Test

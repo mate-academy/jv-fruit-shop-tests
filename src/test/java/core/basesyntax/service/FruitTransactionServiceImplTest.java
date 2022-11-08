@@ -29,10 +29,6 @@ public class FruitTransactionServiceImplTest {
 
     @BeforeClass
     public static void setUp() {
-        apple = new Fruit("apple");
-        fruitTransactionList = new ArrayList<>();
-        fruitTransactionList.add(new FruitTransaction("b", apple, 20));
-        fruitTransactionList.add(new FruitTransaction("p", apple, 10));
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitOperation.BALANCE.getOperation(),
                 new BalanceOperationHandlerImpl());
@@ -44,6 +40,10 @@ public class FruitTransactionServiceImplTest {
 
     @Test
     public void addToStorage_ok() {
+        apple = new Fruit("apple");
+        fruitTransactionList = new ArrayList<>();
+        fruitTransactionList.add(new FruitTransaction("b", apple, 20));
+        fruitTransactionList.add(new FruitTransaction("p", apple, 10));
         int expected = 10;
         fruitTransactionService.addToStorage(fruitTransactionList);
         int actual = FruitStorage.fruitStorage.get(apple);

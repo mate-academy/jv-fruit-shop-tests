@@ -6,6 +6,7 @@ import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.OperationValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,7 +25,6 @@ public class FruitTransactionParserImplTest {
 
     @Before
     public void prepareData() {
-        testData.clear();
         testData.add("type,fruit,quantity");
     }
 
@@ -35,15 +35,6 @@ public class FruitTransactionParserImplTest {
         expected.add(new FruitTransaction("b", new Fruit("banana"), 20));
         List<FruitTransaction> actual = fruitTransactionParser.parseFruitTransactions(testData);
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void parsTransaction_wrongFruit_notOk() {
-        testData.add("b,error,0");
-        List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(new FruitTransaction("b", new Fruit("banana"), 20));
-        List<FruitTransaction> actual = fruitTransactionParser.parseFruitTransactions(testData);
-        Assert.assertNotEquals(expected.toString(), actual.toString());
     }
 
     @Test
@@ -66,5 +57,10 @@ public class FruitTransactionParserImplTest {
         expected.add(new FruitTransaction("s", new Fruit("apple"), 50));
         List<FruitTransaction> actual = fruitTransactionParser.parseFruitTransactions(testData);
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void clearData() {
+        testData.clear();
     }
 }

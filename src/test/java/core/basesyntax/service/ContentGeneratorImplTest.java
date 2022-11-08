@@ -17,25 +17,27 @@ public class ContentGeneratorImplTest {
     @BeforeClass
     public static void setUp() {
         fruitIntegerMap = new HashMap<>();
-        fruitIntegerMap.put(new Fruit("banana"), 152);
-        fruitIntegerMap.put(new Fruit("apple"), 90);
         contentGenerator = new ContentGeneratorImpl();
         report = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,152"
-                + System.lineSeparator()
-                + "apple,90"
                 + System.lineSeparator();
     }
 
     @Test
     public void generateContent_validData_ok() {
+        fruitIntegerMap.put(new Fruit("banana"), 152);
+        fruitIntegerMap.put(new Fruit("apple"), 90);
         String actual = contentGenerator.generateContent(fruitIntegerMap);
-        Assert.assertEquals(actual, report);
+        String expected = report
+                + "banana,152"
+                + System.lineSeparator()
+                + "apple,90"
+                + System.lineSeparator();
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
     public void generateContent_emptyData_ok() {
-        contentGenerator.generateContent(Collections.emptyMap());
+        String actual = contentGenerator.generateContent(Collections.emptyMap());
+        Assert.assertEquals(actual, report);
     }
 }

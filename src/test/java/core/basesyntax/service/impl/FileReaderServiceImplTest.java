@@ -36,11 +36,6 @@ public class FileReaderServiceImplTest {
         assertEquals(actual, expected);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void readFromFile_null_notOk() {
-        fileReader.readFromFile(null);
-    }
-
     @Test(expected = RuntimeException.class)
     public void readFromFile_nonExistentFile_notOk() {
         fileReader.readFromFile(PATH_TO_NON_EXISTENT_FILE);

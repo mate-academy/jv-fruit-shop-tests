@@ -31,11 +31,6 @@ public class FileWriterServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void writeToFile_nullFilePath_notOk() {
-        fileWriterService.writeToFile(VALID_DATA, null);
-    }
-
     @Test
     public void writeToFile_emptyReport_ok() {
         fileWriterService.writeToFile(EMPTY_DATA, VALID_FILE_PATH);

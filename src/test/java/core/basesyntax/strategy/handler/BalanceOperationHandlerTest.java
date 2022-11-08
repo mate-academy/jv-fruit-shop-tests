@@ -41,11 +41,6 @@ public class BalanceOperationHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void execute_null_notOk() {
-        balanceHandler.execute(null);
-    }
-
     @After
     public void tearDown() {
         Storage.storage.clear();

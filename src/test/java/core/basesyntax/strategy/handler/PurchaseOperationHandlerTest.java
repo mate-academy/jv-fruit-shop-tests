@@ -38,11 +38,6 @@ public class PurchaseOperationHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void execute_null_notOk() {
-        purchaseHandler.execute(null);
-    }
-
     @After
     public void tearDown() {
         Storage.storage.clear();

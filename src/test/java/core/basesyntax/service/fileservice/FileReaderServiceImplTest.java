@@ -41,7 +41,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_IsOk() {
+    public void readFile_isOk() {
         assertEquals(expectedList.toString(), fileReader.readFile(validFilePath).toString());
     }
 

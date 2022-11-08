@@ -29,7 +29,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_IsOk() {
+    public void writeDataToFile_isOk() {
         writerService.writeDataToFile(pathToTestReportFile,report);
         List<String> lines;
         try {

@@ -17,15 +17,15 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
 
     @Test
-    public void getReport_EmptyStorage_IsOk() {
-        final String Expected = HEADER;
+    public void getReport_emptyStorage_isOk() {
+        final String expected = HEADER;
         FruitDao fruitDao = new FruitDaoImpl();
         reportService = new ReportServiceImpl(fruitDao);
-        assertEquals(Expected,reportService.getReport());
+        assertEquals(expected,reportService.getReport());
     }
 
     @Test
-    public void getReport_IsOk() {
+    public void getReport_isOk() {
         final String Expected = HEADER + lineSeparator()
                 + KEY_BANANA + SEPARATOR + "100" + lineSeparator()
                 + KEY_APPLE + SEPARATOR + "200";

@@ -31,7 +31,7 @@ public class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    public void operationWithFruitTransaction_IsOk() {
+    public void operationWithFruitTransaction_isOk() {
         Integer expected = 10;
         assertEquals(expected, FruitStorage.storage.get(KEY_APPLE));
     }

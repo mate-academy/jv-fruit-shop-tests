@@ -34,11 +34,6 @@ public class FileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_pathIsNull_notOk() {
-        List<String> actual = fileReaderService.readFile(null);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void readFile_pathIsInvalid_notOk() {
         List<String> actual = fileReaderService.readFile("src/test");
     }

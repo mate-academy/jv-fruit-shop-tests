@@ -35,11 +35,6 @@ public class FileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFile_pathIsNull_notOk() {
-        fileWriterService.writeFile(DATA_TO_WRITE, null);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void writeFile_pathIsInvalid_notOk() {
         fileWriterService.writeFile(DATA_TO_WRITE, "src/test");
     }

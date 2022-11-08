@@ -14,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class QuantityServiceImplTest {
-    private static final Map<Fruit, Integer> ACTUAL = Storage.fruits;
     private static QuantityService quantityService;
     private static Map<Fruit, Integer> expected;
     private static Fruit fruit;
@@ -33,8 +32,9 @@ public class QuantityServiceImplTest {
 
     @Test
     public void add_validData_ok() {
+        Map<Fruit, Integer> actual = Storage.fruits;
         quantityService.add(fruit, 20);
-        assertEquals(expected, ACTUAL);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -49,9 +49,10 @@ public class QuantityServiceImplTest {
 
     @Test
     public void subtract_ok() {
+        Map<Fruit, Integer> actual = Storage.fruits;
         quantityService.add(fruit, 30);
         quantityService.subtract(fruit, 10);
-        assertEquals(expected, ACTUAL);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -67,6 +68,6 @@ public class QuantityServiceImplTest {
 
     @After
     public void tearDown() {
-        ACTUAL.clear();
+        Storage.fruits.clear();
     }
 }

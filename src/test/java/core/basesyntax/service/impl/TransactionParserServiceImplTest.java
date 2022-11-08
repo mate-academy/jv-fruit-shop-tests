@@ -17,7 +17,6 @@ public class TransactionParserServiceImplTest {
     private static TransactionParserService parserService;
     private static List<String> data;
     private static Fruit fruit;
-    private static List<FruitTransaction> expected;
 
     @BeforeClass
     public static void beforeClass() {
@@ -28,6 +27,10 @@ public class TransactionParserServiceImplTest {
     @Before
     public void setUp() {
         data = new ArrayList<>();
+    }
+
+    @Test
+    public void parseTransaction_validData_ok() {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, fruit, 50);
         FruitTransaction supplyTransaction =
@@ -36,12 +39,8 @@ public class TransactionParserServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, fruit, 20);
         FruitTransaction returnTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, fruit, 5);
-        expected = List.of(balanceTransaction, supplyTransaction,
+        final List<FruitTransaction> expected = List.of(balanceTransaction, supplyTransaction,
                 purchaseTransaction, returnTransaction);
-    }
-
-    @Test
-    public void parseTransaction_validData_ok() {
         data.add("column_name");
         data.add("b,banana,50");
         data.add("s,banana,10");

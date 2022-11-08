@@ -17,6 +17,9 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     @Override
     public List<FruitTransaction> parseTransaction(List<String> data) {
+        if (data == null) {
+            throw new RuntimeException("Can't parse data, it is empty.");
+        }
         String[] parsedData;
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = START_POS; i < data.size(); i++) {

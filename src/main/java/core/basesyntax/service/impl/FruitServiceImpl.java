@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {

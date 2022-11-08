@@ -9,7 +9,6 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitTransaction;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.operation.impl.WarehouseOperationStrategyImpl;
-
 import java.util.List;
 
 public class Main {

@@ -4,7 +4,6 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.OperationHandler;
-
 import java.util.HashMap;
 import java.util.Map;
 

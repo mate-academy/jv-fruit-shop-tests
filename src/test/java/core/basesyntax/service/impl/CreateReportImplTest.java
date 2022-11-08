@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.CreateReport;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class CreateReportImplTest {
     private static final String REPORT = "fruit,quantity"

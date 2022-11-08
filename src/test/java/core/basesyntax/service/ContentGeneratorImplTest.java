@@ -11,23 +11,21 @@ import org.junit.Test;
 
 public class ContentGeneratorImplTest {
     private static ContentGenerator contentGenerator;
-    private static Map<Fruit, Integer> fruitIntegerMap;
-    private static String report;
+    private static final String HEADER = "fruit,quantity"
+            + System.lineSeparator();
 
     @BeforeClass
     public static void setUp() {
-        fruitIntegerMap = new HashMap<>();
         contentGenerator = new ContentGeneratorImpl();
-        report = "fruit,quantity"
-                + System.lineSeparator();
     }
 
     @Test
     public void generateContent_validData_ok() {
+        Map<Fruit, Integer> fruitIntegerMap = new HashMap<>();
         fruitIntegerMap.put(new Fruit("banana"), 152);
         fruitIntegerMap.put(new Fruit("apple"), 90);
         String actual = contentGenerator.generateContent(fruitIntegerMap);
-        String expected = report
+        String expected = HEADER
                 + "banana,152"
                 + System.lineSeparator()
                 + "apple,90"
@@ -38,6 +36,6 @@ public class ContentGeneratorImplTest {
     @Test
     public void generateContent_emptyData_ok() {
         String actual = contentGenerator.generateContent(Collections.emptyMap());
-        Assert.assertEquals(actual, report);
+        Assert.assertEquals(actual, HEADER);
     }
 }

@@ -58,6 +58,6 @@ public class FruitTransactionServiceImplTest {
 
     @After
     public void cleanStorage() {
-        FruitStorage.fruitStorage.remove(apple);
+        FruitStorage.fruitStorage.clear();
     }
 }

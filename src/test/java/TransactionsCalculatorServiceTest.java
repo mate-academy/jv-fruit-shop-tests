@@ -53,8 +53,8 @@ public class TransactionsCalculatorServiceTest {
         List<FruitReport> actual = transactionsCalculator.calculate();
         List<FruitReport> expected = List.of(
                 new FruitReport("banana", 3832),
-                new FruitReport("apple",10020),
-                new FruitReport("peach",0)
+                new FruitReport("apple", 10020),
+                new FruitReport("peach", 0)
         );
         assertEquals("Expected sizes to be equal", expected.size(), actual.size());
         assertEquals("Expected report to write is not correct", expected, actual);

@@ -21,7 +21,7 @@ public class OperationTest {
 
     @Test
     public void getByValue_getValidOperationSupply_ok() {
-        Operation actualOperationByValueSupply = Operation.getByValue('b');
+        Operation actualOperationByValueSupply = Operation.getByValue('s');
         assertEquals("Expected to return corresponding operation",
                 actualOperationByValueSupply, Operation.SUPPLY
         );
@@ -29,7 +29,7 @@ public class OperationTest {
 
     @Test
     public void getByValue_getValidOperation_ok() {
-        Operation actualOperationByValuePurchase = Operation.getByValue('b');
+        Operation actualOperationByValuePurchase = Operation.getByValue('p');
         assertEquals("Expected to return corresponding operation",
                 actualOperationByValuePurchase, Operation.PURCHASE
         );
@@ -37,7 +37,7 @@ public class OperationTest {
 
     @Test
     public void getByValue_getValidOperationReturn_ok() {
-        Operation actualOperationByValueReturn = Operation.getByValue('b');
+        Operation actualOperationByValueReturn = Operation.getByValue('r');
         assertEquals("Expected to return corresponding operation",
                 actualOperationByValueReturn, Operation.RETURN
         );

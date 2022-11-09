@@ -100,7 +100,7 @@ public class TransactionRowParserTest {
     }
 
     @Test()
-    public void parse_everythingOk_toBeOk() {
+    public void parse_everythingOk_ok() {
         transactionRowParser.parse(currentDataRows);
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.getByValue('b'), "banana", 20),

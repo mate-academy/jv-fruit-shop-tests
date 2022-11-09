@@ -9,8 +9,8 @@ public class BalanceOperationImpl implements OperationHandler {
             putNewBalanceToFruit(fruitName, value);
             return;
         }
-        int oldVale = getBalanceFromFruitName(fruitName);
-        int newValue = oldVale + value;
+        int oldValue = getBalanceFromFruitName(fruitName);
+        int newValue = oldValue + value;
         putNewBalanceToFruit(fruitName, newValue);
     }
 }

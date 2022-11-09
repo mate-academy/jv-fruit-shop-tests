@@ -22,4 +22,14 @@ public class PurchaseOperationImplTest {
         int actual = purchaseOperation.getBalanceFromFruitName(BANANA);
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void applyOperation_uncorrectedData_notOk() {
+        Storage.FRUIT_STORAGE.put(BANANA, BANANA_VALUE);
+        int oldValue = new ReturnOperationImpl().getBalanceFromFruitName(BANANA);
+        int newValue = oldValue - 10;
+        int excepted = 10;
+        int actual = newValue;
+        Assert.assertEquals(excepted, actual);
+    }
 }

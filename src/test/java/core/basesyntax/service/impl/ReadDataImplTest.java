@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReadDataImplTest {
-    private static final String INPUT = "src/test/resources/fruitInfo.csv";
+    private static final String INPUT_FILE = "src/test/resources/fruitInfo.csv";
     private ReadData readData = new ReadDataImpl();
 
     @Test

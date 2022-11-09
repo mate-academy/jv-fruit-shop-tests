@@ -21,7 +21,7 @@ public class ReadDataImplTest {
                 "p,apple,18",
                 "p,banana,5",
                 "s,banana,500");
-        List<String> expected = readData.read(INPUT);
+        List<String> expected = readData.read(INPUT_FILE);
         Assert.assertEquals(expected, actual);
     }
 

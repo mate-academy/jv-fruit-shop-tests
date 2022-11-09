@@ -17,8 +17,9 @@ public class BalanceHandlerTest {
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(200);
         operationHandler.apply(fruitTransaction);
+        int expectedFruitQuantity = 200;
         int actual = Storage.getStorage().get("banana");
-        int expected = EXPECTED_FRUIT_QUANTITY;
+        int expected = expectedFruitQuantity;
         assertEquals(expected, actual);
     }
 }

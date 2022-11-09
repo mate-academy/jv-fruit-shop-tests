@@ -19,7 +19,8 @@ public class PurchaseHandlerTest {
         fruitTransaction.setQuantity(200);
         operationHandler.apply(fruitTransaction);
         int actual = Storage.getStorage().get("banana");
-        int expected = EXPECTED_FRUIT_QUANTITY;
+        int expectedFruitQuantity = 200;
+        int expected = expectedFruitQuantity;
         assertEquals(expected, actual);
     }
 

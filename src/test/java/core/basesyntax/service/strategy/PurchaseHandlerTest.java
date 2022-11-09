@@ -12,7 +12,7 @@ public class PurchaseHandlerTest {
     private FruitTransaction fruitTransaction = new FruitTransaction();
 
     @Test
-    public void purchaseOperationHandler_CorrectData_Ok() {
+    public void apply_correctData_ok() {
         Storage.storageFruits.put("banana", 400);
         fruitTransaction.setOperation(Operation.PURCHASE);
         fruitTransaction.setFruit("banana");

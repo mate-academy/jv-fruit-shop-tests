@@ -24,7 +24,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperationHandler_NotEnoughFruit_NotOk() {
+    public void apply_notEnoughFruit_notOk() {
         Storage.storageFruits.put("banana", 10);
         fruitTransaction.setOperation(Operation.PURCHASE);
         fruitTransaction.setFruit("banana");

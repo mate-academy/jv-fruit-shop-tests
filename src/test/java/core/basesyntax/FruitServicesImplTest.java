@@ -116,5 +116,6 @@ public class FruitServicesImplTest {
     @After
     public void clean() {
         fruitTransactionList.clear();
+        Storage.storage.clear();
     }
 }

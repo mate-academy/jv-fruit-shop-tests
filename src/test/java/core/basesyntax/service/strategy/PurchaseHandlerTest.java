@@ -8,7 +8,6 @@ import core.basesyntax.model.FruitTransaction.Operation;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
-    private static final int EXPECTED_FRUIT_QUANTITY = 200;
     private OperationHandler operationHandler = new PurchaseHandler();
     private FruitTransaction fruitTransaction = new FruitTransaction();
 

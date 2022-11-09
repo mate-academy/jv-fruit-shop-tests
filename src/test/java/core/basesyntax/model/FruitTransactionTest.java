@@ -7,18 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionTest {
-    private static FruitTransaction.Operation BALANCE;
-    private static FruitTransaction.Operation PURCHASE;
-    private static FruitTransaction.Operation RETURN;
-    private static FruitTransaction.Operation SUPPLY;
-
-    @Before
-    public void setUp() {
-        BALANCE = Operation.BALANCE;
-        PURCHASE = Operation.PURCHASE;
-        RETURN = Operation.RETURN;
-        SUPPLY = Operation.SUPPLY;
-    }
+  
 
     @Test
     public void correctInputData_Ok() {

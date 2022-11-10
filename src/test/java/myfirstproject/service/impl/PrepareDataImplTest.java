@@ -1,6 +1,6 @@
 package myfirstproject.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import java.util.Map;
 import myfirstproject.model.Fruit;
 import myfirstproject.service.PreparingData;
 import org.junit.Test;
+
 
 public class PrepareDataImplTest {
     @Test

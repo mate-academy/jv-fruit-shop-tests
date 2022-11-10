@@ -19,7 +19,6 @@ import myfirstproject.strategy.SupplyOperation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
 
 public class OperationsTests {
     private static final FruitDao FRUIT_DAO = new FruitDaoImpl();
@@ -125,10 +124,5 @@ public class OperationsTests {
         actual.put(new Fruit("apple"), 10);
         actual.put(new Fruit("banana"), 10);
         Assert.assertEquals(expected, actual);
-    }
-
-    @AfterAll
-    public static void after() {
-        operation.clear();
     }
 }

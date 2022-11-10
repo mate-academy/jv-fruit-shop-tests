@@ -97,7 +97,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Application*</exclude>
-                        <exclude>myfirstproject/model/*.class</exclude>
+                        <exclude>**/model/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

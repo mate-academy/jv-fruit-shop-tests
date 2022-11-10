@@ -16,6 +16,7 @@ import myfirstproject.strategy.PurchaseOperation;
 import myfirstproject.strategy.ReturnOperation;
 import myfirstproject.strategy.SeparationOfOperations;
 import myfirstproject.strategy.SupplyOperation;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -124,5 +125,10 @@ public class OperationsTests {
         actual.put(new Fruit("apple"), 10);
         actual.put(new Fruit("banana"), 10);
         Assert.assertEquals(expected, actual);
+    }
+
+    @AfterClass
+    public static void after() {
+        operation.clear();
     }
 }

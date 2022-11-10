@@ -9,7 +9,6 @@ import myfirstproject.model.Fruit;
 import myfirstproject.service.PreparingData;
 import org.junit.Test;
 
-
 public class PrepareDataImplTest {
     @Test
     public void isEmptyData_Ok() {

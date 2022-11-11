@@ -99,6 +99,7 @@
                         <exclude>**/Application*</exclude>
                         <exclude>**/model/*</exclude>
                         <exclude>**/strategy/*</exclude>
+                        <exclude>**/db/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

@@ -7,8 +7,10 @@ import java.util.Map;
 import myfirstproject.dao.FruitDao;
 import myfirstproject.dao.impl.FruitDaoImpl;
 import myfirstproject.model.Operation;
+import myfirstproject.service.PreparingData;
 import myfirstproject.service.ReadFile;
 import myfirstproject.service.WriteFile;
+import myfirstproject.service.impl.PrepareDataImpl;
 import myfirstproject.service.impl.ReadFileImpl;
 import myfirstproject.service.impl.WriteFileImpl;
 import myfirstproject.strategy.BalanceOperation;
@@ -29,13 +31,14 @@ public class Application {
         final SeparationOfOperations separation = new SeparationOfOperations();
         final List<String[]> temporalList = new ArrayList<>();
         final Map<String, OperationHandler> operation = new HashMap<>();
+        final PreparingData preparingData = new PrepareDataImpl();
         operation.put(Operation.BALANCE.getOperation(), new BalanceOperation());
         operation.put(Operation.SUPPLY.getOperation(), new SupplyOperation());
         operation.put(Operation.PURCHASE.getOperation(), new PurchaseOperation());
         operation.put(Operation.RETURN.getOperation(), new ReturnOperation());
         reader.readFile(temporalList, PATH_TO_DB);
         separation.toDoEachOperation(fruitDao, temporalList, operation);
-        writer.writeToFile(PATH_TO_RESULT, fruitDao.getAll());
+        writer.writeToFile(PATH_TO_RESULT, preparingData.prepare(fruitDao.getAll()));
 
     }
 }

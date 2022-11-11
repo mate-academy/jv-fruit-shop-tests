@@ -7,20 +7,28 @@ import java.util.HashMap;
 import java.util.Map;
 import myfirstproject.model.Fruit;
 import myfirstproject.service.PreparingData;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PrepareDataImplTest {
+    private static PreparingData preparingData;
+
+    @BeforeClass
+    public static void setUp() {
+        preparingData = new PrepareDataImpl();
+    }
+
     @Test
-    public void isEmptyData_Ok() {
-        PreparingData preparingData = new PrepareDataImpl();
-        String expected = preparingData.prepare(Collections.emptyMap());
-        String actual = "fruit,quantity" + System.lineSeparator();
+    public void isEmptyData_ok() {
+        preparingData = new PrepareDataImpl();
+        String expected = "fruit,quantity" + System.lineSeparator();
+        String actual = preparingData.prepare(Collections.emptyMap());
         assertEquals(expected, actual);
     }
 
     @Test
-    public void isValidPreparedData_Ok() {
-        PreparingData preparingData = new PrepareDataImpl();
+    public void isValidPreparedData_ok() {
+        preparingData = new PrepareDataImpl();
         Fruit fruit = new Fruit("apple");
         Integer value = 10;
         Map<Fruit, Integer> map = new HashMap<>();

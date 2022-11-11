@@ -16,7 +16,7 @@ import myfirstproject.strategy.PurchaseOperation;
 import myfirstproject.strategy.ReturnOperation;
 import myfirstproject.strategy.SeparationOfOperations;
 import myfirstproject.strategy.SupplyOperation;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,7 +30,8 @@ public class OperationsTests {
     private static final OperationHandler RETURN_OPERATION = new ReturnOperation();
     private static final OperationHandler SUPPLY_OPERATION = new SupplyOperation();
     private static Map<String, OperationHandler> operation;
-    private final Fruit fruit = new Fruit("apple");
+    private final Fruit fruitApple = new Fruit("apple");
+    private final Fruit fruitBanana = new Fruit("banana");
     private final int value = 10;
     private Map<Fruit, Integer> expected;
 
@@ -46,53 +47,58 @@ public class OperationsTests {
         operation.put(Operation.PURCHASE.getOperation(), PURCHASE_OPERATION);
         operation.put(Operation.RETURN.getOperation(), RETURN_OPERATION);
         SEPARATION.toDoEachOperation(FRUIT_DAO, TEMPORAL_LIST, operation);
+        Assert.assertEquals(Operation.BALANCE.getOperation(), "b");
+        Assert.assertEquals(Operation.SUPPLY.getOperation(), "s");
+        Assert.assertEquals(Operation.PURCHASE.getOperation(), "p");
+        Assert.assertEquals(Operation.RETURN.getOperation(), "r");
     }
 
     @Test
-    public void testBalanceIsNull_ok() {
+    public void testBalance_ok() {
         expected = new HashMap<>();
-        expected.put(fruit, value);
-        CustomDataBase.storage.put(fruit, value);
-        BALANCE_OPERATION.changeValue(FRUIT_DAO, fruit, value);
-        Integer actual = CustomDataBase.storage.get(fruit);
-        Assert.assertEquals(expected.get(fruit), actual);
+        expected.put(fruitApple, value);
+        expected.put(fruitBanana, value);
+        BALANCE_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
+        Assert.assertEquals(expected, CustomDataBase.storage);
     }
 
     @Test
-    public void testSupplyIsNull_ok() {
+    public void testSupply_ok() {
         expected = new HashMap<>();
-        expected.put(fruit, value + value);
-        CustomDataBase.storage.put(fruit, value);
-        SUPPLY_OPERATION.changeValue(FRUIT_DAO, fruit, value);
-        Integer actual = CustomDataBase.storage.get(fruit);
-        Assert.assertEquals(expected.get(fruit), actual);
+        expected.put(fruitApple, value + value);
+        expected.put(fruitBanana, value);
+        CustomDataBase.storage.put(fruitApple, value);
+        SUPPLY_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
+        System.out.println(expected);
+        System.out.println(CustomDataBase.storage);
+        Assert.assertEquals(expected, CustomDataBase.storage);
     }
 
     @Test
-    public void testPurchaseIsNull_ok() {
+    public void testPurchase_ok() {
         expected = new HashMap<>();
-        expected.put(fruit, 0);
-        CustomDataBase.storage.put(fruit, value);
-        PURCHASE_OPERATION.changeValue(FRUIT_DAO, fruit, value);
-        Integer actual = CustomDataBase.storage.get(fruit);
-        Assert.assertEquals(expected.get(fruit), actual);
+        expected.put(fruitApple, 0);
+        expected.put(fruitBanana, value);
+        CustomDataBase.storage.put(fruitApple, value);
+        PURCHASE_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
+        Assert.assertEquals(expected, CustomDataBase.storage);
     }
 
     @Test
-    public void testReturnIsNull_ok() {
+    public void testReturn_ok() {
         expected = new HashMap<>();
-        expected.put(fruit, value + value);
-        CustomDataBase.storage.put(fruit, value);
-        RETURN_OPERATION.changeValue(FRUIT_DAO, fruit, value);
-        Integer actual = CustomDataBase.storage.get(fruit);
-        Assert.assertEquals(expected.get(fruit), actual);
+        expected.put(fruitApple, value + value);
+        expected.put(fruitBanana, value);
+        CustomDataBase.storage.put(fruitApple, value);
+        RETURN_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
+        Assert.assertEquals(expected, CustomDataBase.storage);
     }
 
     @Test
     public void testPrepareData_ok() {
         PreparingData preparingData = new PrepareDataImpl();
         expected = new HashMap<>();
-        expected.put(fruit, value);
+        expected.put(fruitApple, value);
         String expectedPrep = "fruit,quantity" + System.lineSeparator()
                 + "apple,10" + System.lineSeparator();
         String actual = preparingData.prepare(expected);
@@ -114,21 +120,25 @@ public class OperationsTests {
 
     @Test
     public void testGetQuantityOfFruit_ok() {
-        Integer actual = 10;
-        Assert.assertEquals(FRUIT_DAO.getQuantity(fruit), actual);
+        Integer actual = value;
+        CustomDataBase.storage.put(new Fruit("apple"), value);
+        Assert.assertEquals(FRUIT_DAO.getQuantity(fruitApple), actual);
     }
 
     @Test
     public void testGetAllMethod() {
-        Map<Fruit, Integer> actual = new HashMap<>();
-        Map<Fruit, Integer> expected = FRUIT_DAO.getAll();
-        actual.put(new Fruit("apple"), 10);
-        actual.put(new Fruit("banana"), 10);
+        final Map<Fruit, Integer> actual = new HashMap<>();
+        Map<Fruit, Integer> expected;
+        CustomDataBase.storage.put(fruitApple, value);
+        CustomDataBase.storage.put(fruitBanana, value);
+        expected = FRUIT_DAO.getAll();
+        actual.put(fruitApple, value);
+        actual.put(fruitBanana, value);
         Assert.assertEquals(expected, actual);
     }
 
-    @AfterClass
-    public static void after() {
+    @After
+    public void after() {
         operation.clear();
     }
 }

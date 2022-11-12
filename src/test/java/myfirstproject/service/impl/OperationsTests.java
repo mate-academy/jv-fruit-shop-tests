@@ -12,6 +12,7 @@ import myfirstproject.model.Operation;
 import myfirstproject.service.PreparingData;
 import myfirstproject.strategy.BalanceOperation;
 import myfirstproject.strategy.OperationHandler;
+import myfirstproject.strategy.PurchaseOperation;
 import myfirstproject.strategy.ReturnOperation;
 import myfirstproject.strategy.SeparationOfOperations;
 import myfirstproject.strategy.SupplyOperation;

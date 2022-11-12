@@ -90,10 +90,11 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Application*</exclude>
+                        <exclude>**/dao/*</exclude>
+                        <exclude>**/db/*</exclude>
                         <exclude>**/model/*</exclude>
                         <exclude>**/strategy/*</exclude>
-                        <exclude>**/db/*</exclude>
+                        <exclude>**/Application*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

@@ -1,8 +1,7 @@
-package myfirstproject.service.impl;
+package myfirstproject.strategy;
 
 import myfirstproject.dao.FruitDao;
 import myfirstproject.model.Fruit;
-import myfirstproject.strategy.OperationHandler;
 
 public class PurchaseOperation implements OperationHandler {
     @Override

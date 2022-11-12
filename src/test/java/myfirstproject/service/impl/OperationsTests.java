@@ -57,7 +57,6 @@ public class OperationsTests {
     public void testBalance_ok() {
         expected = new HashMap<>();
         expected.put(fruitApple, value);
-        expected.put(fruitBanana, value);
         BALANCE_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
         Assert.assertEquals(expected, CustomDataBase.storage);
     }
@@ -66,7 +65,6 @@ public class OperationsTests {
     public void testSupply_ok() {
         expected = new HashMap<>();
         expected.put(fruitApple, value + value);
-        expected.put(fruitBanana, value);
         CustomDataBase.storage.put(fruitApple, value);
         SUPPLY_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
         System.out.println(expected);
@@ -78,7 +76,6 @@ public class OperationsTests {
     public void testPurchase_ok() {
         expected = new HashMap<>();
         expected.put(fruitApple, 0);
-        expected.put(fruitBanana, value);
         CustomDataBase.storage.put(fruitApple, value);
         PURCHASE_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
         Assert.assertEquals(expected, CustomDataBase.storage);
@@ -88,7 +85,6 @@ public class OperationsTests {
     public void testReturn_ok() {
         expected = new HashMap<>();
         expected.put(fruitApple, value + value);
-        expected.put(fruitBanana, value);
         CustomDataBase.storage.put(fruitApple, value);
         RETURN_OPERATION.changeValue(FRUIT_DAO, fruitApple, value);
         Assert.assertEquals(expected, CustomDataBase.storage);
@@ -139,6 +135,6 @@ public class OperationsTests {
 
     @After
     public void after() {
-        operation.clear();
+        CustomDataBase.storage.clear();
     }
 }

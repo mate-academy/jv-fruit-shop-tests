@@ -20,7 +20,6 @@ public class PrepareDataImplTest {
 
     @Test
     public void isEmptyData_ok() {
-        preparingData = new PrepareDataImpl();
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = preparingData.prepare(Collections.emptyMap());
         assertEquals(expected, actual);
@@ -28,7 +27,6 @@ public class PrepareDataImplTest {
 
     @Test
     public void isValidPreparedData_ok() {
-        preparingData = new PrepareDataImpl();
         Fruit fruit = new Fruit("apple");
         Integer value = 10;
         Map<Fruit, Integer> map = new HashMap<>();

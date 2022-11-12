@@ -90,8 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-<!--                        <exclude>**/dao/*</exclude>-->
-<!--                        <exclude>**/db/*</exclude>-->
+                        <exclude>**/db/*</exclude>
                         <exclude>**/model/*</exclude>
                         <exclude>**/strategy/*</exclude>
                         <exclude>**/Application*</exclude>

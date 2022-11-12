@@ -5,6 +5,23 @@ public class FruitTransaction {
     private int quantity;
     private String fruit;
 
+    public FruitTransaction() {
+    }
+
+    public FruitTransaction(String operation) {
+        this.operation = operation;
+    }
+
+    public FruitTransaction(String operation, int quantity) {
+        this.operation = operation;
+        this.quantity = quantity;
+    }
+
+    public FruitTransaction(int quantity, String fruit) {
+        this.quantity = quantity;
+        this.fruit = fruit;
+    }
+
     public FruitTransaction(String operation, int quantity, String fruit) {
         this.operation = operation;
         this.quantity = quantity;

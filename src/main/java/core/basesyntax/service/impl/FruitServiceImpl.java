@@ -13,6 +13,9 @@ public class FruitServiceImpl implements FruitService {
     }
 
     public void applyFruitTransactions(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null || fruitTransactions.isEmpty()) {
+            throw new IllegalArgumentException("Input data is not correct");
+        }
         fruitTransactions.forEach(operationStrategy::processOperation);
     }
 

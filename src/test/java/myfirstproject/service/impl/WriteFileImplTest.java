@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import myfirstproject.service.WriteFile;
@@ -24,10 +26,9 @@ public class WriteFileImplTest {
     }
 
     @Test
-    public void testContentOfFile_ok() {
-        List<String[]> temporalList = new ArrayList<>();
+    public void testContentOfFile_ok() throws IOException {
         WRITE_FILE.writeToFile(PATH_TO_NEW_FILE, Arrays.toString(TEST_CONTENT));
-        temporalList.add(TEST_CONTENT);
-        assertEquals(Arrays.toString(temporalList.get(0)), Arrays.toString(TEST_CONTENT));
+        List<String> actual = Files.readAllLines(Path.of(PATH_TO_NEW_FILE));
+        assertEquals(actual.get(0), Arrays.toString(TEST_CONTENT));
     }
 }

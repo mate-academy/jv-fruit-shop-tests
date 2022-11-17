@@ -15,10 +15,10 @@ public class WorkWithFile implements IStorageDao {
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
 
     @Override
-    public List<String> getData(String path_input) {
+    public List<String> getData(String path) {
         List<String> operations = new ArrayList<>();
         String tmp;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path_input))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             while ((tmp = bufferedReader.readLine()) != null) {
                 operations.add(tmp);
             }
@@ -29,8 +29,8 @@ public class WorkWithFile implements IStorageDao {
     }
 
     @Override
-    public void putData(String path_output) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path_output))) {
+    public void putData(String path) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             bufferedWriter.write(HEADER);
             for (Map.Entry<String, Integer> entry: storage.entrySet()) {
                 bufferedWriter.write(entry.getKey() + ","

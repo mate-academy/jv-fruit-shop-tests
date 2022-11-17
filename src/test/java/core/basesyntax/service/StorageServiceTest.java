@@ -13,6 +13,8 @@ import org.junit.Test;
 
 public class StorageServiceTest {
     private static StorageService storageService;
+    private static final Integer NUM = 123;
+    private static final Integer TO_BIG_NUM = 2_000_000_000;
 
     @BeforeClass
     public static void initStorageServiceClass() {
@@ -26,16 +28,26 @@ public class StorageServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void checkOperationIsNull_NotOK() {
-        storageService.operation(null, "apple", 100);
+        storageService.operation(null, "apple", NUM);
     }
 
     @Test(expected = RuntimeException.class)
     public void checkFruitIsNull_NotOK() {
-        storageService.operation("b", null, 100);
+        storageService.operation("b", null, NUM);
     }
 
     @Test(expected = RuntimeException.class)
     public void checkQuantityIsNull_NotOK() {
         storageService.operation("s", "banana", null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void operationMoreTwoLetters_NotOK() {
+        storageService.operation("bs", "banana", NUM);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void quantityToBig_NotOK() {
+        storageService.operation("p", "pineapple", TO_BIG_NUM);
     }
 }

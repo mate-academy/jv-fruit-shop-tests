@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import java.util.List;
 
 public interface IStorageDao {
-    List<String> getData();
+    List<String> getData(String path);
 
-    void putData();
+    void putData(String path);
 }

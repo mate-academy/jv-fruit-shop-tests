@@ -12,15 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 public class WorkWithFile implements IStorageDao {
-    private static final String PATH_INPUT = "src/main/resources/input.csv";
-    private static final String PATH_OUTPUT = "src/main/resources/output.csv";
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
 
     @Override
-    public List<String> getData() {
+    public List<String> getData(String path_input) {
         List<String> operations = new ArrayList<>();
         String tmp;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(PATH_INPUT))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path_input))) {
             while ((tmp = bufferedReader.readLine()) != null) {
                 operations.add(tmp);
             }
@@ -31,8 +29,8 @@ public class WorkWithFile implements IStorageDao {
     }
 
     @Override
-    public void putData() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH_OUTPUT))) {
+    public void putData(String path_output) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path_output))) {
             bufferedWriter.write(HEADER);
             for (Map.Entry<String, Integer> entry: storage.entrySet()) {
                 bufferedWriter.write(entry.getKey() + ","

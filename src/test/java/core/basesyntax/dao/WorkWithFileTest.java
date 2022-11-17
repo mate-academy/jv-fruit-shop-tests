@@ -1,12 +1,11 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-
-import static org.junit.Assert.assertEquals;
 
 public class WorkWithFileTest {
     private static final String PATH_INPUT = "src/test/resources/input.csv";

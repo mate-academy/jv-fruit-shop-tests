@@ -52,10 +52,6 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
-        }
-
         public static Operation fromString(String text) {
             for (Operation o : Operation.values()) {
                 if (o.operation.equals(text)) {

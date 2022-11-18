@@ -90,7 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/mate.academy.Main*</exclude>
+                        <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

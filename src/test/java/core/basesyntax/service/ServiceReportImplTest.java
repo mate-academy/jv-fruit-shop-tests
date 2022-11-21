@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import static core.basesyntax.db.Storage.storage;
 import static org.junit.Assert.assertEquals;
 
-
 import core.basesyntax.dao.FileWriterImpl;
 import org.junit.Test;
 

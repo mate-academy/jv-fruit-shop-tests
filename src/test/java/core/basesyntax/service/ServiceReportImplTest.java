@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class ServiceReportImplTest {
-    private static final String expectedString = "alala,1234567890";
+    private static final String expectedString = "Malala,1234567890";
     private static final ServiceReportImpl serviceReport = new ServiceReportImpl();
 
     @Test

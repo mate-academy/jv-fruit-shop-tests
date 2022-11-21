@@ -26,28 +26,28 @@ public class OperationHandlerStrategyImplTest {
     }
 
     @Test
-    public void checkReturnBalanceOperationClass_OK() {
+    public void returnBalanceOperationClass_OK() {
         operationHandler =
                 operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.BALANCE);
         assertEquals(operationHandler.getClass(), BalanceOperationHandler.class);
     }
 
     @Test
-    public void checkReturnSupplyOperationClass_OK() {
+    public void returnSupplyOperationClass_OK() {
         operationHandler =
                 operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.SUPPLY);
         assertEquals(operationHandler.getClass(), SupplyOperationHandler.class);
     }
 
     @Test
-    public void checkReturnPurchaseOperationClass_OK() {
+    public void returnPurchaseOperationClass_OK() {
         operationHandler =
                 operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.PURCHASE);
         assertEquals(operationHandler.getClass(), PurchaseOperationHandler.class);
     }
 
     @Test
-    public void checkReturnReturnOperationClass_OK() {
+    public void returnReturnOperationClass_OK() {
         operationHandler =
                 operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.RETURN);
         assertEquals(operationHandler.getClass(), ReturnOperationHandler.class);

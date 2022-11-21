@@ -19,17 +19,17 @@ public class ParseServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void checkWhenStringIsNull_NotOK() {
+    public void parse_stringIsNull_NotOK() {
         parseService.parse(null);
     }
 
     @Test (expected = RuntimeException.class)
-    public void checkWrongOperation_NotOK() {
+    public void parse_wrongOperation_NotOK() {
         parseService.parse(WRONG_OPERATION_TRANSACTION);
     }
 
     @Test
-    public void checkWrightTransaction_OK() {
+    public void parse_rightTransaction_OK() {
         FruitTransaction fruitTransaction = parseService.parse(WRIGHT_TRANSACTION);
         assertEquals(expectedFruitTransaction, fruitTransaction);
     }

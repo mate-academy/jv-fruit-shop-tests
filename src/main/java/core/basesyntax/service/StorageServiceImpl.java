@@ -2,12 +2,12 @@ package core.basesyntax.service;
 
 import core.basesyntax.service.model.FruitTransaction;
 import core.basesyntax.service.operations.OperationHandler;
-import core.basesyntax.strategy.OperatioHandlerStrategyImpl;
+import core.basesyntax.strategy.OperationHandlerStrategyImpl;
 
 public class StorageServiceImpl implements StorageService {
-    private final OperatioHandlerStrategyImpl handlerStrategy;
+    private final OperationHandlerStrategyImpl handlerStrategy;
 
-    public StorageServiceImpl(OperatioHandlerStrategyImpl handlerStrategy) {
+    public StorageServiceImpl(OperationHandlerStrategyImpl handlerStrategy) {
         this.handlerStrategy = handlerStrategy;
     }
 

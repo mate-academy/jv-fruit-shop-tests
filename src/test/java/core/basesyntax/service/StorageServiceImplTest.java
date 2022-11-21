@@ -92,8 +92,9 @@ public class StorageServiceImplTest {
 
     @Test
     public void checkStorageAfterPurchaseWithMore_OK() {
+        storage.put("apple", 10);
         storageService.operation(WRIGHT_PURCHASE);
-        assertEquals(Integer.valueOf(0), storage.get("apple"));
+        assertEquals(Integer.valueOf(10), storage.get("apple"));
     }
 
     @Test

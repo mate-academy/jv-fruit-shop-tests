@@ -43,10 +43,12 @@ public class StorageServiceImplTest {
     public void checkNullFruitItem_NotOK() {
         storageService.operation(NULL_OPERATION);
     }
+
     @Test (expected = RuntimeException.class)
     public void checkEmptyFruitItem_NotOK() {
         storageService.operation(EMPTY_FRUIT);
     }
+
     @Test (expected = RuntimeException.class)
     public void checkNullQuanityItem_NotOK() {
         storageService.operation(NULL_QUANTITY);

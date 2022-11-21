@@ -42,14 +42,14 @@ public class OperationHandlerStrategyImplTest {
     @Test
     public void checkReturnPurchaseOperationClass_OK() {
         operationHandler =
-                operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.SUPPLY);
+                operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.PURCHASE);
         assertEquals(operationHandler.getClass(), PurchaseOperationHandler.class);
     }
 
     @Test
     public void checkReturnReturnOperationClass_OK() {
         operationHandler =
-                operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.SUPPLY);
+                operationHandlerStrategy.chooseOperation(FruitTransaction.TypeOperation.RETURN);
         assertEquals(operationHandler.getClass(), ReturnOperationHandler.class);
     }
 }

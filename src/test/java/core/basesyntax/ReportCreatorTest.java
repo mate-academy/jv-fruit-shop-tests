@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.ReportCreator;
 import core.basesyntax.dao.ReportCreatorImpl;
+import core.basesyntax.dbreport.Report;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.FruitShopService;
 import core.basesyntax.services.FruitShopServiceImpl;
@@ -17,9 +18,16 @@ import core.basesyntax.services.transaction.ReturnOperationHandler;
 import core.basesyntax.services.transaction.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorTest {
+    private static final ReportCreator reportCreator = new ReportCreatorImpl();
+
+    @Before
+    public void before() {
+        Report.report.clear();
+    }
 
     @Test
     public void reportCreate_Ok() {
@@ -45,11 +53,32 @@ public class ReportCreatorTest {
         fruitShopService.doTransaction(transactionReturn);
         fruitShopService.doTransaction(transactionSupply);
 
-        ReportCreator reportCreator = new ReportCreatorImpl();
         String actual = reportCreator.createReport();
         String eol = System.getProperty("line.separator");
         String expected = "fruit,quantity" + eol
                 + "banana,105" + eol;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void reportCreate_EmptyData_Ok() {
+        String actual = reportCreator.createReport();
+        String eol = System.getProperty("line.separator");
+        String expected = "fruit,quantity" + eol;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void reportCreate_Manual_Ok() {
+        Report.report.put("banana", 100);
+        Report.report.put("apple", 10);
+        Report.report.put("plum", 50);
+        String actual = reportCreator.createReport();
+        String eol = System.getProperty("line.separator");
+        String expected = "fruit,quantity" + eol
+                + "banana,100" + eol
+                + "plum,50" + eol
+                + "apple,10" + eol;
         assertEquals(expected, actual);
     }
 }

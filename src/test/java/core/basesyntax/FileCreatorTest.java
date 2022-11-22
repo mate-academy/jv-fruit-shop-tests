@@ -12,6 +12,8 @@ public class FileCreatorTest {
     private static final String FRUIT_REPORT_FILE_NAME = "src/test/resources/report.csv";
     private static final String EMPTY_FILE_NAME = "";
 
+    private static final FileCreatorImpl fileCreator = new FileCreatorImpl();
+
     @Test
     public void fileCreate_Ok() {
         String eol = System.getProperty("line.separator");
@@ -29,7 +31,6 @@ public class FileCreatorTest {
                 .append("10")
                 .append(eol);
 
-        FileCreatorImpl fileCreator = new FileCreatorImpl();
         fileCreator.createFile(expected.toString(), FRUIT_REPORT_FILE_NAME);
         File file = new File(FRUIT_REPORT_FILE_NAME);
         String actual;
@@ -44,7 +45,6 @@ public class FileCreatorTest {
 
     @Test(expected = RuntimeException.class)
     public void fileCreator_EmptyPath_NotOk() {
-        FileCreatorImpl fileCreator = new FileCreatorImpl();
         fileCreator.createFile("test", EMPTY_FILE_NAME);
     }
 }

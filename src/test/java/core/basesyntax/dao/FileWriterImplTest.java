@@ -19,7 +19,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void write_correctFile_Ok() throws IOException {
+    public void write_correctFile_ok() throws IOException {
         fileWriter.write(PATH_OUTPUT, ETALON_STRING);
         String string = Files.readAllLines(Path.of(PATH_OUTPUT)).get(0);
         assertEquals(string, ETALON_STRING);

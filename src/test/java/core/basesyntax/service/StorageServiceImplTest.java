@@ -47,58 +47,58 @@ public class StorageServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void operation_nullOperationItem_notOK() {
+    public void operation_nullOperationItem_notOk() {
         storageService.operation(NULL_FRUIT);
     }
 
     @Test (expected = RuntimeException.class)
-    public void nullFruitItem_NotOK() {
+    public void operation_nullFruitItem_notOk() {
         storageService.operation(NULL_OPERATION);
     }
 
     @Test (expected = RuntimeException.class)
-    public void emptyFruitItem_NotOK() {
+    public void operation_emptyFruitItem_notOk() {
         storageService.operation(EMPTY_FRUIT);
     }
 
     @Test (expected = RuntimeException.class)
-    public void nullQuantityItem_NotOK() {
+    public void operation_nullQuantityItem_notOk() {
         storageService.operation(NULL_QUANTITY);
     }
 
     @Test (expected = RuntimeException.class)
-    public void toBigQuantityItem_NotOK() {
+    public void operation_toBigQuantityItem_notOk() {
         storageService.operation(TO_BIG_QUANTITY);
     }
 
     @Test
-    public void storageAfterBalanceOperation_OK() {
+    public void operation_afterBalanceOperation_ok() {
         storageService.operation(WRIGHT_BALANCE);
         assertEquals(Integer.valueOf(25), storage.get("apple"));
     }
 
     @Test
-    public void storageAfterSupplyOperation_OK() {
+    public void operation_afterSupplyOperation_ok() {
         storageService.operation(WRIGHT_SUPPLY);
         assertEquals(Integer.valueOf(50), storage.get("apple"));
     }
 
     @Test
-    public void storageAfterPurchaseOperation_OK() {
+    public void operation_afterPurchaseOperation_ok() {
         storage.put("apple", 25);
         storageService.operation(WRIGHT_PURCHASE);
         assertEquals(Integer.valueOf(10), storage.get("apple"));
     }
 
     @Test
-    public void storageAfterPurchaseWithMore_OK() {
+    public void operation_afterPurchaseBiggerQuantity_ok() {
         storage.put("apple", 10);
         storageService.operation(WRIGHT_PURCHASE);
         assertEquals(Integer.valueOf(10), storage.get("apple"));
     }
 
     @Test
-    public void storageAfterReturnOperation_OK() {
+    public void operation_afterReturnOperation_ok() {
         storageService.operation(WRIGHT_RETURN);
         assertEquals(Integer.valueOf(5), storage.get("apple"));
     }

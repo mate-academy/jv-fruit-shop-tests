@@ -10,7 +10,7 @@ public class ServiceReportImplTest {
     private static final ServiceReportImpl serviceReport = new ServiceReportImpl();
 
     @Test
-    public void makeReport_OK() {
+    public void makeReport_createString_ok() {
         storage.put("cherry", 890);
         assertEquals(expectedString, serviceReport.makeReport());
         storage.clear();

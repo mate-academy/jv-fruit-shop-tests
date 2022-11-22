@@ -17,7 +17,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void read_correctFile_Ok() {
+    public void read_correctFile_ok() {
         assertEquals("Expected another string",
                 ETALON_STRING, fileReader.read(TEST_PATH_INPUT).get(0));
     }

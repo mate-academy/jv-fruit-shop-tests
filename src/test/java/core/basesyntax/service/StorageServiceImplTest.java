@@ -47,7 +47,7 @@ public class StorageServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void nullOperationItem_NotOK() {
+    public void operation_nullOperationItem_notOK() {
         storageService.operation(NULL_FRUIT);
     }
 

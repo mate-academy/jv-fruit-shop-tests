@@ -3,7 +3,7 @@ package core.basesyntax.model;
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
-    private int quantity;
+    private final int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
@@ -23,17 +23,14 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
         }
-        if (!(o instanceof FruitTransaction))
+        if (!(o instanceof FruitTransaction)) {
             return false;
+        }
         FruitTransaction compare = (FruitTransaction) o;
         return this.fruit.equals(compare.fruit)
                 && this.operation.equals(compare.operation)
@@ -58,7 +55,7 @@ public class FruitTransaction {
                     return elem;
                 }
             }
-            return null;
+            throw new RuntimeException("Wrong operation code " + operationCode);
         }
     }
 }

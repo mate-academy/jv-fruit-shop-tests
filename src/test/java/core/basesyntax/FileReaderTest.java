@@ -17,7 +17,7 @@ public class FileReaderTest {
 
     @Test
     public void fileReader_CorrectPath_Ok() {
-        String filePath = "src/main/resources/transactions.csv";
+        String filePath = "src/test/resources/transactions.csv";
         List<String> expected = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",

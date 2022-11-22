@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class FruitTransactionCsvParserTest {
-    private static final String FRUIT_TRANSACTION_FILE_NAME = "src/main/resources/transactions.csv";
+    private static final String FRUIT_TRANSACTION_FILE_NAME = "src/test/resources/transactions.csv";
 
     @Test
     public void fruitTransactionCsvParser_CorrectPath_Ok() {

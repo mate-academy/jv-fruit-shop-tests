@@ -23,7 +23,7 @@ public class FileReaderImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void read_nonExistFile_NotOK() {
+    public void read_nonExistFile_notOk() {
         fileReader.read(WRONG_TEST_PATH_INPUT);
     }
 }

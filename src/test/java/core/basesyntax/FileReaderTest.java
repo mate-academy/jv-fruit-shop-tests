@@ -9,6 +9,7 @@ import org.junit.Test;
 
 public class FileReaderTest {
     private static FileReaderImpl fileReader;
+    private static final String FRUIT_TRANSACTION_FILE_NAME = "src/main/resources/transactions.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -16,8 +17,7 @@ public class FileReaderTest {
     }
 
     @Test
-    public void fileReader_CorrectPath_Ok() {
-        String filePath = "src/test/resources/transactions.csv";
+    public void readFromFile_CorrectPath_Ok() {
         List<String> expected = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -28,19 +28,19 @@ public class FileReaderTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = fileReader.readFromFile(filePath);
+        List<String> actual = fileReader.readFromFile(FRUIT_TRANSACTION_FILE_NAME);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileReader_IncorrectPath_NotOk() {
+    public void readFromFile_IncorrectPath_NotOk() {
         String filePath = "incorrectPath";
         fileReader.readFromFile(filePath);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileReader_NullPath_NotOk() {
-        String filePath = null;
-        fileReader.readFromFile(filePath);
+    public void readFromFile_NullPath_NotOk() {
+        String nullFilePath = null;
+        fileReader.readFromFile(nullFilePath);
     }
 }

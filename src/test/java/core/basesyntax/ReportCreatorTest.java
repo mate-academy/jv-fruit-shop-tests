@@ -22,7 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorTest {
-    private static final ReportCreator reportCreator = new ReportCreatorImpl();
+    private final ReportCreator reportCreator = new ReportCreatorImpl();
 
     @Before
     public void before() {
@@ -30,7 +30,7 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void reportCreate_Ok() {
+    public void createReport_Ok() {
         Map<Operation, OperationHandler> transactionMap = new HashMap<>();
         transactionMap.put(Operation.BALANCE, new BalanceOperationHandler());
         transactionMap.put(Operation.SUPPLY, new SupplyOperationHandler());

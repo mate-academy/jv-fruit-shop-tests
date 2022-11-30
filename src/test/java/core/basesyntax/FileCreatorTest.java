@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.services.FileCreatorImpl;
 import java.io.File;
@@ -11,11 +12,10 @@ import org.junit.Test;
 public class FileCreatorTest {
     private static final String FRUIT_REPORT_FILE_NAME = "src/test/resources/report.csv";
     private static final String EMPTY_FILE_NAME = "";
-
-    private static final FileCreatorImpl fileCreator = new FileCreatorImpl();
+    private final FileCreatorImpl fileCreator = new FileCreatorImpl();
 
     @Test
-    public void fileCreate_Ok() {
+    public void createFile_Ok() {
         String eol = System.getProperty("line.separator");
         StringBuilder expected = new StringBuilder();
         expected.append("fruit")
@@ -36,15 +36,15 @@ public class FileCreatorTest {
         String actual;
         try {
             actual = Files.readString(file.toPath());
+            assertEquals(expected.toString(), actual);
         } catch (IOException e) {
-            throw new RuntimeException("Transactions file "
-                    + FRUIT_REPORT_FILE_NAME + " not found", e);
+            fail("Unexpected exception was thrown for transactions file "
+                    + FRUIT_REPORT_FILE_NAME + " is not founded");
         }
-        assertEquals(expected.toString(), actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileCreator_EmptyPath_NotOk() {
+    public void createFile_EmptyPath_NotOk() {
         fileCreator.createFile("test", EMPTY_FILE_NAME);
     }
 }

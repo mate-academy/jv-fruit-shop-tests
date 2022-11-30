@@ -19,7 +19,7 @@ import org.junit.Test;
 
 public class FruitShopServiceTest {
     @Test
-    public void fruitShopService_Ok() {
+    public void doTransaction_Ok() {
         Map<FruitTransaction.Operation, OperationHandler> transactionMap = new HashMap<>();
         transactionMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         transactionMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());

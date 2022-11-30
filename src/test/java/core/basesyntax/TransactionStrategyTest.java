@@ -29,16 +29,13 @@ public class TransactionStrategyTest {
     }
 
     @Test
-    public void transaction_BalanceOperation_ok() {
-        FruitTransaction actualTransactionHandler =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,"apple,",100);
-        OperationHandler expected = new BalanceOperationHandler();
-        assertEquals(expected.getClass(),
-                transactionStrategy.get(actualTransactionHandler.getOperation()).getClass());
+    public void get_BalanceOperation_ok() {
+        assertEquals(BalanceOperationHandler.class,
+                transactionStrategy.get(FruitTransaction.Operation.BALANCE).getClass());
     }
 
     @Test
-    public void transaction_SupplyOperation_ok() {
+    public void get_SupplyOperation_ok() {
         FruitTransaction actualTransactionHandler =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,"banana,",100);
         OperationHandler expected = new SupplyOperationHandler();
@@ -47,7 +44,7 @@ public class TransactionStrategyTest {
     }
 
     @Test
-    public void transaction_PurchaseOperation_ok() {
+    public void get_PurchaseOperation_ok() {
         FruitTransaction actualTransactionHandler =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,"banana,",13);
         OperationHandler expected = new PurchaseOperationHandler();
@@ -56,7 +53,7 @@ public class TransactionStrategyTest {
     }
 
     @Test
-    public void transaction_ReturnOperation_ok() {
+    public void get_ReturnOperation_ok() {
         FruitTransaction actualTransactionHandler =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,"apple,",10);
         OperationHandler expected = new ReturnOperationHandler();

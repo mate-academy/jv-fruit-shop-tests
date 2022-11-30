@@ -18,11 +18,11 @@ public class FruitTransactionCsvParserTest {
     private static final String
             FRUIT_TRANSACTION_FILE_ONE_ELEMENT
             = "src/test/resources/transactions_one_element.csv";
-    private static final FruitTransactionCsvParser
+    private final FruitTransactionCsvParser
             fruitTransactionDao = new FruitTransactionCsvParserImpl();
 
     @Test
-    public void fruitTransactionCsvParser_CorrectPath_Ok() {
+    public void parse_CorrectPath_Ok() {
         FruitTransactionCsvParser fruitTransactionDao = new FruitTransactionCsvParserImpl();
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
@@ -40,7 +40,7 @@ public class FruitTransactionCsvParserTest {
     }
 
     @Test
-    public void fruitTransactionCsvParser_EmptyFile_Ok() {
+    public void parse_EmptyFile_Ok() {
         List<FruitTransaction> expected = List.of();
         List<FruitTransaction> actual = fruitTransactionDao
                 .parse(FRUIT_TRANSACTION_FILE_NAME_EMPTY);
@@ -48,7 +48,7 @@ public class FruitTransactionCsvParserTest {
     }
 
     @Test
-    public void fruitTransactionCsvParser_OneElement_Ok() {
+    public void parse_OneElement_Ok() {
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20)
         );

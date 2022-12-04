@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportService;
 
 public class ReportServiceImplTest {
     private static final String HEADER = "fruit,quantity";

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.FileWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,13 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import core.basesyntax.service.FileWriter;
-
 public class FileWriterImplTest {
     public static final String WRITE_FILEPATH = "src/test/resources/write_test.csv";
     public static final String EMPTY_FILEPATH = "";
     public static final String TEST_STRING = "type,fruit,quantity" + System.lineSeparator()
-    + "b,banana,20";
+            + "b,banana,20";
     private FileWriter writer;
 
     @Before
@@ -46,6 +45,6 @@ public class FileWriterImplTest {
     @After
     public void tearDown() {
         File file = new File(WRITE_FILEPATH);
-        file.deleteOnExit();
+        file.delete();
     }
 }

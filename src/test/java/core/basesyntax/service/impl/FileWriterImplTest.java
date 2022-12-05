@@ -42,11 +42,11 @@ public class FileWriterImplTest {
     }
 
     @After
-    public void tearDown() throws IOException {
+    public void tearDown() {
         try {
             Files.deleteIfExists(Path.of(WRITE_FILEPATH));
         } catch (IOException e) {
-            throw new IOException(WRITE_FILEPATH + " doesn't exist");
+            throw new RuntimeException(WRITE_FILEPATH + " doesn't exist");
         }
     }
 }

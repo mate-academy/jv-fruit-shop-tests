@@ -4,11 +4,11 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.strategy.OperationHandler;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class SupplyHandlerTest {
-
     private final OperationHandler operationHandler = new SupplyHandler();
     private FruitTransaction fruitTransaction;
 
@@ -20,5 +20,10 @@ public class SupplyHandlerTest {
         int expected = 110;
         int actual = Storage.getStorageMap().get("banana");
         Assert.assertEquals(expected, actual);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.getStorageMap().clear();
     }
 }

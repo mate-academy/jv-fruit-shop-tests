@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.strategy.OperationHandler;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,6 +27,10 @@ public class PurchaseHandlerTest {
         Storage.getStorageMap().put("banana", 100);
         fruitTransaction = new FruitTransaction(Operation.PURCHASE, "banana", 200);
         operationHandler.handle(fruitTransaction);
+    }
 
+    @After
+    public void afterEachTest() {
+        Storage.getStorageMap().clear();
     }
 }

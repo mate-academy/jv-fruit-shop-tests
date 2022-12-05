@@ -1,15 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 
 public class FileReaderImplTest {
     private static final String FILE_NAME_TEST = "src/test/resources/input_file_test.csv";

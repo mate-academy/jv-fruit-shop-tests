@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWrite;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class FileWriteImplTest {
     private static final String FILE_NAME = "src/test/resources/report_file_test.csv";

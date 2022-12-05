@@ -1,13 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportCreator;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ReportCreatorImplTest {
     private final ReportCreator reportCreator = new ReportCreatorImpl();

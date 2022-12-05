@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FileWriteImplTest {
@@ -30,13 +31,12 @@ public class FileWriteImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read date from file " + FILE_NAME, e);
         }
-
         Assert.assertEquals(report, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_IncorrectFileName_NotOk() {
-        String fileName = " ";
+        String fileName = "/";
         fileWrite.writeToFile(report, fileName);
     }
 

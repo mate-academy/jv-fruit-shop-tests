@@ -21,7 +21,7 @@ public class SupplyHandlerTest {
     @Test
     public void addSupplyHandler_existProduct_ok() {
         Storage.fruits.put(FRUIT, 20);
-        FruitTransaction supply = new FruitTransaction(Operation.getByCode("s"), FRUIT, 20);
+        FruitTransaction supply = new FruitTransaction(Operation.SUPPLY, FRUIT, 20);
         supplyHandler.operate(supply);
         int expected = 40;
         int actual = Storage.fruits.get(FRUIT);
@@ -30,7 +30,7 @@ public class SupplyHandlerTest {
 
     @Test
     public void addSupplyHandler_newProduct_ok() {
-        FruitTransaction supply = new FruitTransaction(Operation.getByCode("s"), FRUIT, 20);
+        FruitTransaction supply = new FruitTransaction(Operation.SUPPLY, FRUIT, 20);
         supplyHandler.operate(supply);
         int expected = 20;
         int actual = Storage.fruits.get(FRUIT);
@@ -40,7 +40,7 @@ public class SupplyHandlerTest {
     @Test
     public void addSupplyHandler_negativeQty_ok() {
         Storage.fruits.put(FRUIT, 20);
-        FruitTransaction supply = new FruitTransaction(Operation.getByCode("s"), FRUIT, -20);
+        FruitTransaction supply = new FruitTransaction(Operation.SUPPLY, FRUIT, -20);
         supplyHandler.operate(supply);
         int expected = 40;
         int actual = Storage.fruits.get(FRUIT);

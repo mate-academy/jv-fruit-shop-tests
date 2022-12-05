@@ -21,8 +21,13 @@ public class ReportServiceImplTest {
         Storage.fruits.put("banana", 20);
         Storage.fruits.put("apple", 3);
         String actual = report.createReport();
-        String expected = new StringBuilder().append(HEADER + System.lineSeparator() + "banana,20"
-                + System.lineSeparator() + "apple,3").toString();
+        String expected = new StringBuilder()
+                .append(HEADER)
+                .append(System.lineSeparator())
+                .append("banana,20")
+                .append(System.lineSeparator())
+                .append("apple,3")
+                .toString();
         Assert.assertEquals(expected, actual);
     }
 

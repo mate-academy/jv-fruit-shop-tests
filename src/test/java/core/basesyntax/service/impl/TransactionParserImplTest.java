@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +26,9 @@ public class TransactionParserImplTest {
         transactions.add("b,apple,100");
         transactions.add("b,orange,100");
         List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(new FruitTransaction(
-                FruitTransaction.Operation.getByCode("b"), "banana", 20));
-        expected.add(new FruitTransaction(
-                FruitTransaction.Operation.getByCode("b"), "apple", 100));
-        expected.add(new FruitTransaction(
-                FruitTransaction.Operation.getByCode("b"), "orange", 100));
+        expected.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
+        expected.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
+        expected.add(new FruitTransaction(Operation.BALANCE, "orange", 100));
         List<FruitTransaction> actual = parser.process(transactions);
         assertEquals(expected, actual);
     }

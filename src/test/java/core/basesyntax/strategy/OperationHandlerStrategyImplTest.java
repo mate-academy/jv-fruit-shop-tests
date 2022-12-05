@@ -29,31 +29,27 @@ public class OperationHandlerStrategyImplTest {
     public void getBalanceOperation_ok() {
         OperationHandler actual = new OperationHandlerStrategyImpl(operations)
                 .get(FruitTransaction.Operation.BALANCE);
-        OperationHandler expected = new BalanceHandler();
-        assertEquals(expected.getClass(),actual.getClass());
+        assertEquals(BalanceHandler.class, actual.getClass());
     }
 
     @Test
     public void getPurchaseOperation_ok() {
         OperationHandler actual = new OperationHandlerStrategyImpl(operations)
                 .get(FruitTransaction.Operation.PURCHASE);
-        OperationHandler expected = new PurchaseHandler();
-        assertEquals(expected.getClass(),actual.getClass());
+        assertEquals(PurchaseHandler.class, actual.getClass());
     }
 
     @Test
     public void getReturnOperation_ok() {
         OperationHandler actual = new OperationHandlerStrategyImpl(operations)
                 .get(FruitTransaction.Operation.RETURN);
-        OperationHandler expected = new ReturnHandler();
-        assertEquals(expected.getClass(),actual.getClass());
+        assertEquals(ReturnHandler.class, actual.getClass());
     }
 
     @Test
     public void getSupplyOperation_ok() {
         OperationHandler actual = new OperationHandlerStrategyImpl(operations)
                 .get(FruitTransaction.Operation.SUPPLY);
-        OperationHandler expected = new SupplyHandler();
-        assertEquals(expected.getClass(),actual.getClass());
+        assertEquals(SupplyHandler.class, actual.getClass());
     }
 }

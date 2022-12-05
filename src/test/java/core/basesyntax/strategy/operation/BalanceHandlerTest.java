@@ -21,7 +21,7 @@ public class BalanceHandlerTest {
     @Test
     public void addBalanceHandler_ok() {
         FruitTransaction transaction = new FruitTransaction(
-                Operation.getByCode("b"), FRUIT, 20);
+                Operation.BALANCE, FRUIT, 20);
         balanceHandler.operate(transaction);
         int expected = 20;
         int actual = Storage.fruits.get(FRUIT);
@@ -31,7 +31,7 @@ public class BalanceHandlerTest {
     @Test
     public void addBalanceHandler_negativeQty_ok() {
         FruitTransaction transaction = new FruitTransaction(
-                Operation.getByCode("b"), FRUIT, -20);
+                Operation.BALANCE, FRUIT, -20);
         balanceHandler.operate(transaction);
         int expected = 20;
         int actual = Storage.fruits.get(FRUIT);

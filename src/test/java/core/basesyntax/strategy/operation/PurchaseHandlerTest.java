@@ -21,7 +21,7 @@ public class PurchaseHandlerTest {
 
     @Test
     public void addPurchaseHandler_enoughFruits_ok() {
-        FruitTransaction purchase = new FruitTransaction(Operation.getByCode("p"), FRUIT, 20);
+        FruitTransaction purchase = new FruitTransaction(Operation.PURCHASE, FRUIT, 20);
         purchaseHandler.operate(purchase);
         int expected = 30;
         int actual = Storage.fruits.get(FRUIT);
@@ -30,7 +30,7 @@ public class PurchaseHandlerTest {
     
     @Test
     public void addPurchaseHandler_negativeQty_ok() {
-        FruitTransaction purchase = new FruitTransaction(Operation.getByCode("p"), FRUIT, -20);
+        FruitTransaction purchase = new FruitTransaction(Operation.PURCHASE, FRUIT, -20);
         purchaseHandler.operate(purchase);
         int expected = 30;
         int actual = Storage.fruits.get(FRUIT);
@@ -39,7 +39,7 @@ public class PurchaseHandlerTest {
     
     @Test(expected = RuntimeException.class)
     public void addPurchaseHandler_notEnoughFruits_notOk() {
-        FruitTransaction purchase = new FruitTransaction(Operation.getByCode("p"), FRUIT, 51);
+        FruitTransaction purchase = new FruitTransaction(Operation.PURCHASE, FRUIT, 51);
         purchaseHandler.operate(purchase);
     }
     

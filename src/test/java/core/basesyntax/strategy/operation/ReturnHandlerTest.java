@@ -22,7 +22,7 @@ public class ReturnHandlerTest {
     public void addReturnHandler() {
         Storage.fruits.put(FRUIT, 0);
         FruitTransaction returnTransaction = new FruitTransaction(
-                Operation.getByCode("r"), FRUIT, 20);
+                Operation.RETURN, FRUIT, 20);
         returnHandler.operate(returnTransaction);
         int expected = 20;
         int actual = Storage.fruits.get(FRUIT);
@@ -33,7 +33,7 @@ public class ReturnHandlerTest {
     public void addReturnHandler_negativeQty_ok() {
         Storage.fruits.put(FRUIT, 0);
         FruitTransaction returnTransaction = new FruitTransaction(
-                Operation.getByCode("r"), FRUIT, -20);
+                Operation.RETURN, FRUIT, -20);
         returnHandler.operate(returnTransaction);
         int expected = 20;
         int actual = Storage.fruits.get(FRUIT);
@@ -43,7 +43,7 @@ public class ReturnHandlerTest {
     @Test(expected = RuntimeException.class)
     public void addReturnHandler_notExistProduct_notOk() {
         FruitTransaction returnTransaction = new FruitTransaction(
-                Operation.getByCode("r"), FRUIT, 20);
+                Operation.RETURN, FRUIT, 20);
         returnHandler.operate(returnTransaction);
     }
      

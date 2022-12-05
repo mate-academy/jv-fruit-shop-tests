@@ -10,11 +10,11 @@ public class FruitTransactionTest {
     private static String FRUIT = "apple";
     private static String OPERATION_CODE = "b";
     private static String ILLIGAL_OPERATION_CODE = "w";
-    private static Operation TEST_BALANCE_OPERATION = FruitTransaction.Operation.BALANCE;
+    private static Operation TEST_BALANCE_OPERATION = Operation.BALANCE;
     private FruitTransaction fruitTransaction;
 
     @Test
-    public void getExistingOperation_ok() {
+    public void getOperationExisting_ok() {
         fruitTransaction = new FruitTransaction(TEST_BALANCE_OPERATION, FRUIT, 20);
         Operation actual = fruitTransaction.getOperation();
         Operation expected = TEST_BALANCE_OPERATION;

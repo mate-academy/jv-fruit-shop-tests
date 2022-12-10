@@ -36,20 +36,6 @@ public class ReturnOperationHandlerTest {
         Assert.assertEquals(testMap,Storage.storage);
     }
 
-    @Test
-    public void return_correct_NotOK() {
-        testMap.put("banana",0);
-        FruitTransaction fruit1 =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",20);
-        FruitTransaction fruit2 =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",20);
-        balanceOperationHandler.handle(fruit1);
-        returnOperationHandler.handle(fruit2);
-        Assert.assertNotEquals(testMap,Storage.storage);
-    }
-
     @After
     public void clear() {
         Storage.storage.clear();

@@ -23,18 +23,6 @@ public class ReportCreaterServiceImpTest {
     }
 
     @Test
-    public void create_NonCorrectReport_OK() {
-        Storage.storage.put("banana",1000);
-        Storage.storage.put("apple",1000);
-        String expected = "fruit,quantity"
-                + System.lineSeparator() + "banana,50"
-                + System.lineSeparator() + "apple,20"
-                + System.lineSeparator();
-        String actual = reportCreaterService.createReport();
-        Assert.assertNotEquals(expected,actual);
-    }
-
-    @Test
     public void create_NullKeyAndValue_OK() {
         Storage.storage.put(null,null);
         Storage.storage.put(null,null);

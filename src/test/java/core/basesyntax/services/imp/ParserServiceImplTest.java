@@ -14,8 +14,7 @@ public class ParserServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void parse_listIsNull_notOK() {
-        List<String> test = null;
-        transactionParser.parse(test);
+        transactionParser.parse(null);
     }
 
     @Test

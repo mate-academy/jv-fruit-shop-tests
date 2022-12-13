@@ -19,7 +19,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void purchaseOperationResult_Ok() {
+    public void getOperationResult_purchaseOperation_ok() {
         purchaseFruitTransaction.setQuantity(-100);
         FruitTransaction actualFruitTransaction
                 = operationHandler.getOperationResult(purchaseFruitTransaction);

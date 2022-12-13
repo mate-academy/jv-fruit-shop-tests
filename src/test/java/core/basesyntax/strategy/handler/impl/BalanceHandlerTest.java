@@ -19,7 +19,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void balanceOperationResult_Ok() {
+    public void getOperationResult_balanceOperation_ok() {
         FruitTransaction actualFruitTransaction
                 = operationHandler.getOperationResult(balanceFruitTransaction);
         assertEquals(balanceFruitTransaction, actualFruitTransaction);

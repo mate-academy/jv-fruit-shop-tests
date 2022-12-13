@@ -11,9 +11,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport(Map<String, Integer> transactionResultMap) {
+        if (transactionResultMap.containsKey(null) || transactionResultMap.containsValue(null)) {
+            throw new RuntimeException("Fruit or quantity can't be null");
+        }
         return START_OF_REPORT + System.lineSeparator()
                 + transactionResultMap.entrySet().stream()
-                .filter(e -> e.getKey() != null && e.getValue() != null)
                 .map(e -> e.getKey() + COMMA + e.getValue())
                 .collect(joining(System.lineSeparator()));
     }

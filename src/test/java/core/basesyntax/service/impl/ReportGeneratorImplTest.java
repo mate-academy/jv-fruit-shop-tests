@@ -40,11 +40,10 @@ public class ReportGeneratorImplTest {
         assertEquals(expectedReport, actualReport);
     }
 
-    @Test
-    public void keyAndValueNull_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void generateReport_keyAndValueNull_notOk() {
         transactionResultMap.put(null, null);
-        String actualReport = reportGenerator.generateReport(transactionResultMap);
-        assertEquals(expectedReport, actualReport);
+        reportGenerator.generateReport(transactionResultMap);
     }
 
     @After

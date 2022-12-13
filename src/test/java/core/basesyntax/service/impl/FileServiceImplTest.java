@@ -14,7 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileServiceImplTest {
-    private static final String TRANSACTION_FILE = "src/test/resources/transactions.csv";
+    private static final String TRANSACTION_FILE = "src/test/resources/transaction.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
     private static final String REPORT_FILE = "src/test/resources/report.csv";
     private static final String FILE_NOT_EXIST = "test/notExist.csv";
     private static FileService fileService;
@@ -32,30 +33,19 @@ public class FileServiceImplTest {
 
     @Test
     public void readFromFile_ok() {
-        try {
-            Files.writeString(Path.of(TRANSACTION_FILE), expected);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         List<String> list = fileService.readFromFile(TRANSACTION_FILE);
         String actual = list.get(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readFromEmptyFile_ok() {
-        String expected = "";
-        try {
-            Files.writeString(Path.of(TRANSACTION_FILE), expected);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        List<String> list = fileService.readFromFile(TRANSACTION_FILE);
+    public void readFromFile_emptyFile_ok() {
+        List<String> list = fileService.readFromFile(EMPTY_FILE);
         assertTrue(list.isEmpty());
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromNotExistingFile_notOk() {
+    public void readFromFile_notExistingFile_notOk() {
         fileService.readFromFile(FILE_NOT_EXIST);
     }
 
@@ -63,7 +53,6 @@ public class FileServiceImplTest {
     public void writeToFile_ok() {
         fileService.writeToFile(expected, REPORT_FILE);
         List<String> list;
-
         try {
             list = Files.readAllLines(Path.of(REPORT_FILE));
         } catch (IOException e) {
@@ -74,13 +63,13 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void writeToFileNull_notOk() {
+    public void writeToFile_nullData_notOk() {
         boolean actual = fileService.writeToFile(null, REPORT_FILE);
         assertFalse(actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToNotExistingFile_notOk() {
+    public void writeToFile_notExistingFile_notOk() {
         fileService.writeToFile(expected, FILE_NOT_EXIST);
     }
 }

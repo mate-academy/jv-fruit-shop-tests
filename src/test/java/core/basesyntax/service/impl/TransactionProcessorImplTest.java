@@ -49,7 +49,7 @@ public class TransactionProcessorImplTest {
     }
 
     @Test
-    public void processValidData_ok() {
+    public void process_validData_ok() {
         Integer expectedQuantity = 100 + 100 - 100 + 100;
         Map<String, Integer> actualProcessMap = transactionProcessor.process(fruitTransactions);
         Integer actualQuantity = actualProcessMap.get(FRUIT);
@@ -57,7 +57,7 @@ public class TransactionProcessorImplTest {
     }
 
     @Test
-    public void summingIntegerMaxValue_notOk() {
+    public void process_summingIntegerMaxValue_notOk() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(Operation.BALANCE, FRUIT, Integer.MAX_VALUE);
         fruitTransactions.add(fruitTransaction);

@@ -19,7 +19,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void returnOperationResult_Ok() {
+    public void getOperationResult_returnOperation_ok() {
         FruitTransaction actualFruitTransaction
                 = operationHandler.getOperationResult(returnFruitTransaction);
         assertEquals(returnFruitTransaction, actualFruitTransaction);

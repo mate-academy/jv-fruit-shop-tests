@@ -19,7 +19,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void supplyOperationResult_Ok() {
+    public void getOperationResult_supplyOperation_ok() {
         FruitTransaction actualFruitTransaction
                 = operationHandler.getOperationResult(supplyFruitTransaction);
         assertEquals(supplyFruitTransaction, actualFruitTransaction);

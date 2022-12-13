@@ -42,7 +42,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseValidData_ok() {
+    public void parseData_validData_ok() {
         fruitTransactions.add(BALANCE_CODE + COMMA + FRUIT + COMMA + QUANTITY);
         List<FruitTransaction> actualFruitTransactionsList
                 = transactionParser.parseData(fruitTransactions);
@@ -51,7 +51,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseNotExistingCode_notOk() {
+    public void parseData_NotExistingCode_notOk() {
         fruitTransactions.add("a" + COMMA + FRUIT + COMMA + QUANTITY);
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("Can't find operation ");
@@ -59,7 +59,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseNotValidCode_notOk() {
+    public void parseData_notValidCode_notOk() {
         fruitTransactions.add("1" + COMMA + FRUIT + COMMA + QUANTITY);
         List<FruitTransaction> actualFruitTransactions
                 = transactionParser.parseData(fruitTransactions);
@@ -67,13 +67,13 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseNotValidQuantity_notOk() {
+    public void parseData_notValidQuantity_notOk() {
         fruitTransactions.add(BALANCE_CODE + COMMA + FRUIT + COMMA + "1j1");
         transactionParser.parseData(fruitTransactions);
     }
 
     @Test
-    public void parseNull_notOk() {
+    public void parseData_nullData_notOk() {
         fruitTransactions.add(null);
         List<FruitTransaction> actualFruitTransactions
                 = transactionParser.parseData(fruitTransactions);
@@ -81,7 +81,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseBigNumber_notOk() {
+    public void parseData_bigNumber_notOk() {
         fruitTransactions.add(BALANCE_CODE + COMMA + FRUIT + COMMA + Integer.MAX_VALUE);
         List<FruitTransaction> actualFruitTransactions
                 = transactionParser.parseData(fruitTransactions);

@@ -13,7 +13,7 @@ public class FruitTransactionParserTest {
     private static FruitTransactionParser parser;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         parser = new FruitTransactionParserImpl();
     }
 
@@ -24,9 +24,7 @@ public class FruitTransactionParserTest {
 
     @Test(expected = RuntimeException.class)
     public void getFruitTransactionsList_DataContainsNull_notOk() {
-        List<String> listWithNull = new ArrayList<>();
-        listWithNull.add(null);
-        parser.getFruitTransactionsList(listWithNull);
+        parser.getFruitTransactionsList(List.of(null));
     }
 
     @Test
@@ -50,7 +48,7 @@ public class FruitTransactionParserTest {
     }
 
     @Test
-    public void getFruitTransactionsList_InvalidData_NotOk() {
+    public void getFruitTransactionsList_InvalidData_Ok() {
         List<String> list = new ArrayList<>();
         list.add("r");
         list.add("b,banana");

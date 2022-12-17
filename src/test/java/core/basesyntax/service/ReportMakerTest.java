@@ -16,17 +16,17 @@ public class ReportMakerTest {
     private int fruitQuantity;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reportMaker = new ReportMakerImpl();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         head = "fruit,quantity";
         bananaFruit = "banana";
         appleFruit = "apple";

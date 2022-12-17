@@ -13,13 +13,13 @@ public class BalanceHandlerTest {
     private static FruitTransaction fruitTransaction;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         handler = new BalanceHandler();
         fruitTransaction = new FruitTransaction();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 

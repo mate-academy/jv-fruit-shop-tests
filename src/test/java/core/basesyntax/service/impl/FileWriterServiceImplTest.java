@@ -22,7 +22,7 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_Ok() {
-        String pathName = "src\\test\\resources\\fileToWriteTest.csv";
+        String pathName = "src/test/resources/fileToWriteTest.csv";
         String text = "apple,45" + System.lineSeparator() + "banana,75";
         fileWriterService.writeToFile(text, pathName);
         List<String> expectedList = new ArrayList<>();

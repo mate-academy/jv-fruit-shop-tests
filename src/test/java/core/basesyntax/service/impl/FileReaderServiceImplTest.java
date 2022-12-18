@@ -23,7 +23,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFromFile_Ok() {
-        String pathName = "src\\test\\resources\\testFile.csv";
+        String pathName = "src/test/resources/testFile.csv";
         List<String> fruitList = new ArrayList<>();
         fruitList.add("b,apple,20");
         fruitList.add("s,banana,30");

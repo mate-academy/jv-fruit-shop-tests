@@ -14,7 +14,7 @@ public class TransactionParserImplTest {
     private List<String> fruitList;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         transactionParser = new TransactionParserImpl();
     }
 

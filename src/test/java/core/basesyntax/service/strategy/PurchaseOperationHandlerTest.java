@@ -5,26 +5,31 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    @Test
-    public void getCorrectPurchaseOperation_Ok() {
-        Storage.fruits.put("banana", 100);
+    private static FruitTransaction fruitTransaction;
+    private static OperationHandler operationHandler;
 
-        FruitTransaction fruitTransaction = new FruitTransaction();
+    @BeforeClass
+    public static void beforeClass() {
+        fruitTransaction = new FruitTransaction();
+        operationHandler = new PurchaseOperationHandler();
+    }
+
+    @Test
+    public void operate_correctPurchaseOperation_Ok() {
+        Storage.fruits.put("banana", 100);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(50);
-
-        OperationHandler operationHandler = new PurchaseOperationHandler();
         operationHandler.operate(fruitTransaction);
-
         int bananaAmount = Storage.fruits.get("banana");
         assertEquals(50, bananaAmount);
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullArgument_NotOk() {
+    public void operate_nullValue_NotOk() {
         new PurchaseOperationHandler().operate(null);
     }
 

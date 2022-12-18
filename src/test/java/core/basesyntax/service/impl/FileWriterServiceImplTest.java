@@ -25,29 +25,30 @@ public class FileWriterServiceImplTest {
         String pathName = "src\\test\\resources\\fileToWriteTest.csv";
         String text = "apple,45" + System.lineSeparator() + "banana,75";
         fileWriterService.writeToFile(text, pathName);
-
         List<String> expectedList = new ArrayList<>();
         expectedList.add("apple,45");
         expectedList.add("banana,75");
-
         File file = new File(pathName);
-        List<String> fruitList;
-        try {
-            fruitList = Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t read from the file", e);
-        }
+        List<String> fruitList = getFruitList(file);
         assertEquals(expectedList, fruitList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullFileToWrite_NotOk() {
+    public void writeToFile_nullValue_NotOk() {
         fileWriterService.writeToFile(STORAGE, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptyPathLineToWrite_NotOk() {
+    public void writeToFile_emptySpaceValue_NotOk() {
         String pathLine = "";
         fileWriterService.writeToFile(STORAGE, pathLine);
+    }
+
+    private List<String> getFruitList(File file) {
+        try {
+            return Files.readAllLines(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t read from the file", e);
+        }
     }
 }

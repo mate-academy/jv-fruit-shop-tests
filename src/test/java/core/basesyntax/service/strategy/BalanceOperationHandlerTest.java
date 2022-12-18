@@ -5,14 +5,21 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
+    private static OperationHandler operationHandler;
+    private static FruitTransaction fruitTransaction;
+
+    @BeforeClass
+    public static void beforeClass() {
+        operationHandler = new BalanceOperationHandler();
+        fruitTransaction = new FruitTransaction();
+    }
 
     @Test
-    public void getCorrectBalance_Ok() {
-        OperationHandler operationHandler = new BalanceOperationHandler();
-        FruitTransaction fruitTransaction = new FruitTransaction();
+    public void operate_correctBalance_Ok() {
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(55);
         operationHandler.operate(fruitTransaction);
@@ -21,7 +28,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullArgument_NotOk() {
+    public void operate_nullValue_NotOk() {
         new BalanceOperationHandler().operate(null);
     }
 

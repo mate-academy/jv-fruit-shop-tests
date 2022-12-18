@@ -21,10 +21,8 @@ public class ReportServiceImplTest {
         String expectedReport = new StringBuilder().append("banana,152")
                 .append(System.lineSeparator()).append("apple,90").append(System.lineSeparator())
                 .toString();
-
         Storage.fruits.put("banana", 152);
         Storage.fruits.put("apple", 90);
-
         assertEquals(expectedReport,reportService.makeReport());
     }
 

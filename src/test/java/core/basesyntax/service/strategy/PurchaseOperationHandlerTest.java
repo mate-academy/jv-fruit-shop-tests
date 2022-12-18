@@ -18,6 +18,11 @@ public class PurchaseOperationHandlerTest {
         operationHandler = new PurchaseOperationHandler();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void operate_nullValue_NotOk() {
+        new PurchaseOperationHandler().operate(null);
+    }
+
     @Test
     public void operate_correctPurchaseOperation_Ok() {
         Storage.fruits.put("banana", 100);
@@ -26,11 +31,6 @@ public class PurchaseOperationHandlerTest {
         operationHandler.operate(fruitTransaction);
         int bananaAmount = Storage.fruits.get("banana");
         assertEquals(50, bananaAmount);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void operate_nullValue_NotOk() {
-        new PurchaseOperationHandler().operate(null);
     }
 
     @AfterClass

@@ -25,7 +25,7 @@ public class FileReaderServiceImplTest {
     public void readFromFile_Ok() {
         String pathName = "src\\test\\resources\\testFile.csv";
         List<String> fruitList = new ArrayList<>();
-        fruitList. add("b,apple,20");
+        fruitList.add("b,apple,20");
         fruitList.add("s,banana,30");
         fruitList.add("r,apple,10");
         List<String> actual = fileReaderService.readFromFile(pathName);

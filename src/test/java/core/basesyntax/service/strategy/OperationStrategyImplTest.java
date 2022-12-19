@@ -27,14 +27,14 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getCorrectOperationStrategy_Ok() {
+    public void get_getCorrectOperationStrategy_Ok() {
         OperationHandler expected = new BalanceOperationHandler();
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test(expected = RuntimeException.class)
-    public void getOperationWithNullValue_NotOk() {
+    public void get_getOperationWithNullValue_NotOk() {
         operationStrategy.get(null);
     }
 }

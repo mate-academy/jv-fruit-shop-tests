@@ -17,7 +17,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseStringToModel_Ok() {
+    public void parseAll_Ok() {
         List<String> fruitList = new ArrayList<>();
         fruitList.add("b,apple,20");
         fruitList.add("s,banana,30");
@@ -42,7 +42,7 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void wrongOperation_NotOk() {
+    public void parseAll_notExistOperation_NotOk() {
         List<String> fruit = new ArrayList<>();
         fruit.add("b,apple,20");
         fruit.add("s,banana,30");
@@ -51,7 +51,7 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptySpaceOperation_NotOk() {
+    public void parseAll_emptySpaceOperation_NotOk() {
         List<String> fruit = new ArrayList<>();
         fruit.add("b,apple,20");
         fruit.add("s,banana,30");
@@ -60,7 +60,7 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptySpaces_NotOk() {
+    public void parseAll_parseEmptySpaces_NotOk() {
         List<String> fruit = new ArrayList<>();
         fruit.add(",,");
         transactionParser.parseAll(fruit);

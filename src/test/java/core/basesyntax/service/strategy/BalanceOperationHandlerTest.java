@@ -10,16 +10,15 @@ import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static OperationHandler operationHandler;
-    private static FruitTransaction fruitTransaction;
 
     @BeforeClass
     public static void beforeClass() {
         operationHandler = new BalanceOperationHandler();
-        fruitTransaction = new FruitTransaction();
     }
 
     @Test
     public void operate_correctBalance_Ok() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(55);
         operationHandler.operate(fruitTransaction);

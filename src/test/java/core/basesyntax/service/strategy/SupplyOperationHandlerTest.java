@@ -9,18 +9,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static FruitTransaction fruitTransaction;
     private static OperationHandler operationHandler;
 
     @BeforeClass
     public static void beforeClass() {
-        fruitTransaction = new FruitTransaction();
         operationHandler = new SupplyOperationHandler();
     }
 
     @Test
     public void operate_correctSupplyOperation_Ok() {
         Storage.fruits.put("banana", 100);
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(50);
         operationHandler.operate(fruitTransaction);

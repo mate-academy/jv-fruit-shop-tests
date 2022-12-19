@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
-    private static final String STORAGE = "apple,35";
     private static FileWriterService fileWriterService;
 
     @BeforeClass
@@ -35,13 +34,15 @@ public class FileWriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullValue_NotOk() {
-        fileWriterService.writeToFile(STORAGE, null);
+        String storage = "apple,35";
+        fileWriterService.writeToFile(storage, null);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_emptySpaceValue_NotOk() {
         String pathLine = "";
-        fileWriterService.writeToFile(STORAGE, pathLine);
+        String storage = "apple,35";
+        fileWriterService.writeToFile(storage, pathLine);
     }
 
     private List<String> getFruitList(File file) {

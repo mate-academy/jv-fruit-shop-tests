@@ -9,12 +9,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static FruitTransaction fruitTransaction;
     private static OperationHandler operationHandler;
 
     @BeforeClass
     public static void beforeClass() {
-        fruitTransaction = new FruitTransaction();
         operationHandler = new PurchaseOperationHandler();
     }
 
@@ -26,6 +24,7 @@ public class PurchaseOperationHandlerTest {
     @Test
     public void operate_correctPurchaseOperation_Ok() {
         Storage.fruits.put("banana", 100);
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(50);
         operationHandler.operate(fruitTransaction);

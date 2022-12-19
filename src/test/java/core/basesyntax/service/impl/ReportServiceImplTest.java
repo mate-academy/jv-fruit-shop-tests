@@ -17,7 +17,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getSameReport_Ok() {
+    public void makeReport_Ok() {
         String expectedReport = new StringBuilder().append("banana,152")
                 .append(System.lineSeparator()).append("apple,90").append(System.lineSeparator())
                 .toString();

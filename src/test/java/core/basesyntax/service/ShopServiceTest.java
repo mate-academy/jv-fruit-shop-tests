@@ -26,14 +26,6 @@ import org.junit.Test;
 public class ShopServiceTest {
     private static final Fruit FRUIT = new Fruit("apple");
     private static ShopService shopService;
-    private static List<FruitTransaction> nullList;
-    private static List<FruitTransaction> nullFruitTransactionsList;
-    private static List<FruitTransaction> nullOperationTransactionsList;
-    private static List<FruitTransaction> nullAmountTransactionsList;
-    private static List<FruitTransaction> correctTransactions;
-    private static FruitTransaction nullFruitTransaction;
-    private static FruitTransaction nullOperationTransaction;
-    private static FruitTransaction nullAmountTransaction;
     private static FruitTransaction balanceTransaction;
     private static FruitTransaction returnTransaction;
     private static FruitTransaction supplyTransaction;
@@ -54,20 +46,6 @@ public class ShopServiceTest {
                 FruitTransaction.Operation.RETURN, new ReturnActivityHandler(fruitStorageDao));
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(operationActivityHandlerMap);
         shopService = new ShopServiceImpl(activityStrategy);
-        nullList = new ArrayList<>();
-        nullFruitTransactionsList = new ArrayList<>();
-        nullOperationTransactionsList = new ArrayList<>();
-        nullAmountTransactionsList = new ArrayList<>();
-        nullFruitTransaction = new FruitTransaction();
-        nullFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        nullFruitTransaction.setAmount(0);
-        nullOperationTransaction = new FruitTransaction();
-        nullOperationTransaction.setFruit(FRUIT);
-        nullOperationTransaction.setAmount(100);
-        nullAmountTransaction = new FruitTransaction();
-        nullAmountTransaction.setFruit(FRUIT);
-        nullAmountTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        correctTransactions = new ArrayList<>();
         balanceTransaction = new FruitTransaction();
         balanceTransaction.setFruit(FRUIT);
         balanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
@@ -100,32 +78,41 @@ public class ShopServiceTest {
         }
     }
 
-    @Test
-    public void processTransactions_inputDataWithNull_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void processTransactions_inputListWithNull_notOk() {
+        List<FruitTransaction> nullList = new ArrayList<>();
         nullList.add(null);
+        shopService.processTransactions(nullList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void processTransactions_inputListWithNullFruitInTransaction_notOk() {
+        FruitTransaction nullFruitTransaction = new FruitTransaction();
+        nullFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        nullFruitTransaction.setAmount(0);
+        List<FruitTransaction> nullFruitTransactionsList = new ArrayList<>();
         nullFruitTransactionsList.add(nullFruitTransaction);
-        nullOperationTransactionsList.add(nullOperationTransaction);
+        shopService.processTransactions(nullFruitTransactionsList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void processTransactions_inputListWithNullOperationInTransaction_notOk() {
+        FruitTransaction nullAmountTransaction = new FruitTransaction();
+        nullAmountTransaction.setFruit(FRUIT);
+        nullAmountTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        List<FruitTransaction> nullAmountTransactionsList = new ArrayList<>();
         nullAmountTransactionsList.add(nullAmountTransaction);
-        try {
-            shopService.processTransactions(nullList);
-        } catch (RuntimeException e) {
-            Assert.assertThat(e.getMessage(), is("Input list of transactions with null value"));
-        }
-        try {
-            shopService.processTransactions(nullFruitTransactionsList);
-        } catch (RuntimeException e) {
-            Assert.assertThat(e.getMessage(), is("Input list of transactions with null value"));
-        }
-        try {
-            shopService.processTransactions(nullOperationTransactionsList);
-        } catch (RuntimeException e) {
-            Assert.assertThat(e.getMessage(), is("Input list of transactions with null value"));
-        }
-        try {
-            shopService.processTransactions(nullAmountTransactionsList);
-        } catch (RuntimeException e) {
-            Assert.assertThat(e.getMessage(), is("Input list of transactions with null value"));
-        }
+        shopService.processTransactions(nullAmountTransactionsList);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void processTransactions_inputListWithNullAmountInTransaction_notOk() {
+        FruitTransaction nullOperationTransaction = new FruitTransaction();
+        nullOperationTransaction.setFruit(FRUIT);
+        nullOperationTransaction.setAmount(100);
+        List<FruitTransaction> nullOperationTransactionsList = new ArrayList<>();
+        nullOperationTransactionsList.add(nullOperationTransaction);
+        shopService.processTransactions(nullOperationTransactionsList);
     }
 
     @Test
@@ -196,6 +183,7 @@ public class ShopServiceTest {
 
     @Test
     public void processTransactions_correctInputValue_ok() {
+        List<FruitTransaction> correctTransactions = new ArrayList<>();
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(FRUIT, 0);
         correctTransactions.add(balanceTransaction);

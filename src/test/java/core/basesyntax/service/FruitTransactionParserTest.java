@@ -18,33 +18,11 @@ public class FruitTransactionParserTest {
     private static final String FIRST_INCORRECT_TRANSACTION_LINE = "p.orange;100";
     private static final String SECOND_INCORRECT_TRANSACTION_LINE = "";
     private static final String THIRD_INCORRECT_TRANSACTION_LINE = null;
-    private static List<String> firstIncorrectData;
-    private static List<String> secondIncorrectData;
-    private static List<String> thirdIncorrectData;
-    private static FruitTransaction firstTransaction;
-    private static FruitTransaction secondTransaction;
     private static FruitTransactionParser fruitTransactionParser;
 
     @BeforeClass
     public static void beforeClass() {
         fruitTransactionParser = new FruitTransactionParserImpl();
-        firstTransaction = new FruitTransaction();
-        secondTransaction = new FruitTransaction();
-        firstIncorrectData = new ArrayList<>();
-        firstIncorrectData.add(INFO_LINE);
-        firstIncorrectData.add(FIRST_INCORRECT_TRANSACTION_LINE);
-        secondIncorrectData = new ArrayList<>();
-        secondIncorrectData.add(INFO_LINE);
-        secondIncorrectData.add(SECOND_INCORRECT_TRANSACTION_LINE);
-        thirdIncorrectData = new ArrayList<>();
-        thirdIncorrectData.add(INFO_LINE);
-        thirdIncorrectData.add(THIRD_INCORRECT_TRANSACTION_LINE);
-        firstTransaction.setFruit(new Fruit("apple"));
-        firstTransaction.setAmount(50);
-        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        secondTransaction.setFruit(new Fruit("apple"));
-        secondTransaction.setAmount(40);
-        secondTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
     }
 
     @Test
@@ -79,6 +57,15 @@ public class FruitTransactionParserTest {
 
     @Test
     public void parse_incorrectInputData_notOk() {
+        List<String> firstIncorrectData = new ArrayList<>();
+        firstIncorrectData.add(INFO_LINE);
+        firstIncorrectData.add(FIRST_INCORRECT_TRANSACTION_LINE);
+        List<String> secondIncorrectData = new ArrayList<>();
+        secondIncorrectData.add(INFO_LINE);
+        secondIncorrectData.add(SECOND_INCORRECT_TRANSACTION_LINE);
+        List<String> thirdIncorrectData = new ArrayList<>();
+        thirdIncorrectData.add(INFO_LINE);
+        thirdIncorrectData.add(THIRD_INCORRECT_TRANSACTION_LINE);
         try {
             fruitTransactionParser.parse(firstIncorrectData);
         } catch (RuntimeException e) {
@@ -100,6 +87,14 @@ public class FruitTransactionParserTest {
 
     @Test
     public void parse_correctInputData_ok() {
+        FruitTransaction firstTransaction = new FruitTransaction();
+        firstTransaction.setFruit(new Fruit("apple"));
+        firstTransaction.setAmount(50);
+        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        FruitTransaction secondTransaction = new FruitTransaction();
+        secondTransaction.setFruit(new Fruit("apple"));
+        secondTransaction.setAmount(40);
+        secondTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(firstTransaction);
         expected.add(secondTransaction);

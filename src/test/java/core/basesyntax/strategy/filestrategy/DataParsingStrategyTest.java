@@ -10,12 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataParsingStrategyTest {
-    private static Map<String, DataParser> dataParsersMap;
     private static DataParsingStrategy dataParsingStrategy;
 
     @BeforeClass
-    public static void beforeClass() {
-        dataParsersMap = new HashMap<>();
+    public static void setUp() {
+        Map<String, DataParser> dataParsersMap = new HashMap<>();
         dataParsersMap.put(FileType.CSV.getName(), new CsvDataParserImpl());
         dataParsingStrategy = new DataParsingStrategy(dataParsersMap);
     }

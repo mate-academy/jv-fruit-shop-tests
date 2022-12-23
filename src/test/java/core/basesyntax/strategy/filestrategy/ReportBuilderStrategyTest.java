@@ -17,14 +17,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportBuilderStrategyTest {
-    private static Map<String, ReportBuilder> reportBuilderMap;
-    private static Map<Operation, OperationCalculator> operationCalculatorsMap;
     private static ReportBuilderStrategy reportBuilderStrategy;
-    private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void beforeClass() {
-        operationCalculatorsMap = new HashMap<>();
+    public static void setUp() {
+        Map<Operation, OperationCalculator> operationCalculatorsMap = new HashMap<>();
         operationCalculatorsMap.put(
                 Operation.BALANCE, new BalanceOperationCalculatorImpl());
         operationCalculatorsMap.put(
@@ -33,8 +30,8 @@ public class ReportBuilderStrategyTest {
                 Operation.PURCHASE, new PurchaseOperationCalculatorImpl());
         operationCalculatorsMap.put(
                 Operation.RETURN, new ReturnOperationCalculatorImpl());
-        operationStrategy = new OperationStrategy(operationCalculatorsMap);
-        reportBuilderMap = new HashMap<>();
+        OperationStrategy operationStrategy = new OperationStrategy(operationCalculatorsMap);
+        Map<String, ReportBuilder> reportBuilderMap = new HashMap<>();
         reportBuilderMap.put(FileType.CSV.getName(), new CsvReportBuilderImpl(operationStrategy));
         reportBuilderStrategy = new ReportBuilderStrategy(reportBuilderMap);
     }

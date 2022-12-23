@@ -19,13 +19,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvReportBuilderImplTest {
-    private static Map<Operation, OperationCalculator> operationCalculatorsMap;
-    private static OperationStrategy operationStrategy;
     private static ReportBuilder csvReportBuilder;
 
     @BeforeClass
-    public static void beforeClass() {
-        operationCalculatorsMap = new HashMap<>();
+    public static void setUp() {
+        Map<Operation, OperationCalculator> operationCalculatorsMap = new HashMap<>();
         operationCalculatorsMap.put(
                 Operation.BALANCE, new BalanceOperationCalculatorImpl());
         operationCalculatorsMap.put(
@@ -34,7 +32,7 @@ public class CsvReportBuilderImplTest {
                 Operation.PURCHASE, new PurchaseOperationCalculatorImpl());
         operationCalculatorsMap.put(
                 Operation.RETURN, new ReturnOperationCalculatorImpl());
-        operationStrategy = new OperationStrategy(operationCalculatorsMap);
+        OperationStrategy operationStrategy = new OperationStrategy(operationCalculatorsMap);
         csvReportBuilder = new CsvReportBuilderImpl(operationStrategy);
     }
 

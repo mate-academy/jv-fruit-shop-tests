@@ -16,7 +16,7 @@ public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         fileWriterService = new FileWriterServiceImpl();
     }
 

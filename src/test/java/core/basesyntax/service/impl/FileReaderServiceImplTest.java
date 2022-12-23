@@ -11,7 +11,7 @@ public class FileReaderServiceImplTest {
     private static FileReaderService fileReaderService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         fileReaderService = new FileReaderServiceImpl();
     }
 

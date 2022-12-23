@@ -14,12 +14,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private static Map<Operation, OperationCalculator> operationCalculatorsMap;
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void beforeClass() {
-        operationCalculatorsMap = new HashMap<>();
+    public static void setUp() {
+        Map<Operation, OperationCalculator> operationCalculatorsMap = new HashMap<>();
         operationCalculatorsMap.put(
                 Operation.BALANCE, new BalanceOperationCalculatorImpl());
         operationCalculatorsMap.put(

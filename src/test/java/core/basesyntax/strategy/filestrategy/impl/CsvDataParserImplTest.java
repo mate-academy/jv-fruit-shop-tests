@@ -13,7 +13,7 @@ public class CsvDataParserImplTest {
     private static DataParser dataParser;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void setUp() {
         dataParser = new CsvDataParserImpl();
     }
 

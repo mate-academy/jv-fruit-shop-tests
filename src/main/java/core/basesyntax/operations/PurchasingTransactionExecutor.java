@@ -16,6 +16,9 @@ public class PurchasingTransactionExecutor implements TransactionExecutor {
             Integer purchaseResult = fruitMap.get(fruit)
                     - purchaseQuantity;
             fruitMap.put(fruit, purchaseResult);
+        } else {
+            throw new RuntimeException(fruit + ", " + purchaseQuantity
+                    + " - are not enough to by in store");
         }
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class TransactionParserServiceImpl implements TransactionParserService {
-    private String rowTitle = "type,fruit,quantity";
+    private String rowTitle = "type";
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
@@ -27,9 +27,9 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     private Optional<FruitTransaction.Operation> parseOperation(String value) {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getOperation().equals(value)) {
+            if (value.equals(operation.getOperation())) {
                 return Optional.of(operation);
-            } else if (rowTitle.contains(value)) {
+            } else if (rowTitle.equals(value)) {
                 return Optional.ofNullable(null);
             }
         }

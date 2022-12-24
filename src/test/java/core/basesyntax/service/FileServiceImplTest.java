@@ -34,14 +34,6 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void readNotExistedFile_notOk() {
-        List<String> expectedResult = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
-        thrownRule.expect(RuntimeException.class);
-        thrownRule.expectMessage("Can't read file src\\test\\sources\\inputData.csv1");
-        fileService.readFromFile("notExistedFile");
-    }
-
-    @Test
     public void writeToFile_ok() {
         String content = "fruit,quantity";
         fileService.writeToFile(reportFileName, content);

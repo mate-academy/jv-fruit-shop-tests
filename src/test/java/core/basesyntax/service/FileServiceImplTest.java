@@ -38,7 +38,7 @@ public class FileServiceImplTest {
         List<String> expectedResult = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
         thrownRule.expect(RuntimeException.class);
         thrownRule.expectMessage("Can't read file src\\test\\sources\\inputData.csv1");
-        fileService.readFromFile(transactionsFileName + 1);
+        fileService.readFromFile("notExistedFile");
     }
 
     @Test

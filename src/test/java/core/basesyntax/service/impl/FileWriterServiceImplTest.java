@@ -25,6 +25,20 @@ public class FileWriterServiceImplTest {
     public ExpectedException writeToFileExceptionRule = ExpectedException.none();
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
 
+    @Test
+    public void writeToFile_emptyFileName_notOk() {
+        writeToFileExceptionRule.expect(RuntimeException.class);
+        writeToFileExceptionRule.expectMessage("Can't write data to file: "
+                + FILE_NAME_IS_EMPTY);
+        fileWriterService.writeToFile(FULL_REPORT, FILE_NAME_IS_EMPTY);
+    }
+
+    @Test
+    public void writeToFile_fullReport_Ok() {
+        writeToFile(FULL_REPORT, REPORT_FILE_NAME);
+        assertEquals(FULL_REPORT, readFromFile(REPORT_FILE_NAME));
+    }
+
     private void writeToFile(List<String> data, String fileName) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             for (String string : data) {
@@ -43,19 +57,5 @@ public class FileWriterServiceImplTest {
             throw new RuntimeException("Can't read data from file: " + fileName);
         }
         return allLines;
-    }
-
-    @Test
-    public void writeToFile_emptyFileName_notOk() {
-        writeToFileExceptionRule.expect(RuntimeException.class);
-        writeToFileExceptionRule.expectMessage("Can't write data to file: "
-                + FILE_NAME_IS_EMPTY);
-        fileWriterService.writeToFile(FULL_REPORT, FILE_NAME_IS_EMPTY);
-    }
-
-    @Test
-    public void writeToFile_fullReport_Ok() {
-        writeToFile(FULL_REPORT, REPORT_FILE_NAME);
-        assertEquals(FULL_REPORT, readFromFile(REPORT_FILE_NAME));
     }
 }

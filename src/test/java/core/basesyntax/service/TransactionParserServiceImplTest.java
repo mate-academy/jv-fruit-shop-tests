@@ -12,7 +12,7 @@ public class TransactionParserServiceImplTest {
     public ExpectedException thrownRule = ExpectedException.none();
 
     @Test
-    public void parse_balanceOperation_ok() {
+    public void parseOperation_balance_ok() {
         final TransactionParserService transactionParserService =
                 new TransactionParserServiceImpl();
         final List<String> list = List.of("type,fruit,quantity", "b,banana,20");
@@ -26,7 +26,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test
-    public void parse_supplyOperation_ok() {
+    public void parseOperation_supply_ok() {
         final TransactionParserService transactionParserService =
                 new TransactionParserServiceImpl();
         final List<String> list = List.of("type,fruit,quantity", "s,apple,5");
@@ -40,7 +40,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test
-    public void parse_purchaseOperation_ok() {
+    public void parseOperation_purchase_ok() {
         final TransactionParserService transactionParserService =
                 new TransactionParserServiceImpl();
         final List<String> list = List.of("type,fruit,quantity", "p,apple,5");
@@ -54,7 +54,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test
-    public void parse_returnOperation_ok() {
+    public void parseOperation_return_ok() {
         final TransactionParserService transactionParserService =
                 new TransactionParserServiceImpl();
         final List<String> list = List.of("type,fruit,quantity", "r,apple,5");

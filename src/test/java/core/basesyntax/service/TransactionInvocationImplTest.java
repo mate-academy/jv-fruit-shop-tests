@@ -38,7 +38,7 @@ public class TransactionInvocationImplTest {
     }
 
     @Test
-    public void involveSupplyTransaction_ok() {
+    public void invokeTransaction_supply_ok() {
         TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         Map<String, Integer> expectedMap = Map.of("apple", 10);
         Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = createOperationMap();
@@ -51,7 +51,7 @@ public class TransactionInvocationImplTest {
     }
 
     @Test
-    public void involvePurchaseTransaction_ok() {
+    public void involveTransaction_purchase_ok() {
         TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         Map<String, Integer> expectedMap = Map.of("apple", 5);
         Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = createOperationMap();
@@ -64,7 +64,7 @@ public class TransactionInvocationImplTest {
     }
 
     @Test
-    public void involveReturnTransaction_ok() {
+    public void involveTransaction_return_ok() {
         TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         Map<String, Integer> expectedMap = Map.of("apple", 20);
         Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = createOperationMap();
@@ -77,7 +77,7 @@ public class TransactionInvocationImplTest {
     }
 
     @Test
-    public void involvePurchaseTransaction_notOk() {
+    public void involveTransaction_purchase_notOk() {
         TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = createOperationMap();
         List<FruitTransaction> fruitTransactionList = List.of(

@@ -14,17 +14,14 @@ import core.basesyntax.service.TransactionInvocation;
 import core.basesyntax.service.TransactionInvocationImpl;
 import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.TransactionParserServiceImpl;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String transactionsFileName = "src" + File.separator + "main"
-            + File.separator + "sources" + File.separator + "inputData.csv";
-    private static final String reportFileName = "src" + File.separator + "main" + File.separator
-            + "sources" + File.separator + "reports.csv";
+    private static final String TRANSACTIONS_FILE_NAME = "src/main/sources/inputData.csv";
+    private static final String REPORT_FILE_NAME = "src/main/sources/reports.csv";
 
     public static void main(String[] args) throws IOException {
         final TransactionParserService transactionParserService =
@@ -32,7 +29,7 @@ public class Main {
         final TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         final ReportGenerator reportGenerator = new ReportGeneratorImpl();
         FileService fileService = new FileServiceImpl();
-        List<String> list = fileService.readFromFile(transactionsFileName);
+        List<String> list = fileService.readFromFile(TRANSACTIONS_FILE_NAME);
         final List<FruitTransaction> fruitTransactionList = transactionParserService.parse(list);
         final Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = new HashMap<>();
         operationsMap.put(FruitTransaction.Operation.BALANCE, new BalanceTransactionExecutor());
@@ -40,6 +37,6 @@ public class Main {
         operationsMap.put(FruitTransaction.Operation.RETURN, new ReturningTransactionExecutor());
         operationsMap.put(FruitTransaction.Operation.SUPPLY, new SupplingTransactionExecutor());
         transactionInvocation.invokeTransaction(fruitTransactionList, operationsMap);
-        fileService.writeToFile(reportFileName, reportGenerator.getReport());
+        fileService.writeToFile(REPORT_FILE_NAME, reportGenerator.getReport());
     }
 }

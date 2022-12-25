@@ -14,30 +14,28 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class FileServiceImplTest {
-    private static final String transactionsFileName = "src" + File.separator + "test"
-            + File.separator + "sources" + File.separator + "inputData.csv";
-    private static final String reportFileName = "src" + File.separator + "test" + File.separator
-            + "sources" + File.separator + "reports.csv";
+    private static final String TRANSACTIONS_FILE_NAME = "src/test/sources/inputData.csv";
+    private static final String REPORT_FILE_NAME = "src/test/sources/reports.csv";
     @Rule
     public ExpectedException thrownRule = ExpectedException.none();
     private FileService fileService = new FileServiceImpl();
 
     @After
     public void deleteReportFile() {
-        deleteFile(reportFileName);
+        deleteFile(REPORT_FILE_NAME);
     }
 
     @Test
     public void readFromFile_ok() {
         List<String> expectedResult = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
-        Assert.assertEquals(expectedResult, fileService.readFromFile(transactionsFileName));
+        Assert.assertEquals(expectedResult, fileService.readFromFile(TRANSACTIONS_FILE_NAME));
     }
 
     @Test
     public void writeToFile_ok() {
         String content = "fruit,quantity";
-        fileService.writeToFile(reportFileName, content);
-        String fileReportContent = getReporFileContent(reportFileName);
+        fileService.writeToFile(REPORT_FILE_NAME, content);
+        String fileReportContent = getReporFileContent(REPORT_FILE_NAME);
         Assert.assertEquals(content, fileReportContent);
     }
 

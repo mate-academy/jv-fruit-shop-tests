@@ -26,7 +26,7 @@ public class TransactionInvocationImplTest {
     }
 
     @Test
-    public void involveBalanceTransaction_ok() {
+    public void invokeTransaction_balance_ok() {
         TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         Map<String, Integer> expectedMap = Map.of("apple", 100);
         Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = createOperationMap();

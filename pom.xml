@@ -42,13 +42,13 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <excludes>**/Main*</excludes>
                     <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <excludes>**/Main*</excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -91,7 +91,9 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/db/*</exclude>
+                        <exclude>**/model/*</exclude>
+                        <exclude>**/service</exclude>
                     </excludes>
                 </configuration>
             </plugin>

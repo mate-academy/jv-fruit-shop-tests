@@ -34,7 +34,7 @@ public class BalanceOperationHandlerImplTest {
     @Test
     public void balanceHandler_Work_Ok() {
         balanceOperationHandler.operate(fruitTransaction);
-        int expected = 50;
+        int expected = TEST_BALANCE;
         int actual = Storage.fruits.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }

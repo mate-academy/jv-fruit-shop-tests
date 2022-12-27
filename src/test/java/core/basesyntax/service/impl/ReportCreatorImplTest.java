@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreator;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,11 +18,6 @@ public class ReportCreatorImplTest {
     @Before
     public void setUp() {
         reportCreator = new ReportCreatorImpl();
-    }
-
-    @After
-    public void tearDown() {
-        Storage.fruits.clear();
     }
 
     @Test

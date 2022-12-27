@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    public static final String TEST_FILEPATH = "src/main/resources/input.csv";
+    public static final String TEST_FILEPATH = "src/test/resources/input.csv";
     public static final String WRONG_FILEPATH = "/var/lib";
     private ReaderService readerService;
 

@@ -46,7 +46,8 @@ public class ReportServiceImplTest {
     @Test
     public void report_ContainTitleIsOk() {
         String[] split = reportService.generateReport().split("\r\n");
-        assertEquals(FIRST_LINE,split[0]);
+        String first = split[0];
+        assertEquals(FIRST_LINE,first);
     }
 
     @AfterClass

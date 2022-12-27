@@ -1,11 +1,15 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.servise.ReportService;
+import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class ReportServiceImplTest {
     private static final String FIRST_LINE = "fruit, quantity";
@@ -21,28 +25,32 @@ public class ReportServiceImplTest {
 
     @Test
     public void report_Storage_IsNotEmptyIsOk() {
-        Assertions.assertTrue(Storage.storageMap.size() > 0,
-                "Storage is not Empty");
+        assertTrue("Storage is not Empty",Storage.storageMap.size() > 0);
     }
 
     @Test
     public void report_Storage_IsEmptyIsNotOk() {
         Storage.storageMap.clear();
-        Assertions.assertTrue(Storage.storageMap.isEmpty(), "Storage is Empty");
+        assertTrue("Storage is Empty",Storage.storageMap.isEmpty());
     }
 
     @Test
     public void report_Storage_IsNull() {
         Storage.storageMap.clear();
         Storage.storageMap.put(null,null);
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        Assert.assertThrows("Storage can't be null",NullPointerException.class, () -> {
             reportService.generateReport();
-        }, "Storage can't be null");
+        });
     }
 
     @Test
     public void report_ContainTitleIsOk() {
         String[] split = reportService.generateReport().split("\r");
-        Assertions.assertEquals(FIRST_LINE,split[0]);
+        assertEquals(FIRST_LINE,split[0]);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.storageMap.clear();
     }
 }

@@ -1,9 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.servise.ReaderService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
@@ -16,34 +19,35 @@ public class ReaderServiceImplTest {
 
     @Test
     public void read_pathFileIsNullNotOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
+        assertThrows("Path to file can't be null", RuntimeException.class, () -> {
             readerService.readFromFile(null);
-        }, "Path to file can't be null");
+        });
     }
 
     @Test
     public void read_pathEqualsInputPath() {
         String actual = "src/test/resourcesfortest/InputFile.csv";
-        Assertions.assertEquals(FROM_FILE, actual);
+        assertEquals(FROM_FILE, actual);
     }
 
     @Test
     public void read_pathNotEqualsInputPath() {
         String actual = "src/test/resourcesfortest/sdw.csv";
-        Assertions.assertThrows(RuntimeException.class,() -> {
-            readerService.readFromFile(actual);
-        },"This path not exist");
+        assertThrows("This path not exist",
+                RuntimeException.class,() -> {
+                readerService.readFromFile(actual);
+            });
     }
 
     @Test
     public void read_FileIsNotEmptyOk() {
-        Assertions.assertTrue(readerService.readFromFile(FROM_FILE).size() > 0,
-                "File is not empty");
+        assertTrue("File is not empty",
+                readerService.readFromFile(FROM_FILE).size() > 0);
     }
 
     @Test
     public void read_FileIsEmptyNotOk() {
         String pathToFile = "src/test/resourcesfortest/file.csv";
-        Assertions.assertTrue(readerService.readFromFile(pathToFile).isEmpty());
+        assertTrue(readerService.readFromFile(pathToFile).isEmpty());
     }
 }

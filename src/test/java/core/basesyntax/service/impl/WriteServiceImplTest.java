@@ -1,5 +1,9 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.servise.ReaderService;
 import core.basesyntax.servise.WriteService;
 import java.io.IOException;
@@ -8,14 +12,12 @@ import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 
 public class WriteServiceImplTest {
     private static final String TO_FILE = "src/test/resourcesfortest/ReportFile.csv";
     private static WriteService writeService;
     private static ReaderService readerService;
     private String report;
-    private String expectedReport;
 
     @Before
     public void setUp() {
@@ -29,28 +31,30 @@ public class WriteServiceImplTest {
 
     @Test
     public void write_PathFileIsNullNotOk() {
-        Assertions.assertThrows(RuntimeException.class,() -> {
-            writeService.writeToFile(report,null);
-        }, "Path can't be null");
+        assertThrows("Path can't be null",
+                RuntimeException.class,() -> {
+                writeService.writeToFile(report,null);
+            });
     }
 
     @Test
     public void write_pathEqualsInputPathIsOk() {
         String actual = "src/test/resourcesfortest/ReportFile.csv";
-        Assertions.assertEquals(TO_FILE,actual);
+        assertEquals(TO_FILE,actual);
     }
 
     @Test
     public void write_pathNotEqualsInputPathIsNotOk() {
         String actual = "src/main/bamburses/ReportFile.csv";
-        Assertions.assertNotEquals(TO_FILE,actual);
+        assertNotEquals(TO_FILE,actual);
     }
 
     @Test
     public void write_reportIsNullNotOk() {
-        Assertions.assertThrows(RuntimeException.class,() -> {
-            writeService.writeToFile(null,TO_FILE);
-        }, "Report can't be null");
+        assertThrows("Report can't be null",
+                RuntimeException.class,() -> {
+                writeService.writeToFile(null,TO_FILE);
+            });
     }
 
     @Test
@@ -62,7 +66,7 @@ public class WriteServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read file date" + TO_FILE, e);
         }
-        Assertions.assertEquals(report,actual);
+        assertEquals(report,actual);
     }
 
     @After

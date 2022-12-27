@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.servise.ReportService;
-import org.junit.AfterClass;
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,14 +18,6 @@ public class ReportServiceImplTest {
     @Before
     public void setUp() {
         reportService = new ReportServiceImpl();
-        Storage.storageMap.put(new Fruit("avocado"),40);
-        Storage.storageMap.put(new Fruit("banana"),43);
-        Storage.storageMap.put(new Fruit("apple"),185);
-    }
-
-    @Test
-    public void report_Storage_IsNotEmptyIsOk() {
-        assertTrue("Storage is not Empty",Storage.storageMap.size() > 0);
     }
 
     @Test
@@ -38,20 +30,26 @@ public class ReportServiceImplTest {
     public void report_Storage_IsNull() {
         Storage.storageMap.clear();
         Storage.storageMap.put(null,null);
-        Assert.assertThrows("Storage can't be null",NullPointerException.class, () -> {
+        assertThrows("Storage can't be null",NullPointerException.class, () -> {
             reportService.generateReport();
         });
     }
 
     @Test
-    public void report_ContainTitleIsOk() {
-        String[] split = reportService.generateReport().split("\r\n");
-        String first = split[0];
-        assertEquals(FIRST_LINE,first);
+    public void name() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("fruit,quantity").append(System.lineSeparator())
+                .append("avocado,40").append(System.lineSeparator())
+                .append("banana,43").append(System.lineSeparator())
+                .append("apple,185").append(System.lineSeparator());
+        Storage.storageMap.put(new Fruit("avocado"),40);
+        Storage.storageMap.put(new Fruit("banana"),43);
+        Storage.storageMap.put(new Fruit("apple"),185);
+        assertEquals(stringBuilder.toString(), reportService.generateReport());
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() {
         Storage.storageMap.clear();
     }
 }

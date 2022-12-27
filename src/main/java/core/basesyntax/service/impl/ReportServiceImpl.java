@@ -6,7 +6,7 @@ import core.basesyntax.servise.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String FIRST_LINE = "fruit, quantity";
+    private static final String FIRST_LINE = "fruit,quantity";
 
     @Override
     public String generateReport() {

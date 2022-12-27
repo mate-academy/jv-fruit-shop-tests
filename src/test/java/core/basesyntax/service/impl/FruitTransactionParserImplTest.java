@@ -7,24 +7,23 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionParserImplTest {
-    private static String TEST_FRUIT_FIRST = "apple";
-    private static String TEST_FRUIT_SECOND = "banana";
-    private static String TEST_OPERATION_CODE = "b";
-
-    private static int TEST_BALANCE_FIRST = 50;
-    private static int TEST_BALANCE_SECOND = 100;
-    private static FruitTransaction.Operation TEST_OPERATION = BALANCE;
+    private static final String TEST_FRUIT_FIRST = "apple";
+    private static final String TEST_FRUIT_SECOND = "banana";
+    private static final int TEST_BALANCE_FIRST = 50;
+    private static final int TEST_BALANCE_SECOND = 100;
+    private static final FruitTransaction.Operation TEST_OPERATION = BALANCE;
     private static FruitTransaction fruitTransactionFirst;
     private static FruitTransaction fruitTransactionSecond;
     private static List<FruitTransaction> fruitTransactionsList;
     private static FruitTransactionParser fruitTransactionParser;
 
-    @BeforeClass
-    public static void beforeAll() {
+    @Before
+    public void setUp() {
         fruitTransactionParser = new FruitTransactionParserImpl();
         fruitTransactionFirst = new FruitTransaction();
         fruitTransactionFirst.setOperation(TEST_OPERATION);
@@ -37,6 +36,11 @@ public class FruitTransactionParserImplTest {
         fruitTransactionsList = new ArrayList<>();
         fruitTransactionsList.add(fruitTransactionFirst);
         fruitTransactionsList.add(fruitTransactionSecond);
+    }
+
+    @After
+    public void tearDown() {
+        fruitTransactionsList = null;
     }
 
     @Test

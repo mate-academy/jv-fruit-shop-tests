@@ -4,20 +4,20 @@ import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction.Operation;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionTest {
 
-    private static String TEST_FRUIT = "apple";
-    private static String TEST_OPERATION_CODE = "b";
-    private static String TEST_WRONG_OPERATION_CODE = "w";
-    private static int TEST_BALANCE = 50;
-    private static Operation TEST_OPERATION = BALANCE;
+    private static final String TEST_FRUIT = "apple";
+    private static final String TEST_OPERATION_CODE = "b";
+    private static final String TEST_WRONG_OPERATION_CODE = "w";
+    private static final int TEST_BALANCE = 50;
+    private static final Operation TEST_OPERATION = BALANCE;
     private static FruitTransaction fruitTransaction;
 
-    @BeforeClass
-    public static void beforeAll() {
+    @Before
+    public void setUp() {
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(TEST_OPERATION);
         fruitTransaction.setFruit(TEST_FRUIT);
@@ -27,15 +27,13 @@ public class FruitTransactionTest {
     @Test
     public void getOperation_Work_Ok() {
         Operation actual = fruitTransaction.getOperation();
-        Operation expected = TEST_OPERATION;
-        assertEquals(expected, actual);
+        assertEquals(TEST_OPERATION, actual);
     }
 
     @Test
     public void getByCode_Work_Ok() {
         Operation actual = Operation.getByCode(TEST_OPERATION_CODE);
-        Operation expected = TEST_OPERATION;
-        assertEquals(expected, actual);
+        assertEquals(TEST_OPERATION, actual);
     }
 
     @Test(expected = IllegalArgumentException.class)

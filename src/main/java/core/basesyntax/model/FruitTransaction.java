@@ -36,6 +36,33 @@ public class FruitTransaction {
                 + ", quantity=" + quantity + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+
+        if (quantity != that.quantity) {
+            return false;
+        }
+        if (operation != that.operation) {
+            return false;
+        }
+        return fruit.equals(that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = operation.hashCode();
+        result = 31 * result + fruit.hashCode();
+        result = 31 * result + quantity;
+        return result;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

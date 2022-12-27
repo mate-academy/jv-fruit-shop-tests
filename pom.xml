@@ -92,8 +92,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/db/*</exclude>
-                        <exclude>**/model/*</exclude>
-                        <exclude>**/service</exclude>
+                        <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

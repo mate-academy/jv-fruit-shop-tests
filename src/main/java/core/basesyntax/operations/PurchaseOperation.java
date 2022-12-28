@@ -1,6 +1,7 @@
 package core.basesyntax.operations;
 
 import static core.basesyntax.db.Storage.fruitStorage;
+
 import core.basesyntax.exception.OperationException;
 
 public class PurchaseOperation implements Operational {

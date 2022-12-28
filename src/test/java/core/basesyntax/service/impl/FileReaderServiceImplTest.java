@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.exception.FileReaderException;
 import core.basesyntax.service.FileReaderService;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;

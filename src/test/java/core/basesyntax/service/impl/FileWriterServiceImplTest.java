@@ -1,9 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.FileWriterException;
-import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -3,6 +3,7 @@ package core.basesyntax.operations;
 import static core.basesyntax.db.Storage.fruitStorage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+
 import core.basesyntax.exception.OperationException;
 import org.junit.After;
 import org.junit.BeforeClass;

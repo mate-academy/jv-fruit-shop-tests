@@ -1,18 +1,23 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.operations.*;
-import core.basesyntax.service.OperationsExecutorService;
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.operations.BalanceOperation;
+import core.basesyntax.operations.Operation;
+import core.basesyntax.operations.Operational;
+import core.basesyntax.operations.PurchaseOperation;
+import core.basesyntax.operations.ReturnOperation;
+import core.basesyntax.operations.SupplyOperation;
+import core.basesyntax.service.OperationsExecutorService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 
 public class OperationsExecutorServiceImplTest {

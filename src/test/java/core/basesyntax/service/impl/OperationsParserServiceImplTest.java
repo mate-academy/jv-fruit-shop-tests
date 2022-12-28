@@ -1,11 +1,13 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertArrayEquals;
+
 import core.basesyntax.service.OperationsParserService;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 
 public class OperationsParserServiceImplTest {
     private static final List<String> INPUT_LIST = new ArrayList<>();

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static core.basesyntax.db.Storage.fruitStorage;
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ReportService;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

@@ -20,8 +20,8 @@ import org.junit.Test;
 public class OperationStrategyImplTest {
     private static final FruitTransaction.Operation TEST_OPERATION = BALANCE;
     private static Map<FruitTransaction.Operation, OperationHandler> strategies;
-    private static OperationStrategy operationStrategy;
-    private static OperationHandler actual;
+    private OperationStrategy operationStrategy;
+    private OperationHandler actual;
 
     @BeforeClass
     public static void oneTimeSetUp() {

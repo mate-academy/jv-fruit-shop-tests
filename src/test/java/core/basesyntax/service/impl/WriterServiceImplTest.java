@@ -36,7 +36,12 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_Exception_NotOk() {
+    public void writeToFile_wrongPath_NotOk() {
         writerService.writeToFile(TEST_STRING, WRONG_FILEPATH);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullPath_NotOk() {
+        writerService.writeToFile(TEST_STRING, null);
     }
 }

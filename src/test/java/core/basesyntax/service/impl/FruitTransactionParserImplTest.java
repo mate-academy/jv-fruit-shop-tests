@@ -17,10 +17,10 @@ public class FruitTransactionParserImplTest {
     private static final int TEST_BALANCE_FIRST = 50;
     private static final int TEST_BALANCE_SECOND = 100;
     private static final FruitTransaction.Operation TEST_OPERATION = BALANCE;
-    private static FruitTransaction fruitTransactionFirst;
-    private static FruitTransaction fruitTransactionSecond;
-    private static List<FruitTransaction> fruitTransactionsList;
-    private static FruitTransactionParser fruitTransactionParser;
+    private FruitTransaction fruitTransactionFirst;
+    private FruitTransaction fruitTransactionSecond;
+    private List<FruitTransaction> fruitTransactionsList;
+    private FruitTransactionParser fruitTransactionParser;
 
     @Before
     public void setUp() {

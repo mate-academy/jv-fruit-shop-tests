@@ -15,7 +15,7 @@ public class SupplyOperationHandlerImplTest {
     private static final int TEST_BALANCE_FIRST = 300;
     private static final int TEST_BALANCE_SECOND = 120;
     private static final FruitTransaction.Operation TEST_OPERATION = RETURN;
-    private static FruitTransaction fruitTransaction;
+    private FruitTransaction fruitTransaction;
     private OperationHandler supplyOperationHandler;
 
     @Before

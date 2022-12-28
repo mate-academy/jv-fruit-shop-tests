@@ -15,7 +15,7 @@ public class ReturnOperationHandlerImplTest {
     private static final int TEST_BALANCE_FIRST = 100;
     private static final int TEST_BALANCE_SECOND = 70;
     private static final FruitTransaction.Operation TEST_OPERATION = RETURN;
-    private static FruitTransaction fruitTransaction;
+    private FruitTransaction fruitTransaction;
     private OperationHandler returnOperationHandler;
 
     @Before

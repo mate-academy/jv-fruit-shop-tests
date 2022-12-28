@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
-
 public class PurchaseOperationTest {
     private static final String APPLE_NAME = "apple";
     private static final String ORANGE_NAME = "orange";

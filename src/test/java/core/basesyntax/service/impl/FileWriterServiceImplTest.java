@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.exception.FileWriterException;
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
@@ -9,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class FileWriterServiceImplTest {
     private static final String CREATED_PATH =

@@ -2,15 +2,13 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.FileWriterException;
 import core.basesyntax.service.FileWriterService;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 

@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 public class FileReaderServiceImplTest {
     private static final String ONE_LINE_TEXT_PATH =
             "src/test/resources/one-line-text.csv";

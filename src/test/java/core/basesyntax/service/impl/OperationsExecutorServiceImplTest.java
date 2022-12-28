@@ -19,7 +19,6 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 public class OperationsExecutorServiceImplTest {
     private static final List<String[]> OPERATION_LIST = new ArrayList<>();
     private static final Map<String, Integer> EXPECTED_MAP = new HashMap<>();

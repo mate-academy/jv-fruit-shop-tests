@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 public class OperationsParserServiceImplTest {
     private static final List<String> INPUT_LIST = new ArrayList<>();
     private static final List<String[]> EXPECTED_LIST = new ArrayList<>();

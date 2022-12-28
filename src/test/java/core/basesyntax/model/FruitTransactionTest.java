@@ -14,7 +14,7 @@ public class FruitTransactionTest {
     private static final String TEST_WRONG_OPERATION_CODE = "w";
     private static final int TEST_BALANCE = 50;
     private static final Operation TEST_OPERATION = BALANCE;
-    private static FruitTransaction fruitTransaction;
+    private FruitTransaction fruitTransaction;
 
     @Before
     public void setUp() {

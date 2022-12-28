@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
-    private static final String TO_FILE = "src/test/resourcesfortest/ReportFile.csv";
+    private static final String TO_FILE = "src/test/resources/ReportFile.csv";
     private static WriteService writeService;
     private static ReaderService readerService;
     private String report;
@@ -39,7 +39,7 @@ public class WriteServiceImplTest {
 
     @Test
     public void write_pathEqualsInputPathIsOk() {
-        String actual = "src/test/resourcesfortest/ReportFile.csv";
+        String actual = "src/test/resources/ReportFile.csv";
         assertEquals(TO_FILE,actual);
     }
 

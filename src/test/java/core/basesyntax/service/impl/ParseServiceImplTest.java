@@ -15,7 +15,7 @@ public class ParseServiceImplTest {
     private static ParseService parseService;
     private static ReaderService readerService;
     private static List<String> strings;
-    private static final String FROM_FILE = "src/test/resourcesfortest/InputFile.csv";
+    private static final String FROM_FILE = "src/test/resources/InputFile.csv";
 
     @Before
     public void setUp() {

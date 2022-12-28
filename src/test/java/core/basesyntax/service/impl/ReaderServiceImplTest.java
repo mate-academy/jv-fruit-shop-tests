@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
-    private static final String FROM_FILE = "src/test/resourcesfortest/InputFile.csv";
+    private static final String FROM_FILE = "src/test/resources/InputFile.csv";
 
     @Before
     public void setUp() {
@@ -26,13 +26,13 @@ public class ReaderServiceImplTest {
 
     @Test
     public void read_pathEqualsInputPath() {
-        String actual = "src/test/resourcesfortest/InputFile.csv";
+        String actual = "src/test/resources/InputFile.csv";
         assertEquals(FROM_FILE, actual);
     }
 
     @Test
     public void read_pathNotEqualsInputPath() {
-        String actual = "src/test/resourcesfortest/sdw.csv";
+        String actual = "src/test/resources/sdw.csv";
         assertThrows("This path not exist",
                 RuntimeException.class,() -> {
                 readerService.readFromFile(actual);
@@ -47,7 +47,7 @@ public class ReaderServiceImplTest {
 
     @Test
     public void read_FileIsEmptyNotOk() {
-        String pathToFile = "src/test/resourcesfortest/file.csv";
+        String pathToFile = "src/test/resources/file.csv";
         assertTrue(readerService.readFromFile(pathToFile).isEmpty());
     }
 }

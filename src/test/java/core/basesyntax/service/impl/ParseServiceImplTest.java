@@ -25,33 +25,33 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseService_ListFruitTransferSizeIsNotEmptyIsOk() {
+    public void parseFruitTransfers_NotEmptyList_IsOk() {
         assertTrue("Size is not Empty",parseService.parseFruitTransfers(strings).size() > 0);
     }
 
     @Test
-    public void parseService_ListFruitTransferSizeIsEmptyIsNotOk() {
+    public void parseFruitTransfers_emptyList_notOk() {
         List<FruitTransfer> fruitTransfers =
                 parseService.parseFruitTransfers(Collections.emptyList());
-        assertTrue("Size is Empty",fruitTransfers.isEmpty());
+        assertTrue("Size is Empty", fruitTransfers.isEmpty());
     }
 
     @Test
-    public void parseService_ListFruitTransferSizeIsNullNotOk() {
-        assertThrows("List can't be null",RuntimeException.class,() -> {
+    public void parseFruitTransfers_ListIsNull_notOk() {
+        assertThrows("List can't be null", RuntimeException.class, () -> {
             parseService.parseFruitTransfers(null);
         });
     }
 
     @Test
-    public void parseService_ListFruitTransferSizeIsNotNullOk() {
-        assertTrue("List not null",parseService.parseFruitTransfers(strings) != null);
+    public void parseFruitTransfers_ListIsNotNull_IsOk() {
+        assertTrue("List not null", parseService.parseFruitTransfers(strings) != null);
     }
 
     @Test
-    public void getOperation_elementNotFound_NotOk() {
-        List<String> test = List.of("fruit,quantity","m,avocado,80");
-        assertThrows("No such element found",RuntimeException.class,() -> {
+    public void getOperation_elementNotFound_notOk() {
+        List<String> test = List.of("fruit,quantity", "m,avocado,80");
+        assertThrows("No such element found", RuntimeException.class,() -> {
             parseService.parseFruitTransfers(test);
         });
     }

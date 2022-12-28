@@ -21,30 +21,30 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void report_Storage_IsEmptyIsNotOk() {
+    public void reportCreate_StorageEmpty_notOk() {
         Storage.storageMap.clear();
-        assertTrue("Storage is Empty",Storage.storageMap.isEmpty());
+        assertTrue("Storage is Empty", Storage.storageMap.isEmpty());
     }
 
     @Test
-    public void report_Storage_IsNull() {
+    public void reportCreate_StorageNull_notOk() {
         Storage.storageMap.clear();
         Storage.storageMap.put(null,null);
-        assertThrows("Storage can't be null",NullPointerException.class, () -> {
+        assertThrows("Storage can't be null", NullPointerException.class, () -> {
             reportService.generateReport();
         });
     }
 
     @Test
-    public void name() {
+    public void reportCreate_ContentSame_Ok() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator())
                 .append("avocado,40").append(System.lineSeparator())
                 .append("banana,43").append(System.lineSeparator())
                 .append("apple,185").append(System.lineSeparator());
-        Storage.storageMap.put(new Fruit("avocado"),40);
-        Storage.storageMap.put(new Fruit("banana"),43);
-        Storage.storageMap.put(new Fruit("apple"),185);
+        Storage.storageMap.put(new Fruit("avocado"), 40);
+        Storage.storageMap.put(new Fruit("banana"), 43);
+        Storage.storageMap.put(new Fruit("apple"), 185);
         assertEquals(stringBuilder.toString(), reportService.generateReport());
     }
 

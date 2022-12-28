@@ -19,13 +19,13 @@ public class FruitOperationStrategyImplTest {
     private static FruitOperationStrategy fruitOperationStrategy;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         fruitOperationStrategy = new FruitOperationStrategyImpl(createMap());
     }
 
     @Test
-    public void operation_Balance_IsOk() {
-        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"),100);
+    public void transferOperation_Balance_Ok() {
+        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"), 100);
         List<FruitTransfer> fruitTransfers = List.of(
                 createFruitTransfer(FruitTransfer.Operation.BALANCE, "avocado", 100)
         );
@@ -38,8 +38,8 @@ public class FruitOperationStrategyImplTest {
     }
 
     @Test
-    public void operation_SupplyIsOk() {
-        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"),100);
+    public void transferOperation_Supply_Ok() {
+        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"), 100);
         List<FruitTransfer> fruitTransfers = List.of(
                 createFruitTransfer(FruitTransfer.Operation.SUPPLY, "avocado", 100)
         );
@@ -48,41 +48,41 @@ public class FruitOperationStrategyImplTest {
                     fruitTransfer.getOperation());
             operationHandler.apply(fruitTransfer);
         }
-        Assert.assertEquals(expect,Storage.storageMap);
+        Assert.assertEquals(expect, Storage.storageMap);
     }
 
     @Test
-    public void operation_ReturnIsOk() {
-        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"),100);
+    public void transferOperation_Return_Ok() {
+        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"), 100);
         List<FruitTransfer> fruitTransfers = List.of(
                 createFruitTransfer(FruitTransfer.Operation.RETURN, "avocado", 100)
         );
-        Storage.storageMap.put(new Fruit("avocado"),0);
+        Storage.storageMap.put(new Fruit("avocado"), 0);
         for (FruitTransfer fruitTransfer: fruitTransfers) {
             OperationHandler operationHandler = fruitOperationStrategy.get(
                     fruitTransfer.getOperation());
             operationHandler.apply(fruitTransfer);
         }
-        Assert.assertEquals(expect,Storage.storageMap);
+        Assert.assertEquals(expect, Storage.storageMap);
     }
 
     @Test
-    public void operation_PurchaseIsOk() {
-        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"),100);
+    public void transferOperation_Purchase_Ok() {
+        Map<Fruit,Integer> expect = Map.of(new Fruit("avocado"), 100);
         List<FruitTransfer> fruitTransfers = List.of(
                 createFruitTransfer(FruitTransfer.Operation.PURCHASE, "avocado", 100)
         );
-        Storage.storageMap.put(new Fruit("avocado"),200);
+        Storage.storageMap.put(new Fruit("avocado"), 200);
         for (FruitTransfer fruitTransfer: fruitTransfers) {
             OperationHandler operationHandler = fruitOperationStrategy.get(
                     fruitTransfer.getOperation());
             operationHandler.apply(fruitTransfer);
         }
-        Assert.assertEquals(expect,Storage.storageMap);
+        Assert.assertEquals(expect, Storage.storageMap);
     }
 
     @Test
-    public void operation_PurchaseIsNotOk() {
+    public void transferOperation_Purchase_notOk() {
         List<FruitTransfer> fruitTransfers = List.of(
                 createFruitTransfer(FruitTransfer.Operation.BALANCE, "avocado", 100),
                 createFruitTransfer(FruitTransfer.Operation.PURCHASE, "avocado", 105)
@@ -96,8 +96,8 @@ public class FruitOperationStrategyImplTest {
 
     private Map<FruitTransfer.Operation, OperationHandler> createMap() {
         Map<FruitTransfer.Operation, OperationHandler> operationStrategyMap = Map.of(
-                FruitTransfer.Operation.BALANCE,new BalanceOperationHandler(),
-                FruitTransfer.Operation.PURCHASE,new PurchaseOperationHandler(),
+                FruitTransfer.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransfer.Operation.PURCHASE, new PurchaseOperationHandler(),
                 FruitTransfer.Operation.RETURN, new ReturnOperationHandler(),
                 FruitTransfer.Operation.SUPPLY, new SupplyOperationHandler()
         );

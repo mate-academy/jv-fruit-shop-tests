@@ -18,35 +18,35 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_pathFileIsNullNotOk() {
+    public void readFromFile_FilePathNull_notOk() {
         assertThrows("Path to file can't be null", RuntimeException.class, () -> {
             readerService.readFromFile(null);
         });
     }
 
     @Test
-    public void read_pathEqualsInputPath() {
+    public void readFromFile_pathEqualsInputPath_Ok() {
         String actual = "src/test/resources/InputFile.csv";
         assertEquals(FROM_FILE, actual);
     }
 
     @Test
-    public void read_pathNotEqualsInputPath() {
+    public void readFromFile_pathNotEqualsInputPath_notOk() {
         String actual = "src/test/resources/sdw.csv";
         assertThrows("This path not exist",
-                RuntimeException.class,() -> {
+                RuntimeException.class, () -> {
                 readerService.readFromFile(actual);
             });
     }
 
     @Test
-    public void read_FileIsNotEmptyOk() {
+    public void readFromFile_FileNotEmpty_Ok() {
         assertTrue("File is not empty",
                 readerService.readFromFile(FROM_FILE).size() > 0);
     }
 
     @Test
-    public void read_FileIsEmptyNotOk() {
+    public void readFromFile_FileIsEmpty_notOk() {
         String pathToFile = "src/test/resources/file.csv";
         assertTrue(readerService.readFromFile(pathToFile).isEmpty());
     }

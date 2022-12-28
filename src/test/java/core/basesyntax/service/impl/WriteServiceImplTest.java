@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
 
-import core.basesyntax.servise.ReaderService;
 import core.basesyntax.servise.WriteService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,13 +15,11 @@ import org.junit.Test;
 public class WriteServiceImplTest {
     private static final String TO_FILE = "src/test/resources/ReportFile.csv";
     private static WriteService writeService;
-    private static ReaderService readerService;
     private String report;
 
     @Before
     public void setUp() {
         writeService = new WriteServiceImpl();
-        readerService = new ReaderServiceImpl();
         report = "fruit,quantity" + System.lineSeparator()
                 + "avocado,40" + System.lineSeparator()
                 + "banana,43" + System.lineSeparator()
@@ -30,43 +27,43 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void write_PathFileIsNullNotOk() {
+    public void writeToFile_PathFileNull_notOk() {
         assertThrows("Path can't be null",
-                RuntimeException.class,() -> {
+                RuntimeException.class, () -> {
                 writeService.writeToFile(report,null);
             });
     }
 
     @Test
-    public void write_pathEqualsInputPathIsOk() {
+    public void writeToFile_pathEqualsInputPath_Ok() {
         String actual = "src/test/resources/ReportFile.csv";
         assertEquals(TO_FILE,actual);
     }
 
     @Test
-    public void write_pathNotEqualsInputPathIsNotOk() {
+    public void writeToFile_pathNotEqualsInputPath_notOk() {
         String actual = "src/main/bamburses/ReportFile.csv";
         assertNotEquals(TO_FILE,actual);
     }
 
     @Test
-    public void write_reportIsNullNotOk() {
+    public void writeToFile_reportNull_notOk() {
         assertThrows("Report can't be null",
-                RuntimeException.class,() -> {
+                RuntimeException.class, () -> {
                 writeService.writeToFile(null,TO_FILE);
             });
     }
 
     @Test
-    public void write_contentIsSame() {
-        writeService.writeToFile(report,TO_FILE);
+    public void writeToFile_ContentSame_Ok() {
+        writeService.writeToFile(report, TO_FILE);
         String actual;
         try {
             actual = Files.readString(Path.of(TO_FILE));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file date" + TO_FILE, e);
         }
-        assertEquals(report,actual);
+        assertEquals(report, actual);
     }
 
     @After
@@ -74,7 +71,7 @@ public class WriteServiceImplTest {
         try {
             Files.deleteIfExists(Path.of(TO_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't delete data from file",e);
+            throw new RuntimeException("Can't delete data from file", e);
         }
     }
 }

@@ -21,7 +21,7 @@ public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
     }
 
@@ -37,11 +37,6 @@ public class FileWriterServiceImplTest {
             throw new RuntimeException(e);
         }
         assertEquals(expected, actual);
-        try {
-            Files.delete(Path.of(CREATED_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Test(expected = FileWriterException.class)

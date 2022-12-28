@@ -34,8 +34,9 @@ public class FileWriterServiceImplTest {
         try {
             actual = Files.readAllLines(Path.of(CREATED_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path " + e);
+            throw new RuntimeException(e);
         }
+        assertEquals(expected, actual);
     }
 
     @Test(expected = FileWriterException.class)

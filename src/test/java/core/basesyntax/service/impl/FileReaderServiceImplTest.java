@@ -15,14 +15,12 @@ public class FileReaderServiceImplTest {
     private static final String SOME_LINES_TEXT_PATH =
             "src/test/resources/some-lines-with-text.csv";
     private static final String INVALID_PATH = "invalid.cvs";
-    private static final int FIRST_FILE_LINES_AMOUNT = 1;
-    private static final int SECOND_FILE_LINES_AMOUNT = 3;
     private static final List<String> ONE_LINE_TEXT = new ArrayList<>();
     private static final List<String> SOME_LINES_TEXT = new ArrayList<>();
     private static FileReaderService fileReaderService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fileReaderService = new FileReaderServiceImpl();
         ONE_LINE_TEXT.add("This file has only one line");
         SOME_LINES_TEXT.add("This file has 3 lines");
@@ -34,14 +32,14 @@ public class FileReaderServiceImplTest {
     public void readFileWithOneLine_Ok() {
         List<String> actual = fileReaderService.readFromFile(ONE_LINE_TEXT_PATH);
         assertEquals(ONE_LINE_TEXT, actual);
-        assertEquals(FIRST_FILE_LINES_AMOUNT, actual.size());
+        assertEquals(1, actual.size());
     }
 
     @Test
     public void readFileWithSomeLines_Ok() {
         List<String> actual = fileReaderService.readFromFile(SOME_LINES_TEXT_PATH);
         assertEquals(SOME_LINES_TEXT, actual);
-        assertEquals(SECOND_FILE_LINES_AMOUNT, actual.size());
+        assertEquals(3, actual.size());
     }
 
     @Test(expected = FileReaderException.class)

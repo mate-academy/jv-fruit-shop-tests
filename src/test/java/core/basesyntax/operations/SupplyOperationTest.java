@@ -10,13 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationTest {
-    private static final String APPLE_NAME = "apple";
-    private static final String ORANGE_NAME = "orange";
-    private static final String NULL_NAME = null;
-    private static final int BALANCE_AMOUNT = 20;
-    private static final int ZERO_AMOUNT = 0;
-    private static final int NEGATIVE_AMOUNT = -1;
-    private static final int SUPPLY_AMOUNT = 10;
     private static SupplyOperation supplyOperation;
 
     @BeforeClass
@@ -26,35 +19,35 @@ public class SupplyOperationTest {
 
     @Before
     public void setUp() throws Exception {
-        fruitStorage.put(APPLE_NAME, BALANCE_AMOUNT);
+        fruitStorage.put("apple", 20);
     }
 
     @Test
     public void getSupply_Ok() {
-        supplyOperation.action(APPLE_NAME, SUPPLY_AMOUNT);
-        int actual = fruitStorage.get(APPLE_NAME);
+        supplyOperation.action("apple", 10);
+        int actual = fruitStorage.get("apple");
         int expected = 30;
         assertEquals(expected, actual);
     }
 
     @Test(expected = OperationException.class)
     public void getSypplyWithZeroAmount_NotOk() {
-        supplyOperation.action(APPLE_NAME, ZERO_AMOUNT);
+        supplyOperation.action("apple", 0);
     }
 
     @Test(expected = OperationException.class)
     public void getSupplyWithNegativeAmount() {
-        supplyOperation.action(APPLE_NAME, NEGATIVE_AMOUNT);
+        supplyOperation.action("apple", -1);
     }
 
     @Test(expected = OperationException.class)
     public void getSupplyWithUnknownFruit() {
-        supplyOperation.action(ORANGE_NAME, SUPPLY_AMOUNT);
+        supplyOperation.action("orange", 10);
     }
 
     @Test(expected = OperationException.class)
     public void getSupplyWithNullFruitName() {
-        supplyOperation.action(NULL_NAME, SUPPLY_AMOUNT);
+        supplyOperation.action(null, 10);
     }
 
     @After

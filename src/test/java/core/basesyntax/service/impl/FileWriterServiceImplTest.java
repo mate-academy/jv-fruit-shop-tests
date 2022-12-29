@@ -15,9 +15,6 @@ import org.junit.Test;
 public class FileWriterServiceImplTest {
     private static final String CREATED_PATH =
             "src/test/resources/created-files/created-file.csv";
-    private static final String EXAMPLE_TEXT = "This file has only one line";
-    private static final String NULL_TEXT = null;
-    private static final String NULL_PATH = null;
     private static FileWriterService fileWriterService;
 
     @BeforeClass
@@ -27,9 +24,9 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeFileWithOneLine_ok() {
-        fileWriterService.writeToFile(EXAMPLE_TEXT, CREATED_PATH);
+        fileWriterService.writeToFile("This file has only one line", CREATED_PATH);
         List<String> expected = new ArrayList<>();
-        expected.add(EXAMPLE_TEXT);
+        expected.add("This file has only one line");
         List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(CREATED_PATH));
@@ -41,11 +38,11 @@ public class FileWriterServiceImplTest {
 
     @Test(expected = FileWriterException.class)
     public void writeFileNullText_NotOk() {
-        fileWriterService.writeToFile(NULL_TEXT, CREATED_PATH);
+        fileWriterService.writeToFile(null, CREATED_PATH);
     }
 
     @Test(expected = FileWriterException.class)
     public void writeFileWithNullPath() {
-        fileWriterService.writeToFile(EXAMPLE_TEXT, NULL_PATH);
+        fileWriterService.writeToFile("This file has only one line", null);
     }
 }

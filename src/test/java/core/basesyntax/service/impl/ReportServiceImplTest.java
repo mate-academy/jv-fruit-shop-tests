@@ -9,10 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static final String EXPECTED_REPORT =
-            "fruit,quantity" + "\n"
-            + "orange,10" + "\n"
-            + "apple,15";
+
     private static ReportService reportService;
 
     @BeforeClass
@@ -25,7 +22,9 @@ public class ReportServiceImplTest {
     @Test
     public void createReport_Ok() {
         String actual = reportService.createReport();
-        assertEquals(EXPECTED_REPORT, actual);
+        assertEquals("fruit,quantity" + "\n"
+                + "orange,10" + "\n"
+                + "apple,15", actual);
     }
 
     @AfterClass

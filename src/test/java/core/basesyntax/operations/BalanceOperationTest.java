@@ -10,11 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationTest {
-    private static final String APPLE_NAME = "apple";
-    private static final String ORANGE_NAME = "orange";
-    private static final String NULL_NAME = null;
-    private static final int FRUIT_AMOUNT = 10;
-    private static final int NEGATIVE_AMOUNT = -10;
     private static BalanceOperation balanceOperation;
 
     @BeforeClass
@@ -24,41 +19,30 @@ public class BalanceOperationTest {
 
     @Test
     public void setAppleBalance_Ok() {
-        balanceOperation.action(APPLE_NAME, FRUIT_AMOUNT);
-        int actual = fruitStorage.get(APPLE_NAME);
+        balanceOperation.action("apple", 10);
+        int actual = fruitStorage.get("apple");
         assertFalse(fruitStorage.isEmpty());
-        assertEquals(FRUIT_AMOUNT, actual);
-    }
-
-    @Test
-    public void setSomeBalances_Ok() {
-        balanceOperation.action(APPLE_NAME, FRUIT_AMOUNT);
-        balanceOperation.action(ORANGE_NAME, FRUIT_AMOUNT);
-        int actual = fruitStorage.get(APPLE_NAME);
-        assertEquals(FRUIT_AMOUNT, actual);
-        actual = fruitStorage.get(ORANGE_NAME);
-        assertEquals(FRUIT_AMOUNT, actual);
-        assertFalse(fruitStorage.isEmpty());
+        assertEquals(10, actual);
     }
 
     @Test(expected = OperationException.class)
     public void setBalanceForNullFruit_NotOk() {
-        balanceOperation.action(NULL_NAME, FRUIT_AMOUNT);
+        balanceOperation.action(null, 10);
     }
 
     @Test(expected = OperationException.class)
     public void setNegativeBalance_NotOk() {
-        balanceOperation.action(APPLE_NAME, NEGATIVE_AMOUNT);
+        balanceOperation.action("apple", -10);
     }
 
     @Test(expected = OperationException.class)
     public void bigLetterInFruitName_NotOk() {
-        balanceOperation.action("Apple", FRUIT_AMOUNT);
+        balanceOperation.action("Apple", 10);
     }
 
     @Test(expected = OperationException.class)
     public void incorrectSymbolsInFruitName_NotOk() {
-        balanceOperation.action("$arvisberry", FRUIT_AMOUNT);
+        balanceOperation.action("$arvisberry", 10);
     }
 
     @After

@@ -5,7 +5,7 @@ import java.util.Objects;
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
-    private int quantity;
+    private Integer quantity;
 
     public Operation getOperation() {
         return operation;
@@ -23,11 +23,11 @@ public class FruitTransaction {
         this.fruit = fruit;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

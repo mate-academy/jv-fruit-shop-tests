@@ -19,6 +19,11 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void makeTransaction(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getFruit() == null
+                || fruitTransaction.getQuantity() == null
+                || fruitTransaction.getOperation() == null) {
+            throw new RuntimeException("FruitTransaction fields can't be null ");
+        }
         strategies.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         strategies.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationStrategy());
         strategies.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationStrategy());

@@ -34,9 +34,42 @@ public class ShopServiceTest {
     }
 
     @Test
-    public void shopService_makeTransaction_emptyValue_NotOk() {
+    public void shopService_makeTransaction_emptyFruitTransaction_NotOk() {
         ShopService shopService = new ShopServiceImpl();
-        assertThrows(NullPointerException.class,
+        assertThrows(RuntimeException.class,
                 () -> shopService.makeTransaction(new FruitTransaction()));
+    }
+
+    @Test
+    public void shopService_makeTransaction_nullFruitTransaction_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(null);
+        fruitTransaction.setFruit(null);
+        fruitTransaction.setQuantity(null);
+        ShopService shopService = new ShopServiceImpl();
+        assertThrows(RuntimeException.class,
+                () -> shopService.makeTransaction(fruitTransaction));
+    }
+
+    @Test
+    public void shopService_makeTransaction_nullOperation_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(null);
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(10);
+        ShopService shopService = new ShopServiceImpl();
+        assertThrows(RuntimeException.class,
+                () -> shopService.makeTransaction(fruitTransaction));
+    }
+
+    @Test
+    public void shopService_makeTransaction_nullFruit_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        fruitTransaction.setFruit(null);
+        fruitTransaction.setQuantity(10);
+        ShopService shopService = new ShopServiceImpl();
+        assertThrows(RuntimeException.class,
+                () -> shopService.makeTransaction(fruitTransaction));
     }
 }

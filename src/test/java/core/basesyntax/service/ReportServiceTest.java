@@ -17,13 +17,26 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void reportService_Ok() {
+    public void reportService_FirstCase_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(80);
         Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         String expected = "fruit,quantity" + System.lineSeparator() + "apple," + 80;
+        ReportService reportService = new ReportServiceImpl();
+        String actual = reportService.createReport();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void reportService_SecondCase_Ok() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(15);
+        Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        String expected = "fruit,quantity" + System.lineSeparator() + "banana," + 15;
         ReportService reportService = new ReportServiceImpl();
         String actual = reportService.createReport();
         assertEquals(expected, actual);
@@ -41,6 +54,20 @@ public class ReportServiceTest {
     public void reportService_emptyFruitTransaction_NotOk() {
         Storage.fruits.put(null, null);
         ReportService reportService = new ReportServiceImpl();
-        assertThrows(NullPointerException.class, reportService::createReport);
+        assertThrows(RuntimeException.class, reportService::createReport);
+    }
+
+    @Test
+    public void reportService_nullFruit_NotOk() {
+        Storage.fruits.put(null, 20);
+        ReportService reportService = new ReportServiceImpl();
+        assertThrows(RuntimeException.class, reportService::createReport);
+    }
+
+    @Test
+    public void reportService_nullQuantity_NotOk() {
+        Storage.fruits.put("apple", null);
+        ReportService reportService = new ReportServiceImpl();
+        assertThrows(RuntimeException.class, reportService::createReport);
     }
 }

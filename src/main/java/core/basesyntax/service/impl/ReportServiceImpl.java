@@ -11,7 +11,7 @@ public class ReportServiceImpl implements ReportService {
         stringBuilder.append("fruit").append(",").append("quantity");
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             if (entry.getKey() == null || entry.getValue() == null) {
-                throw new NullPointerException("Value can't equals null");
+                throw new RuntimeException("Value can't equals null");
             }
             stringBuilder.append(System.lineSeparator())
                     .append(entry.getKey()).append(",").append(entry.getValue());

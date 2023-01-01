@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-    private static String FRUIT = "apple";
+    private static final String FRUIT = "apple";
     private OperationHandler balanceHandler;
 
     @Before

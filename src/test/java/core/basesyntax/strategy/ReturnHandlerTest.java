@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnHandlerTest {
-    private static String FRUIT = "peach";
+    private static final String FRUIT = "peach";
     private OperationHandler returnHandler;
 
     @Before

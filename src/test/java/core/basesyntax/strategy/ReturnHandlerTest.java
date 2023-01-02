@@ -19,7 +19,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void returnHandler_ok() {
+    public void handle_returnHandle_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.RETURN);
         transaction.setFruit(FRUIT);

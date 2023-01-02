@@ -19,7 +19,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void balanceHandler_ok() {
+    public void handle_balanceHandle_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.BALANCE);
         transaction.setFruit(FRUIT);

@@ -18,7 +18,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void supplyHandler_ok() {
+    public void handle_supplyHandle_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.SUPPLY);
         transaction.setFruit(FRUIT);

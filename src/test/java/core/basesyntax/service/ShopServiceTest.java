@@ -11,21 +11,13 @@ import org.junit.Test;
 
 public class ShopServiceTest {
 
-    private FruitTransaction getDefaultFruitTransaction() {
-        FruitTransaction firstFruitTransaction = new FruitTransaction();
-        firstFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        firstFruitTransaction.setFruit("banana");
-        firstFruitTransaction.setQuantity(20);
-        return firstFruitTransaction;
-    }
-
     @After
     public void afterEachTest() {
         Storage.fruits.clear();
     }
 
     @Test
-    public void shopService_makeTransaction_Ok() {
+    public void makeTransaction_Ok() {
         ShopService shopService = new ShopServiceImpl();
         shopService.makeTransaction(getDefaultFruitTransaction());
         Integer expectedQuantity = getDefaultFruitTransaction().getQuantity();
@@ -34,14 +26,14 @@ public class ShopServiceTest {
     }
 
     @Test
-    public void shopService_makeTransaction_emptyFruitTransaction_NotOk() {
+    public void makeTransaction_emptyFruitTransaction_NotOk() {
         ShopService shopService = new ShopServiceImpl();
         assertThrows(RuntimeException.class,
                 () -> shopService.makeTransaction(new FruitTransaction()));
     }
 
     @Test
-    public void shopService_makeTransaction_nullFruitTransaction_notOk() {
+    public void makeTransaction_nullFruitTransaction_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(null);
         fruitTransaction.setFruit(null);
@@ -52,7 +44,7 @@ public class ShopServiceTest {
     }
 
     @Test
-    public void shopService_makeTransaction_nullOperation_notOk() {
+    public void makeTransaction_nullOperation_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(null);
         fruitTransaction.setFruit("banana");
@@ -63,7 +55,7 @@ public class ShopServiceTest {
     }
 
     @Test
-    public void shopService_makeTransaction_nullFruit_notOk() {
+    public void makeTransaction_nullFruit_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit(null);
@@ -71,5 +63,13 @@ public class ShopServiceTest {
         ShopService shopService = new ShopServiceImpl();
         assertThrows(RuntimeException.class,
                 () -> shopService.makeTransaction(fruitTransaction));
+    }
+
+    private FruitTransaction getDefaultFruitTransaction() {
+        FruitTransaction firstFruitTransaction = new FruitTransaction();
+        firstFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        firstFruitTransaction.setFruit("banana");
+        firstFruitTransaction.setQuantity(20);
+        return firstFruitTransaction;
     }
 }

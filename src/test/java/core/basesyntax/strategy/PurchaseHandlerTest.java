@@ -19,7 +19,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void purchaseHandler_ok() {
+    public void handle_purchaseHandle_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit(FRUIT);

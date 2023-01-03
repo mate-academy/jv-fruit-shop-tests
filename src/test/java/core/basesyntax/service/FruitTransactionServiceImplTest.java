@@ -51,6 +51,7 @@ public class FruitTransactionServiceImplTest {
         fruitTransactionService.processTransactions(transactions);
 
         assertTrue(Storage.reportMap.containsKey(fruitName));
+        assertEquals(fruitQuantity, (int) Storage.reportMap.get(fruitName));
     }
 
     @Test

@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 public class ReportDaoImplTest {
+    private static final String ERROR_MESSAGE = "Can`t read data from files!";
     private final ReportDao reportDao = new ReportDaoImpl();
 
     @Test(expected = RuntimeException.class)
@@ -30,7 +31,7 @@ public class ReportDaoImplTest {
             assertEquals(Files.readAllLines(Path.of(toFileNameExpected)).toString(),
                     Files.readAllLines(Path.of(toFileNameActual)).toString());
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(ERROR_MESSAGE, e);
         }
     }
 }

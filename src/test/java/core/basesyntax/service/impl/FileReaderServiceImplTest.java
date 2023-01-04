@@ -2,11 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.FileReaderException;
 import core.basesyntax.service.FileReaderService;
-import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class FileReaderServiceImplTest {
     private static final String ONE_LINE_TEXT_PATH =

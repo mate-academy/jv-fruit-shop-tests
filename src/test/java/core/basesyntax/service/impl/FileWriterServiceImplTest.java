@@ -21,7 +21,8 @@ public class FileWriterServiceImplTest {
             throw new RuntimeException("Can't write data to file ", e);
         }
     }
-        @Test
+
+    @Test
     public void writeToFile_validPathAndString_Ok() {
         String expected = "Hope you still don't want to reject it!";
         fileWriterService.writeToFile(expected, VALID_PATH);

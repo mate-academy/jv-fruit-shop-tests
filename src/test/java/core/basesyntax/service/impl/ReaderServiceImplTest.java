@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReaderServiceImplTest {
-    private static final String EMPTY_FILE_NAME = "src/test/sources/test1.csv";
-    private static final String FIRST_FILE = "src/Main/java/resources/FruitShop.csv";
+    private static final String EMPTY_FILE_NAME = "src/test/resources/test1.csv";
+    private static final String FIRST_FILE = "src/test/resources/FruitShop.csv";
     private static final String PATH_TO_NON_EXISTING_FILE = "src/Main/java/resources/cars.csv";
     private static final List<String> EXPECTED_RESULT = Arrays.asList("type;fruit;quantity",
             "b;banana;20", "b;apple;100", "s;banana;100", "p;banana;13", "r;apple;10",

@@ -14,8 +14,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
-    private static final String REPORT_FILE_NAME = "src/test/sources/reports.csv";
-    private static final String REPORT_FILE_NAME_TEST = "src/test/sources/reports_test.csv";
+    private static final String REPORT_FILE_NAME = "src/test/resources/reports.csv";
+    private static final String REPORT_FILE_NAME_TEST = "src/test/resources/reports_test.csv";
     private static final String PATH_TO_FILE = "/wrong/path";
 
     @Rule

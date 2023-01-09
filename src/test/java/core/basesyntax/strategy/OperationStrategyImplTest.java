@@ -32,7 +32,7 @@ public class OperationStrategyImplTest {
 
     @AfterClass
     public static void oneTimeTearDown() {
-        strategies = null;
+        strategies.clear();
     }
 
     @Before
@@ -42,8 +42,8 @@ public class OperationStrategyImplTest {
 
     @Test
      public void getHandler_Work_Ok() {
-        OperationHandler actual = new BalanceHandler();
-        OperationHandler expected = operationStrategy.get(TEST_OPERATION);
-        assertEquals(expected.getClass(), actual.getClass());
+        OperationHandler expected = new BalanceHandler();
+        OperationHandler actual = operationStrategy.get(TEST_OPERATION);
+        assertEquals(actual.getClass(), expected.getClass());
     }
 }

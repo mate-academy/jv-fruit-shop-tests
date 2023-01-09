@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_FILE = "src/main/resources/inputFile.csv";
+    private static final String READ_FILE = "src/main/resources/createdFile.csv";
     private static final String WRITE_FILE = "src/main/resources/reportFile.csv";
 
     public static void main(String[] args) {

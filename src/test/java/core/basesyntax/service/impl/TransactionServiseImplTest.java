@@ -1,9 +1,12 @@
 package core.basesyntax.service.impl;
 
 import static core.basesyntax.operation.Operation.BALANCE;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitsTranslation;
 import core.basesyntax.operation.Operation;
+import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -48,5 +51,13 @@ public class TransactionServiseImplTest {
         dataFromCsv.add(SECOND_LINE_FILE);
         List<FruitsTranslation> actual = fruitTransactionParser.transactionProcess(dataFromCsv);
         Assertions.assertEquals(fruitTransactionsList, actual);
+    }
+
+    @Test
+    public void transactionService_Empty_Value_NotOK() {
+        TransactionService transactionService = new TransactionServiseImpl();
+        assertNotNull(transactionService);
+        List<String> data = null;
+        assertThrows(RuntimeException.class, () -> transactionService.transactionProcess(data));
     }
 }

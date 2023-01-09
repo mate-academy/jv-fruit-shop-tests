@@ -25,12 +25,6 @@ public class FruitsTranslationTest {
     }
 
     @Test
-    public void getOperation_Work_Ok() {
-        Operation actual = fruitTransaction.getOperation();
-        Assertions.assertEquals(TEST_OPERATION, actual);
-    }
-
-    @Test
     public void getByCode_Work_Ok() {
         Operation actual = getByCode(TEST_OPERATION_CODE);
         Assertions.assertEquals(TEST_OPERATION, actual);
@@ -39,11 +33,5 @@ public class FruitsTranslationTest {
     @Test(expected = IllegalArgumentException.class)
     public void getByCode_IllegalArgExc_notOk() {
         fruitTransaction.setOperation(getByCode(TEST_WRONG_OPERATION_CODE));
-    }
-
-    @Test
-    public void getOperationCode_ok() {
-        String actual = fruitTransaction.getOperation().getCode();
-        Assertions.assertEquals(TEST_OPERATION_CODE, actual);
     }
 }

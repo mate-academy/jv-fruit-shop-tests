@@ -39,7 +39,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void operate_null_NotOk() {
+    public void balanceOperate_null_NotOk() {
         exception.expect(RuntimeException.class);
         exception.expectMessage("Transaction cannot be null");
         handler.operate(null);

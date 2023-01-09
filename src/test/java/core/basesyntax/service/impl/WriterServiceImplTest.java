@@ -14,9 +14,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
-    private static final String REPORT_FILE_NAME = "src/test/resources/reports.csv";
-    private static final String REPORT_FILE_NAME_TEST = "src/test/resources/reports_test.csv";
-    private static final String PATH_TO_FILE = "/wrong/path";
+    private static final String EXPECTED_REPORT = "src/test/resources/reports.csv";
+    private static final String REPORT_FROM_TEST = "src/test/resources/reports_test.csv";
+    private static final String INVALID_FILE_PATH = "/wrong/path";
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -24,23 +24,23 @@ public class WriterServiceImplTest {
 
     @After
     public void deleteReportFile() {
-        deleteFile(REPORT_FILE_NAME_TEST);
+        deleteFile(REPORT_FROM_TEST);
     }
 
     @Test
     public void writeToFile_ok() {
         String content = "fruit;quantity";
-        fileService.writeToFile(REPORT_FILE_NAME_TEST, content);
-        String fileReportContent = getReportFromFile(REPORT_FILE_NAME);
+        fileService.writeToFile(REPORT_FROM_TEST, content);
+        String fileReportContent = getReportFromFile(EXPECTED_REPORT);
         Assert.assertEquals(fileReportContent, content);
     }
 
     @Test
-    public void reader_throw_RuntimeException() {
+    public void writeToFile_wrongPath_notOk() {
         String content = "fruit;quantity";
         exception.expect(RuntimeException.class);
-        exception.expectMessage("Can't write to file " + PATH_TO_FILE);
-        fileService.writeToFile(PATH_TO_FILE, content);
+        exception.expectMessage("Can't write to file " + INVALID_FILE_PATH);
+        fileService.writeToFile(INVALID_FILE_PATH, content);
     }
 
     private String getReportFromFile(String reportFileName) {

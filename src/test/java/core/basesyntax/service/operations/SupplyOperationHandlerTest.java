@@ -28,7 +28,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void operate_Ok() {
+    public void supplyOperate_Ok() {
         Storage.fruits.put("apple", 10);
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setFruit("apple");

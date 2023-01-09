@@ -32,14 +32,14 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void with_Key_Ok() {
+    public void operationStrategy_Key_Ok() {
         OperationHandler expected = strategies.get(FruitTransaction.Operation.BALANCE);
         OperationHandler actual = strategy.get(FruitTransaction.Operation.BALANCE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void get_null_NotOk() {
+    public void operationStrategy_getNull_NotOk() {
         exception.expect(RuntimeException.class);
         exception.expectMessage("Type cannot be null");
         strategy.get(null);

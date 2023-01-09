@@ -5,13 +5,21 @@ import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class TransactionParserImplTest {
+    private static TransactionParser transactionParser;
+
     @Rule
     public ExpectedException thrownRule = ExpectedException.none();
+
+    @BeforeClass
+    public static void beforeClass() {
+        transactionParser = new TransactionParserImpl();
+    }
 
     @Test
     public void parse_OperationBalance_Ok() {
@@ -22,7 +30,6 @@ public class TransactionParserImplTest {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(fruitTransaction);
         List<String> list = List.of("type;fruit;quantity", "b;banana;20");
-        TransactionParser transactionParser = new TransactionParserImpl();
         Assert.assertEquals(fruitTransactionList, transactionParser.parse(list));
     }
 
@@ -35,7 +42,6 @@ public class TransactionParserImplTest {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(fruitTransaction);
         List<String> list = List.of("type;fruit;quantity", "s;banana;100");
-        TransactionParser transactionParser = new TransactionParserImpl();
         Assert.assertEquals(fruitTransactionList, transactionParser.parse(list));
     }
 
@@ -47,7 +53,6 @@ public class TransactionParserImplTest {
         fruitTransaction.setQuantity(13);
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(fruitTransaction);
-        TransactionParser transactionParser = new TransactionParserImpl();
         List<String> list = List.of("type;fruit;quantity", "p;banana;13");
         Assert.assertEquals(fruitTransactionList, transactionParser.parse(list));
     }
@@ -58,7 +63,6 @@ public class TransactionParserImplTest {
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(10);
-        TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(fruitTransaction);
         List<String> list = List.of("type;fruit;quantity", "r;apple;10");
@@ -67,7 +71,6 @@ public class TransactionParserImplTest {
 
     @Test
     public void parse_incorrectOperation_notOk() {
-        TransactionParser transactionParser = new TransactionParserImpl();
         List<String> list = List.of("type;fruit;quantity", "x;apple;5");
         thrownRule.expect(RuntimeException.class);
         thrownRule.expectMessage("Can't find Operation type for this String ");
@@ -76,8 +79,13 @@ public class TransactionParserImplTest {
 
     @Test
     public void parse_skipTitleRow_Ok() {
-        TransactionParser transactionParser = new TransactionParserImpl();
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        fruitTransaction.setQuantity(5);
+        fruitTransaction.setFruit("apple");
+        List<FruitTransaction> expectedList = List.of(fruitTransaction);
         List<String> list = List.of("type;fruit;quantity", "b;apple;5");
-        System.out.println(transactionParser.parse(list));
+        List<FruitTransaction> actualList = transactionParser.parse(list);
+        Assert.assertEquals(expectedList, actualList);
     }
 }

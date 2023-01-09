@@ -28,7 +28,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void balanceOperate_Ok() {
+    public void purchaseOperate_Ok() {
         Storage.fruits.put("banana", 10);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit("banana");
@@ -40,7 +40,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void operate_QtyLessThanInStock_NotOk() {
+    public void purchaseOperate_QtyLessThanInStock_NotOk() {
         Storage.fruits.put("banana", 10);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit("banana");

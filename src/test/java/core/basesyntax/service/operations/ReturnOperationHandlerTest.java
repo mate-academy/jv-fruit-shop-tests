@@ -28,7 +28,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void operate_Ok() {
+    public void returnOperate_Ok() {
         Storage.fruits.put("apple", 10);
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit("apple");

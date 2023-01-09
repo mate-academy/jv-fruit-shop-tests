@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String FILE_PATH_READ_FROM = "src/Main/java/resources/FruitShop.csv";
-    public static final String FILE_PATH_WRITE_TO = "src/Main/java/resources/FruitShopReport.csv";
+    public static final String FILE_PATH_READ_FROM = "src/main/java/resources/FruitShop.csv";
+    public static final String FILE_PATH_WRITE_TO = "src/main/java/resources/FruitShopReport.csv";
 
     public static void main(String[] args) {
         ReaderService fileReader = new ReaderServiceImpl();

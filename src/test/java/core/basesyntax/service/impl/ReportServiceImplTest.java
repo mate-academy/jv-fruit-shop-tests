@@ -17,7 +17,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void reportCreated_OK() {
+    public void createReport_Ok() {
         Storage.fruits.put("banana", 152);
         Storage.fruits.put("apple", 90);
         String actualReport = reportService.createReport();

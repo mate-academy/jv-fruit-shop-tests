@@ -75,7 +75,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parse_skipTytleRow_Ok() {
+    public void parse_skipTitleRow_Ok() {
         TransactionParser transactionParser = new TransactionParserImpl();
         List<String> list = List.of("type;fruit;quantity", "b;apple;5");
         System.out.println(transactionParser.parse(list));

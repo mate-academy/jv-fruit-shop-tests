@@ -32,7 +32,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void readFromFile_OK() {
+    public void readFromFile_NotOK() {
         List<String> excepted = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
@@ -82,5 +82,11 @@ public class FileServiceImplTest {
     public void write_OK() {
         String report = "some text";
         fileService.write(REPORT_TEST, report);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeFileExist_OK() {
+        String test = "/wrong/filepath";
+        fileService.write(test, "some text");
     }
 }

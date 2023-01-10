@@ -2,21 +2,22 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileService;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
     @Override
     public List<String> read(String filePath) {
-        File file = new File(filePath);
+        List<String> lines;
         try {
-            return Files.readAllLines(file.toPath());
+            lines = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + filePath, e);
         }
+        return lines;
     }
 
     @Override

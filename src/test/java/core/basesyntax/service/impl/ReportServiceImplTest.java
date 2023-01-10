@@ -1,9 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.ReportService;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;

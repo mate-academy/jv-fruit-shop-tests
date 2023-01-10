@@ -1,21 +1,12 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.TransactionProcessingServiceImpl;
-import core.basesyntax.service.impl.TransactionProcessingServiceImplTest;
-import core.basesyntax.strategy.OperationCalculatorStrategy;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 public class StorageTest {
 
 //    @BeforeClass
 //    public static void beforeEachTest(){
 //        Storage storage = new Storage();
-//        TransactionProcessingServiceImpl fruitService = new TransactionProcessingServiceImpl(new OperationCalculatorStrategy());
+//        TransactionProcessingServiceImpl fruitService =
+//        new TransactionProcessingServiceImpl(new OperationCalculatorStrategy());
 //    }
 //
 //    @Test

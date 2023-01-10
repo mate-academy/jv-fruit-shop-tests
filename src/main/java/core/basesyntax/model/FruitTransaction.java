@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.InvalidDataException;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -73,7 +74,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Can't find an operation by letter " + letter);
+            throw new InvalidDataException("Can't find an operation by letter " + letter);
         }
     }
 }

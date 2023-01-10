@@ -2,6 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exception.InvalidDataException;
+import core.basesyntax.exception.NoSuchFileException;
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,13 +37,32 @@ public class FileWriterServiceImplTest {
         assertEquals("Data should be written to file", expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NoSuchFileException.class)
     public void writeToFile_nullPath_NotOk() {
         fileWriterService.writeToFile("null", null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NoSuchFileException.class)
     public void writeToFile_invalidPath_NotOk() {
         fileWriterService.writeToFile("null", VALID_PATH + "/notExist");
+    }
+
+    @Test
+    public void writeToFile_emptyInput_ok() {
+        String expected = "";
+        fileWriterService.writeToFile(expected, VALID_PATH);
+        String actual;
+        try {
+            actual = Files.readString(Path.of(VALID_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from path: " + VALID_PATH, e);
+        }
+        assertEquals("Empty input should be ignored", expected, actual);
+    }
+
+    @Test(expected = InvalidDataException.class)
+    public void writeToFile_nullInput_notOk() {
+        String expected = null;
+        fileWriterService.writeToFile(expected, VALID_PATH);
     }
 }

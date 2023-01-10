@@ -3,9 +3,10 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Test;
@@ -47,13 +48,13 @@ public class FruitTransactionServiceImplTest {
                 Storage.fruits.containsKey(GRAPE) && Storage.fruits.get(GRAPE) == 800);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void update_nullInput_ok() {
+    @Test(expected = InvalidDataException.class)
+    public void update_nullInput_notOk() {
         fruitTransactionService.update(null);
     }
 
-    @Test(expected = RuntimeException.class)
-    public void update_emptyInput_ok() {
-        fruitTransactionService.update(new ArrayList<>());
+    @Test(expected = InvalidDataException.class)
+    public void update_emptyInput_notOk() {
+        fruitTransactionService.update(Collections.emptyList());
     }
 }

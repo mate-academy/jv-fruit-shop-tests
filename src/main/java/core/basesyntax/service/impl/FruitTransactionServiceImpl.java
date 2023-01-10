@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.strategy.OperationHandler;
@@ -12,7 +13,7 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public void update(List<FruitTransaction> fruitTransactions) {
         if (fruitTransactions == null || fruitTransactions.size() == 0) {
-            throw new RuntimeException("Input List should contain transactions ");
+            throw new InvalidDataException("Input List should contain transactions");
         }
         for (FruitTransaction transaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy.getHandler(transaction);

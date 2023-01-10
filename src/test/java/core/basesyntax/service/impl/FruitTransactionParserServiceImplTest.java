@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
 import java.util.List;
@@ -44,25 +45,35 @@ public class FruitTransactionParserServiceImplTest {
                 + "r,apple,100" + System.lineSeparator()
                 + "r,grape,7785";
         List<FruitTransaction> actual = fruitTransactionParserService.parseData(input);
-        assertEquals(expected, actual);
+        assertEquals("Method should return List<FruitTransaction>: ", expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidDataException.class)
     public void parseData_inputOneLine_notOk() {
         fruitTransactionParserService.parseData("invalidInput");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NumberFormatException.class) // I believe it's ok to expect this exception
     public void parseData_thirdPartIsNotInteger_notOk() {
         String input = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,notInteger" + System.lineSeparator();
         fruitTransactionParserService.parseData(input);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidDataException.class)
     public void parseData_invalidOperationLetter_notOk() {
         String input = "type,fruit,quantity" + System.lineSeparator()
                 + "x,banana,10" + System.lineSeparator();
         fruitTransactionParserService.parseData(input);
+    }
+
+    @Test(expected = InvalidDataException.class)
+    public void parseData_nullInput_notOk() {
+        fruitTransactionParserService.parseData(null);
+    }
+
+    @Test(expected = InvalidDataException.class)
+    public void parseData_emptyInput_notOk() {
+        fruitTransactionParserService.parseData("");
     }
 }

@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
 import java.util.ArrayList;
@@ -13,9 +14,9 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
 
     @Override
     public List<FruitTransaction> parseData(String data) {
-        if (data.length() == 0 || data == null
-                || !data.contains(System.lineSeparator()) || !data.contains(",")) {
-            throw new RuntimeException("Can't parse data");
+        if (data == null || data.length() == 0 || !data.contains(System.lineSeparator())
+                || !data.contains(",")) {
+            throw new InvalidDataException("Can't parse data" + data);
         }
         List<FruitTransaction> transactions = new ArrayList<>();
         String[] lines = data.split(System.lineSeparator());

@@ -16,7 +16,6 @@ import core.basesyntax.strategy.impl.BalanceCountStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseCountStrategyImpl;
 import core.basesyntax.strategy.impl.ReturnCountStrategyImpl;
 import core.basesyntax.strategy.impl.SupplyCountStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

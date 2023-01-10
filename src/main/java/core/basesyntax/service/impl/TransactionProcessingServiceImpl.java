@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationCalculator;
 import core.basesyntax.strategy.OperationCalculatorStrategy;
-
 import java.util.List;
 import java.util.Map;
 

@@ -18,7 +18,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = NullPointerException.class)
-    public void nullPointerException_Balance() {
+    public void nullPointerException_Purchase() {
         purchaseOperation.handle(null);
     }
 

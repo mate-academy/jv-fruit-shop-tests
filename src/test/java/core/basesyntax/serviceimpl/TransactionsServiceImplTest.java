@@ -31,7 +31,7 @@ public class TransactionsServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,"apple", 20),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,"banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,"banana", 50));
-        List<FruitTransaction> actual = transactionService.getlistOfFruitTransaction(dataFromFile);
+        List<FruitTransaction> actual = transactionService.getlistFruitTransaction(dataFromFile);
         assertEquals(expected, actual);
     }
 }

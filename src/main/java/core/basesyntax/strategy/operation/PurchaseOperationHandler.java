@@ -7,8 +7,8 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void operation(FruitTransaction fruitTransaction) {
         String fruitInStorage = fruitTransaction.getFruit();
-        int currentQtyInStorage = Storage.fruitsStorage.get(fruitInStorage);
         int purchaseQty = fruitTransaction.getQuantity();
+        int currentQtyInStorage = Storage.fruitsStorage.get(fruitInStorage);
 
         if (currentQtyInStorage >= purchaseQty) {
             Storage.fruitsStorage.put(fruitInStorage, (currentQtyInStorage - purchaseQty));

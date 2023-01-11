@@ -30,7 +30,7 @@ public class FileWriterServiceImplTest {
         try {
             actual = Files.readAllLines(Path.of(PATH_TO_WRITE_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file: " + PATH_TO_WRITE_FILE);
+            throw new RuntimeException("Can not read data from file: " + PATH_TO_WRITE_FILE);
         }
         assertEquals(expected, actual);
     }

@@ -30,8 +30,7 @@ public class PurchaseOperationHandlerTest {
     @Test(expected = RuntimeException.class)
     public void addToStoragePurchaseOperationHandler_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE,
-                "banana", 30);
+                FruitTransaction.Operation.PURCHASE,"banana", 30);
         operationHandler.operation(fruitTransaction);
     }
 

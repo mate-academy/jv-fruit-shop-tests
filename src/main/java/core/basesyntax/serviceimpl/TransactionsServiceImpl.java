@@ -11,7 +11,7 @@ public class TransactionsServiceImpl implements TransactionService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getlistOfFruitTransaction(List<String> dataFromFile) {
+    public List<FruitTransaction> getlistFruitTransaction(List<String> dataFromFile) {
         return dataFromFile.stream()
                 .skip(1)
                 .map(s -> getFruitTransaction(s))

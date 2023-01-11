@@ -59,7 +59,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Input file contains wrong data");
+            throw new RuntimeException("Input file contains incorrect data");
         }
     }
 }

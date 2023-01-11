@@ -7,8 +7,8 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void operation(FruitTransaction fruitTransaction) {
         String fruitInStorage = fruitTransaction.getFruit();
-        int currentQtyInStorage = Storage.fruitsStorage.get(fruitInStorage);
         int returnQty = fruitTransaction.getQuantity();
+        int currentQtyInStorage = Storage.fruitsStorage.get(fruitInStorage);
         Storage.fruitsStorage.put(fruitInStorage, (currentQtyInStorage + returnQty));
     }
 }

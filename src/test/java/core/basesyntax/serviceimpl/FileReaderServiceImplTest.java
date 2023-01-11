@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    public static final String PATH_TO_INPUT_FILE = "src/main/resources/Input_file.csv";
     public static final String PATH_TO_EMPTY_FILE = "src/main/resources/Empty_file.csv";
+    public static final String PATH_TO_INPUT_FILE = "src/main/resources/Input_file.csv";
 
     private ReaderService readerService;
 

@@ -12,7 +12,7 @@ public class ReturnOperationHandlerTest {
 
     @Before
     public void setUp() {
-        Storage.fruitsStorage.put("banana", 20);
+        Storage.fruitsStorage.put("banana", 10);
         operationHandler = new ReturnOperationHandler();
     }
 
@@ -21,7 +21,7 @@ public class ReturnOperationHandlerTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", 10);
         operationHandler.operation(fruitTransaction);
-        int expected = 30;
+        int expected = 20;
         int actual = Storage.fruitsStorage.get("banana");
         assertEquals(expected, actual);
     }

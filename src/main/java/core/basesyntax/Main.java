@@ -40,7 +40,7 @@ public class Main {
 
         TransactionService transactionService = new TransactionsServiceImpl();
         List<FruitTransaction> listOfFruitTransactions =
-                transactionService.getlistOfFruitTransaction(dataFromInputFile);
+                transactionService.getlistFruitTransaction(dataFromInputFile);
 
         OperationStrategyImpl operationStrategy =
                 new OperationStrategyImpl(operationOperationHandlerMap);
@@ -50,7 +50,7 @@ public class Main {
             operationHandler.operation(fruitTransaction);
         }
         ReportService reportService = new CsvReportServiceImpl();
-        String dataToWtite = reportService.createReport();
+        String dataToWtite = reportService.createOurReport();
 
         WriterService writerService = new FileWriterServiceImpl();
         writerService.writeToFile(dataToWtite, PATH_TO_OUTPUT_FILE);

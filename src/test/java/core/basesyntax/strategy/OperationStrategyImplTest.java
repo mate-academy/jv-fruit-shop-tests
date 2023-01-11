@@ -47,8 +47,7 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getSupplyOperationHandler_Ok() {
-        OperationHandler actual = operationStrategy.getOperation(
-                FruitTransaction.Operation.SUPPLY);
+        OperationHandler actual = operationStrategy.getOperation(FruitTransaction.Operation.SUPPLY);
         assertEquals(SupplyOperationHandler.class, actual.getClass());
     }
 

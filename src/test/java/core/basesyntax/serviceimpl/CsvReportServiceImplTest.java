@@ -23,14 +23,14 @@ public class CsvReportServiceImplTest {
                         .append("\n").append("apple,90").toString();
         Storage.fruitsStorage.put("banana", 152);
         Storage.fruitsStorage.put("apple", 90);
-        String actual = reportService.createReport();
+        String actual = reportService.createOurReport();
         assertEquals(expected, actual);
     }
 
     @Test
     public void creatReportWithEmptyList_Ok() {
         String expected = FIRST_LINE;
-        String actual = reportService.createReport();
+        String actual = reportService.createOurReport();
         assertEquals(expected, actual);
     }
 }

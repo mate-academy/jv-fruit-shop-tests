@@ -12,7 +12,7 @@ public class SupplyOperationHandlerTest {
 
     @Before
     public void setUp() {
-        Storage.fruitsStorage.put("banana", 30);
+        Storage.fruitsStorage.put("banana", 20);
         operationHandler = new SupplyOperationHandler();
     }
 
@@ -21,7 +21,7 @@ public class SupplyOperationHandlerTest {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "banana", 20);
         operationHandler.operation(fruitTransaction);
-        int expected = 50;
+        int expected = 40;
         int actual = Storage.fruitsStorage.get("banana");
         assertEquals(expected, actual);
     }

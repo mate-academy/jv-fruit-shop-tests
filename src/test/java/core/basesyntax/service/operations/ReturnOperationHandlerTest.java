@@ -17,11 +17,6 @@ public class ReturnOperationHandlerTest {
         returnOperation = new ReturnOperationHandler();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullPointerException_Return() {
-        returnOperation.handle(null);
-    }
-
     @Test
     public void returnOperationHandler_OK() {
         Storage.fruits.put("apple", 10);

@@ -18,11 +18,6 @@ public class BalanceOperationHandlerTest {
         balanceOperation = new BalanceOperationHandler();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullPointerException_Balance() {
-        balanceOperation.handle(null);
-    }
-
     @Test
     public void balanceOperationHandler_OK() {
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE,

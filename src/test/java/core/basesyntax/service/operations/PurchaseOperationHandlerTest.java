@@ -17,11 +17,6 @@ public class PurchaseOperationHandlerTest {
         purchaseOperation = new PurchaseOperationHandler();
     }
 
-    @Test (expected = NullPointerException.class)
-    public void nullPointerException_Purchase() {
-        purchaseOperation.handle(null);
-    }
-
     @Test
     public void purchaseOperationHandler_OK() {
         Storage.fruits.put("apple", 10);

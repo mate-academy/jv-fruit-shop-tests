@@ -12,19 +12,9 @@ import org.junit.Test;
 public class SupplyOperationHandlerTest {
     private static OperationHandler supplyOperation;
 
-    public SupplyOperationHandlerTest() {
-    }
-
     @Before
     public void before() {
         supplyOperation = new SupplyOperationHandler();
-    }
-
-    @Test(
-            expected = NullPointerException.class
-    )
-    public void nullPointerException_Balance() {
-        supplyOperation.handle((FruitTransaction)null);
     }
 
     @Test

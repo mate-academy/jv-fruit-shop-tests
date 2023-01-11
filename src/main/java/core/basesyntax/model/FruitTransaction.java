@@ -59,6 +59,14 @@ public class FruitTransaction {
         return Objects.hash(operation, fruit, quantity);
     }
 
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity + '}';
+    }
+
     public enum Operation {
         BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
 

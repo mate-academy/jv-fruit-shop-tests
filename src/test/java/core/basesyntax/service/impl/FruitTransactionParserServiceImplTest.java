@@ -45,7 +45,8 @@ public class FruitTransactionParserServiceImplTest {
                 + "r,apple,100" + System.lineSeparator()
                 + "r,grape,7785";
         List<FruitTransaction> actual = fruitTransactionParserService.parseData(input);
-        assertEquals("Method should return List<FruitTransaction>: ", expected, actual);
+        assertEquals("Method should return List<FruitTransaction>: ",
+                expected.toString(), actual.toString());
     }
 
     @Test(expected = InvalidDataException.class)

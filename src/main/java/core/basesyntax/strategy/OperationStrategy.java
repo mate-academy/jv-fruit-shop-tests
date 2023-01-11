@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
@@ -21,7 +22,8 @@ public class OperationStrategy {
 
     public OperationHandler getHandler(FruitTransaction transaction) {
         if (transaction == null || transaction.getOperation() == null) {
-            throw new RuntimeException("Can't find handler for current transaction " + transaction);
+            throw new InvalidDataException(
+                    "Can't find handler for current transaction " + transaction);
         }
         return OPERATIONS_MAP.get(transaction.getOperation());
     }

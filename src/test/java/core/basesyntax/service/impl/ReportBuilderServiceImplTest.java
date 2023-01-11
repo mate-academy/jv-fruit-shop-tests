@@ -27,10 +27,13 @@ public class ReportBuilderServiceImplTest {
         assertEquals("Invalid report", expected, reportBuilderService.buildReport());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void buildReport_emptyStorage_notOk() {
+    @Test
+    public void buildReport_emptyStorage_ok() {
         Storage.fruits.clear();
-        reportBuilderService.buildReport();
+        String expected = "";
+        String actual = reportBuilderService.buildReport();
+        assertEquals("Method should return empty string if storage is empty",
+                expected, actual);
     }
 
     @Test

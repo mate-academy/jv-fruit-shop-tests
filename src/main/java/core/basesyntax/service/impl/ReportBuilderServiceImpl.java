@@ -10,7 +10,7 @@ public class ReportBuilderServiceImpl implements ReportBuilderService {
     @Override
     public String buildReport() {
         if (Storage.fruits.isEmpty()) {
-            throw new RuntimeException("Can't build report with no data");
+            return "";
         }
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(HEADER);

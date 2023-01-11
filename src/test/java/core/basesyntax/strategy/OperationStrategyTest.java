@@ -2,6 +2,7 @@ package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
@@ -30,12 +31,12 @@ public class OperationStrategyTest {
                 .getHandler(fruitTransaction).getClass(), ReturnOperationHandler.class);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidDataException.class)
     public void getHandler_nullTransaction_notOk() {
         operationStrategy.getHandler(null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = InvalidDataException.class)
     public void getHandler_nullOperation_notOk() {
         fruitTransaction.setOperation(null);
         operationStrategy.getHandler(fruitTransaction);

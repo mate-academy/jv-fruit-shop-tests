@@ -18,9 +18,9 @@ public class BalanceOperationHandlerTest {
     @Test
     public void addToStorageBalanceOperationHandler_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, "banana", 20);
+                FruitTransaction.Operation.BALANCE, "banana", 30);
         operationHandler.operation(fruitTransaction);
-        int expected = 20;
+        int expected = 30;
         int actual = Storage.fruitsStorage.get("banana");
         assertEquals(expected, actual);
     }

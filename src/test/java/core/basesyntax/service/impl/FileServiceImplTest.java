@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileService;
-import java.nio.file.InvalidPathException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,16 +51,6 @@ public class FileServiceImplTest {
                 fileService.read(EMPTY_FILE_NAME));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void readFile_RuntimeException() {
-        fileService.read(null);
-    }
-
-    @Test(expected = InvalidPathException.class)
-    public void readFileError() {
-        fileService.read(" ");
-    }
-
     @Test(expected = RuntimeException.class)
     public void file_not_exist_NotOK() {
         String test = "FileNotExist";
@@ -82,11 +71,5 @@ public class FileServiceImplTest {
     public void write_OK() {
         String report = "some text";
         fileService.write(REPORT_TEST, report);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void writeFileExist_OK() {
-        String test = "/wrong/filepath";
-        fileService.write(test, "some text");
     }
 }

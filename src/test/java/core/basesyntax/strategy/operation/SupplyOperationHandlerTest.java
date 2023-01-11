@@ -12,8 +12,8 @@ public class SupplyOperationHandlerTest {
 
     @Before
     public void setUp() {
-        operationHandler = new SupplyOperationHandler();
         Storage.fruitsStorage.put("banana", 30);
+        operationHandler = new SupplyOperationHandler();
     }
 
     @Test

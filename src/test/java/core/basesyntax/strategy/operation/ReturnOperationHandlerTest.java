@@ -12,8 +12,8 @@ public class ReturnOperationHandlerTest {
 
     @Before
     public void setUp() {
-        operationHandler = new ReturnOperationHandler();
         Storage.fruitsStorage.put("banana", 20);
+        operationHandler = new ReturnOperationHandler();
     }
 
     @Test

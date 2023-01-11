@@ -13,6 +13,7 @@ public class CsvReportServiceImplTest {
 
     @Before
     public void setUp() {
+
         reportService = new CsvReportServiceImpl();
     }
 

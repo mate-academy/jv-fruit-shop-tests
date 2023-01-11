@@ -18,6 +18,7 @@ public class FileWriterServiceImplTest {
 
     @Before
     public void setUp() {
+
         writerService = new FileWriterServiceImpl();
     }
 

@@ -46,16 +46,16 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getReturnOperationHandler_Ok() {
-        OperationHandler actual = operationStrategy.getOperation(
-                FruitTransaction.Operation.RETURN);
-        assertEquals(ReturnOperationHandler.class, actual.getClass());
-    }
-
-    @Test
     public void getSupplyOperationHandler_Ok() {
         OperationHandler actual = operationStrategy.getOperation(
                 FruitTransaction.Operation.SUPPLY);
         assertEquals(SupplyOperationHandler.class, actual.getClass());
+    }
+
+    @Test
+    public void getReturnOperationHandler_Ok() {
+        OperationHandler actual = operationStrategy.getOperation(
+                FruitTransaction.Operation.RETURN);
+        assertEquals(ReturnOperationHandler.class, actual.getClass());
     }
 }

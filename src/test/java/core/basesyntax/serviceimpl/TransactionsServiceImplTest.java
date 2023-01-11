@@ -13,6 +13,7 @@ public class TransactionsServiceImplTest {
 
     @Before
     public void setUp() {
+
         transactionService = new TransactionsServiceImpl();
     }
 

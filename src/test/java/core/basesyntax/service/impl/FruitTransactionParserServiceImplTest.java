@@ -46,7 +46,7 @@ public class FruitTransactionParserServiceImplTest {
                 + "r,grape,7785";
         List<FruitTransaction> actual = fruitTransactionParserService.parseData(input);
         assertEquals("Method should return List<FruitTransaction>: ",
-                expected.toString(), actual.toString());
+                expected, actual);
     }
 
     @Test(expected = InvalidDataException.class)
@@ -54,7 +54,7 @@ public class FruitTransactionParserServiceImplTest {
         fruitTransactionParserService.parseData("invalidInput");
     }
 
-    @Test(expected = NumberFormatException.class) // I believe it's ok to expect this exception
+    @Test(expected = NumberFormatException.class)
     public void parseData_thirdPartIsNotInteger_notOk() {
         String input = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,notInteger" + System.lineSeparator();

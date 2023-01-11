@@ -30,7 +30,8 @@ public class SupplyOperationHandlerTest {
     @Test
     public void supplyOperationHandler_OK() {
         Storage.fruits.put("apple", 10);
-        FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY, "apple", 5);
+        FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY,
+                "apple", 5);
         Integer excepted = Storage.fruits.get(fruitTransaction.getFruitName())
                 + fruitTransaction.getQuantity();
         supplyOperation.handle(fruitTransaction);
@@ -41,7 +42,8 @@ public class SupplyOperationHandlerTest {
     @Test
     public void supplyOperationHandler_NotOK() {
         Storage.fruits.put("apple", 10);
-        FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY, "apple", 5);
+        FruitTransaction fruitTransaction = new FruitTransaction(Operation.SUPPLY,
+                "apple", 5);
         Integer excepted = Storage.fruits.get(fruitTransaction.getFruitName())
                 - fruitTransaction.getQuantity();
         supplyOperation.handle(fruitTransaction);

@@ -18,14 +18,14 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void nullPointerException_Balance() {
+    public void nullPointerException_Return() {
         returnOperation.handle(null);
     }
 
     @Test
-    public void purchaseOperationHandler_OK() {
+    public void returnOperationHandler_OK() {
         Storage.fruits.put("apple", 10);
-        FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE,
+        FruitTransaction fruitTransaction = new FruitTransaction(Operation.RETURN,
                 "apple", 5);
         Integer excepted = Storage.fruits.get(fruitTransaction.getFruitName())
                 + fruitTransaction.getQuantity();
@@ -35,9 +35,9 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperationHandler_NotOK() {
+    public void returnOperationHandler_NotOK() {
         Storage.fruits.put("apple", 10);
-        FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE,
+        FruitTransaction fruitTransaction = new FruitTransaction(Operation.RETURN,
                 "apple", 5);
         Integer excepted = Storage.fruits.get(fruitTransaction.getFruitName())
                 - fruitTransaction.getQuantity();

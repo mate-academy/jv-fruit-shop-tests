@@ -11,7 +11,6 @@ import org.junit.Test;
 public class FileWriterServiceImplTest {
     private static final String VALID_REPORT = "fruit,quantity\n"
             + "banana,20";
-    private static final String VALID_DATA_PATH = "src/test/resources/data.csv";
     private static final String VALID_TEST_REPORT_PATH = "src/test/resources/testReport.csv";
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
 

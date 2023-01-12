@@ -7,6 +7,7 @@ import core.basesyntax.strategy.OperationCalculator;
 import core.basesyntax.strategy.OperationCalculatorStrategy;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class TransactionProcessingServiceImpl implements TransactionProcessingService {
     private final OperationCalculatorStrategy operationStrategy;
@@ -20,6 +21,10 @@ public class TransactionProcessingServiceImpl implements TransactionProcessingSe
     @Override
     public Map<String, Integer> update(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> fruitMap = storage.getFruitMap();
+        if (fruitTransactions.isEmpty()) {
+            throw new NoSuchElementException(
+                    "Empty fruit transaction list is not ok" + fruitTransactions);
+        }
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
             OperationCalculator countStrategy = operationStrategy.getCountStrategy(operation);

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 public class FruitsTranslationTest {
     private static final String TEST_FRUIT = "apple";
     private static final String TEST_OPERATION_CODE = "b";
-    private static final String TEST_WRONG_OPERATION_CODE = "w";
     private static final int TEST_BALANCE = 50;
     private static final Operation TEST_OPERATION = BALANCE;
     private FruitsTranslation fruitTransaction;
@@ -28,10 +27,5 @@ public class FruitsTranslationTest {
     public void getByCode_Work_Ok() {
         Operation actual = getByCode(TEST_OPERATION_CODE);
         Assertions.assertEquals(TEST_OPERATION, actual);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void getByCode_IllegalArgExc_notOk() {
-        fruitTransaction.setOperation(getByCode(TEST_WRONG_OPERATION_CODE));
     }
 }

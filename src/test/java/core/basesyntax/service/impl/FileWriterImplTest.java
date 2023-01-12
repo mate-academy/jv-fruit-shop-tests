@@ -15,6 +15,7 @@ public class FileWriterImplTest {
     public static final String WRONG_FILEPATH = "/var/lib";
     public static final String CREATED_PATH = "src/test/resources/inputFile";
     public static final String TEST_STRING = "type,fruit,quantity\nb,banana,20";
+    private static final String SUCCESSFUL_PROCESS = "This process was successful";
     private FileWriter writerService;
 
     @Before
@@ -23,11 +24,10 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void writeFile_Ok() {
-        FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeData("This process was successful", CREATED_PATH);
+    public void writeToFile_validPath_ok() {
+        writerService.writeData(SUCCESSFUL_PROCESS, CREATED_PATH);
         List<String> expected = new ArrayList<>();
-        expected.add("This process was successful");
+        expected.add(SUCCESSFUL_PROCESS);
         List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(CREATED_PATH));

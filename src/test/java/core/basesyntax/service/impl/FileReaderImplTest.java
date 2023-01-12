@@ -21,13 +21,11 @@ public class FileReaderImplTest {
     @BeforeClass
     public static void beforeClass() {
         readerService = new FileReaderImpl();
-        ONE_LINE_TEXT.add("This file have only one line." + System.lineSeparator());
-        SOME_LINES_TEXT.add("This file have some lines." + System.lineSeparator()
-                + "This file have some lines!" + System.lineSeparator());
     }
 
     @Test
     public void readFileWithOneLine_Ok() {
+        ONE_LINE_TEXT.add("This file have only one line." + System.lineSeparator());
         List<String> actual = readerService.readData(ONE_LINE_TEXT_PATH);
         assertEquals(ONE_LINE_TEXT, actual);
         assertEquals(1, actual.size());
@@ -35,6 +33,8 @@ public class FileReaderImplTest {
 
     @Test
     public void readFileWithSomeLines_Ok() {
+        SOME_LINES_TEXT.add("This file have some lines." + System.lineSeparator()
+                + "This file have some lines!" + System.lineSeparator());
         List<String> actual = readerService.readData(SOME_LINES_TEXT_PATH);
         assertEquals(SOME_LINES_TEXT, actual);
     }

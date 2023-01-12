@@ -7,9 +7,9 @@ import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessingServiceImpl;
-import core.basesyntax.service.impl.TransactionsServiceImpl;
 import core.basesyntax.strategy.OperationCalculator;
 import core.basesyntax.strategy.OperationCalculatorStrategy;
 import core.basesyntax.strategy.impl.BalanceCountStrategyImpl;
@@ -25,7 +25,7 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
     private static final FruitTransactionParser transactionsService
-            = new TransactionsServiceImpl();
+            = new FruitTransactionParserImpl();
     private static final ReportServiceImpl reportService = new ReportServiceImpl();
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private static final Map<FruitTransaction.Operation, OperationCalculator> countStrategyMap

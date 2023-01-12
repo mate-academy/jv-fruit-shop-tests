@@ -65,4 +65,9 @@ public class FileWriterServiceImplTest {
     public void writeToFile_nullPath_nullReport_notOk() {
         fileWriterService.writeReport(null, null);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_emptyPath_notOk() {
+        fileWriterService.writeReport("", VALID_REPORT);
+    }
 }

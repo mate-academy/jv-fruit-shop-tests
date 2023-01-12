@@ -12,17 +12,17 @@ public class FileReaderServiceImplTest {
     public void readFromFile_validPath_ok() {
         String actual = fileReaderService.readFromFile(VALID_PATH);
         String expected = "type,fruit,quantity\n"
-                + "b,banana,20";
+                + "    b,banana,20";
         Assert.assertEquals("String from " + VALID_PATH + "have to be read", expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_invalidPAth_notOk() {
+    public void readFromFile_invalidPath_notOk() {
         fileReaderService.readFromFile(VALID_PATH + "/notYourDayBro;)");
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_nullPAth_notOk() {
+    public void readFromFile_nullPath_notOk() {
         fileReaderService.readFromFile(null);
     }
 }

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionsServiceImpl implements FruitTransactionParser {
+public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
@@ -16,6 +16,9 @@ public class TransactionsServiceImpl implements FruitTransactionParser {
     @Override
     public List<FruitTransaction> parse(String data) {
         String[] lines = data.split(System.lineSeparator());
+        if (lines.length == 1) {
+            throw new RuntimeException("Only header is not ok");
+        }
         return Arrays.stream(lines)
                 .skip(HEADER)
                 .map(line -> line.trim().split(LINE_SEPARATOR))

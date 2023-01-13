@@ -28,13 +28,13 @@ public class ReadFromFileImplTest {
     }
 
     @Test
-    public void readFile_ok() {
+    public void readFile_validData_ok() {
         String fileActual = readFromFile.readFile(Path.of(validPathFrom));
         assertEquals("Uncorrected file data!", fileData, fileActual);
     }
 
     @Test (expected = InvalidData.class)
-    public void readFile_fail() {
+    public void readFile_validData_fail() {
         readFromFile.readFile(Path.of(invalidPathFrom));
     }
 }

@@ -17,7 +17,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void validReturnClass_Ok() {
+    public void getOperation_validReturnClass_ok() {
         Class<? extends OperationHandler> actualBalance = operationStrategy
                 .getOperation(FruitTransaction.Operation.BALANCE).getClass();
         assertEquals(BalanceOperationHandler.class, actualBalance);

@@ -33,7 +33,7 @@ public class FruitParserImplTest {
     }
 
     @Test
-    public void parseData_validInput_ok() {
+    public void parseData_validOutput_ok() {
         List<FruitTransaction> actual = fruitParser.parseData(dataFromFile);
         assertEquals("Invalid count of parsed lines",8, actual.size());
         assertEquals("Invalid class type!", FruitTransaction.class,
@@ -41,7 +41,7 @@ public class FruitParserImplTest {
     }
 
     @Test
-    public void createFruitTransaction_fruitTransaction_ok() {
+    public void createFruitTransaction_validOutput_ok() {
         FruitTransaction actual = fruitParser.parseData(dataFromFileOneLine).get(0);
         assertEquals(fruitTransaction, actual);
     }

@@ -23,7 +23,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void validData_ok() {
+    public void operate_validData_ok() {
         operationStrategy.getOperation(FruitTransaction.Operation.RETURN)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");

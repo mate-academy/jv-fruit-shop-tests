@@ -21,7 +21,7 @@ public class WriteToFileImplTest {
     }
 
     @Test
-    public void writeToFile_ok() {
+    public void writeToFile_validDataAndPath_ok() {
         writeToFile.writeFile(Path.of(pathTo), testText);
         try {
             String actual = Files.readString(Path.of(pathTo));

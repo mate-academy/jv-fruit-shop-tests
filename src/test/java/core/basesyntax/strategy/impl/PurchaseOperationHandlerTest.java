@@ -24,13 +24,13 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = InvalidData.class)
-    public void invalidData() {
+    public void operate_invalidData() {
         operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE)
                 .operate(fruitTransaction);
     }
 
     @Test
-    public void validData_ok() {
+    public void operate_validData_ok() {
         fruitTransaction.setQuantity(9);
         operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE)
                 .operate(fruitTransaction);

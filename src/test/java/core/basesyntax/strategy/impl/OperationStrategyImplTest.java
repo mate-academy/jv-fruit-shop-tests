@@ -20,15 +20,19 @@ public class OperationStrategyImplTest {
     public void getOperation_validReturnClass_ok() {
         Class<? extends OperationHandler> actualBalance = operationStrategy
                 .getOperation(FruitTransaction.Operation.BALANCE).getClass();
-        assertEquals(BalanceOperationHandler.class, actualBalance);
+        assertEquals("Invalid operation, expected BALANCE operation",
+                BalanceOperationHandler.class, actualBalance);
         Class<? extends OperationHandler> actualReturn = operationStrategy
                 .getOperation(FruitTransaction.Operation.RETURN).getClass();
-        assertEquals(ReturnOperationHandler.class, actualReturn);
+        assertEquals("Invalid operation, expected RETURN operation",
+                ReturnOperationHandler.class, actualReturn);
         Class<? extends OperationHandler> actualSupply = operationStrategy
                 .getOperation(FruitTransaction.Operation.SUPPLY).getClass();
-        assertEquals(SupplyOperationHandler.class, actualSupply);
+        assertEquals("Invalid operation, expected SUPPLY operation",
+                SupplyOperationHandler.class, actualSupply);
         Class<? extends OperationHandler> actualPurchase = operationStrategy
                 .getOperation(FruitTransaction.Operation.PURCHASE).getClass();
-        assertEquals(PurchaseOperationHandler.class, actualPurchase);
+        assertEquals("Invalid operation, expected PURCHASE operation",
+                PurchaseOperationHandler.class, actualPurchase);
     }
 }

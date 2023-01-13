@@ -2,6 +2,7 @@ package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exeption.InvalidData;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
@@ -22,21 +23,14 @@ public class PurchaseOperationHandlerTest {
         fruitTransaction.setQuantity(15);
     }
 
-    @Test
-    public void validClass() {
-        assertEquals(operationStrategy
-                        .getOperation(FruitTransaction.Operation.PURCHASE).getClass(),
-                PurchaseOperationHandler.class);
-    }
-
-    @Test (expected = RuntimeException.class)
+    @Test (expected = InvalidData.class)
     public void invalidData() {
         operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE)
                 .operate(fruitTransaction);
     }
 
     @Test
-    public void validData() {
+    public void validData_ok() {
         fruitTransaction.setQuantity(9);
         operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE)
                 .operate(fruitTransaction);

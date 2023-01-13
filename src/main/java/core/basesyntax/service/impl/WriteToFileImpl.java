@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exeption.InvalidData;
 import core.basesyntax.service.WriteToFile;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +13,7 @@ public class WriteToFileImpl implements WriteToFile {
         try {
             Files.write(path, data.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file: " + path, e);
+            throw new InvalidData("Can't write data to file: " + path);
         }
     }
 }

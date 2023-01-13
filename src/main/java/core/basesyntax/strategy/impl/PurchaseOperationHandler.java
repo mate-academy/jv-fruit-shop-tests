@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.exeption.InvalidData;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
@@ -9,7 +10,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void operate(FruitTransaction fruitTransaction) {
         if (Storage.FRUITS_MAP.get(fruitTransaction.getFruit())
                 - fruitTransaction.getQuantity() < 0) {
-            throw new RuntimeException("We don't have enough fruits " + fruitTransaction.getFruit()
+            throw new InvalidData("We don't have enough fruits " + fruitTransaction.getFruit()
                     + ". Needed: " + fruitTransaction.getQuantity() + ", we have: "
                     + Storage.FRUITS_MAP.get(fruitTransaction.getFruit()));
         }

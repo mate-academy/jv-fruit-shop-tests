@@ -23,14 +23,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void validClass() {
-        assertEquals(operationStrategy
-                        .getOperation(FruitTransaction.Operation.RETURN).getClass(),
-                ReturnOperationHandler.class);
-    }
-
-    @Test
-    public void validData() {
+    public void validData_ok() {
         operationStrategy.getOperation(FruitTransaction.Operation.RETURN)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");

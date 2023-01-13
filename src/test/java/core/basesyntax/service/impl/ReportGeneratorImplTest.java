@@ -25,8 +25,8 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void makeReport_Ok() {
+    public void makeReport_ok() {
         String actual = reportGenerator.makeReport(testMap);
-        assertEquals(report, actual);
+        assertEquals("Report data is not correct",report, actual);
     }
 }

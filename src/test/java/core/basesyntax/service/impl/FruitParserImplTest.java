@@ -28,17 +28,20 @@ public class FruitParserImplTest {
     }
 
     @Test
-    public void fruitTransaction_Ok() {
+    public void parseData_validInput_ok() {
         List<FruitTransaction> actual = fruitParser.parseData(dataFromFile);
-        assertEquals(8, actual.size());
-        assertEquals(FruitTransaction.class, actual.get(0).getClass());
+        assertEquals("Invalid count of parsed lines",8, actual.size());
+        assertEquals("Invalid class type!", FruitTransaction.class,
+                actual.get(0).getClass());
     }
 
     @Test
-    public void fruitTransactionTypes_Ok() {
+    public void createFruitTransaction_fruitTransaction_ok() {
         FruitTransaction actual = fruitParser.parseData(dataFromFileOneLine).get(0);
-        assertEquals(FruitTransaction.Operation.BALANCE, actual.getOperation());
-        assertEquals("banana", actual.getFruit());
+        assertEquals("Invalid operation", FruitTransaction.Operation.BALANCE,
+                actual.getOperation());
+        assertEquals("Invalid type of fruit, need banana, but get: " + actual.getFruit(),
+                "banana", actual.getFruit());
         assertEquals(20, actual.getQuantity());
     }
 }

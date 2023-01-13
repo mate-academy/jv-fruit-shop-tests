@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exeption.InvalidData;
 import core.basesyntax.service.WriteToFile;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,13 +21,13 @@ public class WriteToFileImplTest {
     }
 
     @Test
-    public void writeToFile_Ok() {
+    public void writeToFile_ok() {
         writeToFile.writeFile(Path.of(pathTo), testText);
         try {
             String actual = Files.readString(Path.of(pathTo));
-            assertEquals(testText, actual);
+            assertEquals("Can't write to file!",testText, actual);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InvalidData("Invalid path");
         }
     }
 }

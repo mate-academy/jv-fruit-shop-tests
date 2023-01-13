@@ -23,15 +23,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-
-    public void validClass() {
-        assertEquals(operationStrategy
-                .getOperation(FruitTransaction.Operation.SUPPLY).getClass(),
-                SupplyOperationHandler.class);
-    }
-
-    @Test
-    public void validData() {
+    public void validData_ok() {
         operationStrategy.getOperation(FruitTransaction.Operation.SUPPLY)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");

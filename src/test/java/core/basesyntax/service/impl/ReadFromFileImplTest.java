@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
+import core.basesyntax.exeption.InvalidData;
 import core.basesyntax.service.ReadFromFile;
 import java.nio.file.Path;
 import org.junit.Before;
@@ -11,7 +11,6 @@ import org.junit.Test;
 public class ReadFromFileImplTest {
     private final String validPathFrom = "src/main/resources/resources.csv";
     private final String invalidPathFrom = "src/main/resources/r.csv";
-
     private final String fileData = "type,fruit,quantity" + System.lineSeparator()
             + "b,banana,20" + System.lineSeparator()
             + "b,apple,100" + System.lineSeparator()
@@ -29,19 +28,13 @@ public class ReadFromFileImplTest {
     }
 
     @Test
-    public void readFromFileTest_Ok() {
+    public void readFile_ok() {
         String fileActual = readFromFile.readFile(Path.of(validPathFrom));
-        assertEquals(fileData, fileActual);
+        assertEquals("Uncorrected file data!", fileData, fileActual);
     }
 
-    @Test
-    public void readFromFileTest_invalidData() {
-        String fileActual = readFromFile.readFile(Path.of(validPathFrom)) + "this is error!";
-        assertNotEquals(fileData, fileActual);
-    }
-
-    @Test (expected = RuntimeException.class)
-    public void readFile_Fail() {
+    @Test (expected = InvalidData.class)
+    public void readFile_fail() {
         readFromFile.readFile(Path.of(invalidPathFrom));
     }
 }

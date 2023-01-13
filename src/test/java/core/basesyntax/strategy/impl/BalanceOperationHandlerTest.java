@@ -22,14 +22,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void validClass() {
-        assertEquals(operationStrategy
-                .getOperation(FruitTransaction.Operation.BALANCE).getClass(),
-                BalanceOperationHandler.class);
-    }
-
-    @Test
-    public void validData() {
+    public void validData_ok() {
         operationStrategy.getOperation(FruitTransaction.Operation.BALANCE)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");

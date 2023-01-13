@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FileWritingException;
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +12,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try {
             Files.writeString(Path.of(path), report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to the file " + path, e);
+            throw new FileWritingException("Can't write data to the file " + path, e);
         }
     }
 }

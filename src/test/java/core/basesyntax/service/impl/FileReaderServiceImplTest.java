@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FileReadingException;
 import core.basesyntax.service.FileReaderService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,12 +17,12 @@ public class FileReaderServiceImplTest {
         Assert.assertEquals("String from " + VALID_PATH + "have to be read", expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FileReadingException.class)
     public void readFromFile_invalidPath_notOk() {
         fileReaderService.readFromFile(VALID_PATH + "/notYourDayBro;)");
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NullPointerException.class)
     public void readFromFile_nullPath_notOk() {
         fileReaderService.readFromFile(null);
     }

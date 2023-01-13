@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.FruitTransactionException;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -96,7 +97,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Wrong operation letter inserted: " + letter);
+            throw new FruitTransactionException("Wrong operation letter inserted: " + letter);
         }
 
         public String getLetter() {

@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FileWritingException;
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,22 +52,22 @@ public class FileWriterServiceImplTest {
                 + "similar to validReport.csv", emptyDataReport, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NullPointerException.class)
     public void writeToFile_nullPath_notOk() {
         fileWriterService.writeReport(null, VALID_REPORT);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NullPointerException.class)
     public void writeToFile_nullReport_notOk() {
         fileWriterService.writeReport(VALID_TEST_REPORT_PATH, null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = NullPointerException.class)
     public void writeToFile_nullPath_nullReport_notOk() {
         fileWriterService.writeReport(null, null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = FileWritingException.class)
     public void writeToFile_emptyPath_notOk() {
         fileWriterService.writeReport("", VALID_REPORT);
     }

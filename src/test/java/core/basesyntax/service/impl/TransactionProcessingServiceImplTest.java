@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.FruitTransactionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationCalculator;
@@ -10,31 +11,26 @@ import core.basesyntax.strategy.impl.PurchaseCountStrategyImpl;
 import core.basesyntax.strategy.impl.ReturnCountStrategyImpl;
 import core.basesyntax.strategy.impl.SupplyCountStrategyImpl;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessingServiceImplTest {
-    private static Map<FruitTransaction.Operation, OperationCalculator> countStrategyMap;
+    private static Map<FruitTransaction.Operation,
+            OperationCalculator> countStrategyMap;
     private static OperationCalculatorStrategy operationStrategy;
     private static TransactionProcessingService transactionProcessingService;
     private static Storage storage;
 
     @BeforeClass
     public static void setUp() {
-        countStrategyMap = new HashMap<>();
-        countStrategyMap.put(
-                FruitTransaction.Operation.BALANCE, new BalanceCountStrategyImpl());
-        countStrategyMap.put(
-                FruitTransaction.Operation.SUPPLY, new SupplyCountStrategyImpl());
-        countStrategyMap.put(
-                FruitTransaction.Operation.PURCHASE, new PurchaseCountStrategyImpl());
-        countStrategyMap.put(
+        countStrategyMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceCountStrategyImpl(),
+                FruitTransaction.Operation.SUPPLY, new SupplyCountStrategyImpl(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseCountStrategyImpl(),
                 FruitTransaction.Operation.RETURN, new ReturnCountStrategyImpl());
         operationStrategy
                 = new OperationCalculatorStrategy(countStrategyMap);
@@ -78,7 +74,7 @@ public class TransactionProcessingServiceImplTest {
         transactionProcessingService.update(null);
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = FruitTransactionException.class)
     public void update_emptyInput_notOk() {
         transactionProcessingService.update(Collections.emptyList());
     }

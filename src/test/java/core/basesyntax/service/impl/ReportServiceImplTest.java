@@ -17,9 +17,8 @@ public class ReportServiceImplTest {
     @BeforeClass
     public static void setUp() {
         reportService = new ReportServiceImpl();
-        fruitMap = new HashMap<>();
-        fruitMap.put("banana", 130);
-        fruitMap.put("apple", 90);
+        fruitMap = Map.of("banana", 130,
+                "apple", 90);
     }
 
     @Test
@@ -35,14 +34,6 @@ public class ReportServiceImplTest {
         String actual = reportService.getReport(new HashMap<>());
         String expected = "fruit,quantity" + System.lineSeparator();
         Assert.assertEquals("Method have to return empty report: "
-                + System.lineSeparator() + VALID_REPORT, expected, actual);
-    }
-
-    @Test
-    public void getReport_notValidMap_notOk() {
-        String actual = reportService.getReport(fruitMap);
-        String expected = VALID_REPORT + " ";
-        Assert.assertNotEquals("Method have to return valid report: "
                 + System.lineSeparator() + VALID_REPORT, expected, actual);
     }
 

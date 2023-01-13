@@ -21,10 +21,15 @@ public class FruitParserImplTest {
     private final String dataFromFileOneLine = "type,fruit,quantity"
             + System.lineSeparator() + "b,banana,20";
     private FruitParser fruitParser;
+    private FruitTransaction fruitTransaction;
 
     @Before
     public void setUp() {
         fruitParser = new FruitParserImpl();
+        fruitTransaction = new FruitTransaction();
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        fruitTransaction.setQuantity(20);
     }
 
     @Test
@@ -38,10 +43,6 @@ public class FruitParserImplTest {
     @Test
     public void createFruitTransaction_fruitTransaction_ok() {
         FruitTransaction actual = fruitParser.parseData(dataFromFileOneLine).get(0);
-        assertEquals("Invalid operation", FruitTransaction.Operation.BALANCE,
-                actual.getOperation());
-        assertEquals("Invalid type of fruit, need banana, but get: " + actual.getFruit(),
-                "banana", actual.getFruit());
-        assertEquals(20, actual.getQuantity());
+        assertEquals(fruitTransaction, actual);
     }
 }

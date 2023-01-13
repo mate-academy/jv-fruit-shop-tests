@@ -22,13 +22,13 @@ public class BalanceCountStrategyImplTest {
     public void count_balance_ok() {
         int expected = 5;
         int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Balance should be updated properly", expected, actual);
     }
 
     @Test
     public void count_balance_notOk() {
         int expected = 14;
         int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertNotEquals(expected, actual);
+        Assert.assertNotEquals("Balance should be updated properly", expected, actual);
     }
 }

@@ -21,13 +21,13 @@ public class ReturnCountStrategyImplTest {
     public void count_return_ok() {
         int expected = 25;
         int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Amount should be updated properly", expected, actual);
     }
 
     @Test
     public void count_return_notOk() {
         int expected = 14;
         int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertNotEquals(expected, actual);
+        Assert.assertNotEquals("Amount should be updated properly", expected, actual);
     }
 }

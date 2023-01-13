@@ -6,7 +6,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitParser;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FruitParserImplTest {
@@ -16,17 +15,10 @@ public class FruitParserImplTest {
             + "s,banana,10" + System.lineSeparator()
             + "p,apple,13";
 
-    private FruitParser fruitParser;
-    private List<FruitTransaction> fruitTransactionList;
-
-    @Before
-    public void setUp() {
-        fruitParser = new FruitParserImpl();
-        fruitTransactionList = new ArrayList<>();
-    }
-
     @Test
     public void parseData_validInput_ok() {
+        FruitParser fruitParser = new FruitParserImpl();
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         final List<FruitTransaction> actual = fruitParser.parseData(dataFromFile);
         fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20));

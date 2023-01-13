@@ -28,6 +28,6 @@ public class ReturnOperationHandlerTest {
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");
         Integer expected = 25;
-        assertEquals("Invalid data: " + actual, expected, actual);
+        assertEquals("Wrong result of RETURN operation for input " + actual, expected, actual);
     }
 }

@@ -36,6 +36,6 @@ public class PurchaseOperationHandlerTest {
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");
         Integer expected = 1;
-        assertEquals("Invalid data: " + actual, expected, actual);
+        assertEquals("Wrong result of PURCHASE operation for input " + actual, expected, actual);
     }
 }

@@ -21,11 +21,11 @@ public class WriteToFileImplTest {
     }
 
     @Test
-    public void writeToFile_validDataAndPath_ok() {
+    public void writeFile_validDataAndPath_ok() {
         writeToFile.writeFile(Path.of(pathTo), testText);
         try {
             String actual = Files.readString(Path.of(pathTo));
-            assertEquals("Can't write to file!",testText, actual);
+            assertEquals("Wrong data was written to file: " + pathTo, testText, actual);
         } catch (IOException e) {
             throw new InvalidData("Invalid path");
         }

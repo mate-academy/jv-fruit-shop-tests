@@ -28,9 +28,9 @@ public class ReadFromFileImplTest {
     }
 
     @Test
-    public void readFile_validData_ok() {
+    public void readFromFile_validData_ok() {
         String fileActual = readFromFile.readFile(Path.of(validPathFrom));
-        assertEquals("Uncorrected file data!", fileData, fileActual);
+        assertEquals("Wrong output from file: " + validPathFrom, fileData, fileActual);
     }
 
     @Test (expected = InvalidData.class)

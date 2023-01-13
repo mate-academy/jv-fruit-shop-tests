@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitParser;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,36 +15,24 @@ public class FruitParserImplTest {
             + "b,banana,20" + System.lineSeparator()
             + "b,apple,100" + System.lineSeparator()
             + "s,banana,10" + System.lineSeparator()
-            + "p,banana,13" + System.lineSeparator()
-            + "r,apple,10" + System.lineSeparator()
-            + "p,apple,20" + System.lineSeparator()
-            + "p,banana,5" + System.lineSeparator()
-            + "s,banana,10";
-    private final String dataFromFileOneLine = "type,fruit,quantity"
-            + System.lineSeparator() + "b,banana,20";
+            + "p,apple,13";
+
     private FruitParser fruitParser;
-    private FruitTransaction fruitTransaction;
+    private List<FruitTransaction> fruitTransactionList;
 
     @Before
     public void setUp() {
         fruitParser = new FruitParserImpl();
-        fruitTransaction = new FruitTransaction();
-        fruitTransaction.setFruit("banana");
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setQuantity(20);
+        fruitTransactionList = new ArrayList<>();
     }
 
     @Test
-    public void parseData_validOutput_ok() {
+    public void parseData_validInput_ok() {
         List<FruitTransaction> actual = fruitParser.parseData(dataFromFile);
-        assertEquals("Invalid count of parsed lines",8, actual.size());
-        assertEquals("Invalid class type!", FruitTransaction.class,
-                actual.get(0).getClass());
-    }
-
-    @Test
-    public void createFruitTransaction_validOutput_ok() {
-        FruitTransaction actual = fruitParser.parseData(dataFromFileOneLine).get(0);
-        assertEquals(fruitTransaction, actual);
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10));
+        fruitTransactionList.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 13));
+        assertEquals("Wrong output for: " + dataFromFile, fruitTransactionList, actual);
     }
 }

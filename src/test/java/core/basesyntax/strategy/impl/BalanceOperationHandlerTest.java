@@ -27,6 +27,6 @@ public class BalanceOperationHandlerTest {
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");
         Integer expected = 15;
-        assertEquals("Invalid data: " + actual, expected, actual);
+        assertEquals("Wrong result of BALANCE operation for input " + actual, expected, actual);
     }
 }

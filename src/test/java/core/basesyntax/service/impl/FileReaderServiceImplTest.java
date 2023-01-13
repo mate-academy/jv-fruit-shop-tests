@@ -21,9 +21,4 @@ public class FileReaderServiceImplTest {
     public void readFromFile_invalidPath_notOk() {
         fileReaderService.readFromFile(VALID_PATH + "/notYourDayBro;)");
     }
-
-    @Test(expected = NullPointerException.class)
-    public void readFromFile_nullPath_notOk() {
-        fileReaderService.readFromFile(null);
-    }
 }

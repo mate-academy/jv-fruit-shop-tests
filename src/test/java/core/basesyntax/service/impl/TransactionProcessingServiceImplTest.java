@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.exception.FruitTransactionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationCalculator;
@@ -10,7 +9,6 @@ import core.basesyntax.strategy.impl.BalanceCountStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseCountStrategyImpl;
 import core.basesyntax.strategy.impl.ReturnCountStrategyImpl;
 import core.basesyntax.strategy.impl.SupplyCountStrategyImpl;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.junit.AfterClass;
@@ -72,10 +70,5 @@ public class TransactionProcessingServiceImplTest {
     @Test(expected = NullPointerException.class)
     public void update_nullInput_notOk() {
         transactionProcessingService.update(null);
-    }
-
-    @Test(expected = FruitTransactionException.class)
-    public void update_emptyInput_notOk() {
-        transactionProcessingService.update(Collections.emptyList());
     }
 }

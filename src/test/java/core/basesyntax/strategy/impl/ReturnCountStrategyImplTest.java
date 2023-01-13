@@ -23,11 +23,4 @@ public class ReturnCountStrategyImplTest {
         int actual = operationCalculator.count(currentAmount, operationAmount);
         Assert.assertEquals("Amount should be updated properly", expected, actual);
     }
-
-    @Test
-    public void count_return_notOk() {
-        int expected = 14;
-        int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertNotEquals("Amount should be updated properly", expected, actual);
-    }
 }

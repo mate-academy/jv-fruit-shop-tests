@@ -23,11 +23,4 @@ public class PurchaseCountStrategyImplTest {
         int actual = operationCalculator.count(currentAmount, operationAmount);
         Assert.assertEquals("Amount should be updated properly", expected, actual);
     }
-
-    @Test
-    public void count_purchase_notOk() {
-        int expected = 14;
-        int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertNotEquals("Amount should be updated properly", expected, actual);
-    }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.exception.FruitTransactionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationCalculator;
@@ -21,10 +20,6 @@ public class TransactionProcessingServiceImpl implements TransactionProcessingSe
     @Override
     public Map<String, Integer> update(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> fruitMap = storage.getFruitMap();
-        if (fruitTransactions.isEmpty()) {
-            throw new FruitTransactionException(
-                    "Empty fruit transaction list is not ok" + fruitTransactions);
-        }
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
             OperationCalculator countStrategy = operationStrategy.getCountStrategy(operation);

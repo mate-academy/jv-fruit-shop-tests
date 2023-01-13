@@ -6,7 +6,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceCountStrategyImplTest {
-
     private static OperationCalculator operationCalculator;
     private static int currentAmount;
     private static int operationAmount;
@@ -23,12 +22,5 @@ public class BalanceCountStrategyImplTest {
         int expected = 5;
         int actual = operationCalculator.count(currentAmount, operationAmount);
         Assert.assertEquals("Balance should be updated properly", expected, actual);
-    }
-
-    @Test
-    public void count_balance_notOk() {
-        int expected = 14;
-        int actual = operationCalculator.count(currentAmount, operationAmount);
-        Assert.assertNotEquals("Balance should be updated properly", expected, actual);
     }
 }

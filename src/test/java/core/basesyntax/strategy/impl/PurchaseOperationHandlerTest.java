@@ -35,6 +35,7 @@ public class PurchaseOperationHandlerTest {
         operationStrategy.getOperation(FruitTransaction.Operation.PURCHASE)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");
-        assertEquals(1, Integer.parseInt(String.valueOf(actual)));
+        Integer expected = 1;
+        assertEquals(expected, actual);
     }
 }

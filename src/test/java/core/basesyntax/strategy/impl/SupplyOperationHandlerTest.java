@@ -27,6 +27,7 @@ public class SupplyOperationHandlerTest {
         operationStrategy.getOperation(FruitTransaction.Operation.SUPPLY)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");
-        assertEquals(25, Integer.parseInt(String.valueOf(actual)));
+        Integer expected = 25;
+        assertEquals(expected, actual);
     }
 }

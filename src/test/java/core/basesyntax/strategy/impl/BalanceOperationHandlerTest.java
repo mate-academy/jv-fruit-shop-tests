@@ -26,6 +26,7 @@ public class BalanceOperationHandlerTest {
         operationStrategy.getOperation(FruitTransaction.Operation.BALANCE)
                 .operate(fruitTransaction);
         Integer actual = Storage.FRUITS_MAP.get("cherry");
-        assertEquals(15, Integer.parseInt(String.valueOf(actual)));
+        Integer expected = 15;
+        assertEquals(expected, actual);
     }
 }

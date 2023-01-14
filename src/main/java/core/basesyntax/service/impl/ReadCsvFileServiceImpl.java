@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.WrongPathException;
 import core.basesyntax.service.ReadCsvFileService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,12 +13,16 @@ public class ReadCsvFileServiceImpl implements ReadCsvFileService {
 
     @Override
     public List<String> readFromFile(String path) {
-        try {
-            return Files.readAllLines(Path.of(path)).stream()
-                    .skip(FILE_HEADER_LINE).collect(Collectors.toList());
-        } catch (IOException e) {
-            throw new RuntimeException(
-                    String.format("Can`t get data from file %s", path));
+        if (path != null) {
+            try {
+                return Files.readAllLines(Path.of(path)).stream()
+                        .skip(FILE_HEADER_LINE).collect(Collectors.toList());
+            } catch (IOException e) {
+                throw new WrongPathException(
+                        String.format("Can`t get data from file %s", path));
+            }
+        } else {
+            throw new WrongPathException("Can`t get data from null path");
         }
     }
 }

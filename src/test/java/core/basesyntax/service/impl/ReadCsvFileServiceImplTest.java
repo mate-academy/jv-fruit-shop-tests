@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exception.WrongPathException;
 import core.basesyntax.service.ReadCsvFileService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,20 +27,18 @@ public class ReadCsvFileServiceImplTest {
     @Test
     public void readFromFile_validFilePath_ok() {
         writeToTestFile();
-        List<String> expected = new ArrayList<>();
-        expected.add("b,banana,20");
-        expected.add("b,apple,100");
+        List<String> expected = new ArrayList<>(List.of("b,banana,20", "b,apple,100"));
         List<String> actual = readCsvFileService.readFromFile(VALID_FILE_PATH);
         assertEquals(String.format("Should return list -> %s%nbut was -> %s",
                 expected, actual), expected, actual);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test (expected = WrongPathException.class)
     public void readFromFile_invalidFilePath_notOk() {
         readCsvFileService.readFromFile(INVALID_FILE_PATH);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test (expected = WrongPathException.class)
     public void readFromFile_pathIsNull_notOk() {
         readCsvFileService.readFromFile(null);
     }

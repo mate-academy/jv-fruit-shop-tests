@@ -11,10 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
-    private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
-    private static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
-    private static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
@@ -23,43 +19,43 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getOperationHandler_balanceOperationTest() {
+    public void getOperationHandler_balanceOperationTest_ok() {
         Class<BalanceOperationHandler> expected = BalanceOperationHandler.class;
         Class<? extends OperationHandler> actual = operationStrategy
-                .getOperationHandler(BALANCE).getClass();
-        assertEquals(String.format("Should return -> %s%n"
-                                + "for operation -> %s%nbut was -> %s",
-                        expected, BALANCE.name(), actual), expected, actual);
+                .getOperationHandler(FruitTransaction.Operation.BALANCE).getClass();
+        assertEquals(String.format("Should return -> %s%nfor operation -> %s%nbut was -> %s",
+                        expected, FruitTransaction.Operation.BALANCE.name(), actual),
+                expected, actual);
     }
 
     @Test
-    public void getOperationHandler_supplyOperationTest() {
+    public void getOperationHandler_supplyOperationTest_ok() {
         Class<SupplyOperationHandler> expected = SupplyOperationHandler.class;
         Class<? extends OperationHandler> actual = operationStrategy
-                .getOperationHandler(SUPPLY).getClass();
-        assertEquals(String.format("Should return -> %s%n"
-                                + "for operation -> %s%nbut was -> %s",
-                        expected, SUPPLY.name(), actual), expected, actual);
+                .getOperationHandler(FruitTransaction.Operation.SUPPLY).getClass();
+        assertEquals(String.format("Should return -> %s%nfor operation -> %s%nbut was -> %s",
+                        expected, FruitTransaction.Operation.SUPPLY.name(), actual),
+                expected, actual);
     }
 
     @Test
-    public void getOperationHandler_returnOperationTest() {
+    public void getOperationHandler_returnOperationTest_ok() {
         Class<ReturnOperationHandler> expected = ReturnOperationHandler.class;
         Class<? extends OperationHandler> actual = operationStrategy
-                .getOperationHandler(RETURN).getClass();
-        assertEquals(String.format("Should return -> %s%n"
-                                + "for operation -> %s%nbut was -> %s",
-                        expected, RETURN.name(), actual), expected, actual);
+                .getOperationHandler(FruitTransaction.Operation.RETURN).getClass();
+        assertEquals(String.format("Should return -> %s%nfor operation -> %s%nbut was -> %s",
+                        expected, FruitTransaction.Operation.RETURN.name(), actual),
+                expected, actual);
     }
 
     @Test
-    public void getOperationHandler_purchaseOperationTest() {
+    public void getOperationHandler_purchaseOperationTest_ok() {
         Class<PurchaseOperationHandler> expected = PurchaseOperationHandler.class;
         Class<? extends OperationHandler> actual = operationStrategy
-                .getOperationHandler(PURCHASE).getClass();
-        assertEquals(String.format("Should return -> %s%n"
-                                + "for operation -> %s%nbut was -> %s",
-                        expected, PURCHASE.name(), actual), expected, actual);
+                .getOperationHandler(FruitTransaction.Operation.PURCHASE).getClass();
+        assertEquals(String.format("Should return -> %s%nfor operation -> %s%nbut was -> %s",
+                        expected, FruitTransaction.Operation.PURCHASE.name(), actual),
+                expected, actual);
     }
 
     @After

@@ -11,7 +11,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
     private static final Integer VALID_VALUE = 20;
     private static OperationHandler operationHandler;
 
@@ -28,7 +27,8 @@ public class ReturnOperationHandlerTest {
     @Test
     public void apply_addCorrectValueToStorage_ok() {
         Integer expected = 120;
-        operationHandler.apply(new FruitTransaction(RETURN, "banana", VALID_VALUE));
+        operationHandler.apply(
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", VALID_VALUE));
         Integer actual = FruitStorage.fruits.get("banana");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
                 expected, "banana", actual), expected, actual);
@@ -36,7 +36,8 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void apply_addDataWithNullKey_ok() {
-        operationHandler.apply(new FruitTransaction(RETURN, null, VALID_VALUE));
+        operationHandler.apply(
+                new FruitTransaction(FruitTransaction.Operation.RETURN, null, VALID_VALUE));
         Integer actual = FruitStorage.fruits.get(null);
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
                 VALID_VALUE, "banana", actual), VALID_VALUE, actual);
@@ -44,7 +45,8 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void apply_addDataWithEmptyKey_ok() {
-        operationHandler.apply(new FruitTransaction(RETURN, "", VALID_VALUE));
+        operationHandler.apply(
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "", VALID_VALUE));
         Integer actual = FruitStorage.fruits.get("");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
                 VALID_VALUE, "banana", actual), VALID_VALUE, actual);

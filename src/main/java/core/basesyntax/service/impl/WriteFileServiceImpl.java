@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.WrongPathException;
 import core.basesyntax.service.WriteFileService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,6 +9,9 @@ import java.nio.file.Path;
 public class WriteFileServiceImpl implements WriteFileService {
     @Override
     public void writeToFile(String path, String data) {
+        if (path == null) {
+            throw new WrongPathException("Can`t write data to file with null path");
+        }
         Path pathToFile = Path.of(path);
         if (Files.exists(pathToFile)) {
             try {
@@ -17,7 +21,7 @@ public class WriteFileServiceImpl implements WriteFileService {
                         String.format("Can`t write data: %s ,to file %s", data, path));
             }
         } else {
-            throw new RuntimeException("Can`t write data to this file -> " + path);
+            throw new WrongPathException("Can`t write data to this file -> " + path);
         }
     }
 }

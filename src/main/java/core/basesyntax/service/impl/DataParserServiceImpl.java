@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.WrongOperationLetterException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
 import java.util.ArrayList;
@@ -34,6 +35,6 @@ public class DataParserServiceImpl implements DataParserService {
                 return value;
             }
         }
-        throw new RuntimeException("Can`t add data with incorrect operation letter");
+        throw new WrongOperationLetterException("Can`t add data with incorrect operation letter");
     }
 }

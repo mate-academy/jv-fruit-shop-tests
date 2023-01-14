@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.FruitStorage;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,8 +27,8 @@ public class ReportGeneratorImplTest {
                 EXPECTED_REPORT, actual), EXPECTED_REPORT, actual);
     }
 
-    @Before
-    public void setUp() {
+    @After
+    public void tearDown() {
         FruitStorage.fruits.clear();
     }
 }

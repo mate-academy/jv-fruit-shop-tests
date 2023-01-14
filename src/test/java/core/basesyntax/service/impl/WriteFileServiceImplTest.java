@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.exception.WrongPathException;
 import core.basesyntax.service.WriteFileService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,17 +24,23 @@ public class WriteFileServiceImplTest {
     @Test
     public void writeToFile_writeWithValidPath_ok() {
         writeFileService.writeToFile(VALID_FILE_PATH, DATA_FOR_TEST_FILE);
-        String actual = readFromTestFile();
+        String actual;
+        try {
+            actual = Files.readString(Path.of(VALID_FILE_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException(
+                    String.format("Can`t get data from file %s", VALID_FILE_PATH));
+        }
         assertEquals(String.format("Should write \"%s\" to file, but was -> %s",
                 DATA_FOR_TEST_FILE, actual), DATA_FOR_TEST_FILE, actual);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test (expected = WrongPathException.class)
     public void writeToFile_writeWithInvalidPath_notOk() {
         writeFileService.writeToFile(INVALID_FILE_PATH, DATA_FOR_TEST_FILE);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test (expected = WrongPathException.class)
     public void writeToFile_pathIsNull_notOk() {
         writeFileService.writeToFile(null, DATA_FOR_TEST_FILE);
     }
@@ -41,15 +48,5 @@ public class WriteFileServiceImplTest {
     @Test (expected = RuntimeException.class)
     public void writeToFile_writeDataIsNull_notOk() {
         writeFileService.writeToFile(VALID_FILE_PATH, null);
-    }
-
-    private String readFromTestFile() {
-        try {
-            return Files.readString(Path.of(WriteFileServiceImplTest.VALID_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException(
-                    String.format("Can`t get data from file %s",
-                            WriteFileServiceImplTest.VALID_FILE_PATH));
-        }
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitShopException;
+import core.basesyntax.service.DataProcessorService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -13,7 +14,7 @@ import org.junit.Test;
 
 public class DataProcessorServiceImplTest {
     private static List<String[]> list;
-    private DataProcessorServiceImpl dataProcessorService = new DataProcessorServiceImpl();
+    private DataProcessorService dataProcessorService = new DataProcessorServiceImpl();
 
     @BeforeClass
     public static void beforeClass() {

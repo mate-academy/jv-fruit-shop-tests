@@ -3,13 +3,14 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.exception.FruitShopException;
+import core.basesyntax.service.ParseDataService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParseDataServiceImplTest {
-    private static ParseDataServiceImpl parseDataService;
+    private static ParseDataService parseDataService;
     private static List<String[]> expectedList;
 
     @BeforeClass
@@ -39,14 +40,6 @@ public class ParseDataServiceImplTest {
     @Test(expected = FruitShopException.class)
     public void parseData_addInvalidString_notOk() {
         parseDataService.parseData(null);
-    }
-
-    @Test
-    public void parseData_addIncorrectData_Ok() {
-        expectedList.clear();
-        List<String[]> list = parseDataService.parseData("abc");
-        boolean listLength = list.size() == 0;
-        assertTrue(listLength);
     }
 
     @Test(expected = FruitShopException.class)

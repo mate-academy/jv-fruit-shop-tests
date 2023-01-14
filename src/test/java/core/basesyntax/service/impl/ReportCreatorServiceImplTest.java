@@ -3,11 +3,12 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportCreatorService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorServiceImplTest {
-    private static ReportCreatorServiceImpl reportCreatorService;
+    private static ReportCreatorService reportCreatorService;
     private static String expected1;
     private static String expected2;
 

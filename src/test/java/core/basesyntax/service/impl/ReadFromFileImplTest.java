@@ -1,8 +1,9 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.exception.FruitShopException;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReadFromFileImplTest {
-    private static final ReadFromFileImpl readFromFile = new ReadFromFileImpl();
+    private static final FileReaderService readFromFile = new ReadFromFileImpl();
     private static final String path = "src/test/resources/Hello.csv";
     private static final String expectedString = "Hello, mate!";
 
@@ -31,8 +32,7 @@ public class ReadFromFileImplTest {
         } catch (IOException e) {
             throw new FruitShopException("Enter correct file path");
         }
-        boolean isContentEqual = actualString.equals(expectedString);
-        assertTrue(isContentEqual);
+        assertEquals(expectedString, actualString);
     }
 
     @Test(expected = FruitShopException.class)

@@ -38,4 +38,11 @@ public class FileWriteServiceImplTest {
                 + "b,apple,40" + System.lineSeparator() + "b,banana,10";
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void writeFileService_nullPath_notOk() {
+        String data = fileReadService.readFromFile(INPUT_PATH);
+        expectedEx.expect(NullPointerException.class);
+        fileWriteService.writeToFile(null, data);
+    }
 }

@@ -5,8 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,10 +16,6 @@ public class SupplyOperationHandlerTest {
     @BeforeClass
     public static void beforeClass() {
         operationHandler = new SupplyOperationHandler();
-    }
-
-    @Before
-    public void setUp() {
         FruitStorage.fruits.put("banana", 100);
     }
 
@@ -52,8 +47,8 @@ public class SupplyOperationHandlerTest {
                 VALID_VALUE, "banana", actual), VALID_VALUE, actual);
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void setUp() {
         FruitStorage.fruits.clear();
     }
 }

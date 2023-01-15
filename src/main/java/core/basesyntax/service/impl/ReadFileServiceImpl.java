@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidPathException;
 import core.basesyntax.service.ReadFileService;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class ReadFileServiceImpl implements ReadFileService {
         try {
             return Files.readString(path);
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + path, e);
+            throw new InvalidPathException("Can't find file by path: " + path);
         }
     }
 }

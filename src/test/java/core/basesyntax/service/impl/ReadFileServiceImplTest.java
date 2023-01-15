@@ -10,7 +10,8 @@ import java.nio.file.Path;
 
 public class ReadFileServiceImplTest {
     private static final String VALID_CSV_TEST_PATH = "src/test/resources/test_data.csv";
-    ReadFileService readFileService = new ReadFileServiceImpl();
+    private static final String INVALID_CSV_PATH = "bad path";
+    private final ReadFileService readFileService = new ReadFileServiceImpl();
 
     @Test
     public void readFromFile_validPath_ok() {
@@ -21,7 +22,7 @@ public class ReadFileServiceImplTest {
 
     @Test(expected = InvalidPathException.class)
     public void readFromFile_invalidPath_notOk() {
-        readFileService.readFromFile(Path.of("bad path"));
+        readFileService.readFromFile(Path.of(INVALID_CSV_PATH));
     }
 
 }

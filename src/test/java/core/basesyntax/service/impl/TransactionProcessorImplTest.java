@@ -1,7 +1,11 @@
 package core.basesyntax.service.impl;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TransactionProcessorImplTest extends TestCase {
+public class TransactionProcessorImplTest {
+    @Test
+    public void transactionProcessor_ok() {
+
+    }
 
 }

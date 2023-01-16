@@ -11,11 +11,18 @@ public class FruitTransactionParseService implements ParseService<FruitTransacti
 
     @Override
     public FruitTransaction parse(String line) {
+        if (!line.contains(DELIMITER)) {
+            throw new RuntimeException("Couldn't find delimiter to parse data.");
+        }
         String[] data = line.split(DELIMITER);
+        int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity can't be negative. Quantity: " + quantity);
+        }
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(data[OPERATION_INDEX]);
         fruitTransaction.setFruit(data[FRUIT_INDEX]);
-        fruitTransaction.setQuantity(Integer.parseInt(data[QUANTITY_INDEX]));
+        fruitTransaction.setQuantity(quantity);
         return fruitTransaction;
     }
 }

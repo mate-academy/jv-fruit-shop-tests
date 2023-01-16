@@ -32,7 +32,8 @@ public class FileReadServiceImplTest {
 
     @Test
     public void fileReadService_ok() {
-        String actual = fileReadService.readFromFile("src/test/resources/file_read_service_test.csv");
+        String actual = fileReadService.readFromFile(
+                "src/test/resources/file_read_service_test.csv");
         String expected = "type,fruit,quantity" + System.lineSeparator()
                 + "b,apple,40" + System.lineSeparator() + "b,banana,10";
         Assert.assertEquals(expected, actual);

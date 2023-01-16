@@ -3,8 +3,8 @@ package core.basesyntax.service.amount;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,8 +34,8 @@ public class PurchaseHandlerTest {
         purchaseHandler = new PurchaseHandler();
     }
 
-    @After
-    public void tearDown() {
+    @Before
+    public void setUp() {
         Storage.fruits.clear();
     }
 
@@ -57,12 +57,10 @@ public class PurchaseHandlerTest {
 
     @Test
     public void process_purchaseMoreThanBalance_notOk() {
+        balanceHandler.process(bananaTransactionBalance);
         FruitTransaction bananaInvalidPurchase = new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(Operation.PURCHASE)
-                .setFruitType("banana")
-                .setAmount(15)
-                .build();
-        balanceHandler.process(bananaTransactionBalance);
+                .setFruitType("banana").setAmount(15).build();
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("You can`t cell more fruits than you have");
         purchaseHandler.process(bananaInvalidPurchase);

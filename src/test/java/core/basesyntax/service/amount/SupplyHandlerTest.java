@@ -3,8 +3,8 @@ package core.basesyntax.service.amount;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class SupplyHandlerTest {
     private static OperationHandler balanceHandler;
     private static OperationHandler supplyHandler;
     @Rule
-    public ExpectedException expectedEx = ExpectedException.none();;
+    public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
     public static void beforeClass() {
@@ -34,8 +34,8 @@ public class SupplyHandlerTest {
         balanceHandler = new BalanceHandler();
     }
 
-    @After
-    public void tearDown() {
+    @Before
+    public void setUp() {
         Storage.fruits.clear();
     }
 

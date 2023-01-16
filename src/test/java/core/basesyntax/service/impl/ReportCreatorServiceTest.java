@@ -15,12 +15,19 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_ok() {
+    public void createReport_fullStorage_ok() {
         FruitStorage.storageFruits.put("banana", 152);
         FruitStorage.storageFruits.put("apple", 90);
         String expected = reportCreatorService.createReport();
         String actual = "fruit,quantity" + System.lineSeparator() + "banana,152"
                 + System.lineSeparator() + "apple,90" + System.lineSeparator();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void createReport_emptyStorage_ok() {
+        String expected = reportCreatorService.createReport();
+        String actual = "fruit,quantity" + System.lineSeparator();
         Assert.assertEquals(expected, actual);
     }
 }

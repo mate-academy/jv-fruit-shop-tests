@@ -6,7 +6,6 @@ import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataTransactionService;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
@@ -18,12 +17,10 @@ import org.junit.Test;
 public class DataTransactionServiceTest {
     private static DataTransactionService dataTransactionService;
     private static FruitDao fruitDao;
-    private static final List<FruitTransaction> fruitTransactions = new ArrayList<>();
+    private List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
-    @BeforeClass
-    public static void beforeClass() {
-        dataTransactionService = new DataTransactionServiceImpl();
-        fruitDao = new FruitDaoImpl();
+    @Before
+    public void setUp() throws Exception {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -42,23 +39,50 @@ public class DataTransactionServiceTest {
                 "banana", 50));
     }
 
-    @Before
-    public void setUp() {
-
+    @BeforeClass
+    public static void beforeClass() {
+        dataTransactionService = new DataTransactionServiceImpl();
+        fruitDao = new FruitDaoImpl();
     }
 
     @Test
-    public void parseData_ok() {
+    public void parseData_validData_ok() {
         dataTransactionService.parseData(fruitTransactions);
         Map<String, Integer> actual = fruitDao.getAll();
-        Map<String, Integer> expected = new HashMap<>();
-        expected.put("banana", 152);
-        expected.put("apple", 90);
+        Map<String, Integer> expected = Map.of("banana", 152,"apple", 90);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseData_emptyList_ok() {
+        fruitTransactions.clear();
+        dataTransactionService.parseData(fruitTransactions);
+    }
+
+    @Test
+    public void parseData_emptyFruit_notOk() {
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                null, 23));
+        dataTransactionService.parseData(fruitTransactions);
+    }
+
+    @Test
+    public void parseData_negativeQuantity_notOk() {
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", -15));
+        dataTransactionService.parseData(fruitTransactions);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void parseData_emptyOperation_ok() {
+        fruitTransactions.add(new FruitTransaction(null,
+                "banana", 23));
+        dataTransactionService.parseData(fruitTransactions);
     }
 
     @After
     public void tearDown() {
         FruitStorage.storageFruits.clear();
+        fruitTransactions.clear();
     }
 }

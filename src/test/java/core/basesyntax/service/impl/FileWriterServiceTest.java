@@ -29,4 +29,24 @@ public class FileWriterServiceTest {
             throw new RuntimeException("Can't read file", e);
         }
     }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullPath_NotOk() {
+        try {
+            fileWriterService.writeToFile(REPORT, null);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Can't write file - path to file is null", e);
+        }
+    }
+
+    @Test
+    public void writeToFile_emptyData_ok() {
+        fileWriterService.writeToFile("", PATH_TO_FILE);
+        try {
+            String actual = Files.readString(Path.of(PATH_TO_FILE));
+            Assert.assertEquals("", actual);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file", e);
+        }
+    }
 }

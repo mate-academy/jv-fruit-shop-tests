@@ -24,14 +24,14 @@ public class FileReaderServiceTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_pathToFileIsNotValid_notOk() {
         try {
             fileReaderService.readFromFile("src/test/resources/transaction");
         } catch (RuntimeException e) {
-            return;
+            throw new RuntimeException("RuntimeException should be thrown - "
+                    + "path to File is not valid", e);
         }
-        Assert.fail("RuntimeException should be thrown - path to File is not valid");
     }
 
     @Test
@@ -39,5 +39,11 @@ public class FileReaderServiceTest {
         List<String> empty =
                 fileReaderService.readFromFile("src/test/resources/empty.csv");
         Assert.assertTrue(empty.isEmpty());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void readFromFile_nullFile_ok() {
+        List<String> empty =
+                fileReaderService.readFromFile(null);
     }
 }

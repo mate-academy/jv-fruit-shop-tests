@@ -16,7 +16,6 @@ import org.junit.Test;
 
 public class DataTransactionServiceTest {
     private static DataTransactionService dataTransactionService;
-    private static FruitDao fruitDao;
     private List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
     @Before
@@ -42,12 +41,13 @@ public class DataTransactionServiceTest {
     @BeforeClass
     public static void beforeClass() {
         dataTransactionService = new DataTransactionServiceImpl();
-        fruitDao = new FruitDaoImpl();
+
     }
 
     @Test
     public void parseData_validData_ok() {
         dataTransactionService.parseData(fruitTransactions);
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<String, Integer> actual = fruitDao.getAll();
         Map<String, Integer> expected = Map.of("banana", 152,"apple", 90);
         Assert.assertEquals(expected, actual);

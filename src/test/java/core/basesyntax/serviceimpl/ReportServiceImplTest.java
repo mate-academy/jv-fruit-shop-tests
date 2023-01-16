@@ -10,17 +10,19 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
+    private static Fruit banana;
+    private static Fruit apple;
 
     @BeforeClass
     public static void beforeClass() {
         Storage.storage.clear();
         reportService = new ReportServiceImpl();
+        apple = new Fruit("apple");
+        banana = new Fruit("banana");
     }
 
     @Test
-    public void report_validData_ok() {
-        Fruit banana = new Fruit("banana");
-        Fruit apple = new Fruit("apple");
+    public void report_validData_Ok() {
         Storage.storage.put(apple, 33);
         Storage.storage.put(banana, 22);
         String expected = "fruit,quantity" + System.lineSeparator()

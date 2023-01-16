@@ -17,8 +17,8 @@ public class ReturnOperationHandlerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        operationHandler = new ReturnOperationHandler();
         Storage.storage.clear();
+        operationHandler = new ReturnOperationHandler();
         apple = new Fruit("apple");
         Storage.storage.put(apple, 100);
     }

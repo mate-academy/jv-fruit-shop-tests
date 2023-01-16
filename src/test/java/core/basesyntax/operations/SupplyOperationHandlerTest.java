@@ -36,9 +36,7 @@ public class SupplyOperationHandlerTest {
     @Test
     public void apply_supplyOperationHandlerNewFruit_Ok() {
         Storage.storage.put(banana, 100);
-        Transaction newFruitTransaction = new Transaction(Operation.SUPPLY,
-                banana, 10);
-        operationHandler.apply(newFruitTransaction);
+        operationHandler.apply(new Transaction(Operation.SUPPLY, banana, 10));
         Map<Fruit,Integer> expected = new HashMap<>();
         expected.put(apple, 105);
         expected.put(banana, 110);

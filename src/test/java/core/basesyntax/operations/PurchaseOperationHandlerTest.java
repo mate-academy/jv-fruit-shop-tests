@@ -8,6 +8,7 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 
 public class PurchaseOperationHandlerTest {
@@ -31,5 +32,10 @@ public class PurchaseOperationHandlerTest {
         expected.put(apple, 80);
         expected.put(banana, 80);
         assertEquals(expected, Storage.storage);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.storage.clear();
     }
 }

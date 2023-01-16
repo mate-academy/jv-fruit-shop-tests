@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static OperationHandler operationHandler;
+    private static BalanceOperationHandler operationHandler;
     private static Fruit apple;
     private static Fruit banana;
 

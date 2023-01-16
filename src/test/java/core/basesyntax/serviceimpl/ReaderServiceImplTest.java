@@ -2,7 +2,6 @@ package core.basesyntax.serviceimpl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.ReaderService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static String filePath;
-    private static ReaderService readerService;
+    private static ReaderServiceImpl readerService;
 
     private final List<String> defaultDataFromFile = List.of("b,banana,20",
             "b,apple,100",

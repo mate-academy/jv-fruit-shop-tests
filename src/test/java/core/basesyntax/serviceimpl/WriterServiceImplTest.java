@@ -1,6 +1,5 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +10,7 @@ import org.junit.Test;
 public class WriterServiceImplTest {
     private static String filePathEmpty;
     private static String filePathWrongContent;
-    private static WriterService writerService;
+    private static WriterServiceImpl writerService;
 
     @BeforeClass
     public static void beforeClass() {

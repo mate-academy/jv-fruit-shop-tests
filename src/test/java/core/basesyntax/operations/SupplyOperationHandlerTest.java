@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static OperationHandler operationHandler;
+    private static SupplyOperationHandler operationHandler;
     private static Fruit apple;
     private static Fruit banana;
 

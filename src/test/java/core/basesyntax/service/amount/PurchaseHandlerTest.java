@@ -11,31 +11,27 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class PurchaseHandlerTest {
-    private static FruitTransaction bananaTransactionBalance;
     private static FruitTransaction bananaTransactionPurchase;
-    private static FruitTransaction bananaInvalidPurchase;
+    private static FruitTransaction bananaTransactionBalance;
+    private static OperationHandler balanceHandler;
+    private static OperationHandler purchaseHandler;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
-    private final OperationHandler balanceHandler = new BalanceHandler();
-    private final OperationHandler purchaseHandler = new PurchaseHandler();
 
     @BeforeClass
     public static void beforeClass() {
-        bananaTransactionBalance = new FruitTransaction.FruitTransactionBuilder()
-                .setOperation(Operation.BALANCE)
-                .setFruitType("banana")
-                .setAmount(10)
-                .build();
         bananaTransactionPurchase = new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(Operation.PURCHASE)
                 .setFruitType("banana")
                 .setAmount(3)
                 .build();
-        bananaInvalidPurchase = new FruitTransaction.FruitTransactionBuilder()
-                .setOperation(Operation.PURCHASE)
+        bananaTransactionBalance = new FruitTransaction.FruitTransactionBuilder()
+                .setOperation(Operation.BALANCE)
                 .setFruitType("banana")
-                .setAmount(15)
+                .setAmount(10)
                 .build();
+        balanceHandler = new BalanceHandler();
+        purchaseHandler = new PurchaseHandler();
     }
 
     @After
@@ -53,7 +49,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void process_notOK() {
+    public void process_purchaseFromEmptyStorage_notOK() {
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("You can`t cell more fruits than you have");
         purchaseHandler.process(bananaTransactionPurchase);
@@ -61,6 +57,11 @@ public class PurchaseHandlerTest {
 
     @Test
     public void process_purchaseMoreThanBalance_notOk() {
+        FruitTransaction bananaInvalidPurchase = new FruitTransaction.FruitTransactionBuilder()
+                .setOperation(Operation.PURCHASE)
+                .setFruitType("banana")
+                .setAmount(15)
+                .build();
         balanceHandler.process(bananaTransactionBalance);
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("You can`t cell more fruits than you have");

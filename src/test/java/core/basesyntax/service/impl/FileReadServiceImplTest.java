@@ -6,21 +6,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class FileReadServiceImplTest {
-    private static final String INPUT_PATH = "src/test/resources/file_read_service_test.csv";
-    private static final String OUTPUT_PATH = "src/test/resources/file_writer_service_test.csv";
+    private static FileReadService fileReadService;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
-    private final FileReadService fileReadService = new FileReadServiceImpl();
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReadService = new FileReadServiceImpl();
+    }
 
     @After
     public void tearDown() {
         try {
-            Files.deleteIfExists(Path.of(OUTPUT_PATH));
+            Files.deleteIfExists(Path.of("src/test/resources/file_writer_service_test.csv"));
         } catch (IOException e) {
             throw new RuntimeException("Can`t correctly clear result file after test ", e);
         }
@@ -28,14 +32,14 @@ public class FileReadServiceImplTest {
 
     @Test
     public void fileReadService_ok() {
-        String actual = fileReadService.readFromFile(INPUT_PATH);
+        String actual = fileReadService.readFromFile("src/test/resources/file_read_service_test.csv");
         String expected = "type,fruit,quantity" + System.lineSeparator()
                 + "b,apple,40" + System.lineSeparator() + "b,banana,10";
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void fileReadService_notOk() {
+    public void fileReadService_invalidFilePath_notOk() {
         String invalidPath = "invalid path";
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Can`t read file " + invalidPath);

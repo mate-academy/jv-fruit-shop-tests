@@ -23,7 +23,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void strategyTest() {
+    public void getOperationHandler_ok() {
         OperationStrategy strategy = new OperationStrategyImpl();
         for (Map.Entry<Operation, Class> entry: operationHandlerMap.entrySet()) {
             OperationHandler actual = strategy.getOperationHandler(entry.getKey());
@@ -31,5 +31,4 @@ public class OperationStrategyImplTest {
             Assert.assertEquals(expected, actual.getClass());
         }
     }
-
 }

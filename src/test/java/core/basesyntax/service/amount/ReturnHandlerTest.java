@@ -13,10 +13,10 @@ import org.junit.rules.ExpectedException;
 public class ReturnHandlerTest {
     private static FruitTransaction bananaTransactionBalance;
     private static FruitTransaction bananaTransactionReturn;
+    private static OperationHandler balanceHandler;
+    private static OperationHandler returnHandler;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
-    private final OperationHandler balanceHandler = new BalanceHandler();
-    private final OperationHandler returnHandler = new ReturnHandler();
 
     @BeforeClass
     public static void beforeClass() {
@@ -30,6 +30,8 @@ public class ReturnHandlerTest {
                 .setFruitType("banana")
                 .setAmount(8)
                 .build();
+        returnHandler = new ReturnHandler();
+        balanceHandler = new BalanceHandler();
     }
 
     @After

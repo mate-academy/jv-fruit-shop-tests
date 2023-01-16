@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -14,10 +15,16 @@ import org.junit.rules.ExpectedException;
 public class FileWriteServiceImplTest {
     private static final String INPUT_PATH = "src/test/resources/file_read_service_test.csv";
     private static final String OUTPUT_PATH = "src/test/resources/file_writer_service_test.csv";
+    private static FileReadService fileReadService;
+    private static FileWriteService fileWriteService;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
-    private final FileReadService fileReadService = new FileReadServiceImpl();
-    private final FileWriteService fileWriteService = new FileWriteServiceImpl();
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileWriteService = new FileWriteServiceImpl();
+        fileReadService = new FileReadServiceImpl();
+    }
 
     @After
     public void tearDown() {

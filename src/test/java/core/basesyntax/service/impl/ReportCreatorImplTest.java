@@ -9,17 +9,26 @@ import core.basesyntax.service.StorageUpdateService;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReportCreatorImplTest {
+    private static ReportCreator reportCreator;
+    private static FileReadService fileReadService;
+    private static DataParserService dataParserService;
+    private static StorageUpdateService storageUpdateService;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
-    private final ReportCreator reportCreator = new ReportCreatorImpl();
-    private final FileReadService fileReadService = new FileReadServiceImpl();
-    private final DataParserService dataParserService = new DataParserServiceImpl();
-    private final StorageUpdateService storageUpdateService = new StorageUpdateServiceImpl();
+
+    @BeforeClass
+    public static void beforeClass() {
+        storageUpdateService = new StorageUpdateServiceImpl();
+        dataParserService = new DataParserServiceImpl();
+        fileReadService = new FileReadServiceImpl();
+        reportCreator = new ReportCreatorImpl();
+    }
 
     @After
     public void tearDown() {

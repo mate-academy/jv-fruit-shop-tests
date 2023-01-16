@@ -4,10 +4,16 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-    private final OperationHandler balanceHandler = new BalanceHandler();
+    private static OperationHandler balanceHandler;
+
+    @BeforeClass
+    public static void beforeClass() {
+        balanceHandler = new BalanceHandler();
+    }
 
     @Test
     public void process_ok() {

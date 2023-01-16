@@ -54,8 +54,9 @@ public class FruitDaoImplTest {
         fruitDao.saveFruit(APPLE, NEW_QUANTITY);
         int actual = FruitStorage.fruitStorage.size();
         assertEquals(1, actual);
-        assertTrue(FruitStorage.fruitStorage.containsKey(APPLE)
-                && FruitStorage.fruitStorage.containsValue(NEW_QUANTITY));
+        assertTrue(FruitStorage.fruitStorage.containsKey(APPLE));
+        int actualQuantity = FruitStorage.fruitStorage.get(APPLE);
+        assertEquals(NEW_QUANTITY, actualQuantity);
     }
 
     @Test

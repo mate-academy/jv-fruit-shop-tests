@@ -50,7 +50,8 @@ public class DataTransactionServiceTest {
         FruitDao fruitDao = new FruitDaoImpl();
         Map<String, Integer> actual = fruitDao.getAll();
         Map<String, Integer> expected = Map.of("banana", 152,"apple", 90);
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Expected " + expected + " for valid data, but was "
+                + actual, expected, actual);
     }
 
     @Test
@@ -60,14 +61,14 @@ public class DataTransactionServiceTest {
     }
 
     @Test
-    public void parseData_emptyFruit_notOk() {
+    public void parseData_emptyFruit_Ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 null, 23));
         dataTransactionService.parseData(fruitTransactions);
     }
 
     @Test
-    public void parseData_negativeQuantity_notOk() {
+    public void parseData_negativeQuantity_Ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", -15));
         dataTransactionService.parseData(fruitTransactions);

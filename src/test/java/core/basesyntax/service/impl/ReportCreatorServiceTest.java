@@ -21,13 +21,15 @@ public class ReportCreatorServiceTest {
         String expected = reportCreatorService.createReport();
         String actual = "fruit,quantity" + System.lineSeparator() + "banana,152"
                 + System.lineSeparator() + "apple,90" + System.lineSeparator();
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Expected report " + expected + ", but was "
+                + actual, expected, actual);
     }
 
     @Test
     public void createReport_emptyStorage_ok() {
         String expected = reportCreatorService.createReport();
         String actual = "fruit,quantity" + System.lineSeparator();
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Expected report " + expected + ", but was "
+                + actual, expected, actual);
     }
 }

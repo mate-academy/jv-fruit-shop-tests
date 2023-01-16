@@ -37,7 +37,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new BalanceHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue(fruitDao.getQuantityByName("banana") == 29);
+        Assert.assertTrue("Expected quantity 29 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"),
+                fruitDao.getQuantityByName("banana") == 29);
     }
 
     @Test
@@ -48,7 +50,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new PurchaseHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue(fruitDao.getQuantityByName("banana") == 71);
+        Assert.assertTrue("Expected quantity 71 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"),
+                fruitDao.getQuantityByName("banana") == 71);
     }
 
     @Test
@@ -59,7 +63,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new SupplyHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue(fruitDao.getQuantityByName("banana") == 129);
+        Assert.assertTrue("Expected quantity 129 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"),
+                fruitDao.getQuantityByName("banana") == 129);
     }
 
     @Test
@@ -70,7 +76,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new ReturnHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue(fruitDao.getQuantityByName("banana") == 129);
+        Assert.assertTrue("Expected quantity 129 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"),
+                fruitDao.getQuantityByName("banana") == 129);
     }
 
     @After

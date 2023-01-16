@@ -21,7 +21,8 @@ public class FileReaderServiceTest {
                 "p,apple,20", "p,banana,5", "s,banana,50");
         List<String> actual =
                 fileReaderService.readFromFile("src/test/resources/transaction.csv");
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("Expected " + expected + ", but was "
+                + actual, expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -38,7 +39,8 @@ public class FileReaderServiceTest {
     public void readFromFile_emptyFile_ok() {
         List<String> empty =
                 fileReaderService.readFromFile("src/test/resources/empty.csv");
-        Assert.assertTrue(empty.isEmpty());
+        Assert.assertTrue("Expected empty List<String> for empty file, but was "
+                + empty, empty.isEmpty());
     }
 
     @Test(expected = NullPointerException.class)

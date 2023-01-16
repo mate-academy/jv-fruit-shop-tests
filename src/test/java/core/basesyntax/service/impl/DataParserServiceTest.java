@@ -31,7 +31,8 @@ public class DataParserServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
         List<FruitTransaction> actual = dataParserService.toTransactions(dataFromFile);
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Expected " + expected + " for valid data, but was "
+                + actual, expected,actual);
     }
 
     @Test(expected = RuntimeException.class)

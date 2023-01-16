@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.InvalidPathException;
 import core.basesyntax.service.ReadFileService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

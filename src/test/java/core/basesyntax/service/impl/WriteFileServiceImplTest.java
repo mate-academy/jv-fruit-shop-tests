@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriteFileService;
 import static java.nio.file.Files.readString;
+
+import core.basesyntax.service.WriteFileService;
+import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Path;
 
 public class WriteFileServiceImplTest {
     private static final String VALID_FILE_PATH = "src/test/resources/write_test_data";
@@ -17,6 +17,7 @@ public class WriteFileServiceImplTest {
     public static void setUp() {
         writeFileService = new WriteFileServiceImpl();
     }
+
     @Test
     public void writeToFile_validData_ok() throws IOException {
         String expected = "This string must be in write_test_data file";
@@ -30,5 +31,4 @@ public class WriteFileServiceImplTest {
             throw new IOException("Invalid file path");
         }
     }
-
 }

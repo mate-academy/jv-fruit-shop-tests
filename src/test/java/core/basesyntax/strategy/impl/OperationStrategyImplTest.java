@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static  OperationStrategy operationStrategy;
+    private static OperationStrategy operationStrategy;
 
     @BeforeClass
     public static void setUp() {
@@ -23,31 +23,40 @@ public class OperationStrategyImplTest {
     public void getHandlerByOperation_balanceOperation_ok() {
         Class<BalanceOperationHandler> expected = BalanceOperationHandler.class;
         Class<? extends OperationHandler> actual =
-                operationStrategy.getHandlerByOperation(FruitTransaction.Operation.BALANCE).getClass();
+                operationStrategy
+                        .getHandlerByOperation(FruitTransaction.Operation.BALANCE)
+                        .getClass();
         Assert.assertEquals("Operations must be the same", expected, actual);
     }
 
     @Test
     public void getHandlerByOperation_purchaseOperation_ok() {
-        Class<PurchaseOperationHandler> expected = PurchaseOperationHandler.class;
+        Class<PurchaseOperationHandler> expected
+                = PurchaseOperationHandler.class;
         Class<? extends OperationHandler> actual =
-                operationStrategy.getHandlerByOperation(FruitTransaction.Operation.PURCHASE).getClass();
+                operationStrategy
+                        .getHandlerByOperation(FruitTransaction.Operation.PURCHASE)
+                        .getClass();
         Assert.assertEquals("Operations must be the same", expected, actual);
     }
 
     @Test
-    public void getHandlerByOperation_returnOperation_ok() {
+    public void getHandlerByOperation_returnOp_ok() {
         Class<ReturnOperationHandler> expected = ReturnOperationHandler.class;
         Class<? extends OperationHandler> actual =
-                operationStrategy.getHandlerByOperation(FruitTransaction.Operation.RETURN).getClass();
+                operationStrategy
+                        .getHandlerByOperation(FruitTransaction.Operation.RETURN)
+                        .getClass();
         Assert.assertEquals("Operations must be the same", expected, actual);
     }
 
     @Test
-    public void getHandlerByOperation_supplyOperation_ok() {
+    public void getHandlerByOperation_supplyOp_ok() {
         Class<SupplyOperationHandler> expected = SupplyOperationHandler.class;
         Class<? extends OperationHandler> actual =
-                operationStrategy.getHandlerByOperation(FruitTransaction.Operation.SUPPLY).getClass();
+                operationStrategy
+                        .getHandlerByOperation(FruitTransaction.Operation.SUPPLY)
+                        .getClass();
         Assert.assertEquals("Operations must be the same", expected, actual);
     }
 }

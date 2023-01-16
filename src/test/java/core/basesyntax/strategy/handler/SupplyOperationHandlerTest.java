@@ -13,6 +13,7 @@ public class SupplyOperationHandlerTest {
         fruitTransaction = new FruitTransaction();
         supplyOperationHandler = new SupplyOperationHandler();
     }
+
     @Test
     public void apply_correctSupply_ok() {
         FruitDao.put("Avocado", 20);
@@ -21,8 +22,10 @@ public class SupplyOperationHandlerTest {
         fruitTransaction.setQuantity(10);
         supplyOperationHandler.apply(fruitTransaction);
         int expected = 30;
-        int actual = FruitDao.getQuantity("Avocado");
-        Assert.assertEquals("There are " + expected + " avocado must be in storage", expected, actual);
+        int actual = FruitDao
+                .getQuantity("Avocado");
+        Assert.assertEquals("There are "
+                + expected
+                + " avocado must be in storage", expected, actual);
     }
-
 }

@@ -16,6 +16,7 @@ public class BalanceOperationHandlerTest {
         fruitTransaction = new FruitTransaction();
         balanceOperationHandler = new BalanceOperationHandler();
     }
+
     @Test
     public void apply_correctBalance_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
@@ -31,5 +32,4 @@ public class BalanceOperationHandlerTest {
     public void tearDown() {
         FruitDao.storage.clear();
     }
-
 }

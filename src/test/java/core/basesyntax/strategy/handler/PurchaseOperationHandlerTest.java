@@ -16,6 +16,7 @@ public class PurchaseOperationHandlerTest {
         fruitTransaction = new FruitTransaction();
         purchaseOperationHandler = new PurchaseOperationHandler();
     }
+
     @Test
     public void apply_correctPurchase_ok() {
         FruitDao.storage.put("mango", 25);
@@ -24,8 +25,11 @@ public class PurchaseOperationHandlerTest {
         fruitTransaction.setQuantity(10);
         purchaseOperationHandler.apply(fruitTransaction);
         int expected = 15;
-        int actual = FruitDao.getQuantity("mango");
-        Assert.assertEquals("There are " + expected + " mango must be in storage ", expected, actual);
+        int actual = FruitDao
+                .getQuantity("mango");
+        Assert.assertEquals("There are "
+                + expected
+                + " mango must be in storage ", expected, actual);
     }
 
     @After

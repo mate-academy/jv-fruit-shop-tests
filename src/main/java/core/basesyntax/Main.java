@@ -11,7 +11,6 @@ import core.basesyntax.service.impl.ReadFileServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.service.impl.WriteFileServiceImpl;
-
 import java.nio.file.Path;
 import java.util.List;
 

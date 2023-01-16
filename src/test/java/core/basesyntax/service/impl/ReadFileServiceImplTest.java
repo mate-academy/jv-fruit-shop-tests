@@ -2,13 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.InvalidPathException;
 import core.basesyntax.service.ReadFileService;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReadFileServiceImplTest {
     private static final String VALID_CSV_TEST_PATH = "src/test/resources/read_test_data.csv";
@@ -41,5 +40,4 @@ public class ReadFileServiceImplTest {
     public void readFromFile_nullFilePath_notOk() {
         readFileService.readFromFile(Path.of(null));
     }
-
 }

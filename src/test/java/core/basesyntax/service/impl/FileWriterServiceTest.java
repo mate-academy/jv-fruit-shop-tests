@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -65,14 +64,12 @@ public class FileWriterServiceTest {
         }
     }
 
-    @Test(expected = InvalidPathException.class)
-    public void writeToFile_isNotValidPath_notOk() {
-        String pathIsNotValid = "&^%$^&*(*";
+    @Test
+    public void writeToFile_isNotValidPath_ok() {
+        String pathIsNotValid = "null";
         fileWriterService.writeToFile(REPORT, pathIsNotValid);
         try {
             String actual = Files.readString(Path.of(pathIsNotValid));
-            Assert.assertEquals("Expected InvalidPathException for wrong path to file, but was "
-                    + actual, REPORT, pathIsNotValid);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }

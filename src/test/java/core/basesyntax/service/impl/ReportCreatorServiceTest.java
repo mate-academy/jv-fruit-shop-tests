@@ -15,7 +15,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_ok() {
         FruitStorage.storageFruits.put("banana", 152);
         FruitStorage.storageFruits.put("apple", 90);
         String expected = reportCreatorService.createReport();

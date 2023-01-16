@@ -20,7 +20,7 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void recordReportInFile_Ok() {
+    public void writeToFile_ok() {
         fileWriterService.writeToFile(REPORT, PATH_TO_FILE);
         try {
             String actual = Files.readString(Path.of(PATH_TO_FILE));

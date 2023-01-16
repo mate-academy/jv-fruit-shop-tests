@@ -20,7 +20,7 @@ public class DataParserServiceTest {
     }
 
     @Test
-    public void parserDataFromFile_Ok() {
+    public void toTransaction_dataFromFile_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
@@ -35,7 +35,7 @@ public class DataParserServiceTest {
     }
 
     @Test
-    public void parserDataFromFile_IsNotValidOperation_NotOk() {
+    public void toTransaction_isNotValidOperation_notOk() {
         List<String> incorrectOperation = List.of("type,fruit,quantity", "a,banana,20");
         try {
             dataParserService.toTransactions(incorrectOperation);
@@ -46,7 +46,7 @@ public class DataParserServiceTest {
     }
 
     @Test
-    public void parserDataFromEmptyFile_NotOk() {
+    public void toTransaction_dataFromEmptyFile_notOk() {
         List<String> empty = new ArrayList<>();
         try {
             dataParserService.toTransactions(empty);

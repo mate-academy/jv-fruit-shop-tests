@@ -48,7 +48,7 @@ public class DataTransactionServiceTest {
     }
 
     @Test
-    public void updateStorage_Ok() {
+    public void parseData_ok() {
         dataTransactionService.parseData(fruitTransactions);
         Map<String, Integer> actual = fruitDao.getAll();
         Map<String, Integer> expected = new HashMap<>();

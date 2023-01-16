@@ -30,7 +30,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void chooseBalanceHandler_Ok() {
+    public void chooseBalanceHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -41,7 +41,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void choosePurchaseHandler_Ok() {
+    public void choosePurchaseHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -52,7 +52,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void chooseSupplyHandler_Ok() {
+    public void chooseSupplyHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -63,7 +63,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void chooseReturnHandler_Ok() {
+    public void chooseReturnHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());

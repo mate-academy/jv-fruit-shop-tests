@@ -15,7 +15,7 @@ public class FileReaderServiceTest {
     }
 
     @Test
-    public void readFromFile_PathToFileIsValid_Ok() {
+    public void readFromFile_pathToFileIsValid_ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",
                 "p,apple,20", "p,banana,5", "s,banana,50");
@@ -25,7 +25,7 @@ public class FileReaderServiceTest {
     }
 
     @Test
-    public void readFromFile_PathToFileIsNotValid_NotOk() {
+    public void readFromFile_pathToFileIsNotValid_notOk() {
         try {
             fileReaderService.readFromFile("src/test/resources/transaction");
         } catch (RuntimeException e) {
@@ -35,7 +35,7 @@ public class FileReaderServiceTest {
     }
 
     @Test
-    public void readFromEmptyFile() {
+    public void readFromFile_emptyFile_ok() {
         List<String> empty =
                 fileReaderService.readFromFile("src/test/resources/empty.csv");
         Assert.assertTrue(empty.isEmpty());

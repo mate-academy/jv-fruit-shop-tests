@@ -23,7 +23,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void dataParserService_validData_ok() {
+    public void getTransactions_validData_ok() {
         String data = fileReadService.readFromFile("src/test/resources/file_read_service_test.csv");
         List<FruitTransaction> transactions = dataParserService.getTransactions(data);
         int actualSize = transactions.size();
@@ -32,7 +32,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void dataParserService_invalidOperation_notOk() {
+    public void getTransactions_invalidOperation_notOk() {
         String data = fileReadService.readFromFile("src/test/resources/invalid_data_test.csv");
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Can`t find operation");

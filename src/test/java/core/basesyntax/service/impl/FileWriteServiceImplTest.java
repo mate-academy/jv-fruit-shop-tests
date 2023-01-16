@@ -36,7 +36,7 @@ public class FileWriteServiceImplTest {
     }
 
     @Test
-    public void writeFileService_correctDataAndFilePath_ok() {
+    public void writeToFile_correctDataAndFilePath_ok() {
         String data = fileReadService.readFromFile(INPUT_PATH);
         fileWriteService.writeToFile(OUTPUT_PATH, data);
         String actual = fileReadService.readFromFile(OUTPUT_PATH);
@@ -46,7 +46,7 @@ public class FileWriteServiceImplTest {
     }
 
     @Test
-    public void writeFileService_nullPath_notOk() {
+    public void writeToFile_nullPath_notOk() {
         String data = fileReadService.readFromFile(INPUT_PATH);
         expectedEx.expect(NullPointerException.class);
         fileWriteService.writeToFile(null, data);

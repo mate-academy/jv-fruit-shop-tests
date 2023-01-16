@@ -31,7 +31,7 @@ public class FileReadServiceImplTest {
     }
 
     @Test
-    public void fileReadService_correctFilePathAndData_ok() {
+    public void readFromFile_correctFilePathAndData_ok() {
         String actual = fileReadService.readFromFile(
                 "src/test/resources/file_read_service_test.csv");
         String expected = "type,fruit,quantity" + System.lineSeparator()
@@ -40,7 +40,7 @@ public class FileReadServiceImplTest {
     }
 
     @Test
-    public void fileReadService_invalidFilePath_notOk() {
+    public void readFromFile_invalidFilePath_notOk() {
         String invalidPath = "invalid path";
         expectedEx.expect(RuntimeException.class);
         expectedEx.expectMessage("Can`t read file " + invalidPath);

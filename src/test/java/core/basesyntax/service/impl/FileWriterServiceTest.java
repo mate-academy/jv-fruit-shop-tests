@@ -67,7 +67,7 @@ public class FileWriterServiceTest {
 
     @Test(expected = InvalidPathException.class)
     public void writeToFile_isNotValidPath_notOk() {
-        String pathIsNotValid = "&^%$^&*(";
+        String pathIsNotValid = "&^%$^&*(*";
         fileWriterService.writeToFile(REPORT, pathIsNotValid);
         try {
             String actual = Files.readString(Path.of(pathIsNotValid));

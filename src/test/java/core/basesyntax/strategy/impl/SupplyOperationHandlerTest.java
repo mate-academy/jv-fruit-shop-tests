@@ -10,11 +10,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static final Integer VALID_VALUE = 20;
+    private static final Integer DEFAULT_AMOUNT = 20;
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         operationHandler = new SupplyOperationHandler();
         FruitStorage.fruits.put("banana", 100);
     }
@@ -23,7 +23,7 @@ public class SupplyOperationHandlerTest {
     public void apply_addCorrectValueToStorage_ok() {
         Integer expected = 120;
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get("banana");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
                 expected, "banana", actual), expected, actual);
@@ -32,19 +32,19 @@ public class SupplyOperationHandlerTest {
     @Test
     public void apply_addDataWithNullKey_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, null, VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, null, DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get(null);
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @Test
     public void apply_addDataWithEmptyKey_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "", VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "", DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get("");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @AfterClass

@@ -11,11 +11,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static final Integer VALID_VALUE = 20;
+    private static final Integer DEFAULT_AMOUNT = 20;
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         operationHandler = new ReturnOperationHandler();
     }
 
@@ -28,7 +28,7 @@ public class ReturnOperationHandlerTest {
     public void apply_addCorrectValueToStorage_ok() {
         Integer expected = 120;
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get("banana");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
                 expected, "banana", actual), expected, actual);
@@ -37,19 +37,19 @@ public class ReturnOperationHandlerTest {
     @Test
     public void apply_addDataWithNullKey_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.RETURN, null, VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.RETURN, null, DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get(null);
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @Test
     public void apply_addDataWithEmptyKey_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "", VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "", DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get("");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @After

@@ -10,39 +10,39 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final Integer VALID_VALUE = 10;
+    private static final Integer DEFAULT_AMOUNT = 10;
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         operationHandler = new BalanceOperationHandler();
     }
 
     @Test
     public void apply_addCorrectValueToStorage_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get("banana");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @Test
     public void apply_addDataWithNullKey_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, null, VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, null, DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get(null);
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @Test
     public void apply_addDataWithEmptyKey_ok() {
         operationHandler.apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "", VALID_VALUE));
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "", DEFAULT_AMOUNT));
         Integer actual = FruitStorage.fruits.get("");
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                VALID_VALUE, "banana", actual), VALID_VALUE, actual);
+                DEFAULT_AMOUNT, "banana", actual), DEFAULT_AMOUNT, actual);
     }
 
     @After

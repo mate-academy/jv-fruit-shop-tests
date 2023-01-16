@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.WrongPathException;
-import core.basesyntax.service.ReadCsvFileService;
+import core.basesyntax.service.CsvFileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReadCsvFileServiceImpl implements ReadCsvFileService {
+public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     private static final int FILE_HEADER_LINE = 1;
 
     @Override

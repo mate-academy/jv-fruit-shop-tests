@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.WrongPathException;
-import core.basesyntax.service.WriteFileService;
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WriteFileServiceImpl implements WriteFileService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String path, String data) {
         if (path == null) {

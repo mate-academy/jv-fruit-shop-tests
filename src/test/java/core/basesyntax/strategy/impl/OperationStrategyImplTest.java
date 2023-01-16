@@ -14,7 +14,7 @@ public class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         operationStrategy = new OperationStrategyImpl();
     }
 

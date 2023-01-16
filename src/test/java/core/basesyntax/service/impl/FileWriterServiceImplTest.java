@@ -3,27 +3,27 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.exception.WrongPathException;
-import core.basesyntax.service.WriteFileService;
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriteFileServiceImplTest {
+public class FileWriterServiceImplTest {
     private static final String VALID_FILE_PATH = "src/test/resources/report.csv";
     private static final String INVALID_FILE_PATH = "not.today";
     private static final String DATA_FOR_TEST_FILE = "test sentence";
-    private static WriteFileService writeFileService;
+    private static FileWriterService fileWriterService;
 
     @BeforeClass
-    public static void beforeClass() {
-        writeFileService = new WriteFileServiceImpl();
+    public static void init() {
+        fileWriterService = new FileWriterServiceImpl();
     }
 
     @Test
     public void writeToFile_writeWithValidPath_ok() {
-        writeFileService.writeToFile(VALID_FILE_PATH, DATA_FOR_TEST_FILE);
+        fileWriterService.writeToFile(VALID_FILE_PATH, DATA_FOR_TEST_FILE);
         String actual;
         try {
             actual = Files.readString(Path.of(VALID_FILE_PATH));
@@ -37,16 +37,16 @@ public class WriteFileServiceImplTest {
 
     @Test (expected = WrongPathException.class)
     public void writeToFile_writeWithInvalidPath_notOk() {
-        writeFileService.writeToFile(INVALID_FILE_PATH, DATA_FOR_TEST_FILE);
+        fileWriterService.writeToFile(INVALID_FILE_PATH, DATA_FOR_TEST_FILE);
     }
 
     @Test (expected = WrongPathException.class)
     public void writeToFile_pathIsNull_notOk() {
-        writeFileService.writeToFile(null, DATA_FOR_TEST_FILE);
+        fileWriterService.writeToFile(null, DATA_FOR_TEST_FILE);
     }
 
     @Test (expected = RuntimeException.class)
     public void writeToFile_writeDataIsNull_notOk() {
-        writeFileService.writeToFile(VALID_FILE_PATH, null);
+        fileWriterService.writeToFile(VALID_FILE_PATH, null);
     }
 }

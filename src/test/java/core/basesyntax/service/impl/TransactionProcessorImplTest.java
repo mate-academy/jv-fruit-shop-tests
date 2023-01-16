@@ -11,7 +11,7 @@ public class TransactionProcessorImplTest {
     private static TransactionProcessor transactionProcessor;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         transactionProcessor = new TransactionProcessorImpl();
     }
 

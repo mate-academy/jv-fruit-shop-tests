@@ -13,7 +13,7 @@ public class DataParserServiceImplTest {
     private static DataParserServiceImpl dataParserService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         dataParserService = new DataParserServiceImpl();
     }
 

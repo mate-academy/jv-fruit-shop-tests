@@ -14,7 +14,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ReportCreatorImplTest {
-
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
     private final ReportCreator reportCreator = new ReportCreatorImpl();
@@ -23,7 +22,7 @@ public class ReportCreatorImplTest {
     private final StorageUpdateService storageUpdateService = new StorageUpdateServiceImpl();
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 

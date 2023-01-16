@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-
     private static Map<Operation, Class> operationHandlerMap;
 
     @BeforeClass

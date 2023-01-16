@@ -5,26 +5,27 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class SupplyHandlerTest {
-
-    private static final FruitTransaction bananaBalance;
-    private static final FruitTransaction bananaSupply;
+    private static FruitTransaction bananaTransactionBalance;
+    private static FruitTransaction bananaTransactionSupply;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
-    private final OperationHandler balance = new BalanceHandler();
-    private final OperationHandler supply = new SupplyHandler();
+    private final OperationHandler balanceHandler = new BalanceHandler();
+    private final OperationHandler supplyHandler = new SupplyHandler();
 
-    static {
-        bananaBalance = new FruitTransaction.FruitTransactionBuilder()
+    @BeforeClass
+    public static void beforeClass() {
+        bananaTransactionBalance = new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(Operation.BALANCE)
                 .setFruitType("banana")
                 .setAmount(10)
                 .build();
-        bananaSupply = new FruitTransaction.FruitTransactionBuilder()
+        bananaTransactionSupply = new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(Operation.PURCHASE)
                 .setFruitType("banana")
                 .setAmount(20)
@@ -32,24 +33,24 @@ public class SupplyHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 
     @Test
-    public void returnHandlerTest_ok() {
-        balance.process(bananaBalance);
-        supply.process(bananaSupply);
-        int actual = Storage.fruits.get(bananaBalance.getFruitType());
-        int expected = 30;
+    public void process_ok() {
+        balanceHandler.process(bananaTransactionBalance);
+        supplyHandler.process(bananaTransactionSupply);
+        int actual = Storage.fruits.get(bananaTransactionBalance.getFruitType());
+        int expected = bananaTransactionSupply.getAmount() + bananaTransactionBalance.getAmount();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void supplyHandlerTest_nullValueIsStorage_Ok() {
-        supply.process(bananaSupply);
-        int actual = Storage.fruits.get(bananaSupply.getFruitType());
-        int expected = 20;
+    public void process_nullValueIsStorage_Ok() {
+        supplyHandler.process(bananaTransactionSupply);
+        int actual = Storage.fruits.get(bananaTransactionSupply.getFruitType());
+        int expected = bananaTransactionSupply.getAmount();
         Assert.assertEquals(expected, actual);
     }
 }

@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class DataParserServiceImplTest {
-
     private static final String INPUT_PATH = "src/test/resources/file_read_service_test.csv";
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();

@@ -15,7 +15,7 @@ public class OperationStrategyImplTest {
     private static Map<Operation, Class> operationHandlerMap;
 
     @BeforeClass
-    public static void setUp() {
+    public static void init() {
         operationHandlerMap = Map.of(Operation.RETURN, ReturnHandler.class,
                 Operation.BALANCE, BalanceHandler.class,
                 Operation.PURCHASE, PurchaseHandler.class,

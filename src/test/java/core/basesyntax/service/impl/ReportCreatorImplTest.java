@@ -23,7 +23,7 @@ public class ReportCreatorImplTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         storageUpdateService = new StorageUpdateServiceImpl();
         dataParserService = new DataParserServiceImpl();
         fileReadService = new FileReadServiceImpl();

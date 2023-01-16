@@ -17,7 +17,7 @@ public class DataParserServiceImplTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         dataParserService = new DataParserServiceImpl();
         fileReadService = new FileReadServiceImpl();
     }

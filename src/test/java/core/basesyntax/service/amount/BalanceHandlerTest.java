@@ -11,7 +11,7 @@ public class BalanceHandlerTest {
     private static OperationHandler balanceHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         balanceHandler = new BalanceHandler();
     }
 

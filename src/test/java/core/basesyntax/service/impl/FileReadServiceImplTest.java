@@ -17,7 +17,7 @@ public class FileReadServiceImplTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fileReadService = new FileReadServiceImpl();
     }
 

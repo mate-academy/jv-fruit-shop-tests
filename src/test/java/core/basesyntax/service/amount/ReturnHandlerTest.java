@@ -19,7 +19,7 @@ public class ReturnHandlerTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         bananaTransactionBalance = new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(Operation.BALANCE)
                 .setFruitType("banana")

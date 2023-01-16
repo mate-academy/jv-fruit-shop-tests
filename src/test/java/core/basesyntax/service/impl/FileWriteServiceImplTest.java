@@ -21,7 +21,7 @@ public class FileWriteServiceImplTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fileWriteService = new FileWriteServiceImpl();
         fileReadService = new FileReadServiceImpl();
     }

@@ -40,7 +40,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void process_ok() {
+    public void process_purchase_ok() {
         balanceHandler.process(bananaTransactionBalance);
         purchaseHandler.process(bananaTransactionPurchase);
         int actual = Storage.fruits.get(bananaTransactionBalance.getFruitType());

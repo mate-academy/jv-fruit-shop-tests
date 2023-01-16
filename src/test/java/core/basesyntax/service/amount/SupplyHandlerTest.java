@@ -40,7 +40,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void process_ok() {
+    public void process_supply_ok() {
         balanceHandler.process(bananaTransactionBalance);
         supplyHandler.process(bananaTransactionSupply);
         int actual = Storage.fruits.get(bananaTransactionBalance.getFruitType());

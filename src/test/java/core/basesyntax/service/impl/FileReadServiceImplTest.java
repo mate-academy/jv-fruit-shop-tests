@@ -31,7 +31,7 @@ public class FileReadServiceImplTest {
     }
 
     @Test
-    public void fileReadService_ok() {
+    public void fileReadService_correctFilePathAndData_ok() {
         String actual = fileReadService.readFromFile(
                 "src/test/resources/file_read_service_test.csv");
         String expected = "type,fruit,quantity" + System.lineSeparator()

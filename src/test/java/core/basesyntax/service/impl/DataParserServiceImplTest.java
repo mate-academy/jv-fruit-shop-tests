@@ -23,7 +23,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void dataParserService_ok() {
+    public void dataParserService_validData_ok() {
         String data = fileReadService.readFromFile("src/test/resources/file_read_service_test.csv");
         List<FruitTransaction> transactions = dataParserService.getTransactions(data);
         int actualSize = transactions.size();

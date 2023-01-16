@@ -36,7 +36,7 @@ public class FileWriteServiceImplTest {
     }
 
     @Test
-    public void writeFileService_ok() {
+    public void writeFileService_correctDataAndFilePath_ok() {
         String data = fileReadService.readFromFile(INPUT_PATH);
         fileWriteService.writeToFile(OUTPUT_PATH, data);
         String actual = fileReadService.readFromFile(OUTPUT_PATH);

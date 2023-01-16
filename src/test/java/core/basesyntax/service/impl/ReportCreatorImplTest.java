@@ -7,8 +7,8 @@ import core.basesyntax.service.FileReadService;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.StorageUpdateService;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,13 +30,13 @@ public class ReportCreatorImplTest {
         reportCreator = new ReportCreatorImpl();
     }
 
-    @After
-    public void tearDown() {
+    @Before
+    public void setUp() {
         Storage.fruits.clear();
     }
 
     @Test
-    public void createReport_ok() {
+    public void createReport_correctReportCreate_ok() {
         String data = fileReadService.readFromFile("src/main/resources/data.csv");
         List<FruitTransaction> transactions = dataParserService.getTransactions(data);
         storageUpdateService.update(transactions);

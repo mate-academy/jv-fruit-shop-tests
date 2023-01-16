@@ -16,7 +16,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void process_ok() {
+    public void process_balance_ok() {
         FruitTransaction bananaTransactionBalance = new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(Operation.BALANCE)
                 .setFruitType("banana")

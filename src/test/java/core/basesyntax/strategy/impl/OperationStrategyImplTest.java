@@ -10,26 +10,22 @@ import core.basesyntax.strategy.operationhandler.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.operationhandler.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.operationhandler.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.operationhandler.impl.SupplyOperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
+    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static OperationStrategy strategy;
 
     @BeforeClass
     public static void beforeClass() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        OperationHandler balanceOperationHandler = new BalanceOperationHandler();
-        OperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
-        OperationHandler returnOperationHandler = new ReturnOperationHandler();
-        OperationHandler supplyOperationHandler = new SupplyOperationHandler();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, balanceOperationHandler);
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, purchaseOperationHandler);
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, returnOperationHandler);
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyOperationHandler);
+        operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         strategy = new OperationStrategyImpl(operationHandlerMap);
     }
 

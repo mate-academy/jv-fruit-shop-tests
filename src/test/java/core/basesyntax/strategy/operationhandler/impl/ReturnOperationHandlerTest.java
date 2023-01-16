@@ -8,11 +8,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static FruitTransaction transaction;
-    private static ReturnOperationHandler returnOperationHandler;
     private static final String APPLE = "apple";
     private static final int APPLE_QUANTITY = 50;
     private static final int APPLE_RETURN_QUANTITY = 30;
+    private static FruitTransaction transaction;
+    private static ReturnOperationHandler returnOperationHandler;
 
     @BeforeClass
     public static void beforeClass() {

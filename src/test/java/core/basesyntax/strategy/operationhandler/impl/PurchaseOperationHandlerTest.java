@@ -8,12 +8,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static FruitTransaction transaction;
-    private static PurchaseOperationHandler purchaseOperationHandler;
     private static final String APPLE = "apple";
     private static final int QUANTITY = 50;
     private static final int PURCHASE_QUANTITY = 30;
     private static final int GREATER_PURCHASE_QUANTITY = 51;
+    private static FruitTransaction transaction;
+    private static PurchaseOperationHandler purchaseOperationHandler;
 
     @BeforeClass
     public static void beforeClass() {

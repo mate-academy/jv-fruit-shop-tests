@@ -10,12 +10,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static FruitTransaction transaction;
-    private static BalanceOperationHandler balanceOperationHandler;
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final int APPLE_QUANTITY = 40;
     private static final int BANANA_QUANTITY = 50;
+    private static FruitTransaction transaction;
+    private static BalanceOperationHandler balanceOperationHandler;
 
     @BeforeClass
     public static void beforeClass() {

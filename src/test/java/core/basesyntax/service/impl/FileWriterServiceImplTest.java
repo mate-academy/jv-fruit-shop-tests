@@ -23,7 +23,7 @@ public class FileWriterServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeToFile_WriteToNotExistingFile_NotOk() {
+    public void writeToFile_writeToNotExistingFile_NotOk() {
         fileWriterService.writeToFile(INVALID_OUTPUT_PATH, REPORT);
     }
 }

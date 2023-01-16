@@ -21,14 +21,10 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readAllLines_isOk() {
-        try {
-            List<String> expected = Files.readAllLines(Path.of(VALID_INPUT_PATH));
-            List<String> actual = fileReaderService.readAllLines(VALID_INPUT_PATH);
-            assertEquals(expected, actual);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    public void readAllLines_isOk() throws IOException {
+        List<String> expected = Files.readAllLines(Path.of(VALID_INPUT_PATH));
+        List<String> actual = fileReaderService.readAllLines(VALID_INPUT_PATH);
+        assertEquals(expected, actual);
 
     }
 

@@ -14,11 +14,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private static FruitDao fruitDao;
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final int DEFAULT_QUANTITY = 50;
     private static final int NEW_QUANTITY = 100;
+    private static FruitDao fruitDao;
 
     @BeforeClass
     public static void beforeClass() {
@@ -65,7 +65,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void getQuantity_notOk() {
+    public void getQuantity_nonExistingKey_notOk() {
         Integer actual = fruitDao.getQuantity(BANANA);
         assertNull(actual);
     }

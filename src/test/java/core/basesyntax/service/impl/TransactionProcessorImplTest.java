@@ -2,10 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionProcessor;
 import java.util.ArrayList;
 import java.util.List;
-
-import core.basesyntax.service.TransactionProcessor;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ReadFileServiceImplTest {
     private static final String VALID_CSV_TEST_PATH = "src/test/resources/read_test_data.csv";
-    private static final String INVALID_CSV_PATH = "bad path";
+    private static final String INVALID_CSV_PATH = "bad path to file";
     private static ReadFileService readFileService;
 
     @BeforeClass

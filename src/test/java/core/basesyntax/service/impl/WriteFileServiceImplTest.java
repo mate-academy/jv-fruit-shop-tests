@@ -31,4 +31,9 @@ public class WriteFileServiceImplTest {
             throw new IOException("Invalid file path");
         }
     }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_nullPath_ok() {
+        writeFileService.writeToFile("Some string", Path.of(null));
+    }
 }

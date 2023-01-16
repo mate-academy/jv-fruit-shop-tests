@@ -2,12 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FruitTransactionParserImplTest {
     private static final String HEADER = "fruit,quantity";
@@ -20,7 +19,7 @@ public class FruitTransactionParserImplTest {
 
     @Test
     public void parseTransactions_validData_ok() {
-        List<FruitTransaction> expected = new ArrayList<>();
+        final List<FruitTransaction> expected = new ArrayList<>();
         FruitTransaction firstTransaction = new FruitTransaction();
         firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         firstTransaction.setFruit("apple");

@@ -2,13 +2,16 @@ package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static FruitTransaction fruitTransaction;
     private static SupplyOperationHandler supplyOperationHandler;
 
+    @BeforeClass
     public static void setUp() {
         fruitTransaction = new FruitTransaction();
         supplyOperationHandler = new SupplyOperationHandler();
@@ -27,5 +30,10 @@ public class SupplyOperationHandlerTest {
         Assert.assertEquals("There are "
                 + expected
                 + " avocado must be in storage", expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        FruitDao.storage.clear();
     }
 }

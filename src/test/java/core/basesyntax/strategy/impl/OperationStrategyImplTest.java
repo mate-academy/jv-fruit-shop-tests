@@ -1,6 +1,5 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.exception.WrongOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -9,10 +8,16 @@ import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private static  OperationStrategy operationStrategy;
+
+    @BeforeClass
+    public static void setUp() {
+        operationStrategy = new OperationStrategyImpl();
+    }
 
     @Test
     public void getHandlerByOperation_balanceOperation_ok() {

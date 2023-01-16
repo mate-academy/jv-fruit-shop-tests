@@ -4,11 +4,18 @@ import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
-    private final PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
+    private static FruitTransaction fruitTransaction;
+    private static PurchaseOperationHandler purchaseOperationHandler;
+
+    @BeforeClass
+    public static void setUp() {
+        fruitTransaction = new FruitTransaction();
+        purchaseOperationHandler = new PurchaseOperationHandler();
+    }
     @Test
     public void apply_correctPurchase_ok() {
         FruitDao.storage.put("mango", 25);

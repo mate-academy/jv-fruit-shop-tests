@@ -2,14 +2,17 @@ package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
-    private final SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
+    private static FruitTransaction fruitTransaction;
+    private static SupplyOperationHandler supplyOperationHandler;
 
+    public static void setUp() {
+        fruitTransaction = new FruitTransaction();
+        supplyOperationHandler = new SupplyOperationHandler();
+    }
     @Test
     public void apply_correctSupply_ok() {
         FruitDao.put("Avocado", 20);

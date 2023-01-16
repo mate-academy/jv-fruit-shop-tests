@@ -3,12 +3,18 @@ package core.basesyntax.strategy.handler;
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
-    private final ReturnOperationHandler returnOperationHandler = new ReturnOperationHandler();
+    private static FruitTransaction fruitTransaction;
+    private static ReturnOperationHandler returnOperationHandler;
 
+    @BeforeClass
+    public static void setUp() {
+        fruitTransaction = new FruitTransaction();
+        returnOperationHandler = new ReturnOperationHandler();
+    }
     @Test
     public void apply_correctReturn_ok() {
         FruitDao.put("kiwi", 7);

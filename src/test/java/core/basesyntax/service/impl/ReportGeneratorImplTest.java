@@ -1,17 +1,15 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitDao;
-import core.basesyntax.exception.InvalidPathException;
 import core.basesyntax.service.ReportGenerator;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Map;
 
 public class ReportGeneratorImplTest {
-    private static final String VALID_REPORT = "fruit,quantity" + System.lineSeparator() +"blueberry,10";
+    private static final String HEADER = "fruit,quantity";
 
     private static ReportGenerator reportGenerator;
     @BeforeClass
@@ -20,11 +18,22 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void generateReport_correctReport_ok() {
-/*        FruitDao.storage.put("blueberry", 10);
+    public void generateReport_emptyStorage_ok() {
+        FruitDao.storage.clear();
+        String expected = HEADER + System.lineSeparator();
         String actual = reportGenerator.generateReport();
-        Assert.assertEquals("Strings must be equals"
-                + System.lineSeparator() + VALID_REPORT,VALID_REPORT, actual);*/
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void generateReport_correctReport_ok() {
+        FruitDao.storage.put("blueberry", 10);
+        String expected = HEADER +
+                System.lineSeparator() +
+                "blueberry,10" +
+                System.lineSeparator();
+        String actual = reportGenerator.generateReport();
+        Assert.assertEquals("Strings must be the same", expected, actual);
     }
     @After
     public void tearDown() {

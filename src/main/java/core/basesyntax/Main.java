@@ -41,4 +41,3 @@ public class Main {
         reportFile.writeToFile(report, FILE_PATH_TO);
     }
 }
-

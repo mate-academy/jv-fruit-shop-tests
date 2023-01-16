@@ -26,18 +26,14 @@ public class BalanceOperationHandlerTest {
         assertEquals(DEFAULT_QUANTITY, actual);
     }
 
-    @Test
-    public void apply_addDataWithNullKey_ok() {
+    @Test (expected = NullPointerException.class)
+    public void apply_addDataWithNullKey_notOk() {
         operationHandler.apply(new FruitTransaction(OPERATION, null, DEFAULT_QUANTITY));
-        Integer actual = Storage.getAll().get(null);
-        assertEquals(DEFAULT_QUANTITY, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void apply_addDataWithEmptyKey_ok() {
         operationHandler.apply(new FruitTransaction(OPERATION, "", DEFAULT_QUANTITY));
-        Integer actual = Storage.getAll().get("");
-        assertEquals(DEFAULT_QUANTITY, actual);
     }
 
     @After

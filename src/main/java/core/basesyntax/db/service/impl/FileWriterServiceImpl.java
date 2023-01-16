@@ -9,6 +9,9 @@ public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String report, String path) {
         Path pathToFile = Path.of(path);
+        if (report == null) {
+            throw new NullPointerException("Report can't be null");
+        }
         if (Files.exists(pathToFile)) {
             try {
                 Files.writeString(pathToFile, report);

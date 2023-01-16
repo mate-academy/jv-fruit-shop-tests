@@ -9,6 +9,9 @@ import java.util.List;
 public class FileCsvReaderServiceImpl implements FileCsvReaderService {
     @Override
     public List<String> readFromFile(String path) {
+        if (path == null) {
+            throw new NullPointerException("Path can't be null");
+        }
         try {
             List<String> lines = Files.readAllLines(Path.of(path));
             lines.remove(0);

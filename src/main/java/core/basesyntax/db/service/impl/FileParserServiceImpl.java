@@ -22,7 +22,7 @@ public class FileParserServiceImpl implements FileParserService {
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction toTransaction(String line) {
+    public FruitTransaction toTransaction(String line) {
         String[] splitLine = line.split(REGEX);
         return new FruitTransaction(FruitTransaction.Operation
                 .getOperationStrChar(splitLine[INDEX_OPERATION]),

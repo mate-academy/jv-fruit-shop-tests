@@ -3,14 +3,13 @@ package core.basesyntax.db.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.model.FruitTransaction;
-import core.basesyntax.db.service.FileParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileParserServiceImplTest {
-    private static FileParserService fileParserService;
+    private static FileParserServiceImpl fileParserService;
 
     @BeforeClass
     public static void setUp() {
@@ -54,6 +53,15 @@ public class FileParserServiceImplTest {
         List<FruitTransaction> expected = new ArrayList<>(List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 30)));
         List<FruitTransaction> actual = fileParserService.parse(test);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void toTransaction_validData_ok() {
+        FruitTransaction expected = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "banana", 10);
+        String line = "b,banana,10";
+        FruitTransaction actual = fileParserService.toTransaction(line);
         assertEquals(expected, actual);
     }
 

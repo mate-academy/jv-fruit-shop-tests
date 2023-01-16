@@ -21,7 +21,7 @@ public class FileCsvReaderServiceImplTest {
     @Test
     public void readFromFile_validFilePath_ok() {
         List<String> expected = new ArrayList<>(List.of(
-                "b,banana,321", "b,apple,110", "b,,120", "b,pineapple,34"));
+                "b,banana,321", "b,apple,110", "b,pineapple,34"));
         List<String> actual = fileCsvReaderService.readFromFile(VALID_FILE_PATH);
         assertEquals(expected, actual);
     }

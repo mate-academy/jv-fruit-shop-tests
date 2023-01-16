@@ -42,7 +42,7 @@ public class FileWriterServiceImplTest {
         fileWriterService.writeToFile(TEST_SENTENCE, null);
     }
 
-    @Test (expected = RuntimeException.class)
+    @Test (expected = NullPointerException.class)
     public void writeToFile_dataIsNull() {
         fileWriterService.writeToFile(null, VALID_PATH);
     }

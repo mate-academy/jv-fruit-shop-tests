@@ -23,7 +23,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TransitionServiceImplTest {
+public class FruitTransitionServiceImplTest {
     private static List<FruitTransaction> transitionData;
     private static FruitTransactionService transitionService;
     private static Fruit banana;

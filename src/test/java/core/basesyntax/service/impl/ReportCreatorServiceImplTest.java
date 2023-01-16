@@ -9,32 +9,30 @@ import org.junit.Test;
 
 public class ReportCreatorServiceImplTest {
     private static ReportCreatorService reportCreatorService;
-    private static String expected1;
-    private static String expected2;
 
     @BeforeClass
     public static void beforeClass() {
         reportCreatorService = new ReportCreatorServiceImpl();
-        expected1 = "fruit,quantity" + System.lineSeparator()
-                + "banana,152" + System.lineSeparator()
-                + "apple,90";
-        expected2 = "fruit,quantity";
     }
 
     @Test
-    public void createReport_isValid_Ok() {
+    public void createReport_isValid_ok() {
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator()
+                + "apple,90";
         Storage.mapFruits.put("banana", 152);
         Storage.mapFruits.put("apple", 90);
         String actual = reportCreatorService.createReport();
-        boolean isEqual = actual.equals(expected1);
+        boolean isEqual = actual.equals(expected);
         assertTrue(isEqual);
     }
 
     @Test
-    public void createReport_withEmptyMap_Ok() {
+    public void createReport_withEmptyMap_ok() {
         Storage.mapFruits.clear();
+        String expected = "fruit,quantity";
         String actual = reportCreatorService.createReport();
-        boolean isEqual = actual.equals(expected2);
+        boolean isEqual = actual.equals(expected);
         assertTrue(isEqual);
     }
 }

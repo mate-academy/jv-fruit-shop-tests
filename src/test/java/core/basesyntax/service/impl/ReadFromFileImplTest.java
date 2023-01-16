@@ -11,28 +11,24 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReadFromFileImplTest {
-    private static final FileReaderService readFromFile = new ReadFromFileImpl();
-    private static final String path = "src/test/resources/Hello.csv";
-    private static final String expectedString = "Hello, mate!";
+    private static FileReaderService readFromFile;
+    private static final String VALID_FILE_TO_PATH = "src/test/resources/Hello.csv";
+    private static final String EXPECTED_DATA = "Hello, mate!";
 
     @BeforeClass
     public static void beforeClass() {
-        try {
-            Files.writeString(Paths.get(path), expectedString);
-        } catch (IOException e) {
-            throw new RuntimeException("Check the file path " + path, e);
-        }
+        readFromFile = new ReadFromFileImpl();
     }
 
     @Test
-    public void readFile_isContentEqual_Ok() {
+    public void readFile_isContentEqual_ok() {
         String actualString;
         try {
-            actualString = Files.readString(Paths.get(path));
+            actualString = Files.readString(Paths.get(VALID_FILE_TO_PATH));
         } catch (IOException e) {
             throw new FruitShopException("Enter correct file path");
         }
-        assertEquals(expectedString, actualString);
+        assertEquals(EXPECTED_DATA, actualString);
     }
 
     @Test(expected = FruitShopException.class)

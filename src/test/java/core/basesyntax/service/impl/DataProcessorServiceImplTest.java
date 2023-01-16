@@ -13,28 +13,29 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataProcessorServiceImplTest {
-    private static List<String[]> list;
-    private DataProcessorService dataProcessorService = new DataProcessorServiceImpl();
+    private static List<String[]> fruitTransactions;
+    private static DataProcessorService dataProcessorService;
 
     @BeforeClass
     public static void beforeClass() {
-        list = new ArrayList<>();
+        dataProcessorService = new DataProcessorServiceImpl();
+        fruitTransactions = new ArrayList<>();
     }
 
     @Before
     public void setUp() {
-        list.add(new String[]{"b", "apple", "20"});
-        list.add((new String[] {"s", "apple", "30"}));
+        fruitTransactions.add(new String[]{"b", "apple", "20"});
+        fruitTransactions.add((new String[] {"s", "apple", "30"}));
     }
 
     @After
     public void tearDown() {
-        list.clear();
+        fruitTransactions.clear();
     }
 
     @Test
-    public void processData_addValidData_Ok() {
-        dataProcessorService.processData(list);
+    public void processData_addValidData_ok() {
+        dataProcessorService.processData(fruitTransactions);
         Integer actual = Storage.mapFruits.get("apple");
         Integer expected = 50;
         assertEquals(expected, actual);
@@ -42,8 +43,8 @@ public class DataProcessorServiceImplTest {
 
     @Test(expected = FruitShopException.class)
     public void processData_addInvalidOperation_notOk() {
-        list.add(new String[]{"k", "apple", "20"});
-        dataProcessorService.processData(list);
+        fruitTransactions.add(new String[]{"k", "apple", "20"});
+        dataProcessorService.processData(fruitTransactions);
     }
 
     @Test(expected = FruitShopException.class)

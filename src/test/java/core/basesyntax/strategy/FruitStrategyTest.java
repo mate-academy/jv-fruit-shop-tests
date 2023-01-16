@@ -1,10 +1,16 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.exception.FruitShopException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitStrategyTest {
-    private FruitStrategy fruitStrategy = new FruitStrategy();
+    private static FruitStrategy fruitStrategy;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitStrategy = new FruitStrategy();
+    }
 
     @Test(expected = FruitShopException.class)
     public void getFruitService_addInvalidOperation_notOk() {

@@ -11,18 +11,17 @@ import org.junit.Test;
 
 public class ParseDataServiceImplTest {
     private static ParseDataService parseDataService;
-    private static List<String[]> expectedList;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws Exception {
         parseDataService = new ParseDataServiceImpl();
-        expectedList = new ArrayList<>();
-        expectedList.add(new String[]{"d", "e", "f"});
-        expectedList.add(new String[]{"x", "y", "z"});
     }
 
     @Test
-    public void parseData_addValidString_Ok() {
+    public void parseData_addValidString_ok() {
+        List<String[]> expectedList = new ArrayList<>();
+        expectedList.add(new String[]{"d", "e", "f"});
+        expectedList.add(new String[]{"x", "y", "z"});
         String input = "a,b,c" + System.lineSeparator() + "d,e,f"
                 + System.lineSeparator() + "x,y,z";
         List<String[]> actualList = parseDataService.parseData(input);

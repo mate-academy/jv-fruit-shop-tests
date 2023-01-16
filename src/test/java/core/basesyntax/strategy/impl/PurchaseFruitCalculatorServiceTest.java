@@ -4,13 +4,19 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.strategy.FruitStrategy;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseFruitCalculatorServiceTest {
-    private FruitStrategy fruitStrategy = new FruitStrategy();
+    private static FruitStrategy fruitStrategy;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitStrategy = new FruitStrategy();
+    }
 
     @Test
-    public void getFruitService_addValidPurchase_Ok() {
+    public void getFruitService_addValidPurchase_ok() {
         int expected = 25;
         int actual = fruitStrategy.getFruitService("p")
                 .calculateFruits(45, 20);
@@ -19,7 +25,7 @@ public class PurchaseFruitCalculatorServiceTest {
     }
 
     @Test(expected = FruitShopException.class)
-    public void getFruitService_addInvalidPurchase_Ok() {
+    public void getFruitService_addInvalidPurchase_ok() {
         fruitStrategy.getFruitService("p")
                 .calculateFruits(-45, -20);
     }

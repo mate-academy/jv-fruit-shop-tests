@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ReadFromFileImpl implements FileReaderService {
+public class FileReaderImpl implements FileReaderService {
     @Override
     public String readFile(String fromFileName) {
         if (fromFileName == null || fromFileName.isEmpty()) {

@@ -11,13 +11,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReadFromFileImplTest {
-    private static FileReaderService readFromFile;
+    private static FileReaderService fileReaderService;
     private static final String VALID_FILE_TO_PATH = "src/test/resources/Hello.csv";
     private static final String EXPECTED_DATA = "Hello, mate!";
 
     @BeforeClass
     public static void beforeClass() {
-        readFromFile = new ReadFromFileImpl();
+        fileReaderService = new FileReaderImpl();
     }
 
     @Test
@@ -33,11 +33,11 @@ public class ReadFromFileImplTest {
 
     @Test(expected = FruitShopException.class)
     public void readFile_pathIsNull_notOk() {
-        readFromFile.readFile(null);
+        fileReaderService.readFile(null);
     }
 
     @Test(expected = FruitShopException.class)
     public void readFile_pathIsIncorrect_notOk() {
-        readFromFile.readFile("src/test/resources/Hello.txt");
+        fileReaderService.readFile("src/test/resources/Hello.txt");
     }
 }

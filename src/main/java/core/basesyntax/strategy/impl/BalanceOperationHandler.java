@@ -2,9 +2,9 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationHandler;
 
-public class BalanceOperationStrategy implements OperationStrategy {
+public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void calculate(FruitTransaction transaction) {
         Storage.fruits.put(transaction.getFruit(), transaction.getQuantity());

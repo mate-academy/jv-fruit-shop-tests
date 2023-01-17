@@ -1,30 +1,30 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.BalanceOperationStrategy;
-import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
-import core.basesyntax.strategy.impl.ReturnOperationStrategy;
-import core.basesyntax.strategy.impl.SupplyOperationStrategy;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperationStrategyImpl {
-    private static Map<FruitTransaction.Operation, OperationStrategy> strategies = new HashMap<>();
+public class OperationStrategyImpl implements OperationStrategy {
+    private static Map<FruitTransaction.Operation, OperationHandler> strategies = new HashMap<>();
 
     static {
         strategies = Map.of(
                 FruitTransaction.Operation.BALANCE,
-                        new BalanceOperationStrategy(),
+                        new BalanceOperationHandler(),
                 FruitTransaction.Operation.PURCHASE,
-                        new PurchaseOperationStrategy(),
+                        new PurchaseOperationHandler(),
                 FruitTransaction.Operation.RETURN,
-                        new ReturnOperationStrategy(),
+                        new ReturnOperationHandler(),
                 FruitTransaction.Operation.SUPPLY,
-                        new SupplyOperationStrategy()
+                        new SupplyOperationHandler()
         );
     }
 
-    public OperationStrategy getOperationStrategy(FruitTransaction transaction) {
+    public OperationHandler getOperationStrategy(FruitTransaction transaction) {
         return strategies.get(transaction.getOperation());
     }
 }

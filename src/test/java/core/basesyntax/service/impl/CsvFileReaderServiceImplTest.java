@@ -18,7 +18,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void fileReader_filePathRight_Ok() {
+    public void readFromFile_filePathRight_ok() {
         String expected = "";
         Path path = Path.of(VALID_FILE_PATH);
         try {
@@ -31,12 +31,12 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void fileReader_invalidFilePath_NotOk() {
+    public void readFromFile_invalidFilePath_notOk() {
         fileReaderService.readFromFile(Path.of("src/test/resources/fl.csv"));
     }
 
     @Test (expected = NullPointerException.class)
-    public void fileReader_nullFilePath_NotOk() {
+    public void readFromFile_nullFilePath_notOk() {
         fileReaderService.readFromFile(Path.of(null));
     }
 }

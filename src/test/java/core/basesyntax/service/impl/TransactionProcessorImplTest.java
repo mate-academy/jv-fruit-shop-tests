@@ -10,9 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessorImplTest {
-    public static final String BANANA = "banana";
-    public static final String APPLE = "apple";
-    public static final String PINEAPPLE = "pineapple";
     private static TransactionProcessor transactionProcessor;
 
     @BeforeClass
@@ -33,10 +30,10 @@ public class TransactionProcessorImplTest {
         actual.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10));
         transactionProcessor.process(actual);
         Assert.assertTrue("Incorrect result: expected banana of quantity" + 107,
-                Storage.fruits.containsKey(BANANA) && Storage.fruits.get(BANANA) == 107);
+                Storage.fruits.containsKey("banana") && Storage.fruits.get("banana") == 107);
         Assert.assertTrue("Incorrect result: expected apple of quantity" + 110,
-                Storage.fruits.containsKey(APPLE) && Storage.fruits.get(APPLE) == 110);
+                Storage.fruits.containsKey("apple") && Storage.fruits.get("apple") == 110);
         Assert.assertTrue("Incorrect result: expected pineapple of quantity" + 55,
-                Storage.fruits.containsKey(PINEAPPLE) && Storage.fruits.get(PINEAPPLE) == 55);
+                Storage.fruits.containsKey("pineapple") && Storage.fruits.get("pineapple") == 55);
     }
 }

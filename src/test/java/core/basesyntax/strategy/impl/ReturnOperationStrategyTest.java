@@ -2,17 +2,18 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationStrategyTest {
-    private static ReturnOperationStrategy returnOperationStrategy;
+    private static OperationHandler returnOperationHandler;
 
     @BeforeClass
     public static void setUp() {
-        returnOperationStrategy = new ReturnOperationStrategy();
+        returnOperationHandler = new ReturnOperationHandler();
         Storage.fruits.clear();
     }
 
@@ -21,7 +22,7 @@ public class ReturnOperationStrategyTest {
         Storage.fruits.put("banana", 60);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 20);
-        returnOperationStrategy.calculate(transaction);
+        returnOperationHandler.calculate(transaction);
         Integer expected = 80;
         Integer actual = Storage.fruits.get("banana");
         Assert.assertEquals("Wrong return data", expected, actual);
@@ -31,7 +32,7 @@ public class ReturnOperationStrategyTest {
     public void calculate_wrongFruit_notOk() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "orange", 20);
-        returnOperationStrategy.calculate(transaction);
+        returnOperationHandler.calculate(transaction);
     }
 
     @After

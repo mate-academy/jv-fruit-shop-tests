@@ -30,4 +30,9 @@ public class CsvFileWriterServiceImplTest {
         }
         Assert.assertEquals("Incorrect data in report", expected, actual);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void writerToFile_nullPath_notOk() {
+        writerService.writerToFile(Path.of(null), "Random text");
+    }
 }

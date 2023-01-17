@@ -12,7 +12,7 @@ public class ReportGeneratorImplTest {
     private static ReportGenerator reportGenerator;
 
     @BeforeClass
-    public static void setUpBeforeAll() {
+    public static void init() {
         reportGenerator = new ReportGeneratorImpl();
     }
 

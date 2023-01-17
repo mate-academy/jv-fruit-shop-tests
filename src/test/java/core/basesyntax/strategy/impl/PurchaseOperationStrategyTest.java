@@ -2,17 +2,18 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationStrategyTest {
-    private static PurchaseOperationStrategy purchaseOperationStrategy;
+    private static OperationHandler purchaseOperationHandler;
 
     @BeforeClass
     public static void setUp() {
-        purchaseOperationStrategy = new PurchaseOperationStrategy();
+        purchaseOperationHandler = new PurchaseOperationHandler();
         Storage.fruits.clear();
     }
 
@@ -21,7 +22,7 @@ public class PurchaseOperationStrategyTest {
         Storage.fruits.put("banana", 60);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 50);
-        purchaseOperationStrategy.calculate(transaction);
+        purchaseOperationHandler.calculate(transaction);
         Integer expected = 10;
         Integer actual = Storage.fruits.get("banana");
         Assert.assertEquals("Wrong purchase data", expected, actual);
@@ -32,7 +33,7 @@ public class PurchaseOperationStrategyTest {
         Storage.fruits.put("banana", 40);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 50);
-        purchaseOperationStrategy.calculate(transaction);
+        purchaseOperationHandler.calculate(transaction);
     }
 
     @After

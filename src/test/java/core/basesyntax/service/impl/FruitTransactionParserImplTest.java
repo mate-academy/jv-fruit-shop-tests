@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -8,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionParserImplTest {
-    private static FruitTransactionParserImpl fruitTransactionParser;
+    private static FruitTransactionParser fruitTransactionParser;
 
     @BeforeClass
     public static void setUp() {
@@ -16,7 +17,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void transactionParser_validInputData_ok() {
+    public void toTransactions_validInputData_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
@@ -41,7 +42,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void transactionParser_inputDataNull_NotOk() {
+    public void toTransactions_inputDataNull_notOk() {
         fruitTransactionParser.toTransactions(null);
     }
 }

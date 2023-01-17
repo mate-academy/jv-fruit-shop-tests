@@ -14,8 +14,6 @@ import org.junit.Test;
 
 public class WriteFileTest {
     private static final String VALID_PATH_FILE = "src/test/resources/testResult.csv";
-    private static final String NOT_VALID_PATH = "";
-    private static final String DATA = "type,quantity" + System.lineSeparator() + "banana,25";
 
     private static WriteFileService writeFileService;
 
@@ -31,9 +29,12 @@ public class WriteFileTest {
 
     @Test
     public void writeToFile_validPath_ok() throws IOException {
+        String data = "type,quantity"
+                + System.lineSeparator()
+                + "banana,25";
         Path path = Path.of(VALID_PATH_FILE);
-        writeFileService.writeToFile(path, DATA);
-        assertEquals("Not valid path " + VALID_PATH_FILE, DATA, Files.readString(path));
+        writeFileService.writeToFile(path, data);
+        assertEquals("Not valid path " + VALID_PATH_FILE, data, Files.readString(path));
     }
 
     @Test(expected = NullPointerException.class)
@@ -43,7 +44,9 @@ public class WriteFileTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_invalidPathToFile() {
-        writeFileService.writeToFile(Path.of(NOT_VALID_PATH), DATA);
+        String data = "type,quantity"
+                + System.lineSeparator()
+                + "banana,25";
+        writeFileService.writeToFile(Path.of(""), data);
     }
-
 }

@@ -11,28 +11,28 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReadFileTest {
-    private static FileReadService fileReadService;
+    private static FileReadService fileReaderService;
     private static final String VALID_PATH_FILE = "src/test/resources/date.csv";
 
     @BeforeClass
     public static void setUp() {
-        fileReadService = new FileReadServiceImpl();
+        fileReaderService = new FileReadServiceImpl();
     }
 
     @Test(expected = NullPointerException.class)
     public void redFromFile_nullFilePath_notOk() {
-        fileReadService.readFromFile(null);
+        fileReaderService.readFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void redFromFile_invalidPath_notOk() {
-        fileReadService.readFromFile(Path.of("not_valid_path"));
+        fileReaderService.readFromFile(Path.of("not_valid_path"));
     }
 
     @Test
     public void redFromFile_validFilePath_ok() throws IOException {
         Path path = Path.of(VALID_PATH_FILE);
-        String actual = fileReadService.readFromFile(path);
+        String actual = fileReaderService.readFromFile(path);
         String expected = Files.readString(path);
         assertEquals("File not read", expected, actual);
     }

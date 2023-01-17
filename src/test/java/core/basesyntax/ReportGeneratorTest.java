@@ -25,7 +25,7 @@ public class ReportGeneratorTest {
     }
 
     @Test
-    public void generate_ok() {
+    public void generate_withOneLine_ok() {
         FruitStorage.fruits.put("banana", 20);
         String expected = ReportGeneratorImpl.HEADER + System.lineSeparator() + "banana,20";
         String actual = reportGenerator.generate();
@@ -33,7 +33,7 @@ public class ReportGeneratorTest {
     }
 
     @Test
-    public void generate_withTwoElement_ok() {
+    public void generate_withTwoLines_ok() {
         FruitStorage.fruits.put("banana", 20);
         FruitStorage.fruits.put("apple", 10);
         StringBuilder expected = new StringBuilder(ReportGeneratorImpl.HEADER)

@@ -18,6 +18,7 @@ public class BalanceOperationHandlerTest {
 
     @BeforeClass
     public static void beforeClass() {
+        Storage.storage.clear();
         operationHandler = new BalanceOperationHandler();
         apple = new Fruit("apple");
         banana = new Fruit("banana");

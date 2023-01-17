@@ -88,6 +88,15 @@ public class OperationHandlerTest {
         assertEquals("Buyers purchased the product, balance: ", expected, actual);
     }
 
+    @Test
+    public void apply_returnNotValid_ok() {
+        FruitStorage.fruits.put("apple", 50);
+        returnHandler.apply(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10));
+        int expected = 60;
+        int actual = FruitStorage.fruits.get("apple");
+        assertEquals("Buyer return some fruits, balance: ", expected, actual);
+    }
+
     @Test(expected = ProductNotFoundException.class)
     public void apply_purchaseOperationNotValidQuantity_ok() {
         FruitStorage.fruits.put("banana", 50);
@@ -99,14 +108,5 @@ public class OperationHandlerTest {
     public void apply_purchaseOperationNotFoundFruit_ok() {
         FruitStorage.fruits.put("banana", 50);
         purchaseHandler.apply(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 80));
-    }
-
-    @Test
-    public void apply_returnNotValid_ok() {
-        FruitStorage.fruits.put("apple", 50);
-        returnHandler.apply(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10));
-        int expected = 60;
-        int actual = FruitStorage.fruits.get("apple");
-        assertEquals("Buyer return some fruits, balance: ", expected, actual);
     }
 }

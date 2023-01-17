@@ -17,11 +17,6 @@ public class ReportGeneratorTest {
         reportGenerator = new ReportGeneratorImpl();
     }
 
-    @After
-    public void clearStorage() {
-        FruitStorage.fruits.clear();
-    }
-
     @Test
     public void generate_isEmpty_ok() {
         String expected = ReportGeneratorImpl.HEADER;
@@ -48,5 +43,10 @@ public class ReportGeneratorTest {
                 .append("apple,10");
         String actual = reportGenerator.generate();
         assertEquals("Method must generate valid report", expected.toString(), actual);
+    }
+
+    @After
+    public void clearStorage() {
+        FruitStorage.fruits.clear();
     }
 }

@@ -8,17 +8,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static FruitTransaction fruitTransaction;
     private static SupplyOperationHandler supplyOperationHandler;
 
     @BeforeClass
     public static void setUp() {
-        fruitTransaction = new FruitTransaction();
         supplyOperationHandler = new SupplyOperationHandler();
     }
 
     @Test
     public void apply_correctSupply_ok() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
         FruitDao.put("Avocado", 20);
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction.setFruit("Avocado");

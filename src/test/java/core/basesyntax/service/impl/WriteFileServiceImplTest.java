@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import static java.nio.file.Files.readString;
 
-import core.basesyntax.service.WriteFileService;
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.junit.Assert;
@@ -11,11 +11,11 @@ import org.junit.Test;
 
 public class WriteFileServiceImplTest {
     private static final String VALID_FILE_PATH = "src/test/resources/write_test_data";
-    private static WriteFileService writeFileService;
+    private static FileWriterService writeFileService;
 
     @BeforeClass
     public static void setUp() {
-        writeFileService = new WriteFileServiceImpl();
+        writeFileService = new FileWriterServiceImpl();
     }
 
     @Test

@@ -2,22 +2,22 @@ package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static FruitTransaction fruitTransaction;
-    private static ReturnOperationHandler returnOperationHandler;
+    private static OperationHandler returnOperationHandler;
 
     @BeforeClass
     public static void setUp() {
-        fruitTransaction = new FruitTransaction();
         returnOperationHandler = new ReturnOperationHandler();
     }
 
     @Test
     public void apply_correctReturn_ok() {
+        FruitTransaction fruitTransaction = new FruitTransaction();
         FruitDao.put("kiwi", 7);
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit("kiwi");

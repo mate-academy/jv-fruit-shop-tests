@@ -59,4 +59,9 @@ public class OperationStrategyImplTest {
                         .getClass();
         Assert.assertEquals("Operations must be the same", expected, actual);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void getHandlerByOperation_nullOperation_notOk() {
+        operationStrategy.getHandlerByOperation(null).getClass();
+    }
 }

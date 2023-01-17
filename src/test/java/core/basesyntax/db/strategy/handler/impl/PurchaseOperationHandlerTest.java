@@ -38,7 +38,7 @@ public class PurchaseOperationHandlerTest {
     @Test (expected = NullPointerException.class)
     public void apply_productDoesntExistsKey_notOk() {
         operationHandler.apply(
-                new FruitTransaction(PURCHASE, "pineapple", DEFAULT_QUANTITY));
+                new FruitTransaction(PURCHASE, null, DEFAULT_QUANTITY));
     }
 
     @Test (expected = RuntimeException.class)

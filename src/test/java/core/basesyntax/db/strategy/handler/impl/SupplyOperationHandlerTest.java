@@ -17,7 +17,7 @@ public class SupplyOperationHandlerTest {
 
     @BeforeClass
     public static void setUp() {
-        operationHandler = new ReturnOperationHandler();
+        operationHandler = new SupplyOperationHandler();
         Storage.getAll().put(BANANA, DEFAULT_QUANTITY);
     }
 

@@ -11,26 +11,26 @@ public class FruitTransactionParseServiceTest {
     private static final String VALID_DATA = "b,banana,50";
     private static final String INVALID_DATA = "b,banana,-50";
     private static final String WRONG_DELIMITER_DATA = "b banana 50";
-    private static final String FRUIT = "banana";
-    private static final FruitTransaction.Operation OPERATION = FruitTransaction.Operation.BALANCE;
-    private static final int QUANTITY = 50;
     private static ParseService<FruitTransaction> parseService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         parseService = new FruitTransactionParseService();
     }
 
     @Test
     public void parse_isOk() {
+        String fruit = "banana";
+        FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
+        int quantity = 50;
         FruitTransaction expected = new FruitTransaction();
-        expected.setOperation(FruitTransaction.Operation.BALANCE);
-        expected.setFruit("banana");
-        expected.setQuantity(50);
+        expected.setOperation(operation);
+        expected.setFruit(fruit);
+        expected.setQuantity(quantity);
         FruitTransaction actual = parseService.parse(VALID_DATA);
-        assertEquals(OPERATION, actual.getOperation());
-        assertEquals(FRUIT, actual.getFruit());
-        assertEquals(QUANTITY, actual.getQuantity());
+        assertEquals(operation, actual.getOperation());
+        assertEquals(fruit, actual.getFruit());
+        assertEquals(quantity, actual.getQuantity());
     }
 
     @Test (expected = RuntimeException.class)

@@ -20,7 +20,7 @@ public class OperationStrategyImplTest {
     private static OperationStrategy strategy;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         operationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
@@ -30,7 +30,7 @@ public class OperationStrategyImplTest {
     }
 
     @Before
-    public void beforeEach() {
+    public void fillStorage() {
         FruitStorage.fruitStorage.put("apple", 40);
     }
 

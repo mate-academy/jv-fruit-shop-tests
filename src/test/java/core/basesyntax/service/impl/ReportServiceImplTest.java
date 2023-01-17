@@ -13,12 +13,12 @@ public class ReportServiceImplTest {
     private static ReportService reportService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         reportService = new ReportServiceImpl();
     }
 
     @After
-    public void afterEach() {
+    public void clearStorage() {
         FruitStorage.fruitStorage.clear();
     }
 

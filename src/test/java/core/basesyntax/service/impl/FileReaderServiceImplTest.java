@@ -12,11 +12,10 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static final String VALID_INPUT_PATH = "src/test/resources/input_test_file.csv";
-    private static final String INVALID_INPUT_PATH = "";
     private static FileReaderService fileReaderService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fileReaderService = new FileReaderServiceImpl();
     }
 
@@ -30,7 +29,7 @@ public class FileReaderServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void readAllLines_nonExistingFilePath_isNotOk() {
-        fileReaderService.readAllLines(INVALID_INPUT_PATH);
+        fileReaderService.readAllLines("");
     }
 
     @Test (expected = NullPointerException.class)

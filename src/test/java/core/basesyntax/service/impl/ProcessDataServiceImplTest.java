@@ -26,7 +26,7 @@ public class ProcessDataServiceImplTest {
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         processDataService = new ProcessDataServiceImpl();
         data = List.of("type,fruit,quantity",
                 "b,banana,20",

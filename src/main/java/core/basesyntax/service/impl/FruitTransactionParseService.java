@@ -16,8 +16,8 @@ public class FruitTransactionParseService implements ParseService<FruitTransacti
         }
         String[] data = line.split(DELIMITER);
         int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
-        if (quantity < 0) {
-            throw new RuntimeException("Quantity can't be negative. Quantity: " + quantity);
+        if (quantity <= 0) {
+            throw new RuntimeException("Invalid quantity. Quantity: " + quantity);
         }
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(data[OPERATION_INDEX]);

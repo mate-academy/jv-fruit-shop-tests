@@ -21,17 +21,17 @@ public class FruitDaoImplTest {
     private static FruitDao fruitDao;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fruitDao = new FruitDaoImpl();
     }
 
     @Before
-    public void beforeEach() {
+    public void fillStorage() {
         FruitStorage.fruitStorage.put(APPLE, DEFAULT_QUANTITY);
     }
 
     @After
-    public void afterEach() {
+    public void clearStorage() {
         FruitStorage.fruitStorage.clear();
     }
 

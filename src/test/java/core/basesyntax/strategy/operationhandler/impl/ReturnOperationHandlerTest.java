@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.operationhandler.OperationHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,10 +13,10 @@ public class ReturnOperationHandlerTest {
     private static final int APPLE_QUANTITY = 50;
     private static final int APPLE_RETURN_QUANTITY = 30;
     private static FruitTransaction transaction;
-    private static ReturnOperationHandler returnOperationHandler;
+    private static OperationHandler returnOperationHandler;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         transaction = new FruitTransaction();
         returnOperationHandler = new ReturnOperationHandler();
         FruitStorage.fruitStorage.put(APPLE, APPLE_QUANTITY);
@@ -24,7 +25,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_return_isOk() {
+    public void handle_isOk() {
         returnOperationHandler.handle(transaction);
         int actual = FruitStorage.fruitStorage.get(APPLE);
         int expected = APPLE_QUANTITY + APPLE_RETURN_QUANTITY;

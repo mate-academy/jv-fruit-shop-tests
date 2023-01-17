@@ -3,14 +3,11 @@ package core.basesyntax.strategy.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static OperationStrategy operationStrategy;
 
     @BeforeClass

@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final String KEY = "apple";
+    private static final String DEFAULT_FRUIT = "apple";
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
     private static FruitDao fruitDao;
@@ -19,7 +19,8 @@ public class BalanceOperationHandlerTest {
     @BeforeClass
     public static void init() {
         operationHandler = new BalanceOperationHandler();
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, KEY, 20);
+        fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, DEFAULT_FRUIT, 20);
         fruitDao = new FruitDaoImpl();
     }
 
@@ -29,7 +30,7 @@ public class BalanceOperationHandlerTest {
         operationHandler.handle(fruitTransaction);
         Integer actual = fruitDao.getQuantity(fruitTransaction.getFruit());
         assertEquals(String.format("Should record %d for key \"%s\" but was %d",
-                expected, KEY, actual), expected, actual);
+                expected, DEFAULT_FRUIT, actual), expected, actual);
     }
 
     @Test
@@ -40,7 +41,7 @@ public class BalanceOperationHandlerTest {
         operationHandler.handle(fruitTransaction);
         Integer actual = fruitDao.getQuantity(fruitTransaction.getFruit());
         assertEquals(String.format("Should record %d for key \"%s\" but was %d",
-                expected, KEY, actual), expected, actual);
+                expected, DEFAULT_FRUIT, actual), expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

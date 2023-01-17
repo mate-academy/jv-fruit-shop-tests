@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static final String KEY = "apple";
+    private static final String DEFAULT_FRUIT = "apple";
     private static final Integer DEFAULT_QUANTITY = 20;
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
@@ -22,19 +22,19 @@ public class SupplyOperationHandlerTest {
         operationHandler = new SupplyOperationHandler();
         fruitDao = new FruitDaoImpl();
         fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, KEY, DEFAULT_QUANTITY);
+                FruitTransaction.Operation.PURCHASE, DEFAULT_FRUIT, DEFAULT_QUANTITY);
     }
 
     @Test
     public void handle_supplySomeFruits_ok() {
-        fruitDao.updateQuantity(KEY, DEFAULT_QUANTITY);
+        fruitDao.updateQuantity(DEFAULT_FRUIT, DEFAULT_QUANTITY);
         Integer fruitsSupplied = DEFAULT_QUANTITY;
-        Integer expected = fruitDao.getQuantity(KEY) + fruitsSupplied;
+        Integer expected = fruitDao.getQuantity(DEFAULT_FRUIT) + fruitsSupplied;
         fruitTransaction.setQuantity(fruitsSupplied);
         operationHandler.handle(fruitTransaction);
         Integer actual = fruitDao.getQuantity(fruitTransaction.getFruit());
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                expected, KEY, actual), expected, actual);
+                expected, DEFAULT_FRUIT, actual), expected, actual);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class SupplyOperationHandlerTest {
         operationHandler.handle(fruitTransaction);
         Integer actual = fruitDao.getQuantity(fruitTransaction.getFruit());
         assertEquals(String.format("Should return %d for key \"%s\" but was %d",
-                expected, KEY, actual), expected, actual);
+                expected, DEFAULT_FRUIT, actual), expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

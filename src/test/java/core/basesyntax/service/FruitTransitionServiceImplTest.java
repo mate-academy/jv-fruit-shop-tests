@@ -24,40 +24,45 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransitionServiceImplTest {
-    private static List<FruitTransaction> transitionData;
-    private static FruitTransactionService transitionService;
+    private static FruitTransactionService transactionService;
     private static Fruit banana;
 
     @BeforeClass
     public static void setUp() {
+        List<FruitTransaction> transitions;
         banana = new Fruit("banana");
-        transitionData = new ArrayList<>();
-        transitionData.add(new FruitTransaction("b", banana, 100));
-        transitionData.add(new FruitTransaction("s", banana, 100));
+        transitions = new ArrayList<>();
+        transitions.add(new FruitTransaction("b", banana, 100));
+        transitions.add(new FruitTransaction("s", banana, 100));
         Map<String, OperationHandler> dataOperation = new HashMap<>();
         dataOperation.put(BALANCE.getFirstLetter(), new BalanceHandler());
         dataOperation.put(SUPPLY.getFirstLetter(), new SupplyHandler());
         OperationHandlerStrategy strategy = new OperationHandlerStrategyImpl(dataOperation);
-        transitionService = new FruitTransactionServiceImpl(strategy);
+        transactionService = new FruitTransactionServiceImpl(strategy);
     }
 
     @After
-    public void afterEach() {
+    public void clearStorage() {
         FruitStorage.storage.clear();
     }
 
     @Test
-    public void setTestTransaction_ok() {
+    public void processTransactionService_ok() {
+        List<FruitTransaction> transitions;
+        banana = new Fruit("banana");
+        transitions = new ArrayList<>();
+        transitions.add(new FruitTransaction("b", banana, 100));
+        transitions.add(new FruitTransaction("s", banana, 100));
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(banana, 200);
-        transitionService.process(transitionData);
+        transactionService.process(transitions);
         Map<Fruit, Integer> actual = FruitStorage.storage;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void setEmptyTransaction_emptyDB_ok() {
-        transitionService.process(Collections.emptyList());
+        transactionService.process(Collections.emptyList());
         assertTrue(FruitStorage.storage.isEmpty());
     }
 }

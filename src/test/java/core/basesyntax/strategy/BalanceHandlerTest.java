@@ -10,24 +10,23 @@ import org.junit.Test;
 
 public class BalanceHandlerTest {
     private static Map<String, OperationHandler> operationHandler;
-    private static OperationHandlerStrategyImpl operationHandlerStrategy;
-    private static BalanceHandler balanceStrategy;
-    private static final int BALANCE = 100;
-    private static final int QUANTITY = 10;
-    private static final int BALANCE_RESULT = BALANCE + QUANTITY;
+    private static OperationHandler balanceHandler;
 
     @BeforeClass
     public static void setUp() {
-        balanceStrategy = new BalanceHandler();
+        balanceHandler = new BalanceHandler();
         operationHandler = new HashMap<>();
         operationHandler.put("b", new BalanceHandler());
-        operationHandlerStrategy = new OperationHandlerStrategyImpl(operationHandler);
+        new OperationHandlerStrategyImpl(operationHandler);
     }
 
     @Test
-    public void balanceStrategy_ok() {
-        int actual = balanceStrategy.handle(BALANCE, QUANTITY);
-        int expected = BALANCE_RESULT;
+    public void balanceHandler_ok() {
+        int balance = 100;
+        int quality = 10;
+        int balanceResult = balance + quality;
+        int actual = balanceHandler.handle(balance,quality);
+        int expected = balanceResult;
         Assert.assertEquals(expected, actual);
     }
 }

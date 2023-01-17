@@ -11,24 +11,23 @@ import org.junit.Test;
 
 public class ReturnHandlerTest {
     private static Map<String, OperationHandler> operationHandler;
-    private static OperationHandlerStrategyImpl operationHandlerStrategy;
-    private static ReturnHandler returnStrategy;
-    private static final int BALANCE = 100;
-    private static final int QUANTITY = 10;
-    private static final int RETURN_RESULT = BALANCE + QUANTITY;
+    private static OperationHandler returnHandler;
 
     @BeforeClass
     public static void setUp() {
-        returnStrategy = new ReturnHandler();
+        returnHandler = new ReturnHandler();
         operationHandler = new HashMap<>();
         operationHandler.put("b", new BalanceHandler());
-        operationHandlerStrategy = new OperationHandlerStrategyImpl(operationHandler);
+        new OperationHandlerStrategyImpl(operationHandler);
     }
 
     @Test
-    public void returnStrategy_ok() {
-        int actual = returnStrategy.handle(BALANCE, QUANTITY);
-        int expected = RETURN_RESULT;
+    public void returnHandler_ok() {
+        int balance = 100;
+        int quality = 10;
+        int returnResult = balance + quality;
+        int actual = returnHandler.handle(balance, quality);
+        int expected = returnResult;
         Assert.assertEquals(expected, actual);
     }
 }

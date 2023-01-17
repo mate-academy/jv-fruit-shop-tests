@@ -10,18 +10,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String FILE_WRITE_PATH
-            = "src/test/java/core/basesyntax/resources/output.csv";
-    private static final String FILE_READ_PATH
+    private static final String PATH_TO_OUTPUT_FILE
             = "src/test/java/core/basesyntax/resources/output.csv";
     private static FileWriter fileWriter;
-    private static StringBuilder report;
 
     @BeforeClass
     public static void setUp() {
         fileWriter = new FileWriterImpl();
-        report = new StringBuilder();
-        report.append("fruit, quantity")
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append("fruit, quantity")
                 .append(System.lineSeparator())
                 .append("banana,132")
                 .append(System.lineSeparator())
@@ -29,16 +26,18 @@ public class FileWriterImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeDataToFile_wrongFile_notOk() {
+    public void writeToFile_wrongFile_notOk() {
+        StringBuilder reportBuilder = null;
         String wrongPath = "wrong/file.csv";
-        fileWriter.writeToFile(report.toString(), wrongPath);
+        fileWriter.writeToFile("", wrongPath);
     }
 
     @Test
-     public void writeDataToFile_correctFile_ok() throws IOException {
-        fileWriter.writeToFile(report.toString(), FILE_WRITE_PATH);
-        List<String> expected = Files.readAllLines(Path.of(FILE_WRITE_PATH));
-        List<String> actual = Files.readAllLines(Path.of(FILE_READ_PATH));
+     public void writeToFile_correctFile_ok() throws IOException {
+        StringBuilder reportBuilder = new StringBuilder();
+        fileWriter.writeToFile(reportBuilder.toString(), PATH_TO_OUTPUT_FILE);
+        List<String> expected = Files.readAllLines(Path.of(PATH_TO_OUTPUT_FILE));
+        List<String> actual = Files.readAllLines(Path.of(PATH_TO_OUTPUT_FILE));
         Assert.assertEquals(expected, actual);
     }
 }

@@ -22,13 +22,13 @@ public class FruitTransitionParserImplTest {
     }
 
     @Before
-    public void beforeAll() {
+    public void addHeader() {
         data.clear();
         data.add("type,fruit,quantity");
     }
 
     @Test
-    public void parseTransition_getFruit_ok() {
+    public void parse_getFruit_ok() {
         data.add("b,apple,100");
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("b", new Fruit("apple"), 100));
@@ -37,7 +37,7 @@ public class FruitTransitionParserImplTest {
     }
 
     @Test
-    public void parseTransition_singleElement_ok() {
+    public void parse_singleElement_ok() {
         data.add("b,apple,100");
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("b", new Fruit("apple"), 100));
@@ -46,7 +46,7 @@ public class FruitTransitionParserImplTest {
     }
 
     @Test
-    public void parseTransition_threeElement_ok() {
+    public void parse_threeElement_ok() {
         data.add("b,apple,100");
         data.add("b,apple,150");
         data.add("s,banana,200");

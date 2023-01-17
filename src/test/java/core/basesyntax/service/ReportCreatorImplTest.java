@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class ReportCreatorImplTest {
     private static Map<Fruit, Integer> storage;
-    private static StringBuilder report;
     private static ReportCreator reportCreator;
 
     @BeforeClass
@@ -20,8 +19,8 @@ public class ReportCreatorImplTest {
         storage.put(new Fruit("banana"), 152);
         storage.put(new Fruit("apple"), 90);
         reportCreator = new ReportCreatorImpl();
-        report = new StringBuilder();
-        report.append("fruit, quantity")
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append("fruit, quantity")
                 .append(System.lineSeparator())
                 .append("banana,152")
                 .append(System.lineSeparator())
@@ -31,8 +30,15 @@ public class ReportCreatorImplTest {
 
     @Test
     public void createReport_validData_ok() {
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append("fruit, quantity")
+                .append(System.lineSeparator())
+                .append("banana,152")
+                .append(System.lineSeparator())
+                .append("apple,90")
+                .append(System.lineSeparator());
         String actual = reportCreator.createReport(storage);
-        String expected = report.toString();
+        String expected = reportBuilder.toString();
         Assert.assertEquals(expected, actual);
     }
 

@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReadServiceImplTest {
-    private static final Path VALID_PATH = Path.of("src/test/resources/input.csv");
     private static FileReadService fileReadService;
 
     @BeforeClass
@@ -20,14 +19,15 @@ public class FileReadServiceImplTest {
 
     @Test
     public void readFromFile_validFilePath_ok() throws IOException {
-        String expected = Files.readString(VALID_PATH);
-        String actual = fileReadService.readFromFile(VALID_PATH);
+        Path validPath = Path.of("src/test/resources/input.csv");
+        String expected = Files.readString(validPath);
+        String actual = fileReadService.readFromFile(validPath);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void readFromFile_nonExistentFilePath_notOk() {
-        fileReadService.readFromFile(Path.of("src/main/resources/non_existent.csv"));
+        fileReadService.readFromFile(Path.of("src/test/resources/non_existent.csv"));
     }
 
     @Test (expected = NullPointerException.class)

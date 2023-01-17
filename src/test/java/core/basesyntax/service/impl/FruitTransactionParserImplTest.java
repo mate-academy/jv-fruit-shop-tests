@@ -38,7 +38,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void toTransactions_invalidResult_notOk() {
+    public void toTransactions_resultIsNotEmpty_ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> actual = fruitTransactionParser.toTransactions(fileData);
         assertNotEquals(expected, actual);

@@ -17,14 +17,14 @@ import org.junit.Test;
 public class TransactionProcessorStrategyTest {
     private static final String TEST_FRUIT = "banana";
     private static List<FruitTransaction> transactions;
-    private static Map<String, Integer> fruits;
+    private static Map<String, Integer> fruitsMap;
     private static TransactionProcessor strategy;
     private static FruitTransaction fruitTransaction;
 
     @BeforeClass
     public static void setUpClass() {
         transactions = new ArrayList<>();
-        fruits = new HashMap<>();
+        fruitsMap = new HashMap<>();
         strategy = new TransactionProcessorStrategy();
         fruitTransaction = new FruitTransaction(Operation.BALANCE,
                 TEST_FRUIT, 15);
@@ -32,22 +32,22 @@ public class TransactionProcessorStrategyTest {
 
     @Before
     public void setUp() {
-        fruits.put(TEST_FRUIT, 25);
+        fruitsMap.put(TEST_FRUIT, 25);
     }
 
     @After
     public void tearDown() {
         transactions.clear();
-        fruits.clear();
+        fruitsMap.clear();
     }
 
     @Test
     public void process_addition_ok() {
         fruitTransaction.setOperation(Operation.SUPPLY);
         transactions.add(fruitTransaction);
-        strategy.process(transactions, fruits);
+        strategy.process(transactions, fruitsMap);
         final int expected = 40;
-        int actual = fruits.get(TEST_FRUIT);
+        int actual = fruitsMap.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 
@@ -55,9 +55,9 @@ public class TransactionProcessorStrategyTest {
     public void process_additionIfReturn_ok() {
         fruitTransaction.setOperation(Operation.RETURN);
         transactions.add(fruitTransaction);
-        strategy.process(transactions, fruits);
+        strategy.process(transactions, fruitsMap);
         final int expected = 40;
-        int actual = fruits.get(TEST_FRUIT);
+        int actual = fruitsMap.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 
@@ -65,20 +65,20 @@ public class TransactionProcessorStrategyTest {
     public void process_sellFromStorage_ok() {
         fruitTransaction.setOperation(Operation.PURCHASE);
         transactions.add(fruitTransaction);
-        strategy.process(transactions, fruits);
+        strategy.process(transactions, fruitsMap);
         final int expected = 10;
-        int actual = fruits.get(TEST_FRUIT);
+        int actual = fruitsMap.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 
     @Test
     public void process_initialFruits_ok() {
         fruitTransaction.setOperation(Operation.BALANCE);
-        fruits.clear();
+        fruitsMap.clear();
         transactions.add(fruitTransaction);
-        strategy.process(transactions, fruits);
+        strategy.process(transactions, fruitsMap);
         final int expected = fruitTransaction.getQuantity();
-        int actual = fruits.get(TEST_FRUIT);
+        int actual = fruitsMap.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 }

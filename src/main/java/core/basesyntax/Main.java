@@ -4,12 +4,12 @@ import static core.basesyntax.db.FruitStorage.fruits;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.FileWriteService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
-import core.basesyntax.service.impl.FileWriteServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.strategy.TransactionProcessorStrategy;
@@ -21,7 +21,7 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
         TransactionProcessor transactionProcessor = new TransactionProcessorStrategy();
-        FileWriteService fileWriteService = new FileWriteServiceImpl();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         Map<String, Integer> database = fruits;
 
@@ -33,6 +33,6 @@ public class Main {
 
         String report = reportGenerator.generateReport(database);
 
-        fileWriteService.writeReportToFile(report, "src/main/resources/output.csv");
+        fileWriterService.writeReportToFile(report, "src/main/resources/output.csv");
     }
 }

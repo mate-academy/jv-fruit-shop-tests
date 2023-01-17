@@ -10,24 +10,24 @@ import org.junit.Test;
 
 public class InitialFruitsServiceTest {
     private static FruitTransaction fruitTransaction;
-    private static InitialFruitsService addition;
-    private Map<String, Integer> fruitMap;
+    private static InitialFruitsService initialFruitsService;
+    private Map<String, Integer> fruitsMap;
 
     @Before
     public void setUp() {
         fruitTransaction = new FruitTransaction(Operation.BALANCE,
                 "banana", 20);
-        fruitMap = new HashMap<>();
-        addition = new InitialFruitsService();
+        fruitsMap = new HashMap<>();
+        initialFruitsService = new InitialFruitsService();
     }
 
     @After
     public void tearDown() {
-        fruitMap.clear();
+        fruitsMap.clear();
     }
 
     @Test
     public void process_addFruits_ok() {
-        addition.process(fruitTransaction, fruitMap);
+        initialFruitsService.process(fruitTransaction, fruitsMap);
     }
 }

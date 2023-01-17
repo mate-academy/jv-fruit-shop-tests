@@ -9,7 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation BALANCE_OPERATION =
+            FruitTransaction.Operation.BALANCE;
     private static OperationHandler operationHandler;
     private FruitTransaction fruitTransaction;
 
@@ -25,14 +26,14 @@ public class BalanceOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void apply_negativeQuantity_notOk() {
-        fruitTransaction = new FruitTransaction(BALANCE, "banana", -10);
+        fruitTransaction = new FruitTransaction(BALANCE_OPERATION, "banana", -10);
         operationHandler.apply(fruitTransaction);
     }
 
     @Test
     public void apply_zeroQuantity_ok() {
         int expected = 0;
-        fruitTransaction = new FruitTransaction(BALANCE, "apple", expected);
+        fruitTransaction = new FruitTransaction(BALANCE_OPERATION, "apple", expected);
         operationHandler.apply(fruitTransaction);
         int actual = FruitStorage.fruits.get("apple");
         assertEquals(expected, actual);
@@ -41,7 +42,7 @@ public class BalanceOperationHandlerTest {
     @Test
     public void apply_validQuantity_ok() {
         int expected = 12;
-        fruitTransaction = new FruitTransaction(BALANCE, "orange", expected);
+        fruitTransaction = new FruitTransaction(BALANCE_OPERATION, "orange", expected);
         operationHandler.apply(fruitTransaction);
         int actual = FruitStorage.fruits.get("orange");
         assertEquals(expected, actual);

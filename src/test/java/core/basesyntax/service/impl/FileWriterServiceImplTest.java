@@ -2,37 +2,37 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.FileWriteService;
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FileWriteServiceImplTest {
-    private static FileWriteService fileWriteService;
+public class FileWriterServiceImplTest {
+    private static FileWriterService fileWriterService;
 
     @BeforeClass
     public static void setUp() {
-        fileWriteService = new FileWriteServiceImpl();
+        fileWriterService = new FileWriterServiceImpl();
     }
 
     @Test
     public void writeToFile_validFilePath_ok() throws IOException {
         Path validPath = Path.of("src/test/resources/output.csv");
         String expected = "expected data";
-        fileWriteService.writeToFile(validPath, expected);
+        fileWriterService.writeToFile(validPath, expected);
         String actual = Files.readString(validPath);
         assertEquals(expected, actual);
     }
 
     @Test (expected = NullPointerException.class)
     public void writeToFile_nullFilePath_notOk() {
-        fileWriteService.writeToFile(null, "");
+        fileWriterService.writeToFile(null, "");
     }
 
     @Test (expected = RuntimeException.class)
     public void writeToFile_nonValidFilePath_notOk() {
-        fileWriteService.writeToFile(Path.of(""), "valid data");
+        fileWriterService.writeToFile(Path.of(""), "valid data");
     }
 }

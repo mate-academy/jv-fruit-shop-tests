@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportGeneratorImplTest {
-    private static final Map<String, Integer> STORAGE = FruitStorage.fruits;
     private static ReportGenerator reportGenerator;
 
     @BeforeClass
@@ -20,7 +19,7 @@ public class ReportGeneratorImplTest {
 
     @Before
     public void clearStorage() {
-        STORAGE.clear();
+        FruitStorage.fruits.clear();
     }
 
     @Test
@@ -32,11 +31,11 @@ public class ReportGeneratorImplTest {
 
     @Test
     public void generate_storageIsFull_ok() {
-        STORAGE.put("banana", 12);
-        STORAGE.put("apple", 8);
-        STORAGE.put("orange", 14);
+        FruitStorage.fruits.put("banana", 12);
+        FruitStorage.fruits.put("apple", 8);
+        FruitStorage.fruits.put("orange", 14);
         StringBuilder stringBuilder = new StringBuilder(ReportGeneratorImpl.FIELDS_NAMES);
-        for (Map.Entry<String, Integer> fruitBalance : STORAGE.entrySet()) {
+        for (Map.Entry<String, Integer> fruitBalance : FruitStorage.fruits.entrySet()) {
             stringBuilder.append(System.lineSeparator())
                     .append(fruitBalance.getKey())
                     .append(",")

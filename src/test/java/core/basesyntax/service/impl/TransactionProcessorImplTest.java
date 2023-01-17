@@ -21,10 +21,17 @@ public class TransactionProcessorImplTest {
     @Test
     public void process_validTransactions_ok() {
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 6));
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 3));
-        int expected = 17;
+        FruitTransaction balanceTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        FruitTransaction purchaseTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 6);
+        FruitTransaction returnTransaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 3);
+        transactions.add(balanceTransaction);
+        transactions.add(purchaseTransaction);
+        transactions.add(returnTransaction);
+        int expected = balanceTransaction.getQuantity() - purchaseTransaction.getQuantity()
+                + returnTransaction.getQuantity();
         transactionProcessor.process(transactions);
         int actual = FruitStorage.fruits.get("banana");
         assertEquals(expected, actual);

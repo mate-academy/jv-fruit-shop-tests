@@ -12,7 +12,6 @@ public class ReportBuilderServiceTest {
     private static ReportBuilderService reportBuilder;
     private static FruitTransaction fruit;
 
-
     @BeforeClass
     public static void setUp() {
         reportBuilder = new ReportBuilderServiceImpl();

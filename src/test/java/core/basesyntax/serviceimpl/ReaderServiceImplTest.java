@@ -2,6 +2,7 @@ package core.basesyntax.serviceimpl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,17 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String filePath = "src\\test\\result.csv";
-    private static ReaderServiceImpl readerService;
-    private static final String defaultData =
-            "b,banana,20" + System.lineSeparator()
-                    + "b,apple,100" + System.lineSeparator()
-                    + "s,banana,100" + System.lineSeparator()
-                    + "p,banana,13" + System.lineSeparator()
-                    + "r,apple,10" + System.lineSeparator()
-                    + "p,apple,20" + System.lineSeparator()
-                    + "p,banana,5" + System.lineSeparator()
-                    + "s,banana,50";
+    private static final String PATH_TO_FILE = "src\\test\\result.csv";
+    private static ReaderService readerService;
 
     @BeforeClass
     public static void init() {
@@ -30,10 +22,19 @@ public class ReaderServiceImplTest {
 
     @Before
     public void setUp() {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
+        String defaultData =
+                "b,banana,20" + System.lineSeparator()
+                        + "b,apple,100" + System.lineSeparator()
+                        + "s,banana,100" + System.lineSeparator()
+                        + "p,banana,13" + System.lineSeparator()
+                        + "r,apple,10" + System.lineSeparator()
+                        + "p,apple,20" + System.lineSeparator()
+                        + "p,banana,5" + System.lineSeparator()
+                        + "s,banana,50";
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH_TO_FILE))) {
             bufferedWriter.write(defaultData);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file " + filePath, e);
+            throw new RuntimeException("Can`t write data to file " + PATH_TO_FILE, e);
         }
     }
 
@@ -47,7 +48,7 @@ public class ReaderServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = readerService.readFromFile(filePath);
+        List<String> actual = readerService.readFromFile(PATH_TO_FILE);
         assertEquals(defaultDataFromFile, actual);
     }
 

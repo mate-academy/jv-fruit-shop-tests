@@ -15,7 +15,7 @@ public class ParserServiceImplTest {
     private static ParserService transactionParserService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         transactionParserService = new ParserServiceImpl();
     }
 

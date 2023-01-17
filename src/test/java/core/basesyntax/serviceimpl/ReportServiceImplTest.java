@@ -3,15 +3,16 @@ package core.basesyntax.serviceimpl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static ReportServiceImpl reportService;
+    private static ReportService reportService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         Storage.storage.clear();
         reportService = new ReportServiceImpl();
     }

@@ -12,12 +12,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-    private static SupplyOperationHandler operationHandler;
+    private static OperationHandler operationHandler;
     private static Fruit apple;
     private static Fruit banana;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         Storage.storage.clear();
         operationHandler = new SupplyOperationHandler();
         apple = new Fruit("apple");

@@ -1,9 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.FileReaderImpl;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -26,7 +23,7 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readFile_fileExist_ok() throws IOException {
+    public void readFile_fileExist_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -37,7 +34,6 @@ public class FileReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        Files.write(Path.of(FILE_EXIST), expected);
         List<String> actual = fileReader.readFromFile(FILE_EXIST);
         Assert.assertEquals(expected, actual);
     }

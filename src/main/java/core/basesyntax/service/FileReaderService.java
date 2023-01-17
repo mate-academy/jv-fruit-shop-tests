@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.nio.file.Path;
 
-public interface FileReadService {
+public interface FileReaderService {
     String readFromFile(Path path);
 }

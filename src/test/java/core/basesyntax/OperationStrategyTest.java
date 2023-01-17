@@ -54,4 +54,9 @@ public class OperationStrategyTest {
         assertEquals("Buyer return some fruits, balance: ",
                 expected, actual);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void get_operationNullValue_notOk() {
+        operationStrategy.getOperationHandler(null);
+    }
 }

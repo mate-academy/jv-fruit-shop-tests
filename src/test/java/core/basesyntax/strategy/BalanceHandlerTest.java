@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.strategy.impl.BalanceHandler;
-import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -17,7 +16,6 @@ public class BalanceHandlerTest {
         balanceHandler = new BalanceHandler();
         operationHandler = new HashMap<>();
         operationHandler.put("b", new BalanceHandler());
-        new OperationHandlerStrategyImpl(operationHandler);
     }
 
     @Test

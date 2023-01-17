@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.strategy.impl.BalanceHandler;
-import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,6 @@ public class PurchaseHandlerTest {
         purchaseHandler = new PurchaseHandler();
         operationHandler = new HashMap<>();
         operationHandler.put("b", new BalanceHandler());
-        new OperationHandlerStrategyImpl(operationHandler);
     }
 
     @Test

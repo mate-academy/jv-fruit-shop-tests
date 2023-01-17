@@ -19,7 +19,7 @@ public class FileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_wrongPath_notOkk() {
+    public void readFromFile_wrongPath_notOk() {
         fileReader.readFromFile(WRONG_FILE_PATH);
     }
 
@@ -39,4 +39,3 @@ public class FileReaderImplTest {
         Assert.assertEquals(expected, actual);
     }
 }
-

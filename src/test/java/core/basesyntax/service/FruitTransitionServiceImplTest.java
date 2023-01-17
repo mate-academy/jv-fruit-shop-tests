@@ -29,11 +29,10 @@ public class FruitTransitionServiceImplTest {
 
     @BeforeClass
     public static void setUp() {
-        List<FruitTransaction> transitions;
+        List<FruitTransaction> transactions = new ArrayList<>();
         banana = new Fruit("banana");
-        transitions = new ArrayList<>();
-        transitions.add(new FruitTransaction("b", banana, 100));
-        transitions.add(new FruitTransaction("s", banana, 100));
+        transactions.add(new FruitTransaction("b", banana, 100));
+        transactions.add(new FruitTransaction("s", banana, 100));
         Map<String, OperationHandler> dataOperation = new HashMap<>();
         dataOperation.put(BALANCE.getFirstLetter(), new BalanceHandler());
         dataOperation.put(SUPPLY.getFirstLetter(), new SupplyHandler());
@@ -48,14 +47,13 @@ public class FruitTransitionServiceImplTest {
 
     @Test
     public void processTransactionService_ok() {
-        List<FruitTransaction> transitions;
+        List<FruitTransaction> transactions = new ArrayList<>();
         banana = new Fruit("banana");
-        transitions = new ArrayList<>();
-        transitions.add(new FruitTransaction("b", banana, 100));
-        transitions.add(new FruitTransaction("s", banana, 100));
+        transactions.add(new FruitTransaction("b", banana, 100));
+        transactions.add(new FruitTransaction("s", banana, 100));
         Map<Fruit, Integer> expected = new HashMap<>();
         expected.put(banana, 200);
-        transactionService.process(transitions);
+        transactionService.process(transactions);
         Map<Fruit, Integer> actual = FruitStorage.storage;
         Assert.assertEquals(expected, actual);
     }

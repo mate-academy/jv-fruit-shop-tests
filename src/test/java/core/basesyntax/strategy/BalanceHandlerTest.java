@@ -8,13 +8,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceHandlerTest {
-    private static Map<String, OperationHandler> operationHandler;
     private static OperationHandler balanceHandler;
 
     @BeforeClass
     public static void setUp() {
         balanceHandler = new BalanceHandler();
-        operationHandler = new HashMap<>();
+        Map<String, OperationHandler> operationHandler = new HashMap<>();
         operationHandler.put("b", new BalanceHandler());
     }
 

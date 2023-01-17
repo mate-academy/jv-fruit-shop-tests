@@ -9,13 +9,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnHandlerTest {
-    private static Map<String, OperationHandler> operationHandler;
     private static OperationHandler returnHandler;
 
     @BeforeClass
     public static void setUp() {
         returnHandler = new ReturnHandler();
-        operationHandler = new HashMap<>();
+        Map<String, OperationHandler> operationHandler = new HashMap<>();
         operationHandler.put("b", new BalanceHandler());
     }
 

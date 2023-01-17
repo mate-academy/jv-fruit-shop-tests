@@ -12,28 +12,28 @@ import org.junit.Test;
 
 public class AdditionToStorageServiceTest {
     private static FruitTransaction fruitTransaction;
-    private static AdditionToStorageService addition;
-    private Map<String, Integer> fruitMap;
+    private static AdditionToStorageService additionToStorageService;
+    private Map<String, Integer> fruitsMap;
 
     @Before
     public void setUp() {
         fruitTransaction = new FruitTransaction(Operation.SUPPLY,
                 "banana", 20);
-        fruitMap = new HashMap<>();
-        fruitMap.put("banana", 10);
-        addition = new AdditionToStorageService();
+        fruitsMap = new HashMap<>();
+        fruitsMap.put("banana", 10);
+        additionToStorageService = new AdditionToStorageService();
     }
 
     @After
     public void tearDown() {
-        fruitMap.clear();
+        fruitsMap.clear();
     }
 
     @Test
     public void process_validResult_ok() {
         int expected = 30;
-        addition.process(fruitTransaction, fruitMap);
-        int actual = fruitMap.get("banana");
+        additionToStorageService.process(fruitTransaction, fruitsMap);
+        int actual = fruitsMap.get("banana");
         assertEquals(actual, expected);
     }
 }

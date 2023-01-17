@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvFileReaderService;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceImplTest {
-    //1. file path is wrong another from src/test/resources/
-    //2. file path is wrong src/test/resources/no file
-    private static CsvFileReaderService fileReaderService;
     private static final String VALID_FILE_PATH = "src/test/resources/file.csv";
+    private static CsvFileReaderService fileReaderService;
 
     @BeforeClass
     public static void setUp() {
@@ -19,7 +19,15 @@ public class CsvFileReaderServiceImplTest {
 
     @Test
     public void fileReader_filePathRight_Ok() {
-        Assert.assertEquals(VALID_FILE_PATH, "src/test/resources/file.csv");
+        String expected = "";
+        Path path = Path.of(VALID_FILE_PATH);
+        try {
+            expected = Files.readString(path);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read from file");
+        }
+        String actual = fileReaderService.readFromFile(path);
+        Assert.assertEquals("Result is not equal", expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

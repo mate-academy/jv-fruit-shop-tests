@@ -23,6 +23,6 @@ public class SupplyOperationStrategyTest {
         supplyOperationStrategy.calculate(transaction);
         Integer expected = 80;
         Integer actual = Storage.fruits.get("banana");
-        Assert.assertEquals("Wrong balance data", expected, actual);
+        Assert.assertEquals("Wrong supply data", expected, actual);
     }
 }

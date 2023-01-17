@@ -9,8 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterServiceImplTest {
-    private static CsvFileWriterService writerService;
     private static final String FILE_PATH = "src/test/resources/rp.csv";
+    private static CsvFileWriterService writerService;
 
     @BeforeClass
     public static void setUp() {

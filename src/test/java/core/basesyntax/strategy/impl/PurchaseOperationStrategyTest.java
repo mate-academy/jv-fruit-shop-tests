@@ -24,7 +24,7 @@ public class PurchaseOperationStrategyTest {
         purchaseOperationStrategy.calculate(transaction);
         Integer expected = 10;
         Integer actual = Storage.fruits.get("banana");
-        Assert.assertEquals("Wrong balance data", expected, actual);
+        Assert.assertEquals("Wrong purchase data", expected, actual);
     }
 
     @Test

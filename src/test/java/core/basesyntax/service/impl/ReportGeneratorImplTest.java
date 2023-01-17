@@ -12,7 +12,7 @@ public class ReportGeneratorImplTest {
     private static ReportGenerator reportGenerator;
 
     @BeforeClass
-    public static void setUpBeforAll() {
+    public static void setUpBeforeAll() {
         reportGenerator = new ReportGeneratorImpl();
     }
 
@@ -31,11 +31,10 @@ public class ReportGeneratorImplTest {
                 + "pineapple,40";
         String actual = reportGenerator.createReport();
         Assert.assertEquals(expected, actual);
-
     }
 
     @Test
-    public void createReport_reportDataEmpty_notOk() {
+    public void createReport_reportDataEmpty_ok() {
         Storage.fruits.clear();
         String expected = "fruit,quantity";
         String actual = reportGenerator.createReport();

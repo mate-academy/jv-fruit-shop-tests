@@ -14,7 +14,6 @@ public class FileWriterImplTest {
             = "src/test/java/core/basesyntax/resources/output.csv";
     private static final String FILE_READ_PATH
             = "src/test/java/core/basesyntax/resources/output.csv";
-    private static final String WRONG_PATH = "wrong/file.csv";
     private static FileWriter fileWriter;
     private static StringBuilder report;
 
@@ -31,7 +30,8 @@ public class FileWriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeDataToFile_wrongFile_notOk() {
-        fileWriter.writeToFile(report.toString(), WRONG_PATH);
+        String wrongPath = "wrong/file.csv";
+        fileWriter.writeToFile(report.toString(), wrongPath);
     }
 
     @Test

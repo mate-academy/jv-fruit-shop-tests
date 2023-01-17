@@ -1,11 +1,10 @@
 package core.basesyntax.db.service.impl;
 
 import core.basesyntax.db.model.FruitTransaction;
-import core.basesyntax.db.service.FileParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileParserServiceImpl implements FileParserService {
+public class FileParserServiceImpl implements core.basesyntax.db.service.FileParserService {
     private static final String REGEX = ",";
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
@@ -13,15 +12,13 @@ public class FileParserServiceImpl implements FileParserService {
 
     @Override
     public List<FruitTransaction> parse(List<String> inputFile) {
-        if (inputFile.contains(null)) {
-            throw new NullPointerException("input file contains null");
-        }
         return inputFile.stream()
                 .map(String::toLowerCase)
                 .map(this::toTransaction)
                 .collect(Collectors.toList());
     }
 
+    @Override
     public FruitTransaction toTransaction(String line) {
         String[] splitLine = line.split(REGEX);
         return new FruitTransaction(FruitTransaction.Operation

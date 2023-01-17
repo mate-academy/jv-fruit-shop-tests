@@ -13,7 +13,6 @@ import core.basesyntax.db.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.db.strategy.OperationHandler;
 import core.basesyntax.db.strategy.OperationStrategy;
 import core.basesyntax.db.strategy.handler.impl.OperationStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +21,6 @@ public class Main {
     private static final String FILE_PATH_TO = "src/main/resources/report.csv";
     private static final FileCsvReaderService service = new FileCsvReaderServiceImpl();
     private static final FileParserService fruitParserService = new FileParserServiceImpl();
-    private static final Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlerMap = new HashMap<>();
     private static final Map<String, Integer> map = Storage.getAll();
     private static final ReportCreatorService createReport = new ReportCreatorServiceImpl();
     private static final FileWriterService reportFile = new FileWriterServiceImpl();

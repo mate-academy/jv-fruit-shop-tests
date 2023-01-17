@@ -18,15 +18,15 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl();
         apple = new Fruit("apple");
         banana = new Fruit("banana");
+        Storage.storage.put(banana, 22);
+        Storage.storage.put(apple, 33);
     }
 
     @Test
     public void report_validData_Ok() {
-        Storage.storage.put(banana, 22);
-        Storage.storage.put(apple, 33);
         String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,33" + System.lineSeparator()
-                + "banana,22" + System.lineSeparator();
+                + "banana,22" + System.lineSeparator()
+                + "apple,33" + System.lineSeparator();
         String actual = reportService.getReport();
         assertEquals(expected, actual);
     }

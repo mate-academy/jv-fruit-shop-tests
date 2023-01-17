@@ -16,8 +16,7 @@ public class WriterServiceImplTest {
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
         filePathEmpty = "src\\test\\empty.csv";
-        filePathWrongContent = "C:\\Users\\User\\IdeaProjects"
-                + "\\jv-fruit-shop-tests\\src\\test\\wrongdata.csv";
+        filePathWrongContent = "src\\test\\wrongdata.csv";
     }
 
     @Test

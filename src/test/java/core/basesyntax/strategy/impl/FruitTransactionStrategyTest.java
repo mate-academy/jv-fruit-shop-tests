@@ -14,9 +14,7 @@ import org.junit.Test;
 
 public class FruitTransactionStrategyTest {
     private static FruitTransactionStrategy fruitTransactionStrategy;
-    private static FruitTransaction fruitTransaction;
     private static FruitDao fruitDao;
-    private FruitTransactionHandler actual;
 
     @BeforeClass
     public static void init() {
@@ -31,9 +29,11 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_chooseBalanceHandler_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 29);
-        actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
+        FruitTransactionHandler actual = fruitTransactionStrategy
+                .getTransaction(fruitTransaction.getOperation());
         FruitTransactionHandler expected = new BalanceHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
@@ -44,9 +44,11 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_choosePurchaseHandler_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 29);
-        actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
+        FruitTransactionHandler actual = fruitTransactionStrategy
+                .getTransaction(fruitTransaction.getOperation());
         FruitTransactionHandler expected = new PurchaseHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
@@ -57,9 +59,11 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_chooseSupplyHandler_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 29);
-        actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
+        FruitTransactionHandler actual = fruitTransactionStrategy
+                .getTransaction(fruitTransaction.getOperation());
         FruitTransactionHandler expected = new SupplyHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
@@ -70,9 +74,11 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_chooseReturnHandler_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 29);
-        actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
+        FruitTransactionHandler actual = fruitTransactionStrategy
+                .getTransaction(fruitTransaction.getOperation());
         FruitTransactionHandler expected = new ReturnHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
@@ -83,9 +89,10 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_nullOperator_notOk() {
-        fruitTransaction = new FruitTransaction(null,
+        FruitTransaction fruitTransaction = new FruitTransaction(null,
                 "banana", 29);
-        actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
+        FruitTransactionHandler actual = fruitTransactionStrategy
+                .getTransaction(fruitTransaction.getOperation());
         Assert.assertNull(actual);
     }
 

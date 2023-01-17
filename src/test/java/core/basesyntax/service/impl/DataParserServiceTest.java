@@ -45,6 +45,5 @@ public class DataParserServiceTest {
     public void toTransactions_dataFromEmptyFile_notOk() {
         List<String> empty = new ArrayList<>();
         dataParserService.toTransactions(empty);
-
     }
 }

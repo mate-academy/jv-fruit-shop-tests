@@ -62,7 +62,7 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void writeToFile_isNotValidPath_ok() {
+    public void writeToFile_isNotValidPath_notOk() {
         String pathIsNotValid = "null";
         fileWriterService.writeToFile(REPORT, pathIsNotValid);
         try {

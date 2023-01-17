@@ -42,7 +42,7 @@ public class TransactionProcessorImplTest {
     public void process_emptyList_ok() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         transactionProcessor.process(fruitTransactions);
-        assertTrue(String.format("Should return true but was false"),
+        assertTrue("Should return true but was false",
                 fruitDao.isEmpty());
     }
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public class ReportGeneratorImplTest {
         assertEquals(expected, actual);
     }
 
-    @After
+    @Before
     public void clearStorage() {
         STORAGE.clear();
     }

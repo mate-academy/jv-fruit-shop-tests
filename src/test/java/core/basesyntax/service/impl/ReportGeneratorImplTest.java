@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class ReportGeneratorImplTest {
     private static final String HEADER = "fruit,quantity";
-
     private static ReportGenerator reportGenerator;
 
     @BeforeClass

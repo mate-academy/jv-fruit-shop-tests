@@ -19,15 +19,11 @@ public class FruitTransactionParserImplTest {
 
     @Test
     public void parseTransactions_validData_ok() {
-        final List<FruitTransaction> expected = new ArrayList<>();
-        FruitTransaction firstTransaction = new FruitTransaction();
-        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        firstTransaction.setFruit("apple");
-        firstTransaction.setQuantity(10);
-        FruitTransaction secondTransaction = new FruitTransaction();
-        secondTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        secondTransaction.setFruit("apple");
-        secondTransaction.setQuantity(10);
+        List<FruitTransaction> expected = new ArrayList<>();
+        FruitTransaction firstTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10);
+        FruitTransaction secondTransaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10);
         expected.add(firstTransaction);
         expected.add(secondTransaction);
         String input = HEADER

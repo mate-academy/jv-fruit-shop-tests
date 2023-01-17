@@ -21,7 +21,7 @@ public class ReadFileServiceImplTest {
 
     @Test
     public void readFromFile_validPath_ok() {
-        String expected = null;
+        String expected = "";
         try {
             expected = Files.readString(Path.of(VALID_CSV_TEST_PATH));
         } catch (IOException e) {

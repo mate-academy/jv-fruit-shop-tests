@@ -3,6 +3,7 @@ package core.basesyntax.db.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.model.FruitTransaction;
+import core.basesyntax.db.service.FileParserService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileParserServiceImplTest {
-    private static FileParserServiceImpl fileParserService;
+    private static FileParserService fileParserService;
 
     @BeforeClass
     public static void setUp() {
@@ -37,7 +38,7 @@ public class FileParserServiceImplTest {
 
     @Test
     public void parse_letterInUpperCase_ok() {
-        List<String> data = new ArrayList<>(List.of("B,apple,20", "b,BANANA,10"));
+        List<String> data = List.of("B,apple,20", "b,BANANA,10");
         List<FruitTransaction> expected = new ArrayList<>(List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20),
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10)));
@@ -47,7 +48,7 @@ public class FileParserServiceImplTest {
 
     @Test
     public void parse_quantityIsNegative_ok() {
-        List<String> data = new ArrayList<>(List.of("b,banana,-30"));
+        List<String> data = List.of("b,banana,-30");
         List<FruitTransaction> expected = new ArrayList<>(List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 30)));
         List<FruitTransaction> actual = fileParserService.parse(data);

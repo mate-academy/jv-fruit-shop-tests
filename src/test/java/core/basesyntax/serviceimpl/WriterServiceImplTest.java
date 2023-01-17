@@ -8,15 +8,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static String filePathEmpty;
-    private static String filePathWrongContent;
+    private static final String filePathEmpty = "src\\test\\empty.csv";
+    private static final String filePathWrongContent = "src\\test\\wrongdata.csv";
     private static WriterServiceImpl writerService;
 
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
-        filePathEmpty = "src\\test\\empty.csv";
-        filePathWrongContent = "src\\test\\wrongdata.csv";
     }
 
     @Test

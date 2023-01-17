@@ -8,11 +8,18 @@ import core.basesyntax.operations.BalanceOperationHandler;
 import core.basesyntax.operations.PurchaseOperationHandler;
 import core.basesyntax.operations.ReturnOperationHandler;
 import core.basesyntax.operations.SupplyOperationHandler;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyImplTest {
-    private static Strategy strategy = new StrategyImpl();
-    private static Transaction transaction = new Transaction();
+    private static Strategy strategy;
+    private static Transaction transaction;
+
+    @BeforeClass
+    public static void init() {
+        strategy = new StrategyImpl();
+        transaction = new Transaction();
+    }
 
     @Test
     public void get_balanceOperation_ok() {

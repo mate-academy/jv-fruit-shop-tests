@@ -11,18 +11,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static String filePath;
+    private static final String filePath = "src\\test\\result.csv";
     private static ReaderServiceImpl readerService;
-
-    private final List<String> defaultDataFromFile = List.of("b,banana,20",
-            "b,apple,100",
-            "s,banana,100",
-            "p,banana,13",
-            "r,apple,10",
-            "p,apple,20",
-            "p,banana,5",
-            "s,banana,50");
-    private final String defaultData =
+    private static final String defaultData =
             "b,banana,20" + System.lineSeparator()
                     + "b,apple,100" + System.lineSeparator()
                     + "s,banana,100" + System.lineSeparator()
@@ -33,8 +24,7 @@ public class ReaderServiceImplTest {
                     + "s,banana,50";
 
     @BeforeClass
-    public static void beforeClass() {
-        filePath = "src\\test\\result.csv";
+    public static void init() {
         readerService = new ReaderServiceImpl();
     }
 
@@ -49,6 +39,14 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFromFile_equalsReadDataFromFile_ok() {
+        List<String> defaultDataFromFile = List.of("b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
         List<String> actual = readerService.readFromFile(filePath);
         assertEquals(defaultDataFromFile, actual);
     }

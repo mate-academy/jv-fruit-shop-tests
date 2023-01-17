@@ -3,6 +3,7 @@ package core.basesyntax.serviceimpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-    private static ParserServiceImpl transactionParserService;
+    private static ParserService transactionParserService;
 
     @BeforeClass
     public static void beforeClass() {

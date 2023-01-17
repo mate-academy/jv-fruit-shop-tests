@@ -9,21 +9,19 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static ReportServiceImpl reportService;
-    private static Fruit banana;
-    private static Fruit apple;
 
     @BeforeClass
     public static void beforeClass() {
         Storage.storage.clear();
         reportService = new ReportServiceImpl();
-        apple = new Fruit("apple");
-        banana = new Fruit("banana");
-        Storage.storage.put(banana, 22);
-        Storage.storage.put(apple, 33);
     }
 
     @Test
     public void report_validData_ok() {
+        Fruit apple = new Fruit("apple");
+        Fruit banana = new Fruit("banana");
+        Storage.storage.put(banana, 22);
+        Storage.storage.put(apple, 33);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,22" + System.lineSeparator()
                 + "apple,33" + System.lineSeparator();

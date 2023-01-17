@@ -8,18 +8,26 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.services.ParseFruitNames;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParseFruitNamesImplTest {
-    private final ParseFruitNames parser = new ParseFruitNamesImpl();
+    //private final ParseFruitNames parser = new ParseFruitNamesImpl();
+    private static ParseFruitNames parser;
     private final List<String> listWithFruits = List.of("type,fruit,quantity", "b,banana,20",
             "b,apple,100", "b,kivi,100", "s,banana,100",
             "p,kivi,100", "p,banana,13", "r,apple,10", "p,apple,20",
             "p,banana,5", "s,kivi,5", "s,kivi,20", "s,banana,50");
-    private HashMap<String, Fruit> rightMap;
-    private HashMap<String, Fruit> wrongMap;
+    private Map<String, Fruit> rightMap = new HashMap<>();
+    private Map<String, Fruit> wrongMap = new HashMap<>();
+
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        parser = new ParseFruitNamesImpl();
+    }
 
     @Before
     public void setUp() {

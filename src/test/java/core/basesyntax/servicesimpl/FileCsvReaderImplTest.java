@@ -8,9 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileCsvReaderImplTest {
-    private final String filePath = "src/test/resources/FiletoRead1.csv";
-    private List<String> expected;
     private FileCsvReader reader;
+    private List<String> expected;
 
     @Before
     public void setUp() {
@@ -23,6 +22,7 @@ public class FileCsvReaderImplTest {
 
     @Test
     public void readFromFile_ok() {
+        final String filePath = "src/test/resources/FiletoRead1.csv";
         List<String> actual = reader.readFromFile(filePath);
         assertEquals(expected, actual);
     }

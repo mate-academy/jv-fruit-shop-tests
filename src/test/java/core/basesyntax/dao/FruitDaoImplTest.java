@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
-    private final String lemon = "Lemon";
-    private final String kivi = "kivi";
+    private static final String LEMON = "Lemon";
+    private static final String KIVI = "kivi";
     private FruitDao fruitDao;
     private Fruit fruitOne;
     private Fruit fruitTwo;
@@ -31,10 +31,10 @@ public class FruitDaoImplTest {
 
     @Test
     public void add_ok() {
-        fruitDao.add(lemon, fruitOne);
+        fruitDao.add(LEMON, fruitOne);
         int expected = 1;
         assertEquals(expected, DataBase.fruitsInShop.size());
-        assertEquals(fruitOne, DataBase.fruitsInShop.get(lemon));
+        assertEquals(fruitOne, DataBase.fruitsInShop.get(LEMON));
     }
 
     @Test(expected = ElementDoesNotExist.class)
@@ -54,19 +54,19 @@ public class FruitDaoImplTest {
 
     @Test
     public void get_ok() {
-        DataBase.fruitsInShop.put(lemon, fruitOne);
-        DataBase.fruitsInShop.put(kivi, fruitTwo);
-        assertEquals(fruitOne, fruitDao.get(lemon));
-        assertEquals(fruitTwo, fruitDao.get(kivi));
+        DataBase.fruitsInShop.put(LEMON, fruitOne);
+        DataBase.fruitsInShop.put(KIVI, fruitTwo);
+        assertEquals(fruitOne, fruitDao.get(LEMON));
+        assertEquals(fruitTwo, fruitDao.get(KIVI));
     }
 
     @Test
     public void getAll_ok() {
         Map<String, Fruit> expectedMap = new TreeMap<>();
-        expectedMap.put(lemon, fruitOne);
-        expectedMap.put(kivi, fruitTwo);
-        DataBase.fruitsInShop.put(lemon, fruitOne);
-        DataBase.fruitsInShop.put(kivi, fruitTwo);
+        expectedMap.put(LEMON, fruitOne);
+        expectedMap.put(KIVI, fruitTwo);
+        DataBase.fruitsInShop.put(LEMON, fruitOne);
+        DataBase.fruitsInShop.put(KIVI, fruitTwo);
         assertEquals(expectedMap, fruitDao.getAll());
     }
 

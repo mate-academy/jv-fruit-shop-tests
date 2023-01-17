@@ -13,7 +13,7 @@ public class ReportCreatorServiceTest {
     private static FruitDao fruitDao;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         reportCreatorService = new ReportCreatorServiceImpl();
         fruitDao = new FruitDaoImpl();
     }

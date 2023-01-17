@@ -19,7 +19,7 @@ public class DataTransactionServiceTest {
     private List<FruitTransaction> fruitTransactions;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fruitDao = new FruitDaoImpl();
         dataTransactionService = new DataTransactionServiceImpl();
     }
@@ -61,7 +61,7 @@ public class DataTransactionServiceTest {
     }
 
     @Test
-    public void parseData_emptyFruit_Ok() {
+    public void parseData_emptyFruit_ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 null, 23));
         dataTransactionService.parseData(fruitTransactions);

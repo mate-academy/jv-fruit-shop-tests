@@ -12,12 +12,12 @@ public class DataParserServiceTest {
     private static DataParserService dataParserService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         dataParserService = new DataParserServiceImpl();
     }
 
     @Test
-    public void toTransaction_dataFromFile_ok() {
+    public void toTransactions_dataFromFile_ok() {
         List<String> dataFromFile = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",
                 "p,apple,20", "p,banana,5", "s,banana,50");
@@ -36,25 +36,15 @@ public class DataParserServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void toTransaction_isNotValidOperation_notOk() {
+    public void toTransactions_isNotValidOperation_notOk() {
         List<String> incorrectOperation = List.of("type,fruit,quantity", "a,banana,20");
-        try {
-            dataParserService.toTransactions(incorrectOperation);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("RuntimeException should be thrown -"
-                    + " incorrect Operation", e);
-        }
-        Assert.fail();
+        dataParserService.toTransactions(incorrectOperation);
     }
 
     @Test(expected = RuntimeException.class)
-    public void toTransaction_dataFromEmptyFile_notOk() {
+    public void toTransactions_dataFromEmptyFile_notOk() {
         List<String> empty = new ArrayList<>();
-        try {
-            dataParserService.toTransactions(empty);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("RuntimeException should be thrown -"
-                    + " List<String> don't contains data", e);
-        }
+        dataParserService.toTransactions(empty);
+
     }
 }

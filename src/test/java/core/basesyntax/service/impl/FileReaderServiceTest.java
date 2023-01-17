@@ -11,7 +11,7 @@ public class FileReaderServiceTest {
     private static final String VALID_FILE_PATH = "src/test/resources/transaction.csv";
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fileReaderService = new FileReaderServiceImpl();
     }
 
@@ -28,12 +28,7 @@ public class FileReaderServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_pathToFileIsNotValid_notOk() {
-        try {
-            fileReaderService.readFromFile("src/test/resources/transaction");
-        } catch (RuntimeException e) {
-            throw new RuntimeException("RuntimeException should be thrown - "
-                    + "path to File is not valid", e);
-        }
+        fileReaderService.readFromFile("src/test/resources/transaction");
     }
 
     @Test
@@ -46,7 +41,6 @@ public class FileReaderServiceTest {
 
     @Test(expected = NullPointerException.class)
     public void readFromFile_pathToFileIsNull_notOk() {
-        List<String> empty =
-                fileReaderService.readFromFile(null);
+        fileReaderService.readFromFile(null);
     }
 }

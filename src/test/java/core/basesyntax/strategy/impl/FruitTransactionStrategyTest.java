@@ -19,7 +19,7 @@ public class FruitTransactionStrategyTest {
     private FruitTransactionHandler actual;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fruitTransactionStrategy = new FruitTransactionStrategyImpl();
         fruitDao = new FruitDaoImpl();
     }
@@ -30,7 +30,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void chooseBalanceHandler_ok() {
+    public void getTransaction_chooseBalanceHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -43,7 +43,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void choosePurchaseHandler_ok() {
+    public void getTransaction_choosePurchaseHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -56,7 +56,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void chooseSupplyHandler_ok() {
+    public void getTransaction_chooseSupplyHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -69,7 +69,7 @@ public class FruitTransactionStrategyTest {
     }
 
     @Test
-    public void chooseReturnHandler_ok() {
+    public void getTransaction_chooseReturnHandler_ok() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
@@ -81,12 +81,12 @@ public class FruitTransactionStrategyTest {
                 fruitDao.getQuantityByName("banana"));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void nullOperator_notOk() {
+    @Test
+    public void getTransaction_nullOperator_notOk() {
         fruitTransaction = new FruitTransaction(null,
                 "banana", 29);
         actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
-        actual.handleTransaction(fruitTransaction);
+        Assert.assertNull(actual);
     }
 
     @After

@@ -15,7 +15,7 @@ public class FileWriterServiceTest {
     private static FileWriterService fileWriterService;
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void init() {
         fileWriterService = new FileWriterServiceImpl();
     }
 
@@ -32,12 +32,9 @@ public class FileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_nullPath_NotOk() {
-        try {
-            fileWriterService.writeToFile(REPORT, null);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Can't write file - path to file is null", e);
-        }
+    public void writeToFile_nullPath_notOk() {
+        fileWriterService.writeToFile(REPORT, null);
+
     }
 
     @Test

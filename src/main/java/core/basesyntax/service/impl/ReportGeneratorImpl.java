@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String FIELD_NAMES = "fruit,quantity";
+    public static final String FIELD_NAMES = "fruit,quantity";
 
     @Override
     public String generate() {

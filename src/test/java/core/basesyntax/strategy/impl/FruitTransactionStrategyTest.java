@@ -24,7 +24,7 @@ public class FruitTransactionStrategyTest {
 
     @Before
     public void setUp() {
-        FruitStorage.storageFruits.put("banana", 100);
+        fruitDao.saveQuantity("banana", 100);
     }
 
     @Test

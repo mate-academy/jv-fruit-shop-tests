@@ -61,4 +61,9 @@ public class OperationStrategyImplTest {
         Class<?> expected = SupplyOperationHandler.class;
         assertEquals(actual, expected);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void getHandler_nullOperation_isOk() {
+        strategy.getHandler(null);
+    }
 }

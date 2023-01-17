@@ -32,4 +32,9 @@ public class FileReaderServiceImplTest {
     public void readAllLines_nonExistingFilePath_isNotOk() {
         fileReaderService.readAllLines(INVALID_INPUT_PATH);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void readAllLines_nullFilePath_isNotOk() {
+        fileReaderService.readAllLines(null);
+    }
 }

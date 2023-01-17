@@ -54,4 +54,14 @@ public class ProcessDataServiceImplTest {
         assertEquals(BANANA_RESULT_QUANTITY, actualBanana);
         assertEquals(APPLE_RESULT_QUANTITY, actualApple);
     }
+
+    @Test (expected = NullPointerException.class)
+    public void processData_nullData_notOk() {
+        processDataService.processData(null, operationHandlerMap);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void processData_nullOperationHandlerMap_notOk() {
+        processDataService.processData(data, null);
+    }
 }

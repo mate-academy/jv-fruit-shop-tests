@@ -10,7 +10,7 @@ import org.junit.Test;
 public class SupplyOperationHandlerTest {
     private static final String APPLE = "apple";
     private static final int APPLE_QUANTITY = 50;
-    private static final int APPLE_RETURN_QUANTITY = 30;
+    private static final int APPLE_SUPPLY_QUANTITY = 30;
     private static FruitTransaction transaction;
     private static SupplyOperationHandler supplyOperationHandler;
 
@@ -20,14 +20,14 @@ public class SupplyOperationHandlerTest {
         supplyOperationHandler = new SupplyOperationHandler();
         FruitStorage.fruitStorage.put(APPLE, APPLE_QUANTITY);
         transaction.setFruit(APPLE);
-        transaction.setQuantity(APPLE_RETURN_QUANTITY);
+        transaction.setQuantity(APPLE_SUPPLY_QUANTITY);
     }
 
     @Test
     public void handle_supply_isOk() {
         supplyOperationHandler.handle(transaction);
         int actual = FruitStorage.fruitStorage.get(APPLE);
-        int expected = APPLE_QUANTITY + APPLE_RETURN_QUANTITY;
+        int expected = APPLE_QUANTITY + APPLE_SUPPLY_QUANTITY;
         assertEquals(expected, actual);
     }
 }

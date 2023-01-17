@@ -10,7 +10,7 @@ import org.junit.Test;
 public class FruitTransactionParseServiceTest {
     private static final String VALID_DATA = "b,banana,50";
     private static final String INVALID_DATA = "b,banana,-50";
-    private static final String NO_DELIMITER_DATA = "b banana 50";
+    private static final String WRONG_DELIMITER_DATA = "b banana 50";
     private static final String FRUIT = "banana";
     private static final FruitTransaction.Operation OPERATION = FruitTransaction.Operation.BALANCE;
     private static final int QUANTITY = 50;
@@ -38,8 +38,13 @@ public class FruitTransactionParseServiceTest {
         parseService.parse(INVALID_DATA);
     }
 
+    @Test (expected = NullPointerException.class)
+    public void parse_nullData_notOk() {
+        parseService.parse(null);
+    }
+
     @Test (expected = RuntimeException.class)
-    public void parse_emptyData_notOk() {
-        parseService.parse(NO_DELIMITER_DATA);
+    public void parse_wrongDelimiterData_notOk() {
+        parseService.parse(WRONG_DELIMITER_DATA);
     }
 }

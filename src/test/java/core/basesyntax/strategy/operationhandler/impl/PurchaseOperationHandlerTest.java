@@ -33,11 +33,8 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void handle_greaterPurchaseQuantity_isOk() {
+    public void handle_greaterPurchaseQuantity_notOk() {
         transaction.setQuantity(GREATER_PURCHASE_QUANTITY);
         purchaseOperationHandler.handle(transaction);
-        int actual = FruitStorage.fruitStorage.get(APPLE);
-        int expected = QUANTITY - PURCHASE_QUANTITY;
-        assertEquals(expected, actual);
     }
 }

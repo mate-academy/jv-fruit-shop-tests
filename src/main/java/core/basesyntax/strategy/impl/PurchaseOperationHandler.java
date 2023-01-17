@@ -9,6 +9,9 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         int balance = FruitStorage.fruits.get(transaction.getFruit());
         int purchaseQuantity = transaction.getQuantity();
+        if (purchaseQuantity == 0) {
+            throw new RuntimeException("Purchase quantity can't be zero");
+        }
         if (purchaseQuantity > balance) {
             throw new RuntimeException("Purchase quantity can't be bigger than balance, "
                     + "balance: " + balance + ", purchase quantity: " + purchaseQuantity);

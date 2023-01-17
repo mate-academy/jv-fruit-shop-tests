@@ -7,7 +7,6 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,18 +21,13 @@ public class ReturnOperationHandlerTest {
     public static void init() {
         operationHandler = new ReturnOperationHandler();
         fruitDao = new FruitDaoImpl();
-        fruitTransaction = new FruitTransaction();
-    }
-
-    @Before
-    public void setUp() {
-        fruitTransaction.setFruit(KEY);
-        fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitDao.updateQuantity(KEY, DEFAULT_QUANTITY);
+        fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, KEY, DEFAULT_QUANTITY);
     }
 
     @Test
     public void handle_returnSomeFruits_ok() {
+        fruitDao.updateQuantity(KEY, DEFAULT_QUANTITY);
         Integer fruitsReturned = DEFAULT_QUANTITY;
         Integer expected = fruitDao.getQuantity(KEY) + fruitsReturned;
         fruitTransaction.setQuantity(fruitsReturned);
@@ -45,7 +39,6 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void handle_returnWithEmptyStorage_ok() {
-        fruitDao.clearStorage();
         Integer expected = DEFAULT_QUANTITY;
         fruitTransaction.setQuantity(expected);
         operationHandler.handle(fruitTransaction);

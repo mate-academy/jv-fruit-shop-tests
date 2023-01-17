@@ -22,13 +22,12 @@ public class PurchaseOperationHandlerTest {
     public static void init() {
         operationHandler = new PurchaseOperationHandler();
         fruitDao = new FruitDaoImpl();
-        fruitTransaction = new FruitTransaction();
+        fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, KEY, DEFAULT_QUANTITY);
     }
 
     @Before
     public void setUp() {
-        fruitTransaction.setFruit(KEY);
-        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitDao.updateQuantity(KEY, DEFAULT_QUANTITY);
     }
 

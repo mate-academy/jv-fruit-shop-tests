@@ -7,7 +7,6 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -22,18 +21,13 @@ public class SupplyOperationHandlerTest {
     public static void init() {
         operationHandler = new SupplyOperationHandler();
         fruitDao = new FruitDaoImpl();
-        fruitTransaction = new FruitTransaction();
-    }
-
-    @Before
-    public void setUp() {
-        fruitTransaction.setFruit(KEY);
-        fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitDao.updateQuantity(KEY, DEFAULT_QUANTITY);
+        fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, KEY, DEFAULT_QUANTITY);
     }
 
     @Test
     public void handle_supplySomeFruits_ok() {
+        fruitDao.updateQuantity(KEY, DEFAULT_QUANTITY);
         Integer fruitsSupplied = DEFAULT_QUANTITY;
         Integer expected = fruitDao.getQuantity(KEY) + fruitsSupplied;
         fruitTransaction.setQuantity(fruitsSupplied);
@@ -43,8 +37,8 @@ public class SupplyOperationHandlerTest {
                 expected, KEY, actual), expected, actual);
     }
 
+    @Test
     public void handle_returnWithEmptyStorage_ok() {
-        fruitDao.clearStorage();
         Integer expected = DEFAULT_QUANTITY;
         fruitTransaction.setQuantity(expected);
         operationHandler.handle(fruitTransaction);

@@ -32,4 +32,9 @@ public class FruitDaoImpl implements FruitDao {
     public boolean containsFruit(String key) {
         return FruitStorage.fruits.containsKey(key);
     }
+
+    @Override
+    public boolean isEmpty() {
+        return FruitStorage.fruits.isEmpty();
+    }
 }

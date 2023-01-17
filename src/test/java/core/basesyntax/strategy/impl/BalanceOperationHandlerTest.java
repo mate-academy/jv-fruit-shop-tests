@@ -19,10 +19,8 @@ public class BalanceOperationHandlerTest {
     @BeforeClass
     public static void init() {
         operationHandler = new BalanceOperationHandler();
-        fruitTransaction = new FruitTransaction();
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, KEY, 20);
         fruitDao = new FruitDaoImpl();
-        fruitTransaction.setFruit(KEY);
-        fruitTransaction.setQuantity(20);
     }
 
     @Test
@@ -46,7 +44,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_nullKey_noOk() {
+    public void handle_nullKey_notOk() {
         fruitTransaction.setFruit(null);
         operationHandler.handle(fruitTransaction);
     }

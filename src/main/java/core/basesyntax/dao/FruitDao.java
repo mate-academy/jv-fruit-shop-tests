@@ -13,4 +13,6 @@ public interface FruitDao {
     void clearStorage();
 
     boolean containsFruit(String key);
+
+    boolean isEmpty();
 }

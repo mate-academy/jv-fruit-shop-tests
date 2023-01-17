@@ -11,7 +11,7 @@ import org.junit.Test;
 public class FileWriterServiceTest {
     private static final String REPORT = "fruit,quantity" + System.lineSeparator() + "banana,152"
             + System.lineSeparator() + "apple,90" + System.lineSeparator();
-    private static final String PATH_TO_FILE = "src/test/resources/report.csv";
+    private static final String VALID_PATH_TO_FILE = "src/test/resources/report.csv";
     private static FileWriterService fileWriterService;
 
     @BeforeClass
@@ -21,11 +21,11 @@ public class FileWriterServiceTest {
 
     @Test
     public void writeToFile_ok() {
-        fileWriterService.writeToFile(REPORT, PATH_TO_FILE);
+        fileWriterService.writeToFile(REPORT, VALID_PATH_TO_FILE);
         try {
-            String actual = Files.readString(Path.of(PATH_TO_FILE));
+            String actual = Files.readString(Path.of(VALID_PATH_TO_FILE));
             Assert.assertEquals("Expected report " + actual + " in file "
-                    + PATH_TO_FILE, REPORT, actual);
+                    + VALID_PATH_TO_FILE, REPORT, actual);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }
@@ -42,9 +42,9 @@ public class FileWriterServiceTest {
 
     @Test
     public void writeToFile_emptyData_ok() {
-        fileWriterService.writeToFile("", PATH_TO_FILE);
+        fileWriterService.writeToFile("", VALID_PATH_TO_FILE);
         try {
-            String actual = Files.readString(Path.of(PATH_TO_FILE));
+            String actual = Files.readString(Path.of(VALID_PATH_TO_FILE));
             Assert.assertEquals("Should write empty report for empty data, but was "
                     + actual, "", actual);
         } catch (IOException e) {
@@ -54,11 +54,11 @@ public class FileWriterServiceTest {
 
     @Test(expected = NullPointerException.class)
     public void writeToFile_nullData_notOk() {
-        fileWriterService.writeToFile(null, PATH_TO_FILE);
+        fileWriterService.writeToFile(null, VALID_PATH_TO_FILE);
         try {
-            String actual = Files.readString(Path.of(PATH_TO_FILE));
-            Assert.assertEquals("Expected NullPointerException for null data, but was "
-                    + actual,null, actual);
+            String actual = Files.readString(Path.of(VALID_PATH_TO_FILE));
+            Assert.assertNull("Expected NullPointerException for null data, but was "
+                    + actual, actual);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }
@@ -69,7 +69,7 @@ public class FileWriterServiceTest {
         String pathIsNotValid = "null";
         fileWriterService.writeToFile(REPORT, pathIsNotValid);
         try {
-            String actual = Files.readString(Path.of(pathIsNotValid));
+            Files.readString(Path.of(pathIsNotValid));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }

@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataTransactionService;
 import java.util.ArrayList;
@@ -16,10 +15,18 @@ import org.junit.Test;
 
 public class DataTransactionServiceTest {
     private static DataTransactionService dataTransactionService;
-    private List<FruitTransaction> fruitTransactions = new ArrayList<>();
+    private static FruitDao fruitDao;
+    private List<FruitTransaction> fruitTransactions;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fruitDao = new FruitDaoImpl();
+        dataTransactionService = new DataTransactionServiceImpl();
+    }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        fruitTransactions = new ArrayList<>();
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -38,16 +45,9 @@ public class DataTransactionServiceTest {
                 "banana", 50));
     }
 
-    @BeforeClass
-    public static void beforeClass() {
-        dataTransactionService = new DataTransactionServiceImpl();
-
-    }
-
     @Test
     public void parseData_validData_ok() {
         dataTransactionService.parseData(fruitTransactions);
-        FruitDao fruitDao = new FruitDaoImpl();
         Map<String, Integer> actual = fruitDao.getAll();
         Map<String, Integer> expected = Map.of("banana", 152,"apple", 90);
         Assert.assertEquals("Expected " + expected + " for valid data, but was "
@@ -68,7 +68,7 @@ public class DataTransactionServiceTest {
     }
 
     @Test
-    public void parseData_negativeQuantity_Ok() {
+    public void parseData_negativeQuantity_ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", -15));
         dataTransactionService.parseData(fruitTransactions);
@@ -83,7 +83,7 @@ public class DataTransactionServiceTest {
 
     @After
     public void tearDown() {
-        FruitStorage.storageFruits.clear();
+        fruitDao.getAll().clear();
         fruitTransactions.clear();
     }
 }

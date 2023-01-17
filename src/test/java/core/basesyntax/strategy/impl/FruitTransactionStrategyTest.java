@@ -37,9 +37,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new BalanceHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue("Expected quantity 29 for banana in FruitStorage, but was "
-                + fruitDao.getQuantityByName("banana"),
-                fruitDao.getQuantityByName("banana") == 29);
+        Assert.assertEquals("Expected quantity 29 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"), 29,
+                fruitDao.getQuantityByName("banana"));
     }
 
     @Test
@@ -50,9 +50,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new PurchaseHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue("Expected quantity 71 for banana in FruitStorage, but was "
-                + fruitDao.getQuantityByName("banana"),
-                fruitDao.getQuantityByName("banana") == 71);
+        Assert.assertEquals("Expected quantity 71 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"), 71,
+                fruitDao.getQuantityByName("banana"));
     }
 
     @Test
@@ -63,9 +63,9 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new SupplyHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue("Expected quantity 129 for banana in FruitStorage, but was "
-                + fruitDao.getQuantityByName("banana"),
-                fruitDao.getQuantityByName("banana") == 129);
+        Assert.assertEquals("Expected quantity 129 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"), 129,
+                fruitDao.getQuantityByName("banana"));
     }
 
     @Test
@@ -76,9 +76,17 @@ public class FruitTransactionStrategyTest {
         FruitTransactionHandler expected = new ReturnHandler();
         Assert.assertEquals(expected.getClass(), actual.getClass());
         actual.handleTransaction(fruitTransaction);
-        Assert.assertTrue("Expected quantity 129 for banana in FruitStorage, but was "
-                + fruitDao.getQuantityByName("banana"),
-                fruitDao.getQuantityByName("banana") == 129);
+        Assert.assertEquals("Expected quantity 129 for banana in FruitStorage, but was "
+                + fruitDao.getQuantityByName("banana"), 129,
+                fruitDao.getQuantityByName("banana"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void nullOperator_notOk() {
+        fruitTransaction = new FruitTransaction(null,
+                "banana", 29);
+        actual = fruitTransactionStrategy.getTransaction(fruitTransaction.getOperation());
+        actual.handleTransaction(fruitTransaction);
     }
 
     @After

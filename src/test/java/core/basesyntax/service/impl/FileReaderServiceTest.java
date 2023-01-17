@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class FileReaderServiceTest {
     private static FileReaderService fileReaderService;
+    private static final String VALID_FILE_PATH = "src/test/resources/transaction.csv";
 
     @BeforeClass
     public static void beforeClass() {
@@ -20,7 +21,7 @@ public class FileReaderServiceTest {
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",
                 "p,apple,20", "p,banana,5", "s,banana,50");
         List<String> actual =
-                fileReaderService.readFromFile("src/test/resources/transaction.csv");
+                fileReaderService.readFromFile(VALID_FILE_PATH);
         Assert.assertEquals("Expected " + expected + ", but was "
                 + actual, expected, actual);
     }
@@ -44,7 +45,7 @@ public class FileReaderServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void readFromFile_nullFile_ok() {
+    public void readFromFile_pathToFileIsNull_notOk() {
         List<String> empty =
                 fileReaderService.readFromFile(null);
     }

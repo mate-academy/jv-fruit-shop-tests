@@ -15,10 +15,10 @@ public class FruitTransactionParserTest {
     @Test
     public void toTransaction_validCase_ok() {
         String data = "type,fruit,quantity" + System.lineSeparator()
-                + "b,banana,200\n" + System.lineSeparator()
-                + "b,apple,100\n" + System.lineSeparator()
-                + "s,banana,100\n" + System.lineSeparator()
-                + "p,banana,13\n";
+                + "b,banana,200" + System.lineSeparator()
+                + "b,apple,100" + System.lineSeparator()
+                + "s,banana,100" + System.lineSeparator()
+                + "p,banana,13";
         List<FruitTransaction> actual = FRUIT_TRANSACTION_PARSER.toTransaction(data);
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 200),

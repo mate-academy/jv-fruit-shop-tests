@@ -10,7 +10,7 @@ import org.junit.Test;
 public class WriterServiceImplTest {
     private static final String PATH_TO_EMPTY_FILE = "src\\test\\empty.csv";
     private static final String PATH_TO_FILE_WITH_WRONT_CONTENT = "src\\test\\wrongdata.csv";
-    private static WriterServiceImpl writerService;
+    private static WriterService writerService;
 
     @BeforeClass
     public static void init() {

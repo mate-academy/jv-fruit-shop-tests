@@ -8,12 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileCsvReaderImplTest {
-    private FileCsvReader reader;
     private List<String> expected;
 
     @Before
     public void setUp() {
-        reader = new FileCsvReaderImpl();
+        FileCsvReader reader = new FileCsvReaderImpl();
         expected = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "b,kivi,100", "s,banana,100",
                 "p,kivi,100", "p,banana,13", "r,apple,10", "p,apple,20",
@@ -22,13 +21,15 @@ public class FileCsvReaderImplTest {
 
     @Test
     public void readFromFile_ok() {
-        final String filePath = "src/test/resources/FiletoRead1.csv";
+        String filePath = "src/test/resources/FiletoRead2.csv";
+        FileCsvReader reader = new FileCsvReaderImpl();
         List<String> actual = reader.readFromFile(filePath);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_wrongPath_notOk() {
+        FileCsvReader reader = new FileCsvReaderImpl();
         reader.readFromFile("src/test/resources/wrongName.csv");
     }
 }

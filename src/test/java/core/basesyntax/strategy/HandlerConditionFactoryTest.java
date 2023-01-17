@@ -3,10 +3,16 @@ package core.basesyntax.strategy;
 import static org.junit.Assert.assertEquals;
 
 import java.util.NoSuchElementException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class HandlerConditionFactoryTest {
-    private final HandlerConditionFactory handler = new HandlerConditionFactory();
+    private static HandlerConditionFactory handler;
+
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        handler = new HandlerConditionFactory();
+    }
 
     @Test
     public void getHandler_ok() {

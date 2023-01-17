@@ -14,7 +14,7 @@ import org.junit.Test;
 public class FileCsvWriterImplTest {
     private static FileCsvWriter writer;
     private static final File WRONG_PATH = new File("src/wrongpath/resources/wrongFile.csv");
-    private String message;
+    private static String DEFAULT_TEXT;
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -23,27 +23,27 @@ public class FileCsvWriterImplTest {
 
     @Before
     public void setUp() throws IOException {
-        File fileToWriteIn = new File("src/test/resources/testFileToWRiteIn.csv");
+        File fileToWriteIn = new File("src/test/resources/FiletoRead1.csv");
         fileToWriteIn.createNewFile();
-        message = "balance, return supply";
+        DEFAULT_TEXT = "balance, return supply";
     }
 
     @Test
     public void writeInFile_ok() throws IOException {
-        File fileToWriteIn = new File("src/test/resources/testFileToWRiteIn.csv");
-        writer.writeInFile(message, fileToWriteIn.getPath());
+        File fileToWriteIn = new File("src/test/resources/FiletoRead1.csv");
+        writer.writeInFile(DEFAULT_TEXT, fileToWriteIn.getPath());
         assertTrue(Files.readAllLines(fileToWriteIn.toPath())
-                .stream().allMatch(x -> x.contains(message)));
+                .stream().allMatch(x -> x.contains(DEFAULT_TEXT)));
     }
 
     @Test(expected = RuntimeException.class)
     public void writeInFile_wrongPath_notOk() {
-        writer.writeInFile(message,WRONG_PATH.getPath());
+        writer.writeInFile(DEFAULT_TEXT,WRONG_PATH.getPath());
     }
 
     @After
     public void tearDown() {
-        File fileToWriteIn = new File("src/test/resources/testFileToWRiteIn.csv");
+        File fileToWriteIn = new File("src/test/resources/FiletoRead1.csv");
         fileToWriteIn.delete();
     }
 }

@@ -8,6 +8,10 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         int balance = FruitStorage.fruits.get(transaction.getFruit());
-        FruitStorage.fruits.put(transaction.getFruit(), balance + transaction.getQuantity());
+        int applyQuantity = transaction.getQuantity();
+        if (applyQuantity == 0) {
+            throw new RuntimeException("Apply quantity can't be zero");
+        }
+        FruitStorage.fruits.put(transaction.getFruit(), balance + applyQuantity);
     }
 }

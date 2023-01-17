@@ -18,9 +18,14 @@ public class ReportGeneratorImplTest {
         reportGenerator = new ReportGeneratorImpl();
     }
 
+    @Before
+    public void clearStorage() {
+        STORAGE.clear();
+    }
+
     @Test
     public void generate_storageIsEmpty_ok() {
-        String expected = ReportGeneratorImpl.FIELD_NAMES;
+        String expected = ReportGeneratorImpl.FIELDS_NAMES;
         String actual = reportGenerator.generate();
         assertEquals(expected, actual);
     }
@@ -30,7 +35,7 @@ public class ReportGeneratorImplTest {
         STORAGE.put("banana", 12);
         STORAGE.put("apple", 8);
         STORAGE.put("orange", 14);
-        StringBuilder stringBuilder = new StringBuilder(ReportGeneratorImpl.FIELD_NAMES);
+        StringBuilder stringBuilder = new StringBuilder(ReportGeneratorImpl.FIELDS_NAMES);
         for (Map.Entry<String, Integer> fruitBalance : STORAGE.entrySet()) {
             stringBuilder.append(System.lineSeparator())
                     .append(fruitBalance.getKey())
@@ -40,10 +45,5 @@ public class ReportGeneratorImplTest {
         String expected = stringBuilder.toString();
         String actual = reportGenerator.generate();
         assertEquals(expected, actual);
-    }
-
-    @Before
-    public void clearStorage() {
-        STORAGE.clear();
     }
 }

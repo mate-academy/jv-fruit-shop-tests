@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationTest {
-
     private static CalculateOperation operation;
     private static FruitTransaction fruitTransaction;
 

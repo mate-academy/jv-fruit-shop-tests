@@ -26,11 +26,11 @@ public class ReportBuilderServiceTest {
     public void create_trueBuild_ok() {
         StringBuilder builder = new StringBuilder("fruit,quantity");
         String expected = builder.append(System.lineSeparator())
-                .append("key")
+                .append("fruitName")
                 .append(",")
                 .append(10)
                 .toString();
-        StorageOfData.fruitsData.put("key", 10);
+        StorageOfData.fruitsData.put("fruitName", 10);
         String actual = reportBuilder.buildReport();
         assertEquals(expected, actual);
 

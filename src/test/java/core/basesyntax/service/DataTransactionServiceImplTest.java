@@ -9,14 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataTransactionServiceImplTest {
-
     private static DataTransactionService dataTransaction;
-    private final String dataFromInput = new StringBuilder("type,fruit,quantity")
-            .append(System.lineSeparator())
-            .append("b,banana,20").append(System.lineSeparator())
-            .append("b,apple,100").append(System.lineSeparator())
-            .append("s,banana,100").append(System.lineSeparator())
-            .append("p,banana,13").toString();
 
     @BeforeClass
     public static void setUp() {
@@ -24,7 +17,13 @@ public class DataTransactionServiceImplTest {
     }
 
     @Test
-    public void dataTransaction_parseData_ok() {
+    public void turnDataToTransactions_parseData_ok() {
+        String dataFromInput = new StringBuilder("type,fruit,quantity")
+                .append(System.lineSeparator())
+                .append("b,banana,20").append(System.lineSeparator())
+                .append("b,apple,100").append(System.lineSeparator())
+                .append("s,banana,100").append(System.lineSeparator())
+                .append("p,banana,13").toString();
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
         expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
@@ -35,15 +34,14 @@ public class DataTransactionServiceImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void dataTransaction_nullInput_notOk() {
+    public void turnDataToTransactions_nullInput_notOk() {
         dataTransaction.turnDataToTransactions(null);
     }
 
     @Test(expected = NumberFormatException.class)
-    public void dataTransaction_quantityNotNum_notOk() {
+    public void turnDataToTransactions_quantityNotNum_notOk() {
         String str = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,abcd" + System.lineSeparator();
         dataTransaction.turnDataToTransactions(str);
     }
-
 }

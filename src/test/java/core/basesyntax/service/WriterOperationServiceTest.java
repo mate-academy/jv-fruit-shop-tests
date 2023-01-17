@@ -10,34 +10,34 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterOperationServiceTest {
-    private static WriterOperationService fileWrite;
-    private static final String WRITE_TO_FILE = "src/test/resources/report.csv";
+    private static WriterOperationService fileWriter;
+    private static final String PATH_TO_OUTPUT_FILE = "src/test/resources/report.csv";
 
     @BeforeClass
     public static void setUp() {
-        fileWrite = new WriterOperationServiceImpl();
+        fileWriter = new WriterOperationServiceImpl();
     }
 
     @Test
-    public void writeToFile_validPathForWriteData_ok() {
+    public void writeData_validPathForWriteData_ok() {
         String expected = "hello";
-        fileWrite.writeData(expected, WRITE_TO_FILE);
+        fileWriter.writeData(expected, PATH_TO_OUTPUT_FILE);
         String actual;
         try {
-            actual = Files.readString(Path.of(WRITE_TO_FILE));
+            actual = Files.readString(Path.of(PATH_TO_OUTPUT_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from path: " + WRITE_TO_FILE, e);
+            throw new RuntimeException("Can't read data from path: " + PATH_TO_OUTPUT_FILE, e);
         }
         assertEquals(expected, actual);
     }
 
     @Test (expected = NullPointerException.class)
-    public void writeToFile_pathIsNull_notOk() {
-        fileWrite.writeData(null, "hello");
+    public void writeData_pathIsNull_notOk() {
+        fileWriter.writeData(null, "hello");
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeToFile_writeDataIsNull_notOk() {
-        fileWrite.writeData(WRITE_TO_FILE, null);
+    public void writeData_writeDataIsNull_notOk() {
+        fileWriter.writeData(PATH_TO_OUTPUT_FILE, null);
     }
 }

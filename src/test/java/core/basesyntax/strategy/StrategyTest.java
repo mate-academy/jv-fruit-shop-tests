@@ -7,22 +7,14 @@ import core.basesyntax.utils.impl.BalanceOperation;
 import core.basesyntax.utils.impl.PurchaseOperation;
 import core.basesyntax.utils.impl.ReturnOperation;
 import core.basesyntax.utils.impl.SupplyOperation;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StrategyTest {
-    private static Strategy strategy;
-    private static FruitTransaction fruitTransaction;
-
-    @BeforeClass
-    public static void setUp() {
-        strategy = new Strategy();
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 20);
-    }
-
     @Test
     public void strategy_validTransactions_ok() {
+        Strategy strategy = new Strategy();
+        FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 20);
         assertEquals("hello", strategy
                 .getCalculateOperation(fruitTransaction).getClass(), BalanceOperation.class);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

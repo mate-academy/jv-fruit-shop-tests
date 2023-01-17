@@ -6,7 +6,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderOperationServiceTest {
-
     private static ReaderOperationService fileReader;
 
     @BeforeClass
@@ -15,17 +14,17 @@ public class ReaderOperationServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void readFromFile_nullFilePath_notOk() {
+    public void readDataFromFile_nullFilePath_notOk() {
         fileReader.readDataFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_notValidFilePath_notOk() {
+    public void readDataFromFile_notValidFilePath_notOk() {
         fileReader.readDataFromFile("not_valid_file_path");
     }
 
     @Test
-    public void readFromFile_validFilePath_ok() {
+    public void readDataFromFile_validFilePath_ok() {
         String expected = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,20" + System.lineSeparator()
                 + "b,apple,100" + System.lineSeparator();

@@ -26,7 +26,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void apply_balanceOperationHandlerNewFruit_Ok() {
+    public void apply_balanceOperationHandlerNewFruit_ok() {
         Transaction newFruitTransaction = new Transaction(Operation.BALANCE,
                 banana, 100);
         operationHandler.apply(newFruitTransaction);
@@ -37,7 +37,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void apply_balanceOperationHandlerFruitExist_Ok() {
+    public void apply_balanceOperationHandlerFruitExist_ok() {
         operationHandler.apply(new Transaction(Operation.BALANCE, apple, 20));
         Map<Fruit,Integer> expected = new HashMap<>();
         expected.put(apple, 120);

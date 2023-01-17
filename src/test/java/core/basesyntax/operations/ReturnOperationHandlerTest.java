@@ -24,7 +24,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void apply_returnOperationHandler_Ok() {
+    public void apply_returnOperationHandler_ok() {
         operationHandler.apply(new Transaction(Operation.RETURN, apple, 5));
         Map<Fruit,Integer> expected = new HashMap<>();
         expected.put(apple, 105);

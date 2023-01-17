@@ -15,7 +15,7 @@ public class StrategyImplTest {
     private static Transaction transaction = new Transaction();
 
     @Test
-    public void get_balanceOperation_Ok() {
+    public void get_balanceOperation_ok() {
         transaction.setOperation(Operation.BALANCE);
         Class<?> expected = BalanceOperationHandler.class;
         Class<?> actual = strategy.getOperationHandler(transaction).getClass();
@@ -23,7 +23,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void get_supplyOperation_Ok() {
+    public void get_supplyOperation_ok() {
         transaction.setOperation(Operation.SUPPLY);
         Class<?> expected = SupplyOperationHandler.class;
         Class<?> actual = strategy.getOperationHandler(transaction).getClass();
@@ -31,7 +31,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void get_purchaseOperation_Ok() {
+    public void get_purchaseOperation_ok() {
         transaction.setOperation(Operation.PURCHASE);
         Class<?> expected = PurchaseOperationHandler.class;
         Class<?> actual = strategy.getOperationHandler(transaction).getClass();
@@ -39,7 +39,7 @@ public class StrategyImplTest {
     }
 
     @Test
-    public void get_returnOperation_Ok() {
+    public void get_returnOperation_ok() {
         transaction.setOperation(Operation.RETURN);
         Class<?> expected = ReturnOperationHandler.class;
         Class<?> actual = strategy.getOperationHandler(transaction).getClass();

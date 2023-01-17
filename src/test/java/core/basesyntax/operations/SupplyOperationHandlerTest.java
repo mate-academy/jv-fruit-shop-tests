@@ -26,7 +26,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void apply_supplyOperationHandlerFruitExist_Ok() {
+    public void apply_supplyOperationHandlerFruitExist_ok() {
         operationHandler.apply(new Transaction(Operation.SUPPLY, apple, 5));
         Map<Fruit,Integer> expected = new HashMap<>();
         expected.put(apple, 105);
@@ -34,7 +34,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void apply_supplyOperationHandlerNewFruit_Ok() {
+    public void apply_supplyOperationHandlerNewFruit_ok() {
         Storage.storage.put(banana, 100);
         operationHandler.apply(new Transaction(Operation.SUPPLY, banana, 10));
         Map<Fruit,Integer> expected = new HashMap<>();

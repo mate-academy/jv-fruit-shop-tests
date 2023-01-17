@@ -23,7 +23,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void report_validData_Ok() {
+    public void report_validData_ok() {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,22" + System.lineSeparator()
                 + "apple,33" + System.lineSeparator();

@@ -29,6 +29,18 @@ public class FruitTransaction {
         return quantity;
     }
 
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public void setFruit(String fruit) {
+        this.fruit = fruit;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object fruitTransaction) {
         if (this == fruitTransaction) {

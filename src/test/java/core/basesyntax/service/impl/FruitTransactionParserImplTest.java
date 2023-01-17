@@ -40,10 +40,6 @@ public class FruitTransactionParserImplTest {
     @Test
     public void toTransactions_invalidResult_notOk() {
         List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(new FruitTransaction(Operation.SUPPLY,
-                "banana", 15));
-        expected.add(new FruitTransaction(Operation.PURCHASE, "banana", 8));
-        expected.add(new FruitTransaction(Operation.RETURN, "banana", 0));
         List<FruitTransaction> actual = fruitTransactionParser.toTransactions(fileData);
         assertNotEquals(expected, actual);
     }

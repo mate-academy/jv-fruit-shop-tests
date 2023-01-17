@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class SellFromStorageServiceTest {
     private static FruitTransaction fruitTransaction;
-    private static SellFromStorageService sell;
+    private static SellFromStorageService sellFromStorage;
     private Map<String, Integer> fruitMap;
 
     @Before
@@ -21,7 +21,7 @@ public class SellFromStorageServiceTest {
                 "banana", 10);
         fruitMap = new HashMap<>();
         fruitMap.put("banana", 20);
-        sell = new SellFromStorageService();
+        sellFromStorage = new SellFromStorageService();
     }
 
     @After
@@ -32,7 +32,7 @@ public class SellFromStorageServiceTest {
     @Test
     public void process_validResult_ok() {
         int expected = 10;
-        sell.process(fruitTransaction, fruitMap);
+        sellFromStorage.process(fruitTransaction, fruitMap);
         int actual = fruitMap.get("banana");
         assertEquals(actual, expected);
     }

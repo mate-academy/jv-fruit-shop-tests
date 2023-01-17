@@ -10,19 +10,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionProcessorStrategyTest {
+    private static final String TEST_FRUIT = "banana";
     private static List<FruitTransaction> transactions;
     private static Map<String, Integer> fruits;
     private static TransactionProcessor strategy;
+    private static FruitTransaction fruitTransaction;
 
     @BeforeClass
-    public static void setUp() {
+    public static void setUpClass() {
         transactions = new ArrayList<>();
         fruits = new HashMap<>();
         strategy = new TransactionProcessorStrategy();
+        fruitTransaction = new FruitTransaction(Operation.BALANCE,
+                TEST_FRUIT, 15);
+    }
+
+    @Before
+    public void setUp() {
+        fruits.put(TEST_FRUIT, 25);
     }
 
     @After
@@ -32,33 +42,43 @@ public class TransactionProcessorStrategyTest {
     }
 
     @Test
-    public void process_InitialFruits_ok() {
-        transactions.add(new FruitTransaction(Operation.BALANCE, "banana", 15));
+    public void process_addition_ok() {
+        fruitTransaction.setOperation(Operation.SUPPLY);
+        transactions.add(fruitTransaction);
         strategy.process(transactions, fruits);
-        int expected = 15;
-        int actual = fruits.get("banana");
+        final int expected = 40;
+        int actual = fruits.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void process_Addition_ok() {
-        transactions.add(new FruitTransaction(Operation.SUPPLY,
-                "banana", 15));
-        fruits.put("banana", 25);
+    public void process_additionIfReturn_ok() {
+        fruitTransaction.setOperation(Operation.RETURN);
+        transactions.add(fruitTransaction);
         strategy.process(transactions, fruits);
-        int expected = 40;
-        int actual = fruits.get("banana");
+        final int expected = 40;
+        int actual = fruits.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void process_SellFromStorage_ok() {
-        transactions.add(new FruitTransaction(Operation.PURCHASE,
-                "banana", 10));
-        fruits.put("banana", 30);
+    public void process_sellFromStorage_ok() {
+        fruitTransaction.setOperation(Operation.PURCHASE);
+        transactions.add(fruitTransaction);
         strategy.process(transactions, fruits);
-        int expected = 20;
-        int actual = fruits.get("banana");
+        final int expected = 10;
+        int actual = fruits.get(TEST_FRUIT);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void process_initialFruits_ok() {
+        fruitTransaction.setOperation(Operation.BALANCE);
+        fruits.clear();
+        transactions.add(fruitTransaction);
+        strategy.process(transactions, fruits);
+        final int expected = fruitTransaction.getQuantity();
+        int actual = fruits.get(TEST_FRUIT);
         assertEquals(expected, actual);
     }
 }

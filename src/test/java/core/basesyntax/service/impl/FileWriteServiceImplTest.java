@@ -21,10 +21,9 @@ public class FileWriteServiceImplTest {
     }
 
     @Test
-    public void writeReportToFile_validReport_OK() throws IOException {
+    public void writeReportToFile_validReport_ok() throws IOException {
         fileWriteService.writeReportToFile("report", VALID_OUTPUT);
-        List<String> expected = new ArrayList<>();
-        expected.add("report");
+        List<String> expected = List.of("report");
         List<String> actual = Files.readAllLines(Path.of(VALID_OUTPUT));
         assertEquals(expected, actual);
     }
@@ -43,7 +42,7 @@ public class FileWriteServiceImplTest {
     }
 
     @Test
-    public void writeReportToFile_emptyReport_Ok() throws IOException {
+    public void writeReportToFile_emptyReport_ok() throws IOException {
         fileWriteService.writeReportToFile("", VALID_OUTPUT);
         List<String> expected = new ArrayList<>();
         List<String> actual = Files.readAllLines(Path.of(VALID_OUTPUT));

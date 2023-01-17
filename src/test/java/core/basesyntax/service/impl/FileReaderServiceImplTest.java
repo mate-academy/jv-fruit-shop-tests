@@ -1,47 +1,38 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
-import core.basesyntax.service.FileReadService;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FileReadServiceImplTest {
+public class FileReaderServiceImplTest {
     private static final String VALID_PATH = "src/main/resources/input.csv";
-    private static FileReadService fileReadService;
+    private static FileReaderService fileReaderService;
 
     @BeforeClass
     public static void setUp() {
-        fileReadService = new FileReadServiceImpl();
+        fileReaderService = new FileReaderServiceImpl();
     }
 
     @Test
     public void readFromFile_validPath_ok() throws IOException {
         List<String> expected = Files.readAllLines(Path.of(VALID_PATH));
-        List<String> actual = fileReadService.readFromFile(VALID_PATH);
+        List<String> actual = fileReaderService.readFromFile(VALID_PATH);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_nullPath_notOk() {
-        fileReadService.readFromFile(null);
+        fileReaderService.readFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_nonExistentPath_notOk() {
-        fileReadService.readFromFile("non_existent_path");
-    }
-
-    @Test
-    public void readFromFile_noDataRead_notOk() {
-        List<String> expected = new ArrayList<>();
-        List<String> actual = fileReadService.readFromFile(VALID_PATH);
-        assertNotEquals(expected, actual);
+        fileReaderService.readFromFile("non_existent_path");
     }
 }

@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class ReaderServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        filePath = "C:\\Users\\User\\IdeaProjects\\jv-fruit-shop-tests\\src\\test\\result.csv";
+        filePath = "src\\test\\result.csv";
         readerService = new ReaderServiceImpl();
     }
 

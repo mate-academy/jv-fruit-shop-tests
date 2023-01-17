@@ -3,6 +3,7 @@ package core.basesyntax.serviceimpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class WriterServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
-        filePathEmpty = "C:\\Users\\User\\IdeaProjects\\jv-fruit-shop-tests\\src\\test\\empty.csv";
+        filePathEmpty = "src\\test\\empty.csv";
         filePathWrongContent = "C:\\Users\\User\\IdeaProjects"
                 + "\\jv-fruit-shop-tests\\src\\test\\wrongdata.csv";
     }

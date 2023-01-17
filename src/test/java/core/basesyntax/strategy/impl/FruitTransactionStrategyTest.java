@@ -15,6 +15,7 @@ import org.junit.Test;
 public class FruitTransactionStrategyTest {
     private static FruitTransactionStrategy fruitTransactionStrategy;
     private static FruitDao fruitDao;
+    private static FruitTransaction fruitTransaction;
 
     @BeforeClass
     public static void init() {
@@ -29,8 +30,7 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_chooseBalanceHandler_ok() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 29);
         FruitTransactionHandler actual = fruitTransactionStrategy
                 .getTransaction(fruitTransaction.getOperation());
@@ -44,8 +44,7 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_choosePurchaseHandler_ok() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 29);
         FruitTransactionHandler actual = fruitTransactionStrategy
                 .getTransaction(fruitTransaction.getOperation());
@@ -59,8 +58,7 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_chooseSupplyHandler_ok() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 29);
         FruitTransactionHandler actual = fruitTransactionStrategy
                 .getTransaction(fruitTransaction.getOperation());
@@ -74,8 +72,7 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_chooseReturnHandler_ok() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.RETURN,
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 29);
         FruitTransactionHandler actual = fruitTransactionStrategy
                 .getTransaction(fruitTransaction.getOperation());
@@ -89,7 +86,7 @@ public class FruitTransactionStrategyTest {
 
     @Test
     public void getTransaction_nullOperator_notOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction(null,
+        fruitTransaction = new FruitTransaction(null,
                 "banana", 29);
         FruitTransactionHandler actual = fruitTransactionStrategy
                 .getTransaction(fruitTransaction.getOperation());

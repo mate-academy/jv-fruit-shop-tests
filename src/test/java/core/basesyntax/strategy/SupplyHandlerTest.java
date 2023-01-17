@@ -1,9 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.SupplyHandler;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,8 +11,6 @@ public class SupplyHandlerTest {
     @BeforeClass
     public static void setUp() {
         supplyHandler = new SupplyHandler();
-        Map<String, OperationHandler> operationHandler = new HashMap<>();
-        operationHandler.put("b", new BalanceHandler());
     }
 
     @Test

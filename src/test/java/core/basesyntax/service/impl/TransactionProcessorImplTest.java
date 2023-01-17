@@ -9,7 +9,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessor;
 import java.util.ArrayList;
 import java.util.List;
-import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;

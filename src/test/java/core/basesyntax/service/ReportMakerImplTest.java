@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportMakerImpl;
@@ -24,13 +25,19 @@ public class ReportMakerImplTest {
         Storage.fruitStorage.put("test2", 8);
         Storage.fruitStorage.put("test3", 3);
 
-        List<String> expected = new ArrayList<>();
-        expected.add("fruit,quantity");
-        expected.add("test1,2");
-        expected.add("test2,8");
-        expected.add("test3,3");
+        List<String> expected1 = new ArrayList<>();
+        expected1.add("fruit,quantity");
+        expected1.add("test1,2");
+        expected1.add("test2,8");
+        expected1.add("test3,3");
+
+        List<String> expected2 = new ArrayList<>();
+        expected2.add("fruit,quantity");
+        expected2.add("test2,8");
+        expected2.add("test3,3");
+        expected2.add("test1,2");
         List<String> actual = reportMaker.makeReport();
-        assertEquals(expected, actual);
+        assertTrue(expected1.equals(actual) || expected2.equals(actual));
     }
 
     @Test

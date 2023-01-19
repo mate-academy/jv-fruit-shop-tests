@@ -6,7 +6,7 @@ import core.basesyntax.model.Operation;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OperationTest {
+public class OperationDaoTest {
     private static Operation operation;
     private static OperationDaoImpl operationDao;
     private static final int SIZE_OPERATIONS = 4;

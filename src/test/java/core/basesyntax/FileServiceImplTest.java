@@ -30,7 +30,7 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void writeToFile_ValidInput_notOK() {
+    public void writeToFile_ValidInput_OK() {
         outputPath = "src/main/java/core/basesyntax/resources/outputTest.csv";
         String testValue = "type,fruit,quantity";
         readFromFileTest.writeToFile(outputPath, testValue);

@@ -14,9 +14,19 @@ public class TransactionParserImplTest {
     private static final TransactionParser transactionParser = new TransactionParserImpl();
 
     @Test
-    public void validInput_Ok() {
+    public void parse_validInput_Ok() {
         FruitTransaction actual = transactionParser.parse("s,banana,3");
         Assert.assertTrue(fruitTransaction.getTransactionName()
+                .equals(actual.getTransactionName())
+                && fruitTransaction.getFruit()
+                .equals(actual.getFruit()) && fruitTransaction.getQuantity()
+                == actual.getQuantity());
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parse_invalidInput_notOk() {
+        FruitTransaction actual = transactionParser.parse("s,banana,two");
+        Assert.assertFalse(fruitTransaction.getTransactionName()
                 .equals(actual.getTransactionName())
                 && fruitTransaction.getFruit()
                 .equals(actual.getFruit()) && fruitTransaction.getQuantity()

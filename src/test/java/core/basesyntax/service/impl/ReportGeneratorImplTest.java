@@ -10,7 +10,7 @@ public class ReportGeneratorImplTest {
     private static final String EXPECTED = "fruit,quantity\r\n"
             + "banana,20\r\n"
             + "apple,16\r\n"
-            + "pineapple,89";
+            + "pineapple,89\n";
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     @Test(expected = NullPointerException.class)

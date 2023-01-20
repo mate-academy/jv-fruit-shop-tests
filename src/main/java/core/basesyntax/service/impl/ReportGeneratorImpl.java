@@ -9,7 +9,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generate(Map<String, Integer> fruits) {
-
         StringBuilder reportGenerator = new StringBuilder(HEADER + System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
             reportGenerator

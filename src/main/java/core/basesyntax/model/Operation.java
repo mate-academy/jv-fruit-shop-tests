@@ -13,7 +13,7 @@ public enum Operation {
     }
 
     public static Operation getOperationByFirstLetter(String firstLetter) {
-        for (Operation operation: Operation.values()) {
+        for (Operation operation : Operation.values()) {
             if (firstLetter.trim().equals(operation.firstLetter)) {
                 return operation;
             }

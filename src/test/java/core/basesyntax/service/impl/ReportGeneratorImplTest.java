@@ -7,10 +7,11 @@ import core.basesyntax.service.ReportGenerator;
 import org.junit.Test;
 
 public class ReportGeneratorImplTest {
-    private static final String EXPECTED = "fruit,quantity\r\n"
-            + "banana,20\r\n"
-            + "apple,16\r\n"
-            + "pineapple,89\n";
+    private static final String EXPECTED = "fruit,quantity"
+            + System.lineSeparator() + "banana,20"
+            + System.lineSeparator() + "apple,16"
+            + System.lineSeparator() + "pineapple,89"
+            + System.lineSeparator();
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     @Test(expected = NullPointerException.class)

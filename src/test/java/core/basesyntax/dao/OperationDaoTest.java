@@ -19,16 +19,16 @@ public class OperationDaoTest {
 
     @Test
     public void amountOperations_Ok() {
-        assertEquals(operationDao.getListOperations().size(), SIZE_OPERATIONS);
+        assertEquals(SIZE_OPERATIONS, operationDao.getListOperations().size());
     }
 
     @Test
     public void getOperation_Ok() {
-        assertEquals(operation.getArithmeticOperation(), Operation.ArithmeticOperation.ADD);
+        assertEquals(Operation.ArithmeticOperation.ADD, operation.getArithmeticOperation());
     }
 
     @Test
     public void getShortName_Ok() {
-        assertEquals(operation.getShortName(), "b");
+        assertEquals("b", operation.getShortName());
     }
 }

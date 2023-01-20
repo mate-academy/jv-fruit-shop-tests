@@ -10,7 +10,7 @@ import org.junit.Test;
 public class FruitShopTest {
 
     @Test
-    public void testProcessing_Ok() {
+    public void testFruitShop_processing_Ok() {
         String input = "type,fruit,quantity\r\n"
                 + "b,banana,500\r\n"
                 + "b,apple,500\r\n"
@@ -35,7 +35,7 @@ public class FruitShopTest {
     }
 
     @Test
-    public void writeInFileAndReadFromFile_Ok() {
+    public void testFileService_writeRead_ok() {
         String input = "type,trIger,Crypta\r\n"
                 + "Orange,banana,2023\r\n"
                 + "b,C,%";

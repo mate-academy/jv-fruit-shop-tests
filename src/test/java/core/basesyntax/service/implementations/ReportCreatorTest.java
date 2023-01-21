@@ -1,7 +1,6 @@
 package core.basesyntax.service.implementations;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,22 +8,20 @@ import org.junit.jupiter.api.Test;
 
 public class ReportCreatorTest {
     private static final String REPORT_TEMPLATE = "fruit,quantity";
-    private StorageDao storageDao;
     private ReportCreator reportCreator;
 
     @BeforeEach
     void setUp() {
-        storageDao = new StorageDaoImpl();
         reportCreator = new ReportCreator();
-        storageDao.add("banana", 23);
-        storageDao.add("apple", 10);
+        Storage.fruits.put("banana", 23);
+        Storage.fruits.put("apple", 10);
     }
 
     @Test
     public void provideReport_ok() {
         String expectedString = REPORT_TEMPLATE + System.lineSeparator() + "banana,23"
                 + System.lineSeparator() + "apple,10";
-        String actualString = reportCreator.provideReport(storageDao.getAll());
+        String actualString = reportCreator.provideReport(Storage.fruits);
         Assertions.assertEquals(expectedString, actualString);
     }
 

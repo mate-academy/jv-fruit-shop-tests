@@ -22,6 +22,10 @@ public class TransactionProcessorImplTest {
     private StorageDao storageDao;
     private TransactionProcessorImpl transactionProcessor;
     private List<FruitTransaction> fruitTransactions;
+    private FruitTransaction fruitTransaction1;
+    private FruitTransaction fruitTransaction2;
+    private FruitTransaction fruitTransaction3;
+    private FruitTransaction fruitTransaction4;
 
     @BeforeEach
     void setUp() {
@@ -37,19 +41,19 @@ public class TransactionProcessorImplTest {
                 new SupplyOperationHandler(storageDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
         transactionProcessor = new TransactionProcessorImpl(operationStrategy);
-        FruitTransaction fruitTransaction1 = new FruitTransaction();
+        fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction1.setFruit(TEST_FRUIT);
         fruitTransaction1.setQuantity(100);
-        FruitTransaction fruitTransaction2 = new FruitTransaction();
+        fruitTransaction2 = new FruitTransaction();
         fruitTransaction2.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction2.setFruit(TEST_FRUIT);
         fruitTransaction2.setQuantity(10);
-        FruitTransaction fruitTransaction3 = new FruitTransaction();
+        fruitTransaction3 = new FruitTransaction();
         fruitTransaction3.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction3.setFruit(TEST_FRUIT);
         fruitTransaction3.setQuantity(60);
-        FruitTransaction fruitTransaction4 = new FruitTransaction();
+        fruitTransaction4 = new FruitTransaction();
         fruitTransaction4.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction4.setFruit(TEST_FRUIT);
         fruitTransaction4.setQuantity(20);
@@ -64,6 +68,38 @@ public class TransactionProcessorImplTest {
     public void processData_ok() {
         transactionProcessor.processData(fruitTransactions);
         Assertions.assertEquals(70, (int) storageDao.get(TEST_FRUIT));
+    }
+
+    @Test
+    public void processData_negativeBalanceQuantity_notOk() {
+        fruitTransaction1.setQuantity(-5);
+        fruitTransactions.add(fruitTransaction1);
+        Assertions.assertThrows(RuntimeException.class,
+                () -> transactionProcessor.processData(fruitTransactions));
+    }
+
+    @Test
+    public void processData_negativeReturnQuantity_notOk() {
+        fruitTransaction2.setQuantity(-5);
+        fruitTransactions.add(fruitTransaction1);
+        Assertions.assertThrows(RuntimeException.class,
+                () -> transactionProcessor.processData(fruitTransactions));
+    }
+
+    @Test
+    public void processData_muchPurchaseQuantity_notOk() {
+        fruitTransaction3.setQuantity(1000);
+        fruitTransactions.add(fruitTransaction1);
+        Assertions.assertThrows(RuntimeException.class,
+                () -> transactionProcessor.processData(fruitTransactions));
+    }
+
+    @Test
+    public void processData_negativeSupplyQuantity_notOk() {
+        fruitTransaction4.setQuantity(-5);
+        fruitTransactions.add(fruitTransaction1);
+        Assertions.assertThrows(RuntimeException.class,
+                () -> transactionProcessor.processData(fruitTransactions));
     }
 
     @Test

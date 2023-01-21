@@ -16,10 +16,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FileServiceImplTest {
-    private static final String INPUT_FILE_PATH = "src/main/resources/dayInStore.csv";
-    private static final String INPUT_FILE_WRONG_PATH = "src/main/dayInStore.csv";
-    private static final String OUTPUT_FILE_PATH = "src/main/resources/outputTestFile.csv";
-    private static final String OUTPUT_FILE_WRONG_PATH = "src/main/resourcesss/outputTestFile.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/dayInStore.csv";
+    private static final String INPUT_FILE_WRONG_PATH = "src/test/dayInStore.csv";
+    private static final String OUTPUT_FILE_PATH = "src/test/resources/outputTestFile.csv";
+    private static final String OUTPUT_FILE_WRONG_PATH = "src/test/resourcesss/outputTestFile.csv";
     private static final String TEST_STRING = "test string text";
     private FileService fileService;
 
@@ -27,10 +27,10 @@ public class FileServiceImplTest {
     public static void beforeAll() throws Exception {
         Files.write(Path.of(INPUT_FILE_PATH), (
                 "type,fruit,quantity\n"
-                        + "b,banana,20\n"
-                        + "b,apple,100\n"
+                        + "b,banana,5\n"
+                        + "b,apple,110\n"
                         + "s,banana,100\n"
-                        + "p,banana,13\n"
+                        + "p,banana,12\n"
                         + "r,apple,10\n"
                         + "p,apple,20\n"
                         + "p,banana,5\n"
@@ -67,19 +67,18 @@ public class FileServiceImplTest {
 
     @Test
     public void readFromFile_ok() {
-        List<String> readFile;
-        readFile = fileService.readFromFile(INPUT_FILE_PATH);
         List<String> expectedResult = new ArrayList<>(
                 List.of("type,fruit,quantity",
-                        "b,banana,20",
-                        "b,apple,100",
+                        "b,banana,5",
+                        "b,apple,110",
                         "s,banana,100",
-                        "p,banana,13",
+                        "p,banana,12",
                         "r,apple,10",
                         "p,apple,20",
                         "p,banana,5",
                         "s,banana,50"));
-        Assertions.assertEquals(expectedResult, readFile);
+        List<String> actualResult = fileService.readFromFile(INPUT_FILE_PATH);
+        Assertions.assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -96,6 +95,7 @@ public class FileServiceImplTest {
     static void afterAll() {
         try {
             Files.deleteIfExists(Path.of(OUTPUT_FILE_PATH));
+            Files.deleteIfExists(Path.of(INPUT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Can't clear result files after test ", e);
         }

@@ -1,20 +1,19 @@
 package core.basesyntax.service.implementations;
 
-import core.basesyntax.service.FileService;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.File;
+import core.basesyntax.service.FileService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileServiceImplTest {
     private static final String INPUT_FILE_PATH = "src/main/resources/dayInStore.csv";
@@ -22,20 +21,25 @@ public class FileServiceImplTest {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/outputTestFile.csv";
     private static final String OUTPUT_FILE_WRONG_PATH = "src/main/resourcesss/outputTestFile.csv";
     private static final String TEST_STRING = "test string text";
-    FileService fileService = new FileServiceImpl();
+    private FileService fileService;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @BeforeAll
+    public static void beforeAll() throws Exception {
         Files.write(Path.of(INPUT_FILE_PATH), (
-                "type,fruit,quantity\n" +
-                        "b,banana,20\n" +
-                        "b,apple,100\n" +
-                        "s,banana,100\n" +
-                        "p,banana,13\n" +
-                        "r,apple,10\n" +
-                        "p,apple,20\n" +
-                        "p,banana,5\n" +
-                        "s,banana,50\n").getBytes(StandardCharsets.UTF_8));
+                "type,fruit,quantity\n"
+                        + "b,banana,20\n"
+                        + "b,apple,100\n"
+                        + "s,banana,100\n"
+                        + "p,banana,13\n"
+                        + "r,apple,10\n"
+                        + "p,apple,20\n"
+                        + "p,banana,5\n"
+                        + "s,banana,50\n").getBytes(StandardCharsets.UTF_8));
+    }
+
+    @BeforeEach
+    void setUp() {
+        fileService = new FileServiceImpl();
     }
 
     @Test
@@ -47,7 +51,7 @@ public class FileServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read string from " + OUTPUT_FILE_PATH, e);
         }
-        assertEquals(TEST_STRING, actual);
+        Assertions.assertEquals(TEST_STRING, actual);
     }
 
     @Test
@@ -57,7 +61,8 @@ public class FileServiceImplTest {
 
     @Test
     public void writeToFile_wrongPath_notOk() {
-        assertThrows(RuntimeException.class, () -> fileService.writeToFile(TEST_STRING, OUTPUT_FILE_WRONG_PATH));
+        assertThrows(RuntimeException.class,
+                () -> fileService.writeToFile(TEST_STRING, OUTPUT_FILE_WRONG_PATH));
     }
 
     @Test
@@ -74,7 +79,7 @@ public class FileServiceImplTest {
                         "p,apple,20",
                         "p,banana,5",
                         "s,banana,50"));
-        assertEquals("Test failed. Read data are incorrect", expectedResult, readFile);
+        Assertions.assertEquals(expectedResult, readFile);
     }
 
     @Test
@@ -87,8 +92,8 @@ public class FileServiceImplTest {
         assertThrows(NullPointerException.class,() -> fileService.readFromFile(null));
     }
 
-    @After
-    public void clearResults() {
+    @AfterAll
+    static void afterAll() {
         try {
             Files.deleteIfExists(Path.of(OUTPUT_FILE_PATH));
         } catch (IOException e) {

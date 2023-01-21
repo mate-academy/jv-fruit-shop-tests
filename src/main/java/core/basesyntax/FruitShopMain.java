@@ -2,11 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.implementations.FileServiceImpl;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.implementations.OperationStrategyImpl;
 import core.basesyntax.service.implementations.ReportCreator;
 import core.basesyntax.service.implementations.TransactionParser;
@@ -16,7 +16,6 @@ import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.PurchaseOperationHandler;
 import core.basesyntax.service.operationhandler.ReturnOperationHandler;
 import core.basesyntax.service.operationhandler.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +43,7 @@ public class FruitShopMain {
         List<FruitTransaction> fruitTransactions =
                 transactionParser.parseTransactions(fileService.readFromFile(INPUT_FILE_PATH));
         transactionProcessor.processData(fruitTransactions);
-        ReportCreator reportCreator = new ReportCreator(storageDao);
+        ReportCreator reportCreator = new ReportCreator();
         fileService.writeToFile(reportCreator.provideReport(storageDao.getAll()), OUTPUT_FILE_PATH);
     }
 }

@@ -1,9 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-
 import java.util.Map;
-import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
     private Storage storage = new Storage();
@@ -19,7 +17,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> getAll() {
-        return storage.fruits.entrySet();
+    public Map<String, Integer> getAll() {
+        return storage.fruits;
     }
 }

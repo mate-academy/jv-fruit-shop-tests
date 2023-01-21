@@ -1,24 +1,22 @@
 package core.basesyntax.service.implementations;
 
 import core.basesyntax.model.FruitTransaction;
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TransactionParserTest {
-    private TransactionParser transactionParser = new TransactionParser();
+    private TransactionParser transactionParser;
     private FruitTransaction fruitTransaction1;
     private FruitTransaction fruitTransaction2;
     private List<String> activities;
 
     @BeforeEach
     public void setUp() {
-        fruitTransaction1= new FruitTransaction();
+        transactionParser = new TransactionParser();
+        fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.SUPPLY);
         fruitTransaction1.setFruit("banana");
         fruitTransaction1.setQuantity(100);
@@ -35,26 +33,28 @@ public class TransactionParserTest {
     @Test
     public void parseTransactions_ok() {
         List<FruitTransaction> actualList = transactionParser.parseTransactions(activities);
-        Assert.assertEquals(2, actualList.size());
-        Assert.assertTrue(actualList.contains(fruitTransaction1));
-        Assert.assertTrue(actualList.contains(fruitTransaction2));
+        Assertions.assertEquals(2, actualList.size());
+        Assertions.assertTrue(actualList.contains(fruitTransaction1));
+        Assertions.assertTrue(actualList.contains(fruitTransaction2));
     }
 
     @Test
     public void parseTransactions_quantityNotNumber_notOk() {
         activities.add("r,apple,sos");
-        Assert.assertThrows(NumberFormatException.class, () -> transactionParser.parseTransactions(activities));
+        Assertions.assertThrows(NumberFormatException.class,
+                () -> transactionParser.parseTransactions(activities));
     }
 
     @Test
     public void parseTransactions_nullActivities_notOk() {
         activities.add(null);
-        Assert.assertThrows(NullPointerException.class, () -> transactionParser.parseTransactions(activities));
+        Assertions.assertThrows(NullPointerException.class,
+                () -> transactionParser.parseTransactions(activities));
     }
 
     @Test
     public void parseTransactions_emptyActivities_notOk() {
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> transactionParser.parseTransactions(new ArrayList<>()));
+        Assertions.assertThrows(IndexOutOfBoundsException.class,
+                () -> transactionParser.parseTransactions(new ArrayList<>()));
     }
-
 }

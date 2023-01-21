@@ -1,7 +1,6 @@
 package core.basesyntax.service.implementations;
 
 import core.basesyntax.service.FileService;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

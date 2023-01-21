@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceTest {
-    private static final String FILE_INPUT = "src/main/resources/allTransactionForPeriod.csv";
+    private static final String FILE_INPUT = "src/test/resources/testInputFile.csv";
     private static final int REDUCE_ON_ONE = 1;
     private static List<String> listAfterRead;
     private static ReaderServiceImpl readerService;

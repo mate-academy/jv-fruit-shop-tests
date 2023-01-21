@@ -11,8 +11,8 @@ public class WriterServiceImpl implements WriterService {
     private static final String FILE_FOR_WRITE = "src/main/resources/reportTotalResult.csv";
 
     @Override
-    public void writeFile(List<Transaction> list) {
-        File csvOutputFile = new File(FILE_FOR_WRITE);
+    public void writeFile(List<Transaction> list, String fileOutput) {
+        File csvOutputFile = new File(fileOutput);
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
             pw.println("fruit,quantity");
             for (Transaction result : list) {

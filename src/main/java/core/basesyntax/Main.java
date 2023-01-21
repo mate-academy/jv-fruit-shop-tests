@@ -11,6 +11,7 @@ public class Main {
         String fileInput = "src/main/resources/allTransactionForPeriod.csv";
         List<Transaction> listTransactions = new ReaderServiceImpl().getListTransaction(fileInput);
         List<Transaction> listTotalResults = new SummaryData().getTotalResult(listTransactions);
-        new WriterServiceImpl().writeFile(listTotalResults);
+        String fileOutput = "src/main/resources/reportTotalResult.csv";
+        new WriterServiceImpl().writeFile(listTotalResults, fileOutput);
     }
 }

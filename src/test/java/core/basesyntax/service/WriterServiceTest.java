@@ -26,9 +26,9 @@ public class WriterServiceTest {
 
     @Test
     public void reportWrite_Ok() {
-        writerService.writeFile(listTransactions);
+        writerService.writeFile(listTransactions, "src/test/resources/testOutputFile.csv");
         List<String> list = readerService.readAndGetList(
-                "src/main/resources/reportTotalResult.csv");
+                "src/test/resources/testOutputFile.csv");
         assertEquals(2, list.size());
     }
 

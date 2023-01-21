@@ -1,11 +1,9 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.AfterClass;
@@ -16,15 +14,12 @@ public class SummaryDataTest {
     private static Operation operationAdd;
     private static Operation operationSubtract;
     private static List<Transaction> listTransactions;
-    private static final int SIZE_ZERO = 0;
     private static SummaryData summaryData;
-    private static ReaderServiceImpl readerService;
 
     @Before
     public void setUp() {
         operationAdd = new Operation("BALANCE", "b", Operation.ArithmeticOperation.ADD);
         operationSubtract = new Operation("PURCHASE", "p", Operation.ArithmeticOperation.SUBTRACT);
-        readerService = new ReaderServiceImpl();
         summaryData = new SummaryData();
         listTransactions = new ArrayList<>();
         listTransactions.add(new Transaction(operationAdd, "banana", 100));
@@ -51,10 +46,10 @@ public class SummaryDataTest {
     }
 
     @Test
-    public void totalResultEmpty_NotOk() {
-        listTransactions.clear();
-        listTransactions = readerService.getListTransaction();
-        assertTrue(summaryData.getTotalResult(listTransactions).size() > SIZE_ZERO);
+    public void totalResult_Ok() {
+        List<Transaction> listOneLine = new ArrayList<>();
+        listOneLine.add(new Transaction(operationAdd, "banana", 100));
+        assertEquals(1, summaryData.getTotalResult(listOneLine).size());
     }
 
     @AfterClass

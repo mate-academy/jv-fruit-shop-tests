@@ -4,6 +4,5 @@ import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface ReaderService {
-    List<Transaction> getListTransaction();
-
+    List<Transaction> getListTransaction(String fileForRead);
 }

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final String FILE_FOR_READ = "src/main/resources/allTransactionForPeriod.csv";
     private static final int INDEX_FIRST_LINE = 0;
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
@@ -33,17 +32,20 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public List<Transaction> getListTransaction() {
-        List<String> list;
-        try {
-            list = Files.readAllLines(Path.of(FILE_FOR_READ));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file " + FILE_FOR_READ);
-        }
+    public List<Transaction> getListTransaction(String fileForRead) {
+        List<String> list = readAndGetList(fileForRead);
         list.remove(INDEX_FIRST_LINE);
         return list.stream()
                 .filter(l -> !l.isEmpty())
                 .map(this::getTransaction)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> readAndGetList(String fileForRead) {
+        try {
+            return Files.readAllLines(Path.of(fileForRead));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't get data from file " + fileForRead);
+        }
     }
 }

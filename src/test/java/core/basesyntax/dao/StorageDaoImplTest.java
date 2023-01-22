@@ -8,25 +8,19 @@ import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 
 public class StorageDaoImplTest {
     private static final String TEST_FRUIT = "apple";
     private static final int TEST_QTY = 10;
-    private StorageDao storageDao;
-
-    @Before
-    public void setUp() {
-        storageDao = new StorageDaoImpl();
-    }
+    private StorageDao storageDao = new StorageDaoImpl();
 
     @Test
     public void add_ok() {
         storageDao.add(TEST_FRUIT, TEST_QTY);
         assertEquals(1, Storage.fruits.size());
         assertTrue(Storage.fruits.containsKey(TEST_FRUIT));
-        assertTrue(Storage.fruits.containsValue(TEST_QTY));
+        assertEquals(TEST_QTY, (int) Storage.fruits.get(TEST_FRUIT));
     }
 
     @Test
@@ -42,7 +36,7 @@ public class StorageDaoImplTest {
     }
 
     @Test
-    public void getAll() {
+    public void getAll_ok() {
         Storage.fruits.put(TEST_FRUIT, TEST_QTY);
         Storage.fruits.put(TEST_FRUIT + "2", TEST_QTY + 2);
         Map<String, Integer> expected = new HashMap<>();

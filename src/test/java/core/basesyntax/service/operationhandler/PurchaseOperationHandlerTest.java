@@ -13,12 +13,12 @@ import org.junit.Test;
 public class PurchaseOperationHandlerTest {
     private static final String TEST_FRUIT = "apple";
     private static final int TEST_QTY = 10;
-    private PurchaseOperationHandler purchaseOperationHandler;
+    private StorageDao storageDao = new StorageDaoImpl();
+    private PurchaseOperationHandler purchaseOperationHandler =
+                                new PurchaseOperationHandler(storageDao);
 
     @Before
     public void setUp() {
-        StorageDao storageDao = new StorageDaoImpl();
-        purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
         Storage.fruits.put(TEST_FRUIT, TEST_QTY);
     }
 

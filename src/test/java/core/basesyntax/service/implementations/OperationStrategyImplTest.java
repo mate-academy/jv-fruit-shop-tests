@@ -18,14 +18,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
-    private StorageDao storageDao;
+    private StorageDao storageDao = new StorageDaoImpl();
     private OperationStrategy operationStrategy;
     private OperationHandler operationHandler;
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap;
 
     @Before
     public void setUp() {
-        storageDao = new StorageDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
+        operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler(storageDao));
         operationHandlersMap.put(FruitTransaction.Operation.PURCHASE,

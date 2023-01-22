@@ -7,19 +7,13 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static final String TEST_FRUIT = "apple";
     private static final int TEST_QTY = 10;
-    private SupplyOperationHandler supplyOperationHandler;
-
-    @Before
-    public void setUp() throws Exception {
-        StorageDao storageDao = new StorageDaoImpl();
-        supplyOperationHandler = new SupplyOperationHandler(storageDao);
-    }
+    private StorageDao storageDao = new StorageDaoImpl();
+    private SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler(storageDao);
 
     @Test
     public void makeOperation_ok() {

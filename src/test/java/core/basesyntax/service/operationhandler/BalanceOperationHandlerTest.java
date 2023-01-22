@@ -6,19 +6,14 @@ import static org.junit.Assert.assertTrue;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
-import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static final String TEST_FRUIT = "apple";
     private static final int TEST_QTY = 10;
-    private BalanceOperationHandler balanceOperationHandler;
-
-    @Before
-    public void setUp() {
-        StorageDao storageDao = new StorageDaoImpl();
-        balanceOperationHandler = new BalanceOperationHandler(storageDao);
-    }
+    private StorageDao storageDao = new StorageDaoImpl();
+    private BalanceOperationHandler balanceOperationHandler =
+                                new BalanceOperationHandler(storageDao);
 
     @Test
     public void makeOperation_ok() {

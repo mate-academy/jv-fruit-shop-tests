@@ -10,22 +10,21 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserTest {
-    private TransactionParser transactionParser;
-    private FruitTransaction fruitTransaction1;
-    private FruitTransaction fruitTransaction2;
+    private TransactionParser transactionParser = new TransactionParser();
+    private FruitTransaction transactionOne;
+    private FruitTransaction transactionTwo;
     private List<String> activities;
 
     @Before
     public void setUp() {
-        transactionParser = new TransactionParser();
-        fruitTransaction1 = new FruitTransaction();
-        fruitTransaction1.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitTransaction1.setFruit("banana");
-        fruitTransaction1.setQuantity(100);
-        fruitTransaction2 = new FruitTransaction();
-        fruitTransaction2.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction2.setFruit("apple");
-        fruitTransaction2.setQuantity(10);
+        transactionOne = new FruitTransaction();
+        transactionOne.setOperation(FruitTransaction.Operation.SUPPLY);
+        transactionOne.setFruit("banana");
+        transactionOne.setQuantity(100);
+        transactionTwo = new FruitTransaction();
+        transactionTwo.setOperation(FruitTransaction.Operation.RETURN);
+        transactionTwo.setFruit("apple");
+        transactionTwo.setQuantity(10);
         activities = new ArrayList<>();
         activities.add("type,fruit,quantity");
         activities.add("s,banana,100");
@@ -36,8 +35,8 @@ public class TransactionParserTest {
     public void parseTransactions_ok() {
         List<FruitTransaction> actualList = transactionParser.parseTransactions(activities);
         assertEquals(2, actualList.size());
-        assertTrue(actualList.contains(fruitTransaction1));
-        assertTrue(actualList.contains(fruitTransaction2));
+        assertTrue(actualList.contains(transactionOne));
+        assertTrue(actualList.contains(transactionTwo));
     }
 
     @Test (expected = NumberFormatException.class)

@@ -10,11 +10,10 @@ import org.junit.Test;
 
 public class ReportCreatorTest {
     private static final String REPORT_TEMPLATE = "fruit,quantity";
-    private ReportCreator reportCreator;
+    private ReportCreator reportCreator = new ReportCreator();
 
     @Before
     public void setUp() {
-        reportCreator = new ReportCreator();
         Storage.fruits.put("banana", 23);
         Storage.fruits.put("apple", 10);
     }

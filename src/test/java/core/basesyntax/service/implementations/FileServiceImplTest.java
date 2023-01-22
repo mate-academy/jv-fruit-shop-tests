@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.Test;
 
 public class FileServiceImplTest {
@@ -18,12 +17,7 @@ public class FileServiceImplTest {
     private static final String OUTPUT_FILE_PATH = "src/test/resources/outputTestFile.csv";
     private static final String OUTPUT_FILE_WRONG_PATH = "src/test/resourcesss/outputTestFile.csv";
     private static final String TEST_STRING = "test string text";
-    private FileService fileService;
-
-    @Before
-    public void setUp() throws Exception {
-        fileService = new FileServiceImpl();
-    }
+    private FileService fileService = new FileServiceImpl();
 
     @Test
     public void writeToFile_ok() {

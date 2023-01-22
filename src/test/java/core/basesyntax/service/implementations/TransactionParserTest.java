@@ -1,11 +1,13 @@
 package core.basesyntax.service.implementations;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TransactionParserTest {
     private TransactionParser transactionParser;
@@ -13,7 +15,7 @@ public class TransactionParserTest {
     private FruitTransaction fruitTransaction2;
     private List<String> activities;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         transactionParser = new TransactionParser();
         fruitTransaction1 = new FruitTransaction();
@@ -33,28 +35,25 @@ public class TransactionParserTest {
     @Test
     public void parseTransactions_ok() {
         List<FruitTransaction> actualList = transactionParser.parseTransactions(activities);
-        Assertions.assertEquals(2, actualList.size());
-        Assertions.assertTrue(actualList.contains(fruitTransaction1));
-        Assertions.assertTrue(actualList.contains(fruitTransaction2));
+        assertEquals(2, actualList.size());
+        assertTrue(actualList.contains(fruitTransaction1));
+        assertTrue(actualList.contains(fruitTransaction2));
     }
 
-    @Test
+    @Test (expected = NumberFormatException.class)
     public void parseTransactions_quantityNotNumber_notOk() {
         activities.add("r,apple,sos");
-        Assertions.assertThrows(NumberFormatException.class,
-                () -> transactionParser.parseTransactions(activities));
+        transactionParser.parseTransactions(activities);
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void parseTransactions_nullActivities_notOk() {
         activities.add(null);
-        Assertions.assertThrows(NullPointerException.class,
-                () -> transactionParser.parseTransactions(activities));
+        transactionParser.parseTransactions(activities);
     }
 
-    @Test
+    @Test (expected = IndexOutOfBoundsException.class)
     public void parseTransactions_emptyActivities_notOk() {
-        Assertions.assertThrows(IndexOutOfBoundsException.class,
-                () -> transactionParser.parseTransactions(new ArrayList<>()));
+        transactionParser.parseTransactions(new ArrayList<>());
     }
 }

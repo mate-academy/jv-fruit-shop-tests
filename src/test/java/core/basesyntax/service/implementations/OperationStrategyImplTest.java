@@ -1,5 +1,8 @@
 package core.basesyntax.service.implementations;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -11,16 +14,15 @@ import core.basesyntax.service.operationhandler.ReturnOperationHandler;
 import core.basesyntax.service.operationhandler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private StorageDao storageDao;
     private OperationStrategy operationStrategy;
     private OperationHandler operationHandler;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
@@ -38,22 +40,22 @@ public class OperationStrategyImplTest {
     @Test
     public void get_ok() {
         operationHandler = operationStrategy.get(FruitTransaction.Operation.BALANCE);
-        Assertions.assertEquals(BalanceOperationHandler.class,
+        assertEquals(BalanceOperationHandler.class,
                                 operationHandler.getClass());
         operationHandler = operationStrategy.get(FruitTransaction.Operation.RETURN);
-        Assertions.assertEquals(ReturnOperationHandler.class,
+        assertEquals(ReturnOperationHandler.class,
                                 operationHandler.getClass());
         operationHandler = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
-        Assertions.assertEquals(PurchaseOperationHandler.class,
+        assertEquals(PurchaseOperationHandler.class,
                                 operationHandler.getClass());
         operationHandler = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
-        Assertions.assertEquals(SupplyOperationHandler.class,
+        assertEquals(SupplyOperationHandler.class,
                                 operationHandler.getClass());
     }
 
     @Test
     public void get_nullOperation_ok() {
         operationHandler = operationStrategy.get(null);
-        Assertions.assertNull(operationHandler);
+        assertNull(operationHandler);
     }
 }

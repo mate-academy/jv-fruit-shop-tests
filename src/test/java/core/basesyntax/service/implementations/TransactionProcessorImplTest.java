@@ -1,7 +1,10 @@
 package core.basesyntax.service.implementations;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.operationhandler.BalanceOperationHandler;
@@ -13,9 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TransactionProcessorImplTest {
     private static final String TEST_FRUIT = "banana";
@@ -27,8 +30,8 @@ public class TransactionProcessorImplTest {
     private FruitTransaction fruitTransaction3;
     private FruitTransaction fruitTransaction4;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.BALANCE,
@@ -67,44 +70,44 @@ public class TransactionProcessorImplTest {
     @Test
     public void processData_ok() {
         transactionProcessor.processData(fruitTransactions);
-        Assertions.assertEquals(70, (int) storageDao.get(TEST_FRUIT));
+        assertEquals(70, (int) Storage.fruits.get(TEST_FRUIT));
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void processData_negativeBalanceQuantity_notOk() {
         fruitTransaction1.setQuantity(-5);
         fruitTransactions.add(fruitTransaction1);
-        Assertions.assertThrows(RuntimeException.class,
-                () -> transactionProcessor.processData(fruitTransactions));
+        transactionProcessor.processData(fruitTransactions);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void processData_negativeReturnQuantity_notOk() {
         fruitTransaction2.setQuantity(-5);
         fruitTransactions.add(fruitTransaction1);
-        Assertions.assertThrows(RuntimeException.class,
-                () -> transactionProcessor.processData(fruitTransactions));
+        transactionProcessor.processData(fruitTransactions);
     }
 
-    @Test
-    public void processData_muchPurchaseQuantity_notOk() {
+    @Test (expected = RuntimeException.class)
+    public void processData_toMuchPurchaseQuantity_notOk() {
         fruitTransaction3.setQuantity(1000);
         fruitTransactions.add(fruitTransaction1);
-        Assertions.assertThrows(RuntimeException.class,
-                () -> transactionProcessor.processData(fruitTransactions));
+        transactionProcessor.processData(fruitTransactions);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void processData_negativeSupplyQuantity_notOk() {
         fruitTransaction4.setQuantity(-5);
         fruitTransactions.add(fruitTransaction1);
-        Assertions.assertThrows(RuntimeException.class,
-                () -> transactionProcessor.processData(fruitTransactions));
+        transactionProcessor.processData(fruitTransactions);
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void processData_nullTransaction_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> transactionProcessor.processData(null));
+        transactionProcessor.processData(null);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruits.clear();
     }
 }

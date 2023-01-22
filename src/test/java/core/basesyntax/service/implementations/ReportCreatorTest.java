@@ -1,17 +1,19 @@
 package core.basesyntax.service.implementations;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import java.util.HashMap;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportCreatorTest {
     private static final String REPORT_TEMPLATE = "fruit,quantity";
     private ReportCreator reportCreator;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         reportCreator = new ReportCreator();
         Storage.fruits.put("banana", 23);
         Storage.fruits.put("apple", 10);
@@ -22,18 +24,22 @@ public class ReportCreatorTest {
         String expectedString = REPORT_TEMPLATE + System.lineSeparator() + "banana,23"
                 + System.lineSeparator() + "apple,10";
         String actualString = reportCreator.provideReport(Storage.fruits);
-        Assertions.assertEquals(expectedString, actualString);
+        assertEquals(expectedString, actualString);
     }
 
     @Test
     public void provideReport_emptyStorage_ok() {
         String actualString = reportCreator.provideReport(new HashMap<>());
-        Assertions.assertEquals(REPORT_TEMPLATE, actualString);
+        assertEquals(REPORT_TEMPLATE, actualString);
     }
 
-    @Test
+    @Test (expected = NullPointerException.class)
     public void provideReport_nullStorage_notOk() {
-        Assertions.assertThrows(NullPointerException.class,
-                () -> reportCreator.provideReport(null));
+        reportCreator.provideReport(null);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.fruits.clear();
     }
 }

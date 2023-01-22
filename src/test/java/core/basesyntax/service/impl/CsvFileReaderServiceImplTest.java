@@ -15,17 +15,6 @@ public class CsvFileReaderServiceImplTest {
     private static final String NOT_VALID_PATH = "not valid path";
     private FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
 
-    @Test(expected = RuntimeException.class)
-    public void readFromFile_invalidFilePath_isNotOk() {
-        fileReaderService.readFromFile(NOT_VALID_PATH);
-    }
-
-    @Test (expected = NullPointerException.class)
-    public void readFromFile_nullPath_isNotOk() {
-        fileReaderService = new CsvFileReaderServiceImpl();
-        fileReaderService.readFromFile(null);
-    }
-
     @Test
     public void fileReaderService_validPathToFile_isOk() {
         final Operation expectedOperation = Operation.getOperationByFirstLetter("b");
@@ -39,5 +28,16 @@ public class CsvFileReaderServiceImplTest {
         assertEquals(expectedQuantity, actual.get(0).getQuantity());
         assertEquals(expectedOperation,
                 Operation.getOperationByFirstLetter(actual.get(0).getOperation()));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_invalidFilePath_isNotOk() {
+        fileReaderService.readFromFile(NOT_VALID_PATH);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void readFromFile_nullPath_isNotOk() {
+        fileReaderService = new CsvFileReaderServiceImpl();
+        fileReaderService.readFromFile(null);
     }
 }

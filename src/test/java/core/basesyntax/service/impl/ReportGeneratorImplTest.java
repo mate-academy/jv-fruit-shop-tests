@@ -14,11 +14,6 @@ public class ReportGeneratorImplTest {
             + System.lineSeparator();
     private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
-    @Test(expected = NullPointerException.class)
-    public void generate_nullInputValue_isNotOk() {
-        reportGenerator.generate(null);
-    }
-
     @Test
     public void generate_validData_isOk() {
         Storage.FRUITS.put("banana", 20);
@@ -26,5 +21,10 @@ public class ReportGeneratorImplTest {
         Storage.FRUITS.put("pineapple", 89);
         String actual = reportGenerator.generate(Storage.FRUITS);
         assertEquals(EXPECTED, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void generate_nullInputValue_isNotOk() {
+        reportGenerator.generate(null);
     }
 }

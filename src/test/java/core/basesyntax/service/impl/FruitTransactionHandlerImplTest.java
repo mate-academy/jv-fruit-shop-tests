@@ -14,15 +14,15 @@ public class FruitTransactionHandlerImplTest {
     private final FruitTransactionHandler fruitTransactionHandler
             = new FruitTransactionHandlerImpl();
 
-    @Test(expected = NullPointerException.class)
-    public void handle_nullInputValue_isNotOk() {
-        fruitTransactionHandler.handle(null, null);
-    }
-
     @Test
     public void handle_validInputValue_isOk() {
         fruitTransactionHandler.handle(Storage.FRUITS,
                 fileReaderService.readFromFile(VALID_DATA_FILENAME));
         assertFalse(Storage.FRUITS.isEmpty());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void handle_nullInputValue_isNotOk() {
+        fruitTransactionHandler.handle(null, null);
     }
 }

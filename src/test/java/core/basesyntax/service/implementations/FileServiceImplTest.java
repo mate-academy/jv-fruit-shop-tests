@@ -4,14 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileService;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileServiceImplTest {
@@ -21,20 +19,6 @@ public class FileServiceImplTest {
     private static final String OUTPUT_FILE_WRONG_PATH = "src/test/resourcesss/outputTestFile.csv";
     private static final String TEST_STRING = "test string text";
     private FileService fileService;
-
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        Files.write(Path.of(INPUT_FILE_PATH), (
-                "type,fruit,quantity\n"
-                        + "b,banana,5\n"
-                        + "b,apple,110\n"
-                        + "s,banana,100\n"
-                        + "p,banana,12\n"
-                        + "r,apple,10\n"
-                        + "p,apple,20\n"
-                        + "p,banana,5\n"
-                        + "s,banana,50\n").getBytes(StandardCharsets.UTF_8));
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -93,7 +77,6 @@ public class FileServiceImplTest {
     public static void afterClass() {
         try {
             Files.deleteIfExists(Path.of(OUTPUT_FILE_PATH));
-            Files.deleteIfExists(Path.of(INPUT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException("Can't clear result files after test ", e);
         }

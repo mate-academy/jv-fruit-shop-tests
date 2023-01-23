@@ -13,21 +13,21 @@ public class StorageTest {
     }
 
     @Test
-    public void storage_addValidDataToStorage_isOk() {
+    public void storage_addValidDataToStorage_ok() {
         Integer expected = 20;
         Integer actual = Storage.FRUITS.get("banana");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void storage_addNullDataToStorage_isNotOk() {
+    public void storage_addNullDataToStorage_notOk() {
         Integer expected = null;
         Integer actual = Storage.FRUITS.get(null);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void storage_addInvalidDataToStorage_isNotOk() {
+    public void storage_addInvalidDataToStorage_notOk() {
         Integer expected = null;
         Integer actual = Storage.FRUITS.get("NotAdded");
         assertEquals(expected, actual);

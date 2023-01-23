@@ -16,7 +16,7 @@ public class CsvFileReaderServiceImplTest {
     private FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
 
     @Test
-    public void fileReaderService_validPathToFile_isOk() {
+    public void fileReaderService_validPathToFile_ok() {
         final Operation expectedOperation = Operation.getOperationByFirstLetter("b");
         String expectedName = "banana";
         int expectedQuantity = 20;
@@ -31,12 +31,12 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_invalidFilePath_isNotOk() {
+    public void readFromFile_invalidFilePath_notOk() {
         fileReaderService.readFromFile(NOT_VALID_PATH);
     }
 
     @Test (expected = NullPointerException.class)
-    public void readFromFile_nullPath_isNotOk() {
+    public void readFromFile_nullPath_notOk() {
         fileReaderService = new CsvFileReaderServiceImpl();
         fileReaderService.readFromFile(null);
     }

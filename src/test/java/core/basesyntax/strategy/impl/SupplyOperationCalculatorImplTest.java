@@ -16,19 +16,19 @@ public class SupplyOperationCalculatorImplTest {
     private OperationCalculator returnOperationCalculator = new ReturnOperationCalculatorImpl();
 
     @Test
-    public void calculateSupply_isOk() {
+    public void calculateSupply_ok() {
         int actual = returnOperationCalculator.calculate(VALID_BALANCE, VALID_QUANTITY);
         assertEquals("supply calculate not valid ", actual, EXPECTED_RESULT);
     }
 
     @Test
-    public void calculateSupplyZeroBalance_isOk() {
+    public void calculateSupplyZeroBalance_ok() {
         int actual = returnOperationCalculator.calculate(ZERO_BALANCE, VALID_QUANTITY);
         assertEquals("supply calculate not valid ", actual, EXPECTED_RESULT_FOR_ZERO_BALANCE);
     }
 
     @Test
-    public void calculateSupplyZeroQuantity_isOk() {
+    public void calculateSupplyZeroQuantity_ok() {
         int actual = returnOperationCalculator.calculate(VALID_BALANCE, ZERO_QUANTITY);
         assertEquals("supply calculate not valid ", actual, EXPECTED_RESULT_FOR_ZERO_QUANTITY);
     }

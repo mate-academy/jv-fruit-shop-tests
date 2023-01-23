@@ -13,20 +13,20 @@ public class BalanceOperationCalculatorImplTest {
     private OperationCalculator balanceOperationCalculator;
 
     @Test
-    public void calculateBalance_isOk() {
+    public void calculateBalance_ok() {
         balanceOperationCalculator = new BalanceOperationCalculatorImpl();
         int actual = balanceOperationCalculator.calculate(VALID_BALANCE, VALID_QUANTITY);
         assertEquals(VALID_QUANTITY, actual);
     }
 
     @Test
-    public void calculateBalance_ZeroQuantity_isOk() {
+    public void calculateBalance_ZeroQuantity_ok() {
         balanceOperationCalculator = new BalanceOperationCalculatorImpl();
         balanceOperationCalculator.calculate(VALID_BALANCE, ZERO_QUANTITY);
     }
 
     @Test
-    public void calculateBalanceZeroBalance_isOk() {
+    public void calculateBalanceZeroBalance_ok() {
         balanceOperationCalculator = new BalanceOperationCalculatorImpl();
         balanceOperationCalculator.calculate(ZERO_BALANCE, VALID_QUANTITY);
     }

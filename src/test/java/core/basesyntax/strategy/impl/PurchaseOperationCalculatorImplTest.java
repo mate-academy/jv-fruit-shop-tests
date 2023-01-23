@@ -16,19 +16,19 @@ public class PurchaseOperationCalculatorImplTest {
     private OperationCalculator purchaseOperationCalculator = new PurchaseOperationCalculatorImpl();
 
     @Test
-    public void calculatePurchase_isOk() {
+    public void calculatePurchase_ok() {
         int actual = purchaseOperationCalculator.calculate(VALID_BALANCE, VALID_QUANTITY);
         assertEquals("purchase calculate not valid ", actual, EXPECTED_RESULT);
     }
 
     @Test
-    public void calculatePurchaseZeroBalance_isOk() {
+    public void calculatePurchaseZeroBalance_ok() {
         int actual = purchaseOperationCalculator.calculate(ZERO_BALANCE, VALID_QUANTITY);
         assertEquals("purchase calculate not valid ", actual, EXPECTED_RESULT_FOR_ZERO_BALANCE);
     }
 
     @Test
-    public void calculatePurchaseZeroQuantity_isOk() {
+    public void calculatePurchaseZeroQuantity_ok() {
         int actual = purchaseOperationCalculator.calculate(VALID_BALANCE, ZERO_QUANTITY);
         assertEquals("purchase calculate not valid ", actual, EXPECTED_RESULT_FOR_ZERO_QUANTITY);
     }

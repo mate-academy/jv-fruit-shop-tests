@@ -17,19 +17,19 @@ public class FileWriterServiceImplTest {
     private FileWriterService fileWriterService;
 
     @Test
-    public void writeToFile_validData_isOk() throws IOException {
+    public void writeToFile_validData_ok() throws IOException {
         String expected = "fruit,quantity";
         String actual = Files.readAllLines(Path.of(VALID_PATH)).get(0);
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeToFile_nullData_isNotOk() {
+    public void writeToFile_nullData_notOk() {
         fileWriterService.writeToFile(VALID_PATH, null);
     }
 
     @Test (expected = NullPointerException.class)
-    public void writeToFile_nullPath_isNotOk() {
+    public void writeToFile_nullPath_notOk() {
         fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(null, REPORT);
     }

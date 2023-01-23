@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import core.basesyntax.service.FileWriterService;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {

@@ -12,7 +12,6 @@ public class StorageTest {
         Storage.FRUITS.put("banana", 20);
     }
 
-
     @Test
     public void storage_addValidDataToStorage_isOk() {
         Integer expected = 20;

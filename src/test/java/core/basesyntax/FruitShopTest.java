@@ -1,7 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FileService;
-import core.basesyntax.service.FileServiceImpl;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;
@@ -11,6 +14,7 @@ public class FruitShopTest {
 
     @Test
     public void testFruitShop_processing_Ok() {
+
         String input = "type,fruit,quantity\r\n"
                 + "b,banana,500\r\n"
                 + "b,apple,500\r\n"
@@ -21,32 +25,25 @@ public class FruitShopTest {
                 + "p,banana,500\r\n"
                 + "s,banana,2000";
 
-        FileService fileService = new FileServiceImpl();
-        fileService.writeInFile(input, "activities.csv");
+        try (BufferedWriter bufferedWriter =
+                     new BufferedWriter(new FileWriter("src/test/resources/input.csv"))) {
+            bufferedWriter.write(input);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write data to file", e);
+        }
         FruitShop fruitShop = new FruitShop();
-        fruitShop.processing();
-        List<String> test = fileService.readFromFile("report.csv");
-        String expected = "fruit,quantity\r\n"
-                + "banana,2700\r\n"
-                + "apple,300";
-        String actual = test.stream().map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testFileService_writeRead_ok() {
-        String input = "type,trIger,Crypta\r\n"
-                + "Orange,banana,2023\r\n"
-                + "b,C,%";
-        FileService fileService = new FileServiceImpl();
-        fileService.writeInFile(input, "store.csv");
-        List<String> test = fileService.readFromFile("store.csv");
-        String expected = "type,trIger,Crypta\r\n"
-                + "Orange,banana,2023\r\n"
-                + "b,C,%";
-        String actual = test.stream().map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
-        Assert.assertEquals(expected, actual);
+        fruitShop.processing("src/test/resources/input.csv", "src/test/resources/report.csv");
+        try {
+            File file = new File("src/test/resources/report.csv");
+            List<String> list = Files.readAllLines(file.toPath());
+            String actual = list.stream().map(Object::toString)
+                    .collect(Collectors.joining(System.lineSeparator()));
+            String expected = "fruit,quantity\r\n"
+                    + "banana,2700\r\n"
+                    + "apple,300";
+            Assert.assertEquals(expected, actual);
+        } catch (IOException e1) {
+            throw new RuntimeException("Can't read from file", e1);
+        }
     }
 }

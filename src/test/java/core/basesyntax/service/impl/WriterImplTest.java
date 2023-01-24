@@ -5,7 +5,6 @@ import core.basesyntax.service.Writer;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
@@ -28,11 +27,14 @@ public class WriterImplTest {
     @Test
     public void writer_writeInFile_Ok() {
         Writer writer = new WriterImpl();
-        String expected = "fruit,quantity\r\n"
-                + "banana,2700\r\n"
-                + "apple,300";
+        StringBuilder b = new StringBuilder();
+        String expected = b.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,2700")
+                .append(System.lineSeparator())
+                .append("apple,300").toString();
         writer.writeInFile(expected,"src/test/resources/report.csv");
-        List<String> actualList = new ArrayList<>();
+        List<String> actualList;
         try {
             File file = new File("src/test/resources/report.csv");
             List<String> activities = Files.readAllLines(file.toPath());

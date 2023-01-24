@@ -27,16 +27,25 @@ public class FruitShopTest {
 
     @Test
     public void testFruitShop_processing_Ok() {
+        StringBuilder builder = new StringBuilder();
 
-        String input = "type,fruit,quantity\r\n"
-                + "b,banana,500\r\n"
-                + "b,apple,500\r\n"
-                + "s,banana,2000\r\n"
-                + "p,banana,1300\r\n"
-                + "r,apple,500\r\n"
-                + "p,apple,700\r\n"
-                + "p,banana,500\r\n"
-                + "s,banana,2000";
+        String input = builder.append("type,fruit,quantity")
+                .append(System.lineSeparator())
+                .append("b,banana,500")
+                .append(System.lineSeparator())
+                .append("b,apple,500")
+                .append(System.lineSeparator())
+                .append("s,banana,2000")
+                .append(System.lineSeparator())
+                .append("p,banana,1300")
+                .append(System.lineSeparator())
+                .append("r,apple,500")
+                .append(System.lineSeparator())
+                .append("p,apple,700")
+                .append(System.lineSeparator())
+                .append("p,banana,500")
+                .append(System.lineSeparator())
+                .append("s,banana,2000").toString();
 
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter("src/test/resources/input.csv"))) {
@@ -51,9 +60,12 @@ public class FruitShopTest {
             List<String> list = Files.readAllLines(file.toPath());
             String actual = list.stream().map(Object::toString)
                     .collect(Collectors.joining(System.lineSeparator()));
-            String expected = "fruit,quantity\r\n"
-                    + "banana,2700\r\n"
-                    + "apple,300";
+            StringBuilder b = new StringBuilder();
+            String expected = b.append("fruit,quantity")
+                    .append(System.lineSeparator())
+                    .append("banana,2700")
+                    .append(System.lineSeparator())
+                    .append("apple,300").toString();
             Assert.assertEquals(expected, actual);
         } catch (IOException e1) {
             throw new RuntimeException("Can't read from file", e1);

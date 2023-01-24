@@ -35,10 +35,15 @@ public class ReaderImplTest {
         expectedList.add(new FruitTransaction(Operation.RETURN,"apple",500));
         expectedList.add(new FruitTransaction(Operation.SUPPLY,"banana",2000));
 
-        String input = "type,fruit,quantity\r\n"
-                + "b,banana,500\r\n"
-                + "r,apple,500\r\n"
-                + "s,banana,2000";
+        StringBuilder builder = new StringBuilder();
+
+        String input = builder.append("type,fruit,quantity")
+                .append(System.lineSeparator())
+                .append("b,banana,500")
+                .append(System.lineSeparator())
+                .append("r,apple,500")
+                .append(System.lineSeparator())
+                .append("s,banana,2000").toString();
 
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter("src/test/resources/input.csv"))) {

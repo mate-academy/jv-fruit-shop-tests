@@ -25,9 +25,12 @@ public class ReportServiceImplTest {
 
     @Test
     public void reportServiceImpl_createReport_Ok() {
-        String expected = "fruit,quantity\r\n"
-                + "banana,2700\r\n"
-                + "apple,300";
+        StringBuilder b = new StringBuilder();
+        String expected = b.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,2700")
+                .append(System.lineSeparator())
+                .append("apple,300").toString();
 
         List<FruitReport> actualList = new ArrayList<>();
         actualList.add(new FruitReport("banana",2700));

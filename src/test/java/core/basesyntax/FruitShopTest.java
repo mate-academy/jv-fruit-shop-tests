@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,9 +9,15 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitShopTest {
+
+    @Before
+    public void clean() {
+        Storage.fruits.clear();
+    }
 
     @Test
     public void testFruitShop_processing_Ok() {

@@ -5,6 +5,7 @@ import core.basesyntax.model.FruitReport;
 import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,12 @@ public class ReportServiceImplTest {
     private ReportService reportService = new ReportServiceImpl();
 
     @Before
-    public void clean() {
+    public void cleanBefore() {
+        Storage.fruits.clear();
+    }
+
+    @After
+    public void cleanAfter() {
         Storage.fruits.clear();
     }
 

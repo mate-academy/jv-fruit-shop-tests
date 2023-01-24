@@ -3,6 +3,7 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +11,12 @@ import org.junit.Test;
 public class SupplyOperationHandlerTest {
 
     @Before
-    public void clean() {
+    public void cleanBefore() {
+        Storage.fruits.clear();
+    }
+
+    @After
+    public void cleanAfter() {
         Storage.fruits.clear();
     }
 

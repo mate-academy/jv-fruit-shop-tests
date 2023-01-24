@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,12 @@ public class ReaderImplTest {
     private Reader reader = new ReaderImpl();
 
     @Before
-    public void clean() {
+    public void cleanBefore() {
+        Storage.fruits.clear();
+    }
+
+    @After
+    public void cleanAfter() {
         Storage.fruits.clear();
     }
 

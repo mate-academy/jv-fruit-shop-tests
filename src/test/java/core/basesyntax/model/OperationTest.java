@@ -16,6 +16,11 @@ public class OperationTest {
     }
 
     @Test(expected = RuntimeException.class)
+    public void parseOperation_nullString_notOk() {
+        Operation.parseOperation(null);
+    }
+
+    @Test(expected = RuntimeException.class)
     public void parseOperation_operationNotListed_notOk() {
         Operation.parseOperation(INCORRECT_STRING_OPERATION);
     }

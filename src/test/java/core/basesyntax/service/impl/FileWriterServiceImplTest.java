@@ -8,8 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
-    private static final String CORRECT_FILE_PATH =
-            "src/test/java/core/basesyntax/resources/testWriterFile.csv";
+    private static final String CORRECT_FILE_PATH = "src/test/resources/testWriterFile.csv";
     private static final String INCORRECT_FILE_PATH = "";
     private static final String TEST_REPORT = "apple, 120";
     private FileWriterService fileWriterService;

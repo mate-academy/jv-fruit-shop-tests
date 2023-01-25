@@ -8,10 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String INPUT_FILE_PATH =
-            "src/test/java/core/basesyntax/resources/data.csv";
-    private static final String INCORRECT_FILE_PATH =
-            "src/test/java/core/basesyntax/resources/fileAbsent.csv";
+    private static final String INPUT_FILE_PATH = "src/test/resources/data.csv";
+    private static final String INCORRECT_FILE_PATH = "src/test/resources/fileAbsent.csv";
     private FileReaderService fileReaderService;
 
     @Before

@@ -34,18 +34,15 @@ public class WriterImplTest {
                 .append(System.lineSeparator())
                 .append("apple,300").toString();
         writer.writeInFile(expected,"src/test/resources/report.csv");
-        List<String> actualList;
         try {
             File file = new File("src/test/resources/report.csv");
-            List<String> activities = Files.readAllLines(file.toPath());
-            actualList = activities;
+            List<String> actualList = Files.readAllLines(file.toPath());
+            String actual = actualList
+                    .stream().map(String::valueOf)
+                    .collect(Collectors.joining(System.lineSeparator()));
+            Assert.assertEquals(actual, expected);
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file", e);
         }
-        String actual = actualList
-                .stream().map(String::valueOf)
-                .collect(Collectors.joining(System.lineSeparator()));
-        Assert.assertEquals(actual, expected);
-
     }
 }

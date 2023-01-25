@@ -28,7 +28,12 @@ public class FruitShopTest {
     @Test
     public void testFruitShop_processing_Ok() {
         StringBuilder builder = new StringBuilder();
-
+        StringBuilder b = new StringBuilder();
+        String expected = b.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,2700")
+                .append(System.lineSeparator())
+                .append("apple,300").toString();
         String input = builder.append("type,fruit,quantity")
                 .append(System.lineSeparator())
                 .append("b,banana,500")
@@ -60,12 +65,6 @@ public class FruitShopTest {
             List<String> list = Files.readAllLines(file.toPath());
             String actual = list.stream().map(Object::toString)
                     .collect(Collectors.joining(System.lineSeparator()));
-            StringBuilder b = new StringBuilder();
-            String expected = b.append("fruit,quantity")
-                    .append(System.lineSeparator())
-                    .append("banana,2700")
-                    .append(System.lineSeparator())
-                    .append("apple,300").toString();
             Assert.assertEquals(expected, actual);
         } catch (IOException e1) {
             throw new RuntimeException("Can't read from file", e1);

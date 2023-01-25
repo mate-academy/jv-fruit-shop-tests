@@ -29,10 +29,8 @@ public class SupplyOperationHandlerTest {
         SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
         supplyOperationHandler.process(f1);
         supplyOperationHandler.process(f2);
-
-        Assert.assertEquals(Storage.fruits.size(),2);
+        Assert.assertEquals(Storage.fruits.size(), 2);
         Assert.assertEquals(Storage.fruits.get("pineapple"),(Integer) 400);
         Assert.assertEquals(Storage.fruits.get("strawberry"), (Integer) 200);
-        Storage.fruits.clear();
     }
 }

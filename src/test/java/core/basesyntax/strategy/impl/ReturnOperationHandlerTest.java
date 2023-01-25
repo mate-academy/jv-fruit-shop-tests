@@ -33,6 +33,5 @@ public class ReturnOperationHandlerTest {
         Assert.assertEquals(Storage.fruits.size(),2);
         Assert.assertEquals(Storage.fruits.get("pineapple"),(Integer) 220);
         Assert.assertEquals(Storage.fruits.get("strawberry"), (Integer) 150);
-        Storage.fruits.clear();
     }
 }

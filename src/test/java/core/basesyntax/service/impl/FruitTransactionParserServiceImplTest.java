@@ -42,13 +42,13 @@ public class FruitTransactionParserServiceImplTest {
         expectedList.add(new FruitReport("pineapple", 200));
         expectedList.add(new FruitReport("strawberry", 45));
 
+        String expected;
         List<FruitReport> actualList = fruitTransactionParserService.prepareDataForReport(list);
 
-        String expected = expectedList.stream().map(i -> String.valueOf(i.getFruit())
+        expected = expectedList.stream().map(i -> String.valueOf(i.getFruit())
                 + String.valueOf(i.getQuantity())).collect(Collectors.joining());
         String actual = actualList.stream().map(i -> String.valueOf(i.getFruit())
                 + String.valueOf(i.getQuantity())).collect(Collectors.joining());
         Assert.assertEquals(actual, expected);
-
     }
 }

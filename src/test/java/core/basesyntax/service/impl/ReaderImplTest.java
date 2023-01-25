@@ -51,9 +51,10 @@ public class ReaderImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file", e);
         }
+        String expected;
         Reader reader = new ReaderImpl();
         List<FruitTransaction> actualList = reader.readFromFile("src/test/resources/input.csv");
-        String expected = expectedList.stream()
+        expected = expectedList.stream()
                 .map(i -> String.valueOf(i.getOperation()) + String.valueOf(i.getFruit())
                         + String.valueOf(i.getQuantity())).collect(Collectors.joining());
         String actual = actualList.stream()

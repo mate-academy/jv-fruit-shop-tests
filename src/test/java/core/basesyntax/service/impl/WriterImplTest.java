@@ -1,6 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.Writer;
 import java.io.File;
 import java.io.IOException;
@@ -9,15 +11,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class WriterImplTest {
-    private StringBuilder expectedBuilder = new StringBuilder();
-    private String expected = expectedBuilder.append("fruit,quantity")
-            .append(System.lineSeparator())
-            .append("banana,2700")
-            .append(System.lineSeparator())
-            .append("apple,300").toString();
+    private Writer writer = new WriterImpl();
+    private String expected;
+
+    @Before
+    public void prepareBefore() {
+        StringBuilder expectedBuilder = new StringBuilder();
+        expected = expectedBuilder.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,2700")
+                .append(System.lineSeparator())
+                .append("apple,300").toString();
+    }
 
     @After
     public void cleanAfter() {
@@ -26,7 +35,6 @@ public class WriterImplTest {
 
     @Test
     public void writer_writeInFile_Ok() {
-        Writer writer = new WriterImpl();
         writer.writeInFile(expected,"src/test/resources/report.csv");
         try {
             File file = new File("src/test/resources/report.csv");
@@ -42,7 +50,6 @@ public class WriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writer_writeInDirectory_NotOk() {
-        Writer writer = new WriterImpl();
         writer.writeInFile(expected,"src/test/resources");
     }
 }

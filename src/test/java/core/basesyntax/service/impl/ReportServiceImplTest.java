@@ -12,10 +12,19 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private ReportService reportService = new ReportServiceImpl();
+    private String expected;
+    private List<FruitReport> actualList = new ArrayList<>();
 
     @Before
-    public void cleanBefore() {
-        Storage.fruits.clear();
+    public void prepareBefore() {
+        actualList.add(new FruitReport("banana",2700));
+        actualList.add(new FruitReport("apple", 300));
+        StringBuilder builder = new StringBuilder();
+        expected = builder.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,2700")
+                .append(System.lineSeparator())
+                .append("apple,300").toString();
     }
 
     @After
@@ -25,17 +34,6 @@ public class ReportServiceImplTest {
 
     @Test
     public void reportServiceImpl_createReport_Ok() {
-        StringBuilder b = new StringBuilder();
-        String expected = b.append("fruit,quantity")
-                .append(System.lineSeparator())
-                .append("banana,2700")
-                .append(System.lineSeparator())
-                .append("apple,300").toString();
-
-        List<FruitReport> actualList = new ArrayList<>();
-        actualList.add(new FruitReport("banana",2700));
-        actualList.add(new FruitReport("apple", 300));
-
         String actual = reportService.createReport(actualList);
         Assert.assertEquals(actual, expected);
     }

@@ -8,18 +8,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitShopTest {
 
     private StringBuilder builder = new StringBuilder();
-    private StringBuilder expectedBuilder = new StringBuilder();
-    private String expected = expectedBuilder.append("fruit,quantity")
-            .append(System.lineSeparator())
-            .append("banana,2700")
-            .append(System.lineSeparator())
-            .append("apple,300").toString();
+    private String expected;
     private FruitShop fruitShop = new FruitShop();
+
+    @Before
+    public void before() {
+        StringBuilder expectedBuilder = new StringBuilder();
+        expected = expectedBuilder.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,2700")
+                .append(System.lineSeparator())
+                .append("apple,300").toString();
+    }
 
     @After
     public void cleanAfter() {

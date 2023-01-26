@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
@@ -15,11 +14,6 @@ public class BalanceOperationHandlerTest {
     private FruitTransaction f2 =
             new FruitTransaction(Operation.BALANCE, "strawberry", 50);
     private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
-
-    @Before
-    public void cleanBefore() {
-        Storage.fruits.clear();
-    }
 
     @After
     public void cleanAfter() {

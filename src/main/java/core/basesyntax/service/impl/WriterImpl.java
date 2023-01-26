@@ -9,7 +9,6 @@ public class WriterImpl implements Writer {
 
     @Override
     public void writeInFile(String report, String filePath) {
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
             bufferedWriter.write(report);
         } catch (IOException e) {

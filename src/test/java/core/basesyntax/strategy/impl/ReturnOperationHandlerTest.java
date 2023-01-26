@@ -11,8 +11,9 @@ import org.junit.Test;
 public class ReturnOperationHandlerTest {
 
     @Before
-    public void cleanBefore() {
-        Storage.fruits.clear();
+    public void fillStorage() {
+        Storage.fruits.put("pineapple",200);
+        Storage.fruits.put("strawberry",100);
     }
 
     @After
@@ -22,8 +23,6 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void returnOperationHandler_process_Ok() {
-        Storage.fruits.put("pineapple",200);
-        Storage.fruits.put("strawberry",100);
         FruitTransaction f1 = new FruitTransaction(Operation.RETURN, "pineapple", 20);
         FruitTransaction f2 = new FruitTransaction(Operation.RETURN, "strawberry", 50);
         ReturnOperationHandler returnOperationHandler = new ReturnOperationHandler();

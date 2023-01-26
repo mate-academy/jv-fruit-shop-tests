@@ -11,8 +11,9 @@ import org.junit.Test;
 public class PurchaseOperationHandlerTest {
 
     @Before
-    public void cleanBefore() {
-        Storage.fruits.clear();
+    public void fillStorage() {
+        Storage.fruits.put("pineapple",500);
+        Storage.fruits.put("strawberry",50);
     }
 
     @After
@@ -22,8 +23,6 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void purchaseOperationHandler_process_Ok() {
-        Storage.fruits.put("pineapple",500);
-        Storage.fruits.put("strawberry",50);
         FruitTransaction f1 = new FruitTransaction(Operation.PURCHASE, "pineapple", 100);
         FruitTransaction f2 = new FruitTransaction(Operation.PURCHASE, "strawberry", 20);
         PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
@@ -37,8 +36,7 @@ public class PurchaseOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperationHandler_process_NotOk() {
-        Storage.fruits.put("pineapple",50);
-        FruitTransaction f1 = new FruitTransaction(Operation.PURCHASE, "pineapple", 100);
+        FruitTransaction f1 = new FruitTransaction(Operation.PURCHASE, "pineapple", 600);
         PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
         purchaseOperationHandler.process(f1);
     }

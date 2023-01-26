@@ -20,6 +20,9 @@ public class ReaderImpl implements Reader {
         try {
             File file = new File(filePath);
             List<String> activities = Files.readAllLines(file.toPath());
+            if (activities.size() == 0) {
+                throw new RuntimeException("File is empty");
+            }
             for (int i = 1; i < activities.size(); i++) {
                 String[] activityArray = activities.get(i).split(",");
                 list.add(new FruitTransaction(Operation.getOperation(activityArray[OPERATION]),

@@ -11,8 +11,9 @@ import org.junit.Test;
 public class SupplyOperationHandlerTest {
 
     @Before
-    public void cleanBefore() {
-        Storage.fruits.clear();
+    public void fillStorage() {
+        Storage.fruits.put("pineapple",200);
+        Storage.fruits.put("strawberry",100);
     }
 
     @After
@@ -22,8 +23,6 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void supplyOperationHandler_process_Ok() {
-        Storage.fruits.put("pineapple",200);
-        Storage.fruits.put("strawberry",100);
         FruitTransaction f1 = new FruitTransaction(Operation.SUPPLY, "pineapple", 200);
         FruitTransaction f2 = new FruitTransaction(Operation.SUPPLY, "strawberry", 100);
         SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();

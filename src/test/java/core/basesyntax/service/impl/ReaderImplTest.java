@@ -4,24 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.Reader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderImplTest {
     private Reader reader = new ReaderImpl();
-
-    @Before
-    public void cleanBefore() {
-        Storage.fruits.clear();
-    }
 
     @After
     public void cleanAfter() {
@@ -34,23 +25,6 @@ public class ReaderImplTest {
         expectedList.add(new FruitTransaction(Operation.BALANCE,"banana",500));
         expectedList.add(new FruitTransaction(Operation.RETURN,"apple",500));
         expectedList.add(new FruitTransaction(Operation.SUPPLY,"banana",2000));
-
-        StringBuilder builder = new StringBuilder();
-
-        String input = builder.append("type,fruit,quantity")
-                .append(System.lineSeparator())
-                .append("b,banana,500")
-                .append(System.lineSeparator())
-                .append("r,apple,500")
-                .append(System.lineSeparator())
-                .append("s,banana,2000").toString();
-
-        try (BufferedWriter bufferedWriter =
-                     new BufferedWriter(new FileWriter("src/test/resources/input.csv"))) {
-            bufferedWriter.write(input);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file", e);
-        }
         String expected;
         Reader reader = new ReaderImpl();
         List<FruitTransaction> actualList = reader.readFromFile("src/test/resources/input.csv");
@@ -61,5 +35,18 @@ public class ReaderImplTest {
                 .map(i -> String.valueOf(i.getOperation()) + String.valueOf(i.getFruit())
                         + String.valueOf(i.getQuantity())).collect(Collectors.joining());
         Assert.assertEquals(actual, expected);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void reader_readFromEmptyFile_NotOk() {
+        Reader reader = new ReaderImpl();
+        List<FruitTransaction> actualList =
+                reader.readFromFile("src/test/resources/inputEmpty.csv");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void reader_readFromNotExistingFile_NotOk() {
+        Reader reader = new ReaderImpl();
+        List<FruitTransaction> actualList = reader.readFromFile("src/test/resources");
     }
 }

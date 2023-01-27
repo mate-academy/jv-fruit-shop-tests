@@ -12,7 +12,7 @@ public class SupplyOperationHandlerTest {
     private OperationHandler operationHandler = new SupplyOperationHandler();
 
     @Test
-    public void handleSupplyOperation_Ok() {
+    public void handle_Ok() {
         operationHandler.handle(new FruitTransaction(StoreOperation.SUPPLY, "apple", 50));
         Integer actualResult = FruitStorage.storage.get("apple");
         Integer expectedResult = 50;
@@ -20,7 +20,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleNegativeSupplyOperation_NotOk() {
+    public void handle_NegativeAmount_NotOk() {
         operationHandler.handle(new FruitTransaction(StoreOperation.SUPPLY, "banana", -30));
     }
 

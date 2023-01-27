@@ -45,7 +45,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void addValidDataToStorage_Ok() {
+    public void addDataToStorage_Ok() {
         fruitShopService.addDataToStorage(dataList);
         Integer actualResult = FruitStorage.storage.get("apple");
         Integer expectedResult = 85;
@@ -53,37 +53,37 @@ public class FruitShopServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void addBalanceAmountTwice_NotOk() {
+    public void addDataToStorage_TwiceBalance_NotOk() {
         dataList.add(new FruitTransaction(StoreOperation.BALANCE, "apple", 150));
         fruitShopService.addDataToStorage(dataList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addNegativeBalanceAmount_NotOk() {
+    public void addDataToStorage_NegativeBalance_NotOk() {
         dataList.add(new FruitTransaction(StoreOperation.BALANCE, "apple", -60));
         fruitShopService.addDataToStorage(dataList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addNegativeSupplyAmount_NotOk() {
+    public void addDataToStorage_NegativeSupply_NotOk() {
         dataList.add(new FruitTransaction(StoreOperation.SUPPLY, "apple", -30));
         fruitShopService.addDataToStorage(dataList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addNegativePurchaseAmount_NotOk() {
+    public void addDataToStorage_NegativePurchase_NotOk() {
         dataList.add(new FruitTransaction(StoreOperation.PURCHASE, "apple", -10));
         fruitShopService.addDataToStorage(dataList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addPurchaseAmountLargerThanTotalAmount_NotOk() {
+    public void addDataToStorage_PurchaseLargerThanTotal_NotOk() {
         dataList.add(new FruitTransaction(StoreOperation.PURCHASE, "apple", 200));
         fruitShopService.addDataToStorage(dataList);
     }
 
     @Test(expected = RuntimeException.class)
-    public void addNegativeReturnAmount_NotOk() {
+    public void addDataToStorage_NegativeReturn_NotOk() {
         dataList.add(new FruitTransaction(StoreOperation.RETURN, "apple", -40));
         fruitShopService.addDataToStorage(dataList);
     }

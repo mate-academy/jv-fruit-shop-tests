@@ -12,7 +12,7 @@ public class BalanceOperationHandlerTest {
     private OperationHandler operationHandler = new BalanceOperationHandler();
 
     @Test
-    public void handleBalanceOperation_Ok() {
+    public void handle_Ok() {
         operationHandler.handle(new FruitTransaction(StoreOperation.BALANCE, "banana", 90));
         Integer actualResult = FruitStorage.storage.get("banana");
         Integer expectedResult = 90;
@@ -20,13 +20,13 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleBalanceOperationTwice_NotOk() {
+    public void handle_TwiceBalance_NotOk() {
         operationHandler.handle(new FruitTransaction(StoreOperation.BALANCE, "banana", 30));
         operationHandler.handle(new FruitTransaction(StoreOperation.BALANCE, "banana", 90));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleNegativeAmountBalanceOperation_NotOk() {
+    public void handle_NegativeAmount_NotOk() {
         operationHandler.handle(new FruitTransaction(StoreOperation.BALANCE, "banana", -50));
     }
 

@@ -9,6 +9,7 @@ public class ReportServiceImpl implements ReportService {
     public String createReport() {
         return FruitStorage.storage.entrySet().stream()
                 .map(fs -> fs.getKey() + "," + fs.getValue())
-                .collect(Collectors.joining("\n", "fruit,quantity\n", ""));
+                .collect(Collectors.joining(System.lineSeparator(),
+                        "fruit,quantity" + System.lineSeparator(), ""));
     }
 }

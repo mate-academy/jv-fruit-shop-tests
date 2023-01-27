@@ -17,7 +17,7 @@ public class FileServiceImplTest {
     private FileService fileService = new FileServiceImpl();
 
     @Test
-    public void readingDataFromFile_Ok() {
+    public void readDataFromFile_Ok() {
         List<String> expectedResult = new ArrayList<>();
         expectedResult.add("type,fruit,quantity");
         expectedResult.add("b,banana,20");
@@ -33,7 +33,7 @@ public class FileServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readingFromInvalidPathFile_NotOk() {
+    public void readDataFromFile_InvalidPath_NotOk() {
         fileService.readDataFromFile(NOT_EXIST_FILE_PATH);
     }
 

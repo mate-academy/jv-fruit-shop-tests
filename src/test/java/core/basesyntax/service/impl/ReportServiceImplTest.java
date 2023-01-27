@@ -11,18 +11,19 @@ public class ReportServiceImplTest {
     private ReportService reportService = new ReportServiceImpl();
 
     @Test
-    public void creatingReport_Ok() {
+    public void createReport_Ok() {
         FruitStorage.storage.put("banana", 152);
         FruitStorage.storage.put("apple", 90);
         String actualResult = reportService.createReport();
-        String expectedResult = "fruit,quantity\nbanana,152\napple,90";
+        String expectedResult = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator() + "apple,90";
         assertEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void creatingEmptyReport_Ok() {
+    public void createReport_EmptyData_Ok() {
         String actualResult = reportService.createReport();
-        String expectedResult = "fruit,quantity\n";
+        String expectedResult = "fruit,quantity" + System.lineSeparator();
         assertEquals(expectedResult, actualResult);
     }
 

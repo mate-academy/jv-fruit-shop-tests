@@ -20,7 +20,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handleReturnOperation_Ok() {
+    public void handle_Ok() {
         operationHandler.handle(new FruitTransaction(StoreOperation.RETURN, "apple", 20));
         Integer actualResult = FruitStorage.storage.get("apple");
         Integer expectedResult = 50;
@@ -28,7 +28,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleNegativeReturnOperation_NotOk() {
+    public void handle_NegativeAmount_NotOk() {
         operationHandler.handle(new FruitTransaction(StoreOperation.RETURN, "banana", -10));
     }
 

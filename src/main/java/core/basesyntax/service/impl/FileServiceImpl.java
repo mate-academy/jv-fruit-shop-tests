@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
-
     @Override
     public List<String> readDataFromFile(String pathFile) {
         List<String> dataFileReader;

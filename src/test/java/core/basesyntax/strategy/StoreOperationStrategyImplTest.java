@@ -27,25 +27,25 @@ public class StoreOperationStrategyImplTest {
     }
 
     @Test
-    public void getBalanceOperation_Ok() {
+    public void getOperation_Balance_Ok() {
         OperationHandler operation = operationStrategy.getOperation(StoreOperation.BALANCE);
         assertEquals(BalanceOperationHandler.class, operation.getClass());
     }
 
     @Test
-    public void getSupplyOperation_Ok() {
+    public void getOperation_Supply_Ok() {
         OperationHandler operation = operationStrategy.getOperation(StoreOperation.SUPPLY);
         assertEquals(SupplyOperationHandler.class, operation.getClass());
     }
 
     @Test
-    public void getPurchaseOperation_Ok() {
+    public void getOperation_Purchase_Ok() {
         OperationHandler operation = operationStrategy.getOperation(StoreOperation.PURCHASE);
         assertEquals(PurchaseOperationHandler.class, operation.getClass());
     }
 
     @Test
-    public void getReturnOperation_Ok() {
+    public void getOperation_Return_Ok() {
         OperationHandler operation = operationStrategy.getOperation(StoreOperation.RETURN);
         assertEquals(ReturnOperationHandler.class, operation.getClass());
     }

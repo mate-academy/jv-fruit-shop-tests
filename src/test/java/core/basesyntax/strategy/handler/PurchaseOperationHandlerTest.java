@@ -20,7 +20,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handlePurchaseOperation_Ok() {
+    public void handle_Ok() {
         operationHandler.handle(new FruitTransaction(StoreOperation.PURCHASE, "apple", 20));
         Integer actualResult = FruitStorage.storage.get("apple");
         Integer expectedResult = 10;
@@ -28,12 +28,12 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleNegativeAmountPurchaseOperation_NotOk() {
+    public void handle_NegativeAmount_NotOk() {
         operationHandler.handle(new FruitTransaction(StoreOperation.PURCHASE, "apple", -10));
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleAmountPurchaseOperationLagerThanTotal_NotOk() {
+    public void handle_AmountLagerThanTotal_NotOk() {
         operationHandler.handle(new FruitTransaction(StoreOperation.PURCHASE, "banana", 30));
     }
 

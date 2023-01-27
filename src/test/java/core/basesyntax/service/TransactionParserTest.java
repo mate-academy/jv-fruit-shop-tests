@@ -13,7 +13,7 @@ public class TransactionParserTest {
     private List<String> dataList = new ArrayList<>();
 
     @Test
-    public void parseValidTransaction_Ok() {
+    public void parse_Ok() {
         dataList.add("type,fruit,quantity");
         dataList.add("b,banana,20");
         dataList.add("s,banana,100");
@@ -30,7 +30,7 @@ public class TransactionParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseInvalidStoreOperationTransaction_NotOk() {
+    public void parse_InvalidStoreOperationTransaction_NotOk() {
         dataList.add("type,fruit,quantity");
         dataList.add("q,banana,20");
         transactionParser.parse(dataList);

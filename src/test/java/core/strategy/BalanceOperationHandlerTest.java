@@ -27,7 +27,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void handle_isOk() {
+    public void handle_Ok() {
         balanceOparationHandler.handle(fruitTransaction);
         int actualStorageSize = Storage.fruits.size();
         assertEquals(actualStorageSize, EXPECTED_STORAGE_SIZE);

@@ -23,7 +23,7 @@ public class ReportSeviceImplTest {
     }
 
     @Test
-    public void reportGenerator_isOk() {
+    public void reportGenerator_Ok() {
         List<String> actual = reportSevice.reportGenerator(VAILID_DATA);
         assertEquals(actual.get(INDEX_FIRST_LINE), EXPECTED_DATA.get(INDEX_FIRST_LINE));
         assertEquals(actual.get(INDEX_SECOND_LINE), EXPECTED_DATA.get(INDEX_SECOND_LINE));

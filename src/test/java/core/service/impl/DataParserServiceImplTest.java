@@ -20,7 +20,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void parseList_isOk() {
+    public void parseList_Ok() {
         String fruit = "banana";
         int quantity = 13;
         FruitTransaction.Operation operation = FruitTransaction.Operation.PURCHASE;

@@ -28,7 +28,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getPurchaseOperation_isOk() {
+    public void getOperationHandler_Purchase_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.PURCHASE).getClass();
         Class<PurchaseOperationHandler> expected = PurchaseOperationHandler.class;
@@ -36,7 +36,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getReturneOperation_isOk() {
+    public void getReturneOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.RETURN).getClass();
         Class<ReturnOperationHandler> expected = ReturnOperationHandler.class;
@@ -44,7 +44,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getBalanceOperation_isOk() {
+    public void getBalanceOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.BALANCE).getClass();
         Class<BalanceOperationHandler> expected = BalanceOperationHandler.class;
@@ -52,7 +52,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getSupplyOperation_isOk() {
+    public void getSupplyOperation_Ok() {
         Class<? extends OperationHandler> actual = operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.SUPPLY).getClass();
         Class<SupplyOperationHandler> expected = SupplyOperationHandler.class;
@@ -60,7 +60,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void getNull_notOk() {
+    public void getOperationHandler_Null_notOk() {
         operationStrategy.getOperationHandler(null);
     }
 }

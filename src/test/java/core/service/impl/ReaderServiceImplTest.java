@@ -20,19 +20,19 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_isOk() throws IOException {
+    public void readFromFile_Ok() throws IOException {
         List<String> actual = readerService.readFromFile(PATH);
         List<String> expected = Files.readAllLines(Path.of(PATH));
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NonExistingPath_isNotOk() {
+    public void readFromFile_NonExistingPath_notOk() {
         readerService.readFromFile("");
     }
 
     @Test(expected = NullPointerException.class)
-    public void readFromFile_NullPath_isNotOk() {
+    public void readFromFile_NullPath_notOk() {
         readerService.readFromFile(null);
     }
 }

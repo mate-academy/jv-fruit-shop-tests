@@ -24,7 +24,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_isOk() {
+    public void handle_Ok() {
         fruitTransaction.setQuantity(APPLE_PURCHASE);
         purchaseOperationHandler.handle(fruitTransaction);
         int actual = Storage.fruits.get(APPLE);

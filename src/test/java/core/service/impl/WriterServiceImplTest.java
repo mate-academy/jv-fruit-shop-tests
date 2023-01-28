@@ -21,7 +21,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_isOk() throws IOException {
+    public void writeToFile_Ok() throws IOException {
         writerService.writeToFile(TEST_DATA, TEST_FILE);
         List<String> actual = Files.readAllLines(Path.of(TEST_FILE));
         assertEquals(actual, TEST_DATA);

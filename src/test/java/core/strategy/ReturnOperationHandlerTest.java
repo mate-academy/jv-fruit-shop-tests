@@ -23,7 +23,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_isOk() {
+    public void handle_Ok() {
         fruitTransaction.setQuantity(APPLE_RETURN);
         purchaseOperationHandler.handle(fruitTransaction);
         int actual = Storage.fruits.get(APPLE);

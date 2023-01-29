@@ -5,14 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.serviceimpl.CsvFileReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
     private static CsvFileReaderServiceImpl csvFileReaderService;
     private static final String FILE_INPUT_TEST_CSV = "src/test/resources/input_test.csv";
-    private static final String FILE_INPUT_TEST_EMPTY_CSV = "src/test/resources/input_empty_test.csv";
+    private static final String FILE_INPUT_TEST_EMPTY_CSV =
+            "src/test/resources/input_empty_test.csv";
 
     @BeforeClass
     public static void setUp() {

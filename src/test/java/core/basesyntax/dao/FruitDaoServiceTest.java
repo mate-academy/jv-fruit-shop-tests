@@ -7,7 +7,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.serviceimpl.FruitDaoServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

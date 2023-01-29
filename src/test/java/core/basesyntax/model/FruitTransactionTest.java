@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,40 +17,40 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void fruitTransaction_operation_getOperationByValue_b_OK() {
+    public void getOperationByValueTest_isBalance_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("b");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransaction_operation_getOperationByValue_s_OK() {
+    public void getOperationByValueTest_isSupply_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("s");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransaction_operation_getOperationByValue_p_OK() {
+    public void getOperationByValueTest_isPurchase_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.PURCHASE;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("p");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransaction_operation_getOperationByValue_r_OK() {
+    public void getOperationByValueTest_IsReturn_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("r");
         assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void fruitTransaction_operation_getOperationByValue_Empty() {
+    public void getOperationByValueTest_EmptyData_OK() {
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("");
     }
 
     @Test
-    public void fruitTransaction_equals_OK() {
+    public void equalsTest_EqualsMatch_OK() {
         FruitTransaction expected = transaction;
         FruitTransaction actual = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple", 10);;
@@ -58,7 +58,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void fruitTransaction_hashCode_OK() {
+    public void hashCodeTest_HashCodeMatch_OK() {
         FruitTransaction expected = transaction;
         FruitTransaction actual = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple", 10);;
@@ -66,7 +66,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void fruitTransaction_FruitTransaction_OK() {
+    public void fruitTransactionTest_ConstructorInit_OK() {
         FruitTransaction expected = transaction;
         FruitTransaction actual = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple", 10);
@@ -74,21 +74,21 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void fruitTransaction_getFruit_OK() {
+    public void getFruitTest_IsDataGet_OK() {
         String expected = "apple";
         String actual = transaction.getFruit();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransaction_getQuantity_OK() {
+    public void getQuantityTest_IsDataGet_OK() {
         int expected = 10;
         int actual = transaction.getQuantity();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransaction_getOperation_OK() {
+    public void getOperation_isDataGet_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = transaction.getOperation();
         assertEquals(expected, actual);

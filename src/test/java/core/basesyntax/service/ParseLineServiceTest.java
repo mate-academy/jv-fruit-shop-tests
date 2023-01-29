@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ public class ParseLineServiceTest {
     private static ParseLineImpl parseLine;
 
     @Test
-    public void parseLineService_Parse_OK() {
+    public void parseLineTest_isParseData_OK() {
         parseLine = new ParseLineImpl();
         List<String> lines = new ArrayList<>();
         lines.add("b,apple,20");

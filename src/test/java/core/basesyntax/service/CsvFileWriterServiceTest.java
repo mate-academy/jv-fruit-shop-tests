@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertTrue;
 
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterServiceTest {
@@ -18,8 +18,8 @@ public class CsvFileWriterServiceTest {
     private static final String EXPECTED_REPORT_TEST_FILE
             = "src/test/resources/report_expected_test.csv";
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         csvFileWriterService = new CsvFileWriterServiceImpl();
         reportLines = new HashMap<>();
         reportLines.put("banana","20");
@@ -27,12 +27,12 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void csvFileWriter_FilePath_Empty() {
+    public void writeDataToFileCsvTest_IsFilePathEmpty_NotOk() {
         csvFileWriterService.writeDataToFileCsv(reportLines,"");
     }
 
     @Test
-    public void csvFileWriter_Write_OK() {
+    public void writeDataToFileCsvTest_IsWriteData_OK() {
         csvFileWriterService.writeDataToFileCsv(reportLines,REPORT_TEST_FILE);
         File actualFile = new File(REPORT_TEST_FILE);
         File expectedFile = new File(EXPECTED_REPORT_TEST_FILE);
@@ -40,7 +40,7 @@ public class CsvFileWriterServiceTest {
             assertTrue("The files differ!",
                     FileUtils.contentEquals(expectedFile, actualFile));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't write file:" + REPORT_TEST_FILE, e);
         }
     }
 }

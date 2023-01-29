@@ -1,28 +1,31 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.serviceimpl.CsvFileReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
     private static CsvFileReaderServiceImpl csvFileReaderService;
+    private static final String FILE_INPUT_TEST_CSV = "src/test/resources/input_test.csv";
+    private static final String FILE_INPUT_TEST_EMPTY_CSV = "src/test/resources/input_empty_test.csv";
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         csvFileReaderService = new CsvFileReaderServiceImpl();
     }
 
     @Test (expected = RuntimeException.class)
-    public void csvFileReader_FilePath_Empty() {
+    public void readDataFromFileCsv_EmptyFilePath_NotOk() {
         List<String> actual = csvFileReaderService.readDataFromFileCsv("");
     }
 
     @Test
-    public void csvFileReader_Read_OK() {
+    public void readDataFromFileCsvTest_IsReadData_OK() {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -32,16 +35,15 @@ public class CsvFileReaderServiceTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
-        List<String> actual = csvFileReaderService.readDataFromFileCsv(
-                "src/test/resources/input_test.csv");
+        List<String> actual = csvFileReaderService.readDataFromFileCsv(FILE_INPUT_TEST_CSV);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void csvFileReader_EmptyFile_OK() {
+    public void readDataFromFileCsvTest_EmptyFile_OK() {
         List<String> expected = new ArrayList<>();
         List<String> actual = csvFileReaderService.readDataFromFileCsv(
-                "src/test/resources/input_empty_test.csv");
+                FILE_INPUT_TEST_EMPTY_CSV);
         assertEquals(expected, actual);
     }
 }

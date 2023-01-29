@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.serviceimpl.FruitDaoServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,11 +25,16 @@ public class FruitDaoServiceTest {
                 "apple",10));
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "bananas",120));
+
+    }
+
+    @After
+    public void afterEachTest() {
         Storage.fruitTransactions.clear();
     }
 
     @Test
-    public void fruitDaoService_Add_OK() {
+    public void addTest_Data_OK() {
         List<FruitTransaction> expected = transactions;
         fruitDaoService.add(transactions);
         List<FruitTransaction> actual = Storage.fruitTransactions;
@@ -35,8 +42,7 @@ public class FruitDaoServiceTest {
     }
 
     @Test
-    public void fruitDaoService_Add_Empty_OK() {
-        transactions.clear();
+    public void addTest_EmptyData_OK() {
         List<FruitTransaction> expected = transactions;
         fruitDaoService.add(transactions);
         List<FruitTransaction> actual = Storage.fruitTransactions;
@@ -44,7 +50,7 @@ public class FruitDaoServiceTest {
     }
 
     @Test
-    public void fruitDaoService_Get_OK() {
+    public void getTest_Data_OK() {
         List<FruitTransaction> expected = transactions;
         Storage.fruitTransactions.addAll(transactions);
         List<FruitTransaction> actual = fruitDaoService.get();
@@ -52,8 +58,7 @@ public class FruitDaoServiceTest {
     }
 
     @Test
-    public void fruitDaoService_Get_Empty_OK() {
-        Storage.fruitTransactions.clear();
+    public void getTest_EmptyData_OK() {
         List<FruitTransaction> expected = transactions;
         Storage.fruitTransactions.addAll(transactions);
         List<FruitTransaction> actual = fruitDaoService.get();

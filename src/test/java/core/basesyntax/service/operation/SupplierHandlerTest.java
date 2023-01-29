@@ -1,16 +1,20 @@
-package core.basesyntax;
+package core.basesyntax.service.operation;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.operation.SupplierHandler;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplierHandlerTest {
     private static SupplierHandler supplierHandler;
 
-    @Test
-    public void supplierHandlerTest_getOperationAction_OK() {
+    @BeforeClass
+    public static void beforeClass() {
         supplierHandler = new SupplierHandler();
+    }
+
+    @Test
+    public void getOperationAction_IsGetSupplierData_OK() {
         int expected = 10;
         int actual = supplierHandler.getOperationAction(10);
         assertEquals(expected, actual);

@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,7 +33,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void fruitServiceTest_CalculateBalance_OK() {
+    public void calculateBalanceTest_IsData_OK() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple",20));
@@ -49,7 +49,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void fruitServiceTest_CalculateBalance_Empty_OK() {
+    public void calculateBalance_IsEmptyData_OK() {
         List<FruitTransaction> transactions = new ArrayList<>();
         Map<String, String> actual = fruitService.calculateBalance(transactions);
         Map<String, String> expected = new HashMap<>();

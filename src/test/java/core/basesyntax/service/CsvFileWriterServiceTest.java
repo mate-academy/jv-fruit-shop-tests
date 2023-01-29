@@ -27,12 +27,12 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void writeDataToFileCsvTest_IsFilePathEmpty_NotOk() {
+    public void writeDataToFileCsvTest_FilePathEmpty_NotOk() {
         csvFileWriterService.writeDataToFileCsv(reportLines,"");
     }
 
     @Test
-    public void writeDataToFileCsvTest_IsWriteData_OK() {
+    public void writeDataToFileCsvTest_WriteData_OK() {
         csvFileWriterService.writeDataToFileCsv(reportLines,REPORT_TEST_FILE);
         File actualFile = new File(REPORT_TEST_FILE);
         File expectedFile = new File(EXPECTED_REPORT_TEST_FILE);

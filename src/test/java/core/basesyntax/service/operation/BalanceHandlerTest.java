@@ -14,7 +14,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void getOperationActionTest_IsGetBalanceData_OK() {
+    public void getOperationActionTest_GetBalance_OK() {
         int expected = 10;
         int actual = balanceHandler.getOperationAction(10);
         assertEquals(expected, actual);

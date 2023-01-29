@@ -14,7 +14,7 @@ public class SupplierHandlerTest {
     }
 
     @Test
-    public void getOperationAction_IsGetSupplierData_OK() {
+    public void getOperationAction_GetSupplier_OK() {
         int expected = 10;
         int actual = supplierHandler.getOperationAction(10);
         assertEquals(expected, actual);

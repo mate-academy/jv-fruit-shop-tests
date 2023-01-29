@@ -16,28 +16,28 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void getOperationByValueTest_isBalance_OK() {
+    public void getOperationByValueTest_Balance_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("b");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getOperationByValueTest_isSupply_OK() {
+    public void getOperationByValueTest_Supply_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("s");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getOperationByValueTest_isPurchase_OK() {
+    public void getOperationByValueTest_Purchase_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.PURCHASE;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("p");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getOperationByValueTest_IsReturn_OK() {
+    public void getOperationByValueTest_Return_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getOperationByValue("r");
         assertEquals(expected, actual);
@@ -49,7 +49,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void equalsTest_EqualsMatch_OK() {
+    public void equalsTest_EqualMatch_OK() {
         FruitTransaction expected = transaction;
         FruitTransaction actual = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple", 10);;
@@ -73,21 +73,21 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void getFruitTest_IsDataGet_OK() {
+    public void getFruitTest_GetData_OK() {
         String expected = "apple";
         String actual = transaction.getFruit();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getQuantityTest_IsDataGet_OK() {
+    public void getQuantityTest_GetData_OK() {
         int expected = 10;
         int actual = transaction.getQuantity();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void getOperation_isDataGet_OK() {
+    public void getOperation_GetData_OK() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = transaction.getOperation();
         assertEquals(expected, actual);

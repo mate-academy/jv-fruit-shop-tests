@@ -25,7 +25,7 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void readDataFromFileCsvTest_IsReadData_OK() {
+    public void readDataFromFileCsvTest_ReadData_OK() {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");

@@ -12,7 +12,7 @@ public class ParseLineServiceTest {
     private static ParseLineImpl parseLine;
 
     @Test
-    public void parseLineTest_isParseData_OK() {
+    public void parseLineTest_Parse_OK() {
         parseLine = new ParseLineImpl();
         List<String> lines = new ArrayList<>();
         lines.add("b,apple,20");

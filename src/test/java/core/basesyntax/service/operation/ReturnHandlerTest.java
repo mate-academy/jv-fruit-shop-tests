@@ -14,7 +14,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void getOperationActionTest_IsGetReturnData_OK() {
+    public void getOperationActionTest_GetReturn_OK() {
         int expected = -10;
         int actual = returnHandler.getOperationAction(10);
         assertEquals(expected, actual);

@@ -33,7 +33,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void calculateBalanceTest_IsData_OK() {
+    public void calculateBalanceTest_Calculate_OK() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple",20));
@@ -49,7 +49,7 @@ public class FruitServiceTest {
     }
 
     @Test
-    public void calculateBalance_IsEmptyData_OK() {
+    public void calculateBalance_EmptyData_OK() {
         List<FruitTransaction> transactions = new ArrayList<>();
         Map<String, String> actual = fruitService.calculateBalance(transactions);
         Map<String, String> expected = new HashMap<>();

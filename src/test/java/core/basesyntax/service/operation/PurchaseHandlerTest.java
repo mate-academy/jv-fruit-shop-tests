@@ -14,7 +14,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void getOperationActionTest_IsGetPurchaseData_OK() {
+    public void getOperationActionTest_GetPurchase_OK() {
         int expected = -10;
         int actual = purchaseHandler.getOperationAction(10);
         assertEquals(expected, actual);

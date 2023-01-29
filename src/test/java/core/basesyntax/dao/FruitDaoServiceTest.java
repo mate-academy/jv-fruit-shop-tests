@@ -33,7 +33,7 @@ public class FruitDaoServiceTest {
     }
 
     @Test
-    public void addTest_Data_OK() {
+    public void addTest_AddData_OK() {
         List<FruitTransaction> expected = transactions;
         fruitDaoService.add(transactions);
         List<FruitTransaction> actual = Storage.fruitTransactions;
@@ -49,7 +49,7 @@ public class FruitDaoServiceTest {
     }
 
     @Test
-    public void getTest_Data_OK() {
+    public void getTest_GetData_OK() {
         List<FruitTransaction> expected = transactions;
         Storage.fruitTransactions.addAll(transactions);
         List<FruitTransaction> actual = fruitDaoService.get();

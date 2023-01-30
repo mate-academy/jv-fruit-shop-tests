@@ -42,6 +42,6 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_NotOk() {
-        fileWriter.writeToFile(WRONG_FILE_PATH, REPORT );
+        fileWriter.writeToFile(WRONG_FILE_PATH, REPORT);
     }
 }

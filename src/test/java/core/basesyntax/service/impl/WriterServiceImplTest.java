@@ -13,7 +13,7 @@ import org.junit.Test;
 public class WriterServiceImplTest {
 
     private static final String TEST_FILE_PATH = "src/test/resources/test_report.csv";
-    private static final String WRONG_FILE_PATH = "abcd";
+    private static final String WRONG_FILE_PATH = "src/testABC/resources/test_report.csv";
     private static final String REPORT = "fruit,quantity\n"
             + "banana,152\n"
             + "apple,90";
@@ -41,7 +41,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_NotOk() {
-        fileWriter.writeToFile(REPORT, WRONG_FILE_PATH);
+    public void writeToFile_NotOk() {
+        fileWriter.writeToFile(WRONG_FILE_PATH, REPORT );
     }
 }

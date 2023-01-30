@@ -7,11 +7,13 @@ import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import java.util.List;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String WRITE_TO = "src/test/java/resources/report.csv";
+    private static final String WRONG_PATH = null;
     private ReaderService readerService;
     private ReportService reportService;
     private WriterService writerService;
@@ -32,6 +34,17 @@ public class WriterServiceImplTest {
         List<String> expected = List.of("banana,81", "apple,100");
         List<String> actual = readerService.readFromFile(WRITE_TO);
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void writeToFile_nullPath_NotOk() {
+        String report = reportService.generate();
+        writerService.writeToFile(WRONG_PATH, report);
+    }
+
+    @After
+    public void clear() {
+        Storage.fruits.clear();
     }
 }
 

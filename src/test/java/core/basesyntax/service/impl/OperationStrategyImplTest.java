@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.strategy.BalanceOperationHandler;
@@ -18,9 +19,12 @@ import org.junit.Test;
 
 public class OperationStrategyImplTest {
     private OperationStrategy operationStrategy;
+    private FruitTransaction fruitTransaction;
 
     @Before
     public void setUp() {
+        Storage.fruits.put("apple", 10);
+        fruitTransaction = new FruitTransaction(Operation.PURCHASE, "apple", 7);
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
@@ -31,9 +35,11 @@ public class OperationStrategyImplTest {
 
     @Test
     public void getOperationHandler_validData_Ok() {
-        Operation operation = Operation.SUPPLY;
-        OperationHandler expected = operationStrategy.getOperationHandler(Operation.SUPPLY);
-        OperationHandler actual = operationStrategy.getOperationHandler(operation);
+        OperationHandler operationHandler = operationStrategy
+                .getOperationHandler(fruitTransaction.getOperation());
+        operationHandler.handle(fruitTransaction);
+        Integer expected = 3;
+        Integer actual = Storage.fruits.get("apple");
         assertEquals(expected, actual);
     }
 

@@ -10,7 +10,7 @@ import org.junit.Test;
 public class ReaderServiceImplTest {
 
     private static final String TEST_FILE_PATH = "src/test/resources/test_data.csv";
-    private static final String WRONG_FILE_PATH = "src/test/abcd/test_data.csv";
+    private static final String WRONG_FILE_PATH = "wrongfile.xcv";
     private ReaderService fileReader;
 
     @Before

@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.strategy.OperationCalculator;
@@ -51,40 +49,25 @@ public class FruitTransactionProcessorImplTest {
         Assert.assertEquals(message, expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void handleDataNegativeValue_NotOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 8));
         transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 17));
-        try {
-            fruitTransactionProcessor.process(transactions);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should throw exception for negative amount.");
+        fruitTransactionProcessor.process(transactions);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void handleDataNullValue_NotOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(null);
-        try {
-            fruitTransactionProcessor.process(transactions);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should throw exception for null value");
+        fruitTransactionProcessor.process(transactions);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void handleData_NotOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(null, "banana", 200));
-        try {
-            fruitTransactionProcessor.process(transactions);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should throw an exception for wrong operation.");
+        transactions.add(new FruitTransaction(null, null, 200));
+        fruitTransactionProcessor.process(transactions);
     }
 }

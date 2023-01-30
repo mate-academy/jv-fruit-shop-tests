@@ -26,4 +26,9 @@ public class ReportGeneratorImplTest {
         String actual = reportGenerator.generateReport(fruits);
         Assert.assertEquals("Report wasn't created correctly.", expected, actual);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void getReport_null_notOk() {
+        reportGenerator.generateReport(null);
+    }
 }

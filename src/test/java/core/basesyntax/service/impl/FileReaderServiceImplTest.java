@@ -36,7 +36,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFileRemovedInfoLine_Ok() {
+    public void readFromFileRemovedHeader_Ok() {
         List<String> actual = fileReaderService.readFromFile(INPUT_FILE_PATH);
         Assert.assertFalse("Result shouldn't contain info line.", actual.contains(HEADER));
     }

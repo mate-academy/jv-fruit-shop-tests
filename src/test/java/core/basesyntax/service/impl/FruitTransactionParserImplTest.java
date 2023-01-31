@@ -15,7 +15,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test
-    public void parseData_Ok() {
+    public void parseData_ok() {
         List<String> data = List.of("type,fruit,quantity", "b,apple,50",
                 "s,banana,250", "p,apple,20", "r,apple,20");
         List<FruitTransaction> expected = List.of(
@@ -29,7 +29,7 @@ public class FruitTransactionParserImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseData_wrongInputData_NotOk() {
+    public void parseData_wrongInputData_notOk() {
         List<String> data = List.of("type,fruit,quantity", "b,apple,-60");
         fruitTransactionParser.toTransactions(data);
     }

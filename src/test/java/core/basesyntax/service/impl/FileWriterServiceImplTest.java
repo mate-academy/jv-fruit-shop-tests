@@ -16,13 +16,13 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeFile_Ok() {
+    public void writeToFile_ok() {
         Assert.assertFalse("The file had to be saved.",
                 fileWriterService.writeToFile(CORRECT_PATH, ""));
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_wrongPath_NotOk() {
+    public void writeToFile_wrongPath_notOk() {
         fileWriterService.writeToFile(WRONG_PATH, "");
     }
 }

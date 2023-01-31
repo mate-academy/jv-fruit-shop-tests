@@ -20,27 +20,27 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFromFile_ok() {
         List<String> expected = List.of("b,apple,80", "b,banana,60");
         List<String> actual = fileReaderService.readFromFile(INPUT_FILE_PATH);
         Assert.assertEquals("File wasn't read correctly.", expected, actual);
     }
 
     @Test
-    public void readFromFile_EmptyFile_Ok() {
+    public void readFromFile_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReaderService.readFromFile(EMPTY_FILE);
         Assert.assertEquals("You should return empty list for empty data.", expected, actual);
     }
 
     @Test
-    public void readFromFile_RemovedHeader_Ok() {
+    public void readFromFile_removedHeader_ok() {
         List<String> actual = fileReaderService.readFromFile(INPUT_FILE_PATH);
         Assert.assertFalse("Result shouldn't contain info line.", actual.contains(HEADER));
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_WrongPath_NotOk() {
+    public void readFromFile_wrongPath_notOk() {
         fileReaderService.readFromFile(WRONG_PATH);
     }
 }

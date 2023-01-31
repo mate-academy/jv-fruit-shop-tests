@@ -17,7 +17,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_ok() {
         Map<String, Integer> fruits = new HashMap<>();
         fruits.put("banana", 20);
         fruits.put("apple", 15);

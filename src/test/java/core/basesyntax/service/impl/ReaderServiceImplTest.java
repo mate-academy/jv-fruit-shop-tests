@@ -12,7 +12,7 @@ public class ReaderServiceImplTest {
     private static final String NOT_EXIST_FILE_PATH = "notexist.csv";
     private final ReaderService readerService = new ReaderServiceImpl();
 
-    @org.testng.annotations.Test
+    @Test
     public void readData_Ok() {
         List<String> expectedList = new ArrayList<>();
         expectedList.add("b,banana,20");

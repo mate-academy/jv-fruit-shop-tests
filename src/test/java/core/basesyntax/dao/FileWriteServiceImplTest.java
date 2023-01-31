@@ -6,11 +6,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriteServiceImplTest {
     private static final String ERROR_MESSAGE = "Can`t read data from files!";
-    private final FileWriteService reportDao = new FileWriteServiceImpl();
+    private static FileWriteService reportDao;
+
+    @BeforeClass
+    public static void setUp() {
+        reportDao = new FileWriteServiceImpl();
+    }
 
     @Test(expected = RuntimeException.class)
     public void writeReportToCsvFile_noValidPath_NotOk() {

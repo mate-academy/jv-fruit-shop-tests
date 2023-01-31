@@ -9,11 +9,17 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
     private static final String TEST_FILE = "src/test/resources/fromFileTest.csv";
-    private final CsvFileReader csvFileReader = new CsvFileReaderImpl();
+    private static CsvFileReader csvFileReader;
+
+    @BeforeClass
+    public static void setUp() {
+        csvFileReader = new CsvFileReaderImpl();
+    }
 
     @Test
     public void readTransactions_validData_Ok() {

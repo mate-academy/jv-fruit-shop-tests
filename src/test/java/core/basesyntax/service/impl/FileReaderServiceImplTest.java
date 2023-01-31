@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,25 +27,20 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFileEmptyFile_Ok() {
+    public void readFromFile_EmptyFile_Ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = fileReaderService.readFromFile(EMPTY_FILE);
         Assert.assertEquals("You should return empty list for empty data.", expected, actual);
     }
 
     @Test
-    public void readFromFileRemovedHeader_Ok() {
+    public void readFromFile_RemovedHeader_Ok() {
         List<String> actual = fileReaderService.readFromFile(INPUT_FILE_PATH);
         Assert.assertFalse("Result shouldn't contain info line.", actual.contains(HEADER));
     }
 
-    @Test
-    public void readFromFileWrongPath_NotOk() {
-        try {
-            fileReaderService.readFromFile(WRONG_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should throw an exception for incorrect file path.");
+    @Test(expected = RuntimeException.class)
+    public void readFromFile_WrongPath_NotOk() {
+        fileReaderService.readFromFile(WRONG_PATH);
     }
 }

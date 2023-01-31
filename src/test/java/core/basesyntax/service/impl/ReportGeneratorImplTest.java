@@ -28,7 +28,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void getReport_null_notOk() {
+    public void getReport_nullReport_notOk() {
         reportGenerator.generateReport(null);
     }
 }

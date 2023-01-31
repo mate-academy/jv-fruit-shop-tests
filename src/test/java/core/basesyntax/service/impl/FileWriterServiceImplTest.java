@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.service.FileWriterService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,18 +16,13 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void write_Ok() {
+    public void writeFile_Ok() {
         Assert.assertFalse("The file had to be saved.",
                 fileWriterService.writeToFile(CORRECT_PATH, ""));
     }
 
-    @Test
-    public void write_NotOk() {
-        try {
-            fileWriterService.writeToFile(WRONG_PATH, "");
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should throw an exception for empty path.");
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_wrongPath_NotOk() {
+        fileWriterService.writeToFile(WRONG_PATH, "");
     }
 }

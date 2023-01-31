@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.fail;
-
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import org.junit.Assert;
@@ -30,14 +28,9 @@ public class FruitTransactionParserImplTest {
         Assert.assertNotEquals("Data wasn't parsed correctly.", expected.toString(), actual);
     }
 
-    @Test
-    public void parseData_NotOk() {
+    @Test(expected = RuntimeException.class)
+    public void parseData_wrongInputData_NotOk() {
         List<String> data = List.of("type,fruit,quantity", "b,apple,-60");
-        try {
-            fruitTransactionParser.toTransactions(data);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("parseData method should throw an RuntimeException for wrong input data.");
+        fruitTransactionParser.toTransactions(data);
     }
 }

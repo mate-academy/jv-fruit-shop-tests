@@ -50,7 +50,7 @@ public class FruitTransactionProcessorImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleDataNegativeValue_NotOk() {
+    public void handleData_NegativeValue_NotOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 8));
         transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 17));
@@ -58,14 +58,14 @@ public class FruitTransactionProcessorImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void handleDataNullValue_NotOk() {
+    public void handleData_NullTransaction_NotOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(null);
         fruitTransactionProcessor.process(transactions);
     }
 
     @Test(expected = NullPointerException.class)
-    public void handleData_NotOk() {
+    public void handleData_NullValues_NotOk() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(null, null, 200));
         fruitTransactionProcessor.process(transactions);

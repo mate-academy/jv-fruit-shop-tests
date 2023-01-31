@@ -1,0 +1,34 @@
+package core.basesyntax.service.impl;
+
+import static junit.framework.TestCase.assertEquals;
+
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
+import org.junit.After;
+import org.junit.Test;
+
+public class ReportGeneratorImplTest {
+    private final ReportService reportService = new ReportGeneratorImpl();
+
+    @Test
+    public void reportGenerate_Ok() {
+        Storage.fruitsStorage.put("banana", 152);
+        Storage.fruitsStorage.put("apple", 90);
+        String actual = reportService.generateReport();
+        String expectedResult = "fruit, quantity" + System.lineSeparator() + "banana, 152"
+                + System.lineSeparator() + "apple, 90";
+        assertEquals(expectedResult, actual);
+    }
+
+    @Test
+    public void reportGenerate_EmptyData_NotOk() {
+        String actual = reportService.generateReport();
+        String expecteResult = "fruit, quantity";
+        assertEquals(expecteResult, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitsStorage.clear();
+    }
+}

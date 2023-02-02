@@ -5,10 +5,16 @@ import static junit.framework.TestCase.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportGeneratorImplTest {
-    private final ReportService reportService = new ReportGeneratorImpl();
+    private static ReportService reportService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        reportService = new ReportGeneratorImpl();
+    }
 
     @Test
     public void reportGenerate_Ok() {

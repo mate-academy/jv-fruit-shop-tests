@@ -5,12 +5,20 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String FILE_PATH = "src/main/java/resources/input.csv";
-    private static final String NOT_EXIST_FILE_PATH = "notexist.csv";
-    private final ReaderService readerService = new ReaderServiceImpl();
+    private static String FILE_PATH;
+    private static String NOT_EXIST_FILE_PATH;
+    private static ReaderService readerService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        FILE_PATH = "src/main/java/resources/input.csv";
+        NOT_EXIST_FILE_PATH = "notexist.csv";
+        readerService = new ReaderServiceImpl();
+    }
 
     @Test
     public void readData_Ok() {

@@ -7,16 +7,23 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private final OperationHandler operationHandler = new PurchaseOperationHandler();
+    private static OperationHandler operationHandler;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        operationHandler = new PurchaseOperationHandler();
+    }
 
     @Before
     public void setUp() {
-        OperationHandler balanceHandler = new BalanceOperationHandler();
-        balanceHandler.calculate(new Transaction("banana", 30));
-        balanceHandler.calculate(new Transaction("apple", 30));
+        Transaction transactionBanana = new Transaction("banana", 30);
+        Transaction transactionApple = new Transaction("apple", 30);
+        Storage.fruitsStorage.put(transactionBanana.getFruit(), transactionBanana.getQuantity());
+        Storage.fruitsStorage.put(transactionApple.getFruit(), transactionApple.getQuantity());
     }
 
     @Test

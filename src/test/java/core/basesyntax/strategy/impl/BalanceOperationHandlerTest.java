@@ -6,10 +6,16 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private final OperationHandler operationHandler = new BalanceOperationHandler();
+    private static OperationHandler operationHandler;
+
+    @BeforeClass
+    public static void beforeClass() {
+        operationHandler = new BalanceOperationHandler();
+    }
 
     @Test
     public void calculate_Ok() {

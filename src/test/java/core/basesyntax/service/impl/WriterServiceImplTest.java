@@ -9,12 +9,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static final String WRITING_RESULT_FILE_PATH = "forwriting.csv";
+    private static String WRITING_RESULT_FILE_PATH;
+    private static WriterService writerService;
 
-    private final WriterService writerService = new WriterServiceImpl();
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        WRITING_RESULT_FILE_PATH = "forwriting.csv";
+        writerService = new WriterServiceImpl();
+    }
 
     @Test
     public void writeFile_Ok() {

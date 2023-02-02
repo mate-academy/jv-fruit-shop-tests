@@ -7,25 +7,30 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static final String TEST_FRUIT = "apple";
-    private static final int TEST_QUANTITY = 20;
-    private static final int NEW_TEST_QUANTITY = 15;
+    private static String TEST_FRUIT;
+    private static int TEST_QUANTITY;
+    private static int NEW_TEST_QUANTITY;
+    private static OperationHandler returnOperationHandler;
     private FruitTransaction fruitTransaction;
-    private final OperationHandler returnOperationHandler = new ReturnOperationHandler();
 
-    @Before
-    public void fillStorage() {
-        Storage.fruits.put(TEST_FRUIT, TEST_QUANTITY);
+    @BeforeClass
+    public static void initialize_var() {
+        TEST_FRUIT = "apple";
+        TEST_QUANTITY = 20;
+        NEW_TEST_QUANTITY = 15;
+        returnOperationHandler = new ReturnOperationHandler();
     }
 
     @Before
-    public void crateTransaction() {
+    public void setUp() {
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(TEST_FRUIT);
         fruitTransaction.setQuantity(NEW_TEST_QUANTITY);
+        Storage.fruits.put(TEST_FRUIT, TEST_QUANTITY);
     }
 
     @Test

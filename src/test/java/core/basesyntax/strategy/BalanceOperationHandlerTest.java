@@ -7,13 +7,21 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final String TEST_FRUIT = "apple";
-    private static final int TEST_QUANTITY = 20;
+    private static String TEST_FRUIT;
+    private static int TEST_QUANTITY;
+    private static OperationHandler balanceOperationHandler;
     private FruitTransaction fruitTransaction;
-    private final OperationHandler balanceOperationHandler = new BalanceOperationHandler();
+
+    @BeforeClass
+    public static void initialize_var() {
+        TEST_FRUIT = "apple";
+        TEST_QUANTITY = 20;
+        balanceOperationHandler = new BalanceOperationHandler();
+    }
 
     @Before
     public void crateTransaction() {

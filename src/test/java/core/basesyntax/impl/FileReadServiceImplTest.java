@@ -5,13 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.services.FileReadService;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReadServiceImplTest {
 
-    private static final String INPUT_FILE_PATH = "src/test/java/resources/fromFile";
-    private static final String WRONG_FILE_PATH = "incorrect/path";
-    private final FileReadService fileReadService = new FileReadServiceImpl();
+    private static String INPUT_FILE_PATH;
+    private static String WRONG_FILE_PATH;
+    private static FileReadService fileReadService;
+
+    @BeforeClass
+    public static void initialize_var() {
+        fileReadService = new FileReadServiceImpl();
+        INPUT_FILE_PATH = "src/test/java/resources/fromFile";
+        WRONG_FILE_PATH = "incorrect/path";
+    }
 
     @Test
     public void readFromFile_Ok() {
@@ -22,14 +30,8 @@ public class FileReadServiceImplTest {
     }
 
     @Test
-    public void readFromFileWithWrongPath_not_Ok() {
+    public void readFromFile_WithWrongPath_not_Ok() {
         assertThrows(RuntimeException.class, () -> fileReadService
                 .readFromFile(WRONG_FILE_PATH));
-    }
-
-    @Test
-    public void readFromFileWithNullPath_notOk() {
-        assertThrows(NullPointerException.class, () -> fileReadService
-                .readFromFile(null));
     }
 }

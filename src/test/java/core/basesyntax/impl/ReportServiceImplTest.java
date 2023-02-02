@@ -4,13 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportService;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private static final String FIRST_LINE_REPORT = "fruit,quantity"
-            + System.lineSeparator();
+    private static String FIRST_LINE_REPORT;
+    private static ReportService reportService;
 
-    private final ReportService reportService = new ReportServiceImpl();
+    @BeforeClass
+    public static void initialize_var() {
+        FIRST_LINE_REPORT = "fruit,quantity"
+                + System.lineSeparator();
+        reportService = new ReportServiceImpl();
+    }
 
     @Test
     public void createReport_ok() {
@@ -23,7 +29,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReportWithEmptyStorage_ok() {
+    public void createReport_WithEmptyStorage_ok() {
         Storage.fruits.clear();
         String actualReport = reportService.createReport();
         assertEquals(FIRST_LINE_REPORT, actualReport);

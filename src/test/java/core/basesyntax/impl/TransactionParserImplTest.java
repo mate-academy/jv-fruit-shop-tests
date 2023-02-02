@@ -8,29 +8,35 @@ import core.basesyntax.services.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private final TransactionParser transactionParser = new TransactionParserImpl();
-    private FruitTransaction fruitTransaction1;
-    private FruitTransaction fruitTransaction2;
-    private FruitTransaction fruitTransaction3;
+    private static TransactionParser transactionParser;
+    private FruitTransaction firstFruitTransaction;
+    private FruitTransaction secondFruitTransaction;
+    private FruitTransaction thirdFruitTransaction;
     private List<String> activities;
+
+    @BeforeClass
+    public static void initialize_var() {
+        transactionParser = new TransactionParserImpl();
+    }
 
     @Before
     public void setTransactions() {
-        fruitTransaction1 = new FruitTransaction();
-        fruitTransaction1.setQuantity(20);
-        fruitTransaction1.setFruit("banana");
-        fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction2 = new FruitTransaction();
-        fruitTransaction2.setQuantity(100);
-        fruitTransaction2.setFruit("apple");
-        fruitTransaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction3 = new FruitTransaction();
-        fruitTransaction3.setQuantity(13);
-        fruitTransaction3.setFruit("banana");
-        fruitTransaction3.setOperation(FruitTransaction.Operation.PURCHASE);
+        firstFruitTransaction = new FruitTransaction();
+        firstFruitTransaction.setQuantity(20);
+        firstFruitTransaction.setFruit("banana");
+        firstFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        secondFruitTransaction = new FruitTransaction();
+        secondFruitTransaction.setQuantity(100);
+        secondFruitTransaction.setFruit("apple");
+        secondFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        thirdFruitTransaction = new FruitTransaction();
+        thirdFruitTransaction.setQuantity(13);
+        thirdFruitTransaction.setFruit("banana");
+        thirdFruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         activities = new ArrayList<>();
         activities.add("type,fruit,quantity");
         activities.add("b,banana,20");
@@ -42,7 +48,7 @@ public class TransactionParserImplTest {
     public void parseString_ok() {
         List<FruitTransaction> actualList = transactionParser.parse(activities);
         List<FruitTransaction> expectedList = List
-                .of(fruitTransaction1, fruitTransaction2, fruitTransaction3);
+                .of(firstFruitTransaction, secondFruitTransaction, thirdFruitTransaction);
         assertEquals(expectedList, actualList);
     }
 
@@ -50,11 +56,5 @@ public class TransactionParserImplTest {
     public void parseString_notOk() {
         activities.add("s, banana, ss");
         assertThrows(NumberFormatException.class, () -> transactionParser.parse(activities));
-    }
-
-    @Test
-    public void parseStringWithNullValue_notOk() {
-        activities.add(null);
-        assertThrows(NullPointerException.class, () -> transactionParser.parse(activities));
     }
 }

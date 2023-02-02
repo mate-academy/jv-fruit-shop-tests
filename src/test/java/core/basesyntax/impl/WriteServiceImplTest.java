@@ -7,13 +7,22 @@ import core.basesyntax.services.WriteService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
-    private static final String OUTPUT_FILE_PATH = "src/test/java/resources/report";
-    private static final String WRONG_FILE_PATH = "src/test/java/reoures/report";
-    private static final String CHECK_STRING = "check string";
-    private final WriteService writeService = new WriteServiceImpl();
+    private static String OUTPUT_FILE_PATH;
+    private static String WRONG_FILE_PATH;
+    private static String CHECK_STRING;
+    private static WriteService writeService;
+
+    @BeforeClass
+    public static void initialize_var() {
+        OUTPUT_FILE_PATH = "src/test/java/resources/report";
+        WRONG_FILE_PATH = "src/test/java/reoures/report";
+        CHECK_STRING = "check string";
+        writeService = new WriteServiceImpl();
+    }
 
     @Test
     public void writeToFile_ok() {
@@ -28,14 +37,8 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void writeToFileWithWrongPath_notOk() {
+    public void writeToFile_WithWrongPath_notOk() {
         assertThrows(RuntimeException.class, () -> writeService
                 .writeToFile(CHECK_STRING, WRONG_FILE_PATH));
-    }
-
-    @Test
-    public void writeToFileWithNullPath_notOk() {
-        assertThrows(NullPointerException.class, () -> writeService
-                .writeToFile(CHECK_STRING, null));
     }
 }

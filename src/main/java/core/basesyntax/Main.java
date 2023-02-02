@@ -2,11 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.dao.CsvFileReader;
 import core.basesyntax.dao.CsvFileReaderImpl;
-import core.basesyntax.dao.FileWriteService;
-import core.basesyntax.dao.FileWriteServiceImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.FileWriteService;
+import core.basesyntax.service.FileWriteServiceImpl;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.FruitTransactionServiceImpl;
 import core.basesyntax.service.OperationStrategy;

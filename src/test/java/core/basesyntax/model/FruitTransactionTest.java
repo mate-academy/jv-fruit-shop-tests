@@ -7,7 +7,7 @@ import org.junit.Test;
 public class FruitTransactionTest {
 
     @Test
-    public void createFruitTransaction_Ok() {
+    public void createFruitTransaction_ok() {
         String fruitName = "coconut";
         int fruitQuantity = 15;
 

@@ -36,7 +36,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void checkBalanceOperationHandler_Ok() {
+    public void checkBalanceOperationHandler_ok() {
         String fruitName = "peach";
         int fruitQuantity = 5;
 
@@ -55,7 +55,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void checkPurchaseOperationHandler_Ok() {
+    public void checkPurchaseOperationHandler_ok() {
         String fruitName = "banana";
         int fruitQuantity = 7;
 
@@ -77,7 +77,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void checkReturnOperationHandler_Ok() {
+    public void checkReturnOperationHandler_ok() {
         String fruitName = "orange";
         int fruitQuantity = 12;
 
@@ -99,7 +99,7 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test
-    public void checkSupplyOperationHandler_Ok() {
+    public void checkSupplyOperationHandler_ok() {
         String fruitName = "watermelon";
         int fruitQuantity = 8;
 

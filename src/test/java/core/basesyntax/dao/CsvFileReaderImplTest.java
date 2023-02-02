@@ -22,7 +22,7 @@ public class CsvFileReaderImplTest {
     }
 
     @Test
-    public void readTransactions_validData_Ok() {
+    public void readTransactions_validData_ok() {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(balanceBananaFruitTransaction());
         fruitTransactionList.add(balanceAppleFruitTransaction());
@@ -80,7 +80,7 @@ public class CsvFileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readTransactions_noValidPath_NotOk() {
+    public void readTransactions_noValidPath_notOk() {
         String noValidPath = "ndbkam.sxc";
         csvFileReader.readTransactions(noValidPath);
     }

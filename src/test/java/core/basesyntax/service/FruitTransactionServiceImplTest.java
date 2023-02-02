@@ -16,16 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
-    private Map<Operation, OperationHandler> operationHandlerMap;
-    private OperationStrategy operationStrategy;
-    private FruitTransactionService fruitTransactionService;
+    private static Map<Operation, OperationHandler> operationHandlerMap;
+    private static OperationStrategy operationStrategy;
+    private static FruitTransactionService fruitTransactionService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());

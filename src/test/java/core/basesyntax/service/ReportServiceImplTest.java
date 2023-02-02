@@ -5,15 +5,16 @@ import static junit.framework.TestCase.assertFalse;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static final String TITLE_FOR_RESULT = "fruit,quantity";
     private static final String PUNCTUATION_MARK = ",";
-    private final ReportService reportService = new ReportServiceImpl();
+    private static final ReportService reportService = new ReportServiceImpl();
 
-    @Test
-    public void createReportString_ok() {
+    @BeforeClass
+    public static void createReportString_ok() {
         String firstFruit = "orange";
         int quantityFirstFruit = 20;
 

@@ -6,14 +6,20 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private final TransactionParser transactionParser = new TransactionParserImpl();
-    private List<String> stringList = new ArrayList<>();
+    private static TransactionParser transactionParser;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        transactionParser = new TransactionParserImpl();
+    }
 
     @Test
     public void parseTransactionList_Ok() {
+        List<String> stringList = new ArrayList<>();
         stringList.add("b,banana,20");
         stringList.add("b,apple,100");
         stringList.add("s,banana,100");
@@ -45,6 +51,7 @@ public class TransactionParserImplTest {
 
     @Test(expected = RuntimeException.class)
     public void parse_InvalidStoreOperationTransaction_NotOk() {
+        List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("q,banana,20");
         transactionParser.parseTransactionList(stringList);

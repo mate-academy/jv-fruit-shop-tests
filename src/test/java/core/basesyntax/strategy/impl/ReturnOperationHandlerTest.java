@@ -15,11 +15,11 @@ public class ReturnOperationHandlerTest {
     @Before
     public void setUp() {
         operationHandler = new ReturnOperationHandler();
+        FruitStorage.fruits.put("banana", 10);
     }
 
     @Test
     public void returnHandler_Ok() {
-        FruitStorage.fruits.put("banana", 10);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "banana", 40);
         operationHandler.handle(transaction);

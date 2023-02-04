@@ -1,6 +1,7 @@
 package core.basesyntax.db;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,15 +21,13 @@ public class FruitStorageTest {
 
     @Test
     public void storage_addInvalidData_Ok() {
-        Integer expected = null;
         Integer actual = FruitStorage.fruits.get("Bad data");
-        assertEquals(expected, actual);
+        assertNull(actual);
     }
 
     @Test
     public void storage_addNullData_Ok() {
-        Integer expected = null;
         Integer actual = FruitStorage.fruits.get(null);
-        assertEquals(expected, actual);
+        assertNull(actual);
     }
 }

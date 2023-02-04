@@ -16,12 +16,12 @@ public class ReportServiceImplTest {
     @Before
     public void setUp() {
         reportService = new ReportServiceImpl();
+        FruitStorage.fruits.put("banana", 152);
+        FruitStorage.fruits.put("apple", 90);
     }
 
     @Test
     public void createReport_Ok() {
-        FruitStorage.fruits.put("banana", 152);
-        FruitStorage.fruits.put("apple", 90);
         String actual = reportService.report();
         assertEquals(EXPECTED_REPORT, actual);
     }

@@ -14,13 +14,13 @@ public class BalanceOperationHandlerTest {
     @Before
     public void setUp() {
         operationHandler = new BalanceOperationHandler();
+        FruitStorage.fruits.put("banana", 20);
     }
 
     @Test
     public void balanceHandler_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20);
-        FruitStorage.fruits.put("banana", 20);
         operationHandler.handle(transaction);
         int expected = 20;
         int actual = FruitStorage.fruits.get("banana");

@@ -15,11 +15,11 @@ public class SupplyOperationHandlerTest {
     @Before
     public void setUp() {
         operationHandler = new SupplyOperationHandler();
+        FruitStorage.fruits.put("banana", 20);
     }
 
     @Test
     public void supplyHandler_Ok() {
-        FruitStorage.fruits.put("banana", 20);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "banana", 40);
         operationHandler.handle(transaction);

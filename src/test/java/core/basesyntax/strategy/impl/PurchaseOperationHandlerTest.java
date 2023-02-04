@@ -15,11 +15,11 @@ public class PurchaseOperationHandlerTest {
     @Before
     public void setUp() {
         operationHandler = new PurchaseOperationHandler();
+        FruitStorage.fruits.put("banana", 100);
     }
 
     @Test
     public void purchaseHandler_Ok() {
-        FruitStorage.fruits.put("banana", 100);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 20);
         operationHandler.handle(transaction);
@@ -30,7 +30,6 @@ public class PurchaseOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void purchaseHandler_NotOk() {
-        FruitStorage.fruits.put("banana", 100);
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 150);
         operationHandler.handle(transaction);

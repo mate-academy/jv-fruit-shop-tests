@@ -27,7 +27,7 @@ public class ReportGeneratorImplTest {
     }
 
     @Test
-    public void reportGenerate_EmptyData_NotOk() {
+    public void reportGenerate_EmptyData_Ok() {
         String actual = reportService.generateReport();
         String expecteResult = "fruit, quantity";
         assertEquals(expecteResult, actual);

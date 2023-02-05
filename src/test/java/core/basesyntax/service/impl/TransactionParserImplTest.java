@@ -4,56 +4,45 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionParser;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
     private static TransactionParser transactionParser;
+    private static List<String> TEST_DATA;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         transactionParser = new TransactionParserImpl();
+        TEST_DATA = List.of("b,banana,20", "b,apple,100", "s,banana,100",
+                "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
     }
 
     @Test
     public void parseTransactionList_Ok() {
-        List<String> stringList = new ArrayList<>();
-        stringList.add("b,banana,20");
-        stringList.add("b,apple,100");
-        stringList.add("s,banana,100");
-        stringList.add("p,banana,13");
-        stringList.add("r,apple,10");
-        stringList.add("p,apple,20");
-        stringList.add("p,banana,5");
-        stringList.add("s,banana,50");
-        final List<Transaction> actual = transactionParser.parseTransactionList(stringList);
-        List<Transaction> expectedList = new ArrayList<>();
-        expectedList.add(new Transaction("banana", 20));
+        final List<Transaction> actual = transactionParser.parseTransactionList(TEST_DATA);
+        List<Transaction> expectedList = List.of(new Transaction("banana", 20),
+                new Transaction("apple", 100), new Transaction("banana", 100),
+                new Transaction("banana", 13), new Transaction("apple", 10),
+                new Transaction("apple", 20), new Transaction("banana", 5),
+                new Transaction("banana", 50));
         expectedList.get(0).setOperation(Transaction.Operation.BALANCE);
-        expectedList.add(new Transaction("apple", 100));
         expectedList.get(1).setOperation(Transaction.Operation.BALANCE);
-        expectedList.add(new Transaction("banana", 100));
         expectedList.get(2).setOperation(Transaction.Operation.SUPPLY);
-        expectedList.add(new Transaction("banana", 13));
         expectedList.get(3).setOperation(Transaction.Operation.PURCHASE);
-        expectedList.add(new Transaction("apple", 10));
         expectedList.get(4).setOperation(Transaction.Operation.RETURN);
-        expectedList.add(new Transaction("apple", 20));
         expectedList.get(5).setOperation(Transaction.Operation.PURCHASE);
-        expectedList.add(new Transaction("banana", 5));
         expectedList.get(6).setOperation(Transaction.Operation.PURCHASE);
-        expectedList.add(new Transaction("banana", 50));
         expectedList.get(7).setOperation(Transaction.Operation.SUPPLY);
-        assertEquals(expectedList.get(2).getOperation(), actual.get(2).getOperation());
+        for (int i = 0; i < 8; i++) {
+            assertEquals(expectedList.get(i).getOperation(), actual.get(i).getOperation());
+        }
     }
 
     @Test(expected = RuntimeException.class)
     public void parse_InvalidStoreOperationTransaction_NotOk() {
-        List<String> stringList = new ArrayList<>();
-        stringList.add("type,fruit,quantity");
-        stringList.add("q,banana,20");
-        transactionParser.parseTransactionList(stringList);
+        TEST_DATA.add("type,fruit,quantity");
+        transactionParser.parseTransactionList(TEST_DATA);
     }
 }

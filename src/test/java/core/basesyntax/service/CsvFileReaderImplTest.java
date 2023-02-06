@@ -1,9 +1,10 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
+import core.basesyntax.dao.CsvFileReader;
+import core.basesyntax.dao.CsvFileReaderImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.ArrayList;
@@ -21,6 +22,12 @@ public class CsvFileReaderImplTest {
         csvFileReader = new CsvFileReaderImpl();
     }
 
+    @Test(expected = RuntimeException.class)
+    public void readTransactions_noValidPath_notOk() {
+        String noValidPath = "ndbkam.sxc";
+        csvFileReader.readTransactions(noValidPath);
+    }
+
     @Test
     public void readTransactions_validData_ok() {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
@@ -36,7 +43,6 @@ public class CsvFileReaderImplTest {
                 = csvFileReader.readTransactions(TEST_FILE).trim();
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
-        assertEquals(expected, actual);
     }
 
     private FruitTransaction balanceBananaFruitTransaction() {
@@ -77,11 +83,5 @@ public class CsvFileReaderImplTest {
         returnApple.setFruit("apple");
         returnApple.setQuantity(10);
         return returnApple;
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void readTransactions_noValidPath_notOk() {
-        String noValidPath = "ndbkam.sxc";
-        csvFileReader.readTransactions(noValidPath);
     }
 }

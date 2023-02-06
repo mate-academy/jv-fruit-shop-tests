@@ -48,11 +48,4 @@ public class FruitTransaction {
     public int hashCode() {
         return Objects.hash(operation, fruit, quantity);
     }
-
-    @Override
-    public String toString() {
-        return operation.toString().toLowerCase().charAt(0)
-                + "\t" + fruit
-                + "\t" + quantity;
-    }
 }

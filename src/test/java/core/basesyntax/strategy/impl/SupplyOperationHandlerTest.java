@@ -19,9 +19,9 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void calculate_Ok() {
+        Integer expectResult = 20;
         operationHandler.calculate(new Transaction("apple", 20));
         Integer actual = Storage.fruitsStorage.get("apple");
-        Integer expectResult = 20;
         assertEquals(expectResult, actual);
     }
 

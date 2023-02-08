@@ -28,9 +28,9 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void calculate_Ok() {
+        Integer expectResult = 5;
         operationHandler.calculate(new Transaction("apple", 25));
         Integer actual = Storage.fruitsStorage.get("apple");
-        Integer expectResult = 5;
         assertEquals(expectResult, actual);
     }
 

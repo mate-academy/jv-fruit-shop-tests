@@ -42,7 +42,8 @@ public class TransactionParserImplTest {
 
     @Test(expected = RuntimeException.class)
     public void parse_InvalidStoreOperationTransaction_NotOk() {
-        TEST_DATA.add("type,fruit,quantity");
-        transactionParser.parseTransactionList(TEST_DATA);
+        List<String> testList = TEST_DATA;
+        testList.add("type,fruit,quantity");
+        transactionParser.parseTransactionList(testList);
     }
 }

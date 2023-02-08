@@ -20,9 +20,9 @@ public class ReportGeneratorImplTest {
     public void reportGenerate_Ok() {
         Storage.fruitsStorage.put("banana", 152);
         Storage.fruitsStorage.put("apple", 90);
-        String actual = reportService.generateReport();
         String expectedResult = "fruit, quantity" + System.lineSeparator() + "banana, 152"
                 + System.lineSeparator() + "apple, 90";
+        String actual = reportService.generateReport();
         assertEquals(expectedResult, actual);
     }
 

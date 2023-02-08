@@ -19,8 +19,8 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void calculate_Ok() {
-        operationHandler.calculate(new Transaction("banana", 20));
         Integer expectedResult = 20;
+        operationHandler.calculate(new Transaction("banana", 20));
         Integer actual = Storage.fruitsStorage.get("banana");
         assertEquals(expectedResult, actual);
     }

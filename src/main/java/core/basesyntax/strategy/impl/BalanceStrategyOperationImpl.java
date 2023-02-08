@@ -19,6 +19,5 @@ public class BalanceStrategyOperationImpl implements OperationHandler {
             throw new RuntimeException("Quantity can't be negative: " + transaction.getFruit());
         }
         Storage.fruits.put(fruitName, resultQuantity);
-
     }
 }

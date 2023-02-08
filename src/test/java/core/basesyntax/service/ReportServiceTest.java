@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,8 +18,13 @@ public class ReportServiceTest {
         reportService = new ReportServiceImpl();
     }
 
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
-    public void createReportFromStorage_Ok() {
+    public void createReport_FromStorage_Ok() {
         Storage.fruitStorage.put("banana", 100);
         String expected = HEADER + System.lineSeparator() + "banana" + DELIMITER + 100;
         String actual = reportService.createReport();

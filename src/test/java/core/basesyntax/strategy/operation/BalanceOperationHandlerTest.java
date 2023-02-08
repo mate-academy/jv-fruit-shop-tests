@@ -24,13 +24,13 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void negativeQuantityTransaction_NotOk() {
+    public void updateAmount_negativeQuantityTransaction_NotOk() {
         fruitTransaction.setQuantity(-1);
         operationHandler.updateAmount(fruitTransaction);
     }
 
     @Test
-    public void updateAmount_Ok() {
+    public void updateAmount_ValidData_Ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(100);

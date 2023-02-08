@@ -2,11 +2,12 @@ package core.basesyntax.strategy.operation;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReturnOperationHandlerImplTest {
+public class ReturnOperationHandlerTest {
     private static FruitTransaction fruitTransaction;
     private static OperationHandler operationHandler;
 
@@ -17,8 +18,13 @@ public class ReturnOperationHandlerImplTest {
         operationHandler = new ReturnOperationHandlerImpl();
     }
 
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
+    }
+
     @Test
-    public void updateAmount_Ok() {
+    public void updateAmount_ValidData_Ok() {
         Storage.fruitStorage.put("banana", 100);
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setFruit("banana");

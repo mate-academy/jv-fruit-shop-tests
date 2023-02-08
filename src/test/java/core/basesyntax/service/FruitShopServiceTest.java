@@ -19,19 +19,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceTest {
-    private static final Map<FruitTransaction.Operation,
-            OperationHandler> STRATEGIES = new HashMap<>();
-    private static OperationStrategy operationStrategy;
     private static FruitShopServiceImpl fruitShopService;
 
     @BeforeClass
     public static void beforeClass() {
-        STRATEGIES.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandlerImpl());
-        STRATEGIES.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandlerImpl());
-        STRATEGIES.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandlerImpl());
-        STRATEGIES.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandlerImpl());
         Storage.fruitStorage.clear();
-        operationStrategy = new OperationStrategyImpl(STRATEGIES);
+        Map<FruitTransaction.Operation, OperationHandler> handlersMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandlerImpl(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandlerImpl(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandlerImpl(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandlerImpl());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlersMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
     }
 
@@ -41,7 +39,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    public void operateTransactions_Ok() {
+    public void processTransactions_ValidData_Ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 100);
         expected.put("apple", 100);

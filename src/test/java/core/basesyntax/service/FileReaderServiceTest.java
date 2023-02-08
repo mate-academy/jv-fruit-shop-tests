@@ -16,17 +16,17 @@ public class FileReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFileWrongPath_NotOk() {
+    public void read_WrongFilePath_NotOk() {
         readerService.read("wrong path");
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromNullFile_NotOk() {
+    public void read_Null_NotOk() {
         readerService.read(null);
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void read_ValidInput_Ok() {
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
         List<String> actual = readerService.read(FILE_PATH);
         Assert.assertEquals(actual, expected);

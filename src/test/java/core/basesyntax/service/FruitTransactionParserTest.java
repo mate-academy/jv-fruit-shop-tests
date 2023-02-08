@@ -17,18 +17,18 @@ public class FruitTransactionParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseTransactionsNullInput_NotOk() {
+    public void getFruitTransactionsList_NullInput_NotOk() {
         fruitTransactionParser.getFruitTransactionsList(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parseTransactionsEmptyInput_NotOk() {
+    public void getFruitTransactionsList_EmptyInput_NotOk() {
         List<String> emptyList = new ArrayList<>();
         fruitTransactionParser.getFruitTransactionsList(emptyList);
     }
 
     @Test
-    public void parseTransactionsValidInput_Ok() {
+    public void getFruitTransactionsList_ValidInput_Ok() {
         FruitTransaction bananaTransaction = new FruitTransaction();
         bananaTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         bananaTransaction.setFruit("banana");

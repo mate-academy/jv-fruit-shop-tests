@@ -15,17 +15,17 @@ public class FileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToNullPath_NotOk() {
+    public void writeDataToFile_NullPath_NotOk() {
         fileWriterService.writeDataToFile(REPORT, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeNullReport_NotOk() {
+    public void writeDataToFile_NullReport_NotOk() {
         fileWriterService.writeDataToFile(null, REPORT);
     }
 
     @Test
-    public void writeDataToFileValidInput_Ok() {
+    public void writeDataToFile_ValidInput_Ok() {
         fileWriterService.writeDataToFile(REPORT, TO_FILE_PATH);
     }
 }

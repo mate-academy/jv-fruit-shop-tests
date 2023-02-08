@@ -29,7 +29,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void negativeQuantityTransaction_NotOk() {
+    public void updateAmount_negativeQuantityTransaction_NotOk() {
         Storage.fruitStorage.put("apple", 10);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit("apple");
@@ -38,7 +38,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void updateAmount_Ok() {
+    public void updateAmount_ValidData_Ok() {
         Storage.fruitStorage.put("banana", 110);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("banana");

@@ -11,14 +11,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static String outputFilePath;
+    private static final String OUTPUT_FILE_PATH = "src/test/java/resources/OutputInfo.csv";
     private static WriterService writerService;
     private static String reportInfo;
     private static List<String> expectedList;
 
     @BeforeClass
     public static void beforeClass() {
-        outputFilePath = "src/test/java/resources/OutputInfo.csv";
         writerService = new WriterServiceImpl();
         reportInfo = "fruit,quantity" + System.lineSeparator()
                 + "banana,120" + System.lineSeparator()
@@ -28,19 +27,19 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeInfoToFile_reportInfo_Ok() {
-        writerService.writeInfoToFile(reportInfo, outputFilePath);
+        writerService.writeInfoToFile(reportInfo, OUTPUT_FILE_PATH);
         List<String> actual;
         try {
-            actual = Files.readAllLines(Path.of(outputFilePath));
+            actual = Files.readAllLines(Path.of(OUTPUT_FILE_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + outputFilePath, e);
+            throw new RuntimeException("Can't read data from file " + OUTPUT_FILE_PATH, e);
         }
         assertEquals(actual, expectedList);
     }
 
     @Test(expected = NullPointerException.class)
     public void writeInfoToFile_nullInfo_notOk() {
-        writerService.writeInfoToFile(null, outputFilePath);
+        writerService.writeInfoToFile(null, OUTPUT_FILE_PATH);
     }
 
     @Test(expected = NullPointerException.class)

@@ -26,7 +26,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void doBalanceTransaction_Fruit_Ok() {
+    public void doTransaction_Ok() {
         handler.doTransaction(fruitType, returnedFruits);
         Fruit actual = Storage.fruits.stream()
                 .filter(f -> f.getFruitType().equals(fruitType))

@@ -22,7 +22,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void doBalanceTransaction_Fruit_Ok() {
+    public void doTransaction_Ok() {
         handler.doTransaction(fruitType, quantity);
         assertTrue(Storage.fruits.contains(fruit));
     }

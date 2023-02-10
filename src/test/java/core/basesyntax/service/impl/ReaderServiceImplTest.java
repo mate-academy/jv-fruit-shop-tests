@@ -9,15 +9,13 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
-    private static String correctInputFile;
-    private static String incorrectInputFile;
+    private static final String CORRECT_INPUT_FILE = "src/test/java/resources/InputInfo.csv";
+    private static final String INCORRECT_INPUT_FILE = "src/main/resources/IncorrectName.csv";
     private static List<String> fruitInfo;
 
     @BeforeClass
     public static void beforeClass() {
         readerService = new ReaderServiceImpl();
-        correctInputFile = "src/test/java/resources/InputInfo.csv";
-        incorrectInputFile = "src/main/resources/IncorrectName.csv";
         fruitInfo = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
@@ -31,13 +29,13 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readInfoFromFile_correctInputFile_Ok() {
-        List<String> actual = readerService.readInfoFromFile(correctInputFile);
+        List<String> actual = readerService.readInfoFromFile(CORRECT_INPUT_FILE);
         assertEquals(actual, fruitInfo);
     }
 
     @Test(expected = RuntimeException.class)
     public void readInfoFromFile_incorrectInputFile_notOk() {
-        readerService.readInfoFromFile(incorrectInputFile);
+        readerService.readInfoFromFile(INCORRECT_INPUT_FILE);
     }
 
     @Test(expected = RuntimeException.class)

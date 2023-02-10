@@ -11,6 +11,7 @@ import core.basesyntax.strategy.TransactionStrategyImpl;
 import core.basesyntax.strategy.transaction.BalanceHandler;
 import core.basesyntax.strategy.transaction.SupplyHandler;
 import core.basesyntax.strategy.transaction.TransactionHandler;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,7 @@ public class ReportServiceImplTest {
     private static List<FruitTransaction> transactionList;
 
     private static String reportInfo;
+    private static List<FruitTransaction> emptyList;
 
     @BeforeClass
     public static void beforeClass() {
@@ -57,12 +59,23 @@ public class ReportServiceImplTest {
         reportInfo = "fruit,quantity" + System.lineSeparator()
                 + "banana,120" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator();
+        emptyList = new ArrayList<>();
     }
 
     @Test
     public void countAmountOfFruits_listOfTransaction_Ok() {
         String actual = reportService.countAmountOfFruits(transactionList);
         assertEquals(actual, reportInfo);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void countAmountOfFruits_emptyList_notOk() {
+        reportService.countAmountOfFruits(emptyList);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void countAmountOfFruits_null_notOk() {
+        reportService.countAmountOfFruits(null);
     }
 
     @AfterClass

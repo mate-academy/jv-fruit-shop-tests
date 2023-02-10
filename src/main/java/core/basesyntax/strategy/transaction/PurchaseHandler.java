@@ -12,6 +12,9 @@ public class PurchaseHandler implements TransactionHandler {
     @Override
     public void doTransaction(String fruitType, int quantity) {
         int oldQuantity = transactionDao.getFruit(fruitType).getQuantity();
+        if (oldQuantity < quantity) {
+            throw new RuntimeException("You can't buy more fruits than there are in the shop");
+        }
         transactionDao.getFruit(fruitType).setQuantity(oldQuantity - quantity);
     }
 }

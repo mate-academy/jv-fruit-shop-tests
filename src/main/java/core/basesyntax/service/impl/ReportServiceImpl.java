@@ -16,6 +16,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String countAmountOfFruits(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions.isEmpty()) {
+            throw new RuntimeException("There is no info to make report");
+        }
         fruitTransactions
                 .forEach(transaction -> transactionStrategy.get(transaction.getOperation())
                         .doTransaction(transaction.getFruit(), transaction.getQuantity()));

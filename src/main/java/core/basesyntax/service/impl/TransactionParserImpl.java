@@ -14,6 +14,9 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> toTransaction(List<String> inputData) {
+        if (inputData == null) {
+            throw new NullPointerException("The data from input file does not exist.");
+        }
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = TITLE_LINE; i < inputData.size(); i++) {
             transactions.add(parseLine(inputData.get(i)));

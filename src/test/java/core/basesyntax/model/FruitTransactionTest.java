@@ -10,7 +10,7 @@ public class FruitTransactionTest {
         String code = "b";
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actual = FruitTransaction.Operation.getByCode(code);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)

@@ -10,6 +10,9 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int QUANTITY = 2;
 
     public List<FruitTransaction> parseFruitTransactions(List<String> lines) {
+        if (lines == null || lines.isEmpty()) {
+            throw new RuntimeException("Incoming List == null or empty");
+        }
         List<FruitTransaction> dataList = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             String[] array = lines.get(i).split(",");

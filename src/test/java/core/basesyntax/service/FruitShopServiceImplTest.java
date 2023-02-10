@@ -1,7 +1,11 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.*;
+import core.basesyntax.strategy.OperationStrategy;
 
 public class FruitShopServiceImplTest {
+    OperationStrategy operationStrategy;
+    private FruitShopService fruitShopService = new FruitShopServiceImpl
+            (operationStrategy);
+
 
 }

@@ -5,14 +5,14 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportGeneratorService;
 import org.junit.Before;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Test;
 
 public class ReportGeneratorServiceImplTest {
     private final ReportGeneratorService reportGeneratorService
             = new ReportGeneratorServiceImpl();
-    FruitDao dao = new FruitDaoImpl();
+    private final FruitDao dao = new FruitDaoImpl();
     private List<FruitTransaction> transactionsList;
 
     @Before

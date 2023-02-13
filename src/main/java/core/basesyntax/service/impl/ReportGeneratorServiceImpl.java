@@ -17,6 +17,4 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
                         String.valueOf(transaction.getQuantity())))
                 .collect(Collectors.joining(System.lineSeparator()));
     }
-
-
 }

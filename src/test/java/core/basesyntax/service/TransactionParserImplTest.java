@@ -1,8 +1,9 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.*;
-import core.basesyntax.model.FruitTransaction;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
@@ -11,6 +12,7 @@ import org.junit.Test;
 public class TransactionParserImplTest {
     private final TransactionParser transactionParser = new TransactionParserImpl();
     private List<String> lines;
+
     @Before
     public void setUp() {
         lines = new ArrayList<>();
@@ -44,6 +46,7 @@ public class TransactionParserImplTest {
 
     @Test
     public void emptyIncomingList_NotOk() {
-        assertThrows(RuntimeException.class, () -> transactionParser.parseFruitTransactions(new ArrayList<>()));
+        assertThrows(RuntimeException.class, () ->
+                transactionParser.parseFruitTransactions(new ArrayList<>()));
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
@@ -18,6 +19,7 @@ import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static String report;
+
     @BeforeClass
     public static void beforeClass() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -44,7 +46,8 @@ public class FruitShopServiceImplTest {
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
 
         TransactionParser transactionParser = new TransactionParserImpl();
-        List<FruitTransaction> fruitTransaction = transactionParser.parseFruitTransactions(fruitOperationsList);
+        List<FruitTransaction> fruitTransaction =
+                transactionParser.parseFruitTransactions(fruitOperationsList);
 
         fruitShopService.provideOperation(fruitTransaction);
         ReportCreator reportCreator = new ReportCreatorImpl();

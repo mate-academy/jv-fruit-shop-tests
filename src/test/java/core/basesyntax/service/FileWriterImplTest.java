@@ -2,15 +2,15 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
 import org.junit.Test;
 
 public class FileWriterImplTest {
+    private final FileReader fileReader = new FileReaderImpl();
     private final FileWriter fileWriter = new FileWriterImpl();
-    FileReader fileReader = new FileReaderImpl();
-    String report;
-    String filepath;
-
+    private String report;
+    private String filepath;
 
     @Test
     public void reportNull_NotOk() {
@@ -26,7 +26,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    public void WriteToFile_Ok() {
+    public void writeToFile_Ok() {
         report = "report1";
         filepath = "src/main/resources/TestFile.csv";
         fileWriter.writeToFile(report, filepath);
@@ -35,3 +35,4 @@ public class FileWriterImplTest {
         assertEquals("report1", actual.get(0));
     }
 }
+

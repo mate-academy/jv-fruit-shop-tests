@@ -2,12 +2,17 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    FileWriter fileWriter = new FileWriterImpl();
-    FileReader fileReader = new FileReaderImpl();
+    private final FileWriter fileWriter = new FileWriterImpl();
+    private final FileReader fileReader = new FileReaderImpl();
     private String filepath;
 
     @Test
@@ -60,5 +65,11 @@ public class FileReaderImplTest {
             return;
         }
         fail("Runtime exception should be thrown in case of invalid filepath");
+    }
+
+    @AfterClass
+    public static void afterClass() throws IOException {
+        String filepath = "src/main/resources/TestFile.csv";
+        Files.delete(Path.of(filepath));
     }
 }

@@ -11,9 +11,9 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
-import org.junit.Before;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionOperationsCalculatorImplTest {

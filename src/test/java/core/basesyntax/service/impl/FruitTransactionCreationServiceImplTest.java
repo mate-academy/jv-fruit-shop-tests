@@ -3,9 +3,9 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.FruitTransactionCreationService;
-import org.junit.Before;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionCreationServiceImplTest {

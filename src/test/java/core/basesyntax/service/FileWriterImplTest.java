@@ -3,7 +3,11 @@ package core.basesyntax.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,6 +42,12 @@ public class FileWriterImplTest {
         List<String> actual = fileReader.readFromFile(filepath);
         assertEquals(1, actual.size());
         assertEquals("report1", actual.get(0));
+    }
+
+    @AfterClass
+    public static void afterClass() throws IOException {
+        String filepath = "src/main/resources/TestFile.csv";
+        Files.delete(Path.of(filepath));
     }
 }
 

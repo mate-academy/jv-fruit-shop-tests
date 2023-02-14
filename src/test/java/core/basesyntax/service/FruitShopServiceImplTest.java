@@ -10,15 +10,22 @@ import core.basesyntax.strategy.handlers.BalanceOperationHandler;
 import core.basesyntax.strategy.handlers.OperationHandler;
 import core.basesyntax.strategy.handlers.PurchaseOperationHandler;
 import core.basesyntax.strategy.handlers.SupplyOperationHandler;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
-    private static String report;
+    private static FruitShopService fruitShopService;
+    private static TransactionParser transactionParser;
+    private static List<String> fruitOperationsList;
+    private static ReportCreator reportCreator;
 
     @BeforeClass
     public static void beforeClass() {
@@ -26,12 +33,13 @@ public class FruitShopServiceImplTest {
         BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
         SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
         PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
+
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, balanceOperationHandler);
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyOperationHandler);
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, purchaseOperationHandler);
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, supplyOperationHandler);
 
-        List<String> fruitOperationsList = new ArrayList<>();
+        fruitOperationsList = new ArrayList<>();
         fruitOperationsList.add("type,fruit,quantity");
         fruitOperationsList.add("b,banana,20");
         fruitOperationsList.add("b,kiwi,10");
@@ -43,23 +51,31 @@ public class FruitShopServiceImplTest {
         fruitOperationsList.add("p,apple,20");
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-
-        TransactionParser transactionParser = new TransactionParserImpl();
-        List<FruitTransaction> fruitTransaction =
-                transactionParser.parseFruitTransactions(fruitOperationsList);
-
-        fruitShopService.provideOperation(fruitTransaction);
-
-        ReportCreator reportCreator = new ReportCreatorImpl();
-        report = reportCreator.createReport(Storage.fruitsQuantity);
+        fruitShopService = new FruitShopServiceImpl(operationStrategy);
+        transactionParser = new TransactionParserImpl();
+        reportCreator = new ReportCreatorImpl();
     }
 
     @Test
     public void provideOperation_validData_Ok() {
-        assertTrue("peach,50", report.contains("peach,50"));
-        assertTrue("kiwi,10", report.contains("kiwi,10"));
-        assertTrue("apple,90", report.contains("apple,90"));
-        assertTrue("banana,107", report.contains("banana,107"));
+        List<FruitTransaction> fruitTransaction =
+                transactionParser.parseFruitTransactions(fruitOperationsList);
+        fruitShopService.provideOperation(fruitTransaction);
+        FileWriter fileWriter = new FileWriterImpl();
+        String filepath = "src/main/resources/TestFile.csv";
+        fileWriter.writeToFile(reportCreator.createReport(Storage.fruitsQuantity), filepath);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> strings = fileReader.readFromFile(filepath);
+
+        assertTrue("peach,50", strings.contains("peach,50"));
+        assertTrue("kiwi,10", strings.contains("kiwi,10"));
+        assertTrue("apple,90", strings.contains("apple,90"));
+        assertTrue("banana,107", strings.contains("banana,107"));
+    }
+
+    @AfterClass
+    public static void afterClass() throws IOException {
+        String filepath = "src/main/resources/TestFile.csv";
+        Files.delete(Path.of(filepath));
     }
 }

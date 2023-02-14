@@ -8,7 +8,6 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-
     private static final String CORRECT_FILE_PATH = "src/main/resources/input.csv";
     private static final String WRONG_FILE_PATH = "src/main/resources/unknown.csv";
     private static final List<String> CORRECT_DATA = List.of("type,fruit,quantity",

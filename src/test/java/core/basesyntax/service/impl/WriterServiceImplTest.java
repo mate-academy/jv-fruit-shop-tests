@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static final String REPORT_FILE_PATH = "src/test/java/core/basesyntax/"
+    private static final String REPORT_FILE_PATH = "src/test/java/"
             + "resources/reporttest.csv";
     private static final String forReport = "fruit,quantity" + System.lineSeparator()
             + "banana,10" + System.lineSeparator() + "apple,15";
@@ -17,7 +17,7 @@ public class WriterServiceImplTest {
     private ReaderService readerService = new ReaderServiceImpl();
 
     @Test
-    public void writerService_CorrectWriting_Ok() {
+    public void writeToFile_Ok() {
         writerService.writeToFile(forReport, REPORT_FILE_PATH);
         List<String> expected = List.of("fruit,quantity",
                 "banana,10",
@@ -27,7 +27,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writerService_WritingNull_NotOk() {
+    public void writeToFile_WritingNull_NotOk() {
         try {
             writerService.writeToFile(null, REPORT_FILE_PATH);
         } catch (NullPointerException e) {

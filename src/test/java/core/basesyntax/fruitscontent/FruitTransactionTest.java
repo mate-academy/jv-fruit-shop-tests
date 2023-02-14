@@ -6,20 +6,19 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 public class FruitTransactionTest {
-
     @Test
-    public void transation_GetCorrectEnum_Ok() {
-        String operation = "b";
-        String expected = String.valueOf(FruitTransaction.Operation.BALANCE);
-        String actual = String.valueOf(FruitTransaction.Operation.getByCode(operation));
+    public void getByCode_Ok() {
+        String code = "b";
+        FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
+        FruitTransaction.Operation actual = FruitTransaction.Operation.getByCode(code);
         assertEquals(expected, actual);
     }
 
     @Test
-    public void transation_GetIncorrectEnum_NotOk() {
-        String operation = "n";
+    public void getByCode_NotOk() {
+        String code = "n";
         try {
-            FruitTransaction.Operation.getByCode(operation);
+            FruitTransaction.Operation.getByCode(code);
         } catch (RuntimeException e) {
             return;
         }

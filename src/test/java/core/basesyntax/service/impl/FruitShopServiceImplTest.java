@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
@@ -41,7 +41,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void fruitShopService_GetCorrectData_Ok() {
+    public void processOfOperations_GetCorrectData_Ok() {
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 4),
@@ -54,17 +54,17 @@ public class FruitShopServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @BeforeClass
-    public static void beforeClass() {
-        FruitStorage.fruits.clear();
-    }
-
     @Test
-    public void fruitShopService_CheckEmptyList_Ok() {
+    public void processOfOperations_CheckEmptyList_Ok() {
         List<FruitTransaction> emptyList = new ArrayList<>();
         fruitShopService.processOfOperations(emptyList);
         int expected = 0;
         int actual = FruitStorage.fruits.size();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        FruitStorage.fruits.clear();
     }
 }

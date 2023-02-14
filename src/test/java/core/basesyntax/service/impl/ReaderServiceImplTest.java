@@ -23,13 +23,13 @@ public class ReaderServiceImplTest {
     private ReaderService readerService = new ReaderServiceImpl();
 
     @Test
-    public void readerService_getCorrectData_Ok() {
+    public void readFromFile_Ok() {
         List<String> actual = readerService.readFromFile(CORRECT_FILE_PATH);
         assertEquals(CORRECT_DATA, actual);
     }
 
     @Test
-    public void readerService_IncorrectPath_NotOk() {
+    public void readFromFile_IncorrectPath_NotOk() {
         try {
             readerService.readFromFile(WRONG_FILE_PATH);
         } catch (RuntimeException e) {

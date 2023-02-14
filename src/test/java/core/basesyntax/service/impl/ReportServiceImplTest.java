@@ -21,7 +21,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void reportService_CorrectFormation_Ok() {
+    public void report_Ok() {
         String actual = reportService.report();
         assertEquals(EXPECTED_DATA, actual);
     }

@@ -2,16 +2,21 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private final ReportCreator reportCreator = new ReportCreatorImpl();
+    private ReportCreator reportCreator;
+
+    @Before
+    public void setUp() {
+        reportCreator = new ReportCreatorImpl();
+    }
 
     @Test
-    public void createReport_Ok() {
+    public void createReport_validReport_Ok() {
         Map<String, Integer> fruits = new HashMap<>();
         fruits.put("banana", 30);
         String actual = reportCreator.createReport(fruits);
@@ -19,7 +24,7 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void createReportWithMoreData_Ok() {
+    public void createReport_MoreValidData_Ok() {
         Map<String, Integer> fruits = new HashMap<>();
         fruits.put("banana", 30);
         fruits.put("plum", 100);
@@ -35,12 +40,12 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void nullForInput_NotOk() {
+    public void createReport_nullReport_NotOk() {
         assertThrows(RuntimeException.class, () -> reportCreator.createReport(null));
     }
 
     @Test
-    public void emptyMapForInput_NotOk() {
+    public void createReport_emptyReport_NotOk() {
         assertThrows(RuntimeException.class, () -> reportCreator.createReport(new HashMap<>()));
     }
 }

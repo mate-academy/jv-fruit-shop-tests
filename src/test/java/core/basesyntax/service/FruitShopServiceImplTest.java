@@ -56,7 +56,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void validDataValidResult_Ok() {
+    public void provideOperation_validData_Ok() {
         assertTrue("peach,50", report.contains("peach,50"));
         assertTrue("kiwi,10", report.contains("kiwi,10"));
         assertTrue("apple,90", report.contains("apple,90"));

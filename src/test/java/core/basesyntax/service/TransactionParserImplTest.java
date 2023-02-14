@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private final TransactionParser transactionParser = new TransactionParserImpl();
+    private TransactionParser transactionParser;
     private List<String> lines;
 
     @Before
     public void setUp() {
+        transactionParser = new TransactionParserImpl();
         lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,apple,100");
@@ -25,7 +25,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void isParsingOfOperation() {
+    public void parseFruitTransactions_validData_Ok() {
         List<FruitTransaction> actual = transactionParser.parseFruitTransactions(lines);
         assertEquals("banana", actual.get(1).getFruit());
         assertEquals(13, actual.get(2).getQuantity());
@@ -34,18 +34,18 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void sizeOfList_Ok() {
+    public void parseFruitTransactions_validDatasizeOfList_Ok() {
         List<FruitTransaction> actual = transactionParser.parseFruitTransactions(lines);
         assertEquals(5, actual.size());
     }
 
     @Test
-    public void nullIncomingList_NotOk() {
+    public void parseFruitTransactions_NullForInput_NotOk() {
         assertThrows(RuntimeException.class, () -> transactionParser.parseFruitTransactions(null));
     }
 
     @Test
-    public void emptyIncomingList_NotOk() {
+    public void parseFruitTransactions_EmptyIncomingList_NotOk() {
         assertThrows(RuntimeException.class, () ->
                 transactionParser.parseFruitTransactions(new ArrayList<>()));
     }

@@ -50,8 +50,8 @@ public class FruitShopServiceImplTest {
                 transactionParser.parseFruitTransactions(fruitOperationsList);
 
         fruitShopService.provideOperation(fruitTransaction);
-        ReportCreator reportCreator = new ReportCreatorImpl();
 
+        ReportCreator reportCreator = new ReportCreatorImpl();
         report = reportCreator.createReport(Storage.fruitsQuantity);
     }
 

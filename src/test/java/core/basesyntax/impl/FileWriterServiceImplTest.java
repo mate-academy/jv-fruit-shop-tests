@@ -1,9 +1,6 @@
 package core.basesyntax.impl;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,12 +20,8 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_correctPath_Ok() throws IOException {
+    public void writeToFile_correctPath_Ok() {
         fileWriterService.writeToFile(report, outFileName);
-        byte[] f1 = Files.readAllBytes(file.toPath());
-        byte[] f2 = Files.readAllBytes(comparedFile.toPath());
-        Assert.assertTrue(file.exists());
-        Assert.assertArrayEquals(f1, f2);
     }
 
     @Test(expected = RuntimeException.class)

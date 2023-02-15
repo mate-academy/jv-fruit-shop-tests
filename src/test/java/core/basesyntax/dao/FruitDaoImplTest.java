@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;

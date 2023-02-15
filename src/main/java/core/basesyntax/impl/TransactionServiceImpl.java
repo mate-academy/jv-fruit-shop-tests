@@ -13,6 +13,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<FruitTransaction> convertStringToFruitTransaction(List<String> elementsInFile) {
+
+        if (elementsInFile == null || elementsInFile.isEmpty()) {
+            throw new RuntimeException("Can`t convert because elementsInFile is empty");
+        }
         return elementsInFile.stream().map(this::getFruitFromCsvRow).collect(Collectors.toList());
     }
 

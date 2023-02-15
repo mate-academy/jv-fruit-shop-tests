@@ -8,6 +8,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport(List<String[]> convertedList) {
+        if (convertedList == null || convertedList.isEmpty()) {
+            throw new RuntimeException("convertedList is empty");
+        }
         return convertedList.stream()
                 .map(this::convertToCsv)
                 .collect(Collectors.joining());

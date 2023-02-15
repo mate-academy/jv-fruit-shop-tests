@@ -13,7 +13,7 @@ public class ReturnStrategyOperationImpl implements OperationHandler {
         }
         String fruitName = transaction.getFruit();
         int resultQuantity = Storage.fruits.get(fruitName) + transaction.getQuantity();
-        if (resultQuantity < 0) {
+        if (resultQuantity < 0 || transaction.getQuantity() < 0) {
             throw new RuntimeException("Quantity can't be negative: " + transaction.getFruit());
         }
         Storage.fruits.put(fruitName, resultQuantity);

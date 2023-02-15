@@ -15,6 +15,9 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void calculateFruit(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null || fruitTransactions.isEmpty()) {
+            throw new RuntimeException("Can`t calculate when list of transaction is empty");
+        }
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy
                     .get(fruitTransaction.getOperation());

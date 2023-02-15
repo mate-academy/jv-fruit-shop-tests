@@ -2,16 +2,18 @@ package core.basesyntax.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ConverterService;
-import org.junit.jupiter.api.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class ConverterServiceImplTest {
-    private static ConverterService converterService;
-   private static final String[] head = {
+    private static final String[] head = {
             "fruits", "quantity\r\n"
     };
+    private static ConverterService converterService;
 
     @BeforeAll
     static void beforeAll() {
@@ -35,7 +37,7 @@ public class ConverterServiceImplTest {
     }
 
     @Test
-    public void converter_EmptyStorage_notOk() {
+    public void converter_emptyStorage_notOk() {
         List<String[]> expected = new ArrayList<>();
         expected.add(head);
         List<String[]> actual = converterService.convertList();

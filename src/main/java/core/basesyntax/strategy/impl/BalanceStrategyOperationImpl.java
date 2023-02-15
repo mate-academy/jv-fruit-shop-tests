@@ -7,7 +7,9 @@ import core.basesyntax.strategy.OperationHandler;
 public class BalanceStrategyOperationImpl implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        if (transaction.getFruit() == null || transaction.getOperation() == null) {
+        if (transaction == null
+                || transaction.getOperation() == null
+                || transaction.getFruit() == null) {
             throw new RuntimeException("Fruit can't be null");
         }
         String fruitName = transaction.getFruit();
@@ -15,7 +17,7 @@ public class BalanceStrategyOperationImpl implements OperationHandler {
         int oldQuantity = Storage.fruits.get(fruitName)
                 != null ? Storage.fruits.get(fruitName) : 0;
         int resultQuantity = oldQuantity + balanceQuantity;
-        if (resultQuantity < 0) {
+        if (resultQuantity < 0 || balanceQuantity < 0) {
             throw new RuntimeException("Quantity can't be negative: " + transaction.getFruit());
         }
         Storage.fruits.put(fruitName, resultQuantity);

@@ -1,16 +1,15 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.List;
-import static org.junit.Assert.assertEquals;
-
 
 public class FruitDaoImplTest {
     private final FruitDao dao = new FruitDaoImpl();
-    FruitTransaction transaction;
+    private FruitTransaction transaction;
 
     @Before
     public void setUp() {

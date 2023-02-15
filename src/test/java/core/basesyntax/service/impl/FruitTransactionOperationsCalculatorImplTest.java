@@ -45,5 +45,4 @@ public class FruitTransactionOperationsCalculatorImplTest {
     public void checkNullparameter_Ok() {
         transactionOperationsCalculator.process(null);
     }
-
 }

@@ -4,11 +4,11 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-class TransactionServiceImplTest {
+public class TransactionServiceImplTest {
     private TransactionService transactionService;
     private List<String> elementsInFile;
 
@@ -16,8 +16,8 @@ class TransactionServiceImplTest {
 
     private FruitTransaction fruitTransaction2;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         transactionService = new TransactionServiceImpl();
         elementsInFile = new ArrayList<>();
         fruitTransaction = new FruitTransaction();
@@ -33,25 +33,23 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void convertStringToFruitTransaction_Ok() {
+    public void convertStringToFruitTransaction_Ok() {
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(fruitTransaction);
         expected.add(fruitTransaction2);
         List<FruitTransaction> actual
                 = transactionService.convertStringToFruitTransaction(elementsInFile);
-        Assertions.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    void convertString_emptyElements_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void convertString_emptyElements_notOk() {
         List<String> elementsInFile = new ArrayList<>();
-        Assertions.assertThrows(RuntimeException.class, ()
-                -> transactionService.convertStringToFruitTransaction(elementsInFile));
+        transactionService.convertStringToFruitTransaction(elementsInFile);
     }
 
-    @Test
-    void convertString_nullElements_notOk() {
-        Assertions.assertThrows(RuntimeException.class, ()
-                -> transactionService.convertStringToFruitTransaction(null));
+    @Test(expected = RuntimeException.class)
+    public void convertString_nullElements_notOk() {
+        transactionService.convertStringToFruitTransaction(null);
     }
 }

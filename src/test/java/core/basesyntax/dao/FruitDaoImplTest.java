@@ -1,10 +1,9 @@
 package core.basesyntax.dao;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,27 +24,31 @@ public class FruitDaoImplTest {
     public void add_Ok() {
         dao.add(transaction);
         FruitTransaction actual = Storage.transactions.get(0);
-        assertEquals(transaction, actual);
+        Assert.assertEquals(transaction, actual);
+        Storage.transactions.clear();
     }
 
     @Test
     public void getByOperation_Ok() {
         List<FruitTransaction> expected = List.of(transaction);
         List<FruitTransaction> actual = dao.getByOperation(FruitTransaction.Operation.BALANCE);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
+        Storage.transactions.clear();
     }
 
     @Test
     public void get_Ok() {
         List<FruitTransaction> actual = dao.get();
         List<FruitTransaction> expected = List.of(transaction);
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
+        Storage.transactions.clear();
     }
 
     @Test
     public void getFruitOperationsList_Ok() {
         List<FruitTransaction> expected = List.of(transaction);
         List<FruitTransaction> fruitOperationsList = dao.getFruitOperationsList("b", "banana");
-        assertEquals(expected, fruitOperationsList);
+        Assert.assertEquals(expected, fruitOperationsList);
+        Storage.transactions.clear();
     }
 }

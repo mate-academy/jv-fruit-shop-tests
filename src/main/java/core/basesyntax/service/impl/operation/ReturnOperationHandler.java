@@ -13,9 +13,9 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        int quantityFromDb = warehouseDao.getQuantity(transaction.getFruit());
         String fruit = transaction.getFruit();
         if (warehouseDao.isPresent(fruit)) {
+            int quantityFromDb = warehouseDao.getQuantity(transaction.getFruit());
             warehouseDao.setQuantity(fruit, quantityFromDb + transaction.getQuantity());
         } else {
             warehouseDao.setQuantity(fruit, transaction.getQuantity());

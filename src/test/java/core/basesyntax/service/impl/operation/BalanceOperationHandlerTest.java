@@ -18,10 +18,10 @@ public class BalanceOperationHandlerTest {
 
     @Before
     public void setUp() {
-        warehouseDao = new WarehouseDaoImpl();
         transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.BALANCE);
         transaction.setFruit("banana");
+        warehouseDao = new WarehouseDaoImpl();
         balanceOperationHandler = new BalanceOperationHandler(warehouseDao);
     }
 

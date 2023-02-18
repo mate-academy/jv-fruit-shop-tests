@@ -14,9 +14,9 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         int currentFruitQuantity = warehouseDao.getQuantity(transaction.getFruit());
-        int newFruitQuantity = currentFruitQuantity - transaction.getQuantity();
         String fruit = transaction.getFruit();
         if (currentFruitQuantity >= transaction.getQuantity()) {
+            int newFruitQuantity = currentFruitQuantity - transaction.getQuantity();
             warehouseDao.setQuantity(fruit, newFruitQuantity);
         } else {
             throw new RuntimeException(transaction.getQuantity()

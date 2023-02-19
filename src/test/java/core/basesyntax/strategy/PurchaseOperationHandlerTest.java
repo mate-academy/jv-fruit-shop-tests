@@ -15,7 +15,7 @@ public class PurchaseOperationHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        List<FruitTransaction> transactionsList = new ArrayList<>();
+        final List<FruitTransaction> transactionsList = new ArrayList<>();
         final FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.BALANCE);
         transaction.setFruit("banana");

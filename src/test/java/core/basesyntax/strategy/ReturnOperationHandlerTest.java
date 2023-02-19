@@ -15,7 +15,7 @@ public class ReturnOperationHandlerTest {
 
     @Before
     public void setUp() {
-        List<FruitTransaction> transactionsList = new ArrayList<>();
+        final List<FruitTransaction> transactionsList = new ArrayList<>();
         final FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.BALANCE);
         transaction.setFruit("banana");

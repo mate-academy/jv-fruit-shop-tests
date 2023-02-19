@@ -1,9 +1,9 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import org.junit.Assert;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

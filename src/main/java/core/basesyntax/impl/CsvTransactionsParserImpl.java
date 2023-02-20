@@ -1,5 +1,6 @@
 package core.basesyntax.impl;
 
+import core.basesyntax.exceptions.ParseException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvTransactionsParser;
 import java.util.List;
@@ -34,19 +35,19 @@ public class CsvTransactionsParserImpl implements CsvTransactionsParser {
 
     private void operationCellIsNotEmpty(String operationCell) {
         if (operationCell.equals(EMPTY_SCV_TABLE_CELL)) {
-            throw new RuntimeException("Operation can't be empty.");
+            throw new ParseException("Operation can't be empty.");
         }
     }
 
     private void fruitCellIsNotEmpty(String fruitCell) {
         if (fruitCell.equals(EMPTY_SCV_TABLE_CELL)) {
-            throw new RuntimeException("Fruit can't be empty.");
+            throw new ParseException("Fruit can't be empty.");
         }
     }
 
     private void quantityIsValidInteger(String quantityCell) {
         if (quantityCell.equals(EMPTY_SCV_TABLE_CELL)) {
-            throw new RuntimeException("Quantity can't be empty.");
+            throw new ParseException("Quantity can't be empty.");
         }
         try {
             int quantity = Integer.parseInt(quantityCell);

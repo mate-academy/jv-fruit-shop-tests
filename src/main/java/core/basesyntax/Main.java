@@ -39,7 +39,7 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> csvLines = fileReaderService.readCsvFile(FROM_FILE_PATH);
+        List<String> csvLines = fileReaderService.readFile(FROM_FILE_PATH);
 
         CsvTransactionsParser csvTransactionsParser = new CsvTransactionsParserImpl();
         List<FruitTransaction> fruitTransactionList =

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public List<String> readCsvFile(String fromFilePath) {
+    public List<String> readFile(String fromFilePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fromFilePath))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {

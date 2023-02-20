@@ -33,7 +33,7 @@ public class FruitTransactionCreationServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void checkEmptyList_Ok() {
+    public void createTransaction_checkEmptyList_Ok() {
         transactionCreationService.createTransactions(new ArrayList<>());
     }
 }

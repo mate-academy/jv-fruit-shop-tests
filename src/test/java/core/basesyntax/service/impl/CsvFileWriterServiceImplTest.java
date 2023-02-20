@@ -14,7 +14,7 @@ public class CsvFileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void checkFileExistence() {
+    public void writeToFile_ThrowException_Ok() {
         String fakeFilePath = "";
         fileWriterService.writeToFile(fakeFilePath, REPORT);
     }

@@ -42,7 +42,7 @@ public class FruitTransactionOperationsCalculatorImplTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void checkNullparameter_Ok() {
+    public void process_checkNullparameter_Ok() {
         transactionOperationsCalculator.process(null);
     }
 }

@@ -13,7 +13,7 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void checkFileExistence_Ok() {
+    public void readFile_ThrowException_Ok() {
         String fakeFilePath = "hola";
         fileReaderService.readFile(fakeFilePath);
     }

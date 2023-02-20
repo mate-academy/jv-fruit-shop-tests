@@ -53,7 +53,7 @@ public class ReportGeneratorServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void checkEmptyList_Ok() {
+    public void generate_checkEmptyList_Ok() {
         List<FruitTransaction> testList = new ArrayList<>();
         reportGeneratorService.generate(testList);
     }

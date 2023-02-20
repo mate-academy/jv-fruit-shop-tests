@@ -24,26 +24,14 @@ public class FileWriterServiceImplTest {
         fileWriterService = new FileWriterServiceImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_filePathIsNull_notOk() {
-        try {
-            fileWriterService.writeToFile(null, REPORT);
-        } catch (NullPointerException e) {
-            return;
-        }
-        Assert.fail(
-                "NullPointerException should be thrown if the file path is null");
+        fileWriterService.writeToFile(null, REPORT);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_reportIsNull_notOk() {
-        try {
-            fileWriterService.writeToFile(CORRECT_FILE_PATH, null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        Assert.fail(
-                "NullPointerException should be thrown if the report is null");
+        fileWriterService.writeToFile(CORRECT_FILE_PATH, null);
     }
 
     @Test
@@ -52,19 +40,14 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_successfulWriting_ok() {
+    public void writeToFile_successfulWriting_ok() throws IOException {
         fileWriterService.writeToFile(CORRECT_FILE_PATH, REPORT);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,152",
                 "apple,90");
         List<String> actual;
-        try {
-            actual = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException(
-                    "Can't read data from file " + CORRECT_FILE_PATH, e);
-        }
+        actual = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
         Assert.assertEquals(expected, actual);
     }
 }

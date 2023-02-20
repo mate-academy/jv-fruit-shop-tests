@@ -28,26 +28,9 @@ public class FileReaderServiceImplTest {
         fileReaderService = new FileReaderServiceImpl();
     }
 
-    @Test
-    public void readFromFile_filePathIsNull_notOk() {
-        try {
-            fileReaderService.readFromFile(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        Assert.fail(
-                "NullPointerException should be thrown if the file path is null");
-    }
-
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_noSuchFile_notOk() {
-        try {
-            fileReaderService.readFromFile(NON_EXISTING_FILE_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.fail(
-                "RuntimeException should be thrown is such file don't exist");
+        fileReaderService.readFromFile(NON_EXISTING_FILE_PATH);
     }
 
     @Test

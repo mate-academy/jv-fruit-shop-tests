@@ -22,15 +22,9 @@ public class FruitTransactionParserImplTest {
         fruitTransactionParser = new FruitTransactionParserImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void parse_dataFromFileIsNull_notOk() {
-        try {
-            fruitTransactionParser.parse(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.fail(
-                "RuntimeException should be thrown if the list is null");
+        fruitTransactionParser.parse(null);
     }
 
     @Test

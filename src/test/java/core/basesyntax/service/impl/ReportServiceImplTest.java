@@ -21,15 +21,9 @@ public class ReportServiceImplTest {
         reportService = new ReportServiceImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void createReport_mapIsNull_notOk() {
-        try {
-            reportService.createReport(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.fail(
-                "RuntimeException should be thrown if the map is null");
+        reportService.createReport(null);
     }
 
     @Test

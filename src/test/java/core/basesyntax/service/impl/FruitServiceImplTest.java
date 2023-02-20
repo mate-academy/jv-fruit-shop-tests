@@ -28,15 +28,9 @@ public class FruitServiceImplTest {
         fruitService = new FruitServiceImpl(activityStrategy);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void processTransaction_listIsNull_notOk() {
-        try {
-            fruitService.processTransaction(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.fail(
-                "RuntimeException should be thrown if the list is null");
+        fruitService.processTransaction(null);
     }
 
     @Test

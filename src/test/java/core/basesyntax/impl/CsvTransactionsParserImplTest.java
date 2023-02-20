@@ -74,7 +74,7 @@ public class CsvTransactionsParserImplTest {
         invalidFruitTransactions.addAll(List.of(FIRST_INVALID_OPERATION_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
-        fail("You should to throw an exception " + PARSE_EXCEPTION_MESSAGE
+        fail("Test failed! The method must throw " + PARSE_EXCEPTION_MESSAGE
                 + " if the parser receives an empty operation: " + invalidFruitTransactions);
     }
 
@@ -83,7 +83,7 @@ public class CsvTransactionsParserImplTest {
         invalidFruitTransactions.addAll(List.of(INVALID_FRUIT_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
-        fail("You should to throw an exception " + PARSE_EXCEPTION_MESSAGE
+        fail("Test failed! The method must throw " + PARSE_EXCEPTION_MESSAGE
                 + " if the parser receives an empty fruit: " + invalidFruitTransactions);
     }
 
@@ -92,7 +92,7 @@ public class CsvTransactionsParserImplTest {
         invalidFruitTransactions.addAll(List.of(FIRST_INVALID_QUANTITY_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
-        fail("You should to throw an exception " + PARSE_EXCEPTION_MESSAGE
+        fail("Test failed! The method must throw " + PARSE_EXCEPTION_MESSAGE
                 + " if the parser receives an empty quantity: " + invalidFruitTransactions);
     }
 
@@ -101,7 +101,7 @@ public class CsvTransactionsParserImplTest {
         invalidFruitTransactions.addAll(List.of(SECOND_INVALID_QUANTITY_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
-        fail("You should to throw an exception " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
+        fail("Test failed! The method must throw " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
                 + " if the parser receives an 0 quantity: " + invalidFruitTransactions);
     }
 
@@ -110,7 +110,7 @@ public class CsvTransactionsParserImplTest {
         invalidFruitTransactions.addAll(List.of(THIRD_INVALID_QUANTITY_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
-        fail("You should to throw an exception " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
+        fail("Test failed! The method must throw " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
                 + " if the parser receives an negative quantity: " + invalidFruitTransactions);
     }
 }

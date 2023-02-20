@@ -1,14 +1,17 @@
 package core.basesyntax.dao;
 
 import static core.basesyntax.db.Warehouse.warehouse;
-
 import core.basesyntax.db.Warehouse;
 import java.util.Map;
 
 public class WarehouseDaoImpl implements WarehouseDao {
     @Override
     public void setQuantity(String fruit, Integer quantity) {
-        warehouse.put(fruit, quantity);
+        if (fruit != null && quantity != null) {
+            warehouse.put(fruit, quantity);
+        } else {
+            throw new RuntimeException("Input parameters can't be null");
+        }
     }
 
     @Override

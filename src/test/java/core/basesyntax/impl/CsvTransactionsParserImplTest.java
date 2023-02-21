@@ -22,16 +22,18 @@ public class CsvTransactionsParserImplTest {
                     "b,apple,100"};
     private static List<String> invalidFruitTransactions;
     private static final String EMPTY_SCV_TABLE_CELL = "\"\"";
-    private static final String[] FIRST_INVALID_OPERATION_TRANSACTIONS =
+    private static final String[] INVALID_EMPTY_OPERATION_TRANSACTIONS =
             {EMPTY_SCV_TABLE_CELL + ",banana,20", EMPTY_SCV_TABLE_CELL + ",apple,80"};
-    private static final String[] INVALID_FRUIT_TRANSACTIONS =
+    private static final String[] INVALID_EMPTY_FRUIT_TRANSACTIONS =
             {"b," + EMPTY_SCV_TABLE_CELL + ",20", "b," + EMPTY_SCV_TABLE_CELL + ",100"};
-    private static final String[] FIRST_INVALID_QUANTITY_TRANSACTIONS =
+    private static final String[] INVALID_EMPTY_QUANTITY_TRANSACTIONS =
             {"b,banana," + EMPTY_SCV_TABLE_CELL, "p,apple," + EMPTY_SCV_TABLE_CELL};
-    private static final String[] SECOND_INVALID_QUANTITY_TRANSACTIONS =
+    private static final String[] INVALID_ZERO_QUANTITY_TRANSACTIONS =
             {"b,apple,0", "r,banana,0"};
-    private static final String[] THIRD_INVALID_QUANTITY_TRANSACTIONS =
+    private static final String[] INVALID_NEGATIVE_QUANTITY_TRANSACTIONS =
             {"r,banana,-1", "b,apple,-5"};
+    private static final String[] INVALID_TYPE_OF_QUANTITY_TRANSACTIONS =
+            {"r,banana,banana", "b,apple,A"};
     private static final String PARSE_EXCEPTION_MESSAGE = ParseException.class.toString();
     private static final String ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE =
             IllegalArgumentException.class.toString();
@@ -71,46 +73,55 @@ public class CsvTransactionsParserImplTest {
 
     @Test(expected = ParseException.class)
     public void parseTransactions_emptyOperationCell_NotOk() {
-        invalidFruitTransactions.addAll(List.of(FIRST_INVALID_OPERATION_TRANSACTIONS));
+        invalidFruitTransactions.addAll(List.of(INVALID_EMPTY_OPERATION_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
         fail("Test failed! The method must throw " + PARSE_EXCEPTION_MESSAGE
-                + " if the parser receives an empty operation: " + invalidFruitTransactions);
+                + " if the operation is empty: " + invalidFruitTransactions);
     }
 
     @Test(expected = ParseException.class)
     public void parseTransactions_emptyFruitCell_NotOk() {
-        invalidFruitTransactions.addAll(List.of(INVALID_FRUIT_TRANSACTIONS));
+        invalidFruitTransactions.addAll(List.of(INVALID_EMPTY_FRUIT_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
         fail("Test failed! The method must throw " + PARSE_EXCEPTION_MESSAGE
-                + " if the parser receives an empty fruit: " + invalidFruitTransactions);
+                + " if the fruit is empty: " + invalidFruitTransactions);
     }
 
     @Test(expected = ParseException.class)
     public void parseTransactions_emptyQuantityCell_NotOk() {
-        invalidFruitTransactions.addAll(List.of(FIRST_INVALID_QUANTITY_TRANSACTIONS));
+        invalidFruitTransactions.addAll(List.of(INVALID_EMPTY_QUANTITY_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
         fail("Test failed! The method must throw " + PARSE_EXCEPTION_MESSAGE
-                + " if the parser receives an empty quantity: " + invalidFruitTransactions);
+                + " if the quantity is empty: " + invalidFruitTransactions);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parseTransactions_zeroQuantity_NotOk() {
-        invalidFruitTransactions.addAll(List.of(SECOND_INVALID_QUANTITY_TRANSACTIONS));
+        invalidFruitTransactions.addAll(List.of(INVALID_ZERO_QUANTITY_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
         fail("Test failed! The method must throw " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
-                + " if the parser receives an 0 quantity: " + invalidFruitTransactions);
+                + " if the quantity is equal to 0: " + invalidFruitTransactions);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void parseTransactions_negativeQuantity_NotOk() {
-        invalidFruitTransactions.addAll(List.of(THIRD_INVALID_QUANTITY_TRANSACTIONS));
+        invalidFruitTransactions.addAll(List.of(INVALID_NEGATIVE_QUANTITY_TRANSACTIONS));
 
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
         fail("Test failed! The method must throw " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
-                + " if the parser receives an negative quantity: " + invalidFruitTransactions);
+                + " if the quantity is negative number: " + invalidFruitTransactions);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void parseTransactions_notIntegerQuantity_NotOk() {
+        invalidFruitTransactions.addAll(List.of(INVALID_TYPE_OF_QUANTITY_TRANSACTIONS));
+
+        csvTransactionsParser.parseTransactions(invalidFruitTransactions);
+        fail("Test failed! The method must throw " + ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
+                + " if the quantity is not in the type of an Integer: " + invalidFruitTransactions);
     }
 }

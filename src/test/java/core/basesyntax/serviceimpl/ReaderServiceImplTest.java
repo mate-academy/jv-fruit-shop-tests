@@ -1,7 +1,6 @@
 package core.basesyntax.serviceimpl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.ReaderService;
 import java.util.List;
@@ -9,9 +8,9 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String INVALID_PATH =
-            "src/main/java/core/basesyntax/resources/12345.csv";
+            "src/test/java/resources/12345.csv";
     private static final String VALID_PATH =
-            "src/main/java/core/basesyntax/resources/transactions.csv";
+            "src/test/java/resources/transactionstest.csv";
     private static final List<String> CORRECT_DATA = List.of("type,fruit,quantity",
             "b,banana,20",
             "b,apple,100",
@@ -29,13 +28,8 @@ public class ReaderServiceImplTest {
         assertEquals(CORRECT_DATA, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void read_invalidPath_notOk() {
-        try {
-            readerService.read(INVALID_PATH);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Exception should be thrown if file path is invalid!");
+        readerService.read(INVALID_PATH);
     }
 }

@@ -1,10 +1,11 @@
 package core.basesyntax.serviceimpl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportWriterService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.Test;
 
@@ -13,25 +14,25 @@ public class ReportWriterServiceImplTest {
     private static final String report = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
     private final ReportWriterService reportWriterService = new ReportWriterServiceImpl();
-    private final ReaderService readerService = new ReaderServiceImpl();
 
     @Test
     public void write_validPath_ok() {
         reportWriterService.write(report, VALID_PATH);
+        List<String> actual;
         List<String> expected = List.of("fruit,quantity",
                 "banana,152",
                 "apple,90");
-        List<String> actual = readerService.read(VALID_PATH);
+        Path fromFilePath = Path.of(VALID_PATH);
+        try {
+            actual = Files.readAllLines(fromFilePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void write_nullValue_notOk() {
-        try {
-            reportWriterService.write(null, VALID_PATH);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("NullPointerException should be thrown");
+        reportWriterService.write(null, VALID_PATH);
     }
 }

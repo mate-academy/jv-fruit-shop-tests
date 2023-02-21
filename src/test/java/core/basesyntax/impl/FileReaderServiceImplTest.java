@@ -15,9 +15,8 @@ import org.junit.Test;
 
 public class FileReaderServiceImplTest {
     private static FileReaderService fileReaderService;
-    private static final String VALID_INPUT_FILE = "transactions.csv";
+    private static final String TEST_FILE_PATH = "transactions.csv";
     private static final String INVALID_FILE_PATH = "/invalid_path/fruit";
-    private static final File validCsvFile = new File(VALID_INPUT_FILE);
     private static final String[] VALID_INPUT_DATA =
             {"type,fruit,quantity",
                     "b,banana,20",
@@ -37,16 +36,16 @@ public class FileReaderServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
-        Files.deleteIfExists(Path.of(VALID_INPUT_FILE));
+    public void clearResults() throws Exception {
+        Files.deleteIfExists(Path.of(TEST_FILE_PATH));
     }
 
     @Test
     public void readFile_getListOfStringsFromValidFile_Ok() throws IOException {
-        Path filePath = validCsvFile.toPath();
-        Files.write(filePath, List.of(VALID_INPUT_DATA));
+        File file = new File(TEST_FILE_PATH);
+        Files.write(file.toPath(), List.of(VALID_INPUT_DATA));
 
-        List<String> actual = fileReaderService.readFile(validCsvFile.getPath());
+        List<String> actual = fileReaderService.readFile(file.getPath());
         assertEquals("Test failed! The method must return the input file's correct List<String>.",
                 EXPECTED_RESULT, actual);
     }

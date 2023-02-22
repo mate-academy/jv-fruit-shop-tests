@@ -12,7 +12,7 @@ public class ReportServiceImpl implements ReportService {
             throw new RuntimeException("Check your storage. It's something wrong with him");
         }
         StringBuilder builder = new StringBuilder("fruit,quantity");
-        if (storage.isEmpty()){
+        if (storage.isEmpty()) {
             builder.append(System.lineSeparator()).append("Storage is empty");
             return builder.toString();
         }
@@ -27,7 +27,7 @@ public class ReportServiceImpl implements ReportService {
                 .collect(Collectors.joining(System.lineSeparator()));
     }
 
-    private String parseToString(Map.Entry<String, Integer> entry){
+    private String parseToString(Map.Entry<String, Integer> entry) {
         StringBuilder builder = new StringBuilder();
         builder.append(entry.getKey()).append(",").append(entry.getValue());
         return builder.toString();

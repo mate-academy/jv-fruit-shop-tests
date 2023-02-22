@@ -10,13 +10,12 @@ import core.basesyntax.service.transaction.PurchaseTransactionHandler;
 import core.basesyntax.service.transaction.ReturnTransactionHandler;
 import core.basesyntax.service.transaction.SupplyTransactionHandler;
 import core.basesyntax.service.transaction.TransactionHandler;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TransactionStrategyImplTest {
 
@@ -45,9 +44,11 @@ public class TransactionStrategyImplTest {
         Transaction transaction = new Transaction(Operation.BALANCE, "banana", 20);
         transactionStrategy.handleOperation(transaction);
         Integer actualValue = Storage.fruitStorage.get("banana");
-        Assert.assertTrue("Test failed! Storage should has banana", Storage.fruitStorage.containsKey("banana"));
+        Assert.assertTrue("Test failed! Storage should has banana",
+                Storage.fruitStorage.containsKey("banana"));
         Assert.assertEquals("There are " + actualValue + " numbers of "
-                + transaction.getFruitName() + "but should be " + expectedValue, expectedValue, actualValue);
+                + transaction.getFruitName() + "but should be " + expectedValue,
+                expectedValue, actualValue);
     }
 
     @Test(expected = RuntimeException.class)

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FruitShopService;
@@ -12,12 +13,13 @@ import core.basesyntax.service.transaction.SupplyTransactionHandler;
 import core.basesyntax.service.transaction.TransactionHandler;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FruitShopServiceImplTest {
     private static Map<Operation, TransactionHandler> handlerMap;
@@ -63,5 +65,10 @@ public class FruitShopServiceImplTest {
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 30));
         transactions.add(new Transaction(Operation.PURCHASE, "apple", 50));
         shopService.processTransactions(transactions);
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        Storage.fruitStorage.clear();
     }
 }

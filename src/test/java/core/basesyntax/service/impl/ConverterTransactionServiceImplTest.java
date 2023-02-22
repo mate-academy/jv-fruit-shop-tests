@@ -2,20 +2,20 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConverterTransactionServiceImplTest {
     private static ConverterTransactionServiceImpl converterService;
     private static List<String> lineFromFile;
 
     @BeforeClass
-    public static void beforeClass(){
+    public static void beforeClass() {
         converterService = new ConverterTransactionServiceImpl();
         lineFromFile = new ArrayList<>();
     }

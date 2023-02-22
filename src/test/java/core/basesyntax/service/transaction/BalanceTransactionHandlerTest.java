@@ -5,6 +5,7 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,9 +26,15 @@ public class BalanceTransactionHandlerTest {
         Integer expected = 100;
         Transaction transaction = new Transaction(Operation.BALANCE, FRUIT_NAME, 100);
         handler.handle(transaction);
-        Assert.assertTrue("The storage should contain " + FRUIT_NAME, Storage.fruitStorage.containsKey(FRUIT_NAME));
+        Assert.assertTrue("The storage should contain " + FRUIT_NAME,
+                Storage.fruitStorage.containsKey(FRUIT_NAME));
         Integer actual = Storage.fruitStorage.get(FRUIT_NAME);
         Assert.assertEquals("Expected numbers of " + FRUIT_NAME + " is " + expected
                 + " but actual is " + actual, expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

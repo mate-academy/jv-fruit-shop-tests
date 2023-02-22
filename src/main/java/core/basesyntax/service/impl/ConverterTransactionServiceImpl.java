@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ConverterService;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,8 +34,9 @@ public class ConverterTransactionServiceImpl implements ConverterService {
     }
 
     private void isValid(String[] line) {
-        if(line.length != 3) {
-            throw new RuntimeException("Line " + Arrays.toString(line) + " doesn't consist of 3 elements");
+        if (line.length != 3) {
+            throw new RuntimeException("Line " + Arrays.toString(line)
+                    + " doesn't consist of 3 elements");
         }
         int quantity;
         try {

@@ -20,15 +20,9 @@ public class PurchaseTransactionHandlerTest {
         handler = new PurchaseTransactionHandler(storageDao);
     }
 
-    @Test
-    public void handle_validTransaction_ok() {
-        Storage.fruitStorage.put("banana", 200);
-        Transaction transaction = new Transaction(Operation.PURCHASE, FRUIT_NAME, 100);
-        handler.handle(transaction);
-    }
-
     @Test(expected = RuntimeException.class)
     public void handle_fruitNotEnough_notOk() {
+        Storage.fruitStorage.put(FRUIT_NAME, 50);
         Transaction transaction = new Transaction(Operation.PURCHASE, FRUIT_NAME, 100);
         handler.handle(transaction);
     }
@@ -39,8 +33,15 @@ public class PurchaseTransactionHandlerTest {
         handler.handle(transaction);
     }
 
+    @Test
+    public void handle_validTransaction_ok() {
+        Storage.fruitStorage.put("banana", 200);
+        Transaction transaction = new Transaction(Operation.PURCHASE, FRUIT_NAME, 100);
+        handler.handle(transaction);
+    }
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         Storage.fruitStorage.clear();
     }
 }

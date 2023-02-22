@@ -1,11 +1,10 @@
 package core.basesyntax.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CsvFileReaderServiceImplTest {
     private static final String EMPTY_FILE_NAME = "";

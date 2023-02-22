@@ -45,7 +45,7 @@ public class ReturnTransactionHandlerTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         Storage.fruitStorage.clear();
     }
 }

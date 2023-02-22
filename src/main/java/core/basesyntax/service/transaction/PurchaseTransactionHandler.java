@@ -18,7 +18,8 @@ public class PurchaseTransactionHandler implements TransactionHandler {
 
     private int isEnoughFruit(Transaction transaction) {
         if (!storageDao.getFruitsFromStorage().containsKey(transaction.getFruitName())) {
-            throw new RuntimeException(transaction.getFruitName() + " doesn't exist at the storage");
+            throw new RuntimeException(transaction.getFruitName()
+                    + " doesn't exist at the storage");
         }
         Integer currentQuantity = storageDao.getFruitsFromStorage()
                 .get(transaction.getFruitName());

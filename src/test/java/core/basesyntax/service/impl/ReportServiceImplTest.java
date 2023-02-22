@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,16 +23,16 @@ public class ReportServiceImplTest {
         expected.append(System.lineSeparator()).append("banana,20")
             .append(System.lineSeparator()).append("apple,30");
         String actual = reportService.getReport(Storage.fruitStorage);
-        Assert.assertEquals("Test failed! Expected: "+ System.lineSeparator() + expected
-                        + System.lineSeparator() + " but actual is " + System.lineSeparator() + actual,
-                expected.toString(), actual);
+        Assert.assertEquals("Test failed! Expected: " + System.lineSeparator() + expected
+                        + System.lineSeparator() + " but actual is " + System.lineSeparator()
+                        + actual, expected.toString(), actual);
     }
 
     @Test
     public void getReport_EmptyStorage_ok() {
         String expected = "fruit,quantity" + System.lineSeparator() + "Storage is empty";
         String actual = reportService.getReport(Storage.fruitStorage);
-        Assert.assertEquals("Test failed! Expected: "+ System.lineSeparator() + expected
+        Assert.assertEquals("Test failed! Expected: " + System.lineSeparator() + expected
                 + System.lineSeparator() + " but actual is " + System.lineSeparator() + actual,
                 expected, actual);
     }
@@ -39,5 +40,10 @@ public class ReportServiceImplTest {
     @Test(expected = RuntimeException.class)
     public void getReport_nullValue_notOk() {
         reportService.getReport(null);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

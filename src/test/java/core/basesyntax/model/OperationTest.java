@@ -1,12 +1,10 @@
 package core.basesyntax.model;
 
+import java.util.NoSuchElementException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.NoSuchElementException;
-
 public class OperationTest {
-
     @Test(expected = NoSuchElementException.class)
     public void getByCode_nullValue_notOk() {
         Operation.getByCode(null);

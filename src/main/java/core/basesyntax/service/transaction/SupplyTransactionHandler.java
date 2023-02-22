@@ -12,9 +12,17 @@ public class SupplyTransactionHandler implements TransactionHandler {
 
     @Override
     public void handle(Transaction transaction) {
+        if (!isContain(transaction)) {
+            storageDao.updateStorage(transaction.getFruitName(), transaction.getQuantity());
+            return;
+        }
         Integer currentQuantity = storageDao.getFruitsFromStorage()
                 .get(transaction.getFruitName());
         storageDao.updateStorage(transaction.getFruitName(), transaction.getQuantity()
                 + currentQuantity);
+    }
+
+    private boolean isContain(Transaction transaction) {
+        return storageDao.getFruitsFromStorage().containsKey(transaction.getFruitName());
     }
 }

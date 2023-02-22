@@ -8,6 +8,9 @@ import java.io.IOException;
 public class CsvFileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String report, String fileName) {
+        if (report == null) {
+            throw new RuntimeException("Report is null");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(report);
         } catch (IOException e) {

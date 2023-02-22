@@ -13,11 +13,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandleStrategyImplTest {
-    private static BalanceOperationHandleImpl testBalanceStrategy;
-    private static ReturnOperationHandleImpl testReturnStrategy;
-    private static SupplyOperationHandleImpl testSupplyStrategy;
+    private static BalanceOperationHandleImpl balanceStrategy;
+    private static ReturnOperationHandleImpl returnStrategy;
+    private static SupplyOperationHandleImpl supplyStrategy;
     private static PurchaseOperationHandleImpl testPurchaseStrategy;
-    private static Map<Operation, OperationHandler> testOperationHandler;
     private static OperationHandleStrategyImpl operationHandlerStrategy;
     private static final int BALANCE = 100;
     private static final int COUNT = 10;
@@ -28,18 +27,18 @@ public class OperationHandleStrategyImplTest {
 
     @BeforeClass
     public static void setUp() {
-        testBalanceStrategy = new BalanceOperationHandleImpl();
+        balanceStrategy = new BalanceOperationHandleImpl();
         testPurchaseStrategy = new PurchaseOperationHandleImpl();
-        testSupplyStrategy = new SupplyOperationHandleImpl();
-        testReturnStrategy = new ReturnOperationHandleImpl();
-        testOperationHandler = new HashMap<>();
-        testOperationHandler.put(Operation.BALANCE, new BalanceOperationHandleImpl());
-        operationHandlerStrategy = new OperationHandleStrategyImpl(testOperationHandler);
+        supplyStrategy = new SupplyOperationHandleImpl();
+        returnStrategy = new ReturnOperationHandleImpl();
+        Map<Operation, OperationHandler> operationHandler = new HashMap<>();
+        operationHandler.put(Operation.BALANCE, new BalanceOperationHandleImpl());
+        operationHandlerStrategy = new OperationHandleStrategyImpl(operationHandler);
     }
 
     @Test
     public void testBalanceStrategy_ok() {
-        int actual = testBalanceStrategy.apply(BALANCE, COUNT);
+        int actual = balanceStrategy.apply(BALANCE, COUNT);
         int expected = BALANCE_RESULT;
         Assert.assertEquals(expected, actual);
     }
@@ -53,14 +52,14 @@ public class OperationHandleStrategyImplTest {
 
     @Test
     public void tesReturnStrategy_ok() {
-        int actual = testReturnStrategy.apply(BALANCE, COUNT);
+        int actual = returnStrategy.apply(BALANCE, COUNT);
         int expected = RETURN_RESULT;
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void testSupplyStrategy_ok() {
-        int actual = testSupplyStrategy.apply(BALANCE, COUNT);
+        int actual = supplyStrategy.apply(BALANCE, COUNT);
         int expected = SUPPLY_RESULT;
         Assert.assertEquals(expected, actual);
     }

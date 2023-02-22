@@ -10,17 +10,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String FILE_WRITE_TEST =
+    private static final String EXPECTED_FILE_PATH =
             "src/test/java/core/basesyntax/resources/write.csv";
-    private static final String FILE_READ_TEST =
+    private static final String ACTUAL_FILE_PATH =
             "src/test/java/core/basesyntax/resources/read.csv";
     private static final String FILE_NOT_WRITE = "directory/file.csv";
-    private static FileWriter fileWriterTest;
+    private static FileWriter fileWriter;
     private static StringBuilder testReport;
 
     @BeforeClass
     public static void setUp() {
-        fileWriterTest = new FileWriterImpl();
+        fileWriter = new FileWriterImpl();
         testReport = new StringBuilder();
         testReport.append("fruit,quantity")
                 .append(System.lineSeparator())
@@ -31,14 +31,14 @@ public class FileWriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeWrongFile_notOk() {
-        fileWriterTest.writeToFile(testReport.toString(), FILE_NOT_WRITE);
+        fileWriter.writeToFile(testReport.toString(), FILE_NOT_WRITE);
     }
 
     @Test
     public void writeToFile_ok() throws IOException {
-        fileWriterTest.writeToFile(testReport.toString(), FILE_WRITE_TEST);
-        List<String> expected = Files.readAllLines(Path.of(FILE_WRITE_TEST));
-        List<String> actual = Files.readAllLines(Path.of(FILE_READ_TEST));
+        fileWriter.writeToFile(testReport.toString(), EXPECTED_FILE_PATH);
+        List<String> expected = Files.readAllLines(Path.of(ACTUAL_FILE_PATH));
+        List<String> actual = Files.readAllLines(Path.of(EXPECTED_FILE_PATH));
         Assert.assertEquals(expected, actual);
     }
 }

@@ -15,46 +15,48 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionServiceImplTest {
-    private static List<FruitTransaction> testTransactionData;
-    private static Map<Operation, OperationHandler> testDateOperation;
+    private static List<FruitTransaction> transactionData;
+    private static Map<Operation, OperationHandler> dateOperation;
     private static OperationHandlerStrategy testStrategy;
-    private static TransactionService testTransaction;
+    private static TransactionService transactionService;
     private static Fruit banana;
 
     @BeforeClass
     public static void setUp() {
         banana = new Fruit("banana");
-        testTransactionData = new ArrayList<>();
-        testTransactionData.add(new FruitTransaction(Operation.BALANCE, banana, 100));
-        testTransactionData.add(new FruitTransaction(Operation.SUPPLY, banana, 100));
-        testDateOperation = new HashMap<>();
-        testDateOperation.put(Operation.BALANCE, new BalanceOperationHandleImpl());
-        testDateOperation.put(Operation.SUPPLY, new SupplyOperationHandleImpl());
-        testStrategy = new OperationHandleStrategyImpl(testDateOperation);
-        testTransaction = new TransactionServiceImpl(testStrategy);
+        transactionData = new ArrayList<>();
+        transactionData.add(new FruitTransaction(Operation.BALANCE, banana, 100));
+        transactionData.add(new FruitTransaction(Operation.SUPPLY, banana, 100));
+        dateOperation = new HashMap<>();
+        dateOperation.put(Operation.BALANCE, new BalanceOperationHandleImpl());
+        dateOperation.put(Operation.SUPPLY, new SupplyOperationHandleImpl());
+        testStrategy = new OperationHandleStrategyImpl(dateOperation);
+        transactionService = new TransactionServiceImpl(testStrategy);
     }
 
-    @Before
-    public void beforeAll() {
+    @After
+    public void clearStorage() {
         FruitStorage.fruitStorage.remove(banana);
     }
 
     @Test
     public void setTestTransaction_ok() {
         int expected = 200;
-        testTransaction.transferToStorage(testTransactionData);
+        transactionService.transferToStorage(transactionData);
         int actual = FruitStorage.fruitStorage.get(banana);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void setEmptyTransaction_ok() {
-        testTransaction.transferToStorage(Collections.emptyList());
+        transactionService.transferToStorage(Collections.emptyList());
     }
 }

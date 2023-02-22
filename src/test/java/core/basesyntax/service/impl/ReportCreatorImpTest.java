@@ -17,7 +17,7 @@ public class ReportCreatorImpTest {
     }
 
     @Test
-    public void reportGenerate_Ok() {
+    public void reportCreate_Ok() {
         FruitStorage.put("banana", 70);
         FruitStorage.put("apple", 30);
         String expectedResult = "fruit,amount" + System.lineSeparator() + "banana,70"
@@ -27,7 +27,7 @@ public class ReportCreatorImpTest {
     }
 
     @Test
-    public void reportGenerate_EmptyData_Ok() {
+    public void reportCreate_EmptyData_Ok() {
         String actualResult = reportCreator.createReport();
         String expecteResult = "fruit,amount";
         assertEquals(expecteResult, actualResult);

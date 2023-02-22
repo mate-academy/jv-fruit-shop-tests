@@ -16,7 +16,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void getByWrongCode_inValidData_NotOk() {
+    public void getByCode_Wrong_inValidData_NotOk() {
         String code = "w";
         Exception exception = assertThrows(RuntimeException.class,
                 () -> FruitTransaction.Operation.getByCode(code));

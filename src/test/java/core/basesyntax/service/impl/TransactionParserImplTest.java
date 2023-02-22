@@ -36,7 +36,7 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void parseListWrongOperation_NotOk() {
+    public void parseList_WrongOperation_NotOk() {
         Exception exception = assertThrows(RuntimeException.class,
                 () -> parser.parseList(INVALID_OPERATION_IN_DATA));
         String expectedMessage = "Invalid input data";

@@ -20,7 +20,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void addToStoragePurchaseOperationHandler_Ok() {
+    public void handle_addToStoragePurchaseHandler_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 10);
         purchaseHandler.handle(fruitTransaction);
@@ -30,7 +30,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void addToStoragePurchaseOperationHandler_notOk() {
+    public void handle_PurchaseMoreThanInStorage_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 110);
         purchaseHandler.handle(fruitTransaction);

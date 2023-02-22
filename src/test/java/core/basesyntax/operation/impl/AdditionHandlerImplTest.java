@@ -17,7 +17,7 @@ public class AdditionHandlerImplTest {
     }
 
     @Test
-    public void operate_validDataReturnAndSupply_ok() {
+    public void handle_validDataReturnAndSupply_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY, "banana", 10);
         FruitStorage.fruitStorage.clear();

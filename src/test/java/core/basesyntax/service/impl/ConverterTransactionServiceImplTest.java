@@ -42,7 +42,7 @@ public class ConverterTransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void convertFromString_lessThenZeroQuantity_notOk() {
+    public void convertFromString_negativeQuantity_notOk() {
         List<String> invalidValue = new ArrayList<>();
         invalidValue.add("fruit, quantity");
         invalidValue.add("b,banana,-2");
@@ -50,7 +50,7 @@ public class ConverterTransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void convertFromString_lineLessThan3_notOk() {
+    public void convertFromString_incorrectNumbersOfColumns_notOk() {
         List<String> invalidValue = new ArrayList<>();
         invalidValue.add("fruit, quantity");
         invalidValue.add("first");

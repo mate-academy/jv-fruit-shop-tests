@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -44,7 +45,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void processTransactions_firstTransactionPurchase_ok() {
+    public void processTransactions_firstTransactionPurchase_notOk() {
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 30));
         transactions.add(new Transaction(Operation.BALANCE, "banana", 30));
@@ -65,6 +66,18 @@ public class FruitShopServiceImplTest {
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 30));
         transactions.add(new Transaction(Operation.PURCHASE, "apple", 50));
         shopService.processTransactions(transactions);
+        Assert.assertTrue("Test failed! Storage must contain a banana",
+                Storage.fruitStorage.containsKey("banana"));
+        Assert.assertTrue("Test failed! Storage must contain an apple",
+                Storage.fruitStorage.containsKey("apple"));
+        Integer expectedBanana = 40;
+        Integer expectedApple = 50;
+        Integer actualBanana = Storage.fruitStorage.get("banana");
+        Integer actualApple = Storage.fruitStorage.get("apple");
+        Assert.assertEquals("There should be " + expectedBanana + " banana but actual is "
+                + actualBanana, expectedBanana, actualBanana);
+        Assert.assertEquals("There should be " + expectedApple + " apple but actual is "
+                + actualApple, expectedApple, actualApple);
     }
 
     @AfterClass

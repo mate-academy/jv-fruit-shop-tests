@@ -35,8 +35,6 @@ public class CsvTransactionsParserImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        csvTransactionsParser = new CsvTransactionsParserImpl();
-
         transactions = new ArrayList<>();
         transactions.addAll(List.of(VALID_STRING_TRANSACTIONS));
 
@@ -49,6 +47,7 @@ public class CsvTransactionsParserImplTest {
 
     @Before
     public void setUp() {
+        csvTransactionsParser = new CsvTransactionsParserImpl();
         invalidFruitTransactions = new ArrayList<>();
         invalidFruitTransactions.add(TITLE_IN_CSV);
     }

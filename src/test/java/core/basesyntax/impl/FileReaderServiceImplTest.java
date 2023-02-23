@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
@@ -31,8 +31,8 @@ public class FileReaderServiceImplTest {
                     "s,banana,100",
                     "p,banana,13");
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         fileReaderService = new FileReaderServiceImpl();
     }
 

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
@@ -17,8 +17,8 @@ public class FileWriterServiceImplTest {
     private static final String INVALID_RESULT_FILE_PATH = "/invalid/path/test.txt";
     private static final String TEST_DATA = "Hello World!";
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void setUp() {
         fileWriterService = new FileWriterServiceImpl();
     }
 

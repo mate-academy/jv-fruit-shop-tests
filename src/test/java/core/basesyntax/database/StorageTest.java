@@ -17,23 +17,45 @@ public class StorageTest {
     }
 
     @Test
-    public void getFruitStorage_putAndGetFromStorage_Ok() {
-        Storage.getFruitStorage().put(FRUIT, FIRST_QUANTITY);
+    public void getFruitStorage_get() {
+        //arrange
+        String errorMessage = String.format("Wrong value for the key \"%s\":", FRUIT);
+        int expectedQuantity = FIRST_QUANTITY;
+        Storage.getFruitStorage().put(FRUIT, expectedQuantity);
 
-        assertEquals("Test failed! The storage should return the value \""
-                        + FIRST_QUANTITY + "\" with the key \"" + FRUIT + "\"",
-                FIRST_QUANTITY, Storage.getFruitStorage()
-                        .getOrDefault(FRUIT, DEFAULT_QUANTITY).intValue());
+        //act
+        int actualQuantity = Storage.getFruitStorage().getOrDefault(FRUIT, DEFAULT_QUANTITY);
+
+        //assert
+        assertEquals(errorMessage, expectedQuantity, actualQuantity);
     }
 
     @Test
-    public void getFruitStorage_putAndUpdateExistingFruit_Ok() {
+    public void getFruitStorage_updateExistent() {
+        //arrange
+        int expectedQuantity = FIRST_QUANTITY + SECOND_QUANTITY;
         Storage.getFruitStorage().put(FRUIT, FIRST_QUANTITY);
-        Storage.getFruitStorage().merge(FRUIT, SECOND_QUANTITY, Integer::sum);
 
-        assertEquals("Test failed! The value in the storage should have been updated to be: "
-                        + (FIRST_QUANTITY + SECOND_QUANTITY),
-                FIRST_QUANTITY + SECOND_QUANTITY,
-                Storage.getFruitStorage().getOrDefault(FRUIT, DEFAULT_QUANTITY).intValue());
+        //act
+        Storage.getFruitStorage().merge(FRUIT, SECOND_QUANTITY, Integer::sum);
+        int actualQuantity = Storage.getFruitStorage().getOrDefault(FRUIT, DEFAULT_QUANTITY);
+
+        //assert
+        assertEquals("Wrong value in the storage after updating:",
+                expectedQuantity, actualQuantity);
+    }
+
+    @Test
+    public void getFruitStorage_updateNonExistent() {
+        //arrange
+        int expectedQuantity = SECOND_QUANTITY;
+
+        //act
+        Storage.getFruitStorage().merge(FRUIT, expectedQuantity, Integer::sum);
+        int actualQuantity = Storage.getFruitStorage().getOrDefault(FRUIT, DEFAULT_QUANTITY);
+
+        //assert
+        assertEquals("Wrong value in the storage after updating:",
+                expectedQuantity, actualQuantity);
     }
 }

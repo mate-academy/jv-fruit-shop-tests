@@ -17,15 +17,13 @@ import org.junit.Test;
 public class FruitShopServiceImplTest {
     private static OperationStrategy mockOperationStrategy;
     private static FruitShopService fruitShopService;
-    private static List<FruitTransaction> fruitTransactions;
     private static FruitTransaction first_transaction;
     private static FruitTransaction second_transaction;
 
     @BeforeClass
     public static void beforeClass() {
         first_transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10);
-        second_transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 10);
-        fruitTransactions = List.of(first_transaction, second_transaction);
+        second_transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 10);
     }
 
     @Before
@@ -36,20 +34,29 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void processTransactions_EmptyList_Ok() {
+        //act
         fruitShopService.processTransactions(Collections.emptyList());
+
+        //assert
         verifyNoInteractions(mockOperationStrategy);
     }
 
     @Test
     public void processTransactions_SingleTransaction_Ok() {
+        //act
         fruitShopService.processTransactions(Collections.singletonList(first_transaction));
+
+        //assert
         verify(mockOperationStrategy).handleOperation(first_transaction);
         verifyNoMoreInteractions(mockOperationStrategy);
     }
 
     @Test
     public void processTransactions_ListOfTransactions_Ok() {
+        //act
         fruitShopService.processTransactions(List.of(first_transaction, second_transaction));
+
+        //assert
         verify(mockOperationStrategy).handleOperation(first_transaction);
         verify(mockOperationStrategy).handleOperation(second_transaction);
         verifyNoMoreInteractions(mockOperationStrategy);

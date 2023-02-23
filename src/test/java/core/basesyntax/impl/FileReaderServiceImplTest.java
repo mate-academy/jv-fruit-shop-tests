@@ -1,5 +1,6 @@
 package core.basesyntax.impl;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -42,18 +43,26 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFile_getListOfStringsFromValidFile_Ok() throws IOException {
+        //arrange
         File file = new File(TEST_FILE_PATH);
         Files.write(file.toPath(), List.of(VALID_INPUT_DATA));
 
+        //act
         List<String> actual = fileReaderService.readFile(file.getPath());
-        assertEquals("Test failed! The method must return the input file's correct List<String>.",
-                EXPECTED_RESULT, actual);
+
+        //assert
+        assertEquals("The list size from file is incorrect:",
+                EXPECTED_RESULT.size(), actual.size());
+        assertArrayEquals("The list from file is incorrect:",
+                EXPECTED_RESULT.toArray(), actual.toArray());
     }
 
     @Test(expected = RuntimeException.class)
     public void readFile_readInvalidFilePath_NotOk() {
+        //act
         fileReaderService.readFile(INVALID_FILE_PATH);
-        fail("Test failed! The method must throw " + RuntimeException.class
-                + " if the file does not exist");
+
+        //assert
+        fail("Expected the file does not exist.");
     }
 }

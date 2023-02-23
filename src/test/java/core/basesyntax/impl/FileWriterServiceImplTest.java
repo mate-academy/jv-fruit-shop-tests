@@ -29,20 +29,25 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void writeToFile_writeDataInToFilePath_Ok() {
+        //arrange
         String expected = TEST_DATA;
-        fileWriterService.writeToFile(TEST_DATA, RESULT_FILE_PATH);
+
+        //act
+        fileWriterService.writeToFile(expected, RESULT_FILE_PATH);
         String actual = readFromFile(RESULT_FILE_PATH).trim();
 
-        assertEquals("Test failed! Method should be create new file: "
-                        + TEST_DATA + ", and write inside data: " + TEST_DATA,
+        //assert
+        assertEquals("Incorrect data after writing operation: ",
                 expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_writeToInvalidPath_NotOk() {
+        //act
         fileWriterService.writeToFile(TEST_DATA, INVALID_RESULT_FILE_PATH);
-        fail("Test failed! The method must throw " + RuntimeException.class
-                + " if method can't write data to file");
+
+        //assert
+        fail("Writing to an invalid data path is not allowed.");
     }
 
     private String readFromFile(String fileName) {

@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportService;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String TITLE = "fruit,quantity\n";
+    private static final String TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String DATA_SEPARATOR = ",";
 
     @Override

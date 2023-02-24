@@ -1,17 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReader;
-import org.junit.Before;
-import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
+import core.basesyntax.service.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
+
 public class FileReaderImplTest {
+    private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
+    private static final String WRONG_INPUT_FILE_NAME = "src/main/resources/inpur.csv";
     private FileReader fileReader;
-    private String INPUT_FILE_NAME = "src/main/resources/input.csv";
-    private String WRONG_INPUT_FILE_NAME = "src/main/resources/inpur.csv";
 
     @Before
     public void setUp() {
@@ -34,14 +35,14 @@ public class FileReaderImplTest {
     }
 
     @Test
-    public void readWrongFileName_notOk() {
+    public void read_wrongFileName_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read(WRONG_INPUT_FILE_NAME);
         });
     }
 
     @Test
-    public void readNullFileName_notOk() {
+    public void read_nullFileName_notOk() {
         assertThrows(RuntimeException.class, () -> {
             fileReader.read(null);
         });

@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import static core.basesyntax.db.Warehouse.warehouse;
+
 import core.basesyntax.db.Warehouse;
 import java.util.Map;
 

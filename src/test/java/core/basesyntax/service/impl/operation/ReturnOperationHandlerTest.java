@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl.operation;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.dao.WarehouseDao;
 import core.basesyntax.dao.WarehouseDaoImpl;
 import core.basesyntax.db.Warehouse;
@@ -7,9 +10,6 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 public class ReturnOperationHandlerTest {
     private WarehouseDao warehouseDao;
@@ -32,7 +32,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void return_ok() {
+    public void handle_return_ok() {
         transaction.setQuantity(25);
         int expected = Warehouse.warehouse.get("banana") + transaction.getQuantity();
         returnOperationHandler.handle(transaction);
@@ -41,7 +41,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnNegativeQuantity_notOk() {
+    public void handle_returnNegativeQuantity_notOk() {
         transaction.setQuantity(-50);
         assertThrows(RuntimeException.class, () -> {
             returnOperationHandler.handle(transaction);
@@ -49,14 +49,14 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnNullTransaction_notOk() {
+    public void handle_returnNullTransaction_notOk() {
         assertThrows(RuntimeException.class, () -> {
             returnOperationHandler.handle(null);
         });
     }
 
     @Test
-    public void returnNewFruit_ok() {
+    public void handle_returnNewFruit_ok() {
         transaction.setFruit("apple");
         transaction.setQuantity(25);
         int expected = transaction.getQuantity();

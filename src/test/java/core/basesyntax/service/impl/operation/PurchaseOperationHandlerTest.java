@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl.operation;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.dao.WarehouseDao;
 import core.basesyntax.dao.WarehouseDaoImpl;
 import core.basesyntax.db.Warehouse;
@@ -7,11 +10,6 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 public class PurchaseOperationHandlerTest {
     private WarehouseDao warehouseDao;
@@ -34,7 +32,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void sale_ok() {
+    public void handle_sale_ok() {
         transaction.setQuantity(20);
         int expected = Warehouse.warehouse.get("banana") - transaction.getQuantity();
         purchaseOperationHandler.handle(transaction);
@@ -43,7 +41,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void saleNegativeQuantity_notOk() {
+    public void handle_saleNegativeQuantity_notOk() {
         transaction.setQuantity(-50);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);
@@ -51,7 +49,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void saleZeroQuantity_notOk() {
+    public void handle_saleZeroQuantity_notOk() {
         transaction.setQuantity(0);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);
@@ -59,7 +57,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void saleSuperiorQuantity_notOk() {
+    public void handle_saleSuperiorQuantity_notOk() {
         transaction.setQuantity(50);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);
@@ -67,7 +65,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void fruitNull_notOk() {
+    public void handle_fruitNull_notOk() {
         transaction.setFruit(null);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);
@@ -75,7 +73,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void transactionNull_notOk() {
+    public void handle_transactionNull_notOk() {
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(null);
         });

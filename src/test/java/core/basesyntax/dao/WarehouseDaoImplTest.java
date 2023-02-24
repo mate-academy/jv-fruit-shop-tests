@@ -1,13 +1,15 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.db.Warehouse;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class WarehouseDaoImplTest {
     private WarehouseDao warehouseDao;
@@ -15,7 +17,7 @@ public class WarehouseDaoImplTest {
     private Integer quantity;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         warehouseDao = new WarehouseDaoImpl();
         fruit = "banana";
         quantity = 20;
@@ -57,7 +59,7 @@ public class WarehouseDaoImplTest {
     }
 
     @Test
-    public void getQuantity_notOk() {
+    public void getQuantity_nullQuantity_notOk() {
         assertThrows(RuntimeException.class, () -> {
             warehouseDao.getQuantity(null);
         });
@@ -72,11 +74,10 @@ public class WarehouseDaoImplTest {
     }
 
     @Test
-    public void getLeftovers() {
+    public void getLeftovers_ok() {
         Warehouse.warehouse.put(fruit, quantity);
         Warehouse.warehouse.put("apple", 30);
         Map<String, Integer> leftovers = warehouseDao.getLeftovers();
         assertEquals(Warehouse.warehouse, leftovers);
-
     }
 }

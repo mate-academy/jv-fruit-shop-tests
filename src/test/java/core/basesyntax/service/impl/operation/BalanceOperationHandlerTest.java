@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl.operation;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.dao.WarehouseDao;
 import core.basesyntax.dao.WarehouseDaoImpl;
 import core.basesyntax.db.Warehouse;
@@ -7,9 +10,6 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 public class BalanceOperationHandlerTest {
     private WarehouseDao warehouseDao;
@@ -31,7 +31,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void setBalance_ok() {
+    public void handle_setBalance_ok() {
         transaction.setQuantity(20);
         balanceOperationHandler.handle(transaction);
         int expected = transaction.getQuantity();
@@ -40,11 +40,10 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void setBalance_negativeQuantity_notOk() {
+    public void handle_setBalance_negativeQuantity_notOk() {
         transaction.setQuantity(-15);
         assertThrows(RuntimeException.class, () -> {
             balanceOperationHandler.handle(transaction);
         });
-
     }
 }

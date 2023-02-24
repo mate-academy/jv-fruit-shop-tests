@@ -11,12 +11,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private static final FruitTransaction.Operation BALANCE_OPERATION = FruitTransaction.Operation.BALANCE;
-    private static final FruitTransaction.Operation RETURN_OPERATION = FruitTransaction.Operation.RETURN;
+    private static final FruitTransaction.Operation BALANCE_OPERATION =
+            FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation RETURN_OPERATION =
+            FruitTransaction.Operation.RETURN;
     private OperationHandler mockOperationHandler;
-    private final FruitTransaction FIRST_FRUITTRANSACTION =
+    private final FruitTransaction firstFruittransaction =
             new FruitTransaction(BALANCE_OPERATION, "banana", 70);
-    private final FruitTransaction SECOND_FRUITTRANSACTION =
+    private final FruitTransaction secondFruittransaction =
             new FruitTransaction(RETURN_OPERATION, "banana", 30);
     private OperationStrategy operationStrategy;
 
@@ -32,18 +34,18 @@ public class OperationStrategyTest {
     @Test
     public void handleOperation_validBalanceTransaction_Ok() {
         //act
-        operationStrategy.handleOperation(FIRST_FRUITTRANSACTION);
+        operationStrategy.handleOperation(firstFruittransaction);
 
         //assert
-        verify(mockOperationHandler).handleOperation(FIRST_FRUITTRANSACTION);
+        verify(mockOperationHandler).handleOperation(firstFruittransaction);
     }
 
     @Test
     public void handleOperation_validReturnTransaction_Ok() {
         //act
-        operationStrategy.handleOperation(SECOND_FRUITTRANSACTION);
+        operationStrategy.handleOperation(secondFruittransaction);
 
         //assert
-        verify(mockOperationHandler).handleOperation(SECOND_FRUITTRANSACTION);
+        verify(mockOperationHandler).handleOperation(secondFruittransaction);
     }
 }

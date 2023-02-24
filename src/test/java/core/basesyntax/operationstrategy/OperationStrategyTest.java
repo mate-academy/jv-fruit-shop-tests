@@ -11,29 +11,39 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class OperationStrategyTest {
-    private static final String FRUIT = "banana";
-    private static final Integer QUANTITY = 30;
-    private static final FruitTransaction.Operation OPERATION = FruitTransaction.Operation.BALANCE;
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static final FruitTransaction.Operation BALANCE_OPERATION = FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation RETURN_OPERATION = FruitTransaction.Operation.RETURN;
     private OperationHandler mockOperationHandler;
-    private FruitTransaction fruitTransaction;
+    private final FruitTransaction FIRST_FRUITTRANSACTION =
+            new FruitTransaction(BALANCE_OPERATION, "banana", 70);
+    private final FruitTransaction SECOND_FRUITTRANSACTION =
+            new FruitTransaction(RETURN_OPERATION, "banana", 30);
     private OperationStrategy operationStrategy;
 
     @Before
     public void setUp() {
-        operationHandlerMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         mockOperationHandler = mock(OperationHandler.class);
-        operationHandlerMap.put(OPERATION, mockOperationHandler);
-        fruitTransaction = new FruitTransaction(OPERATION, FRUIT, QUANTITY);
+        operationHandlerMap.put(BALANCE_OPERATION, mockOperationHandler);
+        operationHandlerMap.put(RETURN_OPERATION, mockOperationHandler);
         operationStrategy = new OperationStrategy(operationHandlerMap);
     }
 
     @Test
-    public void handleOperation_validTransaction_Ok() {
+    public void handleOperation_validBalanceTransaction_Ok() {
         //act
-        operationStrategy.handleOperation(fruitTransaction);
+        operationStrategy.handleOperation(FIRST_FRUITTRANSACTION);
 
         //assert
-        verify(mockOperationHandler).handleOperation(fruitTransaction);
+        verify(mockOperationHandler).handleOperation(FIRST_FRUITTRANSACTION);
+    }
+
+    @Test
+    public void handleOperation_validReturnTransaction_Ok() {
+        //act
+        operationStrategy.handleOperation(SECOND_FRUITTRANSACTION);
+
+        //assert
+        verify(mockOperationHandler).handleOperation(SECOND_FRUITTRANSACTION);
     }
 }

@@ -41,7 +41,6 @@ public class ReportServiceImplTest {
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,50" + System.lineSeparator()
                 + "apple,200" + System.lineSeparator();
-
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
         //act

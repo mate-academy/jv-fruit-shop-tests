@@ -9,9 +9,11 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.MockedStatic;
 
 public class BalanceOperationTest {
     private static OperationHandler operationHandler;
@@ -19,10 +21,11 @@ public class BalanceOperationTest {
     private static final Integer FIRST_QUANTITY = 50;
     private static final Integer SECOND_QUANTITY = 150;
     private static Map<String, Integer> fruitStorage;
+    private static MockedStatic<Storage> mockStorage;
 
     @BeforeClass
     public static void beforeClass() {
-        mockStatic(Storage.class);
+        mockStorage = mockStatic(Storage.class);
         fruitStorage = new HashMap<>();
     }
 
@@ -32,8 +35,13 @@ public class BalanceOperationTest {
     }
 
     @After
-    public void tearDown() {
+    public void storageClear() {
         fruitStorage.clear();
+    }
+
+    @AfterClass
+    public static void closeMock() {
+        mockStorage.close();
     }
 
     @Test

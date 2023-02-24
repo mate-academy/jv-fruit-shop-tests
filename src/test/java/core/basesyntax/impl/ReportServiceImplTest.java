@@ -9,17 +9,20 @@ import core.basesyntax.service.ReportService;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.MockedStatic;
 
 public class ReportServiceImplTest {
     private static Map<String, Integer> fruitStorage;
     private static ReportService reportService;
+    private static MockedStatic<Storage> mockStorage;
 
     @BeforeClass
     public static void beforeClass() {
-        mockStatic(Storage.class);
+        mockStorage = mockStatic(Storage.class);
         fruitStorage = new HashMap<>();
     }
 
@@ -31,6 +34,11 @@ public class ReportServiceImplTest {
     @After
     public void clearStorage() {
         fruitStorage.clear();
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        mockStorage.close();
     }
 
     @Test

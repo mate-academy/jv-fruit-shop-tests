@@ -26,7 +26,7 @@ public class ParserServiceImpl implements ParserService {
     }
 
     @Override
-    public List<List<String>> parseDataFromCsv(String inputFilePath) {
+    public List<List<String>> parseInput(String inputFilePath) {
         if (inputFilePath == null) {
             throw new ParserException("Argument must not be null");
         }

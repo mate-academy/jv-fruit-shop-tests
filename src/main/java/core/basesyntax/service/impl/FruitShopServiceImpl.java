@@ -32,7 +32,7 @@ public class FruitShopServiceImpl implements FruitShopService {
         if (inputFilePath == null || outputFilePath == null) {
             throw new FruitShopException("None of the arguments must be null");
         }
-        List<List<String>> parsed = parserService.parseDataFromCsv(inputFilePath);
+        List<List<String>> parsed = parserService.parseInput(inputFilePath);
         parsed.forEach(row -> {
             String operationType = row.get(OPERATION_TYPE_ROW);
             String fruitName = row.get(FRUIT_NAME_ROW);
@@ -41,6 +41,6 @@ public class FruitShopServiceImpl implements FruitShopService {
             fruitsHolderService.putFruit(fruitName,
                     operationStrategy.get(operationType).operation(amount, quantity));
         });
-        reportMakerService.generateReport(fruitsHolderService.getAllFruits(), outputFilePath);
+        reportMakerService.prepareReport(fruitsHolderService.getAllFruits(), outputFilePath);
     }
 }

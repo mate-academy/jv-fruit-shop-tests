@@ -62,7 +62,7 @@ public class ParserServiceImplTest {
     @Test
     public void parseDataFromCsv_argumentIsNull_notOk() {
         try {
-            parserService.parseDataFromCsv(null);
+            parserService.parseInput(null);
         } catch (ParserException e) {
             return;
         }
@@ -72,7 +72,7 @@ public class ParserServiceImplTest {
     @Test
     public void parseDataFromCsv_wrongColumnsFormat_notOk() {
         try {
-            parserService.parseDataFromCsv(PATH_WRONG_COLUMNS_FILE);
+            parserService.parseInput(PATH_WRONG_COLUMNS_FILE);
         } catch (ParserException e) {
             return;
         }
@@ -82,7 +82,7 @@ public class ParserServiceImplTest {
     @Test
     public void parseDataFromCsv_wrongRowFormat_notOk() {
         try {
-            parserService.parseDataFromCsv(PATH_WRONG_ROW_FILE);
+            parserService.parseInput(PATH_WRONG_ROW_FILE);
         } catch (ParserException e) {
             return;
         }
@@ -92,7 +92,7 @@ public class ParserServiceImplTest {
     @Test
     public void parseDataFromCsv_correctData_ok() {
         String actual = VALID_FILE_TITLE
-                + parserService.parseDataFromCsv(PATH_CORRECT_FILE).stream()
+                + parserService.parseInput(PATH_CORRECT_FILE).stream()
                     .map(l -> l.stream().collect(Collectors.joining(COLUMNS_DELIMITER)))
                     .collect(Collectors.joining(System.lineSeparator()));
         assertEquals("Read data must match", CONTENT_CORRECT_FILE, actual);

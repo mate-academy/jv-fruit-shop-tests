@@ -42,7 +42,7 @@ public class ReportMakerServiceImplTest {
     @Test
     public void generateReport_argumentsNull_notOk() {
         try {
-            reportMakerService.generateReport(null, null);
+            reportMakerService.prepareReport(null, null);
         } catch (ReportMakerException e) {
             return;
         }
@@ -52,7 +52,7 @@ public class ReportMakerServiceImplTest {
     @Test
     public void generateReport_firstArgumentNull_notOk() {
         try {
-            reportMakerService.generateReport(null, DEFAULT_FILE_PATH);
+            reportMakerService.prepareReport(null, DEFAULT_FILE_PATH);
         } catch (ReportMakerException e) {
             return;
         }
@@ -62,7 +62,7 @@ public class ReportMakerServiceImplTest {
     @Test
     public void generateReport_secondArgumentNull_notOk() {
         try {
-            reportMakerService.generateReport(new HashMap<>(), null);
+            reportMakerService.prepareReport(new HashMap<>(), null);
         } catch (ReportMakerException e) {
             return;
         }
@@ -74,7 +74,7 @@ public class ReportMakerServiceImplTest {
         Map<String, Integer> sampleData = new HashMap<>();
         sampleData.put("banana", 100);
         sampleData.put("apple", 120);
-        reportMakerService.generateReport(sampleData, DEFAULT_FILE_PATH);
+        reportMakerService.prepareReport(sampleData, DEFAULT_FILE_PATH);
         StringBuilder result = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(DEFAULT_FILE_PATH))) {
             String value = br.readLine();
@@ -90,7 +90,7 @@ public class ReportMakerServiceImplTest {
 
     @Test
     public void generateReport_emptyInput_ok() {
-        reportMakerService.generateReport(new HashMap<>(), DEFAULT_FILE_PATH);
+        reportMakerService.prepareReport(new HashMap<>(), DEFAULT_FILE_PATH);
         StringBuilder result = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(DEFAULT_FILE_PATH))) {
             String value = br.readLine();

@@ -28,7 +28,7 @@ public class OutputWriterImplTest {
     @Test
     public void generateReport_twoArgumentsNull_notOk() {
         try {
-            outputWriter.generateReport(null, null);
+            outputWriter.writeToCsv(null, null);
         } catch (OutputWriteException e) {
             return;
         }
@@ -38,7 +38,7 @@ public class OutputWriterImplTest {
     @Test
     public void generateReport_firstArgumentIsNull_notOk() {
         try {
-            outputWriter.generateReport(null, DEFAULT_FILE_PATH);
+            outputWriter.writeToCsv(null, DEFAULT_FILE_PATH);
         } catch (OutputWriteException e) {
             return;
         }
@@ -48,7 +48,7 @@ public class OutputWriterImplTest {
     @Test
     public void generateReport_secondArgumentIsNull_notOk() {
         try {
-            outputWriter.generateReport(DEFAULT_FILE_CONTENT, null);
+            outputWriter.writeToCsv(DEFAULT_FILE_CONTENT, null);
         } catch (OutputWriteException e) {
             return;
         }
@@ -57,7 +57,7 @@ public class OutputWriterImplTest {
 
     @Test
     public void generateReport_writeToFile_ok() {
-        outputWriter.generateReport(DEFAULT_FILE_CONTENT, DEFAULT_FILE_PATH);
+        outputWriter.writeToCsv(DEFAULT_FILE_CONTENT, DEFAULT_FILE_PATH);
 
         StringBuilder actual = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new FileReader(DEFAULT_FILE_PATH))) {

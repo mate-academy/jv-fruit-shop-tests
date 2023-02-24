@@ -17,7 +17,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     }
 
     @Override
-    public void generateReport(Map<String, Integer> fruitsMap, String toFile) {
+    public void prepareReport(Map<String, Integer> fruitsMap, String toFile) {
         if (fruitsMap == null || toFile == null) {
             throw new ReportMakerException("None of the arguments can be null");
         }
@@ -25,6 +25,6 @@ public class ReportMakerServiceImpl implements ReportMakerService {
                 .stream()
                 .map(i -> i.getKey() + COLUMNS_SEPARATOR + i.getValue() + System.lineSeparator())
                 .collect(Collectors.joining());
-        outputWriter.generateReport(TITLE + System.lineSeparator() + content, toFile);
+        outputWriter.writeToCsv(TITLE + System.lineSeparator() + content, toFile);
     }
 }

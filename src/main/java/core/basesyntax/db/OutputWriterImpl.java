@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class OutputWriterImpl implements OutputWriter {
     @Override
-    public void generateReport(String toWrite, String toFile) {
+    public void writeToCsv(String toWrite, String toFile) {
         if (toWrite == null || toFile == null) {
             throw new OutputWriteException("You shouldn't pass null for function");
         }

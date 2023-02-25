@@ -1,16 +1,14 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.impl.OperationStrategyImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operations.BalanceOperationHandler;
 import core.basesyntax.operations.PurchaseOperationHandler;
 import core.basesyntax.operations.ReturnOperationHandler;
 import core.basesyntax.operations.SupplyOperationHandler;
-import java.util.HashMap;
-import java.util.Map;
-
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.OperationStrategy;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;

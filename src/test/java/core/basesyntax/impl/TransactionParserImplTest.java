@@ -1,12 +1,10 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.impl.TransactionParserImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
-
-import core.basesyntax.service.TransactionParser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

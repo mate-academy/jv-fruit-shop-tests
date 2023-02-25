@@ -1,6 +1,5 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.impl.FileServiceImpl;
 import core.basesyntax.service.FileService;
 import org.junit.BeforeClass;
 import org.junit.Test;

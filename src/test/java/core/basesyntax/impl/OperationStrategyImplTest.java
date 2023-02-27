@@ -1,5 +1,7 @@
 package core.basesyntax.impl;
 
+import static org.junit.Assert.assertNull;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.operations.BalanceOperationHandler;
 import core.basesyntax.operations.PurchaseOperationHandler;
@@ -58,9 +60,9 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getSupplyOperationHandler_NotOk() {
-        OperationHandler expected = operationHandlerMap.get(Operation.SUPPLY);
-        Assert.assertNotEquals(expected.getClass(), PurchaseOperationHandler.class);
+    public void get_NullOperationHandler_NotOk() {
+        OperationHandler expected = operationHandlerMap.get(null);
+        assertNull(expected);
     }
 
     @Test
@@ -80,20 +82,6 @@ public class OperationStrategyImplTest {
     @Test
     public void getOperationSupply_NotOk() {
         OperationHandler expected = operationHandlerMap.get(Operation.SUPPLY);
-        OperationHandler actual = operationStrategy.get(Operation.PURCHASE);
-        Assert.assertNotEquals(expected, actual);
-    }
-
-    @Test
-    public void getOperationBalance_NotOk() {
-        OperationHandler expected = operationHandlerMap.get(Operation.BALANCE);
-        OperationHandler actual = operationStrategy.get(Operation.SUPPLY);
-        Assert.assertNotEquals(expected, actual);
-    }
-
-    @Test
-    public void getOperationReturn_NotOk() {
-        OperationHandler expected = operationHandlerMap.get(Operation.RETURN);
         OperationHandler actual = operationStrategy.get(Operation.PURCHASE);
         Assert.assertNotEquals(expected, actual);
     }

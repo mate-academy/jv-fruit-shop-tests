@@ -7,12 +7,35 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
+    private FruitTransactionServiceImpl transactionService;
+
+    @Before
+    public void setUp() {
+        transactionService = new FruitTransactionServiceImpl();
+    }
+
     @Test
     public void processTransactions_Ok() {
+        Map<String, Integer> expectedMap = new HashMap<>();
+        expectedMap.put("banana", 152);
+        expectedMap.put("apple", 90);
+
+        transactionService.processTransactions(prepareTestTransactionList());
+        Assert.assertEquals(expectedMap, Storage.fruitMap);
+    }
+
+    @After
+    public void clearStorage() {
+        Storage.fruitMap.clear();
+    }
+
+    private List<FruitTransaction> prepareTestTransactionList() {
         final List<FruitTransaction> transactions = new ArrayList<>();
 
         FruitTransaction transaction1 = new FruitTransaction();
@@ -63,13 +86,6 @@ public class FruitTransactionServiceImplTest {
         transaction8.setQuantity(50);
         transactions.add(transaction8);
 
-        Map<String, Integer> expectedMap = new HashMap<>();
-        expectedMap.put("banana", 152);
-        expectedMap.put("apple", 90);
-
-        new FruitTransactionServiceImpl().processTransactions(transactions);
-        Assert.assertEquals(expectedMap, Storage.fruitMap);
-
-        Storage.fruitMap.clear();
+        return transactions;
     }
 }

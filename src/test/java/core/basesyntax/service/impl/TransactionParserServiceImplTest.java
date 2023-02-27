@@ -2,12 +2,21 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserServiceImplTest {
+    private TransactionParserService transactionParserService;
+
+    @Before
+    public void setUp() {
+        transactionParserService = new TransactionParserServiceImpl();
+    }
+
     @Test
     public void parseTransactions_Ok() {
         String data = "b,banana,20" + System.lineSeparator()
@@ -20,7 +29,7 @@ public class TransactionParserServiceImplTest {
                 + "s,banana,50";
 
         final List<FruitTransaction> parsedByService
-                = new TransactionParserServiceImpl().parseTransactions(data);
+                = transactionParserService.parseTransactions(data);
         final List<FruitTransaction> expected = new ArrayList<>();
 
         FruitTransaction transaction1 = new FruitTransaction();

@@ -38,53 +38,53 @@ public class FruitTransactionServiceImplTest {
     private List<FruitTransaction> prepareTestTransactionList() {
         final List<FruitTransaction> transactions = new ArrayList<>();
 
-        FruitTransaction transaction1 = new FruitTransaction();
-        transaction1.setFruit(new Fruit("banana"));
-        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setQuantity(20);
-        transactions.add(transaction1);
+        FruitTransaction firstTransaction = new FruitTransaction();
+        firstTransaction.setFruit(new Fruit("banana"));
+        firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        firstTransaction.setQuantity(20);
+        transactions.add(firstTransaction);
 
-        FruitTransaction transaction2 = new FruitTransaction();
-        transaction2.setFruit(new Fruit("apple"));
-        transaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction2.setQuantity(100);
-        transactions.add(transaction2);
+        FruitTransaction secondTransaction = new FruitTransaction();
+        secondTransaction.setFruit(new Fruit("apple"));
+        secondTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        secondTransaction.setQuantity(100);
+        transactions.add(secondTransaction);
 
-        FruitTransaction transaction3 = new FruitTransaction();
-        transaction3.setFruit(new Fruit("banana"));
-        transaction3.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction3.setQuantity(100);
-        transactions.add(transaction3);
+        FruitTransaction thirdTransaction = new FruitTransaction();
+        thirdTransaction.setFruit(new Fruit("banana"));
+        thirdTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        thirdTransaction.setQuantity(100);
+        transactions.add(thirdTransaction);
 
-        FruitTransaction transaction4 = new FruitTransaction();
-        transaction4.setFruit(new Fruit("banana"));
-        transaction4.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction4.setQuantity(13);
-        transactions.add(transaction4);
+        FruitTransaction fourthTransaction = new FruitTransaction();
+        fourthTransaction.setFruit(new Fruit("banana"));
+        fourthTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        fourthTransaction.setQuantity(13);
+        transactions.add(fourthTransaction);
 
-        FruitTransaction transaction5 = new FruitTransaction();
-        transaction5.setFruit(new Fruit("apple"));
-        transaction5.setOperation(FruitTransaction.Operation.RETURN);
-        transaction5.setQuantity(10);
-        transactions.add(transaction5);
+        FruitTransaction fifthTransaction = new FruitTransaction();
+        fifthTransaction.setFruit(new Fruit("apple"));
+        fifthTransaction.setOperation(FruitTransaction.Operation.RETURN);
+        fifthTransaction.setQuantity(10);
+        transactions.add(fifthTransaction);
 
-        FruitTransaction transaction6 = new FruitTransaction();
-        transaction6.setFruit(new Fruit("apple"));
-        transaction6.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction6.setQuantity(20);
-        transactions.add(transaction6);
+        FruitTransaction sixthTransaction = new FruitTransaction();
+        sixthTransaction.setFruit(new Fruit("apple"));
+        sixthTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        sixthTransaction.setQuantity(20);
+        transactions.add(sixthTransaction);
 
-        FruitTransaction transaction7 = new FruitTransaction();
-        transaction7.setFruit(new Fruit("banana"));
-        transaction7.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction7.setQuantity(5);
-        transactions.add(transaction7);
+        FruitTransaction seventhTransaction = new FruitTransaction();
+        seventhTransaction.setFruit(new Fruit("banana"));
+        seventhTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        seventhTransaction.setQuantity(5);
+        transactions.add(seventhTransaction);
 
-        FruitTransaction transaction8 = new FruitTransaction();
-        transaction8.setFruit(new Fruit("banana"));
-        transaction8.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction8.setQuantity(50);
-        transactions.add(transaction8);
+        FruitTransaction eighthTransaction = new FruitTransaction();
+        eighthTransaction.setFruit(new Fruit("banana"));
+        eighthTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        eighthTransaction.setQuantity(50);
+        transactions.add(eighthTransaction);
 
         return transactions;
     }

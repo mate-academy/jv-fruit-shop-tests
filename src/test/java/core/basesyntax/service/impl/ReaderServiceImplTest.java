@@ -41,22 +41,6 @@ public class ReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void getReadTextInvalidPath_NotOk() {
-        String readerServiceResult = readerService.readFromFile(INVALID_FILE_PATH);
-        String bufferedReaderResult = "";
-        try {
-            StringBuilder stringBuilder = new StringBuilder();
-            BufferedReader reader = new BufferedReader(new FileReader(INVALID_FILE_PATH));
-            String line;
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-                stringBuilder.append(System.lineSeparator());
-            }
-            bufferedReaderResult = stringBuilder.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Assert.assertEquals(bufferedReaderResult, readerServiceResult);
+        readerService.readFromFile(INVALID_FILE_PATH);
     }
 }

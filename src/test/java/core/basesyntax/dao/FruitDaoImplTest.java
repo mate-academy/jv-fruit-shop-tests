@@ -4,6 +4,7 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exeption.FruitShopExeption;
+import org.junit.After;
 import org.junit.Test;
 
 public class FruitDaoImplTest {
@@ -67,5 +68,10 @@ public class FruitDaoImplTest {
         if (!expected.equals(actual)) {
             fail("Expected: " + expected + ", but was: " + actual);
         }
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 }

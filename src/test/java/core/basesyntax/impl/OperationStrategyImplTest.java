@@ -1,6 +1,6 @@
 package core.basesyntax.impl;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.operations.BalanceOperationHandler;
@@ -12,7 +12,6 @@ import core.basesyntax.service.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,15 +22,12 @@ public class OperationStrategyImplTest {
     @BeforeClass
     public static void beforeClass() {
         operationHandlerMap = new HashMap<>();
-    }
-
-    @Before
-    public void before() {
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
     @Test
@@ -61,8 +57,9 @@ public class OperationStrategyImplTest {
 
     @Test
     public void get_NullOperationHandler_NotOk() {
-        OperationHandler expected = operationHandlerMap.get(null);
-        assertNull(expected);
+        OperationHandler expected = null;
+        OperationHandler actual = operationHandlerMap.get(null);
+        assertEquals(expected, actual);
     }
 
     @Test

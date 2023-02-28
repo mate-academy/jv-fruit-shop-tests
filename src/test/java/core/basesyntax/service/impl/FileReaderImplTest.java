@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
-    private static final String WRONG_INPUT_FILE_NAME = "src/main/resources/inpur.csv";
+    private static final String INPUT_FILE_NAME = "src/test/java/resources/input.csv";
+    private static final String WRONG_INPUT_FILE_NAME = "src/test/java/resources/inpur.csv";
     private FileReader fileReader;
 
     @Before

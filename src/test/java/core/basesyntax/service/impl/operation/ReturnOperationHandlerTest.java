@@ -32,7 +32,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_return_ok() {
+    public void handle_ok() {
         transaction.setQuantity(25);
         int expected = Warehouse.warehouse.get("banana") + transaction.getQuantity();
         returnOperationHandler.handle(transaction);
@@ -41,7 +41,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_returnNegativeQuantity_notOk() {
+    public void handle_negativeQuantity_notOk() {
         transaction.setQuantity(-50);
         assertThrows(RuntimeException.class, () -> {
             returnOperationHandler.handle(transaction);
@@ -49,14 +49,14 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void handle_returnNullTransaction_notOk() {
+    public void handle_nullTransaction_notOk() {
         assertThrows(RuntimeException.class, () -> {
             returnOperationHandler.handle(null);
         });
     }
 
     @Test
-    public void handle_returnNewFruit_ok() {
+    public void handle_newFruit_ok() {
         transaction.setFruit("apple");
         transaction.setQuantity(25);
         int expected = transaction.getQuantity();

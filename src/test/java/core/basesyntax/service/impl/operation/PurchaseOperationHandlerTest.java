@@ -32,7 +32,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_sale_ok() {
+    public void handle_ok() {
         transaction.setQuantity(20);
         int expected = Warehouse.warehouse.get("banana") - transaction.getQuantity();
         purchaseOperationHandler.handle(transaction);
@@ -41,7 +41,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_saleNegativeQuantity_notOk() {
+    public void handle_negativeQuantity_notOk() {
         transaction.setQuantity(-50);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);
@@ -49,7 +49,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_saleZeroQuantity_notOk() {
+    public void handle_zeroQuantity_notOk() {
         transaction.setQuantity(0);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);
@@ -57,7 +57,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void handle_saleSuperiorQuantity_notOk() {
+    public void handle_superiorQuantity_notOk() {
         transaction.setQuantity(50);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperationHandler.handle(transaction);

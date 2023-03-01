@@ -32,7 +32,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void handle_supply_ok() {
+    public void handle_ok() {
         transaction.setQuantity(25);
         int expected = Warehouse.warehouse.get("banana") + transaction.getQuantity();
         supplyOperationHandler.handle(transaction);
@@ -41,7 +41,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void handle_supplyNegativeQuantity_notOk() {
+    public void handle_negativeQuantity_notOk() {
         transaction.setQuantity(-50);
         assertThrows(RuntimeException.class, () -> {
             supplyOperationHandler.handle(transaction);
@@ -49,14 +49,14 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void handle_supplyNullTransaction_notOk() {
+    public void handle_nullTransaction_notOk() {
         assertThrows(RuntimeException.class, () -> {
             supplyOperationHandler.handle(null);
         });
     }
 
     @Test
-    public void handle_supplyNewFruit_ok() {
+    public void handle_newFruit_ok() {
         transaction.setFruit("apple");
         transaction.setQuantity(25);
         int expected = transaction.getQuantity();

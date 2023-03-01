@@ -31,7 +31,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void handle_setBalance_ok() {
+    public void handle_ok() {
         transaction.setQuantity(20);
         balanceOperationHandler.handle(transaction);
         int expected = transaction.getQuantity();
@@ -40,7 +40,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void handle_setBalance_negativeQuantity_notOk() {
+    public void handle_negativeQuantity_notOk() {
         transaction.setQuantity(-15);
         assertThrows(RuntimeException.class, () -> {
             balanceOperationHandler.handle(transaction);

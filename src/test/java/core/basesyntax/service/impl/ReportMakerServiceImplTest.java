@@ -1,13 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportMakerService;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.ReportMakerService;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReportMakerServiceImplTest {
 

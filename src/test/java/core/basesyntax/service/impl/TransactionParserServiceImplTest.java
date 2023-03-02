@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
+import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class TransactionParserServiceImplTest {
 
@@ -23,15 +22,15 @@ public class TransactionParserServiceImplTest {
 
     @Before
     public void before() {
-        source = "type,fruit,quantity" + System.lineSeparator() +
-                "b,banana,20" + System.lineSeparator() +
-                "b,apple,100" + System.lineSeparator() +
-                "s,banana,100" + System.lineSeparator() +
-                "p,banana,13" + System.lineSeparator() +
-                "r,apple,10" + System.lineSeparator() +
-                "p,apple,20" + System.lineSeparator() +
-                "p,banana,5" + System.lineSeparator() +
-                "s,banana,50";
+        source = "type,fruit,quantity" + System.lineSeparator()
+                + "b,banana,20" + System.lineSeparator()
+                + "b,apple,100" + System.lineSeparator()
+                + "s,banana,100" + System.lineSeparator()
+                + "p,banana,13" + System.lineSeparator()
+                + "r,apple,10" + System.lineSeparator()
+                + "p,apple,20" + System.lineSeparator()
+                + "p,banana,5" + System.lineSeparator()
+                + "s,banana,50";
     }
 
     @Test

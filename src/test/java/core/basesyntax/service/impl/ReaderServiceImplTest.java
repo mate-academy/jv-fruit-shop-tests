@@ -1,23 +1,21 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ReaderService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static org.junit.Assert.*;
-
 public class ReaderServiceImplTest {
-    private final static String PATH_TO_RESOURCES = "src/main/resources/";
+    private static final String PATH_TO_RESOURCES = "src/main/resources/";
     private static final String PATH_TO_DEFAULT_FILE =
             PATH_TO_RESOURCES + "sampleInput.txt";
 
-    private final static String LOREM = "Lorem ipsum"
+    private static final String LOREM = "Lorem ipsum"
             + "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
             + "incididunt ut labore et dolore magna aliqua.";
 

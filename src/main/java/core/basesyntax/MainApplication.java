@@ -41,7 +41,6 @@ public class MainApplication {
         WriterService writerService = new WriterServiceImpl();
         List<FruitTransaction> parsed =
                 transactionParserService.parse(readerService.readFrom(INPUT_FILE));
-        parsed.forEach(i -> System.out.println("new FruitTransaction(" + i.getOperation() + ", " + i.getFruit() + ", " + i.getQuantity() + "),"));
         Map<String, Integer> preparedMap = fruitShopService.report(parsed);
         String preparedReport = reportMakerService.make(preparedMap);
         writerService.write(preparedReport, OUTPUT_FILE);

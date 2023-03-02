@@ -2,8 +2,9 @@ package core.basesyntax.service.imp;
 
 import static org.junit.Assert.fail;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.Storage;
 import core.basesyntax.exeption.FruitShopExeption;
+import core.basesyntax.service.CsvFileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -29,20 +30,22 @@ public class CsvFileWriterServiceTest {
     @Test(expected = FruitShopExeption.class)
     public void readFile_NotOk() {
         Storage.fruits.put(FRUIT_FOR_STORAGE, FRUIT_AMOUNT_STORAGE);
-        csvFileWriterServiceService.writeFile(READ_FILE_NAME_NOTOK);
+        csvFileWriterServiceService.writeFile(READ_FILE_NAME_NOTOK, "");
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test
-    public void readFile_tOk() {
+    public void readFile_Ok() {
+        String message = FIRST_LINE + System.lineSeparator() + SECOND_LINE;
         Storage.fruits.put(FRUIT_FOR_STORAGE, FRUIT_AMOUNT_STORAGE);
-        csvFileWriterServiceService.writeFile(READ_FILE_NAME_OK);
+        csvFileWriterServiceService.writeFile(READ_FILE_NAME_OK, message);
+
         File file = new File(READ_FILE_NAME_OK);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
             if (!Objects.equals(line, FIRST_LINE)) {
-                throw new RuntimeException("First line in file not correct");
+                throw new RuntimeException("First line in file not correct " + line);
             }
             line = bufferedReader.readLine();
             if (!Objects.equals(line, SECOND_LINE)) {
@@ -53,7 +56,4 @@ public class CsvFileWriterServiceTest {
         }
     }
 }
-
-
-
 

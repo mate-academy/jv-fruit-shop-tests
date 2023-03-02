@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service;
 
 import core.basesyntax.exeption.FruitShopExeption;
 import java.io.BufferedReader;
@@ -19,7 +19,7 @@ public class CsvFileReaderService {
             if (line == null || line.length() == 0) {
                 throw new FruitShopExeption("File " + fileName + " is empty");
             }
-            while (line != null) {
+            while (bufferedReader.ready()) {
                 line = bufferedReader.readLine();
                 if (line != null) {
                     listFromFile.add(line);

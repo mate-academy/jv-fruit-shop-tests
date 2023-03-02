@@ -3,6 +3,7 @@ package core.basesyntax.service.imp;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.exeption.FruitShopExeption;
+import core.basesyntax.service.CsvFileReaderService;
 import java.util.List;
 import java.util.Objects;
 import org.junit.BeforeClass;
@@ -29,13 +30,13 @@ public class CsvFileReaderServiceTest {
 
     @Test(expected = FruitShopExeption.class)
     public void readFile_Empty_NotOk() {
-        List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME_EMPTY_NOTOK);
+        List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME_NOTOK);
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for empty file, but it wasn't");
     }
 
     @Test
-    public void readFile_Empty_Ok() {
+    public void readFile_Ok() {
         List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME_OK);
         String expected = FIRST_LINE;
         String actual = linesFromFile.get(0);
@@ -44,3 +45,4 @@ public class CsvFileReaderServiceTest {
         }
     }
 }
+

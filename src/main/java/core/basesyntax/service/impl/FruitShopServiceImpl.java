@@ -1,46 +1,28 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.FruitShopException;
+import core.basesyntax.dao.Storage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.FruitsHolderService;
-import core.basesyntax.service.ParserService;
-import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
+import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    public static final int OPERATION_TYPE_ROW = 0;
-    public static final int FRUIT_NAME_ROW = 1;
-    public static final int QUANTITY_ROW = 2;
-    private final ParserService parserService;
-    private final FruitsHolderService fruitsHolderService;
     private final OperationStrategy operationStrategy;
-    private final ReportMakerService reportMakerService;
 
-    public FruitShopServiceImpl(ParserService parserService,
-                                FruitsHolderService fruitsHolderService,
-                                OperationStrategy operationStrategy,
-                                ReportMakerService reportMakerService) {
-        this.parserService = parserService;
-        this.fruitsHolderService = fruitsHolderService;
+    public FruitShopServiceImpl(OperationStrategy operationStrategy) {
+        if (operationStrategy == null) {
+            throw new RuntimeException("Argument cannot be null");
+        }
         this.operationStrategy = operationStrategy;
-        this.reportMakerService = reportMakerService;
     }
 
     @Override
-    public void report(String inputFilePath, String outputFilePath) {
-        if (inputFilePath == null || outputFilePath == null) {
-            throw new FruitShopException("None of the arguments must be null");
+    public Map<String, Integer> report(List<FruitTransaction> parsed) {
+        if (parsed == null) {
+            throw new RuntimeException("None of the arguments must be null");
         }
-        List<List<String>> parsed = parserService.parseInput(inputFilePath);
-        parsed.forEach(row -> {
-            String operationType = row.get(OPERATION_TYPE_ROW);
-            String fruitName = row.get(FRUIT_NAME_ROW);
-            int quantity = Integer.parseInt(row.get(QUANTITY_ROW));
-            int amount = fruitsHolderService.getFruitAmount(fruitName);
-            fruitsHolderService.putFruit(fruitName,
-                    operationStrategy.get(operationType).operation(amount, quantity));
-        });
-        reportMakerService.prepareReport(fruitsHolderService.getAllFruits(), outputFilePath);
+        parsed.forEach(t -> operationStrategy.get(t.getOperation()).operation(t));
+        return Storage.getMap();
     }
 }

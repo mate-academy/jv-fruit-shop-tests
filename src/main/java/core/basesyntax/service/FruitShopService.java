@@ -1,5 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
+import java.util.Map;
+
 public interface FruitShopService {
-    void report(String inputFilePath, String outputFilePath);
+    Map<String, Integer> report(List<FruitTransaction> parsed);
 }

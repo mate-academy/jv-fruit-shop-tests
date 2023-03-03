@@ -56,7 +56,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void report_noOperationStrategy_notOk() {
+    public void constructor_noOperationStrategy_notOk() {
         new FruitShopServiceImpl(null);
     }
 

@@ -14,7 +14,6 @@ public class ReaderServiceImplTest {
     private static final String PATH_TO_RESOURCES = "src/main/resources/";
     private static final String PATH_TO_DEFAULT_FILE =
             PATH_TO_RESOURCES + "sampleInput.txt";
-
     private static final String LOREM = "Lorem ipsum"
             + "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
             + "incididunt ut labore et dolore magna aliqua.";

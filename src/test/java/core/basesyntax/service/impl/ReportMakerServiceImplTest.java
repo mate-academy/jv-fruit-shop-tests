@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportMakerServiceImplTest {
-
     private static ReportMakerService reportMakerService;
 
     @BeforeClass

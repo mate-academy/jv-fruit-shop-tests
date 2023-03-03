@@ -18,6 +18,7 @@ public class WriterServiceImplTest {
     private static final String LOREM = "Lorem ipsum"
             + "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
             + "incididunt ut labore et dolore magna aliqua.";
+
     private static WriterService writerService;
 
     @BeforeClass

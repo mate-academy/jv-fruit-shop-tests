@@ -1,23 +1,20 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service.strategy;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import core.basesyntax.dao.Storage;
 import core.basesyntax.exeption.FruitShopExeption;
-import core.basesyntax.service.strategy.OperationHandler;
-import core.basesyntax.service.strategy.ReturnService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnServiceTest {
-    //private static final FruitDao FRUIT_DAO = new FruitDaoImpl();
-    private static final String FRUIT_OK = "apple";
     private static final Integer AMOUNT_OK = 10;
-    private static final Integer AMOUNT_0_NOTOK = 0;
-    private static final Integer AMOUNT_LES_THEN_0_NOTOK = -5;
+    private static final String FRUIT_OK = "apple";
     private static OperationHandler operationHandler;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         operationHandler = new ReturnService();
     }
 
@@ -26,5 +23,15 @@ public class ReturnServiceTest {
         operationHandler.moveFruit(null, AMOUNT_OK);
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for not existing file, but it wasn't");
+    }
+
+    @Test
+    public void moveFruit_Ok() {
+        Storage.fruits.clear();
+        operationHandler.moveFruit(FRUIT_OK, AMOUNT_OK);
+        Integer expected = AMOUNT_OK;
+        Integer actual = Storage.get(FRUIT_OK);
+        assertEquals("Expected amount of fruit = " + expected + ", but was " + actual,
+                actual, expected);
     }
 }

@@ -1,15 +1,14 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.exeption.FruitShopExeption;
-import core.basesyntax.service.CsvFileWriterService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Objects;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,7 +22,7 @@ public class CsvFileWriterServiceTest {
     private static CsvFileWriterService csvFileWriterServiceService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         csvFileWriterServiceService = new CsvFileWriterService();
     }
 
@@ -44,13 +43,11 @@ public class CsvFileWriterServiceTest {
         File file = new File(READ_FILE_NAME_OK);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
-            if (!Objects.equals(line, FIRST_LINE)) {
-                throw new RuntimeException("First line in file not correct " + line);
-            }
+            assertEquals("Header line in file not correct " + line, line, FIRST_LINE);
+
             line = bufferedReader.readLine();
-            if (!Objects.equals(line, SECOND_LINE)) {
-                throw new RuntimeException("First data in second line in file not correct");
-            }
+            assertEquals("First data in second line in file not correct", line, SECOND_LINE);
+
         } catch (IOException e) {
             throw new FruitShopExeption("Can't read from file " + file);
         }

@@ -1,36 +1,35 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.exeption.FruitShopExeption;
-import core.basesyntax.service.CsvFileReaderService;
 import java.util.List;
-import java.util.Objects;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
     private static final String FIRST_LINE = "b,banana,20";
-    private static final String READ_FILE_NAME_NOTOK = "source_notok.csv";
+    private static final String READ_FILE_NAME_NOT_OK = "source_notok.csv";
     private static final String READ_FILE_NAME_OK = "source.csv";
-    private static final String READ_FILE_NAME_EMPTY_NOTOK = "source_empty.csv";
+    private static final String READ_FILE_NAME_EMPTY_NOT_OK = "source_empty.csv";
     private static CsvFileReaderService csvFileReaderService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         csvFileReaderService = new CsvFileReaderService();
     }
 
     @Test(expected = FruitShopExeption.class)
     public void readFile_NotOk() {
-        List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME_NOTOK);
+        csvFileReaderService.readFile(READ_FILE_NAME_NOT_OK);
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test(expected = FruitShopExeption.class)
     public void readFile_Empty_NotOk() {
-        List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME_NOTOK);
+        csvFileReaderService.readFile(READ_FILE_NAME_EMPTY_NOT_OK);
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for empty file, but it wasn't");
     }
@@ -40,9 +39,7 @@ public class CsvFileReaderServiceTest {
         List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME_OK);
         String expected = FIRST_LINE;
         String actual = linesFromFile.get(0);
-        if (!Objects.equals(expected, actual)) {
-            fail("First line Expected: " + expected + ", but was: " + actual);
-        }
+        assertEquals("First line Expected: " + expected + ", but was: " + actual, expected, actual);
     }
 }
 

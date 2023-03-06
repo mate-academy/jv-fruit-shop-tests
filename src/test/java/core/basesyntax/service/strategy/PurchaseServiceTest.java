@@ -17,14 +17,14 @@ public class PurchaseServiceTest {
     }
 
     @Test(expected = FruitShopExeption.class)
-    public void moveFruit_null_NotOk() {
+    public void moveFruit_nullFruit_NotOk() {
         operationHandler.moveFruit(null, AMOUNT_OK);
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test(expected = FruitShopExeption.class)
-    public void moveAmount_null_NotOk() {
+    public void moveAmount_nullAmount_NotOk() {
         operationHandler.moveFruit(FRUIT_OK, null);
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for not existing file, but it wasn't");

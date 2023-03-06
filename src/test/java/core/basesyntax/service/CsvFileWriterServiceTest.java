@@ -13,8 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterServiceTest {
-    private static final String READ_FILE_NAME_NOTOK = "T://source_notok.csv";
-    private static final String READ_FILE_NAME_OK = "report.csv";
+    private static final String FILE_NAME_NOT_OK = "T://source_notok.csv";
+    private static final String FILE_NAME_OK = "report.csv";
     private static final String FRUIT_FOR_STORAGE = "banana";
     private static final Integer FRUIT_AMOUNT_STORAGE = 50;
     private static final String FIRST_LINE = "fruit,quantity";
@@ -27,20 +27,20 @@ public class CsvFileWriterServiceTest {
     }
 
     @Test(expected = FruitShopExeption.class)
-    public void readFile_NotOk() {
+    public void writeFile_ErrorInFileName_NotOk() {
         Storage.fruits.put(FRUIT_FOR_STORAGE, FRUIT_AMOUNT_STORAGE);
-        csvFileWriterServiceService.writeFile(READ_FILE_NAME_NOTOK, "");
+        csvFileWriterServiceService.writeFile(FILE_NAME_NOT_OK, "");
         fail("Expected " + FruitShopExeption.class.getName()
                 + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test
-    public void readFile_Ok() {
+    public void writeFile_Ok() {
         String message = FIRST_LINE + System.lineSeparator() + SECOND_LINE;
         Storage.fruits.put(FRUIT_FOR_STORAGE, FRUIT_AMOUNT_STORAGE);
-        csvFileWriterServiceService.writeFile(READ_FILE_NAME_OK, message);
+        csvFileWriterServiceService.writeFile(FILE_NAME_OK, message);
 
-        File file = new File(READ_FILE_NAME_OK);
+        File file = new File(FILE_NAME_OK);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
             assertEquals("Header line in file not correct " + line, line, FIRST_LINE);

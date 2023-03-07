@@ -7,11 +7,11 @@ import core.basesyntax.actions.DoingAction;
 import core.basesyntax.actions.PurchaseAction;
 import core.basesyntax.actions.ReturnAction;
 import core.basesyntax.actions.SupplyAction;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitDto;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitCounter;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.Saved;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.SaveService;
 import core.basesyntax.strategy.StrategyOptions;
 import core.basesyntax.strategy.StrategyOptionsImpl;
 import java.util.ArrayList;
@@ -24,12 +24,12 @@ import org.junit.Test;
 
 public class FruitCounterImplTest {
     private static final String WORKER_FILE = "src/main/resources/testInput.csv";
-    private static List<Fruit> expectedFruits;
+    private static List<FruitDto> expectedFruits;
     private static FruitCounter fruitCounter;
     private static Map<FruitTransaction.Operation, DoingAction> doingStrategy;
     private static StrategyOptions strategyOptions;
-    private static Reader reader;
-    private static Saved saved;
+    private static ReaderService reader;
+    private static SaveService saved;
     
     @BeforeClass
     public static void beforeClass() {
@@ -41,26 +41,26 @@ public class FruitCounterImplTest {
         doingStrategy.put(FruitTransaction.Operation.RETURN, new ReturnAction());
         strategyOptions = new StrategyOptionsImpl(doingStrategy);
         fruitCounter = new FruitCounterImpl(strategyOptions);
-        reader = new ReaderImpl();
-        saved = new SavedImpl();
+        reader = new ReaderServiceImpl();
+        saved = new SaveServiceImpl();
     }
 
     @Before
     public void setUp() {
-        Fruit fruit = new Fruit("banana",152);
+        FruitDto fruit = new FruitDto("banana",152);
         expectedFruits.add(fruit);
-        Fruit fruit1 = new Fruit("apple",90);
+        FruitDto fruit1 = new FruitDto("apple",90);
         expectedFruits.add(fruit1);
     }
 
     @Test
     public void calculateFruit_withCorrectData_isOk() {
-        String text = reader.readerTransaction(WORKER_FILE);
-        saved.saveToDb(text);
-        Fruit[] fruits = fruitCounter.countReport();
-        for (int i = 0; i < fruits.length; i++) {
-            assertEquals(fruits[i].getFruit(), expectedFruits.get(i).getFruit());
-            assertEquals(fruits[i].getQuantity(), expectedFruits.get(i).getQuantity());
+        List<String> strings = reader.readTransactionWithFile(WORKER_FILE);
+        saved.saveToDb(strings);
+        List<FruitDto> fruitDtos = fruitCounter.countReport();
+        for (int i = 0; i < fruitDtos.size(); i++) {
+            assertEquals(fruitDtos.get(i).getFruit(), expectedFruits.get(i).getFruit());
+            assertEquals(fruitDtos.get(i).getQuantity(), expectedFruits.get(i).getQuantity());
         }
     }
 }

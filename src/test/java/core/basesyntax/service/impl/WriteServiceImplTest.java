@@ -2,24 +2,24 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.WriteService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriterImplTest {
+public class WriteServiceImplTest {
     private static final String WORKER_FILE = "src/main/resources/testOutput.csv";
     private static final String UNREAL_FILE = "src/main/resources/testUnreal.csv";
     private static final String DATA_RESULT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator();
-    private static Writer writer;
+    private static WriteService writer;
 
     @BeforeClass
     public static void beforeClass() {
-        writer = new WriterImpl();
+        writer = new WriteServiceImpl();
     }
 
     @Test

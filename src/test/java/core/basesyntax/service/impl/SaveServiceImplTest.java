@@ -3,26 +3,38 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Saved;
+import core.basesyntax.service.SaveService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class SavedImplTest {
-    private static final String INFORMATION_WITH_FILE = "type,fruit,quantity///"
-            + "b,banana,20///s,banana,100///p,banana,13///r,apple,10///";
-    private static final String INCORRECT_OPTION_INFORMATION_WITH_FILE = "type,fruit,quantity///"
-            + "b,banana,20///u,banana,100///h,banana,13///w,apple,10///";
-    private static final String INCORRECT_INFORMATION_WITH_FILE = "HFJDNVDNKNVFNDVVFDMNV,";
+public class SaveServiceImplTest {
+    private static List<String> informationWithFile;
+    private static List<String> incorrectInformationWithOptionsInFile;
+    private static List<String> incorrectInformationWithFile;
     private static List<FruitTransaction> fruitTransactions;
-    private static Saved saved;
+    private static SaveService saved;
 
     @BeforeClass
     public static void beforeClass() {
-        saved = new SavedImpl();
+        saved = new SaveServiceImpl();
         fruitTransactions = new ArrayList<>();
+        informationWithFile = new ArrayList<>();
+        informationWithFile.add("type,fruit,quantity");
+        informationWithFile.add("b,banana,20");
+        informationWithFile.add("s,banana,100");
+        informationWithFile.add("p,banana,13");
+        informationWithFile.add("r,apple,10");
+
+        incorrectInformationWithOptionsInFile = new ArrayList<>();
+        incorrectInformationWithOptionsInFile.add("type,fruit,quantity");
+        incorrectInformationWithOptionsInFile.add("k,banana,20");
+        incorrectInformationWithOptionsInFile.add("t,apple,100");
+
+        incorrectInformationWithFile = new ArrayList<>();
+        incorrectInformationWithFile.add("gfrhjfkdvfjnvjdfkvnjdsf");
     }
 
     @Before
@@ -51,7 +63,7 @@ public class SavedImplTest {
 
     @Test
     public void saved_data_isOk() {
-        List<FruitTransaction> transactions = saved.saveToDb(INFORMATION_WITH_FILE);
+        List<FruitTransaction> transactions = saved.saveToDb(informationWithFile);
         for (int i = 0; i < transactions.size(); i++) {
             assertEquals(transactions.get(i).getFruit(), fruitTransactions.get(i).getFruit());
             assertEquals(transactions.get(i).getQuantity(), fruitTransactions.get(i).getQuantity());
@@ -67,11 +79,11 @@ public class SavedImplTest {
 
     @Test(expected = RuntimeException.class)
     public void saved_incorrectData_isNotOk() {
-        saved.saveToDb(INCORRECT_INFORMATION_WITH_FILE);
+        saved.saveToDb(incorrectInformationWithFile);
     }
 
     @Test(expected = RuntimeException.class)
     public void saved_dataWithIncorrectOption_isNotOk() {
-        saved.saveToDb(INCORRECT_OPTION_INFORMATION_WITH_FILE);
+        saved.saveToDb(incorrectInformationWithOptionsInFile);
     }
 }

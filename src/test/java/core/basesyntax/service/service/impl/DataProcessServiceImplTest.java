@@ -26,6 +26,8 @@ public class DataProcessServiceImplTest {
     private static DataProcessService dataProcessService;
     private static List<String> expected;
     private static List<String> actualReport;
+    private static File fileFrom;
+    private static File fileTo;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -41,10 +43,7 @@ public class DataProcessServiceImplTest {
         dataProcessService = new DataProcessServiceImpl(operationServiceMap);
         expected = new ArrayList<>();
         actualReport = new ArrayList<>();
-    }
-
-    @Test
-    public void processReport_ok() {
+        fileFrom = new File(FILE_FROM);
         String okFileContent = String.join("", "type,fruit,quantity\n",
                 "b,banana,20\n",
                 "b,apple,100\n",
@@ -55,16 +54,21 @@ public class DataProcessServiceImplTest {
                 "p,banana,5\n",
                 "s,banana,50\n");
         try {
-            Files.write(new File(FILE_FROM).toPath(), okFileContent.getBytes());
+            Files.write(fileFrom.toPath(), okFileContent.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file" + FILE_FROM);
         }
+        fileTo = new File(FILE_TO);
+    }
+
+    @Test
+    public void processReport_ok() {
         dataProcessService.processReport(FILE_FROM, FILE_TO);
         expected = List.of("fruit,quantity",
                 "banana,152",
                 "apple,90");
         try {
-            actualReport = Files.readAllLines(new File(FILE_TO).toPath());
+            actualReport = Files.readAllLines(fileTo.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file " + FILE_TO, e);
         }
@@ -73,9 +77,7 @@ public class DataProcessServiceImplTest {
 
     @AfterClass
     public static void afterClass() {
-        File fileFrom = new File(FILE_FROM);
         fileFrom.delete();
-        File fileTo = new File(FILE_TO);
         fileTo.delete();
         Storage.getFruits().clear();
     }

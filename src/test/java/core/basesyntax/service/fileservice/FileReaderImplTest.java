@@ -18,9 +18,12 @@ public class FileReaderImplTest {
     private static final String EMPTY_NAME = "";
     private static final String OTHER_FORMAT = "txtFileFormat.txt";
     private static final String MISSING_FILE = "missingFile.csv";
-    private static final String VALID_NAME = "validFile.csv";
+    private static final String VALID_FILE = "validFile.csv";
     private static List<String> validOutputData;
     private static FileReader reader;
+
+    private static File emptyFile;
+    private static File validFile;
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -28,6 +31,23 @@ public class FileReaderImplTest {
     public static void beforeClass() throws Exception {
         reader = new FileReaderImpl();
         validOutputData = new ArrayList<>();
+        emptyFile = new File(EMPTY_FILE);
+        try {
+            Files.write(emptyFile.toPath(), EMPTY_NAME.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t write to file" + EMPTY_FILE);
+        }
+        validFile = new File(VALID_FILE);
+        String validFileContent = String.join("", "type,fruit,quantity\n",
+                "b,banana,20\n",
+                "b,apple,100\n",
+                "s,banana,100\n",
+                "p,banana,13\n");
+        try {
+            Files.write(validFile.toPath(), validFileContent.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t write to file" + VALID_FILE);
+        }
     }
 
     @Test
@@ -44,11 +64,6 @@ public class FileReaderImplTest {
 
     @Test
     public void read_emptyFile_notOk() {
-        try {
-            Files.write(new File(EMPTY_FILE).toPath(), EMPTY_NAME.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write to file" + EMPTY_FILE);
-        }
         thrown.expect(RuntimeException.class);
         reader.read(EMPTY_FILE);
     }
@@ -72,24 +87,12 @@ public class FileReaderImplTest {
                 "b,apple,100",
                 "s,banana,100",
                 "p,banana,13");
-        String validFileContent = String.join("", "type,fruit,quantity\n",
-                "b,banana,20\n",
-                "b,apple,100\n",
-                "s,banana,100\n",
-                "p,banana,13\n");
-        try {
-            Files.write(new File(VALID_NAME).toPath(), validFileContent.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write to file" + VALID_NAME);
-        }
-        assertEquals(validOutputData, reader.read(VALID_NAME));
+        assertEquals(validOutputData, reader.read(VALID_FILE));
     }
 
     @AfterClass
     public static void afterClass() {
-        File emptyFile = new File(EMPTY_FILE);
         emptyFile.delete();
-        File validFile = new File(VALID_NAME);
         validFile.delete();
     }
 }

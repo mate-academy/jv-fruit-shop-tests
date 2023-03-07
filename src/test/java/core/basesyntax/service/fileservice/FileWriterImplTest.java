@@ -20,6 +20,7 @@ public class FileWriterImplTest {
     private static final String OTHER_FORMAT = "txtFileFormat.txt";
     private static List<String> dataFromFile;
     private static FileWriter writer;
+    private static File testFile;
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -27,6 +28,7 @@ public class FileWriterImplTest {
     public static void beforeClass() throws Exception {
         writer = new FileWriterImpl();
         dataFromFile = new ArrayList<>();
+        testFile = new File(FILE_NAME);
     }
 
     @Test
@@ -57,7 +59,7 @@ public class FileWriterImplTest {
     public void write_Ok() {
         writer.write(FILE_NAME, RECORDED_DATA);
         try {
-            dataFromFile = Files.readAllLines(new File(FILE_NAME).toPath());
+            dataFromFile = Files.readAllLines(testFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file " + FILE_NAME, e);
         }
@@ -66,7 +68,6 @@ public class FileWriterImplTest {
 
     @AfterClass
     public static void afterClass() {
-        File file = new File(FILE_NAME);
-        file.delete();
+        testFile.delete();
     }
 }

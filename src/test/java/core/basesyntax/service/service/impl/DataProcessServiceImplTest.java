@@ -2,7 +2,6 @@ package core.basesyntax.service.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessService;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -10,24 +9,21 @@ import core.basesyntax.service.strategy.OperationHandlerOfBalance;
 import core.basesyntax.service.strategy.OperationHandlerOfPurchase;
 import core.basesyntax.service.strategy.OperationHandlerOfReturn;
 import core.basesyntax.service.strategy.OperationHandlerOfSupply;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataProcessServiceImplTest {
-    private static final String FILE_FROM = "fileFrom.csv";
-    private static final String FILE_TO = "fileTo.csv";
+    private static final String FILE_FROM = "src/test/resources/fileFrom.csv";
+    private static final String FILE_TO = "src/test/resources/fileTo.csv";
     private static DataProcessService dataProcessService;
     private static List<String> expected;
     private static List<String> actualReport;
-    private static File fileFrom;
-    private static File fileTo;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -43,7 +39,6 @@ public class DataProcessServiceImplTest {
         dataProcessService = new DataProcessServiceImpl(operationServiceMap);
         expected = new ArrayList<>();
         actualReport = new ArrayList<>();
-        fileFrom = new File(FILE_FROM);
         String okFileContent = String.join("", "type,fruit,quantity\n",
                 "b,banana,20\n",
                 "b,apple,100\n",
@@ -54,11 +49,10 @@ public class DataProcessServiceImplTest {
                 "p,banana,5\n",
                 "s,banana,50\n");
         try {
-            Files.write(fileFrom.toPath(), okFileContent.getBytes());
+            Files.write(Path.of(FILE_FROM), okFileContent.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file" + FILE_FROM);
         }
-        fileTo = new File(FILE_TO);
     }
 
     @Test
@@ -68,17 +62,10 @@ public class DataProcessServiceImplTest {
                 "banana,152",
                 "apple,90");
         try {
-            actualReport = Files.readAllLines(fileTo.toPath());
+            actualReport = Files.readAllLines(Path.of(FILE_TO));
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file " + FILE_TO, e);
         }
         assertEquals(expected, actualReport);
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        fileFrom.delete();
-        fileTo.delete();
-        Storage.getFruits().clear();
     }
 }

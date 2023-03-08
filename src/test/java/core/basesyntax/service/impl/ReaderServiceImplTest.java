@@ -33,21 +33,23 @@ public class ReaderServiceImplTest {
 
     @Test
     public void reading_testingFile_isOk() {
-        assertEquals(reader.readTransactionWithFile(WORKER_FILE), WORKER_FILE_RESULT);
+        assertEquals("Expected file content: " + WORKER_FILE_RESULT + ", but was: "
+                + reader.readFile(WORKER_FILE), reader.readFile(WORKER_FILE), WORKER_FILE_RESULT);
     }
 
     @Test
     public void reading_emptyFile_isOk() {
-        assertTrue(reader.readTransactionWithFile(EMPTY_FILE).isEmpty());
+        assertTrue("Expected file content: file must be empty, but was: "
+                + reader.readFile(WORKER_FILE), reader.readFile(EMPTY_FILE).isEmpty());
     }
 
     @Test(expected = RuntimeException.class)
     public void reading_unrealFile_isNotOk() {
-        reader.readTransactionWithFile(UNREAL_FILE);
+        reader.readFile(UNREAL_FILE);
     }
 
     @Test(expected = RuntimeException.class)
     public void reading_Null_notOk() {
-        reader.readTransactionWithFile(null);
+        reader.readFile(null);
     }
 }

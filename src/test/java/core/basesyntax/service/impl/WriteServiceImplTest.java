@@ -35,7 +35,8 @@ public class WriteServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(stringBuilder.toString(), DATA_RESULT);
+        assertEquals("Expected file content: " + DATA_RESULT + ", but was: "
+                + stringBuilder.toString(), stringBuilder.toString(), DATA_RESULT);
     }
 
     @Test
@@ -51,7 +52,8 @@ public class WriteServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        assertEquals(stringBuilder.toString(), DATA_RESULT);
+        assertEquals("Expected file content: " + DATA_RESULT + ", but was: "
+                + stringBuilder.toString(), stringBuilder.toString(), DATA_RESULT);
     }
 
     @Test (expected = RuntimeException.class)

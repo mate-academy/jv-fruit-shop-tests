@@ -50,6 +50,6 @@ public class FruitDaoImplTest {
 
     @AfterClass
     public static void afterClass() {
-        Storage.getFruits().remove(fruit);
+        Storage.getFruits().clear();
     }
 }

@@ -12,9 +12,4 @@ public class StorageDaoImpl implements StorageDao {
     public Integer getAmount(String fruit) {
         return Storage.storage.getOrDefault(fruit, 0);
     }
-
-    @Override
-    public void update(String fruit, Integer amount) {
-        add(fruit, amount);
-    }
 }

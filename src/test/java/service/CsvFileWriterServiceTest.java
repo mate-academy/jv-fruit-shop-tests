@@ -1,9 +1,8 @@
 package service;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -13,18 +12,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CsvFileReaderServiceTest {
-    private static FileReaderService fileReaderService;
+public class CsvFileWriterServiceTest {
+    private static FileWriterService fileWriterService;
     private static final String PATH = "src/test/resources";
     private static final File DIRECTORY = new File(PATH);
     private static final File TEST_FILE =
             new File(PATH + File.separator + "testFile.csv");
-    private static final File NOT_EXISTED_FILE =
-            new File(PATH + File.separator + "notExistedFile.csv");
 
     @BeforeClass
     public static void beforeClass() {
-        fileReaderService = new CsvFileReaderService();
+        fileWriterService = new CsvFileWriterService();
         DIRECTORY.mkdir();
     }
 
@@ -48,49 +45,51 @@ public class CsvFileReaderServiceTest {
     }
 
     @Test
-    public void readFile_withData_Ok() {
+    public void saveToFile_someData_Ok() {
         List<String> expected = new ArrayList<>();
         String data;
         for (int i = 1; i <= 10; i++) {
             data = i + " operation, fruit, amount";
-            writeDataToFile(data);
             expected.add(data);
         }
-        List<String> actual = fileReaderService.readFile(TEST_FILE);
+        File resultFile = fileWriterService.saveToFile(TEST_FILE, expected);
+        List<String> actual = readFile(resultFile);
         Assert.assertEquals("Result is incorrect", expected, actual);
     }
 
     @Test
-    public void readFile_withoutData_Ok() {
+    public void saveToFile_emptyData_Ok() {
         List<String> expected = new ArrayList<>();
-        List<String> actual = fileReaderService.readFile(TEST_FILE);
+        File resultFile = fileWriterService.saveToFile(TEST_FILE, expected);
+        List<String> actual = readFile(resultFile);
         Assert.assertEquals("Result is incorrect", expected, actual);
     }
 
     @Test
-    public void readFile_null_Ok() {
+    public void saveToFile_nullData_Ok() {
+        File resultFile = fileWriterService.saveToFile(TEST_FILE, null);
         List<String> expected = new ArrayList<>();
-        List<String> actual = fileReaderService.readFile(null);
+        List<String> actual = readFile(resultFile);
         Assert.assertEquals("Result is incorrect", expected, actual);
     }
 
     @Test
-    public void readFile_notExistedFile_NotOk() {
+    public void saveToFile_nullFile_NotOk() {
+        List<String> someData = List.of("line1", "line2", "line3");
         try {
-            fileReaderService.readFile(NOT_EXISTED_FILE);
+            File resultFile = fileWriterService.saveToFile(null, someData);
         } catch (RuntimeException e) {
             return;
         }
-        Assert.assertEquals("Should throw RuntimeException if file doesn't exist.",
+        Assert.assertEquals("Should throw RuntimeException if null instead of file.",
                 true, false);
     }
 
-    private void writeDataToFile(String data) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(TEST_FILE, true))) {
-            bufferedWriter.write(data);
-            bufferedWriter.newLine();
+    private List<String> readFile(File inputFile) {
+        try {
+            return Files.readAllLines(inputFile.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file." + e);
+            throw new RuntimeException("Can’t read file", e);
         }
     }
 }

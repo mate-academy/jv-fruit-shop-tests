@@ -9,7 +9,9 @@ import java.util.List;
 public class CsvFileWriterService implements FileWriterService {
     @Override
     public File saveToFile(File reportFile, List<String> report) {
-        report.forEach(line -> write(reportFile, line));
+        if(report != null) {
+            report.forEach(line -> write(reportFile, line));
+        }
         return reportFile;
     }
 

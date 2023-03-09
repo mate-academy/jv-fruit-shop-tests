@@ -34,29 +34,29 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void processTransactions_EmptyList_Ok() {
-        //act
+        //when
         fruitShopService.processTransactions(Collections.emptyList());
 
-        //assert
+        //then
         verifyNoInteractions(mockOperationStrategy);
     }
 
     @Test
     public void processTransactions_SingleTransaction_Ok() {
-        //act
+        //when
         fruitShopService.processTransactions(Collections.singletonList(first_transaction));
 
-        //assert
+        //then
         verify(mockOperationStrategy).handleOperation(first_transaction);
         verifyNoMoreInteractions(mockOperationStrategy);
     }
 
     @Test
     public void processTransactions_ListOfTransactions_Ok() {
-        //act
+        //when
         fruitShopService.processTransactions(List.of(first_transaction, second_transaction));
 
-        //assert
+        //when
         verify(mockOperationStrategy).handleOperation(first_transaction);
         verify(mockOperationStrategy).handleOperation(second_transaction);
         verifyNoMoreInteractions(mockOperationStrategy);

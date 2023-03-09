@@ -33,19 +33,19 @@ public class OperationStrategyTest {
 
     @Test
     public void handleOperation_validBalanceTransaction_Ok() {
-        //act
+        //when
         operationStrategy.handleOperation(firstFruittransaction);
 
-        //assert
+        //then
         verify(mockOperationHandler).handleOperation(firstFruittransaction);
     }
 
     @Test
     public void handleOperation_validReturnTransaction_Ok() {
-        //act
+        //when
         operationStrategy.handleOperation(secondFruittransaction);
 
-        //assert
+        //then
         verify(mockOperationHandler).handleOperation(secondFruittransaction);
     }
 }

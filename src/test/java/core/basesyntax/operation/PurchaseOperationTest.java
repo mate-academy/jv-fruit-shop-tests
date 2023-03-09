@@ -47,50 +47,50 @@ public class PurchaseOperationTest {
 
     @Test
     public void handleOperation_getPurchase_Ok() {
-        //arrange
+        //given
         fruitStorage.put(FRUIT, FIRST_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, SECOND_QUANTITY);
         Integer expected = FIRST_QUANTITY - SECOND_QUANTITY;
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         operationHandler.handleOperation(transaction);
         Integer actual = fruitStorage.get(FRUIT);
 
-        //assert
+        //then
         assertEquals("PurchaseOperation should update a quantity in DB.",
                 expected, actual);
     }
 
     @Test
     public void handleOperation_addNewFruitInStorage_Ok() {
-        //arrange
+        //given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, SECOND_QUANTITY);
         Integer expected = SECOND_QUANTITY;
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         operationHandler.handleOperation(transaction);
         Integer actual = fruitStorage.get(FRUIT);
 
-        //assert
+        //then
         assertEquals("PurchaseOperation should add new transaction in DB.",
                 expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void handleOperation_purchaseMoreThanKeptInStorage_NotOk() {
-        //arrange
+        //given
         fruitStorage.put(FRUIT, SECOND_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, FIRST_QUANTITY);
 
-        //act
+        //when
         operationHandler.handleOperation(transaction);
 
-        //assert
+        //then
         fail("Not enough fruit. The transaction could not be completed.");
     }
 }

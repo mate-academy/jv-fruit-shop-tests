@@ -59,13 +59,13 @@ public class CsvTransactionsParserImplTest {
 
     @Test
     public void parseTransactions_returnValidFruitTransactionList_Ok() {
-        //arrange
+        //given
         List<FruitTransaction> expected = validFruitTransactions;
 
-        //act
+        //when
         List<FruitTransaction> actual = csvTransactionsParser.parseTransactions(transactions);
 
-        //assert
+        //then
         assertEquals("Array size after parseTransactions:",
                 expected.size(), actual.size());
         assertArrayEquals("Incorrect data after parseTransactions:",
@@ -109,14 +109,14 @@ public class CsvTransactionsParserImplTest {
     }
 
     private void assertFailParseTransactions(String errorPattern, String invalidData) {
-        //arrange
+        //given
         invalidFruitTransactions.add(invalidData);
         String errorMessage = String.format(errorPattern, invalidFruitTransactions);
 
-        //act
+        //when
         csvTransactionsParser.parseTransactions(invalidFruitTransactions);
 
-        //assert
+        //then
         fail(errorMessage);
     }
 }

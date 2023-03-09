@@ -43,14 +43,14 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFile_getListOfStringsFromValidFile_Ok() throws IOException {
-        //arrange
+        //given
         File file = new File(TEST_FILE_PATH);
         Files.write(file.toPath(), List.of(VALID_INPUT_DATA));
 
-        //act
+        //when
         List<String> actual = fileReaderService.readFile(file.getPath());
 
-        //assert
+        //then
         assertEquals("The list size from file is incorrect:",
                 EXPECTED_RESULT.size(), actual.size());
         assertArrayEquals("The list from file is incorrect:",
@@ -59,10 +59,10 @@ public class FileReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readFile_readInvalidFilePath_NotOk() {
-        //act
+        //when
         fileReaderService.readFile(INVALID_FILE_PATH);
 
-        //assert
+        //then
         fail("Expected the file does not exist.");
     }
 }

@@ -46,52 +46,52 @@ public class BalanceOperationTest {
 
     @Test
     public void handleOperation_getBalance_Ok() {
-        //arrange
+        //given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, FIRST_QUANTITY);
         Integer expected = FIRST_QUANTITY;
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         operationHandler.handleOperation(transaction);
         Integer actual = fruitStorage.get(FRUIT);
 
-        //assert
+        //then
         assertEquals("BalanceOperation should add a pair of fruit-quantity to DB.",
                 expected, actual);
     }
 
     @Test
     public void handleOperation_updateInStorage_Ok() {
-        //arrange
+        //given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, SECOND_QUANTITY);
         fruitStorage.put(transaction.getFruit(), transaction.getQuantity());
         Integer expected = SECOND_QUANTITY;
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         operationHandler.handleOperation(transaction);
         Integer actual = fruitStorage.get(FRUIT);
 
-        //assert
+        //then
         assertEquals("BalanceOperation should update the quantity in DB.",
                 expected, actual);
     }
 
     @Test
     public void handleOperation_addZeroQuantity_Ok() {
-        //arrange
+        //given
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, 0);
         Integer expected = 0;
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         operationHandler.handleOperation(transaction);
         Integer actual = fruitStorage.get(FRUIT);
 
-        //assert
+        //then
         assertEquals("BalanceOperation should add 0 quantity for fruit in DB.",
                 expected, actual);
     }

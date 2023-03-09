@@ -16,27 +16,32 @@ public class FruitTransactionTest {
 
     @Test
     public void createFruitTransaction_Ok() {
-        //arrange
+        //given
+        FruitTransaction.Operation expectedOperation = OPERATION;
+        String expectedFruit = FRUIT;
+        int expectedQuantity = QUANTITY;
+
+        //when
         fruitTransaction = new FruitTransaction(OPERATION, FRUIT, QUANTITY);
 
-        //assert
+        //then
         assertEquals("Incorrect operation: ",
-                OPERATION, fruitTransaction.getOperation());
+                expectedOperation, fruitTransaction.getOperation());
         assertEquals("Incorrect fruit: ",
-                FRUIT, fruitTransaction.getFruit());
+                expectedFruit, fruitTransaction.getFruit());
         assertEquals("Incorrect quantity: ",
-                QUANTITY, fruitTransaction.getQuantity());
+                expectedQuantity, fruitTransaction.getQuantity());
     }
 
     @Test(expected = RuntimeException.class)
     public void createWithInvalidOperation_NotOk() {
-        //arrange
+        //when
         fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.getByCode(INVALID_OPERATION),
                 FRUIT,
                 QUANTITY);
 
-        //assert
+        //then
         fail("Non-existent operation is not allowed.");
     }
 }

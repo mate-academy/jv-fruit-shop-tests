@@ -43,7 +43,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void getReport_getReportSomeData_Ok() {
-        //arrange
+        //given
         fruitStorage.put("banana", 50);
         fruitStorage.put("apple", 200);
         String expected = "fruit,quantity" + System.lineSeparator()
@@ -51,24 +51,24 @@ public class ReportServiceImplTest {
                 + "apple,200" + System.lineSeparator();
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         String actual = reportService.getReport();
 
-        //assert
+        //then
         assertEquals("Incorrect data after writing report: ",
                 expected, actual);
     }
 
     @Test
     public void getReport_getReportEmptyStorage_Ok() {
-        //arrange
+        //given
         String expected = "fruit,quantity" + System.lineSeparator();
         when(Storage.getFruitStorage()).thenReturn(fruitStorage);
 
-        //act
+        //when
         String actual = reportService.getReport();
 
-        //assert
+        //then
         assertEquals("Incorrect data after writing report: ",
                 expected, actual);
     }

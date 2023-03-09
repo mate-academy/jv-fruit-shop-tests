@@ -2,6 +2,7 @@ package core.basesyntax.service.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessService;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -15,6 +16,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -67,5 +69,10 @@ public class DataProcessServiceImplTest {
             throw new RuntimeException("Can`t read file " + FILE_TO, e);
         }
         assertEquals(expected, actualReport);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.getFruits().clear();
     }
 }

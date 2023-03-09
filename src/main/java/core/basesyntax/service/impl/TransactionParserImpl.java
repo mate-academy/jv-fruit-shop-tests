@@ -31,7 +31,7 @@ public class TransactionParserImpl implements TransactionParser {
                     .fromCode(message[OPERATION_POSITION]));
             fruitTransaction.setFruit(message[FRUIT_POSITION]);
             fruitTransaction.setQuantity(Integer.parseInt(message[QUANTITY_POSITION]));
-            strategyOptions.get(fruitTransaction.getOperation()).handler(fruitTransaction);
+            strategyOptions.get(fruitTransaction.getOperation()).handle(fruitTransaction);
         }
         return Storage.storage;
     }

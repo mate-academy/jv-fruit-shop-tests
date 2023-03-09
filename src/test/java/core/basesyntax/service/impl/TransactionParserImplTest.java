@@ -25,18 +25,17 @@ public class TransactionParserImplTest {
     private static List<String> incorrectInformationWithFile;
     private static List<String> informationWithIncorrectOptionsStepInFile;
     private static Map<String, Integer> fruitsCounter;
-    private static Map<FruitTransaction.Operation, OperationHandler> doingStrategy;
-    private static StrategyOptions strategyOptions;
     private static TransactionParser transactionParser;
 
     @BeforeClass
     public static void beforeClass() {
-        doingStrategy = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> doingStrategy = new HashMap<>();
         doingStrategy.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         doingStrategy.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         doingStrategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         doingStrategy.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        strategyOptions = new StrategyOptionsImpl(doingStrategy);
+        StrategyOptions strategyOptions = new StrategyOptionsImpl(doingStrategy);
+
         transactionParser = new TransactionParserImpl(strategyOptions);
         fruitsCounter = new HashMap<>();
         informationWithFile = new ArrayList<>();
@@ -67,31 +66,35 @@ public class TransactionParserImplTest {
     }
 
     @Test
-    public void saved_data_isOk() {
+    public void parseFrom_correctData_isOk() {
         Map<String, Integer> fruits = transactionParser.saveToDb(informationWithFile);
-        assertTrue("Expected data: " + fruits.get("banana") + ", but was: "
-                + fruitsCounter.get("banana"), fruitsCounter.get("banana") == fruits.get("banana"));
-        assertTrue("Expected data: " + fruits.get("apple") + ", but was: "
-                + fruitsCounter.get("apple"), fruitsCounter.get("apple") == fruits.get("apple"));
+        Integer actual = fruitsCounter.get("banana");
+        Integer expected = fruits.get("banana");
+        assertTrue("Expected data: " + expected + ", but was: "
+                + actual, actual.equals(expected));
+        actual = fruitsCounter.get("apple");
+        expected = fruits.get("apple");
+        assertTrue("Expected data: " + expected + ", but was: "
+                + actual, actual.equals(expected));
     }
 
     @Test (expected = RuntimeException.class)
-    public void saved_data_isNotOk() {
+    public void parseFrom_dataWithIncorrectOptionsStep_NotOk() {
         transactionParser.saveToDb(informationWithIncorrectOptionsStepInFile);
     }
 
     @Test(expected = RuntimeException.class)
-    public void saved_nullData_isNotOk() {
+    public void parseFrom_nullData_NotOk() {
         transactionParser.saveToDb(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void saved_incorrectData_isNotOk() {
+    public void parseFrom_incorrectData_NotOk() {
         transactionParser.saveToDb(incorrectInformationWithFile);
     }
 
     @Test(expected = RuntimeException.class)
-    public void saved_dataWithIncorrectOption_isNotOk() {
+    public void parseFrom_dataWithIncorrectOption_NotOk() {
         transactionParser.saveToDb(incorrectInformationWithOptionsInFile);
     }
 }

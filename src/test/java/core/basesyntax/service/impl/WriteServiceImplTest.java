@@ -10,8 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
-    private static final String WORKER_FILE = "src/main/resources/testOutput.csv";
-    private static final String UNREAL_FILE = "src/main/resources/testUnreal.csv";
+    private static final String WORKER_FILE = "src/test/java/testFiles/testOutput.csv";
+    private static final String UNREAL_FILE = "src/test/java/testFiles//testUnreal.csv";
     private static final String DATA_RESULT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator();
@@ -23,7 +23,7 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void writer_correctData_isOk() {
+    public void writerToFile_data_isOk() {
         writer.writeReport(WORKER_FILE, DATA_RESULT);
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(WORKER_FILE))) {
@@ -35,12 +35,13 @@ public class WriteServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        String actual = stringBuilder.toString();
         assertEquals("Expected file content: " + DATA_RESULT + ", but was: "
-                + stringBuilder.toString(), stringBuilder.toString(), DATA_RESULT);
+                + actual, actual, DATA_RESULT);
     }
 
     @Test
-    public void write_toUnrealFile_isOk() {
+    public void writeToUnrealFile_data_isOk() {
         writer.writeReport(UNREAL_FILE, DATA_RESULT);
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(UNREAL_FILE))) {
@@ -52,12 +53,13 @@ public class WriteServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        String actual = stringBuilder.toString();
         assertEquals("Expected file content: " + DATA_RESULT + ", but was: "
-                + stringBuilder.toString(), stringBuilder.toString(), DATA_RESULT);
+                + actual, actual, DATA_RESULT);
     }
 
     @Test (expected = RuntimeException.class)
-    public void write_toNull_isNotOk() {
+    public void writeToNull_data_notOk() {
         writer.writeReport(null, DATA_RESULT);
     }
 }

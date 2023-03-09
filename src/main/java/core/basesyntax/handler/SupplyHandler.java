@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyHandler implements OperationHandler {
 
     @Override
-    public void handler(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         if (Storage.storage.get(transaction.getFruit()) == 0) {
             throw new RuntimeException("We don`t know how many fruits are in storage");
         }

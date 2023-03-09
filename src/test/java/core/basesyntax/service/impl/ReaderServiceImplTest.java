@@ -10,46 +10,48 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String EMPTY_FILE = "src/main/resources/testEmpty.csv";
-    private static final String WORKER_FILE = "src/main/resources/testInput.csv";
-    private static final String UNREAL_FILE = "src/main/resources/unrealInput.csv";
-    private static List<String> WORKER_FILE_RESULT;
+    private static final String EMPTY_FILE = "src/test/java/testFiles/testEmpty.csv";
+    private static final String WORKER_FILE = "src/test/java/testFiles/testInput.csv";
+    private static final String UNREAL_FILE = "src/test/java/testFiles/unrealInput.csv";
+    private static List<String> PROGRAM_CORRECT_RESULT;
     private static ReaderService reader;
 
     @BeforeClass
     public static void beforeClass() {
         reader = new ReaderServiceImpl();
-        WORKER_FILE_RESULT = new ArrayList<>();
-        WORKER_FILE_RESULT.add("type,fruit,quantity");
-        WORKER_FILE_RESULT.add("b,banana,20");
-        WORKER_FILE_RESULT.add("b,apple,100");
-        WORKER_FILE_RESULT.add("s,banana,100");
-        WORKER_FILE_RESULT.add("p,banana,13");
-        WORKER_FILE_RESULT.add("r,apple,10");
-        WORKER_FILE_RESULT.add("p,apple,20");
-        WORKER_FILE_RESULT.add("p,banana,5");
-        WORKER_FILE_RESULT.add("s,banana,50");
+        PROGRAM_CORRECT_RESULT = new ArrayList<>();
+        PROGRAM_CORRECT_RESULT.add("type,fruit,quantity");
+        PROGRAM_CORRECT_RESULT.add("b,banana,20");
+        PROGRAM_CORRECT_RESULT.add("b,apple,100");
+        PROGRAM_CORRECT_RESULT.add("s,banana,100");
+        PROGRAM_CORRECT_RESULT.add("p,banana,13");
+        PROGRAM_CORRECT_RESULT.add("r,apple,10");
+        PROGRAM_CORRECT_RESULT.add("p,apple,20");
+        PROGRAM_CORRECT_RESULT.add("p,banana,5");
+        PROGRAM_CORRECT_RESULT.add("s,banana,50");
     }
 
     @Test
-    public void reading_testingFile_isOk() {
-        assertEquals("Expected file content: " + WORKER_FILE_RESULT + ", but was: "
-                + reader.readFile(WORKER_FILE), reader.readFile(WORKER_FILE), WORKER_FILE_RESULT);
+    public void readFrom_testingFile_ok() {
+        List<String> actual = reader.readFile(WORKER_FILE);
+        assertEquals("Expected file content: " + PROGRAM_CORRECT_RESULT + ", but was: "
+                + actual, actual, PROGRAM_CORRECT_RESULT);
     }
 
     @Test
-    public void reading_emptyFile_isOk() {
+    public void readFrom_emptyFile_ok() {
+        List<String> actual = reader.readFile(WORKER_FILE);
         assertTrue("Expected file content: file must be empty, but was: "
-                + reader.readFile(WORKER_FILE), reader.readFile(EMPTY_FILE).isEmpty());
+                + actual, reader.readFile(EMPTY_FILE).isEmpty());
     }
 
     @Test(expected = RuntimeException.class)
-    public void reading_unrealFile_isNotOk() {
+    public void readFrom_unrealFile_notOk() {
         reader.readFile(UNREAL_FILE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void reading_Null_notOk() {
+    public void readFrom_Null_notOk() {
         reader.readFile(null);
     }
 }

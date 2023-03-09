@@ -16,21 +16,16 @@ public class FruitTransactionTest {
 
     @Test
     public void createFruitTransaction_Ok() {
-        //given
-        FruitTransaction.Operation expectedOperation = OPERATION;
-        String expectedFruit = FRUIT;
-        int expectedQuantity = QUANTITY;
-
         //when
         fruitTransaction = new FruitTransaction(OPERATION, FRUIT, QUANTITY);
 
         //then
         assertEquals("Incorrect operation: ",
-                expectedOperation, fruitTransaction.getOperation());
+                OPERATION, fruitTransaction.getOperation());
         assertEquals("Incorrect fruit: ",
-                expectedFruit, fruitTransaction.getFruit());
+                FRUIT, fruitTransaction.getFruit());
         assertEquals("Incorrect quantity: ",
-                expectedQuantity, fruitTransaction.getQuantity());
+                QUANTITY, fruitTransaction.getQuantity());
     }
 
     @Test(expected = RuntimeException.class)

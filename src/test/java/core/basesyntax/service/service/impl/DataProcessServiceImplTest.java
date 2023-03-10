@@ -40,10 +40,10 @@ public class DataProcessServiceImplTest {
 
     @Test
     public void processReport_ok() {
-        List<String> expected;
-        List<String> actualReport;
         dataProcessService.processReport(FILE_FROM, FILE_TO);
-        expected = List.of("fruit,quantity",
+        List<String> actualReport;
+        List<String> expected = List.of(
+                "fruit,quantity",
                 "banana,152",
                 "apple,90");
         try {

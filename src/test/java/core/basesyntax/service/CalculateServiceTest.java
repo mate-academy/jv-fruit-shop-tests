@@ -22,7 +22,7 @@ public class CalculateServiceTest {
     private static OperationHandlerStrategy operationHandlerStrategy;
     private static Map<FruitTransaction.Operation,
             OperationHandler> handlerMap;
-    private static List<FruitTransaction> correct;
+    private static List<FruitTransaction> correctTransactionList;
     private static final int BALANCE_INDEX = 0;
     private static final int TRANSACTION_INDEX = 2;
     private static final String FRUIT_BANANA = "banana";
@@ -43,12 +43,12 @@ public class CalculateServiceTest {
                 new OperationHandlerSupplyImpl(storage));
         operationHandlerStrategy = new OperationHandlerStrategy(handlerMap);
         calculateService = new CalculateServiceImpl(operationHandlerStrategy);
-        correct = initCorrectFruitTransactionList();
+        correctTransactionList = initCorrectFruitTransactionList();
     }
 
     @Test
     public void process_calculateTransactions_ok() {
-        List<FruitTransaction> fruitTransactions = correct;
+        List<FruitTransaction> fruitTransactions = correctTransactionList;
         calculateService.process(fruitTransactions);
         Integer expectedBananas = 252;
         Integer actualBananas = storage.STOCK_BALANCE.get(FRUIT_BANANA);
@@ -64,14 +64,14 @@ public class CalculateServiceTest {
 
     @Test(expected = UnsupportedOperationException.class)
     public void process_voidBalance_notOk() {
-        List<FruitTransaction> fruitTransactions = correct;
+        List<FruitTransaction> fruitTransactions = correctTransactionList;
         fruitTransactions.remove(BALANCE_INDEX);
         calculateService.process(fruitTransactions);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void process_negativeBalanceQuantity_notOk() {
-        List<FruitTransaction> fruitTransactions = correct;
+        List<FruitTransaction> fruitTransactions = correctTransactionList;
         FruitTransaction balanceWithNegativeQuantity
                 = new FruitTransaction(FruitTransaction.Operation
                 .BALANCE, "banana", -1);
@@ -82,7 +82,7 @@ public class CalculateServiceTest {
 
     @Test(expected = NullPointerException.class)
     public void process_wrongFruit_notOk() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>(correct);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>(correctTransactionList);
         FruitTransaction wrongFruit
                 = new FruitTransaction(FruitTransaction.Operation
                 .SUPPLY, "wrongFruit", 1);
@@ -92,7 +92,7 @@ public class CalculateServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void process_negativeSupply_notOk() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>(correct);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>(correctTransactionList);
         FruitTransaction wrongFruit
                 = new FruitTransaction(FruitTransaction.Operation
                 .SUPPLY, "apple", -1);
@@ -102,7 +102,7 @@ public class CalculateServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void process_negativeReturn_notOk() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>(correct);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>(correctTransactionList);
         FruitTransaction wrongFruit
                 = new FruitTransaction(FruitTransaction.Operation
                 .RETURN, "apple", -1);
@@ -112,7 +112,7 @@ public class CalculateServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void process_negativePurchase_notOk() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>(correct);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>(correctTransactionList);
         FruitTransaction wrongFruit = new FruitTransaction(FruitTransaction.Operation
                 .PURCHASE, FRUIT_APPLE, -1);
         fruitTransactions.add(TRANSACTION_INDEX, wrongFruit);
@@ -121,7 +121,7 @@ public class CalculateServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void process_lackOfFruits_notOk() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>(correct);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>(correctTransactionList);
         FruitTransaction wrongFruit = new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE, FRUIT_APPLE, QUANTITY_MORE_THAN_IN_STOCK);
         fruitTransactions.add(TRANSACTION_INDEX, wrongFruit);

@@ -9,9 +9,8 @@ import java.nio.file.Files;
 import org.junit.Test;
 
 public class WriterServiceTest extends FruitShopTest {
-
     @Test
-    public void writeReportToFile_OK() {
+    public void writeReportToFile_ok() {
         String reportText = "Some report";
         File reportFile = writerService.writeReportToFile(reportText);
         assertTrue(reportFile.exists());

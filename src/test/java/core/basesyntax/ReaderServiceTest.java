@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ReaderServiceTest extends FruitShopTest {
     @Test
-    public void readInfoFromFile_OK() {
+    public void readInfoFromFile_ok() {
         List<String> expected;
         try {
             expected = Files.readAllLines(testFile.toPath());
@@ -23,13 +23,13 @@ public class ReaderServiceTest extends FruitShopTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readInfoFromFile_NotExistFile_NotOk() {
+    public void readInfoFromFile_notExistFile_notOk() {
         File file = new File("not_exist.csv");
         readerService.readFileToList(file);
     }
 
     @Test
-    public void readInfoFromFile_EmptyFile_NotOk() {
+    public void readInfoFromFile_emptyFile_notOk() {
         List<String> expected = new ArrayList<>();
         File file = new File("emptyFile.csv");
         try {
@@ -42,7 +42,7 @@ public class ReaderServiceTest extends FruitShopTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readInfoFromFile_FileIsNull_NotOk() {
+    public void readInfoFromFile_fileIsNull_notOk() {
         readerService.readFileToList(null);
     }
 }

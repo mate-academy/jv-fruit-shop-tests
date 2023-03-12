@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class CalculationTest extends FruitShopTest {
     @Test
-    public void calculate_MultipleItems_Ok() {
+    public void calculate_multipleItems_ok() {
         FruitTransaction balanceTransaction = new FruitTransaction(BALANCE, "apple", 40);
         FruitTransaction suppleTransaction = new FruitTransaction(SUPPLY, "apple", 10);
         Map<String, Integer> expected = new HashMap<>();
@@ -27,7 +27,7 @@ public class CalculationTest extends FruitShopTest {
     }
 
     @Test
-    public void calculate_theSameItems_Ok() {
+    public void calculate_theSameItems_ok() {
         FruitTransaction transactionApple = new FruitTransaction(BALANCE, "apple", 10);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 10);
@@ -36,7 +36,7 @@ public class CalculationTest extends FruitShopTest {
     }
 
     @Test
-    public void calculate_differentFruits_Ok() {
+    public void calculate_differentFruits_ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 25);
         expected.put("banana", 45);

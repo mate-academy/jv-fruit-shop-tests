@@ -32,7 +32,7 @@ public class StrategiesTest {
     }
 
     @Test
-    public void calculateAndStore_Balance_Ok() {
+    public void calculateAndStore_Balance_ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 10);
         expected.put("banana", 35);
@@ -45,13 +45,13 @@ public class StrategiesTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void calculateAndStore_Balance_NegativeQuantity_NotOk() {
+    public void calculateAndStore_balance_negativeQuantity_notOk() {
         FruitTransaction transactionApple = new FruitTransaction(BALANCE, "apple", -10);
         balanceTransaction.calculateAndStore(transactionApple);
     }
 
     @Test
-    public void calculateAndStore_Purchase_Ok() {
+    public void calculateAndStore_purchase_ok() {
         Storage.STORAGE.put("apple", 50);
         Storage.STORAGE.put("banana", 50);
         Map<String, Integer> expected = new HashMap<>();
@@ -66,7 +66,7 @@ public class StrategiesTest {
     }
 
     @Test
-    public void calculateAndStore_Return_Ok() {
+    public void calculateAndStore_return_ok() {
         Storage.STORAGE.put("apple", 50);
         Storage.STORAGE.put("banana", 50);
         Map<String, Integer> expected = new HashMap<>();
@@ -81,7 +81,7 @@ public class StrategiesTest {
     }
 
     @Test
-    public void calculateAndStore_Supply_Ok() {
+    public void calculateAndStore_supply_ok() {
         Storage.STORAGE.put("apple", 50);
         Storage.STORAGE.put("banana", 50);
         Map<String, Integer> expected = new HashMap<>();

@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ReportMakerServiceTest extends FruitShopTest {
     @Test
-    public void generateReportText_OneItem_Ok() {
+    public void generateReportText_oneItem_ok() {
         Map<String, Integer> info = new HashMap<>();
         info.put("apple", 5);
         String expected = "fruit,quantity" + System.lineSeparator()
@@ -18,7 +18,7 @@ public class ReportMakerServiceTest extends FruitShopTest {
     }
 
     @Test
-    public void generateReportText_MultipleItems_Ok() {
+    public void generateReportText_multipleItems_ok() {
         Map<String, Integer> info = new HashMap<>();
         info.put("apple", 5);
         info.put("banana", 3);
@@ -30,5 +30,4 @@ public class ReportMakerServiceTest extends FruitShopTest {
         String actualReport = reportMakerService.generateReportText(info);
         assertEquals(expectedReport, actualReport);
     }
-
 }

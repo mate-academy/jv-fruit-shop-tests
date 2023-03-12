@@ -11,14 +11,14 @@ public class TransactionParserServiceTest extends FruitShopTest {
     private static final int SIZE_OF_DEFAULT_FILE = 8;
 
     @Test
-    public void createTransaction_Ok() {
+    public void createTransaction_ok() {
         List<String> infoInStrings = readerService.readFileToList(testFile);
         List<FruitTransaction> actual = transactionParser.createTransaction(infoInStrings);
         assertEquals(SIZE_OF_DEFAULT_FILE, actual.size());
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransaction_wrongCode_Ok() {
+    public void createTransaction_wrongCode_ok() {
         List<String> info = new ArrayList<>();
         info.add("operation,fruit,quantity");
         info.add("c,banana,75");

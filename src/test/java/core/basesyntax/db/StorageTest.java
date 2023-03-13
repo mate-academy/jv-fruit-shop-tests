@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class StorageTest {
+    private static final String DEFAULT_FRUIT = "apple";
 
     @After
     public void cleanStorageAfterEach() {
@@ -18,8 +19,8 @@ public class StorageTest {
     public void storage_notEmptyMap_ok() {
         Map<String, Integer> expected = new HashMap<>();
         for (int i = 0; i < 50; i++) {
-            Storage.STORAGE.put(("apple" + i), i);
-            expected.put(("apple" + i), i);
+            Storage.STORAGE.put((DEFAULT_FRUIT + i), i);
+            expected.put((DEFAULT_FRUIT + i), i);
             assertEquals(expected, Storage.STORAGE);
         }
     }

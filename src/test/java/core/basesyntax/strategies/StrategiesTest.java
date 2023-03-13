@@ -20,6 +20,8 @@ import org.junit.After;
 import org.junit.Test;
 
 public class StrategiesTest {
+    private static final String DEFAULT_FRUIT_APPLE = "apple";
+    private static final String DEFAULT_FRUIT_BANANA = "banana";
     private final BalanceTransaction balanceTransaction = new BalanceTransaction();
     private final PurchaseTransaction purchaseTransaction = new PurchaseTransaction();
     private final ReturnTransaction returnTransaction = new ReturnTransaction();
@@ -34,10 +36,12 @@ public class StrategiesTest {
     @Test
     public void calculateAndStore_Balance_ok() {
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 10);
-        expected.put("banana", 35);
-        FruitTransaction transactionApple = new FruitTransaction(BALANCE, "apple", 10);
-        FruitTransaction transactionBanana = new FruitTransaction(BALANCE, "banana", 35);
+        expected.put(DEFAULT_FRUIT_APPLE, 10);
+        expected.put(DEFAULT_FRUIT_BANANA, 35);
+        FruitTransaction transactionApple
+                = new FruitTransaction(BALANCE, DEFAULT_FRUIT_APPLE, 10);
+        FruitTransaction transactionBanana
+                = new FruitTransaction(BALANCE, DEFAULT_FRUIT_BANANA, 35);
         balanceTransaction.calculateAndStore(transactionApple);
         balanceTransaction.calculateAndStore(transactionBanana);
         assertEquals("Test failed! Storage must contains "
@@ -46,19 +50,21 @@ public class StrategiesTest {
 
     @Test(expected = RuntimeException.class)
     public void calculateAndStore_balance_negativeQuantity_notOk() {
-        FruitTransaction transactionApple = new FruitTransaction(BALANCE, "apple", -10);
+        FruitTransaction transactionApple = new FruitTransaction(BALANCE, DEFAULT_FRUIT_APPLE, -10);
         balanceTransaction.calculateAndStore(transactionApple);
     }
 
     @Test
     public void calculateAndStore_purchase_ok() {
-        Storage.STORAGE.put("apple", 50);
-        Storage.STORAGE.put("banana", 50);
+        Storage.STORAGE.put(DEFAULT_FRUIT_APPLE, 50);
+        Storage.STORAGE.put(DEFAULT_FRUIT_BANANA, 50);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 40);
-        expected.put("banana", 15);
-        FruitTransaction transactionApple = new FruitTransaction(PURCHASE, "apple", 10);
-        FruitTransaction transactionBanana = new FruitTransaction(PURCHASE, "banana", 35);
+        expected.put(DEFAULT_FRUIT_APPLE, 40);
+        expected.put(DEFAULT_FRUIT_BANANA, 15);
+        FruitTransaction transactionApple
+                = new FruitTransaction(PURCHASE, DEFAULT_FRUIT_APPLE, 10);
+        FruitTransaction transactionBanana
+                = new FruitTransaction(PURCHASE, DEFAULT_FRUIT_BANANA, 35);
         purchaseTransaction.calculateAndStore(transactionApple);
         purchaseTransaction.calculateAndStore(transactionBanana);
         assertEquals("Test failed! Storage must contains "
@@ -67,13 +73,13 @@ public class StrategiesTest {
 
     @Test
     public void calculateAndStore_return_ok() {
-        Storage.STORAGE.put("apple", 50);
-        Storage.STORAGE.put("banana", 50);
+        Storage.STORAGE.put(DEFAULT_FRUIT_APPLE, 50);
+        Storage.STORAGE.put(DEFAULT_FRUIT_BANANA, 50);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 60);
-        expected.put("banana", 85);
-        FruitTransaction transactionApple = new FruitTransaction(RETURN, "apple", 10);
-        FruitTransaction transactionBanana = new FruitTransaction(RETURN, "banana", 35);
+        expected.put(DEFAULT_FRUIT_APPLE, 60);
+        expected.put(DEFAULT_FRUIT_BANANA, 85);
+        FruitTransaction transactionApple = new FruitTransaction(RETURN, DEFAULT_FRUIT_APPLE, 10);
+        FruitTransaction transactionBanana = new FruitTransaction(RETURN, DEFAULT_FRUIT_BANANA, 35);
         returnTransaction.calculateAndStore(transactionApple);
         returnTransaction.calculateAndStore(transactionBanana);
         assertEquals("Test failed! Storage must contains "
@@ -82,13 +88,13 @@ public class StrategiesTest {
 
     @Test
     public void calculateAndStore_supply_ok() {
-        Storage.STORAGE.put("apple", 50);
-        Storage.STORAGE.put("banana", 50);
+        Storage.STORAGE.put(DEFAULT_FRUIT_APPLE, 50);
+        Storage.STORAGE.put(DEFAULT_FRUIT_BANANA, 50);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 60);
-        expected.put("banana", 85);
-        FruitTransaction transactionApple = new FruitTransaction(RETURN, "apple", 10);
-        FruitTransaction transactionBanana = new FruitTransaction(RETURN, "banana", 35);
+        expected.put(DEFAULT_FRUIT_APPLE, 60);
+        expected.put(DEFAULT_FRUIT_BANANA, 85);
+        FruitTransaction transactionApple = new FruitTransaction(RETURN, DEFAULT_FRUIT_APPLE, 10);
+        FruitTransaction transactionBanana = new FruitTransaction(RETURN, DEFAULT_FRUIT_BANANA, 35);
         supplyTransaction.calculateAndStore(transactionApple);
         supplyTransaction.calculateAndStore(transactionBanana);
         assertEquals("Test failed! Storage must contains "
@@ -97,7 +103,7 @@ public class StrategiesTest {
 
     @Test
     public void getCalculationServiceByLetter_balance_ok() {
-        FruitTransaction balance = new FruitTransaction(BALANCE, "apple", 45);
+        FruitTransaction balance = new FruitTransaction(BALANCE, DEFAULT_FRUIT_APPLE, 45);
         CalculationService service = strategy.getCalculationServiceByLetter(balance);
         assertEquals("Test failed! Method must return "
                 + BalanceTransaction.class + ", but was "
@@ -106,7 +112,7 @@ public class StrategiesTest {
 
     @Test
     public void getCalculationServiceByLetter_purchase_ok() {
-        FruitTransaction purchase = new FruitTransaction(PURCHASE, "apple", 45);
+        FruitTransaction purchase = new FruitTransaction(PURCHASE, DEFAULT_FRUIT_APPLE, 45);
         CalculationService service = strategy.getCalculationServiceByLetter(purchase);
         assertEquals("Test failed! Method must return "
                 + PurchaseTransaction.class + ", but was "
@@ -115,7 +121,7 @@ public class StrategiesTest {
 
     @Test
     public void getCalculationServiceByLetter_return_ok() {
-        FruitTransaction returnOperation = new FruitTransaction(RETURN, "apple", 45);
+        FruitTransaction returnOperation = new FruitTransaction(RETURN, DEFAULT_FRUIT_APPLE, 45);
         CalculationService service = strategy.getCalculationServiceByLetter(returnOperation);
         assertEquals("Test failed! Method must return "
                 + ReturnTransaction.class + ", but was "
@@ -124,7 +130,7 @@ public class StrategiesTest {
 
     @Test
     public void getCalculationServiceByLetter_supply_ok() {
-        FruitTransaction supply = new FruitTransaction(SUPPLY, "apple", 45);
+        FruitTransaction supply = new FruitTransaction(SUPPLY, DEFAULT_FRUIT_APPLE, 45);
         CalculationService service = strategy.getCalculationServiceByLetter(supply);
         assertEquals("Test failed! Method must return "
                 + SupplyTransaction.class + ", but was "

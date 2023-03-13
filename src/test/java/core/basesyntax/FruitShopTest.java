@@ -12,6 +12,9 @@ import org.junit.After;
 import org.junit.BeforeClass;
 
 public class FruitShopTest {
+    protected static final String DEFAULT_FRUIT_APPLE = "apple";
+    protected static final String DEFAULT_FRUIT_BANANA = "banana";
+    protected static final String DEFAULT_FRUIT_ORANGE = "orange";
     protected static final String FULL_NAME_FILE = "input.csv";
     protected static File testFile;
     protected FruitCalculatorImpl fruitCalculator = new FruitCalculatorImpl();

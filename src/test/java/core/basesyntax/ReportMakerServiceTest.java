@@ -10,7 +10,7 @@ public class ReportMakerServiceTest extends FruitShopTest {
     @Test
     public void generateReportText_oneItem_ok() {
         Map<String, Integer> info = new HashMap<>();
-        info.put("apple", 5);
+        info.put(DEFAULT_FRUIT_APPLE, 5);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,5" + System.lineSeparator();
         String actual = reportMakerService.generateReportText(info);
@@ -20,9 +20,9 @@ public class ReportMakerServiceTest extends FruitShopTest {
     @Test
     public void generateReportText_multipleItems_ok() {
         Map<String, Integer> info = new HashMap<>();
-        info.put("apple", 5);
-        info.put("banana", 3);
-        info.put("orange", 10);
+        info.put(DEFAULT_FRUIT_APPLE, 5);
+        info.put(DEFAULT_FRUIT_BANANA, 3);
+        info.put(DEFAULT_FRUIT_ORANGE, 10);
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,3" + System.lineSeparator()
                 + "orange,10" + System.lineSeparator()

@@ -11,8 +11,10 @@ public class CalculationStrategy {
                 return new SupplyTransaction();
             case PURCHASE:
                 return new PurchaseTransaction();
-            default:
+            case RETURN:
                 return new ReturnTransaction();
+            default:
+                throw new RuntimeException("Wrong operation!");
         }
     }
 }

@@ -6,6 +6,10 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
+        if (operation == null || fruit == null || fruit.length() == 0 || quantity < 0) {
+            throw new RuntimeException("Wrong data!");
+        }
+
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.actions.ActionWithFruits;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +19,11 @@ public class ActionWithFruitsPurchaseTest {
     @BeforeClass
     public static void beforeClass() {
         actionWithFruits = new ActionWithFruitsPurchase();
+    }
+
+    @After
+    public void tearDownAfterTest() {
+        Storage.fruits.clear();
     }
 
     @Test(expected = RuntimeException.class)
@@ -47,7 +53,7 @@ public class ActionWithFruitsPurchaseTest {
     @Test
     public void getAmountAfterAction_Ok() {
         Storage.put(VALID_NAME, VALID_AMOUNT);
-        int expectedAmount = Storage.get(VALID_NAME) - VALID_AMOUNT;
+        int expectedAmount = 0;
         actionWithFruits.getAmountAfterAction(VALID_NAME, VALID_AMOUNT);
         assertEquals(expectedAmount, (int) Storage.get(VALID_NAME));
     }

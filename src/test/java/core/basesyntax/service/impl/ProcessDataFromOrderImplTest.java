@@ -21,12 +21,12 @@ public class ProcessDataFromOrderImplTest {
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_AMOUNT = 2;
     private static List<String> actual;
-    private static ProcessDataFromOrder processDataFromOrder;
+    private static ProcessDataFromOrder dataFromOrderProcesser;
 
     @BeforeClass
     public static void beforeClass() {
         actual = new ArrayList<>();
-        processDataFromOrder = new ProcessDataFromOrderImpl();
+        dataFromOrderProcesser = new ProcessDataFromOrderImpl();
     }
 
     @Before
@@ -42,7 +42,7 @@ public class ProcessDataFromOrderImplTest {
 
     @Test
     public void split_Ok() {
-        List<String[]> actualList = processDataFromOrder.split(actual);
+        List<String[]> actualList = dataFromOrderProcesser.split(actual);
         String actualType = actualList.get(0)[INDEX_OF_TYPE];
         String actualFruit = actualList.get(0)[INDEX_OF_FRUIT];
         String actualAmount = actualList.get(0)[INDEX_OF_AMOUNT];
@@ -53,13 +53,13 @@ public class ProcessDataFromOrderImplTest {
 
     @Test(expected = RuntimeException.class)
     public void split_with_null_string_notOk() {
-        processDataFromOrder.split(null);
+        dataFromOrderProcesser.split(null);
         fail("Should throw an exception when the input parameter is null");
     }
 
     @Test(expected = RuntimeException.class)
     public void split_with_empty_string_notOk() {
-        processDataFromOrder.split(new ArrayList<>());
+        dataFromOrderProcesser.split(new ArrayList<>());
         fail("Should throw an exception when the input parameter is empty List");
     }
 }

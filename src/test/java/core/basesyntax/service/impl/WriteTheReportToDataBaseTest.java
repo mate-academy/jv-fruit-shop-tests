@@ -17,16 +17,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteTheReportToDataBaseTest {
-    private static final String REPORT_FILE_NAME = "src.test.resources.empty_order.csv";
+    private static final String REPORT_FILE_NAME = "src/test/resources/empty_order.csv";
     private static final String FRUIT = "apple";
     private static final Integer AMOUNT = 10;
     private static List<String> expectedMessage;
-    private static WriteTheReportToDataBase writeTheReportToDataBase;
+    private static WriteTheReportToDataBase theReportToDataBaseWriter;
     private static Map<String, Integer> map;
 
     @BeforeClass
     public static void beforeClass() {
-        writeTheReportToDataBase = new WriteTheReportToDataBaseImpl();
+        theReportToDataBaseWriter = new WriteTheReportToDataBaseImpl();
         map = new HashMap<>();
         expectedMessage = new ArrayList<>();
     }
@@ -46,7 +46,7 @@ public class WriteTheReportToDataBaseTest {
     @Test
     public void write_with_valid_file_name_Ok() {
         map.put(FRUIT, AMOUNT);
-        writeTheReportToDataBase.write(map, REPORT_FILE_NAME);
+        theReportToDataBaseWriter.write(map, REPORT_FILE_NAME);
         List<String> actual;
         try {
             actual = Files.readAllLines(Path.of(REPORT_FILE_NAME));
@@ -58,19 +58,19 @@ public class WriteTheReportToDataBaseTest {
 
     @Test(expected = RuntimeException.class)
     public void write_from_empty_map_notOk() {
-        writeTheReportToDataBase.write(map, REPORT_FILE_NAME);
+        theReportToDataBaseWriter.write(map, REPORT_FILE_NAME);
         fail("Should throw an exception when the input parameter is empty");
     }
 
     @Test(expected = RuntimeException.class)
     public void write_empty_file_name_notOk() {
-        writeTheReportToDataBase.write(map, "");
+        theReportToDataBaseWriter.write(map, "");
         fail("Should throw an exception when the input parameter is empty");
     }
 
     @Test(expected = RuntimeException.class)
     public void write_with_null_input_parameter_notOk() {
-        writeTheReportToDataBase.write(null, REPORT_FILE_NAME);
+        theReportToDataBaseWriter.write(null, REPORT_FILE_NAME);
         fail("Should throw an exception when the input parameter is null");
     }
 }

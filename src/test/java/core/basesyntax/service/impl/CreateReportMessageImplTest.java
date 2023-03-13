@@ -17,12 +17,12 @@ public class CreateReportMessageImplTest {
     private static final String APPLE = "apple";
     private static final Integer AMOUNT = 10;
     private static StringBuilder toReport;
-    private static CreateReportMessage createReportMessage;
+    private static CreateReportMessage reportMessageCreator;
     private static Map<String, Integer> map;
 
     @BeforeClass
     public static void beforeClass() {
-        createReportMessage = new CreateReportMessageImpl();
+        reportMessageCreator = new CreateReportMessageImpl();
         toReport = new StringBuilder(FRUIT + SEPARATOR_TO_WORDS
                 + QUANTITY + System.lineSeparator());
         map = new HashMap<>();
@@ -35,13 +35,13 @@ public class CreateReportMessageImplTest {
 
     @Test(expected = RuntimeException.class)
     public void createMessage_with_null_input_parameter_notOk() {
-        createReportMessage.createMessage(null);
+        reportMessageCreator.createMessage(null);
         fail("The input parameter couldn't be null");
     }
 
     @Test(expected = RuntimeException.class)
     public void createMessage_with_empty_input_parameter_notOk() {
-        createReportMessage.createMessage(map);
+        reportMessageCreator.createMessage(map);
         fail("The input parameter couldn't be empty");
     }
 
@@ -52,6 +52,6 @@ public class CreateReportMessageImplTest {
                 .append(AMOUNT)
                 .append(System.lineSeparator());
         map.put(APPLE, AMOUNT);
-        assertEquals(createReportMessage.createMessage(map), toReport.toString());
+        assertEquals(reportMessageCreator.createMessage(map), toReport.toString());
     }
 }

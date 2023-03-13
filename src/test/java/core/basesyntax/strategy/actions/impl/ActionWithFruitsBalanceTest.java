@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.actions.ActionWithFruits;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,6 +18,11 @@ public class ActionWithFruitsBalanceTest {
     @BeforeClass
     public static void beforeClass() {
         actionWithFruits = new ActionWithFruitsBalance();
+    }
+
+    @After
+    public void tearDownAfterTest() {
+        Storage.fruits.clear();
     }
 
     @Test(expected = RuntimeException.class)

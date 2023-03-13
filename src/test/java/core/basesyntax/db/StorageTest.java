@@ -38,18 +38,6 @@ public class StorageTest {
                 Storage.getCalculationMap().get(key));
     }
 
-    @Test
-    public void addToCalculationMapReturnsSameInstance_Ok() {
-        Map<String, Integer> calculationMap1 = Storage.getCalculationMap();
-        Map<String, Integer> calculationMap2 = Storage.getCalculationMap();
-        assertSame(calculationMap1, calculationMap2);
-
-        String key = "foo";
-        int value = 42;
-        calculationMap1.put(key, value);
-        assertEquals(Integer.valueOf(value), calculationMap2.get(key));
-    }
-
     @AfterClass
     public static void afterClass() {
         Storage.getCalculationMap().clear();

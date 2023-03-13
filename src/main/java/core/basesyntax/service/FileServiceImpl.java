@@ -20,6 +20,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void writeToFile(String data, String fileName) {
+        if (data.equals("") || fileName.equals("")) {
+            throw new RuntimeException("Incorrect input parameter");
+        }
         File reportFile = new File(fileName);
         Path filePath = reportFile.toPath();
 

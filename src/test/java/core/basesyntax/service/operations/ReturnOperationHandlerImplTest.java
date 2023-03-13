@@ -5,7 +5,9 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.template.FruitTransaction;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -37,5 +39,10 @@ public class ReturnOperationHandlerImplTest {
         balanceHandler.handle(transaction);
         Integer actual = storageDao.get("grape");
         assertEquals(Integer.valueOf(23), actual);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.getCalculationMap().clear();
     }
 }

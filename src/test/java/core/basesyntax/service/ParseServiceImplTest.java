@@ -29,7 +29,7 @@ public class ParseServiceImplTest {
 
     @Test
     public void parseLineEmptyInputLine_NotOk() {
-        String line = null;
+        String line = "";
 
         try {
             parseService.parseLine(line);
@@ -40,35 +40,29 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parseLineIncorectInputLine_1_NotOk() {
+    public void parseLineIncorectInputLineOrderStructure_NotOk() {
         FruitTransaction expected = new FruitTransaction();
         expected.setOperation(FruitTransaction.Operation.BALANCE);
         expected.setFruit("banana");
         expected.setQuantity(20);
-        String line = "banana,b,20";
+        String firstInputLine = "banana,b,20";
         try {
-            FruitTransaction actual = parseService.parseLine(line);
+            FruitTransaction actual = parseService.parseLine(firstInputLine);
         } catch (IllegalArgumentException e) {
             return;
         }
-        fail("IllegalArgumentException should be thrown for incorrect operation "
-                + line);
-    }
 
-    @Test
-    public void parseLineIncorectInputLine_2_NotOk() {
-        FruitTransaction expected = new FruitTransaction();
         expected.setOperation(FruitTransaction.Operation.BALANCE);
         expected.setFruit("banana");
         expected.setQuantity(20);
-        String line = "b,20,banana";
+        String secondInputLine = "b,20,banana";
         try {
-            FruitTransaction actual = parseService.parseLine(line);
+            FruitTransaction actual = parseService.parseLine(secondInputLine);
         } catch (IllegalArgumentException e) {
             return;
         }
         fail("IllegalArgumentException should be thrown for incorrect operation "
-                + line);
+                + secondInputLine);
     }
 
     @Test

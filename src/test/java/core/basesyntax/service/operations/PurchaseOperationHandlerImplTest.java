@@ -7,7 +7,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.template.FruitTransaction;
-import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -58,8 +58,8 @@ public class PurchaseOperationHandlerImplTest {
         assertEquals(Integer.valueOf(20), actual);
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void afterClass() {
         Storage.getCalculationMap().clear();
     }
 }

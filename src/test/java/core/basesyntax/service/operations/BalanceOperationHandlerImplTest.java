@@ -5,13 +5,16 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.template.FruitTransaction;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerImplTest {
     private static StorageDao storageDao;
     private static OperationHandler balanceHandler;
+    private static final Integer EXPECTED_QUANTITY = 20;
 
     @BeforeClass
     public static void beforeClass() {
@@ -35,6 +38,11 @@ public class BalanceOperationHandlerImplTest {
                 "orange", 20);
         balanceHandler.handle(transaction);
         Integer actual = storageDao.get("orange");
-        assertEquals(Integer.valueOf(20), actual);
+        assertEquals(EXPECTED_QUANTITY, actual);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.getCalculationMap().clear();
     }
 }

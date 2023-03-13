@@ -20,7 +20,7 @@ public class FileServiceImplTest {
     }
 
     @Test //(expected = RuntimeException.class)
-    public void readFromFileNullInputPath_NotOk() {
+    public void readFromFileInputNullPath_NotOk() {
         String path = null;
 
         try {
@@ -32,11 +32,19 @@ public class FileServiceImplTest {
     }
 
     @Test
-    public void readFromFileInputEmptyLinePath_NotOk() {
-        String path = "";
+    public void readFromFileInputIncorrectPath_NotOk() {
+        String emptyLinePath = "";
 
         try {
-            fileService.readFromFile(path);
+            fileService.readFromFile(emptyLinePath);
+        } catch (RuntimeException e) {
+            return;
+        }
+
+        String incorrectPath = "-";
+
+        try {
+            fileService.readFromFile(incorrectPath);
         } catch (RuntimeException e) {
             return;
         }
@@ -80,7 +88,7 @@ public class FileServiceImplTest {
         String fileName = "testresult.csv";
 
         try {
-            fileService.writeToFile(null, fileName);
+            fileService.writeToFile(data, fileName);
         } catch (RuntimeException e) {
             return;
         }
@@ -93,11 +101,12 @@ public class FileServiceImplTest {
         String fileName = "testresult.csv";
 
         try {
-            fileService.writeToFile(null, fileName);
+            fileService.writeToFile(data, fileName);
         } catch (RuntimeException e) {
             return;
         }
-        fail("RuntimeException should be thrown if value is null");
+        fail("RuntimeException should be thrown "
+                + "for empty line input data");
     }
 
     @Test
@@ -106,7 +115,7 @@ public class FileServiceImplTest {
         String fileName = null;
 
         try {
-            fileService.writeToFile(null, fileName);
+            fileService.writeToFile(data, fileName);
         } catch (RuntimeException e) {
             return;
         }
@@ -119,11 +128,12 @@ public class FileServiceImplTest {
         String fileName = "";
 
         try {
-            fileService.writeToFile(null, fileName);
+            fileService.writeToFile(data, fileName);
         } catch (RuntimeException e) {
             return;
         }
-        fail("RuntimeException should be thrown if value is null");
+        fail("RuntimeException should be thrown"
+                + " if file name is empty line");
     }
 
     @Test

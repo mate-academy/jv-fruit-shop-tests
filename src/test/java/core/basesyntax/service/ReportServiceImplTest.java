@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -30,5 +31,10 @@ public class ReportServiceImplTest {
                 .toString();
         String report = reportService.createReport();
         assertEquals(expected, report);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Storage.getCalculationMap().clear();
     }
 }

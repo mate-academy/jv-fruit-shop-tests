@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import core.basesyntax.service.WriteTheReportToDataBase;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,17 +15,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriteTheReportToDataBaseTest {
+public class ReportWriterImplTest {
     private static final String REPORT_FILE_NAME = "src/test/resources/report.csv";
     private static final String FRUIT = "apple";
     private static final Integer AMOUNT = 10;
     private static List<String> expectedMessage;
-    private static WriteTheReportToDataBase theReportToDataBaseWriter;
+    private static core.basesyntax.service.ReportWriter theReportToDataBaseWriter;
     private static Map<String, Integer> map;
 
     @BeforeClass
     public static void beforeClass() {
-        theReportToDataBaseWriter = new WriteTheReportToDataBaseImpl();
+        theReportToDataBaseWriter = new ReportWriterImpl();
         map = new HashMap<>();
         expectedMessage = new ArrayList<>();
     }

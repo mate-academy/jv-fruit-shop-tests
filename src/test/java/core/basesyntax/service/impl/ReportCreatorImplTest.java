@@ -5,25 +5,25 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.CreateTheReport;
+import core.basesyntax.service.ReportCreator;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CreateTheReportImplTest {
+public class ReportCreatorImplTest {
     private static final String WORD_TO_IGNORE = "type";
     private static final String[] FIRST_LINE = new String[]{"type", "fruit", "quantity"};
     private static final String[] SECOND_LINE = new String[]{"b", "apple", "15"};
     private static final String FRUIT = "apple";
     private static final int EXPECTED_AMOUNT = 15;
-    private static CreateTheReport theReportCreator;
+    private static ReportCreator theReportCreator;
     private static List<String[]> list;
 
     @BeforeClass
     public static void beforeClass() {
-        theReportCreator = new CreateTheReportImpl();
+        theReportCreator = new ReportCreatorImpl();
         list = new ArrayList<>();
     }
 

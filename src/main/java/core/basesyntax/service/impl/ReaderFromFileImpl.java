@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadFromFile;
+import core.basesyntax.service.ReaderFromFile;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFromFileImpl implements ReadFromFile {
+public class ReaderFromFileImpl implements ReaderFromFile {
     @Override
     public List<String> read(String fileName) {
         if (fileName == null) {

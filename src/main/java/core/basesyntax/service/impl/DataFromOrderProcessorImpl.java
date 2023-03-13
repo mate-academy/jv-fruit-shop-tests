@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ProcessDataFromOrder;
+import core.basesyntax.service.DataFromOrderProcessor;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProcessDataFromOrderImpl implements ProcessDataFromOrder {
+public class DataFromOrderProcessorImpl implements DataFromOrderProcessor {
     private static final String SYMBOL_TO_SPLIT = ",";
 
     @Override

@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import core.basesyntax.service.ReadFromFile;
+import core.basesyntax.service.ReaderFromFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,15 +11,15 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReadFromFileImplTest {
+public class ReaderFromFileImplTest {
     private static final String ORDER_FILE_NAME = "src/test/resources/order.csv";
     private static final String EMPTY_ORDER_FILE_NAME = "src/test/resources/empty_order.csv";
     private static final String NOT_EXISTING_FILE_NAME = "src/test/resources/not_existing_file.csv";
-    private static ReadFromFile readerFromFile;
+    private static ReaderFromFile readerFromFile;
 
     @BeforeClass
     public static void beforeClass() {
-        readerFromFile = new ReadFromFileImpl();
+        readerFromFile = new ReaderFromFileImpl();
     }
 
     @Test

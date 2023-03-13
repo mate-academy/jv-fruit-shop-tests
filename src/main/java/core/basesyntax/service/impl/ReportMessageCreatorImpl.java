@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CreateReportMessage;
+import core.basesyntax.service.ReportMessageCreator;
 import java.util.Map;
 
-public class CreateReportMessageImpl implements CreateReportMessage {
+public class ReportMessageCreatorImpl implements ReportMessageCreator {
     private static final char SEPARATOR_TO_WORDS = ',';
     private static final String FRUIT = "fruit";
     private static final String QUANTITY = "quantity";

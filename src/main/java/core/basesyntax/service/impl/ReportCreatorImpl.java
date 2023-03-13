@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.TypeOfOperation;
-import core.basesyntax.service.CreateTheReport;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.strategy.ActionStrategyImpl;
 import core.basesyntax.strategy.ActionsStrategy;
 import java.util.List;
 
-public class CreateTheReportImpl implements CreateTheReport {
+public class ReportCreatorImpl implements ReportCreator {
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;

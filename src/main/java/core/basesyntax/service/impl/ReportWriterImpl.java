@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CreateReportMessage;
-import core.basesyntax.service.WriteTheReportToDataBase;
+import core.basesyntax.service.ReportMessageCreator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class WriteTheReportToDataBaseImpl implements WriteTheReportToDataBase {
-    private final CreateReportMessage createReportMessage = new CreateReportMessageImpl();
+public class ReportWriterImpl implements core.basesyntax.service.ReportWriter {
+    private final ReportMessageCreator createReportMessage = new ReportMessageCreatorImpl();
 
     @Override
     public void write(Map<String, Integer> toWrite, String fileName) {

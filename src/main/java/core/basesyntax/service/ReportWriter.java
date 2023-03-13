@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface WriteTheReportToDataBase {
+public interface ReportWriter {
     void write(Map<String, Integer> toWrite, String fileName);
 }

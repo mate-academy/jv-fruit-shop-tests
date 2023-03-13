@@ -47,8 +47,10 @@ public class CreateReportMessageImplTest {
 
     @Test
     public void createMessage_Ok() {
-        toReport.append(APPLE).append(SEPARATOR_TO_WORDS)
-                .append(AMOUNT).append(System.lineSeparator());
+        toReport.append(APPLE)
+                .append(SEPARATOR_TO_WORDS)
+                .append(AMOUNT)
+                .append(System.lineSeparator());
         map.put(APPLE, AMOUNT);
         assertEquals(createReportMessage.createMessage(map), toReport.toString());
     }

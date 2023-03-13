@@ -17,7 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteTheReportToDataBaseTest {
-    private static final String REPORT_FILE_NAME = "src/test/resources/empty_order.csv";
+    private static final String REPORT_FILE_NAME = "src/test/resources/report.csv";
     private static final String FRUIT = "apple";
     private static final Integer AMOUNT = 10;
     private static List<String> expectedMessage;

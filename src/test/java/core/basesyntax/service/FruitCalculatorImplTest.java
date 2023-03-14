@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
@@ -18,9 +18,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CalculationTest {
-    private static final String FILE_NAME = "src/test/resources/input.csv";
-    private static File testFile;
+public class FruitCalculatorImplTest {
     private static final String DEFAULT_FRUIT_APPLE = "apple";
     private static final String DEFAULT_FRUIT_BANANA = "banana";
     private static final int DEFAULT_QUANTITY_10 = 10;
@@ -30,6 +28,8 @@ public class CalculationTest {
     private static final int DEFAULT_QUANTITY_40 = 40;
     private static final int DEFAULT_QUANTITY_45 = 45;
     private static final int DEFAULT_QUANTITY_50 = 50;
+    private static final String FILE_NAME = "src/test/resources/input.csv";
+    private static File testFile;
 
     @BeforeClass
     public static void setUpBeforeClass() {

@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -15,8 +14,9 @@ import org.junit.Test;
 
 public class CsvFileReaderServiceTest {
     private static FileReaderService fileReaderService;
-    private static final String PATH = "src/test/resources";
-    private static final File DIRECTORY = new File(PATH);
+    private static final String PATH = "src" + File.separator
+                                    + "test" + File.separator
+                                    + "resources";
     private static final File TEST_FILE =
             new File(PATH + File.separator + "testFile.csv");
     private static final File NOT_EXISTED_FILE =
@@ -25,12 +25,6 @@ public class CsvFileReaderServiceTest {
     @BeforeClass
     public static void beforeClass() {
         fileReaderService = new CsvFileReaderService();
-        DIRECTORY.mkdir();
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        DIRECTORY.delete();
     }
 
     @Before

@@ -19,10 +19,13 @@ import service.transaction.TransactionHandler;
 public class Main {
     public static final Map<FruitTransaction.Operation,
                         TransactionHandler> transactionHandlerMap = new HashMap<>();
+    private static final String PATH = "src" + File.separator
+                                    + "test" + File.separator
+                                    + "resources";
     public static final File INPUT_FILE =
-                            new File("src/main/resources/inputData.csv");
+                            new File(PATH + File.separator + "inputData.csv");
     public static final File REPORT_FILE =
-                            new File("src/main/resources/reportFile.csv");
+                            new File(PATH + File.separator + "reportFile.csv");
 
     public static void main(String[] args) {
         transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,

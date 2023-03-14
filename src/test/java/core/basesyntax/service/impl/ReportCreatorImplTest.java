@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
@@ -13,7 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private static final String WORD_TO_IGNORE = "type";
     private static final String[] FIRST_LINE = new String[]{"type", "fruit", "quantity"};
     private static final String[] SECOND_LINE = new String[]{"b", "apple", "15"};
     private static final String FRUIT = "apple";
@@ -57,6 +56,6 @@ public class ReportCreatorImplTest {
     public void add_with_wrong_first_line_notOk() {
         list.add(FIRST_LINE);
         theReportCreator.add(list);
-        assertNull(Storage.get(WORD_TO_IGNORE));
+        assertTrue(Storage.fruits.isEmpty());
     }
 }

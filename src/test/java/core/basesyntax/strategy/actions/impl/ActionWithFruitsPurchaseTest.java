@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.actions.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
@@ -55,6 +55,6 @@ public class ActionWithFruitsPurchaseTest {
         Storage.put(VALID_NAME, VALID_AMOUNT);
         int expectedAmount = 0;
         actionWithFruits.getAmountAfterAction(VALID_NAME, VALID_AMOUNT);
-        assertEquals(expectedAmount, (int) Storage.get(VALID_NAME));
+        assertSame(expectedAmount, Storage.get(VALID_NAME));
     }
 }

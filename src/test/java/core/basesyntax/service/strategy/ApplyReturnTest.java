@@ -30,6 +30,7 @@ public class ApplyReturnTest {
 
     @Test
     public void apply_Ok() {
+        Storage.storage.clear();
         FruitTransaction fruit = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,"apple", 100);
         unaryOperation.apply(fruit);

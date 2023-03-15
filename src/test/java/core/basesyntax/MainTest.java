@@ -78,6 +78,7 @@ public class MainTest {
         }
     }
 
+
     @Test(expected = NullPointerException.class)
     public void transactionParser_parse_emptyInput_exception() {
         List<String> read = new ArrayList<>();

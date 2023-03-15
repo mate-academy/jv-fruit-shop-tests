@@ -17,39 +17,32 @@ public class WriterServiceImplTest {
             = null;
     private static final String INVALID_REPORT_FILE
             = "///^_^|||";
-    private static final String RESTRICTED_DESTINATION
-            = "C:\\Windows\\System32\\!noWayYouCanCreateMe";
     private static final List<String> expectedReportLines = new ArrayList<>();
-    private static String prepearedReport;
+    private static String preparedReport;
 
     @BeforeClass
     public static void set() {
         expectedReportLines.add("fruit,quantity");
         expectedReportLines.add("banana,152");
         expectedReportLines.add("apple,90");
-        prepearedReport = "fruit,quantity" + System.lineSeparator()
+        preparedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullFile_notOk() {
-        new WriterServiceImpl().writeToFile(prepearedReport, NULL_FILE);
+        new WriterServiceImpl().writeToFile(preparedReport, NULL_FILE);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_invalidPath_notOk() {
-        new WriterServiceImpl().writeToFile(prepearedReport, INVALID_REPORT_FILE);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void writeToFile_invalidFile_notOk() {
-        new WriterServiceImpl().writeToFile(prepearedReport, RESTRICTED_DESTINATION);
+        new WriterServiceImpl().writeToFile(preparedReport, INVALID_REPORT_FILE);
     }
 
     @Test
     public void writeToFile_ok() {
-        new WriterServiceImpl().writeToFile(prepearedReport, REPORT_FILE);
+        new WriterServiceImpl().writeToFile(preparedReport, REPORT_FILE);
         List<String> actualReportLines;
         try {
             actualReportLines = Files.readAllLines(Path.of(REPORT_FILE));

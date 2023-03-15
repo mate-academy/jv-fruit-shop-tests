@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.impl;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assume.assumeThat;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
@@ -50,11 +49,11 @@ public class PurchaseOperationHandlerTest {
     public void handleOperation_regularTransactionWithExistingProduct_ok() {
         operationHandler.handleOperation(new FruitTransaction(
                 DEFAULT_OPERATION, DEFAULT_PRODUCT_NAME, SUBTRACT_QUANTITY_OK));
-        assumeThat("Test failed! For product '" + DEFAULT_PRODUCT_NAME
+        assertEquals("Test failed! For product '" + DEFAULT_PRODUCT_NAME
                         + "' expected quantity: " + (DEFAULT_QUANTITY - SUBTRACT_QUANTITY_OK)
                         + ", but actual is: " + FruitStorage.storage.get(DEFAULT_PRODUCT_NAME),
-                FruitStorage.storage.get(DEFAULT_PRODUCT_NAME),
-                is(DEFAULT_QUANTITY - SUBTRACT_QUANTITY_OK));
+                (Integer) (DEFAULT_QUANTITY - SUBTRACT_QUANTITY_OK),
+                FruitStorage.storage.get(DEFAULT_PRODUCT_NAME));
     }
 
     @Test

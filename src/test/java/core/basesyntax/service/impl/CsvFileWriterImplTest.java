@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class CsvFileWriterImplTest {
-    private static final String OUTPUT_FILE_PATH = "src/test/java/resources/reportTest.cvs";
+    private static final String OUTPUT_FILE_PATH = "src/test/java/resources/reportTest.csv";
     private static final String OUTPUT_FOLDER_PATH = "src/test/java/resources/";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String REPORT = "fruit,quantity" + LINE_SEPARATOR
@@ -28,16 +28,12 @@ public class CsvFileWriterImplTest {
     }
 
     @Test
-    public void write_correctReport_ok() {
+    public void write_correctReport_ok() throws IOException {
         writer.write(REPORT);
-        try {
-            String report = String.join(LINE_SEPARATOR,
-                    Files.readAllLines(Path.of(OUTPUT_FILE_PATH)));
-            assertEquals("Test failed! Expected report: " + REPORT + LINE_SEPARATOR
-                    + "But actual is: " + report, REPORT, report);
-        } catch (IOException e) {
-            throw new RuntimeException("File not found '" + OUTPUT_FILE_PATH + '\'');
-        }
+        String report = String.join(LINE_SEPARATOR,
+                Files.readAllLines(Path.of(OUTPUT_FILE_PATH)));
+        assertEquals("Test failed! Expected report: " + REPORT + LINE_SEPARATOR
+                + "But actual is: " + report, REPORT, report);
     }
 
     @Test

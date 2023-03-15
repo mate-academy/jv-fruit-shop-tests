@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.impl;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assume.assumeThat;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
@@ -48,20 +47,20 @@ public class SupplyOperationHandlerTest {
     public void handleOperation_handleNewProduct_ok() {
         FruitStorage.storage.clear();
         operationHandler.handleOperation(defaultTransaction);
-        assumeThat("Test failed! Expected product '" + DEFAULT_PRODUCT_NAME
+        assertEquals("Test failed! Expected product '" + DEFAULT_PRODUCT_NAME
                         + "' with value '" + DEFAULT_QUANTITY + "', but actual value is '"
                         + FruitStorage.storage.get(DEFAULT_PRODUCT_NAME),
-                FruitStorage.storage.get(DEFAULT_PRODUCT_NAME), is(DEFAULT_QUANTITY));
+                (Integer) DEFAULT_QUANTITY, FruitStorage.storage.get(DEFAULT_PRODUCT_NAME));
     }
 
     @Test
     public void handleOperation_handleExistingProduct_ok() {
         operationHandler.handleOperation(new FruitTransaction(DEFAULT_OPERATION,
                 DEFAULT_PRODUCT_NAME, DEFAULT_QUANTITY));
-        assumeThat("Test failed! Expected product '" + DEFAULT_PRODUCT_NAME
+        assertEquals("Test failed! Expected product '" + DEFAULT_PRODUCT_NAME
                         + "' with value '" + (DEFAULT_QUANTITY << 1) + "', but actual value is '"
                         + FruitStorage.storage.get(DEFAULT_PRODUCT_NAME),
-                FruitStorage.storage.get(DEFAULT_PRODUCT_NAME), is(DEFAULT_QUANTITY << 1));
+                (Integer) (DEFAULT_QUANTITY << 1), FruitStorage.storage.get(DEFAULT_PRODUCT_NAME));
     }
 
     @Test

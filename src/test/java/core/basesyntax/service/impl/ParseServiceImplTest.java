@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,13 +24,13 @@ public class ParseServiceImplTest {
     private static ParseServiceImpl parser;
     private List<FruitTransaction> result;
 
-    @BeforeAll
+    @BeforeClass
     public static void beforeClass() {
         parser = new ParseServiceImpl();
     }
 
-    @AfterEach
-    void clearResultList() {
+    @After
+    public void clearResultList() {
         result.clear();
     }
 

@@ -7,7 +7,10 @@ public final class AdderToStorage {
     public static void add(FruitTransaction transaction) {
         int currentQuantity = Storage.storage
                 .getOrDefault(transaction.getFruit(), 0);
-        Storage.storage.put(transaction.getFruit(),
-                currentQuantity + transaction.getQuantity());
+        int transactionQuantity = transaction.getQuantity();
+        if (transactionQuantity >= 0) {
+            Storage.storage.put(transaction.getFruit(),
+                    currentQuantity + transactionQuantity);
+        }
     }
 }

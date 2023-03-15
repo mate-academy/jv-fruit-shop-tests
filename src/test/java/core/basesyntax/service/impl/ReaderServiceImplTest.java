@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +17,7 @@ public class ReaderServiceImplTest {
     private static final String PATH_TO_NONEXISTENT_FILE = "path/to/nonexistent/file.csv";
     private static ReaderService readerService;
 
-    @BeforeAll
+    @BeforeClass
     public static void beforeAll() {
         readerService = new ReaderServiceImpl();
     }

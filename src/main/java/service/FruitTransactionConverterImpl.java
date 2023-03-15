@@ -20,9 +20,13 @@ public class FruitTransactionConverterImpl implements FruitTransactionConverter 
         return inputData.stream()
                 .map(string -> string.split(REGEX_TO_SPLIT_STRING))
                 .filter(array -> array.length == REQUIRED_ARRAY_SIZE)
-                .map(array -> new FruitTransaction(array[OPERATION_SIGN_INDEX],
-                        array[FRUIT_NAME_INDEX],
-                        Integer.parseInt(array[AMOUNT_INDEX])))
+                .map(this::createFruitTransaction)
                 .collect(Collectors.toList());
+    }
+
+    private FruitTransaction createFruitTransaction(String[] strings) {
+        return new FruitTransaction(strings[OPERATION_SIGN_INDEX],
+                                    strings[FRUIT_NAME_INDEX],
+                                    Integer.parseInt(strings[AMOUNT_INDEX]));
     }
 }

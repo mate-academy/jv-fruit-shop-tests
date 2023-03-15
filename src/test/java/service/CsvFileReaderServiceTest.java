@@ -16,6 +16,7 @@ public class CsvFileReaderServiceTest {
     private static FileReaderService fileReaderService;
     private static final String PATH = "src" + File.separator
                                     + "test" + File.separator
+                                    + "java" + File.separator
                                     + "resources";
     private static final File TEST_FILE =
             new File(PATH + File.separator + "testFile.csv");

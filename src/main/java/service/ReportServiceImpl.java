@@ -2,6 +2,8 @@ package service;
 
 import dao.StorageDao;
 import dao.StorageDaoImpl;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
@@ -17,6 +19,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<String> createReport(List<FruitTransaction> transactions) {
+        if (transactionStrategy == null || transactions == null) {
+            return new ArrayList<>();
+        }
         List<String> fruitList = transactions.stream()
                                             .peek(this::applyTransaction)
                                             .map(FruitTransaction::getFruit)
@@ -32,7 +37,7 @@ public class ReportServiceImpl implements ReportService {
                 transactionStrategy.get(transaction.getOperation());
         int amountFromStorage = storageDao.getAmount(transaction.getFruit());
         int newAmount = transactionHandler.calculateRemnant(amountFromStorage,
-                                                        transaction.getAmount());
+                transaction.getAmount());
         storageDao.add(transaction.getFruit(), newAmount);
     }
 }

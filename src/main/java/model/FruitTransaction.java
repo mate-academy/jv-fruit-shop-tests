@@ -64,7 +64,8 @@ public class FruitTransaction {
         }
     }
 
-    private Operation convertSignToOperation(String operationSign) {
+    private Operation convertSignToOperation(String operationSign)
+                                        throws NoSuchElementException {
         switch (operationSign) {
             case BALANCE_SIGN:
                 return Operation.BALANCE;

@@ -17,6 +17,7 @@ public class FruitShopServiceImplTest {
                     TransactionHandler> transactionHandlerMap = new HashMap<>();
     private static final String PATH = "src" + File.separator
                                     + "test" + File.separator
+                                    + "java" + File.separator
                                     + "resources";
     public static final File INPUT_FILE =
             new File(PATH + File.separator + "testInputData.csv");

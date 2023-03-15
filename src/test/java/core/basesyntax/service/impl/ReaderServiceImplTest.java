@@ -1,15 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -17,11 +15,10 @@ public class ReaderServiceImplTest {
     private static final String VALID_PATH_TO_VALID_FILE = "src/test/resources/valid_input.csv";
     private static final String PATH_TO_EMPTY_FILE = "src/test/resources/empty_input.csv";
     private static final String PATH_TO_NONEXISTENT_FILE = "path/to/nonexistent/file.csv";
-
     private static ReaderService readerService;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @BeforeAll
+    public static void beforeAll() {
         readerService = new ReaderServiceImpl();
     }
 

@@ -9,8 +9,7 @@ public class PurchaseActivitiesHandler implements ActivitiesHandler {
     @Override
     public void changeFruit(String fruitType, Integer amount) {
         if (storageDao.get(fruitType) == null) {
-            storageDao.add(fruitType, -amount);
-            return;
+            throw new RuntimeException("Can't find fruit");
         }
         int different = storageDao.get(fruitType) - amount;
         storageDao.add(fruitType, different);

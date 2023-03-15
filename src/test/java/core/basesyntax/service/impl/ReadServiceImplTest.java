@@ -1,11 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ReadService;
-import org.junit.Test;
-
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class ReadServiceImplTest {
     private static final ReadService readService = new ReadServiceImpl();

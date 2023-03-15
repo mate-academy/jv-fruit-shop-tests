@@ -17,7 +17,6 @@ import core.basesyntax.strategy.activities.BalanceActivitiesHandler;
 import core.basesyntax.strategy.activities.PurchaseActivitiesHandler;
 import core.basesyntax.strategy.activities.ReturnActivitiesHandler;
 import core.basesyntax.strategy.activities.SupplyActivitiesHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

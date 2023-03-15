@@ -39,7 +39,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl(storageDao);
 
         List<String> dataOperationsFromFile = fileService
-                .readFromFile("src/main/java/inputdata.csv");
+                .readFromFile("src/main/java/input-data.csv");
 
         OperationStrategy strategy = new OperationStrategyImpl(operationsHandlerMap);
         dataOperationsFromFile

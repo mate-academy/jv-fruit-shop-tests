@@ -1,7 +1,6 @@
 package core.basesyntax.service.operations;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -21,14 +20,9 @@ public class ReturnOperationHandlerImplTest {
         balanceHandler = new ReturnOperationHandlerImpl(storageDao);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void handleReturnNullFruitTransaction_NotOk() {
-        try {
-            balanceHandler.handle(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException should be thrown for incorrect input operation");
+        balanceHandler.handle(null);
     }
 
     @Test

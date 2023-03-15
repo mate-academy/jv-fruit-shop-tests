@@ -1,7 +1,6 @@
 package core.basesyntax.service.operations;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -27,26 +26,17 @@ public class PurchaseOperationHandlerImplTest {
         Storage.getCalculationMap().put("apple", 40);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void handlePurchaseInputNullFruitTransaction_NotOk() {
-        try {
-            balanceHandler.handle(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException should be thrown for incorrect input operation");
+        balanceHandler.handle(null);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void handlePurchaseNotEnoughFruit_NotOk() {
         storageDao.put("apple", 40);
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "apple", 45);
-        try {
-            balanceHandler.handle(transaction);
-        } catch (RuntimeException e) {
-            return;
-        }
+        balanceHandler.handle(transaction);
     }
 
     @Test

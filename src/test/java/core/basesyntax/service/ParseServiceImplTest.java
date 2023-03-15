@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.template.FruitTransaction;
 import org.junit.BeforeClass;
@@ -15,54 +14,23 @@ public class ParseServiceImplTest {
         parseService = new ParseServiceImpl();
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parseLineNullInputLine_NotOk() {
         String line = null;
-
-        try {
-            parseService.parseLine(line);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException should be thrown if value is null");
+        parseService.parseLine(line);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parseLineEmptyInputLine_NotOk() {
         String line = "";
-
-        try {
-            parseService.parseLine(line);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException should be thrown if value is empty");
+        parseService.parseLine(line);
     }
 
-    @Test
-    public void parseLineIncorectInputLineOrderStructure_NotOk() {
-        FruitTransaction expected = new FruitTransaction();
-        expected.setOperation(FruitTransaction.Operation.BALANCE);
-        expected.setFruit("banana");
-        expected.setQuantity(20);
+    @Test (expected = IllegalArgumentException.class)
+    public void parseLineIncorrectInputLineOrderStructure_NotOk() {
         String firstInputLine = "banana,b,20";
-        try {
-            FruitTransaction actual = parseService.parseLine(firstInputLine);
-        } catch (IllegalArgumentException e) {
-            return;
-        }
-
-        expected.setOperation(FruitTransaction.Operation.BALANCE);
-        expected.setFruit("banana");
-        expected.setQuantity(20);
-        String secondInputLine = "b,20,banana";
-        try {
-            FruitTransaction actual = parseService.parseLine(secondInputLine);
-        } catch (IllegalArgumentException e) {
-            return;
-        }
-        fail("IllegalArgumentException should be thrown for incorrect operation "
-                + secondInputLine);
+        FruitTransaction actual = parseService.parseLine(firstInputLine);
+        actual.setOperation(FruitTransaction.Operation.BALANCE);
     }
 
     @Test

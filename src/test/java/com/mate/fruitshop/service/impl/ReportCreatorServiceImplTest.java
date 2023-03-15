@@ -14,7 +14,7 @@ public class ReportCreatorServiceImplTest {
 
     @Test
     public void createReport_empty_Ok() {
-        assertEquals("fruit,quantity\r\n",
+        assertEquals("fruit,quantity" + System.lineSeparator(),
                 reportCreator.createReport(new ArrayList<>()));
     }
 
@@ -23,7 +23,9 @@ public class ReportCreatorServiceImplTest {
         List<FruitEntry> entries = new ArrayList<>();
         entries.add(new FruitEntry("banana", 152));
         entries.add(new FruitEntry("apple", 90));
-        assertEquals("fruit,quantity\r\nbanana,152\r\napple,90\r\n",
+        assertEquals("fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator()
+                + "apple,90" + System.lineSeparator(),
                 reportCreator.createReport(entries));
     }
 }

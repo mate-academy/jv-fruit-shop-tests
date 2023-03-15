@@ -32,7 +32,7 @@ public class ApplyReturnTest {
     public void apply_Ok() {
         Storage.storage.clear();
         FruitTransaction fruit = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE,"apple", 100);
+                FruitTransaction.Operation.RETURN,"apple", 100);
         unaryOperation.apply(fruit);
         Integer expected = AMOUNT_OK;
         Integer actual = Storage.storage.get(FRUIT_OK);

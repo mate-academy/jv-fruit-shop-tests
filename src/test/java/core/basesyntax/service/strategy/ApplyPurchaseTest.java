@@ -29,7 +29,7 @@ public class ApplyPurchaseTest {
     @Test(expected = FruitStoreException.class)
     public void apply_nullAmount_NotOk() {
         FruitTransaction fruit = new FruitTransaction(
-                FruitTransaction.Operation.BALANCE, FRUIT_OK, AMOUNT_OK);
+                FruitTransaction.Operation.PURCHASE, FRUIT_OK, AMOUNT_OK);
         unaryOperation.apply(fruit);
         fail("Expected " + FruitStoreException.class.getName()
                 + " to be thrown for not existing file, but it wasn't");

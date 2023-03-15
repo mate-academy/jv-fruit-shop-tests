@@ -24,6 +24,7 @@ public class TransactionParserServiceTest {
     private static final String LINE_NOT_OK_NO_FRUIT = "s,,15";
     private static final String LINE_NOT_OK_NO_VALUE = "s,apple,";
     private static final String LINE_NOT_OK_LETTER_IN_VALUE = "b,apple,f101";
+    private static final int EXPECTED_AMOUNT = 101;
     private static List<String> list;
     private static TransactionParserService transactionParserService;
 
@@ -105,7 +106,7 @@ public class TransactionParserServiceTest {
         FruitTransaction.Operation actualOperation = fruitTransaction.getOperation();
         assertEquals("Expected operation = " + expectedOperation + ", but was: "
                         + actualOperation, expectedOperation, actualOperation);
-        int expectedAmount = 101;
+        int expectedAmount = EXPECTED_AMOUNT;
         int actualAmount = listTest.get(0).getQuantity();
         assertEquals("Expected amount = " + expectedAmount + ", but was: "
                         + actualAmount, expectedAmount, actualAmount);

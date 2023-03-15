@@ -24,8 +24,6 @@ public class ReaderServiceTest {
     @Test(expected = FruitStoreException.class)
     public void readFile_FileNotFound_notOk() {
         readerService.readFileToList(FILE_NAME_NOT_OK);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test(expected = FruitStoreException.class)
@@ -40,7 +38,6 @@ public class ReaderServiceTest {
         List<String> linesFromFile = readerService.readFileToList(FILE_NAME_OK);
         String expected = FIRST_LINE;
         String actual = linesFromFile.get(1);
-        assertEquals("First line Expected: " + expected + ", but was: "
-                + actual, expected, actual);
+        assertEquals(expected, actual);
     }
 }

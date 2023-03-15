@@ -22,6 +22,15 @@ public class FruitTransaction {
         return fruit;
     }
 
+    @Override
+    public String toString() {
+        return "FruitTransaction{" +
+                "operation=" + operation +
+                ", fruit='" + fruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
+
     public Integer getQuantity() {
         return quantity;
     }

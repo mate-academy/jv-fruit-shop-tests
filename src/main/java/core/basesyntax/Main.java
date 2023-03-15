@@ -22,8 +22,7 @@ public class Main {
     private static final WriterService writer = new WriterServiceImpl();
     private static final TransactionParserService parser = new TransactionParserServiceImpl();
     private static final ReportMakerService reportMaker = new ReportMakerServiceImpl();
-    private static final String FROM = "src/main/resources/test.csv";
-    private static final String TO = "src/main/resources/out.csv";
+
     private static final ActionStrategyImpl strategy =
             new ActionStrategyImpl(Map.of(
                     FruitTransaction.Operation.BALANCE, new BalanceActionHandler(),
@@ -32,11 +31,11 @@ public class Main {
                     FruitTransaction.Operation.RETURN, new ReturnActionHandler()
             ));
 
-    public static void main(String[] args) {
-        parser.parse(reader.read(FROM))
+    public static void main(String from, String to) {
+        parser.parse(reader.read(from))
                 .forEach(transaction ->
                         strategy.get(transaction.getOperation()).apply(
                                 transaction));
-        writer.write(reportMaker.report(Storage.getFruits()), TO);
+        writer.write(reportMaker.report(Storage.getFruits()), to);
     }
 }

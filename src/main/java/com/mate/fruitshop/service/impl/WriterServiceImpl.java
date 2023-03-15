@@ -8,17 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class WriterServiceImpl implements WriterService {
-    public static final String DEFAULT_REPORT_NAME = "src/main/resources/report.csv";
-
     @Override
     public void write(String report, String reportFileDir) {
-        Path reportFile;
-        try {
-            reportFile = Paths.get(reportFileDir);
-        } catch (Exception e) {
-            reportFile = Paths.get(DEFAULT_REPORT_NAME);
-        }
-
+        Path reportFile = Paths.get(reportFileDir);
         try (BufferedWriter writer = Files.newBufferedWriter(reportFile)) {
             writer.write(report);
         } catch (IOException e) {

@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.AfterClass;
 import org.junit.Test;
 
 public class MainLogicImplTest {
@@ -20,16 +19,6 @@ public class MainLogicImplTest {
             = "src/test/resources/OutGoingReports/NormReport.csv";
     private static final String BUILT_IN_REPORT_PATH
             = "src/main/resources/OutGoingReports/Report.csv";
-
-    @AfterClass
-    public static void clear() {
-        try {
-            Files.deleteIfExists(Path.of(REPORT_FILE));
-            Files.deleteIfExists(Path.of(BUILT_IN_REPORT_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to perform operations with " + REPORT_FILE, e);
-        }
-    }
 
     @Test
     public void endToEnd_twoFruits_ok() {

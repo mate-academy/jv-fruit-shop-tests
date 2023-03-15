@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ApplyPurchaseTest {
     private static final String FRUIT_OK = "apple";
-    private static final Integer AMOUNT_OK = 100;
+    private static final Integer NEGATIVE_AMOUNT = -100;
     private static UnaryOperation unaryOperation;
 
     @BeforeClass
@@ -27,9 +27,9 @@ public class ApplyPurchaseTest {
     }
 
     @Test(expected = FruitStoreException.class)
-    public void apply_nullAmount_NotOk() {
+    public void apply_negativeAmount_NotOk() {
         FruitTransaction fruit = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, FRUIT_OK, AMOUNT_OK);
+                FruitTransaction.Operation.PURCHASE, FRUIT_OK, NEGATIVE_AMOUNT);
         unaryOperation.apply(fruit);
         fail("Expected " + FruitStoreException.class.getName()
                 + " to be thrown for not existing file, but it wasn't");

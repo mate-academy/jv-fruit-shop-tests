@@ -4,13 +4,25 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private final Operation operation;
-    private final String productName;
-    private final int quantity;
+    private Operation operation;
+    private String productName;
+    private int quantity;
 
     public FruitTransaction(Operation operation, String productName, int quantity) {
         this.operation = operation;
         this.productName = productName;
+        this.quantity = quantity;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

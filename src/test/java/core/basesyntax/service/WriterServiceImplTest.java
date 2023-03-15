@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,11 +12,11 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class WriterServiceTest {
+public class WriterServiceImplTest {
     private static final String FILE_NAME = "src/test/resources/input.csv";
     private static final String REPORT_TEXT = "Some report";
     private static File testFile;
-    private final WriterServiceImpl writerService = new WriterServiceImpl();
+    private final WriterService writerService = new WriterServiceImpl();
 
     @BeforeClass
     public static void setUpBeforeClass() {

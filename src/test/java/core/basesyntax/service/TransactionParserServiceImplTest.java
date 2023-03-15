@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -15,7 +15,7 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TransactionParserServiceTest {
+public class TransactionParserServiceImplTest {
     private static final int SIZE_OF_DEFAULT_FILE = 8;
     private static final String INPUT_FILE_HEADER = "operation,fruit,quantity";
     private static final String DEFAULT_WRONG_OPERATION = "c,apple,25";
@@ -23,9 +23,9 @@ public class TransactionParserServiceTest {
     private static final String DEFAULT_QUALITY_IS_WRONG_CHARACTER = "b,apple,k";
     private static final String FILE_NAME = "src/test/resources/input.csv";
     private static File testFile;
-    private final TransactionParserServiceImpl transactionParser
+    private final TransactionParserService transactionParser
             = new TransactionParserServiceImpl();
-    private final ReaderServiceImpl readerService = new ReaderServiceImpl();
+    private final ReaderService readerService = new ReaderServiceImpl();
 
     @BeforeClass
     public static void setUpBeforeClass() {

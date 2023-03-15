@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -14,12 +14,12 @@ import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReaderServiceTest {
+public class ReaderServiceImplTest {
     private static final String FILE_NAME = "src/test/resources/input.csv";
     private static final String EMPTY_FILE_NAME = "src/test/resources/emptyFile.csv";
     private static final String WRONG_FILE_NAME = "not_exist.csv";
     private static File testFile;
-    private final ReaderServiceImpl readerService = new ReaderServiceImpl();
+    private final ReaderService readerService = new ReaderServiceImpl();
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -37,7 +37,7 @@ public class ReaderServiceTest {
     }
 
     @Test
-    public void readInfoFromFile_ok() {
+    public void readFileToList_ok() {
         List<String> expected;
         try {
             expected = Files.readAllLines(testFile.toPath());
@@ -49,13 +49,13 @@ public class ReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readInfoFromFile_notExistFile_notOk() {
+    public void readFileToList_notExistingFile_notOk() {
         File file = new File(WRONG_FILE_NAME);
         readerService.readFileToList(file);
     }
 
     @Test
-    public void readInfoFromFile_emptyFile_notOk() {
+    public void readFileToList_emptyFile_notOk() {
         List<String> expected = new ArrayList<>();
         File file = new File(EMPTY_FILE_NAME);
         try {
@@ -68,7 +68,7 @@ public class ReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readInfoFromFile_fileIsNull_notOk() {
+    public void readFileToList_fileIsNull_notOk() {
         readerService.readFileToList(null);
         fail("The file cannot be null!");
     }

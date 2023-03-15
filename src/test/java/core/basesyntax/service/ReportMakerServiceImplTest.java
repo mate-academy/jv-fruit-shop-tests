@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,14 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
 
-public class ReportMakerServiceTest {
+public class ReportMakerServiceImplTest {
     private static final String DEFAULT_FRUIT_APPLE = "apple";
     private static final String DEFAULT_FRUIT_BANANA = "banana";
     private static final String DEFAULT_FRUIT_ORANGE = "orange";
     private static final int DEFAULT_QUANTITY_5 = 5;
     private static final int DEFAULT_QUANTITY_3 = 3;
     private static final int DEFAULT_QUANTITY_10 = 10;
-    private final ReportMakerServiceImpl reportMakerService = new ReportMakerServiceImpl();
+    private final ReportMakerService reportMakerService = new ReportMakerServiceImpl();
 
     @Test
     public void generateReportText_oneItem_ok() {
@@ -38,5 +38,14 @@ public class ReportMakerServiceTest {
                 + "apple,5" + System.lineSeparator();
         String actualReport = reportMakerService.generateReportText(info);
         assertEquals(expectedReport, actualReport);
+    }
+
+    @Test
+    public void generateReportText_emptyStorage_ok() {
+        Map<String, Integer> info = new HashMap<>();
+        String expected = "fruit,quantity" + System.lineSeparator();
+        String actual = reportMakerService.generateReportText(info);
+        assertEquals("Test failed! Report must be: "
+                + expected + ", but was " + actual, expected, actual);
     }
 }

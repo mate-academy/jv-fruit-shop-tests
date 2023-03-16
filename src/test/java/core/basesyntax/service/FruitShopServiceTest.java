@@ -11,6 +11,7 @@ import core.basesyntax.strategy.impl.BalanceOperationStrategy;
 import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
 import core.basesyntax.strategy.impl.ReturnOperationStrategy;
 import core.basesyntax.strategy.impl.SupplyOperationStrategy;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,8 +43,8 @@ public class FruitShopServiceTest {
 
     @Test
     public void processing_Ok() {
-        List<FruitTransaction> listOperations
-                = List.of(new FruitTransaction(OPERATION_TEST, FRUIT_TEST, AMOUNT_TEST));
+        List<FruitTransaction> listOperations = new ArrayList<>();
+        listOperations.add(new FruitTransaction(OPERATION_TEST, FRUIT_TEST, AMOUNT_TEST));
         fruitShopService.processing(listOperations);
         assertEquals(AMOUNT_TEST, fruitDao.get(FRUIT_TEST));
     }

@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
+    public static final int FRUIT_QUANTITY = 10;
     private TransactionParser transactionParser;
     private FruitTransaction fruitTransaction;
     private List<FruitTransaction> expected;
@@ -21,7 +22,7 @@ public class TransactionParserImplTest {
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction.setFruit("fruit");
-        fruitTransaction.setQuantity(10);
+        fruitTransaction.setQuantity(FRUIT_QUANTITY);
         inputList = List.of("type,fruit,quantity,", "b,fruit,10,");
         expected = new ArrayList<>();
     }

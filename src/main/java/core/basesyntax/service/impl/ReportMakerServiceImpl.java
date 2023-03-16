@@ -10,6 +10,9 @@ public class ReportMakerServiceImpl implements ReportMakerService {
 
     @Override
     public String report(Map<String, Integer> report) {
+        if (report.keySet().size() < 1) {
+            throw new RuntimeException("Input is empty, nothing to do here");
+        }
         return HEAD_LINER + report
                 .entrySet()
                 .stream()

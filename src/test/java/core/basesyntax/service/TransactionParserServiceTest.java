@@ -1,10 +1,11 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class TransactionParserServiceTest {
@@ -31,7 +32,7 @@ public class TransactionParserServiceTest {
                 5));
         List<FruitTransaction> actual = new TransactionParserServiceImpl().parse(read);
         for (int i = 0; i < expected.size(); i++) {
-            Assert.assertEquals(expected.get(i), actual.get(i));
+            assertEquals(expected.get(i), actual.get(i));
         }
     }
 

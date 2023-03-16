@@ -1,10 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.actions.BalanceActionHandler;
 import core.basesyntax.strategy.actions.PurchaseActionHandler;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class PurchaseActionTest {
@@ -19,7 +20,7 @@ public class PurchaseActionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "banana",
                         5));
-        Assert.assertEquals(5L, (long) Storage.getFruits().get("banana"));
+        assertEquals(5L, (long) Storage.getFruits().get("banana"));
     }
 
     @Test(expected = RuntimeException.class)

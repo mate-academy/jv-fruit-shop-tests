@@ -1,10 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.actions.BalanceActionHandler;
 import core.basesyntax.strategy.actions.ReturnActionHandler;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class ReturnActionTest {
@@ -19,7 +20,7 @@ public class ReturnActionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "banana",
                         5));
-        Assert.assertEquals(15L, (long) Storage.getFruits().get("banana"));
+        assertEquals(15L, (long) Storage.getFruits().get("banana"));
     }
 
     @Test
@@ -29,6 +30,6 @@ public class ReturnActionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "apple",
                         5));
-        Assert.assertEquals(5L, (long) Storage.getFruits().get("apple"));
+        assertEquals(5L, (long) Storage.getFruits().get("apple"));
     }
 }

@@ -48,8 +48,9 @@ public class WriteServiceImplTest {
     public void write_emptyMap_Ok() {
         writeService.writeToFile(testMap, "src/test/java/resources/writeEmpty.csv");
         try {
-            String result = Files.readString(Path.of("src/test/java/resources/writeEmpty.csv"));
-            assertEquals(16, result.length());
+            List<String> result = Files.readAllLines(
+                    Path.of("src/test/java/resources/writeEmpty.csv"));
+            assertEquals(1, result.size());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

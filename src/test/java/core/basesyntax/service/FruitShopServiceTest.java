@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,8 +46,12 @@ public class FruitShopServiceTest {
     public void processing_Ok() {
         List<FruitTransaction> listOperations = new ArrayList<>();
         listOperations.add(new FruitTransaction(OPERATION_TEST, FRUIT_TEST, AMOUNT_TEST));
-        fruitDao.clear();
         fruitShopService.processing(listOperations);
         assertEquals(AMOUNT_TEST, fruitDao.get(FRUIT_TEST));
+    }
+
+    @After
+    public void tearDown() {
+        fruitDao.clear();
     }
 }

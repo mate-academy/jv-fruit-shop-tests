@@ -4,10 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
+    private static FruitDao fruitDao;
     private static ReportService reportService;
     private static final String FRUIT1_TEST = "banana";
     private static final int AMOUNT1_TEST = 45;
@@ -22,7 +24,8 @@ public class ReportServiceTest {
 
     @BeforeClass
     public static void setUp() {
-        FruitDao fruitDao = new FruitDaoImpl();
+        fruitDao = new FruitDaoImpl();
+        fruitDao.clear();
         fruitDao.put(FRUIT1_TEST, AMOUNT1_TEST);
         fruitDao.put(FRUIT2_TEST, AMOUNT2_TEST);
         reportService = new ReportService(fruitDao);
@@ -31,5 +34,10 @@ public class ReportServiceTest {
     @Test
     public void generateReport_Ok() {
         assertEquals(REPORT_TEST, reportService.generateReport());
+    }
+
+    @After
+    public void tearDown() {
+        fruitDao.clear();
     }
 }

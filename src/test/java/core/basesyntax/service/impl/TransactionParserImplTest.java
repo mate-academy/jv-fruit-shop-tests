@@ -4,17 +4,16 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParser;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TransactionParserImplTest {
-    TransactionParser transactionParser;
-    FruitTransaction fruitTransaction;
-    List<FruitTransaction> expected;
-    List<String> inputList;
+    private TransactionParser transactionParser;
+    private FruitTransaction fruitTransaction;
+    private List<FruitTransaction> expected;
+    private List<String> inputList;
 
     @Before
     public void setUp() {

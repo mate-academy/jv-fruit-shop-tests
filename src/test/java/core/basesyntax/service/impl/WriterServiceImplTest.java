@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -53,15 +52,6 @@ public class WriterServiceImplTest {
                     EXPECTED_CONTENT, actual);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + REPORT, e);
-        }
-    }
-
-    @After
-    public void after() {
-        try {
-            Files.deleteIfExists(Path.of(OUTPUT));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete file " + OUTPUT, e);
         }
     }
 }

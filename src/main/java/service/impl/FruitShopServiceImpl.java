@@ -23,6 +23,6 @@ public class FruitShopServiceImpl implements FruitShopService {
             throw new RuntimeException("Arguments can't be null");
         }
         parsed.forEach(t -> operationStrategy.get(t.getOperation()).handler(t));
-        return Storage.getAll();
+        return Storage.map;
     }
 }

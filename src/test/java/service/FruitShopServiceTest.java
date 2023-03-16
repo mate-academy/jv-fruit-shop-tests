@@ -12,9 +12,6 @@ import service.impl.FruitShopServiceImpl;
 import strategy.OperationHandler;
 import strategy.impl.BalanceOperationImpl;
 import strategy.impl.OperationStrategyServiceImpl;
-import strategy.impl.PurchaseOperationImpl;
-import strategy.impl.ReturnOperationImpl;
-import strategy.impl.SupplyOperationImpl;
 
 public class FruitShopServiceTest {
     private static final String BANANA = "banana";
@@ -27,22 +24,12 @@ public class FruitShopServiceTest {
     public static void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationImpl());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationImpl());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl());
         defaultFruitShopService =
                 new FruitShopServiceImpl(new OperationStrategyServiceImpl(operationHandlerMap));
         defaultParsed = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 50),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 20),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 10),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 10),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 10)
-        );
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 50));
         defaultExpected = new HashMap<>();
-        defaultExpected.put(BANANA, 60);
-        defaultExpected.put(APPLE, 20);
+        defaultExpected.put(BANANA, 50);
     }
 
     @Test

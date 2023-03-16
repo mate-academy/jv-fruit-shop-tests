@@ -9,7 +9,11 @@ public class SupplyOperationImpl implements OperationHandler {
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        int amount = Storage.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
-        Storage.put(fruitTransaction.getFruit(), amount + fruitTransaction.getQuantity());
+        if (!fruitTransaction.getOperation().equals(FruitTransaction.Operation.SUPPLY)) {
+            throw new RuntimeException("Operation is not Supply");
+        } else {
+            int amount = Storage.map.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
+            Storage.map.put(fruitTransaction.getFruit(), amount + fruitTransaction.getQuantity());
+        }
     }
 }

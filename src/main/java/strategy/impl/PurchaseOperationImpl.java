@@ -9,12 +9,16 @@ public class PurchaseOperationImpl implements OperationHandler {
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        int amount = Storage.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
-        int purchaseResult = amount - fruitTransaction.getQuantity();
-        if (purchaseResult < 0) {
-            throw new RuntimeException("Invalid quantity for purchase,"
-                    + "you can't buy more than we have");
+        if (!fruitTransaction.getOperation().equals(FruitTransaction.Operation.PURCHASE)) {
+            throw new RuntimeException("Operation is not Purchase");
+        } else {
+            int amount = Storage.map.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
+            int purchaseResult = amount - fruitTransaction.getQuantity();
+            if (purchaseResult < 0) {
+                throw new RuntimeException("Invalid quantity for purchase,"
+                        + "you can't buy more than we have");
+            }
+            Storage.map.put(fruitTransaction.getFruit(), purchaseResult);
         }
-        Storage.put(fruitTransaction.getFruit(), purchaseResult);
     }
 }

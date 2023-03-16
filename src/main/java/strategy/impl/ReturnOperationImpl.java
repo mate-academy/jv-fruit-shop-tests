@@ -9,7 +9,11 @@ public class ReturnOperationImpl implements OperationHandler {
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        int amount = Storage.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
-        Storage.put(fruitTransaction.getFruit(), amount + fruitTransaction.getQuantity());
+        if (!fruitTransaction.getOperation().equals(FruitTransaction.Operation.RETURN)) {
+            throw new RuntimeException("Operation is not return");
+        } else {
+            int amount = Storage.map.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
+            Storage.map.put(fruitTransaction.getFruit(), amount + fruitTransaction.getQuantity());
+        }
     }
 }

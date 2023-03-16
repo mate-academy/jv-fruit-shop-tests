@@ -5,13 +5,12 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exeption.FruitShopException;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import org.junit.Before;
+import org.junit.Test;
 
 public class FileWriterServiceImplTest {
     private static final String INCORRECT_PATH = "F://incorrectPath.csv";
@@ -20,7 +19,7 @@ public class FileWriterServiceImplTest {
     private static final Integer FRUIT_QUANTITY_FOR_STORAGE = 50;
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String SECOND_LINE = "banana,50";
-    FileWriterServiceImpl fileWriterService;
+    private FileWriterServiceImpl fileWriterService;
 
     @Before
     public void setUp() {

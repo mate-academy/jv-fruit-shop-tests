@@ -1,14 +1,14 @@
 package core.basesyntax.service.implementation;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
 
 public class ParserServiceImplTest {
     private static final String CORRECT_LINE_FIRST = "b,apple,101";
@@ -17,8 +17,8 @@ public class ParserServiceImplTest {
     private static final String APPLE_FRUIT = "apple";
     private static final int FIRST_ELEMENT = 0;
     private static final int EXPECTED_QUANTITY = 101;
-    ParserServiceImpl parserService;
-    List<String> stringList;
+    private ParserServiceImpl parserService;
+    private List<String> stringList;
 
     @Before
     public void setUp() {

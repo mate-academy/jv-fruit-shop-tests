@@ -5,10 +5,9 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exeption.FruitShopException;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.List;
-
 
 public class FileReaderServiceImplTest {
     private static final String PATH_TO_FILE_OK = "src/main/resources/FruitStorageOperation.csv";
@@ -16,7 +15,7 @@ public class FileReaderServiceImplTest {
     private static final String INCORRECT_PATH = "F://incorrectName.csv";
     private static final String FIRST_LINE_IN_OK_FILE = "b,banana,20";
     private static final int INDEX_FOR_FIRST_LINE = 0;
-    FileReaderServiceImpl fileReaderService;
+    private FileReaderServiceImpl fileReaderService;
 
     @Before
     public void setUp() {

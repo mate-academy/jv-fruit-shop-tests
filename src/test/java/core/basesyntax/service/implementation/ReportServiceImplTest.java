@@ -1,10 +1,10 @@
 package core.basesyntax.service.implementation;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ReportServiceImplTest {
     private static final String CORRECT_LINE = "apple,5";
@@ -13,7 +13,7 @@ public class ReportServiceImplTest {
     private static final int CORRECT_QUANTITY = 5;
     private static final int DATA_LINE_INDEX = 1;
     private static final int HEADER_LINE_INDEX = 0;
-    ReportServiceImpl reportService;
+    private ReportServiceImpl reportService;
 
     @Before
     public void setUp() {

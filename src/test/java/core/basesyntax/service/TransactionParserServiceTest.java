@@ -2,14 +2,12 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitStoreException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,14 +29,6 @@ public class TransactionParserServiceTest {
     public static void beforeClass() {
         transactionParserService = new TransactionParserServiceImpl();
         list = new ArrayList<>();
-        Storage.storage.clear();
-    }
-
-    @Before
-    public void setUp() {
-        list.add(LINE_OK_1);
-        list.add(LINE_OK_2);
-        list.add(LINE_OK_3);
     }
 
     @After
@@ -83,19 +73,17 @@ public class TransactionParserServiceTest {
 
     @Test
     public void parseFruitTransaction_Line_Ok() {
-        List<FruitTransaction> listTest = transactionParserService.parse(list);
+        List<String> list2 = List.of(LINE_OK_1, LINE_OK_2, LINE_OK_3);
+        List<FruitTransaction> listTest = transactionParserService.parse(list2);
         FruitTransaction fruitTransaction = listTest.get(0);
         String expectedFruit = APPLE;
         String actualFruit = listTest.get(0).getFruit();
-        assertEquals("Expected fruits = " + expectedFruit + ", but was: "
-                        + actualFruit, expectedFruit, actualFruit);
+        assertEquals(expectedFruit, actualFruit);
         FruitTransaction.Operation expectedOperation = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation actualOperation = fruitTransaction.getOperation();
-        assertEquals("Expected operation = " + expectedOperation + ", but was: "
-                        + actualOperation, expectedOperation, actualOperation);
+        assertEquals(expectedOperation, actualOperation);
         int expectedAmount = EXPECTED_AMOUNT;
         int actualAmount = listTest.get(0).getQuantity();
-        assertEquals("Expected amount = " + expectedAmount + ", but was: "
-                        + actualAmount, expectedAmount, actualAmount);
+        assertEquals(expectedAmount, actualAmount);
     }
 }

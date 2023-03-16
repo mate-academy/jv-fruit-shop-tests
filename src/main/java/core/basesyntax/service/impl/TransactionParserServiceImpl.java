@@ -27,7 +27,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
                     || !buffer[FIELD_QUANTITY].matches(REGEX_PATTERN)) {
                 throw new FruitStoreException("Incorrect input data for adding to storage");
             }
-            if (buffer.length == ARRAY_SIZE && buffer[FIELD_TYPE].length() == FIELD_NAME) {
+            if (buffer[FIELD_TYPE].length() == FIELD_NAME) {
                 parsedRecords.add(new FruitTransaction(
                         FruitTransaction.Operation.getCode(buffer[FIELD_TYPE].trim()),
                         buffer[FIELD_NAME].trim(),

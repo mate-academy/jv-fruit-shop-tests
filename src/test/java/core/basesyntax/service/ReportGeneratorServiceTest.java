@@ -40,8 +40,7 @@ public class ReportGeneratorServiceTest {
     public void createReport_Header_ok() {
         String expected = HEADER;
         String actual = lines[HEADER_LINE_INDEX];
-        assertEquals("Expected header line: " + expected + ", but was: " + actual,
-                expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -49,6 +48,6 @@ public class ReportGeneratorServiceTest {
 
         String expected = LINE_OK;
         String actual = lines[FIRST_DATA_LINE_INDEX];
-        assertEquals("Expected line: " + expected + ", but was: " + actual, expected, actual);
+        assertEquals(expected, actual);
     }
 }

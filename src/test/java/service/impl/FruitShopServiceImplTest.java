@@ -20,6 +20,7 @@ import strategy.handler.ReturnHandler;
 import strategy.handler.SupplyHandler;
 
 public class FruitShopServiceImplTest {
+    private static final String FRUIT_FOR_TEST = "banana";
     private static OperationStrategy operationStrategy;
     private static FruitShopService fruitShopService;
     private static Map<FruitTransaction.Operation, TransactionHandler> handlerMap;
@@ -37,22 +38,22 @@ public class FruitShopServiceImplTest {
     public void setUp() {
         balanceTransaction = new FruitTransaction();
         balanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        balanceTransaction.setFruit("banana");
+        balanceTransaction.setFruit(FRUIT_FOR_TEST);
         balanceTransaction.setQuantity(10);
 
         returnTransaction = new FruitTransaction();
         returnTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        returnTransaction.setFruit("banana");
+        returnTransaction.setFruit(FRUIT_FOR_TEST);
         returnTransaction.setQuantity(2);
 
         supplyTransaction = new FruitTransaction();
         supplyTransaction.setQuantity(12);
-        supplyTransaction.setFruit("banana");
+        supplyTransaction.setFruit(FRUIT_FOR_TEST);
         supplyTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
 
         purchaseTransaction = new FruitTransaction();
         purchaseTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        purchaseTransaction.setFruit("banana");
+        purchaseTransaction.setFruit(FRUIT_FOR_TEST);
         purchaseTransaction.setQuantity(10);
 
         balanceHandler = new BalanceHandler();
@@ -78,7 +79,7 @@ public class FruitShopServiceImplTest {
     public void get_OperationSuccessful_Ok() {
         Integer expected = 14;
         fruitShopService.calculate(listForTest);
-        assertEquals(expected, Storage.fruits.get("banana"));
+        assertEquals(expected, Storage.fruits.get(FRUIT_FOR_TEST));
     }
 
     @After

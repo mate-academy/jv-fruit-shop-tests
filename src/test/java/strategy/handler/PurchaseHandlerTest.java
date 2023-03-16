@@ -11,6 +11,12 @@ import org.junit.Test;
 import strategy.TransactionHandler;
 
 public class PurchaseHandlerTest {
+    private static final String FRUIT_FOR_TEST = "banana";
+    private static final Integer QUANTITY_IN_STORAGE = 10;
+    private static final Integer QUANTITY_OF_FRUIT_AFTER_PURCHASE = 6;
+
+    private static final Integer QUANTITY_FOR_ENOUGH_SELL = 4;
+    private static final Integer QUANTITY_FOR_NOT_ENOUGH_SELL = 20;
     private static TransactionHandler purchaseHandler;
     private static FruitTransaction purchase;
 
@@ -20,23 +26,23 @@ public class PurchaseHandlerTest {
 
         purchase = new FruitTransaction();
         purchase.setOperation(FruitTransaction.Operation.PURCHASE);
-        purchase.setFruit("banana");
-        purchase.setQuantity(5);
+        purchase.setFruit(FRUIT_FOR_TEST);
+        purchase.setQuantity(QUANTITY_FOR_ENOUGH_SELL);
 
-        Storage.fruits.put("banana", 10);
+        Storage.fruits.put(FRUIT_FOR_TEST, QUANTITY_IN_STORAGE);
     }
 
     @Test
     public void handle_PurchaseSuccessful_Ok() {
-        Integer expected = 5;
+        Integer expected = QUANTITY_OF_FRUIT_AFTER_PURCHASE;
         purchaseHandler.handle(purchase);
-        Integer actual = Storage.fruits.get("banana");
+        Integer actual = Storage.fruits.get(FRUIT_FOR_TEST);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_PurchaseNotSuccessful_NotOk() {
-        purchase.setQuantity(20);
+        purchase.setQuantity(QUANTITY_FOR_NOT_ENOUGH_SELL);
         purchaseHandler.handle(purchase);
         fail(RuntimeException.class.getName());
     }

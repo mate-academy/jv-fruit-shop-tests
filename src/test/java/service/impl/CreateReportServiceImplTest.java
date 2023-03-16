@@ -8,11 +8,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CreateReportServiceImplTest {
-    private static final String reportForTest = new StringBuilder().append("fruit,quantity")
+    private static final String TITLE = "fruit,quantity";
+    private static final String SECOND_LINE_OF_REPORT = "banana,152";
+    private static final String THIRD_LINE_OF_REPORT = "apple,90";
+    private static final String BANANA_FRUIT = "banana";
+    private static final String APPLE_FRUIT = "apple";
+    private static final Integer APPLE_QUANTITY = 90;
+    private static final Integer BANANA_QUANTITY = 152;
+
+    private static final String reportForTest = new StringBuilder().append(TITLE)
             .append(System.lineSeparator())
-            .append("banana,152")
+            .append(SECOND_LINE_OF_REPORT)
             .append(System.lineSeparator())
-            .append("apple,90")
+            .append(THIRD_LINE_OF_REPORT)
             .append(System.lineSeparator())
             .toString();
     private static CreateReportServiceImpl createReportServiceImpl;
@@ -20,8 +28,8 @@ public class CreateReportServiceImplTest {
     @Before
     public void setUp() {
         createReportServiceImpl = new CreateReportServiceImpl();
-        Storage.fruits.put("banana", 152);
-        Storage.fruits.put("apple", 90);
+        Storage.fruits.put(BANANA_FRUIT, BANANA_QUANTITY);
+        Storage.fruits.put(APPLE_FRUIT, APPLE_QUANTITY);
     }
 
     @Test

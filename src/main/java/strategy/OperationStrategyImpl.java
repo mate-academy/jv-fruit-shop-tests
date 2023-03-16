@@ -13,6 +13,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public TransactionHandler get(FruitTransaction.Operation operation) {
+        if (transactionHandlerMap.get(operation) == null) {
+            throw new RuntimeException("Can't find handler for this operation");
+        }
         return transactionHandlerMap.get(operation);
     }
 }

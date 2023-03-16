@@ -10,6 +10,8 @@ import org.junit.Test;
 import strategy.TransactionHandler;
 
 public class BalanceHandlerTest {
+    private static final String FRUIT_FOR_TEST = "banana";
+    private static final Integer FRUIT_QUANTITY = 5;
     private static TransactionHandler balanceHandler;
     private static FruitTransaction balance;
 
@@ -19,15 +21,15 @@ public class BalanceHandlerTest {
 
         balance = new FruitTransaction();
         balance.setOperation(FruitTransaction.Operation.BALANCE);
-        balance.setFruit("banana");
+        balance.setFruit(FRUIT_FOR_TEST);
         balance.setQuantity(5);
     }
 
     @Test
     public void handle_BalanceHandle_Ok() {
-        Integer expected = 5;
+        Integer expected = FRUIT_QUANTITY;
         balanceHandler.handle(balance);
-        Integer actual = Storage.fruits.get("banana");
+        Integer actual = Storage.fruits.get(FRUIT_FOR_TEST);
         assertEquals(expected, actual);
     }
 

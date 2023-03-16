@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitStoreException;
@@ -50,48 +49,36 @@ public class TransactionParserServiceTest {
     @Test(expected = FruitStoreException.class)
     public void parseFruitTransaction_null_NotOk() {
         transactionParserService.parse(null);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test(expected = FruitStoreException.class)
     public void parseFruitTransaction_Line_With2Words_NotOk() {
         list.add(LINE_NO_TOK_2WORDS);
         transactionParserService.parse(list);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test(expected = FruitStoreException.class)
     public void parseFruitTransaction_Line_With4Words_NotOk() {
         list.add(LINE_NOT_OK_4WORDS);
         transactionParserService.parse(list);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for this case, but it wasn't");
     }
 
     @Test(expected = FruitStoreException.class)
     public void parseFruitTransaction_Line_NoFruit_NotOk() {
         list.add(LINE_NOT_OK_NO_FRUIT);
         transactionParserService.parse(list);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for this case, but it wasn't");
     }
 
     @Test(expected = FruitStoreException.class)
     public void parseFruitTransaction_Line_NoValue_NotOk() {
         list.add(LINE_NOT_OK_NO_VALUE);
         transactionParserService.parse(list);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for this case, but it wasn't");
     }
 
     @Test(expected = FruitStoreException.class)
     public void parseFruitTransaction_Line_NegativeValue_NotOk() {
         list.add(LINE_NOT_OK_LETTER_IN_VALUE);
         transactionParserService.parse(list);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for this case, but it wasn't");
     }
 
     @Test

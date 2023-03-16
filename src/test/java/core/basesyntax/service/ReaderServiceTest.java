@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.exception.FruitStoreException;
 import core.basesyntax.service.impl.ReaderServiceImpl;
@@ -29,8 +28,6 @@ public class ReaderServiceTest {
     @Test(expected = FruitStoreException.class)
     public void readFile_Empty_NotOk() {
         readerService.readFileToList(FILE_NAME_EMPTY_NOT_OK);
-        fail("Expected " + FruitStoreException.class.getName()
-                + " to be thrown for empty file, but it wasn't");
     }
 
     @Test

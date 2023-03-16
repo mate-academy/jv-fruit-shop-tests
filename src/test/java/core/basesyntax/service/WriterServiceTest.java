@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitStoreException;
@@ -31,8 +30,6 @@ public class WriterServiceTest {
     public void writeFile_ErrorInFileName_NotOk() {
         Storage.storage.put(FRUIT_FOR_STORAGE, FRUIT_AMOUNT_STORAGE);
         writerService.writeReportToFile(FILE_NAME_NOT_OK, "");
-        fail("Expected " + FruitStoreException.class.getName()
-                    + " to be thrown for not existing file, but it wasn't");
     }
 
     @Test

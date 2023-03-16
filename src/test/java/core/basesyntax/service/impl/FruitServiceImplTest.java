@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.ServiceException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
@@ -45,12 +46,18 @@ public class FruitServiceImplTest {
         FruitServiceImpl fruitServiceImpl = new FruitServiceImpl(fruitStrategyImpl);
         fruitServiceImpl.usageOfStrategy(actual);
 
-        assertEquals(Optional.ofNullable(Storage.fruitStorage.get("orange")), Optional.of(119));
-        assertEquals(Optional.ofNullable(Storage.fruitStorage.get("banana")), Optional.of(5));
-        assertEquals(Optional.ofNullable(Storage.fruitStorage.get("apple")), Optional.of(75));
+        assertEquals("Expected banana quantity 5, but actual: " + Optional.ofNullable(
+                Storage.fruitStorage.get("banana")), Optional.ofNullable(
+                Storage.fruitStorage.get("banana")), Optional.of(5));
+        assertEquals("Expected apple quantity 75, but actual: " + Optional.ofNullable(
+                Storage.fruitStorage.get("apple")), Optional.ofNullable(
+                Storage.fruitStorage.get("apple")), Optional.of(75));
+        assertEquals("Expected orange quantity 119, but actual: " + Optional.ofNullable(
+                Storage.fruitStorage.get("orange")), Optional.ofNullable(
+                Storage.fruitStorage.get("orange")), Optional.of(119));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = ServiceException.class)
     public void fruitService_return_notOk() {
         List<FruitTransaction> actual = List.of(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "orange", 44));

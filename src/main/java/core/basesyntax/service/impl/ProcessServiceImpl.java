@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Fruits;
+import core.basesyntax.exception.ServiceException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessService;
 import java.util.List;
@@ -16,7 +17,7 @@ public class ProcessServiceImpl implements ProcessService {
     @Override
     public List<FruitTransaction> getTransactions(List<String> lines) {
         if (lines.size() == 0) {
-            throw new RuntimeException("Can't work with empty list");
+            throw new ServiceException("Can't work with empty list");
         }
         return lines.stream()
                 .skip(skipFirstLine)
@@ -26,6 +27,10 @@ public class ProcessServiceImpl implements ProcessService {
 
     private FruitTransaction transformation(String line) {
         String[] lineSplit = line.split(COMMA);
+        if (Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]) < 0) {
+            throw new ServiceException("Can't accept negative numbers "
+                    + Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]));
+        }
         return new FruitTransaction(FruitTransaction.Operation
                 .getOperationByCode(lineSplit[TYPE_ACTION]),
                 Fruits.getFruit(lineSplit[FRUIT]), Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]));

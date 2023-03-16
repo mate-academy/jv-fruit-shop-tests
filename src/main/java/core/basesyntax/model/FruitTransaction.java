@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.ServiceException;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -47,7 +48,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Does not valid transaction");
+            throw new ServiceException("Does not valid transaction");
         }
     }
 

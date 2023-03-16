@@ -6,6 +6,10 @@ import core.basesyntax.storage.Storage;
 public class SupplyActionHandler implements ActionHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        Storage.plus(transaction.getFruit(), transaction.getQuantity());
+        if (Storage.getFruits().containsKey(transaction.getFruit())) {
+            Storage.plus(transaction.getFruit(), transaction.getQuantity());
+        } else {
+            Storage.put(transaction.getFruit(), transaction.getQuantity());
+        }
     }
 }

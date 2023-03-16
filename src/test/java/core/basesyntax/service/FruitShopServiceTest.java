@@ -45,6 +45,7 @@ public class FruitShopServiceTest {
     public void processing_Ok() {
         List<FruitTransaction> listOperations = new ArrayList<>();
         listOperations.add(new FruitTransaction(OPERATION_TEST, FRUIT_TEST, AMOUNT_TEST));
+        fruitDao.clear();
         fruitShopService.processing(listOperations);
         assertEquals(AMOUNT_TEST, fruitDao.get(FRUIT_TEST));
     }

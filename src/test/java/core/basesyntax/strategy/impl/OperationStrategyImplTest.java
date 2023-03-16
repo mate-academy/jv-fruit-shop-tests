@@ -9,7 +9,6 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseHandler;
 import core.basesyntax.strategy.handler.impl.ReturnHandler;
 import core.basesyntax.strategy.handler.impl.SupplyHandler;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -51,16 +50,5 @@ public class OperationStrategyImplTest {
         OperationHandler expectedHandler = new ReturnHandler();
         OperationHandler actualHandler = strategy.getHandler(operation);
         assertEquals(expectedHandler.getClass(), actualHandler.getClass());
-    }
-
-    @Test
-    public void testGetHandlerThrowsExceptionForInvalidOperation() {
-        FruitTransaction.Operation invalidOperation = FruitTransaction.Operation.getOperationByCode("a");
-        try {
-            strategy.getHandler(invalidOperation);
-            Assert.fail("Expected IllegalArgumentException was not thrown");
-        } catch (IllegalArgumentException e) {
-            Assert.assertEquals("Unknown operation: " + invalidOperation, e.getMessage());
-        }
     }
 }

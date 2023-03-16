@@ -21,7 +21,8 @@ public class ReturnHandlerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        handler = new PurchaseHandler();
+        Storage.storage.clear();
+        handler = new ReturnHandler();
     }
 
     @Before

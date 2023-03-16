@@ -1,9 +1,9 @@
 package service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,8 +13,6 @@ public class ReaderServiceImplTest {
             = "src/test/resources/IncomingReports/TwoFruits.csv";
     private static final String EMPTY_FILE
             = "src/test/resources/IncomingReports/EmptyInput.csv";
-    private static final String NULL_FILE
-            = null;
     private static final String INVALID_FILE
             = "&812375ba^_^";
     private static final String INVALID_PATH_FILE
@@ -47,13 +45,13 @@ public class ReaderServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void readFile_null_notOk() {
-        new ReaderServiceImpl().readFile(NULL_FILE);
+        new ReaderServiceImpl().readFile(null);
     }
 
     @Test
     public void readFile_emptyFile_ok() {
-        assertEquals("Reading empty file should return empty list",
-                Collections.EMPTY_LIST, new ReaderServiceImpl().readFile(EMPTY_FILE));
+        List<String> actual = new ReaderServiceImpl().readFile(EMPTY_FILE);
+        assertTrue("Reading empty file should return empty list", actual.isEmpty());
     }
 
     @Test

@@ -13,8 +13,6 @@ import org.junit.Test;
 public class WriterServiceImplTest {
     private static final String REPORT_FILE
             = "src/test/resources/OutGoingReports/NormReport.csv";
-    private static final String NULL_FILE
-            = null;
     private static final String INVALID_REPORT_FILE
             = "///^_^|||";
     private static final List<String> expectedReportLines = new ArrayList<>();
@@ -32,7 +30,7 @@ public class WriterServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullFile_notOk() {
-        new WriterServiceImpl().writeToFile(preparedReport, NULL_FILE);
+        new WriterServiceImpl().writeToFile(preparedReport, null);
     }
 
     @Test(expected = RuntimeException.class)

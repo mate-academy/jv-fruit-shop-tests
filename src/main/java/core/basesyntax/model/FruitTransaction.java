@@ -47,7 +47,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            return null;
+            throw new RuntimeException("Does not valid transaction");
         }
     }
 

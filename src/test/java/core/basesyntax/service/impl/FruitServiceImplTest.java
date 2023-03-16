@@ -15,10 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
+
+    @Before
+    public void beforeEachTest() {
+        Storage.fruitStorage.clear();
+    }
 
     @Test
     public void fruitService_return_Ok() {
@@ -43,11 +48,6 @@ public class FruitServiceImplTest {
         assertEquals(Optional.ofNullable(Storage.fruitStorage.get("orange")), Optional.of(119));
         assertEquals(Optional.ofNullable(Storage.fruitStorage.get("banana")), Optional.of(5));
         assertEquals(Optional.ofNullable(Storage.fruitStorage.get("apple")), Optional.of(75));
-    }
-
-    @After
-    public void afterEachTest() {
-        Storage.fruitStorage.clear();
     }
 
     @Test(expected = RuntimeException.class)

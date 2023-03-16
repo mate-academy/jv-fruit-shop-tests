@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Fruits;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessService;
 import java.util.List;
@@ -10,10 +11,13 @@ public class ProcessServiceImpl implements ProcessService {
     private static final int TYPE_ACTION = 0;
     private static final int FRUIT = 1;
     private static final int AMOUNT_OF_FRUIT = 2;
+    private static final int skipFirstLine = 1;
 
     @Override
     public List<FruitTransaction> getTransactions(List<String> lines) {
-        final int skipFirstLine = 1;
+        if (lines.size() == 0) {
+            throw new RuntimeException("Can't work with empty list");
+        }
         return lines.stream()
                 .skip(skipFirstLine)
                 .map(s -> transformation(s))
@@ -24,6 +28,6 @@ public class ProcessServiceImpl implements ProcessService {
         String[] lineSplit = line.split(COMMA);
         return new FruitTransaction(FruitTransaction.Operation
                 .getOperationByCode(lineSplit[TYPE_ACTION]),
-                lineSplit[FRUIT], Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]));
+                Fruits.getFruit(lineSplit[FRUIT]), Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]));
     }
 }

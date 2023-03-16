@@ -17,7 +17,9 @@ public class PurchaseHandler implements OperationHandler {
                     + currentQuantity + " and you want to purchase "
                     + transactionQuantity);
         }
-        Storage.storage.put(transaction.getFruit(),
+        if (transactionQuantity >= 0) {
+            Storage.storage.put(transaction.getFruit(),
                     currentQuantity - transactionQuantity);
+        }
     }
 }

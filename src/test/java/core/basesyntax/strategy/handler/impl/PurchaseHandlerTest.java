@@ -14,9 +14,11 @@ public class PurchaseHandlerTest {
     private static final String APPLE = "apple";
     private static final int VALID_FRUIT_QUANTITY = 10;
     private static final int ANOTHER_VALID_FRUIT_QUANTITY = 5;
+    private static final int VALID_OPERATION_QUANTITY = 5;
     private static final int MORE_THAN_VALID_FRUIT_QUANTITY = 11;
     private static final String BANANA = "banana";
     private static final int ZERO_FRUIT_QUANTITY = 0;
+    private static final int INVALID_OPERATION_QUANTITY = -7;
     private static OperationHandler handler;
 
     @BeforeClass
@@ -54,23 +56,34 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void testPurchaseHandlerShouldReduceFruitQuantityInStorage() {
+    public void test_Reduce_Fruit_Quantity_In_Storage() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
-                "apple",
-                5);
+                APPLE,
+                VALID_OPERATION_QUANTITY);
         handler.handle(transaction);
-        Integer actualQuantity = Storage.storage.get("apple");
-        int expectedQuantity = 5;
-        assertEquals(expectedQuantity, (int) actualQuantity);
+        Integer actualQuantity = Storage.storage.get(APPLE);
+        Integer expectedQuantity = VALID_FRUIT_QUANTITY - VALID_OPERATION_QUANTITY;
+        assertEquals(expectedQuantity, actualQuantity);
 
         transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
-                "apple",
-                5);
+                APPLE,
+                VALID_OPERATION_QUANTITY);
         handler.handle(transaction);
-        actualQuantity = Storage.storage.get("apple");
-        expectedQuantity = 0;
-        assertEquals(expectedQuantity, (int) actualQuantity);
+        actualQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
+        expectedQuantity = ZERO_FRUIT_QUANTITY;
+        assertEquals(expectedQuantity, actualQuantity);
+    }
+
+    @Test
+    public void testPurchaseHandlerShouldIgnoreNegativeTransaction() {
+        FruitTransaction transaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE,
+                APPLE,
+                INVALID_OPERATION_QUANTITY);
+        handler.handle(transaction);
+        Integer appleQuantity = Storage.storage.getOrDefault("apple", 0);
+        assertEquals(10, (int) appleQuantity);
     }
 }

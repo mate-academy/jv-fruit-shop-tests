@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.operation.FruitBalanceOperation;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +16,16 @@ public class FruitBalanceOperationTest {
     private FruitTransaction transaction;
 
     @Before
-    public void setUp() {
+    public void setUpTransaction() {
         Storage.fruitStorage.clear();
         transaction = new FruitTransaction();
         transaction.setFruit(FRUIT_NAME);
         transaction.setQuantity(FRUIT_QUANTITY);
+    }
+
+    @After
+    public void clearStorage() {
+        Storage.fruitStorage.clear();
     }
 
     @Test

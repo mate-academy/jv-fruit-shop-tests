@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +16,13 @@ public class ReportMakerServiceTest {
 
     @Before
     public void setUpStorage() {
-        Storage.fruitStorage.clear();
         Storage.fruitStorage.put("papaya", 100);
         Storage.fruitStorage.put("durian", 72);
+    }
+
+    @After
+    public void clearStorage() {
+        Storage.fruitStorage.clear();
     }
 
     @Test

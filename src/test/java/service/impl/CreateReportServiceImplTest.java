@@ -15,7 +15,6 @@ public class CreateReportServiceImplTest {
     private static final String APPLE_FRUIT = "apple";
     private static final Integer APPLE_QUANTITY = 90;
     private static final Integer BANANA_QUANTITY = 152;
-
     private static final String reportForTest = new StringBuilder().append(TITLE)
             .append(System.lineSeparator())
             .append(SECOND_LINE_OF_REPORT)

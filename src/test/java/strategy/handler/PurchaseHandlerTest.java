@@ -14,7 +14,6 @@ public class PurchaseHandlerTest {
     private static final String FRUIT_FOR_TEST = "banana";
     private static final Integer QUANTITY_IN_STORAGE = 10;
     private static final Integer QUANTITY_OF_FRUIT_AFTER_PURCHASE = 6;
-
     private static final Integer QUANTITY_FOR_ENOUGH_SELL = 4;
     private static final Integer QUANTITY_FOR_NOT_ENOUGH_SELL = 20;
     private static TransactionHandler purchaseHandler;
@@ -23,7 +22,6 @@ public class PurchaseHandlerTest {
     @Before
     public void setUp() {
         purchaseHandler = new PurchaseHandler();
-
         purchase = new FruitTransaction();
         purchase.setOperation(FruitTransaction.Operation.PURCHASE);
         purchase.setFruit(FRUIT_FOR_TEST);

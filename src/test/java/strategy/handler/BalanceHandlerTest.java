@@ -18,7 +18,6 @@ public class BalanceHandlerTest {
     @Before
     public void setUp() {
         balanceHandler = new BalanceHandler();
-
         balance = new FruitTransaction();
         balance.setOperation(FruitTransaction.Operation.BALANCE);
         balance.setFruit(FRUIT_FOR_TEST);

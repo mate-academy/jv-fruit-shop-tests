@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import db.Storage;
 import model.FruitTransaction;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -35,5 +36,10 @@ public class ReturnOperationImplTest {
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransaction.getFruit());
         assertEquals(expected,actual);
+    }
+
+    @After
+    public void after() {
+        Storage.map.clear();
     }
 }

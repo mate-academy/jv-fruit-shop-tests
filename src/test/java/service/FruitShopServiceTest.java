@@ -15,7 +15,6 @@ import strategy.impl.OperationStrategyServiceImpl;
 
 public class FruitShopServiceTest {
     private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
     private static FruitShopService defaultFruitShopService;
     private static List<FruitTransaction> defaultParsed;
     private static Map<String, Integer> defaultExpected;

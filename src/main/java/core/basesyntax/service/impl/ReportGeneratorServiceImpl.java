@@ -11,6 +11,9 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     @Override
     public String generateReport() {
         StringBuilder report = new StringBuilder(HEADER);
+        if (Storage.storage.isEmpty()) {
+            throw new RuntimeException("Report is empty");
+        }
         for (Map.Entry<String, Integer> entry: Storage.storage.entrySet()) {
             report.append(System.lineSeparator())
                     .append(entry.getKey())

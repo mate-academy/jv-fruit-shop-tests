@@ -50,6 +50,8 @@ public class ReportMakerServiceTest {
 
     @Test
     public void makeReport_emptyMap_ok() {
-        reportMakerService.makeReport(new HashMap<>());
+        String actual = reportMakerService.makeReport(new HashMap<>());
+        String expected = "fruits,quantity" + System.lineSeparator();
+        assertEquals(expected, actual);
     }
 }

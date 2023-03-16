@@ -53,18 +53,23 @@ public class TransactionParserServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 40)
         );
 
-        List<FruitTransaction> result = parser.parse(source);
+        List<FruitTransaction> parsedData = parser.parse(source);
 
-        for (int i = 0; i < result.size(); i++) {
-            assertEquals(result.get(i).getOperation(), expected.get(i).getOperation());
-            assertEquals(result.get(i).getFruit(), expected.get(i).getFruit());
-            assertEquals(result.get(i).getQuantity(), expected.get(i).getQuantity());
+        for (int i = 0; i < parsedData.size(); i++) {
+            assertEquals(parsedData.get(i).getOperation(), expected.get(i).getOperation());
+            assertEquals(parsedData.get(i).getFruit(), expected.get(i).getFruit());
+            assertEquals(parsedData.get(i).getQuantity(), expected.get(i).getQuantity());
         }
     }
 
     @Test(expected = RuntimeException.class)
     public void parse_argumentNull_notOk() {
         parser.parse(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_argumentEmpty_notOk() {
+        parser.parse("");
     }
 
     @Test(expected = RuntimeException.class)
@@ -77,4 +82,33 @@ public class TransactionParserServiceTest {
         parser.parse("frogman" + source);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void parse_spaceColumnsFormat_notOk() {
+        parser.parse(" " + source);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_spaceRowFormat_notOk() {
+        parser.parse(source + " ");
+    }
+
+    @Test
+    public void parse_emptyColumnsFormat_Ok() {
+        parser.parse("" + source);
+    }
+
+    @Test
+    public void parse_emptyRowFormat_Ok() {
+        parser.parse(source + "");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_nullRowFormat_notOk() {
+        parser.parse(source + null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_nullColumnsFormat_notOk() {
+        parser.parse(null + source);
+    }
 }

@@ -20,7 +20,7 @@ public class ReaderServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void badFileName_notOk() {
+    public void badFilePath_notOk() {
         readerService.readFromFile(PATH_TO_FILE_NOT_OK);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for not existing file, but it wasn't");

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.Map;
 import java.util.Set;
+import org.junit.Before;
 import org.junit.Test;
 import storage.DataStorage;
 
@@ -12,6 +13,11 @@ public class DataDaoImplTest {
     private static final Integer EXPECTED_AMOUNT = 50;
     private static final String FRUIT = "banana";
     private static final String SUPER_FRUIT = "potato";
+
+    @Before
+    public void clear() {
+        DataStorage.FRUIT_MAP.clear();
+    }
 
     @Test
     public void putValue_ok() {

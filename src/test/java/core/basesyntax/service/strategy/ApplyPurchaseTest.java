@@ -1,5 +1,6 @@
 package core.basesyntax.service.strategy;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitStoreException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.UnaryOperation;
@@ -25,6 +26,7 @@ public class ApplyPurchaseTest {
 
     @Test(expected = FruitStoreException.class)
     public void apply_not_enoughAmount_NotOk() {
+        Storage.storage.clear();
         FruitTransaction fruit = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 FRUIT_OK,

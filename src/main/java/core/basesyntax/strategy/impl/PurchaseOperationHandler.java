@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
-public class PurchaseHandler implements OperationHandler {
+public class PurchaseOperationHandler implements OperationHandler {
     public static final int EMPTY_VALUE = 0;
 
     @Override

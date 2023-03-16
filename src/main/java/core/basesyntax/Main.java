@@ -12,11 +12,11 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.BalanceHandler;
-import core.basesyntax.strategy.impl.PurchaseHandler;
-import core.basesyntax.strategy.impl.ReturnHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.StrategyStorageImpl;
-import core.basesyntax.strategy.impl.SupplyHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +27,10 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
-        handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        handlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        handlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         StrategyStorageImpl strategyStorage = new StrategyStorageImpl();
         strategyStorage.setHandlers(handlers);
         ReaderService fileReaderService = new ReaderServiceImpl();

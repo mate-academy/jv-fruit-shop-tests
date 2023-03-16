@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseHandlerTest {
-
     private static final String APPLE = "apple";
     private static final int VALID_FRUIT_QUANTITY = 10;
     private static final int ANOTHER_VALID_FRUIT_QUANTITY = 5;
@@ -83,7 +82,8 @@ public class PurchaseHandlerTest {
                 APPLE,
                 INVALID_OPERATION_QUANTITY);
         handler.handle(transaction);
-        Integer appleQuantity = Storage.storage.getOrDefault("apple", 0);
-        assertEquals(10, (int) appleQuantity);
+        Integer actualQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
+        Integer expectedQuantity = VALID_FRUIT_QUANTITY;
+        assertEquals(expectedQuantity, actualQuantity);
     }
 }

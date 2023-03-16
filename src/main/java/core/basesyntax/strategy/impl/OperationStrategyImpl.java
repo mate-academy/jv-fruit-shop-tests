@@ -23,6 +23,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
-        return handlerMap.get(operation);
+        OperationHandler handler = handlerMap.get(operation);
+        if (handler == null) {
+            throw new IllegalArgumentException("Unknown operation: " + operation);
+        }
+        return handler;
     }
 }

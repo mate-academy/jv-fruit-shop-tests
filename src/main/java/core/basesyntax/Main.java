@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ParserService;
@@ -11,8 +12,6 @@ import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {

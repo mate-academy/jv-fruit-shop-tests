@@ -1,19 +1,18 @@
 package core.basesyntax.strategy.handler.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 public class AdderToStorageTest {
     private static final String APPLE = "apple";
-    public static final int VALID_FRUIT_QUANTITY = 5;
+    private static final int VALID_FRUIT_QUANTITY = 5;
     private static final String BANANA = "banana";
     private static final int VALID_STORAGE_SIZE = 2;
     private static final int INVALID_FRUIT_QUANTITY = -5;

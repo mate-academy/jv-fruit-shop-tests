@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReaderService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import core.basesyntax.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String VALID_PATH_TO_VALID_FILE = "src/test/resources/valid_input.csv";

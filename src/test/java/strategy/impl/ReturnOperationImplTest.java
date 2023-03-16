@@ -13,6 +13,7 @@ public class ReturnOperationImplTest {
     private static final int OPERATION_AMOUNT = 10;
     private static FruitTransaction fruitTransactionOk;
     private static FruitTransaction fruitTransactionNotOk;
+    private static ReturnOperationImpl returnOperation;
 
     @BeforeClass
     public static void beforeAll() {
@@ -20,11 +21,12 @@ public class ReturnOperationImplTest {
                 BANANA, OPERATION_AMOUNT);
         fruitTransactionNotOk = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 BANANA, OPERATION_AMOUNT);
+        returnOperation = new ReturnOperationImpl();
     }
 
     @Test
     public void handle_return_ok() {
-        new ReturnOperationImpl().handler(fruitTransactionOk);
+        returnOperation.handler(fruitTransactionOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
@@ -32,7 +34,7 @@ public class ReturnOperationImplTest {
 
     @Test(expected = RuntimeException.class)
     public void handle_not_returnOperation_notOk() {
-        new ReturnOperationImpl().handler(fruitTransactionNotOk);
+        returnOperation.handler(fruitTransactionNotOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionNotOk.getFruit());
         assertEquals(expected,actual);

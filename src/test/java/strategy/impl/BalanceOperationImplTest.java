@@ -13,6 +13,7 @@ public class BalanceOperationImplTest {
     private static final int OPERATION_AMOUNT = 10;
     private static FruitTransaction fruitTransactionOk;
     private static FruitTransaction fruitTransactionNotOk;
+    private static BalanceOperationImpl balanceOperation;
 
     @BeforeClass
     public static void beforeAll() {
@@ -20,11 +21,12 @@ public class BalanceOperationImplTest {
                 BANANA, OPERATION_AMOUNT);
         fruitTransactionNotOk = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 BANANA, OPERATION_AMOUNT);
+        balanceOperation = new BalanceOperationImpl();
     }
 
     @Test
     public void handle_balance_ok() {
-        new BalanceOperationImpl().handler(fruitTransactionOk);
+        balanceOperation.handler(fruitTransactionOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
@@ -32,7 +34,7 @@ public class BalanceOperationImplTest {
 
     @Test(expected = RuntimeException.class)
     public void handle_not_balance_notOk() {
-        new BalanceOperationImpl().handler(fruitTransactionNotOk);
+        balanceOperation.handler(fruitTransactionNotOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionNotOk.getFruit());
         assertEquals(expected,actual);

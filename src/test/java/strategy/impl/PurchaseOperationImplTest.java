@@ -13,6 +13,7 @@ public class PurchaseOperationImplTest {
     private static final int OPERATION_AMOUNT = 10;
     private static FruitTransaction fruitTransactionOk;
     private static FruitTransaction fruitTransactionNotOk;
+    private static PurchaseOperationImpl purchaseOperation;
 
     @BeforeClass
     public static void beforeAll() {
@@ -20,12 +21,13 @@ public class PurchaseOperationImplTest {
                 BANANA, OPERATION_AMOUNT);
         fruitTransactionNotOk = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 BANANA, OPERATION_AMOUNT);
+        purchaseOperation = new PurchaseOperationImpl();
     }
 
     @Test
     public void handle_purchase_ok() {
         Storage.map.put(BANANA, 20);
-        new PurchaseOperationImpl().handler(fruitTransactionOk);
+        purchaseOperation.handler(fruitTransactionOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
@@ -34,7 +36,7 @@ public class PurchaseOperationImplTest {
     @Test(expected = RuntimeException.class)
     public void handle_purchaseWithMoreAmount_notOk() {
         Storage.map.put(BANANA, 5);
-        new PurchaseOperationImpl().handler(fruitTransactionOk);
+        purchaseOperation.handler(fruitTransactionOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
@@ -42,7 +44,7 @@ public class PurchaseOperationImplTest {
 
     @Test(expected = RuntimeException.class)
     public void handle_not_purchaseOperation_notOk() {
-        new PurchaseOperationImpl().handler(fruitTransactionNotOk);
+        purchaseOperation.handler(fruitTransactionNotOk);
         Integer expected = 10;
         Integer actual = Storage.map.get(fruitTransactionNotOk.getFruit());
         assertEquals(expected,actual);

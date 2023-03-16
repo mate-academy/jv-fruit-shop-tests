@@ -20,7 +20,7 @@ public class WriterServiceImplTest {
             .append("apple,90")
             .toString();
     private static final String FILE_TO_WRITE_FOR_TEST = "src/test/resources/output-test.csv";
-    private static final String WRONG_FILE = "G:/dsddsd////???src/main/resources";
+    private static final String WRONG_FILE = "";
     private static WriterService writerService;
     private static final List<String> expected =
             List.of("fruit,quantity","banana,152","apple,90");

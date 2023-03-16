@@ -11,30 +11,30 @@ import org.junit.Test;
 public class ReturnOperationImplTest {
     private static final String BANANA = "banana";
     private static final int OPERATION_AMOUNT = 10;
-    private static FruitTransaction fruitTransaction;
+    private static FruitTransaction fruitTransactionOk;
+    private static FruitTransaction fruitTransactionNotOk;
 
     @BeforeClass
     public static void beforeAll() {
-        Storage.map.clear();
+        fruitTransactionOk = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                BANANA, OPERATION_AMOUNT);
+        fruitTransactionNotOk = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                BANANA, OPERATION_AMOUNT);
     }
 
     @Test
     public void handle_return_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                BANANA, OPERATION_AMOUNT);
-        new ReturnOperationImpl().handler(fruitTransaction);
+        new ReturnOperationImpl().handler(fruitTransactionOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_not_returnOperation_notOk() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                BANANA, OPERATION_AMOUNT);
-        new ReturnOperationImpl().handler(fruitTransaction);
+        new ReturnOperationImpl().handler(fruitTransactionNotOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionNotOk.getFruit());
         assertEquals(expected,actual);
     }
 

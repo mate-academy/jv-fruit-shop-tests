@@ -11,30 +11,30 @@ import org.junit.Test;
 public class BalanceOperationImplTest {
     private static final String BANANA = "banana";
     private static final int OPERATION_AMOUNT = 10;
-    private static FruitTransaction fruitTransaction;
+    private static FruitTransaction fruitTransactionOk;
+    private static FruitTransaction fruitTransactionNotOk;
 
     @BeforeClass
     public static void beforeAll() {
-        Storage.map.clear();
+        fruitTransactionOk = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                BANANA, OPERATION_AMOUNT);
+        fruitTransactionNotOk = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                BANANA, OPERATION_AMOUNT);
     }
 
     @Test
     public void handle_balance_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                BANANA, OPERATION_AMOUNT);
-        new BalanceOperationImpl().handler(fruitTransaction);
+        new BalanceOperationImpl().handler(fruitTransactionOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_not_balance_notOk() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                BANANA, OPERATION_AMOUNT);
-        new BalanceOperationImpl().handler(fruitTransaction);
+        new BalanceOperationImpl().handler(fruitTransactionNotOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionNotOk.getFruit());
         assertEquals(expected,actual);
     }
 

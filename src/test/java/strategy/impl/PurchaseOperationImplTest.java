@@ -11,42 +11,40 @@ import org.junit.Test;
 public class PurchaseOperationImplTest {
     private static final String BANANA = "banana";
     private static final int OPERATION_AMOUNT = 10;
-    private static FruitTransaction fruitTransaction;
+    private static FruitTransaction fruitTransactionOk;
+    private static FruitTransaction fruitTransactionNotOk;
 
     @BeforeClass
     public static void beforeAll() {
-        Storage.map.clear();
+        fruitTransactionOk = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                BANANA, OPERATION_AMOUNT);
+        fruitTransactionNotOk = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                BANANA, OPERATION_AMOUNT);
     }
 
     @Test
     public void handle_purchase_ok() {
         Storage.map.put(BANANA, 20);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                BANANA, OPERATION_AMOUNT);
-        new PurchaseOperationImpl().handler(fruitTransaction);
+        new PurchaseOperationImpl().handler(fruitTransactionOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_purchaseWithMoreAmount_notOk() {
         Storage.map.put(BANANA, 5);
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                BANANA, OPERATION_AMOUNT);
-        new PurchaseOperationImpl().handler(fruitTransaction);
+        new PurchaseOperationImpl().handler(fruitTransactionOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionOk.getFruit());
         assertEquals(expected,actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_not_purchaseOperation_notOk() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
-                BANANA, OPERATION_AMOUNT);
-        new PurchaseOperationImpl().handler(fruitTransaction);
+        new PurchaseOperationImpl().handler(fruitTransactionNotOk);
         Integer expected = 10;
-        Integer actual = Storage.map.get(fruitTransaction.getFruit());
+        Integer actual = Storage.map.get(fruitTransactionNotOk.getFruit());
         assertEquals(expected,actual);
     }
 

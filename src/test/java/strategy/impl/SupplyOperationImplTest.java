@@ -29,7 +29,7 @@ public class SupplyOperationImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handle_not_balance_notOk() {
+    public void handle_not_balanceOperation_notOk() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 BANANA, OPERATION_AMOUNT);
         new SupplyOperationImpl().handler(fruitTransaction);

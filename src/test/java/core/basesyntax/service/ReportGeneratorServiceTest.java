@@ -45,7 +45,6 @@ public class ReportGeneratorServiceTest {
 
     @Test
     public void createReport_ok() {
-
         String expected = LINE_OK;
         String actual = lines[FIRST_DATA_LINE_INDEX];
         assertEquals(expected, actual);

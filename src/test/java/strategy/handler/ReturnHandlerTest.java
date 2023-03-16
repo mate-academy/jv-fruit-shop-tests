@@ -10,6 +10,9 @@ import org.junit.Test;
 import strategy.TransactionHandler;
 
 public class ReturnHandlerTest {
+    private static final String FRUIT_FOR_TEST = "banana";
+    private static final Integer QUANTITY_OF_FRUITS_IN_STORAGE = 10;
+    private static final Integer QUANTITY_OF_FRUITS_TO_RETURN = 5;
     private static TransactionHandler returnHandler;
     private static FruitTransaction returnTransaction;
 
@@ -19,17 +22,17 @@ public class ReturnHandlerTest {
 
         returnTransaction = new FruitTransaction();
         returnTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        returnTransaction.setFruit("banana");
-        returnTransaction.setQuantity(10);
+        returnTransaction.setFruit(FRUIT_FOR_TEST);
+        returnTransaction.setQuantity(QUANTITY_OF_FRUITS_TO_RETURN);
 
-        Storage.fruits.put("banana", 10);
+        Storage.fruits.put(FRUIT_FOR_TEST, QUANTITY_OF_FRUITS_IN_STORAGE);
     }
 
     @Test
     public void handle_ReturnTransaction_Ok() {
-        Integer expected = 20;
+        Integer expected = 15;
         returnHandler.handle(returnTransaction);
-        Integer actual = Storage.fruits.get("banana");
+        Integer actual = Storage.fruits.get(FRUIT_FOR_TEST);
         assertEquals(expected, actual);
     }
 

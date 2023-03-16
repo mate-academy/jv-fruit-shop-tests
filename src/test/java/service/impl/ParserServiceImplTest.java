@@ -11,6 +11,11 @@ import org.junit.Test;
 import service.ParserService;
 
 public class ParserServiceImplTest {
+    private static final String TITLE = "type,fruit,quantity";
+    private static final String SECOND_LINE = "b,banana,20";
+    private static final String FRUIT_FOR_TEST = "banana";
+    private static final Integer QUANTITY_OF_FRUITS = 20;
+    private static final String INVALID_LINE = "z,zefir,-333";
     private static ParserService parserService;
     private static List<String> forTest;
     private static List<FruitTransaction> expected;
@@ -20,13 +25,13 @@ public class ParserServiceImplTest {
         parserService = new ParserServiceImpl();
 
         forTest = new ArrayList<>();
-        forTest.add("type,fruit,quantity");
-        forTest.add("b,banana,20");
+        forTest.add(TITLE);
+        forTest.add(SECOND_LINE);
 
         FruitTransaction balance = new FruitTransaction();
         balance.setOperation(FruitTransaction.Operation.BALANCE);
-        balance.setFruit("banana");
-        balance.setQuantity(20);
+        balance.setFruit(FRUIT_FOR_TEST);
+        balance.setQuantity(QUANTITY_OF_FRUITS);
 
         expected = new ArrayList<>();
         expected.add(balance);
@@ -40,7 +45,7 @@ public class ParserServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void parse_NotSuccessful_NotOk() {
-        forTest.add("z,zefir,-333");
+        forTest.add(INVALID_LINE);
         List<FruitTransaction> actual = parserService.parse(forTest);
         fail(RuntimeException.class.getName());
     }

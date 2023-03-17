@@ -38,7 +38,6 @@ public class CreateReportServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void createReport_nullData_notOk() {
-        map.put(null, null);
         createReportService.createReport(null);
         fail("Expected " + RuntimeException.class.getName() + " to be thrown for null data "
                 + "but it's wasn't");

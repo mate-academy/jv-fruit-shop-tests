@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class ReportGeneratorServiceImplTest {
     private static final int TEN = 10;
     private static final int FIVE = 5;
     private static final String EXPECTED_REPORT = "fruit quantity" + System.lineSeparator()
-            + "banana,25" + System.lineSeparator()
+            + "banana,50" + System.lineSeparator()
             + "apple,40";
 
     private ReportGeneratorService reportGeneratorService;
@@ -68,5 +69,10 @@ public class ReportGeneratorServiceImplTest {
     public void generateReport_emptyStorage_notOk() {
         Storage.storage.clear();
         reportGeneratorService.generateReport();
+    }
+
+    @Test
+    public void setUp_reportGeneratorServiceNotNull() {
+        Assert.assertNotNull("ReportGeneratorService should not be null", reportGeneratorService);
     }
 }

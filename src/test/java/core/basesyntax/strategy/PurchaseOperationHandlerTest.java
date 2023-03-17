@@ -28,8 +28,8 @@ public class PurchaseOperationHandlerTest {
                         FRUIT_NAME,
                         INITIAL_QUANTITY2);
         purchaseOperationHandler.handle(fruitTransaction);
-        int expectedQuantity = INITIAL_QUANTITY1 - INITIAL_QUANTITY2;
-        assertEquals(expectedQuantity, (int) Storage.storage.get(FRUIT_NAME));
+        Integer expectedQuantity = INITIAL_QUANTITY1 - INITIAL_QUANTITY2;
+        assertEquals(expectedQuantity, Storage.storage.get(FRUIT_NAME));
     }
 
     @Test(expected = RuntimeException.class)

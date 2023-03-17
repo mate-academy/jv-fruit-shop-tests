@@ -11,11 +11,12 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
+    private static final String TEST_RESOURCES_PATH = "src/test/resources/";
     private final ReaderService readerService = new ReaderServiceImpl();
 
     @Test
-    public void read_validFile_notOk() throws IOException {
-        Path tempFile = Files.createTempFile("test", ".csv");
+    public void read_validFile_Ok() throws IOException {
+        Path tempFile = Files.createTempFile(TEST_RESOURCES_PATH + "test", ".csv");
         List<String> result = readerService.read(tempFile.toString());
         assertNotNull("Result should not be null", result);
     }
@@ -28,9 +29,14 @@ public class ReaderServiceImplTest {
 
     @Test
     public void read_emptyFile_notOk() throws IOException {
-        Path emptyFile = Files.createTempFile("empty", ".csv");
+        Path emptyFile = Files.createTempFile(TEST_RESOURCES_PATH + "empty", ".csv");
         List<String> result = readerService.read(emptyFile.toString());
         assertNotNull("Result should not be null", result);
         assertEquals("Result should be an empty list", 0, result.size());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void read_nullParameter_notOk() {
+        readerService.read(null);
     }
 }

@@ -5,22 +5,22 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static final int INITIAL_QUANTITY1 = 20;
     private static final int INITIAL_QUANTITY2 = 10;
     private static final String FRUIT_NAME = "apple";
-    private OperationHandler balanceOperationHandler;
+    private static OperationHandler balanceOperationHandler;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
     }
 
     @Test
-    public void adds_toStorage_ok() {
+    public void adds_ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_NAME,

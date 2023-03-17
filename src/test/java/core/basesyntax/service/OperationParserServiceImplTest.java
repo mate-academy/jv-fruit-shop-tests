@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.OperationParserServiceImpl;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationParserServiceImplTest {
@@ -26,11 +26,10 @@ public class OperationParserServiceImplTest {
     private static final int VALUE2 = 100;
     private static final int VALUE3 = 5;
     private static final int VALUE4 = 50;
+    private static OperationParserService operationParserService;
 
-    private OperationParserService operationParserService;
-
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationParserService = new OperationParserServiceImpl();
     }
 

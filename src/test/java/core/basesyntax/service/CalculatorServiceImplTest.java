@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CalculatorServiceImplTest {
@@ -26,11 +26,12 @@ public class CalculatorServiceImplTest {
     private static final int PURCHASE_QUANTITY = 10;
     private static final int RETURN_QUANTITY = 5;
     private static final int PURCHASE_INSUFFICIENT_QUANTITY = 60;
+    private static CalculatorService calculatorService;
+    private List<FruitTransaction> transactions;
+    private FruitTransaction balanceTransaction;
 
-    private CalculatorService calculatorService;
-
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -43,7 +44,7 @@ public class CalculatorServiceImplTest {
 
     @Test
     public void calculate_validTransactions_ok() {
-        FruitTransaction balanceTransaction =
+        balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY);
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, BANANA_QUANTITY);
@@ -65,7 +66,7 @@ public class CalculatorServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void calculate_purchaseWithInsufficientStock_noOk() {
-        FruitTransaction balanceTransaction =
+        balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         APPLE,
                         APPLE_QUANTITY);
@@ -80,19 +81,19 @@ public class CalculatorServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void calculate_nullTransactionList_notOk() {
-        List<FruitTransaction> transactions = null;
+        transactions = null;
         calculatorService.calculate(transactions);
     }
 
     @Test(expected = RuntimeException.class)
     public void calculate_emptyTransactionList_notOk() {
-        List<FruitTransaction> transactions = Arrays.asList();
+        transactions = Arrays.asList();
         calculatorService.calculate(transactions);
     }
 
     @Test(expected = NullPointerException.class)
     public void calculate_transactionListWithNullElement_notOk() {
-        FruitTransaction balanceTransaction =
+        balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY);
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, BANANA_QUANTITY);

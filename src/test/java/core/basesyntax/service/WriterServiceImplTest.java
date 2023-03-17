@@ -1,15 +1,15 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String TEST_RESOURCES_PATH = "src/test/resources/";
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         writerService = new WriterServiceImpl();
     }
 
@@ -21,7 +21,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_nullReportOrFilePath_notOk() {
+    public void write_nullReport_notOk() {
         String report = "test report";
         String fileName = TEST_RESOURCES_PATH + "test-report.txt";
         writerService.write(null, fileName);

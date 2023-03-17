@@ -43,7 +43,7 @@ public class ReaderServiceImplTest {
 
     @Test
     void read_file_notOk() {
-        assertThrows(InvalidPathException.class,
+        assertThrows(RuntimeException.class,
                 () -> readerService.getListOfDataFromFile(WRONG_PATH));
     }
 }

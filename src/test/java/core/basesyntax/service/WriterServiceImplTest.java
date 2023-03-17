@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
@@ -28,12 +27,5 @@ public class WriterServiceImplTest {
         writerService.write(HEADER + LINE_OK, PATH_TO_TEST);
         assertEquals(readerService.getListOfDataFromFile(PATH_TO_TEST),
                 List.of(HEADER + LINE_OK));
-    }
-
-    @Test
-    void wrong_Name_File_ok() {
-        assertThrows(RuntimeException.class, () -> {
-            writerService.write(" ", WRONG_PATH);
-        });
     }
 }

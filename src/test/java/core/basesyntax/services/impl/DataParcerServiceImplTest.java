@@ -23,19 +23,19 @@ public class DataParcerServiceImplTest {
     private static List<String> validData;
     private static List<String> invalidData;
     private static List<List<String>> expectedData;
-    private static List<String> opratorTypeCode;
+    private static List<String> opratorTypeCodes;
     private static List<String> fruitsInStore;
     private static ParametrsValidatorService parametrsValidator;
 
     @BeforeClass
     public static void beforeClass() {
-        opratorTypeCode = Arrays.stream(OperationType.values())
+        opratorTypeCodes = Arrays.stream(OperationType.values())
                 .map(OperationType::getCode)
                 .collect(Collectors.toList());
         fruitsInStore = Arrays.stream(FruitsInStore.values())
                 .map(FruitsInStore::getCode)
                 .collect(Collectors.toList());
-        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCode, fruitsInStore);
+        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCodes, fruitsInStore);
         validData = List.of(ROW_TITLE, "s,apple,20", "b,banana,100", "p,apple,800");
         expectedData = List.of(List.of("s", "apple", "20"),
                 List.of("b", "banana", "100"),

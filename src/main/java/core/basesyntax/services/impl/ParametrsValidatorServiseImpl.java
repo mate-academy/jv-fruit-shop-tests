@@ -10,11 +10,12 @@ public class ParametrsValidatorServiseImpl implements ParametrsValidatorService 
     public static final int OPERATION_INDEX = 0;
     public static final int QUANTITY_INDEX = 2;
     public static final int FRUIT_INDEX = 1;
-    private final List<String> opratorTypeCode;
+    private final List<String> opratorTypeCodes;
     private final List<String> fruitsInStore;
 
-    public ParametrsValidatorServiseImpl(List<String> opratorTypeCode, List<String> fruitsInStore) {
-        this.opratorTypeCode = opratorTypeCode;
+    public ParametrsValidatorServiseImpl(List<String> opratorTypeCodes,
+                                         List<String> fruitsInStore) {
+        this.opratorTypeCodes = opratorTypeCodes;
         this.fruitsInStore = fruitsInStore;
     }
 
@@ -40,7 +41,7 @@ public class ParametrsValidatorServiseImpl implements ParametrsValidatorService 
 
     @Override
     public boolean isOperationValid(String operation) {
-        if (!opratorTypeCode.contains(operation)) {
+        if (!opratorTypeCodes.contains(operation)) {
             throw new InvalidParametersException("Operation can't be: " + operation);
         }
         return true;

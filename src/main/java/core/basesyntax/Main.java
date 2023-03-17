@@ -30,21 +30,21 @@ import java.util.stream.Collectors;
 
 public class Main {
     private static ParametrsValidatorService parametrsValidator;
-    private static List<String> opratorTypeCode;
+    private static List<String> opratorTypeCodes;
     private static List<String> fruitsInStore;
     private static Map<String, OperationHandler> operationHandlerMap;
     private static final String INPUT_DATA_PATH = "src/main/resources/FruitShopInputData.csv";
     private static final String REPORT_DATA_PATH = "src/main/resources/FruitShopOutputData.csv";
 
     public static void main(String[] args) {
-        opratorTypeCode = Arrays.stream(OperationType.values())
+        opratorTypeCodes = Arrays.stream(OperationType.values())
                 .map(OperationType::getCode)
                 .collect(Collectors.toList());
 
         fruitsInStore = Arrays.stream(FruitsInStore.values())
                 .map(FruitsInStore::getCode)
                 .collect(Collectors.toList());
-        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCode, fruitsInStore);
+        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCodes, fruitsInStore);
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(OperationType.BALANCE.getCode(),new OperationHandlerBalance());
         operationHandlerMap.put(OperationType.SUPPLY.getCode(),new OperationHandlersSupply());
@@ -59,7 +59,7 @@ public class Main {
         List<String> inputData = readerService.readFromFile(Path.of(INPUT_DATA_PATH));
 
         ParametrsValidatorService parametrsValidator =
-                new ParametrsValidatorServiseImpl(opratorTypeCode,fruitsInStore);
+                new ParametrsValidatorServiseImpl(opratorTypeCodes,fruitsInStore);
 
         DataParcerService dataParcerService = new DataParcerServiceImpl(parametrsValidator);
         List<List<String>> parcedData = dataParcerService.parceDataFromCsv(inputData);

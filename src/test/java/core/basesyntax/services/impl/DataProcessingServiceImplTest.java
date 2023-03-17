@@ -30,7 +30,7 @@ public class DataProcessingServiceImplTest {
     private static List<List<String>> invalidData;
     private static List<List<String>> validData;
     private static Map<String, Integer> expectedData;
-    private static List<String> opratorTypeCode;
+    private static List<String> opratorTypeCodes;
     private static List<String> fruitsInStore;
     private static ParametrsValidatorService parametrsValidator;
     private static Map<String, OperationHandler> operationHandlerMap;
@@ -38,13 +38,13 @@ public class DataProcessingServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        opratorTypeCode = Arrays.stream(OperationType.values())
+        opratorTypeCodes = Arrays.stream(OperationType.values())
                 .map(OperationType::getCode)
                 .collect(Collectors.toList());
         fruitsInStore = Arrays.stream(FruitsInStore.values())
                 .map(FruitsInStore::getCode)
                 .collect(Collectors.toList());
-        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCode, fruitsInStore);
+        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCodes, fruitsInStore);
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(OperationType.BALANCE.getCode(), new OperationHandlerBalance());
         operationHandlerMap.put(OperationType.SUPPLY.getCode(), new OperationHandlersSupply());

@@ -46,7 +46,7 @@ public class CsvFileWriterServiceImplTest {
     }
 
     @Test(expected = InvalidPathException.class)
-    public void writeToCsvFile_ivalidPath_notOk() {
+    public void writeToCsvFile_invalidPath_notOk() {
         writerService.writeToCsvFile(testData, invalidPath);
     }
 

@@ -20,7 +20,7 @@ public class BalanceOperationImplTest {
     }
 
     @Test
-    void add_Balance_isOk() {
+    void add_Balance_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         balanceOperation.calculateFruit(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, KEY, VALUE

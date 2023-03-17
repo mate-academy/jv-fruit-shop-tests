@@ -22,7 +22,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    void parse_toList_isOk() {
+    void parse_toList_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 KEY,VALUE);
         List<FruitTransaction> excepted = parserService.parse(List.of(HEADER, LINE_OK));
@@ -30,7 +30,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    void parse_toList_isNotOk() {
+    void parse_toList_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 KEY,VALUE);
         List<FruitTransaction> excepted = parserService.parse(List.of(LINE_OK));

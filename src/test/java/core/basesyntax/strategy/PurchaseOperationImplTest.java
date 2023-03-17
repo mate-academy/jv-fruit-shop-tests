@@ -28,7 +28,7 @@ public class PurchaseOperationImplTest {
     }
 
     @Test
-    void add_Purchase_isOk() {
+    void add_Purchase_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         purchaseOperation.calculateFruit(new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, KEY, VALUE
@@ -38,7 +38,7 @@ public class PurchaseOperationImplTest {
     }
 
     @Test
-    void add_Purchase_isNotOk() {
+    void add_Purchase_notOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperation.calculateFruit(new FruitTransaction(

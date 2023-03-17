@@ -24,19 +24,19 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    void read_Empty_File_isOk() {
+    void read_emptyFile_ok() {
         List<String> listOfDataFromFile = readerService.getListOfDataFromFile(PATH_TO_EMPTY);
         assertEquals(new ArrayList<>(), listOfDataFromFile);
     }
 
     @Test
-    void read_Data_isOk() {
+    void read_Data_ok() {
         List<String> listOfDataFromFile = readerService.getListOfDataFromFile(PATH_TO_FRUITS);
         assertEquals(List.of(HEADER,LINE_OK), listOfDataFromFile);
     }
 
     @Test
-    void read_No_File_isNotOk() {
+    void read_No_File_notOk() {
         assertThrows(InvalidPathException.class,
                 () -> readerService.getListOfDataFromFile(WRONG_PATH));
     }

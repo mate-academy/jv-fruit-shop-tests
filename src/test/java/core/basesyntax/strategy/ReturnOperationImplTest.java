@@ -21,7 +21,7 @@ public class ReturnOperationImplTest {
     }
 
     @Test
-    void add_Return_isOk() {
+    void add_Return_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         returnOperation.calculateFruit(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, KEY, VALUE

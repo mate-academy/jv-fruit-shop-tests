@@ -24,14 +24,14 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    void write_To_File_isOk() {
+    void write_To_File_ok() {
         writerService.write(HEADER + LINE_OK, PATH_TO_TEST);
         assertEquals(readerService.getListOfDataFromFile(PATH_TO_TEST),
                 List.of(HEADER + LINE_OK));
     }
 
     @Test
-    void wrong_Name_File_isNotOk() {
+    void wrong_Name_File_ok() {
         assertThrows(RuntimeException.class, () -> {
             writerService.write(" ", WRONG_PATH);
         });

@@ -36,7 +36,7 @@ public class CalculatorServiceImplTest {
     }
 
     @Test
-    void changing_Operations_isOK() {
+    void changing_Operations_oK() {
         StorageOfFruits.fruitStorage.put(KEY,VALUE);
         calculatorService.calculate(List.of(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, KEY, VALUE),

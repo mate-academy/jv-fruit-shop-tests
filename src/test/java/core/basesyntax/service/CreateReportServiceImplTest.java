@@ -26,7 +26,7 @@ public class CreateReportServiceImplTest {
     }
 
     @Test
-    void creating_Of_Report_isOk() {
+    void creating_Of_Report_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         String parse = createReportService.parse(StorageOfFruits.fruitStorage);
         String assertLine = HEADER + System.lineSeparator() + LINE_OK;
@@ -34,7 +34,7 @@ public class CreateReportServiceImplTest {
     }
 
     @Test
-    void creating_Header_Of_Report_isOk() {
+    void creating_Header_Of_Report_ok() {
         String parse = createReportService.parse(StorageOfFruits.fruitStorage);
         assertEquals(HEADER, parse);
     }

@@ -31,7 +31,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Supply_isOK() {
+    void get_Supply_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, KEY, VALUE)
@@ -39,7 +39,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Purchase_isOK() {
+    void get_Purchase_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, KEY, VALUE)
@@ -47,7 +47,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Return_isOK() {
+    void get_Return_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.RETURN, KEY, VALUE)
@@ -55,7 +55,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Balance_isOK() {
+    void get_Balance_ok() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, KEY, VALUE)

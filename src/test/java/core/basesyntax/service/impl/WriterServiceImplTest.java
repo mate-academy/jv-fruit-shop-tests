@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,14 +35,7 @@ public class WriterServiceImplTest {
                 + "orange,30" + LINE_SEPARATOR;
         writerService.writeToFile(PATH_TO_FILE, expectedReport);
 
-        List<String> actualLines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                actualLines.add(line);
-            }
-        }
-
+        List<String> actualLines = Files.readAllLines(Path.of(PATH_TO_FILE));
         List<String> expectedLines = Arrays.asList(expectedReport.split(LINE_SEPARATOR));
 
         assertEquals("Number of lines in file is incorrect",

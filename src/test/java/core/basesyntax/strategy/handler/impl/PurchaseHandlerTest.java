@@ -66,15 +66,12 @@ public class PurchaseHandlerTest {
         assertSame(expectedQuantity, actualQuantity);
     }
 
-    @Test
-    public void testPurchaseHandlerShouldIgnoreNegativeTransaction() {
+    @Test(expected = RuntimeException.class)
+    public void test_Negative_Transaction_not_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 APPLE,
                 INVALID_OPERATION_QUANTITY);
         handler.handle(transaction);
-        Integer actualQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
-        int expectedQuantity = VALID_FRUIT_QUANTITY;
-        assertSame(expectedQuantity, actualQuantity);
     }
 }

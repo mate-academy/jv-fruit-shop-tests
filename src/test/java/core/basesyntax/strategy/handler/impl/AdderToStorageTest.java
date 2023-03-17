@@ -53,13 +53,12 @@ public class AdderToStorageTest {
         assertSame(VALID_FRUIT_QUANTITY, Storage.storage.get(BANANA));
     }
 
-    @Test
-    public void test_add_negative_quantity_ok() {
+    @Test(expected = RuntimeException.class)
+    public void test_add_negative_quantity_not_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 BANANA,
                 INVALID_FRUIT_QUANTITY);
         AdderToStorage.add(transaction);
-        assertEquals(new HashMap<>(), Storage.storage);
     }
 }

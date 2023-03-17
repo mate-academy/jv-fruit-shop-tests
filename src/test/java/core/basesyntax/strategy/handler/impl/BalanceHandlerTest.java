@@ -57,15 +57,12 @@ public class BalanceHandlerTest {
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
-    @Test
-    public void test_negativeQuantity_not_added_to_storage() {
+    @Test(expected = RuntimeException.class)
+    public void test_add_negative_Quantity_not_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
                 BANANA,
                 INVALID_FRUIT_QUANTITY);
         handler.handle(transaction);
-        int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
-        Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 }

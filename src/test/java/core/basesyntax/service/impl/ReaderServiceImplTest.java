@@ -35,23 +35,13 @@ public class ReaderServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_read_empty_file_not_ok() {
-        try {
-            readerService.readFromFile(PATH_TO_EMPTY_FILE);
-            fail("Expected a RuntimeException to be thrown");
-        } catch (RuntimeException e) {
-            assertEquals("File is empty", e.getMessage());
-        }
+        readerService.readFromFile(PATH_TO_EMPTY_FILE);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void test_read_nonexistent_file_not_ok() {
-        try {
-            readerService.readFromFile(PATH_TO_NONEXISTENT_FILE);
-            fail("Expected a RuntimeException to be thrown");
-        } catch (RuntimeException e) {
-            assertEquals("Can't read file", e.getMessage());
-        }
+        readerService.readFromFile(PATH_TO_NONEXISTENT_FILE);
     }
 }

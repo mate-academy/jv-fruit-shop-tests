@@ -36,7 +36,6 @@ public class SupplyHandlerTest {
 
     @Test
     public void test_Add_To_Empty_FruitStorage_ok() {
-        Storage.storage.clear();
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 APPLE,
@@ -71,15 +70,12 @@ public class SupplyHandlerTest {
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
-    @Test
-    public void test_Not_Add_To_FruitStorage_ForNegativeQuantity_ok() {
+    @Test(expected = RuntimeException.class)
+    public void test_Add_To_FruitStorage_ForNegativeQuantity_not_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 BANANA,
                 INVALID_FRUIT_QUANTITY);
         handler.handle(transaction);
-        int expectedBananaQuantity = VALID_FRUIT_QUANTITY;
-        Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertSame(expectedBananaQuantity, actualAppleQuantity);
     }
 }

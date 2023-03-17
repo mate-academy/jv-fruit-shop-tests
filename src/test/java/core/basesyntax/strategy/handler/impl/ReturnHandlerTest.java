@@ -14,7 +14,7 @@ public class ReturnHandlerTest {
     private static final String APPLE = "apple";
     private static final int VALID_FRUIT_QUANTITY = 5;
     private static final String BANANA = "banana";
-    private static final int INVALID_FRUIT_QUANTITY = -7;
+    private static final int NEGATIVE_FRUIT_QUANTITY = -7;
     private static final int ZERO_FRUIT_QUANTITY = 0;
     private static final int ADD_FRUIT_QUANTITY = 7;
     private static OperationHandler handler;
@@ -72,15 +72,12 @@ public class ReturnHandlerTest {
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
-    @Test
-    public void test_Not_Add_To_FruitStorage_ForNegativeQuantity_ok() {
+    @Test(expected = RuntimeException.class)
+    public void test_Add_To_FruitStorage_ForNegativeQuantity_not_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN,
                 BANANA,
-                INVALID_FRUIT_QUANTITY);
+                NEGATIVE_FRUIT_QUANTITY);
         handler.handle(transaction);
-        int expectedBananaQuantity = VALID_FRUIT_QUANTITY;
-        Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertSame(expectedBananaQuantity, actualAppleQuantity);
     }
 }

@@ -19,7 +19,6 @@ public class FruitShopServiceImplTest {
     private static final String BANANA = "banana";
     private static final String ORANGE = "orange";
     private static final String PEAR = "pear";
-
     private static FruitShopService fruitShopService;
 
     @BeforeClass
@@ -74,8 +73,8 @@ public class FruitShopServiceImplTest {
         assertEquals(expectedStorage, Storage.storage);
     }
 
-    @Test
-    public void test_Negative_ProcessData_Not_Update_Storage_ok() {
+    @Test(expected = RuntimeException.class)
+    public void test_Negative_ProcessData_Update_Storage_not_ok() {
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, -1),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, -1),
@@ -83,10 +82,5 @@ public class FruitShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, ORANGE, -1)
         );
         fruitShopService.processData(transactions);
-        Map<String, Integer> expectedStorage = new HashMap<>();
-        expectedStorage.put(APPLE, 10);
-        expectedStorage.put(BANANA, 20);
-        expectedStorage.put(ORANGE, 30);
-        assertEquals(expectedStorage, Storage.storage);
     }
 }

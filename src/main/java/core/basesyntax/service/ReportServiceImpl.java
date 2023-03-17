@@ -11,7 +11,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String generateReport() {
-        if (Storage.storage.containsValue(null)) {
+        if (Storage.storage.containsValue(null) || Storage.storage.containsKey(null)) {
             throw new FruitShopException("Storage is null!");
         }
         return Storage.storage.entrySet().stream()

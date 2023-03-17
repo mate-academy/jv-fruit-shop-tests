@@ -32,17 +32,10 @@ public class ReturnOperationTest {
                 expected, actual);
     }
 
-    @Test
+    @Test(expected = FruitTransactionException.class)
     public void handle_notExistValue_notOk() {
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                    WRONG_NAME, RETURN_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                WRONG_NAME, RETURN_COUNT));
     }
 
     @Test(expected = FruitTransactionException.class)

@@ -21,12 +21,11 @@ public class BalanceOperationTest {
 
     @Test
     public void handle_newValue_ok() {
-        int expected = FRUIT_COUNT;
         operation.handle(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, FRUIT_NAME, FRUIT_COUNT));
         int actual = Storage.fruits.get(FRUIT_NAME);
-        assertEquals(actual + " waiting for, but " + expected + " was expected!",
-                expected, actual);
+        assertEquals(FRUIT_COUNT + " expected, but was " + actual + " !",
+                FRUIT_COUNT, actual);
     }
 
     @Test(expected = FruitTransactionException.class)
@@ -37,17 +36,9 @@ public class BalanceOperationTest {
                 FRUIT_NAME, FRUIT_COUNT));
     }
 
-    @Test
+    @Test(expected = FruitTransactionException.class)
     public void handle_nullValue_notOk() {
-        BalanceOperation operation = new BalanceOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                    null, FRUIT_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true, "
-                + "but false was expected", thrown);
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                null, FRUIT_COUNT));
     }
 }

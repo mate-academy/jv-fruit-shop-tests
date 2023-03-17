@@ -27,18 +27,17 @@ public class PurchaseOperationTest {
         operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 REGULAR_NAME, PURCHASE_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
-        assertEquals(actual + " waiting for, but " + expected + " was expected!",
+        assertEquals(expected + " expected, but was " + actual + "!",
                 expected, actual);
     }
 
     @Test
     public void handle_allOfExistValue_ok() {
-        int expected = 0;
         operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 REGULAR_NAME, START_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
-        assertEquals(actual + " waiting for, but " + expected + " was expected!",
-                expected, actual);
+        assertEquals("0 expected, but was " + actual + "!",
+                0, actual);
     }
 
     @Test(expected = FruitTransactionException.class)

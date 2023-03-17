@@ -39,7 +39,7 @@ public class TransactionsEvaluateServiceImplTest {
         transactions.add(PURCHASE_TRANSACTION);
         transactionsEvaluateService.evaluate(transactions);
         int actual = Storage.fruits.get(FRUIT_NAME);
-        assertEquals(EXPECTED_AFTER_EVALUATE + " expected, but was " + actual,
+        assertEquals(EXPECTED_AFTER_EVALUATE + " expected, but was " + actual + "!",
                 EXPECTED_AFTER_EVALUATE, actual);
     }
 }

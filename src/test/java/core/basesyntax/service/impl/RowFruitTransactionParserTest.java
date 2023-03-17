@@ -97,7 +97,7 @@ public class RowFruitTransactionParserTest {
     public void parse_nullValue_ok() {
         String[] s = null;
         FruitTransaction actual = parser.parse(s);
-        assertEquals("Null expected but was " + actual,
+        assertEquals("null expected but was " + actual,
                 null, actual);
     }
 

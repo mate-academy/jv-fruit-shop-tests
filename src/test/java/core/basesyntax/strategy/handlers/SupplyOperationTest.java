@@ -27,7 +27,7 @@ public class SupplyOperationTest {
         operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 REGULAR_NAME, SUPPLY_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
-        assertEquals(actual + " waiting for, but " + expected + " was expected!",
+        assertEquals(expected + " expected, but was " + actual + " !",
                 expected, actual);
     }
 

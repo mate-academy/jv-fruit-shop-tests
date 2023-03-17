@@ -4,11 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
+import core.basesyntax.strategy.actions.ActionHandler;
 import core.basesyntax.strategy.actions.SupplyActionHandler;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyActionTest {
+    private static ActionHandler actionHandler;
+
+    @BeforeClass
+    public static void initialize() {
+        actionHandler = new SupplyActionHandler();
+    }
 
     @Before
     public void clearStorage() {
@@ -18,7 +26,7 @@ public class SupplyActionTest {
     @Test
     public void apply_normalInput_ok() {
         Storage.put("apple", 10);
-        new SupplyActionHandler().apply(
+        actionHandler.apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "apple",
                         5));

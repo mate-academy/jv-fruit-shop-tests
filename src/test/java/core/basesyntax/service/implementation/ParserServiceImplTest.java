@@ -2,57 +2,65 @@ package core.basesyntax.service.implementation;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
-import org.junit.Before;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-    private static final String CORRECT_LINE_FIRST = "b,apple,101";
-    private static final String CORRECT_LINE_SECOND = "s,apple,10";
-    private static final String CORRECT_LINE_THIRD = "s,apple,15";
-    private static final String APPLE_FRUIT = "apple";
-    private static final int FIRST_ELEMENT = 0;
-    private static final int EXPECTED_QUANTITY = 101;
-    private ParserServiceImpl parserService;
-    private List<String> stringList;
 
-    @Before
-    public void setUp() {
-        parserService = new ParserServiceImpl();
+    private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
+    private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
+    private static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
+    private static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static List<String> stringList;
+    private static List<FruitTransaction> fruitTransactions;
+    private static ParserServiceImpl dataParserService;
+
+    @BeforeClass
+    public static void beforeAll() {
         stringList = new ArrayList<>();
-        stringList.add(CORRECT_LINE_FIRST);
-        stringList.add(CORRECT_LINE_SECOND);
-        stringList.add(CORRECT_LINE_THIRD);
-        Storage.fruits.clear();
-    }
+        fruitTransactions = new ArrayList<>();
+        dataParserService = new ParserServiceImpl();
 
-    @After
-    public void tearDown() {
-        stringList.clear();
+        stringList.add("b,banana,20");
+        stringList.add("b,apple,100");
+        stringList.add("s,banana,100");
+        stringList.add("p,banana,13");
+        stringList.add("r,apple,10");
+        stringList.add("p,apple,20");
+        stringList.add("p,banana,5");
+        stringList.add("s,banana,50");
+
+        fruitTransactions.add(new FruitTransaction(BALANCE,BANANA,20));
+        fruitTransactions.add(new FruitTransaction(BALANCE,APPLE,100));
+        fruitTransactions.add(new FruitTransaction(SUPPLY,BANANA,100));
+        fruitTransactions.add(new FruitTransaction(PURCHASE,BANANA,13));
+        fruitTransactions.add(new FruitTransaction(RETURN,APPLE,10));
+        fruitTransactions.add(new FruitTransaction(PURCHASE,APPLE,20));
+        fruitTransactions.add(new FruitTransaction(PURCHASE,BANANA,5));
+        fruitTransactions.add(new FruitTransaction(SUPPLY,BANANA,50));
+
     }
 
     @Test
-    public void parseFruitTransactions() {
-        List<FruitTransaction> listTest = parserService.parseFruitTransactions(stringList);
-        FruitTransaction fruitTransaction = listTest.get(FIRST_ELEMENT);
+    public void parseTransaction_ok() {
+        List<FruitTransaction> actualTransactions
+                = dataParserService.parseFruitTransactions(stringList);
 
-        String expectedFruit = APPLE_FRUIT;
-        String actualFruit = listTest.get(FIRST_ELEMENT).getFruit();
-        assertEquals("Expected fruits = " + expectedFruit + ", but was: " + actualFruit,
-                expectedFruit, actualFruit);
-
-        FruitTransaction.Operation expectedOperation = FruitTransaction.Operation.BALANCE;
-        FruitTransaction.Operation actualOperation = fruitTransaction.getOperation();
-        assertEquals("Expected operation = " + expectedOperation + ", but was: "
-                        + actualOperation, expectedOperation, actualOperation);
-
-        int expectedQuantity = EXPECTED_QUANTITY;
-        int actualQuantity = listTest.get(FIRST_ELEMENT).getQuantity();
-        assertEquals("Expected amount = " + expectedQuantity + ", but was: "
-                        + actualQuantity, expectedQuantity, actualQuantity);
+        assertEquals(fruitTransactions.size(),actualTransactions.size());
+        FruitTransaction actual;
+        FruitTransaction expected;
+        for (int i = 0; i < fruitTransactions.size(); i++) {
+            actual = actualTransactions.get(i);
+            expected = fruitTransactions.get(i);
+            assertEquals(expected.getFruit(), actual.getFruit());
+            assertEquals(expected.getOperation(),actual.getOperation());
+            assertEquals(expected.getQuantity(),actual.getQuantity());
+        }
     }
 }

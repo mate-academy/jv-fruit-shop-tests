@@ -3,31 +3,37 @@ package core.basesyntax.service.implementation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.exeption.FruitShopException;
+
+import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceImplTest {
-    private static final String PATH_TO_FILE_OK = "src/main/resources/FruitStorageOperation.csv";
-    private static final String PATH_TO_EMPTY_FILE = "src/main/resources/EmptyFile.csv";
+    private static final String PATH_TO_FILE_OK = "src/test/resources/FruitStorageOperation.csv";
+    private static final String PATH_TO_EMPTY_FILE = "src/test/resources/EmptyFile.csv";
     private static final String INCORRECT_PATH = "F://incorrectName.csv";
-    private static final String FIRST_LINE_IN_OK_FILE = "b,banana,20";
-    private static final int INDEX_FOR_FIRST_LINE = 0;
-    private FileReaderServiceImpl fileReaderService;
+    private static List<String> listOk;
+    private static FileReaderServiceImpl fileReaderService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass(){
         fileReaderService = new FileReaderServiceImpl();
-        Storage.fruits.clear();
+        listOk = new ArrayList<>();
+        listOk.add("b,banana,20");
+        listOk.add("b,apple,100");
+        listOk.add("s,banana,100");
+        listOk.add("p,banana,13" );
+        listOk.add("r,apple,10");
+        listOk.add("p,apple,20");
+        listOk.add("p,banana,5");
+        listOk.add("s,banana,50");
     }
 
     @Test
     public void readFromFile_ok() {
-        List<String> linesFromFile = fileReaderService.readFromFile(PATH_TO_FILE_OK);
-        String actual = linesFromFile.get(INDEX_FOR_FIRST_LINE);
-        assertEquals(FIRST_LINE_IN_OK_FILE, actual);
+        assertEquals(listOk, fileReaderService.readFromFile(PATH_TO_FILE_OK));
     }
 
     @Test(expected = FruitShopException.class)

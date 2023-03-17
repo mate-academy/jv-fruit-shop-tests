@@ -24,7 +24,7 @@ public class ReaderServiceImplTest {
     void read_nonExistentFile_notOk() {
         String nonExistentFileName = "non_existed.txt";
         assertThrows(RuntimeException.class, () -> readerService.read(nonExistentFileName),
-                "non-existent file");
+                "non existent file");
     }
 
     @Test

@@ -18,6 +18,9 @@ public class StrategyStorageImpl implements StrategyStorage {
 
     @Override
     public OperationHandler getStrategy(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getOperation() == null) {
+            throw new RuntimeException("Operation is null");
+        }
         return handlers.get(fruitTransaction.getOperation());
     }
 }

@@ -56,19 +56,19 @@ public class CalculatorServiceImplTest {
     }
 
     @Test
-    void calculate_nullTransactionList_throwsRuntimeException() {
+    void calculate_nullTransactionList_notOk() {
         List<FruitTransaction> transactions = null;
         assertThrows(RuntimeException.class, () -> calculatorService.calculate(transactions));
     }
 
     @Test
-    void calculate_emptyTransactionList_throwsRuntimeException() {
+    void calculate_emptyTransactionList_notOk() {
         List<FruitTransaction> transactions = Arrays.asList();
         assertThrows(RuntimeException.class, () -> calculatorService.calculate(transactions));
     }
 
     @Test
-    void calculate_transactionListWithNullElement_throwsNullPointerException() {
+    void calculate_transactionListWithNullElement_notOk() {
         FruitTransaction balanceTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 50);
         FruitTransaction supplyTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20);
         List<FruitTransaction> transactions = Arrays.asList(balanceTransaction, null, supplyTransaction);

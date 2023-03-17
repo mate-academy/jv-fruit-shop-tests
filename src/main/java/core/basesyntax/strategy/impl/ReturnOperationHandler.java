@@ -9,6 +9,10 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getFruit() == null
+                || fruitTransaction.getOperation() == null) {
+            throw new RuntimeException("Invalid input transaction data");
+        }
         Storage.storage.put(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity()
                         + Storage.storage.getOrDefault(fruitTransaction.getFruit(), EMPTY_VALUE));

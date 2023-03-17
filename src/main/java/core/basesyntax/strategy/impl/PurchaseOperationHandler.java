@@ -9,6 +9,10 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getFruit() == null
+                || fruitTransaction.getOperation() == null) {
+            throw new RuntimeException("Invalid input transaction data");
+        }
         int currentBalance = Storage.storage.getOrDefault(fruitTransaction.getFruit(), EMPTY_VALUE);
         int updatedBalance = currentBalance - fruitTransaction.getQuantity();
         if (updatedBalance < EMPTY_VALUE) {

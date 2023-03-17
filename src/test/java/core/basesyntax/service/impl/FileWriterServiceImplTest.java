@@ -14,7 +14,7 @@ public class FileWriterServiceImplTest {
     private static final String HEAD = "fruit,quantity";
     private static final String INVALID_FILE_PATH = "G://unreal_folder.csv";
     private static final String VALID_FILE_PATH =
-            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/main/resources/new.csv";
+            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/test/resources/new.csv";
     private static String REPORT = HEAD;
 
     @BeforeClass

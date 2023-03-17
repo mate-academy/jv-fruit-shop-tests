@@ -17,7 +17,7 @@ public class TransactionParserServiceImplTest {
     private static FileReaderService fileReaderService;
     private static TransactionParserService transactionParserService;
     private static final String NORMAL_FILE =
-            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/main/resources/input.csv";
+            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/test/resources/input.csv";
     private static final String HEAD = "operation,fruit,quantity";
     private static final int AMOUNT_OF_LINES = 8;
     private static final String TRANSACTION_WITH_INVALID_COMMAND = "v, banana, 11";

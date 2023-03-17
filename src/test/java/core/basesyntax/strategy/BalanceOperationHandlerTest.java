@@ -1,13 +1,12 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
     private static final int INITIAL_QUANTITY1 = 20;
@@ -15,35 +14,37 @@ public class BalanceOperationHandlerTest {
     private static final String FRUIT_NAME = "apple";
     private OperationHandler balanceOperationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
     }
 
     @Test
-    void adds_toStorage_ok() {
+    public void adds_toStorage_ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_NAME,
                         INITIAL_QUANTITY1);
         balanceOperationHandler.handle(fruitTransaction);
-        assertEquals(INITIAL_QUANTITY1, Storage.storage.get(FRUIT_NAME));
+        assertEquals(INITIAL_QUANTITY1, (int) Storage.storage.get(FRUIT_NAME));
     }
 
-    @Test
-    void handle_invalidTransaction_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidTransaction_notOk() {
         FruitTransaction fruitTransactionWithNullFruit =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, null, INITIAL_QUANTITY2);
-        assertThrows(RuntimeException.class, () ->
-                balanceOperationHandler.handle(fruitTransactionWithNullFruit));
+        balanceOperationHandler.handle(fruitTransactionWithNullFruit);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidTransactionWithNullOperation_notOk() {
         FruitTransaction fruitTransactionWithNullOperation =
                 new FruitTransaction(null, FRUIT_NAME, INITIAL_QUANTITY2);
-        assertThrows(RuntimeException.class, () ->
-                balanceOperationHandler.handle(fruitTransactionWithNullOperation));
+        balanceOperationHandler.handle(fruitTransactionWithNullOperation);
     }
 
     @Test
-    void handle_multipleTransactions_ok() {
+    public void handle_multipleTransactions_ok() {
         FruitTransaction firstTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_NAME,
@@ -54,6 +55,6 @@ public class BalanceOperationHandlerTest {
                         INITIAL_QUANTITY2);
         balanceOperationHandler.handle(firstTransaction);
         balanceOperationHandler.handle(secondTransaction);
-        assertEquals(INITIAL_QUANTITY2, Storage.storage.get(FRUIT_NAME));
+        assertEquals(INITIAL_QUANTITY2, (int) Storage.storage.get(FRUIT_NAME));
     }
 }

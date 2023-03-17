@@ -1,14 +1,13 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.OperationParserServiceImpl;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OperationParserServiceImplTest {
     private static final String HEADER = "operation,fruit,quantity";
@@ -30,7 +29,7 @@ public class OperationParserServiceImplTest {
 
     private OperationParserService operationParserService;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         operationParserService = new OperationParserServiceImpl();
     }
@@ -54,43 +53,39 @@ public class OperationParserServiceImplTest {
         assertEquals(expectedResult, actualResult);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parseOperation_invalidRowLength_notOk() {
         List<String> inputData = Arrays.asList(
                 HEADER,
                 INVALID_ROW_LENGTH
         );
-        assertThrows(RuntimeException.class, () ->
-                operationParserService.parseOperation(inputData));
+        operationParserService.parseOperation(inputData);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parseOperation_invalidFruitName_notOk() {
         List<String> inputData = Arrays.asList(
                 HEADER,
                 INVALID_FRUIT_NAME
         );
-        assertThrows(RuntimeException.class, () ->
-                operationParserService.parseOperation(inputData));
+        operationParserService.parseOperation(inputData);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parseOperation_invalidAmount_notOk() {
         List<String> inputData = Arrays.asList(
                 HEADER,
                 INVALID_AMOUNT
         );
-        assertThrows(RuntimeException.class, () ->
-                operationParserService.parseOperation(inputData));
+        operationParserService.parseOperation(inputData);
     }
 
-    @Test
+    @Test (expected = RuntimeException.class)
     public void parseOperation_NonNumeric_notOk() {
         List<String> inputData = Arrays.asList(
                 HEADER,
                 NON_NUMERIC_AMOUNT
         );
-        assertThrows(RuntimeException.class, () ->
-                operationParserService.parseOperation(inputData));
+        operationParserService.parseOperation(inputData);
     }
 }

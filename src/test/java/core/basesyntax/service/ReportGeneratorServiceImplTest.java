@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -17,8 +16,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportGeneratorServiceImplTest {
     private static final String APPLE = "apple";
@@ -33,8 +32,8 @@ public class ReportGeneratorServiceImplTest {
 
     private ReportGeneratorService reportGeneratorService;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -60,14 +59,14 @@ public class ReportGeneratorServiceImplTest {
     }
 
     @Test
-    void generateReport_validStorage_Ok() {
+    public void generateReport_validStorage_Ok() {
         String actualReport = reportGeneratorService.generateReport();
         assertEquals(EXPECTED_REPORT, actualReport);
     }
 
-    @Test
-    void generateReport_emptyStorage_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void generateReport_emptyStorage_notOk() {
         Storage.storage.clear();
-        assertThrows(RuntimeException.class, () -> reportGeneratorService.generateReport());
+        reportGeneratorService.generateReport();
     }
 }

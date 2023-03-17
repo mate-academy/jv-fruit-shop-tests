@@ -1,13 +1,12 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static final String FRUIT_NAME = "apple";
@@ -17,14 +16,14 @@ public class SupplyOperationHandlerTest {
 
     private OperationHandler supplyOperationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         supplyOperationHandler = new SupplyOperationHandler();
         Storage.storage.clear();
     }
 
     @Test
-    void handle_validTransaction_ok() {
+    public void handle_validTransaction_ok() {
         Storage.storage.put(FRUIT_NAME, INITIAL_QUANTITY);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
@@ -32,28 +31,30 @@ public class SupplyOperationHandlerTest {
                         SUPPLY_QUANTITY);
         supplyOperationHandler.handle(fruitTransaction);
         int expectedQuantity = INITIAL_QUANTITY + SUPPLY_QUANTITY;
-        assertEquals(expectedQuantity, Storage.storage.get(FRUIT_NAME));
+        assertEquals(expectedQuantity, (int) Storage.storage.get(FRUIT_NAME));
     }
 
-    @Test
-    void handle_invalidTransaction_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidTransactionWithNullFruit_notOk() {
         FruitTransaction fruitTransactionWithNullFruit =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, null, SUPPLY_QUANTITY);
-        assertThrows(RuntimeException.class, () ->
-                supplyOperationHandler.handle(fruitTransactionWithNullFruit));
+        supplyOperationHandler.handle(fruitTransactionWithNullFruit);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidTransactionWithNullOperation_notOk() {
         FruitTransaction fruitTransactionWithNullOperation =
                 new FruitTransaction(null, FRUIT_NAME, SUPPLY_QUANTITY);
-        assertThrows(RuntimeException.class, () ->
-                supplyOperationHandler.handle(fruitTransactionWithNullOperation));
+        supplyOperationHandler.handle(fruitTransactionWithNullOperation);
     }
 
     @Test
-    void handle_noInitialQuantity_notOk() {
+    public void handle_noInitialQuantity_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                FRUIT_NAME,
-                SUPPLY_QUANTITY);
+                        FRUIT_NAME,
+                        SUPPLY_QUANTITY);
         supplyOperationHandler.handle(fruitTransaction);
-        assertEquals(SUPPLY_QUANTITY, Storage.storage.getOrDefault(FRUIT_NAME, EMPTY_VALUE));
+        assertEquals(SUPPLY_QUANTITY, (int) Storage.storage.getOrDefault(FRUIT_NAME, EMPTY_VALUE));
     }
 }

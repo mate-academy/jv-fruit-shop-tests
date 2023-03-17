@@ -33,7 +33,11 @@ public class OperationParserServiceImpl implements OperationParserService {
             throw new RuntimeException("Invalid fruit name: " + fruitName);
         }
         String fruitAmount = row[AMOUNT_INDEX];
-        if (Integer.parseInt(fruitAmount) < 0) {
+        try {
+            if (Integer.parseInt(fruitAmount) < 0) {
+                throw new RuntimeException("Invalid amount: " + fruitAmount);
+            }
+        } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid amount: " + fruitAmount);
         }
     }

@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertNotNull;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
@@ -11,15 +10,15 @@ import core.basesyntax.strategy.impl.StrategyStorageImpl;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StrategyStorageImplTest {
     private static final String APPLE = "apple";
     private static final int QUANTITY = 100;
     private StrategyStorage strategyStorage;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -50,9 +49,9 @@ public class StrategyStorageImplTest {
         assertNotNull(handler);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getStrategy_nullOperation_noOk() {
         FruitTransaction invalidTransaction = new FruitTransaction(null, APPLE, QUANTITY);
-        assertThrows(RuntimeException.class, () -> strategyStorage.getStrategy(invalidTransaction));
+        strategyStorage.getStrategy(invalidTransaction);
     }
 }

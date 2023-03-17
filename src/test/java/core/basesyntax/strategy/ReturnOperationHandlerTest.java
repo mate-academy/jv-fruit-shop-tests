@@ -1,13 +1,12 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static final String FRUIT_NAME = "apple";
@@ -17,14 +16,14 @@ public class ReturnOperationHandlerTest {
 
     private OperationHandler returnOperationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         returnOperationHandler = new ReturnOperationHandler();
         Storage.storage.clear();
     }
 
     @Test
-    void handle_validTransaction_increasesStorage() {
+    public void handle_validTransaction_ok() {
         Storage.storage.put(FRUIT_NAME, INITIAL_QUANTITY);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,
@@ -32,28 +31,30 @@ public class ReturnOperationHandlerTest {
                         RETURN_QUANTITY);
         returnOperationHandler.handle(fruitTransaction);
         int expectedQuantity = INITIAL_QUANTITY + RETURN_QUANTITY;
-        assertEquals(expectedQuantity, Storage.storage.get(FRUIT_NAME));
+        assertEquals(expectedQuantity, (int) Storage.storage.get(FRUIT_NAME));
     }
 
-    @Test
-    void handle_invalidTransaction_throwsRuntimeException() {
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidTransaction_notOk() {
         FruitTransaction fruitTransactionWithNullFruit =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, null, RETURN_QUANTITY);
-        assertThrows(RuntimeException.class, () ->
-                returnOperationHandler.handle(fruitTransactionWithNullFruit));
+        returnOperationHandler.handle(fruitTransactionWithNullFruit);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handle_invalidTransactionWithNullOperation_notOk() {
         FruitTransaction fruitTransactionWithNullOperation =
                 new FruitTransaction(null, FRUIT_NAME, RETURN_QUANTITY);
-        assertThrows(RuntimeException.class, () ->
-                returnOperationHandler.handle(fruitTransactionWithNullOperation));
+        returnOperationHandler.handle(fruitTransactionWithNullOperation);
     }
 
     @Test
-    void handle_noInitialQuantity_increasesStorage() {
+    public void handle_noInitialQuantity_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,
                         FRUIT_NAME,
                         RETURN_QUANTITY);
         returnOperationHandler.handle(fruitTransaction);
-        assertEquals(RETURN_QUANTITY, Storage.storage.getOrDefault(FRUIT_NAME, EMPTY_VALUE));
+        assertEquals(RETURN_QUANTITY, (int) Storage.storage.getOrDefault(FRUIT_NAME, EMPTY_VALUE));
     }
 }

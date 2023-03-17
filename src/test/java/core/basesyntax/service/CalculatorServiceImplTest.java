@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -16,8 +15,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CalculatorServiceImplTest {
     private static final String APPLE = "apple";
@@ -30,8 +29,8 @@ public class CalculatorServiceImplTest {
 
     private CalculatorService calculatorService;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -43,7 +42,7 @@ public class CalculatorServiceImplTest {
     }
 
     @Test
-    void calculate_validTransactions_ok() {
+    public void calculate_validTransactions_ok() {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY);
         FruitTransaction supplyTransaction =
@@ -60,12 +59,12 @@ public class CalculatorServiceImplTest {
                         purchaseTransaction,
                         returnTransaction);
         calculatorService.calculate(transactions);
-        assertEquals(APPLE_QUANTITY - PURCHASE_QUANTITY, Storage.storage.get(APPLE));
-        assertEquals(BANANA_QUANTITY + RETURN_QUANTITY, Storage.storage.get(BANANA));
+        assertEquals(APPLE_QUANTITY - PURCHASE_QUANTITY, Storage.storage.get(APPLE).intValue());
+        assertEquals(BANANA_QUANTITY + RETURN_QUANTITY, Storage.storage.get(BANANA).intValue());
     }
 
-    @Test
-    void calculate_purchaseWithInsufficientStock_noOk() {
+    @Test(expected = RuntimeException.class)
+    public void calculate_purchaseWithInsufficientStock_noOk() {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         APPLE,
@@ -75,30 +74,30 @@ public class CalculatorServiceImplTest {
                         APPLE,
                         PURCHASE_INSUFFICIENT_QUANTITY);
         List<FruitTransaction> transactions = Arrays.asList(balanceTransaction,
-                        purchaseTransaction);
-        assertThrows(RuntimeException.class, () -> calculatorService.calculate(transactions));
+                purchaseTransaction);
+        calculatorService.calculate(transactions);
     }
 
-    @Test
-    void calculate_nullTransactionList_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void calculate_nullTransactionList_notOk() {
         List<FruitTransaction> transactions = null;
-        assertThrows(RuntimeException.class, () -> calculatorService.calculate(transactions));
+        calculatorService.calculate(transactions);
     }
 
-    @Test
-    void calculate_emptyTransactionList_notOk() {
-        List<FruitTransaction> transactions = List.of();
-        assertThrows(RuntimeException.class, () -> calculatorService.calculate(transactions));
+    @Test(expected = RuntimeException.class)
+    public void calculate_emptyTransactionList_notOk() {
+        List<FruitTransaction> transactions = Arrays.asList();
+        calculatorService.calculate(transactions);
     }
 
-    @Test
-    void calculate_transactionListWithNullElement_notOk() {
+    @Test(expected = NullPointerException.class)
+    public void calculate_transactionListWithNullElement_notOk() {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY);
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, BANANA_QUANTITY);
         List<FruitTransaction> transactions =
                 Arrays.asList(balanceTransaction, null, supplyTransaction);
-        assertThrows(NullPointerException.class, () -> calculatorService.calculate(transactions));
+        calculatorService.calculate(transactions);
     }
 }

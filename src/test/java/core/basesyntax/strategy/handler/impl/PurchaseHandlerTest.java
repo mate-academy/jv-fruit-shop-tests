@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.handler.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -41,8 +41,8 @@ public class PurchaseHandlerTest {
         Integer beforeQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
         handler.handle(transaction);
         Integer actualQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
-        Integer expectedQuantity = beforeQuantity - ANOTHER_VALID_FRUIT_QUANTITY;
-        assertEquals(expectedQuantity, actualQuantity);
+        int expectedQuantity = beforeQuantity - ANOTHER_VALID_FRUIT_QUANTITY;
+        assertSame(expectedQuantity, actualQuantity);
     }
 
     @Test(expected = RuntimeException.class)
@@ -62,8 +62,8 @@ public class PurchaseHandlerTest {
                 VALID_OPERATION_QUANTITY);
         handler.handle(transaction);
         Integer actualQuantity = Storage.storage.get(APPLE);
-        Integer expectedQuantity = VALID_FRUIT_QUANTITY - VALID_OPERATION_QUANTITY;
-        assertEquals(expectedQuantity, actualQuantity);
+        int expectedQuantity = VALID_FRUIT_QUANTITY - VALID_OPERATION_QUANTITY;
+        assertSame(expectedQuantity, actualQuantity);
 
         transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
@@ -72,7 +72,7 @@ public class PurchaseHandlerTest {
         handler.handle(transaction);
         actualQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
         expectedQuantity = ZERO_FRUIT_QUANTITY;
-        assertEquals(expectedQuantity, actualQuantity);
+        assertSame(expectedQuantity, actualQuantity);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class PurchaseHandlerTest {
                 INVALID_OPERATION_QUANTITY);
         handler.handle(transaction);
         Integer actualQuantity = Storage.storage.getOrDefault(APPLE, ZERO_FRUIT_QUANTITY);
-        Integer expectedQuantity = VALID_FRUIT_QUANTITY;
-        assertEquals(expectedQuantity, actualQuantity);
+        int expectedQuantity = VALID_FRUIT_QUANTITY;
+        assertSame(expectedQuantity, actualQuantity);
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.handler.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -40,9 +40,9 @@ public class BalanceHandlerTest {
                 APPLE,
                 VALID_FRUIT_QUANTITY);
         handler.handle(transaction);
-        Integer expectedAppleQuantity = VALID_FRUIT_QUANTITY;
+        int expectedAppleQuantity = VALID_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertEquals(expectedAppleQuantity, actualAppleQuantity);
+        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
     @Test
@@ -52,9 +52,9 @@ public class BalanceHandlerTest {
                 APPLE,
                 ZERO_FRUIT_QUANTITY);
         handler.handle(transaction);
-        Integer expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
+        int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertEquals(expectedAppleQuantity, actualAppleQuantity);
+        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
     @Test
@@ -64,8 +64,8 @@ public class BalanceHandlerTest {
                 BANANA,
                 INVALID_FRUIT_QUANTITY);
         handler.handle(transaction);
-        Integer expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
+        int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertEquals(expectedAppleQuantity, actualAppleQuantity);
+        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 }

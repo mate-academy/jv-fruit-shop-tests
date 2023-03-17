@@ -2,6 +2,7 @@ package core.basesyntax.strategy.handler.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -31,7 +32,7 @@ public class AdderToStorageTest {
         AdderToStorage.add(transaction);
         Integer appleQuantity = Storage.storage.get(APPLE);
         assertNotNull(appleQuantity);
-        assertEquals(VALID_FRUIT_QUANTITY, (int) appleQuantity);
+        assertSame(VALID_FRUIT_QUANTITY, appleQuantity);
     }
 
     @Test
@@ -48,8 +49,8 @@ public class AdderToStorageTest {
         AdderToStorage.add(transaction2);
         int storageSize = Storage.storage.size();
         assertEquals(VALID_STORAGE_SIZE, storageSize);
-        assertEquals(VALID_FRUIT_QUANTITY, (int) Storage.storage.get(APPLE));
-        assertEquals(VALID_FRUIT_QUANTITY, (int) Storage.storage.get(BANANA));
+        assertSame(VALID_FRUIT_QUANTITY, Storage.storage.get(APPLE));
+        assertSame(VALID_FRUIT_QUANTITY, Storage.storage.get(BANANA));
     }
 
     @Test

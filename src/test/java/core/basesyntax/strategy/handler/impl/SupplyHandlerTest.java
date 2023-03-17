@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.handler.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -43,7 +43,7 @@ public class SupplyHandlerTest {
                 VALID_FRUIT_QUANTITY);
         handler.handle(transaction);
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertEquals(VALID_FRUIT_QUANTITY, (int) actualAppleQuantity);
+        assertSame(VALID_FRUIT_QUANTITY, actualAppleQuantity);
     }
 
     @Test
@@ -53,10 +53,10 @@ public class SupplyHandlerTest {
                 BANANA,
                 ADD_FRUIT_QUANTITY);
         handler.handle(transaction);
-        Integer expectedBananaQuantity = VALID_FRUIT_QUANTITY
+        int expectedBananaQuantity = VALID_FRUIT_QUANTITY
                 + ADD_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertEquals(expectedBananaQuantity, actualAppleQuantity);
+        assertSame(expectedBananaQuantity, actualAppleQuantity);
     }
 
     @Test
@@ -66,9 +66,9 @@ public class SupplyHandlerTest {
                 APPLE,
                 ZERO_FRUIT_QUANTITY);
         handler.handle(transaction);
-        Integer expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
+        int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertEquals(expectedAppleQuantity, actualAppleQuantity);
+        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
     @Test
@@ -78,8 +78,8 @@ public class SupplyHandlerTest {
                 BANANA,
                 INVALID_FRUIT_QUANTITY);
         handler.handle(transaction);
-        Integer expectedBananaQuantity = VALID_FRUIT_QUANTITY;
+        int expectedBananaQuantity = VALID_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertEquals(expectedBananaQuantity, actualAppleQuantity);
+        assertSame(expectedBananaQuantity, actualAppleQuantity);
     }
 }

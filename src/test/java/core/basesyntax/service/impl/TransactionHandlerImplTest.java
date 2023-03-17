@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionHandlerImplTest {
@@ -30,12 +30,12 @@ public class TransactionHandlerImplTest {
     private static final List<FruitTransaction> EMPTY_FRUIT_TRANSACTIONS = Collections.emptyList();
     private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
             = new HashMap<>();
-    private List<FruitTransaction> validFruitTransactions;
-    private TransactionHandler transactionHandler;
-    private OperationStrategy operationStrategy;
+    private static List<FruitTransaction> validFruitTransactions;
+    private static TransactionHandler transactionHandler;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
@@ -69,7 +69,7 @@ public class TransactionHandlerImplTest {
     }
 
     @Test
-  public void processData_validListOfData_ok() {
+    public void processData_validListOfData_ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put(TITLE_FOR_BANANAS, QUANTITY_FOR_BANANAS);
         expected.put(TITLE_FOR_APPLES, QUANTITY_FOR_APPLES);
@@ -78,8 +78,8 @@ public class TransactionHandlerImplTest {
         assertEquals(expected, actual);
     }
 
-    @After
-  public void tearDown() {
+    @AfterClass
+    public static void afterClass() {
         Storage.fruits.clear();
     }
 }

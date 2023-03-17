@@ -8,24 +8,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.List;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static final String CORRECT_PATH = "src/main/resources/output.csv";
+    private static final String CORRECT_PATH = "src/test/resources/output.csv";
     private static final String FULL_REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
     private static final String EMPTY_REPORT = "";
-    private static final List<String> CORRECT_RESULT_FOR_FULL_REPORT = List.of("fruit,quantity",
-            "banana,152", "apple,90");
-    private static final List<String> CORRECT_RESULT_FOR_EMPTY_REPORT = Collections.emptyList();
-    private WriterService writerService;
+    private static final String CORRECT_RESULT_FOR_FULL_REPORT = "fruit,quantity"
+            + System.lineSeparator() + "banana,152" + System.lineSeparator() + "apple,90";
+    private static final String CORRECT_RESULT_FOR_EMPTY_REPORT = "";
+    private static WriterService writerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         writerService = new WriterServiceImpl();
     }
 
@@ -52,8 +50,8 @@ public class WriterServiceImplTest {
         writerService.writeReportToFile(pathToFile, report);
         File createdFile = new File(CORRECT_PATH);
         try {
-            List<String> expected = CORRECT_RESULT_FOR_FULL_REPORT;
-            List<String> actual = Files.readAllLines(createdFile.toPath());
+            String expected = CORRECT_RESULT_FOR_FULL_REPORT;
+            String actual = Files.readString(createdFile.toPath());
             assertEquals(expected, actual);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from the file " + createdFile.toPath(), e);
@@ -68,8 +66,8 @@ public class WriterServiceImplTest {
         writerService.writeReportToFile(pathToFile, report);
         File createdFile = new File(CORRECT_PATH);
         try {
-            List<String> expected = CORRECT_RESULT_FOR_EMPTY_REPORT;
-            List<String> actual = Files.readAllLines(createdFile.toPath());
+            String expected = CORRECT_RESULT_FOR_EMPTY_REPORT;
+            String actual = Files.readString(createdFile.toPath());
             assertEquals(expected, actual);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from the file " + CORRECT_PATH, e);

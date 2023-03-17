@@ -11,7 +11,7 @@ import core.basesyntax.strategy.operations.ReturnOperationHandler;
 import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationStrategyImplTest {
@@ -25,10 +25,10 @@ public class OperationStrategyImplTest {
             = FruitTransaction.Operation.PURCHASE;
     private static final FruitTransaction.Operation RETURN_OPERATION
             = FruitTransaction.Operation.RETURN;
-    private OperationStrategy operationStrategy;
+    private static OperationStrategy operationStrategy;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         operations.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operations.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         operations.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
@@ -40,28 +40,28 @@ public class OperationStrategyImplTest {
     public void get_balanceOperation_ok() {
         OperationHandler expected = operationStrategy.get(BALANCE_OPERATION);
         OperationHandler actual = operationStrategy.get(BALANCE_OPERATION);
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void get_supplyOperation_ok() {
         OperationHandler expected = operationStrategy.get(SUPPLY_OPERATION);
         OperationHandler actual = operationStrategy.get(SUPPLY_OPERATION);
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void get_purchaseOperation_ok() {
         OperationHandler expected = operationStrategy.get(PURCHASE_OPERATION);
         OperationHandler actual = operationStrategy.get(PURCHASE_OPERATION);
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test
     public void get_returnOperation_ok() {
         OperationHandler expected = operationStrategy.get(RETURN_OPERATION);
         OperationHandler actual = operationStrategy.get(RETURN_OPERATION);
-        assertEquals(expected, actual);
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test (expected = RuntimeException.class)

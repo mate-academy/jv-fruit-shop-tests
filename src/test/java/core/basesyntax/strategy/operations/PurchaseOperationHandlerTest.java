@@ -5,8 +5,8 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
@@ -15,11 +15,11 @@ public class PurchaseOperationHandlerTest {
     private static final String NAME_OF_FRUIT = "apple";
     private static final int QUANTITY_OF_FRUIT = 20;
     private static final int NOT_ENOUGH_QUANTITY_OF_FRUIT = 10;
-    private PurchaseOperationHandler purchaseOperationHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler purchaseOperationHandler;
+    private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         purchaseOperationHandler = new PurchaseOperationHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(OPERATION);
@@ -50,8 +50,8 @@ public class PurchaseOperationHandlerTest {
         fail("You must throw Runtime Exception, if it is not enough fruits in the storage");
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void afterClass() {
         Storage.fruits.clear();
     }
 }

@@ -5,8 +5,8 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
@@ -14,11 +14,11 @@ public class ReturnOperationHandlerTest {
             = FruitTransaction.Operation.RETURN;
     private static final String NAME_OF_FRUIT = "apple";
     private static final int QUANTITY_OF_FRUIT = 5;
-    private ReturnOperationHandler returnOperationHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationHandler returnOperationHandler;
+    private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         returnOperationHandler = new ReturnOperationHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(OPERATION);
@@ -42,8 +42,8 @@ public class ReturnOperationHandlerTest {
         fail("You must throw Runtime Exception, if the passed Fruit Transaction is null");
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void afterClass() {
         Storage.fruits.clear();
     }
 }

@@ -6,17 +6,17 @@ import static org.junit.Assert.fail;
 import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String VALID_PATH = "src/main/resources/input.csv";
-    private static final String INVALID_PATH = "src/main/resources/invalid.csv";
-    private static final String PATH_WITH_EMPTY_DATA = "src/main/resources/empty.csv";
-    private ReaderService readerService;
+    private static final String VALID_PATH = "src/test/resources/input.csv";
+    private static final String INVALID_PATH = "src/test/resources/invalid.csv";
+    private static final String PATH_WITH_EMPTY_DATA = "src/test/resources/empty.csv";
+    private static ReaderService readerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         readerService = new ReaderServiceImpl();
     }
 

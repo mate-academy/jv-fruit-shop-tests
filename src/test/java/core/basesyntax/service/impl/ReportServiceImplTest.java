@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
@@ -16,10 +16,10 @@ public class ReportServiceImplTest {
     private static final String TITLE_FOR_APPLES = "apple";
     private static final Integer QUANTITY_FOR_BANANAS = 152;
     private static final Integer QUANTITY_FOR_APPLES = 90;
-    private ReportService reportService;
+    private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
     }
 

@@ -1,18 +1,18 @@
 package service.impl;
 
-import db.Storage;
+import java.util.Map;
 import java.util.stream.Collectors;
-import service.ReportData;
+import service.ReportDataService;
 
-public class ReportDataImpl implements ReportData {
+public class ReportDataServiceImpl implements ReportDataService {
     private static final String TITLE_FOR_RESIT = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
     @Override
-    public String creatReport() {
+    public String creatReport(Map<String, Integer> storage) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TITLE_FOR_RESIT).append(System.lineSeparator());
-        Storage.getFruitsMap()
+        storage
                 .entrySet()
                 .stream()
                 .map(e -> stringBuilder.append(e.getKey())
@@ -20,6 +20,6 @@ public class ReportDataImpl implements ReportData {
                         .append(e.getValue())
                         .append(System.lineSeparator()))
                 .collect(Collectors.joining());
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 }

@@ -4,9 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import service.WriterData;
+import service.WriterDataService;
 
-public class CsvFileWriterService implements WriterData {
+public class CsvFileWriterService implements WriterDataService {
     @Override
     public void write(String report, String path) {
         File file = new File(path);

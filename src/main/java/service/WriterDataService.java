@@ -1,5 +1,5 @@
 package service;
 
-public interface WriterData {
+public interface WriterDataService {
     void write(String report, String path);
 }

@@ -15,7 +15,15 @@ public class FruitStorage {
         fruitMap.put(fruitName, quantity);
     }
 
+    public static void clear() {
+        fruitMap.clear();
+    }
+
     public static Set<Map.Entry<String, Integer>> getEntries() {
         return fruitMap.entrySet();
+    }
+
+    public static boolean contains(String key) {
+        return fruitMap.containsKey(key);
     }
 }

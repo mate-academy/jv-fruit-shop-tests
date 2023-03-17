@@ -18,7 +18,6 @@ import core.basesyntax.strategy.implementation.BalanceOperationStrategy;
 import core.basesyntax.strategy.implementation.PurchaseOperationStrategy;
 import core.basesyntax.strategy.implementation.ReturnOperationStrategy;
 import core.basesyntax.strategy.implementation.SupplyOperationStrategy;
-
 import java.util.List;
 import java.util.Map;
 

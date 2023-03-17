@@ -1,7 +1,6 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.CsvFileReaderService;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,12 +15,12 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     @Override
     public List<String> readFrom(String inputFile) {
         List<String> linesInputFile = new ArrayList<>();
-        if (inputFile == null || inputFile.length() == 0) {
-            throw new RuntimeException("File " + inputFile + " is empty");
-        }
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
             String line = bufferedReader.readLine();
+            if (line == null || line.length() == 0) {
+                throw new RuntimeException("File " + inputFile + " is empty");
+            }
             while (line != null) {
                 linesInputFile.add(line);
                 line = bufferedReader.readLine();

@@ -1,9 +1,9 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.CsvFileWriterService;
-
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -13,6 +13,8 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
         File file = new File(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(report);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Can't find file" + file, e);
         } catch (IOException e) {
             throw new RuntimeException("Can't write in file " + file, e);
         }

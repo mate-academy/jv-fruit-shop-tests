@@ -2,7 +2,6 @@ package core.basesyntax.service.implementation;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.FruitShopReportService;
-
 import java.util.Map;
 
 public class FruitShopReportServiceImpl implements FruitShopReportService {

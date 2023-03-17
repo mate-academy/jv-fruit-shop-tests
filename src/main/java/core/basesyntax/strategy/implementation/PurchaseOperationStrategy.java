@@ -15,8 +15,8 @@ public class PurchaseOperationStrategy implements OperationStrategy {
         }
         Integer amount = FruitStorage.get(fruit);
         if (amount == null) {
-            FruitStorage.put(fruit, quantity);
-            return;
+            throw new RuntimeException("Invalid data inside: "
+                    + "you can't buy this fruit");
         }
         if (quantity > amount) {
             throw new RuntimeException("You want to buy " + quantity

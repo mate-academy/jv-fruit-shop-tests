@@ -15,6 +15,7 @@ import org.junit.Test;
 
 public class OperationStrategyTest {
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static OperationStrategy operationStrategy;
 
     @BeforeClass
     public static void beforeClass() {
@@ -28,13 +29,22 @@ public class OperationStrategyTest {
     @Test
     public void operationStrategy_getOperation_Ok() {
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.BALANCE);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(expected, actual);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void operationStrategy_getOperationWithNull_Ok() {
-        operationHandlerMap.get(null);
+        operationStrategy.get(null);
+    }
+
+    @Test
+    public void operationStrategy_getOperationWithEmpty_Ok() {
+        OperationHandler expected = null;
+        operationHandlerMap.clear();
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
+        assertEquals(expected, actual);
     }
 }

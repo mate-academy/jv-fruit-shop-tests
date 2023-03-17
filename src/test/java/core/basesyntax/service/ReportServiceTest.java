@@ -41,6 +41,7 @@ public class ReportServiceTest {
 
     @Test
     public void reportService_createWithEmptyStorage_Ok() {
-        reportService.createReport();
+        String actual = reportService.createReport();
+        assertEquals(TITLE, actual);
     }
 }

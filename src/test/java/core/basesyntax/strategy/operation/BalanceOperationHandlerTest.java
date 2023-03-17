@@ -38,8 +38,11 @@ public class BalanceOperationHandlerTest {
     @Test
     public void balanceOperation_withNullFruit_Ok() {
         balanceOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
-                                                        null,
-                                                        EXPECTED));
+                null,
+                EXPECTED));
+        int expected = 20;
+        int actual = Storage.fruits.get(null);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -47,13 +50,19 @@ public class BalanceOperationHandlerTest {
         balanceOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
                 EMPTY,
                 EXPECTED));
+        int expected = 20;
+        int actual = Storage.fruits.get(EMPTY);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void balanceOperation_withNullTransaction_Ok() {
+    public void balanceOperation_withNullTransaction_NotOk() {
         balanceOperation.handle(Utils.createTransaction(null,
                 FRUIT,
                 EXPECTED));
+        int expected = 20;
+        int actual = Storage.fruits.get(FRUIT);
+        assertEquals(expected, actual);
     }
 
     @After

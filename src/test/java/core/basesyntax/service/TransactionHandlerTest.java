@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.Utils;
 import core.basesyntax.db.Storage;
@@ -66,6 +67,7 @@ public class TransactionHandlerTest {
     @Test
     public void transactionHandler_parseEmptyInput_Ok() {
         transactionHandler.parse(new ArrayList<>());
+        assertTrue(Storage.fruits.isEmpty());
     }
 
     @AfterClass

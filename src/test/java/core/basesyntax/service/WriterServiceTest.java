@@ -25,6 +25,7 @@ public class WriterServiceTest {
     private static WriterService writerService;
     private static List<String> expected;
     private static StringBuilder report;
+    private static File file;
 
     @BeforeClass
     public static void beforeClass() {
@@ -38,6 +39,7 @@ public class WriterServiceTest {
         report.append(System.lineSeparator()).append(FIRST_LINE);
         report.append(System.lineSeparator()).append(SECOND_LINE);
         writerService = new WriterServiceImpl();
+        file = new File(TRUE_PATH);
     }
 
     @After
@@ -48,7 +50,6 @@ public class WriterServiceTest {
     @Test
     public void writerService_writeToFile_Ok() {
         writerService.writeToFile(TRUE_PATH, report.toString());
-        File file = new File(TRUE_PATH);
         List<String> actual;
         try {
             actual = Files.readAllLines(file.toPath());
@@ -66,6 +67,14 @@ public class WriterServiceTest {
     @Test
     public void writerService_writeEmptyReport_Ok() {
         writerService.writeToFile(TRUE_PATH, TITLE);
+        List<String> actual;
+        List<String> emptyExpected = List.of(TITLE);
+        try {
+            actual = Files.readAllLines(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(emptyExpected, actual);
     }
 
     @Test(expected = RuntimeException.class)

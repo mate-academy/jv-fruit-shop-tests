@@ -1,16 +1,15 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class TransactionParserServiceTest {
+public class TransactionParserServiceTest {
     private static final String INCORRECT_FIRSLINE_PATH =
             "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources\\falseInput.csv";
     private static final String DEFAULT_DATA =
@@ -19,8 +18,8 @@ class TransactionParserServiceTest {
     private static TransactionParserService transactionParserService;
     private static List<FruitTransaction> defaultData;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeAll() {
         readerService = new ReaderServiceImpl();
         transactionParserService = new TransactionParserServiceImpl();
         defaultData = List.of(new FruitTransaction("b", "banana", 20),
@@ -29,7 +28,7 @@ class TransactionParserServiceTest {
     }
 
     @Test
-    void parseData_defaultInput_ok() {
+    public void parseData_defaultInput_ok() {
         List<FruitTransaction> parsedData =
                 transactionParserService.parse(readerService.readFrom(DEFAULT_DATA));
         for (int i = 0; i < parsedData.size(); i++) {
@@ -39,17 +38,13 @@ class TransactionParserServiceTest {
         }
     }
 
-    @Test
-    void parseData_incorrect_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            transactionParserService.parse(readerService.readFrom(INCORRECT_FIRSLINE_PATH));
-        });
+    @Test(expected = RuntimeException.class)
+    public void parseData_incorrect_notOk() {
+        transactionParserService.parse(readerService.readFrom(INCORRECT_FIRSLINE_PATH));
     }
 
-    @Test
-    void parseData_isNull_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            transactionParserService.parse(null);
-        });
+    @Test(expected = RuntimeException.class)
+    public void parseData_isNull_notOk() {
+        transactionParserService.parse(null);
     }
 }

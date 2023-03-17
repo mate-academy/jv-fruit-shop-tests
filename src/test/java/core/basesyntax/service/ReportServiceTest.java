@@ -1,24 +1,24 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class ReportServiceTest {
+public class ReportServiceTest {
     private static ReportService reportService;
 
-    @BeforeAll
-    static void beforeAll() {
+    @Before
+    public void setUp() {
         reportService = new ReportServiceImpl();
     }
 
     @Test
-    void makeReport_correctInput_ok() {
+    public void makeReport_correctInput_ok() {
         Map<String, Integer> map = new HashMap<>();
         map.put("banana", 100);
         map.put("apple", 100);
@@ -31,18 +31,17 @@ class ReportServiceTest {
                 .append("apple,100")
                 .append(System.lineSeparator())
                 .append("grenade,100").append(System.lineSeparator()).toString();
-        assertEquals(reportService.makeReport(map), expected);
+        assertEquals("Incorrect output", expected, reportService.makeReport(map));
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void makeReport_nullArgument_notOk() {
+        reportService.makeReport(null);
+        fail("Expected an exception to be thrown");
     }
 
     @Test
-    void makeReport_nullArgument_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            reportService.makeReport(null);
-        });
-    }
-
-    @Test
-    void makeReport_emptyInput_ok() {
-        assertEquals(reportService.makeReport(new HashMap<>()), "");
+    public void makeReport_emptyInput_ok() {
+        assertEquals("", reportService.makeReport(new HashMap<>()));
     }
 }

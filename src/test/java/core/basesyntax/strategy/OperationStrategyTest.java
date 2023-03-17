@@ -8,11 +8,11 @@ import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class OperationStrategyTest {
+public class OperationStrategyTest {
     private static final String BALANCE_CONST = "b";
     private static final String SUPPLY_CONST = "s";
     private static final String RETURN_CONST = "r";
@@ -21,9 +21,9 @@ class OperationStrategyTest {
     private static OperationStrategy operationStrategy;
     private static FruitTransaction.Operation operation;
 
-    @BeforeAll
-    static void beforeAll() {
-        Map<FruitTransaction.Operation, OperationHandler> defaultMap = new HashMap();
+    @BeforeClass
+    public static void beforeAll() {
+        Map<FruitTransaction.Operation, OperationHandler> defaultMap = new HashMap<>();
         defaultMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         defaultMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         defaultMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
@@ -32,41 +32,35 @@ class OperationStrategyTest {
     }
 
     @Test
-    void getBalanceHandler_ok() {
+    public void getBalanceHandler_ok() {
         OperationHandler expected = new BalanceOperationHandler();
-        Assertions.assertEquals(operationStrategy
-                        .get(operation.getByCode(BALANCE_CONST)).getClass(),
-                expected.getClass());
+        Assert.assertEquals(expected.getClass(), operationStrategy
+                .get(operation.getByCode(BALANCE_CONST)).getClass());
     }
 
     @Test
-    void getReturnHandler_ok() {
+    public void getReturnHandler_ok() {
         OperationHandler expected = new ReturnOperationHandler();
-        Assertions.assertEquals(operationStrategy
-                        .get(operation.getByCode(RETURN_CONST)).getClass(),
-                expected.getClass());
+        Assert.assertEquals(expected.getClass(), operationStrategy
+                .get(operation.getByCode(RETURN_CONST)).getClass());
     }
 
     @Test
-    void getPurchaseHandler_ok() {
+    public void getPurchaseHandler_ok() {
         OperationHandler expected = new PurchaseOperationHandler();
-        Assertions.assertEquals(operationStrategy
-                        .get(operation.getByCode(PURCHASE_CONST)).getClass(),
-                expected.getClass());
+        Assert.assertEquals(expected.getClass(), operationStrategy
+                .get(operation.getByCode(PURCHASE_CONST)).getClass());
     }
 
     @Test
-    void getSupplyHandler_ok() {
+    public void getSupplyHandler_ok() {
         OperationHandler expected = new SupplyOperationHandler();
-        Assertions.assertEquals(operationStrategy
-                        .get(operation.getByCode(SUPPLY_CONST)).getClass(),
-                expected.getClass());
+        Assert.assertEquals(expected.getClass(), operationStrategy
+                .get(operation.getByCode(SUPPLY_CONST)).getClass());
     }
 
-    @Test
-    void getHandler_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            operationStrategy.get(operation.getByCode(INCORRECT_DATA_INPU));
-        });
+    @Test(expected = RuntimeException.class)
+    public void getHandler_notOk() {
+        operationStrategy.get(operation.getByCode(INCORRECT_DATA_INPU));
     }
 }

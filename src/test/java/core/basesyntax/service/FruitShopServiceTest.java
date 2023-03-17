@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
@@ -15,17 +14,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class FruitShopServiceTest {
+public class FruitShopServiceTest {
     private static List<FruitTransaction> defaultParsed;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static Map<String, Integer> expectedMap;
     private static FruitShopService fruitShopService;
 
-    @BeforeAll
-    static void beforeAll() {
+    @Before
+    public void beforeAll() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
@@ -44,26 +43,22 @@ class FruitShopServiceTest {
     }
 
     @Test
-    void parse_defaultInput_ok() {
-        assertEquals(fruitShopService.finalReport(defaultParsed), expectedMap);
+    public void parse_defaultInput_ok() {
+        assertEquals(expectedMap, fruitShopService.finalReport(defaultParsed));
     }
 
     @Test
-    void parse_emplyInput_ok() {
-        assertEquals(fruitShopService.finalReport(new ArrayList<>()), new HashMap<>());
+    public void parse_emplyInput_ok() {
+        assertEquals(new HashMap<>(), fruitShopService.finalReport(new ArrayList<>()));
     }
 
-    @Test
-    void parse_nullInput_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            fruitShopService.finalReport(null);
-        });
+    @Test(expected = RuntimeException.class)
+    public void parse_nullInput_notOk() {
+        fruitShopService.finalReport(null);
     }
 
-    @Test
-    void constructorIsNull_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-            new FruitShopServiceImpl(null);
-        });
+    @Test(expected = RuntimeException.class)
+    public void constructorIsNull_notOk() {
+        fruitShopService = new FruitShopServiceImpl(null);
     }
 }

@@ -20,10 +20,6 @@ public class ReportServiceImplTest {
     private static final String EXPECTED_REPORT_WITH_EMPTY_DATA = "fruit,quantity"
             + System.lineSeparator()
             + System.lineSeparator();
-    private static final String EXPECTED_REPORT_WITH_NULL_DATA = "fruit,quantity"
-            + System.lineSeparator()
-            + "null,null" + System.lineSeparator();
-
     private static ReportService reportService;
 
     @BeforeClass

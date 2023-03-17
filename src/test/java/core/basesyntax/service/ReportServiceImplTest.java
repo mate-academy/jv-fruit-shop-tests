@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.service.interfaces.ReportService;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -44,11 +45,10 @@ public class ReportServiceImplTest {
         assertEquals(actual, EXPECTED_REPORT_WITH_EMPTY_DATA);
     }
 
-    @Test
-    public void generateReport_nullData_ok() {
+    @Test(expected = FruitShopException.class)
+    public void generateReport_nullData_notOk() {
         Storage.storage.put(null, null);
-        String actual = reportService.generateReport();
-        assertEquals(actual, EXPECTED_REPORT_WITH_NULL_DATA);
+        reportService.generateReport();
     }
 
     @After

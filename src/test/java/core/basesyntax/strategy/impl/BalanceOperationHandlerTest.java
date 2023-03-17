@@ -9,8 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final FruitTransaction.Operation DEFAULT_OPERATION =
-            FruitTransaction.Operation.BALANCE;
     private static BalanceOperationHandler balanceOperationHandler;
     private static FruitTransaction fruitTransaction;
 
@@ -26,13 +24,13 @@ public class BalanceOperationHandlerTest {
 
     @Test (expected = RuntimeException.class)
     public void doActivity_fruitIsNull_notOk() {
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, null, 123);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, null, 123);
         balanceOperationHandler.doActivity(fruitTransaction);
     }
 
     @Test
     public void doActivity_defaultCase_ok() {
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, "banana", 20);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
         Integer expectedQuantity = 20;
         balanceOperationHandler.doActivity(fruitTransaction);
         Integer actualQuantity = Storage.get(fruitTransaction.getFruit());

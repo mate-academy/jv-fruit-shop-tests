@@ -19,11 +19,9 @@ public class ReportCreatorServiceImplTest {
     public static void setUp() {
         reportCreatorService = new ReportCreatorServiceImpl();
         testMap = new HashMap<>();
-    }
-
-    @After
-    public void afterEach() {
-        testMap.clear();
+        testMap.put("banana", 44);
+        testMap.put("apple", 50);
+        testMap.put("orange", 123);
     }
 
     @Test (expected = RuntimeException.class)
@@ -33,9 +31,6 @@ public class ReportCreatorServiceImplTest {
 
     @Test
     public void createReport_defaultTitle() {
-        testMap.put("banana", 44);
-        testMap.put("apple", 50);
-        testMap.put("orange", 123);
         String output = reportCreatorService.createReport(testMap);
         String actualTitle = output.split(System.lineSeparator())[TITLE_INDEX];
         assertEquals(DEFAULT_TITLE, actualTitle);
@@ -49,9 +44,6 @@ public class ReportCreatorServiceImplTest {
 
     @Test
     public void createReport_defaultCase_ok() {
-        testMap.put("banana", 44);
-        testMap.put("apple", 50);
-        testMap.put("orange", 123);
         String expected = DEFAULT_TITLE
                 + System.lineSeparator()
                 + "banana,44"

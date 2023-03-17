@@ -9,8 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static final FruitTransaction.Operation DEFAULT_OPERATION =
-            FruitTransaction.Operation.PURCHASE;
     private static final String DEFAULT_FRUIT = "banana";
     private static final Integer DEFAULT_QUANTITY = 123;
     private static PurchaseOperationHandler purchaseOperationHandler;
@@ -28,14 +26,14 @@ public class PurchaseOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void doActivity_fruitIsNull_notOk() {
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, null, 20);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, null, 20);
         purchaseOperationHandler.doActivity(fruitTransaction);
     }
 
     @Test
     public void doActivity_defaultCase_ok() {
         Storage.put(DEFAULT_FRUIT, DEFAULT_QUANTITY);
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, "banana", 20);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 20);
         Integer expectedQuantity = 103;
         purchaseOperationHandler.doActivity(fruitTransaction);
         Integer actualQuantity = Storage.get(fruitTransaction.getFruit());
@@ -45,7 +43,7 @@ public class PurchaseOperationHandlerTest {
     @Test (expected = RuntimeException.class)
     public void doActivity_amountMoreThanBalance_notOk() {
         Storage.put(DEFAULT_FRUIT, DEFAULT_QUANTITY);
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, "banana", 126);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 126);
         purchaseOperationHandler.doActivity(fruitTransaction);
     }
 

@@ -9,8 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static final FruitTransaction.Operation DEFAULT_OPERATION =
-            FruitTransaction.Operation.RETURN;
     private static ReturnOperationHandler returnOperationHandler;
     private static FruitTransaction fruitTransaction;
 
@@ -26,13 +24,13 @@ public class ReturnOperationHandlerTest {
 
     @Test(expected = RuntimeException.class)
     public void doActivity_fruitIsNull_notOk() {
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, null, 123);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, null, 123);
         returnOperationHandler.doActivity(fruitTransaction);
     }
 
     @Test
     public void doActivity_defaultCase_ok() {
-        fruitTransaction = new FruitTransaction(DEFAULT_OPERATION, "banana", 20);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 20);
         Integer expectedQuantity = 20;
         returnOperationHandler.doActivity(fruitTransaction);
         Integer actualQuantity = Storage.get(fruitTransaction.getFruit());

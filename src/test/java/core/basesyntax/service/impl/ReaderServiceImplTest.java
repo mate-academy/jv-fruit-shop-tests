@@ -40,12 +40,12 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFrom_EmptyFile_notOk() {
+    public void readFromFile_EmptyFile_notOk() {
         readerService.readFromFile(PATH_TO_EMPTY_FILE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_ArgumentNull_notOk() {
+    public void readFromFile_ArgumentNull_notOk() {
         readerService.readFromFile(null);
     }
 }

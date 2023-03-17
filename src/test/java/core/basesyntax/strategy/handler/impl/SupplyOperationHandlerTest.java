@@ -18,13 +18,20 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supply_OperationHandler_ok() {
+    public void handle_addToStorageSupplyOperation_ok() {
         TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.SUPPLY,
                 "banana", 100);
         operationHandler.apply(transactionDto);
         int actual = 120;
         int expected = Storage.storage.get("banana");
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handleSupply_addNegativeQuantityToStorage_notOk() {
+        TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.SUPPLY,
+                "banana", -10);
+        operationHandler.apply(transactionDto);
     }
 
     @After

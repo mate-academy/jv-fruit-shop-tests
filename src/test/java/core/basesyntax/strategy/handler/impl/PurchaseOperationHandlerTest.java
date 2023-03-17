@@ -18,7 +18,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchase_OperationHandler_ok() {
+    public void handle_addToStoragePurchaseOperation_ok() {
         TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.PURCHASE,
                 "banana", 13);
         operationHandler.apply(transactionDto);
@@ -28,7 +28,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchase_OperationHandler_notOk() {
+    public void purchase_withEmptyStorage_notOk() {
         TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.PURCHASE,
                 "banana", 130);
         operationHandler.apply(transactionDto);

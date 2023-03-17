@@ -17,7 +17,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balance_Operation_ok() {
+    public void handle_addToStorageBalanceOperation_ok() {
         TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.BALANCE,
                 "banana", 20);
         operationHandler.apply(transactionDto);
@@ -27,7 +27,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void balance_NegativeQuantity_notOk() {
+    public void handleBalance_addNegativeQuantityToStorage_notOk() {
         TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.BALANCE,
                 "banana", -5);
         operationHandler.apply(transactionDto);

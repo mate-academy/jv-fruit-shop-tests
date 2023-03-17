@@ -44,12 +44,12 @@ public class TransactionParserImplTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void trancsctionParser_ArgumentNull_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void transactionParser_ArgumentNull_notOk() {
         transactionParser.parserTransactionOperation(null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void transactionParser_ArgumentIsEmpty_notOk() {
         transactionParser.parserTransactionOperation(new ArrayList<>());
     }

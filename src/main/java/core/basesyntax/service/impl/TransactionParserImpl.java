@@ -16,7 +16,7 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<TransactionDto> parserTransactionOperation(List<String> line) {
         if (line.size() < 1 || line == null) {
-            throw new NullPointerException("File is empty");
+            throw new RuntimeException("File is empty");
         }
         List<TransactionDto> parsedTransaction = new ArrayList<>();
         isValidData(line);

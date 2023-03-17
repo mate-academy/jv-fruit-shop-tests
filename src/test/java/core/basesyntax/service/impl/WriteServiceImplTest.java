@@ -21,7 +21,7 @@ public class WriteServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_notOk() {
+    public void writeToFile_incorrectPath_notOk() {
         writeService.writeToFile(WRONG_FILE_PATH, REPORT);
     }
 
@@ -39,21 +39,21 @@ public class WriteServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file " + CORRECT_FILE_PATH, e);
         }
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_NullArguments_notOk() {
+    public void writeToFile_NullArguments_notOk() {
         writeService.writeToFile(null, null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeFirstArgumentNull_notOk() {
+    public void writeToFile_FirstArgumentNull_notOk() {
         writeService.writeToFile(null, CORRECT_FILE_PATH);
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_SecondArgumentNull_notOk() {
+    public void writeToFile_SecondArgumentNull_notOk() {
         writeService.writeToFile(REPORT, null);
     }
 }

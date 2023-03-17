@@ -12,19 +12,26 @@ public class ReturnOperationHandlerTest {
     private OperationHandler operationHandler;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         operationHandler = new ReturnOperationHandler();
         Storage.storage.put("banana", 20);
     }
 
     @Test
-    public void return_OperationHandler_ok() {
+    public void handle_addToStorageReturnOperation_ok() {
         TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.RETURN,
                 "banana", 50);
         operationHandler.apply(transactionDto);
         int expected = 70;
         int actual = Storage.storage.get("banana");
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handleReturn_addNegativeQuantityToStorage_notOk() {
+        TransactionDto transactionDto = new TransactionDto(TransactionDto.Operation.RETURN,
+                "banana", -20);
+        operationHandler.apply(transactionDto);
     }
 
     @After

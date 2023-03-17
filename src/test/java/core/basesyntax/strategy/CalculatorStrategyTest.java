@@ -13,6 +13,7 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CalculatorStrategyTest {
@@ -32,8 +33,14 @@ public class CalculatorStrategyTest {
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 200),
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "mango", 200)
     );
-    private final TypeCalculatorStrategy balance = new BalanceCalculatorImpl();
-    private final CalculatorStrategy calculatorStrategy = new CalculatorStrategyImpl(strategies);
+    private static TypeCalculatorStrategy balance;
+    private static CalculatorStrategy calculatorStrategy;
+
+    @BeforeClass
+    public static void beforeClass() {
+        balance = new BalanceCalculatorImpl();
+        calculatorStrategy = new CalculatorStrategyImpl(strategies);
+    }
 
     @Before
     public void setUp() {

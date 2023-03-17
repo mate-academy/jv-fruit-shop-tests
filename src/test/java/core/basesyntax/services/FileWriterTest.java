@@ -7,12 +7,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
     private static final String DATA = "Hello,world\n1,2\n3,4";
     private static final String PATH = "src/test/resources/";
-    private final FileWriterService fileWriterService = new FileWriterServiceImpl();
+    private static FileWriterService fileWriterService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileWriterService = new FileWriterServiceImpl();
+    }
 
     @Test
     public void writeReportToFile_data_Ok() {

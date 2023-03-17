@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitCalculatorTest {
@@ -32,13 +33,21 @@ public class FruitCalculatorTest {
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 120),
             new FruitTransaction(FruitTransaction.Operation.RETURN, "mango", 60)
     );
-    private List<TypeCalculatorStrategy> strategies = List.of(new SupplyCalculatorImpl(),
+    private static final List<TypeCalculatorStrategy> strategies = List.of(
+            new SupplyCalculatorImpl(),
             new ReturnCalculatorImpl(),
             new PurchaseCalculatorImpl(),
-            new BalanceCalculatorImpl());
-    private CalculatorStrategy calculatorStrategy = new CalculatorStrategyImpl(strategies);
-    private FruitCalculationService fruitCalculationService
-            = new FruitCalculationServiceImpl(calculatorStrategy);
+            new BalanceCalculatorImpl()
+    );
+    private static CalculatorStrategy calculatorStrategy;
+    private static FruitCalculationService fruitCalculationService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        calculatorStrategy = new CalculatorStrategyImpl(strategies);
+        fruitCalculationService
+                = new FruitCalculationServiceImpl(calculatorStrategy);
+    }
 
     @After
     public void tearDown() {
@@ -63,5 +72,15 @@ public class FruitCalculatorTest {
         expected.put("apple", 80);
         expected.put("mango", 100);
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void addToStorage_emptyList_notOk() {
+        fruitCalculationService.addToStorage(List.of());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void addToStorage_null_notOk() {
+        fruitCalculationService.addToStorage(null);
     }
 }

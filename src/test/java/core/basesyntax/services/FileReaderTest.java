@@ -4,12 +4,18 @@ import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderTest {
     private static final String PATH_VALID_DATA = "src/test/resources/test1.csv";
     private static final String EMPTY_DATA = "src/test/resources/test2.csv";
-    private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    private static FileReaderService fileReaderService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     public void readToList_validData_Ok() {

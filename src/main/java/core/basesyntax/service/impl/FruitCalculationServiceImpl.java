@@ -14,6 +14,9 @@ public class FruitCalculationServiceImpl implements FruitCalculationService {
 
     @Override
     public void addToStorage(List<FruitTransaction> transactions) {
+        if (transactions.isEmpty()) {
+            throw new RuntimeException("List should be not empty");
+        }
         for (FruitTransaction transaction : transactions) {
             strategy.calculate(transaction);
         }

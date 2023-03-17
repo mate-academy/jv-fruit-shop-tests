@@ -12,13 +12,21 @@ import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportMakerTest {
     private static final String PATH = "src/test/resources";
-    private final Map<String, Integer> storage = new HashMap<>();
-    private FileWriterService fileWriterService = new FileWriterServiceImpl();
-    private ReportMakerService reportMakerService = new ReportMakerServiceImpl(fileWriterService);
+    private static Map<String, Integer> storage;
+    private static FileWriterService fileWriterService;
+    private static ReportMakerService reportMakerService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        fileWriterService = new FileWriterServiceImpl();
+        reportMakerService = new ReportMakerServiceImpl(fileWriterService);
+        storage = new HashMap<>();
+    }
 
     @After
     public void tearDown() {

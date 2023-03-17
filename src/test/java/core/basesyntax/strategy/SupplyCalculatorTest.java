@@ -8,14 +8,24 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyCalculatorTest {
-    private final TypeCalculatorStrategy supplyCalculator = new SupplyCalculatorImpl();
-    private final FruitTransaction validTransaction
-            = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10);
-    private final FruitTransaction invalidTransaction
-            = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10);
+    private static TypeCalculatorStrategy supplyCalculator;
+    private static FruitTransaction validTransaction;
+    private static FruitTransaction invalidTransaction;
+
+    @BeforeClass
+    public static void beforeClass() {
+        invalidTransaction
+                = new FruitTransaction(
+                        FruitTransaction.Operation.PURCHASE, "banana", 10);
+        validTransaction
+                = new FruitTransaction(
+                        FruitTransaction.Operation.SUPPLY, "banana", 10);
+        supplyCalculator = new SupplyCalculatorImpl();
+    }
 
     @Before
     public void setUp() {

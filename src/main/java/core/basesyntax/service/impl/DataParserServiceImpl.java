@@ -21,9 +21,12 @@ public class DataParserServiceImpl implements DataParserService {
 
     private FruitTransaction transformString(String string) {
         String[] fruitTransaction = string.split(SEPARATOR);
+        Integer amount = Integer.parseInt(fruitTransaction[AMOUNT_INDEX]);
+        if (amount < 0) {
+            throw new RuntimeException("Negative transaction amount");
+        }
         return new FruitTransaction(FruitTransaction
                 .getOperationByString(fruitTransaction[TRANSACTION_INDEX]),
-                fruitTransaction[FRUIT_INDEX],
-                Integer.parseInt(fruitTransaction[AMOUNT_INDEX]));
+                fruitTransaction[FRUIT_INDEX], amount);
     }
 }

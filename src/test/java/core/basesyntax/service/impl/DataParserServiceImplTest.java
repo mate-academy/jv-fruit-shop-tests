@@ -6,6 +6,10 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,32 +29,28 @@ public class DataParserServiceImplTest {
         dataList = new ArrayList<>();
         fruitTransactions = new ArrayList<>();
         dataParserService = new DataParserServiceImpl();
+    }
 
-        dataList.add("type,fruit,quantity");
-        dataList.add("b,banana,20");
-        dataList.add("b,apple,100");
-        dataList.add("s,banana,100");
-        dataList.add("p,banana,13");
-        dataList.add("r,apple,10");
-        dataList.add("p,apple,20");
-        dataList.add("p,banana,5");
-        dataList.add("s,banana,50");
-
-        fruitTransactions.add(new FruitTransaction(BALANCE,BANANA,20));
-        fruitTransactions.add(new FruitTransaction(BALANCE,APPLE,100));
-        fruitTransactions.add(new FruitTransaction(SUPPLY,BANANA,100));
-        fruitTransactions.add(new FruitTransaction(PURCHASE,BANANA,13));
-        fruitTransactions.add(new FruitTransaction(RETURN,APPLE,10));
-        fruitTransactions.add(new FruitTransaction(PURCHASE,APPLE,20));
-        fruitTransactions.add(new FruitTransaction(PURCHASE,BANANA,5));
-        fruitTransactions.add(new FruitTransaction(SUPPLY,BANANA,50));
-
+    @Before
+    public void init() {
+        dataList = Stream.of("type,fruit,quantity","b,banana,20","b,apple,100","s,banana,100",
+                "p,banana,13","r,apple,10","p,apple,20","p,banana,5", "s,banana,50")
+                .collect(Collectors.toList());
+        fruitTransactions = Stream.of(
+                        new FruitTransaction(BALANCE,BANANA,20),
+                        new FruitTransaction(BALANCE,APPLE,100),
+                        new FruitTransaction(SUPPLY,BANANA,100),
+                        new FruitTransaction(PURCHASE,BANANA,13),
+                        new FruitTransaction(RETURN,APPLE,10),
+                        new FruitTransaction(PURCHASE,APPLE,20),
+                        new FruitTransaction(PURCHASE,BANANA,5),
+                        new FruitTransaction(SUPPLY,BANANA,50))
+                .collect(Collectors.toList());
     }
 
     @Test
     public void parseTransaction_ok() {
         List<FruitTransaction> actualTransactions = dataParserService.parseToTransaction(dataList);
-
         assertEquals(fruitTransactions.size(),actualTransactions.size());
 
         FruitTransaction actual;
@@ -65,9 +65,45 @@ public class DataParserServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseTransaction_notOk() {
+    public void invalidString_notOk() {
         dataList.add("invalid_transaction^&!@");
         dataParserService.parseToTransaction(dataList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void nullString_notOk() {
+        dataList.add(null);
+        dataParserService.parseToTransaction(dataList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void emptyString_notOk() {
+        dataList.add("");
+        dataParserService.parseToTransaction(dataList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void negativeAmount_notOk() {
+        dataList.add("b,banana,-10");
+        dataParserService.parseToTransaction(dataList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void invalidFruit_notOk() {
+        dataList.add("b,,-10");
+        dataParserService.parseToTransaction(dataList);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void invalidOperation_notOk() {
+        dataList.add(",apple,-10");
+        dataParserService.parseToTransaction(dataList);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        fruitTransactions.clear();
+        dataList.clear();
     }
 
 }

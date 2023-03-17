@@ -11,6 +11,7 @@ public class PurchaseOperationHandlerTest {
     private static final Integer SMALL_VALUE = 10;
     private static final Integer BIG_VALUE = 25;
     private static final Integer EXPECTED_VALUE = 15;
+    private static final Integer NEGATIVE_VALUE = -1;
     private static OperationHandler purchaseHandler;
 
     @BeforeClass
@@ -26,6 +27,16 @@ public class PurchaseOperationHandlerTest {
     @Test (expected = RuntimeException.class)
     public void purchase_notOK() {
         purchaseHandler.operate(BIG_VALUE, SMALL_VALUE);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void negativeAmount_notOk() {
+        purchaseHandler.operate(NEGATIVE_VALUE,BIG_VALUE);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void nullAmount_notOK() {
+        purchaseHandler.operate(null,null);
     }
 
 }

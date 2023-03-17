@@ -12,6 +12,7 @@ public class BalanceOperationHandlerTest {
     private static final Integer EXPECTED = 2;
     private static final Integer TRANSACTION_VALUE = 2;
     private static final Integer OLD_VALUE = 10;
+    private static final Integer NEGATIVE_VALUE = -10;
 
     @BeforeClass
     public static void beforeAll() {
@@ -23,4 +24,15 @@ public class BalanceOperationHandlerTest {
         Integer actual = balanceHandler.operate(TRANSACTION_VALUE,OLD_VALUE);
         assertEquals(EXPECTED,actual);
     }
+
+    @Test (expected = RuntimeException.class)
+    public void negativeAmount_notOk() {
+        balanceHandler.operate(NEGATIVE_VALUE,OLD_VALUE);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void nullAmount_notOK() {
+        balanceHandler.operate(null,null);
+    }
+
 }

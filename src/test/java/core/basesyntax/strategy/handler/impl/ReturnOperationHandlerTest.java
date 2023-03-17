@@ -11,6 +11,7 @@ public class ReturnOperationHandlerTest {
     private static final Integer TRANSACTION_VALUE = 5;
     private static final Integer OLD_VALUE = 25;
     private static final Integer EXPECTED_VALUE = 30;
+    private static final Integer NEGATIVE_VALUE = -1;
     private static OperationHandler returnHandler;
 
     @BeforeClass
@@ -22,5 +23,15 @@ public class ReturnOperationHandlerTest {
     public void return_ok() {
         assertEquals(EXPECTED_VALUE, returnHandler.operate(TRANSACTION_VALUE,OLD_VALUE));
 
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void negativeAmount_notOk() {
+        returnHandler.operate(NEGATIVE_VALUE,OLD_VALUE);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void nullAmount_notOK() {
+        returnHandler.operate(null,null);
     }
 }

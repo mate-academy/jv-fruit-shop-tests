@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,10 +6,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.exception.FruitException;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.BalanceOperationStrategy;
-import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
-import core.basesyntax.strategy.impl.ReturnOperationStrategy;
-import core.basesyntax.strategy.impl.SupplyOperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.BeforeClass;
@@ -48,6 +45,21 @@ public class FactoryStrategyTest {
         OperationStrategy expectedStrategy = new PurchaseOperationStrategy(fruitDao);
         OperationStrategy actualStrategy = factoryStrategy
                 .getOperationStrategy(FruitTransaction.Operation.PURCHASE);
+        assertEquals(expectedStrategy.getClass(), actualStrategy.getClass());
+
+        expectedStrategy = new SupplyOperationStrategy(fruitDao);
+        actualStrategy = factoryStrategy
+                .getOperationStrategy(FruitTransaction.Operation.SUPPLY);
+        assertEquals(expectedStrategy.getClass(), actualStrategy.getClass());
+
+        expectedStrategy = new ReturnOperationStrategy(fruitDao);
+        actualStrategy = factoryStrategy
+                .getOperationStrategy(FruitTransaction.Operation.RETURN);
+        assertEquals(expectedStrategy.getClass(), actualStrategy.getClass());
+
+        expectedStrategy = new BalanceOperationStrategy(fruitDao);
+        actualStrategy = factoryStrategy
+                .getOperationStrategy(FruitTransaction.Operation.BALANCE);
         assertEquals(expectedStrategy.getClass(), actualStrategy.getClass());
     }
 

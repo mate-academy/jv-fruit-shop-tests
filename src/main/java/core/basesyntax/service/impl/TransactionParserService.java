@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.FruitException;
 import core.basesyntax.model.FruitTransaction;

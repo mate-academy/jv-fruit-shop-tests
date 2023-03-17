@@ -1,13 +1,13 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.FactoryStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationStrategy;
+import core.basesyntax.strategy.impl.FactoryStrategy;
 import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
 import core.basesyntax.strategy.impl.ReturnOperationStrategy;
 import core.basesyntax.strategy.impl.SupplyOperationStrategy;

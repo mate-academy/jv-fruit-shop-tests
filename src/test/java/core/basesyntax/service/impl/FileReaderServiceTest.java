@@ -1,23 +1,27 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceTest {
-    private static List<String> excepted;
     private static FileReaderService fileReaderService;
     private static final File TEST_FILE = new File("src/test/resources/fileForFileReaderTest.csv");
     private static final File NON_EXISTENT_FILE = new File("src/test/resources/bandera.csv");
+    private List<String> excepted;
 
     @BeforeClass
     public static void beforeClass() {
         fileReaderService = new FileReaderServiceImpl();
+    }
+
+    @Before
+    public void before() {
         excepted = new ArrayList<>();
         excepted.add("type,fruit,quantity");
         excepted.add("b,durian,100");

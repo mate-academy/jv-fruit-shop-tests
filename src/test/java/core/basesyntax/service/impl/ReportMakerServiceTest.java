@@ -1,11 +1,11 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportMakerService;
-import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportMakerServiceTest {
@@ -13,6 +13,12 @@ public class ReportMakerServiceTest {
             + "papaya,100" + System.lineSeparator()
             + "durian,72";
     private static final String EXCEPTED_EMPTY = "fruit,quantity";
+    private static ReportMakerService reportMakerService;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        reportMakerService = new ReportMakerServiceImpl();
+    }
 
     @Before
     public void setUpStorage() {
@@ -27,14 +33,12 @@ public class ReportMakerServiceTest {
 
     @Test
     public void createReport_validInputData() {
-        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
         String actual = reportMakerService.createReport();
         Assert.assertEquals(EXCEPTED_VALID, actual);
     }
 
     @Test
     public void createReport_emptyInputData() {
-        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
         Storage.fruitStorage.clear();
         String actual = reportMakerService.createReport();
         Assert.assertEquals(EXCEPTED_EMPTY, actual);

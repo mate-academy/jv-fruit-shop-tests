@@ -1,12 +1,12 @@
-package core.basesyntax;
+package core.basesyntax.service.operation;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitOperation;
-import core.basesyntax.service.operation.FruitPurchaseOperation;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitPurchaseOperationTest {
@@ -14,7 +14,13 @@ public class FruitPurchaseOperationTest {
     private static final int EMPTY_STORAGE = 0;
     private static final int FRUIT_QUANTITY = 100;
     private static final int FRUIT_START_BALANCE = 110;
+    private static FruitOperation operation;
     private FruitTransaction transaction;
+
+    @BeforeClass
+    public static void beforeClass() {
+        operation = new FruitPurchaseOperation();
+    }
 
     @Before
     public void setUpTransaction() {
@@ -31,7 +37,6 @@ public class FruitPurchaseOperationTest {
     @Test
     public void fruitOperate_validInputData_ok() {
         Storage.fruitStorage.put(FRUIT_NAME, FRUIT_START_BALANCE);
-        FruitOperation operation = new FruitPurchaseOperation();
         operation.fruitOperate(transaction);
         int actualQuantity = Storage.fruitStorage.get(FRUIT_NAME);
         Assert.assertEquals(FRUIT_START_BALANCE - FRUIT_QUANTITY, actualQuantity);
@@ -40,7 +45,6 @@ public class FruitPurchaseOperationTest {
     @Test
     public void fruitOperate_fruitBalanceIsEqualsToPurchaseQuantity_ok() {
         Storage.fruitStorage.put(FRUIT_NAME, FRUIT_QUANTITY);
-        FruitOperation operation = new FruitPurchaseOperation();
         operation.fruitOperate(transaction);
         int actualQuantity = Storage.fruitStorage.get(FRUIT_NAME);
         Assert.assertEquals(EMPTY_STORAGE, actualQuantity);
@@ -48,7 +52,6 @@ public class FruitPurchaseOperationTest {
 
     @Test(expected = RuntimeException.class)
     public void fruitOperate_fruitQuantityIsHigherThanBalance_notOk() {
-        FruitOperation operation = new FruitPurchaseOperation();
         operation.fruitOperate(transaction);
     }
 }

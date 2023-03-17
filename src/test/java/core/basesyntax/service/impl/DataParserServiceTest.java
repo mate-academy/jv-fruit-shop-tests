@@ -1,8 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
-import core.basesyntax.service.impl.DataParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -11,8 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DataParserServiceTest {
-    private static List<FruitTransaction> excepted;
-    private static List<String> input;
     private static DataParserService parserService;
     private static final String FIRST_FRUIT_NAME = "durian";
     private static final String SECOND_FRUIT_NAME = "papaya";
@@ -20,10 +17,16 @@ public class DataParserServiceTest {
     private static final int SECOND_QUANTITY = 55;
     private static final int THIRD_QUANTITY = 28;
     private static final int FOURTH_QUANTITY = 45;
+    private List<FruitTransaction> excepted;
+    private List<String> input;
 
     @BeforeClass
-    public static void createOutputList() throws Exception {
+    public static void beforeClass() throws Exception {
         parserService = new DataParserServiceImpl();
+    }
+
+    @Before
+    public void createOutputInputList() {
         excepted = new ArrayList<>();
         FruitTransaction first = new FruitTransaction();
         first.setOperation(FruitTransaction.Operation.BALANCE);
@@ -44,10 +47,6 @@ public class DataParserServiceTest {
         fourth.setOperation(FruitTransaction.Operation.SUPPLY);
         fourth.setFruit(SECOND_FRUIT_NAME);
         fourth.setQuantity(FOURTH_QUANTITY);
-    }
-
-    @Before
-    public void createInputList() throws Exception {
         input = new ArrayList<>();
         input.add("type,fruit,quantity");
         input.add("b,durian,100");

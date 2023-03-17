@@ -19,7 +19,6 @@ public class OperationStrategyTest {
     private static final String PURCHASE_CONST = "p";
     private static final String INCORRECT_DATA_INPU = "d";
     private static OperationStrategy operationStrategy;
-    private static FruitTransaction.Operation operation;
 
     @BeforeClass
     public static void beforeAll() {
@@ -35,32 +34,32 @@ public class OperationStrategyTest {
     public void getBalanceHandler_ok() {
         OperationHandler expected = new BalanceOperationHandler();
         Assert.assertEquals(expected.getClass(), operationStrategy
-                .get(operation.getByCode(BALANCE_CONST)).getClass());
+                .get(FruitTransaction.Operation.getByCode(BALANCE_CONST)).getClass());
     }
 
     @Test
     public void getReturnHandler_ok() {
         OperationHandler expected = new ReturnOperationHandler();
         Assert.assertEquals(expected.getClass(), operationStrategy
-                .get(operation.getByCode(RETURN_CONST)).getClass());
+                .get(FruitTransaction.Operation.getByCode(RETURN_CONST)).getClass());
     }
 
     @Test
     public void getPurchaseHandler_ok() {
         OperationHandler expected = new PurchaseOperationHandler();
         Assert.assertEquals(expected.getClass(), operationStrategy
-                .get(operation.getByCode(PURCHASE_CONST)).getClass());
+                .get(FruitTransaction.Operation.getByCode(PURCHASE_CONST)).getClass());
     }
 
     @Test
     public void getSupplyHandler_ok() {
         OperationHandler expected = new SupplyOperationHandler();
         Assert.assertEquals(expected.getClass(), operationStrategy
-                .get(operation.getByCode(SUPPLY_CONST)).getClass());
+                .get(FruitTransaction.Operation.getByCode(SUPPLY_CONST)).getClass());
     }
 
     @Test(expected = RuntimeException.class)
     public void getHandler_notOk() {
-        operationStrategy.get(operation.getByCode(INCORRECT_DATA_INPU));
+        operationStrategy.get(FruitTransaction.Operation.getByCode(INCORRECT_DATA_INPU));
     }
 }

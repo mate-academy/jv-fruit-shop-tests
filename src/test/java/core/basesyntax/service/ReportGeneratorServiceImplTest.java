@@ -28,7 +28,7 @@ public class ReportGeneratorServiceImplTest {
     private static final int TEN = 10;
     private static final int FIVE = 5;
     private static final String EXPECTED_REPORT = "fruit quantity" + System.lineSeparator()
-            + "banana,50" + System.lineSeparator()
+            + "banana,25" + System.lineSeparator()
             + "apple,40";
 
     private ReportGeneratorService reportGeneratorService;

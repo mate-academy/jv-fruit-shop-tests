@@ -15,12 +15,9 @@ import org.junit.Test;
 public class FileReaderServiceImplTest {
     private static FileReaderService fileReaderService;
     private static List<String> actual;
-    private static final String EMPTY_FILE =
-            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/test/resources/empty.csv";
-    private static final String NOT_EXISTING_FILE =
-            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/main/resources/cucaracha.csv";
-    private static final String NORMAL_FILE =
-            "src/test/resources/input.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
+    private static final String NOT_EXISTING_FILE = "src/main/resources/cucaracha.csv";
+    private static final String NORMAL_FILE = "src/test/resources/input.csv";
     private static File file;
 
     @BeforeClass

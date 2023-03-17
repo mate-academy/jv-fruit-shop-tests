@@ -17,6 +17,7 @@ public class SupplyHandlerTest {
     private static final int VALUE_TO_ADD = 23;
     private static final int VALUE_AFTER_ADDING_EXPECTED = 78;
     private static FruitTransaction fruitTransaction;
+    private static FruitTransaction fruitTransactionNull;
     private static SupplyHandler supplyHandler;
     private static int expected;
 
@@ -63,5 +64,11 @@ public class SupplyHandlerTest {
         supplyHandler.initializeOperation(fruitTransaction);
         int actual = Storage.storage.get(fruitTransaction.getFruit());
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = FruitShopException.class)
+    public void initializeOperation_fruitTransactionIsNull_notOk() {
+        fruitTransactionNull = null;
+        supplyHandler.initializeOperation(fruitTransaction);
     }
 }

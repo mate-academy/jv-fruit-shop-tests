@@ -18,6 +18,7 @@ public class PurchaseHandlerTest {
     private static final int VALUE_TO_REMOVE = 23;
     private static final int VALUE_AFTER_REMOVE_EXPECTED = 32;
     private static FruitTransaction fruitTransaction;
+    private static FruitTransaction fruitTransactionNull;
     private static PurchaseHandler purchaseHandler;
     private static int expected;
 
@@ -71,5 +72,11 @@ public class PurchaseHandlerTest {
         purchaseHandler.initializeOperation(fruitTransaction);
         int actual = Storage.storage.get(fruitTransaction.getFruit());
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = FruitShopException.class)
+    public void initializeOperation_fruitTransactionIsNull_notOk() {
+        fruitTransactionNull = null;
+        purchaseHandler.initializeOperation(fruitTransaction);
     }
 }

@@ -16,6 +16,7 @@ public class BalanceHandlerTest {
     private static final int VALUE_LESS_THAN_ZERO = -1;
     private static final int VALUE_MORE_THAN_ZERO = 55;
     private static FruitTransaction fruitTransaction;
+    private static FruitTransaction fruitTransactionNull;
     private static BalanceHandler balanceHandler;
 
     @BeforeClass
@@ -61,6 +62,12 @@ public class BalanceHandlerTest {
         int expected = VALUE_MORE_THAN_ZERO;
         int actual = fruitTransaction.getQuantity();
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = FruitShopException.class)
+    public void initializeOperation_fruitTransactionIsNull_notOk() {
+        fruitTransactionNull = null;
+        balanceHandler.initializeOperation(fruitTransaction);
     }
 
     @After

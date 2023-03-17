@@ -8,6 +8,9 @@ import core.basesyntax.strategy.handlers.OperationHandler;
 public class ReturnHandler implements OperationHandler {
     @Override
     public void initializeOperation(FruitTransaction fruitTransaction) {
+        if (fruitTransaction == null) {
+            throw new FruitShopException("Data is null");
+        }
         if (fruitTransaction.getFruit() == null) {
             throw new FruitShopException("Invalid input data");
         }

@@ -9,8 +9,8 @@ public class FruitTransactionTest {
     private static final String DEFAULT_OPERATION = "b";
     private static final String DEFAULT_FRUIT_NAME = "banana";
     private static final int DEFAULT_QUANTITY = 100;
-    private static final String INCORRECT_OPERATION = "d";
     private static final int INCORRECT_QUANTITY = -1;
+    private static final String INCORRECT_OPERATION = "d";
     private static FruitTransaction fruitTransaction;
 
     @BeforeClass

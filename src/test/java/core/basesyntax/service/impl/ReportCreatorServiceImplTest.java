@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

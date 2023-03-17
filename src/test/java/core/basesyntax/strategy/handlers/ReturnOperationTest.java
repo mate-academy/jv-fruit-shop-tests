@@ -14,6 +14,7 @@ public class ReturnOperationTest {
     private static final int START_COUNT = 40;
     private static final int RETURN_COUNT = 10;
     private static final String WRONG_NAME = "airplane";
+    private final ReturnOperation operation = new ReturnOperation();
 
     @Before
     public void before() {
@@ -22,9 +23,8 @@ public class ReturnOperationTest {
     }
 
     @Test
-    public void returnExist_ok() {
+    public void handle_existValue_ok() {
         int expected = START_COUNT + RETURN_COUNT;
-        ReturnOperation operation = new ReturnOperation();
         operation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
                 REGULAR_NAME, RETURN_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
@@ -33,8 +33,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    public void returnNotExist_notOk() {
-        ReturnOperation operation = new ReturnOperation();
+    public void handle_notExistValue_notOk() {
         boolean thrown = false;
         try {
             operation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
@@ -46,17 +45,9 @@ public class ReturnOperationTest {
                 + ", but false was expected", thrown);
     }
 
-    @Test
-    public void returnNull_notOk() {
-        ReturnOperation operation = new ReturnOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                    null, RETURN_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+    @Test(expected = FruitTransactionException.class)
+    public void handle_nullValue_notOk() {
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                null, RETURN_COUNT));
     }
 }

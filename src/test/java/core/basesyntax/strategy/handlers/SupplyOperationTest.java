@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.handlers;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.handlers.FruitTransactionException;
@@ -14,6 +13,7 @@ public class SupplyOperationTest {
     private static final int START_COUNT = 40;
     private static final int SUPPLY_COUNT = 10;
     private static final String WRONG_NAME = "airplane";
+    private static SupplyOperation operation = new SupplyOperation();
 
     @Before
     public void before() {
@@ -22,9 +22,8 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void supplyExist_ok() {
+    public void handle_existValue_ok() {
         int expected = START_COUNT + SUPPLY_COUNT;
-        SupplyOperation operation = new SupplyOperation();
         operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 REGULAR_NAME, SUPPLY_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
@@ -32,31 +31,15 @@ public class SupplyOperationTest {
                 expected, actual);
     }
 
-    @Test
-    public void supplyNotExist_notOk() {
-        SupplyOperation operation = new SupplyOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                    WRONG_NAME, SUPPLY_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+    @Test(expected = FruitTransactionException.class)
+    public void handle_notExistValue_notOk() {
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                WRONG_NAME, SUPPLY_COUNT));
     }
 
-    @Test
-    public void supplyNull_notOk() {
-        SupplyOperation operation = new SupplyOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                    null, SUPPLY_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+    @Test(expected = FruitTransactionException.class)
+    public void handle_nullValue_notOk() {
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                null, SUPPLY_COUNT));
     }
 }

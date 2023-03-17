@@ -31,7 +31,7 @@ public class TransactionsEvaluateServiceImplTest {
     }
 
     @Test
-    public void evaluateOperations_ok() {
+    public void evaluate_allOperations_ok() {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(BALANCE_TRANSACTION);
         transactions.add(RETURN_TRANSACTION);

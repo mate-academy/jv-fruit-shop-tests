@@ -12,6 +12,7 @@ import org.junit.Test;
 public class BalanceOperationTest {
     private static final String FRUIT_NAME = "strawberry";
     private static final int FRUIT_COUNT = 20;
+    private final BalanceOperation operation = new BalanceOperation();
 
     @Before
     public void before() {
@@ -19,34 +20,25 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void addNew_ok() {
-        BalanceOperation balanceOperation = new BalanceOperation();
+    public void handle_newValue_ok() {
         int expected = FRUIT_COUNT;
-        balanceOperation.handle(new FruitTransaction(
+        operation.handle(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, FRUIT_NAME, FRUIT_COUNT));
         int actual = Storage.fruits.get(FRUIT_NAME);
         assertEquals(actual + " waiting for, but " + expected + " was expected!",
                 expected, actual);
     }
 
-    @Test
-    public void addExisted_notOk() {
-        BalanceOperation operation = new BalanceOperation();
-        boolean thrown = false;
+    @Test(expected = FruitTransactionException.class)
+    public void handle_existValue_notOk() {
         operation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT_NAME, FRUIT_COUNT));
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                    FRUIT_NAME, FRUIT_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                FRUIT_NAME, FRUIT_COUNT));
     }
 
     @Test
-    public void addNull_notOk() {
+    public void handle_nullValue_notOk() {
         BalanceOperation operation = new BalanceOperation();
         boolean thrown = false;
         try {
@@ -55,7 +47,7 @@ public class BalanceOperationTest {
         } catch (FruitTransactionException e) {
             thrown = true;
         }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+        assertTrue("FruitTransactionException expected true, "
+                + "but false was expected", thrown);
     }
 }

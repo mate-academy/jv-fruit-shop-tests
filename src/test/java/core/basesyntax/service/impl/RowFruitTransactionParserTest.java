@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
@@ -34,30 +33,38 @@ public class RowFruitTransactionParserTest {
     }
 
     @Test
-    public void parseRegularValue_ok() {
+    public void parse_regularValue_ok() {
         FruitTransaction balanceTransaction = parser.parse(BALANCE_VALUES);
         assertEquals(balanceTransaction + " expected, but was " + balanceTransaction + "!",
                 EXPECTED_BALANCE_TRANSACTION, balanceTransaction);
     }
 
     @Test
-    public void transactionsOperationCorrectTypes_ok() {
-        // Balance
+    public void parse_balanceValue_ok() {
         FruitTransaction balanceTransaction = parser.parse(BALANCE_VALUES);
         assertEquals(FruitTransaction.Operation.BALANCE
                         + " expected, but was " + balanceTransaction.getOperation() + "!",
                 FruitTransaction.Operation.BALANCE, balanceTransaction.getOperation());
-        // Return
+    }
+
+    @Test
+    public void parse_returnValue_ok() {
         FruitTransaction returnTransaction = parser.parse(RETURN_VALUES);
         assertEquals(FruitTransaction.Operation.RETURN
                         + " expected, but was " + returnTransaction.getOperation() + "!",
                 FruitTransaction.Operation.RETURN, returnTransaction.getOperation());
-        // Supply
+    }
+
+    @Test
+    public void parse_supplyValue_ok() {
         FruitTransaction supplyTransaction = parser.parse(SUPPLY_VALUES);
         assertEquals(FruitTransaction.Operation.SUPPLY
                         + " expected, but was " + supplyTransaction.getOperation() + "!",
                 FruitTransaction.Operation.SUPPLY, supplyTransaction.getOperation());
-        // Purchase
+    }
+
+    @Test
+    public void parse_purchaseValue_ok() {
         FruitTransaction purchaseTransaction = parser.parse(PURCHASE_VALUES);
         assertEquals(FruitTransaction.Operation.PURCHASE
                         + " expected, but was " + purchaseTransaction.getOperation() + "!",
@@ -65,7 +72,7 @@ public class RowFruitTransactionParserTest {
     }
 
     @Test
-    public void parseCollection_ok() {
+    public void parse_collection_ok() {
         List<String[]> strings = new ArrayList<>();
         strings.add(BALANCE_VALUES);
         strings.add(RETURN_VALUES);
@@ -81,33 +88,21 @@ public class RowFruitTransactionParserTest {
                 expected, actual);
     }
 
-    @Test
-    public void wrongArraySize_notOk() {
-        boolean thrown = false;
-        try {
-            parser.parse(WRONG_SIZE_VALUES);
-        } catch (IllegalArgumentException e) {
-            thrown = true;
-        }
-        assertTrue("IllegalArgumentException expected true but was false!",thrown);
+    @Test(expected = IllegalArgumentException.class)
+    public void parse_wrongArraySize_notOk() {
+        parser.parse(WRONG_SIZE_VALUES);
     }
 
     @Test
-    public void nullValue_ok() {
+    public void parse_nullValue_ok() {
         String[] s = null;
         FruitTransaction actual = parser.parse(s);
         assertEquals("Null expected but was " + actual,
                 null, actual);
     }
 
-    @Test
-    public void nullElementValue_notOk() {
-        boolean thrown = false;
-        try {
-            parser.parse(NULL_VALUES);
-        } catch (IllegalArgumentException e) {
-            thrown = true;
-        }
-        assertTrue("IllegalArgumentException expected true but was false!",thrown);
+    @Test(expected = IllegalArgumentException.class)
+    public void parse_nullElementValue_notOk() {
+        parser.parse(NULL_VALUES);
     }
 }

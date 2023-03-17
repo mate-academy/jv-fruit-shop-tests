@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.handlers;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.handlers.FruitTransactionException;
@@ -14,6 +13,7 @@ public class PurchaseOperationTest {
     private static final int START_COUNT = 40;
     private static final int PURCHASE_COUNT = 20;
     private static final String WRONG_NAME = "airplane";
+    private final PurchaseOperation operation = new PurchaseOperation();
 
     @Before
     public void before() {
@@ -22,9 +22,8 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseAny_ok() {
+    public void handle_existedValue_ok() {
         int expected = START_COUNT / 2;
-        PurchaseOperation operation = new PurchaseOperation();
         operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 REGULAR_NAME, PURCHASE_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
@@ -33,9 +32,8 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseAllWork_ok() {
+    public void handle_allOfExistValue_ok() {
         int expected = 0;
-        PurchaseOperation operation = new PurchaseOperation();
         operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 REGULAR_NAME, START_COUNT));
         int actual = Storage.fruits.get(REGULAR_NAME);
@@ -43,45 +41,21 @@ public class PurchaseOperationTest {
                 expected, actual);
     }
 
-    @Test
-    public void purchaseMoreThanExist_notOk() {
-        PurchaseOperation operation = new PurchaseOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                    REGULAR_NAME, START_COUNT + PURCHASE_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+    @Test(expected = FruitTransactionException.class)
+    public void handle_moreThanExistValue_notOk() {
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                REGULAR_NAME, START_COUNT + PURCHASE_COUNT));
     }
 
-    @Test
-    public void purchaseWhenNotExist_notOk() {
-        PurchaseOperation operation = new PurchaseOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                    WRONG_NAME, PURCHASE_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+    @Test(expected = FruitTransactionException.class)
+    public void handle_notExistValue_notOk() {
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                WRONG_NAME, PURCHASE_COUNT));
     }
 
-    @Test
-    public void purchaseWhenNull_notOk() {
-        PurchaseOperation operation = new PurchaseOperation();
-        boolean thrown = false;
-        try {
-            operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                    null, PURCHASE_COUNT));
-        } catch (FruitTransactionException e) {
-            thrown = true;
-        }
-        assertTrue("FruitTransactionException expected true"
-                + ", but false was expected", thrown);
+    @Test(expected = FruitTransactionException.class)
+    public void handle_nullValue_notOk() {
+        operation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                null, PURCHASE_COUNT));
     }
 }

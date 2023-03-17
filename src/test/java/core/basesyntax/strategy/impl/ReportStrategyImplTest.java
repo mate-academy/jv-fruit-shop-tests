@@ -15,7 +15,7 @@ public class ReportStrategyImplTest {
     private static ReportStrategy strategy = new ReportStrategyImpl();
 
     @Test
-    public void correctHandlerReturn_ok() {
+    public void getHandlerByOperation_regularTransactions_ok() {
         OperationHandler handler =
                 strategy.getHandlerByOperation(FruitTransaction.Operation.BALANCE);
         assertEquals(BalanceOperation.class + " expected but was " + handler.getClass(),
@@ -35,7 +35,7 @@ public class ReportStrategyImplTest {
     }
 
     @Test
-    public void nullValue_ok() {
+    public void getHandlerByOperation_nullValue_ok() {
         OperationHandler actual = strategy.getHandlerByOperation(null);
         assertEquals("Null expected but was " + actual,
                 null, actual);

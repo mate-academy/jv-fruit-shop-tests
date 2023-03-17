@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.exception.GridGeneratorException;
 import core.basesyntax.model.Grid;
@@ -11,22 +10,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitGridGeneratorServiceTest {
     private static final String[] EXPECTED_TITLES = {"fruit", "quantity"};
     private static final String[][] EXPECTED_ROWS = {{"banana", "90"}, {"blueberry", "40"}};
+    private static final Map<String, Integer> REGULAR_VALUES =
+            Map.of("banana", 90, "blueberry", 40);
     private static Grid expectedGrid;
-    private static Map<String, Integer> REGULAR_VALUES = new HashMap<>();
-
     private static GridGeneratorService gridGeneratorService;
-
-    @BeforeClass
-    public static void beforeClass() {
-        REGULAR_VALUES.put("banana", 90);
-        REGULAR_VALUES.put("blueberry", 40);
-    }
 
     @Before
     public void before() {
@@ -39,41 +31,30 @@ public class FruitGridGeneratorServiceTest {
     }
 
     @Test
-    public void gridRegularValue_ok() {
-        Grid expected = expectedGrid;
+    public void grid_regularValue_ok() {
         Grid actual = gridGeneratorService.grid(REGULAR_VALUES);
-        assertEquals(actual + " expected equals to " + expected + "!",
-                expected, actual);
+        assertEquals(actual + " expected equals to " + expectedGrid + "!",
+                expectedGrid, actual);
     }
 
     @Test
-    public void gridNullValue_ok() {
+    public void grid_nullValue_ok() {
         Grid actual = gridGeneratorService.grid(null);
         assertEquals(actual + " expected be null!",
                 null, actual);
     }
 
-    @Test
-    public void gridFruitOrValueNull_notOk() {
-        boolean thrownOnName = false;
-        boolean thrownOnCount = false;
+    @Test(expected = GridGeneratorException.class)
+    public void grid_fruitNameNull_notOk() {
         Map<String, Integer> wrongFruitName = new HashMap<>();
         wrongFruitName.put(null, 40);
+        gridGeneratorService.grid(wrongFruitName);
+    }
+
+    @Test(expected = GridGeneratorException.class)
+    public void grid_quantityNull_notOk() {
         Map<String, Integer> wrongFruitCount = new HashMap<>();
         wrongFruitCount.put("apple", null);
-        try {
-            gridGeneratorService.grid(wrongFruitName);
-        } catch (GridGeneratorException e) {
-            thrownOnName = true;
-        }
-        assertTrue("GridGeneratorException when fruit name"
-                + " are null expected true, but was false", thrownOnName);
-        try {
-            gridGeneratorService.grid(wrongFruitCount);
-        } catch (GridGeneratorException e) {
-            thrownOnCount = true;
-        }
-        assertTrue("GridGeneratorException when fruit count"
-                + " are null expected true, but was false", thrownOnCount);
+        gridGeneratorService.grid(wrongFruitCount);
     }
 }

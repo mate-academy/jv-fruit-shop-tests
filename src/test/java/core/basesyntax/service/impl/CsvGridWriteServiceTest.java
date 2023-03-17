@@ -16,7 +16,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvGridWriteServiceTest {
-
     private static final String[] TITLES_TO_WRITE = new String[]{"model", "color", "price"};
     private static final String[][] ROWS_TO_WRITE = new String[][]{
             {"Ferrari", "blue", "9000"},
@@ -49,7 +48,7 @@ public class CsvGridWriteServiceTest {
     }
 
     @Test
-    public void writeGrid_ok() {
+    public void write_regularGrid_ok() {
         gridWriteService.write(OUTPUT_PATH, gridToWrite);
         try (BufferedReader reader = new BufferedReader(new FileReader(OUTPUT_PATH))) {
             for (int i = 0; i < EXPECTED_LINES.length; i++) {

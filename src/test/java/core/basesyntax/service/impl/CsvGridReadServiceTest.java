@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.exception.GridIoException;
 import core.basesyntax.model.Grid;
@@ -34,25 +33,19 @@ public class CsvGridReadServiceTest {
     }
 
     @Test
-    public void regularCsvRead_ok() {
+    public void getGrid_regularValue_ok() {
         Grid actual = gridReadService.getGrid(REGULAR_VALUES_PATH);
         assertEquals(expectedGrid + " expected, but was " + actual + "!",
                 expectedGrid, actual);
     }
 
-    @Test
-    public void notExistFileRead_notOk() {
-        boolean thrown = false;
-        try {
-            gridReadService.getGrid(NOT_EXIST_PATH);
-        } catch (GridIoException e) {
-            thrown = true;
-        }
-        assertTrue("GridIOException expected true but was false!", thrown);
+    @Test(expected = GridIoException.class)
+    public void getGrid_notExistFile_notOk() {
+        gridReadService.getGrid(NOT_EXIST_PATH);
     }
 
     @Test
-    public void emptyFileRead_ok() {
+    public void getGrid_emptyFile_ok() {
         Grid actual = gridReadService.getGrid(EMPTY_FILE_PATH);
         assertEquals("Null expected, but was " + actual + "!",
                 null, actual);

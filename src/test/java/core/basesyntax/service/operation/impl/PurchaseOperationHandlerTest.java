@@ -17,7 +17,6 @@ public class PurchaseOperationHandlerTest {
     private static final Integer EXPECTED_QUANTITY = 0;
     private static final FruitTransaction.Operation VALID_OPERATION =
             FruitTransaction.Operation.SUPPLY;
-    private static BalanceOperationHandler balanceOperationHandler;
     private static PurchaseOperationHandler purchaseOperationHandler;
     private static FruitShopDao fruitShopDao;
     private static FruitTransaction fruitTransactionOk;
@@ -30,10 +29,9 @@ public class PurchaseOperationHandlerTest {
         fruitTransactionNull = null;
 
         fruitShopDao = new FruitShopDaoImpl();
-        balanceOperationHandler = new BalanceOperationHandler(fruitShopDao);
         purchaseOperationHandler = new PurchaseOperationHandler(fruitShopDao);
 
-        balanceOperationHandler.operation(fruitTransactionOk);
+        fruitShopDao.add(FRUIT_BANANA, VALID_QUANTITY);
     }
 
     @Test(expected = RuntimeException.class)

@@ -28,11 +28,17 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFile_nullPath_notOk() {
+    public void readFile_emptyPath_notOk() {
         readerService.readData(EMPTY_PATH);
-        readerService.readData(null);
-        fail("Expected " + RuntimeException.class.getName() + " to be thrown for null path '"
+        fail("Expected " + RuntimeException.class.getName() + " to be thrown for empty path '"
                 + EMPTY_PATH + "' but it's wasn't");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFile_nullPath_notOk() {
+        readerService.readData(null);
+        fail("Expected " + RuntimeException.class.getName() + " to be thrown for null path "
+                + "but it's wasn't");
     }
 
     @Test(expected = RuntimeException.class)

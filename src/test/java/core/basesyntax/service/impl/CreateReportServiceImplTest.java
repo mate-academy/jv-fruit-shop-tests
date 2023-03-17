@@ -16,24 +16,12 @@ public class CreateReportServiceImplTest {
     private static final int VALID_QUANTITY = 20;
     private static final String LINE_SEPARATOR = ",";
     private static CreateReportService createReportService;
-    private static Map<String, Integer> map;
+    private static Map<String, Integer> data;
 
     @BeforeClass
     public static void beforeClass() {
         createReportService = new CreateReportServiceImpl();
-        map = new HashMap<>();
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void createReport_emptyData_notOk() {
-        String report = createReportService.createReport(map);
-        String expected = FIRST_ROW + System.lineSeparator();
-        assertEquals(expected, report);
-    }
-
-    @After
-    public void tearDown() {
-        map.clear();
+        data = new HashMap<>();
     }
 
     @Test(expected = RuntimeException.class)
@@ -41,7 +29,18 @@ public class CreateReportServiceImplTest {
         createReportService.createReport(null);
         fail("Expected " + RuntimeException.class.getName() + " to be thrown for null data "
                 + "but it's wasn't");
-        tearDown();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void createReport_emptyData_notOk() {
+        String report = createReportService.createReport(data);
+        String expected = FIRST_ROW + System.lineSeparator();
+        assertEquals(expected, report);
+    }
+
+    @After
+    public void tearDown() {
+        data.clear();
     }
 
     @Test
@@ -54,10 +53,9 @@ public class CreateReportServiceImplTest {
                 .append(System.lineSeparator())
                 .toString();
 
-        map.put(FRUIT_BANANA, VALID_QUANTITY);
-        String report = createReportService.createReport(map);
+        data.put(FRUIT_BANANA, VALID_QUANTITY);
+        String report = createReportService.createReport(data);
         assertEquals("Expected: " + expected + " but was: "
                 + report, expected, report);
-        tearDown();
     }
 }

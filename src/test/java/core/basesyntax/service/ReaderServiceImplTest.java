@@ -30,7 +30,7 @@ public class ReaderServiceImplTest {
 
     @Test
     void read_emptyFile_notOk() throws IOException {
-        Path emptyFile = Files.createTempFile("empty", ".txt");
+        Path emptyFile = Files.createTempFile("empty", ".csv");
         List<String> result = readerService.read(emptyFile.toString());
         assertNotNull(result, "Result should not be null");
         assertEquals(0, result.size(), "Result should be an empty list");

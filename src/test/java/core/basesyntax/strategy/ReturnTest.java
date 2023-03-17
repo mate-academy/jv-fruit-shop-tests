@@ -24,7 +24,7 @@ public class ReturnTest {
     }
 
     @Test
-    public void handleFruitOperation_return_whenFruitExists() {
+    public void handleFruitOperation_return_whenFruitExists_ok() {
         Storage.fruits.put(FRUIT, QUANTITY);
         operationHandler.handleFruitOperation(FRUIT, QUANTITY);
         assertEquals(Integer.valueOf(QUANTITY + QUANTITY), Storage.get(FRUIT));

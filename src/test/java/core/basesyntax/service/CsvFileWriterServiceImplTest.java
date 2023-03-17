@@ -20,7 +20,7 @@ public class CsvFileWriterServiceImplTest {
     private CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
 
     @Test
-    public void write_writeToFile_Ok() {
+    public void writeToFile_Ok() {
         writerService.write(REPORT, OUTPUT_TEST_FILE_PATH);
         File file = new File(OUTPUT_TEST_FILE_PATH);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -34,7 +34,7 @@ public class CsvFileWriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_writeToFile_not_Ok() {
+    public void writeToFile_not_Ok() {
         writerService.write(REPORT, INVALID_OUTPUT_FILE_PATH);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for invalid path, but it wasn't");

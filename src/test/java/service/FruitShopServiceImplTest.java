@@ -38,6 +38,7 @@ public class FruitShopServiceImplTest {
     private static final File INCORRECT_DATA_FILE =
             new File(PATH + File.separator + "incorrectInputData.csv");
     private static FruitShopService fruitShopService;
+    private static FruitShopServiceImpl fruitShopServiceImpl;
     private static TransactionStrategy transactionStrategy;
     private static FileReaderService fileReaderService;
     private static FileWriterService fileWriterService;
@@ -59,50 +60,75 @@ public class FruitShopServiceImplTest {
         fruitShopService = new FruitShopServiceImpl(transactionStrategy,
                                                     fileReaderService,
                                                     fileWriterService);
+        fruitShopServiceImpl = new FruitShopServiceImpl(transactionStrategy,
+                                                        fileReaderService,
+                                                        fileWriterService);
     }
 
     @Test
-    public void accessors_Ok() {
-        FruitShopServiceImpl testFruitShopService =
-                new FruitShopServiceImpl(null, null, null);
+    public void getTransactionStrategy_shouldReturnValue_Ok() {
+        TransactionStrategy expectedTransactionStrategy = transactionStrategy;
+        TransactionStrategy actualTransactionStrategy =
+                                fruitShopServiceImpl.getTransactionStrategy();
+        Assert.assertEquals("Method getTransactionStrategy should return "
+                        + "the value of field TransactionStrategy.",
+                        expectedTransactionStrategy, actualTransactionStrategy);
+    }
+
+    @Test
+    public void setTransactionStrategy_null_Ok() {
+        fruitShopServiceImpl.setTransactionStrategy(null);
         TransactionStrategy expectedTransactionStrategy = null;
         TransactionStrategy actualTransactionStrategy =
-                                testFruitShopService.getTransactionStrategy();
-        Assert.assertEquals("Method getTransactionStrategy should return null.",
-                expectedTransactionStrategy, actualTransactionStrategy);
+                                fruitShopServiceImpl.getTransactionStrategy();
+        Assert.assertEquals("Method setTransactionStrategy must "
+                        + "replace value of field transactionStrategy.",
+                        expectedTransactionStrategy, actualTransactionStrategy);
+        fruitShopServiceImpl.setTransactionStrategy(transactionStrategy);
+    }
 
+    @Test
+    public void getFileReaderService_shouldReturnValue_Ok() {
+        FileReaderService expectedFileReaderService = fileReaderService;
+        FileReaderService actualFileReaderService =
+                fruitShopServiceImpl.getFileReaderService();
+        Assert.assertEquals("Method getFileReaderService should return"
+                        + "the value of field fileReaderService.",
+                        expectedFileReaderService, actualFileReaderService);
+    }
+
+    @Test
+    public void setFileReaderService_null_Ok() {
+        fruitShopServiceImpl.setFileReaderService(null);
         FileReaderService expectedFileReaderService = null;
         FileReaderService actualFileReaderService =
-                                testFruitShopService.getFileReaderService();
-        Assert.assertEquals("Method getFileReaderService should return null",
-                expectedFileReaderService, actualFileReaderService);
+                fruitShopServiceImpl.getFileReaderService();
+        Assert.assertEquals("Method setFileReaderService must "
+                        + "replace value of field fileReaderService.",
+                        expectedFileReaderService, actualFileReaderService);
+        fruitShopServiceImpl.setFileReaderService(fileReaderService);
+    }
 
+    @Test
+    public void getFileWriterService_shouldReturnValue_Ok() {
+        FileWriterService expectedFileWriterService = fileWriterService;
+        FileWriterService actualFileWriterService =
+                fruitShopServiceImpl.getFileWriterService();
+        Assert.assertEquals("Method getFileWriterService should return "
+                        + "the value of field fileWriterService.",
+                        expectedFileWriterService, actualFileWriterService);
+    }
+
+    @Test
+    public void setFileWriterService_null_Ok() {
+        fruitShopServiceImpl.setFileWriterService(null);
         FileWriterService expectedFileWriterService = null;
-        FileWriterService actuaslFileWriterService =
-                                testFruitShopService.getFileWriterService();
-        Assert.assertEquals("Method getFileWriterService should return null",
-                expectedFileWriterService, actuaslFileWriterService);
-
-        expectedTransactionStrategy = transactionStrategy;
-        testFruitShopService.setTransactionStrategy(expectedTransactionStrategy);
-        actualTransactionStrategy = testFruitShopService.getTransactionStrategy();
-        Assert.assertEquals("Method getTransactionStrategy should return"
-                + "the value of field TransactionStrategy",
-                expectedTransactionStrategy, actualTransactionStrategy);
-
-        expectedFileReaderService = fileReaderService;
-        testFruitShopService.setFileReaderService(expectedFileReaderService);
-        actualFileReaderService = testFruitShopService.getFileReaderService();
-        Assert.assertEquals("Method getFileReaderService should return"
-                + "the value of field FileReaderService",
-                expectedFileReaderService, actualFileReaderService);
-
-        expectedFileWriterService = fileWriterService;
-        testFruitShopService.setFileWriterService(expectedFileWriterService);
-        actuaslFileWriterService = testFruitShopService.getFileWriterService();
-        Assert.assertEquals("Method getFileWriterService should return"
-                + "the value of field FileWriterService",
-                expectedFileWriterService, actuaslFileWriterService);
+        FileWriterService actualFileWriterService =
+                fruitShopServiceImpl.getFileWriterService();
+        Assert.assertEquals("Method setFileWriterService must "
+                        + "replace value of field fileWriterService.",
+                        expectedFileWriterService, actualFileWriterService);
+        fruitShopServiceImpl.setFileWriterService(fileWriterService);
     }
 
     @Test

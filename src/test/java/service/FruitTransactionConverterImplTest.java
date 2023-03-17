@@ -33,7 +33,7 @@ public class FruitTransactionConverterImplTest {
     }
 
     @Test
-    public void convertToFruitTransaction_incorrectOperationSign_NotOk() {
+    public void convertToFruitTransaction_incorrectOperationCode_NotOk() {
         List<String> strings = List.of("d,banana,200", "a,plum,30", "k,cherry,19",
                                         "c,melon,325", "f,pineapple,68", "o,coconut,0");
         try {
@@ -46,7 +46,7 @@ public class FruitTransactionConverterImplTest {
     }
 
     @Test
-    public void convertToFruitTransaction_incorrectData_NotOk() {
+    public void convertToFruitTransaction_otherStringsInsteadOfTransactions_NotOk() {
         List<String> strings = List.of("error", "Windows XP", "");
         List<FruitTransaction> fruitTransactions =
                 fruitTransactionConverter.convertToFruitTransaction(strings);

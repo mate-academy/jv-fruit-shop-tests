@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,15 +22,6 @@ public class CsvFileWriterServiceTest {
     @BeforeClass
     public static void beforeClass() {
         fileWriterService = new CsvFileWriterService();
-    }
-
-    @Before
-    public void setUp() {
-        try {
-            TEST_FILE.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create directory with resources." + e);
-        }
     }
 
     @After

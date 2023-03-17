@@ -21,9 +21,9 @@ public class WriterServiceTest {
     private static final String FALSE_PATH = "";
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    public static final String TITLE = "fruit,quantity";
-    public static final String FIRST_LINE = "banana,20";
-    public static final String SECOND_LINE = "apple,90";
+    private static final String TITLE = "fruit,quantity";
+    private static final String FIRST_LINE = "banana,20";
+    private static final String SECOND_LINE = "apple,90";
     private static WriterService writerService;
     private static List<String> expected;
     private static StringBuilder report;

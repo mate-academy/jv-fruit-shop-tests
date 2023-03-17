@@ -40,4 +40,10 @@ public class ReaderServiceImplTest {
         assertThrows(InvalidPathException.class,
                 () -> readerService.getListOfDataFromFile(WRONG_PATH));
     }
+
+    @Test
+    void read_file_notOk() {
+        assertThrows(InvalidPathException.class,
+                () -> readerService.getListOfDataFromFile(WRONG_PATH));
+    }
 }

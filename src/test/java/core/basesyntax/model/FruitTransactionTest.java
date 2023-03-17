@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -67,5 +68,63 @@ public class FruitTransactionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.getOperation(INVALID_OPERATION_CODE);
         });
+    }
+    @Test
+    void equals_ok() {
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        FruitTransaction fruitTransaction2 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        assertEquals(fruitTransaction1, fruitTransaction2);
+    }
+
+    @Test
+    void equals_notok() {
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        FruitTransaction fruitTransaction2 =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, QUANTITY1);
+        assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+    }
+
+    @Test
+    void equals_fruit_notOk() {
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        FruitTransaction fruitTransaction2 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, QUANTITY1);
+        assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+    }
+
+    @Test
+    void equals_quantity_notOk() {
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        FruitTransaction fruitTransaction2 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY2);
+        assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+    }
+
+    @Test
+    void hashCode_sameObject_ok() {
+        assertEquals(fruitTransaction.hashCode(), fruitTransaction.hashCode());
+    }
+
+    @Test
+    void hashCode_differentObjects_Ok() {
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        FruitTransaction fruitTransaction2 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        assertEquals(fruitTransaction1.hashCode(), fruitTransaction2.hashCode());
+    }
+
+    @Test
+    void hashCode_differentObjects_notOk() {
+        FruitTransaction fruitTransaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
+        FruitTransaction fruitTransaction2 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, QUANTITY2);
+        assertNotEquals(fruitTransaction1.hashCode(), fruitTransaction2.hashCode());
     }
 }

@@ -22,14 +22,14 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnTransaction_Ok() {
+    public void returnOperation_handle_Ok() {
         returnOperation.handle(transaction);
         int actual = Storage.fruits.get(FRUIT);
         assertEquals(EXPECTED, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void notFoundInStorage_NotOk() {
+    public void returnOperation_notFoundInStorage_NotOk() {
         returnOperation.handle(null);
     }
 

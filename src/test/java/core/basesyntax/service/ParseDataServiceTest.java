@@ -10,46 +10,57 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParseDataServiceTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final String TITLE = "type,fruit,quantity";
+    private static final String FIRST_LINE = "b,banana,200";
+    private static final String SECOND_LINE = "p,apple,100";
+    private static final String THIRD_LINE = "s,banana,50";
+    private static final String FOUR_LINE = "r,apple,100";
+    private static final String NOT_LIQUID_LINE = "o,banana,200";
     private static ParseDataService parseDataService;
+    private static List<FruitTransaction> expected;
+    private static List<String> input;
 
     @BeforeClass
     public static void beforeAll() {
         parseDataService = new ParseDataServiceImpl();
+        expected = new ArrayList<>();
+        expected.add(creteTransaction(FruitTransaction.Operation.BALANCE, BANANA, 200));
+        expected.add(creteTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 100));
+        expected.add(creteTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
+        expected.add(creteTransaction(FruitTransaction.Operation.RETURN, APPLE, 100));
+        input = new ArrayList<>();
     }
 
     @Test
-    public void parseData_Ok() {
-        List<FruitTransaction> expected = new ArrayList<>();
-        expected.add(creteTransaction(FruitTransaction.Operation.BALANCE, "banana", 200));
-        expected.add(creteTransaction(FruitTransaction.Operation.PURCHASE, "apple", 100));
-        expected.add(creteTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
-        expected.add(creteTransaction(FruitTransaction.Operation.RETURN, "apple", 100));
-        List<String> input = new ArrayList<>();
-        input.add("type,fruit,quantity");
-        input.add("b,banana,200");
-        input.add("p,apple,100");
-        input.add("s,banana,50");
-        input.add("r,apple,100");
+    public void parseDataService_parseData_Ok() {
+        input.clear();
+        input.add(TITLE);
+        input.add(FIRST_LINE);
+        input.add(SECOND_LINE);
+        input.add(THIRD_LINE);
+        input.add(FOUR_LINE);
         List<FruitTransaction> actual = parseDataService.parseData(input);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void inputNullData_NotOk() {
-        List<FruitTransaction> list = parseDataService.parseData(null);
+    public void parseDataService_inputNullData_NotOk() {
+        parseDataService.parseData(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void inputInvalidData_NotOk() {
-        List<String> input = new ArrayList<>();
-        input.add("type,fruit,quantity");
-        input.add("o,banana,200");
-        List<FruitTransaction> list = parseDataService.parseData(input);
+    public void parseDataService_inputInvalidData_NotOk() {
+        input.clear();
+        input.add(TITLE);
+        input.add(NOT_LIQUID_LINE);
+        parseDataService.parseData(input);
     }
 
-    private FruitTransaction creteTransaction(FruitTransaction.Operation operation,
-                                              String fruitName,
-                                              int quantity) {
+    private static FruitTransaction creteTransaction(FruitTransaction.Operation operation,
+                                                     String fruitName,
+                                                     int quantity) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(operation);
         fruitTransaction.setFruit(fruitName);

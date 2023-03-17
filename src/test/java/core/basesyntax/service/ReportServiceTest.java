@@ -9,24 +9,36 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceTest {
+    private static ReportService reportService;
     private static StringBuilder expected;
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final String TITLE = "fruit,quantity";
+    private static final String FIRST_LINE = "banana,20";
+    private static final String SECOND_LINE = "apple,90";
 
     @BeforeClass
     public static void beforeAll() {
-        Storage.fruits.clear();
-        Storage.fruits.put("banana", 20);
-        Storage.fruits.put("apple", 90);
+        reportService = new ReportServiceImpl();
         expected = new StringBuilder();
-        expected.append("fruit,quantity");
-        expected.append(System.lineSeparator()).append("banana,20");
-        expected.append(System.lineSeparator()).append("apple,90");
+        expected.append(TITLE);
+        expected.append(System.lineSeparator()).append(FIRST_LINE);
+        expected.append(System.lineSeparator()).append(SECOND_LINE);
     }
 
     @Test
-    public void createReport_Ok() {
-        ReportService reportService = new ReportServiceImpl();
+    public void reportService_createReport_Ok() {
+        Storage.fruits.clear();
+        Storage.fruits.put(BANANA, 20);
+        Storage.fruits.put(APPLE, 90);
         String actual = reportService.createReport();
         assertEquals(expected.toString(), actual);
+    }
+
+    @Test
+    public void reportService_createWithEmptyStorage_Ok() {
+        Storage.fruits.clear();
+        reportService.createReport();
     }
 
     @AfterClass

@@ -21,8 +21,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionHandlerTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
     private static OperationStrategy operationStrategy;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static TransactionHandler transactionHandler;
     private static List<FruitTransaction> input;
 
     @BeforeClass
@@ -35,28 +38,27 @@ public class TransactionHandlerTest {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        input.clear();
+        input.add(creteTransaction(FruitTransaction.Operation.BALANCE, BANANA, 200));
+        input.add(creteTransaction(FruitTransaction.Operation.RETURN, APPLE, 100));
+        input.add(creteTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 50));
+        input.add(creteTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
+        transactionHandler = new TransactionHandlerImpl(operationStrategy);
     }
 
     @Test
-    public void transactionParse_Ok() {
-        input.clear();
-        input.add(creteTransaction(FruitTransaction.Operation.BALANCE, "banana", 200));
-        input.add(creteTransaction(FruitTransaction.Operation.RETURN, "apple", 100));
-        input.add(creteTransaction(FruitTransaction.Operation.PURCHASE, "apple", 50));
-        input.add(creteTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(operationStrategy);
+    public void transactionHandler_parse_Ok() {
         transactionHandler.parse(input);
         int expectedValue = 250;
-        int actualValue = Storage.fruits.get("banana");
+        int actualValue = Storage.fruits.get(BANANA);
         assertEquals(expectedValue, actualValue);
         expectedValue = 50;
-        actualValue = Storage.fruits.get("apple");
+        actualValue = Storage.fruits.get(APPLE);
         assertEquals(expectedValue, actualValue);
     }
 
     @Test(expected = RuntimeException.class)
-    public void notFoundFruit_NotOk() {
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(operationStrategy);
+    public void transactionHandler_notFoundFruit_NotOk() {
         transactionHandler.parse(null);
 
     }

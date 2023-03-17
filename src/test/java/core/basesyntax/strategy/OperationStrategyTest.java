@@ -26,7 +26,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    public void getOperation_Ok() {
+    public void operationStrategy_getOperation_Ok() {
         OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.BALANCE);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);

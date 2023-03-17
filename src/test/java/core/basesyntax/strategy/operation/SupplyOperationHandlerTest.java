@@ -22,14 +22,14 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyTransaction_Ok() {
+    public void supplyOperation_handle_Ok() {
         supplyOperation.handle(transaction);
         int actual = Storage.fruits.get(FRUIT);
         assertEquals(EXPECTED, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void notFoundInStorage_NotOk() {
+    public void supplyOperation_notFoundInStorage_NotOk() {
         supplyOperation.handle(null);
     }
 

@@ -22,14 +22,14 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceTransaction_Ok() {
+    public void balanceOperation_handle_Ok() {
         balanceOperation.handle(transaction);
         int actual = Storage.fruits.get(FRUIT);
         assertEquals(EXPECTED, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void notFoundInStorage_NotOk() {
+    public void balanceOperation_notFoundInStorage_NotOk() {
         balanceOperation.handle(null);
     }
 

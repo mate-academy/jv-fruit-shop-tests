@@ -14,6 +14,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceTest {
+    private static final String TRUE_PATH = "src" + File.separator
+                                            + "test" + File.separator
+                                            + "resources" + File.separator
+                                            + "report.csv";
+    private static final String FALSE_PATH = "";
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    public static final String TITLE = "fruit,quantity";
+    public static final String FIRST_LINE = "banana,20";
+    public static final String SECOND_LINE = "apple,90";
     private static WriterService writerService;
     private static List<String> expected;
     private static StringBuilder report;
@@ -21,27 +31,22 @@ public class WriterServiceTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         Storage.fruits.clear();
-        Storage.fruits.put("banana", 20);
-        Storage.fruits.put("apple", 90);
+        Storage.fruits.put(BANANA, 20);
+        Storage.fruits.put(APPLE, 90);
         expected = new ArrayList<>();
-        expected.add("fruit,quantity");
-        expected.add("banana,20");
-        expected.add("apple,90");
-        report = new StringBuilder("fruit,quantity");
-        report.append(System.lineSeparator()).append("banana,20");
-        report.append(System.lineSeparator()).append("apple,90");
+        expected.add(TITLE);
+        expected.add(FIRST_LINE);
+        expected.add(SECOND_LINE);
+        report = new StringBuilder(TITLE);
+        report.append(System.lineSeparator()).append(FIRST_LINE);
+        report.append(System.lineSeparator()).append(SECOND_LINE);
         writerService = new WriterServiceImpl();
     }
 
     @Test
-    public void writeToFile_Ok() {
-        String trueFilePath = "src" + File.separator
-                             + "test" + File.separator
-                             + "resources" + File.separator
-                             + "report.csv";
-        System.out.println(trueFilePath);
-        writerService.writeToFile(trueFilePath, report.toString());
-        File file = new File(trueFilePath);
+    public void writerService_writeToFile_Ok() {
+        writerService.writeToFile(TRUE_PATH, report.toString());
+        File file = new File(TRUE_PATH);
         List<String> actual;
         try {
             actual = Files.readAllLines(file.toPath());
@@ -52,13 +57,12 @@ public class WriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptyPath_NotOk() {
-        String emptyFilePath = "";
-        writerService.writeToFile(emptyFilePath, report.toString());
+    public void writerService_emptyPath_NotOk() {
+        writerService.writeToFile(FALSE_PATH, report.toString());
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.fruits.clear();
     }
 }

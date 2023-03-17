@@ -22,7 +22,7 @@ public class BuyOperationHandlerTest {
     }
 
     @Test
-    public void buyTransaction_Ok() {
+    public void purchaseOperation_handle_Ok() {
         Storage.fruits.put("banana", 40);
         buyOperation.handle(transaction);
         int actual = Storage.fruits.get(FRUIT);
@@ -30,12 +30,12 @@ public class BuyOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void notEnoughInStorage_NotOk() {
+    public void purchaseOperation_notEnoughInStorage_NotOk() {
         buyOperation.handle(transaction);
     }
 
     @Test(expected = RuntimeException.class)
-    public void notFoundInStorage_NotOk() {
+    public void purchaseOperation_notFoundInStorage_NotOk() {
         buyOperation.handle(null);
     }
 

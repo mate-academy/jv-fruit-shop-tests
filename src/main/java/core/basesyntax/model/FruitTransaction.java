@@ -1,13 +1,25 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private final String operation;
-    private final String fruit;
-    private final int value;
+    private String operation;
+    private String fruit;
+    private Integer value;
 
-    public FruitTransaction(String operation, String fruit, int value) {
+    public FruitTransaction(String operation, String fruit, Integer value) {
         this.operation = operation;
         this.fruit = fruit;
+        this.value = value;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public void setFruit(String fruit) {
+        this.fruit = fruit;
+    }
+
+    public void setValue(Integer value) {
         this.value = value;
     }
 

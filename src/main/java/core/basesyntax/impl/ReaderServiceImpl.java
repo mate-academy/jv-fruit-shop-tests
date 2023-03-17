@@ -1,7 +1,6 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.service.ReaderService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,6 +22,9 @@ public class ReaderServiceImpl implements ReaderService {
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read information from file " + fileName, e);
+        }
+        if (informationFromFile.isEmpty()) {
+            throw new RuntimeException("File are empty " + fileName);
         }
         return informationFromFile.stream()
                 .map(e -> e.split(SPLIT))

@@ -15,7 +15,6 @@ public class Options {
     }
 
     public void initialHandler() {
-
         handlerMap.put(BALANCE, new BalanceFruitHandler());
         handlerMap.put(SUPPLY, new SupplyFruitHandler());
         handlerMap.put(PURCHASE, new PurchaseFruitHandler());

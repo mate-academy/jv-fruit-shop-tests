@@ -1,20 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.FruitShopServiceImpl;
-import core.basesyntax.impl.ReaderServiceImpl;
-import core.basesyntax.impl.ReportServiceImpl;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransactionParserService;
-import core.basesyntax.service.TransactionParserServiceImpl;
-import core.basesyntax.service.WriteService;
+import core.basesyntax.db.Storage;
 import core.basesyntax.impl.FruitShopServiceImpl;
 import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.impl.WriteServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionParserService;
+import core.basesyntax.service.TransactionParserServiceImpl;
+import core.basesyntax.service.WriteService;
 import core.basesyntax.strategy.StrategyImpl;
-
 import java.util.List;
 
 public class Main {
@@ -35,7 +32,7 @@ public class Main {
         List<String[]> infoFromFIle = readerService.read(NAME_FILE_FROM);
         List<FruitTransaction> report = transactionParserService.create(infoFromFIle);
         evaluateResultImpl.realizePattern(report);
-        String result = reportService.createReport();
+        String result = reportService.createReport(Storage.storage);
         writeService.writeToFile(result, NAME_FILE_TO);
     }
 }

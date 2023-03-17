@@ -5,10 +5,16 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.service.ReadService;
 import java.util.List;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReadServiceImplTest {
-    private static final ReadService readService = new ReadServiceImpl();
+    private static ReadService readService;
+
+    @Before
+    public void beforeEachTest() {
+        readService = new ReadServiceImpl();
+    }
 
     @Test(expected = RuntimeException.class)
     public void read_notExist_notOk() {
@@ -23,7 +29,9 @@ public class ReadServiceImplTest {
                 "b,apple,100",
                 "s,orange,75",
                 "s,banana,100");
-        assertEquals(expected, readService.readFromFile("src/test/java/resources/actual.csv"));
+        List<String> actual = readService.readFromFile("src/test/java/resources/actual.csv");
+
+        assertEquals(expected, actual);
     }
 
     @Test

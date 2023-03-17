@@ -5,21 +5,24 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.ServiceException;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ProcessService;
+import java.util.Collections;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ProcessServiceImplTest {
-    private ProcessServiceImpl processService = new ProcessServiceImpl();
+    private ProcessService processService;
 
     @Before
     public void beforeEachTest() {
         Storage.fruitStorage.clear();
+        processService = new ProcessServiceImpl();
     }
 
     @Test
     public void process_return_Ok() {
-        List<String> actual = List.of("type,fruit,quantity",
+        List<String> input = List.of("type,fruit,quantity",
                 "b,orange,44",
                 "b,banana,30",
                 "r,apple,60",
@@ -31,45 +34,47 @@ public class ProcessServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 60),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "orange", 75));
-        assertEquals(expected, processService.getTransactions(actual));
+        List<FruitTransaction> actual = processService.getTransactions(input);
+
+        assertEquals(expected, actual);
     }
 
     @Test(expected = ServiceException.class)
     public void process_addNegativeBalance_notOk() {
-        List<String> actualBalance = List.of("type,fruit,quantity",
+        List<String> inputBalance = List.of("type,fruit,quantity",
                 "b,orange,20",
                 "b,orange,-44");
-        processService.getTransactions(actualBalance);
+        processService.getTransactions(inputBalance);
     }
 
     @Test(expected = ServiceException.class)
     public void process_addNegativeSupply_notOk() {
-        List<String> actualSupply = List.of("type,fruit,quantity",
+        List<String> inputSupply = List.of("type,fruit,quantity",
                 "b,orange,20",
                 "s,orange,-44");
-        processService.getTransactions(actualSupply);
+        processService.getTransactions(inputSupply);
     }
 
     @Test(expected = ServiceException.class)
     public void process_addNegativePurchase_notOk() {
-        List<String> actualPurchase = List.of("type,fruit,quantity",
+        List<String> inputPurchase = List.of("type,fruit,quantity",
                 "b,orange,20",
                 "p,orange,-44");
-        processService.getTransactions(actualPurchase);
+        processService.getTransactions(inputPurchase);
     }
 
     @Test(expected = ServiceException.class)
     public void process_addNegativeReturn_notOk() {
-        List<String> actualReturn = List.of("type,fruit,quantity",
+        List<String> inputReturn = List.of("type,fruit,quantity",
                 "b,orange,20",
                 "r,orange,-44");
-        processService.getTransactions(actualReturn);
+        processService.getTransactions(inputReturn);
     }
 
     @Test(expected = ServiceException.class)
     public void process_addEmpty_notOk() {
-        List<String> actual = List.of();
-        processService.getTransactions(actual);
+        List<String> input = Collections.emptyList();
+        processService.getTransactions(input);
     }
 
     @Test (expected = ServiceException.class)

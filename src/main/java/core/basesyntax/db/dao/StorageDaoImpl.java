@@ -13,4 +13,3 @@ public class StorageDaoImpl implements StorageDao {
         return Storage.fruitStorage.get(type);
     }
 }
-

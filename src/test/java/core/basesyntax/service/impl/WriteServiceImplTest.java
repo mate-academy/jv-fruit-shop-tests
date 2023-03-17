@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.ReadService;
 import core.basesyntax.service.WriteService;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,11 +15,11 @@ import org.junit.Test;
 
 public class WriteServiceImplTest {
     private WriteService writeService;
-    private ReadServiceImpl readService;
+    private ReadService readService;
     private Map<String, Integer> testMap;
 
     @Before
-    public void setUp() {
+    public void beforeEachTest() {
         writeService = new WriteServiceImpl();
         readService = new ReadServiceImpl();
         testMap = new HashMap<>();
@@ -33,7 +34,9 @@ public class WriteServiceImplTest {
         List<String> expected = List.of("fruit,quantity",
                 "banana,250",
                 "apple,61");
-        assertEquals(expected, readService.readFromFile("src/test/java/resources/testToFile.csv"));
+        List<String> actual = readService.readFromFile("src/test/java/resources/testToFile.csv");
+
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

@@ -2,18 +2,18 @@ package core.basesyntax.strategy.activities;
 
 import core.basesyntax.db.dao.StorageDao;
 import core.basesyntax.db.dao.StorageDaoImpl;
-import core.basesyntax.exception.ServiceException;
+import core.basesyntax.exception.StrategyException;
 
 public class PurchaseActivitiesHandler implements ActivitiesHandler {
     private StorageDao storageDao = new StorageDaoImpl();
 
     @Override
     public void changeFruit(String fruitType, Integer amount) {
-        if (storageDao.get(fruitType) == null) {
-            throw new ServiceException("Can't find fruit");
+        if (fruitType == null || amount == null || amount < 0) {
+            throw new StrategyException("Invalid input");
         }
-        if (amount < 0) {
-            throw new ServiceException("Can't accept negative numbers " + amount);
+        if (storageDao.get(fruitType) == null || storageDao.get(fruitType) < amount) {
+            throw new StrategyException("Can't find fruit");
         }
         int different = storageDao.get(fruitType) - amount;
         storageDao.add(fruitType, different);

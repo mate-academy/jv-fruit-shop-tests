@@ -86,7 +86,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, QUANTITY1);
-        Assertions.assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+        Assertions.assertFalse(fruitTransaction1.equals(fruitTransaction2));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, QUANTITY1);
-        Assertions.assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+        Assertions.assertFalse(fruitTransaction1.equals(fruitTransaction2));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY2);
-        Assertions.assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+        assertNotEquals(fruitTransaction1, fruitTransaction2);
     }
 
     @Test

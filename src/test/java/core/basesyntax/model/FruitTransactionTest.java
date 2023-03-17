@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,41 +26,42 @@ public class FruitTransactionTest {
     @Test
     void setOperation_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        assertEquals(FruitTransaction.Operation.SUPPLY, fruitTransaction.getOperation());
+        Assertions.assertEquals(FruitTransaction.Operation.SUPPLY, fruitTransaction.getOperation());
     }
 
     @Test
     void setFruit_ok() {
         fruitTransaction.setFruit(BANANA);
-        assertEquals(BANANA, fruitTransaction.getFruit());
+        Assertions.assertEquals(BANANA, fruitTransaction.getFruit());
     }
 
     @Test
     void setQuantity_ok() {
         fruitTransaction.setQuantity(QUANTITY2);
-        assertEquals(QUANTITY2, fruitTransaction.getQuantity());
+        Assertions.assertEquals(QUANTITY2, fruitTransaction.getQuantity());
     }
 
     @Test
     void getOperation_ok() {
-        assertEquals(FruitTransaction.Operation.BALANCE, fruitTransaction.getOperation());
+        Assertions.assertEquals(FruitTransaction.Operation.BALANCE,
+                fruitTransaction.getOperation());
     }
 
     @Test
     void getFruit_ok() {
-        assertEquals(APPLE, fruitTransaction.getFruit());
+        Assertions.assertEquals(APPLE, fruitTransaction.getFruit());
     }
 
     @Test
     void getQuantity_ok() {
-        assertEquals(QUANTITY1, fruitTransaction.getQuantity());
+        Assertions.assertEquals(QUANTITY1, fruitTransaction.getQuantity());
     }
 
     @Test
     void getOperation_validCode_ok() {
         FruitTransaction.Operation operation =
                 FruitTransaction.Operation.getOperation(BALANCE_OPERATION_CODE);
-        assertEquals(FruitTransaction.Operation.BALANCE, operation);
+        Assertions.assertEquals(FruitTransaction.Operation.BALANCE, operation);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
-        assertEquals(fruitTransaction1, fruitTransaction2);
+        Assertions.assertEquals(fruitTransaction1, fruitTransaction2);
     }
 
     @Test
@@ -85,7 +86,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, QUANTITY1);
-        assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+        Assertions.assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
     }
 
     @Test
@@ -94,7 +95,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, QUANTITY1);
-        assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+        Assertions.assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
     }
 
     @Test
@@ -103,12 +104,12 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY2);
-        assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
+        Assertions.assertEquals(false, fruitTransaction1.equals(fruitTransaction2));
     }
 
     @Test
     void hashCode_sameObject_ok() {
-        assertEquals(fruitTransaction.hashCode(), fruitTransaction.hashCode());
+        Assertions.assertEquals(fruitTransaction.hashCode(), fruitTransaction.hashCode());
     }
 
     @Test
@@ -117,7 +118,7 @@ public class FruitTransactionTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
         FruitTransaction fruitTransaction2 =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY1);
-        assertEquals(fruitTransaction1.hashCode(), fruitTransaction2.hashCode());
+        Assertions.assertEquals(fruitTransaction1.hashCode(), fruitTransaction2.hashCode());
     }
 
     @Test

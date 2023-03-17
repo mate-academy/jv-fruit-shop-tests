@@ -8,14 +8,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataParcerServiceImpl implements DataParcerService {
-    private String valueSeparator;
-    private int rowTitleIndex;
+    private static final String VALUE_SEPARATOR = "\\s*,\\s*";
+    private static final int ROW_TITLE_INDEX = 1;
     private ParametrsValidatorService parametrValidator;
 
-    public DataParcerServiceImpl(String valueSeparator, int rowTitleIndex,
-                                 ParametrsValidatorService parametrValidator) {
-        this.valueSeparator = "\\s*" + valueSeparator + "\\s*";
-        this.rowTitleIndex = rowTitleIndex;
+    public DataParcerServiceImpl(ParametrsValidatorService parametrValidator) {
         this.parametrValidator = parametrValidator;
     }
 
@@ -25,10 +22,10 @@ public class DataParcerServiceImpl implements DataParcerService {
             throw new NullDataException("Can't parse data when input data is null");
         }
         return nonParcedData.stream()
-                .skip(rowTitleIndex)
+                .skip(ROW_TITLE_INDEX)
                 .filter(s -> parametrValidator.isParametrsNotNull(s))
                 .map(String::trim)
-                .map(s -> Arrays.stream(s.split(valueSeparator)).collect(Collectors.toList()))
+                .map(s -> Arrays.stream(s.split(VALUE_SEPARATOR)).collect(Collectors.toList()))
                 .filter(l -> parametrValidator.isValidParameters(l))
                 .collect(Collectors.toList());
     }

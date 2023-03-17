@@ -28,18 +28,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
+    private static ParametrsValidatorService parametrsValidator;
     private static List<String> opratorTypeCode;
     private static List<String> fruitsInStore;
     private static Map<String, OperationHandler> operationHandlerMap;
     private static final String INPUT_DATA_PATH = "src/main/resources/FruitShopInputData.csv";
     private static final String REPORT_DATA_PATH = "src/main/resources/FruitShopOutputData.csv";
-    private static final String VALUE_SEPARATOR = ",";
-    private static final String REPORT_TITLE_ROW = "fruit,quantity";
-    private static final int ROW_TITLE_INDEX = 1;
 
     public static void main(String[] args) {
         opratorTypeCode = Arrays.stream(OperationType.values())
@@ -49,14 +44,16 @@ public class Main {
         fruitsInStore = Arrays.stream(FruitsInStore.values())
                 .map(FruitsInStore::getCode)
                 .collect(Collectors.toList());
-
+        parametrsValidator = new ParametrsValidatorServiseImpl(opratorTypeCode, fruitsInStore);
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(OperationType.BALANCE.getCode(),new OperationHandlerBalance());
         operationHandlerMap.put(OperationType.SUPPLY.getCode(),new OperationHandlersSupply());
         operationHandlerMap.put(OperationType.RETURN.getCode(),new OperationHandlerReturn());
         operationHandlerMap.put(OperationType.PURCHASE.getCode(),new OperarionHandlerPurchase());
 
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(
+                operationHandlerMap,
+                parametrsValidator);
 
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String> inputData = readerService.readFromFile(Path.of(INPUT_DATA_PATH));
@@ -64,18 +61,14 @@ public class Main {
         ParametrsValidatorService parametrsValidator =
                 new ParametrsValidatorServiseImpl(opratorTypeCode,fruitsInStore);
 
-        DataParcerService dataParcerService = new DataParcerServiceImpl(
-                VALUE_SEPARATOR,
-                ROW_TITLE_INDEX,
-                parametrsValidator);
+        DataParcerService dataParcerService = new DataParcerServiceImpl(parametrsValidator);
         List<List<String>> parcedData = dataParcerService.parceDataFromCsv(inputData);
 
         DataProcessingService dataProcessingService =
                 new DataProcessingServiceImpl(operationStrategy, parametrsValidator);
         Map<String, Integer> processedData = dataProcessingService.processData(parcedData);
 
-        ShopReportService reportService =
-                new ShopReportServiceImpl(VALUE_SEPARATOR,REPORT_TITLE_ROW);
+        ShopReportService reportService = new ShopReportServiceImpl();
         List<String> report = reportService.generateReport(processedData);
 
         CsvFileWriterService writerService = new CsvFileWriterServiceImpl();

@@ -7,25 +7,18 @@ import java.util.List;
 import java.util.Map;
 
 public class ShopReportServiceImpl implements ShopReportService {
-    private static final String DEFAULT_TITLE_ROW = "fruit,quantity";
-    private static final String DEFAULT_VALUE_SEPARATOR = ",";
-    private String valueSeparator;
-    private String titleRow;
-
-    public ShopReportServiceImpl(String valueSeparator, String titleRow) {
-        this.valueSeparator = valueSeparator == null ? DEFAULT_VALUE_SEPARATOR : valueSeparator;
-        this.titleRow = titleRow == null ? DEFAULT_TITLE_ROW : titleRow;
-    }
+    private static final String VALUE_SEPARATOR = ",";
+    private static final String REPORT_TITLE_ROW = "fruit,quantity";
 
     @Override
     public List<String> generateReport(Map<String, Integer> processedData) {
         List<String> report = new ArrayList<>();
-        report.add(titleRow);
+        report.add(REPORT_TITLE_ROW);
         if (processedData == null) {
             throw new NullDataException("Can't generate report from null input data.");
         }
         processedData.forEach((key, value) -> {
-            report.add(key + valueSeparator + value);
+            report.add(key + VALUE_SEPARATOR + value);
         });
         return report;
     }

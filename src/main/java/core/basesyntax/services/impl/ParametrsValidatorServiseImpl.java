@@ -38,7 +38,8 @@ public class ParametrsValidatorServiseImpl implements ParametrsValidatorService 
         return true;
     }
 
-    private boolean isOperationValid(String operation) {
+    @Override
+    public boolean isOperationValid(String operation) {
         if (!opratorTypeCode.contains(operation)) {
             throw new InvalidParametersException("Operation can't be: " + operation);
         }

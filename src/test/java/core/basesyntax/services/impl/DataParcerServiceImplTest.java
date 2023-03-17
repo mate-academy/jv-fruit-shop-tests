@@ -22,8 +22,6 @@ public class DataParcerServiceImplTest {
     private static DataParcerService parcerService;
     private static List<String> validData;
     private static List<String> invalidData;
-    private static String valueSeparator;
-    private static int rowTitleIndex;
     private static List<List<String>> expectedData;
     private static List<String> opratorTypeCode;
     private static List<String> fruitsInStore;
@@ -31,8 +29,6 @@ public class DataParcerServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() {
-        valueSeparator = ",";
-        rowTitleIndex = 1;
         opratorTypeCode = Arrays.stream(OperationType.values())
                 .map(OperationType::getCode)
                 .collect(Collectors.toList());
@@ -48,9 +44,7 @@ public class DataParcerServiceImplTest {
 
     @Before
     public void setUp() {
-        parcerService = new DataParcerServiceImpl(valueSeparator,
-                rowTitleIndex,
-                parametrsValidator);
+        parcerService = new DataParcerServiceImpl(parametrsValidator);
         invalidData = new ArrayList<>(List.of(ROW_TITLE,
                 "s,apple,20   ",
                 "  b  ,  banana  ,   100",
@@ -64,9 +58,6 @@ public class DataParcerServiceImplTest {
 
     @Test
     public void parceDataFromCsv_invalidData_ok() {
-        assertEquals(expectedData, parcerService.parceDataFromCsv(invalidData));
-        parcerService = new DataParcerServiceImpl("-", 0, parametrsValidator);
-        invalidData = List.of("s-apple-20", " b - banana  -  100  ", "p -   apple - 800   ");
         assertEquals(expectedData, parcerService.parceDataFromCsv(invalidData));
     }
 

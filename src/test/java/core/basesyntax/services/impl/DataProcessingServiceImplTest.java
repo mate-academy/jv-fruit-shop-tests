@@ -50,7 +50,9 @@ public class DataProcessingServiceImplTest {
         operationHandlerMap.put(OperationType.SUPPLY.getCode(), new OperationHandlersSupply());
         operationHandlerMap.put(OperationType.RETURN.getCode(), new OperationHandlerReturn());
         operationHandlerMap.put(OperationType.PURCHASE.getCode(), new OperarionHandlerPurchase());
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        operationStrategy = new OperationStrategyImpl(
+                operationHandlerMap,
+                parametrsValidator);
         validData = List.of(List.of("b", "banana", "20"),
                 List.of("b", "apple", "100"),
                 List.of("s", "banana", "100"),

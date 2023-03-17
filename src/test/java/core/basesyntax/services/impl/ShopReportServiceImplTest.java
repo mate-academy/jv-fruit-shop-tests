@@ -27,7 +27,7 @@ public class ShopReportServiceImplTest {
 
     @Before
     public void setUp() {
-        reportService = new ShopReportServiceImpl(valueSeparator, titleRow);
+        reportService = new ShopReportServiceImpl();
     }
 
     @Test

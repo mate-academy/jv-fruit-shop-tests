@@ -1,22 +1,21 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class TransactionParserServiceImplTest {
-    TransactionParserService parser = new TransactionParserServiceImpl();
-    FruitTransaction fruitTransaction = new FruitTransaction();
+    private final TransactionParserService parser = new TransactionParserServiceImpl();
 
     @Test(expected = RuntimeException.class)
-    public void parse_InputNull_notOk() {
+    public void parse_inputNull_notOk() {
         parser.saveToStorage(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void parse_WrongDataFormatLess_notOk() {
+    public void parse_wrongDataFormatLess_notOk() {
         parser.saveToStorage("abra codabra");
     }
 
@@ -26,7 +25,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test
-    public void parse_ValidData_ok() {
+    public void parse_validData_ok() {
         FruitTransaction actual = parser.saveToStorage("b,apricot,1000");
         String code = actual.getOperation().getCode();
         String fruit = actual.getFruit();

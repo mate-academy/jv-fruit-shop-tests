@@ -1,23 +1,35 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class ReportServiceImplTest {
-    ReportService reportService = new ReportServiceImpl();
+    private ReportService reportService;
+
+    @Before
+    public void setUp() {
+        reportService = new ReportServiceImpl();
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
+    }
 
     @Test
-    public void report_EmptyDataExpectTitleRow_ok() {
+    public void report_emptyDataExpectTitleRow_ok() {
         String expected = "fruit,quantity";
         String actual = reportService.newReport();
         assertEquals(actual,expected);
     }
 
     @Test
-    public void report_PresentData_ok() {
+    public void report_presentData_ok() {
         Storage.storage.put("banana", 152);
         Storage.storage.put("apple", 90);
         String expected = "fruit,quantity" + System.lineSeparator()

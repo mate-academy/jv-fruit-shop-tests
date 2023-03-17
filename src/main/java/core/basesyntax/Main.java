@@ -5,10 +5,6 @@ import core.basesyntax.handlers.OperationTypeHandler;
 import core.basesyntax.handlers.PurchaseHandler;
 import core.basesyntax.handlers.ReturnHandler;
 import core.basesyntax.handlers.SupplyHandler;
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
@@ -20,10 +16,16 @@ import core.basesyntax.serviceimpl.TransactionParserServiceImpl;
 import core.basesyntax.serviceimpl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
-    private static final File INPUT_FILE = new File("src/main/java/core/basesyntax/resources/input.csv");
-    private static final File OUTPUT_FILE = new File("src/main/java/core/basesyntax/resources/output.csv");
+    private static final File INPUT_FILE = new File(
+            "src/main/java/core/basesyntax/resources/input.csv");
+    private static final File OUTPUT_FILE = new File(
+            "src/main/java/core/basesyntax/resources/output.csv");
     private static final int FIRST_VALID_LINE = 1;
     private static ReaderService reader = new ReaderServiceImpl();
     private static WriterService writer = new WriterServiceImpl();

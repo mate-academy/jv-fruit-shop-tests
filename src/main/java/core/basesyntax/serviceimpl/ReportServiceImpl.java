@@ -1,8 +1,8 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
-import java.util.Map;
 import core.basesyntax.service.ReportService;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";

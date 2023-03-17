@@ -1,46 +1,44 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
 public class WriterServiceImplTest {
-    File WRITE_TO = new File("src/test/java/testresources/output/write-to.csv");
-    File EXPECTED_CONTENT = new File("src/test/java/testresources/output/valid-output-for-writer.csv");
-    File WRONG_PATH = new File("src/test/java/testresources/wrong-path/new-file.csv");
-    File EMPTY_FILE = new File("src/test/java/testresources/output/empty.csv");
     private static final String NULL_PATH = null;
-    ReportService report = new ReportServiceImpl();
-    WriterService writer = new WriterServiceImpl();
+    private static final File WRITE_TO
+            = new File(
+                    "src/test/java/core/basesyntax/resources/output/write-to.csv");
+    private static final File EXPECTED_CONTENT = new File(
+            "src/test/java/core/basesyntax/resources/output/valid-output-for-writer.csv");
+    private static final File WRONG_PATH = new File(
+            "src/test/java/testresources/wrong-path/new-file.csv");
 
+    private final ReportService report = new ReportServiceImpl();
+    private final WriterService writer = new WriterServiceImpl();
 
     @Test(expected = RuntimeException.class)
-    public void writing_NullReport_notOk() {
+    public void write_nullReport_notOk() {
         writer.write(WRONG_PATH, report.newReport());
     }
 
-
     @Test(expected = NullPointerException.class)
-    public void write_ToNullPath_notOk() {
+    public void write_toNullPath_notOk() {
         writer.write(new File(NULL_PATH), "banana,152");
     }
 
     @Test
-    public void writing_DataMustBeSame_ok() {
+    public void write_dataMustBeSame_ok() {
         Storage.storage.put("banana", 152);
-        writer.write(WRITE_TO, "fruit,quantity"+ System.lineSeparator()+ "banana,152");
+        writer.write(WRITE_TO, "fruit,quantity"
+                + System.lineSeparator() + "banana,152");
         try {
             List<String> actual = Files.readAllLines(WRITE_TO.toPath());
             List<String> expected = Files.readAllLines(EXPECTED_CONTENT.toPath());
@@ -49,6 +47,4 @@ public class WriterServiceImplTest {
             throw new RuntimeException("SOMEMaSSaGa", e);
         }
     }
-
-
 }

@@ -13,6 +13,8 @@ import org.junit.Test;
 public class WriterServiceImplTest {
     private static final String REPORT_FILE
             = "src/test/resources/OutGoingReports/NormReport.csv";
+    private static final String INVALID_DESTINATION
+            = "C://Windows\\//System32\\!noWayYouCanCreateMe";
     private static final String INVALID_REPORT_FILE
             = "///^_^|||";
     private static final List<String> expectedReportLines = new ArrayList<>();
@@ -34,8 +36,13 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_invalidPath_notOk() {
+    public void writeToFile_invalidFile_notOk() {
         new WriterServiceImpl().writeToFile(preparedReport, INVALID_REPORT_FILE);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_invalidPath_notOk() {
+        new WriterServiceImpl().writeToFile(preparedReport, INVALID_DESTINATION);
     }
 
     @Test

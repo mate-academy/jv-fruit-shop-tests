@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceTest {
@@ -19,8 +19,8 @@ public class WriterServiceTest {
     private static ReaderService readerService;
     private static WriterService writerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         readerService = new ReaderServiceImpl();
         writerService = new WriterServiceImpl();
     }

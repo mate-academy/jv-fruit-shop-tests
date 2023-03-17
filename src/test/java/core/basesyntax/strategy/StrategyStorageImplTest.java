@@ -1,5 +1,8 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
@@ -10,8 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StrategyStorageImplTest {
     private static final String APPLE = "apple";
@@ -31,14 +32,20 @@ public class StrategyStorageImplTest {
 
     @Test
     public void getStrategy_validOperation_ok() {
-        FruitTransaction validTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY);
+        FruitTransaction validTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                        APPLE,
+                        QUANTITY);
         OperationHandler handler = strategyStorage.getStrategy(validTransaction);
         assertNotNull(handler);
     }
 
     @Test
     public void getStrategy_validOperation_notOk() {
-        FruitTransaction validTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, QUANTITY);
+        FruitTransaction validTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                        APPLE,
+                        QUANTITY);
         OperationHandler handler = strategyStorage.getStrategy(validTransaction);
         assertNotNull(handler);
     }

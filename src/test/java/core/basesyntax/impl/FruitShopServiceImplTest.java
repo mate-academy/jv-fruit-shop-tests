@@ -42,10 +42,9 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void validListTransaction_ok() {
-        int expected = 115;
         fruitShopService.realizePattern(VALID_LIST_TRANSACTION);
         int actual = Storage.storage.get("banana");
-        assertEquals(expected, actual);
+        assertEquals(115, actual);
     }
 
     @Test(expected = RuntimeException.class)

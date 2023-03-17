@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static final Map<String, Integer> EMPTY_MAP = new HashMap<>();
-    private static final Map<String, Integer> VALID_MAP = new HashMap<>();
+    private static Map<String, Integer> VALID_MAP = new HashMap<>();
     private static final Map<String, Integer> NULL_MAP = null;
     private static ReportService reportService;
     private static final String EXPECTED_REPORT =

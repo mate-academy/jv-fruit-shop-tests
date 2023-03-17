@@ -1,12 +1,13 @@
 package core.basesyntax.model;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class TransactionTest extends Assert {
+public class TransactionTest {
     private static Transaction transaction;
     private static final String FRUIT = "banana";
     private static final String VALID_OPERATION_TYPE = "BALANCE";

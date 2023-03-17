@@ -1,17 +1,18 @@
 package core.basesyntax.dao.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.repository.FruitDB;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class FruitDaoImplTest extends Assert {
+public class FruitDaoImplTest {
     private static FruitDao fruitDao;
     private static final String FRUIT_1 = "banana";
     private static final String FRUIT_2 = "apple";

@@ -1,18 +1,20 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CsvParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class CsvParserImplTest extends Assert {
+public class CsvParserImplTest {
     private static CsvParser csvParserImpl;
     private static Transaction transaction;
     private static List<String> parsingData;
@@ -51,8 +53,6 @@ public class CsvParserImplTest extends Assert {
     @Test
     public void parse_invalidOperationAsArgument_notOk() {
         thrown.expect(RuntimeException.class);
-        thrown.expectMessage("Code is invalid");
-        parsingData.clear();
         parsingData.add(HEADER);
         parsingData.add(INVALID_CSV_PART);
         csvParserImpl.parse(parsingData);

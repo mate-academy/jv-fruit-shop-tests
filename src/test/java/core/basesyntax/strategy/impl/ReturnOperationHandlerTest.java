@@ -1,11 +1,13 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ReturnOperationHandlerTest extends Assert {
+public class ReturnOperationHandlerTest {
     private static final int EXPECTED_AMOUNT = 10;
     private static final int AMOUNT = 10;
     private static final int ZERO = 0;

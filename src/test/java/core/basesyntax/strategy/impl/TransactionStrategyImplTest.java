@@ -4,6 +4,7 @@ import static core.basesyntax.model.Transaction.Operation.BALANCE;
 import static core.basesyntax.model.Transaction.Operation.PURCHASE;
 import static core.basesyntax.model.Transaction.Operation.RETURN;
 import static core.basesyntax.model.Transaction.Operation.SUPPLY;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationHandler;
@@ -11,14 +12,13 @@ import core.basesyntax.strategy.TransactionStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class TransactionStrategyImplTest extends Assert {
+public class TransactionStrategyImplTest {
     public static final int AMOUNT_OF_OPERATIONS = 4;
     public static final String INVALID_OPERATION_CODE = "q";
     private static Map<Transaction.Operation, OperationHandler> operationsMap;

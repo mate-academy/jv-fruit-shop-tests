@@ -1,17 +1,18 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.repository.FruitDB;
 import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class WriterServiceImplTest extends Assert {
+public class WriterServiceImplTest {
     private static final String EMPTY_STRING = "";
     private static final String VALID_FILE = "src/test/resources/test_writer2.csv";
     private static final String INVALID_FILE = "src/test/test/resources/test_writer.csv";

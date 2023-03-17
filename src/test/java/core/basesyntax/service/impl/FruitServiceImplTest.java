@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.Transaction;
@@ -16,14 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class FruitServiceImplTest extends Assert {
+public class FruitServiceImplTest {
     private static FruitService service;
     private static List<Transaction> transactions;
     private static final String FRUIT = "orange";

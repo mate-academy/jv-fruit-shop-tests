@@ -1,14 +1,15 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.ReaderService;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class ReaderServiceImplTest extends Assert {
+public class ReaderServiceImplTest {
     private static final String NONEXISTENT_FILE = "src/test/resources/notExist.csv";
     private static final String VALID_FILE = "src/test/resources/test.csv";
     private static final String HEADER = "type,fruit,quantity";
@@ -26,7 +27,7 @@ public class ReaderServiceImplTest extends Assert {
     @Test
     public void read_nonExistingFile_notOk() {
         thrown.expect(RuntimeException.class);
-        thrown.expectMessage("Can't get data from file");
+        thrown.expectMessage("Can't get data from file " + NONEXISTENT_FILE);
         reader.read(NONEXISTENT_FILE);
     }
 

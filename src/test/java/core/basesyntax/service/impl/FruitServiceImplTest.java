@@ -28,6 +28,7 @@ public class FruitServiceImplTest extends Assert {
     private static List<Transaction> transactions;
     private static final String FRUIT = "orange";
     private static final Integer AMOUNT = 33;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

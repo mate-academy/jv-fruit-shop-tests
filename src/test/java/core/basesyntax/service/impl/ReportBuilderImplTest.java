@@ -25,7 +25,6 @@ public class ReportBuilderImplTest extends Assert {
     @Before
     public void setUp() {
         FruitDB.fruitsOnStock.put(FRUIT_1, AMOUNT);
-
     }
 
     @After

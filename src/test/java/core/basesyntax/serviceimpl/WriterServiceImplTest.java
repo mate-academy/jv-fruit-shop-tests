@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
+    private static final String REPORT_TITLE_ROW = "fruit,quantity";
     private static final String NULL_PATH = null;
     private static final File WRITE_TO
             = new File(
@@ -37,14 +38,14 @@ public class WriterServiceImplTest {
     @Test
     public void write_dataMustBeSame_ok() {
         Storage.storage.put("banana", 152);
-        writer.write(WRITE_TO, "fruit,quantity"
+        writer.write(WRITE_TO, REPORT_TITLE_ROW
                 + System.lineSeparator() + "banana,152");
         try {
             List<String> actual = Files.readAllLines(WRITE_TO.toPath());
             List<String> expected = Files.readAllLines(EXPECTED_CONTENT.toPath());
             assertEquals(actual, expected);
         } catch (IOException e) {
-            throw new RuntimeException("SOMEMaSSaGa", e);
+            throw new RuntimeException("File can`t be read!", e);
         }
     }
 }

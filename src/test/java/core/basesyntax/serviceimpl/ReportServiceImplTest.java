@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
+    private static final String REPORT_TITLE_ROW = "fruit,quantity";
     private ReportService reportService;
 
     @Before
@@ -23,7 +24,7 @@ public class ReportServiceImplTest {
 
     @Test
     public void report_emptyDataExpectTitleRow_ok() {
-        String expected = "fruit,quantity";
+        String expected = REPORT_TITLE_ROW;
         String actual = reportService.newReport();
         assertEquals(actual,expected);
     }
@@ -32,7 +33,7 @@ public class ReportServiceImplTest {
     public void report_presentData_ok() {
         Storage.storage.put("banana", 152);
         Storage.storage.put("apple", 90);
-        String expected = "fruit,quantity" + System.lineSeparator()
+        String expected = REPORT_TITLE_ROW + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
         String actual = reportService.newReport();

@@ -7,6 +7,8 @@ import core.basesyntax.service.TransactionParserService;
 import org.junit.Test;
 
 public class TransactionParserServiceImplTest {
+    private static final String TWO_WORDS_WITHOUT_SEPARATOR = "abra codabra";
+    private static final String FOUR_WORDS_WITH_SEPARATOR = "abra,codabra,codabra,abra";
     private final TransactionParserService parser = new TransactionParserServiceImpl();
 
     @Test(expected = RuntimeException.class)
@@ -16,12 +18,12 @@ public class TransactionParserServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void parse_wrongDataFormatLess_notOk() {
-        parser.saveToStorage("abra codabra");
+        parser.saveToStorage(TWO_WORDS_WITHOUT_SEPARATOR);
     }
 
     @Test(expected = RuntimeException.class)
     public void parse_WrongDataFormatMore_notOk() {
-        parser.saveToStorage("abra,codabra,codabra,abra");
+        parser.saveToStorage(FOUR_WORDS_WITH_SEPARATOR);
     }
 
     @Test

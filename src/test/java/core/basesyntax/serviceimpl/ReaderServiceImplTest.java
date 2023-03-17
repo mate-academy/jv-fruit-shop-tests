@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
+    private static final String TITLE_ROW = "type,fruit,quantity";
     private static final File EMPTY_FILE = new File(
             "src/test/java/core/basesyntax/resources/input/empty.csv");
     private static final String WRONG_PATH = "src/wrong/path";
@@ -36,7 +37,7 @@ public class ReaderServiceImplTest {
 
     @Test
     public void read_validFile_ok() {
-        validList.add("type,fruit,quantity");
+        validList.add(TITLE_ROW);
         validList.add("b,banana,20");
         validList.add("b,apple,100");
         validList.add("s,banana,100");

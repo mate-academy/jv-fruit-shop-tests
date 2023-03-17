@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportCreatorService;
-
 import java.util.Map;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
@@ -10,6 +9,9 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
 
     @Override
     public String createReport(Map<String, Integer> products) {
+        if (products == null || products.isEmpty()) {
+            throw new RuntimeException("Can't create report on null or empty data");
+        }
         StringBuilder productsInfo = new StringBuilder();
         productsInfo.append(FILE_HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : products.entrySet()) {

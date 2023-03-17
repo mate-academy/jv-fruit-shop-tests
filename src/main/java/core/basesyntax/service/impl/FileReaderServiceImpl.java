@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +12,9 @@ public class FileReaderServiceImpl implements FileReaderService {
 
     @Override
     public List<String> readFromFile(String fileName) {
+        if (fileName == null) {
+            throw new RuntimeException("Can't read data from NULL");
+        }
         List<String> transactionInfo;
         try {
             transactionInfo = Files.readAllLines(Path.of(fileName));
@@ -23,8 +25,11 @@ public class FileReaderServiceImpl implements FileReaderService {
         if (transactionInfo.isEmpty()) {
             throw new RuntimeException("There is no data in file to read " + fileName);
         }
-        if (FILE_HEADER.equals(transactionInfo.get(INDEX_OF_FILE_HEADER))) {
+        if (FILE_HEADER.equalsIgnoreCase(transactionInfo.get(INDEX_OF_FILE_HEADER))) {
             transactionInfo.remove(INDEX_OF_FILE_HEADER);
+        } else {
+            throw new RuntimeException("Your csv file should have header like - "
+                    + FILE_HEADER);
         }
         return transactionInfo;
     }

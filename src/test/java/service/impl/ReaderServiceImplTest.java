@@ -16,7 +16,7 @@ import org.junit.Test;
 import service.ReaderService;
 
 public class ReaderServiceImplTest {
-    private static final String TEST_FILE_PATH = "./src/main/resources/testDatabase.csv";
+    private static final String TEST_FILE_PATH = "./src/test/resources/testDatabase.csv";
     private static List<String> content = new ArrayList<>();
     private static ReaderService reader = new ReaderServiceImpl();
 
@@ -64,7 +64,7 @@ public class ReaderServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void readFromNonexistingFile() {
-        reader.read("./src/main/nonExisting.csv");
+        reader.read("./src/test/nonExisting.csv");
     }
 
     @After

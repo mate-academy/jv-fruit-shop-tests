@@ -26,8 +26,8 @@ public class TransactionProcessingServiceImplTest {
     private final List<FruitTransaction> notAvailableFruitSupplyTransaction;
 
     public TransactionProcessingServiceImplTest() {
+        Storage.storage.put("cherry", 50);
         transactionProcessing = new TransactionProcessingServiceImpl();
-        Storage.storage.put("banana", 50);
         validBalanceTransaction =
                 List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10));
         validPurchaseTransaction =
@@ -39,13 +39,13 @@ public class TransactionProcessingServiceImplTest {
         negativeBalanceTransaction =
                 List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, "lemon", -1));
         negativePurchaseTransaction =
-                List.of(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", -1));
+                List.of(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "cherry", -1));
         negativeReturnTransaction =
-                List.of(new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", -1));
+                List.of(new FruitTransaction(FruitTransaction.Operation.RETURN, "cherry", -1));
         negativeSupplyTransaction =
-                List.of(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", -1));
+                List.of(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "cherry", -1));
         moreThanSupplyPurchaseTransaction =
-                List.of(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 51));
+                List.of(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "cherry", 51));
         notAvailableFruitPurchaseTransaction =
                 List.of(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "lemon", 10));
         notAvailableFruitReturnTransaction =
@@ -63,24 +63,31 @@ public class TransactionProcessingServiceImplTest {
     public void acceptBalanceTransaction_Ok() {
         transactionProcessing.accept(validBalanceTransaction);
         Assert.assertEquals(Integer.valueOf(10), Storage.storage.get("apple"));
+        Storage.storage.clear();
     }
 
     @Test
     public void acceptPurchaseTransaction_Ok() {
+        Storage.storage.put("banana", 50);
         transactionProcessing.accept(validPurchaseTransaction);
         Assert.assertEquals(Integer.valueOf(40), Storage.storage.get("banana"));
+        Storage.storage.clear();
     }
 
     @Test
     public void acceptReturnTransaction_Ok() {
+        Storage.storage.put("banana", 50);
         transactionProcessing.accept(validReturnTransaction);
         Assert.assertEquals(Integer.valueOf(60), Storage.storage.get("banana"));
+        Storage.storage.clear();
     }
 
     @Test
     public void acceptSupplyTransaction_Ok() {
+        Storage.storage.put("banana", 50);
         transactionProcessing.accept(validSupplyTransaction);
         Assert.assertEquals(Integer.valueOf(60), Storage.storage.get("banana"));
+        Storage.storage.clear();
     }
 
     @Test (expected = TransactionQuantityException.class)

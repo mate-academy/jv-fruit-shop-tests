@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.interfaces.ReportService;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,5 +30,10 @@ public class ReportServiceImplTest {
         Storage.storage.put(DEFAULT_FRUIT_NAME_NEXT_LINE, DEFAULT_QUANTITY_NEXT_LINE);
         String actual = reportService.generateReport();
         assertEquals(EXPECTED_REPORT, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

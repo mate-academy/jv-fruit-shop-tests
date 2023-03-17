@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.operations.BalanceHandler;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -60,5 +61,10 @@ public class BalanceHandlerTest {
         int expected = VALUE_MORE_THAN_ZERO;
         int actual = fruitTransaction.getQuantity();
         assertEquals(expected, actual);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

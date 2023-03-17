@@ -10,11 +10,14 @@ public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String pathToFile, String report) {
         File file = new File(pathToFile);
+        if (report == null) {
+            throw new RuntimeException("Report cannot be null");
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             file.createNewFile();
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file on the path "
+            throw new RuntimeException("Can't write data to file on the path"
                     + pathToFile, e);
         }
     }

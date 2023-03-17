@@ -6,8 +6,6 @@ import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

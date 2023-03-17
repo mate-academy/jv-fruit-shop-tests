@@ -13,7 +13,7 @@ public class FileReaderServiceTest {
     private static FileReaderService fileReaderService;
     private static final File TEST_FILE = new File("src/test/resources/fileForFileReaderTest.csv");
     private static final File NON_EXISTENT_FILE = new File("src/test/resources/bandera.csv");
-    private List<String> excepted;
+    private List<String> expected;
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,18 +22,18 @@ public class FileReaderServiceTest {
 
     @Before
     public void before() {
-        excepted = new ArrayList<>();
-        excepted.add("type,fruit,quantity");
-        excepted.add("b,durian,100");
-        excepted.add("b,papaya,55");
-        excepted.add("p,durian,28");
-        excepted.add("s,papaya,45");
+        expected = new ArrayList<>();
+        expected.add("type,fruit,quantity");
+        expected.add("b,durian,100");
+        expected.add("b,papaya,55");
+        expected.add("p,durian,28");
+        expected.add("s,papaya,45");
     }
 
     @Test
     public void readFromFile_validInputData_ok() {
         List<String> actual = fileReaderService.readFromFile(TEST_FILE);
-        Assert.assertEquals(excepted, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

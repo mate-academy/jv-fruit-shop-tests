@@ -17,7 +17,7 @@ public class DataParserServiceTest {
     private static final int SECOND_QUANTITY = 55;
     private static final int THIRD_QUANTITY = 28;
     private static final int FOURTH_QUANTITY = 45;
-    private List<FruitTransaction> excepted;
+    private List<FruitTransaction> expected;
     private List<String> input;
 
     @BeforeClass
@@ -27,22 +27,22 @@ public class DataParserServiceTest {
 
     @Before
     public void createOutputInputList() {
-        excepted = new ArrayList<>();
+        expected = new ArrayList<>();
         FruitTransaction first = new FruitTransaction();
         first.setOperation(FruitTransaction.Operation.BALANCE);
         first.setFruit(FIRST_FRUIT_NAME);
         first.setQuantity(FIRST_QUANTITY);
-        excepted.add(first);
+        expected.add(first);
         FruitTransaction second = new FruitTransaction();
         second.setOperation(FruitTransaction.Operation.BALANCE);
         second.setFruit(SECOND_FRUIT_NAME);
         second.setQuantity(SECOND_QUANTITY);
-        excepted.add(second);
+        expected.add(second);
         FruitTransaction third = new FruitTransaction();
         third.setOperation(FruitTransaction.Operation.PURCHASE);
         third.setFruit(FIRST_FRUIT_NAME);
         third.setQuantity(THIRD_QUANTITY);
-        excepted.add(third);
+        expected.add(third);
         FruitTransaction fourth = new FruitTransaction();
         fourth.setOperation(FruitTransaction.Operation.SUPPLY);
         fourth.setFruit(SECOND_FRUIT_NAME);
@@ -58,8 +58,8 @@ public class DataParserServiceTest {
     @Test
     public void parseData_validInputData_ok() {
         List<FruitTransaction> actual = parserService.parseData(input);
-        for (int i = 0; i < excepted.size(); i++) {
-            Assert.assertEquals(excepted.get(i), actual.get(i));
+        for (int i = 0; i < expected.size(); i++) {
+            Assert.assertEquals(expected.get(i), actual.get(i));
         }
     }
 

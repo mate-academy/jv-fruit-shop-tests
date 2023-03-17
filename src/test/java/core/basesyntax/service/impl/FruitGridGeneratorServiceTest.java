@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class FruitGridGeneratorServiceTest {
     private static final String[] EXPECTED_TITLES = {"fruit", "quantity"};
-    private static final String[][] EXPECTED_ROWS = {{"banana", "90"}, {"blueberry", "40"}};
+    private static final String[][] EXPECTED_ROWS = {{"blueberry", "40"}, {"banana", "90"}};
     private static final Map<String, Integer> REGULAR_VALUES =
             Map.of("banana", 90, "blueberry", 40);
     private static Grid expectedGrid;

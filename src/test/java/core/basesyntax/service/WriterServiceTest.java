@@ -9,23 +9,24 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 public class WriterServiceTest {
+
     @Test
-    public void writer_write_ok() {
-        String toWrite =
+    public void write_normalInput_ok() {
+        String expected =
                 "fruit, quantity" + System.lineSeparator()
                 + "banana, 5" + System.lineSeparator()
                 + "apple, 25";
-        String to = "src/main/resources/out.csv";
-        new WriterServiceImpl().write(toWrite, to);
+        String to = "src/test/resources/out.csv";
+        new WriterServiceImpl().write(expected, to);
         try {
-            assertEquals(toWrite, Files.readString(Path.of(to)));
+            assertEquals(expected, Files.readString(Path.of(to)));
         } catch (IOException e) {
             throw new RuntimeException("Can't read the output file");
         }
     }
 
     @Test(expected = RuntimeException.class)
-    public void writer_write_nonExistentFile_exception() {
+    public void write_nonExistentFile_exception() {
         new WriterServiceImpl().write("Writing something in the file",
                 "");
     }

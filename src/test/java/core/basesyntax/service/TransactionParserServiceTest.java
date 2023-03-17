@@ -9,8 +9,9 @@ import java.util.List;
 import org.junit.Test;
 
 public class TransactionParserServiceTest {
+
     @Test
-    public void transactionParser_parse_ok() {
+    public void parse_normalInput_ok() {
         List<String> read = new ArrayList<>();
         read.add("action,fruit,amount");
         read.add("b,banana,10");
@@ -37,7 +38,7 @@ public class TransactionParserServiceTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void transactionParser_parse_emptyInput_exception() {
+    public void parse_emptyInput_exception() {
         List<String> read = new ArrayList<>();
         new TransactionParserServiceImpl().parse(read);
     }

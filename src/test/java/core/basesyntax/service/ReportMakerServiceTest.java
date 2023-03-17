@@ -5,26 +5,32 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportMakerServiceTest {
-    private static final Map<String, Integer> BASE = new HashMap<>();
+    private static Map<String, Integer> base;
+    private static ReportMakerService reportMaker;
 
-    private static final ReportMakerService REPORT_MAKER = new ReportMakerServiceImpl();
+    @BeforeClass
+    public static void initialize() {
+        base = new HashMap<>();
+        reportMaker = new ReportMakerServiceImpl();
+    }
 
     @Test
-    public void reporterMaker_report_ok() {
-        BASE.put("banana", 5);
-        BASE.put("apple", 25);
+    public void report_normalInput_ok() {
+        base.put("banana", 5);
+        base.put("apple", 25);
         String expected = "fruit, quantity" + System.lineSeparator()
                 + "banana, 5" + System.lineSeparator()
                 + "apple, 25";
-        String actual = REPORT_MAKER.report(BASE);
+        String actual = reportMaker.report(base);
         assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void reporterMaker_report_InputIsEmpty_notOk() {
-        REPORT_MAKER.report(BASE);
+    public void report_InputIsEmpty_notOk() {
+        reportMaker.report(base);
     }
 }

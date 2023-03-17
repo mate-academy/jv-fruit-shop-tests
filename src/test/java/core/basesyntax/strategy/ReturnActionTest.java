@@ -4,18 +4,20 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
-import core.basesyntax.strategy.actions.BalanceActionHandler;
 import core.basesyntax.strategy.actions.ReturnActionHandler;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnActionTest {
-    @Test
-    public void returnAction_ok() {
+
+    @Before
+    public void clearStorage() {
         Storage.getFruits().clear();
-        new BalanceActionHandler().apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10));
+    }
+
+    @Test
+    public void apply_normalInput_ok() {
+        Storage.put("banana", 10);
         new ReturnActionHandler().apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "banana",
@@ -24,12 +26,8 @@ public class ReturnActionTest {
     }
 
     @Test
-    public void returnAction_supplyingNonExistent_ok() {
-        Storage.getFruits().clear();
-        new ReturnActionHandler().apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "apple",
-                        5));
+    public void apply_supplyingNonExistent_ok() {
+        Storage.put("apple", 5);
         assertEquals(5L, (long) Storage.getFruits().get("apple"));
     }
 }

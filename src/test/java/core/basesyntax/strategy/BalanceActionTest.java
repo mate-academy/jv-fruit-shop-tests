@@ -16,7 +16,7 @@ public class BalanceActionTest {
     }
 
     @Test
-    public void balanceAction_ok() {
+    public void apply_normalInput_ok() {
         new BalanceActionHandler().apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "banana",
@@ -25,7 +25,7 @@ public class BalanceActionTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void balanceAction_negativeBalance_notOk() {
+    public void apply_negativeBalance_notOk() {
         new BalanceActionHandler().apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "fruit",

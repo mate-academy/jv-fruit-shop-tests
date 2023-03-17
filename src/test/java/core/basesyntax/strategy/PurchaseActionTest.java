@@ -4,18 +4,21 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
-import core.basesyntax.strategy.actions.BalanceActionHandler;
 import core.basesyntax.strategy.actions.PurchaseActionHandler;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseActionTest {
-    @Test
-    public void purchaseAction_ok() {
+
+    @Before
+    public void beforeEach() {
         Storage.getFruits().clear();
-        new BalanceActionHandler().apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10));
+        Storage.put("banana", 10);
+    }
+
+    @Test
+    public void apply_normalInput_ok() {
+
         new PurchaseActionHandler().apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "banana",
@@ -24,12 +27,7 @@ public class PurchaseActionTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseAction_nonExistentFruit_notOk() {
-        Storage.getFruits().clear();
-        new BalanceActionHandler().apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10));
+    public void apply_nonExistentFruit_notOk() {
         new PurchaseActionHandler().apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "apple",
@@ -38,11 +36,6 @@ public class PurchaseActionTest {
 
     @Test(expected = RuntimeException.class)
     public void purchaseAction_purchaseTooMuch_notOk() {
-        Storage.getFruits().clear();
-        new BalanceActionHandler().apply(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "banana",
-                        10));
         new PurchaseActionHandler().apply(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         "banana",

@@ -9,27 +9,31 @@ import core.basesyntax.strategy.actions.PurchaseActionHandler;
 import core.basesyntax.strategy.actions.ReturnActionHandler;
 import core.basesyntax.strategy.actions.SupplyActionHandler;
 import java.util.Map;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ActionStrategyTest {
+    private static ActionStrategy strategy;
 
-    private static final ActionStrategy STRATEGY =
-            new ActionStrategyImpl(Map.of(
-                    FruitTransaction.Operation.BALANCE, new BalanceActionHandler(),
-                    FruitTransaction.Operation.PURCHASE, new PurchaseActionHandler(),
-                    FruitTransaction.Operation.SUPPLY, new SupplyActionHandler(),
-                    FruitTransaction.Operation.RETURN, new ReturnActionHandler()
-            ));
+    @BeforeClass
+    public static void initialize() {
+        strategy = new ActionStrategyImpl(Map.of(
+                        FruitTransaction.Operation.BALANCE, new BalanceActionHandler(),
+                        FruitTransaction.Operation.PURCHASE, new PurchaseActionHandler(),
+                        FruitTransaction.Operation.SUPPLY, new SupplyActionHandler(),
+                        FruitTransaction.Operation.RETURN, new ReturnActionHandler()
+        ));
+    }
 
     @Test
-    public void actionStrategy_get_ok() {
-        ActionHandler actual = STRATEGY.get(FruitTransaction.Operation.getOperationByCode("b"));
+    public void get_normalInput_ok() {
+        ActionHandler actual = strategy.get(FruitTransaction.Operation.getOperationByCode("b"));
         ActionHandler expected = new BalanceActionHandler();
-        assertEquals(actual.getClass(), expected.getClass());
+        assertEquals(expected.getClass(), actual.getClass());
     }
 
     @Test(expected = RuntimeException.class)
-    public void actionStrategy_get_invalidActionKey_notOk() {
-        STRATEGY.get(FruitTransaction.Operation.getOperationByCode("k"));
+    public void get_invalidActionKey_notOk() {
+        strategy.get(FruitTransaction.Operation.getOperationByCode("k"));
     }
 }

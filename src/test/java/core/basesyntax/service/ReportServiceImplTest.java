@@ -16,6 +16,10 @@ public class ReportServiceImplTest {
             + "apple,90" + System.lineSeparator();
     private static final int DEFAULT_QUANTITY = 152;
     private static final int DEFAULT_QUANTITY_NEXT_LINE = 90;
+    private static final String EXPECTED_REPORT_WITH_EMPTY_DATA = "fruit,quantity" + System.lineSeparator()
+            + System.lineSeparator();
+    private static final String EXPECTED_REPORT_WITH_NULL_DATA = "fruit,quantity" + System.lineSeparator()
+            + "null,null" + System.lineSeparator();
 
     private static ReportService reportService;
 
@@ -30,6 +34,19 @@ public class ReportServiceImplTest {
         Storage.storage.put(DEFAULT_FRUIT_NAME_NEXT_LINE, DEFAULT_QUANTITY_NEXT_LINE);
         String actual = reportService.generateReport();
         assertEquals(EXPECTED_REPORT, actual);
+    }
+
+    @Test
+    public void generateReport_emptyData_ok() {
+        String actual = reportService.generateReport();
+        assertEquals(actual, EXPECTED_REPORT_WITH_EMPTY_DATA);
+    }
+
+    @Test
+    public void generateReport_nullData_ok() {
+        Storage.storage.put(null, null);
+        String actual = reportService.generateReport();
+        assertEquals(actual, EXPECTED_REPORT_WITH_NULL_DATA);
     }
 
     @After

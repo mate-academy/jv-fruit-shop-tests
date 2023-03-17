@@ -32,6 +32,11 @@ public class ParserFromCsvServiceImplTest {
         parser.parse(new ArrayList<>());
     }
 
+    @Test(expected = NullPointerException.class)
+    public void parse_nullList_notOk() {
+        parser.parse(null);
+    }
+
     @Test
     public void parse_correctDataFruit_ok() {
         List<FruitTransaction> actual = parser.parse(EXPECTED);

@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-    private static final String CORRECT_PATH_TO_FILE = "src/main/resources/output.csv";
+    private static final String CORRECT_PATH = "src/main/resources/output.csv";
     private static final String FULL_REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
     private static final String EMPTY_REPORT = "";
@@ -39,7 +39,7 @@ public class WriterServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void writeReportToFile_reportIsNull_notOk() {
-        String pathToFile = CORRECT_PATH_TO_FILE;
+        String pathToFile = CORRECT_PATH;
         String report = null;
         writerService.writeReportToFile(pathToFile, report);
         fail("You must throw Runtime Exception, if the passed report is null");
@@ -47,10 +47,10 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeReportToFile_defaultCase_ok() {
-        String pathToFile = CORRECT_PATH_TO_FILE;
+        String pathToFile = CORRECT_PATH;
         String report = FULL_REPORT;
         writerService.writeReportToFile(pathToFile, report);
-        File createdFile = new File(CORRECT_PATH_TO_FILE);
+        File createdFile = new File(CORRECT_PATH);
         try {
             List<String> expected = CORRECT_RESULT_FOR_FULL_REPORT;
             List<String> actual = Files.readAllLines(createdFile.toPath());
@@ -63,25 +63,25 @@ public class WriterServiceImplTest {
 
     @Test
     public void writeReportToFile_defaultCaseWithEmptyReport_ok() {
-        String pathToFile = CORRECT_PATH_TO_FILE;
+        String pathToFile = CORRECT_PATH;
         String report = EMPTY_REPORT;
         writerService.writeReportToFile(pathToFile, report);
-        File createdFile = new File(CORRECT_PATH_TO_FILE);
+        File createdFile = new File(CORRECT_PATH);
         try {
             List<String> expected = CORRECT_RESULT_FOR_EMPTY_REPORT;
             List<String> actual = Files.readAllLines(createdFile.toPath());
             assertEquals(expected, actual);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from the file " + CORRECT_PATH_TO_FILE, e);
+            throw new RuntimeException("Can't read data from the file " + CORRECT_PATH, e);
         }
     }
 
     @After
     public void tearDown() {
         try {
-            Files.deleteIfExists(Path.of(CORRECT_PATH_TO_FILE));
+            Files.deleteIfExists(Path.of(CORRECT_PATH));
         } catch (IOException e) {
-            throw new RuntimeException("Can't delete this file " + CORRECT_PATH_TO_FILE);
+            throw new RuntimeException("Can't delete this file " + CORRECT_PATH);
         }
     }
 }

@@ -14,6 +14,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("The passed operation is null!");
+        }
         return operationHandlerMap.get(operation);
     }
 

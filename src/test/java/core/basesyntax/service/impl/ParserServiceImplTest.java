@@ -14,8 +14,8 @@ public class ParserServiceImplTest {
             "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",
             "p,apple,20", "p,banana,5", "s,banana,50");
     private static final List<String> EMPTY_DATA = List.of();
-    private static final List<String> INVALID_DATA = List.of("putin huylo, russia sucks",
-            "glory to Ukraine", "russia, is, a, terrorist state");
+    private static final List<String> INVALID_DATA = List.of("cross across, math",
+            "chemical, addiction, good, boy", "approximately, beautiful, bananas, apples, fruits");
     private ParserService parserService;
     private List<FruitTransaction> validDataTransactions;
     private List<FruitTransaction> emptyDataTransactions;

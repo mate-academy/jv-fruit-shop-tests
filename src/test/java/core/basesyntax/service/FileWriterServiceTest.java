@@ -45,35 +45,35 @@ public class FileWriterServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_nullFileName_NotOk() {
+    public void writeToFile_nullFileName_notOk() {
         fileWriterService.writeToFile(null, CORRECT_DATA);
         fail("An error was expected in case of null data"
                 + " to write in file");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_nullData_NotOk() {
+    public void writeToFile_nullData_notOk() {
         fileWriterService.writeToFile(FILE, null);
         fail("An error was expected in case of null data"
                 + " to write in file");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_emptyData_NotOk() {
+    public void writeToFile_emptyData_notOk() {
         fileWriterService.writeToFile(FILE, EMPTY_DATA);
         fail("An error was expected in case of empty data"
                 + " to write in file");
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_unexistingFile_NotOk() {
+    public void writeToFile_unexistingFile_notOk() {
         fileWriterService.writeToFile(UNEXISTING_FILE, CORRECT_DATA);
         fail("An error was expected in case of writing"
                 + " to unexisting file");
     }
 
     @Test
-    public void writeToFile_successWrite_Ok() {
+    public void writeToFile_successWrite_ok() {
         fileWriterService.writeToFile(FILE, CORRECT_DATA);
         String actualData = readFromFile(FILE).trim();
         assertEquals(CORRECT_DATA, actualData);

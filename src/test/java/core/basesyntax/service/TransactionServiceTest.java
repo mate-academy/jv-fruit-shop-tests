@@ -27,40 +27,40 @@ public class TransactionServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransactions_nullFileData_NotOk() {
+    public void createTransactions_nullFileData_notOk() {
         transactionService.createTransactions(null);
         fail("An error was expected in case of null file data source");
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransactions_emptyFileData_NotOk() {
+    public void createTransactions_emptyFileData_notOk() {
         transactionService.createTransactions(fileData);
         fail("An error was expected in case of empty file data source");
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransactions_wrongTransactionOperation_NotOk() {
+    public void createTransactions_wrongTransactionOperation_notOk() {
         fileData.add("g,banana,20");
         transactionService.createTransactions(fileData);
         fail("An error was expected in case of wrong transaction operation type");
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransactions_wrongTransactionFruitName_NotOk() {
+    public void createTransactions_wrongTransactionFruitName_notOk() {
         fileData.add("s,1233,20");
         transactionService.createTransactions(fileData);
         fail("An error was expected in case of wrong transaction fruit name");
     }
 
     @Test(expected = RuntimeException.class)
-    public void createTransactions_wrongTransactionFruitQuantity_NotOk() {
+    public void createTransactions_wrongTransactionFruitQuantity_notOk() {
         fileData.add("s,banana,-10");
         transactionService.createTransactions(fileData);
         fail("An error was expected in case of wrong transaction fruit quantity");
     }
 
     @Test
-    public void createTransactions_correctFileData_Ok() {
+    public void createTransactions_correctFileData_ok() {
         fileData.add("b,banana,20");
         List<FruitTransaction> actual = transactionService.createTransactions(fileData);
         FruitTransaction.Operation expectedOperation = FruitTransaction.Operation.BALANCE;
@@ -72,7 +72,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    public void createTransactions_checkTransactionsSize_Ok() {
+    public void createTransactions_checkTransactionsSize_ok() {
         fileData.add("b,banana,40");
         fileData.add("s,orange,10");
         fileData.add("r,apple,80");

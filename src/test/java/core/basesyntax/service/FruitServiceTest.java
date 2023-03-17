@@ -43,22 +43,26 @@ public class FruitServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransactions_nullTransactions_NotOk() {
+    public void handleTransactions_nullTransactions_notOk() {
         fruitService.handleTransactions(null);
         fail("An error was expected in case of null fruit transactions");
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransactions_emptyTransactions_NotOk() {
+    public void handleTransactions_emptyTransactions_notOk() {
         fruitService.handleTransactions(fruitTransactions);
         fail("An error was expected in case of empty fruit transactions");
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransactions_wrongTransactions_NotOk() {
+    public void handleTransactions_nullTransactionOperation_notOk() {
         fruitTransactions.add(new FruitTransaction(null, "banana", 20));
-        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", -10));
+        fruitService.handleTransactions(fruitTransactions);
+        fail("An error was expected in case wrong transactions data");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void handleTransactions_nullTransactionFruitName_notOk() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 null, 40));
         fruitService.handleTransactions(fruitTransactions);
@@ -66,17 +70,15 @@ public class FruitServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void handleTransactions_gettingMoreThanExists_NotOk() {
-        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 10));
-        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "banana", 11));
+    public void handleTransactions_negativeTransactionFruitQuantity_notOk() {
+        fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", -10));
         fruitService.handleTransactions(fruitTransactions);
-        fail("An error was expected in case of getting more products than exists");
+        fail("An error was expected in case wrong transactions data");
     }
 
     @Test
-    public void handleTransactions_correctTransactions_Ok() {
+    public void handleTransactions_correctTransactions_ok() {
         ProductStorage.products.clear();
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 10));
@@ -91,6 +93,6 @@ public class FruitServiceTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 40);
         expected.put("orange", 10);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

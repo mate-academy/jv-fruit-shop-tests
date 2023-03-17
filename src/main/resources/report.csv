@@ -1,0 +1,17 @@
+
+    @Test
+    void parseThreeValidTransactionsOk() {
+        inputData.add("b,banana,17");
+        inputData.add("s,apple,20");
+        inputData.add("p,banana,11");
+        fruitTransactions.add(new FruitTransaction("b", "banana", 17));
+        fruitTransactions.add(new FruitTransaction("s", "apple", 20));
+        fruitTransactions.add(new FruitTransaction("p", "banana", 11));
+        assertEquals(fruitTransactions, transactionParserService.parseInputData(inputData));
+    }
+
+    @AfterEach
+    void tearDown() {
+        fruitTransactions.clear();
+        inputData.clear();
+    }

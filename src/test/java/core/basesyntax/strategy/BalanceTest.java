@@ -22,4 +22,11 @@ public class BalanceTest {
         operationHandler.handleFruitOperation(FRUIT, QUANTITY);
         assertEquals(QUANTITY, Storage.get(FRUIT));
     }
+
+    @Test
+    public void handleFruitOperation_return_whenFruitExists() {
+        Storage.fruits.put(FRUIT, QUANTITY);
+        operationHandler.handleFruitOperation(FRUIT, QUANTITY);
+        assertEquals(Integer.valueOf(QUANTITY + QUANTITY), Storage.get(FRUIT));
+    }
 }

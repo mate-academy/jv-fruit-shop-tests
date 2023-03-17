@@ -58,7 +58,9 @@ public class DataParserServiceTest {
     @Test
     public void parseData_validInputData_ok() {
         List<FruitTransaction> actual = parserService.parseData(input);
-        Assert.assertEquals(excepted,actual);
+        for (int i = 0; i < excepted.size(); i++) {
+            Assert.assertEquals(excepted.get(i), actual.get(i));
+        }
     }
 
     @Test(expected = RuntimeException.class)

@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
@@ -50,6 +51,6 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void process_emptyInput_ok() {
-        assertEquals(new HashMap<>(),fruitShopService.process(new ArrayList<>()));
+        assertTrue(fruitShopService.process(new ArrayList<>()).isEmpty());
     }
 }

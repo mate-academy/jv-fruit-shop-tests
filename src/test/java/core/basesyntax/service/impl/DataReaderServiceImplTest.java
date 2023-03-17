@@ -26,7 +26,7 @@ public class DataReaderServiceImplTest {
     }
 
     @Test
-    public void readData_validReadData_Ok() {
+    public void readData_validReadData_ok() {
         List<String> actual = dataReaderService.readData(VALID_READ_DATA_FILE_PATH);
         Assert.assertEquals(VALID_DATA_LIST, actual);
     }
@@ -38,7 +38,7 @@ public class DataReaderServiceImplTest {
     }
 
     @Test
-    public void readData_emptyFile_Ok() {
+    public void readData_emptyFile_ok() {
         List<String> expected = new ArrayList<>();
         List<String> actual = dataReaderService.readData(EMPTY_FILE_PATH);
         Assert.assertEquals(expected, actual);

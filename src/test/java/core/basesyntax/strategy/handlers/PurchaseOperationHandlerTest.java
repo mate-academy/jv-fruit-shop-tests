@@ -5,11 +5,17 @@ import static org.junit.Assert.fail;
 
 import core.basesyntax.db.Storage;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
     private static final String BANANA_FRUIT = "banana";
-    private PurchaseOperationHandler handler = new PurchaseOperationHandler();
+    private PurchaseOperationHandler handler;
+
+    @Before
+    public void setUp() {
+        handler = new PurchaseOperationHandler();
+    }
 
     @After
     public void afterEachTest() {
@@ -17,7 +23,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void apply_buyFruit_Ok() {
+    public void apply_buyFruit_ok() {
         Storage.put(BANANA_FRUIT, 10);
         handler.apply(BANANA_FRUIT, 5);
         assertEquals((Integer) 5, Storage.get("banana"));

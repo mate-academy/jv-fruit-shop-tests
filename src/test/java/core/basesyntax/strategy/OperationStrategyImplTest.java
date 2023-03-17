@@ -20,25 +20,25 @@ public class OperationStrategyImplTest {
     ));
 
     @Test
-    public void get_BalanceOperationHandler_Ok() {
+    public void get_BalanceOperationHandler_ok() {
         OperationHandler operationHandler = operationStrategy.get(Operation.BALANCE);
         assertTrue(operationHandler instanceof BalanceOperationHandler);
     }
 
     @Test
-    public void get_PurchaseOperationHandler_Ok() {
+    public void get_PurchaseOperationHandler_ok() {
         OperationHandler operationHandler = operationStrategy.get(Operation.PURCHASE);
         assertTrue(operationHandler instanceof PurchaseOperationHandler);
     }
 
     @Test
-    public void get_SupplyOperationHandler_Ok() {
+    public void get_SupplyOperationHandler_ok() {
         OperationHandler operationHandler = operationStrategy.get(Operation.SUPPLY);
         assertTrue(operationHandler instanceof SupplyOperationHandler);
     }
 
     @Test
-    public void get_ReturnOperationHandler_Ok() {
+    public void get_ReturnOperationHandler_ok() {
         OperationHandler operationHandler = operationStrategy.get(Operation.RETURN);
         assertTrue(operationHandler instanceof ReturnOperationHandler);
     }

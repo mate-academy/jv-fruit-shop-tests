@@ -54,7 +54,7 @@ public class StrategyApplicationServiceImplTest {
     }
 
     @Test
-    public void applyOperationStrategy_validData_Ok() {
+    public void applyOperationStrategy_validData_ok() {
         strategyApplicationService.applyOperationStrategy(VALID_LIST);
         Assert.assertEquals((Integer) 200, Storage.get("banana"));
         Storage.fruits.clear();

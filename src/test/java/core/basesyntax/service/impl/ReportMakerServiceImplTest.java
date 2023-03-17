@@ -26,7 +26,7 @@ public class ReportMakerServiceImplTest {
     }
 
     @Test
-    public void createReportString_validData_Ok() {
+    public void createReportString_validData_ok() {
         String reportString = reportMakerService.createReportString(fruits);
         assertEquals(VALID_DATA_STRING, reportString);
     }

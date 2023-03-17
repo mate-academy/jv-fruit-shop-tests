@@ -26,7 +26,7 @@ public class DataProcessorServiceImplTest {
     }
 
     @Test
-    public void processData_validData_Ok() {
+    public void processData_validData_ok() {
         List<String[]> processedData = dataProcessorService.processData(VALID_DATA_LIST);
         assertEquals(3, processedData.size());
         assertArrayEquals(VALID_DATA_STRING_1, processedData.get(0));

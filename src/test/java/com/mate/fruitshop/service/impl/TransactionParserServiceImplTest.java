@@ -3,13 +3,14 @@ package com.mate.fruitshop.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import com.mate.fruitshop.model.Transaction;
+import com.mate.fruitshop.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserServiceImplTest {
-    private static TransactionParserServiceImpl parser = new TransactionParserServiceImpl();
+    private static TransactionParserService parser = new TransactionParserServiceImpl();
     private static List<String> testInput;
     private static List<Transaction> expectedOutput;
 

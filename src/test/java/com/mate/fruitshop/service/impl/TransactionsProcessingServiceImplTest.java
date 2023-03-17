@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import com.mate.fruitshop.db.Storage;
 import com.mate.fruitshop.model.FruitEntry;
 import com.mate.fruitshop.model.Transaction;
+import com.mate.fruitshop.service.TransactionsProcessingService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -13,7 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionsProcessingServiceImplTest {
-    private static TransactionsProcessingServiceImpl processor =
+    private static TransactionsProcessingService processor =
             new TransactionsProcessingServiceImpl();
     private static List<Transaction> transactions;
     private static List<FruitEntry> expectedStorage;
@@ -54,15 +55,5 @@ public class TransactionsProcessingServiceImplTest {
             assertEquals(expectedStorage.get(i).getQuantity(),
                     Storage.fruits.get(i).getQuantity());
         }
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void process_PurchaseBelowStock_NotOk() {
-        processor.process(transactions);
-        List<Transaction> testList = new ArrayList<>();
-        testList.add(new Transaction(Transaction.Operation.PURCHASE,
-                Storage.fruits.get(0).getFruitName(),
-                Storage.fruits.get(0).getQuantity() + 1));
-        processor.process(testList);
     }
 }

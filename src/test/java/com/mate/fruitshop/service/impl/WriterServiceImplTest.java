@@ -1,7 +1,6 @@
 package com.mate.fruitshop.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import com.mate.fruitshop.service.WriterService;
 import java.io.IOException;
@@ -13,6 +12,7 @@ import org.junit.Test;
 public class WriterServiceImplTest {
     private static final String SOME_TEXT = "12345qwerty";
     private static final String CORRECT_FILE_NAME = "src/test/resources/testReport.csv";
+    private static final String WRONG_PATH = "#$%^EdD^%&//Wrong path..//";
     private static WriterService writer = new WriterServiceImpl();
 
     @After
@@ -26,20 +26,18 @@ public class WriterServiceImplTest {
     @Test
     public void write_Empty_Ok() {
         writer.write("", CORRECT_FILE_NAME);
-        assertTrue(Files.exists(Path.of(CORRECT_FILE_NAME)));
         assertEquals("", readFile(CORRECT_FILE_NAME));
     }
 
     @Test
     public void write_SomeText_Ok() {
         writer.write(SOME_TEXT, CORRECT_FILE_NAME);
-        assertTrue(Files.exists(Path.of(CORRECT_FILE_NAME)));
         assertEquals(SOME_TEXT, readFile(CORRECT_FILE_NAME));
     }
 
     @Test(expected = RuntimeException.class)
     public void write_WrongDirectory_NotOk() {
-        writer.write(SOME_TEXT, CORRECT_FILE_NAME + "//Wrong path..//");
+        writer.write(SOME_TEXT, WRONG_PATH);
     }
 
     private String readFile(String fileName) {

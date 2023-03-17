@@ -1,10 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.ParserService;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    void parse_toList_ok() {
+    void parse_toList_isOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 KEY,VALUE);
         List<FruitTransaction> excepted = parserService.parse(List.of(HEADER, LINE_OK));
@@ -30,7 +30,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    void parse_toList_notOk() {
+    void parse_toList_isNotOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 KEY,VALUE);
         List<FruitTransaction> excepted = parserService.parse(List.of(LINE_OK));

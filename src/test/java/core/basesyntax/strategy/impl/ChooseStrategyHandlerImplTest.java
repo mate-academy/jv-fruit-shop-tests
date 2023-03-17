@@ -1,14 +1,11 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.database.StorageOfFruits;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.BalanceOperationImpl;
-import core.basesyntax.strategy.impl.ChooseStrategyHandlerImpl;
-import core.basesyntax.strategy.impl.PurchaseOperationImpl;
-import core.basesyntax.strategy.impl.ReturnOperationImpl;
-import core.basesyntax.strategy.impl.SupplyOperationImpl;
+import core.basesyntax.strategy.ChooseStrategyHandler;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +28,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Supply_ok() {
+    void getHandler_supply_isOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, KEY, VALUE)
@@ -39,7 +36,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Purchase_ok() {
+    void getHandler_purchase_isOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, KEY, VALUE)
@@ -47,7 +44,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Return_ok() {
+    void getHandler_return_isOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.RETURN, KEY, VALUE)
@@ -55,7 +52,7 @@ public class ChooseStrategyHandlerImplTest {
     }
 
     @Test
-    void get_Balance_ok() {
+    void getHandler_balance_isOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertEquals(chooseStrategyHandler.getHandler(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, KEY, VALUE)

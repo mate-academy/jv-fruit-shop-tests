@@ -1,9 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 public class ReaderServiceImplTest {
     private static final String HEADER = "type,fruit,quantity";
     private static final String LINE_OK = "b,banana,100";
-    private static final String PATH_TO_EMPTY = "src/test/java/core/basesyntax/empty.txt";
-    private static final String PATH_TO_FRUITS = "src/test/java/core/basesyntax/fruits.txt";
+    private static final String PATH_TO_EMPTY = "src/test/resources/empty.txt";
+    private static final String PATH_TO_FRUITS = "src/test/resources/fruits.txt";
     private static final String WRONG_PATH = " ";
     private static ReaderService readerService;
 
@@ -23,26 +23,20 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    void read_emptyFile_ok() {
-        List<String> listOfDataFromFile = readerService.getListOfDataFromFile(PATH_TO_EMPTY);
+    void read_emptyFile_isOk() {
+        List<String> listOfDataFromFile = readerService.read(PATH_TO_EMPTY);
         assertEquals(new ArrayList<>(), listOfDataFromFile);
     }
 
     @Test
-    void read_Data_ok() {
-        List<String> listOfDataFromFile = readerService.getListOfDataFromFile(PATH_TO_FRUITS);
+    void reade_data_isOk() {
+        List<String> listOfDataFromFile = readerService.read(PATH_TO_FRUITS);
         assertEquals(List.of(HEADER,LINE_OK), listOfDataFromFile);
     }
 
     @Test
-    void read_No_File_notOk() {
+    void read_noFile_isNotOk() {
         assertThrows(RuntimeException.class,
-                () -> readerService.getListOfDataFromFile(WRONG_PATH));
-    }
-
-    @Test
-    void read_file_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> readerService.getListOfDataFromFile(WRONG_PATH));
+                () -> readerService.read(WRONG_PATH));
     }
 }

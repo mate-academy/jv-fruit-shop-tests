@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> getListOfDataFromFile(String fileName) {
+    public List<String> read(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {

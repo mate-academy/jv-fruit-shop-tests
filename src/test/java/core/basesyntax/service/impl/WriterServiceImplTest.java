@@ -1,9 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.service.WriterService;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,21 +13,22 @@ import org.junit.jupiter.api.Test;
 public class WriterServiceImplTest {
     private static final String HEADER = "type,fruit,quantity";
     private static final String LINE_OK = "b,banana,100";
-    private static final String PATH_TO_TEST = "src/test/java/core/basesyntax/test.txt";
-    private static final String WRONG_PATH = " ";
+    private static final String PATH_TO_TEST = "src/test/resources/test.txt";
     private static WriterService writerService;
-    private static ReaderService readerService;
 
     @BeforeAll
     static void beforeAll() {
         writerService = new WriterServiceImpl();
-        readerService = new ReaderServiceImpl();
     }
 
     @Test
-    void write_To_File_ok() {
+    void write_toFile_isOk() {
         writerService.write(HEADER + LINE_OK, PATH_TO_TEST);
-        assertEquals(readerService.getListOfDataFromFile(PATH_TO_TEST),
-                List.of(HEADER + LINE_OK));
+        try {
+            assertEquals(Files.readAllLines(Path.of(PATH_TO_TEST)),
+                    List.of(HEADER + LINE_OK));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

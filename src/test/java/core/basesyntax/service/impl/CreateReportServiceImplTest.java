@@ -1,9 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.database.StorageOfFruits;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
+import core.basesyntax.service.CreateReportService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,15 +26,15 @@ public class CreateReportServiceImplTest {
     }
 
     @Test
-    void creating_Of_Report_ok() {
+    void parse_creatingReport_isOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         String parse = createReportService.parse(StorageOfFruits.fruitStorage);
-        String assertLine = HEADER + System.lineSeparator() + LINE_OK;
-        assertEquals(assertLine, parse);
+        String expected = HEADER + System.lineSeparator() + LINE_OK;
+        assertEquals(expected, parse);
     }
 
     @Test
-    void creating_Header_Of_Report_ok() {
+    void parse_creatingHeader_isOk() {
         String parse = createReportService.parse(StorageOfFruits.fruitStorage);
         assertEquals(HEADER, parse);
     }

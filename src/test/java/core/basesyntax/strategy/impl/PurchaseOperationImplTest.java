@@ -1,11 +1,10 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.database.StorageOfFruits;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.PurchaseOperationImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,7 @@ public class PurchaseOperationImplTest {
     }
 
     @Test
-    void add_Purchase_ok() {
+    void calculateFruit_Purchase_isOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         purchaseOperation.calculateFruit(new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, KEY, VALUE
@@ -38,7 +37,7 @@ public class PurchaseOperationImplTest {
     }
 
     @Test
-    void add_Purchase_notOk() {
+    void calculateFruit_Purchase_isNotOk() {
         StorageOfFruits.fruitStorage.put(KEY, VALUE);
         assertThrows(RuntimeException.class, () -> {
             purchaseOperation.calculateFruit(new FruitTransaction(

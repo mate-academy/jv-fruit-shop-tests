@@ -32,7 +32,7 @@ public class Main {
         mapOfOperations.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl());
         mapOfOperations.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl());
         ReaderServiceImpl readFromFile = new ReaderServiceImpl();
-        List<String> list = readFromFile.getListOfDataFromFile(INPUT_FILE);
+        List<String> list = readFromFile.read(INPUT_FILE);
         ParserService cft = new ParserServiceImpl();
         CalculatorService calculatorService = new CalculatorServiceImpl(
                 new ChooseStrategyHandlerImpl(mapOfOperations));

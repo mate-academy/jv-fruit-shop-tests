@@ -1,10 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.database.StorageOfFruits;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.CalculatorServiceImpl;
+import core.basesyntax.service.CalculatorService;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationImpl;
 import core.basesyntax.strategy.impl.ChooseStrategyHandlerImpl;
@@ -36,7 +36,7 @@ public class CalculatorServiceImplTest {
     }
 
     @Test
-    void changing_Operations_oK() {
+    void calculate_chooseStrategy_isOk() {
         StorageOfFruits.fruitStorage.put(KEY,VALUE);
         calculatorService.calculate(List.of(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, KEY, VALUE),

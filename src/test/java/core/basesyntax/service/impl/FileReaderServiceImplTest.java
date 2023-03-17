@@ -20,7 +20,7 @@ public class FileReaderServiceImplTest {
     private static final String NOT_EXISTING_FILE =
             "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/main/resources/cucaracha.csv";
     private static final String NORMAL_FILE =
-            "/Users/MacBook/Desktop/base_1/jv-fruit-shop-tests/src/test/resources/input.csv";
+            "src/test/resources/input.csv";
     private static File file;
 
     @BeforeClass

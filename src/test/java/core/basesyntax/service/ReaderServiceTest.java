@@ -9,12 +9,12 @@ import org.junit.Test;
 
 public class ReaderServiceTest {
     private static final String DEFAULT_FILE_PATH =
-            "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources\\reader.csv";
+            "src/test/resources/reader.csv";
     private static final String CORRECT_DATA = "abcd";
     private static final String EMPTY_DATA_PATH =
-            "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources\\empty.csv";
+            "src/test/resources/empty.csv";
     private static final String INCORRECT_PATH =
-            "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources";
+            "src/test/resources";
     private static final String EMPTY_DATA = "";
     private static ReaderService readerService;
 

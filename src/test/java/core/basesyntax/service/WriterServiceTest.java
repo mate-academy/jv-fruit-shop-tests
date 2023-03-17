@@ -14,7 +14,7 @@ import org.junit.Test;
 public class WriterServiceTest {
     private static final String DEFAULT_INPUT = "abcd";
     private static final String PATH_TO_FILE =
-            "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources\\toWrite.csv";
+            "src/test/resources/toWrite.csv";
     private static final String EMPTY_DATA = "";
     private static ReaderService readerService;
     private static WriterService writerService;

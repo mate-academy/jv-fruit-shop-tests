@@ -11,9 +11,9 @@ import org.junit.Test;
 
 public class TransactionParserServiceTest {
     private static final String INCORRECT_FIRSLINE_PATH =
-            "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources\\falseInput.csv";
+            "src/test/resources/falseInput.csv";
     private static final String DEFAULT_DATA =
-            "D:\\Progr\\jv-fruit-shop-tests\\src\\test\\resources\\input.csv";
+            "src/test/resources/input.csv";
     private static ReaderService readerService;
     private static TransactionParserService transactionParserService;
     private static List<FruitTransaction> defaultData;

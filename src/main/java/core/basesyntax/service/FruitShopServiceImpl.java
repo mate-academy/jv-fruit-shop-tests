@@ -1,7 +1,6 @@
-package core.basesyntax.impl;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopService;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.Strategy;
 import java.util.List;

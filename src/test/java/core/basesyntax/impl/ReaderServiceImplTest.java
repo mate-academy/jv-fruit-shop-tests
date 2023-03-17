@@ -1,14 +1,14 @@
 package core.basesyntax.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
@@ -17,26 +17,25 @@ public class ReaderServiceImplTest {
     private static final String FILE_NAME_TO_NULL = null;
     private static final String NAME_FILE_WITH_INFO =
             "src/test/java/core/basesyntax/impl/resources/CorrectData.csv";
-    private static final ReaderService readerService = new ReaderServiceImpl();
+    private static ReaderService readerService;
     private static final List<String []> arrayList = new ArrayList<>();
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void beforeClass() {
+        readerService = new ReaderServiceImpl();
         arrayList.add(new String[] {"type", "fruit", "quantity"});
         arrayList.add(new String[] {"b", "banana", "20"});
         arrayList.add(new String[] {"b", "apple", "100"});
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readEmptyFile_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                readerService.read(NAME_EMPTY_FILE));
+        readerService.read(NAME_EMPTY_FILE);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readNullFile_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                readerService.read(FILE_NAME_TO_NULL));
+        readerService.read(FILE_NAME_TO_NULL);
     }
 
     @Test

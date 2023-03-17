@@ -1,29 +1,29 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class BalanceFruitHandlerTest {
+public class BalanceFruitHandlerTest {
     private static final String BANANA = "banana";
     private static final String OPERATION_BANANA = "b";
     private static final Integer VALID_VALUE = 10;
     private static final FruitTransaction TRANSACTION = new FruitTransaction(null, null, -1);
-    private static final FruitHandler fruitHandler = new BalanceFruitHandler();
+    private static FruitHandler fruitHandler;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
+        fruitHandler = new BalanceFruitHandler();
         TRANSACTION.setOperation(null);
         TRANSACTION.setFruit(null);
         TRANSACTION.setValue(-1);
     }
 
     @Test
-    void fruitTransactionValid_ok() {
+    public void fruitTransactionValid_ok() {
         TRANSACTION.setOperation(OPERATION_BANANA);
         TRANSACTION.setValue(VALID_VALUE);
         TRANSACTION.setFruit(BANANA);
@@ -33,27 +33,25 @@ class BalanceFruitHandlerTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void fruitInFruitTransactionNull_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void fruitInFruitTransactionNull_notOk() {
         TRANSACTION.setOperation(OPERATION_BANANA);
         TRANSACTION.setValue(VALID_VALUE);
-        assertThrows(RuntimeException.class, () ->
-                fruitHandler.apply(TRANSACTION));
+        fruitHandler.apply(TRANSACTION);
+
     }
 
-    @Test
-    void operationInFruitTransactionNull_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void operationInFruitTransactionNull_notOk() {
         TRANSACTION.setFruit(BANANA);
         TRANSACTION.setValue(VALID_VALUE);
-        assertThrows(RuntimeException.class, () ->
-                fruitHandler.apply(TRANSACTION));
+        fruitHandler.apply(TRANSACTION);
     }
 
-    @Test
-    void valueInFruitTransactionNull_notOk() {
+    @Test(expected = RuntimeException.class)
+    public void valueInFruitTransactionNull_notOk() {
         TRANSACTION.setFruit(BANANA);
         TRANSACTION.setOperation(OPERATION_BANANA);
-        assertThrows(RuntimeException.class, () ->
-                fruitHandler.apply(TRANSACTION));
+        fruitHandler.apply(TRANSACTION);
     }
 }

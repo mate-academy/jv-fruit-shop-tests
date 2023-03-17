@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.Test;
 
@@ -14,9 +11,9 @@ public class ReaderServiceImplTest {
     private final ReaderService readerService = new ReaderServiceImpl();
 
     @Test
-    public void read_validFile_Ok() throws IOException {
-        Path tempFile = Files.createTempFile("src/test/resources/test", ".csv");
-        List<String> result = readerService.read(tempFile.toString());
+    public void read_validFile_Ok() {
+        String fileName = "src/test/resources/test.csv";
+        List<String> result = readerService.read(fileName);
         assertNotNull("Result should not be null", result);
     }
 
@@ -27,9 +24,9 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_emptyFile_notOk() throws IOException {
-        Path emptyFile = Files.createTempFile("src/test/resources/empty", ".csv");
-        List<String> result = readerService.read(emptyFile.toString());
+    public void read_emptyFile_notOk() {
+        String fileName = "src/test/resources/empty.csv";
+        List<String> result = readerService.read(fileName);
         assertNotNull("Result should not be null", result);
         assertEquals("Result should be an empty list", 0, result.size());
     }

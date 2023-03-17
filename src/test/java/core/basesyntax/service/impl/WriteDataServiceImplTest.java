@@ -22,11 +22,9 @@ public class WriteDataServiceImplTest {
         readerService = new ReaderServiceImpl();
     }
 
-    @Test(expected = AssertionError.class)
-    public void writeData_wrongPath_notOk() {
+    @Test
+    public void writeData_wrongPath_Ok() {
         writeDataService.writeDataToFile(EXPECTED_DATA, WRONG_PATH_TO_FILE);
-        fail("Expected " + AssertionError.class.getName() + " to be thrown for wrong path "
-                + WRONG_PATH_TO_FILE + " but it's wasn't");
     }
 
     @Test(expected = RuntimeException.class)

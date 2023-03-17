@@ -13,7 +13,7 @@ public class ReportCreatorServiceImplTest {
             new ReportCreatorServiceImpl();
 
     @Test
-    public void createReport_empty_Ok() {
+    public void createReport_Empty_Ok() {
         assertEquals("fruit,quantity" + System.lineSeparator(),
                 reportCreator.createReport(new ArrayList<>()));
     }

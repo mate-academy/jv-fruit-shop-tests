@@ -44,7 +44,7 @@ public class WriterServiceImplTest {
         try {
             return Files.readString(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to read from test report:" + fileName, e);
         }
     }
 }

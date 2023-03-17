@@ -13,13 +13,13 @@ public class BalanceHandlerTest {
     private static final FruitEntry STORAGE_ENTRY =
             new FruitEntry("banana", 5);
     private static final int FIRST_INDEX = 0;
-    private static BalanceHandler balanceHandler;
+    private static OperationHandler balanceHandler;
     private static Transaction balanceTransaction;
 
     @Before
     public void setUp() {
         balanceHandler = new BalanceHandler();
-        balanceTransaction = new Transaction(Transaction.Operation.RETURN,
+        balanceTransaction = new Transaction(Transaction.Operation.BALANCE,
                 "banana", 10);
     }
 
@@ -29,7 +29,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void process_newFruit_Ok() {
+    public void process_NewFruit_Ok() {
         balanceHandler.process(balanceTransaction);
         assertEquals(balanceTransaction.getFruitName(),
                 Storage.fruits.get(FIRST_INDEX).getFruitName());
@@ -38,7 +38,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void process_existingFruit_Ok() {
+    public void process_ExistingFruit_Ok() {
         Storage.fruits.add(FIRST_INDEX, STORAGE_ENTRY);
         balanceHandler.process(balanceTransaction);
         assertEquals(balanceTransaction.getQuantity(),

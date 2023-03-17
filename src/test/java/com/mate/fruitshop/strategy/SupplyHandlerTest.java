@@ -14,13 +14,13 @@ public class SupplyHandlerTest {
             new FruitEntry("banana", 5);
     private static final int EXPECTED_QUANTITY = 15;
     private static final int FIRST_INDEX = 0;
-    private static SupplyHandler supplyHandler;
+    private static OperationHandler supplyHandler;
     private static Transaction supplyTransaction;
 
     @Before
     public void setUp() {
         supplyHandler = new SupplyHandler();
-        supplyTransaction = new Transaction(Transaction.Operation.RETURN,
+        supplyTransaction = new Transaction(Transaction.Operation.SUPPLY,
                 "banana", 10);
     }
 
@@ -30,7 +30,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void process_newFruit_Ok() {
+    public void process_NewFruit_Ok() {
         supplyHandler.process(supplyTransaction);
         assertEquals(supplyTransaction.getFruitName(),
                 Storage.fruits.get(FIRST_INDEX).getFruitName());
@@ -39,7 +39,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void process_existingFruit_Ok() {
+    public void process_ExistingFruit_Ok() {
         Storage.fruits.add(FIRST_INDEX, STORAGE_ENTRY);
         supplyHandler.process(supplyTransaction);
         assertEquals(EXPECTED_QUANTITY,

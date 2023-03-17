@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final int LINES_COUNT = 100;
-    private static final String TEST_FILE_NAME = "src/test/resources/HundredLines.csv";
+    private static final String TEST_FILE_NAME = "src/test/resources/hundredLines.csv";
     private static final String EMPTY_FILE_NAME = "src/test/resources/empty.csv";
     private static ReaderService readerService = new ReaderServiceImpl();
 

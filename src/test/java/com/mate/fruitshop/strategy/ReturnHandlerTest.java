@@ -14,7 +14,7 @@ public class ReturnHandlerTest {
             new FruitEntry("banana", 5);
     private static final int EXPECTED_QUANTITY = 15;
     private static final int FIRST_INDEX = 0;
-    private static ReturnHandler returnHandler;
+    private static OperationHandler returnHandler;
     private static Transaction returnTransaction;
 
     @Before
@@ -30,7 +30,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void process_newFruit_Ok() {
+    public void process_NewFruit_Ok() {
         returnHandler.process(returnTransaction);
         assertEquals(returnTransaction.getFruitName(),
                 Storage.fruits.get(FIRST_INDEX).getFruitName());
@@ -39,7 +39,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void process_existingFruit_Ok() {
+    public void process_ExistingFruit_Ok() {
         Storage.fruits.add(FIRST_INDEX, STORAGE_ENTRY);
         returnHandler.process(returnTransaction);
         assertEquals(EXPECTED_QUANTITY,

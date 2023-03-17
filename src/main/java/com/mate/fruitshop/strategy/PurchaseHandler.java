@@ -5,7 +5,7 @@ import com.mate.fruitshop.dao.impl.FruitStorageDaoImpl;
 import com.mate.fruitshop.model.FruitEntry;
 import com.mate.fruitshop.model.Transaction;
 
-public class PurchaseHandler implements TransactionProcessingStrategy {
+public class PurchaseHandler implements OperationHandler {
     private final FruitStorageDao dao;
 
     public PurchaseHandler() {

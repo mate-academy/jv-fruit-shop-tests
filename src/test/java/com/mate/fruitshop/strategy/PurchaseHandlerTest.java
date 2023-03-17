@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class PurchaseHandlerTest {
     private static final int FIRST_INDEX = 0;
-    private static PurchaseHandler purchaseHandler;
+    private static OperationHandler purchaseHandler;
 
     @Before
     public void setUp() {
@@ -25,7 +25,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void process_validPurchase_Ok() {
+    public void process_ValidPurchase_Ok() {
         FruitEntry storageEntry = Storage.fruits.get(FIRST_INDEX);
         Transaction purchase = new Transaction(Transaction.Operation.PURCHASE,
                 storageEntry.getFruitName(), storageEntry.getQuantity());
@@ -35,7 +35,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void process_purchaseBelowStock_NotOk() {
+    public void process_PurchaseBelowStock_NotOk() {
         FruitEntry storageEntry = Storage.fruits.get(FIRST_INDEX);
         Transaction purchase = new Transaction(Transaction.Operation.PURCHASE,
                 storageEntry.getFruitName(), storageEntry.getQuantity() + 1);

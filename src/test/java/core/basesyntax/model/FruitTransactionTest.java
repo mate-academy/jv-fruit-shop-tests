@@ -69,6 +69,7 @@ public class FruitTransactionTest {
             FruitTransaction.Operation.getOperation(INVALID_OPERATION_CODE);
         });
     }
+
     @Test
     void equals_ok() {
         FruitTransaction fruitTransaction1 =

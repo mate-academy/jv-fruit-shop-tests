@@ -46,7 +46,7 @@ public class OperationStrategyServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-        public void applyOperationStrategy_nullOperation_notOk() {
+    public void applyOperationStrategy_nullOperation_notOk() {
         fruitTransaction = new FruitTransaction(
                 null, BANANA_FRUIT, BANANA_QUANTITY);
         operationStrategyService.applyOperationStrategy(fruitTransaction);

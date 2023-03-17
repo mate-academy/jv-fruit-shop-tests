@@ -4,10 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.service.implementation.CsvFileWriterServiceImpl;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.Test;
 
 public class CsvFileWriterServiceImplTest {
@@ -20,21 +19,17 @@ public class CsvFileWriterServiceImplTest {
     private CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
 
     @Test
-    public void writeToFile_Ok() {
+    public void write_validDataToFile_Ok() {
         writerService.write(REPORT, OUTPUT_TEST_FILE_PATH);
-        File file = new File(OUTPUT_TEST_FILE_PATH);
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String line = bufferedReader.readLine();
-            assertEquals("First row is invalid " + line, line, FIRST_ROW);
-            line = bufferedReader.readLine();
-            assertEquals("Second row is invalid " + line, line, SECOND_ROW);
+        try {
+            assertEquals(REPORT, Files.readString(Path.of(OUTPUT_TEST_FILE_PATH)));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + file);
+            throw new RuntimeException(e);
         }
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToFile_not_Ok() {
+    public void write_invalidData_notOk() {
         writerService.write(REPORT, INVALID_OUTPUT_FILE_PATH);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for invalid path, but it wasn't");

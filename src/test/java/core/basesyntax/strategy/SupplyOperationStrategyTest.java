@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Test;
 
 public class SupplyOperationStrategyTest {
-
     private static final String APPLE_KEY = "apple";
     private static final int APPLE_VALUE = 100;
     private static final int APPLE_TEST_VALUE = 120;
@@ -45,7 +44,7 @@ public class SupplyOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applySupply_nullFruit_not_Ok() {
+    public void applySupply_nullFruit_notOk() {
         fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                         null, APPLE_TEST_VALUE);
@@ -55,7 +54,7 @@ public class SupplyOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applySupply_quantityLessThanZero_not_Ok() {
+    public void applySupply_quantityLessThanZero_notOk() {
         fruitTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.SUPPLY, APPLE_KEY, APPLE_TEST_NEGATIVE_VALUE);

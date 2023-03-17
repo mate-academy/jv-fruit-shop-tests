@@ -47,7 +47,7 @@ public class PurchaseOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyPurchase_nullFruit_not_Ok() {
+    public void applyPurchase_nullFruit_notOk() {
         fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         null, APPLE_TEST_VALUE);
@@ -57,7 +57,7 @@ public class PurchaseOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyPurchase_quantityLessThanZero_not_Ok() {
+    public void applyPurchase_quantityLessThanZero_notOk() {
         fruitTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.PURCHASE, APPLE_KEY,
@@ -68,7 +68,7 @@ public class PurchaseOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyPurchase_quantityMoreThanAmount_not_Ok() {
+    public void applyPurchase_quantityMoreThanAmount_notOk() {
         FruitStorage.put(APPLE_KEY, APPLE_VALUE);
         fruitTransaction =
                 new FruitTransaction(

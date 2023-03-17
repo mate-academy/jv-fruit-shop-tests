@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Test;
 
 public class BalanceOperationStrategyTest {
-
     private static final String APPLE_KEY = "apple";
     private static final int APPLE_VALUE = 100;
     private static final int APPLE_TEST_VALUE = 120;
@@ -45,7 +44,7 @@ public class BalanceOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyBalance_nullFruit_not_Ok() {
+    public void applyBalance_nullFruit_notOk() {
         fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         null, APPLE_TEST_VALUE);
@@ -55,7 +54,7 @@ public class BalanceOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyBalance_quantityLessThanZero_not_Ok() {
+    public void applyBalance_quantityLessThanZero_notOk() {
         fruitTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.BALANCE, APPLE_KEY,

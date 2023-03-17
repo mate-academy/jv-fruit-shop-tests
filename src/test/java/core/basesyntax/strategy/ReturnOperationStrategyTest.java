@@ -45,7 +45,7 @@ public class ReturnOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyReturn_nullFruit_not_Ok() {
+    public void applyReturn_nullFruit_notOk() {
         fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, null, APPLE_TEST_VALUE);
         operationStrategy.apply(fruitTransaction);
@@ -54,7 +54,7 @@ public class ReturnOperationStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void applyReturn_quantityLessThanZero_not_Ok() {
+    public void applyReturn_quantityLessThanZero_notOk() {
         fruitTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.RETURN, APPLE_KEY, APPLE_TEST_NEGATIVE_VALUE);

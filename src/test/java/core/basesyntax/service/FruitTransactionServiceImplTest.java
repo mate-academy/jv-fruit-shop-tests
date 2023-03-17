@@ -25,14 +25,14 @@ public class FruitTransactionServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void createFruitTransaction_nullInputLine_not_Ok() {
+    public void createFruitTransaction_nullInputLine_notOk() {
         fruitTransactionService.createFruitTransaction(null);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for null input line, but it wasn't");
     }
 
     @Test(expected = RuntimeException.class)
-    public void createFruitTransaction_invalidInputLine_not_Ok() {
+    public void createFruitTransaction_invalidInputLine_notOk() {
         fruitTransactionService.createFruitTransaction(INVALID_INPUT_LINE);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for invalid input line, but it wasn't");

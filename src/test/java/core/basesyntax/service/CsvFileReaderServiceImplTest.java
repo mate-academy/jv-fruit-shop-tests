@@ -10,7 +10,7 @@ import org.junit.Test;
 public class CsvFileReaderServiceImplTest {
     private static final String INPUT_FILE_PATH = "src/test/resources/testInput.csv";
     private static final String INVALID_FILE_PATH = "src/test/resources/testInputFail.csv";
-    private static final String EMPTY_FILE_PATH = "src/test/resources/emptyTestFile.csv";
+    private static final String PATH_TO_EMPTY_FILE = "src/test/resources/emptyTestFile.csv";
     private static final List<String> EXPECTED_RESULT = List.of(
             "b,banana,20",
             "b,apple,100",
@@ -30,15 +30,15 @@ public class CsvFileReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFrom_fileNotFound_not_Ok() {
+    public void readFrom_fileNotFound_notOk() {
         csvFileReaderService.readFrom(INVALID_FILE_PATH);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for invalid path, but it wasn't");
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFrom_emptyFile_not_Ok() {
-        csvFileReaderService.readFrom(EMPTY_FILE_PATH);
+    public void readFrom_emptyFile_notOk() {
+        csvFileReaderService.readFrom(PATH_TO_EMPTY_FILE);
         fail("Expected " + RuntimeException.class.getName()
                 + " to be thrown for invalid path, but it wasn't");
     }

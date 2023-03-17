@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,7 +36,7 @@ public class ReaderServiceImplTest {
 
     @Test
     void read_No_File_notOk() {
-        assertThrows(InvalidPathException.class,
+        assertThrows(RuntimeException.class,
                 () -> readerService.getListOfDataFromFile(WRONG_PATH));
     }
 

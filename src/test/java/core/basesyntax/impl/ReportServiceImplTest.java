@@ -27,18 +27,18 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void storageValid_ok() {
+    public void realizePattern_storageValid_ok() {
         String actual = reportService.createReport(VALID_MAP);
         assertEquals(EXPECTED_REPORT, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void storageEmpty_notOk() {
+    public void realizePattern_storageEmpty_notOk() {
         reportService.createReport(EMPTY_MAP);
     }
 
     @Test(expected = RuntimeException.class)
-    public void storageNull_notOk() {
+    public void realizePattern_storageNull_notOk() {
         reportService.createReport(NULL_MAP);
     }
 }

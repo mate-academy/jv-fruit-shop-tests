@@ -12,10 +12,10 @@ import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String NAME_EMPTY_FILE =
-            "src/test/java/core/basesyntax/impl/resources/emptyFile.csv";
+            "src/test/java/core/basesyntax/impl/emptyFile.csv";
     private static final String FILE_NAME_TO_NULL = null;
     private static final String NAME_FILE_WITH_INFO =
-            "src/test/java/core/basesyntax/impl/resources/CorrectData.csv";
+            "src/test/java/core/basesyntax/impl/CorrectData.csv";
     private static ReaderService readerService;
     private static final List<String> VALID_LIST = List.of(
             "type", "fruit", "quantity",
@@ -28,17 +28,17 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readEmptyFile_notOk() {
+    public void realizePattern_readEmptyFile_notOk() {
         readerService.read(NAME_EMPTY_FILE);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNullFile_notOk() {
+    public void realizePattern_readNullFile_notOk() {
         readerService.read(FILE_NAME_TO_NULL);
     }
 
     @Test
-    public void readCorrectData_ok() {
+    public void realizePattern_readCorrectData_ok() {
         List<String[]> listOfArray = readerService.read(NAME_FILE_WITH_INFO);
         List<String> actual = listOfArray.stream()
                 .flatMap(Arrays::stream)

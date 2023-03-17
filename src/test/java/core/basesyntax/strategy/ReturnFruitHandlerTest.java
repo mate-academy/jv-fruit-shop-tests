@@ -30,9 +30,14 @@ public class ReturnFruitHandlerTest {
         TRANSACTION.setValue(VALID_VALUE);
         TRANSACTION.setFruit(BANANA);
         fruitHandler.apply(TRANSACTION);
-        int expected = (int) VALID_VALUE + BALANCE_VALUE;
+        int expected = VALID_VALUE + BALANCE_VALUE;
         int actual = Storage.storage.get(BANANA);
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void transactionInFruitTransactionNull_notOk() {
+        fruitHandler.apply(null);
     }
 
     @Test (expected = RuntimeException.class)

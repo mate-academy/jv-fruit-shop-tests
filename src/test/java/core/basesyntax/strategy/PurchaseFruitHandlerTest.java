@@ -30,7 +30,7 @@ public class PurchaseFruitHandlerTest {
         TRANSACTION.setValue(VALID_VALUE);
         TRANSACTION.setFruit(BANANA);
         fruitHandler.apply(TRANSACTION);
-        int expected = (int) BALANCE_VALUE - VALID_VALUE;
+        int expected = BALANCE_VALUE - VALID_VALUE;
         int actual = Storage.storage.get(BANANA);
         assertEquals(expected, actual);
     }
@@ -40,6 +40,11 @@ public class PurchaseFruitHandlerTest {
         TRANSACTION.setOperation(OPERATION_BANANA);
         TRANSACTION.setValue(VALID_VALUE);
         fruitHandler.apply(TRANSACTION);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void transactionInFruitTransactionNull_notOk() {
+        fruitHandler.apply(null);
     }
 
     @Test (expected = RuntimeException.class)

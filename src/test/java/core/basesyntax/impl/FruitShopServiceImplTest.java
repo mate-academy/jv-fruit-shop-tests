@@ -36,19 +36,19 @@ public class FruitShopServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void emptyListTransaction_notOk() {
+    public void realizePattern_emptyListTransaction_notOk() {
         fruitShopService.realizePattern(EMPTY_LIST_TRANSACTION);
     }
 
     @Test
-    public void validListTransaction_ok() {
+    public void realizePattern_validListTransaction_ok() {
         fruitShopService.realizePattern(VALID_LIST_TRANSACTION);
         int actual = Storage.storage.get("banana");
         assertEquals(115, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void nullListTransaction_notOk() {
+    public void realizePattern_nullListTransaction_notOk() {
         fruitShopService.realizePattern(NULL_LIST_TRANSACTION);
     }
 }

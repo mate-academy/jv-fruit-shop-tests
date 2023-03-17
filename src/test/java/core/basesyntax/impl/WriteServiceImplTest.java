@@ -18,7 +18,8 @@ public class WriteServiceImplTest {
                     + "b,banana,20" + System.lineSeparator()
                     + "b,apple,100" + System.lineSeparator();
     private static final String FILE_NAME_CORRECT =
-            "src/test/java/core/basesyntax/impl/resources/FileToWrite.csv";
+            "src/test/java/core/basesyntax/impl/FileToWrite.csv";
+    private static final String FILE_NAME_INVALID = "this/path/don`t/exist";
     private static WriteService writeService;
 
     @BeforeClass
@@ -27,17 +28,22 @@ public class WriteServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void reportNull_notOk() {
+    public void realizePattern_reportNull_notOk() {
         writeService.writeToFile(NULL_REPORT, FILE_NAME_CORRECT);
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileNameNull_notOk() {
+    public void realizePattern_fileNameNull_notOk() {
         writeService.writeToFile(VALID_REPORT, FILE_NAME_TO_NULL);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void writeData_invalidFilePath_notOk() {
+        writeService.writeToFile(VALID_REPORT, FILE_NAME_INVALID);
+    }
+
     @Test
-    public void allFieldCorrect_ok() {
+    public void realizePattern_allFieldCorrect_ok() {
         writeService.writeToFile(VALID_REPORT, FILE_NAME_CORRECT);
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader =

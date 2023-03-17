@@ -33,9 +33,7 @@ public class FileReaderServiceTest {
     @Test
     public void readFromFile_validInputData_ok() {
         List<String> actual = fileReaderService.readFromFile(TEST_FILE);
-        for (int i = 0; i < excepted.size(); i++) {
-            Assert.assertEquals(excepted.get(i), actual.get(i));
-        }
+        Assert.assertEquals(excepted,actual);
     }
 
     @Test(expected = RuntimeException.class)

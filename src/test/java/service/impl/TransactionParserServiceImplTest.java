@@ -51,6 +51,12 @@ public class TransactionParserServiceImplTest {
         transactionParserService.parseInputData(inputData);
     }
 
+    @Test (expected = RuntimeException.class)
+    public void parseNullOk() {
+        inputData.remove(0);
+        transactionParserService.parseInputData(null);
+    }
+
     @After
     public void tearDown() {
         expected.clear();

@@ -25,8 +25,8 @@ public class CsvGridWriteServiceTest {
     private static final String[] EXPECTED_LINES = new String[] {
             "model,color,price", "Ferrari,blue,9000",
             "BMW,gray,4500", "Audi,yellow,3000"};
-    private static final String OUTPUT_PATH = "src/regularOutput.csv";
-    private static final String WRONG_PATH = "src/random/doubleRandom/tooRandom.csv";
+    private static final String OUTPUT_PATH = "src/test/resources/regularOutput.csv";
+    private static final String WRONG_PATH = "src/test/resources/random/doubleRandom/tooRandom.csv";
     private static Grid gridToWrite;
     private static final GridWriteService gridWriteService = new CsvGridWriteService();
 

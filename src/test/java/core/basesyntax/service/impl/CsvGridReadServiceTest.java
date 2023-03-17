@@ -17,9 +17,10 @@ public class CsvGridReadServiceTest {
             {"Ferrari", "blue", "9000"},
             {"BMW", "gray", "4500"},
             {"Audi", "yellow", "3000"}};
-    private static final String REGULAR_VALUES_PATH = "src/regular.csv";
-    private static final String EMPTY_FILE_PATH = "src/empty.csv";
-    private static final String NOT_EXIST_PATH = "src/random/doubleRandom/tooRandom.csv";
+    private static final String REGULAR_VALUES_PATH = "src/test/resources/regular.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
+    private static final String NOT_EXIST_PATH =
+            "src/test/resources/random/doubleRandom/tooRandom.csv";
     private static final GridReadService gridReadService = new CsvGridReadService();
     private static Grid expectedGrid;
 

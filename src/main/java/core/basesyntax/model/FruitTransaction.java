@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.handlers.FruitTransactionException;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -10,6 +11,9 @@ public class FruitTransaction {
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
+        if (quantity < 0) {
+            throw new FruitTransactionException("Quantity can't be less than 0!");
+        }
         this.quantity = quantity;
     }
 

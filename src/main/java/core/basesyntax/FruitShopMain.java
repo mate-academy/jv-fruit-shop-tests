@@ -16,8 +16,8 @@ import core.basesyntax.strategy.impl.ReportStrategyImpl;
 import java.util.List;
 
 public class FruitShopMain {
-    private static final String SOURCE_FILE_PATH = "src/source.csv";
-    private static final String REPORT_FILE_PATH = "src/report.csv";
+    private static final String SOURCE_FILE_PATH = "src/main/resources/source.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
     private static GridReadService gridReadService = new CsvGridReadService();
     private static FruitTransactionParser parser = new RowFruitTransactionParser();
     private static TransactionsEvaluateService evaluateService =

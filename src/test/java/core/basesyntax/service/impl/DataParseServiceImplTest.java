@@ -13,9 +13,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class DataParseServiceImplTest {
-    private static List<String> data;
-    private static List<String> wrongOperationData;
-    private static List<String> notNumberQuantityData;
+    private static List<String> valid;
+    private static List<String> wrongOperation;
+    private static List<String> notNumberQuantity;
     private static List<String> onlyHeader;
     private static List<String> negativeQuantity;
     private static List<FruitTransaction> validTransactions;
@@ -32,19 +32,19 @@ public class DataParseServiceImplTest {
         validTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 50));
 
-        data = new ArrayList<>();
-        data.add("type,fruit,quantity");
-        data.add("b,banana,20");
-        data.add("r,apple,10");
-        data.add("s,banana,50");
+        valid = new ArrayList<>();
+        valid.add("type,fruit,quantity");
+        valid.add("b,banana,20");
+        valid.add("r,apple,10");
+        valid.add("s,banana,50");
 
-        wrongOperationData = new ArrayList<>();
-        wrongOperationData.add("HEADER");
-        wrongOperationData.add("q,banana,1000");
+        wrongOperation = new ArrayList<>();
+        wrongOperation.add("HEADER");
+        wrongOperation.add("q,banana,1000");
 
-        notNumberQuantityData = new ArrayList<>();
-        notNumberQuantityData.add("HEADER");
-        notNumberQuantityData.add("b,banana,twenty");
+        notNumberQuantity = new ArrayList<>();
+        notNumberQuantity.add("HEADER");
+        notNumberQuantity.add("b,banana,twenty");
 
         onlyHeader = new ArrayList<>();
         onlyHeader.add("HEADER");
@@ -55,32 +55,32 @@ public class DataParseServiceImplTest {
     }
 
     @Test
-    public void parseData_Ok() {
-        Assert.assertEquals(validTransactions, parseService.parseData(data));
+    public void parseData_valid_Ok() {
+        Assert.assertEquals(validTransactions, parseService.parseData(valid));
     }
 
     @Test (expected = WrongOperationException.class)
-    public void parseWrongOperation_NotOk() {
-        parseService.parseData(wrongOperationData);
+    public void parseData_WrongOperation_NotOk() {
+        parseService.parseData(wrongOperation);
     }
 
     @Test (expected = TransactionQuantityException.class)
-    public void parseNotNumberQuantity_NotOk() {
-        parseService.parseData(notNumberQuantityData);
+    public void parseData_NotNumberQuantity_NotOk() {
+        parseService.parseData(notNumberQuantity);
     }
 
     @Test (expected = NullDataException.class)
-    public void parseNullData_NotOk() {
+    public void parseData_Null_NotOk() {
         parseService.parseData(null);
     }
 
     @Test
-    public void parseDataWithOnlyHeaderPresent_Ok() {
+    public void parseData_OnlyHeaderPresent_Ok() {
         Assert.assertEquals(Collections.emptyList(), parseService.parseData(onlyHeader));
     }
 
     @Test (expected = NegativeTransactionException.class)
-    public void parseDataNegativeQuantity() {
+    public void parseData_NegativeQuantity_NotOk() {
         parseService.parseData(negativeQuantity);
     }
 }

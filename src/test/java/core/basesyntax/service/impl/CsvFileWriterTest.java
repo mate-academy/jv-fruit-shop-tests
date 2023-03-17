@@ -25,7 +25,7 @@ public class CsvFileWriterTest {
     }
 
     @Test
-    public void writeToFile_Ok() {
+    public void writeToFile_validParameters_Ok() {
         fileWriter.writeToFile(file, DATA);
         try {
             Assert.assertEquals(READ_DATA, Files.readAllLines(file.toPath()));
@@ -35,7 +35,7 @@ public class CsvFileWriterTest {
     }
 
     @Test
-    public void writeNothingToFile_Ok() {
+    public void writeToFile_emptyData_Ok() {
         fileWriter.writeToFile(file, Collections.emptyList());
         try {
             Assert.assertEquals(Collections.emptyList(), Files.readAllLines(file.toPath()));
@@ -45,12 +45,12 @@ public class CsvFileWriterTest {
     }
 
     @Test (expected = NullFileException.class)
-    public void writeInNullFile_NotOk() {
+    public void writeToFile_nullFile_NotOk() {
         fileWriter.writeToFile(null, DATA);
     }
 
     @Test (expected = NullDataException.class)
-    public void writeNullDataToFile_NotOk() {
+    public void writeToFile_nullData_NotOk() {
         fileWriter.writeToFile(file, null);
     }
 }

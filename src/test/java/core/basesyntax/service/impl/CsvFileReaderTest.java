@@ -14,6 +14,7 @@ public class CsvFileReaderTest {
             "aA1!@:',&*", "test message2");
     private final File file = new File("src/test/resources/test.csv");
     private final File emptyFile = new File("src/test/resources/empty.csv");
+    private final File nonExistentFile = new File("src/test/resources/nonExistent.csv");
     private final FileReaderService fileReader;
 
     public CsvFileReaderTest() {
@@ -21,22 +22,22 @@ public class CsvFileReaderTest {
     }
 
     @Test
-    public void readFromFile_Ok() {
+    public void readFromFile_validFile_Ok() {
         Assert.assertEquals(TEST_DATA, fileReader.readFromFile(file));
     }
 
     @Test
-    public void readFromEmptyFile_Ok() {
+    public void readFromFile_emptyFile_Ok() {
         Assert.assertEquals(Collections.emptyList(), fileReader.readFromFile(emptyFile));
     }
 
     @Test (expected = NullFileException.class)
-    public void readFromNull_NotOk() {
+    public void readFromFile_NullFile_NotOk() {
         fileReader.readFromFile(null);
     }
 
     @Test (expected = ReadDataException.class)
-    public void readFromNonExistentFile_NotOk() {
-        fileReader.readFromFile(new File("src/test/resources/nonExistent.csv"));
+    public void readFromFile_nonExistentFile_NotOk() {
+        fileReader.readFromFile(nonExistentFile);
     }
 }

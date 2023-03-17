@@ -20,7 +20,7 @@ public class ReportCreatorServiceImplTest {
     }
 
     @Test
-    public void getReport_Ok() {
+    public void getReport_validData_Ok() {
         Storage.storage.put("banana", 11);
         Storage.storage.put("apple", 25);
         Assert.assertEquals(VALID_REPORT, reportCreatorService.getReport());
@@ -28,7 +28,7 @@ public class ReportCreatorServiceImplTest {
     }
 
     @Test
-    public void getReportFromEmptyStorage_Ok() {
+    public void getReport_emptyStorage_Ok() {
         Assert.assertEquals(List.of(HEADER), reportCreatorService.getReport());
     }
 }

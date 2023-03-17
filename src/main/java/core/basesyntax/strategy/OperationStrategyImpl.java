@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.exceptions.NullDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
@@ -22,6 +23,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandlerByTransaction(FruitTransaction transactions) {
+        if (transactions == null) {
+            throw new NullDataException("Transaction is null!");
+        }
         return operations.get(transactions.getOperation());
     }
 }

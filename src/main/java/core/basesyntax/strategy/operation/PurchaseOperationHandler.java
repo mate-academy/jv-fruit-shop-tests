@@ -2,12 +2,16 @@ package core.basesyntax.strategy.operation;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NoSuchElementException;
+import core.basesyntax.exceptions.NullDataException;
 import core.basesyntax.exceptions.TransactionQuantityException;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void evaluateTransaction(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new NullDataException("Transaction is null!");
+        }
         if (!Storage.storage.containsKey(transaction.getFruit())) {
             throw new NoSuchElementException("There no such fruits at the storage yet!");
         }

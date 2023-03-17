@@ -6,6 +6,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportMakerService;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportMakerServiceImplTest {
@@ -15,7 +17,7 @@ public class ReportMakerServiceImplTest {
     private static ReportMakerService reportMakerService;
     private static List<String> expectedReport;
 
-    @Test
+    @BeforeClass
     public void beforeAll() {
         reportMakerService = new ReportMakerServiceImpl(HEADER,SEPARATOR);
         expectedReport = new ArrayList<>();

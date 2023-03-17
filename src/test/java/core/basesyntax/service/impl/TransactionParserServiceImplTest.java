@@ -78,7 +78,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parse_invalidQuantity() {
+    public void parse_invalidQuantity_notOk() {
         List<String> input = List.of("type,fruit,quantity",
                 "p,null,123l3");
         transactionParserService.parse(input);

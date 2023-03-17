@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.handlers;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.handlers.FruitTransactionException;

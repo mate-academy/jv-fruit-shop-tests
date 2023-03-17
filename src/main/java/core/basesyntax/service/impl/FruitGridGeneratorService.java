@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.exception.GridGeneratorException;
 import core.basesyntax.model.Grid;
 import core.basesyntax.service.GridGeneratorService;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,8 @@ public class FruitGridGeneratorService implements GridGeneratorService<Map<Strin
                 .stream()
                 .sorted(new Comparator<Map.Entry<String, Integer>>() {
                     @Override
-                    public int compare(Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) {
+                    public int compare(Map.Entry<String, Integer> e1,
+                                       Map.Entry<String, Integer> e2) {
                         return e1.getValue() - e2.getValue();
                     }
                 })

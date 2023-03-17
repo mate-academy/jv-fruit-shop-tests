@@ -17,7 +17,6 @@ public class FruitBalanceOperationTest {
 
     @Before
     public void setUpTransaction() {
-        Storage.fruitStorage.clear();
         transaction = new FruitTransaction();
         transaction.setFruit(FRUIT_NAME);
         transaction.setQuantity(FRUIT_QUANTITY);

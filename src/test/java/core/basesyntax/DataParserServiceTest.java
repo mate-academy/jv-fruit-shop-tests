@@ -13,6 +13,7 @@ import org.junit.Test;
 public class DataParserServiceTest {
     private static List<FruitTransaction> excepted;
     private static List<String> input;
+    private static DataParserService parserService;
     private static final String FIRST_FRUIT_NAME = "durian";
     private static final String SECOND_FRUIT_NAME = "papaya";
     private static final int FIRST_QUANTITY = 100;
@@ -22,6 +23,7 @@ public class DataParserServiceTest {
 
     @BeforeClass
     public static void createOutputList() throws Exception {
+        parserService = new DataParserServiceImpl();
         excepted = new ArrayList<>();
         FruitTransaction first = new FruitTransaction();
         first.setOperation(FruitTransaction.Operation.BALANCE);
@@ -56,7 +58,6 @@ public class DataParserServiceTest {
 
     @Test
     public void parseData_validInputData_ok() {
-        DataParserService parserService = new DataParserServiceImpl();
         List<FruitTransaction> actual = parserService.parseData(input);
         for (int i = 0; i < excepted.size(); i++) {
             Assert.assertEquals(excepted.get(i), actual.get(i));
@@ -65,14 +66,12 @@ public class DataParserServiceTest {
 
     @Test(expected = RuntimeException.class)
     public void parseData_invalidOperation_notOk() {
-        DataParserService parserService = new DataParserServiceImpl();
         input.add(1, "m,durian,2003");
         parserService.parseData(input);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void parseData_emptyLines_notOk() {
-        DataParserService parserService = new DataParserServiceImpl();
         input.add(1, "b,durian,");
         parserService.parseData(input);
     }

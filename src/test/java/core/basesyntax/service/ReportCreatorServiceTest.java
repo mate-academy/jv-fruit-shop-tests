@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import java.util.Collections;
@@ -35,15 +34,11 @@ public class ReportCreatorServiceTest {
     @Test(expected = RuntimeException.class)
     public void createReport_nullData_notOk() {
         reportCreatorService.createReport(null);
-        fail("An error was expected in case of null data source"
-                + " for creating report");
     }
 
     @Test(expected = RuntimeException.class)
     public void createReport_emptyData_notOk() {
         reportCreatorService.createReport(Collections.EMPTY_MAP);
-        fail("An error was expected in case of empty"
-                + " data source for creating report");
     }
 
     @Test

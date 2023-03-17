@@ -14,6 +14,11 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction == null
+                || transaction.getFruit() == null
+                || transaction.getQuantity() < 0) {
+            throw new RuntimeException("Can't handle null or wrong transaction data");
+        }
         productDao.updateAmount(transaction.getFruit(), transaction.getQuantity());
     }
 }

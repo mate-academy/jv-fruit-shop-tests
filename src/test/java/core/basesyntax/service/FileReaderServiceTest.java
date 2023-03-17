@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.util.ArrayList;
@@ -24,25 +23,21 @@ public class FileReaderServiceTest {
     @Test(expected = RuntimeException.class)
     public void readFromFile_nullFile_notOk() {
         fileReaderService.readFromFile(null);
-        fail("An error was expected in case of null fileName");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_unexistingFile_notOk() {
         fileReaderService.readFromFile(UNEXISTING_FILE);
-        fail("An error was expected in case of unexisting file");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_emptyFile_notOk() {
         fileReaderService.readFromFile(EMPTY_FILE);
-        fail("An error was expected in case of empty file");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFromFile_fileWithoutCsvHeader_notOk() {
         fileReaderService.readFromFile(NO_HEADER_FILE);
-        fail("An error was expected in case of csv file without header");
     }
 
     @Test

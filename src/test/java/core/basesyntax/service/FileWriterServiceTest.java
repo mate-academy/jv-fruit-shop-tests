@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.File;
@@ -47,29 +46,21 @@ public class FileWriterServiceTest {
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullFileName_notOk() {
         fileWriterService.writeToFile(null, CORRECT_DATA);
-        fail("An error was expected in case of null data"
-                + " to write in file");
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_nullData_notOk() {
         fileWriterService.writeToFile(FILE, null);
-        fail("An error was expected in case of null data"
-                + " to write in file");
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_emptyData_notOk() {
         fileWriterService.writeToFile(FILE, EMPTY_DATA);
-        fail("An error was expected in case of empty data"
-                + " to write in file");
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_unexistingFile_notOk() {
         fileWriterService.writeToFile(UNEXISTING_FILE, CORRECT_DATA);
-        fail("An error was expected in case of writing"
-                + " to unexisting file");
     }
 
     @Test

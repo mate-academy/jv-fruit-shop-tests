@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.FruitServiceImpl;
@@ -45,20 +44,17 @@ public class FruitServiceTest {
     @Test(expected = RuntimeException.class)
     public void handleTransactions_nullTransactions_notOk() {
         fruitService.handleTransactions(null);
-        fail("An error was expected in case of null fruit transactions");
     }
 
     @Test(expected = RuntimeException.class)
     public void handleTransactions_emptyTransactions_notOk() {
         fruitService.handleTransactions(fruitTransactions);
-        fail("An error was expected in case of empty fruit transactions");
     }
 
     @Test(expected = RuntimeException.class)
     public void handleTransactions_nullTransactionOperation_notOk() {
         fruitTransactions.add(new FruitTransaction(null, "banana", 20));
         fruitService.handleTransactions(fruitTransactions);
-        fail("An error was expected in case wrong transactions data");
     }
 
     @Test(expected = RuntimeException.class)
@@ -66,7 +62,6 @@ public class FruitServiceTest {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 null, 40));
         fruitService.handleTransactions(fruitTransactions);
-        fail("An error was expected in case wrong transactions data");
     }
 
     @Test(expected = RuntimeException.class)
@@ -74,7 +69,6 @@ public class FruitServiceTest {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", -10));
         fruitService.handleTransactions(fruitTransactions);
-        fail("An error was expected in case wrong transactions data");
     }
 
     @Test

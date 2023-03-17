@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.dao.impl.ProductDaoImpl;
 import core.basesyntax.storage.ProductStorage;
@@ -14,8 +13,8 @@ import org.junit.Test;
 public class ProductDaoTest {
     private static final int EXPECTED_SIZE = 1;
     private static String CORRECT_FRUIT_NAME = "banana";
-    private static int CORRECT_QUANTITY = 20;
-    private static int WRONG_QUANTITY = -10;
+    private static Integer CORRECT_QUANTITY = 20;
+    private static Integer NEGATIVE_QUANTITY = -10;
     private static ProductDao productDao;
     private static Map<String, Integer> expectedProductStorage;
 
@@ -34,13 +33,16 @@ public class ProductDaoTest {
     @Test(expected = RuntimeException.class)
     public void updateAmount_nullProductName_NotOk() {
         productDao.updateAmount(null, CORRECT_QUANTITY);
-        fail("An error was expected by passing null product name to storage");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void updateAmount_nullProductQuantity_NotOk() {
+        productDao.updateAmount(CORRECT_FRUIT_NAME, null);
     }
 
     @Test(expected = RuntimeException.class)
     public void updateAmount_negativeProductQuantity_NotOk() {
-        productDao.updateAmount(CORRECT_FRUIT_NAME, WRONG_QUANTITY);
-        fail("An error was expected by passing negative product quantity to storage");
+        productDao.updateAmount(CORRECT_FRUIT_NAME, NEGATIVE_QUANTITY);
     }
 
     @Test
@@ -63,13 +65,16 @@ public class ProductDaoTest {
     @Test(expected = RuntimeException.class)
     public void addAmount_nullProductName_NotOk() {
         productDao.addAmount(null, CORRECT_QUANTITY);
-        fail("An error was expected by passing null product name to storage");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void addAmount_nullProductQuantity_NotOk() {
+        productDao.addAmount(CORRECT_FRUIT_NAME, null);
     }
 
     @Test(expected = RuntimeException.class)
     public void addAmount_negativeProductQuantity_NotOk() {
-        productDao.addAmount(CORRECT_FRUIT_NAME, WRONG_QUANTITY);
-        fail("An error was expected by passing negative product quantity to storage");
+        productDao.addAmount(CORRECT_FRUIT_NAME, NEGATIVE_QUANTITY);
     }
 
     @Test
@@ -99,26 +104,27 @@ public class ProductDaoTest {
     @Test(expected = RuntimeException.class)
     public void subtractAmount_nullProductName_NotOk() {
         productDao.subtractAmount(null, CORRECT_QUANTITY);
-        fail("An error was expected by passing null product name to storage");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void subtractAmount_nullProductQuantity_NotOk() {
+        productDao.subtractAmount(CORRECT_FRUIT_NAME, null);
     }
 
     @Test(expected = RuntimeException.class)
     public void subtractAmount_negativeProductQuantity_NotOk() {
-        productDao.subtractAmount(CORRECT_FRUIT_NAME, WRONG_QUANTITY);
-        fail("An error was expected by passing negative product quantity to storage");
+        productDao.subtractAmount(CORRECT_FRUIT_NAME, NEGATIVE_QUANTITY);
     }
 
     @Test(expected = RuntimeException.class)
     public void subtractAmount_subtractingFromEmptyStorage_NotOk() {
         productDao.subtractAmount(CORRECT_FRUIT_NAME, CORRECT_QUANTITY);
-        fail("An error was expected by subtracting products from empty storage");
     }
 
     @Test(expected = RuntimeException.class)
     public void subtractAmount_subtractingMoreProductsThanExists_NotOk() {
         ProductStorage.products.put("banana", 19);
         productDao.subtractAmount(CORRECT_FRUIT_NAME, CORRECT_QUANTITY);
-        fail("An error was expected by subtracting products from empty storage");
     }
 
     @Test

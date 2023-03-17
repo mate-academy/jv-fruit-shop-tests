@@ -6,13 +6,13 @@ import java.util.Map;
 
 public class ProductDaoImpl implements ProductDao {
     @Override
-    public void updateAmount(String fruitName, int quantity) {
+    public void updateAmount(String fruitName, Integer quantity) {
         checkIfProductDataValid(fruitName, quantity);
         ProductStorage.products.put(fruitName, quantity);
     }
 
     @Override
-    public void addAmount(String fruitName, int quantity) {
+    public void addAmount(String fruitName, Integer quantity) {
         checkIfProductDataValid(fruitName, quantity);
         if (ProductStorage.products.containsKey(fruitName)) {
             ProductStorage.products.put(
@@ -23,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void subtractAmount(String fruitName, int quantity) {
+    public void subtractAmount(String fruitName, Integer quantity) {
         checkIfProductDataValid(fruitName, quantity);
         if (ProductStorage.products.containsKey(fruitName)) {
             if (ProductStorage.products.get(fruitName) < quantity) {
@@ -41,13 +41,13 @@ public class ProductDaoImpl implements ProductDao {
         return ProductStorage.products;
     }
 
-    private void checkIfProductDataValid(String fruitName, int quantity) {
+    private void checkIfProductDataValid(String fruitName, Integer quantity) {
         if (fruitName == null || fruitName.isEmpty()) {
             throw new RuntimeException("Invalid product name " + fruitName
                     + " to work with product storage");
         }
-        if (quantity < 0) {
-            throw new RuntimeException("Negative product quantity " + fruitName
+        if (quantity == null || quantity < 0) {
+            throw new RuntimeException("Negative or null product quantity " + fruitName
                     + ", can't work with product storage");
         }
     }

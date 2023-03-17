@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.TransactionServiceImpl;
@@ -29,34 +28,29 @@ public class TransactionServiceTest {
     @Test(expected = RuntimeException.class)
     public void createTransactions_nullFileData_notOk() {
         transactionService.createTransactions(null);
-        fail("An error was expected in case of null file data source");
     }
 
     @Test(expected = RuntimeException.class)
     public void createTransactions_emptyFileData_notOk() {
         transactionService.createTransactions(fileData);
-        fail("An error was expected in case of empty file data source");
     }
 
     @Test(expected = RuntimeException.class)
     public void createTransactions_wrongTransactionOperation_notOk() {
         fileData.add("g,banana,20");
         transactionService.createTransactions(fileData);
-        fail("An error was expected in case of wrong transaction operation type");
     }
 
     @Test(expected = RuntimeException.class)
     public void createTransactions_wrongTransactionFruitName_notOk() {
         fileData.add("s,1233,20");
         transactionService.createTransactions(fileData);
-        fail("An error was expected in case of wrong transaction fruit name");
     }
 
     @Test(expected = RuntimeException.class)
     public void createTransactions_wrongTransactionFruitQuantity_notOk() {
         fileData.add("s,banana,-10");
         transactionService.createTransactions(fileData);
-        fail("An error was expected in case of wrong transaction fruit quantity");
     }
 
     @Test

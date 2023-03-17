@@ -14,6 +14,11 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction == null
+                || transaction.getFruit() == null
+                || transaction.getQuantity() < 0) {
+            throw new RuntimeException("Can't handle null or wrong transaction data");
+        }
         productDao.addAmount(transaction.getFruit(), transaction.getQuantity());
     }
 }

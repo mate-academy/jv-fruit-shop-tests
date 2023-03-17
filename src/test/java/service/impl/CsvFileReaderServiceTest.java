@@ -11,7 +11,7 @@ import service.ReaderDataService;
 public class CsvFileReaderServiceTest {
     private static final String PATH_TO_VALID_FILE = "src/main/resources/InputData.csv";
     private static final String INVALID_PATH_FILE = "src/main/resources/InvalidFileName.csv";
-    private static final String PATH_TO_EMPTY_FILE = "src/main/resources/InvalidFileName.csv";
+    private static final String PATH_TO_EMPTY_FILE = "src/test/resources/EmptyFileRead.csv";
     private static ReaderDataService readerDataService;
     private static List<String> CORRECT_DATA_FROM_FILE;
 

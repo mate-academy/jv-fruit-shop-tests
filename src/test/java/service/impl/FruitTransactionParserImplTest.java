@@ -2,6 +2,7 @@ package service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import org.junit.BeforeClass;
@@ -39,6 +40,13 @@ public class FruitTransactionParserImplTest {
     public void parse_Ok() {
         List<FruitTransaction> actual = fruitTransactionParser.parse(DATA_FROM_FILE);
         assertEquals(EXPECTED_AFTER_PARSE, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_invalid_code_Ok() {
+        List<String> dataFromFile = new ArrayList<>(DATA_FROM_FILE);
+        dataFromFile.add("x,banana,100");
+        fruitTransactionParser.parse(dataFromFile);
     }
 
     @Test(expected = RuntimeException.class)

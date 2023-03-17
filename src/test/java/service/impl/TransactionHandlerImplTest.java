@@ -31,14 +31,6 @@ public class TransactionHandlerImplTest {
     @BeforeClass
     public static void beforeClass() {
         data = new ArrayList<>();
-        data.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 10));
-        data.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "banana", 7));
-        data.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 2));
-        data.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "banana", 1));
 
         handlerMap = new HashMap<>();
         FruitsDao fruitsDao = new FruitDaoImpl();
@@ -57,10 +49,44 @@ public class TransactionHandlerImplTest {
 
     @Test
     public void parse_transaction_Ok() {
+        data.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 10));
+        data.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", 7));
+        data.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", 2));
+        data.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "banana", 1));
         transactionHandler.proccesFruitTransaction(data);
         int expected = 6;
         int actual = Storage.fruits.get("banana");
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void parse_unknown_fruit_NotOk() {
+        data.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 10));
+        data.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "cucumber", 7));
+        data.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", 2));
+        data.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "banana", 1));
+        transactionHandler.proccesFruitTransaction(data);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void purchase_tooMuch_NotOk() {
+        data.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 10));
+        data.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", 1000));
+        data.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", 2));
+        data.add(new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "banana", 1));
+        transactionHandler.proccesFruitTransaction(data);
     }
 
     @Test(expected = NullPointerException.class)

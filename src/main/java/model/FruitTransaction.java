@@ -69,12 +69,4 @@ public class FruitTransaction {
         }
         return Objects.equals(fruit, that.fruit);
     }
-
-    @Override
-    public int hashCode() {
-        int result = operation != null ? operation.hashCode() : 0;
-        result = 31 * result + (fruit != null ? fruit.hashCode() : 0);
-        result = 31 * result + quantity;
-        return result;
-    }
 }

@@ -11,6 +11,7 @@ import service.WriterDataService;
 
 public class CsvFileWriterServiceTest {
     private static final String PATH_TO_FILE = "src/test/resources/OutputFile.csv";
+    private static final String INVALID_PATH_TO_FILE = "src/test/resources/invalidPath.csv";
     private static WriterDataService writerDataService;
     private static ReaderDataService readerDataService;
     private static StringBuilder DATA_FOR_OUTPUT;
@@ -35,5 +36,10 @@ public class CsvFileWriterServiceTest {
         writerDataService.write(DATA_FOR_OUTPUT.toString(), PATH_TO_FILE);
         List<String> actual = readerDataService.read(PATH_TO_FILE);
         assertEquals(EXPECTED_DATA, actual);
+    }
+
+    @Test
+    public void write_to_invalid_file_NotOk() {
+        writerDataService.write(DATA_FOR_OUTPUT.toString(), INVALID_PATH_TO_FILE);
     }
 }

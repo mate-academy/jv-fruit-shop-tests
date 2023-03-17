@@ -20,9 +20,22 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     private FruitTransaction getFromRow(String line) {
         String[] fields = line.split(COMMA);
+        quantityIsValidInteger(fields[QUANTITY_INDEX]);
         return new FruitTransaction(
                 FruitTransaction.Operation.getByCode(fields[OPERATION_INDEX]),
                 fields[FRUIT_NAME_INDEX],
                 Integer.parseInt(fields[QUANTITY_INDEX]));
+    }
+
+    private void quantityIsValidInteger(String quantityCell) {
+        try {
+            int quantity = Integer.parseInt(quantityCell);
+            if (quantity <= 0) {
+                throw new IllegalArgumentException("Quantity can't be <= 0. Actual quantity: "
+                        + quantityCell);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid quantity: " + quantityCell + e);
+        }
     }
 }

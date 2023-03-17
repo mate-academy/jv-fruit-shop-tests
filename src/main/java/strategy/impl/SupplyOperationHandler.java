@@ -7,6 +7,9 @@ import strategy.OperationHandler;
 public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void calculate(FruitTransaction transaction) {
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("Quantity can't be less than 0");
+        }
         Storage.fruits.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
     }
 }

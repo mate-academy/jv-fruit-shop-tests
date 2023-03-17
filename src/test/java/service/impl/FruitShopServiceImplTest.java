@@ -51,7 +51,7 @@ public class FruitShopServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 
@@ -68,19 +68,19 @@ public class FruitShopServiceImplTest {
         fruitShopService.calculate(expected);
         int actualMango = Storage.fruits.get(MANGO);
         Assert.assertEquals(
-                "FruitShopService failed or some problem with BalanceOperationHandler",
+                "FruitShopService failed",
                 MANGO_QUANTITY, actualMango);
         int actualApple = Storage.fruits.get(APPLE);
         Assert.assertEquals(
-                "FruitShopService failed or some problem with ReturnOperationHandler",
+                "FruitShopService failed",
                 APPLE_QUANTITY, actualApple);
         int actualBanana = Storage.fruits.get(BANANA);
         Assert.assertEquals(
-                "FruitShopService failed or some problem with SupplyOperationHandler",
+                "FruitShopService failed",
                 BANANA_QUANTITY, actualBanana);
         int actualKiwi = Storage.fruits.get(KIWI);
         Assert.assertEquals(
-                "FruitShopService failed or some problem with PurchaseOperationHandler",
+                "FruitShopService failed",
                 KIWI_QUANTITY, actualKiwi);
     }
 

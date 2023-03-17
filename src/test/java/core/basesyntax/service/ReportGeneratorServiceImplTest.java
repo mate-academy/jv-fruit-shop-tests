@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.CalculatorServiceImpl;
@@ -8,20 +11,26 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
-import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.strategy.impl.StrategyStorageImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorServiceImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final int FIFTY = 50;
+    private static final int TWENTY = 20;
+    private static final int TEN = 10;
+    private static final int FIVE = 5;
+    private static final String EXPECTED_REPORT = "fruit quantity" + System.lineSeparator()
+            + "banana,25" + System.lineSeparator()
+            + "apple,40";
+
     private ReportGeneratorService reportGeneratorService;
 
     @BeforeEach
@@ -35,21 +44,25 @@ public class ReportGeneratorServiceImplTest {
         strategyStorage.setHandlers(handlers);
         CalculatorService calculatorService = new CalculatorServiceImpl(strategyStorage);
         reportGeneratorService = new ReportGeneratorServiceImpl();
-        FruitTransaction balanceTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 50);
-        FruitTransaction supplyTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20);
-        FruitTransaction purchaseTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 10);
-        FruitTransaction returnTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 5);
-        List<FruitTransaction> transactions = Arrays.asList(balanceTransaction, supplyTransaction, purchaseTransaction, returnTransaction);
+        FruitTransaction balanceTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, FIFTY);
+        FruitTransaction supplyTransaction =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, TWENTY);
+        FruitTransaction purchaseTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, TEN);
+        FruitTransaction returnTransaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, FIVE);
+        List<FruitTransaction> transactions = Arrays.asList(balanceTransaction,
+                supplyTransaction,
+                purchaseTransaction,
+                returnTransaction);
         calculatorService.calculate(transactions);
     }
 
     @Test
     void generateReport_validStorage_Ok() {
-        String expectedReport = "fruit quantity" + System.lineSeparator()
-                + "banana,25" + System.lineSeparator()
-                + "apple,40";
         String actualReport = reportGeneratorService.generateReport();
-        assertEquals(expectedReport, actualReport);
+        assertEquals(EXPECTED_REPORT, actualReport);
     }
 
     @Test

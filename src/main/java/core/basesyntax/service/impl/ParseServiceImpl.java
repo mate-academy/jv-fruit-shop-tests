@@ -13,6 +13,9 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<FruitTransaction> parse(String data) {
+        if (data == null || data.isEmpty()) {
+            throw new RuntimeException("You can't parse empty data!");
+        }
         List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
         List<String> convertedData = new ArrayList<>(List.of(data.split(System.lineSeparator())));
         convertedData.remove(0);

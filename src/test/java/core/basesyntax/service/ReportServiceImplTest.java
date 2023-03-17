@@ -16,9 +16,11 @@ public class ReportServiceImplTest {
             + "apple,90" + System.lineSeparator();
     private static final int DEFAULT_QUANTITY = 152;
     private static final int DEFAULT_QUANTITY_NEXT_LINE = 90;
-    private static final String EXPECTED_REPORT_WITH_EMPTY_DATA = "fruit,quantity" + System.lineSeparator()
+    private static final String EXPECTED_REPORT_WITH_EMPTY_DATA = "fruit,quantity"
+            + System.lineSeparator()
             + System.lineSeparator();
-    private static final String EXPECTED_REPORT_WITH_NULL_DATA = "fruit,quantity" + System.lineSeparator()
+    private static final String EXPECTED_REPORT_WITH_NULL_DATA = "fruit,quantity"
+            + System.lineSeparator()
             + "null,null" + System.lineSeparator();
 
     private static ReportService reportService;

@@ -42,12 +42,13 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void generateDailyReport(File inputFile, File reportFile) {
+    public File generateDailyReport(File inputFile, File reportFile) {
         List<String> dataFromFile = readFile(inputFile);
         List<FruitTransaction> fruitTransactions = convertData(dataFromFile);
         List<String> reportData = createReport(fruitTransactions);
         File report = writeToFile(reportFile, reportData);
         printReport(report);
+        return report;
     }
 
     private List<String> readFile(File inputFile) {

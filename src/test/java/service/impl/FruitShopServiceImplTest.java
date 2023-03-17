@@ -28,7 +28,7 @@ public class FruitShopServiceImplTest {
     private static List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         activitiesHandlerMap.put("b", new BalanceHandler());
         activitiesHandlerMap.put("s", new SupplyHandler());
         activitiesHandlerMap.put("p", new PurchaseHandler());
@@ -56,13 +56,12 @@ public class FruitShopServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void precessNullTransactionsOk() {
-        expected.put(null, null);
         fruitTransactions.add(null);
         fruitShopService.processData(fruitTransactions);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         expected.clear();
         FruitStore.supplies.clear();
         fruitTransactions.clear();

@@ -16,12 +16,12 @@ import org.junit.Test;
 import service.ReaderService;
 
 public class ReaderServiceImplTest {
-    private static final String TEST_FILE_PATH = "./src/main/resources/testDatabase.csv";
+    private static final String TEST_FILE_PATH = "./src/test/resources/testDatabase.csv";
     private static List<String> content = new ArrayList<>();
     private static ReaderService reader = new ReaderServiceImpl();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         try {
             Files.createFile(Path.of(TEST_FILE_PATH));
         } catch (IOException e) {
@@ -64,11 +64,11 @@ public class ReaderServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void readFromNonexistingFile() {
-        reader.read("./src/main/nonExisting.csv");
+        reader.read("./src/test/nonExisting.csv");
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         content.clear();
         try {
             Files.newBufferedWriter(Path.of(TEST_FILE_PATH), StandardOpenOption.TRUNCATE_EXISTING);
@@ -78,7 +78,7 @@ public class ReaderServiceImplTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         try {
             Files.delete(Path.of(TEST_FILE_PATH));
         } catch (IOException e) {

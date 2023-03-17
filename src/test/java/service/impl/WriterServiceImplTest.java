@@ -10,7 +10,7 @@ import org.junit.Test;
 import service.WriterService;
 
 public class WriterServiceImplTest {
-    private static final String TEST_FILE_PATH = "./src/main/resources/testReport.csv";
+    private static final String TEST_FILE_PATH = "./src/test/resources/testReport.csv";
     private static String content;
     private static WriterService writerService = new WriterServiceImpl();
 
@@ -51,7 +51,7 @@ public class WriterServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         try {
             Files.deleteIfExists(Path.of(TEST_FILE_PATH));
         } catch (IOException e) {

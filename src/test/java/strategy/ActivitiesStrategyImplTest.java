@@ -17,7 +17,7 @@ public class ActivitiesStrategyImplTest {
     private static ActivitiesStrategy strategy = new ActivitiesStrategyImpl(activitiesHandlerMap);
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         activitiesHandlerMap.put("b", new BalanceHandler());
         activitiesHandlerMap.put("s", new SupplyHandler());
         activitiesHandlerMap.put("p", new PurchaseHandler());

@@ -18,7 +18,7 @@ public class TransactionParserServiceImplTest {
     private static List<String> inputData = new ArrayList<>();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         inputData.add(TITLE);
     }
 
@@ -52,7 +52,7 @@ public class TransactionParserServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         expected.clear();
         inputData.clear();
     }

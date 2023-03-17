@@ -33,7 +33,7 @@ public class PurchaseHandlerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         FruitStore.supplies.clear();
         expected.clear();
     }

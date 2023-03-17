@@ -16,7 +16,7 @@ public class ReaderServiceImplTest {
 
     @Test
     void read_validFile_notOk() throws IOException {
-        Path tempFile = Files.createTempFile("test", ".txt");
+        Path tempFile = Files.createTempFile("test", ".csv");
         List<String> result = readerService.read(tempFile.toString());
         assertNotNull(result, "Result should not be null");
     }

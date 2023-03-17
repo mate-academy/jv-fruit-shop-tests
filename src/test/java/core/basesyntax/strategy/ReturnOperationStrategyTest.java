@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Test;
 
 public class ReturnOperationStrategyTest {
-
     private static final String APPLE_KEY = "apple";
     private static final int APPLE_VALUE = 100;
     private static final int APPLE_TEST_VALUE = 120;

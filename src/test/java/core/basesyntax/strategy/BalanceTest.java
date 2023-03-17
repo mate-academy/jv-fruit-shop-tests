@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BalanceTest {
-    private static final int QUANTITY = 12;
+    private static final Integer QUANTITY = 12;
     private static final String FRUIT = "banana";
     private static OperationHandler operationHandler;
 
@@ -20,8 +20,6 @@ public class BalanceTest {
     @Test
     public void handleFruitOperation_balance_ok() {
         operationHandler.handleFruitOperation(FRUIT, QUANTITY);
-        Integer expected = QUANTITY;
-        Integer current = Storage.get(FRUIT);
-        assertEquals(expected, current);
+        assertEquals(QUANTITY, Storage.get(FRUIT));
     }
 }

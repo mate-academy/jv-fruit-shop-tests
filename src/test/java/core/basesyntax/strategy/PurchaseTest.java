@@ -25,8 +25,7 @@ public class PurchaseTest {
         Storage.put(FRUIT, QUANTITY);
         operationHandler.handleFruitOperation(FRUIT, QUANTITY);
         Integer expected = QUANTITY - QUANTITY;
-        Integer current = Storage.get(FRUIT);
-        assertEquals(expected, current);
+        assertEquals(expected, Storage.get(FRUIT));
     }
 
     @Test(expected = FruitShopException.class)

@@ -13,7 +13,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     private static final int QUANTITY_INDEX = 2;
     private static final String COMMA_SEPARATOR = ",";
     private static final int DEFAULT_LINE_LENGTH = 3;
-    private static final String VALID_LINE_REGEX = "^[bspr],[a-z]+,\\d+$";
+    private static final String VALID_LINE_REGEX = "[a-z],[a-z]+,\\d+$";
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {

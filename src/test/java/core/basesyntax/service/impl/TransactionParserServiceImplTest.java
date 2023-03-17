@@ -4,16 +4,25 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
+import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserServiceImplTest {
     private static TransactionParserService transactionParserService;
+    private static List<String> input;
 
     @BeforeClass
     public static void setUp() {
         transactionParserService = new TransactionParserServiceImpl();
+        input = new ArrayList<>();
+    }
+
+    @After
+    public void afterEach() {
+        input.clear();
     }
 
     @Test (expected = RuntimeException.class)
@@ -23,20 +32,20 @@ public class TransactionParserServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void parse_notDefaultTitle_notOk() {
-        List<String> input = List.of("type,,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13");
+        input.add("type,,quantity");
+        input.add("b,banana,20");
+        input.add("b,apple,100");
+        input.add("s,banana,100");
+        input.add("p,banana,13");
         transactionParserService.parse(input);
     }
 
     @Test
     public void parse_allRowsValid_ok() {
-        List<String> input = List.of("type,fruit,quantity",
-                "b,orange,44",
-                "b,banana,20",
-                "s,orange,75");
+        input.add("type,fruit,quantity");
+        input.add("b,orange,44");
+        input.add("b,banana,20");
+        input.add("s,orange,75");
         List<FruitTransaction> fruitTransactionsExpected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "orange", 44),
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana",20),
@@ -55,11 +64,12 @@ public class TransactionParserServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parse_invalidRow_notOk() {
-        List<String> input = List.of("type,fruit,quantity",
-                "b,123,44",
-                "b,banana,20",
-                "s,orange,75");
+    public void parse_invalidFruitValue_notOk() {
+        input.add("type,fruit,quantity");
+        input.add("b,123,44");
+        input.add("b,banana,20");
+        input.add("s,orange,75");
+        input.add("p,banana,13");
         transactionParserService.parse(input);
     }
 
@@ -72,15 +82,22 @@ public class TransactionParserServiceImplTest {
 
     @Test (expected = RuntimeException.class)
     public void parse_emptyValue_notOk() {
-        List<String> input = List.of("type,fruit,quantity",
-                "p,null,");
+        input.add("type,fruit,quantity");
+        input.add("p,null,");
         transactionParserService.parse(input);
     }
 
     @Test (expected = RuntimeException.class)
     public void parse_invalidQuantity_notOk() {
-        List<String> input = List.of("type,fruit,quantity",
-                "p,null,123l3");
+        input.add("type,fruit,quantity");
+        input.add("p,null,123l3");
+        transactionParserService.parse(input);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void parse_invalidOperationType_notOk() {
+        input.add("type,fruit,quantity");
+        input.add("y,apple,123l3");
         transactionParserService.parse(input);
     }
 }

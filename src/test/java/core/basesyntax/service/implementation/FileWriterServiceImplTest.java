@@ -12,7 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,7 +23,6 @@ public class FileWriterServiceImplTest {
     private static List<String> listOk;
     private static FileWriterServiceImpl fileWriterService;
 
-
     @BeforeClass
     public static void beforeClass() {
         fileWriterService = new FileWriterServiceImpl();
@@ -32,7 +30,6 @@ public class FileWriterServiceImplTest {
         listOk.add(HEADER);
         listOk.add(SECOND_LINE);
     }
-
 
     @Test(expected = FruitShopException.class)
     public void writeToFile_incorrectPath_notOk() {

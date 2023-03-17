@@ -9,12 +9,10 @@ import org.junit.Test;
 public class ReportServiceImplTest {
     private static final String CORRECT_HEADER = "fruit,quantity";
     private static final int HEADER_LINE_INDEX = 0;
+    private static final String EXPECTED_REPORT = "fruit,quantity" + System.lineSeparator()
+                                                    + "banana,152" + System.lineSeparator()
+                                                        + "apple,90";
     private static ReportServiceImpl reportService;
-    private static final String EXPECTED_REPORT = "fruit,quantity"
-                                            + System.lineSeparator()
-                                            + "banana,152"
-                                            + System.lineSeparator()
-                                            + "apple,90";
 
     @BeforeClass
     public static void beforeClass() {

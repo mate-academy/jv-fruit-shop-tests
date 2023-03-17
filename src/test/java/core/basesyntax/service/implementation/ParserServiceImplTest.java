@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 

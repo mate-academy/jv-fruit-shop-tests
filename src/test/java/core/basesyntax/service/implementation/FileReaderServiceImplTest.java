@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.exeption.FruitShopException;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -18,13 +17,13 @@ public class FileReaderServiceImplTest {
     private static FileReaderServiceImpl fileReaderService;
 
     @BeforeClass
-    public static void beforeClass(){
+    public static void beforeClass() {
         fileReaderService = new FileReaderServiceImpl();
         listOk = new ArrayList<>();
         listOk.add("b,banana,20");
         listOk.add("b,apple,100");
         listOk.add("s,banana,100");
-        listOk.add("p,banana,13" );
+        listOk.add("p,banana,13");
         listOk.add("r,apple,10");
         listOk.add("p,apple,20");
         listOk.add("p,banana,5");

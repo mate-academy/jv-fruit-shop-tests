@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
+    private static final String APPLE_FRUIT = "apple";
+    private static final String BANANA_FRUIT = "banana";
     private ReturnOperationHandler handler = new ReturnOperationHandler();
 
     @After
@@ -17,20 +19,20 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void apply_AddNewFruit_Ok() {
-        handler.apply("apple", 5);
-        assertEquals((Integer) 5, Storage.get("apple"));
+        handler.apply(APPLE_FRUIT, 5);
+        assertEquals((Integer) 5, Storage.get(APPLE_FRUIT));
     }
 
     @Test
     public void apply_AddToFruit_Ok() {
-        Storage.put("banana", 10);
-        handler.apply("banana", 5);
-        assertEquals((Integer) 15, Storage.get("banana"));
+        Storage.put(BANANA_FRUIT, 10);
+        handler.apply(BANANA_FRUIT, 5);
+        assertEquals((Integer) 15, Storage.get(BANANA_FRUIT));
     }
 
     @Test(expected = RuntimeException.class)
     public void apply_negativeQuantity_notOk() {
-        handler.apply("banana", -5);
+        handler.apply(BANANA_FRUIT, -5);
         fail("Should throw RuntimeException when we try to apply "
                 + "ReturnOperationHandler with negative quantity");
     }

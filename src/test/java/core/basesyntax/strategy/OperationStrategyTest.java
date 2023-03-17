@@ -32,4 +32,9 @@ public class OperationStrategyTest {
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void operationStrategy_getOperationWithNull_Ok() {
+        operationHandlerMap.get(null);
+    }
 }

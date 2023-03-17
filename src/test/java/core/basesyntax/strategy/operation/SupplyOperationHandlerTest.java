@@ -2,6 +2,7 @@ package core.basesyntax.strategy.operation;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.Utils;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static final String FRUIT = "banana";
+    private static final String EMPTY = "";
     private static final int EXPECTED = 20;
     private static FruitTransaction transaction;
     private static SupplyOperationHandler supplyOperation;
@@ -17,7 +19,7 @@ public class SupplyOperationHandlerTest {
     @BeforeClass
     public static void beforeAll() {
         Storage.fruits.clear();
-        transaction = creteTransaction(FruitTransaction.Operation.SUPPLY, FRUIT, EXPECTED);
+        transaction = Utils.createTransaction(FruitTransaction.Operation.SUPPLY, FRUIT, EXPECTED);
         supplyOperation = new SupplyOperationHandler();
     }
 
@@ -33,18 +35,29 @@ public class SupplyOperationHandlerTest {
         supplyOperation.handle(null);
     }
 
+    @Test
+    public void supplyOperation_withNullFruit_Ok() {
+        supplyOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
+                null,
+                EXPECTED));
+    }
+
+    @Test
+    public void supplyOperation_withEmptyFruit_Ok() {
+        supplyOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
+                EMPTY,
+                EXPECTED));
+    }
+
+    @Test
+    public void supplyOperation_withNullTransaction_Ok() {
+        supplyOperation.handle(Utils.createTransaction(null,
+                FRUIT,
+                EXPECTED));
+    }
+
     @After
     public void after() {
         Storage.fruits.clear();
-    }
-
-    private static FruitTransaction creteTransaction(FruitTransaction.Operation operation,
-                                                     String fruitName,
-                                                     int quantity) {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(operation);
-        fruitTransaction.setFruit(fruitName);
-        fruitTransaction.setQuantity(quantity);
-        return fruitTransaction;
     }
 }

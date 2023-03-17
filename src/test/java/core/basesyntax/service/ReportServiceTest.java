@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -26,9 +26,13 @@ public class ReportServiceTest {
         expected.append(System.lineSeparator()).append(SECOND_LINE);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
+    }
+
     @Test
     public void reportService_createReport_Ok() {
-        Storage.fruits.clear();
         Storage.fruits.put(BANANA, 20);
         Storage.fruits.put(APPLE, 90);
         String actual = reportService.createReport();
@@ -37,12 +41,6 @@ public class ReportServiceTest {
 
     @Test
     public void reportService_createWithEmptyStorage_Ok() {
-        Storage.fruits.clear();
         reportService.createReport();
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        Storage.fruits.clear();
     }
 }

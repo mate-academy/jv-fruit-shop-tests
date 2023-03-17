@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.Utils;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.io.File;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceTest {
-    private static final String PATH = pathFix("src/test/resources/fruits.csv");
+    private static final String PATH = Utils.pathFix("src/test/resources/fruits.csv");
     private static final String EMPTY_PATH = "";
     private static final String TITLE = "type,fruit,quantity";
     private static final String FIRST_LINE = "b,banana,20";
@@ -51,11 +52,5 @@ public class ReaderServiceTest {
     @Test(expected = RuntimeException.class)
     public void readerService_readWithEmptyPath_NotOk() {
         readerService.readFromFile(EMPTY_PATH);
-    }
-
-    private static String pathFix(String path) {
-        path = path.replace("\\", File.separator);
-        path = path.replace("/", File.separator);
-        return path;
     }
 }

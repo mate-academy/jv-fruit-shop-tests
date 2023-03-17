@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.Utils;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.File;
@@ -9,15 +10,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceTest {
-    private static final String TRUE_PATH = "src" + File.separator
-                                            + "test" + File.separator
-                                            + "resources" + File.separator
-                                            + "report.csv";
+    private static final String TRUE_PATH = Utils.pathFix("src/test/resources/report.csv");
     private static final String FALSE_PATH = "";
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
@@ -29,8 +27,7 @@ public class WriterServiceTest {
     private static StringBuilder report;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        Storage.fruits.clear();
+    public static void beforeClass() {
         Storage.fruits.put(BANANA, 20);
         Storage.fruits.put(APPLE, 90);
         expected = new ArrayList<>();
@@ -41,6 +38,11 @@ public class WriterServiceTest {
         report.append(System.lineSeparator()).append(FIRST_LINE);
         report.append(System.lineSeparator()).append(SECOND_LINE);
         writerService = new WriterServiceImpl();
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 
     @Test
@@ -61,8 +63,13 @@ public class WriterServiceTest {
         writerService.writeToFile(FALSE_PATH, report.toString());
     }
 
-    @AfterClass
-    public static void afterClass() {
-        Storage.fruits.clear();
+    @Test
+    public void writerService_writeEmptyReport_Ok() {
+        writerService.writeToFile(TRUE_PATH, TITLE);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writerService_writeNullReport_NotOk() {
+        writerService.writeToFile(TRUE_PATH, null);
     }
 }

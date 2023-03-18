@@ -32,11 +32,11 @@ public class FruitShopServiceTest {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler());
         fruitShopService = new FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
-        defaultParsed = List.of(new FruitTransaction("b","banana",100),
-                new FruitTransaction("s","banana",30),
-                new FruitTransaction("p","banana",50),
-                new FruitTransaction("r","banana",20),
-                new FruitTransaction("b","apple",15));
+        defaultParsed = List.of(new FruitTransaction("b", "banana", 100),
+                new FruitTransaction("s", "banana", 30),
+                new FruitTransaction("p", "banana", 50),
+                new FruitTransaction("r", "banana", 20),
+                new FruitTransaction("b", "apple", 15));
         expectedMap = new HashMap<>();
         expectedMap.put("banana",100);
         expectedMap.put("apple",15);

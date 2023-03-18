@@ -22,10 +22,9 @@ public class Main {
     public static final String TO_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        CalculateStrategy calculateStrategy = new CalculateStrategyImpl();
         ReaderService readerService = new ReaderServiceImpl();
         WriterService writerService = new WriterServiceImpl();
-        FruitService fruitService = new FruitServiceImpl(calculateStrategy);
+        FruitService fruitService = new FruitServiceImpl();
         DataParserService dataParserService = new DataParserServiceImpl();
         ReportMakerService reportMakerService = new ReportMakerServiceImpl();
         File file = new File(INPUT_FILE_NAME);

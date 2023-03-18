@@ -63,16 +63,11 @@ public class ReportServiceImplTest {
                 + "should return empty list", expectedReport, actualReport);
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void createReport_incorrectFruitTransactionList_NotOk() {
         reportService = new ReportServiceImpl(transactionStrategy);
-        try {
-            reportService.createReport(initIncorrectFruitTransactionList());
-        } catch (NoSuchElementException e) {
-            return;
-        }
-        Assert.assertEquals("If transactions incorrect,"
-                + "should throw NoSuchElementException.", true, false);
+        reportService.createReport(initIncorrectFruitTransactionList());
+        Assert.fail("If transactions incorrect, should throw NoSuchElementException.");
     }
 
     @Test

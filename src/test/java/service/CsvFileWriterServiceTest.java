@@ -58,16 +58,11 @@ public class CsvFileWriterServiceTest {
         Assert.assertEquals("Result is incorrect", expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void saveToFile_nullFile_NotOk() {
         List<String> someData = List.of("line1", "line2", "line3");
-        try {
-            File resultFile = fileWriterService.saveToFile(null, someData);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.assertEquals("Should throw RuntimeException if null instead of file.",
-                true, false);
+        File resultFile = fileWriterService.saveToFile(null, someData);
+        Assert.fail("Should throw RuntimeException if null instead of file.");
     }
 
     private List<String> readFile(File inputFile) {

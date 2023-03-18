@@ -142,37 +142,22 @@ public class FruitShopServiceImplTest {
         REPORT_FILE.delete();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void generateDailyReport_nullReportFile_NotOk() {
-        try {
-            fruitShopService.generateDailyReport(INPUT_FILE, null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.assertEquals("Should throw RuntimeException "
-                + "when null instead of report file.", true, false);
+        fruitShopService.generateDailyReport(INPUT_FILE, null);
+        Assert.fail("Should throw RuntimeException when null instead of report file.");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void generateDailyReport_nullFiles_NotOk() {
-        try {
-            fruitShopService.generateDailyReport(null, null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.assertEquals("Should throw RuntimeException "
-                + "when null instead of files.", true, false);
+        fruitShopService.generateDailyReport(null, null);
+        Assert.fail("Should throw RuntimeException when null instead of files.");
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void generateDailyReport_notExistedInputFile_NotOk() {
-        try {
-            fruitShopService.generateDailyReport(NOT_EXISTED_FILE, REPORT_FILE);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.assertEquals("If input file doesn't exist, "
-                        + "should throw RuntimeException.", true, false);
+        fruitShopService.generateDailyReport(NOT_EXISTED_FILE, REPORT_FILE);
+        Assert.fail("If input file doesn't exist, should throw RuntimeException.");
     }
 
     @Test
@@ -199,15 +184,11 @@ public class FruitShopServiceImplTest {
         REPORT_FILE.delete();
     }
 
-    @Test
+    @Test(expected = NoSuchElementException.class)
     public void generateDailyReport_fileWithIncorrectData_NotOk() {
-        try {
-            fruitShopService.generateDailyReport(INCORRECT_DATA_FILE, REPORT_FILE);
-        } catch (NoSuchElementException e) {
-            return;
-        }
-        Assert.assertEquals("If input file contains incorrect data, "
-                + "should throw NoSuchElementException.", true, false);
+        fruitShopService.generateDailyReport(INCORRECT_DATA_FILE, REPORT_FILE);
+        Assert.fail("If input file contains incorrect data, "
+                        + "should throw NoSuchElementException.");
     }
 
     private List<String> readFile(File inputFile) {

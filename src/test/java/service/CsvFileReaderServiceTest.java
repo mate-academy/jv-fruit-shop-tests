@@ -69,15 +69,10 @@ public class CsvFileReaderServiceTest {
         Assert.assertEquals("Result is incorrect", expected, actual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFile_notExistedFile_NotOk() {
-        try {
-            fileReaderService.readFile(NOT_EXISTED_FILE);
-        } catch (RuntimeException e) {
-            return;
-        }
-        Assert.assertEquals("Should throw RuntimeException if file doesn't exist.",
-                true, false);
+        fileReaderService.readFile(NOT_EXISTED_FILE);
+        Assert.fail("Should throw RuntimeException if file doesn't exist.");
     }
 
     private void writeDataToFile(String data) {

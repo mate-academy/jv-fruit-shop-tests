@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FruitTransaction {
     private final Operation operation;
@@ -25,6 +26,19 @@ public class FruitTransaction {
         return quantity;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FruitTransaction)) return false;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation && fruit.equals(that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -45,7 +59,7 @@ public class FruitTransaction {
             return Arrays.stream(FruitTransaction.Operation.values())
                     .filter(i -> i.getCode().equals(code))
                     .findFirst()
-                    .get();
+                    .orElseThrow(() -> new RuntimeException("Invalid operation type " + code));
         }
     }
 }

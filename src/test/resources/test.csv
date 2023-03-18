@@ -1,2 +1,3 @@
 type,fruit,quantity
-s,apple,55
+s,apple,55fruit,quantity
+apple,80

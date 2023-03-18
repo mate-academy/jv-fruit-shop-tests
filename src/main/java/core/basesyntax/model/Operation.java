@@ -8,6 +8,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
+    public static final String OPERATION_NOT_SUPPORTED = "Transaction operation %s not supported";
     private final String code;
 
     Operation(String code) {
@@ -19,7 +20,7 @@ public enum Operation {
                 .filter(o -> o.getCode().equals(code))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(
-                        "Transaction operation " + code + " not supported"));
+                        String.format(OPERATION_NOT_SUPPORTED, code)));
     }
 
     public String getCode() {

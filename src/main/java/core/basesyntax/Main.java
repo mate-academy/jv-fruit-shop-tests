@@ -33,18 +33,17 @@ public class Main {
     private static final int FRUIT_COLUMN = 1;
     private static final int AMOUNT_COLUMN = 2;
     private static final String CSV_SEPARATOR = ",";
-    private static final String HEADER;
-    private static final DaoService<String, Integer> STORAGE;
+    private static final String HEADER = "fruit" + CSV_SEPARATOR + "quantity";
+    private static final DaoService STORAGE;
     private static final Map<Operation, SaveStrategy> STRATEGY_FOR_OPERATION =
             new HashMap<>();
 
     static {
-        STORAGE = new DaoServiceHashMap<>();
+        STORAGE = new DaoServiceHashMap();
         STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new SaveStrategySupply(STORAGE));
         STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new SaveStrategyPurchase(STORAGE));
         STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new SaveStrategyBalance(STORAGE));
         STRATEGY_FOR_OPERATION.put(Operation.RETURN, new SaveStrategyReturn(STORAGE));
-        HEADER = "fruit" + CSV_SEPARATOR + "quantity";
     }
 
     public static void main(String[] args) {

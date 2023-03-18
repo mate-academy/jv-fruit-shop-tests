@@ -5,6 +5,8 @@ import core.basesyntax.strategy.SaveStrategy;
 import java.util.Map;
 
 public class StrategySelector {
+    public static final String FAILED_TO_CHOOSE_STRATEGY
+            = "Failed to choose strategy for operation ";
     private final Map<Operation, SaveStrategy> strategies;
 
     public StrategySelector(Map<Operation, SaveStrategy> strategies) {
@@ -14,7 +16,7 @@ public class StrategySelector {
     public SaveStrategy selectStrategy(Operation operation) {
         if (!strategies.containsKey(operation)) {
             throw new RuntimeException(
-                    "Failed to choose strategy for operation " + operation.name());
+                    FAILED_TO_CHOOSE_STRATEGY + operation.name());
         }
         return strategies.get(operation);
     }

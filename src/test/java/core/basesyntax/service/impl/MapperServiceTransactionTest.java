@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class MapperServiceTransactionTest {
     private static final int OPERATION_CODE_COLUMN = 0;
@@ -27,24 +27,39 @@ public class MapperServiceTransactionTest {
 
     @Test
     public void map_withValidString_ok() {
-        Assertions.assertEquals(mapper.map(VALID_STRING), EXPECTED_RESULT);
+        Assert.assertEquals(mapper.map(VALID_STRING), EXPECTED_RESULT);
     }
 
     @Test
     public void map_withMissingParametersString_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> mapper.map(INVALID_STRING_MISSING_ELEMENTS));
+        try {
+            mapper.map(INVALID_STRING_MISSING_ELEMENTS);
+            Assert.fail();
+        } catch (RuntimeException e) {
+            Assert.assertEquals(ArrayIndexOutOfBoundsException.class,
+                    e.getClass());
+        }
     }
 
     @Test
     public void map_withWrongOrderParameters_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> mapper.map(INVALID_STRING_WRONG_ORDER));
+        try {
+            mapper.map(INVALID_STRING_WRONG_ORDER);
+            Assert.fail();
+        } catch (RuntimeException e) {
+            Assert.assertEquals(e.getClass(),
+                    RuntimeException.class);
+        }
     }
 
     @Test
     public void map_nullString_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> mapper.map(null));
+        try {
+            mapper.map(null);
+            Assert.fail();
+        } catch (RuntimeException e) {
+            Assert.assertEquals(e.getClass(),
+                    NullPointerException.class);
+        }
     }
 }

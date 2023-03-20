@@ -34,31 +34,31 @@ public class ParserServiceImplTest {
         stringList.add("p,banana,5");
         stringList.add("s,banana,50");
 
-        fruitTransactions.add(new FruitTransaction(BALANCE,BANANA,20));
-        fruitTransactions.add(new FruitTransaction(BALANCE,APPLE,100));
-        fruitTransactions.add(new FruitTransaction(SUPPLY,BANANA,100));
-        fruitTransactions.add(new FruitTransaction(PURCHASE,BANANA,13));
-        fruitTransactions.add(new FruitTransaction(RETURN,APPLE,10));
-        fruitTransactions.add(new FruitTransaction(PURCHASE,APPLE,20));
-        fruitTransactions.add(new FruitTransaction(PURCHASE,BANANA,5));
-        fruitTransactions.add(new FruitTransaction(SUPPLY,BANANA,50));
+        fruitTransactions.add(new FruitTransaction(BALANCE, BANANA, 20));
+        fruitTransactions.add(new FruitTransaction(BALANCE, APPLE, 100));
+        fruitTransactions.add(new FruitTransaction(SUPPLY, BANANA, 100));
+        fruitTransactions.add(new FruitTransaction(PURCHASE, BANANA, 13));
+        fruitTransactions.add(new FruitTransaction(RETURN, APPLE, 10));
+        fruitTransactions.add(new FruitTransaction(PURCHASE, APPLE, 20));
+        fruitTransactions.add(new FruitTransaction(PURCHASE, BANANA, 5));
+        fruitTransactions.add(new FruitTransaction(SUPPLY, BANANA, 50));
+    }
 
+    @Test
+    public void parseFruitTransactions_returnsEmptyList_whenInputIsEmpty() {
+        List<FruitTransaction> fruitTransactions
+                = dataParserService.parseFruitTransactions(new ArrayList<>());
+        assertEquals(0, fruitTransactions.size());
     }
 
     @Test
     public void parseTransaction_ok() {
         List<FruitTransaction> actualTransactions
                 = dataParserService.parseFruitTransactions(stringList);
+        assertEquals(fruitTransactions.size(), actualTransactions.size());
 
-        assertEquals(fruitTransactions.size(),actualTransactions.size());
-        FruitTransaction actual;
-        FruitTransaction expected;
-        for (int i = 0; i < fruitTransactions.size(); i++) {
-            actual = actualTransactions.get(i);
-            expected = fruitTransactions.get(i);
-            assertEquals(expected.getFruit(), actual.getFruit());
-            assertEquals(expected.getOperation(),actual.getOperation());
-            assertEquals(expected.getQuantity(),actual.getQuantity());
-        }
+        List<FruitTransaction> actualFruitTransaction
+                = dataParserService.parseFruitTransactions(stringList);
+        assertEquals(fruitTransactions, actualFruitTransaction);
     }
 }

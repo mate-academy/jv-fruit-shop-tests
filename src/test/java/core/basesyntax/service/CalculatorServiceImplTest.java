@@ -11,10 +11,8 @@ import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.StrategyStorageImpl;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -24,11 +22,7 @@ public class CalculatorServiceImplTest {
     private static final int APPLE_QUANTITY = 50;
     private static final int BANANA_QUANTITY = 20;
     private static final int PURCHASE_QUANTITY = 10;
-    private static final int RETURN_QUANTITY = 5;
-    private static final int PURCHASE_INSUFFICIENT_QUANTITY = 60;
     private static CalculatorService calculatorService;
-    private List<FruitTransaction> transactions;
-    private FruitTransaction balanceTransaction;
 
     @BeforeClass
     public static void setUp() {
@@ -44,7 +38,7 @@ public class CalculatorServiceImplTest {
 
     @Test
     public void calculate_validTransactions_ok() {
-        balanceTransaction =
+        FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY);
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, BANANA_QUANTITY);
@@ -53,7 +47,7 @@ public class CalculatorServiceImplTest {
                         APPLE,
                         PURCHASE_QUANTITY);
         FruitTransaction returnTransaction =
-                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, RETURN_QUANTITY);
+                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 5);
         List<FruitTransaction> transactions =
                 Arrays.asList(balanceTransaction,
                         supplyTransaction,
@@ -61,19 +55,19 @@ public class CalculatorServiceImplTest {
                         returnTransaction);
         calculatorService.calculate(transactions);
         assertEquals(APPLE_QUANTITY - PURCHASE_QUANTITY, Storage.storage.get(APPLE).intValue());
-        assertEquals(BANANA_QUANTITY + RETURN_QUANTITY, Storage.storage.get(BANANA).intValue());
+        assertEquals(BANANA_QUANTITY + 5, Storage.storage.get(BANANA).intValue());
     }
 
     @Test(expected = RuntimeException.class)
     public void calculate_purchaseWithInsufficientStock_noOk() {
-        balanceTransaction =
+        FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         APPLE,
                         APPLE_QUANTITY);
         FruitTransaction purchaseTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         APPLE,
-                        PURCHASE_INSUFFICIENT_QUANTITY);
+                        60);
         List<FruitTransaction> transactions = Arrays.asList(balanceTransaction,
                 purchaseTransaction);
         calculatorService.calculate(transactions);
@@ -81,24 +75,29 @@ public class CalculatorServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void calculate_nullTransactionList_notOk() {
-        transactions = null;
+        List<FruitTransaction> transactions = null;
         calculatorService.calculate(transactions);
     }
 
     @Test(expected = RuntimeException.class)
     public void calculate_emptyTransactionList_notOk() {
-        transactions = Arrays.asList();
+        List<FruitTransaction> transactions = Collections.emptyList();
         calculatorService.calculate(transactions);
     }
 
     @Test(expected = NullPointerException.class)
     public void calculate_transactionListWithNullElement_notOk() {
-        balanceTransaction =
+        FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY);
         FruitTransaction supplyTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, BANANA_QUANTITY);
         List<FruitTransaction> transactions =
                 Arrays.asList(balanceTransaction, null, supplyTransaction);
         calculatorService.calculate(transactions);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 }

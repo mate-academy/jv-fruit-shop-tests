@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
@@ -13,12 +14,15 @@ public class ReturnOperationHandlerTest {
     private static final int INITIAL_QUANTITY = 20;
     private static final int RETURN_QUANTITY = 10;
     private static final int EMPTY_VALUE = 0;
+    private static OperationHandler returnOperationHandler;
 
-    private OperationHandler returnOperationHandler;
+    @BeforeClass
+    public static void setUp() {
+        returnOperationHandler = new ReturnOperationHandler();
+    }
 
     @Before
-    public void setUp() {
-        returnOperationHandler = new ReturnOperationHandler();
+    public void clearStorage() {
         Storage.storage.clear();
     }
 

@@ -6,29 +6,32 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-    private static final int INITIAL_QUANTITY1 = 20;
-    private static final int INITIAL_QUANTITY2 = 10;
     private static final String FRUIT_NAME = "apple";
-    private OperationHandler purchaseOperationHandler;
+    private static OperationHandler purchaseOperationHandler;
+
+    @BeforeClass
+    public static void setUp() {
+        purchaseOperationHandler = new PurchaseOperationHandler();
+    }
 
     @Before
-    public void setUp() {
-        purchaseOperationHandler = new PurchaseOperationHandler();
+    public void clearStorage() {
         Storage.storage.clear();
     }
 
     @Test
     public void handle_validTransaction_ok() {
-        Storage.storage.put(FRUIT_NAME, INITIAL_QUANTITY1);
+        Storage.storage.put(FRUIT_NAME, 20);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         FRUIT_NAME,
-                        INITIAL_QUANTITY2);
+                        10);
         purchaseOperationHandler.handle(fruitTransaction);
-        Integer expectedQuantity = INITIAL_QUANTITY1 - INITIAL_QUANTITY2;
+        Integer expectedQuantity = 20 - 10;
         assertEquals(expectedQuantity, Storage.storage.get(FRUIT_NAME));
     }
 
@@ -37,24 +40,24 @@ public class PurchaseOperationHandlerTest {
         FruitTransaction fruitTransactionWithNullFruit =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         null,
-                        INITIAL_QUANTITY2);
+                        10);
         purchaseOperationHandler.handle(fruitTransactionWithNullFruit);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_invalidTransactionWithNullOperation_notOk() {
         FruitTransaction fruitTransactionWithNullOperation =
-                new FruitTransaction(null, FRUIT_NAME, INITIAL_QUANTITY2);
+                new FruitTransaction(null, FRUIT_NAME, 10);
         purchaseOperationHandler.handle(fruitTransactionWithNullOperation);
     }
 
     @Test(expected = RuntimeException.class)
     public void handle_notEnoughQuantity_notOk() {
-        Storage.storage.put(FRUIT_NAME, INITIAL_QUANTITY2);
+        Storage.storage.put(FRUIT_NAME, 10);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         FRUIT_NAME,
-                        INITIAL_QUANTITY1);
+                        20);
         purchaseOperationHandler.handle(fruitTransaction);
     }
 }

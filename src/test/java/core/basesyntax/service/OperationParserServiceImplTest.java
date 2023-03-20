@@ -22,10 +22,6 @@ public class OperationParserServiceImplTest {
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final String ORANGE = "orange";
-    private static final int VALUE1 = 20;
-    private static final int VALUE2 = 100;
-    private static final int VALUE3 = 5;
-    private static final int VALUE4 = 50;
     private static OperationParserService operationParserService;
 
     @BeforeClass
@@ -43,10 +39,10 @@ public class OperationParserServiceImplTest {
                 VALID_OPERATION_4
         );
         List<FruitTransaction> expectedResult = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, VALUE1),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, VALUE2),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, VALUE3),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, ORANGE, VALUE4)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 20),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 100),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 5),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, ORANGE, 50)
         );
         List<FruitTransaction> actualResult = operationParserService.parseOperation(inputData);
         assertEquals(expectedResult, actualResult);
@@ -80,7 +76,7 @@ public class OperationParserServiceImplTest {
     }
 
     @Test (expected = RuntimeException.class)
-    public void parseOperation_NonNumeric_notOk() {
+    public void parseOperation_nonNumeric_notOk() {
         List<String> inputData = Arrays.asList(
                 HEADER,
                 NON_NUMERIC_AMOUNT

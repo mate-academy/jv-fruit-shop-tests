@@ -54,6 +54,7 @@ public class FruitServiceImplTest {
     @After
     public void tearDown() {
         transactions.clear();
+        FruitDB.fruitsOnStock.clear();
     }
 
     @Test

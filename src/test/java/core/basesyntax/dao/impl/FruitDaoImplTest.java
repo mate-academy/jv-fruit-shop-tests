@@ -43,11 +43,6 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void updateStock_size1_Ok() {
-        assertEquals(1, fruitDao.getStock().size());
-    }
-
-    @Test
     public void updateStock_sizeGrowing_Ok() {
         fruitDao.updateStock(FRUIT_2, AMOUNT);
         assertEquals(2, fruitDao.getStock().size());

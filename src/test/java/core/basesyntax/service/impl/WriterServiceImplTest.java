@@ -7,6 +7,7 @@ import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,6 +29,11 @@ public class WriterServiceImplTest {
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
         FruitDB.fruitsOnStock.put(FRUIT, AMOUNT);
+    }
+
+    @After
+    public void tearDown() {
+        FruitDB.fruitsOnStock.clear();
     }
 
     @Test

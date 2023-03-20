@@ -53,6 +53,7 @@ public class CsvParserImplTest {
     @Test
     public void parse_invalidOperationAsArgument_notOk() {
         thrown.expect(RuntimeException.class);
+        parsingData.clear();
         parsingData.add(HEADER);
         parsingData.add(INVALID_CSV_PART);
         csvParserImpl.parse(parsingData);

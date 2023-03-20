@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.repository.FruitDB;
 import core.basesyntax.service.ReportBuilder;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +19,11 @@ public class ReportBuilderImplTest {
     @BeforeClass
     public static void beforeClass() {
         reportBuilder = new ReportBuilderImpl();
+        FruitDB.fruitsOnStock.clear();
+    }
+
+    @After
+    public void tearDown() {
         FruitDB.fruitsOnStock.clear();
     }
 

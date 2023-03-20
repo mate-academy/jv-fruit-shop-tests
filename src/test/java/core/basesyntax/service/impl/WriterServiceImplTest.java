@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/testWriter.csv";
-    private static final String EXPECTED_CONTENT = "fruit,quantity" + "\r\n" + "apple,80" + "\r\n";
+    private static final String EXPECTED_CONTENT = "fruit,quantity" + "\r\n" + "apple,80";
     private static WriterService writer;
 
     @BeforeClass
@@ -22,7 +22,7 @@ public class WriterServiceImplTest {
     @Test
     public void writeDataToFile_ValidWritingCase_Ok() throws IOException {
         File file = new File(VALID_PATH);
-        String dataToWrite = "fruit,quantity" + "\r\n" + "apple,80" + "\r\n";
+        String dataToWrite = "fruit,quantity" + "\r\n" + "apple,80";
         writer.writeDataToFile(dataToWrite, VALID_PATH);
         String expected = EXPECTED_CONTENT;
         String actual = Files.readString(file.toPath());

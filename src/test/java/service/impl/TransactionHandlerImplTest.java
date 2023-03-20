@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import service.TransactionHandler;
@@ -43,7 +43,6 @@ public class TransactionHandlerImplTest {
         handlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler(fruitsDao));
         operationStrategy = new OperationStrategyImpl(handlerMap);
-
         transactionHandler = new TransactionHandlerImpl(operationStrategy);
     }
 
@@ -94,8 +93,8 @@ public class TransactionHandlerImplTest {
         transactionHandler.proccesFruitTransaction(null);
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
+    @After
+    public void tearDown() {
         Storage.fruits.clear();
     }
 }

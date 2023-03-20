@@ -2,27 +2,31 @@ package service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import service.FruitTransactionParserService;
-import service.ReaderDataService;
 
 public class FruitTransactionParserImplTest {
     private static final String PATH_TO_INPUT_FILE =
             "src/test/resources/InputDataForFruitTransactionParser.csv";
     private static List<String> DATA_FROM_FILE;
     private static List<FruitTransaction> EXPECTED_AFTER_PARSE;
-    private static ReaderDataService readerDataService;
     private static FruitTransactionParserService fruitTransactionParser
             = new FruitTransactionParserImpl();
 
     @BeforeClass
     public static void beforeClass() {
-        readerDataService = new CsvFileReaderService();
-        DATA_FROM_FILE = readerDataService.read(PATH_TO_INPUT_FILE);
+        try {
+            DATA_FROM_FILE = Files.readAllLines(Path.of(PATH_TO_INPUT_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Test exception. Can't read file: " + PATH_TO_INPUT_FILE);
+        }
         // 20 + 100 - 13 + 5 = 125 - 13 = 112
         FruitTransaction fruitTransaction1 = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20);

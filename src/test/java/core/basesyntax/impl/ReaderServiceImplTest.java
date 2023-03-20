@@ -14,7 +14,7 @@ public class ReaderServiceImplTest {
     private static final String NAME_EMPTY_FILE =
             "src/test/resources/emptyFile.csv";
     private static final String NAME_FILE_WITH_INFO =
-            "src/test/resources/correctData.csv";
+            "src/test/resources/CorrectData.csv";
     private static ReaderService readerService;
     private static final List<String> VALID_LIST = List.of(
             "type", "fruit", "quantity",

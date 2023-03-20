@@ -2,7 +2,6 @@ package core.basesyntax.strategy.operation;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.Utils;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
@@ -12,22 +11,27 @@ import org.junit.Test;
 public class BalanceOperationHandlerTest {
     private static final String FRUIT = "banana";
     private static final String EMPTY = "";
-    private static final int EXPECTED = 20;
+    private static final int QUANTITY = 20;
     private static FruitTransaction transaction;
     private static BalanceOperationHandler balanceOperation;
 
     @BeforeClass
-    public static void beforeAll() throws Exception {
-        Storage.fruits.clear();
-        transaction = Utils.createTransaction(FruitTransaction.Operation.BALANCE, FRUIT, EXPECTED);
+    public static void beforeAll() {
+        transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, FRUIT, QUANTITY);
         balanceOperation = new BalanceOperationHandler();
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 
     @Test
     public void balanceOperation_handle_Ok() {
         balanceOperation.handle(transaction);
         int actual = Storage.fruits.get(FRUIT);
-        assertEquals(EXPECTED, actual);
+        int expected = 20;
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -35,38 +39,22 @@ public class BalanceOperationHandlerTest {
         balanceOperation.handle(null);
     }
 
-    @Test
-    public void balanceOperation_withNullFruit_Ok() {
-        balanceOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
+    @Test(expected = RuntimeException.class)
+    public void balanceOperation_withNullFruit_NotOk() {
+        balanceOperation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 null,
-                EXPECTED));
-        int expected = 20;
-        int actual = Storage.fruits.get(null);
-        assertEquals(expected, actual);
+                QUANTITY));
     }
 
-    @Test
-    public void balanceOperation_withEmptyFruit_Ok() {
-        balanceOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
+    @Test(expected = RuntimeException.class)
+    public void balanceOperation_withEmptyFruit_NotOk() {
+        balanceOperation.handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 EMPTY,
-                EXPECTED));
-        int expected = 20;
-        int actual = Storage.fruits.get(EMPTY);
-        assertEquals(expected, actual);
+                QUANTITY));
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void balanceOperation_withNullTransaction_NotOk() {
-        balanceOperation.handle(Utils.createTransaction(null,
-                FRUIT,
-                EXPECTED));
-        int expected = 20;
-        int actual = Storage.fruits.get(FRUIT);
-        assertEquals(expected, actual);
-    }
-
-    @After
-    public void after() {
-        Storage.fruits.clear();
+        balanceOperation.handle(new FruitTransaction(null, FRUIT, QUANTITY));
     }
 }

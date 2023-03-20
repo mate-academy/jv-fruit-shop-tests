@@ -7,6 +7,12 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -74,5 +80,13 @@ public class FruitTransaction {
     @Override
     public int hashCode() {
         return Objects.hash(operation, fruit, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity + '}';
     }
 }

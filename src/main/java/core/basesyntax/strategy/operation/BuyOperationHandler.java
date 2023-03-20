@@ -6,6 +6,12 @@ import core.basesyntax.model.FruitTransaction;
 public class BuyOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction == null
+                || fruitTransaction.getFruit() == null
+                || fruitTransaction.getOperation() == null
+                || fruitTransaction.getFruit().isEmpty()) {
+            throw new RuntimeException("Bad data transaction: " + fruitTransaction);
+        }
         reduceIfPresent(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 

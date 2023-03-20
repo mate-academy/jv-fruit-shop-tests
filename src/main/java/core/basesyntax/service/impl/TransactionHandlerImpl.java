@@ -14,13 +14,13 @@ public class TransactionHandlerImpl implements TransactionHandler {
 
     @Override
     public void parse(List<FruitTransaction> transactionList) {
-        for (FruitTransaction transaction : transactionList) {
-            try {
+        try {
+            for (FruitTransaction transaction : transactionList) {
                 FruitTransaction.Operation operation = transaction.getOperation();
                 operationStrategy.get(operation).handle(transaction);
-            } catch (NullPointerException e) {
-                throw new RuntimeException("Operation not found ", e);
             }
+        } catch (NullPointerException e) {
+            throw new RuntimeException("Operation not found ", e);
         }
     }
 }

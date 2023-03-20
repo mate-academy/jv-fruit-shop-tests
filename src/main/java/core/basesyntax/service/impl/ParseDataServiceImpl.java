@@ -22,12 +22,11 @@ public class ParseDataServiceImpl implements ParseDataService {
     }
 
     private FruitTransaction parseLine(String line) {
-        FruitTransaction fruitTransaction = new FruitTransaction();
         String[] fields = line.split(SEPARATOR);
-        fruitTransaction
-                .setOperation(FruitTransaction.Operation.getByCode(fields[OPERATION_CODE_FIELD]));
-        fruitTransaction.setFruit(fields[FRUIT_FIELD]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[QUANTITY_FIELD]));
-        return fruitTransaction;
+        return new FruitTransaction(
+                FruitTransaction.Operation.getByCode(fields[OPERATION_CODE_FIELD]),
+                fields[FRUIT_FIELD],
+                Integer.parseInt(fields[QUANTITY_FIELD])
+        );
     }
 }

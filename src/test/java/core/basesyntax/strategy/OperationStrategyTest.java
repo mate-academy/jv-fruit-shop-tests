@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
@@ -24,27 +24,23 @@ public class OperationStrategyTest {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new BuyOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
     @Test
     public void operationStrategy_getOperation_Ok() {
-        OperationHandler expected = operationHandlerMap.get(FruitTransaction.Operation.BALANCE);
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
-        assertEquals(expected, actual);
+        assertSame(actual.getClass(), BalanceOperationHandler.class);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void operationStrategy_getOperationWithNull_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void operationStrategy_getOperationWithNull_NotOk() {
         operationStrategy.get(null);
     }
 
-    @Test
-    public void operationStrategy_getOperationWithEmpty_Ok() {
-        OperationHandler expected = null;
+    @Test(expected = RuntimeException.class)
+    public void operationStrategy_getOperationWithEmpty_NotOk() {
         operationHandlerMap.clear();
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
-        assertEquals(expected, actual);
+        operationStrategy.get(FruitTransaction.Operation.BALANCE);
     }
 }

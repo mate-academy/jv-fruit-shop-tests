@@ -2,7 +2,6 @@ package core.basesyntax.strategy.operation;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.Utils;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.After;
@@ -12,15 +11,19 @@ import org.junit.Test;
 public class BuyOperationHandlerTest {
     private static final String FRUIT = "banana";
     private static final String EMPTY = "";
-    private static final int EXPECTED = 20;
+    private static final int QUANTITY = 20;
     private static FruitTransaction transaction;
     private static BuyOperationHandler buyOperation;
 
     @BeforeClass
     public static void beforeAll() {
-        Storage.fruits.clear();
-        transaction = Utils.createTransaction(FruitTransaction.Operation.PURCHASE, FRUIT, EXPECTED);
+        transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT, QUANTITY);
         buyOperation = new BuyOperationHandler();
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 
     @Test
@@ -28,51 +31,39 @@ public class BuyOperationHandlerTest {
         Storage.fruits.put("banana", 40);
         buyOperation.handle(transaction);
         int actual = Storage.fruits.get(FRUIT);
-        assertEquals(EXPECTED, actual);
+        int expected = 20;
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperation_notEnoughInStorage_NotOk() {
+        Storage.fruits.put(FRUIT, 10);
         buyOperation.handle(transaction);
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperation_notFoundInStorage_NotOk() {
-        buyOperation.handle(null);
+        buyOperation.handle(transaction);
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperation_withNullFruit_NotOk() {
-        buyOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
+        buyOperation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 null,
-                EXPECTED));
-        int expected = 20;
-        int actual = Storage.fruits.get(null);
-        assertEquals(expected, actual);
+                QUANTITY));
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperation_withEmptyFruit_NotOk() {
-        buyOperation.handle(Utils.createTransaction(FruitTransaction.Operation.BALANCE,
+        buyOperation.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 EMPTY,
-                EXPECTED));
-        int expected = 20;
-        int actual = Storage.fruits.get(EMPTY);
-        assertEquals(expected, actual);
+                QUANTITY));
     }
 
     @Test(expected = RuntimeException.class)
     public void purchaseOperation_withNullTransaction_NotOk() {
-        buyOperation.handle(Utils.createTransaction(null,
+        buyOperation.handle(new FruitTransaction(null,
                 FRUIT,
-                EXPECTED));
-        int expected = 20;
-        int actual = Storage.fruits.get(FRUIT);
-        assertEquals(expected, actual);
-    }
-
-    @After
-    public void after() {
-        Storage.fruits.clear();
+                QUANTITY));
     }
 }

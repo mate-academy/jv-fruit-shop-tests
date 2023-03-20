@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.Utils;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ParseDataServiceImpl;
 import java.util.ArrayList;
@@ -29,10 +28,10 @@ public class ParseDataServiceTest {
     public static void beforeAll() {
         parseDataService = new ParseDataServiceImpl();
         expected = new ArrayList<>();
-        expected.add(Utils.createTransaction(FruitTransaction.Operation.BALANCE, BANANA, 200));
-        expected.add(Utils.createTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 100));
-        expected.add(Utils.createTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
-        expected.add(Utils.createTransaction(FruitTransaction.Operation.RETURN, APPLE, 100));
+        expected.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 200));
+        expected.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 100));
+        expected.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
+        expected.add(new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 100));
         expectedEmpty = new ArrayList<>();
         input = new ArrayList<>();
     }

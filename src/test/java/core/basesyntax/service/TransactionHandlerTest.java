@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.Utils;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.TransactionHandlerImpl;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -32,20 +31,23 @@ public class TransactionHandlerTest {
 
     @BeforeClass
     public static void beforeAll() {
-        Storage.fruits.clear();
-        input = new ArrayList<>();
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new BuyOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        input.clear();
-        input.add(Utils.createTransaction(FruitTransaction.Operation.BALANCE, BANANA, 200));
-        input.add(Utils.createTransaction(FruitTransaction.Operation.RETURN, APPLE, 100));
-        input.add(Utils.createTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 50));
-        input.add(Utils.createTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
+        input = new ArrayList<>();
+        input.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 200));
+        input.add(new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE, 100));
+        input.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 50));
+        input.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 50));
         transactionHandler = new TransactionHandlerImpl(operationStrategy);
+    }
+
+    @After
+    public void tearDown() {
+        Storage.fruits.clear();
     }
 
     @Test
@@ -70,8 +72,8 @@ public class TransactionHandlerTest {
         assertTrue(Storage.fruits.isEmpty());
     }
 
-    @AfterClass
-    public static void afterClass() throws Exception {
-        Storage.fruits.clear();
+    @Test(expected = RuntimeException.class)
+    public void transactionHandler_parseNullInput_NotOk() {
+        transactionHandler.parse(null);
     }
 }

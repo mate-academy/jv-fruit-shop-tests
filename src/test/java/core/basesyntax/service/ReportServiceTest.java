@@ -27,7 +27,7 @@ public class ReportServiceTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruits.clear();
     }
 

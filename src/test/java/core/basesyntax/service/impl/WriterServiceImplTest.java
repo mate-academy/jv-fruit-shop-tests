@@ -14,9 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriterServiceImplTest {
-
-    private static final String FILE_PATH = "src/main/java/resources/test_report.csv";
-    private static final String ORIGINAL_FILE_PATH = "src/main/java/resources/report.csv";
+    private static final String FILE_PATH = "src/test/resources/report.csv";
     private static List<String> expectedData;
     private static WriterService writerService;
 

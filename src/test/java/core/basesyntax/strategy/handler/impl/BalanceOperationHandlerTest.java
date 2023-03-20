@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceOperationHandlerTest {
-
     private static OperationHandler balanceHandler;
     private static final Integer EXPECTED = 2;
     private static final Integer TRANSACTION_VALUE = 2;

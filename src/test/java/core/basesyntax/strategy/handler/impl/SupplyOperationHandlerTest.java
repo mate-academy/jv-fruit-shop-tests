@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
-
     private static final Integer TRANSACTION_VALUE = 50;
     private static final Integer OLD_VALUE = 90;
     private static final Integer EXPECTED_VALUE = 140;

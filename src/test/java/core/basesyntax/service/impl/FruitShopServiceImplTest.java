@@ -23,14 +23,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceImplTest {
-
     public static final String BANANA = "banana";
     public static final String APPLE = "apple";
     public static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
     public static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
     public static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
     public static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
-
     public static final Integer BANANA_AMOUNT = 152;
     public static final Integer APPLE_AMOUNT = 90;
     private static FruitShopService fruitShopService;
@@ -79,7 +77,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void emptyData_Ok() {
+    public void emptyData_ok() {
         List<FruitTransaction> emptyFruitTransactions = new ArrayList<>();
         fruitShopService.processData(emptyFruitTransactions);
         assertEquals(expectedFruitStorage,Storage.fruitMap);
@@ -98,7 +96,7 @@ public class FruitShopServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.fruitMap.clear();
         expectedFruitStorage.clear();
         fruitTransactions.clear();

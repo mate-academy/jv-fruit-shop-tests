@@ -8,8 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
-    private static final String FILE_PATH_NOT_OK = "src/main/java/resources/fileNotExist.csv";
-    private static final String FILE_PATH_OK = "src/main/java/resources/data.csv";
+    private static final String FILE_PATH_NOT_OK = "src/test/resources/fileNotExist.csv";
+    private static final String FILE_PATH_OK = "src/test/resources/data.csv";
     private static List<String> dataFileList;
     private static ReaderService readerService;
 

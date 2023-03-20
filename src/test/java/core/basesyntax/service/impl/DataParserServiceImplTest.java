@@ -101,7 +101,7 @@ public class DataParserServiceImplTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         fruitTransactions.clear();
         dataList.clear();
     }

@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-
     private static final Integer TRANSACTION_VALUE = 5;
     private static final Integer OLD_VALUE = 25;
     private static final Integer EXPECTED_VALUE = 30;

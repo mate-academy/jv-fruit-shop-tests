@@ -7,7 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
-
     private static final Integer SMALL_VALUE = 10;
     private static final Integer BIG_VALUE = 25;
     private static final Integer EXPECTED_VALUE = 15;

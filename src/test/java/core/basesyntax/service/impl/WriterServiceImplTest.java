@@ -35,7 +35,7 @@ public class WriterServiceImplTest {
     @Test
     public void writeDataToFile_ValidWritingCase_Ok() throws IOException {
         File file = new File(VALID_PATH);
-        String dataToWrite = reportMaker.generateReport(FruitStorage.fruitStorage);
+        String dataToWrite = "fruit,quantity" + "\r\n" + "apple,80" + "\r\n";
         writer.writeDataToFile(dataToWrite, VALID_PATH);
         String expected = EXPECTED_CONTENT;
         String actual = Files.readString(file.toPath());

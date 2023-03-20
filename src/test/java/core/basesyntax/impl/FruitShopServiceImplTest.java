@@ -17,12 +17,11 @@ import org.junit.Test;
 public class FruitShopServiceImplTest {
     private static final List<FruitTransaction> EMPTY_LIST_TRANSACTION = new ArrayList<>();
     private static final List<FruitTransaction> VALID_LIST_TRANSACTION = new ArrayList<>();
-    private static final List<FruitTransaction> NULL_LIST_TRANSACTION = null;
     private static final Strategy strategy = new StrategyImpl();
     private static FruitShopService fruitShopService;
 
     @BeforeClass
-    public static void beforeAll() {
+    public static void beforeClass() {
         fruitShopService = new FruitShopServiceImpl(strategy);
         VALID_LIST_TRANSACTION.add(new FruitTransaction("b", "banana", 23));
         VALID_LIST_TRANSACTION.add(new FruitTransaction("s", "banana", 100));
@@ -49,6 +48,6 @@ public class FruitShopServiceImplTest {
 
     @Test(expected = RuntimeException.class)
     public void realizePattern_nullListTransaction_notOk() {
-        fruitShopService.realizePattern(NULL_LIST_TRANSACTION);
+        fruitShopService.realizePattern(null);
     }
 }

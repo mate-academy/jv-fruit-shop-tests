@@ -11,30 +11,28 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
-    private static final String NULL_REPORT = null;
-    private static final String FILE_NAME_TO_NULL = null;
     private static final String VALID_REPORT =
             "type,fruit,quantity" + System.lineSeparator()
                     + "b,banana,20" + System.lineSeparator()
                     + "b,apple,100" + System.lineSeparator();
     private static final String FILE_NAME_CORRECT =
-            "src/test/java/core/basesyntax/impl/FileToWrite.csv";
+            "src/test/resources/FileToWrite.csv";
     private static final String FILE_NAME_INVALID = "this/path/don`t/exist";
     private static WriteService writeService;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         writeService = new WriteServiceImpl();
     }
 
     @Test(expected = RuntimeException.class)
-    public void realizePattern_reportNull_notOk() {
-        writeService.writeToFile(NULL_REPORT, FILE_NAME_CORRECT);
+    public void writeData_reportNull_notOk() {
+        writeService.writeToFile(null, FILE_NAME_CORRECT);
     }
 
     @Test(expected = RuntimeException.class)
-    public void realizePattern_fileNameNull_notOk() {
-        writeService.writeToFile(VALID_REPORT, FILE_NAME_TO_NULL);
+    public void writeData_fileNameNull_notOk() {
+        writeService.writeToFile(VALID_REPORT, null);
     }
 
     @Test(expected = RuntimeException.class)
@@ -43,7 +41,7 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void realizePattern_allFieldCorrect_ok() {
+    public void writeData_allFieldCorrect_ok() {
         writeService.writeToFile(VALID_REPORT, FILE_NAME_CORRECT);
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader =

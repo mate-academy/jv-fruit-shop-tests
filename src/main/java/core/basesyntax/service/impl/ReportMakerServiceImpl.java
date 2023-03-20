@@ -13,8 +13,8 @@ public class ReportMakerServiceImpl implements ReportMakerService {
         report.append(TABLE_HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> pair : data.entrySet()) {
             report.append(pair.getKey())
-                .append(TABLE_SEPARATOR)
-                .append(pair.getValue())
+                    .append(TABLE_SEPARATOR)
+                    .append(pair.getValue())
                     .append(System.lineSeparator());
         }
         return report.toString();

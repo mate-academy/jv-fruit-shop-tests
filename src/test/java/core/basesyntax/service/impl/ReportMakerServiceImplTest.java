@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportMakerService;
 import org.junit.After;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ReportMakerServiceImplTest {
     private static final String HEADER = "fruit,quantity";
@@ -27,7 +27,4 @@ public class ReportMakerServiceImplTest {
         String actual = reportMaker.generateReport(FruitStorage.fruitStorage);
         assertEquals(expected, actual);
     }
-
-
-
 }

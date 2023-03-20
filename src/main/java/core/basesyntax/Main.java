@@ -12,8 +12,6 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.CalculateStrategy;
-import core.basesyntax.strategy.impl.CalculateStrategyImpl;
 import java.io.File;
 import java.util.List;
 

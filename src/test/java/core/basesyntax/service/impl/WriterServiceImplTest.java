@@ -1,17 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.service.WriterService;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/testWriter.csv";

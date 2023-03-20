@@ -17,8 +17,8 @@ public class DataParserServiceImpl implements DataParserService {
                 .skip(1)
                 .map(d -> d.split(LINE_SPLITTER))
                 .map(d -> new FruitTransaction(FruitTransaction
-                    .Operation.getOperation(d[OPERATION_INDEX]),
-                    d[FRUIT_INDEX], Integer.parseInt(d[QUANTITY_INDEX])))
+                        .Operation.getOperation(d[OPERATION_INDEX]),
+                        d[FRUIT_INDEX], Integer.parseInt(d[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 }

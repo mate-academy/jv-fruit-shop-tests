@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnHandlerTest {
-    private static final int INITIAL_STORAGE_QUANTITY = 50;c
+    private static final int INITIAL_STORAGE_QUANTITY = 50;
     private static final int RETURN_QUANTITY = 40;
     private static final Integer EXPECTED_QUANTITY = 90;
     private static final String FRUIT = "apple";

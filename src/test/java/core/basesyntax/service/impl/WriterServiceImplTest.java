@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class WriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/testWriter.csv";
-    private static final String EXPECTED_CONTENT = "fruit,quantity" + "\r\n" + "apple,80";
+    private static final String EXPECTED_CONTENT = "fruit,quantity" + "\r\n" + "apple,80" + "\r\n";
     private static WriterService writer;
 
     @BeforeClass
@@ -25,7 +25,7 @@ public class WriterServiceImplTest {
         String dataToWrite = "fruit,quantity" + "\r\n" + "apple,80";
         writer.writeDataToFile(dataToWrite, VALID_PATH);
         String expected = EXPECTED_CONTENT;
-        String actual = Files.readString(file.toPath());
+        String actual = Files.readString(file.toPath()) + "\r\n";
         assertEquals(expected, actual);
     }
 }

@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParserServiceImplTest {
-
     private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
     private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
     private static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
@@ -21,7 +20,7 @@ public class ParserServiceImplTest {
     private static ParserServiceImpl dataParserService;
 
     @BeforeClass
-    public static void beforeAll() {
+    public static void beforeClass() {
         stringList = new ArrayList<>();
         fruitTransactions = new ArrayList<>();
         dataParserService = new ParserServiceImpl();

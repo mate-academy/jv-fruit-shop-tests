@@ -3,6 +3,7 @@ package core.basesyntax.service.implementation;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,6 +18,10 @@ public class ReportServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         reportService = new ReportServiceImpl();
+    }
+
+    @Before
+    public void setUp() {
         Storage.fruits.clear();
         Storage.fruits.put("banana",152);
         Storage.fruits.put("apple",90);

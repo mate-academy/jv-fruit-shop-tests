@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReturnTest {
@@ -11,9 +12,13 @@ public class ReturnTest {
     private static final String FRUIT = "banana";
     private static OperationHandler operationHandler;
 
+    @BeforeClass
+    public static void beforeClass() {
+        operationHandler = new Return();
+    }
+
     @Before
     public void setUp() {
-        operationHandler = new Return();
         Storage.fruits.clear();
     }
 

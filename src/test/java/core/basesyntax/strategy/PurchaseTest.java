@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exeption.FruitShopException;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseTest {
@@ -14,9 +15,13 @@ public class PurchaseTest {
     private static final String FRUIT = "banana";
     private static OperationHandler operationHandler;
 
+    @BeforeClass
+    public static void beforeClass() {
+        operationHandler = new Purchase();
+    }
+
     @Before
     public void setUp() {
-        operationHandler = new Purchase();
         Storage.fruits.clear();
     }
 

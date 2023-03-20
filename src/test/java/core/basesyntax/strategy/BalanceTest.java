@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BalanceTest {
@@ -11,9 +12,13 @@ public class BalanceTest {
     private static final String FRUIT = "banana";
     private static OperationHandler operationHandler;
 
+    @BeforeClass
+    public static void beforeClass() {
+        operationHandler = new Balance();
+    }
+
     @Before
     public void setUp() {
-        operationHandler = new Balance();
         Storage.fruits.clear();
     }
 
@@ -24,7 +29,7 @@ public class BalanceTest {
     }
 
     @Test
-    public void handleFruitOperation_return_whenFruitExists_ok() {
+    public void handleFruitOperation_balance_whenFruitExists_ok() {
         Storage.fruits.put(FRUIT, QUANTITY);
         operationHandler.handleFruitOperation(FRUIT, QUANTITY);
         assertEquals(Integer.valueOf(QUANTITY + QUANTITY), Storage.get(FRUIT));

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopServiceTest {
@@ -23,8 +23,8 @@ public class FruitShopServiceTest {
     private static Map<String, Integer> expectedMap;
     private static FruitShopService fruitShopService;
 
-    @Before
-    public void beforeAll() {
+    @BeforeClass
+    public static void beforeAll() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());

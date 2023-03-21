@@ -16,25 +16,25 @@ public class TransactionParserServiceTest {
             "src/test/resources/input.csv";
     private static ReaderService readerService;
     private static TransactionParserService transactionParserService;
-    private static List<FruitTransaction> defaultData;
+    private static List<FruitTransaction> expectedData;
 
     @BeforeClass
     public static void beforeAll() {
         readerService = new ReaderServiceImpl();
         transactionParserService = new TransactionParserServiceImpl();
-        defaultData = List.of(new FruitTransaction("b", "banana", 20),
+        expectedData = List.of(new FruitTransaction("b", "banana", 20),
                 new FruitTransaction("b", "apple", 100),
                 new FruitTransaction("s", "banana", 100));
     }
 
     @Test
     public void parseData_defaultInput_ok() {
-        List<FruitTransaction> parsedData =
+        List<FruitTransaction> actualData =
                 transactionParserService.parse(readerService.readFrom(DEFAULT_DATA));
-        for (int i = 0; i < parsedData.size(); i++) {
-            assertEquals(defaultData.get(i).getOperation(), parsedData.get(i).getOperation());
-            assertEquals(defaultData.get(i).getFruit(), parsedData.get(i).getFruit());
-            assertEquals(defaultData.get(i).getQuantity(), parsedData.get(i).getQuantity());
+        for (int i = 0; i < actualData.size(); i++) {
+            assertEquals(expectedData.get(i).getOperation(), actualData.get(i).getOperation());
+            assertEquals(expectedData.get(i).getFruit(), actualData.get(i).getFruit());
+            assertEquals(expectedData.get(i).getQuantity(), actualData.get(i).getQuantity());
         }
     }
 

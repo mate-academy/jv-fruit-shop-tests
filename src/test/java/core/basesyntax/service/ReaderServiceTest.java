@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceTest {
@@ -18,8 +18,8 @@ public class ReaderServiceTest {
     private static final String EMPTY_DATA = "";
     private static ReaderService readerService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

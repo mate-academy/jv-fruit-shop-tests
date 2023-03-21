@@ -13,7 +13,7 @@ import org.junit.rules.ExpectedException;
 
 public class WriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/testWriter.csv";
-    private static final String DATA_TO_WRITE = "fruit,quantity\napple,80";
+    private static final String DATA_TO_WRITE = "fruit,quantity\napple,80\n";
     private static final String EXPECTED_CONTENT = "fruit,quantity\napple,80";
     private static WriterService writer;
 

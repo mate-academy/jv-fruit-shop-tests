@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
 public interface FruitService {
     void calculateTotalQuantity(List<FruitTransaction> transactions);

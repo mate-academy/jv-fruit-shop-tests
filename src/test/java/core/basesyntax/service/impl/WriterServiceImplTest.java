@@ -2,12 +2,12 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.service.WriterService;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,7 +19,8 @@ public class WriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/testWriter.csv";
     private static final String FRUIT = "apple";
     private static final int QUANTITY = 80;
-    private static final String EXPECTED_CONTENT = "fruit,quantity" + System.lineSeparator() + "apple,80";
+    private static final String EXPECTED_CONTENT = "fruit,quantity"
+            + System.lineSeparator() + "apple,90";
     private static ReportMakerService reportMaker;
     private static WriterService writer;
 
@@ -43,20 +44,20 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_ValidWritingCase_Ok() throws IOException {
-        File file = new File(VALID_PATH);
-        String dataToWrite = reportMaker.generateReport(FruitStorage.fruitStorage);
-        String expected = EXPECTED_CONTENT;
-        writer.writeDataToFile(dataToWrite, VALID_PATH);
-        String actual = Files.readString(file.toPath());
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void writeDataToFile_ZeroLengthStringInput_NotOk() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Can't write zero string");
         String dataToWrite = "";
         writer.writeDataToFile(dataToWrite, VALID_PATH);
+    }
+
+    @Test
+    public void writeDataToFile_ValidWritingCase_Ok() throws IOException {
+        File file = new File(VALID_PATH);
+        String dataToWrite = "fruit,quantity" + System.lineSeparator() + "apple,90";
+        String expected = EXPECTED_CONTENT;
+        writer.writeDataToFile(dataToWrite, VALID_PATH);
+        String actual = Files.readString(file.toPath());
+        assertEquals(expected, actual);
     }
 }

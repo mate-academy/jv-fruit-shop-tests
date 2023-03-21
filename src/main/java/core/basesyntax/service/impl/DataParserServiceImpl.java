@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DataParserServiceImpl implements DataParserService {
     private static final String LINE_SPLITTER = ",";

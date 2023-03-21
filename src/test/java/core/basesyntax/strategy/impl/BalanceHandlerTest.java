@@ -2,10 +2,10 @@ package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Map;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -24,7 +24,8 @@ public class BalanceHandlerTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, FRUIT, BALANCE_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                FRUIT, BALANCE_QUANTITY);
         handler = new BalanceHandler();
     }
 

@@ -2,10 +2,10 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -46,7 +46,8 @@ public class DataParserServiceImplTest {
     public void parseDataToFruitTransaction_ValidDataInput_Ok() {
         dataToParse.add(HEADER);
         dataToParse.add(VALID_TRANSACTION_LINE);
-        FruitTransaction expected = new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 80);
+        FruitTransaction expected = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "apple", 80);
         List<FruitTransaction> actual = dataParser.parseDataToFruitTransaction(dataToParse);
         FruitTransaction actualTransaction = actual.get(0);
         assertEquals(expected, actualTransaction);

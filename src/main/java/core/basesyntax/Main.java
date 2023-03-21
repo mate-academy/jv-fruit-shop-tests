@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.io.File;
-import java.util.List;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
@@ -14,6 +12,8 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
+import java.io.File;
+import java.util.List;
 
 public class Main {
     public static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
@@ -28,9 +28,9 @@ public class Main {
         File file = new File(INPUT_FILE_NAME);
         List<String> dataFromFile = readerService.readDataFromFile(file);
         List<FruitTransaction> parsedDataFromFile = dataParserService
-            .parseDataToFruitTransaction(dataFromFile);
+                .parseDataToFruitTransaction(dataFromFile);
         fruitService
-            .calculateTotalQuantity(parsedDataFromFile);
+                .calculateTotalQuantity(parsedDataFromFile);
         String report = reportMakerService.generateReport(FruitStorage.fruitStorage);
         writerService.writeDataToFile(report, TO_FILE_NAME);
     }

@@ -26,28 +26,32 @@ public class CalculateStrategyImplTest {
 
     @Test
     public void getHandler_getBalanceHandler_Ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, DEFAULT_FRUIT, DEFAULT_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                DEFAULT_FRUIT, DEFAULT_QUANTITY);
         OperationHandler actual = calculateStrategy.getHandler(fruitTransaction);
         assertEquals(BalanceHandler.class, actual.getClass());
     }
 
     @Test
     public void getHandler_getSupplyHandler_Ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, DEFAULT_FRUIT, DEFAULT_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                DEFAULT_FRUIT, DEFAULT_QUANTITY);
         OperationHandler actual = calculateStrategy.getHandler(fruitTransaction);
         assertEquals(SupplyHandler.class, actual.getClass());
     }
 
     @Test
     public void getHandler_getReturnHandler_Ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, DEFAULT_FRUIT, DEFAULT_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                DEFAULT_FRUIT, DEFAULT_QUANTITY);
         OperationHandler actual = calculateStrategy.getHandler(fruitTransaction);
         assertEquals(ReturnHandler.class, actual.getClass());
     }
 
     @Test
     public void getHandler_getPurchaseHandler_Ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, DEFAULT_FRUIT, DEFAULT_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                DEFAULT_FRUIT, DEFAULT_QUANTITY);
         OperationHandler actual = calculateStrategy.getHandler(fruitTransaction);
         assertEquals(PurchaseHandler.class, actual.getClass());
     }

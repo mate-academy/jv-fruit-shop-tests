@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import java.util.Map;
 import core.basesyntax.service.ReportMakerService;
+import java.util.Map;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
     private static final String TABLE_HEADER = "fruit,quantity";
@@ -15,7 +15,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
             report.append(pair.getKey())
                 .append(TABLE_SEPARATOR)
                 .append(pair.getValue())
-                .append(System.lineSeparator());
+                    .append(System.lineSeparator());
         }
         report.deleteCharAt(report.length() - 1);
         return report.toString().trim();

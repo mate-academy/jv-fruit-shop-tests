@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.util.List;
-import core.basesyntax.service.ReaderService;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,7 +35,8 @@ public class ReaderServiceImplTest {
     @Test
     public void readDataFromFile_NonExistentFilePath_NotOk() {
         exceptionRule.expect(RuntimeException.class);
-        exceptionRule.expectMessage("Can't read data from the file " + new File(NON_EXISTENT_PATH).getName());
+        exceptionRule.expectMessage("Can't read data from the file "
+                + new File(NON_EXISTENT_PATH).getName());
         reader.readDataFromFile(new File(NON_EXISTENT_PATH));
     }
 

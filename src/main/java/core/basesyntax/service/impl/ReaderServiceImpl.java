@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import core.basesyntax.service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override

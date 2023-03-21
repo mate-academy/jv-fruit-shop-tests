@@ -27,7 +27,4 @@ public class ReportMakerServiceImplTest {
         String actual = reportMaker.generateReport(FruitStorage.fruitStorage);
         assertEquals(expected, actual);
     }
-
-
-
 }

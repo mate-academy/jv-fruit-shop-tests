@@ -2,10 +2,10 @@ package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Map;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -27,7 +27,8 @@ public class PurchaseHandlerTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT, PURCHASE_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                FRUIT, PURCHASE_QUANTITY);
         handler = new PurchaseHandler();
     }
 
@@ -50,10 +51,11 @@ public class PurchaseHandlerTest {
 
     @Test
     public void apply_NotEnoughFruitsToPurchase_NotOk() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, FRUIT, TOO_MUCH_FRUITS_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                FRUIT, TOO_MUCH_FRUITS_QUANTITY);
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Not enough "
-            + fruitTransaction.getFruit() + "'s on store to purchase");
+                + fruitTransaction.getFruit() + "'s on store to purchase");
         handler.apply(fruitTransaction);
     }
 

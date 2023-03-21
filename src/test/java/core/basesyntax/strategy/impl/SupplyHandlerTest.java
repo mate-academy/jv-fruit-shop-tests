@@ -2,10 +2,10 @@ package core.basesyntax.strategy.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Map;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -26,7 +26,8 @@ public class SupplyHandlerTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, FRUIT, SUPPLY_QUANTITY);
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                FRUIT, SUPPLY_QUANTITY);
         handler = new SupplyHandler();
     }
 

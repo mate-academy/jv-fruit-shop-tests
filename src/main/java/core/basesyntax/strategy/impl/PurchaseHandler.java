@@ -12,7 +12,7 @@ public class PurchaseHandler implements OperationHandler {
                 + transaction.getFruit() + "'s on store to purchase");
         }
         int newAmount = FruitStorage.fruitStorage.get(transaction.getFruit())
-            - transaction.getQuantity();
+                - transaction.getQuantity();
         FruitStorage.fruitStorage.put(transaction.getFruit(), newAmount);
     }
 }

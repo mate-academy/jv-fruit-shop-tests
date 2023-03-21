@@ -48,7 +48,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void calculateTotalQuantity_validInputs_Ok() {
+    public void calculateTotalQuantity_validInputs_ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 FRUIT, SUPPLY_QUANTITY));
         Map<String, Integer> expected = Map.of(FRUIT, INITIAL_QUANTITY + SUPPLY_QUANTITY);

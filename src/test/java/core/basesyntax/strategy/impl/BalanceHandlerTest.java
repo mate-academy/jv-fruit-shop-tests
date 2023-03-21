@@ -35,7 +35,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void apply_regularCalculatingCase_Ok() {
+    public void apply_regularCalculatingCase_ok() {
         handler.apply(fruitTransaction);
         Map<String, Integer> expected = Map.of(FRUIT, EXPECTED_QUANTITY);
         assertEquals(expected, FruitStorage.fruitStorage);

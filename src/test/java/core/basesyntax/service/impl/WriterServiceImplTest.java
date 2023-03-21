@@ -43,7 +43,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_validWritingCase_Ok() throws IOException {
+    public void writeDataToFile_validWritingCase_ok() throws IOException {
         File file = new File(VALID_PATH);
         String expected = EXPECTED_CONTENT;
         writer.writeData(DATA_TO_WRITE, VALID_PATH);

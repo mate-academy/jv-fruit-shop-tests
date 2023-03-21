@@ -21,7 +21,7 @@ public class ReportMakerServiceImplTest {
     }
 
     @Test
-    public void generateReport_validInput_Ok() {
+    public void generateReport_validInput_ok() {
         String expected = VALID_REPORT;
         FruitStorage.fruitStorage.put(FRUIT, QUANTITY);
         String actual = reportMaker.generateReport(FruitStorage.fruitStorage);

@@ -43,7 +43,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void parseDataToFruitTransaction_validDataInput_Ok() {
+    public void parseDataToFruitTransaction_validDataInput_ok() {
         dataToParse.add(HEADER);
         dataToParse.add(VALID_TRANSACTION_LINE);
         FruitTransaction expected = new FruitTransaction(FruitTransaction.Operation.BALANCE,

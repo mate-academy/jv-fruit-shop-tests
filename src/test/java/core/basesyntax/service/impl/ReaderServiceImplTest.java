@@ -26,7 +26,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readDataFromFile_validInput_Ok() {
+    public void readDataFromFile_validInput_ok() {
         List<String> expected = List.of(HEADER, VALID_LINE);
         List<String> actual = reader.readData(new File(VALID_FILE));
         assertEquals(expected, actual);

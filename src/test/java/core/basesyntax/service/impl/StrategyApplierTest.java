@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.DaoService;
 import core.basesyntax.db.DaoServiceHashMap;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -20,9 +19,10 @@ import org.junit.Test;
 public class StrategyApplierTest {
     private static final String DEFAULT_FRUIT = "apple";
     private static final String ADDITIONAL_FRUIT = "banana";
-    private static final List<FruitTransaction> VALID_DEFAULT_TRANSACTIONS = new ArrayList<>();
-    private static final List<FruitTransaction> VALID_ADDITIONAL_TRANSACTIONS = new ArrayList<>();
-    private static DaoService STORAGE;
+    private static final List<FruitTransaction> validTransactionsDefault = new ArrayList<>();
+    private static final List<FruitTransaction> validTransactionsAdditional = new ArrayList<>();
+    private static DaoServiceHashMap storage;
+    private static Map<String, Integer> expectedResult;
     private static final Map<Operation, SaveStrategy> STRATEGIES_WITHOUT_RETURN =
             new HashMap<>();
     private static StrategySelector strategySelector;
@@ -30,38 +30,39 @@ public class StrategyApplierTest {
 
     @BeforeClass
     public static void initialize() {
-        STORAGE = new DaoServiceHashMap();
-        STRATEGIES_WITHOUT_RETURN.put(Operation.SUPPLY, new SaveStrategySupply(STORAGE));
-        STRATEGIES_WITHOUT_RETURN.put(Operation.PURCHASE, new SaveStrategyPurchase(STORAGE));
-        STRATEGIES_WITHOUT_RETURN.put(Operation.BALANCE, new SaveStrategyBalance(STORAGE));
+        storage = new DaoServiceHashMap();
+        expectedResult = new HashMap<>();
+        STRATEGIES_WITHOUT_RETURN.put(Operation.SUPPLY, new SaveStrategySupply(storage));
+        STRATEGIES_WITHOUT_RETURN.put(Operation.PURCHASE, new SaveStrategyPurchase(storage));
+        STRATEGIES_WITHOUT_RETURN.put(Operation.BALANCE, new SaveStrategyBalance(storage));
         strategySelector = new StrategySelector(STRATEGIES_WITHOUT_RETURN);
         strategyApplier = new StrategyApplier(strategySelector);
-        VALID_DEFAULT_TRANSACTIONS.add(
+        validTransactionsDefault.add(
                 new FruitTransaction(
                         Operation.BALANCE.getCode(),
                         DEFAULT_FRUIT,
                         100));
-        VALID_DEFAULT_TRANSACTIONS.add(
+        validTransactionsDefault.add(
                 new FruitTransaction(
                         Operation.PURCHASE.getCode(),
                         DEFAULT_FRUIT,
                         50));
-        VALID_DEFAULT_TRANSACTIONS.add(
+        validTransactionsDefault.add(
                 new FruitTransaction(
                         Operation.SUPPLY.getCode(),
                         DEFAULT_FRUIT,
                         20));
-        VALID_ADDITIONAL_TRANSACTIONS.add(
+        validTransactionsAdditional.add(
                 new FruitTransaction(
                         Operation.BALANCE.getCode(),
                         ADDITIONAL_FRUIT,
                         100));
-        VALID_ADDITIONAL_TRANSACTIONS.add(
+        validTransactionsAdditional.add(
                 new FruitTransaction(
                         Operation.PURCHASE.getCode(),
                         ADDITIONAL_FRUIT,
                         50));
-        VALID_ADDITIONAL_TRANSACTIONS.add(
+        validTransactionsAdditional.add(
                 new FruitTransaction(
                         Operation.SUPPLY.getCode(),
                         ADDITIONAL_FRUIT,
@@ -70,42 +71,36 @@ public class StrategyApplierTest {
 
     @Before
     public void reset() {
-        STORAGE.clear();
+        expectedResult.clear();
+        storage.getMemory().clear();
     }
 
     @Test
     public void applyAll_validSingleFruit_ok() {
-        DaoService expectedStorage = new DaoServiceHashMap();
-        expectedStorage.create(DEFAULT_FRUIT, 70);
-        strategyApplier.applyAll(VALID_DEFAULT_TRANSACTIONS);
-        Assert.assertEquals(STORAGE.getAll(), expectedStorage.getAll());
+        expectedResult.put(DEFAULT_FRUIT, 70);
+        strategyApplier.applyAll(validTransactionsDefault);
+        Assert.assertEquals(storage.getMemory(), expectedResult);
     }
 
     @Test
     public void applyAll_validTwoFruits_ok() {
-        DaoService expectedStorage = new DaoServiceHashMap();
-        expectedStorage.create(DEFAULT_FRUIT, 70);
-        expectedStorage.create(ADDITIONAL_FRUIT, 70);
-        for (int i = 0; i < VALID_DEFAULT_TRANSACTIONS.size(); i++) {
-            strategyApplier.applyAll(List.of(VALID_DEFAULT_TRANSACTIONS.get(i)));
-            strategyApplier.applyAll(List.of(VALID_ADDITIONAL_TRANSACTIONS.get(i)));
+        expectedResult.put(DEFAULT_FRUIT, 70);
+        expectedResult.put(ADDITIONAL_FRUIT, 70);
+        for (int i = 0; i < validTransactionsDefault.size(); i++) {
+            strategyApplier.applyAll(List.of(validTransactionsDefault.get(i)));
+            strategyApplier.applyAll(List.of(validTransactionsAdditional.get(i)));
         }
-        Assert.assertEquals(STORAGE.getAll(), expectedStorage.getAll());
+        Assert.assertEquals(storage.getMemory(), expectedResult);
     }
 
     @Test
     public void applyAll_emptyList_ok() {
         strategyApplier.applyAll(List.of());
+        Assert.assertEquals(storage.getMemory(), expectedResult);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void applyAll_nullList_notOk() {
-        try {
-            strategyApplier.applyAll(null);
-            Assert.fail();
-        } catch (RuntimeException e) {
-            Assert.assertEquals(e.getClass(),
-                    NullPointerException.class);
-        }
+        strategyApplier.applyAll(null);
     }
 }

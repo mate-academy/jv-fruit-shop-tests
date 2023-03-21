@@ -30,36 +30,18 @@ public class MapperServiceTransactionTest {
         Assert.assertEquals(mapper.map(VALID_STRING), EXPECTED_RESULT);
     }
 
-    @Test
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void map_withMissingParametersString_notOk() {
-        try {
-            mapper.map(INVALID_STRING_MISSING_ELEMENTS);
-            Assert.fail();
-        } catch (RuntimeException e) {
-            Assert.assertEquals(ArrayIndexOutOfBoundsException.class,
-                    e.getClass());
-        }
+        mapper.map(INVALID_STRING_MISSING_ELEMENTS);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void map_withWrongOrderParameters_notOk() {
-        try {
-            mapper.map(INVALID_STRING_WRONG_ORDER);
-            Assert.fail();
-        } catch (RuntimeException e) {
-            Assert.assertEquals(e.getClass(),
-                    RuntimeException.class);
-        }
+        mapper.map(INVALID_STRING_WRONG_ORDER);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void map_nullString_notOk() {
-        try {
-            mapper.map(null);
-            Assert.fail();
-        } catch (RuntimeException e) {
-            Assert.assertEquals(e.getClass(),
-                    NullPointerException.class);
-        }
+        mapper.map(null);
     }
 }

@@ -16,6 +16,10 @@ import org.junit.Test;
 public class WriterServiceCsvTest {
     private static final Collection<String> LINES_TO_WRITE
             = Arrays.asList("line1", "line2");
+    private static final String READER_TEST_EXCEPTION
+            = "Exception while deleting file after reader test";
+    private static final String READING_EXCEPTION
+            = "Exception while reading file ";
     private static WriterServiceCsv writerService;
     private static final String FILE_PATH_NOT_EXISTING_EMPTY
             = "src/test/resources/new_empty_file.csv";
@@ -35,7 +39,7 @@ public class WriterServiceCsvTest {
             new FileWriter(FILE_PATH_EXISTING_EMPTY, false).close();
             new File(FILE_PATH_NOT_EXISTING_EMPTY).delete();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(READER_TEST_EXCEPTION);
         }
 
     }
@@ -64,7 +68,7 @@ public class WriterServiceCsvTest {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(READING_EXCEPTION + filename);
         }
     }
 }

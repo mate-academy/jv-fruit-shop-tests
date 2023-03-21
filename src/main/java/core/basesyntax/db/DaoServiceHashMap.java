@@ -53,4 +53,12 @@ public class DaoServiceHashMap implements DaoService<String,Integer> {
             throw new NumberFormatException(CANNOT_BE_NEGATIVE);
         }
     }
+
+    public Map<String, Integer> getMemory() {
+        return memory;
+    }
+
+    public void setMemory(Map<String, Integer> memory) {
+        this.memory = memory;
+    }
 }

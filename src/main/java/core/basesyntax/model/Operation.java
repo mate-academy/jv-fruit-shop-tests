@@ -8,7 +8,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    public static final String OPERATION_NOT_SUPPORTED = "Transaction operation %s not supported";
+    private static final String OPERATION_NOT_SUPPORTED = "Transaction operation %s not supported";
     private final String code;
 
     Operation(String code) {

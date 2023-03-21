@@ -34,16 +34,16 @@ public class Main {
     private static final int AMOUNT_COLUMN = 2;
     private static final String CSV_SEPARATOR = ",";
     private static final String HEADER = "fruit" + CSV_SEPARATOR + "quantity";
-    private static final DaoService STORAGE;
+    private static final DaoService storage;
     private static final Map<Operation, SaveStrategy> STRATEGY_FOR_OPERATION =
             new HashMap<>();
 
     static {
-        STORAGE = new DaoServiceHashMap();
-        STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new SaveStrategySupply(STORAGE));
-        STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new SaveStrategyPurchase(STORAGE));
-        STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new SaveStrategyBalance(STORAGE));
-        STRATEGY_FOR_OPERATION.put(Operation.RETURN, new SaveStrategyReturn(STORAGE));
+        storage = new DaoServiceHashMap();
+        STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new SaveStrategySupply(storage));
+        STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new SaveStrategyPurchase(storage));
+        STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new SaveStrategyBalance(storage));
+        STRATEGY_FOR_OPERATION.put(Operation.RETURN, new SaveStrategyReturn(storage));
     }
 
     public static void main(String[] args) {
@@ -62,6 +62,8 @@ public class Main {
         strategyApplier.applyAll(mappedTransactions);
         final ReportService reportService = new ReportServiceCsv(HEADER, CSV_SEPARATOR);
         final WriterService writerService = new WriterServiceCsv();
-        writerService.writeLines(reportService.generateReport(STORAGE), new File(FILE_TARGET));
+        writerService.writeLines(
+                reportService.generateReport(storage.getAll()),
+                new File(FILE_TARGET));
     }
 }

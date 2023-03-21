@@ -12,7 +12,7 @@ public class ReportMakerServiceImplTest {
     private static final String FRUIT_AMOUNT_LINE = "apple,50";
     private static final String FRUIT = "apple";
     private static final int QUANTITY = 50;
-    private static final String VALID_REPORT = HEADER + "\r\n" + FRUIT_AMOUNT_LINE + "\r\n";
+    private static final String VALID_REPORT = HEADER + System.lineSeparator() + FRUIT_AMOUNT_LINE;
     private static final ReportMakerService reportMaker = new ReportMakerServiceImpl();
 
     @After

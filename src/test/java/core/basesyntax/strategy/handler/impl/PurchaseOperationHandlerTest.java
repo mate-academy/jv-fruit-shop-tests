@@ -30,12 +30,12 @@ public class PurchaseOperationHandlerTest {
 
     @Test (expected = RuntimeException.class)
     public void negativeAmount_notOk() {
-        purchaseHandler.operate(NEGATIVE_VALUE,BIG_VALUE);
+        purchaseHandler.operate(NEGATIVE_VALUE, BIG_VALUE);
     }
 
     @Test (expected = RuntimeException.class)
     public void nullAmount_notOK() {
-        purchaseHandler.operate(null,null);
+        purchaseHandler.operate(null, null);
     }
 
 }

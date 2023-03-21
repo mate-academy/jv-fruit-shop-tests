@@ -46,29 +46,28 @@ public class FruitShopServiceImplTest {
         fruitShopService = new FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
         expectedFruitStorage = new HashMap<>();
         fruitTransactions = new ArrayList<>();
-
     }
 
     @Before
     public void init() {
         fruitTransactions = Stream.of(
-                        new FruitTransaction(BALANCE,BANANA,20),
-                        new FruitTransaction(BALANCE,APPLE,100),
-                        new FruitTransaction(SUPPLY,BANANA,100),
-                        new FruitTransaction(PURCHASE,BANANA,13),
-                        new FruitTransaction(RETURN,APPLE,10),
-                        new FruitTransaction(PURCHASE,APPLE,20),
-                        new FruitTransaction(PURCHASE,BANANA,5),
-                        new FruitTransaction(SUPPLY,BANANA,50))
+                        new FruitTransaction(BALANCE, BANANA, 20),
+                        new FruitTransaction(BALANCE, APPLE, 100),
+                        new FruitTransaction(SUPPLY, BANANA, 100),
+                        new FruitTransaction(PURCHASE, BANANA, 13),
+                        new FruitTransaction(RETURN, APPLE, 10),
+                        new FruitTransaction(PURCHASE, APPLE, 20),
+                        new FruitTransaction(PURCHASE, BANANA, 5),
+                        new FruitTransaction(SUPPLY, BANANA, 50))
                 .collect(Collectors.toList());
     }
 
     @Test
     public void processData_ok() {
-        expectedFruitStorage.put(BANANA,BANANA_AMOUNT);
-        expectedFruitStorage.put(APPLE,APPLE_AMOUNT);
+        expectedFruitStorage.put(BANANA, BANANA_AMOUNT);
+        expectedFruitStorage.put(APPLE, APPLE_AMOUNT);
         fruitShopService.processData(fruitTransactions);
-        assertEquals(expectedFruitStorage,Storage.fruitMap);
+        assertEquals(expectedFruitStorage, Storage.fruitMap);
     }
 
     @Test (expected = RuntimeException.class)
@@ -80,18 +79,18 @@ public class FruitShopServiceImplTest {
     public void emptyData_ok() {
         List<FruitTransaction> emptyFruitTransactions = new ArrayList<>();
         fruitShopService.processData(emptyFruitTransactions);
-        assertEquals(expectedFruitStorage,Storage.fruitMap);
+        assertEquals(expectedFruitStorage, Storage.fruitMap);
     }
 
     @Test (expected = RuntimeException.class)
     public void incorrectData_notOk() {
-        fruitTransactions.add(new FruitTransaction(null,BANANA,100));
+        fruitTransactions.add(new FruitTransaction(null, BANANA, 100));
         fruitShopService.processData(fruitTransactions);
     }
 
     @Test (expected = RuntimeException.class)
     public void negativeAmount_notOk() {
-        fruitTransactions.add(new FruitTransaction(BALANCE,BANANA,-200));
+        fruitTransactions.add(new FruitTransaction(BALANCE, BANANA, -200));
         fruitShopService.processData(fruitTransactions);
     }
 

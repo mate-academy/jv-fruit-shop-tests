@@ -33,25 +33,25 @@ public class DataParserServiceImplTest {
 
     @Before
     public void init() {
-        dataList = Stream.of("type,fruit,quantity","b,banana,20","b,apple,100","s,banana,100",
-                "p,banana,13","r,apple,10","p,apple,20","p,banana,5", "s,banana,50")
+        dataList = Stream.of("type,fruit,quantity", "b,banana,20", "b,apple,100", "s,banana,100",
+                        "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50")
                 .collect(Collectors.toList());
         fruitTransactions = Stream.of(
-                        new FruitTransaction(BALANCE,BANANA,20),
-                        new FruitTransaction(BALANCE,APPLE,100),
-                        new FruitTransaction(SUPPLY,BANANA,100),
-                        new FruitTransaction(PURCHASE,BANANA,13),
-                        new FruitTransaction(RETURN,APPLE,10),
-                        new FruitTransaction(PURCHASE,APPLE,20),
-                        new FruitTransaction(PURCHASE,BANANA,5),
-                        new FruitTransaction(SUPPLY,BANANA,50))
+                        new FruitTransaction(BALANCE, BANANA, 20),
+                        new FruitTransaction(BALANCE, APPLE, 100),
+                        new FruitTransaction(SUPPLY, BANANA, 100),
+                        new FruitTransaction(PURCHASE, BANANA, 13),
+                        new FruitTransaction(RETURN, APPLE, 10),
+                        new FruitTransaction(PURCHASE, APPLE, 20),
+                        new FruitTransaction(PURCHASE, BANANA, 5),
+                        new FruitTransaction(SUPPLY, BANANA, 50))
                 .collect(Collectors.toList());
     }
 
     @Test
     public void parseTransaction_ok() {
         List<FruitTransaction> actualTransactions = dataParserService.parseToTransaction(dataList);
-        assertEquals(fruitTransactions.size(),actualTransactions.size());
+        assertEquals(fruitTransactions.size(), actualTransactions.size());
 
         FruitTransaction actual;
         FruitTransaction expected;
@@ -59,8 +59,8 @@ public class DataParserServiceImplTest {
             actual = actualTransactions.get(i);
             expected = fruitTransactions.get(i);
             assertEquals(expected.getFruit(), actual.getFruit());
-            assertEquals(expected.getOperation(),actual.getOperation());
-            assertEquals(expected.getQuantity(),actual.getQuantity());
+            assertEquals(expected.getOperation(), actual.getOperation());
+            assertEquals(expected.getQuantity(), actual.getQuantity());
         }
     }
 

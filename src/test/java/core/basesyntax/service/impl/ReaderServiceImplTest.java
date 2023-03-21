@@ -16,8 +16,8 @@ public class ReaderServiceImplTest {
     @BeforeClass
     public static void beforeAll() {
         readerService = new ReaderServiceImpl();
-        dataFileList = List.of("type,fruit,quantity","b,banana,20", "b,apple,100", "s,banana,100",
-                "p,banana,13", "r,apple,10","p,apple,20", "p,banana,5","s,banana,50");
+        dataFileList = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100", "s,banana,100",
+                "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
     }
 
     @Test(expected = RuntimeException.class)

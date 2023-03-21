@@ -20,18 +20,18 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void balance_ok() {
-        Integer actual = balanceHandler.operate(TRANSACTION_VALUE,OLD_VALUE);
+        Integer actual = balanceHandler.operate(TRANSACTION_VALUE, OLD_VALUE);
         assertEquals(EXPECTED,actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void negativeAmount_notOk() {
-        balanceHandler.operate(NEGATIVE_VALUE,OLD_VALUE);
+        balanceHandler.operate(NEGATIVE_VALUE, OLD_VALUE);
     }
 
     @Test (expected = RuntimeException.class)
     public void nullAmount_notOK() {
-        balanceHandler.operate(null,null);
+        balanceHandler.operate(null, null);
     }
 
 }

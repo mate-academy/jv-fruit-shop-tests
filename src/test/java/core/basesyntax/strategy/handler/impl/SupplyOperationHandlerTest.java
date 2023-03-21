@@ -16,18 +16,16 @@ public class SupplyOperationHandlerTest {
     @BeforeClass
     public static void beforeAll() {
         supplyHandler = new SupplyOperationHandler();
-
     }
 
     @Test
     public void return_ok() {
-        assertEquals(EXPECTED_VALUE, supplyHandler.operate(TRANSACTION_VALUE,OLD_VALUE));
-
+        assertEquals(EXPECTED_VALUE, supplyHandler.operate(TRANSACTION_VALUE, OLD_VALUE));
     }
 
     @Test (expected = RuntimeException.class)
     public void negativeAmount_notOk() {
-        supplyHandler.operate(NEGATIVE_VALUE,OLD_VALUE);
+        supplyHandler.operate(NEGATIVE_VALUE, OLD_VALUE);
     }
 
     @Test (expected = RuntimeException.class)

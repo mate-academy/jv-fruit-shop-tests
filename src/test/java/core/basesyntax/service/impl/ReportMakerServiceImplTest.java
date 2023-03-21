@@ -18,20 +18,20 @@ public class ReportMakerServiceImplTest {
 
     @BeforeClass
     public static void beforeAll() {
-        reportMakerService = new ReportMakerServiceImpl(HEADER,SEPARATOR);
-        expectedReport = List.of(HEADER,"banana,152","apple,90");
+        reportMakerService = new ReportMakerServiceImpl(HEADER, SEPARATOR);
+        expectedReport = List.of(HEADER, "banana,152", "apple,90");
     }
 
     @Before
     public void setUp() {
-        Storage.fruitMap.put("banana",152);
-        Storage.fruitMap.put("apple",90);
+        Storage.fruitMap.put("banana", 152);
+        Storage.fruitMap.put("apple", 90);
     }
 
     @Test
     public void makeReport_ok() {
         List<String> actualReport = reportMakerService.createReport();
-        assertEquals(expectedReport,actualReport);
+        assertEquals(expectedReport, actualReport);
     }
 
     @After

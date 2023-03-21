@@ -20,17 +20,17 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void return_ok() {
-        assertEquals(EXPECTED_VALUE, returnHandler.operate(TRANSACTION_VALUE,OLD_VALUE));
+        assertEquals(EXPECTED_VALUE, returnHandler.operate(TRANSACTION_VALUE, OLD_VALUE));
 
     }
 
     @Test (expected = RuntimeException.class)
     public void negativeAmount_notOk() {
-        returnHandler.operate(NEGATIVE_VALUE,OLD_VALUE);
+        returnHandler.operate(NEGATIVE_VALUE, OLD_VALUE);
     }
 
     @Test (expected = RuntimeException.class)
     public void nullAmount_notOK() {
-        returnHandler.operate(null,null);
+        returnHandler.operate(null, null);
     }
 }

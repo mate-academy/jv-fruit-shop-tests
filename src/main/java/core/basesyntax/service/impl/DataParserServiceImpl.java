@@ -12,7 +12,7 @@ public class DataParserServiceImpl implements DataParserService {
     private static final byte QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseDataToFruitTransaction(List<String> data) {
+    public List<FruitTransaction> parseData(List<String> data) {
         return data.stream()
             .skip(1)
             .map(d -> d.split(LINE_SPLITTER))

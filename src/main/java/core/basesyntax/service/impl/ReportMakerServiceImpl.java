@@ -9,8 +9,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
 
     @Override
     public String generateReport(Map<String, Integer> data) {
-        StringBuilder report = new StringBuilder();
-        report.append(TABLE_HEADER).append(System.lineSeparator());
+        StringBuilder report = new StringBuilder(TABLE_HEADER + System.lineSeparator());
         for (Map.Entry<String, Integer> pair : data.entrySet()) {
             report.append(pair.getKey())
                 .append(TABLE_SEPARATOR)

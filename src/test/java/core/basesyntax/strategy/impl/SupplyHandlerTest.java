@@ -42,14 +42,14 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void apply_RegularCalculatingCase_Ok() {
+    public void apply_regularCalculatingCase_Ok() {
         handler.apply(fruitTransaction);
         Map<String, Integer> expected = Map.of(FRUIT, EXPECTED_QUANTITY);
         assertEquals(expected, FruitStorage.fruitStorage);
     }
 
     @Test
-    public void apply_NullAsArgumentInput_NotOk() {
+    public void apply_nullAsArgumentInput_notOk() {
         expectedException.expect(NullPointerException.class);
         handler.apply(null);
     }

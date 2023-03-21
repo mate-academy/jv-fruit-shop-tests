@@ -16,8 +16,8 @@ import java.io.File;
 import java.util.List;
 
 public class Main {
-    public static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
-    public static final String TO_FILE_NAME = "src/main/resources/report.csv";
+    public static final String INPUT_PATH = "src/main/resources/input.csv";
+    public static final String OUTPUT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
@@ -25,13 +25,13 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl();
         DataParserService dataParserService = new DataParserServiceImpl();
         ReportMakerService reportMakerService = new ReportMakerServiceImpl();
-        File file = new File(INPUT_FILE_NAME);
-        List<String> dataFromFile = readerService.readDataFromFile(file);
+        File file = new File(INPUT_PATH);
+        List<String> dataFromFile = readerService.readData(file);
         List<FruitTransaction> parsedDataFromFile = dataParserService
-                .parseDataToFruitTransaction(dataFromFile);
+                .parseData(dataFromFile);
         fruitService
                 .calculateTotalQuantity(parsedDataFromFile);
         String report = reportMakerService.generateReport(FruitStorage.fruitStorage);
-        writerService.writeDataToFile(report, TO_FILE_NAME);
+        writerService.writeData(report, OUTPUT_PATH);
     }
 }

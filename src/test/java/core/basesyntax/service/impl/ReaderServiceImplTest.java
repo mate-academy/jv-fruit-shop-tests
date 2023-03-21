@@ -26,23 +26,23 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readDataFromFile_ValidInput_Ok() {
+    public void readDataFromFile_validInput_Ok() {
         List<String> expected = List.of(HEADER, VALID_LINE);
-        List<String> actual = reader.readDataFromFile(new File(VALID_FILE));
+        List<String> actual = reader.readData(new File(VALID_FILE));
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readDataFromFile_NonExistentFilePath_NotOk() {
+    public void readDataFromFile_nonExistentFilePath_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("Can't read data from the file "
                 + new File(NON_EXISTENT_PATH).getName());
-        reader.readDataFromFile(new File(NON_EXISTENT_PATH));
+        reader.readData(new File(NON_EXISTENT_PATH));
     }
 
     @Test
-    public void readDataFromFile_NullArgumentAsInput_NotOk() {
+    public void readDataFromFile_nullArgumentAsInput_notOk() {
         exceptionRule.expect(NullPointerException.class);
-        reader.readDataFromFile(null);
+        reader.readData(null);
     }
 }

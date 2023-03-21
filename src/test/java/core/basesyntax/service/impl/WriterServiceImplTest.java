@@ -35,18 +35,18 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_ZeroLengthStringInput_NotOk() {
+    public void writeDataToFile_zeroLengthStringInput_notOk() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Can't write zero string");
         String dataToWrite = "";
-        writer.writeDataToFile(dataToWrite, VALID_PATH);
+        writer.writeData(dataToWrite, VALID_PATH);
     }
 
     @Test
-    public void writeDataToFile_ValidWritingCase_Ok() throws IOException {
+    public void writeDataToFile_validWritingCase_Ok() throws IOException {
         File file = new File(VALID_PATH);
         String expected = EXPECTED_CONTENT;
-        writer.writeDataToFile(DATA_TO_WRITE, VALID_PATH);
+        writer.writeData(DATA_TO_WRITE, VALID_PATH);
         String actual = Files.readString(file.toPath());
         assertEquals(expected, actual);
     }

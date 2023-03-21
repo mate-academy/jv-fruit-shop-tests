@@ -38,7 +38,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void calculateTotalQuantity_NotEnoughFruits_NotOk() {
+    public void calculateTotalQuantity_notEnoughFruits_notOk() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Not enough "
                 + FRUIT + "'s on store to purchase");
@@ -48,7 +48,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void calculateTotalQuantity_ValidInputs_Ok() {
+    public void calculateTotalQuantity_validInputs_Ok() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 FRUIT, SUPPLY_QUANTITY));
         Map<String, Integer> expected = Map.of(FRUIT, INITIAL_QUANTITY + SUPPLY_QUANTITY);
@@ -57,7 +57,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void calculateTotalQuantity_NullAsArgumentInput_NotOk() {
+    public void calculateTotalQuantity_NullAsArgumentInput_notOk() {
         expectedException.expect(NullPointerException.class);
         fruitService.calculateTotalQuantity(null);
     }

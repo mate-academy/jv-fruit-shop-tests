@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> readDataFromFile(File file) {
+    public List<String> readData(File file) {
         try {
             return Files.readAllLines(file.toPath());
         } catch (FileNotFoundException e) {

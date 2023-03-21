@@ -34,28 +34,28 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void parseDataToFruitTransaction_InvalidOperationInput_NotOk() {
+    public void parseDataToFruitTransaction_invalidOperationInput_notOk() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Invalid operation type " + INVALID_OPERATION);
         dataToParse.add(HEADER);
         dataToParse.add(INVALID_TRANSACTION_LINE);
-        dataParser.parseDataToFruitTransaction(dataToParse);
+        dataParser.parseData(dataToParse);
     }
 
     @Test
-    public void parseDataToFruitTransaction_ValidDataInput_Ok() {
+    public void parseDataToFruitTransaction_validDataInput_Ok() {
         dataToParse.add(HEADER);
         dataToParse.add(VALID_TRANSACTION_LINE);
         FruitTransaction expected = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "apple", 80);
-        List<FruitTransaction> actual = dataParser.parseDataToFruitTransaction(dataToParse);
+        List<FruitTransaction> actual = dataParser.parseData(dataToParse);
         FruitTransaction actualTransaction = actual.get(0);
         assertEquals(expected, actualTransaction);
     }
 
     @Test
-    public void parseDataToFruitTransaction_NullArgumentAsInput_NotOk() {
+    public void parseDataToFruitTransaction_nullArgumentAsInput_notOk() {
         expectedException.expect(NullPointerException.class);
-        dataParser.parseDataToFruitTransaction(null);
+        dataParser.parseData(null);
     }
 }

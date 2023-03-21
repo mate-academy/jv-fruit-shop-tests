@@ -7,7 +7,7 @@ import java.nio.file.Files;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void writeDataToFile(String data, String fileName) {
+    public void writeData(String data, String fileName) {
         if (data.length() == 0) {
             throw new RuntimeException("Can't write zero string");
         }

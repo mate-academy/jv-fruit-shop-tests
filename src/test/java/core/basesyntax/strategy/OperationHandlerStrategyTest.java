@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class OperationHandlerStrategyTest {
-    private static OperationHandlerStrategy operationHandler;
+    private static OperationHandlerStrategy strategy;
 
     @BeforeClass
     public static void beforeClass() {
@@ -22,19 +22,19 @@ public class OperationHandlerStrategyTest {
         handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandler = new OperationHandlerStrategy(handlers);
+        strategy = new OperationHandlerStrategy(handlers);
     }
 
     @Test(expected = RuntimeException.class)
     public void getHandler_nullOperation_notOk() {
-        operationHandler.getHandler(null);
+        strategy.getHandler(null);
     }
 
     @Test
     public void getHandler_balanceOperation_ok() {
         OperationHandler expectedHandler = new BalanceOperationHandler();
         OperationHandler actualHandler =
-                operationHandler.getHandler(FruitTransaction.Operation.BALANCE);
+                strategy.getHandler(FruitTransaction.Operation.BALANCE);
         assertEquals(expectedHandler.getClass(), actualHandler.getClass());
     }
 
@@ -42,7 +42,7 @@ public class OperationHandlerStrategyTest {
     public void getHandler_supplyOperation_ok() {
         OperationHandler expectedHandler = new SupplyOperationHandler();
         OperationHandler actualHandler =
-                operationHandler.getHandler(FruitTransaction.Operation.SUPPLY);
+                strategy.getHandler(FruitTransaction.Operation.SUPPLY);
         assertEquals(expectedHandler.getClass(), actualHandler.getClass());
     }
 
@@ -50,7 +50,7 @@ public class OperationHandlerStrategyTest {
     public void getHandler_purchaseOperation_ok() {
         OperationHandler expectedHandler = new PurchaseOperationHandler();
         OperationHandler actualHandler =
-                operationHandler.getHandler(FruitTransaction.Operation.PURCHASE);
+                strategy.getHandler(FruitTransaction.Operation.PURCHASE);
         assertEquals(expectedHandler.getClass(), actualHandler.getClass());
     }
 
@@ -58,7 +58,7 @@ public class OperationHandlerStrategyTest {
     public void getHandler_returnOperation_ok() {
         OperationHandler expectedHandler = new ReturnOperationHandler();
         OperationHandler actualHandler =
-                operationHandler.getHandler(FruitTransaction.Operation.RETURN);
+                strategy.getHandler(FruitTransaction.Operation.RETURN);
         assertEquals(expectedHandler.getClass(), actualHandler.getClass());
     }
 }

@@ -42,7 +42,7 @@ public class ReportCreatorServiceTest {
     }
 
     @Test
-    public void createReport_NoCsvHeader_notok() {
+    public void createReport_NoCsvHeader_notOk() {
         String actual = reportCreatorService.createReport(mockData);
         assertTrue(actual.toLowerCase().contains(FILE_HEADER));
     }

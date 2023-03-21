@@ -30,7 +30,7 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void apply_correctTransaction_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 50);
         supplyOperationHandler.apply(fruitTransaction);
         Integer expectedQuantity = 50;

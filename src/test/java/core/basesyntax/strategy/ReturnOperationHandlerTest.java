@@ -30,7 +30,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     public void apply_correctTransaction_ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 50);
         returnOperationHandler.apply(fruitTransaction);
         Integer expectedQuantity = 50;

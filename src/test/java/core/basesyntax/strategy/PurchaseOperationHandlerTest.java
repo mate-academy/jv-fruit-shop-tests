@@ -40,7 +40,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void apply_purchaseMoreThanExist_ok() {
+    public void apply_purchaseMoreThanExist_notOk() {
         ProductStorage.products.put("banana", 9);
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 10);

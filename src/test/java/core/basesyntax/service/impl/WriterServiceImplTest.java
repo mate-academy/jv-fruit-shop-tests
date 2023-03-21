@@ -17,7 +17,8 @@ public class WriterServiceImplTest {
     private static final String EMPTY_STRING = "";
     private static final String VALID_FILE = "src/test/resources/test_writer2.csv";
     private static final String INVALID_FILE = "src/test/test/resources/test_writer.csv";
-    private static final String RESULT_REGULAR_CASE = "fruit,quantity\nbanana,20";
+    private static final String RESULT_REGULAR_CASE = "fruit,quantity" + System.lineSeparator()
+            + "banana,20";
     private static final String FRUIT = "banana";
     private static final int AMOUNT = 20;
     private static WriterService writerService;
@@ -28,7 +29,6 @@ public class WriterServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         writerService = new WriterServiceImpl();
-        FruitDB.fruitsOnStock.put(FRUIT, AMOUNT);
     }
 
     @After

@@ -14,6 +14,9 @@ public class CsvWriteFileServiceImpl implements WriteFileService {
             throw new InvalidFileExtensionException(
                     "Invalid file extension, extension must be 'csv'.");
         }
+        if (content == null) {
+            throw new NullPointerException("Content equal null");
+        }
         File newFile = new File(file);
         try {
             newFile.createNewFile();

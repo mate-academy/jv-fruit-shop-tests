@@ -4,10 +4,6 @@ import core.basesyntax.errors.InvalidCodeException;
 import core.basesyntax.fileservice.CsvReadFileServiceImpl;
 import core.basesyntax.fileservice.ReadFileService;
 import core.basesyntax.fruittransaction.FruitTransaction;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -61,34 +57,11 @@ public class TransactionParserImplTest {
         fruitTransaction8.setOperation(FruitTransaction.Operation.SUPPLY);
         listAfterParsingListLines.add(fruitTransaction8);
 
-        String filePath = "src/test/java/core/basesyntax/"
-                + "resoursefortesting/test.csv";
-        String contentForExpectedFile = "b,banana,30\n"
-                + "b,apple,110\n"
-                + "s,banana,110\n"
-                + "p,banana,23\n"
-                + "r,apple,20\n"
-                + "p,apple,30\n"
-                + "p,banana,15\n"
-                + "s,banana,60";
-
-        File file = new File(filePath);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file", e);
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(contentForExpectedFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        String filePath = "src/test/resource/test.csv";
 
         List<String> listStringsLineForParse = readFileService.read(filePath);
         List<FruitTransaction> listForTesting = transactionParser.parse(listStringsLineForParse);
         Assert.assertEquals(listAfterParsingListLines, listForTesting);
-        file.delete();
     }
 
     @Test(expected = InvalidCodeException.class)

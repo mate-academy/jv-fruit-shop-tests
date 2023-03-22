@@ -1,10 +1,6 @@
 package core.basesyntax.fileservice;
 
 import core.basesyntax.errors.InvalidFileExtensionException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -16,36 +12,13 @@ public class CsvReadFileServiceImplTest {
     
     @Test(expected = InvalidFileExtensionException.class)
     public void checkThrowsExceptionForFileReader_NotOk() {
-        String filePath = "src/test/java/core/basesyntax/"
-                + "resoursefortesting/test.txt";
+        String filePath = "test.txt";
         readFileService.read(filePath);
     }
 
     @Test
     public void checkingTheWorkOfTheReadMethod_Ok() {
-        String filePath = "src/test/java/core/basesyntax/"
-                + "resoursefortesting/test.csv";
-        String contentForExpectedFile = "b,banana,30\n"
-                + "b,apple,110\n"
-                + "s,banana,110\n"
-                + "p,banana,23\n"
-                + "r,apple,20\n"
-                + "p,apple,30\n"
-                + "p,banana,15\n"
-                + "s,banana,60";
-        File file = new File(filePath);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file", e);
-        }
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(contentForExpectedFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        String filePath = "src/test/resource/test.csv";
         listAfterReadingFile.add("b,banana,30");
         listAfterReadingFile.add("b,apple,110");
         listAfterReadingFile.add("s,banana,110");
@@ -56,23 +29,14 @@ public class CsvReadFileServiceImplTest {
         listAfterReadingFile.add("s,banana,60");
         List<String> actual = readFileService.read(filePath);
         Assert.assertEquals(listAfterReadingFile, actual);
-        file.delete();
     }
 
     @Test
     public void checkReadFileEmptyFileInput_Ok() {
-        String filePath = "src/test/java/core/basesyntax/"
-                + "resoursefortesting/emptyFile.csv";
-        File file = new File(filePath);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file", e);
-        }
+        String filePath = "src/test/resource/emptyFile.csv";
         List<String> actual = readFileService.read(filePath);
         List<String> expected = new ArrayList<>();
         Assert.assertEquals(expected, actual);
-        file.delete();
     }
 
     @Test(expected = RuntimeException.class)

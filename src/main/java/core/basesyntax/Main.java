@@ -37,12 +37,11 @@ public class Main {
         ReportServiceImpl reportService = new ReportServiceImpl();
         CsvWriteFileServiceImpl csvWriteFileService = new CsvWriteFileServiceImpl();
 
-        List<String> listForParsing = csvReadFileService.read("src/main/java"
-                + "/core/basesyntax/resource/test.csv");
+        List<String> listForParsing = csvReadFileService.read("src/main/resource/test.csv");
         List<FruitTransaction> completeFruitsObjectList = transactionParser.parse(listForParsing);
         transactionExecutor.execute(completeFruitsObjectList);
         String completeContentForNewFile = reportService.createReport();
-        csvWriteFileService.write("src/main/java/core/basesyntax/resource/result.csv",
+        csvWriteFileService.write("src/main/resource/expectedResult.csv",
                 completeContentForNewFile);
     }
 }

@@ -8,6 +8,7 @@ import core.basesyntax.service.FruitService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -26,15 +27,21 @@ public class FruitServiceImplTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitService = new FruitServiceImpl();
+        fruitTransactions = new ArrayList<>();
     }
 
     @Before
-    public void setUp() throws Exception {
-        fruitTransactions = new ArrayList<>();
+    public void setUp() {
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, INITIAL_QUANTITY));
+    }
+
+    @After
+    public void tearDown() {
+        fruitTransactions.clear();
+        FruitStorage.fruitStorage.clear();
     }
 
     @Test

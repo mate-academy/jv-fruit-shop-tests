@@ -23,14 +23,14 @@ public class BalanceHandlerTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 FRUIT, BALANCE_QUANTITY);
         handler = new BalanceHandler();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         FruitStorage.fruitStorage.clear();
     }
 

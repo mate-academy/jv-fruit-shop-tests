@@ -15,25 +15,25 @@ public class ReaderServiceImplTest {
     private static final String NON_EXISTENT_PATH = "src/test/resources/test123123.csv";
     private static final String HEADER = "type,fruit,quantity";
     private static final String VALID_LINE = "s,apple,55";
-    private static ReaderService reader = new ReaderServiceImpl();
+    private static ReaderService reader;
 
     @Rule
     public ExpectedException exceptionRule = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         reader = new ReaderServiceImpl();
     }
 
     @Test
-    public void readDataFromFile_validInput_ok() {
+    public void readData_validInput_ok() {
         List<String> expected = List.of(HEADER, VALID_LINE);
         List<String> actual = reader.readData(new File(VALID_FILE));
         assertEquals(expected, actual);
     }
 
     @Test
-    public void readDataFromFile_nonExistentFilePath_notOk() {
+    public void readData_nonExistentFilePath_notOk() {
         exceptionRule.expect(RuntimeException.class);
         exceptionRule.expectMessage("Can't read data from the file "
                 + new File(NON_EXISTENT_PATH).getName());
@@ -41,7 +41,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readDataFromFile_nullArgumentAsInput_notOk() {
+    public void readData_nullArgumentAsInput_notOk() {
         exceptionRule.expect(NullPointerException.class);
         reader.readData(null);
     }

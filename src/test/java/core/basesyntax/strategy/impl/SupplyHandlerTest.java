@@ -25,19 +25,19 @@ public class SupplyHandlerTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 FRUIT, SUPPLY_QUANTITY);
         handler = new SupplyHandler();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         FruitStorage.fruitStorage.put(FRUIT, INITIAL_STORAGE_QUANTITY);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         FruitStorage.fruitStorage.clear();
     }
 

@@ -20,7 +20,7 @@ public class CalculateStrategyImplTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         calculateStrategy = new CalculateStrategyImpl();
     }
 

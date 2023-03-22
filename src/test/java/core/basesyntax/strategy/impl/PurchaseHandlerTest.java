@@ -26,14 +26,14 @@ public class PurchaseHandlerTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 FRUIT, PURCHASE_QUANTITY);
         handler = new PurchaseHandler();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         FruitStorage.fruitStorage.put(FRUIT, INITIAL_STORAGE_QUANTITY);
     }
 

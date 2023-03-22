@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,17 +24,18 @@ public class DataParserServiceImplTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         dataParser = new DataParserServiceImpl();
-    }
-
-    @Before
-    public void setUp() throws Exception {
         dataToParse = new ArrayList<>();
     }
 
+    @After
+    public void tearDown() {
+        dataToParse.clear();
+    }
+
     @Test
-    public void parseDataToFruitTransaction_invalidOperationInput_notOk() {
+    public void parseData_invalidOperationInput_notOk() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Invalid operation type " + INVALID_OPERATION);
         dataToParse.add(HEADER);
@@ -43,7 +44,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void parseDataToFruitTransaction_validDataInput_ok() {
+    public void parseData_validDataInput_ok() {
         dataToParse.add(HEADER);
         dataToParse.add(VALID_TRANSACTION_LINE);
         FruitTransaction expected = new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -54,7 +55,7 @@ public class DataParserServiceImplTest {
     }
 
     @Test
-    public void parseDataToFruitTransaction_nullArgumentAsInput_notOk() {
+    public void parseData_nullArgumentAsInput_notOk() {
         expectedException.expect(NullPointerException.class);
         dataParser.parseData(null);
     }

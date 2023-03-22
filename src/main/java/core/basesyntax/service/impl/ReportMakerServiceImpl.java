@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportMakerService;
 import java.util.Map;
 
@@ -9,6 +10,9 @@ public class ReportMakerServiceImpl implements ReportMakerService {
 
     @Override
     public String generateReport(Map<String, Integer> data) {
+        if (FruitStorage.fruitStorage.isEmpty()) {
+            throw new RuntimeException("Storage is empty, can't generate an report");
+        }
         StringBuilder report = new StringBuilder(TABLE_HEADER + System.lineSeparator());
         for (Map.Entry<String, Integer> pair : data.entrySet()) {
             report.append(pair.getKey())

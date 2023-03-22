@@ -25,17 +25,17 @@ public class WriterServiceImplTest {
     public ExpectedException expectedException = ExpectedException.none();
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         writer = new WriterServiceImpl();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         FruitStorage.fruitStorage.clear();
     }
 
     @Test
-    public void writeDataToFile_zeroLengthStringInput_notOk() {
+    public void writeData_zeroLengthStringInput_notOk() {
         expectedException.expect(RuntimeException.class);
         expectedException.expectMessage("Can't write zero string");
         String dataToWrite = "";
@@ -43,7 +43,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeDataToFile_validWritingCase_ok() throws IOException {
+    public void writeData_validWritingCase_ok() throws IOException {
         File file = new File(VALID_PATH);
         String expected = EXPECTED_CONTENT;
         writer.writeData(DATA_TO_WRITE, VALID_PATH);

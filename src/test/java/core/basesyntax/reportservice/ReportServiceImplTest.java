@@ -8,7 +8,7 @@ public class ReportServiceImplTest {
     private ReportService reportService = new ReportServiceImpl();
 
     @Test
-    public void checkWorkReportMethod_Ok() {
+    public void createReport_checkWork_ok() {
         Storage.put("banana", 30);
         Storage.put("apple", 50);
         Storage.put("orange", 10);
@@ -22,7 +22,7 @@ public class ReportServiceImplTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void checkThrowExceptionGetDataFromEmptyStorage_NotOk() {
+    public void createReport_storageIsEmpty_notOk() {
         reportService.createReport();
     }
 }

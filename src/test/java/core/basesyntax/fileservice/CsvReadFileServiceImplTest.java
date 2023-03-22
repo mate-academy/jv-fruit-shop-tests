@@ -11,13 +11,13 @@ public class CsvReadFileServiceImplTest {
     private final List<String> listAfterReadingFile = new ArrayList<>();
     
     @Test(expected = InvalidFileExtensionException.class)
-    public void checkThrowsExceptionForFileReader_NotOk() {
+    public void read_incorrectFileExtension_notOk() {
         String filePath = "test.txt";
         readFileService.read(filePath);
     }
 
     @Test
-    public void checkingTheWorkOfTheReadMethod_Ok() {
+    public void read_checkWork_ok() {
         String filePath = "src/test/resource/test.csv";
         listAfterReadingFile.add("b,banana,30");
         listAfterReadingFile.add("b,apple,110");
@@ -32,7 +32,7 @@ public class CsvReadFileServiceImplTest {
     }
 
     @Test
-    public void checkReadFileEmptyFileInput_Ok() {
+    public void read_inputFileIsEmpty_ok() {
         String filePath = "src/test/resource/emptyFile.csv";
         List<String> actual = readFileService.read(filePath);
         List<String> expected = new ArrayList<>();
@@ -40,13 +40,13 @@ public class CsvReadFileServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void checkNoSuchFileInput_NotOk() {
+    public void read_wrongFileInput_notOk() {
         String file = "error.csv";
         readFileService.read(file);
     }
 
     @Test(expected = NullPointerException.class)
-    public void theInputParameterIsNull() {
+    public void read_inputNull_notOk() {
         readFileService.read(null);
     }
 }

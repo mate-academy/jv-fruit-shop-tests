@@ -13,24 +13,24 @@ public class CsvWriteFileServiceImplTest {
     private WriteFileService csvWriteFileService = new CsvWriteFileServiceImpl();
 
     @Test(expected = NullPointerException.class)
-    public void filePathEqualNull_NotOk() {
+    public void write_inputParameterForFileNull_notOk() {
         csvWriteFileService.write(null, "a, banana, 30");
     }
 
     @Test(expected = NullPointerException.class)
-    public void contentEqualNull_NotOk() {
+    public void write_inputParameterForContentNull_notOk() {
         String file = "test.csv";
         csvWriteFileService.write(file, null);
     }
 
     @Test(expected = InvalidFileExtensionException.class)
-    public void checkCorrectFileExtension_NotOk() {
+    public void write_incorrectFileExtension_notOk() {
         String file = "test.txt";
         csvWriteFileService.write(file, "a, banana, 30");
     }
 
     @Test
-    public void checkWorkWriteMethod_Ok() {
+    public void write_checkWork_ok() {
         String contentForNewFile = "banana,162" + "\n" + "apple,100";
         String expectedFile = "src/test/resource/expectedResult.csv";
         String actualFile = "src/test/resource/actualResult.csv";
@@ -59,7 +59,7 @@ public class CsvWriteFileServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void checkCreateFileInWriteMethod() {
+    public void write_inputFilePathIsIncorrect_notOk() {
         String filePath = "";
         String content = "b, banana, 30";
         csvWriteFileService.write(filePath, content);

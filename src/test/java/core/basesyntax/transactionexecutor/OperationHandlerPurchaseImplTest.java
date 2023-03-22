@@ -10,7 +10,7 @@ public class OperationHandlerPurchaseImplTest {
     private FruitTransaction fruitTransaction = new FruitTransaction();
 
     @Test
-    public void checkWorkHandlerMethod_Ok() {
+    public void handlerPurchase_checkWork_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(50);

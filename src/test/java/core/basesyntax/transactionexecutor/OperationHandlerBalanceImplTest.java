@@ -12,7 +12,7 @@ public class OperationHandlerBalanceImplTest {
     private FruitTransaction fruitTransaction = new FruitTransaction();
 
     @Test
-    public void checkWorkHandlerMethod_Ok() {
+    public void handlerBalance_checkWork_ok() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
         fruitTransaction.setFruit("banana");

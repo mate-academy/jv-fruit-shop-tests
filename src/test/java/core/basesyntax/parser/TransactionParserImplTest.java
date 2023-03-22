@@ -15,7 +15,7 @@ public class TransactionParserImplTest {
     private List<FruitTransaction> listAfterParsingListLines = new ArrayList<>();
 
     @Test
-    public void checkingTheWorkOfTheParseMethod_Ok() {
+    public void parse_checkWork_ok() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setFruit("banana");
         fruitTransaction1.setQuantity(30);
@@ -65,14 +65,14 @@ public class TransactionParserImplTest {
     }
 
     @Test(expected = InvalidCodeException.class)
-    public void throwsInvalidCodeException_NotOk() {
+    public void parse_inputDataIsIncorrect_notOk() {
         List<String> lineForParsMethod = new ArrayList<>();
         lineForParsMethod.add("b banana 30");
         transactionParser.parse(lineForParsMethod);
     }
 
     @Test(expected = NullPointerException.class)
-    public void theInputParameterIsNull_NotOk() {
+    public void parse_inputNull_notOk() {
         transactionParser.parse(null);
     }
 }

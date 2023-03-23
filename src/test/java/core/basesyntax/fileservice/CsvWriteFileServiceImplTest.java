@@ -34,8 +34,8 @@ public class CsvWriteFileServiceImplTest {
     @Test
     public void write_checkWork_ok() {
         String contentForNewFile = "banana,162" + "\n" + "apple,100";
-        String expectedFile = "src/test/resource/expectedResult.csv";
-        String actualFile = "src/test/resource/actualResult.csv";
+        String expectedFile = "src/test/resources/expectedResult.csv";
+        String actualFile = "src/test/resources/actualResult.csv";
 
         csvWriteFileService.write(actualFile, contentForNewFile);
         List<String> actual = new ArrayList<>();

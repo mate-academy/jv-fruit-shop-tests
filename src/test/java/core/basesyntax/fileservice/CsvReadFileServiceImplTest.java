@@ -24,7 +24,7 @@ public class CsvReadFileServiceImplTest {
 
     @Test
     public void read_checkWork_ok() {
-        String filePath = "src/test/resource/test.csv";
+        String filePath = "src/test/resources/test.csv";
         listAfterReadingFile.add("b,banana,30");
         listAfterReadingFile.add("b,apple,110");
         listAfterReadingFile.add("s,banana,110");
@@ -39,7 +39,7 @@ public class CsvReadFileServiceImplTest {
 
     @Test
     public void read_inputFileIsEmpty_ok() {
-        String filePath = "src/test/resource/emptyFile.csv";
+        String filePath = "src/test/resources/emptyFile.csv";
         List<String> actual = readFileService.read(filePath);
         List<String> expected = new ArrayList<>();
         Assert.assertEquals(expected, actual);

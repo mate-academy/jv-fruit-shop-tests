@@ -2,10 +2,16 @@ package core.basesyntax.reportservice;
 
 import core.basesyntax.db.Storage;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
-    private ReportService reportService = new ReportServiceImpl();
+    private ReportService reportService;
+
+    @Before
+    public void initializationOfVariables() {
+        reportService = new ReportServiceImpl();
+    }
 
     @Test
     public void createReport_checkWork_ok() {
@@ -21,8 +27,10 @@ public class ReportServiceImplTest {
         Storage.getStorage().clear();
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void createReport_storageIsEmpty_notOk() {
-        reportService.createReport();
+        String actual = reportService.createReport();
+        String expected = "";
+        Assert.assertEquals(expected, actual);
     }
 }

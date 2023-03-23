@@ -1,5 +1,6 @@
 package core.basesyntax.parser;
 
+import core.basesyntax.errors.InputDataEqualNullException;
 import core.basesyntax.fruittransaction.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,9 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
+        if (lines == null) {
+            throw new InputDataEqualNullException("Data equal null");
+        }
         List<FruitTransaction> completeParseList = new ArrayList<>();
         for (String line : lines) {
             String[] splitLineFromLines = line.split(",");

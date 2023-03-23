@@ -1,5 +1,6 @@
 package core.basesyntax.parser;
 
+import core.basesyntax.errors.InputDataEqualNullException;
 import core.basesyntax.errors.InvalidCodeException;
 import core.basesyntax.fileservice.CsvReadFileServiceImpl;
 import core.basesyntax.fileservice.ReadFileService;
@@ -7,55 +8,62 @@ import core.basesyntax.fruittransaction.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private TransactionParser transactionParser = new TransactionParserImpl();
-    private ReadFileService readFileService = new CsvReadFileServiceImpl();
-    private List<FruitTransaction> listAfterParsingListLines = new ArrayList<>();
+    private TransactionParser transactionParser;
+    private ReadFileService readFileService;
+    private final List<FruitTransaction> listAfterParsingListLines = new ArrayList<>();
+
+    @Before
+    public void initializationOfVariables() {
+        transactionParser = new TransactionParserImpl();
+        readFileService = new CsvReadFileServiceImpl();
+    }
 
     @Test
     public void parse_checkWork_ok() {
-        FruitTransaction fruitTransaction1 = new FruitTransaction();
-        fruitTransaction1.setFruit("banana");
-        fruitTransaction1.setQuantity(30);
-        fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        listAfterParsingListLines.add(fruitTransaction1);
-        FruitTransaction fruitTransaction2 = new FruitTransaction();
-        fruitTransaction2.setFruit("apple");
-        fruitTransaction2.setQuantity(110);
-        fruitTransaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        listAfterParsingListLines.add(fruitTransaction2);
-        FruitTransaction fruitTransaction3 = new FruitTransaction();
-        fruitTransaction3.setFruit("banana");
-        fruitTransaction3.setQuantity(110);
-        fruitTransaction3.setOperation(FruitTransaction.Operation.SUPPLY);
-        listAfterParsingListLines.add(fruitTransaction3);
-        FruitTransaction fruitTransaction4 = new FruitTransaction();
-        fruitTransaction4.setFruit("banana");
-        fruitTransaction4.setQuantity(23);
-        fruitTransaction4.setOperation(FruitTransaction.Operation.PURCHASE);
-        listAfterParsingListLines.add(fruitTransaction4);
-        FruitTransaction fruitTransaction5 = new FruitTransaction();
-        fruitTransaction5.setFruit("apple");
-        fruitTransaction5.setQuantity(20);
-        fruitTransaction5.setOperation(FruitTransaction.Operation.RETURN);
-        listAfterParsingListLines.add(fruitTransaction5);
-        FruitTransaction fruitTransaction6 = new FruitTransaction();
-        fruitTransaction6.setFruit("apple");
-        fruitTransaction6.setQuantity(30);
-        fruitTransaction6.setOperation(FruitTransaction.Operation.PURCHASE);
-        listAfterParsingListLines.add(fruitTransaction6);
-        FruitTransaction fruitTransaction7 = new FruitTransaction();
-        fruitTransaction7.setFruit("banana");
-        fruitTransaction7.setQuantity(15);
-        fruitTransaction7.setOperation(FruitTransaction.Operation.PURCHASE);
-        listAfterParsingListLines.add(fruitTransaction7);
-        FruitTransaction fruitTransaction8 = new FruitTransaction();
-        fruitTransaction8.setFruit("banana");
-        fruitTransaction8.setQuantity(60);
-        fruitTransaction8.setOperation(FruitTransaction.Operation.SUPPLY);
-        listAfterParsingListLines.add(fruitTransaction8);
+        FruitTransaction fruitTransactionOne = new FruitTransaction();
+        fruitTransactionOne.setFruit("banana");
+        fruitTransactionOne.setQuantity(30);
+        fruitTransactionOne.setOperation(FruitTransaction.Operation.BALANCE);
+        listAfterParsingListLines.add(fruitTransactionOne);
+        FruitTransaction fruitTransactionTwo = new FruitTransaction();
+        fruitTransactionTwo.setFruit("apple");
+        fruitTransactionTwo.setQuantity(110);
+        fruitTransactionTwo.setOperation(FruitTransaction.Operation.BALANCE);
+        listAfterParsingListLines.add(fruitTransactionTwo);
+        FruitTransaction fruitTransactionThree = new FruitTransaction();
+        fruitTransactionThree.setFruit("banana");
+        fruitTransactionThree.setQuantity(110);
+        fruitTransactionThree.setOperation(FruitTransaction.Operation.SUPPLY);
+        listAfterParsingListLines.add(fruitTransactionThree);
+        FruitTransaction fruitTransactionFour = new FruitTransaction();
+        fruitTransactionFour.setFruit("banana");
+        fruitTransactionFour.setQuantity(23);
+        fruitTransactionFour.setOperation(FruitTransaction.Operation.PURCHASE);
+        listAfterParsingListLines.add(fruitTransactionFour);
+        FruitTransaction fruitTransactionFive = new FruitTransaction();
+        fruitTransactionFive.setFruit("apple");
+        fruitTransactionFive.setQuantity(20);
+        fruitTransactionFive.setOperation(FruitTransaction.Operation.RETURN);
+        listAfterParsingListLines.add(fruitTransactionFive);
+        FruitTransaction fruitTransactionSix = new FruitTransaction();
+        fruitTransactionSix.setFruit("apple");
+        fruitTransactionSix.setQuantity(30);
+        fruitTransactionSix.setOperation(FruitTransaction.Operation.PURCHASE);
+        listAfterParsingListLines.add(fruitTransactionSix);
+        FruitTransaction fruitTransactionSeven = new FruitTransaction();
+        fruitTransactionSeven.setFruit("banana");
+        fruitTransactionSeven.setQuantity(15);
+        fruitTransactionSeven.setOperation(FruitTransaction.Operation.PURCHASE);
+        listAfterParsingListLines.add(fruitTransactionSeven);
+        FruitTransaction fruitTransactionEight = new FruitTransaction();
+        fruitTransactionEight.setFruit("banana");
+        fruitTransactionEight.setQuantity(60);
+        fruitTransactionEight.setOperation(FruitTransaction.Operation.SUPPLY);
+        listAfterParsingListLines.add(fruitTransactionEight);
 
         String filePath = "src/test/resource/test.csv";
 
@@ -71,7 +79,7 @@ public class TransactionParserImplTest {
         transactionParser.parse(lineForParsMethod);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = InputDataEqualNullException.class)
     public void parse_inputNull_notOk() {
         transactionParser.parse(null);
     }

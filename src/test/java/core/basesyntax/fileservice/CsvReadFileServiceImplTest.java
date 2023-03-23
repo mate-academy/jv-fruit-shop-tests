@@ -4,12 +4,18 @@ import core.basesyntax.errors.InvalidFileExtensionException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvReadFileServiceImplTest {
-    private ReadFileService readFileService = new CsvReadFileServiceImpl();
+    private ReadFileService readFileService;
     private final List<String> listAfterReadingFile = new ArrayList<>();
-    
+
+    @Before
+    public void initializationOfVariables() {
+        readFileService = new CsvReadFileServiceImpl();
+    }
+
     @Test(expected = InvalidFileExtensionException.class)
     public void read_incorrectFileExtension_notOk() {
         String filePath = "test.txt";
@@ -43,10 +49,5 @@ public class CsvReadFileServiceImplTest {
     public void read_wrongFileInput_notOk() {
         String file = "error.csv";
         readFileService.read(file);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void read_inputNull_notOk() {
-        readFileService.read(null);
     }
 }

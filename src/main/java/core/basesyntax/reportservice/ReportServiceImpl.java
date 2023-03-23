@@ -6,6 +6,9 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
     @Override
     public String createReport() {
+        if (Storage.getStorage().size() == 0) {
+            return "";
+        }
         StringBuilder builderForGetContentFromMap = new StringBuilder();
         for (Map.Entry<String, Integer> entry: Storage.getStorage().entrySet()) {
             builderForGetContentFromMap.append(entry.getKey()).append(",")

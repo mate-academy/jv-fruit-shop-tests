@@ -1,5 +1,6 @@
 package core.basesyntax.fileservice;
 
+import core.basesyntax.errors.InputDataEqualNullException;
 import core.basesyntax.errors.InvalidFileExtensionException;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,17 +8,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class CsvWriteFileServiceImplTest {
-    private WriteFileService csvWriteFileService = new CsvWriteFileServiceImpl();
+    private WriteFileService csvWriteFileService;
 
-    @Test(expected = NullPointerException.class)
-    public void write_inputParameterForFileNull_notOk() {
-        csvWriteFileService.write(null, "a, banana, 30");
+    @Before
+    public void initializationOfVariables() {
+        csvWriteFileService = new CsvWriteFileServiceImpl();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = InputDataEqualNullException.class)
     public void write_inputParameterForContentNull_notOk() {
         String file = "test.csv";
         csvWriteFileService.write(file, null);

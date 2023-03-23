@@ -41,7 +41,7 @@ public class Main {
         List<FruitTransaction> completeFruitsObjectList = transactionParser.parse(listForParsing);
         transactionExecutor.execute(completeFruitsObjectList);
         String completeContentForNewFile = reportService.createReport();
-        csvWriteFileService.write("src/main/resource/expectedResult.csv",
+        csvWriteFileService.write("src/main/resource/result.csv",
                 completeContentForNewFile);
     }
 }

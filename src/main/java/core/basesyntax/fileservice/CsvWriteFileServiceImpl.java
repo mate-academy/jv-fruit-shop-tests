@@ -1,5 +1,6 @@
 package core.basesyntax.fileservice;
 
+import core.basesyntax.errors.InputDataEqualNullException;
 import core.basesyntax.errors.InvalidFileExtensionException;
 import core.basesyntax.errors.WriteDataToFileException;
 import java.io.File;
@@ -15,7 +16,7 @@ public class CsvWriteFileServiceImpl implements WriteFileService {
                     "Invalid file extension, extension must be 'csv'.");
         }
         if (content == null) {
-            throw new NullPointerException("Content equal null");
+            throw new InputDataEqualNullException("Content equal null");
         }
         File newFile = new File(file);
         try {

@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.BalanceHandlerImpl;
@@ -63,10 +62,9 @@ public class TransactionStrategyImplTest {
         assertEquals(expectedOperationHandler.getClass(), actualOperationHandler.getClass());
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void getOperationHandler_nullHandlersMap_notOk() {
         transactionStrategy = new TransactionStrategyImpl(null);
-        assertThrows(RuntimeException.class, () -> transactionStrategy
-                .getOperationHandler(FruitTransaction.Operation.getByCode("b")));
+        transactionStrategy.getOperationHandler(FruitTransaction.Operation.getByCode("b"));
     }
 }

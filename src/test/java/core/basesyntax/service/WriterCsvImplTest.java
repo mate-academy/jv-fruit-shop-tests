@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,29 +41,28 @@ public class WriterCsvImplTest {
         }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_notExistingFilePathname_NotOk() {
         stringBuilder.append(System.lineSeparator()).append("banana,152")
                 .append(System.lineSeparator()).append("apple,90");
         report = stringBuilder.toString();
-        assertThrows(RuntimeException.class, () -> writer.writeToFile(report,
-                NOT_EXISTING_FILE_PATHNAME));
+        writer.writeToFile(report, NOT_EXISTING_FILE_PATHNAME);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void writeToFile_nullFilePathname_NotOk() {
         stringBuilder.append(System.lineSeparator()).append("banana,152")
                 .append(System.lineSeparator()).append("apple,90");
         report = stringBuilder.toString();
-        assertThrows(RuntimeException.class, () -> writer.writeToFile(report,null));
+        writer.writeToFile(report,null);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_emptyFilePathname_NotOk() {
         stringBuilder.append(System.lineSeparator()).append("banana,152")
                 .append(System.lineSeparator()).append("apple,90");
         report = stringBuilder.toString();
-        assertThrows(RuntimeException.class, () -> writer.writeToFile(report, EMPTY_FILE_PATHNAME));
+        writer.writeToFile(report, EMPTY_FILE_PATHNAME);
     }
 
     @Test

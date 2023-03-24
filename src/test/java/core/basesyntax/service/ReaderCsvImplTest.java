@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,14 +39,14 @@ public class ReaderCsvImplTest {
         }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_notExistingFile_NotOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromFile(NOT_EXISTING_FILE_PATHNAME));
+        reader.readFromFile(NOT_EXISTING_FILE_PATHNAME);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void readFromFile_nullFilePathname_NotOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromFile(null));
+        reader.readFromFile(null);
     }
 
     @Test

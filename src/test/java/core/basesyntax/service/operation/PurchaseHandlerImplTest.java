@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -42,20 +41,20 @@ public class PurchaseHandlerImplTest {
         assertEquals(expectedFruits, Storage.fruits);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void handle_notEnoughFruitsForPurchase_NotOk() {
         Storage.fruits.put("banana", 10);
-        assertThrows(RuntimeException.class,() -> purchaseHandler.handle(fruitTransaction));
+        purchaseHandler.handle(fruitTransaction);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void handle_emptyStorage_NotOk() {
-        assertThrows(RuntimeException.class,() -> purchaseHandler.handle(fruitTransaction));
+        purchaseHandler.handle(fruitTransaction);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void handle_nullInput_Ok() {
-        assertThrows(RuntimeException.class, () -> purchaseHandler.handle(null));
+        purchaseHandler.handle(null);
     }
 
     @After

@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import org.junit.After;
@@ -33,9 +32,9 @@ public class ReportCreatorImplTest {
         assertEquals(expectedReport, actualReport);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void createReport_nullInput_notOk() {
-        assertThrows(RuntimeException.class, () -> reportCreator.createReport(null));
+        reportCreator.createReport(null);
     }
 
     @After

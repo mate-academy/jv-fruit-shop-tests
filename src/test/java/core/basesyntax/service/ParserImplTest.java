@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
@@ -62,9 +61,9 @@ public class ParserImplTest {
         }
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void parse_nullInput_notOk() {
-        assertThrows(RuntimeException.class, () -> parser.parse(null));
+        parser.parse(null);
     }
 
     @Test

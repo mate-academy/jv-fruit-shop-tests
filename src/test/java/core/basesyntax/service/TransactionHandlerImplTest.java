@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -72,9 +71,9 @@ public class TransactionHandlerImplTest {
         assertEquals(expectedFruits, Storage.fruits);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void handle_nullInput_notOk() {
-        assertThrows(RuntimeException.class, () -> transactionHandler.handle(null));
+        transactionHandler.handle(null);
     }
 
     @Test

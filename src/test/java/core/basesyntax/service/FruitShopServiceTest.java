@@ -48,7 +48,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    public void parse_emplyInput_ok() {
+    public void parse_emptyInput_ok() {
         assertEquals(new HashMap<>(), fruitShopService.finalReport(new ArrayList<>()));
     }
 

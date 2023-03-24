@@ -43,6 +43,6 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(Storage.fruits);
         Writer writer = new WriterCsvImpl();
-        writer.writeToFile(report, "src/main/resources/report23.csv");
+        writer.writeToFile(report, "src/main/resources/report24.csv");
     }
 }

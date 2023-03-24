@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import org.junit.After;
@@ -20,8 +20,8 @@ public class ReportCreatorImplTest {
     public void createReport_Ok() {
         Storage.fruits.put("banana", 152);
         Storage.fruits.put("apple", 90);
-        String expectedReport = "fruit,quantity" + System.lineSeparator() + "banana,152" +
-                System.lineSeparator() + "apple,90";
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator() + "apple,90";
         String actualReport = reportCreator.createReport(Storage.fruits);
         assertEquals(expectedReport, actualReport);
     }

@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.testng.Assert.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;

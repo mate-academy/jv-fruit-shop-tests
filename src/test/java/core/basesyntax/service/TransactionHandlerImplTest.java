@@ -16,30 +16,63 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionHandlerImplTest {
-    private static List<FruitTransaction> fruitTransactions;
-    private static Map<String, Integer> expectedFruits;
-    private static TransactionHandler transactionHandler;
     private static final Map<FruitTransaction.Operation,
             OperationHandler> handlersMap = new HashMap<>();
 
-    @Before
-    public void setUp() throws Exception {
-        fruitTransactions = new ArrayList<>();
-        expectedFruits = new HashMap<>();
-        handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl());
-        handlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl());
-        handlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerImpl());
-        handlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl());
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(handlersMap);
-        transactionHandler = new TransactionHandlerImpl(transactionStrategy);
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        fillHandlersMap();
     }
 
     @Test
     public void handle_Ok() {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fillFruitTransactionsList(fruitTransactions);
+        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(handlersMap);
+        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
+        transactionHandler.handle(fruitTransactions);
+        Map<String, Integer> expectedFruits = new HashMap<>();
+        expectedFruits.put("banana", 152);
+        expectedFruits.put("apple", 90);
+        assertEquals(expectedFruits.size(), Storage.fruits.size());
+        assertEquals(expectedFruits, Storage.fruits);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void handle_nullInput_notOk() {
+        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(handlersMap);
+        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
+        transactionHandler.handle(null);
+    }
+
+    @Test
+    public void handle_emptyInputList_ok() {
+        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(handlersMap);
+        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        transactionHandler.handle(fruitTransactions);
+        Map<String, Integer> expectedFruits = new HashMap<>();
+        assertEquals(expectedFruits.size(), Storage.fruits.size());
+        assertEquals(expectedFruits, Storage.fruits);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
+    }
+
+    private static void fillHandlersMap() {
+        handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl());
+        handlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl());
+        handlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerImpl());
+        handlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl());
+    }
+
+    private void fillFruitTransactionsList(List<FruitTransaction> fruitTransactions) {
         FruitTransaction fruitTransaction1 = new FruitTransaction("banana",
                 FruitTransaction.Operation.getByCode("b"), 20);
         fruitTransactions.add(fruitTransaction1);
@@ -64,28 +97,5 @@ public class TransactionHandlerImplTest {
         FruitTransaction fruitTransaction8 = new FruitTransaction("banana",
                 FruitTransaction.Operation.getByCode("s"), 50);
         fruitTransactions.add(fruitTransaction8);
-        transactionHandler.handle(fruitTransactions);
-        expectedFruits.put("banana", 152);
-        expectedFruits.put("apple", 90);
-        assertEquals(expectedFruits.size(), Storage.fruits.size());
-        assertEquals(expectedFruits, Storage.fruits);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void handle_nullInput_notOk() {
-        transactionHandler.handle(null);
-    }
-
-    @Test
-    public void handle_emptyInputList_ok() {
-        transactionHandler.handle(fruitTransactions);
-        assertEquals(expectedFruits.size(), Storage.fruits.size());
-        assertEquals(expectedFruits, Storage.fruits);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        Storage.fruits.clear();
-        expectedFruits.clear();
     }
 }

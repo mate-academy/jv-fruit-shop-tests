@@ -14,15 +14,20 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parse(List<String> records) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        FruitTransaction.Operation type;
+        String fruit;
+        int quantity;
+        if (records.size() == 0) {
+            throw new WrongFormatException("There is WrongFormatException: ");
+        }
         for (String record : records) {
             String[] values = record.split(COMMA_DELIMITER);
             if (values[OPERATION_TYPE_INDEX].equals("type")) {
                 continue;
             }
-            FruitTransaction.Operation type =
-                    FruitTransaction.Operation.getByCode(values[OPERATION_TYPE_INDEX]);
-            String fruit = values[FRUIT_INDEX];
-            int quantity = Integer.parseInt(values[QUANTITY_INDEX]);
+            type = FruitTransaction.Operation.getByCode(values[OPERATION_TYPE_INDEX]);
+            fruit = values[FRUIT_INDEX];
+            quantity = Integer.parseInt(values[QUANTITY_INDEX]);
             FruitTransaction fruitTransaction = new FruitTransaction(type, fruit, quantity);
             fruitTransactionList.add(fruitTransaction);
         }

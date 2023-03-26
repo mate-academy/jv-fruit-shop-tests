@@ -19,7 +19,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperationHandler_handle_Ok() {
+    public void handle_rightAction_Ok() {
         FruitTransaction item = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 15);
         purchaseOperationHandler.handle(item);
@@ -28,7 +28,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = QuantityException.class)
-    public void purchaseOperationHandler_purchaseExceed_notOk() {
+    public void handle_purchaseExceed_notOk() {
         FruitTransaction item = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 17);
         purchaseOperationHandler.handle(item);

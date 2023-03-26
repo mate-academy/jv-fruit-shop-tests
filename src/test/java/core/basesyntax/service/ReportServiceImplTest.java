@@ -18,7 +18,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void reportService_readFromStorage_Ok() {
+    public void createReport_rightStorage_Ok() {
         String text = reportService.createReport();
         String[] actualResult = text.split(System.lineSeparator());
         Assert.assertEquals("Test failed! You should returned next text "

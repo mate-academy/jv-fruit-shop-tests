@@ -29,7 +29,7 @@ public class OperationHandlerStrategyTest {
     }
 
     @Test
-    public void operationHandlerStrategy_get_Ok() {
+    public void get_rightAction_Ok() {
         FruitTransaction item = new FruitTransaction(FruitTransaction.Operation.RETURN,
                 "banana", 43);
         OperationHandler handler = operationHandlerStrategy.get(item);

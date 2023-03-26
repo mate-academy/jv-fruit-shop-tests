@@ -29,7 +29,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readerService_readFromFile_Ok() {
+    public void read_rightFile_Ok() {
         List<String> actualResult = readerService.read(INPUT_FILE_PATH);
         Assert.assertEquals("Test failed! You should returned next record "
                         + records.get(0) + " but you returned "
@@ -38,7 +38,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readerService_readFromEmptyFile_Ok() {
+    public void read_emptyFile_Ok() {
         List<String> actualResult = readerService.read(EMPTY_FILE_PATH);
         records = new ArrayList<>();
         Assert.assertEquals("Test failed! You should returned empty record.",
@@ -46,7 +46,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readerService_readFromEmptyPath_notOk() {
+    public void read_emptyPath_notOk() {
         readerService.read("");
     }
 }

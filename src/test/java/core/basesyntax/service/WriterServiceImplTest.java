@@ -19,7 +19,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writerService_write_Ok() {
+    public void writeToFile_rightPath_Ok() {
         String expectedText = "banana,154"
                 + System.lineSeparator()
                 + "apple,90";
@@ -32,7 +32,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeToEmptyPath_notOk() {
+    public void writeToFile_writeToEmptyPath_notOk() {
         writerService.writeToFile("expectedText", "");
     }
 }

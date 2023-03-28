@@ -1,0 +1,24 @@
+package core.basesyntax.service.impl;
+
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.service.ReadDataService;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class ReadDataServiceImplTest {
+    private static final String FILE_DATE_NAME = "src/main/java/resources/FruitShop.csv";
+    private static ReadDataService readDataService;
+
+    @BeforeClass
+    public static void beforeClass() {
+        readDataService = new ReadDataServiceImpl();
+    }
+
+    @Test
+    public void readData_Ok() {
+        String actual = readDataService.readFromFile(FILE_DATE_NAME).get(2);
+        String expected = "p,banana,20";
+        assertEquals(actual, expected);
+    }
+}

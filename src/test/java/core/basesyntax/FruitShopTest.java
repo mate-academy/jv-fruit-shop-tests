@@ -21,8 +21,10 @@ import org.junit.rules.ExpectedException;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -112,15 +114,32 @@ public class FruitShopTest {
         Assert.assertEquals(FruitTransaction.Operation.BALANCE, fruitTransactionList.get(1).getOperation());
     }
 
-//    @Test
-//    public void readFromFile_readFileFromPath_Ok() throws IOException {
-//        FileReader fileReader = new FileReaderImpl();
-//        File file = Files.createTempFile("test", ".csv", new File("src/main/resources/"));
-//        BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file));
-//        bufferedWriter.write("b,banana,50");
-//        bufferedWriter.newLine();
-//        bufferedWriter.write("p,banana,30");
-//        List<String> actual = fileReader.readFromFile(file.getPath());
-//        Assert.assertEquals(2, actual.size());
-//    }
+    @Test
+    public void readFromFile_readFileFromPath_Ok() throws IOException {
+        FileReader fileReader = new FileReaderImpl();
+        File file = Files.createTempFile("test", ".csv").toFile();
+        BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file));
+        bufferedWriter.write("b,banana,50");
+        bufferedWriter.newLine();
+        bufferedWriter.write("p,banana,30");
+        bufferedWriter.close();
+        List<String> actual = fileReader.readFromFile(file.getPath());
+        Assert.assertEquals(2, actual.size());
+    }
+
+    @Test
+    public void readFromFile_fileIsAbsent_NotOk() {
+        FileReader fileReader = new FileReaderImpl();
+        String path = "src/main/resources/input.csv";
+        exception.expect(RuntimeException.class);
+        List<String> actual = fileReader.readFromFile(path);
+    }
+
+    @Test
+    public void readFromFile_fileIsNotRead_NotOk() throws IOException {
+        Path tmpDir = Files.createTempDirectory("tmp");
+        tmpDir.toFile().delete();
+        exception.expect(IOException.class);
+        Path tmpFile = Files.createTempFile(tmpDir, "test", ".txt");
+    }
 }

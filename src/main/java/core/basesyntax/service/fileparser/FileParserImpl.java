@@ -3,7 +3,6 @@ package core.basesyntax.service.fileparser;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionTypeFinderImpl;
 import core.basesyntax.service.fileparser.FileParser;
-
 import java.util.ArrayList;
 import java.util.List;
 

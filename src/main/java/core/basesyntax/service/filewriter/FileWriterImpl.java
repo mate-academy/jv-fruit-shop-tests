@@ -18,7 +18,7 @@ public class FileWriterImpl implements FileWriter {
         try {
             Files.write(fileName.toPath(), transactionDao.getAll().getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can not write to file" + fileName,e);
+            throw new RuntimeException("Can not write to file" + fileName, e);
         }
         return true;
     }

@@ -1,18 +1,17 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.Main;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.TransactionStrategyImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class TransactionDaoImplTest {
     private static TransactionStrategy transactionStrategy;
@@ -42,11 +41,11 @@ public class TransactionDaoImplTest {
 
     @Test
     public void addAll_Ok() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         FruitTransaction fruitTransactionBanana = new FruitTransaction();
         fruitTransactionBanana.setFruit("banana");
         fruitTransactionBanana.setQuantity(10);
         fruitTransactionBanana.setOperation(FruitTransaction.Operation.BALANCE);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(fruitTransactionBanana);
 
         FruitTransaction fruitTransactionApple = new FruitTransaction();

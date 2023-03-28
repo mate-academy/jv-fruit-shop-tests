@@ -1,13 +1,14 @@
 package core.basesyntax.service.filereadertest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import core.basesyntax.service.filereader.FileReader;
 import core.basesyntax.service.filereader.FileReaderImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileReaderImplTest {
     private static FileReader fileReader;

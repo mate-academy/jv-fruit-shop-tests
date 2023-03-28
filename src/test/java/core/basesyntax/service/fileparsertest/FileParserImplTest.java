@@ -1,15 +1,14 @@
 package core.basesyntax.service.fileparsertest;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.fileparser.FileParser;
 import core.basesyntax.service.fileparser.FileParserImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FileParserImplTest {
     private static List<String> stringFruitTransactions;
@@ -26,11 +25,11 @@ public class FileParserImplTest {
         stringFruitTransactions.add("b,banana,20");
         stringFruitTransactions.add("b,apple,100");
 
-        List<FruitTransaction> expected = new ArrayList<>();
         FruitTransaction fruitTransactionBanana = new FruitTransaction();
         fruitTransactionBanana.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransactionBanana.setFruit("banana");
         fruitTransactionBanana.setQuantity(20);
+        List<FruitTransaction> expected = new ArrayList<>();
         expected.add(fruitTransactionBanana);
 
         FruitTransaction fruitTransactionApple = new FruitTransaction();
@@ -39,7 +38,8 @@ public class FileParserImplTest {
         fruitTransactionApple.setQuantity(100);
         expected.add(fruitTransactionApple);
 
-        List<FruitTransaction> parsedData = fileParser.parsedFruitTransactions(stringFruitTransactions);
+        List<FruitTransaction> parsedData =
+                fileParser.parsedFruitTransactions(stringFruitTransactions);
         assertEquals(parsedData,expected);
     }
 }

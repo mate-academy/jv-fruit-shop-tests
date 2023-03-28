@@ -1,11 +1,12 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.TransactionTypeFinder;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class TransactionTypeFinderImplTest {
     private static TransactionTypeFinder transactionTypeFinder;
@@ -16,7 +17,7 @@ public class TransactionTypeFinderImplTest {
     }
 
     @Test
-    public void TransactionTypeFinder_Null_NotOk() {
+    public void transactionTypeFinder_Null_NotOk() {
         try {
             transactionTypeFinder.operationType(null);
         } catch (RuntimeException e) {
@@ -26,7 +27,7 @@ public class TransactionTypeFinderImplTest {
     }
 
     @Test
-    public void TransactionTypeFinder_Ok() {
+    public void transactionTypeFinder_Ok() {
         FruitTransaction.Operation expected = FruitTransaction.Operation.BALANCE;
         FruitTransaction.Operation balance = transactionTypeFinder.operationType("b");
         assertEquals(expected, balance);

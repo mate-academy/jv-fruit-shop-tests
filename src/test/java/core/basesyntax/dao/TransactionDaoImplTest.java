@@ -8,8 +8,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.TransactionStrategyImpl;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -27,6 +31,24 @@ public class TransactionDaoImplTest {
         transactionDao.add(apple, 20);
     }
 
+    @Before
+    public void setUp() {
+        Storage.fruitStorage.clear();
+        FruitTransaction fruitTransactionBanana = new FruitTransaction();
+        fruitTransactionBanana.setFruit("banana");
+        fruitTransactionBanana.setQuantity(10);
+        fruitTransactionBanana.setOperation(FruitTransaction.Operation.BALANCE);
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fruitTransactions.add(fruitTransactionBanana);
+
+        FruitTransaction fruitTransactionApple = new FruitTransaction();
+        fruitTransactionApple.setFruit("apple");
+        fruitTransactionApple.setQuantity(20);
+        fruitTransactionApple.setOperation(FruitTransaction.Operation.BALANCE);
+        fruitTransactions.add(fruitTransactionApple);
+        transactionDao.addAll(fruitTransactions);
+    }
+
     @Test
     public void add_Ok() {
         int expectedStorageSize = 2;
@@ -41,19 +63,6 @@ public class TransactionDaoImplTest {
 
     @Test
     public void addAll_Ok() {
-        FruitTransaction fruitTransactionBanana = new FruitTransaction();
-        fruitTransactionBanana.setFruit("banana");
-        fruitTransactionBanana.setQuantity(10);
-        fruitTransactionBanana.setOperation(FruitTransaction.Operation.BALANCE);
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        fruitTransactions.add(fruitTransactionBanana);
-
-        FruitTransaction fruitTransactionApple = new FruitTransaction();
-        fruitTransactionApple.setFruit("apple");
-        fruitTransactionApple.setQuantity(20);
-        fruitTransactionApple.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransactions.add(fruitTransactionApple);
-        transactionDao.addAll(fruitTransactions);
         Integer expectedQuantity = 10;
         int expectedStorageSize = 2;
         assertEquals(expectedStorageSize, Storage.fruitStorage.size());
@@ -66,6 +75,6 @@ public class TransactionDaoImplTest {
         expected.append("banana ").append(10).append(System.lineSeparator())
                 .append("apple ").append(20).append(System.lineSeparator());
         String storageInfo = transactionDao.getAll();
-        assertEquals(expected.toString(),storageInfo);
+        assertEquals(expected.toString(), storageInfo);
     }
 }

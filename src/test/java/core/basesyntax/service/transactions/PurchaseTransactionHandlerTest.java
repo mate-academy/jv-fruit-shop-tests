@@ -21,13 +21,8 @@ public class PurchaseTransactionHandlerTest {
         assertEquals(expected, transaction);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void purchaseTransaction_Null_NotOk() {
-        try {
-            purchaseTransactionHandler.getCurrentQuantity(null, 10);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("PurchaseTransactionHandler should not be able work with null");
+        purchaseTransactionHandler.getCurrentQuantity(null, 10);
     }
 }

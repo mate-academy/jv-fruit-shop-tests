@@ -21,13 +21,8 @@ public class ReturnTransactionHandlerTest {
         assertEquals(expected, transaction);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void returnTransaction_Null_NotOk() {
-        try {
-            returnTransactionHandler.getCurrentQuantity(null, 10);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("ReturnTransaction should not be able work with null");
+        returnTransactionHandler.getCurrentQuantity(null, 10);
     }
 }

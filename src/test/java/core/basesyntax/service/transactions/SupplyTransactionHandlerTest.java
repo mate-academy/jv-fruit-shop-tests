@@ -21,13 +21,8 @@ public class SupplyTransactionHandlerTest {
         assertEquals(expected, transaction);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void supplyTransaction_Null_NotOk() {
-        try {
-            supplyTransactionHandler.getCurrentQuantity(null, 10);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("SupplyTransactionHandler should not be able work with null");
+        supplyTransactionHandler.getCurrentQuantity(null, 10);
     }
 }

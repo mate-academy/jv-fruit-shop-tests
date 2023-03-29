@@ -1,7 +1,6 @@
 package core.basesyntax.service.filewriter;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.Main;
 import core.basesyntax.dao.TransactionDao;
@@ -15,7 +14,7 @@ import org.junit.Test;
 
 public class FileWriterImplTest {
     private static final String REPORT_TEST_FILE = "src/test/resources/reportTest.csv";
-    private static final String NULL_FILE = null;
+    private static final String WRONG_FILE_PATH = "srcff/wrong/resources/reportTest.csv";
     private static FileWriter fileWriter;
     private static final Fruit banana = new Fruit("banana");
     private static final Fruit apple = new Fruit("apple");
@@ -36,13 +35,8 @@ public class FileWriterImplTest {
         assertTrue(expected);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void writeToFile_Null_NotOk() {
-        try {
-            fileWriter.writeToFile(NULL_FILE);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should not be able write to this file " + NULL_FILE);
+        fileWriter.writeToFile(WRONG_FILE_PATH);
     }
 }

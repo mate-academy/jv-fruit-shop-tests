@@ -16,14 +16,9 @@ public class TransactionTypeFinderImplTest {
         transactionTypeFinder = new TransactionTypeFinderImpl();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void transactionTypeFinder_Null_NotOk() {
-        try {
-            transactionTypeFinder.operationType(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("Transaction type can not be Null");
+        transactionTypeFinder.operationType(null);
     }
 
     @Test

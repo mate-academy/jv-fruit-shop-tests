@@ -32,14 +32,9 @@ public class FileReaderImplTest {
         assertEquals(FileReaderImplTest.stringDataFromFile, dataFromFile);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readFromFile_NotOk() {
         String fileNotExist = "src/test/resources/inputTest1234.csv";
-        try {
             fileReader.dataFromFile(fileNotExist);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("You should not be able to read from not existed file");
     }
 }

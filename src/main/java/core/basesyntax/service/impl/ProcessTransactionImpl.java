@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessTransaction;
 import core.basesyntax.strategy.TransactionStrategy;
-
 import java.util.List;
 
 public class ProcessTransactionImpl implements ProcessTransaction {

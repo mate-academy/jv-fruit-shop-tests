@@ -56,7 +56,7 @@ public class DaoServiceHashMapTest {
         expectedResult.put(DEFAULT_FRUIT, VALUE_POSITIVE);
         storage.getMemory().put(DEFAULT_FRUIT, VALUE_ZERO);
         storage.update(DEFAULT_FRUIT, VALUE_POSITIVE);
-        Assert.assertEquals(storage.getMemory(), expectedResult);
+        Assert.assertEquals(expectedResult, storage.getMemory());
     }
 
     @Test(expected = NumberFormatException.class)
@@ -67,7 +67,7 @@ public class DaoServiceHashMapTest {
     @Test
     public void getByKey_valid_ok() {
         storage.getMemory().put(DEFAULT_FRUIT, VALUE_POSITIVE);
-        Assert.assertEquals(storage.getByKey(DEFAULT_FRUIT), VALUE_POSITIVE);
+        Assert.assertEquals(VALUE_POSITIVE, storage.getByKey(DEFAULT_FRUIT));
     }
 
     @Test

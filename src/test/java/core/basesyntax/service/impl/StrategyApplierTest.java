@@ -79,7 +79,7 @@ public class StrategyApplierTest {
     public void applyAll_validSingleFruit_ok() {
         expectedResult.put(DEFAULT_FRUIT, 70);
         strategyApplier.applyAll(validTransactionsDefault);
-        Assert.assertEquals(storage.getMemory(), expectedResult);
+        Assert.assertEquals(expectedResult, storage.getMemory());
     }
 
     @Test
@@ -90,13 +90,13 @@ public class StrategyApplierTest {
             strategyApplier.applyAll(List.of(validTransactionsDefault.get(i)));
             strategyApplier.applyAll(List.of(validTransactionsAdditional.get(i)));
         }
-        Assert.assertEquals(storage.getMemory(), expectedResult);
+        Assert.assertEquals(expectedResult, storage.getMemory());
     }
 
     @Test
     public void applyAll_emptyList_ok() {
         strategyApplier.applyAll(List.of());
-        Assert.assertEquals(storage.getMemory(), expectedResult);
+        Assert.assertEquals(expectedResult, storage.getMemory());
     }
 
     @Test(expected = NullPointerException.class)

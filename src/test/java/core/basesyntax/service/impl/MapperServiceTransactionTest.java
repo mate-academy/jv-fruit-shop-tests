@@ -27,7 +27,7 @@ public class MapperServiceTransactionTest {
 
     @Test
     public void map_withValidString_ok() {
-        Assert.assertEquals(mapper.map(VALID_STRING), EXPECTED_RESULT);
+        Assert.assertEquals(EXPECTED_RESULT, mapper.map(VALID_STRING));
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)

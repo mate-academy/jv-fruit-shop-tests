@@ -38,7 +38,7 @@ public class ReportServiceCsvTest {
 
     @Test
     public void generateReport_withValidOperations_ok() {
-        Assert.assertEquals(reportServiceCsv.generateReport(storage.entrySet()), expectedResult);
+        Assert.assertEquals(expectedResult, reportServiceCsv.generateReport(storage.entrySet()));
     }
 
     @Test(expected = NullPointerException.class)

@@ -25,8 +25,10 @@ public class WriterServiceCsvTest {
             = "src/test/resources/new_empty_file.csv";
     private static final String FILE_PATH_EXISTING_EMPTY
             = "src/test/resources/empty_file.csv";
-    private static final String FILE_PATH_EXPECTED
-            = "src/test/resources/expected.csv";
+    private static final String EXPECTED
+            = "line1"
+            + System.lineSeparator()
+            + "line2";
 
     @BeforeClass
     public static void setup() {
@@ -50,8 +52,8 @@ public class WriterServiceCsvTest {
                 LINES_TO_WRITE,
                 new File(FILE_PATH_EXISTING_EMPTY));
         Assert.assertEquals(
-                read(FILE_PATH_EXISTING_EMPTY),
-                read(FILE_PATH_EXPECTED));
+                EXPECTED,
+                String.join(System.lineSeparator(), read(FILE_PATH_EXISTING_EMPTY)));
     }
 
     @Test
@@ -60,8 +62,8 @@ public class WriterServiceCsvTest {
                 LINES_TO_WRITE,
                 new File(FILE_PATH_NOT_EXISTING_EMPTY));
         Assert.assertEquals(
-                read(FILE_PATH_NOT_EXISTING_EMPTY),
-                read(FILE_PATH_EXPECTED));
+                EXPECTED,
+                String.join(System.lineSeparator(), read(FILE_PATH_NOT_EXISTING_EMPTY)));
     }
 
     private Collection<String> read(String filename) {

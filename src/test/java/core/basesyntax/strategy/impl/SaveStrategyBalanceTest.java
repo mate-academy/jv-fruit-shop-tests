@@ -43,30 +43,26 @@ public class SaveStrategyBalanceTest {
                 transactionValid.getFruit(),
                 transactionValid.getQuantity());
         strategyBalance.save(transactionValid);
-        Assert.assertEquals(storage.getMemory(), expectedStorage.getMemory());
+        Assert.assertEquals(expectedStorage.getMemory(), storage.getMemory());
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withWrongType_notOk() {
         strategyBalance.save(transactionWrongType);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withKeyExisting_notOk() {
         strategyBalance.save(transactionExisting);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withValueNegative_notOk() {
         strategyBalance.save(transactionNegativeQuantity);
-        Assert.fail();
     }
 
     @Test(expected = NullPointerException.class)
     public void save_withValueNull_notOk() {
         strategyBalance.save(null);
-        Assert.fail();
     }
 }

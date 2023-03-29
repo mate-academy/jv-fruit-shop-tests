@@ -48,36 +48,31 @@ public class SaveStrategyPurchaseTest {
                 transactionValid.getFruit(),
                 expectedAmount);
         strategyPurchase.save(transactionValid);
-        Assert.assertEquals(storage.getMemory(), expectedStorage.getMemory());
+        Assert.assertEquals(expectedStorage.getMemory(), storage.getMemory());
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withWrongType_notOk() {
         strategyPurchase.save(transactionWrongType);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withKeyNotExisting_notOk() {
         strategyPurchase.save(transactionNotExisting);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withResultNegative_notOk() {
         strategyPurchase.save(transactionNegativeResult);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withValueNegative_notOk() {
         strategyPurchase.save(transactionNegativeQuantity);
-        Assert.fail();
     }
 
     @Test(expected = NullPointerException.class)
     public void save_withValueNull_notOk() {
         strategyPurchase.save(null);
-        Assert.fail();
     }
 }

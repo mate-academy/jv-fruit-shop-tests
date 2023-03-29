@@ -46,30 +46,26 @@ public class SaveStrategySupplyTest {
                 transactionValid.getFruit(),
                 expectedAmount);
         strategySupply.save(transactionValid);
-        Assert.assertEquals(storage.getMemory(), expectedStorage.getMemory());
+        Assert.assertEquals(expectedStorage.getMemory(), storage.getMemory());
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withWrongType_notOk() {
         strategySupply.save(transactionWrongType);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withKeyNotExisting_notOk() {
         strategySupply.save(transactionNotExisting);
-        Assert.fail();
     }
 
     @Test(expected = RuntimeException.class)
     public void save_withValueNegative_notOk() {
         strategySupply.save(transactionNegativeQuantity);
-        Assert.fail();
     }
 
     @Test(expected = NullPointerException.class)
     public void save_withValueNull_notOk() {
         strategySupply.save(null);
-        Assert.fail();
     }
 }

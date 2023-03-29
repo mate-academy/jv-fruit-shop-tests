@@ -31,14 +31,14 @@ public class StrategySelectorTest {
     @Test
     public void selectStrategy_withValidOperations_ok() {
         Assert.assertEquals(
-                strategySelector.selectStrategy(Operation.SUPPLY).getClass(),
-                SaveStrategySupply.class);
+                SaveStrategySupply.class,
+                strategySelector.selectStrategy(Operation.SUPPLY).getClass());
         Assert.assertEquals(
-                strategySelector.selectStrategy(Operation.BALANCE).getClass(),
-                SaveStrategyBalance.class);
+                SaveStrategyBalance.class,
+                strategySelector.selectStrategy(Operation.BALANCE).getClass());
         Assert.assertEquals(
-                strategySelector.selectStrategy(Operation.PURCHASE).getClass(),
-                SaveStrategyPurchase.class);
+                SaveStrategyPurchase.class,
+                strategySelector.selectStrategy(Operation.PURCHASE).getClass());
     }
 
     @Test(expected = RuntimeException.class)

@@ -1,7 +1,6 @@
 package core.basesyntax.service.transactions;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

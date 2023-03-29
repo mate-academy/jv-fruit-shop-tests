@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.TransactionTypeFinder;

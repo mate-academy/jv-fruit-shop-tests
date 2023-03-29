@@ -8,7 +8,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.TransactionStrategyImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;

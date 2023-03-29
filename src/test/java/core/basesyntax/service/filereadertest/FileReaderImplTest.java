@@ -1,7 +1,6 @@
 package core.basesyntax.service.filereadertest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.service.filereader.FileReader;
 import core.basesyntax.service.filereader.FileReaderImpl;
@@ -35,6 +34,6 @@ public class FileReaderImplTest {
     @Test(expected = RuntimeException.class)
     public void readFromFile_NotOk() {
         String fileNotExist = "src/test/resources/inputTest1234.csv";
-            fileReader.dataFromFile(fileNotExist);
+        fileReader.dataFromFile(fileNotExist);
     }
 }

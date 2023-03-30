@@ -10,12 +10,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FileReaderImplTest {
-    private static final String TEMP_PATH = "src/main/resources/input.csv";
-
     @Test
     public void readFromFile_readFileFromPath_Ok() throws IOException {
         FileReader fileReader = new FileReaderImpl();
-        File file = new File(TEMP_PATH);
+        File file = File.createTempFile("input", ".csv");
         BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file));
         bufferedWriter.write("b,banana,50");
         bufferedWriter.newLine();
@@ -29,6 +27,6 @@ public class FileReaderImplTest {
     @Test (expected = RuntimeException.class)
     public void readFromFile_fileIsAbsent_NotOk() {
         FileReader fileReader = new FileReaderImpl();
-        List<String> actual = fileReader.readFromFile(TEMP_PATH);
+        List<String> actual = fileReader.readFromFile("input.csv");
     }
 }

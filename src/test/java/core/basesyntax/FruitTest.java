@@ -4,9 +4,6 @@ import core.basesyntax.model.Fruit;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class FruitTest {
     @Test
     public void equals_fruitIsNotEqual_NotOk() {

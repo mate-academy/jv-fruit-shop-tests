@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FileWriterImplTest {
-    private static final String TEMP_PATH = "src/main/resources/input.csv";
     private static List<String> listData;
 
     @Test(expected = RuntimeException.class)
@@ -29,7 +28,7 @@ public class FileWriterImplTest {
         String expected = "s,banana,30";
         listData = new ArrayList<>();
         listData.add(expected);
-        File file = new File(TEMP_PATH);
+        File file = File.createTempFile("input", ".csv");
         fileWriter.writeIntoFile(listData, file.getPath());
         BufferedReader reader = new BufferedReader(new java.io.FileReader(file.getPath()));
         Assert.assertEquals(expected, reader.readLine());

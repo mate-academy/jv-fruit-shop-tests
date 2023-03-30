@@ -33,8 +33,6 @@ public class TransactionStrategyImplTest {
     @Test
     public void get_checkBalanceHandler_Ok() {
         FruitTransaction.Operation key = FruitTransaction.Operation.BALANCE;
-        OperationHandler balanceHandler = new BalanceHandlerImpl();
-        balanceHandler.getBalance(0, 20);
         int expected = 20;
         Assert.assertEquals(expected, new TransactionStrategyImpl(operationHandlerMap)
                 .get(key).getBalance(0, 20));
@@ -43,8 +41,6 @@ public class TransactionStrategyImplTest {
     @Test
     public void get_checkPurchaseHandler_Ok() {
         FruitTransaction.Operation key = FruitTransaction.Operation.PURCHASE;
-        OperationHandler purchaseHandler = new PurchaseHandlerImpl();
-        purchaseHandler.getBalance(50, 20);
         int expected = 30;
         Assert.assertEquals(expected, new TransactionStrategyImpl(operationHandlerMap)
                 .get(key).getBalance(50, 20));
@@ -53,7 +49,6 @@ public class TransactionStrategyImplTest {
     @Test
     public void get_purchaseHandlerThrowRuntimeException_NotOk() {
         FruitTransaction.Operation key = FruitTransaction.Operation.PURCHASE;
-        OperationHandler purchaseHandler = new PurchaseHandlerImpl();
         int balance = 10 - 20;
         exception.expect(RuntimeException.class);
         exception.expectMessage("Quantity of purchase can't be bigger then balance in storage: "
@@ -66,8 +61,6 @@ public class TransactionStrategyImplTest {
     @Test
     public void get_checkReturnHandler_Ok() {
         FruitTransaction.Operation key = FruitTransaction.Operation.RETURN;
-        OperationHandler returnHandler = new ReturnHandlerImpl();
-        returnHandler.getBalance(20, 10);
         int expected = 30;
         Assert.assertEquals(expected, new TransactionStrategyImpl(operationHandlerMap)
                 .get(key).getBalance(20, 10));
@@ -76,10 +69,22 @@ public class TransactionStrategyImplTest {
     @Test
     public void get_checkSupplyHandler_Ok() {
         FruitTransaction.Operation key = FruitTransaction.Operation.SUPPLY;
-        OperationHandler supplyHandler = new SupplyHandlerImpl();
-        supplyHandler.getBalance(30, 10);
         int expected = 40;
         Assert.assertEquals(expected, new TransactionStrategyImpl(operationHandlerMap)
                 .get(key).getBalance(30, 10));
+    }
+
+    @Test
+    public void getBalance_operationPurchaseHandler_Ok() {
+        OperationHandler operationHandler = new PurchaseHandlerImpl();
+        int expected = 40;
+        Assert.assertEquals(expected, operationHandler.getBalance(60, 20));
+    }
+
+    @Test
+    public void getBalance_operationSupplyHandler_Ok() {
+        OperationHandler operationHandler = new SupplyHandlerImpl();
+        int expected = 30;
+        Assert.assertEquals(expected, operationHandler.getBalance(20, 10));
     }
 }

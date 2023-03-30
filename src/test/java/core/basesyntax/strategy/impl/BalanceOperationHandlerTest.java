@@ -28,6 +28,7 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void calculate_balanceOperation_ok() {
+        Storage.storage.clear();
         balance.operate(validTransaction);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 10);
@@ -36,7 +37,7 @@ public class BalanceOperationHandlerTest {
 
     @Test(expected = NullPointerException.class)
     public void calculate_null_notOk() {
+
         balance.operate(null);
     }
-
 }

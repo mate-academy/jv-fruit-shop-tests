@@ -90,7 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>src/main/java/core/base syntax/Main.java</exclude>
+                        <exclude>src/main/java/core/base/syntax/Main.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

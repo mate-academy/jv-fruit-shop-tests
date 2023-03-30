@@ -20,7 +20,8 @@ public class ReportServiceImplTest {
         Storage.storage.put("banana", 65);
         Storage.storage.put("apple", 45);
         String actual = reportService.getReport();
-        String expected = "banana,65\r\napple,45\r\n";
+        String expected = "banana,65" + System.lineSeparator()
+                + "apple,45" + System.lineSeparator();
         assertEquals(expected, actual);
     }
 }

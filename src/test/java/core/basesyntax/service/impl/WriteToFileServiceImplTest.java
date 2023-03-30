@@ -30,7 +30,7 @@ public class WriteToFileServiceImplTest {
 
     @Test
     public void writeToFile_dataNotNull_Ok() {
-        String report = "banana,65\napple,45\n";
+        String report = "banana,65" + System.lineSeparator() + "apple,45" + System.lineSeparator();
         writeToFileService.writeToFile(report, FILE_REPORT_NAME);
         assertTrue(Files.exists(Path.of(FILE_REPORT_NAME)));
     }

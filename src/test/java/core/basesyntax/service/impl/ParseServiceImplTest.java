@@ -30,9 +30,8 @@ public class ParseServiceImplTest {
 
     @Test
     public void parse_NullList_NotOk() {
-        List<String> fruitTransactions = null;
         try {
-            parser.getFruitTransactions(fruitTransactions);
+            parser.getFruitTransactions(null);
         } catch (NullPointerException e) {
             return;
         }

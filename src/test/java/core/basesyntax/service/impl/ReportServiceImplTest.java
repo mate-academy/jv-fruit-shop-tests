@@ -22,7 +22,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void testReport_dataFromStorage_oK() {
+    public void getReport_fromStorage_oK() {
         Storage.storage.put("banana", 65);
         Storage.storage.put("apple", 45);
         String actual = reportService.getReport();

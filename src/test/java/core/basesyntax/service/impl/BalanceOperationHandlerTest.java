@@ -22,7 +22,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceOperation_putBalanceToMap_ok() {
+    public void handle_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction("b", "banana", 60);
         balanceOperationHandler.handle(fruitTransaction);
         int expected = 60;

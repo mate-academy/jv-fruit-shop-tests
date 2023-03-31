@@ -23,7 +23,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperation_purchaseIsLessThenBalance_notOk() {
+    public void handle_purchaseIsLessThenBalance_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction("p", "banana", 81);
         try {
             purchaseOperationHandler.handle(fruitTransaction);
@@ -34,7 +34,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperation_purchaseIsMoreThenBalance_ok() {
+    public void handle_purchaseIsMoreThenBalance_ok() {
         Storage.storage.put("banana", 80);
         FruitTransaction fruitTransaction = new FruitTransaction("p", "banana", 60);
         purchaseOperationHandler.handle(fruitTransaction);

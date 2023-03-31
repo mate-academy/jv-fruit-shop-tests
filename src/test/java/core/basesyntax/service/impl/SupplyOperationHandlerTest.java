@@ -22,7 +22,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperation_purchaseIsMoreThenBalance_ok() {
+    public void handle_purchaseIsMoreThenBalance_ok() {
         Storage.storage.put("banana", 80);
         FruitTransaction fruitTransaction = new FruitTransaction("s", "banana", 20);
         supplyOperationHandler.handle(fruitTransaction);

@@ -22,7 +22,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnOperation_fruitQuantity_ok() {
+    public void handle_fruitQuantity_ok() {
         Storage.storage.put("banana", 80);
         FruitTransaction fruitTransaction = new FruitTransaction("r", "banana", 10);
         returnOperationHandler.handle(fruitTransaction);

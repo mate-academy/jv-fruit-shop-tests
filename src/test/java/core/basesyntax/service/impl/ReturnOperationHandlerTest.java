@@ -4,33 +4,28 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.strategy.FruitShopStrategy;
-import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
-import java.util.HashMap;
-import java.util.Map;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
-    private static FruitShopStrategy fruitShopStrategy;
+    private static ReturnOperationHandler returnOperationHandler;
 
     @Before
     public void setUp() {
-        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
-        fruitShopStrategy = new FruitShopStrategyImpl(operationHandlerMap);
+        returnOperationHandler = new ReturnOperationHandler();
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.storage.clear();
     }
 
     @Test
-    public void returnOperation_Ok() {
+    public void returnOperation_fruitQuantity_ok() {
         Storage.storage.put("banana", 80);
         FruitTransaction fruitTransaction = new FruitTransaction("r", "banana", 10);
-        fruitShopStrategy.get(fruitTransaction.getOperation()).handle(fruitTransaction);
+        returnOperationHandler.handle(fruitTransaction);
         int expected = 90;
         int actual = Storage.storage.get("banana");
         assertEquals(expected, actual);

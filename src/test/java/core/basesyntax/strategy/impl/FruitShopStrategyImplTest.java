@@ -28,7 +28,7 @@ public class FruitShopStrategyImplTest {
     }
 
     @Test
-    public void fruitShopStrategy_GetOperationHandlerOfTheOperation_Ok() {
+    public void fruitShopStrategy_getOperationHandlerOfTheOperation_ok() {
         String actual = String.valueOf(fruitShopStrategy.get(Operation.BALANCE).getClass());
         String expected = String.valueOf(new BalanceOperationHandler().getClass());
         assertEquals(actual, expected);

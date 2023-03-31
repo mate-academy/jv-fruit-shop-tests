@@ -19,7 +19,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parse_Ok() {
+    public void parse_listOfFruit_ok() {
         List<String> fruitTransactions = new ArrayList<>();
         fruitTransactions.add("b,banana,80");
         fruitTransactions.add("s,banana,10");
@@ -29,7 +29,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void parse_NullList_NotOk() {
+    public void parse_nullList_notOk() {
         try {
             parser.getFruitTransactions(null);
         } catch (NullPointerException e) {

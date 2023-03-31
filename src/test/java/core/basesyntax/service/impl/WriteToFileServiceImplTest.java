@@ -30,14 +30,14 @@ public class WriteToFileServiceImplTest {
     }
 
     @Test
-    public void writeToFile_dataNotNull_Ok() {
+    public void writeToFile_dataNotNull_ok() {
         String report = "banana,65" + System.lineSeparator() + "apple,45" + System.lineSeparator();
         writeToFileService.writeToFile(report, FILE_REPORT_NAME);
         assertTrue(Files.exists(Path.of(FILE_REPORT_NAME)));
     }
 
     @Test
-    public void readFromFile_NotExistsFile_NotOk() {
+    public void writeToFile_notExistsFile_notOk() {
         try {
             writeToFileService.writeToFile("null", "java");
         } catch (RuntimeException e) {

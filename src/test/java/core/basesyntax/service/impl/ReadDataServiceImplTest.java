@@ -17,14 +17,14 @@ public class ReadDataServiceImplTest {
     }
 
     @Test
-    public void readData_Ok() {
+    public void readData_readFruitShopFile_ok() {
         String actual = readDataService.readFromFile(FILE_DATE_NAME).get(2);
         String expected = "p,banana,20";
         assertEquals(actual, expected);
     }
 
     @Test
-    public void readFromFile_NotExistsFile_NotOk() {
+    public void readData_notExistsFile_notOk() {
         try {
             readDataService.readFromFile("Fruit.csv");
         } catch (RuntimeException e) {

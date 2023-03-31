@@ -30,7 +30,7 @@ public class FruitShopStrategyImplTest {
     @Test
     public void get_operationHandlerOfTheOperation_ok() {
         String actual = String.valueOf(fruitShopStrategy.get(Operation.BALANCE).getClass());
-        String expected = String.valueOf(new BalanceOperationHandler().getClass());
+        String expected = String.valueOf(BalanceOperationHandler.class);
         assertEquals(actual, expected);
     }
 }

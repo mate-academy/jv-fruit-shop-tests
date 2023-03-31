@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
     private static SupplyOperationHandler supplyOperationHandler;
+    private static final String NAME_FRUIT = "banana";
+    private static final String OPERATION = "s";
 
     @Before
     public void setUp() {
@@ -23,11 +25,11 @@ public class SupplyOperationHandlerTest {
 
     @Test
     public void handle_purchaseIsMoreThenBalance_ok() {
-        Storage.storage.put("banana", 80);
-        FruitTransaction fruitTransaction = new FruitTransaction("s", "banana", 20);
+        Storage.storage.put(NAME_FRUIT, 80);
+        FruitTransaction fruitTransaction = new FruitTransaction(OPERATION, NAME_FRUIT, 20);
         supplyOperationHandler.handle(fruitTransaction);
         int expected = 100;
-        int actual = Storage.storage.get("banana");
+        int actual = Storage.storage.get(NAME_FRUIT);
         assertEquals(expected, actual);
     }
 }

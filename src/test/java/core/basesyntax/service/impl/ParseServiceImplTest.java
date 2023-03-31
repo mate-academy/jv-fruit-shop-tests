@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParseService;
 import java.util.ArrayList;
@@ -22,10 +23,18 @@ public class ParseServiceImplTest {
     public void getFruitTransactions_ok() {
         List<String> fruitTransactions = new ArrayList<>();
         fruitTransactions.add("b,banana,80");
-        fruitTransactions.add("s,banana,10");
-        Operation actual = parser.getFruitTransactions(fruitTransactions).get(1).getOperation();
-        Operation expected = Operation.SUPPLY;
-        assertEquals(actual, expected);
+        List<FruitTransaction> fruitTransactionList = parser
+                .getFruitTransactions(fruitTransactions);
+        Operation actualOperation = fruitTransactionList.get(0).getOperation();
+        String actualFruit = fruitTransactionList.get(0).getFruit();
+        int actualQuantity = fruitTransactionList.get(0).getQuantity();
+        FruitTransaction expected = new FruitTransaction("b", "banana", 80);
+        Operation expectedOperation = expected.getOperation();
+        String expectedFruit = expected.getFruit();
+        int expectedQuantity = expected.getQuantity();
+        assertEquals(actualOperation, expectedOperation);
+        assertEquals(actualFruit, expectedFruit);
+        assertEquals(actualQuantity, expectedQuantity);
     }
 
     @Test

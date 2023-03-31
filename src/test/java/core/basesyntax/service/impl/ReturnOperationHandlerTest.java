@@ -10,6 +10,8 @@ import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
     private static ReturnOperationHandler returnOperationHandler;
+    private static final String NAME_FRUIT = "banana";
+    private static final String OPERATION = "r";
 
     @Before
     public void setUp() {
@@ -24,10 +26,10 @@ public class ReturnOperationHandlerTest {
     @Test
     public void handle_fruitQuantity_ok() {
         Storage.storage.put("banana", 80);
-        FruitTransaction fruitTransaction = new FruitTransaction("r", "banana", 10);
+        FruitTransaction fruitTransaction = new FruitTransaction(OPERATION, NAME_FRUIT, 10);
         returnOperationHandler.handle(fruitTransaction);
         int expected = 90;
-        int actual = Storage.storage.get("banana");
+        int actual = Storage.storage.get(NAME_FRUIT);
         assertEquals(expected, actual);
     }
 }

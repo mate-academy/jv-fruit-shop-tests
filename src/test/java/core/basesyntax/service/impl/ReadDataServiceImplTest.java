@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.service.ReadDataService;
 import org.junit.BeforeClass;
@@ -20,5 +21,15 @@ public class ReadDataServiceImplTest {
         String actual = readDataService.readFromFile(FILE_DATE_NAME).get(2);
         String expected = "p,banana,20";
         assertEquals(actual, expected);
+    }
+
+    @Test
+    public void readFromFile_NotExistsFile_NotOk() {
+        try {
+            readDataService.readFromFile("Fruit.csv");
+        } catch (RuntimeException e) {
+            return;
+        }
+        fail();
     }
 }

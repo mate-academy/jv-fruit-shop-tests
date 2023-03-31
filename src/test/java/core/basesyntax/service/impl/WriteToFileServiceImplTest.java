@@ -39,7 +39,7 @@ public class WriteToFileServiceImplTest {
     @Test
     public void writeToFile_notExistsFile_notOk() {
         try {
-            writeToFileService.writeToFile("null", "java");
+            writeToFileService.writeToFile("null", FILE_REPORT_NAME);
         } catch (RuntimeException e) {
             fail("Cant trow RuntimeException");
         }

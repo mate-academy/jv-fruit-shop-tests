@@ -15,6 +15,7 @@ public class ReportServiceImplTest {
     @BeforeClass
     public static void beforeClass() {
         reportService = new ReportServiceImpl();
+        Storage.storage.clear();
     }
 
     @After

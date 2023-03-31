@@ -30,6 +30,6 @@ public class ReadDataServiceImplTest {
         } catch (RuntimeException e) {
             return;
         }
-        fail();
+        fail("Cant trow RuntimeException");
     }
 }

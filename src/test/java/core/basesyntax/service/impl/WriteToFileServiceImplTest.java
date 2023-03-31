@@ -1,8 +1,11 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import core.basesyntax.service.WriteToFileService;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,5 +36,14 @@ public class WriteToFileServiceImplTest {
         String report = "banana,65" + System.lineSeparator() + "apple,45" + System.lineSeparator();
         writeToFileService.writeToFile(report, FILE_REPORT_NAME);
         assertTrue(Files.exists(Path.of(FILE_REPORT_NAME)));
+    }
+
+    @Test
+    public void readFromFile_NotExistsFile_NotOk() {
+        try {
+            writeToFileService.writeToFile("null", "java");
+        } catch (RuntimeException e) {
+            fail("Cant trow RuntimeException");
+        }
     }
 }

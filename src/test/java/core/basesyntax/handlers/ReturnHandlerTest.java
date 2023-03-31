@@ -44,7 +44,7 @@ public class ReturnHandlerTest {
         Integer expected = Storage.storage.get(fruitTransaction.getFruit());
         returnHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
-        assertEquals(actual,expected);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -63,6 +63,6 @@ public class ReturnHandlerTest {
         Integer expected = HUNDRED_QUANTITY + TWENTY_QUANTITY;
         returnHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get(FRUIT_NAME);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SupplyHandlerTest {
@@ -14,16 +14,18 @@ public class SupplyHandlerTest {
     private static final int NEGATIVE_QUANTITY = -10;
     private static final int ZERO_QUANTITY = 0;
     private static final int TWENTY_QUANTITY = 20;
-    private final OperationTypeHandler supplyHandler = new SupplyHandler();
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
+    private static OperationTypeHandler supplyHandler;
+    private static FruitTransaction fruitTransaction;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
+        supplyHandler = new SupplyHandler();
+        fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
     }
 
-    @After
-    public void tearDown() {
+    @AfterClass
+    public static void afterClass() {
         Storage.storage.clear();
     }
 
@@ -43,7 +45,7 @@ public class SupplyHandlerTest {
         Integer expected = Storage.storage.get(fruitTransaction.getFruit());
         supplyHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
-        assertEquals(actual,expected);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -62,6 +64,6 @@ public class SupplyHandlerTest {
         Integer expected = HUNDRED_QUANTITY + TWENTY_QUANTITY;
         supplyHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get(FRUIT_NAME);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

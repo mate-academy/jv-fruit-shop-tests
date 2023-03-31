@@ -42,7 +42,7 @@ public class BalanceHandlerTest {
         Integer expected = fruitTransaction.getQuantity();
         balanceHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
-        assertEquals(actual,expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class BalanceHandlerTest {
         Integer expected = fruitTransaction.getQuantity();
         balanceHandler.handle(fruitTransaction);
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
-        assertEquals(actual,expected);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

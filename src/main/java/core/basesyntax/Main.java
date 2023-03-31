@@ -10,10 +10,10 @@ import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.serviceimpl.ReaderServiceImpl;
-import core.basesyntax.serviceimpl.ReportServiceImpl;
-import core.basesyntax.serviceimpl.TransactionParserServiceImpl;
-import core.basesyntax.serviceimpl.WriterServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.io.File;
@@ -29,7 +29,6 @@ public class Main {
     private static final int FIRST_VALID_LINE = 1;
     private static ReaderService reader = new ReaderServiceImpl();
     private static WriterService writer = new WriterServiceImpl();
-
     private static ReportService reporting = new ReportServiceImpl();
     private static Map<FruitTransaction.Operation, OperationTypeHandler> strategy = new HashMap<>();
     private static OperationStrategy operationStrategy = new OperationStrategyImpl(strategy);

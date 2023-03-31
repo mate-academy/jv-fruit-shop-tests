@@ -1,19 +1,19 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
     private static final String REPORT_TITLE_ROW = "fruit,quantity";
-    private ReportService reportService;
+    private static ReportService reportService;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         reportService = new ReportServiceImpl();
     }
 
@@ -26,7 +26,7 @@ public class ReportServiceImplTest {
     public void report_emptyDataExpectTitleRow_ok() {
         String expected = REPORT_TITLE_ROW;
         String actual = reportService.newReport();
-        assertEquals(actual,expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -37,6 +37,6 @@ public class ReportServiceImplTest {
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
         String actual = reportService.newReport();
-        assertEquals(actual,expected);
+        assertEquals(expected, actual);
     }
 }

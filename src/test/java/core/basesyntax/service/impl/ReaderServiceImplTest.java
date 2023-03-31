@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,23 +6,36 @@ import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
     private static final String TITLE_ROW = "type,fruit,quantity";
-    private static final File EMPTY_FILE = new File(
-            "src/test/java/core/basesyntax/resources/input/empty.csv");
+    private static final File EMPTY_FILE = new File("src/test/resources/input/empty.csv");
     private static final String WRONG_PATH = "src/wrong/path";
     private static final String NULL_PATH = null;
-    private final ReaderService testReader = new ReaderServiceImpl();
-    private final List<String> emptyList = new ArrayList<>();
-    private final List<String> validList = new ArrayList<>();
+    private static ReaderService testReader;
+    private static List<String> emptyList;
+    private static List<String> validList;
+
+    @BeforeClass
+    public static void beforeClass() {
+        testReader = new ReaderServiceImpl();
+        emptyList = new ArrayList<>();
+        validList = new ArrayList<>();
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        validList.clear();
+    }
 
     @Test
     public void read_emptyFile_ok() {
         List<String> actual = testReader.read(EMPTY_FILE);
         List<String> expected = emptyList;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -47,9 +60,8 @@ public class ReaderServiceImplTest {
         validList.add("p,apple,20");
         validList.add("p,banana,5");
         validList.add("s,banana,50");
-        List<String> actual = testReader
-                .read(new File("src/test/java/core/basesyntax/resources/input/valid.csv"));
+        List<String> actual = testReader.read(new File("src/test/resources/input/valid.csv"));
         List<String> expected = validList;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

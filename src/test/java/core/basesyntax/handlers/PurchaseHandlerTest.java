@@ -70,7 +70,7 @@ public class PurchaseHandlerTest {
         purchaseHandler.handle(fruitTransaction);
         Integer expected = HUNDRED_QUANTITY - TEN_QUANTITY;
         Integer actual = Storage.storage.get(FRUIT_NAME);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

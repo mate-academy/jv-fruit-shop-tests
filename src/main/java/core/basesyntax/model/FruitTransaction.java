@@ -22,4 +22,21 @@ public class FruitTransaction {
     public String getFruit() {
         return fruit;
     }
+
+    @Override
+    public boolean equals(Object fruitTransaction) {
+        if (fruitTransaction == this) {
+            return true;
+        }
+        if (fruitTransaction == null) {
+            return false;
+        }
+        if (fruitTransaction.getClass().equals(FruitTransaction.class)) {
+            FruitTransaction current = (FruitTransaction) fruitTransaction;
+            return this.operation == current.getOperation()
+                    && this.fruit.equals(current.fruit)
+                    && this.quantity == current.quantity;
+        }
+        return false;
+    }
 }

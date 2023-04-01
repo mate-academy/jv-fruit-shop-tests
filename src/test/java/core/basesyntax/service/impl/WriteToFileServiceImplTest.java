@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class WriteToFileServiceImplTest {
     private static final String FILE_REPORT_NAME =
-            "src/main/java/resources/FruitShopReportTest.csv";
+            "src/test/resources/FruitShopReportTest.csv";
     private static WriteToFileService writeToFileService;
 
     @BeforeClass

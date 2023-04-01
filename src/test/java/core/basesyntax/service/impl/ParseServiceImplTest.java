@@ -1,10 +1,8 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParseService;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,8 @@ import org.junit.Test;
 
 public class ParseServiceImplTest {
     private static ParseService parser;
+    private static final String NAME_FRUIT = "banana";
+    private static final String OPERATION = "b";
 
     @BeforeClass
     public static void beforeClass() {
@@ -25,25 +25,13 @@ public class ParseServiceImplTest {
         fruitTransactions.add("b,banana,80");
         List<FruitTransaction> fruitTransactionList = parser
                 .getFruitTransactions(fruitTransactions);
-        Operation actualOperation = fruitTransactionList.get(0).getOperation();
-        String actualFruit = fruitTransactionList.get(0).getFruit();
-        int actualQuantity = fruitTransactionList.get(0).getQuantity();
-        FruitTransaction expected = new FruitTransaction("b", "banana", 80);
-        Operation expectedOperation = expected.getOperation();
-        String expectedFruit = expected.getFruit();
-        int expectedQuantity = expected.getQuantity();
-        assertEquals(actualOperation, expectedOperation);
-        assertEquals(actualFruit, expectedFruit);
-        assertEquals(actualQuantity, expectedQuantity);
+        FruitTransaction actual = fruitTransactionList.get(0);
+        FruitTransaction expected = new FruitTransaction(OPERATION, NAME_FRUIT, 80);
+        assertEquals(actual, expected);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void getFruitTransactions_nullList_notOk() {
-        try {
-            parser.getFruitTransactions(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("There is no data");
+        parser.getFruitTransactions(null);
     }
 }

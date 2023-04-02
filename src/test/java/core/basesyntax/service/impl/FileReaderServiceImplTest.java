@@ -47,7 +47,7 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_inputFileExist_Ok() {
+    public void readFromFile_inputFileExist_ok() {
         List<String> expected;
         try {
             expected = Files.readAllLines(file.toPath());

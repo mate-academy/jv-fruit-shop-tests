@@ -48,10 +48,10 @@ public class FruitShopServiceImplTest {
         fruitTransactionList = new ArrayList<>();
 
         fruitTransactionList.add(new FruitTransaction(Operation.RETURN, "apple", 100));
-        fruitTransactionList.add(new FruitTransaction(Operation.PURCHASE, "apple"
-                , PURCHASE_OPERATION_VALUE));
-        fruitTransactionList.add(new FruitTransaction(Operation.SUPPLY, "apple"
-                , SUPPLY_OPERATION_VALUE));
+        fruitTransactionList.add(new FruitTransaction(Operation.PURCHASE, "apple",
+                PURCHASE_OPERATION_VALUE));
+        fruitTransactionList.add(new FruitTransaction(Operation.SUPPLY, "apple",
+                SUPPLY_OPERATION_VALUE));
 
         operationStrategy = new OperationStrategyImpl(operationHandlersMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);

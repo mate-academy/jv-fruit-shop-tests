@@ -7,8 +7,6 @@ import core.basesyntax.service.impl.WriteToFileServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.IOException;
-
 public class WriteToFileServiceImplTest {
     private static final String TEST_FILE_PATH = "src/test/resources/WriteToFileTestFile.csv";
     private static WriteToFileService writeToFileService;

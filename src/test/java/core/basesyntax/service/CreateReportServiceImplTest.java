@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.impl.CreateReportServiceImpl;

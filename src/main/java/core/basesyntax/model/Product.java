@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.services.exception.ProductException;
-
 import java.util.Objects;
 
 public class Product {
@@ -13,8 +12,9 @@ public class Product {
         if (name == null) {
             throw new ProductException("Name parameter can not be null");
         } else if (count <= 0) {
-            throw  new ProductException("Quantity parameter can not be less then 0");
+            throw new ProductException("Quantity parameter can not be less then 0");
         }
+
         this.count = count;
         this.name = name;
     }
@@ -29,7 +29,7 @@ public class Product {
 
     public void setCount(int count) {
         if (count < 0) {
-            throw  new ProductException("Quantity parameter can not be less then 0");
+            throw new ProductException("Quantity parameter can not be less then 0");
         }
         this.count = count;
     }
@@ -43,8 +43,12 @@ public class Product {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Product product = (Product) o;
         return count == product.count && Objects.equals(name, product.name);
     }

@@ -3,10 +3,9 @@ package core.basesyntax;
 import core.basesyntax.services.transaction.ProductTransactionMapper;
 import core.basesyntax.services.transaction.ProductTransactionMapperImpl;
 import core.basesyntax.services.transaction.model.ProductTransaction;
+import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.List;
 
 public class ProductTransactionMapperTests {
     private static ProductTransactionMapper mapper;

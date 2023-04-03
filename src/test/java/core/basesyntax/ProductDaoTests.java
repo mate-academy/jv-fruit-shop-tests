@@ -4,13 +4,11 @@ import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ProductDaoTests {
     private static ProductDao productDao;

@@ -1,24 +1,37 @@
 package core.basesyntax;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.services.*;
-import core.basesyntax.services.operation.*;
+import core.basesyntax.services.FileReaderService;
+import core.basesyntax.services.FileReaderServiceImpl;
+import core.basesyntax.services.FileWriterService;
+import core.basesyntax.services.FileWriterServiceImpl;
+import core.basesyntax.services.FruitService;
+import core.basesyntax.services.FruitServiceImpl;
+import core.basesyntax.services.OperationStrategy;
+import core.basesyntax.services.OperationStrategyImpl;
+import core.basesyntax.services.ReportService;
+import core.basesyntax.services.ReportServiceImpl;
+import core.basesyntax.services.operation.BalanceOperation;
+import core.basesyntax.services.operation.OperationHandler;
+import core.basesyntax.services.operation.PurchaseOperation;
+import core.basesyntax.services.operation.ReturnOperation;
+import core.basesyntax.services.operation.SupplyOperation;
 import core.basesyntax.services.transaction.ProductTransactionMapper;
 import core.basesyntax.services.transaction.ProductTransactionMapperImpl;
 import core.basesyntax.services.transaction.TransactionService;
 import core.basesyntax.services.transaction.TransactionServiceImpl;
 import core.basesyntax.services.transaction.model.ProductTransaction;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.AfterClass;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
-
 public class FruitServiceImplTest {
+
     @AfterClass
     public static void clearStorage() {
         Storage.products.clear();
@@ -48,10 +61,11 @@ public class FruitServiceImplTest {
         String toFile = "src/test/java/core/basesyntax/report.csv";
         fruitService.run(fromFile, toFile);
 
-        String expectedReport = "name,quantity\n" +
-                "banana,20\n" +
-                "apple,100";
-        String actualReport = String.join("\n", reader.readFromFile("src/test/java/core/basesyntax/report.csv"));
+        String expectedReport = "name,quantity\n"
+                + "banana,20\n"
+                + "apple,100";
+
+        String actualReport = String.join("\n", reader.readFromFile(toFile));
         assertEquals(expectedReport, actualReport);
     }
 }

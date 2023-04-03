@@ -2,8 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
-import core.basesyntax.services.exception.ProductException;
-
 import java.util.List;
 import java.util.Objects;
 

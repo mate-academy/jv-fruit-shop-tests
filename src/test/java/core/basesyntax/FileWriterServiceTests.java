@@ -4,9 +4,8 @@ import core.basesyntax.services.FileReaderService;
 import core.basesyntax.services.FileReaderServiceImpl;
 import core.basesyntax.services.FileWriterService;
 import core.basesyntax.services.FileWriterServiceImpl;
-import java.util.List;
-
 import core.basesyntax.services.exception.FileWriterException;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

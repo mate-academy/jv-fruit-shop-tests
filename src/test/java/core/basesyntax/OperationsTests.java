@@ -1,18 +1,25 @@
 package core.basesyntax;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.services.operation.*;
+import core.basesyntax.services.operation.BalanceOperation;
+import core.basesyntax.services.operation.OperationHandler;
+import core.basesyntax.services.operation.PurchaseOperation;
+import core.basesyntax.services.operation.ReturnOperation;
+import core.basesyntax.services.operation.SupplyOperation;
 import core.basesyntax.services.transaction.model.ProductTransaction;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OperationsTests {
     private static ProductDao productDao;
-
 
     @BeforeClass
     public static void setProductDao() {
@@ -21,24 +28,26 @@ public class OperationsTests {
 
     @Test
     public void balanceOperation_Ok() {
-        ProductTransaction transaction = new ProductTransaction(ProductTransaction.Operation.BALANCE,
+        ProductTransaction transaction = new ProductTransaction(
+                ProductTransaction.Operation.BALANCE,
                 "banana", 100);
         OperationHandler operationHandler = new BalanceOperation(productDao);
         operationHandler.handle(transaction);
         int actual = productDao.get("banana").getCount();
         int expected = 100;
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void purchaseOperation_Ok() {
-        ProductTransaction transaction = new ProductTransaction(ProductTransaction.Operation.PURCHASE,
+        ProductTransaction transaction = new ProductTransaction(
+                ProductTransaction.Operation.PURCHASE,
                 "banana", 50);
         OperationHandler o = new PurchaseOperation(productDao);
         o.handle(transaction);
         int actual = productDao.get("banana").getCount();
         int expected = 50;
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -49,7 +58,7 @@ public class OperationsTests {
         operationHandler.handle(transaction);
         int actual = productDao.get("banana").getCount();
         int expected = 60;
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -60,11 +69,11 @@ public class OperationsTests {
         operationHandler.handle(transaction);
         int actual = productDao.get("banana").getCount();
         int expected = 150;
-        Assert.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @AfterClass
-    public static void clearDao(){
+    public static void clearDao() {
         Storage.products.clear();
     }
 

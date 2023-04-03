@@ -1,9 +1,10 @@
 package core.basesyntax;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import core.basesyntax.model.Product;
 import core.basesyntax.services.exception.ProductException;
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class ProductTests {

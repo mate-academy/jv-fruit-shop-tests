@@ -79,7 +79,7 @@
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
+                                            <value>COVERED-RATIO</value>
                                             <minimum>0.8</minimum>
                                         </limit>
                                     </limits>

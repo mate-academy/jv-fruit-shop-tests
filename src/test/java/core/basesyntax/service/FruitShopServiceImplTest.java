@@ -23,6 +23,8 @@ import org.junit.Test;
 public class FruitShopServiceImplTest {
     private static final int APPLE_QUANTITY = 200;
     private static final int RETURN_OPERATION_VALUE = 100;
+    private static final int PURCHASE_OPERATION_VALUE = 150;
+    private static final int SUPPLY_OPERATION_VALUE = 200;
     private static FruitShopService fruitShopService;
     private static Map<String, OperationHandler> operationHandlersMap;
     private static OperationStrategy operationStrategy;
@@ -45,7 +47,11 @@ public class FruitShopServiceImplTest {
 
         fruitTransactionList = new ArrayList<>();
 
-        fruitTransactionList.add(new FruitTransaction(Operation.fromString("r"), "apple", 100));
+        fruitTransactionList.add(new FruitTransaction(Operation.RETURN, "apple", 100));
+        fruitTransactionList.add(new FruitTransaction(Operation.PURCHASE, "apple"
+                , PURCHASE_OPERATION_VALUE));
+        fruitTransactionList.add(new FruitTransaction(Operation.SUPPLY, "apple"
+                , SUPPLY_OPERATION_VALUE));
 
         operationStrategy = new OperationStrategyImpl(operationHandlersMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
@@ -53,7 +59,8 @@ public class FruitShopServiceImplTest {
 
     @Test
     public void processOfOperations_checkIfCorrect_isOk() {
-        Integer expected = APPLE_QUANTITY + RETURN_OPERATION_VALUE;
+        Integer expected = APPLE_QUANTITY + RETURN_OPERATION_VALUE - PURCHASE_OPERATION_VALUE
+                + SUPPLY_OPERATION_VALUE;
         fruitShopService.processOfOperations(fruitTransactionList);
 
         assertEquals(expected, FruitStorage.fruitsStorage.get("apple"));

@@ -32,14 +32,4 @@ public class CreateReportServiceImplTest {
 
         assertEquals(expected, createReportService.createReport());
     }
-
-    @Test
-    public void createReport_wrongQuantities_isNotOk() {
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,1" + System.lineSeparator()
-                + "orange,2" + System.lineSeparator()
-                + "apple,3" + System.lineSeparator();
-
-        assertFalse(expected.equals(createReportService.createReport()));
-    }
 }

@@ -1,13 +1,13 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 
-import core.basesyntax.model.Product;
 import core.basesyntax.services.exception.ProductException;
 import org.junit.Test;
 
-public class ProductTests {
+public class ProductTest {
 
     @Test(expected = ProductException.class)
     public void productWithNullName_NotOk() {
@@ -55,6 +55,12 @@ public class ProductTests {
         Product product3 = new Product("apple", 5);
         assertEquals(product1, product2);
         assertNotEquals(product3, product1);
+    }
+
+    @Test
+    public void nullEquals_NotOk() {
+        Product product1 = new Product("banana", 100);
+        assertFalse(product1.equals(null));
     }
 
     @Test

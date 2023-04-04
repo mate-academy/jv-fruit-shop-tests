@@ -1,9 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.services;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
-import core.basesyntax.services.OperationStrategy;
-import core.basesyntax.services.OperationStrategyImpl;
 import core.basesyntax.services.operation.BalanceOperation;
 import core.basesyntax.services.operation.OperationHandler;
 import core.basesyntax.services.operation.PurchaseOperation;
@@ -16,7 +14,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class OperationStrategyTests {
+public class OperationStrategyImplTest {
     private static OperationStrategy strategy;
     private static ProductDao dao;
 
@@ -47,3 +45,4 @@ public class OperationStrategyTests {
                 strategy.get(ProductTransaction.Operation.RETURN).getClass());
     }
 }
+

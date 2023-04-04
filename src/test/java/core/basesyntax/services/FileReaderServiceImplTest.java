@@ -1,17 +1,15 @@
-package core.basesyntax;
+package core.basesyntax.services;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
-import core.basesyntax.services.FileReaderService;
-import core.basesyntax.services.FileReaderServiceImpl;
 import core.basesyntax.services.exception.FileReaderException;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class FileReaderServiceTests {
+public class FileReaderServiceImplTest {
     private static FileReaderService fileReader;
     private static final String File = "src/test/java/core/basesyntax/data.csv";
 

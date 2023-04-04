@@ -1,0 +1,30 @@
+package core.basesyntax.services.operation;
+
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
+import core.basesyntax.services.transaction.model.ProductTransaction;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+public class PurchaseOperationTest {
+    private static ProductDao productDao;
+
+    @BeforeClass
+    public static void setProductDao() {
+        productDao = new ProductDaoImpl();
+    }
+
+    @Test
+    public void purchaseOperation_Ok() {
+        ProductTransaction transaction = new ProductTransaction(
+                ProductTransaction.Operation.PURCHASE,
+                "banana", 50);
+        OperationHandler o = new PurchaseOperation(productDao);
+        o.handle(transaction);
+        int actual = productDao.get("banana").getCount();
+        int expected = 50;
+        assertEquals(expected, actual);
+    }
+}

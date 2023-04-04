@@ -1,7 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.dao;
 
-import core.basesyntax.dao.ProductDao;
-import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
 import java.util.List;
@@ -10,7 +8,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ProductDaoTests {
+public class ProductDaoImplTest {
     private static ProductDao productDao;
 
     @BeforeClass

@@ -2,15 +2,15 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ReportServiceImplTest {
     private ReportServiceImpl reportService;
     private String expectedText;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         reportService = new ReportServiceImpl();
         expectedText = "banana,154";
@@ -21,8 +21,6 @@ public class ReportServiceImplTest {
     public void createReport_rightStorage_Ok() {
         String text = reportService.createReport();
         String[] actualResult = text.split(System.lineSeparator());
-        Assert.assertEquals("Test failed! You should returned next text "
-                + expectedText + " but you returned "
-                + actualResult[0], actualResult[0], expectedText);
+        Assertions.assertEquals(actualResult[0], expectedText);
     }
 }

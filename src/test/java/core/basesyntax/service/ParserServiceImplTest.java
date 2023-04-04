@@ -5,9 +5,9 @@ import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.WrongFormatException;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ParserServiceImplTest {
     private ParserServiceImpl parserService;
@@ -15,7 +15,7 @@ public class ParserServiceImplTest {
     private List<String> records;
     private List<String> recordsWrong;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parserService = new ParserServiceImpl();
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,"banana",20);
@@ -37,20 +37,19 @@ public class ParserServiceImplTest {
     @Test
     public void parse_rightFile_Ok() {
         List<FruitTransaction> actualResult = parserService.parse(records);
-        Assert.assertEquals("Test failed! You should returned next fruit "
-                        + fruitTransaction.getFruit() + " but you returned "
-                        + actualResult.get(0).getFruit(),
-                fruitTransaction, actualResult.get(0));
+        Assertions.assertEquals(fruitTransaction, actualResult.get(0));
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void parse_wrongFormatInFile_notOk() {
-        parserService.parse(recordsWrong);
+        Assertions.assertThrows(NumberFormatException.class, () ->
+                parserService.parse(recordsWrong));
     }
 
-    @Test(expected = WrongFormatException.class)
+    @Test
     public void parse_emptyFile_notOk() {
         recordsWrong = new ArrayList<>();
-        parserService.parse(recordsWrong);
+        Assertions.assertThrows(WrongFormatException.class, () ->
+                parserService.parse(recordsWrong));
     }
 }

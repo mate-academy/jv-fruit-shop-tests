@@ -3,14 +3,14 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
     private BalanceOperationHandler balanceOperationHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Storage.fruits.clear();
         balanceOperationHandler = new BalanceOperationHandler();
@@ -22,6 +22,6 @@ public class BalanceOperationHandlerTest {
                 "banana", 15);
         balanceOperationHandler.handle(item);
         int quantity = Storage.fruits.get("banana");
-        Assert.assertEquals(quantity, 15);
+        Assertions.assertEquals(quantity, 15);
     }
 }

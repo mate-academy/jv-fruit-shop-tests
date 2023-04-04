@@ -9,14 +9,14 @@ import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class OperationHandlerStrategyTest {
     private OperationHandlerStrategy operationHandlerStrategy;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Storage.fruits.clear();
         Map<FruitTransaction.Operation, OperationHandler> operationStrategies = new HashMap<>();
@@ -35,6 +35,6 @@ public class OperationHandlerStrategyTest {
         OperationHandler handler = operationHandlerStrategy.get(item);
         handler.handle(item);
         int quantity = Storage.fruits.get("banana");
-        Assert.assertEquals(quantity, 43);
+        Assertions.assertEquals(quantity, 43);
     }
 }

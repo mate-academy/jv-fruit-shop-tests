@@ -14,7 +14,7 @@ public class ProductTransactionMapperImplTest {
     }
 
     @Test
-    public void getProductTransactionsFromLines_Ok() {
+    public void getProductTransactions_Ok() {
         List<String> lines = List.of("b,banana,100",
                 "p,apple,500",
                 "r,orange,89");

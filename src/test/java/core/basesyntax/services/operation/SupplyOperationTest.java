@@ -19,7 +19,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void supplyOperation_Ok() {
+    public void handle_supplyOperation_ok() {
         ProductTransaction transaction = new ProductTransaction(ProductTransaction.Operation.SUPPLY,
                 "banana", 90);
         OperationHandler operationHandler = new SupplyOperation(productDao);

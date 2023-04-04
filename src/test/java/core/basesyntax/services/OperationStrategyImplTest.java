@@ -31,16 +31,25 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getAllOperation_Ok() {
+    public void get_balanceOperation_ok() {
         Assert.assertEquals(BalanceOperation.class,
                 strategy.get(ProductTransaction.Operation.BALANCE).getClass());
+    }
 
+    @Test
+    public void get_purchaseOperation_ok() {
         Assert.assertEquals(PurchaseOperation.class,
                 strategy.get(ProductTransaction.Operation.PURCHASE).getClass());
+    }
 
+    @Test
+    public void get_supplyOperation_ok() {
         Assert.assertEquals(SupplyOperation.class,
                 strategy.get(ProductTransaction.Operation.SUPPLY).getClass());
+    }
 
+    @Test
+    public void get_returnOperation_ok() {
         Assert.assertEquals(ReturnOperation.class,
                 strategy.get(ProductTransaction.Operation.RETURN).getClass());
     }

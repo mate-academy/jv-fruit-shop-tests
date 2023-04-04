@@ -17,7 +17,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    public void returnOperation() {
+    public void handle_returnOperation_ok() {
         ProductTransaction transaction = new ProductTransaction(ProductTransaction.Operation.RETURN,
                 "banana", 10);
         OperationHandler operationHandler = new ReturnOperation(productDao);

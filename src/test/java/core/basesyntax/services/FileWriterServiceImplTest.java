@@ -1,12 +1,13 @@
 package core.basesyntax.services;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceImplTest {
-    private static final String file = "src/test/java/core/basesyntax/writeTest.csv";
+    private static final String file = "writeTest.csv";
     private static FileWriterService writerService;
     private static FileReaderService readerService;
 
@@ -17,28 +18,17 @@ public class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeTextToFile_Ok() {
+    public void write_report_Ok() {
         String report = "banana,100" + System.lineSeparator()
                 + "apple,50";
         List<String> expected = List.of("banana,100", "apple,50");
-        writerService.writeToFile(file, report);
-        List<String> actual = readerService.readFromFile(file);
-        Assert.assertEquals(expected, actual);
+        writerService.write(file, report);
+        List<String> actual = readerService.read(file);
+        assertEquals(expected, actual);
     }
 
     @Test(expected = NullPointerException.class)
-    public void writeNullToFile_NotOk() {
-        writerService.writeToFile(file, null);
-    }
-
-    @Test
-    public void writeReportToFileException_Ok() {
-        String report = "banana,100" + System.lineSeparator()
-                + "apple,50";
-        try {
-            writerService.writeToFile("src/test/java/core/basesyntax/111.ddd", report);
-        } catch (RuntimeException ex) {
-            Assert.assertEquals("Can't write data to file 111.csv", ex.getMessage());
-        }
+    public void write_nullReport_notOk() {
+        writerService.write(file, null);
     }
 }

@@ -17,7 +17,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void purchaseOperation_Ok() {
+    public void handle_purchaseOperation_ok() {
         ProductTransaction transaction = new ProductTransaction(
                 ProductTransaction.Operation.PURCHASE,
                 "banana", 50);

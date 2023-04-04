@@ -18,10 +18,10 @@ public class ProductTransactionMapperImpl implements ProductTransactionMapper {
     }
 
     private ProductTransaction getProductTransaction(String line) {
-        String[] splittedLine = line.split(",");
+        String[] splitLine = line.split(",");
         return new ProductTransaction(
-                ProductTransaction.Operation.getOperation(splittedLine[OPERATION_INDEX]),
-                splittedLine[PRODUCT_INDEX],
-                Integer.parseInt(splittedLine[QUANTITY_INDEX]));
+                ProductTransaction.Operation.getOperation(splitLine[OPERATION_INDEX]),
+                splitLine[PRODUCT_INDEX],
+                Integer.parseInt(splitLine[QUANTITY_INDEX]));
     }
 }

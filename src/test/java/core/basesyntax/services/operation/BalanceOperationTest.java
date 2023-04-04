@@ -17,7 +17,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_Ok() {
+    public void handle_balancedOperation_ok() {
         ProductTransaction transaction = new ProductTransaction(
                 ProductTransaction.Operation.BALANCE,
                 "banana", 100);

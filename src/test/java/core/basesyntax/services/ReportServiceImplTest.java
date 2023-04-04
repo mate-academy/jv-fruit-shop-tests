@@ -1,9 +1,12 @@
 package core.basesyntax.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
@@ -15,31 +18,24 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void getReport_Ok() {
+    public void createReport_Ok() {
         Storage.products.add(new Product("banana", 100));
         Storage.products.add(new Product("apple", 50));
-        String expected = "name,quantity" + System.lineSeparator()
+        String expected0 = "name,quantity" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator()
                 + "apple,50";
         String actual = reportService.createReport(Storage.products);
-        Assert.assertEquals(expected, actual);
-    }
+        assertEquals(expected0, actual);
 
-    @Test
-    public void getReport_NotOk() {
-        Storage.products.add(new Product("banana", 500));
-        Storage.products.add(new Product("apple", 100));
-        String expectReport = "name,quantity" + System.lineSeparator()
+        String expect1 = "name,quantity" + System.lineSeparator()
                 + "banana,250" + System.lineSeparator()
                 + "apple,475";
-        String actualReport = reportService.createReport(Storage.products);
-        boolean actual = expectReport.equals(actualReport);
-        Assert.assertFalse(actual);
+        assertNotEquals(expect1, actual);
     }
 
     @Test
-    public void getReport_noFruit_Ok() {
+    public void createReport_null_Ok() {
         String actual = reportService.createReport(Storage.products);
-        Assert.assertNull(actual);
+        assertNull(actual);
     }
 }

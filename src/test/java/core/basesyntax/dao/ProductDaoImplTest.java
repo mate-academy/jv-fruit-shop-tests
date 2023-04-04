@@ -27,14 +27,14 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void addProduct_Ok() {
+    public void add_product_ok() {
         Product product = new Product("banana", 100);
         productDao.add(product);
         Assert.assertTrue(Storage.products.contains(product));
     }
 
     @Test
-    public void getProduct_Ok() {
+    public void get_product_ok() {
         Product product = new Product("banana", 100);
         productDao.add(product);
         Product actual = productDao.get(product.getName());
@@ -42,7 +42,7 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void getNonExistProduct_NotOk() {
+    public void get_nonExistProduct_NotOk() {
         String productName = "banana";
         try {
             Product expected = productDao.get(productName);
@@ -53,7 +53,7 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void getAllProducts_Ok() {
+    public void get_allProducts_Ok() {
         Product productBanana = new Product("banana", 100);
         Product productApple = new Product("apple", 50);
         productDao.add(productBanana);
@@ -64,7 +64,7 @@ public class ProductDaoImplTest {
     }
 
     @Test
-    public void updateExistProduct_Ok() {
+    public void update_existProduct_Ok() {
         Product product = new Product("banana", 100);
         Product updatedProduct = new Product("banana", 50);
         productDao.add(product);
@@ -74,7 +74,7 @@ public class ProductDaoImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void updateNonExistProduct_NotOk() {
+    public void update_nonExistProduct_NotOk() {
         Product product = new Product("banana", 100);
         productDao.update(product);
     }

@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void writeToFile(String toFile, String report) {
+    public void write(String toFile, String report) {
         try (FileWriter writer = new FileWriter(toFile)) {
             writer.write(report);
         } catch (IOException e) {

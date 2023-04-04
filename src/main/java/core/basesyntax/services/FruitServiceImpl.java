@@ -27,10 +27,10 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void run(String fromFile, String toFile) {
-        List<String> allTransactionsStr = reader.readFromFile(fromFile);
+        List<String> allTransactionsStr = reader.read(fromFile);
         allTransactionsStr.remove(0); //deleted line with annotation text
         List<ProductTransaction> prTransactions = mapper.getProductTransactions(allTransactionsStr);
         transactionService.process(prTransactions);
-        writerService.writeToFile(toFile, reportService.createReport(productDao.getAll()));
+        writerService.write(toFile, reportService.createReport(productDao.getAll()));
     }
 }

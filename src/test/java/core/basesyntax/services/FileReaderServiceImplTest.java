@@ -19,36 +19,31 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromEmptyFile_Ok() {
+    public void read_emptyFile_ok() {
         String emptyFile = "src/test/java/core/basesyntax/empty.csv";
-        List<String> lines = fileReader.readFromFile(emptyFile);
+        List<String> lines = fileReader.read(emptyFile);
         int expectedSize = 0;
         int actualSize = lines.size();
         assertEquals(expectedSize, actualSize);
     }
 
     @Test
-    public void readFromFile_Ok() {
-        List<String> actualLines = fileReader.readFromFile(File);
-        List<String> expectedLines = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
-        assertEquals(expectedLines, actualLines);
+    public void read_file_ok() {
+        List<String> actual = fileReader.read(File);
+        List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "b,apple,100");
+        assertEquals(expected, actual);
+
+        List<String> unExpected = List.of("type,fruit,quantity", "p,banana,70", "b,apple,100");
+        assertNotEquals(unExpected, actual);
     }
 
     @Test
-    public void readFromFile_NotOk() {
-        List<String> actualLines = fileReader.readFromFile(File);
-        List<String> expectedLines = List.of("type,fruit,quantity", "p,banana,70", "b,apple,100");
-        assertNotEquals(expectedLines, actualLines);
-    }
-
-    @Test
-    public void readFromNonExistFile() {
+    public void read_nonExistFile_notOk() {
         try {
-            List<String> actualLines = fileReader.readFromFile("111.csv");
+            List<String> actualLines = fileReader.read("111.csv");
             fail("Expected fileReaderException");
         } catch (FileReaderException ex) {
             assertEquals("Can't read file 111.csv", ex.getMessage());
         }
     }
-
 }

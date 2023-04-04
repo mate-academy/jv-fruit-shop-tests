@@ -28,7 +28,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void runMethod_Ok() {
+    public void run_ok() {
         ProductDao dao = new ProductDaoImpl();
 
         Map<ProductTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
@@ -55,7 +55,7 @@ public class FruitServiceImplTest {
                 + "banana,20\n"
                 + "apple,100";
 
-        String actualReport = String.join("\n", reader.readFromFile(toFile));
+        String actualReport = String.join("\n", reader.read(toFile));
         assertEquals(expectedReport, actualReport);
     }
 }

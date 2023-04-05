@@ -29,7 +29,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyOperation_validData_ok() {
+    public void handle_validData_ok() {
         balanceOperationHandler.handle(fruitTransactionB);
         Integer expectedQuantity = fruitTransactionB.getQuantity()
                 + fruitTransactionS.getQuantity();
@@ -40,13 +40,13 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void supplyOperation_zeroQuantity_notOk() {
+    public void handle_zeroQuantity_notOk() {
         fruitTransactionInvalidDataS.setQuantity(ZERO_QUANTITY);
         supplyOperationHandler.handle(fruitTransactionInvalidDataS);
     }
 
     @Test(expected = NullPointerException.class)
-    public void supplyOperation_null_notOk() {
+    public void handle_null_notOk() {
         supplyOperationHandler.handle(null);
     }
 

@@ -6,7 +6,7 @@ import core.basesyntax.service.CreateReportService;
 import java.util.Map;
 
 public class CreateReportImpl implements CreateReportService {
-    private static final String HEADER_FRUIT = "fruitTransaction,";
+    private static final String HEADER_FRUIT = "fruit,";
     private static final String HEADER_QUANTITY = "quantity";
 
     @Override

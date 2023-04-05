@@ -29,7 +29,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void returnOperation_validData_ok() {
+    public void handle_validData_ok() {
         balanceOperationHandler.handle(fruitTransactionB);
         Integer expectedQuantity = fruitTransactionB.getQuantity()
                 + fruitTransactionR.getQuantity();
@@ -41,18 +41,18 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void returnOperation_null_notOk() {
+    public void handle_null_notOk() {
         returnOperationHandler.handle(null);
     }
 
     @Test(expected = NullPointerException.class)
-    public void returnOperation_zeroQuantity_notOk() {
+    public void handle_zeroQuantity_notOk() {
         fruitTransactionInvalidDataR.setQuantity(ZERO_QUANTITY);
         returnOperationHandler.handle(fruitTransactionInvalidDataR);
     }
 
     @Test(expected = NullPointerException.class)
-    public void returnOperation_negativeQuantity_notOk() {
+    public void handle_negativeQuantity_notOk() {
         returnOperationHandler.handle(fruitTransactionInvalidDataR);
     }
 

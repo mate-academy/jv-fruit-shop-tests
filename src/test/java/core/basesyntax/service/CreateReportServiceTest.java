@@ -7,10 +7,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CreateReportServiceTest {
-    private static final String HEADER_FRUIT = "fruitTransaction,";
-    private static final String HEADER_QUANTITY = "quantity";
-    private static final String BANANA_REPORT = "banana 152";
-    private static final String APPLE_REPORT = "apple 90";
     private static CreateReportService createReport;
 
     @BeforeClass
@@ -20,7 +16,9 @@ public class CreateReportServiceTest {
 
     @Test
     public void createReport_validData_ok() {
-        String expectedReportString = expectedReport();
+        String expectedReportString = "fruit,quantity" + System.lineSeparator()
+                + "banana 152" + System.lineSeparator()
+                + "apple 90";
         fillStorage();
         String actualReportString = createReport.generateReport();
 
@@ -29,7 +27,7 @@ public class CreateReportServiceTest {
 
     @Test
     public void createReport_emptyStorage_ok() {
-        String expectedReportString = "fruitTransaction,quantity";
+        String expectedReportString = "fruit,quantity";
         String actualReportString = createReport.generateReport();
 
         Assert.assertEquals(expectedReportString, actualReportString);
@@ -38,13 +36,5 @@ public class CreateReportServiceTest {
     private void fillStorage() {
         Storage.fruits.put("banana", 152);
         Storage.fruits.put("apple", 90);
-    }
-
-    private String expectedReport() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(HEADER_FRUIT).append(HEADER_QUANTITY).append(System.lineSeparator())
-                .append(BANANA_REPORT).append(System.lineSeparator())
-                .append(APPLE_REPORT);
-        return stringBuilder.toString();
     }
 }

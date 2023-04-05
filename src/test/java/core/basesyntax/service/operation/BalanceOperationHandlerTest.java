@@ -24,7 +24,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceOperation_validData_ok() {
+    public void handle_validData_ok() {
         Integer expectedQuantity = fruitTransactionB.getQuantity();
         balanceOperationHandler.handle(fruitTransactionB);
         Assert.assertEquals(expectedQuantity,
@@ -32,7 +32,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void balanceOperation_zeroBalance_ok() {
+    public void handle_zeroBalance_ok() {
         fruitTransactionB.setQuantity(ZERO_BALANCE);
         Integer expectedQuantity = fruitTransactionB.getQuantity();
         balanceOperationHandler.handle(fruitTransactionB);
@@ -41,12 +41,12 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void balanceOperation_negativeBalance_notOk() {
+    public void handle_negativeBalance_notOk() {
         balanceOperationHandler.handle(fruitTransactionInvalidDataB);
     }
 
     @Test(expected = NullPointerException.class)
-    public void balanceOperation_null_notOk() {
+    public void handle_null_notOk() {
         balanceOperationHandler.handle(null);
     }
 

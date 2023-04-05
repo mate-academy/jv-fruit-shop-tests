@@ -46,7 +46,7 @@ public class ParseServiceTest {
 
     private List<String> dataToParse() {
         List<String> dataFromFileExpected = List.of(
-                "type,fruitTransaction,quantity",
+                "type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",

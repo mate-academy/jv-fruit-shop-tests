@@ -7,8 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileReaderServiceTest {
-    private static final String VALID_PATH_TO_FILE = "src/test/resources/inputFile.csv";
-    private static final String NOT_EXISTING_FILE_PATHNAME = "srt/inputFile.csv";
+    private static final String VALID_PATH_TO_FILE = "src/main/resources/inputFile.csv";
+    private static final String NOT_EXISTING_FILE_PATHNAME = "src/test/resources/not_existed.csv";
     private static FileReaderCsvImpl fileReaderCsv;
 
     @BeforeClass
@@ -22,10 +22,7 @@ public class FileReaderServiceTest {
         List<String> dataFromFileActual = fileReaderCsv.readFile(VALID_PATH_TO_FILE);
 
         Assert.assertEquals(dataFromFileExpected.size(), dataFromFileActual.size());
-
-        for (int i = 0; i < dataFromFileExpected.size(); i++) {
-            Assert.assertEquals(dataFromFileExpected.get(i), dataFromFileActual.get(i));
-        }
+        Assert.assertEquals(dataFromFileExpected, dataFromFileActual);
     }
 
     @Test(expected = RuntimeException.class)
@@ -40,7 +37,7 @@ public class FileReaderServiceTest {
 
     private List<String> fillExpectedList() {
         List<String> dataFromFileExpected = List.of(
-                "type,fruitTransaction,quantity",
+                "type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",

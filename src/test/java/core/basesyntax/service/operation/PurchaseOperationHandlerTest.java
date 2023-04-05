@@ -29,7 +29,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperation_validData_ok() {
+    public void handle_validData_ok() {
         balanceOperationHandler.handle(fruitTransactionB);
         Integer expectedQuantity = fruitTransactionB.getQuantity()
                 - fruitTransactionP.getQuantity();
@@ -40,7 +40,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void purchaseOperation_allFruits_ok() {
+    public void handle_allFruits_ok() {
         balanceOperationHandler.handle(fruitTransactionB);
         fruitTransactionP.setQuantity(fruitTransactionB.getQuantity());
         Integer expectedQuantity = fruitTransactionB.getQuantity()
@@ -52,18 +52,18 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_zeroQuantity_notOk() {
+    public void handle_zeroQuantity_notOk() {
         fruitTransactionInvalidDataP.setQuantity(ZERO_QUANTITY);
         purchaseOperationHandler.handle(fruitTransactionInvalidDataP);
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_negativeQuantity_notOk() {
+    public void handle_negativeQuantity_notOk() {
         purchaseOperationHandler.handle(fruitTransactionInvalidDataP);
     }
 
     @Test(expected = RuntimeException.class)
-    public void purchaseOperation_moreThanBalance_notOk() {
+    public void handle_moreThanBalance_notOk() {
         fruitTransactionInvalidDataP.setQuantity(MORE_THAN_BALANCE);
         purchaseOperationHandler.handle(fruitTransactionInvalidDataP);
     }

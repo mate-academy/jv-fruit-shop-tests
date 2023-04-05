@@ -13,7 +13,7 @@ import org.junit.Test;
 public class FileWriterServiceTest {
     private static final String FILE_PATH = "src/test/resources/exportFile.csv";
     private static final String INVALID_PATH_TO_FILE = "/error/exportFile.csv";
-    private static final String HEADER_FRUIT = "fruitTransaction,";
+    private static final String HEADER_FRUIT = "fruit,";
     private static final String HEADER_QUANTITY = "quantity";
     private static final String BANANA_REPORT = "banana 152";
     private static final String APPLE_REPORT = "apple 90";

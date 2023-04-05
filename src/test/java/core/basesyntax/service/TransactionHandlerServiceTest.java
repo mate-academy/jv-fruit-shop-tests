@@ -35,7 +35,7 @@ public class TransactionHandlerServiceTest {
     }
 
     @Test
-    public void handleTransaction_validData_ok() {
+    public void handleTransactions_validData_ok() {
         List<FruitTransaction> transactions = fillExpectedList();
         Map<String, Integer> expectedMap = fillExpectedMap();
         transactionHandler.handleTransactions(transactions);

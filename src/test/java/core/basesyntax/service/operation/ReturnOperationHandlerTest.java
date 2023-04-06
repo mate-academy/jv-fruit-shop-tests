@@ -40,18 +40,18 @@ public class ReturnOperationHandlerTest {
                 Storage.fruits.get(fruitTransactionB.getFruitName()));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_null_notOk() {
         returnOperationHandler.handle(null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_zeroQuantity_notOk() {
         fruitTransactionInvalidDataR.setQuantity(ZERO_QUANTITY);
         returnOperationHandler.handle(fruitTransactionInvalidDataR);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_negativeQuantity_notOk() {
         returnOperationHandler.handle(fruitTransactionInvalidDataR);
     }

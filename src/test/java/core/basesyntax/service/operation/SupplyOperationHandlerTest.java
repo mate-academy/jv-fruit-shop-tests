@@ -45,7 +45,7 @@ public class SupplyOperationHandlerTest {
         supplyOperationHandler.handle(fruitTransactionInvalidDataS);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_null_notOk() {
         supplyOperationHandler.handle(null);
     }

@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.CreateReportImpl;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,6 +32,11 @@ public class CreateReportServiceTest {
         String actualReportString = createReport.generateReport();
 
         Assert.assertEquals(expectedReportString, actualReportString);
+    }
+
+    @After
+    public void afterEachTest() {
+        Storage.fruits.clear();
     }
 
     private void fillStorage() {

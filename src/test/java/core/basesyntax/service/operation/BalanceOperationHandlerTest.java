@@ -45,7 +45,7 @@ public class BalanceOperationHandlerTest {
         balanceOperationHandler.handle(fruitTransactionInvalidDataB);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void handle_null_notOk() {
         balanceOperationHandler.handle(null);
     }

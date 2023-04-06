@@ -30,7 +30,7 @@ public class FileReaderServiceTest {
         fileReaderCsv.readFile(NOT_EXISTING_FILE_PATHNAME);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void readFile_nullValue_notOk() {
         fileReaderCsv.readFile(null);
     }

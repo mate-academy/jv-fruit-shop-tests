@@ -35,7 +35,6 @@ public class FileWriterServiceTest {
         try {
             String actualString = String.join(System.lineSeparator(),
                     Files.readAllLines(Path.of(FILE_PATH)));
-
             Assert.assertEquals(expectedString, actualString);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file: " + FILE_PATH, e);

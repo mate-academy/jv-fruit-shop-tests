@@ -21,11 +21,6 @@ public class ProductDaoImplTest {
         Storage.products.clear();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void addNullProduct_NotOk() {
-        productDao.add(null);
-    }
-
     @Test
     public void add_product_ok() {
         Product product = new Product("banana", 100);

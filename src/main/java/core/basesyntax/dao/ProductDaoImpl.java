@@ -27,9 +27,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void add(Product product) {
-        if (product == null) {
-            throw new NullPointerException("Product can't be null");
-        }
         Storage.products.add(product);
     }
 }

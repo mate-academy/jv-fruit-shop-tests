@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Product;
 import core.basesyntax.services.transaction.model.ProductTransaction;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -16,6 +17,7 @@ public class SupplyOperationTest {
     @BeforeClass
     public static void setProductDao() {
         productDao = new ProductDaoImpl();
+        Storage.products.add(new Product("banana", 60));
     }
 
     @Test

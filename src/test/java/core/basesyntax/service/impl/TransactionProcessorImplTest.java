@@ -14,16 +14,17 @@ import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorImplTest {
+    private static TransactionProcessor transactionProcessor;
+    private static OperationStrategy strategy;
+    private static FruitDao fruitDao;
     private static final int FRUIT_BALANCE = 20;
     private static final String FRUIT = "banana";
-    private final FruitDao fruitDao = new FruitDaoImpl();
     private OperationHandler operationHandler;
-    private final TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
-    private OperationStrategy strategy = new OperationStrategyImpl();
     private final FruitTransaction transactionBalance =
             new FruitTransaction(FruitTransaction.Operation.BALANCE, FRUIT, FRUIT_BALANCE);
     private final FruitTransaction transactionPurchase =
@@ -33,6 +34,13 @@ class TransactionProcessorImplTest {
     private final FruitTransaction transactionSupply =
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, FRUIT, FRUIT_BALANCE);
 
+    @BeforeAll
+    static void beforeAll() {
+        strategy = new OperationStrategyImpl();
+        fruitDao = new FruitDaoImpl();
+        transactionProcessor = new TransactionProcessorImpl();
+    }
+
     @BeforeEach
     void setUp() {
         Storage.getFruitsStorage().put(FRUIT, FRUIT_BALANCE);
@@ -41,8 +49,7 @@ class TransactionProcessorImplTest {
     @AfterEach
     void afterEach() {
         Storage.getFruitsStorage().clear();
-        operationHandler = null;
-        strategy = null;
+        strategy = new OperationStrategyImpl();
     }
 
     @Test

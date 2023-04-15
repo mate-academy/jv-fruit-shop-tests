@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FinalReportTest {
@@ -12,7 +13,12 @@ class FinalReportTest {
     private static final int SECOND_FRUIT_QUANTITY = 10;
     private static final List<String> TEST_LIST =
             List.of("fruit,quantity", "banana,20", "apple,10");
-    private final FinalReport finalReport = new FinalReport();
+    private static FinalReport finalReport;
+
+    @BeforeAll
+    static void beforeAll() {
+        finalReport = new FinalReport();
+    }
 
     @Test
     void getReport_Ok() {

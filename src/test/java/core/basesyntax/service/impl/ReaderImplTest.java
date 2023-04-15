@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Reader;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderImplTest {
@@ -9,7 +10,12 @@ class ReaderImplTest {
     private static final String EMPTY_FILE_PATH = "src/main/resources/test/empty.csv";
     private static final String WRONG_FILE_PATH = "src/main/resources/test/epty.csv";
     private static final String NULL_PATH = null;
-    private final Reader reader = new ReaderImpl();
+    private static Reader reader;
+
+    @BeforeAll
+    static void beforeAll() {
+        reader = new ReaderImpl();
+    }
 
     @Test
     void readingNull_NotOk() {

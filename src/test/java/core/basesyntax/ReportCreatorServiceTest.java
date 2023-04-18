@@ -56,6 +56,6 @@ public class ReportCreatorServiceTest {
         Storage.records.put(VALID_SECOND_FRUIT, VALID_SECOND_QUANTITY);
         Storage.records.put(VALID_FOURTH_FRUIT, VALID_FOURTH_QUANTITY);
         List<String> generatedReport = reportCreatorService.create();
-        assertNotEquals("Reports are not equals ", validReport, generatedReport);
+        assertNotEquals("Reports are equals ", validReport, generatedReport);
     }
 }

@@ -18,7 +18,8 @@ import org.junit.Test;
 public class CsvFileServiceTest {
     private static final String INPUT_VALID_FILE = "src/test/resources/input.csv";
     private static final String REPORT_VALID_FILE = "src/test/resources/report.csv";
-    private static final String INPUT_WRONG_FILE = "src/test/resources/null.csv";
+    private static final String INPUT_WRONG_FILE = "src/test/resources/absend.csv";
+    private static final String INPUT_NULL_FILE = "src/test/resources/null.csv";
     private static final String REPORT_WRONG_FILE = "src/test/reources/report$*!.csv";
 
     private static final List<String> validInputTransactions = List.of(
@@ -64,6 +65,13 @@ public class CsvFileServiceTest {
         List<String> transactionsFromFile = fileReaderService.readFromFile(INPUT_VALID_FILE);
         Assert.assertEquals(String.format("Incorrect value read from file - %s\n",
                 INPUT_VALID_FILE), validInputTransactions, transactionsFromFile);
+    }
+
+    @Test
+    public void readFromFile_null_ok() {
+        List<String> transactionsFromFile = fileReaderService.readFromFile(INPUT_NULL_FILE);
+        Assert.assertEquals(String.format("Incorrect value read from file - %s\n",
+                INPUT_NULL_FILE), new ArrayList<String>(), transactionsFromFile);
     }
 
     @Test

@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.ReportService;
@@ -42,7 +41,7 @@ public class Main {
 
         ReadFromFileService readService = new ReadFromFileServiceImpl();
         List<String> fruitTransactions = readService.readCsv(INPUT_PATH);
-
+        System.out.println(fruitTransactions);
         TransactionService operationService = new TransactionServiceImpl();
         List<FruitTransaction> transactionsList = operationService
                 .createTransactionsList(fruitTransactions);
@@ -50,7 +49,6 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsHandlerMap);
         TransactionHandler operationHandler = new TransactionHandlerImpl(operationStrategy);
         operationHandler.parse(transactionsList);
-        Storage storage = new Storage();
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.generateReport();
 

@@ -2,61 +2,60 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Activity;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.ActivityService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ActivityServiceImpl;
-import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.service.impl.CsvReaderServiceImpl;
+import core.basesyntax.service.impl.CsvReportServiceImpl;
+import core.basesyntax.service.impl.CsvWriterServiceImpl;
+import core.basesyntax.strategy.ActivityHandler;
+import core.basesyntax.strategy.ActivityStrategy;
+import core.basesyntax.strategy.impl.ActivityStrategyImpl;
 import core.basesyntax.strategy.impl.BalanceHandlerImpl;
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyHandlerImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+    private static final int LEGEND_LINE = 1;
+    private static final Map<Activity.Operation, ActivityHandler> activityHandlerMap =
+            Map.of(Activity.Operation.BALANCE, new BalanceHandlerImpl(),
+                    Activity.Operation.PURCHASE, new PurchaseHandlerImpl(),
+                    Activity.Operation.RETURN, new ReturnHandlerImpl(),
+                    Activity.Operation.SUPPLY, new SupplyHandlerImpl());
 
     public static void main(String[] args) {
-        //Map for strategy pattern
-        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceHandlerImpl());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseHandlerImpl());
-        operationHandlerMap.put(Operation.RETURN, new ReturnHandlerImpl());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyHandlerImpl());
-
         //Read data from file
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> dataFromCsv =
-                readerService.getDataFromCsv(INPUT_FILE_PATH);
+        ReaderService readerService = new CsvReaderServiceImpl();
+        List<String> dataFromFile = readerService.readFile(INPUT_FILE_PATH);
 
         //Convert data to Activity objects and collect them to list
         ActivityService activityService = new ActivityServiceImpl();
-        List<Activity> activitiesFromData =
-                activityService.getActivitiesFromInput(dataFromCsv);
+        List<Activity> activities = dataFromFile.stream()
+                .skip(LEGEND_LINE)
+                .map(activityService::parse)
+                .collect(Collectors.toList());
 
         //Process all activity object in list by strategy pattern
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        activitiesFromData
-                .forEach(a -> operationStrategy.getHandler(a.getOperation()).process(a));
+        ActivityStrategy operationStrategy = new ActivityStrategyImpl(activityHandlerMap);
+        for (Activity activity : activities) {
+            ActivityHandler handler = operationStrategy.getHandler(activity.getOperation());
+            handler.process(activity);
+        }
 
         //Create report using date from storage
-        ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport(reportService.getDataForReport());
+        ReportService reportService = new CsvReportServiceImpl();
+        String report = reportService.getReport(Storage.storeItems);
 
         //Save report to destination file;
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeToCsv(OUTPUT_FILE_PATH, report);
-
-        System.out.println(Storage.storeItems.get("item"));
+        WriterService writerService = new CsvWriterServiceImpl();
+        writerService.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

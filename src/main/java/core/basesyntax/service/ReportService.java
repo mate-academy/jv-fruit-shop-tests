@@ -3,7 +3,5 @@ package core.basesyntax.service;
 import java.util.Map;
 
 public interface ReportService {
-    String getReport(Map<String, Integer> formattedData);
-
-    Map<String, Integer> getDataForReport();
+    String getReport(Map<String, Integer> shopItemQuantityMap);
 }

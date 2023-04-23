@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ReaderServiceImpl implements ReaderService {
+public class CsvReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> getDataFromCsv(String pathToResource) {
+    public List<String> readFile(String pathToResource) {
         try (Stream<String> data = Files.lines(Path.of(pathToResource))) {
             return data.collect(Collectors.toList());
         } catch (IOException e) {

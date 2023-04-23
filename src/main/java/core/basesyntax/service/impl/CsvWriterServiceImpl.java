@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 
-public class WriterServiceImpl implements WriterService {
+public class CsvWriterServiceImpl implements WriterService {
     @Override
-    public void writeToCsv(String pathToFile, String data) {
+    public void writeToFile(String pathToFile, String data) {
         Path path = Path.of(pathToFile);
         File csvOutputFile = path.toFile();
         try (PrintWriter printWriter = new PrintWriter(csvOutputFile)) {

@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StorageTest {
-    public static final String testKey = "item";
+    public static final String testKey = "banana";
     public static final int testValue = 1;
 
     @Before

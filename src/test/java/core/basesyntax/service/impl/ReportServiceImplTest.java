@@ -3,16 +3,10 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private ReportServiceImpl reportService;
-
-    @BeforeEach
-    void setUp() {
-        reportService = new ReportServiceImpl();
-    }
+    private ReportServiceImpl reportService = new ReportServiceImpl();
 
     @AfterEach
     void tearDown() {

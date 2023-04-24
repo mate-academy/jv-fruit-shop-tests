@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReaderService;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -7,9 +8,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
+    private final ReaderService readerService = new ReaderServiceImpl();
+
     @Test
     void readFromFile_OK() {
-        String filePath = "test.csv";
+        String filePath = "src/test/java/core/basesyntax/resources/test.csv";
         String date = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n";
@@ -20,7 +23,6 @@ class ReaderServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ReaderServiceImpl readerService = new ReaderServiceImpl();
         List<String> lines = readerService.readFromFile(filePath);
         Assertions.assertEquals(3, lines.size());
         Assertions.assertEquals("type,fruit,quantity", lines.get(0));
@@ -30,7 +32,6 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromNonExistentFile_NotOk() {
-        ReaderServiceImpl readerService = new ReaderServiceImpl();
         String nonExistentFilePath = "non-existent-file.csv";
         Assertions.assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(nonExistentFilePath));

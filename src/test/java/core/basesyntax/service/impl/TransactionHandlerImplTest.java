@@ -3,10 +3,11 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionHandler;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceTransactionHandlerImpl;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.Collections;
 import java.util.List;
@@ -31,16 +32,13 @@ class TransactionHandlerImplTest {
 
     @Test
     void parseCallTransactionOfOperationHandler_Ok() {
-        OperationHandler handler = new OperationHandler() {
-            @Override
-            public void transaction(FruitTransaction transaction) {
-            }
-        };
         OperationStrategy strategy = new OperationStrategyImpl(Collections
-                .singletonMap(FruitTransaction.Operation.BALANCE, handler));
+                .singletonMap(FruitTransaction.Operation.BALANCE,
+                        new BalanceTransactionHandlerImpl()));
         TransactionHandler transactionHandler = new TransactionHandlerImpl(strategy);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.BALANCE);
+        transaction.setFruit(new Fruit("some fruit", 1));
         List<FruitTransaction> inputList = List.of(transaction);
         assertDoesNotThrow(() -> transactionHandler.parse(inputList));
     }

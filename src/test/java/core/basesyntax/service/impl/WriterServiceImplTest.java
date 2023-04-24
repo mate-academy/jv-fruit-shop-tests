@@ -10,21 +10,20 @@ import org.junit.jupiter.api.Test;
 class WriterServiceImplTest {
     private static final String OUTPUT_FILE_PATH
             = "src/main/java/core/basesyntax/resources/outputFile.csv";
-    private static String date;
-    private WriterServiceImpl writerService;
+    private static final String DATA = "fruit,quantity" + System.lineSeparator()
+            + "banana,5" + System.lineSeparator()
+            + "apple,100" + System.lineSeparator();
+    private WriterServiceImpl writerService = new WriterServiceImpl();
 
     @BeforeEach
     void setUp() {
         writerService = new WriterServiceImpl();
-        date = "fruit,quantity" + System.lineSeparator()
-                + "banana,5" + System.lineSeparator()
-                + "apple,100" + System.lineSeparator();
     }
 
     @Test
     void writeAndRead_Ok() {
-        String expected = date;
-        writerService.writeToFile(date);
+        String expected = DATA;
+        writerService.writeToFile(DATA);
         String actual;
         try {
             actual = Files.readString(Path.of(OUTPUT_FILE_PATH));

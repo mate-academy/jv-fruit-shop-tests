@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitTransaction;
-
 import static core.basesyntax.db.Storage.fruitData;
+
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override

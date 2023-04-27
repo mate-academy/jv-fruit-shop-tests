@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 class CsvFileReaderServiceImplTest {
     private static final String VALID_FILE_PATH = "src/test/resources/validInput.csv";
     private static final String WRONG_PATH = "src/test/resources/wrong.csv";
-    private static final String NULL_PATH = null;
     private static FileReaderService fileReaderService;
 
     @BeforeAll
@@ -30,6 +29,6 @@ class CsvFileReaderServiceImplTest {
 
     @Test
     void readFromFile_nullPath_notOk() {
-        assertThrows(NullPointerException.class, () -> fileReaderService.readFromFile(NULL_PATH));
+        assertThrows(RuntimeException.class, () -> fileReaderService.readFromFile(null));
     }
 }

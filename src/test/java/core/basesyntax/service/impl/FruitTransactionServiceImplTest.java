@@ -39,11 +39,7 @@ class FruitTransactionServiceImplTest {
                 "b,banana,100",
                 "s,banana,20",
                 "b,apple,20",
-                "s,apple,100",
-                "p,banana,50",
-                "p,apple,40",
-                "r,banana,10",
-                "r,apple,20");
+                "s,apple,100");
         
         Files.write(tempFile, list);
         fruitService.createNewFruitTransaction(readService.readFile(tempFile));

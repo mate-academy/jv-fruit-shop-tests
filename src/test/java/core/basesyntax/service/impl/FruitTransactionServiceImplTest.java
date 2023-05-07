@@ -62,8 +62,6 @@ class FruitTransactionServiceImplTest {
             fruitTransaction.setQuantity(Integer.parseInt(dataValue[2]));
             expected.add(fruitTransaction);
         }
-        System.out.println(expected);
-        System.out.println(Storage.fruitShopData);
         assertEquals(expected, Storage.fruitShopData);
         Storage.fruitShopData.clear();
     }

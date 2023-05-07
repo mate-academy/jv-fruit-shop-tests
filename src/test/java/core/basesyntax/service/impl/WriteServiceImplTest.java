@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class WriteServiceImplTest {
@@ -21,6 +22,11 @@ class WriteServiceImplTest {
             new FruitTransactionServiceImpl();
     private final ReadService readService = new ReadServiceImpl();
     private final WriteService writeService = new WriteServiceImpl();
+    
+    @AfterEach
+    void tearDown() throws IOException {
+        Storage.fruitShopData.clear();
+    }
     
     @Test
     void write_validData_Ok() throws IOException {

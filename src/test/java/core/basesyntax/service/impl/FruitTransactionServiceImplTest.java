@@ -30,6 +30,7 @@ class FruitTransactionServiceImplTest {
     
     @AfterEach
     void tearDown() throws IOException {
+        Storage.fruitShopData.clear();
         Files.deleteIfExists(tempFile);
     }
     
@@ -63,7 +64,6 @@ class FruitTransactionServiceImplTest {
             expected.add(fruitTransaction);
         }
         assertEquals(expected, Storage.fruitShopData);
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -72,7 +72,6 @@ class FruitTransactionServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -81,7 +80,7 @@ class FruitTransactionServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
-        Storage.fruitShopData.clear();
+        
     }
     
     @Test
@@ -90,7 +89,6 @@ class FruitTransactionServiceImplTest {
         assertThrows(NumberFormatException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -99,6 +97,5 @@ class FruitTransactionServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
-        Storage.fruitShopData.clear();
     }
 }

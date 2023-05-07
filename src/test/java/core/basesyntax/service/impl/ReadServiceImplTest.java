@@ -25,6 +25,7 @@ class ReadServiceImplTest {
     
     @AfterEach
     void tearDown() throws IOException {
+        Storage.fruitShopData.clear();
         Files.deleteIfExists(tempFile);
     }
     
@@ -34,7 +35,7 @@ class ReadServiceImplTest {
         List<String> actual = readService.readFile(tempFile);
         List<String> expected = List.of("b,banana,100", "s,banana,20");
         assertEquals(expected, actual);
-        Storage.fruitShopData.clear();
+        
     }
     
     @Test
@@ -43,7 +44,6 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -52,7 +52,6 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -61,7 +60,6 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -70,7 +68,6 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -79,7 +76,6 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -88,7 +84,6 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -96,13 +91,11 @@ class ReadServiceImplTest {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
-        Storage.fruitShopData.clear();
     }
     
     @Test
     void readFile_InvalidPath_NotOk() {
         Path invalidPath = Path.of("nonFile.csv");
         assertThrows(RuntimeException.class, () -> readService.readFile(invalidPath));
-        Storage.fruitShopData.clear();
     }
 }

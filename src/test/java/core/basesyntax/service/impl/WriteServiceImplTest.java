@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReadService;
 import core.basesyntax.service.WriteService;
@@ -28,6 +29,7 @@ class WriteServiceImplTest {
         writeService.writeToFile(repotPath);
         List<String> actual = Files.readAllLines(repotPath);
         assertEquals(expected, actual);
+        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -36,5 +38,6 @@ class WriteServiceImplTest {
             fruitTransactionService.createNewFruitTransaction(readService.readFile(inputPath));
             writeService.writeToFile(invalidPath);
         });
+        Storage.fruitShopData.clear();
     }
 }

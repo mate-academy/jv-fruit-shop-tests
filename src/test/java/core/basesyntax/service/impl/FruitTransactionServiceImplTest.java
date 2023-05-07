@@ -39,7 +39,11 @@ class FruitTransactionServiceImplTest {
                 "b,banana,100",
                 "s,banana,20",
                 "b,apple,20",
-                "s,apple,100");
+                "s,apple,100",
+                "p,banana,50",
+                "p,apple,40",
+                "r,banana,10",
+                "r,apple,20");
         
         Files.write(tempFile, list);
         fruitService.createNewFruitTransaction(readService.readFile(tempFile));
@@ -58,7 +62,10 @@ class FruitTransactionServiceImplTest {
             fruitTransaction.setQuantity(Integer.parseInt(dataValue[2]));
             expected.add(fruitTransaction);
         }
+        System.out.println(expected);
+        System.out.println(Storage.fruitShopData);
         assertEquals(expected, Storage.fruitShopData);
+        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -67,6 +74,7 @@ class FruitTransactionServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
+        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -75,6 +83,7 @@ class FruitTransactionServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
+        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -83,6 +92,7 @@ class FruitTransactionServiceImplTest {
         assertThrows(NumberFormatException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
+        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -91,5 +101,6 @@ class FruitTransactionServiceImplTest {
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
         });
+        Storage.fruitShopData.clear();
     }
 }

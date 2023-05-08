@@ -67,7 +67,7 @@ class FruitTransactionServiceImplTest {
     }
     
     @Test
-    void add_NotValidOperation_NotOk() throws IOException {
+    void add_notValidOperation_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "l,banana,100", "t,banana,20"));
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
@@ -75,7 +75,7 @@ class FruitTransactionServiceImplTest {
     }
     
     @Test
-    void add_NotValidFruitName_NotOk() throws IOException {
+    void add_notValidFruitName_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,1ana,100"));
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
@@ -84,7 +84,7 @@ class FruitTransactionServiceImplTest {
     }
     
     @Test
-    void add_QuantityString_NotOk() throws IOException {
+    void add_quantityString_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,banana,number"));
         assertThrows(NumberFormatException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));
@@ -92,7 +92,7 @@ class FruitTransactionServiceImplTest {
     }
     
     @Test
-    void add_NegativeQuantity_NotOk() throws IOException {
+    void add_negativeQuantity_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,banana,-100"));
         assertThrows(ValidationException.class, () -> {
             fruitService.createNewFruitTransaction(readService.readFile(tempFile));

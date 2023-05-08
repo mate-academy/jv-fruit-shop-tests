@@ -39,7 +39,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_OperationNull_NotOk() throws IOException {
+    void add_operationNull_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "null,banana,100", "s,banana,20"));
         assertThrows(ValidationException.class, () -> {
             readService.readFile(tempFile);
@@ -47,7 +47,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_OperationEmpty_NotOk() throws IOException {
+    void add_operationEmpty_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", ",banana,100", "s,banana,20"));
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
@@ -55,7 +55,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_FruitNull_NotOk() throws IOException {
+    void add_fruitNull_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,null,100", "s,banana,20"));
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
@@ -63,7 +63,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_FruitEmpty_NotOk() throws IOException {
+    void add_fruitEmpty_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,,100", "s,banana,20"));
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
@@ -71,7 +71,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_QuantityNull_NotOk() throws IOException {
+    void add_quantityNull_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,banana,null", "s,banana,20"));
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
@@ -79,7 +79,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_QuantityEmpty_NotOk() throws IOException {
+    void add_quantityEmpty_NotOk() throws IOException {
         Files.write(tempFile, List.of("type,fruit,quantity", "b,banana,", "s,banana,20"));
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
@@ -87,14 +87,14 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void add_EmptyFile_NotOk() {
+    void add_emptyFile_NotOk() {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });
     }
     
     @Test
-    void readFile_InvalidPath_NotOk() {
+    void add_invalidPath_NotOk() {
         Path invalidPath = Path.of("nonFile.csv");
         assertThrows(RuntimeException.class, () -> readService.readFile(invalidPath));
     }

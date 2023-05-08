@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriteServiceImplTest {
@@ -22,6 +23,12 @@ class WriteServiceImplTest {
             new FruitTransactionServiceImpl();
     private final ReadService readService = new ReadServiceImpl();
     private final WriteService writeService = new WriteServiceImpl();
+    private Storage storage;
+    
+    @BeforeEach
+    void setUp() {
+        storage = new Storage();
+    }
     
     @AfterEach
     void tearDown() throws IOException {
@@ -35,7 +42,6 @@ class WriteServiceImplTest {
         writeService.writeToFile(repotPath);
         List<String> actual = Files.readAllLines(repotPath);
         assertEquals(expected, actual);
-        Storage.fruitShopData.clear();
     }
     
     @Test
@@ -44,6 +50,5 @@ class WriteServiceImplTest {
             fruitTransactionService.createNewFruitTransaction(readService.readFile(inputPath));
             writeService.writeToFile(invalidPath);
         });
-        Storage.fruitShopData.clear();
     }
 }

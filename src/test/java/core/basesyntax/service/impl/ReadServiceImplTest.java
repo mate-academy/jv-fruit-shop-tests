@@ -87,7 +87,7 @@ class ReadServiceImplTest {
     }
     
     @Test
-    void readFile_emptyData_NotOk() {
+    void readFile_inputFileIsEmpty_NotOk() {
         assertThrows(ValidationException.class,() -> {
             readService.readFile(tempFile);
         });

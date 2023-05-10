@@ -1,15 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ReportServiceImplTest {
-    ReportService reportService = new ReportServiceImpl();
+    private final ReportService reportService = new ReportServiceImpl();
 
     @BeforeEach
     void setUp() {

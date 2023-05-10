@@ -1,20 +1,20 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReaderService;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.ReaderService;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
 class ReaderServiceImplTest {
-    ReaderService readerService = new ReaderServiceImpl();
+    private final ReaderService readerService = new ReaderServiceImpl();
 
     @Test
     void getInformationFromFile_Ok() {
-        List<String> actual = readerService.getInformationFromFile("src/test/resources/data.txt");
+        final List<String> actual = readerService.getInformationFromFile(
+                "src/test/resources/data.txt");
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");

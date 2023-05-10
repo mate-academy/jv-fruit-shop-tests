@@ -40,7 +40,6 @@ public class Main {
         FruitOperationStrategy fruitOperationStrategy =
                 new FruitOperationStrategyImpl(operationHandlerMap);
 
-
         List<FruitTransaction> fruitTransactions = fruitTransactionService
                 .getFruitTransactionsFromFile(READ_FROM_FILE_PATH);
 

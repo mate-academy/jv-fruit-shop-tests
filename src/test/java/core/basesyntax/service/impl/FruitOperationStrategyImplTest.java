@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitOperationStrategy;
@@ -8,30 +10,16 @@ import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 class FruitOperationStrategyImplTest {
-    Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-    FruitOperationStrategy fruitOperationStrategy =
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
+            new HashMap<>();
+    private final FruitOperationStrategy fruitOperationStrategy =
             new FruitOperationStrategyImpl(operationHandlerMap);
-
-    /*
-    @BeforeAll
-    static void beforeAll() {
-
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
-    }
-     */
 
     @Test
     void put_Balance_Ok() {
@@ -94,7 +82,6 @@ class FruitOperationStrategyImplTest {
 
     @AfterEach
     void tearDown() {
-
         Storage.fruitBalance.clear();
     }
 }

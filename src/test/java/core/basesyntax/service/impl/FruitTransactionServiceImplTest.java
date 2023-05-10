@@ -1,23 +1,25 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionServiceImplTest {
-    FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+    private final FruitTransactionService fruitTransactionService =
+            new FruitTransactionServiceImpl();
 
     @Test
     void getFruitTransactionsFromFile_Ok() {
-        List<FruitTransaction> actualList = fruitTransactionService
+        final List<FruitTransaction> actualList = fruitTransactionService
                 .getFruitTransactionsFromFile("src/test/resources/wrongData.txt");
 
-        List<FruitTransaction> expectedList = new ArrayList<>();
+        final List<FruitTransaction> expectedList = new ArrayList<>();
 
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
@@ -37,10 +39,10 @@ class FruitTransactionServiceImplTest {
 
     @Test
     void getFruitTransactionsFromFile_WrongData_NotOk() {
-        List<FruitTransaction> actualList = fruitTransactionService
+        final List<FruitTransaction> actualList = fruitTransactionService
                 .getFruitTransactionsFromFile("src/test/resources/wrongData.txt");
 
-        List<FruitTransaction> expectedList = new ArrayList<>();
+        final List<FruitTransaction> expectedList = new ArrayList<>();
 
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
@@ -73,7 +75,8 @@ class FruitTransactionServiceImplTest {
     @Test
     void getFruitTransactionsFromFile_WrongTransactionDataQuantity_NotOk() {
         assertThrows(RuntimeException.class, () -> fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/wrongTransactionDataQuantity.txt"));
+                .getFruitTransactionsFromFile(
+                        "src/test/resources/wrongTransactionDataQuantity.txt"));
     }
 
     @Test

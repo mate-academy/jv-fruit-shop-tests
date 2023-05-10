@@ -1,17 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriterService;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
+import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     @BeforeAll
@@ -27,7 +27,7 @@ class WriterServiceImplTest {
     @Test
     void createReportFile_Ok() {
         try {
-            List<String> actual = Files.readAllLines(Path.of("src/test/resources/data3.txt"));
+            final List<String> actual = Files.readAllLines(Path.of("src/test/resources/data3.txt"));
             List<String> expected = new ArrayList<>();
             expected.add("fruit,quantity");
             expected.add("banana,100");
@@ -40,13 +40,13 @@ class WriterServiceImplTest {
 
     @Test
     void createReportFile_WrongPath_NotOk() {
-        assertThrows(IOException.class, () -> Files.readAllLines
-                (Path.of("src/test/resources/data0.txt")));
+        assertThrows(IOException.class, () -> Files.readAllLines(
+                Path.of("src/test/resources/data0.txt")));
     }
 
     @Test
     void createReportFile_PathIsNull_NotOk() {
-        assertThrows(RuntimeException.class, () -> Files.readAllLines
-                (Path.of(null)));
+        assertThrows(RuntimeException.class, () -> Files.readAllLines(
+                Path.of(null)));
     }
 }

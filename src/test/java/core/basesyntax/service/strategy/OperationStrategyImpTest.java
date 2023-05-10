@@ -5,16 +5,20 @@ import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
-import core.basesyntax.service.operation.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.*;
+import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperation;
+import core.basesyntax.service.operation.SupplyOperation;
+import core.basesyntax.service.operation.ReturnOperation;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OperationStrategyImpTest {
     private FruitTransactionDao fruitTransactionDao;
-    FruitTransactionService fruitTransactionService;
+    private FruitTransactionService fruitTransactionService;
     private OperationStrategy operationStrategy;
     private Map<FruitTransaction.Operation, OperationHandler> operationMap;
 

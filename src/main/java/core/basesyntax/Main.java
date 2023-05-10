@@ -1,0 +1,51 @@
+package core.basesyntax;
+
+import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.dao.impl.FruitTransactionDaoIml;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.ReadScvService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriteScvService;
+import core.basesyntax.service.impl.*;
+import core.basesyntax.service.operation.*;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.OperationStrategyImp;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    private static FruitTransactionDao fruitTransactionDao;
+    private static ReadScvService readScvService;
+    private static FruitTransactionService fruitTransactionService;
+    private static OperationStrategy operationStrategy;
+    private static FruitTransferImpl fruitTransfer;
+    private static ReportService reportService;
+    private static String report;
+    private static WriteScvService writeScvService;
+    private static final String FILE_REPORT_NAME = "report.csv";
+    private static final String FILE_PATH = "input.csv";
+
+    public static void main(String[] args) {
+        fruitTransactionDao = new FruitTransactionDaoIml();
+        readScvService = new ReadScvServiceImpl();
+        fruitTransactionService = new FruitTransactionServiceImpl(fruitTransactionDao);
+        Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
+        operationMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperation(fruitTransactionDao, fruitTransactionService));
+        operationMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperation(fruitTransactionDao));
+        operationMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(fruitTransactionDao));
+        operationMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperation(fruitTransactionDao));
+        operationStrategy = new OperationStrategyImp(operationMap);
+        fruitTransfer = new FruitTransferImpl(operationStrategy, readScvService, FILE_PATH);
+        fruitTransfer.transfer();
+        reportService = new ReportServiceImpl();
+        report = reportService.createReport(fruitTransactionDao.getAllListDb());
+        writeScvService = new WriteScvServiceIml();
+        writeScvService.writeDataScvFile(report, FILE_REPORT_NAME);
+    }
+}

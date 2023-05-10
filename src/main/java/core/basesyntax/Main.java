@@ -7,11 +7,18 @@ import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReadScvService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriteScvService;
-import core.basesyntax.service.impl.*;
-import core.basesyntax.service.operation.*;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.FruitTransferImpl;
+import core.basesyntax.service.impl.ReadScvServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriteScvServiceIml;
+import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.SupplyOperation;
+import core.basesyntax.service.operation.PurchaseOperation;
+import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImp;
-
 import java.util.HashMap;
 import java.util.Map;
 

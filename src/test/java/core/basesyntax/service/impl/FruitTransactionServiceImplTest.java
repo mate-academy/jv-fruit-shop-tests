@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FruitTransactionServiceImplTest {
     private FruitTransactionDao fruitTransactionDao;

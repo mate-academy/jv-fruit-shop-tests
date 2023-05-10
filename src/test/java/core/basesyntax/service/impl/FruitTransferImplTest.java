@@ -1,29 +1,34 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReadScvService;
-import core.basesyntax.service.operation.*;
+import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperation;
+import core.basesyntax.service.operation.SupplyOperation;
+import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImp;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitTransferImplTest {
+    private static final String FILE_PATH = "inputTestFile.csv";
     private FruitTransactionDao fruitTransactionDao;
     private ReadScvService readScvService;
     private FruitTransactionService fruitTransactionService;
     private OperationStrategy operationStrategy;
     private FruitTransferImpl fruitTransfer;
-    private static final String FILE_PATH = "inputTestFile.csv";
 
     @BeforeEach
     void setUp() {

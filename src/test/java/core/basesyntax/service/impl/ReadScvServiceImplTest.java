@@ -1,18 +1,19 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReadScvService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ReadScvServiceImplTest {
-    private ReadScvService readScvService;
     private static final String FILE_PATH = "inputTestFile.csv";
     private static final String FRUIT_NAME = "banana";
+    private ReadScvService readScvService;
     private List<FruitTransaction> actualFruitTransactionList;
 
     private FruitTransaction createFruitTransaction(String fruit, int quantity,

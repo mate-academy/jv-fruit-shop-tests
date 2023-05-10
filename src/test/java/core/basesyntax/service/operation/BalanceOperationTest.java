@@ -1,5 +1,8 @@
 package core.basesyntax.service.operation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
@@ -7,7 +10,6 @@ import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceOperationTest {
     private FruitTransactionDao fruitTransactionDao;

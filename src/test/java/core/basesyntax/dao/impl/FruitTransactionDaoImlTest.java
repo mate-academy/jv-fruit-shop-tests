@@ -1,12 +1,16 @@
 package core.basesyntax.dao.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.NoSuchElementException;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionDaoImlTest {
     private FruitTransactionDaoIml fruitTransactionDaoIml;
@@ -28,7 +32,7 @@ class FruitTransactionDaoImlTest {
     }
 
     @Test
-    public void Add_ok() {
+    public void add_ok() {
         fruitTransactionDaoIml.add(appleTransaction);
         List<FruitTransaction> fruitTransactionList = fruitTransactionDaoIml.getAllListDb();
         assertEquals(1, fruitTransactionList.size());
@@ -36,7 +40,7 @@ class FruitTransactionDaoImlTest {
     }
 
     @Test
-    public void Get_ok() {
+    public void get_ok() {
         fruitTransactionDaoIml.add(appleTransaction);
         fruitTransactionDaoIml.add(bananaTransaction);
         FruitTransaction extend = fruitTransactionDaoIml.get("Apple");
@@ -45,7 +49,7 @@ class FruitTransactionDaoImlTest {
     }
 
     @Test
-    public void Update_Ok() {
+    public void update_Ok() {
         fruitTransactionDaoIml.add(appleTransaction);
         FruitTransaction extendTransaction = new FruitTransaction();
         extendTransaction.setFruit("Apple");
@@ -59,7 +63,7 @@ class FruitTransactionDaoImlTest {
     }
 
     @Test
-    public void GetAllListDb_Ok() {
+    public void getAllListDb_Ok() {
         assertTrue(fruitTransactionDaoIml.getAllListDb().isEmpty());
         fruitTransactionDaoIml.add(appleTransaction);
         fruitTransactionDaoIml.add(bananaTransaction);

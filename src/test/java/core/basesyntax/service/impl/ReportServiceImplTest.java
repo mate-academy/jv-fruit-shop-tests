@@ -1,19 +1,20 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
+    private static final String actualReport = "fruit,quantity\nbanana,50\napple,25\n";
     private ReportService reportService;
     private List<FruitTransaction> fruitTransactionList;
     private FruitTransaction bananaFruitTransaction;
     private FruitTransaction appleFruitTransaction;
-    private static final String actualReport = "fruit,quantity\nbanana,50\napple,25\n";
 
     @BeforeEach
     void setUp() {

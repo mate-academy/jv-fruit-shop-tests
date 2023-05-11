@@ -28,7 +28,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createFruitBalanceReport_NegativeQuantity_NotOk() {
+    void createFruitBalanceReport_NegativeQuantity_throwsException() {
         Storage.fruitBalance.put("banana", -50);
         assertThrows(RuntimeException.class,
                 () -> reportService.createFruitBalanceReport(Storage.fruitBalance));

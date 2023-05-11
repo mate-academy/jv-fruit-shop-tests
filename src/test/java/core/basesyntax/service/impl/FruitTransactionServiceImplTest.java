@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
@@ -11,83 +10,75 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionServiceImplTest {
+    public static final String FILE_PATH = "src/test/resources/data1.txt";
+    public static final String QUANTITY_IS_LETTER_FILE_PATH =
+            "src/test/resources/quantityIsLetter.txt";
+    public static final String WRONG_OPERATOR_FILE_PATH =
+            "src/test/resources/wrongOperation.txt";
+    public static final String WRONG_TRANSACTION_DATA_QUANTITY_FILE_PATH =
+            "src/test/resources/wrongTransactionDataQuantity.txt";
+    public static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.txt";
+    public static final String WITHOUT_TITLE_FILE_PATH =
+            "src/test/resources/withoutTitle.txt";
     private final FruitTransactionService fruitTransactionService =
             new FruitTransactionServiceImpl();
 
     @Test
     void getFruitTransactionsFromFile_Ok() {
         final List<FruitTransaction> actualList = fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/wrongData.txt");
+                .getFruitTransactionsFromFile(FILE_PATH);
 
         final List<FruitTransaction> expectedList = new ArrayList<>();
 
-        FruitTransaction fruitTransaction1 = new FruitTransaction();
-        fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction1.setFruit("banana");
-        fruitTransaction1.setQuantity(20);
+        FruitTransaction bananaTransactionBalance = new FruitTransaction();
+        bananaTransactionBalance.setOperation(FruitTransaction.Operation.BALANCE);
+        bananaTransactionBalance.setFruit("banana");
+        bananaTransactionBalance.setQuantity(20);
 
-        FruitTransaction fruitTransaction2 = new FruitTransaction();
-        fruitTransaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction2.setFruit("apple");
-        fruitTransaction2.setQuantity(100);
+        FruitTransaction appleTransactionBalance = new FruitTransaction();
+        appleTransactionBalance.setOperation(FruitTransaction.Operation.BALANCE);
+        appleTransactionBalance.setFruit("apple");
+        appleTransactionBalance.setQuantity(100);
 
-        expectedList.add(fruitTransaction1);
-        expectedList.add(fruitTransaction2);
+        FruitTransaction bananaTransactionSupply = new FruitTransaction();
+        bananaTransactionSupply.setOperation(FruitTransaction.Operation.SUPPLY);
+        bananaTransactionSupply.setFruit("banana");
+        bananaTransactionSupply.setQuantity(100);
+
+        expectedList.add(bananaTransactionBalance);
+        expectedList.add(appleTransactionBalance);
+        expectedList.add(bananaTransactionSupply);
 
         assertEquals(expectedList, actualList);
     }
 
     @Test
-    void getFruitTransactionsFromFile_WrongData_NotOk() {
-        final List<FruitTransaction> actualList = fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/wrongData.txt");
-
-        final List<FruitTransaction> expectedList = new ArrayList<>();
-
-        FruitTransaction fruitTransaction1 = new FruitTransaction();
-        fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction1.setFruit("orange");
-        fruitTransaction1.setQuantity(20);
-
-        FruitTransaction fruitTransaction2 = new FruitTransaction();
-        fruitTransaction2.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction2.setFruit("apple");
-        fruitTransaction2.setQuantity(100);
-
-        expectedList.add(fruitTransaction1);
-        expectedList.add(fruitTransaction2);
-
-        assertNotEquals(expectedList, actualList);
+    void getFruitTransactionsFromFile_QuantityIsLetters_throwsException() {
+        assertThrows(RuntimeException.class, () -> fruitTransactionService
+                .getFruitTransactionsFromFile(QUANTITY_IS_LETTER_FILE_PATH));
     }
 
     @Test
-    void getFruitTransactionsFromFile_QuantityIsLetters_NotOk() {
+    void getFruitTransactionsFromFile_WrongOperation_throwsException() {
         assertThrows(RuntimeException.class, () -> fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/quantityIsLetter.txt"));
+                .getFruitTransactionsFromFile(WRONG_OPERATOR_FILE_PATH));
     }
 
     @Test
-    void getFruitTransactionsFromFile_WrongOperation_NotOk() {
+    void getFruitTransactionsFromFile_WrongTransactionDataQuantity_throwsException() {
         assertThrows(RuntimeException.class, () -> fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/wrongOperation.txt"));
+                .getFruitTransactionsFromFile(WRONG_TRANSACTION_DATA_QUANTITY_FILE_PATH));
     }
 
     @Test
-    void getFruitTransactionsFromFile_WrongTransactionDataQuantity_NotOk() {
+    void getFruitTransactionsFromFile_EmptyFile_throwsException() {
         assertThrows(RuntimeException.class, () -> fruitTransactionService
-                .getFruitTransactionsFromFile(
-                        "src/test/resources/wrongTransactionDataQuantity.txt"));
+                .getFruitTransactionsFromFile(EMPTY_FILE_PATH));
     }
 
     @Test
-    void getFruitTransactionsFromFile_EmptyFile_NotOk() {
+    void getFruitTransactionsFromFile_WithoutTitle_throwsException() {
         assertThrows(RuntimeException.class, () -> fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/emptyFile.txt"));
-    }
-
-    @Test
-    void getFruitTransactionsFromFile_WithoutTitle_NotOk() {
-        assertThrows(RuntimeException.class, () -> fruitTransactionService
-                .getFruitTransactionsFromFile("src/test/resources/withoutTitle.txt"));
+                .getFruitTransactionsFromFile(WITHOUT_TITLE_FILE_PATH));
     }
 }

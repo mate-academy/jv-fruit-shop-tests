@@ -44,7 +44,7 @@ public class Main {
                 .getFruitTransactionsFromFile(READ_FROM_FILE_PATH);
 
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            fruitOperationStrategy.put(fruitTransaction).transaction(fruitTransaction);
+            fruitOperationStrategy.put(fruitTransaction).applyTransaction(fruitTransaction);
         }
         String fruitBalanceReport = reportService.createFruitBalanceReport(Storage.fruitBalance);
         writerService.createReportFile(fruitBalanceReport, WRITE_TO_FILE_PATH);

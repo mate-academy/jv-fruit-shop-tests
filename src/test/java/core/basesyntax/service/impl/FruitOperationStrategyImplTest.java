@@ -31,7 +31,7 @@ class FruitOperationStrategyImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(100);
 
-        fruitOperationStrategy.put(fruitTransaction).transaction(fruitTransaction);
+        fruitOperationStrategy.put(fruitTransaction).applyTransaction(fruitTransaction);
         assertEquals(100, Storage.fruitBalance.get("apple"));
     }
 
@@ -46,7 +46,7 @@ class FruitOperationStrategyImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(100);
 
-        fruitOperationStrategy.put(fruitTransaction).transaction(fruitTransaction);
+        fruitOperationStrategy.put(fruitTransaction).applyTransaction(fruitTransaction);
         assertEquals(50, Storage.fruitBalance.get("apple"));
     }
 
@@ -61,7 +61,7 @@ class FruitOperationStrategyImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(80);
 
-        fruitOperationStrategy.put(fruitTransaction).transaction(fruitTransaction);
+        fruitOperationStrategy.put(fruitTransaction).applyTransaction(fruitTransaction);
         assertEquals(110, Storage.fruitBalance.get("apple"));
     }
 
@@ -76,7 +76,7 @@ class FruitOperationStrategyImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(50);
 
-        fruitOperationStrategy.put(fruitTransaction).transaction(fruitTransaction);
+        fruitOperationStrategy.put(fruitTransaction).applyTransaction(fruitTransaction);
         assertEquals(200, Storage.fruitBalance.get("apple"));
     }
 

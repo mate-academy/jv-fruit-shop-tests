@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
@@ -21,6 +22,7 @@ class BalanceOperationTest {
         fruitTransactionDao = new FruitTransactionDaoIml();
         fruitTransactionService = new FruitTransactionServiceImpl(fruitTransactionDao);
         balanceOperation = new BalanceOperation(fruitTransactionDao, fruitTransactionService);
+        Storage.fruits.clear();
     }
 
     @Test

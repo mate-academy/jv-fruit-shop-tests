@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ class PurchaseOperationTest {
     void setUp() {
         fruitTransactionDao = new FruitTransactionDaoIml();
         purchaseOperation = new PurchaseOperation(fruitTransactionDao);
+        Storage.fruits.clear();
     }
 
     @Test

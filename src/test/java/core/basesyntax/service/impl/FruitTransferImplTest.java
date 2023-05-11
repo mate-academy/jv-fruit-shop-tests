@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReadScvService;
@@ -46,6 +47,7 @@ class FruitTransferImplTest {
                 new ReturnOperation(fruitTransactionDao));
         operationStrategy = new OperationStrategyImp(operationMap);
         fruitTransfer = new FruitTransferImpl(operationStrategy, readScvService, FILE_PATH);
+        Storage.fruits.clear();
     }
 
     @Test

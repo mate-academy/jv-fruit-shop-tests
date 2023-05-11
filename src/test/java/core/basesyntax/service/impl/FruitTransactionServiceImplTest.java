@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoIml;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,13 +20,14 @@ class FruitTransactionServiceImplTest {
 
     @BeforeEach
     void setUp() {
+        nameFruit = "Apple";
+        quantity = 10;
         fruitTransactionDao = new FruitTransactionDaoIml();
         fruitTransactionService = new FruitTransactionServiceImpl(fruitTransactionDao);
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(nameFruit);
         fruitTransaction.setQuantity(quantity);
-        nameFruit = "Apple";
-        quantity = 10;
+        Storage.fruits.clear();
     }
 
     @Test

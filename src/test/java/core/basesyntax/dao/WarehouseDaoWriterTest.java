@@ -15,18 +15,14 @@ class WarehouseDaoWriterTest {
     private static final WarehouseDaoWriter warehouseDaoWriter = new WarehouseDaoWriter();
 
     @Test
-    void writeData_normalBehavior_ok() {
+    void writeData_normalBehavior_ok() throws IOException {
         Map<String, Integer> fruitMap = new HashMap<>();
         fruitMap.put("banana", 20);
         fruitMap.put("apple", 42);
         warehouseDaoWriter.writeData(PATH_TEST_FILE, fruitMap);
         String actualReport = "";
-        try {
-            actualReport = String.join(
-                    System.lineSeparator(), Files.readAllLines(Path.of(PATH_TEST_FILE)));
-        } catch (IOException e) {
-            throw new RuntimeException("File not found", e);
-        }
+        actualReport = String.join(
+                System.lineSeparator(), Files.readAllLines(Path.of(PATH_TEST_FILE)));
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()
                 + "apple,42";

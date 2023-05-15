@@ -12,7 +12,7 @@ public class ReaderServiceImplTest {
     private static final String INVALID_PATH =
             "wrong";
     private static final String VALID_PATH =
-            "src/test/java/core/basesyntax/resources/testreport";
+            "src/test/java/core/basesyntax/resources/testreport.csv";
     private ReaderService readerService = new ReaderServiceImpl();
 
     @Test
@@ -29,5 +29,4 @@ public class ReaderServiceImplTest {
     public void read_invalidPath_notOk() {
         readerService.readFromFile(INVALID_PATH);
     }
-
 }

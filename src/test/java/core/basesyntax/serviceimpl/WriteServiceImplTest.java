@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class WriteServiceImplTest {
-    private static final String VALID_PATH = "src/test/java/resources/testreport.csv.csv";
+    private static final String VALID_PATH = "src/test/java/resources/testreport.csv";
     private static final String report = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";
     private final WriteService writeService = new WriteServiceImpl();

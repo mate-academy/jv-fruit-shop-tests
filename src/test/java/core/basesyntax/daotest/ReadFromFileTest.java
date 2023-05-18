@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReadFromFileTest {
     public static final int EXPECTED_SIZE_OF_EMPTY_LIST = 0;
-    public static final String FILE_PATH = "src/test/resources/inputOK.csv";
+    public static final String FILE_PATH = "src/test/resources/inputOk.csv";
     public static final String EMPTY_FILE_PATH = "src/test/resources/inputEmpty.csv";
     public static final String WRONG_FILE_PATH = "src/test/resources/blablabla";
     public static final String NULL_FILE_PATH = null;

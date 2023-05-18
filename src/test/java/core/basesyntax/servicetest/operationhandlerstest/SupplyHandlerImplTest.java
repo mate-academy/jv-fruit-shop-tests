@@ -23,8 +23,8 @@ public class SupplyHandlerImplTest {
     void supplyHandle_emptyStorage_Ok() {
         SupplyHandlerImpl supplyHandler = new SupplyHandlerImpl();
         supplyHandler.handleOperation(
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
-        assertEquals(100, Storage.fruitsAndAmount.get("banana"));
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 287));
+        assertEquals(287, Storage.fruitsAndAmount.get("banana"));
     }
 
     @Test

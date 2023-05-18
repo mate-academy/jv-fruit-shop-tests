@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -98,5 +99,10 @@ public class TransactionHandlerImplTest {
         mapToHandle.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl());
         mapToHandle.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl());
         mapToHandle.put(FruitTransaction.Operation.RETURN, new ReturnHandlerImpl());
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitsAndAmount.clear();
     }
 }

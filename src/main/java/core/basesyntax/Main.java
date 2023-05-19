@@ -19,11 +19,10 @@ import java.util.List;
 public class Main {
     private static final String PATH_TO_INPUT_FILE = "src/main/resources/input.csv";
     private static final String PATH_TO_REPORT_FILE = "src/main/resources/report.csv";
+    public static final OperationStrategy operationStrategy = new OperationStrategyImpl();
     private static final ReaderService csvFileReader = new ReaderServiceImpl();
     private static final ParserService fruitTransactionParser = new ParseServiceImpl();
-    public static final OperationStrategy operationStrategy = new OperationStrategyImpl();
-    private static final FruitShopService fruitShopService =
-            new FruitShopServiceImpl(operationStrategy);
+    private static final FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
     private static final ReportMakerService reportMakerService = new ReportMakerServiceImpl();
     private static final WriterService csvFileWriter = new WriterServiceImpl();
 
@@ -35,3 +34,4 @@ public class Main {
         csvFileWriter.writeToFile(PATH_TO_REPORT_FILE, report);
     }
 }
+

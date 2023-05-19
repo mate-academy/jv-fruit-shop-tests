@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
+    public static final OperationStrategy operationStrategy = new OperationStrategyImpl();
     private static final String PATH_TO_INPUT_FILE = "src/main/resources/input.csv";
     private static final String PATH_TO_REPORT_FILE = "src/main/resources/report.csv";
     private static final ReaderService csvFileReader = new ReaderServiceImpl();
     private static final ParserService fruitTransactionParser = new ParseServiceImpl();
-    public static final OperationStrategy operationStrategy = new OperationStrategyImpl();
     private static final FruitShopService fruitShopService =
             new FruitShopServiceImpl(operationStrategy);
     private static final ReportMakerService reportMakerService = new ReportMakerServiceImpl();

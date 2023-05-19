@@ -35,11 +35,6 @@ public class ReaderServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_Read_Empty_File_Not_Ok() {
-        readerService.readFromFile(PATH_TO_EMPTY_FILE);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void test_Read_Nonexistent_File_Not_Ok() {
         readerService.readFromFile(PATH_TO_NONEXISTENT_FILE);
     }

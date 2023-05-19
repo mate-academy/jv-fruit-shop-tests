@@ -15,19 +15,20 @@ public class ReadFromFileTest {
     public static final String EMPTY_FILE_PATH = "src/test/resources/inputEmpty.csv";
     public static final String WRONG_FILE_PATH = "src/test/resources/blablabla";
     public static final String NULL_FILE_PATH = null;
+    private ReadFromFile reader;
 
     @Test
     void readFromFile_Ok() {
         List<String> expected = new ArrayList<>();
         fillTransactionsList(expected);
-        ReadFromFile reader = new ReadFromFileImpl();
+        reader = new ReadFromFileImpl();
         List<String> actual = reader.readFromFile(FILE_PATH);
         assertEquals(expected.size(), actual.size());
     }
 
     @Test
     void readFromEmptyFile_Ok() {
-        ReadFromFile reader = new ReadFromFileImpl();
+        reader = new ReadFromFileImpl();
         List<String> actual = reader.readFromFile(EMPTY_FILE_PATH);
         assertEquals(EXPECTED_SIZE_OF_EMPTY_LIST, actual.size());
     }
@@ -36,20 +37,20 @@ public class ReadFromFileTest {
     void readFromEmptyFile_NotOk() {
         List<String> expected = new ArrayList<>();
         fillTransactionsList(expected);
-        ReadFromFile reader = new ReadFromFileImpl();
+        reader = new ReadFromFileImpl();
         List<String> actual = reader.readFromFile(EMPTY_FILE_PATH);
         assertEquals(EXPECTED_SIZE_OF_EMPTY_LIST, actual.size());
     }
 
     @Test
     void readFromNullPathFill_NotOk() {
-        ReadFromFile reader = new ReadFromFileImpl();
+        reader = new ReadFromFileImpl();
         assertThrows(NullPointerException.class, () -> reader.readFromFile(NULL_FILE_PATH));
     }
 
     @Test
     void readFromWrongFile_NotOk() {
-        ReadFromFile reader = new ReadFromFileImpl();
+        reader = new ReadFromFileImpl();
         assertThrows(RuntimeException.class, () -> reader.readFromFile(WRONG_FILE_PATH));
     }
 

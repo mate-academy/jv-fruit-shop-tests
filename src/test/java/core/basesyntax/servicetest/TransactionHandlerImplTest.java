@@ -12,6 +12,7 @@ import core.basesyntax.service.serviceimpl.operationhandlers.OperationHandler;
 import core.basesyntax.service.serviceimpl.operationhandlers.PurchaseHandlerImpl;
 import core.basesyntax.service.serviceimpl.operationhandlers.ReturnHandlerImpl;
 import core.basesyntax.service.serviceimpl.operationhandlers.SupplyHandlerImpl;
+import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,9 @@ public class TransactionHandlerImplTest {
     public static final int EXPECTED_EMPTY_MAP_SIZE = 0;
     public static final Map
             <FruitTransaction.Operation, OperationHandler> mapToHandle = new HashMap<>();
+    private List<FruitTransaction> fruitTransactions;
+    private TransactionStrategy transactionStrategy;
+    private TransactionHandler transactionHandler;
 
     @BeforeAll
     static void beforeAll() {
@@ -33,10 +37,11 @@ public class TransactionHandlerImplTest {
 
     @Test
     void handle_Ok() {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fruitTransactions = new ArrayList<>();
         fillTransactionsList(fruitTransactions);
-        TransactionStrategyImpl transactionStrategy = new TransactionStrategyImpl(mapToHandle);
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
+        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
+        transactionHandler =
+                new TransactionHandlerImpl((TransactionStrategyImpl) transactionStrategy);
         transactionHandler.handle(fruitTransactions);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 187);
@@ -49,9 +54,10 @@ public class TransactionHandlerImplTest {
 
     @Test
     void handleEmptyList_Ok() {
-        TransactionStrategyImpl transactionStrategy = new TransactionStrategyImpl(mapToHandle);
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
+        transactionHandler =
+                new TransactionHandlerImpl((TransactionStrategyImpl) transactionStrategy);
+        fruitTransactions = new ArrayList<>();
         transactionHandler.handle(fruitTransactions);
         Map<String, Integer> expected = new HashMap<>();
         int actual = Storage.fruitsAndAmount.size();
@@ -61,8 +67,9 @@ public class TransactionHandlerImplTest {
 
     @Test
     void handleNull_NotOk() {
-        TransactionStrategyImpl transactionStrategy = new TransactionStrategyImpl(mapToHandle);
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
+        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
+        transactionHandler =
+                new TransactionHandlerImpl((TransactionStrategyImpl) transactionStrategy);
         assertThrows(NullPointerException.class, () -> transactionHandler.handle(null));
     }
 

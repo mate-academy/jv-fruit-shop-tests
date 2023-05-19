@@ -5,15 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.serviceimpl.operationhandlers.OperationHandler;
 import core.basesyntax.service.serviceimpl.operationhandlers.PurchaseHandlerImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseHandlerImplTest {
+    private OperationHandler purchaseHandler;
+
     @Test
     void purchaseHandle_Ok() {
         Storage.fruitsAndAmount.put("banana", 50);
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
+        purchaseHandler = new PurchaseHandlerImpl();
         purchaseHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 49));
         assertEquals(1, Storage.fruitsAndAmount.get("banana"));
@@ -21,14 +24,14 @@ public class PurchaseHandlerImplTest {
 
     @Test
     void balanceHandle_emptyStorage_NotOk() {
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
+        purchaseHandler = new PurchaseHandlerImpl();
         assertThrows(NullPointerException.class, () -> purchaseHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 100)));
     }
 
     @Test
     void handleNull_NotOk() {
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
+        purchaseHandler = new PurchaseHandlerImpl();
         assertThrows(
                 NullPointerException.class, () -> purchaseHandler.handleOperation(null));
     }

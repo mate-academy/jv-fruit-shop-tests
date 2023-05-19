@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 public class TransactionStrategyImplTest {
     public static final Map<FruitTransaction.Operation,
             OperationHandler> mapToHandle = new HashMap<>();
+    private OperationHandler expected;
 
     @BeforeAll
     static void beforeAll() {
@@ -27,7 +28,7 @@ public class TransactionStrategyImplTest {
 
     @Test
     void balanceOperationCheck_Ok() {
-        OperationHandler expected = new BalanceHandlerImpl();
+        expected = new BalanceHandlerImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.BALANCE);
@@ -36,7 +37,7 @@ public class TransactionStrategyImplTest {
 
     @Test
     void supplyOperationCheck_Ok() {
-        OperationHandler expected = new SupplyHandlerImpl();
+        expected = new SupplyHandlerImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.SUPPLY);
@@ -45,7 +46,7 @@ public class TransactionStrategyImplTest {
 
     @Test
     void purchaseOperationCheck_Ok() {
-        OperationHandler expected = new PurchaseHandlerImpl();
+        expected = new PurchaseHandlerImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.PURCHASE);
@@ -54,7 +55,7 @@ public class TransactionStrategyImplTest {
 
     @Test
     void returnOperationCheck_Ok() {
-        OperationHandler expected = new ReturnHandlerImpl();
+        expected = new ReturnHandlerImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.RETURN);

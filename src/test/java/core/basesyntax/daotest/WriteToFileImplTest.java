@@ -15,10 +15,11 @@ public class WriteToFileImplTest {
     public static final String EMPTY_FILE_PATH = "src/test/resources/";
     public static final String FILE_PATH_OK = "src/test/resources/output.csv";
     public static final String WRONG_FILE_PATH = "src/test/resouRRRces/blabla";
+    private WriteToFile writer;
 
     @Test
     void writeToFile_Ok() {
-        WriteToFile writer = new WriteToFileImpl();
+        writer = new WriteToFileImpl();
         writer.writeToFile(report(), FILE_PATH_OK);
 
         File file = new File(FILE_PATH_OK);
@@ -34,7 +35,7 @@ public class WriteToFileImplTest {
 
     @Test
     void writeToFile_emptyReport_Ok() {
-        WriteToFile writer = new WriteToFileImpl();
+        writer = new WriteToFileImpl();
         writer.writeToFile("fruit,quantity", FILE_PATH_OK);
         File file = new File(FILE_PATH_OK);
         String actual;
@@ -49,7 +50,7 @@ public class WriteToFileImplTest {
 
     @Test
     void writeToFile_NotOk() {
-        WriteToFile writer = new WriteToFileImpl();
+        writer = new WriteToFileImpl();
         writer.writeToFile(report(), FILE_PATH_OK);
         String actual = "";
         assertNotEquals(report(), actual);
@@ -57,19 +58,19 @@ public class WriteToFileImplTest {
 
     @Test
     void writeToFile_WrongFilePath_NotOk() {
-        WriteToFile writer = new WriteToFileImpl();
+        writer = new WriteToFileImpl();
         assertThrows(RuntimeException.class, () -> writer.writeToFile(report(), WRONG_FILE_PATH));
     }
 
     @Test
     void writeToFIle_nullFilePath_NotOk() {
-        WriteToFile writer = new WriteToFileImpl();
+        writer = new WriteToFileImpl();
         assertThrows(NullPointerException.class, () -> writer.writeToFile(report(), null));
     }
 
     @Test
     void writeToFIle_emptyFilePath_NotOk() {
-        WriteToFile writer = new WriteToFileImpl();
+        writer = new WriteToFileImpl();
         assertThrows(RuntimeException.class, () -> writer.writeToFile(report(), EMPTY_FILE_PATH));
     }
 

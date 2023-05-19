@@ -12,35 +12,37 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ParserImplTest {
+    private Parser parser;
+    private List<FruitTransaction> expected;
 
     @Test
     void parse_null_notOk() {
-        Parser parser = new ParserImpl();
+        parser = new ParserImpl();
         Assertions.assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
 
     @Test
     void parse_Ok() {
-        List<FruitTransaction> expected = new ArrayList<>();
+        expected = new ArrayList<>();
         fillTransactionsList(expected);
-        Parser parser = new ParserImpl();
+        parser = new ParserImpl();
         List<FruitTransaction> actual = parser.parse(parseList());
         assertEquals(expected.size(), actual.size());
     }
 
     @Test
     void parse_inputEmpty_Ok() {
-        List<FruitTransaction> expected = new ArrayList<>();
-        Parser parser = new ParserImpl();
+        expected = new ArrayList<>();
+        parser = new ParserImpl();
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         assertEquals(expected, actual);
     }
 
     @Test
     void parse_inputEmpty_NotOk() {
-        List<FruitTransaction> expected = new ArrayList<>();
+        expected = new ArrayList<>();
         fillTransactionsList(expected);
-        Parser parser = new ParserImpl();
+        parser = new ParserImpl();
         List<FruitTransaction> actual = parser.parse(new ArrayList<>());
         assertNotEquals(expected.size(), actual.size());
     }

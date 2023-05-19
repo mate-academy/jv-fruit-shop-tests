@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitTransactionDaoImplTest {
+    private final FruitTransactionDao dao = new FruitTransactionDaoImpl();
 
     @AfterEach
     void tearDown() {
@@ -21,7 +22,6 @@ public class FruitTransactionDaoImplTest {
 
         String result = "apple,24" + System.lineSeparator()
                 + "banan,8" + System.lineSeparator();
-        FruitTransactionDao dao = new FruitTransactionDaoImpl();
         String getAllDataString = dao.getAllData();
         assertEquals(result, getAllDataString);
     }

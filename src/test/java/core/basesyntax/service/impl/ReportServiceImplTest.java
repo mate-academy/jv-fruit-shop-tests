@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportServiceImplTest {
+    private final ReportService reportService = new ReportServiceImpl();
 
     @AfterEach
     void tearDown() {
@@ -24,7 +25,6 @@ public class ReportServiceImplTest {
                 + "apple,24" + System.lineSeparator()
                 + "banan,8" + System.lineSeparator();
 
-        ReportService reportService = new ReportServiceImpl();
         String generatedReport = reportService.generateReport();
         assertEquals(result, generatedReport);
     }

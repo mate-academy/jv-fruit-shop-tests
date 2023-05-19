@@ -15,6 +15,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitServiceImplTest {
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private final FruitService fruitService = new FruitServiceImpl();
 
     @AfterEach
     void tearDown() {
@@ -36,9 +38,6 @@ public class FruitServiceImplTest {
                 "banana", 5));
         fruitTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "apple", 100));
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
-        FruitService fruitService = new FruitServiceImpl();
         fruitService.calculateShoppingCart(fruitTransactions, operationStrategy);
         assertEquals(initialFruitQuantities, Storage.listFruits);
     }

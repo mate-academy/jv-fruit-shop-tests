@@ -2,27 +2,33 @@ package core.basesyntax.model;
 
 import static core.basesyntax.model.FruitTransaction.Operation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 class OperationTest {
-
     @Test
     void getByCode_validCode_Ok() {
-        FruitTransaction.Operation actual1 = Operation.getOperationByCode("b");
-        Operation expected1 = Operation.BALANCE;
-        assertEquals(expected1, actual1);
+        FruitTransaction.Operation actualBalanceOperation = Operation.getOperationByCode("b");
+        Operation balanceOperation = Operation.BALANCE;
+        assertEquals(balanceOperation, actualBalanceOperation);
 
-        Operation actual2 = Operation.getOperationByCode("s");
-        Operation expected2 = Operation.SUPPLY;
-        assertEquals(expected2, actual2);
+        Operation actualSupplyOperation = Operation.getOperationByCode("s");
+        Operation supplyOperation = Operation.SUPPLY;
+        assertEquals(supplyOperation, actualSupplyOperation);
 
-        Operation actual3 = Operation.getOperationByCode("p");
-        Operation expected3 = Operation.PURCHASE;
-        assertEquals(expected3, actual3);
+        Operation actualPurchaseOperation = Operation.getOperationByCode("p");
+        Operation purchaseOperation = Operation.PURCHASE;
+        assertEquals(purchaseOperation, actualPurchaseOperation);
 
-        Operation actual4 = Operation.getOperationByCode("r");
-        Operation expected4 = Operation.RETURN;
-        assertEquals(expected4, actual4);
+        Operation actualReturnOperation = Operation.getOperationByCode("r");
+        Operation returnOperation = Operation.RETURN;
+        assertEquals(returnOperation, actualReturnOperation);
+    }
+
+    @Test
+    void getByCode_notValidCode_notOk() {
+        assertThrows(IllegalArgumentException.class, () -> Operation.getOperationByCode("B"));
+        assertThrows(IllegalArgumentException.class, () -> Operation.getOperationByCode("n"));
     }
 }

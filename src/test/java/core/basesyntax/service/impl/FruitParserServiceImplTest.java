@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class FruitParserServiceImplTest {
+    private final FruitParserService parserService = new FruitParserServiceImpl();
 
     @Test
     public void parser_vaildInput_Ok() {
@@ -21,7 +22,6 @@ public class FruitParserServiceImplTest {
         list.add(line1);
         list.add(line2);
         list.add(line3);
-        FruitParserService parserService = new FruitParserServiceImpl();
         List<FruitTransaction> fruitTransactions =
                 List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 152),
                         new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 90));
@@ -29,10 +29,9 @@ public class FruitParserServiceImplTest {
     }
 
     @Test
-    public void parser_NotvaildInput_notOk() {
-        FruitParserService fruitParserService = new FruitParserServiceImpl();
+    public void parser_notVaildInput_notOk() {
         List<String> list = Arrays.asList("type,fruit,quantity");
-        assertThrows(RuntimeException.class, () -> fruitParserService.parserFruitTransaction(list),
+        assertThrows(RuntimeException.class, () -> parserService.parserFruitTransaction(list),
                 "Not valid length data ");
     }
 }

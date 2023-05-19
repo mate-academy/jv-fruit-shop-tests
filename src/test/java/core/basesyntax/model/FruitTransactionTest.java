@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
-
     @Test
     void constructor_negativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class,

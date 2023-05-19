@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterServiceImplTest {
-
     @Test
     public void writeToFile_validData_Ok() {
         final String validPath = "src/test/resources/report.csv";

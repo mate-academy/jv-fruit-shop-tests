@@ -9,22 +9,21 @@ import core.basesyntax.strategy.operation.PlusOperationHandler;
 import org.junit.jupiter.api.Test;
 
 public class PlusOperationHandlerTest {
+    private final OperationHandler operationHandler = new PlusOperationHandler();
 
     @Test
     public void getHandle_valid_Ok() {
         Integer firstInt = 5;
         Integer secondInt = 5;
 
-        OperationHandler operationHandler = new PlusOperationHandler();
         assertEquals(10, operationHandler.handle(firstInt, secondInt));
     }
 
     @Test
-    public void getHandle_Notvalid_notOk() {
+    public void getHandle_notValid_notOk() {
         Integer firstInt = 5;
         Integer secondInt = -10;
 
-        OperationHandler operationHandler = new PlusOperationHandler();
         assertThrows(NegativeNumberException.class, () ->
                 operationHandler.handle(firstInt,secondInt));
         assertThrows(NegativeNumberException.class, () ->

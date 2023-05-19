@@ -13,6 +13,7 @@ import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.impl.OperationStrategyImpl;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Main {
     private static final String PATH_TO_REPORT_FILE = "src/main/resources/report.csv";
     private static final ReaderService csvFileReader = new ReaderServiceImpl();
     private static final ParserService fruitTransactionParser = new ParseServiceImpl();
-    public static final OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private static final OperationStrategy operationStrategy = new OperationStrategyImpl();
     private static final FruitShopService fruitShopService =
             new FruitShopServiceImpl(operationStrategy);
     private static final ReportMakerService reportMakerService = new ReportMakerServiceImpl();
@@ -35,4 +36,5 @@ public class Main {
         csvFileWriter.writeToFile(PATH_TO_REPORT_FILE, report);
     }
 }
+
 

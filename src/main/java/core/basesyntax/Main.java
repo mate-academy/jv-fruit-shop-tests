@@ -13,7 +13,6 @@ import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.impl.OperationStrategyImpl;
-
 import java.io.IOException;
 import java.util.List;
 

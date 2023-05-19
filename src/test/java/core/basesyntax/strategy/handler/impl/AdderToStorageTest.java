@@ -21,7 +21,6 @@ public class AdderToStorageTest {
         Storage.storage.clear();
     }
 
-
     @Test
     public void test_add_transaction_ok() {
         FruitTransaction transaction = new FruitTransaction(

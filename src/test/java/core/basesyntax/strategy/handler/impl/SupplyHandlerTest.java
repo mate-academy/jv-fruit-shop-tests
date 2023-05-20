@@ -69,3 +69,4 @@ public class SupplyHandlerTest {
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 }
+

@@ -47,7 +47,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void test_AddToNotEmpt_FruitStorage_Ok() {
+    public void test_AddToNotEmptyFruitStorage_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 BANANA,
@@ -68,6 +68,6 @@ public class SupplyHandlerTest {
         handler.handle(transaction);
         int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertEquals(Optional.of(expectedAppleQuantity), Optional.ofNullable(actualAppleQuantity));
+        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 }

@@ -1,12 +1,10 @@
 package core.basesyntax.strategy.handler.impl;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
-import java.util.Optional;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -70,6 +68,6 @@ public class ReturnHandlerTest {
         handler.handle(transaction);
         int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertEquals(Optional.of(expectedAppleQuantity), Optional.ofNullable(actualAppleQuantity));
+        assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 }

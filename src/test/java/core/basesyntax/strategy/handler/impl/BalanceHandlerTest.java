@@ -1,12 +1,10 @@
 package core.basesyntax.strategy.handler.impl;
 
-import static org.junit.Assert.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +27,7 @@ public class BalanceHandlerTest {
     }
 
     @AfterAll
-    public void afterEach() {
+    public static void afterAll() {
         Storage.storage.clear();
     }
 

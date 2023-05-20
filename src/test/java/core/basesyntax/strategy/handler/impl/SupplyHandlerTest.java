@@ -6,13 +6,11 @@ import static org.junit.Assert.assertSame;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
-import org.junit.After;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
-
-import java.util.Optional;
 
 public class SupplyHandlerTest {
     private static final String APPLE = "apple";
@@ -33,7 +31,7 @@ public class SupplyHandlerTest {
     }
 
     @AfterAll
-    public void afterEach() {
+    public static void afterAll() {
         Storage.storage.clear();
     }
 

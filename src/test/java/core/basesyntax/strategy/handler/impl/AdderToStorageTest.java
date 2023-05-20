@@ -6,10 +6,9 @@ import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Optional;
 
 public class AdderToStorageTest {
     private static final String APPLE = "apple";
@@ -49,7 +48,9 @@ public class AdderToStorageTest {
         AdderToStorage.add(transaction2);
         int storageSize = Storage.storage.size();
         assertEquals(VALID_STORAGE_SIZE, storageSize);
-        assertEquals(Optional.of(VALID_FRUIT_QUANTITY), Optional.ofNullable(Storage.storage.get(APPLE)));
-        assertEquals(Optional.of(VALID_FRUIT_QUANTITY),  Optional.ofNullable(Storage.storage.get(BANANA)));
+        assertEquals(Optional.of(VALID_FRUIT_QUANTITY),
+                Optional.ofNullable(Storage.storage.get(APPLE)));
+        assertEquals(Optional.of(VALID_FRUIT_QUANTITY),
+                Optional.ofNullable(Storage.storage.get(BANANA)));
     }
 }

@@ -9,6 +9,8 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 public class AdderToStorageTest {
     private static final String APPLE = "apple";
     private static final int VALID_FRUIT_QUANTITY = 5;
@@ -22,7 +24,7 @@ public class AdderToStorageTest {
     }
 
     @Test
-    public void test_add_transaction_ok() {
+    public void test_AddTransaction_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
                 APPLE,
@@ -34,7 +36,7 @@ public class AdderToStorageTest {
     }
 
     @Test
-    public void test_add_multiple_transactions_ok() {
+    public void test_AddMultipleTransactions_k() {
         FruitTransaction transaction1 = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
                 APPLE,
@@ -47,7 +49,7 @@ public class AdderToStorageTest {
         AdderToStorage.add(transaction2);
         int storageSize = Storage.storage.size();
         assertEquals(VALID_STORAGE_SIZE, storageSize);
-        assertSame(VALID_FRUIT_QUANTITY, Storage.storage.get(APPLE));
-        assertSame(VALID_FRUIT_QUANTITY, Storage.storage.get(BANANA));
+        assertEquals(Optional.of(VALID_FRUIT_QUANTITY), Optional.ofNullable(Storage.storage.get(APPLE)));
+        assertEquals(Optional.of(VALID_FRUIT_QUANTITY),  Optional.ofNullable(Storage.storage.get(BANANA)));
     }
 }

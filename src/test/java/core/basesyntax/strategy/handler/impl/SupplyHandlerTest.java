@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.handler.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
@@ -9,6 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+
+import java.util.Optional;
 
 public class SupplyHandlerTest {
     private static final String APPLE = "apple";
@@ -28,13 +32,13 @@ public class SupplyHandlerTest {
         Storage.storage.put(BANANA, VALID_FRUIT_QUANTITY);
     }
 
-    @After
+    @AfterAll
     public void afterEach() {
         Storage.storage.clear();
     }
 
     @Test
-    public void test_Add_To_Empty_FruitStorage_ok() {
+    public void test_AddToEmptyFruitStorage_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 APPLE,
@@ -45,7 +49,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void test_Add_To_not_empty_FruitStorage_ok() {
+    public void test_AddToNotEmpt_FruitStorage_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
                 BANANA,
@@ -58,7 +62,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void test_Add_Zero_To_Not_Empty_FruitStorage_For_ZeroQuantity_ok() {
+    public void test_AddZeroToNotEmptyFruitStorageForZeroQuantity_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
                 APPLE,
@@ -66,6 +70,6 @@ public class SupplyHandlerTest {
         handler.handle(transaction);
         int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertSame(expectedAppleQuantity, actualAppleQuantity);
+        assertEquals(Optional.of(expectedAppleQuantity), Optional.ofNullable(actualAppleQuantity));
     }
 }

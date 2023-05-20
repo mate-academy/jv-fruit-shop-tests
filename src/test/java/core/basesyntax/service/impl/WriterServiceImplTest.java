@@ -22,7 +22,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void write_To_File_Ok() throws IOException {
+    public void write_ToFile_Ok() throws IOException {
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "apple,20" + System.lineSeparator()
                 + "banana,50" + System.lineSeparator()
@@ -40,7 +40,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = java.io.IOException.class)
-    public void write_To_File_Illegal_Path_Not_Ok() throws IOException {
+    public void write_ToFileIllegalPath_NotOk() throws IOException {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "apple,20" + System.lineSeparator()
                 + "banana,50" + System.lineSeparator()
@@ -50,7 +50,7 @@ public class WriterServiceImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void write_To_File_Null_Report_Not_Ok() throws IOException {
+    public void write_ToFileNullReportNot_Ok() throws IOException {
         writerService.writeToFile(PATH_TO_FILE, null);
     }
 }

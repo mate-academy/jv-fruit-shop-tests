@@ -41,7 +41,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void test_Process_Data_Update_Storage_Ok() {
+    public void test_ProcessDataUpdateStorage_Ok() {
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, ORANGE, 100),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 5),
@@ -58,7 +58,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void test_Process_Data_Not_Update_Storage_Ok() {
+    public void test_ProcessDataNotUpdateStorage_Ok() {
         List<FruitTransaction> transactions = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 0),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 0),
@@ -73,15 +73,4 @@ public class FruitShopServiceImplTest {
         expectedStorage.put(PEAR, 0);
         assertEquals(expectedStorage, Storage.storage);
     }
-
-    /*@Test(expected = RuntimeException.class)
-    public void test_Negative_Process_Data_Update_Storage_Not_Ok() {
-        List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, -1),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, -1),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, PEAR, -1),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, ORANGE, -1)
-        );
-        fruitShopService.processData(transactions);
-    }*/
 }

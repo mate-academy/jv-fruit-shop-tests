@@ -36,21 +36,21 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void test_Parse_With_Null_Input_Ok() {
+    public void test_ParseWithNullInput_Ok() {
         result = parser.parse(null);
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void test_Parse_With_Empty_Input_Ok() {
+    public void test_ParseWithEmptyInput_Ok() {
         result = parser.parse(Collections.emptyList());
         assertNotNull(result);
         assertTrue(result.isEmpty());
     }
 
     @Test
-    public void test_Parse_With_Valid_Input_Ok() {
+    public void test_ParseWithValidInput_Ok() {
         List<String> input = Arrays.asList(HEAD_FILE, VALID_BALANCE_APPLE, VALID_SUPPLY_ORANGE);
         List<FruitTransaction> expected = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
@@ -65,7 +65,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void testParseWithInvalidInputOk() {
+    public void test_ParseInvalidInput_ExpectCorrectHandling() {
         List<String> input = Arrays.asList(HEAD_FILE, INVALID_BALANCE_STRING, VALID_SUPPLY_ORANGE);
         result = parser.parse(input);
         assertEquals(EXPECTED_LIST_SIZE, result.size());

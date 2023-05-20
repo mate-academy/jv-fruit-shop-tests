@@ -24,14 +24,14 @@ public class ReportMakerServiceImplTest {
     }
 
     @Test
-    public void report_Empty_Storage_Ok() {
+    public void report_EmptyStorage_Ok() {
         String expected = HEAD_STRING + LINE_SEPARATOR;
         String actual = reportMaker.generateReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void report_With_One_Item_ok() {
+    public void report_WithOneItem_ok() {
         Storage.storage.put("apple", 10);
         String expected = HEAD_STRING
                 + "apple,10"
@@ -41,7 +41,7 @@ public class ReportMakerServiceImplTest {
     }
 
     @Test
-    public void report_Storage_With_Multiple_Items_ok() {
+    public void report_StorageWithMultipleItems_ok() {
         Storage.storage.put("apple", 10);
         Storage.storage.put("orange", 20);
         Storage.storage.put("banana", 30);

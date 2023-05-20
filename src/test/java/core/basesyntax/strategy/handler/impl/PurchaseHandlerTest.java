@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.handler.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
@@ -8,6 +9,8 @@ import core.basesyntax.strategy.handler.OperationHandler;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.Optional;
 
 public class PurchaseHandlerTest {
     private static final String APPLE = "apple";
@@ -31,7 +34,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void test_Update_FruitStorage_Ok() {
+    public void test_UpdateFruitStorage_Ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 APPLE,
@@ -44,7 +47,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void test_Purchase_Quantity_Is_Greater_Than_Current() {
+    public void test_PurchaseQuantityIsGreaterThanCurrent() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 APPLE,
@@ -53,7 +56,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void test_Reduce_Fruit_Quantity_In_Storage() {
+    public void test_ReduceFruitQuantityInStorage() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
                 BANANA,
@@ -61,6 +64,6 @@ public class PurchaseHandlerTest {
         handler.handle(transaction);
         Integer actualQuantity = Storage.storage.get(BANANA);
         int expectedQuantity = ZERO_FRUIT_QUANTITY;
-        assertSame(expectedQuantity, actualQuantity);
+        assertEquals(Optional.of(expectedQuantity), Optional.ofNullable(actualQuantity));
     }
 }

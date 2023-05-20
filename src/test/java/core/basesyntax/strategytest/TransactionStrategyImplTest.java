@@ -19,17 +19,18 @@ import org.junit.jupiter.api.Test;
 public class TransactionStrategyImplTest {
     public static final Map<FruitTransaction.Operation,
             OperationHandler> mapToHandle = new HashMap<>();
-    private OperationHandler expected;
+    private static OperationHandler expected;
+    private static TransactionStrategy transactionStrategy;
 
     @BeforeAll
     static void beforeAll() {
         fillMapToHandle();
+        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
     }
 
     @Test
     void balanceOperationCheck_Ok() {
         expected = new BalanceHandlerImpl();
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.BALANCE);
         assertEquals(expected.getClass(), actual.getClass());
@@ -38,7 +39,6 @@ public class TransactionStrategyImplTest {
     @Test
     void supplyOperationCheck_Ok() {
         expected = new SupplyHandlerImpl();
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.SUPPLY);
         assertEquals(expected.getClass(), actual.getClass());
@@ -47,7 +47,6 @@ public class TransactionStrategyImplTest {
     @Test
     void purchaseOperationCheck_Ok() {
         expected = new PurchaseHandlerImpl();
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.PURCHASE);
         assertEquals(expected.getClass(), actual.getClass());
@@ -56,7 +55,6 @@ public class TransactionStrategyImplTest {
     @Test
     void returnOperationCheck_Ok() {
         expected = new ReturnHandlerImpl();
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         OperationHandler actual =
                 transactionStrategy.getOperationHandler(FruitTransaction.Operation.RETURN);
         assertEquals(expected.getClass(), actual.getClass());

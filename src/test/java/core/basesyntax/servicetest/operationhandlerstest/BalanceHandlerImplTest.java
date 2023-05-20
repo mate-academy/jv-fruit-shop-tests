@@ -8,15 +8,20 @@ import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.serviceimpl.operationhandlers.BalanceHandlerImpl;
 import core.basesyntax.service.serviceimpl.operationhandlers.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceHandlerImplTest {
-    private OperationHandler balanceHandler;
+    private static OperationHandler balanceHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        balanceHandler = new BalanceHandlerImpl();
+    }
 
     @Test
     void balanceHandle_Ok() {
         Storage.fruitsAndAmount.put("banana", 50);
-        balanceHandler = new BalanceHandlerImpl();
         balanceHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100));
         assertEquals(150, Storage.fruitsAndAmount.get("banana"));
@@ -24,7 +29,6 @@ public class BalanceHandlerImplTest {
 
     @Test
     void balanceHandle_emptyStorage_Ok() {
-        balanceHandler = new BalanceHandlerImpl();
         balanceHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100));
         assertEquals(100, Storage.fruitsAndAmount.get("banana"));
@@ -32,7 +36,6 @@ public class BalanceHandlerImplTest {
 
     @Test
     void handleNull_NotOk() {
-        balanceHandler = new BalanceHandlerImpl();
         assertThrows(
                 NullPointerException.class, () -> balanceHandler.handleOperation(null));
     }

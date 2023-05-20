@@ -8,15 +8,20 @@ import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.serviceimpl.operationhandlers.OperationHandler;
 import core.basesyntax.service.serviceimpl.operationhandlers.PurchaseHandlerImpl;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseHandlerImplTest {
-    private OperationHandler purchaseHandler;
+    private static OperationHandler purchaseHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        purchaseHandler = new PurchaseHandlerImpl();
+    }
 
     @Test
     void purchaseHandle_Ok() {
         Storage.fruitsAndAmount.put("banana", 50);
-        purchaseHandler = new PurchaseHandlerImpl();
         purchaseHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 49));
         assertEquals(1, Storage.fruitsAndAmount.get("banana"));
@@ -24,14 +29,12 @@ public class PurchaseHandlerImplTest {
 
     @Test
     void balanceHandle_emptyStorage_NotOk() {
-        purchaseHandler = new PurchaseHandlerImpl();
         assertThrows(NullPointerException.class, () -> purchaseHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 100)));
     }
 
     @Test
     void handleNull_NotOk() {
-        purchaseHandler = new PurchaseHandlerImpl();
         assertThrows(
                 NullPointerException.class, () -> purchaseHandler.handleOperation(null));
     }
@@ -39,7 +42,6 @@ public class PurchaseHandlerImplTest {
     @Test
     void handle_notEnoughFruitsToPurchase_NotOk() {
         Storage.fruitsAndAmount.put("banana", 50);
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
         assertThrows(RuntimeException.class, () -> purchaseHandler.handleOperation(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 51)));
     }

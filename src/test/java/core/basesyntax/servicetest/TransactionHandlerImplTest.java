@@ -23,23 +23,23 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class TransactionHandlerImplTest {
-    public static final int EXPECTED_EMPTY_MAP_SIZE = 0;
-    public static final Map
+    private static final int EXPECTED_EMPTY_MAP_SIZE = 0;
+    private static final Map
             <FruitTransaction.Operation, OperationHandler> mapToHandle = new HashMap<>();
-    private List<FruitTransaction> fruitTransactions;
-    private TransactionStrategy transactionStrategy;
+    private static List<FruitTransaction> fruitTransactions;
+    private static TransactionStrategy transactionStrategy;
     private TransactionHandler transactionHandler;
 
     @BeforeAll
     static void beforeAll() {
         fillMapToHandle();
+        fruitTransactions = new ArrayList<>();
+        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
     }
 
     @Test
     void handle_Ok() {
-        fruitTransactions = new ArrayList<>();
         fillTransactionsList(fruitTransactions);
-        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         transactionHandler =
                 new TransactionHandlerImpl((TransactionStrategyImpl) transactionStrategy);
         transactionHandler.handle(fruitTransactions);
@@ -54,10 +54,8 @@ public class TransactionHandlerImplTest {
 
     @Test
     void handleEmptyList_Ok() {
-        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         transactionHandler =
                 new TransactionHandlerImpl((TransactionStrategyImpl) transactionStrategy);
-        fruitTransactions = new ArrayList<>();
         transactionHandler.handle(fruitTransactions);
         Map<String, Integer> expected = new HashMap<>();
         int actual = Storage.fruitsAndAmount.size();
@@ -67,7 +65,6 @@ public class TransactionHandlerImplTest {
 
     @Test
     void handleNull_NotOk() {
-        transactionStrategy = new TransactionStrategyImpl(mapToHandle);
         transactionHandler =
                 new TransactionHandlerImpl((TransactionStrategyImpl) transactionStrategy);
         assertThrows(NullPointerException.class, () -> transactionHandler.handle(null));

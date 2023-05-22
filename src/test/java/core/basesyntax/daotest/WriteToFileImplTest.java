@@ -24,16 +24,11 @@ public class WriteToFileImplTest {
     }
 
     @Test
-    void writeToFile_Ok() {
+    void writeToFile_Ok() throws IOException {
         writer.writeToFile(report(), FILE_PATH_OK);
         File file = new File(FILE_PATH_OK);
-        String actual;
-        try {
-            actual = String.join(System.lineSeparator(),
-                    Files.readAllLines(file.toPath()));
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write to file. " + e);
-        }
+        String actual = String.join(System.lineSeparator(),
+                Files.readAllLines(file.toPath()));
         assertEquals(report(), actual);
     }
 

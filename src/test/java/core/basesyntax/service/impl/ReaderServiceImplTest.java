@@ -4,21 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.service.ReadService;
+import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ReadServiceImplTest {
-    private static ReadService readService;
+class ReaderServiceImplTest {
+
+    private static ReaderService readerService;
     private static List<String> dataFromFile;
-    private static final String INPUT_FILE = "src/main/java/core/basesyntax/files/input_file.csv";
+    private static final String INPUT_FILE = "src/main/resources/input_file.csv";
     private static final String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll
     public static void init() {
-        readService = new ReadServiceImpl();
+        readerService = new ReaderServiceImpl();
         dataFromFile = new ArrayList<>();
     }
 
@@ -26,13 +27,13 @@ class ReadServiceImplTest {
     void reader_fileNotExist_notOk() {
         String nonExistingFile = "not_exist";
         assertThrows(RuntimeException.class,
-                () -> readService.readFromFile(nonExistingFile),
+                () -> readerService.readFromFile(nonExistingFile),
                 MASSAGE);
     }
 
     @Test
     void reader_fileIsEmpty_notOk() {
-        dataFromFile = readService.readFromFile(INPUT_FILE);
+        dataFromFile = readerService.readFromFile(INPUT_FILE);
         assertThrows(AssertionError.class,
                 () -> assertTrue(dataFromFile.isEmpty()),
                 MASSAGE);
@@ -40,7 +41,7 @@ class ReadServiceImplTest {
 
     @Test
     void reader_readFromFile_Ok() {
-        dataFromFile = readService.readFromFile(INPUT_FILE);
+        dataFromFile = readerService.readFromFile(INPUT_FILE);
         List<String> newList = new ArrayList<>();
         newList.add("b,banana,20");
         newList.add("b,apple,100");

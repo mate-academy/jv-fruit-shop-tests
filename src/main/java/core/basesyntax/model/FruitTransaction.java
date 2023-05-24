@@ -6,28 +6,26 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public Operation getOperation() {
-        return operation;
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
     }
 
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public enum Operation {
@@ -36,19 +34,20 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String code;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String code) {
+            this.code = code;
         }
 
         public static Operation getOperationByCode(String code) {
-            for (Operation operationType : values()) {
-                if (operationType.operation.equals(code)) {
+            for (Operation operationType : Operation.values()) {
+                if (operationType.code.equals(code)) {
                     return operationType;
                 }
             }
-            throw new RuntimeException("Incorrect code " + code);
+            throw new RuntimeException("Incorrect code: " + code);
         }
+
     }
 }

@@ -35,7 +35,7 @@ public class ReturnImplTest {
     }
 
     @Test
-    public void handle_ValidReturnTransaction_isOk() {
+    public void handleReturnTransaction_ValidTransaction_Ok() {
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(EXPECTED_QUANTITY,
                 FruitStorage.fruits.get(fruitTransaction.getFruit()),
@@ -43,7 +43,7 @@ public class ReturnImplTest {
     }
 
     @Test
-    public void handle_QuantityUpdated_isOk() {
+    public void handleReturnTransaction_QuantityUpdated_Ok() {
         FruitStorage.fruits.put(FRUIT, INITIAL_QUANTITY);
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(INITIAL_QUANTITY + EXPECTED_QUANTITY,
@@ -52,7 +52,7 @@ public class ReturnImplTest {
     }
 
     @Test
-    public void handle_ReturnTransactionWithZeroQuantity_isOk() {
+    public void handleReturnTransaction_ZeroQuantity_Ok() {
         FruitStorage.fruits.put(FRUIT, INITIAL_QUANTITY);
         operationHandler.operate(zeroQuantityFruitTransaction);
         Assertions.assertEquals(INITIAL_QUANTITY, FruitStorage.fruits.get(FRUIT),

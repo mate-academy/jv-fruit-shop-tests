@@ -31,7 +31,7 @@ public class BalanceImplTest {
     }
 
     @Test
-    public void handle_ValidBalanceTransaction_isOk() {
+    public void handleBalanceTransaction_ValidTransaction_Ok() {
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(EXPECTED_QUANTITY,
                 FruitStorage.fruits.get(fruitTransaction.getFruit()),
@@ -39,7 +39,7 @@ public class BalanceImplTest {
     }
 
     @Test
-    public void handle_QuantityUpdated_isOk() {
+    public void handleBalanceTransaction_QuantityUpdated_Ok() {
         FruitStorage.fruits.put(FRUIT, INITIAL_QUANTITY);
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(EXPECTED_QUANTITY, FruitStorage.fruits.get(FRUIT),

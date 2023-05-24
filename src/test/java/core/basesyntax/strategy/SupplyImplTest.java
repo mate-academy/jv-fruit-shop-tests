@@ -31,14 +31,14 @@ public class SupplyImplTest {
     }
 
     @Test
-    public void handle_ValidSupplyTransaction_isOk() {
+    public void handleSupplyTransaction_ValidTransaction_Ok() {
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(EXPECTED_QUANTITY, FruitStorage.fruits.get(FRUIT),
                 "Supply transaction with adding fruits failed");
     }
 
     @Test
-    public void handle_SupplyTransaction_QuantityUpdated_isOk() {
+    public void handleSupplyTransaction_QuantityUpdated_Ok() {
         FruitStorage.fruits.put(FRUIT, INITIAL_QUANTITY);
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(EXPECTED_QUANTITY + INITIAL_QUANTITY,

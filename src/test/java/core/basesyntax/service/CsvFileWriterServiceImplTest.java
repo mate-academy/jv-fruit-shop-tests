@@ -1,16 +1,18 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.service.impl.CsvFileReportServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.testservice.ConfigReader;
+import core.basesyntax.testservice.RandomDataGenerator;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,114 +23,108 @@ import org.junit.jupiter.api.TestInstance;
 @TestInstance(TestInstance.Lifecycle.PER_METHOD)
 public class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService csvFileWriterService;
-    private static CsvFileReportService csvFileReportService;
-    private static FruitDao fruitDao;
     private static ConfigReader configReader;
-    private static String directoryPath;
-    private static String inputFileName;
+    private static RandomDataGenerator randomDataGenerator;
     private static Path fileCopyPath;
-    private static final String INVALID_DATA = "1,2,3\n4,5,6\n";
     private static final String INVALID_FILE_READ_FROM = "invalid/test.csv";
     private static final String PREFIX = "test";
     private static final String SUFFIX = ".csv";
-    private static final String INVALID_FILE_NAME = "test.csv";
+    private static String actualReportTest;
 
     @BeforeAll
     public static void init() {
         csvFileWriterService = new CsvFileWriterServiceImpl();
-        csvFileReportService = new CsvFileReportServiceImpl();
-        fruitDao = new FruitDaoImpl();
         configReader = new ConfigReader();
-        directoryPath = Paths.get(configReader.getValueByKey("file.read.from"))
-                .getParent().toString();
-        inputFileName = Paths.get(configReader.getValueByKey("file.read.from"))
-                .getFileName().toString();
+        randomDataGenerator = new RandomDataGenerator();
     }
 
     @BeforeEach
     public void createFileCopy() throws IOException {
-        fileCopyPath = Files.createTempDirectory("temp")
-                .resolve("file_copy.csv");
+        fileCopyPath = Path.of("src/test/resources", "file_copy.csv");
         Files.copy(Path.of(configReader.getValueByKey("file.read.from")),
                 fileCopyPath, StandardCopyOption.REPLACE_EXISTING);
     }
 
     @AfterEach
-    public void restoreFileCopy() throws IOException {
-        Path filePath = Path.of(configReader.getValueByKey("file.read.from"));
-        Files.copy(fileCopyPath, filePath, StandardCopyOption.REPLACE_EXISTING);
+    public void restoreFileContent() throws IOException {
+        actualReportTest = configReader.getValueByKey("report.actual.test");
+        Files.write(Paths.get(actualReportTest), new byte[0]);
         Files.delete(fileCopyPath);
     }
 
     @Test
-    public void writeReportToFile_isOk() {
-        String expectedReport = csvFileReportService.createReport(fruitDao.getAllFruits());
-        Assertions.assertDoesNotThrow(() -> {
-            Path filePath = Paths.get(directoryPath, "filename.txt");
-            Files.writeString(filePath, "");
-            Files.write(filePath, expectedReport.getBytes());
-            String actualReport = Files.readString(filePath);
-            Assertions.assertEquals(expectedReport, actualReport,
-                    "Recording failed");
-        });
+    public void writeDataToFile_WriteValidData_Ok() {
+        csvFileWriterService.writeDataToFile(actualReportTest, createTestReport());
+        File actualFile = new File(actualReportTest);
+        File expectedFile = new File(configReader.getValueByKey("report.expected.test"));
+        try {
+            Assertions.assertTrue(FileUtils.contentEquals(expectedFile, actualFile),
+                    "Files don't equal");
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write file:" + actualReportTest, e);
+        }
     }
 
     @Test
-    public void writeDataToFile_FileExist_isOk() {
-        Path filePath = Paths.get(directoryPath, inputFileName);
-        Assertions.assertTrue(Files.exists(filePath),
+    public void writeDataToFile_FileExist_Ok() {
+        Assertions.assertTrue(Files.exists(Paths.get(fileCopyPath.getParent().toString(),
+                        fileCopyPath.getFileName().toString())),
                 "The file wasn't written to the specified directory");
     }
 
     @Test
-    public void writeDataToFile_InvalidFileName_isNotOk() {
+    public void writeDataToFile_InvalidFileName_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
-                () -> csvFileWriterService.writeDataToFile(INVALID_FILE_READ_FROM, INVALID_DATA),
+                () -> csvFileWriterService.writeDataToFile(INVALID_FILE_READ_FROM,
+                        randomDataGenerator.generateRandomData()),
                     "RuntimeException expected");
     }
 
     @Test
-    public void writeDataToFile_IoException_isNotOk() throws IOException {
+    public void writeDataToFile_setReadOnly_Ok() throws IOException {
         File file = Files.createTempFile(PREFIX, SUFFIX).toFile();
         file.deleteOnExit();
 
         if (!file.setReadOnly()) {
             Assertions.fail("Failed to set file as read-only");
         }
-
         Assertions.assertThrows(RuntimeException.class,
                 () -> csvFileWriterService.writeDataToFile(file.getAbsolutePath(),
-                        INVALID_DATA),
+                        randomDataGenerator.generateRandomData()),
                 "RuntimeException expected");
     }
 
     @Test
-    public void writeDataToCorrectDirectoryAsFilePath_isOk() {
-        Assertions.assertTrue(Files.exists(Paths.get(directoryPath)),
-                "Directory path isn't correct");
-    }
-
-    @Test
-    public void writeDataToFile_DirectoryAsFilePath_isNotOk() {
-        String directoryPath = Paths.get(configReader.getValueByKey("file.read.from"))
-                .getParent()
-                .toString();
+    public void writeDataToFile_DirectoryAsFilePath_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
-                () -> csvFileWriterService.writeDataToFile(directoryPath, INVALID_DATA),
+                () -> csvFileWriterService
+                        .writeDataToFile(fileCopyPath.getParent().toString(),
+                        randomDataGenerator.generateRandomData()),
                 "RuntimeException expected");
     }
 
     @Test
-    public void writeDataToFile_NullData_isNotOk() {
+    public void writeDataToFile_NullData_NotOk() {
         Assertions.assertThrows(NullPointerException.class,
-                () -> csvFileWriterService.writeDataToFile(INVALID_FILE_NAME, null),
+                () -> csvFileWriterService
+                        .writeDataToFile(randomDataGenerator.generateRandomData(),
+                        null),
                 "NullPointerException expected");
     }
 
     @Test
-    public void writeDataToFile_NullFilePath_isNotOk() {
+    public void writeDataToFile_NullFilePath_NotOk() {
         Assertions.assertThrows(NullPointerException.class,
-                () -> csvFileWriterService.writeDataToFile(null, INVALID_DATA),
+                () -> csvFileWriterService.writeDataToFile(null,
+                        randomDataGenerator.generateRandomData()),
                 "NullPointerException expected");
+    }
+
+    public String createTestReport() {
+        CsvFileReportServiceImpl csvFileReportService = new CsvFileReportServiceImpl();
+        Map<String, Integer> allFruits = new HashMap<>();
+        allFruits.put("banana", 30);
+        allFruits.put("apple", 40);
+        return csvFileReportService.createReport(allFruits);
     }
 }

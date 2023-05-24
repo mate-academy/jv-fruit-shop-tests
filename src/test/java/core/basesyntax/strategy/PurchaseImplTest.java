@@ -34,7 +34,7 @@ public class PurchaseImplTest {
     }
 
     @Test
-    public void handle_ValidPurchaseTransaction_isOk() {
+    public void handlePurchaseTransaction_ValidTransaction_Ok() {
         FruitStorage.fruits.put(FRUIT, INITIAL_QUANTITY);
         operationHandler.operate(fruitTransaction);
         Assertions.assertEquals(INITIAL_QUANTITY - EXPECTED_QUANTITY,
@@ -43,14 +43,7 @@ public class PurchaseImplTest {
     }
 
     @Test
-    public void handle_PurchaseTransaction_RuntimeExceptionThrown_isOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> operationHandler.operate(fruitTransaction),
-                "RuntimeException expected");
-    }
-
-    @Test
-    public void handle_InvalidPurchaseTransaction_RuntimeExceptionThrown_isOk() {
+    public void handlePurchaseTransaction_InvalidTransaction_NotOk() {
         Assertions.assertThrows(RuntimeException.class, () ->
                 operationHandler.operate(invalidFruitTransaction),
                 "RuntimeException expected");

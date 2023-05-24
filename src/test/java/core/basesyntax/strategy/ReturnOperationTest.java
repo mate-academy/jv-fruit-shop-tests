@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,5 +28,10 @@ class ReturnOperationTest {
         int expectedQuantity = 10;
         int actualQuantity = storage.get(transaction.getFruit());
         assertEquals(expectedQuantity, actualQuantity);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        Storage.fruitStorage.clear();
     }
 }

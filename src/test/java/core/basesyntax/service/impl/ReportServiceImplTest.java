@@ -8,16 +8,22 @@ import core.basesyntax.model.Product;
 import core.basesyntax.service.ReportService;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ReportServiceImpl Test")
 class ReportServiceImplTest {
-    private static final ReportService REPORT_SERVICE = new ReportServiceImpl();
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
     public static final Product BANANA = Product.BANANA;
     public static final Product APPLE = Product.APPLE;
+    private static ReportService reportService;
+
+    @BeforeAll
+    static void beforeAll() {
+        reportService = new ReportServiceImpl();
+    }
 
     @AfterEach
     void tearDown() {
@@ -34,7 +40,7 @@ class ReportServiceImplTest {
                 "fruit,quantity",
                 "banana,20",
                 "apple,10");
-        List<String> actual = REPORT_SERVICE.createReport();
+        List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }
 
@@ -46,7 +52,7 @@ class ReportServiceImplTest {
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,130");
-        List<String> actual = REPORT_SERVICE.createReport();
+        List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }
 
@@ -56,7 +62,7 @@ class ReportServiceImplTest {
     void createReport_emptyList_ok() {
         List<String> expected = List.of(
                 "fruit,quantity");
-        List<String> actual = REPORT_SERVICE.createReport();
+        List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }
 }

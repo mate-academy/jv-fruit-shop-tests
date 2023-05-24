@@ -1,14 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.BalanceOperation;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.PurchaseHandler;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;

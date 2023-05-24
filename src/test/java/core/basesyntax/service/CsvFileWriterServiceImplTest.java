@@ -9,14 +9,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -25,31 +23,24 @@ public class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService csvFileWriterService;
     private static ConfigReader configReader;
     private static RandomDataGenerator randomDataGenerator;
-    private static Path fileCopyPath;
+    private static Path testReportPath;
+    private static String actualReportTest;
     private static final String INVALID_FILE_READ_FROM = "invalid/test.csv";
     private static final String PREFIX = "test";
     private static final String SUFFIX = ".csv";
-    private static String actualReportTest;
 
     @BeforeAll
     public static void init() {
         csvFileWriterService = new CsvFileWriterServiceImpl();
         configReader = new ConfigReader();
         randomDataGenerator = new RandomDataGenerator();
-    }
-
-    @BeforeEach
-    public void createFileCopy() throws IOException {
-        fileCopyPath = Path.of("src/test/resources", "file_copy.csv");
-        Files.copy(Path.of(configReader.getValueByKey("file.read.from")),
-                fileCopyPath, StandardCopyOption.REPLACE_EXISTING);
+        actualReportTest = configReader.getValueByKey("report.actual.test");
+        testReportPath = Paths.get(actualReportTest);
     }
 
     @AfterEach
     public void restoreFileContent() throws IOException {
-        actualReportTest = configReader.getValueByKey("report.actual.test");
         Files.write(Paths.get(actualReportTest), new byte[0]);
-        Files.delete(fileCopyPath);
     }
 
     @Test
@@ -67,9 +58,9 @@ public class CsvFileWriterServiceImplTest {
 
     @Test
     public void writeDataToFile_FileExist_Ok() {
-        Assertions.assertTrue(Files.exists(Paths.get(fileCopyPath.getParent().toString(),
-                        fileCopyPath.getFileName().toString())),
-                "The file wasn't written to the specified directory");
+        Assertions.assertTrue(Files.exists(testReportPath.getParent()),
+                "The parent directory doesn't exist");
+        Assertions.assertTrue(Files.exists(testReportPath), "The file doesn't exist");
     }
 
     @Test
@@ -98,7 +89,7 @@ public class CsvFileWriterServiceImplTest {
     public void writeDataToFile_DirectoryAsFilePath_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> csvFileWriterService
-                        .writeDataToFile(fileCopyPath.getParent().toString(),
+                        .writeDataToFile(testReportPath.getParent().toString(),
                         randomDataGenerator.generateRandomData()),
                 "RuntimeException expected");
     }

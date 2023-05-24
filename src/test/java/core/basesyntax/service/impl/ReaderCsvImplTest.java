@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,11 +12,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("ReaderCsvImpl Test")
 class ReaderCsvImplTest {
     private ReaderCsvImpl reader;
-
-    @AfterEach
-    void tearDown() {
-        reader = null;
-    }
 
     @DisplayName("Check reader CSV with valid file")
     @Test

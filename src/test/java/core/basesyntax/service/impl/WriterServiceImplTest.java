@@ -17,14 +17,14 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void write_writeToFile_Ok() {
-        boolean excually =
+    void writerService_writeToFile_ok() {
+        boolean operationSuccess =
                 writeService.writeToFile("src/main/resources/report_file.csv", "report");
-        assertTrue(excually);
+        assertTrue(operationSuccess);
     }
 
     @Test
-    void write_invalidFilePath_ExceptionThrown() {
+    void writerService_invalidFilePath_notOk() {
         assertThrows(RuntimeException.class,
                 () -> writeService.writeToFile("invalid/file/path.csv", "report"),
                 MASSAGE);

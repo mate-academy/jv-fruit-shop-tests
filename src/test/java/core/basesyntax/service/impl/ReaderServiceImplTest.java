@@ -13,18 +13,18 @@ import org.junit.jupiter.api.Test;
 class ReaderServiceImplTest {
 
     private static ReaderService readerService;
-    private static List<String> dataFromFile;
+    private static List<String> expected;
     private static final String INPUT_FILE = "src/main/resources/input_file.csv";
     private static final String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll
     public static void init() {
         readerService = new ReaderServiceImpl();
-        dataFromFile = new ArrayList<>();
     }
 
     @Test
     void reader_fileNotExist_notOk() {
+        expected = new ArrayList<>();
         String nonExistingFile = "not_exist";
         assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(nonExistingFile),
@@ -33,24 +33,25 @@ class ReaderServiceImplTest {
 
     @Test
     void reader_fileIsEmpty_notOk() {
-        dataFromFile = readerService.readFromFile(INPUT_FILE);
+        expected = new ArrayList<>();
+        expected = readerService.readFromFile(INPUT_FILE);
         assertThrows(AssertionError.class,
-                () -> assertTrue(dataFromFile.isEmpty()),
+                () -> assertTrue(expected.isEmpty()),
                 MASSAGE);
     }
 
     @Test
     void reader_readFromFile_Ok() {
-        dataFromFile = readerService.readFromFile(INPUT_FILE);
-        List<String> newList = new ArrayList<>();
-        newList.add("b,banana,20");
-        newList.add("b,apple,100");
-        newList.add("s,banana,100");
-        newList.add("p,banana,13");
-        newList.add("r,apple,10");
-        newList.add("p,apple,20");
-        newList.add("p,banana,5");
-        newList.add("s,banana,50");
-        assertEquals(dataFromFile, newList);
+        expected = readerService.readFromFile(INPUT_FILE);
+        List<String> actualList = new ArrayList<>();
+        actualList.add("b,banana,20");
+        actualList.add("b,apple,100");
+        actualList.add("s,banana,100");
+        actualList.add("p,banana,13");
+        actualList.add("r,apple,10");
+        actualList.add("p,apple,20");
+        actualList.add("p,banana,5");
+        actualList.add("s,banana,50");
+        assertEquals(expected, actualList);
     }
 }

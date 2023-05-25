@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -28,6 +29,12 @@ class ReturnOperationTest {
         int expectedQuantity = 10;
         int actualQuantity = storage.get(transaction.getFruit());
         assertEquals(expectedQuantity, actualQuantity);
+    }
+
+    @Test
+    public void returnOperation_NegativeQuantity_notOk() {
+        assertThrows(RuntimeException.class, () -> returnOperation.operateTransaction(
+                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", -10), storage));
     }
 
     @AfterEach

@@ -17,17 +17,27 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    public void testParseTransaction_EmptyInput_ThrowsException() {
+    public void transactionService_emptyInput_notOk() {
         List<String> transactionStrings = new ArrayList<>();
         assertThrows(RuntimeException.class,
                 () -> transaction.parseTransactions(transactionStrings));
     }
 
     @Test
-    public void testParseTransaction_InvalidInputFormat_ThrowsException() {
+    public void transactionService_invalidInput_notOk() {
         List<String> transactionStrings = new ArrayList<>();
         transactionStrings.add("b,apple");
         assertThrows(RuntimeException.class,
                 () -> transaction.parseTransactions(transactionStrings));
+    }
+
+    @Test
+    public void transactionService_successfulTransaction_ok() {
+        List<String> transactionStrings = new ArrayList<>();
+        transactionStrings.add("b,apple,3");
+        transactionStrings.add("s,banana,2");
+        transactionStrings.add("p,apple,5");
+        transactionStrings.add("r,banana,5");
+        transaction.parseTransactions(transactionStrings);
     }
 }

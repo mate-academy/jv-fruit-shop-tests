@@ -22,7 +22,7 @@ class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_ValidTransactionApples_ok() {
+    public void balanceOperation_validTransactionApples_ok() {
         transaction.setQuantity(10);
         new BalanceOperation().operateTransaction(transaction, storage);
         int actualQuantity = storage.get(transaction.getFruit());
@@ -31,7 +31,7 @@ class BalanceOperationTest {
     }
 
     @Test
-    public void balanceOperation_NegativeQuantity_ook() {
+    public void balanceOperation_NegativeValue_notOk() {
         transaction.setQuantity(-10);
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 balanceOperation.operateTransaction(transaction, storage));

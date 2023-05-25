@@ -24,18 +24,15 @@ class PurchaseHandlerTest {
     @Test
     public void purchaseHandler_testOperateTransaction_ok() {
         transaction.setQuantity(3);
-
         storage.put(transaction.getFruit(), 5);
-
         purchaseHandler.operateTransaction(transaction, storage);
-
-        int expectedQuantity = 2; // 5 - 3
+        int expectedQuantity = 2;
         int actualQuantity = storage.get(transaction.getFruit());
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
-    public void purchaseHandler_NegativeQuantity_ok() {
+    public void purchaseHandler_NegativeQuantity_notOk() {
         transaction.setQuantity(10);
         storage.put(transaction.getFruit(), 5);
         RuntimeException exception = assertThrows(RuntimeException.class,

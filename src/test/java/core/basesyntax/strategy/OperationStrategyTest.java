@@ -25,28 +25,32 @@ class OperationStrategyTest {
     @Test
     void validBalanceOperationInput_ok() {
         Class<BalanceOperation> expected = BalanceOperation.class;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.BALANCE);
-        assertEquals(expected, actual.getClass());
+        Class<? extends OperationHandler> actual
+                = operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass();
+        assertEquals(expected, actual);
     }
 
     @Test
     void validSupplyOperationInput_ok() {
         Class<SupplyHandler> expected = SupplyHandler.class;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.SUPPLY);
-        assertEquals(expected, actual.getClass());
+        Class<? extends OperationHandler> actual
+                = operationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass();
+        assertEquals(expected, actual);
     }
 
     @Test
     void validPurchaseOperationInput_ok() {
         Class<PurchaseHandler> expected = PurchaseHandler.class;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
-        assertEquals(expected, actual.getClass());
+        Class<? extends OperationHandler> actual
+                = operationStrategy.get(FruitTransaction.Operation.PURCHASE).getClass();
+        assertEquals(expected, actual);
     }
 
     @Test
     void validReturnOperationInput_ok() {
         Class<ReturnOperation> expected = ReturnOperation.class;
-        OperationHandler actual = operationStrategy.get(FruitTransaction.Operation.RETURN);
-        assertEquals(expected, actual.getClass());
+        Class<? extends OperationHandler> actual
+                = operationStrategy.get(FruitTransaction.Operation.RETURN).getClass();
+        assertEquals(expected, actual);
     }
 }

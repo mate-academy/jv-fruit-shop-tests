@@ -6,12 +6,11 @@ import static org.junit.Assert.assertSame;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
+import java.util.Optional;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.Optional;
 
 public class ReturnHandlerTest {
     private static final String APPLE = "apple";

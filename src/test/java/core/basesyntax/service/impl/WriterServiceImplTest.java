@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static WriterService writeService;
-    private static String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll
     public static void beforeAll() {
@@ -27,6 +26,6 @@ class WriterServiceImplTest {
     void writerService_invalidFilePath_notOk() {
         assertThrows(RuntimeException.class,
                 () -> writeService.writeToFile("invalid/file/path.csv", "report"),
-                MASSAGE);
+                "Should throw runtime exception.");
     }
 }

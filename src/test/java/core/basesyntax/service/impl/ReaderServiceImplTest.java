@@ -14,8 +14,6 @@ class ReaderServiceImplTest {
 
     private static ReaderService readerService;
     private static List<String> expected;
-    private static String INPUT_FILE = "src/main/resources/input_file.csv";
-    private static String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll
     public static void init() {
@@ -28,21 +26,21 @@ class ReaderServiceImplTest {
         String nonExistingFile = "not_exist";
         assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(nonExistingFile),
-                MASSAGE);
+                "Should throw runtime exception.");
     }
 
     @Test
     void reader_fileIsEmpty_notOk() {
         expected = new ArrayList<>();
-        expected = readerService.readFromFile(INPUT_FILE);
+        expected = readerService.readFromFile("src/main/resources/input_file.csv");
         assertThrows(AssertionError.class,
                 () -> assertTrue(expected.isEmpty()),
-                MASSAGE);
+                "Should throw runtime exception.");
     }
 
     @Test
     void reader_readFromFile_ok() {
-        expected = readerService.readFromFile(INPUT_FILE);
+        expected = readerService.readFromFile("src/main/resources/input_file.csv");
         List<String> actualList = List.of("b,banana,20",
                 "b,apple,100",
                 "s,banana,100",

@@ -7,6 +7,7 @@ import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Collections;
@@ -16,13 +17,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceImplTest {
-    private static final ProductDao PRODUCT_DAO = new ProductDaoImpl();
-    private static final OperationStrategy OPERATION_STRATEGY = new OperationStrategy(PRODUCT_DAO);
+    private static ProductDao productDao;
+    private static OperationStrategy operationStrategy;
     private static FruitService fruitService;
     
     @BeforeAll
     static void setUp() {
-        fruitService = new FruitServiceImpl(OPERATION_STRATEGY);
+        productDao = new ProductDaoImpl();
+        operationStrategy = new OperationStrategy(productDao);
+        fruitService = new FruitServiceImpl(operationStrategy);
     }
 
     @Test
@@ -51,8 +54,8 @@ class FruitServiceImplTest {
         int expectedQuantityOfApple = 100;
         int expectedQuantityOfBanana = 100;
         List<FruitTransaction> fruitTransactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 100),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 100));
+                new FruitTransaction(Operation.RETURN, "banana", 100),
+                new FruitTransaction(Operation.RETURN, "apple", 100));
         fruitService.process(fruitTransactions);
         int actualQuantityOfApple = FruitsStorage.FRUIT_MAP.get("apple");
         int actualQuantityOfBanana = FruitsStorage.FRUIT_MAP.get("banana");
@@ -67,8 +70,8 @@ class FruitServiceImplTest {
         int expectedQuantityOfApple = 0;
         int expectedQuantityOfBanana = 0;
         List<FruitTransaction> fruitTransactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 100),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 100));
+                new FruitTransaction(Operation.PURCHASE, "banana", 100),
+                new FruitTransaction(Operation.PURCHASE, "apple", 100));
         fruitService.process(fruitTransactions);
         int actualQuantityOfApple = FruitsStorage.FRUIT_MAP.get("apple");
         int actualQuantityOfBanana = FruitsStorage.FRUIT_MAP.get("banana");

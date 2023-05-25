@@ -1,14 +1,17 @@
 package core.basesyntax.strategy.handler.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+
+import java.util.Optional;
 
 public class SupplyHandlerTest {
     private static final String APPLE = "apple";
@@ -28,8 +31,8 @@ public class SupplyHandlerTest {
         Storage.storage.put(BANANA, VALID_FRUIT_QUANTITY);
     }
 
-    @AfterAll
-    public static void afterAll() {
+    @After
+    public void after() {
         Storage.storage.clear();
     }
 
@@ -54,7 +57,7 @@ public class SupplyHandlerTest {
         int expectedBananaQuantity = VALID_FRUIT_QUANTITY
                 + ADD_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(BANANA, 0);
-        assertSame(expectedBananaQuantity, actualAppleQuantity);
+        assertEquals(Optional.of(expectedBananaQuantity), Optional.ofNullable(actualAppleQuantity));
     }
 
     @Test
@@ -66,7 +69,7 @@ public class SupplyHandlerTest {
         handler.handle(transaction);
         int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertSame(expectedAppleQuantity, actualAppleQuantity);
+        assertEquals(Optional.of(expectedAppleQuantity), Optional.ofNullable(actualAppleQuantity));
     }
 }
 

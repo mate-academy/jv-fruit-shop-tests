@@ -1,14 +1,17 @@
 package core.basesyntax.strategy.handler.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+
+import java.util.Optional;
 
 public class ReturnHandlerTest {
     private static final String APPLE = "apple";
@@ -29,8 +32,8 @@ public class ReturnHandlerTest {
         Storage.storage.put(BANANA, VALID_FRUIT_QUANTITY);
     }
 
-    @AfterAll
-    public static void afterAll() {
+    @After
+    public void after() {
         Storage.storage.clear();
     }
 
@@ -68,7 +71,7 @@ public class ReturnHandlerTest {
         handler.handle(transaction);
         int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
         Integer actualAppleQuantity = Storage.storage.getOrDefault(APPLE, 0);
-        assertSame(expectedAppleQuantity, actualAppleQuantity);
+        assertEquals(Optional.of(expectedAppleQuantity), Optional.of(actualAppleQuantity));
     }
 }
 

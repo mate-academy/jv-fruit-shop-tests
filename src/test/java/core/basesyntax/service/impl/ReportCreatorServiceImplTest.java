@@ -1,11 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.Product.APPLE;
+import static core.basesyntax.model.Product.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.Product;
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,33 +16,31 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ReportServiceImpl Test")
-class ReportServiceImplTest {
-    private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
-    public static final Product BANANA = Product.BANANA;
-    public static final Product APPLE = Product.APPLE;
-    private static ReportService reportService;
+class ReportCreatorServiceImplTest {
+    private static ReportCreatorService reportCreatorService;
+    private final ProductDao<Product, Integer> dao = new ProductDaoImpl();
 
     @BeforeAll
     static void beforeAll() {
-        reportService = new ReportServiceImpl();
+        reportCreatorService = new ReportCreatorServiceImpl(new ProductDaoImpl());
     }
 
     @AfterEach
     void tearDown() {
-        DAO.clear();
+        dao.clear();
     }
 
     @DisplayName("Check report with Banana and apple")
     @Order(1)
     @Test
     void createReport_bananaAndApple_ok() {
-        DAO.put(BANANA, 20);
-        DAO.put(APPLE, 10);
+        dao.put(BANANA, 20);
+        dao.put(APPLE, 10);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,20",
                 "apple,10");
-        List<String> actual = reportService.createReport();
+        List<String> actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }
 
@@ -48,11 +48,11 @@ class ReportServiceImplTest {
     @Order(2)
     @Test
     void createReport_banana_ok() {
-        DAO.put(BANANA, 130);
+        dao.put(BANANA, 130);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,130");
-        List<String> actual = reportService.createReport();
+        List<String> actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }
 
@@ -62,7 +62,7 @@ class ReportServiceImplTest {
     void createReport_emptyList_ok() {
         List<String> expected = List.of(
                 "fruit,quantity");
-        List<String> actual = reportService.createReport();
+        List<String> actual = reportCreatorService.createReport();
         assertEquals(expected, actual);
     }
 }

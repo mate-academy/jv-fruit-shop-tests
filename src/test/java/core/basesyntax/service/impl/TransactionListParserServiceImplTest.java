@@ -1,10 +1,15 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.Product.APPLE;
+import static core.basesyntax.model.Product.BANANA;
+import static core.basesyntax.strategy.FruitTransaction.Operation.BALANCE;
+import static core.basesyntax.strategy.FruitTransaction.Operation.PURCHASE;
+import static core.basesyntax.strategy.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.strategy.FruitTransaction.Operation.SUPPLY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.model.Product;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.TransactionListParserService;
 import core.basesyntax.strategy.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +19,12 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ParserImpl Test")
-class ParserImplTest {
-    private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
-    private static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
-    private static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
-    private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
-    private static final Product BANANA = Product.BANANA;
-    private static final Product APPLE = Product.APPLE;
-    private static Parser service;
+class TransactionListParserServiceImplTest {
+    private static TransactionListParserService service;
 
     @BeforeAll
     static void beforeAll() {
-        service = new ParserImpl();
+        service = new TransactionListParserServiceImpl();
     }
 
     @Test

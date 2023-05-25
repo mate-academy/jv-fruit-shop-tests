@@ -1,14 +1,24 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.Product.APPLE;
+import static core.basesyntax.model.Product.BANANA;
+import static core.basesyntax.strategy.FruitTransaction.Operation.BALANCE;
+import static core.basesyntax.strategy.FruitTransaction.Operation.PURCHASE;
+import static core.basesyntax.strategy.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.strategy.FruitTransaction.Operation.SUPPLY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.Product;
-import core.basesyntax.service.TransferToDb;
+import core.basesyntax.service.TransferToDbService;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceProcessor;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseProcessor;
+import core.basesyntax.strategy.impl.ReturnProcessor;
+import core.basesyntax.strategy.impl.SupplyProcessor;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -17,19 +27,17 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("TransferToDbImplTest")
-class TransferToDbImplTest {
-    private static final OperationStrategy STRATEGY = new OperationStrategyImpl();
-    private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
-    private static final Product BANANA = Product.BANANA;
-    private static final Product APPLE = Product.APPLE;
-    public static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
-    public static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
-    public static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
-    public static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
+class TransferToDbServiceImplTest {
+    private final OperationStrategy strategy = new OperationStrategyImpl(Map.of(
+            BALANCE, new BalanceProcessor(new ProductDaoImpl()),
+            SUPPLY, new SupplyProcessor(new ProductDaoImpl()),
+            PURCHASE, new PurchaseProcessor(new ProductDaoImpl()),
+            RETURN, new ReturnProcessor(new ProductDaoImpl())));
+    private final ProductDao<Product, Integer> dao = new ProductDaoImpl();
 
     @AfterEach
     void tearDown() {
-        DAO.clear();
+        dao.clear();
     }
 
     @DisplayName("Test transfer to DB")
@@ -45,10 +53,10 @@ class TransferToDbImplTest {
                 new FruitTransaction(SUPPLY, APPLE, 20),
                 new FruitTransaction(RETURN, APPLE, 10),
                 new FruitTransaction(PURCHASE, APPLE, 30));
-        TransferToDb transfer = new TransferToDbImpl(STRATEGY);
+        TransferToDbService transfer = new TransferToDbServiceImpl(strategy);
         transfer.transfer(transactions);
         Map<Product, Integer> expected = Map.of(BANANA, 20, APPLE, 20);
-        Map<Product, Integer> actual = Map.of(BANANA, DAO.get(BANANA), APPLE, DAO.get(APPLE));
+        Map<Product, Integer> actual = Map.of(BANANA, dao.get(BANANA), APPLE, dao.get(APPLE));
         assertEquals(expected, actual);
     }
 }

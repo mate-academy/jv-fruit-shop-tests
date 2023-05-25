@@ -14,7 +14,7 @@ class ReaderServiceImplTest {
 
     private static ReaderService readerService;
     private static List<String> expected;
-    private static final String INPUT_FILE = "src/main/resources/input_file.csv";
+    private static String INPUT_FILE = "src/main/resources/input_file.csv";
     private static String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll

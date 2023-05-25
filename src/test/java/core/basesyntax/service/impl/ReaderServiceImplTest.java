@@ -15,7 +15,7 @@ class ReaderServiceImplTest {
     private static ReaderService readerService;
     private static List<String> expected;
     private static final String INPUT_FILE = "src/main/resources/input_file.csv";
-    private static final String MASSAGE = "Should throw runtime exception.";
+    private static String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll
     public static void init() {
@@ -41,17 +41,16 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void reader_readFromFile_Ok() {
+    void reader_readFromFile_ok() {
         expected = readerService.readFromFile(INPUT_FILE);
-        List<String> actualList = new ArrayList<>();
-        actualList.add("b,banana,20");
-        actualList.add("b,apple,100");
-        actualList.add("s,banana,100");
-        actualList.add("p,banana,13");
-        actualList.add("r,apple,10");
-        actualList.add("p,apple,20");
-        actualList.add("p,banana,5");
-        actualList.add("s,banana,50");
+        List<String> actualList = List.of("b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
         assertEquals(expected, actualList);
     }
 }

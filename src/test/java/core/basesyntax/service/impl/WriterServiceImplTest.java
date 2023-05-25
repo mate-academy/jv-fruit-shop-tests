@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static WriterService writeService;
-    private static final String MASSAGE = "Should throw runtime exception.";
+    private static String MASSAGE = "Should throw runtime exception.";
 
     @BeforeAll
     public static void beforeAll() {

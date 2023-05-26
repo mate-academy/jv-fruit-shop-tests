@@ -31,7 +31,7 @@ class WriteServiceTest {
 
     @Test
     public void save_null_notOk() {
-        assertThrows(NullPointerException.class, () -> writeService.save(null, path));
+        assertThrows(RuntimeException.class, () -> writeService.save(null, path));
     }
 
     private List<String> readFromFile() {

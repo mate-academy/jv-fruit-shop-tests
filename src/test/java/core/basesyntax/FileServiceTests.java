@@ -11,17 +11,13 @@ import org.junit.jupiter.api.Test;
 
 public class FileServiceTests {
     private static final String DATA_INPUT_PATH =
-            "C:\\Users\\bahme\\IdeaProjects\\jv-fruit-shop-tests"
-                    + "\\src\\main\\java\\core\\basesyntax\\files\\NormalData.txt";
+            "src/main/java/core/basesyntax/files/NormalData.txt";
     private static final String NOT_EXIST_FILE_PATH =
-            "C:\\Users\\bahme\\IdeaProjects\\jv-fruit-shop-tests"
-                    + "\\src\\main\\java\\core\\basesyntax\\files\\Path.txt";
+            "src/main/java/core/basesyntax/files/Path.txt";
     private static final String DATA_OUTPUT_PATH =
-            "C:\\Users\\bahme\\IdeaProjects\\jv-fruit-shop-tests"
-                    + "\\src\\main\\java\\core\\basesyntax\\files\\WrittenData.txt";
+            "src/main/java/core/basesyntax/files/WrittenData.txt";
     private static final String DIRECTORY_PATH =
-            "C:\\Users\\bahme\\IdeaProjects\\jv-fruit-shop-tests"
-                    + "\\src\\main\\java\\core\\basesyntax\\files";
+            "src/main/java/core/basesyntax/files";
     private static final String FRUIT_DATA =
             "b,banana,100" + System.lineSeparator()
             + "b,apple,29" + System.lineSeparator()

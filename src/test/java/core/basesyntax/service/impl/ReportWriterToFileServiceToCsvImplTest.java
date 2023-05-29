@@ -28,7 +28,7 @@ class ReportWriterToFileServiceToCsvImplTest {
     @DisplayName("Check writing to file in correct path")
     @Order(1)
     @Test
-    void writeInFile_correctPath_ok() {
+    void writeToFile_correctPath_ok() {
         reportWriterToFileService = new ReportWriterToFileServiceToCsvImpl(
                 "src/test/resources/output/reportFile.csv");
         List<String> expected = List.of("fruit,quantity",
@@ -49,7 +49,7 @@ class ReportWriterToFileServiceToCsvImplTest {
     @DisplayName("Check writing to file in incorrect path")
     @Order(2)
     @Test
-    void writeInFile_incorrectPath_notOk() {
+    void writeToFile_incorrectPath_notOk() {
         reportWriterToFileService =
                 new ReportWriterToFileServiceToCsvImpl(
                         "src/test/resources/incorrectPath/reportFile.csv");
@@ -60,7 +60,7 @@ class ReportWriterToFileServiceToCsvImplTest {
     @DisplayName("Check writing to file with incorrect extension")
     @Order(3)
     @Test
-    void writeInFile_incorrectExtension_notOk() {
+    void writeToFile_incorrectExtension_notOk() {
         reportWriterToFileService =
                 new ReportWriterToFileServiceToCsvImpl(
                         "src/test/resources/reportFile.txt");

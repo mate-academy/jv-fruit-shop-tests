@@ -4,9 +4,8 @@ import static core.basesyntax.model.Product.APPLE;
 import static core.basesyntax.model.Product.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
-import core.basesyntax.model.Product;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +17,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("ReportServiceImpl Test")
 class ReportCreatorServiceImplTest {
     private static ReportCreatorService reportCreatorService;
-    private final ProductDao<Product, Integer> dao = new ProductDaoImpl();
 
     @BeforeAll
     static void beforeAll() {
@@ -27,15 +25,15 @@ class ReportCreatorServiceImplTest {
 
     @AfterEach
     void tearDown() {
-        dao.clear();
+        Storage.storage.clear();
     }
 
     @DisplayName("Check report with Banana and apple")
     @Order(1)
     @Test
     void createReport_bananaAndApple_ok() {
-        dao.put(BANANA, 20);
-        dao.put(APPLE, 10);
+        Storage.storage.put(BANANA, 20);
+        Storage.storage.put(APPLE, 10);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,20",
@@ -48,7 +46,7 @@ class ReportCreatorServiceImplTest {
     @Order(2)
     @Test
     void createReport_banana_ok() {
-        dao.put(BANANA, 130);
+        Storage.storage.put(BANANA, 130);
         List<String> expected = List.of(
                 "fruit,quantity",
                 "banana,130");

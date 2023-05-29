@@ -30,7 +30,7 @@ class TransactionListParserServiceImplTest {
     @Test
     @DisplayName("Check correct input data - many lines")
     @Order(1)
-    void collectToProductList_validInput_ok() {
+    void parse_validInput_ok() {
         List<String> inputList = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -56,7 +56,7 @@ class TransactionListParserServiceImplTest {
     @Test
     @DisplayName("Check correct input data - only titles")
     @Order(2)
-    void collectToProductList_onlyTitleLineInput_ok() {
+    void parse_onlyTitleLineInput_ok() {
         List<String> inputList = List.of("type,fruit,quantity");
         List<FruitTransaction> expectedList = new ArrayList<>();
         assertEquals(expectedList, service.parse(inputList));
@@ -65,7 +65,7 @@ class TransactionListParserServiceImplTest {
     @Test
     @DisplayName("Check correct input data - one data line")
     @Order(3)
-    void collectToProductList_oneLineInput_ok() {
+    void parse_oneLineInput_ok() {
         List<String> inputList = List.of("type,fruit,quantity", "b,banana,20");
         List<FruitTransaction> expectedList =
                 List.of(new FruitTransaction(BALANCE, BANANA, 20));
@@ -75,7 +75,7 @@ class TransactionListParserServiceImplTest {
     @Test
     @DisplayName("Check correct input data - empty list")
     @Order(4)
-    void collectToProductList_emptyLineInput_ok() {
+    void parse_emptyLineInput_ok() {
         List<String> inputList = new ArrayList<>();
         List<FruitTransaction> expectedList = new ArrayList<>();
         assertEquals(expectedList, service.parse(inputList));
@@ -84,14 +84,14 @@ class TransactionListParserServiceImplTest {
     @Test
     @DisplayName("Check incorrect input data - null-pointer")
     @Order(5)
-    void collectToProductList_nullInput_notOk() {
+    void parse_nullInput_notOk() {
         assertThrows(RuntimeException.class, () -> service.parse(null));
     }
 
     @Test
     @DisplayName("Check incorrect input data - bad line's format")
     @Order(6)
-    void collectToProductList_invalidStringInputFormat_notOk() {
+    void parse_invalidStringInputFormat_notOk() {
         List<String> inputList = List.of("type,fruit", "b,banana");
         assertThrows(RuntimeException.class, () -> service.parse(inputList));
     }

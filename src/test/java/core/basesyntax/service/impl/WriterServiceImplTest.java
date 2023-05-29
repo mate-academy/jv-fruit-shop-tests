@@ -18,7 +18,7 @@ class WriterServiceImplTest {
     @Test
     void writerService_writeToFile_ok() {
         boolean operationSuccess =
-                writeService.writeToFile("src/main/resources/report_file.csv", "report");
+                writeService.writeToFile("src/test/resources/report_file_test.csv", "report");
         assertTrue(operationSuccess);
     }
 

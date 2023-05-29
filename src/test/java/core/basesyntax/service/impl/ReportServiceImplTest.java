@@ -16,14 +16,13 @@ class ReportServiceImplTest {
     public static void setUp() {
         reportService = new ReportServiceImpl();
         storage = new Storage();
-
     }
 
     @Test
     public void reportService_createReportFromEmptyList_ok() {
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         String actualReport = reportService.createReport();
-        assertEquals(actualReport, expectedReport);
+        assertEquals(expectedReport, actualReport);
     }
 
     @Test

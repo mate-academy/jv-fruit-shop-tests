@@ -24,7 +24,7 @@ class BalanceOperationTest {
     @Test
     public void balanceOperation_validTransactionApples_ok() {
         transaction.setQuantity(10);
-        new BalanceOperation().operateTransaction(transaction, storage);
+        balanceOperation.operateTransaction(transaction, storage);
         int actualQuantity = storage.get(transaction.getFruit());
         int expectedQuantity = 10;
         assertEquals(expectedQuantity, actualQuantity);

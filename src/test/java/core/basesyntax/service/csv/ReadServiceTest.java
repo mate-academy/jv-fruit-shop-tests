@@ -3,7 +3,8 @@ package core.basesyntax.service.csv;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.csv.impl.CsvReadServiceImpl;
+import core.basesyntax.service.ReadService;
+import core.basesyntax.service.impl.CsvReadServiceImpl;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;

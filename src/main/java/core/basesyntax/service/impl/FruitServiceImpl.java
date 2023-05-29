@@ -1,7 +1,7 @@
-package core.basesyntax.service.fruit.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.fruit.Record;
-import core.basesyntax.service.fruit.FruitService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;

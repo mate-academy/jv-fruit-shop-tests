@@ -1,6 +1,6 @@
-package core.basesyntax.service.parser.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.service.parser.WriteParser;
+import core.basesyntax.service.WriteParser;
 import java.util.Map;
 import java.util.stream.Collectors;
 

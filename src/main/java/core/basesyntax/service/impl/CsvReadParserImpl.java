@@ -1,8 +1,8 @@
-package core.basesyntax.service.parser.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.fruit.Operation;
 import core.basesyntax.model.fruit.Record;
-import core.basesyntax.service.parser.ReadParser;
+import core.basesyntax.service.ReadParser;
 import java.util.List;
 import java.util.stream.Collectors;
 

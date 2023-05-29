@@ -3,7 +3,8 @@ package core.basesyntax.service.csv;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.csv.impl.CsvWriteServiceImpl;
+import core.basesyntax.service.WriteService;
+import core.basesyntax.service.impl.CsvWriteServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

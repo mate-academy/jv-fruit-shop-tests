@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.fruit.Operation;
 import core.basesyntax.model.fruit.Record;
-import core.basesyntax.service.parser.impl.CsvReadParserImpl;
+import core.basesyntax.service.ReadParser;
+import core.basesyntax.service.impl.CsvReadParserImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

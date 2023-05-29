@@ -3,7 +3,8 @@ package core.basesyntax.service.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.parser.impl.CsvWriteParserImpl;
+import core.basesyntax.service.WriteParser;
+import core.basesyntax.service.impl.CsvWriteParserImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;

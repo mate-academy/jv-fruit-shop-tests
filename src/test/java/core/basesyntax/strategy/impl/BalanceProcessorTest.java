@@ -13,7 +13,6 @@ import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("BalanceProcessor Test")
@@ -26,7 +25,6 @@ class BalanceProcessorTest {
     }
 
     @DisplayName("Check balance operation with valid value (Apple) and empty Storage")
-    @Order(1)
     @Test
     void operate_checkBalanceAppleEmptyStorage_ok() {
         balanceProcessor.operate(new FruitTransaction(BALANCE, APPLE, 20));
@@ -34,7 +32,6 @@ class BalanceProcessorTest {
     }
 
     @DisplayName("Check balance operation with valid value (Apple) and non empty Storage")
-    @Order(2)
     @Test
     void operate_checkBalanceApple_ok() {
         Storage.storage.put(APPLE, 10);
@@ -43,7 +40,6 @@ class BalanceProcessorTest {
     }
 
     @DisplayName("Check balance operation with valid value (Apple) and empty Storage")
-    @Order(3)
     @Test
     void operate_checkBalanceBananaEmptyStorage_ok() {
         balanceProcessor.operate(new FruitTransaction(BALANCE, BANANA, 20));
@@ -51,7 +47,6 @@ class BalanceProcessorTest {
     }
 
     @DisplayName("Check balance operation with valid value (Apple) and non empty Storage")
-    @Order(4)
     @Test
     void operate_checkBalanceBanana_ok() {
         Storage.storage.put(BANANA, 10);
@@ -60,7 +55,6 @@ class BalanceProcessorTest {
     }
 
     @DisplayName("Check balance operation with negative value")
-    @Order(5)
     @Test
     void operate_checkBalanceNegative_notOk() {
         assertThrows(InvalidTransaction.class, () -> balanceProcessor.operate(

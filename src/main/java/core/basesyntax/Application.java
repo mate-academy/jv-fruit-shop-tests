@@ -33,7 +33,7 @@ public class Application {
                 FruitTransaction.Operation.PURCHASE, new PurchaseProcessor(new ProductDaoImpl()),
                 FruitTransaction.Operation.RETURN, new ReturnProcessor(new ProductDaoImpl()));
         FileReaderService fileReaderService =
-                new FileReaderServiceCsvImpl("src/main/resources/input/testFile.csv");
+                new FileReaderServiceCsvImpl();
         TransactionListParserService transactionListParserService =
                 new TransactionListParserServiceImpl();
         OperationStrategy strategy = new OperationStrategyImpl(strategyMap);
@@ -42,11 +42,12 @@ public class Application {
         ReportCreatorService reportCreatorService =
                 new ReportCreatorServiceImpl(new ProductDaoImpl());
         ReportWriterToFileServiceToCsvImpl writerToCsv =
-                new ReportWriterToFileServiceToCsvImpl("src/main/resources/output");
+                new ReportWriterToFileServiceToCsvImpl();
 
         List<FruitTransaction> fruitTransactions =
-                transactionListParserService.parse(fileReaderService.readFile());
+                transactionListParserService.parse(fileReaderService
+                        .readFile("src/main/resources/input/testFile.csv"));
         transferToDbService.transfer(fruitTransactions);
-        writerToCsv.writeToFile(reportCreatorService.createReport());
+        writerToCsv.writeToFile(reportCreatorService.createReport(), "src/main/resources/output");
     }
 }

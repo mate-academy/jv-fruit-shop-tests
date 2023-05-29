@@ -8,6 +8,7 @@ import static core.basesyntax.strategy.FruitTransaction.Operation.RETURN;
 import static core.basesyntax.strategy.FruitTransaction.Operation.SUPPLY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.TransactionListParserService;
 import core.basesyntax.strategy.FruitTransaction;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ParserImpl Test")
@@ -27,9 +27,8 @@ class TransactionListParserServiceImplTest {
         service = new TransactionListParserServiceImpl();
     }
 
-    @Test
     @DisplayName("Check correct input data - many lines")
-    @Order(1)
+    @Test
     void parse_validInput_ok() {
         List<String> inputList = List.of(
                 "type,fruit,quantity",
@@ -53,18 +52,15 @@ class TransactionListParserServiceImplTest {
         assertEquals(expectedList, service.parse(inputList));
     }
 
-    @Test
     @DisplayName("Check correct input data - only titles")
-    @Order(2)
+    @Test
     void parse_onlyTitleLineInput_ok() {
         List<String> inputList = List.of("type,fruit,quantity");
-        List<FruitTransaction> expectedList = new ArrayList<>();
-        assertEquals(expectedList, service.parse(inputList));
+        assertTrue(service.parse(inputList).isEmpty());
     }
 
-    @Test
     @DisplayName("Check correct input data - one data line")
-    @Order(3)
+    @Test
     void parse_oneLineInput_ok() {
         List<String> inputList = List.of("type,fruit,quantity", "b,banana,20");
         List<FruitTransaction> expectedList =
@@ -72,25 +68,21 @@ class TransactionListParserServiceImplTest {
         assertEquals(expectedList, service.parse(inputList));
     }
 
-    @Test
     @DisplayName("Check correct input data - empty list")
-    @Order(4)
+    @Test
     void parse_emptyLineInput_ok() {
         List<String> inputList = new ArrayList<>();
-        List<FruitTransaction> expectedList = new ArrayList<>();
-        assertEquals(expectedList, service.parse(inputList));
+        assertTrue(service.parse(inputList).isEmpty());
     }
 
-    @Test
     @DisplayName("Check incorrect input data - null-pointer")
-    @Order(5)
+    @Test
     void parse_nullInput_notOk() {
         assertThrows(RuntimeException.class, () -> service.parse(null));
     }
 
-    @Test
     @DisplayName("Check incorrect input data - bad line's format")
-    @Order(6)
+    @Test
     void parse_invalidStringInputFormat_notOk() {
         List<String> inputList = List.of("type,fruit", "b,banana");
         assertThrows(RuntimeException.class, () -> service.parse(inputList));

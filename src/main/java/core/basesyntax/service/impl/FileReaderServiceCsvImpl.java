@@ -10,22 +10,17 @@ import java.util.stream.Collectors;
 
 public class FileReaderServiceCsvImpl implements FileReaderService {
     private static final String FILE_FORMAT = ".csv";
-    private final String pathFile;
-
-    public FileReaderServiceCsvImpl(String filePath) {
-        this.pathFile = filePath;
-    }
 
     @Override
-    public List<String> readFile() {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathFile))) {
-            if (pathFile.endsWith(FILE_FORMAT)) {
+    public List<String> readFile(String filePath) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+            if (filePath.endsWith(FILE_FORMAT)) {
                 return bufferedReader.lines().collect(Collectors.toList());
             }
             throw new WrongExtensionFile("Wrong extension of file: "
-                    + pathFile + ", must be '" + FILE_FORMAT + "' file");
+                    + filePath + ", must be '" + FILE_FORMAT + "' file");
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file by path: " + pathFile, e);
+            throw new RuntimeException("Can't read file by path: " + filePath, e);
         }
     }
 }

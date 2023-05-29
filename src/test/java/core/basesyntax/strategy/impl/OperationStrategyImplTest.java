@@ -13,7 +13,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("OperationStrategyImpl Test")
@@ -30,10 +29,8 @@ class OperationStrategyImplTest {
     }
 
     @DisplayName("Check method get in Operation Strategy with Balance Processor")
-    @Order(1)
     @Test
     void get_getBalanceOperationStrategy_ok() {
-
         Class<? extends OperationProcessor> actualOperationClass =
                 strategy.get(BALANCE).getClass();
         Class<? extends OperationProcessor> expectedClass = BalanceProcessor.class;
@@ -41,7 +38,6 @@ class OperationStrategyImplTest {
     }
 
     @DisplayName("Check method get in Operation Strategy with Purchase Processor")
-    @Order(2)
     @Test
     void get_getPurchaseOperationStrategy_ok() {
         Class<? extends OperationProcessor> actualOperationClass =
@@ -51,7 +47,6 @@ class OperationStrategyImplTest {
     }
 
     @DisplayName("Check method get in Operation Strategy with Return Processor")
-    @Order(3)
     @Test
     void get_getReturnOperationStrategy_ok() {
         Class<? extends OperationProcessor> actualOperationClass =
@@ -61,7 +56,6 @@ class OperationStrategyImplTest {
     }
 
     @DisplayName("Check method get in Operation Strategy with Supply Processor")
-    @Order(4)
     @Test
     void get_getSupplyOperationStrategy_ok() {
         Class<? extends OperationProcessor> actualOperationClass =
@@ -71,7 +65,6 @@ class OperationStrategyImplTest {
     }
 
     @DisplayName("Check method get in Operation Strategy with invalid data - null")
-    @Order(5)
     @Test
     void get_getNullOperationStrategy_notOk() {
         assertThrows(RuntimeException.class, () -> strategy.get(null));

@@ -12,13 +12,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("WriterToCsvImpl Test")
 class ReportWriterToFileServiceToCsvImplTest {
-    private static ReportWriterToFileService reportWriterToFileService;
+    private static ReportWriterToFileService WRITER_TO_FILE;
+
+    @BeforeAll
+    static void beforeAll() {
+        WRITER_TO_FILE = new ReportWriterToFileServiceToCsvImpl();
+    }
 
     @AfterEach
     void tearDown() {
@@ -26,15 +31,12 @@ class ReportWriterToFileServiceToCsvImplTest {
     }
 
     @DisplayName("Check writing to file in correct path")
-    @Order(1)
     @Test
     void writeToFile_correctPath_ok() {
-        reportWriterToFileService = new ReportWriterToFileServiceToCsvImpl(
-                "src/test/resources/output/reportFile.csv");
         List<String> expected = List.of("fruit,quantity",
                 "banana,20",
                 "apple,10");
-        reportWriterToFileService.writeToFile(expected);
+        WRITER_TO_FILE.writeToFile(expected, "src/test/resources/output/reportFile.csv");
         List<String> actual;
         try (BufferedReader bufferedReader = new BufferedReader(
                 new FileReader("src/test/resources/output/reportFile.csv"))) {
@@ -47,24 +49,18 @@ class ReportWriterToFileServiceToCsvImplTest {
     }
 
     @DisplayName("Check writing to file in incorrect path")
-    @Order(2)
     @Test
     void writeToFile_incorrectPath_notOk() {
-        reportWriterToFileService =
-                new ReportWriterToFileServiceToCsvImpl(
-                        "src/test/resources/incorrectPath/reportFile.csv");
         assertThrows(RuntimeException.class, () ->
-                reportWriterToFileService.writeToFile(List.of()));
+                WRITER_TO_FILE.writeToFile(List.of(),
+                        "src/test/resources/incorrectPath/reportFile.csv"));
     }
 
     @DisplayName("Check writing to file with incorrect extension")
-    @Order(3)
     @Test
     void writeToFile_incorrectExtension_notOk() {
-        reportWriterToFileService =
-                new ReportWriterToFileServiceToCsvImpl(
-                        "src/test/resources/reportFile.txt");
         assertThrows(WrongExtensionFile.class, () ->
-                reportWriterToFileService.writeToFile(List.of()));
+                WRITER_TO_FILE.writeToFile(List.of(),
+                        "src/test/resources/reportFile.txt"));
     }
 }

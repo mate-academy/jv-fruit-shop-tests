@@ -11,7 +11,6 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ReportServiceImpl Test")
@@ -29,7 +28,6 @@ class ReportCreatorServiceImplTest {
     }
 
     @DisplayName("Check report with Banana and apple")
-    @Order(1)
     @Test
     void createReport_bananaAndApple_ok() {
         Storage.storage.put(BANANA, 20);
@@ -43,7 +41,6 @@ class ReportCreatorServiceImplTest {
     }
 
     @DisplayName("Check report with Banana only")
-    @Order(2)
     @Test
     void createReport_banana_ok() {
         Storage.storage.put(BANANA, 130);
@@ -55,7 +52,6 @@ class ReportCreatorServiceImplTest {
     }
 
     @DisplayName("Check report without any fruit")
-    @Order(3)
     @Test
     void createReport_emptyList_ok() {
         List<String> expected = List.of(

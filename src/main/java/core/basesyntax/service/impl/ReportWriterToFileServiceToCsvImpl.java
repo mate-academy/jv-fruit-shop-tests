@@ -9,14 +9,9 @@ import java.util.List;
 
 public class ReportWriterToFileServiceToCsvImpl implements ReportWriterToFileService {
     private static final String FILE_FORMAT = ".csv";
-    private final String pathFile;
-
-    public ReportWriterToFileServiceToCsvImpl(String filePath) {
-        this.pathFile = filePath;
-    }
 
     @Override
-    public void writeToFile(List<String> lines) {
+    public void writeToFile(List<String> lines, String pathFile) {
         if (!pathFile.endsWith(FILE_FORMAT)) {
             throw new WrongExtensionFile("Wrong extension of file: "
                     + pathFile + ", must be '" + FILE_FORMAT + "' file");

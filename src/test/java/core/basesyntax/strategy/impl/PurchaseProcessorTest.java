@@ -13,7 +13,6 @@ import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("PurchaseProcessor Test")
@@ -27,7 +26,6 @@ class PurchaseProcessorTest {
     }
 
     @DisplayName("Check purchase operation with valid value (Apple)")
-    @Order(1)
     @Test
     void operate_checkPurchaseAppleEmptyStorage_ok() {
         Storage.storage.put(APPLE, 15);
@@ -38,7 +36,6 @@ class PurchaseProcessorTest {
     }
 
     @DisplayName("Check purchase operation with valid value (Apple) and empty Storage")
-    @Order(2)
     @Test
     void operate_checkPurchaseApple_NotOk() {
         assertThrows(RuntimeException.class,
@@ -46,7 +43,6 @@ class PurchaseProcessorTest {
     }
 
     @DisplayName("Check purchase operation with valid value (Banana)")
-    @Order(3)
     @Test
     void operate_checkPurchaseBananaEmptyStorage_ok() {
         Storage.storage.put(BANANA, 147);
@@ -57,7 +53,6 @@ class PurchaseProcessorTest {
     }
 
     @DisplayName("Check purchase operation with valid value (Banana) and empty Storage")
-    @Order(4)
     @Test
     void operate_checkPurchaseBananaEmpty_notOk() {
         assertThrows(InvalidTransaction.class,
@@ -65,7 +60,6 @@ class PurchaseProcessorTest {
     }
 
     @DisplayName("Check purchase operation with invalid value (Apple) and non empty Storage")
-    @Order(5)
     @Test
     void operate_checkPurchaseBananaIncorrect_notOk() {
         Storage.storage.put(BANANA, 147);
@@ -74,7 +68,6 @@ class PurchaseProcessorTest {
     }
 
     @DisplayName("Check purchase operation with invalid value (Apple) and non empty Storage")
-    @Order(6)
     @Test
     void operate_checkPurchaseApple_notOk() {
         Storage.storage.put(BANANA, 147);

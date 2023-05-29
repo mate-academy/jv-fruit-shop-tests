@@ -24,7 +24,6 @@ import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("TransferToDbImplTest")
@@ -46,7 +45,6 @@ class TransferToDbServiceImplTest {
     }
 
     @DisplayName("Test transfer to DB")
-    @Order(1)
     @Test
     void transfer_transferToDb_ok() {
         List<FruitTransaction> transactions = getTransactions();

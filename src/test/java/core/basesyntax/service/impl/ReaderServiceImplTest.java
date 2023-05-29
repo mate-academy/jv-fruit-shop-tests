@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.ReaderService;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,10 +27,9 @@ class ReaderServiceImplTest {
 
     @Test
     void reader_fileIsEmpty_notOk() {
-        List<String> actual = readerService.readFromFile("src/test/resources/input_file_test.csv");
-        assertThrows(AssertionError.class,
-                () -> assertTrue(actual.isEmpty()),
-                "Should throw runtime exception.");
+        List<String> expected = new ArrayList<>();
+        List<String> actual = readerService.readFromFile("src/test/resources/emptyFile.csv");
+        assertEquals(expected, actual);
     }
 
     @Test

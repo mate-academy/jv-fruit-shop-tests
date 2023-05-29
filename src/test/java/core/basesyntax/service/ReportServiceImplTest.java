@@ -18,13 +18,13 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createReport_WithNullInitializeList_notOk() {
+    void createReport_withNullInitializeList_notOk() {
         List<String> records = null;
         assertThrows(NullPointerException.class, () -> reportService.createReport(records));
     }
 
     @Test
-    void createReport_WithEmptyInitializeList_ok() {
+    void createReport_withEmptyInitializeList_ok() {
         List<String> records = Collections.emptyList();
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportService.createReport(records);
@@ -32,7 +32,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createReport_WithValidInformationInList_ok() {
+    void createReport_withValidInformationInList_ok() {
         List<String> records = List.of("banana,10", "apple,15");
         String expected = "fruit,quantity"
                 + System.lineSeparator()

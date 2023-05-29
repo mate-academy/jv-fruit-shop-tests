@@ -20,13 +20,13 @@ class ParserServiceImplTest {
     }
 
     @Test
-    void parseTransaction_WithNullArgument_notOk() {
+    void parseTransaction_withNullArgument_notOk() {
         List<String> argument = null;
         assertThrows(NullPointerException.class, () -> parserService.parseTransaction(argument));
     }
 
     @Test
-    void parseTransaction_WithEmptyArgument_Ok() {
+    void parseTransaction_withEmptyArgument_Ok() {
         List<String> argument = Collections.emptyList();
         List<FruitTransaction> expected = Collections.emptyList();
         List<FruitTransaction> actual = parserService.parseTransaction(argument);
@@ -34,7 +34,7 @@ class ParserServiceImplTest {
     }
 
     @Test
-    void parseTransaction_WithValidArgument_Ok() {
+    void parseTransaction_withValidArgument_Ok() {
         List<String> argument = List.of("b,banana,10","b,apple,10", "s,banana,10", "s,apple,10");
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 10),

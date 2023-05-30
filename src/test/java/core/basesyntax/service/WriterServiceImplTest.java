@@ -4,16 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.WriterServiceImpl;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private WriterService writerService;
+    private static WriterService writerService;
+    private static String report;
     private String pathToFile;
-    private String report;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         writerService = new WriterServiceImpl();
         report = "fruit,quantity" + System.lineSeparator()
                 + "banana, 152" + System.lineSeparator()

@@ -6,17 +6,22 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
+    private static ReaderService readerService;
     private String pathToFile;
     private List<String> dataFromFile;
-    private ReaderService readerService;
+
+    @BeforeAll
+    public static void setUpBeforeAll() {
+        readerService = new ReaderServiceImpl();
+    }
 
     @BeforeEach
     void setUp() {
-        readerService = new ReaderServiceImpl();
         dataFromFile = new ArrayList<>();
     }
 

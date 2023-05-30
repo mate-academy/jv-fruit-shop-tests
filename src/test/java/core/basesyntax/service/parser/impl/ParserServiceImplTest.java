@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,13 +16,17 @@ class ParserServiceImplTest {
     private static final int QUANTITY_OF_FRUIT = 20;
     private static final String NAME_OF_FRUIT = "banana";
     private static final String TITLE_OF_INPUT_DATA = "type,fruit,quantity";
-    private ParserService parserService;
+    private static ParserService parserService;
     private List<FruitTransaction> fruitTransactions;
     private List<String> sourceData;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void setUpBeforeAll() {
         parserService = new ParserServiceImpl();
+    }
+
+    @BeforeEach
+    void setUp() {
         fruitTransactions = new ArrayList<>();
         sourceData = new ArrayList<>();
     }
@@ -80,7 +85,7 @@ class ParserServiceImplTest {
         sourceData.add("b,20");
         IndexOutOfBoundsException exception = Assertions
                 .assertThrows(IndexOutOfBoundsException.class,
-                    () -> parserService.parseData(sourceData));
+                        () -> parserService.parseData(sourceData));
         Assertions.assertEquals("Index 2 out of bounds for length 2", exception.getMessage());
     }
 
@@ -90,7 +95,7 @@ class ParserServiceImplTest {
         sourceData.add("b,banana");
         IndexOutOfBoundsException exception = Assertions
                 .assertThrows(IndexOutOfBoundsException.class,
-                    () -> parserService.parseData(sourceData));
+                        () -> parserService.parseData(sourceData));
         Assertions.assertEquals("Index 2 out of bounds for length 2", exception.getMessage());
     }
 }

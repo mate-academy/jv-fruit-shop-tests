@@ -1,46 +1,74 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.enumeration.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitHandlerStrategy;
+import core.basesyntax.strategy.impl.BalanceFruitHandlerImpl;
+import core.basesyntax.strategy.impl.PurchaseFruitHandlerImpl;
+import core.basesyntax.strategy.impl.ReturnFruitHandlerImpl;
+import core.basesyntax.strategy.impl.SupplyFruitHandlerImpl;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class FruitServiceTest {
-    private FruitService fruitService;
-    private FruitHandlerStrategy fruitHandlerStrategy;
-    private FruitTransaction transaction;
-    private FruitHandler fruitHandler;
-    private List<FruitTransaction> transactions;
+    private static FruitService fruitService;
+    private static FruitHandlerStrategy fruitHandlerStrategy;
+    private static List<FruitTransaction> transactions;
+    private static final int INITIAL_QUANTITY = 40;
+    private static final String NAME_OF_FRUIT = "banana";
+
+    @BeforeAll
+    static void setUp() {
+        fruitService = new FruitServiceImpl();
+        fruitHandlerStrategy = new FruitHandlerStrategy((new HashMap<>() {
+            {
+                put(Operation.BALANCE, new BalanceFruitHandlerImpl());
+                put(Operation.SUPPLY, new SupplyFruitHandlerImpl());
+                put(Operation.PURCHASE, new PurchaseFruitHandlerImpl());
+                put(Operation.RETURN, new ReturnFruitHandlerImpl());
+            }
+        }));
+        transactions = new ArrayList<>();
+    }
 
     @BeforeEach
-    void setUp() {
-        fruitService = new FruitServiceImpl();
-        fruitHandlerStrategy = Mockito.mock(FruitHandlerStrategy.class);
-        transaction = Mockito.mock(FruitTransaction.class);
-        fruitHandler = Mockito.mock(FruitHandler.class);
-        transactions = new ArrayList<>();
-        transactions.add(transaction);
+    void initialStorage() {
+        Storage.getFruitStorage().put(NAME_OF_FRUIT, INITIAL_QUANTITY);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.getFruitStorage().clear();
     }
 
     @Test
-    void fruitService_validData_ok() {
-        Mockito.when(fruitHandlerStrategy.get(transaction))
-                .thenReturn(fruitHandler);
+    void fruitService_validDataSupplyOperation_ok() {
+        transactions = List.of(new FruitTransaction(Operation.SUPPLY,
+                NAME_OF_FRUIT, INITIAL_QUANTITY));
         fruitService.processAllTransations(transactions, fruitHandlerStrategy);
-        Mockito.verify(fruitHandler)
-                .doAction(transaction);
+        Assertions.assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 80);
+    }
+
+    @Test
+    void fruitService_validDataPurchaseOperation_ok() {
+        transactions = List.of(new FruitTransaction(Operation. PURCHASE,
+                NAME_OF_FRUIT, 10));
+        fruitService.processAllTransations(transactions, fruitHandlerStrategy);
+        Assertions.assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 30);
     }
 
     @Test
     void fruitService_withNullHandler_notOk() {
-        Mockito.when(fruitHandlerStrategy.get(transaction))
-                .thenReturn(null);
+        transactions = List.of(new FruitTransaction(null, NAME_OF_FRUIT, INITIAL_QUANTITY));
         fruitService.processAllTransations(transactions, fruitHandlerStrategy);
-        Mockito.verifyNoInteractions(transaction);
+        Assertions.assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), INITIAL_QUANTITY);
     }
 }

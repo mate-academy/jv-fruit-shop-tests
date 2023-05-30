@@ -6,17 +6,17 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyFruitHandlerImplTest {
     private static final int QUANTITY_OF_FRUIT_APPLE = 50;
     private static final String NAME_OF_FRUIT_APPLE = "apple";
-    private FruitTransaction fruitTransaction;
-    private FruitHandler fruitHandler;
+    private static FruitTransaction fruitTransaction;
+    private static FruitHandler fruitHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+   static void setUp() {
         fruitHandler = new SupplyFruitHandlerImpl();
         fruitTransaction = new FruitTransaction(Operation.SUPPLY, NAME_OF_FRUIT_APPLE,
                 QUANTITY_OF_FRUIT_APPLE);

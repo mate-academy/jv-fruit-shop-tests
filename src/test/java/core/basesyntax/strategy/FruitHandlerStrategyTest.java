@@ -8,15 +8,15 @@ import core.basesyntax.strategy.impl.ReturnFruitHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyFruitHandlerImpl;
 import java.util.HashMap;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitHandlerStrategyTest {
-    private FruitHandlerStrategy fruitHandlerStrategy;
-    private FruitTransaction fruitTransaction;
+    private static FruitHandlerStrategy fruitHandlerStrategy;
+    private static FruitTransaction fruitTransaction;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         fruitHandlerStrategy = new FruitHandlerStrategy((new HashMap<>() {
             {
                 put(Operation.BALANCE, new BalanceFruitHandlerImpl());

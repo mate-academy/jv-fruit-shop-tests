@@ -8,18 +8,23 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceFruitHandlerImplTest {
     private static final int QUANTITY_OF_FRUIT_APPLE = 50;
     private static final String NAME_OF_FRUIT_APPLE = "apple";
-    private FruitTransaction fruitTransaction;
-    private FruitHandler fruitHandler;
+    private static FruitTransaction fruitTransaction;
+    private static FruitHandler fruitHandler;
+
+    @BeforeAll
+    static void setUpBeforeAll() {
+        fruitHandler = new BalanceFruitHandlerImpl();
+    }
 
     @BeforeEach
     void setUp() {
-        fruitHandler = new BalanceFruitHandlerImpl();
         fruitTransaction = new FruitTransaction(Operation.BALANCE, NAME_OF_FRUIT_APPLE,
                 QUANTITY_OF_FRUIT_APPLE);
     }

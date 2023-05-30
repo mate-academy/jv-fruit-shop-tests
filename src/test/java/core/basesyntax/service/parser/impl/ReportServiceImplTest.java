@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.parser.ReportService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
@@ -13,10 +13,10 @@ class ReportServiceImplTest {
     private static final String FRUIT_APPLE = "apple";
     private static final int QUANTITY_OF_BANANA = 152;
     private static final int QUANTITY_OF_APPLE = 90;
-    private ReportService reportService;
+    private static ReportService reportService;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void setUp() {
         reportService = new ReportServiceImpl();
     }
 

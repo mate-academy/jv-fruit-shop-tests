@@ -2,6 +2,7 @@ package core.basesyntax.service.parser.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.parser.ReportService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,6 @@ class ReportServiceImplTest {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String FRUIT_BANANA = "banana";
     private static final String FRUIT_APPLE = "apple";
-    //    private static final String COMMA = ",";
     private static final int QUANTITY_OF_BANANA = 152;
     private static final int QUANTITY_OF_APPLE = 90;
     private ReportService reportService;
@@ -18,6 +18,11 @@ class ReportServiceImplTest {
     @BeforeEach
     public void setUp() {
         reportService = new ReportServiceImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.getFruitStorage().clear();
     }
 
     @Test

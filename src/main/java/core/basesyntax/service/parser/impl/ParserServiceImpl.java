@@ -4,7 +4,6 @@ import static core.basesyntax.enumeration.Operation.getOperation;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.parser.ParserService;
-
 import java.util.ArrayList;
 import java.util.List;
 

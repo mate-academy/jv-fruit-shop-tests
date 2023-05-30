@@ -4,11 +4,11 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitHandlerStrategy;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import java.util.ArrayList;
-import java.util.List;
 
 class FruitServiceTest {
     private FruitService fruitService;

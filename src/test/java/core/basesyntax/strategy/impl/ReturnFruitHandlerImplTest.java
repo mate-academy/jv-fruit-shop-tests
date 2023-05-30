@@ -1,7 +1,5 @@
 package core.basesyntax.strategy.impl;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.enumeration.Operation;
 import core.basesyntax.model.FruitTransaction;
@@ -11,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BalanceFruitHandlerImplTest {
+class ReturnFruitHandlerImplTest {
     private static final int QUANTITY_OF_FRUIT_APPLE = 50;
     private static final String NAME_OF_FRUIT_APPLE = "apple";
     private FruitTransaction fruitTransaction;
@@ -19,8 +17,8 @@ class BalanceFruitHandlerImplTest {
 
     @BeforeEach
     void setUp() {
-        fruitHandler = new BalanceFruitHandlerImpl();
-        fruitTransaction = new FruitTransaction(Operation.BALANCE, NAME_OF_FRUIT_APPLE,
+        fruitHandler = new ReturnFruitHandlerImpl();
+        fruitTransaction = new FruitTransaction(Operation.RETURN, NAME_OF_FRUIT_APPLE,
                 QUANTITY_OF_FRUIT_APPLE);
     }
 
@@ -30,17 +28,9 @@ class BalanceFruitHandlerImplTest {
     }
 
     @Test
-    void balanceFruitHandler_fruitQuantityLessThanZero_notOk() {
-        fruitTransaction.setQuantity(-5);
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> fruitHandler.doAction(fruitTransaction));
-        Assertions.assertEquals("The balance of fruits in the store"
-                + " cannot be less than zero", exception.getMessage());
-    }
-
-    @Test
-    void balanceFruitHandler_validData_ok() {
-        Storage.getFruitStorage().put(NAME_OF_FRUIT_APPLE, QUANTITY_OF_FRUIT_APPLE);
+    void returnFruitHandler_validData_ok() {
+        Storage.getFruitStorage().put(NAME_OF_FRUIT_APPLE, 110);
         Assertions.assertDoesNotThrow(() -> fruitHandler.doAction(fruitTransaction));
+        Assertions.assertEquals(160,Storage.getFruitStorage().get(fruitTransaction.getFruit()));
     }
 }

@@ -3,12 +3,12 @@ package core.basesyntax.service.parser.impl;
 import core.basesyntax.enumeration.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.parser.ParserService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
     private static final int COUNT_OF_ELEMENT_AFTER_PARSING = 1;
@@ -32,7 +32,6 @@ class ParserServiceImplTest {
         sourceData.add("b,banana,20");
         List<FruitTransaction> resultFruitTransactions = parserService.parseData(sourceData);
         Assertions.assertEquals(COUNT_OF_ELEMENT_AFTER_PARSING, resultFruitTransactions.size());
-
         FruitTransaction firstFruitTransaction = resultFruitTransactions.get(0);
         Assertions.assertEquals(Operation.BALANCE, firstFruitTransaction.getOperation());
         Assertions.assertEquals(NAME_OF_FRUIT, firstFruitTransaction.getFruit());
@@ -79,8 +78,9 @@ class ParserServiceImplTest {
     void parserService_stringWithoutFruit_notOk() {
         sourceData.add(TITLE_OF_INPUT_DATA);
         sourceData.add("b,20");
-        IndexOutOfBoundsException exception = Assertions.assertThrows(IndexOutOfBoundsException.class,
-                () -> parserService.parseData(sourceData));
+        IndexOutOfBoundsException exception = Assertions
+                .assertThrows(IndexOutOfBoundsException.class,
+                    () -> parserService.parseData(sourceData));
         Assertions.assertEquals("Index 2 out of bounds for length 2", exception.getMessage());
     }
 
@@ -88,8 +88,9 @@ class ParserServiceImplTest {
     void parserService_stringWithoutQuantity_notOk() {
         sourceData.add(TITLE_OF_INPUT_DATA);
         sourceData.add("b,banana");
-        IndexOutOfBoundsException exception = Assertions.assertThrows(IndexOutOfBoundsException.class,
-                () -> parserService.parseData(sourceData));
+        IndexOutOfBoundsException exception = Assertions
+                .assertThrows(IndexOutOfBoundsException.class,
+                    () -> parserService.parseData(sourceData));
         Assertions.assertEquals("Index 2 out of bounds for length 2", exception.getMessage());
     }
 }

@@ -3,21 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private static ReportService reportService;
+    private final ReportService reportService;
 
-    @BeforeAll
-    static void beforeAll() {
+    private ReportServiceImplTest() {
         reportService = new ReportServiceImpl();
-    }
-
-    @BeforeEach
-    void setUp() {
-        Storage.storage.clear();
     }
 
     @Test
@@ -49,6 +41,7 @@ class ReportServiceImplTest {
 
     @Test
     void createReport_emptyData_notOk() {
+        Storage.storage.clear();
         String expected = "fruit,quantity\n";
         String actual = reportService.getReport();
         Assertions.assertEquals(expected, actual);

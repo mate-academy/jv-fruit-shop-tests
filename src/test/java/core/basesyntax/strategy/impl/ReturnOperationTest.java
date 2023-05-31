@@ -1,37 +1,33 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
-    private static final String FRUIT_NAME = "banana";
-    private static final int BALANCE_FRUIT_QUANTITY = 105;
-    private static final int FRUIT_QUANTITY = 85;
-    private static final int NEGATIVE_FRUIT_QUANTITY = -20;
-    private static OperationsStrategy returnOperation;
+    private final OperationsStrategy returnOperation;
 
-    @BeforeAll
-    static void beforeAll() {
+    private ReturnOperationTest() {
         returnOperation = new ReturnOperation();
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterAll
+    static void afterAll() {
         Storage.storage.clear();
-        Storage.storage.put(FRUIT_NAME, BALANCE_FRUIT_QUANTITY);
     }
 
     @Test
     void handle_returnOperation_ok() {
+        Storage.storage.put("banana", 105);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, FRUIT_NAME, FRUIT_QUANTITY);
+                RETURN, "banana", 85);
         returnOperation.handle(fruitTransaction);
-        Integer expected = BALANCE_FRUIT_QUANTITY + FRUIT_QUANTITY;
+        Integer expected = 190;
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
         Assertions.assertEquals(expected, actual);
     }
@@ -39,7 +35,7 @@ class ReturnOperationTest {
     @Test
     void handle_negativeQuantity_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, FRUIT_NAME, NEGATIVE_FRUIT_QUANTITY);
+                RETURN, "banana", -20);
         Assertions.assertThrows(RuntimeException.class, () ->
                 returnOperation.handle(fruitTransaction));
     }

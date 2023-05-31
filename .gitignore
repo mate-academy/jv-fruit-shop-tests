@@ -1,3 +1,5 @@
 .idea/*
 *.iml
 target/*
+src/test/resources/file.csv
+src/main/resources/report.csv

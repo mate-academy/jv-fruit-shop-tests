@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.Strategy;
-
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {

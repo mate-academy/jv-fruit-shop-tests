@@ -6,9 +6,12 @@ import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.FormatTransformerService;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FormatTransformerServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.Strategy;
-
 import java.util.List;
 
 public class Main {
@@ -16,7 +19,7 @@ public class Main {
     private static final String SOURCE_PATH = "src/main/resources/Data.csv";
 
     public static void main(String[] args) {
-        List<String> linesFromFile = new FileReaderServiceImpl(SOURCE_PATH).readFile();
+        List<String> linesFromFile = new FileReaderServiceImpl().readFile(SOURCE_PATH);
         FormatTransformerService transformer = new FormatTransformerServiceImpl();
         List<FruitTransaction> fruitTransactions = transformer.formatData(linesFromFile);
 

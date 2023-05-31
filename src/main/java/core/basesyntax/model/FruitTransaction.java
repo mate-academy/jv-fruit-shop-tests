@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import core.basesyntax.exception.InvalidValueExeption;
+import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
@@ -49,5 +50,19 @@ public class FruitTransaction {
             }
             throw new InvalidValueExeption("Invalid operation type: " + code);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return operation == that.operation
+                && Objects.equals(fruit, that.fruit)
+                && quantity == that.quantity;
     }
 }

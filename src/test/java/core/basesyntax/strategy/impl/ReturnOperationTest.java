@@ -7,12 +7,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
-    private final OperationsStrategy returnOperation;
+    private OperationsStrategy returnOperation;
 
-    private ReturnOperationTest() {
+    @BeforeEach
+    void setUp() {
         returnOperation = new ReturnOperation();
     }
 

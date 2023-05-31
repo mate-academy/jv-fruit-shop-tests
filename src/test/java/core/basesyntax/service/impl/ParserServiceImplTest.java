@@ -7,13 +7,15 @@ import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
-    private final ParserService parserService;
-    private final List<String> dataList;
+    private ParserService parserService;
+    private List<String> dataList;
 
-    private ParserServiceImplTest() {
+    @BeforeEach
+    void setUp() {
         parserService = new ParserServiceImpl();
         dataList = new ArrayList<>();
     }

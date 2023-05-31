@@ -6,13 +6,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String REPORT_PATH = "src/test/java/resources/reportTest.csv";
-    private final WriterService writerService;
+    private WriterService writerService;
 
-    private WriterServiceImplTest() {
+    @BeforeEach
+    void setUp() {
         writerService = new WriterServiceImpl();
     }
 

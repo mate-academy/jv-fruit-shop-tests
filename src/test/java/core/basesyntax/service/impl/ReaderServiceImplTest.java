@@ -3,12 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ReaderService;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private final ReaderService readerService;
+    private ReaderService readerService;
 
-    private ReaderServiceImplTest() {
+    @BeforeEach
+    void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

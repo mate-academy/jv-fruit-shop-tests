@@ -7,12 +7,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
-    private final OperationsStrategy supplyOperation;
+    private OperationsStrategy supplyOperation;
 
-    private SupplyOperationTest() {
+    @BeforeEach
+    void setUp() {
         supplyOperation = new SupplyOperation();
     }
 

@@ -7,12 +7,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
-    private final OperationsStrategy balanceOperation;
+    private OperationsStrategy balanceOperation;
 
-    private BalanceOperationTest() {
+    @BeforeEach
+    void setUp() {
         balanceOperation = new BalanceOperation();
     }
 

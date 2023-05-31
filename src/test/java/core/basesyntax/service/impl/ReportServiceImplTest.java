@@ -3,12 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private final ReportService reportService;
+    private ReportService reportService;
 
-    private ReportServiceImplTest() {
+    @BeforeEach
+    void setUp() {
         reportService = new ReportServiceImpl();
     }
 

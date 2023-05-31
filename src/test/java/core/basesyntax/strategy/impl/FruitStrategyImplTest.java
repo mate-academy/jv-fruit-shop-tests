@@ -5,24 +5,23 @@ import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
 import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
 import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitStrategy;
-import core.basesyntax.strategy.OperationsStrategy;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitStrategyImplTest {
-    private final FruitStrategy fruitStrategy;
+    private FruitStrategy fruitStrategy;
 
-    private FruitStrategyImplTest() {
-        Map<FruitTransaction.Operation, OperationsStrategy> operationsStrategyMap = Map.of(
+    @BeforeEach
+    void setUp() {
+        fruitStrategy = new FruitStrategyImpl(Map.of(
                 BALANCE, new BalanceOperation(),
                 RETURN, new ReturnOperation(),
                 PURCHASE, new PurchaseOperation(),
                 SUPPLY, new SupplyOperation()
-        );
-        fruitStrategy = new FruitStrategyImpl(operationsStrategyMap);
+        ));
     }
 
     @Test

@@ -9,7 +9,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.FruitStrategy;
-import core.basesyntax.strategy.OperationsStrategy;
 import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.FruitStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperation;
@@ -18,21 +17,22 @@ import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceImplTest {
-    private final FruitService fruitService;
-    private final FruitStrategy fruitStrategy;
+    private FruitService fruitService;
+    private FruitStrategy fruitStrategy;
 
-    private FruitServiceImplTest() {
-        Map<FruitTransaction.Operation, OperationsStrategy> operationsStrategyMap = Map.of(
+    @BeforeEach
+    void setUp() {
+        fruitService = new FruitServiceImpl();
+        fruitStrategy = new FruitStrategyImpl(Map.of(
                 BALANCE, new BalanceOperation(),
                 RETURN, new ReturnOperation(),
                 PURCHASE, new PurchaseOperation(),
                 SUPPLY, new SupplyOperation()
-        );
-        fruitService = new FruitServiceImpl();
-        fruitStrategy = new FruitStrategyImpl(operationsStrategyMap);
+        ));
     }
 
     @Test

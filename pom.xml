@@ -98,6 +98,10 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/Fruit*</exclude>
+                        <exclude>**/Operation*</exclude>
+                        <exclude>**/Transaction*</exclude>
+                        <exclude>**/ProcessDataServiceImpl*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

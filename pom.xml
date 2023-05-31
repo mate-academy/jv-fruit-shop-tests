@@ -97,6 +97,7 @@
                 </executions>
                 <configuration>
                     <excludes>
+                        <exclude>**/db/*</exclude>
                         <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>

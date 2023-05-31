@@ -97,7 +97,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/HelloWorld*</exclude>
+                        <exclude>core/basesyntax/model/*.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>

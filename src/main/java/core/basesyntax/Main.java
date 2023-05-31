@@ -14,7 +14,7 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.Strategy;
 import java.util.List;
 
-public class Mainn {
+public class Main {
     private static final String REPORT_PATH = "src/main/resources/Report3.csv";
     private static final String SOURCE_PATH = "src/main/resources/Data.csv";
 

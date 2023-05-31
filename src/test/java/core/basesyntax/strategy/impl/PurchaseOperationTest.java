@@ -18,7 +18,7 @@ class PurchaseOperationTest {
     @BeforeAll
     static void setUp() {
         storageImpl = new StorageImpl();
-        purchaseOperation = new PurchaseOperation((StorageImpl) storageImpl);
+        purchaseOperation = new PurchaseOperation(storageImpl);
     }
 
     @Test

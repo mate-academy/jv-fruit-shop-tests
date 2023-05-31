@@ -18,7 +18,7 @@ class SupplyOperationTest {
     @BeforeAll
     static void setUp() {
         storageImpl = new StorageImpl();
-        supplyOperation = new SupplyOperation((StorageImpl) storageImpl);
+        supplyOperation = new SupplyOperation(storageImpl);
     }
 
     @Test

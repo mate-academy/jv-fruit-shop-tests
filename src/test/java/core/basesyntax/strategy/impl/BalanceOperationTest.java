@@ -19,7 +19,7 @@ class BalanceOperationTest {
     @BeforeAll
     static void setUp() {
         storageImpl = new StorageImpl();
-        balanceOperation = new BalanceOperation((StorageImpl) storageImpl);
+        balanceOperation = new BalanceOperation(storageImpl);
     }
 
     @Test

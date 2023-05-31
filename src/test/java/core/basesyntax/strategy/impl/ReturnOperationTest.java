@@ -20,7 +20,7 @@ class ReturnOperationTest {
     @BeforeAll
     static void setUp() {
         storageImpl = new StorageImpl();
-        returnOperation = new ReturnOperation((StorageImpl) storageImpl);
+        returnOperation = new ReturnOperation(storageImpl);
     }
 
     @Test

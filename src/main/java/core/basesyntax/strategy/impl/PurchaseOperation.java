@@ -1,14 +1,14 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.StorageImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.InvalidOperatioExeption;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 
 public class PurchaseOperation implements OperationProcessor {
-    private StorageImpl storageImpl;
+    private Storage storageImpl;
 
-    public PurchaseOperation(StorageImpl storageImpl) {
+    public PurchaseOperation(Storage storageImpl) {
         this.storageImpl = storageImpl;
     }
 

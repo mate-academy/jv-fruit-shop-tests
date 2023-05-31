@@ -1,14 +1,14 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.StorageImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.InvalidValueExeption;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 
 public class BalanceOperation implements OperationProcessor {
-    private StorageImpl storageImpl;
+    private Storage storageImpl;
 
-    public BalanceOperation(StorageImpl storageImpl) {
+    public BalanceOperation(Storage storageImpl) {
         this.storageImpl = storageImpl;
     }
 

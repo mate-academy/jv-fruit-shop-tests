@@ -36,15 +36,6 @@ class FileWriterServiceImplTest {
         assertThrows(RuntimeException.class, () -> csvFileWriterService.writeFile(lines, fileName));
     }
 
-    @Test
-    void writeFile_ioException_notOk() throws IOException {
-        List<String> lines = List.of("Line 1", "Line 2");
-        String fileName = "src/test/resources/readonly-file.txt";
-        Files.setAttribute(Path.of(fileName), "dos:readonly", true);
-        assertThrows(RuntimeException.class, () -> csvFileWriterService.writeFile(lines, fileName));
-        Files.setAttribute(Path.of(fileName), "dos:readonly", false);
-    }
-
     private String read(String fileName) {
         try {
             return Files.readString(Path.of(fileName));

@@ -3,8 +3,8 @@ package core.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.Report;
-import core.basesyntax.service.impl.ReportImpl;
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.impl.ReportImpl;
 import org.junit.After;
 import org.junit.Test;
 

@@ -12,7 +12,6 @@ import core.basesyntax.strategy.operation.ReturnHandlerImpl;
 import core.basesyntax.strategy.operation.SupplyHandlerImpl;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 

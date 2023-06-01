@@ -7,14 +7,16 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
     private static final FruitTransaction.Operation SUPPLY_OPERATION = SUPPLY;
     private static final String BANANA_FRUIT = "banana";
-    private final OperationHandler supplyOperationHandler;
+    private OperationHandler supplyOperationHandler;
 
-    private SupplyOperationHandlerTest() {
+    @BeforeEach
+    void setUp() {
         supplyOperationHandler = new SupplyOperationHandler();
     }
 

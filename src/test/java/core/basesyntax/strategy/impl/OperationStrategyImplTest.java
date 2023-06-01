@@ -10,12 +10,14 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private final OperationStrategy operationStrategy;
+    private OperationStrategy operationStrategy;
 
-    private OperationStrategyImplTest() {
+    @BeforeEach
+    void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> map = Map.of(
                 BALANCE, new BalanceOperationHandler(),
                 SUPPLY, new SupplyOperationHandler(),

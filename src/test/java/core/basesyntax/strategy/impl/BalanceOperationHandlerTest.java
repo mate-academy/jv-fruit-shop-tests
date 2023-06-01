@@ -7,14 +7,16 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
     private static final FruitTransaction.Operation BALANCE_OPERATION = BALANCE;
     private static final String BANANA_FRUIT = "banana";
-    private final OperationHandler balanceOperationHandler;
+    private OperationHandler balanceOperationHandler;
 
-    private BalanceOperationHandlerTest() {
+    @BeforeEach
+    void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
     }
 

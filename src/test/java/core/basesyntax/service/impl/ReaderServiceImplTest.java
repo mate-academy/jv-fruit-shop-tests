@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ReaderService;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
@@ -10,8 +11,8 @@ class ReaderServiceImplTest {
             = "src/test/resources/validDataTestFile.csv";
     private ReaderService readerService;
 
-    ReaderServiceImplTest() {
-
+    @BeforeEach
+    void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

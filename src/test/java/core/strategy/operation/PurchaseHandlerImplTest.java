@@ -1,6 +1,7 @@
 package core.strategy.operation;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.strategy.operation.PurchaseHandlerImpl;

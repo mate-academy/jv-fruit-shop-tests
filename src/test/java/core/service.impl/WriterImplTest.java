@@ -1,11 +1,12 @@
 package core.service.impl;
 
 import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.service.Writer;
+import core.basesyntax.service.impl.WriterImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.WriterImpl;
 import org.junit.Test;
 
 public class WriterImplTest {

@@ -1,10 +1,11 @@
 package core.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import java.util.ArrayList;
-import java.util.List;
+
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.impl.ReaderImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
 public class ReaderImplTest {

@@ -1,11 +1,12 @@
 package core.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import java.util.ArrayList;
-import java.util.List;
+
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.ParseImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
 public class ParserImplTest {

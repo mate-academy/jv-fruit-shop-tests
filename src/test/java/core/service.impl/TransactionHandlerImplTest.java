@@ -1,6 +1,7 @@
 package core.service.impl;
 
 import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
@@ -8,14 +9,14 @@ import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.service.TransactionStrategy;
 import core.basesyntax.service.impl.TransactionHandlerImpl;
 import core.basesyntax.strategy.TransactionStrategyImpl;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.strategy.operation.BalanceHandlerImpl;
 import core.basesyntax.strategy.operation.PurchaseHandlerImpl;
 import core.basesyntax.strategy.operation.ReturnHandlerImpl;
 import core.basesyntax.strategy.operation.SupplyHandlerImpl;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;

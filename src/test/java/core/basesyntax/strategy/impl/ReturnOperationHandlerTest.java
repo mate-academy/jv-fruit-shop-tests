@@ -3,6 +3,7 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.transaction.Operation;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,6 @@ public class ReturnOperationHandlerTest {
     @BeforeEach
     public void setUp() {
         returnOperationHandler = new ReturnOperationHandler();
-        Storage.FRUITS.clear();
     }
 
     @Test
@@ -69,5 +69,10 @@ public class ReturnOperationHandlerTest {
                 = new FruitTransaction(Operation.RETURN, fruit, returnedQuantity);
         Assertions.assertThrows(RuntimeException.class,
                 () -> returnOperationHandler.handle(fruitTransaction));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.FRUITS.clear();
     }
 }

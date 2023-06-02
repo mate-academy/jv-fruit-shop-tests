@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.transaction.FruitTransaction;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,8 +18,14 @@ public class TransactionParserServiceImplTest {
 
     @Test
     public void parse_emptyRawData_notOk() {
-        List<String> rawData = List.of();
+        List<String> rawData = Collections.emptyList();
         List<FruitTransaction> parsedTransactions = transactionParserService.parse(rawData);
         Assertions.assertTrue(parsedTransactions.isEmpty());
+    }
+
+    @Test
+    public void parse_nullRawData_notOk() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> transactionParserService.parse(null));
     }
 }

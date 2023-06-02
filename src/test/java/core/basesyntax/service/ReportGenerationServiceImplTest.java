@@ -6,6 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportGenerationServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ public class ReportGenerationServiceImplTest {
     @BeforeEach
     public void setup() {
         reportGenerationService = new ReportGenerationServiceImpl();
+        Storage.FRUITS.clear();
     }
 
     @Test
@@ -33,7 +35,6 @@ public class ReportGenerationServiceImplTest {
 
     @Test
     public void generateReport_emptyStorageData_ok() {
-        Storage.FRUITS.clear();
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         String actualReport = reportGenerationService.generateReport();
         assertEquals(expectedReport, actualReport);

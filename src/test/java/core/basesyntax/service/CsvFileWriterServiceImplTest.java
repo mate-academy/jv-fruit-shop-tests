@@ -32,7 +32,7 @@ public class CsvFileWriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_emptyReport_fileIsEmpty() throws IOException {
+    void writeToFile_emptyReport_ok() throws IOException {
         String invalidFile = "src/main/resources/EmptyFile.csv";
         String emptyReport = "";
         writerService.writeToFile(invalidFile, emptyReport);

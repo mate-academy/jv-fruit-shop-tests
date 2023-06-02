@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.transaction.Operation;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,6 @@ public class SupplyOperationHandlerTest {
     @BeforeEach
     public void setUp() {
         supplyOperationHandler = new SupplyOperationHandler();
-        Storage.FRUITS.clear();
     }
 
     @Test
@@ -59,5 +59,10 @@ public class SupplyOperationHandlerTest {
                 new FruitTransaction(Operation.SUPPLY, fruit, suppliedQuantity);
         assertThrows(IllegalArgumentException.class,
                 () -> supplyOperationHandler.handle(fruitTransaction));
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.FRUITS.clear();
     }
 }

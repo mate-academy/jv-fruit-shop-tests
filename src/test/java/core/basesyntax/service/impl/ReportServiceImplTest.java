@@ -20,7 +20,8 @@ class ReportServiceImplTest {
     @Test
     void createReport_withNullInitializeList_notOk() {
         List<String> record = null;
-        assertThrows(NullPointerException.class, () -> reportService.createReport(record));
+        assertThrows(NullPointerException.class, () -> reportService.createReport(record),
+                "Throw null pointer exception if List<String> = null");
     }
 
     @Test

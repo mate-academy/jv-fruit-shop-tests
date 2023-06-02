@@ -31,11 +31,12 @@ class FruitServiceImplTest {
     void process_withNullInitializationList_notOk() {
         List<FruitTransaction> fruitTransactions = null;
         assertThrows(NullPointerException.class, ()
-                -> fruitService.processTransaction(fruitTransactions));
+                -> fruitService.processTransaction(fruitTransactions),
+                "Throw null pointer exception if fruit transactions null");
     }
 
     @Test
-    void process_withEmptyInitializationListShouldNotChangeTheStorage_ok() {
+    void process_withEmptyInitializationList_ok() {
         List<FruitTransaction> fruitTransactions = Collections.emptyList();
         FruitStorage.Storage_Map.put("banana", 10);
         int expected = FruitStorage.Storage_Map.get("banana");

@@ -22,7 +22,8 @@ class ParserServiceImplTest {
     @Test
     void parseTransaction_withNullArgument_notOk() {
         List<String> argument = null;
-        assertThrows(NullPointerException.class, () -> parserService.parseData(argument));
+        assertThrows(NullPointerException.class, () -> parserService.parseData(argument),
+                "Throw null pointer exception if List<String> = null");
     }
 
     @Test

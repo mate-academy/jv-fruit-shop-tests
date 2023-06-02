@@ -19,20 +19,30 @@ class CsvFileReaderServiceImplTest {
     @Test
     void readLines_filePathIsEmpty_notOk() {
         String filePath = "";
-        assertThrows(RuntimeException.class, () -> fileReaderService.readLines(filePath));
+        assertThrows(RuntimeException.class, () -> fileReaderService.readLines(filePath),
+                "Throw runtime exception if file path empty");
     }
 
     @Test
     void readLines_readFromFileWithInvalidData_notOk() {
         String filePath = "src/test/resources/InvalidData.csv";
         assertThrows(RuntimeException.class,
-                () -> fileReaderService.readLines(filePath));
+                () -> fileReaderService.readLines(filePath),
+                "Throw runtime exception if file have wrong data");
     }
 
     @Test
     void readLines_readFromNonExistFile_notOk() {
         String nonExistingFile = "non_existing_file.txt";
-        assertThrows(RuntimeException.class, () -> fileReaderService.readLines(nonExistingFile));
+        assertThrows(RuntimeException.class, () -> fileReaderService.readLines(nonExistingFile),
+                "Throw runtime exception if file not exist");
+    }
+
+    @Test
+    void readLines_readFromEmptyFile_notOk() {
+        String emptyFile = "src/test/resources/Empty.csv";
+        assertThrows(RuntimeException.class, () -> fileReaderService.readLines(emptyFile),
+                "Throw runtime exception if file empty");
     }
 
     @Test

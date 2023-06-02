@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.enumeration.Operation;
 import core.basesyntax.model.FruitTransaction;
@@ -9,7 +11,6 @@ import core.basesyntax.strategy.impl.BalanceFruitHandlerImpl;
 import core.basesyntax.strategy.impl.PurchaseFruitHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnFruitHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyFruitHandlerImpl;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -21,7 +22,6 @@ import org.junit.jupiter.api.Test;
 class FruitServiceTest {
     private static FruitService fruitService;
     private static FruitHandlerStrategy fruitHandlerStrategy;
-    private static List<FruitTransaction> transactions;
     private static final int INITIAL_QUANTITY = 40;
     private static final String NAME_OF_FRUIT = "banana";
 
@@ -36,7 +36,6 @@ class FruitServiceTest {
                 put(Operation.RETURN, new ReturnFruitHandlerImpl());
             }
         }));
-        transactions = new ArrayList<>();
     }
 
     @BeforeEach
@@ -50,25 +49,35 @@ class FruitServiceTest {
     }
 
     @Test
-    void fruitService_validDataSupplyOperation_ok() {
-        transactions = List.of(new FruitTransaction(Operation.SUPPLY,
+    void processAllTransations_validDataSupplyOperation_ok() {
+        List<FruitTransaction> transactions = List.of(new FruitTransaction(Operation.SUPPLY,
                 NAME_OF_FRUIT, INITIAL_QUANTITY));
         fruitService.processAllTransations(transactions, fruitHandlerStrategy);
-        Assertions.assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 80);
+        assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 80);
     }
 
     @Test
-    void fruitService_validDataPurchaseOperation_ok() {
-        transactions = List.of(new FruitTransaction(Operation. PURCHASE,
+    void processAllTransations_validDataPurchaseOperation_ok() {
+        List<FruitTransaction> transactions = List.of(new FruitTransaction(Operation.PURCHASE,
                 NAME_OF_FRUIT, 10));
         fruitService.processAllTransations(transactions, fruitHandlerStrategy);
-        Assertions.assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 30);
+        assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 30);
     }
 
     @Test
-    void fruitService_withNullHandler_notOk() {
-        transactions = List.of(new FruitTransaction(null, NAME_OF_FRUIT, INITIAL_QUANTITY));
+    void processAllTransations_validData_ok() {
+        List<FruitTransaction> transactions = List.of(new FruitTransaction(Operation.PURCHASE,
+                        NAME_OF_FRUIT, 10),
+                new FruitTransaction(Operation.RETURN, NAME_OF_FRUIT, 10),
+                new FruitTransaction(Operation.SUPPLY, NAME_OF_FRUIT, 15),
+                new FruitTransaction(Operation.PURCHASE, NAME_OF_FRUIT, 20));
         fruitService.processAllTransations(transactions, fruitHandlerStrategy);
-        Assertions.assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), INITIAL_QUANTITY);
+        assertEquals(Storage.getFruitStorage().get(NAME_OF_FRUIT), 35);
+    }
+
+    @Test
+    void processAllTransations_withNull_notOk() {
+        Assertions.assertThrows(NullPointerException.class, () -> fruitService
+                .processAllTransations(null, fruitHandlerStrategy));
     }
 }

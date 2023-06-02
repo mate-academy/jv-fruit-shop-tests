@@ -1,9 +1,10 @@
 package core.basesyntax.service.parser.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.parser.ReportService;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -26,28 +27,28 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void reportService_withValidData_ok() {
+    void createReport_withValidData_ok() {
         Storage.getFruitStorage().put(FRUIT_BANANA, QUANTITY_OF_BANANA);
         Storage.getFruitStorage().put(FRUIT_APPLE, QUANTITY_OF_APPLE);
         String testReport = REPORT_TITLE + System.lineSeparator()
                 + "banana,152" + System.lineSeparator() + "apple,90";
         String resultReport = reportService.createReport();
-        Assertions.assertEquals(testReport, resultReport);
+        assertEquals(testReport, resultReport);
     }
 
     @Test
-    void reportService_withEmptyStorage_notOk() {
+    void createReport_withEmptyStorage_notOk() {
         String resultReport = reportService.createReport();
-        Assertions.assertEquals(REPORT_TITLE, resultReport);
+        assertEquals(REPORT_TITLE, resultReport);
     }
 
     @Test
-    void reportService_withNullValue_notOk() {
+    void createReport_withNullValue_notOk() {
         Storage.getFruitStorage().put(FRUIT_BANANA, null);
         Storage.getFruitStorage().put(FRUIT_APPLE, null);
         String resultReport = reportService.createReport();
         String testReport = REPORT_TITLE + System.lineSeparator()
                 + "banana,null" + System.lineSeparator() + "apple,null";
-        Assertions.assertEquals(testReport, resultReport);
+        assertEquals(testReport, resultReport);
     }
 }

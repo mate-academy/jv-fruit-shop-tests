@@ -1,7 +1,12 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.transaction.Operation.BALANCE;
+import static core.basesyntax.transaction.Operation.PURCHASE;
+import static core.basesyntax.transaction.Operation.RETURN;
+import static core.basesyntax.transaction.Operation.SUPPLY;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.QuantityCalculatorServiceImpl;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
@@ -10,7 +15,6 @@ import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.transaction.FruitTransaction;
-import core.basesyntax.transaction.Operation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +29,10 @@ public class QuantityCalculatorServiceImplTest {
     @BeforeEach
     void setUp() {
         OperationHandlerStrategy operationHandlerStrategy = new OperationHandlerStrategyImpl(Map.of(
-                Operation.BALANCE, new BalanceOperationHandler(),
-                Operation.RETURN, new ReturnOperationHandler(),
-                Operation.PURCHASE, new PurchaseOperationHandler(),
-                Operation.SUPPLY, new SupplyOperationHandler()
+                BALANCE, new BalanceOperationHandler(),
+                RETURN, new ReturnOperationHandler(),
+                PURCHASE, new PurchaseOperationHandler(),
+                SUPPLY, new SupplyOperationHandler()
         ));
         quantityCalculatorService = new QuantityCalculatorServiceImpl(operationHandlerStrategy);
         fruitTransactions = new ArrayList<>();
@@ -40,20 +44,18 @@ public class QuantityCalculatorServiceImplTest {
     }
 
     @Test
-    void calculate_SingleTransaction_ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction(Operation.BALANCE, "apple", 5);
-        fruitTransactions.add(fruitTransaction);
-        quantityCalculatorService.calculate(fruitTransactions);
-        Assertions.assertTrue(true);
-    }
-
-    @Test
-    void calculate_MultipleTransactions_ok() {
-        FruitTransaction transaction1 = new FruitTransaction(Operation.BALANCE, "apple", 5);
-        FruitTransaction transaction2 = new FruitTransaction(Operation.SUPPLY, "banana", 10);
-        fruitTransactions.add(transaction1);
-        fruitTransactions.add(transaction2);
-        quantityCalculatorService.calculate(fruitTransactions);
-        Assertions.assertTrue(true);
+    void addData_validData_ok() {
+        fruitTransactions = List.of(
+                new FruitTransaction(BALANCE, "banana", 100),
+                new FruitTransaction(PURCHASE, "banana", 90),
+                new FruitTransaction(SUPPLY, "banana", 100),
+                new FruitTransaction(RETURN, "banana", 50)
+        );
+        fruitTransactions.forEach(transaction ->
+                quantityCalculatorService.calculate(List.of(transaction)));
+        System.out.println("Storage: " + Storage.FRUITS);
+        int expected = 160;
+        int actual = Storage.FRUITS.get("banana");
+        Assertions.assertEquals(expected, actual);
     }
 }

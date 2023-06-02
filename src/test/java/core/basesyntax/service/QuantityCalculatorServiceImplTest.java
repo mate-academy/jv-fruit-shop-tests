@@ -5,10 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import core.basesyntax.service.impl.QuantityCalculatorServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.transaction.Operation;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +24,18 @@ public class QuantityCalculatorServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        OperationHandlerStrategy operationHandlerStrategy = new TestOperationHandlerStrategy();
+        OperationHandlerStrategy operationHandlerStrategy = new OperationHandlerStrategy() {
+            private final Map<Operation, OperationHandler> operationHandlers = Map.of(
+                    Operation.BALANCE, new BalanceOperationHandler(),
+                    Operation.RETURN, new ReturnOperationHandler(),
+                    Operation.PURCHASE, new PurchaseOperationHandler(),
+                    Operation.SUPPLY, new SupplyOperationHandler()
+            );
+            @Override
+            public OperationHandler getOperationService(Operation operation) {
+                return operationHandlers.get(operation);
+            }
+        };
         quantityCalculatorService = new QuantityCalculatorServiceImpl(operationHandlerStrategy);
         fruitTransactions = new ArrayList<>();
     }
@@ -42,17 +59,5 @@ public class QuantityCalculatorServiceImplTest {
         fruitTransactions.add(transaction1);
         fruitTransactions.add(transaction2);
         assertDoesNotThrow(() -> quantityCalculatorService.calculate(fruitTransactions));
-    }
-
-    private static class TestOperationHandlerStrategy implements OperationHandlerStrategy {
-        public OperationHandler getOperationService(Operation operation) {
-            return new TestOperationHandler();
-        }
-    }
-
-    private static class TestOperationHandler implements OperationHandler {
-        public void handle(FruitTransaction fruitTransaction) {
-
-        }
     }
 }

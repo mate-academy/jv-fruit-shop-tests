@@ -14,6 +14,10 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public Operation getOperation() {
         return operation;
     }

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     private static OperationStrategy operationStrategy;
+    private static OperationHandler expectedOperationHandler;
 
     @BeforeEach
     public void setUp() {
@@ -25,28 +26,28 @@ class OperationStrategyImplTest {
 
     @Test
     public void get_getBalanceHandler_Ok() {
-        OperationHandler expectedOperationHandler = new BalanceHandler();
+        expectedOperationHandler = new BalanceHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass());
     }
 
     @Test
     public void get_getPurchaseHandler_Ok() {
-        OperationHandler expectedOperationHandler = new PurchaseHandler();
+        expectedOperationHandler = new PurchaseHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.PURCHASE).getClass());
     }
 
     @Test
     public void get_getReturnHandler_Ok() {
-        OperationHandler expectedOperationHandler = new ReturnHandler();
+        expectedOperationHandler = new ReturnHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.RETURN).getClass());
     }
 
     @Test
     public void get_getSupplyHandler_Ok() {
-        OperationHandler expectedOperationHandler = new SupplyHandler();
+        expectedOperationHandler = new SupplyHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass());
     }

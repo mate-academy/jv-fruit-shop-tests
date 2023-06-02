@@ -14,18 +14,16 @@ class ReportServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         reportService = new ReportServiceImpl();
+        Storage.storage.clear();
     }
 
     @Test
     void createReport_validData_Ok() {
         Storage.storage.put("banana",25);
         Storage.storage.put("apple",5);
-        String expectedReportString = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,25"
-                + System.lineSeparator()
-                + "apple,5"
-                + System.lineSeparator();
+        String expectedReportString = "fruit,quantity" + System.lineSeparator()
+                + "banana,25" + System.lineSeparator()
+                + "apple,5" + System.lineSeparator();
         assertEquals(expectedReportString,reportService.reportStorage());
     }
 

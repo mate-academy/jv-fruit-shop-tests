@@ -11,18 +11,19 @@ import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
     private static OperationHandler purchaseHandler;
+    private static FruitTransaction transaction;
 
     @BeforeEach
     public void setUp() {
         purchaseHandler = new PurchaseHandler();
         Storage.storage.clear();
+        transaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE,"Apple", 5);
     }
 
     @Test
     public void handle_PositiveQuantity_Ok() {
         Storage.storage.put("Apple", 10);
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE,"Apple", 5);
         purchaseHandler.handle(transaction);
         assertEquals(5, Storage.storage.get("Apple"));
     }
@@ -30,8 +31,7 @@ class PurchaseHandlerTest {
     @Test
     public void handle_NegativeQuantity_notOk() {
         Storage.storage.put("Apple", 10);
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE,"Apple", -5);
+        transaction.setQuantity(-5);
         assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(transaction));
     }
@@ -39,8 +39,7 @@ class PurchaseHandlerTest {
     @Test
     public void handle_ZeroQuantity_notOk() {
         Storage.storage.put("Banana", 10);
-        FruitTransaction transaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE,"Banana", 0);
+        transaction.setQuantity(0);
         assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(transaction));
     }

@@ -23,7 +23,6 @@ class ReadServiceImplTest {
                "p,apple,20",
                "p,banana,5",
                "s,banana,50");
-
     }
 
     @Test

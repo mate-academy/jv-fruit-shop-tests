@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReportService;
@@ -29,6 +30,7 @@ class FruitServiceImplTest {
         operationsMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationsMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationsMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        Storage.storage.clear();
         fruitService = new FruitServiceImpl(new OperationStrategyImpl(operationsMap));
     }
 
@@ -45,12 +47,9 @@ class FruitServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50"));
-        String reportExpected = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,152"
-                + System.lineSeparator()
-                + "apple,90"
-                + System.lineSeparator();
+        String reportExpected = "fruit,quantity" + System.lineSeparator()
+                + "banana,152" + System.lineSeparator()
+                + "apple,90" + System.lineSeparator();
         fruitService.processTransactions(new ParserInFruitTransactionImpl().parseData(testData));
         assertEquals(reportExpected, reportService.reportStorage());
     }

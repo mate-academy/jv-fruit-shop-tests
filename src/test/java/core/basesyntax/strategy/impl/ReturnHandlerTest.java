@@ -13,17 +13,17 @@ import org.junit.jupiter.api.Test;
 
 class ReturnHandlerTest {
     private static OperationHandler balanceHandler;
+    private static FruitTransaction fruitTransaction;
 
     @BeforeEach
     void setUp() {
         balanceHandler = new ReturnHandler();
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,"Apple", 10);
     }
 
     @Test
     void handle_positiveQuantity_Ok() {
         Storage.storage.put("Apple", 10);
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.RETURN,"Apple", 10);
         Map<String, Integer> expectedStorage = new HashMap<>();
         expectedStorage.put("Apple", 20);
         balanceHandler.handle(fruitTransaction);
@@ -32,15 +32,13 @@ class ReturnHandlerTest {
 
     @Test
     void handle_zeroQuantity_notOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.RETURN,"Apple", 0);
+        fruitTransaction.setQuantity(0);
         assertThrows(RuntimeException.class, () -> balanceHandler.handle(fruitTransaction));
     }
 
     @Test
     void handle_negativeQuantity_notOk() {
-        FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.RETURN,"Apple", -5);
+        fruitTransaction.setQuantity(-5);
         assertThrows(RuntimeException.class, () -> balanceHandler.handle(fruitTransaction));
     }
 }

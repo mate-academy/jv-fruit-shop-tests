@@ -17,15 +17,19 @@ class FruitHandlerStrategyTest {
     private static FruitHandlerStrategy fruitHandlerStrategy;
     private static final int QUANTITY = 50;
     private static final String FRUIT = "apple";
+    private static final FruitHandler balanceHandler = new BalanceFruitHandlerImpl();
+    private static final FruitHandler supplyHandler = new SupplyFruitHandlerImpl();
+    private static final FruitHandler purchaseHandler = new PurchaseFruitHandlerImpl();
+    private static final FruitHandler returnHandler = new ReturnFruitHandlerImpl();
 
     @BeforeAll
     static void setUp() {
         fruitHandlerStrategy = new FruitHandlerStrategy((new HashMap<>() {
             {
-                put(Operation.BALANCE, new BalanceFruitHandlerImpl());
-                put(Operation.SUPPLY, new SupplyFruitHandlerImpl());
-                put(Operation.PURCHASE, new PurchaseFruitHandlerImpl());
-                put(Operation.RETURN, new ReturnFruitHandlerImpl());
+                put(Operation.BALANCE, balanceHandler);
+                put(Operation.SUPPLY, supplyHandler);
+                put(Operation.PURCHASE, purchaseHandler);
+                put(Operation.RETURN, returnHandler);
             }
         }));
     }
@@ -34,8 +38,7 @@ class FruitHandlerStrategyTest {
     void get_returnBalanceHandlerImpl_ok() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(Operation.BALANCE, FRUIT, QUANTITY);
-        FruitHandler fruitHandler = fruitHandlerStrategy.get(fruitTransaction);
-        assertEquals(fruitHandlerStrategy.get(fruitTransaction), fruitHandler);
+        assertEquals(balanceHandler, fruitHandlerStrategy.get(fruitTransaction));
         assertDoesNotThrow(() -> fruitHandlerStrategy.get(fruitTransaction));
     }
 
@@ -43,8 +46,7 @@ class FruitHandlerStrategyTest {
     void get_returnSupplyHandlerImpl_ok() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(Operation.SUPPLY, FRUIT, QUANTITY);
-        FruitHandler fruitHandler = fruitHandlerStrategy.get(fruitTransaction);
-        assertEquals(fruitHandlerStrategy.get(fruitTransaction), fruitHandler);
+        assertEquals(supplyHandler, fruitHandlerStrategy.get(fruitTransaction));
         assertDoesNotThrow(() -> fruitHandlerStrategy.get(fruitTransaction));
     }
 
@@ -52,8 +54,7 @@ class FruitHandlerStrategyTest {
     void get_returnPurchaseHandlerImpl_ok() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(Operation.PURCHASE, FRUIT, QUANTITY);
-        FruitHandler fruitHandler = fruitHandlerStrategy.get(fruitTransaction);
-        assertEquals(fruitHandlerStrategy.get(fruitTransaction), fruitHandler);
+        assertEquals(purchaseHandler, fruitHandlerStrategy.get(fruitTransaction));
         assertDoesNotThrow(() -> fruitHandlerStrategy.get(fruitTransaction));
     }
 
@@ -61,8 +62,7 @@ class FruitHandlerStrategyTest {
     void get_repayReturnHandlerImpl_ok() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(Operation.RETURN, FRUIT, QUANTITY);
-        FruitHandler fruitHandler = fruitHandlerStrategy.get(fruitTransaction);
-        assertEquals(fruitHandlerStrategy.get(fruitTransaction), fruitHandler);
+        assertEquals(returnHandler, fruitHandlerStrategy.get(fruitTransaction));
         assertDoesNotThrow(() -> fruitHandlerStrategy.get(fruitTransaction));
     }
 }

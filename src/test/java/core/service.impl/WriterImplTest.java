@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class WriterImplTest {
 
-    private static final String OK_FILE_NAME = "src/test/java/core/resources/okFile.csv";
+    private static final String OK_FILE_NAME = "src/test/resources/okFile.csv";
     private static final String NOT_OK_FILE_NAME = "src/tes/java/core/resources/OkFile.csv";
     private static final String NOT_FILE_PATH_NAME = "";
 

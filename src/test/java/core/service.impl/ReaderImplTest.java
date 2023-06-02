@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.Test;
 
 public class ReaderImplTest {
-    private static final String FILE_PATHNAME = "src/test/java/core/resources/fileone.csv";
-    private static final String EMPTY_FILE = "src/test/java/core/resources/emptyFile.csv";
-    private static final String NOT_EXISTING_FILE = "src/test/java/core/resources/noFile.csv";
+    private static final String FILE_PATHNAME = "src/test/resources/fileone.csv";
+    private static final String EMPTY_FILE = "src/test/resources/emptyFile.csv";
+    private static final String NOT_EXISTING_FILE = "src/test/resources/noFile.csv";
 
     private void fillExpectedList(List<String> expectedList) {
         expectedList.add("type,fruit,quantity");

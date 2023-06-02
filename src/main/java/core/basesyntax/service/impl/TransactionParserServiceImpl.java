@@ -27,5 +27,4 @@ public class TransactionParserServiceImpl implements TransactionParserService {
         int quantity = Integer.parseInt(splitedLine[QUANTITY_INDEX]);
         return new FruitTransaction(operation, fruit, quantity);
     }
-
 }

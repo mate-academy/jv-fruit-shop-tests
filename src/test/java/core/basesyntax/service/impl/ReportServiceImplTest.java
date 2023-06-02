@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String HEAD_STRING = "fruit,quantity" + LINE_SEPARATOR;
     private static ReportService reporter;
 
     @BeforeAll
@@ -24,35 +22,35 @@ class ReportServiceImplTest {
     }
 
     @Test
-    public void report_Empty_Storage_ok() {
-        String expected = HEAD_STRING + LINE_SEPARATOR;
+    public void createReport_EmptyStorage_ok() {
+        String expected = "fruit,quantity" + System.lineSeparator() + System.lineSeparator();
         String actual = reporter.createReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void report_With_One_Item_ok() {
+    public void createReport_WithOneItem_ok() {
         Storage.FRUITS.put("apple", 10);
-        String expected = HEAD_STRING
+        String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,10"
-                + LINE_SEPARATOR;
+                + System.lineSeparator();
         String actual = reporter.createReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    public void report_Storage_With_Multiple_Items_ok() {
+    public void createReport_StorageWithMultipleItems_ok() {
         Storage.FRUITS.put("apple", 10);
         Storage.FRUITS.put("orange", 20);
         Storage.FRUITS.put("banana", 30);
         String expected = "fruit,quantity"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "orange,20"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "banana,30"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "apple,10"
-                + LINE_SEPARATOR;
+                + System.lineSeparator();
         String actual = reporter.createReport();
         assertEquals(expected, actual);
     }

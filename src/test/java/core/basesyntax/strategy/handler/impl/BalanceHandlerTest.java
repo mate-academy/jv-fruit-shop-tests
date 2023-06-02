@@ -11,11 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
-    private static final String APPLE = "apple";
-    private static final int VALID_FRUIT_QUANTITY = 5;
-    private static final String BANANA = "banana";
-    private static final int INVALID_FRUIT_QUANTITY = -5;
-    private static final int ZERO_FRUIT_QUANTITY = 0;
     private static OperationHandler handler;
 
     @BeforeAll
@@ -29,34 +24,34 @@ class BalanceHandlerTest {
     }
 
     @Test
-    public void test_addFruitToStorage_ok() {
+    public void handle_addFruitToStorage_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                APPLE,
-                VALID_FRUIT_QUANTITY);
+                "apple",
+                5);
         handler.handle(transaction);
-        int expectedAppleQuantity = VALID_FRUIT_QUANTITY;
-        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault(APPLE, 0);
+        int expectedAppleQuantity = 5;
+        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault("apple", 0);
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
     @Test
-    public void test_add_fruit_with_zero_quantity_to_storage() {
+    public void handle_addFruitWithZeroQuantityToStorage_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                APPLE,
-                ZERO_FRUIT_QUANTITY);
+                "apple",
+                0);
         handler.handle(transaction);
-        int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
-        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault(APPLE, 0);
+        int expectedAppleQuantity = 0;
+        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault("apple", 0);
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
     @Test
-    public void test_add_negative_Quantity_not_ok() {
+    public void handle_addNegativeQuantity_notOk() {
         assertThrows(RuntimeException.class, () -> handler
                 .handle(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        BANANA,
-                        INVALID_FRUIT_QUANTITY)));
+                        "banana",
+                        -5)));
     }
 }

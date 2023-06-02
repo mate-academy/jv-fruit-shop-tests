@@ -12,15 +12,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
-    private static final String HEAD_FILE = "operation,fruit,quantity";
-    private static final String INVALID_BALANCE_STRING = "b,apple";
-    private static final int EXPECTED_LIST_SIZE = 1;
-    private static final String APPLE = "apple";
-    private static final String ORANGE = "orange";
-    private static final String VALID_BALANCE_APPLE = "b,apple,10";
-    private static final String VALID_SUPPLY_ORANGE = "s,orange,5";
-    private static final int APPLE_QUANTITY = 10;
-    private static final int ORANGE_QUANTITY = 5;
     private static ParserServiceImpl parser;
     private List<FruitTransaction> result;
 
@@ -35,38 +26,44 @@ class ParserServiceImplTest {
     }
 
     @Test
-    public void test_parse_with_null_input_ok() {
+    public void parse_withNullInput_ok() {
         result = parser.parse(null);
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result.isEmpty());
     }
 
     @Test
-    public void test_parse_with_empty_input_ok() {
+    public void parse_withEmptyInput_ok() {
         result = parser.parse(Collections.emptyList());
         Assertions.assertNotNull(result);
         Assertions.assertTrue(result.isEmpty());
     }
 
     @Test
-    public void test_parse_with_valid_input_ok() {
-        List<String> input = Arrays.asList(HEAD_FILE, VALID_BALANCE_APPLE, VALID_SUPPLY_ORANGE);
+    public void parse_withValidInput_ok() {
+        List<String> input
+                = Arrays.asList("operation,fruit,quantity",
+                "b,apple,10",
+                "s,orange,5");
         List<FruitTransaction> expected = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        APPLE,
-                        APPLE_QUANTITY),
+                        "apple",
+                        10),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                        ORANGE,
-                        ORANGE_QUANTITY)
+                        "orange",
+                        5)
         );
         result = parser.parse(input);
         assertEquals(expected, result);
     }
 
     @Test
-    public void test_parse_with_invalid_input_ok() {
-        List<String> input = Arrays.asList(HEAD_FILE, INVALID_BALANCE_STRING, VALID_SUPPLY_ORANGE);
+    public void parse_withInvalidInput_ok() {
+        List<String> input
+                = Arrays.asList("operation,fruit,quantity",
+                "b,apple",
+                "s,orange,5");
         result = parser.parse(input);
-        assertEquals(EXPECTED_LIST_SIZE, result.size());
+        assertEquals(1, result.size());
     }
 }

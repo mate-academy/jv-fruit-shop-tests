@@ -11,12 +11,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
-    private static final String APPLE = "apple";
-    private static final int VALID_FRUIT_QUANTITY = 5;
-    private static final String BANANA = "banana";
-    private static final int INVALID_FRUIT_QUANTITY = -7;
-    private static final int ZERO_FRUIT_QUANTITY = 0;
-    private static final int ADD_FRUIT_QUANTITY = 7;
     private static OperationHandler handler;
 
     @BeforeAll
@@ -30,56 +24,56 @@ class SupplyHandlerTest {
     }
 
     @Test
-    public void test_Add_To_Empty_FruitStorage_ok() {
+    public void handle_addToEmptyFruitStorage_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
-                APPLE,
-                VALID_FRUIT_QUANTITY);
+                "apple",
+                5);
         handler.handle(transaction);
-        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault(APPLE, 0);
-        assertSame(VALID_FRUIT_QUANTITY, actualAppleQuantity);
+        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault("apple", 0);
+        assertSame(5, actualAppleQuantity);
     }
 
     @Test
-    public void test_Add_Zero_To_Not_Empty_FruitStorage_For_ZeroQuantity_ok() {
+    public void handle_addZeroToNotEmptyFruitStorageForZeroQuantity_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
-                APPLE,
-                ZERO_FRUIT_QUANTITY);
+                "apple",
+                0);
         handler.handle(transaction);
-        int expectedAppleQuantity = ZERO_FRUIT_QUANTITY;
-        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault(APPLE, 0);
+        int expectedAppleQuantity = 0;
+        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault("apple", 0);
         assertSame(expectedAppleQuantity, actualAppleQuantity);
     }
 
     @Test
-    public void test_Add_To_FruitStorage_ForNegativeQuantity_not_ok() {
+    public void handle_addToFruitStorageForNegativeQuantity_notOk() {
         assertThrows(RuntimeException.class, () -> handler
                 .handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                BANANA,
-                INVALID_FRUIT_QUANTITY)));
+                        "banana",
+                        -7)));
     }
 
     @Test
-    public void test_Add_To_FruitStorage_ForNullFruitTransaction_not_ok() {
+    public void handle_addToFruitStorageForNullFruitTransaction_notOk() {
         assertThrows(NullPointerException.class, () -> handler.handle(null));
     }
 
     @Test
-    public void test_Add_To_FruitStorage_ForMultipleFruits_ok() {
+    public void handle_addToFruitStorageForMultipleFruits_ok() {
         FruitTransaction transaction1 = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
-                APPLE,
-                VALID_FRUIT_QUANTITY);
+                "apple",
+                5);
         FruitTransaction transaction2 = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
-                BANANA,
-                ADD_FRUIT_QUANTITY);
+                "banana",
+                7);
         handler.handle(transaction1);
         handler.handle(transaction2);
-        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault(APPLE, 0);
-        Integer actualBananaQuantity = Storage.FRUITS.getOrDefault(BANANA, 0);
-        assertSame(VALID_FRUIT_QUANTITY, actualAppleQuantity);
-        assertSame(ADD_FRUIT_QUANTITY, actualBananaQuantity);
+        Integer actualAppleQuantity = Storage.FRUITS.getOrDefault("apple", 0);
+        Integer actualBananaQuantity = Storage.FRUITS.getOrDefault("banana", 0);
+        assertSame(5, actualAppleQuantity);
+        assertSame(7, actualBananaQuantity);
     }
 }

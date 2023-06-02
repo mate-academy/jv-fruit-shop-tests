@@ -13,10 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-
-    private static final String PATH_TO_FILE = "src/test/resources/report.csv";
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String INVALID_PATH = "invalid/path/to/file";
     private static WriterService writerService;
 
     @BeforeAll
@@ -25,14 +21,14 @@ class WriterServiceImplTest {
     }
 
     @Test
-    public void write_To_File_Ok() throws IOException {
-        String expectedReport = "fruit,quantity" + LINE_SEPARATOR
-                + "apple,20" + LINE_SEPARATOR
-                + "banana,50" + LINE_SEPARATOR
-                + "orange,30" + LINE_SEPARATOR;
-        writerService.writeToFile(PATH_TO_FILE, expectedReport);
-        List<String> expectedLines = Arrays.asList(expectedReport.split(LINE_SEPARATOR));
-        List<String> actualLines = Files.readAllLines(Path.of(PATH_TO_FILE));
+    public void writeToFile_Ok() throws IOException {
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "apple,20" + System.lineSeparator()
+                + "banana,50" + System.lineSeparator()
+                + "orange,30" + System.lineSeparator();
+        writerService.writeToFile("src/test/resources/report.csv", expectedReport);
+        List<String> expectedLines = Arrays.asList(expectedReport.split(System.lineSeparator()));
+        List<String> actualLines = Files.readAllLines(Path.of("src/test/resources/report.csv"));
 
         assertEquals(expectedLines.size(), actualLines.size());
         for (int i = 0; i < expectedLines.size(); i++) {
@@ -41,17 +37,19 @@ class WriterServiceImplTest {
     }
 
     @Test
-    public void write_To_File_Illegal_Path_not_ok() {
-        String report = "fruit,quantity" + LINE_SEPARATOR
-                + "apple,20" + LINE_SEPARATOR
-                + "banana,50" + LINE_SEPARATOR
-                + "orange,30" + LINE_SEPARATOR;
+    public void writeToFile_IllegalPath_notOk() {
+        String report = "fruit,quantity" + System.lineSeparator()
+                + "apple,20" + System.lineSeparator()
+                + "banana,50" + System.lineSeparator()
+                + "orange,30" + System.lineSeparator();
 
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile(INVALID_PATH, report));
+        assertThrows(RuntimeException.class, ()
+                -> writerService.writeToFile("invalid/path/to/file", report));
     }
 
     @Test
-    public void write_To_File_null_report_not_ok() {
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile(PATH_TO_FILE, null));
+    public void writeToFile_nullReport_notOk() {
+        assertThrows(RuntimeException.class, ()
+                -> writerService.writeToFile("src/test/resources/report.csv", null));
     }
 }

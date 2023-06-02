@@ -11,66 +11,60 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class StorageServiceTest {
-    private static final String APPLE = "apple";
-    private static final int VALID_FRUIT_QUANTITY = 5;
-    private static final String BANANA = "banana";
-    private static final int VALID_STORAGE_SIZE = 2;
-    private static final int INVALID_FRUIT_QUANTITY = -5;
-
     @AfterEach
     public void afterEachTest() {
         Storage.FRUITS.clear();
     }
 
     @Test
-    public void test_add_transaction_ok() {
+    public void add_transaction_ok() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                APPLE,
-                VALID_FRUIT_QUANTITY);
+                "apple",
+                5);
         StorageService.add(transaction);
-        Integer appleQuantity = Storage.FRUITS.get(APPLE);
+        Integer appleQuantity = Storage.FRUITS.get("apple");
         assertNotNull(appleQuantity);
-        assertSame(VALID_FRUIT_QUANTITY, appleQuantity);
+        assertSame(5, appleQuantity);
     }
 
     @Test
-    public void test_add_transaction_notOk() {
+    public void add_Transaction_notOk() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                APPLE,
-                INVALID_FRUIT_QUANTITY);
+                "apple",
+                -5);
         assertThrows(RuntimeException.class, () -> StorageService.add(transaction));
     }
 
     @Test
-    public void test_add_multiple_transactions_ok() {
+    public void add_multipleTransactions_ok() {
         FruitTransaction transaction1 = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                APPLE,
-                VALID_FRUIT_QUANTITY);
+                "apple",
+                5);
         FruitTransaction transaction2 = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
-                BANANA,
-                VALID_FRUIT_QUANTITY);
+                "banana",
+                5);
         StorageService.add(transaction1);
         StorageService.add(transaction2);
         int storageSize = Storage.FRUITS.size();
-        assertEquals(VALID_STORAGE_SIZE, storageSize);
-        assertSame(VALID_FRUIT_QUANTITY, Storage.FRUITS.get(APPLE));
-        assertSame(VALID_FRUIT_QUANTITY, Storage.FRUITS.get(BANANA));
+        assertEquals(2, storageSize);
+        assertSame(5, Storage.FRUITS.get("apple"));
+        assertSame(5, Storage.FRUITS.get("banana"));
     }
 
     @Test
-    public void test_add_multiple_transactions_notOk() {
+    public void add_multipleTransactions_notOk() {
         FruitTransaction transaction1 = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                APPLE,
-                INVALID_FRUIT_QUANTITY);
+                "apple",
+                -5);
         FruitTransaction transaction2 = new FruitTransaction(
                 FruitTransaction.Operation.SUPPLY,
-                BANANA,
-                INVALID_FRUIT_QUANTITY);
+                "banana",
+                -5);
         assertThrows(RuntimeException.class, () -> StorageService.add(transaction1));
         assertThrows(RuntimeException.class, () -> StorageService.add(transaction2));
     }

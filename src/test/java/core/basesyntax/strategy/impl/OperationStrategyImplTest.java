@@ -9,7 +9,6 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseHandler;
 import core.basesyntax.strategy.handler.impl.ReturnHandler;
 import core.basesyntax.strategy.handler.impl.SupplyHandler;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,16 +19,15 @@ class OperationStrategyImplTest {
 
     @BeforeAll
     public static void beforeAll() {
-        handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        handlerMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler());
         strategy = new OperationStrategyImpl(handlerMap);
     }
 
     @Test
-    public void test_Get_BalanceHandler_ok() {
+    public void getHandler_BalanceHandler_ok() {
         BalanceHandler expected = new BalanceHandler();
         OperationHandler actual
                 = strategy.getHandler(FruitTransaction.Operation.BALANCE);
@@ -37,7 +35,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    public void test_Get_SupplyHandler_ok() {
+    public void getHandler_SupplyHandler_ok() {
         SupplyHandler expected = new SupplyHandler();
         OperationHandler actual
                 = strategy.getHandler(FruitTransaction.Operation.SUPPLY);
@@ -45,7 +43,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    public void test_Get_PurchaseHandler_ok() {
+    public void getHandler_PurchaseHandler_ok() {
         PurchaseHandler expected = new PurchaseHandler();
         OperationHandler actual
                 = strategy.getHandler(FruitTransaction.Operation.PURCHASE);
@@ -53,7 +51,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    public void test_Get_ReturnHandler_ok() {
+    public void getHandler_ReturnHandler_ok() {
         ReturnHandler expected = new ReturnHandler();
         OperationHandler actual
                 = strategy.getHandler(FruitTransaction.Operation.RETURN);

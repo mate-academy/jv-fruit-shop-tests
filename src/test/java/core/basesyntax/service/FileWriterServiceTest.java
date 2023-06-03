@@ -11,8 +11,10 @@ import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class FileWriterServiceTest {
-    private static final String FILE_PATH = "src/test/java/resources/data.csv";
+    private static final String FILE_PATH = "src/test/java/resources/report.csv";
     private static List<String> expected;
     private static FileWriterService fileWriterService;
 
@@ -26,9 +28,9 @@ public class FileWriterServiceTest {
     public void writeToFile_ok() {
         fileWriterService.writeToFile(FILE_PATH, expected);
         File file = new File(FILE_PATH);
+        List<String> actualData = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
-            List<String> actualData = new ArrayList<>();
             while (line != null) {
                 actualData.add(line);
                 line = bufferedReader.readLine();
@@ -38,6 +40,7 @@ public class FileWriterServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read file. " + e);
         }
+        assertEquals(expected, actualData);
     }
 
     @Test(expected = RuntimeException.class)

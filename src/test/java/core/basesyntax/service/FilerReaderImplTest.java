@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -29,7 +31,8 @@ public class FilerReaderImplTest {
     }
 
     @Test
-    public void readFile_ok(){
-        fileReaderService.readFromFile(VALID_FILE_PATH);
+    public void readFile_ok() {
+        List<String> actual = fileReaderService.readFromFile(VALID_FILE_PATH);
+        assertEquals(dataFromList, actual);
     }
 }

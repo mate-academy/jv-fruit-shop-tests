@@ -62,7 +62,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    public void processData_Ok() {
+    public void processData_ok() {
         expectedResult.put(BANANA, BANANA_QUANTITY);
         expectedResult.put(APPLE, APPLE_QUANTITY);
         fruitShopService.processData(fruitModels);

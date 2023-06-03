@@ -23,12 +23,12 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void writeToFile_Ok() {
+    public void writeToFile_ok() {
         fileWriterService.writeToFile(FILE_PATH, expected);
-        List<String> actualData = new ArrayList<>();
         File file = new File(FILE_PATH);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
+            List<String> actualData = new ArrayList<>();
             while (line != null) {
                 actualData.add(line);
                 line = bufferedReader.readLine();

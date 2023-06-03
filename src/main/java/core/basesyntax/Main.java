@@ -3,9 +3,12 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.impl.CalculatorImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-
 import java.util.List;
 
 public class Main {

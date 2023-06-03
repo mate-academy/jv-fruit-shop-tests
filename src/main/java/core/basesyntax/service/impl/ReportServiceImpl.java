@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.exeption.NoSuchOperationException;
-
 import java.util.Objects;
 import java.util.stream.Stream;
 

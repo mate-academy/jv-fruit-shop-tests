@@ -29,7 +29,7 @@ public class FilerReaderImplTest {
     }
 
     @Test
-    public void readFile_ok() {
+    public void readFile_ok(){
         fileReaderService.readFromFile(VALID_FILE_PATH);
     }
 }

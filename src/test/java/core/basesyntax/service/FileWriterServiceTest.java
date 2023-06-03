@@ -12,7 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceTest {
-    private static final String FILE_PATH = "src/test/java/core/basesyntax/resources/result.csv";
+    private static final String FILE_PATH = "src/test/java/resources/data.csv";
     private static List<String> expected;
     private static FileWriterService fileWriterService;
 

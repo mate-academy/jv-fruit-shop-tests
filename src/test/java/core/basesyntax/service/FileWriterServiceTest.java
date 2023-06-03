@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class FileWriterServiceTest {
     private static final String FILE_PATH = "src/test/java/resources/report.csv";

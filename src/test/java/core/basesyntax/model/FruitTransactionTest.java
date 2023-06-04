@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.exception.ValidationException;
 import org.junit.Assert;
 import org.junit.Test;
-
+//
 public class FruitTransactionTest {
 
     @Test

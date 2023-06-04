@@ -3,7 +3,7 @@ package core.basesyntax.db;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
+//
 public class FruitsStorage {
     public static final Map<String, Integer> fruitsStorage = new HashMap<String, Integer>();
 

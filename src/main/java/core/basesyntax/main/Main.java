@@ -23,7 +23,7 @@ import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/resources/activities.csv";
     private static final String OUTPUT_FILE_NAME = "src/main/resources/dailyreport.csv";

@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import org.junit.Assert;
 import org.junit.Test;
-
+//
 public class OperationTypeTest {
     private static final String BALANCE_CODE = "b";
     private static final String SUPPLY_CODE = "s";

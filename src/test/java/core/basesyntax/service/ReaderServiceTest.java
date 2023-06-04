@@ -4,7 +4,7 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
-
+//
 public class ReaderServiceTest {
     private static final String CORRECT_FILE = "src/test/resources/activitiesTest.csv";
     private static final List<String> EXPECTED_DATA = List.of("type,fruit,quantity",

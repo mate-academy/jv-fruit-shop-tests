@@ -6,7 +6,7 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
-
+//
 public class FruitShopServiceImpl implements FruitShopService {
     private final OperationStrategy operationStrategy;
 

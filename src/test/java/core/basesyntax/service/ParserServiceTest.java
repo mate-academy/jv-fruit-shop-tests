@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+//
 public class ParserServiceTest {
     private static List<FruitTransaction> expectedFruitTransactionList;
     private static final List<String> SENDING_DATA = new ArrayList<>();

@@ -9,25 +9,36 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
+import core.basesyntax.strategy.handler.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.handler.impl.SupplyOperationHandler;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceImplTest {
     private StorageDao storageDao;
-    private OperationStrategy operationStrategy;
     private FruitShopService fruitShopService;
+    private OperationStrategy operationStrategy;
+    private Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlerMap;
     private List<FruitTransaction> transactions;
 
     @BeforeEach
     void setUp() {
-        transactions = new ArrayList<>();
         storageDao = new StorageDaoImpl();
-        operationStrategy = new FakeOperationStrategy();
+        operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
+        transactions = new ArrayList<>();
+
     }
 
     @AfterEach
@@ -55,7 +66,7 @@ class FruitShopServiceImplTest {
     }
 
     @Test
-    void processData_emptyTransactions_notOk() {
+    void processData_emptyTransactions_ok() {
         fruitShopService.processData(transactions);
         assertEquals(0, storageDao.getAllFruits().size());
     }
@@ -63,19 +74,5 @@ class FruitShopServiceImplTest {
     private void assertThrowsException(List<FruitTransaction> transactions) {
         assertThrows(IllegalArgumentException.class,
                 () -> fruitShopService.processData(transactions));
-    }
-
-    private static class FakeOperationStrategy implements OperationStrategy {
-        @Override
-        public OperationHandler get(FruitTransaction.Operation operation) {
-            return new FakeOperationHandler();
-        }
-    }
-
-    private static class FakeOperationHandler implements OperationHandler {
-        @Override
-        public int operate(int quantity, int oldCount) {
-            return quantity + oldCount;
-        }
     }
 }

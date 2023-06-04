@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +27,7 @@ class DataParserServiceImplTest {
                 "b,apple,100",
                 "s,banana,100"
         );
-        List<FruitTransaction> expectedOutput = Arrays.asList(
+        List<FruitTransaction> expectedOutput = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100)

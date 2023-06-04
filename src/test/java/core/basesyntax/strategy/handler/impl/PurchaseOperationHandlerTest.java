@@ -21,7 +21,8 @@ class PurchaseOperationHandlerTest {
     void operate_validTransaction_ok() {
         int transaction = 200;
         int result = handler.operate(transaction, oldValue);
-        assertEquals(oldValue - transaction, result);
+        int expected = 300;
+        assertEquals(expected, result);
     }
 
     @Test
@@ -35,7 +36,8 @@ class PurchaseOperationHandlerTest {
     void operate_transactionEqualsOldValue_ok() {
         int transaction = 500;
         int result = handler.operate(transaction, oldValue);
-        assertEquals(oldValue - transaction, result);
+        int expected = 0;
+        assertEquals(expected, result);
     }
 
     @Test

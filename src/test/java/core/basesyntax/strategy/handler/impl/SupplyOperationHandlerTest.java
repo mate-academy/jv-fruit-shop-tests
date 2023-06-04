@@ -21,14 +21,16 @@ class SupplyOperationHandlerTest {
     void operate_validTransaction_ok() {
         int transaction = 200;
         int result = handler.operate(transaction, oldValue);
-        assertEquals(oldValue + transaction, result);
+        int expected = 700;
+        assertEquals(expected, result);
     }
 
     @Test
     void operate_zeroTransaction_ok() {
         int transaction = 0;
         int result = handler.operate(transaction, oldValue);
-        assertEquals(oldValue + transaction, result);
+        int expected = 500;
+        assertEquals(expected, result);
     }
 
     @Test

@@ -19,7 +19,6 @@ class ReportServiceImplTest {
     void setUp() {
         storageDao = new StorageDaoImpl();
         reportService = new ReportServiceImpl("fruit,quantity", ":");
-        reportService.generateReport();
     }
 
     @AfterEach

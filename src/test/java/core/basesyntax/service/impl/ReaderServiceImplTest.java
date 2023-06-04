@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
     private static final String PATH_TO_TEST_INPUT_CSV_FILE = "src/test/resources/testInput.csv";
+    private static final String NOT_EXISTING_PATH = "/non_existing_path.txt";
     private ReaderServiceImpl readerService;
 
     @BeforeEach
@@ -30,6 +31,6 @@ class ReaderServiceImplTest {
     @Test
     void readFromFile_nonExistingPath_notOk() {
         Assertions.assertThrows(RuntimeException.class,
-                () -> readerService.readFromFile("/non_existing_path.txt"));
+                () -> readerService.readFromFile(NOT_EXISTING_PATH));
     }
 }

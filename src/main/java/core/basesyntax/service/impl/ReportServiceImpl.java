@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.OutFileStructure;
 import core.basesyntax.service.ReportService;
-//
+
 public class ReportServiceImpl implements ReportService {
     private static final String COMMA_SEPARATOR = ",";
 

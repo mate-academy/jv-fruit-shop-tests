@@ -6,7 +6,7 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
-//
+
 public class ParserServiceImpl implements ParserService {
     private static final String ONLY_LETTERS_SEPARATOR = "\\W+";
     private static final byte TYPE = 0;

@@ -1,5 +1,5 @@
 package core.basesyntax.model;
-//
+
 public enum OperationType {
     BALANCE("b"),
     SUPPLY("s"),

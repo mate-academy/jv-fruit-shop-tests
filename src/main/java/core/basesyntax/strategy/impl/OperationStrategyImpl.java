@@ -5,7 +5,7 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
-//
+
 public class OperationStrategyImpl implements OperationStrategy {
     private Map<OperationType, OperationHandler> operationTypeMap;
 

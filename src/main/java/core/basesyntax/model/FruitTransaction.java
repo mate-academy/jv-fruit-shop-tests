@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import core.basesyntax.exception.ValidationException;
 import java.util.Objects;
-//
+
 public class FruitTransaction {
     private OperationType operationType;
     private String name;

@@ -1,5 +1,5 @@
 package core.basesyntax.model;
-//
+
 public class OutFileStructure {
     private String fruit;
     private String quantity;

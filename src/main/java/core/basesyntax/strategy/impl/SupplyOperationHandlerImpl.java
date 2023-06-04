@@ -4,7 +4,7 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.exception.ValidationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
-//
+
 public class SupplyOperationHandlerImpl implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {

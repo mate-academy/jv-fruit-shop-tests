@@ -1,6 +1,7 @@
 package core.basesyntax.service.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.model.FruitTransaction;
@@ -53,5 +54,10 @@ class OperationStrategyTest {
         OperationHandler actual = operationStrategy.getOperation(
                 new FruitTransaction(Operation.PURCHASE, "banana", 10));
         assertEquals(expected.getClass(), actual.getClass());
+    }
+
+    @Test
+    void get_getNulOperationStrategy_notOk() {
+        assertThrows(RuntimeException.class, () -> operationStrategy.getOperation(null));
     }
 }

@@ -45,4 +45,10 @@ class ParserServiceImplTest {
         List<FruitTransaction> actual = parserService.parseData(argument);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void parse_invalidStringInputFormat_notOk() {
+        List<String> inputList = List.of("type,fruit", "p,strawbery,-10");
+        assertThrows(RuntimeException.class, () -> parserService.parseData(inputList));
+    }
 }

@@ -16,7 +16,9 @@ class FileWriterTest {
     private static String reportText;
     private static final String PATH = "src/test/resources/report.csv";
     private static final String INVALID_PATH = "src/test/res/report.csv";
-    private static final String DEFAULT_TITTLE = "fruit,quantity" + System.lineSeparator();
+    private static final String REPORT_TEXT = "fruit,quantity" + System.lineSeparator()
+            + "banana,152" + System.lineSeparator()
+            + "apple,90" + System.lineSeparator();
 
     @BeforeAll
     static void beforeAll() {
@@ -31,9 +33,7 @@ class FileWriterTest {
 
     @Test
     void writeReportToFile_ValidReportText_IsOk() {
-        reportText = DEFAULT_TITTLE
-                + "banana,152" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator();
+        reportText = REPORT_TEXT;
         fileWriter.writeReportToFile(reportText, toFile);
     }
 
@@ -45,9 +45,7 @@ class FileWriterTest {
 
     @Test
     void writeReportToFile_InvalidFileName_NotOk() {
-        reportText = DEFAULT_TITTLE
-                + "banana,152" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator();
+        reportText = REPORT_TEXT;
         toInvalidFile = new File(INVALID_PATH);
         assertThrows(CustomException.class, ()
                 -> fileWriter.writeReportToFile(reportText, toInvalidFile));

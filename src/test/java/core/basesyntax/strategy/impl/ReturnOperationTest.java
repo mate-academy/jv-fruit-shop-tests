@@ -15,12 +15,10 @@ import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
     private static OperationProcessor returnOperation;
-    private static Storage storageImpl;
 
     @BeforeAll
     static void setUp() {
-        storageImpl = new StorageImpl();
-        returnOperation = new ReturnOperation(storageImpl);
+        returnOperation = new ReturnOperation(new StorageImpl());
     }
 
     @Test

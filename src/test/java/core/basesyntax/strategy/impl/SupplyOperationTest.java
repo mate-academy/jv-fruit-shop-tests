@@ -12,13 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
-    private static Storage storageImpl;
     private static SupplyOperation supplyOperation;
 
     @BeforeAll
     static void setUp() {
-        storageImpl = new StorageImpl();
-        supplyOperation = new SupplyOperation(storageImpl);
+        supplyOperation = new SupplyOperation(new StorageImpl());
     }
 
     @Test

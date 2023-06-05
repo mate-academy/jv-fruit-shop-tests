@@ -20,7 +20,7 @@ class CsvFileReaderServiceImplTest {
 
     @BeforeAll
     static void setUp() {
-        fileReaderService = new FileReaderServiceImpl();
+        fileReaderService = new CsvFileReaderServiceImpl();
     }
 
     @Test

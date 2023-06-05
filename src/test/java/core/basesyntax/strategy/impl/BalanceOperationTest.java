@@ -13,13 +13,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
-    private static Storage storageImpl;
     private static OperationProcessor balanceOperation;
 
     @BeforeAll
     static void setUp() {
-        storageImpl = new StorageImpl();
-        balanceOperation = new BalanceOperation(storageImpl);
+        balanceOperation = new BalanceOperation(new StorageImpl());;
     }
 
     @Test

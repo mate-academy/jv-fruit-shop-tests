@@ -18,7 +18,7 @@ class CsvFileWriterServiceImplTest {
 
     @BeforeAll
     static void setUp() {
-        csvFileWriterService = new FileWriterServiceImpl();
+        csvFileWriterService = new CsvFileWriterServiceImpl();
     }
 
     @Test

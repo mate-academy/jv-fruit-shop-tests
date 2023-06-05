@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileReaderServiceImpl implements CsvFileReaderService {
+public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     private static final int FIRST_LINE = 1;
     private static final String REGEX = "^[bpsr],\\w+,[0-9]+$";
 

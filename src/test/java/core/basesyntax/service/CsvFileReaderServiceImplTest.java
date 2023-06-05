@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceImplTest {
     private static CsvFileReaderService fileReaderService;
+    private String correctFile = "src/main/java/core/basesyntax/resources/Correct.csv";
+    private String emptyFile = "src/main/java/core/basesyntax/resources/Empty.csv";
+    private String inCorrectFile = "src/main/java/core/basesyntax/resources/InCorrect.csv";
+    private String nonExistingFile = "src/main/java/core/basesyntax/resources/NullParameters.txt";
 
     @BeforeAll
     static void setUp() {
@@ -20,9 +24,8 @@ class CsvFileReaderServiceImplTest {
 
     @Test
     void readLines_readFromEmptyFile_ok() {
-        String filePath = "src/main/java/core/basesyntax/resources/Empty.csv";
         List<String> expected = Collections.emptyList();
-        List<String> actual = fileReaderService.readLines(filePath);
+        List<String> actual = fileReaderService.readLines(emptyFile);
         assertEquals(expected, actual);
     }
 
@@ -34,7 +37,6 @@ class CsvFileReaderServiceImplTest {
 
     @Test
     void readLines_readFromFileWithValidData_ok() {
-        String filePath = "src/main/java/core/basesyntax/resources/Correct.csv";
         List<String> expected = List.of("b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -43,20 +45,18 @@ class CsvFileReaderServiceImplTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<String> actual = fileReaderService.readLines(filePath);
+        List<String> actual = fileReaderService.readLines(correctFile);
         assertEquals(expected, actual);
     }
 
     @Test
     void readLines_readFromFileWithInvalidData_notOk() {
-        String filePath = "src/main/java/core/basesyntax/resources/InCorrect.csv";
         assertThrows(AcceptedDataInvalidException.class,
-                () -> fileReaderService.readLines(filePath));
+                () -> fileReaderService.readLines(inCorrectFile));
     }
 
     @Test
     void readLines_readFromNonExistFile_notOk() {
-        String nonExistingFile = "src/main/java/core/basesyntax/resources/NullParameters.txt";
         assertThrows(RuntimeException.class, () -> fileReaderService.readLines(nonExistingFile));
     }
 }

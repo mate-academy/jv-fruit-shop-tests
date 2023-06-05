@@ -25,14 +25,14 @@ class CsvFileWriterServiceImplTest {
                 + "b,apple,10"
                 + System.lineSeparator()
                 + "b,banana,15";
-        String content = "fruit,quantity"
+        String actual = "fruit,quantity"
                 + System.lineSeparator()
                 + "b,apple,10"
                 + System.lineSeparator()
                 + "b,banana,15";
         String fileName = "src/main/java/core/basesyntax/resources/Report.csv";
-        csvFileWriterService.writeToFile(fileName, content);
-        String actual = read(fileName);
+        csvFileWriterService.writeToFile(fileName, actual);
+        actual = read(fileName);
         assertEquals(expected, actual);
     }
 

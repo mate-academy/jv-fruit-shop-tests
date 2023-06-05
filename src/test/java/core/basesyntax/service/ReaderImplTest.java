@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.exception.WrongFileType;
+import core.basesyntax.exception.WrongFileTypeException;
 import core.basesyntax.service.impl.ReaderImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
@@ -56,6 +56,6 @@ public class ReaderImplTest {
 
     @Test
     public void read_wrongTypeFileName_notOk() {
-        assertThrows(WrongFileType.class, () -> reader.read(WRONG_TYPE_FILE_NAME));
+        assertThrows(WrongFileTypeException.class, () -> reader.read(WRONG_TYPE_FILE_NAME));
     }
 }

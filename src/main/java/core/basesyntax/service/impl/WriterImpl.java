@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.WrongFileType;
+import core.basesyntax.exception.WrongFileTypeException;
 import core.basesyntax.service.Writer;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -19,7 +19,7 @@ public class WriterImpl implements Writer {
     @Override
     public void write(String toFileName) {
         if (!toFileName.endsWith(FILE_FORMAT)) {
-            throw new WrongFileType("Cant write info to not csv file");
+            throw new WrongFileTypeException("Cant write info to not csv file");
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(toFileName))) {
             writer.write(NEW_HEADER);

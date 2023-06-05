@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.WrongFileType;
+import core.basesyntax.exception.WrongFileTypeException;
 import core.basesyntax.service.Reader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ public class ReaderImpl implements Reader {
                   .skip(OLD_HEADER_INDEX)
                   .collect(Collectors.toList());
             }
-            throw new WrongFileType("Cant read info from not csv file");
+            throw new WrongFileTypeException("Cant read info from not csv file");
         } catch (IOException e) {
             throw new RuntimeException("Cant read data from file ");
         }

@@ -9,7 +9,9 @@ public class PurchaseHandler implements OperationHandler {
     public void handle(FruitTransaction transaction) {
         int quantityInStock = Storage.get(transaction.getFruit());
         if (transaction.getQuantity() > quantityInStock || transaction.getQuantity() <= 0) {
-            throw new RuntimeException("Quantity of fruits should be greater than 0, but it was: "
+            throw new RuntimeException("Quantity of fruits should be greater than 0 and less than "
+                    + (quantityInStock + 1)
+                    + ", but it was: "
                     + transaction.getQuantity());
         }
         Storage.put(transaction.getFruit(), quantityInStock - transaction.getQuantity());

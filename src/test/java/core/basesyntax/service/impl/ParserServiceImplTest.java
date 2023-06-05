@@ -29,4 +29,34 @@ class ParserServiceImplTest {
         List<FruitTransaction> actual = parser.parse(input);
         Assertions.assertIterableEquals(expected, actual);
     }
+
+    @Test
+    void parse_notValidLengthOfInputLine_notOk() {
+        List<String> input = List.of(
+                "b,banana",
+                "b,apple,100",
+                "s,banana,100"
+        );
+        Assertions.assertThrows(RuntimeException.class,
+                () -> parser.parse(input));
+    }
+
+    @Test
+    void parse_notValidInputOperationType_notOk() {
+        List<String> input = List.of(
+                "d,banana, 20",
+                "b,apple,100",
+                "s,banana,100"
+        );
+        Assertions.assertThrows(RuntimeException.class,
+                () -> parser.parse(input));
+    }
+
+    @Test
+    void parse_emptyInput_ok() {
+        List<FruitTransaction> expected = List.of();
+        List<String> input = List.of();
+        List<FruitTransaction> actual = parser.parse(input);
+        Assertions.assertIterableEquals(expected, actual);
+    }
 }

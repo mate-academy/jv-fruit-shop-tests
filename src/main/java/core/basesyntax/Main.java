@@ -16,8 +16,8 @@ import core.basesyntax.strategy.StrategyImpl;
 import java.util.List;
 
 public class Main {
-    private static final String toFileName = "src/main/resources/testRecord.csv";
-    private static final String fromFileName = "src/main/resources/testData.csv";
+    private static final String toFileName = "src/main/resources/record.csv";
+    private static final String fromFileName = "src/main/resources/data.csv";
 
     public static void main(String[] args) {
         Strategy strategy = new StrategyImpl(OperationHandlerMap.operationHandlerMap);

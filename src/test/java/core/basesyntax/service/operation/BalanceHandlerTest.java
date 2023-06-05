@@ -45,9 +45,8 @@ public class BalanceHandlerTest {
     @Test
     public void handle_validFruitTransaction_ok() {
         balanceHandler.handle(fruitTransaction);
-        Integer actual = Storage.fruitMap.get(fruitTransaction.getFruit());
-        Integer expected = DEFAULT_FRUIT_QUANTITY;
-        assertEquals(actual, expected);
+        int actual = Storage.fruitMap.get(fruitTransaction.getFruit());
+        assertEquals(actual, DEFAULT_FRUIT_QUANTITY);
     }
 
     @AfterEach

@@ -12,7 +12,6 @@ import core.basesyntax.strategy.StrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,11 +53,5 @@ public class FruitServiceImplTest {
         Map<String, Integer> expected = Map.of("banana", 30, "apple", 20);
         fruitService.process(fruitTransactions);
         assertEquals(expected, Storage.fruitMap);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        fruitTransactions.clear();
-        Storage.fruitMap.clear();
     }
 }

@@ -11,11 +11,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReaderImplTest {
-    private static final String EMPTY_FILE_NAME = "src/main/resources/emptyData.csv";
-    private static final String NON_EXISTENT_FILE_NAME = "src/main/resources/nonExistent.csv";
-    private static final String TWO_LINES_FILE_NAME = "src/main/resources/shortTestData.csv";
-    private static final String WRONG_TYPE_FILE_NAME = "src/main/resources/shortTestData.css";
-    private static final String VALID_FILE_NAME = "src/main/resources/testData.csv";
+    private static final String EMPTY_FILE_NAME = "src/test/resources/emptyData.csv";
+    private static final String NON_EXISTENT_FILE_NAME = "src/test/resources/nonExistent.csv";
+    private static final String TWO_LINES_FILE_NAME = "src/test/resources/shortTestData.csv";
+    private static final String WRONG_TYPE_FILE_NAME = "src/test/resources/wrongTypeFileName.css";
+    private static final String VALID_FILE_NAME = "src/test/resources/testData.csv";
     private static Reader reader;
 
     @BeforeAll

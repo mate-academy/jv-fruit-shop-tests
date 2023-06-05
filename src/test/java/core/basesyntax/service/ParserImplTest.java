@@ -9,7 +9,6 @@ import core.basesyntax.service.impl.ParserImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,10 +74,5 @@ public class ParserImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         "banana", 13));
         assertEquals(actual, expected);
-    }
-
-    @AfterEach
-    void tearDown() {
-        data.clear();
     }
 }

@@ -44,7 +44,7 @@ public class Main {
         List<FruitTransaction> fruitTransactionList =
                 parserService.formatData(fruitList);
 
-        fruitService.getAllOperationsStrategy(fruitTransactionList, fruitStrategy);
+        fruitService.processTransactions(fruitTransactionList, fruitStrategy);
         writeToFileService.writeToFile(reportService.getReport(), REPORT_PATH);
     }
 }

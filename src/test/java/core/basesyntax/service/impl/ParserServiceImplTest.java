@@ -4,7 +4,6 @@ import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,12 +16,11 @@ class ParserServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         parserService = new ParserServiceImpl();
-        dataList = new ArrayList<>();
     }
 
     @Test
     void formatData_correctList_ok() {
-        dataList.add("b,banana,80");
+        dataList = List.of("b,banana,80");
         List<FruitTransaction> fruitTransactionList = parserService.formatData(dataList);
         FruitTransaction expected = new FruitTransaction(
                 BALANCE, "banana", 80);

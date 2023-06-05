@@ -5,7 +5,7 @@ import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,8 @@ class SupplyOperationTest {
         supplyOperation = new SupplyOperation();
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterEach
+    void tearDown() {
         Storage.storage.clear();
     }
 

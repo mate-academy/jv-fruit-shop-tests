@@ -37,14 +37,14 @@ class FruitServiceImplTest {
     }
 
     @Test
-    void getAllOperations_ok() {
+    void processTransactions_validOperation_ok() {
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(BALANCE,BANANA,100),
                 new FruitTransaction(SUPPLY,BANANA,100),
                 new FruitTransaction(PURCHASE,BANANA,150),
                 new FruitTransaction(RETURN,BANANA,10)
         );
-        fruitService.getAllOperationsStrategy(fruitTransactionList, fruitStrategy);
+        fruitService.processTransactions(fruitTransactionList, fruitStrategy);
         Integer actual = Storage.storage.get(BANANA);
         Integer expect = 60;
         Assertions.assertEquals(expect, actual);

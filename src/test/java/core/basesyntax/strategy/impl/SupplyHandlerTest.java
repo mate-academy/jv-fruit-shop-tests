@@ -8,22 +8,29 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
     private static OperationHandler balanceHandler;
     private static FruitTransaction fruitTransaction;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         balanceHandler = new SupplyHandler();
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN,"Apple", 10);
 
     }
 
+    @AfterEach
+    public void cleanUp() {
+        Storage.storage.clear();
+    }
+
     @Test
     void handle_positiveQuantity_Ok() {
+        fruitTransaction.setQuantity(10);
         Storage.storage.put("Apple", 10);
         Map<String, Integer> expectedStorage = new HashMap<>();
         expectedStorage.put("Apple", 20);

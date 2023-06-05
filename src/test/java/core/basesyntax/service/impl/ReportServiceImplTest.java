@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,6 @@ class ReportServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         reportService = new ReportServiceImpl();
-        Storage.storage.clear();
     }
 
     @Test
@@ -29,12 +28,11 @@ class ReportServiceImplTest {
 
     @Test
     public void createReport_emptyData_Ok() {
-        Storage.storage.clear();
         assertEquals("fruit,quantity" + System.lineSeparator(), reportService.reportStorage());
     }
 
-    @AfterAll
-    public static void afterAll() {
+    @AfterEach
+    public void afterEach() {
         Storage.storage.clear();
     }
 }

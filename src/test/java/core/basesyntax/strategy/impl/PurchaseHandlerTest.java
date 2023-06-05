@@ -6,24 +6,30 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
     private static OperationHandler purchaseHandler;
     private static FruitTransaction transaction;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         purchaseHandler = new PurchaseHandler();
-        Storage.storage.clear();
         transaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,"Apple", 5);
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        Storage.storage.clear();
     }
 
     @Test
     public void handle_PositiveQuantity_Ok() {
         Storage.storage.put("Apple", 10);
+        transaction.setQuantity(5);
         purchaseHandler.handle(transaction);
         assertEquals(5, Storage.storage.get("Apple"));
     }

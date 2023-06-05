@@ -11,35 +11,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
     private static File inputFile;
+    private static File InvalidinputFile;
     private static String inputData;
     private static FileReader fileReader;
     private static final String PATH = "src/test/resources/inputDatabase.csv";
+    private static final String INVALID_PATH = "src/t/inputDatabase.csv";
     private static final String SEPARATOR = "\n";
 
     @BeforeAll
     static void beforeAll() {
         fileReader = new FileReaderImpl();
-    }
-
-    @BeforeEach
-    void setUp() {
         inputFile = new File(PATH);
-    }
-
-    @AfterEach
-    void tearDown() {
-        inputFile.delete();
-    }
-
-    @Test
-    void readReport_ValidReport_IsOk() {
         inputData = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
@@ -55,6 +42,19 @@ class FileReaderTest {
         } catch (IOException e) {
             throw new RuntimeException("can't write inputData to file: " + inputFile);
         }
+    }
+
+    @Test
+    void readReport_ValidReport_IsOk() {
+        inputData = "type,fruit,quantity\n"
+                + "b,banana,20\n"
+                + "b,apple,100\n"
+                + "s,banana,100\n"
+                + "p,banana,13\n"
+                + "r,apple,10\n"
+                + "p,apple,20\n"
+                + "p,banana,5\n"
+                + "s,banana,50";
         List<String> expected = Arrays.asList(inputData.split(SEPARATOR));
         List<String> actual = fileReader.readReport(inputFile);
         assertEquals(expected, actual);
@@ -62,6 +62,7 @@ class FileReaderTest {
 
     @Test
     void readReport_EmptyFile_NotOk() {
-        assertThrows(CustomException.class, () -> fileReader.readReport(inputFile));
+        InvalidinputFile = new File(INVALID_PATH);
+        assertThrows(CustomException.class, () -> fileReader.readReport(InvalidinputFile));
     }
 }

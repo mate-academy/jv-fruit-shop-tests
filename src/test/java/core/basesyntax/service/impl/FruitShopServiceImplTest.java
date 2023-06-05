@@ -50,6 +50,7 @@ public class FruitShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
         );
+        //all work
         fruitShopService.process(fruitTransactions);
         Assertions.assertEquals(expectedFruitStorage, Storage.fruitStorage);
     }

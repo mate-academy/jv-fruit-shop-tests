@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -31,10 +30,8 @@ class ReportServiceImplTest {
     void createReport_bananaAndApple_ok() {
         Storage.STORAGE_MAP.put(BANANA.getName(), 152);
         Storage.STORAGE_MAP.put(APPLE.getName(), 90);
-        List<String> expected = List.of("banana,152", "apple,90").stream()
-                .map(String::trim).collect(Collectors.toList());
-        List<String> actual = reportService.createReport().stream()
-                .map(String::trim).collect(Collectors.toList());
+        List<String> expected = List.of("banana,152", "apple,90");
+        List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }
 
@@ -42,10 +39,8 @@ class ReportServiceImplTest {
     @Test
     void createReport_banana_ok() {
         Storage.STORAGE_MAP.put(BANANA.getName(), 99);
-        List<String> expected = List.of("banana,99").stream()
-                .map(String::trim).collect(Collectors.toList());
-        List<String> actual = reportService.createReport().stream()
-                .map(String::trim).collect(Collectors.toList());
+        List<String> expected = List.of("banana,99");
+        List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }
 

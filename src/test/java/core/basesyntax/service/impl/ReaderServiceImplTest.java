@@ -2,16 +2,16 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
 import java.util.List;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class ReaderServiceImplTest {
-    private static final String INPUT_DATA_FILE_TEST = "src/test/java/resources/testData.csv";
+    private final String INPUT_DATA_FILE_TEST = "src/test/resources/testData.csv";
     private static ReaderService readerService;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         readerService = new ReaderServiceImpl();
     }
 

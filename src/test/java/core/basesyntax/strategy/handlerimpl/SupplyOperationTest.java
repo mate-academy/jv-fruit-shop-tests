@@ -17,14 +17,8 @@ public class SupplyOperationTest {
     @BeforeClass
     public static void setUp() {
         operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperation());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperation());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 

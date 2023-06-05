@@ -6,25 +6,21 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class BalanceOperationTest {
-    private static OperationStrategy operationStrategy;
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private OperationStrategy operationStrategy;
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private BalanceOperation balanceOperation;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
+        balanceOperation = new BalanceOperation();
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperation());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 

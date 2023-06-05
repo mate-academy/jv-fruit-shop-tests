@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileReaderImplTest {
     private static final String PATH_TO_TEST_INPUT_FILE = "src/test/resources/testInput.csv";

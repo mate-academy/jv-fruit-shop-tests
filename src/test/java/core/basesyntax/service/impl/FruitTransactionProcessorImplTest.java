@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.db.MapStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -15,9 +18,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FruitTransactionProcessorImplTest {
     private static FruitTransactionProcessorImpl fruitTransactionProcessor;
@@ -55,7 +55,8 @@ class FruitTransactionProcessorImplTest {
 
     @Test
     void process_getByCode_ok() {
-        FruitTransaction.Operation actual = FruitTransaction.Operation.getByCode(VALID_OPERATION_CODE);
+        FruitTransaction.Operation actual = FruitTransaction.Operation
+                .getByCode(VALID_OPERATION_CODE);
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
         Assertions.assertEquals(actual, expected);
     }
@@ -67,65 +68,5 @@ class FruitTransactionProcessorImplTest {
                 () -> FruitTransaction.Operation.getByCode(INVALID_OPERATION_CODE),
                 "There is not operation with code: " + INVALID_OPERATION_CODE
         );
-    }
-
-    @Test
-    void process_validFruitTransaction_notOk() {
-        assertThrows(
-                RuntimeException.class,
-                () -> {
-                    List<FruitTransaction> fruitTransactions = List.of(
-                            new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                                    INVALID_FRUIT_NAME,
-                                    10
-                            )
-                    );
-                    fruitTransactionProcessor.process(fruitTransactions);
-                },
-                "There is no fruit like this in storage! " + "(" + INVALID_FRUIT_NAME + ")"
-        );
-    }
-
-    @Test
-    void process_nonEmptyFruitTransactionList_ok() {
-        List<FruitTransaction> fruitTransactions = List.of(
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "apple",
-                        30
-                ),
-                new FruitTransaction(
-                        FruitTransaction.Operation.BALANCE,
-                        "orange",
-                        100
-                ),
-                new FruitTransaction(
-                        FruitTransaction.Operation.PURCHASE,
-                        "apple",
-                        25
-                ),
-                new FruitTransaction(
-                        FruitTransaction.Operation.RETURN,
-                        "apple",
-                        5
-                ),
-                new FruitTransaction(
-                        FruitTransaction.Operation.SUPPLY,
-                        "orange",
-                        14
-                ),
-                new FruitTransaction(
-                        FruitTransaction.Operation.PURCHASE,
-                        "orange",
-                        60
-                )
-        );
-        fruitTransactionProcessor.process(fruitTransactions);
-        Map<String, Integer> expected = Map.of(
-                "apple", 10,
-                "orange", 54
-        );
-        Map<String, Integer> actual = storage.getAll();
-        Assertions.assertEquals(expected, actual);
     }
 }

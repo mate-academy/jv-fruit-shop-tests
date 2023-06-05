@@ -21,7 +21,9 @@ public class FruitServiceImpl implements FruitService {
             throw new RuntimeException("Enter valid quantity!");
         }
 
-        if (!storage.getAll().containsKey(fruitTransaction.fruit()) && (fruitTransaction.operation() == FruitTransaction.Operation.RETURN || fruitTransaction.operation() == FruitTransaction.Operation.SUPPLY)) {
+        if (!storage.getAll().containsKey(fruitTransaction.fruit())
+                && (fruitTransaction.operation() == FruitTransaction.Operation.RETURN
+                || fruitTransaction.operation() == FruitTransaction.Operation.SUPPLY)) {
             throw new RuntimeException("Enter valid fruit name!");
         }
 
@@ -48,7 +50,8 @@ public class FruitServiceImpl implements FruitService {
         }
 
         if (quantityOptional.get() - fruitTransaction.quantity() < 0) {
-            throw new RuntimeException("There are not enough " + fruitTransaction.fruit() + "s in storage!");
+            throw new RuntimeException("There are not enough "
+                    + fruitTransaction.fruit() + "s in storage!");
         }
 
         storage.add(

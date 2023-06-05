@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileWriterImplTest {
     private static final String PATH_TO_TEST_OUTPUT_FILE = "src\\test\\resources\\testOutput.csv";

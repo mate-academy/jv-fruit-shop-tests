@@ -1,5 +1,8 @@
 package core.basesyntax.service.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.MapStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -7,14 +10,10 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
 import core.basesyntax.service.strategy.OperationHandlerStrategy;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
     private static final String TEST_FRUIT_NAME = "watermelon";
@@ -90,7 +89,9 @@ class PurchaseOperationHandlerTest {
                     );
                     fruitTransactionProcessor.process(fruitTransactions);
                 },
-                "There are not enough " + TEST_FRUIT_NAME + "s in storage! ( there are only " + TEST_QUANTITY + " )"
+                "There are not enough "
+                        + TEST_FRUIT_NAME + "s in storage! ( there are only "
+                        + TEST_QUANTITY + " )"
         );
     }
 }

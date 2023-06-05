@@ -1,10 +1,14 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.exception.CustomException;
 import core.basesyntax.service.impl.FileWriterImpl;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,7 +17,6 @@ class FileWriterTest {
     private static FileWriter fileWriter;
     private static File toFile;
     private static File toInvalidFile;
-    private static String reportText;
     private static final String PATH = "src/test/resources/report.csv";
     private static final String INVALID_PATH = "src/test/res/report.csv";
     private static final String REPORT_TEXT = "fruit,quantity" + System.lineSeparator()
@@ -33,8 +36,15 @@ class FileWriterTest {
 
     @Test
     void writeReportToFile_ValidReportText_IsOk() {
-        reportText = REPORT_TEXT;
-        fileWriter.writeReportToFile(reportText, toFile);
+        List<String> actual;
+        fileWriter.writeReportToFile(REPORT_TEXT, toFile);
+        List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
+        try {
+            actual = Files.readAllLines(toFile.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -45,9 +55,8 @@ class FileWriterTest {
 
     @Test
     void writeReportToFile_InvalidFileName_NotOk() {
-        reportText = REPORT_TEXT;
         toInvalidFile = new File(INVALID_PATH);
         assertThrows(CustomException.class, ()
-                -> fileWriter.writeReportToFile(reportText, toInvalidFile));
+                -> fileWriter.writeReportToFile(REPORT_TEXT, toInvalidFile));
     }
 }

@@ -46,15 +46,6 @@ class FileReaderTest {
 
     @Test
     void readReport_ValidReport_IsOk() {
-        inputData = "type,fruit,quantity\n"
-                + "b,banana,20\n"
-                + "b,apple,100\n"
-                + "s,banana,100\n"
-                + "p,banana,13\n"
-                + "r,apple,10\n"
-                + "p,apple,20\n"
-                + "p,banana,5\n"
-                + "s,banana,50";
         List<String> expected = Arrays.asList(inputData.split(SEPARATOR));
         List<String> actual = fileReader.readReport(inputFile);
         assertEquals(expected, actual);

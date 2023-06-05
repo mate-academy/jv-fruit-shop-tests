@@ -25,7 +25,7 @@ public class SupplyServiceTest {
     void supplyService_negativeAmount_notOk() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple",-30);
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", -30);
         Assertions.assertThrows(RuntimeException.class,
                 () -> supplyService.process(fruitTransaction));
     }
@@ -34,7 +34,7 @@ public class SupplyServiceTest {
     void supplyService_positiveAmount_Ok() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple",30);
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 30);
         supplyService.process(fruitTransaction);
         int actual = Storage.storage.get("apple");
         Assertions.assertEquals(50, actual);

@@ -25,7 +25,7 @@ public class BalanceServiceTest {
     void balanceService_negativeAmount_notOk() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple",-30);
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", -30);
         Assertions.assertThrows(RuntimeException.class,
                 () -> balanceService.process(fruitTransaction));
     }
@@ -34,7 +34,7 @@ public class BalanceServiceTest {
     void balanceService_positiveAmount_Ok() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple",30);
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 30);
         balanceService.process(fruitTransaction);
         int actual = Storage.storage.get("apple");
         Assertions.assertEquals(30, actual);

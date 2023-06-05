@@ -25,7 +25,7 @@ public class PurchaseServiceTest {
     void purchaseService_negativeAmount_notOk() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple",-30);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", -30);
         Assertions.assertThrows(RuntimeException.class,
                 () -> purchaseService.process(fruitTransaction));
     }
@@ -34,7 +34,7 @@ public class PurchaseServiceTest {
     void purchaseService_quantityMoreAmount_Ok() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple",30);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 30);
         Assertions.assertThrows(RuntimeException.class,
                 () -> purchaseService.process(fruitTransaction));
     }
@@ -43,7 +43,7 @@ public class PurchaseServiceTest {
     void purchaseService_positiveAmount_Ok() {
         Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple",10);
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 10);
         purchaseService.process(fruitTransaction);
         int actual = Storage.storage.get("apple");
         Assertions.assertEquals(10, actual);

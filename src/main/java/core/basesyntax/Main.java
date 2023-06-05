@@ -27,7 +27,7 @@ public class Main {
         List<FruitTransaction> fruitTransactionList = parser.parse(dataFromFile);
         FruitService processor = new FruitServiceImpl(strategy);
         processor.process(fruitTransactionList);
-        Writer writer = new WriterImpl(Storage.fruitMap);
-        writer.write(toFileName);
+        Writer writer = new WriterImpl();
+        writer.write(toFileName, Storage.fruitMap);
     }
 }

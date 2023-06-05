@@ -10,14 +10,9 @@ import java.util.Map;
 public class WriterImpl implements Writer {
     private static final String NEW_HEADER = "fruit,quantity";
     private static final String FILE_FORMAT = ".csv";
-    private final Map<String, Integer> mapToWrite;
-
-    public WriterImpl(Map<String, Integer> mapToWrite) {
-        this.mapToWrite = mapToWrite;
-    }
 
     @Override
-    public void write(String toFileName) {
+    public void write(String toFileName, Map<String, Integer> mapToWrite) {
         if (!toFileName.endsWith(FILE_FORMAT)) {
             throw new WrongFileTypeException("Cant write info to not csv file");
         }

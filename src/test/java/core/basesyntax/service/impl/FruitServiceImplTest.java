@@ -17,15 +17,16 @@ import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceImplTest {
-    private FruitService fruitService;
-    private FruitStrategy fruitStrategy;
+    private static final String BANANA = "banana";
+    private static FruitService fruitService;
+    private static FruitStrategy fruitStrategy;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         fruitService = new FruitServiceImpl();
         fruitStrategy = new FruitStrategyImpl(Map.of(
                 BALANCE, new BalanceOperation(),
@@ -38,13 +39,13 @@ class FruitServiceImplTest {
     @Test
     void getAllOperations_ok() {
         List<FruitTransaction> fruitTransactionList = List.of(
-                new FruitTransaction(BALANCE,"banana",100),
-                new FruitTransaction(SUPPLY,"banana",100),
-                new FruitTransaction(PURCHASE,"banana",150),
-                new FruitTransaction(RETURN,"banana",10)
+                new FruitTransaction(BALANCE,BANANA,100),
+                new FruitTransaction(SUPPLY,BANANA,100),
+                new FruitTransaction(PURCHASE,BANANA,150),
+                new FruitTransaction(RETURN,BANANA,10)
         );
         fruitService.getAllOperationsStrategy(fruitTransactionList, fruitStrategy);
-        Integer actual = Storage.storage.get("banana");
+        Integer actual = Storage.storage.get(BANANA);
         Integer expect = 60;
         Assertions.assertEquals(expect, actual);
     }

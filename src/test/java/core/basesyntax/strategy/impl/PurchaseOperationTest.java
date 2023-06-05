@@ -7,14 +7,15 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
-    private OperationsStrategy purchaseOperation;
+    private static final String BANANA = "banana";
+    private static OperationsStrategy purchaseOperation;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         purchaseOperation = new PurchaseOperation();
     }
 
@@ -25,9 +26,9 @@ class PurchaseOperationTest {
 
     @Test
     void handle_purchaseOperation_ok() {
-        Storage.storage.put("banana", 105);
+        Storage.storage.put(BANANA, 105);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                PURCHASE, "banana", 85);
+                PURCHASE, BANANA, 85);
         purchaseOperation.handle(fruitTransaction);
         Integer expected = 20;
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
@@ -37,7 +38,7 @@ class PurchaseOperationTest {
     @Test
     void handle_invalidQuantity_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
-                PURCHASE, "banana", 120);
+                PURCHASE, BANANA, 120);
         Assertions.assertThrows(RuntimeException.class, () ->
                 purchaseOperation.handle(fruitTransaction));
     }

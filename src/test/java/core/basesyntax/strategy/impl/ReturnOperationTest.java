@@ -7,14 +7,15 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationsStrategy;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
-    private OperationsStrategy returnOperation;
+    private static final String BANANA = "banana";
+    private static OperationsStrategy returnOperation;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         returnOperation = new ReturnOperation();
     }
 
@@ -25,9 +26,9 @@ class ReturnOperationTest {
 
     @Test
     void handle_returnOperation_ok() {
-        Storage.storage.put("banana", 105);
+        Storage.storage.put(BANANA, 105);
         FruitTransaction fruitTransaction = new FruitTransaction(
-                RETURN, "banana", 85);
+                RETURN, BANANA, 85);
         returnOperation.handle(fruitTransaction);
         Integer expected = 190;
         Integer actual = Storage.storage.get(fruitTransaction.getFruit());
@@ -37,7 +38,7 @@ class ReturnOperationTest {
     @Test
     void handle_negativeQuantity_notOk() {
         FruitTransaction fruitTransaction = new FruitTransaction(
-                RETURN, "banana", -20);
+                RETURN, BANANA, -20);
         Assertions.assertThrows(RuntimeException.class, () ->
                 returnOperation.handle(fruitTransaction));
     }

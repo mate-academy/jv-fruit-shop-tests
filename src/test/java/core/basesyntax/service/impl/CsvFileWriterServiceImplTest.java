@@ -11,8 +11,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FileWriterServiceImplTest {
+class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService csvFileWriterService;
+    private static final String VALID_FILE_PATH = "src//test//resources//Report.csv";
+    private static final String INVALID_FILE_PATH = "nonexistent-directory/nonexistent-file.txt";
 
     @BeforeAll
     static void setUp() {
@@ -23,7 +25,7 @@ class FileWriterServiceImplTest {
     void writeToFile_writeCorrectInformation_ok() {
         List<String> content = List.of("fruit,quantity", "b,apple,10", "b,banana,15");
         String expected = String.join(System.lineSeparator(), content);
-        String fileName = "src//test//resources//Report.csv";
+        String fileName = VALID_FILE_PATH;
         csvFileWriterService.writeFile(content, fileName);
         String actual = read(fileName).trim();
         assertEquals(expected, actual);
@@ -32,7 +34,7 @@ class FileWriterServiceImplTest {
     @Test
     void writeFile_fileNotFound_notOk() {
         List<String> lines = List.of("Line 1", "Line 2");
-        String fileName = "nonexistent-directory/nonexistent-file.txt";
+        String fileName = INVALID_FILE_PATH;
         assertThrows(RuntimeException.class, () -> csvFileWriterService.writeFile(lines, fileName));
     }
 

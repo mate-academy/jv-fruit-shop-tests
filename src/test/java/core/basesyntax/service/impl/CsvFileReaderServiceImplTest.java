@@ -10,10 +10,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FileReaderServiceImplTest {
+class CsvFileReaderServiceImplTest {
     private static CsvFileReaderService fileReaderService;
     private static final String VALID_FILE_PATH = "src/test/resources/TestData.csv";
-    private static final String INVALID_FILE_PATH = "src/resources/NonexistentFile.csv";
+    private static final String INVALID_FILE_PATH = "src/test/resource/NonexistentFile.csv";
     private static final String INVALID_FORMAT_FILE_PATH
             = "src/test/resources/InvalidFormatData.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/EmptyData.csv";
@@ -44,12 +44,12 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFile_nullFile_notOk() {
+    void readFile_nullFile_notOk() {
         assertThrows(NullPointerException.class, () -> fileReaderService.readFile(null));
     }
 
     @Test
-    public void readFile_fileNotFound_notOk() {
+     void readFile_fileNotFound_notOk() {
         assertThrows(RuntimeException.class, () -> fileReaderService.readFile(INVALID_FILE_PATH));
     }
 }

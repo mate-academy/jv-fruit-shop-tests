@@ -21,7 +21,7 @@ class ReportServiceImplTest {
     @Test
     void createReport_withNullInitializeList_notOk() {
         List<String> report = reportService.createReport();
-        assertNotNull(report);
+        assertNotNull(report, "Report should not be null");
     }
 
     @Test

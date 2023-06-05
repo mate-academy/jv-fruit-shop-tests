@@ -30,12 +30,11 @@ class FruitServiceImplTest {
 
     @Test
     void process_withNullInitializeList_notOk() {
-        List<FruitTransaction> fruitTransactions = null;
-        assertThrows(NullPointerException.class, () -> fruitService.process(fruitTransactions));
+        assertThrows(NullPointerException.class, () -> fruitService.process(null));
     }
 
     @Test
-    void process_validData_ok() {
+     void process_validData_ok() {
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(BALANCE, "apple", 100),
                 new FruitTransaction(SUPPLY, "apple", 200),

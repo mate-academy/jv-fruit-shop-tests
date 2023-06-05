@@ -12,14 +12,14 @@ import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.transaction.Operation;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class OperationHandlerStrategyTest {
-    private OperationHandlerStrategy strategy;
+    private static OperationHandlerStrategy strategy;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         Map<Operation, OperationHandler> strategies = new HashMap<>();
         strategies.put(Operation.BALANCE, new BalanceOperationHandler());
         strategies.put(Operation.SUPPLY, new SupplyOperationHandler());

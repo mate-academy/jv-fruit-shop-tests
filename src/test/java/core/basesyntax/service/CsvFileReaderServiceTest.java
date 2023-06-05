@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderServiceTest {
     private static CsvFileReaderService readerService;
+    private static final String VALID_FILE_PATH = "src/main/resources/DatabaseOfShop.csv";
+    private static final String WRONG_FILE_PATH = "src/main/DatabaseOfShop.csv";
 
     @BeforeAll
     static void beforeAll() {
@@ -18,18 +20,16 @@ public class CsvFileReaderServiceTest {
 
     @Test
     void readFromFile_validFile_ok() {
-        String validFilePath = "src/main/resources/DatabaseOfShop.csv";
         List<String> expectedLines = List.of("type,fruit,quantity", "b,banana,20",
                 "b,apple,100", "s,banana,100", "p,banana,13", "r,apple,10",
                 "p,apple,20", "p,banana,5", "s,banana,50");
-        List<String> actualLines = readerService.readFromFile(validFilePath);
+        List<String> actualLines = readerService.readFromFile(VALID_FILE_PATH);
         assertEquals(expectedLines, actualLines);
     }
 
     @Test
     void readFromFile_invalidFile_notOk() {
-        String invalidFilePath = "src/main/DatabaseOfShop.csv";
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(invalidFilePath));
+        assertThrows(RuntimeException.class, () -> readerService.readFromFile(WRONG_FILE_PATH));
     }
 
     @Test

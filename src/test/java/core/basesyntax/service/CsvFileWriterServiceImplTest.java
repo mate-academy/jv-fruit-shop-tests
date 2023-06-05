@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService writerService;
+    private static final String VALID_FILE_PATH = "src/main/resources/ValidInputFile.csv";
+    private static final String WRONG_FILE_PATH = "src/main/resources/EmptyFile.csv";
 
     @BeforeAll
     static void beforeAll() {
@@ -22,21 +24,19 @@ public class CsvFileWriterServiceImplTest {
 
     @Test
     void writeToFile_validStorageData_ok() throws IOException {
-        String validFile = "src/main/resources/ValidInputFile.csv";
         Storage.FRUITS.put("banana", 152);
         Storage.FRUITS.put("apple", 90);
         String expected = "fruit,quantity\nbanana,152\napple,90";
-        writerService.writeToFile(validFile, expected);
-        String actual = Files.readString(Path.of(validFile)).trim();
+        writerService.writeToFile(VALID_FILE_PATH, expected);
+        String actual = Files.readString(Path.of(VALID_FILE_PATH)).trim();
         assertEquals(expected, actual);
     }
 
     @Test
     void writeToFile_emptyReport_ok() throws IOException {
-        String invalidFile = "src/main/resources/EmptyFile.csv";
         String emptyReport = "";
-        writerService.writeToFile(invalidFile, emptyReport);
-        Path path = Path.of(invalidFile);
+        writerService.writeToFile(WRONG_FILE_PATH, emptyReport);
+        Path path = Path.of(WRONG_FILE_PATH);
         assertTrue(Files.exists(path), "File should exist");
         assertTrue(Files.size(path) == 0, "File should be empty");
     }

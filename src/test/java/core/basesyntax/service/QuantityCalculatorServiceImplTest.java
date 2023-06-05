@@ -19,15 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class QuantityCalculatorServiceImplTest {
-    private QuantityCalculatorService quantityCalculatorService;
+    private static QuantityCalculatorService quantityCalculatorService;
     private List<FruitTransaction> fruitTransactions;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         OperationHandlerStrategy operationHandlerStrategy = new OperationHandlerStrategyImpl(Map.of(
                 BALANCE, new BalanceOperationHandler(),
                 RETURN, new ReturnOperationHandler(),
@@ -35,6 +36,10 @@ public class QuantityCalculatorServiceImplTest {
                 SUPPLY, new SupplyOperationHandler()
         ));
         quantityCalculatorService = new QuantityCalculatorServiceImpl(operationHandlerStrategy);
+    }
+
+    @BeforeEach
+    void setUp() {
         fruitTransactions = new ArrayList<>();
     }
 

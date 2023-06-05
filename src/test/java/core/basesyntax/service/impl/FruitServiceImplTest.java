@@ -57,6 +57,7 @@ class FruitServiceImplTest {
                 "apple", 90
         );
         Map<String, Integer> actual = Storage.fruitStorage;
+        Assertions.assertEquals(expected, actual);
     }
 
     @AfterEach

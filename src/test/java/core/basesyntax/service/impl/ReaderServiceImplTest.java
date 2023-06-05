@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
     private static final String INPUT_CSV_FILE_TEST = "src/test/resources/inputDataTest.csv";
+    private static final String WRONG_PATH = "path";
+
     private ReaderServiceImpl reader;
 
     @BeforeEach
@@ -18,7 +20,7 @@ class ReaderServiceImplTest {
     void readFromFile_wrongPath_notOk() {
         Assertions.assertThrows(
                 RuntimeException.class,
-                () -> reader.readFromFile("path")
+                () -> reader.readFromFile(WRONG_PATH)
         );
     }
 

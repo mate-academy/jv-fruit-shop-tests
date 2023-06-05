@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,8 +55,8 @@ class ParserServiceImplTest {
 
     @Test
     void parse_emptyInput_ok() {
-        List<FruitTransaction> expected = List.of();
-        List<String> input = List.of();
+        List<FruitTransaction> expected = Collections.emptyList();
+        List<String> input = Collections.emptyList();
         List<FruitTransaction> actual = parser.parse(input);
         Assertions.assertIterableEquals(expected, actual);
     }

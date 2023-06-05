@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String OUTPUT_CSV_FILE_TEST = "src/test/resources/outputDataTest.csv";
+    private static final String WRONG_PATH = "test/src/test.csv";
     private WriterServiceImpl writer;
 
     @BeforeEach
@@ -21,7 +22,7 @@ class WriterServiceImplTest {
     void writeToFile_wrongPath_notOk() {
         Assertions.assertThrows(
                 RuntimeException.class,
-                () -> writer.writeToFile("test/src/test.csv", "report")
+                () -> writer.writeToFile(WRONG_PATH, "report")
         );
     }
 
@@ -36,12 +37,16 @@ class WriterServiceImplTest {
                 "banana,152",
                 "apple,90"
         );
-        List<String> actual;
+        List<String> actual = readFromFile();
+
+        Assertions.assertIterableEquals(expected, actual);
+    }
+
+    private List<String> readFromFile() {
         try {
-            actual = Files.readAllLines(Path.of(OUTPUT_CSV_FILE_TEST));
+            return Files.readAllLines(Path.of(OUTPUT_CSV_FILE_TEST));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from test file: " + OUTPUT_CSV_FILE_TEST, e);
         }
-        Assertions.assertIterableEquals(expected, actual);
     }
 }

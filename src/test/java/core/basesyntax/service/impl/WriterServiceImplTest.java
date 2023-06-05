@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class WriterServiceImplTest {
-    private final String OUTPUT_DATA_FILE_TEST = "src/test/resources/testOutput.csv";
-    private static WriterService writerService;
+    private static final String OUTPUT_DATA_FILE_TEST = "src/test/resources/testOutput.csv";
+    private WriterService writerService;
 
     @Before
     public void setUp() {

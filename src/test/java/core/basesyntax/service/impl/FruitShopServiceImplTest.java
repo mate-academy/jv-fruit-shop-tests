@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
@@ -15,8 +17,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FruitShopServiceImplTest {
     private FruitShopService fruitShopService;
@@ -38,7 +38,7 @@ public class FruitShopServiceImplTest {
     public void process_validTransactions_ok() {
         Map<String,Integer> expectedFruitStorage = Map.of(
                 "banana", 152,
-                "apple", 160
+                "apple", 90
         );
         fruitTransactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),

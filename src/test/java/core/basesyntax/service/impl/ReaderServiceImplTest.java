@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class ReaderServiceImplTest {
-    private final String INPUT_DATA_FILE_TEST = "src/test/resources/testData.csv";
-    private static ReaderService readerService;
+    private static final String INPUT_DATA_FILE_TEST = "src/test/resources/testData.csv";
+    private ReaderService readerService;
 
     @Before
     public void setUp() {

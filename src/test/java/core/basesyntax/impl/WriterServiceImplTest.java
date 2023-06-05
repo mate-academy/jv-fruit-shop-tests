@@ -35,7 +35,7 @@ public class WriterServiceImplTest {
         try {
             fileContent = readAllLines(Path.of(PATH_FILE_TO_WRITE));
         } catch (IOException e) {
-            throw new RuntimeException("Invalid path to the file to write");
+            throw new RuntimeException("Invalid path to the file to write: " + PATH_FILE_TO_WRITE);
         }
         Assertions.assertEquals(lines, fileContent);
     }

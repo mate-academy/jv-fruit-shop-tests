@@ -18,9 +18,9 @@ public class ReportServiceImplTest {
 
     @Test
     void reportService_emptyData_Ok() {
-        List<String> data = new ArrayList<>();
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add("fruit,quantity");
+        List<String> data = new ArrayList<>();
         List<String> actualReport = reportService.report(data);
         Assertions.assertEquals(expectedReport, actualReport);
     }

@@ -10,14 +10,19 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FruitServiceImplTest {
     private static FruitServiceImpl fruitService;
 
+    @BeforeAll
+    static void beforeAll() {
+        fruitService = new FruitServiceImpl(new OperationStrategy(null));
+    }
+
     @Test
     void fruitService_emptyData_Ok() {
-        fruitService = new FruitServiceImpl(new OperationStrategy(null));
         Assertions.assertDoesNotThrow(() -> fruitService.process(new ArrayList<>()));
     }
 

@@ -44,6 +44,5 @@ public class ReaderServiceImplTest {
                 "p,banana,5",
                 "s,banana,50");
         Assertions.assertEquals(expected, dataFromFile);
-
     }
 }

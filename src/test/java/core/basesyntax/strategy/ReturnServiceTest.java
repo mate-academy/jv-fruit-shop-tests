@@ -13,17 +13,17 @@ import org.junit.jupiter.api.Test;
 
 public class ReturnServiceTest {
     private static ReturnService returnService;
-    private static StorageImpl storageImpl;
+    private static Storage storage;
 
     @BeforeAll
     static void beforeAll() {
-        storageImpl = new StorageImpl();
-        returnService = new ReturnService(storageImpl);
+        storage = new StorageImpl();
+        returnService = new ReturnService((StorageImpl) storage);
     }
 
     @Test
     void returnService_negativeAmount_notOk() {
-        storage.put("apple", 20);
+        Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple",-30);
         Assertions.assertThrows(RuntimeException.class,
@@ -32,11 +32,11 @@ public class ReturnServiceTest {
 
     @Test
     void returnService_positiveAmount_Ok() {
-        storage.put("apple", 20);
+        Storage.storage.put("apple", 20);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "apple",30);
         returnService.process(fruitTransaction);
-        int actual = storage.get("apple");
+        int actual = Storage.storage.get("apple");
         Assertions.assertEquals(50, actual);
     }
 

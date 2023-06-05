@@ -13,9 +13,9 @@ import java.util.List;
 
 public class Main {
     private static final String VALID_READ_FROM_FILE =
-            "src/main/resources/ValidInputTestData1.csv";
+            "src/test/resources/ValidInputTestData1.csv";
     private static final String WRITE_TO_FILE =
-            "src/main/resources/ValidOutputTestResult1.csv";
+            "src/test/resources/ValidOutputTestResult1.csv";
 
     public static void main(String[] args) {
         List<FruitTransaction> fruitTransactions = new TransactionParserImpl()

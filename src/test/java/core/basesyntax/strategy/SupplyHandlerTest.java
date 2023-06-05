@@ -6,15 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
-    private OperationHandler supplyHandler;
-    private FruitTransaction transaction;
+    private static SupplyHandler supplyHandler;
+    private static FruitTransaction transaction;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         supplyHandler = new SupplyHandler();
         transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,"apple", 1);
     }

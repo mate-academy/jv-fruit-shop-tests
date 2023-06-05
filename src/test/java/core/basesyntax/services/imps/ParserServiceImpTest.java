@@ -4,32 +4,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.services.ParserService;
-import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceImpTest {
-    private ParserService parserService;
-    private List<FruitTransaction> fruitTransactionList;
+    private static ParserServiceImp parserService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         parserService = new ParserServiceImp();
-        fruitTransactionList = new ArrayList<>();
     }
 
     @Test
     void parse_validString_ok() {
-        fruitTransactionList.add(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "pineapple", 1));
-        fruitTransactionList.add(
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 2));
-        fruitTransactionList.add(
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 3));
-        fruitTransactionList.add(
+        List<FruitTransaction> fruitTransactionList = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "pineapple", 1),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 2),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 3),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "orange", 4));
         List<FruitTransaction> actual = parserService.parse(
                 "type,fruit,quantity/b,pineapple,1/s,banana,2/p,apple,3/r,orange,4");
@@ -44,17 +36,11 @@ class ParserServiceImpTest {
 
     @Test
     void parse_stringWithSpaces_Ok() {
-        fruitTransactionList.add(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "pineapple", 1));
-        fruitTransactionList.add(
+        List<FruitTransaction> fruitTransactionList = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "pineapple", 1),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 2));
         List<FruitTransaction> actual = parserService.parse(
                 " type,fruit,quantity /b,pineapple,1 /s, banana,2");
         assertEquals(fruitTransactionList, actual);
-    }
-
-    @AfterEach
-    void tearDown() {
-        fruitTransactionList.clear();
     }
 }

@@ -3,12 +3,11 @@ package core.basesyntax.services.imps;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.services.WriterService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImpTest {
-    private static WriterService writerService;
+    private static WriterServiceImp writerService;
     private static final String REPORT_FILE_PATH = "src/test/resources/report_file_test.csv";
 
     @BeforeAll

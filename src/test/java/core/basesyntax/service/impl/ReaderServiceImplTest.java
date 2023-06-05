@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    public static final String PATH_TO_INPUT_FILE = "src/test/resources/testInputFile.csv";
+    public static final String PATH_TO_INPUT_FILE_TEST = "src/test/resources/testInputFile.csv";
     private ReaderServiceImpl readerService;
 
     @BeforeEach
@@ -15,7 +15,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_wrongPath_notOk() {
+    void readFromFile_wrongPathToFile_notOk() {
         Assertions.assertThrows(
                 RuntimeException.class,
                 () -> readerService.readFromFile("Wrong Path")
@@ -28,8 +28,9 @@ class ReaderServiceImplTest {
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
-                "p,banana,13");
-        List<String> actual = readerService.readFromFile(PATH_TO_INPUT_FILE);
+                "p,banana,13",
+                "s,apple,13");
+        List<String> actual = readerService.readFromFile(PATH_TO_INPUT_FILE_TEST);
         Assertions.assertIterableEquals(expected, actual);
     }
 }

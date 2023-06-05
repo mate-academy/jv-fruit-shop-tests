@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    public static final String PATH_TO_REPORT_FILE = "src/test/resources/testReportFile.csv";
+    public static final String PATH_TO_REPORT_FILE_TEST = "src/test/resources/testReportFile.csv";
     private WriterServiceImpl writerService;
 
     @BeforeEach
@@ -19,7 +19,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writerService_wrongPath_notOk() {
+    void writerService_wrongPathToFile_notOk() {
         Assertions.assertThrows(
                 RuntimeException.class,
                 () -> writerService.writeToFile("test/resources/", "report")
@@ -32,8 +32,8 @@ class WriterServiceImplTest {
                 "fruit,quantity "
                         + "banana,152 "
                         + "apple,120";
-        writerService.writeToFile(PATH_TO_REPORT_FILE, excepted);
-        String actual = validData(PATH_TO_REPORT_FILE);
+        writerService.writeToFile(PATH_TO_REPORT_FILE_TEST, excepted);
+        String actual = validData(PATH_TO_REPORT_FILE_TEST);
         Assertions.assertEquals(excepted, actual);
     }
 

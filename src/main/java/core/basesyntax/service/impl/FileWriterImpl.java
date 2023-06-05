@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exeption.WrongFileFormat;
+import core.basesyntax.exeption.WrongFileFormatException;
 import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class FileWriterImpl implements FileWriter {
                 }
             });
         } catch (IOException e) {
-            throw new WrongFileFormat("Failed to open file: " + path);
+            throw new WrongFileFormatException("Failed to open file: " + path);
         }
     }
 

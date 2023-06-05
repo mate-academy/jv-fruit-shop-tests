@@ -4,7 +4,8 @@ import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.exeption.WrongFileFormat;
+import core.basesyntax.exeption.WrongFileFormatException;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("FileWriterImpl Test")
 class FileWriterImplTest {
-    private static FileWriterImpl fileWriterE;
+    private static FileWriter fileWriter;
     private static final String VALID_DATA_PATH = "src/test/resources/ValidInputTestResult1.csv";
     private static final String INVALID_DATA_PATH =
             "src/test/resources/incorrectPath/ValidOutputTestResult1.csv";
@@ -25,7 +26,7 @@ class FileWriterImplTest {
 
     @BeforeAll
     static void beforeAll() {
-        fileWriterE = new FileWriterImpl();
+        fileWriter = new FileWriterImpl();
     }
 
     @AfterEach
@@ -36,12 +37,12 @@ class FileWriterImplTest {
     @DisplayName("Check writing to file in correct path")
     @Test
     void writeDataToFile_correctPath_ok() {
-        List<String> expected = List.of(
+        List<String> dataToWrite = List.of(
                 "banana,152",
                 System.lineSeparator(),
                 "apple,90");
-        fileWriterE.writeDataToFile(VALID_DATA_PATH, expected);
-        expected = List.of("fruit,quantity",
+        fileWriter.writeDataToFile(VALID_DATA_PATH, dataToWrite);
+        List<String> expected = List.of("fruit,quantity",
                 "banana,152",
                 "apple,90");
         List<String> actual;
@@ -59,14 +60,14 @@ class FileWriterImplTest {
     @Test
     void writeDataToFile_incorrectPath_notOk() {
         assertThrows(RuntimeException.class, () ->
-                fileWriterE.writeDataToFile(INVALID_DATA_PATH, List.of()));
+                fileWriter.writeDataToFile(INVALID_DATA_PATH, List.of()));
     }
 
     @DisplayName("Check writing to file with empty path")
     @Test
     void writeToFile_emptyPath_notOk() {
-        assertThrows(WrongFileFormat.class, () ->
-                fileWriterE.writeDataToFile(
+        assertThrows(WrongFileFormatException.class, () ->
+                fileWriter.writeDataToFile(
                         EMPTY_DATA_PATH, List.of()));
     }
 }

@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.exeption.WrongFileFormat;
+import core.basesyntax.exeption.WrongFileFormatException;
+import core.basesyntax.service.FileReader;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("FileReaderImpl Test")
 class FileReaderImplTest {
-    private static FileReaderImpl fileReader;
+    private static FileReader fileReader;
     private static final String VALID_DATA_PATH = "src/test/resources/ValidInputTestData1.csv";
     private static final String INVALID_WRONG_FORMAT = "src/test/resources/wrongFormat.txt";
     private static final String INVALID_DATA_PATH = "invalid/classpath";
@@ -59,7 +60,7 @@ class FileReaderImplTest {
     @DisplayName("Check reader with invalid file format")
     @Test
     void readFile_invalidFileExtension_notOk() {
-        assertThrows(WrongFileFormat.class, () ->
+        assertThrows(WrongFileFormatException.class, () ->
                         fileReader.readDataFormFile(INVALID_WRONG_FORMAT),
                 "Should throw an exception");
     }

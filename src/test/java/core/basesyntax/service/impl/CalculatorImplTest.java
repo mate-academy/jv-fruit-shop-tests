@@ -31,8 +31,7 @@ class CalculatorImplTest {
                         BANANA.getName(), 20));
         calculator.calculate(transactions);
         Map<String, Integer> expected = Map.of(BANANA.getName(), 20);
-        Map<String, Integer> actual = Storage.STORAGE_MAP;
-        assertEquals(expected, actual);
+        assertEquals(expected, Storage.STORAGE_MAP);
     }
 
     @DisplayName("Check calculator with invalid FruitTransaction")
@@ -43,8 +42,7 @@ class CalculatorImplTest {
                         BANANA.getName(), 20));
         calculator.calculate(transactions);
         Map<String, Integer> expected = Map.of(BANANA.getName(), 30);
-        Map<String, Integer> actual = Storage.STORAGE_MAP;
-        assertNotEquals(expected, actual);
+        assertNotEquals(expected, Storage.STORAGE_MAP);
     }
 
     @AfterAll

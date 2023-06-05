@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exeption.WrongFileFormat;
+import core.basesyntax.exeption.WrongFileFormatException;
 import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +13,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            throw new WrongFileFormat("Can't read from file: " + filePath);
+            throw new WrongFileFormatException("Can't read from file: " + filePath);
         }
     }
 }

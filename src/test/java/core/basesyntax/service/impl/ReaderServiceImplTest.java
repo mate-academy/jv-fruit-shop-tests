@@ -1,24 +1,27 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.service.ReaderService;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
     private static final String INPUT_CSV_FILE_TEST = "src/test/resources/inputDataTest.csv";
     private static final String WRONG_PATH = "path";
 
-    private ReaderServiceImpl reader;
+    private static ReaderService reader;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reader = new ReaderServiceImpl();
     }
 
     @Test
     void readFromFile_wrongPath_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> reader.readFromFile(WRONG_PATH)
         );
@@ -37,6 +40,6 @@ class ReaderServiceImplTest {
                 "s,banana,50"
         );
         List<String> actual = reader.readFromFile(INPUT_CSV_FILE_TEST);
-        Assertions.assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 }

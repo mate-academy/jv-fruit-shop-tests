@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
@@ -12,17 +15,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceImplTest {
-    private FruitService logger;
-    private OperationStrategy operationStrategy;
+    private static FruitService fruitService;
+    private static OperationStrategy operationStrategy;
 
-    @BeforeEach
-    void setUp() {
-        logger = new FruitServiceImpl();
+    @BeforeAll
+    static void beforeAll() {
+        fruitService = new FruitServiceImpl();
         operationStrategy = new OperationStrategy(
                 Map.of(
                         FruitTransaction.Operation.BALANCE, new BalanceHandler(),
@@ -35,8 +37,8 @@ class FruitServiceImplTest {
 
     @Test
     void writeActionToStorage_noTransactions_ok() {
-        logger.writeActionToStorage(Collections.emptyList(), operationStrategy);
-        Assertions.assertTrue(Storage.fruitStorage.isEmpty());
+        fruitService.writeActionToStorage(Collections.emptyList(), operationStrategy);
+        assertTrue(Storage.fruitStorage.isEmpty());
     }
 
     @Test
@@ -51,13 +53,13 @@ class FruitServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
         );
-        logger.writeActionToStorage(fruitTransactions, operationStrategy);
+        fruitService.writeActionToStorage(fruitTransactions, operationStrategy);
         Map<String, Integer> expected = Map.of(
                 "banana", 152,
                 "apple", 90
         );
         Map<String, Integer> actual = Storage.fruitStorage;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @AfterEach

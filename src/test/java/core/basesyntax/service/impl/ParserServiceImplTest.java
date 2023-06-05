@@ -1,22 +1,24 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ParserService;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ParserServiceImplTest {
-    private ParserServiceImpl parser;
+import static org.junit.jupiter.api.Assertions.*;
 
-    @BeforeEach
-    void setUp() {
+class ParserServiceImplTest {
+    private static ParserService parser;
+
+    @BeforeAll
+    static void beforeAll() {
         parser = new ParserServiceImpl();
     }
 
     @Test
-    void parse_ok() {
+    void parse_validInputData_ok() {
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
@@ -28,7 +30,7 @@ class ParserServiceImplTest {
                 "s,banana,100"
         );
         List<FruitTransaction> actual = parser.parse(input);
-        Assertions.assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 
     @Test
@@ -38,7 +40,7 @@ class ParserServiceImplTest {
                 "b,apple,100",
                 "s,banana,100"
         );
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> parser.parse(input));
     }
 
@@ -49,15 +51,14 @@ class ParserServiceImplTest {
                 "b,apple,100",
                 "s,banana,100"
         );
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> parser.parse(input));
     }
 
     @Test
     void parse_emptyInput_ok() {
-        List<FruitTransaction> expected = Collections.emptyList();
         List<String> input = Collections.emptyList();
         List<FruitTransaction> actual = parser.parse(input);
-        Assertions.assertIterableEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 }

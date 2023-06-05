@@ -34,7 +34,7 @@ class FruitServiceImplTest {
     }
 
     @Test
-     void process_validData_ok() {
+    void process_validData_ok() {
         List<FruitTransaction> fruitTransactionList = List.of(
                 new FruitTransaction(BALANCE, "apple", 100),
                 new FruitTransaction(SUPPLY, "apple", 200),

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private static final String PATH_TO_TEST_INPUT_FILE = "src\\test\\resources\\testInput.csv";
+    private static final String PATH_TO_TEST_INPUT_FILE = "src/test/resources/testInput.csv";
     private FileReaderImpl fileReader;
 
     @BeforeEach

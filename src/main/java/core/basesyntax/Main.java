@@ -7,9 +7,9 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionProcessor;
-import core.basesyntax.service.TransactionProcessorImpl;
-import core.basesyntax.service.impl.CsvFileReaderImpl;
-import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.FruitService;
 import core.basesyntax.strategy.OperationHandler;
@@ -33,7 +33,7 @@ public class Main {
         System.out.println("-----------------------");
         System.out.println("-  --= Fuit shop =--  -");
         System.out.println("-----------------------");
-        FileReader fruitReader = new CsvFileReaderImpl();
+        FileReader fruitReader = new FileReaderImpl();
         List<String> linesFromFile = fruitReader.readFile(READ_FILE_PATH);
         for (String line :
                 linesFromFile) {
@@ -55,7 +55,7 @@ public class Main {
         processor.process(transactions);
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.generateReport(storage.getAll());
-        CsvFileWriterImpl file = new CsvFileWriterImpl();
+        FileWriterImpl file = new FileWriterImpl();
         file.writeFile(WRITE_FILE_PATH, report);
     }
 }

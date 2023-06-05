@@ -30,8 +30,7 @@ class ReportServiceImplTest {
     void createReport_bananaAndApple_ok() {
         Storage.STORAGE_MAP.put(BANANA.getName(), 152);
         Storage.STORAGE_MAP.put(APPLE.getName(), 90);
-        List<String> expected = List.of("banana,152" + System.lineSeparator(),
-                "apple,90" + System.lineSeparator());
+        List<String> expected = List.of("banana,152", "apple,90");
         List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }
@@ -40,7 +39,7 @@ class ReportServiceImplTest {
     @Test
     void createReport_banana_ok() {
         Storage.STORAGE_MAP.put(BANANA.getName(), 99);
-        List<String> expected = List.of("banana,99" + System.lineSeparator());
+        List<String> expected = List.of("banana,99");
         List<String> actual = reportService.createReport();
         assertEquals(expected, actual);
     }

@@ -18,6 +18,7 @@ public class FileWriterImpl implements FileWriter {
             lines.forEach(line -> {
                 try {
                     bufferedWriter.write(line);
+                    bufferedWriter.write(System.lineSeparator());
                 } catch (IOException e) {
                     throw new RuntimeException("Failed to write to file: " + path, e);
                 }

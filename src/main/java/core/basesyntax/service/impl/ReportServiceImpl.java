@@ -10,7 +10,7 @@ public class ReportServiceImpl implements ReportService {
     public List<String> createReport() {
         List<String> reportData = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : Storage.STORAGE_MAP.entrySet()) {
-            String line = entry.getKey() + "," + entry.getValue() + System.lineSeparator();
+            String line = entry.getKey() + "," + entry.getValue();
             reportData.add(line);
         }
         return reportData;

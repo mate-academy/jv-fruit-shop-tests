@@ -37,14 +37,9 @@ class FileWriterImplTest {
     @DisplayName("Check writing to file in correct path")
     @Test
     void writeDataToFile_correctPath_ok() {
-        List<String> dataToWrite = List.of(
-                "banana,152",
-                System.lineSeparator(),
-                "apple,90");
+        List<String> dataToWrite = List.of("banana,152", "apple,90");
         fileWriter.writeDataToFile(VALID_DATA_PATH, dataToWrite);
-        List<String> expected = List.of("fruit,quantity",
-                "banana,152",
-                "apple,90");
+        List<String> expected = List.of("fruit,quantity", "banana,152","apple,90");
         List<String> actual;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
                 VALID_DATA_PATH))) {

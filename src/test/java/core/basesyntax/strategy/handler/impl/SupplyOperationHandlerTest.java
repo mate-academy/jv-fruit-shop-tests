@@ -19,24 +19,21 @@ class SupplyOperationHandlerTest {
 
     @Test
     void operate_validTransaction_ok() {
-        int transaction = 200;
-        int result = handler.operate(transaction, oldValue);
+        int result = handler.operate(200, oldValue);
         int expected = 700;
         assertEquals(expected, result);
     }
 
     @Test
     void operate_zeroTransaction_ok() {
-        int transaction = 0;
-        int result = handler.operate(transaction, oldValue);
+        int result = handler.operate(0, oldValue);
         int expected = 500;
         assertEquals(expected, result);
     }
 
     @Test
     void operate_negativeTransaction_notOk() {
-        int transaction = -100;
         assertThrows(RuntimeException.class,
-                () -> handler.operate(transaction, oldValue));
+                () -> handler.operate(-100, oldValue));
     }
 }

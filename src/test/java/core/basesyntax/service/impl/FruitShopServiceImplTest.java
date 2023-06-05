@@ -3,8 +3,6 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
@@ -22,22 +20,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceImplTest {
-    private StorageDao storageDao;
     private FruitShopService fruitShopService;
-    private OperationStrategy operationStrategy;
-    private Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlerMap;
     private List<FruitTransaction> transactions;
 
     @BeforeEach
     void setUp() {
-        storageDao = new StorageDaoImpl();
-        operationHandlerMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        transactions = new ArrayList<>();
 
     }
 
@@ -48,6 +40,7 @@ class FruitShopServiceImplTest {
 
     @Test
     void processData_validTransactions_ok() {
+        transactions = new ArrayList<>();
         FruitTransaction transaction1 = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana", 20);
         FruitTransaction transaction2 = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
@@ -55,24 +48,20 @@ class FruitShopServiceImplTest {
         transactions.add(transaction1);
         transactions.add(transaction2);
         fruitShopService.processData(transactions);
-        assertEquals(20, storageDao.getFruitQuantity("banana"));
-        assertEquals(50, storageDao.getFruitQuantity("apple"));
+        assertEquals(20, Storage.fruitMap.getOrDefault("banana", 0));
+        assertEquals(50, Storage.fruitMap.getOrDefault("apple", 0));
     }
 
     @Test
     void processData_nullTransactions_notOk() {
-        transactions = null;
-        assertThrowsException(transactions);
+        assertThrows(IllegalArgumentException.class,
+                () -> fruitShopService.processData(transactions));
     }
 
     @Test
     void processData_emptyTransactions_ok() {
+        transactions = new ArrayList<>();
         fruitShopService.processData(transactions);
-        assertEquals(0, storageDao.getAllFruits().size());
-    }
-
-    private void assertThrowsException(List<FruitTransaction> transactions) {
-        assertThrows(IllegalArgumentException.class,
-                () -> fruitShopService.processData(transactions));
+        assertEquals(0, Storage.fruitMap.size());
     }
 }

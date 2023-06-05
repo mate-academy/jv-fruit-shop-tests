@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.DataParserService;
 import java.util.Collections;
 import java.util.List;
@@ -28,9 +29,9 @@ class DataParserServiceImplTest {
                 "s,banana,100"
         );
         List<FruitTransaction> expectedOutput = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100)
+                new FruitTransaction(Operation.BALANCE, "banana", 20),
+                new FruitTransaction(Operation.BALANCE, "apple", 100),
+                new FruitTransaction(Operation.SUPPLY, "banana", 100)
         );
         List<FruitTransaction> actualOutput = dataParserService.parse(input);
         assertIterableEquals(expectedOutput, actualOutput);
@@ -50,7 +51,8 @@ class DataParserServiceImplTest {
                 "type,fruit,quantity",
                 "b,banana,abc"
         );
-        assertThrowsException(input);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataParserService.parse(input));
     }
 
     @Test
@@ -60,7 +62,8 @@ class DataParserServiceImplTest {
                 "invalid_row",
                 "s,banana,100"
         );
-        assertThrowsException(input);
+        assertThrows(IllegalArgumentException.class,
+                () -> dataParserService.parse(input));
     }
 
     @Test
@@ -73,10 +76,6 @@ class DataParserServiceImplTest {
     @Test
     void parse_nullData_notOk() {
         List<String> input = null;
-        assertThrowsException(input);
-    }
-
-    private void assertThrowsException(List<String> input) {
         assertThrows(IllegalArgumentException.class,
                 () -> dataParserService.parse(input));
     }

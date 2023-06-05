@@ -19,31 +19,27 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void operate_validTransaction_ok() {
-        int transaction = 200;
-        int result = handler.operate(transaction, oldValue);
+        int result = handler.operate(200, oldValue);
         int expected = 300;
         assertEquals(expected, result);
     }
 
     @Test
     void operate_transactionGreaterThanOldValue_notOk() {
-        int transaction = 600;
         assertThrows(RuntimeException.class,
-                () -> handler.operate(transaction, oldValue));
+                () -> handler.operate(600, oldValue));
     }
 
     @Test
     void operate_transactionEqualsOldValue_ok() {
-        int transaction = 500;
-        int result = handler.operate(transaction, oldValue);
+        int result = handler.operate(500, oldValue);
         int expected = 0;
         assertEquals(expected, result);
     }
 
     @Test
     void operate_negativeTransaction_notOk() {
-        int transaction = -100;
         assertThrows(RuntimeException.class,
-                () -> handler.operate(transaction, oldValue));
+                () -> handler.operate(-100, oldValue));
     }
 }

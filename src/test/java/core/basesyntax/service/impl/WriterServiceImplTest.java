@@ -23,9 +23,8 @@ class WriterServiceImplTest {
     @Test
     void writeDataToFile_existingFile_ok() throws IOException {
         List<String> data = List.of("Line 1", "Line 2", "Line 3");
-        String filePath = PATH_TO_TEST_OUTPUT_CSV_FILE;
-        writerService.writeDataToFile(filePath, data);
-        List<String> result = Files.readAllLines(Path.of(filePath));
+        writerService.writeDataToFile(PATH_TO_TEST_OUTPUT_CSV_FILE, data);
+        List<String> result = Files.readAllLines(Path.of(PATH_TO_TEST_OUTPUT_CSV_FILE));
         assertEquals(data, result);
     }
 

@@ -9,32 +9,27 @@ import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
     private OperationHandler handler;
-    private int oldValue;
 
     @BeforeEach
     void setUp() {
         handler = new BalanceOperationHandler();
-        oldValue = 500;
     }
 
     @Test
     void operate_positiveTransaction_ok() {
-        int transaction = 100;
-        int result = handler.operate(transaction, oldValue);
-        assertEquals(transaction, result);
+        int result = handler.operate(100, 500);
+        assertEquals(100, result);
     }
 
     @Test
     void operate_negativeTransaction_notOk() {
-        int transaction = -200;
         assertThrows(RuntimeException.class,
-                () -> handler.operate(transaction, oldValue));
+                () -> handler.operate(-200, 500));
     }
 
     @Test
     void operate_zeroTransaction_ok() {
-        int transaction = 0;
-        int result = handler.operate(transaction, oldValue);
-        assertEquals(transaction, result);
+        int result = handler.operate(0, 500);
+        assertEquals(0, result);
     }
 }

@@ -27,8 +27,8 @@ class OperationHandlerTest {
     private static FruitTransaction PurchaseAppleTransaction;
     private static FruitTransaction InvalidApplePurchaseTransaction;
     private static final int CONSTANT_ONE = 1;
-    private static final String BANANA = "banana";
     private static final int DEFAULT_QUANTITY = 5;
+    private static final String BANANA = "banana";
     private static final String APPLE = "apple";
 
     @BeforeAll

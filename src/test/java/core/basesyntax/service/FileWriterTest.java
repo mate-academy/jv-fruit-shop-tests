@@ -35,15 +35,11 @@ class FileWriterTest {
     }
 
     @Test
-    void writeReportToFile_ValidReportText_IsOk() {
+    void writeReportToFile_ValidReportText_IsOk() throws IOException {
         List<String> actual;
         fileWriter.writeReportToFile(REPORT_TEXT, toFile);
         List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
-        try {
-            actual = Files.readAllLines(toFile.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        actual = Files.readAllLines(toFile.toPath());
         assertEquals(expected, actual);
     }
 

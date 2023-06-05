@@ -9,19 +9,17 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderTest {
     private static File inputFile;
-    private static File InvalidinputFile;
+    private static File invalidInputFile;
     private static String inputData;
     private static FileReader fileReader;
     private static final String PATH = "src/test/resources/inputDatabase.csv";
-    private static final String INVALID_PATH = "src/t/inputDatabase.csv";
-    private static final String SEPARATOR = "\n";
+    private static final String INVALID_PATH = "invalid/path/inputDatabase.csv";
 
     @BeforeAll
     static void beforeAll() {
@@ -46,14 +44,22 @@ class FileReaderTest {
 
     @Test
     void readReport_ValidReport_IsOk() {
-        List<String> expected = Arrays.asList(inputData.split(SEPARATOR));
+        List<String> expected = List.of("type,fruit,quantity",
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
         List<String> actual = fileReader.readReport(inputFile);
         assertEquals(expected, actual);
     }
 
     @Test
     void readReport_EmptyFile_NotOk() {
-        InvalidinputFile = new File(INVALID_PATH);
-        assertThrows(CustomException.class, () -> fileReader.readReport(InvalidinputFile));
+        invalidInputFile = new File(INVALID_PATH);
+        assertThrows(CustomException.class, () -> fileReader.readReport(invalidInputFile));
     }
 }

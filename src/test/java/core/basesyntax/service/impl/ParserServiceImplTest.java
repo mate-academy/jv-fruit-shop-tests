@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
     private static ParserService parserService;
-    private static List<String> dataList;
 
     @BeforeAll
     static void beforeAll() {
@@ -20,7 +19,7 @@ class ParserServiceImplTest {
 
     @Test
     void formatData_correctList_ok() {
-        dataList = List.of("b,banana,80");
+        List<String> dataList = List.of("b,banana,80");
         List<FruitTransaction> fruitTransactionList = parserService.formatData(dataList);
         FruitTransaction expected = new FruitTransaction(
                 BALANCE, "banana", 80);

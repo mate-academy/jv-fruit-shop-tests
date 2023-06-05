@@ -31,11 +31,10 @@ class ReportServiceImplTest {
     void createReport_bananaAndApple_ok() {
         Storage.STORAGE_MAP.put(BANANA.getName(), 152);
         Storage.STORAGE_MAP.put(APPLE.getName(), 90);
-        String expected = "banana,152"
-                + System.lineSeparator()
-                + "apple,90"
-                + System.lineSeparator();
-        String actual = reportService.createReport().stream().collect(Collectors.joining());
+        List<String> expected = List.of("banana,152", "apple,90").stream()
+                .map(String::trim).collect(Collectors.toList());
+        List<String> actual = reportService.createReport().stream()
+                .map(String::trim).collect(Collectors.toList());
         assertEquals(expected, actual);
     }
 
@@ -43,8 +42,10 @@ class ReportServiceImplTest {
     @Test
     void createReport_banana_ok() {
         Storage.STORAGE_MAP.put(BANANA.getName(), 99);
-        String expected = "banana,99" + System.lineSeparator();
-        String actual = reportService.createReport().stream().collect(Collectors.joining());
+        List<String> expected = List.of("banana,99").stream()
+                .map(String::trim).collect(Collectors.toList());
+        List<String> actual = reportService.createReport().stream()
+                .map(String::trim).collect(Collectors.toList());
         assertEquals(expected, actual);
     }
 

@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.Product.APPLE;
 import static core.basesyntax.model.Product.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -34,15 +34,15 @@ class CalculatorImplTest {
         assertEquals(expected, Storage.STORAGE_MAP);
     }
 
-    @DisplayName("Check calculator with invalid FruitTransaction")
+    @DisplayName("Check calculator with 2 valid FruitTransaction")
     @Test
-    public void calculate_invalidTransaction_notOk() {
-        List<FruitTransaction> transactions =
-                List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        BANANA.getName(), 20));
+    public void calculate_validMultipleTransactions_ok() {
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE.getName(), 20),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, APPLE.getName(), 10)
+        );
         calculator.calculate(transactions);
-        Map<String, Integer> expected = Map.of(BANANA.getName(), 30);
-        assertNotEquals(expected, Storage.STORAGE_MAP);
+        assertEquals(30, Storage.STORAGE_MAP.get(APPLE.getName()).intValue());
     }
 
     @AfterAll

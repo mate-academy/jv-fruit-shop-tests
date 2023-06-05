@@ -4,14 +4,14 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private ReportService reportService;
+    private static ReportService reportService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reportService = new ReportServiceImpl();
     }
 

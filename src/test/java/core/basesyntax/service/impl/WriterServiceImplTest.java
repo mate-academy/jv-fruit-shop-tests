@@ -5,31 +5,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String VALID_PATH = "src/test/resources/ReportTest.csv";
     private static final String REPORT = "banana, 100";
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         writerService = new WriterServiceImpl();
     }
 
     @Test
     void writeToFile_validPath_ok() {
         writerService.writeToFile(VALID_PATH, REPORT);
-        String expected = REPORT;
         String actual;
         try {
             actual = Files.readAllLines(Path.of(VALID_PATH)).get(0);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can`t read data from file with path " + VALID_PATH);
         }
-        Assertions.assertEquals(expected, actual);
-
+        Assertions.assertEquals(REPORT, actual);
     }
 
     @Test

@@ -18,17 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataProcessorImplTest {
     private static final String BANANA_FRUIT = "banana";
-    private OperationStrategy operationStrategy;
-    private DataProcessor dataProcessor;
-    private List<FruitTransaction> fruitTransactions;
+    private static OperationStrategy operationStrategy;
+    private static DataProcessor dataProcessor;
+    private static List<FruitTransaction> fruitTransactions;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         operationStrategy = new OperationStrategyImpl(Map.of(
                 BALANCE, new BalanceOperationHandler(),
                 RETURN, new ReturnOperationHandler(),
@@ -48,9 +48,9 @@ class DataProcessorImplTest {
                 new FruitTransaction(RETURN, BANANA_FRUIT,50)
         );
         dataProcessor.addDataToDB(fruitTransactions);
-        int expacted = 160;
+        int expected = 160;
         int actual = Storage.FRUIT_STORAGE.get(BANANA_FRUIT);
-        Assertions.assertEquals(expacted, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

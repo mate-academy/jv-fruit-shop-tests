@@ -1,24 +1,28 @@
 package core.basesyntax.service.impl;
 
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileReaderImplTest {
     private static final String PATH_TO_TEST_INPUT_FILE = "src/test/resources/testInput.csv";
-    private FileReaderImpl fileReader;
+    private static final String WRONG_PATH_TO_FILE = "test/folder/test.csv";
+    private static FileReaderImpl fileReader;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         fileReader = new FileReaderImpl();
     }
 
     @Test
     void readFromFile_wrongPathToFile_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
-                () -> fileReader.readFromFile("test/folder/test.csv")
+                () -> fileReader.readFromFile(WRONG_PATH_TO_FILE),
+                "Wrong path to file: " + WRONG_PATH_TO_FILE
         );
     }
 
@@ -30,6 +34,6 @@ class FileReaderImplTest {
                 "s,apple,100"
         );
         List<String> actual = fileReader.readFromFile(PATH_TO_TEST_INPUT_FILE);
-        Assertions.assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 }

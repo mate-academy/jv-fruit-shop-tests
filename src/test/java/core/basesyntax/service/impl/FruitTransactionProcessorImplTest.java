@@ -12,18 +12,23 @@ import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class FruitTransactionProcessorImplTest {
-    private FruitTransactionProcessorImpl fruitTransactionProcessor;
-    private Storage storage;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    @BeforeEach
-    void setUp() {
-        storage = new MapStorage(); // Use your preferred storage implementation here
+class FruitTransactionProcessorImplTest {
+    private static FruitTransactionProcessorImpl fruitTransactionProcessor;
+    private static Storage storage;
+    private static final String INVALID_FRUIT_NAME = "watermelon";
+    private static final String INVALID_OPERATION_CODE = "j";
+    private static final String VALID_OPERATION_CODE = "s";
+
+    @BeforeAll
+    static void setUp() {
+        storage = new MapStorage();
         FruitService fruitService = new FruitServiceImpl(storage);
         OperationHandlerStrategy strategy = new OperationHandlerStrategyImpl(
                 Map.of(
@@ -45,37 +50,39 @@ class FruitTransactionProcessorImplTest {
     @Test
     void process_emptyFruitTransactionList_ok() {
         fruitTransactionProcessor.process(List.of());
-        Assertions.assertTrue(storage.getAll().isEmpty());
+        assertTrue(storage.getAll().isEmpty());
     }
 
     @Test
     void process_getByCode_ok() {
-        FruitTransaction.Operation actual = FruitTransaction.Operation.getByCode("s");
+        FruitTransaction.Operation actual = FruitTransaction.Operation.getByCode(VALID_OPERATION_CODE);
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
-        Assert.assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
     @Test
     void process_getByCode_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
-                () -> FruitTransaction.Operation.getByCode("j")
+                () -> FruitTransaction.Operation.getByCode(INVALID_OPERATION_CODE),
+                "There is not operation with code: " + INVALID_OPERATION_CODE
         );
     }
 
     @Test
     void process_validFruitTransaction_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> {
                     List<FruitTransaction> fruitTransactions = List.of(
                             new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                                    "watermelon",
+                                    INVALID_FRUIT_NAME,
                                     10
                             )
                     );
                     fruitTransactionProcessor.process(fruitTransactions);
-                }
+                },
+                "There is no fruit like this in storage! " + "(" + INVALID_FRUIT_NAME + ")"
         );
     }
 

@@ -4,24 +4,28 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileWriterImplTest {
     private static final String PATH_TO_TEST_OUTPUT_FILE = "src\\test\\resources\\testOutput.csv";
-    private FileWriterImpl fileWriter;
+    private static final String WRONG_PATH_TO_FILE = "test/folder/file.csv";
+    private static FileWriterImpl fileWriter;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         fileWriter = new FileWriterImpl();
     }
 
     @Test
     void writeToFile_wrongPathToFile_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
-                () -> fileWriter.writeToFile("test/folder/file.csv", "text")
+                () -> fileWriter.writeToFile(WRONG_PATH_TO_FILE, "text"),
+                "Wrong path to file: " + WRONG_PATH_TO_FILE
         );
     }
 
@@ -37,7 +41,7 @@ class FileWriterImplTest {
                 "banana,13"
         );
         List<String> actual = readFromFile(PATH_TO_TEST_OUTPUT_FILE);
-        Assertions.assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 
     private List<String> readFromFile(String pathToFile) {

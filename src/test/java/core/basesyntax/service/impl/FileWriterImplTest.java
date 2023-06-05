@@ -1,19 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileWriter;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String PATH_TO_INPUT_FILE = "src/test/java/resources/testInput.csv";
     private static final String PATH_TO_OUTPUT_FILE = "src/test/java/resources/testOutput.csv";
     private static FileWriter fileWriter;
     
@@ -29,16 +27,22 @@ class FileWriterImplTest {
                 () -> fileWriter
                         .writeFile("test/some_file.csv", "some content"));
     }
+
     @Test
     void writeFile_writeToFile_ok() {
-        String content = "type,fruit,quantity\n" +
-                "b,banana,20\n" +
-                "b,apple,100\n" +
-                "s,banana,100";
+        String content = "type,fruit,quantity\n"
+                + "b,banana,20\n"
+                + "b,apple,100\n"
+                + "s,banana,100";
         fileWriter.writeFile(PATH_TO_OUTPUT_FILE, content);
+        List<String> expected = List.of(
+                "type,fruit,quantity",
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100"
+        );
         List<String> actual = readFromFile(PATH_TO_OUTPUT_FILE);
-
-
+        assertEquals(expected, actual);
     }
 
     private List<String> readFromFile(String filePath) {

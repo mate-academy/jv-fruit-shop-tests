@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReaderServiceImplTest {
     private static ReaderService readerService;
+    private static String file = "src/test/java/resources/fruitsInfo.csv";
 
     @BeforeAll
     public static void setUp() {
@@ -18,7 +19,6 @@ public class ReaderServiceImplTest {
 
     @Test
     void readFile_withValidData_Ok() {
-        String file = "src/test/java/resources/fruitsInfo.csv";
         List<String> expected = List.of("b,banana,20", "b,apple,100", "s,banana,100");
         List<String> actual = readerService.readFile(file);
         Assertions.assertEquals(expected, actual);
@@ -31,7 +31,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    void readFile_fileIsEmpty_notOk() {
+    void readFile_fileIsEmpty_Ok() {
         List<String> actual = readerService.readFile("src/test/java/resources/emptyFile.csv");
         Assertions.assertTrue(actual.isEmpty());
     }

@@ -12,13 +12,10 @@ import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
     private BalanceOperationHandler balanceOperationHandler;
-    private Storage storage;
-    private FruitTransaction transaction;
 
     @BeforeEach
     public void setUp() {
         balanceOperationHandler = new BalanceOperationHandler();
-        storage = new Storage();
     }
 
     @Test

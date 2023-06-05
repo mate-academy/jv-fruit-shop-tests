@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 public class ReportServiceImplTest {
     private static ReportService reportService;
-    private static Storage storage;
 
     @BeforeAll
     public static void setUp() {
@@ -27,8 +26,8 @@ public class ReportServiceImplTest {
 
     @Test
     public void reportService_createReport_ok() {
-        storage.put("banana", 5);
-        storage.put("apple", 100);
+        Storage.put("banana", 5);
+        Storage.put("apple", 100);
         String expected = "fruit, quantity" + System.lineSeparator()
                 + "banana,5" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator();

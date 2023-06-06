@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +9,7 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +17,10 @@ class FileWriterServiceImplTest {
     private static final String OUTPUT_FILE_PATH = "src/test/resources/output-test.csv";
     private static final String EMPTY_REPORT = "";
     private static final String INVALID_FILE_PATH = "";
-    private FileWriterServiceImpl fileWriterService;
+    private static FileWriterServiceImpl fileWriterService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         fileWriterService = new FileWriterServiceImpl();
     }
 
@@ -36,28 +36,28 @@ class FileWriterServiceImplTest {
     @DisplayName("Checking for passing null as report value")
     @Test
     void writeReport_nullReport_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 fileWriterService.writeReport(null, OUTPUT_FILE_PATH));
     }
 
     @DisplayName("Checking for passing null as filePath value")
     @Test
     void writeReport_nullFilePath_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 fileWriterService.writeReport(EMPTY_REPORT, null));
     }
 
     @DisplayName("Checking for passing null as report value and filePath")
     @Test
     void writeReport_nullReportAndNullFilePath_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 fileWriterService.writeReport(null, null));
     }
 
     @DisplayName("Checking for passing invalid filePath")
     @Test
     void writeReport_invalidFilePath_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 fileWriterService.writeReport(EMPTY_REPORT, INVALID_FILE_PATH));
     }
 
@@ -80,7 +80,7 @@ class FileWriterServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    private static String readFile(String filePath) {
+    private String readFile(String filePath) {
         try (Stream<String> stream = Files.lines(Path.of(filePath))) {
             return stream.collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException e) {

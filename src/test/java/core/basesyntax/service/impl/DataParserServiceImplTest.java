@@ -2,19 +2,20 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class DataParserServiceImplTest {
-    private DataParserServiceImpl dataParserService;
+    private static DataParserServiceImpl dataParserService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         dataParserService = new DataParserServiceImpl();
     }
 
@@ -27,9 +28,8 @@ class DataParserServiceImplTest {
     @DisplayName("Checking for passing empty list")
     @Test
     void parseData_emptyLinesList_ok() {
-        List<FruitTransaction> expected = Collections.emptyList();
         List<FruitTransaction> actual = dataParserService.parseData(Collections.emptyList());
-        assertEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 
     @DisplayName("Checking for passing correct data lines")

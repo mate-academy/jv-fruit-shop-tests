@@ -1,19 +1,19 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
-    private BalanceHandler balanceHandler;
+    private static BalanceHandler balanceHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         balanceHandler = new BalanceHandler();
     }
 
@@ -40,7 +40,7 @@ class BalanceHandlerTest {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", minimumQuantity);
         balanceHandler.handle(fruitTransaction);
-        assertTrue(minimumQuantity == Storage.storageMap.get(fruitTransaction.getFruit()));
+        assertEquals(minimumQuantity, Storage.storageMap.get(fruitTransaction.getFruit()));
     }
 
     @DisplayName("Checking for handling transaction")
@@ -50,6 +50,6 @@ class BalanceHandlerTest {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", quantity);
         balanceHandler.handle(fruitTransaction);
-        assertTrue(quantity == Storage.storageMap.get(fruitTransaction.getFruit()));
+        assertEquals(quantity, (int) Storage.storageMap.get(fruitTransaction.getFruit()));
     }
 }

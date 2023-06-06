@@ -4,17 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorServiceImplTest {
     private static final String REPORT_FIRST_LINE = "fruit,quantity";
     private static final String COMMA_SEPARATOR = ",";
-    private ReportGeneratorServiceImpl reportGeneratorService;
+    private static ReportGeneratorServiceImpl reportGeneratorService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reportGeneratorService = new ReportGeneratorServiceImpl();
     }
 

@@ -1,24 +1,26 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
-    private PurchaseHandler purchaseHandler;
+    private static PurchaseHandler purchaseHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         purchaseHandler = new PurchaseHandler();
     }
 
     @DisplayName("Checking for handling null as fruitTransaction value")
     @Test
     void handle_nullFruitTransaction_notOk() {
-        Assertions.assertThrows(NullPointerException.class, () ->
+        assertThrows(NullPointerException.class, () ->
                 purchaseHandler.handle(null));
     }
 
@@ -34,7 +36,7 @@ class PurchaseHandlerTest {
                 quantityToBuy
         );
         Storage.storageMap.put(fruit, quantityToBuy - 1);
-        Assertions.assertThrows(RuntimeException.class, () ->
+        assertThrows(RuntimeException.class, () ->
                 purchaseHandler.handle(fruitTransaction));
     }
 
@@ -50,6 +52,6 @@ class PurchaseHandlerTest {
         );
         Storage.storageMap.put(fruit, quantityToBuy + 1);
         purchaseHandler.handle(fruitTransaction);
-        Assertions.assertTrue(1 == Storage.storageMap.get(fruit));
+        assertEquals(1, (int) Storage.storageMap.get(fruit));
     }
 }

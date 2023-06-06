@@ -1,19 +1,19 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
-    private SupplyHandler supplyHandler;
+    private static SupplyHandler supplyHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         supplyHandler = new SupplyHandler();
     }
 
@@ -53,6 +53,6 @@ class SupplyHandlerTest {
         int amountInStorage = 10;
         Storage.storageMap.put(fruit, amountInStorage);
         supplyHandler.handle(fruitTransaction);
-        assertTrue(quantityToSupply + amountInStorage == Storage.storageMap.get(fruit));
+        assertEquals(quantityToSupply + amountInStorage, (int) Storage.storageMap.get(fruit));
     }
 }

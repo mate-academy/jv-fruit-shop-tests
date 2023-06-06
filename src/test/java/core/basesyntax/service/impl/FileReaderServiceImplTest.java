@@ -2,26 +2,26 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
     private static final String INVALID_FILE_PATH = "";
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty-file.csv";
-    private static final String EXAMPLE_FILE_PATH = "src/test/resources/example-file.csv";
-    private FileReaderServiceImpl fileReaderService;
+    private static final String VALID_FILE_PATH = "src/test/resources/example-file.csv";
+    private static FileReaderServiceImpl fileReaderService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         fileReaderService = new FileReaderServiceImpl();
     }
 
@@ -42,20 +42,19 @@ class FileReaderServiceImplTest {
     @DisplayName("Checking for reading empty file")
     @Test
     void readLinesFromFile_emptyFile_ok() {
-        List<String> expected = Collections.emptyList();
         List<String> actual = fileReaderService.readLinesFromFile(EMPTY_FILE_PATH);
-        assertEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 
     @DisplayName("Checking for reading example data")
     @Test
     void readLinesFromFile_exampleData_ok() {
-        List<String> expected = readLines(EXAMPLE_FILE_PATH);
-        List<String> actual = fileReaderService.readLinesFromFile(EXAMPLE_FILE_PATH);
+        List<String> expected = readLines(VALID_FILE_PATH);
+        List<String> actual = fileReaderService.readLinesFromFile(VALID_FILE_PATH);
         assertEquals(expected, actual);
     }
 
-    private static List<String> readLines(String filePath) {
+    private List<String> readLines(String filePath) {
         try (Stream<String> stream = Files.lines(Path.of(filePath))) {
             return stream.collect(Collectors.toList());
         } catch (IOException e) {

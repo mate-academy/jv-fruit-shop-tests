@@ -6,30 +6,22 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private OperationStrategyImpl operationStrategy;
-    private BalanceHandler balanceHandler;
-    private SupplyHandler supplyHandler;
-    private PurchaseHandler purchaseHandler;
-    private ReturnHandler returnHandler;
-    private FruitTransaction fruitTransaction;
+    private static OperationStrategyImpl operationStrategy;
+    private static FruitTransaction fruitTransaction;
 
-    @BeforeEach
-    void setUp() {
-        balanceHandler = new BalanceHandler();
-        supplyHandler = new SupplyHandler();
-        purchaseHandler = new PurchaseHandler();
-        returnHandler = new ReturnHandler();
+    @BeforeAll
+    static void beforeAll() {
         fruitTransaction = new FruitTransaction();
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, balanceHandler,
-                FruitTransaction.Operation.SUPPLY, supplyHandler,
-                FruitTransaction.Operation.PURCHASE, purchaseHandler,
-                FruitTransaction.Operation.RETURN, returnHandler
+                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler()
         );
         operationStrategy = new OperationStrategyImpl(handlerMap);
     }
@@ -45,8 +37,9 @@ class OperationStrategyImplTest {
     @Test
     void getHandler_balanceTransaction_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        OperationHandler expected = balanceHandler;
-        OperationHandler actual = operationStrategy.getHandler(fruitTransaction);
+        Class<BalanceHandler> expected = BalanceHandler.class;
+        Class<? extends OperationHandler> actual =
+                operationStrategy.getHandler(fruitTransaction).getClass();
         assertEquals(expected, actual);
     }
 
@@ -54,8 +47,9 @@ class OperationStrategyImplTest {
     @Test
     void getHandler_supplyTransaction_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        OperationHandler expected = supplyHandler;
-        OperationHandler actual = operationStrategy.getHandler(fruitTransaction);
+        Class<SupplyHandler> expected = SupplyHandler.class;
+        Class<? extends OperationHandler> actual =
+                operationStrategy.getHandler(fruitTransaction).getClass();
         assertEquals(expected, actual);
     }
 
@@ -63,8 +57,9 @@ class OperationStrategyImplTest {
     @Test
     void getHandler_purchaseTransaction_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        OperationHandler expected = purchaseHandler;
-        OperationHandler actual = operationStrategy.getHandler(fruitTransaction);
+        Class<PurchaseHandler> expected = PurchaseHandler.class;
+        Class<? extends OperationHandler> actual =
+                operationStrategy.getHandler(fruitTransaction).getClass();
         assertEquals(expected, actual);
     }
 
@@ -72,8 +67,9 @@ class OperationStrategyImplTest {
     @Test
     void getHandler_returnTransaction_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        OperationHandler expected = returnHandler;
-        OperationHandler actual = operationStrategy.getHandler(fruitTransaction);
+        Class<ReturnHandler> expected = ReturnHandler.class;
+        Class<? extends OperationHandler> actual =
+                operationStrategy.getHandler(fruitTransaction).getClass();
         assertEquals(expected, actual);
     }
 }

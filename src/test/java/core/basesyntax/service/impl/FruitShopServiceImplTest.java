@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,15 +14,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceImplTest {
-    private FruitShopServiceImpl fruitShopService;
+    private static FruitShopServiceImpl fruitShopService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceHandler()
         );
@@ -57,7 +58,7 @@ class FruitShopServiceImplTest {
         List<FruitTransaction> fruitTransactions = List.of(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, fruit, quantity));
         fruitShopService.process(fruitTransactions);
-        assertTrue(quantity == Storage.storageMap.get(fruit));
+        assertEquals(quantity, (int) Storage.storageMap.get(fruit));
     }
 
     @DisplayName("Checking for processing list with multiple fruits transactions")
@@ -73,6 +74,6 @@ class FruitShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, fruit, quantity3)
         );
         fruitShopService.process(fruitTransactions);
-        assertTrue(quantity3 == Storage.storageMap.get(fruit));
+        assertEquals(quantity3, (int) Storage.storageMap.get(fruit));
     }
 }

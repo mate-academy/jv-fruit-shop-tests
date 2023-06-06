@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnImplTest {
-    private ReturnImpl returnImpl;
-    private FruitTransaction fruitTransaction;
+    private static ReturnImpl returnImpl;
+    private static FruitTransaction fruitTransaction;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         returnImpl = new ReturnImpl();
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 15);
     }
@@ -36,8 +36,8 @@ class ReturnImplTest {
                 returnImpl.calculateFruitOperation(fruitTransaction));
     }
 
-    @AfterEach
-    public void afterEach() {
+    @AfterAll
+    static void afterAll() {
         Storage.fruitStorage.clear();
     }
 }

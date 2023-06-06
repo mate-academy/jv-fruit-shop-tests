@@ -1,26 +1,28 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     public static final String PATH_TO_REPORT_FILE_TEST = "src/test/resources/testReportFile.csv";
-    private WriterServiceImpl writerService;
+    private static WriterServiceImpl writerService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         writerService = new WriterServiceImpl();
     }
 
     @Test
     void writerService_wrongPathToFile_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> writerService.writeToFile("test/resources/", "report")
         );
@@ -33,11 +35,11 @@ class WriterServiceImplTest {
                         + "banana,152 "
                         + "apple,120";
         writerService.writeToFile(PATH_TO_REPORT_FILE_TEST, excepted);
-        String actual = validData(PATH_TO_REPORT_FILE_TEST);
-        Assertions.assertEquals(excepted, actual);
+        String actual = readData(PATH_TO_REPORT_FILE_TEST);
+        assertEquals(excepted, actual);
     }
 
-    private String validData(String path) {
+    private String readData(String path) {
         try {
             List<String> strList = Files.readAllLines(Path.of(path));
             return strList.stream()

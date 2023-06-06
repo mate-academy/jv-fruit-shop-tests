@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceImplTest {
-    private BalanceImpl balance;
-    private FruitTransaction fruitTransaction;
+    private static BalanceImpl balance;
+    private static FruitTransaction fruitTransaction;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         balance = new BalanceImpl();
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 5);
     }
@@ -34,8 +34,8 @@ class BalanceImplTest {
         assertEquals(expectedQuantity, actualQuantity);
     }
 
-    @AfterEach
-    public void afterEach() {
+    @AfterAll
+    static void afterAll() {
         Storage.fruitStorage.clear();
     }
 }

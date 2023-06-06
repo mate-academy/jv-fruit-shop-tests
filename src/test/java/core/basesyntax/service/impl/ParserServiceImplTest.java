@@ -7,18 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
-    private ParserServiceImpl parserService;
-    private List<FruitTransaction> fruitTransactionList;
+    private static ParserServiceImpl parserService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         parserService = new ParserServiceImpl();
-        fruitTransactionList = new ArrayList<>();
     }
 
     @Test
@@ -28,6 +25,7 @@ class ParserServiceImplTest {
         transactionStrings.add("s,banana,2");
         transactionStrings.add("p,apple,11");
         transactionStrings.add("r,banana,22");
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 1));
         fruitTransactionList.add(
@@ -43,8 +41,8 @@ class ParserServiceImplTest {
 
     @Test
     void parse_emptyString_Ok() {
-        List<FruitTransaction> parsedTransactions = parserService.parseData(new ArrayList<>());
-        assertTrue(parsedTransactions.isEmpty());
+        List<FruitTransaction> actual = parserService.parseData(new ArrayList<>());
+        assertTrue(actual.isEmpty());
     }
 
     @Test
@@ -56,10 +54,5 @@ class ParserServiceImplTest {
     public void getTransactions_unknownOperation_notOk() {
         List<String> unknownOperation = List.of("type,fruit,quantity", "c,apple,100");
         assertThrows(RuntimeException.class, () -> parserService.parseData(unknownOperation));
-    }
-
-    @AfterEach
-    void tearDown() {
-        fruitTransactionList.clear();
     }
 }

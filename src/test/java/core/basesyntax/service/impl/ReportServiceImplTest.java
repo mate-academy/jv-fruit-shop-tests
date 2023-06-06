@@ -4,17 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
     private static ReportServiceImpl reportService;
     private static Storage storage;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reportService = new ReportServiceImpl();
-        storage = new Storage();
     }
 
     @Test
@@ -26,6 +25,7 @@ class ReportServiceImplTest {
 
     @Test
     public void reportService_createReport_ok() {
+        storage = new Storage();
         storage.put("apple", 1);
         storage.put("banana", 2);
         String expectedReport = "fruit,quantity" + System.lineSeparator()

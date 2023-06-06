@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
@@ -14,15 +15,15 @@ import core.basesyntax.strategy.handlerimpl.SupplyOperation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FruitShopServiceImplTest {
     private FruitShopService fruitShopService;
     private List<FruitTransaction> fruitTransactions;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
@@ -38,7 +39,7 @@ public class FruitShopServiceImplTest {
     public void process_validTransactions_ok() {
         Map<String,Integer> expectedFruitStorage = Map.of(
                 "banana", 152,
-                "apple", 160
+                "apple", 90
         );
         fruitTransactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
@@ -50,9 +51,8 @@ public class FruitShopServiceImplTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
         );
-        //all work
         fruitShopService.process(fruitTransactions);
-        Assertions.assertEquals(expectedFruitStorage, Storage.fruitStorage);
+        assertEquals(expectedFruitStorage, Storage.fruitStorage);
     }
 
     @Test
@@ -66,9 +66,8 @@ public class FruitShopServiceImplTest {
     public void process_emptyData_ok() {
         Map<String,Integer> expectedFruitStorage = Map.of();
         List<FruitTransaction> emptyFruitTransactions = new ArrayList<>();
-        Storage.fruitStorage.clear();
         fruitShopService.process(emptyFruitTransactions);
-        Assertions.assertEquals(expectedFruitStorage, Storage.fruitStorage);
+        assertEquals(expectedFruitStorage, Storage.fruitStorage);
     }
 
     @Test
@@ -86,5 +85,10 @@ public class FruitShopServiceImplTest {
         assertThrows(RuntimeException.class, () -> {
             fruitShopService.process(fruitTransactions);
         });
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

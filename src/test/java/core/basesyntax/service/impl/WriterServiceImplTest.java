@@ -1,26 +1,28 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class WriterServiceImplTest {
     private static final String OUTPUT_DATA_FILE_TEST = "src/test/resources/testOutput.csv";
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         writerService = new WriterServiceImpl();
     }
 
     @Test
     public void writeToFile_wrongPathToFile_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 RuntimeException.class,
                 () -> writerService.writeToFile("test/src/test/test.csv", "content")
         );
@@ -38,7 +40,7 @@ public class WriterServiceImplTest {
                 "orange,20"
         );
         List<String> actual = readFromFile(OUTPUT_DATA_FILE_TEST);
-        Assertions.assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 
     private List<String> readFromFile(String pathToFile) {

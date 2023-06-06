@@ -1,20 +1,22 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class TransactionServiceImplTest {
-    private List<String> dataList;
-    private List<FruitTransaction> fruitTransactions;
-    private TransactionService dataParserService;
+    private static List<String> dataList;
+    private static List<FruitTransaction> fruitTransactions;
+    private static TransactionService dataParserService;
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         dataList = new ArrayList<>();
         fruitTransactions = new ArrayList<>();
         dataParserService = new TransactionServiceImpl();
@@ -44,16 +46,16 @@ public class TransactionServiceImplTest {
                 "s,banana,50"
         );
         List<FruitTransaction> actualTransactions = dataParserService.parseTransactions(dataList);
-        Assertions.assertEquals(fruitTransactions.size(), actualTransactions.size());
+        assertEquals(fruitTransactions.size(), actualTransactions.size());
 
         FruitTransaction actual;
         FruitTransaction expected;
         for (int i = 0; i < fruitTransactions.size(); ++i) {
             actual = actualTransactions.get(i);
             expected = fruitTransactions.get(i);
-            Assertions.assertEquals(expected.getFruit(), actual.getFruit());
-            Assertions.assertEquals(expected.getOperation(), actual.getOperation());
-            Assertions.assertEquals(expected.getQuantity(), actual.getQuantity());
+            assertEquals(expected.getFruit(), actual.getFruit());
+            assertEquals(expected.getOperation(), actual.getOperation());
+            assertEquals(expected.getQuantity(), actual.getQuantity());
         }
     }
 
@@ -64,7 +66,7 @@ public class TransactionServiceImplTest {
                 "invalid_row",
                 "s,banana,100"
         );
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataParserService.parseTransactions(input));
     }
 }

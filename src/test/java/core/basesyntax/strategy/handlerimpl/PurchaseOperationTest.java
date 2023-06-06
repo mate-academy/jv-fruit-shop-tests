@@ -1,31 +1,46 @@
 package core.basesyntax.strategy.handlerimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationTest {
-    private static OperationStrategy operationStrategy;
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private PurchaseOperation purchaseOperation;
 
-    @BeforeClass
-    public static void setUp() {
-        operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation());
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+    @BeforeEach
+    public void setUp() {
+        purchaseOperation = new PurchaseOperation();
     }
 
     @Test
-    public void get_purchaseOperationHandler_ok() {
-        OperationHandler expectedHandler = new PurchaseOperation();
-        OperationHandler actualHandler = operationStrategy.get(FruitTransaction.Operation.PURCHASE);
-        Assertions.assertEquals(expectedHandler.getClass(), actualHandler.getClass());
+    public void validTransaction_updatesFruitStorage_ok() {
+        Storage.fruitStorage.put("banana", 10);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "banana", 4);
+        Map<String, Integer> initialFruitStorage = new HashMap<>(Storage.fruitStorage);
+        purchaseOperation.operate(fruitTransaction);
+        int expectedQuantity = initialFruitStorage.getOrDefault("banana", 0) - 4;
+        assertEquals(expectedQuantity, Storage.fruitStorage.getOrDefault("banana", 0));
+    }
+
+    @Test
+    public void operate_negativeQuantity_notOk() {
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "banana", -15);
+        assertThrows(RuntimeException.class, () -> {
+            purchaseOperation.operate(fruitTransaction);
+        });
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitStorage.clear();
     }
 }

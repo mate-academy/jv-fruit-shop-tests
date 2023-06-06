@@ -47,3 +47,4 @@ class FruitServiceImplTest {
         assertEquals(expected, actual);
     }
 }
+

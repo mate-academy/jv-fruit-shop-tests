@@ -12,7 +12,8 @@ import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
 import core.basesyntax.service.strategy.OperationHandlerStrategy;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
@@ -20,13 +21,12 @@ class SupplyOperationHandlerTest {
     private static FruitTransactionProcessorImpl fruitTransactionProcessor;
     private static Storage storage;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         storage = new MapStorage();
         FruitService fruitService = new FruitServiceImpl(storage);
         OperationHandlerStrategy strategy = new OperationHandlerStrategyImpl(
-                Map.of(
-                        FruitTransaction.Operation.BALANCE,
+                Map.of(FruitTransaction.Operation.BALANCE,
                         new BalanceOperationHandler(fruitService),
                         FruitTransaction.Operation.SUPPLY,
                         new SupplyOperationHandler(fruitService)
@@ -35,6 +35,12 @@ class SupplyOperationHandlerTest {
         fruitTransactionProcessor = new FruitTransactionProcessorImpl(
                 strategy
         );
+    }
+
+    @AfterEach
+    void afterEach() {
+        MapStorage mapStorage = (MapStorage) storage;
+        mapStorage.clear();
     }
 
     @Test

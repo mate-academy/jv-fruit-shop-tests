@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,14 +16,12 @@ import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionProcessorImplTest {
     private static FruitTransactionProcessorImpl fruitTransactionProcessor;
     private static Storage storage;
-    private static final String INVALID_FRUIT_NAME = "watermelon";
     private static final String INVALID_OPERATION_CODE = "j";
     private static final String VALID_OPERATION_CODE = "s";
 
@@ -58,7 +57,7 @@ class FruitTransactionProcessorImplTest {
         FruitTransaction.Operation actual = FruitTransaction.Operation
                 .getByCode(VALID_OPERATION_CODE);
         FruitTransaction.Operation expected = FruitTransaction.Operation.SUPPLY;
-        Assertions.assertEquals(actual, expected);
+        assertEquals(actual, expected);
     }
 
     @Test

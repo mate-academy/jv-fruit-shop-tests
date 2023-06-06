@@ -10,6 +10,10 @@ public class MapStorage implements Storage {
         this.fruitsMap = new HashMap<>();
     }
 
+    public void clear() {
+        fruitsMap.clear();
+    }
+
     @Override
     public void add(String fruit, Integer quantity) {
         fruitsMap.put(fruit, quantity);

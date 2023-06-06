@@ -1,9 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ class ReportServiceImplTest {
     void generateReport_emptyStorage_ok() {
         String expected = "fruit,quantity";
         String actual = reportService.generateReport(Collections.emptyMap());
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -33,6 +34,6 @@ class ReportServiceImplTest {
         String actual = reportService.generateReport(storage);
         expected = expected.replaceAll("\\R", System.lineSeparator());
         actual = actual.replaceAll("\\R", System.lineSeparator());
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

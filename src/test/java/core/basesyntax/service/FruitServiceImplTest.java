@@ -17,12 +17,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceImplTest {
-    private static ProductDao productDao;
-    private static OperationStrategy operationStrategy;
     private static FruitService fruitService;
 
     @BeforeAll
     static void setUp() {
+        ProductDao productDao;
+        OperationStrategy operationStrategy;
         productDao = new ProductDaoImpl();
         operationStrategy = new OperationStrategy(productDao);
         fruitService = new FruitServiceImpl(operationStrategy);

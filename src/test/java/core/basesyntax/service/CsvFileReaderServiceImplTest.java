@@ -12,10 +12,14 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceImplTest {
     private static CsvFileReaderService fileReaderService;
-    private String correctFile = "src/main/java/core/basesyntax/resources/Correct.csv";
-    private String emptyFile = "src/main/java/core/basesyntax/resources/Empty.csv";
-    private String inCorrectFile = "src/main/java/core/basesyntax/resources/InCorrect.csv";
-    private String nonExistingFile = "src/main/java/core/basesyntax/resources/NullParameters.txt";
+    private final String correctFile
+            = "src/main/java/core/basesyntax/resources/Correct.csv";
+    private final String emptyFile
+            = "src/main/java/core/basesyntax/resources/Empty.csv";
+    private final String inCorrectFile
+            = "src/main/java/core/basesyntax/resources/InCorrect.csv";
+    private final String nonExistingFile
+            = "src/main/java/core/basesyntax/resources/NullParameters.txt";
 
     @BeforeAll
     static void setUp() {

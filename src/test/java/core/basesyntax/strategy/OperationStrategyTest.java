@@ -25,10 +25,10 @@ class OperationStrategyTest {
 
     @Test
     void getOperation_getBalanceOperation_ok() {
-        OperationService expected = new BalanceOperationServiceImpl(productDao);
+        Class<BalanceOperationServiceImpl> expected = BalanceOperationServiceImpl.class;
         OperationService actual = operationStrategy.getOperation(
                 new FruitTransaction(Operation.BALANCE, "banana", 10));
-        assertEquals(expected.getClass(), actual.getClass());
+        assertEquals(expected, actual.getClass());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -28,9 +29,8 @@ class ParserServiceImplTest {
     @Test
     void parseTransaction_withEmptyArgument_Ok() {
         List<String> argument = Collections.emptyList();
-        List<FruitTransaction> expected = Collections.emptyList();
         List<FruitTransaction> actual = parserService.parseTransaction(argument);
-        assertEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 
     @Test

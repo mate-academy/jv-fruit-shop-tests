@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.impl.ProductDaoImpl;
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.exception.NotEnoughProductsException;
@@ -16,13 +15,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationServiceImplTest {
-    private static ProductDao productDao;
     private static OperationService purchaseOperationService;
 
     @BeforeAll
     static void setUp() {
-        productDao = new ProductDaoImpl();
-        purchaseOperationService = new PurchaseOperationServiceImpl(productDao);
+        purchaseOperationService = new PurchaseOperationServiceImpl(new ProductDaoImpl());
     }
 
     @Test

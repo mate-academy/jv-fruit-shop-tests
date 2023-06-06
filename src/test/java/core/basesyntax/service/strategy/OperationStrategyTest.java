@@ -26,34 +26,34 @@ class OperationStrategyTest {
 
     @Test
     void getOperation_getBalanceOperation_ok() {
-        OperationHandler expected = new BalanceOperationHandler(productDao);
+        Class<BalanceOperationHandler> expected = BalanceOperationHandler.class;
         OperationHandler actual = operationStrategy.getOperation(
                 new FruitTransaction(Operation.BALANCE, "banana", 10));
-        assertEquals(expected.getClass(), actual.getClass());
+        assertEquals(expected, actual.getClass());
     }
 
     @Test
     void getOperation_getReturnOperation_ok() {
-        OperationHandler expected = new ReturnOperationHandler(productDao);
+        Class<ReturnOperationHandler> expected = ReturnOperationHandler.class;
         OperationHandler actual = operationStrategy.getOperation(
                 new FruitTransaction(Operation.RETURN, "banana", 10));
-        assertEquals(expected.getClass(), actual.getClass());
+        assertEquals(expected, actual.getClass());
     }
 
     @Test
     void getOperation_getSupplyOperation_ok() {
-        OperationHandler expected = new SupplyOperationHandler(productDao);
+        Class<SupplyOperationHandler> expected = SupplyOperationHandler.class;
         OperationHandler actual = operationStrategy.getOperation(
                 new FruitTransaction(Operation.SUPPLY, "banana", 10));
-        assertEquals(expected.getClass(), actual.getClass());
+        assertEquals(expected, actual.getClass());
     }
 
     @Test
     void getOperation_getPurchaseOperation_ok() {
-        OperationHandler expected = new PursheOperationHandler(productDao);
+        Class<PursheOperationHandler> expected = PursheOperationHandler.class;
         OperationHandler actual = operationStrategy.getOperation(
                 new FruitTransaction(Operation.PURCHASE, "banana", 10));
-        assertEquals(expected.getClass(), actual.getClass());
+        assertEquals(expected, actual.getClass());
     }
 
     @Test

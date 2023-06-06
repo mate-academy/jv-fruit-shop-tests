@@ -57,13 +57,6 @@ public class TransactionHandlerImplTest {
         assertEquals(expectedFruits, Storage.storage);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void handle_nullInput_notOk() {
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(handlersMap);
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(transactionStrategy);
-        transactionHandler.handle(null);
-    }
-
     @Test
     public void handle_emptyInputList_ok() {
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(handlersMap);

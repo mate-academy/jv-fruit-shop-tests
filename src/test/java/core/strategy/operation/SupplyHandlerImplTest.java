@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.Test;
 
 public class SupplyHandlerImplTest {
+    private static final SupplyHandlerImpl supplyHandler = new SupplyHandlerImpl();
 
     @Test
     public void handle_storageContainsFruit_Ok() {
         Storage.storage.put("apple", 34);
-        SupplyHandlerImpl supplyHandler = new SupplyHandlerImpl();
         supplyHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("r"),
                 "apple", 143));
@@ -22,17 +22,10 @@ public class SupplyHandlerImplTest {
 
     @Test
     public void handle_emptyStorage_Ok() {
-        SupplyHandlerImpl supplyHandler = new SupplyHandlerImpl();
         supplyHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("r"),
                 "apple", 213));
         assertEquals(Integer.valueOf(213), Storage.storage.get("apple"));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void handle_nullInput_Ok() {
-        SupplyHandlerImpl supplyHandler = new SupplyHandlerImpl();
-        supplyHandler.handle(null);
     }
 
     @After

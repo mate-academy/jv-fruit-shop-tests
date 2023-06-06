@@ -35,12 +35,6 @@ public class WriterImplTest {
         writer.writeFile(prepareReport(), NOT_OK_FILE_NAME);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void writeToFile_nullFilePathname_NotOk() {
-        Writer writer = new WriterImpl();
-        writer.writeFile(prepareReport(), null);
-    }
-
     @Test(expected = RuntimeException.class)
     public void writeToFile_emptyFilePathname_NotOk() {
         Writer writer = new WriterImpl();

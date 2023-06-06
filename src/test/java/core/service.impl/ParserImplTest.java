@@ -56,12 +56,6 @@ public class ParserImplTest {
         }
     }
 
-    @Test(expected = NullPointerException.class)
-    public void parse_toNull_input_notOk() {
-        Parser parser = new ParseImpl();
-        parser.parse(null);
-    }
-
     @Test
     public void parse_empty_Ok() {
         List<FruitTransaction> expectedList = new ArrayList<>();

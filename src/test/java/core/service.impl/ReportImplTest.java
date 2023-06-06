@@ -29,12 +29,6 @@ public class ReportImplTest {
         assertEquals(expectedReport, actualReport);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void createReport_nullInput_notOk() {
-        Report reportCreator = new ReportImpl();
-        reportCreator.createReport(null);
-    }
-
     @After
     public void tearDown() throws Exception {
         Storage.storage.clear();

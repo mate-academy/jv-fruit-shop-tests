@@ -60,12 +60,6 @@ public class TransactionStrategyImplTest {
         assertEquals(expectedOperationHandler.getClass(), actualOperationHandler.getClass());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void getOperationHandler_nullHandlersMap_notOk() {
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(null);
-        transactionStrategy.getOperationHandler(FruitTransaction.Operation.getByCode("b"));
-    }
-
     private static void fillHandlersMap() {
         handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl());
         handlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl());

@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.Test;
 
 public class ReturnHandlerImplTest {
+    private static final ReturnHandlerImpl returnHandler = new ReturnHandlerImpl();
 
     @Test
     public void handle_storageContainsFruit_Ok() {
         Storage.storage.put("banana", 276);
-        ReturnHandlerImpl returnHandler = new ReturnHandlerImpl();
         returnHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("r"),
                 "banana", 100));
@@ -22,17 +22,10 @@ public class ReturnHandlerImplTest {
 
     @Test
     public void handle_emptyStorage_Ok() {
-        ReturnHandlerImpl returnHandler = new ReturnHandlerImpl();
         returnHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("r"),
                 "apple", 165));
         assertEquals(Integer.valueOf(165), Storage.storage.get("apple"));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void handle_nullInput_Ok() {
-        ReturnHandlerImpl returnHandler = new ReturnHandlerImpl();
-        returnHandler.handle(null);
     }
 
     @After

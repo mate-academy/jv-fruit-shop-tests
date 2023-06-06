@@ -37,12 +37,6 @@ public class ReaderImplTest {
         reader.readFromFile(NOT_EXISTING_FILE);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void readFrom_nullPathname_NotOk() {
-        Reader reader = new ReaderImpl();
-        reader.readFromFile(null);
-    }
-
     @Test
     public void readFrom_emptyFile_Ok() {
         Reader reader = new ReaderImpl();

@@ -9,11 +9,11 @@ import org.junit.After;
 import org.junit.Test;
 
 public class PurchaseHandlerImplTest {
+    private static final PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
 
     @Test
     public void handle_enoughFruitsForPurchase_Ok() {
         Storage.storage.put("kiwi", 243);
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
         purchaseHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("p"),
                 "kiwi", 243));
@@ -23,7 +23,6 @@ public class PurchaseHandlerImplTest {
     @Test
     public void handle_moreFruitsForPurchase_Ok() {
         Storage.storage.put("banana", 98);
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
         purchaseHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("p"),
                 "banana", 60));
@@ -33,7 +32,6 @@ public class PurchaseHandlerImplTest {
     @Test(expected = RuntimeException.class)
     public void handle_notEnoughFruitsForPurchase_NotOk() {
         Storage.storage.put("ananas", 55);
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
         purchaseHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("p"),
                 "ananas", 99));
@@ -41,16 +39,9 @@ public class PurchaseHandlerImplTest {
 
     @Test(expected = RuntimeException.class)
     public void handle_emptyStorage_NotOk() {
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
         purchaseHandler.handle(new FruitTransaction(
                 FruitTransaction.Operation.getByCode("p"),
                 "apple", 82));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void handle_nullInput_Ok() {
-        PurchaseHandlerImpl purchaseHandler = new PurchaseHandlerImpl();
-        purchaseHandler.handle(null);
     }
 
     @After

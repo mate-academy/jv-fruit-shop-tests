@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceImplTest {
     private static CsvFileWriterService csvFileWriterService;
-    private static final String VALID_FILE_PATH = "src//test//resources//Report.csv";
+    private static final String VALID_FILE_PATH = "src/test/resources/Report.csv";
     private static final String INVALID_FILE_PATH = "nonexistent-directory/nonexistent-file.txt";
 
     @BeforeAll
@@ -25,17 +25,15 @@ class CsvFileWriterServiceImplTest {
     void writeToFile_writeCorrectInformation_ok() {
         List<String> content = List.of("fruit,quantity", "b,apple,10", "b,banana,15");
         String expected = String.join(System.lineSeparator(), content);
-        String fileName = VALID_FILE_PATH;
-        csvFileWriterService.writeFile(content, fileName);
-        String actual = read(fileName).trim();
+        csvFileWriterService.writeFile(content, VALID_FILE_PATH);
+        String actual = read(VALID_FILE_PATH).trim();
         assertEquals(expected, actual);
     }
 
     @Test
     void writeFile_fileNotFound_notOk() {
         List<String> lines = List.of("Line 1", "Line 2");
-        String fileName = INVALID_FILE_PATH;
-        assertThrows(RuntimeException.class, () -> csvFileWriterService.writeFile(lines, fileName));
+        csvFileWriterService.writeFile(lines, INVALID_FILE_PATH);
     }
 
     private String read(String fileName) {

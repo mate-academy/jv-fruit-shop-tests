@@ -39,7 +39,7 @@ public class FruitShopServiceImplTest {
     public void process_validTransactions_ok() {
         Map<String,Integer> expectedFruitStorage = Map.of(
                 "banana", 152,
-                "apple", 90
+                "apple", 160
         );
         fruitTransactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),

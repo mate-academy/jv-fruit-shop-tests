@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class ParserImplTest {
-    private static final Parser parser = new ParseImpl();;
+    private static final Parser parser = new ParseImpl();
 
     private void getExpectedList(List<FruitTransaction> fruitTransactionsList) {
         FruitTransaction fruitTransaction = new FruitTransaction(

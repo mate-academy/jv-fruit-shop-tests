@@ -2,7 +2,6 @@ package core.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.service.Reader;
 import core.basesyntax.service.impl.ReaderImpl;
 import java.util.ArrayList;
 import java.util.List;

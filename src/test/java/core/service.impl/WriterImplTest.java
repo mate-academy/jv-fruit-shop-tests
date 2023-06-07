@@ -10,14 +10,12 @@ import java.nio.file.Files;
 import org.junit.Test;
 
 public class WriterImplTest {
-
     private static final String OK_FILE_NAME = "src/test/resources/okFile.csv";
     private static final String NOT_OK_FILE_NAME = "src/tes/java/core/resources/OkFile.csv";
-    private static final String NOT_FILE_PATH_NAME = "";
+    private static final Writer writer = new WriterImpl();
 
     @Test
     public void writeToFile_Ok() {
-        Writer writer = new WriterImpl();
         writer.writeFile(prepareReport(), OK_FILE_NAME);
         File file = new File(OK_FILE_NAME);
         try {
@@ -31,19 +29,16 @@ public class WriterImplTest {
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_notExistingFilePathname_NotOk() {
-        Writer writer = new WriterImpl();
         writer.writeFile(prepareReport(), NOT_OK_FILE_NAME);
     }
 
     @Test(expected = RuntimeException.class)
     public void writeToFile_emptyFilePathname_NotOk() {
-        Writer writer = new WriterImpl();
-        writer.writeFile(prepareReport(), NOT_FILE_PATH_NAME);
+        writer.writeFile(prepareReport(), "");
     }
 
     @Test
     public void writeToFile_emptyReport_Ok() {
-        Writer writer = new WriterImpl();
         writer.writeFile("fruit,quantity", OK_FILE_NAME);
         File file = new File(OK_FILE_NAME);
         try {

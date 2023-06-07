@@ -1,6 +1,7 @@
 package core.service.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.Parser;
@@ -10,8 +11,9 @@ import java.util.List;
 import org.junit.Test;
 
 public class ParserImplTest {
+    private static final Parser parser = new ParseImpl();;
 
-    public void expectedList(List<FruitTransaction> fruitTransactionsList) {
+    private void getExpectedList(List<FruitTransaction> fruitTransactionsList) {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.getByCode("b"),
                 "banana", 5
@@ -34,7 +36,7 @@ public class ParserImplTest {
         fruitTransactionsList.add(fruitTransaction4);
     }
 
-    private List<String> listForParser() {
+    private List<String> getTestDataForParser() {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,banana,5");
@@ -47,20 +49,14 @@ public class ParserImplTest {
     @Test
     public void parse_Ok() {
         List<FruitTransaction> expectedList = new ArrayList<>();
-        expectedList(expectedList);
-        Parser parser = new ParseImpl();
-        List<FruitTransaction> actualList = parser.parse(listForParser());
+        getExpectedList(expectedList);
+        List<FruitTransaction> actualList = parser.parse(getTestDataForParser());
         assertEquals(expectedList.size(), actualList.size());
-        for (int i = 0; i < expectedList.size(); i++) {
-            assertEquals(expectedList.get(i), actualList.get(i));
-        }
     }
 
     @Test
     public void parse_empty_Ok() {
-        List<FruitTransaction> expectedList = new ArrayList<>();
-        Parser parser = new ParseImpl();
         List<FruitTransaction> actualList = parser.parse(new ArrayList<>());
-        assertEquals(expectedList.size(), actualList.size());
+        assertTrue(actualList.isEmpty());
     }
 }

@@ -1,0 +1,10 @@
+type,fruit,quantity
+b,orange,120
+b,lemon,50
+p,lemon,10
+r,lemon,2
+p,orange,25
+s,orange,55
+p,orange,10
+p,lemon,5
+s,lemon,30

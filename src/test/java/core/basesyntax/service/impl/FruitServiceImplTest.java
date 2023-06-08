@@ -24,7 +24,7 @@ class FruitServiceImplTest {
     @BeforeAll
     static void setUp() {
         storage = new StorageImpl();
-        strategy = new Strategy((StorageImpl) storage);
+        strategy = new Strategy(storage);
         fruitService = new FruitServiceImpl(strategy);
     }
 
@@ -47,4 +47,3 @@ class FruitServiceImplTest {
         assertEquals(expected, actual);
     }
 }
-

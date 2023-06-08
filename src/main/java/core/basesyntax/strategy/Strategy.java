@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.StorageImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.PurchaseOperation;
@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Strategy {
     private final Map<FruitTransaction.Operation, OperationProcessor> strategy;
-    private final StorageImpl productDao;
+    private final Storage productDao;
 
-    public Strategy(StorageImpl productDao) {
+    public Strategy(Storage productDao) {
         this.strategy = Map.of(
                 FruitTransaction.Operation.BALANCE,
                 new BalanceOperation(productDao),

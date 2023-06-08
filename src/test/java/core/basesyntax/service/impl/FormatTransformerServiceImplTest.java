@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
@@ -32,7 +33,7 @@ class FormatTransformerServiceImplTest {
         List<String> content = List.of();
         List<FruitTransaction> expected = List.of();
         List<FruitTransaction> actual = transformerService.formatData(content);
-        assertIterableEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 
     @Test
@@ -40,6 +41,7 @@ class FormatTransformerServiceImplTest {
         List<String> content = List.of("b,banana", "s,apple,10,extra");
         List<FruitTransaction> expected = List.of();
         List<FruitTransaction> actual = transformerService.formatData(content);
-        assertIterableEquals(expected, actual);
+        assertTrue(actual.isEmpty());
     }
 }
+

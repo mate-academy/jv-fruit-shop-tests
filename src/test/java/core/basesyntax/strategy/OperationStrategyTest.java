@@ -23,28 +23,28 @@ class OperationStrategyTest {
     }
 
     @Test
-    public void get_getBalanceOperationHandler_Ok() {
+    public void getBalanceHandler_Ok() {
         expectedOperationHandler = new BalanceOperationHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.BALANCE).getClass());
     }
 
     @Test
-    public void get_getPurchaseOperationHandler_Ok() {
+    public void getPurchaseHandler_Ok() {
         expectedOperationHandler = new PurchaseOperationHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.PURCHASE).getClass());
     }
 
     @Test
-    public void get_getReturnOperationHandler_Ok() {
+    public void getReturnHandler_Ok() {
         expectedOperationHandler = new ReturnOperationHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.RETURN).getClass());
     }
 
     @Test
-    public void get_getSupplyOperationHandler_Ok() {
+    public void getSupplyHandler_Ok() {
         expectedOperationHandler = new SupplyOperationHandler();
         assertEquals(expectedOperationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass());

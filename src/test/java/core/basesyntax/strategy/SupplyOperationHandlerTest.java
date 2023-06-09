@@ -44,7 +44,7 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void handle_negativeQuantity_notOk() {
+    void handle_negativQuantity_notOk() {
         fruitTransaction.setQuantity(-5);
         assertThrows(RuntimeException.class, () -> balanceHandler.handle(fruitTransaction));
     }

@@ -23,7 +23,6 @@ class FileWriterImplTest {
 
     @Test
     void writeFile_wrongPath_notOk() {
-        String wrongPath = "some_file.csv";
         assertThrows(RuntimeException.class,
                 () -> fileWriter
                         .writeFile(NON_EXISTING_FILE, "some content"));

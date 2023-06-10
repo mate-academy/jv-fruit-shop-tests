@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String NON_EXISTING_FILE = "src/test/nonExistingFile.csv";
+    private static final String NON_EXISTING_FILE = "invalid/file/path.csv";
     private static final String PATH_TO_OUTPUT_FILE = "src/test/java/resources/testOutput.csv";
     private static FileWriter fileWriter;
     

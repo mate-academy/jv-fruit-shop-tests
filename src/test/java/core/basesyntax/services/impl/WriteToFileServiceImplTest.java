@@ -29,6 +29,7 @@ class WriteToFileServiceImplTest {
 
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();
+
     @TempDir
     private Path tempDir;
 

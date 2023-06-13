@@ -11,22 +11,22 @@ import org.junit.jupiter.api.Test;
 
 public class FileServiceTests {
     private static final String DATA_INPUT_PATH =
-            "src/main/java/core/basesyntax/files/NormalData.txt";
+            "src/test/resources/NormalData.txt";
     private static final String NOT_EXIST_FILE_PATH =
-            "src/main/java/core/basesyntax/files/Path.txt";
+            "src/test/resources/Path.txt";
     private static final String DATA_OUTPUT_PATH =
-            "src/main/java/core/basesyntax/files/WrittenData.txt";
+            "src/test/resources/WrittenData.txt";
     private static final String DIRECTORY_PATH =
-            "src/main/java/core/basesyntax/files";
+            "ssrc/test/resources";
     private static final String FRUIT_DATA =
             "b,banana,100" + System.lineSeparator()
-            + "b,apple,29" + System.lineSeparator()
-            + "r,banana,10" + System.lineSeparator()
-            + "r,apple,4" + System.lineSeparator()
-            + "p,banana,20" + System.lineSeparator()
-            + "p,apple,10" + System.lineSeparator()
-            + "s,banana,20" + System.lineSeparator()
-            + "s,apple,20" + System.lineSeparator();
+                    + "b,apple,29" + System.lineSeparator()
+                    + "r,banana,10" + System.lineSeparator()
+                    + "r,apple,4" + System.lineSeparator()
+                    + "p,banana,20" + System.lineSeparator()
+                    + "p,apple,10" + System.lineSeparator()
+                    + "s,banana,20" + System.lineSeparator()
+                    + "s,apple,20" + System.lineSeparator();
     private static FileService fileService;
 
     @BeforeAll

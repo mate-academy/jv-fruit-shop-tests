@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +24,7 @@ class ValidationServiceImplTest {
     @BeforeEach
     void setUp() {
         testInput = null;
-        validInput = new ArrayList<>(Arrays.asList(
+        validInput = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
@@ -34,8 +33,7 @@ class ValidationServiceImplTest {
                 "r,apple,10",
                 "p,apple,20",
                 "p,banana,5",
-                "s,banana,50")
-        );
+                "s,banana,50");
     }
 
     @Test
@@ -45,33 +43,27 @@ class ValidationServiceImplTest {
 
     @Test
     void validationService_emptyEntriesData_notOk() {
-        testInput = new ArrayList<>(Arrays.asList(
-                "type,fruit,quantity",
-                "",
-                "")
-        );
+        testInput = List.of("type,fruit,quantity", "", "");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));
     }
 
     @Test
     void validationService_moreEntryColumnsData_notOk() {
-        testInput = new ArrayList<>(Arrays.asList(
+        testInput = List.of(
                 "type,fruit,quantity",
                 "b,banana,20,58",
                 "b,apple,100,89",
-                "s,banana,100,11")
-        );
+                "s,banana,100,11");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));
     }
 
     @Test
     void validationService_fewEntryColumnsData_notOk() {
-        testInput = new ArrayList<>(Arrays.asList(
+        testInput = List.of(
                 "type,fruit,quantity",
                 "b,banana",
                 "b,apple",
-                "s,banana")
-        );
+                "s,banana");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));
     }
 
@@ -116,15 +108,24 @@ class ValidationServiceImplTest {
         testInput = new ArrayList<>(validInput);
         testInput.add("s,banana,2 0");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));
+    }
 
+    @Test
+    void validationService_emptyQuantity_notOk() {
         testInput = new ArrayList<>(validInput);
         testInput.add("s,banana,");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));
+    }
 
+    @Test
+    void validationService_lettersQuantity_notOk() {
         testInput = new ArrayList<>(validInput);
         testInput.add("b,banana,af");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));
+    }
 
+    @Test
+    void validationService_negativeQuantity_notOk() {
         testInput = new ArrayList<>(validInput);
         testInput.add("b,banana,-8");
         assertThrows(RuntimeException.class, () -> validationService.validateInputData(testInput));

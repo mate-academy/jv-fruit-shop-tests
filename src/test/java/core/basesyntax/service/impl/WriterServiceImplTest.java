@@ -13,50 +13,47 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private static String testOutputFilePath;
-
+    private static final String TEST_OUTPUT_FILE_PATH = "src/test/resources/test-valid-report.csv";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static String reportHeader;
     private static WriterService writerService;
-    private static String lineSeparator;
 
     @BeforeAll
     static void beforeAll() {
-        testOutputFilePath = "src/test/resources/test-valid-report.csv";
         reportHeader = "fruit,quantity";
-        lineSeparator = System.lineSeparator();
         writerService = new WriterServiceImpl();
     }
 
     @BeforeEach
     void setUp() {
-        removeFile(testOutputFilePath);
+        removeFile(TEST_OUTPUT_FILE_PATH);
     }
 
     @Test
     void writerService_validData_ok() {
-        String report = reportHeader + lineSeparator + "banana,152" + lineSeparator + "apple,90";
-        writerService.writeToFile(report, testOutputFilePath);
-        String actual = readFromFile(testOutputFilePath);
+        String report = reportHeader + LINE_SEPARATOR + "banana,152" + LINE_SEPARATOR + "apple,90";
+        writerService.writeToFile(report, TEST_OUTPUT_FILE_PATH);
+        String actual = readFromFile(TEST_OUTPUT_FILE_PATH);
         assertEquals(report, actual);
     }
 
     @Test
     void writerService_emptyString_ok() {
         String report = "";
-        writerService.writeToFile(report, testOutputFilePath);
-        String actual = readFromFile(testOutputFilePath);
+        writerService.writeToFile(report, TEST_OUTPUT_FILE_PATH);
+        String actual = readFromFile(TEST_OUTPUT_FILE_PATH);
         assertEquals(report, actual);
     }
 
     @Test
     void writerService_null_notOk() {
         assertThrows(NullPointerException.class, () -> writerService
-                .writeToFile(null, testOutputFilePath));
+                .writeToFile(null, TEST_OUTPUT_FILE_PATH));
     }
 
     private String readFromFile(String path) {
         try {
-            return Files.readString(Path.of(testOutputFilePath));
+            return Files.readString(Path.of(TEST_OUTPUT_FILE_PATH));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

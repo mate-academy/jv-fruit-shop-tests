@@ -17,8 +17,8 @@ class ReportServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         reportHeader = "fruit,quantity";
-        reportService = new ReportServiceImpl();
         lineSeparator = System.lineSeparator();
+        reportService = new ReportServiceImpl();
     }
 
     @BeforeEach

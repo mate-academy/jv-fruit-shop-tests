@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 class BalanceHandlerImplTest {
     private static TransactionHandler balanceHandler;
-    private static String code;
+    private static String balanceCode;
 
     @BeforeAll
     static void beforeAll() {
         balanceHandler = new BalanceHandlerImpl();
-        code = "b";
+        balanceCode = "b";
     }
 
     @BeforeEach
@@ -30,9 +30,8 @@ class BalanceHandlerImplTest {
         String fruit = "banana";
         int quantity = 20;
         FruitTransaction transaction =
-                new FruitTransaction(code, fruit, quantity);
+                new FruitTransaction(balanceCode, fruit, quantity);
         balanceHandler.handleTransaction(transaction);
-
         assertEquals(Map.of(fruit, quantity), Storage.fruits);
     }
 
@@ -42,7 +41,7 @@ class BalanceHandlerImplTest {
         int quantity = 20;
         Storage.fruits.put(fruit, quantity);
         FruitTransaction transaction =
-                new FruitTransaction(code, fruit, quantity);
+                new FruitTransaction(balanceCode, fruit, quantity);
         assertThrows(RuntimeException.class, () -> balanceHandler.handleTransaction(transaction));
     }
 }

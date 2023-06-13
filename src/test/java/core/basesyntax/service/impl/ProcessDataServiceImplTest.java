@@ -26,14 +26,12 @@ class ProcessDataServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         processDataService = new ProcessDataServiceImpl();
-
         Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl(),
                 FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl(),
                 FruitTransaction.Operation.RETURN, new ReturnHandlerImpl()
         );
-
         transactionStrategy =
                 new TransactionStrategyImpl(transactionHandlersMap);
     }
@@ -51,7 +49,6 @@ class ProcessDataServiceImplTest {
                 new FruitTransaction("p", "banana", 5),
                 new FruitTransaction("s", "banana", 50)
         );
-
         expected = Map.of("banana", 152, "apple", 90);
     }
 

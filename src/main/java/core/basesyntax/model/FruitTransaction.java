@@ -88,6 +88,6 @@ public class FruitTransaction {
                 return value;
             }
         }
-        throw new RuntimeException("Can't find operation code: " + operationCode);
+        throw new IllegalArgumentException("Can't find operation code: " + operationCode);
     }
 }

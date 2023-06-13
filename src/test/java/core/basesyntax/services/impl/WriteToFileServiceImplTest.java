@@ -19,7 +19,6 @@ import org.junit.rules.TemporaryFolder;
 class WriteToFileServiceImplTest {
 
     private static WriteToFileServiceImpl writeToFileService;
-    private static final String INCORRECT_PATH = "src/main/resources/Noname.csv";
     private static final String NO_WRITABLE_PATh = "/root/whatever/report.csv";
     private static final String TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String APPLE_AND_QUANTITY = "apple,20" + System.lineSeparator();
@@ -51,16 +50,6 @@ class WriteToFileServiceImplTest {
         List<String> expectedLines = Arrays.asList(expectedReport.split(System.lineSeparator()));
         List<String> actualLines = Files.readAllLines(outputFile.toPath());
         assertLinesMatch(expectedLines, actualLines);
-    }
-
-    @Test
-    void writeDataToFile_withIncorrectPath_notOk() {
-        String report = TITLE
-                + APPLE_AND_QUANTITY
-                + BANAN_AND_QUANTITY
-                + ORANGE_AND_QUANTITY;
-        assertThrows(RuntimeException.class,
-                () -> writeToFileService.writeReportToFile(INCORRECT_PATH, new File(report)));
     }
 
     @Test

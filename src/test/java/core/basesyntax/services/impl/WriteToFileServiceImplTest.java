@@ -19,7 +19,7 @@ import org.junit.rules.TemporaryFolder;
 class WriteToFileServiceImplTest {
 
     private static WriteToFileServiceImpl writeToFileService;
-    private static final String INCORRECT_PATH = "src/main/resources/No_name.csv";
+    private static final String INCORRECT_PATH = "src/main/resources/No_Name.csv";
     private static final String NO_WRITABLE_PATh = "/root/whatever/report.csv";
     private static final String TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String APPLE_AND_QUANTITY = "apple,20" + System.lineSeparator();

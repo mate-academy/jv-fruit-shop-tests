@@ -26,10 +26,11 @@ class WriteToFileServiceImplTest {
     private static final String BANAN_AND_QUANTITY = "banana,50" + System.lineSeparator();
     private static final String ORANGE_AND_QUANTITY = "orange,30" + System.lineSeparator();
     private static final String REPORT_CSV = "report.csv";
+
+    @Rule
+    public TemporaryFolder tempFolder = new TemporaryFolder();
     @TempDir
     private Path tempDir;
-    @Rule
-    private TemporaryFolder tempFolder = new TemporaryFolder();
 
     @BeforeEach
     void setUp() {

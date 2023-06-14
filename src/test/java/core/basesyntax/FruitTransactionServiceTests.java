@@ -41,7 +41,6 @@ public class FruitTransactionServiceTests {
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static FruitTransactionService fruitTransactionService;
     private static OperationStrategy operationStrategy;
-    private Storage storage;
 
     @BeforeAll
     public static void beforeAll() {
@@ -72,7 +71,7 @@ public class FruitTransactionServiceTests {
 
     @BeforeEach
     public void setUp() {
-        storage = new Storage();
+        Storage.fruits.clear();
     }
 
     @Test

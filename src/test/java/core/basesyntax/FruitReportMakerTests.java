@@ -16,7 +16,6 @@ public class FruitReportMakerTests {
             + "banana,100" + System.lineSeparator()
             + "apple,24";
     private static FruitReportMaker fruitReportMaker;
-    private Storage storage;
 
     @BeforeAll
     public static void beforeAll() {
@@ -25,7 +24,7 @@ public class FruitReportMakerTests {
 
     @BeforeEach
     public void setUp() {
-        storage = new Storage();
+        Storage.fruits.clear();
     }
 
     @Test

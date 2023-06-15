@@ -13,7 +13,6 @@ import org.junit.Test;
 public class FileServiceImplTest {
     public static final String PATH_TO_READ_FILE = "src/test/resources/input_file";
     public static final String PATH_TO_WRITE_FILE = "src/test/resources/report_file";
-    public static final String WRONG_FILEPATH = "src/test/resources/wrong_file";
     public static final String REPORT_DATA = "fruits, quantity, banana,152, apple, 90";
     private FileService fileService;
 
@@ -31,15 +30,9 @@ public class FileServiceImplTest {
         assertEquals(expectedData, actualData);
     }
 
-    @Test
-    public void parseDataFromFile_wrongPath_NotOk() {
-        try {
-            fileService.parseDataFromFile(WRONG_FILEPATH);
-        } catch (Exception e) {
-            throw new RuntimeException("wrong path from file to read: "
-                    + WRONG_FILEPATH, e);
-        }
-
+    @Test(expected = RuntimeException.class)
+    public void parseDataFromFile_fileDoesNotExist_NotOk() {
+        fileService.parseDataFromFile(null);
     }
 
     @Test(expected = RuntimeException.class)
@@ -67,15 +60,9 @@ public class FileServiceImplTest {
         assertEquals(expectedData, actualData);
     }
 
-    @Test
-    public void writeDataToFile_wrongPath_NotOk() {
-        try {
-            fileService.writeDataToFile(REPORT_DATA, WRONG_FILEPATH);
-        } catch (Exception e) {
-            throw new RuntimeException("wrong path to write data: "
-                    + WRONG_FILEPATH, e);
-        }
-
+    @Test(expected = RuntimeException.class)
+    public void writeDataToFile_fileDoesNotExist_NotOk() {
+        fileService.writeDataToFile(REPORT_DATA, "");
     }
 
     @Test(expected = RuntimeException.class)

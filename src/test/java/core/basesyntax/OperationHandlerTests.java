@@ -102,6 +102,14 @@ public class OperationHandlerTests {
         Assertions.assertEquals(Operation.BALANCE, actual);
     }
 
+    @Test
+    void operation_getCode_notOk() {
+        String operationCodeWrong = "a";
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Operation.getCode(operationCodeWrong);
+        });
+    }
+
     @AfterEach
     public void afterEachTest() {
         fruitShopStorageDefault.clear();

@@ -65,5 +65,4 @@ public class FruitTransaction {
                 + ", quantity=" + quantity
                 + '}';
     }
-
 }

@@ -5,7 +5,6 @@ import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 public class WriterServiceImplTests {
     private static final String PATH_OUTPUT_FILE = "src/test/resources/reportTest.csv";
+    private static final String PATH_WRONG = "src/java/resources/reportTest.csv";
+    private static final String PATH_FILE_NOT_EXIST = "src/java/resources/reportTest.txt";
     private String valueOutputFile;
     private WriterService writerService;
 
@@ -27,8 +28,15 @@ public class WriterServiceImplTests {
     }
 
     @Test
+    void writeFile_fileNotExist_notOk() {
+        String value = "Some value";
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            writerService.writeValueToFile(PATH_FILE_NOT_EXIST, value);
+        });
+    }
+
+    @Test
     void writeFile_writeValue_ok() throws IOException {
-        WriterServiceImpl writerService = new WriterServiceImpl();
         String expectedValue = valueOutputFile;
         writerService.writeValueToFile(PATH_OUTPUT_FILE, expectedValue);
         List<String> lines = Files.readAllLines(Path.of(PATH_OUTPUT_FILE));
@@ -37,19 +45,10 @@ public class WriterServiceImplTests {
     }
 
     @Test
-    void writeFile_writeValue_notOk() {
-        writerService.writeValueToFile(PATH_OUTPUT_FILE, valueOutputFile);
-        try {
-            String fileContent = Files.readString(Paths.get(PATH_OUTPUT_FILE));
-            Assertions.assertEquals(valueOutputFile, fileContent);
-        } catch (IOException e) {
-            Assertions.fail("Failed to read file: " + PATH_OUTPUT_FILE);
-        } finally {
-            try {
-                Files.deleteIfExists(Paths.get(PATH_OUTPUT_FILE));
-            } catch (IOException e) {
-                Assertions.fail("Failed to delete file: " + PATH_OUTPUT_FILE);
-            }
-        }
+    void writeFile_wrongPath_notOk() throws IOException {
+        String expectedValue = valueOutputFile;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            writerService.writeValueToFile(PATH_WRONG, expectedValue);
+        });
     }
 }

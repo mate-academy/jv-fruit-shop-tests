@@ -98,6 +98,8 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/FruitTransaction*</exclude>
+                        <exclude>**/TransactionException*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

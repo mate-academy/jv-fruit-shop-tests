@@ -1,22 +1,21 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.service.WriterService;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String PATH_TO_WRITE = "src/test/resources/report.csv";
     private static final String WRONG_PATH = "src/test/report.csv";
-    private static final String REPORT = "fruit,quantity\n" +
-            "banana,152\n" +
-            "apple,90";
+    private static final String REPORT = "fruit,quantity\n"
+            + "banana,152\n"
+            + "apple,90";
     private static WriterService writerService;
 
     @BeforeAll

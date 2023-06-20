@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
-import core.basesyntax.strategy.Operation;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import core.basesyntax.strategy.Operation;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     private static final Operation VALID_OPERATION = Operation.BALANCE;

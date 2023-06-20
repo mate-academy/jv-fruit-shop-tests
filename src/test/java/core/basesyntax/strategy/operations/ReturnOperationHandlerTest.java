@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.operations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Operation;
@@ -7,7 +8,6 @@ import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ReturnOperationHandlerTest {
     private static final Operation VALID_OPERATION = Operation.RETURN;

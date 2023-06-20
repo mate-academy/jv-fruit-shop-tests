@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ParseService;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import core.basesyntax.service.ParseService;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class ParseServiceImplTest {
     private static final String TITLE = "type,fruit,quantity";
@@ -29,13 +29,15 @@ class ParseServiceImplTest {
     @Test
     void parseStringToTransactionListIsEmpty_NotOk() {
         List<String> transactions = new ArrayList<>();
-        assertThrows(RuntimeException.class, () -> parseService.parseStringsToTransactions(transactions));
+        assertThrows(RuntimeException.class,
+                () -> parseService.parseStringsToTransactions(transactions));
     }
 
     @Test
     void parseStringToTransactionListWithTitle_NotOk() {
         List<String> transactions = List.of(TITLE);
-        assertThrows(RuntimeException.class, () -> parseService.parseStringsToTransactions(transactions));
+        assertThrows(RuntimeException.class,
+                () -> parseService.parseStringsToTransactions(transactions));
     }
 
     @Test

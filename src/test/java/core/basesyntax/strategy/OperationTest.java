@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import org.junit.jupiter.api.Test;
 
 class OperationTest {
     private static final String BALANCE = "b";
@@ -19,7 +19,7 @@ class OperationTest {
     }
 
     @Test
-    void checkGetByCodeWithNull_NotOk(){
+    void checkGetByCodeWithNull_NotOk() {
         assertThrows(RuntimeException.class, () -> Operation.getByCode(null));
     }
 

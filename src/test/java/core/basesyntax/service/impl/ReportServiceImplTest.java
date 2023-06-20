@@ -8,7 +8,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
 class ReportServiceImplTest {
     private static final String TITLE = "fruit,quantity";
     private static final String FIRST_PAIR = "banana,152";

@@ -1,7 +1,8 @@
 package core.basesyntax.model;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.strategy.Operation;
 import org.junit.jupiter.api.Test;
 

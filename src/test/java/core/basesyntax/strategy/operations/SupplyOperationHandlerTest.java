@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.operations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Operation;

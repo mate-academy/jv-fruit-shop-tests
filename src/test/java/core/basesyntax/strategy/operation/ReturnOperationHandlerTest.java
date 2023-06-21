@@ -10,10 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
-    private static final String EXCEPTION_MESSAGE
-            = TransactionException.class.toString();
-    private static OperationHandler operationHandler;
-    private static FruitTransaction fruitTransaction;
+    private OperationHandler operationHandler;
+    private FruitTransaction fruitTransaction;
 
     @BeforeEach
     void setUp() {
@@ -23,7 +21,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handler_validReturning_Ok() {
+    void handler_validDataForReturnOperation_ok() {
         Storage.fruits.put("apple", 10);
         Integer expected = Storage.fruits.get(fruitTransaction.getFruit())
                 + fruitTransaction.getQuantity();
@@ -33,7 +31,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handler_validReturning_notOk() {
+    void handler_invalidDataForReturnOperation_notOk() {
         Storage.fruits.put("apple", 60);
         Integer expected = Storage.fruits.get(fruitTransaction.getFruit())
                 - fruitTransaction.getQuantity();
@@ -46,16 +44,14 @@ class ReturnOperationHandlerTest {
     void handler_negativeQuantityOfFruit_notOk() {
         Storage.fruits.put("apple", -15);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for negative quantity", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
     void handler_keyInStorageIsNull_notOk() {
         Storage.fruits.put(null, 15);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for null value in storage", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @AfterEach

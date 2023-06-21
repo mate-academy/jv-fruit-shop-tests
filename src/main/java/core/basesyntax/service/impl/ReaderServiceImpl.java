@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.TransactionException;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +11,6 @@ import java.util.Optional;
 public class ReaderServiceImpl implements ReaderService {
     private static final String VALID_FORMAT = ".csv";
     private static final String EXCEPTION_MESSAGE_FOR_FILEPATH = "FilePath argument is null";
-    private static final String EXCEPTION_MESSAGE_FOR_INCORRECT_PATH = "Can't create file: ";
     private static final String EXCEPTION_MESSAGE_FOR_READING = "Can't read data from file: ";
     private static final String EXCEPTION_MESSAGE_FOR_FILE_CONTENT = "Input file is empty: ";
     private static final String EXCEPTION_MESSAGE_FOR_FILE_FORMAT
@@ -24,12 +22,6 @@ public class ReaderServiceImpl implements ReaderService {
                 .orElseThrow(() -> new TransactionException(EXCEPTION_MESSAGE_FOR_FILEPATH));
         if (!sourceFile.endsWith(VALID_FORMAT)) {
             throw new TransactionException(EXCEPTION_MESSAGE_FOR_FILE_FORMAT + filePath);
-        }
-        File file = new File(sourceFile);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new TransactionException(EXCEPTION_MESSAGE_FOR_INCORRECT_PATH + file);
         }
         List<String> data;
         try {

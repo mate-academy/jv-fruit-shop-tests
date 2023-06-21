@@ -10,10 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
-    private static final String EXCEPTION_MESSAGE
-            = TransactionException.class.toString();
-    private static OperationHandler operationHandler;
-    private static FruitTransaction fruitTransaction;
+    private OperationHandler operationHandler;
+    private FruitTransaction fruitTransaction;
 
     @BeforeEach
     void setUp() {
@@ -26,36 +24,32 @@ class PurchaseOperationHandlerTest {
     void handler_keyInStorageIsNull_notOk() {
         Storage.fruits.put(null, 15);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for null value in storage", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
     void handler_inputFruitIsNull_notOk() {
         fruitTransaction.setFruit(null);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for null input value", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
     void handler_negativeQuantityOfFruit_notOk() {
         Storage.fruits.put("apple", -15);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for negative quantity", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
-    void handler_validSubtraction_notOk() {
+    void handler_invalidDataForPurchaseOperation_notOk() {
         Storage.fruits.put("apple", 5);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for incorrect subtraction", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
-    void handler_correctSupplying_Ok() {
+    void handler_validDataForPurchaseOperation_ok() {
         Storage.fruits.put("apple", 100);
         operationHandler.handle(fruitTransaction);
         Integer currentQuantity = fruitTransaction.getQuantity();

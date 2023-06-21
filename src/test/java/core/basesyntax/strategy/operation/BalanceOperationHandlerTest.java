@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-    private static final String EXCEPTION_MESSAGE
-            = TransactionException.class.toString();
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
 
@@ -25,31 +23,21 @@ class BalanceOperationHandlerTest {
     void handler_fruitIsNull_notOk() {
         fruitTransaction.setFruit(null);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for null value", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
     void handler_negativeQuantity_notOk() {
         fruitTransaction.setQuantity(-15);
         Assertions.assertThrows(TransactionException.class,
-                () -> operationHandler.handle(fruitTransaction),
-                String.format("%s should throw for negative value", EXCEPTION_MESSAGE));
+                () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
-    void handler_correctBalance_Ok() {
+    void handler_validDataForBalanceOperation_ok() {
         operationHandler.handle(fruitTransaction);
         Integer expected = fruitTransaction.getQuantity();
         Integer actual = Storage.fruits.get("apple");
         Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    void handler_correctBalance_notOk() {
-        operationHandler.handle(fruitTransaction);
-        Integer expected = fruitTransaction.getQuantity();
-        Integer actual = Storage.fruits.get("banana");
-        Assertions.assertNotEquals(expected, actual);
     }
 }

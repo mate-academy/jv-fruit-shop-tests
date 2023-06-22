@@ -7,7 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +26,8 @@ class PurchaseOperationHandlerTest {
         balance.handle(new FruitTransaction(Operation.BALANCE, VALID_FRUIT, VALID_QUANTITY));
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterEach
+    void tearDown() {
         Storage.getStorage().clear();
     }
 

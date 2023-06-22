@@ -6,7 +6,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +23,8 @@ class SupplyOperationHandlerTest {
         Storage.getStorage().put(VALID_FRUIT, VALID_QUANTITY);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @AfterEach
+    void tearDown() {
         Storage.getStorage().clear();
     }
 
@@ -35,5 +35,14 @@ class SupplyOperationHandlerTest {
         supplyHandler.handle(transaction);
         int expected = VALID_QUANTITY + SUPPLY_QUANTITY;
         assertEquals(expected, Storage.getStorage().get(transaction.getFruit()));
+    }
+
+    @Test
+    void checkHandleForEmptyStorage_Ok() {
+        Storage.getStorage().clear();
+        FruitTransaction transaction =
+                new FruitTransaction(VALID_OPERATION, VALID_FRUIT, SUPPLY_QUANTITY);
+        supplyHandler.handle(transaction);
+        assertEquals(SUPPLY_QUANTITY, Storage.getStorage().get(transaction.getFruit()));
     }
 }

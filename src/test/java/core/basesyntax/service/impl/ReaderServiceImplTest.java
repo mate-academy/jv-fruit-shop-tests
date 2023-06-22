@@ -16,10 +16,24 @@ class ReaderServiceImplTest {
     private static final String WRONG_PATH_1 = "src/test/resources/store.csv";
     private static final String WRONG_PATH_2 = "src/test/storeActivities.csv";
     private static ReaderService readerService;
+    private static List<String> expectedEmpty;
+    private static List<String> expectedTitle;
+    private static List<String> expectedFull;
 
     @BeforeAll
     static void beforeAll() {
         readerService = new ReaderServiceImpl();
+        expectedEmpty = new ArrayList<>();
+        expectedTitle = List.of("type,fruit,quantity");
+        expectedFull = List.of("type,fruit,quantity",
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
     }
 
     @Test
@@ -29,20 +43,9 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFileValidPath_Ok() {
-        List<String> expected = new ArrayList<>();
-        assertEquals(expected, readerService.readFromFile(EMPTY_PATH));
-        expected = List.of("type,fruit,quantity");
-        assertEquals(expected, readerService.readFromFile(TITLE_PATH));
-        expected = List.of("type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13",
-                "r,apple,10",
-                "p,apple,20",
-                "p,banana,5",
-                "s,banana,50");
-        assertEquals(expected, readerService.readFromFile(ACTIVITIES_PATH));
+        assertEquals(expectedEmpty, readerService.readFromFile(EMPTY_PATH));
+        assertEquals(expectedTitle, readerService.readFromFile(TITLE_PATH));
+        assertEquals(expectedFull, readerService.readFromFile(ACTIVITIES_PATH));
     }
 
     @Test

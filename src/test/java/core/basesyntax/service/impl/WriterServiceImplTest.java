@@ -40,13 +40,9 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeServiceValidPathAndReport_Ok() {
+    void writeServiceValidPathAndReport_Ok() throws IOException {
         writerService.writeToFile(PATH_TO_WRITE, REPORT);
         List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
-        try {
-            assertEquals(expected, Files.readAllLines(Paths.get(PATH_TO_WRITE)));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        assertEquals(expected, Files.readAllLines(Paths.get(PATH_TO_WRITE)));
     }
 }

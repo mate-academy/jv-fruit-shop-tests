@@ -55,12 +55,10 @@ class TransactionHandlerImplTest {
         firstTransaction.setFruit("banana");
         firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         firstTransaction.setValue(200);
-
         FruitTransaction secondTransaction = new FruitTransaction();
         secondTransaction.setFruit("banana");
         secondTransaction.setOperation(FruitTransaction.Operation.RETURN);
         secondTransaction.setValue(30);
-
         List<FruitTransaction> transactions = List.of(firstTransaction, secondTransaction);
         new TransactionHandlerImpl(strategy).parseStorage(transactions);
         boolean correct = Storage.FRUITS.get("banana").equals(230);
@@ -85,16 +83,25 @@ class TransactionHandlerImplTest {
         firstTransaction.setFruit("banana");
         firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         firstTransaction.setValue(200);
-
         FruitTransaction secondTransaction = new FruitTransaction();
         secondTransaction.setFruit("banana");
         secondTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         secondTransaction.setValue(30);
-
         List<FruitTransaction> transactions = List.of(firstTransaction, secondTransaction);
         new TransactionHandlerImpl(strategy).parseStorage(transactions);
         boolean correct = Storage.FRUITS.get("banana").equals(170);
         assertTrue(correct);
+    }
+
+    @Test
+    void parseStorage_purchaseBanana_NotOk() {
+        FruitTransaction secondTransaction = new FruitTransaction();
+        secondTransaction.setFruit("banana");
+        secondTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        secondTransaction.setValue(30);
+        List<FruitTransaction> transactions = List.of(secondTransaction);
+        assertThrows(RuntimeException.class,
+                () -> new TransactionHandlerImpl(strategy).parseStorage(transactions));
     }
 
     @Test

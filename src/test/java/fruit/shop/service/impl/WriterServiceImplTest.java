@@ -1,6 +1,7 @@
 package fruit.shop.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,5 +22,11 @@ class WriterServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read file.");
         }
+    }
+
+    @Test
+    void writeToFile_nullInput_NotOk() {
+        assertThrows(RuntimeException.class,
+                () -> new WriterServiceImpl().writeToFile(OUTPUT1, null));
     }
 }

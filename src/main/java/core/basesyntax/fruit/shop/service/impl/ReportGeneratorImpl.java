@@ -1,6 +1,6 @@
 package core.basesyntax.fruit.shop.service.impl;
 
-import fruit.shop.db.Storage;
+import core.basesyntax.fruit.shop.db.Storage;
 import core.basesyntax.fruit.shop.service.ReportGenerator;
 import java.util.Map;
 

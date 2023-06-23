@@ -1,6 +1,7 @@
 package core.basesyntax.fruit.shop.service;
 
-import fruit.shop.model.FruitTransaction;
+import core.basesyntax.fruit.shop.model.FruitTransaction;
+
 import java.util.List;
 
 public interface RecordsParser {

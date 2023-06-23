@@ -1,6 +1,6 @@
 package core.basesyntax.fruit.shop.service.impl;
 
-import fruit.shop.model.FruitTransaction;
+import core.basesyntax.fruit.shop.model.FruitTransaction;
 import core.basesyntax.fruit.shop.service.TransactionHandler;
 import core.basesyntax.fruit.shop.service.strategy.OperationHandler;
 import core.basesyntax.fruit.shop.service.strategy.OperationStrategy;

@@ -1,6 +1,7 @@
 package fruit.shop.service.impl;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import fruit.shop.db.Storage;
 import fruit.shop.model.FruitTransaction;

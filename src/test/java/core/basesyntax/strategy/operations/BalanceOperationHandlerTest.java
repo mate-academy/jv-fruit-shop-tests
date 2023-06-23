@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.operations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -27,7 +28,7 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void checkHandleValidTransaction_Ok() {
+    void handleValidTransaction_Ok() {
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, VALID_QUANTITY);
         balanceHandler.handle(transaction);

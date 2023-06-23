@@ -32,7 +32,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void checkHandleValidQuantity_Ok() {
+    void handleValidQuantity_Ok() {
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, VALID_PURCHASE);
         purchaseHandler.handle(transaction);
@@ -41,7 +41,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void checkHandleInvalidQuantity_NotOk() {
+    void handleQuantityLessThanInStorage_NotOk() {
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, INVALID_PURCHASE);
         assertThrows(RuntimeException.class, () -> purchaseHandler.handle(transaction));

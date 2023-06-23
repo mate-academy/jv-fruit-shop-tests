@@ -7,6 +7,7 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
+        checkTransaction(transaction);
         int currentQuantity = Storage.getStorage().get(transaction.getFruit());
         if (currentQuantity < transaction.getQuantity()) {
             throw new RuntimeException("You can buy only "

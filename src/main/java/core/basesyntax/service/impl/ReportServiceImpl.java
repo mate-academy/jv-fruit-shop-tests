@@ -13,9 +13,14 @@ public class ReportServiceImpl implements ReportService {
         Set<String> fruits = Storage.getStorage().keySet();
         StringBuilder report = new StringBuilder(TITLES);
         for (String fruit : fruits) {
+            if (Storage.getStorage().get(fruit) < 0) {
+                throw new RuntimeException(fruit
+                        + " quantity less than 0. Can't create valid report.");
+            }
             report.append(System.lineSeparator());
             report.append(fruit).append(COMMA_SEPARATOR).append(Storage.getStorage().get(fruit));
         }
         return report.toString();
     }
+
 }

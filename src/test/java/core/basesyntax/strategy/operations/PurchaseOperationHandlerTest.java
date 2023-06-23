@@ -9,6 +9,7 @@ import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
@@ -18,11 +19,16 @@ class PurchaseOperationHandlerTest {
     private static final int VALID_PURCHASE = 10;
     private static final int INVALID_PURCHASE = 50;
     private static OperationHandler purchaseHandler;
+    private static OperationHandler balance;
 
     @BeforeAll
     static void beforeAll() {
         purchaseHandler = new PurchaseOperationHandler();
-        OperationHandler balance = new BalanceOperationHandler();
+        balance = new BalanceOperationHandler();
+    }
+
+    @BeforeEach
+    void setUp() {
         balance.handle(new FruitTransaction(Operation.BALANCE, VALID_FRUIT, VALID_QUANTITY));
     }
 

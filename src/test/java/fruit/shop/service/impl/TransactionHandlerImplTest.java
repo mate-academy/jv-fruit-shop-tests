@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import fruit.shop.db.Storage;
 import fruit.shop.model.FruitTransaction;
+import fruit.shop.service.TransactionHandler;
 import fruit.shop.service.strategy.OperationHandler;
 import fruit.shop.service.strategy.OperationStrategy;
 import fruit.shop.service.strategy.impl.BalanceHandler;
@@ -21,15 +22,18 @@ import org.junit.jupiter.api.Test;
 
 class TransactionHandlerImplTest {
     private static OperationStrategy strategy;
+    private static TransactionHandler transactionHandler;
 
     @BeforeAll
     static void beforeAll() {
+
         Map<FruitTransaction.Operation, OperationHandler> fruitMap = new HashMap<>();
         fruitMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         fruitMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         fruitMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         fruitMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         strategy = new OperationStrategyImpl(fruitMap);
+        transactionHandler = new TransactionHandlerImpl(strategy);
     }
 
     @AfterEach
@@ -44,7 +48,7 @@ class TransactionHandlerImplTest {
         firstTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         firstTransaction.setValue(200);
         List<FruitTransaction> transactions = List.of(firstTransaction);
-        new TransactionHandlerImpl(strategy).parseStorage(transactions);
+        transactionHandler.parseStorage(transactions);
         boolean correct = Storage.FRUITS.get("banana").equals(200);
         assertTrue(correct);
     }
@@ -60,7 +64,7 @@ class TransactionHandlerImplTest {
         secondTransaction.setOperation(FruitTransaction.Operation.RETURN);
         secondTransaction.setValue(30);
         List<FruitTransaction> transactions = List.of(firstTransaction, secondTransaction);
-        new TransactionHandlerImpl(strategy).parseStorage(transactions);
+        transactionHandler.parseStorage(transactions);
         boolean correct = Storage.FRUITS.get("banana").equals(230);
         assertTrue(correct);
     }
@@ -72,7 +76,7 @@ class TransactionHandlerImplTest {
         firstTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
         firstTransaction.setValue(100);
         List<FruitTransaction> transactions = List.of(firstTransaction);
-        new TransactionHandlerImpl(strategy).parseStorage(transactions);
+        transactionHandler.parseStorage(transactions);
         boolean correct = Storage.FRUITS.get("banana").equals(100);
         assertTrue(correct);
     }
@@ -88,7 +92,7 @@ class TransactionHandlerImplTest {
         secondTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
         secondTransaction.setValue(30);
         List<FruitTransaction> transactions = List.of(firstTransaction, secondTransaction);
-        new TransactionHandlerImpl(strategy).parseStorage(transactions);
+        transactionHandler.parseStorage(transactions);
         boolean correct = Storage.FRUITS.get("banana").equals(170);
         assertTrue(correct);
     }
@@ -101,7 +105,7 @@ class TransactionHandlerImplTest {
         secondTransaction.setValue(30);
         List<FruitTransaction> transactions = List.of(secondTransaction);
         assertThrows(RuntimeException.class,
-                () -> new TransactionHandlerImpl(strategy).parseStorage(transactions));
+                () -> transactionHandler.parseStorage(transactions));
     }
 
     @Test
@@ -112,7 +116,7 @@ class TransactionHandlerImplTest {
         firstTransaction.setValue(5);
         List<FruitTransaction> transactions = List.of(firstTransaction);
         assertThrows(RuntimeException.class,
-                () -> new TransactionHandlerImpl(strategy).parseStorage(transactions));
+                () -> transactionHandler.parseStorage(transactions));
     }
 
     @Test
@@ -124,6 +128,6 @@ class TransactionHandlerImplTest {
         FruitTransaction secondTransaction = new FruitTransaction();
         List<FruitTransaction> transactions = List.of(firstTransaction, secondTransaction);
         assertThrows(RuntimeException.class,
-                () -> new TransactionHandlerImpl(strategy).parseStorage(transactions));
+                () -> transactionHandler.parseStorage(transactions));
     }
 }

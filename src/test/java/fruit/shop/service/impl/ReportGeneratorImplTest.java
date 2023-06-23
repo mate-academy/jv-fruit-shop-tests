@@ -3,11 +3,19 @@ package fruit.shop.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import fruit.shop.db.Storage;
+import fruit.shop.service.ReportGenerator;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    private static ReportGenerator reportGenerator;
     private static final String TITLE = "fruit,quantity\n";
+
+    @BeforeAll
+    static void beforeAll() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
 
     @AfterEach
     void cleanStorage() {
@@ -16,7 +24,7 @@ class ReportGeneratorImplTest {
 
     @Test
     void generateReport_emptyMap_Ok() {
-        assertEquals(TITLE, new ReportGeneratorImpl().generateReport());
+        assertEquals(TITLE, reportGenerator.generateReport());
     }
 
     @Test
@@ -28,6 +36,6 @@ class ReportGeneratorImplTest {
                 + "banana,150" + System.lineSeparator()
                 + "apple,70" + System.lineSeparator()
                 + "melon,30" + System.lineSeparator();
-        assertEquals(expected, new ReportGeneratorImpl().generateReport());
+        assertEquals(expected, reportGenerator.generateReport());
     }
 }

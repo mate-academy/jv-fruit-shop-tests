@@ -4,16 +4,25 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import fruit.shop.model.FruitTransaction;
+import fruit.shop.service.RecordsParser;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class RecordsParserTransactionTest {
+    private static RecordsParser recordsParser;
+
+    @BeforeAll
+    static void beforeAll() {
+        recordsParser = new RecordsParserTransaction();
+    }
+
     @Test
     void parseRecords_emptyList_Ok() {
         List<String> list = new ArrayList<>();
         List<FruitTransaction> expected = new ArrayList<>();
-        List<FruitTransaction> actual = new RecordsParserTransaction().parseRecords(list);
+        List<FruitTransaction> actual = recordsParser.parseRecords(list);
         assertEquals(expected, actual);
 
     }
@@ -24,7 +33,7 @@ class RecordsParserTransactionTest {
         list.add("o,fruit,12");
         list.add("l,test,7");
         assertThrows(RuntimeException.class,
-                () -> new RecordsParserTransaction().parseRecords(list));
+                () -> recordsParser.parseRecords(list));
     }
 
     @Test
@@ -33,7 +42,7 @@ class RecordsParserTransactionTest {
         list.add("b,fruit,three");
         list.add("p,test,two");
         assertThrows(NumberFormatException.class,
-                () -> new RecordsParserTransaction().parseRecords(list));
+                () -> recordsParser.parseRecords(list));
     }
 
     @Test
@@ -42,12 +51,12 @@ class RecordsParserTransactionTest {
         list.add("b-fruit-three");
         list.add("p-test-two");
         assertThrows(RuntimeException.class,
-                () -> new RecordsParserTransaction().parseRecords(list));
+                () -> recordsParser.parseRecords(list));
     }
 
     @Test
     void parseRecords_nullInput_Ok() {
         assertThrows(RuntimeException.class,
-                () -> new RecordsParserTransaction().parseRecords(null));
+                () -> recordsParser.parseRecords(null));
     }
 }

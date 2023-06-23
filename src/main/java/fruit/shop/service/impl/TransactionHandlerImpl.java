@@ -15,8 +15,15 @@ public class TransactionHandlerImpl implements TransactionHandler {
 
     public void parseStorage(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
+            if (!checkTransaction(transaction)) {
+                throw new RuntimeException("Wrong transaction!");
+            }
             OperationHandler handler = strategy.getOperationHandler(transaction.getOperation());
             handler.handleTransaction(transaction);
         }
+    }
+
+    private boolean checkTransaction(FruitTransaction transaction) {
+        return transaction.getFruit() != null && transaction.getOperation() != null;
     }
 }

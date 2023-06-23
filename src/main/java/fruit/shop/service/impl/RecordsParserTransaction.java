@@ -2,7 +2,6 @@ package fruit.shop.service.impl;
 
 import fruit.shop.model.FruitTransaction;
 import fruit.shop.service.RecordsParser;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package fruit.shop.service.impl;
 
-import fruit.shop.model.FruitTransaction;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
+import fruit.shop.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class RecordsParserTransactionTest {
     @Test
@@ -23,7 +23,8 @@ class RecordsParserTransactionTest {
         List<String> list = new ArrayList<>();
         list.add("o,fruit,12");
         list.add("l,test,7");
-        assertThrows(RuntimeException.class, () -> new RecordsParserTransaction().parseRecords(list));
+        assertThrows(RuntimeException.class,
+                () -> new RecordsParserTransaction().parseRecords(list));
     }
 
     @Test
@@ -31,7 +32,8 @@ class RecordsParserTransactionTest {
         List<String> list = new ArrayList<>();
         list.add("b,fruit,three");
         list.add("p,test,two");
-        assertThrows(NumberFormatException.class, () -> new RecordsParserTransaction().parseRecords(list));
+        assertThrows(NumberFormatException.class,
+                () -> new RecordsParserTransaction().parseRecords(list));
     }
 
     @Test
@@ -39,14 +41,13 @@ class RecordsParserTransactionTest {
         List<String> list = new ArrayList<>();
         list.add("b-fruit-three");
         list.add("p-test-two");
-        assertThrows(RuntimeException.class, () -> new RecordsParserTransaction().parseRecords(list));
+        assertThrows(RuntimeException.class,
+                () -> new RecordsParserTransaction().parseRecords(list));
     }
 
     @Test
     void parseRecords_nullInput_Ok() {
-        assertThrows(RuntimeException.class, () -> new RecordsParserTransaction().parseRecords(null));
-
+        assertThrows(RuntimeException.class,
+                () -> new RecordsParserTransaction().parseRecords(null));
     }
-
-
 }

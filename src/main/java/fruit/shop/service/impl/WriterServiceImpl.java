@@ -1,7 +1,6 @@
 package fruit.shop.service.impl;
 
 import fruit.shop.service.WriterService;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -7,7 +7,10 @@ import fruit.shop.service.strategy.OperationHandler;
 public class SupplyHandler implements OperationHandler {
     @Override
     public void handleTransaction(FruitTransaction transaction) {
-        int currentValue = Storage.FRUITS.get(transaction.getFruit());
+        int currentValue = 0;
+        if (Storage.FRUITS.containsKey(transaction.getFruit())) {
+            currentValue = Storage.FRUITS.get(transaction.getFruit());
+        }
         Storage.FRUITS.put(transaction.getFruit(), currentValue + transaction.getValue());
     }
 }

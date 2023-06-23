@@ -16,7 +16,6 @@ import fruit.shop.service.strategy.impl.OperationStrategyImpl;
 import fruit.shop.service.strategy.impl.PurchaseHandler;
 import fruit.shop.service.strategy.impl.ReturnHandler;
 import fruit.shop.service.strategy.impl.SupplyHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

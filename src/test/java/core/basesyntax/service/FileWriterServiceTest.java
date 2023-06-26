@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterServiceTest {
-    private static final String FILE_PATH = "src/test/java/resources/report.csv";
+    private static final String FILE_PATH = "src/test/resources/report.csv";
     private static List<String> expected;
     private static FileWriterService fileWriterService;
 
@@ -25,11 +24,25 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void writeToFile_ok() {
+    public void writeToFile_validPath_ok() {
         fileWriterService.writeToFile(FILE_PATH, expected);
-        File file = new File(FILE_PATH);
+        List<String> actualData = readFromFile(FILE_PATH);
+        assertEquals(expected, actualData);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_PathNull_notOK() {
+        fileWriterService.writeToFile(null, expected);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void writeToFile_dataInvalid_notOk() {
+        fileWriterService.writeToFile(FILE_PATH, null);
+    }
+
+    private List<String> readFromFile(String filePath) {
         List<String> actualData = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 actualData.add(line);
@@ -40,16 +53,8 @@ public class FileWriterServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read file. " + e);
         }
-        assertEquals(expected, actualData);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void filePathNull_notOK() {
-        fileWriterService.writeToFile(null, expected);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void dataInvalid_notOk() {
-        fileWriterService.writeToFile(FILE_PATH, null);
+        return actualData;
     }
 }
+
+

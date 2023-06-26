@@ -8,8 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FilerReaderImplTest {
-    private static final String VALID_FILE_PATH = "src/test/java/resources/data.csv";
-    private static final String NOT_VALID_FILE_PATH = "src\\main\\resources\\noSuchFile.csv";
+    private static final String VALID_FILE_PATH = "src/test/resources/data.csv";
+    private static final String NOT_VALID_FILE_PATH = "src/main/resources/noSuchFile.csv";
     private static FileReaderService fileReaderService;
     private static List<String> dataFromList;
 

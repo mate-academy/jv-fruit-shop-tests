@@ -12,43 +12,50 @@ import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserImplTest {
     private static final String HEADER = "type;fruit;quantity";
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final String ORANGE = "orange";
+    private static final int QUANTITY1 = 50;
+    private static final int QUANTITY2 = 100;
+    private static final int QUANTITY3 = 30;
+    private static final int QUANTITY4 = 10;
     private final FruitTransactionParserImpl fruitTransactionParser =
             new FruitTransactionParserImpl();
     private final FruitTransaction fruitTransaction1 = new FruitTransaction(FruitTransaction
-            .Operation.BALANCE, "banana", 50);
+            .Operation.BALANCE, BANANA, QUANTITY1);
     private final String readLine1 = "b;banana;50";
     private final FruitTransaction fruitTransaction2 = new FruitTransaction(FruitTransaction
-            .Operation.BALANCE, "apple", 100);
+            .Operation.BALANCE, APPLE, QUANTITY2);
     private final String readLine2 = "b;apple;100";
     private final FruitTransaction fruitTransaction3 = new FruitTransaction(FruitTransaction
-            .Operation.BALANCE, "orange", 150);
+            .Operation.BALANCE, ORANGE, QUANTITY1 + QUANTITY2);
     private final String readLine3 = "b;orange;150";
     private final FruitTransaction fruitTransaction4 = new FruitTransaction(FruitTransaction
-            .Operation.SUPPLY, "banana", 30);
+            .Operation.SUPPLY, BANANA, QUANTITY3);
     private final String readLine4 = "s;banana;30";
     private final FruitTransaction fruitTransaction5 = new FruitTransaction(FruitTransaction
-            .Operation.SUPPLY, "apple", 40);
+            .Operation.SUPPLY, APPLE, QUANTITY3 + QUANTITY4);
     private final String readLine5 = "s;apple;40";
     private final FruitTransaction fruitTransaction6 = new FruitTransaction(FruitTransaction
-            .Operation.SUPPLY, "orange", 50);
+            .Operation.SUPPLY, ORANGE, QUANTITY1);
     private final String readLine6 = "s;orange;50";
     private final FruitTransaction fruitTransaction7 = new FruitTransaction(FruitTransaction
-            .Operation.PURCHASE, "banana", 30);
+            .Operation.PURCHASE, BANANA, QUANTITY3);
     private final String readLine7 = "p;banana;30";
     private FruitTransaction fruitTransaction8 =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 40);
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 40);
     private final String readLine8 = "p;apple;40";
     private final FruitTransaction fruitTransaction9 = new FruitTransaction(FruitTransaction
-            .Operation.PURCHASE, "orange", 50);
+            .Operation.PURCHASE, ORANGE, QUANTITY1);
     private final String readLine9 = "p;orange;50";
     private final FruitTransaction fruitTransaction10 = new FruitTransaction(FruitTransaction
-            .Operation.RETURN, "banana", 10);
+            .Operation.RETURN, BANANA, QUANTITY4);
     private final String readLine10 = "r;banana;10";
     private final FruitTransaction fruitTransaction11 = new FruitTransaction(FruitTransaction
-            .Operation.RETURN, "apple", 10);
+            .Operation.RETURN, APPLE, QUANTITY4);
     private final String readLine11 = "r;apple;10";
     private final FruitTransaction fruitTransaction12 = new FruitTransaction(FruitTransaction
-            .Operation.RETURN, "orange", 10);
+            .Operation.RETURN, ORANGE, QUANTITY4);
     private final String readLine12 = "r;orange;10";
 
     @Test

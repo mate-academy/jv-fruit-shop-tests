@@ -6,6 +6,6 @@ import core.basesyntax.service.transaction.FruitTransactionValidator;
 public class DefaultFruitTransactionValidator implements FruitTransactionValidator {
     @Override
     public boolean isValid(FruitTransaction fruitTransaction) {
-        return fruitTransaction.getQuantity() > 0;
+        return fruitTransaction != null && fruitTransaction.getQuantity() > 0;
     }
 }

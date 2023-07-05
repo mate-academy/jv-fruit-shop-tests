@@ -39,7 +39,8 @@ class PurchaseDataServiceTest {
         assertThrows(RuntimeException.class,
                 () -> dataService.processTransaction(fruitTransaction));
         Storage.fruitsStorage.put("apple",2);
-        fruitTransaction = new FruitTransaction("p","apple",3);
+        assertThrows(RuntimeException.class,
+                () -> dataService.processTransaction(fruitTransaction));
     }
 
     @Test

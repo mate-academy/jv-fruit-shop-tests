@@ -1,26 +1,16 @@
 package core.basesyntax.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.database.Storage;
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitDaoImplTest {
-    private static String expectedFruitName;
-    private static Integer expectedQuantity;
     private static FruitDao fruitDao = new FruitDaoImpl();
-
-    @BeforeAll
-    static void beforeAll() {
-        expectedFruitName = "Apple";
-        expectedQuantity = 5;
-    }
 
     @AfterEach
     void tearDown() {
@@ -29,25 +19,38 @@ class FruitDaoImplTest {
 
     @Test
     void put_correctFruit_Ok() {
+        String expectedFruitName = "Apple";
+        int expectedQuantity = 5;
         fruitDao.put(expectedFruitName, expectedQuantity);
-        assertTrue(Storage.fruitsStorage.containsKey(expectedFruitName));
+        assertEquals(expectedQuantity, Storage.fruitsStorage.get(expectedFruitName));
     }
 
     @Test
     void getFruitQuantity_correctFruit_Ok() {
+        String expectedFruitName = "Apple";
+        int expectedQuantity = 5;
         fruitDao.put(expectedFruitName, expectedQuantity);
         assertEquals(fruitDao.getFruitQuantity(expectedFruitName), expectedQuantity);
     }
 
     @Test
     void getFruitQuantity_notExistingFruit_notOk() {
+        String expectedFruitName = "Apple";
         assertThrows(RuntimeException.class,() -> fruitDao.getFruitQuantity(expectedFruitName));
     }
 
     @Test
     void getAll() {
-        Storage.fruitsStorage.put(expectedFruitName, expectedQuantity);
+        Map<String, Integer> expectedMap = new HashMap<>();
+        expectedMap.put("Apple",1);
+        expectedMap.put("Banana",2);
+        expectedMap.put("Orange",3);
+        expectedMap.put("Lemon",4);
+        for (Map.Entry<String, Integer> element : expectedMap.entrySet()) {
+            Storage.fruitsStorage.put(element.getKey(), element.getValue());
+        }
         Map<String, Integer> actualMap = fruitDao.getAll();
-        assertSame(actualMap.get(expectedFruitName), expectedQuantity);
+        expectedMap.entrySet().stream()
+                .forEach(e -> assertEquals(e.getValue(), actualMap.get(e.getKey())));
     }
 }

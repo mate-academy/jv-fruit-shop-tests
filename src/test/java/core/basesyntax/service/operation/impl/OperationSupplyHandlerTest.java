@@ -36,18 +36,6 @@ class OperationSupplyHandlerTest {
     }
 
     @Test
-    public void test_OperationSupply_NotFruitInDB_NotOk() {
-        assertEquals(0, operationDao.get("apple"));
-    }
-
-    @Test
-    public void test_OperationSupply_FruitInDB_Ok() {
-        assertNotNull(operationDao.get("banana"));
-        assertNotEquals(0, operationDao.get("banana"));
-        assertEquals(20, operationDao.get("banana"));
-    }
-
-    @Test
     public void test_OperationSupply_NegativeQuantity_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");

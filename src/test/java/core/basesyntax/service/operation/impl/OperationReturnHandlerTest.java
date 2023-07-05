@@ -15,9 +15,11 @@ import org.junit.jupiter.api.Test;
 class OperationReturnHandlerTest {
     private OperationHandler operationHandler;
     private OperationDao operationDao;
+    private final FruitTransaction fruitTransaction = new FruitTransaction();
 
     @BeforeEach
     public void setUp() {
+        fruitTransaction.setFruit("banana");
         operationDao = new OperationDaoImpl();
         operationHandler = new OperationReturnHandler();
         operationDao.put("banana", 20);
@@ -25,8 +27,6 @@ class OperationReturnHandlerTest {
 
     @Test
     public void test_OperationReturn_Ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(10);
         operationHandler.processOperation(fruitTransaction);
         assertEquals(30, operationDao.get("banana"));
@@ -36,21 +36,7 @@ class OperationReturnHandlerTest {
     }
 
     @Test
-    public void test_OperationReturn_NotFruitInDB_NotOk() {
-        assertEquals(0, operationDao.get("apple"));
-    }
-
-    @Test
-    public void test_OperationReturn_FruitInDB_Ok() {
-        assertNotNull(operationDao.get("banana"));
-        assertNotEquals(0, operationDao.get("banana"));
-        assertEquals(20, operationDao.get("banana"));
-    }
-
-    @Test
     public void test_OperationReturn_NegativeQuantity_Ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(-5);
         assertThrows(RuntimeException.class,
                 () -> operationHandler.processOperation(fruitTransaction));

@@ -11,16 +11,16 @@ public class FruitShopStrategyImpl {
 
     public FruitShopStrategyImpl() {
         fruitShopStrategy = new HashMap<>();
-        fruitShopStrategy.put(FruitTransaction.Operation.BALANCE, new BalanceStrategy());
-        fruitShopStrategy.put(FruitTransaction.Operation.SUPPLY, new SupplyStrategy());
-        fruitShopStrategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseStrategy());
-        fruitShopStrategy.put(FruitTransaction.Operation.RETURN, new ReturnStrategy());
+        fruitShopStrategy.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        fruitShopStrategy.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        fruitShopStrategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        fruitShopStrategy.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
     }
 
     public void processTransactions(List<FruitTransaction> transactions, ShopStorage fruitStorage) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = fruitShopStrategy.get(transaction.getOperation());
-            handler.doActivity(transaction, fruitStorage);
+            handler.handle(transaction, fruitStorage);
         }
     }
 }

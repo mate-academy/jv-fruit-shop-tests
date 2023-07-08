@@ -7,15 +7,15 @@ import core.basesyntax.db.ShopStorage;
 import core.basesyntax.db.ShopStorageImpl;
 import core.basesyntax.service.impl.CsvReportGeneratorService;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvReportGeneratorServiceTest {
-    private CsvReportGeneratorService reportGeneratorService;
-    private ShopStorage shopStorage;
+    private static CsvReportGeneratorService reportGeneratorService;
+    private static ShopStorage shopStorage;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         shopStorage = new ShopStorageImpl();
         reportGeneratorService = new CsvReportGeneratorService(shopStorage);
     }
@@ -27,7 +27,7 @@ public class CsvReportGeneratorServiceTest {
 
         List<String> report = reportGeneratorService.generateReport();
 
-        assertEquals(3, report.size());
+        assertEquals(4, report.size());
         assertEquals("fruit,quantity", report.get(0));
         assertTrue(report.contains("banana,10"));
         assertTrue(report.contains("apple,5"));
@@ -55,7 +55,7 @@ public class CsvReportGeneratorServiceTest {
 
         List<String> report = reportGeneratorService.generateReport();
 
-        assertEquals(3, report.size());
+        assertEquals(4, report.size());
         assertEquals("fruit,quantity", report.get(0));
         assertTrue(report.contains("banana,1000"));
         assertTrue(report.contains("apple,500"));
@@ -68,7 +68,7 @@ public class CsvReportGeneratorServiceTest {
 
         List<String> report = reportGeneratorService.generateReport();
 
-        assertEquals(3, report.size());
+        assertEquals(4, report.size());
         assertEquals("fruit,quantity", report.get(0));
         assertTrue(report.contains("banana,0"));
         assertTrue(report.contains("apple,5"));

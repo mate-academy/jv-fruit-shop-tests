@@ -8,7 +8,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderServiceImplTest {
@@ -18,10 +18,10 @@ public class CsvFileReaderServiceImplTest {
             "src/main/java/core/basesyntax/inputFiles/emptyInputFile.csv";
     private static final String INVALID_DATA_FILE_PATH =
             "src/main/java/core/basesyntax/invalidInputFile.csv";
-    private CsvFileReaderService fileReaderService;
+    private static CsvFileReaderService fileReaderService;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         fileReaderService = new CsvFileReaderServiceImpl();
     }
 

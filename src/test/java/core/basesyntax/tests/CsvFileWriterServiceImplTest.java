@@ -7,15 +7,15 @@ import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterServiceImplTest {
-    private CsvFileWriterServiceImpl fileWriterService;
-    private String filePath;
+    private static CsvFileWriterServiceImpl fileWriterService;
+    private static String filePath;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         fileWriterService = new CsvFileWriterServiceImpl();
         filePath = "src/main/java/core/basesyntax/outputFiles/output.csv";
     }

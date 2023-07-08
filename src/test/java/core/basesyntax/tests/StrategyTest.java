@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.ShopStorage;
 import core.basesyntax.db.ShopStorageImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.BalanceStrategy;
-import core.basesyntax.strategy.PurchaseStrategy;
-import core.basesyntax.strategy.ReturnStrategy;
-import core.basesyntax.strategy.SupplyStrategy;
-import org.junit.jupiter.api.BeforeEach;
+import core.basesyntax.strategy.BalanceHandler;
+import core.basesyntax.strategy.PurchaseHandler;
+import core.basesyntax.strategy.ReturnHandler;
+import core.basesyntax.strategy.SupplyHandler;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class StrategyTest {
@@ -22,40 +22,40 @@ public class StrategyTest {
             new FruitTransaction(FruitTransaction.Operation.RETURN, "BANANA", 20);
     private static final FruitTransaction SUPPLY_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "BANANA", 50);
-    private final BalanceStrategy balanceStrategy = new BalanceStrategy();
-    private final SupplyStrategy supplyStrategy = new SupplyStrategy();
-    private final PurchaseStrategy purchaseStrategy = new PurchaseStrategy();
-    private final ReturnStrategy returnStrategy = new ReturnStrategy();
-    private ShopStorage shopStorage;
+    private static ShopStorage shopStorage;
+    private final BalanceHandler balanceStrategy = new BalanceHandler();
+    private final SupplyHandler supplyStrategy = new SupplyHandler();
+    private final PurchaseHandler purchaseStrategy = new PurchaseHandler();
+    private final ReturnHandler returnStrategy = new ReturnHandler();
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         shopStorage = new ShopStorageImpl();
     }
 
     @Test
     public void balance_validTransaction_Ok() {
-        balanceStrategy.doActivity(BALANCE_TRANSACTION, shopStorage);
-        assertEquals(25,shopStorage.getQuantity("APPLE"));
+        balanceStrategy.handle(BALANCE_TRANSACTION, shopStorage);
+        assertEquals(25, shopStorage.getQuantity("APPLE"));
     }
 
     @Test
     public void purchase_validTransaction_Ok() {
         shopStorage.updateQuantity("APPLE", 50);
-        purchaseStrategy.doActivity(PURCHASE_TRANSACTION, shopStorage);
+        purchaseStrategy.handle(PURCHASE_TRANSACTION, shopStorage);
         assertEquals(20, shopStorage.getQuantity("APPLE"));
     }
 
     @Test
     public void return_validTransaction_Ok() {
         shopStorage.updateQuantity("BANANA", 50);
-        returnStrategy.doActivity(RETURN_TRANSACTION, shopStorage);
+        returnStrategy.handle(RETURN_TRANSACTION, shopStorage);
         assertEquals(70, shopStorage.getQuantity("BANANA"));
     }
 
     @Test
     public void supply_validTransaction_Ok() {
-        supplyStrategy.doActivity(SUPPLY_TRANSACTION, shopStorage);
+        supplyStrategy.handle(SUPPLY_TRANSACTION, shopStorage);
         assertEquals(50, shopStorage.getQuantity("BANANA"));
     }
 
@@ -63,7 +63,7 @@ public class StrategyTest {
     public void supply_inValidTransaction_NotOk() {
         shopStorage.updateQuantity("APPLE", 10);
         assertThrows(RuntimeException.class, () -> {
-            purchaseStrategy.doActivity(PURCHASE_TRANSACTION, shopStorage);
+            purchaseStrategy.handle(PURCHASE_TRANSACTION, shopStorage);
         });
     }
 }

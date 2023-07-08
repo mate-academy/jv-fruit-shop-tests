@@ -4,5 +4,5 @@ import core.basesyntax.db.ShopStorage;
 import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
-    void doActivity(FruitTransaction transaction, ShopStorage fruitStorage);
+    void handle(FruitTransaction transaction, ShopStorage fruitStorage);
 }

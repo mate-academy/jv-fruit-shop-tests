@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
+public class ReportReaderImpl implements ReportReader {
 
     public List<String> getListOfTransactions(String filePath) {
         List<String> dataFromFile;

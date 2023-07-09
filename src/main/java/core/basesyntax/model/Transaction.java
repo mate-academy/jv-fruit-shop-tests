@@ -20,6 +20,26 @@ public class Transaction {
         return fruit;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Transaction that = (Transaction) o;
+
+        if (operation != that.operation) {
+            return false;
+        }
+        if (fruit != null ? !fruit.equals(that.fruit) : that.fruit != null) {
+            return false;
+        }
+        return amount != null ? amount.equals(that.amount) : that.amount == null;
+    }
+
     public int getAmount() {
         return amount;
     }

@@ -14,8 +14,8 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public void processDailyReport(List<Transaction> transactionsList) {
         for (Transaction transaction : transactionsList) {
-            operationStrategy.getHandler(
-                    transaction.getOperation()).applyOperation(transaction);
+            operationStrategy.getHandler(transaction.getOperation())
+                             .applyOperation(transaction);
         }
     }
 }

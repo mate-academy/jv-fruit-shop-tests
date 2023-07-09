@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface FileWriter {
+public interface ReportWriter {
 
     void writeToFile(List<String> dailyTransactionsStringList, String reportFullPath);
 }

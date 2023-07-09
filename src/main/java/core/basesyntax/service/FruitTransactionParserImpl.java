@@ -15,6 +15,9 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     }
 
     public List<Transaction> parseList(List<String> transactionListString) {
+        if (transactionListString == null) {
+            throw new RuntimeException("Can't parse NULL list.");
+        }
         return transactionListString.stream()
                 .map(s -> s.split(SEPARATE_SYMBOL_FOR_CSV))
                 .map(t -> new Transaction(Operation.getByCode(t[OPERATION_INDEX]),

@@ -2,18 +2,18 @@ package core.basesyntax;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileReaderImpl;
-import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.FruitTransactionParserImpl;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.FruitTransactionServiceImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ReportReader;
+import core.basesyntax.service.ReportReaderImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.ReportWriterImpl;
 import core.basesyntax.service.strategy.BalanceOperationHandler;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.PurchaseOperationHandler;
@@ -31,9 +31,11 @@ public class Main {
     private static Map<Operation, OperationHandler> operationsMap = new HashMap<>();
 
     public static void main(String[] args) {
-        initOperationsMap();
-        FileReader readDailyTransactions =
-                new FileReaderImpl();
+
+        System.out.println(Math.ceil(5.5d));
+        operationsMap = initOperationsMap();
+        ReportReader readDailyTransactions =
+                new ReportReaderImpl();
         List<String> transactionsStringList = new ArrayList<>(
                 readDailyTransactions.getListOfTransactions(TRANSACTION_FILE_NAME));
         FruitTransactionParser fruitTransactionParser =
@@ -47,14 +49,16 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         List<String> dailyTransactionsReport =
                 reportService.createReport();
-        FileWriter writeDailyReportToFile = new FileWriterImpl();
+        ReportWriter writeDailyReportToFile = new ReportWriterImpl();
         writeDailyReportToFile.writeToFile(dailyTransactionsReport, REPORT_FILE_NAME);
     }
 
-    public static void initOperationsMap() {
+    public static Map<Operation, OperationHandler> initOperationsMap() {
+        Map<Operation, OperationHandler> operationsMap = new HashMap<>();
         operationsMap.put(Operation.SUPPLY, new SupplyOperationHandler());
         operationsMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationsMap.put(Operation.RETURN, new ReturnOperationHandler());
         operationsMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        return operationsMap;
     }
 }

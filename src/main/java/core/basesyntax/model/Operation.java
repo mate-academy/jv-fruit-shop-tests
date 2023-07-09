@@ -24,5 +24,4 @@ public enum Operation {
         }
         throw new RuntimeException("Can't find Operation by letter " + operation);
     }
-
 }

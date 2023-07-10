@@ -16,7 +16,8 @@ class ReadingFileServiceImplTest {
     @Test
     void testReadDataFromFile_Ok() {
         assertThrows(RuntimeException.class,
-                () -> (new ReadingFileServiceImpl()).readDataFromFile("Input File"));
+                () -> (new ReadingFileServiceImpl())
+                        .readDataFromFile("Input File"));
     }
 
     @Test

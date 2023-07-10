@@ -6,9 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
+    private final SupplyOperationHandler supplyOperationHandler
+            = new SupplyOperationHandler();
+
     @Test
     void testApplyTransactionToStorage_NotOk() {
-        final SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("Fruit");
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);

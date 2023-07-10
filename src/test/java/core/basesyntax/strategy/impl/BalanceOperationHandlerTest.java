@@ -6,9 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
+    private final BalanceOperationHandler balanceOperationHandler
+            = new BalanceOperationHandler();
+
     @Test
     void testApplyTransactionToStorage_Ok() {
-        final BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("Fruit");
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
@@ -18,7 +20,6 @@ class BalanceOperationHandlerTest {
 
     @Test
     void testApplyTransactionToStorage_NotOk() {
-        final BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("Fruit");
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);

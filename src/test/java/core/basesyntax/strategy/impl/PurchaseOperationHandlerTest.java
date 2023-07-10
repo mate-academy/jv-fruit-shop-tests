@@ -6,9 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
+    private final PurchaseOperationHandler purchaseOperationHandler
+            = new PurchaseOperationHandler();
+
     @Test
     void testApplyTransactionToStorage_NotOk() {
-        final PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("Fruit");
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);

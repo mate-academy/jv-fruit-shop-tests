@@ -1,4 +1,4 @@
-package core.basesyntax.test;
+package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Test {
+public class Main {
     private static final String INPUT_FILE =
             "src/main/java/core/basesyntax/resources/database.csv";
     private static final String REPORT_FILE =

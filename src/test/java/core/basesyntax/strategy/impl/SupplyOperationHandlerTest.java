@@ -9,7 +9,6 @@ class SupplyOperationHandlerTest {
     @Test
     void testApplyTransactionToStorage_NotOk() {
         final SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
-
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("Fruit");
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);

@@ -2,9 +2,11 @@ package core.basesyntax.service;
 
 import static org.junit.Assert.assertThrows;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ParserTransactionImpl;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -54,5 +56,20 @@ public class ParserTransactionImplTest {
         list.add("r,apple,two");
         assertThrows(NumberFormatException.class,
                 () -> parserService.parseRecords(list));
+    }
+
+    @Test
+    void parseTransaction_Ok() {
+        List<String> list = new ArrayList<>();
+        list.add("type,fruit,quantity");
+        list.add("r,apple,25");
+        list.add("s,banana,15");
+        List<FruitTransaction> expectedTransactions = new ArrayList<>();
+        expectedTransactions.add(new FruitTransaction(
+                FruitTransaction.Operation.RETURN, "apple", 25));
+        expectedTransactions.add(new FruitTransaction(
+                FruitTransaction.Operation.SUPPLY, "banana", 15));
+        List<FruitTransaction> actualTransactions = parserService.parseRecords(list);
+        Assertions.assertEquals(expectedTransactions, actualTransactions);
     }
 }

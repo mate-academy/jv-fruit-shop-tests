@@ -22,7 +22,7 @@ public class WriteToFileImplTest {
 
     @Test
     void writeToFile_checkLists_Ok() {
-        List<String> expected = List.of("test1", "test2");
+        List<String> expected = List.of("test");
         String data = "test";
         writerService.writeReport(OUTPUT, data);
         try {
@@ -36,5 +36,11 @@ public class WriteToFileImplTest {
     void writeToFile_null_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> writerService.writeReport(OUTPUT, null));
+    }
+
+    @Test
+    void writeToFile_incorrectPathToFile_NotOk() {
+        assertThrows(RuntimeException.class,
+                () -> writerService.writeReport("data", "src/test"));
     }
 }

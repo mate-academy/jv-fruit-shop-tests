@@ -97,7 +97,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/src/main/java/core.basesyntax/main/Main.java*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

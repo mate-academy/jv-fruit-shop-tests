@@ -11,8 +11,8 @@ class ReportServiceImplTest {
             + "banana,152"
             + "apple,90";
     private static final String INVALID_FILE_PATH
-            = "src/test/java/resources/invalid_fruits_data.csv";
-    private static WritingFileService writingFileService;
+            = "*src/test/java/resources/invalid_fruits_data.csv";
+    private final WritingFileService writingFileService = new WritingFileServiceImpl();
 
     @Test
     void testGenerateReport_Ok() {
@@ -22,7 +22,7 @@ class ReportServiceImplTest {
     @Test
     void writeReportToFileWriterServiceWrongPath_NotOk() {
         assertThrows(RuntimeException.class,
-                () -> writingFileService.writingDataToFile(INVALID_FILE_PATH, report));
+                () -> writingFileService.writingDataToFile(report, INVALID_FILE_PATH));
     }
 }
 

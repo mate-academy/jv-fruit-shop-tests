@@ -5,18 +5,18 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class TransactionTest {
-    private String fruit = "apple";
-    private Integer amount = 10;
-    private Transaction transaction = new Transaction(Operation.BALANCE, fruit,amount);
+    private static final String FRUIT_APPLE = "apple";
+    private static final Integer AMOUNT = 10;
+    private Transaction transaction = new Transaction(Operation.BALANCE, FRUIT_APPLE, AMOUNT);
 
     @Test
     public void getFruit_validValue_ok() {
-        assertEquals(fruit, transaction.getFruit());
+        assertEquals(FRUIT_APPLE, transaction.getFruit());
     }
 
     @Test
     public void getAmount_validValue_ok() {
-        assertEquals((long) amount, (long) transaction.getAmount());
+        assertEquals((long) AMOUNT, (long) transaction.getAmount());
     }
 
     @Test

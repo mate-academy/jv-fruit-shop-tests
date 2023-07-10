@@ -9,11 +9,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportServiceImplTest {
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_ORANGE = "orange";
+    private static final Integer AMOUNT_APPLE = 10;
+    private static final Integer AMOUNT_ORANGE = 15;
+    private ReportService reportService = new ReportServiceImpl();
+
     @Before
     public void setUp() {
         Storage.clearStorage();
-        Storage.putFruitToStorage("apple", 10);
-        Storage.putFruitToStorage("orange", 15);
+        Storage.putFruitToStorage(FRUIT_APPLE, AMOUNT_APPLE);
+        Storage.putFruitToStorage(FRUIT_ORANGE, AMOUNT_ORANGE);
     }
 
     @Test
@@ -25,6 +31,6 @@ public class ReportServiceImplTest {
                         + FruitTransactionParserImpl.SEPARATE_SYMBOL_FOR_CSV
                         + t.getValue()).collect(Collectors.toList());
         storage.add(0,ReportService.HEAD_OF_REPORT_TABLE);
-        assertEquals(storage, new ReportServiceImpl().createReport());
+        assertEquals(storage, reportService.createReport());
     }
 }

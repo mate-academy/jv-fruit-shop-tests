@@ -12,9 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class StorageTest {
-    private String fruit1 = "apple";
-    private String fruit2 = "orange";
-    private String fruit3 = null;
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_ORANGE = "orange";
+    private static final String FRUIT_NULL = null;
 
     @Before
     public void setUp() {
@@ -28,60 +28,60 @@ public class StorageTest {
 
     @Test
     public void getStorage_validFruits_Ok() {
-        Storage.putFruitToStorage(fruit1, 10);
-        Storage.putFruitToStorage(fruit2, 15);
+        Storage.putFruitToStorage(FRUIT_APPLE, 10);
+        Storage.putFruitToStorage(FRUIT_ORANGE, 15);
         Map<String, Integer> storage = new HashMap<>();
         storage = Storage.getStorage();
-        assertTrue(storage.containsKey(fruit1));
-        assertEquals(10, (long) storage.get(fruit1));
-        assertTrue(storage.containsKey(fruit2));
-        assertEquals(15, (long) storage.get(fruit2));
+        assertTrue(storage.containsKey(FRUIT_APPLE));
+        assertEquals(10, (long) storage.get(FRUIT_APPLE));
+        assertTrue(storage.containsKey(FRUIT_ORANGE));
+        assertEquals(15, (long) storage.get(FRUIT_ORANGE));
         assertEquals(2, storage.size());
     }
 
     @Test
     public void putFruitToStorage_NullFruit_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        Storage.putFruitToStorage(fruit3, 10),
+                        Storage.putFruitToStorage(FRUIT_NULL, 10),
                 "Can't add null fruit to storage!");
     }
 
     @Test
     public void putAndGetFruitAmount_validAmount_Ok() {
-        Storage.putFruitToStorage(fruit1, 10);
-        Storage.putFruitToStorage(fruit2, 15);
-        assertEquals(10, Storage.getFruitAmount(fruit1).intValue());
-        assertEquals(15, Storage.getFruitAmount(fruit2).intValue());
+        Storage.putFruitToStorage(FRUIT_APPLE, 10);
+        Storage.putFruitToStorage(FRUIT_ORANGE, 15);
+        assertEquals(10, Storage.getFruitAmount(FRUIT_APPLE).intValue());
+        assertEquals(15, Storage.getFruitAmount(FRUIT_ORANGE).intValue());
     }
 
     @Test
     public void getFruitAmount_emptyStorage_Ok() {
         Storage.clearStorage();
-        assertEquals(0, Storage.getFruitAmount(fruit1).intValue());
-        assertEquals(0, Storage.getFruitAmount(fruit2).intValue());
+        assertEquals(0, Storage.getFruitAmount(FRUIT_APPLE).intValue());
+        assertEquals(0, Storage.getFruitAmount(FRUIT_ORANGE).intValue());
     }
 
     @Test
     public void clearStorage_Ok() {
-        Storage.putFruitToStorage(fruit1, 10);
-        Storage.putFruitToStorage(fruit2, 15);
+        Storage.putFruitToStorage(FRUIT_APPLE, 10);
+        Storage.putFruitToStorage(FRUIT_ORANGE, 15);
         Storage.clearStorage();
-        assertFalse(Storage.containsFruit(fruit1));
-        assertFalse(Storage.containsFruit(fruit2));
+        assertFalse(Storage.containsFruit(FRUIT_APPLE));
+        assertFalse(Storage.containsFruit(FRUIT_ORANGE));
     }
 
     @Test
     public void containsFruit_validFruit_Ok() {
-        Storage.putFruitToStorage(fruit1, 10);
-        Storage.putFruitToStorage(fruit2, 15);
-        assertTrue(Storage.containsFruit(fruit1));
-        assertTrue(Storage.containsFruit(fruit2));
+        Storage.putFruitToStorage(FRUIT_APPLE, 10);
+        Storage.putFruitToStorage(FRUIT_ORANGE, 15);
+        assertTrue(Storage.containsFruit(FRUIT_APPLE));
+        assertTrue(Storage.containsFruit(FRUIT_ORANGE));
     }
 
     @Test
     public void containsFruit_invalidFruit_notOk() {
         Storage.clearStorage();
-        Storage.putFruitToStorage(fruit1, 10);
-        assertEquals(false, Storage.containsFruit(fruit2));
+        Storage.putFruitToStorage(FRUIT_APPLE, 10);
+        assertEquals(false, Storage.containsFruit(FRUIT_ORANGE));
     }
 }

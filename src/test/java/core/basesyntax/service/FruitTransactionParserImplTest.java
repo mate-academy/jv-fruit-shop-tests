@@ -14,6 +14,7 @@ import org.junit.Test;
 
 public class FruitTransactionParserImplTest {
     private List<Transaction> transactionList = new ArrayList<>();
+    private FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
 
     @Before
     public void setUp() {
@@ -37,14 +38,13 @@ public class FruitTransactionParserImplTest {
                         + t.getAmount())
                 .collect(Collectors.toList());
         assertEquals(transactionList,
-                new FruitTransactionParserImpl()
-                        .parseList(transactionsStringList));
+                fruitTransactionParser.parseList(transactionsStringList));
     }
 
     @Test
     public void parseList_nullInputList_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        new FruitTransactionParserImpl().parseList(null),
+                        fruitTransactionParser.parseList(null),
                 "Can't parse NULL list.");
     }
 }

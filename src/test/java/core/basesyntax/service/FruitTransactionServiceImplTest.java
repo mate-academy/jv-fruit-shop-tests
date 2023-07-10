@@ -16,19 +16,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitTransactionServiceImplTest {
-    private OperationStrategy operationStrategy;
+    private static final String FRUIT_APPLE = "apple";
+    private static final Integer AMOUNT = 10;
     private List<Transaction> transactionList = new ArrayList<>();
     private Map<Operation, OperationHandler> operationHandlersMap;
-    private String fruit = "apple";
+    private OperationStrategy op;
+    private FruitTransactionService fruitTransactionService;
 
     @Before
     public void setUp() {
         Storage.clearStorage();
-        transactionList.add(new Transaction(Operation.BALANCE, fruit,10));
-        transactionList.add(new Transaction(Operation.RETURN, fruit,10));
-        transactionList.add(new Transaction(Operation.SUPPLY, fruit,10));
-        transactionList.add(new Transaction(Operation.PURCHASE, fruit,10));
+        transactionList.add(new Transaction(Operation.BALANCE, FRUIT_APPLE,AMOUNT));
+        transactionList.add(new Transaction(Operation.RETURN, FRUIT_APPLE,AMOUNT));
+        transactionList.add(new Transaction(Operation.SUPPLY, FRUIT_APPLE,AMOUNT));
+        transactionList.add(new Transaction(Operation.PURCHASE, FRUIT_APPLE,AMOUNT));
         operationHandlersMap = Main.initOperationsMap();
+        op = new OperationStrategyImpl(operationHandlersMap);
+        fruitTransactionService = new FruitTransactionServiceImpl(op);
     }
 
     @After
@@ -38,22 +42,19 @@ public class FruitTransactionServiceImplTest {
 
     @Test
     public void processDailyReport_validData_ok() {
-        OperationStrategy op = new OperationStrategyImpl(operationHandlersMap);
-        new FruitTransactionServiceImpl(op).processDailyReport(transactionList);
-        assertEquals(20, (long) Storage.getFruitAmount(fruit));
+        fruitTransactionService.processDailyReport(transactionList);
+        assertEquals(20, (long) Storage.getFruitAmount(FRUIT_APPLE));
     }
 
     @Test
     public void processDailyReport_wrongAmount_notOk() {
         transactionList.clear();
-        transactionList.add(new Transaction(Operation.BALANCE, fruit,10));
-        transactionList.add(new Transaction(Operation.PURCHASE, fruit,11));
-        OperationStrategy op = new OperationStrategyImpl(operationHandlersMap);
-        ;
+        transactionList.add(new Transaction(Operation.BALANCE, FRUIT_APPLE,AMOUNT));
+        transactionList.add(new Transaction(Operation.PURCHASE, FRUIT_APPLE,AMOUNT + 1));
         assertThrows(RuntimeException.class, () ->
-                        new FruitTransactionServiceImpl(op).processDailyReport(transactionList),
+                        fruitTransactionService.processDailyReport(transactionList),
                 "Illegal daily report value for "
-                        + fruit
+                        + FRUIT_APPLE
                         + ". Total amount is negative.");
     }
 }

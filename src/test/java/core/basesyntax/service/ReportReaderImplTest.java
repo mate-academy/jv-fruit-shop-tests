@@ -13,8 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportReaderImplTest {
-    private String fileName = "src/main/resources/readTest.csv";
-    private String wrongFileName = "src/main/resources/badFileName.csv";
+    private static final String FILE_NAME = "src/test/resources/readTest.csv";
+    private static final String WRONG_FILE_NAME = "src/test/resources/badFileName.csv";
     private List<String> lines = new ArrayList<>();
     private ReportReader reportReader = new ReportReaderImpl();
 
@@ -24,12 +24,12 @@ public class ReportReaderImplTest {
         lines.add("b,banana,20");
         lines.add("b,apple,100");
 
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (FileWriter writer = new FileWriter(FILE_NAME)) {
             for (String l : lines) {
                 writer.write(l + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + fileName, e);
+            throw new RuntimeException("Can't find file by path: " + FILE_NAME, e);
         }
     }
 
@@ -37,8 +37,8 @@ public class ReportReaderImplTest {
     public void tearDown() {
         lines.clear();
         try {
-            new File(fileName).delete();
-            new File(wrongFileName).delete();
+            new File(FILE_NAME).delete();
+            new File(WRONG_FILE_NAME).delete();
         } catch (Exception e) {
             throw new RuntimeException("Can't find file", e);
         }
@@ -47,13 +47,13 @@ public class ReportReaderImplTest {
     @Test
     public void getListOfTransactions_validValues_ok() {
         lines.remove(0);
-        assertEquals(lines, reportReader.getListOfTransactions(fileName));
+        assertEquals(lines, reportReader.getListOfTransactions(FILE_NAME));
     }
 
     @Test
     public void getListOfTransactions_invalidPFileName_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        reportReader.getListOfTransactions(wrongFileName),
-                "Can't find file by path: " + wrongFileName);
+                        reportReader.getListOfTransactions(WRONG_FILE_NAME),
+                "Can't find file by path: " + WRONG_FILE_NAME);
     }
 }

@@ -14,8 +14,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class ReportWriterImplTest {
-    private String fileName = "src/main/resources/writeTest.csv";
-    private String wrongFileName = "src/main/resources/badFileName.csv";
+    private static final String FILE_NAME = "src/test/resources/writeTest.csv";
+    private static final String WRONG_FILE_NAME = "src/test/resources/badFileName.csv";
     private List<String> lines = new ArrayList<>();
     private ReportWriter reportWriter = new ReportWriterImpl();
 
@@ -30,8 +30,8 @@ public class ReportWriterImplTest {
     public void tearDown() {
         lines.clear();
         try {
-            new File(fileName).delete();
-            new File(wrongFileName).delete();
+            new File(FILE_NAME).delete();
+            new File(WRONG_FILE_NAME).delete();
         } catch (Exception e) {
             throw new RuntimeException("Can't delete file", e);
         }
@@ -39,15 +39,15 @@ public class ReportWriterImplTest {
 
     @Test
     public void writeToFile_validValues_ok() {
-        reportWriter.writeToFile(lines,fileName);
-        assertEquals(lines,readLinesFromFile(fileName));
+        reportWriter.writeToFile(lines, FILE_NAME);
+        assertEquals(lines,readLinesFromFile(FILE_NAME));
     }
 
     @Test
     public void writeToFile_nullValue_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        reportWriter.writeToFile(null, fileName),
-                "Can't write NULL to file by path: " + fileName);
+                        reportWriter.writeToFile(null, FILE_NAME),
+                "Can't write NULL to file by path: " + FILE_NAME);
     }
 
     @Test

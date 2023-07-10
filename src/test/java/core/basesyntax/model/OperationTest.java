@@ -7,33 +7,33 @@ import org.junit.Test;
 
 public class OperationTest {
 
-    private String invalidOperation = "a";
-    private String validOperationB = "b";
-    private String validOperationP = "p";
-    private String validOperationS = "s";
-    private String validOperationR = "r";
+    private static final String INVALID_OPERATION = "a";
+    private static final String VALID_OPERATION_BALANCE = "b";
+    private static final String VALID_OPERATION_PURCHASE = "p";
+    private static final String VALID_OPERATION_SUPPLY = "s";
+    private static final String VALID_OPERATION_RETURN = "r";
 
     @Test
     public void getByCode_validValue_ok() {
-        assertEquals(Operation.BALANCE,Operation.getByCode(validOperationB));
-        assertEquals(Operation.PURCHASE,Operation.getByCode(validOperationP));
-        assertEquals(Operation.SUPPLY,Operation.getByCode(validOperationS));
-        assertEquals(Operation.RETURN,Operation.getByCode(validOperationR));
+        assertEquals(Operation.BALANCE,Operation.getByCode(VALID_OPERATION_BALANCE));
+        assertEquals(Operation.PURCHASE,Operation.getByCode(VALID_OPERATION_PURCHASE));
+        assertEquals(Operation.SUPPLY,Operation.getByCode(VALID_OPERATION_SUPPLY));
+        assertEquals(Operation.RETURN,Operation.getByCode(VALID_OPERATION_RETURN));
     }
 
     @Test
     public void getByCode_invalidValue_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        Operation.getByCode(invalidOperation),
+                        Operation.getByCode(INVALID_OPERATION),
                 "Can't find Operation by letter "
-                        + invalidOperation);
+                        + INVALID_OPERATION);
     }
 
     @Test
     public void getOperation_validOperation_ok() {
-        assertEquals(validOperationB, Operation.BALANCE.getOperation());
-        assertEquals(validOperationP, Operation.PURCHASE.getOperation());
-        assertEquals(validOperationS, Operation.SUPPLY.getOperation());
-        assertEquals(validOperationR, Operation.RETURN.getOperation());
+        assertEquals(VALID_OPERATION_BALANCE, Operation.BALANCE.getOperation());
+        assertEquals(VALID_OPERATION_PURCHASE, Operation.PURCHASE.getOperation());
+        assertEquals(VALID_OPERATION_SUPPLY, Operation.SUPPLY.getOperation());
+        assertEquals(VALID_OPERATION_RETURN, Operation.RETURN.getOperation());
     }
 }

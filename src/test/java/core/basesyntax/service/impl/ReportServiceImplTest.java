@@ -16,7 +16,8 @@ class ReportServiceImplTest {
 
     @Test
     void testGenerateReport_Ok() {
-        assertEquals("fruit,quantity\r\n", (new ReportServiceImpl()).generateReport());
+        assertEquals("fruit,quantity" + System.lineSeparator(),
+                (new ReportServiceImpl()).generateReport());
     }
 
     @Test

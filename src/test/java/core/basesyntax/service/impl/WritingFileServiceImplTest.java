@@ -15,10 +15,11 @@ class WritingFileServiceImplTest {
     private static final WritingFileService writingFileService = new WritingFileServiceImpl();
     private static final String OUTPUT_FILE = "src/test/java/resources/fruits_report.csv";
     private static final String INVALID_FILE_PATH = "*src/test/java/resources/invalid_data.csv";
+    private static final String REPORT_TEST_DATA = "WRITING_TEST";
 
     @Test
     void invalidWritingDataToFile_Ok() throws IOException {
-        String reportTestData = "WRITING_TEST";
+        String reportTestData = REPORT_TEST_DATA;
         writingFileService.writingDataToFile(reportTestData, OUTPUT_FILE);
         List<String> readData = Files.readAllLines(Paths.get(OUTPUT_FILE));
         String actual = readData.stream()

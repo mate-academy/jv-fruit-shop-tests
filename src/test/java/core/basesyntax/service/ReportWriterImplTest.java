@@ -17,6 +17,7 @@ public class ReportWriterImplTest {
     private String fileName = "src/main/resources/writeTest.csv";
     private String wrongFileName = "src/main/resources/badFileName.csv";
     private List<String> lines = new ArrayList<>();
+    private ReportWriter reportWriter = new ReportWriterImpl();
 
     @Before
     public void setUp() throws Exception {
@@ -38,14 +39,14 @@ public class ReportWriterImplTest {
 
     @Test
     public void writeToFile_validValues_ok() {
-        new ReportWriterImpl().writeToFile(lines,fileName);
+        reportWriter.writeToFile(lines,fileName);
         assertEquals(lines,readLinesFromFile(fileName));
     }
 
     @Test
     public void writeToFile_nullValue_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        new ReportWriterImpl().writeToFile(null, fileName),
+                        reportWriter.writeToFile(null, fileName),
                 "Can't write NULL to file by path: " + fileName);
     }
 
@@ -53,7 +54,7 @@ public class ReportWriterImplTest {
     public void writeToFile_nullFileName_notOk() {
         String nullFileName = null;
         assertThrows(RuntimeException.class, () ->
-                        new ReportWriterImpl().writeToFile(lines, nullFileName),
+                        reportWriter.writeToFile(lines, nullFileName),
                 "Can't write data to file by path: " + nullFileName);
     }
 

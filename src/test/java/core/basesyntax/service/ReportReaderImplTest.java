@@ -16,6 +16,7 @@ public class ReportReaderImplTest {
     private String fileName = "src/main/resources/readTest.csv";
     private String wrongFileName = "src/main/resources/badFileName.csv";
     private List<String> lines = new ArrayList<>();
+    private ReportReader reportReader = new ReportReaderImpl();
 
     @Before
     public void setUp() {
@@ -46,13 +47,13 @@ public class ReportReaderImplTest {
     @Test
     public void getListOfTransactions_validValues_ok() {
         lines.remove(0);
-        assertEquals(lines, new ReportReaderImpl().getListOfTransactions(fileName));
+        assertEquals(lines, reportReader.getListOfTransactions(fileName));
     }
 
     @Test
     public void getListOfTransactions_invalidPFileName_notOk() {
         assertThrows(RuntimeException.class, () ->
-                        new ReportReaderImpl().getListOfTransactions(wrongFileName),
+                        reportReader.getListOfTransactions(wrongFileName),
                 "Can't find file by path: " + wrongFileName);
     }
 }

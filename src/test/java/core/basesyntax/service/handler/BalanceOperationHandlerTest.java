@@ -2,6 +2,7 @@ package core.basesyntax.service.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -49,6 +50,8 @@ class BalanceOperationHandlerTest {
 
         assertThrows(IllegalArgumentException.class,
                 () -> operationHandler.handleTransaction(fruitTransaction));
+
+        assertTrue(Storage.fruits.isEmpty());
     }
 
     @Test
@@ -70,5 +73,7 @@ class BalanceOperationHandlerTest {
 
         assertThrows(NullPointerException.class, ()
                 -> operationHandler.handleTransaction(transaction));
+
+        assertTrue(Storage.fruits.isEmpty());
     }
 }

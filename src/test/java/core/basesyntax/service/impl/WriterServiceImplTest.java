@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertLinesMatch;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -61,5 +62,20 @@ class WriterServiceImplTest {
         File nonWritableFile = new File(NO_WRITABLE_PATh);
         assertThrows(RuntimeException.class,
                 () -> writeToFileService.writeReport(report, String.valueOf(nonWritableFile)));
+    }
+
+    @Test
+    void writeDataToFile_CorrectContentAndPath_ok() throws IOException {
+        String report = TITLE
+                + APPLE_AND_QUANTITY
+                + BANAN_AND_QUANTITY
+                + ORANGE_AND_QUANTITY;
+        Path outputPath = tempDir.resolve(REPORT_CSV);
+
+        writeToFileService.writeReport(report, outputPath.toString());
+
+        List<String> expectedLines = Arrays.asList(report.split(System.lineSeparator()));
+        List<String> actualLines = Files.readAllLines(outputPath);
+        assertEquals(expectedLines, actualLines);
     }
 }

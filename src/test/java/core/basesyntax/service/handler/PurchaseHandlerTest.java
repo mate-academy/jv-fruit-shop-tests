@@ -35,16 +35,16 @@ class PurchaseHandlerTest {
         assertThrows(RuntimeException.class, () -> purchaseHandler.handleTransaction(transaction));
     }
 
+    @AfterEach
+    void clearStorage() {
+        Storage.fruits.clear();
+    }
+
     private FruitTransaction createTransaction(String fruit, int quantity) {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
         transaction.setFruit(fruit);
         transaction.setQuantity(quantity);
         return transaction;
-    }
-
-    @AfterEach
-    void clearStorage() {
-        Storage.fruits.clear();
     }
 }

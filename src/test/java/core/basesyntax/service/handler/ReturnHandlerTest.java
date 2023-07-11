@@ -28,16 +28,16 @@ class ReturnHandlerTest {
         assertEquals(INITIAL_QUANTITY + 5, Storage.fruits.get(FRUIT_NAME));
     }
 
+    @AfterEach
+    void clearStorage() {
+        Storage.fruits.clear();
+    }
+
     private FruitTransaction createTransaction(String fruit, int quantity) {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.RETURN);
         transaction.setFruit(fruit);
         transaction.setQuantity(quantity);
         return transaction;
-    }
-
-    @AfterEach
-    void clearStorage() {
-        Storage.fruits.clear();
     }
 }

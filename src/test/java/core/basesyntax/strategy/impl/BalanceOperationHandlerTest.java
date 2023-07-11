@@ -3,29 +3,37 @@ package core.basesyntax.strategy.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-    private final BalanceOperationHandler balanceOperationHandler
+    private static FruitTransaction fruitTransaction;
+    private static BalanceOperationHandler balanceOperationHandler
             = new BalanceOperationHandler();
 
-    @Test
-    void testApplyTransactionToStorage_Ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
+    @BeforeAll
+    static void beforeAll() {
+        fruitTransaction = new FruitTransaction();
+        balanceOperationHandler = new BalanceOperationHandler();
+    }
+
+    @BeforeEach
+    void setUp() {
         fruitTransaction.setFruit("Fruit");
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+    }
+
+    @Test
+    void testApplyBalanceTransactionToStorage_Ok() {
         fruitTransaction.setQuantity(1);
         balanceOperationHandler.applyTransactionToStorage(fruitTransaction);
     }
 
     @Test
-    void testApplyTransactionToStorage_NotOk() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setFruit("Fruit");
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+    void testApplyBalanceTransactionToStorage_NotOk() {
         fruitTransaction.setQuantity(-1);
         assertThrows(RuntimeException.class,
                 () -> balanceOperationHandler.applyTransactionToStorage(fruitTransaction));
     }
 }
-

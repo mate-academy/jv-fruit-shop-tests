@@ -26,4 +26,3 @@ class ReportServiceImplTest {
                 () -> writingFileService.writingDataToFile(report, INVALID_FILE_PATH));
     }
 }
-

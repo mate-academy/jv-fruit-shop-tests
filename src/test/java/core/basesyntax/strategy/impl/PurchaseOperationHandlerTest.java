@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
-    private static FruitTransaction fruitTransaction = new FruitTransaction();
+    private static FruitTransaction fruitTransaction;
     private static PurchaseOperationHandler purchaseOperationHandler;
 
     @BeforeAll

@@ -32,7 +32,7 @@ class ReadingFileServiceImplTest {
     @Test
     void testReadDataFromFile_Ok() {
         assertThrows(RuntimeException.class,
-                () -> (new ReadingFileServiceImpl())
+                () -> (readingFileService)
                         .readDataFromFile("Input File"));
     }
 

@@ -3,7 +3,9 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WritingFileService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
@@ -12,12 +14,19 @@ class ReportServiceImplTest {
             + "apple,90";
     private static final String INVALID_FILE_PATH
             = "*src/test/java/resources/invalid_fruits_data.csv";
-    private final WritingFileService writingFileService = new WritingFileServiceImpl();
+    private static WritingFileService writingFileService;
+    private static ReportService reportService;
+
+    @BeforeAll
+    static void beforeAll() {
+        writingFileService = new WritingFileServiceImpl();
+        reportService = new ReportServiceImpl();
+    }
 
     @Test
     void testGenerateReport_Ok() {
         assertEquals("fruit,quantity" + System.lineSeparator(),
-                (new ReportServiceImpl()).generateReport());
+                reportService.generateReport());
     }
 
     @Test

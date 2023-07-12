@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
     private static FruitTransaction fruitTransaction;
-    private static BalanceOperationHandler balanceOperationHandler
-            = new BalanceOperationHandler();
+    private static BalanceOperationHandler balanceOperationHandler;
 
     @BeforeAll
     static void beforeAll() {

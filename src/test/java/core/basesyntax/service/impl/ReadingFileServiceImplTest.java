@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReadingFileServiceImplTest {
-    private static final ReadingFileService readingFileService = new ReadingFileServiceImpl();
+    private static ReadingFileService readingFileService;
     private static final String VALID_FIlE_PATH = "src/test/java/resources/fruits_data.csv";
     private static final String INVALID_FILE_PATH
             = "src/test/java/resources/invalid_fruits_data.csv";
@@ -17,6 +17,7 @@ class ReadingFileServiceImplTest {
 
     @BeforeAll
     static void beforeAll() {
+        readingFileService = new ReadingFileServiceImpl();
         expected = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",

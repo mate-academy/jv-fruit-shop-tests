@@ -6,10 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserImplTest {
-    private final TransactionParserImpl transactionParserImpl = new TransactionParserImpl();
+    private static TransactionParserImpl transactionParserImpl;
+    private static List<String> testData;
+
+    @BeforeAll
+    static void beforeAll() {
+        transactionParserImpl = new TransactionParserImpl();
+        testData = Arrays.asList(
+                "type,fruit,quantity",
+                "b,banana,100",
+                "d,apple,50");
+    }
 
     @Test
     void testParseData_Ok() {
@@ -18,10 +29,6 @@ class TransactionParserImplTest {
 
     @Test
     void parseFruitTransactionNotValidData_NotOk() {
-        List<String> testData = new ArrayList<>(Arrays.asList(
-                "type,fruit,quantity",
-                "b,banana,100",
-                "d,apple,50"));
         assertThrows(RuntimeException.class,
                 () -> transactionParserImpl.parseData(testData));
     }

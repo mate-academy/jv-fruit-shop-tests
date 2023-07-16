@@ -1,17 +1,17 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.DataReaderService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CsvReaderServiceTest {
     private static final String INVALID_PATH = "src/test/resources/dummy-path/dummy.csv";
     private static final String VALID_PATH = "src/test/resources/input-test.csv";
     private static final String PATH_TO_EMPTY_FILE =
             "src/test/resources/input-test-empty-file.csv";
-    private static  DataReaderService readerService;
+    private static DataReaderService readerService;
 
     @BeforeAll
     static void beforeAll() {
@@ -29,7 +29,7 @@ class CsvReaderServiceTest {
     }
 
     @Test
-    void  readData_indicateInvalidPath_NotOk() {
+    void readData_indicateInvalidPath_NotOk() {
         assertThrows(RuntimeException.class, () -> readerService.readData(INVALID_PATH));
     }
 }

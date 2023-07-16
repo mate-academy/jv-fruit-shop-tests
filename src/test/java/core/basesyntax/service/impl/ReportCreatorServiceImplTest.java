@@ -1,9 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreatorService;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,8 +33,8 @@ class ReportCreatorServiceImplTest {
 
     @Test
     void createReport_validData_Ok() {
-        String expectedReportData = "fruit,quantity\n" +
-                FIRST_KEY + "," + Storage.fruitStorage.get(FIRST_KEY) + "\n"
+        String expectedReportData = "fruit,quantity\n"
+                + FIRST_KEY + "," + Storage.fruitStorage.get(FIRST_KEY) + "\n"
                 + SECOND_KEY + "," + Storage.fruitStorage.get(SECOND_KEY) + "\n";
         String actualReportData = reportCreatorService.createReport();
         assertEquals(expectedReportData, actualReportData);

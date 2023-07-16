@@ -1,16 +1,15 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.handler.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.ShopOperationStrategy;
 import core.basesyntax.utility.Operation;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class ShopOperationStrategyImplTest {
     private static ShopOperationStrategy shopOperationStrategy;
@@ -19,10 +18,8 @@ class ShopOperationStrategyImplTest {
     @BeforeAll
     static void beforeAll() {
         Map<Operation, ShopOperationHandler> shopOperationHandlerMap = new HashMap<>();
-        shopOperationHandlerMap.put(Operation.BALANCE,
-                new BalanceOperationHandler());
+        shopOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         shopOperationStrategy = new ShopOperationStrategyImpl(shopOperationHandlerMap);
-
     }
 
     @Test

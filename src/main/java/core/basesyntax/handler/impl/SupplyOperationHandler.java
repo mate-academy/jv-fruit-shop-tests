@@ -13,3 +13,4 @@ public class SupplyOperationHandler implements ShopOperationHandler {
                 fruitTransaction.getQuantity() + oldQuantityValue);
     }
 }
+

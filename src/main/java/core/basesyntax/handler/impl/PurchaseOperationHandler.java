@@ -17,3 +17,4 @@ public class PurchaseOperationHandler implements ShopOperationHandler {
                 oldQuantityValue - fruitTransaction.getQuantity());
     }
 }
+

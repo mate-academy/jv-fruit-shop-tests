@@ -33,12 +33,10 @@ class BalanceOperationHandlerTest {
 
     @Test
     void handle_validQuantityData_Ok() {
-        assertAll(
-                () -> {
+        assertAll(() -> {
                     fruitTransaction.setQuantity(0);
                     balanceOperationHandler.handle(fruitTransaction);
-                },
-                () -> {
+                }, () -> {
                     fruitTransaction.setQuantity(12);
                     balanceOperationHandler.handle(fruitTransaction);
                 }
@@ -49,6 +47,3 @@ class BalanceOperationHandlerTest {
         assertEquals(expectedQuantity, actualQuantity);
     }
 }
-
-    
-   

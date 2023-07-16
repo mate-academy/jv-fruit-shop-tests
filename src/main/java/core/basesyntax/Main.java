@@ -10,7 +10,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.*;
 import core.basesyntax.service.impl.*;
 import core.basesyntax.strategy.ShopOperationStrategy;
-import core.basesyntax.strategy.ShopOperationStrategyImpl;
+import core.basesyntax.strategy.impl.ShopOperationStrategyImpl;
 import core.basesyntax.utility.FruitQuantityChecker;
 import core.basesyntax.utility.Operation;
 

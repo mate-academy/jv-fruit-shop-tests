@@ -1,8 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.handler.ShopOperationHandler;
+import core.basesyntax.strategy.ShopOperationStrategy;
 import core.basesyntax.utility.Operation;
-
 import java.util.Map;
 
 public class ShopOperationStrategyImpl implements ShopOperationStrategy {

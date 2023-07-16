@@ -18,6 +18,9 @@ public class CsvReaderService implements DataReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can not read file. Path:" + path);
         }
+        if (dataList.isEmpty()) {
+            throw new RuntimeException("Can not proceed operate with empty file. Path:" + path);
+        }
         dataList.remove(HEADER_LINE_INDEX);
         return dataList;
     }

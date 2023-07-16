@@ -1,8 +1,8 @@
 package core.basesyntax.handler.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.handler.ShopOperationHandler;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.db.*;
+import core.basesyntax.handler.*;
+import core.basesyntax.model.*;
 
 public class PurchaseOperationHandler implements ShopOperationHandler {
     @Override

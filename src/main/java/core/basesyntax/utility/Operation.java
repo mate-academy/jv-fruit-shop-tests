@@ -1,7 +1,6 @@
 package core.basesyntax.utility;
 
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public enum Operation {
     BALANCE("b"),

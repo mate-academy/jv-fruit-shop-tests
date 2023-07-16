@@ -37,7 +37,7 @@ class ReturnOperationHandlerTest {
     void handle_validQuantityData_Ok() {
         assertAll(
                 () -> {
-                    fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY/2);
+                    fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY / 2);
                     returnOperationHandler.handle(fruitTransaction);
                 },
                 () -> {

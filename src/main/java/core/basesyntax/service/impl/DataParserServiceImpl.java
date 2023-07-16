@@ -1,11 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataParserService;
-import core.basesyntax.utility.Operation;
+import core.basesyntax.model.*;
+import core.basesyntax.service.*;
+import core.basesyntax.utility.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DataParserServiceImpl implements DataParserService {
     private static final int OPERATION_INDEX = 0;
@@ -23,7 +22,7 @@ public class DataParserServiceImpl implements DataParserService {
             Operation currentOperation = Operation.getByValue(split[OPERATION_INDEX]);
             fruitTransaction.setOperation(currentOperation);
             fruitTransaction.setFruit(split[FRUIT_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX])); // TODO found out about following this line up with exception checking
+            fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX]));
             transactionList.add(fruitTransaction);
         }
         return transactionList;

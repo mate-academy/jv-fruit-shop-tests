@@ -4,11 +4,11 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PurchaseOperationHandlerTest {
@@ -34,12 +34,11 @@ class PurchaseOperationHandlerTest {
         Storage.fruitStorage.remove(fruitTransaction.getFruit());
     }
 
-
     @Test
     void handle_validQuantityData_Ok() {
         assertAll(
                 () -> {
-                    fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY/2);
+                    fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY / 2);
                     purchaseOperationHandler.handle(fruitTransaction);
                 },
                 () -> {
@@ -55,7 +54,7 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handle_InvalidQuantityData_NotOk() {
-        fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY+1);
+        fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY + 1);
         assertThrows(IllegalArgumentException.class,
                 () -> purchaseOperationHandler.handle(fruitTransaction));
     }

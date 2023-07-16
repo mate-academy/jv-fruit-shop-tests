@@ -1,6 +1,6 @@
 package core.basesyntax.utility;
 
-import java.util.Map;
+import java.util.*;
 
 public class FruitQuantityChecker {
     public void checkFruitQuantity(Map<String, Integer> fruitMap) {

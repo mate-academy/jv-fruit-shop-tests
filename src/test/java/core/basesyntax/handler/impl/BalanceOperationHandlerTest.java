@@ -4,8 +4,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BalanceOperationHandlerTest {
     private static ShopOperationHandler balanceOperationHandler;
@@ -45,5 +45,6 @@ class BalanceOperationHandlerTest {
         assertEquals(expectedQuantity, actualQuantity);
     }
 }
+
     
    

@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-import core.basesyntax.utility.Operation;
+import core.basesyntax.utility.*;
 
 public class FruitTransaction {
     private Operation operation;

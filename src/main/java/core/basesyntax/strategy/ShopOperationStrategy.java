@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.handler.ShopOperationHandler;
-import core.basesyntax.utility.Operation;
+import core.basesyntax.handler.*;
+import core.basesyntax.utility.*;
 
 public interface ShopOperationStrategy {
     ShopOperationHandler get(Operation operation);

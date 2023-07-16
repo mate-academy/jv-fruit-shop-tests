@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.db.*;
+import core.basesyntax.service.*;
 
-import java.util.Map;
+import java.util.*;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String REPORT_HEADER = "fruit,quantity";

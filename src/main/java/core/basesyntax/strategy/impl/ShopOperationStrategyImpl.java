@@ -1,10 +1,9 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.handler.*;
-import core.basesyntax.strategy.*;
-import core.basesyntax.utility.*;
-
-import java.util.*;
+import core.basesyntax.handler.ShopOperationHandler;
+import core.basesyntax.strategy.ShopOperationStrategy;
+import core.basesyntax.utility.Operation;
+import java.util.Map;
 
 public class ShopOperationStrategyImpl implements ShopOperationStrategy {
     private final Map<Operation, ShopOperationHandler> operationHandlerMap;

@@ -1,16 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataParserService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
+import core.basesyntax.service.*;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DataParserServiceImplTest {
     private static List<String> lines_list;
@@ -55,12 +50,12 @@ class DataParserServiceImplTest {
         assertAll("Scenarios with missing data",
                 () -> {
                     lines_list.add("b");
-                    assertThrows(ArrayIndexOutOfBoundsException.class,() -> dataParserService.parseData(lines_list));
+                    assertThrows(ArrayIndexOutOfBoundsException.class, () -> dataParserService.parseData(lines_list));
                     lines_list.clear();
                 },
                 () -> {
                     lines_list.add("b,apple");
-                    assertThrows(ArrayIndexOutOfBoundsException.class,() -> dataParserService.parseData(lines_list));
+                    assertThrows(ArrayIndexOutOfBoundsException.class, () -> dataParserService.parseData(lines_list));
                     lines_list.clear();
                 }
         );

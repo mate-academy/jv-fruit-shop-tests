@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.*;
-import core.basesyntax.service.*;
-import core.basesyntax.utility.*;
-
-import java.util.*;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.utility.Operation;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataParserServiceImpl implements DataParserService {
     private static final int OPERATION_INDEX = 0;

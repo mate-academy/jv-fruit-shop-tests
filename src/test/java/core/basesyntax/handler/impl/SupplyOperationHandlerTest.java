@@ -1,11 +1,12 @@
 package core.basesyntax.handler.impl;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,11 +38,11 @@ class SupplyOperationHandlerTest {
     void handle_validQuantityData_Ok() {
         assertAll(
                 () -> {
-                    fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY/2);
+                    fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY / 2);
                     supplyOperationHandler.handle(fruitTransaction);
                 },
                 () -> {
-                    Storage.fruitStorage.put(fruitTransaction.getFruit(),null);
+                    Storage.fruitStorage.put(fruitTransaction.getFruit(), null);
                     fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY);
                     supplyOperationHandler.handle(fruitTransaction);
                 }
@@ -49,5 +50,4 @@ class SupplyOperationHandlerTest {
         int actualQuantity = Storage.fruitStorage.get(fruitTransaction.getFruit());
         assertEquals(PRIMARY_FRUIT_QUANTITY, actualQuantity);
     }
-
 }

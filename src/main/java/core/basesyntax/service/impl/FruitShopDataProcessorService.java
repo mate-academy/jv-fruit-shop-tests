@@ -1,10 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.*;
-import core.basesyntax.service.*;
-import core.basesyntax.strategy.*;
-
-import java.util.*;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataProcessorService;
+import core.basesyntax.strategy.ShopOperationStrategy;
+import java.util.List;
 
 public class FruitShopDataProcessorService implements DataProcessorService {
     private final ShopOperationStrategy shopOperationStrategy;

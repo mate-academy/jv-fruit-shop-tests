@@ -1,8 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.*;
-
-import java.io.*;
+import core.basesyntax.service.DataWriterService;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class CsvWriterService implements DataWriterService {
 

@@ -1,6 +1,7 @@
 package core.basesyntax.utility;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public enum Operation {
     BALANCE("b"),
@@ -8,7 +9,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private String code;
+    private final String code;
 
     Operation(String code) {
         this.code = code;
@@ -22,7 +23,8 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(operation -> operation.getCode().equals(operationFirstLetter))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("There is no operation code with symbol "
+                .orElseThrow(() ->
+                        new NoSuchElementException("There is no operation code with symbol "
                         + operationFirstLetter));
     }
 }

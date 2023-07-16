@@ -1,5 +1,8 @@
 package core.basesyntax.handler.impl;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.model.FruitTransaction;
@@ -7,8 +10,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReturnOperationHandlerTest {
     private static final int PRIMARY_FRUIT_QUANTITY = 10;

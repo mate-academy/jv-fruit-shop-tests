@@ -1,16 +1,29 @@
 package core.basesyntax;
 
-import core.basesyntax.db.*;
-import core.basesyntax.handler.*;
-import core.basesyntax.handler.impl.*;
-import core.basesyntax.model.*;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
-import core.basesyntax.strategy.*;
-import core.basesyntax.strategy.impl.*;
-import core.basesyntax.utility.*;
-
-import java.util.*;
+import core.basesyntax.db.Storage;
+import core.basesyntax.handler.ShopOperationHandler;
+import core.basesyntax.handler.impl.BalanceOperationHandler;
+import core.basesyntax.handler.impl.PurchaseOperationHandler;
+import core.basesyntax.handler.impl.ReturnOperationHandler;
+import core.basesyntax.handler.impl.SupplyOperationHandler;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.DataProcessorService;
+import core.basesyntax.service.DataReaderService;
+import core.basesyntax.service.DataWriterService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.impl.CsvReaderService;
+import core.basesyntax.service.impl.CsvWriterService;
+import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.FruitShopDataProcessorService;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.strategy.ShopOperationStrategy;
+import core.basesyntax.strategy.impl.ShopOperationStrategyImpl;
+import core.basesyntax.utility.FruitQuantityChecker;
+import core.basesyntax.utility.Operation;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_CSV = "src/main/resources/input.csv";

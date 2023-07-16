@@ -1,10 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.DataWriterService;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CsvWriterServiceTest {
     private static final String INVALID_PATH = "src/test/resources/dummy-path/dummy.csv";

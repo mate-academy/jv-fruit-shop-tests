@@ -23,6 +23,7 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(operation -> operation.getCode().equals(operationFirstLetter))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new NoSuchElementException("There is no operation code with symbol "
+                        + operationFirstLetter));
     }
 }

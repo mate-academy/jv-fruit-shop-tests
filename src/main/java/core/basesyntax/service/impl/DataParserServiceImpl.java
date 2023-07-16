@@ -23,8 +23,7 @@ public class DataParserServiceImpl implements DataParserService {
             Operation currentOperation = Operation.getByValue(split[OPERATION_INDEX]);
             fruitTransaction.setOperation(currentOperation);
             fruitTransaction.setFruit(split[FRUIT_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX]));
-
+            fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX])); // TODO found out about following this line up with exception checking
             transactionList.add(fruitTransaction);
         }
         return transactionList;

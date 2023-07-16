@@ -3,14 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataParserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DataParserServiceImplTest {
     private static List<String> lines_list;
@@ -44,6 +44,10 @@ class DataParserServiceImplTest {
     void parseData_parseInValidQuantityData_NotOk() {
         lines_list.add("b,apple,dummy");
         assertThrows(NumberFormatException.class, () -> dataParserService.parseData(lines_list));
+
+        lines_list.clear();
+        lines_list.add("b,apple,-12");
+        assertThrows(IllegalArgumentException.class, () -> dataParserService.parseData(lines_list));
     }
 
     @Test

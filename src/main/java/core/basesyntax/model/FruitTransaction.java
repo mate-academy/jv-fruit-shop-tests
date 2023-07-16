@@ -28,6 +28,9 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity should not be less zero");
+        }
         this.quantity = quantity;
     }
 }

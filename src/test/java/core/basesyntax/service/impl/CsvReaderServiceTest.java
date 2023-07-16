@@ -4,7 +4,7 @@ import core.basesyntax.service.DataReaderService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CsvReaderServiceTest {
     private static final String INVALID_PATH = "src/test/resources/dummy-path/dummy.csv";

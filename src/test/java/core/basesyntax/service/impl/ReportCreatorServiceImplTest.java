@@ -22,17 +22,16 @@ class ReportCreatorServiceImplTest {
     @BeforeEach
     void setUp() {
         Storage.fruitStorage.put(FIRST_KEY, 3);
-        Storage.fruitStorage.put(SECOND_KEY,0);
+        Storage.fruitStorage.put(SECOND_KEY, 0);
     }
 
     @AfterEach
     void tearDown() {
-        Storage.fruitStorage.remove(FIRST_KEY);
-        Storage.fruitStorage.remove(SECOND_KEY);
+        Storage.fruitStorage.clear();
     }
 
     @Test
-    void createReport_validData_Ok() {
+    void createReport_validData_ok() {
         String expectedReportData = "fruit,quantity\n"
                 + FIRST_KEY + "," + Storage.fruitStorage.get(FIRST_KEY) + "\n"
                 + SECOND_KEY + "," + Storage.fruitStorage.get(SECOND_KEY) + "\n";

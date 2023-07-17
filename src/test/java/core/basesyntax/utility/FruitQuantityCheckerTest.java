@@ -1,6 +1,5 @@
 package core.basesyntax.utility;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
@@ -27,24 +26,23 @@ class FruitQuantityCheckerTest {
     }
 
     @Test
-    void checkFruitQuantity_ValidData_Ok() {
+    void checkFruitQuantity_validData_ok() {
         fruitMap.put(FIRS_KEY, 12);
         fruitMap.put(SECOND_KEY, 0);
         fruitQuantityChecker.checkFruitQuantity(fruitMap);
     }
 
     @Test
-    void checkFruitQuantity_InvalidData_NotOk() {
+    void checkFruitQuantity_negativeQuantityData_notOk() {
         fruitMap.put(FIRS_KEY, -1);
-        assertAll(
-                () -> assertThrows(RuntimeException.class,
-                        () -> fruitQuantityChecker.checkFruitQuantity(fruitMap)),
-                () -> {
-                    fruitMap.clear();
-                    fruitMap.put(SECOND_KEY, null);
-                    assertThrows(RuntimeException.class,
-                            () -> fruitQuantityChecker.checkFruitQuantity(fruitMap));
-                }
-        );
+        assertThrows(RuntimeException.class,
+                () -> fruitQuantityChecker.checkFruitQuantity(fruitMap));
+    }
+
+    @Test
+    void checkFruitQuantity_nullQuantityData_notOk() {
+        fruitMap.put(SECOND_KEY, null);
+        assertThrows(RuntimeException.class,
+                () -> fruitQuantityChecker.checkFruitQuantity(fruitMap));
     }
 }

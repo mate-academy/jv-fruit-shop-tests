@@ -32,18 +32,21 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handle_validQuantityData_Ok() {
+    void handle_validQuantityData_ok() {
         assertAll(() -> {
                     fruitTransaction.setQuantity(0);
                     balanceOperationHandler.handle(fruitTransaction);
+                    int expectedQuantity = 0;
+                    Integer actualQuantity = Storage.fruitStorage.get(fruitTransaction.getFruit());
+                    assertEquals(expectedQuantity, actualQuantity);
+
                 }, () -> {
                     fruitTransaction.setQuantity(12);
                     balanceOperationHandler.handle(fruitTransaction);
+                    int expectedQuantity = 12;
+                    Integer actualQuantity = Storage.fruitStorage.get(fruitTransaction.getFruit());
+                    assertEquals(expectedQuantity, actualQuantity);
                 }
-
         );
-        int expectedQuantity = 12;
-        Integer actualQuantity = Storage.fruitStorage.get(fruitTransaction.getFruit());
-        assertEquals(expectedQuantity, actualQuantity);
     }
 }

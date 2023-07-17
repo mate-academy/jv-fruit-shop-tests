@@ -35,7 +35,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_validQuantityData_Ok() {
+    void handle_validQuantityData_ok() {
         assertAll(
                 () -> {
                     fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY / 2);
@@ -53,7 +53,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_InvalidQuantityData_NotOk() {
+    void handle_invalidQuantityData_notOk() {
         fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY + 1);
         assertThrows(IllegalArgumentException.class,
                 () -> purchaseOperationHandler.handle(fruitTransaction));

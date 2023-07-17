@@ -18,12 +18,12 @@ class ShopOperationStrategyImplTest {
     @BeforeAll
     static void beforeAll() {
         Map<Operation, ShopOperationHandler> shopOperationHandlerMap = new HashMap<>();
-        shopOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        shopOperationHandlerMap.put(BALANCE_OPERATION, new BalanceOperationHandler());
         shopOperationStrategy = new ShopOperationStrategyImpl(shopOperationHandlerMap);
     }
 
     @Test
-    void get_validData_Ok() {
+    void get_validData_ok() {
         ShopOperationHandler expectedHandler = shopOperationStrategy.get(BALANCE_OPERATION);
         assertTrue(expectedHandler instanceof BalanceOperationHandler);
     }

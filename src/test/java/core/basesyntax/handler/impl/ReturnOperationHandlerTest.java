@@ -35,7 +35,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handle_validQuantityData_Ok() {
+    void handle_validQuantityData_ok() {
         assertAll(
                 () -> {
                     fruitTransaction.setQuantity(PRIMARY_FRUIT_QUANTITY / 2);

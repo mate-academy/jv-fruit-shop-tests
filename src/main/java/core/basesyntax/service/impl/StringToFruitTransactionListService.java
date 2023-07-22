@@ -1,17 +1,18 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation.getAllAllowedOperationTypes;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StringToListService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringToFruitTransactionListService implements StringToListService<FruitTransaction> {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER = 2;
+    private int currentLineInInputFile;
 
     @Override
     public List<FruitTransaction> convert(String string) {
@@ -20,12 +21,11 @@ public class StringToFruitTransactionListService implements StringToListService<
         List<FruitTransaction> parsedTransactions = new ArrayList<>();
         for (int i = 0; i < transactions.length; i++) {
             String[] transactionInArray = transactions[i].split(",");
-            int currentLineInInputFile = i + DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER;
+            currentLineInInputFile = i + DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER;
             FruitTransaction.Operation operation =
-                    defineOperationType(transactionInArray[OPERATION_INDEX],
-                            currentLineInInputFile);
+                    defineOperationType(transactionInArray[OPERATION_INDEX]);
             int quantity = Integer.parseInt(transactionInArray[QUANTITY_INDEX]);
-            checkQuantityForNegativeNumber(quantity, currentLineInInputFile);
+            checkQuantityForNegativeNumber(quantity);
             parsedTransactions
                     .add(new FruitTransaction(operation, transactionInArray[FRUIT_INDEX],quantity));
         }
@@ -38,15 +38,14 @@ public class StringToFruitTransactionListService implements StringToListService<
         }
     }
 
-    private void checkQuantityForNegativeNumber(int quantity, int currentLineInInputFile) {
-        if (quantity < 0) {
+    private void checkQuantityForNegativeNumber(int quantity) {
+        if (quantity <= 0) {
             throw new RuntimeException("Invalid quantity on line " + currentLineInInputFile
-                    + "! Quantity can't be below zero! Actual number is " + quantity);
+                    + "! Quantity can't be below or equals zero! Actual number is " + quantity);
         }
     }
 
-    private FruitTransaction.Operation defineOperationType(String type,
-                                                           int currentLineInInputFile) {
+    private FruitTransaction.Operation defineOperationType(String type) {
         switch (type) {
             case "b":
                 return FruitTransaction.Operation.BALANCE;
@@ -61,11 +60,5 @@ public class StringToFruitTransactionListService implements StringToListService<
                         + currentLineInInputFile + "! It's " + type + ", but allowed types are: "
                         + getAllAllowedOperationTypes());
         }
-    }
-
-    private String getAllAllowedOperationTypes() {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .map(FruitTransaction.Operation::getCode)
-                .collect(Collectors.joining(", "));
     }
 }

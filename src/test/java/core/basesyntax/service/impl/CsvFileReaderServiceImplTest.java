@@ -1,15 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileReaderService;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.service.CsvFileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceImplTest {
     private static final String VALID_FILEPATH = "src/test/resources/validData.csv";
@@ -20,7 +18,7 @@ class CsvFileReaderServiceImplTest {
     private final CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
 
     @Test
-    public void read_validFile_NoExceptions() {
+    void read_validFile_NoExceptions() {
         String actual = csvFileReaderService.read(VALID_FILEPATH);
         String expected = "b,banana,20" + System.lineSeparator()
                         + "b,apple,100" + System.lineSeparator()
@@ -35,14 +33,14 @@ class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void read_nullFilePath_throwsRuntimeException() {
+    void read_nullFilePath_throwsRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
                 () -> csvFileReaderService.read(null));
         assertEquals("Input filePath is null!", runtimeException.getMessage());
     }
 
     @Test
-    public void read_invalidFilePath_throwsRuntimeException() {
+    void read_invalidFilePath_throwsRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
                 () -> csvFileReaderService.read(INVALID_FILEPATH));
         assertEquals("Something wrong with file's path " + INVALID_FILEPATH,
@@ -50,7 +48,7 @@ class CsvFileReaderServiceImplTest {
     }
 
     @Test
-    public void read_invalidFirstLine_throwsRuntimeException() {
+    void read_invalidFirstLine_throwsRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
                 () -> csvFileReaderService.read(PATH_OF_FILE_WITH_INVALID_FIRST_LINE));
         String firstLine = "";

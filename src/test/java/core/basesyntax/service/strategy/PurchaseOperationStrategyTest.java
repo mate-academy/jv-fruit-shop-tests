@@ -30,7 +30,7 @@ class PurchaseOperationStrategyTest {
     @Test
     void process_notEnoughFruits_NotOk() {
         try {
-            FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 15);
+            FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 20);
             strategy.process(transaction);
         } catch (IllegalArgumentException e) {
             return;

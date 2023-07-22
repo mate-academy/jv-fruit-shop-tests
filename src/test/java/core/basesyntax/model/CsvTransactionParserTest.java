@@ -4,10 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.service.impl.ErrorDataException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvTransactionParserTest {
     private TransactionParser parser = new CsvTransactionParser();
+
+    @BeforeEach
+    void setUp() {
+        TransactionParser parser = new CsvTransactionParser();
+    }
 
     @Test
     void parseTransaction_testParsing_Ok() {

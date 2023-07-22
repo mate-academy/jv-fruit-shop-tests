@@ -11,7 +11,7 @@ class BalanceOperationStrategyTest {
     @Test
     void process_checkTransactionProcessing_Ok() {
         Storage storage = new Storage();
-        OperationStrategy strategy = new BalanceOperationStrategy(storage);
+        BalanceOperationStrategy strategy = new BalanceOperationStrategy(storage);
         FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", 20);
         strategy.process(transaction);
         Assertions.assertEquals(20, storage.getFruitQuantity("banana"));

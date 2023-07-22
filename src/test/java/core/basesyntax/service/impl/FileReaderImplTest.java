@@ -24,8 +24,8 @@ class FileReaderImplTest {
     @Test
     void readFile_CheckReadingTestFile_Ok() {
         String inputFileName = "src/test/resources/test_input_file.csv";
-        FileReaderService fileReaderService = new FileReaderImpl();
-        FileReaderResult fileReaderResult = fileReaderService.readFile(inputFileName);
+        FileReaderImpl fileReader = new FileReaderImpl();
+        FileReaderResult fileReaderResult = fileReader.readFile(inputFileName);
         String[] lines = fileReaderResult.getLines();
         String secondStringExpected = "b,banana,20";
         String ninthStringExpected = "s,banana,50";

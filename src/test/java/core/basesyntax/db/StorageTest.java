@@ -3,13 +3,20 @@ package core.basesyntax.db;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.ErrorDataException;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class StorageTest {
+    private static Storage storage;
+
+    @BeforeAll
+    static void beforeAll() {
+        storage = new Storage();
+    }
 
     @Test
     void updateFruitQuantity_QuantityLessThan0_NotOk() {
-        Storage storage = new Storage();
+
         try {
             storage.updateFruitQuantity("Any fruit", -1);
         } catch (ErrorDataException e) {

@@ -3,11 +3,16 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.FileReaderService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
-    private FileReaderService fileReader = new FileReaderImpl();
+    private static FileReaderImpl fileReader;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileReader = new FileReaderImpl();
+    }
 
     @Test
     void readFile_CheckIncorrectAddress_NotOk() {
@@ -24,7 +29,6 @@ class FileReaderImplTest {
     @Test
     void readFile_CheckReadingTestFile_Ok() {
         String inputFileName = "src/test/resources/test_input_file.csv";
-        FileReaderImpl fileReader = new FileReaderImpl();
         FileReaderResult fileReaderResult = fileReader.readFile(inputFileName);
         String[] lines = fileReaderResult.getLines();
         String secondStringExpected = "b,banana,20";

@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.fail;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationStrategyTest {
-    private Storage storage = new Storage();
-    private PurchaseOperationStrategy strategy = new PurchaseOperationStrategy(storage);
+    private static Storage storage;
+    private static PurchaseOperationStrategy strategy;
 
-    @BeforeEach
-    void setUp() {
-        Storage storage = new Storage();
-        PurchaseOperationStrategy strategy = new PurchaseOperationStrategy(storage);
+    @BeforeAll
+    static void beforeAll() {
+        storage = new Storage();
+        strategy = new PurchaseOperationStrategy(storage);
     }
 
     @Test

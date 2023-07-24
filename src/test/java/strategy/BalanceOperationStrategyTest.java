@@ -1,15 +1,14 @@
 package strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import dao.FruitStorageDao;
 import dao.FruitStorageDaoImpl;
+import java.util.HashMap;
+import java.util.Map;
 import model.Fruit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceOperationStrategyTest {
     private FruitStorageDao fruitStorageDao;

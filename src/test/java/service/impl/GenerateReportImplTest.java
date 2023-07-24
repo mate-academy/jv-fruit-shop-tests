@@ -1,15 +1,14 @@
 package service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import dao.FruitStorageDao;
 import dao.FruitStorageDaoImpl;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.GenerateReport;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GenerateReportImplTest {
 

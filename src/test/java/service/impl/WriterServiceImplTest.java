@@ -1,20 +1,19 @@
 package service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import dao.FruitStorageDao;
 import dao.FruitStorageDaoImpl;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import service.ReaderService;
-import service.WriterService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import service.ReaderService;
+import service.WriterService;
 
 class WriterServiceImplTest {
     private static final String TEST_FILE = "src/main/resources/test.csv";

@@ -1,17 +1,16 @@
 package service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import dao.FruitStorageDao;
 import dao.FruitStorageDaoImpl;
+import java.util.ArrayList;
 import model.Fruit;
 import model.InputDataType;
 import model.Operation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.TransactionOperation;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionOperationImplTest {
     private TransactionOperation transactionOperation;
@@ -21,6 +20,8 @@ class TransactionOperationImplTest {
     void setUp() {
         transactionOperation = new TransactionOperationImpl();
         fruitStorageDao = new FruitStorageDaoImpl();
+        fruitStorageDao.set("banana", 0);
+        fruitStorageDao.set("apple", 0);
     }
 
     @Test

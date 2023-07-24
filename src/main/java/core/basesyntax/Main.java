@@ -36,7 +36,7 @@ public class Main {
                 .map(PARSER_FILE::parseLine)
                 .forEach(transaction -> operationStrategyMap
                         .get(Operation.checkTypeOperation(transaction.getOperation()))
-                        .handle(transaction));
+                        .apply(transaction));
         FruitService reportService = new FruitServiceImpl();
         String report = reportService.getReport();
         WRITER_FILE.writeToFile(DESTINATION_ADDRESS, report);

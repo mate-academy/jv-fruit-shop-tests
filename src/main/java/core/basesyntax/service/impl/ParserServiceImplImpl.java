@@ -2,10 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitTransaction;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ParserService;
 import java.util.Arrays;
 
-public class ParserServiceImpl implements ParserService {
+public class ParserServiceImplImpl implements core.basesyntax.service.ParserServiceImpl {
     private static final String CSV_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

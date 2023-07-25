@@ -2,10 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitService;
 import java.util.Map;
 
-public class FruitServiceImpl implements FruitService {
+public class FruitServiceImpl implements core.basesyntax.service.FruitServiceImpl {
 
     @Override
     public String getReport() {

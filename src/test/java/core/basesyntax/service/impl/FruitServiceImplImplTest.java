@@ -2,18 +2,18 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FruitServiceImplTest {
+class FruitServiceImplImplTest {
 
-    private FruitService fruitService;
+    private FruitServiceImpl fruitService;
 
     @BeforeEach
     public void setUp() {
-        fruitService = new FruitServiceImpl();
+        fruitService = new core.basesyntax.service.impl.FruitServiceImpl();
         Storage.fruits.clear();
     }
 

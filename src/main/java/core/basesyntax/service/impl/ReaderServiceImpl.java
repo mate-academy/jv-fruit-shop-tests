@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -39,9 +38,10 @@ public class ReaderServiceImpl implements ReaderService {
             }
 
             try {
-                int quantityInt = Integer.parseInt(quantity); // throws NumberFormatException if not a number
+                int quantityInt = Integer.parseInt(quantity);
                 if (quantityInt < 0) {
-                    throw new RuntimeException("Quantity can't be negative on line " + (i + 1) + ": " + quantity);
+                    throw new RuntimeException("Quantity can't be negative on line "
+                            + (i + 1) + ": " + quantity);
                 }
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid quantity on line " + (i + 1) + ": " + quantity);
@@ -79,9 +79,10 @@ public class ReaderServiceImpl implements ReaderService {
             }
 
             try {
-                int qty = Integer.parseInt(quantity); // throws NumberFormatException if not a number
+                int qty = Integer.parseInt(quantity);
                 if (qty <= 0) {
-                    throw new RuntimeException("Quantity must be greater than 0 on line " + (i + 1) + ": " + quantity);
+                    throw new RuntimeException("Quantity must be greater than 0 on line "
+                            + (i + 1) + ": " + quantity);
                 }
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid quantity on line " + (i + 1) + ": " + quantity);

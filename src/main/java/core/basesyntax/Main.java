@@ -1,6 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.service.*;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.Operation;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
@@ -9,7 +13,6 @@ import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

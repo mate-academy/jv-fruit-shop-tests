@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dto.FruitTransaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ParserService;
-
 import java.util.Arrays;
 
 public class ParserServiceImpl implements ParserService {

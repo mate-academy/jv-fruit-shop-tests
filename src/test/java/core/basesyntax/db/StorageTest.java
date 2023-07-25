@@ -3,6 +3,7 @@ package core.basesyntax.db;
 import static org.junit.Assert.fail;
 
 import core.basesyntax.service.impl.ErrorDataException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -23,5 +24,10 @@ class StorageTest {
             return;
         }
         fail("If fruit quantity is less than 0, ErrorDataException should be thrown");
+    }
+
+    @AfterEach
+    void tearDown() {
+        storage = new Storage();
     }
 }

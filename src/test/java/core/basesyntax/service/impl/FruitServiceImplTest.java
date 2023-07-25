@@ -1,11 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import core.basesyntax.dto.FruitTransaction;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitService;
-import org.junit.Assert;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class FruitServiceImplTest {
 

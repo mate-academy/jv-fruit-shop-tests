@@ -1,15 +1,15 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
-    public int apply(Transaction transaction) {
-        int previousValue = Storage.fruits.get(transaction.getFruit());
-        int newValue = previousValue - transaction.getQuantity();
-        Storage.fruits.put(transaction.getFruit(), newValue);
+    public int apply(FruitTransaction fruitTransaction) {
+        int previousValue = Storage.fruits.get(fruitTransaction.getFruit());
+        int newValue = previousValue - fruitTransaction.getQuantity();
+        Storage.fruits.put(fruitTransaction.getFruit(), newValue);
         return newValue;
     }
 }

@@ -2,12 +2,12 @@ package core.basesyntax.dto;
 
 import core.basesyntax.model.Fruit;
 
-public class Transaction {
+public class FruitTransaction {
     private String operation;
     private Fruit fruit;
     private int quantity;
 
-    public Transaction(String operation, Fruit fruit, int quantity) {
+    public FruitTransaction(String operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

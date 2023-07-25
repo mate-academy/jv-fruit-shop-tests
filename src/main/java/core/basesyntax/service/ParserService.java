@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.FruitTransaction;
 
 public interface ParserService {
-    Transaction parseLine(String line);
+    FruitTransaction parseLine(String line);
 }

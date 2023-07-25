@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.FruitTransaction;
 
 public interface OperationHandler {
-    int apply(Transaction transaction);
+    int apply(FruitTransaction fruitTransaction);
 }

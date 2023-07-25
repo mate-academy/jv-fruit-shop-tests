@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.FruitTransaction;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ParserService;
 
@@ -14,10 +14,10 @@ public class ParserServiceImpl implements ParserService {
     private static final int REQUIRED_ELEMENTS = 3;
 
     @Override
-    public Transaction parseLine(String line) {
+    public FruitTransaction parseLine(String line) {
         String[] splitLine = line.split(CSV_SEPARATOR);
         validate(splitLine);
-        return new Transaction(splitLine[OPERATION_INDEX],
+        return new FruitTransaction(splitLine[OPERATION_INDEX],
                 new Fruit(splitLine[FRUIT_INDEX]),
                 Integer.parseInt(splitLine[QUANTITY_INDEX]));
     }

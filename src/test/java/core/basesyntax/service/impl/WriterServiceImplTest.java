@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.service.ReaderServiceImpl;
+import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,12 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private ReaderServiceImpl readerServiceImpl;
+    private ReaderService readerService;
     private TempFile tempFile;
 
     @BeforeEach
     void setUp() {
-        readerServiceImpl = new ReaderServiceImplImpl();
+        readerService = new ReaderServiceImpl();
         tempFile = new TempFile();
     }
 
@@ -38,7 +38,7 @@ class WriterServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        List<String> lines = readerServiceImpl.readFromFileReport(tmpFile.getPath());
+        List<String> lines = readerService.readFromFileReport(tmpFile.getPath());
         Assertions.assertEquals(3, lines.size());
         Assertions.assertEquals("fruit,quantity", lines.get(0));
         Assertions.assertEquals("banana,152", lines.get(1));
@@ -81,7 +81,7 @@ class WriterServiceImplTest {
         }
         final String path = tmpFile.getPath();
         assertThrows(RuntimeException.class,
-                () -> readerServiceImpl.readFromFileReport(path));
+                () -> readerService.readFromFileReport(path));
         tmpFile.delete();
     }
 }

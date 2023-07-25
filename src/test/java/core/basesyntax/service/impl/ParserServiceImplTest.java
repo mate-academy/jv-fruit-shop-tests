@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitTransaction;
-import core.basesyntax.service.ParserServiceImpl;
+import core.basesyntax.service.ParserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ParserServiceImplImplTest {
+class ParserServiceImplTest {
     @Test
     public void parseLine_ValidLine_ShouldReturnFruitTransaction() {
-        ParserServiceImpl parserServiceImpl = new ParserServiceImplImpl();
+        ParserService parserService = new ParserServiceImpl();
         String line = "b,apple,5";
-        FruitTransaction fruitTransaction = parserServiceImpl.parseLine(line);
+        FruitTransaction fruitTransaction = parserService.parseLine(line);
         Assertions.assertEquals("b", fruitTransaction.getOperation());
         Assertions.assertEquals("apple", fruitTransaction.getFruit().getName());
         Assertions.assertEquals(5, fruitTransaction.getQuantity());
@@ -18,8 +18,8 @@ class ParserServiceImplImplTest {
 
     @Test
     public void parseLine_InvalidLine_ShouldThrowException() {
-        ParserServiceImpl parserServiceImpl = new ParserServiceImplImpl();
+        ParserService parserService = new ParserServiceImpl();
         String line = "b,apple,-5";
-        Assertions.assertThrows(RuntimeException.class, () -> parserServiceImpl.parseLine(line));
+        Assertions.assertThrows(RuntimeException.class, () -> parserService.parseLine(line));
     }
 }

@@ -3,20 +3,20 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.service.ReaderServiceImpl;
+import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReaderServiceImplImplTest {
-    private ReaderServiceImpl readerServiceImpl;
+class ReaderServiceImplTest {
+    private ReaderService readerService;
     private TempFile tempFile;
 
     @BeforeEach
     void setUp() {
-        readerServiceImpl = new ReaderServiceImplImpl();
+        readerService = new ReaderServiceImpl();
         tempFile = new TempFile();
     }
 
@@ -38,7 +38,7 @@ class ReaderServiceImplImplTest {
         }
         final String path = tmpFile.getPath();
         assertThrows(RuntimeException.class,
-                () -> readerServiceImpl.readFromFileReport(path));
+                () -> readerService.readFromFileReport(path));
         tmpFile.delete();
     }
 
@@ -46,7 +46,7 @@ class ReaderServiceImplImplTest {
     void readFromNonExistentFile_NotOk() {
         String nonExistentFilePath = "non-existent-file.csv";
         assertThrows(RuntimeException.class,
-                () -> readerServiceImpl.readFromFileReport(nonExistentFilePath));
+                () -> readerService.readFromFileReport(nonExistentFilePath));
     }
 
     @Test

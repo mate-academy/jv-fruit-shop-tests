@@ -23,15 +23,11 @@ class WriterServiceImplTest {
     private Path testFilePath;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         writer = new WriterServiceImpl();
         fruitStorageDao = new FruitStorageDaoImpl();
         reader = new ReaderServiceImpl();
-        try {
-            testFilePath = Files.createTempFile("test", ".csv");
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file with path " + testFilePath, e);
-        }
+        testFilePath = Files.createTempFile("test", ".csv");
     }
 
     @Test
@@ -40,7 +36,6 @@ class WriterServiceImplTest {
 
         fruitStorageDao.set("banana", 100);
         fruitStorageDao.set("apple", 25);
-
         writer.write(expected, TEST_FILE);
 
         List<String> actual = new ArrayList<>();
@@ -52,18 +47,10 @@ class WriterServiceImplTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws IOException {
         fruitStorageDao.set("banana", 0);
         fruitStorageDao.set("apple", 0);
-        try {
-            Files.deleteIfExists(Path.of(TEST_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't find file" + TEST_FILE, e);
-        }
-        try {
-            Files.deleteIfExists(testFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete file " + testFilePath, e);
-        }
+        Files.deleteIfExists(Path.of(TEST_FILE));
+        Files.deleteIfExists(testFilePath);
     }
 }

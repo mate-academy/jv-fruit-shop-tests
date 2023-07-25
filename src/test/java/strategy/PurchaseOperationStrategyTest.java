@@ -1,6 +1,7 @@
 package strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dao.FruitStorageDao;
 import dao.FruitStorageDaoImpl;
@@ -33,6 +34,22 @@ class PurchaseOperationStrategyTest {
 
         Map<String,Integer> actual = fruitStorageDao.getFruits();
 
+        assertEquals(expected, actual,
+                "Actual and expected fruit stocks must be equals");
+    }
+
+    @Test
+    void handlePurchaseGreaterThanStored_notOk() {
+        Map<String,Integer> expected = new HashMap<>();
+        expected.put("banana", 15);
+        expected.put("apple", 10);
+
+        Fruit fruit = new Fruit("apple", 25);
+        assertThrows(RuntimeException.class,
+                () -> purchaseOperationStrategy.handle(fruit, fruitStorageDao),
+                "Can't buy more fruits than stored in stock");
+
+        Map<String,Integer> actual = fruitStorageDao.getFruits();
         assertEquals(expected, actual,
                 "Actual and expected fruit stocks must be equals");
     }

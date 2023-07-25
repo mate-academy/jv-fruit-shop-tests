@@ -27,11 +27,8 @@ class FruitStorageDaoTests {
         Fruit expected = new Fruit(fruitName, fruitQuantity);
         Fruit actual = fruitStorageDao.getFruit("banana");
 
-        assertEquals(expected.getName(), actual.getName(),
-                "Actual and expected fruit name must be equals");
-
-        assertEquals(expected.getQuantity(), actual.getQuantity(),
-                "Actual and expected fruit q-ty must be equals");
+        assertEquals(expected, actual,
+                "Actual and expected fruit should be equals");
     }
 
     @Test
@@ -49,10 +46,7 @@ class FruitStorageDaoTests {
         fruitStorageDao.set("banana", 50);
         Fruit actual = fruitStorageDao.getFruit("banana");
 
-        assertEquals(expected.getName(), actual.getName(),
-                "Actual and expected fruit names must be equals");
-        assertEquals(expected.getQuantity(), actual.getQuantity(),
-                "Actual and expected fruit q-ty must be equals");
+        assertEquals(expected, actual, "Actual and expected fruit should be equal");
     }
 
     @Test

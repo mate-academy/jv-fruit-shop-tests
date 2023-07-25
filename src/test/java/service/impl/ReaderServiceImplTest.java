@@ -21,34 +21,18 @@ class ReaderServiceImplTest {
     private Path testFilePath;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         reader = new ReaderServiceImpl();
-        try {
-            testFilePath = Files.createTempFile("test", ".csv");
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file with path " + testFilePath, e);
-        }
+        testFilePath = Files.createTempFile("test", ".csv");
 
         String testString = "operation,fruit,quantity\nb,banana,10\nb,apple,20\nb,orange,30";
-        try {
-            Files.write(testFilePath, testString.getBytes(), StandardOpenOption.WRITE);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write to file " + testFilePath, e);
-        }
+        Files.write(testFilePath, testString.getBytes(), StandardOpenOption.WRITE);
     }
 
     @AfterEach
-    void tearDown() {
-        try {
-            Files.deleteIfExists(Path.of(TEST_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't find file" + TEST_FILE, e);
-        }
-        try {
-            Files.deleteIfExists(testFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't delete file " + testFilePath, e);
-        }
+    void tearDown() throws IOException {
+        Files.deleteIfExists(Path.of(TEST_FILE));
+        Files.deleteIfExists(testFilePath);
     }
 
     @Test

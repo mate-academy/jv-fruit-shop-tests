@@ -16,9 +16,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getBalanceOperation_ok() {
-        new BalanceOperationStrategy();
-        OperationHandler handler;
-        handler = operationStrategy.get(Operation.BALANCE);
+        OperationHandler handler = operationStrategy.get(Operation.BALANCE);
 
         assertTrue(handler instanceof BalanceOperationStrategy,
                 "The handler should be an instance of BalanceOperationStrategy");
@@ -26,9 +24,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getSupplyOperation_ok() {
-        new SupplyOperationStrategy();
-        OperationHandler handler;
-        handler = operationStrategy.get(Operation.SUPPLY);
+        OperationHandler handler = operationStrategy.get(Operation.SUPPLY);
 
         assertTrue(handler instanceof SupplyOperationStrategy,
                 "The handler should be an instance of SupplyOperationStrategy");
@@ -36,9 +32,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getPurchaseOperation_ok() {
-        new PurchaseOperationStrategy();
-        OperationHandler handler;
-        handler = operationStrategy.get(Operation.PURCHASE);
+        OperationHandler handler = operationStrategy.get(Operation.PURCHASE);
 
         assertTrue(handler instanceof PurchaseOperationStrategy,
                 "The handler should be an instance of PurchaseOperationStrategy");
@@ -46,9 +40,7 @@ class OperationStrategyImplTest {
 
     @Test
     void getReturnOperation_ok() {
-        new ReturnOperationStrategy();
-        OperationHandler handler;
-        handler = operationStrategy.get(Operation.RETURN);
+        OperationHandler handler = operationStrategy.get(Operation.RETURN);
 
         assertTrue(handler instanceof ReturnOperationStrategy,
                 "The handler should be an instance of ReturnOperationStrategy");

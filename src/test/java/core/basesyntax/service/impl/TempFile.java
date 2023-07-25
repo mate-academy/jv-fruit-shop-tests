@@ -2,29 +2,27 @@ package core.basesyntax.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class TempFile {
     public File createTempInputFile() throws IOException {
-        String resourcesPath = "src/test/java/resources";
-
-        File tempFile = File.createTempFile("input", ".csv", new File(resourcesPath));
-
-        if (!tempFile.exists()) {
-            throw new IOException("Failed to create input file in src/test/resources");
+        File tempFile = File.createTempFile("input", ".csv");
+        Path resourcesDir = Path.of("src", "test", "resources");
+        File inputFile = new File(resourcesDir.toFile(), tempFile.getName());
+        if (!inputFile.exists()) {
+            Files.copy(tempFile.toPath(), inputFile.toPath());
         }
-
-        return tempFile;
+        return inputFile;
     }
 
     public File createTempReportFile() throws IOException {
-        String resourcesPath = "src/test/java/resources";
-
-        File tempFile = File.createTempFile("report", ".csv", new File(resourcesPath));
-
-        if (!tempFile.exists()) {
-            throw new IOException("Failed to create report file in src/test/resources");
+        File tempFile = File.createTempFile("report", ".csv");
+        Path resourcesDir = Path.of("src", "test", "resources");
+        File reportFile = new File(resourcesDir.toFile(), tempFile.getName());
+        if (!reportFile.exists()) {
+            Files.copy(tempFile.toPath(), reportFile.toPath());
         }
-
-        return tempFile;
+        return reportFile;
     }
 }

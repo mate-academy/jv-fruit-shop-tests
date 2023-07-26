@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String SOURCE_ADDRESS = "src/main/java/resources/input.csv";
-    public static final String DESTINATION_ADDRESS = "src/main/java/resources/report.csv";
+    public static final String SOURCE_ADDRESS = "src/main/resources/input.csv";
+    public static final String DESTINATION_ADDRESS = "src/main/resources/report.csv";
     public static final ReaderService READER_FILE = new ReaderServiceImpl();
     public static final ParserService PARSER_FILE = new ParserServiceImpl();
     public static final WriterService WRITER_FILE = new WriterServiceImpl();

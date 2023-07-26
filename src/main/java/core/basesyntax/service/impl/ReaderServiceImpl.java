@@ -17,7 +17,7 @@ public class ReaderServiceImpl implements ReaderService {
             throw new RuntimeException("Can't read file " + path, e);
         }
 
-        for (int i = 1; i < lines.size(); i++) { // Start from 1 to skip header
+        for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);
 
             String[] parts = line.split(",");

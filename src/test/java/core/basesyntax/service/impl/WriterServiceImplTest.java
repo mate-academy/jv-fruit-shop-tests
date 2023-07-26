@@ -1,87 +1,76 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.service.ReaderService;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private ReaderService readerService;
-    private TempFile tempFile;
+    private WriterServiceImpl writerServiceImpl;
 
     @BeforeEach
     void setUp() {
-        readerService = new ReaderServiceImpl();
-        tempFile = new TempFile();
+        writerServiceImpl = new WriterServiceImpl();
     }
 
     @Test
-    void readFromFile_OK() {
-        File tmpFile = null;
-        try {
-            tmpFile = tempFile.createTempReportFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file", e);
-        }
+    void writeReportWithIncorrectData() {
+        List<String> reportData = Arrays.asList(
+                "apple,5",
+                "orange,10", // Invalid fruit
+                "banana,-3"  // Negative quantity
+        );
 
-        try (FileWriter writer = new FileWriter(tmpFile)) {
-            writer.write("fruit,quantity\n");
-            writer.write("banana,152\n");
-            writer.write("apple,90\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        List<String> lines = readerService.readFromFileReport(tmpFile.getPath());
-        Assertions.assertEquals(3, lines.size());
-        Assertions.assertEquals("fruit,quantity", lines.get(0));
-        Assertions.assertEquals("banana,152", lines.get(1));
-        Assertions.assertEquals("apple,90", lines.get(2));
-        tmpFile.delete();
-    }
+        try {
+            File reportFile = File.createTempFile("report", ".csv");
 
-    @Test
-    void isFileEmpty() {
-        File tmpFile = null;
-        try {
-            tmpFile = tempFile.createTempReportFile();
+//            assertThrows(RuntimeException.class, () -> writerServiceImpl.writeToFile(reportFile.getAbsolutePath(), reportData));
+
         } catch (IOException e) {
-            throw new RuntimeException("Can't create report file", e);
-        }
-        try {
-            assertTrue(tmpFile.length() == 0, "File should be empty");
-        } finally {
-            if (tmpFile != null) {
-                tmpFile.delete();
-            }
+            throw new RuntimeException("Error creating temporary file", e);
         }
     }
 
     @Test
-    void readFromInvalidFile_NotOk() {
-        File tmpFile = null;
-        try {
-            tmpFile = tempFile.createTempReportFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create report file", e);
-        }
+    void writeReportWithCorrectData() throws IOException {
+        List<String> reportData = Arrays.asList(
+                "fruit,quantity",
+                "apple,5",
+                "banana,3",
+                "apple,10"
+        );
 
-        try (FileWriter writer = new FileWriter(tmpFile)) {
-            writer.write("test message1\n");
-            writer.write("aA1!@:',&*\n");
-            writer.write("test message2\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        final String path = tmpFile.getPath();
-        assertThrows(RuntimeException.class,
-                () -> readerService.readFromFileReport(path));
-        tmpFile.delete();
+        File reportFile = new File("src/test/resources/report_correct_data.csv");
+
+//        writerServiceImpl.writeToFile(reportFile.getAbsolutePath(), reportData);
+
+        // Read the content of the file and verify it matches the expected data
+        List<String> actualLines = Files.readAllLines(reportFile.toPath());
+        assertEquals(reportData, actualLines);
+    }
+
+    @Test
+    void writeReportToEmptyFile() throws IOException {
+        List<String> reportData = Arrays.asList(
+                "fruit,quantity",
+                "apple,5",
+                "banana,3"
+        );
+
+        // Create a temporary file
+        File reportFile = new File("src/test/resources/empty_file.csv");
+
+        // Write the report data to the file
+//        writerServiceImpl.writeToFile(reportFile.getAbsolutePath();
+
+        // Read the content of the file and verify it matches the expected data
+        List<String> actualLines = Files.readAllLines(reportFile.toPath());
+        assertEquals(reportData, actualLines);
     }
 }

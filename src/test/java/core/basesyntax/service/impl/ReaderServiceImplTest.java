@@ -2,67 +2,48 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.service.ReaderService;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private ReaderService readerService;
-    private TempFile tempFile;
+    private ReaderServiceImpl readerServiceImpl;
+    private final String resourcesPath = "src/test/resources";
+    private final String validInputFileName = "input_correct_data.csv";
+    private final String invalidInputFileName = "input_incorrect_data.csv";
+    private final String emptyFileName = "empty_file.csv";
 
     @BeforeEach
     void setUp() {
-        readerService = new ReaderServiceImpl();
-        tempFile = new TempFile();
+        readerServiceImpl = new ReaderServiceImpl();
+    }
+
+    @Test
+    void readFromFile_OK() {
+        String filePath = resourcesPath + File.separator + validInputFileName;
+        List<String> lines = readerServiceImpl.readFromFileInput(filePath);
+        assertEquals(9, lines.size());
     }
 
     @Test
     void readFromInvalidFile_NotOk() {
-        File tmpFile = null;
-        try {
-            tmpFile = tempFile.createTempInputFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create input file", e);
-        }
-
-        try (FileWriter writer = new FileWriter(tmpFile)) {
-            writer.write("test message1\n");
-            writer.write("aA1!@:',&*\n");
-            writer.write("test message2\n");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        final String path = tmpFile.getPath();
-        assertThrows(RuntimeException.class,
-                () -> readerService.readFromFileReport(path));
-        tmpFile.delete();
+        String filePath = resourcesPath + File.separator + invalidInputFileName;
+        assertThrows(RuntimeException.class, () -> readerServiceImpl.readFromFileInput(filePath));
     }
 
     @Test
     void readFromNonExistentFile_NotOk() {
         String nonExistentFilePath = "non-existent-file.csv";
-        assertThrows(RuntimeException.class,
-                () -> readerService.readFromFileReport(nonExistentFilePath));
+        assertThrows(RuntimeException.class, () -> readerServiceImpl.readFromFileInput(nonExistentFilePath));
     }
 
     @Test
     void isFileEmpty() {
-        File tmpFile = null;
-        try {
-            tmpFile = tempFile.createTempInputFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create input file", e);
-        }
-        try {
-            assertTrue(tmpFile.length() == 0, "File should be empty");
-        } finally {
-            if (tmpFile != null) {
-                tmpFile.delete();
-            }
-        }
+        String filePath = resourcesPath + File.separator + emptyFileName;
+        List<String> lines = readerServiceImpl.readFromFileInput(filePath);
+        assertTrue(lines.isEmpty(), "File should be empty");
     }
 }

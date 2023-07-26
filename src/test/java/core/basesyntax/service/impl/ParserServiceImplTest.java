@@ -18,7 +18,7 @@ class ParserServiceImplTest {
     }
 
     @Test
-    void parseLine_correctData_ok() {
+    void parseLineCorrectDataOk() {
         String testLine = "b,banana,20";
         FruitTransaction expected = new FruitTransaction("b", new Fruit("banana"), 20);
         FruitTransaction actual = parserService.parseLine(testLine);
@@ -26,13 +26,13 @@ class ParserServiceImplTest {
     }
 
     @Test
-    void parseLine_incorrectData_notOk() {
+    void parseLineIncorrectDataNotOk() {
         String testLine = "b,banana,-20";
         assertThrows(RuntimeException.class, () -> parserService.parseLine(testLine));
     }
 
     @Test
-    public void parseLine_ValidLine_ShouldReturnFruitTransaction() {
+    public void parseLineValidLineShouldReturnFruitTransaction() {
         ParserService parserService = new ParserServiceImpl();
         String line = "b,apple,5";
         FruitTransaction fruitTransaction = parserService.parseLine(line);
@@ -42,7 +42,7 @@ class ParserServiceImplTest {
     }
 
     @Test
-    public void parseLine_InvalidLine_ShouldThrowException() {
+    public void parseLineInvalidLineShouldThrowException() {
         ParserService parserService = new ParserServiceImpl();
         String line = "b,apple,-5";
         assertThrows(RuntimeException.class, () -> parserService.parseLine(line));

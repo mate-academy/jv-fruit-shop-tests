@@ -15,7 +15,7 @@ class AddOperationHandlerTest {
     }
 
     @Test
-    void apply_AddNewFruit_ShouldAddFruitAndReturnQuantity() {
+    void applyAddNewFruitShouldAddFruitAndReturnQuantity() {
         Fruit apple = new Fruit("apple");
         FruitTransaction transaction = new FruitTransaction("ADD", apple, 10);
         AddOperationHandler handler = new AddOperationHandler();
@@ -27,7 +27,7 @@ class AddOperationHandlerTest {
     }
 
     @Test
-    void apply_UpdateExistingFruitQuantity_ShouldUpdateQuantityAndReturnUpdatedValue() {
+    void applyUpdateExistingFruitQuantityShouldUpdateQuantityAndReturnUpdatedValue() {
         Fruit apple = new Fruit("apple");
         FruitTransaction transaction = new FruitTransaction("ADD", apple, 10);
         Storage.fruits.put(apple, 5);
@@ -40,7 +40,7 @@ class AddOperationHandlerTest {
     }
 
     @Test
-    void apply_UpdateExistingFruitQuantityWithNegativeValue_ShouldUpdateQuantity() {
+    void applyUpdateExistingFruitQuantityWithNegativeValueShouldUpdateQuantity() {
         Fruit apple = new Fruit("apple");
         FruitTransaction transaction = new FruitTransaction("ADD", apple, -5);
         Storage.fruits.put(apple, 10);
@@ -53,7 +53,7 @@ class AddOperationHandlerTest {
     }
 
     @Test
-    void apply_AddNewFruitWithNegativeValue_ShouldNotAddFruitAndReturnZero() {
+    void applyAddNewFruitWithNegativeValueShouldNotAddFruitAndReturnZero() {
         Fruit apple = new Fruit("apple");
         FruitTransaction transaction = new FruitTransaction("ADD", apple, -5);
         AddOperationHandler handler = new AddOperationHandler();

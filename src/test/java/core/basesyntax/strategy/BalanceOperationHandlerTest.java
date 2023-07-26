@@ -18,7 +18,7 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void apply_ValidTransaction_ShouldUpdateQuantityAndReturnUpdatedValue() {
+    void applyValidTransactionShouldUpdateQuantityAndReturnUpdatedValue() {
         Fruit apple = new Fruit("apple");
         FruitTransaction transaction = new FruitTransaction("BALANCE", apple, 10);
         BalanceOperationHandler handler = new BalanceOperationHandler();
@@ -30,7 +30,7 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void apply_ValidTransactionWithExistingFruit_ShouldUpdateQuantityAndReturnUpdatedValue() {
+    void applyValidTransactionWithExistingFruitShouldUpdateQuantityAndReturnUpdatedValue() {
         Fruit apple = new Fruit("apple");
         FruitTransaction transaction = new FruitTransaction("BALANCE", apple, 10);
         Storage.fruits.put(apple, 5);

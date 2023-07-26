@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
+    private final String reportCorrectDataPath = "src/test/resources/report_correct_data.csv";
+    private final String reportEmptyPath = "src/test/resources/report_empty_file.csv";
+    private final File reportCorrectDataFile = new File(reportCorrectDataPath);
+    private final File reportEmptyFile = new File(reportEmptyPath);
     private WriterServiceImpl writerServiceImpl;
 
     @BeforeEach
@@ -23,9 +27,8 @@ class WriterServiceImplTest {
                 + "apple,5\n"
                 + "banana,3\n"
                 + "apple,10\n";
-        File reportFile = new File("src/test/resources/report_correct_data.csv");
-        writerServiceImpl.writeToFile(reportFile.getAbsolutePath(), reportData);
-        String actualLines = Files.readString(reportFile.toPath());
+        writerServiceImpl.writeToFile(reportCorrectDataFile.getAbsolutePath(), reportData);
+        String actualLines = Files.readString(reportCorrectDataFile.toPath());
         assertEquals(reportData, actualLines);
     }
 
@@ -34,14 +37,13 @@ class WriterServiceImplTest {
         String reportData = "fruit,quantity\n"
                 + "apple,5\n"
                 + "banana,3\n";
-        File reportFile = new File("src/test/resources/report_empty_file.csv");
-        writerServiceImpl.writeToFile(reportFile.getAbsolutePath(), reportData);
-        String actualLines = Files.readString(reportFile.toPath());
+        writerServiceImpl.writeToFile(reportEmptyFile.getAbsolutePath(), reportData);
+        String actualLines = Files.readString(reportEmptyFile.toPath());
         assertEquals(reportData, actualLines);
     }
 
     @Test
-    void writeReportToInvalidFilePath_shouldThrowRuntimeException() {
+    void writeReportToInvalidFilePathShouldThrowRuntimeException() {
         String reportData = "fruit,quantity\napple,5\nbanana,3\n";
         String invalidFilePath = "\0:invalid/path.csv";
 

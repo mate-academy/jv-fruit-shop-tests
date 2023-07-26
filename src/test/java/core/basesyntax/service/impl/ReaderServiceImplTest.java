@@ -22,28 +22,28 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_OK() {
+    void readFromFileOK() {
         String filePath = resourcesPath + File.separator + validInputFileName;
         List<String> lines = readerServiceImpl.readFromFileInput(filePath);
         assertEquals(9, lines.size());
     }
 
     @Test
-    void readFromInvalidFile_NotOk() {
+    void readFromInvalidFileNotOk() {
         String filePath = resourcesPath + File.separator + invalidInputFileName;
         assertThrows(RuntimeException.class,
                 () -> readerServiceImpl.readFromFileInput(filePath));
     }
 
     @Test
-    void readFromNonExistentFile_NotOk() {
+    void readFromNonExistentFileNotOk() {
         String nonExistentFilePath = "non-existent-file.csv";
         assertThrows(RuntimeException.class,
                 () -> readerServiceImpl.readFromFileInput(nonExistentFilePath));
     }
 
     @Test
-    void isFileEmpty() {
+    void readFromFileInputShouldReturnEmptyListWhenFileIsEmpty() {
         String filePath = resourcesPath + File.separator + emptyFileName;
         List<String> lines = readerServiceImpl.readFromFileInput(filePath);
         assertTrue(lines.isEmpty(), "File should be empty");

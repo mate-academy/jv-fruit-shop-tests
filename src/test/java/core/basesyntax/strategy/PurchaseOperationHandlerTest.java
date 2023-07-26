@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationHandlerTest {
-
     private Fruit apple;
     private PurchaseOperationHandler purchaseHandler;
     private FruitTransaction transaction;
@@ -23,7 +22,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void apply_PurchaseExistingFruit_ShouldReduceQuantityAndReturnNewValue() {
+    public void applyPurchaseExistingFruitShouldReduceQuantityAndReturnNewValue() {
         Storage.fruits.put(apple, 10);
         int result = purchaseHandler.apply(transaction);
         assertEquals(5, result);
@@ -31,7 +30,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void apply_PurchaseMoreThanAvailableQuantity_ShouldNotGoNegativeAndReturnExistingValue() {
+    void applyPurchaseMoreThanAvailableQuantityShouldNotGoNegativeAndReturnExistingValue() {
         Storage.fruits.put(apple, 3);
         int result = purchaseHandler.apply(transaction);
 

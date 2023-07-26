@@ -18,24 +18,25 @@ class FruitServiceImplTest {
     }
 
     @Test
-    public void getReport_EmptyStorage_ShouldReturnHeaderOnly() {
+    public void getReportEmptyStorageShouldReturnHeaderOnly() {
         String report = fruitService.getReport();
         Assertions.assertEquals("fruit,quantity", report);
     }
 
     @Test
-    public void getReport_NonEmptyStorage_ShouldReturnReport() {
+    public void getReportNonEmptyStorageShouldReturnReport() {
         Fruit apple = new Fruit("apple");
         Fruit orange = new Fruit("orange");
         Storage.fruits.put(apple, 10);
         Storage.fruits.put(orange, 20);
-        String report = fruitService.getReport();
-        Assertions.assertTrue(report.contains("apple,10"));
-        Assertions.assertTrue(report.contains("orange,20"));
+        String expectedReport = "fruit,quantity\napple,10\norange,20";
+        String actualReport = fruitService.getReport();
+        Assertions.assertEquals(expectedReport,
+                actualReport, "The report contains unexpected values or format.");
     }
 
     @Test
-    public void getReport_MultipleSameFruits_ShouldSumQuantities() {
+    public void getReportMultipleSameFruitsShouldSumQuantities() {
         Storage.fruits.put(new Fruit("orange"), 20);
         Storage.fruits.put(new Fruit("banana"), 15);
         String report = fruitService.getReport();

@@ -8,35 +8,35 @@ import org.junit.jupiter.api.Test;
 
 class OperationTest {
     @Test
-    public void testCheckTypeOperation_Purchase() {
+    public void testCheckTypeOperationPurchase() {
         String typeOperation = "p";
         Operation operation = Operation.checkTypeOperation(typeOperation);
         assertEquals(Operation.PURCHASE, operation);
     }
 
     @Test
-    public void testCheckTypeOperation_Supply() {
+    public void testCheckTypeOperationSupply() {
         String typeOperation = "s";
         Operation operation = Operation.checkTypeOperation(typeOperation);
         assertEquals(Operation.SUPPLY, operation);
     }
 
     @Test
-    public void testCheckTypeOperation_Balance() {
+    public void testCheckTypeOperationBalance() {
         String typeOperation = "b";
         Operation operation = Operation.checkTypeOperation(typeOperation);
         assertEquals(Operation.BALANCE, operation);
     }
 
     @Test
-    public void testCheckTypeOperation_Return() {
+    public void testCheckTypeOperationReturn() {
         String typeOperation = "r";
         Operation operation = Operation.checkTypeOperation(typeOperation);
         assertEquals(Operation.RETURN, operation);
     }
 
     @Test
-    public void testCheckTypeOperation_InvalidInput() {
+    public void testCheckTypeOperationInvalidInput() {
         String typeOperation = "invalid";
         assertThrows(RuntimeException.class, () -> Operation.checkTypeOperation(typeOperation));
     }

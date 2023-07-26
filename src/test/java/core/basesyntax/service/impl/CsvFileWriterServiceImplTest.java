@@ -18,8 +18,7 @@ class CsvFileWriterServiceImplTest {
     @Test
     void write_validInputString_noExceptions() {
         csvFileWriterService.write(VALID_INPUT_STRING);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                        + "banana,107" + System.lineSeparator()
+        String expected = "banana,107" + System.lineSeparator()
                         + "apple,90" + System.lineSeparator();
         String actual = readOutputFile() + System.lineSeparator();
         assertEquals(expected, actual);

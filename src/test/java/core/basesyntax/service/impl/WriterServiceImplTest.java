@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,5 +38,15 @@ class WriterServiceImplTest {
         writerServiceImpl.writeToFile(reportFile.getAbsolutePath(), reportData);
         String actualLines = Files.readString(reportFile.toPath());
         assertEquals(reportData, actualLines);
+    }
+
+    @Test
+    void writeReportToInvalidFilePath_shouldThrowRuntimeException() {
+        String reportData = "fruit,quantity\napple,5\nbanana,3\n";
+        String invalidFilePath = "\0:invalid/path.csv";
+
+        Assertions.assertThrows(RuntimeException.class, () ->
+                writerServiceImpl.writeToFile(invalidFilePath, reportData)
+        );
     }
 }

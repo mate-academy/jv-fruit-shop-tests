@@ -24,11 +24,8 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void apply_PurchaseExistingFruit_ShouldReduceQuantityAndReturnNewValue() {
-        // Arrange
         Storage.fruits.put(apple, 10);
-
         int result = purchaseHandler.apply(transaction);
-
         assertEquals(5, result);
         assertEquals(5, Storage.fruits.get(apple));
     }

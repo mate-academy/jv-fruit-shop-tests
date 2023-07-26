@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.util.List;
@@ -14,7 +14,7 @@ class ReaderServiceImplTest {
     private final String resourcesPath = "src/test/resources";
     private final String validInputFileName = "input_correct_data.csv";
     private final String invalidInputFileName = "input_incorrect_data.csv";
-    private final String emptyFileName = "empty_file.csv";
+    private final String emptyFileName = "input_empty_file.csv";
 
     @BeforeEach
     void setUp() {
@@ -31,13 +31,15 @@ class ReaderServiceImplTest {
     @Test
     void readFromInvalidFile_NotOk() {
         String filePath = resourcesPath + File.separator + invalidInputFileName;
-        assertThrows(RuntimeException.class, () -> readerServiceImpl.readFromFileInput(filePath));
+        assertThrows(RuntimeException.class,
+                () -> readerServiceImpl.readFromFileInput(filePath));
     }
 
     @Test
     void readFromNonExistentFile_NotOk() {
         String nonExistentFilePath = "non-existent-file.csv";
-        assertThrows(RuntimeException.class, () -> readerServiceImpl.readFromFileInput(nonExistentFilePath));
+        assertThrows(RuntimeException.class,
+                () -> readerServiceImpl.readFromFileInput(nonExistentFilePath));
     }
 
     @Test

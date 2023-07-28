@@ -40,7 +40,7 @@ class StringToFruitTransactionListServiceTest {
     void convert_nullString_throwRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
                 () -> fruitTransactionListService.convert(null));
-        assertEquals("Input string is null((", runtimeException.getMessage());
+        assertEquals("Input string is null", runtimeException.getMessage());
     }
 
     @Test

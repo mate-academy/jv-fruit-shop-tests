@@ -1,4 +1,4 @@
-package core.basesyntax.service.handlers;
+package core.basesyntax.service.strategy.handler;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;

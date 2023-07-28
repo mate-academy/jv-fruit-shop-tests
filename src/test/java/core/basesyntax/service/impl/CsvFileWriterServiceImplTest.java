@@ -13,11 +13,12 @@ import org.junit.jupiter.api.Test;
 class CsvFileWriterServiceImplTest {
     private static final String VALID_INPUT_STRING = "banana,107" + System.lineSeparator()
                                                     + "apple,90" + System.lineSeparator();
+    private static final String VALID_OUTPUT_PATH = "src/test/resources/testOutput.csv";
     private final CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
 
     @Test
     void write_validInputString_noExceptions() {
-        csvFileWriterService.write(VALID_INPUT_STRING);
+        csvFileWriterService.write(VALID_INPUT_STRING, VALID_OUTPUT_PATH);
         String expected = "banana,107" + System.lineSeparator()
                         + "apple,90" + System.lineSeparator();
         String actual = readOutputFile() + System.lineSeparator();
@@ -27,13 +28,13 @@ class CsvFileWriterServiceImplTest {
     @Test
     void write_nullInputString_throwRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
-                () -> csvFileWriterService.write(null));
-        assertEquals("Input report is null!", runtimeException.getMessage());
+                () -> csvFileWriterService.write(null, null));
+        assertEquals("Input report or path is null!", runtimeException.getMessage());
     }
 
     private String readOutputFile() {
         try (BufferedReader bufferedReader = new BufferedReader(
-                new FileReader("src/main/resources/output.csv"))) {
+                new FileReader(VALID_OUTPUT_PATH))) {
             return bufferedReader
                     .lines()
                     .collect(Collectors.joining(System.lineSeparator()));

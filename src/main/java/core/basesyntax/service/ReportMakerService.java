@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface StorageToStringService {
+public interface ReportMakerService {
     String convert();
 }

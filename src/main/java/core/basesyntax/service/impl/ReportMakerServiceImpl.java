@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.StorageToStringService;
+import core.basesyntax.service.ReportMakerService;
 import java.util.Map;
 
-public class StorageToStringServiceImpl implements StorageToStringService {
+public class ReportMakerServiceImpl implements ReportMakerService {
     @Override
     public String convert() {
         StringBuilder stringBuilder = new StringBuilder("fruits,quantity" + System.lineSeparator());

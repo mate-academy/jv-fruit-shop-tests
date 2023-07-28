@@ -9,8 +9,8 @@ public class PurchaseHandler implements OperationHandler {
         int fruitsInStorageQuantity = Storage.storage.get(transaction.getFruit());
         if (fruitsInStorageQuantity < transaction.getQuantity()) {
             throw new RuntimeException("Can't do purchase operation. Count of fruit \""
-                    + transaction.getFruit() + "\" is " + fruitsInStorageQuantity + ". But quantity "
-                    + "of current purchase transaction is " + transaction.getQuantity());
+                    + transaction.getFruit() + "\" is " + fruitsInStorageQuantity + ". But quantity"
+                    + " of current purchase transaction is " + transaction.getQuantity());
         }
         Storage.storage.replace(transaction.getFruit(),
                 fruitsInStorageQuantity - transaction.getQuantity());

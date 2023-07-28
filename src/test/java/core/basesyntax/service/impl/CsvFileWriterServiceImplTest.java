@@ -29,7 +29,7 @@ class CsvFileWriterServiceImplTest {
     void write_nullInputString_throwRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
                 () -> csvFileWriterService.write(null, null));
-        assertEquals("Input report or path is null!", runtimeException.getMessage());
+        assertEquals("Input report is null!", runtimeException.getMessage());
     }
 
     private String readOutputFile() {

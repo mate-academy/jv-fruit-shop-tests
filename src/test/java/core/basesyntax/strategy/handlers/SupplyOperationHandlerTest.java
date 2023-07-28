@@ -36,7 +36,7 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void handle_firstOperationIsSupply_notOk() {
+    void handle_firstOperationOfEachFruitShouldBeBalance_notOk() {
         FruitTransaction transactionSupply = new FruitTransaction(Operation.SUPPLY, "banana", 10);
         assertThrows(RuntimeException.class, () -> {
             operationHandler.handle(transactionSupply);

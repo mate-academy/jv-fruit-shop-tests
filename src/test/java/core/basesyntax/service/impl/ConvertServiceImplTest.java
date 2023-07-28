@@ -40,7 +40,7 @@ class ConvertServiceImplTest {
     }
 
     @Test
-    void convertData_FileRowContainsOnly1Element_notOk() {
+    void convertData_FileRowContainsOnlyOneElement_notOk() {
         fileRows.add("b");
         assertThrows(RuntimeException.class, () -> {
             convertService.convertData(fileRows);
@@ -48,7 +48,7 @@ class ConvertServiceImplTest {
     }
 
     @Test
-    void convertData_FileRowContainsOnly2Elements_notOk() {
+    void convertData_fileRowContainsOnlyTwoElements_notOk() {
         fileRows.add("b,banana");
         assertThrows(RuntimeException.class, () -> {
             convertService.convertData(fileRows);
@@ -64,7 +64,7 @@ class ConvertServiceImplTest {
     }
 
     @Test
-    void convertData_quantityInsteadType_notOk() {
+    void convertData_quantityInsteadOfType_notOk() {
         fileRows.add("54,banana,54");
         assertThrows(RuntimeException.class, () -> {
             convertService.convertData(fileRows);
@@ -81,7 +81,7 @@ class ConvertServiceImplTest {
 
     @Test
     void convertData_incorrectColumnsNamesOrder_notOk() {
-        fileRows.clear();
+        fileRows.remove(0);
         fileRows.add("quantity,type,fruit");
         assertThrows(RuntimeException.class, () -> {
             convertService.convertData(fileRows);
@@ -89,8 +89,8 @@ class ConvertServiceImplTest {
     }
 
     @Test
-    void convertData_fileContains2ColumnsNames_notOk() {
-        fileRows.clear();
+    void convertData_fileContainsTwoColumnsNames_notOk() {
+        fileRows.remove(0);
         fileRows.add("type,fruit");
         assertThrows(RuntimeException.class, () -> {
             convertService.convertData(fileRows);
@@ -98,8 +98,8 @@ class ConvertServiceImplTest {
     }
 
     @Test
-    void convertData_fileContains1ColumnName_notOk() {
-        fileRows.clear();
+    void convertData_fileContainsOneColumnName_notOk() {
+        fileRows.remove(0);
         fileRows.add("type");
         assertThrows(RuntimeException.class, () -> {
             convertService.convertData(fileRows);
@@ -108,7 +108,7 @@ class ConvertServiceImplTest {
 
     @Test
     void convertData_fileDoesNotContainColumnsNames_notOk() {
-        fileRows.clear();
+        fileRows.remove(0);
         fileRows.add("b,apple,54");
         fileRows.add("b,banana,78");
         assertThrows(RuntimeException.class, () -> {

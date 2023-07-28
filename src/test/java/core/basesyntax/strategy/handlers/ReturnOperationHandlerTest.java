@@ -35,7 +35,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handle_firstOperationIsReturn_notOk() {
+    void handle_firstOperationOfEachFruitShouldBeBalance_notOk() {
         FruitTransaction transactionReturn = new FruitTransaction(Operation.RETURN, "banana", 54);
         assertThrows(RuntimeException.class, () -> {
             operationHandler.handle(transactionReturn);

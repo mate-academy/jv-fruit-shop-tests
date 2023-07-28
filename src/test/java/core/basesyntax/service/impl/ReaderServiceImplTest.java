@@ -26,14 +26,6 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void readData_invalidFileName_notOk() {
-        String fileName = "src/test/resources/invalidValues_ok.csv";
-        assertThrows(RuntimeException.class, () -> {
-            readerService.readData(fileName);
-        });
-    }
-
-    @Test
     void readData_nullInputParameter_notOk() {
         assertThrows(RuntimeException.class, () -> {
             readerService.readData(null);

@@ -34,7 +34,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_firstOperationIsPurchase_notOk() {
+    void handle_firstOperationOfEachFruitShouldBeBalance_notOk() {
         FruitTransaction transactionPurchase
                 = new FruitTransaction(Operation.PURCHASE, "banana", 54);
         assertThrows(RuntimeException.class, () -> {

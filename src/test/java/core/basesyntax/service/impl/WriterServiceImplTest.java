@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
+    private static final String FILE_PATH = "src/test/resources/report.csv";
     private WriterService writerService = new WriterServiceImpl();
 
     @Test
@@ -17,7 +18,7 @@ class WriterServiceImplTest {
         String report = new StringBuilder().append("banana,152")
                 .append(System.lineSeparator()).append("apple,90").toString();
         writerService.writeData(report, "src/test/resources/report.csv");
-        int actual = Files.readAllLines(Path.of("src/test/resources/report.csv")).size();
+        int actual = Files.readAllLines(Path.of(FILE_PATH)).size();
         int expected = 3;
         assertEquals(expected, actual);
     }

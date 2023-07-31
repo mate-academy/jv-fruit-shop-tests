@@ -1,8 +1,6 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class FruitTransaction {
     private Operation operation;

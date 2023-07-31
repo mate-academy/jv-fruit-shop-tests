@@ -1,6 +1,5 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.handler.OperationHandler;
 

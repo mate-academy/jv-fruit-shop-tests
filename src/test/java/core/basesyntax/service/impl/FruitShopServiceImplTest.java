@@ -4,37 +4,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import core.basesyntax.service.strategy.handler.BalanceHandler;
-import core.basesyntax.service.strategy.handler.PurchaseHandler;
-import core.basesyntax.service.strategy.handler.ReturnHandler;
-import core.basesyntax.service.strategy.handler.SupplyHandler;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceImplTest {
     private final FruitShopService<FruitTransaction> fruitShopService = new FruitShopServiceImpl(
-            new OperationStrategyImpl(
-            Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                    FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                    FruitTransaction.Operation.RETURN, new ReturnHandler(),
-                    FruitTransaction.Operation.SUPPLY, new SupplyHandler()))
-    );
+            new OperationStrategyImpl());
 
     @Test
     void update_validList_noExceptions() {
         List<FruitTransaction> validList = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 13),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20));
+                new FruitTransaction(Operation.BALANCE, "banana", 20),
+                new FruitTransaction(Operation.BALANCE, "apple", 100),
+                new FruitTransaction(Operation.SUPPLY, "banana", 100),
+                new FruitTransaction(Operation.PURCHASE, "banana", 13),
+                new FruitTransaction(Operation.RETURN, "apple", 10),
+                new FruitTransaction(Operation.PURCHASE, "apple", 20));
         fruitShopService.update(validList);
         Map<String, Integer> expected = Map.of("banana", 107, "apple", 90);
-        Map<String, Integer> actual = Storage.storage;
+        Map<String, Integer> actual = Storage.getStorage();
         assertEquals(expected, actual);
     }
 

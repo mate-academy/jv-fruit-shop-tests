@@ -11,8 +11,8 @@ class ReportMakerServiceImplTest {
 
     @Test
     void convert_validStorage_noException() {
-        Storage.storage.put("banana", 120);
-        Storage.storage.put("apple", 46);
+        Storage.getStorage().put("banana", 120);
+        Storage.getStorage().put("apple", 46);
         String actual = reportMakerService.createReport();
         String expected = "fruits,quantity" + System.lineSeparator()
                         + "banana,120" + System.lineSeparator()

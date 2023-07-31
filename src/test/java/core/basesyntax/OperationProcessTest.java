@@ -31,5 +31,6 @@ public class OperationProcessTest {
         operationProcess.processData(transactions);
         assertEquals(7, (int) Storage.storageMap.get("apple"));
         assertEquals(30, (int) Storage.storageMap.get("banana"));
+        Storage.storageMap.clear();
     }
 }

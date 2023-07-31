@@ -21,5 +21,6 @@ public class ReturnHandlerTest {
         Storage.storageMap.put("banana", 8);
         returnHandler.doOperation("banana", 2);
         assertEquals(10, (int) Storage.storageMap.get("banana"));
+        Storage.storageMap.clear();
     }
 }

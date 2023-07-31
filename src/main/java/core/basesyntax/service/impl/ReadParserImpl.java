@@ -2,12 +2,14 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.ReadParser;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ReadParserImpl implements core.basesyntax.service.ReadParser {
+public class ReadParserImpl implements ReadParser {
     private static final int INFO_LINE_INDEX = 0;
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -24,6 +26,9 @@ public class ReadParserImpl implements core.basesyntax.service.ReadParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
+        if (lines.size() == 0) {
+            return Collections.emptyList();
+        }
         lines.remove(INFO_LINE_INDEX);
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : lines) {

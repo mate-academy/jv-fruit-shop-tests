@@ -25,17 +25,27 @@ public class ReadParserTest {
         List<String> lines = new ArrayList<>();
         lines.add("type,fruit,quantity");
         lines.add("b,apple,10");
-        lines.add("p,banana,5");
+        List<FruitTransaction> transactions = readParser.parse(lines);
+        FruitTransaction transaction = transactions.get(0);
+        assertEquals(Operation.BALANCE, transaction.getOperation());
+        assertEquals("apple", transaction.getFruit());
+        assertEquals(10, transaction.getQuantity());
+    }
+
+    @Test
+    public void readParse_Empty_Ok() {
+        List<String> lines = new ArrayList<>();
         List<FruitTransaction> transactions = readParser.parse(lines);
         assertNotNull(transactions);
-        assertEquals(2, transactions.size());
-        FruitTransaction transaction1 = transactions.get(0);
-        assertEquals(Operation.BALANCE, transaction1.getOperation());
-        assertEquals("apple", transaction1.getFruit());
-        assertEquals(10, transaction1.getQuantity());
-        FruitTransaction transaction2 = transactions.get(1);
-        assertEquals(Operation.PURCHASE, transaction2.getOperation());
-        assertEquals("banana", transaction2.getFruit());
-        assertEquals(5, transaction2.getQuantity());
+        assertEquals(0, transactions.size());
+    }
+
+    @Test
+    public void readParse_OnlyHeader_Ok() {
+        List<String> lines = new ArrayList<>();
+        lines.add("type,fruit,quantity");
+        List<FruitTransaction> transactions = readParser.parse(lines);
+        assertNotNull(transactions);
+        assertEquals(0, transactions.size());
     }
 }

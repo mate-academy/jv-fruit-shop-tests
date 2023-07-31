@@ -21,5 +21,6 @@ public class SupplyHandlerTest {
         Storage.storageMap.put("apple", 10);
         supplyHandler.doOperation("apple", 5);
         assertEquals(15, (int) Storage.storageMap.get("apple"));
+        Storage.storageMap.clear();
     }
 }

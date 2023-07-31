@@ -23,6 +23,7 @@ public class PurchaseHandlerTest {
         RuntimeException runtimeException = assertThrows(
                 RuntimeException.class, () -> purchaseHandler.doOperation("apple", 10));
         assertEquals(runtimeException.getMessage(), "Balance of fruit can't be negative");
+        Storage.storageMap.clear();
     }
 
     @Test
@@ -30,5 +31,6 @@ public class PurchaseHandlerTest {
         Storage.storageMap.put("apple", 10);
         purchaseHandler.doOperation("apple", 5);
         assertEquals(5, (int) Storage.storageMap.get("apple"));
+        Storage.storageMap.clear();
     }
 }

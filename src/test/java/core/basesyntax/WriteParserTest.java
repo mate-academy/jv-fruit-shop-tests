@@ -23,5 +23,6 @@ public class WriteParserTest {
         String report = writeParser.parse();
         String expectedReport = "fruit,quantity\napple,5\nbanana,10\n";
         assertEquals(expectedReport, report);
+        Storage.storageMap.clear();
     }
 }

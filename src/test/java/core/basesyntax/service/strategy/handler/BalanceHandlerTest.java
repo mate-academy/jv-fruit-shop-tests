@@ -14,6 +14,7 @@ public class BalanceHandlerTest {
 
     @Test
     public void process_validTransaction_noException() {
+        Storage.getStorage().clear();
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 100);
         operationHandler.process(new FruitTransaction(Operation.BALANCE, "apple", 100));

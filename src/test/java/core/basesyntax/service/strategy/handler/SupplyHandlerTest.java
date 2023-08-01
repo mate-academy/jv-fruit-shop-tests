@@ -14,6 +14,7 @@ class SupplyHandlerTest {
 
     @Test
     void process_validTransaction_noException() {
+        Storage.getStorage().clear();
         Storage.getStorage().put("apple", 100);
         operationHandler.process(new FruitTransaction(Operation.SUPPLY, "apple", 20));
         Map<String, Integer> expected = new HashMap<>();

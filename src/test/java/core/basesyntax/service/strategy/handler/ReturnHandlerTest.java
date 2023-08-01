@@ -14,6 +14,7 @@ class ReturnHandlerTest {
 
     @Test
     void process_validTransaction_noException() {
+        Storage.getStorage().clear();
         Storage.getStorage().put("apple", 100);
         operationHandler.process(new FruitTransaction(Operation.RETURN, "apple", 10));
         Map<String, Integer> expected = new HashMap<>();

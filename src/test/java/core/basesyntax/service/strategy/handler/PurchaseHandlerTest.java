@@ -16,6 +16,7 @@ class PurchaseHandlerTest {
 
     @BeforeEach
     void preparation() {
+        Storage.getStorage().clear();
         Storage.getStorage().put("apple", 100);
     }
 

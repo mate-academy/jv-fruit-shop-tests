@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test;
 class FruitConverterTest {
     private static final String VALID_STRING =
             "b,banana,20" + System.lineSeparator()
-            + "b,apple,100" + System.lineSeparator()
-            + "s,banana,100" + System.lineSeparator()
-            + "p,banana,13" + System.lineSeparator()
-            + "r,apple,10" + System.lineSeparator()
-            + "p,apple,20";
+                    + "b,apple,100" + System.lineSeparator()
+                    + "s,banana,100" + System.lineSeparator()
+                    + "p,banana,13" + System.lineSeparator()
+                    + "r,apple,10" + System.lineSeparator()
+                    + "p,apple,20";
     private static final String STRING_WITH_INVALID_OPERATOR = "%,banana,20";
     private static final String STRING_WITH_NEGATIVE_AMOUNT_OF_FRUITS = "b,banana,-5";
     private static final String STRING_WITH_ZERO_AMOUNT_OF_FRUITS = "b,banana,-0";

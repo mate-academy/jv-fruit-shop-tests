@@ -21,13 +21,13 @@ class CsvFileReaderServiceImplTest {
     void read_validFile_Ok() {
         String actual = csvFileReaderService.read(VALID_FILEPATH);
         String expected = "b,banana,20" + System.lineSeparator()
-                        + "b,apple,100" + System.lineSeparator()
-                        + "s,banana,100" + System.lineSeparator()
-                        + "p,banana,13" + System.lineSeparator()
-                        + "r,apple,10" + System.lineSeparator()
-                        + "p,apple,20" + System.lineSeparator()
-                        + "p,banana,5" + System.lineSeparator()
-                        + "s,banana,10";
+                + "b,apple,100" + System.lineSeparator()
+                + "s,banana,100" + System.lineSeparator()
+                + "p,banana,13" + System.lineSeparator()
+                + "r,apple,10" + System.lineSeparator()
+                + "p,apple,20" + System.lineSeparator()
+                + "p,banana,5" + System.lineSeparator()
+                + "s,banana,10";
         assertEquals(expected, actual);
 
     }

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceImplTest {
     private static final String VALID_INPUT_STRING = "banana,107" + System.lineSeparator()
-                                                    + "apple,90" + System.lineSeparator();
+            + "apple,90" + System.lineSeparator();
     private static final String VALID_OUTPUT_PATH = "src/test/resources/testOutput.csv";
     private final CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
 
@@ -20,7 +20,7 @@ class CsvFileWriterServiceImplTest {
     void write_validInputString_Ok() {
         csvFileWriterService.write(VALID_INPUT_STRING, VALID_OUTPUT_PATH);
         String expected = "banana,107" + System.lineSeparator()
-                        + "apple,90" + System.lineSeparator();
+                + "apple,90" + System.lineSeparator();
         String actual = readOutputFile() + System.lineSeparator();
         assertEquals(expected, actual);
     }

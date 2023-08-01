@@ -16,7 +16,8 @@ class FruitShopServiceImplTest {
             new OperationStrategyImpl());
 
     @Test
-    void update_validList_noExceptions() {
+    void update_validList_Ok() {
+        Storage.getStorage().clear();
         List<FruitTransaction> validList = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.BALANCE, "apple", 100),

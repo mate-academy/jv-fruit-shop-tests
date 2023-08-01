@@ -21,7 +21,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void process_validTransaction_noException() {
+    void process_validTransaction_Ok() {
         operationHandler.process(new FruitTransaction(Operation.PURCHASE, "apple", 20));
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 80);

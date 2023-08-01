@@ -17,7 +17,7 @@ class CsvFileWriterServiceImplTest {
     private final CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
 
     @Test
-    void write_validInputString_noExceptions() {
+    void write_validInputString_Ok() {
         csvFileWriterService.write(VALID_INPUT_STRING, VALID_OUTPUT_PATH);
         String expected = "banana,107" + System.lineSeparator()
                         + "apple,90" + System.lineSeparator();

@@ -13,7 +13,7 @@ public class BalanceHandlerTest {
     private final OperationHandler operationHandler = new BalanceHandler();
 
     @Test
-    public void process_validTransaction_noException() {
+    public void process_validTransaction_Ok() {
         Storage.getStorage().clear();
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 100);

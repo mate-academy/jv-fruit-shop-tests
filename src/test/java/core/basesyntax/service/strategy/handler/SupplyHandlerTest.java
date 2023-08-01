@@ -13,7 +13,7 @@ class SupplyHandlerTest {
     private final OperationHandler operationHandler = new SupplyHandler();
 
     @Test
-    void process_validTransaction_noException() {
+    void process_validTransaction_Ok() {
         Storage.getStorage().clear();
         Storage.getStorage().put("apple", 100);
         operationHandler.process(new FruitTransaction(Operation.SUPPLY, "apple", 20));

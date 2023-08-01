@@ -25,7 +25,7 @@ class FruitConverterTest {
             new FruitConverterImpl();
 
     @Test
-    void convert_validString_noException() {
+    void convert_validString_Ok() {
         List<FruitTransaction> actual = fruitConverter.convert(VALID_STRING);
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
@@ -56,11 +56,16 @@ class FruitConverterTest {
     void convert_negativeAmountOfFruits_throwRuntimeException() {
         var runtimeExceptionWithNegativeAmount = assertThrows(RuntimeException.class,
                 () -> fruitConverter.convert(STRING_WITH_NEGATIVE_AMOUNT_OF_FRUITS));
+        assertEquals("Invalid quantity on line 2! Quantity can't be below or equals zero! "
+                + "Actual number is -5", runtimeExceptionWithNegativeAmount.getMessage());
+    }
+
+    @Test
+    void convert_zeroAmountOfFruits_throwRuntimeException() {
         var runtimeExceptionWithZeroAmount = assertThrows(RuntimeException.class,
                 () -> fruitConverter.convert(STRING_WITH_ZERO_AMOUNT_OF_FRUITS));
         assertEquals("Invalid quantity on line 2! Quantity can't be below or equals zero! "
-                + "Actual number is -5", runtimeExceptionWithNegativeAmount.getMessage());
-        assertEquals("Invalid quantity on line 2! Quantity can't be below or equals zero! "
                 + "Actual number is 0", runtimeExceptionWithZeroAmount.getMessage());
+
     }
 }

@@ -18,7 +18,7 @@ class CsvFileReaderServiceImplTest {
     private final CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
 
     @Test
-    void read_validFile_NoExceptions() {
+    void read_validFile_Ok() {
         String actual = csvFileReaderService.read(VALID_FILEPATH);
         String expected = "b,banana,20" + System.lineSeparator()
                         + "b,apple,100" + System.lineSeparator()

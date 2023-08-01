@@ -13,7 +13,7 @@ class ReturnHandlerTest {
     private final OperationHandler operationHandler = new ReturnHandler();
 
     @Test
-    void process_validTransaction_noException() {
+    void process_validTransaction_Ok() {
         Storage.getStorage().clear();
         Storage.getStorage().put("apple", 100);
         operationHandler.process(new FruitTransaction(Operation.RETURN, "apple", 10));

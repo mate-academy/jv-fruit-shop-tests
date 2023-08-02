@@ -18,6 +18,14 @@ import org.junit.jupiter.api.Test;
 public class WriteCsvFileServiceTest {
     private static final String REPORT_FILE = "src/test/resources/report.csv";
     private static final Path REPORT_FILE_PATH = Path.of("src/test/resources/report.csv");
+    private static final String CHERRY = "cherry";
+    private static final int CHERRY_QUANTITY = 100;
+    private static final String DOPPELGANGER = "doppelganger";
+    private static final int DOPPELGANGER_QUANTITY = 50;
+    private static final String REPORT_HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
+    private static final String WRONG_EMPTY_FILENAME = " ";
+    private static final String WRONG_SYMBOLS_FILENAME = "*?";
     private static WriteCsvFileService writeCsvFileService;
     private static List<String> testReport;
 
@@ -29,22 +37,20 @@ public class WriteCsvFileServiceTest {
 
     @Test
     void wrongFileNameNotOkay() {
-        testReport.add("fruit,quantity");
-        testReport.add("cherry,100");
-        testReport.add("doppelganger,50");
-        String testFileName1 = " ";
-        String testFileName2 = "*?";
+        testReport.add(REPORT_HEADER);
+        testReport.add(CHERRY + COMMA + CHERRY_QUANTITY);
+        testReport.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
         assertThrows(WriteFileException.class,
-                () -> writeCsvFileService.writeFile(testFileName1, testReport));
+                () -> writeCsvFileService.writeFile(WRONG_EMPTY_FILENAME, testReport));
         assertThrows(WriteFileException.class,
-                () -> writeCsvFileService.writeFile(testFileName2, testReport));
+                () -> writeCsvFileService.writeFile(WRONG_SYMBOLS_FILENAME, testReport));
     }
 
     @Test
     void isReportPresentOkay() {
-        testReport.add("fruit,quantity");
-        testReport.add("cherry,100");
-        testReport.add("doppelganger,50");
+        testReport.add(REPORT_HEADER);
+        testReport.add(CHERRY + COMMA + CHERRY_QUANTITY);
+        testReport.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
         writeCsvFileService.writeFile(REPORT_FILE, testReport);
         assertTrue(Files.exists(REPORT_FILE_PATH),
                 "Can`t read " + REPORT_FILE + " file.");

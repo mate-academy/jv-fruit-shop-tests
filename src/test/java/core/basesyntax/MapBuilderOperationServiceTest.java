@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MapBuilderOperationServiceTest {
+    private static final int OPERATION_NUMBER = 4;
     private MapBuilderOperationService mapBuilderOperationService;
 
     @BeforeEach
@@ -23,7 +24,7 @@ public class MapBuilderOperationServiceTest {
     void testInitialization() {
         Map<FruitTransaction.Operation, DataHandler> handlerMap
                 = mapBuilderOperationService.initializeMap();
-        assertEquals(4, handlerMap.size());
+        assertEquals(OPERATION_NUMBER, handlerMap.size());
         assertTrue(handlerMap.containsKey(FruitTransaction.Operation.BALANCE));
         assertTrue(handlerMap.containsKey(FruitTransaction.Operation.SUPPLY));
         assertTrue(handlerMap.containsKey(FruitTransaction.Operation.PURCHASE));

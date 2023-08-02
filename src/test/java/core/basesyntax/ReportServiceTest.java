@@ -61,6 +61,8 @@ public class ReportServiceTest {
     void storageNegativeAddNotOkay() {
         assertThrows(FruitsQuantityException.class,
                 () -> Storage.addFruits(CHERRY, WRONG_CHERRY_QUANTITY));
+        List<String> report = reportService.generateReport();
+        assertTrue(report.isEmpty());
     }
 
     @Test

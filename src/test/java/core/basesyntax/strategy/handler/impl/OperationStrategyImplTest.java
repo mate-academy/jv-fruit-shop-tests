@@ -49,8 +49,4 @@ class OperationStrategyImplTest {
         assertThrows(NullPointerException.class, ()
                 -> operationStrategy.getHandler(null));
     }
-
-    @Test
-    void getHandler() {
-    }
 }

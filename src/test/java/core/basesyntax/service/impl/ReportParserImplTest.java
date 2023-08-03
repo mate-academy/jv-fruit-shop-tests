@@ -22,9 +22,9 @@ class ReportParserImplTest {
     @Test
     void parse() {
         Map<Fruit, Integer> storage = new HashMap<>(Map.of(Fruit.BANANA,165, Fruit.APPLE, 90));
-        String expected = new StringBuilder().append(REPORT_HEADING)
-                .append("banana").append(COMMA_DIVIDER).append("165").append(System.lineSeparator())
-                .append("apple").append(COMMA_DIVIDER).append("90").toString();
+        String expected = REPORT_HEADING +
+                "banana" + COMMA_DIVIDER + "165" + System.lineSeparator() +
+                "apple" + COMMA_DIVIDER + "90";
         String actual = reportParser.parse(storage);
         Assertions.assertEquals(expected, actual, "Parser doesn't parse data correctly!");
     }

@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.handler.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
@@ -34,9 +33,11 @@ public class OperationStrategyImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, handler);
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationHandlerMap);
-        OperationHandler actualHandler =
-                operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
-        assertNull(actualHandler);
+        IllegalArgumentException exception =
+                    assertThrows(IllegalArgumentException.class, ()
+                            -> operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY));
+        assertEquals("No handler found "
+                + "for operation: SUPPLY", exception.getMessage());
     }
 
     @Test
@@ -46,7 +47,9 @@ public class OperationStrategyImplTest {
         OperationHandler handler = new BalanceHandler();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, handler);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        assertThrows(NullPointerException.class, ()
-                -> operationStrategy.getHandler(null));
+        NullPointerException exception =
+                assertThrows(NullPointerException.class, ()
+                        -> operationStrategy.getHandler(null));
+        assertEquals("Operation cannot be null", exception.getMessage());
     }
 }

@@ -17,7 +17,7 @@ public class PurchaseHandler implements OperationHandler {
                 .getOrDefault(fruit, DEFAULT_VALUE);
         int transactionQuantity = fruitTransaction.getQuantity();
         if (transactionQuantity < 0) {
-            throw new RuntimeException("Transaction quantity cannot be negative");
+            throw new IllegalArgumentException("Transaction quantity cannot be negative");
         }
         if (transactionQuantity > currentQuantity) {
             throw new RuntimeException("Not enough " + fruit

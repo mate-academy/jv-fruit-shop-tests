@@ -47,15 +47,23 @@ public class PurchaseHandlerTest {
 
     @Test
     public void purchaseHandler_NullTransactionFruit_NotOk() {
-        assertThrows(NullPointerException.class, ()
-                -> purchaseHandler.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                null, 5)));
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                       null, 5);
+        NullPointerException exception =
+                assertThrows(NullPointerException.class, ()
+                        -> purchaseHandler.handle(fruitTransaction));
+        assertEquals("Fruit cannot br null", exception.getMessage());
     }
 
     @Test
     public void purchaseHandler_NegativeQuantity_NotOk() {
-        assertThrows(RuntimeException.class, ()
-                -> purchaseHandler.handle(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "apple", -5)));
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                       "apple", -5);
+        IllegalArgumentException exception =
+                assertThrows(IllegalArgumentException.class, ()
+                        -> purchaseHandler.handle(fruitTransaction));
+        assertEquals("Transaction quantity cannot be negative", exception.getMessage());
     }
 }

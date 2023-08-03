@@ -18,6 +18,11 @@ public class OperationStrategyImpl implements OperationStrategy {
         if (operation == null) {
             throw new NullPointerException("Operation cannot be null");
         }
-        return operationHandlerMap.get(operation);
+        OperationHandler handler = operationHandlerMap.get(operation);
+        if (handler == null) {
+            throw new IllegalArgumentException("No handler found "
+                    + "for operation: " + operation);
+        }
+        return handler;
     }
 }

@@ -48,12 +48,13 @@ public class WriteServiceImplTest {
                 + LINE_SEPARATOR;
         assertThrows(RuntimeException.class, ()
                 -> writeService.writeToFile(INVALID_PATH, report));
-
     }
 
     @Test
     public void writeToFile_NullReport_NotOk() {
-        assertThrows(RuntimeException.class, ()
-                -> writeService.writeToFile(PATH_TO_FILE, null));
+        IllegalArgumentException exception =
+                assertThrows(IllegalArgumentException.class, ()
+                        -> writeService.writeToFile(PATH_TO_FILE, null));
+        assertEquals("Report content cannot be null", exception.getMessage());
     }
 }

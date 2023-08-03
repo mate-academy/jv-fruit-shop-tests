@@ -35,8 +35,11 @@ public class BalanceHandlerTest {
     public void handle_InvalidTransaction_NotOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(null, null, 5);
-        assertThrows(NullPointerException.class, ()
-                -> balanceHandler.handle(fruitTransaction));
+        NullPointerException exception =
+                assertThrows(NullPointerException.class, ()
+                        -> balanceHandler.handle(fruitTransaction));
+        assertEquals("Invalid transaction: fruit or operation is null",
+                exception.getMessage());
     }
 
     @Test
@@ -44,7 +47,10 @@ public class BalanceHandlerTest {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         "banana", -20);
-        assertThrows(IllegalArgumentException.class, ()
-                -> balanceHandler.handle(fruitTransaction));
+        IllegalArgumentException exception =
+                assertThrows(IllegalArgumentException.class, ()
+                        -> balanceHandler.handle(fruitTransaction));
+        assertEquals("Invalid transaction: negative quantity",
+                exception.getMessage());
     }
 }

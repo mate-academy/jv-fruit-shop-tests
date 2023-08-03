@@ -38,15 +38,20 @@ public class SupplyHandlerTest {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", -5);
-        Assertions.assertThrows(IllegalArgumentException.class, ()
-                ->
-                supplyHandler.handle(fruitTransaction));
+        IllegalArgumentException exception =
+                Assertions.assertThrows(IllegalArgumentException.class, ()
+                        -> supplyHandler.handle(fruitTransaction));
+        Assertions.assertEquals("Transaction quantity cannot be negative", exception.getMessage());
     }
 
     @Test
     public void supplyHandler_NullTransaction_NotOk() {
-        assertThrows(NullPointerException.class, ()
-                -> supplyHandler.handle(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                null, 5)));
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                        null, 5);
+        NullPointerException exception =
+                assertThrows(NullPointerException.class, ()
+                        -> supplyHandler.handle(fruitTransaction));
+        Assertions.assertEquals("FruitTransaction cannot be null", exception.getMessage());
     }
 }

@@ -1,11 +1,11 @@
 package core.basesyntax.strategy.handler.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,15 +35,24 @@ public class ReturnHandlerTest {
 
     @Test
     public void returnHandler_NullTransaction_NotOk() {
-        assertThrows(NullPointerException.class, ()
-                -> returnHandler.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                null, 5)));
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN,
+                        null, 5);
+        NullPointerException exception =
+                Assertions.assertThrows(NullPointerException.class, ()
+                        -> returnHandler.handle(fruitTransaction));
+        Assertions.assertEquals("FruitTransaction cannot be null", exception.getMessage());
     }
 
     @Test
     public void returnHandler_NegativeQuantity_NotOk() {
-        assertThrows(IllegalArgumentException.class, ()
-                -> returnHandler.handle(new FruitTransaction(FruitTransaction.Operation.RETURN,
-                "apple", -5)));
+        FruitTransaction fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.RETURN,
+                        "apple", -5);
+        IllegalArgumentException exception =
+                Assertions.assertThrows(IllegalArgumentException.class, ()
+                        -> returnHandler.handle(fruitTransaction));
+        Assertions.assertEquals("FruitTransaction quantity cannot be negative",
+                exception.getMessage());
     }
 }

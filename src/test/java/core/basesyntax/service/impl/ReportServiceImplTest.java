@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReportServiceImplTest {
+public class ReportServiceImplTest {
 
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String HEAD_STRING = "fruit,quantity" + LINE_SEPARATOR;

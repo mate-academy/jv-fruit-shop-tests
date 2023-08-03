@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BalanceHandlerTest {
+public class BalanceHandlerTest {
     private BalanceHandler balanceHandler;
 
     @BeforeEach

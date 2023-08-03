@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-class OperationStrategyImplTest {
+public class OperationStrategyImplTest {
 
     @Test
     public void getHandler_ValidOperation_Ok() {

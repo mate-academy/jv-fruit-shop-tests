@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ReadServiceImplTest {
+public class ReadServiceImplTest {
     private static final String VALID_PATH_TO_VALID_FILE = "src/test/resources/valid_input.csv";
     private static final String PATH_TO_NONEXISTENT_FILE = "path/to/nonexistent/file.csv";
 

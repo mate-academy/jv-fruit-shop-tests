@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class WriteServiceImplTest {
+public class WriteServiceImplTest {
     private static final String PATH_TO_FILE = "src/test/resources/report.csv";
     private static final String INVALID_PATH = "invalid/path/to/file";
     private static final String LINE_SEPARATOR = System.lineSeparator();

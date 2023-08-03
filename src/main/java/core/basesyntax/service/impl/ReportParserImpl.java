@@ -10,7 +10,8 @@ public class ReportParserImpl implements TransactionParser<String, Map<Fruit, In
 
     @Override
     public String parse(Map<Fruit, Integer> data) {
-        StringBuilder report = new StringBuilder().append(REPORT_HEADING).append(System.lineSeparator());
+        StringBuilder report = new StringBuilder().append(REPORT_HEADING)
+                .append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : data.entrySet()) {
             report.append(entry.getKey().name().toLowerCase())
                     .append(COMMA)

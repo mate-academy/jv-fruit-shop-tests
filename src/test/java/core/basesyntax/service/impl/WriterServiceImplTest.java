@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String PATH_TO_WRITE = "src/test/java/resources/report.csv";
-    private static final String WRONG_PATH = "src/test/report.csv";
+    private static final String WRONG_PATH = "";
     private static final String REPORT = "fruit,quantity\n"
             + "banana,152\n"
             + "apple,90";

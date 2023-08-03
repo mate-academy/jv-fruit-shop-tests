@@ -10,6 +10,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
+        checkForNegativeValues();
         Set<String> fruits = Storage.getStorage().keySet();
         StringBuilder report = new StringBuilder(TITLES);
         report.append(System.lineSeparator());
@@ -18,5 +19,13 @@ public class ReportServiceImpl implements ReportService {
                     .append(System.lineSeparator());
         }
         return report.toString();
+    }
+
+    private void checkForNegativeValues() {
+        for (Integer value : Storage.getStorage().values()) {
+            if (value < 0) {
+                throw new RuntimeException("Values cannot be negative!");
+            }
+        }
     }
 }

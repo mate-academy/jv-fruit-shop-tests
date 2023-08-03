@@ -4,6 +4,7 @@ public enum Fruit {
     BANANA,
     APPLE,
     PINEAPPLE,
-    GRAPE,
-    STRAWBERRY
+    STRAWBERRY,
+    GRAPE
+
 }

@@ -16,7 +16,10 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_OK() {
-        String input = "type,fruit,quantity\r\nb,banana,100\r\nb,apple,50\r\ns,banana,10";
+        String input = "type,fruit,quantity" + System.lineSeparator()
+                + "b,banana,100" + System.lineSeparator()
+                + "b,apple,50" + System.lineSeparator()
+                + "s,banana,10";
         String transactionsFilePath = "src/test/resources/test_input.txt";
         String actualData = readerService.readFromFile(transactionsFilePath);
         Assertions.assertEquals(input, actualData, "Data read from file incorrectly!");

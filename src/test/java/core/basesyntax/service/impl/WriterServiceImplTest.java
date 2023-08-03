@@ -18,7 +18,10 @@ class WriterServiceImplTest {
 
     @Test
     void writeToFile_OK() {
-        String input = "fruit,quantity\r\nbanana,100\r\napple,50";
+        String input = "type,fruit,quantity" + System.lineSeparator()
+                + "b,banana,100" + System.lineSeparator()
+                + "b,apple,50" + System.lineSeparator()
+                + "s,banana,10";
         StringBuilder output = new StringBuilder();
         String reportFilePath = "src/test/resources/test_report.txt";
         writerService.writeToFile(reportFilePath, input);

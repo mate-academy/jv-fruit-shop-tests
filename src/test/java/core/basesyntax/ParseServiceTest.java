@@ -71,6 +71,11 @@ public class ParseServiceTest {
     }
 
     @Test
+    void isFruitTransactionNullNotOkay() {
+        assertThrows(WrongDataBaseException.class, () -> parseService.parseDataToTransaction(null));
+    }
+
+    @Test
     void dataWrongOperationNotOkay() {
         testData.add(HEADER);
         testData.add(WRONG_ZAPP_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);

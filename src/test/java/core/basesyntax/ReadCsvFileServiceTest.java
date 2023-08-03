@@ -29,4 +29,10 @@ public class ReadCsvFileServiceTest {
         assertThrows(ReadFileException.class,
                 () -> readCsvFileService.readFile(NOT_EXIST_SOURCE_FILE));
     }
+
+    @Test
+    void testReadNullFileNotOkay() {
+        assertThrows(ReadFileException.class,
+                () -> readCsvFileService.readFile(null));
+    }
 }

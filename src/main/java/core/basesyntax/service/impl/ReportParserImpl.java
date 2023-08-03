@@ -5,12 +5,12 @@ import core.basesyntax.service.interfaces.TransactionParser;
 import java.util.Map;
 
 public class ReportParserImpl implements TransactionParser<String, Map<Fruit, Integer>> {
-    private static final String REPORT_HEADING = "fruit,quantity\r\n";
+    private static final String REPORT_HEADING = "fruit,quantity";
     private static final String COMMA = ",";
 
     @Override
     public String parse(Map<Fruit, Integer> data) {
-        StringBuilder report = new StringBuilder().append(REPORT_HEADING);
+        StringBuilder report = new StringBuilder().append(REPORT_HEADING).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : data.entrySet()) {
             report.append(entry.getKey().name().toLowerCase())
                     .append(COMMA)

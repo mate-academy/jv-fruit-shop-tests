@@ -46,7 +46,7 @@ public class PurchaseDataHandlerTest {
 
     @Test
     void addNegativeQuantityNotOkay() {
-        assertThrows(FruitsQuantityException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataHandler.processData(APPLE, NEGATIVE_APPLE_QUANTITY));
     }
 

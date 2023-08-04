@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.FruitsQuantityException;
+import core.basesyntax.exceptions.WrongDataBaseException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.implementations.FruitShopServiceImpl;
@@ -30,6 +31,7 @@ public class FruitShopServiceTest {
     private static final int EXPECTED_BANANA_QUANTITY = 24;
     private static final int WRONG_QUANTITY = -50;
     private static final short EMPTY_STORAGE_SIZE = 0;
+    private static List<FruitTransaction> transactions;
     private FruitShopService fruitShopService;
     private Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
 
@@ -37,8 +39,8 @@ public class FruitShopServiceTest {
     void setUp() {
         enumHandlerMap = initializeEnumHandlerMap();
         DataHandlerStrategy dataHandlerStrategy = new TestDataHandlerStrategy(enumHandlerMap);
-        List<FruitTransaction> transactions = new ArrayList<>();
-        fruitShopService = new FruitShopServiceImpl(transactions, dataHandlerStrategy);
+        transactions = new ArrayList<>();
+        fruitShopService = new FruitShopServiceImpl(dataHandlerStrategy);
         Storage.createMap();
     }
 
@@ -52,8 +54,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    void testUpdateDataWithValidTransactions() {
-        List<FruitTransaction> transactions = new ArrayList<>();
+    void testUpdateDataWithValidTransactionsOkay() {
         transactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY));
         transactions.add(
@@ -64,30 +65,29 @@ public class FruitShopServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, APPLE_QUANTITY));
         transactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, BANANA_QUANTITY));
-        fruitShopService = new FruitShopServiceImpl(transactions,
-                new TestDataHandlerStrategy(enumHandlerMap));
-        fruitShopService.updateData();
+        fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
+        fruitShopService.updateData(transactions);
         assertEquals(EXPECTED_APPLE_QUANTITY, Storage.getStorage().get(APPLE));
         assertEquals(EXPECTED_BANANA_QUANTITY, Storage.getStorage().get(BANANA));
     }
 
     @Test
-    void testUpdateDataWithNegativeQuantity() {
-        List<FruitTransaction> transactions = new ArrayList<>();
+    void testUpdateDataWithNegativeQuantityNotOkay() {
         transactions.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, APPLE, WRONG_QUANTITY));
-        fruitShopService = new FruitShopServiceImpl(transactions,
-                new TestDataHandlerStrategy(enumHandlerMap));
-        assertThrows(FruitsQuantityException.class, fruitShopService::updateData);
+        fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
+        assertThrows(FruitsQuantityException.class,
+                () -> fruitShopService.updateData(transactions));
     }
 
     @Test
-    void testUpdateDataWithEmptyTransactions() {
-        fruitShopService.updateData();
+    void testUpdateDataWithNullTransactionsNotOkay() {
+        transactions = null;
+        assertThrows(WrongDataBaseException.class,
+                () -> fruitShopService.updateData(transactions));
         assertEquals(EMPTY_STORAGE_SIZE, Storage.getStorage().size());
     }
 
-    // Custom DataHandlerStrategy for testing purposes
     private static class TestDataHandlerStrategy implements DataHandlerStrategy {
         private final Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap;
 

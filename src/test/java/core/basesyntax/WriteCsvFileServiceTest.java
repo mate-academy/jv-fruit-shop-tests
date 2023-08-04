@@ -9,8 +9,6 @@ import core.basesyntax.service.implementations.WriteCsvFileServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,19 +25,28 @@ public class WriteCsvFileServiceTest {
     private static final String WRONG_EMPTY_FILENAME = " ";
     private static final String WRONG_SYMBOLS_FILENAME = "*?";
     private static WriteCsvFileService writeCsvFileService;
-    private static List<String> testReport;
+    private static String testReport;
 
     @BeforeEach
     void setUp() {
         writeCsvFileService = new WriteCsvFileServiceImpl();
-        testReport = new ArrayList<>();
+        testReport = null;
     }
 
     @Test
     void wrongFileNameNotOkay() {
-        testReport.add(REPORT_HEADER);
-        testReport.add(CHERRY + COMMA + CHERRY_QUANTITY);
-        testReport.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
+        StringBuilder report = new StringBuilder();
+        report.append(REPORT_HEADER)
+                .append(System.lineSeparator());
+        report.append(CHERRY)
+                .append(COMMA)
+                .append(CHERRY_QUANTITY)
+                .append(System.lineSeparator());
+        report.append(DOPPELGANGER)
+                .append(COMMA)
+                .append(DOPPELGANGER_QUANTITY)
+                .append(System.lineSeparator());
+        testReport = report.toString();
         assertThrows(WriteFileException.class,
                 () -> writeCsvFileService.writeFile(WRONG_EMPTY_FILENAME, testReport));
         assertThrows(WriteFileException.class,
@@ -48,9 +55,18 @@ public class WriteCsvFileServiceTest {
 
     @Test
     void isReportPresentOkay() {
-        testReport.add(REPORT_HEADER);
-        testReport.add(CHERRY + COMMA + CHERRY_QUANTITY);
-        testReport.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
+        StringBuilder report = new StringBuilder();
+        report.append(REPORT_HEADER)
+                .append(System.lineSeparator());
+        report.append(CHERRY)
+                .append(COMMA)
+                .append(CHERRY_QUANTITY)
+                .append(System.lineSeparator());
+        report.append(DOPPELGANGER)
+                .append(COMMA)
+                .append(DOPPELGANGER_QUANTITY)
+                .append(System.lineSeparator());
+        testReport = report.toString();
         writeCsvFileService.writeFile(REPORT_FILE, testReport);
         assertTrue(Files.exists(REPORT_FILE_PATH),
                 "Can`t read " + REPORT_FILE + " file.");

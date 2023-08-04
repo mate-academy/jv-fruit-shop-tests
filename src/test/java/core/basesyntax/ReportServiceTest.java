@@ -37,8 +37,8 @@ public class ReportServiceTest {
 
     @Test
     void emptyStorageReportOkay() {
-        Storage.getStorage().clear();
-        List<String> report = reportService.generateReport();
+        Storage.clear();
+        String report = reportService.generateReport();
         assertTrue(report.isEmpty());
     }
 
@@ -50,24 +50,26 @@ public class ReportServiceTest {
         expected.add(REPORT_HEADER);
         expected.add(CHERRY + COMMA + CHERRY_QUANTITY);
         expected.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
-        List<String> report = reportService.generateReport();
-        assertEquals(expected, report);
+        String expectedReport = String.join(System.lineSeparator(), expected);
+        String report = reportService.generateReport();
+        assertEquals(expectedReport, report);
     }
 
     @Test
     void specialCharactersOkay() {
         Storage.getStorage().put(SPECIAL_CHARACTER_APPLE, SPECIAL_CHARACTER_APPLE_QUANTITY);
         Storage.getStorage().put(SPECIAL_CHARACTER_BANANA, SPECIAL_CHARACTER_BANANA_QUANTITY);
-        List<String> actualReport = reportService.generateReport();
-        assertEquals(REPORT_HEADER, actualReport.get(HEADER_INDEX));
+        String actualReport = reportService.generateReport();
+        String[] separatedLinesReport = actualReport.split(System.lineSeparator());
+        assertEquals(REPORT_HEADER, separatedLinesReport[HEADER_INDEX]);
         assertEquals(SPECIAL_CHARACTER_APPLE + COMMA + SPECIAL_CHARACTER_APPLE_QUANTITY,
-                actualReport.get(APPLE_REPORT_INDEX));
+                separatedLinesReport[APPLE_REPORT_INDEX]);
         assertEquals(SPECIAL_CHARACTER_BANANA + COMMA + SPECIAL_CHARACTER_BANANA_QUANTITY,
-                actualReport.get(BANANA_REPORT_INDEX));
+                separatedLinesReport[BANANA_REPORT_INDEX]);
     }
 
     @AfterEach
     void onTearDown() {
-        Storage.getStorage().clear();
+        Storage.clear();
     }
 }

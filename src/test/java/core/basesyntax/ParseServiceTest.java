@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.exceptions.WrongDataBaseException;
 import core.basesyntax.model.FruitTransaction;
@@ -65,14 +64,15 @@ public class ParseServiceTest {
     }
 
     @Test
-    void isFruitTransactionEmptyOkay() {
-        List<FruitTransaction> transactions = parseService.parseDataToTransaction(testData);
-        assertTrue(transactions.isEmpty());
+    void isFruitTransactionEmptyNotOkay() {
+        assertThrows(WrongDataBaseException.class,
+                () -> parseService.parseDataToTransaction(testData));
     }
 
     @Test
     void isFruitTransactionNullNotOkay() {
-        assertThrows(WrongDataBaseException.class, () -> parseService.parseDataToTransaction(null));
+        assertThrows(WrongDataBaseException.class,
+                () -> parseService.parseDataToTransaction(null));
     }
 
     @Test

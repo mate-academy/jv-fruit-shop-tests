@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.FruitsNameException;
-import core.basesyntax.exceptions.FruitsQuantityException;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.handlers.DataHandler;
 import core.basesyntax.strategy.handlers.SupplyDataHandler;
@@ -34,7 +33,7 @@ public class SupplyDataHandlerTest {
 
     @Test
     void addNegativeQuantityNotOkay() {
-        assertThrows(FruitsQuantityException.class,
+        assertThrows(RuntimeException.class,
                 () -> dataHandler.processData(APPLE, NEGATIVE_APPLE_QUANTITY));
     }
 

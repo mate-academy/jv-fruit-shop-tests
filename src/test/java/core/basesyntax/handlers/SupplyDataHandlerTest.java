@@ -26,25 +26,25 @@ public class SupplyDataHandlerTest {
     }
 
     @Test
-    void addNormalQuantityOkay() {
+    void processData_validData_okay() {
         assertDoesNotThrow(() -> dataHandler.processData(APPLE, APPLE_QUANTITY));
         assertEquals(APPLE_QUANTITY, Storage.getFruits(APPLE));
     }
 
     @Test
-    void addNegativeQuantityNotOkay() {
+    void processData_negativeQuantity_notOkay() {
         assertThrows(RuntimeException.class,
                 () -> dataHandler.processData(APPLE, NEGATIVE_APPLE_QUANTITY));
     }
 
     @Test
-    void addNullFruitNotOkay() {
+    void processData_nullFruit_notOkay() {
         assertThrows(FruitsNameException.class,
                 () -> dataHandler.processData(NULL_FRUIT, APPLE_QUANTITY));
     }
 
     @Test
-    void addEmptyFruitNotOkay() {
+    void processData_emptyFruit_notOkay() {
         assertThrows(FruitsNameException.class,
                 () -> dataHandler.processData(EMPTY_FRUIT, APPLE_QUANTITY));
     }

@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.EmptyStorageException;
 import core.basesyntax.service.ReportCreatorService;
-
 import java.util.Map;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
@@ -12,6 +12,9 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public String createReport() {
         StringBuilder report = new StringBuilder(STANDARD_HEADER);
+        if (Storage.storage.size() == 0) {
+            throw new EmptyStorageException("Can't create a report, since The storage is empty!");
+        }
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             report.append(entry.getKey());
             report.append(COMMA_SEPARATOR);

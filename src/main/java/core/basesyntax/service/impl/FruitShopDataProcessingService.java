@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.operation.OperationHandler;
-
 import java.util.List;
 
 public class FruitShopDataProcessingService implements DataProcessingService {

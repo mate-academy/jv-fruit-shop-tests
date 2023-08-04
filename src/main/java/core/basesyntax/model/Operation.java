@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.exception.InvalidDataFormatException;
-
 import java.util.Optional;
 
 public enum Operation {

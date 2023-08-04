@@ -4,7 +4,6 @@ import core.basesyntax.exception.InvalidDataFormatException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverterService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class FruitTransactionDataConverterService implements DataConverterServic
     @Override
     public List<FruitTransaction> convertDataToObjects(String dataFromFile) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        String[] data = dataFromFile.split("\\n");
+        String[] data = dataFromFile.split(System.lineSeparator());
         for (int i = 1; i < data.length; i++) {
             FruitTransaction fruitTransaction = createFruitObjectFromData(data[i]);
             fruitTransactions.add(fruitTransaction);
@@ -27,7 +26,7 @@ public class FruitTransactionDataConverterService implements DataConverterServic
     }
 
     private FruitTransaction createFruitObjectFromData(String data) {
-        String[] fieldsOfInfo = data.replaceAll("\\r", "").split(DATA_SEPARATOR);
+        String[] fieldsOfInfo = data.split(DATA_SEPARATOR);
         String name = fieldsOfInfo[FRUIT_NAME_INDEX];
         Integer quantity = Integer.valueOf(fieldsOfInfo[NUMBER_OF_FRUITS_INDEX]);
         String operation = fieldsOfInfo[OPERATION_INDEX];
@@ -50,9 +49,14 @@ public class FruitTransactionDataConverterService implements DataConverterServic
     }
 
     private boolean isValidFruitName(String name) {
-        if (name.matches("[\\W\\d]") || name.isBlank()) {
-            throw new InvalidDataFormatException("Fruit name should consist "
-                    + "any letters and special characters!");
+        if (name.isBlank() || name.isEmpty()) {
+            throw new InvalidDataFormatException("Fruit name shouldn't be a blank!");
+        }
+        for (char symbol : name.toCharArray()) {
+            if (!Character.isLetter(symbol)) {
+                throw new InvalidDataFormatException("Fruit name shouldn't consist "
+                        + "any digits and special characters!");
+            }
         }
         return true;
     }

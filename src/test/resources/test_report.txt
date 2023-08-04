@@ -1,3 +1,4 @@
-fruit,quantity
-banana,100
-apple,50
+type,fruit,quantity
+b,banana,100
+b,apple,50
+s,banana,10

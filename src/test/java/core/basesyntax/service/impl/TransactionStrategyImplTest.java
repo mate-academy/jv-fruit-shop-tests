@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.service.interfaces.TransactionStrategy;
 import core.basesyntax.service.transaction.TransactionHandler;
 import org.junit.jupiter.api.Assertions;
@@ -17,14 +17,21 @@ class TransactionStrategyImplTest {
 
     @Test
     void getHandler_OK() {
-        TransactionHandler returnHandler = TransactionStrategyImpl.handlers.get(Operation.RETURN);
-        TransactionHandler supplyHandler = TransactionStrategyImpl.handlers.get(Operation.SUPPLY);
-        TransactionHandler purchaseHandler = TransactionStrategyImpl.handlers
-                .get(Operation.PURCHASE);
-        Assertions.assertEquals(returnHandler, transactionStrategy.get(Operation.RETURN));
-        Assertions.assertEquals(supplyHandler, transactionStrategy.get(Operation.SUPPLY));
-        Assertions.assertEquals(purchaseHandler, transactionStrategy.get(Operation.PURCHASE));
-        TransactionHandler balanceHandler = TransactionStrategyImpl.handlers.get(Operation.BALANCE);
-        Assertions.assertEquals(balanceHandler, transactionStrategy.get(Operation.BALANCE));
+        TransactionHandler returnHandler =
+                TransactionStrategyImpl.handlers.get(FruitShopOperation.RETURN);
+        TransactionHandler supplyHandler =
+                TransactionStrategyImpl.handlers.get(FruitShopOperation.SUPPLY);
+        TransactionHandler purchaseHandler =
+                TransactionStrategyImpl.handlers.get(FruitShopOperation.PURCHASE);
+        Assertions.assertEquals(
+                returnHandler, transactionStrategy.get(FruitShopOperation.RETURN));
+        Assertions.assertEquals(
+                supplyHandler, transactionStrategy.get(FruitShopOperation.SUPPLY));
+        Assertions.assertEquals(
+                purchaseHandler, transactionStrategy.get(FruitShopOperation.PURCHASE));
+        TransactionHandler balanceHandler =
+                TransactionStrategyImpl.handlers.get(FruitShopOperation.BALANCE);
+        Assertions.assertEquals(
+                balanceHandler, transactionStrategy.get(FruitShopOperation.BALANCE));
     }
 }

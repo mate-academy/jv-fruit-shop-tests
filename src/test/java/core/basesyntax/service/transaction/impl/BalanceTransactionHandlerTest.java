@@ -1,9 +1,8 @@
 package core.basesyntax.service.transaction.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.transaction.TransactionHandler;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +21,11 @@ class BalanceTransactionHandlerTest {
     @Test
     void executeReturnTransaction_OK() {
         FruitTransaction transactionPineapple = new FruitTransaction(
-                Operation.BALANCE, Fruit.PINEAPPLE, 60);
+                FruitShopOperation.BALANCE, "apple", 60);
         FruitTransaction transactionApple = new FruitTransaction(
-                Operation.BALANCE, Fruit.APPLE, 60);
-        Map<Fruit, Integer> expected = new HashMap<>(
-                Map.of(Fruit.PINEAPPLE, 60, Fruit.APPLE, 60));
+                FruitShopOperation.BALANCE, "banana", 60);
+        Map<String, Integer> expected = new HashMap<>(
+                Map.of("apple", 60, "banana", 60));
         balanceTransactionHandler.executeTransaction(transactionPineapple);
         balanceTransactionHandler.executeTransaction(transactionApple);
         Assertions.assertEquals(expected, Storage.getAll(),

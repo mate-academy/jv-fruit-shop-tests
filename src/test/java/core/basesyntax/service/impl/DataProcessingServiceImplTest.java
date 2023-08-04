@@ -1,9 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.interfaces.DataProcessingService;
 import core.basesyntax.service.interfaces.TransactionStrategy;
 import java.util.HashMap;
@@ -26,13 +25,13 @@ class DataProcessingServiceImplTest {
     @Test
     void processData_OK() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(Operation.BALANCE, Fruit.APPLE, 40),
-                new FruitTransaction(Operation.BALANCE, Fruit.BANANA, 60),
-                new FruitTransaction(Operation.SUPPLY, Fruit.APPLE, 20),
-                new FruitTransaction(Operation.RETURN, Fruit.BANANA, 20),
-                new FruitTransaction(Operation.PURCHASE, Fruit.APPLE, 30)
+                new FruitTransaction(FruitShopOperation.BALANCE, "apple", 40),
+                new FruitTransaction(FruitShopOperation.BALANCE, "banana", 60),
+                new FruitTransaction(FruitShopOperation.SUPPLY, "apple", 20),
+                new FruitTransaction(FruitShopOperation.RETURN, "banana", 20),
+                new FruitTransaction(FruitShopOperation.PURCHASE, "apple", 30)
         );
-        Map<Fruit, Integer> expected = new HashMap<>(Map.of(Fruit.APPLE, 30, Fruit.BANANA, 80));
+        Map<String, Integer> expected = new HashMap<>(Map.of("apple", 30, "banana", 80));
         dataProcessingService.processData(transactions);
         Assertions.assertEquals(expected, Storage.getAll(),
                 "Storage doesn't have correct data after processing transactions!");

@@ -1,13 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.InvalidDataException;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.interfaces.TransactionValidator;
-import java.util.Arrays;
-import java.util.function.Predicate;
 
 public class TransactionValidatorImpl implements TransactionValidator {
     private static final String RECORD_PATTERN = "[bspr],\\w+,([1-9][0-9]{0,3})$";
+    private static final String HEADING = "type,fruit,quantity";
+    private static final int INDEX_OF_HEADING = 0;
     private static final int INDEX_OF_OPERATION_IN_RECORD = 0;
     private static final int INDEX_OF_QUANTITY_IN_RECORD = 2;
 
@@ -15,9 +14,21 @@ public class TransactionValidatorImpl implements TransactionValidator {
     public void validate(String data) {
         checkIfNull(data);
         checkIfEmpty(data);
-        checkIfCorrectFormat(data);
-        checkOperationName(data);
-        checkQuantity(data);
+        String[] lines = data.split(System.lineSeparator());
+        checkHeading(lines[INDEX_OF_HEADING]);
+        for (int i = 1; i < lines.length; i++) {
+            checkIfCorrectFormat(lines[i]);
+            checkQuantity(lines[i]);
+        }
+    }
+
+    private void checkHeading(String data) {
+        if (data.length() == 0) {
+            throw new InvalidDataException("The heading must not be empty!");
+        }
+        if (!data.equals(HEADING)) {
+            throw new InvalidDataException("The heading is not in correct format!");
+        }
     }
 
     private void checkIfNull(String data) {
@@ -36,15 +47,7 @@ public class TransactionValidatorImpl implements TransactionValidator {
         String regex = RECORD_PATTERN;
         data = data.trim();
         if (!data.matches(regex)) {
-            throw new InvalidDataException("The record doesn't have required format!");
-        }
-    }
-
-    private void checkOperationName(String data) {
-        Predicate<Operation> predicate = element -> element.equals(
-                Operation.fromCode(splittedData(data)[INDEX_OF_OPERATION_IN_RECORD].trim()));
-        if (Arrays.stream(Operation.values()).noneMatch(predicate)) {
-            throw new InvalidDataException("The Operation is not valid!");
+            throw new InvalidDataException("The record doesn't have required format!" + data);
         }
     }
 

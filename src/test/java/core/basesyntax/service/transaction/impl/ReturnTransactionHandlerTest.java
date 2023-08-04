@@ -1,9 +1,8 @@
 package core.basesyntax.service.transaction.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.transaction.TransactionHandler;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,15 +16,16 @@ class ReturnTransactionHandlerTest {
     @BeforeEach
     void setUp() {
         returnTransactionHandler = new ReturnTransactionHandler();
-        Storage.addPair(Fruit.PINEAPPLE, 60);
-        Storage.addPair(Fruit.STRAWBERRY, 20);
+
     }
 
     @Test
     void executeReturnTransaction_OK() {
-        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, Fruit.PINEAPPLE, 60);
-        Map<Fruit, Integer> expected = new HashMap<>(
-                Map.of(Fruit.PINEAPPLE, 120,Fruit.STRAWBERRY, 20));
+        Storage.addPair("apple", 60);
+        Storage.addPair("banana", 20);
+        FruitTransaction transaction = new FruitTransaction(FruitShopOperation.RETURN, "apple", 60);
+        Map<String, Integer> expected = new HashMap<>(
+                Map.of("apple", 120,"banana", 20));
         returnTransactionHandler.executeTransaction(transaction);
         Assertions.assertEquals(expected, Storage.getAll(),
                 "Return operation doesn't work correctly: ");

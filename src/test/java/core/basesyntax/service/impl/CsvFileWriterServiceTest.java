@@ -45,7 +45,7 @@ class CsvFileWriterServiceTest {
     @Test
     void writeToFile_existingPath_ok() {
         File rootDirectory = new File(DEFAULT_PATH);
-        int initialNumberOfFiles = rootDirectory.list().length;
+        int initialNumberOfFiles = rootDirectory.list() == null ? 0 : rootDirectory.list().length;
         fileWriter.writeToFile(DEFAULT_PATH, generatedReport);
 
         int expected = initialNumberOfFiles + 1;

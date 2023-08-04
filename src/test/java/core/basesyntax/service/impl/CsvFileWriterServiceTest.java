@@ -7,7 +7,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceTest {
@@ -23,7 +23,7 @@ class CsvFileWriterServiceTest {
     @Test
     void writeDataToFile_ExistingFile_Ok() {
         String actual = writeAndAfterReadFromFile(RESULT_FILE_EXISTING, TEXT_TO_WRITING);
-        Assert.assertEquals(TEXT_TO_WRITING, actual);
+        Assertions.assertEquals(TEXT_TO_WRITING, actual);
     }
 
     @Test
@@ -33,7 +33,7 @@ class CsvFileWriterServiceTest {
             path.toFile().delete();
         }
         String actual = writeAndAfterReadFromFile(RESULT_FILE_NOT_EXISTING, TEXT_TO_WRITING);
-        Assert.assertEquals(TEXT_TO_WRITING, actual);
+        Assertions.assertEquals(TEXT_TO_WRITING, actual);
     }
 
     @Test
@@ -41,7 +41,7 @@ class CsvFileWriterServiceTest {
         fileWriter.writeDataToFile(TEXT_TO_WRITING, RESULT_FILE_EXISTING);
         fileWriter.writeDataToFile(TEXT_TO_WRITING, RESULT_FILE_EXISTING);
         String actual = readFromFile(RESULT_FILE_EXISTING);
-        Assert.assertEquals(TEXT_TO_WRITING, actual);
+        Assertions.assertEquals(TEXT_TO_WRITING, actual);
     }
 
     @Test
@@ -53,7 +53,7 @@ class CsvFileWriterServiceTest {
             exception = e;
         }
         String expected = "Can't write db to file" + NOT_EXISTING_DIRECTORY_NAME;
-        Assert.assertEquals(expected, exception.getMessage());
+        Assertions.assertEquals(expected, exception.getMessage());
     }
 
     private String readFromFile(String fileName) {

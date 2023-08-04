@@ -3,8 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.ReportGeneratorException;
 import core.basesyntax.service.ReportGeneratorService;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorServiceImplTest {
@@ -24,7 +24,7 @@ class ReportGeneratorServiceImplTest {
                 + "banana,20" + LINE_SEPARATOR
                 + "apple,100";
         String actual = reportGenerator.generateReport();
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -37,7 +37,7 @@ class ReportGeneratorServiceImplTest {
             exception = e;
         }
         String expected = "Can't create report, because there aren't any fruit in the Storage";
-        Assert.assertEquals(expected, exception.getMessage());
+        Assertions.assertEquals(expected, exception.getMessage());
     }
 
     private void putInStorage(String key, Integer value) {

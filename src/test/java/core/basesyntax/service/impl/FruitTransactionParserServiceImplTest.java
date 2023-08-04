@@ -7,7 +7,7 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserServiceImplTest {
@@ -40,7 +40,7 @@ class FruitTransactionParserServiceImplTest {
         expectedListOfTransactions.add(new FruitTransaction(Operation.PURCHASE, "banana", 40));
         expectedListOfTransactions.add(new FruitTransaction(Operation.RETURN, "banana", 10));
         List<FruitTransaction> actual = transactionParser.getListOfTransactions(INPUT_DATA);
-        Assert.assertEquals(expectedListOfTransactions, actual);
+        Assertions.assertEquals(expectedListOfTransactions, actual);
     }
 
     @Test
@@ -52,7 +52,7 @@ class FruitTransactionParserServiceImplTest {
             exception = e;
         }
         String expected = "Not supported operation type: k";
-        Assert.assertEquals(expected, exception.getMessage());
+        Assertions.assertEquals(expected, exception.getMessage());
     }
 
     @Test
@@ -64,6 +64,6 @@ class FruitTransactionParserServiceImplTest {
             exception = e;
         }
         String expected = "Transactions cannot be created from empty data";
-        Assert.assertEquals(expected, exception.getMessage());
+        Assertions.assertEquals(expected, exception.getMessage());
     }
 }

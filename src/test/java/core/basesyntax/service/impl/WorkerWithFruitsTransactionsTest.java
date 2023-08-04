@@ -14,7 +14,7 @@ import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.Map;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +47,7 @@ class WorkerWithFruitsTransactionsTest {
         Transaction transaction = new FruitTransaction(BALANCE_OPERATION, APPLE, QUANTITY_100);
         workerWithTransactions.completeTransaction(transaction);
         Integer actual = Storage.getStorage().get(APPLE);
-        Assert.assertEquals(Integer.valueOf(100), actual);
+        Assertions.assertEquals(Integer.valueOf(100), actual);
     }
 
     @Test
@@ -57,7 +57,7 @@ class WorkerWithFruitsTransactionsTest {
         boolean isAppleExistInStorage = Storage.getStorage().containsKey(APPLE);
         boolean isBananaExistInStorage = Storage.getStorage().containsKey(BANANA);
         Integer actual = Storage.getStorage().get(APPLE);
-        Assert.assertTrue(isAppleExistInStorage && isBananaExistInStorage);
+        Assertions.assertTrue(isAppleExistInStorage && isBananaExistInStorage);
     }
 
     @Test
@@ -71,7 +71,7 @@ class WorkerWithFruitsTransactionsTest {
         }
         String actual = exception.getMessage();
         String expected = "apple already exist in Storage";
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -79,7 +79,7 @@ class WorkerWithFruitsTransactionsTest {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(RETURN_OPERATION, APPLE, QUANTITY_30);
         Integer actual = Storage.getStorage().get(APPLE);
-        Assert.assertEquals(Integer.valueOf(130), actual);
+        Assertions.assertEquals(Integer.valueOf(130), actual);
     }
 
     @Test
@@ -87,7 +87,7 @@ class WorkerWithFruitsTransactionsTest {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(SUPPLY_OPERATION, APPLE, QUANTITY_30);
         Integer actual = Storage.getStorage().get(APPLE);
-        Assert.assertEquals(Integer.valueOf(130), actual);
+        Assertions.assertEquals(Integer.valueOf(130), actual);
     }
 
     @Test
@@ -95,7 +95,7 @@ class WorkerWithFruitsTransactionsTest {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(PURCHASE_OPERATION, APPLE, QUANTITY_30);
         Integer actual = Storage.getStorage().get(APPLE);
-        Assert.assertEquals(Integer.valueOf(70), actual);
+        Assertions.assertEquals(Integer.valueOf(70), actual);
     }
 
     @Test
@@ -109,7 +109,7 @@ class WorkerWithFruitsTransactionsTest {
         }
         String expected = "Can't get 130 apple from storage, available only 100 apple";
         String actual = exception.getMessage();
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -123,7 +123,7 @@ class WorkerWithFruitsTransactionsTest {
         createAndCompleteTransactions(PURCHASE_OPERATION, BANANA,QUANTITY_50);
         Integer actualQuantityApplesInStorage = Storage.getStorage().get(APPLE);
         Integer actualQuantityBananasInStorage = Storage.getStorage().get(BANANA);
-        Assert.assertTrue(actualQuantityApplesInStorage.equals(160)
+        Assertions.assertTrue(actualQuantityApplesInStorage.equals(160)
                 && actualQuantityBananasInStorage.equals(50));
     }
 

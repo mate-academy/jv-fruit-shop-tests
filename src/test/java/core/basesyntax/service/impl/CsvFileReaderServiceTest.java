@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.exceptions.ReadDataFromFileException;
 import core.basesyntax.service.FileReaderService;
 import java.nio.file.FileSystems;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceTest {
@@ -23,13 +23,13 @@ class CsvFileReaderServiceTest {
     @Test
     void readDataFromFile_EmptyFile_Ok() {
         String actual = csvFileReader.readDataFromFile(SOURCE_FILE_WITHOUT_DATA);
-        Assert.assertEquals("", actual);
+        Assertions.assertEquals("", actual);
     }
 
     @Test
     void readDataFromFile_ExistingFile_ok() {
         String actual = csvFileReader.readDataFromFile(EXISTING_SOURCE_FILE);
-        Assert.assertEquals(TEXT_IN_SOURCE_FILE, actual);
+        Assertions.assertEquals(TEXT_IN_SOURCE_FILE, actual);
     }
 
     @Test
@@ -41,6 +41,6 @@ class CsvFileReaderServiceTest {
             exception = e;
         }
         String expected = "Can't read data from file " + NOT_EXISTING_SOURCE_FILE;
-        Assert.assertEquals(expected, exception.getMessage());
+        Assertions.assertEquals(expected, exception.getMessage());
     }
 }

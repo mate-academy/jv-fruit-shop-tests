@@ -22,7 +22,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void report_Generate_Ok() {
+    void reportGenerator_generate_ok() {
         Storage.storage.put(FRUIT_NAME, FRUIT_QUANTITY);
         String actualReport = reportGenerator.generateReport();
         assertEquals(EXPECTED_REPORT, actualReport);

@@ -29,7 +29,7 @@ class DataParserImplTest {
     }
 
     @Test
-    void parse_ValidData_OK() {
+    void parse_validData_ok() {
         List<String> lines = new ArrayList<>();
         lines.add(LINE_HEADER);
         lines.add(FIRST_LINE);
@@ -43,7 +43,7 @@ class DataParserImplTest {
     }
 
     @Test
-    void parse_OnlyHeader_Ok() {
+    void parse_onlyHeader_ok() {
         List<String> lines = new ArrayList<>();
         lines.add(LINE_HEADER);
         List<FruitTransaction> transactions = dataParser.parse(lines);
@@ -51,7 +51,7 @@ class DataParserImplTest {
     }
 
     @Test
-    void parse_EmptyList_Ok() {
+    void parse_emptyList_ok() {
         List<String> lines = new ArrayList<>();
         List<FruitTransaction> transactions = dataParser.parse(lines);
         assertEquals(SIZE_PARSE_NOT_OK, transactions.size());

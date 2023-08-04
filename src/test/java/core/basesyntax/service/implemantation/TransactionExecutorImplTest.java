@@ -36,7 +36,7 @@ class TransactionExecutorImplTest {
     }
 
     @Test
-    void transaction_CorrectExecutor_Ok() {
+    void processDate_correctExecutor_ok() {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         fruitTransactions.add(new FruitTransaction(Operation.BALANCE, FRUIT_NAME, FRUIT_QUANTITY));
         fruitTransactions.add(new FruitTransaction(Operation.SUPPLY, FRUIT_NAME, COUNT_FRUIT));

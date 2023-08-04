@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,23 +30,27 @@ class PurchaseHandlerTest {
         purchaseHandler = new PurchaseHandler();
     }
 
+    @AfterEach
+    void tearDown() {
+        Storage.storage.clear();
+    }
+
     @Test
-    void purchase_NonExistProduct_NotOk() {
+    void handle_nonExistProduct_notOk() {
         var nonExistProduct = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(FRUIT_NAME, CORRECT_QUANTITY));
         assertEquals(EXCEPTION_MESSAGE_FRUIT_NOT_EXIST, nonExistProduct.getMessage());
     }
 
     @Test
-    void purchase_CorrectQuantity_Ok() {
+    void handle_correctQuantity_ok() {
         Storage.storage.put(FRUIT_NAME, CURRENT_QUANTITY);
         purchaseHandler.handle(FRUIT_NAME, CORRECT_QUANTITY);
         assertEquals(EXPECTED_QUANTITY, Storage.storage.get(FRUIT_NAME));
-        Storage.storage.clear();
     }
 
     @Test
-    void purchase_MoreQuantity_NotOK() {
+    void handle_moreQuantity_notOK() {
         Storage.storage.put(FRUIT_NAME, CURRENT_QUANTITY);
         var moreQuantity = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(FRUIT_NAME, MORE_QUANTITY));
@@ -53,10 +58,9 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void balance_NegativeQuantity_NotOk() {
+    void handle_negativeQuantity_notOk() {
         var negativeQuantity = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(FRUIT_NAME, NEGATIVE_QUANTITY));
         assertEquals(EXCEPTION_MESSAGE_NEGATIVE_NUMBER, negativeQuantity.getMessage());
-        Storage.storage.clear();
     }
 }

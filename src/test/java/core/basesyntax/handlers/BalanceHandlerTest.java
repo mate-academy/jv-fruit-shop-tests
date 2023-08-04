@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.storage.Storage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,27 +24,29 @@ class BalanceHandlerTest {
         balanceHandler = new BalanceHandler();
     }
 
+    @AfterEach
+    void tearDown() {
+        Storage.storage.clear();
+    }
+
     @Test
-    void balance_CorrectQuantity_Ok() {
+    void handle_correctQuantity_ok() {
         balanceHandler.handle(FRUIT_NAME, CORRECT_QUANTITY);
         assertTrue(Storage.storage.containsKey(FRUIT_NAME));
         assertEquals(CORRECT_QUANTITY, Storage.storage.get(FRUIT_NAME));
-        Storage.storage.clear();
     }
 
     @Test
-    void balance_ZeroQuantity_Ok() {
+    void handle_zeroQuantity_ok() {
         balanceHandler.handle(FRUIT_NAME, ZERO_QUANTITY);
         assertTrue(Storage.storage.containsKey(FRUIT_NAME));
         assertEquals(ZERO_QUANTITY, Storage.storage.get(FRUIT_NAME));
-        Storage.storage.clear();
     }
 
     @Test
-    void balance_NegativeQuantity_NotOk() {
+    void handle_negativeQuantity_notOk() {
         var negativeQuantity = assertThrows(RuntimeException.class,
                 () -> balanceHandler.handle(FRUIT_NAME, NEGATIVE_QUANTITY));
         assertEquals(EXCEPTION_MESSAGE_NEGATIVE_QUANTITY, negativeQuantity.getMessage());
-        Storage.storage.clear();
     }
 }

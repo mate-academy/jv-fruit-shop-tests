@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ParserImpl;
 import java.util.List;
@@ -29,14 +31,16 @@ public class ParserImplTest {
 
     @Test
     void parseDataFromFile_ValidData_ok() {
-        List<FruitTransaction> actualTransactions = parserService
-                .parseDataFromFile(VALID_DATA);
         List<FruitTransaction> expectedTransactions = List.of(
                 new FruitTransaction("b", "banana", 20),
                 new FruitTransaction("s", "apple", 100),
                 new FruitTransaction("p", "banana", 10)
         );
-        Assertions.assertEquals(expectedTransactions, actualTransactions,
+
+        List<FruitTransaction> actualTransactions = parserService
+                .parseDataFromFile(VALID_DATA);
+
+        assertEquals(expectedTransactions, actualTransactions,
                 "Transactions should be equal.");
     }
 
@@ -45,7 +49,7 @@ public class ParserImplTest {
         NoSuchElementException noSuchElementException = Assertions
                 .assertThrows(NoSuchElementException.class,
                         () -> parserService.parseDataFromFile(NON_VALID_OPERATION_DATA));
-        Assertions.assertEquals(noSuchElementException.getMessage(),
+        assertEquals(noSuchElementException.getMessage(),
                 "Invalid operation type. Operation code: "
                         + NON_VALID_OPERATION_CODE);
     }
@@ -56,7 +60,7 @@ public class ParserImplTest {
         RuntimeException runtimeException = Assertions
                 .assertThrows(RuntimeException.class,
                         () -> parserService.parseDataFromFile(NON_VALID_ZERO_QUANTITY_DATA));
-        Assertions.assertEquals(runtimeException.getMessage(),
+        assertEquals(runtimeException.getMessage(),
                 "Quantity cannot be equal or below zero. Invalid quantity in line "
                         + invalidDataLine);
     }
@@ -67,7 +71,7 @@ public class ParserImplTest {
         RuntimeException runtimeException = Assertions
                 .assertThrows(RuntimeException.class,
                         () -> parserService.parseDataFromFile(NON_VALID_NEGATIVE_QUANTITY_DATA));
-        Assertions.assertEquals(runtimeException.getMessage(),
+        assertEquals(runtimeException.getMessage(),
                 "Quantity cannot be equal or below zero. Invalid quantity in line "
                         + invalidDataLine);
     }
@@ -77,7 +81,7 @@ public class ParserImplTest {
         RuntimeException runtimeException = Assertions
                 .assertThrows(RuntimeException.class,
                         () -> parserService.parseDataFromFile(null));
-        Assertions.assertEquals(runtimeException.getMessage(),
+        assertEquals(runtimeException.getMessage(),
                 "Input data cannot be null.");
     }
 
@@ -87,7 +91,7 @@ public class ParserImplTest {
         RuntimeException runtimeException = Assertions
                 .assertThrows(RuntimeException.class,
                         () -> parserService.parseDataFromFile(NON_VALID_MISSING_FIELD_DATA));
-        Assertions.assertEquals(runtimeException.getMessage(),
+        assertEquals(runtimeException.getMessage(),
                 "Invalid CSV line: " + invalidDataLine);
     }
 }

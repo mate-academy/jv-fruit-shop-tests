@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
@@ -13,7 +15,6 @@ import core.basesyntax.service.operation.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +46,6 @@ public class FruitShopServiceImplTest {
     void processData_validList_ok() {
         Map<String, Integer> expectedTransactions = Map.of("banana", 20, "apple", 100);
         Map<String, Integer> actualTransactions = fruitShopService.processData(VALID_TRANSACTIONS);
-        Assertions.assertEquals(expectedTransactions, actualTransactions);
+        assertEquals(expectedTransactions, actualTransactions);
     }
 }

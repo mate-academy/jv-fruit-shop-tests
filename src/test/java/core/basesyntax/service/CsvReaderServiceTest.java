@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertLinesMatch;
+
 import core.basesyntax.service.impl.CsvReaderService;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +25,14 @@ public class CsvReaderServiceTest {
         List<String> expectedLines = new ArrayList<>(List.of("b,banana,20",
                 "s,apple,100", "p,banana,10"));
         List<String> actualLines = readerService.read(VALID_OUTPUT_PATH);
-        Assertions.assertLinesMatch(expectedLines, actualLines, "Read data differ from expected.");
+        assertLinesMatch(expectedLines, actualLines, "Read data differ from expected.");
     }
 
     @Test
     void read_nonValidFile_notOk() {
         RuntimeException runtimeException = Assertions.assertThrows(
                 RuntimeException.class, () -> readerService.read(NON_VALID_FILE));
-        Assertions.assertEquals(runtimeException.getMessage(),
+        assertEquals(runtimeException.getMessage(),
                 "Can't read the file: " + NON_VALID_FILE);
     }
 }

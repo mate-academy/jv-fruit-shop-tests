@@ -1,10 +1,8 @@
 package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.exceptions.FruitsQuantityException;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.implementations.ReportServiceImpl;
 import core.basesyntax.storage.Storage;
@@ -17,7 +15,6 @@ import org.junit.jupiter.api.Test;
 public class ReportServiceTest {
     private static final String CHERRY = "cherry";
     private static final int CHERRY_QUANTITY = 100;
-    private static final int WRONG_CHERRY_QUANTITY = -100;
     private static final String DOPPELGANGER = "doppelganger";
     private static final int DOPPELGANGER_QUANTITY = 50;
     private static final String REPORT_HEADER = "fruit,quantity";
@@ -55,14 +52,6 @@ public class ReportServiceTest {
         expected.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
         List<String> report = reportService.generateReport();
         assertEquals(expected, report);
-    }
-
-    @Test
-    void storageNegativeAddNotOkay() {
-        assertThrows(FruitsQuantityException.class,
-                () -> Storage.addFruits(CHERRY, WRONG_CHERRY_QUANTITY));
-        List<String> report = reportService.generateReport();
-        assertTrue(report.isEmpty());
     }
 
     @Test

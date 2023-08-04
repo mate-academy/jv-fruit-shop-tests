@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.handler;
+package core.basesyntax.strategy.handlers;
 
 /**This interface defines the contract for processing the data.
  *  It takes a String data as input and returns the processed data as a String.

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FileWriterService;
@@ -12,7 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceTest {
-    private static final String DEFAULT_PATH = "src/test/resources/fileWriter/";
+    private static final String DEFAULT_PATH = "src/test/resources/";
+    private static final String DEFAULT_REPORT_NAME = "report.csv";
     private static final String NOT_EXISTING_PATH = "source/test/resources/";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String STANDARD_HEADER = "fruit,quantity" + LINE_SEPARATOR;
@@ -44,17 +46,9 @@ class CsvFileWriterServiceTest {
 
     @Test
     void writeToFile_existingPath_ok() {
-        File rootDirectory = new File(DEFAULT_PATH);
-        int initialNumberOfFiles = rootDirectory.list() == null ? 0 : rootDirectory.list().length;
         fileWriter.writeToFile(DEFAULT_PATH, generatedReport);
-
-        int expected = initialNumberOfFiles + 1;
-        int actual = rootDirectory.list().length;
-
-        for (File file : rootDirectory.listFiles()) {
-            file.delete();
-        }
-        assertEquals(expected, actual);
+        File rootDirectory = new File(DEFAULT_PATH + DEFAULT_REPORT_NAME);
+        assertTrue(rootDirectory.exists());
     }
 
     @Test
@@ -67,6 +61,8 @@ class CsvFileWriterServiceTest {
 
     @AfterEach
     void tearDown() {
+        File file = new File(DEFAULT_PATH + DEFAULT_REPORT_NAME);
+        file.delete();
         Storage.storage.clear();
     }
 }

@@ -7,7 +7,6 @@ public class TransactionValidatorImpl implements TransactionValidator {
     private static final String RECORD_PATTERN = "[bspr],\\w+,([1-9][0-9]{0,3})$";
     private static final String HEADING = "type,fruit,quantity";
     private static final int INDEX_OF_HEADING = 0;
-    private static final int INDEX_OF_OPERATION_IN_RECORD = 0;
     private static final int INDEX_OF_QUANTITY_IN_RECORD = 2;
 
     @Override

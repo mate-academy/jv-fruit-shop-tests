@@ -9,15 +9,20 @@ import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceImplTest {
     private final FruitShopService<FruitTransaction> fruitShopService = new FruitShopServiceImpl(
             new OperationStrategyImpl());
 
+    @BeforeEach
+    void preparation() {
+        Storage.getStorage().clear();
+    }
+
     @Test
     void update_validList_Ok() {
-        Storage.getStorage().clear();
         List<FruitTransaction> validList = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.BALANCE, "apple", 100),

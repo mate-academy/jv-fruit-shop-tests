@@ -54,18 +54,18 @@ class FruitConverterTest {
 
     @Test
     void convert_negativeAmountOfFruits_throwRuntimeException() {
-        var runtimeExceptionWithNegativeAmount = assertThrows(RuntimeException.class,
+        var runtimeException = assertThrows(RuntimeException.class,
                 () -> fruitConverter.convert(STRING_WITH_NEGATIVE_AMOUNT_OF_FRUITS));
         assertEquals("Invalid quantity on line 2! Quantity can't be below or equals zero! "
-                + "Actual number is -5", runtimeExceptionWithNegativeAmount.getMessage());
+                + "Actual number is -5", runtimeException.getMessage());
     }
 
     @Test
     void convert_zeroAmountOfFruits_throwRuntimeException() {
-        var runtimeExceptionWithZeroAmount = assertThrows(RuntimeException.class,
+        var runtimeException = assertThrows(RuntimeException.class,
                 () -> fruitConverter.convert(STRING_WITH_ZERO_AMOUNT_OF_FRUITS));
         assertEquals("Invalid quantity on line 2! Quantity can't be below or equals zero! "
-                + "Actual number is 0", runtimeExceptionWithZeroAmount.getMessage());
+                + "Actual number is 0", runtimeException.getMessage());
 
     }
 }

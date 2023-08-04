@@ -51,15 +51,18 @@ class CsvFileReaderServiceImplTest {
     void read_invalidFirstLine_throwsRuntimeException() {
         var runtimeException = assertThrows(RuntimeException.class,
                 () -> csvFileReaderService.read(PATH_OF_FILE_WITH_INVALID_FIRST_LINE));
-        String firstLine = "";
+        String firstLine = getFirstLine();
+        assertEquals("Your first line should be " + VALID_FIRST_LINE + ", but " + "yours is "
+                + firstLine, runtimeException.getMessage());
+    }
+
+    private static String getFirstLine() {
         try (BufferedReader reader = new BufferedReader(
                 new FileReader(PATH_OF_FILE_WITH_INVALID_FIRST_LINE))) {
-            firstLine = reader.readLine();
+            return reader.readLine();
         } catch (IOException e) {
             throw new RuntimeException("Something wrong with file's path "
                     + PATH_OF_FILE_WITH_INVALID_FIRST_LINE, e);
         }
-        assertEquals("Your first line should be " + VALID_FIRST_LINE + ", but " + "yours is "
-                + firstLine, runtimeException.getMessage());
     }
 }

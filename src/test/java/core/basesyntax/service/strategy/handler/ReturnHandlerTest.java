@@ -7,14 +7,19 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnHandlerTest {
     private final OperationHandler operationHandler = new ReturnHandler();
 
+    @BeforeEach
+    void preparation() {
+        Storage.getStorage().clear();
+    }
+
     @Test
     void process_validTransaction_Ok() {
-        Storage.getStorage().clear();
         Storage.getStorage().put("apple", 100);
         operationHandler.process(new FruitTransaction(Operation.RETURN, "apple", 10));
         Map<String, Integer> expected = new HashMap<>();

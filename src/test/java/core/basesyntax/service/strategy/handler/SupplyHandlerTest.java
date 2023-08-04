@@ -7,10 +7,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
     private final OperationHandler operationHandler = new SupplyHandler();
+
+    @BeforeEach
+    void preparation() {
+        Storage.getStorage().clear();
+    }
 
     @Test
     void process_validTransaction_Ok() {

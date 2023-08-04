@@ -21,7 +21,7 @@ class CsvFileWriterServiceImplTest {
         csvFileWriterService.write(VALID_INPUT_STRING, VALID_OUTPUT_PATH);
         String expected = "banana,107" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
-        String actual = readOutputFile() + System.lineSeparator();
+        String actual = readOutputFile();
         assertEquals(expected, actual);
     }
 
@@ -37,7 +37,7 @@ class CsvFileWriterServiceImplTest {
                 new FileReader(VALID_OUTPUT_PATH))) {
             return bufferedReader
                     .lines()
-                    .collect(Collectors.joining(System.lineSeparator()));
+                    .collect(Collectors.joining(System.lineSeparator())) + System.lineSeparator();
         } catch (IOException e) {
             throw new RuntimeException("Can't read file(");
         }

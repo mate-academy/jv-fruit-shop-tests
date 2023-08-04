@@ -36,14 +36,14 @@ public class ReportServiceTest {
     }
 
     @Test
-    void emptyStorageReportOkay() {
+    void generateReport_emptyStorage_okay() {
         Storage.clear();
         String report = reportService.generateReport();
         assertTrue(report.isEmpty());
     }
 
     @Test
-    void storageReportOkay() {
+    void generateReport_filledStorage_okay() {
         Storage.addFruits(CHERRY, CHERRY_QUANTITY);
         Storage.addFruits(DOPPELGANGER, DOPPELGANGER_QUANTITY);
         List<String> expected = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ReportServiceTest {
     }
 
     @Test
-    void specialCharactersOkay() {
+    void generateReport_specialCharsInFruitName_okay() {
         Storage.getStorage().put(SPECIAL_CHARACTER_APPLE, SPECIAL_CHARACTER_APPLE_QUANTITY);
         Storage.getStorage().put(SPECIAL_CHARACTER_BANANA, SPECIAL_CHARACTER_BANANA_QUANTITY);
         String actualReport = reportService.generateReport();

@@ -20,18 +20,18 @@ public class ReadCsvFileServiceTest {
     }
 
     @Test
-    void normalFileReadOkay() {
+    void readFile_validFileName_okay() {
         assertDoesNotThrow(() -> readCsvFileService.readFile(SOURCE_FILE));
     }
 
     @Test
-    void testReadFileFileNotExistNotOkay() {
+    void readFile_missingFile_notOkay() {
         assertThrows(ReadFileException.class,
                 () -> readCsvFileService.readFile(NOT_EXIST_SOURCE_FILE));
     }
 
     @Test
-    void testReadNullFileNotOkay() {
+    void readFile_nullFile_notOkay() {
         assertThrows(ReadFileException.class,
                 () -> readCsvFileService.readFile(null));
     }

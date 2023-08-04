@@ -34,7 +34,26 @@ public class WriteCsvFileServiceTest {
     }
 
     @Test
-    void wrongFileNameNotOkay() {
+    void writeFile_isReportPresent_okay() {
+        StringBuilder report = new StringBuilder();
+        report.append(REPORT_HEADER)
+                .append(System.lineSeparator());
+        report.append(CHERRY)
+                .append(COMMA)
+                .append(CHERRY_QUANTITY)
+                .append(System.lineSeparator());
+        report.append(DOPPELGANGER)
+                .append(COMMA)
+                .append(DOPPELGANGER_QUANTITY)
+                .append(System.lineSeparator());
+        testReport = report.toString();
+        writeCsvFileService.writeFile(REPORT_FILE, testReport);
+        assertTrue(Files.exists(REPORT_FILE_PATH),
+                "Can`t read " + REPORT_FILE + " file.");
+    }
+
+    @Test
+    void writeFile_wrongFileName_notOkay() {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER)
                 .append(System.lineSeparator());
@@ -54,26 +73,7 @@ public class WriteCsvFileServiceTest {
     }
 
     @Test
-    void isReportPresentOkay() {
-        StringBuilder report = new StringBuilder();
-        report.append(REPORT_HEADER)
-                .append(System.lineSeparator());
-        report.append(CHERRY)
-                .append(COMMA)
-                .append(CHERRY_QUANTITY)
-                .append(System.lineSeparator());
-        report.append(DOPPELGANGER)
-                .append(COMMA)
-                .append(DOPPELGANGER_QUANTITY)
-                .append(System.lineSeparator());
-        testReport = report.toString();
-        writeCsvFileService.writeFile(REPORT_FILE, testReport);
-        assertTrue(Files.exists(REPORT_FILE_PATH),
-                "Can`t read " + REPORT_FILE + " file.");
-    }
-
-    @Test
-    void writeEmptyReportNotOkay() {
+    void writeFile_nullReport_notOkay() {
         assertThrows(WriteFileException.class,
                 () -> writeCsvFileService.writeFile(REPORT_FILE, testReport));
     }

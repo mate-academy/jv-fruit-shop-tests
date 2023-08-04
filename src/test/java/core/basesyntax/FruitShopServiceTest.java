@@ -54,7 +54,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    void testUpdateDataWithValidTransactionsOkay() {
+    void updateData_validTransactions_okay() {
         transactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, APPLE_QUANTITY));
         transactions.add(
@@ -72,7 +72,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    void testUpdateDataWithNegativeQuantityNotOkay() {
+    void updateData_negativeQuantity_okay() {
         transactions.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, APPLE, WRONG_QUANTITY));
         fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
@@ -81,7 +81,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    void testUpdateDataWithNullTransactionsNotOkay() {
+    void updateData_nullTransactions_okay() {
         transactions = null;
         assertThrows(WrongDataBaseException.class,
                 () -> fruitShopService.updateData(transactions));

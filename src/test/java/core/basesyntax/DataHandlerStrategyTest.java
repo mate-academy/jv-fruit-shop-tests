@@ -34,7 +34,7 @@ public class DataHandlerStrategyTest {
     }
 
     @Test
-    void getBalanceDataHandlerOkay() {
+    void getHandler_isBalanceDataHeader_okay() {
         DataHandler balanceDataHandler = new BalanceDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.BALANCE);
@@ -42,7 +42,7 @@ public class DataHandlerStrategyTest {
     }
 
     @Test
-    void getSupplyDataHandlerOkay() {
+    void getHandler_isSupplyDataHeader_okay() {
         DataHandler supplyDataHandler = new SupplyDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
@@ -50,7 +50,7 @@ public class DataHandlerStrategyTest {
     }
 
     @Test
-    void getPurchaseDataHandlerOkay() {
+    void getHandler_isPurchaseDataHeader_okay() {
         DataHandler purchaseDataHandler = new PurchaseDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.PURCHASE);
@@ -58,7 +58,7 @@ public class DataHandlerStrategyTest {
     }
 
     @Test
-    void getReturnDataHandlerOkay() {
+    void getHandler_isReturnDataHeader_okay() {
         DataHandler returnDataHandler = new ReturnDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.RETURN);

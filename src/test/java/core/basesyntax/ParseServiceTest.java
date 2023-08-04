@@ -36,7 +36,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    void isFruitTransactionOkay() {
+    void parseDataToTransaction_validFruitTransaction_okay() {
         testData.add(HEADER);
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         testData.add(BALANCE_OPERATION_CODE + COMMA + APPLE + COMMA + TEST_APPLE_QUANTITY);
@@ -64,28 +64,19 @@ public class ParseServiceTest {
     }
 
     @Test
-    void isFruitTransactionEmptyNotOkay() {
+    void parseDataToTransaction_fruitTransactionEmpty_notOkay() {
         assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
     }
 
     @Test
-    void isFruitTransactionNullNotOkay() {
+    void parseDataToTransaction_fruitTransactionNull_notOkay() {
         assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(null));
     }
 
     @Test
-    void dataWrongOperationNotOkay() {
-        testData.add(HEADER);
-        testData.add(WRONG_ZAPP_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        assertThrows(WrongDataBaseException.class,
-                () -> parseService.parseDataToTransaction(testData));
-    }
-
-    @Test
-    void dataMissingQuantityNotOkay() {
+    void parseDataToTransaction_missingQuantity_notOkay() {
         testData.add(HEADER);
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA);
@@ -94,15 +85,7 @@ public class ParseServiceTest {
     }
 
     @Test
-    void dataInvalidQuantityNotOkay() {
-        testData.add(HEADER);
-        testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + WRONG_QUANTITY_TYPE);
-        assertThrows(WrongDataBaseException.class,
-                () -> parseService.parseDataToTransaction(testData));
-    }
-
-    @Test
-    void dataHeaderAbsentNotOkay() {
+    void parseDataToTransaction_missingHeader_notOkay() {
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         assertThrows(WrongDataBaseException.class,
@@ -110,7 +93,24 @@ public class ParseServiceTest {
     }
 
     @Test
-    void dataWrongHeaderNotOkay() {
+    void parseDataToTransaction_invalidQuantity_notOkay() {
+        testData.add(HEADER);
+        testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + WRONG_QUANTITY_TYPE);
+        assertThrows(WrongDataBaseException.class,
+                () -> parseService.parseDataToTransaction(testData));
+    }
+
+    @Test
+    void parseDataToTransaction_invalidOperation_notOkay() {
+        testData.add(HEADER);
+        testData.add(WRONG_ZAPP_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
+        testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
+        assertThrows(WrongDataBaseException.class,
+                () -> parseService.parseDataToTransaction(testData));
+    }
+
+    @Test
+    void parseDataToTransaction_invalidHeader_notOkay() {
         testData.add(WRONG_HEADER);
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);

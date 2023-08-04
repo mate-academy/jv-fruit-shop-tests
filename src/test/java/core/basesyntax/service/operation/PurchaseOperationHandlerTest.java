@@ -7,7 +7,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.InvalidOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,8 +15,7 @@ class PurchaseOperationHandlerTest {
     private static final Integer INITIAL_FRUIT_QUANTITY = 20;
     private static final Integer VALID_REQUIRED_FRUIT_QUANTITY = 10;
     private static final Integer OVERWHELMING_REQ_FRUIT_QUANTITY = INITIAL_FRUIT_QUANTITY + 1;
-    private static final Operation BALANCE_OPERATION = Operation.BALANCE;
-    private static final Operation PURCHASE_OPERATION = Operation.BALANCE;
+    private static final Operation PURCHASE_OPERATION = Operation.PURCHASE;
     private static final String ERROR_MESSAGE = "The required quantity "
                                                 + OVERWHELMING_REQ_FRUIT_QUANTITY
                                                 + " can't be sold, since the current quantity "
@@ -27,11 +25,11 @@ class PurchaseOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
+        Storage.storage.clear();
         operationHandler = new PurchaseOperationHandler();
-
         FruitTransaction fruitTransaction = new FruitTransaction(DEFAULT_FRUIT_NAME,
                                                                 INITIAL_FRUIT_QUANTITY,
-                                                                BALANCE_OPERATION);
+                                                                Operation.BALANCE);
         OperationHandler balanceOperation = new BalanceOperationHandler();
         balanceOperation.execute(fruitTransaction);
     }
@@ -52,13 +50,8 @@ class PurchaseOperationHandlerTest {
         FruitTransaction fruitTransaction = new FruitTransaction(DEFAULT_FRUIT_NAME,
                 OVERWHELMING_REQ_FRUIT_QUANTITY,
                 PURCHASE_OPERATION);
-        InvalidOperationException thrown = assertThrows(InvalidOperationException.class,
+        InvalidOperationException actualException = assertThrows(InvalidOperationException.class,
                 () -> operationHandler.execute(fruitTransaction));
-        assertEquals(ERROR_MESSAGE, thrown.getMessage());
-    }
-
-    @AfterEach
-    void tearDown() {
-        Storage.storage.clear();
+        assertEquals(ERROR_MESSAGE, actualException.getMessage());
     }
 }

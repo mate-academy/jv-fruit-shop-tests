@@ -53,10 +53,10 @@ class CsvFileWriterServiceTest {
 
     @Test
     void writeToFile_notExistingPath_notOk() {
-        RuntimeException thrown = assertThrows(RuntimeException.class,
+        RuntimeException actualException = assertThrows(RuntimeException.class,
                 () -> fileWriter.writeToFile(NOT_EXISTING_PATH,
                                             generatedReport));
-        assertEquals(ERROR_MESSAGE, thrown.getMessage());
+        assertEquals(ERROR_MESSAGE, actualException.getMessage());
     }
 
     @AfterEach

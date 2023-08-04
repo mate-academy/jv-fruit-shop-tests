@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceTest {
     private static final String DEFAULT_PATH = "src/test/resources/";
+    private static final String TEST_FILE_DATA = "hello,world" + System.lineSeparator();
     private static final String EXISTING_FILE_NAME = "test.csv";
     private static final String NOT_EXISTING_FILE_NAME = "failedTest.csv";
     private static final String NOT_EXISTING_FILE_ERROR_MESSAGE = "Can't open and read from the ";
@@ -24,16 +25,15 @@ class CsvFileReaderServiceTest {
     void readFromFile_validFileName_ok() {
         File file = new File(DEFAULT_PATH + EXISTING_FILE_NAME);
         String actual = fileReader.readFromFile(file);
-        String expected = "hello,world" + System.lineSeparator();
-        assertEquals(expected, actual);
+        assertEquals(TEST_FILE_DATA, actual);
     }
 
     @Test
     void readFromFile_notExistingFileName_notOk() {
         File file = new File(DEFAULT_PATH + NOT_EXISTING_FILE_NAME);
-        RuntimeException thrown = assertThrows(RuntimeException.class,
+        RuntimeException actualException = assertThrows(RuntimeException.class,
                 () -> fileReader.readFromFile(file));
         assertEquals(NOT_EXISTING_FILE_ERROR_MESSAGE
-                            + NOT_EXISTING_FILE_NAME, thrown.getMessage());
+                            + NOT_EXISTING_FILE_NAME, actualException.getMessage());
     }
 }

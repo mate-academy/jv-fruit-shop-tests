@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,7 @@ class BalanceOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
+        Storage.storage.clear();
         operationHandler = new BalanceOperationHandler();
     }
 
@@ -29,10 +29,5 @@ class BalanceOperationHandlerTest {
         int expected = DEFAULT_FRUIT_QUANTITY;
         int actual = Storage.storage.get(DEFAULT_FRUIT_NAME);
         assertEquals(expected, actual);
-    }
-
-    @AfterEach
-    void tearDown() {
-        Storage.storage.clear();
     }
 }

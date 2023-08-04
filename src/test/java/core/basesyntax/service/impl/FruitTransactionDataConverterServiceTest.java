@@ -12,24 +12,13 @@ import org.junit.jupiter.api.Test;
 
 class FruitTransactionDataConverterServiceTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String VALID_FRUIT_DATA = "type,fruit,quantity"
-                                                    + LINE_SEPARATOR
-                                                    + "b,banana,20";
-    private static final String INVALID_FRUIT_NAME_DATA = "type,fruit,quantity"
-                                                        + LINE_SEPARATOR
-                                                        + "b,banana@,20";
-    private static final String BLANK_FRUIT_NAME_DATA = "type,fruit,quantity"
-                                                        + LINE_SEPARATOR
-                                                        + "b,,20";
-    private static final String INVALID_FRUIT_QUANTITY_DATA = "type,fruit,quantity"
-                                                            + LINE_SEPARATOR
-                                                            + "b,banana@,twenty";
-    private static final String NEGATIVE_FRUIT_QUANTITY_DATA = "type,fruit,quantity"
-                                                            + LINE_SEPARATOR
-                                                            + "b,banana,-20";
-    private static final String INVALID_FRUIT_OPERATION_DATA = "type,fruit,quantity"
-                                                                    + LINE_SEPARATOR
-                                                                    + "q,banana,20";
+    private static final String STANDARD_HEADER = "type,fruit,quantity";
+    private static final String VALID_FRUIT_DATA = "b,banana,20";
+    private static final String INVALID_FRUIT_NAME_DATA = "b,banana@,20";
+    private static final String BLANK_FRUIT_NAME_DATA = "b,,20";
+    private static final String INVALID_FRUIT_QUANTITY_DATA = "b,banana@,twenty";
+    private static final String NEGATIVE_FRUIT_QUANTITY_DATA = "b,banana,-20";
+    private static final String INVALID_FRUIT_OPERATION_DATA = "q,banana,20";
     private static final String INVALID_FRUIT_NAME_ERROR_MESSAGE = "Fruit name shouldn't consist "
             + "any digits and special characters!";
     private static final String BLANK_FRUIT_NAME_ERROR_MESSAGE = "Fruit name "
@@ -46,40 +35,50 @@ class FruitTransactionDataConverterServiceTest {
     @Test
     void convertDataToObjects_validData_ok() {
         FruitTransaction expected = new FruitTransaction("banana", 20, Operation.BALANCE);
-        FruitTransaction actual = dataConverter.convertDataToObjects(VALID_FRUIT_DATA).get(0);
+        String fruitData = generateValidDataFormat(VALID_FRUIT_DATA);
+        FruitTransaction actual = dataConverter.convertDataToObjects(fruitData).get(0);
         assertEquals(expected, actual);
     }
 
     @Test
     void convertDataToObjects_invalidFruitNameData_notOk() {
-        InvalidDataFormatException thrown = assertThrows(InvalidDataFormatException.class,
-                () -> dataConverter.convertDataToObjects(INVALID_FRUIT_NAME_DATA));
-        assertEquals(INVALID_FRUIT_NAME_ERROR_MESSAGE, thrown.getMessage());
+        String fruitData = generateValidDataFormat(INVALID_FRUIT_NAME_DATA);
+        InvalidDataFormatException actualException = assertThrows(InvalidDataFormatException.class,
+                () -> dataConverter.convertDataToObjects(fruitData));
+        assertEquals(INVALID_FRUIT_NAME_ERROR_MESSAGE, actualException.getMessage());
     }
 
     @Test
     void convertDataToObjects_blankFruitNameData_notOk() {
-        InvalidDataFormatException thrown = assertThrows(InvalidDataFormatException.class,
-                () -> dataConverter.convertDataToObjects(BLANK_FRUIT_NAME_DATA));
-        assertEquals(BLANK_FRUIT_NAME_ERROR_MESSAGE, thrown.getMessage());
+        String fruitData = generateValidDataFormat(BLANK_FRUIT_NAME_DATA);
+        InvalidDataFormatException actualException = assertThrows(InvalidDataFormatException.class,
+                () -> dataConverter.convertDataToObjects(fruitData));
+        assertEquals(BLANK_FRUIT_NAME_ERROR_MESSAGE, actualException.getMessage());
     }
 
     @Test
     void convertDataToObjects_invalidFruitQuantityData_notOk() {
+        String fruitData = generateValidDataFormat(INVALID_FRUIT_QUANTITY_DATA);
         assertThrows(NumberFormatException.class,
-                () -> dataConverter.convertDataToObjects(INVALID_FRUIT_QUANTITY_DATA));
+                () -> dataConverter.convertDataToObjects(fruitData));
     }
 
     @Test
     void convertDataToObjects_negativeFruitQuantity_notOk() {
-        InvalidDataFormatException thrown = assertThrows(InvalidDataFormatException.class,
-                () -> dataConverter.convertDataToObjects(NEGATIVE_FRUIT_QUANTITY_DATA));
-        assertEquals(NEGATIVE_FRUIT_QUANTITY_ERROR_MESSAGE, thrown.getMessage());
+        String fruitData = generateValidDataFormat(NEGATIVE_FRUIT_QUANTITY_DATA);
+        InvalidDataFormatException actualException = assertThrows(InvalidDataFormatException.class,
+                () -> dataConverter.convertDataToObjects(fruitData));
+        assertEquals(NEGATIVE_FRUIT_QUANTITY_ERROR_MESSAGE, actualException.getMessage());
     }
 
     @Test
     void convertDataToObjects_notExistingFruitOperationData_notOk() {
+        String fruitData = generateValidDataFormat(INVALID_FRUIT_OPERATION_DATA);
         assertThrows(InvalidDataFormatException.class,
-                () -> dataConverter.convertDataToObjects(INVALID_FRUIT_OPERATION_DATA));
+                () -> dataConverter.convertDataToObjects(fruitData));
+    }
+
+    private String generateValidDataFormat(String fruitData) {
+        return STANDARD_HEADER + LINE_SEPARATOR + fruitData;
     }
 }

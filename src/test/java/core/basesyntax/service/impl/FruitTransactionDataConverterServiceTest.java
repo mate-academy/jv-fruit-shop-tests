@@ -11,23 +11,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionDataConverterServiceTest {
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String VALID_FRUIT_DATA = "type,fruit,quantity"
-                                                    + System.lineSeparator()
+                                                    + LINE_SEPARATOR
                                                     + "b,banana,20";
     private static final String INVALID_FRUIT_NAME_DATA = "type,fruit,quantity"
-                                                        + System.lineSeparator()
+                                                        + LINE_SEPARATOR
                                                         + "b,banana@,20";
     private static final String BLANK_FRUIT_NAME_DATA = "type,fruit,quantity"
-                                                        + System.lineSeparator()
+                                                        + LINE_SEPARATOR
                                                         + "b,,20";
     private static final String INVALID_FRUIT_QUANTITY_DATA = "type,fruit,quantity"
-                                                            + System.lineSeparator()
+                                                            + LINE_SEPARATOR
                                                             + "b,banana@,twenty";
     private static final String NEGATIVE_FRUIT_QUANTITY_DATA = "type,fruit,quantity"
-                                                            + System.lineSeparator()
+                                                            + LINE_SEPARATOR
                                                             + "b,banana,-20";
     private static final String INVALID_FRUIT_OPERATION_DATA = "type,fruit,quantity"
-                                                                    + System.lineSeparator()
+                                                                    + LINE_SEPARATOR
                                                                     + "q,banana,20";
     private static final String INVALID_FRUIT_NAME_ERROR_MESSAGE = "Fruit name shouldn't consist "
             + "any digits and special characters!";

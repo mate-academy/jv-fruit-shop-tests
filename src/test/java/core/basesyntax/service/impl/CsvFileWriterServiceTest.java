@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 class CsvFileWriterServiceTest {
     private static final String DEFAULT_PATH = "src/test/resources/fileWriter/";
     private static final String NOT_EXISTING_PATH = "source/test/resources/";
-    private static final String STANDARD_HEADER = "fruit,quantity" + System.lineSeparator();
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String STANDARD_HEADER = "fruit,quantity" + LINE_SEPARATOR;
     private static final String BANANA_FRUIT_NAME = "banana";
     private static final Integer BANANA_FRUIT_QUANTITY = 150;
     private static final String APPLE_FRUIT_NAME = "apple";

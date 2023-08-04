@@ -40,6 +40,12 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
+    void sell_MoreThan_Has() {
+        assertThrows(RuntimeException.class,
+                () -> purchaseHandler.handle("apple", 11));
+    }
+
+    @Test
     void handle_NullFruit_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(null, 10));

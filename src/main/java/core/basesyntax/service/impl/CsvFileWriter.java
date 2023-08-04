@@ -7,21 +7,17 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class CsvFileWriter implements FileWriter {
-    private final Path destiny;
-
-    public CsvFileWriter(Path destiny) {
-        PathValidator.validatePath(destiny);
-        this.destiny = destiny;
-    }
-
     @Override
-    public void write(String source) {
-        try (BufferedWriter writer = Files.newBufferedWriter(destiny)) {
+    public void write(Path destination, String source) {
+        Objects.requireNonNull(source);
+        PathValidator.validatePath(destination);
+        try (BufferedWriter writer = Files.newBufferedWriter(destination)) {
             writer.write(source);
         } catch (IOException e) {
-            throw new CsvFileException("Can't write date to csv file: " + destiny, e);
+            throw new CsvFileException("Can't write date to csv file: " + destination, e);
         }
     }
 }

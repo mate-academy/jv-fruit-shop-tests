@@ -13,10 +13,13 @@ public class TransactionMapperImpl implements TransactionMapper {
     private static final int FRUIT_COLUMN = 1;
     private static final int QUANTITY_COLUMN = 2;
     private static final int HEADER_ROW = 1;
-    private static final String RECORD_PATTERN = "^\\w,\\w+,\\d+$";
+    private static final String RECORD_PATTERN = "^[a-zA-Z],[a-zA-Z]+,\\d+$";
 
     @Override
     public List<Transaction> mapAll(List<String> source) {
+        if (source.isEmpty()) {
+            throw new IllegalArgumentException("Provided source is empty");
+        }
         return source.stream()
                 .skip(HEADER_ROW)
                 .map(this::mapToTransaction)

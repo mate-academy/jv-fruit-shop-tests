@@ -11,18 +11,19 @@ import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionMapperImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
-import core.basesyntax.strategy.BalanceOperation;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
+import core.basesyntax.service.strategy.BalanceOperation;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.PurchaseOperation;
+import core.basesyntax.service.strategy.ReturnOperation;
+import core.basesyntax.service.strategy.SupplyOperation;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String SOURCE_PATH = "src/main/resources/source.csv";
+    private static final String DESTINATION_PATH = "src/main/resources/destination.csv";
     private static final Map<Transaction.Operation, OperationStrategy> HANDLERS = new HashMap<>();
 
     static {
@@ -34,10 +35,9 @@ public class Main {
 
     public static void main(String[] args) {
         // read data from csv file
-        Path source = Paths.get("src/main/resources/source.csv");
-        FileReader reader = new CsvFileReader(source);
-        List<String> lines = reader.read();
-
+        Path source = Path.of(SOURCE_PATH);
+        FileReader reader = new CsvFileReader();
+        List<String> lines = reader.read(source);
         // mapping data to Object
         TransactionMapper mapper = new TransactionMapperImpl();
         List<Transaction> transactions = mapper.mapAll(lines);
@@ -51,8 +51,8 @@ public class Main {
         String report = reportCreator.create();
 
         // write report to file
-        Path destiny = Paths.get("src/main/resources/destiny.csv");
-        FileWriter fileWriter = new CsvFileWriter(destiny);
-        fileWriter.write(report);
+        Path destination = Path.of(DESTINATION_PATH);
+        FileWriter fileWriter = new CsvFileWriter();
+        fileWriter.write(destination, report);
     }
 }

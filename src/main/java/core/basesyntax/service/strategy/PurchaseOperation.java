@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.strategy;
 
 import core.basesyntax.storage.Storage;
 
@@ -14,6 +14,9 @@ public class PurchaseOperation implements OperationStrategy {
     }
 
     private Integer subtractFromStorage(Integer oldValue, Integer subtrahend) {
+        if (subtrahend < 0) {
+            throw new IllegalArgumentException("Negative purchase amount: " + subtrahend);
+        }
         if (oldValue < subtrahend) {
             throw new IllegalArgumentException(
                     "There aren't enough fruits in the Storage. The amount is " + oldValue

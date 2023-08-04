@@ -1,0 +1,10 @@
+type,fruit,quantity
+b,pineapple,20
+b,coconut,10
+b,blueberry,321
+b,raspberry,0
+s,pineapple,11
+p,coconut,9
+r,pineapple,100000
+p,blueberry,321
+r,raspberry,1

@@ -27,6 +27,12 @@ public class FruitShopServiceImplTest {
 
     @BeforeEach
       public void setUp() {
+        initializeFruitShopService();
+        initializeStorage();
+
+    }
+
+    private void initializeFruitShopService() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
                 = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
@@ -34,7 +40,11 @@ public class FruitShopServiceImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         fruitShopService = new
-              FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
+                FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
+
+    }
+
+    private void initializeStorage() {
         Storage.storage.clear();
         Storage.storage.put(APPLE, 10);
         Storage.storage.put(BANANA, 20);

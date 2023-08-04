@@ -18,15 +18,15 @@ public class ParseServiceImpl implements ParseService {
     public List<FruitTransaction> parse(List<String> stringList) {
         if (stringList != null && stringList.size() > CSV_HEAD_INDEX) {
             return stringList.stream()
-                   .skip(CSV_HEAD_INDEX)
-                   .map(s -> s.split(LINE_SEPARATOR))
-                   .filter(line -> line.length
-                           == VALID_TRANSACTION_LENGTH)
-                   .map(line -> new FruitTransaction(
-                           FruitTransaction.Operation.getOperationByCode(line[OPERATION_INDEX]),
-                           line[FRUIT_INDEX],
-                           Integer.parseInt(line[QUANTITY_INDEX])
-                   )).collect(Collectors.toList());
+                    .skip(CSV_HEAD_INDEX)
+                    .map(s -> s.split(LINE_SEPARATOR))
+                    .filter(line -> line.length
+                            == VALID_TRANSACTION_LENGTH)
+                    .map(line -> new FruitTransaction(
+                            FruitTransaction.Operation.getOperationByCode(line[OPERATION_INDEX]),
+                            line[FRUIT_INDEX],
+                            Integer.parseInt(line[QUANTITY_INDEX])
+                    )).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }

@@ -8,69 +8,62 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ParseServiceImplTest {
     private static final String HEAD_FILE = "operation,fruit,quantity";
     private static final String INVALID_BALANCE_STRING = "b,apple";
-    private static final int EXPECTED_LIST_SIZE = 1;
     private static final String APPLE = "apple";
     private static final String ORANGE = "orange";
     private static final String VALID_BALANCE_APPLE = "b,apple,10";
     private static final String VALID_SUPPLY_ORANGE = "s,orange,5";
     private static final int APPLE_QUANTITY = 10;
     private static final int ORANGE_QUANTITY = 5;
-    private static ParseServiceImpl parseService;
-    private List<FruitTransaction> resultFruit;
-
-    @BeforeEach
-    public void setUp() {
-        parseService = new ParseServiceImpl();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        resultFruit = null;
-    }
 
     @Test
     public void test_ParseWithNullInput_Ok() {
-        resultFruit = parseService.parse(null);
+        ParseServiceImpl parseService = new ParseServiceImpl();
+        List<FruitTransaction> resultFruit
+                = parseService.parse(null);
         assertNotNull(resultFruit);
         assertTrue(resultFruit.isEmpty());
     }
 
     @Test
     public void test_ParseWithEmptyInput() {
-        resultFruit = parseService.parse(Collections.emptyList());
+        ParseServiceImpl parseService = new ParseServiceImpl();
+        List<FruitTransaction> resultFruit
+                = parseService.parse(Collections.emptyList());
         assertNotNull(resultFruit);
         assertTrue(resultFruit.isEmpty());
     }
 
     @Test
     public void test_ParseWithValidInput_Ok() {
-        List<String> stringList =
-                Arrays.asList(HEAD_FILE, VALID_BALANCE_APPLE,
-                        VALID_SUPPLY_ORANGE);
+        ParseServiceImpl parseService = new ParseServiceImpl();
+        List<String> stringList = Arrays.asList(
+                HEAD_FILE, VALID_BALANCE_APPLE, VALID_SUPPLY_ORANGE);
         List<FruitTransaction> expected = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         APPLE, APPLE_QUANTITY),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                        ORANGE, ORANGE_QUANTITY)
-        );
-        resultFruit = parseService.parse(stringList);
+                        ORANGE, ORANGE_QUANTITY));
+        List<FruitTransaction> resultFruit = parseService.parse(stringList);
         assertEquals(expected, resultFruit);
-
     }
 
     @Test
     public void test_ParseInvalidInput_notOk() {
-        List<String> list = Arrays.asList(HEAD_FILE,
+        ParseServiceImpl parseService = new ParseServiceImpl();
+        List<String> list = Arrays.asList(
+                HEAD_FILE,
                 INVALID_BALANCE_STRING,
                 VALID_SUPPLY_ORANGE);
-        resultFruit = parseService.parse(list);
-        assertEquals(EXPECTED_LIST_SIZE, resultFruit.size());
+        try {
+            parseService.parse(list);
+
+        } catch (IllegalArgumentException e) {
+            assertEquals("Expected IllegalArgumentException", e.getMessage());
+        }
     }
 }

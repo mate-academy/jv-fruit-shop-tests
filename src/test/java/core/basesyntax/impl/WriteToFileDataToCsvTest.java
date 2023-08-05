@@ -14,7 +14,7 @@ class WriteToFileDataToCsvTest {
 
     @BeforeAll
     static void setUp() {
-        writeDataToFileService = new WriteToFileDataToCsv();
+        writeDataToFileService = new WriteToCsv();
     }
 
     @Test

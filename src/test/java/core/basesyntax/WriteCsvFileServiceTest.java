@@ -58,7 +58,7 @@ public class WriteCsvFileServiceTest {
                 () -> writeCsvFileService.writeFile(REPORT_FILE, testReport));
     }
 
-    // disabled due to git hub issue test
+    // Disabled due to git hub issue test fail
     // Expected core.basesyntax.exceptions.WriteFileException to be thrown, but nothing was thrown.
     //    @Test
     //    void writeFile_wrongFileName_notOkay() {

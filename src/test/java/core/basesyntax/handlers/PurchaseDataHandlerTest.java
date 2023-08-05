@@ -52,12 +52,14 @@ public class PurchaseDataHandlerTest {
 
     @Test
     void processData_nullFruit_notOkay() {
+        Storage.addFruits(APPLE, STORAGE_QUANTITY);
         assertThrows(FruitsNameException.class, () -> dataHandler.processData(
                 NULL_FRUIT, APPLE_QUANTITY_SMALLER_THAN_STORAGE));
     }
 
     @Test
     void processData_emptyFruit_notOkay() {
+        Storage.addFruits(APPLE, STORAGE_QUANTITY);
         assertThrows(FruitsNameException.class, () -> dataHandler.processData(
                 EMPTY_FRUIT, APPLE_QUANTITY_SMALLER_THAN_STORAGE));
     }

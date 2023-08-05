@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.FruitsQuantityException;
-import core.basesyntax.exceptions.WrongDataBaseException;
+import core.basesyntax.exceptions.TransactionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.implementations.FruitShopServiceImpl;
@@ -83,7 +83,7 @@ public class FruitShopServiceTest {
     @Test
     void updateData_nullTransactions_okay() {
         transactions = null;
-        assertThrows(WrongDataBaseException.class,
+        assertThrows(TransactionException.class,
                 () -> fruitShopService.updateData(transactions));
         assertEquals(EMPTY_STORAGE_SIZE, Storage.getStorage().size());
     }

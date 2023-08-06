@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,13 +37,17 @@ public class FruitShopServiceTest {
     private FruitShopService fruitShopService;
     private Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
 
+    @BeforeAll
+    static void createStorage() {
+        Storage.createMap();
+    }
+
     @BeforeEach
     void setUp() {
         enumHandlerMap = initializeEnumHandlerMap();
         DataHandlerStrategy dataHandlerStrategy = new TestDataHandlerStrategy(enumHandlerMap);
         transactions = new ArrayList<>();
         fruitShopService = new FruitShopServiceImpl(dataHandlerStrategy);
-        Storage.createMap();
     }
 
     private Map<FruitTransaction.Operation, DataHandler> initializeEnumHandlerMap() {
@@ -86,6 +92,11 @@ public class FruitShopServiceTest {
         assertThrows(TransactionException.class,
                 () -> fruitShopService.updateData(transactions));
         assertEquals(EMPTY_STORAGE_SIZE, Storage.getStorage().size());
+    }
+
+    @AfterEach
+    void cleanStorage() {
+        Storage.clear();
     }
 
     private static class TestDataHandlerStrategy implements DataHandlerStrategy {

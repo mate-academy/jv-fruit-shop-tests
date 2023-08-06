@@ -9,6 +9,8 @@ import core.basesyntax.exceptions.FruitsQuantityException;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.handlers.DataHandler;
 import core.basesyntax.strategy.handlers.PurchaseDataHandler;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,10 +24,14 @@ public class PurchaseDataHandlerTest {
     private static final String EMPTY_FRUIT = "";
     private static final int NEGATIVE_APPLE_QUANTITY = -59;
 
+    @BeforeAll
+    static void createStorage() {
+        Storage.createMap();
+    }
+
     @BeforeEach
     void setUp() {
         dataHandler = new PurchaseDataHandler();
-        Storage.createMap();
     }
 
     @Test
@@ -62,5 +68,10 @@ public class PurchaseDataHandlerTest {
         Storage.addFruits(APPLE, STORAGE_QUANTITY);
         assertThrows(FruitsNameException.class, () -> dataHandler.processData(
                 EMPTY_FRUIT, APPLE_QUANTITY_SMALLER_THAN_STORAGE));
+    }
+
+    @AfterEach
+    void cleanStorage() {
+        Storage.clear();
     }
 }

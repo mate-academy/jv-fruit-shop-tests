@@ -9,6 +9,7 @@ import core.basesyntax.storage.Storage;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,10 +30,14 @@ public class ReportServiceTest {
 
     private ReportService reportService;
 
+    @BeforeAll
+    static void createStorage() {
+        Storage.createMap();
+    }
+
     @BeforeEach
     void setUp() {
         reportService = new ReportServiceImpl();
-        Storage.createMap();
     }
 
     @Test
@@ -57,8 +62,9 @@ public class ReportServiceTest {
 
     @Test
     void generateReport_specialCharsInFruitName_okay() {
-        Storage.getStorage().put(SPECIAL_CHARACTER_APPLE, SPECIAL_CHARACTER_APPLE_QUANTITY);
-        Storage.getStorage().put(SPECIAL_CHARACTER_BANANA, SPECIAL_CHARACTER_BANANA_QUANTITY);
+        Storage.addFruits(SPECIAL_CHARACTER_APPLE, SPECIAL_CHARACTER_APPLE_QUANTITY);
+        Storage.addFruits(SPECIAL_CHARACTER_APPLE, SPECIAL_CHARACTER_APPLE_QUANTITY);
+        Storage.addFruits(SPECIAL_CHARACTER_BANANA, SPECIAL_CHARACTER_BANANA_QUANTITY);
         String actualReport = reportService.generateReport();
         String[] separatedLinesReport = actualReport.split(System.lineSeparator());
         assertEquals(REPORT_HEADER, separatedLinesReport[HEADER_INDEX]);
@@ -69,7 +75,7 @@ public class ReportServiceTest {
     }
 
     @AfterEach
-    void onTearDown() {
+    void cleanStorage() {
         Storage.clear();
     }
 }

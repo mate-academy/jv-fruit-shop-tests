@@ -7,7 +7,7 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataParserImplTest {
@@ -20,11 +20,10 @@ class DataParserImplTest {
     private static final int EXPECTED_QUANTITY = 20;
     private static final String EXPECTED_FRUIT_NAME = "banana";
     private static final Operation EXPECTED_OPERATION = Operation.BALANCE;
+    private static DataParser dataParser;
 
-    private DataParser dataParser;
-
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         dataParser = new DataParserImpl();
     }
 
@@ -34,8 +33,10 @@ class DataParserImplTest {
         lines.add(LINE_HEADER);
         lines.add(FIRST_LINE);
         lines.add(SECOND_LINE);
+
         List<FruitTransaction> transactions = dataParser.parse(lines);
         FruitTransaction fruitTransaction = transactions.get(INDEX_FIRST_FRUIT_TRANSACTION);
+
         assertEquals(SIZE_PARSE_OK, transactions.size());
         assertEquals(EXPECTED_QUANTITY, fruitTransaction.getQuantity());
         assertEquals(EXPECTED_FRUIT_NAME, fruitTransaction.getFruit());
@@ -46,7 +47,9 @@ class DataParserImplTest {
     void parse_onlyHeader_ok() {
         List<String> lines = new ArrayList<>();
         lines.add(LINE_HEADER);
+
         List<FruitTransaction> transactions = dataParser.parse(lines);
+
         assertEquals(SIZE_PARSE_NOT_OK, transactions.size());
     }
 
@@ -54,6 +57,7 @@ class DataParserImplTest {
     void parse_emptyList_ok() {
         List<String> lines = new ArrayList<>();
         List<FruitTransaction> transactions = dataParser.parse(lines);
+
         assertEquals(SIZE_PARSE_NOT_OK, transactions.size());
     }
 }

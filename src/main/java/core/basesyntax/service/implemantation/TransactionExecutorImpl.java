@@ -19,6 +19,10 @@ public class TransactionExecutorImpl implements TransactionExecutor {
     @Override
     public void processDate(List<FruitTransaction> data,
                             Map<Operation, OperationHandler> operationHandlerMap) {
+        if (operationHandlerMap == null) {
+            throw new RuntimeException("Strategy map can`t be a null");
+        }
+
         for (FruitTransaction fruitTransaction : data) {
             OperationHandler operationHandler = strategyOperation
                     .getOperation(fruitTransaction.getOperation(), operationHandlerMap);

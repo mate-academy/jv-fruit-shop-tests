@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.storage.Storage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
@@ -18,11 +18,10 @@ class SupplyHandlerTest {
     private static final int NEGATIVE_QUANTITY = -10;
     private static final String EXCEPTION_MESSAGE_NEGATIVE_QUANTITY =
             "Quantity of fruit can`t be a negative";
+    private static OperationHandler supplyHandler;
 
-    private OperationHandler supplyHandler;
-
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         supplyHandler = new SupplyHandler();
     }
 
@@ -35,6 +34,7 @@ class SupplyHandlerTest {
     void handle_correctQuantity_ok() {
         Storage.storage.put(FRUIT_NAME, CURRENT_QUANTITY);
         supplyHandler.handle(FRUIT_NAME, ADD_QUANTITY);
+
         assertTrue(Storage.storage.containsKey(FRUIT_NAME));
         assertEquals(EXPECTED_QUANTITY, Storage.storage.get(FRUIT_NAME));
     }
@@ -42,6 +42,7 @@ class SupplyHandlerTest {
     @Test
     void handle_productNotExist_ok() {
         supplyHandler.handle(FRUIT_NAME, ADD_QUANTITY);
+
         assertTrue(Storage.storage.containsKey(FRUIT_NAME));
         assertEquals(ADD_QUANTITY, Storage.storage.get(FRUIT_NAME));
     }
@@ -50,6 +51,7 @@ class SupplyHandlerTest {
     void handle_negativeQuantity_notOk() {
         var negativeQuantity = assertThrows(RuntimeException.class,
                 () -> supplyHandler.handle(FRUIT_NAME, NEGATIVE_QUANTITY));
+
         assertEquals(EXCEPTION_MESSAGE_NEGATIVE_QUANTITY, negativeQuantity.getMessage());
     }
 
@@ -57,6 +59,7 @@ class SupplyHandlerTest {
     void handle_zeroQuantity_ok() {
         Storage.storage.put(FRUIT_NAME, CURRENT_QUANTITY);
         supplyHandler.handle(FRUIT_NAME, ZERO_QUANTITY);
+
         assertEquals(CURRENT_QUANTITY, Storage.storage.get(FRUIT_NAME));
     }
 }

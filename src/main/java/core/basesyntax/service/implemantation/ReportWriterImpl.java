@@ -8,6 +8,9 @@ import java.io.IOException;
 public class ReportWriterImpl implements ReportWriter {
     @Override
     public void writeReport(String report, String fileNameToWrite) {
+        if (fileNameToWrite == null) {
+            throw new RuntimeException("File name can`t be a null");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileNameToWrite))) {
             bufferedWriter.write(report);
         } catch (IOException e) {

@@ -5,12 +5,18 @@ import core.service.impl.ReadService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 public class ReadServiceImpl implements ReadService {
 
     @Override
     public String read(String path) {
+        if (!Files.exists(Paths.get(path))) {
+            throw new FileReadException("File not found: " + path);
+        }
+
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             return reader.lines()
                     .skip(1)

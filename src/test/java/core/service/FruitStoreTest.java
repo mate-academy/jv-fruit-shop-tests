@@ -121,4 +121,14 @@ public class FruitStoreTest {
         assertEquals("Apple", result.get(0).getProduct());
         assertEquals(250, result.get(0).getQuantity());
     }
+
+    @Test
+    public void testProcessOperations_EmptyDataString() {
+        String data = "";
+        List<OperationData> dataList = new SplitDataImpl().splitData(data);
+
+        List<OperationData> result = fruitStore.processOperations(dataList);
+
+        assertTrue(result.isEmpty());
+    }
 }

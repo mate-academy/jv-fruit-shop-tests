@@ -39,7 +39,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operation);
         FileWriterService csvFileWriter = new CsvFileWriterService();
         TransactionParserService transactionParserService = new FruitTransactionParserService();
-        TransactionExecutor workerWithTransactions
+        TransactionExecutor transactionExecutor
                 = new FruitsTransactionExecutor(operationStrategy);
         ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
 
@@ -47,7 +47,7 @@ public class Main {
         List<FruitTransaction> transactionList = transactionParserService
                 .getListOfTransactions(dataFromFile);
         for (FruitTransaction transaction : transactionList) {
-            workerWithTransactions.executeTransaction(transaction);
+            transactionExecutor.executeTransaction(transaction);
         }
         String report = reportGenerator.generateReport();
         csvFileWriter.writeDataToFile(report, pathToFile.toString());

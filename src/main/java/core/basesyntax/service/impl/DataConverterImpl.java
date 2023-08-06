@@ -32,10 +32,9 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private void validateData(String[] splitData) {
-        if (!Arrays.asList(FruitTransaction.Operation.values())
-                .stream()
-                .map(operation -> operation.getCode())
-                .anyMatch(string -> string.equals(splitData[OPERATION_TYPE_INDEX]))) {
+        if (Arrays.stream(FruitTransaction.Operation.values())
+                .map(FruitTransaction.Operation::getCode)
+                .noneMatch(string -> string.equals(splitData[OPERATION_TYPE_INDEX]))) {
             throw new FruitShopException("operation with code "
                     + splitData[OPERATION_TYPE_INDEX] + " does not exist");
         }

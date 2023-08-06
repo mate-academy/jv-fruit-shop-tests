@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class FileWriterImplTest {
     private static final String VALID_PATH = "src/test/java/core/basesyntax/resources/report.csv";
     private static final String INVALID_PATH = "vH-@&5nNSz93";
-    private FileWriter fileWriter = new FileWriterImpl();
+    private final FileWriter fileWriter = new FileWriterImpl();
 
     @Test
     void writeToFile_validDataAndPath_ok() {

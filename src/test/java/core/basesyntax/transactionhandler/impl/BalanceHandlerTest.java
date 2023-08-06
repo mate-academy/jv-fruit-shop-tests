@@ -13,8 +13,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
-    private StorageDao storageDao = new StorageDaoImpl();
-    private TransactionHandler balanceHandler = new BalanceHandler(storageDao);
+    private final StorageDao storageDao = new StorageDaoImpl();
+    private final TransactionHandler balanceHandler = new BalanceHandler(storageDao);
     private FruitTransaction balanceTransaction;
 
     @AfterEach

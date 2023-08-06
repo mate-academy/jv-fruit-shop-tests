@@ -10,8 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReportCreatorImplTest {
-    private StorageDao storageDao = new StorageDaoImpl();
-    private ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
+    private final StorageDao storageDao = new StorageDaoImpl();
+    private final ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
 
     @AfterEach
     void tearDown() {

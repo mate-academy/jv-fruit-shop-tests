@@ -17,13 +17,13 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class TransactionStrategyImplTest {
-    private StorageDao storageDao = new StorageDaoImpl();
-    private Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
+    private final StorageDao storageDao = new StorageDaoImpl();
+    private final Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
             = Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(storageDao),
             FruitTransaction.Operation.PURCHASE, new PurchaseHandler(storageDao),
             FruitTransaction.Operation.RETURN, new ReturnHandler(storageDao),
             FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageDao));
-    private TransactionStrategy strategy = new TransactionStrategyImpl(transactionHandlerMap);
+    private final TransactionStrategy strategy = new TransactionStrategyImpl(transactionHandlerMap);
 
     @Test
     void get_validOperation_ok() {

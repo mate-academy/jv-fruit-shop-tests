@@ -21,12 +21,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class DataHandlerImplTest {
-    private StorageDao storageDao = new StorageDaoImpl();
-    private Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
+    private final StorageDao storageDao = new StorageDaoImpl();
+    private final Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
             = new HashMap<>();
-    private TransactionStrategy transactionStrategy
+    private final TransactionStrategy transactionStrategy
             = new TransactionStrategyImpl(transactionHandlerMap);
-    private DataHandler dataHandler = new DataHandlerImpl(transactionStrategy);
+    private final DataHandler dataHandler = new DataHandlerImpl(transactionStrategy);
 
     @AfterEach
     void tearDown() {

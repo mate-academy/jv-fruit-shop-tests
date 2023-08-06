@@ -1,8 +1,10 @@
 package core.service;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import core.exception.OperationHandlerException;
 import core.operationstrategy.OperationStrategyImpl;
@@ -130,5 +132,87 @@ public class FruitStoreTest {
         List<OperationData> result = fruitStore.processOperations(dataList);
 
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testProcessOperations_SupplySuccess() {
+        String data = "b,Apple,200" + System.lineSeparator() + "s,Apple,50";
+        List<OperationData> dataList = new SplitDataImpl().splitData(data);
+
+        List<OperationData> result = fruitStore.processOperations(dataList);
+
+        assertEquals(1, result.size());
+        assertEquals(OperationType.B, result.get(0).getOperationType());
+        assertEquals("Apple", result.get(0).getProduct());
+        assertEquals(250, result.get(0).getQuantity());
+    }
+
+    @Test
+    public void testProcessOperations_SupplyWithInvalidProduct() {
+        String data = "b,Apple,200" + System.lineSeparator() + "p,Apple,200";
+        List<OperationData> dataList = new SplitDataImpl().splitData(data);
+
+        List<OperationData> result = fruitStore.processOperations(dataList);
+
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testProcessOperations_ReturnInvalidProduct() {
+        String data = "b,Apple,200" + System.lineSeparator() + "r,Orange,50";
+        List<OperationData> dataList = new SplitDataImpl().splitData(data);
+
+        List<OperationData> result = fruitStore.processOperations(dataList);
+
+        assertFalse(result.isEmpty());
+    }
+
+    @Test
+    public void testProcessOperations_MultipleOperations() {
+        String data = "b,Apple,200" + System.lineSeparator()
+                + "p,Apple,50" + System.lineSeparator()
+                + "r,Apple,20" + System.lineSeparator()
+                + "p,Apple,30" + System.lineSeparator()
+                + "s,Apple,10";
+        List<OperationData> dataList = new SplitDataImpl().splitData(data);
+
+        List<OperationData> result = fruitStore.processOperations(dataList);
+
+        assertEquals(1, result.size());
+        assertEquals(OperationType.B, result.get(0).getOperationType());
+        assertEquals("Apple", result.get(0).getProduct());
+        assertEquals(150, result.get(0).getQuantity());
+    }
+
+    @Test
+    public void testProcessOperations_MultipleProducts() {
+        String data = "b,Apple,200" + System.lineSeparator()
+                + "b,Orange,100" + System.lineSeparator()
+                + "p,Apple,50" + System.lineSeparator()
+                + "s,Orange,20" + System.lineSeparator()
+                + "r,Apple,30";
+        List<OperationData> dataList = new SplitDataImpl().splitData(data);
+
+        List<OperationData> result = fruitStore.processOperations(dataList);
+
+        assertEquals(2, result.size());
+
+        OperationData appleBalance = result.stream()
+                .filter(op -> op.getProduct().equals("Apple"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(appleBalance);
+        assertEquals(OperationType.B, appleBalance.getOperationType());
+        assertEquals("Apple", appleBalance.getProduct());
+        assertEquals(180, appleBalance.getQuantity());
+
+        OperationData orangeBalance = result.stream()
+                .filter(op -> op.getProduct().equals("Orange"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(orangeBalance);
+        assertEquals(OperationType.B, orangeBalance.getOperationType());
+        assertEquals("Orange", orangeBalance.getProduct());
+        assertEquals(120, orangeBalance.getQuantity());
     }
 }

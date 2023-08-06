@@ -1,7 +1,6 @@
 package core.service;
 
-import static core.storage.Storage.fruitTransactions;
-
+import core.exception.OperationHandlerException;
 import core.operationstrategy.OperationStrategyImpl;
 import core.transactions.OperationHandler;
 import java.util.ArrayList;
@@ -34,6 +33,8 @@ public class FruitStore {
             if (handler != null) {
                 int newQuantity = handler.getTransaction(currentQuantity, number);
                 fruitTransactions.put(product, newQuantity);
+            } else {
+                throw new OperationHandlerException("Handler not found for operation: " + operationType);
             }
         }
 

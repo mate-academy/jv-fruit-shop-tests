@@ -9,9 +9,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ReadServiceImplTest {
     private ReadServiceImpl fileReader = new ReadServiceImpl();
+    private String tempFileName;
+
+    @BeforeEach
+    public void setUp() {
+        tempFileName = "src/test/java/resources/temp_file.csv";
+    }
+
+    @AfterEach
+    public void tearDown() {
+        deleteTemporaryFile(tempFileName);
+    }
 
     @Test
     public void read_ValidFile_Ok() {
@@ -24,21 +37,6 @@ public class ReadServiceImplTest {
         assertEquals(dataFromFile, expectedData);
 
         deleteTemporaryFile(tempFileName);
-    }
-
-    private void createTemporaryFile(String fileName, String data) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            writer.write(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void deleteTemporaryFile(String fileName) {
-        File file = new File(fileName);
-        if (file.exists()) {
-            file.delete();
-        }
     }
 
     @Test
@@ -59,5 +57,20 @@ public class ReadServiceImplTest {
     @Test
     public void read_NullFileName_ExceptionThrown() {
         assertThrows(NullPointerException.class, () -> fileReader.read(null));
+    }
+
+    private void createTemporaryFile(String fileName, String data) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteTemporaryFile(String fileName) {
+        File file = new File(fileName);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 }

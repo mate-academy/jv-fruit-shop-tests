@@ -34,7 +34,8 @@ public class FruitStore {
                 int newQuantity = handler.getTransaction(currentQuantity, number);
                 fruitTransactions.put(product, newQuantity);
             } else {
-                throw new OperationHandlerException("Handler not found for operation: " + operationType);
+                throw new OperationHandlerException(
+                        "Handler not found for operation: " + operationType);
             }
         }
 

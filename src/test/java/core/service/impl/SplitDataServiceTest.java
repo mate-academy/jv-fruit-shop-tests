@@ -11,10 +11,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class SplitDataServiceTest {
+    private SplitDataService<OperationData> splitDataService = new SplitDataImpl();
+
     @Test
     public void testSplitData_ValidData() {
-        SplitDataService<OperationData> splitDataService = new SplitDataImpl();
-        String data = "b,Apple,200" + System.lineSeparator()
+        String data = " b,Apple,200" + System.lineSeparator()
                 + "p,Orange,100" + System.lineSeparator()
                 + "s,Banana,50";
 
@@ -42,5 +43,73 @@ public class SplitDataServiceTest {
 
         assertNotNull(dataList);
         assertTrue(dataList.isEmpty());
+    }
+
+    @Test
+    public void testSplitData_DataWithLeadingAndTrailingWhitespaces() {
+        String data = "  b,Apple,200   " + System.lineSeparator()
+                + "   p,Orange,100   " + System.lineSeparator()
+                + "s,Banana,50   " + System.lineSeparator();
+
+        List<OperationData> dataList = splitDataService.splitData(data);
+
+        assertNotNull(dataList);
+        assertEquals(3, dataList.size());
+    }
+
+    @Test
+    public void testSplitData_DataWithExtraEmptyLines() {
+        SplitDataService<OperationData> splitDataService = new SplitDataImpl();
+        String data = System.lineSeparator()
+                + "b,Apple,200"
+                + System.lineSeparator()
+                + "p,Orange,100"
+                + System.lineSeparator()
+                + "s,Banana,50"
+                + System.lineSeparator();
+
+        List<OperationData> dataList = splitDataService.splitData(data);
+
+        assertNotNull(dataList);
+        assertEquals(3, dataList.size());
+    }
+
+    @Test
+    public void testSplitData_DataWithInvalidOperationType() {
+        SplitDataService<OperationData> splitDataService = new SplitDataImpl();
+        String data = "b,Apple,200" + System.lineSeparator()
+                + "x,Orange,100" + System.lineSeparator()
+                + "s,Banana,50";
+
+        List<OperationData> dataList = splitDataService.splitData(data);
+
+        assertNotNull(dataList);
+        assertEquals(2, dataList.size());
+    }
+
+    @Test
+    public void testSplitData_DataWithInvalidQuantity() {
+        SplitDataService<OperationData> splitDataService = new SplitDataImpl();
+        String data = "b,Apple,200" + System.lineSeparator()
+                + "p,Orange,abc" + System.lineSeparator()
+                + "s,Banana,50";
+
+        List<OperationData> dataList = splitDataService.splitData(data);
+
+        assertNotNull(dataList);
+        assertEquals(2, dataList.size());
+    }
+
+    @Test
+    public void testSplitData_DataWithMissingFields() {
+        SplitDataService<OperationData> splitDataService = new SplitDataImpl();
+        String data = "b,Apple,200" + System.lineSeparator()
+                + "p,Orange" + System.lineSeparator()
+                + "s,50";
+
+        List<OperationData> dataList = splitDataService.splitData(data);
+
+        assertNotNull(dataList);
+        assertEquals(1, dataList.size());
     }
 }

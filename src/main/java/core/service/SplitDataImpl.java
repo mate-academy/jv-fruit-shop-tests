@@ -22,7 +22,7 @@ public class SplitDataImpl implements SplitDataService<OperationData> {
             }
             try {
                 int quantity = Integer.parseInt(parts[PRODUCT_QUANTITY_INDEX].trim());
-                String operationTypeStr = parts[OPERATION_TYPE_INDEX].toUpperCase();
+                String operationTypeStr = parts[OPERATION_TYPE_INDEX].toUpperCase().trim();
                 OperationType operationType = OperationType.valueOf(operationTypeStr);
                 result.add(new OperationData(operationType, parts[PRODUCT_INDEX], quantity));
             } catch (NumberFormatException e) {

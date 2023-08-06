@@ -1,6 +1,7 @@
 package core.exception;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.testng.annotations.Test;
 
@@ -15,6 +16,6 @@ public class OperationHandlerExceptionTest {
     @Test
     public void testOperationHandlerException_NullMessage() {
         OperationHandlerException exception = new OperationHandlerException(null);
-        assertEquals(null, exception.getMessage());
+        assertNull(exception.getMessage());
     }
 }

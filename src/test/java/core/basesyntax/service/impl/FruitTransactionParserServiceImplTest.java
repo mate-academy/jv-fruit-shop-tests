@@ -29,10 +29,10 @@ class FruitTransactionParserServiceImplTest {
 
     private static final String INPUT_DATA_EMPTY = "";
     private final TransactionParserService transactionParser
-            = new FruitTransactionParserServiceImpl();
+            = new FruitTransactionParserService();
 
     @Test
-    void getListOfTransactions_ValidInputData_Ok() {
+    void getListOfTransactions_validInputData_ok() {
         List<FruitTransaction> expectedListOfTransactions = new ArrayList<>();
         expectedListOfTransactions.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
         expectedListOfTransactions.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
@@ -44,7 +44,7 @@ class FruitTransactionParserServiceImplTest {
     }
 
     @Test
-    void getListOfTransactions_NotSupportedOperationType_NotOk() {
+    void getListOfTransactions_notSupportedOperationType_notOk() {
         OperationNotFoundException exception = null;
         try {
             transactionParser.getListOfTransactions(INPUT_DATA_WITH_NOT_SUPPORTED_OPERATION);
@@ -56,7 +56,7 @@ class FruitTransactionParserServiceImplTest {
     }
 
     @Test
-    void getListOfTransactions_EmptyData_NotOk() {
+    void getListOfTransactions_emptyData_notOk() {
         EmptyDataExceptions exception = null;
         try {
             transactionParser.getListOfTransactions(INPUT_DATA_EMPTY);

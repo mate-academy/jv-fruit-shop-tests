@@ -6,7 +6,7 @@ import core.basesyntax.exceptions.CantPutFruitException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.WorkerWithTransactions;
+import core.basesyntax.service.TransactionExecutor;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
 import core.basesyntax.strategy.handler.OperationHandler;
@@ -34,8 +34,8 @@ class WorkerWithFruitsTransactionsTest {
             Operation.RETURN, new ReturnOperationHandler(),
             Operation.PURCHASE, new PurchaseOperationHandler(),
             Operation.SUPPLY, new SupplyOperationHandler());
-    private final WorkerWithTransactions workerWithTransactions
-            = new WorkerWithFruitsTransactions(new OperationStrategyImpl(operation));
+    private final TransactionExecutor workerWithTransactions
+            = new FruitsTransactionExecutor(new OperationStrategyImpl(operation));
 
     @BeforeEach
     void setUp() {
@@ -43,25 +43,23 @@ class WorkerWithFruitsTransactionsTest {
     }
 
     @Test
-    void completeTransaction_setBalance_Ok() {
+    void completeTransaction_setBalance_ok() {
         Transaction transaction = new FruitTransaction(BALANCE_OPERATION, APPLE, QUANTITY_100);
-        workerWithTransactions.completeTransaction(transaction);
+        workerWithTransactions.executeTransaction(transaction);
         Integer actual = Storage.getStorage().get(APPLE);
         Assertions.assertEquals(Integer.valueOf(100), actual);
     }
 
     @Test
-    void completeTransaction_setBalanceDifferentFruit_Ok() {
+    void completeTransaction_setBalanceDifferentFruit_ok() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(BALANCE_OPERATION, BANANA, QUANTITY_50);
-        boolean isAppleExistInStorage = Storage.getStorage().containsKey(APPLE);
-        boolean isBananaExistInStorage = Storage.getStorage().containsKey(BANANA);
-        Integer actual = Storage.getStorage().get(APPLE);
-        Assertions.assertTrue(isAppleExistInStorage && isBananaExistInStorage);
+        Assertions.assertTrue(Storage.getStorage().containsKey(APPLE)
+                && Storage.getStorage().containsKey(BANANA));
     }
 
     @Test
-    void completeTransaction_setBalanceSecondTime_NotOk() {
+    void completeTransaction_setBalanceSecondTime_notOk() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         CantPutFruitException exception = null;
         try {
@@ -75,7 +73,7 @@ class WorkerWithFruitsTransactionsTest {
     }
 
     @Test
-    void completeTransaction_returnOperation_Ok() {
+    void completeTransaction_returnOperation_ok() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(RETURN_OPERATION, APPLE, QUANTITY_30);
         Integer actual = Storage.getStorage().get(APPLE);
@@ -83,7 +81,7 @@ class WorkerWithFruitsTransactionsTest {
     }
 
     @Test
-    void completeTransaction_supplyOperation_Ok() {
+    void completeTransaction_supplyOperation_ok() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(SUPPLY_OPERATION, APPLE, QUANTITY_30);
         Integer actual = Storage.getStorage().get(APPLE);
@@ -91,7 +89,7 @@ class WorkerWithFruitsTransactionsTest {
     }
 
     @Test
-    void completeTransaction_purchaseOperation_Ok() {
+    void completeTransaction_purchaseOperation_ok() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(PURCHASE_OPERATION, APPLE, QUANTITY_30);
         Integer actual = Storage.getStorage().get(APPLE);
@@ -99,7 +97,7 @@ class WorkerWithFruitsTransactionsTest {
     }
 
     @Test
-    void completeTransaction_purchaseOperationInvalidValue_NotOk() {
+    void completeTransaction_purchaseOperationInvalidValue_notOk() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         CantGetFruitException exception = null;
         try {
@@ -113,7 +111,7 @@ class WorkerWithFruitsTransactionsTest {
     }
 
     @Test
-    void completeTransaction_differentOperation_Ok() {
+    void completeTransaction_differentOperation_ok() {
         createAndCompleteTransactions(BALANCE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(PURCHASE_OPERATION, APPLE, QUANTITY_100);
         createAndCompleteTransactions(SUPPLY_OPERATION, APPLE, QUANTITY_130);
@@ -130,6 +128,6 @@ class WorkerWithFruitsTransactionsTest {
     private void createAndCompleteTransactions(Operation operation,
                                                String fruitName, Integer quantity) {
         Transaction transaction = new FruitTransaction(operation, fruitName, quantity);
-        workerWithTransactions.completeTransaction(transaction);
+        workerWithTransactions.executeTransaction(transaction);
     }
 }

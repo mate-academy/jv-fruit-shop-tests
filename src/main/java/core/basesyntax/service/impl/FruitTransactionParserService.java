@@ -7,7 +7,7 @@ import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitTransactionParserServiceImpl implements TransactionParserService {
+public class FruitTransactionParserService implements TransactionParserService {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String COMA_SPLITTER = ",";
     private static final int INDEX_OF_OPERATIONS_TYPE = 0;
@@ -17,7 +17,7 @@ public class FruitTransactionParserServiceImpl implements TransactionParserServi
 
     @Override
     public List<FruitTransaction> getListOfTransactions(String dataFromFile) {
-        if (dataFromFile.length() == 0) {
+        if (dataFromFile.isBlank()) {
             throw new EmptyDataExceptions("Transactions cannot be created from empty data");
         }
         List<FruitTransaction> transactions = new ArrayList<>();

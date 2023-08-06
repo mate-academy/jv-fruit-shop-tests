@@ -17,7 +17,7 @@ class ReportGeneratorServiceImplTest {
     }
 
     @Test
-    void generateReport_ValidData_Ok() {
+    void generateReport_validData_ok() {
         putInStorage("apple", 100);
         putInStorage("banana",20);
         String expected = "fruit,quantity" + LINE_SEPARATOR
@@ -28,7 +28,7 @@ class ReportGeneratorServiceImplTest {
     }
 
     @Test
-    void generateReport_EmptyStorage_NotOk() {
+    void generateReport_emptyStorage_notOk() {
         Storage.getStorage().clear();
         ReportGeneratorException exception = null;
         try {

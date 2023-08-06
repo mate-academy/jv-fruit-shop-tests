@@ -21,13 +21,13 @@ class CsvFileWriterServiceTest {
     private static final FileWriterService fileWriter = new CsvFileWriterService();
 
     @Test
-    void writeDataToFile_existingFile_ok() throws IOException{
+    void writeDataToFile_existingFile_ok() throws IOException {
         String actual = writeAndReadFromFile(RESULT_FILE_EXISTING, TEXT_TO_WRITING);
         Assertions.assertEquals(TEXT_TO_WRITING, actual);
     }
 
     @Test
-    void writeDataToFile_notExistingFile_ok() throws IOException{
+    void writeDataToFile_notExistingFile_ok() throws IOException {
         Path path = Paths.get(RESULT_FILE_NOT_EXISTING);
         if (Files.exists(path) && Files.isRegularFile(path)) {
             path.toFile().delete();
@@ -56,11 +56,11 @@ class CsvFileWriterServiceTest {
         Assertions.assertEquals(expected, exception.getMessage());
     }
 
-    private String readFromFile(String fileName) throws IOException{
+    private String readFromFile(String fileName) throws IOException {
         return Files.readString(Path.of(fileName));
     }
 
-    private String writeAndReadFromFile(String fileName, String text) throws IOException{
+    private String writeAndReadFromFile(String fileName, String text) throws IOException {
         fileWriter.writeDataToFile(text, fileName);
         return readFromFile(fileName);
     }

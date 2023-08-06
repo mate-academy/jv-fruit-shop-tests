@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WorkerWithFruitsTransactionsTest {
+class FruitsTransactionExecutorTest {
     public static final Operation BALANCE_OPERATION = Operation.BALANCE;
     public static final Operation SUPPLY_OPERATION = Operation.SUPPLY;
     public static final Operation PURCHASE_OPERATION = Operation.PURCHASE;

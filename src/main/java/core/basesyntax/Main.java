@@ -5,13 +5,13 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportGeneratorService;
-import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.TransactionExecutor;
+import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.impl.CsvFileReaderService;
 import core.basesyntax.service.impl.CsvFileWriterService;
 import core.basesyntax.service.impl.FruitTransactionParserService;
+import core.basesyntax.service.impl.FruitsTransactionExecutor;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
-import core.basesyntax.service.impl.WorkerWithFruitsTransactions;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
@@ -40,7 +40,7 @@ public class Main {
         FileWriterService csvFileWriter = new CsvFileWriterService();
         TransactionParserService transactionParserService = new FruitTransactionParserService();
         TransactionExecutor workerWithTransactions
-                = new WorkerWithFruitsTransactions(operationStrategy);
+                = new FruitsTransactionExecutor(operationStrategy);
         ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
 
         String dataFromFile = csvFileReader.readDataFromFile(pathFromFile.toString());

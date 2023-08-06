@@ -3,11 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.exceptions.ReadDataFromFileException;
 import core.basesyntax.service.FileReaderService;
 import java.nio.file.FileSystems;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceTest {

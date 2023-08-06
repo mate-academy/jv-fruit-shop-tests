@@ -34,7 +34,7 @@ public class OperatorsAndStrategyTest {
     }
 
     @Test
-    public void testGetOperatorHandler_BalanceOperation() {
+    public void getOperatorHandler_BalanceOperation_Ok() {
         OperationHandler handler
                 = operatorStrategy.getOperatorHandler(FruitTransaction.Operation.BALANCE);
         Assertions.assertTrue(
@@ -43,7 +43,7 @@ public class OperatorsAndStrategyTest {
     }
 
     @Test
-    public void testGetOperatorHandler_PurchaseOperation() {
+    public void getOperatorHandler_PurchaseOperation_Ok() {
         OperationHandler handler
                 = operatorStrategy.getOperatorHandler(FruitTransaction.Operation.PURCHASE);
         Assertions.assertTrue(handler instanceof PurchaseOperationHandler,
@@ -51,7 +51,7 @@ public class OperatorsAndStrategyTest {
     }
 
     @Test
-    public void testGetOperatorHandler_ReturnOperation() {
+    public void getOperatorHandler_ReturnOperation_Ok() {
         OperationHandler handler
                 = operatorStrategy.getOperatorHandler(FruitTransaction.Operation.RETURN);
         Assertions.assertTrue(handler instanceof ReturnOperationHandler,
@@ -59,7 +59,7 @@ public class OperatorsAndStrategyTest {
     }
 
     @Test
-    public void testGetOperatorHandler_SupplyOperation() {
+    public void getOperatorHandler_SupplyOperation_Ok() {
         OperationHandler handler
                 = operatorStrategy.getOperatorHandler(FruitTransaction.Operation.SUPPLY);
         Assertions.assertTrue(handler instanceof SupplyOperationHandler,
@@ -105,7 +105,7 @@ public class OperatorsAndStrategyTest {
     }
 
     @Test
-    public void purchase_NotEnoughStock_Exception() {
+    public void purchase_NotEnoughStock_NotOk() {
         Storage.storage.put("apple", 5);
         operationHandler = new PurchaseOperationHandler();
         Assertions.assertThrows(RuntimeException.class,
@@ -115,7 +115,7 @@ public class OperatorsAndStrategyTest {
     }
 
     @Test
-    public void purchase_RemoveProduct() {
+    public void purchase_RemoveProduct_Ok() {
         Storage.storage.put("orange", 5);
         operationHandler = new PurchaseOperationHandler();
         operationHandler.execute("orange", 5);

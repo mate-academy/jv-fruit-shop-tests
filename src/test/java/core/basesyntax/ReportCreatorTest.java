@@ -18,14 +18,14 @@ public class ReportCreatorTest {
     }
 
     @Test
-    public void testCreateReportWithEmptyStorage() {
+    public void createReport_EmptyStorage_HeaderRowOnly() {
         String expectedReport = "fruit,quantity";
         String actualReport = reportCreator.createReport();
         assertEquals(expectedReport, actualReport, "Report should be the header row only");
     }
 
     @Test
-    public void testCreateReportWithNonEmptyStorage() {
+    public void createReport_NonEmptyStorage_ReportMatchesExpectedData() {
         Storage.storage.put("apple", 50);
         Storage.storage.put("banana", 20);
         Storage.storage.put("orange", 30);

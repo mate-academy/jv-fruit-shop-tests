@@ -5,30 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.operations.exception.InvalidInputDataException;
-import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.impl.ReportCreatorImpl;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
     private PurchaseOperation purchaseOperation;
-    private ReportCreator reportCreator;
 
     @BeforeEach
     void setUp() {
-        reportCreator = new ReportCreatorImpl();
         purchaseOperation = new PurchaseOperation();
+        Storage.storage.clear();
     }
 
     @Test
     void handle_purchaseOperation_Ok() {
+        int expected = 10;
         Storage.storage.put("banana", 30);
-        String expected = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,10";
+
         purchaseOperation.handle("banana", 20);
-        String result = reportCreator.createReport();
+        int result = Storage.storage.get("banana");
+
         assertEquals(expected, result);
     }
 
@@ -52,10 +48,5 @@ class PurchaseOperationTest {
         assertThrows(InvalidInputDataException.class,
                 () -> purchaseOperation.handle("banana", -5),
                 "InvalidInputDataException expected to be thrown");
-    }
-
-    @AfterEach
-    void storageClean() {
-        Storage.storage.clear();
     }
 }

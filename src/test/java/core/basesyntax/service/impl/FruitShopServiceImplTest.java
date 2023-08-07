@@ -11,7 +11,6 @@ import core.basesyntax.operations.OperationHandler;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.impl.exception.InvalidDataException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +29,7 @@ class FruitShopServiceImplTest {
         validFruitTransaction =
                 new FruitTransaction(Operation.BALANCE, "banana", 20);
         inValidFruitTransaction = null;
+        Storage.storage.clear();
     }
 
     @Test
@@ -47,10 +47,5 @@ class FruitShopServiceImplTest {
         assertThrows(InvalidDataException.class,
                 () -> fruitShopService.process(inValidFruitTransaction, operationHandler),
                 "InvalidDataException expected to be thrown");
-    }
-
-    @AfterEach
-    void storageClear() {
-        Storage.storage.clear();
     }
 }

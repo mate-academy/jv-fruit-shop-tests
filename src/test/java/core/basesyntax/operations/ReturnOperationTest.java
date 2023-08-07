@@ -5,42 +5,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.operations.exception.InvalidInputDataException;
-import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.impl.ReportCreatorImpl;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
     private ReturnOperation returnOperation;
-    private ReportCreator reportCreator;
 
     @BeforeEach
     void setUp() {
         returnOperation = new ReturnOperation();
-        reportCreator = new ReportCreatorImpl();
+        Storage.storage.clear();
     }
 
     @Test
     void handle_returnOperation_Ok() {
+        int expected = 150;
         Storage.storage.put("banana", 100);
-        Storage.storage.put("apple", 100);
-        String actualInitialReport = reportCreator.createReport();
-        String expectedInitialReport = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,100"
-                + System.lineSeparator()
-                + "apple,100";
-        assertEquals(expectedInitialReport, actualInitialReport);
+
         returnOperation.handle("banana", 50);
-        returnOperation.handle("apple", 30);
-        String expectedUpdatedReport = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,150"
-                + System.lineSeparator()
-                + "apple,130";
-        String actualUpdatedReport = reportCreator.createReport();
-        assertEquals(expectedUpdatedReport, actualUpdatedReport);
+        int actual = Storage.storage.get("banana");
+
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -64,10 +49,5 @@ class ReturnOperationTest {
         assertThrows(InvalidInputDataException.class,
                 () -> returnOperation.handle(null, 10),
                 "InvalidInputDataException expected to be thrown");
-    }
-
-    @AfterEach
-    void storageClean() {
-        Storage.storage.clear();
     }
 }

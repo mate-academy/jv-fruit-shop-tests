@@ -8,7 +8,6 @@ import core.basesyntax.service.DataReader;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.impl.exception.InvalidDataException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +23,7 @@ class ReportWriterImplTest {
         dataReader = new DataReaderImpl();
         reportCreator = new ReportCreatorImpl();
         reportWriter = new ReportWriterImpl();
+        Storage.storage.clear();
     }
 
     @Test
@@ -47,10 +47,5 @@ class ReportWriterImplTest {
         assertThrows(InvalidDataException.class,
                 () -> reportWriter.writeReportToFile(report, INVALID_REPORT_FILE_PATH),
                 "InvalidDataException expected to be thrown");
-    }
-
-    @AfterEach
-    void storageClear() {
-        Storage.storage.clear();
     }
 }

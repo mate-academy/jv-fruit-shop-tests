@@ -3,17 +3,17 @@ package core.basesyntax.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportPreparer;
+import core.basesyntax.service.ReportCreator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportCreatorTest {
-    private static ReportPreparer reportCreator;
+    private static ReportCreator reportCreator;
 
     @BeforeAll
     static void setUp() {
-        reportCreator = new ReportCreator();
+        reportCreator = new ReportCreatorImpl();
     }
 
     @Test

@@ -3,13 +3,14 @@ package core.basesyntax;
 import core.basesyntax.impl.DataConverterToObject;
 import core.basesyntax.impl.OperationProcess;
 import core.basesyntax.impl.ReadFileFromCsv;
-import core.basesyntax.impl.ReportCreator;
+import core.basesyntax.impl.ReportCreatorImpl;
 import core.basesyntax.impl.WriteToCsv;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataProcesser;
 import core.basesyntax.service.ReadFileService;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.WriteDataToFileService;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -35,7 +36,7 @@ public class Application {
         List<FruitTransaction> transactions = dataConverter.convert(inputData);
         DataProcesser operationProcess = new OperationProcess();
         operationProcess.processData(transactions, operationDefiner);
-        ReportCreator reportCreator = new ReportCreator();
+        ReportCreator reportCreator = new ReportCreatorImpl();
         WriteDataToFileService writeDataToFileService = new WriteToCsv();
         writeDataToFileService.writeToFile(reportCreator.prepare(), OUTPUT_FILE_PATH);
     }

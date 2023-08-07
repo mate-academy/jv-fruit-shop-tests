@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static junit.framework.TestCase.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.CsvFileWriter;
@@ -20,6 +21,7 @@ class CsvFileWriterImplTest {
     private static final String FILE_PATH = "src/test/resources/validData.csv";
     private static final String FIRST_LINE = "type,fruit,quantity";
     private static final String SECOND_LINE = "b,apple,100";
+    private static final String INVALID_FILE_PATH = "src/test/resours/validData.csv";
     private CsvFileWriter csvFileWriter;
 
     @BeforeEach
@@ -31,6 +33,17 @@ class CsvFileWriterImplTest {
     void write_validInputData_ok() {
         csvFileWriter.write(FILE_PATH, VALID_INPUT);
         assertTrue(new File(FILE_PATH).exists());
+        verifyFileContents();
+    }
+
+    @Test
+    void write_invalidFileName_notOk() {
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> csvFileWriter.write(INVALID_FILE_PATH, VALID_INPUT));
+        assertEquals("Can't write data in file " + INVALID_FILE_PATH, exception.getMessage());
+    }
+
+    private void verifyFileContents() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String firstLine = reader.readLine();
             assertEquals(FIRST_LINE, firstLine);

@@ -44,15 +44,17 @@ class ConvertFromDataStringToListImplTest {
 
     @Test
     public void convert_invalidCsvDataMissingFields_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            converter.convert(INVALID_CSV_MISSING_FIELD);
-        });
+        String invalidLine = "p,orange";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(INVALID_CSV_MISSING_FIELD));
+        assertEquals("Invalid CSV line: " + invalidLine, exception.getMessage());
     }
 
     @Test
     public void convert_InvalidCsvDataUnknownOperation_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            converter.convert(INVALID_CSV_UNKNOWN_OPERATION);
-        });
+        String invalidOperationCode = "q";
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> converter.convert(INVALID_CSV_UNKNOWN_OPERATION));
+        assertEquals("Unknown operation code: " + invalidOperationCode, exception.getMessage());
     }
 }

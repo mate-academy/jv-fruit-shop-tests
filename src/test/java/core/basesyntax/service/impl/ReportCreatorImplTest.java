@@ -26,6 +26,7 @@ class ReportCreatorImplTest {
         reportCreator = new ReportCreatorImpl();
         csvFileReader = new CsvFileReaderImpl();
         convertor = new ConvertFromDataStringToListImpl();
+        Storage.storage.clear();
     }
 
     @Test

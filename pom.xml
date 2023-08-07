@@ -54,10 +54,8 @@
                         </goals>
                     </execution>
                 </executions>
+
                 <configuration>
-                    <excludes>
-                        <exclude>**/FruitShopHW*</exclude>
-                    </excludes>
                     <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
@@ -106,7 +104,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/FruitShopHW*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

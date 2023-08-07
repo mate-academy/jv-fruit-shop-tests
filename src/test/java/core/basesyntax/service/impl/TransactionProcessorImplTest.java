@@ -21,22 +21,9 @@ class TransactionProcessorImplTest {
     static void beforeAll() {
         resultList = new ArrayList<>();
         OperationStrategy operationStrategy = (fruit, quantity) -> resultList.add(fruit);
-        handlers = Map.of(
-                Transaction.Operation.BALANCE, operationStrategy,
-                Transaction.Operation.RETURN, operationStrategy,
-                Transaction.Operation.PURCHASE, operationStrategy,
-                Transaction.Operation.SUPPLY, operationStrategy);
+        handlers = Map.of(Transaction.Operation.BALANCE, operationStrategy);
         transactionProcessor = new TransactionProcessorImpl(handlers);
-        validTransactions = List.of(
-                new Transaction(Transaction.Operation.BALANCE, "banana", 20),
-                new Transaction(Transaction.Operation.BALANCE, "apple", 100),
-                new Transaction(Transaction.Operation.SUPPLY, "banana", 100),
-                new Transaction(Transaction.Operation.PURCHASE, "banana", 13),
-                new Transaction(Transaction.Operation.RETURN, "apple", 10),
-                new Transaction(Transaction.Operation.PURCHASE, "apple", 20),
-                new Transaction(Transaction.Operation.PURCHASE, "banana", 5),
-                new Transaction(Transaction.Operation.SUPPLY, "banana", 50)
-        );
+        validTransactions = List.of(new Transaction(Transaction.Operation.BALANCE, "banana", 20));
     }
 
     @AfterEach

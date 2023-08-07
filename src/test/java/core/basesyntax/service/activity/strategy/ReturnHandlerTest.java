@@ -1,30 +1,32 @@
 package core.basesyntax.service.activity.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
-
 import core.basesyntax.db.FruitsDb;
 import core.basesyntax.model.FruitActivity;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class BalanceHandlerTest {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
+class ReturnHandlerTest {
     private static final Map<String, Integer> fruitDb = FruitsDb.fruitDb;
-    private static final BalanceHandler balanceHandler = new BalanceHandler();
+    private static final ReturnHandler returnHandler = new ReturnHandler();
 
     @BeforeEach
     void setUp() {
         fruitDb.clear();
+        fruitDb.put("banana", 0);
+        fruitDb.put("apple", 0);
+        fruitDb.put("orange", 0);
     }
 
     @Test
@@ -32,18 +34,18 @@ class BalanceHandlerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("validBalanceActivities")
-    void handleActvity_validBalanceActivitiy_Ok(List<FruitActivity> activities, Map<String, Integer> expected) {
+    @MethodSource("validReturnActivities")
+    void handleActvity_validReturnActivitiy_Ok(List<FruitActivity> activities, Map<String, Integer> expected) {
         assertDoesNotThrow(() -> {
             for (FruitActivity activity : activities) {
-                balanceHandler.processActivity(activity);
+                returnHandler.processActivity(activity);
             }
-        }, "Handle valid balance-activities shouldnt throw any exceptions");
+        }, "Handle valid return-activities shouldnt throw any exceptions");
         Map<String, Integer> actual = fruitDb;
         assertEquals(expected, actual, "BalanceHandler doesnt wok perly");
     }
 
-    static Stream<Arguments> validBalanceActivities() {
+    static Stream<Arguments> validReturnActivities() {
         return Stream.of(
                 arguments(
                         new ArrayList<FruitActivity>() {{
@@ -51,6 +53,8 @@ class BalanceHandlerTest {
                         }},
                         new HashMap<String, Integer>() {{
                             put("banana", 20);
+                            put("apple", 0);
+                            put("orange", 0);
                         }}
                 ),
                 arguments(
@@ -69,14 +73,14 @@ class BalanceHandlerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("invalidBalanceActivities")
-    void handleActvity_invalidBalanceActivitiy_NotOk(FruitActivity activity) {
+    @MethodSource("invalidReturnActivities")
+    void handleActvity_invalidReturnActivitiy_NotOk(FruitActivity activity) {
         assertThrows(RuntimeException.class,
-                () -> balanceHandler.processActivity(activity)
+                () -> returnHandler.processActivity(activity)
         );
     }
 
-    static Stream<Arguments> invalidBalanceActivities() {
+    static Stream<Arguments> invalidReturnActivities() {
         return Stream.of(
                 arguments(new FruitActivity(FruitActivity.Type.BALANCE, "banana", -20)),
                 arguments(new FruitActivity(FruitActivity.Type.BALANCE, "banana", -1)),

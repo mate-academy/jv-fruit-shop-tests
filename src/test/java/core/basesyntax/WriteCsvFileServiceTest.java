@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,7 +10,9 @@ import core.basesyntax.service.implementations.WriteCsvFileServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,34 +25,33 @@ public class WriteCsvFileServiceTest {
     private static final int DOPPELGANGER_QUANTITY = 50;
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String COMMA = ",";
-    private static final String WRONG_EMPTY_FILENAME = " ";
-    private static final String WRONG_SYMBOLS_FILENAME = "*?";
     private static WriteCsvFileService writeCsvFileService;
     private static String testReport;
 
+    @BeforeAll
+    static void setWriteCsvFileService() {
+        writeCsvFileService = new WriteCsvFileServiceImpl();
+    }
+
     @BeforeEach
     void setUp() {
-        writeCsvFileService = new WriteCsvFileServiceImpl();
         testReport = null;
     }
 
     @Test
     void writeFile_isReportPresent_okay() {
-        StringBuilder report = new StringBuilder();
-        report.append(REPORT_HEADER)
-                .append(System.lineSeparator());
-        report.append(CHERRY)
-                .append(COMMA)
-                .append(CHERRY_QUANTITY)
-                .append(System.lineSeparator());
-        report.append(DOPPELGANGER)
-                .append(COMMA)
-                .append(DOPPELGANGER_QUANTITY)
-                .append(System.lineSeparator());
-        testReport = report.toString();
+        testReport = buildTestReport();
         writeCsvFileService.writeFile(REPORT_FILE, testReport);
         assertTrue(Files.exists(REPORT_FILE_PATH),
                 "Can`t read " + REPORT_FILE + " file.");
+        List<String> acquiredReport;
+        try {
+            acquiredReport = Files.readAllLines(REPORT_FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        String acquiredReportStr = convertListDataToString(acquiredReport);
+        assertEquals(testReport, acquiredReportStr);
     }
 
     @Test
@@ -58,27 +60,6 @@ public class WriteCsvFileServiceTest {
                 () -> writeCsvFileService.writeFile(REPORT_FILE, testReport));
     }
 
-    // Disabled due to git hub issue test fail
-    // Expected core.basesyntax.exceptions.WriteFileException to be thrown, but nothing was thrown.
-    //    @Test
-    //    void writeFile_wrongFileName_notOkay() {
-    //        StringBuilder report = new StringBuilder();
-    //        report.append(REPORT_HEADER)
-    //                .append(System.lineSeparator());
-    //        report.append(CHERRY)
-    //                .append(COMMA)
-    //                .append(CHERRY_QUANTITY)
-    //                .append(System.lineSeparator());
-    //        report.append(DOPPELGANGER)
-    //                .append(COMMA)
-    //                .append(DOPPELGANGER_QUANTITY)
-    //                .append(System.lineSeparator());
-    //        testReport = report.toString();
-    //        assertThrows(WriteFileException.class,
-    //                () -> writeCsvFileService.writeFile(WRONG_EMPTY_FILENAME, testReport));
-    //        assertThrows(WriteFileException.class,
-    //                () -> writeCsvFileService.writeFile(WRONG_SYMBOLS_FILENAME, testReport));
-    //    }
     @AfterEach
     void onTearDown() {
         try {
@@ -88,5 +69,30 @@ public class WriteCsvFileServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can`t delete file");
         }
+    }
+
+    private String buildTestReport() {
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(REPORT_HEADER)
+                .append(System.lineSeparator());
+        reportBuilder.append(CHERRY)
+                .append(COMMA)
+                .append(CHERRY_QUANTITY)
+                .append(System.lineSeparator());
+        reportBuilder.append(DOPPELGANGER)
+                .append(COMMA)
+                .append(DOPPELGANGER_QUANTITY);
+        return reportBuilder.toString();
+    }
+
+    private String convertListDataToString(List<String> list) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            builder.append(list.get(i));
+            if (!(i == list.size() - 1)) {
+                builder.append(System.lineSeparator());
+            }
+        }
+        return builder.toString();
     }
 }

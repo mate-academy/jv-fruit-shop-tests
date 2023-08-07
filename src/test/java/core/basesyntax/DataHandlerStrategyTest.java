@@ -12,15 +12,15 @@ import core.basesyntax.strategy.handlers.ReturnDataHandler;
 import core.basesyntax.strategy.handlers.SupplyDataHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataHandlerStrategyTest {
-    private DataHandlerStrategy dataHandlerStrategy;
-    private Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
+    private static DataHandlerStrategy dataHandlerStrategy;
+    private static Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setHandlerMap() {
         enumHandlerMap = new HashMap<>();
         DataHandler balance = new BalanceDataHandler();
         enumHandlerMap.put(FruitTransaction.Operation.BALANCE, balance);
@@ -34,28 +34,28 @@ public class DataHandlerStrategyTest {
     }
 
     @Test
-    void getHandler_isBalanceDataHeader_okay() {
+    void getHandler_isBalanceDataHandler_okay() {
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.BALANCE);
         assertEquals(BalanceDataHandler.class, strategyDataHandler.getClass());
     }
 
     @Test
-    void getHandler_isSupplyDataHeader_okay() {
+    void getHandler_isSupplyDataHandler_okay() {
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
         assertEquals(SupplyDataHandler.class, strategyDataHandler.getClass());
     }
 
     @Test
-    void getHandler_isPurchaseDataHeader_okay() {
+    void getHandler_isPurchaseDataHandler_okay() {
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.PURCHASE);
         assertEquals(PurchaseDataHandler.class, strategyDataHandler.getClass());
     }
 
     @Test
-    void getHandler_isReturnDataHeader_okay() {
+    void getHandler_isReturnDataHandler_okay() {
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.RETURN);
         assertEquals(ReturnDataHandler.class, strategyDataHandler.getClass());

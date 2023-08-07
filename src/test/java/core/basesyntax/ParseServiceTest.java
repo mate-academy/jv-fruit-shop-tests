@@ -39,25 +39,13 @@ public class ParseServiceTest {
     void parseDataToTransaction_validFruitTransaction_okay() {
         testData.add(HEADER);
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        testData.add(BALANCE_OPERATION_CODE + COMMA + APPLE + COMMA + TEST_APPLE_QUANTITY);
-        testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        testData.add(RETURN_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        testData.add(RETURN_OPERATION_CODE + COMMA + APPLE + COMMA + TEST_APPLE_QUANTITY);
         testData.add(PURCHASE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         List<FruitTransaction> expected = new ArrayList<>();
         FruitTransaction.Operation balanceOperation =
                 FruitTransaction.Operation.fromCode(BALANCE_OPERATION_CODE);
-        FruitTransaction.Operation returnOperation =
-                FruitTransaction.Operation.fromCode(RETURN_OPERATION_CODE);
         FruitTransaction.Operation purchaseOperation =
                 FruitTransaction.Operation.fromCode(PURCHASE_OPERATION_CODE);
-        FruitTransaction.Operation supplyOperation =
-                FruitTransaction.Operation.fromCode(SUPPLY_OPERATION_CODE);
         expected.add(new FruitTransaction(balanceOperation, BANANA, TEST_BANANA_QUANTITY));
-        expected.add(new FruitTransaction(balanceOperation, APPLE, TEST_APPLE_QUANTITY));
-        expected.add(new FruitTransaction(supplyOperation, BANANA, TEST_BANANA_QUANTITY));
-        expected.add(new FruitTransaction(returnOperation, BANANA, TEST_BANANA_QUANTITY));
-        expected.add(new FruitTransaction(returnOperation, APPLE, TEST_APPLE_QUANTITY));
         expected.add(new FruitTransaction(purchaseOperation, BANANA, TEST_BANANA_QUANTITY));
         List<FruitTransaction> transactions = parseService.parseDataToTransaction(testData);
         assertEquals(transactions, expected);

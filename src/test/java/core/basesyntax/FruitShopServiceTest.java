@@ -21,10 +21,11 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitShopServiceTest {
+    private static FruitShopService fruitShopService;
+    private static Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
     private static final String APPLE = "apple";
     private static final int APPLE_QUANTITY = 50;
     private static final int EXPECTED_APPLE_QUANTITY = 100;
@@ -33,30 +34,13 @@ public class FruitShopServiceTest {
     private static final int EXPECTED_BANANA_QUANTITY = 24;
     private static final int WRONG_QUANTITY = -50;
     private static final short EMPTY_STORAGE_SIZE = 0;
-    private static List<FruitTransaction> transactions;
-    private FruitShopService fruitShopService;
-    private Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
+    private List<FruitTransaction> transactions = new ArrayList<>();
 
     @BeforeAll
     static void createStorage() {
         Storage.createMap();
-    }
-
-    @BeforeEach
-    void setUp() {
         enumHandlerMap = initializeEnumHandlerMap();
-        DataHandlerStrategy dataHandlerStrategy = new TestDataHandlerStrategy(enumHandlerMap);
-        transactions = new ArrayList<>();
-        fruitShopService = new FruitShopServiceImpl(dataHandlerStrategy);
-    }
-
-    private Map<FruitTransaction.Operation, DataHandler> initializeEnumHandlerMap() {
-        Map<FruitTransaction.Operation, DataHandler> enumHandlerMap = new HashMap<>();
-        enumHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceDataHandler());
-        enumHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyDataHandler());
-        enumHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseDataHandler());
-        enumHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnDataHandler());
-        return enumHandlerMap;
+        fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
     }
 
     @Test
@@ -71,7 +55,6 @@ public class FruitShopServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, APPLE, APPLE_QUANTITY));
         transactions.add(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, BANANA_QUANTITY));
-        fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
         fruitShopService.updateData(transactions);
         assertEquals(EXPECTED_APPLE_QUANTITY, Storage.getStorage().get(APPLE));
         assertEquals(EXPECTED_BANANA_QUANTITY, Storage.getStorage().get(BANANA));
@@ -81,7 +64,6 @@ public class FruitShopServiceTest {
     void updateData_negativeQuantity_okay() {
         transactions.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, APPLE, WRONG_QUANTITY));
-        fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
         assertThrows(FruitsQuantityException.class,
                 () -> fruitShopService.updateData(transactions));
     }
@@ -97,6 +79,15 @@ public class FruitShopServiceTest {
     @AfterEach
     void cleanStorage() {
         Storage.clear();
+    }
+
+    private static Map<FruitTransaction.Operation, DataHandler> initializeEnumHandlerMap() {
+        Map<FruitTransaction.Operation, DataHandler> enumHandlerMap = new HashMap<>();
+        enumHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceDataHandler());
+        enumHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyDataHandler());
+        enumHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseDataHandler());
+        enumHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnDataHandler());
+        return enumHandlerMap;
     }
 
     private static class TestDataHandlerStrategy implements DataHandlerStrategy {

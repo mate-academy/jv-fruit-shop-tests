@@ -6,9 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.implementations.ReportServiceImpl;
 import core.basesyntax.storage.Storage;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,21 +25,21 @@ public class ReportServiceTest {
     private static final int APPLE_REPORT_INDEX = 1;
     private static final int BANANA_REPORT_INDEX = 2;
 
-    private ReportService reportService;
+    private static ReportService reportService;
 
     @BeforeAll
     static void createStorage() {
+        reportService = new ReportServiceImpl();
         Storage.createMap();
     }
 
     @BeforeEach
     void setUp() {
-        reportService = new ReportServiceImpl();
+        Storage.clear();
     }
 
     @Test
     void generateReport_emptyStorage_okay() {
-        Storage.clear();
         String report = reportService.generateReport();
         assertTrue(report.isEmpty());
     }
@@ -51,11 +48,9 @@ public class ReportServiceTest {
     void generateReport_filledStorage_okay() {
         Storage.addFruits(CHERRY, CHERRY_QUANTITY);
         Storage.addFruits(DOPPELGANGER, DOPPELGANGER_QUANTITY);
-        List<String> expected = new ArrayList<>();
-        expected.add(REPORT_HEADER);
-        expected.add(CHERRY + COMMA + CHERRY_QUANTITY);
-        expected.add(DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY);
-        String expectedReport = String.join(System.lineSeparator(), expected);
+        String expectedReport = REPORT_HEADER + System.lineSeparator()
+                + CHERRY + COMMA + CHERRY_QUANTITY + System.lineSeparator()
+                + DOPPELGANGER + COMMA + DOPPELGANGER_QUANTITY;
         String report = reportService.generateReport();
         assertEquals(expectedReport, report);
     }
@@ -72,10 +67,5 @@ public class ReportServiceTest {
                 separatedLinesReport[APPLE_REPORT_INDEX]);
         assertEquals(SPECIAL_CHARACTER_BANANA + COMMA + SPECIAL_CHARACTER_BANANA_QUANTITY,
                 separatedLinesReport[BANANA_REPORT_INDEX]);
-    }
-
-    @AfterEach
-    void cleanStorage() {
-        Storage.clear();
     }
 }

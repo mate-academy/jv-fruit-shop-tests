@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WriterServiceCsvImplTest {
@@ -19,12 +18,7 @@ public class WriterServiceCsvImplTest {
     private static final List<String> LINES = new ArrayList<>(List.of(
             "type,fruit,quantity",
             "b,banana,20"));
-    private WriterService writerService;
-
-    @BeforeEach
-    void setUp() {
-        writerService = new WriterServiceCsvImpl();
-    }
+    private final WriterService writerService = new WriterServiceCsvImpl();
 
     @Test
     void writeToFile_validFile_Ok() {
@@ -40,7 +34,7 @@ public class WriterServiceCsvImplTest {
     }
 
     private List<String> readFromFile(String filePath) {
-        List<String> strings = null;
+        List<String> strings;
         try {
             strings = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {

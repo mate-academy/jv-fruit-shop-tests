@@ -7,18 +7,12 @@ import core.basesyntax.service.impl.ReaderServiceCsvImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReaderServiceCsvImplTest {
     private static final String VALID_FILE = "src/test/resources/validInput.csv";
     private static final String INVALID_FILE = "file.csv";
-    private ReaderService readerService;
-
-    @BeforeEach
-    void setUp() {
-        readerService = new ReaderServiceCsvImpl();
-    }
+    private final ReaderService readerService = new ReaderServiceCsvImpl();
 
     @Test
     void readFromFile_validFile_Ok() {
@@ -30,7 +24,7 @@ public class ReaderServiceCsvImplTest {
     }
 
     @Test
-    void readFromFile_invalidFile_notOk() {
+    void readFromFile_invalidPath_notOk() {
         RuntimeException invalidFileException = assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(INVALID_FILE));
         assertEquals("Can't find file by path: " + INVALID_FILE, invalidFileException.getMessage());

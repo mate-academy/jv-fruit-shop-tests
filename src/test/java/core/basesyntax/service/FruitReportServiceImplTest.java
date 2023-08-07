@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitReportServiceImplTest {
@@ -18,12 +17,7 @@ public class FruitReportServiceImplTest {
     private static final String APPLE_FRUIT = "apple";
     private static final int APPLE_QTY = 20;
     private static final int BANANA_QTY = 30;
-    private FruitReportService reportService;
-
-    @BeforeEach
-    void setUp() {
-        reportService = new FruitReportServiceImpl();
-    }
+    private final FruitReportService reportService = new FruitReportServiceImpl();
 
     @AfterEach
     void tearDown() {
@@ -31,7 +25,7 @@ public class FruitReportServiceImplTest {
     }
 
     @Test
-    void createReport_normalCase_Ok() {
+    void createReport_validData_Ok() {
         List<String> expectedOutput = new ArrayList<>(List.of("fruit,quantity",
                 "banana,30",
                 "apple,20"));
@@ -43,7 +37,7 @@ public class FruitReportServiceImplTest {
     @Test
     void createReport_emptyStorage_notOk() {
         RuntimeException reportException = assertThrows(RuntimeException.class,
-                () -> reportService.createReport());
+                reportService::createReport);
         assertEquals("Can`t create report. Storage is empty", reportException.getMessage());
     }
 }

@@ -18,11 +18,11 @@ public class ReturnOperationHandlerTest {
     private static final int SUPPLY_RESULT = 10;
     private static final String VALID_FRUIT = "apple";
     private static final String NULL_FRUIT = null;
-    private OperationHandler handler;
+    private final OperationHandler handler = new ReturnOperationHandler(
+            new HandlerDataValidatorImpl());
 
     @BeforeEach
     void setUp() {
-        handler = new ReturnOperationHandler(new HandlerDataValidatorImpl());
         Storage.storage.clear();
     }
 
@@ -43,7 +43,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handle_negativeValueCase_Ok() {
+    void handle_negativeValueCase_notOk() {
         RuntimeException operationException = assertThrows(RuntimeException.class,
                 () -> handler.handle(VALID_FRUIT, NEGATIVE_QTY));
         assertEquals("Quantity cannot be less than zero " + NEGATIVE_QTY,
@@ -51,7 +51,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handle_nullKey_Ok() {
+    void handle_nullKey_notOk() {
         RuntimeException operationException = assertThrows(RuntimeException.class,
                 () -> handler.handle(NULL_FRUIT, POSITIVE_QTY));
         assertEquals("Fruit cannot be null", operationException.getMessage());

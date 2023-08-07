@@ -8,7 +8,6 @@ import core.basesyntax.strategy.handler.HandlerDataValidatorImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationHandlerTest {
@@ -19,13 +18,8 @@ public class PurchaseOperationHandlerTest {
     private static final int PURCHASE_RESULT = 15;
     private static final String VALID_FRUIT = "apple";
     private static final String NULL_FRUIT = null;
-    private OperationHandler handler;
-
-    @BeforeEach
-    void setUp() {
-        handler = new PurchaseOperationHandler(new HandlerDataValidatorImpl());
-        Storage.storage.clear();
-    }
+    private final OperationHandler handler = new PurchaseOperationHandler(
+            new HandlerDataValidatorImpl());
 
     @Test
     void handle_validZeroValueCase_Ok() {
@@ -53,7 +47,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_negativeValueCase_Ok() {
+    void handle_negativeValueCase_notOk() {
         RuntimeException operationException = assertThrows(RuntimeException.class,
                 () -> handler.handle(VALID_FRUIT, NEGATIVE_QTY));
         assertEquals("Quantity cannot be less than zero " + NEGATIVE_QTY,
@@ -61,7 +55,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_nullKey_Ok() {
+    void handle_nullKey_notOk() {
         RuntimeException operationException = assertThrows(RuntimeException.class,
                 () -> handler.handle(NULL_FRUIT, POSITIVE_QTY));
         assertEquals("Fruit cannot be null", operationException.getMessage());

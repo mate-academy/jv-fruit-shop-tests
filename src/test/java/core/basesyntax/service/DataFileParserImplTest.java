@@ -8,7 +8,6 @@ import core.basesyntax.service.impl.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataFileParserImplTest {
@@ -18,13 +17,7 @@ public class DataFileParserImplTest {
     private static final List<String> INVALID_LINES = new ArrayList<>();
     private static final FruitTransaction VALID_TRANSACTION = new FruitTransaction(
             FruitTransaction.Operation.BALANCE, "banana", 20);
-    private DataFileParser fileParser;
-
-    @BeforeEach
-    void setUp() {
-        fileParser = new DataFileParserImpl();
-
-    }
+    private final DataFileParser fileParser = new DataFileParserImpl();
 
     @Test
     void parser_validList_Ok() {

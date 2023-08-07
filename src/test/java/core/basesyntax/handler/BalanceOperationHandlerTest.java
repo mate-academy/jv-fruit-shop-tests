@@ -17,11 +17,11 @@ public class BalanceOperationHandlerTest {
     private static final int POSITIVE_QTY = 5;
     private static final String VALID_FRUIT = "apple";
     private static final String NULL_FRUIT = null;
-    private OperationHandler handler;
+    private final OperationHandler handler = new BalanceOperationHandler(
+            new HandlerDataValidatorImpl());
 
     @BeforeEach
     void setUp() {
-        handler = new BalanceOperationHandler(new HandlerDataValidatorImpl());
         Storage.storage.clear();
     }
 

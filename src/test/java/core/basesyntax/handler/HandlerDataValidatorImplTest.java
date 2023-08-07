@@ -5,18 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.strategy.handler.HandlerDataValidator;
 import core.basesyntax.strategy.handler.HandlerDataValidatorImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class HandlerDataValidatorImplTest {
     private static final String NULL_VALUE = null;
     private static final int NEGATIVE_QTY = -1;
-    private HandlerDataValidator validator;
-
-    @BeforeEach
-    void setUp() {
-        validator = new HandlerDataValidatorImpl();
-    }
+    private final HandlerDataValidator validator = new HandlerDataValidatorImpl();
 
     @Test
     void checkNull_nullCase_notOk() {

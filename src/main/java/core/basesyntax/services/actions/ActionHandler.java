@@ -29,7 +29,8 @@ public interface ActionHandler {
             throw new ValidationDataException("ActionHandler error! valueOfTask can't be null!");
         }
         if (valueOfTask < 0) {
-            throw new ValidationDataException("ActionHandler error! valueOfTask can't be negative!");
+            throw new ValidationDataException("ActionHandler error! "
+                    + "valueOfTask can't be negative!");
         }
     }
 }

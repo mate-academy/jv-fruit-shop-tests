@@ -35,33 +35,29 @@ public class DataHandlerStrategyTest {
 
     @Test
     void getHandler_isBalanceDataHeader_okay() {
-        DataHandler balanceDataHandler = new BalanceDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.BALANCE);
-        assertEquals(balanceDataHandler, strategyDataHandler);
+        assertEquals(BalanceDataHandler.class, strategyDataHandler.getClass());
     }
 
     @Test
     void getHandler_isSupplyDataHeader_okay() {
-        DataHandler supplyDataHandler = new SupplyDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.SUPPLY);
-        assertEquals(supplyDataHandler, strategyDataHandler);
+        assertEquals(SupplyDataHandler.class, strategyDataHandler.getClass());
     }
 
     @Test
     void getHandler_isPurchaseDataHeader_okay() {
-        DataHandler purchaseDataHandler = new PurchaseDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.PURCHASE);
-        assertEquals(purchaseDataHandler, strategyDataHandler);
+        assertEquals(PurchaseDataHandler.class, strategyDataHandler.getClass());
     }
 
     @Test
     void getHandler_isReturnDataHeader_okay() {
-        DataHandler returnDataHandler = new ReturnDataHandler();
         DataHandler strategyDataHandler =
                 dataHandlerStrategy.getHandler(FruitTransaction.Operation.RETURN);
-        assertEquals(returnDataHandler, strategyDataHandler);
+        assertEquals(ReturnDataHandler.class, strategyDataHandler.getClass());
     }
 }

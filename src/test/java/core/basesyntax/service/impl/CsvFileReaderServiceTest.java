@@ -1,9 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exceptions.ReadDataFromFileException;
 import core.basesyntax.service.FileReaderService;
 import java.nio.file.FileSystems;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderServiceTest {
@@ -23,24 +25,25 @@ class CsvFileReaderServiceTest {
     @Test
     void readDataFromFile_emptyFile_ok() {
         String actual = csvFileReader.readDataFromFile(SOURCE_FILE_WITHOUT_DATA);
-        Assertions.assertEquals("", actual);
+
+        assertEquals("", actual);
     }
 
     @Test
     void readDataFromFile_existingFile_ok() {
         String actual = csvFileReader.readDataFromFile(EXISTING_SOURCE_FILE);
-        Assertions.assertEquals(TEXT_IN_SOURCE_FILE, actual);
+
+        assertEquals(TEXT_IN_SOURCE_FILE, actual);
     }
 
     @Test
     void readDataFromFile_notExistingFile_notOk() {
-        ReadDataFromFileException exception = null;
-        try {
-            csvFileReader.readDataFromFile(NOT_EXISTING_SOURCE_FILE);
-        } catch (ReadDataFromFileException e) {
-            exception = e;
-        }
+        ReadDataFromFileException exception = assertThrows(ReadDataFromFileException.class,
+                () -> csvFileReader.readDataFromFile(NOT_EXISTING_SOURCE_FILE));
+
         String expected = "Can't read data from file " + NOT_EXISTING_SOURCE_FILE;
-        Assertions.assertEquals(expected, exception.getMessage());
+
+        assertEquals(expected, exception.getMessage());
     }
+
 }

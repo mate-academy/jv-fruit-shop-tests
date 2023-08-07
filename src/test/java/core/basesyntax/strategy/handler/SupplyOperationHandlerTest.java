@@ -1,7 +1,8 @@
 package core.basesyntax.strategy.handler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +22,14 @@ class SupplyOperationHandlerTest {
     void processData_validData_ok() {
         Storage.getStorage().put(APPLE, QUANTITY_20);
         supplyOperationHandler.processData(APPLE, QUANTITY_30);
-        Assertions.assertEquals(QUANTITY_50, Storage.getStorage().get(APPLE));
+
+        assertEquals(QUANTITY_50, Storage.getStorage().get(APPLE));
     }
 
     @Test
     void processData_fruitNotExistInStorage_ok() {
         supplyOperationHandler.processData(APPLE, QUANTITY_50);
-        Assertions.assertEquals(QUANTITY_50, Storage.getStorage().get(APPLE));
+
+        assertEquals(QUANTITY_50, Storage.getStorage().get(APPLE));
     }
 }

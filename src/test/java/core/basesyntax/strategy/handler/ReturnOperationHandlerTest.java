@@ -1,8 +1,10 @@
 package core.basesyntax.strategy.handler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.CantReturnFruitException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,25 +25,25 @@ class ReturnOperationHandlerTest {
     void processData_validData_ok() {
         Storage.getStorage().put(APPLE, QUANTITY_20);
         returnOperationHandler.processData(APPLE, QUANTITY_30);
-        Assertions.assertEquals(QUANTITY_50, Storage.getStorage().get(APPLE));
+
+        assertEquals(QUANTITY_50, Storage.getStorage().get(APPLE));
     }
 
     @Test
     void processData_noBalanceInStorage_ok() {
         Storage.getStorage().put(APPLE,QUANTITY_0);
         returnOperationHandler.processData(APPLE,QUANTITY_20);
-        Assertions.assertEquals(QUANTITY_20,Storage.getStorage().get(APPLE));
+
+        assertEquals(QUANTITY_20,Storage.getStorage().get(APPLE));
     }
 
     @Test
     void processData_fruitNotExistInStorage_notOk() {
-        CantReturnFruitException exception = null;
-        try {
-            returnOperationHandler.processData(APPLE, QUANTITY_50);
-        } catch (CantReturnFruitException e) {
-            exception = e;
-        }
+        CantReturnFruitException exception = assertThrows(CantReturnFruitException.class,
+                () ->  returnOperationHandler.processData(APPLE, QUANTITY_50));
+
         String expected = "There isn't apple in Storage, can't return";
-        Assertions.assertEquals(expected, exception.getMessage());
+
+        assertEquals(expected, exception.getMessage());
     }
 }

@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class PurchaseOperationHandlerTest {
     private static final String APPLE = "apple";
     private static final Integer QUANTITY_20 = 20;
@@ -22,7 +24,8 @@ class PurchaseOperationHandlerTest {
     void processData_validData_ok() {
         Storage.getStorage().put(APPLE, QUANTITY_50);
         purchaseOperationHandler.processData(APPLE, QUANTITY_20);
-        Assertions.assertEquals(QUANTITY_30, Storage.getStorage().get(APPLE));
+
+        assertEquals(QUANTITY_30, Storage.getStorage().get(APPLE));
     }
 
     @Test
@@ -36,6 +39,6 @@ class PurchaseOperationHandlerTest {
         }
         String expected = "Can't get 50 apple from storage, available only 30 apple";
         String actual = exception.getMessage();
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 }

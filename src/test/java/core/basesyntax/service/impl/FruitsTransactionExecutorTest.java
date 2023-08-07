@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -12,7 +14,6 @@ import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,9 +50,11 @@ class FruitsTransactionExecutorTest {
         createAndCompleteTransactions(BALANCE_OPERATION, BANANA, QUANTITY_50);
         createAndCompleteTransactions(SUPPLY_OPERATION, BANANA, QUANTITY_50);
         createAndCompleteTransactions(PURCHASE_OPERATION, BANANA,QUANTITY_50);
+
         Integer actualQuantityApplesInStorage = Storage.getStorage().get(APPLE);
         Integer actualQuantityBananasInStorage = Storage.getStorage().get(BANANA);
-        Assertions.assertTrue(actualQuantityApplesInStorage.equals(160)
+
+        assertTrue(actualQuantityApplesInStorage.equals(160)
                 && actualQuantityBananasInStorage.equals(50));
     }
 

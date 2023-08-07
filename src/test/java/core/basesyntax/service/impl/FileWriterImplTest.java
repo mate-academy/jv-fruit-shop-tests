@@ -14,10 +14,11 @@ import org.junit.jupiter.api.Test;
 class FileWriterImplTest {
     private static final String VALID_PATH = "src/test/java/core/basesyntax/resources/report.csv";
     private static final String INVALID_PATH = "vH-@&5nNSz93";
+    private static final String REPORT_PATH = "src/test/java/core/basesyntax/resources/report.csv";
     private final FileWriter fileWriter = new FileWriterImpl();
 
     @Test
-    void writeToFile_validDataAndPath_ok() {
+    void writeToFile_validDataAndPath_ok() throws IOException {
         String expected = "type,fruit,quantity\n"
                 + "    b,banana,20\n"
                 + "    b,apple,100\n"
@@ -27,14 +28,8 @@ class FileWriterImplTest {
                 + "    p,apple,20\n"
                 + "    p,banana,5\n"
                 + "    s,banana,50";
-        String path = "src/test/java/core/basesyntax/resources/report.csv";
-        fileWriter.writeToFile(path, expected);
-        String actual;
-        try {
-            actual = Files.readString(Path.of(path), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + path, e);
-        }
+        fileWriter.writeToFile(REPORT_PATH, expected);
+        String actual = Files.readString(Path.of(REPORT_PATH), StandardCharsets.UTF_8);
         assertEquals(expected, actual);
     }
 

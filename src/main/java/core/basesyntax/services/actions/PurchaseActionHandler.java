@@ -12,6 +12,7 @@ public class PurchaseActionHandler implements ActionHandler {
 
     @Override
     public boolean executeAction(String nameOfGoods, Integer valueOfTask) {
+        validateInfo(nameOfGoods, valueOfTask);
         validateData(fruitDB, nameOfGoods);
         Integer value = fruitDB.getStorageFruits().get(nameOfGoods);
         if (value < valueOfTask) {

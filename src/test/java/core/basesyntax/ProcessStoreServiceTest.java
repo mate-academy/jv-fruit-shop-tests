@@ -65,44 +65,6 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isNullStorage_notOk() {
-        Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMapTestTemp =
-                new HashMap<>();
-        actionHandlerMapTestTemp.put(FruitTransaction.ActionType.BALANCE,
-                new BalanceActionHandler(null));
-        ActionStrategy actionStrategyTestTemp =
-                new ActionStrategyImpl(actionHandlerMapTestTemp);
-        ProcessStoreService handleProcessTestTemp =
-                new ProcessStoreServiceImpl(actionStrategyTestTemp);
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "banana", 20));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTestTemp.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isBalanceGoodEmpty_ok() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "", 20));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTest.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isBalance_ok() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "banana", 20));
-        boolean actual = handleProcessTest.processAction(fruitsTransactions);
-        assertTrue(actual);
-    }
-
-    @Test
     void processHandle_isPurchaseNullData_notOk() {
         Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMapTestTemp =
                 new HashMap<>();

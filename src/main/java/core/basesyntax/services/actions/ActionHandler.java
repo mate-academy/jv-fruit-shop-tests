@@ -17,4 +17,19 @@ public interface ActionHandler {
             throw new ValidationDataException("Client can't buy not existing product!");
         }
     }
+
+    default void validateInfo(String nameOfGood, Integer valueOfTask) {
+        if (nameOfGood == null) {
+            throw new ValidationDataException("ActionHandler error! NameOfGood can't be null!");
+        }
+        if (nameOfGood.isEmpty()) {
+            throw new ValidationDataException("ActionHandler error! NameOfGood can't be empty!");
+        }
+        if (valueOfTask == null) {
+            throw new ValidationDataException("ActionHandler error! valueOfTask can't be null!");
+        }
+        if (valueOfTask < 0) {
+            throw new ValidationDataException("ActionHandler error! valueOfTask can't be negative!");
+        }
+    }
 }

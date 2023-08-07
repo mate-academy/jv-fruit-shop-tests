@@ -12,6 +12,7 @@ public class BalanceActionHandler implements ActionHandler {
 
     @Override
     public boolean executeAction(String nameOfGoods, Integer valueOfTask) {
+        validateInfo(nameOfGoods, valueOfTask);
         if (fruitDB == null) {
             throw new ValidationDataException("ActionHandle error db is null");
         }

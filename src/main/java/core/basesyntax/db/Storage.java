@@ -15,6 +15,10 @@ public class Storage {
         return true;
     }
 
+    public Integer getFruit(String key) {
+        return storageFruits.get(key);
+    }
+
     public boolean clean() {
         storageFruits.clear();
         return storageFruits.isEmpty();

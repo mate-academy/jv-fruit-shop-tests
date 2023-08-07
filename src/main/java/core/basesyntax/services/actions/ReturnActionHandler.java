@@ -11,6 +11,7 @@ public class ReturnActionHandler implements ActionHandler {
 
     @Override
     public boolean executeAction(String nameOfGoods, Integer valueOfTask) {
+        validateInfo(nameOfGoods, valueOfTask);
         validateData(fruitDB, nameOfGoods);
         Integer value = fruitDB.getStorageFruits().get(nameOfGoods);
         return fruitDB.add(nameOfGoods, value + valueOfTask);

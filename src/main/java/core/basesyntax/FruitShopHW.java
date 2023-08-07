@@ -3,9 +3,17 @@ package core.basesyntax;
 import core.basesyntax.model.FruitActivity;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.activity.strategy.*;
-import core.basesyntax.service.impl.*;
-
+import core.basesyntax.service.activity.strategy.ActivityHandler;
+import core.basesyntax.service.activity.strategy.BalanceHandler;
+import core.basesyntax.service.activity.strategy.PurchaseHandler;
+import core.basesyntax.service.activity.strategy.ReturnHandler;
+import core.basesyntax.service.activity.strategy.SupplyHandler;
+import core.basesyntax.service.impl.ActivitiesProcessorImpl;
+import core.basesyntax.service.impl.ActivityStrategyImpl;
+import core.basesyntax.service.impl.CsvFileReader;
+import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.DataParserImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +41,7 @@ public class FruitShopHW {
 
     public static void main(String[] args) {
         List<String> lines = CSV_FILE_READER.getLinesFromFile(FILE_NAME);
-        List<FruitActivity> activities = DATA_PARSE.processFile(lines);
+        List<FruitActivity> activities = DATA_PARSE.parseLines(lines);
         ACTIVITIES_PROCESSOR_IMPL.processActivities(activities);
         String report = REPORT_GENERATOR_IMPL.generateReport();
         CSV_FILE_WRITER.writeTextToFile(REPORT_NAME, report);

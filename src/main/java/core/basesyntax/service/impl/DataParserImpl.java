@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitActivity;
 import core.basesyntax.service.DataParser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class DataParserImpl implements DataParser {
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitActivity> processFile(List<String> lines) {
+    public List<FruitActivity> parseLines(List<String> lines) {
         List<FruitActivity> activities = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             activities.add(makeActivityFromLine(lines.get(i)));
@@ -21,7 +20,7 @@ public class DataParserImpl implements DataParser {
         return activities;
     }
 
-    public static FruitActivity makeActivityFromLine(String activityLine) {
+    private static FruitActivity makeActivityFromLine(String activityLine) {
         String[] activitySplit = activityLine.split(SEPARATOR);
         FruitActivity.Type activityType =
                 FruitActivity.Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);

@@ -1,8 +1,8 @@
 package core.basesyntax.model;
 
 import core.basesyntax.service.exceptions.UnsupportedFruitActivityException;
-
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FruitActivity {
     private final Type activityType;
@@ -13,6 +13,25 @@ public class FruitActivity {
         this.activityType = activityType;
         this.fruitName = fruitName;
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof FruitActivity)) {
+            return false;
+        }
+        FruitActivity other = (FruitActivity) object;
+        return Objects.equals(activityType, other.activityType)
+                && Objects.equals(fruitName, other.fruitName)
+                && Objects.equals(quantity, other.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(activityType, fruitName, quantity);
     }
 
     public Type getActivityType() {

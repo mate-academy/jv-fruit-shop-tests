@@ -24,7 +24,7 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void test_writeToFile_ok() {
+    void writeToFile_ok() {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();
@@ -39,17 +39,19 @@ class FileWriterServiceImplTest {
         }
         String[] transactions = report.split(System.lineSeparator());
         for (int i = 0; i < strings.size(); i++) {
-            assertEquals(strings.get(i),transactions[i],
+            String expected = strings.get(i);
+            assertEquals(expected,transactions[i],
                     "transactions differ at element: " + i);
         }
     }
 
     @Test
-    void test_writeToFile_null_notOk() {
+    void writeToFile_null_notOk() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class,
                 () -> writerService.writeToFile(null, ""),
                 "method should throw exception whe path is null");
-        assertEquals("file Path can't be null",runtimeException.getMessage());
+        String expected = "file Path can't be null";
+        assertEquals(expected,runtimeException.getMessage());
     }
 
 }

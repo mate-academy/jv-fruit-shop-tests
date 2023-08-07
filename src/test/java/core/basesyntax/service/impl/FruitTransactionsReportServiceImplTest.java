@@ -22,12 +22,13 @@ class FruitTransactionsReportServiceImplTest {
     }
 
     @Test
-    void test_createReport_ok() {
+    void createReport_ok() {
         String separator = System.lineSeparator();
         Storage.fruitTransactions.put("banana",100);
         Storage.fruitTransactions.put("apple",300);
-        assertEquals("fruit,quantity" + separator
-                + "banana,100" + separator + "apple,300" + separator,
+        String expected = "fruit,quantity" + separator
+                + "banana,100" + separator + "apple,300" + separator;
+        assertEquals(expected,
                 reportService.createReport());
     }
 

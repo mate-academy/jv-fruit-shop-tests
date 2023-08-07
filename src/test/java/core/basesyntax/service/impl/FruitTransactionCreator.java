@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class FruitTransactionCreator {
-    protected static List<FruitTransaction> createValidTransactions() {
+    protected static final List<FruitTransaction> createValidTransactions() {
         FruitTransaction firstValidfruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,"banana",20);
         FruitTransaction secondValidfruitTransaction =

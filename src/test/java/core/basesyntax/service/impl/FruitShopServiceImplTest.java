@@ -35,14 +35,14 @@ class FruitShopServiceImplTest {
     }
 
     @Test
-    void processData_EmptyTransactionList_ok() {
+    void processData_emptyTransactionList_ok() {
         fruitShopService.processData(Collections.emptyList());
         //Verifies that no methods were called on the mock object operationStrategyMock.
         verifyNoInteractions(operationStrategyMock);
     }
 
     @Test
-    void processData_OneTransaction_ok() {
+    void processData_oneTransaction_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction.FruitBuilder()
                 .setOperationType(Operation.SUPPLY)
                 .setFruitName("apple")
@@ -62,7 +62,7 @@ class FruitShopServiceImplTest {
     }
 
     @Test
-    void processData_MultipleTransactions_ok() {
+    void processData_multipleTransactions_ok() {
         List<FruitTransaction> transactionList = new ArrayList<>();
         FruitTransaction transaction1 = new FruitTransaction.FruitBuilder()
                 .setOperationType(Operation.SUPPLY)

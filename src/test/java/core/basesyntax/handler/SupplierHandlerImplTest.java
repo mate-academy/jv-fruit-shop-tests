@@ -30,13 +30,13 @@ class SupplierHandlerImplTest {
     }
 
     @Test
-    void supply_applyOperationSupplyFruitsFirstTime_AllValidData_ok() {
+    void applyOperation_supplyFruitsFirstTime_AllValidData_ok() {
         operationHandler.applyOperation(fruitTransaction);
         assertEquals(10, FruitsStorage.fruitsStorage.get("apple"));
     }
 
     @Test
-    void supply_applyOperationUpdateFruitStorage_AllValidData_ok() {
+    void applyOperation_updateFruitStorage_AllValidData_ok() {
         FruitsStorage.fruitsStorage.put("apple", 50);
         operationHandler.applyOperation(fruitTransaction);
         assertEquals(60, FruitsStorage.fruitsStorage.get("apple"));

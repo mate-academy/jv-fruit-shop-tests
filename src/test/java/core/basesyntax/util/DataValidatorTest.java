@@ -20,7 +20,7 @@ class DataValidatorTest {
     }
 
     @Test
-    void validateInputData_ValidInput_ok() {
+    void validateInputData_validInput_ok() {
         String operationCode = "r";
         String fruitName = "apple";
         int fruitQuantity = 10;
@@ -29,7 +29,7 @@ class DataValidatorTest {
     }
 
     @Test
-    void validateInputData_OperationCodeIsNull_notOk() {
+    void validateInputData_operationCodeIsNull_notOk() {
         String operationCode = null;
         String fruitName = "Apple";
         int fruitQuantity = 10;
@@ -39,7 +39,7 @@ class DataValidatorTest {
     }
 
     @Test
-    void validateInputData_FruitNameIsEmpty() {
+    void validateInputData_fruitNameIsEmpty() {
         String operationCode = "r";
         String fruitName = "";
         int fruitQuantity = 10;
@@ -49,7 +49,7 @@ class DataValidatorTest {
     }
 
     @Test
-    void validateInputData_NegativeFruitQuantity_notOk() {
+    void validateInputData_negativeFruitQuantity_notOk() {
         String operationCode = "r";
         String fruitName = "apple";
         int fruitQuantity = -5;
@@ -59,13 +59,13 @@ class DataValidatorTest {
     }
 
     @Test
-    void validateInputData_SourceDataIsNotEmpty_ok() {
+    void validateInputData_sourceDataIsNotEmpty_ok() {
         List<String> sourceData = Arrays.asList("r", "apple", "10");
         assertDoesNotThrow(() -> dataValidator.validateIsSourceDataEmpty(sourceData));
     }
 
     @Test
-    void validateInputData_SourceDataIsEmpty_notOk() {
+    void validateInputData_sourceDataIsEmpty_notOk() {
         List<String> sourceData = Collections.emptyList();
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> dataValidator.validateIsSourceDataEmpty(sourceData));

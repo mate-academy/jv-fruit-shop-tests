@@ -29,7 +29,7 @@ class WriteDataServiceImplTest {
     }
 
     @Test
-    void writeData_WritesDataToFile_ok() throws IOException {
+    void writeData_writesDataToFile_ok() throws IOException {
         writeDataService.writeData(testData, CORRECT_FILE_PATH_TO_WRITE);
         File file = new File(CORRECT_FILE_PATH_TO_WRITE);
         assertTrue(file.exists());
@@ -38,7 +38,7 @@ class WriteDataServiceImplTest {
     }
 
     @Test
-    void writeData_ThrowsRuntimeException_WhenFileCannotBeWritten_notOk() {
+    void writeData_throwsRuntimeException_whenFileCannotBeWritten_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> writeDataService.writeData(testData, WRONG_PATH_TO_WRITE));
         String expectedErrorMessage = "Can't write data to the file ";
@@ -46,7 +46,7 @@ class WriteDataServiceImplTest {
     }
 
     @Test
-    void writeData_WritesEmptyDataToFile_ok() throws IOException {
+    void writeData_writesEmptyDataToFile_ok() throws IOException {
         writeDataService.writeData(EMPTY_TEXT_TO_WRITE, CORRECT_FILE_PATH_TO_WRITE);
         File file = new File(CORRECT_FILE_PATH_TO_WRITE);
         assertTrue(file.exists());

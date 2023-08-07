@@ -30,14 +30,14 @@ class ReturnOperationHandlerImplTest {
     }
 
     @Test
-    void applyOperation_ReturnFruitsToEmptyStorage_AllValidData_ok() {
+    void applyOperation_returnFruitsToEmptyStorage_AllValidData_ok() {
         FruitsStorage.fruitsStorage.put("apple", 0);
         operationHandler.applyOperation(fruitTransaction);
         assertEquals(100, FruitsStorage.fruitsStorage.get("apple"));
     }
 
     @Test
-    void applyOperation_ReturnFruitsToFruitStorage_AllValidData_ok() {
+    void applyOperation_returnFruitsToFruitStorage_AllValidData_ok() {
         FruitsStorage.fruitsStorage.put("apple", 50);
         operationHandler.applyOperation(fruitTransaction);
         assertEquals(150, FruitsStorage.fruitsStorage.get("apple"));

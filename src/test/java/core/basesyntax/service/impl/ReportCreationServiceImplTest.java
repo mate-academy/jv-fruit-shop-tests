@@ -20,14 +20,14 @@ class ReportCreationServiceImplTest {
     }
 
     @Test
-    public void getReport_ValidData_ok() {
+    public void getReport_validData_ok() {
         String generatedReport = reportCreationService.getReport();
         assertTrue(generatedReport.contains("apple,10"));
         assertTrue(generatedReport.contains("banana,20"));
     }
 
     @Test
-    public void getReport_EmptyFruitsStorage_ok() {
+    public void getReport_emptyFruitsStorage_ok() {
         FruitsStorage.fruitsStorage.clear();
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         String generatedReport = reportCreationService.getReport();
@@ -35,7 +35,7 @@ class ReportCreationServiceImplTest {
     }
 
     @Test
-    public void getReport_SingleFruitInStorage() {
+    public void getReport_singleFruitInStorage() {
         FruitsStorage.fruitsStorage.clear();
         FruitsStorage.fruitsStorage.put("apple", 5);
         String expectedReport = "fruit,quantity" + System.lineSeparator()

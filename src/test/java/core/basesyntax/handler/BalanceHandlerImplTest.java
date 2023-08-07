@@ -30,14 +30,14 @@ class BalanceHandlerImplTest {
     }
 
     @Test
-    void balance_applyOperationAddNewFruits_AllValidData_ok() {
+    void applyOperation_addNewFruits_AllValidData_ok() {
         FruitsStorage.fruitsStorage.clear();
         operationHandler.applyOperation(fruitTransaction);
         assertEquals(10, FruitsStorage.fruitsStorage.get("apple"));
     }
 
     @Test
-    void balance_applyOperationUpdateFruitStorage_AllValidData_ok() {
+    void applyOperation_updateFruitStorageBalance_AllValidData_ok() {
         FruitsStorage.fruitsStorage.put("apple", 10);
         operationHandler.applyOperation(fruitTransaction);
         assertEquals(20, FruitsStorage.fruitsStorage.get("apple"));

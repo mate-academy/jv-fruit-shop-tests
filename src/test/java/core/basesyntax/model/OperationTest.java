@@ -6,32 +6,33 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 class OperationTest {
+    private static final String VALID_CODE = "r";
+    private static final String INVALID_CODE = "f";
+    private static final String EMPTY_CODE = "";
+    private static final String WHITE_SPACE_CODE = " ";
 
     @Test
-    void getOperationByCode_ValidCode_ok() {
-        String validCode = "r";
-        Operation result = Operation.getOperationByCode(validCode);
+    void getOperationByCode_validCode_ok() {
+        Operation result = Operation.getOperationByCode(VALID_CODE);
         assertEquals(Operation.RETURN, result);
     }
 
     @Test
-    void getOperationByCode_InvalidCode_notOk() {
-        String invalidCode = "f";
+    void getOperationByCode_invalidCode_notOk() {
         assertThrows(IllegalArgumentException.class,
-                () -> Operation.getOperationByCode(invalidCode));
+                () -> Operation.getOperationByCode(INVALID_CODE));
     }
 
     @Test
-    void getOperationByCode_EmptyCode_notOk() {
-        String invalidCode = "";
+    void getOperationByCode_emptyCode_notOk() {
         assertThrows(IllegalArgumentException.class,
-                () -> Operation.getOperationByCode(invalidCode));
+                () -> Operation.getOperationByCode(EMPTY_CODE));
     }
 
     @Test
-    void getOperationByCode_WhiteSpaceCode_notOk() {
-        String invalidCode = " ";
+    void getOperationByCode_whiteSpaceCode_notOk() {
+
         assertThrows(IllegalArgumentException.class,
-                () -> Operation.getOperationByCode(invalidCode));
+                () -> Operation.getOperationByCode(WHITE_SPACE_CODE));
     }
 }

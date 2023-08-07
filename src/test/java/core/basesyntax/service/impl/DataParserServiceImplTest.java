@@ -29,7 +29,7 @@ class DataParserServiceImplTest {
     }
 
     @Test
-    void createFruitTransaction_ValidData_ok() {
+    void createFruitTransaction_validData_ok() {
         List<FruitTransaction> result = dataParserService.createFruitTransaction(testData);
         System.out.println(result.size());
         assertEquals(2, result.size());
@@ -42,7 +42,7 @@ class DataParserServiceImplTest {
     }
 
     @Test
-    void createFruitTransaction_EmptyFruitQuantity_notOk() {
+    void createFruitTransaction_emptyFruitQuantity_notOk() {
         testData.clear();
         testData.add("fruit,quantity");
         testData.add("r,apple,10");
@@ -52,7 +52,7 @@ class DataParserServiceImplTest {
     }
 
     @Test
-    void createFruitTransaction_EmptyFruitName_notOk() {
+    void createFruitTransaction_emptyFruitName_notOk() {
         testData.clear();
         testData.add("fruit,quantity");
         testData.add("r,10");
@@ -62,7 +62,7 @@ class DataParserServiceImplTest {
     }
 
     @Test
-    void createFruitTransaction_EmptyOperationType_notOk() {
+    void createFruitTransaction_emptyOperationType_notOk() {
         testData.clear();
         testData.add("fruit,quantity");
         testData.add("apple,10");

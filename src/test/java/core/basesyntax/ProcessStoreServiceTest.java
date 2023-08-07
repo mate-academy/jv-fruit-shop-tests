@@ -65,71 +65,10 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isPurchaseNullData_notOk() {
-        Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMapTestTemp =
-                new HashMap<>();
-        actionHandlerMapTestTemp.put(FruitTransaction.ActionType.BALANCE,
-                new BalanceActionHandler(fruitDB));
-        actionHandlerMapTestTemp.put(FruitTransaction.ActionType.PURCHASE,
-                new PurchaseActionHandler(null));
-        ActionStrategy actionStrategyTestTemp =
-                new ActionStrategyImpl(actionHandlerMapTestTemp);
-        ProcessStoreService handleProcessTestTemp =
-                new ProcessStoreServiceImpl(actionStrategyTestTemp);
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "banana", 20));
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.PURCHASE,
-                        "banana", 10));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTestTemp.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isPurchaseEmptyStorage_notOk() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.PURCHASE,
-                        "banana", 20));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTest.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isPurchaseNotExistProduct_notOk() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "apple", 20));
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.PURCHASE,
-                        "banana", 10));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTest.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isPurchase_ok() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "apple", 20));
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.PURCHASE,
-                        "apple", 20));
-        boolean actual = handleProcessTest.processAction(fruitsTransactions);
-        assertTrue(actual);
-    }
-
-    @Test
-    void processHandle_isReturnNullData_notOk() {
+    void processHandle_isNullData_notOk() {
         Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMapTestTemp = new HashMap<>();
         actionHandlerMapTestTemp.put(FruitTransaction.ActionType.BALANCE,
-                new BalanceActionHandler(fruitDB));
-        actionHandlerMapTestTemp.put(FruitTransaction.ActionType.PURCHASE,
-                new ReturnActionHandler(null));
+                new BalanceActionHandler(null));
         ActionStrategy actionStrategyTestTemp =
                 new ActionStrategyImpl(actionHandlerMapTestTemp);
         ProcessStoreService handleProcessTestTemp =
@@ -138,15 +77,12 @@ public class ProcessStoreServiceTest {
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
                         "banana", 20));
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
-                        "banana", 10));
         assertThrows(ValidationDataException.class,
                 () -> handleProcessTestTemp.processAction(fruitsTransactions));
     }
 
     @Test
-    void processHandle_isReturnEmptyStorage_notOk() {
+    void processHandle_isEmptyStorage_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
@@ -156,7 +92,27 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isReturnNotExistProduct_notOk() {
+    void processHandle_isNullNameFruit_notOk() {
+        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
+        fruitsTransactions
+                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
+                        null, 10));
+        assertThrows(ValidationDataException.class,
+                () -> handleProcessTest.processAction(fruitsTransactions));
+    }
+
+    @Test
+    void processHandle_isEmptyNameFruit_notOk() {
+        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
+        fruitsTransactions
+                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
+                        "", 10));
+        assertThrows(ValidationDataException.class,
+                () -> handleProcessTest.processAction(fruitsTransactions));
+    }
+
+    @Test
+    void processHandle_isNotExistProduct_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
@@ -169,8 +125,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isReturn_ok() {
-        String[] dataFile = {"b,apple,20", "r,apple,10"};
+    void processHandle_isFirstTest_ok() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
@@ -178,66 +133,35 @@ public class ProcessStoreServiceTest {
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
                         "apple", 20));
-        boolean actual = handleProcessTest.processAction(fruitsTransactions);
-        assertTrue(actual);
+        handleProcessTest.processAction(fruitsTransactions);
+        Integer actual = fruitDB.getFruit("apple");
+        Integer expected = 40;
+        assertTrue(expected.equals(actual));
     }
 
     @Test
-    void processHandle_isSupplyNullData_notOk() {
-        Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMapTestTemp =
-                new HashMap<>();
-        actionHandlerMapTestTemp.put(FruitTransaction.ActionType.BALANCE,
-                new BalanceActionHandler(fruitDB));
-        actionHandlerMapTestTemp.put(FruitTransaction.ActionType.PURCHASE,
-                new SupplyActionHandler(null));
-        ActionStrategy actionStrategyTestTemp =
-                new ActionStrategyImpl(actionHandlerMapTestTemp);
-        ProcessStoreService handleProcessTestTemp =
-                new ProcessStoreServiceImpl(actionStrategyTestTemp);
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "banana", 20));
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.SUPPLY,
-                        "banana", 10));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTestTemp.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isSupplyEmptyStorage_notOk() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.SUPPLY,
-                        "banana", 10));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTest.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isSupplyNotExistProduct_notOk() {
+    void processHandle_isSecondTest_ok() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
                         "apple", 20));
         fruitsTransactions
+                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
+                        "banana", 10));
+        fruitsTransactions
+                .add(new FruitTransaction(FruitTransaction.ActionType.PURCHASE,
+                        "banana", 10));
+        fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.SUPPLY,
                         "banana", 10));
-        assertThrows(ValidationDataException.class,
-                () -> handleProcessTest.processAction(fruitsTransactions));
-    }
-
-    @Test
-    void processHandle_isSupply_ok() {
-        List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "apple", 20));
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.SUPPLY,
+                .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
                         "apple", 10));
-        boolean actual = handleProcessTest.processAction(fruitsTransactions);
-        assertTrue(actual);
+        handleProcessTest.processAction(fruitsTransactions);
+        Integer actualFirst = fruitDB.getFruit("apple");
+        Integer actualSecond = fruitDB.getFruit("banana");
+        Integer expectedFirst = 30;
+        Integer expectedSecond = 10;
+        assertTrue((expectedFirst.equals(actualFirst) && expectedSecond.equals(actualSecond)));
     }
 }

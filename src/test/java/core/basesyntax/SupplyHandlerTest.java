@@ -28,14 +28,14 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    void supplyHandle_isNullStorage_notOk() {
+    void supplyHandle_nullStorage_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> new BalanceActionHandler(null)
                         .executeAction("banana", 20));
     }
 
     @Test
-    void supplyHandle_isGoodNameEmpty_ok() {
+    void supplyHandle_emptyName_ok() {
         fruitDB.add("banana", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -43,7 +43,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    void supplyHandle_isGoodValueNull_ok() {
+    void supplyHandle_nullValue_ok() {
         fruitDB.add("banana", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -51,7 +51,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    void supplyHandle_isGoodValueNegative_ok() {
+    void supplyHandle_negativeValue_ok() {
         fruitDB.add("banana", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -59,7 +59,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    void supplyHandle_isNotContainFruit_ok() {
+    void supplyHandle_notContainFruit_ok() {
         fruitDB.add("apple", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -67,7 +67,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    void supplyHandle_isFirstTest_ok() {
+    void supplyHandle_correctTestOneAction_ok() {
         fruitDB.add("banana", 30);
         actionHandler.executeAction("banana", 20);
         Integer actual = fruitDB.getFruit("banana");
@@ -76,7 +76,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    void supplyHandle_isSecondTest_ok() {
+    void supplyHandle_correctTestTwoActions_ok() {
         fruitDB.add("banana", 40);
         fruitDB.add("apple", 40);
         actionHandler.executeAction("banana", 20);

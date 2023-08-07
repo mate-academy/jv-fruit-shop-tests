@@ -12,7 +12,7 @@ public class WriteFileServiceImpl implements WriteFileService {
         validateData(result, fileName);
         try (FileWriter writer = new FileWriter(fileName)) {
             for (String strResult : result) {
-                writer.write(strResult);
+                writer.write(strResult + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new ValidationDataException("Can't write the data to the file " + fileName, e);

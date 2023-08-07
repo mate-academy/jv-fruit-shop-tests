@@ -36,19 +36,19 @@ public class ParseCsvServiceTest {
     }
 
     @Test
-    void parse_isNullData_notOk() {
+    void parse_nullData_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> parseCsvServiceTest.parse(null));
     }
 
     @Test
-    void parse_isEmptyData_notOk() {
+    void parse_emptyData_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> parseCsvServiceTest.parse(new String[0]));
     }
 
     @Test
-    void parse_isValidData_ok() {
+    void parse_validData_ok() {
         List<String[]> actual = parseCsvServiceTest.parse(defaultCorrectData);
         List<String[]> expected = defaultCorrectParseData;
         assertTrue(Arrays.deepEquals(expected.toArray(), actual.toArray()));

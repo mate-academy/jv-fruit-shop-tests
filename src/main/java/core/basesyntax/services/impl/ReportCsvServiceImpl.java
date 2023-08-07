@@ -32,8 +32,7 @@ public class ReportCsvServiceImpl implements ReportCsvService {
             Integer value = entry.getValue();
             validateData(key, value);
             ++index;
-            reportWrite[index] = System.lineSeparator()
-                    + key + ConstantsForCsvParse.COMMA + value;
+            reportWrite[index] = key + ConstantsForCsvParse.COMMA + value;
         }
         return reportWrite;
     }

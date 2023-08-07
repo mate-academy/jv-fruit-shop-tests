@@ -13,17 +13,17 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class CreateTransactionsTest {
+public class CreateTaskServiceTest {
     private static CreateTaskService createTaskServiceTest;
 
     @BeforeAll
-    static void createDataToTransactionsTest() {
+    static void createDataForTransactionsTest() {
         createTaskServiceTest = new CreateTaskServiceImpl();
 
     }
 
     @Test
-    void transaction_isActionTypeNotCorrect_notOk() {
+    void transaction_actionTypeNotCorrect_notOk() {
         List<String[]> actual = new ArrayList<>();
         actual.add(new String[] {"n", "banana", "20"});
         assertThrows(ValidationDataException.class,
@@ -31,7 +31,7 @@ public class CreateTransactionsTest {
     }
 
     @Test
-    void transaction_isNameEmpty_notOk() {
+    void transaction_emptyName_notOk() {
         List<String[]> actual = new ArrayList<>();
         actual.add(new String[] {"b", "", "20"});
         assertThrows(ValidationDataException.class,
@@ -39,7 +39,7 @@ public class CreateTransactionsTest {
     }
 
     @Test
-    void transaction_isValueEmpty_notOk() {
+    void transaction_emptyValue_notOk() {
         List<String[]> actual = new ArrayList<>();
         actual.add(new String[] {"b", "banana", ""});
         assertThrows(ValidationDataException.class,
@@ -47,7 +47,7 @@ public class CreateTransactionsTest {
     }
 
     @Test
-    void transaction_isValueLessZero_notOk() {
+    void transaction_lessZeroValue_notOk() {
         List<String[]> actual = new ArrayList<>();
         actual.add(new String[] {"b", "banana", "-4"});
         assertThrows(ValidationDataException.class,
@@ -55,7 +55,7 @@ public class CreateTransactionsTest {
     }
 
     @Test
-    void transaction_isOneLineCorrect_ok() {
+    void transaction_correctOneLine_ok() {
         FruitTransaction fruit = new FruitTransaction(FruitTransaction.ActionType.BALANCE,
                 "banana", 30);
         List<FruitTransaction> expected = new ArrayList<>();
@@ -68,7 +68,7 @@ public class CreateTransactionsTest {
     }
 
     @Test
-    void transaction_isThreeLinesCorrect_ok() {
+    void transaction_correctThreeLines_ok() {
         FruitTransaction fruitOne = new FruitTransaction(FruitTransaction.ActionType.BALANCE,
                 "banana", 40);
         FruitTransaction fruitTwo = new FruitTransaction(FruitTransaction.ActionType.PURCHASE,

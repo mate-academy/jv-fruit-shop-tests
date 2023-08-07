@@ -28,14 +28,14 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseHandle_isNullStorage_notOk() {
+    void purchaseHandle_nullStorage_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> new BalanceActionHandler(null)
                         .executeAction("banana", 20));
     }
 
     @Test
-    void purchaseHandle_isPurchaseGoodNameEmpty_ok() {
+    void purchaseHandle_emptyName_ok() {
         fruitDB.add("banana", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -43,7 +43,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseHandle_isPurchaseGoodValueNull_ok() {
+    void purchaseHandle_nullValue_ok() {
         fruitDB.add("banana", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -51,7 +51,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseHandle_isPurchaseGoodValueNegative_ok() {
+    void purchaseHandle_negativeValue_ok() {
         fruitDB.add("banana", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -59,7 +59,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseHandle_isNotContainFruit_ok() {
+    void purchaseHandle_notContainFruit_ok() {
         fruitDB.add("apple", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
@@ -67,7 +67,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseHandle_isPurchaseFirst_ok() {
+    void purchaseHandle_correctTestOneAction_ok() {
         fruitDB.add("banana", 30);
         actionHandler.executeAction("banana", 20);
         Integer actual = fruitDB.getFruit("banana");
@@ -76,7 +76,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseHandle_isPurchaseSecond_ok() {
+    void purchaseHandle_correctTestTwoActions_ok() {
         fruitDB.add("banana", 40);
         fruitDB.add("apple", 40);
         actionHandler.executeAction("banana", 20);

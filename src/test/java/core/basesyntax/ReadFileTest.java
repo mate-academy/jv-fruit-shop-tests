@@ -27,26 +27,26 @@ public class ReadFileTest {
     }
 
     @Test
-    void read_isPathEmpty_notOk() {
+    void read_emptyPath_notOk() {
         assertThrows(ValidationDataException.class, () -> new ReadFileServiceImpl().read(""));
     }
 
     @Test
-    void read_isFileEmpty_notOk() {
+    void read_emptyFile_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> readFileServiceTest
                         .read("resources/testFiles/inputFileTestEmpty.csv"));
     }
 
     @Test
-    void read_isNotCorrectPath_notOk() {
+    void read_notCorrectPath_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> readFileServiceTest
                         .read("resources/newFolder/inputFileTestEmpty.csv"));
     }
 
     @Test
-    void read_isPathRightAndFilledFile_ok() {
+    void read_CorrectTest_ok() {
         String[] actual = readFileServiceTest
                 .read("resources/testFiles/inputFileTestCorrectLines.csv");
         String[] expected = defaultCorrectData;

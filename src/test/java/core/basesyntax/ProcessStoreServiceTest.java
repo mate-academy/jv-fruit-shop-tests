@@ -51,21 +51,21 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isFruitTransactionsNull_notOk() {
+    void processHandle_nullFruitTransition_notOk() {
         List<FruitTransaction> fruitsTransactions = null;
         assertThrows(ValidationDataException.class,
                 () -> handleProcessTest.processAction(fruitsTransactions));
     }
 
     @Test
-    void processHandle_isFruitTransactionsIsEmpty_notOk() {
+    void processHandle_emptyFruitTransition_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         assertThrows(ValidationDataException.class,
                 () -> handleProcessTest.processAction(fruitsTransactions));
     }
 
     @Test
-    void processHandle_isNullData_notOk() {
+    void processHandle_nullStorage_notOk() {
         Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMapTestTemp = new HashMap<>();
         actionHandlerMapTestTemp.put(FruitTransaction.ActionType.BALANCE,
                 new BalanceActionHandler(null));
@@ -82,7 +82,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isEmptyStorage_notOk() {
+    void processHandle_emptyStorage_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
@@ -92,7 +92,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isNullNameFruit_notOk() {
+    void processHandle_nullNameFruit_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
@@ -102,7 +102,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isEmptyNameFruit_notOk() {
+    void processHandle_emptyNameFruit_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
@@ -112,7 +112,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isNotExistProduct_notOk() {
+    void processHandle_notExistProduct_notOk() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
@@ -125,7 +125,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isFirstTest_ok() {
+    void processHandle_correctTestTwoTransactions_ok() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
@@ -140,7 +140,7 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_isSecondTest_ok() {
+    void processHandle_correctTestFiveTransactions_ok() {
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,

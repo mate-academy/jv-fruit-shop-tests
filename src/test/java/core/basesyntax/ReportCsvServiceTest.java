@@ -28,51 +28,51 @@ public class ReportCsvServiceTest {
     }
 
     @Test
-    void reportCsv_isNullStorage_notOk() {
+    void reportCsv_nullStorage_notOk() {
         ReportCsvService reportCsvServiceTemp = new ReportCsvServiceImpl(null);
         assertThrows(ValidationDataException.class,
                 () -> reportCsvServiceTemp.createReport());
     }
 
     @Test
-    void reportCsv_isNullFirst_notOk() {
+    void reportCsv_nullFruit_notOk() {
         fruitDB.add(null, 20);
         assertThrows(ValidationDataException.class,
                 () -> reportCsvServiceTest.createReport());
     }
 
     @Test
-    void reportCsv_isEmptyFirst_notOk() {
+    void reportCsv_emptyFruit_notOk() {
         fruitDB.add("", 20);
         assertThrows(ValidationDataException.class,
                 () -> reportCsvServiceTest.createReport());
     }
 
     @Test
-    void reportCsv_isNullSecond_notOk() {
+    void reportCsv_nullValue_notOk() {
         fruitDB.add("banana", null);
         assertThrows(ValidationDataException.class,
                 () -> reportCsvServiceTest.createReport());
     }
 
     @Test
-    void reportCsv_isOneLineCorrect_ok() {
+    void reportCsv_correctTestOneFruit_ok() {
         fruitDB.add("banana", 20);
-        String[] expected = {"fruit,quantity", System.lineSeparator() + "banana,20"};
+        String[] expected = {"fruit,quantity", "banana,20"};
         String[] actual = reportCsvServiceTest.createReport();
         assertTrue(Arrays.deepEquals(expected, actual));
     }
 
     @Test
-    void reportCsv_isStorageThreeLineCorrect_ok() {
+    void reportCsv_correctTestThreeFruits_ok() {
         fruitDB.add("banana", 20);
         fruitDB.add("apple", 50);
         fruitDB.add("orange", 90);
         String[] expected =
                 {"fruit,quantity",
-                        System.lineSeparator() + "banana,20",
-                        System.lineSeparator() + "orange,90",
-                        System.lineSeparator() + "apple,50"};
+                        "banana,20",
+                        "orange,90",
+                        "apple,50"};
         String[] actual = reportCsvServiceTest.createReport();
         assertTrue(Arrays.deepEquals(expected, actual));
     }

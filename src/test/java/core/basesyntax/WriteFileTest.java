@@ -18,33 +18,33 @@ public class WriteFileTest {
     }
 
     @Test
-    void writeFile_isDataIsNull_notOk() {
+    void writeFile_nullData_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> writeFileServiceTest.writeToFile(null, "path"));
     }
 
     @Test
-    void writeFile_isDataIsEmpty_notOk() {
+    void writeFile_emptyData_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> writeFileServiceTest.writeToFile(new String[0], "path"));
     }
 
     @Test
-    void writeFile_isPathIsNull_notOk() {
+    void writeFile_nullPath_notOk() {
         String[] result = {"test", "test"};
         assertThrows(ValidationDataException.class,
                 () -> writeFileServiceTest.writeToFile(result, null));
     }
 
     @Test
-    void writeFile_isIsEmpty_notOk() {
+    void writeFile_emptyPath_notOk() {
         String[] result = {"test", "test"};
         assertThrows(ValidationDataException.class,
                 () -> writeFileServiceTest.writeToFile(result, ""));
     }
 
     @Test
-    void writeFile_isCorrect_ok() {
+    void writeFile_correctTest_ok() {
         String[] result = {"test", "test"};
         boolean actual = writeFileServiceTest
                 .writeToFile(result,

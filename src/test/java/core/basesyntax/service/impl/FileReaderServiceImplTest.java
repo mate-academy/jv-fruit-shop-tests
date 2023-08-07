@@ -21,7 +21,8 @@ class FileReaderServiceImplTest {
     public void readFromFile_ok() {
         String validFilePath = "src/test/resources/test_transaction.csv";
         List<String> strings = readerService.readFromFile(validFilePath);
-        assertEquals(1, strings.size()," list should contains only one transaction");
+        int expectedSize = 1;
+        assertEquals(expectedSize, strings.size()," list should contains only one transaction");
         String expected = strings.get(0);
         assertEquals(expected, "b,banana,30",
                 "first element of list must be: 'b,banana,30'");

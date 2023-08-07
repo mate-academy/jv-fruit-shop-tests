@@ -13,44 +13,35 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 public class ReadServiceImplTest {
-    private ReadServiceImpl fileReader = new ReadServiceImpl();
-    private String tempFileName;
-
-    @BeforeEach
-    public void setUp() {
-        tempFileName = "src/test/java/resources/temp_file.csv";
-    }
-
-    @AfterEach
-    public void tearDown() {
-        deleteTemporaryFile(tempFileName);
-    }
+    private static final String TEMP_FILE_PATH = "src/test/java/resources/temp_file.csv";
+    private static final String NONEXISTENT_FILE_PATH = "src/test/java/resources/nonexistent_file.csv";
+    private static final String EMPTY_INPUT_FILE_PATH = "src/test/java/resources/empty_input.csv";
+    private final ReadServiceImpl fileReader = new ReadServiceImpl();
 
     @Test
     public void read_ValidFile_Ok() {
-        String tempFileName = "src/test/java/resources/temp_file.csv";
         String tempFileData = "Line 1\nLine 2\nLine 3";
         String expectedData = "Line 2" + System.lineSeparator() + "Line 3";
-        createTemporaryFile(tempFileName, tempFileData);
+        createTemporaryFile(TEMP_FILE_PATH, tempFileData);
 
-        String dataFromFile = fileReader.read(tempFileName);
+        String dataFromFile = fileReader.read(TEMP_FILE_PATH);
         assertEquals(dataFromFile, expectedData);
 
-        deleteTemporaryFile(tempFileName);
+        deleteTemporaryFile(TEMP_FILE_PATH);
     }
 
     @Test
     public void read_FileNotFound_ExceptionThrown_notOk() {
         FileReadException fileReadException = assertThrows(
                 FileReadException.class, () -> fileReader.read(
-                        "src/test/java/resources/nonexistent_file.csv"));
+                        NONEXISTENT_FILE_PATH));
         assertEquals("File not found: src/test/java/resources/nonexistent_file.csv",
                 fileReadException.getMessage());
     }
 
     @Test
     public void read_EmptyFile_EmptyStringReturned_ok() {
-        String dataFromFile = fileReader.read("src/test/java/resources/empty_input.csv");
+        String dataFromFile = fileReader.read(EMPTY_INPUT_FILE_PATH);
         assertEquals("", dataFromFile);
     }
 

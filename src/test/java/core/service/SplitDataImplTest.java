@@ -2,97 +2,78 @@ package core.service;
 
 import java.util.List;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class SplitDataImplTest {
+    private static final String VALID_DATA = "p,Apple,5" + System.lineSeparator()
+            + "s,Banana,10" + System.lineSeparator()
+            + "r,Orange,3";
+
+    private static final String INVALID_DATA = "p,Apple 5" + System.lineSeparator()
+            + "s,Banana,10" + System.lineSeparator()
+            + "r,Orange,3";
+
+    private static final String INVALID_QUANTITY_DATA = "p,Apple,5" + System.lineSeparator()
+            + "s,Banana,abc" + System.lineSeparator()
+            + "r,Orange,3";
+
+    private static final String UNKNOWN_OPERATION_DATA = "p,Apple,5" + System.lineSeparator()
+            + "u,Banana,10" + System.lineSeparator()
+            + "r,Orange,3";
+
+    private static final String EMPTY_DATA = "";
+
     private SplitDataImpl splitData = new SplitDataImpl();
 
     @Test
-    public void testSplitData_ValidData_ok() {
-        String data = "p,Apple,5" + System.lineSeparator()
-                + "s,Banana,10" + System.lineSeparator()
-                + "r,Orange,3";
+    public void testSplitData_ValidData() {
+        List<OperationData> result = splitData.splitData(VALID_DATA);
 
-        List<OperationData> result = splitData.splitData(data);
-
-        Assertions.assertEquals(3, result.size());
-
-        Assertions.assertEquals(OperationType.P, result.get(0).getOperationType());
-        Assertions.assertEquals("Apple", result.get(0).getProduct());
-        Assertions.assertEquals(5, result.get(0).getQuantity());
-
-        Assertions.assertEquals(OperationType.S, result.get(1).getOperationType());
-        Assertions.assertEquals("Banana", result.get(1).getProduct());
-        Assertions.assertEquals(10, result.get(1).getQuantity());
-
-        Assertions.assertEquals(OperationType.R, result.get(2).getOperationType());
-        Assertions.assertEquals("Orange", result.get(2).getProduct());
-        Assertions.assertEquals(3, result.get(2).getQuantity());
+        assertAll(() -> assertEquals(3, result.size()),
+                () -> assertOperationData(result.get(0), OperationType.P, "Apple", 5),
+                () -> assertOperationData(result.get(1), OperationType.S, "Banana", 10),
+                () -> assertOperationData(result.get(2), OperationType.R, "Orange", 3));
     }
 
     @Test
-    public void testSplitData_InvalidData_ok() {
-        String data = "p,Apple 5" + System.lineSeparator()
-                + "s,Banana,10" + System.lineSeparator()
-                + "r,Orange,3";
+    public void testSplitData_InvalidData() {
+        List<OperationData> result = splitData.splitData(INVALID_DATA);
 
-        List<OperationData> result = splitData.splitData(data);
-
-        Assertions.assertEquals(2, result.size());
-
-        Assertions.assertEquals(OperationType.S, result.get(0).getOperationType());
-        Assertions.assertEquals("Banana", result.get(0).getProduct());
-        Assertions.assertEquals(10, result.get(0).getQuantity());
-
-        Assertions.assertEquals(OperationType.R, result.get(1).getOperationType());
-        Assertions.assertEquals("Orange", result.get(1).getProduct());
-        Assertions.assertEquals(3, result.get(1).getQuantity());
+        assertAll(() -> assertEquals(2, result.size()),
+                () -> assertOperationData(result.get(0), OperationType.S, "Banana", 10),
+                () -> assertOperationData(result.get(1), OperationType.R, "Orange", 3));
     }
 
     @Test
-    public void testSplitData_InvalidQuantity_ok() {
-        String data = "p,Apple,5" + System.lineSeparator()
-                + "s,Banana,abc" + System.lineSeparator()
-                + "r,Orange,3";
+    public void testSplitData_InvalidQuantity() {
+        List<OperationData> result = splitData.splitData(INVALID_QUANTITY_DATA);
 
-        List<OperationData> result = splitData.splitData(data);
-
-        Assertions.assertEquals(2, result.size());
-
-        Assertions.assertEquals(OperationType.P, result.get(0).getOperationType());
-        Assertions.assertEquals("Apple", result.get(0).getProduct());
-        Assertions.assertEquals(5, result.get(0).getQuantity());
-
-        Assertions.assertEquals(OperationType.R, result.get(1).getOperationType());
-        Assertions.assertEquals("Orange", result.get(1).getProduct());
-        Assertions.assertEquals(3, result.get(1).getQuantity());
+        assertAll(() -> assertEquals(2, result.size()),
+                () -> assertOperationData(result.get(0), OperationType.P, "Apple", 5),
+                () -> assertOperationData(result.get(1), OperationType.R, "Orange", 3));
     }
 
     @Test
-    public void testSplitData_UnknownOperationType_ok() {
-        String data = "p,Apple,5" + System.lineSeparator()
-                + "u,Banana,10" + System.lineSeparator()
-                + "r,Orange,3";
+    public void testSplitData_UnknownOperationType() {
+        List<OperationData> result = splitData.splitData(UNKNOWN_OPERATION_DATA);
 
-        List<OperationData> result = splitData.splitData(data);
-
-        Assertions.assertEquals(2, result.size());
-
-        Assertions.assertEquals(OperationType.P, result.get(0).getOperationType());
-        Assertions.assertEquals("Apple", result.get(0).getProduct());
-        Assertions.assertEquals(5, result.get(0).getQuantity());
-
-        Assertions.assertEquals(OperationType.R, result.get(1).getOperationType());
-        Assertions.assertEquals("Orange", result.get(1).getProduct());
-        Assertions.assertEquals(3, result.get(1).getQuantity());
+        assertAll(() -> assertEquals(2, result.size()),
+                () -> assertOperationData(result.get(0), OperationType.P, "Apple", 5),
+                () -> assertOperationData(result.get(1), OperationType.R, "Orange", 3));
     }
 
     @Test
-    public void testSplitData_EmptyData_ok() {
-        String data = "";
+    public void testSplitData_EmptyData() {
+        List<OperationData> result = splitData.splitData(EMPTY_DATA);
 
-        List<OperationData> result = splitData.splitData(data);
+        assertEquals(0, result.size());
+    }
 
-        Assertions.assertEquals(0, result.size());
+    private void assertOperationData(OperationData data, OperationType type, String product, int quantity) {
+        assertEquals(type, data.getOperationType());
+        assertEquals(product, data.getProduct());
+        assertEquals(quantity, data.getQuantity());
     }
 }

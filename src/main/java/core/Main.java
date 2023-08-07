@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String PathFrom = "src/main/dataBase.csv";
-    private static final String pathTo = "firstReport";
+    private static final String PathFrom = "src/main/inputData.csv";
+    private static final String pathTo = "report";
     private static Map<OperationType, OperationHandler> strategyMap = new HashMap<>();
 
     public static void main(String[] args) {

@@ -23,13 +23,25 @@ public class WriteReportServiceImplTest {
     }
 
     @Test
-    public void testCreateReport_SuccessfulWrite_ok() throws IOException {
+    public void testCreateReport_SuccessfulWrite() throws IOException {
         String reportData = "Apple,200" + "\n"
-                          + "Orange,300";
+                + "Orange,300";
         writeReportService.createReport(TEST_FILE_PATH, reportData);
 
         assertTrue(Files.exists(Paths.get(TEST_FILE_PATH)));
+        assertReportContentMatches(reportData);
+    }
 
+    @Test
+    public void testCreateReport_ReportWriteException() {
+        String invalidFilePath = "invalid/path/to/report.csv";
+        String reportData = "Apple,200\nOrange,300";
+
+        assertThrows(ReportWriteException.class, () ->
+                writeReportService.createReport(invalidFilePath, reportData));
+    }
+
+    private void assertReportContentMatches(String expectedContent) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE_PATH))) {
             String line;
             int lineCount = 0;
@@ -37,20 +49,11 @@ public class WriteReportServiceImplTest {
                 if (lineCount == 0) {
                     assertEquals("fruit,quantity", line);
                 } else {
-                    assertEquals(reportData.split("\n")[lineCount - 1], line);
+                    assertEquals(expectedContent.split("\n")[lineCount - 1], line);
                 }
                 lineCount++;
             }
-            assertEquals(reportData.split("\n").length, lineCount - 1);
+            assertEquals(expectedContent.split("\n").length, lineCount - 1);
         }
-    }
-
-    @Test
-    public void testCreateReport_ReportWriteException_notOk() {
-        String invalidFilePath = "invalid/path/to/report.csv";
-        String reportData = "Apple,200\nOrange,300";
-
-        assertThrows(ReportWriteException.class, () ->
-                writeReportService.createReport(invalidFilePath, reportData));
     }
 }

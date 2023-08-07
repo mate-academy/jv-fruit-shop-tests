@@ -1,9 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.service.interfaces.TransactionStrategy;
-import core.basesyntax.service.transaction.TransactionHandler;
-import org.junit.jupiter.api.Assertions;
+import core.basesyntax.service.transaction.impl.BalanceTransactionHandler;
+import core.basesyntax.service.transaction.impl.PurchaseTransactionHandler;
+import core.basesyntax.service.transaction.impl.ReturnTransactionHandler;
+import core.basesyntax.service.transaction.impl.SupplyTransactionHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,34 +21,26 @@ class TransactionStrategyImplTest {
 
     @Test
     void getReturnHandler_OK() {
-        TransactionHandler returnHandler =
-                TransactionStrategyImpl.handlers.get(FruitShopOperation.RETURN);
-        Assertions.assertEquals(returnHandler,
-                transactionStrategy.get(FruitShopOperation.RETURN));
+        assertEquals(ReturnTransactionHandler.class,
+                transactionStrategy.get(FruitShopOperation.RETURN).getClass());
     }
 
     @Test
     void getSupplyHandler_OK() {
-        TransactionHandler supplyHandler =
-                TransactionStrategyImpl.handlers.get(FruitShopOperation.SUPPLY);
-        Assertions.assertEquals(supplyHandler,
-                transactionStrategy.get(FruitShopOperation.SUPPLY));
+        assertEquals(SupplyTransactionHandler.class,
+                transactionStrategy.get(FruitShopOperation.SUPPLY).getClass());
     }
 
     @Test
     void getPurchaseHandler_OK() {
-        TransactionHandler purchaseHandler =
-                TransactionStrategyImpl.handlers.get(FruitShopOperation.PURCHASE);
-        Assertions.assertEquals(purchaseHandler,
-                transactionStrategy.get(FruitShopOperation.PURCHASE));
+        assertEquals(PurchaseTransactionHandler.class,
+                transactionStrategy.get(FruitShopOperation.PURCHASE).getClass());
     }
 
     @Test
     void getBalanceHandler_OK() {
-        TransactionHandler balanceHandler =
-                TransactionStrategyImpl.handlers.get(FruitShopOperation.BALANCE);
-        Assertions.assertEquals(balanceHandler,
-                transactionStrategy.get(FruitShopOperation.BALANCE));
+        assertEquals(BalanceTransactionHandler.class,
+                transactionStrategy.get(FruitShopOperation.BALANCE).getClass());
     }
 }
 

@@ -1,8 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.service.interfaces.TransactionValidator;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +32,7 @@ class TransactionValidatorImplTest {
     void validate_OK() {
         String input = HEADING + System.lineSeparator()
                 + VALID_RECORD + System.lineSeparator();
-        Assertions.assertDoesNotThrow(() -> validator.validate(input));
+        assertDoesNotThrow(() -> validator.validate(input));
     }
 
     @Test
@@ -38,7 +41,7 @@ class TransactionValidatorImplTest {
                 + VALID_RECORD + System.lineSeparator()
                 + VALID_PURCHASE_RECORD + System.lineSeparator();
         validator.validate(input);
-        Assertions.assertDoesNotThrow(() -> new InvalidDataException("Data is invalid"));
+        assertDoesNotThrow(() -> validator.validate(input));
     }
 
     @Test
@@ -47,7 +50,7 @@ class TransactionValidatorImplTest {
                 + VALID_RECORD + System.lineSeparator()
                 + VALID_SUPPLY_RECORD + System.lineSeparator();
         validator.validate(input);
-        Assertions.assertDoesNotThrow(() -> new InvalidDataException("Data is invalid"));
+        assertDoesNotThrow(() -> validator.validate(input));
     }
 
     @Test
@@ -56,79 +59,79 @@ class TransactionValidatorImplTest {
                 + VALID_RECORD + System.lineSeparator()
                 + VALID_RETURN_RECORD + System.lineSeparator();
         validator.validate(input);
-        Assertions.assertDoesNotThrow(() -> new InvalidDataException("Data is invalid"));
+        assertDoesNotThrow(() -> validator.validate(input));
     }
 
     @Test
     void validate_headingNotEquals_NotOK() {
         String input = INVALID_HEADING + System.lineSeparator()
                 + VALID_RECORD + System.lineSeparator();
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The heading is not in correct format!";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 
     @Test
     void validate_headingEmpty_NotOK() {
         String input = EMPTY_HEADING + System.lineSeparator()
                 + VALID_RECORD + System.lineSeparator();
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The heading must not be empty!";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 
     @Test
     void validate_inputIsNull_NotOK() {
         String input = null;
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The input data must not be null!";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 
     @Test
     void validate_inputIsEmpty_NotOK() {
         String input = "";
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The input data must not be empty!";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 
     @Test
     void validate_transactionIncorrectFormat_NotOK() {
         String input = HEADING + System.lineSeparator()
                 + INVALID_RECORD_FORMAT + System.lineSeparator();
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The record doesn't have required format!banana,b,100";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 
     void validate_transactionInvalidOperationType_NotOK() {
         String input = HEADING + System.lineSeparator()
                 + INVALID_RECORD_OPERATION + System.lineSeparator();
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The Operation type is not valid! k,banana,100";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 
     void validate_transactionQuantityLessThanZero_NotOK() {
         String input = HEADING + System.lineSeparator()
                 + INVALID_RECORD_QUANTITY + System.lineSeparator();
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             validator.validate(input);
         });
         String expectedMessage = "The Operation type is not valid! k,banana,100";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 }

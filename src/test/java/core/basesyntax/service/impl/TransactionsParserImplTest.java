@@ -1,11 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.TransactionParser;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,17 +34,17 @@ class TransactionsParserImplTest {
                 FruitShopOperation.BALANCE, "apple", 50);
         FruitTransaction supplyBanana = new FruitTransaction(
                 FruitShopOperation.SUPPLY, "banana", 10);
-        Assertions.assertEquals(balanceBanana, fruitTransactions.get(0));
-        Assertions.assertEquals(balanceApple, fruitTransactions.get(1));
-        Assertions.assertEquals(supplyBanana, fruitTransactions.get(2));
+        assertEquals(balanceBanana, fruitTransactions.get(0));
+        assertEquals(balanceApple, fruitTransactions.get(1));
+        assertEquals(supplyBanana, fruitTransactions.get(2));
     }
 
     @Test
     void parseTransaction_nullData_NotOk() {
-        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+        InvalidDataException actual = assertThrows(InvalidDataException.class, () -> {
             transactionParser.parse(null);
         });
         String expected = "Data for transactions parsing must not be null!";
-        Assertions.assertEquals(expected, actual.getMessage());
+        assertEquals(expected, actual.getMessage());
     }
 }

@@ -1,7 +1,9 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.interfaces.ReaderService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,22 +18,22 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_OK() {
-        String input = "type,fruit,quantity" + System.lineSeparator()
+        String expected = "type,fruit,quantity" + System.lineSeparator()
                 + "b,banana,100" + System.lineSeparator()
                 + "b,apple,50" + System.lineSeparator()
                 + "s,banana,10";
         String transactionsFilePath = "src/test/resources/test_input.txt";
-        String actualData = readerService.readFromFile(transactionsFilePath);
-        Assertions.assertEquals(input, actualData, "Data read from file incorrectly!");
+        String actual = readerService.readFromFile(transactionsFilePath);
+        assertEquals(expected, actual, "Data read from file incorrectly!");
     }
 
     @Test
     void readFromNonExistingFile_ExceptionThrown() {
         String notExistingFilePath = "not_existing_path";
-        RuntimeException actual = Assertions.assertThrows(RuntimeException.class, () -> {
+        RuntimeException actual = assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(notExistingFilePath);
         });
         String expectedMessage = "Oops! File not found: not_existing_path";
-        Assertions.assertEquals(expectedMessage, actual.getMessage());
+        assertEquals(expectedMessage, actual.getMessage());
     }
 }

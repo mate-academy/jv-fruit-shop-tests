@@ -1,12 +1,13 @@
 package core.basesyntax.service.transaction.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.transaction.TransactionHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +30,7 @@ class BalanceTransactionHandlerTest {
                 Map.of("apple", 60, "banana", 60));
         balanceTransactionHandler.executeTransaction(transactionPineapple);
         balanceTransactionHandler.executeTransaction(transactionApple);
-        Assertions.assertEquals(expected, Storage.getAll(),
+        assertEquals(expected, Storage.getAll(),
                 "Balance operation doesn't work correctly: ");
-        Storage.clear();
     }
 }

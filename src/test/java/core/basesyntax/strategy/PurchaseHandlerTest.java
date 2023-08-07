@@ -20,7 +20,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseOperationNotEnoughAmount_NotOk() {
+    void purchaseOperationValidAmount_NotOk() {
         Storage.fruitsStorage.put("banana", 5);
         FruitTransaction invalidTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 6);

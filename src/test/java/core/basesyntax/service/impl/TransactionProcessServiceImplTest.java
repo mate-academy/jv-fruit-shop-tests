@@ -9,9 +9,6 @@ import core.basesyntax.service.OperationStrategyService;
 import core.basesyntax.service.TransactionProcessService;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.PurchaseHandler;
-import core.basesyntax.strategy.ReturnHandler;
-import core.basesyntax.strategy.SupplyHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +25,7 @@ class TransactionProcessServiceImplTest {
     @BeforeEach
     void setUp() {
         Map<FruitTransaction.Operation, OperationHandlerService> strategyMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                FruitTransaction.Operation.RETURN, new ReturnHandler(),
-                FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+                FruitTransaction.Operation.BALANCE, new BalanceHandler());
         transactionProcessService = new TransactionProcessServiceImpl(operationStrategyService);
         operationStrategyService = new OperationStrategyImpl(strategyMap);
     }

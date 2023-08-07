@@ -1,6 +1,5 @@
 package core.service;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,14 +9,10 @@ import core.exception.OperationHandlerException;
 import core.operationstrategy.OperationStrategyImpl;
 import core.transactions.BalanceOperationHandler;
 import core.transactions.OperationHandler;
-import core.transactions.PurchaseOperationHandler;
-import core.transactions.ReturnOperationHandler;
-import core.transactions.SupplyOperationHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

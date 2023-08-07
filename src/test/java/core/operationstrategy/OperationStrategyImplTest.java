@@ -10,7 +10,6 @@ import core.transactions.ReturnOperationHandler;
 import core.transactions.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

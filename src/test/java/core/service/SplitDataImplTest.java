@@ -1,10 +1,10 @@
 package core.service;
 
-import java.util.List;
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertAll;
+
+import java.util.List;
+import org.junit.Test;
 
 public class SplitDataImplTest {
     private static final String VALID_DATA = "p,Apple,5" + System.lineSeparator()
@@ -71,7 +71,8 @@ public class SplitDataImplTest {
         assertEquals(0, result.size());
     }
 
-    private void assertOperationData(OperationData data, OperationType type, String product, int quantity) {
+    private void assertOperationData(OperationData data,
+                                     OperationType type, String product, int quantity) {
         assertEquals(type, data.getOperationType());
         assertEquals(product, data.getProduct());
         assertEquals(quantity, data.getQuantity());

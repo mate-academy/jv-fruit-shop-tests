@@ -60,7 +60,7 @@ public class ProductTransactionStrategyTest {
     }
 
     @Test
-    void invalidCase_nullOperationType() {
+    void validCase_nullOperationType() {
         TransactionHandler actual = transactionStrategy.getHandler(null);
         assertNull(actual);
     }

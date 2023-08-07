@@ -16,9 +16,6 @@ import org.junit.jupiter.api.Test;
 import service.transaction.strategy.ProductTransactionStrategy;
 import service.transaction.strategy.TransactionStrategy;
 import service.transaction.strategy.type.BalanceTransaction;
-import service.transaction.strategy.type.PurchaseTransaction;
-import service.transaction.strategy.type.ReturnTransaction;
-import service.transaction.strategy.type.SupplyTransaction;
 import service.transaction.strategy.type.TransactionHandler;
 
 public class ProductTransactionExecutorTest {
@@ -30,9 +27,6 @@ public class ProductTransactionExecutorTest {
     static void beforeAll() {
         Map<FruitTransaction.OperationType, TransactionHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.OperationType.BALANCE, new BalanceTransaction());
-        handlers.put(FruitTransaction.OperationType.PURCHASE, new PurchaseTransaction());
-        handlers.put(FruitTransaction.OperationType.SUPPLY, new SupplyTransaction());
-        handlers.put(FruitTransaction.OperationType.RETURN, new ReturnTransaction());
         transactionStrategy = new ProductTransactionStrategy(handlers);
         dao = new StorageDao();
         transactionExecutor = new ProductTransactionExecutor(transactionStrategy, dao);

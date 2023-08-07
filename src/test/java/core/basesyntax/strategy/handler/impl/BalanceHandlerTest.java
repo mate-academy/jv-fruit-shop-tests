@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceHandlerTest {
+    private static final String VALID_FRUIT_NAME = "apple";
+    private static final int INITIAL_BALANCE = 10;
     private BalanceHandler balanceHandler;
 
     @BeforeEach
@@ -26,13 +28,13 @@ public class BalanceHandlerTest {
     public void handle_ValidTransaction_Ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        "apple", 10);
+                        VALID_FRUIT_NAME, INITIAL_BALANCE);
         balanceHandler.handle(fruitTransaction);
-        assertEquals(10, Storage.storage.get("apple"));
+        assertEquals(INITIAL_BALANCE, Storage.storage.get(VALID_FRUIT_NAME));
     }
 
     @Test
-    public void handle_InvalidTransaction_NotOk() {
+    public void handle_InvalidTransaction_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(null, null, 5);
         NullPointerException exception =
@@ -43,7 +45,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void handle_NegativeQuantity_NotOk() {
+    public void handle_NegativeQuantity_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         "banana", -20);

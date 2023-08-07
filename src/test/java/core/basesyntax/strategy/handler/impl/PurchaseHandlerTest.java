@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseHandlerTest {
-
     private PurchaseHandler purchaseHandler;
 
     @BeforeEach
@@ -34,7 +33,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void purchaseHandler_InsufficientStock_NotOk() {
+    public void purchaseHandler_InsufficientStock_notOk() {
         Storage.storage.put("banana", 10);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
@@ -46,7 +45,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void purchaseHandler_NullTransactionFruit_NotOk() {
+    public void purchaseHandler_NullTransactionFruit_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                        null, 5);
@@ -57,7 +56,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void purchaseHandler_NegativeQuantity_NotOk() {
+    public void purchaseHandler_NegativeQuantity_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                        "apple", -5);

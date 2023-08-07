@@ -34,7 +34,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void supplyHandler_InvalidTransactionWithNegativeQuantity_NotOk() {
+    public void supplyHandler_InvalidTransactionWithNegativeQuantity_notOk() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", -5);
@@ -45,7 +45,7 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void supplyHandler_NullTransaction_NotOk() {
+    public void supplyHandler_NullTransaction_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                         null, 5);

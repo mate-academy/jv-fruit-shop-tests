@@ -38,7 +38,7 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void writeToFile_InvalidPath_NotOk() {
+    public void writeToFile_InvalidPath_notOk() {
         String report = "fruit,quantity" + LINE_SEPARATOR
                 + "apple,20"
                 + LINE_SEPARATOR
@@ -51,7 +51,7 @@ public class WriteServiceImplTest {
     }
 
     @Test
-    public void writeToFile_NullReport_NotOk() {
+    public void writeToFile_NullReport_notOk() {
         IllegalArgumentException exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> writeService.writeToFile(PATH_TO_FILE, null));

@@ -39,8 +39,7 @@ public class FruitShopServiceImplTest {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        fruitShopService = new
-                FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
+        fruitShopService = new FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
 
     }
 
@@ -74,7 +73,7 @@ public class FruitShopServiceImplTest {
     }
 
     @Test
-    public void test_ProcessData_NotUpdateStorage_NotOk() {
+    public void test_ProcessData_NotUpdateStorage_notOk() {
         List<FruitTransaction> transactionList = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 0),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, BANANA, 0),

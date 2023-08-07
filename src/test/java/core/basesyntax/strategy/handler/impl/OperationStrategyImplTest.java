@@ -8,31 +8,31 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyImplTest {
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private OperationStrategy operationStrategy;
 
-    @Test
-    public void getHandler_ValidOperation_Ok() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-                = new HashMap<>();
+    @BeforeEach
+    public void setUp() {
+        operationHandlerMap = new HashMap<>();
         OperationHandler handler = new BalanceHandler();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, handler);
-        OperationStrategy operationStrategy =
-                new OperationStrategyImpl(operationHandlerMap);
-        OperationHandler actualHandler =
-                operationStrategy.getHandler(FruitTransaction.Operation.BALANCE);
-        assertEquals(handler, actualHandler);
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
     @Test
-    public void getHandler_InvalidOperation_NotOk() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-                = new HashMap<>();
-        OperationHandler handler = new BalanceHandler();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, handler);
-        OperationStrategy operationStrategy =
-                new OperationStrategyImpl(operationHandlerMap);
+    public void getHandler_ValidOperation_Ok() {
+        OperationHandler actualHandler = operationStrategy.getHandler(
+                FruitTransaction.Operation.BALANCE);
+        assertEquals(operationHandlerMap.get(FruitTransaction.Operation.BALANCE),
+                actualHandler);
+    }
+
+    @Test
+    public void getHandler_InvalidOperation_notOk() {
         IllegalArgumentException exception =
                     assertThrows(IllegalArgumentException.class, ()
                             -> operationStrategy.getHandler(FruitTransaction.Operation.SUPPLY));
@@ -41,12 +41,7 @@ public class OperationStrategyImplTest {
     }
 
     @Test
-    public void getHandler_NullOperation_NotOk() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-                = new HashMap<>();
-        OperationHandler handler = new BalanceHandler();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, handler);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+    public void getHandler_NullOperation_notOk() {
         NullPointerException exception =
                 assertThrows(NullPointerException.class, ()
                         -> operationStrategy.getHandler(null));

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnHandlerTest {
-
     private ReturnHandler returnHandler;
 
     @BeforeEach
@@ -34,7 +33,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void returnHandler_NullTransaction_NotOk() {
+    public void returnHandler_NullTransaction_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,
                         null, 5);
@@ -45,7 +44,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void returnHandler_NegativeQuantity_NotOk() {
+    public void returnHandler_NegativeQuantity_notOk() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,
                         "apple", -5);

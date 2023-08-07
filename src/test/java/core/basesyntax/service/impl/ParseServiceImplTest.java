@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class ParseServiceImplTest {
     private static final String HEAD_FILE = "operation,fruit,quantity";
-    private static final String INVALID_BALANCE_STRING = "b,apple";
+    private static final String INVALID_BALANCE_STRING = "b,apple,5A";
     private static final String APPLE = "apple";
     private static final String ORANGE = "orange";
     private static final String VALID_BALANCE_APPLE = "b,apple,10";
@@ -59,11 +60,8 @@ public class ParseServiceImplTest {
                 HEAD_FILE,
                 INVALID_BALANCE_STRING,
                 VALID_SUPPLY_ORANGE);
-        try {
-            parseService.parse(list);
+        assertThrows(IllegalArgumentException.class, ()
+                -> parseService.parse(list));
 
-        } catch (IllegalArgumentException e) {
-            assertEquals("Expected IllegalArgumentException", e.getMessage());
-        }
     }
 }

@@ -1,21 +1,22 @@
 package core.basesyntax.service.activity.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
 import core.basesyntax.db.FruitsDb;
 import core.basesyntax.model.FruitActivity;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class SupplyHandlerTest {
 
@@ -36,7 +37,9 @@ class SupplyHandlerTest {
 
     @ParameterizedTest
     @MethodSource("validSupplyActivities")
-    void handleActvity_validSupplyActivitiy_Ok(List<FruitActivity> activities, Map<String, Integer> expected) {
+    void handleActvity_validSupplyActivitiy_Ok(
+            List<FruitActivity> activities, Map<String, Integer> expected
+    ) {
         assertDoesNotThrow(() -> {
             for (FruitActivity activity : activities) {
                 supplyHandler.processActivity(activity);

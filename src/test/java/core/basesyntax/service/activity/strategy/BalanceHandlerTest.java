@@ -33,7 +33,9 @@ class BalanceHandlerTest {
 
     @ParameterizedTest
     @MethodSource("validBalanceActivities")
-    void handleActvity_validBalanceActivitiy_Ok(List<FruitActivity> activities, Map<String, Integer> expected) {
+    void handleActvity_validBalanceActivitiy_Ok(
+            List<FruitActivity> activities, Map<String, Integer> expected
+    ) {
         assertDoesNotThrow(() -> {
             for (FruitActivity activity : activities) {
                 balanceHandler.processActivity(activity);

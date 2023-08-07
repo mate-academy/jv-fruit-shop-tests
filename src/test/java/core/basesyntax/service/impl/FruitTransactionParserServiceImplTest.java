@@ -20,7 +20,7 @@ class FruitTransactionParserServiceImplTest {
     }
 
     @Test
-    void stringToFruitTransactions_ok() {
+    void stringToFruitTransactions_validTransaction_ok() {
         List<String> strings = List.of("b,banana,20","s,banana,10","p,banana,13","r,banana,2");
         List<FruitTransaction> transactionList = parserService.stringToFruitTransactions(strings);
         int expectedSize = 4;

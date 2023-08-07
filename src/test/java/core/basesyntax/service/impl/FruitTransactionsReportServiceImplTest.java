@@ -22,7 +22,7 @@ class FruitTransactionsReportServiceImplTest {
     }
 
     @Test
-    void createReport_ok() {
+    void createReport_validDataInStorage_ok() {
         String separator = System.lineSeparator();
         Storage.fruitTransactions.put("banana",100);
         Storage.fruitTransactions.put("apple",300);

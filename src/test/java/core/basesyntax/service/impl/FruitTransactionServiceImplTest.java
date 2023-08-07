@@ -32,7 +32,7 @@ class FruitTransactionServiceImplTest {
     }
 
     @Test
-    void addOrUpdate_ok() {
+    void addOrUpdate_validTransaction_ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,"banana",19);
         Map<String, Integer> fruitMap =

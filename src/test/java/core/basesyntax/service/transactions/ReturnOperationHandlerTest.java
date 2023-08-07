@@ -16,7 +16,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void countQuantity_ok() {
+    void countQuantity_validQuantity_ok() {
         int firstExpectedQuantity = 15;
         assertEquals(firstExpectedQuantity,operationHandler.countQuantity(0,15));
         int secondExpectedQuantity = 113;

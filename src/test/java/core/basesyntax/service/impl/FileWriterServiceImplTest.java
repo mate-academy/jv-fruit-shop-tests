@@ -24,7 +24,7 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_ok() {
+    void writeToFile_validPath_ok() {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator();

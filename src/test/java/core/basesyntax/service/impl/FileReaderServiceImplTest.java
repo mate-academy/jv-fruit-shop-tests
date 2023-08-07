@@ -18,7 +18,7 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_ok() {
+    public void readFromFile_validFile_ok() {
         String validFilePath = "src/test/resources/test_transaction.csv";
         List<String> strings = readerService.readFromFile(validFilePath);
         int expectedSize = 1;

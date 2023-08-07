@@ -16,7 +16,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void countQuantity_ok() {
+    void countQuantity_validQuantity_ok() {
         int firstExpectedQuantity = 5;
         assertEquals(firstExpectedQuantity,operationHandler.countQuantity(20,15));
         int secondExpectedQuantity = 87;

@@ -1,26 +1,29 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandlerService;
 import core.basesyntax.service.OperationStrategyService;
 import core.basesyntax.service.TransactionProcessService;
-import core.basesyntax.strategy.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import core.basesyntax.strategy.BalanceHandler;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.PurchaseHandler;
+import core.basesyntax.strategy.ReturnHandler;
+import core.basesyntax.strategy.SupplyHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class TransactionProcessServiceImplTest {
     private static TransactionProcessService transactionProcessService;
-    private OperationStrategyService operationStrategyService;
-    private static final String APPLE = "apple";
+
     private static final String BANANA = "banana";
+    private OperationStrategyService operationStrategyService;
 
     @BeforeEach
     void setUp() {

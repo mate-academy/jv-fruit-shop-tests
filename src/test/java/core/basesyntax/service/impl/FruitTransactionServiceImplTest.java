@@ -38,9 +38,9 @@ class FruitTransactionServiceImplTest {
         Map<String, Integer> fruitMap =
                 transactionService.addOrUpdate(List.of(fruitTransaction));
         int expectedSize = 1;
-        assertEquals(expectedSize,fruitMap.size(),"size should be 1, added not properly");
+        assertEquals(expectedSize,fruitMap.size(),"size should be 1, added not properly ");
         assertEquals(expectedSize,Storage.fruitTransactions.size(),
-                "size should be 1, added not properly");
+                "size should be 1, added not properly ");
         int expectedQuantity = 19;
         assertEquals(expectedQuantity,fruitMap.get("banana"));
     }

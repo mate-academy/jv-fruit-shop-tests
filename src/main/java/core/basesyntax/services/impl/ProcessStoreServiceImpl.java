@@ -19,12 +19,24 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
         validateFruitTransactions(fruitTransactions);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             String labelGoods = fruitTransaction.getLabelGoods();
+            validateFruitData(labelGoods);
             int value = fruitTransaction.getValue();
             ActionHandler actionHandler = actionStrategy.get(fruitTransaction.getType());
             validateFruit(actionHandler, labelGoods, value);
             actionHandler.executeAction(labelGoods, value);
         }
         return true;
+    }
+
+    private void validateFruitData(String labelGoods) {
+        if (labelGoods == null) {
+            throw new ValidationDataException("ProcessTransactionService error! "
+                    + "Label of product in FruitTransactions can't be null");
+        }
+        if (labelGoods.isEmpty()) {
+            throw new ValidationDataException("ProcessTransactionService error! "
+                    + "Label of product in FruitTransactions can't be empty");
+        }
     }
 
     private void validateFruit(ActionHandler actionHandler, String labelGoods, int value) {

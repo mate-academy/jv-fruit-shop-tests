@@ -28,6 +28,11 @@ public class CreateTaskServiceImpl implements CreateTaskService {
                 }
             }
             String nameOfProduct = readLine[ConstantsForCsvParse.INDEX_OF_NAME];
+            String strValue = readLine[ConstantsForCsvParse.INDEX_OF_VALUE];
+            if (strValue.isEmpty()) {
+                throw new ValidationDataException("Create Transaction error! "
+                        + "Value of parsedData can't be empty!");
+            }
             Integer valueOfLine = Integer.parseInt(readLine[ConstantsForCsvParse.INDEX_OF_VALUE]);
             validateData(typeOfTask, nameOfProduct, valueOfLine);
             fruitTransactions.add(new FruitTransaction(typeOfTask, nameOfProduct, valueOfLine));

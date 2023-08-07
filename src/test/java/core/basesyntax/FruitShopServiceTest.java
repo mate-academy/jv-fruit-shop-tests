@@ -64,15 +64,20 @@ public class FruitShopServiceTest {
     void updateData_negativeQuantity_okay() {
         transactions.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, APPLE, WRONG_QUANTITY));
-        assertThrows(FruitsQuantityException.class,
+        FruitsQuantityException exception = assertThrows(FruitsQuantityException.class,
                 () -> fruitShopService.updateData(transactions));
+        System.out.println(exception.getMessage());
+        String expectedMessage = "Invalid quantity: -50";
+        assertEquals(exception.getMessage(), expectedMessage);
     }
 
     @Test
     void updateData_nullTransactions_okay() {
         transactions = null;
-        assertThrows(TransactionException.class,
+        TransactionException exception = assertThrows(TransactionException.class,
                 () -> fruitShopService.updateData(transactions));
+        String expectedMessage = "Null transactions on input";
+        assertEquals(exception.getMessage(), expectedMessage);
         assertEquals(EMPTY_STORAGE_SIZE, Storage.getStorage().size());
     }
 

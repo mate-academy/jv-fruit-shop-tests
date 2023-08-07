@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.strategy.ActivityHandler;
@@ -20,6 +22,16 @@ class ActivityStrategyImplTest {
     @BeforeEach
     public void setUp() {
         activityStrategy = new ActivityStrategyImpl(getActivitiesServiceMap());
+    }
+
+    @Test
+    public void strategy_testNull() {
+        try {
+            activityStrategy.getQuantityModifier(null);
+            fail("Expected IllegalArgumentException, but got no exception");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Activity type cannot be null", e.getMessage());
+        }
     }
 
     @Test

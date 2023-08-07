@@ -5,6 +5,7 @@ import static core.basesyntax.model.Fruit.Operation.PURCHASE;
 import static core.basesyntax.model.Fruit.Operation.RETURN;
 import static core.basesyntax.model.Fruit.Operation.SUPPLY;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -19,6 +20,7 @@ import core.basesyntax.service.strategy.PurchaseActivityHandler;
 import core.basesyntax.service.strategy.ReturnActivityHandler;
 import core.basesyntax.service.strategy.SupplyActivityHandler;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,19 @@ class ActivityWorkerServiceImplTest {
         activityWorkerService.modifyQuantity(fruits);
         assertEquals(SECOND_EXP_QUANTITY, fruitDao.getByName(SECOND_FRUIT_NAME));
         assertEquals(FIRST_EXP_QUANTITY, fruitDao.getByName(FIRST_FRUIT_NAME));
+    }
+
+    @Test
+    public void testModifyQuantity_EmptyList() {
+        assertThrows(RuntimeException.class,
+                () -> activityWorkerService.modifyQuantity(Collections.emptyList()));
+
+    }
+
+    @Test
+    public void testModifyQuantity_NullList() {
+        assertThrows(RuntimeException.class,
+                () -> activityWorkerService.modifyQuantity(null));
     }
 
     private Map<Fruit.Operation, ActivityHandler> getActivitiesServiceMap() {

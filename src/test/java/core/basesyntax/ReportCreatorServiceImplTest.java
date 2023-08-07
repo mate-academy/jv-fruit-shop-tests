@@ -1,13 +1,12 @@
 package core.basesyntax;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +36,21 @@ class ReportCreatorServiceImplTest {
         fruitDao.put(FIRST_FRUIT_NAME, FIRST_FRUIT_QUANTITY);
         fruitDao.put(SECOND_FRUIT_NAME, SECOND_FRUIT_QUANTITY);
         String report = reportCreatorService.createReport();
-        assertEquals(EXPECTED_REPORT, report);
+        Assert.assertEquals(EXPECTED_REPORT, report);
+    }
+
+    @Test
+    public void testCreateReport_EmptyData() {
+        String expectedReport = "fruit,quantity";
+        String report = reportCreatorService.createReport();
+        Assert.assertEquals(expectedReport, report);
+    }
+
+    @Test
+    public void testCreateReport_NullData() {
+        String expectedReport = "fruit,quantity";
+        fruitData = null;
+        String report = reportCreatorService.createReport();
+        Assert.assertEquals(expectedReport, report);
     }
 }

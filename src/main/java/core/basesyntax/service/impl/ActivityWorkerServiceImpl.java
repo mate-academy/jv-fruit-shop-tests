@@ -17,6 +17,9 @@ public class ActivityWorkerServiceImpl implements ActivityWorkerService {
     }
 
     public void modifyQuantity(List<Fruit> convertedData) {
+        if (convertedData.isEmpty() || convertedData == null) {
+            throw new RuntimeException("No data for modification");
+        }
         for (Fruit fruit : convertedData) {
             int fruitQuantity = fruitDao.getAll().getOrDefault(fruit.getFruit(),0);
             fruitDao.put(fruit.getFruit(),

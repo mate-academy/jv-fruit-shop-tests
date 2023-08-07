@@ -11,7 +11,9 @@ public class ActivityStrategyImpl implements ActivityStrategy {
     }
 
     public ActivityHandler getQuantityModifier(Fruit.Operation operation) {
-        return activitiesServiceMap.get(operation);
-
+        if (operation != null) {
+            return activitiesServiceMap.get(operation);
+        }
+        throw new IllegalArgumentException("Activity type cannot be null");
     }
 }

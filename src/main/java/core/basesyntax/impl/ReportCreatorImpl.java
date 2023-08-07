@@ -1,10 +1,10 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportPreparer;
+import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
-public class ReportCreator implements ReportPreparer {
+public class ReportCreator implements ReportCreator {
     private static final String REPORT_FRUIT = "fruit";
     private static final String COMMA = ",";
     private static final String REPORT_QUANTITY = "quantity";

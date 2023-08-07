@@ -14,7 +14,7 @@ public class SplitDataServiceTest {
     private SplitDataService<OperationData> splitDataService = new SplitDataImpl();
 
     @Test
-    public void testSplitData_ValidData() {
+    public void testSplitData_ValidData_ok() {
         String data = " b,Apple,200" + System.lineSeparator()
                 + "p,Orange,100" + System.lineSeparator()
                 + "s,Banana,50";
@@ -35,8 +35,7 @@ public class SplitDataServiceTest {
     }
 
     @Test
-    public void testSplitData_EmptyData() {
-        SplitDataService<OperationData> splitDataService = new SplitDataImpl();
+    public void testSplitData_EmptyData_ok() {
         String data = "";
 
         List<OperationData> dataList = splitDataService.splitData(data);
@@ -46,7 +45,7 @@ public class SplitDataServiceTest {
     }
 
     @Test
-    public void testSplitData_DataWithLeadingAndTrailingWhitespaces() {
+    public void testSplitData_DataWithLeadingAndTrailingWhitespaces_ok() {
         String data = "  b,Apple,200   " + System.lineSeparator()
                 + "   p,Orange,100   " + System.lineSeparator()
                 + "s,Banana,50   " + System.lineSeparator();
@@ -58,7 +57,7 @@ public class SplitDataServiceTest {
     }
 
     @Test
-    public void testSplitData_DataWithExtraEmptyLines() {
+    public void testSplitData_DataWithExtraEmptyLines_ok() {
         SplitDataService<OperationData> splitDataService = new SplitDataImpl();
         String data = System.lineSeparator()
                 + "b,Apple,200"
@@ -75,7 +74,7 @@ public class SplitDataServiceTest {
     }
 
     @Test
-    public void testSplitData_DataWithInvalidOperationType() {
+    public void testSplitData_DataWithInvalidOperationType_ok() {
         SplitDataService<OperationData> splitDataService = new SplitDataImpl();
         String data = "b,Apple,200" + System.lineSeparator()
                 + "x,Orange,100" + System.lineSeparator()
@@ -88,7 +87,7 @@ public class SplitDataServiceTest {
     }
 
     @Test
-    public void testSplitData_DataWithInvalidQuantity() {
+    public void testSplitData_DataWithInvalidQuantity_ok() {
         SplitDataService<OperationData> splitDataService = new SplitDataImpl();
         String data = "b,Apple,200" + System.lineSeparator()
                 + "p,Orange,abc" + System.lineSeparator()
@@ -101,7 +100,7 @@ public class SplitDataServiceTest {
     }
 
     @Test
-    public void testSplitData_DataWithMissingFields() {
+    public void testSplitData_DataWithMissingFields_ok() {
         SplitDataService<OperationData> splitDataService = new SplitDataImpl();
         String data = "b,Apple,200" + System.lineSeparator()
                 + "p,Orange" + System.lineSeparator()

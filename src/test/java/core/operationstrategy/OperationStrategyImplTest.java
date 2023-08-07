@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     @Test
-    public void testGetOperationHandler() {
+    public void testGetOperationHandler_ok() {
         OperationHandler balanceHandler = new BalanceOperationHandler();
         OperationHandler purchaseHandler = new PurchaseOperationHandler();
         OperationHandler returnHandler = new ReturnOperationHandler();

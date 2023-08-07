@@ -14,7 +14,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testFruitTransactions_AddTransaction() {
+    public void testFruitTransactions_AddTransaction_ok() {
         String fruit = "Apple";
         int amount = 50;
 
@@ -27,7 +27,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testFruitTransactions_AddMultipleTransactions() {
+    public void testFruitTransactions_AddMultipleTransactions_ok() {
         String fruit1 = "Apple";
         int amount1 = 50;
 
@@ -49,7 +49,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testFruitTransactions_RemoveTransaction() {
+    public void testFruitTransactions_RemoveTransaction_ok() {
         String fruit = "Apple";
         int amount = 50;
         Storage.fruitTransactions.put(fruit, amount);
@@ -61,7 +61,7 @@ public class StorageTest {
     }
 
     @Test
-    public void testFruitTransactions_GetTransactionAmount() {
+    public void testFruitTransactions_GetTransactionAmount_ok() {
         String fruit = "Apple";
         int amount = 50;
         Storage.fruitTransactions.put(fruit, amount);

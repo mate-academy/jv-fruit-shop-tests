@@ -7,9 +7,10 @@ import core.exception.OperationHandlerException;
 import org.junit.Test;
 
 public class PurchaseOperationHandlerTest {
+    private static final PurchaseOperationHandler handler = new PurchaseOperationHandler();
+
     @Test
     public void testGetTransaction_PositiveAmount() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
         int currentAmount = 200;
         int operationAmount = 50;
 
@@ -19,7 +20,6 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void testGetTransaction_NegativeAmount() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
         int currentAmount = 100;
         int operationAmount = -50;
 
@@ -29,7 +29,6 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void testGetTransaction_ZeroAmount() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
         int currentAmount = 100;
         int operationAmount = 0;
 
@@ -40,7 +39,6 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     public void testGetTransaction_NegativeResult() {
-        PurchaseOperationHandler handler = new PurchaseOperationHandler();
         int currentAmount = 100;
         int operationAmount = 150;
 

@@ -8,7 +8,7 @@ public class SplitDataImplTest {
     private SplitDataImpl splitData = new SplitDataImpl();
 
     @Test
-    public void testSplitData_ValidData() {
+    public void testSplitData_ValidData_ok() {
         String data = "p,Apple,5" + System.lineSeparator()
                 + "s,Banana,10" + System.lineSeparator()
                 + "r,Orange,3";
@@ -31,7 +31,7 @@ public class SplitDataImplTest {
     }
 
     @Test
-    public void testSplitData_InvalidData() {
+    public void testSplitData_InvalidData_ok() {
         String data = "p,Apple 5" + System.lineSeparator()
                 + "s,Banana,10" + System.lineSeparator()
                 + "r,Orange,3";
@@ -50,7 +50,7 @@ public class SplitDataImplTest {
     }
 
     @Test
-    public void testSplitData_InvalidQuantity() {
+    public void testSplitData_InvalidQuantity_ok() {
         String data = "p,Apple,5" + System.lineSeparator()
                 + "s,Banana,abc" + System.lineSeparator()
                 + "r,Orange,3";
@@ -69,7 +69,7 @@ public class SplitDataImplTest {
     }
 
     @Test
-    public void testSplitData_UnknownOperationType() {
+    public void testSplitData_UnknownOperationType_ok() {
         String data = "p,Apple,5" + System.lineSeparator()
                 + "u,Banana,10" + System.lineSeparator()
                 + "r,Orange,3";
@@ -88,7 +88,7 @@ public class SplitDataImplTest {
     }
 
     @Test
-    public void testSplitData_EmptyData() {
+    public void testSplitData_EmptyData_ok() {
         String data = "";
 
         List<OperationData> result = splitData.splitData(data);

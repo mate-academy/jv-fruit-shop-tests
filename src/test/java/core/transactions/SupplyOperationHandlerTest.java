@@ -7,9 +7,10 @@ import core.exception.OperationHandlerException;
 import org.junit.Test;
 
 public class SupplyOperationHandlerTest {
+    private static final SupplyOperationHandler handler = new SupplyOperationHandler();
+
     @Test
-    public void testGetTransaction_PositiveAmount() {
-        SupplyOperationHandler handler = new SupplyOperationHandler();
+    public void testGetTransaction_PositiveAmount_ok() {
         int currentAmount = 100;
         int operationAmount = 50;
 
@@ -18,8 +19,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_NegativeAmount() {
-        SupplyOperationHandler handler = new SupplyOperationHandler();
+    public void testGetTransaction_NegativeAmount_ok() {
         int currentAmount = 100;
         int operationAmount = -50;
 
@@ -28,8 +28,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_ZeroAmount() {
-        SupplyOperationHandler handler = new SupplyOperationHandler();
+    public void testGetTransaction_ZeroAmount_ok() {
         int currentAmount = 100;
         int operationAmount = 0;
 
@@ -39,8 +38,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_NegativeResult() {
-        SupplyOperationHandler handler = new SupplyOperationHandler();
+    public void testGetTransaction_NegativeResult_notOk() {
         int currentAmount = 100;
         int operationAmount = -150;
 

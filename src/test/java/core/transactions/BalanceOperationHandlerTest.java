@@ -7,9 +7,10 @@ import core.exception.OperationHandlerException;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
+    private static final BalanceOperationHandler handler = new BalanceOperationHandler();
+
     @Test
-    public void testGetTransaction_PositiveAmount() {
-        BalanceOperationHandler handler = new BalanceOperationHandler();
+    public void testGetTransaction_PositiveAmount_ok() {
         int currentAmount = 100;
         int operationAmount = 50;
 
@@ -18,8 +19,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_NegativeAmount() {
-        BalanceOperationHandler handler = new BalanceOperationHandler();
+    public void testGetTransaction_NegativeAmount_notOk() {
         int currentAmount = 100;
         int operationAmount = -150;
 
@@ -29,8 +29,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_ZeroAmount() {
-        BalanceOperationHandler handler = new BalanceOperationHandler();
+    public void testGetTransaction_ZeroAmount_ok() {
         int currentAmount = 100;
         int operationAmount = 0;
 
@@ -40,8 +39,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_NegativeResult() {
-        BalanceOperationHandler handler = new BalanceOperationHandler();
+    public void testGetTransaction_NegativeResult_notOk() {
         int currentAmount = 100;
         int operationAmount = -200;
 

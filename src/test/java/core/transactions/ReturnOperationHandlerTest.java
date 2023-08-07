@@ -7,9 +7,10 @@ import core.exception.OperationHandlerException;
 import org.junit.Test;
 
 public class ReturnOperationHandlerTest {
+    private static final ReturnOperationHandler handler = new ReturnOperationHandler();
+
     @Test
-    public void testGetTransaction_PositiveAmount() {
-        ReturnOperationHandler handler = new ReturnOperationHandler();
+    public void testGetTransaction_PositiveAmount_ok() {
         int currentAmount = 50;
         int operationAmount = 30;
 
@@ -18,8 +19,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_NegativeAmount() {
-        ReturnOperationHandler handler = new ReturnOperationHandler();
+    public void testGetTransaction_NegativeAmount_ok() {
         int currentAmount = 100;
         int operationAmount = -50;
 
@@ -28,8 +28,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_ZeroAmount() {
-        ReturnOperationHandler handler = new ReturnOperationHandler();
+    public void testGetTransaction_ZeroAmount_ok() {
         int currentAmount = 100;
         int operationAmount = 0;
 
@@ -39,8 +38,7 @@ public class ReturnOperationHandlerTest {
     }
 
     @Test
-    public void testGetTransaction_NegativeResult() {
-        ReturnOperationHandler handler = new ReturnOperationHandler();
+    public void testGetTransaction_NegativeResult_notOk() {
         int currentAmount = 100;
         int operationAmount = -150;
 

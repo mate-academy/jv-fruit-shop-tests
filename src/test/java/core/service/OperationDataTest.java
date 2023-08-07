@@ -9,17 +9,17 @@ public class OperationDataTest {
             new OperationData(OperationType.B, "berry", 1);
 
     @Test
-    void getOperation() {
+    void getOperation_ok() {
         assertEquals(OperationType.B, operationData.getOperationType());
     }
 
     @Test
-    void getFruit() {
+    void getFruit_ok() {
         assertEquals("berry", operationData.getProduct());
     }
 
     @Test
-    void getQuantity() {
+    void getQuantity_ok() {
         assertEquals(1, operationData.getQuantity());
     }
 }

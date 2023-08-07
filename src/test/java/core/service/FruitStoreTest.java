@@ -37,7 +37,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_ValidData() {
+    public void testProcessOperations_ValidData_ok() {
         String data = "b,Apple,200" + System.lineSeparator()
                 + "b,Orange,300" + System.lineSeparator()
                 + "p,Apple,100" + System.lineSeparator()
@@ -58,7 +58,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_EmptyDataList() {
+    public void testProcessOperations_EmptyDataList_ok() {
         List<OperationData> dataList = new ArrayList<>();
 
         List<OperationData> result = fruitStore.processOperations(dataList);
@@ -67,13 +67,13 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_NullDataList() {
+    public void testProcessOperations_NullDataList_notOk() {
         assertThrows(RuntimeException.class, () ->
                 fruitStore.processOperations(null));
     }
 
     @Test
-    public void testProcessOperations_InvalidOperationType() {
+    public void testProcessOperations_InvalidOperationType_ok() {
         String data = "x,Apple,200";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -83,7 +83,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_NegativeBalance() {
+    public void testProcessOperations_NegativeBalance_notOk() {
         String data = "b,Apple,-200";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -91,7 +91,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_PurchaseSuccess() {
+    public void testProcessOperations_PurchaseSuccess_ok() {
         String data = "b,Apple,200" + System.lineSeparator() + "p,Apple,100";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -104,7 +104,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_PurchaseInsufficientBalance() {
+    public void testProcessOperations_PurchaseInsufficientBalance_notOk() {
         String data = "b,Apple,200" + System.lineSeparator() + "p,Apple,300";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -112,7 +112,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_ReturnSuccess() {
+    public void testProcessOperations_ReturnSuccess_ok() {
         String data = "b,Apple,200" + System.lineSeparator() + "r,Apple,50";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -125,7 +125,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_EmptyDataString() {
+    public void testProcessOperations_EmptyDataString_ok() {
         String data = "";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -135,7 +135,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_SupplySuccess() {
+    public void testProcessOperations_SupplySuccess_ok() {
         String data = "b,Apple,200" + System.lineSeparator() + "s,Apple,50";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -148,7 +148,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_SupplyWithInvalidProduct() {
+    public void testProcessOperations_SupplyWithInvalidProduct_ok() {
         String data = "b,Apple,200" + System.lineSeparator() + "p,Apple,200";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -158,7 +158,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_ReturnInvalidProduct() {
+    public void testProcessOperations_ReturnInvalidProduct_ok() {
         String data = "b,Apple,200" + System.lineSeparator() + "r,Orange,50";
         List<OperationData> dataList = new SplitDataImpl().splitData(data);
 
@@ -168,7 +168,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_MultipleOperations() {
+    public void testProcessOperations_MultipleOperations_ok() {
         String data = "b,Apple,200" + System.lineSeparator()
                 + "p,Apple,50" + System.lineSeparator()
                 + "r,Apple,20" + System.lineSeparator()
@@ -185,7 +185,7 @@ public class FruitStoreTest {
     }
 
     @Test
-    public void testProcessOperations_MultipleProducts() {
+    public void testProcessOperations_MultipleProducts_ok() {
         String data = "b,Apple,200" + System.lineSeparator()
                 + "b,Orange,100" + System.lineSeparator()
                 + "p,Apple,50" + System.lineSeparator()

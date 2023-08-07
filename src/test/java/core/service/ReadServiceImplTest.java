@@ -40,7 +40,7 @@ public class ReadServiceImplTest {
     }
 
     @Test
-    public void read_FileNotFound_ExceptionThrown() {
+    public void read_FileNotFound_ExceptionThrown_notOk() {
         FileReadException fileReadException = assertThrows(
                 FileReadException.class, () -> fileReader.read(
                         "src/test/java/resources/nonexistent_file.csv"));
@@ -49,13 +49,13 @@ public class ReadServiceImplTest {
     }
 
     @Test
-    public void read_EmptyFile_EmptyStringReturned() {
+    public void read_EmptyFile_EmptyStringReturned_ok() {
         String dataFromFile = fileReader.read("src/test/java/resources/empty_input.csv");
         assertEquals("", dataFromFile);
     }
 
     @Test
-    public void read_NullFileName_ExceptionThrown() {
+    public void read_NullFileName_ExceptionThrown_notOk() {
         assertThrows(NullPointerException.class, () -> fileReader.read(null));
     }
 

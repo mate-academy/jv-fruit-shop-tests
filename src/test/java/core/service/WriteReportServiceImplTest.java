@@ -23,7 +23,7 @@ public class WriteReportServiceImplTest {
     }
 
     @Test
-    public void testCreateReport_SuccessfulWrite() throws IOException {
+    public void testCreateReport_SuccessfulWrite_ok() throws IOException {
         String reportData = "Apple,200" + "\n"
                           + "Orange,300";
         writeReportService.createReport(TEST_FILE_PATH, reportData);
@@ -46,7 +46,7 @@ public class WriteReportServiceImplTest {
     }
 
     @Test
-    public void testCreateReport_ReportWriteException() {
+    public void testCreateReport_ReportWriteException_notOk() {
         String invalidFilePath = "invalid/path/to/report.csv";
         String reportData = "Apple,200\nOrange,300";
 

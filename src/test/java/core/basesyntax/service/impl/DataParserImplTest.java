@@ -14,14 +14,10 @@ import org.junit.jupiter.api.Test;
 
 class DataParserImplTest {
     private static DataParser dataParser;
-    private static FruitTransaction bananaTransaction;
-    private static FruitTransaction appleTransaction;
 
     @BeforeAll
     static void setUp() {
         dataParser = new DataParserImpl();
-        bananaTransaction = new FruitTransaction(Operation.BALANCE, "banana", 20);
-        appleTransaction = new FruitTransaction(Operation.BALANCE, "apple", 30);
     }
 
     @Test
@@ -40,13 +36,18 @@ class DataParserImplTest {
 
     @Test
     void getParsedData_validParsedData_Ok() {
-        List<FruitTransaction> listForTest =
+        FruitTransaction bananaTransaction
+                = new FruitTransaction(Operation.BALANCE, "banana", 20);
+        FruitTransaction appleTransaction
+                = new FruitTransaction(Operation.BALANCE, "apple", 30);
+        List<FruitTransaction> expectedTransactions =
                 new ArrayList<>(List.of(bananaTransaction, appleTransaction));
-        String stringForTest = "type,fruit,quantity"
+        String transactionString = "type,fruit,quantity"
                 + System.lineSeparator()
                 + "b,banana,20"
                 + System.lineSeparator()
                 + "b,apple,30";
-        assertEquals(listForTest, dataParser.getParsedData(stringForTest));
+        List<FruitTransaction> actualTransactions = dataParser.getParsedData(transactionString);
+        assertEquals(expectedTransactions, actualTransactions);
     }
 }

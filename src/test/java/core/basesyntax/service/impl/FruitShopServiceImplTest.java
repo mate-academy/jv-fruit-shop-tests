@@ -18,7 +18,6 @@ class FruitShopServiceImplTest {
     private FruitShopService fruitShopService;
     private OperationHandler operationHandler;
     private ReportCreator reportCreator;
-    private FruitTransaction validFruitTransaction;
     private FruitTransaction inValidFruitTransaction;
 
     @BeforeEach
@@ -26,14 +25,13 @@ class FruitShopServiceImplTest {
         fruitShopService = new FruitShopServiceImpl();
         operationHandler = new BalanceOperation();
         reportCreator = new ReportCreatorImpl();
-        validFruitTransaction =
-                new FruitTransaction(Operation.BALANCE, "banana", 20);
-        inValidFruitTransaction = null;
         Storage.storage.clear();
     }
 
     @Test
     void process_validParameters_Ok() {
+        FruitTransaction validFruitTransaction
+                = new FruitTransaction(Operation.BALANCE, "banana", 20);
         fruitShopService.process(validFruitTransaction, operationHandler);
         String expected = "fruit,quantity"
                 + System.lineSeparator()
@@ -44,6 +42,7 @@ class FruitShopServiceImplTest {
 
     @Test
     void process_inValidParameters_notOk() {
+        inValidFruitTransaction = null;
         assertThrows(InvalidDataException.class,
                 () -> fruitShopService.process(inValidFruitTransaction, operationHandler),
                 "InvalidDataException expected to be thrown");

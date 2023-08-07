@@ -30,14 +30,14 @@ class CsvFileReaderTest {
     }
 
     @Test
-    void validCase_validFileType() {
+    void validCase_csvFile() {
         List<String> expected = List.of("fruit,quantity", "b,banana,100", "b,apple,123");
         List<String> actual = fileReader.read(csvFile);
         assertEquals(expected, actual);
     }
 
     @Test
-    void invalidCase_notCsv() {
+    void invalidCase_notCsvFile() {
         String filePath = notCsvFile;
         assertThrows(IllegalStateException.class, () -> fileReader.read(filePath),
                 "Invalid file type, should be .csv but - " + filePath);

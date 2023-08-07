@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
-public class ReportCreator implements ReportCreator {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String REPORT_FRUIT = "fruit";
     private static final String COMMA = ",";
     private static final String REPORT_QUANTITY = "quantity";

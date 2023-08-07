@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class FruitReportServiceImplTest {
-
     private static final String BANANA_FRUIT = "banana";
     private static final String APPLE_FRUIT = "apple";
     private static final int APPLE_QTY = 20;

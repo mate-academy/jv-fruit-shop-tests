@@ -18,7 +18,7 @@ public class DataParserTest {
     }
 
     @Test
-    public void parseData_ValidData_Ok() {
+    void parseData_validData_ok() {
         List<String> validData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -36,7 +36,7 @@ public class DataParserTest {
     }
 
     @Test
-    public void parseData_InvalidRowFormat_NotOk() {
+    void parseData_invalidRowFormat_notOk() {
         List<String> invalidData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -49,7 +49,7 @@ public class DataParserTest {
     }
 
     @Test
-    public void parseData_InvalidOperationCode_NotOk() {
+    void parseData_invalidOperationCode_notOk() {
         List<String> invalidData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",

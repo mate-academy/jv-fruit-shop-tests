@@ -34,7 +34,7 @@ public class FruitTransactionServiceTest {
     }
 
     @Test
-    public void process_ValidTransactions_BalanceUpdated() {
+    void process_validTransactions_balanceUpdated() {
         List<FruitTransaction> sampleTransactions = Arrays.asList(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50),

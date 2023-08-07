@@ -5,42 +5,35 @@ import core.basesyntax.service.impl.CsvFileWriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FileWriterTest {
     private final String testFolderPath = "src/test/resources/";
     private FileWriter fileWriter;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.fileWriter = new CsvFileWriterImpl();
     }
 
-    @AfterEach
-    void tearDown() {
-        // Clean up test files after each test
-        Path testFile = Paths.get(testFolderPath + "test.csv");
-        try {
-            Files.deleteIfExists(testFile);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to clean up test file: " + testFile, e);
-        }
+    @Test
+    void writeToFile_validData_fileCreatedWithCorrectContent() throws IOException {
+        String fileName = testFolderPath + "test1.csv";
+        String report = "Test report content";
+        fileWriter.writeToFile(report, fileName);
+        Path path = Path.of(fileName);
+        String actualContent = Files.readString(path);
+        Assertions.assertEquals(report, actualContent);
+        Files.deleteIfExists(path);
     }
 
     @Test
-    public void writeToFile_ValidData_FileCreatedWithCorrectContent() {
-        String fileName = testFolderPath + "test.csv";
-        String report = "Test report content";
-        try {
-            fileWriter.writeToFile(report, fileName);
-            String actualContent = Files.readString(Path.of(fileName));
-            Assertions.assertEquals(report, actualContent);
-        } catch (IOException e) {
-            Assertions.fail("IOException occurred: " + e.getMessage());
-        }
+    void writeToFile_invalidPath_notOk() {
+        String invalidPath = "non_existent_folder/test2.csv";
+        String report = "Invalid path test";
+        Assertions.assertThrows(RuntimeException.class,
+                () -> fileWriter.writeToFile(report, invalidPath));
     }
 }

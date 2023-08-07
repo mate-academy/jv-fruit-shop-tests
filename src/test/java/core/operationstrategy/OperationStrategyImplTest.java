@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-public class OperationStrategyImplTest {
+class OperationStrategyImplTest {
     @Test
     public void testGetOperationHandler() {
         OperationHandler balanceHandler = new BalanceOperationHandler();

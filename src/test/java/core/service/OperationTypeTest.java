@@ -3,7 +3,7 @@ package core.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class OperationTypeTest {
     @Test

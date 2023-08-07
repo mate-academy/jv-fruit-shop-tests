@@ -113,10 +113,8 @@ public class ProcessStoreServiceTest {
 
     @Test
     void processHandle_notExistProduct_notOk() {
+        fruitDB.add("apple", 20);
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "apple", 20));
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
                         "banana", 10));
@@ -125,11 +123,9 @@ public class ProcessStoreServiceTest {
     }
 
     @Test
-    void processHandle_correctTestTwoTransactions_ok() {
+    void processHandle_correctTestTransaction_ok() {
+        fruitDB.add("apple", 20);
         List<FruitTransaction> fruitsTransactions = new ArrayList<>();
-        fruitsTransactions
-                .add(new FruitTransaction(FruitTransaction.ActionType.BALANCE,
-                        "apple", 20));
         fruitsTransactions
                 .add(new FruitTransaction(FruitTransaction.ActionType.RETURN,
                         "apple", 20));

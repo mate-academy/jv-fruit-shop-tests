@@ -58,7 +58,7 @@ public class ReportCsvServiceTest {
     @Test
     void reportCsv_isOneLineCorrect_ok() {
         fruitDB.add("banana", 20);
-        String[] expected = {"fruit,quantity", "\r\nbanana,20"};
+        String[] expected = {"fruit,quantity", System.lineSeparator() + "banana,20"};
         String[] actual = reportCsvServiceTest.createReport();
         assertTrue(Arrays.deepEquals(expected, actual));
     }
@@ -69,7 +69,7 @@ public class ReportCsvServiceTest {
         fruitDB.add("apple", 50);
         fruitDB.add("orange", 90);
         String[] expected =
-                {"fruit,quantity", "\r\nbanana,20", "\r\norange,90", "\r\napple,50"};
+                {"fruit,quantity", System.lineSeparator() + "banana,20", System.lineSeparator() + "orange,90", System.lineSeparator() + "apple,50"};
         String[] actual = reportCsvServiceTest.createReport();
         assertTrue(Arrays.deepEquals(expected, actual));
     }

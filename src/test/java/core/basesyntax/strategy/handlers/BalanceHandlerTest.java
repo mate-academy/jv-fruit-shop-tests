@@ -6,19 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
-    private OperationHandler operationHandler;
-
-    @BeforeEach
-    void setUp() {
-        operationHandler = new BalanceHandler();
-    }
+    private OperationHandler operationHandler = new BalanceHandler();
 
     @Test
-    void operateBalance_validTransaction_ok() {
+    void operate_validTransaction_ok() {
         operationHandler.operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                 "banana", 50));
         Map<String, Integer> expected = Map.of("banana", 50);
@@ -27,7 +21,7 @@ class BalanceHandlerTest {
     }
 
     @Test
-    void operateBalance_nullProduct_notOk() {
+    void operate_nullProduct_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                 null, 50)));
@@ -35,7 +29,7 @@ class BalanceHandlerTest {
     }
 
     @Test
-    void operateBalance_negativeQuantity_notOk() {
+    void operate_negativeQuantity_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                         "banana", -10)));

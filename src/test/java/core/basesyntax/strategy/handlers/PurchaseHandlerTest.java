@@ -6,21 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
-    private OperationHandler operationHandler;
+    private OperationHandler operationHandler = new PurchaseHandler();
 
     @BeforeEach
     void setUp() {
-        operationHandler = new PurchaseHandler();
+        Storage.storage.clear();
         Storage.storage.put("banana", 100);
     }
 
     @Test
-    void operatePurchase_validTransaction_ok() {
+    void operate_validTransaction_ok() {
         operationHandler.operate(new FruitTransaction(FruitTransaction.OperationType.PURCHASE,
                 "banana", 50));
         Map<String, Integer> expected = Map.of("banana", 50);
@@ -29,7 +28,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void operatePurchase_notValidTransaction_notOk() {
+    void operate_notValidTransaction_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.PURCHASE,
                 "banana", 110)));
@@ -38,7 +37,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void operatePurchase_nullFruit_notOk() {
+    void operate_nullFruit_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                         null, 20)));
@@ -46,15 +45,10 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void operatePurchase_negativeQuantity_notOk() {
+    void operate_negativeQuantity_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                         "banana", -100)));
         assertEquals("Quantity can't be negative", exception.getMessage());
-    }
-
-    @AfterEach
-    void tearDown() {
-        Storage.storage.clear();
     }
 }

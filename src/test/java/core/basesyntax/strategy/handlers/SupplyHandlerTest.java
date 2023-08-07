@@ -6,21 +6,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
-    private OperationHandler operationHandler;
+    private OperationHandler operationHandler = new SupplyHandler();
 
     @BeforeEach
     void setUp() {
-        operationHandler = new SupplyHandler();
+        Storage.storage.clear();
         Storage.storage.put("banana", 50);
     }
 
     @Test
-    void operateSupply_validTransaction_ok() {
+    void operate_validTransaction_ok() {
         operationHandler.operate(new FruitTransaction(FruitTransaction.OperationType.SUPPLY,
                 "banana", 20));
         Map<String, Integer> expected = Map.of("banana", 70);
@@ -29,7 +28,7 @@ class SupplyHandlerTest {
     }
 
     @Test
-    void operateSupply_nulFruit_notOk() {
+    void operate_nulFruit_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                         null, 5)));
@@ -37,15 +36,10 @@ class SupplyHandlerTest {
     }
 
     @Test
-    void operateSupply_negativeQuantity_notOk() {
+    void operate_negativeQuantity_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> operationHandler
                 .operate(new FruitTransaction(FruitTransaction.OperationType.BALANCE,
                         "banana", -6)));
         assertEquals("Quantity can't be negative", exception.getMessage());
-    }
-
-    @AfterEach
-    void tearDown() {
-        Storage.storage.clear();
     }
 }

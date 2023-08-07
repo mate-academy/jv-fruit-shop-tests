@@ -6,29 +6,16 @@ import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorImplTest {
-    private static List<Transaction> validTransactions;
-    private static Map<Transaction.Operation, OperationStrategy> handlers;
-    private static List<String> resultList;
-    private static TransactionProcessor transactionProcessor;
+    private static Transaction validTransaction;
 
     @BeforeAll
     static void beforeAll() {
-        resultList = new ArrayList<>();
-        OperationStrategy operationStrategy = (fruit, quantity) -> resultList.add(fruit);
-        handlers = Map.of(Transaction.Operation.BALANCE, operationStrategy);
-        transactionProcessor = new TransactionProcessorImpl(handlers);
-        validTransactions = List.of(new Transaction(Transaction.Operation.BALANCE, "banana", 20));
-    }
-
-    @AfterEach
-    void tearDown() {
-        resultList.clear();
+        validTransaction = new Transaction(Transaction.Operation.BALANCE, "banana", 20);
     }
 
     @Test
@@ -47,11 +34,15 @@ class TransactionProcessorImplTest {
 
     @Test
     void process_validTransaction_ok() {
-        List<String> expectedList = new ArrayList<>();
-        validTransactions.forEach(transaction -> {
-            expectedList.add(transaction.getFruit());
-            transactionProcessor.process(transaction);
-        });
-        Assertions.assertEquals(expectedList, resultList);
+        List<String> expected = List.of(validTransaction.getFruit());
+        List<String> actual = new ArrayList<>();
+        OperationStrategy operationStrategy = (fruit, quantity) -> actual.add(fruit);
+        Map<Transaction.Operation, OperationStrategy> handlers = Map.of(
+                Transaction.Operation.BALANCE, operationStrategy);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(handlers);
+
+        transactionProcessor.process(validTransaction);
+
+        Assertions.assertEquals(expected, actual);
     }
 }

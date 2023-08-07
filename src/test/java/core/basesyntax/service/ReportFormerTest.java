@@ -18,27 +18,29 @@ public class ReportFormerTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @BeforeEach
-    public void cleanStorage() {
+    public void clearStorage() {
         Storage.reportData.clear();
     }
 
     @Test
-    public void formReportFromEmptyDb() {
+    public void reportFormer_emptyDb_Ok() {
         assertEquals(HEADLINE, reportFormer.formReport());
     }
 
     @Test
-    public void formReportFromSingleDataStorage() {
+    public void reportFormer_singleDataStorage_Ok() {
         Storage.reportData.put(FIRST_FRUIT_NAME, FIRST_FRUIT_QUANTITY);
+
         assertEquals(String.format(HEADLINE
                 + LINE_SEPARATOR + FIRST_EXPECTED_LINE),
                 reportFormer.formReport());
     }
 
     @Test
-    public void formReportFromMultipleDataStorage() {
+    public void reportFormer_MultipleDataStorage_Ok() {
         Storage.reportData.put(FIRST_FRUIT_NAME, FIRST_FRUIT_QUANTITY);
         Storage.reportData.put(SECOND_FRUIT_NAME, SECOND_FRUIT_QUANTITY);
+
         assertEquals(String.format(
                 HEADLINE + LINE_SEPARATOR + FIRST_EXPECTED_LINE + LINE_SEPARATOR
                 + SECOND_EXPECTED_LINE), reportFormer.formReport());

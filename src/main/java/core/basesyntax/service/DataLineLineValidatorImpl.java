@@ -22,8 +22,8 @@ public class DataLineLineValidatorImpl implements DataLineValidator {
         }
         if (!data[QUANTITY_INDEX].matches("[0-9]+")) {
             throw new InvalidOperationException(
-                    String.format("Quantity should ba a positive number, provided \""
-                            + data[QUANTITY_INDEX] + "\""));
+                    "Quantity should ba a positive number, provided \""
+                            + data[QUANTITY_INDEX] + "\"");
         }
     }
 }

@@ -24,7 +24,7 @@ class ProcessDataImplTest {
     }
 
     @Test
-    void testProcess_ok() {
+    void process_validData_ok() {
         List<FruitTransaction> actual = processData.process(VALID_INPUT_DATA);
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(FruitTransaction.OperationType.BALANCE, "apple", 2),

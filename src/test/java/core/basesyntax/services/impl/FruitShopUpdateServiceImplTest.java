@@ -38,7 +38,7 @@ class FruitShopUpdateServiceImplTest {
     }
 
     @Test
-    void testUpdate_ok() {
+    void update_validTransaction_ok() {
         Storage.storage.put("banana", 20);
         List<FruitTransaction> expectedFruitShopUpdate = List.of(
                 new FruitTransaction(FruitTransaction.OperationType.PURCHASE, "banana", 5),

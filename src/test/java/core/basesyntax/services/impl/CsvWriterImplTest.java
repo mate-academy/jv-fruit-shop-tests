@@ -21,7 +21,7 @@ class CsvWriterImplTest {
     }
 
     @Test
-    void testWrite_Ok() throws IOException {
+    void write_validPath_ok() throws IOException {
         File tempFile = new File(VALID_FILE_NAME);
         csvWriter.write(tempFile.getAbsolutePath(), REPORT);
         String actualContent = Files.readString(tempFile.toPath());
@@ -29,7 +29,7 @@ class CsvWriterImplTest {
     }
 
     @Test
-    void testWrite_invalidPath_throwsException() {
+    void write_invalidPath_notOk() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class,
                 () -> csvWriter.write(INVALID_FILE_NAME, REPORT));
         assertEquals("Can't write report to file ", runtimeException.getMessage());

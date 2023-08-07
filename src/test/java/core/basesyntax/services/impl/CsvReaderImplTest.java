@@ -18,13 +18,13 @@ class CsvReaderImplTest {
     }
 
     @Test
-    void testRead_Ok() {
+    void read_validPath_ok() {
         String result = csvReader.read(VALID_PATH);
         assertEquals(FILE_CONTENT, result);
     }
 
     @Test
-    void testRead_invalidPath_throwsException() {
+    void read_invalidPath_notOk() {
         RuntimeException runtimeException = assertThrows(RuntimeException.class,
                 () -> csvReader.read(INVALID_PATH));
         assertEquals("Can't read file ", runtimeException.getMessage());

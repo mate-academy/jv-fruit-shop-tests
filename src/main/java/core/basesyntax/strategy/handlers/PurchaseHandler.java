@@ -7,6 +7,12 @@ import java.util.Map;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new RuntimeException("Quantity can't be negative");
+        }
+        if (fruitTransaction.getFruit() == null) {
+            throw new RuntimeException("Fruit can't be null");
+        }
         int newAmount = Storage.storage.get(fruitTransaction.getFruit())
                 - fruitTransaction.getQuantity();
         if (newAmount < 0) {

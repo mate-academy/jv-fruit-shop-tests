@@ -17,7 +17,7 @@ class ReportCreatorImplTest {
     }
 
     @Test
-    void testCreateReport_ok() {
+    void createReport_validData_ok() {
         Storage.storage.put("banana", 50);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,50" + System.lineSeparator();
@@ -26,7 +26,7 @@ class ReportCreatorImplTest {
     }
 
     @Test
-    void testCreateReport_emptyStorage() {
+    void createReport_emptyStorage_ok() {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportCreator.createReport();
         assertEquals(expected, actual);

@@ -50,7 +50,8 @@ class FruitTransactionParserServiceImplTest {
     @Test
     void getListOfTransactions_notSupportedOperationType_notOk() {
         OperationNotFoundException exception = assertThrows(OperationNotFoundException.class,
-                () -> transactionParser.getListOfTransactions(INPUT_DATA_WITH_NOT_SUPPORTED_OPERATION));
+                () -> transactionParser
+                        .getListOfTransactions(INPUT_DATA_WITH_NOT_SUPPORTED_OPERATION));
 
         String expected = "Not supported operation type: k";
 

@@ -1,12 +1,11 @@
 package core.basesyntax.strategy.handler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.CantGetFruitException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PurchaseOperationHandlerTest {
     private static final String APPLE = "apple";

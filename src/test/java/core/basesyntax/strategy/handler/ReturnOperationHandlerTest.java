@@ -40,7 +40,7 @@ class ReturnOperationHandlerTest {
     @Test
     void processData_fruitNotExistInStorage_notOk() {
         CantReturnFruitException exception = assertThrows(CantReturnFruitException.class,
-                () ->  returnOperationHandler.processData(APPLE, QUANTITY_50));
+                () -> returnOperationHandler.processData(APPLE, QUANTITY_50));
 
         String expected = "There isn't apple in Storage, can't return";
 

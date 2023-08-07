@@ -16,7 +16,7 @@ class SupplyTransactionHandlerTest {
     @BeforeEach
     void setUp() {
         supplyTransactionHandler = new SupplyTransactionHandler();
-
+        Storage.clear();
     }
 
     @Test

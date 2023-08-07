@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.service.interfaces.TransactionParser;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +26,7 @@ class ReportParserImplTest {
     }
 
     @Test
-    void parse() {
+    void parseReport_OK() {
         Storage.addPair("banana", 165);
         Storage.addPair("apple", 90);
         String expected = REPORT_HEADING + System.lineSeparator()
@@ -33,6 +34,14 @@ class ReportParserImplTest {
                 + "apple" + COMMA_DIVIDER + "90";
         String actual = reportParser.parse(Storage.getAll());
         Assertions.assertEquals(expected, actual, "Parser doesn't parse data correctly!");
+    }
 
+    @Test
+    void parseReport_nullData_NotOk() {
+        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+            reportParser.parse(null);
+        });
+        String expected = "Data for parsing report must not be null!";
+        Assertions.assertEquals(expected, actual.getMessage());
     }
 }

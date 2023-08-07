@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.TransactionParser;
@@ -34,5 +35,14 @@ class TransactionsParserImplTest {
         Assertions.assertEquals(balanceBanana, fruitTransactions.get(0));
         Assertions.assertEquals(balanceApple, fruitTransactions.get(1));
         Assertions.assertEquals(supplyBanana, fruitTransactions.get(2));
+    }
+
+    @Test
+    void parseTransaction_nullData_NotOk() {
+        InvalidDataException actual = Assertions.assertThrows(InvalidDataException.class, () -> {
+            transactionParser.parse(null);
+        });
+        String expected = "Data for transactions parsing must not be null!";
+        Assertions.assertEquals(expected, actual.getMessage());
     }
 }

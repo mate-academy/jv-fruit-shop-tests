@@ -16,7 +16,7 @@ class ReturnTransactionHandlerTest {
     @BeforeEach
     void setUp() {
         returnTransactionHandler = new ReturnTransactionHandler();
-
+        Storage.clear();
     }
 
     @Test

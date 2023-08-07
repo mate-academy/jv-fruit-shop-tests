@@ -16,22 +16,35 @@ class TransactionStrategyImplTest {
     }
 
     @Test
-    void getHandler_OK() {
+    void getReturnHandler_OK() {
         TransactionHandler returnHandler =
                 TransactionStrategyImpl.handlers.get(FruitShopOperation.RETURN);
+        Assertions.assertEquals(returnHandler,
+                transactionStrategy.get(FruitShopOperation.RETURN));
+    }
+
+    @Test
+    void getSupplyHandler_OK() {
         TransactionHandler supplyHandler =
                 TransactionStrategyImpl.handlers.get(FruitShopOperation.SUPPLY);
+        Assertions.assertEquals(supplyHandler,
+                transactionStrategy.get(FruitShopOperation.SUPPLY));
+    }
+
+    @Test
+    void getPurchaseHandler_OK() {
         TransactionHandler purchaseHandler =
                 TransactionStrategyImpl.handlers.get(FruitShopOperation.PURCHASE);
-        Assertions.assertEquals(
-                returnHandler, transactionStrategy.get(FruitShopOperation.RETURN));
-        Assertions.assertEquals(
-                supplyHandler, transactionStrategy.get(FruitShopOperation.SUPPLY));
-        Assertions.assertEquals(
-                purchaseHandler, transactionStrategy.get(FruitShopOperation.PURCHASE));
+        Assertions.assertEquals(purchaseHandler,
+                transactionStrategy.get(FruitShopOperation.PURCHASE));
+    }
+
+    @Test
+    void getBalanceHandler_OK() {
         TransactionHandler balanceHandler =
                 TransactionStrategyImpl.handlers.get(FruitShopOperation.BALANCE);
-        Assertions.assertEquals(
-                balanceHandler, transactionStrategy.get(FruitShopOperation.BALANCE));
+        Assertions.assertEquals(balanceHandler,
+                transactionStrategy.get(FruitShopOperation.BALANCE));
     }
 }
+

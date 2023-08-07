@@ -29,8 +29,7 @@ class TransactionValidatorImplTest {
     void validate_OK() {
         String input = HEADING + System.lineSeparator()
                 + VALID_RECORD + System.lineSeparator();
-        validator.validate(input);
-        Assertions.assertDoesNotThrow(() -> new InvalidDataException("Data is invalid"));
+        Assertions.assertDoesNotThrow(() -> validator.validate(input));
     }
 
     @Test

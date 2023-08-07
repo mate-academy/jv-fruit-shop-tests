@@ -16,6 +16,7 @@ class BalanceTransactionHandlerTest {
     @BeforeEach
     void setUp() {
         balanceTransactionHandler = new BalanceTransactionHandler();
+        Storage.clear();
     }
 
     @Test

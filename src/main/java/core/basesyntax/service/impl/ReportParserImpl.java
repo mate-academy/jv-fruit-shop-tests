@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.service.interfaces.TransactionParser;
 import java.util.Map;
 
@@ -9,6 +10,9 @@ public class ReportParserImpl implements TransactionParser<String, Map<String, I
 
     @Override
     public String parse(Map<String, Integer> data) {
+        if (data == null) {
+            throw new InvalidDataException("Data for parsing report must not be null!");
+        }
         StringBuilder report = new StringBuilder().append(REPORT_HEADING);
         for (Map.Entry<String, Integer> entry : data.entrySet()) {
             report.append(entry.getKey())

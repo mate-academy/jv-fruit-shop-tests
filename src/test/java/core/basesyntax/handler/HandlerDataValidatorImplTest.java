@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class HandlerDataValidatorImplTest {
     private static final String NULL_VALUE = null;
-
     private static final int NEGATIVE_QTY = -1;
-
     private HandlerDataValidator validator;
 
     @BeforeEach
@@ -28,7 +26,7 @@ public class HandlerDataValidatorImplTest {
     }
 
     @Test
-    void checkNegative_negativeValue_Ok() {
+    void checkNegative_negativeValue_notOk() {
         RuntimeException negativeCaseException = assertThrows(RuntimeException.class,
                 () -> validator.checkNegative(NEGATIVE_QTY));
         assertEquals("Quantity cannot be less than zero " + NEGATIVE_QTY,

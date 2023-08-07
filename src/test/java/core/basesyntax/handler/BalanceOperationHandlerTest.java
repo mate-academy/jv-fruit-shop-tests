@@ -26,7 +26,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handle_validZeroValueCase_Ok() {
+    void handle_validZeroValueCase_notOk() {
         Storage.storage.put(VALID_FRUIT, ZERO_QTY);
         handler.handle(VALID_FRUIT, ZERO_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);
@@ -42,7 +42,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handle_negativeValueCase_Ok() {
+    void handle_negativeValueCase_notOk() {
         RuntimeException operationException = assertThrows(RuntimeException.class,
                 () -> handler.handle(VALID_FRUIT, NEGATIVE_QTY));
         assertEquals("Quantity cannot be less than zero " + NEGATIVE_QTY,
@@ -50,7 +50,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handle_nullKey_Ok() {
+    void handle_nullKey_notOk() {
         RuntimeException operationException = assertThrows(RuntimeException.class,
                 () -> handler.handle(NULL_FRUIT, POSITIVE_QTY));
         assertEquals("Fruit cannot be null", operationException.getMessage());

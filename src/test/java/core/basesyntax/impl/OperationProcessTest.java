@@ -1,6 +1,7 @@
 package core.basesyntax.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -19,7 +20,7 @@ import org.junit.jupiter.api.Test;
 class OperationProcessTest {
     private static DataProcesser dataProcesser;
     private static List<FruitTransaction> fruitTransactionList;
-    private static final Map<Operation, OperationHandler> operationDefiner = Map.of(
+    private static final Map<Operation, OperationHandler> OPERATION_HANDLER_MAP = Map.of(
             Operation.BALANCE, new BalanceOperationHandler(),
             Operation.PURCHASE, new PurchaseOperationHandler(),
             Operation.RETURN, new ReturnOperationHandler(),
@@ -36,7 +37,15 @@ class OperationProcessTest {
                 new FruitTransaction(Operation.PURCHASE, "apple", 5),
                 new FruitTransaction(Operation.SUPPLY, "apple", 3),
                 new FruitTransaction(Operation.RETURN, "apple", 2));
-        dataProcesser.processData(fruitTransactionList, operationDefiner);
+        dataProcesser.processData(fruitTransactionList, OPERATION_HANDLER_MAP);
         assertEquals(10, Storage.getStorage().get("apple"));
+    }
+
+    @Test
+    void process_NullTransactions_NotOk() {
+        fruitTransactionList = null;
+        assertThrows(RuntimeException.class,
+                () -> dataProcesser.processData(fruitTransactionList, OPERATION_HANDLER_MAP),
+                "Transactions must not be null");
     }
 }

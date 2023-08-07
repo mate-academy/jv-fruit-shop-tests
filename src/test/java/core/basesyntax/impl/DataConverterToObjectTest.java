@@ -1,17 +1,23 @@
 package core.basesyntax.impl;
 
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataConverterToObjectTest {
-    private DataConverter dataConverter = new DataConverterToObject();
+    private static DataConverter dataConverter;
+
+    @BeforeAll
+    static void setUp() {
+        dataConverter = new DataConverterToObject();
+    }
 
     @Test
     void convert_ValidData_Ok() {
@@ -28,9 +34,11 @@ class DataConverterToObjectTest {
     void convert_NullData_NotOk() {
         List<String> inputDataNull = null;
         assertThrows(RuntimeException.class,
-                () -> dataConverter.convert(inputDataNull));
+                () -> dataConverter.convert(inputDataNull),
+                "Transactions must not be null");
         List<String> emptyInputData = new ArrayList<>();
         assertThrows(RuntimeException.class,
-                () -> dataConverter.convert(emptyInputData));
+                () -> dataConverter.convert(emptyInputData),
+                "Transactions should not be empty");
     }
 }

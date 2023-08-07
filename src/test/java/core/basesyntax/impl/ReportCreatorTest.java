@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportCreatorTest {
+    private static final String EXPECTED_REPORT = "fruit,quantity\nbanana,15\napple,25";
     private static ReportCreator reportCreator;
 
     @BeforeAll
@@ -21,7 +22,13 @@ class ReportCreatorTest {
         Storage.getStorage().put("apple", 25);
         Storage.getStorage().put("banana", 15);
         String report = reportCreator.prepare();
-        String expectedReport = "fruit,quantity\nbanana,15\napple,25";
+        assertEquals(EXPECTED_REPORT, report);
+    }
+
+    @Test
+    public void testCreateReport_EmptyData() {
+        String expectedReport = "fruit,quantity";
+        String report = reportCreator.prepare();
         assertEquals(expectedReport, report);
     }
 

@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ConvertFromDataStringToList;
-import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.ReportCreator;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,26 +16,26 @@ import org.junit.jupiter.api.Test;
 
 class ReportCreatorImplTest {
     private ReportCreator<FruitTransaction> reportCreator;
-    private CsvFileReader csvFileReader;
-    private ConvertFromDataStringToList<FruitTransaction> convertor;
 
     @BeforeEach
     void setUp() {
         reportCreator = new ReportCreatorImpl();
-        csvFileReader = new CsvFileReaderImpl();
-        convertor = new ConvertFromDataStringToListImpl();
         Storage.storage.clear();
+        Storage.storage.put("apple",90);
+        Storage.storage.put("banana",45);
     }
 
     @Test
     void createReport_validInput_ok() {
-        String transaction = csvFileReader.read("src/main/resources/input.csv");
-        List<FruitTransaction> fruitTransactions = convertor.convert(transaction);
+        List<FruitTransaction> fruitTransactions = Arrays.asList(
+                new FruitTransaction(Operation.PURCHASE, "banana", 20),
+                new FruitTransaction(Operation.RETURN, "apple", 48)
+        );
 
         String actualReport = reportCreator.createReport(Storage.storage, fruitTransactions);
         String expectedReport = "fruit,quantity" + System.lineSeparator()
-                + "banana,152" + System.lineSeparator()
-                + "apple,90";
+                + "banana,25" + System.lineSeparator()
+                + "apple,138";
         assertEquals(expectedReport, actualReport);
     }
 
@@ -51,13 +49,13 @@ class ReportCreatorImplTest {
     @Test
     void createReport_negativeQuantity_notOk() {
         List<FruitTransaction> transactions = Arrays.asList(
-                new FruitTransaction(Operation.PURCHASE,"apple", 10)
+                new FruitTransaction(Operation.PURCHASE, "apple", 10)
         );
 
         Map<String, Integer> report = new HashMap<>();
-        report.put("Apple", -5);
+        report.put("apple", -5);
 
         assertThrows(RuntimeException.class,
-                () -> reportCreator.createReport(Storage.storage, transactions));
+                () -> reportCreator.createReport(report, transactions));
     }
 }

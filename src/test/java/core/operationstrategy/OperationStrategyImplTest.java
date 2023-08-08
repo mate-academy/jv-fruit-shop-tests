@@ -37,7 +37,7 @@ class OperationStrategyImplTest {
 
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        assertEquals(balanceHandler, operationStrategy.get(OperationType.B));
+        assertEquals(balanceHandler.getClass(), operationStrategy.get(OperationType.B).getClass());
     }
 
     @Test

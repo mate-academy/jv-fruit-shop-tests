@@ -4,11 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.exception.OperationHandlerException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final BalanceOperationHandler handler = new BalanceOperationHandler();
+    private BalanceOperationHandler handler;
 
+    @BeforeEach
+    public void setUp() {
+        handler = new BalanceOperationHandler();
+    }
     @Test
     public void testGetTransaction_PositiveAmount_ok() {
         int currentAmount = 100;

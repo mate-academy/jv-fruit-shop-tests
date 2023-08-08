@@ -17,13 +17,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitStoreTest {
-    private Map<OperationType, OperationHandler> strategyMap = new HashMap<>();
-    private OperationStrategyImpl strategy = new OperationStrategyImpl(strategyMap);
     private FruitStore fruitStore;
 
     @BeforeEach
     public void setUp() {
-        fruitStore = new FruitStore(strategy);
+        Map<OperationType, OperationHandler> strategyMap = new HashMap<>();
+        strategyMap.put(OperationType.B, new BalanceOperationHandler());
+        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(strategyMap);
+        fruitStore = new FruitStore(operationStrategy);
         fruitStore.resetTransactions();
     }
 
@@ -167,9 +168,5 @@ public class FruitStoreTest {
         assertEquals(OperationType.B, result.get(0).getOperationType());
         assertEquals("Apple", result.get(0).getProduct());
         assertEquals(200, result.get(0).getQuantity());
-    }
-
-    {
-        strategyMap.put(OperationType.B, new BalanceOperationHandler());
     }
 }

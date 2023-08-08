@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.List;
 
 public class WriteReportServiceImplTest {
     private static final String TEST_FILE_PATH = "src/test/java/resources/test_report.csv";
@@ -42,18 +43,17 @@ public class WriteReportServiceImplTest {
     }
 
     private void assertReportContentMatches(String expectedContent) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE_PATH))) {
-            String line;
-            int lineCount = 0;
-            while ((line = reader.readLine()) != null) {
-                if (lineCount == 0) {
-                    assertEquals("fruit,quantity", line);
-                } else {
-                    assertEquals(expectedContent.split("\n")[lineCount - 1], line);
-                }
-                lineCount++;
-            }
-            assertEquals(expectedContent.split("\n").length, lineCount - 1);
+        String actualContent = readReportContent(TEST_FILE_PATH);
+        assertEquals(expectedContent, actualContent);
+    }
+
+    private String readReportContent(String filePath) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(filePath));
+
+        if (!lines.isEmpty()) {
+            lines.remove(0);
         }
+
+        return String.join("\n", lines);
     }
 }

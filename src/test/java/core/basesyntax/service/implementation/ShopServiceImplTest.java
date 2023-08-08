@@ -7,39 +7,32 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.FruitShopOperationsHandler;
-import core.basesyntax.strategy.PurchaseHandler;
-import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
     private static final String PRODUCT_NAME = "apricot";
     private static final int POSITIVE_QUANTITY = 15;
-    private ShopService shopService;
-    private FruitTransaction transaction;
-    private StorageService storageService;
-    private Map<FruitTransaction.Operation, FruitShopOperationsHandler> processSelector
-            = new HashMap<>();
+    private static ShopService shopService;
+    private static Map<FruitTransaction.Operation, FruitShopOperationsHandler> processSelector;
+    private static FruitTransaction transaction;
+    private static StorageService storageService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         shopService = new ShopServiceImpl();
+        storageService = new StorageServiceImpl();
+        processSelector = new HashMap<>();
+        processSelector.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageService));
         transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.BALANCE);
+        transaction.setOperation(FruitTransaction.Operation.SUPPLY);
         transaction.setFruit(PRODUCT_NAME);
         transaction.setQuantity(POSITIVE_QUANTITY);
-        storageService = new StorageServiceImpl();
-        processSelector.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageService));
-        processSelector.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(storageService));
-        processSelector.put(FruitTransaction.Operation.RETURN, new ReturnHandler(storageService));
-        processSelector.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseHandler(storageService));
     }
 
     @Test

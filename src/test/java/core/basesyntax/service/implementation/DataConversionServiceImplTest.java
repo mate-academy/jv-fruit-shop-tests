@@ -5,37 +5,46 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReaderService;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataConversionServiceImplTest {
-    private DataConversionServiceImpl dataConversionService;
-    private FileReaderService fileReaderService;
-    private String newFile;
+    private static String SEPARATOR = System.lineSeparator();
+    private static DataConversionServiceImpl dataConversionService;
     private String fileLines;
+
+    @BeforeAll
+    static void beforeAll() {
+        dataConversionService = new DataConversionServiceImpl();
+    }
 
     @BeforeEach
     void setUp() {
-        dataConversionService = new DataConversionServiceImpl();
-        fileReaderService = new FileReaderServiceImpl();
-        newFile = "src/test/resources/testData.csv";
-        fileLines = fileReaderService.read(newFile);
+        fileLines = "type,fruit,quantity" + SEPARATOR
+                + "b,banana,20" + SEPARATOR
+                + "b,apple,100" + SEPARATOR
+                + "s,banana,100" + SEPARATOR
+                + "p,banana,13" + SEPARATOR
+                + "r,apple,10" + SEPARATOR
+                + "p,apple,20" + SEPARATOR
+                + "p,banana,5" + SEPARATOR
+                + "s,banana,50";
     }
 
     @Test
     void convert_validFile_ok() {
         List<FruitTransaction> transactions = dataConversionService.convert(fileLines);
-        FruitTransaction actualTransaction = new FruitTransaction();
-        actualTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        actualTransaction.setFruit("banana");
-        actualTransaction.setQuantity(20);
+        FruitTransaction expectedTransaction = new FruitTransaction();
+        expectedTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        expectedTransaction.setFruit("banana");
+        expectedTransaction.setQuantity(20);
         FruitTransaction firstTransaction = transactions.get(0);
-        assertEquals(actualTransaction.getOperation(), firstTransaction.getOperation());
-        assertEquals(actualTransaction.getFruit(), firstTransaction.getFruit());
-        assertEquals(actualTransaction.getQuantity(), firstTransaction.getQuantity());
+        assertEquals(expectedTransaction.getOperation(), firstTransaction.getOperation());
+        assertEquals(expectedTransaction.getFruit(), firstTransaction.getFruit());
+        assertEquals(expectedTransaction.getQuantity(), firstTransaction.getQuantity());
     }
 
     @Test

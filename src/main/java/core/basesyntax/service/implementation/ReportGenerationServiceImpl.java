@@ -16,9 +16,17 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
         for (Map.Entry<String, Integer> entry : Storage.STORAGE.entrySet()) {
             report.append(entry.getKey())
                     .append(COMMA)
-                    .append(entry.getValue())
+                    .append(getValidValue(entry))
                     .append(SEPARATOR);
         }
         return report.toString();
+    }
+
+    private int getValidValue(Map.Entry<String, Integer> entry) {
+        if (entry.getValue() < 0) {
+            throw new RuntimeException("Invalid data in the report. "
+                    + "Product quantity can't be negative");
+        }
+        return entry.getValue();
     }
 }

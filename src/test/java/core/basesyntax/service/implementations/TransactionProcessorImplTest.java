@@ -39,7 +39,7 @@ class TransactionProcessorImplTest {
     }
 
     @Test
-    void process() {
+    void process_WriteInput_ok() {
         List<FruitTransaction> fruitInfo = List.of(transaction1, transaction2, transaction3);
         assertDoesNotThrow(() -> transactionProcessor.process(fruitInfo));
     }

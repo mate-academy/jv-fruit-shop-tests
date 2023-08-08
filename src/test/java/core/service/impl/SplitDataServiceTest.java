@@ -29,7 +29,8 @@ public class SplitDataServiceTest {
         );
     }
 
-    private void assertOperationDataListEquals(List<OperationData> actualList, OperationData... expectedData) {
+    private void assertOperationDataListEquals(List<OperationData> actualList,
+                                               OperationData... expectedData) {
         assertNotNull(actualList);
         assertEquals(expectedData.length, actualList.size());
 

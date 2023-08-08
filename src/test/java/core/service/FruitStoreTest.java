@@ -7,13 +7,12 @@ import core.exception.OperationHandlerException;
 import core.operationstrategy.OperationStrategyImpl;
 import core.transactions.BalanceOperationHandler;
 import core.transactions.OperationHandler;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FruitStoreTest {
     private Map<OperationType, OperationHandler> operationHandlers;

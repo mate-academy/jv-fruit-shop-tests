@@ -18,7 +18,6 @@ class PurchaseHandlerTest {
     private static final int ZERO_QUANTITY = 0;
     private static final int NEGATIVE_QUANTITY = -1;
     private static final int STORAGE_BALANCE = 50;
-
     private FruitShopOperationsHandler purchaseHandler;
 
     @BeforeEach

@@ -16,7 +16,6 @@ class ReturnHandlerTest {
     private static final int POSITIVE_QUANTITY = 15;
     private static final int ZERO_QUANTITY = 0;
     private static final int NEGATIVE_QUANTITY = -1;
-
     private FruitShopOperationsHandler returnHandler;
 
     @BeforeEach

@@ -29,6 +29,20 @@ public class SplitDataServiceTest {
         );
     }
 
+    private void assertOperationDataListEquals(List<OperationData> actualList, OperationData... expectedData) {
+        assertNotNull(actualList);
+        assertEquals(expectedData.length, actualList.size());
+
+        for (int i = 0; i < expectedData.length; i++) {
+            OperationData expected = expectedData[i];
+            OperationData actual = actualList.get(i);
+
+            assertEquals(expected.getOperationType(), actual.getOperationType());
+            assertEquals(expected.getProduct(), actual.getProduct());
+            assertEquals(expected.getQuantity(), actual.getQuantity());
+        }
+    }
+
     @Test
     public void testSplitData_EmptyData_ok() {
         String data = "";
@@ -105,20 +119,5 @@ public class SplitDataServiceTest {
 
         assertNotNull(dataList);
         assertEquals(1, dataList.size());
-    }
-
-    private void assertOperationDataListEquals(List<OperationData> actualList,
-                                               OperationData... expectedData) {
-        assertNotNull(actualList);
-        assertEquals(expectedData.length, actualList.size());
-
-        for (int i = 0; i < expectedData.length; i++) {
-            OperationData expected = expectedData[i];
-            OperationData actual = actualList.get(i);
-
-            assertEquals(expected.getOperationType(), actual.getOperationType());
-            assertEquals(expected.getProduct(), actual.getProduct());
-            assertEquals(expected.getQuantity(), actual.getQuantity());
-        }
     }
 }

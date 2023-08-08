@@ -14,6 +14,7 @@ public class BalanceOperationHandlerTest {
     public void setUp() {
         handler = new BalanceOperationHandler();
     }
+
     @Test
     public void testGetTransaction_PositiveAmount_ok() {
         int currentAmount = 100;

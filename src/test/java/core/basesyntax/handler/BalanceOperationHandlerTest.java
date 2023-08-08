@@ -26,7 +26,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handle_validZeroValueCase_notOk() {
+    void handle_validZeroValueCase_ok() {
         Storage.storage.put(VALID_FRUIT, ZERO_QTY);
         handler.handle(VALID_FRUIT, ZERO_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);
@@ -34,7 +34,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handle_validBalance_Ok() {
+    void handle_validBalance_ok() {
         Storage.storage.put(VALID_FRUIT, POSITIVE_QTY);
         handler.handle(VALID_FRUIT, POSITIVE_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);

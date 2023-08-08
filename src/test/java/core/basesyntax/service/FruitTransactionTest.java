@@ -14,7 +14,7 @@ public class FruitTransactionTest {
     private static final String VALID_CODE = "b";
 
     @Test
-    void getOperation_validCode_Ok() {
+    void getOperation_validCode_ok() {
         Assertions.assertEquals(FruitTransaction.Operation.getOperation(VALID_CODE),
                 VALID_OPERATION);
     }

@@ -24,7 +24,7 @@ public class FruitReportServiceImplTest {
     }
 
     @Test
-    void createReport_validData_Ok() {
+    void createReport_validData_ok() {
         List<String> expectedOutput = new ArrayList<>(List.of("fruit,quantity",
                 "banana,30",
                 "apple,20"));

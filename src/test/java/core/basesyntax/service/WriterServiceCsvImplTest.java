@@ -21,7 +21,7 @@ public class WriterServiceCsvImplTest {
     private final WriterService writerService = new WriterServiceCsvImpl();
 
     @Test
-    void writeToFile_validFile_Ok() {
+    void writeToFile_validFile_ok() {
         writerService.writeToFile(LINES, VALID_FILE);
         Assertions.assertLinesMatch(LINES, readFromFile(VALID_FILE));
     }

@@ -20,7 +20,7 @@ public class DataFileParserImplTest {
     private final DataFileParser fileParser = new DataFileParserImpl();
 
     @Test
-    void parser_validList_Ok() {
+    void parser_validList_ok() {
         List<FruitTransaction> output = fileParser.parse(VALID_LINES);
         FruitTransaction fruit = output.get(0);
         Assertions.assertEquals(VALID_TRANSACTION, fruit);

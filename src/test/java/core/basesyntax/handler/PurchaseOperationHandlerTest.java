@@ -22,7 +22,7 @@ public class PurchaseOperationHandlerTest {
             new HandlerDataValidatorImpl());
 
     @Test
-    void handle_validZeroValueCase_Ok() {
+    void handle_validZeroValueCase_ok() {
         Storage.storage.put(VALID_FRUIT, POSITIVE_QTY);
         handler.handle(VALID_FRUIT, ZERO_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);
@@ -30,7 +30,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_validPurchaseCase_Ok() {
+    void handle_validPurchaseCase_ok() {
         Storage.storage.put(VALID_FRUIT, POSITIVE_QTY);
         handler.handle(VALID_FRUIT, PURCHASE_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);

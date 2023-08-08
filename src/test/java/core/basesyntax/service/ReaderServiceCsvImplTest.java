@@ -15,7 +15,7 @@ public class ReaderServiceCsvImplTest {
     private final ReaderService readerService = new ReaderServiceCsvImpl();
 
     @Test
-    void readFromFile_validFile_Ok() {
+    void readFromFile_validFile_ok() {
         List<String> expectedStrings = new ArrayList<>(List.of(
                 "type,fruit,quantity",
                 "b,banana,20"));

@@ -27,7 +27,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    void handle_validZeroValueCase_Ok() {
+    void handle_validZeroValueCase_ok() {
         Storage.storage.put(VALID_FRUIT, POSITIVE_QTY);
         handler.handle(VALID_FRUIT, ZERO_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);
@@ -35,7 +35,7 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    void handle_validSupplyCase_Ok() {
+    void handle_validSupplyCase_ok() {
         Storage.storage.put(VALID_FRUIT, POSITIVE_QTY);
         handler.handle(VALID_FRUIT, POSITIVE_QTY);
         int actualValue = Storage.storage.get(VALID_FRUIT);

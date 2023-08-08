@@ -37,20 +37,16 @@ public class WriteCsvFileServiceTest {
         writeCsvFileService.writeFile(REPORT_FILE, testReport);
         assertTrue(Files.exists(REPORT_FILE_PATH),
                 "Can`t read " + REPORT_FILE + " file.");
-        List<String> acquiredReport;
-        try {
-            acquiredReport = Files.readAllLines(REPORT_FILE_PATH);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        String acquiredReportStr = convertListDataToString(acquiredReport);
+        String acquiredReportStr = readReportFile();
         assertEquals(testReport, acquiredReportStr);
     }
 
     @Test
     void writeFile_nullReport_notOkay() {
-        assertThrows(WriteFileException.class,
+        WriteFileException writeFileException = assertThrows(WriteFileException.class,
                 () -> writeCsvFileService.writeFile(REPORT_FILE, null));
+        String expectedMessage = "Writing null data. You give me null";
+        assertEquals(writeFileException.getMessage(), expectedMessage);
     }
 
     @AfterEach
@@ -62,6 +58,16 @@ public class WriteCsvFileServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can`t delete file");
         }
+    }
+
+    private String readReportFile() {
+        List<String> acquiredReport;
+        try {
+            acquiredReport = Files.readAllLines(REPORT_FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return convertListDataToString(acquiredReport);
     }
 
     private String buildTestReport() {

@@ -28,6 +28,9 @@ public class ParseServiceTest {
     private static final String COMMA = ",";
     private static final String WRONG_QUANTITY_TYPE =
             "Someday You Gonna Realize You`ve Been sleepwalking through it all";
+    private static final int REQUIRED_ROW_LENGTH = 3;
+    private static final int EMPTY_TRANSACTION_LENGTH = 0;
+    private static final int WRONG_COLUMN_NUMBER = 2;
     private static List<String> testData;
 
     @BeforeEach
@@ -53,14 +56,19 @@ public class ParseServiceTest {
 
     @Test
     void parseDataToTransaction_fruitTransactionEmpty_notOkay() {
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
+        String expectedMessage = "Empty data from file";
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
+
     }
 
     @Test
     void parseDataToTransaction_fruitTransactionNull_notOkay() {
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(null));
+        String expectedMessage = "Empty data from file";
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
     }
 
     @Test
@@ -68,24 +76,33 @@ public class ParseServiceTest {
         testData.add(HEADER);
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA);
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
+        String expectedMessage = "Wrong csv file: column length in row "
+                + WRONG_COLUMN_NUMBER
+                + " Need: "
+                + REQUIRED_ROW_LENGTH;
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
     }
 
     @Test
     void parseDataToTransaction_missingHeader_notOkay() {
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
+        String expectedMessage = "Data without header: [b,banana,20, s,banana,20]";
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
     }
 
     @Test
     void parseDataToTransaction_invalidQuantity_notOkay() {
         testData.add(HEADER);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + WRONG_QUANTITY_TYPE);
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
+        String expectedMessage = "Invalid quantity format: " + WRONG_QUANTITY_TYPE;
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
     }
 
     @Test
@@ -93,8 +110,10 @@ public class ParseServiceTest {
         testData.add(HEADER);
         testData.add(WRONG_ZAPP_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
+        String expectedMessage = "Invalid operation code: " + WRONG_ZAPP_OPERATION_CODE;
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
     }
 
     @Test
@@ -102,7 +121,10 @@ public class ParseServiceTest {
         testData.add(WRONG_HEADER);
         testData.add(BALANCE_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
         testData.add(SUPPLY_OPERATION_CODE + COMMA + BANANA + COMMA + TEST_BANANA_QUANTITY);
-        assertThrows(WrongDataBaseException.class,
+        WrongDataBaseException wrongDataBaseException = assertThrows(WrongDataBaseException.class,
                 () -> parseService.parseDataToTransaction(testData));
+        String expectedMessage = "Data without header: "
+                + "[i just wan`t to sleep, b,banana,20, s,banana,20]";
+        assertEquals(expectedMessage, wrongDataBaseException.getMessage());
     }
 }

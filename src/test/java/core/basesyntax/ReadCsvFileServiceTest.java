@@ -7,9 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.exceptions.ReadFileException;
 import core.basesyntax.service.ReadCsvFileService;
 import core.basesyntax.service.implementations.ReadCsvFileServiceImpl;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,23 +24,31 @@ public class ReadCsvFileServiceTest {
     @Test
     void readFile_validData_okay() {
         List<String> data = assertDoesNotThrow(() -> readCsvFileService.readFile(SOURCE_FILE));
-        try {
-            List<String> expectedData = Files.readAllLines(Path.of(SOURCE_FILE));
-            assertEquals(data, expectedData);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        List<String> expectedData = List.of("type,fruit,quantity",
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
+        assertEquals(data, expectedData);
     }
 
     @Test
     void readFile_missingFile_notOkay() {
-        assertThrows(ReadFileException.class,
+        ReadFileException readFileException = assertThrows(ReadFileException.class,
                 () -> readCsvFileService.readFile(NOT_EXIST_SOURCE_FILE));
+        String expectedMeassage = "Can`t read from file: " + NOT_EXIST_SOURCE_FILE;
+        assertEquals(expectedMeassage, readFileException.getMessage());
     }
 
     @Test
     void readFile_nullFile_notOkay() {
-        assertThrows(ReadFileException.class,
+        ReadFileException readFileException = assertThrows(ReadFileException.class,
                 () -> readCsvFileService.readFile(null));
+        String expectedMeassage = "How did you dare to give null filename?";
+        assertEquals(expectedMeassage, readFileException.getMessage());
     }
 }

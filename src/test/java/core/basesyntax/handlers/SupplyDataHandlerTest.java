@@ -39,20 +39,31 @@ public class SupplyDataHandlerTest {
 
     @Test
     void processData_negativeQuantity_notOkay() {
-        assertThrows(RuntimeException.class,
+        RuntimeException runtimeException = assertThrows(RuntimeException.class,
                 () -> dataHandler.processData(APPLE, NEGATIVE_APPLE_QUANTITY));
+        String expectedMessage = "Wrong fruit quantity for "
+                + APPLE
+                + ", quantity: "
+                + NEGATIVE_APPLE_QUANTITY;
+        assertEquals(expectedMessage, runtimeException.getMessage());
+
     }
 
     @Test
-    void processData_nullFruit_notOkay() {
-        assertThrows(FruitsNameException.class,
+    void process_nullFruit_notOkay() {
+        FruitsNameException fruitsNameException = assertThrows(FruitsNameException.class,
                 () -> dataHandler.processData(NULL_FRUIT, APPLE_QUANTITY));
+        String expectedMessage = "Wrong fruit name: " + NULL_FRUIT;
+        assertEquals(expectedMessage, fruitsNameException.getMessage());
+
     }
 
     @Test
-    void processData_emptyFruit_notOkay() {
-        assertThrows(FruitsNameException.class,
+    void process_emptyFruit_notOkay() {
+        FruitsNameException fruitsNameException = assertThrows(FruitsNameException.class,
                 () -> dataHandler.processData(EMPTY_FRUIT, APPLE_QUANTITY));
+        String expectedMessage = "Wrong fruit name: " + EMPTY_FRUIT;
+        assertEquals(expectedMessage, fruitsNameException.getMessage());
     }
 
     @AfterEach

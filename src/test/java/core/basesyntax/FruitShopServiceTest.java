@@ -60,7 +60,7 @@ public class FruitShopServiceTest {
                 () -> fruitShopService.updateData(transactions));
         System.out.println(exception.getMessage());
         String expectedMessage = "Invalid quantity: -50";
-        assertEquals(exception.getMessage(), expectedMessage);
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
@@ -69,7 +69,7 @@ public class FruitShopServiceTest {
         TransactionException exception = assertThrows(TransactionException.class,
                 () -> fruitShopService.updateData(transactions));
         String expectedMessage = "Null transactions on input";
-        assertEquals(exception.getMessage(), expectedMessage);
+        assertEquals(expectedMessage, exception.getMessage());
         assertEquals(EMPTY_STORAGE_SIZE, Storage.getStorage().size());
     }
 

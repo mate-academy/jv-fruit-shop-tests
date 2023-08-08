@@ -45,7 +45,7 @@ public class ParseServiceImpl implements ParseService {
 
     private void validateColumns(String[] column) {
         if (column.length != REQUIRED_ROW_LENGTH) {
-            throw new WrongDataBaseException("Wrong csv file: Row length is "
+            throw new WrongDataBaseException("Wrong csv file: column length in row "
                     + column.length
                     + " Need: "
                     + REQUIRED_ROW_LENGTH);

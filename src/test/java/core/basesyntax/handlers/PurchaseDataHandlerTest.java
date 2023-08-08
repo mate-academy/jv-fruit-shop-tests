@@ -46,28 +46,49 @@ public class PurchaseDataHandlerTest {
     @Test
     void processData_biggerThanStoragePurchase_notOkay() {
         Storage.addFruits(APPLE, STORAGE_QUANTITY);
-        assertThrows(FruitsQuantityException.class,
-                () -> dataHandler.processData(APPLE, APPLE_QUANTITY_BIGGER_THAN_STORAGE));
+        FruitsQuantityException fruitsQuantityException
+                = assertThrows(FruitsQuantityException.class,
+                    () -> dataHandler.processData(APPLE, APPLE_QUANTITY_BIGGER_THAN_STORAGE));
+        String expectedMessage = "Wrong fruit quantity for "
+                + APPLE
+                + ", quantity: "
+                + APPLE_QUANTITY_BIGGER_THAN_STORAGE
+                + " and storage: "
+                + Storage.getFruits(APPLE);
+        assertEquals(fruitsQuantityException.getMessage(), expectedMessage);
     }
 
     @Test
     void processData_negativeQuantity_notOkay() {
-        assertThrows(RuntimeException.class,
+        RuntimeException runtimeException = assertThrows(RuntimeException.class,
                 () -> dataHandler.processData(APPLE, NEGATIVE_APPLE_QUANTITY));
+        String expectedMessage = "Wrong fruit quantity for "
+                + APPLE
+                + ", quantity: "
+                + NEGATIVE_APPLE_QUANTITY
+                + " and storage: "
+                + Storage.getFruits(APPLE);
+        assertEquals(runtimeException.getMessage(), expectedMessage);
     }
 
     @Test
     void processData_nullFruit_notOkay() {
         Storage.addFruits(APPLE, STORAGE_QUANTITY);
-        assertThrows(FruitsNameException.class, () -> dataHandler.processData(
+        FruitsNameException fruitsNameException = assertThrows(FruitsNameException.class,
+                () -> dataHandler.processData(
                 NULL_FRUIT, APPLE_QUANTITY_SMALLER_THAN_STORAGE));
+        String expectedMessage = "Wrong fruit name: " + NULL_FRUIT;
+        assertEquals(fruitsNameException.getMessage(), expectedMessage);
     }
 
     @Test
     void processData_emptyFruit_notOkay() {
         Storage.addFruits(APPLE, STORAGE_QUANTITY);
-        assertThrows(FruitsNameException.class, () -> dataHandler.processData(
+        FruitsNameException fruitsNameException = assertThrows(FruitsNameException.class,
+                () -> dataHandler.processData(
                 EMPTY_FRUIT, APPLE_QUANTITY_SMALLER_THAN_STORAGE));
+        String expectedMessage = "Wrong fruit name: " + EMPTY_FRUIT;
+        assertEquals(fruitsNameException.getMessage(), expectedMessage);
     }
 
     @AfterEach

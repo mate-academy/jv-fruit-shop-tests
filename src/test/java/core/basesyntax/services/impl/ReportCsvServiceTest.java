@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.services.impl;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +24,7 @@ public class ReportCsvServiceTest {
 
     @BeforeEach
     void cleanStorage() {
-        fruitDB.getStorageFruits().clear();
+        fruitDB.clean();
     }
 
     @Test

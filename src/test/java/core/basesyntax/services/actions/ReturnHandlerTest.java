@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.services.actions;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +24,8 @@ public class ReturnHandlerTest {
 
     @BeforeEach
     void cleanStorage() {
-        fruitDB.getStorageFruits().clear();
+        fruitDB.clean();
+        fruitDB.add("banana", 30);
     }
 
     @Test
@@ -35,24 +36,21 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    void returnHandle_emptyName_ok() {
-        fruitDB.add("banana", 30);
+    void returnHandle_emptyName_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
                         .executeAction("", 20));
     }
 
     @Test
-    void returnHandle_nullValue_ok() {
-        fruitDB.add("banana", 30);
+    void returnHandle_nullValue_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
                         .executeAction("banana", null));
     }
 
     @Test
-    void returnHandle_negativeValue_ok() {
-        fruitDB.add("banana", 30);
+    void returnHandle_negativeValue_notOk() {
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
                         .executeAction("banana", -4));
@@ -60,15 +58,13 @@ public class ReturnHandlerTest {
 
     @Test
     void returnHandle_notContainFruit_ok() {
-        fruitDB.add("apple", 30);
         assertThrows(ValidationDataException.class,
                 () -> actionHandler
-                        .executeAction("banana", 10));
+                        .executeAction("apple", 10));
     }
 
     @Test
     void returnHandle_correctTestOneAction_ok() {
-        fruitDB.add("banana", 30);
         actionHandler.executeAction("banana", 20);
         Integer actual = fruitDB.getFruit("banana");
         Integer expected = 50;
@@ -77,6 +73,7 @@ public class ReturnHandlerTest {
 
     @Test
     void returnHandle_correctTestTwoActions_ok() {
+        fruitDB.clean();
         fruitDB.add("banana", 40);
         fruitDB.add("apple", 40);
         actionHandler.executeAction("banana", 20);

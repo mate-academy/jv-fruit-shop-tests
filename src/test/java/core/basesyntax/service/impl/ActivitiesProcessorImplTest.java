@@ -25,8 +25,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ActivitiesProcessorImplTest {
 
-    private static final Map<FruitActivity.Type, ActivityHandler> ACTIVITY_HANDLER_MAP =
-            new HashMap<>();
+    private static final Map<FruitActivity.Type, ActivityHandler> ACTIVITY_HANDLER_MAP
+            = new HashMap<>();
 
     static {
         ACTIVITY_HANDLER_MAP.put(FruitActivity.Type.BALANCE, new BalanceHandler());
@@ -48,8 +48,7 @@ class ActivitiesProcessorImplTest {
     @MethodSource("validActivities")
     void parseData_validActivities_Ok(
             List<FruitActivity> activities, Map<String, Integer> expected) {
-        assertDoesNotThrow(() ->
-                        activitiesProcessor.processActivities(activities),
+        assertDoesNotThrow(() -> activitiesProcessor.processActivities(activities),
                 "Parsing valid lines shouldnt throw any exceptions");
         Map<String, Integer> actual = fruitDb;
         assertEquals(expected, actual, "FruitDB isn't equals expected");

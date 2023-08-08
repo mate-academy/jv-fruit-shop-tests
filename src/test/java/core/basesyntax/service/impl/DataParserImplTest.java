@@ -15,7 +15,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class DataParserImplTest {
-
     private static final DataParser dataParser = new DataParserImpl();
 
     @ParameterizedTest
@@ -67,7 +66,7 @@ class DataParserImplTest {
                             add(head);
                             add("l,banana,20");
                             add("n,apple,100");
-                            }}
+                        }}
                 )
         );
     }

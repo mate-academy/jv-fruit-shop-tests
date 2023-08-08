@@ -18,8 +18,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class ActivityStrategyImplTest {
-    private static final Map<FruitActivity.Type, ActivityHandler> ACTIVITY_HANDLER_MAP =
-            new HashMap<>();
+    private static final Map<FruitActivity.Type, ActivityHandler> ACTIVITY_HANDLER_MAP
+            = new HashMap<>();
 
     static {
         ACTIVITY_HANDLER_MAP.put(FruitActivity.Type.BALANCE, new BalanceHandler());

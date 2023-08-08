@@ -9,7 +9,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
-
     private static final FileReader csvFileReader = new CsvFileReader();
     private static final String FILE_NAME = "src/test/resources/activities.csv";
     private static final String UNEXISTED_FILE_NAME = "src/test/resources/activities2.csv";

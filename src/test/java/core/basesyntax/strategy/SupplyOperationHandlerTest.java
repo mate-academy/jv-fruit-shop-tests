@@ -35,8 +35,10 @@ class SupplyOperationHandlerTest {
 
     @Test
     void handle_NegativeData_NotOk() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> supplyHandler.handle("apple", -10));
+        String expected = "You can't supply negative quantity";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test

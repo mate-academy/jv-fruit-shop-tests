@@ -35,8 +35,10 @@ class ReturnOperationHandlerTest {
 
     @Test
     void handle_NegativeData_NotOk() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> returnHandler.handle("apple", -10));
+        String expected ="You can't return negative quantity";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test

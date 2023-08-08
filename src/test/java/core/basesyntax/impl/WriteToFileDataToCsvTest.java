@@ -26,17 +26,25 @@ class WriteToFileDataToCsvTest {
     void write_ValidData_Ok() {
         String report = "Test report data";
         writeDataToFileService.writeToFile(report, VALID_FILE_NAME);
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(VALID_FILE_NAME))) {
-            String line = bufferedReader.readLine();
-            assertEquals(report, line, "Content should match what was written!");
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read from file: " + VALID_FILE_NAME, e);
-        }
+        String line = readFromFile();
+        assertEquals(report, line, "Content should match what was written!");
     }
 
     @Test
     public void testWriteToFile_Exception() {
-        assertThrows(RuntimeException.class,
+        String expectedMessage = "Can't write to file with path: " + NON_EXISTENT_PATH;
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> writeDataToFileService.writeToFile(OUTPUT_DATA, NON_EXISTENT_PATH));
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    private String readFromFile() {
+        String line;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(VALID_FILE_NAME))) {
+            line = bufferedReader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read from file: " + VALID_FILE_NAME, e);
+        }
+        return line;
     }
 }

@@ -36,6 +36,10 @@ class DataConverterToObjectTest {
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convert(inputDataNull),
                 "Transactions must not be null");
+    }
+
+    @Test
+    void convert_EmptyData_NotOk() {
         List<String> emptyInputData = new ArrayList<>();
         assertThrows(RuntimeException.class,
                 () -> dataConverter.convert(emptyInputData),

@@ -2,6 +2,7 @@ package core.basesyntax.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import core.basesyntax.service.ReadFileService;
 import java.util.List;
@@ -21,9 +22,11 @@ class ReadFileFromCsvTest {
 
     @Test
     public void read_ValidFile_Ok() {
-        List<String> lines = fileReader.readFromFile(VALID_FILE_PATH);
-        Assertions.assertNotNull(lines);
-        assertEquals(3, lines.size());
+        List<String> actual = fileReader.readFromFile(VALID_FILE_PATH);
+        List<String> expected = List.of("Input", "To", "Read");
+        assertNotNull(actual);
+        assertEquals(3, actual.size());
+        assertEquals(expected, actual);
     }
 
     @Test

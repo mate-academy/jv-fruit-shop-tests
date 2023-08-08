@@ -35,19 +35,23 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handle_NegativeData_NotOk() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle("apple", -10));
+        String expected = "The quantity must be positive";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void sell_MoreThan_Has() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle("apple", 11));
+        String expected = "You can't sell more than you have";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void handle_NullFruit_NotOk() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseHandler.handle(null, 10));
     }
 

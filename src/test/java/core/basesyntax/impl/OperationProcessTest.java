@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 class OperationProcessTest {
     private static DataProcesser dataProcesser;
-    private static List<FruitTransaction> fruitTransactionList;
     private static final Map<Operation, OperationHandler> OPERATION_HANDLER_MAP = Map.of(
             Operation.BALANCE, new BalanceOperationHandler(),
             Operation.PURCHASE, new PurchaseOperationHandler(),
@@ -33,7 +32,7 @@ class OperationProcessTest {
 
     @Test
     void process_ValidTransactions_Ok() {
-        fruitTransactionList = List.of(new FruitTransaction(Operation.BALANCE, "apple", 10),
+        List<FruitTransaction> fruitTransactionList = List.of(new FruitTransaction(Operation.BALANCE, "apple", 10),
                 new FruitTransaction(Operation.PURCHASE, "apple", 5),
                 new FruitTransaction(Operation.SUPPLY, "apple", 3),
                 new FruitTransaction(Operation.RETURN, "apple", 2));
@@ -43,7 +42,7 @@ class OperationProcessTest {
 
     @Test
     void process_NullTransactions_NotOk() {
-        fruitTransactionList = null;
+        List<FruitTransaction> fruitTransactionList = null;
         assertThrows(RuntimeException.class,
                 () -> dataProcesser.processData(fruitTransactionList, OPERATION_HANDLER_MAP),
                 "Transactions must not be null");

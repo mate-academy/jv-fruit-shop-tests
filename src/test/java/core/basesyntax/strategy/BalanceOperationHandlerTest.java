@@ -31,14 +31,18 @@ public class BalanceOperationHandlerTest {
 
     @Test
     void handle_NegativeData_NotOk() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> balanceHandler.handle("banana", -10));
+        String expected = "Balance can't be negative";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void handle_NullFruit_NotOk() {
-        assertThrows(RuntimeException.class,
+        RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> balanceHandler.handle(null, 10));
+        String expected = "Fruit can't be null";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test

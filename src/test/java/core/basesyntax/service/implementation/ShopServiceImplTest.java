@@ -19,6 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceImplTest {
+    private static final String PRODUCT_NAME = "apricot";
+    private static final int POSITIVE_QUANTITY = 15;
     private ShopService shopService;
     private FruitTransaction transaction;
     private StorageService storageService;
@@ -30,8 +32,8 @@ class ShopServiceImplTest {
         shopService = new ShopServiceImpl();
         transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction.setFruit("banana");
-        transaction.setQuantity(20);
+        transaction.setFruit(PRODUCT_NAME);
+        transaction.setQuantity(POSITIVE_QUANTITY);
         storageService = new StorageServiceImpl();
         processSelector.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageService));
         processSelector.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(storageService));
@@ -43,7 +45,7 @@ class ShopServiceImplTest {
     @Test
     void process_validTransaction_ok() {
         shopService.process(transaction, processSelector);
-        assertEquals(transaction.getQuantity(), Storage.STORAGE.get("banana"));
+        assertEquals(transaction.getQuantity(), Storage.STORAGE.get(PRODUCT_NAME));
     }
 
     @Test

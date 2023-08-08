@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.exception.ValidationDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.CreateTaskService;
-import core.basesyntax.services.impl.CreateTaskServiceImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

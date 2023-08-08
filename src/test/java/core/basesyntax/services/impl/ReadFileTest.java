@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.ValidationDataException;
 import core.basesyntax.services.ReadFileService;
-import core.basesyntax.services.impl.ReadFileServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

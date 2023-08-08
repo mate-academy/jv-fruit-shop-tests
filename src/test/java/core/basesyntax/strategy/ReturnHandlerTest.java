@@ -24,7 +24,7 @@ class ReturnHandlerTest {
     }
 
     @Test
-    void returnOperationFruitExist_Ok() {
+    void returnOperationFruitExist_ok() {
         Map<String, Integer> expected = Map.of(FRUIT_BANANA, EXPECTED_QUANTITY);
         Storage.fruitsStorage.put(FRUIT_BANANA, CURRENT_QUANTITY);
         operationHandlerService.handle(
@@ -35,7 +35,7 @@ class ReturnHandlerTest {
     }
 
     @Test
-    void returnedOperationEmptyStorage_Ok() {
+    void returnedOperationEmptyStorage_ok() {
         Map<String, Integer> expected = Map.of(FRUIT_BANANA, EXPECTED_QUANTITY);
         operationHandlerService.handle(
                 new FruitTransaction(FruitTransaction.Operation.RETURN,

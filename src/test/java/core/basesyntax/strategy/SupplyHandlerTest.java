@@ -19,7 +19,7 @@ class SupplyHandlerTest {
     }
 
     @Test
-    void supplyOperationFruitExist_Ok() {
+    void supplyOperationFruitExist_ok() {
         Map<String, Integer> expected = Map.of("banana", 10);
         Storage.fruitsStorage.put("banana", 5);
         operationHandlerService.handle(
@@ -29,7 +29,7 @@ class SupplyHandlerTest {
     }
 
     @Test
-    void supplyOperationEmptyStorage_Ok() {
+    void supplyOperationEmptyStorage_ok() {
         Map<String, Integer> expected = Map.of("banana", 20);
         operationHandlerService.handle(
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20));

@@ -22,28 +22,28 @@ class FileReaderServiceImplTest {
     }
 
     @Test
-    void readEmptyFileName_NotOk() {
+    void readEmptyFileName_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readCsvFile(emptyFileName),
                 "File can't be empty");
     }
 
     @Test
-    void readNullFilename_NotOk() {
+    void readNullFilename_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readCsvFile(nullFileName),
                 "File name can't be null");
     }
 
     @Test
-    void readNotExistFile_NotOk() {
+    void readNotExistFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readCsvFile(NoExistFileName),
                 "File does not exist " + NoExistFileName);
     }
 
     @Test
-    void readValidData_Ok() {
+    void readValidData_ok() {
         List<String> expected = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",

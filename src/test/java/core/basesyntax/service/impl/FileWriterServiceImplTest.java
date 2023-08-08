@@ -25,19 +25,19 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    void writeEmptyFileName_NotOk() {
+    void writeEmptyFileName_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileWriterService.writeToCsvFile(emptyFileName, report));
     }
 
     @Test
-    void writeNullFileName_NotOk() {
+    void writeNullFileName_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileWriterService.writeToCsvFile(null, report));
     }
 
     @Test
-    void writeValidData_Ok() {
+    void writeValidData_ok() {
         String excepted = "Test string";
         fileWriterService.writeToCsvFile(writeToFilePath, excepted);
         String actual = readData(readFilePath);

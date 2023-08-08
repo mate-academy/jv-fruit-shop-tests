@@ -19,19 +19,19 @@ class TransactionParseServiceImplTest {
     }
 
     @Test
-    void transactionParseEmptyList_NotOk() {
+    void transactionParseEmptyList_notOk() {
         assertThrows(RuntimeException.class,
                 () -> transactionParseService.getTransactionData(new ArrayList<>()));
     }
 
     @Test
-    void transactionParseNullList_NotOk() {
+    void transactionParseNullList_notOk() {
         assertThrows(RuntimeException.class,
                 () -> transactionParseService.getTransactionData(null));
     }
 
     @Test
-    void transactionParseValidData_OK() {
+    void transactionParseValidData_oK() {
         List<String> data = List.of("type,fruit,quantity", "b,banana,20",
                 "s,apple,100", "p,banana,100");
         List<FruitTransaction> expected = List.of(

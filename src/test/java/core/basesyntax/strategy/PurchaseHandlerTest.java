@@ -20,7 +20,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseOperationValidAmount_NotOk() {
+    void purchaseOperationValidAmount_notOk() {
         Storage.fruitsStorage.put("banana", 5);
         FruitTransaction invalidTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 6);
@@ -29,7 +29,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void purchaseOperationValidDate_Ok() {
+    void purchaseOperationValidDate_ok() {
         Map<String, Integer> expected = Map.of("banana", 10);
         Storage.fruitsStorage.put("banana", 20);
         operationHandlerService.handle(

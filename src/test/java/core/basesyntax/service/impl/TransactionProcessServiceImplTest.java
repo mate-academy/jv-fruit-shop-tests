@@ -20,6 +20,7 @@ class TransactionProcessServiceImplTest {
     private static TransactionProcessService transactionProcessService;
 
     private static final String BANANA = "banana";
+    private static final int QUANTITY = 100;
     private OperationStrategyService operationStrategyService;
 
     @BeforeEach
@@ -31,13 +32,13 @@ class TransactionProcessServiceImplTest {
     }
 
     @Test
-    void transactionProcessData_Ok() {
+    void transactionProcessData_ok() {
         transactionProcessService = new TransactionProcessServiceImpl(operationStrategyService);
         List<FruitTransaction> transactionList = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 100));
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, QUANTITY));
         transactionProcessService.processData(transactionList);
         Map<String, Integer> expectedStorage = new HashMap<>();
-        expectedStorage.put(BANANA, 100);
+        expectedStorage.put(BANANA, QUANTITY);
         assertEquals(expectedStorage, Storage.fruitsStorage);
     }
 }

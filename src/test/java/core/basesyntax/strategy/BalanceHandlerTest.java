@@ -21,7 +21,7 @@ class BalanceHandlerTest {
     }
 
     @Test
-    void balanceOperationValidData_Ok() {
+    void balanceOperationValidData_ok() {
         Map<String, Integer> expected = Map.of(FRUIT_BANANA, QUANTITY);
         operationHandlerService.handle(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, FRUIT_BANANA, QUANTITY));

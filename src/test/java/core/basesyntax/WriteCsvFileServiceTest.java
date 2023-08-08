@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WriteCsvFileServiceTest {
@@ -26,21 +25,15 @@ public class WriteCsvFileServiceTest {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String COMMA = ",";
     private static WriteCsvFileService writeCsvFileService;
-    private static String testReport;
 
     @BeforeAll
     static void setWriteCsvFileService() {
         writeCsvFileService = new WriteCsvFileServiceImpl();
     }
 
-    @BeforeEach
-    void setUp() {
-        testReport = null;
-    }
-
     @Test
     void writeFile_isReportPresent_okay() {
-        testReport = buildTestReport();
+        String testReport = buildTestReport();
         writeCsvFileService.writeFile(REPORT_FILE, testReport);
         assertTrue(Files.exists(REPORT_FILE_PATH),
                 "Can`t read " + REPORT_FILE + " file.");
@@ -57,7 +50,7 @@ public class WriteCsvFileServiceTest {
     @Test
     void writeFile_nullReport_notOkay() {
         assertThrows(WriteFileException.class,
-                () -> writeCsvFileService.writeFile(REPORT_FILE, testReport));
+                () -> writeCsvFileService.writeFile(REPORT_FILE, null));
     }
 
     @AfterEach

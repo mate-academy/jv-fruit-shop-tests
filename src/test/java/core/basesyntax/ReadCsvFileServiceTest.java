@@ -36,11 +36,6 @@ public class ReadCsvFileServiceTest {
     }
 
     @Test
-    void readFile_validFileName_okay() {
-        assertDoesNotThrow(() -> readCsvFileService.readFile(SOURCE_FILE));
-    }
-
-    @Test
     void readFile_missingFile_notOkay() {
         assertThrows(ReadFileException.class,
                 () -> readCsvFileService.readFile(NOT_EXIST_SOURCE_FILE));

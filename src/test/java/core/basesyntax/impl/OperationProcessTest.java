@@ -32,7 +32,8 @@ class OperationProcessTest {
 
     @Test
     void process_ValidTransactions_Ok() {
-        List<FruitTransaction> fruitTransactionList = List.of(new FruitTransaction(Operation.BALANCE, "apple", 10),
+        List<FruitTransaction> fruitTransactionList = List.of(
+                new FruitTransaction(Operation.BALANCE, "apple", 10),
                 new FruitTransaction(Operation.PURCHASE, "apple", 5),
                 new FruitTransaction(Operation.SUPPLY, "apple", 3),
                 new FruitTransaction(Operation.RETURN, "apple", 2));

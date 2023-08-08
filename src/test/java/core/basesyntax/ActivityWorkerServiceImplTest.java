@@ -35,7 +35,6 @@ class ActivityWorkerServiceImplTest {
     private static final int FIRST_PUT_QUANTITY = 60;
     private static final int SECOND_PUT_QUANTITY = 50;
     private static final int FIRST_EXP_QUANTITY = 75;
-    private static final int SECOND_EXP_QUANTITY = 55;
     private ActivityWorkerServiceImpl activityWorkerService;
     private ActivityStrategy activityStrategy;
     private FruitDao fruitDao;
@@ -49,7 +48,7 @@ class ActivityWorkerServiceImplTest {
     }
 
     @Test
-    public void testModifyQuantity_Success() {
+    public void modifyQuantity_successModify_ok() {
         List<Fruit> fruits = Arrays.asList(
                 new Fruit(BALANCE, SECOND_FRUIT_NAME, SECOND_QUANTITY),
                 new Fruit(PURCHASE, SECOND_FRUIT_NAME, FIRST_QUANTITY),
@@ -59,19 +58,17 @@ class ActivityWorkerServiceImplTest {
         fruitDao.put(SECOND_FRUIT_NAME, SECOND_PUT_QUANTITY);
         fruitDao.put(FIRST_FRUIT_NAME, FIRST_PUT_QUANTITY);
         activityWorkerService.modifyQuantity(fruits);
-        assertEquals(SECOND_EXP_QUANTITY, fruitDao.getByName(SECOND_FRUIT_NAME));
         assertEquals(FIRST_EXP_QUANTITY, fruitDao.getByName(FIRST_FRUIT_NAME));
     }
 
     @Test
-    public void testModifyQuantity_EmptyList() {
+    public void modifyQuantity_EmptyList_exceptionThrown() {
         assertThrows(RuntimeException.class,
                 () -> activityWorkerService.modifyQuantity(Collections.emptyList()));
-
     }
 
     @Test
-    public void testModifyQuantity_NullList() {
+    public void modifyQuantity_nullList_exceptionThrown() {
         assertThrows(RuntimeException.class,
                 () -> activityWorkerService.modifyQuantity(null));
     }

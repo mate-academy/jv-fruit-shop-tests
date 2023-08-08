@@ -23,7 +23,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void testPutAndGetByName_Success() {
+    public void putAndGetByName_successPutAndGetByName_ok() {
         fruitDao.put(SECOND_FRUIT_NAME, SECOND_FRUIT_QUANTITY);
         fruitDao.put(FIRST_FRUIT_NAME, FIRST_FRUIT_QUANTITY);
         assertEquals(SECOND_FRUIT_QUANTITY, fruitDao.getByName(SECOND_FRUIT_NAME));
@@ -31,7 +31,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    public void testGetAll_Success() {
+    public void getAll_successGetAll_ok() {
         Map<String, Integer> testData = new HashMap<>();
         testData.put(SECOND_FRUIT_NAME, SECOND_FRUIT_QUANTITY);
         testData.put(FIRST_FRUIT_NAME, FIRST_FRUIT_QUANTITY);

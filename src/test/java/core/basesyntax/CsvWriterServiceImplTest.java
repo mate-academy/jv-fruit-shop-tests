@@ -24,14 +24,14 @@ public class CsvWriterServiceImplTest {
     }
 
     @Test
-    public void testWriteToFile_Success() throws IOException {
+    public void writeToFile_successWriting_ok() throws IOException {
         csvWriterService.writeToFile(FILE_PATH, TEST_DATA);
         String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
         assertEquals(TEST_DATA, content);
     }
 
     @Test
-    public void testWriteToFile_Exception() {
+    public void writeToFile_successWriting_exceptionThrown() {
         assertThrows(RuntimeException.class,
                 () -> csvWriterService.writeToFile(NON_EXISTENT_PATH, OUTPUT_DATA));
     }

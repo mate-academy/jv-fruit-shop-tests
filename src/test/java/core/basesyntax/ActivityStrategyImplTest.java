@@ -25,7 +25,7 @@ class ActivityStrategyImplTest {
     }
 
     @Test
-    public void strategy_testNull() {
+    public void getQuantityModifier_testNull_exceptionThrown() {
         try {
             activityStrategy.getQuantityModifier(null);
             fail("Expected IllegalArgumentException, but got no exception");
@@ -35,7 +35,7 @@ class ActivityStrategyImplTest {
     }
 
     @Test
-    public void testGetQuantityModifier_Success() {
+    public void getQuantityModifier_correctModifier_ok() {
         ActivityHandler balanceHandler = activityStrategy
                 .getQuantityModifier(Fruit.Operation.BALANCE);
         assertTrue(balanceHandler instanceof BalanceActivityHandler);

@@ -6,6 +6,9 @@ public class PurchaseActivityHandler implements ActivityHandler {
         if (quantityAfter > quantityBefore) {
             throw new RuntimeException("you don't have enough fruit purchase.");
         }
+        if (quantityBefore < 0 || quantityAfter < 0) {
+            throw new RuntimeException("Quantity can`t be less than 0");
+        }
         return quantityBefore - quantityAfter;
     }
 }

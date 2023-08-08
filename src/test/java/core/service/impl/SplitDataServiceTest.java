@@ -21,17 +21,12 @@ public class SplitDataServiceTest {
 
         List<OperationData> dataList = splitDataService.splitData(data);
 
-        assertNotNull(dataList);
-        assertEquals(3, dataList.size());
-        assertEquals(OperationType.B, dataList.get(0).getOperationType());
-        assertEquals("Apple", dataList.get(0).getProduct());
-        assertEquals(200, dataList.get(0).getQuantity());
-        assertEquals(OperationType.P, dataList.get(1).getOperationType());
-        assertEquals("Orange", dataList.get(1).getProduct());
-        assertEquals(100, dataList.get(1).getQuantity());
-        assertEquals(OperationType.S, dataList.get(2).getOperationType());
-        assertEquals("Banana", dataList.get(2).getProduct());
-        assertEquals(50, dataList.get(2).getQuantity());
+        assertOperationDataListEquals(
+                dataList,
+                new OperationData(OperationType.B, "Apple", 200),
+                new OperationData(OperationType.P, "Orange", 100),
+                new OperationData(OperationType.S, "Banana", 50)
+        );
     }
 
     @Test
@@ -110,5 +105,19 @@ public class SplitDataServiceTest {
 
         assertNotNull(dataList);
         assertEquals(1, dataList.size());
+    }
+
+    private void assertOperationDataListEquals(List<OperationData> actualList, OperationData... expectedData) {
+        assertNotNull(actualList);
+        assertEquals(expectedData.length, actualList.size());
+
+        for (int i = 0; i < expectedData.length; i++) {
+            OperationData expected = expectedData[i];
+            OperationData actual = actualList.get(i);
+
+            assertEquals(expected.getOperationType(), actual.getOperationType());
+            assertEquals(expected.getProduct(), actual.getProduct());
+            assertEquals(expected.getQuantity(), actual.getQuantity());
+        }
     }
 }

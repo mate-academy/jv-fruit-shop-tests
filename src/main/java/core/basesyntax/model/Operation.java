@@ -14,10 +14,6 @@ public enum Operation {
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public static Operation getType(String type) {
         return Arrays
                 .stream(values())

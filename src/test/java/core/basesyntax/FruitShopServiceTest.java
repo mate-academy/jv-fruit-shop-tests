@@ -9,7 +9,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.implementations.FruitShopServiceImpl;
 import core.basesyntax.storage.Storage;
-import core.basesyntax.strategy.DataHandlerStrategy;
+import core.basesyntax.strategy.DataHandlerStrategyImpl;
 import core.basesyntax.strategy.handlers.BalanceDataHandler;
 import core.basesyntax.strategy.handlers.DataHandler;
 import java.util.ArrayList;
@@ -36,9 +36,9 @@ public class FruitShopServiceTest {
     @BeforeAll
     static void createStorage() {
         Storage.createMap();
-        Map<FruitTransaction.Operation, DataHandler> enumHandlerMap = new HashMap<>();
+        enumHandlerMap = new HashMap<>();
         enumHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceDataHandler());
-        fruitShopService = new FruitShopServiceImpl(new TestDataHandlerStrategy(enumHandlerMap));
+        fruitShopService = new FruitShopServiceImpl(new DataHandlerStrategyImpl(enumHandlerMap));
     }
 
     @Test
@@ -76,19 +76,5 @@ public class FruitShopServiceTest {
     @AfterEach
     void cleanStorage() {
         Storage.clear();
-    }
-
-    private static class TestDataHandlerStrategy implements DataHandlerStrategy {
-        private final Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap;
-
-        public TestDataHandlerStrategy(Map<FruitTransaction.Operation, DataHandler>
-                                               operationDataHandlerMap) {
-            this.operationDataHandlerMap = operationDataHandlerMap;
-        }
-
-        @Override
-        public DataHandler getHandler(FruitTransaction.Operation operation) {
-            return operationDataHandlerMap.get(operation);
-        }
     }
 }

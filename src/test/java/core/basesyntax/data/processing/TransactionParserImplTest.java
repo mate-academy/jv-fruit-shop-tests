@@ -2,6 +2,7 @@ package core.basesyntax.data.processing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,5 +27,9 @@ class TransactionParserImplTest {
                 PURCHASE_OPERATION);
         int expected = lines.size();
         assertEquals(expected, parser.parseTransactions(lines).size());
+        List<FruitTransaction> fruitInfo = parser.parseTransactions(lines);
+        assertEquals("b", fruitInfo.get(0).getOperation().getCode());
+        assertEquals("banana", fruitInfo.get(0).getFruit());
+        assertEquals(20, fruitInfo.get(0).getQuantity());
     }
 }

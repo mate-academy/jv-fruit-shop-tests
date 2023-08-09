@@ -8,9 +8,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
-    private static final String CORRECT_INPUT_PATH = "src/test/java/resources/correctInput.csv";
-    private static final String EMPTY_INPUT_PATH = "src/test/java/resources/emptyFile.csv";
-    private static final String WHITE_SPACES_PATH = "src/test/java/resources/whiteSpacesFile.csv";
+    private static final String CORRECT_INPUT_PATH = "src/test/resources/correctInput.csv";
+    private static final String EMPTY_INPUT_PATH = "src/test/resources/emptyFile.csv";
+    private static final String WHITE_SPACES_PATH = "src/test/resources/whiteSpacesFile.csv";
     private static final String NONEXISTENT_PATH = "nonexistent.csv";
     private static CsvFileReader reader;
 

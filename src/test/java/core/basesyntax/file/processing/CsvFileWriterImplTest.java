@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterImplTest {
-    private static final String TEST_FILE_PATH = "src/test/java/resources/report.csv";
+    private static final String TEST_FILE_PATH = "src/test/resources/report.csv";
     private static CsvFileWriter writer;
 
     @Test

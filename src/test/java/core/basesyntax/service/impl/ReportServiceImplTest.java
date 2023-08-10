@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
     private static ReportService reportService;
-    private static final String TITLE = "fruit,quantity\r\n";
+    private static final String TITLE = "fruit,quantity"
+            + System.lineSeparator();
     private static final String BALANCE = "b,banana,20";
     private static final String RETURN = "r,apple,10";
     private static final String SUPPLY = "s,banana,100";

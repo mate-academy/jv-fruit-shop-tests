@@ -7,14 +7,14 @@ import core.basesyntax.exceptions.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.BalanceOperationHandler;
 import core.basesyntax.service.strategy.OperationHandler;
-import core.basesyntax.service.strategy.PurchaseOperationHandler;
-import core.basesyntax.service.strategy.ReturnOperationHandler;
-import core.basesyntax.service.strategy.SupplyOperationHandler;
 import core.basesyntax.storage.FruitStorage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitShopServiceImplTest {
@@ -31,7 +31,8 @@ class FruitShopServiceImplTest {
     private static final int VALID_BANANA_QUANTITY = 20;
     private static final int VALID_APPLE_QUANTITY = 80;
 
-    static {
+    @BeforeAll
+    static void beforeAll() {
         LIST.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20));
         LIST.add(new FruitTransaction(
@@ -39,13 +40,13 @@ class FruitShopServiceImplTest {
         NEXT_OCCURENCE_BALANCELIST.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 20));
         NEXT_OCCURENCE_BALANCELIST.add(new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 10));
-        NEXT_OCCURENCE_BALANCELIST.add(new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 100));
         STRATEGY_MAP.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        STRATEGY_MAP.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        STRATEGY_MAP.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        STRATEGY_MAP.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+    }
+
+    @BeforeEach
+    void setUp() {
+        FruitStorage.STORAGE_MAP.clear();
     }
 
     @Test
@@ -55,7 +56,6 @@ class FruitShopServiceImplTest {
                 FruitStorage.STORAGE_MAP.get(VALID_FRUIT_BANANA));
         assertEquals(VALID_APPLE_QUANTITY,
                 FruitStorage.STORAGE_MAP.get(VALID_FRUIT_APPLE));
-        FruitStorage.STORAGE_MAP.clear();
     }
 
     @Test
@@ -64,6 +64,10 @@ class FruitShopServiceImplTest {
             FRUIT_SHOP_SERVICE.processAll(NEXT_OCCURENCE_BALANCELIST);
         });
         assertEquals(VALID_EXCEPTION_MESSAGE, exception.getMessage());
+    }
+
+    @AfterAll
+    static void afterAll() {
         FruitStorage.STORAGE_MAP.clear();
     }
 }

@@ -17,8 +17,6 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionServiceImplTest {
     private static final Map<FruitTransaction.Operation, OperationActivities>
             operationStrategyMap = new HashMap<>();
-    private static final FruitTransaction.Operation
-            OPERATION_TOTAL = FruitTransaction.Operation.TOTAL;
     private OperationStrategy operationStrategy;
     private FruitTransactionService fruitTransactionService;
 

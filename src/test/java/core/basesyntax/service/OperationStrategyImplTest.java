@@ -6,6 +6,7 @@ import core.basesyntax.strategy.OperationActivities;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
@@ -14,11 +15,15 @@ class OperationStrategyImplTest {
     private OperationStrategy operationStrategy;
     private FruitTransaction fruitTransaction;
 
-    @Test
-    void get_strategy_Ok() {
+    @BeforeEach
+    void setUp() {
         operationStrategyMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationActivities());
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
+    }
+
+    @Test
+    void get_strategy_Ok() {
         fruitTransaction = createFruits();
         int expected = 100;
         int result = operationStrategy.get(fruitTransaction.getOperation())

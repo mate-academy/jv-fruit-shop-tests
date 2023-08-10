@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
@@ -11,7 +12,12 @@ class WriterServiceImplTest {
     private static final String NEW_LINE = System.lineSeparator();
     private static final String PATH_TEST = "src/test/resources/";
     private static final String FILE_NAME = "fruitsResult.csv";
-    private WriterService writerService = new WriterServiceImpl();
+    private WriterService writerService;
+
+    @BeforeEach
+    void setUp() {
+        writerService = new WriterServiceImpl();
+    }
 
     @Test
     void writeToFile_pathExists_NotOK() {

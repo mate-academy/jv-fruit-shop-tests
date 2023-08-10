@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TotalServiceImplTest {
@@ -16,7 +17,12 @@ class TotalServiceImplTest {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String WORD_DELI = ",";
     private static final String NEW_LINE = System.lineSeparator();
-    private TotalService totalService = new TotalServiceImpl();
+    private TotalService totalService;
+
+    @BeforeEach
+    void setUp() {
+        totalService = new TotalServiceImpl();
+    }
 
     @AfterEach
     void afterEachTest() {

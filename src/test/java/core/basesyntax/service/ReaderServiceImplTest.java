@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
@@ -20,15 +21,14 @@ class ReaderServiceImplTest {
     private static final String FILE_BAD_OPERATION = "fruits_bad_operation.csv";
     private static final String FILE_BAD_NUMBER = "fruits_bad_number.csv";
     private static final String FILE_STORAGE = "fruits_storage.csv";
-    private static final File testFile = new File(PATH_TEST + FILE_NAME);
-    private static final File emptyFile = new File(PATH_TEST + FILE_EMPTY);
-    private static final File noDataFile = new File(PATH_TEST + FILE_NO_DATA);
-    private static final File badOperationFile = new File(PATH_TEST + FILE_BAD_OPERATION);
-    private static final File badNumberFile = new File(PATH_TEST + FILE_BAD_NUMBER);
-    private static final File storageFile = new File(PATH_TEST + FILE_STORAGE);
     private static final String FIRST_LINE = "type,fruit,quantity";
     private static final String NEW_LINE = System.lineSeparator();
-    private ReaderService readerService = new ReaderServiceImpl();
+    private ReaderService readerService;
+
+    @BeforeEach
+    void setUp() {
+        readerService = new ReaderServiceImpl();
+    }
 
     @AfterEach
     void afterEachTest() {
@@ -37,6 +37,7 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_test_OK() {
+        File testFile = new File(PATH_TEST + FILE_NAME);
         if (!testFile.exists()) {
             createFileTest();
         }
@@ -50,6 +51,7 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_empty_NotOK() {
+        File emptyFile = new File(PATH_TEST + FILE_EMPTY);
         if (!emptyFile.exists()) {
             createFileEmpty();
         }
@@ -63,6 +65,7 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_noData_NotOK() {
+        File noDataFile = new File(PATH_TEST + FILE_NO_DATA);
         if (!noDataFile.exists()) {
             createFileNoData();
         }
@@ -76,6 +79,7 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_badOperation_NotOK() throws RuntimeException {
+        File badOperationFile = new File(PATH_TEST + FILE_BAD_OPERATION);
         if (!badOperationFile.exists()) {
             createFileBadOperation();
         }
@@ -88,6 +92,7 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_badNumber_NotOK() throws RuntimeException {
+        File badNumberFile = new File(PATH_TEST + FILE_BAD_NUMBER);
         if (!badNumberFile.exists()) {
             createFileBadNumber();
         }
@@ -100,6 +105,7 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_addInStorage_OK() {
+        File storageFile = new File(PATH_TEST + FILE_STORAGE);
         if (!storageFile.exists()) {
             createFileStorage();
         }
@@ -113,6 +119,7 @@ class ReaderServiceImplTest {
     }
 
     public static void createFileTest() {
+        File testFile = new File(PATH_TEST + FILE_NAME);
         try (FileWriter writer = new FileWriter(testFile, false)) {
             writer.write(FIRST_LINE);
             writer.write(NEW_LINE);
@@ -128,6 +135,7 @@ class ReaderServiceImplTest {
     }
 
     public static void createFileEmpty() {
+        File emptyFile = new File(PATH_TEST + FILE_EMPTY);
         try (FileWriter writer = new FileWriter(emptyFile, false)) {
             writer.flush();
         } catch (IOException e) {
@@ -136,6 +144,7 @@ class ReaderServiceImplTest {
     }
 
     public static void createFileNoData() {
+        File noDataFile = new File(PATH_TEST + FILE_NO_DATA);
         try (FileWriter writer = new FileWriter(noDataFile, false)) {
             writer.write(FIRST_LINE);
             writer.write(NEW_LINE);
@@ -146,6 +155,7 @@ class ReaderServiceImplTest {
     }
 
     public static void createFileBadOperation() {
+        File badOperationFile = new File(PATH_TEST + FILE_BAD_OPERATION);
         try (FileWriter writer = new FileWriter(badOperationFile, false)) {
             writer.write(FIRST_LINE);
             writer.write(NEW_LINE);
@@ -159,6 +169,7 @@ class ReaderServiceImplTest {
     }
 
     public static void createFileBadNumber() {
+        File badNumberFile = new File(PATH_TEST + FILE_BAD_NUMBER);
         try (FileWriter writer = new FileWriter(badNumberFile, false)) {
             writer.write(FIRST_LINE);
             writer.write(NEW_LINE);
@@ -192,6 +203,7 @@ class ReaderServiceImplTest {
     }
 
     public static void createFileStorage() {
+        File storageFile = new File(PATH_TEST + FILE_STORAGE);
         try (FileWriter writer = new FileWriter(storageFile, false)) {
             writer.write(FIRST_LINE);
             writer.write(NEW_LINE);

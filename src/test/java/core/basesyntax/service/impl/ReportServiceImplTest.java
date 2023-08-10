@@ -18,9 +18,12 @@ class ReportServiceImplTest {
     private static final String SUPPLY = "s,banana,100";
     private static final String PURCHASE = "p,apple,20";
     private static List<String> dataFromFile;
-    private static final String REPORT = "fruit,quantity\r\n"
-            + "banana,100\r\n"
-            + "apple,200\r\n";
+    private static final String REPORT = "fruit,quantity"
+            + System.lineSeparator()
+            + "banana,100"
+            + System.lineSeparator()
+            + "apple,200"
+            + System.lineSeparator();
 
     @BeforeAll
     static void beforeAll() {

@@ -51,8 +51,6 @@ class FruitTransactionServiceImplTest {
         Map<String, Integer> expected = createMapResult();
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitTransactionService = new FruitTransactionServiceImpl(operationStrategy);
-        //Map<String, List<FruitTransaction>> transactionMap =
-        //        fruitTransactionService.readFruitTransaction();
         Map<String, List<FruitTransaction>> transactionMap = createFruits();
         Map<String, Integer> result =
                 fruitTransactionService.calcFruitTransaction(transactionMap);

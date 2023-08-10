@@ -30,12 +30,6 @@ class ReaderServiceImplTest {
     private static final String NEW_LINE = System.lineSeparator();
     private ReaderService readerService = new ReaderServiceImpl();
 
-    //@Test
-    //void readFromFile_pathExists_NotOK() {
-    //    Assert.assertTrue("Folder for transaction file not found: "
-    //            + PATH_TEST, Files.exists(Path.of(PATH_TEST)));
-    //}
-
     @AfterEach
     void afterEachTest() {
         Storage.fruitTransactions.clear();
@@ -43,67 +37,79 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_test_OK() {
-        createFileTest();
+        if (!testFile.exists()) {
+            createFileTest();
+        }
         List<FruitTransaction> expected = createFruits_OK();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_NAME);
         Assert.assertEquals("File " + PATH_TEST + FILE_NAME
                 + " not read correctly must be: " + expected + "\n", expected, result);
-        testFile.delete();
+        //testFile.delete();
     }
 
     @Test
     void readFromFile_empty_NotOK() {
-        createFileEmpty();
+        if (!emptyFile.exists()) {
+            createFileEmpty();
+        }
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_EMPTY);
         Assert.assertEquals("File " + PATH_TEST + FILE_EMPTY
                 + " not read correctly must be: " + expected + "\n", expected, result);
-        emptyFile.delete();
+        //emptyFile.delete();
     }
 
     @Test
     void readFromFile_noData_NotOK() {
-        createFileNoData();
+        if (!noDataFile.exists()) {
+            createFileNoData();
+        }
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_NO_DATA);
         Assert.assertEquals("File " + PATH_TEST + FILE_NO_DATA
                 + " not read correctly must be: " + expected + "\n", expected, result);
-        noDataFile.delete();
+        //noDataFile.delete();
     }
 
     @Test
     void readFromFile_badOperation_NotOK() throws RuntimeException {
-        createFileBadOperation();
+        if (!badOperationFile.exists()) {
+            createFileBadOperation();
+        }
         Throwable thrown = Assert.assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(PATH_TEST + FILE_BAD_OPERATION);
         });
         Assert.assertNotNull(thrown.getMessage());
-        badOperationFile.delete();
+        //badOperationFile.delete();
     }
 
     @Test
     void readFromFile_badNumber_NotOK() throws RuntimeException {
-        createFileBadNumber();
+        if (!badNumberFile.exists()) {
+            createFileBadNumber();
+        }
         Throwable thrown = Assert.assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(PATH_TEST + FILE_BAD_NUMBER);
         });
         Assert.assertNotNull(thrown.getMessage());
-        badNumberFile.delete();
+        //badNumberFile.delete();
     }
 
     @Test
     void readFromFile_addInStorage_OK() {
-        createFileStorage();
+        if (!storageFile.exists()) {
+            createFileStorage();
+        }
         List<FruitTransaction> expected = readerService
                 .readFromFile(PATH_TEST + FILE_STORAGE);
         List<FruitTransaction> result = Storage.fruitTransactions.stream()
                 .collect(Collectors.toList());
         Assert.assertEquals("Wrong data written to storage must be: "
                 + expected + "\n", expected, result);
-        storageFile.delete();
+        //storageFile.delete();
     }
 
     public static void createFileTest() {

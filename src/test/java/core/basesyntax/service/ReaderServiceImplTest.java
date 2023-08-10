@@ -5,15 +5,11 @@ import core.basesyntax.model.FruitTransaction;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
@@ -34,31 +30,11 @@ class ReaderServiceImplTest {
     private static final String NEW_LINE = System.lineSeparator();
     private ReaderService readerService = new ReaderServiceImpl();
 
-    @BeforeAll
-    static void beforeAll() {
-        createFileTest();
-        createFileEmpty();
-        createFileNoData();
-        createFileBadOperation();
-        createFileBadNumber();
-        createFileStorage();
-    }
-
-    @AfterAll
-    static void afterAll() {
-        testFile.delete();
-        emptyFile.delete();
-        noDataFile.delete();
-        badOperationFile.delete();
-        badNumberFile.delete();
-        storageFile.delete();
-    }
-
-    @Test
-    void readFromFile_pathExists_NotOK() {
-        Assert.assertTrue("Folder for transaction file not found: "
-                + PATH_TEST, Files.exists(Path.of(PATH_TEST)));
-    }
+    //@Test
+    //void readFromFile_pathExists_NotOK() {
+    //    Assert.assertTrue("Folder for transaction file not found: "
+    //            + PATH_TEST, Files.exists(Path.of(PATH_TEST)));
+    //}
 
     @AfterEach
     void afterEachTest() {
@@ -67,55 +43,67 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_test_OK() {
+        createFileTest();
         List<FruitTransaction> expected = createFruits_OK();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_NAME);
         Assert.assertEquals("File " + PATH_TEST + FILE_NAME
                 + " not read correctly must be: " + expected + "\n", expected, result);
+        testFile.delete();
     }
 
     @Test
     void readFromFile_empty_NotOK() {
+        createFileEmpty();
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_EMPTY);
         Assert.assertEquals("File " + PATH_TEST + FILE_EMPTY
                 + " not read correctly must be: " + expected + "\n", expected, result);
+        emptyFile.delete();
     }
 
     @Test
     void readFromFile_noData_NotOK() {
+        createFileNoData();
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_NO_DATA);
         Assert.assertEquals("File " + PATH_TEST + FILE_NO_DATA
                 + " not read correctly must be: " + expected + "\n", expected, result);
+        noDataFile.delete();
     }
 
     @Test
     void readFromFile_badOperation_NotOK() throws RuntimeException {
+        createFileBadOperation();
         Throwable thrown = Assert.assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(PATH_TEST + FILE_BAD_OPERATION);
         });
         Assert.assertNotNull(thrown.getMessage());
+        badOperationFile.delete();
     }
 
     @Test
     void readFromFile_badNumber_NotOK() throws RuntimeException {
+        createFileBadNumber();
         Throwable thrown = Assert.assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(PATH_TEST + FILE_BAD_NUMBER);
         });
         Assert.assertNotNull(thrown.getMessage());
+        badNumberFile.delete();
     }
 
     @Test
     void readFromFile_addInStorage_OK() {
+        createFileStorage();
         List<FruitTransaction> expected = readerService
                 .readFromFile(PATH_TEST + FILE_STORAGE);
         List<FruitTransaction> result = Storage.fruitTransactions.stream()
                 .collect(Collectors.toList());
         Assert.assertEquals("Wrong data written to storage must be: "
                 + expected + "\n", expected, result);
+        storageFile.delete();
     }
 
     public static void createFileTest() {

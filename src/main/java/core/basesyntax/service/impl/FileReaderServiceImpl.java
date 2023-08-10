@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileReaderServiceImp implements FileReaderService {
+public class FileReaderServiceImpl implements FileReaderService {
     private static final int OFFSET = 1;
 
     @Override

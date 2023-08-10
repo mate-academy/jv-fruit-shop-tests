@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserTest {
-    private static final TransactionParser PARSER = new TransactionParserImpl();
+    private final TransactionParser parser = new TransactionParserImpl();
 
     @Test
     void parseData_validData_ok() {
@@ -31,7 +31,7 @@ class TransactionParserTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
-        List<FruitTransaction> actualTransactions = PARSER.parseData(dataForParsing);
+        List<FruitTransaction> actualTransactions = parser.parseData(dataForParsing);
         assertEquals(exceptedData, actualTransactions);
     }
 
@@ -41,18 +41,18 @@ class TransactionParserTest {
                 "b,apple,100",
                 "s,banana,100",
                 "p,banana,notValid");
-        assertThrows(RuntimeException.class, () -> PARSER.parseData(dataForParsing));
+        assertThrows(RuntimeException.class, () -> parser.parseData(dataForParsing));
     }
 
     @Test
     void parse_dataIsNull_notOk() {
         List<String> dataForParsing = null;
-        assertThrows(RuntimeException.class, () -> PARSER.parseData(dataForParsing));
+        assertThrows(RuntimeException.class, () -> parser.parseData(dataForParsing));
     }
 
     @Test
     void parse_dataIsEmpty_notOk() {
         List<String> dataForParsing = Collections.emptyList();
-        assertThrows(RuntimeException.class, () -> PARSER.parseData(dataForParsing));
+        assertThrows(RuntimeException.class, () -> parser.parseData(dataForParsing));
     }
 }

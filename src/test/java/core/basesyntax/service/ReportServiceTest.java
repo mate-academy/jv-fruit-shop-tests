@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class ReportServiceTest {
 
-    private static final ReportService REPORT_SERVICE = new ReportServiceImpl();
+    private final ReportService reportService = new ReportServiceImpl();
 
     @AfterEach
     void afterEachTest() {
@@ -25,7 +25,7 @@ class ReportServiceTest {
                 + "banana,20" + System.lineSeparator()
                 + "apple,10" + System.lineSeparator()
                 + "watermelon,15" + System.lineSeparator());
-        String actualReport = REPORT_SERVICE.createReport();
+        String actualReport = reportService.createReport();
         assertEquals(exceptedReport, actualReport);
     }
 }

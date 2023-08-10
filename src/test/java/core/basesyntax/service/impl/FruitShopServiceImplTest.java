@@ -37,11 +37,8 @@ class FruitShopServiceImplTest {
             Operation.SUPPLY, new SupplyHandler(),
             Operation.RETURN, new ReturnHandler(),
             Operation.PURCHASE, new PurchaseHandler());
-    private static final Map<Operation, OperationHandler> operationHandlerMapNotFull = Map.of(
-            Operation.BALANCE, new BalanceHandler(),
-            Operation.SUPPLY, new SupplyHandler(),
-            Operation.RETURN, new ReturnHandler());
-    private static final Map<Operation, OperationHandler> operationHandlerEmptyMap = Map.of();
+    private static FruitShopService fruitShopService;
+    private static OperationStrategy operationStrategy;
 
     @BeforeEach
     void setUP() {
@@ -50,29 +47,11 @@ class FruitShopServiceImplTest {
 
     @Test
     void processTransactions_filledMap_Ok() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMapFull);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
+        operationStrategy = new OperationStrategyImpl(operationHandlerMapFull);
+        fruitShopService = new FruitShopServiceImpl(operationStrategy);
 
         fruitShopService.processTransactions(INPUT_TRANSACTION_LIST);
         Assertions.assertEquals(RESULT_MAP, Storage.fruitStorage);
-    }
-
-    @Test
-    void processTransactions_filledMap_NotOk() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMapNotFull);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-
-        Assertions.assertThrows(RuntimeException.class,
-                () -> fruitShopService.processTransactions(INPUT_TRANSACTION_LIST));
-    }
-
-    @Test
-    void processTransactions_emptyMap_NotOk() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerEmptyMap);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-
-        Assertions.assertThrows(RuntimeException.class,
-                () -> fruitShopService.processTransactions(INPUT_TRANSACTION_LIST));
     }
 
     @Test

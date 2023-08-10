@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
-    private static final FileWriter fileWriter = new CsvFileWriter();
+    private static FileWriter fileWriter;
     private static final String PATH = "src/test/resourcesTest/outputFile.csv";
     private static final String REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator()
@@ -16,6 +16,8 @@ class CsvFileWriterTest {
 
     @Test
     void writeToFile_correctPath_Ok() {
+        fileWriter = new CsvFileWriter();
+
         fileWriter.writeToFile(REPORT, PATH);
         String actual = readFile(PATH);
 
@@ -24,12 +26,15 @@ class CsvFileWriterTest {
 
     @Test
     void writeToFile_NullPath_NotOk() {
+        fileWriter = new CsvFileWriter();
+
         Assertions.assertThrows(RuntimeException.class,
                 () -> fileWriter.writeToFile(REPORT, null));
     }
 
     @Test
-    public void testWriteToFile_Failure() {
+    public void writeToFile_testWriteToFile_NotOk() {
+        fileWriter = new CsvFileWriter();
         String fileName = "directory/report.txt";
 
         Assertions.assertThrows(RuntimeException.class,

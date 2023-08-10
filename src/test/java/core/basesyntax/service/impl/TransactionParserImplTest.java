@@ -15,12 +15,12 @@ class TransactionParserImplTest {
             "r,apple,10",
             "s,apple,20",
             "p,apple,30");
-
     private static final List<FruitTransaction> EXPECTED_OUTPUT_LIST = List.of(
             new FruitTransaction(Operation.BALANCE,"apple",100),
             new FruitTransaction(Operation.RETURN,"apple",10),
             new FruitTransaction(Operation.SUPPLY,"apple",20),
             new FruitTransaction(Operation.PURCHASE,"apple",30));
+    private static TransactionParser transactionParser;
 
     @BeforeEach
     void setUp() {
@@ -29,8 +29,7 @@ class TransactionParserImplTest {
 
     @Test
     void parseCsvRows_normalMode_Ok() {
-        TransactionParser transactionParser = new TransactionParserImpl();
-
+        transactionParser = new TransactionParserImpl();
         List<FruitTransaction> actual = transactionParser.parseCsvRows(INPUT_LIST);
 
         Assertions.assertEquals(actual, EXPECTED_OUTPUT_LIST);

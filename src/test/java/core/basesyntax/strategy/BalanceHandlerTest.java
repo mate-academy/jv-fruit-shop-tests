@@ -10,13 +10,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
-    private static final BalanceHandler balanceHandler = new BalanceHandler();
+    private static BalanceHandler balanceHandler;
     private static final Map<String, Integer> RESULT_MAP = Map.of(
             "apple", 10,
             "banana", 20);
 
     @BeforeEach
     void setUp() {
+        balanceHandler = new BalanceHandler();
         Storage.fruitStorage.clear();
     }
 
@@ -26,6 +27,7 @@ class BalanceHandlerTest {
                 new FruitTransaction(Operation.BALANCE, "apple", 10);
         FruitTransaction fruitTransactionTwo =
                 new FruitTransaction(Operation.BALANCE, "banana", 20);
+        balanceHandler = new BalanceHandler();
 
         balanceHandler.handleOperation(fruitTransactionOne);
         balanceHandler.handleOperation(fruitTransactionTwo);

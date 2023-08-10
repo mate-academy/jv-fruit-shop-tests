@@ -10,12 +10,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
-    private static final BalanceHandler balanceHandler = new BalanceHandler();
-    private static final SupplyHandler supplyHandler = new SupplyHandler();
+    private static BalanceHandler balanceHandler;
+    private static SupplyHandler supplyHandler;
     private static final Map<String, Integer> RESULT_MAP = Map.of("apple", 20);
 
     @BeforeEach
     void setUp() {
+        balanceHandler = new BalanceHandler();
+        supplyHandler = new SupplyHandler();
         Storage.fruitStorage.clear();
     }
 

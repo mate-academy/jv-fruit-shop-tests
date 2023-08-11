@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
-import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +17,6 @@ class ReportServiceImplTest {
     private static final String RETURN = "r,apple,10";
     private static final String SUPPLY = "s,banana,100";
     private static final String PURCHASE = "p,apple,20";
-    private static List<String> dataFromFile;
     private static final String REPORT = "fruit,quantity"
             + System.lineSeparator()
             + "banana,100"
@@ -35,7 +33,6 @@ class ReportServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        dataFromFile = List.of(TITLE,BALANCE,RETURN,SUPPLY,PURCHASE);
         Storage.storage.put("banana",100);
         Storage.storage.put("apple",200);
     }

@@ -33,7 +33,7 @@ class WriterServiceImplTest {
         Assert.assertNotNull(thrown.getMessage());
     }
 
-    public String createStringResult() {
+    private String createStringResult() {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(NEW_LINE);
         builder.append("apple").append(WORD_DELI)

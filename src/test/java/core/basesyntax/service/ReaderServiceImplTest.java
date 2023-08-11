@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,10 +19,10 @@ class ReaderServiceImplTest {
     private static final String FILE_BAD_OPERATION = "fruits_bad_operation.csv";
     private static final String FILE_BAD_NUMBER = "fruits_bad_number.csv";
     private static final String FILE_STORAGE = "fruits_storage.csv";
-    private ReaderService readerService;
+    private static ReaderService readerService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         readerService = new ReaderServiceImpl();
     }
 
@@ -32,11 +33,6 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_test_OK() {
-        //File testFile = new File(PATH_TEST + FILE_NAME);
-        //if (!testFile.exists()) {
-        //    System.out.println("In folder " + PATH_TEST + " not found file " + FILE_NAME);
-        //    return;
-        //}
         List<FruitTransaction> expected = createFruits_OK();
         List<FruitTransaction> result = readerService.readFromFile(
                 PATH_TEST + FILE_NAME);
@@ -88,7 +84,7 @@ class ReaderServiceImplTest {
                 + expected + "\n", expected, result);
     }
 
-    public List<FruitTransaction> createFruits_OK() {
+    private List<FruitTransaction> createFruits_OK() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction1.setFruit("apple");

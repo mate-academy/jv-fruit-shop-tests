@@ -39,7 +39,7 @@ class TotalServiceImplTest {
                 + expected + "\n", expected, result);
     }
 
-    public Map<String, List<FruitTransaction>> createFruits() {
+    private Map<String, List<FruitTransaction>> createFruits() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction1.setFruit("apple");
@@ -58,7 +58,7 @@ class TotalServiceImplTest {
         return fruitsMap;
     }
 
-    public FruitTransaction createTotalFruits() {
+    private FruitTransaction createTotalFruits() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(OPERATION_TOTAL);
         fruitTransaction.setFruit("apple");
@@ -67,7 +67,7 @@ class TotalServiceImplTest {
         return fruitTransaction;
     }
 
-    public String createStringResult() {
+    private String createStringResult() {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(NEW_LINE);
         builder.append("apple").append(WORD_DELI)

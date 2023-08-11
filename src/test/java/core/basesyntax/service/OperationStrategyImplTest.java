@@ -32,7 +32,7 @@ class OperationStrategyImplTest {
                 + expected + "\n", expected, result);
     }
 
-    public FruitTransaction createFruits() {
+    private FruitTransaction createFruits() {
         FruitTransaction fruit = new FruitTransaction();
         fruit.setOperation(FruitTransaction.Operation.BALANCE);
         fruit.setFruit("apple");

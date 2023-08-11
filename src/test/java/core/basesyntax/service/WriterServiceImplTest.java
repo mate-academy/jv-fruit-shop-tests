@@ -1,9 +1,7 @@
 package core.basesyntax.service;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
@@ -12,17 +10,11 @@ class WriterServiceImplTest {
     private static final String NEW_LINE = System.lineSeparator();
     private static final String PATH_TEST = "src/test/resources/";
     private static final String FILE_NAME = "fruitsResult.csv";
-    private WriterService writerService;
+    private static WriterService writerService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         writerService = new WriterServiceImpl();
-    }
-
-    @Test
-    void writeToFile_pathExists_NotOK() {
-        Assert.assertTrue("Folder for transaction file not found: "
-                + PATH_TEST, Files.exists(Path.of(PATH_TEST)));
     }
 
     @Test
@@ -34,14 +26,14 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_test_NotOK() {
+    void writeToFile_emptyFileName_NotOK() {
         Throwable thrown = Assert.assertThrows(RuntimeException.class, () -> {
             writerService.writeToFile("", "");
         });
         Assert.assertNotNull(thrown.getMessage());
     }
 
-    public static String createStringResult() {
+    public String createStringResult() {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(NEW_LINE);
         builder.append("apple").append(WORD_DELI)

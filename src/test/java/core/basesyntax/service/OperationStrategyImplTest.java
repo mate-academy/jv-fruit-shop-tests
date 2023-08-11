@@ -6,17 +6,17 @@ import core.basesyntax.strategy.OperationActivities;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     private static final Map<FruitTransaction.Operation, OperationActivities>
             operationStrategyMap = new HashMap<>();
-    private OperationStrategy operationStrategy;
+    private static OperationStrategy operationStrategy;
     private FruitTransaction fruitTransaction;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         operationStrategyMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationActivities());
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
@@ -32,7 +32,7 @@ class OperationStrategyImplTest {
                 + expected + "\n", expected, result);
     }
 
-    public static FruitTransaction createFruits() {
+    public FruitTransaction createFruits() {
         FruitTransaction fruit = new FruitTransaction();
         fruit.setOperation(FruitTransaction.Operation.BALANCE);
         fruit.setFruit("apple");

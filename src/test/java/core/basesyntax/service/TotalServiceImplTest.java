@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TotalServiceImplTest {
@@ -17,10 +17,10 @@ class TotalServiceImplTest {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String WORD_DELI = ",";
     private static final String NEW_LINE = System.lineSeparator();
-    private TotalService totalService;
+    private static TotalService totalService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         totalService = new TotalServiceImpl();
     }
 
@@ -39,7 +39,7 @@ class TotalServiceImplTest {
                 + expected + "\n", expected, result);
     }
 
-    public static Map<String, List<FruitTransaction>> createFruits() {
+    public Map<String, List<FruitTransaction>> createFruits() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction1.setFruit("apple");
@@ -58,7 +58,7 @@ class TotalServiceImplTest {
         return fruitsMap;
     }
 
-    public static FruitTransaction createTotalFruits() {
+    public FruitTransaction createTotalFruits() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(OPERATION_TOTAL);
         fruitTransaction.setFruit("apple");
@@ -67,7 +67,7 @@ class TotalServiceImplTest {
         return fruitTransaction;
     }
 
-    public static String createStringResult() {
+    public String createStringResult() {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(NEW_LINE);
         builder.append("apple").append(WORD_DELI)

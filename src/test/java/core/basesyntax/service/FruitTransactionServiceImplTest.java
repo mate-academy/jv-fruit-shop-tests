@@ -67,7 +67,7 @@ class FruitTransactionServiceImplTest {
         Assert.assertNotNull(thrown.getMessage());
     }
 
-    public static Map<String, List<FruitTransaction>> createFruits() {
+    public Map<String, List<FruitTransaction>> createFruits() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction1.setFruit("apple");
@@ -86,7 +86,7 @@ class FruitTransactionServiceImplTest {
         return fruitsMap;
     }
 
-    public static Map<String, List<FruitTransaction>> createFruits_NotOK() {
+    public Map<String, List<FruitTransaction>> createFruits_NotOK() {
         FruitTransaction fruitTransaction1 = new FruitTransaction();
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
         fruitTransaction1.setFruit("apple");
@@ -105,7 +105,7 @@ class FruitTransactionServiceImplTest {
         return fruitsMap;
     }
 
-    public static Map<String, Integer> createMapResult() {
+    public Map<String, Integer> createMapResult() {
         Map<String, Integer> result = new HashMap<>();
         result.put("apple", Integer.valueOf(80));
         return result;

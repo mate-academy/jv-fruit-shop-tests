@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderServiceTest {
 
     private static final String FILE_PATH = "src/test/resources/data.csv";
-    private final FileReaderService reader = new FileReaderServiceImpl();
+    private FileReaderService reader;
+
+    @BeforeEach
+    void setUp() {
+        reader = new FileReaderServiceImpl();
+    }
 
     @Test
     void read_correctPath_ok() {

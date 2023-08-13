@@ -7,10 +7,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserTest {
-    private final TransactionParser parser = new TransactionParserImpl();
+    private TransactionParser parser;
+
+    @BeforeEach
+    void setUp() {
+        parser = new TransactionParserImpl();
+    }
 
     @Test
     void parseData_validData_ok() {

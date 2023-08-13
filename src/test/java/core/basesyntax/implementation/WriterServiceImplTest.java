@@ -25,22 +25,22 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeServicePathIsNull_NotOk() {
+    void write_ServicePathIsNull_NotOk() {
         assertThrows(RuntimeException.class, () -> writerService.writeToFile(null, REPORT));
     }
 
     @Test
-    void writeServiceReportIsNull_NotOk() {
+    void write_ServiceReportIsNull_NotOk() {
         assertThrows(RuntimeException.class, () -> writerService.writeToFile(PATH_TO_WRITE, null));
     }
 
     @Test
-    void writeServiceWrongPath_NotOk() {
+    void write_ServiceWrongPath_NotOk() {
         assertThrows(RuntimeException.class, () -> writerService.writeToFile(WRONG_PATH,REPORT));
     }
 
     @Test
-    void writeServiceValidPathAndReport_Ok() throws IOException {
+    void write_ServiceValidPathAndReport_Ok() throws IOException {
         writerService.writeToFile(PATH_TO_WRITE, REPORT);
         List<String> expected = List.of("fruit,quantity", "banana,152", "apple,90");
         assertEquals(expected, Files.readAllLines(Paths.get(PATH_TO_WRITE)));

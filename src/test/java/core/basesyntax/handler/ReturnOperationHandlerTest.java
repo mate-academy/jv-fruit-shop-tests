@@ -28,7 +28,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handleValidQuantity_Ok() {
+    void handle_ValidQuantity_Ok() {
         Storage.getStorage().put(VALID_FRUIT, VALID_QUANTITY);
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, RETURN_QUANTITY);
@@ -38,7 +38,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void handleForEmptyStorage_Ok() {
+    void handle_ForEmptyStorage_Ok() {
         Storage.getStorage().clear();
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, RETURN_QUANTITY);

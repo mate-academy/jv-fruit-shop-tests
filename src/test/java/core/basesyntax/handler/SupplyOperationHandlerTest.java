@@ -34,7 +34,7 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void handleValidQuantity_Ok() {
+    void handle_ValidQuantity_Ok() {
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, SUPPLY_QUANTITY);
         supplyHandler.handle(transaction);
@@ -43,7 +43,7 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void handleForEmptyStorage_Ok() {
+    void handle_ForEmptyStorage_Ok() {
         Storage.getStorage().clear();
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, SUPPLY_QUANTITY);

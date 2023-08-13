@@ -26,7 +26,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createReportService_Ok() {
+    void create_ReportService_Ok() {
         assertEquals(TITLE + System.lineSeparator(), reportService.createReport());
         Storage.getStorage().put("banana", 152);
         String expected1 = TITLE + System.lineSeparator() + FIRST_PAIR;
@@ -37,7 +37,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createReportQuantityLessThanZero_NotOk() {
+    void create_ReportQuantityLessThanZero_NotOk() {
         Storage.getStorage().put("banana", -13);
         assertThrows(RuntimeException.class, () -> reportService.createReport());
     }

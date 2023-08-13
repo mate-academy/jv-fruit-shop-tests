@@ -23,26 +23,26 @@ class ParseServiceImplTest {
     }
 
     @Test
-    void parseStringToTransactionListIsNull_NotOk() {
+    void parse_StringToTransactionListIsNull_NotOk() {
         assertThrows(RuntimeException.class, () -> parseService.parseStringsToTransactions(null));
     }
 
     @Test
-    void parseStringToTransactionListIsEmpty_NotOk() {
+    void parse_StringToTransactionListIsEmpty_NotOk() {
         List<String> transactions = new ArrayList<>();
         assertThrows(RuntimeException.class,
                 () -> parseService.parseStringsToTransactions(transactions));
     }
 
     @Test
-    void parseStringToTransactionListWithTitle_NotOk() {
+    void parse_StringToTransactionListWithTitle_NotOk() {
         List<String> transactions = List.of(TITLE);
         assertThrows(RuntimeException.class,
                 () -> parseService.parseStringsToTransactions(transactions));
     }
 
     @Test
-    void parseStringToTransactionWrightListSize_Ok() {
+    void parse_StringToTransactionWrightListSize_Ok() {
         List<String> transactions = List.of(TITLE,
                 BALANCE_OPERATION,
                 SUPPLY_OPERATION,

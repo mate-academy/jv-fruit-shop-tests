@@ -37,19 +37,19 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void readFromFilePathIsNull_NotOk() {
+    void read_FromFilePathIsNull_NotOk() {
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(null));
     }
 
     @Test
-    void readFromFileValidPath_Ok() {
+    void read_FromFileValidPath_Ok() {
         assertEquals(expectedEmpty, readerService.readFromFile(EMPTY_PATH));
         assertEquals(expectedTitle, readerService.readFromFile(TITLE_PATH));
         assertEquals(expectedFull, readerService.readFromFile(ACTIVITIES_PATH));
     }
 
     @Test
-    void readFromFileInvalidPath_NotOk() {
+    void read_FromFileInvalidPath_NotOk() {
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(WRONG_PATH_1));
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(WRONG_PATH_2));
     }

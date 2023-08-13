@@ -27,7 +27,7 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void handleValidTransaction_Ok() {
+    void handle_ValidTransaction_Ok() {
         FruitTransaction transaction =
                 new FruitTransaction(VALID_OPERATION, VALID_FRUIT, VALID_QUANTITY);
         balanceHandler.handle(transaction);

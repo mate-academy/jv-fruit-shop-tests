@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String validPath =
-            "src/test/java/core/basesyntax/fileReaderImplTestResources/validPath.txt";
+            "src/test/resources/readerValidPath.txt";
     private static final String invalidPath =
             "D/invalidPath";
     private FileReader fileReader;

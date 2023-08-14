@@ -12,22 +12,23 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String validPath =
-            "src/test/java/core/basesyntax/fileWriterImplTestResources/validPath.txt";
+            "src/test/resources/writerValidPath.txt";
     private static final String invalidPath =
             "D/D/D/invalidPath";
-    private static final String validContent = "valid content";
+    private static final String validContent = "valid content!";
     private FileWriter fileWriter;
 
     @BeforeEach
     void setUp() {
         fileWriter = new FileWriterImpl();
+
     }
 
     @Test
     void writeToFile_validCase_Ok() {
         FileReader fileReader = new FileReaderImpl();
         fileWriter.writeToFile(validPath, validContent);
-        Assertions.assertEquals(List.of("valid content"), fileReader.readFromFile(validPath));
+        Assertions.assertEquals(List.of("valid content!"), fileReader.readFromFile(validPath));
     }
 
     @Test

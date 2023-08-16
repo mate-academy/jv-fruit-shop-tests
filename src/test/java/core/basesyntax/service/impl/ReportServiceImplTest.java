@@ -12,7 +12,8 @@ class ReportServiceImplTest {
     @BeforeEach
     public void setUp() {
         FruitStorage.getFruits().clear();
-        expectedResult = "fruit,quantity\nbanana,152\r\n";
+        expectedResult = "fruit,quantity" + System.lineSeparator() + "banana,152"
+                + System.lineSeparator();
         FruitStorage.addFruit("banana", 152);
     }
 

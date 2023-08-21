@@ -26,13 +26,13 @@ class WriteServiceImplTest {
     @Test
     void writeToFile_emptyFileName_notOk() {
         assertThrows(RuntimeException.class,
-                () -> writeService.writeToFile(REPORT, EMPTY_FILE_NAME));
+                () -> writeService.writeToFile(EMPTY_FILE_NAME, REPORT));
     }
 
     @Test
     void writeToFile_nullFileName_notOk() {
         assertThrows(RuntimeException.class,
-                () -> writeService.writeToFile(REPORT, null));
+                () -> writeService.writeToFile(null, REPORT));
     }
 
     @Test

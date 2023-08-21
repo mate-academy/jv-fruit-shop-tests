@@ -22,14 +22,15 @@ class ReturnHandlerTest {
     }
 
     @AfterEach
-    static void afterEach() {
+    void afterEach() {
         Storage.storage.clear();
     }
 
     @Test
     void returnHandler_validQuantity_ok() {
+        Storage.storage.put(VALID_FRUIT, VALID_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(VALID_OPERATION,
-                VALID_FRUIT, VALID_QUANTITY);
+                VALID_FRUIT, VALID_RETURN_QUANTITY);
         returnHandler.handler(transaction);
         int expected = VALID_QUANTITY + VALID_RETURN_QUANTITY;
         assertEquals(expected, Storage.storage.get(transaction.getFruit()));

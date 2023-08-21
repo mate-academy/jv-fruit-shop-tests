@@ -19,7 +19,7 @@ class ReportCreatorImplTest {
     @Test
     void reportCreator_correctStorage_ok() {
         Storage.storage.put("banana", 40);
-        String expected = "fruit, quantity\nbanana,40\napple,35\n";
+        String expected = "fruit,quantity\nbanana,40\napple,35\n";
         assertEquals(expected, reportCreator.create());
     }
 }

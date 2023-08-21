@@ -60,7 +60,7 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(c -> c.getCode().equals(code))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Unknown code operation \""
+                    .orElseThrow(() -> new IllegalArgumentException("Unknown code operation \""
                             + code + "\""));
         }
     }

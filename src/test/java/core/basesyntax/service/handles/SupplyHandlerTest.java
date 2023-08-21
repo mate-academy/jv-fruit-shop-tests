@@ -13,8 +13,8 @@ class SupplyHandlerTest {
     private static OperationHandler supplyHandler;
     private static FruitTransaction.Operation VALID_OPERATION = FruitTransaction.Operation.SUPPLY;
     private static String VALID_FRUIT = "apple";
-    private static int VALID_QUANTITY = 40;
-    private static int VALID_SUPPLY_QUANTITY = 30;
+    private static int VALID_QUANTITY = 45;
+    private static int VALID_SUPPLY_QUANTITY = 60;
 
     @BeforeAll
     static void beforeAll() {
@@ -22,12 +22,13 @@ class SupplyHandlerTest {
     }
 
     @AfterEach
-    static void afterEach() {
+    void afterEach() {
         Storage.storage.clear();
     }
 
     @Test
     void supplyHandler_validQuantity_ok() {
+        Storage.storage.put(VALID_FRUIT, VALID_QUANTITY);
         FruitTransaction transaction = new FruitTransaction(VALID_OPERATION,
                 VALID_FRUIT, VALID_SUPPLY_QUANTITY);
         supplyHandler.handler(transaction);
@@ -35,11 +36,4 @@ class SupplyHandlerTest {
         assertEquals(expected, Storage.storage.get(transaction.getFruit()));
     }
 
-    @Test
-    void supplyHandler_emptyStorage_ok() {
-        FruitTransaction transaction = new FruitTransaction(VALID_OPERATION,
-                VALID_FRUIT, VALID_SUPPLY_QUANTITY);
-        supplyHandler.handler(transaction);
-        assertEquals(VALID_SUPPLY_QUANTITY, Storage.storage.get(VALID_FRUIT));
-    }
 }

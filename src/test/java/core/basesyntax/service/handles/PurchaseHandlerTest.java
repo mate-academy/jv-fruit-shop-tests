@@ -25,7 +25,7 @@ class PurchaseHandlerTest {
     }
 
     @AfterEach
-    static void afterEach() {
+    void afterEach() {
         Storage.storage.clear();
     }
 

@@ -18,12 +18,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorImplTest {
-    private static FruitTransaction transaction1 = new FruitTransaction(FruitTransaction
-            .Operation.BALANCE,"apple", 100);
-    private static FruitTransaction transaction2 = new FruitTransaction(FruitTransaction
-            .Operation.PURCHASE, "banana", 50);
-    private static FruitTransaction transaction3 = new FruitTransaction(FruitTransaction
+    private static final FruitTransaction transaction1 = new FruitTransaction(FruitTransaction
+            .Operation.BALANCE, "apple", 100);
+    private static final FruitTransaction transaction2 = new FruitTransaction(FruitTransaction
             .Operation.SUPPLY, "banana", 150);
+    private static final FruitTransaction transaction3 = new FruitTransaction(FruitTransaction
+            .Operation.PURCHASE, "banana", 50);
     private static TransactionProcessor transactionProcessor;
 
     @BeforeAll

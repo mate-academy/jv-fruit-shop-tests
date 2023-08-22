@@ -6,10 +6,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
     private static FileReader fileReader;
+
+    @BeforeEach
+    void init() {
+        fileReader = new CsvFileReader();
+    }
 
     @Test
     void readFileLines_regularCsvFileOutput_Ok() {
@@ -19,7 +25,6 @@ class CsvFileReaderTest {
                 + "b,apple,100" + System.lineSeparator()
                 + "s,banana,100" + System.lineSeparator();
         File file = new File(fileName);
-        fileReader = new CsvFileReader();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(content);
@@ -38,7 +43,6 @@ class CsvFileReaderTest {
     @Test
     void readFileLines_wrongPath_NotOk() {
         String nonExistentFile = "non-existent-file.txt";
-        fileReader = new CsvFileReader();
 
         Assertions.assertThrows(RuntimeException.class,
                 () -> fileReader.readFileLines(nonExistentFile));

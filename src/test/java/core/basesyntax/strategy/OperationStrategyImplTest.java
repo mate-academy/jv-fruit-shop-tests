@@ -3,6 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.model.Operation;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
@@ -12,10 +13,15 @@ class OperationStrategyImplTest {
             Operation.RETURN, new ReturnHandler(),
             Operation.PURCHASE, new PurchaseHandler()
     );
+    private static OperationStrategy operationStrategy;
+
+    @BeforeEach
+    void init() {
+        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+    }
 
     @Test
     void get_normalRecogniseMode_Ok() {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         Class<? extends OperationHandler> actual
                 = operationStrategy.get(Operation.BALANCE).getClass();
         Class<? extends OperationHandler> expected

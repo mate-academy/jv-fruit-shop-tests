@@ -38,7 +38,6 @@ class TransactionProcessorImplTest {
 
     @Test
     void process_correctData_Ok() {
-
         FruitTransaction firstFruitTransaction = new FruitTransaction();
         firstFruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
         firstFruitTransaction.setFruit("banana");

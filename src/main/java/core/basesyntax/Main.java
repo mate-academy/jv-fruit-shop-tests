@@ -50,5 +50,4 @@ public class Main {
         fruitShopService.processTransactions(fruitTransactionList);
         csvFileWriter.writeToFile(reportService.createReport(), OUTPUT_FILE_NAME);
     }
-
 }

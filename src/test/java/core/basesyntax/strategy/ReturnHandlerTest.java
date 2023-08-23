@@ -15,7 +15,7 @@ class ReturnHandlerTest {
     private static final Map<String, Integer> RESULT_MAP = Map.of("apple", 20);
 
     @BeforeEach
-    void setUp() {
+    void init() {
         balanceHandler = new BalanceHandler();
         returnHandler = new ReturnHandler();
         FruitTransaction fruitTransactionBalance

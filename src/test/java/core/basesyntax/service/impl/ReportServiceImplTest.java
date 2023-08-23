@@ -10,13 +10,13 @@ class ReportServiceImplTest {
     private static ReportService reportService;
 
     @BeforeEach
-    void setUp() {
+    void init() {
         Storage.fruitStorage.clear();
+        reportService = new ReportServiceImpl();
     }
 
     @Test
     void createReport_regularReport_Ok() {
-        reportService = new ReportServiceImpl();
         Storage.fruitStorage.put("banana", 10);
         Storage.fruitStorage.put("apple", 123);
         Storage.fruitStorage.put("orange", 54);
@@ -33,7 +33,6 @@ class ReportServiceImplTest {
 
     @Test
     void createReport_emptyReport_NotOk() {
-        reportService = new ReportServiceImpl();
         String actual = reportService.createReport();
         String expected =
                 "fruit,quantity" + System.lineSeparator();

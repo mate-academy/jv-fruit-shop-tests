@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
@@ -14,10 +15,13 @@ class CsvFileWriterTest {
             + "banana,152" + System.lineSeparator()
             + "apple,90" + System.lineSeparator();
 
+    @BeforeEach
+    void init() {
+        fileWriter = new CsvFileWriter();
+    }
+
     @Test
     void writeToFile_correctPath_Ok() {
-        fileWriter = new CsvFileWriter();
-
         fileWriter.writeToFile(REPORT, PATH);
         String actual = readFile(PATH);
 
@@ -26,15 +30,12 @@ class CsvFileWriterTest {
 
     @Test
     void writeToFile_NullPath_NotOk() {
-        fileWriter = new CsvFileWriter();
-
         Assertions.assertThrows(RuntimeException.class,
                 () -> fileWriter.writeToFile(REPORT, null));
     }
 
     @Test
     public void writeToFile_testWriteToFile_NotOk() {
-        fileWriter = new CsvFileWriter();
         String fileName = "directory/report.txt";
 
         Assertions.assertThrows(RuntimeException.class,

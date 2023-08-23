@@ -16,9 +16,9 @@ class BalanceHandlerTest {
             "banana", 20);
 
     @BeforeEach
-    void setUp() {
-        balanceHandler = new BalanceHandler();
+    void init() {
         Storage.fruitStorage.clear();
+        balanceHandler = new BalanceHandler();
     }
 
     @Test
@@ -27,7 +27,6 @@ class BalanceHandlerTest {
                 new FruitTransaction(Operation.BALANCE, "apple", 10);
         FruitTransaction fruitTransactionTwo =
                 new FruitTransaction(Operation.BALANCE, "banana", 20);
-        balanceHandler = new BalanceHandler();
 
         balanceHandler.handleOperation(fruitTransactionOne);
         balanceHandler.handleOperation(fruitTransactionTwo);

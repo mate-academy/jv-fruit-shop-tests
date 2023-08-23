@@ -23,13 +23,13 @@ class TransactionParserImplTest {
     private static TransactionParser transactionParser;
 
     @BeforeEach
-    void setUp() {
+    void init() {
         Storage.fruitStorage.clear();
+        transactionParser = new TransactionParserImpl();
     }
 
     @Test
     void parseCsvRows_normalMode_Ok() {
-        transactionParser = new TransactionParserImpl();
         List<FruitTransaction> actual = transactionParser.parseCsvRows(INPUT_LIST);
 
         Assertions.assertEquals(actual, EXPECTED_OUTPUT_LIST);

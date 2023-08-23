@@ -41,15 +41,14 @@ class FruitShopServiceImplTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeEach
-    void setUP() {
+    void init() {
         Storage.fruitStorage.clear();
+        operationStrategy = new OperationStrategyImpl(operationHandlerMapFull);
+        fruitShopService = new FruitShopServiceImpl(operationStrategy);
     }
 
     @Test
     void processTransactions_filledMap_Ok() {
-        operationStrategy = new OperationStrategyImpl(operationHandlerMapFull);
-        fruitShopService = new FruitShopServiceImpl(operationStrategy);
-
         fruitShopService.processTransactions(INPUT_TRANSACTION_LIST);
         Assertions.assertEquals(RESULT_MAP, Storage.fruitStorage);
     }

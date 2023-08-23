@@ -15,7 +15,7 @@ class PurchaseHandlerTest {
     private static final Map<String, Integer> RESULT_MAP = Map.of("apple", 5);
 
     @BeforeEach
-    void setUp() {
+    void init() {
         balanceHandler = new BalanceHandler();
         purchaseHandler = new PurchaseHandler();
         FruitTransaction fruitTransactionBalance

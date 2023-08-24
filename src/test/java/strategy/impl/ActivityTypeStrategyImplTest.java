@@ -18,9 +18,6 @@ public class ActivityTypeStrategyImplTest {
     static void beforeAll() {
         Map<ActivityType, ActivityTypeHandler> activityTypeHandlerMap = new HashMap<>();
         activityTypeHandlerMap.put(ActivityType.BALANCE, new BalanceTypeHandler());
-        activityTypeHandlerMap.put(ActivityType.SUPPLY, new AdditionTypeHandler());
-        activityTypeHandlerMap.put(ActivityType.RETURN, new AdditionTypeHandler());
-        activityTypeHandlerMap.put(ActivityType.PURCHASE, new PurchaseTypeHandler());
 
         activityTypeStrategy = new ActivityTypeStrategyImpl(
                 activityTypeHandlerMap);

@@ -7,16 +7,16 @@ import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
     private static final String REPORT_NAME = "src/test/resources/report.csv";
-    private static final FileWriter csvfileWriter = new CsvFileWriter();
+    private static FileWriter csvfileWriter;
 
-    @BeforeEach
-    void setUp() {
-        csvfileWriter.writeTextToFile(REPORT_NAME, "");
+    @BeforeAll
+    static void beforeAll() {
+        csvfileWriter = new CsvFileWriter();
     }
 
     @Test
@@ -28,7 +28,7 @@ class CsvFileWriterTest {
     }
 
     @Test
-    void writeTextToFile_invalidName_NotOk() {
+    void writeTextToFile_invalidName_notOk() {
         assertThrows(RuntimeException.class,
                 () -> csvfileWriter.writeTextToFile(null, "text"),
                 "Writing to null file should throw exception");

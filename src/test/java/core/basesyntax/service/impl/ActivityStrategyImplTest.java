@@ -10,26 +10,25 @@ import core.basesyntax.service.activity.strategy.BalanceHandler;
 import core.basesyntax.service.activity.strategy.PurchaseHandler;
 import core.basesyntax.service.activity.strategy.ReturnHandler;
 import core.basesyntax.service.activity.strategy.SupplyHandler;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class ActivityStrategyImplTest {
-    private static final Map<FruitActivity.Type, ActivityHandler> ACTIVITY_HANDLER_MAP
-            = new HashMap<>();
+    private static ActivityStrategyImpl activityStrategy;
 
-    static {
-        ACTIVITY_HANDLER_MAP.put(FruitActivity.Type.BALANCE, new BalanceHandler());
-        ACTIVITY_HANDLER_MAP.put(FruitActivity.Type.SUPPLY, new SupplyHandler());
-        ACTIVITY_HANDLER_MAP.put(FruitActivity.Type.PURCHASE, new PurchaseHandler());
-        ACTIVITY_HANDLER_MAP.put(FruitActivity.Type.RETURN, new ReturnHandler());
+    @BeforeAll
+    static void beforeAll() {
+        Map<FruitActivity.Type, ActivityHandler> activityHandlerMap = Map.of(
+                FruitActivity.Type.BALANCE, new BalanceHandler(),
+                FruitActivity.Type.SUPPLY, new SupplyHandler(),
+                FruitActivity.Type.PURCHASE, new PurchaseHandler(),
+                FruitActivity.Type.RETURN, new ReturnHandler());
+        activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
     }
-
-    private static final ActivityStrategyImpl activityStrategy
-            = new ActivityStrategyImpl(ACTIVITY_HANDLER_MAP);
 
     @ParameterizedTest
     @MethodSource("validTypes")

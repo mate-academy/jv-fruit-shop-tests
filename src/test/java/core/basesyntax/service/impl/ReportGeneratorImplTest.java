@@ -9,13 +9,19 @@ import core.basesyntax.service.ReportGenerator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class ReportGeneratorImplTest {
-    private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private static ReportGenerator reportGenerator;
+
+    @BeforeAll
+    static void beforeAll() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
 
     @BeforeEach
     void setUp() {
@@ -37,26 +43,20 @@ class ReportGeneratorImplTest {
     static Stream<Arguments> mapsWithFruits() {
         return Stream.of(
                 arguments(
-                        new HashMap<String, Integer>() {{
-                            put("fruit1", 1);
-                            put("fruit2", 2);
-                            put("fruit3", 3);
-                        }},
+                        Map.of("fruit1", 1, "fruit2", 2, "fruit3", 3),
                         "fruit,quantity" + System.lineSeparator()
                                 + "fruit3," + 3 + System.lineSeparator()
                                 + "fruit2," + 2 + System.lineSeparator()
                                 + "fruit1," + 1 + System.lineSeparator()
                 ),
                 arguments(
-                        new HashMap<String, Integer>(),
-                        "fruit,quantity" + System.lineSeparator()
-                ),
-                arguments(
-                        new HashMap<String, Integer>() {{
-                            put("fruit", Integer.MAX_VALUE);
-                        }},
+                        Map.of("fruit", Integer.MAX_VALUE),
                         "fruit,quantity" + System.lineSeparator()
                                 + "fruit," + Integer.MAX_VALUE + System.lineSeparator()
+                ),
+                arguments(
+                        new HashMap<String, Integer>(),
+                        "fruit,quantity" + System.lineSeparator()
                 )
 
         );

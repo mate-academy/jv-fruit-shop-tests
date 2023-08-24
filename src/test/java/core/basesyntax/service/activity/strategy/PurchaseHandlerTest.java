@@ -7,13 +7,10 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import core.basesyntax.db.FruitsDb;
 import core.basesyntax.model.FruitActivity;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,10 +25,6 @@ class PurchaseHandlerTest {
         fruitDb.put("banana", 100);
         fruitDb.put("apple", 50);
         fruitDb.put("orange", 10);
-    }
-
-    @Test
-    void processActivity() {
     }
 
     @ParameterizedTest
@@ -51,33 +44,20 @@ class PurchaseHandlerTest {
     static Stream<Arguments> validPurchaseActivities() {
         return Stream.of(
                 arguments(
-                        new ArrayList<FruitActivity>() {{
-                            add(new FruitActivity(FruitActivity.Type.BALANCE, "banana", 20));
-                        }},
-                        new HashMap<String, Integer>() {{
-                            put("banana", 80);
-                            put("apple", 50);
-                            put("orange", 10);
-                        }}
-                ),
-                arguments(
-                        new ArrayList<FruitActivity>() {{
-                            add(new FruitActivity(FruitActivity.Type.BALANCE, "banana", 20));
-                            add(new FruitActivity(FruitActivity.Type.BALANCE, "apple", 10));
-                            add(new FruitActivity(FruitActivity.Type.BALANCE, "orange", 5));
-                        }},
-                        new HashMap<String, Integer>() {{
-                            put("banana", 80);
-                            put("apple", 40);
-                            put("orange", 5);
-                        }}
+                        List.of(new FruitActivity(FruitActivity.Type.PURCHASE, "banana", 20)),
+                        Map.of("banana", 80, "apple", 50, "orange", 10)
+                ), arguments(
+                        List.of(new FruitActivity(FruitActivity.Type.PURCHASE, "banana", 20),
+                                new FruitActivity(FruitActivity.Type.PURCHASE, "apple", 10),
+                                new FruitActivity(FruitActivity.Type.PURCHASE, "orange", 5)),
+                        Map.of("banana", 80, "apple", 40, "orange", 5)
                 )
         );
     }
 
     @ParameterizedTest
     @MethodSource("invalidPurchaseActivities")
-    void handleActvity_invalidPurchaseActivitiy_NotOk(FruitActivity activity) {
+    void handleActvity_invalidPurchaseActivitiy_notOk(FruitActivity activity) {
         assertThrows(RuntimeException.class,
                 () -> purchaseHandler.processActivity(activity)
         );
@@ -85,15 +65,15 @@ class PurchaseHandlerTest {
 
     static Stream<Arguments> invalidPurchaseActivities() {
         return Stream.of(
-                arguments(new FruitActivity(FruitActivity.Type.BALANCE, "banana", -20)),
-                arguments(new FruitActivity(FruitActivity.Type.BALANCE, "apple", -1)),
-                arguments(new FruitActivity(FruitActivity.Type.BALANCE, "orange", null))
+                arguments(new FruitActivity(FruitActivity.Type.PURCHASE, "banana", -20)),
+                arguments(new FruitActivity(FruitActivity.Type.PURCHASE, "apple", -1)),
+                arguments(new FruitActivity(FruitActivity.Type.PURCHASE, "orange", null))
         );
     }
 
     @ParameterizedTest
     @MethodSource("tooBigQuantity")
-    void handleActvity_tooBig_NotOk(FruitActivity activity) {
+    void handleActvity_tooBig_notOk(FruitActivity activity) {
         assertThrows(RuntimeException.class,
                 () -> purchaseHandler.processActivity(activity)
         );
@@ -101,9 +81,9 @@ class PurchaseHandlerTest {
 
     static Stream<Arguments> tooBigQuantity() {
         return Stream.of(
-                arguments(new FruitActivity(FruitActivity.Type.BALANCE, "banana", 101)),
-                arguments(new FruitActivity(FruitActivity.Type.BALANCE, "apple", 51)),
-                arguments(new FruitActivity(FruitActivity.Type.BALANCE, "orange", 11))
+                arguments(new FruitActivity(FruitActivity.Type.PURCHASE, "banana", 101)),
+                arguments(new FruitActivity(FruitActivity.Type.PURCHASE, "apple", 51)),
+                arguments(new FruitActivity(FruitActivity.Type.PURCHASE, "orange", 11))
         );
     }
 }

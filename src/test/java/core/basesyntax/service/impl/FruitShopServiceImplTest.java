@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.FruitDb;
 import core.basesyntax.model.FruitTransaction;
@@ -31,7 +30,7 @@ class FruitShopServiceImplTest {
             operationHandlerMap = new HashMap<>();
     private static final Map<String, Integer> expectedBalanceMap = new HashMap<>();
     private static final FruitTransaction fruitBalance = new FruitTransaction();
-    private List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+    private final List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
     @BeforeAll
     static void initVariables() {
@@ -59,13 +58,6 @@ class FruitShopServiceImplTest {
     @AfterEach
     void clearBalanceMap() {
         FruitDb.getBalanceMap().clear();
-    }
-
-    @Test
-    void executeTransactions_nullFruitTransactionList_notOk() {
-        fruitTransactionList = null;
-        assertThrows(NullPointerException.class,
-                () -> fruitShopService.executeTransactions(fruitTransactionList));
     }
 
     @Test

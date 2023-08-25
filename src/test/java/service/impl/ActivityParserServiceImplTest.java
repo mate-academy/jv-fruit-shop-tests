@@ -10,9 +10,8 @@ import org.junit.Test;
 import service.ActivityParserService;
 
 public class ActivityParserServiceImplTest {
-    private static final ActivityParserService PARSER_SERVICE = new ActivityParserServiceImpl();
-    private static final String[] EMPTY_STRING = {};
-    private static final String[] DEFAULT_STRING = {
+    private static final ActivityParserService parserService = new ActivityParserServiceImpl();
+    private static final String[] TRANSACTIONS = {
             "b,banana,20",
             "b,apple,100",
             "s,banana,100",
@@ -23,24 +22,23 @@ public class ActivityParserServiceImplTest {
             "s,banana,50",
             "b,kiwi,10"
     };
-    private static List<Activity> activityList;
+    private static List<Activity> list;
 
     @Test
     public void emptyActivityString_Ok() {
-        activityList = PARSER_SERVICE.getActivityList(EMPTY_STRING);
-        assertTrue(activityList.isEmpty());
+        list = parserService.getActivityList(new String[] {});
+        assertTrue(list.isEmpty());
     }
 
     @Test
     public void defaultActivityString_Ok() {
-        activityList = PARSER_SERVICE.getActivityList(DEFAULT_STRING);
-        assertEquals(9, activityList.size(), "Expected activity list size is 9");
+        list = parserService.getActivityList(TRANSACTIONS);
+        assertEquals(9, list.size(), "Expected activity list size is 9");
     }
 
     @Test
     public void nullStringArray_NotOk() {
         assertThrows(NullPointerException.class, () ->
-                PARSER_SERVICE.getActivityList(null));
+                parserService.getActivityList(null));
     }
-
 }

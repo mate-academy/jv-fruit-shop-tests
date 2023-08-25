@@ -10,7 +10,7 @@ import org.junit.Test;
 import service.ReportCreator;
 
 public class ReportCreatorImplTest {
-    private static final ReportCreator REPORT_CREATOR = new ReportCreatorImpl();
+    private static final ReportCreator reportCreator = new ReportCreatorImpl();
     private static final Storage DEFAULT_STORAGE = new Storage(new HashMap<>());
     private static final Storage NULL_STORAGE = new Storage(null);
     private static final String EXPECTED_EMPTY_MESSAGE = "fruit,quantity";
@@ -21,19 +21,19 @@ public class ReportCreatorImplTest {
     @Test
     public void nullFruitBoxStorage_notOk() {
         assertThrows(NullPointerException.class, () ->
-                REPORT_CREATOR.createReport(NULL_STORAGE));
+                reportCreator.createReport(NULL_STORAGE));
     }
 
     @Test
     public void nullStorage_notOk() {
         assertThrows(NullPointerException.class, () ->
-                REPORT_CREATOR.createReport(null));
+                reportCreator.createReport(null));
     }
 
     @Test
     public void emptyStorage_Ok() {
         assertEquals(EXPECTED_EMPTY_MESSAGE,
-                REPORT_CREATOR.createReport(DEFAULT_STORAGE),
+                reportCreator.createReport(DEFAULT_STORAGE),
                 "Empty report is expected");
     }
 
@@ -43,8 +43,7 @@ public class ReportCreatorImplTest {
         fruitBox.put("banana", 10);
         fruitBox.put("apple", 10);
         assertEquals(EXPECTED_DEFAULT_MESSAGE,
-                REPORT_CREATOR.createReport(new Storage(fruitBox)),
+                reportCreator.createReport(new Storage(fruitBox)),
                 "Report does not match the expected message");
     }
-
 }

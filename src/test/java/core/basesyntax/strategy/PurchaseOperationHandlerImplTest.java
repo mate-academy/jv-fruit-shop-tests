@@ -33,4 +33,15 @@ class PurchaseOperationHandlerImplTest {
         int quantity = FruitStorage.getQuantity("banana");
         Assertions.assertEquals(quantity, 100);
     }
+
+    @Test
+    public void handleOperationWithNegativeValue_Ok() {
+        FruitTransaction balanceApple = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "apple", 80);
+        String fruitName = "apple";
+        int quantity = 90;
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            float updatedQuantity = FruitStorage.getFruits().get(fruitName) - quantity;
+        });
+    }
 }

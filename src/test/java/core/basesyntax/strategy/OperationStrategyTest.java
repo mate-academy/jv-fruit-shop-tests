@@ -41,4 +41,19 @@ class OperationStrategyTest {
         int quantity = FruitStorage.getQuantity("banana");
         Assertions.assertEquals(quantity, 120);
     }
+
+    @Test
+    public void getHandler_Ok() {
+        FruitTransaction transaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                        "apple", 130);
+        List<FruitTransaction> transactions = new ArrayList<>();
+        transactions.add(transaction1);
+        OperationStrategy strategy = OperationStrategy.valueOf(transaction1.getOperation()
+                .toString().toUpperCase());
+        OperationHandler handler = strategy.getHandler();
+        handler.handleOperation(transaction1);
+        int quantity = FruitStorage.getQuantity("apple");
+        Assertions.assertEquals(quantity, 130);
+    }
 }

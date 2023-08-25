@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertThrows;
+
 class ReturnOperationHandlerImplTest {
     private FruitService fruitService;
 
@@ -32,5 +34,22 @@ class ReturnOperationHandlerImplTest {
         fruitService.processTransactions(transactions);
         int quantity = FruitStorage.getQuantity("banana");
         Assertions.assertEquals(quantity, 140);
+    }
+
+    @Test
+    public void handleOperationWithAbsentFruit_Ok() {
+        FruitTransaction transaction1 =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                        "banana", 120);
+        FruitTransaction transaction2 =
+                new FruitTransaction(FruitTransaction.Operation.RETURN,
+                        "banana", 20);
+        List<FruitTransaction> transactions = new ArrayList<>();
+        transactions.add(transaction1);
+        transactions.add(transaction2);
+        fruitService.processTransactions(transactions);
+        assertThrows(NullPointerException.class, () -> {
+            FruitStorage.getQuantity("apple");
+        });
     }
 }

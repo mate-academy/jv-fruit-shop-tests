@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private static final String INPUT_FILE = "input.csv";
-    private static final String EMPTY_FILE = "empty.csv";
+    private static final String INPUT_FILE = "src/test/resources/input.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty.csv";
     private ReaderServiceImpl readerService = new ReaderServiceImpl();
     private List<String> valuesFromFile;
 
@@ -29,20 +29,20 @@ class ReaderServiceImplTest {
 
     @Test
     public void readRightFile_Ok() {
-        List<String> actualResult = readerService.readFromFile("input.csv");
+        List<String> actualResult = readerService.readFromFile("src/test/resources/input.csv");
         Assertions.assertEquals(valuesFromFile.toString().trim(), actualResult.toString()
                 .replaceAll("\\s+"," "));
     }
 
     @Test
     public void readEmptyFile_Ok() {
-        List<String> actualResult = readerService.readFromFile("empty.csv");
+        List<String> actualResult = readerService.readFromFile("src/test/resources/empty.csv");
         valuesFromFile = new ArrayList<>();
         Assertions.assertEquals(valuesFromFile.toString().trim(), actualResult.toString().trim());
     }
 
     @Test
-    public void readEmptyFile_notOk() {
+    public void readNotExistingFile_Ok() {
         Assertions.assertThrows(RuntimeException.class, () ->
                 readerService.readFromFile(""));
     }

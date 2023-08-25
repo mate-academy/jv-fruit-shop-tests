@@ -23,4 +23,13 @@ class BalanceOperationHandlerImplTest {
         int quantity = FruitStorage.getQuantity("banana");
         Assertions.assertEquals(quantity, 120);
     }
+
+    @Test
+    public void handleOperationWithNegativeValue_Ok() {
+        FruitTransaction balanceBanana = new
+                FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", -120);
+        Assertions.assertThrows(RuntimeException.class, () ->
+                balanceOperationHandler.handleOperation(balanceBanana));
+    }
 }

@@ -11,6 +11,10 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void processTransaction(String fruit, Integer quantity) {
+        if (fruitDao.get(fruit) - quantity < 0 || quantity < 0) {
+            throw new RuntimeException("Not correct quantity");
+        }
+
         fruitDao.add(fruit, fruitDao.get(fruit) - quantity);
         System.out.println("Fruit: " + fruit + " PurchaseOperationHandler: " + fruitDao.get(fruit));
     }

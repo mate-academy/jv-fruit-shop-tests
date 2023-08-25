@@ -11,7 +11,16 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void processTransaction(String fruit, Integer quantity) {
-        fruitDao.add(fruit, fruitDao.get(fruit) + quantity);
+        if (quantity < 0) {
+            throw new RuntimeException("Supply can`t be negative: " + quantity);
+        }
+
+        if (fruitDao.get(fruit) != null) {
+            fruitDao.add(fruit, fruitDao.get(fruit) + quantity);
+        } else {
+            fruitDao.add(fruit, quantity);
+        }
+
         System.out.println("Fruit: " + fruit + " SupplyOperationHandler: " + fruitDao.get(fruit));
     }
 }

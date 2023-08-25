@@ -29,6 +29,6 @@ class BalanceOperationHandlerTest {
     @Test
     void processTransaction_balanceOperation_ok() {
         balanceHandler.processTransaction(VALID_FRUIT, VALID_QUANTITY);
-        assertEquals(VALID_QUANTITY,fruitDao.get(VALID_FRUIT));
+        assertEquals(VALID_QUANTITY, fruitDao.get(VALID_FRUIT));
     }
 }

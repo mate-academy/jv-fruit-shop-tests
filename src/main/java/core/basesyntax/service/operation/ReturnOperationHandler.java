@@ -11,6 +11,10 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void processTransaction(String fruit, Integer quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Return fruit can`t be negative: " + quantity);
+        }
+
         fruitDao.add(fruit, fruitDao.get(fruit) + quantity);
         System.out.println("Fruit: " + fruit + " ReturnOperationHandler: " + fruitDao.get(fruit));
     }

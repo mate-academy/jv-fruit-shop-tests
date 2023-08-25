@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertThrows;
-
 class ReturnOperationHandlerImplTest {
     private FruitService fruitService;
 
@@ -48,7 +46,7 @@ class ReturnOperationHandlerImplTest {
         transactions.add(transaction1);
         transactions.add(transaction2);
         fruitService.processTransactions(transactions);
-        assertThrows(NullPointerException.class, () -> {
+        Assertions.assertThrows(NullPointerException.class, () -> {
             FruitStorage.getQuantity("apple");
         });
     }

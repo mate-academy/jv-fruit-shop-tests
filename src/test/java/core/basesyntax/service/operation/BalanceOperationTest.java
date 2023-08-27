@@ -1,23 +1,31 @@
 package core.basesyntax.service.operation;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
-    private static OperationHandler balance;
+    private static OperationHandler operationHandler;
 
     @BeforeAll
     static void setup() {
-        balance = new BalanceOperation();
+        operationHandler = new BalanceOperation();
     }
 
     @Test
-    void processWithTransaction_emptyInputParameters_NotOk() {
-        assertThrows(RuntimeException.class, () -> {
-            balance.processWithTransaction(null);
-        });
+    void testProcessWithTransaction_successful() {
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", 10);
+        assertDoesNotThrow(() -> operationHandler.processWithTransaction(transaction));
+    }
+
+    @Test
+    void testProcessWithTransaction_nullTransaction() {
+        assertThrows(RuntimeException.class,
+                () -> operationHandler.processWithTransaction(null));
     }
 }

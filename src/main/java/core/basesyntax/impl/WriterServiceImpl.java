@@ -9,7 +9,7 @@ import java.util.List;
 public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(List<String> data, String outputPath) {
-        if (data.isEmpty() || outputPath.isEmpty()) {
+        if (data.isEmpty()) {
             throw new RuntimeException("Incorrect input parameters");
         }
         try {

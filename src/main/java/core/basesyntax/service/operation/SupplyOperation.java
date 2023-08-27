@@ -8,10 +8,18 @@ public class SupplyOperation implements OperationHandler {
 
     @Override
     public void processWithTransaction(FruitTransaction transaction) {
-        if (Storage.getFruits().containsKey(transaction.getFruit())) {
-            int quantity = Storage.getFruits().get(transaction.getFruit());
-            Storage.getFruits().put(transaction.getFruit(),transaction.getQuantity() + quantity);
+        if (transaction == null) {
+            throw new RuntimeException("empty input parameters");
         }
-        Storage.getFruits().put(transaction.getFruit(), transaction.getQuantity());
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("invalid empty parameters");
+        }
+        if (Storage.getFruits().containsKey(transaction.getFruit())) {
+            int quantityFromStorage = Storage.getFruits().get(transaction.getFruit());
+            int quantity = quantityFromStorage + transaction.getQuantity();
+            Storage.getFruits().put(transaction.getFruit(), quantity);
+        } else {
+            Storage.getFruits().put(transaction.getFruit(), transaction.getQuantity());
+        }
     }
 }

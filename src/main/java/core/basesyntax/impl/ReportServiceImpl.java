@@ -9,6 +9,9 @@ public class ReportServiceImpl implements ReportService<String> {
 
     @Override
     public List<String> createReport(Map<String, Integer> map) {
+        if (map.isEmpty()) {
+            throw new RuntimeException("empty input parameters");
+        }
         List<String> report = new ArrayList<>();
         for (String key : map.keySet()) {
             int value = map.get(key);

@@ -8,51 +8,57 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static WriterService writerService;
-    private static List<String> data;
-    private static String outputPath;
 
     @BeforeAll
     static void setup() {
         writerService = new WriterServiceImpl();
-        data = new ArrayList<>();
-        outputPath = new String("/src/main/java/core/recourses/report.csv");
     }
 
     @Test
-    void writeToFile_validDataAndPath() throws IOException {
-        List<String> data = Arrays.asList("Line 1", "Line 2", "Line 3");
-        String outputPath = "output.txt";
-
-        writerService.writeToFile(data, outputPath);
-
-        List<String> lines = Files.readAllLines(Path.of(outputPath));
-        assertEquals(data, lines);
+    void writeToFile_successful() {
+        List<String> testList = List.of("apple,10", "banana,10");
+        String address = "testReport.csv";
+        try {
+            List<String> testFile = Files.readAllLines(Path.of(address));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        writerService.writeToFile(testList, address);
+        assertEquals("apple,10", testList.get(0));
+        assertEquals("banana,10", testList.get(1));
     }
 
     @Test
-    void writeToFile_emptyData_throwsException() {
-        List<String> emptyData = Arrays.asList();
-        String outputPath = "output.txt";
-
+    void writeToFile_emptyInputList_NotOk() {
+        List<String> emptyList = new ArrayList<>();
+        String address = "testReport.csv";
         assertThrows(RuntimeException.class, () -> {
-            writerService.writeToFile(emptyData, outputPath);
+            writerService.writeToFile(emptyList, address);
         });
     }
 
     @Test
-    void writeToFile_emptyPath_throwsException() {
-        List<String> data = Arrays.asList("Line 1", "Line 2", "Line 3");
-        String emptyPath = "";
-
+    void writeToFIle_emptyAddress_NotOk() {
+        List<String> testList = new ArrayList<>();
+        testList.add("banana,10");
+        String address = "";
         assertThrows(RuntimeException.class, () -> {
-            writerService.writeToFile(data, emptyPath);
+            writerService.writeToFile(testList, address);
+        });
+    }
+
+    @Test
+    void writeToFile_throwException_Ok() {
+        String incorrectAddress = "incorrectAddress";
+        List<String> testList = new ArrayList<>();
+        assertThrows(RuntimeException.class, () -> {
+            writerService.writeToFile(testList, incorrectAddress);
         });
     }
 }

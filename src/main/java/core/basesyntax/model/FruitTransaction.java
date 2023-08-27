@@ -6,9 +6,9 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
-    }
-
-    public FruitTransaction() {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
     public int getQuantity() {

@@ -21,7 +21,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         //reader
-        String addressInputFile = "/src/main/java/core/recourses/input.csv";
+        String addressInputFile = "/src/main/java/core/resources/input.csv";
         ReaderService readerService = new ReaderServiceImpl();
         List<String> data = new ArrayList<>();
         readerService.readFromFile(addressInputFile);
@@ -37,7 +37,7 @@ public class Main {
         List<String> stringList = reportService.createReport(Storage.getFruits());
         //writer
         WriterService writerService = new WriterServiceImpl();
-        String addressReportFile = "/src/main/java/core/recourses/report.csv";
+        String addressReportFile = "/src/main/java/core/resources/report.csv";
         writerService.writeToFile(stringList, addressReportFile);
     }
 }

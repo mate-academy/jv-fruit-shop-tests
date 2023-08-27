@@ -15,15 +15,10 @@ public class ParserServiceImpl implements ParserService<FruitTransaction> {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = 1; i < inputData.size(); i++) {
             String[] data = inputData.get(i).split(",");
-            FruitTransaction transaction = new FruitTransaction();
             String operationCode = data[0];
             FruitTransaction.Operation operation = findOperationByCode(operationCode);
-            if (operation == null) {
-                throw new IllegalArgumentException("Invalid operation code: " + operationCode);
-            }
-            transaction.setOperation(operation);
-            transaction.setFruit(data[1]);
-            transaction.setQuantity(Integer.parseInt(data[2]));
+            FruitTransaction transaction = new FruitTransaction(operation, data[1],
+                    Integer.parseInt(data[2]));
             fruitTransactions.add(transaction);
         }
         return fruitTransactions;

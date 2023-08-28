@@ -29,7 +29,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createReport_emptyInput_NotOK() {
+    void createReport_emptyInput_throwsException() {
         Map<String, Integer> emptyMap = new HashMap<>();
         assertThrows(RuntimeException.class, () -> {
             reportService.createReport(emptyMap);

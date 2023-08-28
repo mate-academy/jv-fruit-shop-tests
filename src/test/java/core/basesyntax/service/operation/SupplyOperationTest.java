@@ -13,43 +13,40 @@ import org.junit.jupiter.api.Test;
 
 class SupplyOperationTest {
     private Map<String, Integer> fruitsStorage;
+    private SupplyOperation supplyOperation;
+    private FruitTransaction transaction;
 
     @BeforeEach
     void setup() {
         fruitsStorage = new HashMap<>();
         fruitsStorage.put("banana", 20);
         Storage.setFruits(fruitsStorage);
+        supplyOperation = new SupplyOperation();
+        transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "banana", 10);
     }
 
     @Test
     void testProcessWithTransaction_successful() {
-        SupplyOperation supplyOperation = new SupplyOperation();
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 10);
         assertDoesNotThrow(() -> supplyOperation.processWithTransaction(transaction));
         assertEquals(30, Storage.getFruits().get("banana"));
     }
 
     @Test
-    void testProcessWithTransaction_nullTransaction() {
-        SupplyOperation supplyOperation = new SupplyOperation();
+    void testProcessWithTransaction_nullTransaction_throwsException() {
         assertThrows(RuntimeException.class, () -> supplyOperation.processWithTransaction(null));
     }
 
     @Test
-    void testProcessWithTransaction_existingFruit() {
-        SupplyOperation supplyOperation = new SupplyOperation();
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 10);
+    void testProcessWithTransaction_existingFruit_throwsException() {
         assertDoesNotThrow(() -> supplyOperation.processWithTransaction(transaction));
         assertEquals(30, fruitsStorage.get("banana"));
     }
 
     @Test
-    void testProcessWithTransaction_newFruit() {
-        SupplyOperation supplyOperation = new SupplyOperation();
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "apple", 5);
+    void testProcessWithTransaction_newFruit_Ok() {
+        transaction.setFruit("apple");
+        transaction.setQuantity(5);
         assertDoesNotThrow(() -> supplyOperation.processWithTransaction(transaction));
         assertEquals(5, fruitsStorage.get("apple"));
     }

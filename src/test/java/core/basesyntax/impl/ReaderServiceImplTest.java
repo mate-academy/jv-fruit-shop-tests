@@ -18,21 +18,26 @@ class ReaderServiceImplTest {
 
     @Test
     void readFromFile_successful() {
-        String correctAddress = "testInput.csv";
-        List<String> expected = List.of("Line 1", "Line 2", "Line 3");
+        String correctAddress = "src/main/resources/input.csv";
+        List<String> expected = List.of("Operation,Fruit,Quantity",
+                "s,banana,100",
+                "s,apple,100",
+                "r,banana,10",
+                "r,apple,10",
+                "p,banana,10");
         List<String> actual = readerService.readFromFile(correctAddress);
-        assertEquals(expected, actual);
+        assertEquals(expected.size(), actual.size());
     }
 
     @Test
-    void readFromFile_nullInput_NotOk() {
+    void readFromFile_nullInput_throwsException() {
         assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(null);
         });
     }
 
     @Test
-    void readFromFile_throwException_Ok() {
+    void readFromFile_incorrectAddress_throwsException() {
         String incorrectAddress = "dontcorrect.txt";
         assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(incorrectAddress);

@@ -21,7 +21,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         //reader
-        String addressInputFile = "/src/main/java/core/resources/input.csv";
+        String addressInputFile = "/src/main/resources/input.csv";
         ReaderService readerService = new ReaderServiceImpl();
         List<String> data = new ArrayList<>();
         readerService.readFromFile(addressInputFile);

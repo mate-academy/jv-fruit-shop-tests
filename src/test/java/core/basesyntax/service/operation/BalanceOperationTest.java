@@ -24,7 +24,7 @@ class BalanceOperationTest {
     }
 
     @Test
-    void testProcessWithTransaction_nullTransaction() {
+    void testProcessWithTransaction_nullTransaction_throwsException() {
         assertThrows(RuntimeException.class,
                 () -> operationHandler.processWithTransaction(null));
     }

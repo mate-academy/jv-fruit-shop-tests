@@ -20,41 +20,40 @@ class OperationStrategyImplTest {
     private OperationHandler operationHandler;
     private List<FruitTransaction> transactions;
     private Map<FruitTransaction.Operation,
-            OperationHandler> operationHashMap;
-    private Map<String, Integer> map;
+            OperationHandler> mapOfOperations;
+    private Map<String, Integer> testMapOfFruitsAndQuantity;
 
     @BeforeEach
      void setup() {
-        map = new HashMap<>();
-        map.put("banana", 10);
-        Storage.setFruits(map);
+        testMapOfFruitsAndQuantity = new HashMap<>();
+        testMapOfFruitsAndQuantity.put("banana", 10);
+        Storage.setFruits(testMapOfFruitsAndQuantity);
         operationStrategy = new OperationStrategyImpl();
         operationHandler = new PurchaseOperation();
         transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 10));
-        operationHashMap = new HashMap<>();
-        operationHashMap.put(FruitTransaction.Operation.PURCHASE,
+        mapOfOperations = new HashMap<>();
+        mapOfOperations.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperation());
     }
 
     @Test
-    void getOperationAndProcess_emptyInputParameters_NotOk() {
+    void getOperationAndProcess_emptyInputParameters_throwsException() {
         transactions.clear();
         assertThrows(RuntimeException.class, () -> {
-            operationStrategy.getOperationAndProcess(transactions, operationHashMap);
+            operationStrategy.getOperationAndProcess(transactions, mapOfOperations);
         });
     }
 
     @Test
     void getOperationAndProcess_successful() {
-        operationStrategy.getOperationAndProcess(transactions, operationHashMap);
+        operationStrategy.getOperationAndProcess(transactions, mapOfOperations);
         assertEquals(0, Storage.getFruits().get("banana"));
     }
 
     @Test
-    void testGetOperationAndProcess_insufficientFruits() {
-
+    void testGetOperationAndProcess_insufficientFruits_throwsException() {
         transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                 "banana", 100));
         Map<FruitTransaction.Operation, OperationHandler> operationHashMap = new HashMap<>();

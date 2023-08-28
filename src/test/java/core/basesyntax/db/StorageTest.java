@@ -25,13 +25,13 @@ class StorageTest {
     }
 
     @Test
-    void testGetTransactions() {
+    void testGetTransactions_successful() {
         Storage.setTransactions(initialTransactions);
         assertEquals(initialTransactions, Storage.getTransactions());
     }
 
     @Test
-    void testSetTransactions() {
+    void testSetTransactions_successful() {
         Storage.setTransactions(initialTransactions);
         List<FruitTransaction> newTransactions = new ArrayList<>();
         newTransactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE,
@@ -41,13 +41,13 @@ class StorageTest {
     }
 
     @Test
-    void testGetFruits() {
+    void testGetFruits_successful() {
         Storage.setFruits(initialFruits);
         assertEquals(initialFruits, Storage.getFruits());
     }
 
     @Test
-    void testSetFruits() {
+    void testSetFruits_successful() {
         Storage.setFruits(initialFruits);
         Map<String, Integer> newFruits = new HashMap<>();
         newFruits.put("apple", 15);

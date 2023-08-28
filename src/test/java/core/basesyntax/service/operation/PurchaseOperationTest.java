@@ -12,35 +12,34 @@ import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
     private Map<String, Integer> fruitsStorage;
+    private PurchaseOperation purchaseOperation;
+    private FruitTransaction transaction;
 
     @BeforeEach
     void setup() {
         fruitsStorage = new HashMap<>();
         fruitsStorage.put("banana", 20);
         Storage.setFruits(fruitsStorage);
+        purchaseOperation = new PurchaseOperation();
+        transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", 10);
     }
 
     @Test
     void testProcessWithTransaction_successful() {
-        PurchaseOperation purchaseOperation = new PurchaseOperation();
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "banana", 10);
         purchaseOperation.processWithTransaction(transaction);
         assertEquals(10, Storage.getFruits().get("banana"));
     }
 
     @Test
-    void testProcessWithTransaction_nullTransaction() {
-        PurchaseOperation purchaseOperation = new PurchaseOperation();
+    void testProcessWithTransaction_nullTransaction_throwsException() {
         assertThrows(RuntimeException.class,
                 () -> purchaseOperation.processWithTransaction(null));
     }
 
     @Test
-    void testProcessWithTransaction_insufficientFruits() {
-        PurchaseOperation purchaseOperation = new PurchaseOperation();
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
-                "banana", 30);
+    void testProcessWithTransaction_insufficientFruits_throwsException() {
+        transaction.setQuantity(30);
         assertThrows(RuntimeException.class,
                 () -> purchaseOperation.processWithTransaction(transaction));
         assertEquals(20, Storage.getFruits().get("banana"));

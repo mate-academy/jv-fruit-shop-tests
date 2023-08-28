@@ -22,16 +22,14 @@ class ParserServiceImplTest {
     void parse_successful() {
         List<String> input = List.of("operation,fruit,quantity", "b,apple,10");
         List<FruitTransaction> transactionList = parserService.parse(input);
-        assertEquals(input.get(1).split(",")[0],
-                transactionList.get(0).getOperation().getCode());
-        assertEquals(input.get(1).split(",")[1],
-                transactionList.get(0).getFruit());
-        assertEquals(input.get(1).split(",")[2],
-                String.valueOf(transactionList.get(0).getQuantity()));
+        FruitTransaction expectedTransaction =
+                new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                        "apple", 10);
+        assertEquals(expectedTransaction, transactionList.get(0));
     }
 
     @Test
-    void parse_emptyInput_NotOK() {
+    void parse_emptyInput_throwsException() {
         List<String> emptyInput = new ArrayList<>();
         assertThrows(RuntimeException.class, () -> {
             parserService.parse(emptyInput);

@@ -16,7 +16,7 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <jacoco.version>0.8.6</jacoco.version>
+        <jacoco.version>0.8.10</jacoco.version>
         <junit.jupiter.version>5.9.2</junit.jupiter.version>
     </properties>
 
@@ -60,7 +60,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>0.8.10</version>
                 <executions>
                     <execution>
                         <goals>

@@ -31,6 +31,7 @@ public class FruitTransactionServiceTest {
         fruitDao = new FruitDaoImpl();
         operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         fruitTransactionService = new FruitTransactionServiceImpl(fruitDao, operationStrategy);
+        fruitDao.getAll().clear();
     }
 
     @Test

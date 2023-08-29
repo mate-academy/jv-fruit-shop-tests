@@ -1,19 +1,23 @@
 package core.basesyntax.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
-    private static final String OUTPUT_FILE = "result.csv";
-    private WriterServiceImpl writerService;
-    private ReaderServiceImpl readerService;
+    private static String OUTPUT_FILE;
+    private static WriterServiceImpl writerService;
+    private static ReaderServiceImpl readerService;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         writerService = new WriterServiceImpl();
         readerService = new ReaderServiceImpl();
+        OUTPUT_FILE = "result.csv";
     }
 
     @Test
@@ -24,9 +28,16 @@ class WriterServiceImplTest {
         writerService.writeToFile(OUTPUT_FILE, "banana,154"
                 + System.lineSeparator()
                 + "apple,90");
-        List<String> actualResult = readerService.readFromFile(OUTPUT_FILE);
-        String actualText = String.join(System.lineSeparator(), actualResult);
+        String actualText = String.join(System.lineSeparator(), readFromFile(OUTPUT_FILE));
         Assertions.assertEquals(actualText, expectedText);
+    }
+
+    public List<String> readFromFile(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(OUTPUT_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Can not read data, please check file: " + OUTPUT_FILE, e);
+        }
     }
 
     @Test

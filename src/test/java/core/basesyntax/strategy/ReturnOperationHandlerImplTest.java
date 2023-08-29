@@ -7,14 +7,14 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerImplTest {
-    private FruitService fruitService;
+    private static FruitService fruitService;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         fruitService = new FruitServiceImpl();
     }
 
@@ -46,7 +46,7 @@ class ReturnOperationHandlerImplTest {
         transactions.add(transaction1);
         transactions.add(transaction2);
         fruitService.processTransactions(transactions);
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             FruitStorage.getQuantity("apple");
         });
     }

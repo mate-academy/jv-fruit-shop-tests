@@ -1,14 +1,19 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserImplTest {
-    private FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
+    private static FruitTransactionParser fruitTransactionParser;
+
+    @BeforeAll
+    static void beforeAll(){
+        fruitTransactionParser = new FruitTransactionParserImpl();
+    }
 
     @Test
     void getFruitTransactionsListOk() {

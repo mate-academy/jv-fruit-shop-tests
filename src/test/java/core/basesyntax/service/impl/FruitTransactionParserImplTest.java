@@ -2,9 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
-import java.util.List;
-
 import core.basesyntax.service.FruitTransactionParser;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

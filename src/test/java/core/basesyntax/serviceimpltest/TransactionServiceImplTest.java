@@ -1,19 +1,10 @@
 package core.basesyntax.serviceimpltest;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.readservice.TransactionParseService;
-import core.basesyntax.service.readservice.TransactionParseServiceImpl;
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TransactionServiceImplTest {
-    private TransactionParseService transactionParseService;
-
-    @Before
-    public void setUp() {
-        transactionParseService = new TransactionParseServiceImpl();
-    }
 
     @Test
     void valid_inputValue_B_Transaction_Ok() {

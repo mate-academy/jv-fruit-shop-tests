@@ -11,7 +11,7 @@ class FruitTransactionParserImplTest {
     private static FruitTransactionParser fruitTransactionParser;
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         fruitTransactionParser = new FruitTransactionParserImpl();
     }
 

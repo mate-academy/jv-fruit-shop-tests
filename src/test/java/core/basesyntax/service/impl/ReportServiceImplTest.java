@@ -11,7 +11,7 @@ class ReportServiceImplTest {
     private String expectedResult;
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         reportService = new ReportServiceImpl();
     }
 

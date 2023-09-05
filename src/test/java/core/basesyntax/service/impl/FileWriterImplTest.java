@@ -26,7 +26,7 @@ class FileWriterImplTest {
 
     @Test
     void check_inputData_Exception() {
-        String path = "src\\test\\resources\\report.csv";
+        String path = "src/test/resources/report.csv";
         String inputData = "";
         Assertions.assertThrows(RuntimeException.class, ()
                 -> fileWriter.writeReportToFile(inputData, path));
@@ -34,7 +34,7 @@ class FileWriterImplTest {
 
     @Test
     void check_inputData_Null_Exception() {
-        String path = "src\\test\\resources\\report.csv";
+        String path = "src/test/resources/report.csv";
         String inputData = null;
         Assertions.assertThrows(RuntimeException.class, ()
                 -> fileWriter.writeReportToFile(inputData, path));

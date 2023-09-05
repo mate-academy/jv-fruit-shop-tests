@@ -16,7 +16,7 @@ class FileReaderImplTest {
 
     @Test
     void check_file_Exception() {
-        String path = "src\\test\\resources\\fake.csv";
+        String path = "src/test/resources/fake.csv";
         Assertions.assertThrows(RuntimeException.class, () -> fileReader.readDataFromFile(path));
     }
 
@@ -28,7 +28,7 @@ class FileReaderImplTest {
 
     @Test
     void check_List_OK() {
-        String path = "src\\test\\resources\\dataFruit.csv";
+        String path = "src/test/resources/dataFruit.csv";
         List<String> result = fileReader.readDataFromFile(path);
         Assertions.assertNotNull(result);
         Assertions.assertEquals(2, result.size());

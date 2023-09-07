@@ -4,38 +4,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static final Map<String, Integer> fruitBalances = new HashMap<>();
+    private static final Map<String, Integer> FRUIT_BALANCE = new HashMap<>();
 
     static {
-        fruitBalances.put("apple", 0);
-        fruitBalances.put("banana", 0);
+        FRUIT_BALANCE.put("apple", 0);
+        FRUIT_BALANCE.put("banana", 0);
     }
 
     public Storage() {
     }
 
     public static void addFruits(String fruit, Integer number) {
-        fruitBalances.put(fruit, number);
+        FRUIT_BALANCE.put(fruit, number);
+    }
+
+    public static void clear() {
+        FRUIT_BALANCE.clear();
     }
 
     public static void removeFruit(String fruit, int quantity) {
-        int currentQuantity = fruitBalances.getOrDefault(fruit, 0);
+        int currentQuantity = FRUIT_BALANCE.getOrDefault(fruit, 0);
         if (currentQuantity > 0) {
             int newQuantity = Math.max(currentQuantity - quantity, 0);
-            fruitBalances.put(fruit, newQuantity);
+            FRUIT_BALANCE.put(fruit, newQuantity);
         }
     }
 
     public static int getFruitBalance(String fruit) {
-        return fruitBalances.getOrDefault(fruit, 0);
+
+        return FRUIT_BALANCE.getOrDefault(fruit, 0);
     }
 
     public static Map<String, Integer> getAllFruitBalances() {
-        return new HashMap<>(fruitBalances);
+        return new HashMap<>(FRUIT_BALANCE);
     }
 
     @Override
     public String toString() {
-        return "Storage{" + fruitBalances + "}";
+        return "Storage{" + FRUIT_BALANCE + "}";
     }
 }

@@ -9,5 +9,5 @@ public interface OperationHandler {
     p - purchase, means someone has bought some fruit
     r - return, means someone who have bought the fruits now returns them back
     */
-    void execute(FruitTransaction fruitTransaction);
+    int execute(FruitTransaction fruitTransaction);
 }

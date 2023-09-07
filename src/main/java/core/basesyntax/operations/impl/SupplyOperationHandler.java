@@ -6,7 +6,10 @@ import core.basesyntax.operations.OperationHandler;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void execute(FruitTransaction fruitTransaction) {
-        Storage.addFruits(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
+    public int execute(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruitName();
+        Storage.addFruits(fruit, Storage.getFruitBalance(fruit)
+                                 + fruitTransaction.getQuantity());
+        return Storage.getFruitBalance(fruitTransaction.getFruitName());
     }
 }

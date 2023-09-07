@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessorService;
 import core.basesyntax.service.OperationStrategy;
+import java.util.List;
 
 public class DataProcessorServiceImpl implements DataProcessorService {
     private final OperationStrategy operationStrategy;

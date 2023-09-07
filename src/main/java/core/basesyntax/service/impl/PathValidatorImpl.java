@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.PathValidator;
+import java.io.File;
 
 public class PathValidatorImpl implements PathValidator {
 
@@ -9,7 +10,7 @@ public class PathValidatorImpl implements PathValidator {
 
     @Override
     public boolean filePathValidator(String filePath) {
-        java.io.File file = new java.io.File(filePath);
+        File file = new File(filePath);
         return file.exists() && file.isFile() && file.canRead();
     }
 }

@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.io.IOException;
 import java.util.List;
-import core.basesyntax.model.FruitTransaction;
 
 public interface FileReaderService {
     /**

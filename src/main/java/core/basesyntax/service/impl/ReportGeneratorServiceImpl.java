@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import java.util.Map;
 import core.basesyntax.service.ReportGeneratorService;
+import java.util.Map;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private static final String SEPARATOR = ",";
@@ -25,4 +25,5 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
         }
         return report.toString();
     }
+
 }

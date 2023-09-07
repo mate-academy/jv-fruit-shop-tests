@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
 

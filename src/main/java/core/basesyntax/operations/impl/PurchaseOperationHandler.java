@@ -7,7 +7,7 @@ import core.basesyntax.operations.OperationHandler;
 public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
-    public void execute(FruitTransaction fruitTransaction) {
+    public int execute(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruitName();
         int quantity = fruitTransaction.getQuantity();
         int balance = Storage.getFruitBalance(fruit);
@@ -16,5 +16,6 @@ public class PurchaseOperationHandler implements OperationHandler {
                 + fruit + " in the store for purchase.");
         }
         Storage.removeFruit(fruit, quantity);
+        return Storage.getFruitBalance(fruitTransaction.getFruitName());
     }
 }

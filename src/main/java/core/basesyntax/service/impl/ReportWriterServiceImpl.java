@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReportWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import core.basesyntax.service.ReportWriterService;
 
 public class ReportWriterServiceImpl implements ReportWriterService {
 

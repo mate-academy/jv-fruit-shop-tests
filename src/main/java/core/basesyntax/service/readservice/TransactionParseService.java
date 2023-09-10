@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface TransactionParseService {
     List<FruitTransaction> parse(String dataFromCsvFile);
+
+    boolean isRowValid(String validRow);
 }

@@ -18,7 +18,7 @@ public class BalanceOperationHandlerTest {
     @BeforeEach
     public void setUp() {
         operationHandler = new BalanceOperationHandler();
-        fruit = Storage.fruit;
+        fruit = Storage.FRUIT_MAPS;
     }
 
     @AfterAll

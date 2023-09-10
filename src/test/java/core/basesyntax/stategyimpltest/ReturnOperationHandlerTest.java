@@ -18,7 +18,7 @@ public class ReturnOperationHandlerTest {
     @BeforeEach
     public void setUp() {
         operationHandler = new ReturnOperationHandler();
-        fruit = Storage.fruit;
+        fruit = Storage.FRUIT_MAPS;
         fruit.put("apple", 35);
     }
 

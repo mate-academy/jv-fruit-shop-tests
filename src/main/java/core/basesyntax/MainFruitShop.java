@@ -54,7 +54,7 @@ public class MainFruitShop {
         List<FruitTransaction> parsed = transactionParseService
                 .parse(readFrom.toString());
         fruitShopService.process(parsed);
-        String shopReport = reportService.shopReport(Storage.fruit);
+        String shopReport = reportService.shopReport(Storage.FRUIT_MAPS);
         writerService.write(shopReport, REPORT_DATA_FROM_STORE);
     }
 }

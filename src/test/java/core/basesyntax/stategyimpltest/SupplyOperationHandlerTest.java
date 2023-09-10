@@ -18,7 +18,7 @@ public class SupplyOperationHandlerTest {
     @BeforeEach
     void setUp() {
         operationHandler = new SupplyOperationHandler();
-        fruit = Storage.fruit;
+        fruit = Storage.FRUIT_MAPS;
         fruit.put("apple", 35);
     }
 

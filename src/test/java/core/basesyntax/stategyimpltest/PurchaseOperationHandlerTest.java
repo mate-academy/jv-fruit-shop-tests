@@ -1,6 +1,7 @@
 package core.basesyntax.stategyimpltest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -19,7 +20,7 @@ public class PurchaseOperationHandlerTest {
     @BeforeEach
     public void setUp() {
         operationHandler = new PurchaseOperationHandler();
-        fruit = Storage.fruit;
+        fruit = Storage.FRUIT_MAPS;
         fruit.put("apple", 35);
     }
 
@@ -44,5 +45,16 @@ public class PurchaseOperationHandlerTest {
         int actual = fruit.get("apple");
         int expected = 35;
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void purchase_null_notOk() {
+        assertThrows(RuntimeException.class, () -> operationHandler.operate(null));
+    }
+
+    @Test
+    public void testOperateWithInvalidPurchase() {
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 36);
+        assertThrows(RuntimeException.class, () -> operationHandler.operate(fruitTransaction));
     }
 }

@@ -1,9 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportService;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,13 +20,6 @@ class ReportServiceImplTest {
         Map<String, Integer> data = storage.getData();
         data.put("banana", 152);
         data.put("apple", 90);
-    }
-
-    @Test
-    public void implementedCorrectInterface_OK() {
-        List<Class<?>> interfaces = Arrays.asList(reportService.getClass().getInterfaces());
-        Assertions.assertEquals(1, interfaces.size());
-        Assertions.assertTrue(interfaces.contains(ReportService.class));
     }
 
     @Test

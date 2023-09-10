@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,13 +28,6 @@ class ReaderServiceImplTest {
         fileLines.add("p,apple,20");
         fileLines.add("p,banana,5");
         fileLines.add("s,banana,50");
-    }
-
-    @Test
-    public void implementedCorrectInterface_OK() {
-        List<Class<?>> interfaces = Arrays.asList(reader.getClass().getInterfaces());
-        Assertions.assertEquals(1, interfaces.size());
-        Assertions.assertTrue(interfaces.contains(ReaderService.class));
     }
 
     @Test

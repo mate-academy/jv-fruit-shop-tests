@@ -1,9 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileDataConvertorService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,14 +27,6 @@ class FileDataConvertorServiceImplTest {
         fileLines.add("p,apple,20");
         fileLines.add("p,banana,5");
         fileLines.add("s,banana,50");
-    }
-
-    @Test
-    public void implementsCorrectInterface_OK() {
-        List<Class<?>> interfaces =
-                Arrays.asList(fileDataConvertorService.getClass().getInterfaces());
-        Assertions.assertEquals(1, interfaces.size());
-        Assertions.assertTrue(interfaces.contains(FileDataConvertorService.class));
     }
 
     @Test

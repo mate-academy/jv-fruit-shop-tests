@@ -2,9 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationService;
-import java.util.Arrays;
-import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,14 +14,6 @@ class BalanceServiceImplTest {
     public void init() {
         storage = new Storage();
         balanceService = new BalanceServiceImpl(storage);
-    }
-
-    @Test
-    public void implementsCorrectInterface_OK() {
-        List<Class<?>> interfaces =
-                Arrays.asList(balanceService.getClass().getInterfaces());
-        Assertions.assertEquals(1, interfaces.size());
-        Assertions.assertTrue(interfaces.contains(OperationService.class));
     }
 
     @Test

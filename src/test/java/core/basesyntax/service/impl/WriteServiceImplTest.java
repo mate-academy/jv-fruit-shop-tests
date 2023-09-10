@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriteServiceImplTest {
-    private static final String FILE_PATH = "src/main/resources/Report.csv";
+    private static final String FILE_PATH = "src/test/resources/Report.csv";
     private static final String CONTENT = "fruit,quantity"
             + System.lineSeparator()
             + "banana,152"
@@ -56,7 +56,7 @@ class WriteServiceImplTest {
 
     @Test
     public void write_wrongFilePath_notOK() {
-        String filePath = "src/main/resources/";
+        String filePath = "src/test/resources/";
         Assertions.assertThrows(RuntimeException.class,
                 () -> writeService.write(CONTENT, filePath));
     }

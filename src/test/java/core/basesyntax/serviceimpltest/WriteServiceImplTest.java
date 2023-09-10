@@ -32,16 +32,19 @@ public class WriteServiceImplTest {
 
     @Test
     public void write_nullValue_toFilePath_notOk() {
-        assertThrows(RuntimeException.class, () -> writerService.write(null, INPUT_VALID_DATA_FILE));
+        assertThrows(RuntimeException.class, () ->
+                writerService.write(null, INPUT_VALID_DATA_FILE));
     }
 
     @Test
     public void writeToInvalidPath_notOk() {
-        assertThrows(RuntimeException.class, () -> writerService.write(null, INPUT_INVALID_DATA_FILE));
+        assertThrows(RuntimeException.class, () ->
+                writerService.write(null, INPUT_INVALID_DATA_FILE));
     }
 
     @Test
     void wrire_nullPath_notOk() {
-        assertThrows(RuntimeException.class, () -> writerService.write(NEW_REPORT, null));
+        assertThrows(RuntimeException.class, () ->
+                writerService.write(NEW_REPORT, null));
     }
 }

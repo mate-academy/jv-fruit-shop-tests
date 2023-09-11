@@ -14,4 +14,5 @@ public class Storage {
     public static void reset() {
         fruits = new HashMap<>();
     }
+
 }

@@ -18,33 +18,30 @@ class WriterServiceTest {
     private WriterService writerService;
 
     @Test
-    void write_emptyList_Ok() {
-        writerService = new CsvWriterServiceImpl(RESOURCES_PASS + "emptyTest.csv");
+    void write_emptyReport_Ok() {
+        writerService = new CsvWriterServiceImpl();
         List<FruitInStorage> fruits = new ArrayList<>();
-        writerService.write(fruits);
-        assertEquals("fruit,quantity", readFile(RESOURCES_PASS + "emptyTest.csv"));
+        writerService.write(RESOURCES_PASS + "emptyTest.csv", "");
+        assertEquals("", readFile(RESOURCES_PASS + "emptyTest.csv"));
     }
 
     @Test
-    void write_validList_Ok() {
-        writerService = new CsvWriterServiceImpl(RESOURCES_PASS + "validInputTest.csv");
+    void write_validReport_Ok() {
+        writerService = new CsvWriterServiceImpl();
         List<FruitInStorage> fruits = new ArrayList<>();
         fruits.add(new FruitInStorage("banana", 123));
         fruits.add(new FruitInStorage("apple", 12));
-        writerService.write(fruits);
-        String expected = "fruit,quantity\n"
-                + "banana,123\n"
-                + "apple,12";
-        assertEquals(expected, readFile(RESOURCES_PASS + "validInputTest.csv"));
+        writerService.write(RESOURCES_PASS + "validInputTest.csv", "some text");
+        assertEquals("some text", readFile(RESOURCES_PASS + "validInputTest.csv"));
     }
 
     @Test
     void write_invalidPath_Ok() {
-        writerService = new CsvWriterServiceImpl("invalid/path.csv");
+        writerService = new CsvWriterServiceImpl();
         List<FruitInStorage> fruits = new ArrayList<>();
         fruits.add(new FruitInStorage("banana", 123));
         fruits.add(new FruitInStorage("apple", 12));
-        assertThrows(RuntimeException.class, () -> writerService.write(fruits));
+        assertThrows(RuntimeException.class, () -> writerService.write("invalid/path.csv", "text"));
     }
 
     private static String readFile(String path) {

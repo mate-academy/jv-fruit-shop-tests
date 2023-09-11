@@ -14,7 +14,7 @@ class ParserServiceTest {
 
     @Test
     void getRecords_emptyInput_Ok() {
-        assertTrue(parserService.getRecords(new ArrayList<>()).isEmpty());
+        assertTrue(parserService.getTransactions(new ArrayList<>()).isEmpty());
     }
 
     @Test
@@ -32,7 +32,7 @@ class ParserServiceTest {
         expectedTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
                 "banana", 100));
 
-        List<FruitTransaction> actualTransactions = parserService.getRecords(lines);
+        List<FruitTransaction> actualTransactions = parserService.getTransactions(lines);
 
         assertEquals(lines.size() - 1, actualTransactions.size());
         assertEquals(expectedTransactions, actualTransactions);

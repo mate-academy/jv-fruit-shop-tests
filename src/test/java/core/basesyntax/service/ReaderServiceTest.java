@@ -14,21 +14,22 @@ class ReaderServiceTest {
 
     @Test
     void getLines_emptyFile_Ok() {
-        readerService = new CsvReaderServiceImpl(RESOURCES_PASS + "testEmpty.csv");
-        List<String> result = readerService.getLines();
+        readerService = new CsvReaderServiceImpl();
+        List<String> result = readerService.getLines(RESOURCES_PASS + "testEmpty.csv");
         assertTrue(result.isEmpty(), "Expected empty list");
     }
 
     @Test
     void getLines_nonExistingFile_NotOk() {
-        readerService = new CsvReaderServiceImpl(RESOURCES_PASS + "nonExisting.csv");
-        assertThrows(RuntimeException.class, () -> readerService.getLines());
+        readerService = new CsvReaderServiceImpl();
+        assertThrows(RuntimeException.class, () -> readerService.getLines(
+                RESOURCES_PASS + "nonExisting.csv"));
     }
 
     @Test
     void getLines_validFile_Ok() {
-        readerService = new CsvReaderServiceImpl(RESOURCES_PASS + "text.csv");
-        List<String> result = readerService.getLines();
+        readerService = new CsvReaderServiceImpl();
+        List<String> result = readerService.getLines(RESOURCES_PASS + "text.csv");
         assertEquals(9, result.size(), "The file has the following number of lines:");
     }
 }

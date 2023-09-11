@@ -9,14 +9,6 @@ import org.junit.jupiter.api.Test;
 class TransactionDataParseImplTest {
     private TransactionDataParse transactionDataParse = new TransactionDataParseImpl();
 
-    public TransactionDataParse getTransactionDataParse() {
-        return transactionDataParse;
-    }
-
-    public void setTransactionDataParse(TransactionDataParse transactionDataParse) {
-        this.transactionDataParse = transactionDataParse;
-    }
-
     @Test
     void parseTransaction_ok() {
         FruitTransaction fruitTransactionValid =

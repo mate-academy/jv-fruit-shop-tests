@@ -12,22 +12,6 @@ class SupplyOperationHandlerTest {
     private OperationHandler handler;
     private Storage storage;
 
-    public OperationHandler getHandler() {
-        return handler;
-    }
-
-    public void setHandler(OperationHandler handler) {
-        this.handler = handler;
-    }
-
-    public Storage getStorage() {
-        return storage;
-    }
-
-    public void setStorage(Storage storage) {
-        this.storage = storage;
-    }
-
     @BeforeEach
     public void setUp() {
         handler = new SupplyOperationHandler();

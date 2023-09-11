@@ -1,27 +1,17 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitInStorage;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static final Map<String, FruitInStorage> FRUITS = new HashMap<>();
+    private static Map<String, FruitInStorage> fruits = new HashMap<>();
 
-    public void add(FruitInStorage product) {
-        FRUITS.put(product.getName(), product);
+    public static Map<String, FruitInStorage> fruits() {
+        return fruits;
     }
 
-    public FruitInStorage getByName(String name) {
-        return FRUITS.get(name);
-    }
-
-    public void update(FruitInStorage product, int amount) {
-        product.setAmount(amount);
-        FRUITS.put(product.getName(), product);
-    }
-
-    public Collection<FruitInStorage> getAll() {
-        return FRUITS.values();
+    public static void reset() {
+        fruits = new HashMap<>();
     }
 }

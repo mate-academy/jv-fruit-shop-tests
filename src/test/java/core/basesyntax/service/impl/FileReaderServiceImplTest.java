@@ -14,14 +14,6 @@ import org.junit.jupiter.api.Test;
 class FileReaderServiceImplTest {
     private FileReaderService fileReaderService;
 
-    public FileReaderService getFileReaderService() {
-        return fileReaderService;
-    }
-
-    public void setFileReaderService(FileReaderService fileReaderService) {
-        this.fileReaderService = fileReaderService;
-    }
-
     @BeforeEach
     void setUp() {
         fileReaderService = new FileReaderServiceImpl();

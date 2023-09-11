@@ -18,10 +18,6 @@ class OperationStrategyImplTest {
     private OperationStrategy operationStrategy;
     private final Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
 
-    public Map<Operation, OperationHandler> getOperationHandlerMap() {
-        return operationHandlerMap;
-    }
-
     @BeforeEach
     void setUp() {
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());

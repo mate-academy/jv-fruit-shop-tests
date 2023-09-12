@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitInStorage;
 import core.basesyntax.service.impl.ShopServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ShopServiceTest {
     private static final ShopService SHOP_SERVICE = new ShopServiceImpl();
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
         Storage.reset();
     }
 

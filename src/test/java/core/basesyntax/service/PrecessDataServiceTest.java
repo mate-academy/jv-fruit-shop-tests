@@ -15,7 +15,6 @@ import core.basesyntax.strategy.handler.PurchaseHandler;
 import core.basesyntax.strategy.handler.ReturnHandler;
 import core.basesyntax.strategy.handler.SupplyHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -29,11 +28,10 @@ class PrecessDataServiceTest {
 
     @BeforeAll
     static void beforeAll() {
-        operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        operationHandlerMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
@@ -53,10 +51,10 @@ class PrecessDataServiceTest {
 
     @Test
     void writeToStorage_validData_Ok() {
-        List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100));
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
+        List<FruitTransaction> transactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
         precessDataService.writeToStorage(transactions);
 
         assertEquals(2, Storage.fruits().size());

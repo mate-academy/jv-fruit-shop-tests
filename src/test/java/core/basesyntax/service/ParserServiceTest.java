@@ -24,13 +24,10 @@ class ParserServiceTest {
         lines.add("b,banana,20");
         lines.add("b,apple,100");
         lines.add("s,banana,100");
-        List<FruitTransaction> expectedTransactions = new ArrayList<>();
-        expectedTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "banana", 20));
-        expectedTransactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                "apple", 100));
-        expectedTransactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY,
-                "banana", 100));
+        List<FruitTransaction> expectedTransactions = List.of(
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
 
         List<FruitTransaction> actualTransactions = parserService.getTransactions(lines);
 

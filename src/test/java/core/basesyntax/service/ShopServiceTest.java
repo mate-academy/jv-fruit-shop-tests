@@ -15,7 +15,7 @@ class ShopServiceTest {
 
     @AfterEach
     void tearDown() {
-        Storage.reset();
+        Storage.FRUITS.clear();
     }
 
     @Test
@@ -40,7 +40,7 @@ class ShopServiceTest {
     void addFruits_addTwoFruit_Ok() {
         SHOP_SERVICE.addFruits("banana", 12);
         SHOP_SERVICE.addFruits("apple", 12);
-        assertEquals(2, Storage.fruits().size());
+        assertEquals(2, Storage.FRUITS.size());
     }
 
     @Test

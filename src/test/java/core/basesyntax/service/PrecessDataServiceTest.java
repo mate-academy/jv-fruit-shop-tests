@@ -38,7 +38,7 @@ class PrecessDataServiceTest {
 
     @BeforeEach
     void setUp() {
-        Storage.reset();
+        Storage.FRUITS.clear();
         precessDataService = new PrecessDataServiceImpl(operationStrategy);
     }
 
@@ -46,7 +46,7 @@ class PrecessDataServiceTest {
     void writeToStorage_emptyList_Ok() {
         List<FruitTransaction> transactions = new ArrayList<>();
         precessDataService.writeToStorage(transactions);
-        assertTrue(Storage.fruits().isEmpty());
+        assertTrue(Storage.FRUITS.isEmpty());
     }
 
     @Test
@@ -57,11 +57,11 @@ class PrecessDataServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
         precessDataService.writeToStorage(transactions);
 
-        assertEquals(2, Storage.fruits().size());
+        assertEquals(2, Storage.FRUITS.size());
 
         FruitInStorage banana = new FruitInStorage("banana", 120);
         FruitInStorage apple = new FruitInStorage("apple", 100);
-        assertTrue(Storage.fruits().containsValue(banana));
-        assertTrue(Storage.fruits().containsValue(apple));
+        assertTrue(Storage.FRUITS.containsValue(banana));
+        assertTrue(Storage.FRUITS.containsValue(apple));
     }
 }

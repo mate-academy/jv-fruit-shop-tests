@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class ReaderServiceTest {
     private static final String VALID_FILE_PATH = "src/test/resources/valid_data.csv";
-    private static final String INVALID_FILE_PATH = "test/resources/valid_data.csv";
+    private static final String INVALID_FILE_PATH = "test//resources/valid_data.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty_file.csv";
     private static ReaderService readerService;
 

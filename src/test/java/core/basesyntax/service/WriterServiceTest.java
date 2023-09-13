@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceTest {
     private static final String VALID_FILE_NAME = "src/test/resources/report.csv";
-    private static final String INVALID_FILE_NAME = "src/tests/resources/report.csv";
+    private static final String INVALID_FILE_NAME = "src/testTEST/resources/report.csv";
     private static WriterService writerService;
 
     @BeforeAll

@@ -81,6 +81,18 @@ class FruitServiceTest {
     }
 
     @Test
+    void updateFruitsInStock_ZeroQuantityAfterPurchase_Ok() {
+        Storage.STORAGE.put(apple, 10);
+        List<FruitTransaction> testList = List.of(
+                new FruitTransaction(Operation.PURCHASE, apple, 10)
+        );
+        assertDoesNotThrow(() -> fruitService.updateFruitsInStock(testList),
+                "apple quantity after purchase must be 0");
+        assertEquals(0, Storage.STORAGE.get(apple),
+                "must be 0 apple in storage");
+    }
+
+    @Test
     void updateFruitsInStock_moreThanAvailable_NotOk() {
         List<FruitTransaction> testList = List.of(
                 new FruitTransaction(Operation.BALANCE, new Fruit("banana"), 10),
@@ -88,5 +100,15 @@ class FruitServiceTest {
         );
         assertThrows(RuntimeException.class, () -> fruitService.updateFruitsInStock(testList),
                 "User wants to buy more products than are available in stock");
+    }
+
+    @Test
+    void updateFruitsInStock_negativeQuantity_NotOk() {
+        assertThrows(RuntimeException.class, () -> {
+            List<FruitTransaction> testList = List.of(
+                    new FruitTransaction(Operation.BALANCE, apple, -10)
+            );
+            fruitService.updateFruitsInStock(testList);
+        }, "fruit with negative quantity can't be updated");
     }
 }

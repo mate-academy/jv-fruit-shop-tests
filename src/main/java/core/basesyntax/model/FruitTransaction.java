@@ -46,7 +46,7 @@ public class FruitTransaction {
 
     private void checkQuantity(int quantity) {
         if (quantity < 0) {
-            throw new IllegalArgumentException("Quantity is negative");
+            throw new RuntimeException("Quantity is negative");
         }
     }
 }

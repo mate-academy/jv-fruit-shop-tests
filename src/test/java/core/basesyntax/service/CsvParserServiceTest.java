@@ -67,7 +67,7 @@ class CsvParserServiceTest {
         List<String> invalidData = List.of(
                 HEADER, "b,banana,-10", "b,apple,20"
         );
-        assertThrows(IllegalArgumentException.class, () -> csvParserService.parse(invalidData),
+        assertThrows(RuntimeException.class, () -> csvParserService.parse(invalidData),
                 "amount must be positive");
     }
 

@@ -8,12 +8,19 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
+    private static OperationHandler balanceOperationHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        balanceOperationHandler = new BalanceOperationHandler();
+    }
+
     @Test
-    void addSomeFruits_Ok() {
-        OperationHandler balanceOperationHandler = new BalanceOperationHandler();
+    void addSomeFruits_BalanceOperation_Ok() {
         balanceOperationHandler.processOperation("Banana", 10);
         balanceOperationHandler.processOperation("Apple", 20);
         balanceOperationHandler.processOperation("Grape", 3);
@@ -26,8 +33,13 @@ public class BalanceOperationTest {
     }
 
     @Test
-    void addSomeFruitsWithIncorrectValue_NotOk() {
-        OperationHandler balanceOperationHandler = new BalanceOperationHandler();
+    void balanceOperationTest_AddNullValues_NotOk() {
+        Assertions.assertThrows(RuntimeException.class,
+                () -> balanceOperationHandler.processOperation(null, null));
+    }
+
+    @Test
+    void addSomeFruitsWithIncorrectValue_BalanceOperation_NotOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> balanceOperationHandler.processOperation("Banana", -10));
     }

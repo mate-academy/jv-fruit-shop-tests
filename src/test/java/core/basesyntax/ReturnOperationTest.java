@@ -2,23 +2,29 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.ReturnOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
+    private static OperationHandler returnOperationHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        returnOperationHandler = new ReturnOperationHandler();
+    }
+
     @Test
-    void returnExistingFruits_Ok() {
-        OperationHandler balanceOperationHandler = new BalanceOperationHandler();
-        balanceOperationHandler.processOperation("Banana", 10);
-        balanceOperationHandler.processOperation("Apple", 20);
-        balanceOperationHandler.processOperation("Grape", 3);
-        OperationHandler returnOperationHandler = new ReturnOperationHandler();
+    void returnExistingFruits_ReturnOperation_Ok() {
+        Storage.STOCK.put("Banana", 10);
+        Storage.STOCK.put("Apple", 20);
+        Storage.STOCK.put("Grape", 3);
+
         returnOperationHandler.processOperation("Banana", 5);
         returnOperationHandler.processOperation("Apple", 17);
         Map<String, Integer> expectedStorage = new HashMap<>();
@@ -29,14 +35,23 @@ public class ReturnOperationTest {
     }
 
     @Test
-    void returnNonExistingFruits_NotOk() {
-        OperationHandler balanceOperationHandler = new BalanceOperationHandler();
-        balanceOperationHandler.processOperation("Banana", 10);
-        balanceOperationHandler.processOperation("Apple", 20);
-        balanceOperationHandler.processOperation("Grape", 3);
-        OperationHandler returnOperationHandler = new ReturnOperationHandler();
+    void returnNonExistingFruits_ReturnOperation_NotOk() {
+        Storage.STOCK.put("Banana", 10);
+        Storage.STOCK.put("Apple", 20);
+        Storage.STOCK.put("Grape", 3);
+
         Assertions.assertThrows(RuntimeException.class,
                 () -> returnOperationHandler.processOperation("Orange", 5));
+    }
+
+    @Test
+    void returnNonNullFruits_ReturnOperation_NotOk() {
+        Storage.STOCK.put("Banana", 10);
+        Storage.STOCK.put("Apple", 20);
+        Storage.STOCK.put("Grape", 3);
+
+        Assertions.assertThrows(RuntimeException.class,
+                () -> returnOperationHandler.processOperation(null, null));
     }
 
     @AfterEach

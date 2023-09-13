@@ -5,8 +5,6 @@ import core.basesyntax.service.converter.DataConverter;
 import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.service.impl.DataProcessorImpl;
 import core.basesyntax.service.processor.DataProcessor;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.OperationType;
@@ -19,17 +17,23 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class ServiceTest {
-    private static final Map<OperationType, OperationHandler> OPERATION_HANDLER_MAP;
+public class ConvertProcessServiceTest {
+    private static Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
+    private static DataConverter converter;
+    private static DataProcessor processor;
 
-    static {
-        OPERATION_HANDLER_MAP = new HashMap<>();
-        OPERATION_HANDLER_MAP.put(OperationType.B, new BalanceOperationHandler());
-        OPERATION_HANDLER_MAP.put(OperationType.S, new SupplyOperationHandler());
-        OPERATION_HANDLER_MAP.put(OperationType.P, new PurchaseOperationHandler());
-        OPERATION_HANDLER_MAP.put(OperationType.R, new ReturnOperationHandler());
+    @BeforeAll
+    static void beforeAll() {
+        operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(OperationType.B, new BalanceOperationHandler());
+        operationHandlerMap.put(OperationType.S, new SupplyOperationHandler());
+        operationHandlerMap.put(OperationType.P, new PurchaseOperationHandler());
+        operationHandlerMap.put(OperationType.R, new ReturnOperationHandler());
+        converter = new DataConverterImpl();
+        processor = new DataProcessorImpl(operationHandlerMap);
     }
 
     @Test
@@ -40,7 +44,7 @@ public class ServiceTest {
         listToConvert.add("b,apple,100");
         listToConvert.add("s,banana,100");
         listToConvert.add("p,banana,13");
-        DataConverter converter = new DataConverterImpl();
+
         List<List<String>> expected = new ArrayList<>();
         expected.add(List.of("b", "banana", "20"));
         expected.add(List.of("b", "apple", "100"));
@@ -58,7 +62,7 @@ public class ServiceTest {
         listToConvert.add(" b,apple,100");
         listToConvert.add("    s,banana,100");
         listToConvert.add("  p,banana,13");
-        DataConverter converter = new DataConverterImpl();
+
         List<List<String>> expected = new ArrayList<>();
         expected.add(List.of("b", "banana", "20"));
         expected.add(List.of("b", "apple", "100"));
@@ -79,20 +83,12 @@ public class ServiceTest {
         convertedData.add(List.of("p", "apple", "20"));
         convertedData.add(List.of("p", "banana", "5"));
         convertedData.add(List.of("s", "banana", "50"));
-        DataProcessor processor = new DataProcessorImpl(OPERATION_HANDLER_MAP);
+
         processor.process(convertedData);
         Map<String, Integer> expectedStorage = new HashMap<>();
         expectedStorage.put("banana", 152);
         expectedStorage.put("apple", 90);
         Assertions.assertEquals(expectedStorage, Storage.STOCK);
-    }
-
-    @Test
-    void testStrategyWithNonExistingOperation_NotOk() {
-        Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(OperationType.B, new BalanceOperationHandler());
-        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
-        Assertions.assertThrows(RuntimeException.class, () -> strategy.get(OperationType.R));
     }
 
     @AfterEach

@@ -1,15 +1,17 @@
+package core.basesyntax;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationProcessor;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.PrecessDataService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
+import core.basesyntax.service.impl.OperationProcessorImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
-import core.basesyntax.service.impl.PrecessDataServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -29,12 +31,12 @@ public class Main {
         ParserService parserService = new ParserServiceImpl();
         ReportService reportService = new ReportServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(getOperationHandlerMap());
-        PrecessDataService precessDataService = new PrecessDataServiceImpl(operationStrategy);
+        OperationProcessor precessDataService = new OperationProcessorImpl(operationStrategy);
         FruitDao fruitDao = new FruitDaoImpl();
 
         List<String> lines = readerService.getLines("src/main/resources/text.csv");
         List<FruitTransaction> records = parserService.getTransactions(lines);
-        precessDataService.writeToStorage(records);
+        precessDataService.applyOperation(records);
         String report = reportService.generateReport(fruitDao.getAll());
         writerService.write("src/main/resources/result.csv", report);
     }

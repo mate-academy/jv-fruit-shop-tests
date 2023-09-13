@@ -4,9 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitInStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.PrecessDataServiceImpl;
+import core.basesyntax.service.impl.OperationProcessorImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceHandler;
@@ -24,7 +23,7 @@ import org.junit.jupiter.api.Test;
 class PrecessDataServiceTest {
     private static OperationStrategy operationStrategy;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
-    private PrecessDataService precessDataService;
+    private OperationProcessor precessDataService;
 
     @BeforeAll
     static void beforeAll() {
@@ -39,13 +38,13 @@ class PrecessDataServiceTest {
     @BeforeEach
     void setUp() {
         Storage.FRUITS.clear();
-        precessDataService = new PrecessDataServiceImpl(operationStrategy);
+        precessDataService = new OperationProcessorImpl(operationStrategy);
     }
 
     @Test
     void writeToStorage_emptyList_Ok() {
         List<FruitTransaction> transactions = new ArrayList<>();
-        precessDataService.writeToStorage(transactions);
+        precessDataService.applyOperation(transactions);
         assertTrue(Storage.FRUITS.isEmpty());
     }
 
@@ -55,13 +54,10 @@ class PrecessDataServiceTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20),
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 100),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100));
-        precessDataService.writeToStorage(transactions);
+        precessDataService.applyOperation(transactions);
 
         assertEquals(2, Storage.FRUITS.size());
-
-        FruitInStorage banana = new FruitInStorage("banana", 120);
-        FruitInStorage apple = new FruitInStorage("apple", 100);
-        assertTrue(Storage.FRUITS.containsValue(banana));
-        assertTrue(Storage.FRUITS.containsValue(apple));
+        assertEquals(120, Storage.FRUITS.get("banana"));
+        assertEquals(100, Storage.FRUITS.get("apple"));
     }
 }

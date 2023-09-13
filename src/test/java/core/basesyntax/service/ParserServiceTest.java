@@ -7,10 +7,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceTest {
-    private ParserService parserService = new ParserServiceImpl();
+    private static ParserService parserService;
+
+    @BeforeAll
+    static void beforeAll() {
+        parserService = new ParserServiceImpl();
+    }
 
     @Test
     void getRecords_emptyInput_Ok() {

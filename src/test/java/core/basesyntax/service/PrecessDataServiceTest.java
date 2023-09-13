@@ -16,14 +16,14 @@ import core.basesyntax.strategy.handler.SupplyHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PrecessDataServiceTest {
     private static OperationStrategy operationStrategy;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
-    private OperationProcessor precessDataService;
+    private static OperationProcessor precessDataService;
 
     @BeforeAll
     static void beforeAll() {
@@ -33,12 +33,12 @@ class PrecessDataServiceTest {
                 FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        precessDataService = new OperationProcessorImpl(operationStrategy);
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
         Storage.FRUITS.clear();
-        precessDataService = new OperationProcessorImpl(operationStrategy);
     }
 
     @Test

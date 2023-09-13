@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceTest {
-    private static final String RESOURCES_PASS = "src/main/resources/";
+    private static final String RESOURCES_PASS = "src/main/resources/test/";
     private static ReaderService readerService;
 
     @BeforeAll

@@ -11,8 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceTest {
-    private static final String EMPTY_FILE = "src/main/resources/test/emptyTest.csv";
-    private static final String VALID_FILE = "src/main/resources/test/validInputTest.csv";
+    private static final String EMPTY_FILE = "src/test/resources/emptyTest.csv";
+    private static final String VALID_FILE = "src/test/resources/validInputTest.csv";
     private static final String INVALID_PATH = "invalid/path.csv";
     private WriterService writerService;
 
@@ -36,6 +36,11 @@ class WriterServiceTest {
     @Test
     void write_invalidPath_Ok() {
         assertThrows(RuntimeException.class, () -> writerService.write(INVALID_PATH, "text"));
+    }
+
+    @Test
+    void write_null_NotOk() {
+        assertThrows(RuntimeException.class, () -> writerService.write(null, "text"));
     }
 
     private static String readFile(String path) {

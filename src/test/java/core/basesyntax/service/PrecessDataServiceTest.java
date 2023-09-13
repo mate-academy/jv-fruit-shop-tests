@@ -21,18 +21,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PrecessDataServiceTest {
-    private static OperationStrategy operationStrategy;
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private static OperationProcessor precessDataService;
 
     @BeforeAll
     static void beforeAll() {
-        operationHandlerMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
                 FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnHandler());
 
-        operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         precessDataService = new OperationProcessorImpl(operationStrategy);
     }
 

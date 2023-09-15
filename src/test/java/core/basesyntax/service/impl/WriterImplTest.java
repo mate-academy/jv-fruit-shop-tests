@@ -5,11 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
     private final WriterImpl writer = new WriterImpl();
     private final ReaderImpl reader = new ReaderImpl();
+
+    @BeforeAll
+    static void setup() {
+        Storage.clearStorage();
+    }
 
     @Test
     void writeToFile_nullFilepath_notOk() {

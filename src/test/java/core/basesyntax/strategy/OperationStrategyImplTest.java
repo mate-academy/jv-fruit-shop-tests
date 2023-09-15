@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
     private static OperationStrategyImpl strategy;
-    
+
     @BeforeAll
     static void setUp() {
         Map<Operation, OperationHandler> operationsWithHandlers = new HashMap<>();

@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.Parser;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParserImpl implements Parser {
     private static final int OPERATION_POSITION = 0;

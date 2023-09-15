@@ -1,21 +1,22 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.impl.operations.BalanceOperationHandler;
 import core.basesyntax.service.impl.operations.PurchaseOperationHandler;
 import core.basesyntax.service.impl.operations.ReturnOperationHandler;
 import core.basesyntax.service.impl.operations.SupplyOperationHandler;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class OperationStrategyImplTest {
     private static OperationStrategyImpl strategy;
+    
     @BeforeAll
     static void setUp() {
         Map<Operation, OperationHandler> operationsWithHandlers = new HashMap<>();

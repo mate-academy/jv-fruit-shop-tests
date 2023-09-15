@@ -1,5 +1,8 @@
 package core.basesyntax.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.impl.operations.BalanceOperationHandler;
@@ -7,19 +10,16 @@ import core.basesyntax.service.impl.operations.PurchaseOperationHandler;
 import core.basesyntax.service.impl.operations.ReturnOperationHandler;
 import core.basesyntax.service.impl.operations.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class FruitTransactionTest {
-    FruitTransaction transaction =
+    private static OperationStrategyImpl strategy;
+    private static OperationStrategyImpl emptyStrategy;
+    private FruitTransaction transaction =
             new FruitTransaction(Operation.BALANCE, "banana", 10);
-    static OperationStrategyImpl strategy;
-    OperationStrategyImpl emptyStrategy;
 
     @BeforeAll
     static void setup() {

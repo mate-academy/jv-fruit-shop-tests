@@ -1,15 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class WriterImplTest {
-    WriterImpl writer = new WriterImpl();
-    ReaderImpl reader = new ReaderImpl();
+    private final WriterImpl writer = new WriterImpl();
+    private final ReaderImpl reader = new ReaderImpl();
+
     @Test
     void writeToFile_nullFilepath_notOk() {
         assertThrows(RuntimeException.class, () -> writer.writeToFile(null));

@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ReaderImplTest {
-    ReaderImpl reader = new ReaderImpl();
+    private final ReaderImpl reader = new ReaderImpl();
 
     @Test
     void readFromFile_nullPath_notOk() {
@@ -22,17 +22,18 @@ class ReaderImplTest {
 
     @Test
     void readFromFile_fileNotExist_notOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromFile("src/main/resources/notExists.txt"));
+        assertThrows(RuntimeException.class,
+                () -> reader.readFromFile("src/main/resources/notExists.txt"));
     }
 
     @Test
     void readFromFile_emptyFile_notOk() {
-        assertThrows(RuntimeException.class, () -> reader.readFromFile("src/main/resources/empty.txt"));
+        assertThrows(RuntimeException.class,
+                () -> reader.readFromFile("src/main/resources/empty.txt"));
     }
 
     @Test
     void readFromFile_ok() {
-        List<String> actual = reader.readFromFile("src/main/resources/input.txt");
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,20");
         expected.add("b,apple,100");
@@ -42,6 +43,8 @@ class ReaderImplTest {
         expected.add("p,apple,20");
         expected.add("p,banana,5");
         expected.add("s,banana,50");
+        List<String> actual =
+                reader.readFromFile("src/main/resources/input.txt");
         assertEquals(expected, actual);
     }
 }

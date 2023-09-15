@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl.operations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class PurchaseOperationHandlerTest {
-    PurchaseOperationHandler handler = new PurchaseOperationHandler();
+    private final PurchaseOperationHandler handler = new PurchaseOperationHandler();
 
     @AfterEach
     void afterEachTest() {

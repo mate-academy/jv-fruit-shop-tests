@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
     private final SupplyOperationHandler handler = new SupplyOperationHandler();
 
-    @AfterEach
-    void afterEachTest() {
+    @BeforeEach
+    void beforeEachTest() {
         Storage.clearStorage();
     }
 

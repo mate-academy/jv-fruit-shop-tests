@@ -1,4 +1,4 @@
-package core.basesyntax.stategyimpltest;
+package core.basesyntax.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.BalanceOperationHandler;

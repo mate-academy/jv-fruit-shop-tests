@@ -1,4 +1,4 @@
-package core.basesyntax.stategyimpltest;
+package core.basesyntax.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,17 +9,22 @@ import core.basesyntax.service.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationHandlerTest {
     private static Map<String, Integer> fruit;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
     private FruitTransaction fruitTransaction;
+
+    @BeforeAll
+    static void beforeAll() {
+        operationHandler = new PurchaseOperationHandler();
+    }
 
     @BeforeEach
     public void setUp() {
-        operationHandler = new PurchaseOperationHandler();
         fruit = Storage.FRUIT_MAPS;
         fruit.put("apple", 35);
     }
@@ -53,7 +58,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void testOperateWithInvalidPurchase() {
+    public void purchase_invalid_operation_notOk() {
         fruitTransaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 36);
         assertThrows(RuntimeException.class, () -> operationHandler.operate(fruitTransaction));
     }

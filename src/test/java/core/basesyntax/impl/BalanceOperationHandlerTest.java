@@ -1,4 +1,6 @@
-package core.basesyntax.stategyimpltest;
+package core.basesyntax.impl;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -7,23 +9,33 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
     private static Map<String, Integer> fruit;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
     private FruitTransaction fruitTransaction;
+
+    @BeforeAll
+    static void beforeAll() {
+        operationHandler = new BalanceOperationHandler();
+    }
 
     @BeforeEach
     public void setUp() {
-        operationHandler = new BalanceOperationHandler();
         fruit = Storage.FRUIT_MAPS;
     }
 
     @AfterAll
     static void afterAll() {
         fruit.clear();
+    }
+
+    @Test
+    void balance_null_notOk() {
+        assertThrows(RuntimeException.class, () -> operationHandler.operate(null));
     }
 
     @Test

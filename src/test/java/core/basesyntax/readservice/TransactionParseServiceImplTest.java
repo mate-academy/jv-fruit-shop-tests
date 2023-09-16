@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpltest;
+package core.basesyntax.readservice;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,11 +27,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TransactionParseServiceImplTest {
-    private static final int COLUMNS_LENGTH = 3;
-    private static final String SEPARATOR = ",";
-    private static final String FIRST_COLUMN = "type";
-    private static final String SECOND_COLUMN = "fruits";
-    private static final String THIRD_COLUMN = "quantity";
     private static TransactionParseService transactionParseService;
     private FruitShopService fruitShopService;
     private FruitTransaction fruitTransactionBalance;
@@ -82,40 +77,15 @@ public class TransactionParseServiceImplTest {
     }
 
     @Test
-    void first_column_Ok() {
-        assertTrue(true, FIRST_COLUMN);
-    }
-
-    @Test
-    void first_column_notOk() {
-        String actual = "TYPe";
-        assertFalse(false, actual);
-    }
-
-    @Test
-    void second_column_Ok() {
-        assertTrue(true, SECOND_COLUMN);
-    }
-
-    @Test
-    void third_column_Ok() {
-        assertTrue(true, THIRD_COLUMN);
-    }
-
-    @Test
-    void separator_valid_ok() {
-        assertTrue(true, SEPARATOR);
-    }
-
-    @Test
     void separator_notValid_notOk() {
         String actual = ":";
         assertFalse(false, actual);
     }
 
     @Test
-    void columnsLength_ok() {
-        assertTrue(true, String.valueOf(COLUMNS_LENGTH));
+    void first_column_notOk() {
+        String actual = "TYPe";
+        assertFalse(false, actual);
     }
 
     @Test

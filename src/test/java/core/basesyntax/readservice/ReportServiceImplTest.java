@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpltest;
+package core.basesyntax.readservice;
 
 import static core.basesyntax.db.Storage.FRUIT_MAPS;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -1,23 +1,30 @@
-package core.basesyntax.stategyimpltest;
+package core.basesyntax.impl;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.SupplyOperationHandler;
+import core.basesyntax.service.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SupplyOperationHandlerTest {
+public class ReturnOperationHandlerTest {
     private static Map<String, Integer> fruit;
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
     private FruitTransaction fruitTransaction;
 
+    @BeforeAll
+    static void beforeAll() {
+        operationHandler = new ReturnOperationHandler();
+    }
+
     @BeforeEach
-    void setUp() {
-        operationHandler = new SupplyOperationHandler();
+    public void setUp() {
         fruit = Storage.FRUIT_MAPS;
         fruit.put("apple", 35);
     }
@@ -28,8 +35,13 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-     public void supplyOperation_validOperation_Ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 15);
+    void return_null_notOk() {
+        assertThrows(RuntimeException.class, () -> operationHandler.operate(null));
+    }
+
+    @Test
+    public void return_ValidOperation_Ok() {
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 15);
         operationHandler.operate(fruitTransaction);
         int actual = fruit.get("apple");
         int expected = 50;
@@ -37,8 +49,8 @@ public class SupplyOperationHandlerTest {
     }
 
     @Test
-    public void supplyOperation_zeroValue_Ok() {
-        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 0);
+    public void return_ValidOperation_zeroValue_Ok() {
+        fruitTransaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 0);
         operationHandler.operate(fruitTransaction);
         int actual = fruit.get("apple");
         int expected = 35;

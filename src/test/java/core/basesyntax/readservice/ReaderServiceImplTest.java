@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpltest;
+package core.basesyntax.readservice;
 
 import static org.junit.Assert.assertThrows;
 
@@ -38,7 +38,6 @@ public class ReaderServiceImplTest {
     void readFrom_ok() throws RuntimeException, IOException {
         String content = EXPECTED_DATA_FILE;
         Path tempReader = testFileShop(content);
-
         String actual = readService.readFrom(tempReader.toString());
         Assertions.assertEquals(content, actual);
     }

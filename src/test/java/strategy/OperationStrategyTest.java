@@ -18,6 +18,7 @@ import strategy.impl.SupplyTransactionImpl;
 class OperationStrategyTest {
     private static Map<FruitTransaction.Operation, TransactionHandler>
             transactionHandlerMap;
+    private static OperationStrategyImpl actual;
 
     @BeforeAll
     static void beforeAll() {
@@ -27,6 +28,7 @@ class OperationStrategyTest {
                 new PurchaseTransactionImpl());
         transactionHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnTransactionImpl());
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyTransactionImpl());
+        actual = new OperationStrategyImpl(transactionHandlerMap);
     }
 
     @AfterAll
@@ -36,32 +38,29 @@ class OperationStrategyTest {
 
     @Test
     void get_validBalanceTransactionImpl_ok() {
-        assertTrue(transactionHandlerMap.get(FruitTransaction.Operation.BALANCE)
+        assertTrue(actual.get(FruitTransaction.Operation.BALANCE)
                 instanceof BalanceTransactionImpl);
     }
 
     @Test
     void get_validPurchaseTransactionImpl_ok() {
-        assertTrue(transactionHandlerMap.get(FruitTransaction.Operation.PURCHASE)
+        assertTrue(actual.get(FruitTransaction.Operation.PURCHASE)
                 instanceof PurchaseTransactionImpl);
     }
 
     @Test
     void get_validReturnTransactionImpl_ok() {
-        assertTrue(transactionHandlerMap.get(FruitTransaction.Operation.RETURN)
-                instanceof ReturnTransactionImpl);
+        assertTrue(actual.get(FruitTransaction.Operation.RETURN) instanceof ReturnTransactionImpl);
     }
 
     @Test
     void get_validSupplyTransactionImpl_ok() {
-        assertTrue(transactionHandlerMap.get(FruitTransaction.Operation.SUPPLY)
-                instanceof SupplyTransactionImpl);
+        assertTrue(actual.get(FruitTransaction.Operation.SUPPLY) instanceof SupplyTransactionImpl);
     }
 
     @Test
     void get_validOperationStrategy_ok() {
         assertEquals(transactionHandlerMap.get(FruitTransaction.Operation.BALANCE),
-                new OperationStrategyImpl(transactionHandlerMap)
-                        .get(FruitTransaction.Operation.BALANCE));
+                actual.get(FruitTransaction.Operation.BALANCE));
     }
 }

@@ -5,11 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import service.ReaderService;
 
 class ReaderServiceImplTest {
-    private static final ReaderService readerService = new ReaderServiceImpl();
+    private static ReaderService readerService;
+
+    @BeforeAll
+    static void beforeAll() {
+        readerService = new ReaderServiceImpl();
+    }
 
     @Test
     void readFromFile_validFile_Ok() {

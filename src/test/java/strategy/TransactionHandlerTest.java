@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import db.Warehouse;
 import model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import strategy.impl.BalanceTransactionImpl;
 import strategy.impl.PurchaseTransactionImpl;
@@ -13,6 +14,16 @@ import strategy.impl.ReturnTransactionImpl;
 import strategy.impl.SupplyTransactionImpl;
 
 class TransactionHandlerTest {
+    private static FruitTransaction fruitTransaction;
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        fruitTransaction.setFruit("apple");
+        fruitTransaction.setQuantity(100);
+    }
+
     @AfterEach
     void tearDown() {
         Warehouse.STORAGE.clear();
@@ -20,10 +31,6 @@ class TransactionHandlerTest {
 
     @Test
     void handleTransaction_addToStorage_ok() {
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setFruit("apple");
-        fruitTransaction.setQuantity(100);
         new BalanceTransactionImpl().handleTransaction(fruitTransaction);
         assertEquals(100, Warehouse.STORAGE.get("apple"));
         new PurchaseTransactionImpl().handleTransaction(fruitTransaction);
@@ -44,5 +51,11 @@ class TransactionHandlerTest {
                 () -> new SupplyTransactionImpl().handleTransaction(null));
         assertThrows(NullPointerException.class,
                 () -> new ReturnTransactionImpl().handleTransaction(null));
+    }
+
+    @Test
+    void handleTransaction_subtractFromStorage_notOk() {
+        assertThrows(RuntimeException.class, () ->
+                new PurchaseTransactionImpl().handleTransaction(fruitTransaction));
     }
 }

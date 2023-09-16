@@ -4,11 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import db.Warehouse;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import service.ReportService;
 
 class ReportServiceImplTest {
-    private static final ReportService reportService = new ReportServiceImpl();
+    private static ReportService reportService;
+
+    @BeforeAll
+    static void beforeAll() {
+        reportService = new ReportServiceImpl();
+    }
 
     @AfterEach
     void tearDown() {

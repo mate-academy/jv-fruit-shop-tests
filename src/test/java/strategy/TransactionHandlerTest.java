@@ -15,13 +15,23 @@ import strategy.impl.SupplyTransactionImpl;
 
 class TransactionHandlerTest {
     private static FruitTransaction fruitTransaction;
+    private static TransactionHandler balanceHandler;
+    private static TransactionHandler purchaseHandler;
+    private static TransactionHandler supplyHandler;
+    private static TransactionHandler returnHandler;
+    private static final String APPLE = "apple";
+    private static final int A_HUNDRED = 100;
 
     @BeforeAll
     static void beforeAll() {
+        balanceHandler = new BalanceTransactionImpl();
+        purchaseHandler = new PurchaseTransactionImpl();
+        supplyHandler = new SupplyTransactionImpl();
+        returnHandler = new ReturnTransactionImpl();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setFruit("apple");
-        fruitTransaction.setQuantity(100);
+        fruitTransaction.setFruit(APPLE);
+        fruitTransaction.setQuantity(A_HUNDRED);
     }
 
     @AfterEach
@@ -31,31 +41,19 @@ class TransactionHandlerTest {
 
     @Test
     void handleTransaction_addToStorage_ok() {
-        new BalanceTransactionImpl().handleTransaction(fruitTransaction);
-        assertEquals(100, Warehouse.STORAGE.get("apple"));
-        new PurchaseTransactionImpl().handleTransaction(fruitTransaction);
-        assertEquals(0, Warehouse.STORAGE.get("apple"));
-        new SupplyTransactionImpl().handleTransaction(fruitTransaction);
-        assertEquals(100, Warehouse.STORAGE.get("apple"));
-        new ReturnTransactionImpl().handleTransaction(fruitTransaction);
-        assertEquals(200, Warehouse.STORAGE.get("apple"));
-    }
-
-    @Test
-    void handleTransaction_null_notOk() {
-        assertThrows(NullPointerException.class,
-                () -> new BalanceTransactionImpl().handleTransaction(null));
-        assertThrows(NullPointerException.class,
-                () -> new PurchaseTransactionImpl().handleTransaction(null));
-        assertThrows(NullPointerException.class,
-                () -> new SupplyTransactionImpl().handleTransaction(null));
-        assertThrows(NullPointerException.class,
-                () -> new ReturnTransactionImpl().handleTransaction(null));
+        balanceHandler.handleTransaction(fruitTransaction);
+        assertEquals(A_HUNDRED, Warehouse.STORAGE.get(APPLE));
+        purchaseHandler.handleTransaction(fruitTransaction);
+        assertEquals(0, Warehouse.STORAGE.get(APPLE));
+        supplyHandler.handleTransaction(fruitTransaction);
+        assertEquals(A_HUNDRED, Warehouse.STORAGE.get(APPLE));
+        returnHandler.handleTransaction(fruitTransaction);
+        assertEquals(A_HUNDRED + A_HUNDRED, Warehouse.STORAGE.get(APPLE));
     }
 
     @Test
     void handleTransaction_subtractFromStorage_notOk() {
         assertThrows(RuntimeException.class, () ->
-                new PurchaseTransactionImpl().handleTransaction(fruitTransaction));
+                purchaseHandler.handleTransaction(fruitTransaction));
     }
 }

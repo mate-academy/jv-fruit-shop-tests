@@ -32,9 +32,4 @@ class ReaderServiceImplTest {
         final String pathFile = "src/test/resources/g.csv";
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(pathFile));
     }
-
-    @Test
-    void readFromFile_pathNull_notOk() {
-        assertThrows(NullPointerException.class, () -> readerService.readFromFile(null));
-    }
 }

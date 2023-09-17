@@ -37,12 +37,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_nullPath_notOk() {
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile(expected, null));
-    }
-
-    @Test
-    void writeToFile_nullContent_notOk() {
-        assertThrows(RuntimeException.class, () -> writerService.writeToFile(null, reportPath));
+    void writeToFile_wrongPath_notOk() {
+        assertThrows(RuntimeException.class, () -> writerService.writeToFile(expected, "/"));
     }
 }

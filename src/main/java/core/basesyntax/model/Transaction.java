@@ -5,6 +5,15 @@ public class Transaction {
     private String fruit;
     private Operation operation;
 
+    public Transaction() {
+    }
+
+    public Transaction(Operation operation, String fruit, int value) {
+        this.value = value;
+        this.fruit = fruit;
+        this.operation = operation;
+    }
+
     public int getFruitValue() {
         return value;
     }

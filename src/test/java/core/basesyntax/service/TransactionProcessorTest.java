@@ -35,105 +35,54 @@ class TransactionProcessorTest {
         operationMap.put(Operation.PURCHASE, new PurchaseHandler());
         operationMap.put(Operation.RETURN, new ReturnHandler());
         strategy = new OperationStrategyImpl(operationMap);
-        processor = new TransactionProcessorImpl(strategy);
-        transactions = new ArrayList<>();
     }
 
     @BeforeEach
     void beforeEach() {
         Storage.STORAGE.clear();
-        transactions.clear();
+        processor = new TransactionProcessorImpl(strategy);
     }
 
     @Test
     void process_withValidTransactionsList_ok() {
-        Transaction transaction1 = new Transaction();
-        transaction1.setFruitOperation(Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setValue(20);
-        Transaction transaction2 = new Transaction();
-        transaction2.setFruitOperation(Operation.SUPPLY);
-        transaction2.setFruit("banana");
-        transaction2.setValue(50);
-        Transaction transaction3 = new Transaction();
-        transaction3.setFruitOperation(Operation.PURCHASE);
-        transaction3.setFruit("banana");
-        transaction3.setValue(30);
-        Transaction transaction4 = new Transaction();
-        transaction4.setFruitOperation(Operation.RETURN);
-        transaction4.setFruit("banana");
-        transaction4.setValue(10);
-        transactions.add(transaction1);
-        transactions.add(transaction2);
-        transactions.add(transaction3);
-        transactions.add(transaction4);
+        transactions = List.of(
+                new Transaction(Operation.BALANCE, "banana", 20),
+                new Transaction(Operation.SUPPLY, "banana", 50),
+                new Transaction(Operation.PURCHASE, "banana", 30),
+                new Transaction(Operation.RETURN, "banana", 10));
         processor.processTransaction(transactions);
         assertEquals("[banana=50]", Storage.STORAGE.entrySet().toString());
     }
 
     @Test
     void process_purchaseWithNotEnoughValue_notOk() {
-        Transaction transaction1 = new Transaction();
-        transaction1.setFruitOperation(Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setValue(20);
-        Transaction transaction2 = new Transaction();
-        transaction2.setFruitOperation(Operation.PURCHASE);
-        transaction2.setFruit("banana");
-        transaction2.setValue(21);
-        transactions.add(transaction1);
-        transactions.add(transaction2);
+        transactions = List.of(
+                new Transaction(Operation.BALANCE, "banana", 20),
+                new Transaction(Operation.PURCHASE, "banana", 21));
         assertThrows(RuntimeException.class,
                 () -> processor.processTransaction(transactions));
     }
 
     @Test
     void process_purchaseFewTimes_notOk() {
-        Transaction transaction1 = new Transaction();
-        transaction1.setFruitOperation(Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setValue(20);
-        Transaction transaction2 = new Transaction();
-        transaction2.setFruitOperation(Operation.PURCHASE);
-        transaction2.setFruit("banana");
-        transaction2.setValue(10);
-        Transaction transaction3 = new Transaction();
-        transaction3.setFruitOperation(Operation.PURCHASE);
-        transaction3.setFruit("banana");
-        transaction3.setValue(10);
-        transactions.add(transaction1);
-        transactions.add(transaction2);
-        transactions.add(transaction3);
+        transactions = new ArrayList<>();
+        transactions.add(new Transaction(Operation.BALANCE, "banana", 20));
+        transactions.add(new Transaction(Operation.PURCHASE, "banana", 10));
+        transactions.add(new Transaction(Operation.PURCHASE, "banana", 10));
         processor.processTransaction(transactions);
         assertEquals("[banana=0]", Storage.STORAGE.entrySet().toString());
-        Transaction transaction4 = new Transaction();
-        transaction4.setFruitOperation(Operation.PURCHASE);
-        transaction4.setFruit("banana");
-        transaction4.setValue(10);
-        transactions.add(transaction4);
+        transactions.add(new Transaction(Operation.PURCHASE, "banana", 10));
         assertThrows(RuntimeException.class,
                 () -> processor.processTransaction(transactions));
     }
 
     @Test
     void process_withTwoTypesOfFruit_ok() {
-        Transaction transaction1 = new Transaction();
-        transaction1.setFruitOperation(Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setValue(20);
-        Transaction transaction2 = new Transaction();
-        transaction2.setFruitOperation(Operation.BALANCE);
-        transaction2.setFruit("apple");
-        transaction2.setValue(30);
-        Transaction transaction3 = new Transaction();
-        transaction3.setFruitOperation(Operation.PURCHASE);
-        transaction3.setFruit("banana");
-        transaction3.setValue(5);
-        transactions.add(transaction1);
-        transactions.add(transaction2);
-        transactions.add(transaction3);
+        transactions = List.of(
+                new Transaction(Operation.BALANCE, "banana", 20),
+                new Transaction(Operation.BALANCE, "apple", 30),
+                new Transaction(Operation.PURCHASE, "banana", 5));
         processor.processTransaction(transactions);
-        System.out.println(Storage.STORAGE.entrySet());
         assertEquals("[banana=15, apple=30]",
                 Storage.STORAGE.entrySet().toString());
     }

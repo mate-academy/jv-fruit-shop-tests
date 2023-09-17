@@ -17,7 +17,7 @@ public class DataParserTest {
     private static List<String> testList;
 
     @BeforeAll
-    static void beforeEach() {
+    static void beforeAll() {
         dataParserService = new DataParserServiceImpl();
     }
 

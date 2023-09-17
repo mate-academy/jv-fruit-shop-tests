@@ -27,6 +27,10 @@ public class DataProcessorServiceImpl implements DataProcessorService {
                     || (fruitTransaction.getQuantity() == null)) {
                 throw new InvalidDataException("fruitTransaction fields can't be null");
             }
+            if (fruitTransaction.getQuantity() < 0) {
+                throw new InvalidDataException("fruitTransaction quantity can't be less then 0,"
+                        + " but was: " + fruitTransaction.getQuantity());
+            }
         }
         fruitTransactions.forEach(t -> handlerMap.get(t.getOperation())
                 .processTransaction(t));

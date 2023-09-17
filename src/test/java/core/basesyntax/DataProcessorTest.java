@@ -90,4 +90,13 @@ public class DataProcessorTest {
         Assert.assertThrows(InvalidDataException.class,
                 () -> dataProcessorService.processData(fruitTransactionTestList));
     }
+
+    @DisplayName("Negative quantity test")
+    @Test
+    void dataProcessorTest_NegativeQuantity_NotOk() {
+        fruitTransactionTestList.add(new FruitTransaction(
+                Operation.BALANCE,"Banana", -1));
+        Assert.assertThrows(InvalidDataException.class,
+                () -> dataProcessorService.processData(fruitTransactionTestList));
+    }
 }

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderValidationImplTest {
-    private final ReaderValidation readerValidation = new ReaderValidationImpl();
+    private static ReaderValidation readerValidation;
     private final List<String> emptyList = new ArrayList<>();
     private final List<String> invalidFirstLine = new ArrayList<>(List.of(
             "type,fruit,quantit",
@@ -32,6 +33,11 @@ class ReaderValidationImplTest {
             "b,banana,20",
             "s,apple,35"
     ));
+
+    @BeforeAll
+    static void setUp() {
+        readerValidation = new ReaderValidationImpl();
+    }
 
     @Test
     void correctSkipInvalidQuantity_Ok() {

@@ -21,17 +21,14 @@ import org.junit.jupiter.api.Test;
 
 class OperationProcessorServiceTest {
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
-    private static final Fruit banana = new Fruit("banana");
-    private static final Fruit apple = new Fruit("apple");
-    private static int initialBananaBalance;
-    private static int initialAppleBalance;
-
+    private static Fruit banana;
+    private static Fruit apple;
     @BeforeAll
     static void beforeAll() {
+        banana = new Fruit("banana");
+        apple = new Fruit("apple");
         Storage.storage.put(banana,15);
         Storage.storage.put(apple,35);
-        initialBananaBalance = Storage.storage.get(banana);
-        initialAppleBalance = Storage.storage.get(apple);
         handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
@@ -41,6 +38,8 @@ class OperationProcessorServiceTest {
 
     @Test
     void processValidTransactions() {
+        int initialBananaBalance = Storage.storage.get(banana);
+        int initialAppleBalance = Storage.storage.get(apple);
         int quantity = 25;
         FruitTransaction transaction1 = new FruitTransaction();
         transaction1.setFruit(banana);

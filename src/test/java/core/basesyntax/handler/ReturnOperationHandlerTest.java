@@ -3,23 +3,20 @@ package core.basesyntax.handler;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 class ReturnOperationHandlerTest {
     private static Fruit apple;
     private static OperationHandler returnOperationHandler;
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
-
+    private static FruitTransaction fruitTransaction;
     @BeforeAll
     static void setUp() {
         apple = new Fruit("apple");
         returnOperationHandler = new ReturnOperationHandler();
+        fruitTransaction = new FruitTransaction();
     }
 
-    @BeforeEach
+    @AfterEach
     void clearStorage() {
         Storage.storage.clear();
     }

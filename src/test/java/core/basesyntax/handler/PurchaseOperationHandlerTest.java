@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 class PurchaseOperationHandlerTest {
     private static Fruit apple;
     private static OperationHandler purchaseOperationHandler;
-    private final FruitTransaction fruitTransaction = new FruitTransaction();
-
+    private static FruitTransaction fruitTransaction;
     @BeforeAll
     static void setUp() {
         apple = new Fruit("apple");
         purchaseOperationHandler = new PurchaseOperationHandler();
+        fruitTransaction = new FruitTransaction();
     }
 
     @Test

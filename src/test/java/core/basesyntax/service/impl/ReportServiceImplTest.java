@@ -41,4 +41,11 @@ class ReportServiceImplTest {
                 .toString();
         Assertions.assertEquals(expected,report);
     }
+
+    @Test
+    void generateValidReportEmptyStorage_Ok() {
+        String report = reportService.generateReport();
+        String expected = "fruit,quantity" + System.lineSeparator();
+        Assertions.assertEquals(expected,report);
+    }
 }

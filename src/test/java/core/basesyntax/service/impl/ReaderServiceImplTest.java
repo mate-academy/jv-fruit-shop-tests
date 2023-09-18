@@ -19,7 +19,7 @@ class ReaderServiceImplTest {
     void readFromExistFile_Ok() {
         List<String> expected = List.of("type,fruit,quantity","b,banana,20",
                 "b,apple,100");
-        String existFile = "dataForTest.csv";
+        String existFile = "src/test/java/resources/dataForTest.csv";
         List<String> actual = readerService.readFromFile(existFile);
         Assertions.assertEquals(expected, actual);
     }

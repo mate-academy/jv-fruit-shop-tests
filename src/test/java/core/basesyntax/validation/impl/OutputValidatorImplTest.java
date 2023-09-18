@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 class OutputValidatorImplTest {
     private final String invalidFileForTest = "OutputValidatorinValidTest.csv";
-    private final String invalidQuantityFile = "FileWithInvalidQuantity.csv";
+    private final String invalidQuantityFile = "resources/FileWithInvalidQuantity.csv";
     private final OutputValidatorImpl outputValidator = new OutputValidatorImpl();
 
     @Test
     void fileValid_Ok() {
-        String validFileForTest = "OutputValidatorValidTest.csv";
+        String validFileForTest = "src/test/java/resources/OutputValidatorValidTest.csv";
         outputValidator.validateFile(validFileForTest);
         Assertions.assertTrue(outputValidator.validateFile(validFileForTest));
     }

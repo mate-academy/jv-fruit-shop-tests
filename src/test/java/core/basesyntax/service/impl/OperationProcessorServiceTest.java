@@ -23,6 +23,7 @@ class OperationProcessorServiceTest {
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
     private static Fruit banana;
     private static Fruit apple;
+
     @BeforeAll
     static void beforeAll() {
         banana = new Fruit("banana");
@@ -38,8 +39,8 @@ class OperationProcessorServiceTest {
 
     @Test
     void processValidTransactions() {
-        int initialBananaBalance = Storage.storage.get(banana);
-        int initialAppleBalance = Storage.storage.get(apple);
+        final int initialBananaBalance = Storage.storage.get(banana);
+        final int initialAppleBalance = Storage.storage.get(apple);
         int quantity = 25;
         FruitTransaction transaction1 = new FruitTransaction();
         transaction1.setFruit(banana);

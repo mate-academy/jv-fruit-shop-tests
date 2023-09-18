@@ -13,7 +13,6 @@ class OutputValidatorImplTest {
         outputValidator = new OutputValidatorImpl();
     }
 
-
     @Test
     void validFileValidation_Ok() {
         String validFileForTest = "src/test/java/resources/OutputValidatorValidTest.csv";
@@ -37,7 +36,7 @@ class OutputValidatorImplTest {
 
     @Test
     void noDataInFile_NotOk() {
-        String noDataFile  = "src/test/java/resources/NullFile.csv";
+        String noDataFile = "src/test/java/resources/NullFile.csv";
         Assert.assertThrows(RuntimeException.class,
                 () -> outputValidator.validateFile(noDataFile));
     }

@@ -12,6 +12,7 @@ class PurchaseOperationHandlerTest {
     private static Fruit apple;
     private static OperationHandler purchaseOperationHandler;
     private static FruitTransaction fruitTransaction;
+
     @BeforeAll
     static void setUp() {
         apple = new Fruit("apple");

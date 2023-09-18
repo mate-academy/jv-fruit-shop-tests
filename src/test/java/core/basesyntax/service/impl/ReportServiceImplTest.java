@@ -15,7 +15,6 @@ class ReportServiceImplTest {
     @BeforeEach
      void setUp() {
         reportService = new ReportServiceImpl();
-        Storage.storage.clear();
     }
 
     @AfterEach

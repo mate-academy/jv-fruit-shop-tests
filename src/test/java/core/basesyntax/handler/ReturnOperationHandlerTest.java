@@ -18,7 +18,6 @@ class ReturnOperationHandlerTest {
         apple = new Fruit("apple");
         returnOperationHandler = new ReturnOperationHandler();
         fruitTransaction = new FruitTransaction();
-        Storage.storage.clear();
     }
 
     @AfterEach

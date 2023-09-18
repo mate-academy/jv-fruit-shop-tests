@@ -10,29 +10,6 @@ import org.junit.jupiter.api.Test;
 
 class ReaderValidationImplTest {
     private static ReaderValidation readerValidation;
-    private final List<String> emptyList = new ArrayList<>();
-    private final List<String> invalidFirstLine = new ArrayList<>(List.of(
-            "type,fruit,quantit",
-            "b,banana,20",
-            "s,apple,20"
-    ));
-    private final List<String> validStringList = new ArrayList<>(List.of(
-            "type,fruit,quantity",
-            "b,banana,20",
-            "s,apple,35"
-    ));
-    private final List<String> invalidQuantityList = new ArrayList<>(List.of(
-            "type,fruit,quantity",
-            "b,banana,-10",
-            "b,banana,20",
-            "s,apple,35"
-    ));
-    private final List<String> invalidOperationList = new ArrayList<>(List.of(
-            "type,fruit,quantity",
-            "f,banana,10",
-            "b,banana,20",
-            "s,apple,35"
-    ));
 
     @BeforeAll
     static void setUp() {
@@ -41,6 +18,12 @@ class ReaderValidationImplTest {
 
     @Test
     void correctSkipInvalidQuantity_Ok() {
+        List<String> invalidQuantityList = new ArrayList<>(List.of(
+                "type,fruit,quantity",
+                "b,banana,-10",
+                "b,banana,20",
+                "s,apple,35"
+        ));
         List<String> expected = new ArrayList<>(List.of(
                 "b,banana,20",
                 "s,apple,35"));
@@ -49,6 +32,12 @@ class ReaderValidationImplTest {
 
     @Test
     void correctSkipInvalidOperation_Ok() {
+        List<String> invalidOperationList = new ArrayList<>(List.of(
+                "type,fruit,quantity",
+                "f,banana,10",
+                "b,banana,20",
+                "s,apple,35"
+        ));
         List<String> expected = new ArrayList<>(List.of(
                 "b,banana,20",
                 "s,apple,35"));
@@ -57,18 +46,29 @@ class ReaderValidationImplTest {
 
     @Test
     void invalidFirstLine_notOk() {
+        List<String> invalidFirstLine = new ArrayList<>(List.of(
+                "type,fruit,quantit",
+                "b,banana,20",
+                "s,apple,20"
+        ));
         Assert.assertThrows(RuntimeException.class,
                 () -> readerValidation.validate(invalidFirstLine));
     }
 
     @Test
     void emptyList_notOk() {
+        List<String> emptyList = new ArrayList<>();
         Assert.assertThrows(RuntimeException.class,
                 () -> readerValidation.validate(emptyList));
     }
 
     @Test
     void validListEquals_ok() {
+        List<String> validStringList = new ArrayList<>(List.of(
+                "type,fruit,quantity",
+                "b,banana,20",
+                "s,apple,35"
+        ));
         List<String> expected = validStringList.subList(1,validStringList.size());
         Assertions.assertEquals(expected, readerValidation.validate(validStringList));
     }

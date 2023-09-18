@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,11 @@ class OperationProcessorServiceTest {
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+    }
+
+    @AfterEach
+    void afterEach() {
+        Storage.storage.clear();
     }
 
     @Test

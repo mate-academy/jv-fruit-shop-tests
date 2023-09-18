@@ -3,14 +3,20 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ReaderService;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private final String nonExistFile = "nonExistFile.csv";
-    private final ReaderService readerService = new ReaderServiceImpl();
+    private static ReaderService readerService;
+
+    @BeforeAll
+    static void setUp() {
+        readerService = new ReaderServiceImpl();
+    }
 
     @Test
     void readFromNonExistFile_NotOk() {
+        String nonExistFile = "nonExistFile.csv";
         Assertions.assertThrows(RuntimeException.class, () ->
                 readerService.readFromFile(nonExistFile));
     }

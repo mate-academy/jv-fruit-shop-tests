@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,11 @@ class PurchaseOperationHandlerTest {
         apple = new Fruit("apple");
         purchaseOperationHandler = new PurchaseOperationHandler();
         fruitTransaction = new FruitTransaction();
+    }
+
+    @AfterEach
+    void afterEach() {
+        Storage.storage.clear();
     }
 
     @Test

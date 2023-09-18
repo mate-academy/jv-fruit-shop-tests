@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 class WriterServiceImplTest {
     private static final String HEADER = "fruit,quantity";
     private static final String OUTPUT = "src/main/resources/output.csv";
-    private static final String INVALID_PATH = "/dev/null";
+    private static final String INVALID_PATH = "dev/null";
 
     @BeforeAll
     static void clear() {

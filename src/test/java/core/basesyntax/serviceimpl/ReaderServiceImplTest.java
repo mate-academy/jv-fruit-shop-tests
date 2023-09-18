@@ -9,14 +9,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
     private static final String INPUT = "src/main/resources/output.csv";
     private static final String INVALID_PATH = "/dev/null";
 
+    @BeforeAll
+    static void clear() {
+        Storage.storage.clear();
+    }
+
     @AfterEach
-    void clear() {
+    void clearAfter() {
         Storage.storage.clear();
     }
 

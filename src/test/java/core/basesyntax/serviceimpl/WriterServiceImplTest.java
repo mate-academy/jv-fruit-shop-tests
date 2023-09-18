@@ -12,12 +12,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String HEADER = "fruit,quantity";
     private static final String OUTPUT = "src/main/resources/output.csv";
     private static final String INVALID_PATH = "/dev/null";
+
+    @BeforeAll
+    static void clear() {
+        Storage.storage.clear();
+    }
+
+    @AfterEach
+    void clearAfter() {
+        Storage.storage.clear();
+    }
 
     @Test
     void is_fileExists_Ok() {

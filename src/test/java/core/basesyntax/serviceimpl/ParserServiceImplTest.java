@@ -9,12 +9,17 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceImplTest {
+    @BeforeAll
+    static void clear() {
+        Storage.storage.clear();
+    }
 
     @AfterEach
-    void clear() {
+    void clearAfter() {
         Storage.storage.clear();
     }
 

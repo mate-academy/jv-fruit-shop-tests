@@ -5,13 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
     private static final String HEADERS = "fruit,quantity" + System.lineSeparator();
 
+    @BeforeAll
+    static void clear() {
+        Storage.storage.clear();
+    }
+
     @AfterEach
-    void clear() {
+    void clearAfter() {
         Storage.storage.clear();
     }
 

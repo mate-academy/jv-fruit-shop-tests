@@ -7,12 +7,18 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
 
+    @BeforeAll
+    static void clear() {
+        Storage.storage.clear();
+    }
+
     @AfterEach
-    void clear() {
+    void clearAfter() {
         Storage.storage.clear();
     }
 

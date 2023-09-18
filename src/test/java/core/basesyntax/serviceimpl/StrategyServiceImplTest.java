@@ -11,11 +11,17 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class StrategyServiceImplTest {
+    @BeforeAll
+    static void clear() {
+        Storage.storage.clear();
+    }
+
     @AfterEach
-    void clear() {
+    void clearAfter() {
         Storage.storage.clear();
     }
 

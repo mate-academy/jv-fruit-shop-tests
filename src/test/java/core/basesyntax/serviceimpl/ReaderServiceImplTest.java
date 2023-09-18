@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private static final String INPUT = "src/main/resources/output.csv";
+    private static final String INPUT = "src/test/resources/output.csv";
     private static final String INVALID_PATH = "dev/null";
 
     @BeforeAll

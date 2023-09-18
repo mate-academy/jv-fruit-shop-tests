@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 class WriterServiceImplTest {
     private static final String HEADER = "fruit,quantity";
-    private static final String OUTPUT = "src/main/resources/output.csv";
+    private static final String OUTPUT = "src/test/resources/output.csv";
     private static final String INVALID_PATH = "dev/null";
 
     @BeforeAll
@@ -33,6 +33,8 @@ class WriterServiceImplTest {
 
     @Test
     void is_fileExists_Ok() {
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeAll(OUTPUT);
         File file = new File(OUTPUT);
         assertTrue(file.exists());
     }

@@ -12,14 +12,14 @@ class DataProcessorServiceImplTest {
     private DataProcessorService dataProcessorService = new DataProcessorServiceImpl();
 
     @Test
-    void processData_quantityLessThanZero_notOk() {
+    void processData_invalidOperation_notOk() {
         List<String> data = List.of("b,banana,10", "b,apple,10", "q,banana,20");
         assertThrows(RuntimeException.class,
                 () -> dataProcessorService.processInputData(data));
     }
 
     @Test
-    void processData_invalidOperation_notOk() {
+    void processData_quantityLessThanZero_notOk() {
         List<String> data = List.of("b,banana,10", "b,apple,-10", "s,banana,20");
         assertThrows(RuntimeException.class,
                 () -> dataProcessorService.processInputData(data));

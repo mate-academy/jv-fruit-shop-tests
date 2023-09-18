@@ -5,12 +5,19 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
-    private final Fruit apple = new Fruit("apple");
-    private final OperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
+    private static Fruit apple;
+    private static OperationHandler purchaseOperationHandler;
     private final FruitTransaction fruitTransaction = new FruitTransaction();
+
+    @BeforeAll
+    static void setUp() {
+        apple = new Fruit("apple");
+        purchaseOperationHandler = new PurchaseOperationHandler();
+    }
 
     @Test
     void purchaseProductByPurchaseHandler_NotOk() {

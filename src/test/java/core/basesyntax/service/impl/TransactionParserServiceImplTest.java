@@ -22,7 +22,6 @@ public class TransactionParserServiceImplTest {
 
     @Test
     public void parse_validData_returnsParsedTransactions() {
-
         List<String> inputData = new ArrayList<>();
         inputData.add("s,apple,5");
         inputData.add("p,banana,10");

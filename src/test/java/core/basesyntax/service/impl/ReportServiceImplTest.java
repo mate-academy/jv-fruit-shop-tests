@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,13 @@ class ReportServiceImplTest {
         reportService = new ReportServiceImpl();
     }
 
+    @AfterEach
+    void clearStorage() {
+        Storage.storage.clear();
+    }
+
     @Test
     void emptyStorageValidReport_Ok() {
-        Storage.storage.clear();
         Assertions.assertEquals(firstLinePattern,reportService.generateReport());
     }
 

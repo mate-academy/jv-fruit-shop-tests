@@ -4,16 +4,28 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
-    private final Fruit apple = new Fruit("apple");
-    private final OperationHandler returnOperationHandler = new BalanceOperationHandler();
+    private static Fruit apple;
+    private static OperationHandler returnOperationHandler;
     private final FruitTransaction fruitTransaction = new FruitTransaction();
+
+    @BeforeAll
+    static void setUp() {
+        apple = new Fruit("apple");
+        returnOperationHandler = new ReturnOperationHandler();
+    }
+
+    @BeforeEach
+    void clearStorage() {
+        Storage.storage.clear();
+    }
 
     @Test
     void appendProductByReturnHandler_Ok() {
-        Storage.storage.clear();
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         fruitTransaction.setQuantity(33);
         fruitTransaction.setFruit(apple);

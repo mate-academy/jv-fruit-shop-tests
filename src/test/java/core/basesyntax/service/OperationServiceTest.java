@@ -56,7 +56,7 @@ class OperationServiceTest {
         List<FruitTransaction> parseData = new ParseServiceImpl().parseInputData(inputData);
         operationService = new OperationService(operationStrategy);
         operationService.processOperation(parseData);
-        String actuall = new ReportServiceImpl().createReport();
-        assertEquals(expected, actuall);
+        String actual = new ReportServiceImpl().createReport();
+        assertEquals(expected, actual);
     }
 }

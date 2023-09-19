@@ -42,6 +42,5 @@ class DataProcessorServiceImplTest {
         );
         List<FruitTransaction> processedData = dataProcessorService.processInputData(data);
         assertEquals(expected, processedData);
-
     }
 }

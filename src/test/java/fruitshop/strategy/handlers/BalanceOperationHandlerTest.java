@@ -13,11 +13,19 @@ class BalanceOperationHandlerTest {
 
     @Test
     void processBalanceOperation_OK() {
-        FruitTransaction fruitTransaction = new FruitTransaction(
+        FruitTransaction appleTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "apple", 120);
-        balanceOperationHandler.calculateOperation(fruitTransaction);
-        int actual = Storage.getStorage().get("apple");
-        assertEquals(120, actual);
+        FruitTransaction bananaTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "banana", 100);
+        balanceOperationHandler.calculateOperation(appleTransaction);
+        balanceOperationHandler.calculateOperation(bananaTransaction);
+        int appleActual = Storage.getStorage().get("apple");
+        assertEquals(120, appleActual);
+        int bananaActual = Storage.getStorage().get("banana");
+        assertEquals(100, bananaActual);
+        balanceOperationHandler.calculateOperation(appleTransaction);
+        int secondAppleActual = Storage.getStorage().get("apple");
+        assertEquals(120, secondAppleActual);
     }
 
     @AfterEach

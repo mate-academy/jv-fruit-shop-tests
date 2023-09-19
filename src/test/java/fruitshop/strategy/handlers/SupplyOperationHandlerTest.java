@@ -26,5 +26,4 @@ class SupplyOperationHandlerTest {
     void tearDown() {
         Storage.getStorage().clear();
     }
-
 }

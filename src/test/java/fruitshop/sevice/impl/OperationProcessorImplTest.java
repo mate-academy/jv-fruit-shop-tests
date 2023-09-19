@@ -2,6 +2,7 @@ package fruitshop.sevice.impl;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
+import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
 import fruitshop.sevice.OperationProcessor;
 import fruitshop.strategy.handlers.BalanceOperationHandler;
@@ -11,6 +12,7 @@ import fruitshop.strategy.handlers.SupplyOperationHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class OperationProcessorImplTest {
@@ -19,6 +21,11 @@ class OperationProcessorImplTest {
             FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
             FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
             FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler()));
+
+    @AfterEach
+    void tearDown() {
+        Storage.getStorage().clear();
+    }
 
     @Test
     void processOperations_emptyMap_ok() {

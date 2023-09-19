@@ -19,7 +19,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeToFile() throws IOException {
+    void writeToFile_Ok() throws IOException {
         String data = "b,banana,20";
         writerService.writeToFile(PATH_TO_WRITE,data);
         List<String> lines = Files.readAllLines(Path.of(PATH_TO_WRITE));
@@ -28,7 +28,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void testWriteToFile_NotOk() {
+    void writeToFile_InvalidPath_NotOk() {
         Assertions.assertThrows(RuntimeException.class, () -> {
             writerService.writeToFile("nonexistentdirectory/nonexistentfile.txt", "Data to write");
         });

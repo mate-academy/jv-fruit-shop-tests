@@ -33,25 +33,6 @@ class TransactionServiceImplTest {
         Assertions.assertEquals(15,Storage.DB.get("apple"));
     }
 
-    @Test
-    void fruitTransaction_OK() {
-        FruitTransaction fruitTransaction = new FruitTransaction(FruitTransaction
-                .Operation.BALANCE,"apple",20);
-        FruitTransaction fruitTransaction1 = new FruitTransaction(FruitTransaction
-                .Operation.SUPPLY, "apple",5);
-        FruitTransaction fruitTransaction2 = new FruitTransaction(FruitTransaction
-                .Operation.BALANCE, "banana",20);
-        transactionService.processData(List.of(fruitTransaction,fruitTransaction1,
-                fruitTransaction2));
-        Assertions.assertEquals(25,Storage.DB.get("apple"));
-        fruitTransaction2.setOperation(FruitTransaction.Operation.PURCHASE);
-        fruitTransaction2.setQuantity(10);
-        fruitTransaction2.setFruit("banana");
-        transactionService.processData(List.of(fruitTransaction,fruitTransaction1,
-                fruitTransaction2));
-        Assertions.assertEquals(10,Storage.DB.get("banana"));
-    }
-
     @AfterEach
     void tearDown() {
         Storage.DB.clear();

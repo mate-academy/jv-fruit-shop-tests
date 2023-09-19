@@ -30,7 +30,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    void read_NotOk() {
+    void read_InvalidFile_NotOk() {
         Assertions.assertThrows(RuntimeException.class, () -> readerService.read(WRONG_FILE));
     }
 

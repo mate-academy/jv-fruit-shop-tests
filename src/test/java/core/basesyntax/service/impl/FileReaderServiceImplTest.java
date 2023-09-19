@@ -27,13 +27,13 @@ class FileReaderServiceImplTest {
     @Test
     void reader_NonExistingFile_NotOk() {
         String actual = "src/test/resources/non.csv";
-        assertThrows(RuntimeException.class, () -> fileReaderService.readFromFileName(actual));
+        assertThrows(RuntimeException.class, () -> fileReaderService.readFromFile(actual));
     }
 
     @Test
     void reader_EmptyFile_Ok() {
         List<String> actual = fileReaderService
-                .readFromFileName("src/test/resources/emptyFile.csv");
+                .readFromFile("src/test/resources/emptyFile.csv");
         assertTrue(actual.isEmpty(), "This file requires empty lines");
     }
 
@@ -49,7 +49,7 @@ class FileReaderServiceImplTest {
                 "p,banana,5",
                 "s,banana,50");
         List<String> actual = fileReaderService
-                .readFromFileName("src/test/resources/validFile.csv");
+                .readFromFile("src/test/resources/validFile.csv");
         assertEquals(expected, actual);
     }
 }

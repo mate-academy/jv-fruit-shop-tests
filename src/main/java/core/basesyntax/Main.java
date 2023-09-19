@@ -6,12 +6,12 @@ import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ProcessService;
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ProcessServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.strategy.OperationsHandler;
 import core.basesyntax.strategy.impl.BalanceOperationsHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationsHandler;
@@ -22,19 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FROM_FILE = "src/main/resources/input.csv";
+    private static final String TO_FILE = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> textLines = fileReaderService.readFromFileName("src/main/resources/input.csv");
+        List<String> textLines = fileReaderService.readFromFile(FROM_FILE);
 
-        Map<ActivityType, OperationsHandler> storeOperationsHandlerMap = new HashMap<>();
-        storeOperationsHandlerMap
-                .put(ActivityType.BALANCE, new BalanceOperationsHandler());
-        storeOperationsHandlerMap
-                .put(ActivityType.SUPPLY, new SupplyOperationsHandler());
-        storeOperationsHandlerMap
-                .put(ActivityType.PURCHASE, new PurchaseOperationsHandler());
-        storeOperationsHandlerMap
-                .put(ActivityType.RETURN, new ReturnOperationsHandler());
+        Map<ActivityType, OperationsHandler> storeOperationsHandlerMap = operationsHandlerMap();
 
         FruitService fruitService = new FruitServiceImpl();
         List<FruitTransaction> fruitTransactions = fruitService.processFruitLines(textLines);
@@ -42,10 +37,19 @@ public class Main {
         ProcessService processService = new ProcessServiceImpl(storeOperationsHandlerMap);
         processService.process(fruitTransactions);
 
-        ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        String report = reportCreatorService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report, "src/main/resources/output.csv");
+        fileWriterService.writeToFile(report, TO_FILE);
+    }
+
+    private static Map<ActivityType, OperationsHandler> operationsHandlerMap() {
+        Map<ActivityType, OperationsHandler> map = new HashMap<>();
+        map.put(ActivityType.BALANCE, new BalanceOperationsHandler());
+        map.put(ActivityType.SUPPLY, new SupplyOperationsHandler());
+        map.put(ActivityType.PURCHASE, new PurchaseOperationsHandler());
+        map.put(ActivityType.RETURN, new ReturnOperationsHandler());
+        return map;
     }
 }

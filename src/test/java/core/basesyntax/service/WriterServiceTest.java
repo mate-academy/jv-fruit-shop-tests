@@ -31,7 +31,7 @@ class WriterServiceTest {
             Files.deleteIfExists(path);
             Files.createFile(path);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't clear \"test_report_file.csv\"", e);
         }
     }
 
@@ -39,19 +39,7 @@ class WriterServiceTest {
     void write_reportToFile_ok() {
         String reportString = "fruit,quantity\nbanana,50\norange,10\napple,20";
         writer.writeReportToFile(reportString, TEST_RESOURCES_PATH + "test_report_file.csv");
-        StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(
-                new FileReader(TEST_RESOURCES_PATH + "test_report_file.csv"))) {
-            String stringLine = reader.readLine();
-            while (stringLine != null) {
-                builder.append(stringLine).append("\n");
-                stringLine = reader.readLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: "
-                    + TEST_RESOURCES_PATH + "test_report_file.csv", e);
-        }
-        String resultString = builder.toString().trim();
+        String resultString = readStringFromFile();
         assertEquals(reportString, resultString);
     }
 
@@ -60,5 +48,22 @@ class WriterServiceTest {
         String reportString = "fruit,quantity\nbanana,50\norange,10\napple,20";
         assertThrows(RuntimeException.class, () -> writer
                 .writeReportToFile(reportString, TEST_NON_EXISTENT_PATH + "test_report_file.csv"));
+    }
+
+    private String readStringFromFile() {
+        StringBuilder builder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(TEST_RESOURCES_PATH + "test_report_file.csv"))) {
+            String stringLine = reader.readLine();
+            while (stringLine != null) {
+                builder.append(stringLine).append("\n");
+                stringLine = reader.readLine();
+            }
+            builder.deleteCharAt(builder.length() - 1);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't find file by path: "
+                    + TEST_RESOURCES_PATH + "test_report_file.csv", e);
+        }
+        return builder.toString();
     }
 }

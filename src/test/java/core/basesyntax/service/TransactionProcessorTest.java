@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorTest {
@@ -35,12 +35,12 @@ class TransactionProcessorTest {
         operationMap.put(Operation.PURCHASE, new PurchaseHandler());
         operationMap.put(Operation.RETURN, new ReturnHandler());
         strategy = new OperationStrategyImpl(operationMap);
+        processor = new TransactionProcessorImpl(strategy);
     }
 
-    @BeforeEach
-    void beforeEach() {
+    @AfterEach
+    void afterEach() {
         Storage.STORAGE.clear();
-        processor = new TransactionProcessorImpl(strategy);
     }
 
     @Test
@@ -51,7 +51,7 @@ class TransactionProcessorTest {
                 new Transaction(Operation.PURCHASE, "banana", 30),
                 new Transaction(Operation.RETURN, "banana", 10));
         processor.processTransaction(transactions);
-        assertEquals("[banana=50]", Storage.STORAGE.entrySet().toString());
+        assertEquals(50, Storage.STORAGE.get("banana"));
     }
 
     @Test
@@ -70,7 +70,7 @@ class TransactionProcessorTest {
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 10));
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 10));
         processor.processTransaction(transactions);
-        assertEquals("[banana=0]", Storage.STORAGE.entrySet().toString());
+        assertEquals(0, Storage.STORAGE.get("banana"));
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 10));
         assertThrows(RuntimeException.class,
                 () -> processor.processTransaction(transactions));
@@ -83,7 +83,7 @@ class TransactionProcessorTest {
                 new Transaction(Operation.BALANCE, "apple", 30),
                 new Transaction(Operation.PURCHASE, "banana", 5));
         processor.processTransaction(transactions);
-        assertEquals("[banana=15, apple=30]",
-                Storage.STORAGE.entrySet().toString());
+        assertEquals(15, Storage.STORAGE.get("banana"));
+        assertEquals(30, Storage.STORAGE.get("apple"));
     }
 }

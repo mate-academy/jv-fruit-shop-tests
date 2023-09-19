@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,8 +26,8 @@ class ReaderServiceTest {
                 "p,banana,5", "s,banana,50");
         List<String> currentListOfLines = readerService
                 .readFile(TEST_RESOURCES_PATH + "valid_file.csv");
-        assertTrue(expectedListOfLines.containsAll(currentListOfLines)
-                && expectedListOfLines.size() == currentListOfLines.size());
+        assertTrue(expectedListOfLines.containsAll(currentListOfLines));
+        assertEquals(expectedListOfLines.size(), currentListOfLines.size());
     }
 
     @Test
@@ -35,7 +36,7 @@ class ReaderServiceTest {
                 .readFile(TEST_RESOURCES_PATH + "empty_file.csv");
         assertTrue(currentListOfLines.isEmpty(),
                 String.format("Expected empty list, but was list of %d line(s)",
-                        currentListOfLines.size() - 1));
+                        currentListOfLines.size()));
     }
 
     @Test
@@ -44,7 +45,7 @@ class ReaderServiceTest {
                 .readFile(TEST_RESOURCES_PATH + "one_line_file.csv");
         assertTrue(currentListOfLines.isEmpty(),
                 String.format("Expected empty list, but was list of %d line(s)",
-                        currentListOfLines.size() - 1));
+                        currentListOfLines.size()));
     }
 
     @Test

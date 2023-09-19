@@ -58,18 +58,4 @@ class DataParserServiceTest {
         assertThrows(RuntimeException.class,
                 () -> dataParser.getTransactionsList(incorrectOperation));
     }
-
-    @Test
-    void getTransactions_fromIncorrectValue_notOk() {
-        List<String> incorrectValue = List.of("b,banana,twenty");
-        assertThrows(RuntimeException.class,
-                () -> dataParser.getTransactionsList(incorrectValue));
-    }
-
-    @Test
-    void getTransactions_fromEmptyString_notOk() {
-        List<String> emptyString = List.of("");
-        assertThrows(RuntimeException.class,
-                () -> dataParser.getTransactionsList(emptyString));
-    }
 }

@@ -13,8 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WriterServiceTest {
-    private static final String INVALID_FILE_PATH = "src/test/resources/nonExisted.csv";
-    private static final String VALID_FILE_PATH = "src/test/java/resources/report.csv";
+    private static final String INVALID_FILE_PATH = "src/test/resources/..";
+    private static final String VALID_FILE_PATH = "src/test/resources/report.csv";
     private static WriterService writerService;
 
     @BeforeAll
@@ -35,7 +35,7 @@ public class WriterServiceTest {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator() + "apple,30" + System.lineSeparator();
         assertThrows(RuntimeException.class,
-                () -> writerService.writeToFile(INVALID_FILE_PATH, report)
+                () -> writerService.writeToFile(report, INVALID_FILE_PATH)
         );
     }
 }

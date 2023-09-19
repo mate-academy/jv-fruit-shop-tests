@@ -10,8 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvReaderServiceTest {
-    private static final String EXISTING_FILE_PATH = "src/test/java/resources/test.csv";
-    private static final String NON_EXISTING_FILE_PATH = "src/test/java/resources/NonExisted.csv";
+    private static final String EXISTING_FILE_PATH = "src/test/resources/test.csv";
+    private static final String NON_EXISTING_FILE_PATH = "src/test/resources/NonExisted.csv";
     private static ReaderService readerService;
 
     @BeforeAll

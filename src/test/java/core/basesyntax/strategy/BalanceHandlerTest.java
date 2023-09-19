@@ -1,4 +1,7 @@
-package core.basesyntax.strategyImpl;
+package core.basesyntax.strategy;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -7,8 +10,6 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BalanceHandlerTest {
     private static final String VALID_FRUIT_NAME = "dragonFruit";

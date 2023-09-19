@@ -1,12 +1,12 @@
 package core.basesyntax.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReportServiceImplTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();

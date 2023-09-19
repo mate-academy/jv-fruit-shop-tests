@@ -6,16 +6,19 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
-import core.basesyntax.strategy.handler.impl.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import core.basesyntax.strategy.handler.impl.BalanceHandler;
+import core.basesyntax.strategy.handler.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.handler.impl.PurchaseHandler;
+import core.basesyntax.strategy.handler.impl.ReturnHandler;
+import core.basesyntax.strategy.handler.impl.SupplyHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FruitShopServiceImplTest {
     private static final String PINEAPPLE = "pineapple";

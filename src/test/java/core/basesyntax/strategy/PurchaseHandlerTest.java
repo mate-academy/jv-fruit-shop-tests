@@ -1,4 +1,7 @@
-package core.basesyntax.strategyImpl;
+package core.basesyntax.strategy;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -7,10 +10,6 @@ import core.basesyntax.strategy.handler.impl.PurchaseHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 
 public class PurchaseHandlerTest {
     private PurchaseHandler purchaseHandler;
@@ -46,7 +45,6 @@ public class PurchaseHandlerTest {
                         -> purchaseHandler.handle(fruitTransaction));
         assertEquals("Transaction quantity cannot be negative", exception.getMessage());
     }
-
 
     @Test
     public void purchaseHandler_InsufficientStock_notOk() {

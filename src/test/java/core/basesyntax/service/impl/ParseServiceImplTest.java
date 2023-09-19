@@ -27,7 +27,16 @@ class ParseServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         parseService = new ParseServiceImpl();
+    }
+
+    @Test
+    void parseNull_NotOk() {
         emptyList = new ArrayList<>();
+        assertThrows(FruitShopException.class, () -> parseService.parseInputData(emptyList));
+    }
+
+    @Test
+    void correctParseData_Ok() {
         inputData = new ArrayList<>(Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,100",
@@ -35,15 +44,6 @@ class ParseServiceImplTest {
                 "p,banana,100",
                 "r,banana,100"));
         parseData = parseService.parseInputData(inputData);
-    }
-
-    @Test
-    void parseNull_NotOk() {
-        assertThrows(FruitShopException.class, () -> parseService.parseInputData(emptyList));
-    }
-
-    @Test
-    void correctParseData_Ok() {
         FruitTransaction balanceTransaction = parseData.get(BALANCE_INDEX);
         assertEquals(FruitTransaction.Operation.BALANCE, balanceTransaction.getOperation());
         assertEquals(FRUIT, balanceTransaction.getFruit());

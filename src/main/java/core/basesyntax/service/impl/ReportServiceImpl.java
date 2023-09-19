@@ -6,7 +6,7 @@ import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String FIRST_ROW = "fruit,quantity\n";
+    private static final String FIRST_ROW = "fruit,quantity" + System.lineSeparator();
     private static final String DELIMITER = ",";
 
     @Override

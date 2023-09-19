@@ -46,9 +46,12 @@ class OperationServiceTest {
 
     @Test
     void validResult_Ok() {
-        String expected = "fruit,quantity\n"
-                + "banana,152\r\n"
-                + "apple,90\r\n";
+        String expected = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,152"
+                + System.lineSeparator()
+                + "apple,90"
+                + System.lineSeparator();
         List<String> inputData = new ReadServiceImpl().readInputData(INPUT_PATH);
         List<FruitTransaction> parseData = new ParseServiceImpl().parseInputData(inputData);
         operationService = new OperationService(operationStrategy);

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private static final String FIRST_ROW = "fruit,quantity\n";
+    private static final String FIRST_ROW = "fruit,quantity" + System.lineSeparator();
     private static ReportService reportService;
 
     @BeforeAll
@@ -23,8 +23,10 @@ class ReportServiceImplTest {
         Storage.STORAGE.put("banana", 20);
         Storage.STORAGE.put("apple", 15);
         String expected = FIRST_ROW
-                + "banana,20\r\n"
-                + "apple,15\r\n";
+                + "banana,20"
+                + System.lineSeparator()
+                + "apple,15"
+                + System.lineSeparator();
         String actual = reportService.createReport();
         assertEquals(expected, actual);
     }

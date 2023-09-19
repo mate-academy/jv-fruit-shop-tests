@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.strategyImpl;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationStrategy;

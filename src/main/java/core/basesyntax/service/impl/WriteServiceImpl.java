@@ -9,6 +9,9 @@ import java.io.IOException;
 public class WriteServiceImpl implements WriteService {
     @Override
     public void writeToFile(String toFile, String report) {
+        if (report == null) {
+            throw new IllegalArgumentException("Report cannot be null");
+        }
         File file = new File(toFile);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(report);

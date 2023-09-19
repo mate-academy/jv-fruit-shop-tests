@@ -10,10 +10,15 @@ public class PurchaseHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
+        if (fruit == null) {
+            throw new NullPointerException("Fruit cannot br null");
+        }
         int currentQuantity = Storage.storage
                 .getOrDefault(fruit, DEFAULT_QUANTITY);
         int transactionQuantity = fruitTransaction.getQuantity();
-
+        if (transactionQuantity < 0) {
+            throw new IllegalArgumentException("Transaction quantity cannot be negative");
+        }
         if (transactionQuantity > currentQuantity) {
             throw new RuntimeException("Not enough " + fruit
                     + " in stock. "

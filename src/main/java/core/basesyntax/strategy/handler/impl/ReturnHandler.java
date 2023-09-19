@@ -7,6 +7,12 @@ import core.basesyntax.strategy.handler.OperationHandler;
 public class ReturnHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getFruit() == null) {
+            throw new NullPointerException("FruitTransaction cannot be null");
+        }
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new IllegalArgumentException("FruitTransaction quantity cannot be negative");
+        }
         int oldQuantity = Storage.storage.get(fruitTransaction.getFruit());
         Storage.storage.put(fruitTransaction.getFruit(),
                 oldQuantity + fruitTransaction.getQuantity());

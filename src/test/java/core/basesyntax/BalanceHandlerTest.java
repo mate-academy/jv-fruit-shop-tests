@@ -7,7 +7,6 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -42,7 +41,7 @@ public class BalanceHandlerTest {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(null, null, INITIAL_BALANCE);
         NullPointerException exception = assertThrows(NullPointerException.class,
-                        () -> balanceHandler.handle(fruitTransaction));
+                () -> balanceHandler.handle(fruitTransaction));
         assertEquals("Invalid transaction, something is null!",
                 exception.getMessage());
     }

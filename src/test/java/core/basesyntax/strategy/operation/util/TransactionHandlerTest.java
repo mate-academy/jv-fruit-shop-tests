@@ -49,7 +49,7 @@ public class TransactionHandlerTest {
     }
 
     @Test
-    public void incomingTransaction_supplyExistedFruit_ok() {
+    public void incomingTransaction_supplyExistingFruit_ok() {
         Storage.storage.put(apple, 100);
         Integer expectedSum = appleSupplyTransaction.getSum() + Storage.storage.get(apple);
         transactionHandler.processIncomingTransaction(appleSupplyTransaction);

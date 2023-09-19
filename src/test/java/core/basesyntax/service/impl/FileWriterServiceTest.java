@@ -27,14 +27,10 @@ public class FileWriterServiceTest {
     }
 
     @Test
-    public void writeToFile_correctPath_ok() {
+    public void writeToFile_correctPath_ok() throws IOException {
         fileWriterService.writeToFile(testData, CORRECT_FILE_PATH);
         List<String> dataFromFile;
-        try {
-            dataFromFile = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + CORRECT_FILE_PATH, e);
-        }
+        dataFromFile = Files.readAllLines(Path.of(CORRECT_FILE_PATH));
         List<String> expectedData = new ArrayList<>(Arrays.asList(testData.split(LINE_SEPARATOR)));
         Assert.assertEquals(expectedData, dataFromFile);
     }

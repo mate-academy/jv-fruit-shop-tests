@@ -3,32 +3,24 @@ package core.basesyntax.serviceimpl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReaderService;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
-    private static final String INPUT = "src/test/resources/output.csv";
+    private static final String VALID_INPUT = "src/test/resources/valid_input.csv";
     private static final String INVALID_PATH = "dev/null";
 
-    @BeforeAll
-    static void clear() {
-        Storage.storage.clear();
-    }
+    private static ReaderService readerService;
 
-    @AfterEach
-    void clearAfter() {
-        Storage.storage.clear();
+    @BeforeAll
+    static void init() {
+        readerService = new ReaderServiceImpl();
     }
 
     @Test
     void when_FileNotExists_NotOk() {
-        ReaderService readerService = new ReaderServiceImpl();
         assertThrows(RuntimeException.class,
                 () -> readerService.readOperations(INVALID_PATH));
     }
@@ -39,16 +31,8 @@ class ReaderServiceImplTest {
                 "type,fruit,quantity",
                 "b,apple,100",
                 "p,apple,15");
-        try (FileWriter fileWriter = new FileWriter(INPUT)) {
-            for (String line : lines) {
-                fileWriter.write(line + System.lineSeparator());
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         List<String> expected = lines.stream().skip(1).toList();
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> actual = readerService.readOperations(INPUT);
+        List<String> actual = readerService.readOperations(VALID_INPUT);
         assertEquals(expected, actual);
     }
 }

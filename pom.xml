@@ -49,6 +49,9 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <excludes>
+                        **/Main*
+                    </excludes>
                     <configLocation>${maven.checkstyle.plugin.configLocation}</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>

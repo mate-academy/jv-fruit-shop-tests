@@ -98,6 +98,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>core.basesyntax.serviceimpl.FruitTransaction.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>

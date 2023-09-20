@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 class FileWriterServiceTest {
     private static FileWriterService fileWriterService;
     private static final String VALID_FILE_PATH = "src/test/java/resources/report.csv";
-    private static final String INVALID_FILE_PATH = "src/test/java/resources/.../";
+    private static final String INVALID_FILE_PATH = "src/test/java/resources/..";
 
     @BeforeAll
     static void beforeAll() {
@@ -39,4 +39,3 @@ class FileWriterServiceTest {
         );
     }
 }
-

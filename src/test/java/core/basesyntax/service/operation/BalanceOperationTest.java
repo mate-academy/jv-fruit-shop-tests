@@ -25,16 +25,16 @@ class BalanceOperationTest {
     }
 
     @Test
-    void operate_ValidData_Ok() {
+    void operate_validData_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.BALANCE, "banana", 20);
         assertDoesNotThrow(() -> balanceOperation.operate(fruitTransaction));
-        int expected = Storage.STORAGE.get("banana");
-        assertEquals(expected, 20);
+        int actual = Storage.STORAGE.get("banana");
+        assertEquals(20, actual);
     }
 
     @Test
-    void operate_WithExistedFruit_NotOk() {
+    void operate_withExistedFruit_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.BALANCE, "banana", 100);

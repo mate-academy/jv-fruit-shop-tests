@@ -21,7 +21,7 @@ class FileWriterTest {
     }
 
     @Test
-    void writeReportToFile_ValidData_Ok() throws IOException {
+    void writeReportToFile_validData_ok() throws IOException {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator() + "apple,30" + System.lineSeparator();
         fileWriter.writeReportToFile(VALID_FILE_PATH, report);
@@ -30,7 +30,7 @@ class FileWriterTest {
     }
 
     @Test
-    void writeReportToFile_InvalidFilePath_NotOk() {
+    void writeReportToFile_invalidFilePath_notOk() {
         String report = "fruit,quantity" + System.lineSeparator()
                 + "banana,20" + System.lineSeparator() + "apple,30" + System.lineSeparator();
         assertThrows(RuntimeException.class,

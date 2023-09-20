@@ -32,7 +32,7 @@ class ReportCreatorTest {
     }
 
     @Test
-    void createReport_EmptyReport_Ok() {
+    void createReport_emptyReport_ok() {
         String excpected = "fruit,quantity" + System.lineSeparator();
         String actual = reportCreator.createReport();
         assertEquals(excpected, actual);

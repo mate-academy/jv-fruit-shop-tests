@@ -24,7 +24,7 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void purchaseOperation_validData_Ok() {
+    void purchaseOperation_validData_ok() {
         Storage.STORAGE.put("banana", 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.PURCHASE, "banana", 40);
@@ -34,7 +34,7 @@ class PurchaseOperationTest {
     }
 
     @Test
-    void operate_FruitQuantityNotEnough_NotOk() {
+    void operate_fruitQuantityNotEnough_notOk() {
         Storage.STORAGE.put("banana", 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.PURCHASE, "banana", 140);

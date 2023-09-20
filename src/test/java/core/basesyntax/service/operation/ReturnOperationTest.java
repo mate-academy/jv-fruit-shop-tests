@@ -23,7 +23,7 @@ class ReturnOperationTest {
     }
 
     @Test
-    void operate_ValidData_Ok() {
+    void operate_validData_ok() {
         Storage.STORAGE.put("banana", 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.RETURN, "banana", 30);

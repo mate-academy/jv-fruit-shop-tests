@@ -23,7 +23,7 @@ class SupplyOperationTest {
     }
 
     @Test
-    void operate_ValidData_Ok() {
+    void operate_validData_ok() {
         Storage.STORAGE.put("banana", 50);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.SUPPLY,"banana", 30);

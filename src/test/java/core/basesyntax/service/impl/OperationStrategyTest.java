@@ -35,7 +35,7 @@ class OperationStrategyTest {
     }
 
     @Test
-    void getOperationHandler_ValidData_Ok() {
+    void getOperationHandler_validData_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 OperationType.BALANCE, "banana", 10);
         assertEquals(BalanceOperation.class, strategy.getOperationHandler(

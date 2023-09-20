@@ -20,7 +20,7 @@ class FileReaderTest {
     }
 
     @Test
-    void dataToProcess_validFile_Ok() {
+    void dataToProcess_validFile_ok() {
         List<String> expected = List.of("b,banana,20", "b,apple,100", "s,banana,100",
                 "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
         List<String> actual = fileReader.dataToProcess(VALID_FILE_PATH);
@@ -28,12 +28,12 @@ class FileReaderTest {
     }
 
     @Test
-    void dataToProcess_InvalidFile_NotOk() {
+    void dataToProcess_invalidFile_notOk() {
         assertThrows(RuntimeException.class, () -> fileReader.dataToProcess(INVALID_FILE_PATH));
     }
 
     @Test
-    void dataToProcess_EmptyFile_Ok() {
+    void dataToProcess_emptyFile_ok() {
         List<String> expected = List.of();
         List<String> actual = fileReader.dataToProcess(EMPTY_FILE_PATH);
         assertEquals(expected, actual);

@@ -19,7 +19,7 @@ class DataConverterTest {
     }
 
     @Test
-    void fruitList_validData_Ok() {
+    void fruitList_validData_ok() {
         List<String> validLIst = List.of("b,banana,20", "b,apple,100", "s,banana,100",
                 "p,banana,13", "r,apple,10", "p,apple,20");
         List<FruitTransaction> expected = List.of(
@@ -35,14 +35,14 @@ class DataConverterTest {
     }
 
     @Test
-    void fruitList_InvalidDataFormat_NotOk() {
+    void fruitList_invalidDataFormat_notOk() {
         List<String> invalidData = List.of("b,banana,20,15", "b,apple,100");
         assertThrows(RuntimeException.class, () -> dataConverter.fruitList(invalidData),
                 "Invalid input data format");
     }
 
     @Test
-    void fruitList_NegativeFruitQuantity_NotOk() {
+    void fruitList_negativeFruitQuantity_notOk() {
         List<String> invalidData = List.of("b,banana,20", "b,apple,-100");
         assertThrows(RuntimeException.class, () -> dataConverter.fruitList(invalidData),
                 "Quantity of fruits can't be negative");

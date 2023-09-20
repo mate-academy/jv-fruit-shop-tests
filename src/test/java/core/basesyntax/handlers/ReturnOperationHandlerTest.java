@@ -2,6 +2,7 @@ package core.basesyntax.handlers;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -31,5 +32,25 @@ class ReturnOperationHandlerTest {
         assertDoesNotThrow(() -> returnOperationHandler.calculateOperation(fruitTransaction));
         int actualAmount = Storage.STORAGE.get("banana");
         assertEquals(115, actualAmount);
+    }
+
+    @Test
+    void calculateOperation_negativeQuantity_notOk() {
+        FruitTransaction bananaTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, "banana", -100
+        );
+        assertThrows(RuntimeException.class,
+                () -> returnOperationHandler.calculateOperation(bananaTransaction)
+        );
+    }
+
+    @Test
+    void calculateOperation_nullFruit_notOk() {
+        FruitTransaction bananaTransaction = new FruitTransaction(
+                FruitTransaction.Operation.BALANCE, null, 100
+        );
+        assertThrows(NullPointerException.class,
+                () -> returnOperationHandler.calculateOperation(bananaTransaction)
+        );
     }
 }

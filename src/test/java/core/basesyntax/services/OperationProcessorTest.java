@@ -9,7 +9,7 @@ import core.basesyntax.handlers.ReturnOperationHandler;
 import core.basesyntax.handlers.SupplyOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.impl.OperationProcessorImpl;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -35,8 +35,9 @@ class OperationProcessorTest {
     }
 
     @Test
-    void processOperation_emptyList_notOk() {
-        assertDoesNotThrow(() -> operationProcessor.manageTransactions(Collections.emptyList()));
+    void processOperation_emptyList_Ok() {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        assertDoesNotThrow(() -> operationProcessor.manageTransactions(fruitTransactions));
     }
 
     @Test
@@ -48,4 +49,5 @@ class OperationProcessorTest {
         );
         assertDoesNotThrow(() -> operationProcessor.manageTransactions(transactions));
     }
+
 }

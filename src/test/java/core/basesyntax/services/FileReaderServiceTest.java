@@ -12,6 +12,7 @@ class FileReaderServiceTest {
     private static FileReaderService fileReaderService;
     private static final String VALID_FILE_PATH = "src/test/java/resources/test.csv";
     private static final String INVALID_FILE_PATH = "src/test/java/resources/InvalidTest.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/java/resources/empty_file_csv";
 
     @BeforeAll
     static void beforeAll() {
@@ -27,6 +28,13 @@ class FileReaderServiceTest {
                 "s,banana,40"
         );
         assertEquals(expected,actual);
+    }
+
+    @Test
+    void readData_emptyFile_ok() {
+        List<String> expected = List.of();
+        List<String> actual = fileReaderService.readFromFile(EMPTY_FILE_PATH);
+        assertEquals(expected, actual);
     }
 
     @Test

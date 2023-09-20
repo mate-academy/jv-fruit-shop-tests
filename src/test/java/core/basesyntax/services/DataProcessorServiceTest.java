@@ -47,4 +47,10 @@ class DataProcessorServiceTest {
         List<String> data = List.of("buy,banana,-200", "b,apple,20", "s,banana,10");
         assertThrows(RuntimeException.class, () -> dataProcessorService.processInputData(data));
     }
+
+    @Test
+    void processData_nonNumericQuantity_notOk() {
+        List<String> data = List.of("b,banana,abc", "b,apple,abc", "s,banana,abc");
+        assertThrows(RuntimeException.class, () -> dataProcessorService.processInputData(data));
+    }
 }

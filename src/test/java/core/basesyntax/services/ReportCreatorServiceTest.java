@@ -35,4 +35,12 @@ class ReportCreatorServiceTest {
                 + "banana,10" + System.lineSeparator() + "apple,20" + System.lineSeparator();
         assertEquals(expectedReport, reportCreatorService.createReport());
     }
+
+    @Test
+    void createReport_OneItem_Ok() {
+        Storage.STORAGE.put("banana", 10);
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator();
+        assertEquals(expectedReport,reportCreatorService.createReport());
+    }
 }

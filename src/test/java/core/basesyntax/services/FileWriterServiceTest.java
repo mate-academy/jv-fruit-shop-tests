@@ -38,4 +38,11 @@ class FileWriterServiceTest {
                 () -> fileWriterService.writeToFile(INVALID_FILE_PATH, report)
         );
     }
+
+    @Test
+    void writeTo_nullReport_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> fileWriterService.writeToFile(INVALID_FILE_PATH, null)
+        );
+    }
 }

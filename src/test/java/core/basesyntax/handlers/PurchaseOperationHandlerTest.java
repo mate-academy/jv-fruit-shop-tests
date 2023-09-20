@@ -35,6 +35,26 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
+    void processPurchaseOperation_nullFruit_notOk() {
+        Storage.STORAGE.put("banana", 20);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, null, 10
+        );
+        assertThrows(NullPointerException.class,
+                () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
+    }
+
+    @Test
+    void processPurchaseOperation_negativeNumberOfFruits_notOk() {
+        Storage.STORAGE.put("banana", 20);
+        FruitTransaction fruitTransaction = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "banana", -100
+        );
+        assertThrows(RuntimeException.class,
+                () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
+    }
+
+    @Test
     void processPurchaseOperation_quantityMoreAmount_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(

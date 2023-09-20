@@ -20,7 +20,7 @@ public class ReaderServiceImpl implements ReaderService {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("You can`t read data from file " + pathToFile, e);
+            throw new RuntimeException("You can`t read data from ерші file", e);
         }
         lines.remove(INDEX_OF_DESCRIPTION_LINE);
         return lines;

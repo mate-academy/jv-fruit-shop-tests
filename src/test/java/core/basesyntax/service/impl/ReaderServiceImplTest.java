@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReaderServiceImplTest {
     private static final String PATH_TO_FILE = "src\\resources\\testInput.csv";
-    private static final String FAKE_PATH_TO_FILE = "src\\resources\\file.csv";
+    private static final String FAKE_PATH_TO_FILE = "testFile";
 
     private static ReaderService readerService;
 

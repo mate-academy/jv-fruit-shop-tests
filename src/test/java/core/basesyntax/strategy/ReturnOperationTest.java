@@ -14,7 +14,7 @@ public class ReturnOperationTest {
     private static Operation returnOperation;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         returnOperation = new ReturnOperation();
     }
 

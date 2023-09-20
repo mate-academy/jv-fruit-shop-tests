@@ -12,7 +12,7 @@ public class ReportCreatorServiceImplTest {
     private static ReportCreatorService reportCreatorService;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         reportCreatorService = new ReportCreatorServiceImpl();
     }
 
@@ -25,15 +25,15 @@ public class ReportCreatorServiceImplTest {
     void createReport_validReport_ok() {
         Storage.getFruits().put("banana", 10);
         Storage.getFruits().put("apple", 40);
-        String expectedString = "fruit,quantity" + System.lineSeparator()
+        String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,10" + System.lineSeparator()
                 + "apple,40";
-        assertEquals(expectedString, reportCreatorService.createReport());
+        assertEquals(expected, reportCreatorService.createReport());
     }
 
     @Test
     void createReport_emptyReport_ok() {
-        String expectedString = "fruit,quantity";
-        assertEquals(expectedString, reportCreatorService.createReport());
+        String expected = "fruit,quantity";
+        assertEquals(expected, reportCreatorService.createReport());
     }
 }

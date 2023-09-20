@@ -14,7 +14,7 @@ public class ParseServiceImplTest {
     private static ParseService parseService;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         parseService = new ParseServiceImpl();
     }
 
@@ -26,14 +26,14 @@ public class ParseServiceImplTest {
                 "p,banana,5",
                 "r,banana,10"
         );
-        List<FruitTransaction> expectedList = List.of(
+        List<FruitTransaction> expected = List.of(
                 new FruitTransaction(OperationType.BALANCE, "banana", 20),
                 new FruitTransaction(OperationType.SUPPLY, "banana", 100),
                 new FruitTransaction(OperationType.PURCHASE, "banana", 5),
                 new FruitTransaction(OperationType.RETURN, "banana", 10)
         );
-        List<FruitTransaction> actualList = parseService.parse(lines);
-        assertEquals(expectedList, actualList);
+        List<FruitTransaction> actual = parseService.parse(lines);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    void parse_wrongAmount_notOk() {
+    void parse_invalidAmount_notOk() {
         List<String> lines = List.of("b,apple,-100", "s,apple,20",
                 "s,apple,-30", "p,apple,5");
         assertThrows(IllegalArgumentException.class,

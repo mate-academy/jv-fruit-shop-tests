@@ -15,7 +15,7 @@ public class PurchaseOperationTest {
     private static Operation purchaseOperation;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         purchaseOperation = new PurchaseOperation();
     }
 

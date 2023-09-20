@@ -14,7 +14,7 @@ public class SupplyOperationTest {
     private static Operation supplyOperation;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         supplyOperation = new SupplyOperation();
     }
 

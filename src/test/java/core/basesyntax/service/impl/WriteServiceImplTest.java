@@ -17,18 +17,18 @@ public class WriteServiceImplTest {
     private static WriteService writeService;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         writeService = new WriteServiceImpl();
     }
 
     @Test
     void writeToFile_writePathToFile_ok() {
-        String report = "fruit,quantity" + System.lineSeparator()
+        String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,10" + System.lineSeparator()
                 + "apple,40";
-        writeService.writeToFile(PATH_TO_FILE, report);
-        String actualReport = readFromFile();
-        assertEquals(report, actualReport);
+        writeService.writeToFile(PATH_TO_FILE, expected);
+        String actual = readFromFile();
+        assertEquals(expected, actual);
     }
 
     private static String readFromFile() {

@@ -23,7 +23,7 @@ public class ProcessServiceImplTest {
     private static Map<OperationType, Operation> strategyMap;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         processService = new ProcessServiceImpl();
         strategyMap = new HashMap<>();
         strategyMap.put(OperationType.BALANCE, new BalanceOperation());

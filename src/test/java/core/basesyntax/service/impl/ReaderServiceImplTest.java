@@ -15,7 +15,7 @@ public class ReaderServiceImplTest {
     private static ReaderService readerService;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         readerService = new ReaderServiceImpl();
     }
 

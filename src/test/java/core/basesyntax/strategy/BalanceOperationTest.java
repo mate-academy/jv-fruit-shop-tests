@@ -14,7 +14,7 @@ public class BalanceOperationTest {
     private static Operation balanceOperation;
 
     @BeforeAll
-    static void setUp() {
+    static void beforeAll() {
         balanceOperation = new BalanceOperation();
     }
 

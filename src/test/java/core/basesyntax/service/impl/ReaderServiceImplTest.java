@@ -20,8 +20,8 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_pathToFile_ok() {
-        List<String> expectedLines = List.of(
+    void readFromFile_validPathToFile_ok() {
+        List<String> expected = List.of(
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -31,8 +31,8 @@ public class ReaderServiceImplTest {
                 "p,banana,5",
                 "s,banana,50"
         );
-        List<String> lines = readerService.readFromFile(PATH_TO_FILE);
-        assertEquals(expectedLines, lines);
+        List<String> actual = readerService.readFromFile(PATH_TO_FILE);
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriteService;
 import java.io.BufferedReader;
@@ -31,7 +32,16 @@ public class WriteServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    private static String readFromFile() {
+    @Test
+    void writeToFile_nullPathToFile_notOk() {
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,10" + System.lineSeparator()
+                + "apple,40";
+        assertThrows(RuntimeException.class,
+                () -> writeService.writeToFile(null, expected));
+    }
+
+    private String readFromFile() {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(PATH_TO_FILE))) {
             String line = reader.readLine();

@@ -25,10 +25,10 @@ public class ReportCreatorServiceImplTest {
     void createReport_validReport_ok() {
         Storage.getFruits().put("banana", 10);
         Storage.getFruits().put("apple", 40);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,10" + System.lineSeparator()
-                + "apple,40";
-        assertEquals(expected, reportCreatorService.createReport());
+        StringBuilder expected = new StringBuilder("fruit,quantity")
+                .append(System.lineSeparator()).append("banana,10")
+                .append(System.lineSeparator()).append("apple,40");
+        assertEquals(expected.toString(), reportCreatorService.createReport());
     }
 
     @Test

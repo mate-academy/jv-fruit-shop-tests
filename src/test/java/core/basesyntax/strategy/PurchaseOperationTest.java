@@ -25,7 +25,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void performOperation_enoughFruits_ok() {
+    public void performOperation_validAmountOfFruitsForPurchase_ok() {
         Storage.getFruits().put("apple", 70);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OperationType.PURCHASE, "apple", 50);
@@ -34,7 +34,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void performOperation_enoughFruits_notOk() {
+    public void performOperation_noValidAmountOfFruitsForPurchase_notOk() {
         Storage.getFruits().put("apple", 70);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OperationType.PURCHASE, "apple", 80);

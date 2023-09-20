@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
@@ -34,5 +35,17 @@ public class PurchaseOperationTest {
         FruitStorage.storage.put("banana", 10);
         processOperation.processOperation(validTransaction);
         assertEquals(FruitStorage.storage.get(validName), 0);
+    }
+
+    @Test
+    void purchaseOperation_notEnoughFruits_notOk() {
+        String validName = "banana";
+        int validQuantity = 10;
+        Operation validOperation = Operation.PURCHASE;
+        FruitTransaction validTransaction
+                = new FruitTransaction(validName, validOperation, validQuantity);
+
+        assertThrows(RuntimeException.class,
+                () -> processOperation.processOperation(validTransaction));
     }
 }

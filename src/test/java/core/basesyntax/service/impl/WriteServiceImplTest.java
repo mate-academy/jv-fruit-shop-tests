@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WriteServiceImplTest {
-    private static final String PATH_TO_FILE = "src\\resources\\testReport.csv";
+    private static final String PATH_TO_FILE = "src/resources/testReport.csv";
 
     private static WriteService writeService;
 

@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReaderServiceImplTest {
-    private static final String PATH_TO_FILE = "src\\resources\\testInput.csv";
-    private static final String FAKE_PATH_TO_FILE = "testFile";
+    private static final String PATH_TO_FILE = "src/resources/testInput.csv";
+    private static final String FAKE_PATH_TO_FILE = "src/resourses/testFile12.csv";
 
     private static ReaderService readerService;
 
@@ -21,7 +21,6 @@ public class ReaderServiceImplTest {
 
     @Test
     void readFromFile_pathToFile_ok() {
-        List<String> lines = readerService.readFromFile(PATH_TO_FILE);
         List<String> expectedLines = List.of(
                 "b,banana,20",
                 "b,apple,100",
@@ -32,6 +31,7 @@ public class ReaderServiceImplTest {
                 "p,banana,5",
                 "s,banana,50"
         );
+        List<String> lines = readerService.readFromFile(PATH_TO_FILE);
         assertEquals(expectedLines, lines);
     }
 

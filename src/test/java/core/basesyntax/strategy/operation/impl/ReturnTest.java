@@ -39,7 +39,7 @@ public class ReturnTest {
     }
 
     @Test
-    public void balance_addedSumToExisted_ok() {
+    public void balance_addedSumToExisting_ok() {
         Storage.storage.put(banana, 200);
         Integer expectedSum = Storage.storage.get(banana) + bananaReturnTransaction.getSum();
         returnOperation.apply(transactionHandler, bananaReturnTransaction);

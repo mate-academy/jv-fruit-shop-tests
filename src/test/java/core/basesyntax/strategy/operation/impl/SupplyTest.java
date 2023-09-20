@@ -39,7 +39,7 @@ public class SupplyTest {
     }
 
     @Test
-    public void supply_addedSumToExisted_ok() {
+    public void supply_addedSumToExisting_ok() {
         Storage.storage.put(apple, 200);
         Integer expectedSum = Storage.storage.get(apple) + appleSupplyTransaction.getSum();
         supply.apply(transactionHandler, appleSupplyTransaction);

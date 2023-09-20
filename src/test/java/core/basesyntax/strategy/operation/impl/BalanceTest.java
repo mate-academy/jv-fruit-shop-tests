@@ -39,7 +39,7 @@ public class BalanceTest {
     }
 
     @Test
-    public void balance_addedSumToExisted_ok() {
+    public void balance_addedSumToExisting_ok() {
         Storage.storage.put(apple, 60);
         Integer expectedSum = Storage.storage.get(apple) + appleBalanceTransaction.getSum();
         balance.apply(transactionHandler, appleBalanceTransaction);

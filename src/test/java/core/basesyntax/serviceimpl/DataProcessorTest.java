@@ -1,11 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataProcessorService;
-import core.basesyntax.serviceimpl.DataProcessorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
@@ -48,9 +47,9 @@ public class DataProcessorTest {
     void dataProcessor_ProcessValidData_Ok() {
         fruitTransactionTestList.add(new FruitTransaction(Operation.BALANCE, "Apple", 100));
         String key = "Apple";
-        Integer value = 100;
+        Integer expectedValue = 100;
         dataProcessorService.processData(fruitTransactionTestList);
-        Assertions.assertEquals(Storage.STORAGE.get(key), value);
+        Assertions.assertEquals(Storage.STORAGE.get(key), expectedValue);
     }
 
     @DisplayName("Null values processing tests")
@@ -62,14 +61,14 @@ public class DataProcessorTest {
 
     @Test
     void dataProcessor_ProcessNullOperationType_NotOk() {
-        fruitTransactionTestList.add(new FruitTransaction(null,"Apple", 20));
+        fruitTransactionTestList.add(new FruitTransaction(null, "Apple", 20));
         Assert.assertThrows(InvalidDataException.class,
                 () -> dataProcessorService.processData(fruitTransactionTestList));
     }
 
     @Test
     void dataProcessor_ProcessNullFruitType_NotOk() {
-        fruitTransactionTestList.add(new FruitTransaction(Operation.BALANCE,null, 20));
+        fruitTransactionTestList.add(new FruitTransaction(Operation.BALANCE, null, 20));
         Assert.assertThrows(InvalidDataException.class,
                 () -> dataProcessorService.processData(fruitTransactionTestList));
     }
@@ -84,9 +83,9 @@ public class DataProcessorTest {
     @DisplayName("Storage quantity is less then purchase transaction quantity")
     @Test
     void dataProcessorTest_StorageQuantityLessTransactionQuantity_NotOk() {
+        Storage.STORAGE.put("Banana", 99);
         fruitTransactionTestList.add(
                 new FruitTransaction(Operation.PURCHASE, "Banana", 100));
-        Storage.STORAGE.put("Banana", 99);
         Assert.assertThrows(InvalidDataException.class,
                 () -> dataProcessorService.processData(fruitTransactionTestList));
     }
@@ -95,7 +94,7 @@ public class DataProcessorTest {
     @Test
     void dataProcessorTest_NegativeQuantity_NotOk() {
         fruitTransactionTestList.add(new FruitTransaction(
-                Operation.BALANCE,"Banana", -1));
+                Operation.BALANCE, "Banana", -1));
         Assert.assertThrows(InvalidDataException.class,
                 () -> dataProcessorService.processData(fruitTransactionTestList));
     }

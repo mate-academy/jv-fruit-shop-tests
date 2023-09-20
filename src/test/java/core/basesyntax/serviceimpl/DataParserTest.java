@@ -1,10 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.exceptions.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParserService;
-import core.basesyntax.serviceimpl.DataParserServiceImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -60,7 +59,7 @@ public class DataParserTest {
     }
 
     @Test
-    void getTransactions_invalidInput_invalidDataExceptionThrown() {
+    void getTransactions_invalidInput_notOk() {
         testList = List.of("INVALID_INPUT");
         Assert.assertThrows(InvalidDataException.class,
                 () -> dataParserService.getTransactions(testList));

@@ -1,8 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportTextGeneratorService;
-import core.basesyntax.serviceimpl.ReportTextGeneratorServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

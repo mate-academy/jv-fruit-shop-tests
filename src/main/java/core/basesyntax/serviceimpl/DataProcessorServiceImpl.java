@@ -17,6 +17,12 @@ public class DataProcessorServiceImpl implements DataProcessorService {
 
     @Override
     public void processData(List<FruitTransaction> fruitTransactions) {
+        fruitTransactionsValidation(fruitTransactions);
+        fruitTransactions.forEach(t -> handlerMap.get(t.getOperation())
+                .processTransaction(t));
+    }
+
+    private void fruitTransactionsValidation(List<FruitTransaction> fruitTransactions) {
         if (fruitTransactions == null) {
             throw new InvalidDataException("TransactionsList can't be null");
         }
@@ -32,7 +38,5 @@ public class DataProcessorServiceImpl implements DataProcessorService {
                         + " but was: " + fruitTransaction.getQuantity());
             }
         }
-        fruitTransactions.forEach(t -> handlerMap.get(t.getOperation())
-                .processTransaction(t));
     }
 }

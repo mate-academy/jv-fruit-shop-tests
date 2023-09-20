@@ -1,8 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.exceptions.InvalidDataException;
 import core.basesyntax.service.FileReaderService;
-import core.basesyntax.serviceimpl.FileReaderServiceImpl;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +22,7 @@ public class FileReaderTest {
     void fileReader_ValidFile_Ok() {
         List<String> expected = List.of("b,Apple,20");
         Assertions.assertEquals(fileReaderService.getInputData(
-                "src/main/resources/tests/inputTest.csv"), expected);
+                "src/test/resources/tests/inputTest.csv"), expected);
     }
 
     @DisplayName("Not existing report path")

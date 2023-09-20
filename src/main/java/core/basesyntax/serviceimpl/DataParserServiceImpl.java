@@ -14,7 +14,17 @@ public class DataParserServiceImpl implements DataParserService {
 
     @Override
     public List<FruitTransaction> getTransactions(List<String> textReport) {
-        for (String s : textReport) {
+        textReportValidation(textReport);
+        return textReport.stream()
+                .map(str -> str.split(SPLITERATOR))
+                .map(strArr -> new FruitTransaction(Operation.getOperationType(
+                        strArr[OPERATION_TYPE_INDEX]), strArr[FRUIT_TYPE_INDEX],
+                        Integer.parseInt(strArr[FRUIT_QUANTITY_INDEX])))
+                .toList();
+    }
+
+    private void textReportValidation(List<String> list) {
+        for (String s : list) {
             String[] splittedFields = s.split(SPLITERATOR);
             if (splittedFields.length != 3) {
                 throw new InvalidDataException("Invalid input data, amount of fields"
@@ -35,12 +45,5 @@ public class DataParserServiceImpl implements DataParserService {
                         + splittedFields[OPERATION_TYPE_INDEX]);
             }
         }
-
-        return textReport.stream()
-                .map(str -> str.split(SPLITERATOR))
-                .map(strArr -> new FruitTransaction(Operation.getOperationType(
-                        strArr[OPERATION_TYPE_INDEX]), strArr[FRUIT_TYPE_INDEX],
-                        Integer.parseInt(strArr[FRUIT_QUANTITY_INDEX])))
-                .toList();
     }
 }

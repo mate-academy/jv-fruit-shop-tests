@@ -31,7 +31,7 @@ public class ReadServiceImplTest {
 
     @Test
     public void test_ReadNonexistentFile_notOk() {
-        assertThrows(RuntimeException.class, () ->
-                readService.readFromFile(PATH_TO_NONEXISTENT_FILE));
+        assertThrows(RuntimeException.class, ()
+                -> readService.readFromFile(PATH_TO_NONEXISTENT_FILE));
     }
 }

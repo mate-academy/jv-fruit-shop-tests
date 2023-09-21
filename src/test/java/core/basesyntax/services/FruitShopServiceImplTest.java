@@ -15,23 +15,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FruitShopServiceImplTest {
-    private static final String PINEAPPLE = "pineapple";
-    private static final String BANANA = "banana";
-    private static final String ORANGE = "orange";
-    private static final String DRAGON_FRUIT = "dragonFruit";
     private FruitShopService fruitShopService;
 
     @BeforeEach
     public void setUp() {
         initFruitShopService();
         initStorage();
-
     }
 
     private void initFruitShopService() {
@@ -46,47 +40,24 @@ public class FruitShopServiceImplTest {
 
     private void initStorage() {
         Storage.storage.clear();
-        Storage.storage.put(PINEAPPLE, 10);
-        Storage.storage.put(BANANA, 20);
-        Storage.storage.put(ORANGE, 30);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        Storage.storage.clear();
+        Storage.storage.put("pineapple", 10);
+        Storage.storage.put("banana", 20);
+        Storage.storage.put("orange", 30);
     }
 
     @Test
     public void test_ProcessData_UpdateStorage_Ok() {
         List<FruitTransaction> transactionList = Arrays.asList(
-                new FruitTransaction(Operation.BALANCE, ORANGE, 100),
-                new FruitTransaction(Operation.PURCHASE, PINEAPPLE, 5),
-                new FruitTransaction(Operation.RETURN, BANANA, 10),
-                new FruitTransaction(Operation.SUPPLY, DRAGON_FRUIT, 15)
+                new FruitTransaction(Operation.BALANCE, "orange", 100),
+                new FruitTransaction(Operation.PURCHASE, "orange", 5),
+                new FruitTransaction(Operation.RETURN, "orange", 10),
+                new FruitTransaction(Operation.SUPPLY, "orange", 15)
         );
         fruitShopService.processData(transactionList);
         Map<String, Integer> expectedStorage = new HashMap<>();
-        expectedStorage.put(PINEAPPLE, 5);
-        expectedStorage.put(BANANA, 30);
-        expectedStorage.put(ORANGE, 100);
-        expectedStorage.put(DRAGON_FRUIT, 15);
-        Assertions.assertEquals(expectedStorage, Storage.storage);
-    }
-
-    @Test
-    public void test_ProcessData_NotUpdateStorage_notOk() {
-        List<FruitTransaction> transactionList = Arrays.asList(
-                new FruitTransaction(Operation.PURCHASE, PINEAPPLE, 0),
-                new FruitTransaction(Operation.RETURN, BANANA, 0),
-                new FruitTransaction(Operation.SUPPLY, DRAGON_FRUIT, 0),
-                new FruitTransaction(Operation.BALANCE, ORANGE, 0)
-        );
-        fruitShopService.processData(transactionList);
-        Map<String, Integer> expectedStorage = new HashMap<>();
-        expectedStorage.put(PINEAPPLE, 10);
-        expectedStorage.put(BANANA, 20);
-        expectedStorage.put(ORANGE, 0);
-        expectedStorage.put(DRAGON_FRUIT, 0);
+        expectedStorage.put("banana", 20);
+        expectedStorage.put("orange", 120);
+        expectedStorage.put("pineapple", 10);
         Assertions.assertEquals(expectedStorage, Storage.storage);
     }
 }

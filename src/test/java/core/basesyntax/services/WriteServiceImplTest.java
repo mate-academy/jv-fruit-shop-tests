@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 public class WriteServiceImplTest {
     private static final String PATH_TO_FILE = "src/test/java/resources/report.csv";
     private static final String INVALID_PATH = "invalid/path/to/file";
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static WriteServiceImpl writeService;
 
     @BeforeAll
@@ -25,12 +24,12 @@ public class WriteServiceImplTest {
 
     @Test
     public void writeToFile_Ok() throws IOException {
-        String expectedReport = "fruit,quantity" + LINE_SEPARATOR
-                + "apple,20" + LINE_SEPARATOR
-                + "banana,50" + LINE_SEPARATOR
-                + "orange,30" + LINE_SEPARATOR;
+        String expectedReport = "fruit,quantity" + System.lineSeparator()
+                + "apple,20" + System.lineSeparator()
+                + "banana,50" + System.lineSeparator()
+                + "orange,30" + System.lineSeparator();
         writeService.writeToFile(PATH_TO_FILE, expectedReport);
-        List<String> expectedLines = Arrays.asList(expectedReport.split(LINE_SEPARATOR));
+        List<String> expectedLines = Arrays.asList(expectedReport.split(System.lineSeparator()));
         List<String> actualLines = Files.readAllLines(Path.of(PATH_TO_FILE));
         assertEquals(expectedLines.size(), expectedLines.size());
         for (int i = 0; i < expectedLines.size(); i++) {
@@ -40,13 +39,13 @@ public class WriteServiceImplTest {
 
     @Test
     public void writeToFile_InvalidPath_notOk() {
-        String report = "fruit,quantity" + LINE_SEPARATOR
+        String report = "fruit,quantity" + System.lineSeparator()
                 + "apple,20"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "banana,50"
-                + LINE_SEPARATOR
+                + System.lineSeparator()
                 + "orange,30"
-                + LINE_SEPARATOR;
+                + System.lineSeparator();
         assertThrows(RuntimeException.class, ()
                 -> writeService.writeToFile(INVALID_PATH, report));
     }

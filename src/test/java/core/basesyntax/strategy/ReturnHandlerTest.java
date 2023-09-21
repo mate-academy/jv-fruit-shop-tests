@@ -6,7 +6,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.handler.impl.ReturnHandler;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +15,8 @@ public class ReturnHandlerTest {
 
     @BeforeEach
     public void setUp() {
-        returnHandler = new ReturnHandler();
-    }
-
-    @AfterEach
-    public void tearDown() {
         Storage.storage.clear();
+        returnHandler = new ReturnHandler();
     }
 
     @Test

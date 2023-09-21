@@ -7,29 +7,22 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.handler.impl.BalanceHandler;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceHandlerTest {
-    private static final String VALID_FRUIT_NAME = "dragonFruit";
-    private static final int INITIAL_BALANCE = 10;
     private BalanceHandler balanceHandler;
 
     @BeforeEach
     public void setUp() {
-        balanceHandler = new BalanceHandler();
-    }
-
-    @AfterEach
-    public void tearDown() {
         Storage.storage.clear();
+        balanceHandler = new BalanceHandler();
     }
 
     @Test
     public void handle_NegativeQuantity_notOk() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.PURCHASE, VALID_FRUIT_NAME, -10);
+                new FruitTransaction(Operation.PURCHASE, "dragonFruit", -10);
         IllegalArgumentException exception =
                 assertThrows(IllegalArgumentException.class, ()
                         -> balanceHandler.handle(fruitTransaction));
@@ -40,7 +33,7 @@ public class BalanceHandlerTest {
     @Test
     public void handle_InvalidTransaction_NotOk() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(null, null, INITIAL_BALANCE);
+                new FruitTransaction(null, null, 10);
         NullPointerException exception = assertThrows(NullPointerException.class,
                 () -> balanceHandler.handle(fruitTransaction));
         assertEquals("Invalid transaction, something is null!",
@@ -50,8 +43,8 @@ public class BalanceHandlerTest {
     @Test
     public void handle_ValidTransaction_Ok() {
         FruitTransaction fruitTransaction =
-                new FruitTransaction(Operation.BALANCE, VALID_FRUIT_NAME, INITIAL_BALANCE);
+                new FruitTransaction(Operation.BALANCE, "dragonFruit", 10);
         balanceHandler.handle(fruitTransaction);
-        assertEquals(INITIAL_BALANCE, Storage.storage.get(VALID_FRUIT_NAME));
+        assertEquals(10, Storage.storage.get("dragonFruit"));
     }
 }

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
-    private static final String OUTPUT_FILE = "src/test/resources/test_input.csv";
+    private static final String OUTPUT_FILE = "src/test/resources/test_output.csv";
     private static final String NON_EXISTENT_OUTPUT_FILE = "src/test/someResources/shop_input.csv";
     private static final String EXPECTED_OUTPUT = "fruit,quantity" + System.lineSeparator()
                                                     + "banana,90" + System.lineSeparator()

@@ -37,9 +37,9 @@ class ReportCreatorServiceImplTest {
     void report_NonValidDataAfterProcessing_NotOk() {
         Storage.getStorage().put("banana", 100);
         Storage.getStorage().put("apple", 100);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,100" + System.lineSeparator()
-                + "apple,100";
+        String expected = "quantity,fruit" + System.lineSeparator()
+                   + "banana,-1" + System.lineSeparator()
+                   + "apple,-1";
         assertNotEquals(expected, reportCreatorService.createReport());
     }
 

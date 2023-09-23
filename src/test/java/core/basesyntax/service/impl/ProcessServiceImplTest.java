@@ -28,7 +28,6 @@ class ProcessServiceImplTest {
                 ActivityType.PURCHASE, new PurchaseOperationsHandler(),
                 ActivityType.RETURN, new ReturnOperationsHandler()
         ));
-
     }
 
     @AfterEach

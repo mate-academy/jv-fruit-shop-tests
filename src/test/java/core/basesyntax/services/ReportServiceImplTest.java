@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportServiceImplTest {
-
     private static final String HEAD_STRING = "fruit,quantity" + System.lineSeparator();
     private static ReportServiceImpl reportService;
 

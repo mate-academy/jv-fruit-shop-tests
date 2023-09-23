@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ParseServiceImplTest {
-
     private ParseServiceImpl parseService;
 
     @BeforeEach
@@ -29,7 +28,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void test_ParseWithEmptyInput() {
+    public void test_ParseWithEmptyInput_Ok() {
         List<FruitTransaction> resultFruit = parseService.parse(Collections.emptyList());
         assertNotNull(resultFruit);
         assertTrue(resultFruit.isEmpty());

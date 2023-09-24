@@ -1,16 +1,16 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.FruitShopException;
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private static final String FIRST_ROW = "fruit,quantity" + System.lineSeparator();
+    //private static final String FIRST_ROW = "fruit,quantity" + System.lineSeparator();
     private static ReportService reportService;
 
     @BeforeAll
@@ -19,20 +19,22 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void validReport_Ok() {
+    void create_validReport_Ok() {
         Storage.STORAGE.put("banana", 20);
         Storage.STORAGE.put("apple", 15);
-        String expected = FIRST_ROW
-                + "banana,20"
-                + System.lineSeparator()
-                + "apple,15"
-                + System.lineSeparator();
+        StringBuilder expected = new StringBuilder();
+        expected.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,20")
+                .append(System.lineSeparator())
+                .append("apple,15")
+                .append(System.lineSeparator());
         String actual = reportService.createReport();
-        assertEquals(expected, actual);
+        assertEquals(expected.toString(), actual);
     }
 
     @Test
-    void emptyReport_NotOk() {
+    void create_emptyReport_NotOk() {
         assertThrows(FruitShopException.class, () -> reportService.createReport());
     }
 }

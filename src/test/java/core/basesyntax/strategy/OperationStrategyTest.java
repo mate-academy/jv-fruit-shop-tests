@@ -28,11 +28,11 @@ class OperationStrategyTest {
         operationHandlerMap.put(
                 FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationStrategy = new OperationStrategy(operationHandlerMap);
+        operationHandler = new SupplyOperationHandler();
     }
 
     @Test
     void getSuppleHandler_Ok() {
-        operationHandler = new SupplyOperationHandler();
         assertEquals(operationHandler.getClass(),
                 operationStrategy.get(FruitTransaction.Operation.SUPPLY).getClass());
     }

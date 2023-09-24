@@ -1,19 +1,17 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.FruitShopException;
-import core.basesyntax.service.ReadService;
+import core.basesyntax.service.impl.ReadServiceImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReadServiceImplTest {
-    private static final String INVALID_PATH = "src/main/java/resources/invalid.csv";
-    private static final String VALID_PATH = "src/main/java/resources/input.csv";
-    private static ReadService readService;
     private static List<String> expectedList;
+    private static ReadService readService;
 
     @BeforeAll
     static void beforeAll() {
@@ -30,13 +28,14 @@ class ReadServiceImplTest {
     }
 
     @Test
-    void readInputData_Ok() {
-        List<String> actualList = readService.readInputData(VALID_PATH);
+    void readData_input_Ok() {
+        List<String> actualList = readService.readInputData("src/main/java/resources/input.csv");
         assertEquals(expectedList, actualList);
     }
 
     @Test
-    void invalidPath_notOk() {
-        assertThrows(FruitShopException.class, () -> readService.readInputData(INVALID_PATH));
+    void readData_invalidPath_notOk() {
+        assertThrows(FruitShopException.class, () ->
+                readService.readInputData("src/main/java/resources/invalid.csv"));
     }
 }

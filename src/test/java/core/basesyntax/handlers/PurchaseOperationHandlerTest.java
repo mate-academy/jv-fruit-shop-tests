@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.excteption.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,7 +25,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void processPurchaseOperation_ok() {
+    void purchaseHandler_ValidData_ok() {
         Storage.STORAGE.put("banana", 100);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 70
@@ -35,7 +36,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void processPurchaseOperation_nullFruit_notOk() {
+    void purchaseHandler_nullFruit_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, null, 10
@@ -45,22 +46,22 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void processPurchaseOperation_negativeNumberOfFruits_notOk() {
+    void purchaseHandler_NegativeQuantity_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", -100
         );
-        assertThrows(RuntimeException.class,
+        assertThrows(InvalidDataException.class,
                 () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
     }
 
     @Test
-    void processPurchaseOperation_quantityMoreAmount_notOk() {
+    void purchaseHandler_quantityMoreAmount_notOk() {
         Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE, "banana", 70
         );
-        assertThrows(RuntimeException.class,
+        assertThrows(InvalidDataException.class,
                 () -> purchaseOperationHandler.calculateOperation(fruitTransaction));
     }
 }

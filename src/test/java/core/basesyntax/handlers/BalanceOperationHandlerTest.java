@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.excteption.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,7 +25,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void calculateOperation_ok() {
+    void addSomeFruit_BalanceOperation_Ok() {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", 120
         );
@@ -40,17 +41,17 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void calculateOperation_negativeQuantity_notOk() {
+    void addFruits_NegativeQuantity_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "banana", -100
         );
-        assertThrows(RuntimeException.class,
+        assertThrows(InvalidDataException.class,
                 () -> balanceOperationHandler.calculateOperation(bananaTransaction)
         );
     }
 
     @Test
-    void calculateOperation_nullFruit_notOk() {
+    void addFruits_nullFruit_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, null, 100
         );
@@ -60,7 +61,7 @@ public class BalanceOperationHandlerTest {
     }
 
     @Test
-    void calculateOperation_nullOperationType_notOk() {
+    void addFruits_NullOperationType_notOk() {
         FruitTransaction bananaTransaction = new FruitTransaction(
                 null, "banana", 100
         );

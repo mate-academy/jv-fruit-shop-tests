@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterServiceImplTest {
-    private DataConverterService dataConverterService = new DataConverterServiceImpl();
+    private final DataConverterService dataConverterService = new DataConverterServiceImpl();
 
     @Test
     void convertData_invalidOperation_notOk() {

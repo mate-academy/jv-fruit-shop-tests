@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaceOperationTest {
-    private OperationService purchaseOperation = new PurchaceOperation();
+    private final OperationService purchaseOperation = new PurchaceOperation();
 
     @Test
     void processPurchaseOperation_quantityLessThanAmount_notOk() {

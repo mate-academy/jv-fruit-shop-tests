@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
-    private OperationService balanceOperation = new BalanceOperation();
+    private final OperationService balanceOperation = new BalanceOperation();
 
     @Test
     void processBalanceOperation_OK() {

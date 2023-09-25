@@ -9,16 +9,16 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderServiceImplTest {
-    private ReaderService fileReaderService = new FileReaderServiceImpl();
+    private final ReaderService fileReaderService = new FileReaderServiceImpl();
 
     @Test
-    void readFromNonExistingDirectory_notOk() {
+    void readFromFileFromNonExistingDirectory_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReaderService.readFromFile("src/main/resources/wrongFile.txt"));
     }
 
     @Test
-    void readFromExistingDirectory_Ok() {
+    void readFromFileFromExistingDirectory_Ok() {
         assertDoesNotThrow(
                 () -> fileReaderService.readFromFile("src/main/resources/text.txt"));
         List<String> actual = fileReaderService.readFromFile("src/main/resources/text.txt");

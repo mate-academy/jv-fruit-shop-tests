@@ -11,7 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
-    private OperationService returnOperation = new ReturnOperation();
+    private final OperationService returnOperation = new ReturnOperation();
 
     @Test
     void processReturnOperation_ok() {

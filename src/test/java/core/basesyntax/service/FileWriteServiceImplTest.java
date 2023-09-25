@@ -12,7 +12,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 public class FileWriteServiceImplTest {
-    private FileWriteService fileWriteService = new FileWriteServiceImpl();
+    private final FileWriteService fileWriteService = new FileWriteServiceImpl();
 
     @Test
     void writeToFile_inInvalidDirectory_notOk() {

@@ -8,6 +8,7 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void calculateOperation(FruitTransaction transaction) {
+
         if (transaction.getQuantity() < 0) {
             throw new InvalidDataException("Negative quantity");
         } else if (transaction.getFruit() == null) {
@@ -17,7 +18,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int quantity = transaction.getQuantity();
         int purchaseResult = currentAmount - quantity;
         if (purchaseResult < 0) {
-            throw new RuntimeException("Not enough fruits in storage");
+            throw new InvalidDataException("Not enough fruits in storage");
         }
         Storage.STORAGE.put(transaction.getFruit(), purchaseResult);
     }

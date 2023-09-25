@@ -32,8 +32,7 @@ class WriterServiceImplTest {
 
     @Test
     void testWriteToFileWithIOexception() {
-        assertThrows(IOException.class, () -> {
-            writerService.writeToFile("Data", "/nonexistentfolder/nonexistentfile.txt\"");
-        });
+        assertThrows(IOException.class, () -> writerService.writeToFile("Data",
+                "/nonexistentfolder/nonexistentfile.txt\""));
     }
 }

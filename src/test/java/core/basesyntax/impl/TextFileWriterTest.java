@@ -33,8 +33,7 @@ class TextFileWriterTest {
 
     @Test
     void testWriteTextFileWithIoexception() {
-        assertThrows(IOException.class, () -> {
-            textFileWriter.writeText("Text", "nonexistentfolder/nonexistentfile.txt");
-        });
+        assertThrows(IOException.class, () -> textFileWriter.writeText("Text",
+                "nonexistentfolder/nonexistentfile.txt"));
     }
 }

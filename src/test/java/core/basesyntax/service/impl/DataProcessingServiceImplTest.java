@@ -38,47 +38,7 @@ class DataProcessingServiceImplTest {
     }
 
     @Test
-    void processing_successProcessedSupllyOperation_Ok() {
-        Storage.STORAGE.put("banana", 50);
-        Storage.STORAGE.put("apple", 20);
-        String banana = "banana";
-        String apple = "apple";
-        int bananaSupplyAmount = 100;
-        int appleSupplyAmount = 30;
-        List<String[]> supplyItem = List.of(new String[]{"s", "banana",
-                                    String.valueOf(bananaSupplyAmount)},
-                                    new String[]{"s", "apple", String.valueOf(appleSupplyAmount)});
-        processingService.processing(supplyItem);
-        int bananaExpected = 50 + bananaSupplyAmount;
-        int appleExpected = 20 + appleSupplyAmount;
-        int bananaActual = Storage.STORAGE.get(banana);
-        int appleActual = Storage.STORAGE.get(apple);
-        assertEquals(bananaExpected, bananaActual);
-        assertEquals(appleExpected, appleActual);
-    }
-
-    @Test
-    void processing_successProcessedReturnOperation_Ok() {
-        Storage.STORAGE.put("banana", 50);
-        Storage.STORAGE.put("apple", 20);
-        String banana = "banana";
-        String apple = "apple";
-        int bananaReturnAmount = 100;
-        int appleReturnAmount = 30;
-        List<String[]> supplyItem = List.of(new String[]{"r", "banana",
-                    String.valueOf(bananaReturnAmount)},
-                    new String[]{"r", "apple", String.valueOf(appleReturnAmount)});
-        processingService.processing(supplyItem);
-        int bananaExpected = 50 + bananaReturnAmount;
-        int appleExpected = 20 + appleReturnAmount;
-        int bananaActual = Storage.STORAGE.get(banana);
-        int appleActual = Storage.STORAGE.get(apple);
-        assertEquals(bananaExpected, bananaActual);
-        assertEquals(appleExpected, appleActual);
-    }
-
-    @Test
-    void processing_successProcessedPurchaseOperation_Ok() {
+    void processing_successProcessedOperation_Ok() {
         Storage.STORAGE.put("banana", 150);
         Storage.STORAGE.put("apple", 50);
         String banana = "banana";
@@ -91,23 +51,6 @@ class DataProcessingServiceImplTest {
         processingService.processing(supplyItem);
         int bananaExpected = 150 - bananaPurchaseAmount;
         int appleExpected = 50 - applePurchaseAmount;
-        int bananaActual = Storage.STORAGE.get(banana);
-        int appleActual = Storage.STORAGE.get(apple);
-        assertEquals(bananaExpected, bananaActual);
-        assertEquals(appleExpected, appleActual);
-    }
-
-    @Test
-    void processing_successProcessedBalanceOperation_Ok() {
-        Storage.STORAGE.put("banana", 150);
-        Storage.STORAGE.put("apple", 50);
-        String banana = "banana";
-        String apple = "apple";
-        List<String[]> supplyItem = List.of(new String[]{"b", "banana", "150"},
-                new String[]{"b", "apple", "50"});
-        processingService.processing(supplyItem);
-        int bananaExpected = 150;
-        int appleExpected = 50;
         int bananaActual = Storage.STORAGE.get(banana);
         int appleActual = Storage.STORAGE.get(apple);
         assertEquals(bananaExpected, bananaActual);

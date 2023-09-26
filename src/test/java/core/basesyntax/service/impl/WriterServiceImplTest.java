@@ -16,9 +16,14 @@ class WriterServiceImplTest {
 
     @BeforeAll
     static void beforeAll() {
+        StringBuilder builder = new StringBuilder();
         writerService = new WriterServiceImpl();
-        reportData = "fruit,quantity" + System.lineSeparator()
-                + "banana,152" + System.lineSeparator() + "apple,90";
+        builder.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,152")
+                .append(System.lineSeparator())
+                .append("apple,90");
+        reportData = builder.toString();
     }
 
     @Test
@@ -38,8 +43,13 @@ class WriterServiceImplTest {
     @Test
     void writeToFile_correctWrittenReport_Ok() {
         String pathToFile = "src/main/resources/report.csv";
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,152" + System.lineSeparator() + "apple,90";
+        StringBuilder builder = new StringBuilder();
+        builder.append("fruit,quantity")
+                .append(System.lineSeparator())
+                .append("banana,152")
+                .append(System.lineSeparator())
+                .append("apple,90");
+        String expected = builder.toString();
         writerService.writeToFile(reportData, pathToFile);
         String actual;
         byte[] bytes;

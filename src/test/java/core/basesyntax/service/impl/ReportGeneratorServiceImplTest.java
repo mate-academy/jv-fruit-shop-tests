@@ -9,9 +9,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorServiceImplTest {
-    private static final List<String> EXPECTED_RESULT = List.of(
-            "fruit,quantity", "banana,90", "apple,100");
+    private static final List<String> EXPECTED_RESULT = expectedResultCreator();
     private static ReportGeneratorService reportGeneratorService;
+
+    private static List<String> expectedResultCreator() {
+        return List.of("fruit,quantity", "banana,90", "apple,100");
+    }
 
     @BeforeAll
     static void beforeAll() {

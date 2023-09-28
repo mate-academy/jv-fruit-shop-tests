@@ -15,10 +15,16 @@ public class FileWriterServiceImplTest {
     private static FileWriterService fileWriterService;
     private static final String OUTPUT_FILE = "src/test/resources/test_output.csv";
     private static final String NON_EXISTENT_OUTPUT_FILE = "src/test/someResources/shop_input.csv";
-    private static final String EXPECTED_OUTPUT = "fruit,quantity" + System.lineSeparator()
-                                                    + "banana,90" + System.lineSeparator()
-                                                    + "apple,100" + System.lineSeparator();
+    private static final String EXPECTED_OUTPUT = expectedOutputCreator();
     private static List<String> output;
+
+    private static String expectedOutputCreator() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("fruit,quantity").append(System.lineSeparator())
+                .append("banana,90").append(System.lineSeparator())
+                .append("apple,100").append(System.lineSeparator());
+        return sb.toString();
+    }
 
     @BeforeAll
     static void beforeAll() {

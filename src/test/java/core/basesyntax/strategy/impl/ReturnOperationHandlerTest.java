@@ -8,7 +8,6 @@ import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationHandlerTest {
@@ -19,11 +18,6 @@ public class ReturnOperationHandlerTest {
         operationHandler = new ReturnOperationHandler();
     }
 
-    @BeforeEach
-    void setUp() {
-        Storage.STORAGE.put("banana", 20);
-    }
-
     @AfterEach
     void tearDown() {
         Storage.STORAGE.clear();
@@ -31,6 +25,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     void updateNumberOfFruit_valid_Ok() {
+        Storage.STORAGE.put("banana", 20);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(20);
         fruitTransaction.setFruit("banana");

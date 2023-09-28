@@ -20,12 +20,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataProcessorServiceImplTest {
-    private static OperationStrategy operationStrategy;
     private static DataProcessorService dataProcessorService;
 
     @BeforeAll
     static void beforeAll() {
-        operationStrategy = new OperationStrategyImpl(Map.of(
+        OperationStrategy operationStrategy = new OperationStrategyImpl(Map.of(
                 Operation.BALANCE, new BalanceOperationHandler(),
                 Operation.PURCHASE, new BuyOperationHandler(),
                 Operation.RETURN, new ReturnOperationHandler(),
@@ -53,7 +52,7 @@ public class DataProcessorServiceImplTest {
     }
 
     @Test
-    void update_ok() {
+    void updateDataInStorage_validData_ok() {
         List<String> data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b,banana,1");

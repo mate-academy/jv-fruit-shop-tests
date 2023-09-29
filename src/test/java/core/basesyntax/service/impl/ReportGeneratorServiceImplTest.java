@@ -9,12 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorServiceImplTest {
-    private static final List<String> EXPECTED_RESULT = expectedResultCreator();
     private static ReportGeneratorService reportGeneratorService;
-
-    private static List<String> expectedResultCreator() {
-        return List.of("fruit,quantity", "banana,90", "apple,100");
-    }
 
     @BeforeAll
     static void beforeAll() {
@@ -26,6 +21,7 @@ public class ReportGeneratorServiceImplTest {
 
     @Test
     void createReport_correctReport_Ok() {
-        assertEquals(EXPECTED_RESULT, reportGeneratorService.generateReport());
+        List<String> expected = List.of("fruit,quantity", "banana,90", "apple,100");
+        assertEquals(expected, reportGeneratorService.generateReport());
     }
 }

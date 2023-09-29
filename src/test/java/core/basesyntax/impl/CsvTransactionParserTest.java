@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CsvTransactionParserTest {
+public class CsvTransactionParserTest {
     private TransactionParser transactionParser;
 
     @BeforeEach

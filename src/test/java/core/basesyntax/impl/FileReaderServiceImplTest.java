@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,9 +20,16 @@ class FileReaderServiceImplTest {
     void setUp() throws IOException {
         fileReaderService = new FileReaderServiceImpl();
         tempFile = File.createTempFile("testFile", ".txt");
-        FileWriter writer = new FileWriter(tempFile);
-        writer.write("Line 1\nLine 2\nLine 3");
-        writer.close();
+        try (FileWriter writer = new FileWriter(tempFile)) {
+            writer.write("Line 1\nLine 2\nLine 3");
+        }
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (tempFile != null && tempFile.exists()) {
+            tempFile.delete();
+        }
     }
 
     @Test

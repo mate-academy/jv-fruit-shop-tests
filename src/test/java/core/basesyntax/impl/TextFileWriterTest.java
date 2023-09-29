@@ -21,7 +21,7 @@ class TextFileWriterTest {
     }
 
     @Test
-    void testWriteTextToFile() throws IOException {
+    void writeText_ValidTextAndFilePath_TextWrittenToFile() throws IOException {
         String text = "This is a test text.";
         textFileWriter.writeText(text, tempFilePath);
 
@@ -32,7 +32,7 @@ class TextFileWriterTest {
     }
 
     @Test
-    void testWriteTextFileWithIoexception() {
+    void writeText_InvalidFilePath_IoExceptionThrown() {
         assertThrows(IOException.class, () -> textFileWriter.writeText("Text",
                 "nonexistentfolder/nonexistentfile.txt"));
     }

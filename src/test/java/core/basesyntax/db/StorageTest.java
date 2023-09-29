@@ -16,7 +16,7 @@ class StorageTest {
     }
 
     @Test
-    public void testGetFruitInventory() {
+    public void testFruitInventoryIsEmptyInitially() {
         assertTrue(storage.getFruitInventory().isEmpty());
     }
 

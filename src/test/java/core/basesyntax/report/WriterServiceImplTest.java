@@ -21,7 +21,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void testWriteToFile() throws IOException {
+    void writeToFile_ValidData_FileContainsData() throws IOException {
         String data = "This is a test data";
         writerService.writeToFile(data, outputPath);
 
@@ -31,8 +31,8 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void testWriteToFileWithIOexception() {
+    void writeToFile_InvalidPath_IOexceptionThrown() {
         assertThrows(IOException.class, () -> writerService.writeToFile("Data",
-                "/nonexistentfolder/nonexistentfile.txt\""));
+                "/nonexistentfolder/nonexistentfile.txt"));
     }
 }

@@ -11,15 +11,16 @@ import org.junit.jupiter.api.Test;
 class FruitReportCreatorTest {
 
     private static Storage storage;
+    private static ReportCreator report;
 
     @BeforeAll
     public static void setUp() {
         storage = new FruitStorage();
+        report = new FruitReportCreator(storage);
     }
 
     @Test
     public void getReport_emptyStorage_Ok() {
-        ReportCreator report = new FruitReportCreator(storage);
         String expected = "fruit, quantity\n";
         String actual = report.createReport();
         Assert.assertEquals(expected, actual);
@@ -31,7 +32,6 @@ class FruitReportCreatorTest {
         storage.addFruitInQuantity("orange",12);
         storage.addFruitInQuantity("pineapple", 3);
         String expected = "fruit, quantity\nbanana,20\norange,12\npineapple,3\n";
-        ReportCreator report = new FruitReportCreator(storage);
         String actual = report.createReport();
         Assert.assertEquals(expected, actual);
     }

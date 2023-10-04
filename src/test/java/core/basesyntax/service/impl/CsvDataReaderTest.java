@@ -4,20 +4,26 @@ import core.basesyntax.service.ReaderService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvDataReaderTest {
 
+    private static ReaderService readerService;
+
+    @BeforeAll
+    public static void setUp() {
+        readerService = new CsvDataReader();
+    }
+
     @Test
     public void readFromFile_invalidPath_notOk() {
-        ReaderService readerService = new CsvDataReader();
         String invalidPath = "src/tes/resources/inputTest.csv";
         Assert.assertThrows(RuntimeException.class, () -> readerService.readFromFile(invalidPath));
     }
 
     @Test
     public void readFromFile_validPath_Ok() {
-        ReaderService readerService = new CsvDataReader();
         String validPath = "src/test/resources/inputTest.csv";
         List<String[]> expected = new ArrayList<>();
         expected.add(new String[]{"type", "fruit", "quantity"});

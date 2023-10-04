@@ -48,5 +48,4 @@ class OperationPurchaseTest {
     public static void clear() {
         storage.removeAllItems();
     }
-
 }

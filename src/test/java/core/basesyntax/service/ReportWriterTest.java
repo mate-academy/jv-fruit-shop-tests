@@ -57,13 +57,13 @@ class ReportWriterTest {
 
         // Normal report
         reportWriter.write(normalReport, fileName);
-        Assertions.assertEquals(38, file.length(),
+        Assertions.assertEquals(32 + System.lineSeparator().length() * 3, file.length(),
                 "Does not match file length: expected "
                         + "38, exist " + file.length());
 
         // If file exist
         reportWriter.write(normalReport, fileName);
-        Assertions.assertEquals(38, file.length(),
+        Assertions.assertEquals(32 + System.lineSeparator().length() * 3, file.length(),
                 "Does not match file length: expected "
                         + "38, exist " + file.length());
     }

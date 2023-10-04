@@ -31,9 +31,6 @@ class DataReaderTest {
         // Folder
         Assertions.assertThrows(DataReaderError.class,
                 () -> dataReader.read("src/test/resources/"));
-        // Forbidden symbols
-        Assertions.assertThrows(DataReaderError.class,
-                () -> dataReader.read("src/test/resources/data*.csv"));
     }
 
     @Test

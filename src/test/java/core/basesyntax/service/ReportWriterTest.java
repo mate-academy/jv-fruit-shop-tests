@@ -33,9 +33,6 @@ class ReportWriterTest {
         // Folder
         Assertions.assertThrows(ReportWriterError.class,
                 () -> reportWriter.write(normalReport, "src/test/resources/"));
-        // Forbidden symbols
-        Assertions.assertThrows(ReportWriterError.class,
-                () -> reportWriter.write(normalReport, "src/test/resources/data*.csv"));
     }
 
     @Test

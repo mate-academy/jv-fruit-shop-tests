@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class FruitReportCreatorTest {
 
-    public static Storage storage;
+    private static Storage storage;
 
     @BeforeAll
     public static void setUp() {

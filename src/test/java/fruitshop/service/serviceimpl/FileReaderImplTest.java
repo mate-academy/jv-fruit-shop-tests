@@ -19,14 +19,12 @@ class FileReaderImplTest {
 
     @Test
     void readDataFromFile_filaNameIsNull_notOk() {
-        String fileName = null;
-        assertThrows(NullPointerException.class, () -> reader.readDataFromFile(fileName));
+        assertThrows(NullPointerException.class, () -> reader.readDataFromFile(null));
     }
 
     @Test
-    void readDataFromFile_filaNameDoesntExist_notOk() {
-        String fileName = "hello";
-        assertThrows(RuntimeException.class, () -> reader.readDataFromFile(fileName));
+    void readDataFromFile_fileNameDoesntExist_notOk() {
+        assertThrows(RuntimeException.class, () -> reader.readDataFromFile("hello"));
     }
 
     @Test

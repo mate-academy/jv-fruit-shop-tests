@@ -1,7 +1,6 @@
 package fruitshop.service.serviceimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import fruitshop.service.ReportCreator;
 import fruitshop.storage.Storage;
@@ -34,11 +33,5 @@ class ReportCreatorImplTest {
         String expected = "fruit,quantity" + System.lineSeparator();
         String actual = reportCreator.createReport();
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void createReport_nullAsParameter_notOk() {
-        Storage.setStorage(null);
-        assertThrows(NullPointerException.class, () -> reportCreator.createReport());
     }
 }

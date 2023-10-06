@@ -15,9 +15,11 @@ import org.junit.jupiter.api.Test;
 
 class OperationStrategyTest {
     private OperationStrategy operationStrategy;
+    private OperationHandler expected;
 
     @BeforeEach
     void setUp() {
+        expected = new SupplyOperationHandler();
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
@@ -28,7 +30,6 @@ class OperationStrategyTest {
 
     @Test
     void getOperationHandler_validCase_ok() {
-        OperationHandler expected = new SupplyOperationHandler();
         Operation operation = Operation.SUPPLY;
         OperationHandler actual = operationStrategy.getOperationHandler(operation);
         assertEquals(expected.getClass(), actual.getClass());

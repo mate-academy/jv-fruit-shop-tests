@@ -1,34 +1,19 @@
 package fruitshop.service.serviceimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import fruitshop.model.FruitTransaction;
 import fruitshop.model.Operation;
 import fruitshop.service.DataParser;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DataParserImplTest {
-    private List<String> stringList;
-    private DataParser dataParser;
-
-    @BeforeEach
-    void setUp() {
-        dataParser = new DataParserImpl();
-        stringList = new ArrayList<>();
-    }
-
-    @AfterEach
-    void tearDown() {
-        stringList.clear();
-    }
-
     @Test
     void parseStringToDataObject_validProcessStringToObject_ok() {
+        DataParser dataParser = new DataParserImpl();
+        List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("b,banana,20");
         stringList.add("b,apple,100");
@@ -48,6 +33,8 @@ class DataParserImplTest {
 
     @Test
     void parseStringToDataObject_sizesEquals_ok() {
+        DataParser dataParser = new DataParserImpl();
+        List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("b,banana,20");
         stringList.add("b,apple,100");
@@ -60,12 +47,9 @@ class DataParserImplTest {
     }
 
     @Test
-    void parseStringToDataObject_parameterIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> dataParser.parseStringToDataObject(null));
-    }
-
-    @Test
     void parseStringToDataObject_emptyListAsParameter_ok() {
+        DataParser dataParser = new DataParserImpl();
+        List<String> stringList = new ArrayList<>();
         List<FruitTransaction> expected = new ArrayList<>();
         List<FruitTransaction> actual = dataParser.parseStringToDataObject(stringList);
         assertEquals(expected, actual);

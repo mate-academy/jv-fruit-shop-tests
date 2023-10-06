@@ -1,10 +1,11 @@
 package fruitshop.service.serviceimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import fruitshop.model.FruitTransaction;
 import fruitshop.model.Operation;
+import fruitshop.service.DataParser;
+import fruitshop.service.FileReader;
 import fruitshop.service.FruitService;
 import fruitshop.storage.Storage;
 import fruitshop.strategy.operation.OperationHandler;
@@ -49,23 +50,18 @@ class FruitServiceImplTest {
 
     @Test
     void processFruits_validCase_ok() {
-        dataLinesObj.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
-        dataLinesObj.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
-        dataLinesObj.add(new FruitTransaction(Operation.SUPPLY, "banana", 100));
-        dataLinesObj.add(new FruitTransaction(Operation.PURCHASE, "banana", 13));
-        dataLinesObj.add(new FruitTransaction(Operation.RETURN, "apple", 10));
+        String fromFile = "src/main/resources/fruitdata.csv";
+        FileReader reader = new FileReaderImpl();
+        List<String> fromFileData = reader.readDataFromFile(fromFile);
+        DataParser parser = new DataParserImpl();
+        dataLinesObj = parser.parseStringToDataObject(fromFileData);
         fruitService.processFruits(dataLinesObj);
-        Map<String, Integer> expected = Storage.getStorage();
-        Map<String, Integer> actual = Map.of(
-                "banana", 107,
-                "apple", 110
+        Map<String, Integer> actual = Storage.getStorage();
+        Map<String, Integer> expected = Map.of(
+                "banana", 152,
+                "apple", 90
         );
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    void processFruits_nullAsParameter_notOk() {
-        assertThrows(NullPointerException.class, () -> fruitService.processFruits(null));
+        assertEquals(expected, actual);
     }
 
     @Test

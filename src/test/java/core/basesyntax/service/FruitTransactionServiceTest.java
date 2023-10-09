@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,21 +54,26 @@ class FruitTransactionServiceTest {
         fruitTransactionListEmpty = new ArrayList<>();
     }
 
+    @AfterEach
+    void tearDown() {
+        Storage.totalFruit.clear();
+    }
+
     @Test
-    void transaction_rigthData_ok() {
+    void processData_rigthData_ok() {
         fruitTransactionService.processData(fruitTransactionList);
         assertEquals(Storage.totalFruit.get("banana"), 120);
         assertEquals(Storage.totalFruit.get("apple"), 30);
     }
 
     @Test
-    void transaction_listIsEmpty_ok() {
+    void processData_listIsEmpty_ok() {
         fruitTransactionService.processData(fruitTransactionListEmpty);
         assertTrue(Storage.totalFruit.isEmpty());
     }
 
     @Test
-    void transaction_missingOperation_NotOk() {
+    void processData_missingOperation_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> fruitTransactionService.processData(fruitTransactionListNullOperation));
     }

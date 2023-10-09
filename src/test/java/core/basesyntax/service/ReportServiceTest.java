@@ -30,7 +30,7 @@ class ReportServiceTest {
     }
 
     @Test
-    void report_rightData_OK() {
+    void createReport_rightData_OK() {
         String expected = HEADER_ROW
                 + "banana,120" + System.lineSeparator()
                 + "apple,20" + System.lineSeparator();
@@ -41,7 +41,7 @@ class ReportServiceTest {
     }
 
     @Test
-    void report_storageIsEmpty() {
+    void createReport_storageIsEmpty() {
         Storage.totalFruit.clear();
         String actual = reportService.createReport();
         assertEquals(HEADER_ROW, actual, " " + actual);

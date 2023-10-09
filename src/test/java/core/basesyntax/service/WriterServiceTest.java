@@ -27,19 +27,19 @@ class WriterServiceTest {
     }
 
     @Test
-    void writer_pathIsNull_notOk() {
+    void writeToFile_pathIsNull_notOk() {
         assertThrows(RuntimeException.class,
                 () -> writerService.writeToFile(NULL_VALUE, contentToFile));
     }
 
     @Test
-    void writer_pathIsWrong_notOk() {
+    void writeToFile_pathIsWrong_notOk() {
         assertThrows(RuntimeException.class,
                 () -> writerService.writeToFile(PATH_WRONG, contentToFile));
     }
 
     @Test
-    void writer_pathIsCorrect_ok() {
+    void writeToFile_pathIsCorrect_ok() {
         writerService.writeToFile(PATH_CORRECT, contentToFile);
         try {
             String actual = Files.readString(new File(PATH_CORRECT).toPath());

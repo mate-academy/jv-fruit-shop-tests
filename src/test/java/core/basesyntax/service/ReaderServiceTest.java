@@ -26,17 +26,17 @@ class ReaderServiceTest {
     }
 
     @Test
-    void read_pathIsNull_notOk() {
+    void readFromFile_pathIsNull_notOk() {
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(NULL_VALUE));
     }
 
     @Test
-    void read_pathIsWrong_notOk() {
+    void readFromFile_pathIsWrong_notOk() {
         assertThrows(RuntimeException.class, () -> readerService.readFromFile(PATH_WRONG));
     }
 
     @Test
-    void read_pathIsCorrect_ok() {
+    void readFromFile_pathIsCorrect_ok() {
         List<String> expected = linesFromFile;
         List<String> actual = readerService.readFromFile(PATH_CORRECT);
         assertEquals(expected, actual);

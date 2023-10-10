@@ -1,15 +1,15 @@
 package service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
+import java.util.List;
 import core.basesyntax.FruitInventory;
 import core.basesyntax.FruitTransaction;
 import db.DataBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TransactionProcessorTest {
     private TransactionProcessor transactionProcessor;

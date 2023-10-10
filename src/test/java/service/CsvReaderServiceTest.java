@@ -1,23 +1,20 @@
 package service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import core.basesyntax.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class CsvReaderServiceTest {
     private CsvReaderService csvReaderService;
-    private static final String TEST_CSV_FILE_PATH = "src/test/resources/test-transactions.csv";
+    private final static String TEST_CSV_FILE_PATH = "src/test/resources/test-transactions.csv";
 
     @BeforeEach
     public void setUp() {

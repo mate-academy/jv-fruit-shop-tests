@@ -3,18 +3,18 @@ package service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.FruitTransaction;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import core.basesyntax.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvReaderServiceTest {
     private CsvReaderService csvReaderService;
-    private final static String TEST_CSV_FILE_PATH = "src/test/resources/test-transactions.csv";
+    private static final String TEST_CSV_FILE_PATH = "src/test/resources/test-transactions.csv";
 
     @BeforeEach
     public void setUp() {

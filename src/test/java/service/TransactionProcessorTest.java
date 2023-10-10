@@ -3,11 +3,11 @@ package service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.FruitInventory;
 import core.basesyntax.FruitTransaction;
 import db.DataBase;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +81,8 @@ public class TransactionProcessorTest {
         List<FruitTransaction> transactions = new ArrayList<>();
         transactions.add(new FruitTransaction(FruitTransaction.Operation.UNKNOWN, "apple", 5));
 
-        assertThrows(RuntimeException.class, () -> transactionProcessor.processTransactions(transactions));
+        assertThrows(RuntimeException.class, () ->
+                transactionProcessor.processTransactions(transactions));
     }
 
     private static class StubDataBase extends DataBase {

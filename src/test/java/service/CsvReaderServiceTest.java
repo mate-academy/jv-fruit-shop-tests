@@ -13,8 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvReaderServiceTest {
-    private CsvReaderService csvReaderService;
     private static final String TEST_CSV_FILE_PATH = "src/test/resources/test-transactions.csv";
+    private CsvReaderService csvReaderService;
 
     @BeforeEach
     public void setUp() {

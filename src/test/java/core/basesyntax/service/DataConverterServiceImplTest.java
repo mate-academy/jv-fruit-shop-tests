@@ -3,11 +3,20 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.DataConverterServiceImpl;
+
+import java.io.IOException;
 import java.util.List;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataConverterServiceImplTest {
-    private final DataConverterService dataConverterService = new DataConverterServiceImpl();
+    private static DataConverterService dataConverterService;
+
+    @BeforeAll
+    static void beforeAll() {
+        dataConverterService = new DataConverterServiceImpl();
+    }
 
     @Test
     void convertData_invalidOperation_notOk() {

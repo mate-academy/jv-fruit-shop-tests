@@ -6,10 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import java.util.List;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderServiceImplTest {
-    private final ReaderService fileReaderService = new FileReaderServiceImpl();
+    private static ReaderService fileReaderService;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     void readFromFileFromNonExistingDirectory_notOk() {

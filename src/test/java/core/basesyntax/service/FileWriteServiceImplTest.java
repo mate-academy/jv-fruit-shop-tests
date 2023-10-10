@@ -9,10 +9,17 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileWriteServiceImplTest {
-    private final FileWriteService fileWriteService = new FileWriteServiceImpl();
+    private static FileWriteService fileWriteService;
+
+    @BeforeAll
+    static void beforeAll() {
+        fileWriteService = new FileWriteServiceImpl();
+    }
 
     @Test
     void writeToFile_inInvalidDirectory_notOk() {

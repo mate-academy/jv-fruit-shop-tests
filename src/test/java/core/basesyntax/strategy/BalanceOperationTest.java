@@ -1,16 +1,23 @@
 package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.impl.BalanceOperation;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationTest {
-    private final OperationService balanceOperation = new BalanceOperation();
+    private static OperationService balanceOperation;
+
+    @BeforeAll
+    static void beforeAll() {
+        balanceOperation = new BalanceOperation();
+    }
 
     @Test
     void processBalanceOperation_OK() {
@@ -27,6 +34,22 @@ public class BalanceOperationTest {
         balanceOperation.doOperation(appleTransaction);
         int secondAppleActual = Storage.getStorage().get("apple");
         assertEquals(120, secondAppleActual);
+    }
+
+    @Test
+    void processBalanceOperationWithNegativeValue_notOK() {
+        FruitTransaction appleTransaction = new FruitTransaction(
+                Operation.BALANCE, "apple", -120);
+        assertThrows(RuntimeException.class,
+                () -> balanceOperation.doOperation(appleTransaction));
+    }
+
+    @Test
+    void processBalanceOperationWithValueNull_notOK() {
+        FruitTransaction appleTransaction = new FruitTransaction(
+                Operation.BALANCE, null, -120);
+        assertThrows(RuntimeException.class,
+                () -> balanceOperation.doOperation(appleTransaction));
     }
 
     @AfterEach

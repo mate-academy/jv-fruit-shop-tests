@@ -9,10 +9,17 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.impl.PurchaceOperation;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaceOperationTest {
-    private final OperationService purchaseOperation = new PurchaceOperation();
+    private static OperationService purchaseOperation;
+
+    @BeforeAll
+    static void beforeAll() {
+        purchaseOperation = new PurchaceOperation();
+    }
 
     @Test
     void processPurchaseOperation_quantityLessThanAmount_notOk() {

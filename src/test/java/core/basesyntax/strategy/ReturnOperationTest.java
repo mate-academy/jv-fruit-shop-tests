@@ -8,10 +8,13 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReturnOperationTest {
-    private final OperationService returnOperation = new ReturnOperation();
+    private final OperationService returnOperation = new ReturnOperation();;
+
 
     @Test
     void processReturnOperation_ok() {

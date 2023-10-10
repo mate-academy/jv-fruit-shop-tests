@@ -7,6 +7,9 @@ import core.basesyntax.strategy.OperationService;
 public class BalanceOperation implements OperationService {
     @Override
     public void doOperation(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < 0 || fruitTransaction.getFruit() == null) {
+            throw new RuntimeException("Not correct value");
+        }
         Storage.getStorage().put(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
     }
 }

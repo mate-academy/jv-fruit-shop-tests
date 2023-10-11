@@ -13,9 +13,6 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceTest {
     private static CsvFileWriterService csvFileWriterService;
-    private static String output = "fruit,quantity" + System.lineSeparator()
-            + "banana,152" + System.lineSeparator()
-            + "apple,90";
 
     @BeforeAll
     static void beforeAll() {
@@ -24,6 +21,10 @@ class CsvFileWriterServiceTest {
 
     @Test
     void writeToFile_correctPath_ok() {
+        String output = new StringBuilder()
+                .append("fruit,quantity").append(System.lineSeparator())
+                .append("banana,152").append(System.lineSeparator())
+                .append("apple,90").toString();
         String pathString = "src/test/resources/output.csv";
         Path path = Path.of(pathString);
 
@@ -42,6 +43,6 @@ class CsvFileWriterServiceTest {
     @Test
     void readFromFile_incorrectFilePath_notOk() {
         assertThrows(RuntimeException.class,
-                () -> csvFileWriterService.writeToFile("incorrect/file/path", output));
+                () -> csvFileWriterService.writeToFile("incorrect/file/path", "some output"));
     }
 }

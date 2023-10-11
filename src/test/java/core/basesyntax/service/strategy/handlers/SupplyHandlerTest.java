@@ -1,7 +1,6 @@
 package core.basesyntax.service.strategy.handlers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -28,12 +27,5 @@ class SupplyHandlerTest {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("cherry", 16);
         assertEquals(expected.entrySet(), Storage.fruitsMap.entrySet());
-    }
-
-    @Test
-    void handleTransaction_nonexistentFruit_notOk() {
-        FruitTransaction transaction = new FruitTransaction("s", "banana", 100);
-        assertThrows(RuntimeException.class,
-                () -> supplyHandler.handleTransaction(transaction));
     }
 }

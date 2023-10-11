@@ -17,11 +17,10 @@ class ReportCreatorTest {
 
     @Test
     void createReport_correctData_ok() {
-        String expected = "fruit,quantity"
-                + System.lineSeparator()
-                + "banana,152"
-                + System.lineSeparator()
-                + "apple,90";
+        String expected = new StringBuilder()
+                .append("fruit,quantity").append(System.lineSeparator())
+                .append("banana,152").append(System.lineSeparator())
+                .append("apple,90").toString();
         Storage.fruitsMap.put("banana", 152);
         Storage.fruitsMap.put("apple", 90);
         String actual = reportCreator.createReport();

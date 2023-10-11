@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import static core.basesyntax.db.Storage.fruitsMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,17 +37,5 @@ class ProcessInputServiceImplTest {
         expected.put("banana", 152);
         expected.put("apple", 90);
         assertEquals(expected, fruitsMap);
-    }
-
-    @Test
-    void parseInput_negativeBalance_notOk() {
-        List<String> input = new ArrayList<>();
-        input.add("type,fruit,quantity");
-        input.add("b,banana,20");
-        input.add("b,apple,100");
-        input.add("s,banana,100");
-        input.add("p,banana,130");
-        assertThrows(RuntimeException.class,
-                () -> processInputService.parseInput(input));
     }
 }

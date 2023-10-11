@@ -3,10 +3,7 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.DataConverterServiceImpl;
-
-import java.io.IOException;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

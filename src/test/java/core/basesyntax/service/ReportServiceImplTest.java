@@ -24,9 +24,14 @@ public class ReportServiceImplTest {
                     + "apple," + "90" + System.lineSeparator();
     private List<String> expected;
     private Map<FruitTransaction.Operation, OperationHandler> operationStrategy;
+    private ParserServiceImpl fileParser;
+    private ReportServiceImpl reportService;
+    private FruitShopService fruitShop;
 
     @BeforeEach
     public void setUp() {
+        fileParser = new ParserServiceImpl();
+        reportService = new ReportServiceImpl();
         expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -41,16 +46,14 @@ public class ReportServiceImplTest {
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
                 FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnHandler());
+        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl(operationStrategy);
+        fruitShop = new FruitShopService(operationStrategyImpl);
     }
 
     @Test
     public void reportPreparation_correctStringRecords_ok() {
-        OperationStrategyImpl operationStrategyImpl = new OperationStrategyImpl(operationStrategy);
-        FruitShopService fruitShop = new FruitShopService(operationStrategyImpl);
-        ParserServiceImpl fileParser = new ParserServiceImpl();
         List<FruitTransaction> transactions = fileParser.parseData(expected);
         fruitShop.processOfOperations(transactions);
-        ReportServiceImpl reportService = new ReportServiceImpl();
         String actual = reportService.reportPreparation();
         assertEquals(EXPECT, actual);
     }

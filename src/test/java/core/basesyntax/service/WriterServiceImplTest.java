@@ -1,11 +1,14 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.service.impl.WriterServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,35 +21,25 @@ public class WriterServiceImplTest {
     private String outputPath;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         writerService = new WriterServiceImpl();
-        try {
-            tempDir = Files.createTempDirectory("tempDir");
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file", e);
-        }
+        tempDir = Files.createTempDirectory("tempDir");
         outputPath = tempDir.resolve("tempReport.csv").toString();
     }
 
     @Test
-    public void writeData_fileCreated_ok() {
-        WriterServiceImpl writer = new WriterServiceImpl();
-        writer.writeData(DATA, outputPath);
-        Assertions.assertTrue(Files.exists(Path.of(outputPath)));
-
+    public void writeData_FileCreated_Ok() {
+        writerService.writeData(DATA, outputPath);
+        assertTrue(Files.exists(Path.of(outputPath)));
     }
 
     @Test
-    public void writeData_correctContent_ok() {
-        WriterServiceImpl writer = new WriterServiceImpl();
-        writer.writeData(DATA, outputPath);
-        String fileContent;
-        try {
-            fileContent = Files.readString(Path.of(outputPath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read \"tempReport.csv\"", e);
-        }
-        Assertions.assertEquals(DATA, fileContent);
+    public void writeData_CorrectContent_Ok() {
+        assertDoesNotThrow(() -> {
+            writerService.writeData(DATA, outputPath);
+            String fileContent = Files.readString(Path.of(outputPath));
+            assertEquals(DATA, fileContent);
+        }, "Can't read \"tempReport.csv\"");
     }
 
     @Test

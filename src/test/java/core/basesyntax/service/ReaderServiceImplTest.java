@@ -16,9 +16,11 @@ public class ReaderServiceImplTest {
     private static final String WRONG_FILE_PATH = "src/test/resources/WrongPath.csv";
     private static final String EMPTY_FILE = "src/test/resources/EmptyFile.csv";
     private List<String> expected;
+    private ReaderServiceImpl fileReader;
 
     @BeforeEach
     public void setUp() {
+        fileReader = new ReaderServiceImpl();
         expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -33,28 +35,24 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFromCsvFile_validPath_Ok() {
-        ReaderServiceImpl fileReader = new ReaderServiceImpl();
         List<String> actual = fileReader.readFromCsvFile(VALID_FILE_PATH);
         assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
     @Test
     void readFromCsvFile_notNull_Ok() {
-        ReaderServiceImpl fileReader = new ReaderServiceImpl();
         List<String> fromCsvFile = fileReader.readFromCsvFile(VALID_FILE_PATH);
         assertNotNull(fromCsvFile);
     }
 
     @Test
     void readFromCsvFile_fileNotEmpty_Ok() {
-        ReaderServiceImpl fileReader = new ReaderServiceImpl();
         List<String> fromCsvFile = fileReader.readFromCsvFile(VALID_FILE_PATH);
         assertFalse(fromCsvFile.isEmpty());
     }
 
     @Test
     void readFromCsvFile_invalidPath_notOk() {
-        ReaderServiceImpl fileReader = new ReaderServiceImpl();
         assertThrows(RuntimeException.class, () -> {
             fileReader.readFromCsvFile(WRONG_FILE_PATH);
         });
@@ -62,7 +60,6 @@ public class ReaderServiceImplTest {
 
     @Test
     public void readFromCsvFile_emptyFile_notOk() {
-        ReaderServiceImpl fileReader = new ReaderServiceImpl();
         assertThrows(RuntimeException.class, () -> {
             fileReader.readFromCsvFile(EMPTY_FILE);
         });

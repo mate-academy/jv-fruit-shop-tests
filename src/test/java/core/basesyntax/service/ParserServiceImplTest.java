@@ -11,9 +11,11 @@ import org.junit.jupiter.api.Test;
 
 public class ParserServiceImplTest {
     private List<String> expected;
+    private ParserServiceImpl fileParser;
 
     @BeforeEach
     public void setUp() {
+        fileParser = new ParserServiceImpl();
         expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -29,14 +31,12 @@ public class ParserServiceImplTest {
     @Test
     public void parseData_deleteTitleFromList_Ok() {
         int expectSize = 8;
-        ParserServiceImpl fileParser = new ParserServiceImpl();
         List<FruitTransaction> actual = fileParser.parseData(expected);
         assertEquals(expectSize, actual.size());
     }
 
     @Test
     public void parseData_correctLineParsing_Ok() {
-        ParserServiceImpl fileParser = new ParserServiceImpl();
         List<FruitTransaction> actual = fileParser.parseData(expected);
         assertEquals(FruitTransaction.Operation.BALANCE, actual.get(0).getOperation());
         assertEquals("banana", actual.get(0).getFruit());

@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 public class FileServiceImplTest {
-    private static final String INPUT_FILE_NAME = "src/test/java/testFiles/inputReportTest";
-    private static final String RESULT_FILE_NAME = "src/test/java/testFiles/resultReportTest";
+    private static final String INPUT_FILE_NAME = "src/main/resources/inputReportTest";
+    private static final String RESULT_FILE_NAME = "src/main/resources/resultReportTest";
     private final FileService fileService = new FileServiceImpl();
 
     @BeforeEach

@@ -26,7 +26,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void testGenerateReport_nonEmptyStorage() {
+    public void generateReport_nonEmptyStorage_ok() {
         storage.getFruitInventory().put("banana", 20);
         storage.getFruitInventory().put("apple", 100);
         List<String> report = reportService.generateReport(storage);
@@ -37,7 +37,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void testGenerateReport_emptyStorage() {
+    public void generateReport_emptyStorage() {
         List<String> report = reportService.generateReport(storage);
         assertEquals(LIST_SIZE, report.size());
         assertEquals("fruit,quantity", report.get(0));

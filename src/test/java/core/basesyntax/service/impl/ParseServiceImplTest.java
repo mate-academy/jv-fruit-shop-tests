@@ -18,7 +18,7 @@ public class ParseServiceImplTest {
     }
 
     @Test
-    public void testParseTransactions_validInput() {
+    public void parseTransactions_validInput() {
         List<String> inputLines = Arrays.asList(
                 "b,banana,20",
                 "p,apple,100",
@@ -44,7 +44,7 @@ public class ParseServiceImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testParseTransactions_invalidInput() {
+    public void parseTransactions_invalidInput() {
         List<String> inputLines = Arrays.asList(
                 "b,banana",
                 "p,apple,100",

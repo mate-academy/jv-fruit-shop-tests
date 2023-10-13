@@ -24,7 +24,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void testWriteToFile() throws IOException {
+    public void writeToFile_ok() throws IOException {
         File tempFile = tempFolder.newFile("tempFile.txt");
         List<String> lines = Arrays.asList("Line 1", "Line 2", "Line 3");
         writerService.writeToFile(tempFile.getAbsolutePath(), lines);

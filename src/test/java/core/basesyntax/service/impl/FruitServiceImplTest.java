@@ -29,7 +29,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void testProcessTransactions_BalanceAndPurchaseOperations_ok() {
+    public void processTransactions_BalanceAndPurchaseOperations_ok() {
         FruitTransaction transaction1 = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana",
                 100
@@ -45,14 +45,14 @@ public class FruitServiceImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testProcessTransactions_invalidOperationType() {
+    public void processTransactions_invalidOperationType() {
         FruitTransaction transaction = new FruitTransaction(null, "banana", 100);
         List<FruitTransaction> transactions = List.of(transaction);
         fruitService.processTransactions(transactions);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testProcessTransactions_missingStrategy() {
+    public void processTransactions_missingStrategy() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "orange", 50);
         operationStrategies.clear();

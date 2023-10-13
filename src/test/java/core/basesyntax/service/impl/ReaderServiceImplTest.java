@@ -24,7 +24,7 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void testReadFromFile_fileWithContent() throws IOException {
+    public void readFromFile_fileWithContent_ok() throws IOException {
         File inputFile = tempFolder.newFile("input.csv");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile))) {
             writer.write("b,banana,20\np,apple,100\ns,banana,50");
@@ -37,14 +37,14 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void testReadFromFile_emptyFile() throws IOException {
+    public void readFromFile_emptyFile() throws IOException {
         File inputFile = tempFolder.newFile("emptyInput.csv");
         List<String> lines = readerService.readFromFile(inputFile.getAbsolutePath());
         assertEquals(0, lines.size());
     }
 
     @Test(expected = RuntimeException.class)
-    public void testReadFromFile_nonExistentFile() {
+    public void readFromFile_nonExistentFile() {
         String nonExistentFile = "nonexistent.csv";
         readerService.readFromFile(nonExistentFile);
     }

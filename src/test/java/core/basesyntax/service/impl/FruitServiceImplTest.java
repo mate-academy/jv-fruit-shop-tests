@@ -29,7 +29,7 @@ public class FruitServiceImplTest {
     }
 
     @Test
-    public void testProcessTransactions_BalanceAndPurchaseOperations() {
+    public void testProcessTransactions_BalanceAndPurchaseOperations_ok() {
         FruitTransaction transaction1 = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "banana",
                 100

@@ -37,7 +37,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void generateReport_emptyStorage() {
+    public void generateReport_emptyStorage_notOk() {
         List<String> report = reportService.generateReport(storage);
         assertEquals(LIST_SIZE, report.size());
         assertEquals("fruit,quantity", report.get(0));

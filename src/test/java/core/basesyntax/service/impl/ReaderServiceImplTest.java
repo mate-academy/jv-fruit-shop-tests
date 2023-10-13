@@ -37,14 +37,14 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_emptyFile() throws IOException {
+    public void readFromFile_emptyFile_notOk() throws IOException {
         File inputFile = tempFolder.newFile("emptyInput.csv");
         List<String> lines = readerService.readFromFile(inputFile.getAbsolutePath());
         assertEquals(0, lines.size());
     }
 
     @Test(expected = RuntimeException.class)
-    public void readFromFile_nonExistentFile() {
+    public void readFromFile_nonExistentFile_notOk() {
         String nonExistentFile = "nonexistent.csv";
         readerService.readFromFile(nonExistentFile);
     }

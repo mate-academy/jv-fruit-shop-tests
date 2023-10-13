@@ -45,14 +45,14 @@ public class FruitServiceImplTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void processTransactions_invalidOperationType() {
+    public void processTransactions_invalidOperationType_notOk() {
         FruitTransaction transaction = new FruitTransaction(null, "banana", 100);
         List<FruitTransaction> transactions = List.of(transaction);
         fruitService.processTransactions(transactions);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void processTransactions_missingStrategy() {
+    public void processTransactions_missingStrategy_notOk() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
                 "orange", 50);
         operationStrategies.clear();

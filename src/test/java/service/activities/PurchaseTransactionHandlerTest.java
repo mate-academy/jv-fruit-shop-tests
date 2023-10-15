@@ -1,6 +1,7 @@
 package service.activities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import db.FruitShopStorage;
 import model.FruitTransaction;
@@ -28,5 +29,12 @@ class PurchaseTransactionHandlerTest {
         int quantityPurchase = FruitShopStorage.fruitShop.get(fruit);
         transactionHandler.executeTransaction(fruitTransaction);
         assertEquals(quantityPurchase - quantity, FruitShopStorage.fruitShop.get("banana"));
+    }
+
+    @Test
+    void executeTransaction_NotOk() {
+        fruitTransaction.setQuantity(-101);
+        assertThrows(IllegalArgumentException.class,
+                () -> transactionHandler.executeTransaction(fruitTransaction));
     }
 }

@@ -28,4 +28,11 @@ class QuantityVerifierImplTest {
         assertThrows(IllegalArgumentException.class,
                 () -> quantityVerifier.quantityVerify(quantity, fruit));
     }
+
+    @Test
+    void quantityVerify_Null_Ok() {
+        String fruit = "apple";
+        int quantity = 0;
+        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(quantity, fruit));
+    }
 }

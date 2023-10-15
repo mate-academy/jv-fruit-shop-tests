@@ -21,7 +21,7 @@ class ReaderFileServiceImplTest {
 
     @Test
     void readFromFile_Ok() {
-        String fileName = "src/main/resources/input.csv";
+        String fileName = "src/test/resources/input.csv";
         List<String> listFromFile = readerFileService.readFromFile(fileName);
         List<String> writtenLines;
         try {

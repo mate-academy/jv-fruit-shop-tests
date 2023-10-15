@@ -21,7 +21,7 @@ class ParseServiceImplTest {
     }
 
     @Test
-    void parseTransactionsEmptyArray_Ok() {
+    void parseTransactions_EmptyArray_Ok() {
         List<FruitTransaction> fruitTransactionList = parseService.parseTransactions(lines);
         assertTrue(fruitTransactionList.isEmpty());
     }
@@ -36,7 +36,7 @@ class ParseServiceImplTest {
     }
 
     @Test
-    void parseTransactionsValue_Ok() {
+    void parseTransactions_Value_Ok() {
         lines.add("type,fruit,quantity");
         lines.add("b,apple,71");
         lines.add("s,banana,14");

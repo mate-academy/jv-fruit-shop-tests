@@ -17,14 +17,14 @@ class QuantityVerifierImplTest {
     @Test
     void quantityVerify_Ok() {
         String fruit = "apple";
-        int quantity = 100;
+        int quantity = 1;
         assertDoesNotThrow(() -> quantityVerifier.quantityVerify(quantity, fruit));
     }
 
     @Test
     void quantityVerify_NotOk() {
         String fruit = "apple";
-        int quantity = -100;
+        int quantity = -1;
         assertThrows(IllegalArgumentException.class,
                 () -> quantityVerifier.quantityVerify(quantity, fruit));
     }

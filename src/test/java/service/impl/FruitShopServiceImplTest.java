@@ -1,8 +1,9 @@
 package service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import db.FruitShopStorage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,11 +50,13 @@ class FruitShopServiceImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(74);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+
         fruitTransactionList.add(fruitTransaction);
         fruitShopService.handleTransactions(fruitTransactionList);
-        TransactionHandler handler = transactionStrategy
-                .getHandler(FruitTransaction.Operation.BALANCE);
-        assertTrue(handler instanceof BalanceTransactionHandler);
+
+        int expected = 74;
+        int actual = FruitShopStorage.fruitShop.get("apple");
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -62,10 +65,12 @@ class FruitShopServiceImplTest {
         fruitTransaction.setFruit("apple");
         fruitTransaction.setQuantity(74);
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+
         fruitTransactionList.add(fruitTransaction);
         fruitShopService.handleTransactions(fruitTransactionList);
-        TransactionHandler handler = transactionStrategy
-                .getHandler(FruitTransaction.Operation.BALANCE);
-        assertFalse(handler instanceof SupplyTransactionHandler);
+
+        int expected = 73;
+        int actual = FruitShopStorage.fruitShop.get("apple");
+        assertNotEquals(expected, actual);
     }
 }

@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseTransactionHandlerTest {
+    public static final int QUANTITY_ONE = 1;
+    public static final int QUANTITY_TWO = 2;
+    public static final int QUANTITY_TREE = 3;
     private TransactionHandler transactionHandler;
     private FruitTransaction fruitTransaction;
 
@@ -17,9 +20,9 @@ class PurchaseTransactionHandlerTest {
         transactionHandler = new PurchaseTransactionHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");
-        fruitTransaction.setQuantity(99);
+        fruitTransaction.setQuantity(QUANTITY_ONE);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        FruitShopStorage.fruitShop.put("banana", 100);
+        FruitShopStorage.fruitShop.put("banana", QUANTITY_TWO);
     }
 
     @Test
@@ -33,7 +36,7 @@ class PurchaseTransactionHandlerTest {
 
     @Test
     void executeTransaction_NotOk() {
-        fruitTransaction.setQuantity(-101);
+        fruitTransaction.setQuantity(QUANTITY_TREE);
         assertThrows(IllegalArgumentException.class,
                 () -> transactionHandler.executeTransaction(fruitTransaction));
     }

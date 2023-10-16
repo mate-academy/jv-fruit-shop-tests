@@ -7,6 +7,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class QuantityVerifierImplTest {
+    public static final int QUANTITY_NEGATIVE_HUNDRED = -100;
+    public static final int QUANTITY_NEGATIVE_ONE = -1;
+    public static final int QUANTITY_ZERO = 0;
+    public static final int QUANTITY_ONE = 1;
+    public static final int QUANTITY_TEN = 10;
+    public static final int QUANTITY_HUNDRED = 100;
     private QuantityVerifier quantityVerifier;
 
     @BeforeEach
@@ -17,22 +23,18 @@ class QuantityVerifierImplTest {
     @Test
     void quantityVerify_Ok() {
         String fruit = "apple";
-        int quantity = 1;
-        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(quantity, fruit));
+        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(QUANTITY_ZERO, fruit));
+        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(QUANTITY_ONE, fruit));
+        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(QUANTITY_TEN, fruit));
+        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(QUANTITY_HUNDRED, fruit));
     }
 
     @Test
     void quantityVerify_NotOk() {
         String fruit = "apple";
-        int quantity = -1;
         assertThrows(IllegalArgumentException.class,
-                () -> quantityVerifier.quantityVerify(quantity, fruit));
-    }
-
-    @Test
-    void quantityVerify_Null_Ok() {
-        String fruit = "apple";
-        int quantity = 0;
-        assertDoesNotThrow(() -> quantityVerifier.quantityVerify(quantity, fruit));
+                () -> quantityVerifier.quantityVerify(QUANTITY_NEGATIVE_ONE, fruit));
+        assertThrows(IllegalArgumentException.class,
+                () -> quantityVerifier.quantityVerify(QUANTITY_NEGATIVE_HUNDRED, fruit));
     }
 }

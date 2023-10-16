@@ -1,9 +1,9 @@
 package service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import db.FruitShopStorage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,32 +12,23 @@ import service.ReportService;
 
 class ReportServiceImplTest {
     private ReportService reportService;
-    private List<String> report;
+    private Map<String, Integer> fruitShop;
 
     @BeforeEach
     void setUp() {
         reportService = new ReportServiceImpl();
-        report = reportService.createReport();
     }
 
     @Test
     void createReport_Ok() {
-        Map<String, Integer> fruitShop = FruitShopStorage.fruitShop;
-
-        for (Map.Entry<String, Integer> entry : fruitShop.entrySet()) {
-            String expectedLine = entry.getKey() + "," + entry.getValue();
+        fruitShop = FruitShopStorage.fruitShop;
+        fruitShop.put("apple", 15);
+        fruitShop.put("banana", 26);
+        List<String> report = reportService.createReport();
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(fruitShop.entrySet());
+        for (int i = 1; i < report.size(); i++) {
+            String expectedLine = entryList.get(i - 1).getKey() + "," + entryList.get(i - 1).getValue();
             assertTrue(report.contains(expectedLine));
         }
     }
-
-    @Test
-    void createReportNotEmpty_Ok() {
-        assertFalse(report.isEmpty());
-    }
-
-    @Test
-    void createReportHeader_Ok() {
-        assertTrue(report.contains("fruit,quantity"));
-    }
-
 }

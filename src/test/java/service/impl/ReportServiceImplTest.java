@@ -27,7 +27,8 @@ class ReportServiceImplTest {
         List<String> report = reportService.createReport();
         List<Map.Entry<String, Integer>> entryList = new ArrayList<>(fruitShop.entrySet());
         for (int i = 1; i < report.size(); i++) {
-            String expectedLine = entryList.get(i - 1).getKey() + "," + entryList.get(i - 1).getValue();
+            String expectedLine = entryList.get(i - 1).getKey()
+                    + "," + entryList.get(i - 1).getValue();
             assertTrue(report.contains(expectedLine));
         }
     }

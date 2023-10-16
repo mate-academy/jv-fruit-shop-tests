@@ -27,14 +27,14 @@ class TransactionStrategyImplTest {
     }
 
     @Test
-    void getHandlerBalance_Ok() {
+    void getHandler_balance_Ok() {
         TransactionHandler handler = transactionStrategy
                 .getHandler(FruitTransaction.Operation.BALANCE);
         assertEquals(BalanceTransactionHandler.class, handler.getClass());
     }
 
     @Test
-    void getHandlerBalance_NotOk() {
+    void getHandler_balance_NotOk() {
         TransactionHandler handler = transactionStrategy
                 .getHandler(FruitTransaction.Operation.BALANCE);
         assertNotEquals(SupplyTransactionHandler.class, handler.getClass());

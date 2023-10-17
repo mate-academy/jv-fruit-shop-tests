@@ -22,7 +22,8 @@ public class Main {
 
     private static void processTransaction(FruitTransaction transaction) {
         if (transaction.getOperation() == FruitTransaction.Operation.PURCHASE) {
-            Storage.getStorage().merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
+            Storage.getStorage().merge(transaction.getFruit(), transaction.getQuantity(),
+                    Integer::sum);
         }
     }
 }

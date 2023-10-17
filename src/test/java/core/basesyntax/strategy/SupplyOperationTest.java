@@ -44,13 +44,13 @@ class SupplyOperationTest {
 
     @Test
     void handleTransaction_quantityResult_ok() {
-        int balanceQuantity = 50;
+        int startQuantity = 50;
         int[] supplies = {555, 1, 100};
         for (int quantity : supplies) {
-            Storage.DB.put("banane", balanceQuantity);
+            Storage.DB.put("banane", startQuantity);
             fruitTransaction.setQuantity(quantity);
             supplyOperation.handleTransaction(fruitTransaction);
-            int actual = balanceQuantity + quantity;
+            int actual = startQuantity + quantity;
             Assertions.assertEquals(Storage.DB.get("banane"),actual,
                     "Quantity in DB not equals current Result");
         }

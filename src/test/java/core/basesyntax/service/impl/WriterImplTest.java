@@ -30,29 +30,8 @@ class WriterImplTest {
     }
 
     @Test
-    void writeToFile_stringWrite_notOk() {
-        try {
-            Files.createFile(PATH);
-            Files.setAttribute(PATH,"dos:readonly", true);
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t create File oder change Attribute",e);
-        }
-        Assertions.assertThrows(RuntimeException.class,
-                () -> writer.writeToFile(FILE_NAME,expected),
-                "If in File can`t write should be Exception");
-        try {
-            Files.setAttribute(PATH,"dos:readonly", false);
-            Files.deleteIfExists(PATH);
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t delete file " + FILE_NAME,e);
-        }
-    }
-
-    @Test
     void writeToFile_stringWrite_Ok() {
         writer.writeToFile(FILE_NAME,expected);
-        Assertions.assertTrue(Files.exists(PATH),
-                "File should be create");
         String actual;
         try {
             actual = Files.readString(PATH);

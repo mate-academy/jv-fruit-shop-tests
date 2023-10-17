@@ -44,13 +44,13 @@ class ReturnOperationTest {
 
     @Test
     void handleTransaction_quantityResult_ok() {
-        int balanceQuantity = 50;
+        int startQuantity = 50;
         int[] returns = {555, 10, 1};
         for (int quantity : returns) {
-            Storage.DB.put("banane", balanceQuantity);
+            Storage.DB.put("banane", startQuantity);
             fruitTransaction.setQuantity(quantity);
             returnOperation.handleTransaction(fruitTransaction);
-            int actual = balanceQuantity + quantity;
+            int actual = startQuantity + quantity;
             Assertions.assertEquals(Storage.DB.get("banane"),actual,
                     "Quantity in DB not equals current Result");
         }

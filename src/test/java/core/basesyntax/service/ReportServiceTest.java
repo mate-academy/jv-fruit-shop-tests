@@ -11,7 +11,7 @@ class ReportServiceTest {
 
     @AfterEach
     void afterEachTest() {
-        Storage.storage.clear();
+        Storage.getStorage().clear();
     }
 
     @BeforeEach

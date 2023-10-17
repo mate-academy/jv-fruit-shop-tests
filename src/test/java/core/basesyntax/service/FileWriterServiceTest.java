@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,14 @@ class FileWriterServiceTest {
     @BeforeEach
     void setUp() {
         fileWriter = new FileWriterServiceImpl();
+    }
+
+    @AfterEach
+    void tearDown() {
+        File file = new File(PATH_TO_WRITE);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 
     @Test

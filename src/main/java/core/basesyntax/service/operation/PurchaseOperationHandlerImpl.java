@@ -8,12 +8,12 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     public void handle(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int transactionQuantity = transaction.getQuantity();
-        if (Storage.storage.containsKey(fruitName)) {
-            int updatedQuantity = Storage.storage.get(fruitName) - transactionQuantity;
+        if (Storage.getStorage().containsKey(fruitName)) {
+            int updatedQuantity = Storage.getStorage().get(fruitName) - transactionQuantity;
             if (updatedQuantity < 0) {
                 throw new RuntimeException("We don't have enough fruits!");
             }
-            Storage.storage.replace(fruitName, updatedQuantity);
+            Storage.getStorage().replace(fruitName, updatedQuantity);
         }
     }
 }

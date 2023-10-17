@@ -1,25 +1,28 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operation.*;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
-        operationOperationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandlerImpl());
-        operationOperationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandlerImpl());
-        operationOperationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandlerImpl());
-        operationOperationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandlerImpl());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationOperationHandlerMap);
+        // Add some fruit transactions to the storage
+        Storage.storage.put("apple", 10);
+        Storage.storage.put("banana", 15);
+        FruitTransaction applePurchase = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "apple", 10);
+        FruitTransaction bananaPurchase = new FruitTransaction(
+                FruitTransaction.Operation.PURCHASE, "banana", 15);
+        processTransaction(applePurchase);
+        processTransaction(bananaPurchase);
+        System.out.println("Updated Storage:");
+        Storage.storage.forEach((fruit, quantity) -> {
+            System.out.println(fruit + ": " + quantity);
+        });
+    }
 
-        //FileWriterService writerService = new FileWriterServiceImpl();
-        //String content = "banana";
-        //String filePath = "src/test/resources/FileWriter.csv";
-        //writerService.write(content, filePath);
+    private static void processTransaction(FruitTransaction transaction) {
+        if (transaction.getOperation() == FruitTransaction.Operation.PURCHASE) {
+            Storage.storage.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
+        }
     }
 }

@@ -21,7 +21,7 @@ class ReaderImplTest {
     }
 
     @Test
-    void readFromFile_fileExists_notOk() {
+    void readFromFile_fileNotExists_notOk() {
         try {
             Files.deleteIfExists(PATH);
         } catch (IOException e) {
@@ -30,7 +30,6 @@ class ReaderImplTest {
         Assertions.assertThrows(RuntimeException.class,
                 () -> reader.readFromFile(FILE_NAME),
                 "If from File can`t read should be Exception");
-
     }
 
     @Test

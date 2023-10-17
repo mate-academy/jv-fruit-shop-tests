@@ -22,17 +22,15 @@ class WriterImplTest {
 
     @BeforeEach
     void setUp() {
-        if (Files.exists(PATH)) {
-            try {
-                Files.delete(PATH);
-            } catch (IOException e) {
-                throw new RuntimeException("Can`t delete File",e);
-            }
+        try {
+            Files.deleteIfExists(PATH);
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t delete File",e);
         }
     }
 
     @Test
-    void writeToFile_stringToFileWrite_notOk() {
+    void writeToFile_stringWrite_notOk() {
         try {
             Files.createFile(PATH);
             Files.setAttribute(PATH,"dos:readonly", true);
@@ -51,9 +49,10 @@ class WriterImplTest {
     }
 
     @Test
-    void writeToFile_stringToFileWrite_Ok() {
+    void writeToFile_stringWrite_Ok() {
         writer.writeToFile(FILE_NAME,expected);
-        Assertions.assertTrue(Files.exists(PATH));
+        Assertions.assertTrue(Files.exists(PATH),
+                "File should be create");
         String actual;
         try {
             actual = Files.readString(PATH);

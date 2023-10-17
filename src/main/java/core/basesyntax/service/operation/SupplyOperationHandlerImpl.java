@@ -12,9 +12,9 @@ public class SupplyOperationHandlerImpl implements OperationHandler {
         }
         String fruitName = transaction.getFruit();
         int transactionQuantity = transaction.getQuantity();
-        if (Storage.storage.containsKey(fruitName)) {
-            int updatedQuantity = Storage.storage.get(fruitName) + transactionQuantity;
-            Storage.storage.replace(fruitName, updatedQuantity);
+        if (Storage.getStorage().containsKey(fruitName)) {
+            int updatedQuantity = Storage.getStorage().get(fruitName) + transactionQuantity;
+            Storage.getStorage().replace(fruitName, updatedQuantity);
         }
     }
 }

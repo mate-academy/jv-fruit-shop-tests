@@ -9,6 +9,6 @@ public class BalanceOperationHandlerImpl implements OperationHandler {
     public void handle(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int quantityFruit = transaction.getQuantity();
-        Storage.storage.put(fruitName, quantityFruit);
+        Storage.getStorage().put(fruitName, quantityFruit);
     }
 }

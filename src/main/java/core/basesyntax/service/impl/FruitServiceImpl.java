@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
+    private static final String COMA = ",";
+    private static final String TO_FILE = "newFile.CSV";
 
     private ReaderService readerService;
 
@@ -26,12 +28,12 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void writeReport(String file, String toFile) {
+    public void writeReport(String file) {
         List<FruitTransaction> fruitTransactions = readerService.readFromFile(file);
         fruitTransactions.stream()
                 .forEach(fruit -> typeActivityStrategy
                         .get(fruit.getOperation()).setAmountOfFruit(fruit));
-        writerService.writeToFile(toFile);
+        writerService.writeToFile(TO_FILE);
     }
 
     @Override

@@ -48,6 +48,6 @@ public class Main {
         FruitService fruitService =
                 new FruitServiceImpl(new ReaderServiceImpl(),
                         new WriterServiceImpl(), typeActivityStrategy);
-        fruitService.writeReport(FILE, TO_FILE);
+        fruitService.writeReport(FILE);
     }
 }

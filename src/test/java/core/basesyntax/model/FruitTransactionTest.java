@@ -1,13 +1,13 @@
 package core.basesyntax.model;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     private static final String BANANA = "banana";
+
     @Test
     void addToQuantity_isOk() {
         FruitTransaction fruitTransaction
@@ -38,8 +38,8 @@ class FruitTransactionTest {
 
     @Test
     void creatingFruitWithNegativeQuantity_isNotOk() {
-       assertThrows(RuntimeException.class,
-               () -> FruitTransaction.of(Operation.RETURN, BANANA, -5));
+        assertThrows(RuntimeException.class,
+                () -> FruitTransaction.of(Operation.RETURN, BANANA, -5));
     }
 
     @Test

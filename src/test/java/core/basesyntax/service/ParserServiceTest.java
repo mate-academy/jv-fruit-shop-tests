@@ -1,17 +1,14 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.ParserServiceImpl;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ParserServiceTest {
     private static final String BANANA = "banana";
@@ -25,8 +22,8 @@ class ParserServiceTest {
 
     @Test
     void parseStringsIntoObjects_isOk() {
-        List<String> strings = List.of("b,apple,100", "r,apple,50"
-                , "b,banana,100", "p,banana,20", "s,apple,50");
+        List<String> strings = List.of("b,apple,100", "r,apple,50",
+                "b,banana,100", "p,banana,20", "s,apple,50");
 
         List<FruitTransaction> actual
                 = parserService.parseStringsIntoObjects(strings);
@@ -47,8 +44,8 @@ class ParserServiceTest {
                 = FruitTransaction.of(Operation.SUPPLY, APPLE, 50);
 
         List<FruitTransaction> expected
-                = List.of(fruitTransaction, fruitTransaction1, fruitTransaction2
-                , fruitTransaction3, fruitTransaction4);
+                = List.of(fruitTransaction, fruitTransaction1, fruitTransaction2,
+                fruitTransaction3, fruitTransaction4);
 
         assertIterableEquals(expected, actual);
     }

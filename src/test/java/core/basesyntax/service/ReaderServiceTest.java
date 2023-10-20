@@ -1,21 +1,19 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class ReaderServiceTest {
     private static final String EXIST_FILE = "file.CSV";
-    private static final String NON_EXIST_FILE = "file1.CSV";
+    private static final String NON_EXIST_FILE = "file4.CSV";
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
     private ReaderService readerService;
@@ -55,8 +53,8 @@ class ReaderServiceTest {
                 = FruitTransaction.of(Operation.PURCHASE, BANANA, 25);
 
         List<FruitTransaction> expected
-                = List.of(fruitTransaction, fruitTransaction1, fruitTransaction2
-                , fruitTransaction3, fruitTransaction4, fruitTransaction5);
+                = List.of(fruitTransaction, fruitTransaction1, fruitTransaction2,
+                fruitTransaction3, fruitTransaction4, fruitTransaction5);
         assertIterableEquals(expected, actual);
     }
 

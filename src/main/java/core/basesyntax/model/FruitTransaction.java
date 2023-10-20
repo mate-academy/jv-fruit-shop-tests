@@ -6,11 +6,13 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
     private Operation operation;
+
     private FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
+
     public static FruitTransaction of(Operation operation, String fruit, int quantity) {
         if (quantity < 0) {
             throw new RuntimeException("Quantity cannot be less than 0");
@@ -59,10 +61,15 @@ public class FruitTransaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitTransaction that = (FruitTransaction) o;
-        return quantity == that.quantity && Objects.equals(fruit, that.fruit) && operation == that.operation;
+        return quantity == that.quantity
+                && Objects.equals(fruit, that.fruit) && operation == that.operation;
     }
 
     @Override

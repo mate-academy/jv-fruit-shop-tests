@@ -1,16 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.TypeActivityStrategy;
-
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
     private static final String COMA = ",";

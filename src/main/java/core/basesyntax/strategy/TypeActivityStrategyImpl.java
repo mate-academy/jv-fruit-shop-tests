@@ -1,6 +1,5 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.amount.ActivityHandler;
 import java.util.Map;

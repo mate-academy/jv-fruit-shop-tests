@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

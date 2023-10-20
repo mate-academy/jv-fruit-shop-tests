@@ -1,31 +1,28 @@
 package core.basesyntax.service.amount;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import java.util.List;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class BalanceActivityHandlerTest {
-   private BalanceActivityHandler balanceActivityHandler;
-   private FruitTransactionDao fruitTransactionDao;
-   private static final String BANANA = "banana";
-   private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private BalanceActivityHandler balanceActivityHandler;
+    private FruitTransactionDao fruitTransactionDao;
 
     @BeforeEach
     void beforeEach() {
         fruitTransactionDao = new FruitTransactionDaoImpl();
         balanceActivityHandler = new BalanceActivityHandler(fruitTransactionDao);
     }
-
 
     @Test
     void balanceActivityHandler_isOk() {

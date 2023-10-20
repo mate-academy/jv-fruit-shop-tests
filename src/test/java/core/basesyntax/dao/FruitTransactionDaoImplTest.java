@@ -1,15 +1,20 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionDaoImplTest {
- private FruitTransactionDao fruitTransactionDao;
- private static final String APPLE = "apple";
+    private static final String APPLE = "apple";
+    private FruitTransactionDao fruitTransactionDao;
 
     @BeforeEach
     void beforeEach() {

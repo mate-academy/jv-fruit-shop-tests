@@ -1,20 +1,24 @@
 package core.basesyntax.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.amount.*;
+import core.basesyntax.service.amount.ActivityHandler;
+import core.basesyntax.service.amount.BalanceActivityHandler;
+import core.basesyntax.service.amount.PurchaseActivityHandler;
+import core.basesyntax.service.amount.ReturnActivityHandler;
+import core.basesyntax.service.amount.SupplyActivityHandler;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class TypeActivityStrategyTest {
-    private TypeActivityStrategy typeActivityStrategy;
     private static Map<Operation, ActivityHandler> activityHandlerMap;
+    private TypeActivityStrategy typeActivityStrategy;
 
     @BeforeAll
     static void beforeAll() {

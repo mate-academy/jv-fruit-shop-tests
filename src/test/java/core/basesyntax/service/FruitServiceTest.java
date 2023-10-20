@@ -1,37 +1,39 @@
 package core.basesyntax.service;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.amount.*;
+import core.basesyntax.service.amount.ActivityHandler;
+import core.basesyntax.service.amount.BalanceActivityHandler;
+import core.basesyntax.service.amount.PurchaseActivityHandler;
+import core.basesyntax.service.amount.ReturnActivityHandler;
+import core.basesyntax.service.amount.SupplyActivityHandler;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.TypeActivityStrategy;
 import core.basesyntax.strategy.TypeActivityStrategyImpl;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitServiceTest {
-    private ReaderService readerService;
-    private FruitService fruitService;
     private static final String FROM_FILE = "file.CSV";
     private static final String TO_FILE = "newFile.CSV";
     private static Map<Operation, ActivityHandler> activityHandlerMap;
+    private ReaderService readerService;
+    private FruitService fruitService;
     private TypeActivityStrategy typeActivityStrategy;
 
     @BeforeEach

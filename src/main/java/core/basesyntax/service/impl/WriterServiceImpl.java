@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.WriterService;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class WriterServiceImpl implements WriterService {
     }
 
     private String getString() {
-       return Storage.fruitTransactions
+        return Storage.fruitTransactions
                 .stream()
                 .map(fruit -> fruit.getFruit() + "," + fruit.getQuantity())
                 .collect(Collectors.joining(System.lineSeparator()));

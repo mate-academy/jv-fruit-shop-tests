@@ -1,15 +1,31 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private String fruit;
     private int quantity;
     private Operation operation;
+    private FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+    public static FruitTransaction of(Operation operation, String fruit, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity cannot be less than 0");
+        }
+        return new FruitTransaction(operation, fruit, quantity);
+    }
 
     public String getFruit() {
         return fruit;
     }
 
     public void subtract(int quantity) {
+        if (quantity > this.quantity) {
+            throw new RuntimeException("Cannot sell fruits more than in stock");
+        }
         this.quantity -= quantity;
     }
 
@@ -37,33 +53,20 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(String operation) {
-        this.operation = Operation.getOperationFromString(operation);
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-        private String code;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && Objects.equals(fruit, that.fruit) && operation == that.operation;
+    }
 
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public static Operation getOperationFromString(String code) {
-            for (Operation op : Operation.values()) {
-                if (code.equals(op)) {
-                    return op;
-                }
-            }
-            return null;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(fruit, quantity, operation);
     }
 }

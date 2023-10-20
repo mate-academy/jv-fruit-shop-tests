@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface FruitService {
     void writeReport(String file);
-    String getReport(List<FruitTransaction> transactions);
 }

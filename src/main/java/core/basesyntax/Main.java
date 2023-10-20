@@ -1,6 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.amount.ActivityHandler;
 import core.basesyntax.service.amount.BalanceActivityHandler;
@@ -8,6 +10,7 @@ import core.basesyntax.service.amount.PurchaseActivityHandler;
 import core.basesyntax.service.amount.ReturnActivityHandler;
 import core.basesyntax.service.amount.SupplyActivityHandler;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.TypeActivityStrategy;
@@ -23,30 +26,30 @@ public class Main {
     private static final String TO_FILE = "newFile.CSV";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, ActivityHandler>
+        Map<Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.RETURN,
-                        new ReturnActivityHandler());
+                .put(Operation.RETURN,
+                        new ReturnActivityHandler(new FruitTransactionDaoImpl()));
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.BALANCE,
-                        new BalanceActivityHandler());
+                .put(Operation.BALANCE,
+                        new BalanceActivityHandler(new FruitTransactionDaoImpl()));
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.PURCHASE,
-                        new PurchaseActivityHandler());
+                .put(Operation.PURCHASE,
+                        new PurchaseActivityHandler(new FruitTransactionDaoImpl()));
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.SUPPLY,
-                        new SupplyActivityHandler());
+                .put(Operation.SUPPLY,
+                        new SupplyActivityHandler(new FruitTransactionDaoImpl()));
 
         TypeActivityStrategy typeActivityStrategy =
                 new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
 
         FruitService fruitService =
-                new FruitServiceImpl(new ReaderServiceImpl(),
+                new FruitServiceImpl(new ReaderServiceImpl(new ParserServiceImpl()),
                         new WriterServiceImpl(), typeActivityStrategy);
         fruitService.writeReport(FILE);
     }

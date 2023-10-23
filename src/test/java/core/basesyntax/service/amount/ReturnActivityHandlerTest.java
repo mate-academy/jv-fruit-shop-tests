@@ -2,6 +2,7 @@ package core.basesyntax.service.amount;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -14,17 +15,20 @@ import org.junit.jupiter.api.Test;
 class ReturnActivityHandlerTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private ReturnActivityHandler returnActivityHandler;
-    private FruitTransactionDaoImpl fruitTransactionDao;
 
     @BeforeEach
     void beforeEach() {
-        fruitTransactionDao = new FruitTransactionDaoImpl();
-        returnActivityHandler = new ReturnActivityHandler(fruitTransactionDao);
+
     }
 
     @Test
     void returnActivityHandler_isOk() {
+        FruitTransactionDao fruitTransactionDao
+                = new FruitTransactionDaoImpl();
+
+        ReturnActivityHandler returnActivityHandler
+                = new ReturnActivityHandler(fruitTransactionDao);
+
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.BALANCE, APPLE, 30);
 

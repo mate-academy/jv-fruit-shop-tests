@@ -13,24 +13,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceActivityHandlerTest {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
-    private BalanceActivityHandler balanceActivityHandler;
-    private FruitTransactionDao fruitTransactionDao;
-
     @BeforeEach
     void beforeEach() {
-        fruitTransactionDao = new FruitTransactionDaoImpl();
-        balanceActivityHandler = new BalanceActivityHandler(fruitTransactionDao);
+
     }
 
     @Test
     void balanceActivityHandler_isOk() {
+        FruitTransactionDao fruitTransactionDao
+                = new FruitTransactionDaoImpl();
+
+        BalanceActivityHandler balanceActivityHandler
+                = new BalanceActivityHandler(fruitTransactionDao);
+
         FruitTransaction fruitTransaction
-                = FruitTransaction.of(Operation.BALANCE, BANANA, 50);
+                = FruitTransaction.of(Operation.BALANCE, "banana", 50);
 
         FruitTransaction fruitTransaction1
-                = FruitTransaction.of(Operation.BALANCE, APPLE, 100);
+                = FruitTransaction.of(Operation.BALANCE, "apple", 100);
 
         balanceActivityHandler
                 .setAmountOfFruit(fruitTransaction);

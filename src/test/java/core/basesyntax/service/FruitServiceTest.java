@@ -19,32 +19,17 @@ import core.basesyntax.strategy.TypeActivityStrategyImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceTest {
     private static final String FROM_FILE = "file.CSV";
     private static final String TO_FILE = "newFile.CSV";
     private static Map<Operation, ActivityHandler> activityHandlerMap;
-    private ReaderService readerService;
-    private FruitService fruitService;
-    private TypeActivityStrategy typeActivityStrategy;
-
-    @BeforeEach
-    void beforeEach() {
-        readerService = new ReaderServiceImpl(new ParserServiceImpl());
-
-        typeActivityStrategy = new TypeActivityStrategyImpl(activityHandlerMap);
-
-        fruitService = new FruitServiceImpl(readerService,
-                new WriterServiceImpl(), typeActivityStrategy);
-    }
 
     @BeforeAll
     static void beforeAll() {
@@ -65,6 +50,15 @@ class FruitServiceTest {
 
     @Test
     void writeReport_isOk() {
+        TypeActivityStrategy typeActivityStrategy
+                = new TypeActivityStrategyImpl(activityHandlerMap);
+
+        ReaderService readerService
+                = new ReaderServiceImpl(new ParserServiceImpl());
+
+        FruitService fruitService =
+                new FruitServiceImpl(readerService, new WriterServiceImpl(), typeActivityStrategy);
+
         fruitService.writeReport(FROM_FILE);
         List<String> actual;
         try {
@@ -72,10 +66,7 @@ class FruitServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + TO_FILE);
         }
-        List<String> expected = new ArrayList<>();
-        expected.add("fruit, quantity");
-        expected.add("apple,70");
-        expected.add("banana,35");
+        List<String> expected = List.of("fruit, quantity", "apple,70", "banana,35");
         assertIterableEquals(expected, actual);
     }
 

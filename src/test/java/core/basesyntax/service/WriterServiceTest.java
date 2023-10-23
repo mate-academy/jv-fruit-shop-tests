@@ -15,19 +15,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceTest {
     private static final String EXIST_FILE = "newFile.CSV";
     private static final String NON_EXIST_FILE = "file1.CSV";
-    private WriterService writerService;
-    private FruitTransactionDao fruitTransactionDao;
+    private static WriterService writerService;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    static void beforeAll() {
         writerService = new WriterServiceImpl();
-        fruitTransactionDao = new FruitTransactionDaoImpl();
     }
 
     @Test
@@ -43,6 +41,8 @@ class WriterServiceTest {
 
     @Test
     void writeToExistFile_isOk() {
+        FruitTransactionDao fruitTransactionDao
+                = new FruitTransactionDaoImpl();
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.BALANCE, "apple", 100);
 

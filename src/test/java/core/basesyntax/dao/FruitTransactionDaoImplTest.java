@@ -9,15 +9,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionDaoImplTest {
     private static final String APPLE = "apple";
-    private FruitTransactionDao fruitTransactionDao;
+    private static FruitTransactionDao fruitTransactionDao;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    static void beforeAll() {
         fruitTransactionDao = new FruitTransactionDaoImpl();
     }
 

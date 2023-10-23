@@ -7,16 +7,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private ParserService parserService;
+    private static ParserService parserService;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    static void beforeAll() {
         parserService = new ParserServiceImpl();
     }
 

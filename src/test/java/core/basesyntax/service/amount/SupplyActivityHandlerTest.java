@@ -15,17 +15,20 @@ import org.junit.jupiter.api.Test;
 class SupplyActivityHandlerTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private SupplyActivityHandler supplyActivityHandler;
-    private FruitTransactionDao fruitTransactionDao;
 
     @BeforeEach
     void beforeEach() {
-        fruitTransactionDao = new FruitTransactionDaoImpl();
-        supplyActivityHandler = new SupplyActivityHandler(fruitTransactionDao);
+
     }
 
     @Test
     void supplyActivityHandler_isOk() {
+        FruitTransactionDao fruitTransactionDao
+                = new FruitTransactionDaoImpl();
+
+        SupplyActivityHandler supplyActivityHandler
+                = new SupplyActivityHandler(fruitTransactionDao);
+
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.BALANCE, APPLE, 80);
 

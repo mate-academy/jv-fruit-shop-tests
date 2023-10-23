@@ -8,7 +8,7 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceTest {
@@ -16,10 +16,10 @@ class ReaderServiceTest {
     private static final String NON_EXIST_FILE = "file4.CSV";
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private ReaderService readerService;
+    private static ReaderService readerService;
 
-    @BeforeEach
-    void beforeEach() {
+    @BeforeAll
+    static void beforeAll() {
         readerService = new ReaderServiceImpl(new ParserServiceImpl());
     }
 
@@ -31,7 +31,6 @@ class ReaderServiceTest {
 
     @Test
     void readFromExistFile_isOk() {
-
         List<FruitTransaction> actual = readerService.readFromFile(EXIST_FILE);
 
         FruitTransaction fruitTransaction

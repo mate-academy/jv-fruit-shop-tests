@@ -13,12 +13,11 @@ import core.basesyntax.service.amount.SupplyActivityHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TypeActivityStrategyTest {
     private static Map<Operation, ActivityHandler> activityHandlerMap;
-    private TypeActivityStrategy typeActivityStrategy;
+    private static TypeActivityStrategy typeActivityStrategy;
 
     @BeforeAll
     static void beforeAll() {
@@ -35,11 +34,9 @@ class TypeActivityStrategyTest {
 
         activityHandlerMap.put(Operation.RETURN,
                 new ReturnActivityHandler(new FruitTransactionDaoImpl()));
-    }
 
-    @BeforeEach
-    void beforeEach() {
-        typeActivityStrategy = new TypeActivityStrategyImpl(activityHandlerMap);
+        typeActivityStrategy
+                = new TypeActivityStrategyImpl(activityHandlerMap);
     }
 
     @Test

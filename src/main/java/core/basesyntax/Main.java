@@ -28,6 +28,19 @@ public class Main {
         Map<Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
 
+        initializationMap(amountOfFruitsHandlersMap);
+
+        TypeActivityStrategy typeActivityStrategy =
+                new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
+
+        FruitService fruitService =
+                new FruitServiceImpl(new ReaderServiceImpl(new ParserServiceImpl()),
+                        new WriterServiceImpl(), typeActivityStrategy);
+        fruitService.writeReport(FILE);
+    }
+
+    private static void initializationMap(Map<Operation, ActivityHandler>
+                                                  amountOfFruitsHandlersMap) {
         amountOfFruitsHandlersMap
                 .put(Operation.RETURN,
                         new ReturnActivityHandler(new FruitTransactionDaoImpl()));
@@ -43,13 +56,5 @@ public class Main {
         amountOfFruitsHandlersMap
                 .put(Operation.SUPPLY,
                         new SupplyActivityHandler(new FruitTransactionDaoImpl()));
-
-        TypeActivityStrategy typeActivityStrategy =
-                new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
-
-        FruitService fruitService =
-                new FruitServiceImpl(new ReaderServiceImpl(new ParserServiceImpl()),
-                        new WriterServiceImpl(), typeActivityStrategy);
-        fruitService.writeReport(FILE);
     }
 }

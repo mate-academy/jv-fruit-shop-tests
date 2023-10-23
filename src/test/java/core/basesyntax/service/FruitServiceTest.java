@@ -49,7 +49,7 @@ class FruitServiceTest {
     }
 
     @Test
-    void writeReport_isOk() {
+    void write_Report_isOk() {
         TypeActivityStrategy typeActivityStrategy
                 = new TypeActivityStrategyImpl(activityHandlerMap);
 

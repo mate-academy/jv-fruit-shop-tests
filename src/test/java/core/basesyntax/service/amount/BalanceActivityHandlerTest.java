@@ -19,7 +19,7 @@ class BalanceActivityHandlerTest {
     }
 
     @Test
-    void balanceActivityHandler_isOk() {
+    void balance_ActivityHandler_isOk() {
         FruitTransactionDao fruitTransactionDao
                 = new FruitTransactionDaoImpl();
 

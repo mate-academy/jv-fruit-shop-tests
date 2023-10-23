@@ -9,7 +9,7 @@ class FruitTransactionTest {
     private static final String BANANA = "banana";
 
     @Test
-    void addToQuantity_isOk() {
+    void add_ToQuantity_isOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.BALANCE, BANANA, 100);
         fruitTransaction.add(55);
@@ -19,7 +19,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void subtractCorrectQuantity_isOk() {
+    void subtract_CorrectQuantity_isOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.RETURN, BANANA, 50);
         fruitTransaction.subtract(30);
@@ -29,7 +29,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void subtractIncorrectQuantity_isNotOk() {
+    void subtract_IncorrectQuantity_isNotOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.RETURN, BANANA, 20);
         assertThrows(RuntimeException.class,
@@ -37,13 +37,13 @@ class FruitTransactionTest {
     }
 
     @Test
-    void creatingFruitWithNegativeQuantity_isNotOk() {
+    void creating_FruitWithNegativeQuantity_isNotOk() {
         assertThrows(RuntimeException.class,
                 () -> FruitTransaction.of(Operation.RETURN, BANANA, -5));
     }
 
     @Test
-    void setFruitWithNegativeQuantity_isNotOk() {
+    void set_FruitWithNegativeQuantity_isNotOk() {
         FruitTransaction fruitTransaction =
                 FruitTransaction.of(Operation.RETURN, BANANA, 40);
         assertThrows(RuntimeException.class,

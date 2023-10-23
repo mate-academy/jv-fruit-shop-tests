@@ -24,13 +24,13 @@ class ReaderServiceTest {
     }
 
     @Test
-    void readFromNull_isNotOk() {
+    void read_FromNull_isNotOk() {
         assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(null));
     }
 
     @Test
-    void readFromExistFile_isOk() {
+    void read_FromExistFile_isOk() {
         List<FruitTransaction> actual = readerService.readFromFile(EXIST_FILE);
 
         FruitTransaction fruitTransaction
@@ -58,7 +58,7 @@ class ReaderServiceTest {
     }
 
     @Test
-    void readFromNonExistFile_isNotOk() {
+    void read_FromNonExistFile_isNotOk() {
         assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(NON_EXIST_FILE));
     }

@@ -22,7 +22,7 @@ class ReturnActivityHandlerTest {
     }
 
     @Test
-    void returnActivityHandler_isOk() {
+    void return_ActivityHandler_isOk() {
         FruitTransactionDao fruitTransactionDao
                 = new FruitTransactionDaoImpl();
 

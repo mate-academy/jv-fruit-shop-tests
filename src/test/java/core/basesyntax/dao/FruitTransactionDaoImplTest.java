@@ -22,7 +22,7 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    void getFromStorage_isOk() {
+    void get_FromStorage_isOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.RETURN, APPLE, 50);
         fruitTransactionDao
@@ -31,18 +31,18 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    void getNullFromStorage_isNotOk() {
+    void get_NullFromStorage_isNotOk() {
         assertNull(fruitTransactionDao.getFromStorage(null));
     }
 
     @Test
-    void getNonExistFruitFromStorage_isNotOk() {
+    void get_NonExistFruitFromStorage_isNotOk() {
         assertNull(fruitTransactionDao
                 .getFromStorage(FruitTransaction.of(Operation.RETURN, APPLE, 20)));
     }
 
     @Test
-    void addExistFileToStorage_isOk() {
+    void add_ExistFileToStorage_isOk() {
         fruitTransactionDao
                 .addToStorage(FruitTransaction.of(Operation.BALANCE, APPLE, 40));
         FruitTransaction actual = Storage.fruitTransactions.get(0);
@@ -51,7 +51,7 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    void addNullToStorage_isNotOk() {
+    void add_NullToStorage_isNotOk() {
         assertThrows(RuntimeException.class,
                 () -> fruitTransactionDao.addToStorage(null));
     }

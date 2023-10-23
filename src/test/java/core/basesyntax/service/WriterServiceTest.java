@@ -29,18 +29,18 @@ class WriterServiceTest {
     }
 
     @Test
-    void writeToNull_isNotOk() {
+    void write_ToNull_isNotOk() {
         assertThrows(RuntimeException.class,
                 () -> writerService.writeToFile(null));
     }
 
     @Test
-    void writeToNonExistFile_isOk() {
+    void write_ToNonExistFile_isOk() {
         assertDoesNotThrow(() -> writerService.writeToFile(NON_EXIST_FILE));
     }
 
     @Test
-    void writeToExistFile_isOk() {
+    void write_ToExistFile_isOk() {
         FruitTransactionDao fruitTransactionDao
                 = new FruitTransactionDaoImpl();
         FruitTransaction fruitTransaction

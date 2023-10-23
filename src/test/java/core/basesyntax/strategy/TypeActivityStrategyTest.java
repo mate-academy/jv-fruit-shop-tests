@@ -40,35 +40,35 @@ class TypeActivityStrategyTest {
     }
 
     @Test
-    void getHandlerFromSupplyOperation_isOk() {
+    void get_HandlerFromSupplyOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.SUPPLY);
         ActivityHandler expected = new SupplyActivityHandler(new FruitTransactionDaoImpl());
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void getHandlerFromReturnOperation_isOk() {
+    void get_HandlerFromReturnOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.RETURN);
         ActivityHandler expected = new ReturnActivityHandler(new FruitTransactionDaoImpl());
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void getHandlerFromPurchaseOperation_isOk() {
+    void get_HandlerFromPurchaseOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.PURCHASE);
         ActivityHandler expected = new PurchaseActivityHandler(new FruitTransactionDaoImpl());
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void getHandlerFromBalanceOperation_isOk() {
+    void get_HandlerFromBalanceOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.BALANCE);
         ActivityHandler expected = new BalanceActivityHandler(new FruitTransactionDaoImpl());
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void getHandlerFromNull_isNotOk() {
+    void get_HandlerFromNull_isNotOk() {
         assertThrows(NullPointerException.class,
                 () -> typeActivityStrategy.get(null));
     }

@@ -22,7 +22,7 @@ class PurchaseActivityHandlerTest {
     }
 
     @Test
-    void purchaseActivityHandler_isOk() {
+    void purchase_ActivityHandler_isOk() {
         FruitTransactionDao fruitTransactionDao
                 = new FruitTransactionDaoImpl();
 

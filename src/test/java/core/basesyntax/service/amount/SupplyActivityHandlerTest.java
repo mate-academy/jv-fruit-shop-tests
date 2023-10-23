@@ -22,7 +22,7 @@ class SupplyActivityHandlerTest {
     }
 
     @Test
-    void supplyActivityHandler_isOk() {
+    void supply_ActivityHandler_isOk() {
         FruitTransactionDao fruitTransactionDao
                 = new FruitTransactionDaoImpl();
 

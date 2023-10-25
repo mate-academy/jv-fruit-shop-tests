@@ -1,0 +1,97 @@
+package core.basesyntax.service.impl;
+
+import static org.junit.Assert.assertEquals;
+
+import core.basesyntax.db.dao.StorageDao;
+import core.basesyntax.db.dao.StorageDaoImpl;
+import core.basesyntax.service.CreateReportService;
+import core.basesyntax.service.DataConvertService;
+import core.basesyntax.service.DataProcessService;
+import core.basesyntax.service.ReadFromCsvFileService;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class CreateReportServiceImplTest {
+    private static final String FIRST_FILENAME = "fruits1.csv";
+    private static final String SECOND_FILENAME = "fruits2.csv";
+    private static final String THIRD_FILENAME = "fruits3.csv";
+    private static StorageDao storageDao;
+    private static StringBuilder builder;
+    private static CreateReportService reportCreator;
+    private static DataConvertService dataConverter;
+    private static ReadFromCsvFileService csvReader;
+    private static DataProcessService dataProcessor;
+
+    @BeforeAll
+    static void beforeAll() {
+        storageDao = new StorageDaoImpl();
+        dataConverter = new DataConvertServiceImpl();
+        dataProcessor = new DataProcessServiceImpl();
+    }
+
+    @BeforeEach
+    void setUp() {
+        reportCreator = new CreateReportServiceImpl();
+        csvReader = new ReadFromCsvFileServiceImpl();
+        builder = new StringBuilder();
+    }
+
+    @Test
+    void createReport_twoFruits_Ok() {
+        dataProcessor.processFruits(
+                dataConverter.convert(csvReader.readFile(FIRST_FILENAME)));
+        builder.append("fruit,quantity");
+
+        for (Map.Entry<String, Integer> entry : storageDao.getInfo().entrySet()) {
+            builder.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(',')
+                    .append(entry.getValue());
+        }
+
+        String expected = builder.toString();
+        String actual = reportCreator.createReport();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createReport_threeFruits_Ok() {
+        dataProcessor.processFruits(
+                dataConverter.convert(csvReader.readFile(SECOND_FILENAME)));
+        builder.append("fruit,quantity");
+
+        for (Map.Entry<String, Integer> entry : storageDao.getInfo().entrySet()) {
+            builder.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(',')
+                    .append(entry.getValue());
+        }
+
+        String expected = builder.toString();
+        String actual = reportCreator.createReport();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void createReport_fourFruits_Ok() {
+        dataProcessor.processFruits(
+                dataConverter.convert(csvReader.readFile(THIRD_FILENAME)));
+        builder.append("fruit,quantity");
+
+        for (Map.Entry<String, Integer> entry : storageDao.getInfo().entrySet()) {
+            builder.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(',')
+                    .append(entry.getValue());
+        }
+
+        String expected = builder.toString();
+        String actual = reportCreator.createReport();
+
+        assertEquals(expected, actual);
+    }
+}

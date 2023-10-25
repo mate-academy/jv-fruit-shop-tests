@@ -11,14 +11,10 @@ public enum Operation {
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public static Operation findByCode(String code) {
-        for (Operation op : values()) {
-            if (op.code.equals(code)) {
-                return op;
+        for (Operation operation : values()) {
+            if (operation.code.equals(code)) {
+                return operation;
             }
         }
 

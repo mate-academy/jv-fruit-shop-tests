@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.db.dao.StorageDao;
 import core.basesyntax.db.dao.StorageDaoImpl;
 import core.basesyntax.service.CreateReportService;
@@ -9,6 +10,7 @@ import core.basesyntax.service.DataConvertService;
 import core.basesyntax.service.DataProcessService;
 import core.basesyntax.service.ReadFromCsvFileService;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,5 +95,10 @@ class CreateReportServiceImplTest {
         String actual = reportCreator.createReport();
 
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitsCount.clear();
     }
 }

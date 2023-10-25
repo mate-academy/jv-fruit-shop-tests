@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.DataConvertService;
 import core.basesyntax.service.DataProcessService;
@@ -10,6 +11,7 @@ import core.basesyntax.service.WriteToCsvFileService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -110,5 +112,10 @@ class WriteToCsvFileServiceImplTest {
         String actual = builder.toString().trim();
 
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitsCount.clear();
     }
 }

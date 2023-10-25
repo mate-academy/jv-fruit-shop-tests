@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +44,10 @@ class StorageDaoImplTest {
         Map<String, Integer> actual = storageDao.getInfo();
 
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitsCount.clear();
     }
 }

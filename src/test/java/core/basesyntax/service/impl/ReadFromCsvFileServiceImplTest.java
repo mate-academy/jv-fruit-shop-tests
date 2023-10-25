@@ -2,8 +2,10 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReadFromCsvFileService;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,5 +54,10 @@ class ReadFromCsvFileServiceImplTest {
         List<String> actual = csvReader.readFile(THIRD_FILENAME);
 
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitsCount.clear();
     }
 }

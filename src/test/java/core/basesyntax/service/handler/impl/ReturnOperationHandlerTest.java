@@ -2,6 +2,7 @@ package core.basesyntax.service.handler.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -40,7 +41,6 @@ class ReturnOperationHandlerTest {
         transactionWithNegativeAmount.setOperation(Operation.RETURN);
         transactionWithNegativeAmount.setFruitName(FRUIT_NAME);
         transactionWithNegativeAmount.setAmount(FRUIT_NEGATIVE_AMOUNT);
-
     }
 
     @Test
@@ -59,14 +59,17 @@ class ReturnOperationHandlerTest {
         Integer expectedFruitAmount = FRUIT_AMOUNT * NUMBER_OF_OPERATION;
         Integer actualFruitAmount = Storage.fruits.get(new Fruit(FRUIT_NAME));
         assertEquals(expectedFruitAmount, actualFruitAmount);
-
     }
 
     @Test
     void updateStorage_fruitAmountIsNegative_isNotOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             operationHandler.updateStorage(transactionWithNegativeAmount);
         }, "If amount is negative it should throw RuntimeException!");
+
+        String expectedMessage = "Amount is less then zero!!!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @AfterEach

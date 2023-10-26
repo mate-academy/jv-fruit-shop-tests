@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -62,18 +63,24 @@ class DataProcessingImplTest {
 
     @Test
     void processTransaction_incorrectOperation_isNotOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             dataProcessing.processTransaction(DATA_INCORRECT_OPERATION);
         }, "If operation does not fount by letter it should throw Exception!!!");
 
+        String expectedMessage = "There is no such operation by letter ";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     void processTransaction_dataIsNull_isNotOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             dataProcessing.processTransaction(null);
         });
 
+        String expectedMessage = "Data is null!!!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @AfterEach

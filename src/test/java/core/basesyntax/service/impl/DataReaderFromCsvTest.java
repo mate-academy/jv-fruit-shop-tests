@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.DataReader;
 import java.io.IOException;
@@ -44,8 +45,12 @@ class DataReaderFromCsvTest {
 
     @Test
     public void readData_fileNotExistOrBadPath_notOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             reader.readData(BAD_FILE_PATH);
         }, "If file does not exist or path is incorrect it should throw Exception!!!");
+
+        String expectedMessage = "Can't read data from file: ";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,8 +41,12 @@ class CsvWriterTest {
 
     @Test
     void writeReportToFile_badPath_notOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             writer.writeReportToFile(DATA, WRONG_FILE);
         },"If path is incorrect it should throw Exception!!!");
+
+        String expectedMessage = "Can't write data to file: ";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.service.handler.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
@@ -51,14 +52,17 @@ class PurchaseOperationHandlerTest {
         transactionWithLessAmount.setOperation(Operation.PURCHASE);
         transactionWithLessAmount.setFruitName(FRUIT_NAME);
         transactionWithLessAmount.setAmount(FRUIT_LESS_AMOUNT);
-
     }
 
     @Test
     void updateStorage_emptyStorage_isNotOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             operationHandler.updateStorage(transaction);
         }, "If storage does not have such fruit it should throw Runtime Exception");
+
+        String expectedMessage = "There is no such fruit!!!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
 
     }
 
@@ -79,16 +83,24 @@ class PurchaseOperationHandlerTest {
     @Test
     void updateStorage_fruitAmountIsGreaterThanInStorage_isNotOk() {
         Storage.fruits.put(new Fruit(FRUIT_NAME), FRUIT_AMOUNT);
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             operationHandler.updateStorage(transactionWithGreaterAmount);
         }, "If amount is greater than in Storage it should throw RuntimeException!");
+
+        String expectedMessage = " isn't enough!!!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     void updateStorage_fruitAmountIsNegative_isNotOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             operationHandler.updateStorage(transactionWithNegativeAmount);
         }, "If amount is negative it should throw RuntimeException!");
+
+        String expectedMessage = "Amount is less then zero!!!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));;
     }
 
     @AfterEach

@@ -1,7 +1,9 @@
 package core.basesyntax.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -24,7 +26,6 @@ class StorageDaoImplTest {
     static void beforeAll() {
         storageDao = new StorageDaoImpl();
         expectedMap = new HashMap<>();
-
     }
 
     @BeforeEach
@@ -62,6 +63,19 @@ class StorageDaoImplTest {
         Storage.fruits.put(fruit, AMOUNT);
         Map<Fruit, Integer> actualMap = storageDao.getALl();
         assertEquals(expectedMap, actualMap);
+    }
+
+    @Test
+    void storageDao_isInStorage_isOk() {
+        Storage.fruits.put(fruit, AMOUNT);
+        boolean actual = storageDao.isInStorage(fruit.getName());
+        assertTrue(actual);
+    }
+
+    @Test
+    void storageDao_isNotInStorage_isOk() {
+        boolean actual = storageDao.isInStorage(FRUIT_NAME);
+        assertFalse(actual);
     }
 
     @AfterEach

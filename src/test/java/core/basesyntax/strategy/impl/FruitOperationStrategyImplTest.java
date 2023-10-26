@@ -1,15 +1,15 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.FruitOperationStrategy;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class FruitOperationStrategyImplTest {
     private static final int NORMAL_VALUE = 10;

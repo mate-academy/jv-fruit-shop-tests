@@ -1,5 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConvertService;
@@ -9,13 +12,10 @@ import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class DataProcessServiceImplTest {
     private static final String FIRST_FILENAME = "fruits1.csv";
@@ -71,7 +71,8 @@ class DataProcessServiceImplTest {
     @Test
     void dataProcessor_lessThenZero_NotOk() {
         assertThrows(RuntimeException.class, () ->
-                processor.processFruits(convertor.convert(reader.readFile(LESS_THEN_ZERO_FILENAME))));
+                processor.processFruits(convertor.convert(
+                        reader.readFile(LESS_THEN_ZERO_FILENAME))));
     }
 
     @Test

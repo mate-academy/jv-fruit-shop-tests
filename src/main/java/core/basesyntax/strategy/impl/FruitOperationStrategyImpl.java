@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.FruitOperationStrategy;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.Map;
 
 public class FruitOperationStrategyImpl implements FruitOperationStrategy {

@@ -8,7 +8,6 @@ import core.basesyntax.service.DataProcessService;
 import core.basesyntax.strategy.FruitOperationStrategy;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.FruitOperationStrategyImpl;
-
 import java.util.List;
 import java.util.Map;
 

@@ -9,14 +9,13 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConvertService;
 import core.basesyntax.service.DataProcessService;
 import core.basesyntax.service.ReadFromCsvFileService;
-import java.util.List;
-import java.util.Map;
-
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

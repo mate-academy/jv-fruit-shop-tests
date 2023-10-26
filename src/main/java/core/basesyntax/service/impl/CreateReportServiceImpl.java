@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.dao.StorageDao;
 import core.basesyntax.db.dao.StorageDaoImpl;
 import core.basesyntax.service.CreateReportService;
-
 import java.util.Map;
 
 public class CreateReportServiceImpl implements CreateReportService {

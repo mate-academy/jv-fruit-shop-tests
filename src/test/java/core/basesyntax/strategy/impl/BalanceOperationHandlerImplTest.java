@@ -1,12 +1,13 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceOperationHandlerImplTest {
     private static final int NORMAL_VALUE = 10;
@@ -44,6 +45,6 @@ class BalanceOperationHandlerImplTest {
     @Test
     void balanceOperationHandler_lessThenZero_NotOk() {
         assertThrows(RuntimeException.class, () ->
-            balanceHandler.count(LESS_THEN_ZERO_TRANSACTION));
+                balanceHandler.count(LESS_THEN_ZERO_TRANSACTION));
     }
 }

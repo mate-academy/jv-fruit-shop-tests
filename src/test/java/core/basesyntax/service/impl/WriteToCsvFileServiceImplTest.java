@@ -22,6 +22,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class WriteToCsvFileServiceImplTest {
     private static final String FIRST_FILENAME = "fruits1.csv";
@@ -54,10 +56,15 @@ class WriteToCsvFileServiceImplTest {
         builder = new StringBuilder();
     }
 
-    @Test
-    void csvWriter_twoFruits_Ok() {
+    @ParameterizedTest // idk, can I use it?
+    @ValueSource(strings = {
+            FIRST_FILENAME,
+            SECOND_FILENAME,
+            THIRD_FILENAME
+    })
+    void csvWriter_Fruits_Ok(String filename) {
         dataProcessor.processFruits(
-                dataConverter.convert(csvReader.readFile(FIRST_FILENAME)));
+                dataConverter.convert(csvReader.readFile(filename)));
 
         String expected = reportCreator.createReport();
         csvWriter.write(expected);
@@ -76,58 +83,5 @@ class WriteToCsvFileServiceImplTest {
         String actual = builder.toString().trim();
 
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void csvWriter_threeFruits_Ok() {
-        dataProcessor.processFruits(
-                dataConverter.convert(csvReader.readFile(SECOND_FILENAME)));
-
-        String expected = reportCreator.createReport();
-        csvWriter.write(expected);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(REPORT_FILENAME))) {
-            String line = reader.readLine();
-
-            while (line != null) {
-                builder.append(line)
-                        .append(System.lineSeparator());
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot find file: " + REPORT_FILENAME);
-        }
-        String actual = builder.toString().trim();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void csvWriter_fourFruits_Ok() {
-        dataProcessor.processFruits(
-                dataConverter.convert(csvReader.readFile(THIRD_FILENAME)));
-
-        String expected = reportCreator.createReport();
-        csvWriter.write(expected);
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(REPORT_FILENAME))) {
-            String line = reader.readLine();
-
-            while (line != null) {
-                builder.append(line)
-                        .append(System.lineSeparator());
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot find file: " + REPORT_FILENAME);
-        }
-        String actual = builder.toString().trim();
-
-        assertEquals(expected, actual);
-    }
-
-    @AfterEach
-    void tearDown() {
-        Storage.fruitsCount.clear();
     }
 }

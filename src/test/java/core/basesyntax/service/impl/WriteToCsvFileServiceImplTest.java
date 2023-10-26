@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.DataConvertService;
 import core.basesyntax.service.DataProcessService;
@@ -11,6 +12,13 @@ import core.basesyntax.service.WriteToCsvFileService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
+
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
+import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
+import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,18 +35,23 @@ class WriteToCsvFileServiceImplTest {
     private static ReadFromCsvFileService csvReader;
     private static DataProcessService dataProcessor;
     private static WriteToCsvFileService csvWriter;
+    private static final Map<Operation, OperationHandler> operationPicker =
+            Map.of(Operation.BALANCE, new BalanceOperationHandlerImpl(),
+                    Operation.PURCHASE, new PurchaseOperationHandlerImpl(),
+                    Operation.RETURN, new ReturnOperationHandlerImpl(),
+                    Operation.SUPPLY, new SupplyOperationHandlerImpl());
 
     @BeforeAll
     static void beforeAll() {
         dataConverter = new DataConvertServiceImpl();
-        dataProcessor = new DataProcessServiceImpl();
+        dataProcessor = new DataProcessServiceImpl(operationPicker);
     }
 
     @BeforeEach
     void setUp() {
         reportCreator = new CreateReportServiceImpl();
         csvReader = new ReadFromCsvFileServiceImpl();
-        csvWriter = new WriteToCsvFileServiceImpl();
+        csvWriter = new WriteToCsvFileServiceImpl(REPORT_FILENAME);
         builder = new StringBuilder();
     }
 

@@ -13,6 +13,8 @@ class StorageDaoImplTest {
     private static final String BANANA_NAME = "banana";
     private static final Integer APPLE_COUNT = 15;
     private static final Integer BANANA_COUNT = 20;
+    private static final Map<String, Integer> expected = Map.of(APPLE_NAME,
+            APPLE_COUNT, BANANA_NAME, BANANA_COUNT);
     private static StorageDao storageDao;
 
     @BeforeAll
@@ -22,9 +24,6 @@ class StorageDaoImplTest {
 
     @Test
     void storageDaoAdd_twoFruits_Ok() {
-        Map<String, Integer> expected = Map.of(APPLE_NAME, APPLE_COUNT,
-                BANANA_NAME, BANANA_COUNT);
-
         storageDao.add(APPLE_NAME, APPLE_COUNT);
         storageDao.add(BANANA_NAME, BANANA_COUNT);
 

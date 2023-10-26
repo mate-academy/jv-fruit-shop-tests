@@ -11,13 +11,17 @@ public enum Operation {
         this.code = code;
     }
 
-    public static Operation findByCode(String code) {
-        for (Operation operation : values()) {
-            if (operation.code.equals(code)) {
-                return operation;
-            }
-        }
+    public String getCode() {
+        return code;
+    }
 
-        throw new RuntimeException("Code is not exist " + code);
+    public static Operation findByCode(String code) {
+        return switch (code) {
+            case "b" -> BALANCE;
+            case "s" -> SUPPLY;
+            case "p" -> PURCHASE;
+            case "r" -> RETURN;
+            default -> throw new RuntimeException("Code is not exist " + code);
+        };
     }
 }

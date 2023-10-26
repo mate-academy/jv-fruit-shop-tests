@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReadFromCsvFileService;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFromCsvFileServiceImpl implements ReadFromCsvFileService {
-
     @Override
     public List<String> readFile(String fromFileName) {
         List<String> fruits = new ArrayList<>();

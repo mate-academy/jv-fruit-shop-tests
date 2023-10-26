@@ -36,6 +36,7 @@ class CsvWriterTest {
         } catch (IOException e) {
             throw new RuntimeException("Cant read data from file: " + FILE);
         }
+
         assertEquals(EXPECTED_LIST, actualList);
     }
 
@@ -47,6 +48,7 @@ class CsvWriterTest {
 
         String expectedMessage = "Can't write data to file: ";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
     }
 }

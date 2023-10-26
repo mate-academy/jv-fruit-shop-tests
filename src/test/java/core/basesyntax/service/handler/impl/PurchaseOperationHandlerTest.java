@@ -62,6 +62,7 @@ class PurchaseOperationHandlerTest {
 
         String expectedMessage = "There is no such fruit!!!";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
 
     }
@@ -69,14 +70,19 @@ class PurchaseOperationHandlerTest {
     @Test
     void updateStorage_fruitInStorage_isOk() {
         Storage.fruits.put(new Fruit(FRUIT_NAME), FRUIT_AMOUNT);
+
         operationHandler.updateStorage(transaction);
         Integer expectedFruitAmount = FRUIT_AMOUNT - transaction.getAmount();
         Integer actualFruitAmount = Storage.fruits.get(new Fruit(FRUIT_NAME));
+
         assertEquals(expectedFruitAmount, actualFruitAmount);
+
         Storage.fruits.put(new Fruit(FRUIT_NAME), FRUIT_AMOUNT);
+
         operationHandler.updateStorage(transactionWithLessAmount);
         Integer expectedFruitAmount2 = FRUIT_AMOUNT - transactionWithLessAmount.getAmount();
         Integer actualFruitAmount2 = Storage.fruits.get(new Fruit(FRUIT_NAME));
+
         assertEquals(expectedFruitAmount2, actualFruitAmount2);
     }
 
@@ -89,6 +95,7 @@ class PurchaseOperationHandlerTest {
 
         String expectedMessage = " isn't enough!!!";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
@@ -100,6 +107,7 @@ class PurchaseOperationHandlerTest {
 
         String expectedMessage = "Amount is less then zero!!!";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));;
     }
 

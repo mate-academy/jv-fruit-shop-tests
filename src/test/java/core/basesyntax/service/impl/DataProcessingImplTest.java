@@ -57,6 +57,7 @@ class DataProcessingImplTest {
         dataProcessing.processTransaction(DATA);
         Integer actualBananaAmount = Storage.fruits.get(BANANA);
         Integer actualAppleAmount = Storage.fruits.get(APPLE);
+
         assertEquals(EXPECTED_BANANA_AMOUNT, actualBananaAmount);
         assertEquals(EXPECTED_APPLE_AMOUNT, actualAppleAmount);
     }
@@ -69,6 +70,7 @@ class DataProcessingImplTest {
 
         String expectedMessage = "There is no such operation by letter ";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
@@ -80,6 +82,7 @@ class DataProcessingImplTest {
 
         String expectedMessage = "Data is null!!!";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
     }
 

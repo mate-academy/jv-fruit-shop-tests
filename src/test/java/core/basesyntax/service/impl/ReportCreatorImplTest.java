@@ -39,6 +39,7 @@ class ReportCreatorImplTest {
     @Test
     void createReport_isOk() {
         String actualReport = reportCreator.createReport();
+
         assertEquals(EXPECTED, actualReport);
     }
 

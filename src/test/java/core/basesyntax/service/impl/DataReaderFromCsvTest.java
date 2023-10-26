@@ -40,6 +40,7 @@ class DataReaderFromCsvTest {
     @Test
     void readData_isOk() {
         List<String> actualList = reader.readData(FILE_PATH);
+
         assertEquals(EXPECTED_LIST, actualList);
     }
 
@@ -51,6 +52,7 @@ class DataReaderFromCsvTest {
 
         String expectedMessage = "Can't read data from file: ";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
     }
 }

@@ -47,6 +47,7 @@ class BalanceOperationHandlerTest {
         operationHandler.updateStorage(transaction);
         Integer expectedFruitAmount = FRUIT_AMOUNT;
         Integer actualFruitAmount = Storage.fruits.get(new Fruit(FRUIT_NAME));
+
         assertEquals(expectedFruitAmount, actualFruitAmount);
     }
 
@@ -56,6 +57,7 @@ class BalanceOperationHandlerTest {
         operationHandler.updateStorage(transaction);
         Integer expectedFruitAmount = FRUIT_AMOUNT;
         Integer actualFruitAmount = Storage.fruits.get(new Fruit(FRUIT_NAME));
+
         assertEquals(expectedFruitAmount, actualFruitAmount);
     }
 
@@ -67,6 +69,7 @@ class BalanceOperationHandlerTest {
 
         String expectedMessage = "Amount is less then zero!!!";
         String actualMessage = exception.getMessage();
+
         assertTrue(actualMessage.contains(expectedMessage));
     }
 

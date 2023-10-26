@@ -21,7 +21,7 @@ class ParserServiceTest {
     }
 
     @Test
-    void parse_StringsIntoObjects_isOk() {
+    void parse_stringsIntoObjects_isOk() {
         List<String> strings = List.of("b,apple,100", "r,apple,50",
                 "b,banana,100", "p,banana,20", "s,apple,50");
 
@@ -51,8 +51,8 @@ class ParserServiceTest {
     }
 
     @Test
-    void parse_NullInObjects_isNotOk() {
-        assertThrows(RuntimeException.class,
+    void parse_nullInObjects_isNotOk() {
+        assertThrows(IllegalArgumentException.class,
                 () -> parserService.parseStringsIntoObjects(null));
     }
 }

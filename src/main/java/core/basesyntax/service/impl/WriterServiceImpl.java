@@ -12,12 +12,15 @@ public class WriterServiceImpl implements WriterService {
 
     @Override
     public void writeToFile(String toFile) {
+        if (toFile == null) {
+            throw new IllegalArgumentException("File cannot be null");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
             bufferedWriter.write(HEADER);
             bufferedWriter.newLine();
             bufferedWriter.write(getString());
         } catch (IOException ex) {
-            throw new RuntimeException("Can't write to file " + toFile);
+            throw new RuntimeException("Can't write to file " + toFile, ex);
         }
     }
 

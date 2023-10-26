@@ -14,7 +14,7 @@ public class TypeActivityStrategyImpl implements TypeActivityStrategy {
     @Override
     public ActivityHandler get(Operation operation) {
         if (operation == null) {
-            throw new NullPointerException("Operation cannot be null");
+            throw new IllegalArgumentException("Operation cannot be null");
         }
         return strategyMap.get(operation);
     }

@@ -2,6 +2,7 @@ package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
+import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
@@ -30,26 +31,29 @@ class FruitServiceTest {
     private static final String FROM_FILE = "file.CSV";
     private static final String TO_FILE = "newFile.CSV";
     private static Map<Operation, ActivityHandler> activityHandlerMap;
+    private static FruitTransactionDao fruitTransactionDao;
 
     @BeforeAll
     static void beforeAll() {
+        fruitTransactionDao = new FruitTransactionDaoImpl();
+
         activityHandlerMap = new HashMap<>();
 
         activityHandlerMap.put(Operation.BALANCE,
-                new BalanceActivityHandler(new FruitTransactionDaoImpl()));
+                new BalanceActivityHandler(fruitTransactionDao));
 
         activityHandlerMap.put(Operation.SUPPLY,
-                new SupplyActivityHandler(new FruitTransactionDaoImpl()));
+                new SupplyActivityHandler(fruitTransactionDao));
 
         activityHandlerMap.put(Operation.PURCHASE,
-                new PurchaseActivityHandler(new FruitTransactionDaoImpl()));
+                new PurchaseActivityHandler(fruitTransactionDao));
 
         activityHandlerMap.put(Operation.RETURN,
-                new ReturnActivityHandler(new FruitTransactionDaoImpl()));
+                new ReturnActivityHandler(fruitTransactionDao));
     }
 
     @Test
-    void write_Report_isOk() {
+    void write_reportToCorrectFile_isOk() {
         TypeActivityStrategy typeActivityStrategy
                 = new TypeActivityStrategyImpl(activityHandlerMap);
 

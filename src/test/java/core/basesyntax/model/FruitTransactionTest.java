@@ -9,7 +9,7 @@ class FruitTransactionTest {
     private static final String BANANA = "banana";
 
     @Test
-    void add_ToQuantity_isOk() {
+    void add_toQuantity_isOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.BALANCE, BANANA, 100);
         fruitTransaction.add(55);
@@ -19,7 +19,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void subtract_CorrectQuantity_isOk() {
+    void subtract_correctQuantity_isOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.RETURN, BANANA, 50);
         fruitTransaction.subtract(30);
@@ -29,24 +29,24 @@ class FruitTransactionTest {
     }
 
     @Test
-    void subtract_IncorrectQuantity_isNotOk() {
+    void subtract_incorrectQuantity_isNotOk() {
         FruitTransaction fruitTransaction
                 = FruitTransaction.of(Operation.RETURN, BANANA, 20);
-        assertThrows(RuntimeException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> fruitTransaction.subtract(30));
     }
 
     @Test
-    void creating_FruitWithNegativeQuantity_isNotOk() {
-        assertThrows(RuntimeException.class,
+    void creating_fruitWithNegativeQuantity_isNotOk() {
+        assertThrows(IllegalArgumentException.class,
                 () -> FruitTransaction.of(Operation.RETURN, BANANA, -5));
     }
 
     @Test
-    void set_FruitWithNegativeQuantity_isNotOk() {
+    void set_fruitWithNegativeQuantity_isNotOk() {
         FruitTransaction fruitTransaction =
                 FruitTransaction.of(Operation.RETURN, BANANA, 40);
-        assertThrows(RuntimeException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> fruitTransaction.setQuantity(-20));
     }
 }

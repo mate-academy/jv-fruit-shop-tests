@@ -15,7 +15,7 @@ public class FruitTransaction {
 
     public static FruitTransaction of(Operation operation, String fruit, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("Quantity cannot be less than 0");
+            throw new IllegalArgumentException("Quantity cannot be less than 0");
         }
         return new FruitTransaction(operation, fruit, quantity);
     }
@@ -26,7 +26,7 @@ public class FruitTransaction {
 
     public void subtract(int quantity) {
         if (quantity > this.quantity) {
-            throw new RuntimeException("Cannot sell fruits more than in stock");
+            throw new IllegalArgumentException("Cannot sell fruits more than in stock");
         }
         this.quantity -= quantity;
     }
@@ -47,7 +47,7 @@ public class FruitTransaction {
         if (quantity > 0) {
             this.quantity = quantity;
         } else {
-            throw new RuntimeException("Quantity cannot be less than 0");
+            throw new IllegalArgumentException("Quantity cannot be less than 0");
         }
     }
 

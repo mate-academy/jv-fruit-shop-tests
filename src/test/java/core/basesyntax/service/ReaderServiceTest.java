@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -24,13 +26,16 @@ class ReaderServiceTest {
     }
 
     @Test
-    void read_FromNull_isNotOk() {
-        assertThrows(RuntimeException.class,
+    void read_fromNull_isNotOk() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> readerService.readFromFile(null));
+        String expected = "File cannot be null";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void read_FromExistFile_isOk() {
+    void read_fromExistFile_isOk() {
         List<FruitTransaction> actual = readerService.readFromFile(EXIST_FILE);
 
         FruitTransaction fruitTransaction
@@ -58,8 +63,11 @@ class ReaderServiceTest {
     }
 
     @Test
-    void read_FromNonExistFile_isNotOk() {
-        assertThrows(RuntimeException.class,
+    void read_fromNonExistFile_isNotOk() {
+        Exception exception = assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(NON_EXIST_FILE));
+        String actual = exception.getMessage();
+        String expected = "Can't read";
+        assertTrue(actual.contains(expected));
     }
 }

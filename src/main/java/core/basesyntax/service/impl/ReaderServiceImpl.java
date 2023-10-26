@@ -17,11 +17,14 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<FruitTransaction> readFromFile(String fromFile) {
+        if (fromFile == null) {
+            throw new IllegalArgumentException("File cannot be null");
+        }
         List<String> fruitTransactions;
         try {
             fruitTransactions = Files.readAllLines(Path.of(fromFile));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + fromFile);
+            throw new RuntimeException("Can't read from file " + fromFile, e);
         }
         fruitTransactions.remove(0);
         return parserService.parseStringsIntoObjects(fruitTransactions);

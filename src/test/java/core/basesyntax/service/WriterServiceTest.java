@@ -1,8 +1,9 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
@@ -29,18 +30,21 @@ class WriterServiceTest {
     }
 
     @Test
-    void write_ToNull_isNotOk() {
-        assertThrows(RuntimeException.class,
+    void write_toNull_isNotOk() {
+        Exception exception = assertThrows(IllegalArgumentException.class,
                 () -> writerService.writeToFile(null));
+        String expected = "File cannot be null";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
     }
 
     @Test
-    void write_ToNonExistFile_isOk() {
+    void write_toNonExistFile_isOk() {
         assertDoesNotThrow(() -> writerService.writeToFile(NON_EXIST_FILE));
     }
 
     @Test
-    void write_ToExistFile_isOk() {
+    void write_toExistFile_isOk() {
         FruitTransactionDao fruitTransactionDao
                 = new FruitTransactionDaoImpl();
         FruitTransaction fruitTransaction
@@ -60,7 +64,7 @@ class WriterServiceTest {
         try {
             actual = Files.readAllLines(Path.of(EXIST_FILE));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't read from file " + EXIST_FILE);
         }
         assertIterableEquals(expected, actual);
     }

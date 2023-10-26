@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 
@@ -22,27 +21,26 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    void get_FromStorage_isOk() {
+    void add_toStorage_isOk() {
         FruitTransaction fruitTransaction
-                = FruitTransaction.of(Operation.RETURN, APPLE, 50);
-        fruitTransactionDao
-                .addToStorage(fruitTransaction);
-        assertNotNull(fruitTransactionDao.getFromStorage(fruitTransaction));
+                = FruitTransaction.of(Operation.BALANCE, APPLE, 75);
+        Storage.fruitTransactions.add(fruitTransaction);
+        assertEquals(fruitTransaction, fruitTransactionDao.getFromStorage(fruitTransaction));
     }
 
     @Test
-    void get_NullFromStorage_isNotOk() {
+    void get_nullFromStorage_isNotOk() {
         assertNull(fruitTransactionDao.getFromStorage(null));
     }
 
     @Test
-    void get_NonExistFruitFromStorage_isNotOk() {
+    void get_nonExistFruitFromStorage_isNotOk() {
         assertNull(fruitTransactionDao
                 .getFromStorage(FruitTransaction.of(Operation.RETURN, APPLE, 20)));
     }
 
     @Test
-    void add_ExistFileToStorage_isOk() {
+    void add_toStorageByDao_isOk() {
         fruitTransactionDao
                 .addToStorage(FruitTransaction.of(Operation.BALANCE, APPLE, 40));
         FruitTransaction actual = Storage.fruitTransactions.get(0);
@@ -51,8 +49,8 @@ class FruitTransactionDaoImplTest {
     }
 
     @Test
-    void add_NullToStorage_isNotOk() {
-        assertThrows(RuntimeException.class,
+    void add_nullToStorage_isNotOk() {
+        assertThrows(IllegalArgumentException.class,
                 () -> fruitTransactionDao.addToStorage(null));
     }
 

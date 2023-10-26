@@ -3,6 +3,7 @@ package core.basesyntax.strategy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.amount.ActivityHandler;
@@ -18,58 +19,61 @@ import org.junit.jupiter.api.Test;
 class TypeActivityStrategyTest {
     private static Map<Operation, ActivityHandler> activityHandlerMap;
     private static TypeActivityStrategy typeActivityStrategy;
+    private static FruitTransactionDao fruitTransactionDao;
 
     @BeforeAll
     static void beforeAll() {
+        fruitTransactionDao = new FruitTransactionDaoImpl();
+
         activityHandlerMap = new HashMap<>();
 
         activityHandlerMap.put(Operation.BALANCE,
-                new BalanceActivityHandler(new FruitTransactionDaoImpl()));
+                new BalanceActivityHandler(fruitTransactionDao));
 
         activityHandlerMap.put(Operation.SUPPLY,
-                new SupplyActivityHandler(new FruitTransactionDaoImpl()));
+                new SupplyActivityHandler(fruitTransactionDao));
 
         activityHandlerMap.put(Operation.PURCHASE,
-                new PurchaseActivityHandler(new FruitTransactionDaoImpl()));
+                new PurchaseActivityHandler(fruitTransactionDao));
 
         activityHandlerMap.put(Operation.RETURN,
-                new ReturnActivityHandler(new FruitTransactionDaoImpl()));
+                new ReturnActivityHandler(fruitTransactionDao));
 
         typeActivityStrategy
                 = new TypeActivityStrategyImpl(activityHandlerMap);
     }
 
     @Test
-    void get_HandlerFromSupplyOperation_isOk() {
+    void get_handlerFromSupplyOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.SUPPLY);
-        ActivityHandler expected = new SupplyActivityHandler(new FruitTransactionDaoImpl());
+        ActivityHandler expected = new SupplyActivityHandler(fruitTransactionDao);
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void get_HandlerFromReturnOperation_isOk() {
+    void get_handlerFromReturnOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.RETURN);
-        ActivityHandler expected = new ReturnActivityHandler(new FruitTransactionDaoImpl());
+        ActivityHandler expected = new ReturnActivityHandler(fruitTransactionDao);
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void get_HandlerFromPurchaseOperation_isOk() {
+    void get_handlerFromPurchaseOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.PURCHASE);
-        ActivityHandler expected = new PurchaseActivityHandler(new FruitTransactionDaoImpl());
+        ActivityHandler expected = new PurchaseActivityHandler(fruitTransactionDao);
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void get_HandlerFromBalanceOperation_isOk() {
+    void get_handlerFromBalanceOperation_isOk() {
         ActivityHandler actual = typeActivityStrategy.get(Operation.BALANCE);
-        ActivityHandler expected = new BalanceActivityHandler(new FruitTransactionDaoImpl());
+        ActivityHandler expected = new BalanceActivityHandler(fruitTransactionDao);
         assertEquals(actual.getClass(), expected.getClass());
     }
 
     @Test
-    void get_HandlerFromNull_isNotOk() {
-        assertThrows(NullPointerException.class,
+    void get_handlerFromNull_isNotOk() {
+        assertThrows(IllegalArgumentException.class,
                 () -> typeActivityStrategy.get(null));
     }
 }

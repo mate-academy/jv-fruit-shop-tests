@@ -1,67 +1,57 @@
 package core.basesyntax.service.amount;
 
-import static org.junit.Assert.assertEquals;
-
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import java.util.List;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyActivityHandlerTest {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
+    private static FruitTransactionDao fruitTransactionDao;
+    private static SupplyActivityHandler supplyActivityHandler;
 
-    @BeforeEach
-    void beforeEach() {
-
+    @BeforeAll
+    static void setUp() {
+        fruitTransactionDao = new FruitTransactionDaoImpl();
+        supplyActivityHandler = new SupplyActivityHandler(fruitTransactionDao);
     }
 
     @Test
-    void supply_ActivityHandler_isOk() {
-        FruitTransactionDao fruitTransactionDao
-                = new FruitTransactionDaoImpl();
-
-        SupplyActivityHandler supplyActivityHandler
-                = new SupplyActivityHandler(fruitTransactionDao);
-
+    void supply_activityHandlerForBanana_isOk() {
         FruitTransaction fruitTransaction
-                = FruitTransaction.of(Operation.BALANCE, APPLE, 80);
-
-        FruitTransaction fruitTransaction1
-                = FruitTransaction.of(Operation.BALANCE, BANANA, 55);
-
+                = FruitTransaction.of(Operation.BALANCE, "banana", 65);
         fruitTransactionDao.addToStorage(fruitTransaction);
-
-        fruitTransactionDao.addToStorage(fruitTransaction1);
-
+        FruitTransaction fruitTransactionSupply
+                = FruitTransaction.of(Operation.SUPPLY, "banana", 35);
         supplyActivityHandler
-                .setAmountOfFruit(FruitTransaction.of(Operation.SUPPLY, APPLE, 40));
-
-        supplyActivityHandler
-                .setAmountOfFruit(FruitTransaction.of(Operation.SUPPLY, BANANA, 20));
-
-        FruitTransaction fruitTransaction2
-                = FruitTransaction.of(Operation.BALANCE, APPLE, 120);
-
-        FruitTransaction fruitTransaction3
-                = FruitTransaction.of(Operation.BALANCE, BANANA, 75);
-
-        List<FruitTransaction> expected
-                = List.of(fruitTransaction2, fruitTransaction3);
-
-        List<FruitTransaction> actual
-                = List.of(Storage.fruitTransactions.get(0), Storage.fruitTransactions.get(1));
-
-        assertEquals(expected, actual);
+                .setAmountOfFruit(fruitTransactionSupply);
+        FruitTransaction expected
+                = FruitTransaction.of(Operation.BALANCE, "banana", 100);
+        FruitTransaction actual = fruitTransactionDao.getFromStorage(fruitTransaction);
+        Assertions.assertEquals(expected, actual);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @Test
+    void supply_activityHandlerForApple_isOk() {
+        FruitTransaction fruitTransaction
+                = FruitTransaction.of(Operation.BALANCE, "apple", 70);
+        fruitTransactionDao.addToStorage(fruitTransaction);
+        FruitTransaction fruitTransactionSupply
+                = FruitTransaction.of(Operation.SUPPLY, "apple", 40);
+        supplyActivityHandler
+                .setAmountOfFruit(fruitTransactionSupply);
+        FruitTransaction expected
+                = FruitTransaction.of(Operation.BALANCE, "apple", 110);
+        FruitTransaction actual = fruitTransactionDao.getFromStorage(fruitTransaction);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void afterEach() {
         Storage.fruitTransactions.clear();
     }
 }

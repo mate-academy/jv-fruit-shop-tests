@@ -17,7 +17,7 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
     @Override
     public void addToStorage(FruitTransaction fruitTransaction) {
         if (fruitTransaction == null) {
-            throw new RuntimeException("Fruit cannot be null");
+            throw new IllegalArgumentException("Fruit cannot be null");
         }
         Storage.fruitTransactions.add(fruitTransaction);
     }

@@ -12,9 +12,10 @@ import org.junit.jupiter.api.Test;
 public class FileWriterImplTest {
     private static final String SEPARATOR = ",";
     private static final String HEADER = "fruit,quantity";
+    private static final String FILE_NAME = "report.csv";
     private static FileWriter fileWriter;
     private static FileReader fileReader;
-    private static final String FILE_NAME = "report.csv";
+
     private static final String REPORT = HEADER + System.lineSeparator()
             + "apple" + SEPARATOR + 160 + System.lineSeparator()
             + "banana" + SEPARATOR + 115 + System.lineSeparator()
@@ -39,7 +40,7 @@ public class FileWriterImplTest {
     }
 
     @Test
-    void writeToReadOnlyFile_Not_Ok() {
+    void writeToReadOnlyFile_notOk() {
         assertThrows(RuntimeException.class, () ->
                 fileWriter.writeToFile(null, REPORT));
     }

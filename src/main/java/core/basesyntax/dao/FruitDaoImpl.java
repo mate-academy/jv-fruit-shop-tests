@@ -25,18 +25,23 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void remove(String name, int quantity) {
-        if (fruits.get(name) < quantity) {
-            throw new RuntimeException("Not enough " + name + " to purchase");
-        }
-        fruits.put(name, fruits.get(name) - quantity);
-    }
-
-    @Override
     public void set(String name, int quantity) {
         if (quantity < 0) {
             throw new RuntimeException("Cannot put such quantity: " + quantity);
         }
         fruits.put(name, quantity);
+    }
+
+    @Override
+    public void remove(String name) {
+        fruits.remove(name);
+    }
+
+    @Override
+    public void remove(String name, int quantity) {
+        if (fruits.get(name) < quantity) {
+            throw new RuntimeException("Not enough " + name + " to purchase");
+        }
+        fruits.put(name, fruits.get(name) - quantity);
     }
 }

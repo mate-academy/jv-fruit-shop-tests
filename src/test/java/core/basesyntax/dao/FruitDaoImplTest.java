@@ -35,7 +35,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    void addInvalidAmount_Not_Ok() {
+    void addInvalidAmount_notOk() {
         assertThrows(RuntimeException.class, () -> fruitDao.add("apple", INVALID_AMOUNT));
     }
 
@@ -47,7 +47,7 @@ public class FruitDaoImplTest {
     }
 
     @Test
-    void removeInvalidAmount_Not_Ok() {
+    void removeInvalidAmount_notOk() {
         assertThrows(RuntimeException.class, () -> fruitDao.remove("apple", Integer.MAX_VALUE));
     }
 

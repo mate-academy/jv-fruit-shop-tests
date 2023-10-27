@@ -12,13 +12,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ParseServiceImplTest {
-    private static FileReader fileReader;
-    private static ParseService parseService;
     private static final String INPUT_1_FILE_NAME = "input1.csv";
     private static final String INPUT_2_FILE_NAME = "input2.csv";
     private static final String INPUT_3_FILE_NAME = "input3.csv";
     private static final String INVALID_OPERATION_FILE_NAME = "invalid1.csv";
     private static final String INVALID_QUANTITY_FILE_NAME = "invalid2.csv";
+    private static FileReader fileReader;
+    private static ParseService parseService;
     private static ClassLoader classLoader;
 
     @BeforeAll
@@ -30,8 +30,6 @@ public class ParseServiceImplTest {
 
     @Test
     void parseInput1File_Ok() {
-        URL resources = classLoader.getResource(INPUT_1_FILE_NAME);
-        List<String> result = fileReader.readFromFile(new File(resources.getFile()));
         List<FruitTransaction> expected = new ArrayList<>(List.of(
                 new FruitTransaction("banana", 20, FruitTransaction.Operation.BALANCE),
                 new FruitTransaction("apple", 100, FruitTransaction.Operation.BALANCE),
@@ -41,14 +39,12 @@ public class ParseServiceImplTest {
                 new FruitTransaction("apple", 20, FruitTransaction.Operation.PURCHASE),
                 new FruitTransaction("banana", 5, FruitTransaction.Operation.PURCHASE),
                 new FruitTransaction("banana", 50, FruitTransaction.Operation.SUPPLY)));
-        List<FruitTransaction> actual = parseService.parse(result);
+        List<FruitTransaction> actual = parse(INPUT_1_FILE_NAME);
         assertEquals(expected, actual);
     }
 
     @Test
     void parseInput2File_Ok() {
-        URL resources = classLoader.getResource(INPUT_2_FILE_NAME);
-        List<String> result = fileReader.readFromFile(new File(resources.getFile()));
         List<FruitTransaction> expected = new ArrayList<>(List.of(
                 new FruitTransaction("banana", 200, FruitTransaction.Operation.BALANCE),
                 new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE),
@@ -58,14 +54,12 @@ public class ParseServiceImplTest {
                 new FruitTransaction("banana", 20, FruitTransaction.Operation.RETURN),
                 new FruitTransaction("banana", 5, FruitTransaction.Operation.PURCHASE),
                 new FruitTransaction("banana", 15, FruitTransaction.Operation.SUPPLY)));
-        List<FruitTransaction> actual = parseService.parse(result);
+        List<FruitTransaction> actual = parse(INPUT_2_FILE_NAME);
         assertEquals(expected, actual);
     }
 
     @Test
     void parseInput3File_Ok() {
-        URL resources = classLoader.getResource(INPUT_3_FILE_NAME);
-        List<String> result = fileReader.readFromFile(new File(resources.getFile()));
         List<FruitTransaction> expected = new ArrayList<>(List.of(
                 new FruitTransaction("pear", 200, FruitTransaction.Operation.BALANCE),
                 new FruitTransaction("apple", 150, FruitTransaction.Operation.BALANCE),
@@ -77,21 +71,23 @@ public class ParseServiceImplTest {
                 new FruitTransaction("banana", 5, FruitTransaction.Operation.PURCHASE),
                 new FruitTransaction("banana", 15, FruitTransaction.Operation.SUPPLY),
                 new FruitTransaction("banana", 20, FruitTransaction.Operation.PURCHASE)));
-        List<FruitTransaction> actual = parseService.parse(result);
+        List<FruitTransaction> actual = parse(INPUT_3_FILE_NAME);
         assertEquals(expected, actual);
     }
 
     @Test
-    void parseInvalidOperationFile_Not_Ok() {
-        URL resources = classLoader.getResource(INVALID_OPERATION_FILE_NAME);
-        List<String> result = fileReader.readFromFile(new File(resources.getFile()));
-        assertThrows(RuntimeException.class, () -> parseService.parse(result));
+    void parseInvalidOperationFile_notOk() {
+        assertThrows(RuntimeException.class, () -> parse(INVALID_OPERATION_FILE_NAME));
     }
 
     @Test
-    void parseInvalidQuantityFile_Not_Ok() {
-        URL resources = classLoader.getResource(INVALID_QUANTITY_FILE_NAME);
-        List<String> result = fileReader.readFromFile(new File(resources.getFile()));
-        assertThrows(RuntimeException.class, () -> parseService.parse(result));
+    void parseInvalidQuantityFile_notOk() {
+        assertThrows(RuntimeException.class, () -> parse(INVALID_QUANTITY_FILE_NAME));
+    }
+
+    private List<FruitTransaction> parse(String fileName) {
+        URL resources = classLoader.getResource(fileName);
+        List<String> readFromFile = fileReader.readFromFile(new File(resources.getFile()));
+        return parseService.parse(readFromFile);
     }
 }

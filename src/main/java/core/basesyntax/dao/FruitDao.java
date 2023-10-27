@@ -6,4 +6,6 @@ public interface FruitDao {
     void set(String name, int quantity);
 
     void remove(String name, int quantity);
+
+    void remove(String name);
 }

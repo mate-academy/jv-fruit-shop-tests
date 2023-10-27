@@ -20,7 +20,7 @@ public enum Operation {
 
     public static Operation getOperationOf(String letter) {
         return Arrays.stream(Operation.values())
-                .filter(o -> o.getCodeOfOperation().equals(letter))
+                .filter(operation -> operation.getCodeOfOperation().equals(letter))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("There is no such operation by letter "
                         + "'" + letter + "'"));

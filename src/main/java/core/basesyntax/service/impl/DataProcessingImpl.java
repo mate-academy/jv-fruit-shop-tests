@@ -11,6 +11,7 @@ public class DataProcessingImpl implements DataProcessing {
     private static final int OPERATION_POSITION = 0;
     private static final int FRUIT_NAME_POSITION = 1;
     private static final int AMOUNT_OF_FRUIT_POSITION = 2;
+    private static final String DATA_NULL = "Data is null!!!";
     private final OperationStrategy operationStrategy;
 
     public DataProcessingImpl(OperationStrategy operationStrategy) {
@@ -20,7 +21,7 @@ public class DataProcessingImpl implements DataProcessing {
     @Override
     public void processTransaction(List<String> data) {
         if (data == null) {
-            throw new RuntimeException("Data is null!!!");
+            throw new RuntimeException(DATA_NULL);
         }
         List<FruitTransaction> fruitTransactions = getFruitTransactions(data);
         fruitTransactions

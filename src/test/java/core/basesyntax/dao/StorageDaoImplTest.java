@@ -67,7 +67,7 @@ class StorageDaoImplTest {
     void storageDao_getAll_isOk() {
         Storage.fruits.put(fruit, AMOUNT);
 
-        Map<Fruit, Integer> actualMap = storageDao.getALl();
+        Map<Fruit, Integer> actualMap = storageDao.getAll();
 
         assertEquals(expectedMap, actualMap);
     }

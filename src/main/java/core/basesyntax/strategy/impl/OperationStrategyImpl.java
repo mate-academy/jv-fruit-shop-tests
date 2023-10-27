@@ -6,6 +6,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
+    private static final String MAP_IS_NULL = "Map with handlers is NULL!!!";
     private final Map<Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl(Map<Operation,
@@ -16,7 +17,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public OperationHandler getOperationHandler(Operation operation) {
         if (operationHandlerMap == null) {
-            throw new RuntimeException("Map with handlers is NULL!!!");
+            throw new RuntimeException(MAP_IS_NULL);
         }
         return operationHandlerMap.get(operation);
     }

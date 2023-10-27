@@ -16,8 +16,9 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport() {
-        return storageDao.getALl().entrySet().stream()
-                .map(e -> e.getKey().getName() + SEPARATOR + e.getValue())
+        return storageDao.getAll().entrySet().stream()
+                .map(fruitAmountEntry -> fruitAmountEntry.getKey().getName()
+                        + SEPARATOR + fruitAmountEntry.getValue())
                 .collect(Collectors.joining(System.lineSeparator(),
                         REPORT_HEADER + System.lineSeparator(), JOINING_SUFFIX));
     }

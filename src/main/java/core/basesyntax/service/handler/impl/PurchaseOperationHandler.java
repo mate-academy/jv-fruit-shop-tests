@@ -20,15 +20,15 @@ public class PurchaseOperationHandler implements OperationHandler {
         Integer fruitAmount = fruitAndAmount.getValue();
         Integer fruitAmountFromTransaction = transaction.getAmount();
         fruitAndAmount.setValue(fruitAmount - fruitAmountFromTransaction);
-
     }
 
     private void validAmountOfFruit(FruitTransaction transaction) {
         validAmount(transaction);
-        if (!storageDao.isInStorage(transaction.getFruitName())) {
+        String fruitName = transaction.getFruitName();
+        if (!storageDao.isInStorage(fruitName)) {
             throw new RuntimeException("There is no such fruit!!!");
         }
-        if (storageDao.get(transaction.getFruitName()).getValue() < transaction.getAmount()) {
+        if (storageDao.get(fruitName).getValue() < transaction.getAmount()) {
             throw new RuntimeException("Amount of " + transaction.getFruitName()
                     + " isn't enough!!!");
         }

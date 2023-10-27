@@ -10,5 +10,5 @@ public interface StorageDao {
 
     boolean isInStorage(String name);
 
-    Map<Fruit, Integer> getALl();
+    Map<Fruit, Integer> getAll();
 }

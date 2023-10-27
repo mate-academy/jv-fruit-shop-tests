@@ -15,8 +15,9 @@ public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void updateStorage(FruitTransaction transaction) {
         validAmount(transaction);
-        if (!storageDao.isInStorage(transaction.getFruitName())) {
-            storageDao.add(new Fruit(transaction.getFruitName()), transaction.getAmount());
+        String fruitName = transaction.getFruitName();
+        if (!storageDao.isInStorage(fruitName)) {
+            storageDao.add(new Fruit(fruitName), transaction.getAmount());
         }
     }
 }

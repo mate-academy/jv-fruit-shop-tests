@@ -45,7 +45,7 @@ class DataReaderFromCsvTest {
     }
 
     @Test
-    public void readData_fileNotExistOrBadPath_notOk() {
+    void readData_fileNotExistOrBadPath_notOk() {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             reader.readData(BAD_FILE_PATH);
         }, "If file does not exist or path is incorrect it should throw Exception!!!");

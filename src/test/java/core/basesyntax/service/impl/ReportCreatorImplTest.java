@@ -13,6 +13,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportCreatorImplTest {
+    private static final int bananaAmount = 100;
+    private static final int grapeAmount = 40;
+    private static final int appleAmount = 90;
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit GRAPE = new Fruit("grape");
     private static final Fruit APPLE = new Fruit("apple");
@@ -31,9 +34,9 @@ class ReportCreatorImplTest {
 
     @BeforeEach
     void setUp() {
-        Storage.fruits.put(BANANA, 100);
-        Storage.fruits.put(GRAPE, 40);
-        Storage.fruits.put(APPLE, 90);
+        Storage.fruits.put(BANANA, bananaAmount);
+        Storage.fruits.put(GRAPE, grapeAmount);
+        Storage.fruits.put(APPLE, appleAmount);
     }
 
     @Test

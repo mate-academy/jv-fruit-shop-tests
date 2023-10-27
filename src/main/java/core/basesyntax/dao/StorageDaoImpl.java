@@ -22,11 +22,11 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     public boolean isInStorage(String name) {
-        return (get(name) != null);
+        return get(name) != null;
     }
 
     @Override
-    public Map<Fruit, Integer> getALl() {
+    public Map<Fruit, Integer> getAll() {
         return new HashMap<>(Storage.fruits);
     }
 }

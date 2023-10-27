@@ -16,10 +16,11 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void updateStorage(FruitTransaction transaction) {
         validAmount(transaction);
-        if (!storageDao.isInStorage(transaction.getFruitName())) {
-            storageDao.add(new Fruit(transaction.getFruitName()), transaction.getAmount());
+        String fruitName = transaction.getFruitName();
+        if (!storageDao.isInStorage(fruitName)) {
+            storageDao.add(new Fruit(fruitName), transaction.getAmount());
         } else {
-            Map.Entry<Fruit, Integer> fruitAndAmount = storageDao.get(transaction.getFruitName());
+            Map.Entry<Fruit, Integer> fruitAndAmount = storageDao.get(fruitName);
             Integer fruitAmount = fruitAndAmount.getValue();
             Integer fruitAmountFromTransaction = transaction.getAmount();
             fruitAndAmount.setValue(fruitAmount + fruitAmountFromTransaction);

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class DataReaderFromCsv implements DataReader {
     private static final int ROW_TO_SKIP = 1;
+    private static final String EXCEPTION_MESSAGE = "Can't read data from file: ";
 
     @Override
     public List<String> readData(String file) {
@@ -16,7 +17,7 @@ public class DataReaderFromCsv implements DataReader {
                     .skip(ROW_TO_SKIP)
                     .toList();
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file: " + file);
+            throw new RuntimeException(EXCEPTION_MESSAGE + file);
         }
     }
 }

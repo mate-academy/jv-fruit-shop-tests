@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import service.Writer;
 
 class WriterImplTest {
-    private static final String FILE_NAME = "src/test/java/res/testFile.csv";
+    private static final String FILE_NAME = "src/test/java/res/testFile.txt";
     private static final String WRONG_FILE_NAME = "src/test/resources/badFileName.csv";
     private static final String FIRST_FILE_LINE = "type,fruit,quantity";
     private static final String BANANA_FILE_LINE = "b,banana,8";

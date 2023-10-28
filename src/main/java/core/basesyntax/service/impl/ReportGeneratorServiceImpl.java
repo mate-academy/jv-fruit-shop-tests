@@ -11,6 +11,9 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     public String generate() {
         StringBuilder reportBuilder = new StringBuilder("fruit,quantity")
                 .append(System.lineSeparator());
+        if (Storage.fruits.isEmpty()) {
+            return reportBuilder.toString();
+        }
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             reportBuilder.append(entry.getKey())
                     .append(SEPARATOR)

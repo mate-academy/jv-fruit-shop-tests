@@ -32,8 +32,7 @@ class BalanceOperationHandlerTest {
         transaction.setOperation(FruitTransaction.Operation.BALANCE);
         transaction.setFruit("apple");
         transaction.setQuantity(-10);
-        Assertions.assertThrows(IllegalStateException.class, () -> {
-            balanceOperationHandler.getTransaction(transaction);
-        });
+        Assertions.assertThrows(IllegalStateException.class,
+                () -> balanceOperationHandler.getTransaction(transaction));
     }
 }

@@ -1,7 +1,5 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.Assertions;
@@ -10,12 +8,10 @@ import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
     private ReturnOperationHandler returnOperationHandler;
-    private FruitDao fruitDao;
 
     @BeforeEach
     public void setUp() {
         returnOperationHandler = new ReturnOperationHandler();
-        fruitDao = new FruitDaoImpl();
     }
 
     @Test

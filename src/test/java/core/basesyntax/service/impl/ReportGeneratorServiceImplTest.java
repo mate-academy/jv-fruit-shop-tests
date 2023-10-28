@@ -2,8 +2,6 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
 import org.junit.jupiter.api.AfterEach;
@@ -31,7 +29,6 @@ class ReportGeneratorServiceImplTest {
 
     @Test
     void get_validGeneration_Ok() {
-        FruitDao fruitDao = new FruitDaoImpl();
         Storage.fruits.put("banana", 150);
         Storage.fruits.put("apple", 70);
         Storage.fruits.put("melon", 30);

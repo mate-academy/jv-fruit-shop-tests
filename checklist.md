@@ -60,7 +60,7 @@ Example:
 ```java
 @Test
 public void getReport_Ok() {
-    Storage.storage.put(...); // put fruits directly to the storage
+    Storage.storage.put(...); // putToDb fruits directly to the storage
     String expected = "your expected result here";
     String actual = fruitService.getReport();
     Assert.assertEquals(expected, actual);

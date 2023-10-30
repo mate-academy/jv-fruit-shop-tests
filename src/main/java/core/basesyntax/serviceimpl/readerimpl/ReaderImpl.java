@@ -8,12 +8,12 @@ import java.util.List;
 
 public class ReaderImpl implements Reader {
 
-    public static final int SWITCHING = 1;
+    public static final int OFFSET = 1;
 
     @Override
     public List<String> readDataFromFile(String path) {
         try {
-            return Files.lines(Path.of(path)).skip(SWITCHING).toList();
+            return Files.lines(Path.of(path)).skip(OFFSET).toList();
         } catch (IOException e) {
             throw new RuntimeException("Error read file by path: " + path, e);
         }

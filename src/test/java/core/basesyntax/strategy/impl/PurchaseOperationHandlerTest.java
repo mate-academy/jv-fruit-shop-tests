@@ -18,25 +18,32 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void get_validPurchase_Ok() {
+    public void check_successPurchaseAndUpdate_Ok() {
+        String fruitName = "apple";
+        int initialQuantity = 15;
+        fruitDao.putToDb(fruitName, initialQuantity);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("apple");
+        transaction.setFruit(fruitName);
         transaction.setQuantity(10);
-        fruitDao.putToDb("apple", 15);
         purchaseOperationHandler.getTransaction(transaction);
-        int newQuantity = fruitDao.getQuantity("apple");
-        Assertions.assertEquals(newQuantity, 5);
+        int newQuantity = fruitDao.getQuantity(fruitName);
+        Assertions.assertEquals(newQuantity,
+                initialQuantity - transaction.getQuantity());
     }
 
     @Test
-    public void get_invalidPurchase_NotOk() {
+    public void get_purchaseWithInsufficientQuantity_NotOk() {
+        String fruitName = "banana";
+        int initialQuantity = 5;
+        fruitDao.putToDb(fruitName, initialQuantity);
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction.setFruit("banana");
+        transaction.setFruit(fruitName);
         transaction.setQuantity(10);
-        fruitDao.putToDb("banana", 5);
         Assertions.assertThrows(IllegalStateException.class,
                 () -> purchaseOperationHandler.getTransaction(transaction));
+        int newQuantity = fruitDao.getQuantity(fruitName);
+        Assertions.assertEquals(newQuantity, initialQuantity);
     }
 }

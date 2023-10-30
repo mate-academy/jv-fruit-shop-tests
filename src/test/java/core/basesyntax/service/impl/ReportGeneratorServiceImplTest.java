@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +16,7 @@ class ReportGeneratorServiceImplTest {
     @BeforeAll
     static void beforeAll() {
         reportGenerator = new ReportGeneratorServiceImpl();
+        Storage.fruits.clear();
     }
 
     @AfterEach
@@ -28,7 +30,7 @@ class ReportGeneratorServiceImplTest {
     }
 
     @Test
-    void get_validGeneration_Ok() {
+    void generate_nonEmptyMap_Ok() {
         Storage.fruits.put("banana", 150);
         Storage.fruits.put("apple", 70);
         Storage.fruits.put("melon", 30);

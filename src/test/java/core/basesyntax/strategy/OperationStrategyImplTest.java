@@ -22,10 +22,8 @@ class OperationStrategyImplTest {
     public void getHandler_validOperation_Ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-
         OperationHandler handler = operationHandlerStrategy
                 .getHandler(fruitTransaction.getOperation());
-
         Assertions.assertNotNull(handler);
         Assertions.assertTrue(handler instanceof BalanceOperationHandler);
     }
@@ -37,7 +35,6 @@ class OperationStrategyImplTest {
 
         OperationHandler handler = operationHandlerStrategy
                 .getHandler(fruitTransaction.getOperation());
-
         Assertions.assertNull(handler);
     }
 }

@@ -28,7 +28,7 @@ class FileWriterServiceImplTest {
         try {
             Assertions.assertEquals(expected, Files.readAllLines(Path.of(OUTPUT)));
         } catch (IOException e) {
-            throw new RuntimeException("Can't right to the file", e);
+            throw new RuntimeException("Can't read from the file", e);
         }
     }
 
@@ -36,5 +36,18 @@ class FileWriterServiceImplTest {
     void write_nullInput_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> writerService.write(OUTPUT, null));
+    }
+
+    @Test
+    void write_emptyData_Ok() {
+        String data = "";
+        writerService.write(OUTPUT, data);
+        List<String> lines;
+        try {
+            lines = Files.readAllLines(Path.of(OUTPUT));
+            Assertions.assertEquals(0, lines.size());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read from the file", e);
+        }
     }
 }

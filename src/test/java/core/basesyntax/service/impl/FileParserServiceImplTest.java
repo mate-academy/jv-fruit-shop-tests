@@ -54,7 +54,7 @@ class FileParserServiceImplTest {
     }
 
     @Test
-    void parse_nullInput_Ok() {
+    void parse_nullInput_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> recordsParser.parse(null));
     }

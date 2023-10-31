@@ -53,13 +53,13 @@ class ReportMakingImplTest {
     }
 
     @Test
-    public void testValidDailyReportProcessing() {
+    public void testValidReportMaking() {
         fruitTransactionService.makeReport(transactionList);
         assertEquals(EXPECTED_RESULT, (long) Storage.getFruitsNumber(APPLE));
     }
 
     @Test
-    public void testNegativeAmountInTransaction() {
+    public void testNegativeAmountInReportMaking() {
         final List<FruitTransaction> originalList = new ArrayList<>(transactionList);
         transactionList.clear();
         transactionList.add(new FruitTransaction(FruitTransaction
@@ -70,7 +70,7 @@ class ReportMakingImplTest {
     }
 
     @Test
-    public void testZeroAmountInTransaction() {
+    public void testZeroAmountInReportMaking() {
         final List<FruitTransaction> originalList = new ArrayList<>(transactionList);
         transactionList.clear();
         transactionList.add(new FruitTransaction(FruitTransaction
@@ -81,7 +81,7 @@ class ReportMakingImplTest {
     }
 
     @Test
-    public void processDailyReport_wrongAmount_notOk() {
+    public void processReportMaking_wrongAmount_notOk() {
         final List<FruitTransaction> originalList = new ArrayList<>(transactionList);
         transactionList.clear();
         transactionList.add(new FruitTransaction(FruitTransaction

@@ -19,7 +19,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void testDoOperation_AddsTransactionQuantityToStorage() {
+    public void doOperation_AddsTransactionQuantityToStorage() {
         FruitTransaction transaction = new FruitTransaction(Operation
                 .SUPPLY, APPLE, 5);
         Storage.storeFruit(APPLE, 10);
@@ -29,7 +29,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    public void testDoOperation_AddsTransactionQuantityToStorageWithZeroInitialAmount() {
+    public void doOperation_AddsTransactionQuantityToStorageWithZeroInitialAmount() {
         FruitTransaction transaction = new FruitTransaction(Operation
                 .SUPPLY, BANANA, 3);
         Storage.storeFruit(BANANA, 0);

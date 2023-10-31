@@ -26,7 +26,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void testDoOperation_AddsTransactionQuantityToStorage() {
+    public void doOperation_AddsTransactionQuantityToStorage() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, APPLE, AMOUNT_APPLE);
         Storage.storeFruit(APPLE, AMOUNT_TWO);
@@ -36,7 +36,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    public void testDoOperation_AddsTransactionQuantityToStorageWithZeroInitialAmount() {
+    public void doOperation_AddsTransactionQuantityToStorageWithZeroInitialAmount() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.BALANCE, BANANA, AMOUNT_THREE);
         Storage.storeFruit(BANANA, 0);

@@ -18,7 +18,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void testDoOperation_DeductsTransactionQuantityFromStorage() {
+    public void doOperation_DeductsTransactionQuantityFromStorage() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE, APPLE, 5);
         Storage.storeFruit(APPLE, 20);
@@ -28,7 +28,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void testDoOperation_DeductsTransactionQuantityFromStorageWithZeroInitialAmount() {
+    public void doOperation_DeductsTransactionQuantityFromStorageWithZeroInitialAmount() {
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
                 .Operation.PURCHASE, BANANA, 8);
         Storage.storeFruit(BANANA, 0);

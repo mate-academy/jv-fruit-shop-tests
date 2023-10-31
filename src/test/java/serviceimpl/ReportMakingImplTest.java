@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.OperationStrategy;
@@ -22,8 +23,13 @@ class ReportMakingImplTest {
     private static final Integer PLUS_INDEX = 1;
     private static final int EXPECTED_RESULT = 20;
 
-    private final List<FruitTransaction> transactionList = new ArrayList<>();
+    private static List<FruitTransaction> transactionList;
     private ReportMakingImpl fruitTransactionService;
+
+    @BeforeAll
+    public static void setUpClass() {
+        transactionList = new ArrayList<>();
+    }
 
     @BeforeEach
     public void setUp() {

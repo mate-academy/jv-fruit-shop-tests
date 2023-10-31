@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +18,14 @@ class FruitPackerImplTest {
     private static final int TEST_NUMBER_75 = 75;
     private static final int TEST_NUMBER_54 = 54;
     private static final String NOT_NULL_MESSAGE = "Null can not be added";
-    private final List<FruitTransaction> transactionList = new ArrayList<>();
-    private final FruitPackerImpl fruitPacker = new FruitPackerImpl();
+    private static List<FruitTransaction> transactionList;
+    private static FruitPackerImpl fruitPacker;
+
+    @BeforeAll
+    public static void setUpClass() {
+        fruitPacker = new FruitPackerImpl();
+        transactionList = new ArrayList<>();
+    }
 
     @BeforeEach
     void setUp() {

@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.Reader;
@@ -21,8 +22,14 @@ class ReaderImplTest {
     private static final String APPLE_FILE_LINE = "b,apple,45";
     private static final String PROBLEM_WITH_FILE = "Problem with file: ";
     private static final int ZERO_INDEX = 0;
-    private final List<String> lines = new ArrayList<>();
-    private final Reader reportReader = new ReaderImpl();
+    private static List<String> lines;
+    private static Reader reportReader;
+
+    @BeforeAll
+    public static void setUpClass() {
+        reportReader = new ReaderImpl();
+        lines = new ArrayList<>();
+    }
 
     @BeforeEach
     public void setUp() {

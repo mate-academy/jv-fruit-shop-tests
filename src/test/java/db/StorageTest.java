@@ -25,7 +25,7 @@ public class StorageTest {
     }
 
     @Test
-    public void putAndGetFruitAmount_validAmount_Ok() {
+    public void putAndGetFruitAmount_validAmount_ok() {
         Storage.storeFruit(APPLE, 10);
         Storage.storeFruit(ORANGE, TEST_NUMBER_75);
         assertEquals(10, Storage.getFruitsNumber(APPLE).intValue());
@@ -33,20 +33,20 @@ public class StorageTest {
     }
 
     @Test
-    public void putFruitToStorage_NullFruit_notOk() {
+    public void putFruitToStorage_nullFruit_notOk() {
         assertThrows(RuntimeException.class, () ->
                         Storage.storeFruit(NULL, TEST_NUMBER_75), NOT_NULL_MESSAGE);
     }
 
     @Test
-    public void getFruitAmount_emptyStorage_Ok() {
+    public void getFruitAmount_emptyStorage_ok() {
         Storage.clearStorage();
         assertEquals(TEST_NUMBER_0, Storage.getFruitsNumber(APPLE).intValue());
         assertEquals(TEST_NUMBER_0, Storage.getFruitsNumber(ORANGE).intValue());
     }
 
     @Test
-    public void getStorage_validFruits_Ok() {
+    public void getStorage_validFruits_ok() {
         Storage.storeFruit(APPLE, TEST_NUMBER_75);
         Storage.storeFruit(ORANGE, TEST_NUMBER_54);
         Map<String, Integer> storage = Storage.getStorage();
@@ -58,7 +58,7 @@ public class StorageTest {
     }
 
     @Test
-    public void clearStorage_Ok() {
+    public void clearStorage_ok() {
         Storage.storeFruit(APPLE, TEST_NUMBER_75);
         Storage.storeFruit(ORANGE, TEST_NUMBER_54);
         Storage.clearStorage();
@@ -67,7 +67,7 @@ public class StorageTest {
     }
 
     @Test
-    public void containsFruit_validFruit_Ok() {
+    public void containsFruit_validFruit_ok() {
         Storage.storeFruit(APPLE, TEST_NUMBER_75);
         Storage.storeFruit(ORANGE, TEST_NUMBER_54);
         assertTrue(Storage.containsFruit(APPLE));

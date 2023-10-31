@@ -21,7 +21,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void getHandler_getAllHandlers_Ok() {
+    void getHandler_getAllHandlers_ok() {
         assertEquals(operationsMap.get(FruitTransaction.Operation.BALANCE),
                 operationStrategy.findRightStrategy(FruitTransaction.Operation.BALANCE));
         assertEquals(operationsMap.get(FruitTransaction.Operation.SUPPLY),

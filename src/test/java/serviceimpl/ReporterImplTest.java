@@ -6,6 +6,7 @@ import db.Storage;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.Reporter;
@@ -16,7 +17,12 @@ class ReporterImplTest {
     private static final String ORANGE = "orange";
     private static final Integer AMOUNT_APPLE = 10;
     private static final Integer AMOUNT_ORANGE = 15;
-    private final Reporter reporter = new ReporterImpl();
+    private static Reporter reporter;
+
+    @BeforeAll
+    public static void setUpClass() {
+        reporter = new ReporterImpl();
+    }
 
     @BeforeEach
     public void setUp() {

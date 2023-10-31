@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.Writer;
@@ -23,8 +24,14 @@ class WriterImplTest {
     private static final String APPLE_FILE_LINE = "b,apple,45";
     private static final String PROBLEM_WITH_FILE = "Problem with file: ";
     private static final String NULL_PROBLEM = "Can not write NULL to : ";
-    private final List<String> lines = new ArrayList<>();
-    private final Writer reportWrite = new WriterImpl();
+    private static List<String> lines;
+    private static Writer reportWrite;
+
+    @BeforeAll
+    public static void setUpClass() {
+        lines = new ArrayList<>();
+        reportWrite = new WriterImpl();
+    }
 
     @BeforeEach
     public void setUp() {

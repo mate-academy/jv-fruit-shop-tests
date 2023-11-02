@@ -1,0 +1,88 @@
+package core.basesyntax.dao;
+
+import core.basesyntax.db.FruitStorage;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class FruitStorageDaoImplTest {
+    private FruitStorageDaoImpl dao;
+
+    @BeforeEach
+    void setUp() {
+        dao = new FruitStorageDaoImpl();
+    }
+
+    @Test
+    void add_simpleTest_ok() {
+        dao.add("apple", 10);
+        assertEquals(10, dao.getQuantity("apple"));
+    }
+
+    @Test
+    void add_zeroQuantity_ok() {
+        dao.add("banana", 0);
+        assertEquals(0, dao.getQuantity("banana"));
+    }
+
+    @Test
+    void add_negativeQuantity_notOk() {
+        assertThrows(IllegalArgumentException.class, () ->
+                dao.add("banana", -5));
+    }
+
+    @Test
+    void add_largeQuantity_ok() {
+        dao.add("banana", Integer.MAX_VALUE);
+        assertEquals(Integer.MAX_VALUE, dao.getQuantity("banana"));
+    }
+
+    @Test
+    void getQuantity_simpleTest_ok() {
+        dao.add("apple", 5);
+        int quantity = dao.getQuantity("apple");
+        assertEquals(5, quantity);
+    }
+
+    @Test
+    void getQuantity_forNonExistentFruit_notOk() {
+        assertThrows(NullPointerException.class,
+                () -> dao.getQuantity("grapes"));
+    }
+
+    @Test
+    void add_nullName_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> dao.add(null, 5));
+    }
+
+    @Test
+    void add_emptyName_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> dao.add("", 5));
+    }
+
+    @Test
+    void getAll_simpleTest_ok() {
+        dao.add("banana", 15);
+        dao.add("apple", 7);
+        Map<String, Integer> allFruits = dao.getAll();
+        assertEquals(15, allFruits.get("banana"));
+        assertEquals(7, allFruits.get("apple"));
+    }
+
+    @Test
+    void getAll_withEmptyStorage_ok() {
+        Map<String, Integer> allFruits = dao.getAll();
+        assertTrue(allFruits.isEmpty());
+    }
+
+    @AfterEach
+    void tearDown() {
+        FruitStorage.fruitToStorageQuantityMap.clear();
+    }
+}

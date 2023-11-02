@@ -1,0 +1,44 @@
+package core.basesyntax.strategy.impl;
+
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.FruitStorageDaoImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ReturnOperationHandlerTest {
+    private FruitStorageDao fruitStorageDao;
+    private ReturnOperationHandler returnOperationHandler;
+
+    @BeforeEach
+    void setUp() {
+        fruitStorageDao = new FruitStorageDaoImpl();
+        returnOperationHandler = new ReturnOperationHandler(fruitStorageDao);
+    }
+
+    @Test
+    void operate_withValidData_ok() {
+        fruitStorageDao.add("apple", 20);
+        returnOperationHandler.operate("apple", 10);
+        assertEquals(30, fruitStorageDao.getQuantity("apple"));
+    }
+
+    @Test
+    void operate_withNegativeQuantity_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> returnOperationHandler.operate("banana", -10));
+    }
+
+    @Test
+    void operate_withZeroQuantity_notOk() {
+        assertThrows(IllegalArgumentException.class,
+                () -> returnOperationHandler.operate("banana", 0));
+    }
+
+    @Test
+    void operate_withNonExistentFruit_notOk() {
+        assertThrows(NullPointerException.class,
+                () -> returnOperationHandler.operate("grapes", 10));
+    }
+}

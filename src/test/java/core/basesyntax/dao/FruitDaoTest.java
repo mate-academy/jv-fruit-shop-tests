@@ -36,23 +36,11 @@ class FruitDaoTest {
     }
 
     @Test
-    public void addFirst_fruitAlreadyExist_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> fruitDao.addFirst(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT));
-    }
-
-    @Test
     public void add_correctInput_Ok() {
         fruitDao.add(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
         int actual = fruitDao.get(DEFAULT_FRUIT_NAME);
         int expected = ADDITIONAL_FRUIT_AMOUNT;
         Assertions.assertTrue(expected == actual);
-    }
-
-    @Test
-    public void add_fruitDoesNotExist_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
-                () -> fruitDao.add(ADDITIONAL_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT));
     }
 
     @Test

@@ -16,17 +16,11 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void addFirst(String fruitName, int amount) {
-        if (checkProductAlreadyExist(fruitName)) {
-            throw new RuntimeException(String.format(ADD_FIRST_FAILURE_MESSAGE, fruitName));
-        }
         FruitStorage.goods.put(new Fruit(fruitName), amount);
     }
 
     @Override
     public void add(String fruitName, int amount) {
-        if (!checkProductAlreadyExist(fruitName)) {
-            throw new RuntimeException(String.format(ADDING_FAILURE_MESSAGE, fruitName));
-        }
         for (Map.Entry<Fruit, Integer> good : FruitStorage.goods.entrySet()) {
             if (fruitName.equals(good.getKey().getProductName())) {
                 good.setValue(good.getValue() + amount);
@@ -68,12 +62,5 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public Integer size() {
         return FruitStorage.goods.size();
-    }
-
-    private boolean checkProductAlreadyExist(String fruitName) {
-        return FruitStorage.goods
-                .entrySet()
-                .stream()
-                .anyMatch(product -> product.getKey().getProductName().equals(fruitName));
     }
 }

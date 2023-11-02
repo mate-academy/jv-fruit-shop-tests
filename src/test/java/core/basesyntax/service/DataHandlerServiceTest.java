@@ -35,13 +35,11 @@ class DataHandlerServiceTest {
                 .append(System.lineSeparator()).append("r,apple,10")
                 .append(System.lineSeparator()).append("p,apple,20")
                 .append(System.lineSeparator()).append("p,banana,5")
-                .append(System.lineSeparator()).append("s,banana,50")
-                .append(System.lineSeparator());
+                .append(System.lineSeparator()).append("s,banana,50");
         String inputString = inputStringBuilder.toString();
         StringBuilder reportStringBuilder = new StringBuilder("fruit,quantity");
         reportStringBuilder.append(System.lineSeparator()).append("apple,90")
-                .append(System.lineSeparator()).append("banana,152")
-                .append(System.lineSeparator());
+                .append(System.lineSeparator()).append("banana,152");
         String expected = reportStringBuilder.toString();
         Assertions.assertEquals(expected, dataHandlerService.calculateInputData(inputString));
     }

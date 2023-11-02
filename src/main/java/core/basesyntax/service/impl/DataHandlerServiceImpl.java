@@ -45,7 +45,7 @@ public class DataHandlerServiceImpl implements DataHandlerService {
                         .append(key.getProductName())
                         .append(SEPARATE_SYMBOL)
                         .append(value));
-        return reportBuilder + System.lineSeparator();
+        return reportBuilder.toString();
     }
 
     private void addProductTransaction(String productTransaction) {

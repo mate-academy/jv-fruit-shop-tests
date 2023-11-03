@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileReadServiceTest {
-    private static final String PATH_SOURCE_FILE = "TestSourceFile.csv";//src/test/resources/
+    private static final String PATH_SOURCE_FILE = "TestSourceFile.csv";
     private static FileReadService fileReadService;
     private static File file;
 

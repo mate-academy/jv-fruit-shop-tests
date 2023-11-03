@@ -29,22 +29,22 @@ class DataHandlerServiceTest {
 
     @Test
     public void calculate_correctInputData_Ok() {
-        StringBuilder inputStringBuilder = new StringBuilder("type,fruit,quantity");
-        inputStringBuilder.append(System.lineSeparator()).append("b,banana,20")
-                .append(System.lineSeparator()).append("b,apple,100")
-                .append(System.lineSeparator()).append("s,banana,100")
-                .append(System.lineSeparator()).append("p,banana,13")
-                .append(System.lineSeparator()).append("r,apple,10")
-                .append(System.lineSeparator()).append("p,apple,20")
-                .append(System.lineSeparator()).append("p,banana,5")
-                .append(System.lineSeparator()).append("s,banana,50")
-                .append(System.lineSeparator());
-        String inputString = inputStringBuilder.toString();
-        StringBuilder reportStringBuilder = new StringBuilder("fruit,quantity");
-        reportStringBuilder.append(System.lineSeparator()).append("banana,152")
-                .append(System.lineSeparator()).append("apple,90")
-                .append(System.lineSeparator());
-        String expected = reportStringBuilder.toString();
+        String inputString = """
+                type,fruit,quantity
+                b,banana,20
+                b,apple,100
+                s,banana,100
+                p,banana,13
+                r,apple,10
+                p,apple,20
+                p,banana,5
+                s,banana,50
+                """;
+        String expected = """
+                fruit,quantity
+                banana,152
+                apple,90
+                """;
         String actual = dataHandlerService.calculateInputData(inputString);
         Assertions.assertEquals(expected, actual);
     }

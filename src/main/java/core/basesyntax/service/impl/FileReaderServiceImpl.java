@@ -6,6 +6,8 @@ import java.io.IOException;
 
 public class FileReaderServiceImpl implements FileReaderService {
     private static final String READER_FAILURE_MESSAGE = "Cannot read from file {%s}!";
+    private static final String CARRIAGE_RETURN_SYMBOL = "\r";
+    private static final String EMPTY_STRING = "";
     private static final int READ_END_INDEX = -1;
 
     @Override
@@ -22,6 +24,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         } catch (IOException ex) {
             throw new RuntimeException(String.format(READER_FAILURE_MESSAGE, inputFileName), ex);
         }
-        return fileInputBuilder.toString();
+        return fileInputBuilder.toString().replaceAll(CARRIAGE_RETURN_SYMBOL, EMPTY_STRING);
     }
 }

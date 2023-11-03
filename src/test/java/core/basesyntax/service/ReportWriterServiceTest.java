@@ -21,12 +21,11 @@ public class ReportWriterServiceTest {
 
     @Test
     public void write_correctInputData_Ok() {
-        StringBuilder reportStringBuilder = new StringBuilder("fruit,quantity");
-        reportStringBuilder.append(System.lineSeparator()).append("banana,152")
-                .append(System.lineSeparator()).append("apple,90")
-                .append(System.lineSeparator());
-        String report = reportStringBuilder.toString();
-
+        String report = """
+                fruit,quantity
+                banana,152
+                apple,90
+                """;
         reportWriterService.writeReport(report, REPORT_FILE_NAME);
 
         String actual = readReportFile();

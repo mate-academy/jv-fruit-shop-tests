@@ -13,6 +13,8 @@ import java.util.List;
 public class DataHandlerServiceImpl implements DataHandlerService {
     private static final String CALCULATE_INPUT_NULL_MESSAGE = "Input data cannot be null!";
     private static final String REPORT_COLUMNS = "fruit,quantity";
+    private static final String LINE_SEPARATOR = "\n";
+    private static final String EMPTY_STRING = "";
     private static final int INDEX_OF_REPORT_COLUMNS = 1;
     private static final String SEPARATE_SYMBOL = ",";
     private final OperationStrategy operationStrategy;
@@ -29,7 +31,7 @@ public class DataHandlerServiceImpl implements DataHandlerService {
             throw new RuntimeException(CALCULATE_INPUT_NULL_MESSAGE);
         }
         if (inputData.length() == 0) {
-            return "";
+            return EMPTY_STRING;
         }
         List<String> productTransactionsList = getOperationsList(inputData);
         for (String productTransaction : productTransactionsList) {
@@ -41,11 +43,11 @@ public class DataHandlerServiceImpl implements DataHandlerService {
     private String getFinalReport() {
         StringBuilder reportBuilder = new StringBuilder(REPORT_COLUMNS);
         fruitDao.getAll().forEach((key, value) ->
-                reportBuilder.append(System.lineSeparator())
+                reportBuilder.append(LINE_SEPARATOR)
                         .append(key)
                         .append(SEPARATE_SYMBOL)
                         .append(value));
-        return reportBuilder + System.lineSeparator();
+        return reportBuilder + LINE_SEPARATOR;
     }
 
     private void addProductTransaction(String productTransaction) {
@@ -58,7 +60,7 @@ public class DataHandlerServiceImpl implements DataHandlerService {
     }
 
     private List<String> getOperationsList(String inputData) {
-        return Arrays.stream(inputData.split(System.lineSeparator()))
+        return Arrays.stream(inputData.split(LINE_SEPARATOR))
                 .skip(INDEX_OF_REPORT_COLUMNS)
                 .toList();
     }

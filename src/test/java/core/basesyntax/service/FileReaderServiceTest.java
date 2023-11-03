@@ -11,7 +11,6 @@ import java.util.List;
 public class FileReaderServiceTest {
     private static final String CORRECT_INPUT_FILE_NAME = "src/main/resources/input.csv";
     private static final String WRONG_INPUT_FILE_NAME = "53hsd59.csv";
-    private static final String LINE_SEPARATOR = "\n";
     private static FileReaderService fileReaderService;
 
     @BeforeAll
@@ -21,19 +20,19 @@ public class FileReaderServiceTest {
 
     @Test
     public void read_correctInputData_Ok() {
-        List<String> expected = List.of(
-                "type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13",
-                "r,apple,10",
-                "p,apple,20",
-                "p,banana,5",
-                "s,banana,50");
+        String expected = """
+                type,fruit,quantity
+                b,banana,20
+                b,apple,100
+                s,banana,100
+                p,banana,13
+                r,apple,10
+                p,apple,20
+                p,banana,5
+                s,banana,50
+                """;
         System.out.println(expected);
-        String inputData = fileReaderService.readInputData(CORRECT_INPUT_FILE_NAME);
-        List<String> actual = Arrays.asList(inputData.split(LINE_SEPARATOR));
+        String actual = fileReaderService.readInputData(CORRECT_INPUT_FILE_NAME);
         Assertions.assertEquals(expected, actual);
     }
 

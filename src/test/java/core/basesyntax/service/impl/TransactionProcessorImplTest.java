@@ -20,13 +20,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TransactionProcessorImplTest {
-    private static final HandlerStrategy strategy = new HandlerStrategy(new HashMap<>());
+    private static HandlerStrategy strategy;
     private static InventoryDao inventoryDao;
     private static TransactionProcessorImpl transactionProcessor;
     private static FruitTransaction testTransaction;
 
     @BeforeAll
     static void setUp() {
+        strategy = new HandlerStrategy(new HashMap<>());
         inventoryDao = new InventoryDaoImpl();
         transactionProcessor = new TransactionProcessorImpl(strategy);
         strategy.getStrategyMap().put(OperationType.BALANCE, new BalanceHandler(inventoryDao));
@@ -52,20 +53,17 @@ public class TransactionProcessorImplTest {
                 () -> {
                     transactionProcessor.processTransaction(testTransaction);
                     assertEquals(100, inventoryDao.getAmountByFruit("potato"));
-
                 },
                 () -> {
                     testTransaction.setOperationType(OperationType.PURCHASE);
                     testTransaction.setQuantity(15);
                     transactionProcessor.processTransaction(testTransaction);
-
                     assertEquals(85, inventoryDao.getAmountByFruit("potato"));
                 },
                 () -> {
                     testTransaction.setOperationType(OperationType.SUPPLY);
                     testTransaction.setQuantity(25);
                     transactionProcessor.processTransaction(testTransaction);
-
                     assertEquals(110, inventoryDao.getAmountByFruit("potato"));
                 },
                 () -> {

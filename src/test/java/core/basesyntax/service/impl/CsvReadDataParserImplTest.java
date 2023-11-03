@@ -20,7 +20,7 @@ public class CsvReadDataParserImplTest {
         FruitTransaction expected = new FruitTransaction(
                                         FruitTransaction.OperationType.BALANCE, "banana", 20);
         FruitTransaction actual = parser.convertToFruitTransactionList(VALID_INPUT).get(0);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvReportGeneratorTest {
-    private static final String VALID_RESUL_STRING = "fruit,quantity"
+    private static final String VALID_RESULT_STRING = "fruit,quantity"
                                                     + System.lineSeparator()
                                                     + "banana,152";
     private static InventoryDao inventoryDao;
@@ -31,7 +31,7 @@ public class CsvReportGeneratorTest {
     public void generateReport_allValidConditions() {
         inventoryDao.putToInventory("banana", 152);
         String actual = csvReportGenerator.generateReport();
-        assertEquals(actual, VALID_RESUL_STRING);
+        assertEquals(VALID_RESULT_STRING, actual);
     }
 
     @Test
@@ -49,6 +49,6 @@ public class CsvReportGeneratorTest {
                             + "fruit2," + 2 + System.lineSeparator()
                             + "fruit1," + 1 + System.lineSeparator()
                             + "fruit0," + 0;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

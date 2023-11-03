@@ -12,10 +12,10 @@ public class CsvDataWriterTest {
     private static final String VALID_STRING = "Some VALID STrING";
     private static final String EMPTY_STRING = "";
     private static final String NONEXISTENT_DESTINATION_FILE =
-                                "src/test/test-resources/output-files/nonexistent.txt";
+                                "src/test/test-resources/output-files/nonexistent.csv";
     private static final String VALID_DESTINATION_FILE =
-                                "src/test/test-resources/output-files/TestValidFile.txt";
-    private final CsvDataWriter csvDataWriter = new CsvDataWriter();
+                                "src/test/test-resources/output-files/TestValidFile.csv";
+    private static CsvDataWriter csvDataWriter = new CsvDataWriter();
 
     @Test
     public void writeToFile_allValidConditions_Ok() throws IOException {

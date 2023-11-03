@@ -8,20 +8,20 @@ import org.junit.Test;
 
 public class CsvDataReaderTest {
     private static final String INPUT_VALID_FILE =
-                                "src/test/test-resources/input-files/TestValidInputFile.txt";
+                                "src/test/test-resources/input-files/TestValidInputFile.csv";
     private static final String INPUT_EMPTY_FILE =
-                                "src/test/test-resources/input-files/TestEmptyFile.txt";
+                                "src/test/test-resources/input-files/TestEmptyFile.csv";
     private static final String INPUT_NONEXISTENT_FILE =
                                 "src/test/test-resources/input-files/doesNotExist.txt";
     private static final String INPUT_RANDOM_LINES_FILE =
-                                "src/test/test-resources/input-files/TestRandomLines.txt";
+                                "src/test/test-resources/input-files/TestRandomLines.csv";
     private static final CsvDataReader csvDataReader = new CsvDataReader();
 
     @Test
     public void readFileLines_allValidConditions_Ok() {
         List<String> actual = csvDataReader.readFileLines(INPUT_VALID_FILE);
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20");
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -42,6 +42,6 @@ public class CsvDataReaderTest {
                                         "fwpueivwrnv",
                                         "vpaerhgp48g  oiwjeiof",
                                         "whvwvoiwn");
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }

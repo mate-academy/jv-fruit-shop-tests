@@ -20,14 +20,13 @@ public class HandlerStrategyTest {
     private static InventoryDao inventoryDao;
     private static final Map<OperationType, OperationHandler> testMap = new HashMap<>();
     private static HandlerStrategy handlerStrategy = new HandlerStrategy(testMap);
-
     private static BalanceHandler balanceHandler;
     private static PurchaseHandler purchaseHandler;
     private static ReturnHandler returnHandler;
     private static SupplyHandler supplyHandler;
 
     @BeforeAll
-    public static void setUP() {
+    public static void setUp() {
         handlerStrategy = new HandlerStrategy(testMap);
         inventoryDao = new InventoryDaoImpl();
         balanceHandler = new BalanceHandler(inventoryDao);
@@ -41,7 +40,7 @@ public class HandlerStrategyTest {
     }
 
     @Test
-    public void etHandlerByOperationType_validTypes_Ok() {
+    public void getHandlerByOperationType_validTypes_Ok() {
         assertAll(
                 () -> assertEquals(balanceHandler,
                         handlerStrategy.getHandlerByOperationType(OperationType.BALANCE),
@@ -60,7 +59,8 @@ public class HandlerStrategyTest {
 
     @Test
     public void getHandlerByOperationType_byNullOperationType_NotOk() {
-        assertThrows(RuntimeException.class, () -> handlerStrategy.getHandlerByOperationType(null));
+        assertThrows(RuntimeException.class,
+                () -> handlerStrategy.getHandlerByOperationType(null));
     }
 
     @Test

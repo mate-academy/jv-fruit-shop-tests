@@ -5,12 +5,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileWriteServiceTest {
@@ -23,16 +24,16 @@ class FileWriteServiceTest {
     @BeforeAll
     static void beforeAll() {
         fileWriteService = new FileWriteServiceImp();
-    }
-
-    @BeforeEach
-    void setUp() {
         file = new File(PATH_CONSUMER_FILE);
     }
 
-    @AfterEach
-    void tearDown() {
-        file.delete();
+    @AfterAll
+    static void afterAll() {
+        try {
+            Files.deleteIfExists(Path.of(PATH_CONSUMER_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly clear result files after test ", e);
+        }
     }
 
     @Test

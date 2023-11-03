@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -15,6 +17,15 @@ class FileReadServiceTest {
     private static final String PATH_SOURCE_FILE = "src/test/resources/TestSourceFile.txt";
     private static FileReadService fileReadService;
     private static File file;
+
+    @AfterAll
+    static void afterAll() {
+        try {
+            Files.deleteIfExists(Path.of(PATH_SOURCE_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly clear result files after test ", e);
+        }
+    }
 
     @BeforeAll
     static void beforeAll() {
@@ -29,11 +40,6 @@ class FileReadServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't create file: " + PATH_SOURCE_FILE, e);
         }
-    }
-
-    @AfterAll
-    static void afterAll() {
-        file.delete();
     }
 
     @Test

@@ -1,7 +1,6 @@
 package core.basesyntax.reporter;
 
 import core.basesyntax.dao.FruitStorageDao;
-
 import java.util.Map;
 
 public class CsvReportGenerator implements ReportGenerator {
@@ -19,9 +18,6 @@ public class CsvReportGenerator implements ReportGenerator {
         Map<String, Integer> fruitMap = fruitStorageDao.getAll();
         builder.append(HEADER);
         for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
-            if (fruitStorageDao.getQuantity(entry.getKey()) < 0) {
-                throw new IllegalArgumentException();
-            }
             builder.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(COMA)

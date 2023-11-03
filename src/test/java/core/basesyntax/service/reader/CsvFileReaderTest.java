@@ -1,17 +1,18 @@
 package core.basesyntax.service.reader;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.db.FruitStorage;
+import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
     private static final String VALID_PATH_READ = "fruit1.csv";
     private static final String NOT_VALID_PATH_READ = "nonexistent.csv";
-    FileReader csvFileReader;
+    private FileReader csvFileReader;
 
     @BeforeEach
     void setUp() {
@@ -40,5 +41,10 @@ class CsvFileReaderTest {
                 "s,banana,50"
         );
         assertEquals(expected, actual);
+    }
+
+    @AfterEach
+    void tearDown() {
+        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

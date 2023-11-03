@@ -1,11 +1,14 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.FruitStorage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SupplyOperationHandlerTest {
     private FruitStorageDao fruitStorageDao;
@@ -20,7 +23,7 @@ class SupplyOperationHandlerTest {
     @Test
     void operate_withValidData_ok() {
         fruitStorageDao.add("apple", 20);
-         supplyOperationHandler.operate("apple", 10);
+        supplyOperationHandler.operate("apple", 10);
         assertEquals(30, fruitStorageDao.getQuantity("apple"));
     }
 
@@ -38,5 +41,10 @@ class SupplyOperationHandlerTest {
                 () -> supplyOperationHandler.operate("banana", -5));
         assertEquals("You can't supply a negative quantity of fruits!", exception.getMessage());
         assertEquals(15, fruitStorageDao.getQuantity("banana"));
+    }
+
+    @AfterEach
+    void tearDown() {
+        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

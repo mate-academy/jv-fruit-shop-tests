@@ -1,11 +1,14 @@
 package core.basesyntax.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.FruitStorage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BalanceOperationHandlerTest {
     private FruitStorageDao fruitStorageDao;
@@ -25,12 +28,18 @@ class BalanceOperationHandlerTest {
 
     @Test
     void operate_withZeroQuantity_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> balanceOperationHandler.operate("banana", 0));
+        assertThrows(IllegalArgumentException.class,
+                () -> balanceOperationHandler.operate("banana", 0));
     }
 
     @Test
     void operate_withNegativeQuantity_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> balanceOperationHandler.operate("banana", -10));
+    }
+
+    @AfterEach
+    void tearDown() {
+        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

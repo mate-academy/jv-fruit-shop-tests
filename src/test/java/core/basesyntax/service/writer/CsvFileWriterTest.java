@@ -1,22 +1,24 @@
 package core.basesyntax.service.writer;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.db.FruitStorage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
-    private CsvFileWriter csvFileWriter;
-    private String testFilePath;
     private static final String REPORT = """
             fruit,quantity
             banana,152
             apple,90
             """;
+    private CsvFileWriter csvFileWriter;
+    private String testFilePath;
 
     @BeforeEach
     void setUp() {
@@ -44,5 +46,10 @@ class CsvFileWriterTest {
         assertThrows(RuntimeException.class, () -> {
             csvFileWriter.writeToFile("Test", "nonexistent/test.csv");
         });
+    }
+
+    @AfterEach
+    void tearDown() {
+        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

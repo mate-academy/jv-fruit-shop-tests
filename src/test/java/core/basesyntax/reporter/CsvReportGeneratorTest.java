@@ -1,15 +1,13 @@
 package core.basesyntax.reporter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CsvReportGeneratorTest {
     private static FruitStorageDao fruitStorageDao;
@@ -23,7 +21,6 @@ class CsvReportGeneratorTest {
 
     @Test
     void generateReport_withEmptyData_ok() {
-        FruitStorage.fruitToStorageQuantityMap = Map.of();
         String expectedReport = "fruit,quantity";
         assertEquals(expectedReport, csvReportGenerator.generateReport());
     }
@@ -33,19 +30,16 @@ class CsvReportGeneratorTest {
         fruitStorageDao.add("apple", 10);
         fruitStorageDao.add("banana", 5);
 
-        String expectedReport = "fruit,quantity" +
-                System.lineSeparator() +
-                "banana,5" +
-                System.lineSeparator() +
-                "apple,10";
+        String expectedReport = "fruit,quantity"
+                + System.lineSeparator()
+                + "banana,5"
+                + System.lineSeparator()
+                + "apple,10";
         assertEquals(expectedReport, csvReportGenerator.generateReport());
     }
 
-
     @AfterEach
     void tearDown() {
-        if (!FruitStorage.fruitToStorageQuantityMap.isEmpty()) {
-            FruitStorage.fruitToStorageQuantityMap.clear();
-        }
+        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

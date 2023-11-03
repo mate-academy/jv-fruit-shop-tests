@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriteServiceTest {
-    private static final String PATH_CONSUMER_FILE = "src/test/resources/TestConsumerFile.txt";
+    private static final String PATH_CONSUMER_FILE = "TestConsumerFile.csv";//src/test/resources/
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String REPORT_HEAD = "fruit,quantity";
     private static FileWriteService fileWriteService;

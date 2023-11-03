@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface FruitDao {
@@ -10,9 +9,9 @@ public interface FruitDao {
 
     Integer get(String fruitName);
 
-    Map<Fruit, Integer> getAll();
+    Map<String, Integer> getAll();
 
-    void remove(String fruitName, int amount);
+    void reduce(String fruitName, int amount);
 
     void removeAll();
 

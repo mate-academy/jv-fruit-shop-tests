@@ -15,21 +15,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "input.csv";
-    private static final String REPORT_FILE_NAME = "report.csv";
+    private static final String INPUT_FILE_NAME = "src\\main\\resources\\input.csv";
+    private static final String REPORT_FILE_NAME = "src\\main\\resources\\report.csv";
 
     public static void main(String[] args) {
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        String inputData = fileReaderService.readInputData(INPUT_FILE_NAME);
+
         List<StorageUpdateHandler> storageUpdateHandlers = new ArrayList<>();
         storageUpdateHandlers.add(new FruitBalanceHandler());
         storageUpdateHandlers.add(new FruitSupplyHandler());
         storageUpdateHandlers.add(new FruitPurchaseHandler());
         storageUpdateHandlers.add(new FruitReturnHandler());
 
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
-        ReportWriterService reportWriterService = new ReportWriterServiceImpl();
         DataHandlerService dataHandlerService = new DataHandlerServiceImpl(storageUpdateHandlers);
-        String inputData = fileReaderService.readInputData(INPUT_FILE_NAME);
         String reportData = dataHandlerService.calculateInputData(inputData);
+
+        ReportWriterService reportWriterService = new ReportWriterServiceImpl();
         reportWriterService.writeReport(reportData, REPORT_FILE_NAME);
     }
 }

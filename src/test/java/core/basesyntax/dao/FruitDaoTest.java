@@ -66,7 +66,7 @@ class FruitDaoTest {
 
     @Test
     public void remove_correctInputData_Ok() {
-        fruitDao.remove(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
+        fruitDao.reduce(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
         int expected = EMPTY_SIZE;
         Assertions.assertTrue(expected == fruitDao.get(DEFAULT_FRUIT_NAME));
     }

@@ -42,10 +42,10 @@ public class DataHandlerServiceImpl implements DataHandlerService {
         StringBuilder reportBuilder = new StringBuilder(REPORT_COLUMNS);
         fruitDao.getAll().forEach((key, value) ->
                 reportBuilder.append(System.lineSeparator())
-                        .append(key.getProductName())
+                        .append(key)
                         .append(SEPARATE_SYMBOL)
                         .append(value));
-        return reportBuilder.toString();
+        return reportBuilder + System.lineSeparator();
     }
 
     private void addProductTransaction(String productTransaction) {

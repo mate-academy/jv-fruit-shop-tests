@@ -25,7 +25,7 @@ public class FruitPurchaseHandler implements StorageUpdateHandler {
             throw new RuntimeException(NULL_INPUT_MESSAGE);
         }
         checkAbilityToUpdate(fruitName, amount);
-        fruitDao.remove(fruitName, amount);
+        fruitDao.reduce(fruitName, amount);
     }
 
     @Override

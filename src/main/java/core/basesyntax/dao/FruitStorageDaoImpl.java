@@ -14,8 +14,9 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public int getQuantity(String fruit) {
-        if (FruitStorage.fruitToStorageQuantityMap.get(fruit) == null) return 0;
-        return FruitStorage.fruitToStorageQuantityMap.get(fruit);
+        String lowerCaseFruit = fruit.toLowerCase();
+        if (FruitStorage.fruitToStorageQuantityMap.get(lowerCaseFruit) == null) return -1;
+        return FruitStorage.fruitToStorageQuantityMap.get(lowerCaseFruit);
     }
 
     @Override

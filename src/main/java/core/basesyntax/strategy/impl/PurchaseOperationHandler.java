@@ -14,8 +14,8 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void operate(String fruit, int quantity) {
         int quantityAfterPurchase = fruitStorageDao.getQuantity(fruit) - quantity;
-        if (quantityAfterPurchase < 0) {
-            throw new RuntimeException(EXCEPTION_MESSAGE);
+        if (quantity == 0 || quantityAfterPurchase < 0) {
+            throw new IllegalArgumentException(EXCEPTION_MESSAGE);
         }
         fruitStorageDao.add(fruit, quantityAfterPurchase);
     }

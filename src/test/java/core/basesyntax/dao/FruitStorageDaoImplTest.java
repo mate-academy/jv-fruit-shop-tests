@@ -25,8 +25,8 @@ class FruitStorageDaoImplTest {
 
     @Test
     void add_zeroQuantity_ok() {
-        dao.add("banana", 0);
-        assertEquals(0, dao.getQuantity("banana"));
+        assertThrows(IllegalArgumentException.class,
+                () -> dao.add("banana", 0));
     }
 
     @Test
@@ -46,12 +46,6 @@ class FruitStorageDaoImplTest {
         dao.add("apple", 5);
         int quantity = dao.getQuantity("apple");
         assertEquals(5, quantity);
-    }
-
-    @Test
-    void getQuantity_forNonExistentFruit_notOk() {
-        assertThrows(NullPointerException.class,
-                () -> dao.getQuantity("grapes"));
     }
 
     @Test

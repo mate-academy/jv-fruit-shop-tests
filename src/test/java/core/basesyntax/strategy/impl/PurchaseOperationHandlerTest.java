@@ -25,11 +25,18 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void operate_withInsufficientQuantity() {
+    void operate_withInsufficientQuantity_notOk() {
         fruitStorageDao.add("banana", 5);
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> purchaseOperationHandler.operate("banana", 10));
         assertEquals("You can't buy this amount of fruits!", exception.getMessage());
         assertEquals(5, fruitStorageDao.getQuantity("banana"));
+    }
+
+    @Test
+    void operate_withZeroQuantity_notOk() {
+        fruitStorageDao.add("apple", 15);
+        assertThrows(IllegalArgumentException.class,
+                () -> purchaseOperationHandler.operate("apple", 0));
     }
 }

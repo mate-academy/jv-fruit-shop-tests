@@ -35,10 +35,4 @@ class ReturnOperationHandlerTest {
         assertThrows(IllegalArgumentException.class,
                 () -> returnOperationHandler.operate("banana", 0));
     }
-
-    @Test
-    void operate_withNonExistentFruit_notOk() {
-        assertThrows(NullPointerException.class,
-                () -> returnOperationHandler.operate("grapes", 10));
-    }
 }

@@ -30,12 +30,7 @@ class BalanceOperationHandlerTest {
 
     @Test
     void operate_withNegativeQuantity_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> balanceOperationHandler.operate("banana", -10));
-    }
-
-    @Test
-    void operate_withNonExistentFruit_notOk() {
-        assertThrows(NullPointerException.class,
-                () -> balanceOperationHandler.operate("grapes", 10));
+        assertThrows(IllegalArgumentException.class,
+                () -> balanceOperationHandler.operate("banana", -10));
     }
 }

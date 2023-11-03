@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReportWriterServiceTest {
     private static final String READER_FAILURE_MESSAGE = "Cannot read from file {%s}!";
-    private static final String REPORT_FILE_NAME = "report.csv";
+    private static final String REPORT_FILE_NAME = "src\\main\\resources\\report.csv";
     private static final String EMPTY_STRING = "";
     private static final int READ_END_INDEX = -1;
     private static ReportWriterService reportWriterService;

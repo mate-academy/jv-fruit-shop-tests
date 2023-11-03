@@ -68,10 +68,4 @@ class TransactionPerformerImplTest {
         assertEquals(appleExpectedQuantity, appleActualQuantity);
         assertEquals(bananaExpectedQuantity, bananaActualQuantity);
     }
-
-    @Test
-    void performTransactions_withEmptyData_notOk() {
-        List<FruitTransaction> transactions = List.of();
-        transactionPerformer.performTransactions(transactions);
-    }
 }

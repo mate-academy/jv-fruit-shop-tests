@@ -3,11 +3,9 @@ package core.basesyntax.service.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -41,10 +39,5 @@ class ParserTest {
         fileData = List.of("fruit,quantity");
         transactions = parser.parseListToTransactionList(fileData);
         assertTrue(transactions.isEmpty());
-    }
-
-    @AfterEach
-    void tearDown() {
-        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

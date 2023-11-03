@@ -6,17 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.FruitStorage;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
     private static final String VALID_PATH_READ = "fruit1.csv";
     private static final String NOT_VALID_PATH_READ = "nonexistent.csv";
-    private FileReader csvFileReader;
+    private static FileReader csvFileReader;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         csvFileReader = new CsvFileReader();
+
     }
 
     @Test

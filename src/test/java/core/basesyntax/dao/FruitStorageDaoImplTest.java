@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitStorageDaoImplTest {
-    private FruitStorageDaoImpl dao;
+    private static FruitStorageDaoImpl dao;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         dao = new FruitStorageDaoImpl();
     }
 

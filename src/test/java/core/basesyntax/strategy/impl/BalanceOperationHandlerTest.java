@@ -7,16 +7,21 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-    private FruitStorageDao fruitStorageDao;
+    private static FruitStorageDao fruitStorageDao;
     private BalanceOperationHandler balanceOperationHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitStorageDao = new FruitStorageDaoImpl();
+    }
 
     @BeforeEach
     void setUp() {
-        fruitStorageDao = new FruitStorageDaoImpl();
         balanceOperationHandler = new BalanceOperationHandler(fruitStorageDao);
     }
 

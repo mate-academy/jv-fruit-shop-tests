@@ -19,11 +19,11 @@ class FruitTransactionTest {
     @Test
     void gettersAndSetters_workProperly_ok() {
         transaction.setOperation(Operation.BALANCE);
-        transaction.setFruit("Apple");
+        transaction.setFruit("apple");
         transaction.setQuantity(10);
 
         assertEquals(Operation.BALANCE, transaction.getOperation());
-        assertEquals("Apple", transaction.getFruit());
+        assertEquals("apple", transaction.getFruit());
         assertEquals(10, transaction.getQuantity());
     }
 

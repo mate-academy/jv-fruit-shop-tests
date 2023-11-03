@@ -4,13 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitStorageDaoImpl;
-import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,15 +17,13 @@ class OperationStrategyImplTest {
 
     @BeforeEach
     void setUp() {
-        operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE,
-                new BalanceOperationHandler(new FruitStorageDaoImpl()));
-        operationHandlerMap.put(Operation.PURCHASE,
-                new PurchaseOperationHandler(new FruitStorageDaoImpl()));
-        operationHandlerMap.put(Operation.RETURN,
-                new ReturnOperationHandler(new FruitStorageDaoImpl()));
-        operationHandlerMap.put(Operation.SUPPLY,
-                new SupplyOperationHandler(new FruitStorageDaoImpl()));
+        operationHandlerMap = Map.of(
+                Operation.BALANCE, new BalanceOperationHandler(new FruitStorageDaoImpl()),
+                Operation.PURCHASE, new PurchaseOperationHandler(new FruitStorageDaoImpl()),
+                Operation.RETURN, new ReturnOperationHandler(new FruitStorageDaoImpl()),
+                Operation.SUPPLY, new SupplyOperationHandler(new FruitStorageDaoImpl())
+        );
+
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 
@@ -64,10 +59,5 @@ class OperationStrategyImplTest {
     void findOperationHandler_forNonExistentOperation_notOk() {
         assertThrows(NoSuchElementException.class,
                 () -> operationStrategy.findOperationHandler(Operation.findByCode("UNKNOWN")));
-    }
-
-    @AfterEach
-    void tearDown() {
-        FruitStorage.fruitToStorageQuantityMap.clear();
     }
 }

@@ -7,12 +7,17 @@ import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";
+    private FileReader fileReader = new FileReaderImpl();
 
     @Test
     void isFileReader_Ok() {
-        FileReader fileReader = new FileReaderImpl();
+
         List<String> strings = fileReader.readFile(INPUT_FILE_NAME);
         Assertions.assertNotNull(strings.size());
-        Assertions.assertThrows(RuntimeException.class,() -> fileReader.readFile(""));
+    }
+
+    @Test
+    void readFile_nonExistentFile_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> fileReader.readFile("File_Not_Exist"));
     }
 }

@@ -8,15 +8,13 @@ import org.junit.jupiter.api.Test;
 
 class WriterFileImplTest {
     private static final String OUT_FILE_NAME = "src/main/resources/report.csv";
+    private FileReader fileReader = new FileReaderImpl();
+    private WriterFile fileWriter = new WriterFileImpl();
 
     @Test
-    void isFinalResult_Ok() {
-        FileReader fileReader = new FileReaderImpl();
-        WriterFile fileWriter = new WriterFileImpl();
+    void isFileWriter_Ok() {
         fileWriter.writeToFile("Test message", OUT_FILE_NAME);
         List<String> strings = fileReader.readFile(OUT_FILE_NAME);
         Assertions.assertEquals("[Test message]", strings.toString());
-        Assertions.assertThrows(RuntimeException.class, () -> fileReader
-                .readFile("wrong file"));
     }
 }

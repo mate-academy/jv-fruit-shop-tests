@@ -18,9 +18,8 @@ import org.junit.jupiter.api.Test;
 class ReportGeneratorImplTest {
 
     private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";
-    private static final String OUT_FILE_NAME = "src/main/resources/report.csv";
 
-    private Map<FruitTransaction.Operation, OperationHandler>
+    private final Map<FruitTransaction.Operation, OperationHandler>
             correspondenceTable = Map.of(
             FruitTransaction.Operation.BALANCE, new OperationHandlerBalance(),
             FruitTransaction.Operation.SUPPLY, new OperationHandlerIn(),

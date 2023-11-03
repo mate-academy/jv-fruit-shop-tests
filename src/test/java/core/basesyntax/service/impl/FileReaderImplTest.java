@@ -18,6 +18,7 @@ class FileReaderImplTest {
 
     @Test
     void readFile_nonExistentFile_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> fileReader.readFile("File_Not_Exist"));
+        Assertions.assertThrows(RuntimeException.class, () -> fileReader
+                .readFile("File_Not_Exist"));
     }
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class FileReaderServiceTest {
-    private static final String CORRECT_INPUT_FILE_NAME = "src\\main\\resources\\input.csv";
+    private static final String CORRECT_INPUT_FILE_NAME = "src/main/resources/input.csv";
     private static final String WRONG_INPUT_FILE_NAME = "53hsd59.csv";
     private static FileReaderService fileReaderService;
 

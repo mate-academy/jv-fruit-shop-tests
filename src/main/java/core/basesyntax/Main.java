@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src\\main\\resources\\input.csv";
-    private static final String REPORT_FILE_NAME = "src\\main\\resources\\report.csv";
+    private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
+    private static final String REPORT_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();

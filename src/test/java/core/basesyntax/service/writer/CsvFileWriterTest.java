@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,19 +19,17 @@ class CsvFileWriterTest {
             """;
     private static final String TEST_FILE_PATH = "test.csv";
     private CsvFileWriter csvFileWriter;
-    private String testFilePath;
 
     @BeforeEach
     void setUp() {
         csvFileWriter = new CsvFileWriter();
-        testFilePath = TEST_FILE_PATH;
     }
 
     @Test
     void testWriteToFile_withValidPath_ok() {
-        csvFileWriter.writeToFile(REPORT, testFilePath);
+        csvFileWriter.writeToFile(REPORT, TEST_FILE_PATH);
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(testFilePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 builder.append(line).append("\n");
@@ -45,5 +45,13 @@ class CsvFileWriterTest {
         assertThrows(RuntimeException.class, () -> {
             csvFileWriter.writeToFile("Test", "nonexistent/test.csv");
         });
+    }
+
+    @AfterEach
+    void tearDown() {
+        File testFile = new File(TEST_FILE_PATH);
+        if (testFile.exists()) {
+            testFile.delete();
+        }
     }
 }

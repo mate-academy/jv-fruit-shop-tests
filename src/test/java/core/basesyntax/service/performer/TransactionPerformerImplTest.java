@@ -16,6 +16,7 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,5 +68,12 @@ class TransactionPerformerImplTest {
         int bananaExpectedQuantity = 60;
         assertEquals(appleExpectedQuantity, appleActualQuantity);
         assertEquals(bananaExpectedQuantity, bananaActualQuantity);
+    }
+
+    @Test
+    void performTransactions_withEmptyData_notOk() {
+        transactions = Collections.emptyList();
+        transactionPerformer.performTransactions(transactions);
+        assertEquals(0, FruitStorage.fruitToStorageQuantityMap.size());
     }
 }

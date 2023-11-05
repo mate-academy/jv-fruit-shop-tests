@@ -17,7 +17,6 @@ class CsvFileReaderTest {
     @BeforeAll
     static void beforeAll() {
         csvFileReader = new CsvFileReader();
-
     }
 
     @Test

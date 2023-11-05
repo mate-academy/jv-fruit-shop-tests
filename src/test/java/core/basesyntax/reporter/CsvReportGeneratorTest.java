@@ -26,7 +26,7 @@ class CsvReportGeneratorTest {
     }
 
     @Test
-    void generateReport_withNonEmptyData_notOk() {
+    void generateReport_withNonEmptyData_ok() {
         fruitStorageDao.add("apple", 10);
         fruitStorageDao.add("banana", 5);
 

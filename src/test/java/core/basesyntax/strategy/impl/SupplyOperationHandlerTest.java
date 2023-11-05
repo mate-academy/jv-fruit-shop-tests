@@ -34,9 +34,8 @@ class SupplyOperationHandlerTest {
 
     @Test
     void operate_withZeroQuantity_notOk() {
-        fruitStorageDao.add("banana", 5);
-        supplyOperationHandler.operate("banana", 0);
-        assertEquals(5, fruitStorageDao.getQuantity("banana"));
+        assertThrows(IllegalArgumentException.class,
+                () -> supplyOperationHandler.operate("banana", 0));
     }
 
     @Test

@@ -13,7 +13,7 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void operate(String fruit, int quantity) {
-        if (quantity < 0 || fruitStorageDao.getQuantity(fruit) == -1) {
+        if (quantity <= 0 || fruitStorageDao.getQuantity(fruit) == -1) {
             throw new IllegalArgumentException(ERROR_MESSAGE);
         }
         int updatedQuantity = fruitStorageDao.getQuantity(fruit) + quantity;

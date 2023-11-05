@@ -43,7 +43,6 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void operate_withZeroQuantity_notOk() {
-        fruitStorageDao.add("apple", 15);
         assertThrows(IllegalArgumentException.class,
                 () -> purchaseOperationHandler.operate("apple", 0));
     }

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitStorageDaoImplTest {
-    private static FruitStorageDaoImpl dao;
+    private static FruitStorageDao dao;
 
     @BeforeAll
     static void beforeAll() {

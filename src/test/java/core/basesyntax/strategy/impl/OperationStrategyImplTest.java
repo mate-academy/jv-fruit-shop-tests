@@ -23,7 +23,6 @@ class OperationStrategyImplTest {
                 Operation.RETURN, new ReturnOperationHandler(new FruitStorageDaoImpl()),
                 Operation.SUPPLY, new SupplyOperationHandler(new FruitStorageDaoImpl())
         );
-
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }
 

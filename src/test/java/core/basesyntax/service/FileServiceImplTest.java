@@ -11,7 +11,7 @@ class FileServiceImplTest {
     private static final String DEFAULT_FILE_NAME = "src/test/resources/testData.csv";
     private static final String RESULT_FILE_NAME
             = "src/test/resources/testResult.csv";
-    private static final String NOT_VALID_FILE_NAME = "notValid.csv";
+    private static final String NOT_VALID_FILE_NAME = "C:/test.csv";
     private static final List<String> DEFAULT_DATA = new ArrayList<>();
     private static final FileService FILE_SERVICE = new FileServiceImpl();
     private static final String VALID_RESULT_DATA = """
@@ -46,6 +46,6 @@ class FileServiceImplTest {
     @Test
     void write_NotValidFileName_notOk() {
         assertThrows(RuntimeException.class, () -> FILE_SERVICE
-                .write(NOT_VALID_FILE_NAME, VALID_RESULT_DATA));
+                .write(VALID_RESULT_DATA,NOT_VALID_FILE_NAME));
     }
 }

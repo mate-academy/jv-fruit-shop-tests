@@ -21,7 +21,7 @@ class FileServiceImplTest {
     private static final List<String> RESULT_LIST = new ArrayList<>();
 
     @Test
-    void fileServiceReadValid_Ok() {
+    void read_ValidDataRead_Ok() {
         DEFAULT_DATA.add("type,fruit,quantity,");
         DEFAULT_DATA.add("b,banana,20");
         DEFAULT_DATA.add("b,apple,100");
@@ -32,19 +32,19 @@ class FileServiceImplTest {
     }
 
     @Test
-    void fileServiceReadNotValidFileName_notOk() {
+    void read_NotValidFileName_notOk() {
         assertThrows(RuntimeException.class, () -> FILE_SERVICE.read(NOT_VALID_FILE_NAME));
     }
 
     @Test
-    void fileServiceWriteValid_Ok() {
+    void write_ValidDataWrite_Ok() {
         RESULT_LIST.addAll(List.of(VALID_RESULT_DATA.split("\n")));
         FILE_SERVICE.write(VALID_RESULT_DATA, RESULT_FILE_NAME);
         assertEquals(RESULT_LIST, FILE_SERVICE.read(RESULT_FILE_NAME));
     }
 
     @Test
-    void fileServiceWriteNotValidFileName_notOk() {
+    void write_NotValidFileName_notOk() {
         assertThrows(RuntimeException.class, () -> FILE_SERVICE
                 .write(NOT_VALID_FILE_NAME, VALID_RESULT_DATA));
     }

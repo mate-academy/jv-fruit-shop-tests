@@ -33,7 +33,7 @@ class FoodStoreServiceImplTest {
     }
 
     @Test
-    void setFoodStoreServiceValidTransactions_Ok() {
+    void processTransactions_ValidTransactions_Ok() {
         foodStoreService.processTransactions(fruitTransanctionList);
         assertEquals(EXPECTED_VALUE,storage.get(VALID_NAME));
     }

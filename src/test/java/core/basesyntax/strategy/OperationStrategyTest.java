@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImp;
@@ -14,7 +15,6 @@ import core.basesyntax.strategy.handler.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ class OperationStrategyTest {
     private static SupplyHandler supplyHandler;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         fruitDao = new FruitDaoImp();
         balanceHandler = new BalanceHandler(fruitDao);
         purchaseHandler = new PurchaseHandler(fruitDao);
@@ -43,22 +43,22 @@ class OperationStrategyTest {
     }
 
     @Test
-    public void operationStrategy_ValidList_Ok() {
+    void validList_Ok() {
         fruitTransactions = List.of(new FruitTransaction(Operation.BALANCE,"banan",20),
                 new FruitTransaction(Operation.SUPPLY, "banan",200),
                 new FruitTransaction(Operation.PURCHASE, "banan", 3),
                 new FruitTransaction(Operation.RETURN, "banan",3));
-        Assertions.assertTrue(operationStrategy.getHandle(fruitTransactions));
+        assertTrue(operationStrategy.getHandle(fruitTransactions));
     }
 
     @Test
-    public void operationStrategy_NullValue_NotOk() {
+    void nullValue_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> operationStrategy.getHandle(null));
     }
 
     @Test
-    public void operationStrategy_EmptyList_NotOk() {
+    void emptyList_NotOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> operationStrategy.getHandle(List.of()));
     }

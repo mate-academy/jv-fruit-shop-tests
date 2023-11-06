@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.Writer;
 import java.io.File;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +22,13 @@ class WriteCsvServiceTest {
     private static Writer writer;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         writer = new WriteCsvService();
         folder = new File(FOLDER_PATH);
     }
 
     @AfterEach
-    public void afterEach() {
+    void afterEach() {
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles();
             if (files != null) {
@@ -42,22 +42,22 @@ class WriteCsvServiceTest {
     }
 
     @Test
-    public void writeCsvService_NullValue_NotOk() {
+    void nullValue_NotOk() {
         assertThrows(RuntimeException.class, () -> writer.write(null,null));
     }
 
     @Test
-    public void writeCsvService_EmptyContent_Ok() {
-        Assertions.assertTrue(writer.write(EMPTY_CONTENT,EMPTY_FILE_PATH));
+    void emptyContent_Ok() {
+        assertTrue(writer.write(EMPTY_CONTENT,EMPTY_FILE_PATH));
     }
 
     @Test
-    public void writeCsvService_NormalContentName_Ok() {
-        Assertions.assertTrue(writer.write(CONTENT_TO_WRITE, CORRECT_FILE_PATH));
+    void normalContentName_Ok() {
+        assertTrue(writer.write(CONTENT_TO_WRITE, CORRECT_FILE_PATH));
     }
 
     @Test
-    public void writeCsvService_NotCsvFile_NotOk() {
+    void notCsvFile_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> writer.write(CONTENT_NOT_TO_WRITE,NOT_CSV_FILE_PATH));
     }

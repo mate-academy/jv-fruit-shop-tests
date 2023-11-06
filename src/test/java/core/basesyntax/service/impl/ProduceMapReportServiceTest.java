@@ -20,10 +20,9 @@ class ProduceMapReportServiceTest {
             + "apple,2000";
     private static Producer produceMapReportService;
     private static Map<String, Integer> map;
-    private String expected;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         produceMapReportService = new ProduceMapReportService();
         map = new LinkedHashMap<>();
     }
@@ -34,56 +33,51 @@ class ProduceMapReportServiceTest {
     }
 
     @Test
-    public void produceMapReportService_ValidData_Ok() {
-        expected = VALID_DATA;
+    void validData_Ok() {
         map.put("banana", 152);
         map.put("apple", 90);
         String actual = produceMapReportService.produceReport(map);
-        assertEquals(expected, actual);
+        assertEquals(VALID_DATA, actual);
     }
 
     @Test
-    public void produceMapReportService_NullData_NotOk() {
+    void nullData_NotOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> produceMapReportService.produceReport(null));
     }
 
     @Test
-    public void produceMapReportService_EmptyData_NotOK() {
-        expected = EMPTY_DATA;
+    void emptyData_NotOK() {
         String actual = produceMapReportService.produceReport(Map.of());
-        assertEquals(expected, actual);
+        assertEquals(EMPTY_DATA, actual);
     }
 
     @Test
-    public void produceMapReportService_NegativeQuantity_NotOk() {
+    void negativeQuantity_NotOk() {
         map.put("banana", -5);
         assertThrows(IllegalArgumentException.class,
                 () -> produceMapReportService.produceReport(map));
     }
 
     @Test
-    public void produceMapReportService_ZeroQuantity_Ok() {
+    void zeroQuantity_Ok() {
         map.put("banana", 0);
-        expected = ZERO_QUANTITY_DATA;
         String actual = produceMapReportService.produceReport(map);
-        assertEquals(expected, actual);
+        assertEquals(ZERO_QUANTITY_DATA, actual);
     }
 
     @Test
-    public void produceMapReportService_SingleFruit_Ok() {
-        expected = SINGLE_FRUIT_DATA;
+    void singleFruit_Ok() {
         map.put("banana", 5);
         String actual = produceMapReportService.produceReport(map);
-        assertEquals(expected, actual);
+        assertEquals(SINGLE_FRUIT_DATA, actual);
     }
 
     @Test
-    public void produceMapReportService_LargeQuantity_Ok() {
-        expected = LARGE_QUANTITY_DATA;
+    void largeQuantity_Ok() {
         map.put("banana", 1000);
         map.put("apple", 2000);
         String actual = produceMapReportService.produceReport(map);
-        assertEquals(expected, actual);
+        assertEquals(LARGE_QUANTITY_DATA, actual);
     }
 }

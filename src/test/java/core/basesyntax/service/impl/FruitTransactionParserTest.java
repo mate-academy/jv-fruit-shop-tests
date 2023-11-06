@@ -1,28 +1,28 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.Parser;
 import java.util.List;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserTest {
-    private static Parser fruitTransaction;
+    private static Parser parser;
     private List<String> fileData;
     private List<FruitTransaction> expected;
 
     @BeforeAll
-    public static void beforeAll() {
-        fruitTransaction = new FruitTransactionParser();
+    static void beforeAll() {
+        parser = new FruitTransactionParser();
     }
 
     @Test
-    public void fruitTransactionParser_OkCase() {
+    void validData_Ok() {
         expected = List.of(new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.BALANCE, "apple", 100),
                 new FruitTransaction(Operation.SUPPLY, "banana", 100),
@@ -39,35 +39,35 @@ class FruitTransactionParserTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        List<FruitTransaction> actual = fruitTransaction.parse(fileData);
-        Assert.assertEquals(expected, actual);
+        List<FruitTransaction> actual = parser.parse(fileData);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransactionParser_EmptyInput_NotOk() {
+    void emptyInput_NotOk() {
         fileData = List.of();
-        List<FruitTransaction> actual = fruitTransaction.parse(fileData);
+        List<FruitTransaction> actual = parser.parse(fileData);
         assertTrue(actual.isEmpty());
     }
 
     @Test
-    public void fruitTransactionParser_MalformedInput_NotOk() {
+    void malformedInput_NotOk() {
         fileData = List.of("b,banana,20", "invalid_line", "s,apple,30");
-        assertThrows(IllegalArgumentException.class, () -> fruitTransaction.parse(fileData));
+        assertThrows(IllegalArgumentException.class, () -> parser.parse(fileData));
     }
 
     @Test
-    public void fruitTransactionParser_CaseInsensitiveOperationCode_Ok() {
+    void caseInsensitiveOperationCode_Ok() {
         fileData = List.of("B,banana,20", "S,apple,30");
         expected = List.of(new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.SUPPLY, "apple", 30));
-        List<FruitTransaction> actual = fruitTransaction.parse(fileData);
-        Assert.assertEquals(expected, actual);
+        List<FruitTransaction> actual = parser.parse(fileData);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void fruitTransactionParser_InvalidQuantity_NotOk() {
+    void invalidQuantity_NotOk() {
         fileData = List.of("b,banana,-20", "s,apple,invalid");
-        assertThrows(IllegalArgumentException.class, () -> fruitTransaction.parse(fileData));
+        assertThrows(IllegalArgumentException.class, () -> parser.parse(fileData));
     }
 }

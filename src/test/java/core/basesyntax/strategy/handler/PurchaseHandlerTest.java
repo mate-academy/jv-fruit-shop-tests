@@ -27,7 +27,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void InvalidData_NotOk() {
+    void invalidData_NotOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> handler.handle(new FruitTransaction(Operation.PURCHASE, "Banana", -100)));
     }

@@ -27,7 +27,7 @@ class SupplyHandlerTest {
     }
 
     @Test
-    void InvalidData_NotOk() {
+    void invalidData_NotOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> handler.handle(new FruitTransaction(Operation.SUPPLY, "Banana", -100)));
     }

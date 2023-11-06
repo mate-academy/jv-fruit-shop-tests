@@ -11,6 +11,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ParserServiceImplTest {
+    private static final String BALANCE_OPERATION_CODE = "b";
+    private static final String SUPPLY_OPERATION_CODE = "s";
+    private static final String PURCHASE_OPERATION_CODE = "p";
+    private static final String RETURN_OPERATION_CODE = "r";
     private ParserServiceImpl parserService;
 
     @BeforeEach
@@ -21,10 +25,10 @@ public class ParserServiceImplTest {
     @Test
     public void testValidStringsToFruitTransactions() {
         List<String> inputStrings = Arrays.asList(
-                "b,apple,10",
-                "s,banana,20",
-                "p,orange,5",
-                "r,kiwi,3"
+                BALANCE_OPERATION_CODE + ",apple,10",
+                SUPPLY_OPERATION_CODE + ",banana,20",
+                PURCHASE_OPERATION_CODE + ",orange,5",
+                RETURN_OPERATION_CODE + ",kiwi,3"
         );
 
         List<FruitTransaction> expectedTransactions = Arrays.asList(
@@ -42,10 +46,10 @@ public class ParserServiceImplTest {
     @Test
     public void testInvalidStringsToFruitTransactions() {
         List<String> inputStrings = Arrays.asList(
-                "b,apple,10",
+                BALANCE_OPERATION_CODE + ",apple,10",
                 "invalid_string",
-                "p,orange,5",
-                "r,kiwi,3"
+                PURCHASE_OPERATION_CODE + ",orange,5",
+                RETURN_OPERATION_CODE + ",kiwi,3"
         );
 
         assertThrows(RuntimeException.class, () ->

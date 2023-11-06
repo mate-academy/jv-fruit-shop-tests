@@ -22,6 +22,8 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionServiceImplTest {
     private static FruitTransactionService transactionService;
     private static OperationStrategy operationStrategy;
+    private static final String FRUIT_NAME = "banana";
+    private static final int FRUIT_QUANTITY = 19;
 
     @BeforeAll
     static void beforeAll() {
@@ -30,31 +32,27 @@ class FruitTransactionServiceImplTest {
         transactionService = new FruitTransactionServiceImpl(fruitStorageDao, operationStrategy);
     }
 
-    @AfterEach
-    void tearDown() {
-        Storage.fruitTransactions.clear();
-    }
-
     @Test
     void processTransactions_validTransactions_updatesStorage() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransactionOperation.BALANCE);
-        fruitTransaction.setFruit("banana");
-        fruitTransaction.setQuantity(19);
-
+        fruitTransaction.setFruit(FRUIT_NAME);
+        fruitTransaction.setQuantity(FRUIT_QUANTITY);
         List<FruitTransaction> fruitTransactions = List.of(fruitTransaction);
         transactionService.processTransactions(fruitTransactions);
-
         Map<String, Integer> expectedFruitMap = new HashMap<>();
-        expectedFruitMap.put("banana", 19);
-
+        expectedFruitMap.put(FRUIT_NAME, FRUIT_QUANTITY);
         assertEquals(expectedFruitMap, Storage.fruitTransactions);
     }
 
-    private static Map<FruitTransactionOperation, OperationHandler>
-                    createOperationMap() {
+    private static Map<FruitTransactionOperation, OperationHandler> createOperationMap() {
         Map<FruitTransactionOperation, OperationHandler> strategyMap = new HashMap<>();
         strategyMap.put(FruitTransactionOperation.BALANCE, new BalanceHandler());
         return strategyMap;
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.fruitTransactions.clear();
     }
 }

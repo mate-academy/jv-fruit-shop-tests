@@ -27,7 +27,7 @@ class TransactionParserImplTest {
         FruitTransaction.Operation operationBalance = FruitTransaction.Operation.getByCode("b");
         Assertions.assertEquals(operationBalance, FruitTransaction.Operation.BALANCE);
         FruitTransaction.Operation operationReturn = FruitTransaction.Operation.getByCode("r");
-        Assertions.assertEquals(true, operationReturn.equals(FruitTransaction.Operation.RETURN));
+        Assertions.assertTrue(operationReturn.equals(FruitTransaction.Operation.RETURN));
     }
 
     @Test

@@ -40,7 +40,7 @@ public class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void updateNumberOfFruit_notValidQuantity_NoOk() {
+    void updateNumberOfFruit_notValidQuantity_NotOk() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setQuantity(21);
         fruitTransaction.setFruit("banana");
@@ -48,4 +48,3 @@ public class PurchaseOperationHandlerTest {
                 () -> operationHandler.handleOperation(fruitTransaction));
     }
 }
-

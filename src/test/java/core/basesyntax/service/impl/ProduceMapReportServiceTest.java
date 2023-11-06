@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.Producer;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -18,17 +19,23 @@ class ProduceMapReportServiceTest {
             + System.lineSeparator()
             + "apple,2000";
     private static Producer produceMapReportService;
+    private static Map<String, Integer> map;
     private String expected;
 
     @BeforeAll
     public static void setUp() {
         produceMapReportService = new ProduceMapReportService();
+        map = new LinkedHashMap<>();
+    }
+
+    @AfterEach
+    public void afterEach() {
+        map.clear();
     }
 
     @Test
     public void produceMapReportService_ValidData_Ok() {
         expected = VALID_DATA;
-        Map<String, Integer> map = new LinkedHashMap<>();
         map.put("banana", 152);
         map.put("apple", 90);
         String actual = produceMapReportService.produceReport(map);
@@ -43,15 +50,13 @@ class ProduceMapReportServiceTest {
 
     @Test
     public void produceMapReportService_EmptyData_NotOK() {
-        Map<String, Integer> map = Map.of();
         expected = EMPTY_DATA;
-        String actual = produceMapReportService.produceReport(map);
+        String actual = produceMapReportService.produceReport(Map.of());
         assertEquals(expected, actual);
     }
 
     @Test
     public void produceMapReportService_NegativeQuantity_NotOk() {
-        Map<String, Integer> map = new LinkedHashMap<>();
         map.put("banana", -5);
         assertThrows(IllegalArgumentException.class,
                 () -> produceMapReportService.produceReport(map));
@@ -59,7 +64,6 @@ class ProduceMapReportServiceTest {
 
     @Test
     public void produceMapReportService_ZeroQuantity_Ok() {
-        Map<String, Integer> map = new LinkedHashMap<>();
         map.put("banana", 0);
         expected = ZERO_QUANTITY_DATA;
         String actual = produceMapReportService.produceReport(map);
@@ -69,7 +73,6 @@ class ProduceMapReportServiceTest {
     @Test
     public void produceMapReportService_SingleFruit_Ok() {
         expected = SINGLE_FRUIT_DATA;
-        Map<String, Integer> map = new LinkedHashMap<>();
         map.put("banana", 5);
         String actual = produceMapReportService.produceReport(map);
         assertEquals(expected, actual);
@@ -78,7 +81,6 @@ class ProduceMapReportServiceTest {
     @Test
     public void produceMapReportService_LargeQuantity_Ok() {
         expected = LARGE_QUANTITY_DATA;
-        Map<String, Integer> map = new LinkedHashMap<>();
         map.put("banana", 1000);
         map.put("apple", 2000);
         String actual = produceMapReportService.produceReport(map);

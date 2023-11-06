@@ -8,25 +8,17 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.Parser;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserTest {
+    private static Parser fruitTransaction;
     private List<String> fileData;
     private List<FruitTransaction> expected;
-    private Parser fruitTransaction;
 
-    @BeforeEach
-    public void beforeEach() {
+    @BeforeAll
+    public static void beforeAll() {
         fruitTransaction = new FruitTransactionParser();
-        fileData = List.of("b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13",
-                "r,apple,10",
-                "p,apple,20",
-                "p,banana,5",
-                "s,banana,50");
     }
 
     @Test
@@ -39,6 +31,14 @@ class FruitTransactionParserTest {
                 new FruitTransaction(Operation.PURCHASE, "apple", 20),
                 new FruitTransaction(Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(Operation.SUPPLY, "banana", 50));
+        fileData = List.of("b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50");
         List<FruitTransaction> actual = fruitTransaction.parse(fileData);
         Assert.assertEquals(expected, actual);
     }

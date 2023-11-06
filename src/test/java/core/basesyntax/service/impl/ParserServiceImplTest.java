@@ -44,7 +44,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void testInvalidStringsToFruitTransactions() {
+    public void testInvalidStringToFruitTransactions() {
         List<String> inputStrings = Arrays.asList(
                 BALANCE_OPERATION_CODE + ",apple,10",
                 "invalid_string",

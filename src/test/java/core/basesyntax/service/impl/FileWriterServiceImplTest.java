@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import service.FileWriterService;
 import service.impl.FileWriterServiceImpl;
 
 public class FileWriterServiceImplTest {
-    private static FileWriterService fileWriterService;
+    private static final String EXPECTED_OUTPUT = "fruit,quantity" + System.lineSeparator()
+            + "banana,90" + System.lineSeparator()
+            + "apple,100" + System.lineSeparator();
     private static final String OUTPUT_FILE = "src/test/resources/test_output.csv";
-    private static final String NON_EXISTENT_OUTPUT_FILE
-            = "src/test/someResources/non_existent_output.csv";
-    private static final String EXPECTED_OUTPUT = expectedOutputCreator();
+    private static final String NON_EXISTENT_OUTPUT_FILE = "src/test/someResources/shop_input.csv";
+    private static FileWriterServiceImpl fileWriterService;
     private static List<String> output;
 
     private static String expectedOutputCreator() {

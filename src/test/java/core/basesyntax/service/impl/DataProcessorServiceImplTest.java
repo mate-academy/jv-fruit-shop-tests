@@ -46,14 +46,14 @@ public class DataProcessorServiceImplTest {
     }
 
     @Test
-    void updateDataInStorage_negativeQuantity_notOk() {
+    void negativeQuantity_notOk() {
         List<String> data = List.of("b,banana,-1", "b,apple,1", "s,banana,1");
         assertThrows(RuntimeException.class,
                 () -> dataProcessorService.processData(data));
     }
 
     @Test
-    void updateDataInStorage_validData_ok() {
+    void update_ok() {
         List<String> data = new ArrayList<>();
         data.add("type,fruit,quantity");
         data.add("b,banana,1");

@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 class TransactionProcessorImplTest {
     private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";
-    private Map<FruitTransaction.Operation, OperationHandler>
+    private final Map<FruitTransaction.Operation, OperationHandler>
             correspondenceTable = Map.of(
             FruitTransaction.Operation.BALANCE, new OperationHandlerBalance(),
             FruitTransaction.Operation.SUPPLY, new OperationHandlerIn(),
@@ -38,3 +38,4 @@ class TransactionProcessorImplTest {
         Assertions.assertEquals(90, Storage.storage.get("apple"));
     }
 }
+

@@ -1,27 +1,16 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.strategy.OperationHandlerBalance;
-import core.basesyntax.strategy.OperationHandlerIn;
-import core.basesyntax.strategy.OperationHandlerOut;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
-    private Map<FruitTransaction.Operation, OperationHandler>
-            correspondenceTable = Map.of(
-            FruitTransaction.Operation.BALANCE, new OperationHandlerBalance(),
-            FruitTransaction.Operation.SUPPLY, new OperationHandlerIn(),
-            FruitTransaction.Operation.RETURN, new OperationHandlerIn(),
-            FruitTransaction.Operation.PURCHASE, new OperationHandlerOut());
 
     @Test
     void operationGetByOperationIs_Ok() {
-        FruitTransaction.Operation b = FruitTransaction.Operation.getByCode("b");
-        Assertions.assertEquals(b, (FruitTransaction.Operation.BALANCE));
-        FruitTransaction.Operation r = FruitTransaction.Operation.getByCode("r");
-        Assertions.assertEquals(r, (FruitTransaction.Operation.RETURN));
+        FruitTransaction.Operation balanceOperation = FruitTransaction.Operation.getByCode("b");
+        Assertions.assertEquals(balanceOperation, (FruitTransaction.Operation.BALANCE));
+        FruitTransaction.Operation returnOperation = FruitTransaction.Operation.getByCode("r");
+        Assertions.assertEquals(returnOperation, (FruitTransaction.Operation.RETURN));
     }
 
     @Test
@@ -32,7 +21,7 @@ class FruitTransactionTest {
 
     @Test
     void enumTestIs_Ok() {
-        Assertions.assertEquals(4,FruitTransaction.Operation.values().length);
+        Assertions.assertEquals(4, FruitTransaction.Operation.values().length);
     }
 
     @Test

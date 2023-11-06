@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 
 class WriterFileImplTest {
     private static final String OUT_FILE_NAME = "src/main/resources/report.csv";
-    private FileReader fileReader = new FileReaderImpl();
-    private WriterFile fileWriter = new WriterFileImpl();
+    private final FileReader fileReader = new FileReaderImpl();
+    private final WriterFile fileWriter = new WriterFileImpl();
 
     @Test
-    void isFileWriter_Ok() {
+    void writeFile_existentFile_ok() {
         fileWriter.writeToFile("Test message", OUT_FILE_NAME);
         List<String> strings = fileReader.readFile(OUT_FILE_NAME);
         Assertions.assertEquals("[Test message]", strings.toString());

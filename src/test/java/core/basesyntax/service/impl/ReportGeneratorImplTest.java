@@ -26,17 +26,18 @@ class ReportGeneratorImplTest {
             FruitTransaction.Operation.RETURN, new OperationHandlerIn(),
             FruitTransaction.Operation.PURCHASE, new OperationHandlerOut());
 
-    private FileReader fileReader = new FileReaderImpl();
-    private CalculateStrategy calculateStrategy = new CalculateStrategy(correspondenceTable);
-    private TransactionProcessor transactionProcessor
+    private final FileReader fileReader = new FileReaderImpl();
+    private final CalculateStrategy calculateStrategy = new CalculateStrategy(correspondenceTable);
+    private final TransactionProcessor transactionProcessor
             = new TransactionProcessorImpl(calculateStrategy);
-    private TransactionParser transactionParser = new TransactionParserImpl();
-    private ReportGenerator reportGenerator = new ReportGeneratorImpl();
-    private List<String> strings = fileReader.readFile(INPUT_FILE_NAME);
-    private List<FruitTransaction> listOfTransaction = transactionParser.parseTransaction(strings);
+    private final TransactionParser transactionParser = new TransactionParserImpl();
+    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private final List<String> strings = fileReader.readFile(INPUT_FILE_NAME);
+    private final List<FruitTransaction> listOfTransaction = transactionParser
+            .parseTransaction(strings);
 
     @Test
-    void makeReportIs_Ok() {
+    void makeReportIs_ok() {
         transactionProcessor.calculateBalance(listOfTransaction);
         String report = reportGenerator.makeReport();
         Assertions.assertEquals(report,"banana, 152"
@@ -46,7 +47,7 @@ class ReportGeneratorImplTest {
     }
 
     @Test
-    void makeReportIsNullNot_Ok() {
+    void makeReportIsNullNot_ok() {
         transactionProcessor.calculateBalance(listOfTransaction);
         Assertions.assertNotNull(reportGenerator.makeReport());
     }

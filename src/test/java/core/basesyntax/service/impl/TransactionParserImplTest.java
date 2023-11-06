@@ -23,11 +23,15 @@ class TransactionParserImplTest {
     }
 
     @Test
-    void operationGetTest() {
-        FruitTransaction.Operation b = FruitTransaction.Operation.getByCode("b");
-        Assertions.assertTrue(b.equals(FruitTransaction.Operation.BALANCE));
-        FruitTransaction.Operation r = FruitTransaction.Operation.getByCode("r");
-        Assertions.assertTrue(r.equals(FruitTransaction.Operation.RETURN));
+    void operationGetIs_ok() {
+        FruitTransaction.Operation operationBalance = FruitTransaction.Operation.getByCode("b");
+        Assertions.assertEquals(operationBalance, FruitTransaction.Operation.BALANCE);
+        FruitTransaction.Operation operationReturn = FruitTransaction.Operation.getByCode("r");
+        Assertions.assertEquals(true, operationReturn.equals(FruitTransaction.Operation.RETURN));
+    }
+
+    @Test
+    void operationGetIs_throwsException() {
         Assertions.assertThrows(RuntimeException.class, () -> FruitTransaction.Operation
                 .getByCode("x"));
     }

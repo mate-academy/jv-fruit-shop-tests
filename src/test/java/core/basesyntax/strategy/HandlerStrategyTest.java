@@ -13,30 +13,33 @@ import core.basesyntax.strategy.handlers.ReturnHandler;
 import core.basesyntax.strategy.handlers.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-public class HandlerStrategyTest {
+class HandlerStrategyTest {
     private static InventoryDao inventoryDao;
-    private static final Map<OperationType, OperationHandler> testMap = new HashMap<>();
-    private static HandlerStrategy handlerStrategy = new HandlerStrategy(testMap);
-    private static BalanceHandler balanceHandler;
-    private static PurchaseHandler purchaseHandler;
-    private static ReturnHandler returnHandler;
-    private static SupplyHandler supplyHandler;
+    private static Map<OperationType, OperationHandler> strategyMap;
+    private static HandlerStrategy handlerStrategy;
+    private static OperationHandler balanceHandler;
+    private static OperationHandler purchaseHandler;
+    private static OperationHandler returnHandler;
+    private static OperationHandler supplyHandler;
 
     @BeforeAll
-    public static void setUp() {
-        handlerStrategy = new HandlerStrategy(testMap);
+    static void setUp() {
+        strategyMap = new HashMap<>();
+        handlerStrategy = new HandlerStrategy(strategyMap);
         inventoryDao = new InventoryDaoImpl();
+
         balanceHandler = new BalanceHandler(inventoryDao);
         purchaseHandler = new PurchaseHandler(inventoryDao);
         returnHandler = new ReturnHandler(inventoryDao);
         supplyHandler = new SupplyHandler(inventoryDao);
-        testMap.put(OperationType.BALANCE, balanceHandler);
-        testMap.put(OperationType.PURCHASE, purchaseHandler);
-        testMap.put(OperationType.RETURN, returnHandler);
-        testMap.put(OperationType.SUPPLY, supplyHandler);
+
+        strategyMap.put(OperationType.BALANCE, balanceHandler);
+        strategyMap.put(OperationType.PURCHASE, purchaseHandler);
+        strategyMap.put(OperationType.RETURN, returnHandler);
+        strategyMap.put(OperationType.SUPPLY, supplyHandler);
     }
 
     @Test
@@ -65,6 +68,6 @@ public class HandlerStrategyTest {
 
     @Test
     public void getStrategyMap_allValidConditions_Ok() {
-        assertEquals(handlerStrategy.getStrategyMap(), testMap);
+        assertEquals(handlerStrategy.getStrategyMap(), strategyMap);
     }
 }

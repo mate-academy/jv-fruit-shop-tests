@@ -20,6 +20,7 @@ class CsvReadDataParserImplTest {
     static void setUp() {
         parser = new CsvReadDataParserImpl();
     }
+
     @Test
     void convertToFruitTransactionList_allValidConditions() {
         FruitTransaction expected = new FruitTransaction(

@@ -50,9 +50,7 @@ class FileWriteServiceTest {
                 STOCK_APPLE_QUANTITY);
         fileWriteService.writeCsvToFile(inputData, PATH_CONSUMER_FILE);
         List<String> actualList = readFile(PATH_CONSUMER_FILE);
-        for (int i = 0; i < expectedList.size(); i++) {
-            Assertions.assertEquals(expectedList.get(i), actualList.get(i));
-        }
+        Assertions. assertIterableEquals(expectedList, actualList);
     }
 
     @Test
@@ -61,9 +59,8 @@ class FileWriteServiceTest {
         List<String> expectedList = List.of(REPORT_HEAD);
         fileWriteService.writeCsvToFile(inputData, PATH_CONSUMER_FILE);
         List<String> actualList = readFile(PATH_CONSUMER_FILE);
-        for (int i = 0; i < actualList.size(); i++) {
-            Assertions.assertEquals(expectedList.get(i), actualList.get(i));
-        }
+        Assertions. assertIterableEquals(expectedList, actualList);
+
     }
 
     @Test

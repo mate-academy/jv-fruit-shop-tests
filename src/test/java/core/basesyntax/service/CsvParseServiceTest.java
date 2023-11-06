@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.GoodsOperation;
 import core.basesyntax.service.imp.CsvParser;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -21,10 +20,6 @@ class CsvParseServiceTest {
         csvParseService = new CsvParser();
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void listOperationsFromCsv_validText_ok() {
         List<String> inputList = List.of(OPERATION_BALANCE_BANANA, OPERATION_BALANCE_APPLE);
@@ -32,9 +27,7 @@ class CsvParseServiceTest {
                 new GoodsOperation(GoodsOperation.TransactionType.BALANCE, BANANA, 20),
                 new GoodsOperation(GoodsOperation.TransactionType.BALANCE, APPLE, 100));
         List<GoodsOperation> actual = csvParseService.listOperationsFromCsv(inputList);
-        for (int i = 0; i < actual.size(); i++) {
-            Assertions.assertEquals(expected.get(i), actual.get(i));
-        }
+        Assertions.assertIterableEquals(expected, actual);
     }
 
     @Test

@@ -40,8 +40,6 @@ class ReportServiceTest {
                 "banana,50" + LINE_SEPARATOR,
                 "apple,100" + LINE_SEPARATOR);
         List<String> actualList = reportService.getGoodsStockCsv();
-        for (int i = 0; i < actualList.size(); i++) {
-            Assertions.assertEquals(expectedsList.get(i), actualList.get(i));
-        }
+        Assertions. assertIterableEquals(expectedsList, actualList);
     }
 }

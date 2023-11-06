@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class ReportServiceTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String REPORT_HEAD = "fruit,quantity";
+
     private static ReportService reportService;
     private static StorageDao storageDao;
     private static Map<String, Integer> storage;

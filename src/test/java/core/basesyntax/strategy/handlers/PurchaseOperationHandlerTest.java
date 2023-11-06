@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
+    private static final String BANANA = "banana";
     private static Map<String, Integer> storage;
     private static StorageDao storageDao;
     private static PurchaseOperationHandler purchaseOperationHandler;
@@ -22,7 +23,7 @@ class PurchaseOperationHandlerTest {
         storageDao = new StorageDaoImp(storage);
         purchaseOperationHandler = new PurchaseOperationHandler(storageDao);
         purchaseOperation = new GoodsOperation(GoodsOperation.TransactionType.PURCHASE,
-                "banana", 24);
+                BANANA, 24);
     }
 
     @AfterEach
@@ -33,7 +34,7 @@ class PurchaseOperationHandlerTest {
     @Test
     void handleOperation_validOperations_ok() {
         int stocksQuantity = 73;
-        storage.put("banana", stocksQuantity);
+        storage.put(BANANA, stocksQuantity);
         purchaseOperationHandler.handleOperation(purchaseOperation);
         Integer actual = storage.get(purchaseOperation.getItem());
         Integer expected = stocksQuantity - purchaseOperation.getQuantity();
@@ -47,9 +48,13 @@ class PurchaseOperationHandlerTest {
         purchaseOperation = new GoodsOperation(purchaseOperation.getTransactionType(),
                 null,
                 purchaseOperation.getQuantity());
-        Assertions.assertThrows(RuntimeException.class,
-                () -> purchaseOperationHandler.handleOperation(purchaseOperation),
-                "Goods name can't be null");
+        String expectedMessage = "can't be null";
+        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
+            purchaseOperationHandler.handleOperation(purchaseOperation);
+        });
+        String actualMessage = exception.getMessage();
+        Assertions.assertTrue(actualMessage.contains(expectedMessage),
+                "Exception message must contain string: " + expectedMessage);
     }
 
     @Test

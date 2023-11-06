@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
+    private static final String BANANA = "banana";
     private static Map<String, Integer> storage;
     private static StorageDao storageDao;
     private static SupplyOperationHandler supplyOperationHandler;
@@ -22,7 +23,7 @@ class SupplyOperationHandlerTest {
         storageDao = new StorageDaoImp(storage);
         supplyOperationHandler = new SupplyOperationHandler(storageDao);
         supplyOperation = new GoodsOperation(GoodsOperation.TransactionType.SUPPLY,
-                "banana", 50);
+                BANANA, 50);
     }
 
     @AfterEach
@@ -45,8 +46,12 @@ class SupplyOperationHandlerTest {
         supplyOperation = new GoodsOperation(supplyOperation.getTransactionType(),
                 null,
                 supplyOperation.getQuantity());
-        Assertions.assertThrows(RuntimeException.class,
-                () -> supplyOperationHandler.handleOperation(supplyOperation),
-                "Goods name can't be null");
+        String expectedMessage = "can't be null";
+        Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
+            supplyOperationHandler.handleOperation(supplyOperation);
+        });
+        String actualMessage = exception.getMessage();
+        Assertions.assertTrue(actualMessage.contains(expectedMessage),
+                "Exception message must contain string: " + expectedMessage);
     }
 }

@@ -15,6 +15,11 @@ import org.junit.jupiter.api.Test;
 
 class FileReadServiceTest {
     private static final String PATH_SOURCE_FILE = "TestSourceFile.csv";
+    private static final String OPERATION_BALANCE_BANANA = "b,banana,20";
+    private static final String OPERATION_BALANCE_APPLE = "b,apple,100";
+    private static final String OPERATION_SUPPLY_APPLE = "s,banana,100";
+    private static final String INVALID_OPERATION_APPLE = "p,apple,20";
+
     private static FileReadService fileReadService;
     private static File file;
 
@@ -30,10 +35,10 @@ class FileReadServiceTest {
     @BeforeAll
     static void beforeAll() {
         fileReadService = new FileReadServiceImp();
-        String testFileText = "b,banana,20"
-                + System.lineSeparator() + "b,apple,100"
-                + System.lineSeparator() + "s,banana,100"
-                + System.lineSeparator() + "p,apple,20";
+        String testFileText = OPERATION_BALANCE_BANANA
+                + System.lineSeparator() + OPERATION_BALANCE_APPLE
+                + System.lineSeparator() + OPERATION_SUPPLY_APPLE
+                + System.lineSeparator() + INVALID_OPERATION_APPLE;
         file = new File(PATH_SOURCE_FILE);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(testFileText);
@@ -44,7 +49,11 @@ class FileReadServiceTest {
 
     @Test
     void readFilesLines_validFile_Ok() {
-        List<String> expected = List.of("b,banana,20", "b,apple,100", "s,banana,100", "p,apple,20");
+        List<String> expected = List.of(
+                OPERATION_BALANCE_BANANA,
+                OPERATION_BALANCE_APPLE,
+                OPERATION_SUPPLY_APPLE,
+                INVALID_OPERATION_APPLE);
         List<String> actual = fileReadService.readFilesLines(PATH_SOURCE_FILE);
         Assertions.assertEquals(expected, actual);
     }

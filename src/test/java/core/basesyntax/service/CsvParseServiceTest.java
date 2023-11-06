@@ -9,6 +9,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvParseServiceTest {
+    private static final String OPERATION_BALANCE_BANANA = "b,banana,20";
+    private static final String OPERATION_BALANCE_APPLE = "b,apple,100";
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+
     private static CsvParseService csvParseService;
 
     @BeforeAll
@@ -22,10 +27,10 @@ class CsvParseServiceTest {
 
     @Test
     void listOperationsFromCsv_validText_ok() {
-        List<String> inputList = List.of("b,banana,20", "b,apple,100");
+        List<String> inputList = List.of(OPERATION_BALANCE_BANANA, OPERATION_BALANCE_APPLE);
         List<GoodsOperation> expected = List.of(
-                new GoodsOperation(GoodsOperation.TransactionType.BALANCE, "banana", 20),
-                new GoodsOperation(GoodsOperation.TransactionType.BALANCE, "apple", 100));
+                new GoodsOperation(GoodsOperation.TransactionType.BALANCE, BANANA, 20),
+                new GoodsOperation(GoodsOperation.TransactionType.BALANCE, APPLE, 100));
         List<GoodsOperation> actual = csvParseService.listOperationsFromCsv(inputList);
         for (int i = 0; i < actual.size(); i++) {
             Assertions.assertEquals(expected.get(i), actual.get(i));
@@ -34,12 +39,11 @@ class CsvParseServiceTest {
 
     @Test
     void convertToOperationFromCsv_validText_ok() {
-        String input = "b,banana,20";
         GoodsOperation expected = new GoodsOperation(
                 GoodsOperation.TransactionType.BALANCE,
-                "banana",
+                BANANA,
                 20);
-        GoodsOperation actual = csvParseService.convertToOperationFromCsv(input);
+        GoodsOperation actual = csvParseService.convertToOperationFromCsv(OPERATION_BALANCE_BANANA);
         Assertions.assertEquals(expected, actual);
     }
 }

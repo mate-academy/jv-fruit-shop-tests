@@ -18,6 +18,9 @@ class FileWriteServiceTest {
     private static final String PATH_CONSUMER_FILE = "TestConsumerFile.csv";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String REPORT_HEAD = "fruit,quantity";
+    private static final String STOCK_BANANA_QUANTITY = "banana,50";
+    private static final String STOCK_APPLE_QUANTITY = "apple,100";
+
     private static FileWriteService fileWriteService;
     private static File file;
 
@@ -40,11 +43,11 @@ class FileWriteServiceTest {
     void writeCsvToFile_allValid_ok() {
         List<String> inputData = List.of(
                 REPORT_HEAD + LINE_SEPARATOR,
-                "banana,50" + LINE_SEPARATOR,
-                "apple,100" + LINE_SEPARATOR);
+                STOCK_BANANA_QUANTITY + LINE_SEPARATOR,
+                STOCK_APPLE_QUANTITY + LINE_SEPARATOR);
         List<String> expectedList = List.of(REPORT_HEAD,
-                "banana,50",
-                "apple,100");
+                STOCK_BANANA_QUANTITY,
+                STOCK_APPLE_QUANTITY);
         fileWriteService.writeCsvToFile(inputData, PATH_CONSUMER_FILE);
         List<String> actualList = readFile(PATH_CONSUMER_FILE);
         for (int i = 0; i < expectedList.size(); i++) {

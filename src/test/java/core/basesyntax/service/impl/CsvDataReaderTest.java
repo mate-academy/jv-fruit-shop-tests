@@ -2,9 +2,11 @@ package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class CsvDataReaderTest {
     private static final String INPUT_VALID_FILE =
@@ -15,13 +17,18 @@ public class CsvDataReaderTest {
                                 "src/test/test-resources/input-files/doesNotExist.txt";
     private static final String INPUT_RANDOM_LINES_FILE =
                                 "src/test/test-resources/input-files/TestRandomLines.csv";
-    private static final CsvDataReader csvDataReader = new CsvDataReader();
+    private static CsvDataReader csvDataReader;
+
+    @BeforeAll
+    public static void setUp() {
+        csvDataReader = new CsvDataReader();
+    }
 
     @Test
     public void readFileLines_allValidConditions_Ok() {
         List<String> actual = csvDataReader.readFileLines(INPUT_VALID_FILE);
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20");
-        assertEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 
     @Test

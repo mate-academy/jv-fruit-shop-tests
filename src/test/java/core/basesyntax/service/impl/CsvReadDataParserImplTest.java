@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class CsvReadDataParserImplTest {
     private static final List<String> VALID_INPUT = List.of("type,fruit,quantity",
@@ -13,8 +14,12 @@ public class CsvReadDataParserImplTest {
     private static final List<String> INVALID_INPUT = List.of("type,fruit,quantity",
                                                             "2 0,ban ana,b //qqq");
 
-    private static final CsvReadDataParserImpl parser = new CsvReadDataParserImpl();
+    private static CsvReadDataParserImpl parser;
 
+    @BeforeAll
+    public static void setUp() {
+        parser = new CsvReadDataParserImpl();
+    }
     @Test
     public void convertToFruitTransactionList_allValidConditions() {
         FruitTransaction expected = new FruitTransaction(

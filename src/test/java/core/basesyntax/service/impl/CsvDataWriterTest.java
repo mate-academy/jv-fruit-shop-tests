@@ -6,7 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class CsvDataWriterTest {
     private static final String VALID_STRING = "Some VALID STrING";
@@ -15,8 +16,11 @@ public class CsvDataWriterTest {
                                 "src/test/test-resources/output-files/nonexistent.csv";
     private static final String VALID_DESTINATION_FILE =
                                 "src/test/test-resources/output-files/TestValidFile.csv";
-    private static CsvDataWriter csvDataWriter = new CsvDataWriter();
-
+    private static CsvDataWriter csvDataWriter;
+    @BeforeAll
+    public static void setUp() {
+        csvDataWriter = new CsvDataWriter();
+    }
     @Test
     public void writeToFile_allValidConditions_Ok() throws IOException {
         csvDataWriter.writeToFile(VALID_DESTINATION_FILE, VALID_STRING);

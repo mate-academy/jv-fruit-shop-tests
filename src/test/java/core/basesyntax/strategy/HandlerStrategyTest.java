@@ -20,7 +20,7 @@ class HandlerStrategyTest {
     private static InventoryDao inventoryDao;
     private static Map<OperationType, OperationHandler> strategyMap;
     private static HandlerStrategy handlerStrategy;
-    private static OperationHandler balanceHandler;
+    private static BalanceHandler balanceHandler;
     private static OperationHandler purchaseHandler;
     private static OperationHandler returnHandler;
     private static OperationHandler supplyHandler;
@@ -43,7 +43,7 @@ class HandlerStrategyTest {
     }
 
     @Test
-    public void getHandlerByOperationType_validTypes_Ok() {
+    void getHandlerByOperationType_validTypes_Ok() {
         assertAll(
                 () -> assertEquals(balanceHandler,
                         handlerStrategy.getHandlerByOperationType(OperationType.BALANCE),
@@ -61,13 +61,13 @@ class HandlerStrategyTest {
     }
 
     @Test
-    public void getHandlerByOperationType_byNullOperationType_NotOk() {
+    void getHandlerByOperationType_byNullOperationType_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> handlerStrategy.getHandlerByOperationType(null));
     }
 
     @Test
-    public void getStrategyMap_allValidConditions_Ok() {
+    void getStrategyMap_allValidConditions_Ok() {
         assertEquals(handlerStrategy.getStrategyMap(), strategyMap);
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
     private static final int INITIAL_AMOUNT = 0;
+
     private static final int OPERATION_AMOUNT = 11;
     private static final int FIRST_OPERATION_AMOUNT = 15;
     private static final int SECOND_OPERATION_AMOUNT = 13;

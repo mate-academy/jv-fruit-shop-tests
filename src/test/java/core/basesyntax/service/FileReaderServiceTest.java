@@ -1,22 +1,24 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.service.impl.FileReaderServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class FileReaderServiceTest {
+class FileReaderServiceTest {
     private static final String CORRECT_INPUT_FILE_NAME = "src/main/resources/input.csv";
     private static final String WRONG_INPUT_FILE_NAME = "53hsd59.csv";
     private static FileReaderService fileReaderService;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         fileReaderService = new FileReaderServiceImpl();
     }
 
     @Test
-    public void read_correctInputData_Ok() {
+    void read_correctInputData_Ok() {
         String expected = """
                 type,fruit,quantity
                 b,banana,20
@@ -30,18 +32,18 @@ public class FileReaderServiceTest {
                 """;
         System.out.println(expected);
         String actual = fileReaderService.readInputData(CORRECT_INPUT_FILE_NAME);
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void read_nullInputData_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+    void read_nullInputData_notOk() {
+        assertThrows(RuntimeException.class,
                 () -> fileReaderService.readInputData(null));
     }
 
     @Test
-    public void read_incorrectInputData_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+    void read_incorrectInputData_notOk() {
+        assertThrows(RuntimeException.class,
                 () -> fileReaderService.readInputData(WRONG_INPUT_FILE_NAME));
     }
 }

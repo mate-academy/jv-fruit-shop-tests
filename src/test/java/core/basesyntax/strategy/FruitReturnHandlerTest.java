@@ -1,18 +1,19 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.strategy.impl.FruitReturnHandler;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class FruitReturnHandlerTest {
+class FruitReturnHandlerTest {
     private static final String DEFAULT_FRUIT_NAME = "apple";
     private static final String CORRECT_OPERATION_CODE = "r";
     private static final String INCORRECT_OPERATION_CODE = "a";
@@ -23,48 +24,48 @@ public class FruitReturnHandlerTest {
     private static FruitDao fruitDao;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         fruitReturnHandler = new FruitReturnHandler();
         fruitDao = new FruitDaoImpl();
     }
 
     @BeforeEach
-    public void setFruitDao() {
+    void setFruitDao() {
         fruitDao.addFirst(DEFAULT_FRUIT_NAME, FRUIT_AMOUNT);
     }
 
     @Test
-    public void update_correctInputData_Ok() {
+    void update_correctInputData_Ok() {
         fruitReturnHandler.updateStorage(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
         Integer fruitAmount = fruitDao.get(DEFAULT_FRUIT_NAME);
         Integer expected = ADDITIONAL_FRUIT_AMOUNT;
-        Assertions.assertEquals(expected, fruitAmount);
+        assertEquals(expected, fruitAmount);
     }
 
     @Test
-    public void update_nullInputData_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+    void update_nullInputData_notOk() {
+        assertThrows(RuntimeException.class,
                 () -> fruitReturnHandler.updateStorage(null, DEFAULT_FRUIT_AMOUNT));
     }
 
     @Test
-    public void checkOperationCode_correctInputData_Ok() {
+    void checkOperationCode_correctInputData_Ok() {
         assertTrue(fruitReturnHandler.isServiceApplicable(CORRECT_OPERATION_CODE));
     }
 
     @Test
-    public void checkOperationCode_incorrectInputData_notOk() {
+    void checkOperationCode_incorrectInputData_notOk() {
         assertFalse(fruitReturnHandler.isServiceApplicable(INCORRECT_OPERATION_CODE));
     }
 
     @Test
-    public void checkOperationCode_nullInputData_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+    void checkOperationCode_nullInputData_notOk() {
+        assertThrows(RuntimeException.class,
                 () -> fruitReturnHandler.isServiceApplicable(null));
     }
 
     @AfterEach
-    public void cleanFruitStorage() {
+    void cleanFruitStorage() {
         fruitDao.removeAll();
     }
 }

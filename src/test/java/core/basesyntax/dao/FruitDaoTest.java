@@ -1,8 +1,9 @@
 package core.basesyntax.dao;
 
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,73 +20,73 @@ class FruitDaoTest {
     private static FruitDao fruitDao;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         fruitDao = new FruitDaoImpl();
     }
 
     @BeforeEach
-    public void setFruitDao() {
+    void setFruitDao() {
         fruitDao.addFirst(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
     }
 
     @Test
-    public void addFirst_correctInput_Ok() {
+    void addFirst_correctInput_Ok() {
         int actual = fruitDao.get(DEFAULT_FRUIT_NAME);
         int expected = DEFAULT_FRUIT_AMOUNT;
-        Assertions.assertTrue(expected == actual);
+        assertTrue(expected == actual);
     }
 
     @Test
-    public void add_correctInput_Ok() {
+    void add_correctInput_Ok() {
         fruitDao.add(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
         int actual = fruitDao.get(DEFAULT_FRUIT_NAME);
         int expected = ADDITIONAL_FRUIT_AMOUNT;
-        Assertions.assertTrue(expected == actual);
+        assertTrue(expected == actual);
     }
 
     @Test
-    public void get_correctInputData_Ok() {
+    void get_correctInputData_Ok() {
         int actual = fruitDao.get(DEFAULT_FRUIT_NAME);
         int expected = DEFAULT_FRUIT_AMOUNT;
-        Assertions.assertTrue(expected == actual);
+        assertTrue(expected == actual);
     }
 
     @Test
-    public void get_fruitNotFound_Ok() {
+    void get_fruitNotFound_Ok() {
         int actual = fruitDao.get(ADDITIONAL_FRUIT_NAME);
         int expected = GOT_NEGATIVE_INDEX;
-        Assertions.assertTrue(expected == actual);
+        assertTrue(expected == actual);
     }
 
     @Test
-    public void getAll_correctInputData_Ok() {
+    void getAll_correctInputData_Ok() {
         String expectedFruitName = DEFAULT_FRUIT_NAME;
         int expectedFruitAmount = DEFAULT_FRUIT_AMOUNT;
-        Assertions.assertTrue(fruitDao.get(expectedFruitName) == expectedFruitAmount);
+        assertTrue(fruitDao.get(expectedFruitName) == expectedFruitAmount);
     }
 
     @Test
-    public void remove_correctInputData_Ok() {
+    void remove_correctInputData_Ok() {
         fruitDao.reduce(DEFAULT_FRUIT_NAME, DEFAULT_FRUIT_AMOUNT);
         int expected = EMPTY_SIZE;
-        Assertions.assertTrue(expected == fruitDao.get(DEFAULT_FRUIT_NAME));
+        assertTrue(expected == fruitDao.get(DEFAULT_FRUIT_NAME));
     }
 
     @Test
-    public void removeAll_correctInputData_Ok() {
+    void removeAll_correctInputData_Ok() {
         fruitDao.removeAll();
         int expected = EMPTY_SIZE;
-        Assertions.assertTrue(expected == fruitDao.size());
+        assertTrue(expected == fruitDao.size());
     }
 
     @Test
-    public void size_getActualSize_Ok() {
+    void size_getActualSize_Ok() {
         int expectedMapSize = SIZE_ONE_ELEMENT;
-        Assertions.assertTrue(expectedMapSize == fruitDao.size());
+        assertTrue(expectedMapSize == fruitDao.size());
     }
 
     @AfterEach
-    public void cleanFruitStorage() {
+    void cleanFruitStorage() {
         fruitDao.removeAll();
     }
 }

@@ -1,5 +1,8 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitInputData;
@@ -11,7 +14,6 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +41,7 @@ class OperationStrategyTest {
     private static FruitDao fruitDao;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         List<StorageUpdateHandler> storageUpdateHandlers = new ArrayList<>();
         storageUpdateHandlers.add(new FruitBalanceHandler());
         storageUpdateHandlers.add(new FruitSupplyHandler());
@@ -47,11 +49,10 @@ class OperationStrategyTest {
         storageUpdateHandlers.add(new FruitReturnHandler());
         operationStrategy = new OperationStrategyImpl(storageUpdateHandlers);
         fruitDao = new FruitDaoImpl();
-
     }
 
     @BeforeEach
-    public void initializeNewField() {
+    void initializeNewField() {
         fruitInputData = new FruitInputData();
         fruitInputData.setOperationCode(BALANCE_OPERATION_CODE);
         fruitInputData.setFruitName(DEFAULT_FRUIT_NAME);
@@ -60,17 +61,17 @@ class OperationStrategyTest {
     }
 
     @Test
-    public void balance_correctOperationCode_Ok() {
+    void balance_correctOperationCode_Ok() {
         String expected = "fruit,quantity"
                 + System.lineSeparator()
                 + "apple,10"
                 + System.lineSeparator();
-        Assertions.assertEquals(expected, getFinalReport(),
+        assertEquals(expected, getFinalReport(),
                 String.format(ASSERTION_FAILURE_MESSAGE, expected, getFinalReport()));
     }
 
     @Test
-    public void supply_correctOperationCode_Ok() {
+    void supply_correctOperationCode_Ok() {
         fruitInputData.setOperationCode(SUPPLY_OPERATION_CODE);
         fruitInputData.setFruitName(DEFAULT_FRUIT_NAME);
         fruitInputData.setAmount(DEFAULT_FRUIT_AMOUNT);
@@ -79,12 +80,12 @@ class OperationStrategyTest {
                 + System.lineSeparator()
                 + "apple,20"
                 + System.lineSeparator();
-        Assertions.assertEquals(expected, getFinalReport(),
+        assertEquals(expected, getFinalReport(),
                 String.format(ASSERTION_FAILURE_MESSAGE, expected, getFinalReport()));
     }
 
     @Test
-    public void purchase_correctOperationCode_Ok() {
+    void purchase_correctOperationCode_Ok() {
         fruitInputData.setOperationCode(PURCHASE_OPERATION_CODE);
         fruitInputData.setFruitName(DEFAULT_FRUIT_NAME);
         fruitInputData.setAmount(FRUIT_AMOUNT_CASE1);
@@ -93,22 +94,22 @@ class OperationStrategyTest {
                 + System.lineSeparator()
                 + "apple,5"
                 + System.lineSeparator();
-        Assertions.assertEquals(expected, getFinalReport(),
+        assertEquals(expected, getFinalReport(),
                 String.format(ASSERTION_FAILURE_MESSAGE, expected, getFinalReport()));
     }
 
     @Test
-    public void purchase_incorrectFruitsAmount_notOk() {
+    void purchase_incorrectFruitsAmount_notOk() {
         fruitInputData.setOperationCode(PURCHASE_OPERATION_CODE);
         fruitInputData.setFruitName(DEFAULT_FRUIT_NAME);
         fruitInputData.setAmount(FRUIT_AMOUNT_CASE2);
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationStrategy.manageStorageCells(fruitInputData));
 
     }
 
     @Test
-    public void return_correctOperationCode_Ok() {
+    void return_correctOperationCode_Ok() {
         fruitInputData.setOperationCode(PURCHASE_OPERATION_CODE);
         fruitInputData.setFruitName(DEFAULT_FRUIT_NAME);
         fruitInputData.setAmount(FRUIT_AMOUNT_CASE1);
@@ -122,26 +123,26 @@ class OperationStrategyTest {
                 + "apple,8"
                 + System.lineSeparator();
 
-        Assertions.assertEquals(expected, getFinalReport(),
+        assertEquals(expected, getFinalReport(),
                 String.format(ASSERTION_FAILURE_MESSAGE, expected, getFinalReport()));
     }
 
     @Test
-    public void manage_incorrectOperationCode_notOk() {
+    void manage_incorrectOperationCode_notOk() {
         fruitInputData.setOperationCode(INCORRECT1_OPERATION_CODE);
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationStrategy.manageStorageCells(fruitInputData));
         fruitInputData.setOperationCode(INCORRECT2_OPERATION_CODE);
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationStrategy.manageStorageCells(fruitInputData));
         fruitInputData.setOperationCode(null);
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> operationStrategy.manageStorageCells(fruitInputData));
 
     }
 
     @AfterEach
-    public void cleanFruitStorage() {
+    void cleanFruitStorage() {
         fruitDao.removeAll();
     }
 

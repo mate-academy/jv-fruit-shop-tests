@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.impl.CsvFileReader;
-
-import java.nio.file.FileSystems;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

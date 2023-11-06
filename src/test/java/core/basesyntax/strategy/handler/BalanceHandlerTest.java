@@ -25,7 +25,7 @@ class BalanceHandlerTest {
     }
 
     @Test
-    void get_InValidData_NotOk() {
+    void InValidData_NotOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> handler.handle(new FruitTransaction(Operation.BALANCE, "Banana", -100)));
     }

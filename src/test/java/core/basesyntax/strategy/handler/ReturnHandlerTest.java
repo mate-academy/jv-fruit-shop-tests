@@ -27,7 +27,7 @@ class ReturnHandlerTest {
     }
 
     @Test
-    void get_InValidData_NotOk() {
+    void invalidData_NotOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> handler.handle(new FruitTransaction(Operation.RETURN, "Banana", -100)));
     }

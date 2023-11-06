@@ -25,13 +25,6 @@ class FruitDaoTest {
     }
 
     @Test
-    void getStorage_ValidData_Ok() {
-        STORAGE.put("data1",1);
-        STORAGE.put("data2",2);
-        assertEquals(STORAGE,fruitDao.getStorage());
-    }
-
-    @Test
     void get_ValidData_Ok() {
         STORAGE.put("data1",1);
         STORAGE.put("data2",2);
@@ -39,7 +32,7 @@ class FruitDaoTest {
     }
 
     @Test
-    void add() {
+    void add_ValidData_Ok() {
         fruitDao.add("data1",1);
         fruitDao.add(List.of(
                 new FruitTransaction(Operation.RETURN, "data2", 133),

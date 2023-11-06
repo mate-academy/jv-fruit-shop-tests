@@ -14,6 +14,10 @@ public class PurchaseHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruit();
         int fruitQuantity = fruitTransaction.getQuantity();
+        if (fruitQuantity < 0) {
+            throw new IllegalArgumentException("Quantity can't be below zero you quantity is"
+                    + fruitQuantity);
+        }
         fruitDao.getStorage().put(fruitName, fruitDao.get(fruitName) - fruitQuantity);
     }
 }

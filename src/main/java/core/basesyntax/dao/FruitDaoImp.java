@@ -23,6 +23,9 @@ public class FruitDaoImp implements FruitDao {
     }
 
     public Integer get(String key) {
+        if (STORAGE.get(key) == null) {
+            throw new IllegalArgumentException("Can't get non-existent key your key is " + key);
+        }
         return STORAGE.get(key);
     }
 }

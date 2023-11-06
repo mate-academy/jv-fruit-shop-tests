@@ -13,11 +13,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
-    private static final String REPORT = """
-            fruit,quantity
-            banana,152
-            apple,90
-            """;
+    private static final String REPORT = "fruit,quantity"
+            + System.lineSeparator()
+            + "banana,152"
+            + System.lineSeparator()
+            + "apple,90"
+            + System.lineSeparator();
     private static final String TEST_FILE_PATH = "test.csv";
     private static final String INCORRECT_TEST_FILE_PATH = "123/test.csv";
     private static final String DATA_TO_WRITE = "Java";
@@ -35,7 +36,7 @@ class CsvFileWriterTest {
         try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                builder.append(line).append("\n");
+                builder.append(line).append(System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Cant read data from file:", e);

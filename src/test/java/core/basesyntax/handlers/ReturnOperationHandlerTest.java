@@ -23,7 +23,7 @@ class ReturnOperationHandlerTest {
 
     @Test
     void operate_ValidData_ok() {
-        Storage.fruits.put(BANANA,VALID_QUANTITY);
+        Storage.fruits.put(BANANA, VALID_QUANTITY);
         operationHandler.operate(BANANA, VALID_RETURN_QUANTITY);
         assertEquals(RESULT_QUANTITY, Storage.fruits.get(BANANA));
     }

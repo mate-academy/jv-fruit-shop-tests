@@ -56,7 +56,7 @@ class ParserImplTest {
     void parseListToTransactionList_invalidData_notOk() {
         assertThrows(RuntimeException.class,
                 () -> parser.parseListToTransactionList(INVALID_FILE_DATA),
-                "Should be IndexOutOfBoundsException for this data: " + INVALID_FILE_DATA);
+                "Should be RuntimeException for this data: " + INVALID_FILE_DATA);
     }
 
     @Test

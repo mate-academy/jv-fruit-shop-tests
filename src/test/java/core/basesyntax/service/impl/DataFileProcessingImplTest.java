@@ -49,7 +49,7 @@ class DataFileProcessingImplTest {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         fruitTransactionList.add(fruitTransaction);
         dataFileProcessing.processData(fruitTransactionList);
-        assertEquals(Storage.fruits.get(APPLE),APPLE_QUANTITY);
+        assertEquals(Storage.fruits.get(APPLE), APPLE_QUANTITY);
     }
 
     @AfterAll

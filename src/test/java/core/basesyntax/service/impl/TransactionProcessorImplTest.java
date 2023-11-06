@@ -19,7 +19,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TransactionProcessorImplTest {
+class TransactionProcessorImplTest {
     private static HandlerStrategy strategy;
     private static InventoryDao inventoryDao;
     private static TransactionProcessorImpl transactionProcessor;
@@ -38,17 +38,17 @@ public class TransactionProcessorImplTest {
     }
 
     @BeforeEach
-    public void putDefaultDataToInventoryMap() {
+    void putDefaultDataToInventoryMap() {
         inventoryDao.putToInventory("potato", 100);
     }
 
     @AfterEach
-    public void cleanMap() {
+    void cleanMap() {
         inventoryDao.getCurrentInventoryState().clear();
     }
 
     @Test
-    public void processTransaction_withAllValid_Ok() {
+    void processTransaction_withAllValid_Ok() {
         assertAll(
                 () -> {
                     transactionProcessor.processTransaction(testTransaction);
@@ -76,7 +76,7 @@ public class TransactionProcessorImplTest {
     }
 
     @Test
-    public void processTransaction_withNullTransaction_NotOk() {
+    void processTransaction_withNullTransaction_NotOk() {
         Assert.assertThrows(RuntimeException.class,
                 () -> transactionProcessor.processTransaction(null));
     }

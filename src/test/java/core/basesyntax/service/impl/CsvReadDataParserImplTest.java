@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class CsvReadDataParserImplTest {
+class CsvReadDataParserImplTest {
     private static final List<String> VALID_INPUT = List.of("type,fruit,quantity",
                                                             "b,banana,20");
     private static final List<String> INVALID_INPUT = List.of("type,fruit,quantity",
@@ -17,11 +17,11 @@ public class CsvReadDataParserImplTest {
     private static CsvReadDataParserImpl parser;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         parser = new CsvReadDataParserImpl();
     }
     @Test
-    public void convertToFruitTransactionList_allValidConditions() {
+    void convertToFruitTransactionList_allValidConditions() {
         FruitTransaction expected = new FruitTransaction(
                                         FruitTransaction.OperationType.BALANCE, "banana", 20);
         FruitTransaction actual = parser.convertToFruitTransactionList(VALID_INPUT).get(0);
@@ -29,13 +29,13 @@ public class CsvReadDataParserImplTest {
     }
 
     @Test
-    public void convertToFruitTransactionList_nullInputValue_NotOk() {
+    void convertToFruitTransactionList_nullInputValue_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> parser.convertToFruitTransactionList(null));
     }
 
     @Test
-    public void convertToFruitTransactionList_invalidInputData_NotOk() {
+    void convertToFruitTransactionList_invalidInputData_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> parser.convertToFruitTransactionList(INVALID_INPUT));
     }

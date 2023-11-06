@@ -8,7 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class CsvDataReaderTest {
+class CsvDataReaderTest {
     private static final String INPUT_VALID_FILE =
                                 "src/test/test-resources/input-files/TestValidInputFile.csv";
     private static final String INPUT_EMPTY_FILE =
@@ -20,30 +20,30 @@ public class CsvDataReaderTest {
     private static CsvDataReader csvDataReader;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         csvDataReader = new CsvDataReader();
     }
 
     @Test
-    public void readFileLines_allValidConditions_Ok() {
+    void readFileLines_allValidConditions_Ok() {
         List<String> actual = csvDataReader.readFileLines(INPUT_VALID_FILE);
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20");
         assertIterableEquals(expected, actual);
     }
 
     @Test
-    public void readFileLines_EmptyFileOnInput_NotOk() {
+    void readFileLines_EmptyFileOnInput_NotOk() {
         assertThrows(RuntimeException.class, () -> csvDataReader.readFileLines(INPUT_EMPTY_FILE));
     }
 
     @Test
-    public void readFileLines_nonexistentFilePath_NotOk() {
+    void readFileLines_nonexistentFilePath_NotOk() {
         assertThrows(RuntimeException.class,
                     () -> csvDataReader.readFileLines(INPUT_NONEXISTENT_FILE));
     }
 
     @Test
-    public void readFileLines_inputWithCustomLines_Ok() {
+    void readFileLines_inputWithCustomLines_Ok() {
         List<String> actual = csvDataReader.readFileLines(INPUT_RANDOM_LINES_FILE);
         List<String> expected = List.of("ugpwrevonrov",
                                         "fwpueivwrnv",

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class CsvReportGeneratorTest {
+class CsvReportGeneratorTest {
     private static final String VALID_RESULT_STRING = "fruit,quantity"
                                                     + System.lineSeparator()
                                                     + "banana,152";
@@ -17,30 +17,30 @@ public class CsvReportGeneratorTest {
     private static CsvReportGenerator csvReportGenerator;
 
     @BeforeAll
-    public static void setUp() {
+    static void setUp() {
         csvReportGenerator = new CsvReportGenerator();
         inventoryDao = new InventoryDaoImpl();
     }
 
     @AfterEach
-    public void cleanInventory() {
+    void cleanInventory() {
         inventoryDao.getCurrentInventoryState().clear();
     }
 
     @Test
-    public void generateReport_allValidConditions() {
+    void generateReport_allValidConditions() {
         inventoryDao.putToInventory("banana", 152);
         String actual = csvReportGenerator.generateReport();
         assertEquals(VALID_RESULT_STRING, actual);
     }
 
     @Test
-    public void generateReport_fromEmptyInventory_NotOk() {
+    void generateReport_fromEmptyInventory_NotOk() {
         assertThrows(RuntimeException.class, () -> csvReportGenerator.generateReport());
     }
 
     @Test
-    public void generateReport_with_RandomDataInInventory_Ok() {
+    void generateReport_with_RandomDataInInventory_Ok() {
         for (int i = 0; i < 3; i++) {
             inventoryDao.putToInventory("fruit" + i, i);
         }

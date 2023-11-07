@@ -12,7 +12,7 @@ import org.junit.jupiter.api.TestInstance;
 public class WriterServiceTest {
     private static final String WRITE_TEST_FILE_NAME = "testFile.csv";
     private static final int FIRST_SYMBOL_INDEX = 0;
-    private static final int DECREASED_INDEX = 2;
+    private static final int DECREASED_INDEX = 1;
     private ReaderService reader;
     private WriterService writer;
     private String text = "TEST TEXT"
@@ -32,10 +32,7 @@ public class WriterServiceTest {
 
     @Test
     void writerServiceImpl_Ok() {
-        String expected = "TEST TEXT"
-                + System.lineSeparator()
-                + "12345";
-        writer.writeToFile(expected, WRITE_TEST_FILE_NAME);
+        writer.writeToFile(text, WRITE_TEST_FILE_NAME);
         String actual = reader.readFromFile(WRITE_TEST_FILE_NAME)
                 .stream()
                 .map(string -> string + System.lineSeparator())
@@ -43,9 +40,9 @@ public class WriterServiceTest {
         actual = actual.substring(FIRST_SYMBOL_INDEX,
                 actual.length() - DECREASED_INDEX);
 
-        Assertions.assertEquals(actual, expected,
+        Assertions.assertEquals(actual, text,
                 "Writer should have written "
-                        + expected
+                        + text
                         + " but wrote "
                         + actual);
     }

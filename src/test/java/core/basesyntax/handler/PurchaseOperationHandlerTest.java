@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationHandlerTest {
+    private static final String APPLE = "apple";
     private static PurchaseOperationHandler purchaseOperationHandler;
 
     @BeforeAll
@@ -16,10 +17,10 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     void handle_validData_ok() {
-        Storage.FRUITS.put("apple", 20);
-        boolean expectedResult = purchaseOperationHandler.handle("apple", 20);
+        Storage.FRUITS.put(APPLE, 20);
+        boolean expectedResult = purchaseOperationHandler.handle(APPLE, 20);
         Assertions.assertTrue(expectedResult);
-        Integer expectedQuantity = Storage.FRUITS.get("apple");
+        Integer expectedQuantity = Storage.FRUITS.get(APPLE);
         Assertions.assertEquals(expectedQuantity, 0);
     }
 

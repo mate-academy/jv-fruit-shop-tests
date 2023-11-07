@@ -1,6 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.impl.CsvFileWriter;
+import java.io.File;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -38,5 +40,13 @@ public class CsvFileWriterTest {
     void writeToFile_nullPath_notOk() {
         Assertions.assertThrows(RuntimeException.class,
                 () -> fileWriterService.writeToFile(EMPTY_STRING, null));
+    }
+
+    @AfterEach
+    void tearDown() {
+        File file = new File(VALID_PATH);
+        if (file.exists()) {
+            file.delete();
+        }
     }
 }

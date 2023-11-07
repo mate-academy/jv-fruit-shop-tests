@@ -11,6 +11,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitMapperTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final int VALID_QUANTITY1 = 20;
+    private static final int VALID_QUANTITY2 = 50;
     private static final String DEFAULT_LINE = "type,fruit,quantity";
     private static final String LINE_WITH_BALANCE_BANANAS = "b,banana,20";
     private static final String LINE_WITH_SUPPLY_APPLES = "s,apple,20";
@@ -18,7 +22,6 @@ class FruitMapperTest {
     private static final String LINE_WITH_PURCHASE_APPLES = "p,apple,50";
     private static final String LINE_WITH_INVALID_TRANSACTION1 = "p,apple";
     private static final String LINE_WITH_INVALID_TRANSACTION2 = "f,ads";
-
     private static List<String> linesWithTransactions;
     private static List<String> linesWithInvalidTransactions;
     private static List<FruitTransaction> validFruitTransactions;
@@ -37,24 +40,24 @@ class FruitMapperTest {
         linesWithTransactions.add(LINE_WITH_PURCHASE_APPLES);
 
         FruitTransaction fruitTransaction1 = new FruitTransaction();
-        fruitTransaction1.setFruit("banana");
+        fruitTransaction1.setFruit(BANANA);
         fruitTransaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction1.setQuantity(20);
+        fruitTransaction1.setQuantity(VALID_QUANTITY1);
 
         FruitTransaction fruitTransaction2 = new FruitTransaction();
-        fruitTransaction2.setFruit("apple");
+        fruitTransaction2.setFruit(APPLE);
         fruitTransaction2.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitTransaction2.setQuantity(20);
+        fruitTransaction2.setQuantity(VALID_QUANTITY1);
 
         FruitTransaction fruitTransaction3 = new FruitTransaction();
-        fruitTransaction3.setFruit("banana");
+        fruitTransaction3.setFruit(BANANA);
         fruitTransaction3.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction3.setQuantity(20);
+        fruitTransaction3.setQuantity(VALID_QUANTITY1);
 
         FruitTransaction fruitTransaction4 = new FruitTransaction();
-        fruitTransaction4.setFruit("apple");
+        fruitTransaction4.setFruit(APPLE);
         fruitTransaction4.setOperation(FruitTransaction.Operation.PURCHASE);
-        fruitTransaction4.setQuantity(50);
+        fruitTransaction4.setQuantity(VALID_QUANTITY2);
 
         validFruitTransactions.add(fruitTransaction1);
         validFruitTransactions.add(fruitTransaction2);

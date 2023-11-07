@@ -5,8 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWritterTest {
-    private static final String VALID_PATH = "src/main/resources/input.csv";
-    private static final String INVALID_PATH = "in/valid/path/input.csv";
+    private static final String VALID_PATH = "src/test/resources/output.csv";
+    private static final String INVALID_PATH = "in/valid/path/output.csv";
     private static final String EMPTY_STRING = "";
     private static FileWritter fileWritter;
 

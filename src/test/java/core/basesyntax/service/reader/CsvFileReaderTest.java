@@ -7,19 +7,9 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
     private static FileReader fileReader;
-    private static final String VALID_PATH = "src/main/resources/input.csv";
+    private static final String VALID_PATH = "src/test/resources/input.csv";
     private static final String INVALID_PATH = "in/valid/path/input.csv";
     private static final String EMPTY_PATH = "";
-    private static final List<String> VALID_LIST = List.of(
-            "type,fruit,quantity",
-            "b,banana,20",
-            "b,apple,100",
-            "s,banana,100",
-            "p,banana,13",
-            "r,apple,10",
-            "p,apple,20",
-            "p,banana,5",
-            "s,banana,50");
 
     @BeforeEach
     void setUp() {
@@ -58,6 +48,6 @@ class CsvFileReaderTest {
                 "p,banana,5",
                 "s,banana,50"
         );
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertIterableEquals(expected, actual);
     }
 }

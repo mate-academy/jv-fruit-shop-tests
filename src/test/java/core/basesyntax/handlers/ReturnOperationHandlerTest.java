@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.storage.Storage;
 import core.basesyntax.transaction.FruitTransaction;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
@@ -32,19 +32,17 @@ class ReturnOperationHandlerTest {
         invalidFruitTransaction.setFruit(BANANA);
         invalidFruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
         invalidFruitTransaction.setQuantity(INVALID_FRUIT_QUANTITY);
+    }
 
+    @BeforeEach
+    void setUp() {
+        Storage.getFruitBalance().clear();
         Storage.getFruitBalance().put(APPLE, INITIAL_FRUIT_QUANTITY);
         Storage.getFruitBalance().put(BANANA, INITIAL_FRUIT_QUANTITY);
     }
 
-    @AfterEach
-    void afterEach() {
-        Storage.getFruitBalance().clear();
-    }
-
     @Test
     void handle_Valid_Transaction_Ok() {
-        Storage.getFruitBalance().put(APPLE, INITIAL_FRUIT_QUANTITY);
         returnOperationHandler.handleOperation(validFruitTransaction);
         assertEquals(INITIAL_FRUIT_QUANTITY + RETURN_QUANTITY,
                 Storage.getFruitBalance().get(APPLE));

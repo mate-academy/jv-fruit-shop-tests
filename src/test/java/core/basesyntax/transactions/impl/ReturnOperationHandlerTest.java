@@ -9,6 +9,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.transactions.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,19 +17,23 @@ public class ReturnOperationHandlerTest {
     private static final String FRUIT = "apple";
     private static final int QUANTITY = 100;
     private static final int INITIAL_BALANCE = 50;
+    private static OperationHandler handler;
     private FruitTransaction transaction;
-    private OperationHandler returnHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        handler = new ReturnOperationHandler();
+    }
 
     @BeforeEach
     void setUp() {
         transaction = new FruitTransaction(Operation.PURCHASE, FRUIT, QUANTITY);
-        returnHandler = new ReturnOperationHandler();
         Storage.STORAGE_VALUE.put(FRUIT, INITIAL_BALANCE);
     }
 
     @Test
     void testProcessTransaction_returnPositiveQuantity_OK() {
-        boolean result = returnHandler.processTransaction(transaction);
+        boolean result = handler.processTransaction(transaction);
 
         int updatedBalance = Storage.STORAGE_VALUE.get(FRUIT);
 
@@ -42,17 +47,17 @@ public class ReturnOperationHandlerTest {
         transaction = new FruitTransaction(Operation.RETURN, FRUIT, negativeQuantity);
 
         assertThrows(IllegalArgumentException.class, () ->
-                returnHandler.processTransaction(transaction));
+                handler.processTransaction(transaction));
     }
 
     @Test
     void testProcessTransaction_returnNullTransaction_NotOK() {
         assertThrows(IllegalArgumentException.class, () ->
-                returnHandler.processTransaction(null));
+                handler.processTransaction(null));
     }
 
     @AfterEach
     void afterEach() {
-        Storage.STORAGE_VALUE.put(FRUIT, -INITIAL_BALANCE);
+        Storage.STORAGE_VALUE.clear();
     }
 }

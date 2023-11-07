@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,15 +22,16 @@ class FruitMapperTest {
     static void beforeAll() {
         fruitMapper = new FruitMapperImpl();
         emptyList = new ArrayList<>();
-        correctValues = new HashMap<>();
-        correctValues.put(List.of(
-                new FruitTransaction(Operation.BALANCE, "banana", 20)), List.of("b,banana,20"));
-        correctValues.put(List.of(
-                new FruitTransaction(Operation.PURCHASE, "apple", 20)), List.of("p,apple,20"));
-        correctValues.put(List.of(
-                new FruitTransaction(Operation.SUPPLY, "banana", 100)), List.of("s,banana,100"));
-        correctValues.put(List.of(
-                new FruitTransaction(Operation.RETURN, "apple", 10)), List.of("r,apple,10"));
+        correctValues = Map.of(
+                List.of(new FruitTransaction(Operation.BALANCE, "banana", 20)),
+                List.of("b,banana,20"),
+                List.of(new FruitTransaction(Operation.PURCHASE, "apple", 20)),
+                List.of("p,apple,20"),
+                List.of(new FruitTransaction(Operation.SUPPLY, "banana", 100)),
+                List.of("s,banana,100"),
+                List.of(new FruitTransaction(Operation.RETURN, "apple", 10)),
+                List.of("r,apple,10"));
+
         wrongOperatorFruitOperation = List.of("a,kiwi,20");
         wrongLength = List.of("a, apple, 100, 100");
     }

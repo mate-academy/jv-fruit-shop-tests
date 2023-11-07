@@ -33,21 +33,21 @@ public class CsvFileWriterOrderImplTest {
 
     @Test
     void testWriteOrder_toNonExistingFile_NotOK() {
-        assertThrows(RuntimeException.class, ()
-                -> writer.writerOrder(CONTENT, NON_EXISTENT_FILE_PATH));
+        assertThrows(RuntimeException.class, () ->
+                writer.writerOrder(CONTENT, NON_EXISTENT_FILE_PATH));
     }
 
     @Test
     void testWriteOrder_withNullFilePath_NotOK() {
-        assertThrows(IllegalArgumentException.class, ()
-                -> writer.writerOrder(CONTENT, NULL_FILE_PATH));
+        assertThrows(IllegalArgumentException.class, () ->
+                writer.writerOrder(CONTENT, NULL_FILE_PATH));
     }
 
     @Test
     void testWriteOrder_withEmptyContent_NotOK() {
         String filePath = tempDir.resolve("test.csv").toString();
-        assertThrows(IllegalArgumentException.class, ()
-                -> writer.writerOrder("", filePath));
+        assertThrows(IllegalArgumentException.class, () ->
+                writer.writerOrder("", filePath));
     }
 
     @AfterEach

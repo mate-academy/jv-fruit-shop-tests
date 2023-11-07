@@ -8,7 +8,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.transactions.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +19,15 @@ class BalanceOperationHandlerTest {
     private static final Integer PUT_STORAGE = 10;
     private static FruitTransaction transaction;
     private static Integer balanceStorage;
-    private OperationHandler supplyHandler;
+    private static OperationHandler handler;
+
+    @BeforeAll
+    static void beforeAll() {
+        handler = new BalanceOperationHandler();
+    }
 
     @BeforeEach
     void setUp() {
-        supplyHandler = new BalanceOperationHandler();
         transaction = new FruitTransaction(Operation.PURCHASE, FRUIT, QUANTITY);
         Storage.STORAGE_VALUE.put(FRUIT, PUT_STORAGE);
         balanceStorage = Storage.STORAGE_VALUE.get(FRUIT);
@@ -30,7 +35,7 @@ class BalanceOperationHandlerTest {
 
     @Test
     void testProcessTransaction_ValidTransaction_SuccessfulTransaction() {
-        boolean result = supplyHandler.processTransaction(transaction);
+        boolean result = handler.processTransaction(transaction);
 
         assertTrue(result);
         assertEquals(QUANTITY, balanceStorage);
@@ -41,7 +46,7 @@ class BalanceOperationHandlerTest {
         transaction = new FruitTransaction(Operation.BALANCE, null, QUANTITY);
 
         assertThrows(IllegalArgumentException.class, () ->
-                supplyHandler.processTransaction(transaction));
+                handler.processTransaction(transaction));
     }
 
     @Test
@@ -49,11 +54,11 @@ class BalanceOperationHandlerTest {
         transaction = new FruitTransaction(null, FRUIT, QUANTITY);
 
         assertThrows(IllegalArgumentException.class, () ->
-                supplyHandler.processTransaction(transaction));
+                handler.processTransaction(transaction));
     }
 
-    @AfterClass
-    public static void afterClass() {
-        Storage.STORAGE_VALUE.put(FRUIT, -PUT_STORAGE);
+    @AfterEach
+    void afterEach() {
+        Storage.STORAGE_VALUE.clear();
     }
 }

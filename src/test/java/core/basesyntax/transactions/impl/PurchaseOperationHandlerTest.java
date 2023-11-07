@@ -7,7 +7,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.transactions.OperationHandler;
-import org.junit.AfterClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +18,15 @@ class PurchaseOperationHandlerTest {
     private static final Integer PUT_STORAGE = 11;
     private static Integer balanceStorage;
     private static FruitTransaction transaction;
-    private OperationHandler supplyHandler;
+    private static OperationHandler handler;
+
+    @BeforeAll
+    static void beforeAll() {
+        handler = new PurchaseOperationHandler();
+    }
 
     @BeforeEach
     void setUp() {
-        supplyHandler = new PurchaseOperationHandler();
         transaction = new FruitTransaction(Operation.PURCHASE, FRUIT, QUANTITY);
         Storage.STORAGE_VALUE.put(FRUIT, PUT_STORAGE);
         balanceStorage = Storage.STORAGE_VALUE.get(FRUIT);
@@ -29,19 +34,18 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void testProcessTransaction_transactionCorrectWork_OK() {
-        boolean result = supplyHandler.processTransaction(transaction);
+        boolean result = handler.processTransaction(transaction);
 
         assertTrue(result);
     }
 
     @Test
     void testProcessTransaction_whenBalanceStorageLessThanIs_NotOK() {
-
         Integer exceedsBalance = balanceStorage + QUANTITY;
         transaction = new FruitTransaction(Operation.PURCHASE, FRUIT, exceedsBalance);
 
-        assertThrows(IllegalArgumentException.class, ()
-                -> supplyHandler.processTransaction(transaction));
+        assertThrows(IllegalArgumentException.class, () ->
+                handler.processTransaction(transaction));
     }
 
     @Test
@@ -49,17 +53,17 @@ class PurchaseOperationHandlerTest {
         FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, null, QUANTITY);
 
         assertThrows(IllegalArgumentException.class, () ->
-                supplyHandler.processTransaction(transaction));
+                handler.processTransaction(transaction));
     }
 
     @Test
     void testProcessTransaction_transactionWithNullTransaction_NotOK() {
         assertThrows(IllegalArgumentException.class, () ->
-                supplyHandler.processTransaction(null));
+                handler.processTransaction(null));
     }
 
-    @AfterClass
-    public static void afterEach() {
-        Storage.STORAGE_VALUE.put(FRUIT, -PUT_STORAGE);
+    @AfterEach
+    void afterEach() {
+        Storage.STORAGE_VALUE.clear();
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.operation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.dao.FruitQuantityDao;
 import core.basesyntax.dao.FruitQuantityDaoImpl;
 import core.basesyntax.model.Operation;
 import java.util.Map;
@@ -14,11 +15,12 @@ class OperationStrategyImplTest {
 
     @BeforeEach
     void setUp() {
+        FruitQuantityDao fruitQuantityDao = new FruitQuantityDaoImpl();
         operationHandlerMap = Map.of(
-                Operation.BALANCE, new BalanceOperationHandlerImpl(new FruitQuantityDaoImpl()),
-                Operation.SUPPLY, new SupplyOperationHandlerImpl(new FruitQuantityDaoImpl()),
-                Operation.PURCHASE, new PurchaseOperationHandlerImpl(new FruitQuantityDaoImpl()),
-                Operation.RETURN, new ReturnOperationHandlerImpl(new FruitQuantityDaoImpl())
+                Operation.BALANCE, new BalanceOperationHandlerImpl(fruitQuantityDao),
+                Operation.SUPPLY, new SupplyOperationHandlerImpl(fruitQuantityDao),
+                Operation.PURCHASE, new PurchaseOperationHandlerImpl(fruitQuantityDao),
+                Operation.RETURN, new ReturnOperationHandlerImpl(fruitQuantityDao)
         );
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
     }

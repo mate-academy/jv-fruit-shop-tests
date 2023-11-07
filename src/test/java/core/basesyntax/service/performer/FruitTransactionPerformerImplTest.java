@@ -36,16 +36,16 @@ class FruitTransactionPerformerImplTest {
     @BeforeAll
     static void beforeAll() {
         Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
-        operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        parser = new FruitTransactionDataParserImpl(new FruitQuantityValidatorImpl());
         fruitQuantityDao = new FruitQuantityDaoImpl();
+        operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl(
+                fruitQuantityDao));
+        operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl(
+                fruitQuantityDao));
+        operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl(
+                fruitQuantityDao));
+        operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl(
+                fruitQuantityDao));
+        parser = new FruitTransactionDataParserImpl(new FruitQuantityValidatorImpl());
         operationStrategy = new OperationStrategyImpl(operationOperationHandlerMap);
         performer = new FruitTransactionPerformerImpl(operationStrategy);
     }

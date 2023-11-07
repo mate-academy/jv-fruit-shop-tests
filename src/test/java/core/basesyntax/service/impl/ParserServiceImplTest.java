@@ -23,7 +23,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void testValidStringsToFruitTransactions() {
+    void testValidStringsToFruitTransactions() {
         List<String> inputStrings = Arrays.asList(
                 BALANCE_OPERATION_CODE + ",apple,10",
                 SUPPLY_OPERATION_CODE + ",banana,20",
@@ -44,7 +44,7 @@ public class ParserServiceImplTest {
     }
 
     @Test
-    public void testInvalidStringToFruitTransactions() {
+    void testInvalidStringToFruitTransactions() {
         List<String> inputStrings = Arrays.asList(
                 BALANCE_OPERATION_CODE + ",apple,10",
                 "invalid_string",

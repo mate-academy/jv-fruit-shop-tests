@@ -34,13 +34,13 @@ class ReturnHandlerTest {
     void countQuantity_negativeOperationAmount_notOk() {
         String expected = "Operation amount can not be less than 0";
         assertThrows(RuntimeException.class, () -> operationHandler
-                .countQuantity(HUNDRED_AMOUNT, -FIFTEEN_AMOUNT));
+                .countQuantity(HUNDRED_AMOUNT, -FIFTEEN_AMOUNT), expected);
     }
 
     @Test
     void countQuantity_negativeCurrentAmount() {
         String expected = "Current amount can not be less than 0";
         assertThrows(RuntimeException.class, () -> operationHandler
-                .countQuantity(-FIFTEEN_AMOUNT, HUNDRED_AMOUNT));
+                .countQuantity(-FIFTEEN_AMOUNT, HUNDRED_AMOUNT), expected);
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.service.transaction;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,21 +35,19 @@ class BalanceHandlerTest {
 
     @Test
     void countQuantity_negativeOperationAmount_notOk() {
-        try {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             operationHandler.countQuantity(INITIAL_AMOUNT, NEGATIVE_OPERATION_AMOUNT);
-        } catch (RuntimeException e) {
-            String expected = "Operation amount can not be less than 0";
-            assertEquals(expected, e.getMessage());
-        }
+        });
+        String expected = "operation amount can not be less than 0";
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
     void countQuantity_negativeCurrentAmount() {
-        try {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             operationHandler.countQuantity(NEGATIVE_CURRENT_AMOUNT, OPERATION_AMOUNT);
-        } catch (RuntimeException e) {
-            String expected = "Current amount can not be less than 0";
-            assertEquals(expected, e.getMessage());
-        }
+        });
+        String expected = "current amount can not be less than 0";
+        assertEquals(expected, exception.getMessage());
     }
 }

@@ -20,7 +20,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_validFile_ok() {
+    void readFromFile_validFile_ok() {
         List<String> strings = readerService.readFromFile(VALID_FILE_PATH);
         int expectedSize = 1;
         assertEquals(expectedSize, strings.size()," list should contains only one transaction");

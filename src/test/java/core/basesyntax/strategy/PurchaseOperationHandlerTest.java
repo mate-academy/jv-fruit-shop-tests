@@ -16,6 +16,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
+    public static final String DEFAULT_FRUIT = "banana";
+    public static final int DEFAULT_QUANTITY = 100;
+    public static final int DEFAULT_PURCHASE_QUANTITY = 50;
+
+    public static final Operation DEFAULT_OPERATION = Operation.PURCHASE;
     private OperationHandler purchaseHandler;
     private final FruitTransactionValidation validator = new FruitTransactionValidationImpl();
     private final StorageDao storageDao = new StorageDaoImpl(validator);
@@ -23,7 +28,7 @@ class PurchaseOperationHandlerTest {
     @BeforeEach
     void setUp() {
         purchaseHandler = new PurchaseOperationHandler(storageDao);
-        Storage.storage.put("banana", 100);
+        Storage.storage.put(DEFAULT_FRUIT, DEFAULT_QUANTITY);
     }
 
     @AfterEach
@@ -33,7 +38,8 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handleValidFruit_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 50);
+        FruitTransaction transaction = new FruitTransaction(DEFAULT_OPERATION,
+                DEFAULT_FRUIT, DEFAULT_PURCHASE_QUANTITY);
         assertDoesNotThrow(() -> purchaseHandler.handle(transaction));
     }
 
@@ -45,7 +51,10 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handleNotAvailablePurchase_NotOk() {
-        FruitTransaction transaction = new FruitTransaction(Operation.PURCHASE, "banana", 150);
-        assertThrows(FruitTransactionException.class, () -> purchaseHandler.handle(transaction));
+        int greaterThanAvailable = 150;
+        FruitTransaction transaction = new FruitTransaction(DEFAULT_OPERATION,
+                DEFAULT_FRUIT, greaterThanAvailable);
+        assertThrows(FruitTransactionException.class,
+                () -> purchaseHandler.handle(transaction));
     }
 }

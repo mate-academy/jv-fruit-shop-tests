@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 class CsvReaderServiceTest {
     private static final String VALID_FILE_PATH = "src/test/resources/test.csv";
     private static final String INVALID_FILE_PATH = "src/test/test.csv";
+
     private ReaderService reader;
 
     @BeforeEach
@@ -21,10 +22,13 @@ class CsvReaderServiceTest {
 
     @Test
     void readFromExistingFile_Ok() {
+        String firstLine = "type, fruit, quantity";
+        String fruitOne = "b, banana, 100";
+        String fruitTwo = "b, apple, 100";
         List<String> expected = new ArrayList<>();
-        expected.add("type, fruit, quantity");
-        expected.add("b, banana, 100");
-        expected.add("b, apple, 100");
+        expected.add(firstLine);
+        expected.add(fruitOne);
+        expected.add(fruitTwo);
         List<String> actual = reader.readFromFile(VALID_FILE_PATH);
         assertEquals(expected, actual);
     }

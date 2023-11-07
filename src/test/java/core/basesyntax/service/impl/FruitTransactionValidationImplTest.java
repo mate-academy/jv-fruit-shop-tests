@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionValidationImplTest {
+
     private FruitTransactionValidation fruitValidation;
     private FruitTransaction transaction;
 

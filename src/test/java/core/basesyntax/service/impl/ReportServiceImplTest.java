@@ -10,6 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
+    public static final String DEFAULT_FRUIT = "banana";
+    public static final String SECOND_DEFAULT_FRUIT = "apple";
+    public static final int DEFAULT_QUANTITY = 100;
     private ReportService reportService;
 
     @BeforeEach
@@ -30,8 +33,8 @@ class ReportServiceImplTest {
 
     @Test
     void generateReportValidData_Ok() {
-        Storage.storage.put("banana",100);
-        Storage.storage.put("apple", 100);
+        Storage.storage.put(DEFAULT_FRUIT, DEFAULT_QUANTITY);
+        Storage.storage.put(SECOND_DEFAULT_FRUIT, DEFAULT_QUANTITY);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator()
                 + "apple,100" + System.lineSeparator();

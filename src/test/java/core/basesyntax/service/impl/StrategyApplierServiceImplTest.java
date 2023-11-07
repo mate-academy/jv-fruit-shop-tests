@@ -20,6 +20,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StrategyApplierServiceImplTest {
+    public static final String DEFAULT_FRUIT = "banana";
+    public static final String SECOND_DEFAULT_FRUIT = "apple";
+    public static final int DEFAULT_QUANTITY = 100;
+    public static final Operation DEFAULT_OPERATION = Operation.BALANCE;
     private StrategyApplierService strategyApplierService;
     private List<FruitTransaction> transactions;
     private OperationStrategy strategy;
@@ -28,8 +32,10 @@ class StrategyApplierServiceImplTest {
     void setUp() {
         transactions = new ArrayList<>();
         strategyApplierService = new StrategyApplierServiceImpl();
-        transactions.add(new FruitTransaction(Operation.BALANCE, "banana", 100));
-        transactions.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
+        transactions.add(new FruitTransaction(DEFAULT_OPERATION,
+                DEFAULT_FRUIT, DEFAULT_QUANTITY));
+        transactions.add(new FruitTransaction(DEFAULT_OPERATION,
+                SECOND_DEFAULT_FRUIT, DEFAULT_QUANTITY));
         FruitTransactionValidation fruitValidator = new FruitTransactionValidationImpl();
         StorageDao storageDao = new StorageDaoImpl(fruitValidator);
         Map<Operation, OperationHandler> handlers = new HashMap<>();

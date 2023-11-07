@@ -14,6 +14,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
+    public static final String DEFAULT_FRUIT = "banana";
+    public static final int DEFAULT_QUANTITY = 100;
+    public static final Operation DEFAULT_OPERATION = Operation.BALANCE;
     private OperationHandler balanceHandler;
     private final FruitTransactionValidation validator = new FruitTransactionValidationImpl();
     private final StorageDao storageDao = new StorageDaoImpl(validator);
@@ -25,7 +28,8 @@ class BalanceOperationHandlerTest {
 
     @Test
     void handleValidFruit_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "banana", 100);
+        FruitTransaction transaction = new FruitTransaction(DEFAULT_OPERATION,
+                DEFAULT_FRUIT, DEFAULT_QUANTITY);
         assertDoesNotThrow(() -> balanceHandler.handle(transaction));
     }
 

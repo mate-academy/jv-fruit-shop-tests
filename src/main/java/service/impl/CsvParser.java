@@ -21,7 +21,7 @@ public class CsvParser implements Parser {
             String fruit = values[FRUIT_INDEX];
             int amount = Integer.parseInt(values[AMOUNT_INDEX]);
 
-            fruitTransactions.add(new FruitTransaction(operation, fruit, amount));
+            fruitTransactions.add(FruitTransaction.of(operation, fruit, amount));
         }
 
         return fruitTransactions;

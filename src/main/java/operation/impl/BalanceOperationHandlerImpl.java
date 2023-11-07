@@ -7,6 +7,6 @@ import operation.OperationHandler;
 public class BalanceOperationHandlerImpl implements OperationHandler {
     @Override
     public void accept(FruitTransaction fruitTransaction) {
-        Storage.setAmount(fruitTransaction.fruit(), fruitTransaction.amount());
+        Storage.setAmount(fruitTransaction.getFruit(), fruitTransaction.getAmount());
     }
 }

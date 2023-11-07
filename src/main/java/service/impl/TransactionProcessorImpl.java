@@ -12,6 +12,6 @@ public class TransactionProcessorImpl implements TransactionProcessor {
     }
 
     public void process(FruitTransaction fruitTransaction) {
-        operationStrategy.get(fruitTransaction.operation()).accept(fruitTransaction);
+        operationStrategy.get(fruitTransaction.getOperation()).accept(fruitTransaction);
     }
 }

@@ -58,7 +58,7 @@ public class FruitShopTest {
     void fruitTransactionWithNegativeAmount_NotOk() {
         int negativeAmount = -1;
         Assert.assertThrows(RuntimeException.class,
-                () -> new FruitTransaction(Operation.RETURN, "banana", negativeAmount));
+                () -> FruitTransaction.of(Operation.RETURN, "banana", negativeAmount));
     }
 
     @Test
@@ -102,8 +102,8 @@ public class FruitShopTest {
         int newAmount = 10;
         Storage.setAmount(fruit, amount);
 
-        FruitTransaction fruitTransaction = new FruitTransaction(operation, fruit, newAmount);
-        operationStrategy.get(fruitTransaction.operation()).accept(fruitTransaction);
+        FruitTransaction fruitTransaction = FruitTransaction.of(operation, fruit, newAmount);
+        operationStrategy.get(fruitTransaction.getOperation()).accept(fruitTransaction);
 
         Assertions.assertEquals(Storage.getFruitsAndAmount().get(fruit), newAmount,
                 operation
@@ -123,10 +123,10 @@ public class FruitShopTest {
         int expectedResult = amount + returnedAmount;
         Storage.setAmount(fruit, amount);
 
-        FruitTransaction fruitTransaction = new FruitTransaction(operation,
+        FruitTransaction fruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 returnedAmount);
-        operationStrategy.get(fruitTransaction.operation()).accept(fruitTransaction);
+        operationStrategy.get(fruitTransaction.getOperation()).accept(fruitTransaction);
 
         Assertions.assertEquals(Storage.getFruitsAndAmount().get(fruit), expectedResult,
                 operation
@@ -148,10 +148,10 @@ public class FruitShopTest {
         int expectedResult = amount + suppliedAmount;
         Storage.setAmount(fruit, amount);
 
-        FruitTransaction fruitTransaction = new FruitTransaction(operation,
+        FruitTransaction fruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 suppliedAmount);
-        operationStrategy.get(fruitTransaction.operation()).accept(fruitTransaction);
+        operationStrategy.get(fruitTransaction.getOperation()).accept(fruitTransaction);
 
         Assertions.assertEquals(Storage.getFruitsAndAmount().get(fruit), expectedResult,
                 operation
@@ -173,10 +173,10 @@ public class FruitShopTest {
         int expectedResult = amount - purchasedAmount;
         Storage.setAmount(fruit, amount);
 
-        FruitTransaction fruitTransaction = new FruitTransaction(operation,
+        FruitTransaction fruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 purchasedAmount);
-        operationStrategy.get(fruitTransaction.operation()).accept(fruitTransaction);
+        operationStrategy.get(fruitTransaction.getOperation()).accept(fruitTransaction);
 
         Assertions.assertEquals(Storage.getFruitsAndAmount().get(fruit), expectedResult,
                 operation
@@ -196,10 +196,10 @@ public class FruitShopTest {
         int amount = 5;
         Storage.setAmount(fruit, amount);
 
-        FruitTransaction fruitTransaction = new FruitTransaction(operation,
+        FruitTransaction fruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 amount + 1);
-        operationStrategy.get(fruitTransaction.operation()).accept(fruitTransaction);
+        operationStrategy.get(fruitTransaction.getOperation()).accept(fruitTransaction);
 
         Assertions.assertEquals(Storage.getFruitsAndAmount().get(fruit), amount,
                 "Amount of "
@@ -216,7 +216,7 @@ public class FruitShopTest {
         int amount = 100;
         int purchasedAmount = 10;
         int expectedResult = amount - purchasedAmount;
-        FruitTransaction newFruitTransaction = new FruitTransaction(operation,
+        FruitTransaction newFruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 purchasedAmount);
 
@@ -239,7 +239,7 @@ public class FruitShopTest {
         int amount = 100;
         int returnedAmount = 10;
         int expectedResult = amount + returnedAmount;
-        FruitTransaction newFruitTransaction = new FruitTransaction(operation,
+        FruitTransaction newFruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 returnedAmount);
 
@@ -262,7 +262,7 @@ public class FruitShopTest {
         int amount = 100;
         int suppliedAmount = 10;
         int expectedResult = amount + suppliedAmount;
-        FruitTransaction newFruitTransaction = new FruitTransaction(operation,
+        FruitTransaction newFruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 suppliedAmount);
 
@@ -284,7 +284,7 @@ public class FruitShopTest {
         String fruit = "apple";
         int amount = 100;
         int expectedResult = 10;
-        FruitTransaction newFruitTransaction = new FruitTransaction(operation,
+        FruitTransaction newFruitTransaction = FruitTransaction.of(operation,
                 fruit,
                 expectedResult);
 

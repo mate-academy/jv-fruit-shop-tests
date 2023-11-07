@@ -15,11 +15,19 @@ public class WriterServiceTest {
     private static final int DECREASED_INDEX = 2;
     private ReaderService reader;
     private WriterService writer;
+    private String text = "TEST TEXT"
+            + System.lineSeparator()
+            + "12345";
 
     @BeforeAll
     void setUp() {
         reader = new ReaderServiceImpl();
         writer = new WriterServiceImpl();
+        writeTestText(text, WRITE_TEST_FILE_NAME);
+    }
+
+    void writeTestText(String text, String filePath) {
+        writer.writeToFile(text, filePath);
     }
 
     @Test

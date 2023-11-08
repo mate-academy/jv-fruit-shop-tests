@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class SupplyOperationHandlerTest {
     private static final String APPLE = "apple";
+    private static final int EXPECTED_QUANTITY = 40;
     private static SupplyOperationHandler supplyOperationHandler;
 
     @BeforeAll
@@ -20,8 +21,8 @@ public class SupplyOperationHandlerTest {
         Storage.FRUITS.put(APPLE, 20);
         boolean expectedResult = supplyOperationHandler.handle(APPLE, 20);
         Assertions.assertTrue(expectedResult);
-        Integer expectedQuantity = Storage.FRUITS.get(APPLE);
-        Assertions.assertEquals(expectedQuantity, 40);
+        Integer actualQuantity = Storage.FRUITS.get(APPLE);
+        Assertions.assertEquals(EXPECTED_QUANTITY, actualQuantity);
     }
 
     @AfterEach

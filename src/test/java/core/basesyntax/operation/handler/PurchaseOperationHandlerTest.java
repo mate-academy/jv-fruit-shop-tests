@@ -1,5 +1,6 @@
 package core.basesyntax.operation.handler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.FruitStorageDao;
@@ -28,6 +29,14 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
+    public void calculateQuantity_purchaseValidAmount_ok() {
+        String fruit = "apple";
+        fruitStorageDao.updateFruitQuantity(fruit, 150);
+        purchaseOperationHandler.calculateQuantity(defaultPurchaseTransaction);
+        assertEquals(50,fruitStorageDao.getFruitQuantity(fruit));
+    }
+
+    @Test
     public void calculateQuantity_purchaseEmptyStorage_notOk() {
         fruitStorageDao.updateFruitQuantity("apple", 0);
         assertThrows(IllegalStateException.class,
@@ -35,7 +44,7 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    public void calculateQuantity_purchaseNegativeBalance() {
+    public void calculateQuantity_purchaseNegativeBalance_notOk() {
         fruitStorageDao.updateFruitQuantity("apple", 50);
         assertThrows(IllegalStateException.class,
                 () -> purchaseOperationHandler.calculateQuantity(defaultPurchaseTransaction));

@@ -12,15 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class StockTest {
+    private static final String HEAD_INPUT = "type,fruit,quantity";
     private Stock stock = new Stock();
-
-    @BeforeAll
-    static void beforeAll() {
-    }
+    private List<String> lines;
 
     @BeforeEach
     void clear() {
@@ -28,9 +25,9 @@ public class StockTest {
     }
 
     @Test
-    public void addElementsToStorage() {
-        List<String> lines = new ArrayList<String>();
-        lines.add("type,fruit,quantity");
+    public void addElementsToStorage_Ok() {
+        lines = new ArrayList<>();
+        lines.add(HEAD_INPUT);
         lines.add("b,banana,20");
         lines.add("b,apple,90");
         lines.add("s,banana,100");

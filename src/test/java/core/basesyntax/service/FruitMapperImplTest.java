@@ -17,11 +17,13 @@ public class FruitMapperImplTest {
     private static final String FIRST_VALID_ROW = "b,banana,20";
     private static final String FRUIT_BANANA = "banana";
     private static final String SECOND_VALID_ROW = "b,apple,100";
-    private FruitMapper mapper = new FruitMapperImpl();
-    private List<String> lines = new ArrayList<>();
+    private FruitMapper mapper;
+    private List<String> lines;
 
     @BeforeEach
     void clear() {
+        mapper = new FruitMapperImpl();
+        lines = new ArrayList<>();
         lines.clear();
     }
 

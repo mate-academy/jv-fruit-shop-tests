@@ -6,21 +6,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class BalanceDataHandlerTest {
+public class SupplyDataHandlerTest {
     private static final int QUANTITY_BANANA = 75;
     private static final String FRUIT_BANANA = "banana";
-    private BalanceDataHandler balanceDataHandler;
+    private SupplyDataHandler supplyDataHandler;
     private FruitTransaction validTransaction;
     private FruitTransaction invalidTransaction;
     private Map<String, Integer> validData;
 
     @BeforeEach
     void setUp() {
-        balanceDataHandler = new BalanceDataHandler();
+        supplyDataHandler = new SupplyDataHandler();
     }
 
     @Test
-    void validBalanceOperationInTransaction_Ok() {
+    void validPurchaseOperationInTransaction_Ok() {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
@@ -29,7 +29,7 @@ public class BalanceDataHandlerTest {
     }
 
     @Test
-    void invalidBalanceOperationInTransaction_notOk() {
+    void invalidPurchaseOperationInTransaction_notOk() {
         invalidTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         FRUIT_BANANA, QUANTITY_BANANA);
@@ -40,8 +40,7 @@ public class BalanceDataHandlerTest {
     @Test
     void validProcessWithData_Ok() {
         validData = Map.of(
-                FRUIT_BANANA,QUANTITY_BANANA
-        );
+                FRUIT_BANANA,QUANTITY_BANANA);
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
@@ -55,8 +54,8 @@ public class BalanceDataHandlerTest {
                 FRUIT_BANANA,QUANTITY_BANANA
         );
         Assertions.assertThrows(
-                IllegalArgumentException.class, () -> balanceDataHandler
-                        .processWithData(null, validData));
+                IllegalArgumentException.class,
+                () -> supplyDataHandler.processWithData(null, validData));
     }
 
     @Test
@@ -65,7 +64,7 @@ public class BalanceDataHandlerTest {
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
         Assertions.assertThrows(
-                IllegalArgumentException.class, () -> balanceDataHandler
+                IllegalArgumentException.class, () -> supplyDataHandler
                         .processWithData(validTransaction, null));
     }
 }

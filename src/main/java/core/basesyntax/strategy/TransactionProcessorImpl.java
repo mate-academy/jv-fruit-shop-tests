@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
+    private static final String EXCEPTION_ARGUMENT_NULL_MESSAGE
+            = "Argument of this method is null";
     private static final String EXCEPTION_NO_SUCH_OPERATION_MESSAGE
             = "No such type operation";
     private Stock stock;
@@ -15,7 +17,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
         this.stock = stock;
     }
 
-    private DataHandler getOperationHandler(Operation operation) {
+    private static DataHandler getOperationHandler(Operation operation) {
         switch (operation) {
             case BALANCE -> {
                 return new BalanceDataHandler();
@@ -35,10 +37,14 @@ public class TransactionProcessorImpl implements TransactionProcessor {
 
     @Override
     public void process(List<FruitTransaction> fruitTransactionsList) {
-        Map<String, Integer> data = stock.getData();
-        for (FruitTransaction transaction : fruitTransactionsList) {
-            DataHandler handler = getOperationHandler(transaction.getOperation());
-            handler.processWithData(transaction, data);
+        if (fruitTransactionsList == null || stock.getData() == null) {
+            throw new IllegalArgumentException(EXCEPTION_ARGUMENT_NULL_MESSAGE);
+        } else {
+            Map<String, Integer> data = stock.getData();
+            for (FruitTransaction transaction : fruitTransactionsList) {
+                DataHandler handler = getOperationHandler(transaction.getOperation());
+                handler.processWithData(transaction, data);
+            }
         }
     }
 }

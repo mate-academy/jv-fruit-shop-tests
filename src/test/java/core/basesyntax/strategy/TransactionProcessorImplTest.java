@@ -1,7 +1,8 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.data.Stock;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ public class TransactionProcessorImplTest {
 
     @Test
     void nullListTransactions_notOk() {
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class, () -> transactionProcessor.process(null));
     }
 }

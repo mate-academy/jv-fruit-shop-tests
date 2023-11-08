@@ -1,8 +1,12 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.data.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +28,8 @@ public class BalanceDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertTrue(validTransaction.getOperation()
-                .equals(FruitTransaction.Operation.BALANCE));
+        assertEquals(validTransaction.getOperation(),
+                 (FruitTransaction.Operation.BALANCE));
     }
 
     @Test
@@ -33,8 +37,8 @@ public class BalanceDataHandlerTest {
         invalidTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertFalse(FruitTransaction.Operation.BALANCE
-                .equals(invalidTransaction.getOperation()));
+        assertNotEquals(FruitTransaction.Operation.BALANCE,
+                invalidTransaction.getOperation());
     }
 
     @Test
@@ -45,8 +49,7 @@ public class BalanceDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertTrue(
-                validData.containsKey(validTransaction.getFruit()));
+        assertTrue(validData.containsKey(validTransaction.getFruit()));
     }
 
     @Test
@@ -54,7 +57,7 @@ public class BalanceDataHandlerTest {
         validData = Map.of(
                 FRUIT_BANANA,QUANTITY_BANANA
         );
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class, () -> balanceDataHandler
                         .processWithData(null, validData));
     }
@@ -64,7 +67,7 @@ public class BalanceDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class, () -> balanceDataHandler
                         .processWithData(validTransaction, null));
     }

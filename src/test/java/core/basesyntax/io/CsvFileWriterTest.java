@@ -1,6 +1,8 @@
 package core.basesyntax.io;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,17 +36,19 @@ public class CsvFileWriterTest {
                 FIRST_LINE_REPORT,
                 SECOND_LINE_REPORT
         );
-        Assertions.assertTrue(report.contains(HEAD_REPORT));
+        assertTrue(report.contains(HEAD_REPORT));
     }
 
     @Test
     void reportNull_notOk() {
-        assertThrows(RuntimeException.class, () -> writer.writeFile(null, INVALID_PATH));
+        assertThrows(RuntimeException.class,
+                () -> writer.writeFile(null, INVALID_PATH));
     }
 
     @Test
     void invalidFilePath_notOk() {
-        assertThrows(RuntimeException.class, () -> writer.writeFile(report, INVALID_PATH));
+        assertThrows(RuntimeException.class,
+                () -> writer.writeFile(report, INVALID_PATH));
     }
 
     @Test
@@ -55,7 +58,7 @@ public class CsvFileWriterTest {
                 FIRST_LINE_REPORT,
                 SECOND_LINE_REPORT
         );
-        Assertions.assertTrue(report.contains(FIRST_LINE_REPORT));
+        assertTrue(report.contains(FIRST_LINE_REPORT));
     }
 
     @Test
@@ -65,11 +68,11 @@ public class CsvFileWriterTest {
                 FIRST_LINE_REPORT,
                 SECOND_LINE_REPORT
         );
-        Assertions.assertTrue(report.contains(FIRST_LINE_REPORT));
+        assertTrue(report.contains(FIRST_LINE_REPORT));
     }
 
     @Test
-    void writeFile() {
+    void writeFile_Ok() {
         report = List.of(
                 HEAD_REPORT,
                 FIRST_LINE_REPORT,
@@ -87,7 +90,7 @@ public class CsvFileWriterTest {
         } catch (IOException e) {
             throw new RuntimeException(EXCEPTION_FIND_FILE_MESSAGE + VALID_PATH, e);
         }
-        Assertions.assertEquals(report, actualReport);
+        assertEquals(report, actualReport);
     }
 
     @AfterEach

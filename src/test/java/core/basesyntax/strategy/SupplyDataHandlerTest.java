@@ -1,8 +1,12 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.data.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +28,7 @@ public class SupplyDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertTrue(validTransaction.getOperation()
+        assertTrue(validTransaction.getOperation()
                 .equals(FruitTransaction.Operation.BALANCE));
     }
 
@@ -33,7 +37,7 @@ public class SupplyDataHandlerTest {
         invalidTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertFalse(FruitTransaction.Operation.BALANCE
+        assertFalse(FruitTransaction.Operation.BALANCE
                 .equals(invalidTransaction.getOperation()));
     }
 
@@ -44,8 +48,8 @@ public class SupplyDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertTrue(
-                validData.containsKey(validTransaction.getFruit()));
+        assertEquals(
+                FRUIT_BANANA, validTransaction.getFruit());
     }
 
     @Test
@@ -53,7 +57,7 @@ public class SupplyDataHandlerTest {
         validData = Map.of(
                 FRUIT_BANANA,QUANTITY_BANANA
         );
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class,
                 () -> supplyDataHandler.processWithData(null, validData));
     }
@@ -63,7 +67,7 @@ public class SupplyDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class, () -> supplyDataHandler
                         .processWithData(validTransaction, null));
     }

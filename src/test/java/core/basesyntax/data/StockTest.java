@@ -17,7 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 public class StockTest {
     private static final String HEAD_INPUT = "type,fruit,quantity";
     private Stock stock = new Stock();
-    private List<String> lines;
+    private List<String> inputData;
 
     @BeforeEach
     void clear() {
@@ -26,15 +26,15 @@ public class StockTest {
 
     @Test
     public void addElementsToStorage_Ok() {
-        lines = new ArrayList<>();
-        lines.add(HEAD_INPUT);
-        lines.add("b,banana,20");
-        lines.add("b,apple,90");
-        lines.add("s,banana,100");
-        lines.add("p,banana,40");
-        lines.add("s,apple,10");
+        inputData = new ArrayList<>();
+        inputData.add(HEAD_INPUT);
+        inputData.add("b,banana,20");
+        inputData.add("b,apple,90");
+        inputData.add("s,banana,100");
+        inputData.add("p,banana,40");
+        inputData.add("s,apple,10");
         FruitMapper fruitMapper = new FruitMapperImpl();
-        List<FruitTransaction> fruitTransactions = fruitMapper.mapData(lines);
+        List<FruitTransaction> fruitTransactions = fruitMapper.mapData(inputData);
         TransactionProcessor transactionProcessor = new TransactionProcessorImpl(stock);
         Map<String, Integer> expected = Map.of(
                 "banana", 80,
@@ -57,21 +57,14 @@ public class StockTest {
     }
 
     @Test
-    public void getData_containsKey_Ok() {
+    public void validGetData_Ok() {
         stock.putData("banana", 80);
         stock.putData("apple", 120);
         Map<String, Integer> expected = Map.of(
                 "banana", 80,
                 "apple", 120
         );
-        assertEquals(expected.containsKey("banana"),
-                stock.getData().containsKey("banana"));
-    }
-
-    @Test
-    public void getData_containsKey_notOk() {
-        stock.putData("apple", 120);
-        assertFalse(stock.getData().containsKey("banana"));
+        assertEquals(expected, stock.getData());
     }
 
     @Test

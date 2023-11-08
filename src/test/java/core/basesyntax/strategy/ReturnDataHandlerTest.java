@@ -1,8 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.data.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +29,7 @@ public class ReturnDataHandlerTest {
         validTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.RETURN, FRUIT_APPLE, QUANTITY_APPLE);
-        Assertions.assertTrue(validTransaction.getOperation()
+        assertTrue(validTransaction.getOperation()
                 .equals(FruitTransaction.Operation.RETURN));
     }
 
@@ -35,7 +38,7 @@ public class ReturnDataHandlerTest {
         invalidTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.PURCHASE, FRUIT_APPLE, QUANTITY_APPLE);
-        Assertions.assertFalse(FruitTransaction.Operation.RETURN
+        assertFalse(FruitTransaction.Operation.RETURN
                 .equals(invalidTransaction.getOperation()));
     }
 
@@ -46,13 +49,13 @@ public class ReturnDataHandlerTest {
         validTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.RETURN, FRUIT_APPLE, QUANTITY_APPLE);
-        Assertions.assertTrue(
+        assertTrue(
                 validData.containsKey(validTransaction.getFruit()));
     }
 
     @Test
     void transactionIsNull_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> returnDataHandler.processWithData(null, validData));
     }
 
@@ -61,7 +64,7 @@ public class ReturnDataHandlerTest {
         validTransaction =
                 new FruitTransaction(
                         FruitTransaction.Operation.RETURN, FRUIT_APPLE, QUANTITY_APPLE);
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> returnDataHandler.processWithData(validTransaction, null));
     }
 }

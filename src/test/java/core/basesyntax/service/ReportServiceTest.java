@@ -1,8 +1,10 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,25 +27,19 @@ public class ReportServiceTest {
 
     @Test
     void inputNull_notOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> reportService.generateReport(null));
     }
 
     @Test
     void validReport_Ok() {
         List<String> report = reportService.generateReport(data);
-        Assertions.assertEquals(ROW_OF_INPUT_DATA, report.get(ROW_OF_INPUT_DATA_INDEX));
+        assertEquals(ROW_OF_INPUT_DATA, report.get(ROW_OF_INPUT_DATA_INDEX));
     }
 
     @Test
     void checkHeadReport_Ok() {
         List<String> report = reportService.generateReport(data);
-        Assertions.assertEquals(HEAD_REPORT, report.get(HEAD_REPORT_INDEX));
-    }
-
-    @Test
-    void checkComma_Ok() {
-        List<String> report = reportService.generateReport(data);
-        Assertions.assertTrue(report.get(0).contains(REGEX_COMMA));
+        assertEquals(HEAD_REPORT, report.get(HEAD_REPORT_INDEX));
     }
 }

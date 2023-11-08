@@ -1,8 +1,11 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
 import core.basesyntax.data.FruitTransaction;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +27,7 @@ public class PurchaseDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertTrue(validTransaction.getOperation()
+        assertTrue(validTransaction.getOperation()
                 .equals(FruitTransaction.Operation.BALANCE));
     }
 
@@ -33,7 +36,7 @@ public class PurchaseDataHandlerTest {
         invalidTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertFalse(FruitTransaction.Operation.BALANCE
+        assertFalse(FruitTransaction.Operation.BALANCE
                 .equals(invalidTransaction.getOperation()));
     }
 
@@ -44,7 +47,7 @@ public class PurchaseDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertTrue(
+        assertTrue(
                 validData.containsKey(validTransaction.getFruit()));
     }
 
@@ -53,7 +56,7 @@ public class PurchaseDataHandlerTest {
         validData = Map.of(
                 FRUIT_BANANA,QUANTITY_BANANA
         );
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class,
                 () -> purchaseDataHandler.processWithData(null, validData));
     }
@@ -63,7 +66,7 @@ public class PurchaseDataHandlerTest {
         validTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE,
                         FRUIT_BANANA, QUANTITY_BANANA);
-        Assertions.assertThrows(
+        assertThrows(
                 IllegalArgumentException.class, () -> purchaseDataHandler
                         .processWithData(validTransaction, null));
     }

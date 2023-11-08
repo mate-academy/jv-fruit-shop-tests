@@ -17,8 +17,8 @@ import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
-import core.basesyntax.service.writter.CsvFileWritter;
-import core.basesyntax.service.writter.FileWritter;
+import core.basesyntax.service.writter.CsvFileWriter;
+import core.basesyntax.service.writter.FileWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public class Main {
     private static final FileReader fileReader = new CsvFileReader();
     private static final Parser parser = new ParserImpl();
     private static final Reporter reporter = new CsvReporter();
-    private static final FileWritter fileWritter = new CsvFileWritter();
+    private static final FileWriter fileWritter = new CsvFileWriter();
     private static final Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storageDao),
             FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storageDao),

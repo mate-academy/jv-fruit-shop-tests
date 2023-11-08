@@ -1,15 +1,14 @@
 package core.basesyntax.service.writter;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvFileWritter implements FileWritter {
+public class CsvFileWriter implements FileWriter {
     private static final String EXCEPTION_MESSAGE = "Can't write file";
 
     @Override
     public boolean write(String content, String filePath) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(filePath))) {
             bufferedWriter.write(content);
             return true;
         } catch (IOException e) {

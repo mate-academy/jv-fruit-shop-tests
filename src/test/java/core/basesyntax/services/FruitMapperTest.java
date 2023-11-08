@@ -8,8 +8,12 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class FruitMapperTest {
     private static FruitMapper fruitMapper;
@@ -36,14 +40,16 @@ class FruitMapperTest {
         wrongLength = List.of("a, apple, 100, 100");
     }
 
-    @Test
-    void mapDate_correct_OK() {
-        for (Map.Entry<List<FruitTransaction>, List<String>> map : correctValues.entrySet()) {
-            List<FruitTransaction> excepted = map.getKey();
-            List<String> value = map.getValue();
-            List<FruitTransaction> actual = fruitMapper.mapData(value);
-            assertEquals(excepted, actual);
-        }
+    @ParameterizedTest
+    @MethodSource("getCorrectValues")
+    void mapData_correct_OK(List<FruitTransaction> expected, List<String> value) {
+        List<FruitTransaction> actual = fruitMapper.mapData(value);
+        assertEquals(expected, actual);
+    }
+
+    private static Stream<Arguments> getCorrectValues() {
+        return correctValues.entrySet().stream()
+                .map(entry -> Arguments.of(entry.getKey(), entry.getValue()));
     }
 
     @Test
@@ -63,14 +69,14 @@ class FruitMapperTest {
 
     @Test
     void mapData_checkNull_NotOK() {
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             fruitMapper.mapData(null);
         });
     }
 
     @Test
     void mapData_checkIsEmpty_NotOk() {
-        assertThrows(RuntimeException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             fruitMapper.mapData(emptyList);
         });
     }

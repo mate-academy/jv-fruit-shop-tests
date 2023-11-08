@@ -26,7 +26,7 @@ public class ReportServiceImpl implements ReportService {
     private void checkOnNull(Map<String, Integer> storage) {
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             if (entry.getKey() == null || entry.getValue() == null) {
-                throw new NullPointerException(NULL_VALUE + entry.getKey());
+                throw new IllegalArgumentException(NULL_VALUE + entry.getKey());
             }
         }
     }

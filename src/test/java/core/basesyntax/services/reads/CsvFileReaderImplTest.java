@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileReaderImplTest {
     private static CsvFileReader csvFileReader;
-    private static final String correctFilePath = "file_for_the_test";
+    private static final String correctFilePath = "src/test/resources/file_for_the_test";
     private static final String incorrectFilePath = "Wrong path to the file";
-    private static final String emptyFilePath = "empty_test_file";
+    private static final String emptyFilePath = "src/test/resources/empty_test_file";
     private static List<String> listFromFile;
 
     @BeforeAll

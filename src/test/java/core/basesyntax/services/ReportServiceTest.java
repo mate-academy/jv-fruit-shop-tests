@@ -40,7 +40,7 @@ class ReportServiceTest {
     void testGenerate_reportWithNullKey_NotOK() {
         storage.put(null, 10);
 
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 reportService.generateReport(storage));
     }
 
@@ -48,7 +48,7 @@ class ReportServiceTest {
     void testGenerate_reportWithNullValue_NotOK() {
         storage.put("apple", null);
 
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 reportService.generateReport(storage));
     }
 
@@ -56,7 +56,7 @@ class ReportServiceTest {
     void testGenerate_reportWithNullKeyAndValue_NotOk() {
         storage.put(null, null);
 
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 reportService.generateReport(storage));
     }
 }

@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopApp {
-    public static final String INPUT_PATH = "Input target transactions";
-    public static final String OUTPUT_FILE_REPORT = "Report on the results";
+    public static final String INPUT_PATH = "src/main/resources/Input target transactions";
+    public static final String OUTPUT_FILE_REPORT = "src/main/resources/Report on the results";
 
     public static void main(String[] args) {
         CsvFileReader readFile = new CsvFileReaderImpl();

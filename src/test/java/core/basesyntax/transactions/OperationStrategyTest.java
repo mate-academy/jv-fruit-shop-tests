@@ -48,22 +48,21 @@ public class OperationStrategyTest {
     @Test
     void handler_withNullOperation_NotOK() {
         fruitTransaction.setOperation(null);
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 operationStrategy.handler(fruitTransaction));
     }
 
     @Test
     void handler_withNullFruit_NotOK() {
         fruitTransaction.setFruit(null);
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 operationStrategy.handler(fruitTransaction));
     }
 
     @Test
     void handler_negativeQuantity_NotOK() {
         fruitTransaction.setQuantity(-1);
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(IllegalArgumentException.class, () ->
                 operationStrategy.handler(fruitTransaction));
     }
 }
-

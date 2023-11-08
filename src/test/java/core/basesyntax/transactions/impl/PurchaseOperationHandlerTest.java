@@ -35,7 +35,6 @@ class PurchaseOperationHandlerTest {
     @Test
     void testProcessTransaction_transactionCorrectWork_OK() {
         boolean result = handler.processTransaction(transaction);
-
         assertTrue(result);
     }
 

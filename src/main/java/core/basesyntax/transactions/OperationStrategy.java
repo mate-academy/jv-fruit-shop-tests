@@ -24,10 +24,10 @@ public class OperationStrategy {
         if (fruitTransaction == null
                 || fruitTransaction.getFruit() == null
                 || fruitTransaction.getOperation() == null) {
-            throw new NullPointerException(NULL_VALUE + fruitTransaction);
+            throw new IllegalArgumentException(NULL_VALUE + fruitTransaction);
         }
         if (fruitTransaction.getQuantity() < 0) {
-            throw new RuntimeException(UNDER_ZERO_QUANTITY + fruitTransaction);
+            throw new IllegalArgumentException(UNDER_ZERO_QUANTITY + fruitTransaction);
         }
 
     }

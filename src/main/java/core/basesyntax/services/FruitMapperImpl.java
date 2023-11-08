@@ -31,10 +31,10 @@ public class FruitMapperImpl implements FruitMapper {
 
     private void checkOnNullEmpty(List<String> data) {
         if (data == null) {
-            throw new NullPointerException(NULL_INPUT_DATA + data);
+            throw new IllegalArgumentException(NULL_INPUT_DATA + data);
         }
         if (data.isEmpty()) {
-            throw new RuntimeException(EMPTY_INPUT_DATA + data);
+            throw new IllegalArgumentException(EMPTY_INPUT_DATA + data);
         }
     }
 }

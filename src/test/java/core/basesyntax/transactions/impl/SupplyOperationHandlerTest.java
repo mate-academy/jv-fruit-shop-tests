@@ -39,6 +39,7 @@ public class SupplyOperationHandlerTest {
         boolean result = handler.processTransaction(transaction);
         assertTrue(result);
         assertEquals(sumBalanceQuantity, Storage.STORAGE_VALUE.get(FRUIT));
+        assertTrue(handler.processTransaction(transaction));
     }
 
     @Test

@@ -10,6 +10,7 @@ class OperationTest {
     private static final String OPERATION_SUPPLY = "s";
     private static final String OPERATION_PURCHASE = "p";
     private static final String OPERATION_RETURN = "r";
+    private static final String EMPTY_STRING = "";
 
     @Test
     void getOperationByCode_givenBalance_OK() {
@@ -55,10 +56,8 @@ class OperationTest {
 
     @Test
     void getOperationByCode_givenEmptyString_NotOk() {
-        String emptyString = "";
-
         assertThrows(IllegalArgumentException.class, () -> {
-            Operation.getOperationByCode(emptyString);
+            Operation.getOperationByCode(EMPTY_STRING);
         });
     }
 }

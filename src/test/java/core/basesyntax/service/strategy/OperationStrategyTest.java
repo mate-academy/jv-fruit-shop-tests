@@ -1,5 +1,8 @@
 package core.basesyntax.service.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
@@ -10,11 +13,12 @@ import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private static OperationStrategy operationStrategy;
     private static StorageDao storageDao;
     private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
@@ -35,52 +39,52 @@ class OperationStrategyTest {
     @Test
     void handleOperation_balanceOperation_ok() {
         fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-        fruitTransaction.setFruit("apple");
+        fruitTransaction.setFruit(APPLE);
         fruitTransaction.setQuantity(40);
         operationStrategy.processOperation(fruitTransaction);
-        Map<String, Integer> expectedMap = Map.of("apple", 40);
-        Assertions.assertEquals(expectedMap, Storage.FRUITS);
+        Map<String, Integer> expectedMap = Map.of(APPLE, 40);
+        assertEquals(expectedMap, Storage.FRUITS);
     }
 
     @Test
     void handleOperation_purchaseOperation_ok() {
-        Storage.FRUITS.put("apple", 20);
+        Storage.FRUITS.put(APPLE, 20);
         fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-        fruitTransaction.setFruit("apple");
+        fruitTransaction.setFruit(APPLE);
         fruitTransaction.setQuantity(10);
         operationStrategy.processOperation(fruitTransaction);
-        Map<String, Integer> expectedMap = Map.of("apple", 10);
-        Assertions.assertEquals(expectedMap, Storage.FRUITS);
+        Map<String, Integer> expectedMap = Map.of(APPLE, 10);
+        assertEquals(expectedMap, Storage.FRUITS);
     }
 
     @Test
     void handleOperation_returnOperation_ok() {
-        Storage.FRUITS.put("banana", 20);
+        Storage.FRUITS.put(BANANA, 20);
         fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-        fruitTransaction.setFruit("banana");
+        fruitTransaction.setFruit(BANANA);
         fruitTransaction.setQuantity(20);
         operationStrategy.processOperation(fruitTransaction);
-        Map<String, Integer> expectedMap = Map.of("banana", 40);
-        Assertions.assertEquals(expectedMap, Storage.FRUITS);
+        Map<String, Integer> expectedMap = Map.of(BANANA, 40);
+        assertEquals(expectedMap, Storage.FRUITS);
     }
 
     @Test
     void handleOperation_supplyOperation_ok() {
-        Storage.FRUITS.put("banana", 20);
+        Storage.FRUITS.put(BANANA, 20);
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-        fruitTransaction.setFruit("banana");
+        fruitTransaction.setFruit(BANANA);
         fruitTransaction.setQuantity(30);
         operationStrategy.processOperation(fruitTransaction);
-        Map<String, Integer> expectedMap = Map.of("banana", 50);
-        Assertions.assertEquals(expectedMap, Storage.FRUITS);
+        Map<String, Integer> expectedMap = Map.of(BANANA, 50);
+        assertEquals(expectedMap, Storage.FRUITS);
     }
 
     @Test
     void handleOperation_nullOperation_notOk() {
-        Storage.FRUITS.put("banana", 20);
+        Storage.FRUITS.put(BANANA, 20);
         fruitTransaction.setOperation(null);
-        fruitTransaction.setFruit("banana");
-        Assertions.assertThrows(RuntimeException.class,
+        fruitTransaction.setFruit(BANANA);
+        assertThrows(RuntimeException.class,
                 () -> operationStrategy.processOperation(fruitTransaction));
     }
 

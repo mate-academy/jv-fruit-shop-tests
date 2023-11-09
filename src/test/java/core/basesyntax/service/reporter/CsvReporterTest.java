@@ -1,8 +1,9 @@
 package core.basesyntax.service.reporter;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,13 +20,13 @@ class CsvReporterTest {
     @Test
     void startedWithFirstLine_Ok() {
         String actual = reporter.makeReport();
-        Assertions.assertTrue(actual.startsWith(FIRST_LINE));
+        assertTrue(actual.startsWith(FIRST_LINE));
     }
 
     @Test
     void containsFruitInformation_Ok() {
         String actual = reporter.makeReport();
-        Assertions.assertTrue(actual.contains("apple,20"));
+        assertTrue(actual.contains("apple,20"));
     }
 
     @AfterEach

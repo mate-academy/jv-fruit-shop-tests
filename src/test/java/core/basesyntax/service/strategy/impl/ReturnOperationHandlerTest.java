@@ -1,12 +1,13 @@
 package core.basesyntax.service.strategy.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ class ReturnOperationHandlerTest {
     void handleValidFruit_Ok() {
         Storage.FRUITS.put(FRUIT_NAME, STARTED_QUANTITY);
         operationHandler.handle(fruitTransaction);
-        Assertions.assertEquals(EXPECTED_QUANTITY, Storage.FRUITS.get(FRUIT_NAME));
+        assertEquals(EXPECTED_QUANTITY, Storage.FRUITS.get(FRUIT_NAME));
     }
 
     @AfterEach

@@ -1,7 +1,9 @@
 package core.basesyntax.service.reader;
 
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,19 +20,19 @@ class CsvFileReaderTest {
 
     @Test
     void readFileWithInvalidPath_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> fileReader.read(INVALID_PATH));
     }
 
     @Test
     void readFileWithEmptyPath_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> fileReader.read(EMPTY_PATH));
     }
 
     @Test
     void readFileWithNullPath_NotOk() {
-        Assertions.assertThrows(RuntimeException.class,
+        assertThrows(RuntimeException.class,
                 () -> fileReader.read(null));
     }
 
@@ -48,6 +50,6 @@ class CsvFileReaderTest {
                 "p,banana,5",
                 "s,banana,50"
         );
-        Assertions.assertIterableEquals(expected, actual);
+        assertIterableEquals(expected, actual);
     }
 }

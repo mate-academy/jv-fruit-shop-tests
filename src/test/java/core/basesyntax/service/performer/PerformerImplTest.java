@@ -1,5 +1,7 @@
 package core.basesyntax.service.performer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
@@ -16,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,14 +53,14 @@ class PerformerImplTest {
                 "r,banana,1");
         List<FruitTransaction> list = parser.parseStringToFruitTransaction(stringList);
         performer.performTransaction(list);
-        Assertions.assertEquals(101, storageDao.getQuantity("banana"));
-        Assertions.assertEquals(84, storageDao.getQuantity("apple"));
+        assertEquals(101, storageDao.getQuantity("banana"));
+        assertEquals(84, storageDao.getQuantity("apple"));
     }
 
     @Test
     void performEmptyList_NotOk() {
         performer.performTransaction(Collections.EMPTY_LIST);
-        Assertions.assertEquals(0, Storage.FRUITS.size());
+        assertEquals(0, Storage.FRUITS.size());
     }
 
     @AfterEach

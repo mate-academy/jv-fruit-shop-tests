@@ -17,10 +17,11 @@ class PurchaseOperationHandlerTest {
 
     @BeforeEach
     void setUp() {
-        fruitTransaction = new FruitTransaction();
-        fruitTransaction.setFruit(BANANA);
-        fruitTransaction.setQuantity(10);
-        Storage.SHOPSTORAGE.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+//        fruitTransaction = new FruitTransaction();
+//        fruitTransaction.setFruit(BANANA);
+//        fruitTransaction.setQuantity(10);
+//        Storage.SHOPSTORAGE.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        Storage.SHOPSTORAGE.clear();
     }
 
     @AfterEach
@@ -30,6 +31,7 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handle_PurchaseBanana_ok() {
+        Storage.SHOPSTORAGE.put(BANANA, 10);
         FruitTransaction fruitPurchase = new FruitTransaction();
         fruitPurchase.setFruit(BANANA);
         fruitPurchase.setQuantity(5);
@@ -56,6 +58,7 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handle_purchaseZeroQuantity_notOk() {
+        Storage.SHOPSTORAGE.put(BANANA, 10);
         FruitTransaction zeroQuantityPurchase = new FruitTransaction();
         zeroQuantityPurchase.setFruit(BANANA);
         zeroQuantityPurchase.setQuantity(0);
@@ -65,6 +68,7 @@ class PurchaseOperationHandlerTest {
 
     @Test
     void handle_purchaseWithEdgeCase_ok() {
+        Storage.SHOPSTORAGE.put(BANANA, 10);
         FruitTransaction purchaseFruit = new FruitTransaction();
         purchaseFruit.setFruit(BANANA);
         purchaseFruit.setQuantity(10);

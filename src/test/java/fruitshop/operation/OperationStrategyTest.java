@@ -18,7 +18,7 @@ public class OperationStrategyTest {
     }
 
     @Test
-    void operationStrategySuppliesRightImpl_Ok() {
+    void get_OperationStrategySuppliesRightOperation_Ok() {
         Operation purchaseOperation = Operation.PURCHASE;
         Class<PurchaseOperationHandlerImpl> expectedOperation = PurchaseOperationHandlerImpl.class;
         Class<? extends OperationHandler> actualOperation = operationStrategy.get(purchaseOperation)

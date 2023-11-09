@@ -31,7 +31,7 @@ public class WriterServiceTest {
     }
 
     @Test
-    void writerServiceImpl_Ok() {
+    void writeToFile_WritesTextToFile_Ok() {
         writer.writeToFile(text, WRITE_TEST_FILE_NAME);
         String actual = reader.readFromFile(WRITE_TEST_FILE_NAME)
                 .stream()

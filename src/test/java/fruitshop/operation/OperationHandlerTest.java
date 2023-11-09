@@ -19,7 +19,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    void balanceOperation_Ok() {
+    void get_BalanceReturnsRightAmount_Ok() {
         Operation operation = Operation.BALANCE;
         String fruit = "banana";
         int amount = 4;
@@ -39,7 +39,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    void returnOperation_Ok() {
+    void get_ReturnReturnsRightAmount_Ok() {
         Operation operation = Operation.RETURN;
         String fruit = "apple";
         int amount = 2;
@@ -64,7 +64,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    void supplyOperation_Ok() {
+    void get_SupplyReturnsRightAmount_Ok() {
         Operation operation = Operation.SUPPLY;
         String fruit = "apple";
         int amount = 20;
@@ -89,7 +89,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    void purchaseOperation_Ok() {
+    void get_PurchaseReturnsRightAmount_Ok() {
         Operation operation = Operation.PURCHASE;
         String fruit = "apple";
         int amount = 8;
@@ -114,7 +114,7 @@ public class OperationHandlerTest {
     }
 
     @Test
-    void purchaseWhenBalanceIsNotSufficient_NotOK() {
+    void get_PurchaseWhenBalanceIsNotSufficient_NotOK() {
         Operation operation = Operation.PURCHASE;
         String fruit = "banana";
         int amount = 5;

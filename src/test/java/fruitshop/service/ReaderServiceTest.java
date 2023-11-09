@@ -18,7 +18,7 @@ public class ReaderServiceTest {
     }
 
     @Test
-    void readerServiceImplWorks_Ok() {
+    void readFromFile_ReturnsExpectedString_Ok() {
         String[] expectedArray = {
                 "type,fruit,quantity",
                 "b,banana,20",

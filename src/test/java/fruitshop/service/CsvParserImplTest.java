@@ -41,7 +41,7 @@ public class CsvParserImplTest {
     }
 
     @Test
-    void csvParser_Ok() {
+    void parse_CsvParserReturnsRightList_Ok() {
         List<String> readResult = reader.readFromFile(TEST_FILE_NAME);
         List<FruitTransaction> expected = new ArrayList<>();
 

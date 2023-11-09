@@ -7,7 +7,7 @@ import org.junit.jupiter.api.TestInstance;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OperationTest {
     @Test
-    void getOperationByCode_Ok() {
+    void getByCode_ReturnsOperationByLetter_Ok() {
         Operation expected = Operation.PURCHASE;
         String givenLetter = "p";
         Operation result = Operation.getByCode(givenLetter);
@@ -20,7 +20,7 @@ public class OperationTest {
     }
 
     @Test
-    void getOperationByCodeThrowsException_Ok() {
+    void getByCode_ThrowsExceptionIfWrongChar_Ok() {
         String wrongChar = "1";
         Assertions.assertThrows(RuntimeException.class, () -> Operation.getByCode(wrongChar));
     }

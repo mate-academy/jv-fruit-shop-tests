@@ -17,7 +17,7 @@ public class ReportImplTest {
     }
 
     @Test
-    void reportImplCreate_Ok() {
+    void create_ReturnsRightReport_Ok() {
         String expected = "fruit,quantity"
                     + System.lineSeparator()
                     + "banana,20"

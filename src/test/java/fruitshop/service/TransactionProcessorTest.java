@@ -22,7 +22,7 @@ public class TransactionProcessorTest {
     }
 
     @Test
-    void transactionProcessorImplProcessesPurchase_Ok() {
+    void process_WritesPurchaseToStorage_Ok() {
         Operation operation = Operation.PURCHASE;
         String fruit = "apple";
         int amount = 100;
@@ -45,7 +45,7 @@ public class TransactionProcessorTest {
     }
 
     @Test
-    void transactionProcessorImplProcessesReturn_Ok() {
+    void process_WritesReturnToStorage_Ok() {
         Operation operation = Operation.RETURN;
         String fruit = "apple";
         int amount = 100;
@@ -68,7 +68,7 @@ public class TransactionProcessorTest {
     }
 
     @Test
-    void transactionProcessorImplProcessesSupply_Ok() {
+    void process_WritesSupplyToStorage_Ok() {
         Operation operation = Operation.SUPPLY;
         String fruit = "apple";
         int amount = 100;
@@ -91,7 +91,7 @@ public class TransactionProcessorTest {
     }
 
     @Test
-    void transactionProcessorImplProcessesBalance_Ok() {
+    void process_WritesBalanceToStorage_Ok() {
         Operation operation = Operation.BALANCE;
         String fruit = "apple";
         int amount = 100;

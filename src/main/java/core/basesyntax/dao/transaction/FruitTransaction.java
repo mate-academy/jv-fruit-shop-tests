@@ -13,12 +13,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public FruitTransaction(FruitTransaction fruitTransaction) {
-        this.operation = fruitTransaction.getOperation();
-        this.name = fruitTransaction.getName();
-        this.quantity = fruitTransaction.getQuantity();
-    }
-
     public Operation getOperation() {
         return operation;
     }

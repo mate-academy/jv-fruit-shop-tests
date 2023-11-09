@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class ReturnOperationTest {
 
     @Test
-    void useOperation() {
+    void useOperation_Ok() {
         // Arrange
         ReturnOperation returnOperation = new ReturnOperation();
         Integer quantity = 10;

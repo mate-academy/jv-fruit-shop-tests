@@ -25,7 +25,7 @@ public class ReportCreatorImpl implements ReportCreator {
     }
 
     @Override
-    public Map<String, Integer> updateStorage() {
+    public Map<String, Integer> createReport() {
         Map<String, Integer> reportMap = new HashMap<>();
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
 

@@ -25,7 +25,7 @@ class TransactionImplTest {
     }
 
     @Test
-    void testGetTransactionList() {
+    void testGetTransactionList_Ok() {
         //Arrange
         String testStr1 = "b,apple,20";
         testlist.add(testStr1);
@@ -39,7 +39,7 @@ class TransactionImplTest {
     }
 
     @Test
-    void testGetTransactionList_InValidLength() {
+    void testGetTransactionList_InValidLength_Ok() {
         //Arrange
         String testStr1 = "b,apple,20,40";
         testlist.add(testStr1);
@@ -53,7 +53,7 @@ class TransactionImplTest {
     }
 
     @Test
-    void testGetTransactionList_InValidOperation() {
+    void testGetTransactionList_InValidOperation_Ok() {
         //Arrange
         String testStr1 = "w,apple,20";
         testlist.add(testStr1);
@@ -67,7 +67,7 @@ class TransactionImplTest {
     }
 
     @Test
-    void testGetTransactionList_NullLine() {
+    void testGetTransactionList_NullLine_Ok() {
         //Arrange
         String testStr1 = null;
         testlist.add(testStr1);
@@ -81,7 +81,7 @@ class TransactionImplTest {
     }
 
     @Test
-    void testGetTransactionList_FruitTransaction() {
+    void testGetTransactionList_FruitTransaction_Ok() {
         //Arrange
         String testStr1 = "b,apple,20";
         testlist.add(testStr1);

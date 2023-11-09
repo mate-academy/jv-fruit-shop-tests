@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class SupplyOperationTest {
 
     @Test
-    void useOperation() {
+    void useOperation_Ok() {
         // Arrange
         SupplyOperation supplyOperation = new SupplyOperation();
         Integer quantity = 10;

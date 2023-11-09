@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class OperationTest {
 
     @Test
-    void getBalanceCode() {
+    void getBalanceCode_Ok() {
         //Arrange
         Operation balanceOperation = Operation.BALANCE;
 
@@ -22,7 +22,7 @@ class OperationTest {
     }
 
     @Test
-    void getPurchaseCode() {
+    void getPurchaseCode_Ok() {
         //Arrange
         Operation purchaseOperation = Operation.PURCHASE;
 
@@ -34,7 +34,7 @@ class OperationTest {
     }
 
     @Test
-    void getReturnCode() {
+    void getReturnCode_Ok() {
         //Arrange
         Operation returnOperation = Operation.RETURN;
 
@@ -46,7 +46,7 @@ class OperationTest {
     }
 
     @Test
-    void getSupplyCode() {
+    void getSupplyCode_Ok() {
         //Arrange
         Operation supplyOperation = Operation.SUPPLY;
 
@@ -58,7 +58,7 @@ class OperationTest {
     }
 
     @Test
-    void getBalanceOperation() {
+    void getBalanceOperation_Ok() {
         //Arrange
         String codeOperation = "b";
 
@@ -70,7 +70,7 @@ class OperationTest {
     }
 
     @Test
-    void getPurchaseOperation() {
+    void getPurchaseOperation_Ok() {
         //Arrange
         String codeOperation = "p";
 
@@ -82,7 +82,7 @@ class OperationTest {
     }
 
     @Test
-    void getReturnOperation() {
+    void getReturnOperation_Ok() {
         //Arrange
         String codeOperation = "r";
 
@@ -94,7 +94,7 @@ class OperationTest {
     }
 
     @Test
-    void getSupplyOperation() {
+    void getSupplyOperation_Ok() {
         //Arrange
         String codeOperation = "s";
 
@@ -106,22 +106,20 @@ class OperationTest {
     }
 
     @Test
-    void getNotValidOperation() {
+    void getNotValidOperation_NotOk() {
         //Arrange
         String notValid = "q";
 
-        //Act
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            Operation.getOperation(notValid);
-        });
-
         //Assert
+        IllegalArgumentException exception
+                = assertThrows(IllegalArgumentException.class, () -> Operation
+                .getOperation(notValid));
         assertEquals("No constant with abbreviation " + notValid + " found",
                 exception.getMessage());
     }
 
     @Test
-    void validAbbreviation() {
+    void validAbbreviation_Ok() {
         //Arrange
         String validAbbreviation = "s";
 
@@ -133,7 +131,7 @@ class OperationTest {
     }
 
     @Test
-    void notValidAbbreviation() {
+    void notValidAbbreviation_NotOk() {
         //Arrange
         String notValidAbbreviation = "q";
 

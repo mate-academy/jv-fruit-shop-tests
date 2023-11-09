@@ -19,7 +19,7 @@ class FruitStorageDaoImplTest {
     }
 
     @Test
-    void add() {
+    void testAdd_Ok() {
         //Arrange
         FruitTransaction transaction1 = new FruitTransaction(Operation.BALANCE, "apple", 34);
 
@@ -32,7 +32,7 @@ class FruitStorageDaoImplTest {
     }
 
     @Test
-    void getAllTransaction() {
+    void testGetAllTransaction_Ok() {
         //Arrange
         FruitTransaction transaction1 = new FruitTransaction(Operation.BALANCE, "apple", 34);
         FruitTransaction transaction2 = new FruitTransaction(Operation.PURCHASE, "banana", 12);

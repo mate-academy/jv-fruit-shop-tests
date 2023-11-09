@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class BalanceOperationTest {
 
     @Test
-    void useOperation() {
+    void useOperation_Ok() {
         // Arrange
         BalanceOperation balanceOperation = new BalanceOperation();
         Integer quantity = 10;

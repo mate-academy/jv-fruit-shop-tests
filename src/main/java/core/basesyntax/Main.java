@@ -17,6 +17,6 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl();
         
         transaction.getTransactionList(fileReader.readFile("file.csv"));
-        fileWriter.writeReport(reportCreator.updateStorage(),"report_file.csv");
+        fileWriter.writeReport(reportCreator.createReport(),"report_file.csv");
     }
 }

@@ -1,8 +1,8 @@
 package core.basesyntax.dao.operation;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class PurchaseOperationTest {
 
@@ -18,5 +18,4 @@ class PurchaseOperationTest {
         // Assert
         assertEquals(-10, result, "useOperation should return the negative of the quantity");
     }
-
 }

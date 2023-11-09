@@ -12,15 +12,10 @@ import org.junit.jupiter.api.Test;
 class PurchaseOperationHandlerTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private FruitTransaction fruitTransaction;
     private PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
 
     @BeforeEach
     void setUp() {
-//        fruitTransaction = new FruitTransaction();
-//        fruitTransaction.setFruit(BANANA);
-//        fruitTransaction.setQuantity(10);
-//        Storage.SHOPSTORAGE.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         Storage.SHOPSTORAGE.clear();
     }
 

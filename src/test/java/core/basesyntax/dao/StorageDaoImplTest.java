@@ -27,7 +27,6 @@ class StorageDaoImplTest {
     void addNullFruitName_NotOk() {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> storageDao.add(null, VALID_QUANTITY));
-
     }
 
     @Test

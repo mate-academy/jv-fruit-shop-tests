@@ -20,5 +20,4 @@ public class StorageDaoImpl implements StorageDao {
     public int getQuantity(String fruit) {
         return Storage.FRUITS.get(fruit);
     }
-
 }

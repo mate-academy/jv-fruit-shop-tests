@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,6 +23,11 @@ class WriterServiceImpTest {
     void setUp() throws IOException {
         writerService = new WriterServiceImp();
         testFile = new File(FILE_PATH);
+    }
+
+    @AfterEach
+    void tearDown() {
+        testFile.delete();
     }
 
     @Test

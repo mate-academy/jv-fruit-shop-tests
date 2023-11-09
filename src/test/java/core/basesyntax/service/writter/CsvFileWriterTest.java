@@ -3,11 +3,10 @@ package core.basesyntax.service.writter;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 
 class CsvFileWriterTest {
     private static final String VALID_PATH = "src/test/resources/output.csv";

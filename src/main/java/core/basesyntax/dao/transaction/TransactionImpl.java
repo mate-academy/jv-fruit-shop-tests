@@ -16,14 +16,16 @@ public class TransactionImpl implements Transaction {
         String[] infoString;
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
         for (String str : stringList) {
-            infoString = str.split(SEPARATOR);
-            if (infoString.length == 3) {
-                if (Operation.validAbbreviation(infoString[OPERATION])) {
-                    Operation operation = Operation.getOperation(infoString[OPERATION]);
-                    String name = infoString[NAME];
-                    Integer quantity = Integer.parseInt(infoString[QUANTITY]);
+            if (str != null) {
+                infoString = str.split(SEPARATOR);
+                if (infoString.length == 3) {
+                    if (Operation.validAbbreviation(infoString[OPERATION])) {
+                        Operation operation = Operation.getOperation(infoString[OPERATION]);
+                        String name = infoString[NAME];
+                        Integer quantity = Integer.parseInt(infoString[QUANTITY]);
 
-                    fruitStorageDao.add(new FruitTransaction(operation, name, quantity));
+                        fruitStorageDao.add(new FruitTransaction(operation, name, quantity));
+                    }
                 }
             }
         }

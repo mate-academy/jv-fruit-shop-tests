@@ -8,10 +8,6 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
-
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     public static void main(String[] args) {
         FileWriter fileWriter = new FileWriterImpl();

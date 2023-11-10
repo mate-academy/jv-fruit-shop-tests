@@ -3,10 +3,17 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterTest {
+    private static final String TEST_FILE_NAME = "report.csv";
+    private static final String EXCEPTION_MESSAGE = "Can't write to file";
+
     private static FileWriter fileWriter;
 
     @BeforeAll
@@ -14,11 +21,20 @@ class CsvFileWriterTest {
         fileWriter = new CsvFileWriter();
     }
 
+    @AfterEach
+    void afterEach() {
+        try {
+            Files.deleteIfExists(Paths.get(TEST_FILE_NAME));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't delete file", e);
+        }
+    }
+
     @Test
     void write_nullInputData_NotOk() {
         String content = null;
-        assertThrows(RuntimeException.class, () -> fileWriter.write(content, "report.csv"),
-                "Can't write to file");
+        assertThrows(RuntimeException.class, () -> fileWriter.write(content, TEST_FILE_NAME),
+                EXCEPTION_MESSAGE);
     }
 
     @Test
@@ -26,13 +42,12 @@ class CsvFileWriterTest {
         String content = "valid";
         String fileName = null;
         assertThrows(RuntimeException.class, () -> fileWriter.write(content, fileName),
-                "Can't write to file");
+                EXCEPTION_MESSAGE);
     }
 
     @Test
     void write_validData_Ok() {
         String content = "valid";
-        String fileName = "report.csv";
-        assertTrue(fileWriter.write(content, fileName));
+        assertTrue(fileWriter.write(content, TEST_FILE_NAME));
     }
 }

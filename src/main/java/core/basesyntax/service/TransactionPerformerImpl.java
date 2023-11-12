@@ -15,6 +15,9 @@ public class TransactionPerformerImpl implements TransactionPerformer {
     @Override
     public void performTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
+            if (transaction == null) {
+                throw new NullPointerException("Fruit transaction is null");
+            }
             OperationHandler operationHandler = operationStrategy.getHandler(transaction);
             operationHandler.handle(transaction);
         }

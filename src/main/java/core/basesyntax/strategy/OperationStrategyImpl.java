@@ -13,6 +13,12 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitTransaction fruitTransaction) {
+        if (fruitTransaction == null) {
+            throw new NullPointerException("Fruit transaction is null");
+        }
+        if (handlers.isEmpty()) {
+            throw new RuntimeException("Handlers map is empty");
+        }
         return handlers.get(fruitTransaction.getOperation());
     }
 }

@@ -11,7 +11,7 @@ public class CsvFileReaderTest {
     private FileReaderService csvFileReader;
 
     @BeforeEach
-    void initializeCsvFileReader() {
+    void setUp() {
         csvFileReader = new CsvFileReader();
     }
 

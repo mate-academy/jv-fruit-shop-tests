@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class FruitTransaction {
     private static final String ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE = "Quantity can't be negative";
@@ -60,5 +61,27 @@ public class FruitTransaction {
             throw new NoSuchElementException(
                     "Element doesn't exist for this code: " + operationCode);
         }
+    }
+
+    @Override
+    public boolean equals(Object transaction) {
+        if (transaction == this) {
+            return true;
+        }
+        if (transaction == null) {
+            return false;
+        }
+        if (transaction.getClass().equals(FruitTransaction.class)) {
+            FruitTransaction current = (FruitTransaction) transaction;
+            return (operation == current.operation)
+                    && (fruit != null && fruit.equals(current.fruit))
+                    && (quantity == current.quantity);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

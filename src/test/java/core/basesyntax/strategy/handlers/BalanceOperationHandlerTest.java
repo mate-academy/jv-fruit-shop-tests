@@ -1,5 +1,8 @@
 package core.basesyntax.strategy.handlers;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.db.FruitStorage;
@@ -7,9 +10,6 @@ import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BalanceOperationHandlerTest {
     private FruitTransaction fruitTransaction;
@@ -35,15 +35,30 @@ public class BalanceOperationHandlerTest {
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(quantity);
         balanceOperationHandler.handle(fruitTransaction);
-        assertEquals(quantity, storageDao.getQuantityByObjectType(fruit));
+        assertEquals(quantity, FruitStorage.fruitStorage.get(fruit));
     }
 
     @Test
-    void handle_negativeQuantity_notOk() {
+    void handle_zeroQuantity_ok() {
         String fruit = "apple";
-        int quantity = -8;
+        int quantity = 0;
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(quantity);
-        assertThrows(IllegalArgumentException.class, () -> balanceOperationHandler.handle(fruitTransaction));
+        balanceOperationHandler.handle(fruitTransaction);
+        assertEquals(quantity, FruitStorage.fruitStorage.get(fruit));
+    }
+
+    @Test
+    void handle_nullTransaction_notOk() {
+        assertThrows(NullPointerException.class, () -> balanceOperationHandler.handle(null));
+    }
+
+    @Test
+    void handle_nullFruit_notOk() {
+        int quantity = 5;
+        fruitTransaction.setFruit(null);
+        fruitTransaction.setQuantity(quantity);
+        assertThrows(RuntimeException.class,
+                () -> balanceOperationHandler.handle(fruitTransaction));
     }
 }

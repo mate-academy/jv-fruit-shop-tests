@@ -1,24 +1,23 @@
 package core.basesyntax.dao;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.FruitStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class FruitDaoTest {
     private StorageDao fruitDao;
 
     @BeforeEach
-    void initialize() {
+    void setUp() {
         FruitStorage.fruitStorage.put("banana", 20);
         fruitDao = new FruitDao();
     }
 
     @Test
     void getStorage_expectedStorage_ok() {
-        assertSame(FruitStorage.fruitStorage, fruitDao.getStorage());
+        assertEquals(FruitStorage.fruitStorage, fruitDao.getStorage());
     }
 
     @Test

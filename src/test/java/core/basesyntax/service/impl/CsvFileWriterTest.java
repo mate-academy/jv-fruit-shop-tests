@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileWriterService;
@@ -11,8 +12,16 @@ public class CsvFileWriterTest {
     private FileWriterService csvFileWriter;
 
     @BeforeEach
-    void initializeCsvFileWriter() {
+    void setUp() {
         csvFileWriter = new CsvFileWriter();
+    }
+
+    @Test
+    void write_validContentAndFilePath_ok() {
+        String content = "b,banana,20" + NEW_LINE + "s,banana,100" + NEW_LINE + "p,banana,5";
+        String filePath = "src/test/resources/output_file.csv";
+
+        assertDoesNotThrow(() -> csvFileWriter.write(content, filePath));
     }
 
     @Test

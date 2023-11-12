@@ -9,10 +9,10 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
     public void applyOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         int quantityToReturn = fruitTransaction.getFruitQuantity();
-        int fruitQuantityInStorage = FruitsStorage.fruitsStorage.get(fruitName);
-        if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
+        int fruitQuantityInStorage = FruitsStorage.FRUITS_STORAGE.get(fruitName);
+        if (FruitsStorage.FRUITS_STORAGE.containsKey(fruitName)) {
             fruitQuantityInStorage = fruitQuantityInStorage + quantityToReturn;
         }
-        FruitsStorage.fruitsStorage.put(fruitName, fruitQuantityInStorage);
+        FruitsStorage.FRUITS_STORAGE.put(fruitName, fruitQuantityInStorage);
     }
 }

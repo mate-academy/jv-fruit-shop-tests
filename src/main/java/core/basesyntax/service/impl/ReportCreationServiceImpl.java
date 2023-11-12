@@ -13,7 +13,7 @@ public class ReportCreationServiceImpl implements ReportCreationService {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REPORT_TABLE_HEADER)
                 .append(System.lineSeparator());
-        for (Map.Entry<String, Integer> data : FruitsStorage.fruitsStorage.entrySet()) {
+        for (Map.Entry<String, Integer> data : FruitsStorage.FRUITS_STORAGE.entrySet()) {
             stringBuilder.append(data.getKey())
                     .append(COMMA_SIGN)
                     .append(data.getValue())

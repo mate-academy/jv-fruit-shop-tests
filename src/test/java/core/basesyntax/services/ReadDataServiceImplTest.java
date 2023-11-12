@@ -20,8 +20,6 @@ import org.junit.jupiter.api.Test;
 class ReadDataServiceImplTest {
     private static final String SOURCE_DATA_FILE_PATH =
             "src/test/java/resources/inputDataTest.csv";
-    private static final String FILE_NAME = "inputDataTest.csv";
-    private static final String EMPTY_FILE_NAME = "inputDataTestEmpty.csv";
     private static final String NON_EXISTED_FILE_PATH = "";
     private static final String EMPTY_DATA_TEST_FILE_PATH =
             "src/test/java/resources/inputDataTestEmpty.csv";

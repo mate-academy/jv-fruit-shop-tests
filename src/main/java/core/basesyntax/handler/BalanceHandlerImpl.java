@@ -9,10 +9,10 @@ public class BalanceHandlerImpl implements OperationHandler {
     public void applyOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         int fruitQuantity = fruitTransaction.getFruitQuantity();
-        if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
-            int fruitQuantityInStorage = FruitsStorage.fruitsStorage.get(fruitName);
+        if (FruitsStorage.FRUITS_STORAGE.containsKey(fruitName)) {
+            int fruitQuantityInStorage = FruitsStorage.FRUITS_STORAGE.get(fruitName);
             fruitQuantity = fruitQuantity + fruitQuantityInStorage;
         }
-        FruitsStorage.fruitsStorage.put(fruitName, fruitQuantity);
+        FruitsStorage.FRUITS_STORAGE.put(fruitName, fruitQuantity);
     }
 }

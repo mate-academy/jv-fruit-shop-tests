@@ -10,14 +10,14 @@ public class PurchaseHandlerImpl implements OperationHandler {
     public void applyOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         int quantityToSubtract = fruitTransaction.getFruitQuantity();
-        int fruitQuantityInStorage = FruitsStorage.fruitsStorage.get(fruitName);
+        int fruitQuantityInStorage = FruitsStorage.FRUITS_STORAGE.get(fruitName);
         if (fruitQuantityInStorage < quantityToSubtract) {
             throw new DataValidationException("The quantity of the product "
                     + "for purchase exceeds the quantity available in the storage");
         }
-        if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
+        if (FruitsStorage.FRUITS_STORAGE.containsKey(fruitName)) {
             fruitQuantityInStorage = fruitQuantityInStorage - quantityToSubtract;
         }
-        FruitsStorage.fruitsStorage.put(fruitName, fruitQuantityInStorage);
+        FruitsStorage.FRUITS_STORAGE.put(fruitName, fruitQuantityInStorage);
     }
 }

@@ -13,32 +13,32 @@ class ReportCreationServiceImplTest {
     private ReportCreationServiceImpl reportCreationService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         reportCreationService = new ReportCreationServiceImpl();
-        FruitsStorage.fruitsStorage.clear();
-        FruitsStorage.fruitsStorage.put("apple", 10);
-        FruitsStorage.fruitsStorage.put("banana", 20);
+        FruitsStorage.FRUITS_STORAGE.clear();
+        FruitsStorage.FRUITS_STORAGE.put("apple", 10);
+        FruitsStorage.FRUITS_STORAGE.put("banana", 20);
     }
 
     @Test
-    public void getReport_validData_ok() {
+    void getReport_validData_ok() {
         String generatedReport = reportCreationService.getReport();
         assertTrue(generatedReport.contains("apple,10"));
         assertTrue(generatedReport.contains("banana,20"));
     }
 
     @Test
-    public void getReport_emptyFruitsStorage_ok() {
-        FruitsStorage.fruitsStorage.clear();
+    void getReport_emptyFruitsStorage_ok() {
+        FruitsStorage.FRUITS_STORAGE.clear();
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         String generatedReport = reportCreationService.getReport();
         assertEquals(expectedReport, generatedReport);
     }
 
     @Test
-    public void getReport_singleFruitInStorage() {
-        FruitsStorage.fruitsStorage.clear();
-        FruitsStorage.fruitsStorage.put("apple", 5);
+    void getReport_singleFruitInStorage() {
+        FruitsStorage.FRUITS_STORAGE.clear();
+        FruitsStorage.FRUITS_STORAGE.put("apple", 5);
         String expectedReport = "fruit,quantity" + System.lineSeparator()
                 + "apple,5" + System.lineSeparator();
         String generatedReport = reportCreationService.getReport();
@@ -46,7 +46,7 @@ class ReportCreationServiceImplTest {
     }
 
     @AfterEach
-    public void tearDown() {
-        FruitsStorage.fruitsStorage.clear();
+    void tearDown() {
+        FruitsStorage.FRUITS_STORAGE.clear();
     }
 }

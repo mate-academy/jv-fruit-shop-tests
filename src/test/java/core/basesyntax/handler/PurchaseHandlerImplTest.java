@@ -14,6 +14,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerImplTest {
+    private static final String FRUIT_NAME = "apple";
+    private static final int DEFAULT_QUANTITY = 100;
+    private static final int FRUIT_QUANTITY1 = 150;
+    private static final int FRUIT_QUANTITY2 = 50;
     private static FruitTransaction fruitTransaction;
     private static OperationHandler operationHandler;
 
@@ -26,21 +30,21 @@ class PurchaseHandlerImplTest {
     void setUp() {
         fruitTransaction = new FruitTransaction.FruitBuilder()
                 .setOperationType(Operation.PURCHASE)
-                .setFruitName("apple")
-                .setFruitQuantity(100)
+                .setFruitName(FRUIT_NAME)
+                .setFruitQuantity(DEFAULT_QUANTITY)
                 .build();
     }
 
     @Test
     void applyOperation_purchaseFruitFromStorages_AllValidData_ok() {
-        FruitsStorage.fruitsStorage.put("apple", 150);
+        FruitsStorage.FRUITS_STORAGE.put(FRUIT_NAME, FRUIT_QUANTITY1);
         operationHandler.applyOperation(fruitTransaction);
-        assertEquals(50, FruitsStorage.fruitsStorage.get("apple"));
+        assertEquals(FRUIT_QUANTITY2, FruitsStorage.FRUITS_STORAGE.get(FRUIT_NAME));
     }
 
     @Test
     void applyOperation_purchaseMoreThanInStorage_AllValidData_ok() {
-        FruitsStorage.fruitsStorage.put("apple", 50);
+        FruitsStorage.FRUITS_STORAGE.put(FRUIT_NAME, FRUIT_QUANTITY2);
         DataValidationException exception = assertThrows(DataValidationException.class,
                 () -> operationHandler.applyOperation(fruitTransaction));
         assertEquals("The quantity of the product for purchase exceeds "
@@ -49,6 +53,6 @@ class PurchaseHandlerImplTest {
 
     @AfterEach
     public void afterEachTest() {
-        FruitsStorage.fruitsStorage.clear();
+        FruitsStorage.FRUITS_STORAGE.clear();
     }
 }

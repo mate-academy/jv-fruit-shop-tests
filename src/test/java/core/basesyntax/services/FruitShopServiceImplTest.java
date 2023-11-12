@@ -38,7 +38,6 @@ class FruitShopServiceImplTest {
     @Test
     void processData_emptyTransactionList_ok() {
         fruitShopService.processData(Collections.emptyList());
-        //Verifies that no methods were called on the mock object operationStrategyMock.
         verifyNoInteractions(operationStrategyMock);
     }
 
@@ -53,12 +52,7 @@ class FruitShopServiceImplTest {
                 .thenReturn(supplierHandlerMock);
         fruitShopService.processData(Collections.singletonList(fruitTransaction));
         verify(supplierHandlerMock).applyOperation(fruitTransaction);
-        // Verifies that the method processOperation was called on
-        // the mock object operationStrategyMock.
         verify(operationStrategyMock).processOperation(Operation.SUPPLY);
-        // Verifies that no additional methods were called on the
-        // mock object operationStrategyMock
-        // after the last explicit verification.
         verifyNoMoreInteractions(operationStrategyMock);
     }
 

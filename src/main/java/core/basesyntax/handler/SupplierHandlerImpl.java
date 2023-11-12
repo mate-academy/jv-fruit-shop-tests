@@ -9,10 +9,10 @@ public class SupplierHandlerImpl implements OperationHandler {
     public void applyOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         int fruitQuantityToAdd = fruitTransaction.getFruitQuantity();
-        if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
-            int fruitQuantityInStorage = FruitsStorage.fruitsStorage.get(fruitName);
+        if (FruitsStorage.FRUITS_STORAGE.containsKey(fruitName)) {
+            int fruitQuantityInStorage = FruitsStorage.FRUITS_STORAGE.get(fruitName);
             fruitQuantityToAdd = fruitQuantityToAdd + fruitQuantityInStorage;
         }
-        FruitsStorage.fruitsStorage.put(fruitName, fruitQuantityToAdd);
+        FruitsStorage.FRUITS_STORAGE.put(fruitName, fruitQuantityToAdd);
     }
 }

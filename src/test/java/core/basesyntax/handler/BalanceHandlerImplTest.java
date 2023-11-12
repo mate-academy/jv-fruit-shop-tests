@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerImplTest {
+    private static final String FRUIT_NAME = "apple";
+    private static final int DEFAULT_FRUIT_QUANTITY = 10;
+    private static final int NEW_FRUIT_QUANTITY = 20;
     private static FruitTransaction fruitTransaction;
     private static OperationHandler operationHandler;
 
@@ -24,27 +27,27 @@ class BalanceHandlerImplTest {
     void setUp() {
         fruitTransaction = new FruitTransaction.FruitBuilder()
                 .setOperationType(Operation.BALANCE)
-                .setFruitName("apple")
-                .setFruitQuantity(10)
+                .setFruitName(FRUIT_NAME)
+                .setFruitQuantity(DEFAULT_FRUIT_QUANTITY)
                 .build();
     }
 
     @Test
     void applyOperation_addNewFruits_AllValidData_ok() {
-        FruitsStorage.fruitsStorage.clear();
+        FruitsStorage.FRUITS_STORAGE.clear();
         operationHandler.applyOperation(fruitTransaction);
-        assertEquals(10, FruitsStorage.fruitsStorage.get("apple"));
+        assertEquals(DEFAULT_FRUIT_QUANTITY, FruitsStorage.FRUITS_STORAGE.get(FRUIT_NAME));
     }
 
     @Test
     void applyOperation_updateFruitStorageBalance_AllValidData_ok() {
-        FruitsStorage.fruitsStorage.put("apple", 10);
+        FruitsStorage.FRUITS_STORAGE.put(FRUIT_NAME, DEFAULT_FRUIT_QUANTITY);
         operationHandler.applyOperation(fruitTransaction);
-        assertEquals(20, FruitsStorage.fruitsStorage.get("apple"));
+        assertEquals(NEW_FRUIT_QUANTITY, FruitsStorage.FRUITS_STORAGE.get(FRUIT_NAME));
     }
 
     @AfterEach
     public void afterEachTest() {
-        FruitsStorage.fruitsStorage.clear();
+        FruitsStorage.FRUITS_STORAGE.clear();
     }
 }

@@ -4,20 +4,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private FruitTransaction fruitTransaction;
-    private ReturnOperationHandler returnOperationHandler = new ReturnOperationHandler();
+    private static FruitTransaction fruitTransaction;
+    private static ReturnOperationHandler returnOperationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
+        returnOperationHandler = new ReturnOperationHandler();
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(BANANA);
         fruitTransaction.setQuantity(10);
+    }
+
+    @BeforeEach
+    void setUp() {
         Storage.SHOPSTORAGE.clear();
     }
 

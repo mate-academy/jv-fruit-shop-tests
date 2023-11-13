@@ -5,15 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.service.ReportCreator;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportCreatorImplTest {
     private static final String TITLE = "fruit,quantity";
-    private ReportCreator reportCreator;
+    private static ReportCreator reportCreator;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reportCreator = new ReportCreatorImpl();
     }
 

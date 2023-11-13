@@ -6,16 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.ReaderService;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceImplTest {
     private static final String FILE_PATH = "src/test/resources/input.csv";
     private static final String INVALID_FILE_PATH = "non_existent_file.txt";
-    private ReaderService readerService;
+    private static final int NUMBER_OF_LINES = 8;
+    private static final int FIRST_LINE = 0;
+    private static ReaderService readerService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         readerService = new ReaderServiceImpl();
     }
 
@@ -37,9 +39,8 @@ class ReaderServiceImplTest {
 
     @Test
     void read_skipFirstLine_ok() {
-        String filePath = "src/test/resources/input.csv";
-        List<String> data = readerService.read(filePath);
-        assertEquals(8, data.size());
-        assertFalse(data.get(0).startsWith("type,fruit,quantity"));
+        List<String> data = readerService.read(FILE_PATH);
+        assertEquals(NUMBER_OF_LINES, data.size());
+        assertFalse(data.get(FIRST_LINE).startsWith("type,fruit,quantity"));
     }
 }

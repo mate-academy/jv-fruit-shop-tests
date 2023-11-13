@@ -4,19 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
     private static final String BANANA = "banana";
-    private FruitTransaction fruitTransaction;
-    private SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
+    private static FruitTransaction fruitTransaction;
+    private static SupplyOperationHandler supplyOperationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(BANANA);
         fruitTransaction.setQuantity(5);
+        supplyOperationHandler = new SupplyOperationHandler();
+    }
+
+    @BeforeEach
+    void setUp() {
         Storage.SHOPSTORAGE.clear();
     }
 

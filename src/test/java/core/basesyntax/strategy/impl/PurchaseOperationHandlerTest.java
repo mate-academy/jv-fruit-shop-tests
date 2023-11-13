@@ -6,13 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private PurchaseOperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
+    private static final String NULL_MESSAGE = "Your FruitTransaction is Null";
+    private static final String NO_SUCH_FRUIT = "Your do not have such fruit";
+    private static PurchaseOperationHandler purchaseOperationHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        purchaseOperationHandler = new PurchaseOperationHandler();
+    }
 
     @BeforeEach
     void setUp() {
@@ -35,24 +43,24 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void handle_notFruitInStorage_notOk() {
+    void handle_fruitNotInStorage_notOk() {
         FruitTransaction noSuchFruit = new FruitTransaction();
         noSuchFruit.setFruit(APPLE);
         noSuchFruit.setQuantity(5);
         assertThrows(RuntimeException.class,
                 () -> purchaseOperationHandler.handle(noSuchFruit),
-                "Your do not have such fruit");
+                NO_SUCH_FRUIT);
     }
 
     @Test
     void handle_purchaseFruitTransactionNull_notOk() {
         assertThrows(NullPointerException.class,
                 () -> purchaseOperationHandler.handle(null),
-                "Your FruitTransaction is Null");
+                NULL_MESSAGE);
     }
 
     @Test
-    void handle_purchaseZeroQuantity_notOk() {
+    void handle_purchaseZeroQuantity_ok() {
         Storage.SHOPSTORAGE.put(BANANA, 10);
         FruitTransaction zeroQuantityPurchase = new FruitTransaction();
         zeroQuantityPurchase.setFruit(BANANA);

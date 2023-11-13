@@ -5,41 +5,49 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
     private static final String BANANA = "banana";
-    private FruitTransaction fruitTransaction;
-    private BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
+    private static final int QUANTITY = 10;
+    private static final String NULL_MESSAGE = "Your FruitTransaction is Null";
+    private static FruitTransaction fruitTransaction;
+    private static BalanceOperationHandler balanceOperationHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        fruitTransaction = new FruitTransaction();
+        balanceOperationHandler = new BalanceOperationHandler();
+    }
 
     @BeforeEach
     void setUp() {
-        fruitTransaction = new FruitTransaction();
         Storage.SHOPSTORAGE.clear();
     }
 
     @Test
     void handle_returnNewFruit_ok() {
         fruitTransaction.setFruit(BANANA);
-        fruitTransaction.setQuantity(10);
+        fruitTransaction.setQuantity(QUANTITY);
         balanceOperationHandler.handle(fruitTransaction);
-        assertEquals(10, Storage.SHOPSTORAGE.get(BANANA));
+        assertEquals(QUANTITY, Storage.SHOPSTORAGE.get(BANANA));
     }
 
     @Test
     void handle_fruitAlreadyPut_ok() {
         fruitTransaction.setFruit(BANANA);
-        fruitTransaction.setQuantity(10);
+        fruitTransaction.setQuantity(QUANTITY);
         Storage.SHOPSTORAGE.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         balanceOperationHandler.handle(fruitTransaction);
-        assertEquals(10, Storage.SHOPSTORAGE.get(BANANA));
+        assertEquals(QUANTITY, Storage.SHOPSTORAGE.get(BANANA));
     }
 
     @Test
     void handle_putFruitTransactionNull_notOk() {
         assertThrows(NullPointerException.class,
                 () -> balanceOperationHandler.handle(null),
-                "Your FruitTransaction is Null");
+                NULL_MESSAGE);
     }
 }

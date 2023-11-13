@@ -8,14 +8,18 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitConverter;
 import java.util.Collections;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitConverterImplTest {
-    private FruitConverter fruitConverter;
+    private static final int LENGTH_OF_LINE = 3;
+    private static final int FIRST_LINE = 0;
+    private static final String BANANA = "banana";
 
-    @BeforeEach
-    void setUp() {
+    private static FruitConverter fruitConverter;
+
+    @BeforeAll
+    static void beforeAll() {
         fruitConverter = new FruitConverterImpl();
     }
 
@@ -27,10 +31,11 @@ class FruitConverterImplTest {
                 "p,banana,13"
         );
         List<FruitTransaction> result = fruitConverter.convertData(testData);
-        assertEquals(3, result.size());
-        assertEquals(Operation.BALANCE, result.get(0).getOperation());
-        assertEquals("banana", result.get(0).getFruit());
-        assertEquals(20, result.get(0).getQuantity());
+        assertEquals(LENGTH_OF_LINE, result.size());
+        FruitTransaction firstTransaction = result.get(FIRST_LINE);
+        assertEquals(Operation.BALANCE, firstTransaction.getOperation());
+        assertEquals(BANANA, firstTransaction.getFruit());
+        assertEquals(20, firstTransaction.getQuantity());
     }
 
     @Test

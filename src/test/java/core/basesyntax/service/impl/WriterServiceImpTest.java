@@ -10,16 +10,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterServiceImpTest {
     private static final String FILE_PATH = "src/test/resources/output.csv";
-    private WriterService writerService;
-    private File testFile;
+    private static final String REPORT = "fruit,quantity";
+    private static final String FAIL_READ_MESSAGE = "Failed to read from the output.csv file: ";
+    private static final String EMPTY_REPORT = "";
+    private static WriterService writerService;
+    private static File testFile;
 
-    @BeforeEach
-    void setUp() throws IOException {
+    @BeforeAll
+    static void beforeAll() {
         writerService = new WriterServiceImp();
         testFile = new File(FILE_PATH);
     }
@@ -31,40 +34,36 @@ class WriterServiceImpTest {
 
     @Test
     void writeFile_fileExist_ok() {
-        String report = "fruit,quantity";
-        writerService.writeFile(report, FILE_PATH);
+        writerService.writeFile(REPORT, FILE_PATH);
         assertTrue(testFile.exists());
     }
 
     @Test
-    public void writeFile_writeContent_ok() {
-        String report = "fruit,quantity";
-        writerService.writeFile(report, FILE_PATH);
+    void writeFile_writeContent_ok() {
+        writerService.writeFile(REPORT, FILE_PATH);
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String content = reader.readLine();
-            assertEquals(report, content);
+            assertEquals(REPORT, content);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read from the output.csv file: " + FILE_PATH);
+            throw new RuntimeException(FAIL_READ_MESSAGE + FILE_PATH);
         }
     }
 
     @Test
-    public void writeFile_NullReport_notOk() {
+    void writeFile_NullReport_notOk() {
         assertThrows(IllegalArgumentException.class,
                 () -> writerService.writeFile(null, FILE_PATH));
     }
 
     @Test
-    public void writeFile_NullFilePath_notOk() {
-        String report = "fruit,quantity";
+    void writeFile_NullFilePath_notOk() {
         assertThrows(IllegalArgumentException.class,
-                () -> writerService.writeFile(report, null));
+                () -> writerService.writeFile(REPORT, null));
     }
 
     @Test
-    public void writeFile_EmptyReport_notOk() {
-        String report = "";
+    void writeFile_EmptyReport_notOk() {
         assertThrows(IllegalArgumentException.class,
-                () -> writerService.writeFile(report, FILE_PATH));
+                () -> writerService.writeFile(EMPTY_REPORT, FILE_PATH));
     }
 }

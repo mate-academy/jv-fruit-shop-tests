@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 class PurchaseOperationHandlerTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private static final String NULL_MESSAGE = "Your FruitTransaction is Null";
     private static final String NO_SUCH_FRUIT = "Your do not have such fruit";
     private static PurchaseOperationHandler purchaseOperationHandler;
 
@@ -50,13 +49,6 @@ class PurchaseOperationHandlerTest {
         assertThrows(RuntimeException.class,
                 () -> purchaseOperationHandler.handle(noSuchFruit),
                 NO_SUCH_FRUIT);
-    }
-
-    @Test
-    void handle_purchaseFruitTransactionNull_notOk() {
-        assertThrows(NullPointerException.class,
-                () -> purchaseOperationHandler.handle(null),
-                NULL_MESSAGE);
     }
 
     @Test

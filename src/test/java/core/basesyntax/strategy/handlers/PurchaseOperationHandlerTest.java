@@ -68,7 +68,7 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        assertThrows(NullPointerException.class, () -> purchaseOperationHandler.handle(null));
+        assertThrows(IllegalArgumentException.class, () -> purchaseOperationHandler.handle(null));
     }
 
     @Test

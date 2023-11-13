@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderTest {
+    private static final String INPUT_FILE_PATH = "src/test/resources/input_file.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/empty_file.csv";
+    private static final String NON_EXISTENT_FILE_PATH = "src/test/resources/non_existent_file.csv";
     private FileReaderService csvFileReader;
 
     @BeforeEach
@@ -17,19 +20,19 @@ public class CsvFileReaderTest {
 
     @Test
     void read_validFile_ok() {
-        String filePath = "src/test/resources/input_file.csv";
+        String filePath = INPUT_FILE_PATH;
         assertDoesNotThrow(() -> csvFileReader.read(filePath));
     }
 
     @Test
     void read_emptyFile_notOk() {
-        String filePath = "src/test/resources/empty_file.csv";
+        String filePath = EMPTY_FILE_PATH;
         assertThrows(Exception.class, () -> csvFileReader.read(filePath));
     }
 
     @Test
     void read_nonExistentFile_notOk() {
-        String filePath = "src/test/resources/non_existent_file.csv";
+        String filePath = NON_EXISTENT_FILE_PATH;
         assertThrows(Exception.class, () -> csvFileReader.read(filePath));
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class FruitMapperImplTest {
+    private static final String BANANA = "banana";
     private final FruitMapper fruitMapper = new FruitMapperImpl();
 
     @Test
@@ -19,24 +20,24 @@ public class FruitMapperImplTest {
         csvData.add("p,banana,5");
 
         final List<FruitTransaction> expectedTransactions = new ArrayList<>();
-        FruitTransaction transaction1 = new FruitTransaction();
-        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setQuantity(20);
+        FruitTransaction balanceTransaction = new FruitTransaction();
+        balanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        balanceTransaction.setFruit(BANANA);
+        balanceTransaction.setQuantity(20);
 
-        FruitTransaction transaction2 = new FruitTransaction();
-        transaction2.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction2.setFruit("banana");
-        transaction2.setQuantity(100);
+        FruitTransaction supplyTransaction = new FruitTransaction();
+        supplyTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        supplyTransaction.setFruit(BANANA);
+        supplyTransaction.setQuantity(100);
 
-        FruitTransaction transaction3 = new FruitTransaction();
-        transaction3.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction3.setFruit("banana");
-        transaction3.setQuantity(5);
+        FruitTransaction purchaseTransaction = new FruitTransaction();
+        purchaseTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        purchaseTransaction.setFruit(BANANA);
+        purchaseTransaction.setQuantity(5);
 
-        expectedTransactions.add(transaction1);
-        expectedTransactions.add(transaction2);
-        expectedTransactions.add(transaction3);
+        expectedTransactions.add(balanceTransaction);
+        expectedTransactions.add(supplyTransaction);
+        expectedTransactions.add(purchaseTransaction);
 
         List<FruitTransaction> actualTransactions = fruitMapper.mapLinesIntoTransactions(csvData);
 

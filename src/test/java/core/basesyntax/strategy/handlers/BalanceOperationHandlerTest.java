@@ -50,7 +50,7 @@ public class BalanceOperationHandlerTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        assertThrows(NullPointerException.class, () -> balanceOperationHandler.handle(null));
+        assertThrows(IllegalArgumentException.class, () -> balanceOperationHandler.handle(null));
     }
 
     @Test

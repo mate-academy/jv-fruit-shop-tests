@@ -56,7 +56,7 @@ public class ReturnOperationHandlerTest {
 
     @Test
     void handle_nullTransaction_notOk() {
-        assertThrows(NullPointerException.class, () -> returnOperationHandler.handle(null));
+        assertThrows(IllegalArgumentException.class, () -> returnOperationHandler.handle(null));
     }
 
     @Test

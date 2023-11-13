@@ -3,6 +3,7 @@ package core.basesyntax.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.FruitStorage;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,11 @@ public class FruitDaoTest {
     void setUp() {
         FruitStorage.fruitStorage.put("banana", 20);
         fruitDao = new FruitDao();
+    }
+
+    @AfterEach
+    void tearDown() {
+        FruitStorage.fruitStorage.clear();
     }
 
     @Test

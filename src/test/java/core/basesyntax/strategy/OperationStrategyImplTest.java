@@ -47,6 +47,6 @@ public class OperationStrategyImplTest {
 
     @Test
     void getHandler_nullTransaction_notOk() {
-        assertThrows(NullPointerException.class, () -> operationStrategy.getHandler(null));
+        assertThrows(IllegalArgumentException.class, () -> operationStrategy.getHandler(null));
     }
 }

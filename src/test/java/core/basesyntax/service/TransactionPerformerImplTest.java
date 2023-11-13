@@ -23,6 +23,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TransactionPerformerImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private Map<FruitTransaction.Operation, OperationHandler> handlers;
     private StorageDao storageDao;
     private OperationStrategy operationStrategy;
@@ -47,29 +49,29 @@ public class TransactionPerformerImplTest {
 
     @Test
     void performTransactions_validTransactions_ok() {
-        String fruit = "banana";
+        String fruit = BANANA;
         int initialQuantity = 50;
         FruitStorage.fruitStorage.put(fruit, initialQuantity);
 
         final List<FruitTransaction> transactions = new ArrayList<>();
-        FruitTransaction transaction1 = new FruitTransaction();
-        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setQuantity(initialQuantity);
+        FruitTransaction balanceTransaction = new FruitTransaction();
+        balanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        balanceTransaction.setFruit(BANANA);
+        balanceTransaction.setQuantity(initialQuantity);
 
-        FruitTransaction transaction2 = new FruitTransaction();
-        transaction2.setOperation(FruitTransaction.Operation.SUPPLY);
-        transaction2.setFruit("banana");
-        transaction2.setQuantity(100);
+        FruitTransaction supplyTransaction = new FruitTransaction();
+        supplyTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+        supplyTransaction.setFruit(BANANA);
+        supplyTransaction.setQuantity(100);
 
-        FruitTransaction transaction3 = new FruitTransaction();
-        transaction3.setOperation(FruitTransaction.Operation.PURCHASE);
-        transaction3.setFruit("banana");
-        transaction3.setQuantity(5);
+        FruitTransaction purchaseTransaction = new FruitTransaction();
+        purchaseTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+        purchaseTransaction.setFruit(BANANA);
+        purchaseTransaction.setQuantity(5);
 
-        transactions.add(transaction1);
-        transactions.add(transaction2);
-        transactions.add(transaction3);
+        transactions.add(balanceTransaction);
+        transactions.add(supplyTransaction);
+        transactions.add(purchaseTransaction);
 
         transactionPerformer.performTransactions(transactions);
 
@@ -80,7 +82,7 @@ public class TransactionPerformerImplTest {
 
     @Test
     void performTransactions_emptyTransactionsList_ok() {
-        String fruit = "apple";
+        String fruit = APPLE;
         int initialQuantity = 40;
         FruitStorage.fruitStorage.put(fruit, initialQuantity);
 
@@ -91,20 +93,20 @@ public class TransactionPerformerImplTest {
 
     @Test
     void performTransactions_nullTransaction_notOk() {
-        String fruit = "banana";
+        String fruit = BANANA;
         int initialQuantity = 10;
         FruitStorage.fruitStorage.put(fruit, initialQuantity);
 
         final List<FruitTransaction> transactions = new ArrayList<>();
-        FruitTransaction transaction1 = new FruitTransaction();
-        transaction1.setOperation(FruitTransaction.Operation.BALANCE);
-        transaction1.setFruit("banana");
-        transaction1.setQuantity(initialQuantity);
+        FruitTransaction balanceTransaction = new FruitTransaction();
+        balanceTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+        balanceTransaction.setFruit(BANANA);
+        balanceTransaction.setQuantity(initialQuantity);
 
-        transactions.add(transaction1);
+        transactions.add(balanceTransaction);
         transactions.add(null);
 
-        assertThrows(NullPointerException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> transactionPerformer.performTransactions(transactions));
     }
 }

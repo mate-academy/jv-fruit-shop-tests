@@ -9,13 +9,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String OUTPUT_FILE_PATH = "src/test/resources/output.csv";
     private static final String INVALID_FILE_PATH = "src/notexistdirectory/output.csv";
     private static final String DATA_TO_WRITE = "Some data to write";
-    private final FileWriter fileWriter = new FileWriterImpl();
+    private static FileWriter fileWriter = new FileWriterImpl();
+
+    @BeforeAll
+    static void init() {
+        fileWriter = new FileWriterImpl();
+    }
 
     @AfterEach
     void tearDown() {
@@ -31,7 +37,7 @@ class FileWriterImplTest {
             String value = reader.readLine();
             assertEquals(DATA_TO_WRITE, value);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file" + OUTPUT_FILE_PATH, e);
+            throw new RuntimeException("Can't write to the file" + OUTPUT_FILE_PATH, e);
         }
     }
 

@@ -6,6 +6,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +16,16 @@ class BalanceOperationHandlerTest {
     private static final int PREVIOUS_QUANTITY = 20;
     private static final int VALID_QUANTITY = 30;
     private static final int NULL_QUANTITY = 0;
-    private final Storage storage = new Storage();
-    private final FruitDao fruitDao = new FruitDaoImpl(storage);
-    private final OperationHandler operationHandler = new BalanceOperationHandler(fruitDao);
+    private static Storage storage;
+    private static FruitDao fruitDao;
+    private static OperationHandler operationHandler;
+
+    @BeforeAll
+    static void setUp() {
+        storage = new Storage();
+        fruitDao = new FruitDaoImpl(storage);
+        operationHandler = new BalanceOperationHandler(fruitDao);
+    }
 
     @BeforeEach
     void tearUp() {

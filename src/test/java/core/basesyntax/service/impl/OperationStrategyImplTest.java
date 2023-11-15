@@ -13,13 +13,22 @@ import core.basesyntax.service.OperationStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class OperationStrategyImplTest {
-    private final Storage storage = new Storage();
-    private final FruitDao fruitDao = new FruitDaoImpl(storage);
-    private final Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
+    private static Storage storage;
+    private static FruitDao fruitDao;
+    private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
+    private static OperationStrategy operationStrategy;
+
+    @BeforeAll
+    static void init() {
+        storage = new Storage();
+        fruitDao = new FruitDaoImpl(storage);
+        handlerMap = new HashMap<>();
+        operationStrategy = new OperationStrategyImpl(handlerMap);
+    }
 
     @AfterEach
     public void afterEachTest() {

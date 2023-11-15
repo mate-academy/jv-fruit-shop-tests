@@ -6,24 +6,31 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
     private static final String VALID_FRUIT = "Banana";
     private static final int VALID_QUANTITY = 20;
+    private static FruitTransaction fruitTransaction;
+    private static DataConverter dataConverter;
 
-    private static final FruitTransaction FRUIT_TRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, VALID_FRUIT, VALID_QUANTITY);
-    private final DataConverter dataConverter = new DataConverterImpl();
+    @BeforeAll
+    static void init() {
+        fruitTransaction =
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                        VALID_FRUIT, VALID_QUANTITY);
+        dataConverter = new DataConverterImpl();
+    }
 
     @Test
     void convertDataToObject_convertValidData_isOK() {
         String validString = FruitTransaction.Operation.PURCHASE.getCode() + "," + VALID_FRUIT + ","
                 + Integer.toString(VALID_QUANTITY);
         FruitTransaction fruitTransaction = dataConverter.convertDataToObject(validString);
-        assertEquals(FRUIT_TRANSACTION.getOperation(), fruitTransaction.getOperation());
-        assertEquals(FRUIT_TRANSACTION.getFruit(), fruitTransaction.getFruit());
-        assertEquals(FRUIT_TRANSACTION.getQuantity(), fruitTransaction.getQuantity());
+        assertEquals(fruitTransaction.getOperation(), fruitTransaction.getOperation());
+        assertEquals(fruitTransaction.getFruit(), fruitTransaction.getFruit());
+        assertEquals(fruitTransaction.getQuantity(), fruitTransaction.getQuantity());
     }
 
     @Test

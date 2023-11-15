@@ -6,12 +6,20 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private final Storage storage = new Storage();
-    private final FruitDao fruitDao = new FruitDaoImpl(storage);
-    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private static Storage storage;
+    private static FruitDao fruitDao;
+    private static ReportGenerator reportGenerator;
+
+    @BeforeAll
+    static void init() {
+        storage = new Storage();
+        fruitDao = new FruitDaoImpl(storage);
+        reportGenerator = new ReportGeneratorImpl();
+    }
 
     @Test
     void reportGenerator_createReport_isOk() {

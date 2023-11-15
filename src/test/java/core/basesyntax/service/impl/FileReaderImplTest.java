@@ -7,16 +7,22 @@ import core.basesyntax.service.FileReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderImplTest {
     private static final String VALID_INPUT_FILE_PATH = "src/test/resources/input.csv";
     private static final String INVALID_INPUT_FILE_PATH = "src/test/resources/invalidinput.csv";
-    private static final FileReader fileReader = new FileReaderImpl();
+    private static FileReader fileReader;
+
+    @BeforeAll
+    static void init() {
+        fileReader = new FileReaderImpl();
+    }
 
     @BeforeEach
-    void tearsUp() {
+    void initEach() {
         StringBuilder builder = new StringBuilder();
         builder.append("b,banana,20");
         builder.append(System.lineSeparator());

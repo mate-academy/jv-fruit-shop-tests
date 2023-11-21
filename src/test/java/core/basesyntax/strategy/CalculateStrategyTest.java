@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 import java.util.Map;
@@ -26,5 +28,16 @@ public class CalculateStrategyTest {
         OperationHandler handlerPurchase = calculateStrategy.getHandler(FruitTransaction.Operation
                 .PURCHASE);
         Assertions.assertTrue(handlerPurchase instanceof OperationHandlerOut);
+    }
+
+    @Test
+    public void testGetHandler() {
+        CalculateStrategy calculateStrategy = new CalculateStrategy(correspondenceTable);
+        OperationHandler operationHandlerOut = calculateStrategy.getHandler(FruitTransaction
+                .Operation.PURCHASE);
+        assertEquals(OperationHandlerOut.class, operationHandlerOut.getClass());
+        OperationHandler operationHandlerIn = calculateStrategy.getHandler(FruitTransaction
+                .Operation.SUPPLY);
+        assertEquals(OperationHandlerIn.class, operationHandlerIn.getClass());
     }
 }

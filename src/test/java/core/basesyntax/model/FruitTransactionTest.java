@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionTest {
 
     @Test
-    void operationGetByOperationIs_Ok() {
+    void operationGetByOperation_Is_ok() {
         FruitTransaction.Operation balanceOperation = FruitTransaction.Operation.getByCode("b");
         Assertions.assertEquals(balanceOperation, (FruitTransaction.Operation.BALANCE));
         FruitTransaction.Operation returnOperation = FruitTransaction.Operation.getByCode("r");
@@ -14,7 +14,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void operationGetByOperationIs_Not_Ok() {
+    void operationGetByOperation_IsNot_ok() {
         Assertions.assertThrows(RuntimeException.class, () -> FruitTransaction
                 .Operation.getByCode("x"));
     }
@@ -25,7 +25,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void fieldsOfFruitTransactionIs_Ok() {
+    void fieldsOfFruitTransaction_Is_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit("banana");
         fruitTransaction.setQuantity(10);

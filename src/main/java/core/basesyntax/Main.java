@@ -1,33 +1,35 @@
 package core.basesyntax;
 
-import core.basesyntax.converter.Converter;
-import core.basesyntax.converter.ConverterImpl;
-import core.basesyntax.handler.Handler;
-import core.basesyntax.handler.HandlerImpl;
-import core.basesyntax.reader.Reader;
-import core.basesyntax.reader.ReaderImpl;
-import core.basesyntax.report.ReportCreator;
-import core.basesyntax.report.ReportCreatorImpl;
-import core.basesyntax.writer.DataWriter;
-import core.basesyntax.writer.DataWriterImpl;
-
+import core.basesyntax.model.ItemTransaction;
+import core.basesyntax.service.Converter;
+import core.basesyntax.service.DataWriter;
+import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionHandler;
+import core.basesyntax.service.impl.ConverterImpl;
+import core.basesyntax.service.impl.DataWriterImpl;
+import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionHandlerImpl;
 import java.util.List;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Reader csvReader = new ReaderImpl();
-        List<String> strings = csvReader.read("input.csv");
-
+        List<String> strings = csvReader.read(INPUT_FILE_PATH);
         Converter converter = new ConverterImpl();
         List<ItemTransaction> itemTransactions = converter.convert(strings);
 
-        Handler handler = new HandlerImpl();
-        handler.handle(itemTransactions);
+        TransactionHandler transactionHandler = new TransactionHandlerImpl();
+        transactionHandler.handle(itemTransactions);
 
-        ReportCreator reportCreator = new ReportCreatorImpl();
-        List<String> report = reportCreator.report();
+        ReportService reportService = new ReportServiceImpl();
+        List<String> report = reportService.report();
 
         DataWriter dataWriter = new DataWriterImpl();
-        dataWriter.write(report, "report.csv");
+        dataWriter.write(report, OUTPUT_FILE_PATH);
     }
 }

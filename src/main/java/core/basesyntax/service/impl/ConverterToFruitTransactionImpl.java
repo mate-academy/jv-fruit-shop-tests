@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ConvertToFruitTransactionService;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConverterToFruitTransactionImpl implements ConvertToFruitTransactionService {
     private static final String SEPARATOR = ",";

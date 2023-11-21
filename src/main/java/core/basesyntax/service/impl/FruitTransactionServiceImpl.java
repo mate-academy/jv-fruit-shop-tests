@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitShopDao;
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.strategy.FruitStrategy;
+import java.util.List;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private FruitShopDao fruitShopDao;

@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import java.util.Map;
 import core.basesyntax.model.Operation;
+import java.util.Map;
 
 public class FruitStrategyImpl implements FruitStrategy {
     private Map<Operation, OperationHandler> operationHandlerMap;

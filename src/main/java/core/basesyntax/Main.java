@@ -2,9 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoCsvImpl;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ConvertToFruitTransactionService;
@@ -24,6 +21,9 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/resources/input_file.csv";

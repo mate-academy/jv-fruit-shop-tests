@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ConvertToFruitTransactionService;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ConverterToFruitTransactionImplTest {
     private static ConvertToFruitTransactionService convertService;
@@ -50,7 +50,7 @@ class ConverterToFruitTransactionImplTest {
         assertEquals(expectedList, actual);
     }
 
-    private List<String> generateValidInputList(){
+    private List<String> generateValidInputList() {
         List<String> inputList = new ArrayList<>();
         inputList.add("type,fruit,quantity");
         inputList.add("b,banana,20");

@@ -1,17 +1,16 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoCsvImpl;
 import core.basesyntax.service.ReportGenerationService;
 import core.basesyntax.storage.Storage;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReportGenerationServiceImplTest {
     private static final String REPORT_FIRST_LINE = "fruit,quantity";

@@ -1,16 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileWriterService;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.service.CsvFileWriterService;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceImplTest {
     private static final String REPORT_FIRST_LINE = "fruit,quantity";
@@ -28,18 +29,27 @@ class CsvFileWriterServiceImplTest {
         String nullFileName = null;
         List<String> validInputList = generateValidInputList();
         assertThrows(RuntimeException.class,
-                ()-> writerService.writeToNewCsvFile(nullFileName, validInputList));
+                () -> writerService.writeToNewCsvFile(nullFileName, validInputList));
 
         List<String> nullInputList = null;
         assertThrows(RuntimeException.class,
-                ()-> writerService.writeToNewCsvFile(VALID_FILE_EXTENSION_TYPE, nullInputList));
+                () -> writerService.writeToNewCsvFile(VALID_FILE_EXTENSION_TYPE, nullInputList));
     }
 
     @Test
     void writeToNewCsvFile_wrongFileExtension_notOk() {
         List<String> validInputList = generateValidInputList();
         assertThrows(RuntimeException.class,
-                ()-> writerService.writeToNewCsvFile(INVALID_FILE_EXTENSION_TYPE, validInputList));
+                () -> writerService.writeToNewCsvFile(INVALID_FILE_EXTENSION_TYPE, validInputList));
+    }
+
+    @Test
+    void writeToNewCsvFile_ioExceptionThrown_notOk() {
+        List<String> validInputList = generateValidInputList();
+
+        assertThrows(RuntimeException.class,
+                () -> writerService.writeToNewCsvFile(
+                        "/invalid/path/" + VALID_FILE_EXTENSION_TYPE, validInputList));
     }
 
     @Test

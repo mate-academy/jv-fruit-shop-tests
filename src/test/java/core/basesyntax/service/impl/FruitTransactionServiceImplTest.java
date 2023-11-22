@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoCsvImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -10,16 +12,13 @@ import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionServiceImplTest {
     private static FruitShopDao fruitShopDao;

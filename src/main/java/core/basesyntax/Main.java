@@ -42,5 +42,3 @@ public class Main {
         fileWriter.writeToFile(reportGenerator.makeReport(), OUT_FILE_NAME);
     }
 }
-
-

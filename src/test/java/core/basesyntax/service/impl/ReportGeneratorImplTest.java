@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-
     private static ReportGenerator reportGenerator;
     private static final String BANANA_NAME = "banana";
     private static final String APPLE_NAME = "apple";

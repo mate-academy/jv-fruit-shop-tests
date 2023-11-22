@@ -38,7 +38,7 @@ class TransactionProcessorImplTest {
     ).collect(Collectors.toList());
 
     @Test
-    void calculateBalanceTest_Is_ok() {
+    void calculateBalanceTest_ok() {
         CalculateStrategy calculateStrategy = new CalculateStrategy(correspondenceTable);
         TransactionProcessor transactionProcessor = new TransactionProcessorImpl(calculateStrategy);
         TransactionParser transactionParser = new TransactionParserImpl();
@@ -49,4 +49,3 @@ class TransactionProcessorImplTest {
         Assertions.assertEquals(90, Storage.storage.get(APPLE_NAME));
     }
 }
-

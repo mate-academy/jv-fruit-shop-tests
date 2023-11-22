@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserImplTest {
-
     private static final String BANANA_STRING = "b,banana,20";
     private static final String ORANGE_STRING = "p,orange,5";
     private static final String APPLE_STRING = "s,apple,10";
@@ -23,7 +22,7 @@ class TransactionParserImplTest {
     private TransactionParser fruitTransactionParser = new TransactionParserImpl();
 
     @Test
-    void parseTransactionTest_Is_ok() {
+    void parseTransactionTest_ok() {
         TransactionParser transactionParser = new TransactionParserImpl();
         List<String> strings = Stream.of(
                 "b,banana,20",

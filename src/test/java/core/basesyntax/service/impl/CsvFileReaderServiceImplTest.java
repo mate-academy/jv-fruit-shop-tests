@@ -52,6 +52,7 @@ class CsvFileReaderServiceImplTest {
         expectedList.add("b,banana,20");
         expectedList.add("b,apple,100");
         expectedList.add("s,banana,100");
-        assertEquals(expectedList, readerService.readFromCsvFile(VALID_CSV_FILE_PATH));
+        List<String> actualList = readerService.readFromCsvFile(VALID_CSV_FILE_PATH);
+        assertEquals(expectedList, actualList);
     }
 }

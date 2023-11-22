@@ -25,7 +25,7 @@ class DataWriterImpTest {
     }
 
     @Test
-    void write() {
+    void write_data_ok() {
         List<String> data = new ArrayList<>();
         data.add("banana,9");
         data.add("apple,7");

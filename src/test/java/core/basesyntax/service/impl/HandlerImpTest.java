@@ -30,7 +30,7 @@ class HandlerImpTest {
     }
 
     @Test
-    void handle_ok() {
+    void handle_correctData_ok() {
         List<ItemTransaction> input = new ArrayList<>();
         input.add(new ItemTransaction(Operation.BALANCE,"banana", 20));
         input.add(new ItemTransaction(Operation.BALANCE,"apple", 100));
@@ -48,7 +48,7 @@ class HandlerImpTest {
     }
 
     @Test
-    void handle_nullData() {
+    void handle_nullData_notOk() {
         assertThrows(NullPointerException.class, () ->
                 handler.handle(null));
     }

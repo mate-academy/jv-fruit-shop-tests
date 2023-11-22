@@ -14,7 +14,7 @@ class ConverterImpTest {
     private final Converter converter = new ConverterImpl();
 
     @Test
-    void convert_ok() {
+    void convert_correctData_ok() {
         List<String> input = new ArrayList<>();
         input.add("type,fruit,quantity");
         input.add("b,banana,20");
@@ -39,7 +39,7 @@ class ConverterImpTest {
     }
 
     @Test
-    void convert_invalidData() {
+    void convert_invalidData_notOk() {
         List<String> input1 = new ArrayList<>();
         input1.add("type,fruit,quantity");
         input1.add("b,banana20");
@@ -66,7 +66,7 @@ class ConverterImpTest {
     }
 
     @Test
-    void convert_nullData() {
+    void convert_nullData_notOk() {
         List<String> input = new ArrayList<>();
         assertThrows(RuntimeException.class, () ->
                 converter.convert(input));

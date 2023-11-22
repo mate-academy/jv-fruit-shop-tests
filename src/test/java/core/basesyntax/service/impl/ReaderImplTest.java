@@ -12,7 +12,7 @@ class ReaderImplTest {
     private final Reader reader = new ReaderImpl();
 
     @Test
-    void read_ok() {
+    void read_correctData_ok() {
         String fileName = "src/main/resources/input.csv";
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
@@ -30,13 +30,13 @@ class ReaderImplTest {
     }
 
     @Test
-    void read_invalidFileName() {
+    void read_invalidFileName_notOk() {
         assertThrows(RuntimeException.class, () ->
                 reader.read("nu%$#lllllll"));
     }
 
     @Test
-    void read_nullFileName() {
+    void read_nullFileName_notOk() {
         assertThrows(RuntimeException.class, () ->
                 reader.read(null));
     }

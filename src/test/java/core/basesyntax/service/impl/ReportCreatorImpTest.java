@@ -24,7 +24,7 @@ class ReportCreatorImpTest {
     }
 
     @Test
-    void report() {
+    void report_correctData_ok() {
         InMemoryStorage.items.put("lala", 1);
         InMemoryStorage.items.put("tata", -1);
         List<String> actual = reportCreator.report();
@@ -35,7 +35,7 @@ class ReportCreatorImpTest {
     }
 
     @Test
-    void emptyReport() {
+    void report_empty_ok() {
         List<String> report = reportCreator.report();
         List<String> emptyList = new ArrayList<>();
         assertEquals(emptyList, report);

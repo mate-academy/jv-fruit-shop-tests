@@ -3,24 +3,38 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReader;
 import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserImplTest {
 
-    private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";
+    private static final String BANANA_STRING = "b,banana,20";
+    private static final String ORANGE_STRING = "p,orange,5";
+    private static final String APPLE_STRING = "s,apple,10";
+    private static final String BANANA_NAME = "banana";
+    private static final String APPLE_NAME = "apple";
+    private static final String ORANGE_NAME = "orange";
 
     private TransactionParser fruitTransactionParser = new TransactionParserImpl();
 
     @Test
     void parseTransactionTest_Is_ok() {
-        FileReader fileReader = new FileReaderImpl();
         TransactionParser transactionParser = new TransactionParserImpl();
-        List<String> strings = fileReader.readFile(INPUT_FILE_NAME);
+        List<String> strings = Stream.of(
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50"
+        ).collect(Collectors.toList());
         Assertions.assertNotNull(transactionParser.parseTransaction(strings));
         List<FruitTransaction> listOfTransaction = transactionParser.parseTransaction(strings);
         Assertions.assertEquals(8, listOfTransaction.size());
@@ -43,21 +57,23 @@ class TransactionParserImplTest {
 
     @Test
     public void testParseTransaction() {
-
         List<String> inputData = new ArrayList<>();
-        inputData.add("s,apple,10");
-        inputData.add("p,orange,5");
-        inputData.add("b,banana,20");
+        inputData.add(APPLE_STRING);
+        inputData.add(ORANGE_STRING);
+        inputData.add(BANANA_STRING);
+        final int appleExpected = 10;
+        final int orangeExpected = 5;
+        final int bananaExpected = 20;
         List<FruitTransaction> parsedData = fruitTransactionParser.parseTransaction(inputData);
         assertEquals(3, parsedData.size());
         assertEquals(FruitTransaction.Operation.SUPPLY, parsedData.get(0).getOperation());
-        assertEquals("apple", parsedData.get(0).getFruit());
-        assertEquals(10, parsedData.get(0).getQuantity());
+        assertEquals(APPLE_NAME, parsedData.get(0).getFruit());
+        assertEquals(appleExpected, parsedData.get(0).getQuantity());
         assertEquals(FruitTransaction.Operation.PURCHASE, parsedData.get(1).getOperation());
-        assertEquals("orange", parsedData.get(1).getFruit());
-        assertEquals(5, parsedData.get(1).getQuantity());
+        assertEquals(ORANGE_NAME, parsedData.get(1).getFruit());
+        assertEquals(orangeExpected, parsedData.get(1).getQuantity());
         assertEquals(FruitTransaction.Operation.BALANCE, parsedData.get(2).getOperation());
-        assertEquals("banana", parsedData.get(2).getFruit());
-        assertEquals(20, parsedData.get(2).getQuantity());
+        assertEquals(BANANA_NAME, parsedData.get(2).getFruit());
+        assertEquals(bananaExpected, parsedData.get(2).getQuantity());
     }
 }

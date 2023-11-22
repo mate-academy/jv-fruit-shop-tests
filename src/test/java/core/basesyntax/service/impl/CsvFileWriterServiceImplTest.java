@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceImplTest {
     private static final String REPORT_FIRST_LINE = "fruit,quantity";
-    private static final String VALID_FILE_EXTENSION_TYPE = "src/test/resources/valid.csv";
+    private static final String VALID_FILE_EXTENSION_TYPE = "src/test/resources/valid_output.csv";
     private static final String INVALID_FILE_EXTENSION_TYPE = "invalid.txt";
     private static CsvFileWriterService writerService;
 

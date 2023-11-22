@@ -17,6 +17,6 @@ public class FruitShopDaoCsvImpl implements FruitShopDao {
 
     @Override
     public Integer getFruitQuantity(String fruit) {
-        return Storage.fruitQuantities.getOrDefault(fruit, -1);
+        return Storage.fruitQuantities.getOrDefault(fruit, 0);
     }
 }

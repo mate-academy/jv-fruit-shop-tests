@@ -1,5 +1,3 @@
-package core.basesyntax;
-
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoCsvImpl;
 import core.basesyntax.model.FruitTransaction;

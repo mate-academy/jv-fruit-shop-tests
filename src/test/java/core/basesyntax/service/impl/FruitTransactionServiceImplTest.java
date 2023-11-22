@@ -45,8 +45,8 @@ class FruitTransactionServiceImplTest {
     @Test
     void processTransactions_validInputList_ok() {
         inputList.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
-        inputList.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
-        String expected = "[banana=20, apple=100]";
+        inputList.add(new FruitTransaction(Operation.BALANCE, "apple", 0));
+        String expected = "[banana=20, apple=0]";
         String actual = fruitTransactionService.processTransactions(inputList);
         assertEquals(expected, actual);
     }

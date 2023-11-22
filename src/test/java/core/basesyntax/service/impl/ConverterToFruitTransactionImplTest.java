@@ -32,31 +32,28 @@ class ConverterToFruitTransactionImplTest {
 
     @Test
     void convert_negativeQuantityList_notOk() {
-        inputList.add("type,fruit,quantity");
-        inputList.add("b,banana,20");
+        generateValidInputList();
         inputList.add("b,apple,-100");
-        inputList.add("s,banana,10");
         assertThrows(RuntimeException.class, () -> convertService.convert(inputList));
     }
 
     @Test
     void convert_validInputList_ok() {
-        inputList = generateValidInputList();
-        expectedList.add(new FruitTransaction(Operation.BALANCE, "banana", 20));
+        generateValidInputList();
+        expectedList.add(new FruitTransaction(Operation.BALANCE, "banana", 0));
         expectedList.add(new FruitTransaction(Operation.BALANCE, "apple", 100));
         expectedList.add(new FruitTransaction(Operation.SUPPLY, "banana", 10));
         expectedList.add(new FruitTransaction(Operation.RETURN, "apple", 30));
+
         List<FruitTransaction> actual = convertService.convert(inputList);
         assertEquals(expectedList, actual);
     }
 
-    private List<String> generateValidInputList() {
-        List<String> inputList = new ArrayList<>();
+    private void generateValidInputList() {
         inputList.add("type,fruit,quantity");
-        inputList.add("b,banana,20");
+        inputList.add("b,banana,0");
         inputList.add("b,apple,100");
         inputList.add("s,banana,10");
         inputList.add("r,apple,30");
-        return inputList;
     }
 }

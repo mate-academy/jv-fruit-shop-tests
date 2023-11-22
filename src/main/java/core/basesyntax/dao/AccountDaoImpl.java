@@ -1,6 +1,6 @@
-package dao;
+package core.basesyntax.dao;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class AccountDaoImpl implements AccountDao {

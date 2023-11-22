@@ -1,10 +1,10 @@
-package impl;
+package core.basesyntax.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.TransactionParser;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.FruitTransaction;
-import model.Operation;
-import service.TransactionParser;
 
 public class TransactionParserImpl implements TransactionParser {
     private static final int HEADER_INDEX_IN_INITIAL_FILE = 0;

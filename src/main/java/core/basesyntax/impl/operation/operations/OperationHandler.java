@@ -1,6 +1,6 @@
-package impl.operation.operations;
+package core.basesyntax.impl.operation.operations;
 
-import model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
     void handleTransaction(FruitTransaction fruitTransaction);

@@ -1,8 +1,8 @@
-package impl.operation;
+package core.basesyntax.impl.operation;
 
-import impl.operation.operations.OperationHandler;
+import core.basesyntax.impl.operation.operations.OperationHandler;
+import core.basesyntax.model.Operation;
 import java.util.Map;
-import model.Operation;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<Operation, OperationHandler> operationHandlerMap;

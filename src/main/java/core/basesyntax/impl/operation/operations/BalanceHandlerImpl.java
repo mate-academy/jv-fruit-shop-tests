@@ -1,8 +1,8 @@
-package impl.operation.operations;
+package core.basesyntax.impl.operation.operations;
 
-import dao.AccountDao;
-import dao.AccountDaoImpl;
-import model.FruitTransaction;
+import core.basesyntax.dao.AccountDao;
+import core.basesyntax.dao.AccountDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 
 public class BalanceHandlerImpl implements OperationHandler {
     private final AccountDao accountDao = new AccountDaoImpl();

@@ -1,9 +1,9 @@
-package impl;
+package core.basesyntax.impl;
 
-import dao.AccountDao;
-import dao.AccountDaoImpl;
+import core.basesyntax.dao.AccountDao;
+import core.basesyntax.dao.AccountDaoImpl;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
-import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";

@@ -1,11 +1,11 @@
-package impl;
+package core.basesyntax.impl;
 
+import core.basesyntax.service.ReadFileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import service.ReadFileService;
 
 public class ReadFileImpl implements ReadFileService {
     @Override

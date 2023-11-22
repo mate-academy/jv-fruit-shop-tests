@@ -1,9 +1,9 @@
-package impl;
+package core.basesyntax.impl;
 
+import core.basesyntax.service.WriteToFileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import service.WriteToFileService;
 
 public class WriteToFileImpl implements WriteToFileService {
     @Override

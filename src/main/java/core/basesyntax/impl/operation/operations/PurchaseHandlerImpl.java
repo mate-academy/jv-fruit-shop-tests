@@ -1,9 +1,9 @@
-package impl.operation.operations;
+package core.basesyntax.impl.operation.operations;
 
-import dao.AccountDao;
-import dao.AccountDaoImpl;
-import impl.operation.operations.exception.NegativeBalanceException;
-import model.FruitTransaction;
+import core.basesyntax.dao.AccountDao;
+import core.basesyntax.dao.AccountDaoImpl;
+import core.basesyntax.impl.operation.operations.exception.NegativeBalanceException;
+import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseHandlerImpl implements OperationHandler {
     private final AccountDao accountDao = new AccountDaoImpl();

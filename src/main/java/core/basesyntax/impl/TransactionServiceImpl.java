@@ -1,9 +1,9 @@
-package impl;
+package core.basesyntax.impl;
 
-import impl.operation.OperationStrategy;
+import core.basesyntax.impl.operation.OperationStrategy;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionService;
 import java.util.List;
-import model.FruitTransaction;
-import service.TransactionService;
 
 public class TransactionServiceImpl implements TransactionService {
     private final OperationStrategy operationStrategy;

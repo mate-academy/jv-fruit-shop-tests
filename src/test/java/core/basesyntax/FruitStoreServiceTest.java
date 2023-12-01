@@ -16,37 +16,37 @@ import strategy.SupplyStrategy;
 import strategy.TransactionStrategy;
 
 public class FruitStoreServiceTest {
-    private static final Map<FruitTransaction.Operation, TransactionStrategy> strategyMap = Map.of(
+    private static final Map<FruitTransaction.Operation, TransactionStrategy> STRATEGY_MAP = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceStrategy(),
             FruitTransaction.Operation.SUPPLY, new SupplyStrategy(),
             FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
             FruitTransaction.Operation.RETURN, new ReturnStrategy());
 
-    private static final FruitStoreServiceImpl fruitStoreService
-            = new FruitStoreServiceImpl(strategyMap);
-
-    private static final FruitTransaction transaction1 =
+    private static final FruitTransaction FIRST_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100);
-    private static final FruitTransaction transaction2 =
+    private static final FruitTransaction SECOND_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5);
-    private static final FruitTransaction transaction3 =
+    private static final FruitTransaction THIRD_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10);
 
-    private static final List<FruitTransaction> correctTransactions =
-            new ArrayList<>(Arrays.asList(transaction1, transaction2, transaction3));
+    private static final List<FruitTransaction> CORRECT_TRANSACTIONS =
+            new ArrayList<>(
+                    Arrays.asList(FIRST_TRANSACTION, SECOND_TRANSACTION, THIRD_TRANSACTION));
+    private FruitStoreServiceImpl fruitStoreService
+            = new FruitStoreServiceImpl(STRATEGY_MAP);
 
     @Test
-    public void testCorrectTransactions() {
+    public void processTransactionsAndGetOk() {
         FruitStorage fruitStorage = new FruitStorage();
         SupplyStrategy supplyStrategy = new SupplyStrategy();
         PurchaseStrategy purchaseStrategy = new PurchaseStrategy();
         ReturnStrategy returnStrategy = new ReturnStrategy();
 
-        supplyStrategy.apply(fruitStorage, transaction1);
-        purchaseStrategy.apply(fruitStorage, transaction2);
-        returnStrategy.apply(fruitStorage, transaction3);
+        supplyStrategy.apply(fruitStorage, FIRST_TRANSACTION);
+        purchaseStrategy.apply(fruitStorage, SECOND_TRANSACTION);
+        returnStrategy.apply(fruitStorage, THIRD_TRANSACTION);
 
         Assert.assertEquals(fruitStorage,
-                fruitStoreService.processTransactions(correctTransactions));
+                fruitStoreService.processTransactions(CORRECT_TRANSACTIONS));
     }
 }

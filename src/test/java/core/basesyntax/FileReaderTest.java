@@ -8,28 +8,28 @@ import org.junit.Test;
 import service.FileReaderImpl;
 
 public class FileReaderTest {
-    private static final String fileNameWithData = "src/test/resources/readTestFileWithData.csv";
-    private static final String emptyDataFile = "src/test/resources/readEmptyFile.csv";
-    private static final String wrongFileName = "src/test/resources/wrong.csv";
-    private static final FileReaderImpl fileReader = new FileReaderImpl();
-    private static final List<String> correctData = new ArrayList<>(Arrays.asList("b,banana,20",
+    private static final String FILE_NAME_WITH_DATA = "src/test/resources/readTestFileWithData.csv";
+    private static final String EMPTY_DATA_TYPE = "src/test/resources/readEmptyFile.csv";
+    private static final String WRONG_FILE_NAME = "src/test/resources/wrong.csv";
+    private static final List<String> CORRECT_DATA = new ArrayList<>(Arrays.asList("b,banana,20",
             "b,apple,100", "s,banana,100"));
-    private static final List<String> emptyData = new ArrayList<>();
+    private static final List<String> EMPTY_DATA = new ArrayList<>();
+    private FileReaderImpl fileReader = new FileReaderImpl();
 
     @Test
-    public void testIoException() {
-        Assert.assertThrows(RuntimeException.class, () -> fileReader.read(wrongFileName));
+    public void throwsIoException() {
+        Assert.assertThrows(RuntimeException.class, () -> fileReader.read(WRONG_FILE_NAME));
     }
 
     @Test
-    public void testReadFileWithData() {
-        List<String> strings = fileReader.read(fileNameWithData);
-        Assert.assertEquals(correctData, strings);
+    public void readAndGetOk() {
+        List<String> strings = fileReader.read(FILE_NAME_WITH_DATA);
+        Assert.assertEquals(CORRECT_DATA, strings);
     }
 
     @Test
-    public void testFileWithNoCommands() {
-        List<String> strings = fileReader.read(emptyDataFile);
-        Assert.assertEquals(emptyData, strings);
+    public void readAndGetOkEmptyFile() {
+        List<String> strings = fileReader.read(EMPTY_DATA_TYPE);
+        Assert.assertEquals(EMPTY_DATA, strings);
     }
 }

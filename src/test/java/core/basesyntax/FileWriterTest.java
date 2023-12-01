@@ -12,21 +12,16 @@ import service.FileReader;
 import service.FileReaderImpl;
 import service.FileWriter;
 import service.FileWriterImpl;
-import service.FruitStoreService;
-import service.FruitStoreServiceImpl;
-import service.FruitTransactionService;
-import service.FruitTransactionServiceImpl;
 import strategy.BalanceStrategy;
 import strategy.PurchaseStrategy;
 import strategy.ReturnStrategy;
 import strategy.SupplyStrategy;
 import strategy.TransactionStrategy;
 
-public class MainTest {
-    private static final String INPUT_FILE_NAME = "src/test/resources/testStorage";
+public class FileWriterTest {
     private static final String REPORT_FILE_NAME = "src/test/resources/reportFileName";
 
-    private static final List<String> expectedResult =
+    private static final List<String> EXPECTED_RESULT =
             new ArrayList<>(Arrays.asList("banana,152", "apple,90"));
 
     private static final Map<FruitTransaction.Operation, TransactionStrategy> strategyMap = Map.of(
@@ -35,22 +30,18 @@ public class MainTest {
             FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
             FruitTransaction.Operation.RETURN, new ReturnStrategy());
 
+    private FileWriter fileWriter = new FileWriterImpl();
+    private FileReader fileReader = new FileReaderImpl();
+
     @Test
-    public void reportFileTest() {
-        FileReader fileReader = new FileReaderImpl();
-        List<String> fruitTransactionStorageStrings = fileReader.read(INPUT_FILE_NAME);
+    public void writeAndGetOk() {
+        FruitStorage fruitStorage = new FruitStorage();
+        fruitStorage.addQuantity("banana", 152);
+        fruitStorage.addQuantity("apple", 90);
 
-        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
-        List<FruitTransaction> fruitTransactionStorage = fruitTransactionService
-                .parseTransactions(fruitTransactionStorageStrings);
-
-        FruitStoreService fruitStoreService = new FruitStoreServiceImpl(strategyMap);
-        FruitStorage fruitStorage = fruitStoreService.processTransactions(fruitTransactionStorage);
-
-        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(fruitStorage, REPORT_FILE_NAME);
 
         List<String> strings = fileReader.read(REPORT_FILE_NAME);
-        Assert.assertEquals(expectedResult, strings);
+        Assert.assertEquals(EXPECTED_RESULT, strings);
     }
 }

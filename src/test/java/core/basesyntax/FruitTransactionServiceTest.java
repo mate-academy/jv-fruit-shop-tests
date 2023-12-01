@@ -12,50 +12,51 @@ import service.FruitTransactionServiceImpl;
 import util.ValidationDataException;
 
 public class FruitTransactionServiceTest {
-    private static final FruitTransactionServiceImpl fruitTransactionService =
-            new FruitTransactionServiceImpl();
-    private static final List<String> transactionsWithWrongTransaction =
+    private static final List<String> TRANSACTIONS_WITH_ONE_WRONG =
             new ArrayList<>(Arrays.asList("r,apple,10", "p,apple,20, 5555", "b,banana,20"));
-    private static final List<String> correctTransactions =
+    private static final List<String> CORRECT_TRANSACTIONS =
             new ArrayList<>(Arrays.asList("s,banana,100", "p,banana,5", "r,apple,10"));
-    private static final List<String> transactionsWithWrongCommandType =
+    private static final List<String> TRANSACTIONS_WITH_WRONG_COMMAND_TYPE =
             new ArrayList<>(Arrays.asList("s,banana,100", "o,banana,5", "r,apple,10"));
-    private static final List<String> transactionsWithWrongQuantityType =
+    private static final List<String> TRANSACTIONS_WITH_WRONG_QUANTITY_TYPE =
             new ArrayList<>(Arrays.asList("s,banana,dddd", "p,banana,5", "r,apple,10"));
-    private static final FruitTransaction transaction1 =
+    private static final FruitTransaction FIRST_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100);
-    private static final FruitTransaction transaction2 =
+    private static final FruitTransaction SECOND_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5);
-    private static final FruitTransaction transaction3 =
+    private static final FruitTransaction THIRD_TRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 10);
-    private static final List<FruitTransaction> correctTransactionsList =
-            new ArrayList<>(Arrays.asList(transaction1, transaction2, transaction3));
+    private static final List<FruitTransaction> CORRECT_TRANSACTION_LIST =
+            new ArrayList<>(
+                    Arrays.asList(FIRST_TRANSACTION, SECOND_TRANSACTION, THIRD_TRANSACTION));
+    private FruitTransactionServiceImpl fruitTransactionService =
+            new FruitTransactionServiceImpl();
 
     @Test
-    public void testCorrectTransactions() {
+    public void parseCorrectTransactionsAndGetOk() {
         List<FruitTransaction> fruitTransactions =
-                fruitTransactionService.parseTransactions(correctTransactions);
-        Assert.assertEquals(fruitTransactions, correctTransactionsList);
+                fruitTransactionService.parseTransactions(CORRECT_TRANSACTIONS);
+        Assert.assertEquals(fruitTransactions, CORRECT_TRANSACTION_LIST);
     }
 
     @Test
-    public void testWrongInputFormat() {
+    public void tryParseIncorrectTransactionsAndThrowException() {
         ValidationDataException exception = assertThrows(ValidationDataException.class, () ->
-                fruitTransactionService.parseTransactions(transactionsWithWrongTransaction));
+                fruitTransactionService.parseTransactions(TRANSACTIONS_WITH_ONE_WRONG));
         Assert.assertEquals(exception.getMessage(), "Invalid input format in file");
     }
 
     @Test
-    public void testWrongCommandType() {
+    public void tryParseWrongCommandTypeAndThrowException() {
         ValidationDataException exception = assertThrows(ValidationDataException.class, () ->
-                fruitTransactionService.parseTransactions(transactionsWithWrongCommandType));
+                fruitTransactionService.parseTransactions(TRANSACTIONS_WITH_WRONG_COMMAND_TYPE));
         Assert.assertEquals(exception.getMessage(), "Invalid operation code in file");
     }
 
     @Test
-    public void testWrongQuantity() {
+    public void tryParseWrongQuantityTypeAndThrowException() {
         ValidationDataException exception = assertThrows(ValidationDataException.class, () ->
-                fruitTransactionService.parseTransactions(transactionsWithWrongQuantityType));
+                fruitTransactionService.parseTransactions(TRANSACTIONS_WITH_WRONG_QUANTITY_TYPE));
         Assert.assertEquals(exception.getMessage(), "Invalid quantity format in file");
     }
 }

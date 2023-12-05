@@ -1,22 +1,21 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.ReportSenderException;
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exceptions.ReportSenderException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class ReportSenderCsvImplTest {
     private static String TEST_REPORT_CSV_FILE_PATH =
-        "src/test/java/resources/testReport.csv";
+            "src/test/java/resources/testReport.csv";
     private static final String TITLE_ROW = "fruit,quantity";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String FIELD_SEPARATOR = ",";
@@ -60,8 +59,8 @@ class ReportSenderCsvImplTest {
         String actualResult = readFromFile(TEST_REPORT_CSV_FILE_PATH);
 
         String expectedResult = TITLE_ROW + LINE_SEPARATOR
-            + "banana" + FIELD_SEPARATOR + "152" + LINE_SEPARATOR
-            + "apple" + FIELD_SEPARATOR + "90" + LINE_SEPARATOR;
+                + "banana" + FIELD_SEPARATOR + "152" + LINE_SEPARATOR
+                + "apple" + FIELD_SEPARATOR + "90" + LINE_SEPARATOR;
 
         assertEquals(expectedResult, actualResult);
     }
@@ -73,5 +72,4 @@ class ReportSenderCsvImplTest {
             throw new RuntimeException("Can't correctly read data from file " + fileName, e);
         }
     }
-
 }

@@ -20,18 +20,18 @@ public class ReaderFileTest {
     private ReaderFile reader = new ReaderFileImpl();
 
     @Test
-    public void getIoException_notOk() {
+    public void readerFruitShop_ioException_notOk() {
         Assert.assertThrows(RuntimeException.class,
                 () -> reader.readFileFruitShop(WRONG_FILE_PATH));
     }
 
     @Test
-    public void readerEmptyFile_Ok() {
+    public void readerFruitShop_emptyFile_Ok() {
         Assert.assertEquals(EXPECTED_EMPTY, reader.readFileFruitShop(EMPTY_FILE_PATH));
     }
 
     @Test
-    public void readerDataFile_Ok() {
+    public void readerFruitShop_dataFile_Ok() {
         Assert.assertEquals(EXPECTED_DATA, reader.readFileFruitShop(DATA_FILE_PATH));
     }
 }

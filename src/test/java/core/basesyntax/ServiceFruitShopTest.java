@@ -21,7 +21,6 @@ public class ServiceFruitShopTest {
             FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
             FruitTransaction.Operation.RETURN, new ReturnStrategy(),
             FruitTransaction.Operation.SUPPLY, new SupplyStrategy());
-
     private static final FruitTransaction BALANCE_TXN = new FruitTransaction(
             FruitTransaction.Operation.BALANCE, "banana", 100);
     private static final FruitTransaction PURCHASE_TXN = new FruitTransaction(
@@ -35,7 +34,7 @@ public class ServiceFruitShopTest {
     private ServiceFruitShop serviceFruitShop = new ServiceFruitShopImpl(OPERATION_STRATEGY_MAP);
 
     @Test
-    public void processTransaction_Ok() {
+    public void processTransactionFruitShop_correctTransaction_Ok() {
         FruitTransactionDb fruitStore = new FruitTransactionDbImpl();
 
         BalanceStrategy balanceStrategy = new BalanceStrategy();

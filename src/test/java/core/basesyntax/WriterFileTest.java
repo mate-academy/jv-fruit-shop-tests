@@ -20,7 +20,7 @@ public class WriterFileTest {
     private WriterFile writer = new WriterFileImpl();
 
     @Test
-    public void getIoException_notOk() {
+    public void writerFruitShop_ioException_notOk() {
         fruitStore = new FruitTransactionDbImpl();
 
         Assert.assertThrows(RuntimeException.class, () -> writer
@@ -28,7 +28,7 @@ public class WriterFileTest {
     }
 
     @Test
-    public void writeDataReport_Ok() {
+    public void writerFruitShop_dataReport_Ok() {
         fruitStore = new FruitTransactionDbImpl();
         fruitStore.addQuantity("banana", 152);
         fruitStore.addQuantity("apple", 90);

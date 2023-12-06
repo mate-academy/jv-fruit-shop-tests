@@ -23,13 +23,13 @@ public class ParserFileTest {
     private ParserFile parser = new ParserFileImpl();
 
     @Test
-    public void parserCorrectData_Ok() {
+    public void parserFruitShop_correctData_ok() {
         Assert.assertEquals(CORRECT_TRANSACTIONS,
                 parser.parseFruitShop(CORRECT_TRANSACTIONS_STRING));
     }
 
     @Test
-    public void parserWrongData_notOk() {
+    public void parserFruitShop_wrongData_notOk() {
         Assert.assertThrows(RuntimeException.class,
                 () -> parser.parseFruitShop(WRONG_TRANSACTION));
     }

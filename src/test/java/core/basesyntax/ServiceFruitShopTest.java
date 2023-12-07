@@ -29,12 +29,12 @@ public class ServiceFruitShopTest {
             FruitTransaction.Operation.RETURN, "banana", 45);
     private static final FruitTransaction SUPPLY_TXN = new FruitTransaction(
             FruitTransaction.Operation.SUPPLY, "apple", 180);
-    private static final List<FruitTransaction> FRUIT_TRANSACTION = List
+    private static final List<FruitTransaction> FRUIT_TRANSACTIONS = List
             .of(BALANCE_TXN, PURCHASE_TXN, RETURN_TXN, SUPPLY_TXN);
     private ServiceFruitShop serviceFruitShop = new ServiceFruitShopImpl(OPERATION_STRATEGY_MAP);
 
     @Test
-    public void processTransactionFruitShop_correctTransaction_Ok() {
+    public void processTransaction_correctTransaction_Ok() {
         FruitTransactionDb fruitStore = new FruitTransactionDbImpl();
 
         BalanceStrategy balanceStrategy = new BalanceStrategy();
@@ -49,7 +49,7 @@ public class ServiceFruitShopTest {
         SupplyStrategy supplyStrategy = new SupplyStrategy();
         supplyStrategy.calculation(SUPPLY_TXN, fruitStore);
 
-        Assert.assertEquals(fruitStore, serviceFruitShop.processTransaction(FRUIT_TRANSACTION));
+        Assert.assertEquals(fruitStore, serviceFruitShop.processTransaction(FRUIT_TRANSACTIONS));
     }
 
 }

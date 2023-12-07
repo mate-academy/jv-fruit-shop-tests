@@ -11,8 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class WriterFileTest {
-    private static final String REPORT_FILE_PATH = "src/test/java/core/basesyntax/resources"
-            + "/reportTest.csv";
+    private static final String REPORT_FILE_PATH = "src/test/resources/reportTest.csv";
     private static final String WRONG_FILE_PATH = "invalid/path/that/does/not/exist.csv";
     private static final List<String> EXPECTED_REPORT = List.of("banana,152", "apple,90");
     private FruitTransactionDb fruitStore;

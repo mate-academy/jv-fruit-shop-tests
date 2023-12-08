@@ -39,7 +39,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void getByCode_notCorrectOperation_noOk() {
+    void getByCode_notCorrectOperation_notOk() {
         assertThrows(RuntimeException.class, () ->
                         FruitTransaction.Operation.getByCode("unknown"),
                 "Expected RuntimeException but it was not thrown");

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class FruitTransactionTest {
     @Test
-    void setOperation_setsOperationCorrectly() {
+    void setOperation_supply_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "Apple", 10);
         fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
@@ -16,7 +16,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void setFruit_setsFruitCorrectly() {
+    void setFruit_supply_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "Apple", 10);
         fruitTransaction.setFruit("Banana");
@@ -24,7 +24,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void setQuantity_setsQuantityCorrectly() {
+    void setQuantity_supply_ok() {
         FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "Apple", 10);
         fruitTransaction.setQuantity(5);
@@ -32,14 +32,14 @@ class FruitTransactionTest {
     }
 
     @Test
-    void getByCode_returnsCorrectOperation() {
+    void getByCode_correctOperation_ok() {
         FruitTransaction.Operation expectedOperation = FruitTransaction.Operation.RETURN;
         FruitTransaction.Operation actualOperation = FruitTransaction.Operation.getByCode("r");
         assertEquals(expectedOperation, actualOperation);
     }
 
     @Test
-    void getByCode_throwsRuntimeExceptionForUnknownOperation() {
+    void getByCode_notCorrectOperation_noOk() {
         assertThrows(RuntimeException.class, () ->
                         FruitTransaction.Operation.getByCode("unknown"),
                 "Expected RuntimeException but it was not thrown");

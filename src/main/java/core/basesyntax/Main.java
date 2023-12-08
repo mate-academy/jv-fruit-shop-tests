@@ -16,6 +16,7 @@ import java.util.Map;
 
 public class Main {
     public static final String FROM_FILE_PATH = "src/main/resources/test.csv";
+    public static final String TO_FILE_PATH = "src/main/resources/Report.csv";
     public static final ActionHandler balanceHandler = new BalanceHandler();
     public static final ActionHandler purchaseHandler = new PurchaseHandler();
     public static final ActionHandler returnHandler = new ReturnHandler();
@@ -34,6 +35,6 @@ public class Main {
         dataService.fillDataStorage(dataFromFile);
         dataService.fillFruitStorage();
         String report = reportService.getReport();
-        fileService.writeDataToFile(report);
+        fileService.writeDataToFile(report, TO_FILE_PATH);
     }
 }

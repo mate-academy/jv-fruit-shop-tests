@@ -12,8 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
-    private static final String FROM_FILE_PATH = "src/main/resources/test.csv";
-    private static final String TO_FILE_PATH = "src/main/resources/Report.csv";
+    private static final String FROM_FILE_PATH = "src/test/resources/test.csv";
+    private static final String TO_FILE_PATH = "src/test/resources/Report.csv";
     private static final String INCORRECT_FILE_PATH = "...";
     private static final String CORRECT_REPORT = "fruit,quantity\nbanana,152\napple,90";
     private static FileService fileService;
@@ -46,7 +46,7 @@ class FileServiceImplTest {
 
     @Test
     public void writeDataToFile_CorrectData_Ok() {
-        fileService.writeDataToFile(CORRECT_REPORT);
+        fileService.writeDataToFile(CORRECT_REPORT, TO_FILE_PATH);
         String actual = fileService.readFromFile(TO_FILE_PATH).stream()
                 .reduce("", (sum, string) -> sum + string + System.lineSeparator())
                 .trim();

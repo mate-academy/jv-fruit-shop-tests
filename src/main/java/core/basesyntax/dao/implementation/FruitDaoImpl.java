@@ -5,7 +5,7 @@ import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private static final FruitStorage FRUIT_STORAGE = new FruitStorage();
+    private FruitStorage FRUIT_STORAGE = new FruitStorage();
 
     @Override
     public boolean contains(String fruitName) {

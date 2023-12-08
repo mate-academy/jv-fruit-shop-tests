@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,7 +34,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_throwsRuntimeExceptionWhenIOExceptionOccurs() {
+    void writeToFile_throwsRuntimeExceptionWhenIoExceptionOccurs() {
         String data = "Test write report data";
         String invalidFilePath = "invalid/file/path"; // Цей шлях призведе до IOException
 

@@ -5,15 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.action.Action;
 import core.basesyntax.action.ActionHandler;
 import core.basesyntax.action.BalanceHandler;
-import core.basesyntax.action.PurchaseHandler;
-import core.basesyntax.action.ReturnHandler;
-import core.basesyntax.action.SupplyHandler;
-import core.basesyntax.dao.DataDao;
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.implementation.DataDaoImpl;
-import core.basesyntax.dao.implementation.FruitDaoImpl;
-import core.basesyntax.service.DataService;
-import core.basesyntax.service.FileService;
+import core.basesyntax.db.DataStorage;
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportService;
 import java.util.List;
 import java.util.Map;
@@ -21,39 +14,31 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    public static final String FROM_FILE_PATH = "src/main/resources/test.csv";
-    private static final String CORRECT_REPORT = "fruit,quantity\nbanana,152\napple,90\n";
+    public static final List<String> listOfData
+            = List.of("b,banana,20", "b,apple,100");
+    public static final Map<String, Integer> mapOfFruits
+            = Map.of("banana", 0, "apple", 0);
+    private static final String CORRECT_REPORT = "fruit,quantity\nbanana,20\napple,100\n";
     private static final ActionHandler balanceHandler = new BalanceHandler();
-    private static final ActionHandler purchaseHandler = new PurchaseHandler();
-    private static final ActionHandler returnHandler = new ReturnHandler();
-    private static final ActionHandler supplyHandler = new SupplyHandler();
     private static final Map<Action, ActionHandler> actionHandlersMap = Map.of(
-            Action.BALANCE, balanceHandler,
-            Action.RETURN, returnHandler,
-            Action.PURCHASE, purchaseHandler,
-            Action.SUPPLY, supplyHandler);
-    private static FileService fileService;
-    private static DataService dataService;
+            Action.BALANCE, balanceHandler);
     private static ReportService reportService;
-    private static DataDao dataDao;
-    private static FruitDao fruitDao;
+    private static DataStorage dataStorage;
+    private static FruitStorage fruitStorage;
 
     @BeforeAll
     public static void setUp() {
-        fileService = new FileServiceImpl();
-        dataService = new DataServiceImpl();
         reportService = new ReportServiceImpl(actionHandlersMap);
-        dataDao = new DataDaoImpl();
-        fruitDao = new FruitDaoImpl();
-        dataDao.getData().clear();
-        fruitDao.getMap().clear();
+        dataStorage = new DataStorage();
+        dataStorage.getListOfData().clear();
+        dataStorage.getListOfData().addAll(listOfData);
+        fruitStorage = new FruitStorage();
+        fruitStorage.getMapOfFruits().clear();
+        fruitStorage.getMapOfFruits().putAll(mapOfFruits);
     }
 
     @Test
     public void getReport_CorrectData_Ok() {
-        List<String> dataFromFile = fileService.readFromFile(FROM_FILE_PATH);
-        dataService.fillDataStorage(dataFromFile);
-        dataService.fillFruitStorage();
         String actual = reportService.getReport();
         assertEquals(CORRECT_REPORT, actual);
     }

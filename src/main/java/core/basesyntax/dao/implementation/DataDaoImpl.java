@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class DataDaoImpl implements DataDao {
-    private DataStorage DATA_STORAGE = new DataStorage();
+    private static final DataStorage DATA_STORAGE = new DataStorage();
 
     @Override
     public boolean contains(List<String> dataFromFile) {

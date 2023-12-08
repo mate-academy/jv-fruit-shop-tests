@@ -3,15 +3,9 @@ package core.basesyntax.service.implementation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.dao.DataDao;
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.implementation.DataDaoImpl;
-import core.basesyntax.dao.implementation.FruitDaoImpl;
 import core.basesyntax.db.DataStorage;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.DataService;
-import core.basesyntax.service.FileService;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -70,8 +64,7 @@ class DataServiceImplTest {
 
     @Test
     public void fillFruitStorage_CorrectData_ok() {
-        Map<String, Integer> expected = Map
-                .of("banana", 0, "apple", 0);
+
         try {
             dataFromFile = Files.readAllLines(new File(FROM_FILE_PATH)
                     .toPath());
@@ -81,6 +74,8 @@ class DataServiceImplTest {
         }
         dataService.fillDataStorage(dataFromFile);
         dataService.fillFruitStorage();
+        Map<String, Integer> expected
+                = Map.of("banana", 0, "apple", 0);
         Map<String, Integer> actual = fruitStorage.getMapOfFruits();
         assertEquals(expected, actual);
     }

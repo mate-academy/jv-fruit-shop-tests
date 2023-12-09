@@ -6,8 +6,4 @@ public class PathDoesNotExistException extends IOException {
     public PathDoesNotExistException(String message) {
         super(message);
     }
-
-    public PathDoesNotExistException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

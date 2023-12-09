@@ -9,5 +9,7 @@ public interface Storage {
 
     void merge(String key, Integer value, BinaryOperator<Integer> mergeFunction);
 
+    boolean equals(Object object);
+
     Set<Map.Entry<String,Integer>> entrySet();
 }

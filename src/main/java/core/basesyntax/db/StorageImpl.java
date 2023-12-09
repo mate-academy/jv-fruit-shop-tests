@@ -23,6 +23,24 @@ public class StorageImpl implements Storage {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        StorageImpl someStorage = (StorageImpl) obj;
+
+        return this.getStorageMap().equals(someStorage.getStorageMap());
+    }
+
+    private Map<String, Integer> getStorageMap() {
+        return this.storageMap;
+    }
+
+    @Override
     public Set<Map.Entry<String,Integer>> entrySet() {
         return storageMap.entrySet();
     }

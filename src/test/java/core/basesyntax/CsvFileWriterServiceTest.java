@@ -25,7 +25,7 @@ public class CsvFileWriterServiceTest {
                 banana,123
                 apple,909
                 coconut,90""";
-        String path = "shos\\neponiatne";
+        String path = "shos/neponiatne";
         assertThrows(PathDoesNotExistException.class,
                 () -> csvFileWriterService.writeToFile(validData, path),
                 "File path doesn't exist!");
@@ -38,7 +38,7 @@ public class CsvFileWriterServiceTest {
                 banana,123
                 apple,909
                 coconut,90""";
-        String path = "src\\test\\resources\\report.csv";
+        String path = "src/test/resources/report.csv";
         assertDoesNotThrow(() -> csvFileWriterService.writeToFile(validData, path),
                 "File path doesn't exist!");
     }
@@ -50,7 +50,7 @@ public class CsvFileWriterServiceTest {
                 banana,123
                 apple,909
                 coconut,90""";
-        String path = "src\\test\\resources\\notCsvFile.txt";
+        String path = "src/test/resources/notCsvFile.txt";
         assertThrows(WrongExtensionException.class,
                 () -> csvFileWriterService.writeToFile(validData, path),
                 "You can only use csv files!");
@@ -63,7 +63,7 @@ public class CsvFileWriterServiceTest {
                 banana,123
                 apple,909
                 coconut,90""";
-        String path = "src\\test\\resources\\report.csv";
+        String path = "src/test/resources/report.csv";
         assertDoesNotThrow(() -> csvFileWriterService.writeToFile(validData, path),
                 "You can only use csv files!");
     }

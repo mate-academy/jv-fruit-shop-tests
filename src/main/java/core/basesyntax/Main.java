@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String REPORT_PATH = "src\\main\\resources\\report.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) throws IOException {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -47,7 +47,7 @@ public class Main {
 
         List<FruitTransaction> fruitTransactions = conversionService
                 .convert(csvFileReaderService
-                        .readFromFile("src\\main\\resources\\products.csv"));
+                        .readFromFile("src/main/resources/products.csv"));
 
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy.get(fruitTransaction.operation());

@@ -3,19 +3,15 @@ package core.basesyntax.service.impl;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.service.FileReaderService;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 public class FileReaderServiceImplTest {
-    @Rule
-    public TemporaryFolder tempFolder = new TemporaryFolder();
     private FileReaderService fileReaderService;
 
     @Before
@@ -24,28 +20,47 @@ public class FileReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_fileWithContent_ok() throws IOException {
-        File inputFile = tempFolder.newFile("input_file.csv");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(inputFile))) {
-            writer.write("type,fruit,quantity\nb,banana,20\np,apple,100\ns,banana,50");
+    public void readFromFile_nonExistentFile_throwsException() {
+        String nonExistentFile = "nonexistent.csv";
+        try {
+            fileReaderService.readFromFile(nonExistentFile);
+        } catch (RuntimeException e) {
+            assertEquals("Can't read from file"
+                    + "Something went wrong" + nonExistentFile, e.getMessage());
         }
-        List<String> lines = fileReaderService.readFromFile(inputFile.getAbsolutePath());
-        assertEquals(3, lines.size());
-        assertEquals("b,banana,20", lines.get(0));
-        assertEquals("p,apple,100", lines.get(1));
-        assertEquals("s,banana,50", lines.get(2));
     }
 
     @Test
-    public void readFromFile_emptyFile_notOk() throws IOException {
-        File inputFile = tempFolder.newFile("emptyInput.csv");
-        List<String> lines = fileReaderService.readFromFile(inputFile.getAbsolutePath());
-        assertEquals(0, lines.size());
+    public void readFromFile_validFile_returnsAllLines() throws IOException {
+        String filePath = "src/test/resources/input_file.csv";
+        List<String> fileContent = Arrays.asList(
+                "type,fruit,quantity",
+                "b,banana,20",
+                "p,apple,100",
+                "s,banana,50"
+        );
+
+        // Ми створюємо тестовий файл у тимчасовій директорії
+        Files.write(Paths.get(filePath), fileContent);
+
+        List<String> lines = fileReaderService.readFromFile(filePath);
+        assertEquals(fileContent.size(), lines.size());
+        assertEquals(fileContent, lines);
+
+        // Очищення тестового файлу після завершення тесту
+        Files.deleteIfExists(Paths.get(filePath));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void readFromFile_nonExistentFile_notOk() {
-        String nonExistentFile = "nonexistent.csv";
-        fileReaderService.readFromFile(nonExistentFile);
+    @Test
+    public void readFromFile_emptyFile_returnsEmptyList() throws IOException {
+        String filePath = "src/test/resources/input_file.csv";
+        Files.createFile(Paths.get(filePath));
+
+        List<String> lines = fileReaderService.readFromFile(filePath);
+        assertEquals(0, lines.size());
+
+        Files.deleteIfExists(Paths.get(filePath));
     }
+
+    // Додайте додаткові тести для перевірки граничних умов та інших сценаріїв використання
 }

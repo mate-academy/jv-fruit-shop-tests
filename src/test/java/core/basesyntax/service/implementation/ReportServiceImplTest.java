@@ -8,6 +8,7 @@ import core.basesyntax.action.BalanceHandler;
 import core.basesyntax.db.DataStorage;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportService;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +16,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    public static final List<String> listOfData
-            = List.of("b,banana,20", "b,apple,100");
-    public static final Map<String, Integer> mapOfFruits
-            = Map.of("banana", 0, "apple", 0);
+    public static final List<String> listOfData = new ArrayList<>();
+    public static final Map<String, Integer> mapOfFruits = new HashMap<>();
     private static final String CORRECT_REPORT = "fruit,quantity\nbanana,20\napple,100\n";
     private static final Map<Action, ActionHandler> actionHandlersMap = new HashMap<>();
     private static ActionHandler balanceHandler;
@@ -28,6 +27,8 @@ class ReportServiceImplTest {
 
     @BeforeAll
     public static void setUp() {
+        listOfData.addAll(List.of("b,banana,20", "b,apple,100"));
+        mapOfFruits.putAll(Map.of("banana", 0, "apple", 0));
         reportService = new ReportServiceImpl(actionHandlersMap);
         dataStorage = new DataStorage();
         dataStorage.getListOfData().clear();

@@ -22,9 +22,7 @@ class ActionStrategyImplTest {
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private static final List<String> listOfData = new ArrayList<>();
-    private static final Map<String, Integer> mapOfFruits = Map
-            .of("banana", 0,
-                    "apple", 0);
+    private static final Map<String, Integer> mapOfFruits = new HashMap<>();
     private static final ActionHandler balanceHandler = new BalanceHandler();
     private static final ActionHandler purchaseHandler = new PurchaseHandler();
     private static final ActionHandler returnHandler = new ReturnHandler();
@@ -35,10 +33,6 @@ class ActionStrategyImplTest {
 
     @BeforeAll
     public static void setUp() {
-        actionStrategy = new ActionStrategyImpl(actionHandlersMap);
-        fruitStorage = new FruitStorage();
-        fruitStorage.getMapOfFruits().clear();
-        fruitStorage.getMapOfFruits().putAll(mapOfFruits);
         listOfData.addAll(List.of("b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -52,6 +46,13 @@ class ActionStrategyImplTest {
                 Action.RETURN, returnHandler,
                 Action.PURCHASE, purchaseHandler,
                 Action.SUPPLY, supplyHandler));
+        mapOfFruits.putAll(Map.of(
+                "banana", 0,
+                "apple", 0));
+        actionStrategy = new ActionStrategyImpl(actionHandlersMap);
+        fruitStorage = new FruitStorage();
+        fruitStorage.getMapOfFruits().clear();
+        fruitStorage.getMapOfFruits().putAll(mapOfFruits);
     }
 
     @Test

@@ -40,14 +40,12 @@ public class FileReaderServiceImplTest {
                 "s,banana,50"
         );
 
-        // Ми створюємо тестовий файл у тимчасовій директорії
         Files.write(Paths.get(filePath), fileContent);
 
         List<String> lines = fileReaderService.readFromFile(filePath);
         assertEquals(fileContent.size(), lines.size());
         assertEquals(fileContent, lines);
 
-        // Очищення тестового файлу після завершення тесту
         Files.deleteIfExists(Paths.get(filePath));
     }
 
@@ -62,5 +60,4 @@ public class FileReaderServiceImplTest {
         Files.deleteIfExists(Paths.get(filePath));
     }
 
-    // Додайте додаткові тести для перевірки граничних умов та інших сценаріїв використання
 }

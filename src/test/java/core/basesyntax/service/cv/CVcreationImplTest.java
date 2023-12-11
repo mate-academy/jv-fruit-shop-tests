@@ -40,4 +40,19 @@ class CVcreationImplTest {
         assertTrue(actual.contains("apple,100"));
         assertTrue(actual.contains("orange,8"));
     }
+
+    @Test
+    public void createCv_WithEmptyStorage_ReturnsHeaderOnly() {
+        Map<String, Integer> emptyStorage = new HashMap<>();
+
+        when(fruitDao.getStorage()).thenReturn(emptyStorage);
+
+        String actual = cvCreation.createCV();
+
+        String[] lines = actual.split(System.lineSeparator());
+
+        assertEquals(1, lines.length);
+        assertTrue(actual.contains("fruit,quantity"));
+    }
 }
+

@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileParseService;
@@ -44,4 +45,44 @@ public class FileParseServiceImplTest {
 
         assertEquals(0, result.size());
     }
+
+    @Test
+    public void parseDataFromCV_InvalidOperationCode_ThrowsException() {
+        List<String> testData = Arrays.asList(
+                "x,Apple,10",
+                "s,Banana,5",
+                "p,Orange,8"
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            fileParseService.parseDataFromCV(testData);
+        });
+    }
+
+    @Test
+    public void parseDataFromCV_InvalidQuantity_ThrowsException() {
+        List<String> testData = Arrays.asList(
+                "b,Apple,10",
+                "s,Banana,invalid",
+                "p,Orange,8"
+        );
+
+        assertThrows(NumberFormatException.class, () -> {
+            fileParseService.parseDataFromCV(testData);
+        });
+    }
+
+    @Test
+    public void parseDataFromCV_EmptyLine_ThrowsException() {
+        List<String> testData = Arrays.asList(
+                "b,Apple,10",
+                "",
+                "p,Orange,8"
+        );
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            fileParseService.parseDataFromCV(testData);
+        });
+    }
 }
+

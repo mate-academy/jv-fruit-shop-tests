@@ -9,6 +9,8 @@ import core.basesyntax.action.PurchaseHandler;
 import core.basesyntax.action.ReturnHandler;
 import core.basesyntax.action.SupplyHandler;
 import core.basesyntax.db.FruitStorage;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,15 +21,7 @@ class ActionStrategyImplTest {
     private static final int ACTION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
-    private static final List<String> listOfData = List
-            .of("b,banana,20",
-                    "b,apple,100",
-                    "s,banana,100",
-                    "p,banana,13",
-                    "r,apple,10",
-                    "p,apple,20",
-                    "p,banana,5",
-                    "s,banana,50");
+    private static final List<String> listOfData = new ArrayList<>();
     private static final Map<String, Integer> mapOfFruits = Map
             .of("banana", 0,
                     "apple", 0);
@@ -35,11 +29,7 @@ class ActionStrategyImplTest {
     private static final ActionHandler purchaseHandler = new PurchaseHandler();
     private static final ActionHandler returnHandler = new ReturnHandler();
     private static final ActionHandler supplyHandler = new SupplyHandler();
-    private static final Map<Action, ActionHandler> actionHandlersMap = Map.of(
-            Action.BALANCE, balanceHandler,
-            Action.RETURN, returnHandler,
-            Action.PURCHASE, purchaseHandler,
-            Action.SUPPLY, supplyHandler);
+    private static final Map<Action, ActionHandler> actionHandlersMap = new HashMap<>();
     private static ActionStrategy actionStrategy;
     private static FruitStorage fruitStorage;
 
@@ -49,6 +39,19 @@ class ActionStrategyImplTest {
         fruitStorage = new FruitStorage();
         fruitStorage.getMapOfFruits().clear();
         fruitStorage.getMapOfFruits().putAll(mapOfFruits);
+        listOfData.addAll(List.of("b,banana,20",
+                "b,apple,100",
+                "s,banana,100",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50"));
+        actionHandlersMap.putAll(Map.of(
+                Action.BALANCE, balanceHandler,
+                Action.RETURN, returnHandler,
+                Action.PURCHASE, purchaseHandler,
+                Action.SUPPLY, supplyHandler));
     }
 
     @Test

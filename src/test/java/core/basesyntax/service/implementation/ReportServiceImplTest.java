@@ -8,6 +8,7 @@ import core.basesyntax.action.BalanceHandler;
 import core.basesyntax.db.DataStorage;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,9 +20,8 @@ class ReportServiceImplTest {
     public static final Map<String, Integer> mapOfFruits
             = Map.of("banana", 0, "apple", 0);
     private static final String CORRECT_REPORT = "fruit,quantity\nbanana,20\napple,100\n";
-    private static final ActionHandler balanceHandler = new BalanceHandler();
-    private static final Map<Action, ActionHandler> actionHandlersMap = Map.of(
-            Action.BALANCE, balanceHandler);
+    private static final Map<Action, ActionHandler> actionHandlersMap = new HashMap<>();
+    private static ActionHandler balanceHandler;
     private static ReportService reportService;
     private static DataStorage dataStorage;
     private static FruitStorage fruitStorage;
@@ -35,6 +35,8 @@ class ReportServiceImplTest {
         fruitStorage = new FruitStorage();
         fruitStorage.getMapOfFruits().clear();
         fruitStorage.getMapOfFruits().putAll(mapOfFruits);
+        balanceHandler = new BalanceHandler();
+        actionHandlersMap.put(Action.BALANCE, balanceHandler);
     }
 
     @Test

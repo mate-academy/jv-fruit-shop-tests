@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 class DataServiceImplTest {
     private static final String FROM_FILE_PATH = "src/test/resources/test.csv";
+    private static final String FRUIT_NAME_ONE = "banana";
+    private static final String FRUIT_NAME_TWO = "apple";
     private static final String[] INCORRECT_FILES
                 = {"src/test/resources/incorrect/EmptyFile.csv",
                     "src/test/resources/incorrect/IncorrectAction.csv",
@@ -75,7 +77,7 @@ class DataServiceImplTest {
         dataService.fillDataStorage(dataFromFile);
         dataService.fillFruitStorage();
         Map<String, Integer> expected
-                = Map.of("banana", 0, "apple", 0);
+                = Map.of(FRUIT_NAME_ONE, 0, FRUIT_NAME_TWO, 0);
         Map<String, Integer> actual = fruitStorage.getMapOfFruits();
         assertEquals(expected, actual);
     }

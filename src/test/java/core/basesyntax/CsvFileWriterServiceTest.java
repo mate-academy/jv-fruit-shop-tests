@@ -5,14 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.PathDoesNotExistException;
 import core.basesyntax.exceptions.WrongExtensionException;
-import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileWriterServiceTest {
-    private static CsvFileReaderService csvFileReaderService;
     private static final String VALID_DATA = """
                 fruit,quantity
                 banana,123

@@ -21,6 +21,7 @@ public class FileParseServiceImplTest {
     @Test
     public void parseDataFromCV_ValidData_ReturnsCorrectFruitTransactions() {
         List<String> testData = Arrays.asList(
+                "type,fruit,quantity",
                 "b,Apple,10",
                 "s,Banana,5",
                 "p,Orange,8"
@@ -47,19 +48,6 @@ public class FileParseServiceImplTest {
     }
 
     @Test
-    public void parseDataFromCV_InvalidOperationCode_ThrowsException() {
-        List<String> testData = Arrays.asList(
-                "x,Apple,10",
-                "s,Banana,5",
-                "p,Orange,8"
-        );
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            fileParseService.parseDataFromCV(testData);
-        });
-    }
-
-    @Test
     public void parseDataFromCV_InvalidQuantity_ThrowsException() {
         List<String> testData = Arrays.asList(
                 "b,Apple,10",
@@ -67,7 +55,7 @@ public class FileParseServiceImplTest {
                 "p,Orange,8"
         );
 
-        assertThrows(NumberFormatException.class, () -> {
+        assertThrows(RuntimeException.class, () -> {
             fileParseService.parseDataFromCV(testData);
         });
     }

@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 
 public class CsvFileReaderServiceTest {
     private static CsvFileReaderService csvFileReaderService;
+    private static final String INVALID_PATH = "shos/neponiatne";
+    private static final String VALID_FILE = "src/test/resources/products.csv";
+    private static final String INVALID_EXTENSION = "src/test/resources/notCsvFile.txt";
+    private static final String INVALID_DATA = "src/test/resources/invalidColumnsNumberFile.csv";
 
     @BeforeAll
     public static void setCsvFileReaderService() {
@@ -21,46 +25,40 @@ public class CsvFileReaderServiceTest {
 
     @Test
     public void readFromFile_invalidPath_NotOk() {
-        String path = "shos/neponiatne";
         assertThrows(PathDoesNotExistException.class,
-                () -> csvFileReaderService.readFromFile(path),
+                () -> csvFileReaderService.readFromFile(INVALID_PATH),
                 "File path doesn't exist!");
     }
 
     @Test
     public void readFromFile_validPath_Ok() {
-        String path = "src/test/resources/products.csv";
-        assertDoesNotThrow(() -> csvFileReaderService.readFromFile(path),
+        assertDoesNotThrow(() -> csvFileReaderService.readFromFile(VALID_FILE),
                 "File path doesn't exist!");
     }
 
     @Test
     public void readFromFile_invalidExtension_NotOk() {
-        String path = "src/test/resources/notCsvFile.txt";
         assertThrows(WrongExtensionException.class,
-                () -> csvFileReaderService.readFromFile(path),
+                () -> csvFileReaderService.readFromFile(INVALID_EXTENSION),
                 "You can only use csv files!");
     }
 
     @Test
     public void readFromFile_validExtension_Ok() {
-        String path = "src/test/resources/products.csv";
-        assertDoesNotThrow(() -> csvFileReaderService.readFromFile(path),
+        assertDoesNotThrow(() -> csvFileReaderService.readFromFile(VALID_FILE),
                 "You can only use csv files!");
     }
 
     @Test
     public void readFromFile_invalidData_NotOk() {
-        String path = "src/test/resources/invalidColumnsNumberFile.csv";
         assertThrows(InvalidDataException.class,
-                () -> csvFileReaderService.readFromFile(path),
+                () -> csvFileReaderService.readFromFile(INVALID_DATA),
                 "Csv file should have 3 columns!");
     }
 
     @Test
     public void readFromFile_validData_Ok() {
-        String path = "src/test/resources/products.csv";
-        assertDoesNotThrow(() -> csvFileReaderService.readFromFile(path),
+        assertDoesNotThrow(() -> csvFileReaderService.readFromFile(VALID_FILE),
                 "Csv file should have 3 columns!");
     }
 }

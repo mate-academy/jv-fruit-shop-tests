@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationHandlerTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
     private static OperationHandler purchaseOperationHandler;
     private static Storage storage;
 
@@ -23,19 +25,19 @@ public class PurchaseOperationHandlerTest {
     @BeforeEach
     public void setStorage() {
         storage = new StorageImpl();
-        storage.put("banana", 234);
-        storage.put("apple", 327);
+        storage.put(BANANA, 234);
+        storage.put(APPLE, 327);
     }
 
     @Test
     public void process_validData_Ok() {
         final FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.PURCHASE,
-                "banana",
+                BANANA,
                 34);
         Storage expectedStorage = new StorageImpl();
-        expectedStorage.put("banana", 200);
-        expectedStorage.put("apple", 327);
+        expectedStorage.put(BANANA, 200);
+        expectedStorage.put(APPLE, 327);
         purchaseOperationHandler.process(fruitTransaction, storage);
         assertEquals(expectedStorage, storage);
     }

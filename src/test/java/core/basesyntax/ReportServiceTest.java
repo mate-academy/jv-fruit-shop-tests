@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportServiceTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
+    private static final String COCONUT = "coconut";
     private static ReportService reportService;
     private static Storage storage;
 
@@ -26,9 +29,9 @@ public class ReportServiceTest {
 
     @Test
     public void createReport_validData() {
-        storage.put("banana", 192);
-        storage.put("apple", 34);
-        storage.put("coconut", 12);
+        storage.put(BANANA, 192);
+        storage.put(APPLE, 34);
+        storage.put(COCONUT, 12);
 
         assertDoesNotThrow(() -> reportService.createReport(storage));
     }

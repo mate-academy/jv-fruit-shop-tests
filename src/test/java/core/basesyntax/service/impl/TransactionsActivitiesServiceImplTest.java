@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TransactionsActivitiesServiceImplTest {
-
     private TransactionsActivitiesService transactionsActivitiesService;
 
     @BeforeEach
@@ -35,7 +34,6 @@ public class TransactionsActivitiesServiceImplTest {
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "Apple", 10);
         List<FruitTransaction> transactions = List.of(balanceTransaction);
-
         transactionsActivitiesService.activityOfTransaction(transactions);
     }
 }

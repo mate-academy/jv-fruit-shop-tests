@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
-    private static final String CORRECT_FILE_PATH = "src/test/java/resources/testInput.csv";
-    private static final String NOT_EXISTING_FILE_PATH = "src/test/java/resources/notExisting.csv";
-    private static final String INCORRECT_FILE_PATH = "src/test/java/reso/testOutput.csv";
+    private static final String CORRECT_FILE_PATH = "src/test/resources/testInput.csv";
+    private static final String NOT_EXISTING_FILE_PATH = "src/test/resources/notExisting.csv";
+    private static final String INCORRECT_FILE_PATH = "src/test/reso/testOutput.csv";
     private static final String TEST_REPORT = "Some report data.";
-    private static final String TEST_REPORT_CORRECT_PATH = "src/test/java/resources/testOutput.csv";
+    private static final String TEST_REPORT_CORRECT_PATH = "src/test/resources/testOutput.csv";
     private static FileService fileService;
 
     @BeforeAll

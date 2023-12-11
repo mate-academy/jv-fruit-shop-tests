@@ -30,7 +30,7 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void balanceOperationHandler_correctQuantity_Ok() {
+    void balanceOperationHandler_correctBalanceCheck_Ok() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, FRUIT_QUANTITY);
         balanceOperationHandler.handleOperation(fruitTransaction);

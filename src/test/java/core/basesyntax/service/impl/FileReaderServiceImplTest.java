@@ -51,7 +51,7 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void readFromFile_emptyFile_returnsEmptyList() throws IOException {
-        String filePath = "src/test/resources/input_file.csv";
+        String filePath = "src/test/resources/test_input_file.csv";
         Files.createFile(Paths.get(filePath));
 
         List<String> lines = fileReaderService.readFromFile(filePath);

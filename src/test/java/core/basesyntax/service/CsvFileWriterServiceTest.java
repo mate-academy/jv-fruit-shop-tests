@@ -1,11 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.PathDoesNotExistException;
 import core.basesyntax.exceptions.WrongExtensionException;
-import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,32 +21,32 @@ public class CsvFileWriterServiceTest {
     private static CsvFileWriterService csvFileWriterService;
 
     @BeforeAll
-    public static void setCsvFileWriterService() {
+    public static void init() {
         csvFileWriterService = new CsvFileWriterServiceImpl();
     }
 
     @Test
-    public void writeToFile_invalidPath_NotOk() {
+    public void writeToFile_invalidPath_notOk() {
         assertThrows(PathDoesNotExistException.class,
                 () -> csvFileWriterService.writeToFile(VALID_DATA, INVALID_PATH),
                 "File path doesn't exist!");
     }
 
     @Test
-    public void writeToFile_validPath_Ok() {
+    public void writeToFile_validPath_ok() {
         assertDoesNotThrow(() -> csvFileWriterService.writeToFile(VALID_DATA, REPORT_PATH),
                 "File path doesn't exist!");
     }
 
     @Test
-    public void writeToFile_invalidExtension_NotOk() {
+    public void writeToFile_invalidExtension_notOk() {
         assertThrows(WrongExtensionException.class,
                 () -> csvFileWriterService.writeToFile(VALID_DATA, INVALID_EXTENSION),
                 "You can only use csv files!");
     }
 
     @Test
-    public void writeToFile_validExtension_Ok() {
+    public void writeToFile_validExtension_ok() {
         assertDoesNotThrow(() -> csvFileWriterService.writeToFile(VALID_DATA, REPORT_PATH),
                 "You can only use csv files!");
     }

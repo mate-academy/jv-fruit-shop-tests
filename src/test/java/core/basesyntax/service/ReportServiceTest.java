@@ -1,10 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.StorageImpl;
-import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,17 +17,17 @@ public class ReportServiceTest {
     private static Storage storage;
 
     @BeforeAll
-    public static void setReportService() {
+    public static void init() {
         reportService = new ReportServiceImpl();
     }
 
     @BeforeEach
-    public void setStorage() {
+    public void setup() {
         storage = new StorageImpl();
     }
 
     @Test
-    public void createReport_validData() {
+    public void createReport_validData_ok() {
         storage.put(BANANA, 192);
         storage.put(APPLE, 34);
         storage.put(COCONUT, 12);

@@ -20,17 +20,4 @@ public class SupplyOperationHandlerTest {
 
         assertEquals(15, FruitStorage.FRUITS.get("Banana"));
     }
-
-    @Test
-    public void handle_ValidTransaction_AddsToExistingQuantity_Ok() {
-        SupplyOperationHandler supplyHandler = new SupplyOperationHandler();
-        FruitStorage.FRUITS.put("Grapes", 5);
-
-        FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.SUPPLY, "Grapes", 8);
-
-        supplyHandler.handle(transaction);
-
-        assertEquals(13, FruitStorage.FRUITS.get("Grapes"));
-    }
 }

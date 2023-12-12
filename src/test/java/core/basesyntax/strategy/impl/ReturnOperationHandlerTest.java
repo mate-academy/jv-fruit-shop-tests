@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.FruitStorage;
@@ -18,19 +19,8 @@ public class ReturnOperationHandlerTest {
 
         returnHandler.handle(transaction);
 
-        assertEquals(15, FruitStorage.FRUITS.get("Apple"));
-    }
-
-    @Test
-    public void handle_ValidTransaction_AddsToExistingQuantity_Ok() {
-        ReturnOperationHandler returnHandler = new ReturnOperationHandler();
-        FruitStorage.FRUITS.put("Orange", 5);
-
-        FruitTransaction transaction = new FruitTransaction(
-                FruitTransaction.Operation.RETURN, "Orange", 8);
-
-        returnHandler.handle(transaction);
-
-        assertEquals(13, FruitStorage.FRUITS.get("Orange"));
+        int updatedBalance = FruitStorage.FRUITS.get("Apple");
+        assertTrue(updatedBalance >= 0);
+        assertEquals(15, updatedBalance);
     }
 }

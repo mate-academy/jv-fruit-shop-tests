@@ -29,7 +29,7 @@ public class CsvFileReaderTest {
     }
 
     @Test
-    void read_NotExistingFile_notOk() {
+    void read_NotExistingFile_NotOk() {
         assertThrows(RuntimeException.class, () -> fileReader.read(INVALID_INPUT_FILE_PATH));
     }
 

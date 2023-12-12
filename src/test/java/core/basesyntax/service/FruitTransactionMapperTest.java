@@ -12,20 +12,20 @@ import org.junit.jupiter.api.Test;
 public class FruitTransactionMapperTest {
 
     @Test
-    public void mapData_NullData_Check_ThrowsRuntimeException_NotOk() {
+    public void mapData_NullData_ThrowsRuntimeException() {
         FruitTransactionMapper mapper = new FruitTransactionMapper();
         assertThrows(RuntimeException.class, () -> mapper.mapData(null));
     }
 
     @Test
-    public void mapData_EmptyData_Check_ThrowsRuntimeException_NotOk() {
+    public void mapData_EmptyData_ThrowsRuntimeException() {
         FruitTransactionMapper mapper = new FruitTransactionMapper();
 
         assertThrows(RuntimeException.class, () -> mapper.mapData(Arrays.asList()));
     }
 
     @Test
-    public void mapData_ValidData_Check_ReturnsFruitTransactions_Ok() {
+    public void mapData_ValidData_ReturnsFruitTransactions() {
         FruitTransactionMapper mapper = new FruitTransactionMapper();
         List<String> lines = Arrays.asList(
                 "OPERATION,FRUIT,QUANTITY",

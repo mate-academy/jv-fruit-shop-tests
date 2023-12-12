@@ -22,7 +22,7 @@ public class CsvFileWriterTest {
     }
 
     @Test
-    public void write_IncorrectPath_notOk() {
+    public void write_IncorrectPath_NotOk() {
         assertThrows(RuntimeException.class, () ->
                 fileWriter.write(WRONG_FILE_PATH, REPORT_TEXT));
     }

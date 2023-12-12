@@ -8,7 +8,6 @@ import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -19,14 +18,10 @@ public class OperationStrategyTest {
     @BeforeAll
     public static void setup() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
-        FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(),
-        FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(),
-        FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(),
-        FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlers);
     }
 

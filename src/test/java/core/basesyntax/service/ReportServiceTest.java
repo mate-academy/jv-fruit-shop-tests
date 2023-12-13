@@ -22,7 +22,7 @@ public class ReportServiceTest {
         fruitDao.add("яблуко", 90);
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity");
         for (Map.Entry<String, Integer> stringIntegerEntry : fruitDao.get().entrySet()) {
-            stringBuilder.append("\r\n").append(stringIntegerEntry.getKey())
+            stringBuilder.append(System.lineSeparator()).append(stringIntegerEntry.getKey())
                     .append(",").append(stringIntegerEntry.getValue());
         }
         VALID_REPORT = stringBuilder.toString();

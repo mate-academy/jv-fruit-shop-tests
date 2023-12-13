@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class ReaderServiceTest {
     private static final String DIRECTORY = "src/test/resources/input.csv";
     private static final String TEMP_DIRECTORY = System.getProperty("java.io.tmpdir")
-            + "empty_file";
+            + "/empty_file";
     private static final List<String> EMPTY_LIST = new ArrayList<>();
     private static final List<String> RESULT_FROM_FILE =
             List.of("type,fruit,quantity",

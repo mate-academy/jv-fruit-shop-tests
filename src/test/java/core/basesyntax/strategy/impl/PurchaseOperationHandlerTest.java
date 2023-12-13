@@ -34,8 +34,8 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void purchaseOperationHandler_tooBigPurchasedQuantity_notOk() {
-        fruitStorageDao.updateFruitQuantity(FRUIT_NAME, FRUIT_QUANTITY);
+    void handleOperation_tooBigPurchasedQuantity_notOk() {
+        Storage.storage.put(FRUIT_NAME, FRUIT_QUANTITY);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, INCORRECT_PURCHASED_QUANTITY);
         assertThrows(RuntimeException.class, ()
@@ -43,8 +43,8 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void purchaseOperationHandler_correctPurchasedQuantity_Ok() {
-        fruitStorageDao.updateFruitQuantity(FRUIT_NAME, FRUIT_QUANTITY);
+    void handleOperation_correctPurchasedQuantity_Ok() {
+        Storage.storage.put(FRUIT_NAME, FRUIT_QUANTITY);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, PURCHASED_QUANTITY);
         purchaseHandler.handleOperation(fruitTransaction);
@@ -53,8 +53,8 @@ class PurchaseOperationHandlerTest {
     }
 
     @Test
-    void purchaseOperationHandler_maxAllowedPurchasedQuantity_Ok() {
-        fruitStorageDao.updateFruitQuantity(FRUIT_NAME, FRUIT_QUANTITY);
+    void handleOperation_maxAllowedPurchasedQuantity_Ok() {
+        Storage.storage.put(FRUIT_NAME, FRUIT_QUANTITY);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, MAX_PURCHASED_QUANTITY);
         purchaseHandler.handleOperation(fruitTransaction);

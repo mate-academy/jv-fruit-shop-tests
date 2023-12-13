@@ -31,7 +31,7 @@ class ReturnOperationHandlerTest {
     }
 
     @Test
-    void returnOperationHandler_correctQuantity_Ok() {
+    void handleOperation_correctQuantity_Ok() {
         fruitStorageDao.updateFruitQuantity(FRUIT_NAME, FRUIT_QUANTITY);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, RETURNED_FRUIT_QUANTITY);

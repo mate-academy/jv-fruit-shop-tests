@@ -20,7 +20,7 @@ class TransactionParserImplTest {
     }
 
     @Test
-    void parseTransactions_CreateList_Ok() {
+    void parse_CreateList_Ok() {
         List<String> lines = List.of(HEADER, FIRST_LINE, SECOND_LINE);
 
         assertEquals(lines.size() - 1, transactionParser.parse(lines).size());

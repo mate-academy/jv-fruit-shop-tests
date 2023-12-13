@@ -31,7 +31,7 @@ class SupplyOperationHandlerTest {
     }
 
     @Test
-    void supplyOperationHandler_CorrectQuantity_Ok() {
+    void handleOperation_CorrectQuantity_Ok() {
         fruitStorageDao.updateFruitQuantity(FRUIT_NAME, FRUIT_QUANTITY);
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, SUPPLY_QUANTITY);

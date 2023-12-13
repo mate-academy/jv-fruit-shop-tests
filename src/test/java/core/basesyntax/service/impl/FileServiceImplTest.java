@@ -25,25 +25,25 @@ class FileServiceImplTest {
     }
 
     @Test
-    void read_NotExistingFile_notOk() {
+    void readFile_NotExistingFile_notOk() {
         assertThrows(RuntimeException.class, () -> fileService.readFile(NOT_EXISTING_FILE_PATH));
     }
 
     @Test
-    void read_CorrectFile_Ok() {
+    void readFile_CorrectFile_Ok() {
         List<String> lines = fileService.readFile(CORRECT_FILE_PATH);
         assertEquals(9, lines.size());
         assertEquals("s,banana,50", lines.get(8));
     }
 
     @Test
-    void write_IncorrectPath_notOk() {
+    void writeFile_IncorrectPath_notOk() {
         assertThrows(RuntimeException.class, ()
                 -> fileService.writeFile(INCORRECT_FILE_PATH,TEST_REPORT));
     }
 
     @Test
-    void write_CorrectPath_Ok() throws IOException {
+    void writeFile_CorrectPath_Ok() throws IOException {
         fileService.writeFile(TEST_REPORT_CORRECT_PATH,TEST_REPORT);
         String data = new String(Files.readAllBytes(Paths.get(TEST_REPORT_CORRECT_PATH)));
         assertEquals(TEST_REPORT, data);

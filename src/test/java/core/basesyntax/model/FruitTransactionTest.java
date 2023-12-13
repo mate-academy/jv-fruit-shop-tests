@@ -11,14 +11,14 @@ class FruitTransactionTest {
     private static final int INVALID_QUANTITY = -4;
 
     @Test
-    void fruitTransaction_invalidOperationCode_notOk() {
+    void of_invalidOperationCode_notOk() {
         assertThrows(IllegalArgumentException.class, () -> {
             FruitTransaction.Operation.of("k");
         });
     }
 
     @Test
-    void fruitTransaction_invalidFruitQuantity_notOk() {
+    void setQuantity_invalidFruitQuantity_notOk() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, FRUIT_QUANTITY);
         assertThrows(RuntimeException.class, () -> fruitTransaction.setQuantity(INVALID_QUANTITY));

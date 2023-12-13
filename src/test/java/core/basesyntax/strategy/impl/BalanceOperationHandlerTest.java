@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import org.junit.jupiter.api.AfterEach;
@@ -30,10 +31,10 @@ class BalanceOperationHandlerTest {
     }
 
     @Test
-    void balanceOperationHandler_correctBalanceCheck_Ok() {
+    void handleOperation_correctBalanceCheck_Ok() {
         FruitTransaction fruitTransaction
                 = new FruitTransaction(OPERATION, FRUIT_NAME, FRUIT_QUANTITY);
         balanceOperationHandler.handleOperation(fruitTransaction);
-        assertEquals(FRUIT_QUANTITY, fruitStorageDao.getFruitQuantity(FRUIT_NAME));
+        assertEquals(FRUIT_QUANTITY, Storage.storage.get(FRUIT_NAME));
     }
 }

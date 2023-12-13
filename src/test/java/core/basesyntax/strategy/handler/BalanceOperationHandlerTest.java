@@ -2,6 +2,7 @@ package core.basesyntax.strategy.handler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.constants.Constants;
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -10,9 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
-    private static final String ORANGE = "orange";
     private static OperationHandler balanceOperationHandler;
     private static Storage storage;
 
@@ -24,20 +22,20 @@ public class BalanceOperationHandlerTest {
     @BeforeEach
     public void setup() {
         storage = new StorageImpl();
-        storage.put(BANANA, 234);
-        storage.put(APPLE, 327);
+        storage.put(Constants.BANANA.getValue(), 234);
+        storage.put(Constants.APPLE.getValue(), 327);
     }
 
     @Test
     public void process_validData_ok() {
         final FruitTransaction fruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE,
-                ORANGE,
+                Constants.ORANGE.getValue(),
                 888);
         Storage expectedStorage = new StorageImpl();
-        expectedStorage.put(BANANA, 234);
-        expectedStorage.put(APPLE, 327);
-        expectedStorage.put(ORANGE, 888);
+        expectedStorage.put(Constants.BANANA.getValue(), 234);
+        expectedStorage.put(Constants.APPLE.getValue(), 327);
+        expectedStorage.put(Constants.ORANGE.getValue(), 888);
         balanceOperationHandler.process(fruitTransaction, storage);
         assertEquals(expectedStorage, storage);
     }

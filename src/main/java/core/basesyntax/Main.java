@@ -52,3 +52,4 @@ public class Main {
         writeFileService.writeFile(report, OUTPUT_FILE_PATH);
     }
 }
+

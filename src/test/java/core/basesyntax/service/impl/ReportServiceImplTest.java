@@ -9,7 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
-    private static final String TITLE = "fruit,quantity\r\n";
+    private static final String TITLE = "fruit,quantity";
+    private static final String NEW_LINE = System.lineSeparator();
     private ReportService reportService;
 
     @BeforeEach
@@ -19,8 +20,8 @@ class ReportServiceImplTest {
 
     @Test
     void getReport_correctReport_ok() {
-        String expendReport = TITLE
-                + "banana,20\r\n"
+        String expendReport = TITLE + NEW_LINE
+                + "banana,20" + NEW_LINE
                 + "apple,10";
 
         Map<String, Integer> storage = new HashMap<>();

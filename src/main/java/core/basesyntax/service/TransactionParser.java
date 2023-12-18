@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionParser {
-    private static final String TITLE_STRING = "type,fruit,quantity";
-
     public List<FruitTransaction> parseTransactions(List<String> data) {
         return data.stream()
         .skip(1)

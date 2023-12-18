@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
@@ -35,6 +36,20 @@ public class FruitTransaction {
 
     public Operation getByCode() {
         return operation;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof FruitTransaction)) {
+            return false;
+        }
+        FruitTransaction other = (FruitTransaction) obj;
+        return Objects.equals(this.operation, other.operation)
+                && Objects.equals(this.fruit, other.fruit)
+                && Objects.equals(this.quantity, other.quantity);
     }
 
     public enum Operation {

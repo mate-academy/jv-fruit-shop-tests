@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import java.util.HashMap;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ class ReportServiceTest {
     @Test
     void textMassage_Null() {
         reportService = new ReportService();
-        Storage.remnantsOfGoods = new HashMap<>();
+        Storage.remnantsOfGoods.clear();
         String report = reportService.getReport();
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         Assert.assertEquals(expectedReport, report);

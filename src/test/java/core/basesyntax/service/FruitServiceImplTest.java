@@ -15,7 +15,7 @@ class FruitServiceImplTest {
 
     @BeforeAll
     static void beforeAll() {
-        Storage.remnantsOfGoods = new HashMap<>();
+        Storage.remnantsOfGoods.clear(); ;
         fruitService = new FruitServiceImpl();
         expectedRemnants = new HashMap<>();
     }

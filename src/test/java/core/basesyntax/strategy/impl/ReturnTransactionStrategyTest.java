@@ -58,6 +58,7 @@ class ReturnTransactionStrategyTest {
 
     @Test
     void process_newFruitAddedToDB_ok() {
+        FruitDB.FRUIT_DATA_BASE.clear();
         FruitTransaction newFruitTransaction = new FruitTransaction(
                 FruitTransaction.Operation.RETURN, "orange", 30);
         transactionProcessor.process(newFruitTransaction);

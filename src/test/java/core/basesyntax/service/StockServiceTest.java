@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
 import static core.basesyntax.db.Storage.storage;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.StockServiceImpl;
@@ -56,12 +56,9 @@ class StockServiceTest {
 
     @Test
     void calculateStockWithNull_ok() {
-        try {
+        assertThrows(NullPointerException.class, () -> {
             stockService.calculateStock(null);
-        } catch (NullPointerException e) {
-            return;
-        }
-        fail("Should be NullPointerException");
+        });
     }
 
     @AfterEach

@@ -43,11 +43,8 @@ class ReaderServiceTest {
 
     @Test
     void readFromNull_notOk() {
-        try {
+        assertThrows(RuntimeException.class, () -> {
             readerService.readFromFile(null);
-        } catch (RuntimeException e) {
-            return;
-        }
-        fail("RuntimeException should be thrown, but... you not wizard");
+        });
     }
 }

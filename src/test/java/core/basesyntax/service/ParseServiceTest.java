@@ -23,6 +23,13 @@ class ParseServiceTest {
     private List<FruitTransaction> emptyFruitTransactions;
     private ParseService parseService = new ParseServiceImpl();
 
+    @BeforeAll
+    static void beforeAll() {
+        rawData = List.of("    type,fruit,quantity",
+                "    b,banana,20", "    b,apple,100",
+                "    s,banana,100");
+    }
+
     @BeforeEach
     void setUp() {
         emptyFruitTransactions = parseService.parseRawData(EMPTY_DATA);
@@ -57,12 +64,5 @@ class ParseServiceTest {
     void existedElementsCountAfterParse_ok() {
         int actual = fruitTransactions.size();
         assertEquals(actual, ELEMENTS_IN_LIST);
-    }
-
-    @BeforeAll
-    static void beforeAll() {
-        rawData = List.of("    type,fruit,quantity",
-                "    b,banana,20", "    b,apple,100",
-                "    s,banana,100");
     }
 }

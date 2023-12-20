@@ -27,30 +27,21 @@ class WriterServiceTest {
     }
 
     @Test
-    void createsEmptyReportFromEmptyData_ok() {
+    void createsEmptyReportFromEmptyData_ok() throws IOException {
         writerService.write(PATH_TO_FILE, new String());
-        List<String> strings = null;
-        try {
-            strings = Files.readAllLines(Path.of(PATH_TO_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        assertTrue(strings.isEmpty());
+        long actual = Files.size(Path.of(PATH_TO_FILE));
+        int expected = 0;
+        assertEquals(expected, actual);
     }
 
     @Test
-    void checkReportMatchingToInputData_ok() {
+    void checkReportMatchingToInputData_ok() throws IOException {
         String expected = new StringBuilder()
                 .append(INDENTATION).append(TITLE)
                 .append(LINE_SEPARATOR).append(INDENTATION)
                 .append("banana" + SEPARATOR + 42).toString();
         writerService.write(PATH_TO_FILE, expected);
-        List<String> strings = null;
-        try {
-            strings = Files.readAllLines(Path.of(PATH_TO_FILE));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        List<String> strings = Files.readAllLines(Path.of(PATH_TO_FILE));
         String actual = strings.get(0) + LINE_SEPARATOR + strings.get(1);
         assertEquals(expected, actual);
     }

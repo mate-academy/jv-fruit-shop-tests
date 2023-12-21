@@ -20,55 +20,73 @@ class FruitTransactionStrategyTest {
     @Test
     public void testExecuteTransactions_BalanceOperation() {
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10));
+        String fruit = "apple";
+        int quantity = 10;
+        transactions.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, fruit, quantity));
         FruitTransactionStrategy fruitTransactionStrategy = new FruitTransactionStrategy();
         fruitTransactionStrategy.executeTransactions(transactions);
         int expectedQuantity = 10;
-        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get("apple");
+        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     public void testExecuteTransactions_PurchaseOperation() {
-        FruitDB.FRUIT_DATA_BASE.put("apple", 20);
+        String fruit = "orange";
+        int quantity = 20;
+        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 15));
+        int purchaseQuantity = 15;
+        transactions.add(new FruitTransaction(FruitTransaction
+                .Operation.PURCHASE, fruit, purchaseQuantity));
         FruitTransactionStrategy fruitTransactionStrategy = new FruitTransactionStrategy();
         fruitTransactionStrategy.executeTransactions(transactions);
         int expectedQuantity = 5;
-        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get("apple");
+        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     public void testExecuteTransactions_SupplyOperation() {
-        FruitDB.FRUIT_DATA_BASE.put("banana", 30);
+        String fruit = "banana";
+        int quantity = 30;
+        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 25));
+        int supplyQuantity = 25;
+        transactions.add(new FruitTransaction(FruitTransaction
+                .Operation.SUPPLY, fruit, supplyQuantity));
         FruitTransactionStrategy fruitTransactionStrategy = new FruitTransactionStrategy();
         fruitTransactionStrategy.executeTransactions(transactions);
         int expectedQuantity = 55;
-        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get("banana");
+        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     public void testExecuteTransactions_ReturnOperation() {
-        FruitDB.FRUIT_DATA_BASE.put("orange", 5);
+        String fruit = "mango";
+        int quantity = 5;
+        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.RETURN, "orange", 3));
+        int returnQuantity = 3;
+        transactions.add(new FruitTransaction(FruitTransaction
+                .Operation.RETURN, fruit, returnQuantity));
         FruitTransactionStrategy fruitTransactionStrategy = new FruitTransactionStrategy();
         fruitTransactionStrategy.executeTransactions(transactions);
         int expectedQuantity = 8;
-        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get("orange");
+        int actualQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
         assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     public void testExecuteTransactions_NotEnoughInventory() {
-        FruitDB.FRUIT_DATA_BASE.put("peach", 3);
+        String fruit = "peach";
+        int quantity = 3;
+        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
         List<FruitTransaction> transactions = new ArrayList<>();
-        transactions.add(new FruitTransaction(FruitTransaction.Operation.PURCHASE, "peach", 5));
+        int wrongQuantity = 5;
+        transactions.add(new FruitTransaction(FruitTransaction
+                .Operation.PURCHASE, fruit, wrongQuantity));
         FruitTransactionStrategy fruitTransactionStrategy = new FruitTransactionStrategy();
         assertThrows(RuntimeException.class, () ->
                 fruitTransactionStrategy.executeTransactions(transactions));

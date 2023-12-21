@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 
 class ReportServiceImplTest {
 
+    private static final String TITLE = "Fruit,Value";
+    private static final String REPORT_BANANA = "banana.152";
+    private static final String REPORT_APPLE = "apple.90";
+    private static final String REPORT_GRAPE = "grape.75";
     private ReportService reportService;
 
     @BeforeEach
@@ -26,29 +30,32 @@ class ReportServiceImplTest {
 
     @Test
     void makeReport_validData_ok() {
-        String expectedReport = "Fruit,Value" + System.lineSeparator()
-                + "banana.152" + System.lineSeparator()
-                + "apple.90";
+        String expectedReport = TITLE + System.lineSeparator()
+                + REPORT_BANANA + System.lineSeparator()
+                + REPORT_APPLE;
         String actualReport = reportService.makeReport();
         assertEquals(expectedReport, actualReport);
     }
 
     @Test
     void makeReport_addNewFruits_ok() {
-        FruitDB.FRUIT_DATA_BASE.put("grape", 75);
-        String expectedReport = "Fruit,Value" + System.lineSeparator()
-                + "banana.152" + System.lineSeparator()
-                + "apple.90" + System.lineSeparator()
-                + "grape.75";
+        String fruit = "grape";
+        int quantity = 75;
+        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
+        String expectedReport = TITLE + System.lineSeparator()
+                + REPORT_BANANA + System.lineSeparator()
+                + REPORT_APPLE + System.lineSeparator()
+                + REPORT_GRAPE;
         String actualReport = reportService.makeReport();
         assertEquals(expectedReport, actualReport);
     }
 
     @Test
     void makeReport_missingFruits_ok() {
-        FruitDB.FRUIT_DATA_BASE.remove("banana");
+        String fruit = "banana";
+        FruitDB.FRUIT_DATA_BASE.remove(fruit);
         String actualReport = reportService.makeReport();
-        String expectedReport = "Fruit,Value" + System.lineSeparator() + "apple.90";
+        String expectedReport = TITLE + System.lineSeparator() + REPORT_APPLE;
         assertEquals(expectedReport, actualReport);
     }
 

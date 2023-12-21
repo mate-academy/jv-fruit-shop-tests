@@ -20,6 +20,15 @@ class LineParserImplTest {
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "apple", 20),
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50));
+    private static final List<String> VALID_LINES = List.of("type.fruit.quantity",
+            "b.banana.20",
+            "b.apple.100",
+            "s.banana.100",
+            "p.banana.13",
+            "r.apple.10",
+            "p.apple.20",
+            "p.banana.5",
+            "s.banana.50");
     private LineParser lineParser;
 
     @BeforeEach
@@ -29,32 +38,16 @@ class LineParserImplTest {
 
     @Test
     void createListOfTransactions_validLines_ok() {
-        List<String> validLines = List.of("type.fruit.quantity",
-                "b.banana.20",
-                "b.apple.100",
-                "s.banana.100",
-                "p.banana.13",
-                "r.apple.10",
-                "p.apple.20",
-                "p.banana.5",
-                "s.banana.50");
         List<FruitTransaction> actualTransactions = lineParser
-                .createListOfTransactions(validLines);
+                .createListOfTransactions(VALID_LINES);
         assertEquals(EXPECTED_TRANSACTIONS, actualTransactions);
     }
 
     @Test
     void createListOfTransactions_invalidLines_notOk() {
         List<String> invalidLines = List.of("type.fruit.quantity",
-                "b.banana.20",
-                "b.apple.100",
-                "s.banana.r",
-                "p.banana.13",
-                "r.apple.10",
-                "p.apple.-20",
-                "p.banana.5",
-                "s.banana.50",
-                "x.orange.30");
+                "20.t.banana",
+                "x.apple.w");
         assertThrows(RuntimeException.class, () -> lineParser
                 .createListOfTransactions(invalidLines));
     }

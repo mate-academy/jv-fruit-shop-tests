@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class PurchaseTransactionStrategyTest {
 
+    private static final int DEFAULT_VALUE = 0;
     private TransactionProcessor transactionProcessor;
 
     @BeforeEach
@@ -27,67 +28,80 @@ class PurchaseTransactionStrategyTest {
 
     @Test
     void process_validTransaction_ok() {
+        String fruit = "banana";
+        int quantity = 20;
         FruitTransaction validTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 20);
+                FruitTransaction.Operation.PURCHASE, fruit, quantity);
         transactionProcessor.process(validTransaction);
         int actualQuantity = FruitDB.FRUIT_DATA_BASE.get(validTransaction.getFruit());
-        assertEquals(80, actualQuantity);
+        int expectedQuantity = 80;
+        assertEquals(expectedQuantity, actualQuantity);
     }
 
     @Test
     void process_invalidTransaction_notOk() {
+        String fruit = "banana";
+        int quantity = 200;
         FruitTransaction invalidTransaction = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "banana", 200);
+                FruitTransaction.Operation.PURCHASE, fruit, quantity);
         assertThrows(RuntimeException.class,
                 () -> transactionProcessor.process(invalidTransaction));
     }
 
     @Test
     void process_multipleTransactions_ok() {
-        FruitDB.FRUIT_DATA_BASE.put("apple", 50);
-        FruitDB.FRUIT_DATA_BASE.put("orange", 77);
+        String fruitApple = "apple";
+        int quantityApple = 50;
+        FruitDB.FRUIT_DATA_BASE.put(fruitApple, quantityApple);
+        String fruitOrange = "orange";
+        int quantityOrange = 77;
+        FruitDB.FRUIT_DATA_BASE.put(fruitOrange, quantityOrange);
+        int purchaseQuantityApple = 30;
         FruitTransaction transaction1 = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "apple", 30);
+                FruitTransaction.Operation.PURCHASE, fruitApple, purchaseQuantityApple);
+        int purchaseQuantityOrange = 25;
         FruitTransaction transaction2 = new FruitTransaction(
-                FruitTransaction.Operation.PURCHASE, "orange", 25);
+                FruitTransaction.Operation.PURCHASE, fruitOrange, purchaseQuantityOrange);
         transactionProcessor.process(transaction1);
         transactionProcessor.process(transaction2);
-        int defaultValue = 0;
-        int quantityApple = FruitDB.FRUIT_DATA_BASE
-                .getOrDefault("apple", defaultValue);
-        int quantityOrange = FruitDB
-                .FRUIT_DATA_BASE.getOrDefault("orange", defaultValue);
+        int actualQuantityApple = FruitDB.FRUIT_DATA_BASE
+                .getOrDefault(fruitApple, DEFAULT_VALUE);
+        int actualQuantityOrange = FruitDB
+                .FRUIT_DATA_BASE.getOrDefault(fruitOrange, DEFAULT_VALUE);
         int expectedApple = 20;
         int expectedOrange = 52;
-        assertEquals(expectedApple, quantityApple);
-        assertEquals(expectedOrange, quantityOrange);
+        assertEquals(expectedApple, actualQuantityApple);
+        assertEquals(expectedOrange, actualQuantityOrange);
     }
 
     @Test
     void process_nonExistingFruit_notAddedToDB() {
-        int initialQuantityApple = FruitDB.FRUIT_DATA_BASE.getOrDefault("apple", 0);
+        String fruit = "apple";
+        int initialQuantityApple = FruitDB.FRUIT_DATA_BASE.getOrDefault(fruit, DEFAULT_VALUE);
         int requiredQuantity = 10;
         assertThrows(RuntimeException.class, () -> {
             if (initialQuantityApple < requiredQuantity) {
                 FruitTransaction purchaseApplesTransaction = new FruitTransaction(
                         FruitTransaction.Operation
-                                .PURCHASE, "apple", requiredQuantity - initialQuantityApple);
+                                .PURCHASE, fruit, requiredQuantity - initialQuantityApple);
                 transactionProcessor.process(purchaseApplesTransaction);
             }
         });
-        int finalQuantityApple = FruitDB.FRUIT_DATA_BASE.getOrDefault("apple", 0);
+        int finalQuantityApple = FruitDB.FRUIT_DATA_BASE.getOrDefault(fruit, DEFAULT_VALUE);
         assertEquals(initialQuantityApple, finalQuantityApple);
     }
 
     @Test
     void process_negativeQuantity_notProcessed() {
+        String fruit = "banana";
+        int wrongQuantity = -10;
         assertThrows(RuntimeException.class, () -> {
             FruitTransaction negativeQuantityTransaction = new FruitTransaction(
-                    FruitTransaction.Operation.PURCHASE, "banana", -10);
+                    FruitTransaction.Operation.PURCHASE, fruit, wrongQuantity);
             transactionProcessor.process(negativeQuantityTransaction);
         });
         int actualQuantity = FruitDB.FRUIT_DATA_BASE
-                .getOrDefault("banana", 0);
+                .getOrDefault(fruit, DEFAULT_VALUE);
         int exceptedQuantity = 100;
         assertEquals(exceptedQuantity, actualQuantity);
     }

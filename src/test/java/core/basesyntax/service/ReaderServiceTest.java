@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderServiceTest {
-    private static final String RECORD_PATH = "src\\test\\resources\\infoRecord.csv";
+    private static final String RECORD_PATH = "src/test/resources/infoRecord.csv";
     private static ReaderService readerService;
     private static List<String> expectedList;
 

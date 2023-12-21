@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ActivitiesDaoTest {
-    private static final String REPORT_PATH = "src\\test\\resources\\report.csv";
+    private static final String REPORT_PATH = "src/test/resources/report.csv";
     private static ActivitiesDao activitiesDao;
     private static final String REPORT = "fruit,quantity" + System.lineSeparator()
             + "banana,152" + System.lineSeparator() + "apple,90";

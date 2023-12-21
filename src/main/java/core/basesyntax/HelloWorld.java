@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
-    private static final String RECORD_PATH = "src\\main\\resources\\infoRecord.csv";
-    private static final String REPORT_PATH = "src\\main\\resources\\report.csv";
+    private static final String RECORD_PATH = "src/main/resources/infoRecord.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationPerformer> operationPerformerMap = new HashMap<>();

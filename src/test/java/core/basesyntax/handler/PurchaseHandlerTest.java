@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PurchaseHandlerTest {
+    private static String LEMON = "lemon";
     private static final int FRUIT_QUANTITY = 44;
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
@@ -17,7 +18,7 @@ class PurchaseHandlerTest {
     @BeforeAll
     static void beforeAll() {
         operationHandler = new PurchaseHandler();
-        fruitTransaction = new FruitTransaction(PURCHASE, "lemon", FRUIT_QUANTITY);
+        fruitTransaction = new FruitTransaction(PURCHASE, LEMON, FRUIT_QUANTITY);
     }
 
     @Test

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 class WriterServiceTest {
     private static final String WRONG_FILE_PATH = "src/wrong/path";
     private static final String FILE_PATH = "src/test/resources/writingTest.csv";
+    private static final String EMPTY_TEST_REPORT = "";
     private static final String TEST_REPORT = "fruit,quantity\n"
                                                 + "apple,10\n"
                                                 + "mango,15\n"
@@ -23,7 +24,7 @@ class WriterServiceTest {
 
     @Test
     void writeToFile_emptyFile_ok() {
-        assertDoesNotThrow(() -> writerService.writeToFile(FILE_PATH, ""));
+        assertDoesNotThrow(() -> writerService.writeToFile(FILE_PATH, EMPTY_TEST_REPORT));
     }
 
     @Test

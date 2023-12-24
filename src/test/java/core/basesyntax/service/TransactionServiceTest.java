@@ -20,6 +20,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionServiceTest {
+    private static final String BANANA = "banana";
     private static TransactionService transactionService;
     private static OperationStrategy operationStrategy;
     private static Map<FruitTransaction.Operation, OperationHandler> strategyMap;
@@ -33,12 +34,12 @@ class TransactionServiceTest {
         fruitDao = new FruitDaoImpl();
         transactionService = new TransactionServiceImpl(operationStrategy, fruitDao);
         testData = new ArrayList<>();
-        testData.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20));
+        testData.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 20));
     }
 
     @Test
     void processTransactions_validData_ok() {
-        Map<String, Integer> expected = Map.of("banana",20);
+        Map<String, Integer> expected = Map.of(BANANA,20);
         transactionService.processTransactions(testData);
         assertEquals(expected, Storage.getStock());
     }

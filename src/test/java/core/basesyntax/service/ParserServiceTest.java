@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ParserServiceTest {
+    private static final String APPLE = "apple";
+    private static final String MANGO = "mango";
     private static ParserService parserService;
     private static List<String> preParsingData;
     private static List<FruitTransaction> postParsingData;
@@ -19,19 +21,18 @@ class ParserServiceTest {
     @BeforeAll
     static void beforeAll() {
         parserService = new ParserServiceImpl();
-        postParsingData = new ArrayList<>();
-        postParsingData.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10));
-        postParsingData.add(new FruitTransaction(FruitTransaction.Operation.BALANCE, "mango", 3));
-        postParsingData.add(new FruitTransaction(FruitTransaction.Operation.SUPPLY, "mango", 2));
+        postParsingData =
+                List.of(new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 10),
+                        new FruitTransaction(FruitTransaction.Operation.BALANCE, MANGO, 3),
+                        new FruitTransaction(FruitTransaction.Operation.SUPPLY, MANGO, 2));
     }
 
     @BeforeEach
     void setUp() {
-        preParsingData = new ArrayList<>();
-        preParsingData.add("type,fruit,quantity");
-        preParsingData.add("b,apple,10");
-        preParsingData.add("b,mango,3");
-        preParsingData.add("s,mango,2");
+        preParsingData = new ArrayList<>(List.of("type,fruit,quantity",
+                                                    "b,apple,10",
+                                                    "b,mango,3",
+                                                    "s,mango,2"));
     }
 
     @Test
@@ -43,7 +44,8 @@ class ParserServiceTest {
     @Test
     void parseData_invalidData_notOk() {
         preParsingData.add("f,apple");
-        assertThrows(IllegalArgumentException.class, () -> parserService.parseData(preParsingData));
+        assertThrows(IllegalArgumentException.class,
+                () -> parserService.parseData(preParsingData));
         assertThrows(NullPointerException.class, () -> parserService.parseData(null));
     }
 

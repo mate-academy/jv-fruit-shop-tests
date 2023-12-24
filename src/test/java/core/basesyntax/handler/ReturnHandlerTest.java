@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnHandlerTest {
+    private static final String ORANGE = "orange";
     private static final int FRUIT_QUANTITY = 23;
     private static OperationHandler operationHandler;
     private static FruitTransaction fruitTransaction;
@@ -18,7 +19,7 @@ class ReturnHandlerTest {
     @BeforeAll
     static void beforeAll() {
         operationHandler = new BalanceHandler();
-        fruitTransaction = new FruitTransaction(RETURN, "orange", FRUIT_QUANTITY);
+        fruitTransaction = new FruitTransaction(RETURN, ORANGE, FRUIT_QUANTITY);
     }
 
     @Test

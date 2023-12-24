@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitDaoTest {
+    private static final String PINEAPPLE = "pineapple";
+    private static final String COCONUT = "coconut";
     private static FruitDao dao;
 
     @BeforeAll
@@ -19,13 +21,13 @@ class FruitDaoTest {
 
     @Test
     void addFruit_validData_ok() {
-        assertDoesNotThrow(() -> dao.addFruit("pineapple", 14));
+        assertDoesNotThrow(() -> dao.addFruit(PINEAPPLE, 14));
     }
 
     @Test
     void getBalance_validData_ok() {
         Storage.getStock().put("coconut", 20);
-        Map<String, Integer> expected = Map.of("coconut", 20);
+        Map<String, Integer> expected = Map.of(COCONUT, 20);
         Map<String, Integer> actual = dao.getBalance();
         assertEquals(expected, actual);
     }

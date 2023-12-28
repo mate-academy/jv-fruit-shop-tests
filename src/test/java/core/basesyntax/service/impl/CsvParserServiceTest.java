@@ -7,14 +7,14 @@ import static org.junit.Assert.assertThrows;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvParserServiceTest {
-    private CsvParserService csvParserService;
+    private static CsvParserService csvParserService;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         csvParserService = new CsvParserService();
     }
 

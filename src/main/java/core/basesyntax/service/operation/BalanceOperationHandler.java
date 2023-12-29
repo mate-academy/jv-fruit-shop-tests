@@ -1,0 +1,16 @@
+package core.basesyntax.service.operation;
+
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+
+public class BalanceOperationHandler implements OperationHandler {
+    @Override
+    public void handleTransaction(FruitTransaction transaction) {
+        if (transaction.getQuantity() < 0 || transaction.getFruit() == null) {
+            throw new RuntimeException(
+                    "Invalid transaction!"
+            );
+        }
+        Storage.fruits.put(transaction.getFruit(), transaction.getQuantity());
+    }
+}

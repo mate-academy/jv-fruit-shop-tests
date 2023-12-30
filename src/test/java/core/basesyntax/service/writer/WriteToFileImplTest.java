@@ -2,10 +2,10 @@ package core.basesyntax.service.writer;
 
 import core.basesyntax.service.reader.ReaderFile;
 import core.basesyntax.service.reader.ReaderFileImpl;
+import java.io.File;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
 
 class WriteToFileImplTest {
     private static final String INPUT_FILE = "src/test/resources/input.csv";

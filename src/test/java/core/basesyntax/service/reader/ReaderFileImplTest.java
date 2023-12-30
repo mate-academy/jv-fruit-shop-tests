@@ -1,10 +1,9 @@
 package core.basesyntax.service.reader;
 
+import java.io.File;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.File;
-import static org.junit.Assert.assertThrows;
 
 class ReaderFileImplTest {
     private static final String INPUT_FILE = "src/test/resources/input.csv";
@@ -31,7 +30,7 @@ class ReaderFileImplTest {
 
     @Test
     void readFile_notOk() {
-        assertThrows(RuntimeException.class, () -> {
+        Assertions.assertThrows(RuntimeException.class, () -> {
             String fileContent = String.valueOf(readerFile.readFile("output.scv"));
             Assertions.assertFalse(fileContent.isEmpty());
         });

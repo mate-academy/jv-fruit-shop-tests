@@ -22,7 +22,7 @@ class FruitShopDaoImplTest {
     @Test
     void specifiedCabbageIsNotExist_notOk() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-           fruitShopDao.getQuantity("cabbage");
+            fruitShopDao.getQuantity("cabbage");
         });
     }
 }

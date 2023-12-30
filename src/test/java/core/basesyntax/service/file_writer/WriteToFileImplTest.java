@@ -1,7 +1,7 @@
-package core.basesyntax.service.fileWriter;
+package core.basesyntax.service.file_writer;
 
-import core.basesyntax.service.fileReader.ReaderFile;
-import core.basesyntax.service.fileReader.ReaderFileImpl;
+import core.basesyntax.service.file_reader.ReaderFile;
+import core.basesyntax.service.file_reader.ReaderFileImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

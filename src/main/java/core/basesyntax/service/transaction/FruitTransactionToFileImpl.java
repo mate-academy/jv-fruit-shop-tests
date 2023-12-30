@@ -2,7 +2,6 @@ package core.basesyntax.service.transaction;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class FruitTransactionToFileImpl implements FruitTransactionToFile {
@@ -15,7 +14,7 @@ public class FruitTransactionToFileImpl implements FruitTransactionToFile {
     @Override
     public void processTransaction(List<FruitTransaction> fruitTransactionList) {
         fruitTransactionList.forEach(fruitTransaction -> operationStrategy
-            .getOperationHandler(fruitTransaction.getOperation())
-            .operation(fruitTransaction));
+                .getOperationHandler(fruitTransaction.getOperation())
+                .operation(fruitTransaction));
     }
 }

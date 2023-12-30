@@ -1,10 +1,11 @@
 package core.basesyntax.service.transaction;
 
 import core.basesyntax.db.Storage;
+import org.junit.jupiter.api.Assertions;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.stream.Collectors;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 
 class ReportListFruitImplTest {
     private static final String DELIMITER = ",";
@@ -20,10 +21,10 @@ class ReportListFruitImplTest {
 
     @Test
     void reportListIsWork_ok() {
-        assertDoesNotThrow(() -> {
+        Assertions.assertDoesNotThrow(() -> {
             builder.append(Storage.fruitsDB.entrySet().stream()
-                .map(key -> key.getKey() + DELIMITER + key.getValue())
-                .collect(Collectors.joining(System.lineSeparator())));
+                    .map(key -> key.getKey() + DELIMITER + key.getValue())
+                    .collect(Collectors.joining(System.lineSeparator())));
         });
 
     }

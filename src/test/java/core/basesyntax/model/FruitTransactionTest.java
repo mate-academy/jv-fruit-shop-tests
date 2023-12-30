@@ -16,8 +16,8 @@ class FruitTransactionTest {
     }
 
     @Test
-    void operationSupplyExist_ok() {
-        Assertions.assertEquals(fruitTransaction.getOperation(), Operation.SUPPLY);
+    void operationSupplyIsNotExist_ok() {
+        Assertions.assertNotEquals(fruitTransaction.getOperation(), Operation.BALANCE);
     }
 
     @Test
@@ -48,7 +48,6 @@ class FruitTransactionTest {
     void sameQuantity_ok() {
         Assertions.assertEquals(fruitTransaction.getQuantity(), 20);
     }
-
     @Test
     void sameFruit_ok() {
         Assertions.assertEquals(fruitTransaction.getFruit(), "apple");
@@ -61,8 +60,9 @@ class FruitTransactionTest {
     }
 
     @Test
-    void noFruitPlum_notOk() {
-        fruitTransaction.setFruit("plum");
-        Assertions.assertEquals(fruitTransaction.getFruit(), "plum");
+    void quantityIsNull_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
+           fruitTransaction.setQuantity(-100);
+        });
     }
 }

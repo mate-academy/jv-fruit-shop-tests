@@ -1,7 +1,6 @@
 package core.basesyntax.service.transaction;
 
 import core.basesyntax.db.Storage;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,10 +19,16 @@ class ReportListFruitImplTest {
     @Test
     void reportListIsWork_ok() {
         Assertions.assertDoesNotThrow(() -> {
-            builder.append(Storage.fruitsDB.entrySet().stream()
-                    .map(key -> key.getKey() + DELIMITER + key.getValue())
-                    .collect(Collectors.joining(System.lineSeparator())));
+            reportListFruit.createReport();
         });
+    }
 
+    @Test
+    void fruitDbKeyIsExist_ok() {
+        Storage.fruitsDB.put("apple", 100);
+        Assertions.assertDoesNotThrow(() -> {
+            Integer apple = Storage.fruitsDB.get("apple");
+            Assertions.assertEquals(apple, 100);
+        });
     }
 }

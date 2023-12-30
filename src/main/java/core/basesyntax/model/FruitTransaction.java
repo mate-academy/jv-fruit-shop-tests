@@ -41,6 +41,10 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        if (quantity >= 0) {
+            this.quantity = quantity;
+        } else {
+            throw new RuntimeException("Can`t negative quantity");
+        }
     }
 }

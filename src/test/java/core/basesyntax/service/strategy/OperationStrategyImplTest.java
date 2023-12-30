@@ -5,9 +5,9 @@ import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandlerImpl;
-import org.junit.jupiter.api.Assertions;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

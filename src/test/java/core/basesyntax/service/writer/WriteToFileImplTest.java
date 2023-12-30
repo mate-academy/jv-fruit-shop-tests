@@ -1,12 +1,11 @@
-package core.basesyntax.service.file_writer;
+package core.basesyntax.service.writer;
 
-import core.basesyntax.service.file_reader.ReaderFile;
-import core.basesyntax.service.file_reader.ReaderFileImpl;
+import core.basesyntax.service.reader.ReaderFile;
+import core.basesyntax.service.reader.ReaderFileImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
-import static org.junit.Assert.assertThrows;
 
 class WriteToFileImplTest {
     private static final String INPUT_FILE = "src/test/resources/input.csv";
@@ -35,10 +34,10 @@ class WriteToFileImplTest {
 
     @Test
     void fileWriteIsExist_notOk() {
-        assertThrows(RuntimeException.class, () -> {
-           String content = "Where is my money Lebovski";
-           String fileName = "notFile.csv";
-           write.writeToFile(fileName, content);
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            String content = "Where is my money Lebovski";
+            String fileName = "notFile.csv";
+            write.writeToFile(fileName, content);
         });
     }
 

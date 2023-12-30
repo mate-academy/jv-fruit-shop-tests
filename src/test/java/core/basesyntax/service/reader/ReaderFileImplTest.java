@@ -1,4 +1,4 @@
-package core.basesyntax.service.file_reader;
+package core.basesyntax.service.reader;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

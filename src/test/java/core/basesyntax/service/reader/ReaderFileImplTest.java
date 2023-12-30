@@ -1,7 +1,7 @@
 package core.basesyntax.service.reader;
 
-import java.io.File;
 import core.basesyntax.model.FruitTransaction;
+import java.io.File;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

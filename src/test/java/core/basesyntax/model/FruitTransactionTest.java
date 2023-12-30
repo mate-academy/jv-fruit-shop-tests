@@ -48,6 +48,7 @@ class FruitTransactionTest {
     void sameQuantity_ok() {
         Assertions.assertEquals(fruitTransaction.getQuantity(), 20);
     }
+
     @Test
     void sameFruit_ok() {
         Assertions.assertEquals(fruitTransaction.getFruit(), "apple");
@@ -62,7 +63,7 @@ class FruitTransactionTest {
     @Test
     void quantityIsNull_notOk() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-           fruitTransaction.setQuantity(-100);
+            fruitTransaction.setQuantity(-100);
         });
     }
 }

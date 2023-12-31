@@ -12,19 +12,20 @@ import org.junit.jupiter.api.Test;
 class PurchaseOperationHandlerImplTest {
     private OperationHandler operationHandler;
     private FruitShopDao fruitShopDao;
+    private FruitTransaction fruitTransaction;
 
     @BeforeEach
     void setUp() {
         Storage.fruitsDB.clear();
         fruitShopDao = new FruitShopDaoImpl();
         operationHandler = new PurchaseOperationHandlerImpl(fruitShopDao);
+        fruitTransaction = new FruitTransaction(Operation.PURCHASE, "apple", 30);
     }
 
     @Test
     void operationPurchaseHavePositiveAmount_ok() {
         Storage.fruitsDB.put("apple", 200);
-        FruitTransaction apple = new FruitTransaction(Operation.PURCHASE, "apple", 30);
-        operationHandler.operation(apple);
+        operationHandler.operation(fruitTransaction);
         int apple1 = fruitShopDao.getQuantity("apple");
         Assertions.assertEquals(170, apple1);
     }
@@ -32,9 +33,11 @@ class PurchaseOperationHandlerImplTest {
     @Test
     void operationPurchaseHaveNegativeAmount_notOk() {
         Storage.fruitsDB.put("banana", 30);
-        FruitTransaction banana = new FruitTransaction(Operation.PURCHASE, "banana", 50);
+        fruitTransaction.setOperation(Operation.PURCHASE);
+        fruitTransaction.setFruit("banana");
+        fruitTransaction.setQuantity(50);
         Assertions.assertThrows(RuntimeException.class, () -> {
-            operationHandler.operation(banana);
+            operationHandler.operation(fruitTransaction);
         });
     }
 }

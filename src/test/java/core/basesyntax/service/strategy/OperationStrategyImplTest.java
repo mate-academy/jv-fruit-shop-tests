@@ -27,7 +27,7 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void operationPurchaseIsExist_ok() {
+    void operationStrategyIsWork_ok() {
         Assertions.assertDoesNotThrow(() -> {
             operationStrategy.getOperationHandler(Operation.PURCHASE);
         });

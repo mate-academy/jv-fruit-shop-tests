@@ -6,14 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportListFruitImplTest {
-    private static final String DELIMITER = ",";
     private ReportListFruit reportListFruit;
-    private StringBuilder builder;
 
     @BeforeEach
     void setUp() {
         reportListFruit = new ReportListFruitImpl();
-        builder = new StringBuilder();
     }
 
     @Test

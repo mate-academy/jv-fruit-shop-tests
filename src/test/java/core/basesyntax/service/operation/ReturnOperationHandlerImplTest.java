@@ -12,19 +12,20 @@ import org.junit.jupiter.api.Test;
 class ReturnOperationHandlerImplTest {
     private OperationHandler operationHandler;
     private FruitShopDao fruitShopDao;
+    private FruitTransaction fruitTransaction;
 
     @BeforeEach
     void setUp() {
         Storage.fruitsDB.clear();
         fruitShopDao = new FruitShopDaoImpl();
         operationHandler = new ReturnOperationHandlerImpl(fruitShopDao);
+        fruitTransaction = new FruitTransaction(Operation.RETURN, "apple", 100);
     }
 
     @Test
     void operationPurchaseHavePositiveAmount_ok() {
         Storage.fruitsDB.put("apple", 30);
-        FruitTransaction apple = new FruitTransaction(Operation.RETURN, "apple", 100);
-        operationHandler.operation(apple);
+        operationHandler.operation(fruitTransaction);
         int apple1 = fruitShopDao.getQuantity("apple");
         Assertions.assertEquals(130, apple1);
     }

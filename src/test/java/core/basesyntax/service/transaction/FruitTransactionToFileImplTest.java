@@ -44,7 +44,7 @@ class FruitTransactionToFileImplTest {
     }
 
     @Test
-    void isWork() {
+    void fruitTransactionsIsWork_ok() {
         Storage.fruitsDB.put("apple", 100);
         Assertions.assertDoesNotThrow(() -> {
             fruitTransactionToFile.processTransaction(fruitTransactions);

@@ -1,35 +1,22 @@
 package core.basesyntax.service.writer;
 
-import core.basesyntax.service.reader.ReaderFile;
-import core.basesyntax.service.reader.ReaderFileImpl;
-import java.io.File;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.transaction.ReportListFruit;
+import core.basesyntax.service.transaction.ReportListFruitImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WriteToFileImplTest {
-    private static final String INPUT_FILE = "src/test/resources/input.csv";
     private static final String OUTPUT_FILE = "src/test/resources/output.csv";
     private WriteToFile write;
-    private ReaderFile readerFile;
-    private File file;
+    private ReportListFruit reportListFruit;
 
     @BeforeEach
     void setUp() {
-        file = new File(INPUT_FILE);
+        Storage.fruitsDB.clear();
         write = new WriteToFileImpl();
-        readerFile = new ReaderFileImpl();
-    }
-
-    @Test
-    void fileIsExist_ok() {
-        Assertions.assertNotNull(file);
-    }
-
-    @Test
-    void fileIsNotEmpty_ok() {
-        String content = String.valueOf(readerFile.readFile(INPUT_FILE));
-        Assertions.assertFalse(content.isEmpty());
+        reportListFruit = new ReportListFruitImpl();
     }
 
     @Test
@@ -42,9 +29,20 @@ class WriteToFileImplTest {
     }
 
     @Test
+    void contentIsEmpty_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            String content = "";
+            String fileName = "output.csv";
+            write.writeToFile(fileName, content);
+        });
+    }
+
+    @Test
     void writeContentToFile() {
+        Storage.fruitsDB.put("apple", 100);
+        Storage.fruitsDB.put("banana", 1000);
         Assertions.assertDoesNotThrow(() -> {
-            String content = "something";
+            String content = reportListFruit.createReport();
             write.writeToFile(OUTPUT_FILE, content);
         });
     }

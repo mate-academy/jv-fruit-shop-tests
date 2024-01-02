@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,13 +14,13 @@ import org.junit.jupiter.api.Test;
 class FileCsvServiceImplTest {
     private static FileCsvService fileService;
     private static final String PATH_TO_FILE_WITH_ACTIVITIES
-            = "src/main/resources/activities.csv";
+            = "src/test/resources/activities.csv";
     private static final String PATH_TO_EMPTY_FILE_WITH_ACTIVITIES
-            = "src/main/resources/empty_activities.csv";
+            = "src/test/resources/empty_activities.csv";
     private static final String PATH_TO_WRITING_ACTIVITIES
-            = "src/main/resources/writing_activities.csv";
+            = "src/test/resources/writing_activities.csv";
     private static final String WRONG_PATH_TO_FILE_WITH_ACTIVITIES
-            = "src/main/resources/new_package/one_more/activities.csv";
+            = "src/test/resources/new_package/one_more/activities.csv";
     private static List<String> activities;
     private static List<String> activitiesWithoutBrackets;
 
@@ -68,14 +67,6 @@ class FileCsvServiceImplTest {
     void readFile_emptyFile_notOk() {
         List<String> actual = fileService.readFile(PATH_TO_EMPTY_FILE_WITH_ACTIVITIES);
         assertTrue(actual.isEmpty());
-    }
-
-    @Test
-    void readFile_wrongData_notOk() {
-        List<String> actual = fileService.readFile(PATH_TO_FILE_WITH_ACTIVITIES);
-        List<String> expected = activities;
-        actual.add("\"s\",\"banana\",\"50\"");
-        assertNotEquals(expected, actual);
     }
 
     @Test

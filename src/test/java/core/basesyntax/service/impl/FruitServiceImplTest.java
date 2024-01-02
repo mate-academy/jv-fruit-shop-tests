@@ -47,13 +47,13 @@ class FruitServiceImplTest {
         transactions.add(new FruitTransaction(Operation.PURCHASE, new Fruit("apple"), 20));
         transactions.add(new FruitTransaction(Operation.PURCHASE, new Fruit("banana"), 5));
         transactions.add(new FruitTransaction(Operation.SUPPLY, new Fruit("banana"), 50));
-        fruitService.processTransactions(transactions);
         mapWithFinalResult = new HashMap<>();
         expectedReportData = new ArrayList<>();
     }
 
     @Test
     void processTransaction_ok() {
+        fruitService.processTransactions(transactions);
         Map<Fruit, Integer> actual = Storage.getFruits();
         mapWithFinalResult.put(new Fruit("banana"), 152);
         mapWithFinalResult.put(new Fruit("apple"), 90);
@@ -63,6 +63,7 @@ class FruitServiceImplTest {
 
     @Test
     void processTransaction_notCorrectExpectedMap_notOk() {
+        fruitService.processTransactions(transactions);
         Map<Fruit, Integer> actual = Storage.getFruits();
         Map<Fruit, Integer> expected = mapWithFinalResult;
         assertNotEquals(expected, actual);
@@ -73,6 +74,7 @@ class FruitServiceImplTest {
 
     @Test
     void createReport_ok() {
+        fruitService.processTransactions(transactions);
         expectedReportData.add("Fruit,Quantity");
         expectedReportData.add("banana,152");
         expectedReportData.add("apple,90");
@@ -83,6 +85,7 @@ class FruitServiceImplTest {
 
     @Test
     void createReport_notCorrectExpectedList_notOk() {
+        fruitService.processTransactions(transactions);
         expectedReportData.clear();
         List<String> actual = fruitService.createReport();
         List<String> expected = expectedReportData;

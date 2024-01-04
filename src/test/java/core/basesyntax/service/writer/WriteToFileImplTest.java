@@ -38,12 +38,25 @@ class WriteToFileImplTest {
     }
 
     @Test
+    void contentIsNull_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () -> {
+           String content = null;
+           String fileName = "output.csv";
+           write.writeToFile(fileName, content);
+        });
+    }
+
+    @Test
     void writeContentToFile() {
         Storage.fruitsDB.put("apple", 100);
         Storage.fruitsDB.put("banana", 1000);
         Assertions.assertDoesNotThrow(() -> {
             String content = reportListFruit.createReport();
             write.writeToFile(OUTPUT_FILE, content);
+            String string = "fruit,quantity\n"
+                        + "banana,1000\n"
+                        + "apple,100";
+            string.equals(OUTPUT_FILE);
         });
     }
 }

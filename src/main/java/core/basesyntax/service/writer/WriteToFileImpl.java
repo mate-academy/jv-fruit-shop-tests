@@ -10,6 +10,9 @@ public class WriteToFileImpl implements WriteToFile {
     public void writeToFile(String fileName, String fruitList) {
         File file = new File(fileName);
         try {
+            if (fruitList.isEmpty()) {
+                throw new RuntimeException("Your fruit list is empty. ");
+            }
             Files.write(file.toPath(), fruitList.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file fruits ", e);

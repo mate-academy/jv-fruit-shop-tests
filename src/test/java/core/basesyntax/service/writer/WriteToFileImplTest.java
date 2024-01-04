@@ -40,9 +40,9 @@ class WriteToFileImplTest {
     @Test
     void contentIsNull_notOk() {
         Assertions.assertThrows(RuntimeException.class, () -> {
-           String content = null;
-           String fileName = "output.csv";
-           write.writeToFile(fileName, content);
+            String content = null;
+            String fileName = "output.csv";
+            write.writeToFile(fileName, content);
         });
     }
 

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +22,7 @@ class CsvWriterTest {
             fruit,quantity
             banana,152
             apple,90
-            watermelon,10
-            """;
+            watermelon,10""";
     private static Writer csvWriter;
     private static Reader csvReader;
 
@@ -35,11 +35,9 @@ class CsvWriterTest {
     @Test
     void write_validData_ok() {
         csvWriter.write(VALID_PATH_TO_REPORT_FILE, VALID_REPORT);
-        List<String> expected;
-        List<String> actual;
-        expected = csvReader.readFile(EXPECTED_VALID_PATH_TO_REPORT_FILE);
-        actual = csvReader.readFile(VALID_PATH_TO_REPORT_FILE);
-        assertIterableEquals(expected, actual);
+        String actual = csvReader.readFile(VALID_PATH_TO_REPORT_FILE).stream()
+                .collect(Collectors.joining(System.lineSeparator()));
+        assertEquals(VALID_REPORT, actual);
     }
 
     @Test

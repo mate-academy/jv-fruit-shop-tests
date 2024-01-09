@@ -1,12 +1,10 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
-import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,7 +33,8 @@ class CsvWriterTest {
     @Test
     void write_validData_ok() {
         csvWriter.write(VALID_PATH_TO_REPORT_FILE, VALID_REPORT);
-        String actual = csvReader.readFile(VALID_PATH_TO_REPORT_FILE).stream()
+        String actual = csvReader.readFile(VALID_PATH_TO_REPORT_FILE)
+                .stream()
                 .collect(Collectors.joining(System.lineSeparator()));
         assertEquals(VALID_REPORT, actual);
     }

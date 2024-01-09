@@ -17,8 +17,6 @@ class CsvReaderTest {
     private static final String WRONG_FORMAT_FILE = "src/test/resources/testFiles/input.txt";
     private static final String INVALID_PATH_TO_INPUT_FILE =
             "src/test/resources/testFiles/awea" + ".csv";
-    private static final String PATH_TO_REPORT_FILE =
-            "src/test/resources/testFiles/report" + ".csv";
     private static Reader csvReader;
 
     @BeforeAll

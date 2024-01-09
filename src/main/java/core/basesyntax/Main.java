@@ -16,12 +16,12 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionMapper;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.operation.BalanceInputOperation;
-import core.basesyntax.service.operation.InputTransaction;
+import core.basesyntax.service.operation.InputOperation;
 import core.basesyntax.service.operation.PurchaseInputOperation;
 import core.basesyntax.service.operation.ReturnInputOperation;
 import core.basesyntax.service.operation.SupplyInputOperation;
-import core.basesyntax.strategy.InputOperationStrategyImpl;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.InputOperationStrategyImpl;
+import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public class Main {
     public static void main(String[] args) {
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         Mapper<FruitTransaction> fruitTransactionMapper = new FruitTransactionMapper();
-        Map<FruitTransaction.Operation, InputTransaction> strategyMap = Map.of(
+        Map<FruitTransaction.Operation, InputOperation> strategyMap = Map.of(
                 FruitTransaction.Operation.BALANCE,
                 new BalanceInputOperation(fruitTransactionDao),
                 FruitTransaction.Operation.SUPPLY,

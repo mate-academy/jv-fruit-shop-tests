@@ -3,7 +3,7 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 
-public class ReturnInputOperation implements InputTransaction {
+public class ReturnInputOperation implements InputOperation {
     private final FruitTransactionDao fruitTransactionDao;
 
     public ReturnInputOperation(FruitTransactionDao fruitTransactionDao) {
@@ -12,10 +12,9 @@ public class ReturnInputOperation implements InputTransaction {
 
     @Override
     public void process(FruitTransaction fruitOperation) {
+        validate(fruitOperation);
         Integer quantity = fruitTransactionDao.get(fruitOperation);
-        if (quantity != null) {
-            fruitOperation.setQuantity(quantity + fruitOperation.getQuantity());
-            fruitTransactionDao.add(fruitOperation);
-        }
+        fruitOperation.setQuantity(quantity + fruitOperation.getQuantity());
+        fruitTransactionDao.add(fruitOperation);
     }
 }

@@ -9,12 +9,12 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.operation.BalanceInputOperation;
-import core.basesyntax.service.operation.InputTransaction;
+import core.basesyntax.service.operation.InputOperation;
 import core.basesyntax.service.operation.PurchaseInputOperation;
 import core.basesyntax.service.operation.ReturnInputOperation;
 import core.basesyntax.service.operation.SupplyInputOperation;
-import core.basesyntax.strategy.InputOperationStrategyImpl;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.InputOperationStrategyImpl;
+import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +85,7 @@ class FruitServiceImplTest {
         assertEquals(expected, runtimeException.getMessage());
     }
 
-    private static Map<FruitTransaction.Operation, InputTransaction> getMapForStragety() {
+    private static Map<FruitTransaction.Operation, InputOperation> getMapForStragety() {
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         return Map.of(
                 FruitTransaction.Operation.BALANCE,

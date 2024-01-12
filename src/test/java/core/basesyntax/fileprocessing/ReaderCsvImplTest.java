@@ -13,6 +13,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReaderCsvImplTest {
+    private static final String PATH_TO_NON_EXISTING_TEST_REPORT =
+            "src/main/resources/readerTestFiles/IDoNotExist.csv";
+    private static final String EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING =
+            "Can't read from file " + PATH_TO_NON_EXISTING_TEST_REPORT;
     private static final String PATH_TO_EMPTY_TEST_REPORT =
             "src/main/resources/readerTestFiles/ReaderCsvImplTestEmptySourceFile.csv";
     private static final String PATH_TO_TEST_REPORT =
@@ -35,18 +39,29 @@ public class ReaderCsvImplTest {
         readerCsvImpl = null;
     }
 
-    /**I think this is a good idea to throw an exception
+    /**
+     * I think this is a good idea to throw an exception
      * on this stage so that the whole programme
      * doesn't run over an empty file. That's why
-     * I'm adding it to the base code*/
+     * I'm adding it to the base code
+     */
+    @Test
+    void readFile_fileNotExist_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> readerCsvImpl.readFile(PATH_TO_NON_EXISTING_TEST_REPORT),
+                EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING);
+    }
+
     @Test
     void readFile_emptyFile_notOk() {
         assertThrows(ReaderEmptyFileException.class,
                 () -> readerCsvImpl.readFile(PATH_TO_EMPTY_TEST_REPORT));
     }
+
     @Test
     void readFile_badData_notOk() {
-        assertNotEquals(WRONG_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES, readerCsvImpl.readFile(PATH_TO_TEST_REPORT));
+        assertNotEquals(WRONG_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES,
+                readerCsvImpl.readFile(PATH_TO_TEST_REPORT));
     }
 
     @Test

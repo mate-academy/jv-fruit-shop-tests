@@ -47,9 +47,9 @@ public class ReaderCsvImplTest {
      */
     @Test
     void readFile_fileNotExist_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> readerCsvImpl.readFile(PATH_TO_NON_EXISTING_TEST_REPORT),
-                EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING);
+        RuntimeException iOException = assertThrows(RuntimeException.class,
+                () -> readerCsvImpl.readFile(PATH_TO_NON_EXISTING_TEST_REPORT));
+        assertEquals(iOException.getMessage(), EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING);
     }
 
     @Test

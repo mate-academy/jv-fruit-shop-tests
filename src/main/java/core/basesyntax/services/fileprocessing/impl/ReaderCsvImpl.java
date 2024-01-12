@@ -1,5 +1,6 @@
 package core.basesyntax.services.fileprocessing.impl;
 
+import core.basesyntax.exceptions.ReaderEmptyFileException;
 import core.basesyntax.services.fileprocessing.Reader;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,6 +19,9 @@ public class ReaderCsvImpl implements Reader {
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + filename, e);
+        }
+        if (rawData.isEmpty()) {
+            throw new ReaderEmptyFileException("No data found in the file. Try again with another file...");
         }
         return rawData;
     }

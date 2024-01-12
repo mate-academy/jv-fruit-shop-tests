@@ -21,10 +21,10 @@ public class ReaderCsvImplTest {
             "src/main/resources/readerTestFiles/ReaderCsvImplTestEmptySourceFile.csv";
     private static final String PATH_TO_TEST_REPORT =
             "src/main/resources/readerTestFiles/ReaderCsvImplTestSourceFile.csv";
-    private static final List<String> NORMAL_EXPECTED_RESULT =
+    private static final List<String> EXPECTED_RESULT =
             List.of("type,fruit,quantity", "b,banana,20", "b,apple,100", "s,banana,100",
                     "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
-    private static final List<String> WRONG_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES =
+    private static final List<String> UNEXPECTED_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES =
             List.of("type,fruit,quantity", "b,banana,100", "b,apple,20", "s,banana,13",
                     "p,banana,100", "r,apple,20", "p,apple,10", "p,banana,50", "s,banana,5");
     private static Reader readerCsvImpl;
@@ -60,13 +60,13 @@ public class ReaderCsvImplTest {
 
     @Test
     void readFile_badData_notOk() {
-        assertNotEquals(WRONG_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES,
+        assertNotEquals(UNEXPECTED_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES,
                 readerCsvImpl.readFile(PATH_TO_TEST_REPORT));
     }
 
     @Test
     void readFile_normalData_Ok() {
         List<String> actualResult = readerCsvImpl.readFile(PATH_TO_TEST_REPORT);
-        assertEquals(NORMAL_EXPECTED_RESULT, actualResult);
+        assertEquals(EXPECTED_RESULT, actualResult);
     }
 }

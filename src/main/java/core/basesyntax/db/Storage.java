@@ -7,6 +7,9 @@ import java.util.Set;
 public class Storage {
     private static final Map<String, Integer> fruits = new HashMap<>();
 
+    public static Map<String, Integer> getFruits() {
+        return fruits;
+    }
     public static Set<Map.Entry<String, Integer>> getFruitsEntrySet() {
         return fruits.entrySet();
     }

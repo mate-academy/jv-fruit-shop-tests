@@ -1,4 +1,4 @@
-package core.basesyntax.fileprocessing;
+package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;

@@ -26,9 +26,8 @@ public class BalanceOperationHandlerTest {
     private static OperationHandler balanceOperationHandler;
 
     @BeforeAll
-    static void fillStorage() {
+    static void initBalanceOperationHandler() {
         balanceOperationHandler = new BalanceOperationHandler();
-
     }
 
     @AfterAll

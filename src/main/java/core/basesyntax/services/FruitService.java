@@ -45,8 +45,8 @@ public class FruitService {
         transactionGetter = new TransactionGetterImpl();
         fruitTransactionParser = new FruitTransactionParserImpl();
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        writer = new WriterImpl();
         reportGenerator = new ReportGeneratorImpl();
+        writer = new WriterImpl();
     }
 
     public static void processReport() {

@@ -23,7 +23,7 @@ public class BalanceOperationHandlerTest {
             new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", -1);
     private static final String EXPECTED_EXCEPTION_MESSAGE =
             "Balance operation value for banana should've been positive but was -1";
-    private static BalanceOperationHandler balanceOperationHandler;
+    private static OperationHandler balanceOperationHandler;
 
     @BeforeAll
     static void fillStorage() {

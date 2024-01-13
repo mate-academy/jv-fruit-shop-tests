@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class TransactionGetterImplTest {
+    private static TransactionGetter transactionGetter;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -41,7 +42,6 @@ public class TransactionGetterImplTest {
                     new String[] {"s", "banana", "forty"}, new String[] {"p", "banana", "fifty"},
                     new String[] {"r", "banana", "sixty"}, new String[] {"s", "apple", "seventy"},
                     new String[] {"p", "apple", "eighty"}, new String[] {"r", "apple", "ninety"});
-    private static TransactionGetter transactionGetter;
 
     @BeforeAll
     static void initDataSplitter() {

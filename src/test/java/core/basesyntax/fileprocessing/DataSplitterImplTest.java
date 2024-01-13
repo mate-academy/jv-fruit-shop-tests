@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataSplitterImplTest {
+    private static DataSplitter dataSplitter;
     private static final List<String> RAW_DATA =
             List.of("type,fruit,quantity", "b,banana,20", "b,apple,100", "s,banana,100",
                     "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
@@ -27,7 +28,6 @@ public class DataSplitterImplTest {
                     new String[] {"s", "banana", "13"}, new String[] {"p", "banana", "100"},
                     new String[] {"r", "apple", "20"}, new String[] {"p", "apple", "10"},
                     new String[] {"p", "banana", "50"}, new String[] {"s", "banana", "5"});
-    private static DataSplitter dataSplitter;
 
     @BeforeAll
     static void initDataSplitter() {

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReaderCsvImplTest {
+    private static Reader readerCsvImpl;
     private static final String PATH_TO_NON_EXISTING_TEST_REPORT =
             "src/main/resources/readerTestFiles/IDoNotExist.csv";
     private static final String EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING =
@@ -27,7 +28,6 @@ public class ReaderCsvImplTest {
     private static final List<String> UNEXPECTED_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES =
             List.of("type,fruit,quantity", "b,banana,100", "b,apple,20", "s,banana,13",
                     "p,banana,100", "r,apple,20", "p,apple,10", "p,banana,50", "s,banana,5");
-    private static Reader readerCsvImpl;
 
     @BeforeAll
     static void initReader() {

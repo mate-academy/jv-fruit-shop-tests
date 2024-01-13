@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.services.fileprocessing.DataSplitter;
 import core.basesyntax.services.fileprocessing.impl.DataSplitterImpl;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;

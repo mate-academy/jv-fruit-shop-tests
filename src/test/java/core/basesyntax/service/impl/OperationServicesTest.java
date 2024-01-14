@@ -15,13 +15,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class OperationServicesTest {
+    private static final int FRUIT_QUANTITY = 40;
+    private static final String FRUIT_TYPE = "banana";
+    private static final String UNKNOWN_FRUIT_TYPE = "potato";
     private static OperationService balanceService;
     private static OperationService purchaseService;
     private static OperationService returnService;
     private static OperationService supplyService;
     private static FruitTransaction transaction;
-    private static final String FRUIT_TYPE = "banana";
-    private static final int FRUIT_QUANTITY = 40;
 
     @BeforeAll
     static void beforeAll() {
@@ -73,10 +74,10 @@ class OperationServicesTest {
 
     @Test
     void processOperation_purchaseMoreThanStored_NotOk() {
-        int quantityPurchased = 100;
+        int beyondQuantityPurchased = 100;
         FruitDB.getFruitDataBase().put(FRUIT_TYPE, FRUIT_QUANTITY);
         transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE.getCode(),
-                FRUIT_TYPE, quantityPurchased);
+                FRUIT_TYPE, beyondQuantityPurchased);
 
         assertThrows(RuntimeException.class, () -> purchaseService.processOperation(transaction));
     }
@@ -96,10 +97,9 @@ class OperationServicesTest {
 
     @Test
     void processOperation_returnUnknownFruit_notOk() {
-        String unknownFruitType = "potato";
         FruitDB.getFruitDataBase().put(FRUIT_TYPE, FRUIT_QUANTITY);
         transaction = new FruitTransaction(FruitTransaction.Operation.RETURN.getCode(),
-                unknownFruitType, FRUIT_QUANTITY);
+                UNKNOWN_FRUIT_TYPE, FRUIT_QUANTITY);
 
         assertThrows(RuntimeException.class, () -> returnService.processOperation(transaction));
     }

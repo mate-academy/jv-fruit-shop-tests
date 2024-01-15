@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.Constants;
 import core.basesyntax.services.handlers.impl.SupplyOperationHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 
 public class SupplyOperationHandlerTest {
     private static final FruitTransaction ORANGE_FRUITTRANSACTION =

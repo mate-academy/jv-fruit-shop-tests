@@ -3,10 +3,10 @@ package core.basesyntax.services.fileprocessing;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.services.Constants;
 import core.basesyntax.services.fileprocessing.impl.ReportGeneratorImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 
 /**
  * Since it is not possible to be sure of the order of the elements in the Storage hashmap,

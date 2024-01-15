@@ -7,10 +7,10 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.Constants;
 import core.basesyntax.services.handlers.impl.ReturnOperationHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 
 public class ReturnOperationHandlerTest {
     private static final FruitTransaction ORANGE_FRUITTRANSACTION =

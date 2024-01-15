@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.Constants;
 import core.basesyntax.services.handlers.impl.BalanceOperationHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 
 public class BalanceOperationHandlerTest {
     private static final FruitTransaction ORANGE_FRUITTRANSACTION =

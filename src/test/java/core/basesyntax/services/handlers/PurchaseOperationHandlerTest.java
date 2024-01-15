@@ -8,10 +8,10 @@ import core.basesyntax.exceptions.NegativeResultException;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.Constants;
 import core.basesyntax.services.handlers.impl.PurchaseOperationHandler;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 
 public class PurchaseOperationHandlerTest {
     private static final int EXPECTED_RESULT_QUANTITY_OF_ORANGE = 90;

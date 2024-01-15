@@ -15,7 +15,6 @@ public class WriterImpl implements Writer {
             DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
     private static final String REPORT_TIME = " report for " + FORMATTER.format(LocalDateTime.now());
     private static final String FILE_PATH = "src/main/resources/";
-    private static final int fileCounter = 1;
 
     /**
      * I ran into a situation where I can't generate many reports for different files

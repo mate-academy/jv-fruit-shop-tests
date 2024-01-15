@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.exceptions.ReaderEmptyFileException;
 import core.basesyntax.services.fileprocessing.impl.ReaderCsvImpl;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -33,11 +32,6 @@ public class ReaderCsvImplTest {
         readerCsvImpl = new ReaderCsvImpl();
     }
 
-    @AfterAll
-    static void closeReader() {
-        readerCsvImpl = null;
-    }
-
     /**
      * I think this is a good idea to throw an exception
      * on this stage so that the whole programme
@@ -46,9 +40,9 @@ public class ReaderCsvImplTest {
      */
     @Test
     void readFile_fileNotExist_notOk() {
-        RuntimeException iOException = assertThrows(RuntimeException.class,
+        RuntimeException ioexception = assertThrows(RuntimeException.class,
                 () -> readerCsvImpl.readFile(PATH_TO_NON_EXISTING_TEST_REPORT));
-        assertEquals(iOException.getMessage(), EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING);
+        assertEquals(ioexception.getMessage(), EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING);
     }
 
     @Test

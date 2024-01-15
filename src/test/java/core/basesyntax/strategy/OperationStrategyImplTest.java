@@ -10,7 +10,6 @@ import core.basesyntax.services.handlers.impl.PurchaseOperationHandler;
 import core.basesyntax.services.handlers.impl.ReturnOperationHandler;
 import core.basesyntax.services.handlers.impl.SupplyOperationHandler;
 import java.util.Map;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -27,23 +26,27 @@ public class OperationStrategyImplTest {
         operationStrategyImpl = new OperationStrategyImpl(operationHandlerMap);
     }
 
-    @AfterAll
-    static void closeStrategy() {
-        operationStrategyImpl = null;
+    @Test
+    void get_badRequests_Ok() {
+        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.BALANCE)
+                instanceof PurchaseOperationHandler);
+        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.PURCHASE)
+                instanceof ReturnOperationHandler);
+        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.RETURN)
+                instanceof SupplyOperationHandler);
+        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.SUPPLY)
+                instanceof BalanceOperationHandler);
     }
 
     @Test
-    void get_badRequests_Ok() {
-        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.BALANCE) instanceof PurchaseOperationHandler);
-        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.PURCHASE) instanceof ReturnOperationHandler);
-        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.RETURN) instanceof SupplyOperationHandler);
-        assertFalse(operationStrategyImpl.get(FruitTransaction.Operation.SUPPLY) instanceof BalanceOperationHandler);
-    }
-    @Test
     void get_normalRequests_Ok() {
-        assertInstanceOf(BalanceOperationHandler.class, operationStrategyImpl.get(FruitTransaction.Operation.BALANCE));
-        assertInstanceOf(PurchaseOperationHandler.class, operationStrategyImpl.get(FruitTransaction.Operation.PURCHASE));
-        assertInstanceOf(ReturnOperationHandler.class, operationStrategyImpl.get(FruitTransaction.Operation.RETURN));
-        assertInstanceOf(SupplyOperationHandler.class, operationStrategyImpl.get(FruitTransaction.Operation.SUPPLY));
+        assertInstanceOf(BalanceOperationHandler.class,
+                operationStrategyImpl.get(FruitTransaction.Operation.BALANCE));
+        assertInstanceOf(PurchaseOperationHandler.class,
+                operationStrategyImpl.get(FruitTransaction.Operation.PURCHASE));
+        assertInstanceOf(ReturnOperationHandler.class,
+                operationStrategyImpl.get(FruitTransaction.Operation.RETURN));
+        assertInstanceOf(SupplyOperationHandler.class,
+                operationStrategyImpl.get(FruitTransaction.Operation.SUPPLY));
     }
 }

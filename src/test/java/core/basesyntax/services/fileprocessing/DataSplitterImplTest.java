@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.services.fileprocessing.impl.DataSplitterImpl;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -33,11 +32,6 @@ public class DataSplitterImplTest {
         dataSplitter = new DataSplitterImpl();
     }
 
-    @AfterAll
-    static void closeDataSplitter() {
-        dataSplitter = null;
-    }
-
     @Test
     void divideData_skips1line_Ok() {
         List<String[]> actualResult = dataSplitter.divideData(RAW_DATA);
@@ -61,7 +55,7 @@ public class DataSplitterImplTest {
     private boolean assertListEquals(List<String[]> expectedResult, List<String[]> actualResult) {
         for (int arrayPointer = 0; arrayPointer < expectedResult.size(); arrayPointer++) {
             for (int stringPointer = 0; stringPointer < expectedResult.get(arrayPointer).length;
-                 stringPointer++) {
+                    stringPointer++) {
                 if (!expectedResult.get(arrayPointer)[stringPointer].equals(
                         actualResult.get(arrayPointer)[stringPointer])) {
                     return false;

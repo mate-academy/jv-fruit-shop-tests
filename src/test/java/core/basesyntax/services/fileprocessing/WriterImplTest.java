@@ -1,17 +1,24 @@
 package core.basesyntax.services.fileprocessing;
 
-import static core.basesyntax.services.Constants.FILE_PATH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.services.fileprocessing.impl.ReaderCsvImpl;
 import core.basesyntax.services.fileprocessing.impl.WriterImpl;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
+import java.util.Locale;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WriterImplTest {
-    private static final String FILE_NAME = "Test file";
+    private static final String TEST_FILE_NAME = "Test";
+    private static final String DATE_TIME_PATTERN = "dd.MM.yy HH-mm";
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
+    private static final String REPORT_TIME = " report for "
+            + FORMATTER.format(LocalDateTime.now());
+    public static final String FILE_PATH = "src/main/resources/" + TEST_FILE_NAME + REPORT_TIME;
     private static final String EXPECTED_INITIAL_LINE = "fruit,quantity";
     private static final String EXPECTED_APPLE_LINE = "apple,10";
     private static final String EXPECTED_BANANA_LINE = "banana,20";
@@ -25,20 +32,14 @@ public class WriterImplTest {
     private static Reader readerCsvImpl;
 
     @BeforeAll
-    static void initFileWriter() {
+    static void initObjects() {
         writerImpl = new WriterImpl();
         readerCsvImpl = new ReaderCsvImpl();
     }
 
-    @AfterAll
-    static void closeFileWriter() {
-        writerImpl = null;
-        readerCsvImpl = null;
-    }
-
     @Test
     void writeToFile_thenRetrieveNormalData_Ok() {
-        writerImpl.writeToFile(FILE_NAME, BUILDER_FOR_WRITER);
+        writerImpl.writeToFile(TEST_FILE_NAME, BUILDER_FOR_WRITER);
         List<String> listFromReader = readerCsvImpl.readFile(FILE_PATH);
         StringBuilder builderFromList = appendListElementsToBuilder(listFromReader);
         assertEquals(BUILDER_FOR_WRITER.toString(), builderFromList.toString());

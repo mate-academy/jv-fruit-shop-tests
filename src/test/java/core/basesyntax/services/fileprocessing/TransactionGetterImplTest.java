@@ -9,7 +9,6 @@ import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.fileprocessing.impl.TransactionGetterImpl;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -45,11 +44,6 @@ public class TransactionGetterImplTest {
     @BeforeAll
     static void initDataSplitter() {
         transactionGetter = new TransactionGetterImpl();
-    }
-
-    @AfterAll
-    static void closeDataSplitter() {
-        transactionGetter = null;
     }
 
     @Test
@@ -102,9 +96,9 @@ public class TransactionGetterImplTest {
     private boolean assertListEquals(List<FruitTransaction> expectedResult,
                                      List<FruitTransaction> actualResult) {
         for (int i = 0; i < expectedResult.size(); i++) {
-            if (!expectedResult.get(i).getOperation().equals(actualResult.get(i).getOperation()) ||
-                    !expectedResult.get(i).getFruit().equals(actualResult.get(i).getFruit()) ||
-                    expectedResult.get(i).getQuantity() != actualResult.get(i).getQuantity()) {
+            if (!expectedResult.get(i).getOperation().equals(actualResult.get(i).getOperation())
+                    || !expectedResult.get(i).getFruit().equals(actualResult.get(i).getFruit())
+                    || expectedResult.get(i).getQuantity() != actualResult.get(i).getQuantity()) {
                 return false;
             }
         }

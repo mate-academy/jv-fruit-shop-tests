@@ -1,11 +1,10 @@
 package core.basesyntax.services.fileprocessing;
 
-import static core.basesyntax.services.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.services.Constants;
 import core.basesyntax.services.fileprocessing.impl.ReportGeneratorImpl;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -27,14 +26,9 @@ public class ReportGeneratorImplTest {
     @BeforeAll
     static void initReportGeneratorImpl() {
         reportGeneratorImpl = new ReportGeneratorImpl();
-        Storage.updateFruit(APPLE, APPLE_QUANTITY);
-        Storage.updateFruit(ORANGE, ORANGE_QUANTITY);
-        Storage.updateFruit(BANANA, BANANA_QUANTITY);
-    }
-
-    @AfterAll
-    static void closeReportGeneratorImpl() {
-        reportGeneratorImpl = null;
+        Storage.updateFruit(Constants.APPLE, APPLE_QUANTITY);
+        Storage.updateFruit(Constants.ORANGE, ORANGE_QUANTITY);
+        Storage.updateFruit(Constants.BANANA, BANANA_QUANTITY);
     }
 
     @Test

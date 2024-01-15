@@ -7,6 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.impl.SupplyOperationHandler;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.Constants;
@@ -34,6 +35,11 @@ public class SupplyOperationHandlerTest {
         Storage.updateFruit(Constants.ORANGE, Constants.INITIAL_QUANTITY_OF_ORANGE);
         Storage.updateFruit(Constants.APPLE, Constants.INITIAL_QUANTITY_OF_APPLE);
         Storage.updateFruit(Constants.BANANA, Constants.INITIAL_QUANTITY_OF_BANANA);
+    }
+
+    @AfterAll
+    static void clearStorage() {
+        Storage.getFruits().clear();
     }
 
     @Test

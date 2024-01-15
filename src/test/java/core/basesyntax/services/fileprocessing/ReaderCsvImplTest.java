@@ -21,11 +21,25 @@ public class ReaderCsvImplTest {
     private static final String PATH_TO_TEST_REPORT =
             "src/main/resources/readerTestFiles/ReaderCsvImplTestSourceFile.csv";
     private static final List<String> EXPECTED_RESULT =
-            List.of("type,fruit,quantity", "b,banana,20", "b,apple,100", "s,banana,100",
-                    "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
+            List.of("type,fruit,quantity",
+                    "b,banana,20",
+                    "b,apple,100",
+                    "s,banana,100",
+                    "p,banana,13",
+                    "r,apple,10",
+                    "p,apple,20",
+                    "p,banana,5",
+                    "s,banana,50");
     private static final List<String> UNEXPECTED_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES =
-            List.of("type,fruit,quantity", "b,banana,100", "b,apple,20", "s,banana,13",
-                    "p,banana,100", "r,apple,20", "p,apple,10", "p,banana,50", "s,banana,5");
+            List.of("type,fruit,quantity",
+                    "b,banana,100",
+                    "b,apple,20",
+                    "s,banana,13",
+                    "p,banana,100",
+                    "r,apple,20",
+                    "p,apple,10",
+                    "p,banana,50",
+                    "s,banana,5");
 
     @BeforeAll
     static void initReader() {

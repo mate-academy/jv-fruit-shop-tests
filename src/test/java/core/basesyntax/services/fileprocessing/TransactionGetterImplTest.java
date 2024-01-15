@@ -19,30 +19,45 @@ public class TransactionGetterImplTest {
     private static final int QUANTITY_INDEX = 2;
     private static final String EXPECTED_EXCEPTION_MESSAGE = "Can't parse integer for argument";
     private static final List<String[]> NORMAL_TEST_DATA =
-            List.of(new String[] {"b", "banana", "20"}, new String[] {"b", "apple", "100"},
-                    new String[] {"s", "banana", "100"}, new String[] {"p", "banana", "13"},
-                    new String[] {"r", "banana", "10"}, new String[] {"s", "apple", "20"},
-                    new String[] {"p", "apple", "5"}, new String[] {"r", "apple", "5"});
+            List.of(new String[] {"b", "banana", "20"},
+                    new String[] {"b", "apple", "100"},
+                    new String[] {"s", "banana", "100"},
+                    new String[] {"p", "banana", "13"},
+                    new String[] {"r", "banana", "10"},
+                    new String[] {"s", "apple", "20"},
+                    new String[] {"p", "apple", "5"},
+                    new String[] {"r", "apple", "5"});
 
     private static final List<String[]> ANOTHER_NORMAL_TEST_DATA =
-            List.of(new String[] {"b", "banana", "100"}, new String[] {"b", "apple", "20"},
-                    new String[] {"s", "banana", "13"}, new String[] {"p", "banana", "100"},
-                    new String[] {"r", "apple", "20"}, new String[] {"s", "apple", "10"},
-                    new String[] {"p", "banana", "5"}, new String[] {"r", "apple", "5"});
+            List.of(new String[] {"b", "banana", "100"},
+                    new String[] {"b", "apple", "20"},
+                    new String[] {"s", "banana", "13"},
+                    new String[] {"p", "banana", "100"},
+                    new String[] {"r", "apple", "20"},
+                    new String[] {"s", "apple", "10"},
+                    new String[] {"p", "banana", "5"},
+                    new String[] {"r", "apple", "5"});
     private static final List<String[]> BAD_OPERATIONS =
-            List.of(new String[] {"b", "banana", "20"}, new String[] {"q", "apple", "100"},
-                    new String[] {"w", "banana", "100"}, new String[] {"e", "banana", "13"},
-                    new String[] {"r", "banana", "10"}, new String[] {"t", "apple", "20"},
+            List.of(new String[] {"b", "banana", "20"},
+                    new String[] {"q", "apple", "100"},
+                    new String[] {"w", "banana", "100"},
+                    new String[] {"e", "banana", "13"},
+                    new String[] {"r", "banana", "10"},
+                    new String[] {"t", "apple", "20"},
                     new String[] {"y", "apple", "5"});
 
     private static final List<String[]> BAD_INTEGERS =
-            List.of(new String[] {"b", "banana", "twenty"}, new String[] {"b", "apple", "thirty"},
-                    new String[] {"s", "banana", "forty"}, new String[] {"p", "banana", "fifty"},
-                    new String[] {"r", "banana", "sixty"}, new String[] {"s", "apple", "seventy"},
-                    new String[] {"p", "apple", "eighty"}, new String[] {"r", "apple", "ninety"});
+            List.of(new String[] {"b", "banana", "twenty"},
+                    new String[] {"b", "apple", "thirty"},
+                    new String[] {"s", "banana", "forty"},
+                    new String[] {"p", "banana", "fifty"},
+                    new String[] {"r", "banana", "sixty"},
+                    new String[] {"s", "apple", "seventy"},
+                    new String[] {"p", "apple", "eighty"},
+                    new String[] {"r", "apple", "ninety"});
 
     @BeforeAll
-    static void initDataSplitter() {
+    static void initTransactionGetter() {
         transactionGetter = new TransactionGetterImpl();
     }
 

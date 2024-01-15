@@ -8,6 +8,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.impl.BalanceOperationHandler;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.Constants;
@@ -32,6 +33,11 @@ public class BalanceOperationHandlerTest {
     @BeforeAll
     static void initBalanceOperationHandler() {
         balanceOperationHandler = new BalanceOperationHandler();
+    }
+
+    @AfterAll
+    static void clearStorage() {
+        Storage.getFruits().clear();
     }
 
     @Test

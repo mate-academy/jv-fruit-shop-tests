@@ -12,20 +12,35 @@ import org.junit.jupiter.api.Test;
 public class DataSplitterImplTest {
     private static DataSplitter dataSplitter;
     private static final List<String> RAW_DATA =
-            List.of("type,fruit,quantity", "b,banana,20", "b,apple,100", "s,banana,100",
-                    "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
+            List.of("type,fruit,quantity",
+                    "b,banana,20",
+                    "b,apple,100",
+                    "s,banana,100",
+                    "p,banana,13",
+                    "r,apple,10",
+                    "p,apple,20",
+                    "p,banana,5",
+                    "s,banana,50");
     private static final String[] OFFSET_DATA = new String[] {"type", "fruit", "quantity"};
 
     private static final List<String[]> EXPECTED_RESULT =
-            List.of(new String[] {"b", "banana", "20"}, new String[] {"b", "apple", "100"},
-                    new String[] {"s", "banana", "100"}, new String[] {"p", "banana", "13"},
-                    new String[] {"r", "apple", "10"}, new String[] {"p", "apple", "20"},
-                    new String[] {"p", "banana", "5"}, new String[] {"s", "banana", "50"});
+            List.of(new String[] {"b", "banana", "20"},
+                    new String[] {"b", "apple", "100"},
+                    new String[] {"s", "banana", "100"},
+                    new String[] {"p", "banana", "13"},
+                    new String[] {"r", "apple", "10"},
+                    new String[] {"p", "apple", "20"},
+                    new String[] {"p", "banana", "5"},
+                    new String[] {"s", "banana", "50"});
     private static final List<String[]> UNEXPECTED_RESULT_SWAPPED_NUMBERS_BY_TWO_LINES =
-            List.of(new String[] {"b", "banana", "100"}, new String[] {"b", "apple", "20"},
-                    new String[] {"s", "banana", "13"}, new String[] {"p", "banana", "100"},
-                    new String[] {"r", "apple", "20"}, new String[] {"p", "apple", "10"},
-                    new String[] {"p", "banana", "50"}, new String[] {"s", "banana", "5"});
+            List.of(new String[] {"b", "banana", "100"},
+                    new String[] {"b", "apple", "20"},
+                    new String[] {"s", "banana", "13"},
+                    new String[] {"p", "banana", "100"},
+                    new String[] {"r", "apple", "20"},
+                    new String[] {"p", "apple", "10"},
+                    new String[] {"p", "banana", "50"},
+                    new String[] {"s", "banana", "5"});
 
     @BeforeAll
     static void initDataSplitter() {

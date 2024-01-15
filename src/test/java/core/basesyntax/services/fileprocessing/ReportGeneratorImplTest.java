@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.services.fileprocessing.impl.ReportGeneratorImpl;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.Constants;
@@ -24,11 +25,16 @@ public class ReportGeneratorImplTest {
     private static ReportGenerator reportGeneratorImpl;
 
     @BeforeAll
-    static void initReportGeneratorImpl() {
+    static void initTestClass() {
         reportGeneratorImpl = new ReportGeneratorImpl();
         Storage.updateFruit(Constants.APPLE, APPLE_QUANTITY);
         Storage.updateFruit(Constants.ORANGE, ORANGE_QUANTITY);
         Storage.updateFruit(Constants.BANANA, BANANA_QUANTITY);
+    }
+
+    @AfterAll
+    static void clearStorage() {
+        Storage.getFruits().clear();
     }
 
     @Test

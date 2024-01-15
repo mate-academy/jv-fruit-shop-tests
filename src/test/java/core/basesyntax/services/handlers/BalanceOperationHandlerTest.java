@@ -6,18 +6,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.impl.BalanceOperationHandler;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
+    public static final FruitTransaction ORANGE_FRUITTRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.ORANGE, 10);
+    public static final FruitTransaction APPLE_FRUITTRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.APPLE, 10);
+    public static final FruitTransaction BANANA_FRUITTRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.BANANA, 10);
+    public static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.BANANA, -1);
     private static final int EXPECTED_QUANTITY_OF_ORANGE = 10;
     private static final int EXPECTED_QUANTITY_OF_APPLE = 10;
     private static final int EXPECTED_QUANTITY_OF_BANANA = 10;
     private static final String EXPECTED_EXCEPTION_MESSAGE =
             "Balance operation value for banana should've been positive but was " +
-                    Constants.BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY.getQuantity();
+                    BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY.getQuantity();
     private static OperationHandler balanceOperationHandler;
 
     @BeforeAll
@@ -35,15 +44,15 @@ public class BalanceOperationHandlerTest {
         RuntimeException negativeValueForOperationException =
                 assertThrows(NegativeValueForOperationException.class,
                         () -> balanceOperationHandler.handleOperation(
-                                Constants.BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY));
+                                BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY));
         assertEquals(negativeValueForOperationException.getMessage(), EXPECTED_EXCEPTION_MESSAGE);
     }
 
     @Test
     void handleOperation_retrieveGoodDataAfterFunction_Ok() {
-        balanceOperationHandler.handleOperation(Constants.ORANGE_FRUITTRANSACTION);
-        balanceOperationHandler.handleOperation(Constants.APPLE_FRUITTRANSACTION);
-        balanceOperationHandler.handleOperation(Constants.BANANA_FRUITTRANSACTION);
+        balanceOperationHandler.handleOperation(ORANGE_FRUITTRANSACTION);
+        balanceOperationHandler.handleOperation(APPLE_FRUITTRANSACTION);
+        balanceOperationHandler.handleOperation(BANANA_FRUITTRANSACTION);
         assertTrue(Storage.getFruits().containsKey(Constants.ORANGE));
         assertTrue(Storage.getFruits().containsKey(Constants.APPLE));
         assertTrue(Storage.getFruits().containsKey(Constants.BANANA));

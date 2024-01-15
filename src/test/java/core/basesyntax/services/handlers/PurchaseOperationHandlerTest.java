@@ -16,11 +16,19 @@ public class PurchaseOperationHandlerTest {
     public static final int EXPECTED_RESULT_QUANTITY_OF_ORANGE = 90;
     public static final int EXPECTED_RESULT_QUANTITY_OF_APPLE = 90;
     public static final int EXPECTED_RESULT_QUANTITY_OF_BANANA = 90;
+    public static final FruitTransaction ORANGE_FRUITTRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.ORANGE, 10);
+    public static final FruitTransaction APPLE_FRUITTRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.APPLE, 10);
+    public static final FruitTransaction BANANA_FRUITTRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, 10);
+    public static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, -1);
     private static final FruitTransaction PURCHASE_WITH_NEGATIVE_RESULT =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, 1000);
     private static final String EXPECTED_EXCEPTION_MESSAGE_NEGATIVE_NUMBER_PURCHASE =
             "Purchase operation value for banana should've been positive but was " +
-                    Constants.BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY.getQuantity();
+                    BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY.getQuantity();
     private static final String EXPECTED_EXCEPTION_MESSAGE_BUY_MORE_THAN_HAVE =
             "Insufficient stock for purchase: Requested " +
                     PURCHASE_WITH_NEGATIVE_RESULT.getQuantity() + " but only " +
@@ -46,7 +54,7 @@ public class PurchaseOperationHandlerTest {
         RuntimeException negativeValueForOperationException =
                 assertThrows(NegativeValueForOperationException.class,
                         () -> purchaseOperationHandler.handleOperation(
-                                Constants.BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY));
+                                BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY));
         assertEquals(negativeValueForOperationException.getMessage(),
                 EXPECTED_EXCEPTION_MESSAGE_NEGATIVE_NUMBER_PURCHASE);
     }
@@ -61,9 +69,9 @@ public class PurchaseOperationHandlerTest {
 
     @Test
     void handleOperation_goodTransactions_Ok() {
-        purchaseOperationHandler.handleOperation(Constants.ORANGE_FRUITTRANSACTION);
-        purchaseOperationHandler.handleOperation(Constants.APPLE_FRUITTRANSACTION);
-        purchaseOperationHandler.handleOperation(Constants.BANANA_FRUITTRANSACTION);
+        purchaseOperationHandler.handleOperation(ORANGE_FRUITTRANSACTION);
+        purchaseOperationHandler.handleOperation(APPLE_FRUITTRANSACTION);
+        purchaseOperationHandler.handleOperation(BANANA_FRUITTRANSACTION);
         assertEquals(EXPECTED_RESULT_QUANTITY_OF_ORANGE, Storage.getFruits().get(Constants.ORANGE));
         assertEquals(EXPECTED_RESULT_QUANTITY_OF_APPLE, Storage.getFruits().get(Constants.APPLE));
         assertEquals(EXPECTED_RESULT_QUANTITY_OF_BANANA, Storage.getFruits().get(Constants.BANANA));

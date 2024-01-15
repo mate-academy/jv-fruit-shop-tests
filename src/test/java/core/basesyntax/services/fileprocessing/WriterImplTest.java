@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WriterImplTest {
+    private static final String FILE_NAME = "Test file";
     private static final String EXPECTED_INITIAL_LINE = "fruit,quantity";
     private static final String EXPECTED_APPLE_LINE = "apple,10";
     private static final String EXPECTED_BANANA_LINE = "banana,20";
@@ -37,7 +38,7 @@ public class WriterImplTest {
 
     @Test
     void writeToFile_thenRetrieveNormalData_Ok() {
-        writerImpl.writeToFile(BUILDER_FOR_WRITER);
+        writerImpl.writeToFile(FILE_NAME, BUILDER_FOR_WRITER);
         List<String> listFromReader = readerCsvImpl.readFile(FILE_PATH);
         StringBuilder builderFromList = appendListElementsToBuilder(listFromReader);
         assertEquals(BUILDER_FOR_WRITER.toString(), builderFromList.toString());

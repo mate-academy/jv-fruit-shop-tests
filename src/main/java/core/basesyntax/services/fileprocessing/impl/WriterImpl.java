@@ -13,13 +13,18 @@ public class WriterImpl implements Writer {
     private static final String DATE_TIME_PATTERN = "dd.MM.yy HH-mm";
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
-    private static final String REPORT_NAME = "REPORT FOR " + FORMATTER.format(LocalDateTime.now());
-    private static final String FILE_PATH = "src/main/resources/" + REPORT_NAME;
-    private static String currentReportName = FILE_PATH;
-    private static int fileCounter = 1;
+    private static final String REPORT_TIME = " report for " + FORMATTER.format(LocalDateTime.now());
+    private static final String FILE_PATH = "src/main/resources/";
+    private static final int fileCounter = 1;
 
+    /**
+     * I ran into a situation where I can't generate many reports for different files
+     * and not destroy the ones finished if done within 1 minute. Therefore, I added
+     * @param fileName to be able to avoid this
+     */
     @Override
-    public void writeToFile(StringBuilder stringBuilder) {
+    public void writeToFile(String fileName, StringBuilder stringBuilder) {
+        String currentReportName = FILE_PATH + fileName + REPORT_TIME;
         File currentReport = new File(currentReportName);
         if (!currentReport.exists()) {
             try (BufferedWriter bufferedWriter = new BufferedWriter(
@@ -28,10 +33,6 @@ public class WriterImpl implements Writer {
             } catch (IOException e) {
                 throw new RuntimeException("Can't write to file " + currentReportName, e);
             }
-        } else {
-            currentReportName = FILE_PATH + " (" + fileCounter + ")";
-            fileCounter++;
-            writeToFile(stringBuilder);
         }
     }
 }

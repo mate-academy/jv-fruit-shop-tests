@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitService {
-    private static final String PATH_TO_RAW_REPORT = "src/main/resources/SampleSourceCSV.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
             Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                     FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
@@ -38,7 +37,7 @@ public class FruitService {
     private static Writer writer;
     private static ReportGenerator reportGenerator;
 
-    public static void initVars() {
+    public static void initVars(String PATH_TO_RAW_REPORT) {
         Reader reader = new ReaderCsvImpl();
         rawData = reader.readFile(PATH_TO_RAW_REPORT);
         dataSplitter = new DataSplitterImpl();
@@ -49,10 +48,10 @@ public class FruitService {
         writer = new WriterImpl();
     }
 
-    public static void processReport() {
+    public static void processReport(String fileName) {
         fruitTransactionParser.runOperationsOverFruit(
                 transactionGetter.getTransactionsData(dataSplitter.divideData(rawData)),
                 operationStrategy);
-        writer.writeToFile(reportGenerator.generateReport(Storage.getFruitsEntrySet()));
+        writer.writeToFile(fileName, reportGenerator.generateReport(Storage.getFruitsEntrySet()));
     }
 }

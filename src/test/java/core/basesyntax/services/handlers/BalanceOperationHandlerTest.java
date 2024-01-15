@@ -1,5 +1,6 @@
 package core.basesyntax.services.handlers;
 
+import static core.basesyntax.services.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,13 +15,13 @@ import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
     private static final FruitTransaction ORANGE_FRUITTRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.ORANGE, 10);
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, ORANGE, 10);
     private static final FruitTransaction APPLE_FRUITTRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.APPLE, 10);
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 10);
     private static final FruitTransaction BANANA_FRUITTRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.BANANA, 10);
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, 10);
     private static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.BANANA, -1);
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, BANANA, -1);
     private static final int EXPECTED_QUANTITY_OF_ORANGE = 10;
     private static final int EXPECTED_QUANTITY_OF_APPLE = 10;
     private static final int EXPECTED_QUANTITY_OF_BANANA = 10;
@@ -53,15 +54,15 @@ public class BalanceOperationHandlerTest {
         balanceOperationHandler.handleOperation(ORANGE_FRUITTRANSACTION);
         balanceOperationHandler.handleOperation(APPLE_FRUITTRANSACTION);
         balanceOperationHandler.handleOperation(BANANA_FRUITTRANSACTION);
-        assertTrue(Storage.getFruits().containsKey(Constants.ORANGE));
-        assertTrue(Storage.getFruits().containsKey(Constants.APPLE));
-        assertTrue(Storage.getFruits().containsKey(Constants.BANANA));
+        assertTrue(Storage.getFruits().containsKey(ORANGE));
+        assertTrue(Storage.getFruits().containsKey(APPLE));
+        assertTrue(Storage.getFruits().containsKey(BANANA));
         assertTrue(Storage.getFruits().containsValue(EXPECTED_QUANTITY_OF_ORANGE));
         assertTrue(Storage.getFruits().containsValue(EXPECTED_QUANTITY_OF_APPLE));
         assertTrue(Storage.getFruits().containsValue(EXPECTED_QUANTITY_OF_BANANA));
-        assertEquals(EXPECTED_QUANTITY_OF_ORANGE, Storage.getFruits().get(Constants.ORANGE));
-        assertEquals(EXPECTED_QUANTITY_OF_APPLE, Storage.getFruits().get(Constants.APPLE));
-        assertEquals(EXPECTED_QUANTITY_OF_BANANA, Storage.getFruits().get(Constants.BANANA));
+        assertEquals(EXPECTED_QUANTITY_OF_ORANGE, Storage.getFruits().get(ORANGE));
+        assertEquals(EXPECTED_QUANTITY_OF_APPLE, Storage.getFruits().get(APPLE));
+        assertEquals(EXPECTED_QUANTITY_OF_BANANA, Storage.getFruits().get(BANANA));
     }
 
 }

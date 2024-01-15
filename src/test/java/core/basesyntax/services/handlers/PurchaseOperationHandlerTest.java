@@ -1,5 +1,6 @@
 package core.basesyntax.services.handlers;
 
+import static core.basesyntax.services.Constants.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -17,31 +18,31 @@ public class PurchaseOperationHandlerTest {
     private static final int EXPECTED_RESULT_QUANTITY_OF_APPLE = 90;
     private static final int EXPECTED_RESULT_QUANTITY_OF_BANANA = 90;
     private static final FruitTransaction ORANGE_FRUITTRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.ORANGE, 10);
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, ORANGE, 10);
     private static final FruitTransaction APPLE_FRUITTRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.APPLE, 10);
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, APPLE, 10);
     private static final FruitTransaction BANANA_FRUITTRANSACTION =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, 10);
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 10);
     private static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, -1);
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, -1);
     private static final FruitTransaction PURCHASE_WITH_NEGATIVE_RESULT =
-            new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, 1000);
+            new FruitTransaction(FruitTransaction.Operation.PURCHASE, BANANA, 1000);
     private static final String EXPECTED_EXCEPTION_MESSAGE_NEGATIVE_NUMBER_PURCHASE =
             "Purchase operation value for banana should've been positive but was " +
                     BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY.getQuantity();
     private static final String EXPECTED_EXCEPTION_MESSAGE_BUY_MORE_THAN_HAVE =
             "Insufficient stock for purchase: Requested " +
                     PURCHASE_WITH_NEGATIVE_RESULT.getQuantity() + " but only " +
-                    Constants.INITIAL_QUANTITY_OF_BANANA + " available for " +
+                    INITIAL_QUANTITY_OF_BANANA + " available for " +
                     PURCHASE_WITH_NEGATIVE_RESULT.getFruit();
     private static OperationHandler purchaseOperationHandler;
 
     @BeforeAll
     static void initPurchaseOperationHandlerAndStorage() {
         purchaseOperationHandler = new PurchaseOperationHandler();
-        Storage.updateFruit(Constants.ORANGE, Constants.INITIAL_QUANTITY_OF_ORANGE);
-        Storage.updateFruit(Constants.APPLE, Constants.INITIAL_QUANTITY_OF_APPLE);
-        Storage.updateFruit(Constants.BANANA, Constants.INITIAL_QUANTITY_OF_BANANA);
+        Storage.updateFruit(ORANGE, INITIAL_QUANTITY_OF_ORANGE);
+        Storage.updateFruit(APPLE, INITIAL_QUANTITY_OF_APPLE);
+        Storage.updateFruit(BANANA, INITIAL_QUANTITY_OF_BANANA);
     }
 
     @AfterAll
@@ -72,8 +73,8 @@ public class PurchaseOperationHandlerTest {
         purchaseOperationHandler.handleOperation(ORANGE_FRUITTRANSACTION);
         purchaseOperationHandler.handleOperation(APPLE_FRUITTRANSACTION);
         purchaseOperationHandler.handleOperation(BANANA_FRUITTRANSACTION);
-        assertEquals(EXPECTED_RESULT_QUANTITY_OF_ORANGE, Storage.getFruits().get(Constants.ORANGE));
-        assertEquals(EXPECTED_RESULT_QUANTITY_OF_APPLE, Storage.getFruits().get(Constants.APPLE));
-        assertEquals(EXPECTED_RESULT_QUANTITY_OF_BANANA, Storage.getFruits().get(Constants.BANANA));
+        assertEquals(EXPECTED_RESULT_QUANTITY_OF_ORANGE, Storage.getFruits().get(ORANGE));
+        assertEquals(EXPECTED_RESULT_QUANTITY_OF_APPLE, Storage.getFruits().get(APPLE));
+        assertEquals(EXPECTED_RESULT_QUANTITY_OF_BANANA, Storage.getFruits().get(BANANA));
     }
 }

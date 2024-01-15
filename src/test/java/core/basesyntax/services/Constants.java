@@ -1,4 +1,4 @@
-package core.basesyntax.services.handlers;
+package core.basesyntax.services;
 
 public class Constants {
     public static final String ORANGE = "orange";

@@ -13,13 +13,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class BalanceOperationHandlerTest {
-    public static final FruitTransaction ORANGE_FRUITTRANSACTION =
+    private static final FruitTransaction ORANGE_FRUITTRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.ORANGE, 10);
-    public static final FruitTransaction APPLE_FRUITTRANSACTION =
+    private static final FruitTransaction APPLE_FRUITTRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.APPLE, 10);
-    public static final FruitTransaction BANANA_FRUITTRANSACTION =
+    private static final FruitTransaction BANANA_FRUITTRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.BANANA, 10);
-    public static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
+    private static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
             new FruitTransaction(FruitTransaction.Operation.BALANCE, Constants.BANANA, -1);
     private static final int EXPECTED_QUANTITY_OF_ORANGE = 10;
     private static final int EXPECTED_QUANTITY_OF_APPLE = 10;

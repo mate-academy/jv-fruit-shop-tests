@@ -13,16 +13,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class PurchaseOperationHandlerTest {
-    public static final int EXPECTED_RESULT_QUANTITY_OF_ORANGE = 90;
-    public static final int EXPECTED_RESULT_QUANTITY_OF_APPLE = 90;
-    public static final int EXPECTED_RESULT_QUANTITY_OF_BANANA = 90;
-    public static final FruitTransaction ORANGE_FRUITTRANSACTION =
+    private static final int EXPECTED_RESULT_QUANTITY_OF_ORANGE = 90;
+    private static final int EXPECTED_RESULT_QUANTITY_OF_APPLE = 90;
+    private static final int EXPECTED_RESULT_QUANTITY_OF_BANANA = 90;
+    private static final FruitTransaction ORANGE_FRUITTRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.ORANGE, 10);
-    public static final FruitTransaction APPLE_FRUITTRANSACTION =
+    private static final FruitTransaction APPLE_FRUITTRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.APPLE, 10);
-    public static final FruitTransaction BANANA_FRUITTRANSACTION =
+    private static final FruitTransaction BANANA_FRUITTRANSACTION =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, 10);
-    public static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
+    private static final FruitTransaction BANANA_FRUITTRANSACTION_NEGATIVE_QUANTITY =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, -1);
     private static final FruitTransaction PURCHASE_WITH_NEGATIVE_RESULT =
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, Constants.BANANA, 1000);

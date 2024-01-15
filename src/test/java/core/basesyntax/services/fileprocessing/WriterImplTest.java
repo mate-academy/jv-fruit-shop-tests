@@ -1,23 +1,16 @@
 package core.basesyntax.services.fileprocessing;
 
+import static core.basesyntax.services.Constants.FILE_PATH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.services.fileprocessing.impl.ReaderCsvImpl;
 import core.basesyntax.services.fileprocessing.impl.WriterImpl;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class WriterImplTest {
-    private static final String DATE_TIME_PATTERN = "dd.MM.yy HH-mm";
-    private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
-    private static final String REPORT_NAME = "REPORT FOR " + FORMATTER.format(LocalDateTime.now());
-    private static final String FILE_PATH = "src/main/resources/" + REPORT_NAME;
     private static final String EXPECTED_INITIAL_LINE = "fruit,quantity";
     private static final String EXPECTED_APPLE_LINE = "apple,10";
     private static final String EXPECTED_BANANA_LINE = "banana,20";

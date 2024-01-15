@@ -15,17 +15,23 @@ public class WriterImpl implements Writer {
             DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
     private static final String REPORT_NAME = "REPORT FOR " + FORMATTER.format(LocalDateTime.now());
     private static final String FILE_PATH = "src/main/resources/" + REPORT_NAME;
+    private static String currentReportName = FILE_PATH;
+    private static int fileCounter = 1;
 
     @Override
     public void writeToFile(StringBuilder stringBuilder) {
-        File currentReport = new File(FILE_PATH);
+        File currentReport = new File(currentReportName);
         if (!currentReport.exists()) {
             try (BufferedWriter bufferedWriter = new BufferedWriter(
-                    new FileWriter(FILE_PATH))) {
+                    new FileWriter(currentReportName))) {
                 bufferedWriter.write(String.valueOf(stringBuilder));
             } catch (IOException e) {
-                throw new RuntimeException("Can't write to file " + REPORT_NAME, e);
+                throw new RuntimeException("Can't write to file " + currentReportName, e);
             }
+        } else {
+            currentReportName = FILE_PATH + " (" + fileCounter + ")";
+            fileCounter++;
+            writeToFile(stringBuilder);
         }
     }
 }

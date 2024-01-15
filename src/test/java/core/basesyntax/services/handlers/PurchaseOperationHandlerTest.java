@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeResultException;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
+import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.impl.PurchaseOperationHandler;
 import org.junit.jupiter.api.AfterAll;
@@ -35,6 +36,8 @@ public class PurchaseOperationHandlerTest {
                     PURCHASE_WITH_NEGATIVE_RESULT.getQuantity() + " but only " +
                     INITIAL_QUANTITY_OF_BANANA + " available for " +
                     PURCHASE_WITH_NEGATIVE_RESULT.getFruit();
+    private static final String EXPECTED_NO_SUCH_FRUIT_EXCEPTION_MESSAGE = "Fruit was not found in the storage: "
+            + NO_SUCH_FRUIT_EXCEPTION_TRANSACTION.getFruit();
     private static OperationHandler purchaseOperationHandler;
 
     @BeforeAll
@@ -48,6 +51,16 @@ public class PurchaseOperationHandlerTest {
     @AfterAll
     static void closePurchaseOperationHandler() {
         purchaseOperationHandler = null;
+    }
+
+    @Test
+    void handleOperation_tryRetrievingNonExistingFruit_notOk() {
+        RuntimeException noSuchFruitException =
+                assertThrows(NoSuchFruitException.class,
+                        () -> purchaseOperationHandler.handleOperation(
+                                NO_SUCH_FRUIT_EXCEPTION_TRANSACTION));
+        assertEquals(noSuchFruitException.getMessage(),
+                EXPECTED_NO_SUCH_FRUIT_EXCEPTION_MESSAGE);
     }
 
     @Test

@@ -37,9 +37,9 @@ public class FruitService {
     private static Writer writer;
     private static ReportGenerator reportGenerator;
 
-    public static void initVars(String PATH_TO_RAW_REPORT) {
+    public static void initVars(String pathToRawReport) {
         Reader reader = new ReaderCsvImpl();
-        rawData = reader.readFile(PATH_TO_RAW_REPORT);
+        rawData = reader.readFile(pathToRawReport);
         dataSplitter = new DataSplitterImpl();
         transactionGetter = new TransactionGetterImpl();
         fruitTransactionParser = new FruitTransactionParserImpl();

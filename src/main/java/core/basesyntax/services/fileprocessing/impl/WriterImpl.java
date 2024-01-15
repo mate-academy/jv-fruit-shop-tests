@@ -13,7 +13,8 @@ public class WriterImpl implements Writer {
     private static final String DATE_TIME_PATTERN = "dd.MM.yy HH-mm";
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
-    private static final String REPORT_TIME = " report for " + FORMATTER.format(LocalDateTime.now());
+    private static final String REPORT_TIME = " report for "
+            + FORMATTER.format(LocalDateTime.now());
     private static final String FILE_PATH = "src/main/resources/";
 
     /**

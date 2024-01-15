@@ -9,8 +9,6 @@ import core.basesyntax.services.handlers.impl.BalanceOperationHandler;
 import core.basesyntax.services.handlers.impl.PurchaseOperationHandler;
 import core.basesyntax.services.handlers.impl.ReturnOperationHandler;
 import core.basesyntax.services.handlers.impl.SupplyOperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.Map;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

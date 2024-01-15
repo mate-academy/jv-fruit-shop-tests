@@ -9,7 +9,8 @@ public class Storage {
 
     public static Map<String, Integer> getFruits() {
         return fruits;
-    }//need this for easier testing
+    } //need this for easier testing
+
     public static Set<Map.Entry<String, Integer>> getFruitsEntrySet() {
         return fruits.entrySet();
     }

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.exceptions.OperationException;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.fileprocessing.TransactionGetter;
 import core.basesyntax.services.fileprocessing.impl.TransactionGetterImpl;
 import java.util.ArrayList;
 import java.util.List;

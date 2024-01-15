@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exceptions.ReaderEmptyFileException;
-import core.basesyntax.services.fileprocessing.Reader;
 import core.basesyntax.services.fileprocessing.impl.ReaderCsvImpl;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;

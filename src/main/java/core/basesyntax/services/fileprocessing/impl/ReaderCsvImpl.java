@@ -21,7 +21,8 @@ public class ReaderCsvImpl implements Reader {
             throw new RuntimeException("Can't read from file " + filename, e);
         }
         if (rawData.isEmpty()) {
-            throw new ReaderEmptyFileException("No data found in the file. Try again with another file...");
+            throw new ReaderEmptyFileException(
+                    "No data found in the file. Try again with another file...");
         }
         return rawData;
     }

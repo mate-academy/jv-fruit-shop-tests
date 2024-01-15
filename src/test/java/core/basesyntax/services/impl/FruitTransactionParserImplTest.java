@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.Constants;
 import core.basesyntax.services.FruitTransactionParser;
 import core.basesyntax.services.handlers.OperationHandler;
 import core.basesyntax.services.handlers.impl.BalanceOperationHandler;
@@ -18,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 
 public class FruitTransactionParserImplTest {
     private static final FruitTransaction BALANCE_ORANGE_FRUITTRANSACTION =

@@ -11,7 +11,6 @@ import utilities.UtilityReader;
 import utilities.UtilityReaderImpl;
 
 public class FruitServiceImplTest {
-    private static final String CRLF_LINE_BREAK = "\r\n";
     private static final String FIRST_PATH_RAW_REPORT =
             "src/main/resources/SampleSourceCSVSmallQuantities.csv";
     private static final String FIRST_PATH_RAW_REPORT_NAME = "SampleSourceCSVSmallQuantities";
@@ -29,16 +28,16 @@ public class FruitServiceImplTest {
     private static final String THIRD_CURRENT_REPORT_NAME =
             Constants.FILE_PATH + THIRD_PATH_RAW_REPORT_NAME + Constants.REPORT_TIME;
     private static final String SMALL_QUANTITIES_EXPECTED_RESULT =
-            "fruit,quantity" + CRLF_LINE_BREAK
-                    + "banana,150" + CRLF_LINE_BREAK
+            "fruit,quantity" + System.lineSeparator()
+                    + "banana,150" + System.lineSeparator()
                     + "apple,262";
     private static final String BIGGER_QUANTITIES_EXPECTED_RESULT =
-            "fruit,quantity" + CRLF_LINE_BREAK
-                    + "banana,30000" + CRLF_LINE_BREAK
+            "fruit,quantity" + System.lineSeparator()
+                    + "banana,30000" + System.lineSeparator()
                     + "apple,52500";
     private static final String EXTREMELY_BIG_QUANTITIES_EXPECTED_RESULT =
-            "fruit,quantity" + CRLF_LINE_BREAK
-                    + "banana,2080000000" + CRLF_LINE_BREAK
+            "fruit,quantity" + System.lineSeparator()
+                    + "banana,2080000000" + System.lineSeparator()
                     + "apple,2042500000";
 
     private static UtilityReader utilityReader;

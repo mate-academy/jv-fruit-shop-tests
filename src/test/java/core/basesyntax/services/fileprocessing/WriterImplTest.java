@@ -3,22 +3,16 @@ package core.basesyntax.services.fileprocessing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.services.fileprocessing.impl.WriterImpl;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 import utilities.UtilityReader;
 import utilities.UtilityReaderImpl;
 
 public class WriterImplTest {
     private static final String TEST_FILE_NAME = "Test";
-    private static final String DATE_TIME_PATTERN = "dd.MM.yy HH-mm";
-    private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
-    private static final String REPORT_TIME = " report for "
-            + FORMATTER.format(LocalDateTime.now());
-    private static final String FILE_PATH = "src/main/resources/" + TEST_FILE_NAME + REPORT_TIME;
+    private static final String TEST_FILE_PATH = Constants.FILE_PATH + TEST_FILE_NAME
+            + Constants.REPORT_TIME;
     private static final String EXPECTED_INITIAL_LINE = "fruit,quantity";
     private static final String EXPECTED_APPLE_LINE = "apple,10";
     private static final String EXPECTED_BANANA_LINE = "banana,20";
@@ -41,6 +35,6 @@ public class WriterImplTest {
     void writeToFile_thenRetrieveNormalData_Ok() {
         writerImpl.writeToFile(TEST_FILE_NAME, BUILDER_FOR_WRITER);
         assertEquals(BUILDER_FOR_WRITER.toString(),
-                utilityReaderImpl.getDataFromList(utilityReaderImpl.readFile(FILE_PATH)));
+                utilityReaderImpl.getDataFromList(utilityReaderImpl.readFile(TEST_FILE_PATH)));
     }
 }

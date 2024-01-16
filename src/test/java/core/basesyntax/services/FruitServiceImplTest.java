@@ -3,22 +3,14 @@ package core.basesyntax.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utilities.Constants;
 import utilities.UtilityReader;
 import utilities.UtilityReaderImpl;
 
 public class FruitServiceImplTest {
-    private static final String DATE_TIME_PATTERN = "dd.MM.yy HH-mm";
-    private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern(DATE_TIME_PATTERN, Locale.ENGLISH);
-    private static final String REPORT_TIME =
-            " report for " + FORMATTER.format(LocalDateTime.now());
-    private static final String FILE_PATH = "src/main/resources/";
     private static final String FIRST_PATH_RAW_REPORT =
             "src/main/resources/SampleSourceCSVSmallQuantities.csv";
     private static final String FIRST_PATH_RAW_REPORT_NAME = "SampleSourceCSVSmallQuantities";
@@ -30,11 +22,11 @@ public class FruitServiceImplTest {
     private static final String THIRD_PATH_RAW_REPORT_NAME =
             "SampleSourceCSV3ExtremelyBigQuantities";
     private static final String FIRST_CURRENT_REPORT_NAME =
-            FILE_PATH + FIRST_PATH_RAW_REPORT_NAME + REPORT_TIME;
+            Constants.FILE_PATH + FIRST_PATH_RAW_REPORT_NAME + Constants.REPORT_TIME;
     private static final String SECOND_CURRENT_REPORT_NAME =
-            FILE_PATH + SECOND_PATH_RAW_REPORT_NAME + REPORT_TIME;
+            Constants.FILE_PATH + SECOND_PATH_RAW_REPORT_NAME + Constants.REPORT_TIME;
     private static final String THIRD_CURRENT_REPORT_NAME =
-            FILE_PATH + THIRD_PATH_RAW_REPORT_NAME + REPORT_TIME;
+            Constants.FILE_PATH + THIRD_PATH_RAW_REPORT_NAME + Constants.REPORT_TIME;
     private static final String SMALL_QUANTITIES_EXPECTED_RESULT = """
             fruit,quantity\r
             banana,150\r

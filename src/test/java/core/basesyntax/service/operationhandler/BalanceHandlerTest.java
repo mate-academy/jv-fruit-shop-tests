@@ -24,4 +24,13 @@ public class BalanceHandlerTest {
         int quantity = Storage.fruits.get("banana");
         Assertions.assertEquals(quantity, 15);
     }
+
+    @Test
+    public void handle_wrongAction_notOk() {
+        FruitTransaction item = new FruitTransaction(Operation.BALANCE,
+                "banana", 15);
+        balanceHandler.handleOperation(item);
+        int quantity = Storage.fruits.get("banana");
+        Assertions.assertNotEquals(quantity, 14);
+    }
 }

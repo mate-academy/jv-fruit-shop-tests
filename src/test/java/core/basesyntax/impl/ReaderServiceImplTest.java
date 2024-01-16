@@ -45,4 +45,10 @@ public class ReaderServiceImplTest {
         Assertions.assertThrows(RuntimeException.class, () ->
                 readerService.readData(""));
     }
+
+    @Test
+    public void read_wrongPath_notOk() {
+        Assertions.assertThrows(RuntimeException.class, () ->
+                readerService.readData("wrongPath"));
+    }
 }

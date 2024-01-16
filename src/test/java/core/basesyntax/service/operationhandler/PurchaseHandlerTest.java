@@ -33,4 +33,13 @@ public class PurchaseHandlerTest {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> purchaseHandler.handleOperation(item));
     }
+
+    @Test
+    public void handle_wrongAction_notOk() {
+        FruitTransaction item = new FruitTransaction(Operation.PURCHASE,
+                "banana", 15);
+        purchaseHandler.handleOperation(item);
+        int quantity = Storage.fruits.get("banana");
+        Assertions.assertNotEquals(quantity, 14);
+    }
 }

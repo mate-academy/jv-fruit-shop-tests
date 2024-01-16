@@ -34,4 +34,13 @@ public class OperationHandlerTest {
         int quantity = Storage.fruits.get("banana");
         Assertions.assertEquals(quantity, 43);
     }
+
+    @Test
+    public void get_wrongAction_notOk() {
+        FruitTransaction item = new FruitTransaction(Operation.RETURN,
+                "banana", 43);
+        operationHandler.handleOperation(item);
+        int quantity = Storage.fruits.get("banana");
+        Assertions.assertNotEquals(quantity, 42);
+    }
 }

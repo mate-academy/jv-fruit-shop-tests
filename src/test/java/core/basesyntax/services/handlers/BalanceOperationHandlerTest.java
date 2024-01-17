@@ -64,5 +64,4 @@ public class BalanceOperationHandlerTest {
         assertEquals(EXPECTED_QUANTITY_OF_APPLE, Storage.getFruits().get(Constants.APPLE));
         assertEquals(EXPECTED_QUANTITY_OF_BANANA, Storage.getFruits().get(Constants.BANANA));
     }
-
 }

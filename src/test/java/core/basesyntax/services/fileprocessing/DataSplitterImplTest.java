@@ -68,13 +68,13 @@ public class DataSplitterImplTest {
     }
 
     private boolean assertListEquals(List<String[]> expectedResult, List<String[]> actualResult) {
-        for (int arrayPointer = 0; arrayPointer < expectedResult.size(); arrayPointer++) {
-            for (int stringPointer = 0; stringPointer < expectedResult.get(arrayPointer).length;
-                    stringPointer++) {
-                if (!expectedResult.get(arrayPointer)[stringPointer].equals(
-                        actualResult.get(arrayPointer)[stringPointer])) {
-                    return false;
-                }
+        if (expectedResult.size() != actualResult.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < expectedResult.size(); i++) {
+            if (!Arrays.equals(expectedResult.get(i), actualResult.get(i))) {
+                return false;
             }
         }
         return true;

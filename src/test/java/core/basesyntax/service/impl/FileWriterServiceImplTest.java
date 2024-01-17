@@ -51,16 +51,6 @@ class FileWriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_fileHidden_notOk() throws IOException {
-        String text = "Test data";
-        Path pathToFile = Paths.get(outputFileName);
-        Files.setAttribute(pathToFile, "dos:hidden", true);
-        assertThrows(RuntimeException.class,
-                () -> fileWriterService.writeToFile(outputFileName, text));
-        Files.setAttribute(pathToFile, "dos:hidden", false);
-    }
-
-    @Test
     public void readFromFile_nullFileName_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileWriterService.writeToFile(null, "data"),

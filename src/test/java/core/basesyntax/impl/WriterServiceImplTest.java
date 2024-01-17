@@ -17,7 +17,7 @@ public class WriterServiceImplTest {
     }
 
     @Test
-    public void writeToFile_rightPath_Ok() {
+    public void writeToFile_rightPath_ok() {
         String expectedText = "banana,154"
                 + System.lineSeparator()
                 + "apple,90";

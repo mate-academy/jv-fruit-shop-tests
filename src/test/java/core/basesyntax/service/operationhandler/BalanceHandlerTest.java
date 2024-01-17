@@ -17,7 +17,7 @@ public class BalanceHandlerTest {
     }
 
     @Test
-    public void handle_rightAction_Ok() {
+    public void handle_rightAction_ok() {
         FruitTransaction item = new FruitTransaction(Operation.BALANCE,
                 "banana", 15);
         balanceHandler.handleOperation(item);

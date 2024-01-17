@@ -28,13 +28,13 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    public void read_rightFile_Ok() {
+    public void read_rightFile_ok() {
         List<String> actualResult = readerService.readData(INPUT_FILE_PATH);
         Assertions.assertEquals(records, actualResult);
     }
 
     @Test
-    public void read_emptyFile_Ok() {
+    public void read_emptyFile_ok() {
         List<String> actualResult = readerService.readData(EMPTY_FILE_PATH);
         records = new ArrayList<>();
         Assertions.assertEquals(records, actualResult);

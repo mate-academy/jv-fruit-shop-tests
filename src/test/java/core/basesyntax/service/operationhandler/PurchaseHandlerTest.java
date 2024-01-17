@@ -18,7 +18,7 @@ public class PurchaseHandlerTest {
     }
 
     @Test
-    public void handle_rightAction_Ok() {
+    public void handle_rightAction_ok() {
         FruitTransaction item = new FruitTransaction(Operation.PURCHASE,
                 "banana", 15);
         purchaseHandler.handleOperation(item);

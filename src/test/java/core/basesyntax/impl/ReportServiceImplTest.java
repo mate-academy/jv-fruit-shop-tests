@@ -17,14 +17,14 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    public void createReport_rightStorage_Ok() {
+    public void createReport_rightStorage_ok() {
         String text = reportService.createReport();
         String[] actualResult = text.split(System.lineSeparator());
         Assertions.assertEquals(actualResult[0], expectedText);
     }
 
     @Test
-    public void createReport_emptyStorage_Ok() {
+    public void createReport_emptyStorage_ok() {
         Storage.fruits.clear();
         String text = reportService.createReport();
         String[] actualResult = text.split(System.lineSeparator());

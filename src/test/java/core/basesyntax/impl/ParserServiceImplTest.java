@@ -18,41 +18,38 @@ public class ParserServiceImplTest {
     public void setUp() {
         parserService = new ParserServiceImpl();
         fruitTransaction = new FruitTransaction(Operation.BALANCE, "banana", 20);
-        records = new ArrayList<>();
-        records.add("type,fruit,quantity");
-        records.add("b,banana,20");
-        records.add("b,apple,100");
-        records.add("s,banana,102");
-        records.add("p,banana,13");
-        records.add("r,apple,10");
-        records.add("p,apple,20");
-        records.add("p,banana,5");
-        records.add("s,banana,50");
-        recordsWrong = new ArrayList<>();
-        recordsWrong.add("type,fruit,quantity");
-        recordsWrong.add("b,banana,yy");
+        records = new ArrayList<>(List.of(
+                "type,fruit,quantity",
+                "b,banana,20",
+                "b,apple,100",
+                "s,banana,102",
+                "p,banana,13",
+                "r,apple,10",
+                "p,apple,20",
+                "p,banana,5",
+                "s,banana,50"
+        ));
+
+        recordsWrong = new ArrayList<>(List.of(
+                "type,fruit,quantity",
+                "b,banana,yy"
+        ));
     }
 
     @Test
-    public void parse_rightFile_Ok() {
+    public void validTransactions_ok() {
         List<FruitTransaction> actualResult = parserService.parse(records);
         Assertions.assertEquals(fruitTransaction, actualResult.get(0));
     }
 
     @Test
-    public void parse_wrongFormatInFile_notOk() {
+    public void invalidTransactions_notOk() {
         Assertions.assertThrows(RuntimeException.class, () ->
                 parserService.parse(recordsWrong));
     }
 
     @Test
-    public void parse_emptyFile_notOk() {
-        Assertions.assertThrows(RuntimeException.class, () ->
-                parserService.parse(new ArrayList<>()));
-    }
-
-    @Test
-    public void parse_emptyPath_notOk() {
+    public void emptyTransactions_notOk() {
         Assertions.assertThrows(RuntimeException.class, () ->
                 parserService.parse(new ArrayList<>()));
     }

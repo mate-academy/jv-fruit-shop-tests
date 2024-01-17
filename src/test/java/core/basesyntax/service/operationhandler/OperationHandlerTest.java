@@ -4,30 +4,30 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class OperationHandlerTest {
+    private static final Map<Operation, OperationHandler> OPERATION_STRATEGIES = Map.of(
+            Operation.BALANCE, new BalanceHandler(),
+            Operation.SUPPLY, new SupplyHandler(),
+            Operation.PURCHASE, new PurchaseHandler(),
+            Operation.RETURN, new ReturnHandler()
+    );
+
     private OperationHandler operationHandler;
 
     @BeforeEach
     public void setUp() {
         Storage.fruits.clear();
-        Map<Operation, OperationHandler> operationStrategies = new HashMap<>();
-        operationStrategies.put(Operation.BALANCE, new BalanceHandler());
-        operationStrategies.put(Operation.SUPPLY, new SupplyHandler());
-        operationStrategies.put(Operation.PURCHASE,
-                new PurchaseHandler());
-        operationStrategies.put(Operation.RETURN, new ReturnHandler());
-        operationHandler = new OperationStrategy(operationStrategies)
+        operationHandler = new OperationStrategy(OPERATION_STRATEGIES)
                 .getHandler(Operation.BALANCE);
     }
 
     @Test
-    public void get_rightAction_Ok() {
+    public void get_rightAction_ok() {
         FruitTransaction item = new FruitTransaction(Operation.RETURN,
                 "banana", 43);
         operationHandler.handleOperation(item);

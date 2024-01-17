@@ -17,7 +17,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void handle_quantityNull_Ok() {
+    public void handle_quantityNull_ok() {
         FruitTransaction item = new FruitTransaction(Operation.RETURN,
                 "banana", 43);
         returnHandler.handleOperation(item);
@@ -26,7 +26,7 @@ public class ReturnHandlerTest {
     }
 
     @Test
-    public void handle_quantityNotNull_Ok() {
+    public void handle_quantityNotNull_ok() {
         Storage.fruits.put("banana", 7);
         FruitTransaction item = new FruitTransaction(Operation.RETURN,
                 "banana", 43);

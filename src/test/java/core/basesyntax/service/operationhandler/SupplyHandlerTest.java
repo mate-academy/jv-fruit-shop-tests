@@ -17,8 +17,8 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void handle_quantityNull_Ok() {
-        FruitTransaction item = new FruitTransaction(Operation.RETURN,
+    public void handle_quantityNull_ok() {
+        FruitTransaction item = new FruitTransaction(Operation.SUPPLY,
                 "banana", 44);
         supplyHandler.handleOperation(item);
         int quantity = Storage.fruits.get("banana");
@@ -26,21 +26,12 @@ public class SupplyHandlerTest {
     }
 
     @Test
-    public void handle_quantityNotNull_Ok() {
+    public void handle_quantityNotNull_ok() {
         Storage.fruits.put("banana", 7);
-        FruitTransaction item = new FruitTransaction(Operation.RETURN,
+        FruitTransaction item = new FruitTransaction(Operation.SUPPLY,
                 "banana", 43);
         supplyHandler.handleOperation(item);
         int quantity = Storage.fruits.get("banana");
         Assertions.assertEquals(quantity, 50);
-    }
-
-    @Test
-    public void handle_wrongAction_notOk() {
-        FruitTransaction item = new FruitTransaction(Operation.RETURN,
-                "banana", 43);
-        supplyHandler.handleOperation(item);
-        int quantity = Storage.fruits.get("banana");
-        Assertions.assertNotEquals(quantity, 42);
     }
 }

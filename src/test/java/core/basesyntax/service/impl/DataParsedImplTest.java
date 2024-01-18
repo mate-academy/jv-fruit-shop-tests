@@ -14,10 +14,8 @@ import org.junit.jupiter.api.Test;
 
 class DataParsedImplTest {
     private static List<String> data;
-    private static final FruitTransaction FIRST =
-            new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
-    private static final FruitTransaction LAST =
-            new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100);
+    private static FruitTransaction first;
+    private static FruitTransaction last;
     private final ParserService parserService = new DataParsedImpl();
     private List<FruitTransaction> fruitTransactionList;
     private List<FruitTransaction> emptyList;
@@ -28,6 +26,8 @@ class DataParsedImplTest {
                 "    b,banana,20",
                 "    b,apple,100",
                 "    s,banana,100");
+        first = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        last = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 100);
     }
 
     @BeforeEach
@@ -48,14 +48,14 @@ class DataParsedImplTest {
 
     @Test
     void getFirstElementFromList_Ok() {
-        FruitTransaction expected = FIRST;
+        FruitTransaction expected = first;
         FruitTransaction actual = fruitTransactionList.get(0);
         assertEquals(expected, actual);
     }
 
     @Test
     void getLastElementFromList_Ok() {
-        FruitTransaction expected = LAST;
+        FruitTransaction expected = last;
         FruitTransaction actual = fruitTransactionList.get(fruitTransactionList.size() - 1);
         assertEquals(expected, actual);
     }

@@ -10,13 +10,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvWriterServiceImplTest {
     private static final String PATH = "src/test/resources/target.csv";
     private static final String NON_EXISTING_PATH = "src/test/resources/target1.csv";
     private static final String CONTENT = "fruits,quantity banana,152 apple,90";
-    private final WriterService writerService = new CsvWriterServiceImpl();
+    private static final int INDEX_OF_FIRST_ELEMENT = 0;
+    private WriterService writerService;
+
+    @BeforeEach
+    void setUp() {
+        writerService = new CsvWriterServiceImpl();
+    }
 
     @Test
     void reportIsNull_notOk() {
@@ -31,12 +38,9 @@ class CsvWriterServiceImplTest {
     @Test
     void writeToFile_Ok() throws IOException {
         writerService.writeToFile(PATH, CONTENT);
-        List<String> strings = Files.readAllLines(Path.of(PATH));
-        StringBuilder actual = new StringBuilder();
-        for (String string : strings) {
-            actual.append(string);
-        }
-        assertEquals(CONTENT, actual.toString());
+        List<String> writtenContent = Files.readAllLines(Path.of(PATH));
+        String actual = writtenContent.get(INDEX_OF_FIRST_ELEMENT);
+        assertEquals(CONTENT, actual);
     }
 
     @Test

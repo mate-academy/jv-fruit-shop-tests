@@ -25,15 +25,17 @@ class DataConvertorImplTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = "type,fruit,quantity\r\n"
-            + "b,banana,20\r\n"
-            + "b,apple,100\r\n"
-            + "s,banana,100\r\n"
-            + "p,banana,13\r\n"
-            + "r,apple,10\r\n"
-            + "p,apple,20\r\n"
-            + "p,banana,5\r\n"
-            + "s,banana,50\r\n"
+    @ValueSource(strings = """
+            type,fruit,quantity\r
+            b,banana,20\r
+            b,apple,100\r
+            s,banana,100\r
+            p,banana,13\r
+            r,apple,10\r
+            p,apple,20\r
+            p,banana,5\r
+            s,banana,50\r
+            """
     )
     void convertData_isOk(String content) {
         List<FruitTransaction> convertedData =
@@ -43,9 +45,11 @@ class DataConvertorImplTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"type,fruit,quantity\r\n"
-            + "q,banana,20\r\n"
-    })
+    @ValueSource(strings = """
+            type,fruit,quantity\r
+            q,banana,20\r
+            """
+    )
     void convertDataWithIncorrectOperation_expectedException(String content) {
         Exception exception = assertThrows(RuntimeException.class, () -> {
             dataConvertor.convertData(content);

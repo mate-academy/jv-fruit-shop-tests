@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface StoreService {
     void updateStorage(List<FruitTransaction> transactions);
+
+    List<String> createReport();
 }

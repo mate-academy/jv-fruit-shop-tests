@@ -4,7 +4,6 @@ import core.basesyntax.dao.ArticleDao;
 import core.basesyntax.dao.ArticleDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Reader;
-import core.basesyntax.service.Report;
 import core.basesyntax.service.StoreService;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionService;
@@ -12,7 +11,6 @@ import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.FileReaderCsvImpl;
 import core.basesyntax.service.impl.FileWriterCsvImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
-import core.basesyntax.service.impl.ReportImpl;
 import core.basesyntax.service.impl.StoreServiceImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.TransactionStrategy;
@@ -54,9 +52,7 @@ public class Main {
 
         StoreService storeService = new StoreServiceImpl(articleDao, strategy);
         storeService.updateStorage(fruitTransactions);
-
-        Report report = new ReportImpl(articleDao);
-        List<String> fruitsReport = report.create();
+        List<String> fruitsReport = storeService.createReport();
 
         Writer fileWriterCsv = new FileWriterCsvImpl();
         fileWriterCsv.write(reportFile, fruitsReport);

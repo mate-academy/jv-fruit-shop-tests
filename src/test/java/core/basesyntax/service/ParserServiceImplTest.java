@@ -17,9 +17,9 @@ public class ParserServiceImplTest {
 
     @BeforeAll
     static void beforeAll() {
-        data = List.of("b,banana,20"
-        ,"s,grape,20"
-        ,"p,banana,10");
+        data = List.of("b,banana,20",
+                "s,grape,20",
+                "p,banana,10");
     }
 
     @Test
@@ -37,20 +37,18 @@ public class ParserServiceImplTest {
     @Test
     void parserService_Ok() {
         List<FruitTransaction> result = parserService.parseOperations(data);
-        FruitTransaction fruitBananaBalance = result.get(0);
-        FruitTransaction fruitGrapeSupply = result.get(1);
-        FruitTransaction fruitBananaPurchase = result.get(2);
-
         assertEquals(3, result.size());
-
+        FruitTransaction fruitBananaBalance = result.get(0);
         assertEquals(FruitTransaction.Operation.BALANCE, fruitBananaBalance.getOperation());
         assertEquals("banana", fruitBananaBalance.getFruit());
         assertEquals(20, fruitBananaBalance.getQuantity());
 
+        FruitTransaction fruitGrapeSupply = result.get(1);
         assertEquals(FruitTransaction.Operation.SUPPLY, fruitGrapeSupply.getOperation());
         assertEquals("grape", fruitGrapeSupply.getFruit());
         assertEquals(20, fruitGrapeSupply.getQuantity());
 
+        FruitTransaction fruitBananaPurchase = result.get(2);
         assertEquals(FruitTransaction.Operation.PURCHASE, fruitBananaPurchase.getOperation());
         assertEquals("banana", fruitBananaPurchase.getFruit());
         assertEquals(10, fruitBananaPurchase.getQuantity());

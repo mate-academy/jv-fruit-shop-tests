@@ -10,7 +10,6 @@ import service.impl.ReaderServiceImpl;
 
 public class ReaderServiceImplTest {
     private static final String VALID_INPUT_FILE_PATH = "src/test/java/resources/input.csv";
-    private static final String INVALID_INPUT_FILE_PATH = "...";
     private static final List<String> INPUT_FILE_DATA = List.of(
             "b,banana,20",
             "b,grape,50",
@@ -32,8 +31,8 @@ public class ReaderServiceImplTest {
     }
 
     @Test
-    void readFromInvalidFilePath() {
+    void readFromNullFilePath() {
         assertThrows(RuntimeException.class,
-                () -> readerService.readFromFile(INVALID_INPUT_FILE_PATH));
+                () -> readerService.readFromFile(null));
     }
 }

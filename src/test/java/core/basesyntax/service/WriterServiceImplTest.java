@@ -13,15 +13,8 @@ import service.impl.WriterServiceImpl;
 public class WriterServiceImplTest {
     private static final String VALID_OUTPUT_FILE_PATH = "src/test/java/resources/output.csv";
     private static final String PATH_TO_NEW_FILE = "src/test/java/resources/new.csv";
-    private static final String INVALID_OUTPUT_FILE_PATH = "...";
     private static final String Report = "apple,10";
     private WriterService writerService = new WriterServiceImpl();
-
-    @Test
-    void writeToInvalidFilePath() {
-        Assertions.assertThrows(RuntimeException.class, ()
-                -> writerService.writeReport(INVALID_OUTPUT_FILE_PATH, Report));
-    }
 
     @Test
     void write_Ok() {

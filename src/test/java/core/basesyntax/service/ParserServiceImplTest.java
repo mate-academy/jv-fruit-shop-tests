@@ -13,10 +13,11 @@ import service.impl.ParserServiceImpl;
 
 public class ParserServiceImplTest {
     private static List<String> data;
-    private ParserService parserService = new ParserServiceImpl();
+    private static ParserService parserService;
 
     @BeforeAll
     static void beforeAll() {
+        parserService = new ParserServiceImpl();
         data = List.of("b,banana,20",
                 "s,grape,20",
                 "p,banana,10");

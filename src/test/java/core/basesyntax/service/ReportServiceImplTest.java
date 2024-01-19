@@ -4,12 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import db.Storage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import service.ReportService;
 import service.impl.ReportServiceImpl;
 
 public class ReportServiceImplTest {
-    private final ReportService reportService = new ReportServiceImpl();
+    private static ReportService reportService;
+
+    @BeforeAll
+    static void beforeAll() {
+        reportService = new ReportServiceImpl();
+    }
 
     @Test
     void reportService_Ok() {

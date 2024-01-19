@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import service.WriterService;
 import service.impl.WriterServiceImpl;
@@ -14,7 +15,12 @@ public class WriterServiceImplTest {
     private static final String VALID_OUTPUT_FILE_PATH = "src/test/resources/output.csv";
     private static final String PATH_TO_NEW_FILE = "src/test/resources/new.csv";
     private static final String Report = "apple,10";
-    private WriterService writerService = new WriterServiceImpl();
+    private static WriterService writerService;
+
+    @BeforeAll
+    static void beforeAll() {
+        writerService = new WriterServiceImpl();
+    }
 
     @Test
     void writerService_Ok() {

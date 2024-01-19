@@ -1,3 +1,5 @@
+package core.basesyntax;
+
 import core.basesyntax.dao.ArticleDao;
 import core.basesyntax.dao.ArticleDaoImpl;
 import core.basesyntax.model.FruitTransaction;

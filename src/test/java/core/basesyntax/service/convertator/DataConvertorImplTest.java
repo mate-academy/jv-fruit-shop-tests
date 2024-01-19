@@ -25,8 +25,7 @@ class DataConvertorImplTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings =
-            """
+    @ValueSource(strings = """
             type,fruit,quantity\r
             b,banana,20\r
             b,apple,100\r
@@ -35,8 +34,7 @@ class DataConvertorImplTest {
             r,apple,10\r
             p,apple,20\r
             p,banana,5\r
-            s,banana,50"""
-    )
+            s,banana,50""")
     void convertData_isOk(String content) {
         List<FruitTransaction> convertedData =
                 dataConvertor.convertData(content.trim());

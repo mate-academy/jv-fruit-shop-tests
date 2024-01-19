@@ -23,7 +23,7 @@ class FileReaderImplTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"""
+    @ValueSource(strings = """
             type,fruit,quantity\r
             b,banana,20\r
             b,apple,100\r
@@ -33,12 +33,12 @@ class FileReaderImplTest {
             p,apple,20\r
             p,banana,5\r
             s,banana,50"""
-    })
+    )
     void readFromFile_isOk(String expectedOutputString) {
         String actualOutputString =
                 fileReader.readFromFile(TEST_INPUT_FILE_PATH);
-        assertEquals(expectedOutputString, actualOutputString, "Output string must be:\n"
-                + expectedOutputString + "\n" + "but was:\n"
+        assertEquals(expectedOutputString, actualOutputString, "Output string must be:\r\n"
+                + expectedOutputString + "\r\n" + "but was:\r\n"
                 + actualOutputString);
     }
 

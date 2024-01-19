@@ -17,11 +17,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReporterServiceTest {
-    private static final String VALID_FILE_PATH = "src/main/resources/input.csv";
+    private static final String VALID_FILE_PATH = "src/test/resources/input.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationProviderMap =
             Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                     FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
@@ -33,13 +32,8 @@ class CsvFileReporterServiceTest {
     private FileReporterService fileReporterService =
             new CsvFileReporterServiceImpl(operationServiceStrategy, storage);
 
-    @AfterEach
-    void tearDown() {
-        storage = new Storage();
-    }
-
     @Test
-    void getRightReport() {
+    void getReport_validFile_Ok() {
         List<String> readFile =
                 new CsvFileReaderServiceImpl().readFile(new File(VALID_FILE_PATH));
         new CsvFileUniqueFruitsServiceAdderImpl(storage).add(readFile, storage);

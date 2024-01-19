@@ -20,9 +20,9 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class CsvFileWriterServiceTest {
-    private static final String VALID_FILE_PATH = "src/main/resources/input.csv";
-    private static final String EMPTY_FILE_PATH = "src/main/resources/emptyFile.csv";
-    private static final String FILE_TO_WRITE = "src/main/resources/output.csv";
+    private static final String VALID_FILE_PATH = "src/test/resources/input.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.csv";
+    private static final String FILE_TO_WRITE = "src/test/resources/output.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationProviderMap =
             Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                     FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
@@ -33,7 +33,7 @@ class CsvFileWriterServiceTest {
     private Storage storage = new Storage();
 
     @Test
-    void getRightReport() {
+    void write_getValidReport_Ok() {
         FileReaderService fileReader = new CsvFileReaderServiceImpl();
         List<String> transactions = fileReader.readFile(new File(VALID_FILE_PATH));
         UniqueFruitsAdderService uniqueFruitsAdder =

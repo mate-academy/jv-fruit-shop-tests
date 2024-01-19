@@ -17,14 +17,14 @@ class CsvReaderServiceImplTest {
     }
 
     @Test
-    void readFromFile_Ok() {
+    void readFromCsvFile_correctPath_Ok() {
         String path = "src/test/resources/source.csv";
         List<String> data = readerService.readFromCsvFile(path);
         assertFalse(data.isEmpty());
     }
 
     @Test
-    void incorrectFileName_notOk() {
+    void readFromCsvFile_incorrectPath_notOk() {
         String path = "src/test/resources/target2131.csv";
         assertThrows(RuntimeException.class, () -> readerService.readFromCsvFile(path));
     }

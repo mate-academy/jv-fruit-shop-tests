@@ -37,24 +37,24 @@ class DataParsedImplTest {
     }
 
     @Test
-    void parseEmptyList_Ok() {
+    void parseData_emptyList_Ok() {
         assertTrue(emptyList.isEmpty());
     }
 
     @Test
-    void parseData_Ok() {
+    void parseData_correctData_Ok() {
         assertFalse(fruitTransactionList.isEmpty());
     }
 
     @Test
-    void getFirstElementFromList_Ok() {
+    void parseData_getFirstElementFromList_Ok() {
         FruitTransaction expected = first;
         FruitTransaction actual = fruitTransactionList.get(0);
         assertEquals(expected, actual);
     }
 
     @Test
-    void getLastElementFromList_Ok() {
+    void parseData_getLastElementFromList_Ok() {
         FruitTransaction expected = last;
         FruitTransaction actual = fruitTransactionList.get(fruitTransactionList.size() - 1);
         assertEquals(expected, actual);

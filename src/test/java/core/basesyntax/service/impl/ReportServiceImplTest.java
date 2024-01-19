@@ -19,14 +19,14 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void emptyStorageReport_Ok() {
+    void createReport_emptyStorage_Ok() {
         String expected = INDENTION + TITLE;
         String actual = reportService.createReport();
         assertEquals(expected, actual);
     }
 
     @Test
-    void oneElementStorageReport_Ok() {
+    void createReport_oneElementInStorage_Ok() {
         Storage.fruits.put("banana", 10);
         String expected = new StringBuilder()
                 .append(INDENTION)

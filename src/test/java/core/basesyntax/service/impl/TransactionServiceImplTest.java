@@ -40,7 +40,7 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void processTransactions_correctFields_Ok() {
+    void processTransactions_correctFields_ok() {
         transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20),
@@ -53,7 +53,7 @@ class TransactionServiceImplTest {
     }
 
     @Test
-    void processTransactions_emptyList_Ok() {
+    void processTransactions_emptyList_ok() {
         transactionService.processTransactions(Collections.emptyList());
         assertTrue(Storage.fruits.isEmpty());
     }

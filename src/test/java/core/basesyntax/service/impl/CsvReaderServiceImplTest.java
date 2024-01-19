@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvReaderServiceImplTest {
+    private static final String CORRECT_PATH = "src/test/resources/source.csv";
+    private static final String INCORRECT_PATH = "src/test/resources/target2131.csv";
     private ReaderService readerService;
 
     @BeforeEach
@@ -17,15 +19,13 @@ class CsvReaderServiceImplTest {
     }
 
     @Test
-    void readFromCsvFile_correctPath_Ok() {
-        String path = "src/test/resources/source.csv";
-        List<String> data = readerService.readFromCsvFile(path);
+    void readFromCsvFile_correctPath_ok() {
+        List<String> data = readerService.readFromCsvFile(CORRECT_PATH);
         assertFalse(data.isEmpty());
     }
 
     @Test
     void readFromCsvFile_incorrectPath_notOk() {
-        String path = "src/test/resources/target2131.csv";
-        assertThrows(RuntimeException.class, () -> readerService.readFromCsvFile(path));
+        assertThrows(RuntimeException.class, () -> readerService.readFromCsvFile(INCORRECT_PATH));
     }
 }

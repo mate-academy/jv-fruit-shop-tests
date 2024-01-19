@@ -36,7 +36,7 @@ class CsvWriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_correctFields_Ok() throws IOException {
+    void writeToFile_correctFields_ok() throws IOException {
         writerService.writeToFile(PATH, CONTENT);
         List<String> writtenContent = Files.readAllLines(Path.of(PATH));
         String actual = writtenContent.get(INDEX_OF_FIRST_ELEMENT);
@@ -44,7 +44,7 @@ class CsvWriterServiceImplTest {
     }
 
     @Test
-    void writeToFile_createFileAndWriteToIt_Ok() {
+    void writeToFile_createFileAndWriteToIt_ok() {
         writerService.writeToFile(NON_EXISTING_PATH, CONTENT);
         File file = new File(NON_EXISTING_PATH);
         assertTrue(file.exists());

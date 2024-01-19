@@ -48,6 +48,5 @@ public class Main {
 
         WriterService writerService = new CsvWriterServiceImpl();
         writerService.writeToFile(TARGET, report);
-
     }
 }

@@ -12,7 +12,7 @@ public class ReportServiceImplTest {
     private final ReportService reportService = new ReportServiceImpl();
 
     @Test
-    void report_Ok() {
+    void reportService_Ok() {
         Storage.fruits.put("banana", 10);
         String report = reportService.createReport();
         StringBuilder expectedReportBuilder =
@@ -23,7 +23,7 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    void reportWithEmptyStorage() {
+    void reportService_reportWithEmptyStorage_NotOk() {
         Storage.fruits.clear();
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> reportService.createReport());

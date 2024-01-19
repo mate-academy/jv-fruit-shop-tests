@@ -35,7 +35,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    void processTransactions_Ok() {
+    void transactionService_Ok() {
         transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 10),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 10),
@@ -46,7 +46,7 @@ public class TransactionServiceImplTest {
     }
 
     @Test
-    void processEmptyList_Ok() {
+    void transactionService_processEmptyList_NotOk() {
         Storage.fruits.clear();
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> transactionService.processTransactions(Collections.emptyList()));

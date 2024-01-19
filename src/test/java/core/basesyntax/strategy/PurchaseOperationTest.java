@@ -18,7 +18,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    void purchase_Ok() {
+    void purchaseOperation_Ok() {
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "Banana", 5);
         purchaseOperation.processOperation(fruitTransaction);
@@ -26,7 +26,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    void purchaseMoreQuantityThanAvailableInStorage() {
+    void purchaseOperation_MoreQuantityThanAvailableInStorage_NotOk() {
         Storage.fruits.clear();
         Storage.fruits.put("Banana", 10);
         FruitTransaction fruitTransaction =

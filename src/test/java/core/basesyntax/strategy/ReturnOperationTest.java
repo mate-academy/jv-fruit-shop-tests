@@ -18,7 +18,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    void return_Ok() {
+    void returnOperation_Ok() {
         Storage.fruits.put("Banana",10);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN,"Banana",5);
@@ -27,7 +27,7 @@ public class ReturnOperationTest {
     }
 
     @Test
-    void returnNotExistingFruit() {
+    void returnOperation_NotExistingFruit_NotOk() {
         Storage.fruits.put("Apple", 10);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "Banana", 5);

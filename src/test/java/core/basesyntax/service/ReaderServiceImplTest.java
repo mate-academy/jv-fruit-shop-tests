@@ -9,7 +9,7 @@ import service.ReaderService;
 import service.impl.ReaderServiceImpl;
 
 public class ReaderServiceImplTest {
-    private static final String VALID_INPUT_FILE_PATH = "src/test/java/resources/input.csv";
+    private static final String VALID_INPUT_FILE_PATH = "src/test/resources/input.csv";
     private static final List<String> INPUT_FILE_DATA = List.of(
             "b,banana,20",
             "b,grape,50",
@@ -25,13 +25,13 @@ public class ReaderServiceImplTest {
     private ReaderService readerService = new ReaderServiceImpl();
 
     @Test
-    void read_Ok() {
+    void readerService_Ok() {
         List<String> dataFromCsvFile = readerService.readFromFile(VALID_INPUT_FILE_PATH);
         assertEquals(INPUT_FILE_DATA, dataFromCsvFile);
     }
 
     @Test
-    void readFromNullFilePath() {
+    void readerService_readFromNullFilePath_NotOk() {
         assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(null));
     }

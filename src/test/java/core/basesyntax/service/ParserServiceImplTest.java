@@ -17,28 +17,42 @@ public class ParserServiceImplTest {
 
     @BeforeAll
     static void beforeAll() {
-        data = List.of("b,banana,20");
+        data = List.of("b,banana,20"
+        ,"s,grape,20"
+        ,"p,banana,10");
     }
 
     @Test
-    public void parserService_NullData() {
+    public void parserService_NullData_NotOk() {
         assertThrows(RuntimeException.class, () -> parserService.parseOperations(null));
     }
 
     @Test
-    void emptyDataFromFile() {
+    void parserService_emptyDataFromFile_NotOk() {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> parserService.parseOperations(Arrays.asList()));
         assertEquals("Empty data from file", exception.getMessage());
     }
 
     @Test
-    void parsedData_Ok() {
+    void parserService_Ok() {
         List<FruitTransaction> result = parserService.parseOperations(data);
-        FruitTransaction fruit = result.get(0);
-        assertEquals(1, result.size());
-        assertEquals(FruitTransaction.Operation.BALANCE, fruit.getOperation());
-        assertEquals("banana", fruit.getFruit());
-        assertEquals(20, fruit.getQuantity());
+        FruitTransaction fruitBananaBalance = result.get(0);
+        FruitTransaction fruitGrapeSupply = result.get(1);
+        FruitTransaction fruitBananaPurchase = result.get(2);
+
+        assertEquals(3, result.size());
+
+        assertEquals(FruitTransaction.Operation.BALANCE, fruitBananaBalance.getOperation());
+        assertEquals("banana", fruitBananaBalance.getFruit());
+        assertEquals(20, fruitBananaBalance.getQuantity());
+
+        assertEquals(FruitTransaction.Operation.SUPPLY, fruitGrapeSupply.getOperation());
+        assertEquals("grape", fruitGrapeSupply.getFruit());
+        assertEquals(20, fruitGrapeSupply.getQuantity());
+
+        assertEquals(FruitTransaction.Operation.PURCHASE, fruitBananaPurchase.getOperation());
+        assertEquals("banana", fruitBananaPurchase.getFruit());
+        assertEquals(10, fruitBananaPurchase.getQuantity());
     }
 }

@@ -18,7 +18,7 @@ public class BalanceOperationTest {
     }
 
     @Test
-    void balanceOperationWithNegativeBalance() {
+    void balanceOperation_WithNegativeBalance_NotOk() {
         FruitTransaction transaction = new FruitTransaction(
                 FruitTransaction.Operation.BALANCE, "Banana", -5);
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {

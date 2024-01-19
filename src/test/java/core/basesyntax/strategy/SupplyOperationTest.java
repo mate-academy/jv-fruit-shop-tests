@@ -12,7 +12,7 @@ public class SupplyOperationTest {
     private SupplyOperation supplyOperation = new SupplyOperation();
 
     @Test
-    void supplyWithNegativeAmount() {
+    void supplyOperation_supplyWithNegativeAmount_NotOk() {
         Storage.fruits.put("Banana", 10);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "Banana", -5);
@@ -25,7 +25,7 @@ public class SupplyOperationTest {
     }
 
     @Test
-    void supply_Ok() {
+    void supplyOperation_Ok() {
         Storage.fruits.put("Banana", 10);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "Banana", 5);

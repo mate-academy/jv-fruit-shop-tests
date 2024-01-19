@@ -16,8 +16,6 @@ class DataParsedImplTest {
     private static FruitTransaction first;
     private static FruitTransaction last;
     private final ParserService parserService = new DataParsedImpl();
-    private List<FruitTransaction> fruitTransactionList;
-    private List<FruitTransaction> emptyList;
 
     @BeforeAll
     static void beforeAll() {
@@ -31,19 +29,19 @@ class DataParsedImplTest {
 
     @Test
     void parseData_emptyList_ok() {
-        emptyList = parserService.parseData(Collections.emptyList());
+        List<FruitTransaction> emptyList = parserService.parseData(Collections.emptyList());
         assertTrue(emptyList.isEmpty());
     }
 
     @Test
     void parseData_correctData_ok() {
-        fruitTransactionList = parserService.parseData(data);
+        List<FruitTransaction> fruitTransactionList = parserService.parseData(data);
         assertFalse(fruitTransactionList.isEmpty());
     }
 
     @Test
     void parseData_getFirstElementFromList_ok() {
-        fruitTransactionList = parserService.parseData(data);
+        List<FruitTransaction> fruitTransactionList = parserService.parseData(data);
         FruitTransaction expected = first;
         FruitTransaction actual = fruitTransactionList.get(0);
         assertEquals(expected, actual);
@@ -51,7 +49,7 @@ class DataParsedImplTest {
 
     @Test
     void parseData_getLastElementFromList_ok() {
-        fruitTransactionList = parserService.parseData(data);
+        List<FruitTransaction> fruitTransactionList = parserService.parseData(data);
         FruitTransaction expected = last;
         FruitTransaction actual = fruitTransactionList.get(fruitTransactionList.size() - 1);
         assertEquals(expected, actual);

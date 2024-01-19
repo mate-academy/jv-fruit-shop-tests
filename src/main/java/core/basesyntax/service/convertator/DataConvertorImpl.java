@@ -15,7 +15,6 @@ public class DataConvertorImpl implements DataConvertor {
     @Override
     public List<FruitTransaction> convertData(String data) {
         List<FruitTransaction> convertedData = new ArrayList<>();
-
         for (String fruit : Arrays.stream(data.split(System.lineSeparator()))
                 .skip(SKIP_FIRST_LINE_FROM_DATA)
                 .toList()) {

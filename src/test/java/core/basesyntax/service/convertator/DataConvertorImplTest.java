@@ -25,7 +25,8 @@ class DataConvertorImplTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = """
+    @ValueSource(strings =
+            """
             type,fruit,quantity\r
             b,banana,20\r
             b,apple,100\r
@@ -38,7 +39,7 @@ class DataConvertorImplTest {
     )
     void convertData_isOk(String content) {
         List<FruitTransaction> convertedData =
-                dataConvertor.convertData(content);
+                dataConvertor.convertData(content.trim());
         assertTrue(convertedData.size() == correctObjects.size()
                 && convertedData.equals(correctObjects));
     }

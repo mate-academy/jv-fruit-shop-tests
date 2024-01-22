@@ -25,21 +25,21 @@ class FileReaderImplTest {
     @ParameterizedTest
     @ValueSource(strings = {
             "type,fruit,quantity"
-                    +"\r\n"
+                    + "\r\n"
                     + "b,banana,20"
-                    +"\r\n"
+                    + "\r\n"
                     + "b,apple,100"
-                    +"\r\n"
+                    + "\r\n"
                     + "s,banana,100"
-                    +"\r\n"
+                    + "\r\n"
                     + "p,banana,13"
-                    +"\r\n"
+                    + "\r\n"
                     + "r,apple,10"
-                    +"\r\n"
+                    + "\r\n"
                     + "p,apple,20"
-                    +"\r\n"
+                    + "\r\n"
                     + "p,banana,5"
-                    +"\r\n"
+                    + "\r\n"
                     + "s,banana,50"}
     )
     void readFromFile_isOk(String expectedOutputString) {

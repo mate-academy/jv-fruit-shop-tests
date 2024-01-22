@@ -9,6 +9,7 @@ import core.basesyntax.service.file.FileReader;
 import core.basesyntax.service.file.FileReaderImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,24 +25,12 @@ class DataConvertorImplTest {
         correctObjects = getCorrectObjects();
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {
-            """
-                    type,fruit,quantity\r
-                    b,banana,20\r
-                    b,apple,100\r
-                    s,banana,100\r
-                    p,banana,13\r
-                    r,apple,10\r
-                    p,apple,20\r
-                    p,banana,5\r
-                    s,banana,50"""}
-    )
-    void convertData_isOk(String content) {
+    @Test
+    void convertData_isOk() {
         List<FruitTransaction> convertedData =
-                dataConvertor.convertData(content.trim());
+                dataConvertor.convertData(getContentForConvertation());
         assertTrue(convertedData.size() == correctObjects.size()
-                && convertedData.equals(correctObjects), content);
+                && convertedData.equals(correctObjects), getContentForConvertation());
     }
 
     @ParameterizedTest
@@ -61,5 +50,9 @@ class DataConvertorImplTest {
     private static List<FruitTransaction> getCorrectObjects() {
         return dataConvertor.convertData(
                 fileReader.readFromFile("src/test/resources/testInput.csv"));
+    }
+
+    private String getContentForConvertation() {
+        return fileReader.readFromFile("src/test/resources/testInput.csv");
     }
 }

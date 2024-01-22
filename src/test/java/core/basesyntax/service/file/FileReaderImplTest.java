@@ -21,21 +21,27 @@ class FileReaderImplTest {
         fileReader = new FileReaderImpl();
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/testInput.csv")
+    @Test
     void readFromFile_isOk() {
         String actualOutputString =
                 fileReader.readFromFile(TEST_INPUT_FILE_PATH);
-        String expectedOutputString = """
-                type,fruit,quantity\r
-                b,banana,20\r
-                b,apple,100\r
-                s,banana,100\r
-                p,banana,13\r
-                r,apple,10\r
-                p,apple,20\r
-                p,banana,5\r
-                s,banana,50""";
+        String expectedOutputString = "type,fruit,quantity"
+                + System.lineSeparator()
+                + "b,banana,20"
+                + System.lineSeparator()
+                + "b,apple,100"
+                + System.lineSeparator()
+                + "s,banana,100"
+                + System.lineSeparator()
+                + "p,banana,13"
+                + System.lineSeparator()
+                + "r,apple,10"
+                + System.lineSeparator()
+                + "p,apple,20"
+                + System.lineSeparator()
+                + "p,banana,5"
+                + System.lineSeparator()
+                + "s,banana,50";
         assertEquals(expectedOutputString, actualOutputString, "Output string must be:\n"
                 + expectedOutputString + "\n" + "but was:\n"
                 + actualOutputString);

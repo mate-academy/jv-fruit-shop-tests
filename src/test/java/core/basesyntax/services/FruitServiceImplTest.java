@@ -3,12 +3,14 @@ package core.basesyntax.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utilities.Constants;
-import utilities.UtilityReader;
-import utilities.UtilityReaderImpl;
 
 public class FruitServiceImplTest {
     private static final String FIRST_PATH_RAW_REPORT =
@@ -40,13 +42,6 @@ public class FruitServiceImplTest {
                     + "banana,2080000000" + System.lineSeparator()
                     + "apple,2042500000";
 
-    private static UtilityReader utilityReader;
-
-    @BeforeAll
-    static void initReader() {
-        utilityReader = new UtilityReaderImpl();
-    }
-
     @AfterEach
     void clearStorage() {
         Storage.getFruits().clear();
@@ -56,24 +51,32 @@ public class FruitServiceImplTest {
     void processReport_thenRetrieveIt_Ok1() {
         FruitService.initVars(FIRST_PATH_RAW_REPORT);
         FruitService.processReport(FIRST_PATH_RAW_REPORT_NAME);
-        assertEquals(SMALL_QUANTITIES_EXPECTED_RESULT,
-                utilityReader.getDataFromList(utilityReader.readFile(FIRST_CURRENT_REPORT_NAME)));
+        checkWrittenData(FIRST_CURRENT_REPORT_NAME, SMALL_QUANTITIES_EXPECTED_RESULT);
     }
 
     @Test
     void processReport_thenRetrieveIt_Ok2() {
         FruitService.initVars(SECOND_PATH_RAW_REPORT);
         FruitService.processReport(SECOND_PATH_RAW_REPORT_NAME);
-        assertEquals(BIGGER_QUANTITIES_EXPECTED_RESULT,
-                utilityReader.getDataFromList(utilityReader.readFile(SECOND_CURRENT_REPORT_NAME)));
+        checkWrittenData(SECOND_CURRENT_REPORT_NAME, BIGGER_QUANTITIES_EXPECTED_RESULT);
     }
 
     @Test
     void processReport_thenRetrieveIt_Ok3() {
         FruitService.initVars(THIRD_PATH_RAW_REPORT);
         FruitService.processReport(THIRD_PATH_RAW_REPORT_NAME);
-        assertEquals(EXTREMELY_BIG_QUANTITIES_EXPECTED_RESULT,
-                utilityReader.getDataFromList(utilityReader.readFile(THIRD_CURRENT_REPORT_NAME)));
+        checkWrittenData(THIRD_CURRENT_REPORT_NAME, EXTREMELY_BIG_QUANTITIES_EXPECTED_RESULT);
     }
 
+    private void checkWrittenData(String currentReportName, String expectedResult) {
+        Path path = Paths.get(currentReportName);
+        List<String> actualContent;
+        try {
+            actualContent = Files.readAllLines(path);
+        } catch (IOException ioe) {
+            throw new RuntimeException("Can't read from file " + currentReportName, ioe);
+        }
+        assertEquals(expectedResult,
+                String.join(System.lineSeparator(), actualContent));
+    }
 }

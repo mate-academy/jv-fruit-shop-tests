@@ -1,6 +1,7 @@
 package core.basesyntax.services.fileprocessing;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -37,6 +38,7 @@ public class TransactionGetterImplTest {
                     new String[] {"s", "apple", "10"},
                     new String[] {"p", "banana", "5"},
                     new String[] {"r", "apple", "5"});
+
     private static final List<String[]> BAD_OPERATIONS =
             List.of(new String[] {"b", "banana", "20"},
                     new String[] {"q", "apple", "100"},
@@ -80,19 +82,19 @@ public class TransactionGetterImplTest {
                 fruitTransactionsTestSetter(NORMAL_TEST_DATA);
         List<FruitTransaction> anotherNormalFruitTransactions =
                 fruitTransactionsTestSetter(ANOTHER_NORMAL_TEST_DATA);
-        assertFalse(assertListEquals(normalFruitTransactions, anotherNormalFruitTransactions));
-        assertFalse(assertListEquals(normalFruitTransactions,
-                transactionGetter.getTransactionsData(ANOTHER_NORMAL_TEST_DATA)));
-        assertFalse(assertListEquals(transactionGetter.getTransactionsData(NORMAL_TEST_DATA),
-                transactionGetter.getTransactionsData(ANOTHER_NORMAL_TEST_DATA)));
+        assertNotEquals(normalFruitTransactions, anotherNormalFruitTransactions);
+        assertNotEquals(normalFruitTransactions,
+                transactionGetter.getTransactionsData(ANOTHER_NORMAL_TEST_DATA));
+        assertNotEquals(transactionGetter.getTransactionsData(NORMAL_TEST_DATA),
+                transactionGetter.getTransactionsData(ANOTHER_NORMAL_TEST_DATA));
     }
 
     @Test
     void getTransactionsData_putNormalData_Ok() {
         List<FruitTransaction> normalFruitTransactions =
                 fruitTransactionsTestSetter(NORMAL_TEST_DATA);
-        assertTrue(assertListEquals(normalFruitTransactions,
-                transactionGetter.getTransactionsData(NORMAL_TEST_DATA)));
+        assertEquals(normalFruitTransactions,
+                transactionGetter.getTransactionsData(NORMAL_TEST_DATA));
     }
 
     private List<FruitTransaction> fruitTransactionsTestSetter(List<String[]> testData) {
@@ -106,17 +108,5 @@ public class TransactionGetterImplTest {
             fruitTransactions.add(fruitTransaction);
         }
         return fruitTransactions;
-    }
-
-    private boolean assertListEquals(List<FruitTransaction> expectedResult,
-                                     List<FruitTransaction> actualResult) {
-        for (int i = 0; i < expectedResult.size(); i++) {
-            if (!expectedResult.get(i).getOperation().equals(actualResult.get(i).getOperation())
-                    || !expectedResult.get(i).getFruit().equals(actualResult.get(i).getFruit())
-                    || expectedResult.get(i).getQuantity() != actualResult.get(i).getQuantity()) {
-                return false;
-            }
-        }
-        return true;
     }
 }

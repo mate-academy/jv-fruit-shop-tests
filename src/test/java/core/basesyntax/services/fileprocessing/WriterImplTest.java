@@ -44,5 +44,14 @@ public class WriterImplTest {
         }
         String expectedResult = BUILDER_FOR_WRITER.toString();
         assertEquals(expectedResult, String.join(System.lineSeparator(), actualResult));
+        deleteReportFile(TEST_FILE_PATH);
+    }
+
+    private void deleteReportFile(String currentReportName) {
+        try {
+            Files.deleteIfExists(Paths.get(currentReportName));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to delete file: " + currentReportName, e);
+        }
     }
 }

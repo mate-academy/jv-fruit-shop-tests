@@ -78,5 +78,14 @@ public class FruitServiceImplTest {
         }
         assertEquals(expectedResult,
                 String.join(System.lineSeparator(), actualContent));
+        deleteReportFile(currentReportName);
+    }
+
+    private void deleteReportFile(String currentReportName) {
+        try {
+            Files.deleteIfExists(Paths.get(currentReportName));
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to delete file: " + currentReportName, e);
+        }
     }
 }

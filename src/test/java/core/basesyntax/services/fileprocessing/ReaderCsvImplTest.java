@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 public class ReaderCsvImplTest {
     private static Reader readerCsvImpl;
     private static final String PATH_TO_NON_EXISTING_TEST_REPORT =
-            "src/main/resources/readerTestFiles/IDoNotExist.csv";
+            "src/test/resources/readerTestFiles/IDoNotExist.csv";
     private static final String EXPECTED_MESSAGE_WHEN_FILE_NON_EXISTING =
             "Can't read from file " + PATH_TO_NON_EXISTING_TEST_REPORT;
     private static final String PATH_TO_EMPTY_TEST_REPORT =
-            "src/main/resources/readerTestFiles/ReaderCsvImplTestEmptySourceFile.csv";
+            "src/test/resources/readerTestFiles/ReaderCsvImplTestEmptySourceFile.csv";
     private static final String PATH_TO_TEST_REPORT =
-            "src/main/resources/readerTestFiles/ReaderCsvImplTestSourceFile.csv";
+            "src/test/resources/readerTestFiles/ReaderCsvImplTestSourceFile.csv";
     private static final List<String> EXPECTED_RESULT =
             List.of("type,fruit,quantity",
                     "b,banana,20",

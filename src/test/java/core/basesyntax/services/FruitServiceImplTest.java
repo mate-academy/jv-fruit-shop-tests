@@ -12,13 +12,13 @@ import utilities.UtilityReaderImpl;
 
 public class FruitServiceImplTest {
     private static final String FIRST_PATH_RAW_REPORT =
-            "src/main/resources/SampleSourceCSVSmallQuantities.csv";
+            "src/test/resources/SampleSourceCSVSmallQuantities.csv";
     private static final String FIRST_PATH_RAW_REPORT_NAME = "SampleSourceCSVSmallQuantities";
     private static final String SECOND_PATH_RAW_REPORT =
-            "src/main/resources/SampleSourceCSV2BiggerQuantities.csv";
+            "src/test/resources/SampleSourceCSV2BiggerQuantities.csv";
     private static final String SECOND_PATH_RAW_REPORT_NAME = "SampleSourceCSV2BiggerQuantities";
     private static final String THIRD_PATH_RAW_REPORT =
-            "src/main/resources/SampleSourceCSV3ExtremelyBigQuantities.csv";
+            "src/test/resources/SampleSourceCSV3ExtremelyBigQuantities.csv";
     private static final String THIRD_PATH_RAW_REPORT_NAME =
             "SampleSourceCSV3ExtremelyBigQuantities";
     private static final String FIRST_CURRENT_REPORT_NAME =

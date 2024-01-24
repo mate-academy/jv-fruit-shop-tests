@@ -14,6 +14,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class DataConvertorImplTest {
+    private static final String TEST_INPUT_FILE = "src/test/resources/testInput.csv";
     private static DataConvertor dataConvertor;
     private static List<FruitTransaction> correctObjects;
     private static FileReader fileReader;
@@ -49,10 +50,10 @@ class DataConvertorImplTest {
 
     private static List<FruitTransaction> getCorrectObjects() {
         return dataConvertor.convertData(
-                fileReader.readFromFile("src/test/resources/testInput.csv"));
+                fileReader.readFromFile(TEST_INPUT_FILE));
     }
 
     private String getContentForConvertation() {
-        return fileReader.readFromFile("src/test/resources/testInput.csv");
+        return fileReader.readFromFile(TEST_INPUT_FILE);
     }
 }

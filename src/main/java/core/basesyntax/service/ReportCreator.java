@@ -3,9 +3,9 @@ package core.basesyntax.service;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class RapportCreator {
+public class ReportCreator {
 
-    public void createRapport(String path, String content) {
+    public void createReport(String path, String content) {
         try (FileWriter fileWriter = new FileWriter(path)) {
             fileWriter.write(content);
         } catch (IOException e) {

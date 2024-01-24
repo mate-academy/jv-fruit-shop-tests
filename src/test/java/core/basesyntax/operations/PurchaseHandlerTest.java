@@ -66,9 +66,8 @@ class PurchaseHandlerTest {
             operationHandler.getHandler(fruitWithIncorrectQuantity);
         });
         String expectedMassage = "Balance of "
-                + fruitWithIncorrectQuantity.getFruit()
-                + " is less then "
-                + fruitWithIncorrectQuantity.getQuantity();
+                + "banana"
+                + " is less then 110";
         String actualMassage = exception.getMessage();
         assertEquals(expectedMassage, actualMassage);
     }
@@ -83,7 +82,7 @@ class PurchaseHandlerTest {
             operationHandler.getHandler(fruitWithNegativeQuantity);
         });
         String expectedMassage = "Fruit quantity can't be negative "
-                + fruitWithNegativeQuantity.getQuantity();
+                + "-10";
         String actualMassage = exception.getMessage();
         assertEquals(expectedMassage, actualMassage);
     }

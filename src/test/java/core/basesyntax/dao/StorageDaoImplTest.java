@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StorageDaoImplTest {
+    private static final FruitTransaction FRUIT_TRANSACTION =
+            new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100);
     private StorageDao storageDao;
 
     @BeforeEach
@@ -23,13 +25,13 @@ class StorageDaoImplTest {
 
     @Test
     void addIncorrectFruitToStorage_expectedException() {
-        FruitTransaction incorrectFruiyTransaction = null;
+        FruitTransaction incorrectFruitTransaction = null;
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            storageDao.add(incorrectFruiyTransaction);
+            storageDao.add(incorrectFruitTransaction);
         });
 
         String expectedMassage = "Can't add information to storage, information is empty: "
-                + incorrectFruiyTransaction;
+                + incorrectFruitTransaction;
         String actualMassage = exception.getMessage();
 
         assertEquals(expectedMassage, actualMassage);
@@ -39,18 +41,14 @@ class StorageDaoImplTest {
 
     @Test
     void addToStorage_isOk() {
-        FruitTransaction correctFruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100);
-        storageDao.add(correctFruitTransaction);
+        storageDao.add(FRUIT_TRANSACTION);
         assertEquals(storageDao.getStorage().size(), 1);
     }
 
     @Test
     void getValueFromEmptyStorage_expectedException() {
-        FruitTransaction correctFruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100);
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            storageDao.getValue(correctFruitTransaction.getFruit());
+            storageDao.getValue(FRUIT_TRANSACTION.getFruit());
         });
 
         String expectedMassage = "Storage is empty";
@@ -61,11 +59,9 @@ class StorageDaoImplTest {
 
     @Test
     void getValueFromStorage_isOk() {
-        FruitTransaction correctFruitTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 100);
-        storageDao.add(correctFruitTransaction);
-        Integer expectedValue = correctFruitTransaction.getQuantity();
-        Integer actualValue = storageDao.getValue(correctFruitTransaction.getFruit());
+        storageDao.add(FRUIT_TRANSACTION);
+        Integer expectedValue = FRUIT_TRANSACTION.getQuantity();
+        Integer actualValue = storageDao.getValue(FRUIT_TRANSACTION.getFruit());
 
         assertEquals(expectedValue, actualValue);
     }

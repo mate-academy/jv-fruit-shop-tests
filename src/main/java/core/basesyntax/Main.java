@@ -6,7 +6,7 @@ import core.basesyntax.operations.OperationHandler;
 import core.basesyntax.operations.PurchaseHandler;
 import core.basesyntax.operations.ReturnHandler;
 import core.basesyntax.operations.SupplyHandler;
-import core.basesyntax.service.RapportCreator;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.convertator.DataConvertor;
 import core.basesyntax.service.convertator.DataConvertorImpl;
 import core.basesyntax.service.file.FileReader;
@@ -41,7 +41,7 @@ public class Main {
         DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
         String result = dataProcessor.calculateData(convertedData);
 
-        RapportCreator rapportCreator = new RapportCreator();
-        rapportCreator.createRapport(OUTPUT_PATH, result);
+        ReportCreator rapportCreator = new ReportCreator();
+        rapportCreator.createReport(OUTPUT_PATH, result);
     }
 }

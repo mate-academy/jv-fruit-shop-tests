@@ -23,8 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionImplTest {
-    private static final String TEST_FILE_PATH = "C:\\Users\\IdeaProjects\\jv-fruit-shop-tests"
-            + "\\src\\test\\java\\core\\basesyntax\\testfile";
+    private static final String TEST_FILE_PATH = "src/test/java/core/basesyntax/testfile";
     private OperationStrategy operationStrategy;
     private FruitTransaction fruitTransaction;
 

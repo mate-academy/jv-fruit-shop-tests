@@ -6,8 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
-    private static final String FILE_NAME = "C:\\Users\\IdeaProjects\\jv-fruit-shop-tests"
-            + "\\src\\main\\java\\core\\basesyntax\\db\\database.csv";
+    private static final String FILE_NAME = "src/main/java/core/basesyntax/db/database.csv";
 
     @Override
     public List<String> getCsv() {

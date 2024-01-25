@@ -8,8 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DailyReportImp implements DailyReport {
-    private static final String FILE_REPORT = "C:\\Users\\IdeaProjects\\jv-fruit-shop-tests"
-            + "\\src\\main\\java\\core\\basesyntax\\db\\report.csv";
+    private static final String FILE_REPORT = "src/main/java/core/basesyntax/db/report.csv";
     private static final String SEPARATOR = ",";
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;

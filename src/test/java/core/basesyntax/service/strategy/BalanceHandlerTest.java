@@ -11,8 +11,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class BalanceHandlerTest {
-    private static final String TEST_FILE_PATH = "C:\\Users\\IdeaProjects\\jv-fruit-shop-tests"
-            + "\\src\\test\\java\\core\\basesyntax\\testfile";
 
     @Test
     void processOperation_validData_returnsList() {

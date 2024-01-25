@@ -27,14 +27,14 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    public void testGetBalanceHandler() {
+    public void returnOperationHandlerIs_Ok() {
         OperationHandler handler = operationStrategy.get(Fruit.Operation.BALANCE);
         assertNotNull(handler);
         assertTrue(handler instanceof BalanceHandler);
     }
 
     @Test
-    public void testUnsupportedOperation() {
+    public void returnOperationHandlerIs_NotOk() {
         assertThrows(IllegalArgumentException.class, ()
                 -> operationStrategy.get(Fruit.Operation.valueOf("UNKNOWN")));
     }

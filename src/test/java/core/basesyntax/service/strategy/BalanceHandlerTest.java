@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class BalanceHandlerTest {
 
     @Test
-    void processOperation_validData_returnsList() {
+    void balanceProcessOperationIs_Ok() {
         try {
             FruitDao fruitDaoMock = mock(FruitDao.class);
             List<String> testCsvData = Arrays.asList(

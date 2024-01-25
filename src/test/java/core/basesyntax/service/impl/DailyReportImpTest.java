@@ -21,7 +21,7 @@ class DailyReportImpTest {
     }
 
     @Test
-    void testReport() {
+    void reportIs_Ok() {
         List<String> csvData = Arrays.asList(
                 "p,apple,1",
                 "s,orange,3",

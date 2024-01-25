@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -44,21 +43,9 @@ class FruitTransactionImplTest {
     }
 
     @Test
-    void processBalance_validOperation_returnsList() {
-        assertDoesNotThrow(() -> {
-            List<String> inputLines = Files.readAllLines(Path.of(TEST_FILE_PATH));
-        }, "Error reading file: " + TEST_FILE_PATH);
-        List<String> result = fruitTransaction.processBalance();
-        assertNotNull(result);
-        assertEquals(2, result.size());
-        assertTrue(result.get(0).contains("b"));
-    }
-
-    @Test
-    void processBalance_validOperation_returnsL() {
-        List<String> inputLines;
+    void processBalanceIs_Ok() {
         try {
-            inputLines = Files.readAllLines(Path.of(TEST_FILE_PATH));
+            List<String> inputLines = Files.readAllLines(Path.of(TEST_FILE_PATH));
         } catch (Exception e) {
             fail("Can't get data from file " + TEST_FILE_PATH, e);
             return;
@@ -70,21 +57,21 @@ class FruitTransactionImplTest {
     }
 
     @Test
-    void processPurchase_validOperation_returnsList() {
+    void processPurchaseIs_Ok() {
         FruitTransactionImpl fruitTransaction = new FruitTransactionImpl(operationStrategy);
         List<String> result = fruitTransaction.processPurchase();
         assertNotNull(result);
     }
 
     @Test
-    void processReturn_validOperation_returnsList() {
+    void processReturnIs_Ok() {
         FruitTransactionImpl fruitTransaction = new FruitTransactionImpl(operationStrategy);
         List<String> result = fruitTransaction.processReturn();
         assertNotNull(result);
     }
 
     @Test
-    void processSupply_validOperation_returnsList() {
+    void processSupplyIs_Ok() {
         FruitTransactionImpl fruitTransaction = new FruitTransactionImpl(operationStrategy);
         List<String> result = fruitTransaction.processSupply();
         assertNotNull(result);

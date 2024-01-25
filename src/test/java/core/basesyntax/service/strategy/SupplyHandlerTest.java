@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
     @Test
-    void processOperation_validData_returnsList() {
+    void supplyProcessOperationIs_Ok() {
         try {
             FruitDao fruitDaoMock = mock(FruitDao.class);
             List<String> testCsvData = Arrays.asList(

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.transaction.FruitTransaction;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,8 @@ class ReturnHandlerTest {
         handler = new ReturnHandler();
     }
 
-    @AfterEach
-    public void tearDoan() {
+    @AfterAll
+    public static void tearDoan() {
         Storage.storage.clear();
     }
 

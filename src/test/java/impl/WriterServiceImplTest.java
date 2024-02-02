@@ -14,7 +14,7 @@ class WriterServiceImplTest {
     private static final String HEAD = "fruit,quantity" + System.lineSeparator();
     private static final String COMMA = "," + System.lineSeparator();
     private static final String FRUIT_QUANTITY = "100" + System.lineSeparator();
-    private static final String PATH = "src/test/java/TestsFiles/TestForWriteService.csv";
+    private static final String PATH = "src/test/java/resources/TestForWriteService.csv";
     private WriterServiceImpl writeService;
 
     @BeforeAll
@@ -23,7 +23,7 @@ class WriterServiceImplTest {
     }
 
     @Test
-    void writeServiceTest_Ok() {
+    void writeServiceTest_writeToFile_ok() {
         String expectedResult = HEAD + "banana"
                 + COMMA
                 + FRUIT_QUANTITY
@@ -32,6 +32,12 @@ class WriterServiceImplTest {
                 + COMMA
                 + FRUIT_QUANTITY;
         writeService.writeDataToFile(expectedResult, PATH);
+        String actualResult = readDataFromFile();
+        assertEquals(expectedResult, actualResult,
+                "Your service to write data to file works incorrectly");
+    }
+
+    private String readDataFromFile() {
         StringBuilder testDataFromFile = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(PATH))) {
             String line;
@@ -41,8 +47,6 @@ class WriterServiceImplTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read file by path: " + PATH, e);
         }
-        String actualResult = testDataFromFile.toString();
-        assertEquals(expectedResult, actualResult,
-                "Your service to write data to file work incorrectly");
+        return testDataFromFile.toString();
     }
 }

@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import model.FruitTransaction;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ParseDataServiceImplTest {
+    private static final String PATH = "src/test/java/resources/TestInputData.csv";
     private static final FruitTransaction[] TestsTransaction = new FruitTransaction[] {
             new FruitTransaction("b", "banana", 100),
             new FruitTransaction("b", "apple", 100),
@@ -24,28 +24,23 @@ class ParseDataServiceImplTest {
     private final ParseDataServiceImpl parse = new ParseDataServiceImpl();
     private final FileReaderImpl reader = new FileReaderImpl();
 
-    @BeforeAll
-    void setUp() {
-    }
-
     @Test
-    public void parseData_validData_Ok() {
-        String path = "src/test/java/TestsFiles/TestInputData.csv";
-        List<FruitTransaction> actualData = parse.parseData(reader.readFile(path));
+    public void parseDataService_validData_ok() {
+        List<FruitTransaction> actualData = parse.parseData(reader.readFile(PATH));
         List<FruitTransaction> expectedData = List.of(TestsTransaction);
         assertEquals(expectedData, actualData,
-                "Your ParseService class work incorrectly");
+                "Your ParseService class works incorrectly");
 
     }
 
     @Test
-    public void invalidQuantity_NotOk() {
+    public void parseDataService_invalidQuantity_notOk() {
         List<String> invalidQuantity = List.of("b,banana,-10");
         assertThrows(RuntimeException.class, () -> parse.parseData(invalidQuantity));
     }
 
     @Test
-    public void invalidLength_NotOk() {
+    public void parseDataService_invalidLength_notOk() {
         List<String> invalidLength = List.of("b,apple,10,else");
         assertThrows(RuntimeException.class, () -> parse.parseData(invalidLength));
     }

@@ -13,7 +13,7 @@ import service.TransactionProcessor;
 class ReportServiceImplTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String HEAD = "fruit,quantity" + LINE_SEPARATOR;
-    private static final String PATH = "src/test/java/TestsFiles/TestInputData.csv";
+    private static final String PATH = "src/test/java/resources/TestInputData.csv";
     private FileReaderImpl fileReader;
     private ParseDataServiceImpl parse;
     private ReportServiceImpl reportService;
@@ -32,7 +32,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void createReport_0k() {
+    void reportServiceTest_createReport_ok() {
         String actualReport = reportService.createReport();
         String expectedReport = HEAD
                 + "banana,210"

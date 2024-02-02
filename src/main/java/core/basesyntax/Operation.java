@@ -5,11 +5,11 @@ public enum Operation {
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
+    private String code;
 
     Operation(String code) {
         this.code = code;
     }
-    private String code;
 
     public String getCode() {
         return code;

@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionConverterImpl implements TransactionConverter {
-    final int OPERATION_INDEX = 0;
-    final int FRUIT_INDEX = 1;
-    final int QUNTITY_INDEX = 2;
-    final String COMMA_SEPARATOP = ",";
-    final int FIRST_TRANSACTION_LINE_INDEX = 1;
+    private final int operationIndex = 0;
+    private final int fruitIndex = 1;
+    private final int quntityIndex = 2;
+    private final String commaSeparatop = ",";
+    private final int firstTransactionLineIndex = 1;
 
     @Override
     public List<FruitTransaction> convert(List<String> lines) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (int i = FIRST_TRANSACTION_LINE_INDEX; i < lines.size(); i++) {
-            String[] line = lines.get(i).split(COMMA_SEPARATOP);
-            Operation operation = Operation.getOperationFromCode(line[OPERATION_INDEX]);
-            FruitTransaction transaction = new FruitTransaction(operation, line[FRUIT_INDEX],
-                    Integer.parseInt(line[QUNTITY_INDEX]));
+        for (int i = firstTransactionLineIndex; i < lines.size(); i++) {
+            String[] line = lines.get(i).split(commaSeparatop);
+            Operation operation = Operation.getOperationFromCode(line[operationIndex]);
+            FruitTransaction transaction = new FruitTransaction(operation, line[fruitIndex],
+                    Integer.parseInt(line[quntityIndex]));
             fruitTransactionList.add(transaction);
         }
         return fruitTransactionList;

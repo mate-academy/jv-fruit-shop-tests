@@ -1,11 +1,10 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.Operation;
-
 import java.util.Map;
 
 public class OperationStrategy {
-    Map<Operation, OperationHandler> operationStrategyrMap;
+    private final Map<Operation, OperationHandler> operationStrategyrMap;
 
     public OperationStrategy() {
         this.operationStrategyrMap = Map.of(

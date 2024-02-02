@@ -1,12 +1,13 @@
 package core.basesyntax.strategy;
 
+import static core.basesyntax.Operation.BALANCE;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.transaction.FruitTransaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static core.basesyntax.Operation.BALANCE;
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PurchaseHandlerTest {
     private OperationHandler handler;
@@ -24,7 +25,7 @@ class PurchaseHandlerTest {
     @Test
     public void testHandlePurcasheNonExistentFruitFromStorage() {
         FruitTransaction transaction = new FruitTransaction(BALANCE, "Lemon", 10);
-        assertThrows(RuntimeException.class, () -> handler.handle(transaction));//10, Storage.storage.get("Lemon"));
+        assertThrows(RuntimeException.class, () -> handler.handle(transaction));
     }
 
     @Test

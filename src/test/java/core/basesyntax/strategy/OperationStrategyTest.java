@@ -1,12 +1,11 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.transaction.TransactionProcessorImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertThrows;
 
+import org.junit.jupiter.api.Test;
+
 class OperationStrategyTest {
-    OperationStrategy strategy = new OperationStrategy();
+    private final OperationStrategy strategy = new OperationStrategy();
 
     @Test
     void testWriteToStorageWithNullContent() {

@@ -1,18 +1,19 @@
 package core.basesyntax.transaction;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class TransactionConverterImplTest {
     private TransactionConverter transactionConverter;
-    List<String> lines = new ArrayList<>();
+    private final List<String> lines = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {

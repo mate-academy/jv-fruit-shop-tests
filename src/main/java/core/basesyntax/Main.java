@@ -4,8 +4,11 @@ import core.basesyntax.service.FileService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.transaction.*;
-
+import core.basesyntax.transaction.FruitTransaction;
+import core.basesyntax.transaction.TransactionConverter;
+import core.basesyntax.transaction.TransactionConverterImpl;
+import core.basesyntax.transaction.TransactionProcessor;
+import core.basesyntax.transaction.TransactionProcessorImpl;
 import java.io.IOException;
 import java.util.List;
 

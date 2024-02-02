@@ -1,12 +1,14 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.transaction.FruitTransaction;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static core.basesyntax.Operation.BALANCE;
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import core.basesyntax.db.Storage;
+import core.basesyntax.transaction.FruitTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class SupplyHandlerTest {
     private OperationHandler handler;
@@ -14,6 +16,11 @@ class SupplyHandlerTest {
     @BeforeEach
     public void setUp() {
         handler = new SupplyHandler();
+    }
+
+    @AfterEach
+    public void tearDoan() {
+        Storage.storage.clear();
     }
 
     @Test
@@ -35,5 +42,4 @@ class SupplyHandlerTest {
         handler.handle(transaction);
         assertEquals(8, Storage.storage.get("banana"));
     }
-
 }

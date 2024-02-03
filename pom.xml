@@ -53,6 +53,7 @@
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <sourceDirectories>src</sourceDirectories>
                 </configuration>
             </plugin>
             <plugin>
@@ -110,6 +111,9 @@
                         <source>${jdk.version}</source>
                         <target>${jdk.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
+                        <testExcludes>
+                            <exclude>**/src/main/*</exclude>
+                        </testExcludes>
                     </configuration>
                 </plugin>
                 <plugin>

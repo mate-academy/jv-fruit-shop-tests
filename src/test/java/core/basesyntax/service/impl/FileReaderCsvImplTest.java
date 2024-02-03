@@ -18,8 +18,8 @@ class FileReaderCsvImplTest {
 
     @Test
     void read_correctCsvFile_Ok() {
-        String correctCsvFile1 = "src/test/resources/correct-file1.csv";
-        String correctCsvFile2 = "src/test/resources/correct-file2.csv";
+        String correctCsvFile1 = "src/test/resources/reader/correct-file1.csv";
+        String correctCsvFile2 = "src/test/resources/reader/correct-file2.csv";
         String expectedString = "line";
         List<String> linesFrom1 = FILE_READER_CSV.read(correctCsvFile1);
         for (String currentLine : linesFrom1) {
@@ -32,9 +32,9 @@ class FileReaderCsvImplTest {
     }
 
     @Test
-    void read_notCsvFile_NotOk() {
-        String incorrectFileType1 = "src/test/resources/incorrect-file-type1.xml";
-        String incorrectFileType2 = "src/test/resources/incorrect-file-type2.txt";
+    void read_notCsvFileExtension_NotOk() {
+        String incorrectFileType1 = "src/test/resources/reader/incorrect-file-type1.xml";
+        String incorrectFileType2 = "src/test/resources/reader/incorrect-file-type2.txt";
         Throwable exception1 = assertThrows(RuntimeException.class, () ->
                 FILE_READER_CSV.read(incorrectFileType1));
         assertEquals(INCORRECT_FILE_TYPE_MESSAGE, exception1.getMessage());
@@ -53,7 +53,7 @@ class FileReaderCsvImplTest {
 
     @Test
     void read_fileDoesntExist_notOk() {
-        String notExistedFile = "src/test/resources/not-existing-file.csv";
+        String notExistedFile = "src/test/resources/reader/not-existing-file.csv";
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 FILE_READER_CSV.read(notExistedFile));
         assertEquals(FILE_DOESNT_EXIST_MESSAGE, exception.getMessage());
@@ -61,8 +61,8 @@ class FileReaderCsvImplTest {
 
     @Test
     void read_emptyFile_NotOk() {
-        String emptyFile1 = "src/test/resources/empty-file2.csv";
-        String emptyFile2 = "src/test/resources/empty-file2.csv";
+        String emptyFile1 = "src/test/resources/reader/empty-file2.csv";
+        String emptyFile2 = "src/test/resources/reader/empty-file2.csv";
         Throwable exception1 = assertThrows(RuntimeException.class, () ->
                 FILE_READER_CSV.read(emptyFile1));
         assertEquals(FILE_IS_EMPTY_MESSAGE, exception1.getMessage());
@@ -73,8 +73,8 @@ class FileReaderCsvImplTest {
 
     @Test
     void read_wrongFirstLineFormat_notOk() {
-        String wrongFirstLineFile1 = "src/test/resources/wrong-first-line-file1.csv";
-        String wrongFirstLineFile2 = "src/test/resources/wrong-first-line-file1.csv";
+        String wrongFirstLineFile1 = "src/test/resources/reader/wrong-first-line-file1.csv";
+        String wrongFirstLineFile2 = "src/test/resources/reader/wrong-first-line-file1.csv";
         Throwable exception1 = assertThrows(RuntimeException.class, () ->
                 FILE_READER_CSV.read(wrongFirstLineFile1));
         assertEquals(WRONG_FIRST_LINE_FORMAT_MESSAGE, exception1.getMessage());

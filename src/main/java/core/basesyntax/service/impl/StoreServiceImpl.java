@@ -17,14 +17,26 @@ public class StoreServiceImpl implements StoreService {
     private ArticleDao fruitTransactionDao;
     private TransactionStrategy transactionStrategy;
 
-    public StoreServiceImpl(ArticleDao fruitTransactionDao,
+    public StoreServiceImpl(ArticleDao articleDao,
                             TransactionStrategy transactionStrategy) {
-        this.fruitTransactionDao = fruitTransactionDao;
+        if (articleDao == null || transactionStrategy == null) {
+            throw new IllegalArgumentException("Parameters can't be null, but:"
+                    + "\narticleDao = " + articleDao
+                    + "\ntransactionStrategy = " + transactionStrategy);
+        }
+        this.fruitTransactionDao = articleDao;
         this.transactionStrategy = transactionStrategy;
     }
 
     @Override
     public void updateStorage(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new NullPointerException("Transaction list is null");
+        } else if (transactions.contains(null)) {
+            throw new NullPointerException("Transaction list contain null element");
+        } else if (transactions.isEmpty()) {
+            throw new RuntimeException("Transaction list is empty");
+        }
         Map<String, Integer> result = new HashMap<>();
         for (FruitTransaction transaction : transactions) {
             transactionStrategy.get(transaction.getOperation()).proceed(result, transaction);
@@ -51,13 +63,17 @@ public class StoreServiceImpl implements StoreService {
         StringBuilder newRow = new StringBuilder();
         String article;
         int quantity;
-        List<String> articles = fruitTransactionDao.getArticles();
-        for (String articleFromStorage : articles) {
-            article = articleFromStorage;
-            quantity = fruitTransactionDao.getQuantity(article);
-            newRow.append(article).append(ROW_SEPARATOR).append(quantity);
-            report.add(newRow.toString());
-            newRow.setLength(STARTED_ROW_LENGTH);
+        try {
+            List<String> articles = fruitTransactionDao.getArticles();
+            for (String articleFromStorage : articles) {
+                article = articleFromStorage;
+                quantity = fruitTransactionDao.getQuantity(article);
+                newRow.append(article).append(ROW_SEPARATOR).append(quantity);
+                report.add(newRow.toString());
+                newRow.setLength(STARTED_ROW_LENGTH);
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Storage is empty");
         }
         return report;
     }

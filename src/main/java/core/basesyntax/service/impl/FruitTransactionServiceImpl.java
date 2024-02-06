@@ -67,9 +67,11 @@ public class FruitTransactionServiceImpl implements TransactionService {
                     + "' shouldn't contain numbers and"
                     + " special characters");
         }
-        if (fruitTransactionDao.getQuantity(fruitField) == null) {
-            throw new RuntimeException("fruit '" + fruitField
-                    + "' doesn't exist in database or wrong fruit name in line: '" + line + "'");
+        try {
+            fruitTransactionDao.getQuantity(fruitField);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Storage doesn't contain article '" + fruitField
+                    + "'");
         }
         return fruitField;
     }

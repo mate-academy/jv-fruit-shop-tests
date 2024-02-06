@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,12 @@ class FileWriterCsvImplTest {
         report.add("line4");
         report.add("line5");
         report.add("line6");
+    }
+
+    @AfterEach
+    void cleanUpEach() {
+        File targetFile = new File(fileName);
+        targetFile.delete();
     }
 
     @Test

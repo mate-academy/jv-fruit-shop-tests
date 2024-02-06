@@ -6,10 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class SupplierTest {
-    private final OperationCompiler supplier = new Supplier();
+    private static OperationCompiler supplier;
+
+    @BeforeAll
+    static void beforeAll() {
+        supplier = new Supplier();
+    }
 
     @Test
     void doOperation_negativeQuantity_notOk() {

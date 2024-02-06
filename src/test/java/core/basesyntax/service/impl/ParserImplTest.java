@@ -6,11 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ParserImplTest {
-    private final Parser parser = new ParserImpl();
-    private final List<String> fruits = new ArrayList<>();
+    private static Parser parser;
+    private static List<String> fruits;
+
+    @BeforeAll
+    static void beforeAll() {
+        parser = new ParserImpl();
+        fruits = new ArrayList<>();
+    }
 
     @Test
     void parseFile_wrongData_notOk() {

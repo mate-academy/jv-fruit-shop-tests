@@ -6,13 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.Reader;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReaderImplTest {
-    private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
-    private static final String NOT_EMPTY_FILE_PATH = "src/test/resources/fruits.csv";
-    private static final String NOT_EXIST_FILE_PATH = "src/test/resources/file_exist.csv";
-    private final Reader reader = new ReaderImpl();
+    private static String EMPTY_FILE_PATH;
+    private static String NOT_EMPTY_FILE_PATH;
+    private static String NOT_EXIST_FILE_PATH;
+    private static Reader reader;
+
+    @BeforeAll
+    static void beforeAll() {
+        EMPTY_FILE_PATH = "src/test/resources/empty.csv";
+        NOT_EMPTY_FILE_PATH = "src/test/resources/fruits.csv";
+        NOT_EXIST_FILE_PATH = "src/test/resources/file_exist.csv";
+        reader = new ReaderImpl();
+    }
 
     @Test
     void readFromFile_emptyFile_ok() {

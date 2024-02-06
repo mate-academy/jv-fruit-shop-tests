@@ -6,10 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReturnerTest {
-    private final OperationCompiler returner = new Returner();
+    private static OperationCompiler returner;
+
+    @BeforeAll
+    static void beforeAll() {
+        returner = new Returner();
+    }
 
     @Test
     void doOperation_negativeQuantity_notOk() {

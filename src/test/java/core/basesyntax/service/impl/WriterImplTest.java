@@ -6,11 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.basesyntax.service.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class WriterImplTest {
-    private static final String REPORT_FILE_PATH = "src/test/resources/report.csv";
-    private final Writer writer = new WriterImpl();
+    private static Writer writer;
+
+    @BeforeAll
+    static void beforeAll() {
+        writer = new WriterImpl();
+    }
 
     @Test
     void writeToFile_nullValues_notOk() {
@@ -20,7 +25,8 @@ class WriterImplTest {
 
     @Test
     void writeToFile_rightData_ok() {
-        writer.writeToFile("report", REPORT_FILE_PATH);
-        assertTrue(Files.exists(Path.of(REPORT_FILE_PATH)));
+        String filePath = "src/test/resources/report.csv";
+        writer.writeToFile("report", filePath);
+        assertTrue(Files.exists(Path.of(filePath)));
     }
 }

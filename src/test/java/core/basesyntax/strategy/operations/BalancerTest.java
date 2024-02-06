@@ -6,10 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalancerTest {
-    private final OperationCompiler balancer = new Balancer();
+    private static OperationCompiler balancer;
+
+    @BeforeAll
+    static void beforeAll() {
+        balancer = new Balancer();
+    }
 
     @Test
     void doOperation_negativeQuantity_notOk() {

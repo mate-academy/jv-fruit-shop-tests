@@ -25,19 +25,19 @@ class ReturnHandlerTest {
     }
 
     @Test
-    void testWriteToStorageWithNullContent() {
+    public void handle_WithNullContent_ThrowException() {
         assertThrows(RuntimeException.class, () -> handler.handle(null));
     }
 
     @Test
-    public void testHandleAddNewFruitToStorage() {
+    public void handle_FruitToStorage_Ok() {
         FruitTransaction transaction = new FruitTransaction(BALANCE, "Lemon", 10);
         handler.handle(transaction);
         assertEquals(10, Storage.storage.get("Lemon"));
     }
 
     @Test
-    public void testHandleUpdateExistingFruitQuantity() {
+    public void handle_ExistingFruitQuantity_Ok() {
         Storage.storage.put("banana", 10);
         FruitTransaction transaction = new FruitTransaction(BALANCE, "banana", 2);
         handler.handle(transaction);

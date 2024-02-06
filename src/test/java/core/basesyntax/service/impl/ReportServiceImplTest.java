@@ -23,13 +23,13 @@ class ReportServiceImplTest {
     }
 
     @Test
-    public void testCreateReportWithEmptyStorage() {
+    public void createReport_FromEmptyStorage_Ok() {
         String report = reportService.createReport();
         assertEquals("fruit,quantity\n", report);
     }
 
     @Test
-    public void testCreateReportWithNonEmptyStorage() {
+    public void createReport_Ok() {
         Storage.storage.put("Apple", 10);
         Storage.storage.put("Banana", 5);
         String report = reportService.createReport();
@@ -37,7 +37,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    public void testCreateReportWithZeroQuantity() {
+    public void createReportWithZeroQuantity_Ok() {
         Storage.storage.put("Orange", 0);
         String report = reportService.createReport();
         assertEquals("fruit,quantity\nOrange,0\n", report);

@@ -27,17 +27,17 @@ class TransactionConverterImplTest {
     }
 
     @Test
-    void testWriteToStorageWithNullContent() {
+    void convert_NullContent_ThrowException() {
         assertThrows(RuntimeException.class, () -> transactionConverter.convert(null));
     }
 
     @Test
-    void testWriteToStorageWithEmptyContent() {
+    void convert_EmptyContent_NotThrowException() {
         assertDoesNotThrow(() -> transactionConverter.convert(lines));
     }
 
     @Test
-    void testWriteToStorageOneElement() {
+    void convert_OnlyHeaderLine_Ok() {
         lines.add("type,fruit,quantity");
         assertDoesNotThrow(() -> transactionConverter.convert(lines));
     }

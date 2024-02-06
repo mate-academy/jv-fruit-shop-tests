@@ -29,20 +29,20 @@ class FileServiceImplTest {
     }
 
     @Test
-    public void testReadFileWithNullFilePath() {
+    public void readFileFromNullFilePath_ThrowException() {
         String nullFilePath = null;
         assertThrows(RuntimeException.class, () -> fileService.readFile(nullFilePath));
     }
 
     @Test
-    public void testReadFileWithEmpptyFilePath() {
+    public void readFileFromEmptyFilePath_ThrowException() {
         String empFilePath = " ";
 
         assertThrows(RuntimeException.class, () -> fileService.readFile(empFilePath));
     }
 
     @Test
-    public void testWriteToFile() {
+    public void writeToFile_Ok() {
         String content = "Test content";
         fileService.writeToFile(testFileName, content);
         assertTrue(Files.exists(Path.of(testFileName)));
@@ -54,13 +54,13 @@ class FileServiceImplTest {
     }
 
     @Test
-    public void testWriteToFileWithNullFileName() {
+    public void writeToFileWithNullFileName_ThrowException() {
         String content = "Test content";
         assertThrows(RuntimeException.class, () -> fileService.writeToFile(null, content));
     }
 
     @Test
-    public void testWriteToFileWithNullContent() {
+    public void writeToFileWithNullContent_ThrowException() {
         String fileName = "testFile.txt";
         assertThrows(RuntimeException.class, () -> fileService.writeToFile(fileName, null));
     }

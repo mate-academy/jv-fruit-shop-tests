@@ -18,18 +18,18 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void testWriteToStorageWithNullContent() {
+    public void handle_WithNullContent_ThrowException() {
         assertThrows(RuntimeException.class, () -> handler.handle(null));
     }
 
     @Test
-    public void testHandlePurcasheNonExistentFruitFromStorage() {
+    public void handle_NonExistentFruit_ThrowException() {
         FruitTransaction transaction = new FruitTransaction(BALANCE, "Lemon", 10);
         assertThrows(RuntimeException.class, () -> handler.handle(transaction));
     }
 
     @Test
-    public void testHandleUpdateExistingFruitQuantity() {
+    public void handle_UpdateExistingFruitQuantity_Equals() {
         Storage.storage.put("banana", 10);
         FruitTransaction transaction = new FruitTransaction(BALANCE, "banana", 2);
         handler.handle(transaction);

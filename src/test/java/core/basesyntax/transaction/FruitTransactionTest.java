@@ -8,23 +8,22 @@ class FruitTransactionTest {
     private final FruitTransaction transaction = new FruitTransaction(null, null, 0);
 
     @Test
-    void testGetOperationFromNull_Ok() {
+    void getOperation_FromNull_Ok() {
         assertDoesNotThrow(() -> transaction.getOperation());
     }
 
     @Test
-    void testGetFruitFromNull_Ok() {
+    void getFruit_FromNull_Ok() {
         assertDoesNotThrow(() -> transaction.getFruit());
     }
 
     @Test
-    void testGetQuantityFromNull_Ok() {
+    void getQuantity_FromNull_Ok() {
         assertDoesNotThrow(() -> transaction.getQuantity());
     }
 
     @Test
-    void testToStringWithNullValue() {
-        //FruitTransaction transaction = new FruitTransaction(null, null, 0);
+    void toString_WithNullValue_NotThrowException() {
         assertDoesNotThrow(() -> transaction.toString());
     }
 }

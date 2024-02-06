@@ -26,12 +26,12 @@ class TransactionProcessorImplTest {
     }
 
     @Test
-    void testWriteToStorageWithNullContent() {
+    void processTransactions_NullContent_ThrowException() {
         assertThrows(RuntimeException.class, () -> transactionProcessor.processTransactions(null));
     }
 
     @Test
-    void testWriteToStorageOneElement() {
+    void processTransactions_EmptyTransaction_ThrowException() {
         FruitTransaction transaction = new FruitTransaction(null, null, 0);
         list.add(transaction);
         assertThrows(RuntimeException.class, () -> transactionProcessor.processTransactions(list));

@@ -26,15 +26,17 @@ class ReportCreatorImplTest {
     @Test
     void createReport_rightData_ok() {
         String rightReport = "fruit,quantity"
-                + System.lineSeparator() + "banana,10";
+                + System.lineSeparator() + "banana,10" + System.lineSeparator()
+                + "apple,20";
         Storage.fruits.put("banana", 10);
-        assertEquals(rightReport, reportCreator.createReport(Storage.fruits).trim());
+        Storage.fruits.put("apple", 20);
+        assertEquals(rightReport, reportCreator.createReport(Storage.fruits));
     }
 
     @Test
     void createReport_emptyStorage_ok() {
         String emptyReport = "fruit,quantity";
-        assertEquals(emptyReport, reportCreator.createReport(Storage.fruits).trim());
+        assertEquals(emptyReport, reportCreator.createReport(Storage.fruits));
     }
 
     @AfterEach

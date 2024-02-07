@@ -16,6 +16,6 @@ public class ReportCreatorImpl implements ReportCreator {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return report.toString();
+        return report.toString().trim();
     }
 }

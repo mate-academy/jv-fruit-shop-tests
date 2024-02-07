@@ -48,6 +48,12 @@ public class FruitTransactionServiceImpl implements TransactionService {
         }
         FruitTransaction transaction = new FruitTransaction();
         String fruit = validateFruitField(fields[FRUIT_INDEX], line);
+        try {
+            fruitTransactionDao.getQuantity(fruit);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Storage doesn't contain article '" + fruit
+                    + "'");
+        }
         transaction.setFruit(fruit);
         int quantity = validateQuantityField(fields[QUANTITY_INDEX], line);
         transaction.setQuantity(quantity);
@@ -66,12 +72,6 @@ public class FruitTransactionServiceImpl implements TransactionService {
             throw new RuntimeException("Article name in line: '" + line
                     + "' shouldn't contain numbers and"
                     + " special characters");
-        }
-        try {
-            fruitTransactionDao.getQuantity(fruitField);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Storage doesn't contain article '" + fruitField
-                    + "'");
         }
         return fruitField;
     }

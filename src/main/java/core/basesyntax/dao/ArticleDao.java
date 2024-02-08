@@ -12,4 +12,6 @@ public interface ArticleDao {
     List<String> getArticles();
 
     void removeArticle(String article);
+
+    boolean isContainArticle(String article);
 }

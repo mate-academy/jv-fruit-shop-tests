@@ -48,9 +48,7 @@ public class FruitTransactionServiceImpl implements TransactionService {
         }
         FruitTransaction transaction = new FruitTransaction();
         String fruit = validateFruitField(fields[FRUIT_INDEX], line);
-        try {
-            fruitTransactionDao.getQuantity(fruit);
-        } catch (RuntimeException e) {
+        if (!fruitTransactionDao.isContainArticle(fruit)) {
             throw new RuntimeException("Storage doesn't contain article '" + fruit
                     + "'");
         }

@@ -80,7 +80,7 @@ class FileWriterCsvImplTest {
     @Test
     void write_filePathIsNotValid() {
         List<String> incorrectFileNameFormat = new ArrayList<>();
-        incorrectFileNameFormat.add("  src/test/resources/writer/reportCsv.csv");
+        incorrectFileNameFormat.add("  !src/test/resources/writer/reportCsv.csv");
         incorrectFileNameFormat.add("src/test/!resources/writer/reportCsv.csv");
         incorrectFileNameFormat.add("src/test/resources/\nwriter/reportCsv.csv");
         incorrectFileNameFormat.add("src/test/resources/%writer/reportCsv.csv.csv");

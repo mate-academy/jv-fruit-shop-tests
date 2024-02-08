@@ -76,4 +76,9 @@ public class ArticleDaoImpl implements ArticleDao {
         }
         Storage.storage.remove(article);
     }
+
+    @Override
+    public boolean isContainArticle(String article) {
+        return Storage.storage.containsKey(article);
+    }
 }

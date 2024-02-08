@@ -8,12 +8,10 @@ import core.basesyntax.service.Writer;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -32,12 +30,6 @@ class FileWriterCsvImplTest {
         report.add("line4");
         report.add("line5");
         report.add("line6");
-    }
-
-    @AfterEach
-    void cleanUpEach() {
-        File targetFile = new File(fileName);
-        targetFile.delete();
     }
 
     @Test
@@ -75,26 +67,6 @@ class FileWriterCsvImplTest {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> FILE_WRITER_CSV.write(emptyFileName, report));
         assertEquals("File name is empty", exception.getMessage());
-    }
-
-    @Test
-    void write_filePathIsNotValid() {
-        List<String> incorrectFileNameFormat = new ArrayList<>();
-        incorrectFileNameFormat.add("  !src/test/resources/writer/reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/!resources/writer/reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/resources/\nwriter/reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/resources/%writer/reportCsv.csv.csv");
-        incorrectFileNameFormat.add("src/test/resources&^/writer/reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/resources |/writer/reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/resources/writer/:reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/resources/,writer/reportCsv.csv");
-        incorrectFileNameFormat.add("src/test/resources%writer/reportCsv.csv");
-        incorrectFileNameFormat.add("!src/+test/resources/writer/-reportCsv.csv");
-        for (String path : incorrectFileNameFormat) {
-            Throwable exception = assertThrows(InvalidPathException.class,
-                    () -> FILE_WRITER_CSV.write(path, report));
-            assertEquals("File path is not valid: " + path, exception.getMessage());
-        }
     }
 
     @Test

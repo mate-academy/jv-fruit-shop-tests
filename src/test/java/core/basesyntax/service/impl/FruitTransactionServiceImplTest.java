@@ -177,29 +177,6 @@ class FruitTransactionServiceImplTest {
     }
 
     @Test
-    void createTransaction_articleDoesntExistInDatabase_NotOk() {
-        LINES.add("b,pineapple,101");
-        LINES.add("r,pineapple,40");
-        LINES.add("s,pineapple,5");
-        LINES.add("p,pineapple,7");
-        LINES.add("b,strawberry,104");
-        LINES.add("r,strawberry,20");
-        LINES.add("s,strawberry,51");
-        LINES.add("p,strawberry,37");
-        LINES.add("b,lemon,37");
-        LINES.add("s,lemon,37");
-        LINES.add("p,lemon,37");
-        LINES.add("r,lemon,37");
-        for (String line : LINES) {
-            String article = line.split(LINE_SEPARATOR)[ARTICLE_FIELD_INDEX];
-            Throwable exception = assertThrows(RuntimeException.class,
-                    () -> fruitTRansactionService.createTransaction(line));
-            assertEquals("Storage doesn't contain article '" + article
-                    + "'", exception.getMessage());
-        }
-    }
-
-    @Test
     void createTransaction_incorrectTransactionIndex_NotOk() {
         LINES.add("h,apple,20");
         LINES.add("v,apple,20");

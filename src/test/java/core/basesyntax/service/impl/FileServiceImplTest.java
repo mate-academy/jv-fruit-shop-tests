@@ -15,12 +15,11 @@ import org.junit.jupiter.api.Test;
 
 class FileServiceImplTest {
     private FileService fileService;
-    private String testFileName;
+    private final String testFileName = "testFile.txt";
 
     @BeforeEach
     public void setUp() {
         fileService = new FileServiceImpl();
-        testFileName = "testFile.txt";
     }
 
     @AfterEach

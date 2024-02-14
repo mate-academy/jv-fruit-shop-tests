@@ -13,6 +13,10 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class FruitTransactionServiceImplTest {
     private static final String LINE_SEPARATOR = ",";
@@ -20,8 +24,8 @@ class FruitTransactionServiceImplTest {
     private static final int ARTICLE_FIELD_INDEX = 1;
     private static final int QUANTITY_FIELD_INDEX = 2;
     private static final List<String> LINES = new ArrayList<>();
-    private ArticleDao articleDao = new ArticleDaoImpl();
-    private TransactionService fruitTRansactionService
+    private final ArticleDao articleDao = new ArticleDaoImpl();
+    private final TransactionService fruitTRansactionService
             = new FruitTransactionServiceImpl(articleDao);
 
     @BeforeAll
@@ -40,229 +44,168 @@ class FruitTransactionServiceImplTest {
     }
 
     @Test
-    void constructor_parameterIsNull_NotOk() {
+    void constructor_parameterIsNull_notOk() {
         ArticleDao nullArticleDao = null;
         Throwable exception = assertThrows(IllegalArgumentException.class, () ->
                 new FruitTransactionServiceImpl(nullArticleDao));
         assertEquals("Constructor parameter can't be null", exception.getMessage());
     }
 
-    @Test
-    void create_correctLineFormat_ok() {
-        LINES.add("b,apple,20");
-        LINES.add("s,apple,45");
-        LINES.add("p,apple,1");
-        LINES.add("r,apple,0");
-        LINES.add("b,banana,10000");
-        LINES.add("s,banana,46");
-        LINES.add("p,banana,34");
-        LINES.add("r,banana,4");
-        LINES.add("b,orange,441");
-        LINES.add("s,orange,256");
-        LINES.add("p,orange,12");
-        LINES.add("r,orange,98");
-        for (String line : LINES) {
-            String expectedTransactionCodeField
-                    = line.split(LINE_SEPARATOR)[TRANSACTION_FIELD_INDEX];
-            String expectedArticleField
-                    = line.split(LINE_SEPARATOR)[ARTICLE_FIELD_INDEX];
-            int expectedQuantityField
-                    = Integer.parseInt(line.split(LINE_SEPARATOR)[QUANTITY_FIELD_INDEX]);
-            FruitTransaction transaction
-                    = fruitTRansactionService.createTransaction(line);
-            assertEquals(expectedQuantityField, transaction.getQuantity());
-            assertEquals(expectedArticleField, transaction.getFruit());
-            assertEquals(expectedTransactionCodeField, transaction.getOperation().getCode());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "b,apple,20", "p,banana,34",
+            "s,apple,45", "r,banana,4",
+            "p,apple,1", "b,orange,441",
+            "r,apple,0", "s,orange,256",
+            "b,banana,10000", "p,orange,12",
+            "s,banana,46","r,orange,98"
+    })
+    void create_correctLineFormat_ok(String line) {
+        String expectedTransactionCodeField
+                = line.split(LINE_SEPARATOR)[TRANSACTION_FIELD_INDEX];
+        String expectedArticleField
+                = line.split(LINE_SEPARATOR)[ARTICLE_FIELD_INDEX];
+        int expectedQuantityField
+                = Integer.parseInt(line.split(LINE_SEPARATOR)[QUANTITY_FIELD_INDEX]);
+        FruitTransaction transaction
+                = fruitTRansactionService.createTransaction(line);
+        assertEquals(expectedQuantityField, transaction.getQuantity());
+        assertEquals(expectedArticleField, transaction.getFruit());
+        assertEquals(expectedTransactionCodeField, transaction.getOperation().getCode());
+
     }
 
-    @Test
-    void createTransaction_incorrectArticleNameFormat_NotOk() {
-        LINES.add("b,applE,20");
-        LINES.add("s,ApPle|(,45");
-        LINES.add("p,APPLE,1");
-        LINES.add("r,ApplE,0");
-        LINES.add("b,Banana,10000");
-        LINES.add("s,baNAna^*,46");
-        LINES.add("p,bnana#$,34");
-        LINES.add("r,Banana,4");
-        LINES.add("b,ORange!,441");
-        LINES.add("s,Orange,256");
-        LINES.add("p,ORANGE,12");
-        LINES.add("r,$%&OraNge,98");
-        for (String line : LINES) {
-            Throwable exception = assertThrows(RuntimeException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Article name in line: '" + line
-                            + "' shouldn't contain numbers and"
-                            + " special characters",
-                    exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "b,applE,20", "s,ApPle|(,45",
+            "p,APPLE,1", "r,ApplE,0",
+            "b,Banana,10000", "s,baNAna^*,46",
+            "p,bnana#$,34", "r,Banana,4",
+            "b,ORange!,441", "s,Orange,256",
+            "p,ORANGE,12","r,$%&OraNge,98"
+    })
+    void createTransaction_incorrectArticleNameFormat_notOk(String line) {
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Article name in line: '" + line
+                        + "' shouldn't contain numbers and"
+                        + " special characters", exception.getMessage());
     }
 
-    @Test
-    void createTransaction_quantityIs0_Ok() {
-        LINES.add("b,apple,0");
-        LINES.add("s,apple,0");
-        LINES.add("p,apple,0");
-        LINES.add("r,apple,0");
-        LINES.add("b,banana,0");
-        LINES.add("s,banana,0");
-        LINES.add("p,banana,0");
-        LINES.add("r,banana,0");
-        LINES.add("b,orange,0");
-        LINES.add("s,orange,0");
-        LINES.add("p,orange,0");
-        LINES.add("r,orange,0");
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "b,apple,0", "s,apple,0",
+            "p,apple,0", "r,apple,0",
+            "b,banana,0", "s,banana,0",
+            "p,banana,0", "r,banana,0",
+            "b,orange,0", "s,orange,0",
+            "p,orange,0","r,orange,0"
+    })
+    void createTransaction_quantityIsZero_ok(String line) {
         int expectedQuantityField = 0;
-        for (String line : LINES) {
-            FruitTransaction transaction = fruitTRansactionService.createTransaction(line);
-            assertEquals(expectedQuantityField, transaction.getQuantity());
-        }
+        FruitTransaction transaction = fruitTRansactionService.createTransaction(line);
+        assertEquals(expectedQuantityField, transaction.getQuantity());
     }
 
-    @Test
-    void createTransaction_parameterIsNull_NotOK() {
-        LINES.add(null);
-        LINES.add(null);
-        LINES.add(null);
-        LINES.add(null);
-        for (String line : LINES) {
-            Throwable exception = assertThrows(NullPointerException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Parameter can't be null", exception.getMessage());
-        }
+    @ParameterizedTest
+    @NullSource
+    void createTransaction_parameterIsNull_notOk(String line) {
+        Throwable exception = assertThrows(NullPointerException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Parameter can't be null", exception.getMessage());
     }
 
-    @Test
-    void createTransaction_lineIsEmpty_NotOk() {
-        LINES.add("");
-        LINES.add("");
-        LINES.add("");
-        LINES.add("");
-        for (String line : LINES) {
-            Throwable exception = assertThrows(RuntimeException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Line is empty", exception.getMessage());
-        }
+    @ParameterizedTest
+    @EmptySource
+    void createTransaction_lineIsEmpty_notOk(String line) {
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Line is empty", exception.getMessage());
+
     }
 
-    @Test
-    void createTransaction_incorrectLineFormat() {
-        LINES.add("banana,b100");
-        LINES.add("Apple");
-        LINES.add("b,Apple100");
-        LINES.add("bapple,100");
-        LINES.add("bApple100");
-        LINES.add("r,Orange,100,100");
-        LINES.add("r,orange,orange,100");
-        LINES.add("r,Orange,Orange,,Apple,100");
-        LINES.add("s,s,Orange,,Apple,100");
-        LINES.add("s,s,Orange,21,Apple,,");
-        LINES.add(",Banana,100");
-        LINES.add(",banana,");
-        LINES.add(",,40");
-        LINES.add(",,1");
-        LINES.add("r,Apple,");
-        LINES.add(",apple,");
-        LINES.add("r,,70");
-        LINES.add(",,");
-        for (String line : LINES) {
-            Throwable exception = assertThrows(RuntimeException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Wrong format in line: '" + line
-                    + "'\nShould be 3 fields separated by a coma. "
-                    + "Example: 'transaction,fruit,quantity'", exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "banana,b100", "Apple",
+            "b,Apple100", "bapple,100",
+            "bApple100", "r,Orange,100,100",
+            "r,orange,orange,100", "r,Orange,Orange,,Apple,100",
+            "s,s,Orange,,Apple,100", "s,s,Orange,21,Apple,,",
+            ",,40","r,,70"
+    })
+    void createTransaction_incorrectLineFormat_notOk(String line) {
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Wrong format in line: '" + line
+                + "'\nShould be 3 fields separated by a coma. "
+                + "Example: 'transaction,fruit,quantity'", exception.getMessage());
     }
 
-    @Test
-    void createTransaction_incorrectTransactionIndex_NotOk() {
-        LINES.add("h,apple,20");
-        LINES.add("v,apple,20");
-        LINES.add("d,apple,20");
-        LINES.add("a,orange,441");
-        LINES.add("t,orange,256");
-        LINES.add("x,orange,12");
-        LINES.add("o,banana,4");
-        LINES.add("l,banana,4");
-        LINES.add("m,banana,4");
-        for (String line : LINES) {
-            String transactionIndex
-                    = line.split(LINE_SEPARATOR)[TRANSACTION_FIELD_INDEX];
-            Throwable exception = assertThrows(RuntimeException.class,
-                    () -> fruitTRansactionService.createTransaction(line));
-            assertEquals("Incorrect transaction index '"
-                            + transactionIndex + "' in line: '" + line + "'",
-                    exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "h,apple,20", "v,apple,20",
+            "d,apple,20", "a,orange,441",
+            "t,orange,256", "x,orange,12",
+            "o,banana,4", "l,banana,4",
+            "m,banana,4"
+    })
+    void createTransaction_incorrectTransactionIndex_notOk(String line) {
+        String transactionIndex
+                = line.split(LINE_SEPARATOR)[TRANSACTION_FIELD_INDEX];
+        Throwable exception = assertThrows(RuntimeException.class,
+                () -> fruitTRansactionService.createTransaction(line));
+        assertEquals("Incorrect transaction index '"
+                        + transactionIndex + "' in line: '" + line + "'",
+                exception.getMessage());
+
     }
 
-    @Test
-    void createTransaction_negativeQuantity_NotOk() {
-        LINES.add("b,apple,-2");
-        LINES.add("s,apple,-100");
-        LINES.add("p,apple,-300");
-        LINES.add("r,apple,-48");
-        LINES.add("b,banana,-10000");
-        LINES.add("s,banana,-46");
-        LINES.add("p,banana,-34");
-        LINES.add("r,banana,-4");
-        LINES.add("b,orange,-441");
-        LINES.add("s,orange,-256");
-        LINES.add("p,orange,-12");
-        LINES.add("r,orange,-98");
-        for (String line : LINES) {
-            Throwable exception = assertThrows(RuntimeException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Quantity can't be less than zero in line: '"
-                    + line + "'", exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "b,apple,-2", "s,apple,-100",
+            "p,apple,-300", "r,apple,-48",
+            "b,banana,-10000", "s,banana,-46",
+            "p,banana,-34", "r,banana,-4",
+            "b,orange,-441", "s,orange,-256",
+            "p,orange,-12","r,orange,-98"
+    })
+    void createTransaction_negativeQuantity_notOk(String line) {
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Quantity can't be less than zero in line: '"
+                + line + "'", exception.getMessage());
     }
 
-    @Test
-    void createTransaction_quantityAdditionalCharacters_NotOk() {
-        LINES.add("b,apple,one");
-        LINES.add("s,apple,number");
-        LINES.add("p,apple,cat");
-        LINES.add("r,apple,1I1");
-        LINES.add("b,banana,_.");
-        LINES.add("s,banana,sixteen");
-        LINES.add("p,banana,word");
-        LINES.add("r,banana,one");
-        LINES.add("b,orange,44.1");
-        LINES.add("s,orange,2.56");
-        LINES.add("p,orange,0.12");
-        LINES.add("r,orange,six6");
-        for (String line : LINES) {
-            Throwable exception = assertThrows(RuntimeException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Wrong format of quantity field in line: '" + line
-                    + "'\n The field should be an integer number", exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "b,apple,one", "s,apple,number",
+            "p,apple,cat", "r,apple,1I1",
+            "p,banana,word", "r,banana,one",
+            "b,orange,44.1", "s,orange,2.56",
+            "p,orange,0.12", "r,orange,six6"
+    })
+    void createTransaction_quantityAdditionalCharacters_notOk(String line) {
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Wrong format of quantity field in line: '" + line
+                + "'\n The field should be an integer number", exception.getMessage());
     }
 
-    @Test
-    void createTransaction_spacesInLine_NotOk() {
-        LINES.add("b ,apple,20");
-        LINES.add(" s,apple,45");
-        LINES.add("p  ,apple,1");
-        LINES.add("r , apple, 0");
-        LINES.add("b ,  banana,1 000 0");
-        LINES.add("s,banana, 46");
-        LINES.add("p, banana ,34");
-        LINES.add("r ,banana , 4");
-        LINES.add("b,orange,4 41 ");
-        LINES.add("s,orange , 256");
-        LINES.add(" p , o r a n g e , 1 2 ");
-        LINES.add("r,ora nge,9 8");
-        for (String line : LINES) {
-            Throwable exception = assertThrows(RuntimeException.class, () ->
-                    fruitTRansactionService.createTransaction(line));
-            assertEquals("Line '" + line
-                    + "' shouldn't contain"
-                    + " spaces and upper case letters",
-                    exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "b ,apple,20", " s,apple,45",
+            "p  ,apple,1", "r , apple, 0",
+            "b ,  banana,1 000 0", "s,banana, 46",
+            "p, banana ,34", "r ,banana , 4",
+            "b,orange,4 41 ", "s,orange, 256",
+            " p , o r a n g e , 1 2 ","r,ora nge,9 8"
+    })
+    void createTransaction_spacesInLine_notOk(String line) {
+        Throwable exception = assertThrows(RuntimeException.class, () ->
+                fruitTRansactionService.createTransaction(line));
+        assertEquals("Line '" + line
+                + "' shouldn't contain"
+                + " spaces and upper case letters",
+                exception.getMessage());
     }
 }

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.Writer;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class FileWriterCsvImplTest {
     private static final Writer FILE_WRITER_CSV = new FileWriterCsvImpl();
@@ -33,7 +34,7 @@ class FileWriterCsvImplTest {
     }
 
     @Test
-    void write_nullParameters_NotOk() {
+    void write_nullParameters_notOk() {
         String nullName = null;
         List<String> nullList = null;
         Throwable exception1 = assertThrows(IllegalArgumentException.class,
@@ -54,7 +55,7 @@ class FileWriterCsvImplTest {
     }
 
     @Test
-    void write_reportIsEmpty_NotOk() {
+    void write_reportIsEmpty_notOk() {
         List<String> emptyReport = new ArrayList<>();
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> FILE_WRITER_CSV.write(fileName, emptyReport));
@@ -62,32 +63,31 @@ class FileWriterCsvImplTest {
     }
 
     @Test
-    void write_fileNameIsEmpty_NotOk() {
+    void write_fileNameIsEmpty_notOk() {
         String emptyFileName = "";
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> FILE_WRITER_CSV.write(emptyFileName, report));
         assertEquals("File name is empty", exception.getMessage());
     }
 
-    @Test
-    void write_notCsvFileExtension_NotOk() {
-        List<String> wrongFileFormatList = new ArrayList<>();
-        wrongFileFormatList.add("src/test/resources/writer/reportCsv.xml");
-        wrongFileFormatList.add("src/test/resources/writer/reportCsv.txt");
-        wrongFileFormatList.add("src/test/resources/writer/reportCsv.doc");
-        wrongFileFormatList.add("src/test/resources/writer/reportCsv.jpg");
-        wrongFileFormatList.add("src/test/resources/writer/reportCsv.java");
-        wrongFileFormatList.add("src/test/resources/writer/reportCsv.pdf");
-        for (String path : wrongFileFormatList) {
-            Throwable exception = assertThrows(RuntimeException.class,
-                    () -> FILE_WRITER_CSV.write(path, report));
-            assertEquals("The file extension is different from .csv: "
-                    + path, exception.getMessage());
-        }
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "src/test/resources/writer/reportCsv.xml",
+            "src/test/resources/writer/reportCsv.txt",
+            "src/test/resources/writer/reportCsv.doc",
+            "src/test/resources/writer/reportCsv.jpg",
+            "src/test/resources/writer/reportCsv.java",
+            "src/test/resources/writer/reportCsv.pdf"
+    })
+    void write_notCsvFileExtension_notOk(String path) {
+        Throwable exception = assertThrows(RuntimeException.class,
+                () -> FILE_WRITER_CSV.write(path, report));
+        assertEquals("The file extension is different from .csv: "
+                 + path, exception.getMessage());
     }
 
     @Test
-    void write_nullValueInReport_NotOk() {
+    void write_nullValueInReport_notOk() {
         List<String> listWithNull1 = new ArrayList<>();
         listWithNull1.add(null);
         listWithNull1.add(null);
@@ -107,7 +107,7 @@ class FileWriterCsvImplTest {
     }
 
     @Test
-    void write_correctParameters_Ok() {
+    void write_correctParameters_ok() {
         List<String> linesFromFile;
         FILE_WRITER_CSV.write(fileName, report);
         try {
@@ -121,9 +121,14 @@ class FileWriterCsvImplTest {
     }
 
     @Test
-    void write_fileAlreadyExist_Ok() {
+    void write_fileAlreadyExist_ok() {
         List<String> linesFromFile;
-        File newFile = new File(fileName);
+        List<String> recentReport = new ArrayList<>();
+        recentReport.add("previous line 1");
+        recentReport.add("previous line 2");
+        recentReport.add("previous line 3");
+        recentReport.add("previous line 4");
+        FILE_WRITER_CSV.write(fileName,recentReport);
         FILE_WRITER_CSV.write(fileName, report);
         try {
             Path path = Path.of(fileName);

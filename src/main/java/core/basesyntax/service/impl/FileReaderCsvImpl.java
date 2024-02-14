@@ -18,9 +18,9 @@ public class FileReaderCsvImpl implements Reader {
     public List<String> read(String fileName) {
         List<String> transactions = new ArrayList<>();
         if (fileName == null) {
-            throw new NullPointerException("File path is null");
+            throw new IllegalArgumentException("File path is null");
         }
-        if (!fileName.substring(fileName.length() - 4).equals(CSV_TYPE)) {
+        if (!fileName.substring(fileName.length() - CSV_TYPE.length()).equals(CSV_TYPE)) {
             throw new RuntimeException("Incorrect file type");
         }
         Path path = Path.of(fileName);

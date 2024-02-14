@@ -17,9 +17,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class StoreServiceImplTest {
     private static final ArticleDao ARTICLE_DAO = new ArticleDaoImpl();
@@ -41,7 +45,7 @@ class StoreServiceImplTest {
     }
 
     @Test
-    void constructor_nullParameters_NotOk() {
+    void constructor_nullParameters_notOk() {
         expectedStorageSize = Storage.storage.size();
         TransactionStrategy nullStrategy = null;
         ArticleDao nullArticleDao = null;
@@ -66,7 +70,7 @@ class StoreServiceImplTest {
     }
 
     @Test
-    void updateStorage_parameterIsNull_NotOk() {
+    void updateStorage_parameterIsNull_notOk() {
         expectedStorageSize = Storage.storage.size();
         List<FruitTransaction> nullTransactionList = null;
         Throwable exception = assertThrows(NullPointerException.class,
@@ -76,7 +80,7 @@ class StoreServiceImplTest {
     }
 
     @Test
-    void updateStorage_nullElementInTransactionList_NotOk() {
+    void updateStorage_nullElementInTransactionList_notOk() {
         expectedStorageSize = Storage.storage.size();
         List<FruitTransaction> transactionListNullElement = new ArrayList<>();
         transactionListNullElement.add(null);
@@ -100,7 +104,7 @@ class StoreServiceImplTest {
     }
 
     @Test
-    void update_transactionListIsEmpty_NotOk() {
+    void update_transactionListIsEmpty_notOk() {
         expectedStorageSize = Storage.storage.size();
         List<FruitTransaction> emptyList = new ArrayList<>();
         Throwable exception1 = assertThrows(RuntimeException.class,
@@ -111,7 +115,7 @@ class StoreServiceImplTest {
     }
 
     @Test
-    void update_negativeTotalBalance_NotOk() {
+    void update_negativeTotalBalance_notOk() {
         Storage.storage.put("apple", 0);
         Storage.storage.put("banana", 0);
         Storage.storage.put("pear", 0);
@@ -155,91 +159,39 @@ class StoreServiceImplTest {
         assertEquals(expectedStorageSize, Storage.storage.size());
     }
 
-    @Test
-    void updateStorage_newArticles_Ok() {
+    @ParameterizedTest
+    @MethodSource
+    void updateStorage_storageContainsArticles_ok(String fruit, int quantity) {
         Storage.storage.put("apple", 0);
         Storage.storage.put("banana", 0);
         Storage.storage.put("pear", 0);
         Storage.storage.put("lemon", 0);
         Storage.storage.put("orange", 0);
         FruitTransaction.Operation balance = FruitTransaction.Operation.BALANCE;
-        Map<String, Integer> fruitMap = new HashMap<>();
-        fruitMap.put("apple", 50);
-        fruitMap.put("banana", 5345);
-        fruitMap.put("pear", 434);
-        fruitMap.put("orange", 675);
-        fruitMap.put("lemon", 300);
-        List<FruitTransaction> transactions = new ArrayList<>();
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap.entrySet()) {
-            FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(balance);
-            transaction.setFruit(fruitQuantity.getKey());
-            transaction.setQuantity(fruitQuantity.getValue());
-            transactions.add(transaction);
-        }
+        final List<FruitTransaction> transactions = new ArrayList<>();
+        final FruitTransaction transaction = new FruitTransaction();
+        transaction.setOperation(balance);
+        transaction.setFruit(fruit);
+        transaction.setQuantity(quantity);
+        transactions.add(transaction);
         storeService.updateStorage(transactions);
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap.entrySet()) {
-            String expectedFruit = fruitQuantity.getKey();
-            int expectedValue = fruitQuantity.getValue();
-            assertTrue(Storage.storage.containsKey(expectedFruit));
-            assertEquals(expectedValue, Storage.storage.get(expectedFruit));
-        }
+        assertTrue(Storage.storage.containsKey(fruit));
+        assertEquals(quantity, Storage.storage.get(fruit));
     }
 
-    @Test
-    void updateStorage_updatedStorage_Ok() {
-        Storage.storage.put("apple", 0);
-        Storage.storage.put("banana", 0);
-        Storage.storage.put("pear", 0);
-        Storage.storage.put("lemon", 0);
-        Storage.storage.put("orange", 0);
-        FruitTransaction.Operation balance = FruitTransaction.Operation.BALANCE;
-        Map<String, Integer> fruitMap1 = new HashMap<>();
-        fruitMap1.put("apple", 50);
-        fruitMap1.put("banana", 5345);
-        fruitMap1.put("pear", 434);
-        fruitMap1.put("orange", 675);
-        fruitMap1.put("lemon", 300);
-        List<FruitTransaction> transactions1 = new ArrayList<>();
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap1.entrySet()) {
-            FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(balance);
-            transaction.setFruit(fruitQuantity.getKey());
-            transaction.setQuantity(fruitQuantity.getValue());
-            transactions1.add(transaction);
-        }
-        storeService.updateStorage(transactions1);
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap1.entrySet()) {
-            String expectedFruit = fruitQuantity.getKey();
-            int expectedValue = fruitQuantity.getValue();
-            assertTrue(Storage.storage.containsKey(expectedFruit));
-            assertEquals(expectedValue, Storage.storage.get(expectedFruit));
-        }
-        Map<String, Integer> fruitMap2 = new HashMap<>();
-        fruitMap2.put("apple", 345);
-        fruitMap2.put("banana", 5);
-        fruitMap2.put("pear", 0);
-        fruitMap2.put("orange", 798);
-        fruitMap2.put("lemon", 54);
-        List<FruitTransaction> transactions2 = new ArrayList<>();
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap2.entrySet()) {
-            FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(balance);
-            transaction.setFruit(fruitQuantity.getKey());
-            transaction.setQuantity(fruitQuantity.getValue());
-            transactions2.add(transaction);
-        }
-        storeService.updateStorage(transactions2);
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap2.entrySet()) {
-            String expectedFruit = fruitQuantity.getKey();
-            int expectedValue = fruitQuantity.getValue();
-            assertTrue(Storage.storage.containsKey(expectedFruit));
-            assertEquals(expectedValue, Storage.storage.get(expectedFruit));
-        }
+    private static Stream<Arguments> updateStorage_storageContainsArticles_ok() {
+        return Stream.of(
+                Arguments.of("apple", 50),
+                Arguments.of("lemon", 53),
+                Arguments.of("orange",675),
+                Arguments.of("banana", 5345),
+                Arguments.of("pear", 434)
+        );
     }
 
-    @Test
-    void createReport_storageContainsArticles_Ok() {
+    @ParameterizedTest
+    @MethodSource
+    void createReport_storageContainsArticles_ok(String fruit, int quantity) {
         Storage.storage.put("apple", 100);
         Storage.storage.put("lemon", 53);
         Storage.storage.put("orange", 28);
@@ -254,19 +206,29 @@ class StoreServiceImplTest {
         assertEquals(expectedReportLength, report.size());
         String fieldSeparator = ",";
         StringBuilder line = new StringBuilder();
-        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
-            String expectedLine = line
-                    .append(entry.getKey())
-                    .append(fieldSeparator)
-                    .append(entry.getValue())
-                    .toString();
-            assertTrue(report.contains(expectedLine));
-            line.setLength(0);
-        }
+        String expectedLine = line
+                .append(fruit)
+                .append(fieldSeparator)
+                .append(quantity)
+                .toString();
+        assertTrue(report.contains(expectedLine));
+        line.setLength(0);
+
+    }
+
+    private static Stream<Arguments> createReport_storageContainsArticles_ok() {
+        return Stream.of(
+                Arguments.of("apple", 100),
+                Arguments.of("lemon", 53),
+                Arguments.of("orange", 28),
+                Arguments.of("banana", 100),
+                Arguments.of("peach", 100),
+                Arguments.of("pear", 100)
+        );
     }
 
     @Test
-    void createReport_storageIsEmpty_NotOk() {
+    void createReport_storageIsEmpty_notOk() {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> storeService.createReport());
         assertEquals("Storage is empty", exception.getMessage());

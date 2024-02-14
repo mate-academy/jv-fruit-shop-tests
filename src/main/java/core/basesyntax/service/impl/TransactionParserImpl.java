@@ -19,7 +19,7 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
         if (lines == null) {
-            throw new NullPointerException("Parameter can't be null");
+            throw new IllegalArgumentException("Parameter can't be null");
         }
         if (lines.isEmpty()) {
             throw new RuntimeException("List '" + lines + "' is empty");

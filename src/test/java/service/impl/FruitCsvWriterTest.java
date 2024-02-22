@@ -1,17 +1,14 @@
 package service.impl;
 
-import org.junit.jupiter.api.Test;
-import service.Parser;
-import service.Writer;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import service.Writer;
 
 class FruitCsvWriterTest {
     private static final Writer fruitWriter = new FruitCsvWriter();
@@ -29,7 +26,7 @@ class FruitCsvWriterTest {
             fail("Cant read " + TEST_TEXT + " from " + TEST_WRITE_FILE_NAME);
         }
         String expected = TEST_TEXT;
-        assertEquals(actual, TEST_TEXT);
+        assertEquals(expected, actual);
     }
 
     @Test

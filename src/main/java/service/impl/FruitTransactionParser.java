@@ -12,7 +12,8 @@ public class FruitTransactionParser implements Parser<FruitTransaction> {
     private static final int QUANTITY_OPERATION_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parse(List<String> input) {
+    public List<FruitTransaction> parse(List<String> inputList) {
+        List<String> input = new ArrayList<>(inputList);
         if (input.get(0).equals(FIRST_LINE_FROM_FILE)) {
             List<FruitTransaction> transactions = new ArrayList<>();
             input.remove(0);

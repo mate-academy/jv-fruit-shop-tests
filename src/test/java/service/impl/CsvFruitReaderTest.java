@@ -1,11 +1,11 @@
 package service.impl;
 
-import org.junit.jupiter.api.Test;
-import service.Reader;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import service.Reader;
 
 class CsvFruitReaderTest {
     private static final String TEST_READ_FILE_NAME = "FruitsTest.csv";
@@ -25,7 +25,7 @@ class CsvFruitReaderTest {
         Reader fruitReader = new CsvFruitReader();
         List<String> actual = fruitReader.read(TEST_READ_FILE_NAME);
         List<String> expected = TEST_TEXT;
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test

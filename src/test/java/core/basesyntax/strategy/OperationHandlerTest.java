@@ -13,7 +13,7 @@ class OperationHandlerTest {
     private OperationHandler operationHandler;
 
     @Test
-    void processTransaction_positiveBalance_Ok() {
+    void processTransaction_positiveBalance_ok() {
         operationHandler = new BalanceHandlerImpl();
         Map<String, Integer> expected = new HashMap<>();
         expected.put("apple", 30);
@@ -37,21 +37,21 @@ class OperationHandlerTest {
     }
 
     @Test
-    void processTransaction_transactionBalanceNull_Ok() {
+    void processTransaction_transactionBalanceNull_ok() {
         operationHandler = new BalanceHandlerImpl();
         operationHandler.processTransaction(null);
         Assertions.assertTrue(Storage.getStorage().isEmpty());
     }
 
     @Test
-    void processTransaction_transactionPurchaseNull_Ok() {
+    void processTransaction_transactionPurchaseNull_ok() {
         operationHandler = new PurchaseHandlerImpl();
         operationHandler.processTransaction(null);
         Assertions.assertTrue(Storage.getStorage().isEmpty());
     }
 
     @Test
-    void processTransaction_positivePurchase_Ok() {
+    void processTransaction_positivePurchase_ok() {
         operationHandler = new PurchaseHandlerImpl();
         Storage.getStorage().put("apple", 30);
         Storage.getStorage().put("banana", 10);
@@ -69,7 +69,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void processTransaction_negativePurchase_Ok() {
+    void processTransaction_negativePurchase_ok() {
         operationHandler = new PurchaseHandlerImpl();
         Storage.getStorage().put("apple", 30);
         Storage.getStorage().put("banana", 10);
@@ -87,14 +87,14 @@ class OperationHandlerTest {
     }
 
     @Test
-    void processTransaction_transactionSupplyNull_Ok() {
+    void processTransaction_transactionSupplyNull_ok() {
         operationHandler = new SupplyHandlerImpl();
         operationHandler.processTransaction(null);
         Assertions.assertTrue(Storage.getStorage().isEmpty());
     }
 
     @Test
-    void processTransaction_positiveSupply_Ok() {
+    void processTransaction_positiveSupply_ok() {
         operationHandler = new SupplyHandlerImpl();
         Storage.getStorage().put("apple", 3);
         Storage.getStorage().put("banana", 1);
@@ -112,7 +112,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void processTransaction_negativeSupply_Ok() {
+    void processTransaction_negativeSupply_ok() {
         operationHandler = new SupplyHandlerImpl();
         Storage.getStorage().put("apple", 13);
         Storage.getStorage().put("banana", 8);
@@ -130,14 +130,14 @@ class OperationHandlerTest {
     }
 
     @Test
-    void processTransaction_transactionReturnNull_Ok() {
+    void processTransaction_transactionReturnNull_ok() {
         operationHandler = new ReturnHandlerImpl();
         operationHandler.processTransaction(null);
         Assertions.assertTrue(Storage.getStorage().isEmpty());
     }
 
     @Test
-    void processTransaction_positiveReturn_Ok() {
+    void processTransaction_positiveReturn_ok() {
         operationHandler = new ReturnHandlerImpl();
         Storage.getStorage().put("apple", 3);
         Storage.getStorage().put("banana", 1);
@@ -155,7 +155,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void processTransaction_negativeReturn_Ok() {
+    void processTransaction_negativeReturn_ok() {
         operationHandler = new ReturnHandlerImpl();
         Storage.getStorage().put("apple", 13);
         Storage.getStorage().put("banana", 8);

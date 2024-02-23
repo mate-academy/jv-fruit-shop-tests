@@ -18,13 +18,13 @@ class ReaderServiceTest {
     }
 
     @Test
-    void readFromFile_wrongFilePath_Ok() {
+    void readFromFile_wrongFilePath_ok() {
         List<String> actual = readerService.readFromFile(FAIL_FILE_PATH);
         Assertions.assertTrue(actual.isEmpty());
     }
 
     @Test
-    void readFromFile_filePath_Ok() {
+    void readFromFile_filePath_ok() {
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -37,12 +37,12 @@ class ReaderServiceTest {
     }
 
     @Test
-    void readFromFile_filePathNull_Ok() {
+    void readFromFile_filePathNull_ok() {
         Assertions.assertTrue(readerService.readFromFile(null).isEmpty());
     }
 
     @Test
-    void readFromFile_filePathEmpty_Ok() {
+    void readFromFile_filePathEmpty_ok() {
         Assertions.assertTrue(readerService.readFromFile("").isEmpty());
     }
 }

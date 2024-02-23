@@ -16,18 +16,19 @@ class WriterServiceTest {
     }
 
     @Test
-    void writeToFile_bothArgumentsCorrect_Ok() {
+    void writeToFile_bothArgumentsCorrect_ok() {
         Assertions.assertDoesNotThrow(() -> writerService.writeToFile(FILE_PATH, REPORT));
     }
 
     @Test
     void writeToFile_bothArgumentsNull_notOk() {
-        Assertions.assertThrows(RuntimeException.class,() -> writerService.writeToFile(null, null));
+        Assertions.assertThrows(RuntimeException.class,
+                () -> writerService.writeToFile(null, null));
     }
 
     @Test
     void writeToFile_bothArgumentsEmpty_notOk() {
-        Assertions.assertThrows(RuntimeException.class,() -> writerService.writeToFile("", ""));
+        Assertions.assertThrows(RuntimeException.class, () -> writerService.writeToFile("", ""));
     }
 
     @Test
@@ -55,12 +56,12 @@ class WriterServiceTest {
     }
 
     @Test
-    void writeToFile_reportEmpty_Ok() {
+    void writeToFile_reportEmpty_ok() {
         Assertions.assertDoesNotThrow(() -> writerService.writeToFile(FILE_PATH, ""));
     }
 
     @Test
-    void writeToFile_reportWhiteSpace_Ok() {
+    void writeToFile_reportWhiteSpace_ok() {
         Assertions.assertDoesNotThrow(() -> writerService.writeToFile(FILE_PATH, " "));
     }
 }

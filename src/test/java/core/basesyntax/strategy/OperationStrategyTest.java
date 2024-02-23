@@ -14,13 +14,13 @@ class OperationStrategyTest {
     @Test
     void get_mapNullOperationNull_notOk() {
         operationStrategy = new OperationStrategyImpl(null);
-        Assertions.assertThrows(RuntimeException.class,() -> operationStrategy.get(null));
+        Assertions.assertThrows(RuntimeException.class, () -> operationStrategy.get(null));
     }
 
     @Test
     void get_mapEmptyOperationNull_notOk() {
         operationStrategy = new OperationStrategyImpl(new HashMap<>());
-        Assertions.assertThrows(RuntimeException.class,() -> operationStrategy.get(null));
+        Assertions.assertThrows(RuntimeException.class, () -> operationStrategy.get(null));
     }
 
     @Test
@@ -34,7 +34,7 @@ class OperationStrategyTest {
     }
 
     @Test
-    void get_operationOutOfMap_Ok() {
+    void get_operationNotInMap_ok() {
         operationHandlerMap.put(Operation.BALANCE, new BalanceHandlerImpl());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         OperationHandler actual = operationStrategy.get(Operation.RETURN);

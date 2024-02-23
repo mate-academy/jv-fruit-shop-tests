@@ -18,7 +18,7 @@ class ParserServiceTest {
     }
 
     @Test
-    void parseTransactions_stringList_Ok() {
+    void parseTransactions_stringList_ok() {
         List<String> inputData = initStringList();
         List<FruitTransaction> expected = initFruitList();
         List<FruitTransaction> actual = parserService.parseTransactions(inputData);
@@ -37,7 +37,7 @@ class ParserServiceTest {
     }
 
     @Test
-    void parseTransactions_stringListEmpty_Ok() {
+    void parseTransactions_stringListEmpty_ok() {
         Assertions.assertTrue(parserService.parseTransactions(new ArrayList<>()).isEmpty());
     }
 
@@ -90,7 +90,7 @@ class ParserServiceTest {
                 () -> parserService.parseTransactions(wrongInputList));
     }
 
-    List<String> initStringList() {
+    private List<String> initStringList() {
         List<String> stringList = new ArrayList<>();
         stringList.add("type,fruit,quantity");
         stringList.add("b,banana,20");
@@ -101,13 +101,13 @@ class ParserServiceTest {
         return stringList;
     }
 
-    List<FruitTransaction> initFruitList() {
+    private List<FruitTransaction> initFruitList() {
         List<FruitTransaction> fruitList = new ArrayList<>();
-        fruitList.add(new FruitTransaction(Operation.getByType("b"), "banana",20));
-        fruitList.add(new FruitTransaction(Operation.getByType("b"), "apple",100));
-        fruitList.add(new FruitTransaction(Operation.getByType("s"), "banana",100));
-        fruitList.add(new FruitTransaction(Operation.getByType("p"), "apple",20));
-        fruitList.add(new FruitTransaction(Operation.getByType("r"), "apple",8));
+        fruitList.add(new FruitTransaction(Operation.getByType("b"), "banana", 20));
+        fruitList.add(new FruitTransaction(Operation.getByType("b"), "apple", 100));
+        fruitList.add(new FruitTransaction(Operation.getByType("s"), "banana", 100));
+        fruitList.add(new FruitTransaction(Operation.getByType("p"), "apple", 20));
+        fruitList.add(new FruitTransaction(Operation.getByType("r"), "apple", 8));
         return fruitList;
     }
 }

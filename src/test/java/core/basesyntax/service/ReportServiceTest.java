@@ -15,12 +15,12 @@ class ReportServiceTest {
     }
 
     @Test
-    void generateReport_StorageEmpty_Ok() {
+    void generateReport_storageEmpty_ok() {
         Assertions.assertTrue(reportService.generateReport().isBlank());
     }
 
     @Test
-    void generateReport_StorageFilled_Ok() {
+    void generateReport_storageFilled_ok() {
         Storage.getStorage().put("banana", 152);
         Storage.getStorage().put("apple", 90);
         String expected = "banana,152" + System.lineSeparator() + "apple,90";
@@ -29,7 +29,7 @@ class ReportServiceTest {
     }
 
     @Test
-    void generateReport_StorageEmptyNotNull_Ok() {
+    void generateReport_storageEmptyNotNull_ok() {
         Assertions.assertNotNull(reportService.generateReport());
     }
 

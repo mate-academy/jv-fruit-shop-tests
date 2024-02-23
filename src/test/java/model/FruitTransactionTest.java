@@ -11,7 +11,7 @@ class FruitTransactionTest {
             "BALANCE", "b", "SUPPLY", "s", "PURCHASE", "p", "RETURN", "r");
 
     @Test
-    void validation_Ok() {
+    void validation_validOperation_Ok() {
         for (Map.Entry<String, String> entry : trueCodeOperations.entrySet()) {
             assertEquals(FruitTransaction.Operation
                     .validation(entry.getValue()).name(), entry.getKey());
@@ -19,7 +19,7 @@ class FruitTransactionTest {
     }
 
     @Test
-    void validation_NotOk() {
+    void validation_notValidOperation_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             FruitTransaction.Operation.validation("badCode");
         });

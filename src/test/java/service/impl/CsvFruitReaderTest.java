@@ -21,7 +21,7 @@ class CsvFruitReaderTest {
             "    s,banana,50");
 
     @Test
-    void read_Ok() {
+    void read_textFromFile_Ok() {
         Reader fruitReader = new CsvFruitReader();
         List<String> actual = fruitReader.read(TEST_READ_FILE_NAME);
         List<String> expected = TEST_TEXT;
@@ -29,7 +29,7 @@ class CsvFruitReaderTest {
     }
 
     @Test
-    void read_NotOk() {
+    void read_notExistFileName_NotOk() {
         Reader fruitReader = new CsvFruitReader();
         assertThrows(RuntimeException.class, () -> {
             fruitReader.read("BadFileName");

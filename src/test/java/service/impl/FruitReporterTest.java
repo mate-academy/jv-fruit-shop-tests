@@ -22,7 +22,6 @@ import strategy.operation.OperationHandler;
 
 class FruitReporterTest {
     private static final String REPORT_HEAD = "fruit,quantity";
-
     private static final String TEST_REPORT = "fruit,quantity"
             + System.lineSeparator() + "banana,120";
     private static FruitStorage FRUIT_STORAGE;
@@ -47,7 +46,7 @@ class FruitReporterTest {
     }
 
     @Test
-    void getReport_EmptyOk() {
+    void getReport_Empty_Ok() {
         Reporter fruitReporter = new FruitReporter(FRUIT_STORAGE);
         String expected = REPORT_HEAD;
         String actual = fruitReporter.getReport();
@@ -55,7 +54,7 @@ class FruitReporterTest {
     }
 
     @Test
-    void getReport_Ok() {
+    void getReport_FruitsStorageAfterOperations_Ok() {
         TransactionStrategy maketransaction = new FruitTransactionStrategy(OPERATION_HANDLER_MAP);
         Performer performer = new FruitOperationPerformer(maketransaction);
         List<FruitTransaction> transactions = List.of(

@@ -18,7 +18,7 @@ class FruitTransactionParserTest {
     );
 
     @Test
-    void parse_Ok() {
+    void parse_ValidTransactionsText_Ok() {
         List<String> parseTest = List.of("type,fruit,quantity",
                 "b,pamelo,100",
                 "s,pamelo,54",
@@ -32,29 +32,37 @@ class FruitTransactionParserTest {
     }
 
     @Test
-    void parse_NotOk() {
+    void parse_BadTextWithoutHeader_NotOk() {
         Parser parser = new FruitTransactionParser();
         assertThrows(RuntimeException.class, () -> {
             parser.parse(List.of("badText"));
         });
 
-        List<String> firstTest = List.of("type,fruit,quantity",
+    }
+
+    @Test
+    void parse_NotExistOperation_NotOk() {
+        Parser parser = new FruitTransactionParser();
+        List<String> badOperation = List.of("type,fruit,quantity",
                 "y,pamelo,100",
                 "y,pamelo,54",
                 "y,pamelo,30",
                 "y,pamelo,6");
-
         assertThrows(RuntimeException.class, () -> {
-            parser.parse(firstTest);
+            parser.parse(badOperation);
         });
+    }
 
-        List<String> secondTest = List.of("type,fruit,quantity",
+    @Test
+    void parse_BadFruitsCountInOperation_NotOk() {
+        Parser parser = new FruitTransactionParser();
+        List<String> badNumberTest = List.of("type,fruit,quantity",
                 "b,pamelo,BadNumber",
                 "s,pamelo,54",
                 "p,pamelo,30",
                 "r,pamelo,6");
         assertThrows(RuntimeException.class, () -> {
-            parser.parse(secondTest);
+            parser.parse(badNumberTest);
         });
     }
 }

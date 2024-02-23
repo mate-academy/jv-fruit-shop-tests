@@ -17,7 +17,7 @@ class FruitCsvWriterTest {
     private static final String TEST_TEXT = "Example for Test Writer";
 
     @Test
-    void write_Ok() {
+    void write_ExistTextToFile_Ok() {
         fruitWriter.write(TEST_TEXT, TEST_WRITE_FILE_NAME);
         String actual = null;
         try {
@@ -30,11 +30,14 @@ class FruitCsvWriterTest {
     }
 
     @Test
-    void write_NotOk() {
+    void write_NullText_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             fruitWriter.write(null, TEST_WRITE_FILE_NAME);
         });
+    }
 
+    @Test
+    void write_NullTextAndNullFileName_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             fruitWriter.write(null,null);
         });

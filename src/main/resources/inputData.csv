@@ -1,0 +1,15 @@
+type,fruit,quantity
+    b,banana,20
+    b,apple,100
+    s,banana,100
+    p,banana,13
+    r,apple,10
+    p,apple,30
+    p,banana,3
+    s,banana,50
+    s,kivy,100
+    s,melon,23
+    p,kivy,50
+    p,melon,3
+    s, melon,35
+    s,test,100

@@ -24,30 +24,30 @@ class FruitReporterTest {
     private static final String REPORT_HEAD = "fruit,quantity";
     private static final String TEST_REPORT = "fruit,quantity"
             + System.lineSeparator() + "banana,120";
-    private static FruitStorage FRUIT_STORAGE;
-    private static StorageDao<String,Integer> STORAGE_HANDLER;
+    private static FruitStorage fruitStorage;
+    private static StorageDao<String,Integer> storageHandler;
     private static Map<FruitTransaction.Operation,
-            OperationHandler<String, Integer>> OPERATION_HANDLER_MAP;
+            OperationHandler<String, Integer>> operationOperationHandlerMap;
 
     @BeforeEach
     void setUp() {
-        FRUIT_STORAGE = new FruitStorage();
-        STORAGE_HANDLER = new FruitStorageDao(FRUIT_STORAGE);
-        OPERATION_HANDLER_MAP = Map.of(
+        fruitStorage = new FruitStorage();
+        storageHandler = new FruitStorageDao(fruitStorage);
+        operationOperationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE,
-                new FruitBalanceOperation(STORAGE_HANDLER),
+                new FruitBalanceOperation(storageHandler),
                 FruitTransaction.Operation.PURCHASE,
-                new FruitPurchaseOperation(STORAGE_HANDLER),
+                new FruitPurchaseOperation(storageHandler),
                 FruitTransaction.Operation.SUPPLY,
-                new FruitSupplyOperation(STORAGE_HANDLER),
+                new FruitSupplyOperation(storageHandler),
                 FruitTransaction.Operation.RETURN,
-                new FruitReturnOperation(STORAGE_HANDLER)
+                new FruitReturnOperation(storageHandler)
         );
     }
 
     @Test
     void getReport_Empty_Ok() {
-        Reporter fruitReporter = new FruitReporter(FRUIT_STORAGE);
+        Reporter fruitReporter = new FruitReporter(fruitStorage);
         String expected = REPORT_HEAD;
         String actual = fruitReporter.getReport();
         assertEquals(expected, actual);
@@ -55,7 +55,8 @@ class FruitReporterTest {
 
     @Test
     void getReport_FruitsStorageAfterOperations_Ok() {
-        TransactionStrategy maketransaction = new FruitTransactionStrategy(OPERATION_HANDLER_MAP);
+        TransactionStrategy maketransaction =
+                new FruitTransactionStrategy(operationOperationHandlerMap);
         Performer performer = new FruitOperationPerformer(maketransaction);
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 30),
@@ -65,7 +66,7 @@ class FruitReporterTest {
         );
         performer.performProcesses(transactions);
 
-        Reporter reporter = new FruitReporter(FRUIT_STORAGE);
+        Reporter reporter = new FruitReporter(fruitStorage);
         String actual = reporter.getReport();
         String expected = TEST_REPORT;
         assertEquals(expected, actual);

@@ -22,27 +22,27 @@ import strategy.operation.FruitSupplyOperation;
 import strategy.operation.OperationHandler;
 
 class FruitOperationPerformerTest {
-    private static FruitStorage FRUIT_STORAGE;
-    private static StorageDao<String,Integer> STORAGE_HANDLER;
+    private static FruitStorage fruitStorage;
+    private static StorageDao<String,Integer> storageHandler;
     private static Map<FruitTransaction.Operation,
-            OperationHandler<String, Integer>> OPERATION_HANDLER_MAP;
-    private static TransactionStrategy MAKE_TRANSACTION;
+            OperationHandler<String, Integer>> operationOperationHandlerMap;
+    private static TransactionStrategy makeTransaction;
 
     @BeforeEach
     void setUp() {
-        FRUIT_STORAGE = new FruitStorage();
-        STORAGE_HANDLER = new FruitStorageDao(FRUIT_STORAGE);
-        OPERATION_HANDLER_MAP = Map.of(
+        fruitStorage = new FruitStorage();
+        storageHandler = new FruitStorageDao(fruitStorage);
+        operationOperationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE,
-                new FruitBalanceOperation(STORAGE_HANDLER),
+                new FruitBalanceOperation(storageHandler),
                 FruitTransaction.Operation.PURCHASE,
-                new FruitPurchaseOperation(STORAGE_HANDLER),
+                new FruitPurchaseOperation(storageHandler),
                 FruitTransaction.Operation.SUPPLY,
-                new FruitSupplyOperation(STORAGE_HANDLER),
+                new FruitSupplyOperation(storageHandler),
                 FruitTransaction.Operation.RETURN,
-                new FruitReturnOperation(STORAGE_HANDLER)
+                new FruitReturnOperation(storageHandler)
         );
-        MAKE_TRANSACTION = new FruitTransactionStrategy(OPERATION_HANDLER_MAP);
+        makeTransaction = new FruitTransactionStrategy(operationOperationHandlerMap);
     }
 
     @Test
@@ -52,11 +52,12 @@ class FruitOperationPerformerTest {
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 90),
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30),
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", 15));
-        TransactionStrategy makeTransaction = new FruitTransactionStrategy(OPERATION_HANDLER_MAP);
+        TransactionStrategy makeTransaction =
+                new FruitTransactionStrategy(operationOperationHandlerMap);
         Performer performer = new FruitOperationPerformer(makeTransaction);
         performer.performProcesses(fruitTransactionsTest);
 
-        int actual = FRUIT_STORAGE.getFruits().get("banana");
+        int actual = fruitStorage.getFruits().get("banana");
         int expected = 60 + 90 - 30 + 15;
 
         assertEquals(expected, actual);
@@ -64,19 +65,19 @@ class FruitOperationPerformerTest {
 
     @Test
     void performProceses_Null_NotOk() {
-        Performer performer = new FruitOperationPerformer(MAKE_TRANSACTION);
+        Performer performer = new FruitOperationPerformer(makeTransaction);
         assertFalse(performer.performProcesses(null));
     }
 
     @Test
     void performProceses_EmptyList_NotOk() {
-        Performer performer = new FruitOperationPerformer(MAKE_TRANSACTION);
+        Performer performer = new FruitOperationPerformer(makeTransaction);
         assertFalse(performer.performProcesses(List.of()));
     }
 
     @Test
     void performProceses_FruitsCountNotEnoughToPerform_NotOk() {
-        Performer performer = new FruitOperationPerformer(MAKE_TRANSACTION);
+        Performer performer = new FruitOperationPerformer(makeTransaction);
         List<FruitTransaction> fruitTransactionsTest = List.of(
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 30));
         assertThrows(RuntimeException.class, () -> {

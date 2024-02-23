@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import service.Parser;
 
 class FruitTransactionParserTest {
-
-    private static List<FruitTransaction> FRUIT_TRANSACTIONS = List.of(
+    private static List<FruitTransaction> fruitTransactions = List.of(
             new FruitTransaction(FruitTransaction.Operation.BALANCE, "pamelo", 100),
             new FruitTransaction(FruitTransaction.Operation.SUPPLY, "pamelo", 54),
             new FruitTransaction(FruitTransaction.Operation.PURCHASE, "pamelo", 30),
@@ -27,7 +26,7 @@ class FruitTransactionParserTest {
 
         Parser parser = new FruitTransactionParser();
         List<FruitTransaction> actual = parser.parse(parseTest);
-        List<FruitTransaction> expected = FRUIT_TRANSACTIONS;
+        List<FruitTransaction> expected = fruitTransactions;
         assertEquals(expected, actual);
     }
 

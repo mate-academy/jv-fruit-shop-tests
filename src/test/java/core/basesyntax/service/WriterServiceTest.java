@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class WriterServiceTest {
     private static WriterService writerService;
     private static final String REPORT = "banana,152" + System.lineSeparator() + "apple,90";
-    private static final String FILE_PATH = "src/main/resources/test_report.cvs";
+    private static final String FILE_PATH = "src/test/resources/test_report.cvs";
 
     @BeforeAll
     static void beforeAll() {

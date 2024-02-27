@@ -1,15 +1,14 @@
 package core.basesyntax.service;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class TransactionConverterImplTest {
     private static final String TEST_FILE_0 = "src/test/resources/ConvTest0.csv";
@@ -21,7 +20,7 @@ class TransactionConverterImplTest {
     private static final String TEST_FILE_6 = "src/test/resources/Blank.csv";
 
     private static TransactionConverterImpl transactionConverter;
-    List<String> lines;
+    private List<String> lines;
 
     @BeforeAll
     static void beforeAll() {
@@ -29,7 +28,7 @@ class TransactionConverterImplTest {
 
     }
 
-    private List<String> readLinesFromFile(String filePath){
+    private List<String> readLinesFromFile(String filePath) {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
@@ -41,7 +40,6 @@ class TransactionConverterImplTest {
     public void convertLines_validInput_Ok() {
         lines = readLinesFromFile(TEST_FILE_0);
         transactionConverter.convertLines(lines);
-
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.BALANCE, "apple", 100),

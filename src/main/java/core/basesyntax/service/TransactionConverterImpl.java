@@ -24,7 +24,6 @@ public class TransactionConverterImpl implements TransactionConverter {
                     + "\"" + EXP_STARTING_KEY + "\"");
         }
 
-
         return lines.stream().skip(1)
                 .map(line -> line.split(","))
                 .map(values -> new FruitTransaction(

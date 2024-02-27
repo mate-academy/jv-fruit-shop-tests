@@ -25,8 +25,6 @@ public class HelloWorld {
         StorageDaoImpl storageDao = new StorageDaoImpl();
         Map<Operation, OperationHandler> opHandlerMap = new HashMap<>(
                 Map.of(
-
-
                 Operation.BALANCE, new BalanceHandler(storageDao),
                 Operation.SUPPLY, new SupplyHandler(storageDao),
                 Operation.PURCHASE, new PurchaseHandler(storageDao),

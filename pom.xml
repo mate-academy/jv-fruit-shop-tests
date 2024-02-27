@@ -96,6 +96,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/HelloWorld*</exclude>
+                        <exclude>**/FruitTransaction*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

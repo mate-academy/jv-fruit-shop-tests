@@ -13,6 +13,7 @@ import core.basesyntax.service.operation.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,8 +30,13 @@ class ShopServiceStrategyTest {
             ));
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUp() {
         shopServiceStrategy = new ShopServiceStrategy(OP_HANDLER_MAP);
+    }
+
+    @AfterAll
+    static void reset() {
+        Storage.foodStorage.clear();
     }
 
     @Test

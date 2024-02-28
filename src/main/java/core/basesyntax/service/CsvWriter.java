@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +17,7 @@ public class CsvWriter {
 
         try {
             fileWithReport.createNewFile();
-            Files.writeString(Path.of(outputPath), report, StandardOpenOption.APPEND);
+            Files.writeString(Path.of(outputPath), report);
         } catch (IOException e) {
             throw new RuntimeException("Cannot write report to file", e);
         }

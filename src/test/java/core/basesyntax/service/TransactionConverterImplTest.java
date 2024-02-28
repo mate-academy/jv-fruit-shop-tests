@@ -18,7 +18,6 @@ class TransactionConverterImplTest {
     private static final String TEST_FILE_4 = "src/test/resources/ConvTest4.csv";
     private static final String TEST_FILE_5 = "src/test/resources/ConvTest5.csv";
     private static final String TEST_FILE_6 = "src/test/resources/Blank.csv";
-
     private static TransactionConverterImpl transactionConverter;
     private List<String> lines;
 

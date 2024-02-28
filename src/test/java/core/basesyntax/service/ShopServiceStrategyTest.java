@@ -56,8 +56,10 @@ class ShopServiceStrategyTest {
         );
 
         shopServiceStrategy.processTransactions(inputValid);
-        assertEquals(expected, storageDao.getAllFruits());
-        assertEquals(Storage.foodStorage.size(), 2);
+        var actual = storageDao.getAllFruits();
+        assertEquals(expected, actual);
+        var actualSize = Storage.foodStorage.size();
+        assertEquals(2, actualSize);
     }
 
     @Test

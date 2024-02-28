@@ -26,6 +26,7 @@ class ReportServiceTest {
 
         Storage.foodStorage.put("banana", 107);
         Storage.foodStorage.put("apple", 108);
-        assertEquals(expected, reportService.createReport());
+        var actual = reportService.createReport();
+        assertEquals(expected, actual);
     }
 }

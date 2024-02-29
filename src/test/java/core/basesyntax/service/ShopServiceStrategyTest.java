@@ -19,19 +19,20 @@ import org.junit.jupiter.api.Test;
 
 class ShopServiceStrategyTest {
     private static ShopServiceStrategy shopServiceStrategy;
-    private static StorageDaoImpl storageDao = new StorageDaoImpl();
-
-    private static Map<Operation, OperationHandler> OP_HANDLER_MAP = new HashMap<>(
-            Map.of(
-                    Operation.BALANCE, new BalanceHandler(storageDao),
-                    Operation.SUPPLY, new SupplyHandler(storageDao),
-                    Operation.PURCHASE, new PurchaseHandler(storageDao),
-                    Operation.RETURN, new ReturnHandler(storageDao)
-            ));
+    private static StorageDaoImpl storageDao;
+    private static Map<Operation, OperationHandler> opHandlerMap;
 
     @BeforeAll
     static void setUp() {
-        shopServiceStrategy = new ShopServiceStrategy(OP_HANDLER_MAP);
+        storageDao = new StorageDaoImpl();
+        opHandlerMap = new HashMap<>(
+                Map.of(
+                        Operation.BALANCE, new BalanceHandler(storageDao),
+                        Operation.SUPPLY, new SupplyHandler(storageDao),
+                        Operation.PURCHASE, new PurchaseHandler(storageDao),
+                        Operation.RETURN, new ReturnHandler(storageDao)
+                ));
+        shopServiceStrategy = new ShopServiceStrategy(opHandlerMap);
     }
 
     @AfterAll

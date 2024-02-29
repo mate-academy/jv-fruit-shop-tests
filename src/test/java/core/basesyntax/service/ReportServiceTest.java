@@ -8,12 +8,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportServiceTest {
-    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+    private static final String BREAK = System.lineSeparator();
+    private static final String HEADER = "fruit,quantity" + BREAK;
     private static ReportService reportService;
-    private static StorageDaoImpl storageDao = new StorageDaoImpl();
+    private static StorageDaoImpl storageDao;
 
     @BeforeAll
     static void setUp() {
+        storageDao = new StorageDaoImpl();
         reportService = new ReportService(storageDao);
     }
 
@@ -21,8 +23,8 @@ class ReportServiceTest {
     void createReport_validOutput_Ok() {
         String expected =
                 HEADER
-                + "banana,107" + System.lineSeparator()
-                + "apple,108" + System.lineSeparator();
+                + "banana,107" + BREAK
+                + "apple,108" + BREAK;
 
         Storage.foodStorage.put("banana", 107);
         Storage.foodStorage.put("apple", 108);

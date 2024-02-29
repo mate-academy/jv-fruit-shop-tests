@@ -19,25 +19,16 @@ class TransactionConverterImplTest {
     private static final String TEST_FILE_5 = "src/test/resources/ConvTest5.csv";
     private static final String TEST_FILE_6 = "src/test/resources/Blank.csv";
     private static TransactionConverterImpl transactionConverter;
-    private List<String> lines;
 
     @BeforeAll
-    static void beforeAll() {
+    static void setUp() {
         transactionConverter = new TransactionConverterImpl();
 
     }
 
-    private List<String> readLinesFromFile(String filePath) {
-        try {
-            return Files.readAllLines(Path.of(filePath));
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading from file " + filePath, e);
-        }
-    }
-
     @Test
     public void convertLines_validInput_Ok() {
-        lines = readLinesFromFile(TEST_FILE_0);
+        List<String> lines = readLinesFromFile(TEST_FILE_0);
         transactionConverter.convertLines(lines);
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
@@ -54,7 +45,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_wrongHeader_notOk() {
-        lines = readLinesFromFile(TEST_FILE_5);
+        List<String> lines = readLinesFromFile(TEST_FILE_5);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -63,7 +54,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_invalidStartAfterHeader_notOk() {
-        lines = readLinesFromFile(TEST_FILE_1);
+        List<String> lines = readLinesFromFile(TEST_FILE_1);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -72,7 +63,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_wrongCase_notOk() {
-        lines = readLinesFromFile(TEST_FILE_2);
+        List<String> lines = readLinesFromFile(TEST_FILE_2);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -81,7 +72,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_unnecessarySpacing_notOk() {
-        lines = readLinesFromFile(TEST_FILE_3);
+        List<String> lines = readLinesFromFile(TEST_FILE_3);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -90,7 +81,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_blank_notOk() {
-        lines = readLinesFromFile(TEST_FILE_6);
+        List<String> lines = readLinesFromFile(TEST_FILE_6);
 
         assertThrows(IndexOutOfBoundsException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -99,10 +90,18 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_unknownOperation_notOk() {
-        lines = readLinesFromFile(TEST_FILE_4);
+        List<String> lines = readLinesFromFile(TEST_FILE_4);
 
         assertThrows(IllegalArgumentException.class, () -> {
             transactionConverter.convertLines(lines);
         });
+    }
+
+    private List<String> readLinesFromFile(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading from file " + filePath, e);
+        }
     }
 }

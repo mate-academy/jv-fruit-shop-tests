@@ -107,6 +107,47 @@ public class JvFruitShopTest {
     }
 
     @Test
+    void return_Fruit_NotOk() {
+        List<FruitTransaction> emptylist = new ArrayList<>();
+        emptylist.add(new FruitTransaction("r", "null", 10));
+        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+    }
+
+    @Test
+    void return_Quantity_NotOk() {
+        List<FruitTransaction> emptylist = new ArrayList<>();
+        emptylist.add(new FruitTransaction("b", "banana", 100));
+        emptylist.add(new FruitTransaction("r", "banana", -10));
+        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+    }
+
+    @Test
+    void supply_Quantity_NotOk() {
+        List<FruitTransaction> emptylist = new ArrayList<>();
+        emptylist.add(new FruitTransaction("s", "banana", -10));
+        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+    }
+
+    @Test
+    void purchase_Quantity_NotOk() {
+        List<FruitTransaction> emptylist = new ArrayList<>();
+        emptylist.add(new FruitTransaction("p", "banana", -10));
+        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+    }
+
+    @Test
+    void balance_Quantity_NotOk() {
+        List<FruitTransaction> emptylist = new ArrayList<>();
+        emptylist.add(new FruitTransaction("b", "banana", -10));
+        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+    }
+
+    @Test
     void generate_Report_isOk() {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         fruitsDao.storageAccess().put("banana", 100);

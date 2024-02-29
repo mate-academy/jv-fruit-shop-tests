@@ -89,6 +89,12 @@ public class JvFruitShopTest {
     }
 
     @Test
+    void write_File_NotOk() {
+        String report = null;
+        assertThrows(RuntimeException.class, () -> fileWriter.writeToFile(report));
+    }
+
+    @Test
     void execute_Transaction_isOk() {
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 80);

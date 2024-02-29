@@ -7,8 +7,8 @@ public class FruitTransaction {
     private String fruitName;
     private int quantity;
 
-    public FruitTransaction() {
-    }
+    //public FruitTransaction() {
+    //}
 
     public FruitTransaction(String operation, String fruitName, int quantity) {
         this.operation = operation;
@@ -46,12 +46,12 @@ public class FruitTransaction {
         return Objects.hash(operation, fruitName, quantity);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "FruitTransaction{"
                 + "operation='" + operation + '\''
                 + ", fruitName='" + fruitName + '\''
                 + ", quantity=" + quantity
                 + '}';
-    }
+    }*/
 }

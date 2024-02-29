@@ -15,15 +15,13 @@ public class FileWriterCsvImpl implements Writer {
     @Override
     public void write(String fileName, List<String> report) {
         if (fileName == null || report == null) {
-            throw new IllegalArgumentException("Parameters can't be null, but:"
-                    + "\nfileName = " + fileName
-                    + "\nreport = " + report);
+            throw new IllegalArgumentException("""
+                    Parameters can't be null, but:"
+                    fileName = '%s'
+                    report = '%s'""".formatted(fileName, report));
         }
         if (report.isEmpty()) {
             throw new RuntimeException("Report is empty");
-        }
-        if (report.contains(null)) {
-            throw new RuntimeException("Report contains null value");
         }
         if (fileName.isEmpty()) {
             throw new RuntimeException("File name is empty");
@@ -31,13 +29,17 @@ public class FileWriterCsvImpl implements Writer {
         String currentFileExtension = fileName.substring(fileName.length()
                 - FILE_EXTENSION_LENGTH);
         if (!currentFileExtension.equals(CSV_EXTENSION)) {
-            throw new RuntimeException("The file extension is different from .csv: "
-                    + fileName);
+            throw new RuntimeException("""
+                    The file extension is different from .csv: %s"""
+                .formatted(fileName));
         }
         File targetFile = new File(fileName);
         targetFile.delete();
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             for (String line : report) {
+                if (line == null) {
+                    throw new RuntimeException("Report contains null value");
+                }
                 bufferedWriter.append(line);
                 bufferedWriter.append(System.lineSeparator());
             }

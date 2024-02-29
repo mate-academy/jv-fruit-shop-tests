@@ -22,7 +22,9 @@ public class TransactionParserImpl implements TransactionParser {
             throw new IllegalArgumentException("Parameter can't be null");
         }
         if (lines.isEmpty()) {
-            throw new RuntimeException("List '" + lines + "' is empty");
+            throw new RuntimeException("""
+                    List '%s' is empty"""
+                    .formatted(lines));
         }
         return lines.stream()
                 .map(transactionService::createTransaction)

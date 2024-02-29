@@ -1,5 +1,8 @@
 type,fruit,quantity
-line
-line
-line
-line
+b,apple,453
+b,orange,234
+s,apple,100
+s,orange,0
+p,apple,300
+p,orange,45
+r,apple,5

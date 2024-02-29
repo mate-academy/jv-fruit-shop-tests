@@ -26,31 +26,32 @@ public class FruitTransactionServiceImpl implements TransactionService {
         if (line == null) {
             throw new NullPointerException("Parameter can't be null");
         }
-        if (line.length() == 0) {
+        if (line.isEmpty()) {
             throw new RuntimeException("Line is empty");
         }
         if (line.contains(FORBIDDEN_CHARACTER)) {
-            throw new RuntimeException("Line '" + line
-                    + "' shouldn't contain"
-                    + " spaces and upper case letters");
+            throw new RuntimeException("""
+               Line '%s' shouldn't contain spaces and upper case letters"""
+                    .formatted(line));
         }
         String[] fields = line.split(LINE_SEPARATOR);
         boolean emptyField = false;
         for (String field : fields) {
-            if (field.length() == 0) {
+            if (field.isEmpty()) {
                 emptyField = true;
+                break;
             }
         }
         if (fields.length != NUMBER_OF_FIELDS || emptyField) {
-            throw new RuntimeException("Wrong format in line: '" + line
-                    + "'\nShould be 3 fields separated by a coma. "
-                    + "Example: 'transaction,fruit,quantity'");
+            throw new RuntimeException("""
+                Wrong format in line: '%s', should be 3 fields separated by a coma.
+                "Example: 'transaction,fruit,quantity""".formatted(line));
         }
         FruitTransaction transaction = new FruitTransaction();
         String fruit = validateFruitField(fields[FRUIT_INDEX], line);
         if (!fruitTransactionDao.isContainArticle(fruit)) {
-            throw new RuntimeException("Storage doesn't contain article '" + fruit
-                    + "'");
+            throw new RuntimeException("""
+                    Storage doesn't contain article '%s'""".formatted(fruit));
         }
         transaction.setFruit(fruit);
         int quantity = validateQuantityField(fields[QUANTITY_INDEX], line);
@@ -62,14 +63,17 @@ public class FruitTransactionServiceImpl implements TransactionService {
     }
 
     private String validateFruitField(String fruitField, String line) {
-        if (fruitField == null || fruitField.length() == 0) {
-            throw new RuntimeException("Wrong format of fruit field in line: '" + line
-                    + "'\nShould be: " + "'transaction_type,fruit,quantity'");
+        if (fruitField == null || fruitField.isEmpty()) {
+            throw new RuntimeException("""        
+                    Wrong format of fruit field in line: '%s'
+                    Should be: 'transaction_type,fruit,quantity'"""
+                    .formatted(line));
         }
         if (!fruitField.matches("[a-z]+")) {
-            throw new RuntimeException("Article name in line: '" + line
-                    + "' shouldn't contain numbers and"
-                    + " special characters");
+            throw new RuntimeException("""
+                        Article name in line: '%s', shouldn't contain numbers
+                        and special characters"""
+                    .formatted(line));
         }
         return fruitField;
     }
@@ -77,13 +81,16 @@ public class FruitTransactionServiceImpl implements TransactionService {
     private int validateQuantityField(String quantityField, String line) {
         Pattern pattern = Pattern.compile("-?\\d+");
         if (!pattern.matcher(quantityField).matches()) {
-            throw new RuntimeException("Wrong format of quantity field in line: '" + line
-                    + "'\n The field should be an integer number");
+            throw new RuntimeException("""
+                 Wrong format of quantity field in line: '%s'
+                 The field should be an integer number"""
+                    .formatted(line));
         }
         int quantity = Integer.parseInt(quantityField);
         if (quantity < 0) {
-            throw new RuntimeException("Quantity can't be less than zero in line: '"
-                    + line + "'");
+            throw new RuntimeException("""
+                Quantity can't be less than zero in line: '%s'"""
+                    .formatted(line));
         }
         return quantity;
     }
@@ -95,7 +102,8 @@ public class FruitTransactionServiceImpl implements TransactionService {
                 return operation;
             }
         }
-        throw new RuntimeException("Incorrect transaction index '"
-                + operationField + "' in line: '" + line + "'");
+        throw new RuntimeException("""
+                        Incorrect transaction index '%s' in line: '%s'"""
+                .formatted(formattedField, line));
     }
 }

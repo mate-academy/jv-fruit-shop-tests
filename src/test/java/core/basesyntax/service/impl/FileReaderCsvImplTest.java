@@ -15,8 +15,8 @@ class FileReaderCsvImplTest {
     private static final String FILE_IS_EMPTY_MESSAGE = "File is empty";
     private static final String WRONG_FIRST_LINE_FORMAT_MESSAGE =
             "First line format doesn't match with: 'type,fruit,quantity'";
-    private static final int EXPECTED_LINES_FROM_FILE1 = 4;
-    private static final int EXPECTED_LINES_FROM_FILE2 = 1;
+    private static final int EXPECTED_LINES_FROM_FILE1 = 7;
+    private static final int EXPECTED_LINES_FROM_FILE2 = 8;
 
     @Test
     void read_correctCsvFile_ok() {

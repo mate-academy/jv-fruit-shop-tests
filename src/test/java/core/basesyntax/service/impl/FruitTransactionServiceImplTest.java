@@ -11,7 +11,7 @@ import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EmptySource;
@@ -24,18 +24,18 @@ class FruitTransactionServiceImplTest {
     private static final int ARTICLE_FIELD_INDEX = 1;
     private static final int QUANTITY_FIELD_INDEX = 2;
     private static final List<String> LINES = new ArrayList<>();
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String ORANGE = "orange";
     private final ArticleDao articleDao = new ArticleDaoImpl();
     private final TransactionService fruitTRansactionService
             = new FruitTransactionServiceImpl(articleDao);
 
-    @BeforeAll
-    public static void init() {
-        String apple = "apple";
-        String banana = "banana";
-        String orange = "orange";
-        Storage.storage.put(apple, 0);
-        Storage.storage.put(banana, 0);
-        Storage.storage.put(orange, 0);
+    @BeforeEach
+    void setUp() {
+        Storage.storage.put(APPLE, 0);
+        Storage.storage.put(BANANA, 0);
+        Storage.storage.put(ORANGE, 0);
     }
 
     @AfterEach
@@ -87,9 +87,10 @@ class FruitTransactionServiceImplTest {
     void createTransaction_incorrectArticleNameFormat_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Article name in line: '" + line
-                        + "' shouldn't contain numbers and"
-                        + " special characters", exception.getMessage());
+        assertEquals("""
+                        Article name in line: '%s', shouldn't contain numbers 
+                        and special characters"""
+                .formatted(line), exception.getMessage());
     }
 
     @ParameterizedTest
@@ -136,9 +137,10 @@ class FruitTransactionServiceImplTest {
     void createTransaction_incorrectLineFormat_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Wrong format in line: '" + line
-                + "'\nShould be 3 fields separated by a coma. "
-                + "Example: 'transaction,fruit,quantity'", exception.getMessage());
+        assertEquals("""
+                Wrong format in line: '%s', should be 3 fields separated by a coma.
+                "Example: 'transaction,fruit,quantity""".formatted(line),
+                exception.getMessage());
     }
 
     @ParameterizedTest
@@ -154,8 +156,9 @@ class FruitTransactionServiceImplTest {
                 = line.split(LINE_SEPARATOR)[TRANSACTION_FIELD_INDEX];
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> fruitTRansactionService.createTransaction(line));
-        assertEquals("Incorrect transaction index '"
-                        + transactionIndex + "' in line: '" + line + "'",
+        assertEquals("""
+                        Incorrect transaction index '%s' in line: '%s'"""
+                        .formatted(transactionIndex, line),
                 exception.getMessage());
 
     }
@@ -172,8 +175,9 @@ class FruitTransactionServiceImplTest {
     void createTransaction_negativeQuantity_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Quantity can't be less than zero in line: '"
-                + line + "'", exception.getMessage());
+        assertEquals("""
+                Quantity can't be less than zero in line: '%s'""".formatted(line),
+                exception.getMessage());
     }
 
     @ParameterizedTest
@@ -187,8 +191,10 @@ class FruitTransactionServiceImplTest {
     void createTransaction_quantityAdditionalCharacters_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Wrong format of quantity field in line: '" + line
-                + "'\n The field should be an integer number", exception.getMessage());
+        assertEquals("""
+                 Wrong format of quantity field in line: '%s'
+                 The field should be an integer number"""
+                .formatted(line), exception.getMessage());
     }
 
     @ParameterizedTest
@@ -203,9 +209,8 @@ class FruitTransactionServiceImplTest {
     void createTransaction_spacesInLine_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Line '" + line
-                + "' shouldn't contain"
-                + " spaces and upper case letters",
+        assertEquals("""
+               Line '%s' shouldn't contain spaces and upper case letters""".formatted(line),
                 exception.getMessage());
     }
 }

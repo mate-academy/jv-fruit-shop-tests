@@ -20,9 +20,11 @@ public class StoreServiceImpl implements StoreService {
     public StoreServiceImpl(ArticleDao articleDao,
                             TransactionStrategy transactionStrategy) {
         if (articleDao == null || transactionStrategy == null) {
-            throw new IllegalArgumentException("Parameters can't be null, but:"
-                    + "\narticleDao = " + articleDao
-                    + "\ntransactionStrategy = " + transactionStrategy);
+            throw new IllegalArgumentException("""
+                Parameters can't be null, but:
+                articleDao = %s
+                transactionStrategy = %s"""
+                    .formatted(articleDao, transactionStrategy));
         }
         this.fruitTransactionDao = articleDao;
         this.transactionStrategy = transactionStrategy;
@@ -49,9 +51,9 @@ public class StoreServiceImpl implements StoreService {
             if (quantity >= MIN_QUANTITY_VALUE) {
                 fruitTransactionDao.updateStorage(fruit, quantity);
             } else {
-                throw new RuntimeException("Incorrect data - the balance of '" + fruit
-                        + "' less than 0 \n"
-                        + fruit + ": " + quantity);
+                throw new RuntimeException("""
+                        Incorrect data - the balance of %s less than 0
+                        %s: %s""".formatted(fruit, fruit, quantity));
             }
         }
     }

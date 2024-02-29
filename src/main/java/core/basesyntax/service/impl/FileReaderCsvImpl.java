@@ -33,12 +33,13 @@ public class FileReaderCsvImpl implements Reader {
                 throw new RuntimeException("File is empty");
             }
             if (!transactions.get(FIRST_LINE_INDEX).equals(FIRST_LINE_FORMAT)) {
-                throw new RuntimeException("First line format doesn't match with:"
-                        + " 'type,fruit,quantity'");
+                throw new RuntimeException("""
+                        First line format doesn't match with: 'type,fruit,quantity'""");
             }
             transactions.remove(COLUMN_NAMES_INDEX);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + fileName);
+            throw new RuntimeException("""
+                    Can't read data from file fileName""");
         }
         return transactions;
     }

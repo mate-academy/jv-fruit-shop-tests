@@ -13,17 +13,19 @@ public class ArticleDaoImpl implements ArticleDao {
         if (article == null) {
             throw new RuntimeException("Can't add null to storage");
         }
-        if (article.length() == 0) {
+        if (article.isEmpty()) {
             throw new RuntimeException("Can't add empty string to storage");
         }
         if (Storage.storage.containsKey(article)) {
-            throw new RuntimeException("Article '" + article
-                    + "' already exist in storage");
+            throw new RuntimeException("""
+                        Article '%s' already exist in storage"""
+                    .formatted(article));
         }
         if (!article.matches("[a-z]+")) {
-            throw new RuntimeException("Article name: '" + article
-                    + "' shouldn't contain numbers,"
-                    + " spices, special characters and upper case letters");
+            throw new RuntimeException("""
+                        Article name: '%s' shouldn't contain numbers,
+                        spices, special characters and upper case letters"""
+                    .formatted(article));
         }
         Storage.storage.put(article, DEFAULT_FRUIT_QUANTITY);
     }
@@ -31,13 +33,15 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public void updateStorage(String article, int quantity) {
         if (!article.matches("[a-z]+")) {
-            throw new RuntimeException("Article name: '" + article
-                    + "' shouldn't contain numbers,"
-                    + " spices, special characters and upper case letters");
+            throw new RuntimeException("""
+                        Article name: '%s' shouldn't contain numbers,
+                        spices, special characters and upper case letters"""
+                    .formatted(article));
         }
         if (!Storage.storage.containsKey(article)) {
-            throw new RuntimeException("Storage doesn't contain article '"
-                    + article + "'");
+            throw new RuntimeException("""
+                Storage doesn't contain article %s"""
+                    .formatted(article));
         }
         if (quantity < MIN_QUANTITY_VALUE) {
             throw new RuntimeException("Quantity can't be negative");
@@ -51,8 +55,9 @@ public class ArticleDaoImpl implements ArticleDao {
             throw new IllegalArgumentException("Argument can't be null");
         }
         if (!Storage.storage.containsKey(article)) {
-            throw new RuntimeException("Storage doesn't contain article '"
-                    + article + "'");
+            throw new RuntimeException("""
+                Storage doesn't contain article %s"""
+                    .formatted(article));
         }
         return Storage.storage.get(article);
     }
@@ -67,12 +72,10 @@ public class ArticleDaoImpl implements ArticleDao {
 
     @Override
     public void removeArticle(String article) {
-        if (Storage.storage.get(article) == null) {
-            throw new RuntimeException("Storage doesn't contain article '" + article + "'");
-        }
         if (!Storage.storage.containsKey(article)) {
-            throw new RuntimeException("Storage doesn't contain article '"
-                    + article + "'");
+            throw new RuntimeException("""
+                Storage doesn't contain article %s"""
+                    .formatted(article));
         }
         Storage.storage.remove(article);
     }

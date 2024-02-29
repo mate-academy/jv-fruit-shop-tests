@@ -1,2 +1,9 @@
 type,fruit,quantity
-line
+b,banana,43
+b,lemon,123
+s,banana,150
+s,lemon,150
+p,banana,74
+p,lemon,50
+r,banana,0
+r,lemon,10

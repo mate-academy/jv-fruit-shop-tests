@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.Writer;
 import java.io.IOException;
@@ -17,20 +17,19 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class FileWriterCsvImplTest {
-    private static final Writer FILE_WRITER_CSV = new FileWriterCsvImpl();
+    private static final String FILE_NAME = "src/test/resources/writer/reportCsv.csv";
+    private static final Writer fileWriterCsv = new FileWriterCsvImpl();
     private static List<String> report;
-    private static String fileName;
 
     @BeforeAll
     static void beforeAll() {
-        fileName = "src/test/resources/writer/reportCsv.csv";
-        report = new ArrayList<>();
-        report.add("line1");
-        report.add("line2");
-        report.add("line3");
-        report.add("line4");
-        report.add("line5");
-        report.add("line6");
+        report = List.of(
+            "apple,100",
+            "orange,405",
+            "lemon,100",
+            "peach,623",
+            "pear,40",
+            "pineapple,86");
     }
 
     @Test
@@ -38,27 +37,30 @@ class FileWriterCsvImplTest {
         String nullName = null;
         List<String> nullList = null;
         Throwable exception1 = assertThrows(IllegalArgumentException.class,
-                () -> FILE_WRITER_CSV.write(nullName, nullList));
-        assertEquals("Parameters can't be null, but:"
-                + "\nfileName = " + nullName
-                + "\nreport = " + nullList, exception1.getMessage());
+                () -> fileWriterCsv.write(nullName, nullList));
+        assertEquals("""
+                    Parameters can't be null, but:"
+                    fileName = '%s'
+                    report = '%s'""".formatted(nullName, nullList), exception1.getMessage());
         Throwable exception2 = assertThrows(IllegalArgumentException.class,
-                () -> FILE_WRITER_CSV.write(fileName, nullList));
-        assertEquals("Parameters can't be null, but:"
-                + "\nfileName = " + fileName
-                + "\nreport = " + nullList, exception2.getMessage());
+                () -> fileWriterCsv.write(FILE_NAME, nullList));
+        assertEquals("""
+                    Parameters can't be null, but:"
+                    fileName = '%s'
+                    report = '%s'""".formatted(FILE_NAME, nullList), exception2.getMessage());
         Throwable exception3 = assertThrows(IllegalArgumentException.class,
-                () -> FILE_WRITER_CSV.write(nullName, report));
-        assertEquals("Parameters can't be null, but:"
-                + "\nfileName = " + nullName
-                + "\nreport = " + report, exception3.getMessage());
+                () -> fileWriterCsv.write(nullName, report));
+        assertEquals("""
+                    Parameters can't be null, but:"
+                    fileName = '%s'
+                    report = '%s'""".formatted(nullName, report), exception3.getMessage());
     }
 
     @Test
     void write_reportIsEmpty_notOk() {
         List<String> emptyReport = new ArrayList<>();
         Throwable exception = assertThrows(RuntimeException.class,
-                () -> FILE_WRITER_CSV.write(fileName, emptyReport));
+                () -> fileWriterCsv.write(FILE_NAME, emptyReport));
         assertEquals("Report is empty", exception.getMessage());
     }
 
@@ -66,7 +68,7 @@ class FileWriterCsvImplTest {
     void write_fileNameIsEmpty_notOk() {
         String emptyFileName = "";
         Throwable exception = assertThrows(RuntimeException.class,
-                () -> FILE_WRITER_CSV.write(emptyFileName, report));
+                () -> fileWriterCsv.write(emptyFileName, report));
         assertEquals("File name is empty", exception.getMessage());
     }
 
@@ -81,62 +83,63 @@ class FileWriterCsvImplTest {
     })
     void write_notCsvFileExtension_notOk(String path) {
         Throwable exception = assertThrows(RuntimeException.class,
-                () -> FILE_WRITER_CSV.write(path, report));
-        assertEquals("The file extension is different from .csv: "
-                 + path, exception.getMessage());
+                () -> fileWriterCsv.write(path, report));
+        assertEquals("""
+                The file extension is different from .csv: %s"""
+                .formatted(path), exception.getMessage());
     }
 
     @Test
     void write_nullValueInReport_notOk() {
-        List<String> listWithNull1 = new ArrayList<>();
-        listWithNull1.add(null);
-        listWithNull1.add(null);
-        listWithNull1.add(null);
-        listWithNull1.add(null);
-        List<String> listWithNull2 = new ArrayList<>();
-        listWithNull2.add("line");
-        listWithNull2.add("line");
-        listWithNull2.add("line");
-        listWithNull2.add(null);
+        List<String> listWithNull1 = Arrays.asList(null, null, null, null);
+        List<String> listWithNull2 = Arrays.asList("orange,405", "lemon,100", "peach,623", null);
         Throwable exception1 = assertThrows(RuntimeException.class,
-                () -> FILE_WRITER_CSV.write(fileName, listWithNull1));
+                () -> fileWriterCsv.write(FILE_NAME, listWithNull1));
         assertEquals("Report contains null value", exception1.getMessage());
         Throwable exception2 = assertThrows(RuntimeException.class,
-                () -> FILE_WRITER_CSV.write(fileName, listWithNull2));
+                () -> fileWriterCsv.write(FILE_NAME, listWithNull2));
         assertEquals("Report contains null value", exception2.getMessage());
     }
 
     @Test
     void write_correctParameters_ok() {
         List<String> linesFromFile;
-        FILE_WRITER_CSV.write(fileName, report);
+        fileWriterCsv.write(FILE_NAME, report);
         try {
-            Path path = Path.of(fileName);
+            Path path = Path.of(FILE_NAME);
             linesFromFile = Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file");
         }
-        boolean isListEquals = Arrays.equals(report.toArray(), linesFromFile.toArray());
-        assertTrue(isListEquals);
+        assertArrayEquals(report.toArray(), linesFromFile.toArray());
     }
 
     @Test
     void write_fileAlreadyExist_ok() {
-        List<String> linesFromFile;
-        List<String> recentReport = new ArrayList<>();
-        recentReport.add("previous line 1");
-        recentReport.add("previous line 2");
-        recentReport.add("previous line 3");
-        recentReport.add("previous line 4");
-        FILE_WRITER_CSV.write(fileName,recentReport);
-        FILE_WRITER_CSV.write(fileName, report);
+        List<String> previousReport = List.of(
+                "apple,45",
+                "orange,234",
+                "lemon,68",
+                "peach,233",
+                "pear,0",
+                "pineapple,1000");
+        fileWriterCsv.write(FILE_NAME,previousReport);
+        List<String> linesFromPreviousFile;
         try {
-            Path path = Path.of(fileName);
+            Path path = Path.of(FILE_NAME);
+            linesFromPreviousFile = Files.readAllLines(path);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file");
+        }
+        fileWriterCsv.write(FILE_NAME, report);
+        List<String> linesFromFile;
+        try {
+            Path path = Path.of(FILE_NAME);
             linesFromFile = Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file");
         }
-        boolean isListEquals = Arrays.equals(report.toArray(), linesFromFile.toArray());
-        assertTrue(isListEquals);
+        assertArrayEquals(previousReport.toArray(), linesFromPreviousFile.toArray());
+        assertArrayEquals(report.toArray(), linesFromFile.toArray());
     }
 }

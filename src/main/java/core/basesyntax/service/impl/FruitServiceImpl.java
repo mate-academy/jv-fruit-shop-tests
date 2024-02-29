@@ -15,7 +15,13 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void performFruitsOperations(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Can't perform operations with null list");
+        }
         for (FruitTransaction transaction : transactions) {
+            if (transaction == null) {
+                throw new IllegalArgumentException("Can't operate null value transactions");
+            }
             OperationStrategy operation = supplier.get(transaction.getOperation());
             operation.performOperation(transaction);
         }

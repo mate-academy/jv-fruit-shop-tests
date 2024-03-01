@@ -1,7 +1,9 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.FileDataParserCsvImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -35,8 +37,9 @@ public class FileDataParserCsvImplTest {
 
     @Test
     public void parseData_nullData_notOk() {
-        assertThrows(NullPointerException.class, () -> fileDataParser.parseData(null),
-                "NullPointerException should be thrown if the input list is null.");
+        List<FruitTransaction> result = fileDataParser.parseData(null);
+        assertNotNull(result, "Result should not be null.");
+        assertTrue(result.isEmpty(), "Result should be an empty list when input data is null.");
     }
 
     @Test

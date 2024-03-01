@@ -4,9 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.FruitTransactionProcessorImpl;
+import core.basesyntax.dao.impl.FruitDao;
+import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationsHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,19 +20,22 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionProcessorImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private static FruitTransactionProcessor processor;
     private static Map<FruitTransaction.Operation, OperationsHandler> handlersMap = new HashMap<>();
 
     @BeforeAll
     public static void setUp() {
-        handlersMap.put(FruitTransaction.Operation.BALANCE, transaction ->
-                System.out.println("Balancing..."));
-        handlersMap.put(FruitTransaction.Operation.SUPPLY, transaction ->
-                System.out.println("Supplying..."));
-        handlersMap.put(FruitTransaction.Operation.PURCHASE, transaction ->
-                System.out.println("Purchasing..."));
-        handlersMap.put(FruitTransaction.Operation.RETURN, transaction ->
-                System.out.println("Returning..."));
+        FruitDao fruitDao = new FruitDaoImpl();
+        handlersMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitDao));
+        handlersMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitDao));
+        handlersMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitDao));
+        handlersMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitDao));
 
         OperationStrategy operationStrategy = new OperationStrategy(handlersMap);
         processor = new FruitTransactionProcessorImpl(operationStrategy);
@@ -35,8 +44,8 @@ class FruitTransactionProcessorImplTest {
     @Test
     void processTransactions_ValidTransactions_Ok() {
         List<FruitTransaction> transactions = List.of(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 20),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 30)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 20),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 30)
         );
         assertDoesNotThrow(() -> processor.processTransactions(transactions));
     }

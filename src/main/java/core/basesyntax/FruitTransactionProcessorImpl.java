@@ -11,7 +11,7 @@ public record FruitTransactionProcessorImpl(
         FruitTransactionProcessor {
 
     public FruitTransactionProcessorImpl(OperationStrategy operationStrategy) {
-        this.operationStrategy = (OperationStrategy) operationStrategy;
+        this.operationStrategy = operationStrategy;
     }
 
     @Override

@@ -24,7 +24,7 @@ class FileWriterCsvImplTest {
 
     @Test
     void writeToFile_ValidPath_Ok() throws IOException {
-        String content = "Test content";
+        String content = "Test content for valid path";
         Path filePath = tempDir.resolve("testFile.csv");
         fileWriter.writeToFile(content, filePath.toString());
 
@@ -35,7 +35,7 @@ class FileWriterCsvImplTest {
 
     @Test
     void writeToFile_InvalidPath_NotOk() {
-        String content = "Test content";
+        String content = "Test content for invalid path";
         String invalidPath = "\0invalidFileName.csv";
         
         assertThrows(RuntimeException.class, () -> fileWriter.writeToFile(content, invalidPath),

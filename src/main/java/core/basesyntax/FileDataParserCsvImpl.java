@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.FileDataParser;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ public class FileDataParserCsvImpl implements FileDataParser {
 
     @Override
     public List<FruitTransaction> parseData(List<String> dataFromFile) {
-        return dataFromFile.stream()
+        return dataFromFile == null ? Collections.emptyList() : dataFromFile.stream()
             .map(this::parseFruitTransaction)
             .collect(Collectors.toList());
     }

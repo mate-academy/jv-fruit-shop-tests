@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.ReportServiceImpl;
 import core.basesyntax.dao.impl.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportServiceImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private ReportService reportService;
     private FruitDao fruitDao;
 
@@ -20,6 +23,7 @@ public class ReportServiceImplTest {
     void setUp() {
         fruitDao = new FruitDaoImpl();
         reportService = new ReportServiceImpl(fruitDao);
+        Storage.fruitStorage.clear();
     }
 
     @Test
@@ -32,8 +36,8 @@ public class ReportServiceImplTest {
 
     @Test
     void createReport_NonEmptyStorageReturnsCorrectData_Ok() {
-        fruitDao.putToStorage("apple", 20);
-        fruitDao.putToStorage("banana", 30);
+        fruitDao.putToStorage(APPLE, 20);
+        fruitDao.putToStorage(BANANA, 30);
 
         String actualReport = reportService.createReport();
         String[] reportLines = actualReport.split(System.lineSeparator());

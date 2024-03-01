@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationHandlerTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
     private ReturnOperationHandler operationHandler;
 
     @BeforeEach
@@ -21,19 +23,19 @@ class ReturnOperationHandlerTest {
 
     @Test
     void applyOperation_FruitExistsInStorageQuantityUpdated_Ok() {
-        Storage.fruitStorage.put("apple", 50);
-        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "apple", 30);
+        Storage.fruitStorage.put(APPLE, 50);
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, APPLE, 30);
         operationHandler.applyOperation(transaction);
-        Map<String, Integer> actual = Map.of("apple", 80);
+        Map<String, Integer> actual = Map.of(APPLE, 80);
         Map<String, Integer> expected = Storage.fruitStorage;
         assertEquals(expected, actual, "Return strategy did not update quantity correctly");
     }
 
     @Test
     void applyOperation_FruitNotInStorageAddedToStorage_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, "banana", 40);
+        FruitTransaction transaction = new FruitTransaction(Operation.RETURN, BANANA, 40);
         operationHandler.applyOperation(transaction);
-        Map<String, Integer> actual = Map.of("banana", 40);
+        Map<String, Integer> actual = Map.of(BANANA, 40);
         Map<String, Integer> expected = Storage.fruitStorage;
         assertEquals(expected, actual, "Return strategy did not add new fruit correctly");
     }

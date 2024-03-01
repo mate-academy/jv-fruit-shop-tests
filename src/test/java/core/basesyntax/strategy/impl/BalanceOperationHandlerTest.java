@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
+    private static final String APPLE = "apple";
     private BalanceOperationHandler operationHandler;
 
     @BeforeEach
@@ -21,7 +22,7 @@ class BalanceOperationHandlerTest {
 
     @Test
     void applyOperation_ValidTransaction_Ok() {
-        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, "apple", 50);
+        FruitTransaction transaction = new FruitTransaction(Operation.BALANCE, APPLE, 50);
         operationHandler.applyOperation(transaction);
         Map<String, Integer> actual = Map.of(transaction.getFruit(),
                 transaction.getQuantity());

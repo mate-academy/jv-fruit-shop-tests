@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitDaoImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String LEMON = "lemon";
     private FruitDao fruitDao;
 
     @BeforeEach
@@ -25,13 +28,13 @@ class FruitDaoImplTest {
 
     @Test
     void getStorage_AfterAddingFruitsReturnsCorrectData_Ok() {
-        fruitDao.putToStorage("apple", 20);
-        fruitDao.putToStorage("banana", 30);
-        fruitDao.putToStorage("lemon", 2);
+        fruitDao.putToStorage(APPLE, 20);
+        fruitDao.putToStorage(BANANA, 30);
+        fruitDao.putToStorage(LEMON, 2);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 20);
-        expected.put("banana", 30);
-        expected.put("lemon", 2);
+        expected.put(APPLE, 20);
+        expected.put(BANANA, 30);
+        expected.put(LEMON, 2);
         assertEquals(expected, fruitDao.getStorage(),
                 "getStorage() should return all fruits and their quantities");
     }
@@ -45,8 +48,8 @@ class FruitDaoImplTest {
 
     @Test
     void getQualityByItemType_ExistingFruitReturnsQuantity_Ok() {
-        fruitDao.putToStorage("apple", 20);
-        assertEquals(20, fruitDao.getQualityByItemType("apple"),
+        fruitDao.putToStorage(APPLE, 20);
+        assertEquals(20, fruitDao.getQualityByItemType(APPLE),
                 "Should return the correct quantity for an existing fruit");
     }
 
@@ -58,17 +61,17 @@ class FruitDaoImplTest {
 
     @Test
     void putToStorage_AddFruitsToStorage_Ok() {
-        fruitDao.putToStorage("apple", 20);
-        fruitDao.putToStorage("apple", 2);
+        fruitDao.putToStorage(APPLE, 20);
+        fruitDao.putToStorage(APPLE, 2);
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("apple", 2);
+        expected.put(APPLE, 2);
         assertEquals(expected, Storage.fruitStorage,
                 "Fruits should be added to the storage");
     }
 
     @Test
     void putToStorage_NegativeQuantity_NotOk() {
-        assertThrows(IllegalArgumentException.class, () -> fruitDao.putToStorage("apple", -20),
+        assertThrows(IllegalArgumentException.class, () -> fruitDao.putToStorage(APPLE, -20),
                 "Putting fruit with negative quantity should throw IllegalArgumentException");
     }
 }

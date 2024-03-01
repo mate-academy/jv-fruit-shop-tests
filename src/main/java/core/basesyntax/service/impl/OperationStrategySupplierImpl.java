@@ -20,6 +20,7 @@ public class OperationStrategySupplierImpl implements OperationStrategySupplier 
         return Optional.ofNullable(strategies.get(operation))
                 .orElseThrow(() ->
                         new NoSuchElementException(
-                                "There is no such operation: " + operation.name()));
+                                "There is no such operation: "
+                                        + (operation == null ? "null" : operation.name())));
     }
 }

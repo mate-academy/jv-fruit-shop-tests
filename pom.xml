@@ -95,7 +95,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/HelloWorld*</exclude>
+                        <exclude>core/basesyntax/service/FruitTransaction.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

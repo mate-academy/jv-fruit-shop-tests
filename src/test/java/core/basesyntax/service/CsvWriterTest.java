@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvWriterTest {
+    private static final String EXTENSION = ".csv";
     private static final String BREAK = System.lineSeparator();
     private static final String OUTPUT_DATA_FILE = "src/test/resources/report_";
     private static final String OUTPUT_DATA_FILE_INVALID = "src/test/invalid/report_";
@@ -27,29 +28,24 @@ class CsvWriterTest {
     }
 
     @Test
-    void writeToFile_validInput_Ok() {
+    void writeToFile_validInput_ok() throws IOException {
         String finalPath = OUTPUT_DATA_FILE
-                + LocalDateTime.now().format(FORMATTED) + ".csv";
+                + LocalDateTime.now().format(FORMATTED) + EXTENSION;
         String expected =
                 HEADER
                 + "banana,107" + BREAK
                 + "apple,108";
         csvWriter.writeToFile(OUTPUT_DATA_FILE, expected);
-        String actual;
+        String actual = Files.readAllLines(Path.of(finalPath)).stream()
+                .collect(Collectors.joining(BREAK));
 
-        try {
-            actual = Files.readAllLines(Path.of(finalPath)).stream()
-                    .collect(Collectors.joining(BREAK));
-        } catch (IOException e) {
-            throw new RuntimeException("Error reading from file " + finalPath, e);
-        }
         assertEquals(expected, actual);
     }
 
     @Test
     void writeToFile_invalidPath_notOk() {
         String finalPath = OUTPUT_DATA_FILE_INVALID
-                + LocalDateTime.now().format(FORMATTED) + ".csv";
+                + LocalDateTime.now().format(FORMATTED) + EXTENSION;
         String input =
                 HEADER
                         + "banana,107" + BREAK

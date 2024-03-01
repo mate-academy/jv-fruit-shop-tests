@@ -11,24 +11,23 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class TransactionConverterImplTest {
-    private static final String TEST_FILE_0 = "src/test/resources/ConvTest0.csv";
-    private static final String TEST_FILE_1 = "src/test/resources/ConvTest1.csv";
-    private static final String TEST_FILE_2 = "src/test/resources/ConvTest2.csv";
-    private static final String TEST_FILE_3 = "src/test/resources/ConvTest3.csv";
-    private static final String TEST_FILE_4 = "src/test/resources/ConvTest4.csv";
-    private static final String TEST_FILE_5 = "src/test/resources/ConvTest5.csv";
-    private static final String TEST_FILE_6 = "src/test/resources/Blank.csv";
+    private static final String TEST_FILE_VALID = "src/test/resources/ConvTest0.csv";
+    private static final String TEST_FILE_INVALID_START = "src/test/resources/ConvTest1.csv";
+    private static final String TEST_FILE_WRONG_CASE = "src/test/resources/ConvTest2.csv";
+    private static final String TEST_FILE_SPACING = "src/test/resources/ConvTest3.csv";
+    private static final String TEST_FILE_UNKNOWN_OP = "src/test/resources/ConvTest4.csv";
+    private static final String TEST_FILE_WRONG_HEADER = "src/test/resources/ConvTest5.csv";
+    private static final String TEST_FILE_BLANK = "src/test/resources/Blank.csv";
     private static TransactionConverterImpl transactionConverter;
 
     @BeforeAll
     static void setUp() {
         transactionConverter = new TransactionConverterImpl();
-
     }
 
     @Test
-    public void convertLines_validInput_Ok() {
-        List<String> lines = readLinesFromFile(TEST_FILE_0);
+    public void convertLines_validInput_ok() {
+        List<String> lines = readLinesFromFile(TEST_FILE_VALID);
         transactionConverter.convertLines(lines);
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
@@ -45,7 +44,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_wrongHeader_notOk() {
-        List<String> lines = readLinesFromFile(TEST_FILE_5);
+        List<String> lines = readLinesFromFile(TEST_FILE_WRONG_HEADER);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -54,7 +53,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_invalidStartAfterHeader_notOk() {
-        List<String> lines = readLinesFromFile(TEST_FILE_1);
+        List<String> lines = readLinesFromFile(TEST_FILE_INVALID_START);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -63,7 +62,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_wrongCase_notOk() {
-        List<String> lines = readLinesFromFile(TEST_FILE_2);
+        List<String> lines = readLinesFromFile(TEST_FILE_WRONG_CASE);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -72,7 +71,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_unnecessarySpacing_notOk() {
-        List<String> lines = readLinesFromFile(TEST_FILE_3);
+        List<String> lines = readLinesFromFile(TEST_FILE_SPACING);
 
         assertThrows(ConversionException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -81,7 +80,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_blank_notOk() {
-        List<String> lines = readLinesFromFile(TEST_FILE_6);
+        List<String> lines = readLinesFromFile(TEST_FILE_BLANK);
 
         assertThrows(IndexOutOfBoundsException.class, () -> {
             transactionConverter.convertLines(lines);
@@ -90,7 +89,7 @@ class TransactionConverterImplTest {
 
     @Test
     public void convertLines_unknownOperation_notOk() {
-        List<String> lines = readLinesFromFile(TEST_FILE_4);
+        List<String> lines = readLinesFromFile(TEST_FILE_UNKNOWN_OP);
 
         assertThrows(IllegalArgumentException.class, () -> {
             transactionConverter.convertLines(lines);

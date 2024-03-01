@@ -41,7 +41,7 @@ class ShopServiceStrategyTest {
     }
 
     @Test
-    public void processTransactions_validInput_Ok() {
+    public void processTransactions_validInput_ok() {
         Map<String, Integer> expected = Map.of(
                 "banana", 107,
                 "apple", 90

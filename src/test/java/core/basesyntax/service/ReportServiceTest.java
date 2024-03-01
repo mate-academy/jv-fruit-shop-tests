@@ -20,7 +20,7 @@ class ReportServiceTest {
     }
 
     @Test
-    void createReport_validOutput_Ok() {
+    void createReport_validOutput_ok() {
         String expected =
                 HEADER
                 + "banana,107" + BREAK

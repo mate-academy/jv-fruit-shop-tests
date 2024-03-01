@@ -32,6 +32,7 @@ public class JvFruitShopTest {
     private final FileReader fileReader = new FileReaderImpl();
     private final FileWriter fileWriter = new FileWriterImpl();
     private final TransactionParser transactionParser = new TransactionParserImpl();
+    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     @BeforeAll
     static void beforeAll() {
@@ -55,7 +56,7 @@ public class JvFruitShopTest {
 
     @Test
     void read_File_isOk() {
-        File inputFile = new File("src/test/resources/isOkReadFile.csv");
+        File inputDataFile = new File("src/test/resources/isOkReadFile.csv");
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -63,23 +64,22 @@ public class JvFruitShopTest {
         expected.add("s,banana,100");
         expected.add("p,banana,13");
         expected.add("r,apple,10");
-        List<String> actual = fileReader.readFile(inputFile);
+        List<String> actual = fileReader.readFile(inputDataFile);
         assertEquals(expected, actual);
     }
 
     @Test
     void read_File_NotOk() {
-        File inputFile = new File("");
-        assertThrows(RuntimeException.class, () -> fileReader.readFile(inputFile));
+        File inputDataFile = new File("");
+        assertThrows(RuntimeException.class, () -> fileReader.readFile(inputDataFile));
     }
 
     @Test
     void write_File_isOk() {
-        File file = new File("src/test/resources/isOkWriteFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/isOkWriteFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         Map<String, Integer> fruitsDataStorage = transactionExecutor.executeAll(fruits);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.generateReport(fruitsDataStorage);
         fileWriter.writeToFile(report);
         File result = new File("src/main/resources/result.csv");
@@ -106,8 +106,8 @@ public class JvFruitShopTest {
         expected.put("orange", 50);
         expected.put("kiwi", 25);
         expected.put("test", 100);
-        File file = new File("src/test/resources/isOkExecuteTransactionFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/isOkExecuteTransactionFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         Map<String, Integer> actual = transactionExecutor.executeAll(fruits);
         assertEquals(expected, actual);
@@ -115,72 +115,86 @@ public class JvFruitShopTest {
 
     @Test
     void return_Fruit_NotOk() {
-        File file = new File("src/test/resources/notOkReturnTransactionFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/notOkReturnTransactionFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void return_Quantity_NotOk() {
-        File file = new File("src/test/resources/notOkReturnQuantityFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/notOkReturnQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void supply_Quantity_NotOk() {
-        File file = new File("src/test/resources/notOkSupplyQuantityFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/notOkSupplyQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void purchase_Quantity_NotOk() {
-        File file = new File("src/test/resources/notOkPurchaseQuantityFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/notOkPurchaseQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void transaction_Unknown_NotOk() {
-        File file = new File("src/test/resources/notOkUnknownTransactionFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/notOkUnknownTransactionFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void balance_Quantity_NotOk() {
-        File file = new File("src/test/resources/notOkBalanceQuantityFile.csv");
-        List<String> fruitsTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/notOkBalanceQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
+    void access_Storage_isOk() {
+        File inputDataFile = new File("src/test/resources/accessStorageFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("banana", 154);
+        expected.put("apple", 80);
+        expected.put("kiwi", 50);
+        expected.put("melon", 55);
+        expected.put("test", 100);
+        Map<String, Integer> actual = transactionExecutor.executeAll(fruits);
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void generate_Report_isOk() {
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        fruitsDao.storageAccess().put("banana", 100);
-        fruitsDao.storageAccess().put("apple", 200);
-        fruitsDao.storageAccess().put("orange", 50);
-        fruitsDao.storageAccess().put("kiwi", 150);
+        File inputDataFile = new File("src/test/resources/isOkGenerateReportFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(inputDataFile);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        Map<String, Integer> fruitsDataStorage = transactionExecutor.executeAll(fruits);
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,100" + System.lineSeparator()
                 + "orange,50" + System.lineSeparator()
                 + "apple,200" + System.lineSeparator()
                 + "kiwi,150" + System.lineSeparator();
-        String actual = reportGenerator.generateReport(fruitsDao.storageAccess());
+        String actual = reportGenerator.generateReport(fruitsDataStorage);
         assertEquals(expected, actual);
     }
 
     @Test
     void parse_Transaction_isOk() {
-        File file = new File("src/test/resources/isOkParseTransactionFile.csv");
-        List<String> fruitTransaction = fileReader.readFile(file);
+        File inputDataFile = new File("src/test/resources/isOkParseTransactionFile.csv");
+        List<String> fruitTransaction = fileReader.readFile(inputDataFile);
         List<FruitTransaction> actual = transactionParser.parse(fruitTransaction);
         assertEquals(expected, actual);
     }

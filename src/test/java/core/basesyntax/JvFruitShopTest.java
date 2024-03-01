@@ -26,24 +26,26 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class JvFruitShopTest {
-    private static List<FruitTransaction> fruits;
+    private static List<FruitTransaction> expected;
+    private final TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
     private final FruitsDao fruitsDao = new FruitsDaoImpl();
     private final FileReader fileReader = new FileReaderImpl();
     private final FileWriter fileWriter = new FileWriterImpl();
+    private final TransactionParser transactionParser = new TransactionParserImpl();
 
     @BeforeAll
     static void beforeAll() {
-        fruits = new ArrayList<>();
-        fruits.add(new FruitTransaction("b", "banana", 100));
-        fruits.add(new FruitTransaction("p", "banana", 20));
-        fruits.add(new FruitTransaction("b", "apple", 200));
-        fruits.add(new FruitTransaction("b", "orange", 50));
-        fruits.add(new FruitTransaction("p", "orange", 10));
-        fruits.add(new FruitTransaction("p", "apple", 25));
-        fruits.add(new FruitTransaction("s", "orange", 10));
-        fruits.add(new FruitTransaction("s", "apple", 10));
-        fruits.add(new FruitTransaction("s", "kiwi", 150));
-        fruits.add(new FruitTransaction("r", "apple", 15));
+        expected = new ArrayList<>();
+        expected.add(new FruitTransaction("b", "banana", 100));
+        expected.add(new FruitTransaction("p", "banana", 20));
+        expected.add(new FruitTransaction("b", "apple", 200));
+        expected.add(new FruitTransaction("b", "orange", 50));
+        expected.add(new FruitTransaction("p", "orange", 10));
+        expected.add(new FruitTransaction("p", "apple", 25));
+        expected.add(new FruitTransaction("s", "orange", 10));
+        expected.add(new FruitTransaction("s", "apple", 10));
+        expected.add(new FruitTransaction("s", "kiwi", 150));
+        expected.add(new FruitTransaction("r", "apple", 15));
     }
 
     @AfterEach
@@ -53,7 +55,7 @@ public class JvFruitShopTest {
 
     @Test
     void read_File_isOk() {
-        File inputFile = new File("src/test/resources/inputDataTest.csv");
+        File inputFile = new File("src/test/resources/isOkReadFile.csv");
         List<String> expected = new ArrayList<>();
         expected.add("type,fruit,quantity");
         expected.add("b,banana,20");
@@ -73,19 +75,21 @@ public class JvFruitShopTest {
 
     @Test
     void write_File_isOk() {
-        List<String> expected = new ArrayList<>();
-        expected.add("fruit,quantity");
-        expected.add("banana,154");
-        expected.add("apple,80");
-        expected.add("kiwi,50");
-        String report = "fruit,quantity" + System.lineSeparator()
-                + "banana,154" + System.lineSeparator()
-                + "apple,80" + System.lineSeparator()
-                + "kiwi,50" + System.lineSeparator();
+        File file = new File("src/test/resources/isOkWriteFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        Map<String, Integer> fruitsDataStorage = transactionExecutor.executeAll(fruits);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String report = reportGenerator.generateReport(fruitsDataStorage);
         fileWriter.writeToFile(report);
         File result = new File("src/main/resources/result.csv");
-        List<String> actual = fileReader.readFile(result);
-        assertEquals(expected, actual);
+        List<String> fruitsList = fileReader.readFile(result);
+        StringBuilder builder = new StringBuilder();
+        for (String fruit: fruitsList) {
+            builder.append(fruit).append(System.lineSeparator());
+        }
+        String actual = builder.toString();
+        assertEquals(report, actual);
     }
 
     @Test
@@ -97,54 +101,64 @@ public class JvFruitShopTest {
     @Test
     void execute_Transaction_isOk() {
         Map<String, Integer> expected = new HashMap<>();
-        expected.put("banana", 80);
-        expected.put("apple", 200);
+        expected.put("banana", 107);
+        expected.put("apple", 110);
         expected.put("orange", 50);
-        expected.put("kiwi", 150);
-        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
+        expected.put("kiwi", 25);
+        expected.put("test", 100);
+        File file = new File("src/test/resources/isOkExecuteTransactionFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
         Map<String, Integer> actual = transactionExecutor.executeAll(fruits);
         assertEquals(expected, actual);
     }
 
     @Test
     void return_Fruit_NotOk() {
-        List<FruitTransaction> emptylist = new ArrayList<>();
-        emptylist.add(new FruitTransaction("r", "null", 10));
-        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
-        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+        File file = new File("src/test/resources/notOkReturnTransactionFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void return_Quantity_NotOk() {
-        List<FruitTransaction> emptylist = new ArrayList<>();
-        emptylist.add(new FruitTransaction("b", "banana", 100));
-        emptylist.add(new FruitTransaction("r", "banana", -10));
-        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
-        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+        File file = new File("src/test/resources/notOkReturnQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void supply_Quantity_NotOk() {
-        List<FruitTransaction> emptylist = new ArrayList<>();
-        emptylist.add(new FruitTransaction("s", "banana", -10));
-        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
-        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+        File file = new File("src/test/resources/notOkSupplyQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void purchase_Quantity_NotOk() {
-        List<FruitTransaction> emptylist = new ArrayList<>();
-        emptylist.add(new FruitTransaction("p", "banana", -10));
-        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
-        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+        File file = new File("src/test/resources/notOkPurchaseQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
+    }
+
+    @Test
+    void transaction_Unknown_NotOk() {
+        File file = new File("src/test/resources/notOkUnknownTransactionFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
     void balance_Quantity_NotOk() {
-        List<FruitTransaction> emptylist = new ArrayList<>();
-        emptylist.add(new FruitTransaction("b", "banana", -10));
-        TransactionExecutor transactionExecutor = new TransactionExecutorImpl();
-        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(emptylist));
+        File file = new File("src/test/resources/notOkBalanceQuantityFile.csv");
+        List<String> fruitsTransaction = fileReader.readFile(file);
+        List<FruitTransaction> fruits = transactionParser.parse(fruitsTransaction);
+        assertThrows(RuntimeException.class, () -> transactionExecutor.executeAll(fruits));
     }
 
     @Test
@@ -165,20 +179,9 @@ public class JvFruitShopTest {
 
     @Test
     void parse_Transaction_isOk() {
-        List<String> fruitTransaction = new ArrayList<>();
-        fruitTransaction.add("type,fruit,quantity");
-        fruitTransaction.add("b,banana,100");
-        fruitTransaction.add("p,banana,20");
-        fruitTransaction.add("b,apple,200");
-        fruitTransaction.add("b,orange,50");
-        fruitTransaction.add("p,orange,10");
-        fruitTransaction.add("p,apple,25");
-        fruitTransaction.add("s,orange,10");
-        fruitTransaction.add("s,apple,10");
-        fruitTransaction.add("s,kiwi,150");
-        fruitTransaction.add("r,apple,15");
-        TransactionParser transactionParser = new TransactionParserImpl();
+        File file = new File("src/test/resources/isOkParseTransactionFile.csv");
+        List<String> fruitTransaction = fileReader.readFile(file);
         List<FruitTransaction> actual = transactionParser.parse(fruitTransaction);
-        assertEquals(fruits, actual);
+        assertEquals(expected, actual);
     }
 }

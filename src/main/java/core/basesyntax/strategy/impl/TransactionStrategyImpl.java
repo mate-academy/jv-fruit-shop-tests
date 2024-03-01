@@ -13,7 +13,7 @@ public class TransactionStrategyImpl implements TransactionStrategy {
             case "r" -> new TransactionHandlerReturnImpl();
             case "s" -> new TransactionHandlerSupplyImpl();
             case "b" -> new TransactionHandlerImpl();
-            default -> new TransactionHandlerImpl();
+            default -> throw new RuntimeException("Unknown operation: " + operation);
         };
     }
 }

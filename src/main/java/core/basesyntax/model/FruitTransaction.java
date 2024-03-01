@@ -45,4 +45,13 @@ public class FruitTransaction {
     public int hashCode() {
         return Objects.hash(operation, fruitName, quantity);
     }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operation='" + operation + '\''
+                + ", fruitName='" + fruitName + '\''
+                + ", quantity=" + quantity
+                + '}';
+    }
 }

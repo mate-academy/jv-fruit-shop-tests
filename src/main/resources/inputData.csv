@@ -7,9 +7,9 @@ type,fruit,quantity
     p,apple,30
     p,banana,3
     s,banana,50
-    s,kivy,100
+    s,kiwi,100
     s,melon,23
-    p,kivy,50
+    p,kiwi,50
     p,melon,3
     s, melon,35
     s,test,100

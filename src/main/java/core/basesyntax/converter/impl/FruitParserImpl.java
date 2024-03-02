@@ -3,9 +3,11 @@ package core.basesyntax.converter.impl;
 import core.basesyntax.converter.FruitParser;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FruitParserImpl implements FruitParser {
+    private static final String HEADER_LINE = "type,fruit,quantity";
     private static final String CSV_DELIMITER = ",";
     private static final int HEADER_OFFSET = 0;
     private static final int CSV_ROW_ELEMENTS_COUNT = 3;
@@ -15,8 +17,14 @@ public class FruitParserImpl implements FruitParser {
 
     @Override
     public List<FruitTransaction> parseFruitTransactions(List<String> lines) {
-        lines.remove(HEADER_OFFSET);
+        if (lines == null) {
+            throw new IllegalArgumentException("Passed method argument is null");
+        }
+        if (lines.get(HEADER_OFFSET).contains(HEADER_LINE)) {
+            lines.remove(HEADER_OFFSET);
+        }
         return lines.stream()
+                .filter(Objects::nonNull)
                 .map(this::parseLine)
                 .collect(Collectors.toList());
     }
@@ -41,11 +49,12 @@ public class FruitParserImpl implements FruitParser {
         if (splitLine[FRUIT_NAME_POS].isEmpty()) {
             throw new IllegalArgumentException("Fruit name field can't be empty");
         }
-        if (splitLine[QUANTITY_POS].isEmpty()) {
-            throw new IllegalArgumentException("Quantity field can't be empty");
-        }
-        if (Integer.parseInt(splitLine[QUANTITY_POS]) < 0) {
-            throw new IllegalArgumentException("Quantity value can't be negative");
+        try {
+            if (Integer.parseInt(splitLine[QUANTITY_POS]) < 0) {
+                throw new IllegalArgumentException("Quantity value can't be negative");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Csv number parameter should be numeric");
         }
         return splitLine;
     }

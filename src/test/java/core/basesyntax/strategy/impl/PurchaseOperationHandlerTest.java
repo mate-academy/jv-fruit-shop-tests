@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.util.FruitTestConstants.APPLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
-    private static final String APPLE = "apple";
     private PurchaseOperationHandler operationHandler;
 
     @BeforeEach

@@ -1,5 +1,9 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.util.FruitTestConstants.APPLE;
+import static core.basesyntax.util.FruitTestConstants.BANANA;
+import static core.basesyntax.util.FruitTestConstants.MELON;
+import static core.basesyntax.util.FruitTestConstants.PEAR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -26,10 +30,10 @@ public class FileDataParserCsvImplTest {
         List<String> dataFromFile = Arrays.asList("b,apple,10", "s,banana,20",
                 "p,pear,30", "r,melon,40");
         List<FruitTransaction> expected = Arrays.asList(
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "apple", 10),
-                new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 20),
-                new FruitTransaction(FruitTransaction.Operation.PURCHASE, "pear", 30),
-                new FruitTransaction(FruitTransaction.Operation.RETURN, "melon", 40)
+                new FruitTransaction(FruitTransaction.Operation.BALANCE, APPLE, 10),
+                new FruitTransaction(FruitTransaction.Operation.SUPPLY, BANANA, 20),
+                new FruitTransaction(FruitTransaction.Operation.PURCHASE, PEAR, 30),
+                new FruitTransaction(FruitTransaction.Operation.RETURN, MELON, 40)
         );
         List<FruitTransaction> actual = fileDataParser.parseData(dataFromFile);
         assertEquals(expected, actual, "Parsed transactions do not match the expected output.");

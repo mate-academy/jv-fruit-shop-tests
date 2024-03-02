@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.util.FruitTestConstants.APPLE;
+import static core.basesyntax.util.FruitTestConstants.BANANA;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,22 +22,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionProcessorImplTest {
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
     private static FruitTransactionProcessor processor;
     private static Map<FruitTransaction.Operation, OperationsHandler> handlersMap = new HashMap<>();
 
     @BeforeAll
     public static void setUp() {
         FruitDao fruitDao = new FruitDaoImpl();
-        handlersMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(fruitDao));
-        handlersMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler(fruitDao));
-        handlersMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(fruitDao));
-        handlersMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(fruitDao));
+        handlersMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao)
+        );
 
         OperationStrategy operationStrategy = new OperationStrategy(handlersMap);
         processor = new FruitTransactionProcessorImpl(operationStrategy);

@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.util.FruitTestConstants.APPLE;
+import static core.basesyntax.util.FruitTestConstants.BANANA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.ReportServiceImpl;
@@ -14,8 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportServiceImplTest {
-    private static final String APPLE = "apple";
-    private static final String BANANA = "banana";
+    private static final String REPORT_HEADER = "fruit,quantity";
     private ReportService reportService;
     private FruitDao fruitDao;
 
@@ -28,7 +29,7 @@ public class ReportServiceImplTest {
 
     @Test
     void createReport_EmptyStorageReturnsOnlyHeader_Ok() {
-        String expectedReport = "fruit,quantity" + System.lineSeparator();
+        String expectedReport = REPORT_HEADER + System.lineSeparator();
         String actualReport = reportService.createReport();
         assertEquals(expectedReport, actualReport,
                 "Report from empty storage should only contain the header.");
@@ -47,7 +48,7 @@ public class ReportServiceImplTest {
         Collections.sort(expectedDataLines);
         Collections.sort(actualDataLines);
 
-        assertEquals("fruit,quantity", reportLines[0],
+        assertEquals(REPORT_HEADER, reportLines[0],
                 "The header does not match the expected format.");
         assertEquals(expectedDataLines, actualDataLines,
                 "Report data lines do not match expected content for non-empty storage.");

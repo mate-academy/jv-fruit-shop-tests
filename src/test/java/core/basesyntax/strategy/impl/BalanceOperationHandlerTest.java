@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.util.FruitTestConstants.APPLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.dao.impl.FruitDaoImpl;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-    private static final String APPLE = "apple";
     private BalanceOperationHandler operationHandler;
 
     @BeforeEach

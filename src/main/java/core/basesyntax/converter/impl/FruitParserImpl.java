@@ -14,7 +14,7 @@ public class FruitParserImpl implements FruitParser {
     private static final int QUANTITY_POS = 2;
 
     @Override
-    public List<FruitTransaction> parseFruitTransaction(List<String> lines) {
+    public List<FruitTransaction> parseFruitTransactions(List<String> lines) {
         lines.remove(HEADER_OFFSET);
         return lines.stream()
                 .map(this::parseLine)

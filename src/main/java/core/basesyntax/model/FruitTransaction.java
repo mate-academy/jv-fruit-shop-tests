@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private final Operation operation;
     private final String fruitName;
@@ -43,5 +45,18 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("No such operation exists with code: " + code);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation && Objects.equals(fruitName, that.fruitName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruitName, quantity);
     }
 }

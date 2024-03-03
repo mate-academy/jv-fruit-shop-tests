@@ -25,6 +25,7 @@ class FileWriterTest {
         Path filePath = Path.of(PATH_TO_TEST_FILE);
         try {
             Files.deleteIfExists(filePath);
+            Files.createFile(filePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

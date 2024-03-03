@@ -26,6 +26,7 @@ public class FileReaderTest {
         Path filePath = Path.of(PATH_TO_TEST_FILE);
         try {
             Files.deleteIfExists(filePath);
+            Files.createFile(filePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -35,7 +36,6 @@ public class FileReaderTest {
     public void readLines_emptyFile_Ok() {
         try {
             Path pathToTestFile = Path.of(PATH_TO_TEST_FILE);
-            Files.createFile(pathToTestFile);
             List<String> expected = Files.readAllLines(pathToTestFile);
             assertEquals(expected, fileReader.readLines(PATH_TO_TEST_FILE));
         } catch (IOException e) {

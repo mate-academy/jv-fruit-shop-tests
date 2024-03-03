@@ -24,6 +24,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitServiceTest {
+    private static final String ORANGE_FRUIT_NAME = "Orange";
+    private static final String BANANA_FRUIT_NAME = "Banana";
+    private static final String APPLE_FRUIT_NAME = "Apple";
     private static FruitService fruitService;
 
     @BeforeAll
@@ -46,9 +49,9 @@ class FruitServiceTest {
 
     @BeforeEach
     public void fillDatabase() {
-        FruitDatabase.database.put("Orange", 100);
-        FruitDatabase.database.put("Banana", 120);
-        FruitDatabase.database.put("Apple", 10);
+        FruitDatabase.database.put(ORANGE_FRUIT_NAME, 100);
+        FruitDatabase.database.put(BANANA_FRUIT_NAME, 120);
+        FruitDatabase.database.put(APPLE_FRUIT_NAME, 10);
     }
 
     @AfterEach
@@ -67,20 +70,20 @@ class FruitServiceTest {
     @Test
     public void performFruitOperations_performTransactions_ok() {
         HashMap<String, Integer> expectedDatabase = new HashMap<>();
-        expectedDatabase.put("Orange", 120);
-        expectedDatabase.put("Banana", 70);
-        expectedDatabase.put("Apple", 18);
+        expectedDatabase.put(ORANGE_FRUIT_NAME, 120);
+        expectedDatabase.put(BANANA_FRUIT_NAME, 70);
+        expectedDatabase.put(APPLE_FRUIT_NAME, 18);
         List<FruitTransaction> transactions =
                 List.of(
                         new FruitTransaction(
                                 FruitTransaction.Operation.PURCHASE,
-                                "Banana", 50),
+                                BANANA_FRUIT_NAME, 50),
                         new FruitTransaction(
                                 FruitTransaction.Operation.RETURN,
-                                "Apple", 8),
+                                APPLE_FRUIT_NAME, 8),
                         new FruitTransaction(
                                 FruitTransaction.Operation.SUPPLY,
-                                "Orange", 20));
+                                ORANGE_FRUIT_NAME, 20));
         fruitService.performFruitsOperations(transactions);
         assertEquals(expectedDatabase, FruitDatabase.database);
     }
@@ -99,11 +102,11 @@ class FruitServiceTest {
                 Arrays.asList(
                         new FruitTransaction(
                                 FruitTransaction.Operation.PURCHASE,
-                                "Banana", 50),
+                                BANANA_FRUIT_NAME, 50),
                         null,
                         new FruitTransaction(
                                 FruitTransaction.Operation.SUPPLY,
-                                "Orange", 20));
+                                ORANGE_FRUIT_NAME, 20));
         Exception actualException = assertThrows(IllegalArgumentException.class,
                 () -> fruitService.performFruitsOperations(transactionsWithNull));
         assertEquals("Can't operate null value transactions",

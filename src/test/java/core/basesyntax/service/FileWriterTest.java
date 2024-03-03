@@ -17,15 +17,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class FileWriterTest {
-    private static final String pathToTestFile = "src/test/resources/test.txt";
+    private static final String PATH_TO_TEST_FILE = "src/test/resources/test.txt";
     private static final FileWriter fileWriter = new FileWriterImpl();
 
     @BeforeEach
     public void createTestFile() {
-        Path filePath = Path.of(pathToTestFile);
+        Path filePath = Path.of(PATH_TO_TEST_FILE);
         try {
             Files.deleteIfExists(filePath);
-            Files.createFile(filePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,16 +56,16 @@ class FileWriterTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> fileWriter.writeToFile(
-                                null, pathToTestFile));
+                                null, PATH_TO_TEST_FILE));
         String expectedMessage = "Can't write null value to file";
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     public void writeToFile_emptyString_ok() {
-        fileWriter.writeToFile("", pathToTestFile);
+        fileWriter.writeToFile("", PATH_TO_TEST_FILE);
         try {
-            List<String> strings = Files.readAllLines(Path.of(pathToTestFile));
+            List<String> strings = Files.readAllLines(Path.of(PATH_TO_TEST_FILE));
             assertTrue(strings.isEmpty());
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -76,9 +75,9 @@ class FileWriterTest {
     @ParameterizedTest
     @MethodSource
     public void writeToFile_multipleLines_Ok(String content) {
-        fileWriter.writeToFile(content, pathToTestFile);
+        fileWriter.writeToFile(content, PATH_TO_TEST_FILE);
         try {
-            List<String> actualList = Files.readAllLines(Path.of(pathToTestFile));
+            List<String> actualList = Files.readAllLines(Path.of(PATH_TO_TEST_FILE));
             String actual = actualList.stream().collect(Collectors.joining(System.lineSeparator()));
             assertEquals(content, actual);
         } catch (IOException e) {

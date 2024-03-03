@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.impl.FileReaderImpl;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +28,6 @@ public class FileReaderTest {
         Path filePath = Path.of(PATH_TO_TEST_FILE);
         try {
             Files.deleteIfExists(filePath);
-            Files.createFile(filePath);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -35,7 +36,9 @@ public class FileReaderTest {
     @Test
     public void readLines_emptyFile_Ok() {
         try {
-            List<String> expected = Files.readAllLines(Path.of(PATH_TO_TEST_FILE));
+            Path pathToTestFile = Path.of(PATH_TO_TEST_FILE);
+            Files.createFile(pathToTestFile);
+            List<String> expected = Files.readAllLines(pathToTestFile);
             assertEquals(expected, fileReader.readLines(PATH_TO_TEST_FILE));
         } catch (IOException e) {
             throw new RuntimeException(e);

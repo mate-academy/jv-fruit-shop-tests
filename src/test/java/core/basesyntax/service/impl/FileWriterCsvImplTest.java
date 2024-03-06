@@ -11,49 +11,55 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class FileWriterCsvImplTest {
-    private static final String FILE_NAME = "src/test/resources/writer/reportCsv.csv";
     private static final Writer fileWriterCsv = new FileWriterCsvImpl();
-    private static List<String> report;
+    private static final String FILE_NAME = "src/test/resources/writer/reportCsv.csv";
+    private static final String NULL_PARAMETERS_MESSAGE = """
+                    Parameters can't be null, but:"
+                    fileName = '%s'
+                    report = '%s'""";
+    private static final String WRONG_FILE_EXTENSION_MESSAGE = """
+                The file extension is different from .csv: %s""";
+    private static final String EMPTY_REPORT_MESSAGE = "Report is empty";
+    private static final String EMPTY_FILE_MESSAGE = "File name is empty";
+    private static final String REPORT_WITH_NULL_MESSAGE = "Report contains null value";
+    private static List<String> correctReport;
 
     @BeforeAll
     static void beforeAll() {
-        report = List.of(
+        correctReport = List.of(
             "apple,100",
             "orange,405",
             "lemon,100",
             "peach,623",
             "pear,40",
-            "pineapple,86");
+            "pineapple,86"
+        );
     }
 
-    @Test
-    void write_nullParameters_notOk() {
-        String nullName = null;
-        List<String> nullList = null;
+    @ParameterizedTest
+    @MethodSource
+    void write_nullParameters_notOk(String fileName, List<String> report) {
         Throwable exception1 = assertThrows(IllegalArgumentException.class,
-                () -> fileWriterCsv.write(nullName, nullList));
-        assertEquals("""
-                    Parameters can't be null, but:"
-                    fileName = '%s'
-                    report = '%s'""".formatted(nullName, nullList), exception1.getMessage());
-        Throwable exception2 = assertThrows(IllegalArgumentException.class,
-                () -> fileWriterCsv.write(FILE_NAME, nullList));
-        assertEquals("""
-                    Parameters can't be null, but:"
-                    fileName = '%s'
-                    report = '%s'""".formatted(FILE_NAME, nullList), exception2.getMessage());
-        Throwable exception3 = assertThrows(IllegalArgumentException.class,
-                () -> fileWriterCsv.write(nullName, report));
-        assertEquals("""
-                    Parameters can't be null, but:"
-                    fileName = '%s'
-                    report = '%s'""".formatted(nullName, report), exception3.getMessage());
+                () -> fileWriterCsv.write(fileName, report));
+        assertEquals(NULL_PARAMETERS_MESSAGE.formatted(fileName, report), exception1.getMessage());
+    }
+
+    static Stream<Arguments> write_nullParameters_notOk() {
+        return Stream.of(
+                Arguments.of(null, null),
+                Arguments.of(FILE_NAME, null),
+                Arguments.of(null, correctReport)
+
+        );
     }
 
     @Test
@@ -61,15 +67,15 @@ class FileWriterCsvImplTest {
         List<String> emptyReport = new ArrayList<>();
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> fileWriterCsv.write(FILE_NAME, emptyReport));
-        assertEquals("Report is empty", exception.getMessage());
+        assertEquals(EMPTY_REPORT_MESSAGE, exception.getMessage());
     }
 
-    @Test
-    void write_fileNameIsEmpty_notOk() {
-        String emptyFileName = "";
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "    ", "           "})
+    void write_fileNameIsEmpty_notOk(String emptyFileName) {
         Throwable exception = assertThrows(RuntimeException.class,
-                () -> fileWriterCsv.write(emptyFileName, report));
-        assertEquals("File name is empty", exception.getMessage());
+                () -> fileWriterCsv.write(emptyFileName, correctReport));
+        assertEquals(EMPTY_FILE_MESSAGE, exception.getMessage());
     }
 
     @ParameterizedTest
@@ -83,63 +89,38 @@ class FileWriterCsvImplTest {
     })
     void write_notCsvFileExtension_notOk(String path) {
         Throwable exception = assertThrows(RuntimeException.class,
-                () -> fileWriterCsv.write(path, report));
-        assertEquals("""
-                The file extension is different from .csv: %s"""
+                () -> fileWriterCsv.write(path, correctReport));
+        assertEquals(WRONG_FILE_EXTENSION_MESSAGE
                 .formatted(path), exception.getMessage());
     }
 
-    @Test
-    void write_nullValueInReport_notOk() {
-        List<String> listWithNull1 = Arrays.asList(null, null, null, null);
-        List<String> listWithNull2 = Arrays.asList("orange,405", "lemon,100", "peach,623", null);
-        Throwable exception1 = assertThrows(RuntimeException.class,
-                () -> fileWriterCsv.write(FILE_NAME, listWithNull1));
-        assertEquals("Report contains null value", exception1.getMessage());
-        Throwable exception2 = assertThrows(RuntimeException.class,
-                () -> fileWriterCsv.write(FILE_NAME, listWithNull2));
-        assertEquals("Report contains null value", exception2.getMessage());
+    @ParameterizedTest
+    @MethodSource
+    void write_nullValueInReport_notOk(List<String> listWithNull) {
+        Throwable exception = assertThrows(RuntimeException.class,
+                () -> fileWriterCsv.write(FILE_NAME, listWithNull));
+        assertEquals(REPORT_WITH_NULL_MESSAGE, exception.getMessage());
+    }
+
+    static Stream<Arguments> write_nullValueInReport_notOk() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(null, null, null, null)),
+                Arguments.of(Arrays.asList("orange,405", "lemon,100", "peach,623", null)),
+                Arguments.of(Arrays.asList("orange,405", null, "lemon,100", "peach,623")),
+                Arguments.of(Arrays.asList(null, "orange,405", "lemon,100", "peach,623"))
+        );
     }
 
     @Test
     void write_correctParameters_ok() {
         List<String> linesFromFile;
-        fileWriterCsv.write(FILE_NAME, report);
+        fileWriterCsv.write(FILE_NAME, correctReport);
         try {
             Path path = Path.of(FILE_NAME);
             linesFromFile = Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file");
         }
-        assertArrayEquals(report.toArray(), linesFromFile.toArray());
-    }
-
-    @Test
-    void write_fileAlreadyExist_ok() {
-        List<String> previousReport = List.of(
-                "apple,45",
-                "orange,234",
-                "lemon,68",
-                "peach,233",
-                "pear,0",
-                "pineapple,1000");
-        fileWriterCsv.write(FILE_NAME,previousReport);
-        List<String> linesFromPreviousFile;
-        try {
-            Path path = Path.of(FILE_NAME);
-            linesFromPreviousFile = Files.readAllLines(path);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file");
-        }
-        fileWriterCsv.write(FILE_NAME, report);
-        List<String> linesFromFile;
-        try {
-            Path path = Path.of(FILE_NAME);
-            linesFromFile = Files.readAllLines(path);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file");
-        }
-        assertArrayEquals(previousReport.toArray(), linesFromPreviousFile.toArray());
-        assertArrayEquals(report.toArray(), linesFromFile.toArray());
+        assertArrayEquals(correctReport.toArray(), linesFromFile.toArray());
     }
 }

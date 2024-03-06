@@ -12,8 +12,8 @@ import java.util.Map;
 public class StoreServiceImpl implements StoreService {
     private static final String COLUMN_NAMES = "fruit,quantity";
     private static final String ROW_SEPARATOR = ",";
+    private static final int MIN_VALUE = 0;
     private static final int STARTED_ROW_LENGTH = 0;
-    private static final int MIN_QUANTITY_VALUE = 0;
     private ArticleDao fruitTransactionDao;
     private TransactionStrategy transactionStrategy;
 
@@ -43,18 +43,19 @@ public class StoreServiceImpl implements StoreService {
         for (FruitTransaction transaction : transactions) {
             transactionStrategy.get(transaction.getOperation()).proceed(result, transaction);
         }
+        for (Map.Entry<String, Integer> entry : result.entrySet()) {
+            if (entry.getValue() < MIN_VALUE) {
+                throw new RuntimeException("""
+                        Incorrect data - the balance of %s less than 0
+                        %s: %s""".formatted(entry.getKey(), entry.getKey(), entry.getValue()));
+            }
+        }
         String fruit;
         int quantity;
         for (Map.Entry<String, Integer> entry : result.entrySet()) {
             fruit = entry.getKey();
             quantity = entry.getValue();
-            if (quantity >= MIN_QUANTITY_VALUE) {
-                fruitTransactionDao.updateStorage(fruit, quantity);
-            } else {
-                throw new RuntimeException("""
-                        Incorrect data - the balance of %s less than 0
-                        %s: %s""".formatted(fruit, fruit, quantity));
-            }
+            fruitTransactionDao.updateStorage(fruit, quantity);
         }
     }
 

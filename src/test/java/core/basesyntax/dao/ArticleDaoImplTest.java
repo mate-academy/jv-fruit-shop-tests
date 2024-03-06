@@ -15,13 +15,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class ArticleDaoImplTest {
+    private static final ArticleDao ARTICLE_DAO = new ArticleDaoImpl();
     private static final int DEFAULT_STORAGE_SIZE = 0;
     private static final int DEFAULT_QUANTITY = 0;
     private static final int EXPECTED_STORAGE_SIZE = 4;
-    private static final ArticleDao ARTICLE_DAO = new ArticleDaoImpl();
+    private static final String ARTICLE_EXIST_IN_STORAGE_MESSAGE = """
+                        Article '%s' already exist in storage""";
+    private static final String FORBIDDEN_CHARACTERS_MESSAGE = """
+                        Article name: '%s' shouldn't contain numbers,
+                        spices, special characters and upper case letters""";
+    private static final String ARTICLE_IS_MISSING_MESSAGE = """
+                Storage doesn't contain article %s""";
+    private static final String EMPTY_STORAGE_MESSAGE = "Storage is empty";
+    private static final String NULL_ARGUMENT_MESSAGE = "Argument can't be null";
+    private static final String NEGATIVE_QUANTITY_MESSAGE = "Quantity can't be negative";
+    private static final String EMPTY_NAME_MESSAGE = "Article name is empty";
+    private static final String NULL_ARTICLE_MESSAGE = "Article can't be null";
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
     private static final String ORANGE = "orange";
@@ -49,13 +62,13 @@ class ArticleDaoImplTest {
                 APPLE, 23,
                 PINEAPPLE, 10,
                 ORANGE, 345,
-                LEMON, 1000));
+                LEMON, 1000)
+        );
         int expectedStorageSize = Storage.storage.size();
         int expectedValue = Storage.storage.get(article);
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.addArticle(article));
-        assertEquals("""
-                        Article '%s' already exist in storage"""
+        assertEquals(ARTICLE_EXIST_IN_STORAGE_MESSAGE
                         .formatted(article),
                 exception.getMessage());
         assertEquals(expectedValue, Storage.storage.get(article));
@@ -63,44 +76,42 @@ class ArticleDaoImplTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Banana", "applE", "Orange", "PineapplE", "leMon"})
+    @ValueSource(strings = {"Banana", "applE", "Orange", "PineapplE", "leMon"
+    })
     void addArticle_uppercaseLetters_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 ARTICLE_DAO.addArticle(article));
-        assertEquals("""
-                        Article name: '%s' shouldn't contain numbers,
-                        spices, special characters and upper case letters"""
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE
                         .formatted(article), exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
     }
 
-    @Test
-    void addArticle_nullParameter_notOk() {
-        String nullString = null;
+    @ParameterizedTest
+    @NullSource
+    void addArticle_nullParameter_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
-                ARTICLE_DAO.addArticle(nullString));
-        assertEquals("Can't add null to storage", exception.getMessage());
+                ARTICLE_DAO.addArticle(article));
+        assertEquals(NULL_ARTICLE_MESSAGE, exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
     }
 
-    @Test
-    void addArticle_emptyString_notOk() {
-        String emptyString = "";
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "    ", "           "})
+    void addArticle_emptyString_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
-                ARTICLE_DAO.addArticle(emptyString));
-        assertEquals("Can't add empty string to storage", exception.getMessage());
+                ARTICLE_DAO.addArticle(article));
+        assertEquals(EMPTY_NAME_MESSAGE, exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"Apple ", " Apple", "ap ple",
-            "Banana     ", "      Ban ana", "   Banana   "})
+            "Banana     ", "      Ban ana", "   Banana   "
+    })
     void addArticle_stringWithSpaces_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.addArticle(article));
-        assertEquals("""
-                        Article name: '%s' shouldn't contain numbers,
-                        spices, special characters and upper case letters"""
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE
                         .formatted(article), exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
     }
@@ -108,13 +119,12 @@ class ArticleDaoImplTest {
     @ParameterizedTest
     @ValueSource(strings = {"Apple!", "@Apple", "Ap.ple",
             "Banana!", "Banana>>>", "Banana_(*", "$$Orange_(*",
-            "Oran><>ge", "!%$#%"})
+            "Oran><>ge", "!%$#%"
+    })
     void addArticle_specialCharacters_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.addArticle(article));
-        assertEquals("""
-                        Article name: '%s' shouldn't contain numbers,
-                        spices, special characters and upper case letters"""
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE
                         .formatted(article),
                 exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
@@ -123,13 +133,12 @@ class ArticleDaoImplTest {
     @ParameterizedTest
     @ValueSource(strings = {"Apple1", "30Apple", "Ap2ple",
             "Banana410", "Ban4ana4", "100Banana", "100",
-            "Oran45ge", "2345"})
+            "Oran45ge", "2345"
+    })
     void addArticle_numbers_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.addArticle(article));
-        assertEquals("""
-                        Article name: '%s' shouldn't contain numbers,
-                        spices, special characters and upper case letters"""
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE
                         .formatted(article),
                 exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
@@ -143,14 +152,15 @@ class ArticleDaoImplTest {
                 APPLE, 1500,
                 PINEAPPLE, 6,
                 ORANGE, 0,
-                LEMON, 76));
+                LEMON, 76)
+        );
         int storageSize = Storage.storage.size();
         ARTICLE_DAO.updateStorage(fruit, quantity);
         assertEquals(quantity, Storage.storage.get(fruit));
         assertEquals(storageSize, Storage.storage.size());
     }
 
-    private static Stream<Arguments> updateStorage_correctParameters_ok() {
+    static Stream<Arguments> updateStorage_correctParameters_ok() {
         return Stream.of(
                 Arguments.of(0, ORANGE),
                 Arguments.of(1, PINEAPPLE),
@@ -173,11 +183,12 @@ class ArticleDaoImplTest {
                 APPLE, 1500,
                 PINEAPPLE, 6,
                 ORANGE, 0,
-                LEMON, 76));
+                LEMON, 76)
+        );
         int expectedValue = Storage.storage.get(fruit);
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.updateStorage(fruit, quantity));
-        assertEquals("Quantity can't be negative",
+        assertEquals(NEGATIVE_QUANTITY_MESSAGE,
                 exception.getMessage());
         assertEquals(expectedValue, Storage.storage.get(fruit));
     }
@@ -202,9 +213,7 @@ class ArticleDaoImplTest {
     void updateStorage_uppercaseLetters_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.updateStorage(article, DEFAULT_QUANTITY));
-        assertEquals("""
-                        Article name: '%s' shouldn't contain numbers,
-                        spices, special characters and upper case letters"""
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE
                         .formatted(article),
                 exception.getMessage());
         assertEquals(DEFAULT_STORAGE_SIZE, Storage.storage.size());
@@ -216,8 +225,7 @@ class ArticleDaoImplTest {
         int expectedStorageSize = Storage.storage.size();
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 ARTICLE_DAO.updateStorage(article, DEFAULT_QUANTITY));
-        assertEquals("""
-                Storage doesn't contain article %s"""
+        assertEquals(ARTICLE_IS_MISSING_MESSAGE
                 .formatted(article), exception.getMessage());
         assertEquals(expectedStorageSize, Storage.storage.size());
     }
@@ -230,7 +238,8 @@ class ArticleDaoImplTest {
                 APPLE, 1500,
                 PINEAPPLE, 6,
                 ORANGE, 0,
-                LEMON, 76));
+                LEMON, 76)
+        );
         int expectedStorageSize = Storage.storage.size();
         int expectedValue = Storage.storage.get(article);
         assertEquals(expectedValue, ARTICLE_DAO.getQuantity(article));
@@ -242,8 +251,7 @@ class ArticleDaoImplTest {
     void getQuantity_storageDoesntContainArticle_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 ARTICLE_DAO.updateStorage(article, DEFAULT_QUANTITY));
-        assertEquals("""
-                Storage doesn't contain article %s"""
+        assertEquals(ARTICLE_IS_MISSING_MESSAGE
                 .formatted(article), exception.getMessage());
     }
 
@@ -252,7 +260,7 @@ class ArticleDaoImplTest {
         String nullString = null;
         Throwable exception = assertThrows(IllegalArgumentException.class,
                 () -> ARTICLE_DAO.getQuantity(nullString));
-        assertEquals("Argument can't be null", exception.getMessage());
+        assertEquals(NULL_ARGUMENT_MESSAGE, exception.getMessage());
     }
 
     @ParameterizedTest
@@ -263,7 +271,8 @@ class ArticleDaoImplTest {
                 APPLE, 1500,
                 PINEAPPLE, 6,
                 ORANGE, 0,
-                LEMON, 76));
+                LEMON, 76)
+        );
         List<String> expectedArticleList = new ArrayList<>(Storage.storage.keySet());
         List<String> currentList = ARTICLE_DAO.getArticles();
         assertEquals(expectedArticleList.size(), currentList.size());
@@ -274,7 +283,7 @@ class ArticleDaoImplTest {
     void getArticles_emptyStorage_notOk() {
         Throwable exception = assertThrows(RuntimeException.class,
                 ARTICLE_DAO::getArticles);
-        assertEquals("Storage is empty",
+        assertEquals(EMPTY_STORAGE_MESSAGE,
                 exception.getMessage());
     }
 
@@ -286,7 +295,8 @@ class ArticleDaoImplTest {
                 APPLE, 1500,
                 PINEAPPLE, 6,
                 ORANGE, 0,
-                LEMON, 76));
+                LEMON, 76)
+        );
         ARTICLE_DAO.removeArticle(article);
         assertFalse(Storage.storage.containsKey(article));
         assertEquals(EXPECTED_STORAGE_SIZE, Storage.storage.size());
@@ -297,8 +307,7 @@ class ArticleDaoImplTest {
     void removeArticle_storageDoesntContainArticle_notOk(String article) {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> ARTICLE_DAO.removeArticle(article));
-        assertEquals("""
-                Storage doesn't contain article %s"""
+        assertEquals(ARTICLE_IS_MISSING_MESSAGE
                 .formatted(article), exception.getMessage());
     }
 }

@@ -8,8 +8,7 @@ import core.basesyntax.dao.ArticleDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,32 +22,41 @@ class FruitTransactionServiceImplTest {
     private static final int TRANSACTION_FIELD_INDEX = 0;
     private static final int ARTICLE_FIELD_INDEX = 1;
     private static final int QUANTITY_FIELD_INDEX = 2;
-    private static final List<String> LINES = new ArrayList<>();
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
     private static final String ORANGE = "orange";
+    private static final String PARAMETER_IS_NULL_MESSAGE
+            = "Parameter can't be null";
+    private static final String FORBIDDEN_CHARACTERS_MESSAGE = """
+                        Line: '%s', shouldn't contain numbers
+                        special characters and upper case letters""";
+    private static final String EMPTY_LINE_MESSAGE = "Line is empty";
+    private static final String WRONG_LINE_FORMAT_MESSAGE = """
+                Wrong format in line: '%s', should be 3 fields separated by a coma.
+                "Example: 'transaction,fruit,quantity""";
+    private static final String INCORRECT_TRANSACTION_MESSAGE = """
+                        Incorrect transaction index '%s' in line: '%s'""";
+    private static final String NEGATIVE_QUANTITY_MESSAGE = """
+                Quantity can't be less than zero in line: '%s'""";
+    private static final String QUANTITY_FORMAT_MESSAGE = """
+                 Wrong format of quantity field in line: '%s'
+                 The field should be an integer number""";
     private final ArticleDao articleDao = new ArticleDaoImpl();
     private final TransactionService fruitTRansactionService
             = new FruitTransactionServiceImpl(articleDao);
 
     @BeforeEach
     void setUp() {
-        Storage.storage.put(APPLE, 0);
-        Storage.storage.put(BANANA, 0);
-        Storage.storage.put(ORANGE, 0);
+        Storage.storage.putAll(Map.of(
+                APPLE, 0,
+                BANANA, 0,
+                ORANGE, 0)
+        );
     }
 
     @AfterEach
     void tearDown() {
-        LINES.clear();
-    }
-
-    @Test
-    void constructor_parameterIsNull_notOk() {
-        ArticleDao nullArticleDao = null;
-        Throwable exception = assertThrows(IllegalArgumentException.class, () ->
-                new FruitTransactionServiceImpl(nullArticleDao));
-        assertEquals("Constructor parameter can't be null", exception.getMessage());
+        Storage.storage.clear();
     }
 
     @ParameterizedTest
@@ -75,6 +83,14 @@ class FruitTransactionServiceImplTest {
 
     }
 
+    @Test
+    void constructor_parameterIsNull_notOk() {
+        ArticleDao nullArticleDao = null;
+        Throwable exception = assertThrows(IllegalArgumentException.class, () ->
+                new FruitTransactionServiceImpl(nullArticleDao));
+        assertEquals(PARAMETER_IS_NULL_MESSAGE, exception.getMessage());
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
             "b,applE,20", "s,ApPle|(,45",
@@ -87,9 +103,7 @@ class FruitTransactionServiceImplTest {
     void createTransaction_incorrectArticleNameFormat_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("""
-                        Article name in line: '%s', shouldn't contain numbers 
-                        and special characters"""
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE
                 .formatted(line), exception.getMessage());
     }
 
@@ -113,7 +127,7 @@ class FruitTransactionServiceImplTest {
     void createTransaction_parameterIsNull_notOk(String line) {
         Throwable exception = assertThrows(NullPointerException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Parameter can't be null", exception.getMessage());
+        assertEquals(PARAMETER_IS_NULL_MESSAGE, exception.getMessage());
     }
 
     @ParameterizedTest
@@ -121,7 +135,7 @@ class FruitTransactionServiceImplTest {
     void createTransaction_lineIsEmpty_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("Line is empty", exception.getMessage());
+        assertEquals(EMPTY_LINE_MESSAGE, exception.getMessage());
 
     }
 
@@ -137,9 +151,7 @@ class FruitTransactionServiceImplTest {
     void createTransaction_incorrectLineFormat_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("""
-                Wrong format in line: '%s', should be 3 fields separated by a coma.
-                "Example: 'transaction,fruit,quantity""".formatted(line),
+        assertEquals(WRONG_LINE_FORMAT_MESSAGE.formatted(line),
                 exception.getMessage());
     }
 
@@ -156,8 +168,7 @@ class FruitTransactionServiceImplTest {
                 = line.split(LINE_SEPARATOR)[TRANSACTION_FIELD_INDEX];
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> fruitTRansactionService.createTransaction(line));
-        assertEquals("""
-                        Incorrect transaction index '%s' in line: '%s'"""
+        assertEquals(INCORRECT_TRANSACTION_MESSAGE
                         .formatted(transactionIndex, line),
                 exception.getMessage());
 
@@ -175,8 +186,7 @@ class FruitTransactionServiceImplTest {
     void createTransaction_negativeQuantity_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("""
-                Quantity can't be less than zero in line: '%s'""".formatted(line),
+        assertEquals(NEGATIVE_QUANTITY_MESSAGE.formatted(line),
                 exception.getMessage());
     }
 
@@ -188,12 +198,10 @@ class FruitTransactionServiceImplTest {
             "b,orange,44.1", "s,orange,2.56",
             "p,orange,0.12", "r,orange,six6"
     })
-    void createTransaction_quantityAdditionalCharacters_notOk(String line) {
+    void createTransaction_quantityForbiddenCharacters_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("""
-                 Wrong format of quantity field in line: '%s'
-                 The field should be an integer number"""
+        assertEquals(QUANTITY_FORMAT_MESSAGE
                 .formatted(line), exception.getMessage());
     }
 
@@ -209,8 +217,7 @@ class FruitTransactionServiceImplTest {
     void createTransaction_spacesInLine_notOk(String line) {
         Throwable exception = assertThrows(RuntimeException.class, () ->
                 fruitTRansactionService.createTransaction(line));
-        assertEquals("""
-               Line '%s' shouldn't contain spaces and upper case letters""".formatted(line),
+        assertEquals(FORBIDDEN_CHARACTERS_MESSAGE.formatted(line),
                 exception.getMessage());
     }
 }

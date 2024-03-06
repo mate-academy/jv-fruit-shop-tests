@@ -12,26 +12,34 @@ import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionParserImplTest {
-    private static final String LINE_SEPARATOR = ",";
+    private static final ArticleDao articleDao = new ArticleDaoImpl();
+    private static final TransactionService transactionService
+            = new FruitTransactionServiceImpl(articleDao);
+    private static final TransactionParser transactionParser
+            = new TransactionParserImpl(transactionService);
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final ArticleDao articleDao = new ArticleDaoImpl();
-    private final TransactionService transactionService
-            = new FruitTransactionServiceImpl(articleDao);
-    private final TransactionParser transactionParser
-            = new TransactionParserImpl(transactionService);
+    private static final String LINE_SEPARATOR = ",";
+    private static final String NULL_CONSTRUCTOR_PARAMETER_MESSAGE =
+            "Constructor parameter can't be null";
+    private static final String NULL_PARAMETER_MESSAGE = "Parameter can't be null";
+    private static final String EMPTY_LIST_MESSAGE = """
+                List '%s' is empty""";
 
     @BeforeEach
     public void beforeEach() {
-        Storage.storage.put("apple", 0);
-        Storage.storage.put("banana", 0);
-        Storage.storage.put("orange", 0);
+        Storage.storage.putAll(Map.of(
+                "apple", 0,
+                "banana", 0,
+                "orange", 0)
+        );
     }
 
     @AfterEach
@@ -44,7 +52,7 @@ class TransactionParserImplTest {
         TransactionService nullTransactionService = null;
         Throwable exception = assertThrows(IllegalArgumentException.class, () ->
                  new TransactionParserImpl(nullTransactionService));
-        assertEquals("Constructor parameter can't be null", exception.getMessage());
+        assertEquals(NULL_CONSTRUCTOR_PARAMETER_MESSAGE, exception.getMessage());
     }
 
     @Test
@@ -76,7 +84,6 @@ class TransactionParserImplTest {
             }
             expectedFruitTransactionList.add(fruitTransaction);
         }
-
         assertEquals(lines.size(), fruitTransactionsListResult.size());
         assertTrue(fruitTransactionsListResult.containsAll(expectedFruitTransactionList));
     }
@@ -86,8 +93,7 @@ class TransactionParserImplTest {
         List<String> emptyList = new ArrayList<>();
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> transactionParser.parse(emptyList));
-        assertEquals("""
-                List '%s' is empty"""
+        assertEquals(EMPTY_LIST_MESSAGE
                 .formatted(emptyList), exception.getMessage());
     }
 
@@ -96,6 +102,6 @@ class TransactionParserImplTest {
         List<String> nullList = null;
         Throwable exception = assertThrows(IllegalArgumentException.class, () ->
                 transactionParser.parse(nullList));
-        assertEquals("Parameter can't be null", exception.getMessage());
+        assertEquals(NULL_PARAMETER_MESSAGE, exception.getMessage());
     }
 }

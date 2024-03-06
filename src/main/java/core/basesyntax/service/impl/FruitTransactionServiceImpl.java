@@ -16,7 +16,7 @@ public class FruitTransactionServiceImpl implements TransactionService {
 
     public FruitTransactionServiceImpl(ArticleDao fruitTransactionDao) {
         if (fruitTransactionDao == null) {
-            throw new IllegalArgumentException("Constructor parameter can't be null");
+            throw new IllegalArgumentException("Parameter can't be null");
         }
         this.fruitTransactionDao = fruitTransactionDao;
     }
@@ -31,7 +31,8 @@ public class FruitTransactionServiceImpl implements TransactionService {
         }
         if (line.contains(FORBIDDEN_CHARACTER)) {
             throw new RuntimeException("""
-               Line '%s' shouldn't contain spaces and upper case letters"""
+                        Line: '%s', shouldn't contain numbers
+                        special characters and upper case letters"""
                     .formatted(line));
         }
         String[] fields = line.split(LINE_SEPARATOR);
@@ -71,8 +72,8 @@ public class FruitTransactionServiceImpl implements TransactionService {
         }
         if (!fruitField.matches("[a-z]+")) {
             throw new RuntimeException("""
-                        Article name in line: '%s', shouldn't contain numbers
-                        and special characters"""
+                        Line: '%s', shouldn't contain numbers
+                        special characters and upper case letters"""
                     .formatted(line));
         }
         return fruitField;

@@ -27,14 +27,25 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 
 class StoreServiceImplTest {
-    private static final ArticleDao ARTICLE_DAO = new ArticleDaoImpl();
+    private static final ArticleDao articleDao = new ArticleDaoImpl();
+    private static TransactionStrategy transactionStrategy;
+    private static StoreService storeService;
     private static final int LINE_WITH_COLUMN_NAMES_INDEX = 0;
     private static final int REPORT_LENGTH = 7;
     private static final int DEFAULT_LENGTH = 0;
-    private static final String LINE_WITH_COLUMN_NAMES = "fruit,quantity";
     private static final String FIELD_SEPARATOR = ",";
-    private static TransactionStrategy transactionStrategy;
-    private static StoreService storeService;
+    private static final String LINE_WITH_COLUMN_NAMES = "fruit,quantity";
+    private static final String EMPTY_STORAGE_MESSAGE = "Storage is empty";
+    private static final String NULL_LIST_MESSAGE = "Transaction list is null";
+    private static final String LIST_CONTAIN_NULL_MESSAGE = "Transaction list contain null element";
+    private static final String EMPTY_LIST_MESSAGE = "Transaction list is empty";
+    private static final String NULL_PARAMETERS_MESSAGE = """
+                Parameters can't be null, but:
+                articleDao = %s
+                transactionStrategy = %s""";
+    private static final String NEGATIVE_BALANCE_MESSAGE = """
+                        Incorrect data - the balance of %s less than 0
+                        %s: %s""";
     private int expectedStorageSize;
 
     @BeforeAll
@@ -42,7 +53,7 @@ class StoreServiceImplTest {
         Map<FruitTransaction.Operation, TransactionHandler> strategyMap = new HashMap<>();
         strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceTransactionHandler());
         transactionStrategy = new TransactionStrategyImpl(strategyMap);
-        storeService = new StoreServiceImpl(ARTICLE_DAO, transactionStrategy);
+        storeService = new StoreServiceImpl(articleDao, transactionStrategy);
     }
 
     @BeforeEach
@@ -50,35 +61,23 @@ class StoreServiceImplTest {
         Storage.storage.clear();
     }
 
-    @Test
-    void constructor_nullParameters_notOk() {
+    @ParameterizedTest
+    @MethodSource
+    void constructor_nullParameters_notOk(ArticleDao articleDao, TransactionStrategy strategy) {
         expectedStorageSize = Storage.storage.size();
-        TransactionStrategy nullStrategy = null;
-        ArticleDao nullArticleDao = null;
         Throwable exception1 = assertThrows(IllegalArgumentException.class,
-                () -> storeService = new StoreServiceImpl(nullArticleDao, nullStrategy));
-        assertEquals("""
-                Parameters can't be null, but:
-                articleDao = %s
-                transactionStrategy = %s""".formatted(nullArticleDao, nullStrategy),
+                () -> storeService = new StoreServiceImpl(articleDao, strategy));
+        assertEquals(NULL_PARAMETERS_MESSAGE.formatted(articleDao, strategy),
                 exception1.getMessage());
-        Throwable exception2 = assertThrows(IllegalArgumentException.class,
-                () -> storeService = new StoreServiceImpl(nullArticleDao, transactionStrategy));
         assertEquals(expectedStorageSize, Storage.storage.size());
-        assertEquals("""
-                Parameters can't be null, but:
-                articleDao = %s
-                transactionStrategy = %s""".formatted(nullArticleDao, transactionStrategy),
-                exception2.getMessage());
-        Throwable exception3 = assertThrows(IllegalArgumentException.class,
-                () -> storeService = new StoreServiceImpl(ARTICLE_DAO, nullStrategy));
-        assertEquals(expectedStorageSize, Storage.storage.size());
-        assertEquals("""
-                Parameters can't be null, but:
-                articleDao = %s
-                transactionStrategy = %s""".formatted(ARTICLE_DAO, nullStrategy),
-                exception3.getMessage());
-        assertEquals(expectedStorageSize, Storage.storage.size());
+    }
+
+    static Stream<Arguments> constructor_nullParameters_notOk() {
+        return Stream.of(
+                Arguments.of(null, null),
+                Arguments.of(null, transactionStrategy),
+                Arguments.of(articleDao, null)
+        );
     }
 
     @Test
@@ -87,7 +86,7 @@ class StoreServiceImplTest {
         List<FruitTransaction> nullTransactionList = null;
         Throwable exception = assertThrows(NullPointerException.class,
                 () -> storeService.updateStorage(nullTransactionList));
-        assertEquals("Transaction list is null", exception.getMessage());
+        assertEquals(NULL_LIST_MESSAGE, exception.getMessage());
         assertEquals(expectedStorageSize, Storage.storage.size());
     }
 
@@ -99,7 +98,7 @@ class StoreServiceImplTest {
         transactionListNullElement.add(transaction);
         Throwable exception = assertThrows(NullPointerException.class,
                 () -> storeService.updateStorage(transactionListNullElement));
-        assertEquals("Transaction list contain null element", exception.getMessage());
+        assertEquals(LIST_CONTAIN_NULL_MESSAGE, exception.getMessage());
         assertEquals(expectedStorageSize, Storage.storage.size());
     }
 
@@ -109,56 +108,53 @@ class StoreServiceImplTest {
         List<FruitTransaction> emptyList = new ArrayList<>();
         Throwable exception1 = assertThrows(RuntimeException.class,
                 () -> storeService.updateStorage(emptyList));
-        assertEquals("Transaction list is empty", exception1.getMessage());
+        assertEquals(EMPTY_LIST_MESSAGE, exception1.getMessage());
         emptyList.add(new FruitTransaction());
         assertEquals(expectedStorageSize, Storage.storage.size());
     }
 
-    @Test
-    void update_negativeTotalBalance_notOk() {
+    @ParameterizedTest
+    @MethodSource
+    void update_negativeTotalBalance_notOk(Map<String, Integer> fruitMap,
+                                           String expectedArticle) {
         Storage.storage.putAll(Map.of(
                 "apple", 0,
                 "banana", 0,
                 "pear", 0,
                 "lemon", 0,
-                "orange", 0
-                ));
-        expectedStorageSize = Storage.storage.size();
+                "orange", 0)
+        );
+        Map<String, Integer> expectedMap = Map.copyOf(Storage.storage);
         FruitTransaction.Operation balance = FruitTransaction.Operation.BALANCE;
-        Map<String, Integer> fruitMap = new HashMap<>();
-        fruitMap.put("apple", -50);
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
             FruitTransaction transaction = new FruitTransaction();
             transaction.setOperation(balance);
-            transaction.setFruit(fruitQuantity.getKey());
-            transaction.setQuantity(fruitQuantity.getValue());
+            transaction.setFruit(entry.getKey());
+            transaction.setQuantity(entry.getValue());
             transactions.add(transaction);
         }
-        fruitMap.put("banana", 5345);
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap.entrySet()) {
-            FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(balance);
-            transaction.setFruit(fruitQuantity.getKey());
-            transaction.setQuantity(fruitQuantity.getValue());
-            transactions.add(transaction);
-        }
-        Storage.storage.put("pear", -3445);
-        Storage.storage.put("lemon", 534);
-        Storage.storage.put("orange", 2);
-        for (Map.Entry<String, Integer> fruitQuantity : fruitMap.entrySet()) {
-            FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(balance);
-            transaction.setFruit(fruitQuantity.getKey());
-            transaction.setQuantity(fruitQuantity.getValue());
-            transactions.add(transaction);
-        }
-        assertThrows(RuntimeException.class, () -> storeService.updateStorage(transactions));
-        assertEquals(expectedStorageSize, Storage.storage.size());
-        assertThrows(RuntimeException.class, () -> storeService.updateStorage(transactions));
-        assertEquals(expectedStorageSize, Storage.storage.size());
-        assertThrows(RuntimeException.class, () -> storeService.updateStorage(transactions));
-        assertEquals(expectedStorageSize, Storage.storage.size());
+        Exception exception = assertThrows(RuntimeException.class,
+                () -> storeService.updateStorage(transactions));
+        assertEquals(NEGATIVE_BALANCE_MESSAGE.formatted(expectedArticle, expectedArticle,
+                fruitMap.get(expectedArticle)), exception.getMessage());
+        assertEquals(expectedMap, Storage.storage);
+    }
+
+    static Stream<Arguments> update_negativeTotalBalance_notOk() {
+        return Stream.of(
+                Arguments.of(Map.of(
+                        "apple", -50), "apple"),
+                Arguments.of(Map.of(
+                        "banana", 5345,
+                        "pear", -3445), "pear"),
+                Arguments.of(Map.of(
+                        "apple", 50,
+                        "banana", 5345,
+                        "pear", 3445,
+                        "lemon", -534,
+                        "orange", 2), "lemon")
+        );
     }
 
     @ParameterizedTest
@@ -169,8 +165,8 @@ class StoreServiceImplTest {
                 "banana", 0,
                 "pear", 0,
                 "lemon", 0,
-                "orange", 0
-        ));
+                "orange", 0)
+        );
         FruitTransaction.Operation balance = FruitTransaction.Operation.BALANCE;
         final List<FruitTransaction> transactions = new ArrayList<>();
         final FruitTransaction transaction = new FruitTransaction();
@@ -202,8 +198,8 @@ class StoreServiceImplTest {
                 "pear", 100,
                 "lemon", 53,
                 "orange", 28,
-                "peach", 100
-        ));
+                "peach", 100)
+        );
         List<String> report = storeService.createReport();
         assertEquals(report.get(LINE_WITH_COLUMN_NAMES_INDEX), LINE_WITH_COLUMN_NAMES);
         assertEquals(REPORT_LENGTH, report.size());
@@ -232,6 +228,6 @@ class StoreServiceImplTest {
     void createReport_storageIsEmpty_notOk() {
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> storeService.createReport());
-        assertEquals("Storage is empty", exception.getMessage());
+        assertEquals(EMPTY_STORAGE_MESSAGE, exception.getMessage());
     }
 }

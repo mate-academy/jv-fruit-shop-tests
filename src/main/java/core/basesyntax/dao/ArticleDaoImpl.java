@@ -11,10 +11,10 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public void addArticle(String article) {
         if (article == null) {
-            throw new RuntimeException("Can't add null to storage");
+            throw new RuntimeException("Article can't be null");
         }
-        if (article.isEmpty()) {
-            throw new RuntimeException("Can't add empty string to storage");
+        if (article.trim().isEmpty()) {
+            throw new RuntimeException("Article name is empty");
         }
         if (Storage.storage.containsKey(article)) {
             throw new RuntimeException("""

@@ -23,7 +23,7 @@ public class FileWriterCsvImpl implements Writer {
         if (report.isEmpty()) {
             throw new RuntimeException("Report is empty");
         }
-        if (fileName.isEmpty()) {
+        if (fileName.trim().isEmpty()) {
             throw new RuntimeException("File name is empty");
         }
         String currentFileExtension = fileName.substring(fileName.length()

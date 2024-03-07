@@ -1,11 +1,11 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import model.Fruit;
-import service.WriterService;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     private static final String HEADER_FRUIT = "fruit";

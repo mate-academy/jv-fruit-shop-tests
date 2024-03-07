@@ -1,4 +1,4 @@
-package exception;
+package core.basesyntax.exception;
 
 public class OutOfStockException extends RuntimeException {
     public OutOfStockException(String message) {

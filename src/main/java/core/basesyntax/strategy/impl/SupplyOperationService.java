@@ -1,8 +1,8 @@
-package strategy.impl;
+package core.basesyntax.strategy.impl;
 
-import dao.FruitDao;
-import model.Fruit;
-import strategy.OperationService;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.strategy.OperationService;
 
 public class SupplyOperationService implements OperationService {
     private final FruitDao fruitDao;

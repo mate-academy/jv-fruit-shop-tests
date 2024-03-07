@@ -1,9 +1,9 @@
-package strategy.impl;
+package core.basesyntax.strategy.impl;
 
-import dao.FruitDao;
-import exception.OutOfStockException;
-import model.Fruit;
-import strategy.OperationService;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.exception.OutOfStockException;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.strategy.OperationService;
 
 public class PurchaseOperationService implements OperationService {
     private final FruitDao fruitDao;

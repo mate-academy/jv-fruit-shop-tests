@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.FruitTransaction;
-import model.Operation;
-import service.ParserService;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.ParserService;
 
 public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_INDEX = 0;

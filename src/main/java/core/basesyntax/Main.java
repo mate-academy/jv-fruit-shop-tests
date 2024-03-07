@@ -1,23 +1,23 @@
 package core.basesyntax;
 
-import dao.FruitDao;
-import dao.FruitDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.Map;
-import model.Operation;
-import service.ParserService;
-import service.ReaderService;
-import service.UserService;
-import service.WriterService;
-import service.impl.ParserServiceImpl;
-import service.impl.ReaderServiceImpl;
-import service.impl.UserServiceImpl;
-import service.impl.WriterServiceImpl;
-import strategy.OperationService;
-import strategy.impl.BalanceOperationService;
-import strategy.impl.PurchaseOperationService;
-import strategy.impl.ReturnOperationService;
-import strategy.impl.SupplyOperationService;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.UserService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.UserServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.impl.BalanceOperationService;
+import core.basesyntax.strategy.impl.PurchaseOperationService;
+import core.basesyntax.strategy.impl.ReturnOperationService;
+import core.basesyntax.strategy.impl.SupplyOperationService;
 
 public class Main {
     private static final String fromFile = "src/main/resources/fruits.csv";

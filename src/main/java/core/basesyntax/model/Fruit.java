@@ -1,4 +1,4 @@
-package model;
+package core.basesyntax.model;
 
 public class Fruit {
     private String fruitName;

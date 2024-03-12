@@ -2,6 +2,8 @@ package service;
 
 import dao.StorageDaoImpl;
 import db.Storage;
+import java.util.List;
+import java.util.Map;
 import model.Transaction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -14,11 +16,6 @@ import service.operation.PurchaseOperation;
 import service.operation.ReturnOperation;
 import service.operation.SupplyOperation;
 
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class TransactionServiceImplTest {
     private static final Map<Transaction.Operation, OperationHandler> HANDLERS = Map.of(
             Transaction.Operation.BALANCE, new BalanceOperation(new StorageDaoImpl()),
@@ -30,7 +27,7 @@ class TransactionServiceImplTest {
     @BeforeAll
     static void setUp() {
         transactionService = new TransactionServiceImpl(
-                    new OperationStrategyImpl(HANDLERS));
+                new OperationStrategyImpl(HANDLERS));
     }
 
     @Test
@@ -42,10 +39,14 @@ class TransactionServiceImplTest {
 
     @Test
     void processTransactions_multipleTransactions_ok() {
-        Transaction firstTransaction = new Transaction(Transaction.Operation.SUPPLY, "orange", 10);
-        Transaction secondTransaction = new Transaction(Transaction.Operation.PURCHASE, "orange", 2);
-        Transaction thirdTransaction = new Transaction(Transaction.Operation.RETURN, "orange", 4);
-        transactionService.processTransactions(List.of(firstTransaction, secondTransaction, thirdTransaction));
+        Transaction firstTransaction = new Transaction(Transaction.Operation.SUPPLY,
+                "orange", 10);
+        Transaction secondTransaction = new Transaction(Transaction.Operation.PURCHASE,
+                "orange", 2);
+        Transaction thirdTransaction = new Transaction(Transaction.Operation.RETURN,
+                "orange", 4);
+        transactionService.processTransactions(List.of(firstTransaction,
+                secondTransaction, thirdTransaction));
         Assertions.assertEquals(12, Storage.STORAGE.get("orange"));
     }
 

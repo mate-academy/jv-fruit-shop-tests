@@ -56,7 +56,7 @@ class TransactionParserTest {
     }
 
     @Test
-    public void parse_illegalOperation_notOk() {
+    void parse_illegalOperation_notOk() {
         List<String> data = List.of("type,fruit,quantity", "t,apple,1");
         Assertions.assertThrows(RuntimeException.class, () -> parser.parse(data),
                 "RuntimeException should be thrown if operation is illegal");

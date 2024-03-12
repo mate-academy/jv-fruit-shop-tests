@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class FileServiceTest {
     private static final String EXISTING_FILE = "src/test/resources/first.csv";
-    private static final String NON_EXISTING_FILE = "src/test/resources/non-existing-file.csv";
-    private static final String NON_EXISTING_PATH = "";
+    private static final String NON_EXISTING_FILE = "invalid/path/to/non-existing-file.csv";
     private static final String DEST_FILE = "src/test/resources/report.csv";
     private static FileService fileService;
 
@@ -44,10 +43,10 @@ class FileServiceTest {
     }
 
     @Test
-    void writeToFile_cantCreatingFile_notOk() {
+    void writeToFile_nonexistingPath_notOk() {
         String expectedData = "test";
         Assertions.assertThrows(RuntimeException.class,
-                () -> fileService.writeToFile(expectedData, NON_EXISTING_PATH),
+                () -> fileService.writeToFile(expectedData, NON_EXISTING_FILE),
                 "Method should throw RuntimeException for non existing path");
     }
 

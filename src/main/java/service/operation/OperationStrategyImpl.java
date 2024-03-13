@@ -16,8 +16,7 @@ public class OperationStrategyImpl implements OperationStrategy {
         if (handler == null) {
             throw new RuntimeException("There is no handler for transaction "
                     + transaction.getOperation());
-        } else {
-            return handler;
         }
+        return handler;
     }
 }

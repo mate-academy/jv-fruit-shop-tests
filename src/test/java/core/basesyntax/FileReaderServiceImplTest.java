@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
-import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 

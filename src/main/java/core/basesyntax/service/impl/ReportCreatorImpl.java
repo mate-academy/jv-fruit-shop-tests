@@ -14,7 +14,6 @@ public class ReportCreatorImpl implements ReportCreator {
                     .append(value.getValue())
                     .append(System.lineSeparator());
         }
-        //reportMessage.replace(reportMessage.length() - 2, reportMessage.length(), "");
 
         return reportMessage.toString();
     }

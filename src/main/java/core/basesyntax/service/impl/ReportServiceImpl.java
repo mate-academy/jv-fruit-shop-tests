@@ -15,8 +15,8 @@ public class ReportServiceImpl implements ReportService {
 
     private static final String NEGATIVE_QUANTITY_ERROR_MESSAGE = "Quantity cannot be negative!";
     private static final String ARGUMENT_IS_NULL_ERROR_MESSAGE = "Argument must not be null";
-    private FruitTransactionDao fruitTransactionDao;
-    private OperationStrategy operationStrategy;
+    private final FruitTransactionDao fruitTransactionDao;
+    private final OperationStrategy operationStrategy;
 
     public ReportServiceImpl(FruitTransactionDao fruitTransactionDao,
                              OperationStrategy operationStrategy) {
@@ -41,6 +41,10 @@ public class ReportServiceImpl implements ReportService {
     private Map<String, Integer> prepareDataForReport() {
         Map<String, Integer> fruitMap = new HashMap<>();
         List<FruitTransaction> dailyActivities = fruitTransactionDao.getAllTransactions();
+        if (dailyActivities.isEmpty()) {
+            throw new NoSuchElementException(ARGUMENT_IS_NULL_ERROR_MESSAGE
+                    + dailyActivities);
+        }
         for (FruitTransaction fruitTransaction : dailyActivities) {
             Optional.ofNullable(fruitTransaction)
                     .orElseThrow(()

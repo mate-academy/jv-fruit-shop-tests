@@ -29,6 +29,7 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+// Try to update commit
 
 public class FruitShopTest {
     private static final String REPORT_FILE_NAME = "src\\test\\resources\\Report file.csv";

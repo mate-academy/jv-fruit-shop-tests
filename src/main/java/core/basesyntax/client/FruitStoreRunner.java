@@ -15,18 +15,19 @@ import core.basesyntax.service.quantity.handlers.SupplyHandler;
 import java.util.Map;
 
 public class FruitStoreRunner {
+    private static final String DAILY_ACTIVITY_FILE_PATH
+            = "src/main/resources/dailyactivities.csv";
+    private static final String REPORT_FILE_PATH
+            = "src/main/resources/finalreport.csv";
 
     public static void main(String[] args) {
-        final String PATH_TO_DAILY_ACTIVITY_FILE
-                = "src/main/resources/dailyactivities.csv";
-        final String PATH_TO_REPORT_FILE
-                = "src/main/resources/finalreport.csv";
         Map<Operation, OperationHandler> operationHandlerMap = Map.of(
                 Operation.RETURN, new ReturnHandler(),
                 Operation.SUPPLY, new SupplyHandler(),
                 Operation.PURCHASE, new PurchaseHandler(),
                 Operation.BALANCE, new BalanceHandler());
-        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoCsvImpl(PATH_TO_DAILY_ACTIVITY_FILE,PATH_TO_REPORT_FILE);
+        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoCsvImpl(
+                DAILY_ACTIVITY_FILE_PATH,REPORT_FILE_PATH);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportService reportService = new ReportServiceImpl(fruitTransactionDao, operationStrategy);
         reportService.generateFinalReport();

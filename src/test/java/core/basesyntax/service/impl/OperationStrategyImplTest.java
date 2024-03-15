@@ -1,23 +1,27 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.entity.Operation;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.quantity.handlers.*;
+import core.basesyntax.service.quantity.handlers.BalanceHandler;
+import core.basesyntax.service.quantity.handlers.OperationHandler;
+import core.basesyntax.service.quantity.handlers.PurchaseHandler;
+import core.basesyntax.service.quantity.handlers.ReturnHandler;
+import core.basesyntax.service.quantity.handlers.SupplyHandler;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class OperationStrategyImplTest {
-
+    private static final int BALANCE_HANDLER_INDEX = 0;
+    private static final int SUPPLY_HANDLER_INDEX = 1;
+    private static final int RETURN_HANDLER_INDEX = 2;
+    private static final int PURCHASE_HANDLER_INDEX = 3;
     private OperationHandler[] operationHandlers;
     private OperationStrategy operationStrategy;
-    private final int BALANCE_HANDLER_INDEX = 0;
-    private final int SUPPLY_HANDLER_INDEX = 1;
-    private final int RETURN_HANDLER_INDEX = 2;
-    private final int PURCHASE_HANDLER_INDEX = 3;
 
     @BeforeEach
     void setUp() {
@@ -33,30 +37,31 @@ class OperationStrategyImplTest {
     }
 
     @Test
-    void operate_ValidOperations_ReturnCorrectHandlers() {
+    void operate_returnCorrectHandlers_ok() {
         OperationHandler expectedBalanceHandler = operationHandlers[BALANCE_HANDLER_INDEX];
-        OperationHandler expectedSupplyHandler = operationHandlers[SUPPLY_HANDLER_INDEX];
-        OperationHandler expectedReturnHandler = operationHandlers[RETURN_HANDLER_INDEX];
-        OperationHandler expectedPurchaseHandler = operationHandlers[PURCHASE_HANDLER_INDEX];
-
         OperationHandler actualBalanceHandler = operationStrategy.operate(Operation.BALANCE);
-        OperationHandler actualSupplyHandler = operationStrategy.operate(Operation.SUPPLY);
-        OperationHandler actualReturnHandler = operationStrategy.operate(Operation.RETURN);
-        OperationHandler actualPurchaseHandler = operationStrategy.operate(Operation.PURCHASE);
-
         assertEquals(expectedBalanceHandler, actualBalanceHandler);
+
+        OperationHandler expectedSupplyHandler = operationHandlers[SUPPLY_HANDLER_INDEX];
+        OperationHandler actualSupplyHandler = operationStrategy.operate(Operation.SUPPLY);
         assertEquals(expectedSupplyHandler, actualSupplyHandler);
+
+        OperationHandler expectedReturnHandler = operationHandlers[RETURN_HANDLER_INDEX];
+        OperationHandler actualReturnHandler = operationStrategy.operate(Operation.RETURN);
         assertEquals(expectedReturnHandler, actualReturnHandler);
+
+        OperationHandler expectedPurchaseHandler = operationHandlers[PURCHASE_HANDLER_INDEX];
+        OperationHandler actualPurchaseHandler = operationStrategy.operate(Operation.PURCHASE);
         assertEquals(expectedPurchaseHandler, actualPurchaseHandler);
     }
 
     @Test
-    void operate_NullOperation_ReturnNullHandler() {
+    void operate_NullArgument_notOk() {
         assertThrows(IllegalArgumentException.class, () -> operationStrategy.operate(null));
     }
 
     @Test
-    void operate_NonExistingOperation_ReturnNullHandler() {
+    void operate_unknownOperation_notOk() {
         Operation nonExistingOperation = Operation.UNKNOWN;
         OperationHandler actualHandler = operationStrategy.operate(nonExistingOperation);
         assertNull(actualHandler);

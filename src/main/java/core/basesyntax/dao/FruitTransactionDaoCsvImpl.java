@@ -31,12 +31,12 @@ public class FruitTransactionDaoCsvImpl implements FruitTransactionDao {
     private static final String QUANTITY_COLUMN = "quantity";
     private static final String CANNOT_READ_FILE_MESSAGE = "Cannot read the file: ";
     private static final String CANNOT_WRITE_FILE_MESSAGE = "Cannot write the data to file: ";
-    private String pathFromCsvFile;
-    private String pathToCsvFile;
     private static final String FILE_IS_NULL_ERROR_MESSAGE
             = "The file that you try to read is null or does not exist";
     private static final String STRING_ARGUMENT_ERROR
             = "The string was passed in the argument is null";
+    private String pathFromCsvFile;
+    private String pathToCsvFile;
 
     public FruitTransactionDaoCsvImpl(String pathFromCsvFile, String pathToCsvFile) {
         this.pathFromCsvFile = pathFromCsvFile;
@@ -88,9 +88,9 @@ public class FruitTransactionDaoCsvImpl implements FruitTransactionDao {
             throw new RuntimeException(FILE_IS_NULL_ERROR_MESSAGE);
         }
         try (InputStream inputStream = new FileInputStream(file);
-             InputStreamReader inputStreamReader = new InputStreamReader(
-                     inputStream, StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                InputStreamReader inputStreamReader = new InputStreamReader(
+                        inputStream, StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(inputStreamReader)) {
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -118,9 +118,9 @@ public class FruitTransactionDaoCsvImpl implements FruitTransactionDao {
     private boolean isEmptyFile() {
         boolean isEmptyFile;
         try (InputStream inputStream = new FileInputStream(pathFromCsvFile);
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
-                     StandardCharsets.UTF_8);
-             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
+                        StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(inputStreamReader)) {
             isEmptyFile = reader.readLine() == null;
         } catch (IOException e) {
             throw new RuntimeException(CANNOT_READ_FILE_MESSAGE + pathFromCsvFile, e);
@@ -143,9 +143,9 @@ public class FruitTransactionDaoCsvImpl implements FruitTransactionDao {
     private void writeLinesToFile(String lines, String pathToFile) {
         Optional.ofNullable(lines)
                 .orElseThrow(() -> new IllegalArgumentException(STRING_ARGUMENT_ERROR));
-        try (OutputStream outputStream = new FileOutputStream(pathToFile);
-             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
-             BufferedWriter writer = new BufferedWriter(outputStreamWriter)) {
+        try (OutputStream outputStream = new FileOutputStream(pathToFile, true);
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream);
+                BufferedWriter writer = new BufferedWriter(outputStreamWriter)) {
             writer.write(lines);
             writer.flush();
         } catch (IOException e) {

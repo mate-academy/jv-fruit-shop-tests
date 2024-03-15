@@ -10,7 +10,8 @@ import org.junit.jupiter.api.Test;
 
 public class ReadFileServiceImplTest {
     private static String pathFileRead = "src/test/resources/textTest.csv";
-    ReaderFileService readerFileService;
+    private ReaderFileService readerFileService;
+
     @BeforeEach
     void setUp() {
         readerFileService = new ReaderFileServiceImpl();

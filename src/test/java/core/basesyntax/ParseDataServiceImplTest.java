@@ -1,19 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseDataService;
-import core.basesyntax.service.impl.ParseDataServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ParseDataService;
+import core.basesyntax.service.impl.ParseDataServiceImpl;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 public class ParseDataServiceImplTest {
-    ParseDataService parseDataService;
+    private ParseDataService parseDataService;
+
     @BeforeEach
     void setUp() {
         parseDataService = new ParseDataServiceImpl();
@@ -38,7 +38,8 @@ public class ParseDataServiceImplTest {
 
     @Test
     void parseData_dataOnlyTitle_notOk() {
-        assertThrows(RuntimeException.class, () -> parseDataService.parseData("type,fruit,quantity"));
+        assertThrows(RuntimeException.class,
+                () -> parseDataService.parseData("type,fruit,quantity"));
     }
 
     @Test

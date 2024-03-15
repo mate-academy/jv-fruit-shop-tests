@@ -18,6 +18,9 @@ public class ParseDataServiceImpl implements ParseDataService {
         List<String> dataWithoutTitle = Arrays.stream(splitData)
                 .skip(1)
                 .toList();
+        if (dataWithoutTitle.isEmpty()) {
+            throw new RuntimeException("File is empty:  " + data);
+        }
         for (String line : dataWithoutTitle) {
             String[] dataFruit = line.split(",");
             if (dataFruit.length != 3) {

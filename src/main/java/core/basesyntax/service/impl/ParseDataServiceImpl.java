@@ -32,16 +32,10 @@ public class ParseDataServiceImpl implements ParseDataService {
             }
             int quantityFruit = Integer.parseInt(dataFruit[QUANTITY_INDEX]);
             if (quantityFruit < 0) {
-                throw new RuntimeException("Fruits "
-                        + fruitName + " less than 0");
+                throw new RuntimeException("Fruits " + fruitName + " less than 0");
             }
             FruitTransaction.Operation operation =
                     FruitTransaction.Operation.getByCode(dataFruit[CODE_INDEX]);
-            if (!Arrays.stream(FruitTransaction.Operation.values()).toList()
-                    .contains(operation)) {
-                throw new RuntimeException("Operation isn`t correct: "
-                        + operation);
-            }
             fruitList.add(new FruitTransaction(operation, dataFruit[FRUIT_INDEX],
                     quantityFruit));
         }

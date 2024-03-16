@@ -76,7 +76,8 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(o -> o.getCode().equals(operation))
                     .findFirst()
-                    .get();
+                    .orElseThrow(
+                            () -> new RuntimeException("Operation isn`t correct: " + operation));
         }
     }
 }

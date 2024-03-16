@@ -1,9 +1,14 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.WriterServiceImpl;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +19,21 @@ public class WriterServiceImplTest {
     @BeforeEach
     void setUp() {
         writerService = new WriterServiceImpl();
+    }
+
+    @Test
+    void writeToFile_correctData_ok() {
+        String expected = "fruit,quantity\nbanana,10";
+        writerService.writeToFile(pathFileWrite, expected);
+        StringBuilder builder = new StringBuilder();
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(pathFileWrite));
+            lines.forEach(s -> builder.append(s).append(System.lineSeparator()));
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t find file by path " + pathFileWrite, e);
+        }
+        String actual = builder.toString().strip();
+        assertEquals(expected, actual);
     }
 
     @Test

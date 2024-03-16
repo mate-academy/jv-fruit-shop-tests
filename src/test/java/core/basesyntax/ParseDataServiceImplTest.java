@@ -73,4 +73,10 @@ public class ParseDataServiceImplTest {
         assertThrows(RuntimeException.class,
                 () -> parseDataService.parseData("type,fruit,quantity\na,banana,10"));
     }
+
+    @Test
+    void parseData_quantityFruitLessZero_notOk() {
+        assertThrows(RuntimeException.class,
+                () -> parseDataService.parseData("type,fruit,quantity\nb,banana,-1"));
+    }
 }

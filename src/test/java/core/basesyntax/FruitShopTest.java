@@ -29,11 +29,10 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-// Try to update commit
 
 public class FruitShopTest {
-    private static final String REPORT_FILE_NAME = "src\\test\\resources\\Report file.csv";
-    private static final String FILE_FOR_TEST = "src\\test\\resources\\File for test.csv";
+    private static final String REPORT_FILE_NAME = "src/test/resources/Report file.csv";
+    private static final String FILE_FOR_TEST = "src/test/resources/File for test.csv";
     private static final String dataFromReader =
             "b,banana,20 b,apple,100 s,banana,100 p,banana,13 "
                     + "r,apple,10 p,apple,20 p,banana,5 s,banana,50 ";

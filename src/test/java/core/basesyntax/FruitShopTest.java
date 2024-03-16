@@ -65,7 +65,7 @@ public class FruitShopTest {
     @BeforeAll
     static void beforeAll() {
         // Reader
-        readerFileName_Ok = "src\\test\\resources\\During the day.csv";
+        readerFileName_Ok = "src/test/resources/During the day.csv";
         getReaderFileName_Invalid = "hello";
 
         // FruitTransactionMapper

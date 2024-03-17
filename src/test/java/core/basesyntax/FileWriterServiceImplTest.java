@@ -3,28 +3,33 @@ package core.basesyntax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterServiceImplTest {
     private final WriterService writerService = new FileWriterServiceImpl();
 
     @Test
-    void writeToFile_validInput_success() {
+    void writeToFile_validInput_success(@TempDir Path tempDir) {
         String testReport = "Sample Report";
-        String testReportFile = "TestReport.txt";
-        Path pathToTestReport = Path.of(testReportFile);
-        String expectedReport = reader(testReportFile);
-
-        writerService.writeToFile(testReportFile, testReport);
+        Path pathToTestReport = tempDir.resolve("TestReport.txt");
+        writerService.writeToFile(pathToTestReport.toString(), testReport);
+        String actualReport = "";
+        try {
+            actualReport = Files.readString(pathToTestReport);
+        } catch (IOException e) {
+            fail("Can`t read from file");
+        }
         assertTrue(Files.exists(pathToTestReport));
-        assertEquals(testReport, expectedReport);
+        assertEquals(testReport, actualReport);
     }
 
     @Test
@@ -34,13 +39,5 @@ class FileWriterServiceImplTest {
 
         assertThrows(RuntimeException.class, () ->
                 writerService.writeToFile(invalidPath, testReport));
-    }
-
-    private String reader(String pathToFile) {
-        try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(pathToFile))) {
-            return bufferedReader.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file: " + pathToFile, e);
-        }
     }
 }

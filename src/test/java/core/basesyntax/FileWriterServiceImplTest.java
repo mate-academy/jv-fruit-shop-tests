@@ -3,6 +3,7 @@ package core.basesyntax;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
@@ -10,18 +11,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterServiceImplTest {
     private final WriterService writerService = new FileWriterServiceImpl();
 
     @Test
-    void writeToFile_validInput_success(@TempDir Path tempDir) throws IOException {
+    void writeToFile_validInput_success() {
         String testReport = "Sample Report";
-        Path testFile = tempDir.resolve("testReport.txt");
+        Path testFile = Path.of("testReport.txt");
+        String expectedReport = null;
+        try {
+            expectedReport = Files.readString(testFile);
+        } catch (IOException e) {
+            fail("Error reading file: " + e.getMessage());
+        }
         writerService.writeToFile(testFile.toString(), testReport);
         assertTrue(Files.exists(testFile));
-        assertEquals(testReport, Files.readString(testFile));
+        assertEquals(testReport, expectedReport);
     }
 
     @Test

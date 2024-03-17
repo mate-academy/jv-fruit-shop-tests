@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FruitParserServiceImplTest {
+    private static final String APPLE = "apple";
+    private static final String BANANA = "banana";
+    private static final String INVALID_OPERATION = "x";
     private final ParserService parserService = new FruitParserServiceImpl();
 
     @Test
@@ -29,13 +32,19 @@ class FruitParserServiceImplTest {
 
     @Test
     void parse_invalidInput_throwsException() {
-        List<String> commands = List.of("x,apple,-10");
-        assertThrows(IllegalArgumentException.class, () -> parserService.parse(commands));
+        List<String> commands = List.of(INVALID_OPERATION + "," + APPLE + ",10");
+        String expectedMessage = "No operation with code: " + INVALID_OPERATION;
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                parserService.parse(commands));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void parse_incompleteData_throwsException() {
         List<String> commands = List.of("b,banana");
-        assertThrows(RuntimeException.class, () -> parserService.parse(commands));
+        String expectedMessage = "Invalid data in file";
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                parserService.parse(commands));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 }

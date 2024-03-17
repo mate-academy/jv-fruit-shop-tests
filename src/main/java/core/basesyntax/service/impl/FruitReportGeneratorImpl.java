@@ -11,6 +11,9 @@ public class FruitReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport(List<Fruit> fruits) {
+        if (fruits.isEmpty()) {
+            throw new RuntimeException("Report cannot be generated, because nothing happens");
+        }
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER_FRUIT)
                 .append(CSV_SEPARATOR)

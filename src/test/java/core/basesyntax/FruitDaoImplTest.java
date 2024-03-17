@@ -13,45 +13,42 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitDaoImplTest {
-    private static final String TEST_FRUIT_NAME = "apple";
-    private static final int TEST_FRUIT_QUANTITY = 10;
-    private FruitDao fruitDao;
-    private Fruit apple;
+    public static final String APPLE = "apple";
+    public static final String BANANA = "apple";
+    public static final int TEST_FRUIT_QUANTITY = 10;
+    private FruitDao fruitDao = new FruitDaoImpl();
+    private Fruit apple = new Fruit(APPLE, TEST_FRUIT_QUANTITY);
 
     @BeforeEach
     void setUp() {
-        fruitDao = new FruitDaoImpl();
-        apple = new Fruit(TEST_FRUIT_NAME,TEST_FRUIT_QUANTITY);
-        Storage.getInstance().getStorage().clear();
         fruitDao.add(apple);
     }
 
     @Test
     void addFruit_notNull_success() {
-        assertNotNull(fruitDao.get(TEST_FRUIT_NAME));
+        assertNotNull(fruitDao.get(APPLE));
     }
 
     @Test
     void getFruit_existingName_success() {
-        assertEquals(apple, fruitDao.get(TEST_FRUIT_NAME));
+        assertEquals(apple, fruitDao.get(APPLE));
     }
 
     @Test
     void updateFruit_validFruit_success() {
-        Fruit updatedApple = new Fruit(TEST_FRUIT_NAME, TEST_FRUIT_QUANTITY);
+        Fruit updatedApple = new Fruit(APPLE, TEST_FRUIT_QUANTITY);
         fruitDao.update(updatedApple);
-        assertEquals(updatedApple, fruitDao.get(TEST_FRUIT_NAME));
+        assertEquals(updatedApple, fruitDao.get(APPLE));
     }
 
     @Test
     void getAllFruits_sorted_success() {
-        String bananaFruit = "banana";
-        int bananaQuantity = 20;
-        Fruit banana = new Fruit(bananaFruit,bananaQuantity);
-        fruitDao.add(banana);
+        int quantity = 20;
+        Fruit bananaFruit = new Fruit(BANANA, quantity);
+        fruitDao.add(bananaFruit);
         List<Fruit> fruits = fruitDao.getAll();
-        assertEquals(TEST_FRUIT_NAME, fruits.get(0).getFruitName());
-        assertEquals(bananaFruit, fruits.get(1).getFruitName());
+        assertEquals(APPLE, fruits.get(0).getFruitName());
+        assertEquals(BANANA, fruits.get(1).getFruitName());
     }
 
     @AfterEach

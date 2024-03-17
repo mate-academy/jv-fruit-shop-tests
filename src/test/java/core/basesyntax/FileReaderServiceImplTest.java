@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -9,19 +10,21 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
+    private final ReaderService readerService = new FileReaderServiceImpl();
+    private final String validPath = "src/test/resources/test_data.csv";
+    private final String invalidPath = "non_existing_file.csv";
 
     @Test
     void readFromFile_existingFile_success() {
-        ReaderService readerService = new FileReaderServiceImpl();
-        String filePath = "src/test/resources/test_data.csv";
-        List<String> data = readerService.readFromFile(filePath);
+        List<String> data = readerService.readFromFile(validPath);
         assertFalse(data.isEmpty());
     }
 
     @Test
     void readFromFile_nonExistingFile_throwsException() {
-        ReaderService readerService = new FileReaderServiceImpl();
-        String filePath = "non_existing_file.csv";
-        assertThrows(RuntimeException.class, () -> readerService.readFromFile(filePath));
+        String expectedMessage = "Can`t read from file " + invalidPath;
+        RuntimeException exception = assertThrows(RuntimeException.class, () ->
+                readerService.readFromFile(invalidPath));
+        assertEquals(expectedMessage, exception.getMessage());
     }
 }

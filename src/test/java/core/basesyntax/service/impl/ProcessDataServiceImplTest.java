@@ -16,6 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ProcessDataServiceImplTest {
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_BANANA = "banana";
     private ProcessDataService processDataService;
 
     @BeforeEach
@@ -32,14 +34,14 @@ class ProcessDataServiceImplTest {
     @Test
     void successfulProcessing_processData_ok() {
         List<Fruit> fruits = List.of(
-                new Fruit("banana", Operation.BALANCE, 20),
-                new Fruit("apple", Operation.BALANCE, 20),
-                new Fruit("apple", Operation.PURCHASE, 10)
+                new Fruit(FRUIT_BANANA, Operation.BALANCE, 20),
+                new Fruit(FRUIT_APPLE, Operation.BALANCE, 20),
+                new Fruit(FRUIT_APPLE, Operation.PURCHASE, 10)
         );
         processDataService.processData(fruits);
         Map<String, Integer> expected = Map.of(
-                "banana", 20,
-                "apple", 10
+                FRUIT_BANANA, 20,
+                FRUIT_APPLE, 10
         );
         assertEquals(expected, Storage.getInstance().getElements(),
                 "Storage should be updated correctly.");
@@ -48,7 +50,7 @@ class ProcessDataServiceImplTest {
     @Test
     void negativeQuantityResult_processData_throwsRuntimeException() {
         List<Fruit> fruits = List.of(
-                new Fruit("apple", Operation.PURCHASE, 10));
+                new Fruit(FRUIT_APPLE, Operation.PURCHASE, 10));
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> processDataService.processData(fruits));
         assertEquals("Total amount for apple cannot be negative",

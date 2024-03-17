@@ -13,6 +13,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitMapperImplTest {
+    private static final String TITLE = "type,fruit,quantity";
+    private static final String FRUIT_APPLE = "apple";
+    private static final String FRUIT_BANANA = "banana";
+    private static final String VALID_FIRST_ROW = "b,banana,20";
+    private static final String VALID_SECOND_ROW = "s,apple,100";
+    private static final String NOT_VALID_ROW = "b,banana,notanumber";
     private FruitMapper fruitMapper;
 
     @BeforeEach
@@ -23,12 +29,14 @@ class FruitMapperImplTest {
     @Test
     void validData_convert_oK() {
         List<String> inputData = new ArrayList<>();
-        inputData.add("type,fruit,quantity");
-        inputData.add("b,banana,20");
-        inputData.add("s,apple,100");
+        inputData.add(TITLE);
+        inputData.add(VALID_FIRST_ROW);
+        inputData.add(VALID_SECOND_ROW);
+        int quantityForBanana = 20;
+        int quantityForApple = 100;
         List<Fruit> expected = List.of(
-                new Fruit("banana", Operation.BALANCE, 20),
-                new Fruit("apple", Operation.SUPPLY, 100)
+                new Fruit(FRUIT_BANANA, Operation.BALANCE, quantityForBanana),
+                new Fruit(FRUIT_APPLE, Operation.SUPPLY, quantityForApple)
         );
         List<Fruit> actual = fruitMapper.convert(inputData);
         assertEquals(expected, actual, "Fruits should be correctly mapped from input data.");
@@ -37,8 +45,8 @@ class FruitMapperImplTest {
     @Test
     void incorrectDataFormat_convert_throwsNumberFormatException() {
         List<String> incorrectData = new ArrayList<>();
-        incorrectData.add("type,fruit,quantity");
-        incorrectData.add("b,banana,notanumber");
+        incorrectData.add(TITLE);
+        incorrectData.add(NOT_VALID_ROW);
         assertThrows(NumberFormatException.class,
                 () -> fruitMapper.convert(incorrectData),
                 "Conversion of incorrect data format should throw NumberFormatException.");
@@ -47,7 +55,7 @@ class FruitMapperImplTest {
     @Test
     void emptyList_convert_ok() {
         List<String> emptyDataAfterRemovalTitle = new ArrayList<>();
-        emptyDataAfterRemovalTitle.add("type,fruit,quantity");
+        emptyDataAfterRemovalTitle.add(TITLE);
         List<Fruit> actual = fruitMapper.convert(emptyDataAfterRemovalTitle);
         assertTrue(actual.isEmpty(),
                 "Converting an empty list (except header) should return an empty list.");

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
+    private static final String TITLE = "fruit,quantity";
     private ReportGenerator reportGenerator;
 
     @BeforeEach
@@ -26,7 +27,7 @@ class ReportGeneratorImplTest {
 
     @Test
     void returnOnlyTitleWithEmptyStorage_createReport_ok() {
-        String expectedReport = "fruit,quantity" + System.lineSeparator();
+        String expectedReport = TITLE + System.lineSeparator();
         String actualReport = reportGenerator.createReport();
         assertEquals(expectedReport, actualReport,
                 "Report should contain only the title when storage is empty.");
@@ -37,7 +38,7 @@ class ReportGeneratorImplTest {
         LinkedHashMap<String, Integer> products = new LinkedHashMap<>();
         products.put("banana", 20);
         Storage.setElements(products);
-        String expectedReport = "fruit,quantity" + System.lineSeparator()
+        String expectedReport = TITLE + System.lineSeparator()
                 + "banana,20" + System.lineSeparator();
         String actualReport = reportGenerator.createReport();
         assertEquals(expectedReport, actualReport,
@@ -50,7 +51,7 @@ class ReportGeneratorImplTest {
         products.put("banana", 20);
         products.put("apple", 15);
         Storage.setElements(products);
-        String expectedReport = "fruit,quantity" + System.lineSeparator()
+        String expectedReport = TITLE + System.lineSeparator()
                 + "banana,20" + System.lineSeparator()
                 + "apple,15" + System.lineSeparator();
         String actualReport = reportGenerator.createReport();

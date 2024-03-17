@@ -13,6 +13,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 class WriterImplTest {
     private static final String OUTPUT_FILE = "outputData.csv";
+    private static final String TITLE = "type,fruit,quantity";
+
     private Writer writer;
     @TempDir
     private Path temporaryDirectory;
@@ -24,7 +26,7 @@ class WriterImplTest {
 
     @Test
     void successfulWriting_write_ok() throws IOException {
-        String expectedReport = "fruit,quantity" + System.lineSeparator() + "banana,20";
+        String expectedReport = TITLE + System.lineSeparator() + "banana,20";
         Path outputPath = temporaryDirectory.resolve(OUTPUT_FILE);
         writer.write(expectedReport, outputPath.toString());
         String actualReport = Files.readString(outputPath);

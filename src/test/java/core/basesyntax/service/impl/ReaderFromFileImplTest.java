@@ -16,6 +16,16 @@ import org.junit.jupiter.api.io.TempDir;
 class ReaderFromFileImplTest {
     private static final String VALID_INPUT_FILE = "src/main/resources/inputData.csv";
     private static final String EMPTY_FILE = "empty.csv";
+    private static final List<String> VALID_DATA = List.of(
+            "type,fruit,quantity",
+            "b,banana,20",
+            "b,apple,100",
+            "s,banana,100",
+            "p,banana,13",
+            "r,apple,10",
+            "p,apple,20",
+            "s,banana,50");
+
     private Reader reader;
 
     @TempDir
@@ -28,15 +38,7 @@ class ReaderFromFileImplTest {
 
     @Test
     void correctInputFile_readFromFile_ok() {
-        List<String> expectedList = List.of(
-                "type,fruit,quantity",
-                "b,banana,20",
-                "b,apple,100",
-                "s,banana,100",
-                "p,banana,13",
-                "r,apple,10",
-                "p,apple,20",
-                "s,banana,50");
+        List<String> expectedList = VALID_DATA;
         List<String> actualList = reader.readFromFile(VALID_INPUT_FILE);
         assertEquals(expectedList, actualList);
     }

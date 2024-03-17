@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,16 +20,12 @@ class FileWriterServiceImplTest {
     @Test
     void writeToFile_validInput_success() {
         String testReport = "Sample Report";
-        File testFile = new File("testReport.txt");
-        Path testReportFile = Path.of(testFile.toURI());
-        String expectedReport = null;
-        try {
-            expectedReport = Files.readString(testReportFile);
-        } catch (IOException e) {
-            fail("Error reading file: " + e.getMessage());
-        }
-        writerService.writeToFile(testFile.toString(), testReport);
-        assertTrue(Files.exists(testReportFile));
+        String testReportFile = "TestReport.txt";
+        Path pathToTestReport = Path.of(testReportFile);
+        String expectedReport = reader(testReportFile);
+
+        writerService.writeToFile(testReportFile, testReport);
+        assertTrue(Files.exists(pathToTestReport));
         assertEquals(testReport, expectedReport);
     }
 
@@ -39,5 +36,13 @@ class FileWriterServiceImplTest {
 
         assertThrows(RuntimeException.class, () ->
                 writerService.writeToFile(invalidPath, testReport));
+    }
+
+    private String reader(String pathToFile) {
+        try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(pathToFile))) {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file: " + pathToFile, e);
+        }
     }
 }

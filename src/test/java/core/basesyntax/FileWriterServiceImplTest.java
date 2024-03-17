@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,15 +19,16 @@ class FileWriterServiceImplTest {
     @Test
     void writeToFile_validInput_success() {
         String testReport = "Sample Report";
-        Path testFile = Path.of("testReport.txt");
+        File testFile = new File("testReport.txt");
+        Path testReportFile = Path.of(testFile.toURI());
         String expectedReport = null;
         try {
-            expectedReport = Files.readString(testFile);
+            expectedReport = Files.readString(testReportFile);
         } catch (IOException e) {
             fail("Error reading file: " + e.getMessage());
         }
         writerService.writeToFile(testFile.toString(), testReport);
-        assertTrue(Files.exists(testFile));
+        assertTrue(Files.exists(testReportFile));
         assertEquals(testReport, expectedReport);
     }
 

@@ -11,10 +11,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
-    private static final String PRODUCT_NOT_FOUND_IN_DB = "Product not found in DB. ProductName=";
     private static final String FIRST_PRODUCT_NAME = "test";
     private static final String SECOND_PRODUCT_NAME = "another_test";
     private static final int AMOUNT = 12;
+    private static final String PRODUCT_NOT_FOUND_IN_DB_MSG =
+            "Product not found in DB. ProductName=";
+    private static final String COUNT_CANNOT_BE_NEGATIVE_MSG =
+            "Count cannot be negative. Product: ";
     private final Product firstProduct = new Fruit(FIRST_PRODUCT_NAME, AMOUNT);
     private final Product secondProduct = new Fruit(SECOND_PRODUCT_NAME, AMOUNT);
     private final Storage storage = Storage.getInstance();
@@ -39,7 +42,7 @@ class ReturnOperationTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> operation.operate(firstProduct));
-        String expected = PRODUCT_NOT_FOUND_IN_DB + FIRST_PRODUCT_NAME;
+        String expected = PRODUCT_NOT_FOUND_IN_DB_MSG + FIRST_PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }
@@ -50,7 +53,7 @@ class ReturnOperationTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> operation.operate(secondProduct));
-        String expected = PRODUCT_NOT_FOUND_IN_DB + SECOND_PRODUCT_NAME;
+        String expected = PRODUCT_NOT_FOUND_IN_DB_MSG + SECOND_PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }
@@ -61,7 +64,7 @@ class ReturnOperationTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> operation.operate(productCountLessThenZero));
-        String expected = "Count cannot be negative. Product: " + FIRST_PRODUCT_NAME;
+        String expected = COUNT_CANNOT_BE_NEGATIVE_MSG + FIRST_PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }

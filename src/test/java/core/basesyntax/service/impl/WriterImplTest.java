@@ -15,10 +15,13 @@ import org.junit.jupiter.api.Test;
 class WriterImplTest {
     private static final String TEST_FILE = "src/test/resources/test.csv";
     private static final String NOT_EXISTING_FILE = "src/test/resources/notExisting.csv";
-    private static final String PATH_TO_FILE_IS_EMPTY_MSG = "Path to file is empty!";
-    private static final String REPORT_IS_EMPTY_MSG = "Report is empty!";
     private static final String DATA = "1,2,3";
     private static final String EMPTY_STRING = "";
+    private static final String PATH_TO_FILE_IS_EMPTY_MSG = "Path to file is empty!";
+    private static final String REPORT_IS_EMPTY_MSG = "Report is empty!";
+    private static final String CAN_T_DELETE_FILE_MSG = "Can't delete file: ";
+    private static final String CAN_T_READ_FILE_MSG = "Can't read file: ";
+    private static final String CAN_T_WRITE_TO_FILE_MSG = "Can't write to file: ";
     private final Writer writer = new WriterImpl();
 
     @AfterEach
@@ -27,7 +30,7 @@ class WriterImplTest {
         try {
             Files.deleteIfExists(Path.of(NOT_EXISTING_FILE));
         } catch (IOException e) {
-            throw new RuntimeException("Can't delete file: " + NOT_EXISTING_FILE, e);
+            throw new RuntimeException(CAN_T_DELETE_FILE_MSG + NOT_EXISTING_FILE, e);
         }
     }
 
@@ -91,7 +94,7 @@ class WriterImplTest {
         try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(pathToFile))) {
             return bufferedReader.readLine();
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file: " + pathToFile, e);
+            throw new RuntimeException(CAN_T_READ_FILE_MSG + pathToFile, e);
         }
     }
 
@@ -99,7 +102,7 @@ class WriterImplTest {
         try (FileWriter fileWriter = new FileWriter(TEST_FILE, false)) {
             fileWriter.write(data);
         } catch (Exception e) {
-            throw new RuntimeException("Can't write to file: " + TEST_FILE, e);
+            throw new RuntimeException(CAN_T_WRITE_TO_FILE_MSG + TEST_FILE, e);
         }
     }
 }

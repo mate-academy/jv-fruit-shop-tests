@@ -18,15 +18,26 @@ class DataConverterImplTest {
     private static final String VALID_TYPE_COLUMN = "type";
     private static final String VALID_PRODUCT_NAME_COLUMN = "fruit";
     private static final String VALID_QUANTITY_COLUMN = "quantity";
+    private static final String VALID_PRODUCT_NAME = "banana";
+    private static final int VALID_PRODUCT_AMOUNT = 20;
     private static final String INVALID_PRODUCT_NAME_COLUMN = "car";
     private static final String VALID_BODY = "b,banana,20";
+    private static final String INVALID_TYPE_COLUMN = "tepa";
+    private static final String INVALID_QUANTITY_COLUMN = "price";
+    private static final String SHORT_PRODUCT_NAME_COLUMN = "ab";
     private static final String INVALID_HEADER_MSG = "Invalid header. Header=";
+    private static final String PRODUCT_TYPE_IS_NOT_SUPPORTED_MSG =
+            "Product type is not supported. Type=";
+    private static final String PRODUCT_NAME_SHORTER_MSG =
+            "Product name shorter than 3 letters. Header=";
+    private static final String NUMBER_OF_COLUMNS_IS_INVALID_MSG =
+            "Number of columns is invalid. Header=";
     private final DataConverter converter = new DataConverterImpl();
 
     @BeforeAll
     static void setUp() {
         //Init strategy for tests:
-        new RecordMapperStrategyImpl(Map.of("fruit", new FruitRecordMapper()));
+        new RecordMapperStrategyImpl(Map.of(VALID_PRODUCT_NAME_COLUMN, new FruitRecordMapper()));
     }
 
     @Test
@@ -35,14 +46,15 @@ class DataConverterImplTest {
                 + COMMA + VALID_PRODUCT_NAME_COLUMN
                 + COMMA + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(validHeader, VALID_BODY);
-        List<Record> expected = List.of(new Record(Operation.BALANCE,new Fruit("banana", 20)));
+        List<Record> expected = List.of(
+                new Record(Operation.BALANCE,new Fruit(VALID_PRODUCT_NAME, VALID_PRODUCT_AMOUNT)));
         List<Record> actual = converter.convert(data);
         assertEquals(expected, actual);
     }
 
     @Test
     void convert_withInvalidType_notOk() {
-        String header = "tepa" + COMMA
+        String header = INVALID_TYPE_COLUMN + COMMA
                 + VALID_PRODUCT_NAME_COLUMN
                 + COMMA + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
@@ -56,7 +68,7 @@ class DataConverterImplTest {
     void converter_withInvalidQuantity_notOk() {
         String header = VALID_TYPE_COLUMN + COMMA
                 + VALID_PRODUCT_NAME_COLUMN
-                + COMMA + "price";
+                + COMMA + INVALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
@@ -73,19 +85,19 @@ class DataConverterImplTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
         String expectedMessage =
-                "Product type is not supported. Type=" + INVALID_PRODUCT_NAME_COLUMN;
+                PRODUCT_TYPE_IS_NOT_SUPPORTED_MSG + INVALID_PRODUCT_NAME_COLUMN;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void converter_withProductNameIsShort_notOk() {
         String header = VALID_TYPE_COLUMN
-                + COMMA + "ab"
+                + COMMA + SHORT_PRODUCT_NAME_COLUMN
                 + COMMA + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
-        String expectedMessage = "Product name shorter than 3 letters. Header=" + header;
+        String expectedMessage = PRODUCT_NAME_SHORTER_MSG + header;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
@@ -95,7 +107,7 @@ class DataConverterImplTest {
                 + COMMA + VALID_PRODUCT_NAME_COLUMN;
         Exception exception =
                 assertThrows(RuntimeException.class, () -> converter.convert(List.of(header)));
-        String expectedMessage = "Number of columns is invalid. Header=" + header;
+        String expectedMessage = NUMBER_OF_COLUMNS_IS_INVALID_MSG + header;
         assertEquals(expectedMessage, exception.getMessage());
     }
 }

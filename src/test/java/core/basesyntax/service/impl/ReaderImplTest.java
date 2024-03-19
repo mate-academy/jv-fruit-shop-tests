@@ -13,9 +13,12 @@ import org.junit.jupiter.api.Test;
 class ReaderImplTest {
     private static final String TEST_FILE = "src/test/resources/test.csv";
     private static final String NOT_EXISTING_FILE = "src/test/resources/notExisting.csv";
-    private static final String PATH_TO_FILE_IS_EMPTY_MSG = "Path to file is empty!";
     private static final String DATA = "line";
     private static final String EMPTY_STRING = "";
+    private static final String PATH_TO_FILE_IS_EMPTY_MSG = "Path to file is empty!";
+    private static final String FILE_IS_EMPTY_MSG = "File is empty!";
+    private static final String CAN_T_READ_FROM_FILE_MSG = "Can't read from file: ";
+    private static final String CAN_T_WRITE_TO_FILE_MSG = "Can't write to file: ";
     private final Reader reader = new ReaderImpl();
 
     @AfterEach
@@ -35,7 +38,7 @@ class ReaderImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> reader.readFromFile(TEST_FILE));
-        String expectedMessage = "File is empty!";
+        String expectedMessage = FILE_IS_EMPTY_MSG;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
@@ -44,7 +47,7 @@ class ReaderImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> reader.readFromFile(NOT_EXISTING_FILE));
-        String expectedMessage = "Can't read from file: " + NOT_EXISTING_FILE;
+        String expectedMessage = CAN_T_READ_FROM_FILE_MSG + NOT_EXISTING_FILE;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
@@ -68,7 +71,7 @@ class ReaderImplTest {
         try (FileWriter fileWriter = new FileWriter(TEST_FILE, false)) {
             fileWriter.write(data);
         } catch (Exception e) {
-            throw new RuntimeException("Can't write to file: " + TEST_FILE, e);
+            throw new RuntimeException(CAN_T_WRITE_TO_FILE_MSG + TEST_FILE, e);
         }
     }
 }

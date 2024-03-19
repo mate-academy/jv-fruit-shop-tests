@@ -15,6 +15,9 @@ import org.junit.jupiter.api.Test;
 class CommonReportGeneratorTest {
     private static final String COMMA = ",";
     private static final String NAME = "test";
+    private static final String REPORT_CSV = "Report.csv";
+    private static final String QUANTITY = "quantity";
+    private static final String DB_IS_EMPTY = "DB is empty";
     private final Storage storage = Storage.getInstance();
     private final ReportGenerator reportGenerator = new CommonReportGenerator();
 
@@ -29,8 +32,8 @@ class CommonReportGeneratorTest {
         storage.getStorage().put(NAME, testProduct);
         String expectedType = testProduct.getClass().getSimpleName();
         List<Report> expected = List.of(new Report(
-                 expectedType + "Report.csv",
-                expectedType.toLowerCase() + COMMA + "quantity" + System.lineSeparator(),
+                 expectedType + REPORT_CSV,
+                expectedType.toLowerCase() + COMMA + QUANTITY + System.lineSeparator(),
                 NAME + COMMA + testProduct.getCount() + System.lineSeparator()));
         List<Report> actual = reportGenerator.generate();
         assertEquals(expected, actual);
@@ -40,6 +43,6 @@ class CommonReportGeneratorTest {
     void generate_storageEmpty_notOk() {
         Exception actual =
                 assertThrows(RuntimeException.class, reportGenerator::generate);
-        assertEquals("DB is empty", actual.getMessage());
+        assertEquals(DB_IS_EMPTY, actual.getMessage());
     }
 }

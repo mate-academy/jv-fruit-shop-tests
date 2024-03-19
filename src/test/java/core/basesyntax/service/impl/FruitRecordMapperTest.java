@@ -17,8 +17,19 @@ class FruitRecordMapperTest {
     private static final String VALID_NAME = "apple";
     private static final int VALID_COUNT = 10;
     private static final String INVALID_OPERATION_TYPE = "y";
+    private static final String INVALID_COUNT_TYPE = "TEN";
+    private static final String SHORT_PRODUCT_NAME = "a";
+    private static final String NEGATIVE_AMOUNT = "-1";
     private static final String LENGTH_CANNOT_BE_LESS_MSG =
             "Product name length cannot be less than 3. Line=";
+    private static final String NO_OPERATION_WITH_CODE_MSG = "No operation with code '";
+    private static final String FOUND_MSG = "' found";
+    private static final String QUANTITY_IS_NOT_A_NUMBER_MSG = "Quantity is not a number. Line=";
+    private static final String QUANTITY_CANNOT_BE_NEGATIVE_MSG =
+            "Quantity cannot be negative. Line=";
+    private static final String INCORRECT_LINE_FORMAT_MSG = "Incorrect line format. Line=";
+    private static final String OPERATION_TYPE_CANNOT_BE_EMPTY_MSG =
+            "Operation type cannot be empty. Line=";
     private final List<String> lines = new ArrayList<>();
     private final FruitRecordMapper mapper = new FruitRecordMapper();
 
@@ -49,35 +60,36 @@ class FruitRecordMapperTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> mapper.getRecordsFromLines(lines));
-        String expectedMessage = "No operation with code '" + INVALID_OPERATION_TYPE + "' found";
+        String expectedMessage = NO_OPERATION_WITH_CODE_MSG + INVALID_OPERATION_TYPE + FOUND_MSG;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void getRecordsFromLines_withInvalidCountType_notOk() {
-        String line = VALID_OPERATION_TYPE + COMMA + VALID_NAME + COMMA + "TEN";
+        String line = VALID_OPERATION_TYPE + COMMA + VALID_NAME + COMMA + INVALID_COUNT_TYPE;
         lines.add(line);
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> mapper.getRecordsFromLines(lines));
-        String expectedMessage = "Quantity is not a number. Line=" + line;
+        String expectedMessage = QUANTITY_IS_NOT_A_NUMBER_MSG + line;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void getRecordsFromLines_withCountLessThenZero_notOk() {
-        String invalidLine = VALID_OPERATION_TYPE + COMMA + VALID_NAME + COMMA + "-1";
+        String invalidLine = VALID_OPERATION_TYPE + COMMA + VALID_NAME + COMMA + NEGATIVE_AMOUNT;
         lines.add(invalidLine);
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> mapper.getRecordsFromLines(lines));
-        String expectedMessage = "Quantity cannot be negative. Line=" + invalidLine;
+        String expectedMessage = QUANTITY_CANNOT_BE_NEGATIVE_MSG + invalidLine;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void getRecordsFromLines_withNameLengthLessThenThree_notOk() {
-        String invalidLine = VALID_OPERATION_TYPE + COMMA + "a" + COMMA + VALID_COUNT;
+        String invalidLine =
+                VALID_OPERATION_TYPE + COMMA + SHORT_PRODUCT_NAME + COMMA + VALID_COUNT;
         lines.add(invalidLine);
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
@@ -93,7 +105,7 @@ class FruitRecordMapperTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> mapper.getRecordsFromLines(lines));
-        String expectedMessage = "Incorrect line format. Line=" + line;
+        String expectedMessage = INCORRECT_LINE_FORMAT_MSG + line;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
@@ -104,7 +116,7 @@ class FruitRecordMapperTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> mapper.getRecordsFromLines(lines));
-        String expectedMessage = "Operation type cannot be empty. Line=" + line;
+        String expectedMessage = OPERATION_TYPE_CANNOT_BE_EMPTY_MSG + line;
         assertEquals(expectedMessage, exception.getMessage());
     }
 

@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 class SupplyOperationTest {
     private static final String PRODUCT_NAME = "test";
     private static final int AMOUNT = 12;
+    private static final String COUNT_CANNOT_BE_NEGATIVE_MSG =
+            "Count cannot be negative. Product: ";
     private final Product product = new Fruit(PRODUCT_NAME, AMOUNT);
     private final Storage storage = Storage.getInstance();
     private final RecordDataManipulation operation = new SupplyOperation();
@@ -55,7 +57,7 @@ class SupplyOperationTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> operation.operate(productCountLessThenZero));
-        String expected = "Count cannot be negative. Product: " + PRODUCT_NAME;
+        String expected = COUNT_CANNOT_BE_NEGATIVE_MSG + PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }

@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 class PurchaseOperationTest {
     private static final String PRODUCT_NAME = "test";
     private static final int AMOUNT = 12;
+    private static final String COUNT_CANNOT_BE_NEGATIVE_MSG =
+            "Count cannot be negative. Product: ";
+    private static final String NOT_ENOUGH_PRODUCTS_IN_STOCK_MSG =
+            "Not enough products in stock. ProductName=";
     private final Product product = new Fruit(PRODUCT_NAME, AMOUNT);
     private final Storage storage = Storage.getInstance();
     private final RecordDataManipulation operation = new PurchaseOperation();
@@ -36,7 +40,7 @@ class PurchaseOperationTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> operation.operate(product));
-        String expected = "Not enough products in stock. ProductName=" + PRODUCT_NAME;
+        String expected = NOT_ENOUGH_PRODUCTS_IN_STOCK_MSG + PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }
@@ -47,7 +51,7 @@ class PurchaseOperationTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> operation.operate(zeroCountProduct));
-        String expected = "Not enough products in stock. ProductName=" + PRODUCT_NAME;
+        String expected = NOT_ENOUGH_PRODUCTS_IN_STOCK_MSG + PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }
@@ -58,7 +62,7 @@ class PurchaseOperationTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> operation.operate(productCountLessThenZero));
-        String expected = "Count cannot be negative. Product: " + PRODUCT_NAME;
+        String expected = COUNT_CANNOT_BE_NEGATIVE_MSG + PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }

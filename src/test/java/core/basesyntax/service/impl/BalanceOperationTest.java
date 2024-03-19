@@ -11,6 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
+    private static final String AMOUNT_CANNOT_BE_NEGATIVE = "Count cannot be negative. Product: ";
     private static final String PRODUCT_NAME = "test";
     private static final int AMOUNT = 12;
     private final Product product = new Fruit(PRODUCT_NAME, AMOUNT);
@@ -55,7 +56,7 @@ class BalanceOperationTest {
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> operation.operate(productCountLessThenZero));
-        String expected = "Count cannot be negative. Product: " + PRODUCT_NAME;
+        String expected = AMOUNT_CANNOT_BE_NEGATIVE + PRODUCT_NAME;
         String actual = exception.getMessage();
         assertEquals(expected, actual);
     }

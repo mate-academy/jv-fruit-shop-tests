@@ -1,13 +1,15 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.impl.service;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ProcessDataService;
+import core.basesyntax.service.impl.ProcessDataServiceImpl;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,10 +35,10 @@ class ProcessDataServiceImplTest {
 
     @Test
     void successfulProcessing_processData_ok() {
-        List<Fruit> fruits = List.of(
-                new Fruit(FRUIT_BANANA, Operation.BALANCE, 20),
-                new Fruit(FRUIT_APPLE, Operation.BALANCE, 20),
-                new Fruit(FRUIT_APPLE, Operation.PURCHASE, 10)
+        List<FruitTransaction> fruits = List.of(
+                new FruitTransaction(FRUIT_BANANA, Operation.BALANCE, 20),
+                new FruitTransaction(FRUIT_APPLE, Operation.BALANCE, 20),
+                new FruitTransaction(FRUIT_APPLE, Operation.PURCHASE, 10)
         );
         processDataService.processData(fruits);
         Map<String, Integer> expected = Map.of(
@@ -49,8 +51,8 @@ class ProcessDataServiceImplTest {
 
     @Test
     void negativeQuantityResult_processData_throwsRuntimeException() {
-        List<Fruit> fruits = List.of(
-                new Fruit(FRUIT_APPLE, Operation.PURCHASE, 10));
+        List<FruitTransaction> fruits = List.of(
+                new FruitTransaction(FRUIT_APPLE, Operation.PURCHASE, 10));
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> processDataService.processData(fruits));
         assertEquals("Total amount for apple cannot be negative",
@@ -59,7 +61,7 @@ class ProcessDataServiceImplTest {
 
     @Test
     void emptyListNoChangeToStorage_processData_ok() {
-        processDataService.processData(List.of());
+        processDataService.processData(Collections.emptyList());
         assertTrue(Storage.getInstance().getElements().isEmpty(),
                 "Storage should remain unchanged.");
     }

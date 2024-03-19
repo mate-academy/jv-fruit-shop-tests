@@ -1,9 +1,10 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.impl.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.Writer;
+import core.basesyntax.service.impl.WriterImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,10 +39,10 @@ class WriterImplTest {
     void invalidPath_write_ThrowsRuntimeException() {
         String invalidPath = temporaryDirectory.resolve(
                 "nonexistent/directory/outputData.csv").toString();
-        Exception exception = assertThrows(RuntimeException.class,
+        Exception actualException = assertThrows(RuntimeException.class,
                 () -> writer.write("content", invalidPath));
         assertEquals("Can not write to: "
-                        + invalidPath, exception.getMessage(),
+                        + invalidPath, actualException.getMessage(),
                 "Exception message should match the expected one.");
     }
 }

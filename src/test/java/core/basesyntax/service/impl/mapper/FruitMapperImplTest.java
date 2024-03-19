@@ -1,12 +1,13 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.impl.mapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitMapper;
+import core.basesyntax.service.impl.FruitMapperImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,11 +35,11 @@ class FruitMapperImplTest {
         inputData.add(VALID_SECOND_ROW);
         int quantityForBanana = 20;
         int quantityForApple = 100;
-        List<Fruit> expected = List.of(
-                new Fruit(FRUIT_BANANA, Operation.BALANCE, quantityForBanana),
-                new Fruit(FRUIT_APPLE, Operation.SUPPLY, quantityForApple)
+        List<FruitTransaction> expected = List.of(
+                new FruitTransaction(FRUIT_BANANA, Operation.BALANCE, quantityForBanana),
+                new FruitTransaction(FRUIT_APPLE, Operation.SUPPLY, quantityForApple)
         );
-        List<Fruit> actual = fruitMapper.convert(inputData);
+        List<FruitTransaction> actual = fruitMapper.map(inputData);
         assertEquals(expected, actual, "Fruits should be correctly mapped from input data.");
     }
 
@@ -48,7 +49,7 @@ class FruitMapperImplTest {
         incorrectData.add(TITLE);
         incorrectData.add(NOT_VALID_ROW);
         assertThrows(NumberFormatException.class,
-                () -> fruitMapper.convert(incorrectData),
+                () -> fruitMapper.map(incorrectData),
                 "Conversion of incorrect data format should throw NumberFormatException.");
     }
 
@@ -56,7 +57,7 @@ class FruitMapperImplTest {
     void emptyList_convert_ok() {
         List<String> emptyDataAfterRemovalTitle = new ArrayList<>();
         emptyDataAfterRemovalTitle.add(TITLE);
-        List<Fruit> actual = fruitMapper.convert(emptyDataAfterRemovalTitle);
+        List<FruitTransaction> actual = fruitMapper.map(emptyDataAfterRemovalTitle);
         assertTrue(actual.isEmpty(),
                 "Converting an empty list (except header) should return an empty list.");
     }

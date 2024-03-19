@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public record Fruit(
+public record FruitTransaction(
         String name,
         Operation operation,
         Integer quantity

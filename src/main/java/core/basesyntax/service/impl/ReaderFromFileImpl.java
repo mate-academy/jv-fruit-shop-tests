@@ -7,10 +7,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderFromFileImpl implements Reader {
-    private List<String> dataFromFile;
 
     @Override
     public List<String> readFromFile(String inputFile) {
+        List<String> dataFromFile;
         try {
             Path path = Path.of(inputFile);
             dataFromFile = Files.readAllLines(path);

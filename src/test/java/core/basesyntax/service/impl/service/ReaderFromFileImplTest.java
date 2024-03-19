@@ -1,10 +1,11 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.impl.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.service.Reader;
+import core.basesyntax.service.impl.ReaderFromFileImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class ReaderFromFileImplTest {
-    private static final String VALID_INPUT_FILE = "src/main/resources/inputData.csv";
+    private static final String VALID_INPUT_FILE = "src/main/resources/inputDataForTest.csv";
     private static final String EMPTY_FILE = "empty.csv";
     private static final List<String> VALID_DATA = List.of(
             "type,fruit,quantity",
@@ -54,9 +55,9 @@ class ReaderFromFileImplTest {
     @Test
     void invalidInputFile_readFromFile_notOk() {
         String invalidInputFile = "src/main/resources/outputDat.csv";
-        RuntimeException runtimeException = assertThrows(RuntimeException.class,
+        RuntimeException actualException = assertThrows(RuntimeException.class,
                 () -> reader.readFromFile(invalidInputFile));
         assertEquals("Can not read the file: " + invalidInputFile,
-                runtimeException.getMessage());
+                actualException.getMessage());
     }
 }

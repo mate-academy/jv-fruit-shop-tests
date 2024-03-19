@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitMapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FruitMapperImpl implements FruitMapper {
     private static final String COMMA = ",";
@@ -14,16 +15,17 @@ public class FruitMapperImpl implements FruitMapper {
     private static final int INDEX_OF_PRODUCT_AMOUNT = 2;
 
     @Override
-    public List<Fruit> convert(List<String> data) {
-        data.remove(INDEX_OF_TITLE);
-        List<Fruit> fruits = new ArrayList<>();
-        for (String line : data) {
-            String[] split = line.split(COMMA);
-            Operation operation = Operation.fromCode(split[INDEX_OF_OPERATION]);
-            String productName = split[INDEX_OF_PRODUCT_NAME];
-            int amount = Integer.parseInt(split[INDEX_OF_PRODUCT_AMOUNT]);
-            fruits.add(new Fruit(productName, operation, amount));
-        }
-        return fruits;
+    public List<FruitTransaction> map(List<String> data) {
+        List<String> copyOfData = new ArrayList<>(data);
+        copyOfData.remove(INDEX_OF_TITLE);
+        return copyOfData.stream()
+                .map(line -> line.split(COMMA))
+                .map(split -> new FruitTransaction(
+                        split[INDEX_OF_PRODUCT_NAME],
+                        Operation.fromCode(split[INDEX_OF_OPERATION]),
+                        Integer.parseInt(split[INDEX_OF_PRODUCT_AMOUNT])
+                ))
+                .collect(Collectors.toList());
+
     }
 }

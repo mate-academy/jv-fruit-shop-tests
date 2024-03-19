@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.factory.OperationHandlerFactory;
 import core.basesyntax.factory.impl.OperationHandlerFactoryImpl;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessDataService;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.HashMap;
@@ -15,9 +15,9 @@ public class ProcessDataServiceImpl implements ProcessDataService {
             new OperationHandlerFactoryImpl();
 
     @Override
-    public void processData(List<Fruit> fruits) {
+    public void processData(List<FruitTransaction> fruits) {
         Map<String, Integer> storage = new HashMap<>();
-        for (Fruit fruit : fruits) {
+        for (FruitTransaction fruit : fruits) {
             OperationHandler handler = operationHandlerFactory.getHandler(fruit.operation());
             int amount = handler.calculate(fruit.quantity());
             storage.merge(fruit.name(), amount, Integer::sum);

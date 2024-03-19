@@ -1,9 +1,10 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.impl.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import org.junit.jupiter.api.AfterEach;

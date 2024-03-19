@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitMapper;
 import core.basesyntax.service.ProcessDataService;
 import core.basesyntax.service.Reader;
@@ -25,7 +25,7 @@ public class Grocery {
         Writer writer = new WriterImpl();
 
         List<String> dataFromFile = reader.readFromFile(INPUT_FILE);
-        List<Fruit> convertedData = fruitMapper.convert(dataFromFile);
+        List<FruitTransaction> convertedData = fruitMapper.map(dataFromFile);
 
         processDataService.processData(convertedData);
         String report = reportGenerator.createReport();

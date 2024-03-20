@@ -9,6 +9,7 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,11 @@ class FruitStrategyTest {
                 Operation.RETURN, new IncreaseStrategy(fruitDao)
         );
         fruitStrategy = new FruitStrategy(strategyMap);
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.STORAGE.clear();
     }
 
     @Test

@@ -16,9 +16,7 @@ class CsvReaderTest {
     private static final String NOT_CSV_FILE = "src/test/resources/NotCSV.txt";
     private static final String FILE_WITH_RANDOM_LINES = "src/test/resources/RandomLines.csv";
     private static final Class<FileReadingFailureException> EXPECTED_EXCEPTION_CLASS
-        = FileReadingFailureException.class;
-
-
+            = FileReadingFailureException.class;
     private static CsvReader csvReader;
 
     @BeforeAll
@@ -36,35 +34,34 @@ class CsvReaderTest {
     @Test
     void read_nullInput_throwsException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
-            () -> csvReader.read(null));
+                () -> csvReader.read(null));
     }
 
     @Test
     void read_emptyFile_throwException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
-            () -> csvReader.read(EMPTY_FILE));
+                () -> csvReader.read(EMPTY_FILE));
     }
 
     @Test
     void read_readNonExistentFile_throwException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
-            () -> csvReader.read(NON_EXISTENT_FILE));
+                () -> csvReader.read(NON_EXISTENT_FILE));
     }
 
     @Test
     void read_providedFileExtensionNotCsv_throwException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
-            () -> csvReader.read(NOT_CSV_FILE));
+                () -> csvReader.read(NOT_CSV_FILE));
     }
 
     @Test
     void read_inputFileWithCustomLines_Ok() {
         List<String> actual = csvReader.read(FILE_WITH_RANDOM_LINES);
         List<String> expected = List.of("ugpwrevonrov",
-            "fwpueivwrnv",
-            "vpaerhgp48g  oiwjeiof",
-            "whvwvoiwn");
+                "fwpueivwrnv",
+                "vpaerhgp48g  oiwjeiof",
+                "whvwvoiwn");
         assertEquals(expected, actual);
     }
-
 }

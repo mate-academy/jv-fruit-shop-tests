@@ -2,7 +2,8 @@ package core.basesyntax.service.impl;
 
 import static core.basesyntax.model.Operation.BALANCE;
 import static core.basesyntax.model.Operation.PURCHASE;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.InvalidInputDataException;
 import core.basesyntax.model.FruitTransaction;
@@ -16,7 +17,6 @@ class CsvDataParserTest {
     private static List<String> testList = new ArrayList<>();
     private static List<FruitTransaction> validResultList = new ArrayList<>();
     private static CsvDataParser csvDataParser;
-
 
     static {
         csvDataParser = new CsvDataParser();
@@ -44,15 +44,15 @@ class CsvDataParserTest {
     @Test
     void map_nullInput_throwsException() {
         assertThrows(InvalidInputDataException.class,
-            () -> csvDataParser.map(null));
+                () -> csvDataParser.map(null));
     }
 
     @Test
     void map_incorrectHeaderLinePattern_throwException() {
         testList.add("type,fruit,quantity,condition");
         testList.add("b,fruit,50");
-       assertThrows(InvalidInputDataException.class,
-           () -> csvDataParser.map(testList));
+        assertThrows(InvalidInputDataException.class,
+                () -> csvDataParser.map(testList));
     }
 
     @Test
@@ -61,7 +61,7 @@ class CsvDataParserTest {
         testList.add("b,banana,20");
         testList.add("p,apple,apple,100");
         assertThrows(InvalidInputDataException.class,
-            () -> csvDataParser.map(testList));
+                () -> csvDataParser.map(testList));
     }
 
     @Test
@@ -70,6 +70,6 @@ class CsvDataParserTest {
         testList.add("");
         testList.add("p,apple,apple,100");
         assertThrows(InvalidInputDataException.class,
-            () -> csvDataParser.map(testList));
+                () -> csvDataParser.map(testList));
     }
 }

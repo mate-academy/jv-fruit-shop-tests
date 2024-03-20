@@ -16,7 +16,6 @@ public class CsvDataParser implements FruitTransactionMapper {
     private static final String HEADER_PATTERN = "[a-z]+,[a-z]+,[a-z]+";
     private static final String DATA_LINE_PATTERN = "[a-z],[a-z]+,[0-9]+";
 
-
     @Override
     public List<FruitTransaction> map(List<String> data) {
         validateInputData(data);
@@ -28,7 +27,7 @@ public class CsvDataParser implements FruitTransactionMapper {
             String productType = parseProductType(splitLine);
             int amount = parseAmount(splitLine);
             FruitTransaction newTransaction = new FruitTransaction(operationType, productType,
-                amount);
+                    amount);
             resultList.add(newTransaction);
         }
         return resultList;
@@ -61,7 +60,7 @@ public class CsvDataParser implements FruitTransactionMapper {
 
     private void validateInputData(List<String> data) {
         if (data == null || data.size() < 2 || isInvalidHeaderPattern(data)
-            || isDataLinesPattern(data)) {
+                || isDataLinesPattern(data)) {
             throw new InvalidInputDataException("Input data is invalid or has a wrong pattern");
         }
     }

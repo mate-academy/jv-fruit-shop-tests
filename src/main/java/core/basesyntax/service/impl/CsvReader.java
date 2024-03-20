@@ -10,7 +10,6 @@ import java.util.List;
 public class CsvReader implements DataReader {
     private static final String READING_FAILURE_MESSAGE = "Failed to read from the file";
 
-
     @Override
     public List<String> read(String fileName) {
         try {
@@ -22,12 +21,12 @@ public class CsvReader implements DataReader {
         }
     }
 
-    private boolean inputFileExtensionIsCsv (String fileName) {
+    private boolean inputFileExtensionIsCsv(String fileName) {
         return com.google.common.io.Files.getFileExtension(fileName).equals("csv");
     }
 
     private void checkFileValidity(String fileName) throws IOException {
-        if(fileName == null || !inputFileExtensionIsCsv(fileName)
+        if (fileName == null || !inputFileExtensionIsCsv(fileName)
                             || Files.size(Paths.get(fileName)) == 0) {
             throw new IOException();
         }

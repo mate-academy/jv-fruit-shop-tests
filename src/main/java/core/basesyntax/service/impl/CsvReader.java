@@ -14,8 +14,8 @@ public class CsvReader implements DataReader {
     @Override
     public List<String> read(String fileName) {
         try {
-            var path = Paths.get(fileName);
             checkFileValidity(fileName);
+            var path = Paths.get(fileName);
             return Files.readAllLines(path);
         } catch (IOException e) {
             throw new FileReadingFailureException(READING_FAILURE_MESSAGE + fileName, e);

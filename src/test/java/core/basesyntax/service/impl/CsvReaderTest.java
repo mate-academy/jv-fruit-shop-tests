@@ -27,20 +27,26 @@ class CsvReaderTest {
     }
 
     @Test
-    void read_AllValidConditions_Ok() {
+    void read_allValidConditions_Ok() {
         List<String> actual = csvReader.read(ALL_VALID_INPUT_FILE);
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "p,potato,150");
         assertIterableEquals(expected, actual);
     }
 
     @Test
-    void read_EmptyFile_throwException() {
+    void read_nullInput_throwsException() {
+        assertThrows(EXPECTED_EXCEPTION_CLASS,
+            () -> csvReader.read(null));
+    }
+
+    @Test
+    void read_emptyFile_throwException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
             () -> csvReader.read(EMPTY_FILE));
     }
 
     @Test
-    void read_ReadNonExistentFile_throwException() {
+    void read_readNonExistentFile_throwException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
             () -> csvReader.read(NON_EXISTENT_FILE));
     }

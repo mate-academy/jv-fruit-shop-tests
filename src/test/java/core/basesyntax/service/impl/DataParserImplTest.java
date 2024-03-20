@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DataParserImplTest {
-
     private static DataParser dataParser;
 
     @BeforeEach
@@ -21,7 +20,7 @@ public class DataParserImplTest {
 
     @Test
     void processAll_validInput_ok() {
-        List<String> data = List.of("b,banana,20");
+        List<String> data = List.of("header", "b,banana,20");
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20));
         List<FruitTransaction> actual = dataParser.parseAll(data);
@@ -58,7 +57,7 @@ public class DataParserImplTest {
 
     @Test
     void processAll_wrongInput_notOk() {
-        List<String> data = List.of("wrong");
+        List<String> data = List.of("header", "wrong");
         assertThrows(RuntimeException.class, () ->
                 dataParser.parseAll(data), "Can't process data: wrong");
     }
@@ -71,7 +70,7 @@ public class DataParserImplTest {
 
     @Test
     void processAll_negativeQuantity_notOk() {
-        List<String> data = List.of("b,banana,-5");
+        List<String> data = List.of("header", "b,banana,-5");
         assertThrows(NumberFormatException.class, () ->
                 dataParser.parseAll(data), "Quantity can't be less than 0, but was: -5");
     }

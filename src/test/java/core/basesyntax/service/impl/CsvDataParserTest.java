@@ -33,6 +33,7 @@ class CsvDataParserTest {
     void clearTestList() {
         testList.clear();
     }
+
     @Test
     void map_allValidConditions_Ok() {
         var expected = validResultList;
@@ -58,6 +59,15 @@ class CsvDataParserTest {
     void map_incorrectDataLinePattern_throwException() {
         testList.add("type,fruit,quantity");
         testList.add("b,banana,20");
+        testList.add("p,apple,apple,100");
+        assertThrows(InvalidInputDataException.class,
+            () -> csvDataParser.map(testList));
+    }
+
+    @Test
+    void map_emptyLineInFile() {
+        testList.add("type,fruit,quantity");
+        testList.add("");
         testList.add("p,apple,apple,100");
         assertThrows(InvalidInputDataException.class,
             () -> csvDataParser.map(testList));

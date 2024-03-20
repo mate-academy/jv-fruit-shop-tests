@@ -1,17 +1,23 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.FileReadingFailureException;
 import java.util.List;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
 class CsvReaderTest {
     private static final String ALL_VALID_INPUT_FILE = "src/test/resources/AllValidInput.csv";
     private static final String EMPTY_FILE = "src/test/resources/Empty.csv";
     private static final String NON_EXISTENT_FILE = "src/test/resources/NoFile.csv";
     private static final String NOT_CSV_FILE = "src/test/resources/NotCSV.txt";
     private static final String FILE_WITH_RANDOM_LINES = "src/test/resources/RandomLines.csv";
+    private static final Class<FileReadingFailureException> EXPECTED_EXCEPTION_CLASS
+        = FileReadingFailureException.class;
+
 
     private static CsvReader csvReader;
 
@@ -29,20 +35,20 @@ class CsvReaderTest {
 
     @Test
     void read_EmptyFile_throwException() {
-        assertThrows(FileReadingFailureException.class,
-                    () -> csvReader.read(EMPTY_FILE));
+        assertThrows(EXPECTED_EXCEPTION_CLASS,
+            () -> csvReader.read(EMPTY_FILE));
     }
 
     @Test
     void read_ReadNonExistentFile_throwException() {
-        assertThrows(FileReadingFailureException.class,
-                    () -> csvReader.read(NON_EXISTENT_FILE));
+        assertThrows(EXPECTED_EXCEPTION_CLASS,
+            () -> csvReader.read(NON_EXISTENT_FILE));
     }
 
     @Test
     void read_providedFileExtensionNotCsv_throwException() {
-        assertThrows(FileReadingFailureException.class,
-                    () -> csvReader.read(NOT_CSV_FILE));
+        assertThrows(EXPECTED_EXCEPTION_CLASS,
+            () -> csvReader.read(NOT_CSV_FILE));
     }
 
     @Test

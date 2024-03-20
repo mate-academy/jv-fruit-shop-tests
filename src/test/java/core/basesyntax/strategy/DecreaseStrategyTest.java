@@ -8,6 +8,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,11 @@ class DecreaseStrategyTest {
     @BeforeEach
     void setUp() {
         operationHandler = new DecreaseStrategy(new FruitDaoImpl());
+    }
+
+    @AfterEach
+    void tearDown() {
+        Storage.STORAGE.clear();
     }
 
     @Test

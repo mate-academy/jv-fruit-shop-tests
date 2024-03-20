@@ -19,7 +19,8 @@ class SupplyOperationTest {
     void setUp() {
         operationHandler = new SupplyOperation();
         validData = new FruitTransaction(Operation.SUPPLY, APPLE_KEY, 10);
-        inValidData = new FruitTransaction(Operation.SUPPLY, APPLE_KEY, -6);
+        inValidData = new FruitTransaction(Operation.SUPPLY, APPLE_KEY, -15);
+        Storage.fruitsStorage.clear();
     }
 
     @Test
@@ -31,6 +32,7 @@ class SupplyOperationTest {
 
     @Test
     void operationProcess_quantityLessThanZero_notOk() {
+        Storage.fruitsStorage.put(APPLE_KEY, 5);
         RuntimeException expectedMessage = assertThrows(RuntimeException.class,
                 () -> operationHandler.operationProcess(inValidData));
         assertEquals("Can't add negative quantity of fruits", expectedMessage.getMessage());

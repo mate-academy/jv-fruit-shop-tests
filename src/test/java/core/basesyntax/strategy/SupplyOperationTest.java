@@ -30,7 +30,7 @@ class SupplyOperationTest {
     }
 
     @Test
-    void operationProcess_quantityLessTanZero_notOk() {
+    void operationProcess_quantityLessThanZero_notOk() {
         RuntimeException expectedMessage = assertThrows(RuntimeException.class,
                 () -> operationHandler.operationProcess(inValidData));
         assertEquals("Can't add negative quantity of fruits", expectedMessage.getMessage());

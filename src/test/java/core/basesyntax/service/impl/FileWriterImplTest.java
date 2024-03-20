@@ -24,16 +24,12 @@ class FileWriterImplTest {
     }
 
     @AfterEach
-    void tearDown() {
-        try {
-            Files.deleteIfExists(Path.of(REPORT_CSV));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void tearDown() throws IOException {
+        Files.deleteIfExists(Path.of(REPORT_CSV));
     }
 
     @Test
-    void writeReport_ok() {
+    void writeReport_ok() throws IOException {
         String data = """
                 fruit,quantity
                 apple,50
@@ -42,13 +38,7 @@ class FileWriterImplTest {
         fileWriter.write(data, REPORT_CSV);
         File file = new File(REPORT_CSV);
         assertTrue(file.exists());
-
-        List<String> actual;
-        try {
-            actual = Files.readAllLines(Path.of(REPORT_CSV));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        List<String> actual = Files.readAllLines(Path.of(REPORT_CSV));
         List<String> expected = List.of("fruit,quantity", "apple,50", "banana,20");
         assertEquals(expected, actual);
     }

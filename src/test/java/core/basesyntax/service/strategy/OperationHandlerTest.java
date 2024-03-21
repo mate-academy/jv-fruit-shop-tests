@@ -8,6 +8,7 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.repository.StorageRepository;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,11 @@ class OperationHandlerTest {
         transactions.add(new Transaction(Operation.PURCHASE, "banana", 5));
         transactions.add(new Transaction(Operation.SUPPLY, "banana", 50));
         TRANSACTIONS.addAll(transactions);
+    }
+
+    @AfterEach
+    void cleanUp() {
+        repository.getProducts().clear();
     }
 
     @Test

@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitStrategyTest {
+    private static final String BANANA = "banana";
+    private static final String APPLE = "apple";
     private FruitStrategy fruitStrategy;
 
     @BeforeEach
@@ -36,16 +38,16 @@ class FruitStrategyTest {
     @Test
     void processData_validData_ok() {
         List<FruitTransaction> fruitTransactions = List.of(
-                new FruitTransaction(Operation.BALANCE, "banana", 100),
-                new FruitTransaction(Operation.BALANCE, "apple", 80),
-                new FruitTransaction(Operation.PURCHASE, "banana", 10),
-                new FruitTransaction(Operation.SUPPLY, "apple", 75),
-                new FruitTransaction(Operation.RETURN, "banana", 5)
+                new FruitTransaction(Operation.BALANCE, BANANA, 100),
+                new FruitTransaction(Operation.BALANCE, APPLE, 80),
+                new FruitTransaction(Operation.PURCHASE, BANANA, 10),
+                new FruitTransaction(Operation.SUPPLY, APPLE, 75),
+                new FruitTransaction(Operation.RETURN, BANANA, 5)
         );
         fruitStrategy.processData(fruitTransactions);
         Map<String, Integer> actual = Storage.STORAGE;
-        Map<String, Integer> expected = Map.of("apple", 155,
-                "banana", 95);
+        Map<String, Integer> expected = Map.of(APPLE, 155,
+                BANANA, 95);
         assertEquals(expected, actual);
     }
 }

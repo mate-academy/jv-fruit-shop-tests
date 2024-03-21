@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class IncreaseStrategyTest {
+    private static final String BANANA = "banana";
     private OperationHandler operationHandler;
 
     @BeforeEach
@@ -26,10 +27,10 @@ class IncreaseStrategyTest {
 
     @Test
     void apply_validInput_ok() {
-        Storage.STORAGE.put("banana", 30);
-        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, "banana", 10);
+        Storage.STORAGE.put(BANANA, 30);
+        FruitTransaction transaction = new FruitTransaction(Operation.SUPPLY, BANANA, 10);
         operationHandler.apply(transaction);
-        Map<String, Integer> actual = Map.of("banana", 40);
+        Map<String, Integer> actual = Map.of(BANANA, 40);
         Map<String, Integer> expected = Storage.STORAGE;
         assertEquals(actual, expected);
     }

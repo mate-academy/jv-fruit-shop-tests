@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import java.util.List;
 
 public class CsvFileDataParser implements core.basesyntax.service.FileDataParser {
@@ -9,7 +10,8 @@ public class CsvFileDataParser implements core.basesyntax.service.FileDataParser
     private static final int OPERATION_INDEX = 0;
     private static final int QUANTITY_INDEX = 2;
     private static final String REGEX_COMMA_SEPARATOR = ",";
-    public static final String REGEX_INPUT_LINE_VALIDATE = "^[bspr],\\w+,\\d+$";
+    public static final String REGEX_INPUT_LINE_VALIDATE
+            = "^[" + Operation.getAllOperationsCodes() + "],\\w+,\\d+$";
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
@@ -31,7 +33,7 @@ public class CsvFileDataParser implements core.basesyntax.service.FileDataParser
 
     private FruitTransaction create(String[] data) {
         return new FruitTransaction(
-                FruitTransaction.Operation.getOperationByCode(data[OPERATION_INDEX]),
+                Operation.getOperationByCode(data[OPERATION_INDEX]),
                 data[FRUIT_INDEX],
                 Integer.parseInt(data[QUANTITY_INDEX])
         );

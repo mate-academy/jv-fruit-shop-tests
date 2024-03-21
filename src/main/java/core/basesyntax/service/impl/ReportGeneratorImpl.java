@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportGenerator;
+import java.util.Objects;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_HEADER = "fruit,quantity";
@@ -15,6 +16,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport() {
+        Objects.requireNonNull(storageDao);
         StringBuilder report = new StringBuilder(REPORT_HEADER);
         storageDao.getStorage().entrySet().stream()
                 .map(entry -> entry.getKey() + COMMA_SEPARATOR + entry.getValue())

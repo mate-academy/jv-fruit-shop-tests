@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
-    private final FileReader fileReader = new CsvFileReader();
+    private static final FileReader fileReader = new CsvFileReader();
 
     @Test
     void readData_FilePathIsNull_notOk() {
@@ -18,7 +18,7 @@ class CsvFileReaderTest {
     }
 
     @Test
-    void readData_InvalidFilePath_notOk() {
+    void readData_invalidFilePath_notOk() {
         String pathToFile = "src/test/resources/non_existent_file.csv";
         ReadFromFileException expected = assertThrows(ReadFromFileException.class,
                 () -> fileReader.readData(pathToFile));
@@ -27,14 +27,14 @@ class CsvFileReaderTest {
     }
 
     @Test
-    void readData_FileIsEmpty_Ok() {
+    void readData_fileIsEmpty_Ok() {
         String pathToFile = "src/test/resources/empty_file.csv";
         List<String> actual = fileReader.readData(pathToFile);
         assertTrue(actual.isEmpty());
     }
 
     @Test
-    void readData_ReturnsListOfLinesFromInputFile_Ok() {
+    void readData_returnsListOfLinesFromInputFile_Ok() {
         String pathToFile = "src/test/resources/valid_input.csv";
         List<String> expected = List.of(
                 "type,fruit,quantity",

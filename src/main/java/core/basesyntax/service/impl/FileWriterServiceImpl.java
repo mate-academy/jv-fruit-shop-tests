@@ -9,6 +9,9 @@ import java.io.IOException;
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String toFile, String infoToWrite) {
+        if (infoToWrite.isEmpty()) {
+            throw new IllegalArgumentException("Input String cannot be empty");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
             bufferedWriter.write(infoToWrite);
         } catch (IOException e) {

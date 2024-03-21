@@ -46,4 +46,11 @@ public class FileWriterServiceImplTest {
                     + PATH_TO_FILE_OK);
         }
     }
+
+    @Test
+    void writeToFile_emptyStringInput_notOk() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            fileWriterService.writeToFile(PATH_TO_FILE_OK, "");
+        }, "Expected " + IllegalArgumentException.class.getName() + " but wasn't!");
+    }
 }

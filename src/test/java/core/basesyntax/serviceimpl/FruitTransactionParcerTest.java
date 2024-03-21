@@ -1,6 +1,7 @@
 package core.basesyntax.serviceimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.FruitTransaction;
@@ -44,14 +45,14 @@ public class FruitTransactionParcerTest {
     }
 
     @Test
-    public void parse_emptyInput_notOk() {
+    void parse_emptyInput_notOk() {
         List<FruitTransaction> fruitTransactions
                 = dataParserService.parseFruitTransactions(new ArrayList<>());
         assertEquals(0, fruitTransactions.size());
     }
 
     @Test
-    public void parse_correctTransaction_Ok() {
+    void parse_correctTransaction_Ok() {
         List<FruitTransaction> actualTransactions
                 = dataParserService.parseFruitTransactions(stringList);
         assertEquals(fruitTransactions.size(), actualTransactions.size());
@@ -59,5 +60,12 @@ public class FruitTransactionParcerTest {
         List<FruitTransaction> actualFruitTransaction
                 = dataParserService.parseFruitTransactions(stringList);
         assertEquals(fruitTransactions, actualFruitTransaction);
+    }
+
+    @Test
+    public void parse_nullInput_notOk() {
+        assertThrows(NullPointerException.class, () -> {
+            dataParserService.parseFruitTransactions(null);
+        });
     }
 }

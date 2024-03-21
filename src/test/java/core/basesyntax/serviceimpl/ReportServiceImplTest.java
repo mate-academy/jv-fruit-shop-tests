@@ -1,11 +1,14 @@
 package core.basesyntax.serviceimpl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ReportServiceImplTest {
     private static final String CORRECT_HEADER = "fruit,quantity";
@@ -25,13 +28,13 @@ public class ReportServiceImplTest {
     }
 
     @Test
-    void createReport_ValidData_ok() {
+    void createReport_ValidData_Ok() {
         String actualReport = reportService.generateReport(Storage.fruits);
         assertEquals(EXPECTED_REPORT, actualReport);
     }
 
     @Test
-    void createReport_HeaderInReport_ok() {
+    void createReport_HeaderInReport_Ok() {
         String[] lines = reportService.generateReport(Storage.fruits).split(LINE_SEPARATOR);
         String expected = CORRECT_HEADER;
         String actual = lines[HEADER_LINE_INDEX];

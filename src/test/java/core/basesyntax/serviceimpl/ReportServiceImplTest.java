@@ -1,14 +1,11 @@
 package core.basesyntax.serviceimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Collections;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ReportServiceImplTest {
     private static final String CORRECT_HEADER = "fruit,quantity";

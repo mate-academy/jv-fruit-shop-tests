@@ -4,6 +4,7 @@ import core.basesyntax.exception.FileReadingFailureException;
 import core.basesyntax.service.DataReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class CsvReader implements DataReader {
     public List<String> read(String fileName) {
         try {
             checkFileValidity(fileName);
-            var path = Paths.get(fileName);
+            Path path = Paths.get(fileName);
             return Files.readAllLines(path);
         } catch (IOException e) {
             throw new FileReadingFailureException(READING_FAILURE_MESSAGE + fileName, e);

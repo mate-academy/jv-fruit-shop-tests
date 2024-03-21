@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidInputDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.HandlerStrategy;
@@ -14,8 +15,15 @@ public class OperationProcessorImpl implements TransactionProcessor {
     }
 
     public void process(List<FruitTransaction> list) {
+        checkInputListValidity(list);
         for (FruitTransaction transaction : list) {
             processSingleTransaction(transaction);
+        }
+    }
+
+    private void checkInputListValidity(List<FruitTransaction> list) {
+        if (list == null || list.isEmpty()) {
+            throw new InvalidInputDataException("The list is null or empty");
         }
     }
 

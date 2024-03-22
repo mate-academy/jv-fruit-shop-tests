@@ -7,7 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Product;
 import core.basesyntax.service.RecordDataManipulation;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReturnOperationTest {
@@ -23,7 +23,7 @@ class ReturnOperationTest {
     private final Storage storage = Storage.getInstance();
     private final RecordDataManipulation operation = new ReturnOperation();
 
-    @AfterEach
+    @BeforeEach
     void tearDown() {
         storage.getStorage().clear();
     }
@@ -31,9 +31,11 @@ class ReturnOperationTest {
     @Test
     void operate_StorageWithExistingDataIsUpdatedWithSameProduct_ok() {
         storage.getStorage().put(FIRST_PRODUCT_NAME, firstProduct);
+
         operation.operate(firstProduct);
-        Product expected = new Fruit(FIRST_PRODUCT_NAME, AMOUNT * 2);
+
         Product actual = storage.getStorage().get(FIRST_PRODUCT_NAME);
+        Product expected = new Fruit(FIRST_PRODUCT_NAME, AMOUNT * 2);
         assertEquals(expected, actual);
     }
 
@@ -42,30 +44,35 @@ class ReturnOperationTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> operation.operate(firstProduct));
-        String expected = PRODUCT_NOT_FOUND_IN_DB_MSG + FIRST_PRODUCT_NAME;
+
         String actual = exception.getMessage();
+        String expected = PRODUCT_NOT_FOUND_IN_DB_MSG + FIRST_PRODUCT_NAME;
         assertEquals(expected, actual);
     }
 
     @Test
     void operate_FilledStorageIsUpdatedWithNewProduct_notOk() {
         storage.getStorage().put(FIRST_PRODUCT_NAME, firstProduct);
+
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> operation.operate(secondProduct));
-        String expected = PRODUCT_NOT_FOUND_IN_DB_MSG + SECOND_PRODUCT_NAME;
+
         String actual = exception.getMessage();
+        String expected = PRODUCT_NOT_FOUND_IN_DB_MSG + SECOND_PRODUCT_NAME;
         assertEquals(expected, actual);
     }
 
     @Test
     void operate_ProductCountLessThenZero_notOk() {
         Product productCountLessThenZero = new Fruit(FIRST_PRODUCT_NAME, -1);
+
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> operation.operate(productCountLessThenZero));
-        String expected = COUNT_CANNOT_BE_NEGATIVE_MSG + FIRST_PRODUCT_NAME;
+
         String actual = exception.getMessage();
+        String expected = COUNT_CANNOT_BE_NEGATIVE_MSG + FIRST_PRODUCT_NAME;
         assertEquals(expected, actual);
     }
 }

@@ -29,7 +29,9 @@ class ReaderImplTest {
     @Test
     void readFromFile_fromExistingFile_ok() {
         writeToFile(DATA);
+
         List<String> actualData = reader.readFromFile(TEST_FILE);
+
         assertLinesMatch(List.of(DATA), actualData);
     }
 
@@ -38,6 +40,7 @@ class ReaderImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> reader.readFromFile(TEST_FILE));
+
         String expectedMessage = FILE_IS_EMPTY_MSG;
         assertEquals(expectedMessage, exception.getMessage());
     }
@@ -47,6 +50,7 @@ class ReaderImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> reader.readFromFile(NOT_EXISTING_FILE));
+
         String expectedMessage = CAN_T_READ_FROM_FILE_MSG + NOT_EXISTING_FILE;
         assertEquals(expectedMessage, exception.getMessage());
     }
@@ -56,6 +60,7 @@ class ReaderImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> reader.readFromFile(null));
+
         assertEquals(PATH_TO_FILE_IS_EMPTY_MSG, exception.getMessage());
     }
 
@@ -64,6 +69,7 @@ class ReaderImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> reader.readFromFile(EMPTY_STRING));
+
         assertEquals(PATH_TO_FILE_IS_EMPTY_MSG, exception.getMessage());
     }
 

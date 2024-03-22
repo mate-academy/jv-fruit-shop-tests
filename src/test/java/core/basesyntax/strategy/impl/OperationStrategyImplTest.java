@@ -26,35 +26,40 @@ class OperationStrategyImplTest {
 
     @Test
     void get_ByOperationTypeBalance_ok() {
-        var expected = BalanceOperation.class;
         var actual = strategy.get(Operation.BALANCE).getClass();
+
+        var expected = BalanceOperation.class;
         assertEquals(expected, actual);
     }
 
     @Test
     void get_ByOperationTypeReturn_ok() {
-        var expected = ReturnOperation.class;
         var actual = strategy.get(Operation.RETURN).getClass();
+
+        var expected = ReturnOperation.class;
         assertEquals(expected, actual);
     }
 
     @Test
     void get_ByOperationTypePurchase_ok() {
-        var expected = PurchaseOperation.class;
         var actual = strategy.get(Operation.PURCHASE).getClass();
+
+        var expected = PurchaseOperation.class;
         assertEquals(expected, actual);
     }
 
     @Test
     void get_ByOperationTypeSupply_ok() {
-        var expected = SupplyOperation.class;
         var actual = strategy.get(Operation.SUPPLY).getClass();
+
+        var expected = SupplyOperation.class;
         assertEquals(expected, actual);
     }
 
     @Test
     void get_fromEmptyConstructor_ok() {
         var actual = new OperationStrategyImpl().get(Operation.BALANCE).getClass();
+
         var expected = strategy.get(Operation.BALANCE).getClass();
         assertEquals(expected, actual);
     }

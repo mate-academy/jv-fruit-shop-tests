@@ -7,7 +7,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Product;
 import core.basesyntax.service.RecordDataManipulation;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationTest {
@@ -18,7 +18,7 @@ class BalanceOperationTest {
     private final Storage storage = Storage.getInstance();
     private final RecordDataManipulation operation = new BalanceOperation();
 
-    @AfterEach
+    @BeforeEach
     void tearDown() {
         storage.getStorage().clear();
     }
@@ -26,8 +26,9 @@ class BalanceOperationTest {
     @Test
     void operate_EmptyStorageIsUpdatedWithNewProduct_ok() {
         operation.operate(product);
-        Product expected = product;
+
         Product actual = storage.getStorage().get(PRODUCT_NAME);
+        Product expected = product;
         assertEquals(expected, actual);
     }
 
@@ -35,29 +36,35 @@ class BalanceOperationTest {
     void operate_StorageWithZeroCountProductIsUpdatedWithSameProductType_ok() {
         Product zeroCountProduct = new Fruit(PRODUCT_NAME, 0);
         storage.getStorage().put(PRODUCT_NAME, zeroCountProduct);
+
         operation.operate(product);
-        Product expected = product;
+
         Product actual = storage.getStorage().get(PRODUCT_NAME);
+        Product expected = product;
         assertEquals(expected, actual);
     }
 
     @Test
     void operate_FilledStorageIsUpdatedWithSameProduct_Ok() {
         storage.getStorage().put(PRODUCT_NAME, product);
+
         operation.operate(product);
-        Product expected = new Fruit(PRODUCT_NAME, AMOUNT * 2);
+
         Product actual = storage.getStorage().get(PRODUCT_NAME);
+        Product expected = new Fruit(PRODUCT_NAME, AMOUNT * 2);
         assertEquals(expected, actual);
     }
 
     @Test
     void operate_ProductCountLessThenZero_notOk() {
         Product productCountLessThenZero = new Fruit(PRODUCT_NAME, -1);
+
         Exception exception =
                 assertThrows(IllegalArgumentException.class,
                         () -> operation.operate(productCountLessThenZero));
-        String expected = AMOUNT_CANNOT_BE_NEGATIVE + PRODUCT_NAME;
+
         String actual = exception.getMessage();
+        String expected = AMOUNT_CANNOT_BE_NEGATIVE + PRODUCT_NAME;
         assertEquals(expected, actual);
     }
 }

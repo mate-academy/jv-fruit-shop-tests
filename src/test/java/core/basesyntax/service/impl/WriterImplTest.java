@@ -36,27 +36,28 @@ class WriterImplTest {
 
     @Test
     void writeToFolder_toFilledFile_ok() {
-        writeToFile("4,5,6");
-        String expected = DATA;
-        writer.writeToFile(expected, TEST_FILE);
+        writeToFile(DATA);
+
+        writer.writeToFile(DATA, TEST_FILE);
+
         String actual = readFromFile(TEST_FILE);
-        assertEquals(expected, actual);
+        assertEquals(DATA, actual);
     }
 
     @Test
     void writeToFolder_writeToEmptyFile_ok() {
-        String expected = DATA;
-        writer.writeToFile(expected, TEST_FILE);
+        writer.writeToFile(DATA, TEST_FILE);
+
         String actual = readFromFile(TEST_FILE);
-        assertEquals(expected, actual);
+        assertEquals(DATA, actual);
     }
 
     @Test
     void writeToFolder_writeToNotExistingFile_Ok() {
-        String expected = DATA;
-        writer.writeToFile(expected, NOT_EXISTING_FILE);
+        writer.writeToFile(DATA, NOT_EXISTING_FILE);
+
         String actual = readFromFile(NOT_EXISTING_FILE);
-        assertEquals(expected, actual);
+        assertEquals(DATA, actual);
     }
 
     @Test
@@ -64,14 +65,15 @@ class WriterImplTest {
         Exception exception =
                 assertThrows(RuntimeException.class,
                         () -> writer.writeToFile(EMPTY_STRING, TEST_FILE));
+
         assertEquals(REPORT_IS_EMPTY_MSG, exception.getMessage());
     }
 
     @Test
     void writeToFolder_writeNullData_notOk() {
-        Exception exception =
-                assertThrows(RuntimeException.class,
-                    () -> writer.writeToFile(null, TEST_FILE));
+        Exception exception = assertThrows(
+                RuntimeException.class,() -> writer.writeToFile(null, TEST_FILE));
+
         assertEquals(REPORT_IS_EMPTY_MSG, exception.getMessage());
     }
 
@@ -79,14 +81,15 @@ class WriterImplTest {
     void writeToFolder_writeToEmptyPath_notOk() {
         Exception exception = assertThrows(RuntimeException.class,
                 () -> writer.writeToFile(DATA, EMPTY_STRING));
+
         assertEquals(PATH_TO_FILE_IS_EMPTY_MSG, exception.getMessage());
     }
 
     @Test
     void writeToFolder_writeNullPath_notOk() {
-        Exception exception =
-                assertThrows(RuntimeException.class,
-                    () -> writer.writeToFile(DATA,null));
+        Exception exception = assertThrows(
+                RuntimeException.class, () -> writer.writeToFile(DATA,null));
+
         assertEquals(PATH_TO_FILE_IS_EMPTY_MSG, exception.getMessage());
     }
 

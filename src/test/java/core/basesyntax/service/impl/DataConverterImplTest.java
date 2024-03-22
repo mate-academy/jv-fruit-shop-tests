@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class DataConverterImplTest {
-    private static final String COMMA = ",";
+    private static final String SEPARATOR = ",";
     private static final String VALID_TYPE_COLUMN = "type";
     private static final String VALID_PRODUCT_NAME_COLUMN = "fruit";
     private static final String VALID_QUANTITY_COLUMN = "quantity";
@@ -36,42 +36,47 @@ class DataConverterImplTest {
 
     @BeforeAll
     static void setUp() {
-        //Init strategy for tests:
         new RecordMapperStrategyImpl(Map.of(VALID_PRODUCT_NAME_COLUMN, new FruitRecordMapper()));
     }
 
     @Test
     void convert_withValidHeader_ok() {
         String validHeader = VALID_TYPE_COLUMN
-                + COMMA + VALID_PRODUCT_NAME_COLUMN
-                + COMMA + VALID_QUANTITY_COLUMN;
+                + SEPARATOR + VALID_PRODUCT_NAME_COLUMN
+                + SEPARATOR + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(validHeader, VALID_BODY);
+
+        List<Record> actual = converter.convert(data);
+
         List<Record> expected = List.of(
                 new Record(Operation.BALANCE,new Fruit(VALID_PRODUCT_NAME, VALID_PRODUCT_AMOUNT)));
-        List<Record> actual = converter.convert(data);
         assertEquals(expected, actual);
     }
 
     @Test
     void convert_withInvalidType_notOk() {
-        String header = INVALID_TYPE_COLUMN + COMMA
+        String header = INVALID_TYPE_COLUMN + SEPARATOR
                 + VALID_PRODUCT_NAME_COLUMN
-                + COMMA + VALID_QUANTITY_COLUMN;
+                + SEPARATOR + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
+
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
+
         String expectedMessage = INVALID_HEADER_MSG + header;
         assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void converter_withInvalidQuantity_notOk() {
-        String header = VALID_TYPE_COLUMN + COMMA
+        String header = VALID_TYPE_COLUMN + SEPARATOR
                 + VALID_PRODUCT_NAME_COLUMN
-                + COMMA + INVALID_QUANTITY_COLUMN;
+                + SEPARATOR + INVALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
+
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
+
         String expectedMessage = INVALID_HEADER_MSG + header;
         assertEquals(expectedMessage, exception.getMessage());
     }
@@ -79,11 +84,13 @@ class DataConverterImplTest {
     @Test
     void converter_withInvalidProductName_notOk() {
         String header = VALID_TYPE_COLUMN
-                + COMMA + INVALID_PRODUCT_NAME_COLUMN
-                + COMMA + VALID_QUANTITY_COLUMN;
+                + SEPARATOR + INVALID_PRODUCT_NAME_COLUMN
+                + SEPARATOR + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
+
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
+
         String expectedMessage =
                 PRODUCT_TYPE_IS_NOT_SUPPORTED_MSG + INVALID_PRODUCT_NAME_COLUMN;
         assertEquals(expectedMessage, exception.getMessage());
@@ -92,11 +99,13 @@ class DataConverterImplTest {
     @Test
     void converter_withProductNameIsShort_notOk() {
         String header = VALID_TYPE_COLUMN
-                + COMMA + SHORT_PRODUCT_NAME_COLUMN
-                + COMMA + VALID_QUANTITY_COLUMN;
+                + SEPARATOR + SHORT_PRODUCT_NAME_COLUMN
+                + SEPARATOR + VALID_QUANTITY_COLUMN;
         List<String> data = List.of(header, VALID_BODY);
+
         Exception exception =
                 assertThrows(IllegalArgumentException.class, () -> converter.convert(data));
+
         String expectedMessage = PRODUCT_NAME_SHORTER_MSG + header;
         assertEquals(expectedMessage, exception.getMessage());
     }
@@ -104,9 +113,11 @@ class DataConverterImplTest {
     @Test
     void convert_withInvalidNumberOfColumns_notOk() {
         String header = VALID_TYPE_COLUMN
-                + COMMA + VALID_PRODUCT_NAME_COLUMN;
+                + SEPARATOR + VALID_PRODUCT_NAME_COLUMN;
+
         Exception exception =
                 assertThrows(RuntimeException.class, () -> converter.convert(List.of(header)));
+
         String expectedMessage = NUMBER_OF_COLUMNS_IS_INVALID_MSG + header;
         assertEquals(expectedMessage, exception.getMessage());
     }

@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.DataNotFoundException;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionParser;
 import java.util.List;
@@ -16,6 +17,9 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<Transaction> parse(List<String> data) {
+        if (data == null) {
+            throw new DataNotFoundException("Data not found");
+        }
         return data.stream()
                 .skip(HEADER)
                 .map(this::parseTransaction)

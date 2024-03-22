@@ -20,6 +20,10 @@ public class ReportServiceImpl implements ReportService {
         List<String> reportData = new ArrayList<>();
         reportData.add(REPORT_HEADER);
 
+        if (storageService == null) {
+            return reportData;
+        }
+
         for (Map.Entry<String, Integer> entry : storageService.getAll().entrySet()) {
             reportData.add(entry.getKey() + DIVIDER + entry.getValue());
         }

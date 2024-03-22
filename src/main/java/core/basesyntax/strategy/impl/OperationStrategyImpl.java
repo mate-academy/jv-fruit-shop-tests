@@ -14,11 +14,6 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationHandler getHandler(Transaction transaction) {
         String operationCode = transaction.getOperation().getCode();
-        var handler = operations.get(operationCode);
-
-        if (handler == null) {
-            throw new UnsupportedOperationException("Unsupported operation: " + operationCode);
-        }
-        return handler;
+        return operations.get(operationCode);
     }
 }

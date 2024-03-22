@@ -9,6 +9,7 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public void add(String name, Integer quantity) {
+        validateQuantity(quantity);
         storage.getProducts().put(name, quantity);
     }
 
@@ -20,5 +21,13 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public Map<String, Integer> getAll() {
         return storage.getProducts();
+    }
+
+    private static void validateQuantity(Integer quantity) {
+        if (quantity == null || quantity < 0) {
+            throw new IllegalArgumentException(
+                    "Quantity must be a non-negative value, but you provided: " + quantity
+            );
+        }
     }
 }

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.exception.FileReadingFailureException;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvReaderTest {
@@ -30,9 +29,9 @@ class CsvReaderTest {
     void read_inputFileWithCustomLines_Ok() {
         List<String> actual = csvReader.read(FILE_WITH_RANDOM_LINES);
         List<String> expected = List.of("ugpwrevonrov",
-            "fwpueivwrnv",
-            "vpaerhgp48g  oiwjeiof",
-            "whvwvoiwn");
+                "fwpueivwrnv",
+                "vpaerhgp48g  oiwjeiof",
+                "whvwvoiwn");
         assertEquals(expected, actual);
     }
 

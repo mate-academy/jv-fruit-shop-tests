@@ -30,6 +30,7 @@ class OperationProcessorImplTest {
     private static Map<String, Integer> mockStorage = new HashMap<>();
     private static final Class<InvalidInputDataException> EXPECTED_EXCEPTION_CLASS
             = InvalidInputDataException.class;
+
     @BeforeAll
     static void setUp() {
         strategy.fillStrategyMap();

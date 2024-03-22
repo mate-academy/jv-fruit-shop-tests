@@ -14,6 +14,12 @@ import org.junit.jupiter.api.Test;
 class ReportGeneratorImplTest {
     private static final StorageDao storageDao = new StorageDaoImpl();
     private static final ReportGenerator reportGenerator = new ReportGeneratorImpl(storageDao);
+    private static final String REPORT_HEADER = "fruit,quantity";
+    private static final String FRUIT_BANANA = "banana";
+    private static final String FRUIT_APPLE = "apple";
+    private static final String COMMA_SEPARATOR = ",";
+    private static final int BANANA_QUANTITY = 152;
+    private static final int APPLE_QUANTITY = 90;
 
     @BeforeEach
     void setUp() {
@@ -28,21 +34,20 @@ class ReportGeneratorImplTest {
 
     @Test
     void generateReport_storageIsEmpty_Ok() {
-        String expected = "fruit,quantity";
         String actual = reportGenerator.generateReport();
-        assertEquals(expected, actual);
+        assertEquals(REPORT_HEADER, actual);
     }
 
     @Test
     void generateReport_generateReport_Ok() {
         Map<String, Integer> data = Map.of(
-                "banana", 152,
-                "apple", 90
+                FRUIT_BANANA, 152,
+                FRUIT_APPLE, 90
         );
         Storage.fruits.putAll(data);
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,152" + System.lineSeparator()
-                + "apple,90";
+        String expected = REPORT_HEADER + System.lineSeparator()
+                + FRUIT_BANANA + COMMA_SEPARATOR + BANANA_QUANTITY + System.lineSeparator()
+                + FRUIT_APPLE + COMMA_SEPARATOR + APPLE_QUANTITY;
         String actual = reportGenerator.generateReport();
         assertEquals(expected, actual);
     }

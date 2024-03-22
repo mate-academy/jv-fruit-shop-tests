@@ -10,12 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvFileReaderTest {
-    private static final String INPUT_FILE_PATH =
-            "src/test/resources/inputFile.csv";
-    private static final String INCORRECT_FILE_PATH =
-            "src/test/resources/inputFile.txt";
+    private static final String VALID_FILE_PATH =
+            "src/test/resources/input.csv";
+    private static final String NON_EXISTENT_PATH =
+            "invalid/path/to/file";
     private static final String EMPTY_FILE_PATH =
-            "src/test/resources/emptyInputFile.csv";
+            "src/test/resources/empty.csv";
     private FileReaderServ fileReader;
 
     @BeforeEach
@@ -24,22 +24,22 @@ class CsvFileReaderTest {
     }
 
     @Test
-    void read_inputIncorrectFilePath_NotOk() {
+    void read_inputIncorrectFilePath_notOk() {
         assertThrows(RuntimeException.class,
-                () -> fileReader.read(INCORRECT_FILE_PATH));
+                () -> fileReader.read(NON_EXISTENT_PATH));
     }
 
     @Test
-    void read_readAllLinesFromInputFile_Ok() {
-        Collection<String> readLines = fileReader.read(INPUT_FILE_PATH);
-        Path path = Path.of(INPUT_FILE_PATH);
+    void read_readAllLinesFromInputFile_ok() {
+        Collection<String> readLines = fileReader.read(VALID_FILE_PATH);
+        Path path = Path.of(VALID_FILE_PATH);
         assertEquals(9, readLines.size(),
                 "List size is not as expected. Not all data read from file: "
                         + path.getFileName());
     }
 
     @Test
-    void read_readDataFromEmptyInputFile_NotOk() {
+    void read_readDataFromEmptyInputFile_notOk() {
         assertThrows(RuntimeException.class,
                 () -> fileReader.read(EMPTY_FILE_PATH));
     }

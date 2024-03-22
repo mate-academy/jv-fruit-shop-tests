@@ -26,8 +26,9 @@ class ReturnOperationTest {
     void handle_validTransaction_Ok() {
         storageService.add(FRUIT_NAME, INITIAL_QUANTITY);
         Transaction transaction = new Transaction(OPERATION_CODE, FRUIT_NAME, QUANTITY);
-        returnOperation.handle(transaction);
         int expected = INITIAL_QUANTITY + QUANTITY;
+
+        returnOperation.handle(transaction);
         assertEquals(expected, storageService.get(FRUIT_NAME));
     }
 }

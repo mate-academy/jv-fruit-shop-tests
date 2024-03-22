@@ -26,8 +26,9 @@ class SupplyOperationTest {
     void handle_validTransaction_Ok() {
         storageService.add(FRUIT_NAME, INITIAL_QUANTITY);
         Transaction transaction = new Transaction(OPERATION_CODE, FRUIT_NAME, QUANTITY);
-        supplyOperation.handle(transaction);
         int expected = INITIAL_QUANTITY + QUANTITY;
+
+        supplyOperation.handle(transaction);
         assertEquals(expected, storageService.get(FRUIT_NAME));
     }
 }

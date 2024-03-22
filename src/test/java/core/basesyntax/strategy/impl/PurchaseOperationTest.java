@@ -37,11 +37,11 @@ class PurchaseOperationTest {
     void handle_invalidTransaction_NotOk() {
         storageService.add(FRUIT_NAME, QUANTITY);
         Transaction transaction = new Transaction(OPERATION_CODE, FRUIT_NAME, INITIAL_QUANTITY);
-        var exception = assertThrows(RuntimeException.class, () ->
-                purchaseOperation.handle(transaction));
-
         String expected = "Insufficient quantity in stock. Cannot purchase "
                 + INITIAL_QUANTITY + " items when only " + QUANTITY + " items are available.";
+
+        var exception = assertThrows(RuntimeException.class, () ->
+                purchaseOperation.handle(transaction));
         assertEquals(expected, exception.getMessage());
     }
 }

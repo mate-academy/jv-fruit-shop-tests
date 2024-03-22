@@ -23,6 +23,7 @@ class WriterServiceImplTest {
     @Test
     void writeToFile_validReport_Ok() {
         writerService.writeToFile(VALID_REPORT, REPORT_PATH);
+
         List<String> actual = readerService.readFromFile(REPORT_PATH);
         assertEquals(VALID_REPORT, actual);
     }
@@ -30,6 +31,7 @@ class WriterServiceImplTest {
     @Test
     void writeToFile_EmptyReport_Ok() {
         writerService.writeToFile(EMPTY_REPORT, REPORT_PATH);
+
         List<String> actual = readerService.readFromFile(REPORT_PATH);
         assertEquals(EMPTY_REPORT, actual);
     }

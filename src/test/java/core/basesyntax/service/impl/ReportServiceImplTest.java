@@ -43,7 +43,7 @@ class ReportServiceImplTest {
     }
 
     @Test
-    void generateReport_NullStorageInstance_NotOk() {
+    void generateReport_NullStorageInstance_Ok() {
         reportService = new ReportServiceImpl(null);
 
         List<String> actualReport = reportService.generateReport();

@@ -24,6 +24,7 @@ class BalanceOperationTest {
     @Test
     void handle_validTransaction_Ok() {
         Transaction transaction = new Transaction(OPERATION_CODE, FRUIT_NAME, QUANTITY);
+
         balanceOperation.handle(transaction);
         assertEquals(QUANTITY, storageService.get(FRUIT_NAME));
     }

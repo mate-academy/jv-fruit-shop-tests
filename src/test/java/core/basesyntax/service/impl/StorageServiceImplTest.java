@@ -36,6 +36,7 @@ class StorageServiceImplTest {
     @Test
     void add_NegativeQuantityToStorage_NotOk() {
         String expectedMessage = QUANTITY_ERROR_MESSAGE + NEGATIVE_QUANTITY;
+
         var exception = assertThrows(IllegalArgumentException.class, () ->
                 storageService.add(BANANA, NEGATIVE_QUANTITY));
         assertEquals(expectedMessage, exception.getMessage());
@@ -44,20 +45,24 @@ class StorageServiceImplTest {
     @Test
     void add_ExistingKeyToStorage_Ok() {
         int expectedQuantity = 25;
+
         storageService.add(BANANA, BANANA_QUANTITY);
         storageService.add(BANANA, expectedQuantity);
+
         assertEquals(expectedQuantity, storageService.get(BANANA));
     }
 
     @Test
     void add_NullFruitNameToStorage_Ok() {
         storageService.add(null, BANANA_QUANTITY);
+
         assertEquals(BANANA_QUANTITY, storageService.get(null));
     }
 
     @Test
     void add_NullQuantityToStorage_NotOk() {
         String expectedMessage = QUANTITY_ERROR_MESSAGE + null;
+
         var exception = assertThrows(IllegalArgumentException.class, () ->
                 storageService.add(BANANA, null));
         assertEquals(expectedMessage, exception.getMessage());
@@ -67,6 +72,7 @@ class StorageServiceImplTest {
     void get_ValidDataFromStorage_Ok() {
         storageService.add(BANANA, BANANA_QUANTITY);
         storageService.add(APPLE, APPLE_QUANTITY);
+
         assertEquals(BANANA_QUANTITY, storageService.get(BANANA));
         assertEquals(APPLE_QUANTITY, storageService.get(APPLE));
     }
@@ -94,6 +100,7 @@ class StorageServiceImplTest {
     @Test
     void getAll_EmptyDataFromStorage_Ok() {
         Map<String, Integer> allProducts = storageService.getAll();
+
         assertTrue(allProducts.isEmpty());
     }
 }

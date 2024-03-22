@@ -31,6 +31,7 @@ public class OperationStrategyImplTest {
         Transaction transaction = new Transaction("b", FRUIT_NAME, QUANTITY);
         var expected = operations.get("b");
         var actual = operationStrategy.getHandler(transaction);
+
         assertEquals(expected, actual);
     }
 }

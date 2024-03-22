@@ -23,7 +23,7 @@ class ReaderServiceImplTest {
     }
 
     @Test
-    public void readFromFile_fileNotFound_notOk() {
+     void readFromFile_fileNotFound_notOk() {
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> readerService.readFromFile(INVALID_PATH_TO_FILE));
         assertEquals("Can't find file with path" + INVALID_PATH_TO_FILE, exception.getMessage());
@@ -33,7 +33,9 @@ class ReaderServiceImplTest {
     void readFrom_fileExist_ok() throws IOException {
         List<String> expected = new ArrayList<>();
         Files.write(Path.of(VALID_PATH_TO_FILE),expected);
+
         List<String> actualResult = readerService.readFromFile(VALID_PATH_TO_FILE);
+
         assertEquals(expected, actualResult);
     }
 }

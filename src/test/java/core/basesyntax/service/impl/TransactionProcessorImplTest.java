@@ -15,30 +15,23 @@ import core.basesyntax.strategy.SupplyOperation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionProcessorImplTest {
     private static final String KEY_TO_STORAGE_MAP = "apple";
 
-    private static StrategyService strategyService;
-    private static TransactionProcessor transactionProcessor;
-
-    @BeforeAll
-    static void beforeAll() {
-        strategyService = new StrategyServiceImpl(
-                Map.of(Operation.BALANCE, new BalanceOperation(),
-                        Operation.PURCHASE, new PurchaseOperation(),
-                        Operation.SUPPLY, new SupplyOperation(),
-                        Operation.RETURN, new ReturnOperation()));
-        transactionProcessor = new TransactionProcessorImpl(strategyService);
-    }
+    private TransactionProcessor transactionProcessor;
+    private StrategyService strategyService = new StrategyServiceImpl(
+            Map.of(Operation.BALANCE, new BalanceOperation(),
+                    Operation.PURCHASE, new PurchaseOperation(),
+                    Operation.SUPPLY, new SupplyOperation(),
+                    Operation.RETURN, new ReturnOperation()));
 
     @BeforeEach
     void setUp() {
+        transactionProcessor = new TransactionProcessorImpl(strategyService);
         Storage.fruitsStorage.clear();
-
     }
 
     @Test

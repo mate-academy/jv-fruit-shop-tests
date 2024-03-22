@@ -19,10 +19,12 @@ class ReportServiceImplTest {
     @Test
     void createReport_ValidData_ok() {
         Storage.fruitsStorage.put("apple", 10);
-        StringBuilder reportBuilder =
+
+        StringBuilder expectedBuilder =
                 new StringBuilder("fruit,quantity" + System.lineSeparator());
-        reportBuilder.append("apple,10").append(System.lineSeparator());
-        assertEquals(reportBuilder.toString(), reportService.createReport());
+        expectedBuilder.append("apple,10").append(System.lineSeparator());
+
+        assertEquals(expectedBuilder.toString(), reportService.createReport());
     }
 
     @Test

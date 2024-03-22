@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +20,6 @@ class PurchaseOperationTest {
     void setUp() {
         operationHandler = new PurchaseOperation();
         validData = new FruitTransaction(Operation.PURCHASE, APPLE_KEY, 10);
-    }
-
-    @AfterEach
-    void tearDown() {
         Storage.fruitsStorage.clear();
     }
 

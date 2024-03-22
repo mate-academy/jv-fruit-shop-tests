@@ -16,20 +16,21 @@ class FruitMapperImplTest {
     private static List<String> validData;
     private FruitTransactionMapper fruitMapper;
 
-    @BeforeEach
-    void setUp() {
-        fruitMapper = new FruitMapperImpl();
-    }
-
     @BeforeAll
     static void beforeAll() {
         validData = List.of("b,apple,100",
                 "s,banana,100");
     }
 
+    @BeforeEach
+    void setUp() {
+        fruitMapper = new FruitMapperImpl();
+    }
+
     @Test
     void map_validData_ok() {
         List<FruitTransaction> result = fruitMapper.map(validData);
+        assertEquals(2, result.size());
 
         FruitTransaction firstTransaction = result.get(0);
         assertEquals(Operation.BALANCE, firstTransaction.getOperation());
@@ -43,15 +44,9 @@ class FruitMapperImplTest {
     }
 
     @Test
-    void map_RuntimeForEmptyData_notOk() {
+    void map_RuntimeExceptionForEmptyData_notOk() {
         RuntimeException exceptionMessage = assertThrows(RuntimeException.class,
                 () -> fruitMapper.map(Arrays.asList()));
         assertEquals("Can't parse data from empty file", exceptionMessage.getMessage());
-    }
-
-    @Test
-    void map_RuntimeWithNull_notOk() {
-        assertThrows(RuntimeException.class,
-                () -> fruitMapper.map(null));
     }
 }

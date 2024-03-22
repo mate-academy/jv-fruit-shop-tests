@@ -10,10 +10,10 @@ public class SupplyHandler extends OperationHandler {
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        if (ProductStorage.storage.containsKey(product)) {
-            ProductStorage.storage.put(
-                    product, ProductStorage.storage.get(product) + quantity);
+        if (ProductStorage.STORAGE.containsKey(product)) {
+            ProductStorage.STORAGE.put(
+                    product, ProductStorage.STORAGE.get(product) + quantity);
         }
-        ProductStorage.storage.putIfAbsent(product, quantity);
+        ProductStorage.STORAGE.putIfAbsent(product, quantity);
     }
 }

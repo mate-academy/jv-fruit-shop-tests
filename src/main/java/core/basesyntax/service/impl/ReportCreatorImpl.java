@@ -14,7 +14,7 @@ public class ReportCreatorImpl implements ReportCreator {
     public List<String> create() {
         List<String> reportLines = new ArrayList<>();
         reportLines.add(TITLE);
-        reportLines.addAll(ProductStorage.storage
+        reportLines.addAll(ProductStorage.STORAGE
                 .entrySet()
                 .stream()
                 .map(e -> e.getKey() + COMMA + e.getValue())

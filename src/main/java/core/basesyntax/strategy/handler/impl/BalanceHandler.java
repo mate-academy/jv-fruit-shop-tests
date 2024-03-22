@@ -11,10 +11,10 @@ public class BalanceHandler extends OperationHandler {
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        if (ProductStorage.storage.containsKey(product)) {
+        if (ProductStorage.STORAGE.containsKey(product)) {
             throw new BalanceOperationException("Balance can`t be reassigned! "
                     + "You have duplicate balance operation for product: " + product);
         }
-        ProductStorage.storage.putIfAbsent(product, quantity);
+        ProductStorage.STORAGE.putIfAbsent(product, quantity);
     }
 }

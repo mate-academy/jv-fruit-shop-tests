@@ -11,7 +11,7 @@ public class PurchaseHandler extends OperationHandler {
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        Integer currentBalance = ProductStorage.storage.get(product);
+        Integer currentBalance = ProductStorage.STORAGE.get(product);
         if (currentBalance < quantity) {
             throw new PurchaseOperationException(
                     "Unable to purchase product: " + product
@@ -22,6 +22,6 @@ public class PurchaseHandler extends OperationHandler {
                             + "Purchase quantity: " + quantity
             );
         }
-        ProductStorage.storage.put(product, currentBalance - quantity);
+        ProductStorage.STORAGE.put(product, currentBalance - quantity);
     }
 }

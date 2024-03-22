@@ -11,18 +11,13 @@ public class ReturnHandler extends OperationHandler {
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        Integer currentBalance = ProductStorage.storage.get(product);
-        if (!ProductStorage.storage.containsKey(product)) {
-            throw new ReturnOperationException("Can`t return absent product" + product);
+        if (!ProductStorage.STORAGE.containsKey(product)) {
+            throw new ReturnOperationException("Can't return absent product: " + product);
         }
-        if (currentBalance < quantity) {
-            throw new ReturnOperationException(
-                    "Cannot return more product: " + product
-                            + " than were bought!" + System.lineSeparator()
-                            + "Quantity to return: " + quantity + System.lineSeparator()
-                            + "Currently available balance: " + currentBalance
-            );
+        if (quantity < 0) {
+            throw new ReturnOperationException("Invalid quantity for return: " + quantity);
         }
-        ProductStorage.storage.put(product, currentBalance - quantity);
+        Integer currentBalance = ProductStorage.STORAGE.get(product);
+        ProductStorage.STORAGE.put(product, currentBalance + quantity);
     }
 }

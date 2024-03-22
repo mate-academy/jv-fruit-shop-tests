@@ -33,6 +33,7 @@ class FruitReportGeneratorImplTest {
     void generateReport_emptyInput_throwsException() {
         List<Fruit> fruits = new ArrayList<>();
         String expectedMessage = "Report cannot be generated, because nothing happens";
+
         RuntimeException exception = assertThrows(RuntimeException.class, () ->
                 reportGenerator.generateReport(fruits));
         assertEquals(expectedMessage, exception.getMessage());

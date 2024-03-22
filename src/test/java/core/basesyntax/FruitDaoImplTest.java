@@ -21,12 +21,15 @@ class FruitDaoImplTest {
 
     @BeforeEach
     void setUp() {
+        Storage.getInstance().getStorage().clear();
         fruitDao.add(apple);
     }
 
     @Test
-    void addFruit_notNull_success() {
+    void addFruit_notNullAndValidAdded_success() {
+        Fruit expected = apple;
         assertNotNull(fruitDao.get(APPLE));
+        assertEquals(expected, fruitDao.get(APPLE));
     }
 
     @Test
@@ -49,10 +52,5 @@ class FruitDaoImplTest {
         List<Fruit> fruits = fruitDao.getAll();
         assertEquals(APPLE, fruits.get(0).getFruitName());
         assertEquals(BANANA, fruits.get(1).getFruitName());
-    }
-
-    @AfterEach
-    void tearDown() {
-        Storage.getInstance().getStorage().clear();
     }
 }

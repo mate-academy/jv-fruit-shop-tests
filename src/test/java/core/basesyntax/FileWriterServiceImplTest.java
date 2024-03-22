@@ -14,12 +14,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 class FileWriterServiceImplTest {
+    private static final String invalidPath = "\0invalidPath.txt";
+    private static final String validPath = "TestReport.txt";
+    private static final String testReport = "Sample Report";
     private final WriterService writerService = new FileWriterServiceImpl();
 
     @Test
     void writeToFile_validInput_success(@TempDir Path tempDir) {
-        String testReport = "Sample Report";
-        Path pathToTestReport = tempDir.resolve("TestReport.txt");
+        Path pathToTestReport = tempDir.resolve(validPath);
         writerService.writeToFile(pathToTestReport.toString(), testReport);
         String actualReport = "";
         try {
@@ -33,10 +35,9 @@ class FileWriterServiceImplTest {
 
     @Test
     void writeToFile_invalidPath_throwsException() {
-        String invalidPath = "\0invalidPath.txt";
-        String testReport = "Sample Report";
-
-        assertThrows(RuntimeException.class, () ->
+        String expectedMessage = "Can`t write to file " + invalidPath;
+        RuntimeException e = assertThrows(RuntimeException.class, () ->
                 writerService.writeToFile(invalidPath, testReport));
+        assertEquals(expectedMessage, e.getMessage());
     }
 }

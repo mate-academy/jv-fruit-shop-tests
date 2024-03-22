@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.OperationType;
@@ -12,18 +14,17 @@ import core.basesyntax.service.strategy.ReturnOperationHandler;
 import core.basesyntax.service.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitTransactionProcessorTest {
-    private static FruitTransactionProcessor processor;
-    private static Map<OperationType, OperationHandler<FruitTransaction>> strategyMap;
-    private static FruitTransaction transaction;
     private static final OperationType VALID_OPERATION_TYPE = OperationType.BALANCE;
     private static final String VALID_PRODUCT_TYPE = "apple";
     private static final int VALID_OPERATION_VALUE = 100;
+    private static FruitTransactionProcessor processor;
+    private static Map<OperationType, OperationHandler<FruitTransaction>> strategyMap;
+    private static FruitTransaction transaction;
 
     @BeforeAll
     public static void initAllFields() {
@@ -48,8 +49,8 @@ class FruitTransactionProcessorTest {
         for (int i = 0; i < numberOfAdds; i++) {
             processor.process(transaction);
         }
-        Assertions.assertEquals(transaction.getTransactionValue() * numberOfAdds,
-                StorageDao.storage.get(transaction.getProductType()));
+        assertTrue(transaction.getTransactionValue() * numberOfAdds
+                == StorageDao.storage.get(transaction.getProductType()));
     }
 
     @Test
@@ -57,7 +58,7 @@ class FruitTransactionProcessorTest {
         transaction = null;
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> processor.process(transaction));
-        Assertions.assertEquals("Error: transaction is null!", exception.getMessage());
+        assertEquals("Error: transaction is null!", exception.getMessage());
     }
 
     @Test
@@ -65,7 +66,7 @@ class FruitTransactionProcessorTest {
         transaction.setOperationType(null);
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> processor.process(transaction));
-        Assertions.assertEquals("Error: transaction type is null!", exception.getMessage());
+        assertEquals("Error: transaction type is null!", exception.getMessage());
     }
 
     @Test
@@ -73,7 +74,7 @@ class FruitTransactionProcessorTest {
         transaction.setProductType(null);
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> processor.process(transaction));
-        Assertions.assertEquals("Error: product type is null!", exception.getMessage());
+        assertEquals("Error: product type is null!", exception.getMessage());
     }
 
     @Test
@@ -81,7 +82,7 @@ class FruitTransactionProcessorTest {
         transaction.setTransactionValue(-100);
         Throwable exception = assertThrows(RuntimeException.class,
                 () -> processor.process(transaction));
-        Assertions.assertEquals("Error: transaction value can not be less then zero!",
+        assertEquals("Error: transaction value can not be less then zero!",
                 exception.getMessage());
     }
 }

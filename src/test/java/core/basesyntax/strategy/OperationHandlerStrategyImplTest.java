@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class OperationHandlerStrategyImplTest {
     private OperationHandlerStrategy operationHandlerStrategy;
-    private Map<FruitTransaction.Operation, OperationHandler> strategyMapForTest =
+    private final Map<FruitTransaction.Operation, OperationHandler> strategyMapForTest =
             Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                     FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
                     FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
@@ -21,11 +21,18 @@ class OperationHandlerStrategyImplTest {
     }
 
     @Test
-    void getOperationHandler_returnCorrectOperationHandlerObject_Ok() {
+    void getOperationHandler_returnCorrectOperationHandlerObject_ok() {
         FruitTransaction.Operation supply = FruitTransaction.Operation.SUPPLY;
         Class<? extends OperationHandler> expected = SupplyOperationHandler.class;
         Class<? extends OperationHandler> actual =
                 operationHandlerStrategy.getOperationHandler(supply).getClass();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getOperationHandler_checkCorrectSizeInputMapHandler_ok() {
+        int expected = FruitTransaction.Operation.values().length;
+        int actual = strategyMapForTest.size();
         assertEquals(expected, actual);
     }
 }

@@ -22,11 +22,9 @@ public class FileReaderCsvTest {
     private static final String NULL_QUANTITY_IN_FILE = "src/main/resources/"
             + "exampleWithNullQuantity.csv";
     private static final String NULL_FRUIT_IN_FILE = "src/main/resources/exampleWithNullFruit.csv";
-    private static final String ONLY_BALANCE_FILE = "src/main/resources/exampleWithBalanceOnly.csv";
     private FileReaderCsv fileReaderCsv = new FileReaderCsv();
     private FruitTransactionParserImpl fruitTransactionParser = new FruitTransactionParserImpl();
     private ReportGenerator reportGenerator = new ReportGenerator();
-    private Writer writer = new Writer();
 
     @Test
     void read_validPath_Ok() {

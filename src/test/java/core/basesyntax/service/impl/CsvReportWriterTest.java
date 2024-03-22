@@ -19,11 +19,7 @@ class CsvReportWriterTest {
             apple,22
             cucumber,11
             """;
-    private static DataWriter writer;
-
-    static {
-        writer = new CsvReportWriter();
-    }
+    private static DataWriter writer = new CsvReportWriter();
 
     @BeforeEach
     void createOutputFile() throws IOException {

@@ -18,24 +18,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class OperationProcessorImplTest {
-    private static TransactionProcessor processor;
-    private static HandlerStrategy strategy;
-    private static StorageDao storageDao;
-    private static List<FruitTransaction> transactionList;
-    private static Map<String, Integer> mockStorage;
+    private static StorageDao storageDao = new StorageDaoImpl();
+    private static HandlerStrategy strategy = new HandlerStrategy(storageDao);
+    private static TransactionProcessor processor = new OperationProcessorImpl(strategy);
+
+    private static List<FruitTransaction> transactionList = new ArrayList<>();
+    private static Map<String, Integer> mockStorage = new HashMap<>();
     private static final Class<InvalidInputDataException> EXPECTED_EXCEPTION_CLASS
             = InvalidInputDataException.class;
-
-    static {
-        storageDao = new StorageDaoImpl();
-        strategy = new HandlerStrategy(storageDao);
-        processor = new OperationProcessorImpl(strategy);
-        mockStorage = new HashMap<>();
-
-        transactionList = new ArrayList<>();
+    @BeforeAll
+    static void setUp() {
         strategy.fillStrategyMap();
     }
 

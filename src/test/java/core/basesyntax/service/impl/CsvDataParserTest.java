@@ -16,11 +16,9 @@ class CsvDataParserTest {
     private static List<String> validInputData = new ArrayList<>();
     private static List<String> testList = new ArrayList<>();
     private static List<FruitTransaction> validResultList = new ArrayList<>();
-    private static CsvDataParser csvDataParser;
+    private static CsvDataParser csvDataParser = new CsvDataParser();
 
     static {
-        csvDataParser = new CsvDataParser();
-
         validInputData.add("type,fruit,quantity");
         validInputData.add("b,banana,20");
         validInputData.add("p,apple,100");
@@ -65,7 +63,7 @@ class CsvDataParserTest {
     }
 
     @Test
-    void map_emptyLineInFile() {
+    void map_emptyLineInFile_throwException() {
         testList.add("type,fruit,quantity");
         testList.add("");
         testList.add("p,apple,apple,100");

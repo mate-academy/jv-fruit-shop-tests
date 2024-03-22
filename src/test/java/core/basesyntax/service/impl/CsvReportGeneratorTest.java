@@ -9,13 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CsvReportGeneratorTest {
-    private static ReportGenerator generator;
-    private static StorageDao storageDao;
-
-    static {
-        storageDao = new StorageDaoImpl();
-        generator = new CsvReportGenerator(storageDao);
-    }
+    private static StorageDao storageDao = new StorageDaoImpl();
+    private static ReportGenerator generator = new CsvReportGenerator(storageDao);
 
     @BeforeEach
     void clearStorage() {

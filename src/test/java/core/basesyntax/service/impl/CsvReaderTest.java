@@ -17,18 +17,23 @@ class CsvReaderTest {
     private static final String FILE_WITH_RANDOM_LINES = "src/test/resources/RandomLines.csv";
     private static final Class<FileReadingFailureException> EXPECTED_EXCEPTION_CLASS
             = FileReadingFailureException.class;
-    private static CsvReader csvReader;
-
-    @BeforeAll
-    static void setup() {
-        csvReader = new CsvReader();
-    }
+    private static CsvReader csvReader = new CsvReader();
 
     @Test
     void read_allValidConditions_Ok() {
         List<String> actual = csvReader.read(ALL_VALID_INPUT_FILE);
         List<String> expected = List.of("type,fruit,quantity", "b,banana,20", "p,potato,150");
         assertIterableEquals(expected, actual);
+    }
+
+    @Test
+    void read_inputFileWithCustomLines_Ok() {
+        List<String> actual = csvReader.read(FILE_WITH_RANDOM_LINES);
+        List<String> expected = List.of("ugpwrevonrov",
+            "fwpueivwrnv",
+            "vpaerhgp48g  oiwjeiof",
+            "whvwvoiwn");
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -53,15 +58,5 @@ class CsvReaderTest {
     void read_providedFileExtensionNotCsv_throwException() {
         assertThrows(EXPECTED_EXCEPTION_CLASS,
                 () -> csvReader.read(NOT_CSV_FILE));
-    }
-
-    @Test
-    void read_inputFileWithCustomLines_Ok() {
-        List<String> actual = csvReader.read(FILE_WITH_RANDOM_LINES);
-        List<String> expected = List.of("ugpwrevonrov",
-                "fwpueivwrnv",
-                "vpaerhgp48g  oiwjeiof",
-                "whvwvoiwn");
-        assertEquals(expected, actual);
     }
 }

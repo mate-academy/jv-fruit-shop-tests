@@ -1,0 +1,42 @@
+package core.basesyntax.service.parser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import core.basesyntax.dto.FruitTransactionDto;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+class DataParserImplTest {
+    private final DataParserImpl dataParser = new DataParserImpl();
+
+    @Test
+    void parse_validData_isOk() {
+        List<String> rawData = Arrays.asList(
+                "type,fruit,quantity",
+                "b,banana,20",
+                "r,apple,10"
+        );
+        List<FruitTransactionDto> result = dataParser.parse(rawData);
+        FruitTransactionDto dto1 = result.get(0);
+        assertEquals("b", dto1.getOperationType());
+        assertEquals("banana", dto1.getNameFruit());
+        assertEquals(20, dto1.getQuantity());
+
+        FruitTransactionDto dto2 = result.get(1);
+        assertEquals("r", dto2.getOperationType());
+        assertEquals("apple", dto2.getNameFruit());
+        assertEquals(10, dto2.getQuantity());
+    }
+
+    @Test
+    void parse_emptyData_notOk() {
+        List<String> rawData = new ArrayList<>();
+        assertThrows(RuntimeException.class, () -> dataParser.parse(rawData));
+        String actual = assertThrows(RuntimeException.class, () ->
+                dataParser.parse(rawData)).getMessage();
+        assertEquals("File is empty", actual);
+    }
+}

@@ -27,7 +27,7 @@ class CsvFileWriterTest {
     }
 
     @Test
-    void write_CheckCorrectWriteDataToFile_Ok() {
+    void write_CheckCorrectWriteDataToFile_ok() {
         String pathToWrite = "src/test/resources/write.csv";
         fileWriter.write(dataToWrite, pathToWrite);
         Path path = Path.of(pathToWrite);
@@ -46,14 +46,14 @@ class CsvFileWriterTest {
     }
 
     @Test
-    void write_FilePathIsIncorrect_NotOk() {
+    void write_FilePathIsIncorrect_notOk() {
         String pathToWriteNotOk = "src/test/base/write.csv";
         assertThrows(RuntimeException.class,
                 () -> fileWriter.write(dataToWrite, pathToWriteNotOk));
     }
 
     @Test
-    void write_CheckPresentWriteFile_Ok() {
+    void write_CheckPresentWriteFile_ok() {
         String pathToWrite = "src/test/resources/write.csv";
         fileWriter.write(dataToWrite, pathToWrite);
         assertTrue(Files.exists(Path.of(pathToWrite)),

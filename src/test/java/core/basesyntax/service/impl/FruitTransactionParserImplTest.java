@@ -32,7 +32,7 @@ class FruitTransactionParserImplTest {
     }
 
     @Test
-    void converterToTransactions_checkedCorrectSkipFirstLineInInputList_Ok() {
+    void converterToTransactions_checkedCorrectSkipFirstLineInInputList_ok() {
         String firstLine = "type,fruit,quantity";
         List<FruitTransaction> fruitTransactions
                 = testTransactionParser.converterToTransactions(inputTestList);
@@ -41,14 +41,14 @@ class FruitTransactionParserImplTest {
     }
 
     @Test
-    void converterToTransactions_inputNegativeQuantityPerOperation_NotOk() {
+    void converterToTransactions_inputNegativeQuantityPerOperation_notOk() {
         assertThrows(RuntimeException.class,
                 () -> testTransactionParser
                         .converterToTransactions(inputTestListWithNegativeQuantity));
     }
 
     @Test
-    void converterToTransactions_checkIgnoreSymbolBeforeOperationType_OK() {
+    void converterToTransactions_checkIgnoreSymbolBeforeOperationType_ok() {
         int expectedSize = 8;
         int actualSize = testTransactionParser
                 .converterToTransactions(inputListForOperationTypeTest)
@@ -58,13 +58,13 @@ class FruitTransactionParserImplTest {
     }
 
     @Test
-    void converterToTransactions_checkIncorrectOperationType_NotOk() {
+    void converterToTransactions_checkIncorrectOperationType_notOk() {
         assertThrows(IllegalArgumentException.class, () -> testTransactionParser
                 .converterToTransactions(inputTestListWithIncorrectOperationType));
     }
 
     @Test
-    void converterToTransactions_correctConvertDataToObject_Ok() {
+    void converterToTransactions_correctConvertDataToObject_ok() {
         List<String> inputList =
                 List.of("type,fruit,quantity", "    b,banana,20");
         List<FruitTransaction> fruitTransactions

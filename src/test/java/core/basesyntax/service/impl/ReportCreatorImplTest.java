@@ -20,7 +20,7 @@ class ReportCreatorImplTest {
     }
 
     @Test
-    void reportCreator_CreateCorrectReportData_Ok() {
+    void reportCreator_CreateCorrectReportData_ok() {
         String expected = "\tfruit,quantity"
                 + System.lineSeparator()
                 + "\tbanana,152"

@@ -57,7 +57,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void process_checkQuantityFruitInStorageForBalanceOperation_Ok() {
+    void process_checkQuantityFruitInStorageForBalanceOperation_ok() {
         testProcessor.process(listForBalance, strategyMapForTest);
         Integer expectedBananaQuantity = 20;
         Integer expectedAppleQuantity = 100;
@@ -72,7 +72,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void process_checkQuantityFruitInStorageForSupplyOperation_Ok() {
+    void process_checkQuantityFruitInStorageForSupplyOperation_ok() {
         testProcessor.process(listForSupply, strategyMapForTest);
         Integer expectedBananaQuantity = 120;
         Integer actualBananaQuantity = fruitTransactionStorage.get("banana");
@@ -82,7 +82,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void process_checkQuantityFruitInStorageForPurchaseOperation_Ok() {
+    void process_checkQuantityFruitInStorageForPurchaseOperation_ok() {
         testProcessor.process(listForPurchase, strategyMapForTest);
         Integer expectedBananaQuantity = 7;
         Integer actualBananaQuantity = fruitTransactionStorage.get("banana");
@@ -92,7 +92,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void process_checkEnoughFruitForPurchaseOperation_NotOk() {
+    void process_checkEnoughFruitForPurchaseOperation_notOk() {
         assertThrows(RuntimeException.class,
                 () -> testProcessor.process(listForPurchaseMoreQuantity, strategyMapForTest),
                 "The class must contain a checking for enough fruit"
@@ -100,7 +100,7 @@ class FruitTransactionProcessorImplTest {
     }
 
     @Test
-    void process_checkQuantityFruitInStorageForReturnOperation_Ok() {
+    void process_checkQuantityFruitInStorageForReturnOperation_ok() {
         testProcessor.process(listForReturn, strategyMapForTest);
         Integer expectedBananaQuantity = 110;
         Integer actualBananaQuantity = fruitTransactionStorage.get("apple");

@@ -6,6 +6,7 @@ import core.basesyntax.enums.Operation;
 import core.basesyntax.exception.PurchaseOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +15,15 @@ public class PurchaseHandlerTest {
     private static final int INITIAL_QUANTITY = 15;
     private static final int VALID_PURCHASE_QUANTITY = 5;
     private static final int EXCESSIVE_PURCHASE_QUANTITY = 20;
+    private static OperationHandler purchaseHandler;
 
-    private OperationHandler purchaseHandler;
+    @BeforeAll
+    static void beforeAll() {
+        purchaseHandler = new PurchaseHandler();
+    }
 
     @BeforeEach
     public void setUp() {
-        purchaseHandler = new PurchaseHandler();
         ProductStorage.STORAGE.clear();
         ProductStorage.STORAGE.put(TEST_PRODUCT, INITIAL_QUANTITY);
     }

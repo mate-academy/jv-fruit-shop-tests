@@ -6,6 +6,7 @@ import core.basesyntax.enums.Operation;
 import core.basesyntax.exception.BalanceOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +14,15 @@ public class BalanceHandlerTest {
     private static final String TEST_PRODUCT = "apple";
     private static final int TEST_QUANTITY = 10;
     private static final int EXISTING_QUANTITY = 5;
-    private OperationHandler balanceHandler;
+    private static OperationHandler balanceHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        balanceHandler = new BalanceHandler();
+    }
 
     @BeforeEach
     public void setUp() {
-        balanceHandler = new BalanceHandler();
         ProductStorage.STORAGE.clear();
     }
 

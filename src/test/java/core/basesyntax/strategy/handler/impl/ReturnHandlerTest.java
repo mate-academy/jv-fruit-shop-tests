@@ -6,6 +6,7 @@ import core.basesyntax.enums.Operation;
 import core.basesyntax.exception.ReturnOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +16,15 @@ public class ReturnHandlerTest {
     private static final int RETURN_QUANTITY = 5;
     private static final int NEGATIVE_QUANTITY = -5;
     private static final String ABSENT_PRODUCT = "banana";
+    private static OperationHandler returnHandler;
 
-    private OperationHandler returnHandler;
+    @BeforeAll
+    static void beforeAll() {
+        returnHandler = new ReturnHandler();
+    }
 
     @BeforeEach
     public void setUp() {
-        returnHandler = new ReturnHandler();
         ProductStorage.STORAGE.clear();
         ProductStorage.STORAGE.put(TEST_PRODUCT, INITIAL_QUANTITY);
     }

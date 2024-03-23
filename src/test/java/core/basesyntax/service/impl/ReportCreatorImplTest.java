@@ -4,7 +4,7 @@ import core.basesyntax.db.ProductStorage;
 import core.basesyntax.service.ReportCreator;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ReportCreatorImplTest {
@@ -14,10 +14,10 @@ public class ReportCreatorImplTest {
             "banana,20",
             "orange,5"
     );
-    private ReportCreator reportCreator;
+    private static ReportCreator reportCreator;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reportCreator = new ReportCreatorImpl();
     }
 

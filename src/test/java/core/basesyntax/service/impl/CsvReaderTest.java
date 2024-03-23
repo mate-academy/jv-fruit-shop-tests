@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -22,10 +22,10 @@ public class CsvReaderTest {
             "s,banana,20",
             "p,orange,5"
     );
-    private FileReader csvReader;
+    private static FileReader csvReader;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         csvReader = new CsvReader();
     }
 

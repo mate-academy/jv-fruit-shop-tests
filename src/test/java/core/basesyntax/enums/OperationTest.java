@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 public class OperationTest {
 
     public static final String[] VALID_CODES = {"b", "s", "p", "r"};
-    public static final Operation[] EXPECTED_OPERATIONS = {
-            Operation.BALANCE, Operation.SUPPLY, Operation.PURCHASE, Operation.RETURN};
+    public static final Operation[] EXPECTED_OPERATIONS = Operation.values();
 
     @Test
     public void fromCode_ValidCodes_ReturnsExpectedOperations() {

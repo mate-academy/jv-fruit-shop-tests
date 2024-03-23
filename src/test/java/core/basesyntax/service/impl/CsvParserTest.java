@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CsvParserTest {
@@ -23,10 +23,10 @@ public class CsvParserTest {
             new ProductTransaction(Operation.SUPPLY, "banana", 20),
             new ProductTransaction(Operation.PURCHASE, "orange", 5)
     );
-    private TransactionParser csvParser;
+    private static TransactionParser csvParser;
 
-    @BeforeEach
-    public void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         csvParser = new CsvParser();
     }
 

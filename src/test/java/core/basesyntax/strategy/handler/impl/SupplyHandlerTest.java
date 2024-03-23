@@ -5,6 +5,7 @@ import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.enums.Operation;
 import core.basesyntax.strategy.handler.OperationHandler;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,11 +13,15 @@ public class SupplyHandlerTest {
     private static final String TEST_PRODUCT = "apple";
     private static final int TEST_QUANTITY = 10;
     private static final int EXISTING_QUANTITY = 5;
-    private OperationHandler supplyHandler;
+    private static OperationHandler supplyHandler;
+
+    @BeforeAll
+    static void beforeAll() {
+        supplyHandler = new SupplyHandler();
+    }
 
     @BeforeEach
     public void setUp() {
-        supplyHandler = new SupplyHandler();
         ProductStorage.STORAGE.clear();
     }
 

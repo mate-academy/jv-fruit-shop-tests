@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitDataParserTest {
-    private static final FruitDataParser parser = new FruitDataParser();
+    private static FruitDataParser parser;
     private static final String DATA_PATH = "src\\resources\\fileForParserCheck.csv";
     private static final List<FruitTransactionDto> EXPECTED_PARSED_DATA = new ArrayList<>();
     private static final List<FruitTransactionDto> EXPECTED_EMPTY_DATA = Collections.emptyList();
@@ -35,6 +36,11 @@ class FruitDataParserTest {
         EXPECTED_PARSED_DATA.add(FIRST_DTO);
         EXPECTED_PARSED_DATA.add(SECOND_DTO);
         EXPECTED_PARSED_DATA.add(THIRD_DTO);
+    }
+
+    @BeforeEach
+    void setUpParser() {
+        parser = new FruitDataParser();
     }
 
     @Test

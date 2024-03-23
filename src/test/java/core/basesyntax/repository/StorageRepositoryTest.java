@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +14,6 @@ class StorageRepositoryTest {
     @BeforeEach
     void setUp() {
         repository = new StorageRepository();
-    }
-
-    @AfterEach
-    void cleanUp() {
         repository.getProducts().clear();
     }
 

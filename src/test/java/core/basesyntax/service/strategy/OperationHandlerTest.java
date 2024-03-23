@@ -8,8 +8,8 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.repository.StorageRepository;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class OperationHandlerTest {
@@ -33,7 +33,7 @@ class OperationHandlerTest {
         TRANSACTIONS.addAll(transactions);
     }
 
-    @AfterEach
+    @BeforeEach
     void cleanUp() {
         repository.getProducts().clear();
     }

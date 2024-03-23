@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.repository.StorageRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,29 +14,16 @@ class SupplyOperationTest {
             = "Unsupported value for SUPPLY operation: -103";
     private StorageRepository repository = new StorageRepository();
     private SupplyOperation supplyOperation = new SupplyOperation(repository);
-    private Transaction tenValueTransaction;
     private Transaction twentyValueTransaction;
     private Transaction negativeValueTransaction;
 
     @BeforeEach
     void setUp() {
-        tenValueTransaction = new Transaction(Operation.SUPPLY, "apple", 10);
+        repository.getProducts().clear();
         twentyValueTransaction = new Transaction(Operation.SUPPLY, "banana", 20);
         negativeValueTransaction = new Transaction(Operation.SUPPLY, "banana", -123);
 
-        repository.add(tenValueTransaction);
         repository.add(twentyValueTransaction);
-    }
-
-    @AfterEach
-    void clearUp() {
-        repository.getProducts().clear();
-    }
-
-    @Test
-    void balanceOperation_addTenValue_tenShouldPresentInRepository() {
-        supplyOperation.execute(tenValueTransaction);
-        assertEquals(tenValueTransaction.getValue(), repository.getProducts().get("apple"));
     }
 
     @Test

@@ -9,18 +9,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String WRITE_TO_FILE_OK_PATH = "src\\resources\\writer_test_file";
     private static final String WRITE_TO_FILE_EMPTY_PATH = "";
     private static final FileWriterImpl fileWriter = new FileWriterImpl();
-
-    @AfterAll
-    static void deleteFile() throws IOException {
-        Files.delete(Path.of(WRITE_TO_FILE_OK_PATH));
-    }
 
     @Test
     void write_ValidFileName_Ok() throws IOException {

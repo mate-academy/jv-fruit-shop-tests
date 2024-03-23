@@ -28,7 +28,7 @@ class CsvFileWriterTest {
 
     @Test
     void write_CheckCorrectWriteDataToFile_Ok() {
-        String pathToWrite = "src/test/resources/outputFile.csv";
+        String pathToWrite = "src/test/resources/write.csv";
         fileWriter.write(dataToWrite, pathToWrite);
         Path path = Path.of(pathToWrite);
         StringBuilder builder = new StringBuilder();
@@ -47,14 +47,14 @@ class CsvFileWriterTest {
 
     @Test
     void write_FilePathIsIncorrect_NotOk() {
-        String pathToWriteNotOk = "src/test/base/outputFile.csv";
+        String pathToWriteNotOk = "src/test/base/write.csv";
         assertThrows(RuntimeException.class,
                 () -> fileWriter.write(dataToWrite, pathToWriteNotOk));
     }
 
     @Test
     void write_CheckPresentWriteFile_Ok() {
-        String pathToWrite = "src/test/resources/outputFile.csv";
+        String pathToWrite = "src/test/resources/write.csv";
         fileWriter.write(dataToWrite, pathToWrite);
         assertTrue(Files.exists(Path.of(pathToWrite)),
                 "File does not exist in directory - \"resources\"");

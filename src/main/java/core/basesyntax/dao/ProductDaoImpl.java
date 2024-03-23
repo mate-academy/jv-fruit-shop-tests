@@ -13,9 +13,4 @@ public class ProductDaoImpl implements ProductDao {
     public Integer getValue(String key) {
         return Storage.fruitStorage.get(key);
     }
-
-    @Override
-    public void clearDB() {
-        Storage.fruitStorage.clear();
-    }
 }

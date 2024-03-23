@@ -16,10 +16,10 @@ public class PurchaseStrategy implements OperationHandler {
         String fruitName = transaction.getFruit();
         Integer temporaryValue = productDao.getValue(fruitName);
 
-        int newFruitNumber = temporaryValue == null ? transaction.getQuantity() :
+        int newFruitNumber = temporaryValue == null ? -transaction.getQuantity() :
                 temporaryValue - transaction.getQuantity();
 
-        if (newFruitNumber <= 0) {
+        if (newFruitNumber < 0) {
             throw new NotEnoughFruitsException("Not enough fruits to buy "
                     + transaction.getQuantity()
                     + " " + fruitName);
@@ -33,7 +33,7 @@ public class PurchaseStrategy implements OperationHandler {
         }
 
         if (transaction.getQuantity() <= 0) {
-            throw new NotEnoughFruitsException("You can't return less then 0 fruits");
+            throw new NotEnoughFruitsException("You can't purchase less then 0 fruits");
         }
     }
 }

@@ -139,9 +139,18 @@ public class StrategyTest {
     @Test
     void handlePurchase_updateDB_Ok() {
         OperationHandler operationHandler = new PurchaseStrategy();
+        Storage.fruitStorage.put(fruitTransaction.getFruit(), QUANTITY);
         int result = operationHandler.handle(fruitTransaction);
         assertEquals(Storage.fruitStorage.get(fruitTransaction.getFruit()), result,
                 "Updated fruit count, and result in DB must be the same");
+    }
+
+    @Test
+    void handlePurchase_purchaseMoreFruitsThanInDB_notOk() {
+        OperationHandler operationHandler = new PurchaseStrategy();
+        assertThrows(NotEnoughFruitsException.class,
+                () -> operationHandler.handle(fruitTransaction),
+                "Can't process negative amount of fruits");
     }
 
     @Test

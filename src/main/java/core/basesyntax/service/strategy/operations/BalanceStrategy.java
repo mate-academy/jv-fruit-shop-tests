@@ -22,7 +22,7 @@ public class BalanceStrategy implements OperationHandler {
         }
 
         if (transaction.getQuantity() <= 0) {
-            throw new NotEnoughFruitsException("You can't return less then 0 fruits");
+            throw new NotEnoughFruitsException("You can't balance 0 fruits or less");
         }
     }
 }

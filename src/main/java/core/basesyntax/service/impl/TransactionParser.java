@@ -13,6 +13,7 @@ public class TransactionParser implements Parser<FruitTransaction> {
     private static final int OPERATION_TYPE = 0;
     private static final int FRUIT_TYPE = 1;
     private static final int FRUIT_AMOUNT = 2;
+    private static final int MINIMAL_PARSED_LENGTH = 3;
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
@@ -23,7 +24,7 @@ public class TransactionParser implements Parser<FruitTransaction> {
 
         for (var element : data) {
             String[] separatedData = element.split(SEPARATOR);
-            if (separatedData.length < 3) {
+            if (separatedData.length < MINIMAL_PARSED_LENGTH) {
                 throw new InvalidSeparatorException("The separator must be ','");
             }
             FruitTransaction fruitTransaction = new FruitTransaction();

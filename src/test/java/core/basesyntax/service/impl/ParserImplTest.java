@@ -13,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ParserImplTest {
-    private ParserImpl parser;
     private static final String BALANCE_APPLE_40 = "b,apple,40";
     private static final String BALANCE_BANANA_20 = "b,banana,20";
     private static final String PURCHASE_ORANGE_30 = "p,orange,30";
     private static final String RETURN_PEAR_40 = "r,pear,40";
+    private ParserImpl parser;
 
     @BeforeEach
     void setUp() {
@@ -63,7 +63,6 @@ class ParserImplTest {
         assertEquals(40, transactions.get(3).amount(),
                 "Fourth amount mismatch.");
     }
-
 
     @Test
     void parseInvalidFormat_notOk() {

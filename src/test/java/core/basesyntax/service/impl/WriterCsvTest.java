@@ -24,7 +24,7 @@ class WriterCsvTest {
     }
 
     @Test
-    void writeData_ok()  {
+    void writeData_ok() {
         Path csvPath = tempDir.resolve(FILE_TO_WRITE_INTO);
         WriterCsv writer = new WriterCsv();
         writer.writeData(csvPath.toString());

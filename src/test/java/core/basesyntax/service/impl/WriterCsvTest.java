@@ -28,7 +28,6 @@ class WriterCsvTest {
         Path csvPath = tempDir.resolve(FILE_TO_WRITE_INTO);
         WriterCsv writer = new WriterCsv();
         writer.writeData(csvPath.toString());
-
         List<String> lines = ReaderCsvTest.readLinesFromFile(csvPath);
         assertAll("File content should match expected",
                 () -> assertTrue(lines.containsAll(List.of("apple,150", "banana,100")))

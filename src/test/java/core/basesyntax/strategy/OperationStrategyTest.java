@@ -49,7 +49,7 @@ class OperationStrategyTest {
 
     @Test
     void processData_nullTransaction_notOk() {
-        assertThrows(RuntimeException.class, () -> strategy.processData(null));
+        Exception exception = assertThrows(RuntimeException.class, () -> strategy.processData(null));
+        assertEquals("FruitTransaction is null", exception.getMessage());
     }
 }
-

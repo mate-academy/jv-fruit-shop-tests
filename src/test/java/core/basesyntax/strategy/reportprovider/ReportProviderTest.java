@@ -18,7 +18,7 @@ class ReportProviderTest {
                     new FruitTransaction(Operation.PURCHASE, "banana", 13)
             );
 
-    private static final Map<String, Integer> EXPECT =
+    private static final Map<String, Integer> EXPECTED =
             Map.of("banana", 107, "apple", 100);
 
     private static final Map<String, Integer> WRONG =
@@ -36,7 +36,14 @@ class ReportProviderTest {
 
     @Test
     public void reportProvider_Ok() {
-        assertEquals(EXPECT, actual);
+        assertEquals(EXPECTED.size(), actual.size());
+        for (Map.Entry<String, Integer> entry : EXPECTED.entrySet()) {
+            String fruit = entry.getKey();
+            int expectedQuantity = entry.getValue();
+            int actualQuantity = actual.getOrDefault(fruit, 0);
+            assertEquals(expectedQuantity, actualQuantity,
+                    "Quantity of " + fruit + " is not correct");
+        }
     }
 
     @Test

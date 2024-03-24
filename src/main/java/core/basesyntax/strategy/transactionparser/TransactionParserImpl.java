@@ -9,7 +9,9 @@ public class TransactionParserImpl implements TransactionParser {
         List<String> result = new ArrayList<>();
         result.add("fruit,quantity");
         for (Map.Entry<String, Integer> entry : fruitQuantities.entrySet()) {
-            result.add(entry.getKey() + ',' + entry.getValue());
+            if (entry.getValue() >= 0) {
+                result.add(entry.getKey() + ',' + entry.getValue());
+            }
         }
         return result;
     }

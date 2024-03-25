@@ -1,10 +1,9 @@
 package core.basesyntax.repository;
 
-import static core.basesyntax.TestObjects.APPLE;
-import static core.basesyntax.TestObjects.BANANA;
-import static core.basesyntax.TestObjects.ORANGE;
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.BANANA;
+import static core.basesyntax.TestConstants.ORANGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -36,13 +35,6 @@ class StorageImplTest {
     }
 
     @Test
-    void getQuantity_notOk() {
-        storage.add(APPLE, 23);
-        Integer orange = storage.getQuantity(ORANGE);
-        assertNotEquals(23, orange);
-    }
-
-    @Test
     void getQuantity_isNull_Ok() {
         Integer orange = storage.getQuantity(ORANGE);
         assertNull(orange);
@@ -58,7 +50,8 @@ class StorageImplTest {
         storage.add(APPLE, 23);
         storage.add(BANANA, 23);
         storage.add(ORANGE, 4);
-        assertEquals(3, storage.getAll().size());
+        int expected = 3;
+        assertEquals(expected, storage.getAll().size());
         assertTrue(storage.getAll().containsKey(APPLE));
         assertTrue(storage.getAll().containsKey(BANANA));
         assertTrue(storage.getAll().containsKey(ORANGE));

@@ -1,8 +1,8 @@
 package core.basesyntax.service.writer;
 
-import static core.basesyntax.TestObjects.FIRST_LINE;
-import static core.basesyntax.TestObjects.HEADER;
-import static core.basesyntax.TestObjects.INVALID_PATH;
+import static core.basesyntax.TestConstants.HEADER;
+import static core.basesyntax.TestConstants.INVALID_PATH;
+import static core.basesyntax.TestConstants.TYPE_FRUIT_QUANTITY;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,7 +26,7 @@ class CsvWriterImplTest {
         Path filePath = tempDir.resolve("test.csv");
         List<String> info = new ArrayList<>();
         info.add(HEADER);
-        info.add(FIRST_LINE);
+        info.add(TYPE_FRUIT_QUANTITY);
         assertDoesNotThrow(() -> csvWriter.writeToFile(filePath, info));
     }
 
@@ -35,7 +35,7 @@ class CsvWriterImplTest {
         Path filePath = Path.of(INVALID_PATH);
         List<String> info = new ArrayList<>();
         info.add(HEADER);
-        info.add(FIRST_LINE);
+        info.add(TYPE_FRUIT_QUANTITY);
         assertThrows(RuntimeException.class, () -> csvWriter.writeToFile(filePath, info));
     }
 }

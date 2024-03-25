@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import static core.basesyntax.TestConstants.FRUIT_QUANTITY;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,9 +10,9 @@ class SupplyStrategyTest {
 
     @Test
     void calculateFruitQuantity() {
-        Integer num = 100;
-        Integer num2 = 20;
-        Integer expected = num + num2;
-        Assertions.assertEquals(expected, strategy.calculateFruitQuantity(num, num2));
+        Integer supplyQuantity = 20;
+        Integer expected = FRUIT_QUANTITY + supplyQuantity;
+        Assertions.assertEquals(expected, strategy.calculateFruitQuantity(
+                FRUIT_QUANTITY, supplyQuantity));
     }
 }

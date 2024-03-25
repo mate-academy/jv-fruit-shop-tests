@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
-import static core.basesyntax.TestObjects.APPLE;
-import static core.basesyntax.TestObjects.BANANA;
-import static core.basesyntax.TestObjects.FIRST_LINE;
-import static core.basesyntax.TestObjects.HEADER;
-import static core.basesyntax.TestObjects.SECOND_LINE;
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.BANANA;
+import static core.basesyntax.TestConstants.BUY_TWENTY_BANANAS_LINE;
+import static core.basesyntax.TestConstants.HEADER;
+import static core.basesyntax.TestConstants.TYPE_FRUIT_QUANTITY;
 import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 import static org.mockito.Mockito.doNothing;
@@ -47,8 +47,8 @@ class FruitServiceImplTest {
     }
 
     @Test
-    void processCsvFile() {
-        List<String> lines = List.of(HEADER, FIRST_LINE, SECOND_LINE);
+    void processCsvFile_isOk() {
+        List<String> lines = List.of(HEADER, TYPE_FRUIT_QUANTITY, BUY_TWENTY_BANANAS_LINE);
         List<FruitTransaction> fruits = List.of(
                 new FruitTransaction(BALANCE, APPLE, 10),
                 new FruitTransaction(SUPPLY, BANANA, 20)

@@ -1,16 +1,22 @@
 package core.basesyntax.service.report;
 
-import static core.basesyntax.TestObjects.APPLE;
-import static core.basesyntax.TestObjects.HEADER;
+import static core.basesyntax.TestConstants.APPLE;
+import static core.basesyntax.TestConstants.HEADER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private ReportGenerator reportGenerator;
+
+    @BeforeEach
+    void setUp() {
+        reportGenerator = new ReportGeneratorImpl();
+    }
 
     @Test
     void generate_emptyMap_shouldReturnEmptyList() {

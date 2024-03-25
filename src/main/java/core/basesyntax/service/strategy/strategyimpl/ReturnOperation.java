@@ -3,6 +3,7 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.exception.DataNotFoundException;
 import core.basesyntax.exception.NegativeBalanceException;
 import core.basesyntax.service.strategy.OperationHandler;
 
@@ -17,7 +18,7 @@ public class ReturnOperation implements OperationHandler {
     public void handle(FruitTransactionDto dto) {
         Integer currentQuantity = storageDao.get(dto.fruitName());
         if (currentQuantity == null) {
-            throw new NegativeBalanceException("Trying to return fruits "
+            throw new DataNotFoundException("Trying to return fruits "
                     + dto.fruitName()
                     + " but there was no fruit in balance or supply which were purchased");
         }

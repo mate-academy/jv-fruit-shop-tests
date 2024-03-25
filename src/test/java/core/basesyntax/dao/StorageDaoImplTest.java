@@ -1,35 +1,45 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.service.strategy.OperationHandler;
-import org.junit.jupiter.api.Test;
+import core.basesyntax.db.Storage;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.HashMap;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import java.util.List;
+public class StorageDaoImplTest {
+    private StorageDao storageDao;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class StorageDaoImplTest {
-    private static StorageDao storageDao = new StorageDaoImpl();
-    private static FruitTransactionDto dto = new FruitTransactionDto();
-    List<OperationHandler> handlers = List.of();
-
-    @Test
-    void add() {
+    @Before
+    public void setUp() {
+        storageDao = new StorageDaoImpl();
+        Storage.fruitsQuantity.clear();
     }
 
     @Test
-    void get() {
+    public void add_fruitWithQuantity_OK() {
+        String fruitName = "banana";
+        int quantity = 100;
+        HashMap<String, Integer> result = storageDao.add(fruitName, quantity);
+        assertEquals("The quantity of the fruit should be as expected",
+                Integer.valueOf(quantity), result.get(fruitName));
     }
 
     @Test
-    void change() {
+    public void search_fruitWithQuantity_OK() {
+        String fruitName = "banana";
+        int quantity = 100;
+        Storage.fruitsQuantity.put(fruitName, quantity);
+        Integer result = storageDao.get(fruitName);
+        assertEquals("The quantity of the existing fruit should be as expected",
+                Integer.valueOf(quantity), result);
     }
 
     @Test
-    void testAdd() {
-    }
-
-    @Test
-    void testGet() {
+    public void search_fruitNotExist_notOK() {
+        String fruitName = "apple";
+        Integer result = storageDao.get(fruitName);
+        assertNull("The quantity of the non-existing fruit should be null",
+                result);
     }
 }

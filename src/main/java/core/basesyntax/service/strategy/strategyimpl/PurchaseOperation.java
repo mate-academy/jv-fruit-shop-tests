@@ -3,8 +3,8 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.exception.DataNotFoundException;
 import core.basesyntax.exception.NegativeBalanceException;
-import core.basesyntax.exception.WrongOperationException;
 import core.basesyntax.service.strategy.OperationHandler;
 
 public class PurchaseOperation implements OperationHandler {
@@ -18,7 +18,7 @@ public class PurchaseOperation implements OperationHandler {
     public void handle(FruitTransactionDto dto) {
         Integer currentQuantity = storageDao.get(dto.fruitName());
         if (currentQuantity == null) {
-            throw new WrongOperationException("Trying to purchase fruits"
+            throw new DataNotFoundException("Trying to purchase fruits"
                     + dto.fruitName()
                     + " that we "
                     + "dont have in Storage"

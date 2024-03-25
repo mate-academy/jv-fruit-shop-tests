@@ -39,9 +39,9 @@ class DecreaseStrategyTest {
     @Test
     void apply_invalidInput_notOk() {
         Storage.STORAGE.put(BANANA, 5);
-        FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE, BANANA, 10);
+        FruitTransaction invalidTransaction = new FruitTransaction(Operation.PURCHASE, BANANA, 10);
         assertThrows(IllegalArgumentException.class, () ->
-                operationHandler.apply(fruitTransaction));
+                operationHandler.apply(invalidTransaction));
         operationHandler.apply(new FruitTransaction(Operation.PURCHASE, BANANA, 2));
     }
 }

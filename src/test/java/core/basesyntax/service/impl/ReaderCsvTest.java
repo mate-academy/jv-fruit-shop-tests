@@ -28,8 +28,8 @@ class ReaderCsvTest {
             bw.write("b,apple,10" + System.lineSeparator());
             bw.write("s,banana,20");
         }
-
-        List<String> lines = readLinesFromFile(csvPath);
+        ReaderCsv reader = new ReaderCsv();
+        List<String> lines = reader.readData(csvPath.toString());
 
         assertAll("Should read all lines except title",
                 () -> assertNotNull(lines),
@@ -47,10 +47,5 @@ class ReaderCsvTest {
                 () -> reader.readData(invalidPath));
 
         assertTrue(exception.getMessage().contains("Can't read from file"));
-    }
-
-    public static List<String> readLinesFromFile(Path filePath) {
-        ReaderCsv reader = new ReaderCsv();
-        return reader.readData(filePath.toString());
     }
 }

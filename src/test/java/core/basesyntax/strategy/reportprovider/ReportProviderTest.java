@@ -24,18 +24,16 @@ class ReportProviderTest {
     private static final Map<String, Integer> WRONG =
             Map.of("banana", 107, "apple", 110);
 
-    private Map<String, Integer> actual;
-
     private ReportProvider reportProvider;
 
     @BeforeEach
     void setUp() {
         reportProvider = new ReportProviderImpl();
-        actual = reportProvider.processData(DATA);
     }
 
     @Test
     public void reportProvider_Ok() {
+        Map<String, Integer> actual = reportProvider.processData(DATA);
         assertEquals(EXPECTED.size(), actual.size());
         for (Map.Entry<String, Integer> entry : EXPECTED.entrySet()) {
             String fruit = entry.getKey();
@@ -48,6 +46,7 @@ class ReportProviderTest {
 
     @Test
     public void reportProvider_NotOk() {
+        Map<String, Integer> actual = reportProvider.processData(DATA);
         assertNotEquals(WRONG, actual);
     }
 }

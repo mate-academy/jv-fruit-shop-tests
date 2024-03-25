@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
 import java.io.File;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,13 +38,11 @@ public class FruitWriterTest {
 
     @Test
     public void testWriteToFile_InvalidFilePath_NotOk() {
-        File fileToRead = new File(READ_FILE_PATH);
         File invalidFileToWrite = new File(INVALID_WRITE_FILE_PATH);
 
-        String data = fruitDao.readFromFile(fileToRead);
-
+        List<String> testData = List.of("banana,107\n", "apple,100\n");
         assertThrows(RuntimeException.class,
-                () -> fruitDao.writeToFile(invalidFileToWrite, fruitService.generateReport(data)),
+                () -> fruitDao.writeToFile(invalidFileToWrite, testData),
                 "Invalid file path");
     }
 }

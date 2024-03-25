@@ -52,8 +52,9 @@ public class FruitReaderTest {
 
     @Test
     public void dao_readNullFilePath_NotOk() {
-        assertThrows(RuntimeException.class,
-                () -> fruitDao.readFromFile(new File(NULL_FILE_PATH)),
-                "File can not be null");
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> fruitDao.readFromFile(null),
+                "File cannot be null");
+        assertEquals("File cannot be null", exception.getMessage());
     }
 }

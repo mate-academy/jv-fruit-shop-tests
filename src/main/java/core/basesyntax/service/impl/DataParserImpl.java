@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
@@ -26,7 +27,7 @@ public class DataParserImpl implements DataParser {
 
     private FruitTransaction parseLine(String data) {
         if (!data.contains(COMMA)) {
-            throw new RuntimeException("Can't process data: " + data);
+            throw new InvalidDataException("Can't process data: " + data);
         }
 
         String[] splitData = data.split(COMMA);

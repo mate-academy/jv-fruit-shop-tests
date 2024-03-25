@@ -42,6 +42,7 @@ class DecreaseStrategyTest {
         FruitTransaction invalidTransaction = new FruitTransaction(Operation.PURCHASE, BANANA, 10);
         assertThrows(IllegalArgumentException.class, () ->
                 operationHandler.apply(invalidTransaction));
-        operationHandler.apply(new FruitTransaction(Operation.PURCHASE, BANANA, 2));
+        FruitTransaction validTransaction = new FruitTransaction(Operation.PURCHASE, BANANA, 2);
+        operationHandler.apply(validTransaction);
     }
 }

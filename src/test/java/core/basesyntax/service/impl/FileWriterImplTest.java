@@ -48,6 +48,16 @@ class FileWriterImplTest {
     }
 
     @Test
+    void writeToFile_createNewFileWithDiferrentData_isOk() throws IOException {
+        List<String> expected = Arrays.asList(
+                new String("fruit,quantity"));
+
+        fileWriter.writeToFile(expected, new File(TEST_FILE_PATH));
+        List<String> actual = Files.readAllLines(Path.of(TEST_FILE_PATH));
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void writeToFile_unwritableFile_notOk() {
         List<String> data = Arrays.asList("fruit,quantity", "banana,10", "apple,5");
         File unwritableFile = new File(UNWRITABLE_FILE_PATH);

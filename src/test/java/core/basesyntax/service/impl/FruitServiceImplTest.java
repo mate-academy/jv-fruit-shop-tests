@@ -35,7 +35,7 @@ class FruitServiceImplTest {
 
     @Test
     void save_addFruitWithZeroQuantity_isOk() {
-        String nameFruit = "banana";
+        String nameFruit = "orange";
         int zeroQuantity = 0;
         fruitService.save(nameFruit, zeroQuantity);
         int actual = storage.getFruitQuantity(nameFruit);

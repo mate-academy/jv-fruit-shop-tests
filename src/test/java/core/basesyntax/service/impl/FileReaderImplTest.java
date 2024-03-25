@@ -27,14 +27,14 @@ class FileReaderImplTest {
     }
 
     @Test
-    void readFile_nonExistingFile_notOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.readFile(NON_EXISTING_FILE_PATH));
-    }
-
-    @Test
     void readFile_emptyFile_isOk() {
         List<String> actual = fileReader.readFile(EMPTY_FILE_PATH);
         List<String> expected = Arrays.asList();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void readFile_nonExistingFile_notOk() {
+        assertThrows(RuntimeException.class, () -> fileReader.readFile(NON_EXISTING_FILE_PATH));
     }
 }

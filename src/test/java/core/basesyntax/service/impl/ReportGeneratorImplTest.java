@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private static final String SEPARATOR = ",";
+    private static final String COMA_SEPARATOR = ",";
     private static final String TITLE = "fruit,quantity";
     private Storage storage;
     private ReportGenerator reportGenerator;
@@ -35,7 +35,7 @@ class ReportGeneratorImplTest {
         List<String> formattedList = new ArrayList<>();
         formattedList.add(TITLE);
         storage.getFruits().forEach((fruit, quantity) -> formattedList
-                .add(fruit + SEPARATOR + quantity));
+                .add(fruit + COMA_SEPARATOR + quantity));
         List<String> actual = formattedList;
         List<String> expected = Arrays.asList(
                 new String("fruit,quantity"),
@@ -58,7 +58,7 @@ class ReportGeneratorImplTest {
         List<String> formattedList = new ArrayList<>();
         formattedList.add(TITLE);
         storage.getFruits().forEach((fruit, quantity) -> formattedList
-                .add(fruit + SEPARATOR + quantity));
+                .add(fruit + COMA_SEPARATOR + quantity));
         List<String> actual = formattedList;
         List<String> expected = Arrays.asList(
                 new String("fruit,quantity"),

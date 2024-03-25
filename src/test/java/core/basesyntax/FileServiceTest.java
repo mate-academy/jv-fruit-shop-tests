@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FileServiceTest {
@@ -20,19 +20,14 @@ public class FileServiceTest {
     private static final String TEST_DATA = "Some new sentence";
     private static FileService fileService;
 
-    @BeforeAll
-    static void initAll() {
+    @BeforeEach
+    void init() {
         fileService = new FileServiceImpl();
     }
 
     @Test
     void readFromFile_normalData_Ok() {
-        String exceptedResult;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(INPUT_FILE))) {
-            exceptedResult = bufferedReader.readLine();
-        } catch (IOException e) {
-            throw new CouldNotReadFromFileException("Could not read from file: " + INPUT_FILE);
-        }
+        String exceptedResult = readLineFromFile(INPUT_FILE);
         List<String> result = fileService.readFromFile(INPUT_FILE);
         assertEquals(exceptedResult, result.get(0),
                 "The excepted result and result must be the same.");
@@ -48,13 +43,16 @@ public class FileServiceTest {
     @Test
     void writeToFile_normalData_Ok() {
         fileService.writeToFile(OUTPUT_FILE, TEST_DATA);
-        String result;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(OUTPUT_FILE))) {
-            result = bufferedReader.readLine();
-        } catch (IOException e) {
-            throw new CouldNotReadFromFileException("Could not read from file: " + INPUT_FILE);
-        }
+        String result = readLineFromFile(OUTPUT_FILE);
         assertEquals(TEST_DATA, result,
                 "The written data must be the same with read.");
+    }
+
+    private String readLineFromFile(String fileName) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            return bufferedReader.readLine();
+        } catch (IOException e) {
+            throw new CouldNotReadFromFileException("Could not read from file: " + fileName);
+        }
     }
 }

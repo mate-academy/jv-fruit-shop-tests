@@ -12,7 +12,7 @@ import core.basesyntax.service.strategy.operations.ReturnStrategy;
 import core.basesyntax.service.strategy.operations.SupplyStrategy;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StrategyTest {
@@ -23,8 +23,8 @@ public class StrategyTest {
     private static OperationStrategy operationStrategy;
     private static Map<String, OperationHandler> services;
 
-    @BeforeAll
-    static void initAll() {
+    @BeforeEach
+    void init() {
         services = new HashMap<>();
         services.put(BALANCE_LITERAL, new BalanceStrategy());
         services.put(SUPPLY_LITERAL, new SupplyStrategy());

@@ -12,7 +12,6 @@ import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,18 +26,12 @@ public class TransactionParserTest {
     private static List<String> data;
     private static List<FruitTransaction> exceptedResults;
 
-    @BeforeAll
-    static void initAll() {
+    @BeforeEach
+    void init() {
         data = new ArrayList<>();
         parser = new TransactionParser();
         exceptedResults = new ArrayList<>();
-    }
-
-    @BeforeEach
-    void setUp() {
         Storage.fruitStorage.clear();
-        data.clear();
-        exceptedResults.clear();
     }
 
     @Test

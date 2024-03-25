@@ -7,7 +7,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NullDataException;
 import core.basesyntax.service.ReportProvider;
 import core.basesyntax.service.impl.ReportProviderImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,8 +16,8 @@ public class ReportProviderTest {
     private static final String SEPARATOR = ",";
     private static ReportProvider reportProvider;
 
-    @BeforeAll
-    static void initAll() {
+    @BeforeEach
+    void init() {
         reportProvider = new ReportProviderImpl();
     }
 

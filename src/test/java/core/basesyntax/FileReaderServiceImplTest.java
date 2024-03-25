@@ -20,7 +20,6 @@ class FileReaderServiceImplTest {
         readerService = new FileReaderServiceImpl();
     }
 
-
     @Test
     void readFromFile_existingFile_success() {
         List<String> data = readerService.readFromFile(validPath);

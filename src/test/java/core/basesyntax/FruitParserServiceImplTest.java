@@ -22,17 +22,18 @@ class FruitParserServiceImplTest {
         List<FruitTransaction> transactions = parserService.parse(commands);
 
         int expectedTransactionsSize = 2;
-        int firstExpectedQuantity = 20;
-        int secondExpectedQuantity = 100;
-        Operation firstExpectedOperation = Operation.BALANCE;
-        Operation secondExpectedOperation = Operation.SUPPLY;
-        String firstExpectedFruit = "banana";
-        String secondExpectedFruit = "apple";
-
         assertEquals(expectedTransactionsSize, transactions.size());
+
+        int firstExpectedQuantity = 20;
+        Operation firstExpectedOperation = Operation.BALANCE;
+        String firstExpectedFruit = "banana";
         assertEquals(firstExpectedOperation, transactions.get(0).operation());
         assertEquals(firstExpectedFruit, transactions.get(0).fruit());
         assertEquals(firstExpectedQuantity, transactions.get(0).quantity());
+
+        int secondExpectedQuantity = 100;
+        Operation secondExpectedOperation = Operation.SUPPLY;
+        String secondExpectedFruit = "apple";
         assertEquals(secondExpectedOperation, transactions.get(1).operation());
         assertEquals(secondExpectedFruit, transactions.get(1).fruit());
         assertEquals(secondExpectedQuantity, transactions.get(1).quantity());

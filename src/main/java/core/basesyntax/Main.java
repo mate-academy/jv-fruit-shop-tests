@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String fromFile = "src/main/resources/fruits.csv";
-    private static final String toFile = "src/main/resources/report.csv";
+    private static final String FROM_FILE = "src/main/resources/fruits.csv";
+    private static final String TO_FILE = "src/main/resources/report.csv";
     private static final Map<Operation, OperationHandler> operationMap = new HashMap<>();
     private static final FruitDao fruitDao = new FruitDaoImpl();
 
@@ -36,11 +36,11 @@ public class Main {
         WriterService fileWriterService = new FileWriterServiceImpl();
         FruitStrategy fruitStrategy = new FruitStrategy(operationMap);
 
-        List<String> commands = fileReaderService.readFromFile(fromFile);
+        List<String> commands = fileReaderService.readFromFile(FROM_FILE);
         List<FruitTransaction> fruitTransactions = fruitParserService.parse(commands);
         fruitStrategy.executeOperationServiceByOperation(fruitTransactions);
         String report = fruitReportGenerator.generateReport(fruitDao.getAll());
-        fileWriterService.writeToFile(toFile, report);
+        fileWriterService.writeToFile(TO_FILE, report);
     }
 
     private static void fillMapWithStrategies() {

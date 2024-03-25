@@ -8,15 +8,15 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class IncreaseStrategyTest {
     private static final String BANANA = "banana";
-    private OperationHandler operationHandler;
+    private static OperationHandler operationHandler;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         operationHandler = new IncreaseStrategy(new FruitDaoImpl());
     }
 

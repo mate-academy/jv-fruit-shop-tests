@@ -10,16 +10,16 @@ import core.basesyntax.storage.Storage;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class FruitStrategyTest {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private FruitStrategy fruitStrategy;
+    private static FruitStrategy fruitStrategy;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         FruitDao fruitDao = new FruitDaoImpl();
         Map<Operation, OperationHandler> strategyMap = Map.of(
                 Operation.BALANCE, new BalanceStrategy(fruitDao),

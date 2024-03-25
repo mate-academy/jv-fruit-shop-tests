@@ -5,14 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 import java.util.TreeMap;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class ReportCreatorImplTest {
-    private ReportCreator reportCreator;
+    private static ReportCreator reportCreator;
+    private String expected = """
+            fruit,quantity
+            apple,50
+            banana,20
+            """;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         reportCreator = new ReportCreatorImpl();
     }
 
@@ -23,11 +28,6 @@ class ReportCreatorImplTest {
         map.put("apple", 50);
 
         String actual = reportCreator.createReport(map);
-        String expected = """
-                fruit,quantity
-                apple,50
-                banana,20
-                """;
         assertEquals(expected, actual);
     }
 }

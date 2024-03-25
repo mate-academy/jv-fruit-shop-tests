@@ -9,15 +9,15 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class BalanceStrategyTest {
-    private OperationHandler operationHandler;
-    private FruitDao fruitDao;
+    private static OperationHandler operationHandler;
+    private static FruitDao fruitDao;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         operationHandler = new BalanceStrategy(new FruitDaoImpl());
         fruitDao = new FruitDaoImpl();
     }

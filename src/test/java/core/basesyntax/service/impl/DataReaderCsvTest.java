@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.service.DataReader;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataReaderCsvTest {
@@ -15,8 +15,8 @@ public class DataReaderCsvTest {
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
     private static DataReader dataReader;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         dataReader = new DataReaderCsv();
     }
 

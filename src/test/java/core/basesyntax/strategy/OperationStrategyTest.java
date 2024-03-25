@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
+import core.basesyntax.exception.IllegalInputDataException;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
@@ -26,26 +27,32 @@ class OperationStrategyTest {
 
     @Test
     void constructor_strategyMapIsNull_notOk() {
-        assertThrows(NullPointerException.class,
+        IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
                 () -> new OperationStrategy(null));
+
+        assertEquals("Strategy map can`t be null", expected.getMessage());
     }
 
     @Test
     void getHandlerFor_operationIsNull_notOk() {
-        assertThrows(NullPointerException.class,
+        IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
                 () -> OPERATION_STRATEGY.getHandlerFor(null));
+
+        assertEquals("Operation can`t be null", expected.getMessage());
     }
 
     @Test
     void getHandlerFor_returnsOperationHandler_ok() {
         assertEquals(BalanceOperationHandler.class,
                 OPERATION_STRATEGY.getHandlerFor(Operation.BALANCE).getClass());
+
         assertEquals(PurchaseOperationHandler.class,
                 OPERATION_STRATEGY.getHandlerFor(Operation.PURCHASE).getClass());
+
         assertEquals(ReturnOperationHandler.class,
                 OPERATION_STRATEGY.getHandlerFor(Operation.RETURN).getClass());
+
         assertEquals(SupplyOperationHandler.class,
                 OPERATION_STRATEGY.getHandlerFor(Operation.SUPPLY).getClass());
     }
-
 }

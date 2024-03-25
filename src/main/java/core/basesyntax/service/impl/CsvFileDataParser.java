@@ -4,7 +4,6 @@ import core.basesyntax.exception.IllegalInputDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import java.util.List;
-import java.util.Objects;
 
 public class CsvFileDataParser implements core.basesyntax.service.FileDataParser {
     public static final int HEADERS_LINE_NUMBER = 1;
@@ -17,7 +16,10 @@ public class CsvFileDataParser implements core.basesyntax.service.FileDataParser
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
-        Objects.requireNonNull(data);
+        if (data == null) {
+            throw new IllegalInputDataException("Input data can`t be null");
+        }
+
         return data.stream()
                 .skip(HEADERS_LINE_NUMBER)
                 .map(line -> {

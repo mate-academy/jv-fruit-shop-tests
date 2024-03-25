@@ -39,12 +39,16 @@ class CsvFileDataParserTest {
 
     @Test
     void parseData_inputListIsNull_notOk() {
-        assertThrows(NullPointerException.class, () -> fileDataParser.parseData(null));
+        IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
+                () -> fileDataParser.parseData(null));
+
+        assertEquals("Input data can`t be null", expected.getMessage());
     }
 
     @Test
     void parseData_inputListIsEmpty_notOk() {
         List<FruitTransaction> actual = fileDataParser.parseData(Collections.emptyList());
+
         assertTrue(actual.isEmpty());
     }
 
@@ -52,6 +56,7 @@ class CsvFileDataParserTest {
     void parseData_inputListContainsInvalidData_notOk() {
         IllegalInputDataException actual = assertThrows(IllegalInputDataException.class,
                 () -> fileDataParser.parseData(INVALID_DATA));
+
         assertEquals("Invalid input line a,banana", actual.getMessage());
     }
 
@@ -67,7 +72,9 @@ class CsvFileDataParserTest {
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(FruitTransaction.Operation.SUPPLY, "banana", 50)
         );
+
         List<FruitTransaction> actual = fileDataParser.parseData(VALID_DATA);
+
         assertEquals(expected, actual);
     }
 }

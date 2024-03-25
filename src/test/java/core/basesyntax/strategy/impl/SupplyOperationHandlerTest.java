@@ -5,10 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
+import core.basesyntax.exception.IllegalInputDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SupplyOperationHandlerTest {
@@ -26,27 +27,33 @@ class SupplyOperationHandlerTest {
             = new FruitTransaction(FruitTransaction.Operation.RETURN, FRUIT_APPLE,
             FRUIT_QUANTITY_BEFORE_SUPPLY);
 
-    @AfterEach
+    @BeforeEach
     void tearDown() {
         Storage.fruits.clear();
     }
 
     @Test
     void constructor_storageDaoIsNull_notOk() {
-        assertThrows(NullPointerException.class,
+        IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
                 () -> new SupplyOperationHandler(null));
+
+        assertEquals("Storage dao can`t be null", expected.getMessage());
     }
 
     @Test
     void handle_fruitTransactionIsNull_notOk() {
-        assertThrows(NullPointerException.class,
+        IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
                 () -> OPERATION_HANDLER.handle(null));
+
+        assertEquals("Fruit transaction dao can`t be null", expected.getMessage());
     }
 
     @Test
     void handle_putProductWithNewQuantityToTheStorage_notOk() {
         Storage.fruits.put(FRUIT_APPLE, 100);
+
         OPERATION_HANDLER.handle(FRUIT_TRANSACTION);
+
         assertEquals(FRUIT_QUANTITY_AFTER_SUPPLY, Storage.fruits.get(FRUIT_APPLE));
     }
 }

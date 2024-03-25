@@ -1,6 +1,7 @@
 package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.StorageDao;
+import core.basesyntax.exception.IllegalInputDataException;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
 
@@ -25,13 +26,13 @@ public class StorageDaoImpl implements StorageDao {
 
     private void checkProduct(String product) {
         if (product == null || product.isEmpty()) {
-            throw new IllegalArgumentException("Product is null or empty");
+            throw new IllegalInputDataException("Product is null or empty");
         }
     }
 
     private void checkQuantity(int quantity) {
         if (quantity < 0) {
-            throw new IllegalArgumentException("Quantity is less then 0");
+            throw new IllegalInputDataException("Quantity is less then 0");
         }
     }
 }

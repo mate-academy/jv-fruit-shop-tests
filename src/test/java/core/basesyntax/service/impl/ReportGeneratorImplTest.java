@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
+import core.basesyntax.exception.IllegalInputDataException;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
@@ -29,12 +30,17 @@ class ReportGeneratorImplTest {
     @Test
     void generateReport_storageDaoIsNull_notOk() {
         ReportGenerator invalidReportGenerator = new ReportGeneratorImpl(null);
-        assertThrows(NullPointerException.class, invalidReportGenerator::generateReport);
+
+        IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
+                invalidReportGenerator::generateReport);
+
+        assertEquals("Storage dao can`t be null", expected.getMessage());
     }
 
     @Test
     void generateReport_storageIsEmpty_Ok() {
         String actual = reportGenerator.generateReport();
+
         assertEquals(REPORT_HEADER, actual);
     }
 
@@ -44,11 +50,14 @@ class ReportGeneratorImplTest {
                 FRUIT_BANANA, 152,
                 FRUIT_APPLE, 90
         );
+
         Storage.fruits.putAll(data);
+
         String expected = REPORT_HEADER + System.lineSeparator()
                 + FRUIT_BANANA + COMMA_SEPARATOR + BANANA_QUANTITY + System.lineSeparator()
                 + FRUIT_APPLE + COMMA_SEPARATOR + APPLE_QUANTITY;
         String actual = reportGenerator.generateReport();
+
         assertEquals(expected, actual);
     }
 }

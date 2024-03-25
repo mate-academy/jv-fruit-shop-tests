@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
+import core.basesyntax.exception.IllegalInputDataException;
 import core.basesyntax.service.ReportGenerator;
-import java.util.Objects;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_HEADER = "fruit,quantity";
@@ -16,11 +16,15 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport() {
-        Objects.requireNonNull(storageDao);
+        if (storageDao == null) {
+            throw new IllegalInputDataException("Storage dao can`t be null");
+        }
+
         StringBuilder report = new StringBuilder(REPORT_HEADER);
         storageDao.getStorage().entrySet().stream()
                 .map(entry -> entry.getKey() + COMMA_SEPARATOR + entry.getValue())
                 .forEach(s -> report.append(System.lineSeparator()).append(s));
+
         return report.toString();
     }
 }

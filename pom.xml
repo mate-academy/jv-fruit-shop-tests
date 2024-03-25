@@ -101,6 +101,9 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/Main.java</exclude>
+                        <exclude>core/basesyntax/Main.java</exclude>
+                        <exclude>src/main/java/core/basesyntax/Main.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

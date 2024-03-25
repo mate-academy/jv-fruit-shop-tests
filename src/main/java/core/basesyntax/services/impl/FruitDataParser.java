@@ -17,6 +17,9 @@ public class FruitDataParser implements DataParser<FruitTransactionDto> {
                 rawData.isEmpty() ? 0 : rawData.size() - 1);
         for (int i = HEADER_NUMBER; i < rawData.size(); i++) {
             String[] columns = rawData.get(i).trim().split(DELIMITTER);
+            if (columns.length < 3) {
+                throw new RuntimeException("Can't split invalid raw data");
+            }
             var fruitTransaction = new FruitTransactionDto(columns[OPERATION_CODE],
                     columns[HEADER_NUMBER],
                     Integer.parseInt(columns[QUANTITY]));

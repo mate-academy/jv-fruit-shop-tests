@@ -27,23 +27,20 @@ class TextFileReaderTest {
         Files.write(Path.of(TEST_FILE_PATH), EXPECTED_CONTENTS);
     }
 
-    @Test
-    void readFileValidFilePathReturnsContentsOk() {
-        List<String> actualContents = textFileReader.readFile(TEST_FILE_PATH);
-        assertEquals(EXPECTED_CONTENTS, actualContents,
-                "Expected contents: " + EXPECTED_CONTENTS + ", Actual contents: " + actualContents);
-    }
-
-    @Test
-    void readFileInvalidFilePathThrowsExceptionNotOk() {
-        assertThrows(FileOperationException.class,
-                () -> textFileReader.readFile("nonexistent.txt"),
-                "Expected FileOperationException for invalid file path");
-    }
-
     @AfterAll
     static void tearDown() throws IOException {
         Files.deleteIfExists(Path.of(TEST_FILE_PATH));
     }
-}
 
+    @Test
+    void readFile_ValidFilePath_ReturnsContents_Ok() {
+        List<String> actualContents = textFileReader.readFile(TEST_FILE_PATH);
+        assertEquals(EXPECTED_CONTENTS, actualContents);
+    }
+
+    @Test
+    void readFile_InvalidFilePath_ThrowsFileOperationException_NotOk() {
+        assertThrows(FileOperationException.class,
+                () -> textFileReader.readFile("nonexistent.txt"));
+    }
+}

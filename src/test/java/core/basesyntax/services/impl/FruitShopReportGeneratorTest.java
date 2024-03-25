@@ -16,15 +16,14 @@ class FruitShopReportGeneratorTest {
     }
 
     @Test
-    void generateReportWithEmptyStorageIsOk() {
+    void generateReport_WithEmptyStorage_ReturnsExpectedReport_Ok() {
         String expectedReport = "fruit,quantity" + System.lineSeparator();
         String actualReport = reportGenerator.generateReport();
-        assertEquals(expectedReport, actualReport,
-                "In report should be only: fruit,quantity" + System.lineSeparator());
+        assertEquals(expectedReport, actualReport);
     }
 
     @Test
-    void generateReportWithNonEmptyStorageIsOk() {
+    void generateReport_WithNonEmptyStorage_ReturnsExpectedReport_Ok() {
         Storage.fruitStorage.put("Apple", 10);
         Storage.fruitStorage.put("Banana", 20);
         Storage.fruitStorage.put("Orange", 15);
@@ -33,7 +32,6 @@ class FruitShopReportGeneratorTest {
                 + "Orange,15" + System.lineSeparator()
                 + "Banana,20" + System.lineSeparator();
         String actualReport = reportGenerator.generateReport();
-        assertEquals(expectedReport, actualReport, "Report should match: " + expectedReport
-                 + " but was: " + actualReport);
+        assertEquals(expectedReport, actualReport);
     }
 }

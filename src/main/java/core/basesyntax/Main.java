@@ -23,7 +23,6 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_PATHNAME = "src/main/resources/data.csv";
     private static final String REPORT_PATHNAME = "src/main/resources/report.csv";
-    private static Map<Operation, OperationHandler> strategyMap;
 
     public static void main(String[] args) {
         DataReader dataReader = new DataReaderCsv();
@@ -33,8 +32,8 @@ public class Main {
         List<FruitTransaction> fruitTransactions = dataParser.parseAll(readFile);
 
         FruitDao fruitDao = new FruitDaoImpl();
-        mapBuilder(fruitDao);
-        FruitStrategy fruitStrategy = new FruitStrategy(strategyMap);
+        Map<Operation, OperationHandler> handlerMap = mapBuilder(fruitDao);
+        FruitStrategy fruitStrategy = new FruitStrategy(handlerMap);
         fruitStrategy.processData(fruitTransactions);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
@@ -44,8 +43,8 @@ public class Main {
         fileWriter.write(report, REPORT_PATHNAME);
     }
 
-    private static void mapBuilder(FruitDao fruitDao) {
-        strategyMap = Map.of(
+    private static Map<Operation, OperationHandler> mapBuilder(FruitDao fruitDao) {
+        return Map.of(
                 Operation.BALANCE, new BalanceStrategy(fruitDao),
                 Operation.PURCHASE, new DecreaseStrategy(fruitDao),
                 Operation.SUPPLY, new IncreaseStrategy(fruitDao),

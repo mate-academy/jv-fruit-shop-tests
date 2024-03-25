@@ -31,12 +31,12 @@ class CsvFileReaderTest {
 
     @Test
     void readData_invalidFilePath_notOk() {
-        String pathToFile = "src/test/resources/non_existent_file.csv";
+        String nonExistentFilePath  = "src/test/resources/non_existent_file.csv";
 
         ReadFromFileException expected = assertThrows(ReadFromFileException.class,
-                () -> fileReader.readData(pathToFile));
+                () -> fileReader.readData(nonExistentFilePath ));
 
-        assertEquals(String.format("Can`t read data from the file %s", pathToFile),
+        assertEquals(String.format("Can`t read data from the file %s", nonExistentFilePath ),
                 expected.getMessage());
     }
 

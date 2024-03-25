@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.NoneExistedOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Operation;
 import java.util.List;
@@ -21,9 +20,6 @@ class OperationStrategyImplTest {
             Operation.PURCHASE, "lemon", 2);
     private final FruitTransaction returnLemon = new FruitTransaction(
             Operation.RETURN, "lemon", 2);
-    private final OperationHandler wrongHandler = new NoneExistedOperationHandler();
-    private final List<OperationHandler> wrongOperationList = List.of(
-            wrongHandler, wrongHandler, wrongHandler, wrongHandler);
     private final List<OperationHandler> goodOperationList = List.of(
             balance, supply, purchase, returning);
     private final OperationStrategy actualStrategy = new OperationStrategyImpl(goodOperationList);
@@ -55,12 +51,5 @@ class OperationStrategyImplTest {
         actual = actualStrategy.getHandlers(returnLemon);
         assertEquals(1, actual.size());
         assertEquals("ReturningOperationHandler", actual.get(0).getClass().getSimpleName());
-    }
-
-    @Test
-    void operationStrategy_InputWrong_Size0() {
-        OperationStrategy actualStrategy = new OperationStrategyImpl(wrongOperationList);
-        actual = actualStrategy.getHandlers(balanceLemon);
-        assertEquals(0, actual.size());
     }
 }

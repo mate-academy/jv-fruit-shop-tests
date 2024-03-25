@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.FileReaderService;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
     private static final String VALID_FILE_TO_READ = "src/main/resources/input.csv";
     private static final String WRONG_FILE_TO_READ = "1/1/1/input.csv";
-    private final FileReaderService csvFileReaderService = new FileReaderServiceImpl();
-    private final List<String> expectedReaderResult = List.of(
+    private static final List<String> EXPECTED_READER_RESULT = List.of(
             " type,fruit,quantity",
             "    b,banana,100",
             "    b,apple,100",
@@ -21,11 +21,17 @@ class FileReaderServiceImplTest {
             "    r,apple,10",
             "    p,banana,11",
             "    p,apple,11");
+    private FileReaderService csvFileReaderService;
+
+    @BeforeEach
+    void setUp() {
+        csvFileReaderService = new FileReaderServiceImpl();
+    }
 
     @Test
     void fileToRead_InputOk_EqualsTrue() {
-        List<String> lineList = csvFileReaderService.readFromFile(VALID_FILE_TO_READ);
-        assertEquals(lineList, expectedReaderResult);
+        List<String> actual = csvFileReaderService.readFromFile(VALID_FILE_TO_READ);
+        assertEquals(EXPECTED_READER_RESULT, actual);
     }
 
     @Test

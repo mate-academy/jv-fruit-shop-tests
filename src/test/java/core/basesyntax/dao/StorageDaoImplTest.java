@@ -1,11 +1,12 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
-import org.junit.Before;
-import org.junit.Test;
-import java.util.HashMap;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+
+import core.basesyntax.db.Storage;
+import java.util.HashMap;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StorageDaoImplTest {
     private StorageDao storageDao;

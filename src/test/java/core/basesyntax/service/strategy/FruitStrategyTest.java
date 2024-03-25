@@ -1,5 +1,8 @@
 package core.basesyntax.service.strategy;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.WrongOperationException;
@@ -8,21 +11,19 @@ import core.basesyntax.service.strategy.strategyimpl.BalanceOperation;
 import core.basesyntax.service.strategy.strategyimpl.PurchaseOperation;
 import core.basesyntax.service.strategy.strategyimpl.ReturnOperation;
 import core.basesyntax.service.strategy.strategyimpl.SupplyOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FruitStrategyTest {
     private static final Operation OPERATION_CODE_BALANCE = Operation.BALANCE;
-    private static final String FILE_WRONG_OPERATION_PATH = "src/test/resources/service/fruitswithwrongoperation.csv";
+    private static final String FILE_WRONG_OPERATION_PATH = "src/test/resources/service/"
+            + "fruitswithwrongoperation.csv";
     private static final String FRUIT_NAME = "apple";
     private static final int QUANTITY = 50;
 
@@ -44,7 +45,9 @@ class FruitStrategyTest {
 
     @Test
     public void getHandler_inputBalanceOperation_Ok() {
-        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE_BALANCE, FRUIT_NAME, QUANTITY);
+        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE_BALANCE,
+                FRUIT_NAME,
+                QUANTITY);
         var expected = operations.get(OPERATION_CODE_BALANCE);
         var actual = operationStrategy.findHandlerFor(transaction);
         assertEquals(expected, actual);

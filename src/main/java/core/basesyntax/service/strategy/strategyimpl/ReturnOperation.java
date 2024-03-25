@@ -4,7 +4,6 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataNotFoundException;
-import core.basesyntax.exception.NegativeBalanceException;
 import core.basesyntax.service.strategy.OperationHandler;
 
 public class ReturnOperation implements OperationHandler {

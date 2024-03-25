@@ -2,7 +2,6 @@ package core.basesyntax.service.strategy.strategyimpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.model.Operation;
@@ -24,7 +23,9 @@ class BalanceOperationTest {
 
     @Test
     void handle_validTransaction_Ok() {
-        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE, FRUIT_NAME, QUANTITY);
+        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE,
+                FRUIT_NAME,
+                QUANTITY);
         balanceOperation.handle(transaction);
         assertEquals(QUANTITY, storageDao.get(FRUIT_NAME));
     }

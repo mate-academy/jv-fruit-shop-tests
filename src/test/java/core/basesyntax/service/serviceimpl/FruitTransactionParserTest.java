@@ -1,14 +1,14 @@
 package core.basesyntax.service.serviceimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataFileCorruptedException;
-import core.basesyntax.exception.DataNotFoundException;
 import core.basesyntax.model.Operation;
-import org.junit.jupiter.api.Test;
-
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class FruitTransactionParserTest {
     private static final List<String> VALID_DATA = List.of(

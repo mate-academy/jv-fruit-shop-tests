@@ -1,18 +1,20 @@
 package core.basesyntax.service.strategy.strategyimpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataNotFoundException;
-import core.basesyntax.exception.NegativeBalanceException;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.OperationHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReturnOperationTest {
     private static final Operation OPERATION_CODE = Operation.RETURN;
     private static final String FRUIT_NAME = "apple";
+    private static final String INVALID_FRUIT_NAME = "banbana";
     private static final int QUANTITY = 1;
     private static final int INITIAL_QUANTITY = 20;
 
@@ -28,17 +30,20 @@ class ReturnOperationTest {
 
     @Test
     public void handle_ReturnFruit_Ok() {
-        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE, FRUIT_NAME, QUANTITY);
+        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE,
+                FRUIT_NAME,
+                QUANTITY);
         operationHandler.handle(transaction);
         assertEquals(INITIAL_QUANTITY + QUANTITY, storageDao.get(FRUIT_NAME));
     }
 
     @Test
     public void handle_ReturnNonExistingFruit_notOk() {
-        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE,"banbana", QUANTITY);
+        FruitTransactionDto transaction = new FruitTransactionDto(OPERATION_CODE,
+                INVALID_FRUIT_NAME,
+                QUANTITY);
         assertThrows(DataNotFoundException.class, () -> {
             operationHandler.handle(transaction);
         });
     }
-
 }

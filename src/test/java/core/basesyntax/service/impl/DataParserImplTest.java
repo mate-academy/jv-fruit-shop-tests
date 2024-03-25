@@ -3,18 +3,19 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DataParserImplTest {
     private static DataParser dataParser;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         dataParser = new DataParserImpl();
     }
 
@@ -58,8 +59,10 @@ public class DataParserImplTest {
     @Test
     void processAll_wrongInput_notOk() {
         List<String> data = List.of("header", "wrong");
-        assertThrows(RuntimeException.class, () ->
-                dataParser.parseAll(data), "Can't process data: wrong");
+
+        InvalidDataException exception = assertThrows(InvalidDataException.class, () ->
+                dataParser.parseAll(data));
+        assertEquals("Can't process data: wrong", exception.getMessage());
     }
 
     @Test
@@ -71,7 +74,8 @@ public class DataParserImplTest {
     @Test
     void processAll_negativeQuantity_notOk() {
         List<String> data = List.of("header", "b,banana,-5");
-        assertThrows(NumberFormatException.class, () ->
-                dataParser.parseAll(data), "Quantity can't be less than 0, but was: -5");
+        NumberFormatException exception = assertThrows(NumberFormatException.class, () ->
+                dataParser.parseAll(data));
+        assertEquals("Quantity can't be less than 0, but was: -5", exception.getMessage());
     }
 }

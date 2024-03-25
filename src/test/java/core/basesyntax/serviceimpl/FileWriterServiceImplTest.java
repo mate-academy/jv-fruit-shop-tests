@@ -30,27 +30,24 @@ public class FileWriterServiceImplTest {
 
     @Test
     void writeToFile_incorrectPath_notOk() {
-        assertThrows(FileNotExistException.class, () -> {
+        FileNotExistException exception = assertThrows(FileNotExistException.class, () -> {
             fileWriterService.writeToFile(INCORRECT_PATH, HEADER);
-        }, "Expected " + FileNotExistException.class.getName() + " but wasn't!");
+        });
+        assertEquals("Can't write to file: " + INCORRECT_PATH, exception.getMessage());
     }
 
     @Test
-    void writeFile_writeToFile_Ok() {
+    void writeFile_writeToFile_Ok() throws IOException {
         fileWriterService.writeToFile(PATH_TO_FILE_OK, EXPECTED_REPORT);
-        try {
-            List<String> readAllLines = Files.readAllLines(Path.of(PATH_TO_FILE_OK));
-            assertEquals(listOk, readAllLines);
-        } catch (IOException e) {
-            throw new FileNotExistException("Failed to read the content from the file: "
-                    + PATH_TO_FILE_OK);
-        }
+        List<String> readAllLines = Files.readAllLines(Path.of(PATH_TO_FILE_OK));
+        assertEquals(listOk, readAllLines);
     }
 
     @Test
     void writeToFile_emptyStringInput_notOk() {
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             fileWriterService.writeToFile(PATH_TO_FILE_OK, "");
-        }, "Expected " + IllegalArgumentException.class.getName() + " but wasn't!");
+        });
+        assertEquals("Input String cannot be empty", exception.getMessage());
     }
 }

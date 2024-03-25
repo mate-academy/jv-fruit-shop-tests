@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.NullInputException;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
@@ -14,6 +15,9 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     @Override
     public List<FruitTransaction> parseFruitTransactions(List<String> line) {
+        if (line == null) {
+            throw new NullInputException("Input data cannot be null");
+        }
         return line.stream()
                 .map(this::buildFruitTransaction)
                 .collect(Collectors.toList());

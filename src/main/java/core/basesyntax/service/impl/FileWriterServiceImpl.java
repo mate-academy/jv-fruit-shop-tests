@@ -15,7 +15,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
             bufferedWriter.write(infoToWrite);
         } catch (IOException e) {
-            throw new FileNotExistException("Can't write to file:" + toFile);
+            throw new FileNotExistException("Can't write to file: " + toFile);
         }
     }
 }

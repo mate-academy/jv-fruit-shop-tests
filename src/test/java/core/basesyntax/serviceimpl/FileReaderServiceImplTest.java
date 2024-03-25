@@ -47,4 +47,11 @@ public class FileReaderServiceImplTest {
             fileReaderService.readFromFile(INCORRECT_PATH);
         }, "Expected " + FileNotExistException.class.getName());
     }
+
+    @Test
+    void readFromFile_FileDoesNotExist_notOk() {
+        assertThrows(FileNotExistException.class, () -> {
+            fileReaderService.readFromFile("nonexistent_file.csv");
+        }, "Expected " + FileNotExistException.class.getName());
+    }
 }

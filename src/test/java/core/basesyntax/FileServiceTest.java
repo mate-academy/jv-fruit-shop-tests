@@ -9,6 +9,7 @@ import core.basesyntax.service.impl.FileServiceImpl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +28,10 @@ public class FileServiceTest {
 
     @Test
     void readFromFile_normalData_Ok() {
-        String exceptedResult = readLineFromFile(INPUT_FILE);
+        List<String> exceptedResult = readLineFromFile(INPUT_FILE);
         List<String> result = fileService.readFromFile(INPUT_FILE);
-        assertEquals(exceptedResult, result.get(0),
+
+        assertEquals(exceptedResult, result,
                 "The excepted result and result must be the same.");
     }
 
@@ -43,14 +45,21 @@ public class FileServiceTest {
     @Test
     void writeToFile_normalData_Ok() {
         fileService.writeToFile(OUTPUT_FILE, TEST_DATA);
-        String result = readLineFromFile(OUTPUT_FILE);
-        assertEquals(TEST_DATA, result,
-                "The written data must be the same with read.");
+        List<String> result = readLineFromFile(OUTPUT_FILE);
+        for (var element : result) {
+            assertEquals(TEST_DATA, element,
+                    "The written data must be the same with read.");
+        }
     }
 
-    private String readLineFromFile(String fileName) {
+    private List<String> readLineFromFile(String fileName) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            return bufferedReader.readLine();
+            List<String> result = new ArrayList<>();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                result.add(line);
+            }
+            return result;
         } catch (IOException e) {
             throw new CouldNotReadFromFileException("Could not read from file: " + fileName);
         }

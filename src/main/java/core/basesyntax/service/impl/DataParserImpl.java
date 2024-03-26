@@ -16,6 +16,10 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public List<FruitTransaction> parseAll(List<String> data) {
+        if (data == null || data.isEmpty()) {
+            throw new InvalidDataException("Data can not be empty!");
+        }
+
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
         for (int i = START_DATA_LINE; i < data.size(); i++) {

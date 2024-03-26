@@ -67,8 +67,9 @@ public class DataParserImplTest {
 
     @Test
     void processAll_emptyInput_notOk() {
-        assertThrows(RuntimeException.class, () ->
+        InvalidDataException exception = assertThrows(InvalidDataException.class, () ->
                 dataParser.parseAll(null));
+        assertEquals("Data can not be empty!", exception.getMessage());
     }
 
     @Test

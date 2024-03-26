@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.CsvFileException;
+import core.basesyntax.exception.CsvIllegalArgumentException;
 import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,27 +39,27 @@ public class CsvWriterTest {
     }
 
     @Test
-    public void writeToFile_NullPath_ThrowsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            csvWriter.writeToFile(null, TEST_DATA);
-        });
+    public void writeToFile_NullPath_ThrowsCsvIllegalArgumentException() {
+        Assertions.assertThrows(CsvIllegalArgumentException.class, () ->
+                        csvWriter.writeToFile(null, TEST_DATA),
+                "Path and data must not be null");
     }
 
     @Test
-    public void writeToFile_NullData_ThrowsNullPointerException(@TempDir Path tempDir) {
+    public void writeToFile_NullData_ThrowsCsvIllegalArgumentException(@TempDir Path tempDir) {
         Path filePath = tempDir.resolve(TEST_FILE_NAME);
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            csvWriter.writeToFile(filePath, null);
-        });
+        Assertions.assertThrows(CsvIllegalArgumentException.class, () ->
+                        csvWriter.writeToFile(filePath, null),
+                "Path and data must not be null");
     }
 
     @Test
     public void writeToFile_WriteToDirectoryPath_ThrowsCsvFileException(
-            @TempDir Path tempDir) throws IOException {
-        Path directoryPath = tempDir.resolve(DIRECTORY_NAME);
-        Files.createDirectory(directoryPath);
-        Assertions.assertThrows(CsvFileException.class, () -> {
-            csvWriter.writeToFile(directoryPath, TEST_DATA);
-        });
+            @TempDir Path tempDir) {
+        Assertions.assertThrows(
+                CsvFileException.class,
+                () -> csvWriter.writeToFile(tempDir, TEST_DATA),
+                "Cannot write to CSV file in directory path" + tempDir
+        );
     }
 }

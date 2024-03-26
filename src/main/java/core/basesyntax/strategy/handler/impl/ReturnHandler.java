@@ -5,7 +5,7 @@ import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.exception.ReturnOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 
-public class ReturnHandler extends OperationHandler {
+public class ReturnHandler implements OperationHandler {
 
     @Override
     public void handle(ProductTransaction productTransaction) {
@@ -14,8 +14,8 @@ public class ReturnHandler extends OperationHandler {
         if (!ProductStorage.STORAGE.containsKey(product)) {
             throw new ReturnOperationException("Can't return absent product: " + product);
         }
-        if (quantity < 0) {
-            throw new ReturnOperationException("Invalid quantity for return: " + quantity);
+        if (quantity <= 0) {
+            throw new ReturnOperationException("Quantity must be a positive number " + quantity);
         }
         Integer currentBalance = ProductStorage.STORAGE.get(product);
         ProductStorage.STORAGE.put(product, currentBalance + quantity);

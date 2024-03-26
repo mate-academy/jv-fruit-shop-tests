@@ -3,6 +3,7 @@ package core.basesyntax.strategy.handler.impl;
 import core.basesyntax.db.ProductStorage;
 import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.enums.Operation;
+import core.basesyntax.exception.SupplyOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,6 +14,8 @@ public class SupplyHandlerTest {
     private static final String TEST_PRODUCT = "apple";
     private static final int TEST_QUANTITY = 10;
     private static final int EXISTING_QUANTITY = 5;
+    private static final int NEGATIVE_QUANTITY = -5;
+    private static final int ZERO_QUANTITY = 0;
     private static OperationHandler supplyHandler;
 
     @BeforeAll
@@ -42,5 +45,26 @@ public class SupplyHandlerTest {
         supplyHandler.handle(transaction);
         Assertions.assertTrue(ProductStorage.STORAGE.containsKey(TEST_PRODUCT));
         Assertions.assertEquals(TEST_QUANTITY, ProductStorage.STORAGE.get(TEST_PRODUCT));
+    }
+
+    @Test
+    public void handle_NegativeQuantity_ThrowsReturnOperationException() {
+        ProductTransaction transaction =
+                new ProductTransaction(Operation.SUPPLY, TEST_PRODUCT, NEGATIVE_QUANTITY);
+        Assertions.assertThrows(SupplyOperationException.class, () ->
+                        supplyHandler.handle(transaction),
+                "Quantity must be a positive number " + NEGATIVE_QUANTITY
+        );
+    }
+
+    @Test
+    public void handle_ZeroQuantity_ThrowsSupplyOperationException() {
+        ProductTransaction transaction =
+                new ProductTransaction(
+                        Operation.SUPPLY, TEST_PRODUCT, ZERO_QUANTITY);
+        Assertions.assertThrows(SupplyOperationException.class, () ->
+                        supplyHandler.handle(transaction),
+                "Quantity must be a positive number " + ZERO_QUANTITY
+        );
     }
 }

@@ -15,6 +15,7 @@ public class ReturnHandlerTest {
     private static final int INITIAL_QUANTITY = 15;
     private static final int RETURN_QUANTITY = 5;
     private static final int NEGATIVE_QUANTITY = -5;
+    private static final int ZERO_QUANTITY = 0;
     private static final String ABSENT_PRODUCT = "banana";
     private static OperationHandler returnHandler;
 
@@ -42,9 +43,21 @@ public class ReturnHandlerTest {
     public void handle_NegativeQuantity_ThrowsReturnOperationException() {
         ProductTransaction transaction =
                 new ProductTransaction(Operation.RETURN, TEST_PRODUCT, NEGATIVE_QUANTITY);
-        Assertions.assertThrows(ReturnOperationException.class, () -> {
-            returnHandler.handle(transaction);
-        });
+        Assertions.assertThrows(ReturnOperationException.class, () ->
+                        returnHandler.handle(transaction),
+                "Quantity must be a positive number " + NEGATIVE_QUANTITY
+        );
+    }
+
+    @Test
+    public void handle_ZeroQuantity_ThrowsReturnOperationException() {
+        ProductTransaction transaction =
+                new ProductTransaction(
+                        Operation.RETURN, TEST_PRODUCT, ZERO_QUANTITY);
+        Assertions.assertThrows(ReturnOperationException.class, () ->
+                        returnHandler.handle(transaction),
+                "Quantity must be a positive number " + ZERO_QUANTITY
+        );
     }
 
     @Test

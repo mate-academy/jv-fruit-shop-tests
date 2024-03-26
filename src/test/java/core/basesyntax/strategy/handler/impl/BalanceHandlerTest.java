@@ -14,6 +14,8 @@ public class BalanceHandlerTest {
     private static final String TEST_PRODUCT = "apple";
     private static final int TEST_QUANTITY = 10;
     private static final int EXISTING_QUANTITY = 5;
+    private static final int NEGATIVE_QUANTITY = -5;
+    private static final int ZERO_QUANTITY = 0;
     private static OperationHandler balanceHandler;
 
     @BeforeAll
@@ -40,8 +42,33 @@ public class BalanceHandlerTest {
         ProductStorage.STORAGE.put(TEST_PRODUCT, EXISTING_QUANTITY);
         ProductTransaction transaction =
                 new ProductTransaction(Operation.BALANCE, TEST_PRODUCT, TEST_QUANTITY);
-        Assertions.assertThrows(BalanceOperationException.class, () -> {
-            balanceHandler.handle(transaction);
-        });
+        Assertions.assertThrows(
+                BalanceOperationException.class,
+                () -> balanceHandler.handle(transaction),
+                "Balance can't be reassigned! "
+                        + "You have duplicate balance operation for product: " + TEST_PRODUCT
+        );
+    }
+
+    @Test
+    public void handle_NegativeQuantity_ThrowsBalanceOperationException() {
+        ProductTransaction transaction =
+                new ProductTransaction(Operation.BALANCE, TEST_PRODUCT, NEGATIVE_QUANTITY);
+        BalanceOperationException exception = Assertions.assertThrows(
+                BalanceOperationException.class,
+                () -> balanceHandler.handle(transaction),
+                "Quantity must be a positive number " + NEGATIVE_QUANTITY
+        );
+    }
+
+    @Test
+    public void handle_ZeroQuantity_ThrowsBalanceOperationException() {
+        ProductTransaction transaction =
+                new ProductTransaction(Operation.BALANCE, TEST_PRODUCT, ZERO_QUANTITY);
+        BalanceOperationException exception = Assertions.assertThrows(
+                BalanceOperationException.class,
+                () -> balanceHandler.handle(transaction),
+                "Quantity must be a positive number " + ZERO_QUANTITY
+        );
     }
 }

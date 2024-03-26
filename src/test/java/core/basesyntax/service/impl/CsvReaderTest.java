@@ -16,11 +16,9 @@ public class CsvReaderTest {
     private static final String TEST_FILE_NAME = "test.csv";
     private static final String NON_EXISTENT_FILE_NAME = "non-existent-file.csv";
     private static final String EMPTY_FILE_NAME = "empty.csv";
+    private static final String EXPECTED_MESSAGE = "Can't read from csv file ";
     private static final List<String> TEST_DATA = Arrays.asList(
-            "operation,fruit,quantity",
-            "b,apple,10",
-            "s,banana,20",
-            "p,orange,5"
+            "operation,fruit,quantity", "b,apple,10", "s,banana,20", "p,orange,5"
     );
     private static FileReader csvReader;
 
@@ -31,7 +29,8 @@ public class CsvReaderTest {
 
     @Test
     public void readFromFile_ValidPath_ReturnsFileContents(
-            @TempDir Path tempDir) throws IOException {
+            @TempDir Path tempDir
+    ) throws IOException {
         Path filePath = tempDir.resolve(TEST_FILE_NAME);
         Files.write(filePath, TEST_DATA);
         List<String> actualData = csvReader.readFromFile(filePath);
@@ -41,9 +40,11 @@ public class CsvReaderTest {
     @Test
     public void readFromFile_NonExistentPath_ThrowsCsvFileException() {
         Path nonExistentPath = Path.of(NON_EXISTENT_FILE_NAME);
-        Assertions.assertThrows(CsvFileException.class, () -> {
-            csvReader.readFromFile(nonExistentPath);
-        });
+        Assertions.assertThrows(
+                CsvFileException.class, () -> csvReader.readFromFile(
+                        nonExistentPath),
+                "Can't read from csv file " + nonExistentPath
+        );
     }
 
     @Test
@@ -56,8 +57,10 @@ public class CsvReaderTest {
 
     @Test
     public void readFromFile_DirectoryPath_ThrowsCsvFileException(@TempDir Path tempDir) {
-        Assertions.assertThrows(CsvFileException.class, () -> {
-            csvReader.readFromFile(tempDir);
-        });
+        Assertions.assertThrows(
+                CsvFileException.class,
+                () -> csvReader.readFromFile(tempDir),
+                EXPECTED_MESSAGE + tempDir
+        );
     }
 }

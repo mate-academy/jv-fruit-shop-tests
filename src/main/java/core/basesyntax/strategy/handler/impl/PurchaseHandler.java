@@ -5,13 +5,16 @@ import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.exception.PurchaseOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 
-public class PurchaseHandler extends OperationHandler {
+public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void handle(ProductTransaction productTransaction) {
-        String product = productTransaction.product();
         int quantity = productTransaction.quantity();
+        String product = productTransaction.product();
         Integer currentBalance = ProductStorage.STORAGE.get(product);
+        if (quantity <= 0) {
+            throw new PurchaseOperationException("Quantity must be a positive number " + quantity);
+        }
         if (currentBalance < quantity) {
             throw new PurchaseOperationException(
                     "Unable to purchase product: " + product

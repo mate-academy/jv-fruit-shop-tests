@@ -57,4 +57,13 @@ public class FruitTransaction {
             throw new InvalidDataException("Operation is not exist" + operation);
         }
     }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{" +
+                "operation=" + operation +
+                ", fruit='" + fruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

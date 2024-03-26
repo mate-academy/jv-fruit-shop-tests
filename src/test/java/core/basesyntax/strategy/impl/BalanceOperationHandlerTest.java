@@ -14,12 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BalanceOperationHandlerTest {
-    private static final StorageDao storageDao
-            = new StorageDaoImpl();
-    private static final OperationHandler operationHandler =
-            new BalanceOperationHandler(storageDao);
     private static final String FRUIT_APPLE = "apple";
-    private static final FruitTransaction fruitTransaction
+    private final StorageDao storageDao
+            = new StorageDaoImpl();
+    private final OperationHandler operationHandler =
+            new BalanceOperationHandler(storageDao);
+    private final FruitTransaction fruitTransaction
             = new FruitTransaction(Operation.BALANCE, FRUIT_APPLE, 100);
 
     @BeforeEach

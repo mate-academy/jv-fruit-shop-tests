@@ -13,14 +13,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ReportGeneratorImplTest {
-    private static final StorageDao storageDao = new StorageDaoImpl();
-    private static final ReportGenerator reportGenerator = new ReportGeneratorImpl(storageDao);
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String FRUIT_BANANA = "banana";
     private static final String FRUIT_APPLE = "apple";
     private static final String COMMA_SEPARATOR = ",";
     private static final int BANANA_QUANTITY = 152;
     private static final int APPLE_QUANTITY = 90;
+    private final StorageDao storageDao = new StorageDaoImpl();
+    private final ReportGenerator reportGenerator = new ReportGeneratorImpl(storageDao);
 
     @BeforeEach
     void setUp() {

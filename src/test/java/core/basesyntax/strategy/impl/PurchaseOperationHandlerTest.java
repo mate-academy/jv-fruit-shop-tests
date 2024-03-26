@@ -15,14 +15,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PurchaseOperationHandlerTest {
-    private static final StorageDao STORAGE_DAO =
-            new StorageDaoImpl();
-    private static final OperationHandler PURCHASE_OPERATION_HANDLER
-            = new PurchaseOperationHandler(STORAGE_DAO);
     private static final String FRUIT_APPLE = "apple";
-    private static final FruitTransaction FRUIT_TRANSACTION
+    private final StorageDao storageDao =
+            new StorageDaoImpl();
+    private final OperationHandler purchaseOperationHandler
+            = new PurchaseOperationHandler(storageDao);
+    private final FruitTransaction invalidFruitTransaction
             = new FruitTransaction(Operation.PURCHASE, FRUIT_APPLE, 101);
-    private static final FruitTransaction VALID_TRANSACTION
+    private final FruitTransaction validFruitTransaction
             = new FruitTransaction(Operation.PURCHASE, FRUIT_APPLE, 99);
 
     @BeforeEach
@@ -41,7 +41,7 @@ class PurchaseOperationHandlerTest {
     @Test
     void handle_fruitTransactionIsNull_notOk() {
         IllegalInputDataException expected = assertThrows(IllegalInputDataException.class,
-                () -> PURCHASE_OPERATION_HANDLER.handle(null));
+                () -> purchaseOperationHandler.handle(null));
 
         assertEquals("Fruit transaction dao can`t be null", expected.getMessage());
     }
@@ -52,13 +52,13 @@ class PurchaseOperationHandlerTest {
 
         NotEnoughProductAmountException expected = assertThrows(
                 NotEnoughProductAmountException.class,
-                () -> PURCHASE_OPERATION_HANDLER.handle(FRUIT_TRANSACTION));
+                () -> purchaseOperationHandler.handle(invalidFruitTransaction));
 
         assertEquals(
                 String.format("No enough product %s amount: available - %d, needed - %d",
-                FRUIT_TRANSACTION.fruit(),
+                invalidFruitTransaction.fruit(),
                         Storage.fruits.get(FRUIT_APPLE),
-                        FRUIT_TRANSACTION.quantity()),
+                        invalidFruitTransaction.quantity()),
                 expected.getMessage());
     }
 
@@ -66,7 +66,7 @@ class PurchaseOperationHandlerTest {
     void handle_putProductWithNewQuantityToTheStorage_notOk() {
         Storage.fruits.put("apple", 100);
 
-        PURCHASE_OPERATION_HANDLER.handle(VALID_TRANSACTION);
+        purchaseOperationHandler.handle(validFruitTransaction);
 
         assertEquals(1, Storage.fruits.get(FRUIT_APPLE));
     }

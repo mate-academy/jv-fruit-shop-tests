@@ -35,7 +35,7 @@ class CsvFileDataParserTest {
             "s,banana,50"
     );
 
-    private static final FileDataParser fileDataParser = new CsvFileDataParser();
+    private final FileDataParser fileDataParser = new CsvFileDataParser();
 
     @Test
     void parseData_inputListIsNull_notOk() {

@@ -13,7 +13,7 @@ public class ReturnHandlerTest {
     public void handle_ValidTransaction_ShouldUpdateReturn_Ok() {
         ReturnStrategy returnStrategy = new ReturnStrategy();
         FruitTransaction transaction = new FruitTransaction(FruitTransaction
-                .Operation.BALANCE, "banana", 100);
+                .Operation.RETURN, "banana", 100);
         Map<String, Integer> fruitStore = new HashMap<>();
         returnStrategy.handleTransaction(transaction, fruitStore);
 

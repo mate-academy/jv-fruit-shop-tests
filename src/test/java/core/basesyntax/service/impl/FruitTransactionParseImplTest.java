@@ -1,19 +1,21 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.InvalidDataException;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exception.InvalidDataException;
+import org.junit.jupiter.api.Test;
 
 public class FruitTransactionParseImplTest {
     private static final String DEFAULT_VALID_FILE = "src/main/resources/example.csv";
     private static final String NULL_FRUIT_IN_FILE = "src/main/resources/exampleWithNullFruit.csv";
     private static final String NULL_QUANTITY_IN_FILE = "src/main/resources/"
             + "exampleWithNullQuantity.csv";
-    private static final String INVALID_QUANTITY_IN_FILE = "src/main/resources/exampleInvalidQuantity.csv";
+    private static final String INVALID_QUANTITY_IN_FILE = "src/main/resources/"
+            + "exampleInvalidQuantity.csv";
     private FileReaderCsv fileReaderCsv = new FileReaderCsv();
     private FruitTransactionParserImpl fruitTransactionParser = new FruitTransactionParserImpl();
+
     @Test
     void parse_validData_Ok() {
         int actual = fruitTransactionParser.parse(fileReaderCsv
@@ -25,8 +27,8 @@ public class FruitTransactionParseImplTest {
     @Test
     void parse_invalidQuantity_ThrowsInvalidDataException() {
         assertThrows(InvalidDataException.class, () ->
-                fruitTransactionParser.parse(fileReaderCsv.read(INVALID_QUANTITY_IN_FILE)),
-        "Input quantity is not valid");
+                        fruitTransactionParser.parse(fileReaderCsv.read(INVALID_QUANTITY_IN_FILE)),
+                "Input quantity is not valid");
     }
 
     @Test

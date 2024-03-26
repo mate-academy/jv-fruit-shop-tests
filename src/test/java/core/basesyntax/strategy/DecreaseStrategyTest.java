@@ -30,11 +30,11 @@ class DecreaseStrategyTest {
     void apply_validInput_ok() {
         Storage.STORAGE.put(BANANA, 20);
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE, BANANA, 10);
+
         operationHandler.apply(fruitTransaction);
 
         Map<String, Integer> expected = Map.of(BANANA, 10);
         Map<String, Integer> actual = Storage.STORAGE;
-
         assertEquals(expected, actual);
     }
 

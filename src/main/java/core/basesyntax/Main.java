@@ -36,10 +36,8 @@ public class Main {
         FileWriterService writerService
                 = new FileWriterServiceImpl();
         List<String> inputData = readService.readFile(PATH_FROM);
-
         List<FruitsTransaction> fruitsTransactionList
                 = listFruitTransactions.parse(inputData);
-
         transactionProcessor.executeTransactions(fruitsTransactionList);
 
         String readyReport = reportService.createReport();

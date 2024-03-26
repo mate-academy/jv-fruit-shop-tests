@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.exceptions.InvalidFruitException;
 import core.basesyntax.model.FruitsTransaction;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.strategy.service.OperationHandler;
@@ -13,8 +14,13 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void handle(FruitsTransaction fruitsTransaction) {
-        storageService.updateQuantity(fruitsTransaction.getName(), storageService
-                .getQuantity(fruitsTransaction.getName()) - fruitsTransaction.getQuantity());
+        int currentQuantity = storageService.getQuantity(fruitsTransaction.getName());
+        if (currentQuantity >= fruitsTransaction.getQuantity()) {
+            storageService.updateQuantity(
+                    fruitsTransaction.getName(), currentQuantity
+                            - fruitsTransaction.getQuantity());
+        } else {
+            throw new InvalidFruitException("not enough fruit in storage");
+        }
     }
 }
-

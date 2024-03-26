@@ -17,7 +17,8 @@ public class ReporterServiceImpl implements ReporterService {
     public String createReport() {
         StringBuilder builder = new StringBuilder(REPORT_HEADER);
         for (Map.Entry<String, Integer> entry : storageService.getAll().entrySet()) {
-            builder.append(entry.getKey() + SEPARATOR + entry.getValue() + System.lineSeparator());
+            builder.append(entry.getKey()
+                        + SEPARATOR + entry.getValue() + System.lineSeparator());
         }
         return builder.toString();
     }

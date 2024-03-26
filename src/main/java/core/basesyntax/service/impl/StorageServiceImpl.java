@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exceptions.InvalidFruitException;
 import core.basesyntax.service.StorageService;
 import java.util.Map;
 
@@ -13,7 +14,10 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public int getQuantity(String key) {
-        return storage.getFruits().get(key);
+        if (storage.getFruits().containsKey(key)) {
+            return storage.getFruits().get(key);
+        }
+        throw new InvalidFruitException("We don't have that fruit " + key + " in the storage");
     }
 
     @Override

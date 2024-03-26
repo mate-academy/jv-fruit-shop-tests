@@ -4,13 +4,10 @@ import core.basesyntax.exceptions.InvalidFileException;
 import core.basesyntax.service.FileReaderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-
 
 class FileReaderServiceImplTest {
     private static final String VALID_PATH_WAY = "src/main/resources/valid.csv";
@@ -52,10 +49,11 @@ class FileReaderServiceImplTest {
 
     @Test
     void readFile_EmptyFile_NotOk() {
-     String filePath = EMPTY_FILE_PATH;
-     String expectedMessage = "File is empty: " + filePath;
+        String filePath = EMPTY_FILE_PATH;
+        String expectedMessage = "File is empty: " + filePath;
         InvalidFileException actualException
-                = assertThrows(InvalidFileException.class, () -> fileReaderService.readFile(filePath));
-     assertEquals(expectedMessage,actualException.getMessage());
+                = assertThrows(
+                        InvalidFileException.class, () -> fileReaderService.readFile(filePath));
+        assertEquals(expectedMessage,actualException.getMessage());
     }
 }

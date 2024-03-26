@@ -13,7 +13,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(path))) {
             writer.write(content);
         } catch (IOException e) {
-            throw new InvalidFileException("Can`t write content to the file: " + path);
+            throw new InvalidFileException("Can't write content to the file: " + path);
         }
     }
 }

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
     private static final String REPORT_CSV = "src/test/resources/report.csv";
-    private List<String> expected = List.of("fruit,quantity", "apple,50", "banana,20");
+    private static final List<String> EXPECTED = List.of("fruit,quantity", "apple,50", "banana,20");
     private FileWriter fileWriter;
 
     @BeforeEach
@@ -40,12 +40,13 @@ class FileWriterImplTest {
         File file = new File(REPORT_CSV);
         assertTrue(file.exists());
         List<String> actual = Files.readAllLines(Path.of(REPORT_CSV));
-        assertEquals(expected, actual);
+        assertEquals(EXPECTED, actual);
     }
 
     @Test
     void writeReport_emptyData_notOk() {
-        assertThrows(IllegalArgumentException.class, () ->
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 fileWriter.write(null, REPORT_CSV));
+        assertEquals("Data can not be empty!", exception.getMessage());
     }
 }

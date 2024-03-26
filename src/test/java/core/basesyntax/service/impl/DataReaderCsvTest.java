@@ -43,7 +43,7 @@ public class DataReaderCsvTest {
     }
 
     @Test
-    void readFile_emptyFile_notOk() {
+    void readFile_emptyFile_ok() {
         List<String> actual = dataReader.read(EMPTY_FILE_PATH);
         List<String> expected = new ArrayList<>();
         assertEquals(expected, actual);

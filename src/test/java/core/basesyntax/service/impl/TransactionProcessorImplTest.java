@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.ProductStorage;
 import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.enums.Operation;
@@ -9,13 +11,10 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseHandler;
 import core.basesyntax.strategy.handler.impl.ReturnHandler;
 import core.basesyntax.strategy.handler.impl.SupplyHandler;
-import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TransactionProcessorImplTest {
     private static final int INITIAL_APPLE_QUANTITY = 0;

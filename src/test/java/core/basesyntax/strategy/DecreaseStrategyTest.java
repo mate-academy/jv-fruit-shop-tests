@@ -8,8 +8,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class DecreaseStrategyTest {
@@ -21,8 +21,8 @@ class DecreaseStrategyTest {
         operationHandler = new DecreaseStrategy(new FruitDaoImpl());
     }
 
-    @AfterEach
-    void tearDown() {
+    @BeforeEach
+    void setUp() {
         Storage.STORAGE.clear();
     }
 
@@ -31,8 +31,10 @@ class DecreaseStrategyTest {
         Storage.STORAGE.put(BANANA, 20);
         FruitTransaction fruitTransaction = new FruitTransaction(Operation.PURCHASE, BANANA, 10);
         operationHandler.apply(fruitTransaction);
+
         Map<String, Integer> expected = Map.of(BANANA, 10);
         Map<String, Integer> actual = Storage.STORAGE;
+
         assertEquals(expected, actual);
     }
 

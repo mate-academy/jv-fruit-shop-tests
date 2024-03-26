@@ -9,8 +9,8 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.storage.Storage;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitStrategyTest {
@@ -30,8 +30,8 @@ class FruitStrategyTest {
         fruitStrategy = new FruitStrategy(strategyMap);
     }
 
-    @AfterEach
-    void tearDown() {
+    @BeforeEach
+    void setUp() {
         Storage.STORAGE.clear();
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class FileWriterImplTest {
-    private static final String WRITE_TO_FILE_OK_PATH = "src\\test\\resources\\writer_test_file";
+    private static final String WRITE_TO_FILE_OK_PATH = "src/test/resources/writer_test_file";
     private static final String WRITE_TO_FILE_EMPTY_PATH = "";
     private static final FileWriterImpl fileWriter = new FileWriterImpl();
 

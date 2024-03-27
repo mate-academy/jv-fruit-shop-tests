@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class CsvFruitDataReaderImplTest {
-    private static final String CORRECT_FILE_PATH = "src\\test\\resources\\file.csv";
-    private static final String INCORRECT_FILE_PATH = "src\\test\\resources\\incorrect_path.csv";
-    private static final String EMPTY_FILE_PATH = "src\\test\\resources\\emptyfile.csv";
+    private static final String CORRECT_FILE_PATH = "src/test/resources/file.csv";
+    private static final String INCORRECT_FILE_PATH = "src/test/resources/incorrect_path.csv";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/emptyfile.csv";
     private static final List<String> DATA_LIST = new ArrayList<>();
     private static final List<String> EMPTY_DATA_LIST = new ArrayList<>();
     private static CsvFruitDataReaderImpl dataReader = new CsvFruitDataReaderImpl();

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 class FruitDataParserTest {
     private static FruitDataParser parser = new FruitDataParser();
-    private static final String DATA_PATH = "src\\test\\resources\\fileForParserCheck.csv";
+    private static final String DATA_PATH = "src/test/resources/fileForParserCheck.csv";
     private static final List<FruitTransactionDto> EXPECTED_PARSED_DATA = new ArrayList<>();
     private static final List<FruitTransactionDto> EXPECTED_EMPTY_DATA = Collections.emptyList();
     private static final List<String> EMPTY_DATA = Collections.emptyList();

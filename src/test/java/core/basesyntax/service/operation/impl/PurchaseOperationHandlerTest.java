@@ -34,7 +34,8 @@ class PurchaseOperationHandlerTest {
         storage.addFruit("apple", 15);
         handler.apply(dto);
         int actual = storage.getFruitQuantity("apple");
-        assertEquals(5, actual);
+        int expected = 5;
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -43,7 +44,8 @@ class PurchaseOperationHandlerTest {
         storage.addFruit("apple", 15);
         handler.apply(dto);
         int actual = storage.getFruitQuantity("apple");
-        assertEquals(15, actual);
+        int expected = 15;
+        assertEquals(expected, actual);
     }
 
     @Test

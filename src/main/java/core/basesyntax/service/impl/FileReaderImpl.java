@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exceptions.FileReadingException;
 import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +14,7 @@ public class FileReaderImpl implements FileReader {
             List<String> strings = Files.readAllLines(Paths.get(filePath));
             return strings;
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file: " + filePath, e);
+            throw new FileReadingException("Can't read file: " + filePath, e);
         }
     }
 }

@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exceptions.FileReadingException;
 import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +36,6 @@ class FileReaderImplTest {
 
     @Test
     void readFile_nonExistingFile_notOk() {
-        assertThrows(RuntimeException.class, () -> fileReader.readFile(NON_EXISTING_FILE_PATH));
+        assertThrows(FileReadingException.class, () -> fileReader.readFile(NON_EXISTING_FILE_PATH));
     }
 }

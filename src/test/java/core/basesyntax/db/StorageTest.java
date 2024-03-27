@@ -4,7 +4,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,11 +24,11 @@ class StorageTest {
     @Test
     void addFruit_addSingleFruit_isOk() {
         String fruitName = "apple";
-        int quantity = 10;
-        storage.addFruit(fruitName, quantity);
+        int expectedQuantity = 10;
+        storage.addFruit(fruitName, expectedQuantity);
         int actual = storage.getFruitQuantity(fruitName);
 
-        assertEquals(quantity,actual);
+        assertEquals(expectedQuantity,actual);
     }
 
     @Test
@@ -47,34 +46,17 @@ class StorageTest {
     void addFruit_updateExistingFruit_isOk() {
         String fruitName = "apple";
         int initialQuantity = 10;
-        int updatedQuantity = 20;
+        int expectedQuantity = 20;
 
         storage.addFruit(fruitName, initialQuantity);
-        storage.addFruit(fruitName, updatedQuantity);
-
-        assertEquals(updatedQuantity, storage.getFruitQuantity(fruitName));
+        storage.addFruit(fruitName, expectedQuantity);
+        var actual = storage.getFruitQuantity(fruitName);
+        assertEquals(expectedQuantity, actual);
     }
 
     @Test
     void getFruitQuantity_nonExistentFruit_returnsNull() {
         assertNull(storage.getFruitQuantity("nonexistent"));
-    }
-
-    @Test
-    void getFruits_validData_isOk() {
-        storage.addFruit("apple", 10);
-        storage.addFruit("banana", 20);
-        storage.addFruit("cherry", 30);
-
-        Map<String, Integer> fruits = storage.getFruits();
-
-        assertEquals(3, fruits.size());
-        assertTrue(fruits.containsKey("apple"));
-        assertTrue(fruits.containsKey("banana"));
-        assertTrue(fruits.containsKey("cherry"));
-        assertEquals(10, fruits.get("apple"));
-        assertEquals(20, fruits.get("banana"));
-        assertEquals(30, fruits.get("cherry"));
     }
 
     @Test

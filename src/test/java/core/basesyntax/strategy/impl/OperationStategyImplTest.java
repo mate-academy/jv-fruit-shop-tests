@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitTransactionDto;
@@ -49,9 +50,17 @@ class OperationStategyImplTest {
     }
 
     @Test
-    void get_dtoIsValid_isOk() {
-        FruitTransactionDto dto = new FruitTransactionDto("p", "apple", 10);
-        OperationHandler actual = operationStategy.get(dto);
+    void get_validTransaction_isOk() {
+        FruitTransactionDto transaction = new FruitTransactionDto("p", "apple", 10);
+        OperationHandler actual = operationStategy.get(transaction);
         assertEquals(purchaseOperationHandler, actual);
+    }
+
+    @Test
+    void get_notExistingOperationType_notOk() {
+        FruitTransactionDto transactionWithNotExistingOperationType
+                = new FruitTransactionDto("a", "apple", 10);
+        assertThrows(RuntimeException.class,
+                () -> operationStategy.get(transactionWithNotExistingOperationType));
     }
 }

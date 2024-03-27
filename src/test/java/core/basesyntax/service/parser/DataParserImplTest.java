@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class DataParserImplTest {
+    private static final int FIRST_LINE_OF_DATA = 0;
+    private static final int SECOND_LINE_OF_DATA = 1;
     private final DataParserImpl dataParser = new DataParserImpl();
 
     @Test
@@ -20,12 +22,12 @@ class DataParserImplTest {
                 "r,apple,10"
         );
         List<FruitTransactionDto> result = dataParser.parse(rawData);
-        FruitTransactionDto dto1 = result.get(0);
+        FruitTransactionDto dto1 = result.get(FIRST_LINE_OF_DATA);
         assertEquals("b", dto1.getOperationType());
         assertEquals("banana", dto1.getNameFruit());
         assertEquals(20, dto1.getQuantity());
 
-        FruitTransactionDto dto2 = result.get(1);
+        FruitTransactionDto dto2 = result.get(SECOND_LINE_OF_DATA);
         assertEquals("r", dto2.getOperationType());
         assertEquals("apple", dto2.getNameFruit());
         assertEquals(10, dto2.getQuantity());

@@ -32,7 +32,8 @@ class BalanceOperationHandlerTest {
         FruitTransactionDto dto = new FruitTransactionDto("b", "banana",20);
         handler.apply(dto);
         int actual = storage.getFruitQuantity("banana");
-        assertEquals(20, actual);
+        int expected = 20;
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -40,6 +41,7 @@ class BalanceOperationHandlerTest {
         FruitTransactionDto dto = new FruitTransactionDto("b", "banana",0);
         handler.apply(dto);
         int actual = storage.getFruitQuantity("banana");
-        assertEquals(0, actual);
+        int expected = 0;
+        assertEquals(expected, actual);
     }
 }

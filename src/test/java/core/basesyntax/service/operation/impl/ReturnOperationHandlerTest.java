@@ -33,7 +33,8 @@ class ReturnOperationHandlerTest {
         storage.addFruit("apple", 5);
         handler.apply(dto);
         int actual = storage.getFruitQuantity("apple");
-        assertEquals(15, actual);
+        int expected = 15;
+        assertEquals(expected, actual);
 
     }
 
@@ -42,6 +43,7 @@ class ReturnOperationHandlerTest {
         FruitTransactionDto dto = new FruitTransactionDto("r", "apple", 0);
         storage.addFruit("apple", 5);
         handler.apply(dto);
-        assertEquals(5, storage.getFruitQuantity("apple"));
+        int expected = 5;
+        assertEquals(expected, storage.getFruitQuantity("apple"));
     }
 }

@@ -20,24 +20,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransationProcessorImplTest {
+    private static final int EXPECTED_BANANA_QUANTITY = 40;
+    private static final int EXPECTED_APPLE_QUANTITY = 10;
     private Storage storage;
-    private FruitService fruitService;
-    private SupplyOperationHandler supplyOperationHandler;
-    private ReturnOperationHandler returnOperationHandler;
-    private BalanceOperationHandler balanceOperationHandler;
-    private PurchaseOperationHandler purchaseOperationHandler;
-    private OperationStategy operationStategy;
     private TransationProcessor processor;
 
     @BeforeEach
     void setUp() {
-
         storage = new Storage();
-        fruitService = new FruitServiceImpl(storage);
-        returnOperationHandler = new ReturnOperationHandler(storage, fruitService);
-        balanceOperationHandler = new BalanceOperationHandler(fruitService);
-        purchaseOperationHandler = new PurchaseOperationHandler(storage, fruitService);
-        supplyOperationHandler = new SupplyOperationHandler(storage, fruitService);
+        FruitService fruitService = new FruitServiceImpl(storage);
+        SupplyOperationHandler supplyOperationHandler
+                = new SupplyOperationHandler(storage, fruitService);
+        ReturnOperationHandler returnOperationHandler
+                = new ReturnOperationHandler(storage, fruitService);
+        BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(fruitService);
+        PurchaseOperationHandler purchaseOperationHandler
+                = new PurchaseOperationHandler(storage, fruitService);
+        OperationStategy operationStategy;
         Map<Operation, OperationHandler> operationStrategyMap =
                 Map.of(Operation.BALANCE, balanceOperationHandler,
                         Operation.PURCHASE, purchaseOperationHandler,
@@ -62,9 +61,9 @@ class TransationProcessorImplTest {
                     new FruitTransactionDto("s", "banana", 20));
 
         processor.process(transactions);
-        int actual1 = storage.getFruitQuantity("apple");
-        int actual2 = storage.getFruitQuantity("banana");
-        assertEquals(10, actual1);
-        assertEquals(40, actual2);
+        int actualAppleQuantity = storage.getFruitQuantity("apple");
+        int actualBananaQuantity = storage.getFruitQuantity("banana");
+        assertEquals(EXPECTED_APPLE_QUANTITY, actualAppleQuantity);
+        assertEquals(EXPECTED_BANANA_QUANTITY, actualBananaQuantity);
     }
 }

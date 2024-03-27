@@ -29,7 +29,8 @@ class FruitServiceImplTest {
         int quantity = 25;
         fruitService.save(nameFruit,quantity);
         int actual = storage.getFruitQuantity("banana");
-        assertEquals(25, actual);
+        int expected = 25;
+        assertEquals(expected, actual);
 
     }
 

@@ -33,7 +33,8 @@ class SupplyOperationHandlerTest {
         storage.addFruit("apple", 5);
         handler.apply(dto);
         int actual = storage.getFruitQuantity("apple");
-        assertEquals(15, actual);
+        int expected = 15;
+        assertEquals(expected, actual);
 
     }
 

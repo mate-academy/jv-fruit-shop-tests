@@ -35,7 +35,7 @@ public class BalanceOperationHandlerTest {
 
     @Test
     public void apply_AddToExistingFruit_ok() {
-        int initialQuantity = 5;
+        int initialQuantity = 0;
         storage.addFruit(new Fruit(FRUIT_NAME), initialQuantity);
         FruitTransactionDto dto = new FruitTransactionDto(Operation.BALANCE, FRUIT_NAME,
                 BALANCE_QUANTITY);

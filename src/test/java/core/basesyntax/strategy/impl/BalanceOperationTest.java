@@ -1,13 +1,13 @@
 package core.basesyntax.strategy.impl;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+
 import core.basesyntax.model.FruitsTransaction;
 import core.basesyntax.service.StorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 
 public class BalanceOperationTest {
     private BalanceOperation balanceOperation;

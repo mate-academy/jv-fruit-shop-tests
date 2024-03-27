@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.InvalidFruitException;
 import core.basesyntax.service.StorageService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StorageServiceImplTest {
     private static final String NOT_EXIST_FRUIT = "grape";

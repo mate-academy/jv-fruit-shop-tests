@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import core.basesyntax.exceptions.InvalidFileException;
 import core.basesyntax.service.FileWriterService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FileWriterServiceImplTest {
     private static final String VALID_CONTENT = "content";

@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.InvalidFileException;
-import core.basesyntax.service.FileReaderService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
+
+import core.basesyntax.exceptions.InvalidFileException;
+import core.basesyntax.service.FileReaderService;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class FileReaderServiceImplTest {
     private static final String VALID_PATH_WAY = "src/main/resources/valid.csv";

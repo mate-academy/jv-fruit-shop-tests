@@ -1,16 +1,15 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.model.FruitsTransaction;
-import core.basesyntax.service.StorageService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
+import core.basesyntax.model.FruitsTransaction;
+import core.basesyntax.service.StorageService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class SupplyOperationTest {
     private SupplyOperation supplyOperation;

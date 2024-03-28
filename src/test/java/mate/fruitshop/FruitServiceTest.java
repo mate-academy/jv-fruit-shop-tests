@@ -1,8 +1,8 @@
 package mate.fruitshop;
 
-import static mate.fruitshop.TransactionHandlerStrategyTest.DEFAULT_FRUIT;
-import static mate.fruitshop.TransactionHandlerStrategyTest.DEFAULT_OPERATION;
-import static mate.fruitshop.TransactionHandlerStrategyTest.DEFAULT_QUANTITY;
+import static mate.fruitshop.TransactionHandlerTest.DEFAULT_FRUIT;
+import static mate.fruitshop.TransactionHandlerTest.DEFAULT_OPERATION;
+import static mate.fruitshop.TransactionHandlerTest.DEFAULT_QUANTITY;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;

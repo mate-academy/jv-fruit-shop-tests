@@ -18,13 +18,13 @@ class FruitShopServiceTest {
     private final ActivityHandlerProvider activityProvider = new ActivityHandlerProvider(storage);
 
     @Test
-    void execute_NullInput_Ok() {
+    void execute_nullInput_Ok() {
         FruitShopService fruitShopService = new FruitShopService(activityProvider);
         assertThrows(NullPointerException.class, () -> fruitShopService.execute(null));
     }
 
     @Test
-    void execute_CorrectActivity_Ok() {
+    void execute_correctActivity_Ok() {
         FruitShopService fruitShopService = new FruitShopService(activityProvider);
         List<FruitTransactionInfo> testList = getList();
         ActivityHandler expectedActivity = new BalanceHandler(storage);

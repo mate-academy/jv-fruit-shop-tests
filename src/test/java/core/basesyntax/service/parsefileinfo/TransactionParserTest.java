@@ -17,19 +17,19 @@ class TransactionParserTest {
     }
 
     @Test
-    void parse_ValidStringFormat_Ok() {
+    void parse_validStringFormat_Ok() {
         validString = "b,banana,20";
         assertTrue(isValidFormat(validString), "Valid string format should return true");
     }
 
     @Test
-    void parse_InvalidStringFormat_Ok() {
+    void parse_invalidStringFormat_Ok() {
         validString = "bd,banana,s";
         assertFalse(isValidFormat(validString), "Valid string format should return true");
     }
 
     @Test
-    void parse_ValidTypeReturn_Ok() {
+    void parse_validTypeReturn_Ok() {
         validString = "b,banana,20";
         FruitTransactionInfo actualTransactionInfo = parser.parse(validString);
 

@@ -9,7 +9,7 @@ class ActivityTypeTest {
     private String code;
 
     @Test
-    void getByCode_InvalidCode_NotOk() {
+    void getByCode_invalidCode_NotOk() {
         code = "c";
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> ActivityType.getByCode(code));
@@ -27,25 +27,25 @@ class ActivityTypeTest {
     }
 
     @Test
-    void getByCode_ActivityPurchase_Ok() {
+    void getByCode_activityPurchase_Ok() {
         code = "p";
         assertEquals(ActivityType.PURCHASE, ActivityType.getByCode(code));
     }
 
     @Test
-    void getByCode_ActivityBalance_Ok() {
+    void getByCode_activityBalance_Ok() {
         code = "b";
         assertEquals(ActivityType.BALANCE, ActivityType.getByCode(code));
     }
 
     @Test
-    void getByCode_ActivitySupply_Ok() {
+    void getByCode_activitySupply_Ok() {
         code = "s";
         assertEquals(ActivityType.SUPPLY, ActivityType.getByCode(code));
     }
 
     @Test
-    void getByCode_ActivityReturn_Ok() {
+    void getByCode_activityReturn_Ok() {
         code = "r";
         assertEquals(ActivityType.RETURN, ActivityType.getByCode(code));
     }

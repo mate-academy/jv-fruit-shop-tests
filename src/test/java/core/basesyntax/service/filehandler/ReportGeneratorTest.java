@@ -20,7 +20,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    public void generate_CorrectInformation_Ok() {
+    public void generate_correctInformation_Ok() {
         String expected = String.format("fruit,quantity%nbanana,152%napple,90");
         storage.getData().put("banana", 152);
         storage.getData().put("apple", 90);
@@ -30,7 +30,7 @@ class ReportGeneratorTest {
     }
 
     @Test
-    public void generate_WithEmptyStorage_NotOk() {
+    public void generate_withEmptyStorage_NotOk() {
         EmptyStorageException exception = assertThrows(EmptyStorageException.class,
                 () -> generator.generate(storage));
         assertEquals("Storage shouldn't be empty", exception.getMessage(),

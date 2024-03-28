@@ -23,7 +23,7 @@ class ReturnHandlerTest {
     }
 
     @Test
-    void put_NewInformationToStorage_Ok() {
+    void put_newInformationToStorage_Ok() {
         assertNull(storage.getData().get(fruit),
                 "Fruit should not exist in storage before operation.");
         handler.operate(fruit, quantity);

@@ -25,7 +25,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void put_NewInformationToStorage_Ok() {
+    void put_newInformationToStorage_Ok() {
         assertNull(storage.getData().get(fruit),
                 "Fruit should not exist in storage before operation.");
         handler.operate(fruit, quantity);
@@ -38,7 +38,7 @@ class PurchaseHandlerTest {
     }
 
     @Test
-    void throw_ProductQuantityException_Ok() {
+    void throw_productQuantityException_Ok() {
         handler.operate(fruit, quantity);
 
         ProductQuantityException exception = assertThrows(ProductQuantityException.class,

@@ -11,7 +11,7 @@ class StorageTest {
     private final Map<String, Integer> changedData = new HashMap<>();
 
     @Test
-    void getData_ChangedData_Ok() {
+    void getData_changedData_Ok() {
         Map<String, Integer> actual = storage.getData();
 
         assertEquals(actual.getClass(), changedData.getClass());

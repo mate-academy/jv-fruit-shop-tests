@@ -20,7 +20,7 @@ class BalanceHandlerTest {
     }
 
     @Test
-    void put_InformationToStorage_Ok() {
+    void put_informationToStorage_Ok() {
         assertNull(storage.getData().get(fruit),
                 "Fruit should not exist in storage before operation.");
         handler.operate(fruit, quantity);

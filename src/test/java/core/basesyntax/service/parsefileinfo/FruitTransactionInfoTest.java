@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class FruitTransactionInfoTest {
 
     @Test
-    void constructorAndAccessors_ConstructFruitTransactionInfo_Ok() {
+    void constructorAndAccessors_constructFruitTransactionInfo_Ok() {
         ActivityType activityType = ActivityType.PURCHASE;
         String name = "Apple";
         int quantity = 10;

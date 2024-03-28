@@ -20,25 +20,25 @@ class ActivityHandlerProviderTest {
     }
 
     @Test
-    public void testGetHandlerBalanceType() {
+    public void getHandler_handlerBalanceType_Ok() {
         ActivityHandler expectedHandler = handlerProvider.getHandler(ActivityType.BALANCE);
         Assertions.assertEquals(expectedHandler.getClass(), BalanceHandler.class);
     }
 
     @Test
-    public void testGetHandlerPurchaseType() {
+    public void getHandler_handlerPurchaseType_Ok() {
         ActivityHandler expectedHandler = handlerProvider.getHandler(ActivityType.PURCHASE);
         Assertions.assertEquals(expectedHandler.getClass(), PurchaseHandler.class);
     }
 
     @Test
-    public void testGetHandlerReturnType() {
+    public void getHandler_handlerReturnType_Ok() {
         ActivityHandler expectedHandler = handlerProvider.getHandler(ActivityType.RETURN);
         Assertions.assertEquals(expectedHandler.getClass(), ReturnHandler.class);
     }
 
     @Test
-    public void testGetHandlerSupplyType() {
+    public void getHandler_handlerSupplyType_Ok() {
         ActivityHandler expectedHandler = handlerProvider.getHandler(ActivityType.SUPPLY);
         Assertions.assertEquals(expectedHandler.getClass(), SupplyHandler.class);
     }
